@@ -11,10 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C49387B4-7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{7FEBEE53-6B60-400E-85F3-236B83B6311D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits", "src\VectorTraits\VectorTraits.csproj", "{2D7A8A09-BBD5-49F4-85A8-735A862B6FD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorTraits", "src\VectorTraits\VectorTraits.csproj", "{2D7A8A09-BBD5-49F4-85A8-735A862B6FD5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51E2D441-C1EA-422B-BEB3-0EC370181A12}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		LICENSE = LICENSE
 		README.md = README.md
 		README_Chinese.md = README_Chinese.md
