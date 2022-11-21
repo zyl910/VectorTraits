@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Numerics;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.Versioning;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -582,6 +584,39 @@ namespace Zyl.VectorTraits {
             return WriteLine(null, textWriter, format, args);
         }
 
+#if (NET35 || NET20)
+#else
+        /// <summary>
+        /// Get <see cref="TargetFrameworkAttribute"/>.
+        /// </summary>
+        /// <param name="assembly">Source assembly.</param>
+        /// <returns>Returns a TargetFrameworkAttribute.</returns>
+        public static TargetFrameworkAttribute? GetTargetFrameworkAttribute(Assembly assembly) {
+            foreach (TargetFrameworkAttribute a in assembly.GetCustomAttributes<TargetFrameworkAttribute>()) {
+                return a;
+            }
+            return null;
+        }
+#endif
+
+        /// <summary>
+        /// Get TargetFramework display name.
+        /// </summary>
+        /// <param name="assembly">Source assembly.</param>
+        /// <returns>Returns a name.</returns>
+        public static string GetTargetFrameworkDisplayName(Assembly assembly) {
+            string rt = "";
+#if (NET35 || NET20)
+#else
+            TargetFrameworkAttribute? a = GetTargetFrameworkAttribute(assembly);
+            if (null == a) return rt;
+            rt = a.FrameworkDisplayName ?? "";
+            if (string.IsNullOrEmpty(rt)) {
+                rt = a.FrameworkName ?? "";
+            }
+#endif
+            return rt;
+        }
 
     }
 }

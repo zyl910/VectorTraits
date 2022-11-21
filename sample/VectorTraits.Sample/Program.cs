@@ -9,9 +9,9 @@ namespace VectorTraits.Sample {
             TextWriter writer = Console.Out;
             writer.WriteLine("VectorTraits.Sample");
             writer.WriteLine();
+            TraitsOutput.OutputEnvironment(writer);
 
-            Vector<Int16> src = Vector<Int16>.One;
-            //writer.WriteLine(src);
+            Vector<Int16> src = Vectors.CreateRotate<Int16>(0, 1, 2, 3, 4, 5, 6, 7);
             TraitsUtil.WriteLine(writer, "src:\t{0}", src);
         }
     }

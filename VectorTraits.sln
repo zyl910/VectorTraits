@@ -13,7 +13,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{7FEBEE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits", "src\VectorTraits\VectorTraits.csproj", "{2D7A8A09-BBD5-49F4-85A8-735A862B6FD5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51E2D441-C1EA-422B-BEB3-0EC370181A12}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+		README_Chinese.md = README_Chinese.md
+	EndProjectSection
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "VectorTraits.InfoInc", "src\VectorTraits.InfoInc\VectorTraits.InfoInc.shproj", "{81CCAD3F-6606-410B-9D02-3F8FC65CACE5}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{81ccad3f-6606-410b-9d02-3f8fc65cace5}*SharedItemsImports = 13
+		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{8ecae95b-f799-4f02-b598-3fe3e3de9291}*SharedItemsImports = 5
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -34,6 +47,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8ECAE95B-F799-4F02-B598-3FE3E3DE9291} = {7FEBEE53-6B60-400E-85F3-236B83B6311D}
 		{2D7A8A09-BBD5-49F4-85A8-735A862B6FD5} = {087AC9E5-34F6-4254-948C-4CA85204FE24}
+		{81CCAD3F-6606-410B-9D02-3F8FC65CACE5} = {087AC9E5-34F6-4254-948C-4CA85204FE24}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {563C5B68-C47B-4FD9-9EB3-279A64EE805C}

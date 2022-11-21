@@ -10,4 +10,6 @@
     <ProjectReference Include="..\..\src\VectorTraits\VectorTraits.csproj" />
   </ItemGroup>
 
+  <Import Project="..\..\src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems" Label="Shared" />
+
 </Project>
