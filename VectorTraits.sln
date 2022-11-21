@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33027.164
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits.Sample", "sample\VectorTraits.Sample\VectorTraits.Sample.csproj", "{8ECAE95B-F799-4F02-B598-3FE3E3DE9291}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{087AC9E5-34F6-4254-948C-4CA85204FE24}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C49387B4-769A-47F2-9D37-79A13956650D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{7FEBEE53-6B60-400E-85F3-236B83B6311D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8ECAE95B-F799-4F02-B598-3FE3E3DE9291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ECAE95B-F799-4F02-B598-3FE3E3DE9291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ECAE95B-F799-4F02-B598-3FE3E3DE9291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ECAE95B-F799-4F02-B598-3FE3E3DE9291}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8ECAE95B-F799-4F02-B598-3FE3E3DE9291} = {7FEBEE53-6B60-400E-85F3-236B83B6311D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {563C5B68-C47B-4FD9-9EB3-279A64EE805C}
+	EndGlobalSection
+EndGlobal
