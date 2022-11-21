@@ -25,6 +25,7 @@ namespace Zyl.VectorTraits.Tests {
             foreach(int len in LenArray) {
                 T[] arr = new T[len];
                 TraitsUtil.Fill(arr, src);
+                // check.
                 foreach (T p in arr) {
                     Assert.AreEqual(src, p);
                 }
