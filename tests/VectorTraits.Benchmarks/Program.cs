@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace VectorTraits.Benchmarks {
+namespace Zyl.VectorTraits.Benchmarks {
     class Program {
         static void Main(string[] args) {
             TextWriter writer = Console.Out;

@@ -3,7 +3,7 @@ using System.IO;
 using System.Numerics;
 using Zyl.VectorTraits;
 
-namespace VectorTraits.Sample {
+namespace Zyl.VectorTraits.Sample {
     class Program {
         static void Main(string[] args) {
             TextWriter writer = Console.Out;

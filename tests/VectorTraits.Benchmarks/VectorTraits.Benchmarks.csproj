@@ -15,6 +15,7 @@
     <RepositoryUrl>https://github.com/zyl910/VectorTraits</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>VectorTraits;vector;math;simd;intrinsic;x86;avx;arm</PackageTags>
+    <RootNamespace>Zyl.VectorTraits.Benchmarks</RootNamespace>
   </PropertyGroup>
 
   <Import Project="..\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems" Label="Shared" />
@@ -30,6 +31,10 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.2" />
   </ItemGroup>
 
 </Project>

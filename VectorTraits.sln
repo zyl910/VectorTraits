@@ -27,6 +27,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "VectorTraits.Benchmarks.Inc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorTraits.Benchmarks", "tests\VectorTraits.Benchmarks\VectorTraits.Benchmarks.csproj", "{6D794C59-52C2-4853-9124-84FA8FEE0ACB}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BenchmarkDotNet.Fake", "tests\BenchmarkDotNet.Fake\BenchmarkDotNet.Fake.shproj", "{FE742124-F9F3-463D-83D2-2FA9E33E0505}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{22375bc5-630e-4414-9c45-f749ae13cae1}*SharedItemsImports = 13
@@ -34,6 +36,7 @@ Global
 		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{6d794c59-52c2-4853-9124-84fa8fee0acb}*SharedItemsImports = 5
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{81ccad3f-6606-410b-9d02-3f8fc65cace5}*SharedItemsImports = 13
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{8ecae95b-f799-4f02-b598-3fe3e3de9291}*SharedItemsImports = 5
+		tests\BenchmarkDotNet.Fake\BenchmarkDotNet.Fake.projitems*{fe742124-f9f3-463d-83d2-2fa9e33e0505}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +65,7 @@ Global
 		{81CCAD3F-6606-410B-9D02-3F8FC65CACE5} = {087AC9E5-34F6-4254-948C-4CA85204FE24}
 		{22375BC5-630E-4414-9C45-F749AE13CAE1} = {C49387B4-769A-47F2-9D37-79A13956650D}
 		{6D794C59-52C2-4853-9124-84FA8FEE0ACB} = {C49387B4-769A-47F2-9D37-79A13956650D}
+		{FE742124-F9F3-463D-83D2-2FA9E33E0505} = {C49387B4-769A-47F2-9D37-79A13956650D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {563C5B68-C47B-4FD9-9EB3-279A64EE805C}

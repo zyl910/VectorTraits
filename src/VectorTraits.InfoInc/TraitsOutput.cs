@@ -4,9 +4,8 @@ using System.IO;
 using System.Numerics;
 using System.Reflection;
 using System.Text;
-using Zyl.VectorTraits;
 
-namespace VectorTraits {
+namespace Zyl.VectorTraits {
     /// <summary>
     /// VectorTraits output info.
     /// </summary>
