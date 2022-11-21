@@ -6,7 +6,7 @@
     <SharedGUID>22375bc5-630e-4414-9c45-f749ae13cae1</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>VectorTraits.Benchmarks</Import_RootNamespace>
+    <Import_RootNamespace>Zyl.VectorTraits.Benchmarks</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AbstractBenchmark.cs" />

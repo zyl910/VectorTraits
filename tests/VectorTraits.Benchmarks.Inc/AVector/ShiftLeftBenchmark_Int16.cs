@@ -14,7 +14,7 @@ using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using Zyl.VectorTraits.Benchmarks;
 
-namespace VectorTraits.Benchmarks.AVector {
+namespace Zyl.VectorTraits.Benchmarks.AVector {
     //using BenchmarkAttribute = FakeBenchmarkAttribute;
 
     // My type.

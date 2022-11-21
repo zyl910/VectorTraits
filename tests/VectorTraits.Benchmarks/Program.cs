@@ -1,7 +1,7 @@
 ﻿using BenchmarkDotNet.Running;
 using System;
 using System.IO;
-using VectorTraits.Benchmarks.AVector;
+using Zyl.VectorTraits.Benchmarks.AVector;
 
 namespace Zyl.VectorTraits.Benchmarks {
     class Program {
