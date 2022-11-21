@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Company>zyl910</Company>
+    <Authors>zyl910</Authors>
+    <Product>VectorTraits</Product>
+    <Copyright>Copyright (c) 2022 zyl910</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/zyl910/VectorTraits</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/zyl910/VectorTraits</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>VectorTraits;vector;math;simd;intrinsic;x86;avx;arm</PackageTags>
+  </PropertyGroup>
+
+  <Import Project="..\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems" Label="Shared" />
+
+  <Import Project="..\..\src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\VectorTraits\VectorTraits.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
