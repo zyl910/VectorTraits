@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorTraits.Tests", "tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorTraits.Benchmarks.NetCore", "tests\VectorTraits.Benchmarks.NetCore\VectorTraits.Benchmarks.NetCore.csproj", "{EFA732BA-F81C-482D-9BDE-80753CB0C9A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits.Benchmarks.NetFw", "tests\VectorTraits.Benchmarks.NetFw\VectorTraits.Benchmarks.NetFw.csproj", "{A732C040-1F30-4A0A-BE44-C93AE15CA954}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{22375bc5-630e-4414-9c45-f749ae13cae1}*SharedItemsImports = 13
@@ -40,6 +42,9 @@ Global
 		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{6d794c59-52c2-4853-9124-84fa8fee0acb}*SharedItemsImports = 5
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{81ccad3f-6606-410b-9d02-3f8fc65cace5}*SharedItemsImports = 13
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{8ecae95b-f799-4f02-b598-3fe3e3de9291}*SharedItemsImports = 5
+		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
+		tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
+		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
 		tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
 		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
@@ -70,6 +75,10 @@ Global
 		{EFA732BA-F81C-482D-9BDE-80753CB0C9A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFA732BA-F81C-482D-9BDE-80753CB0C9A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFA732BA-F81C-482D-9BDE-80753CB0C9A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A732C040-1F30-4A0A-BE44-C93AE15CA954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A732C040-1F30-4A0A-BE44-C93AE15CA954}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A732C040-1F30-4A0A-BE44-C93AE15CA954}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A732C040-1F30-4A0A-BE44-C93AE15CA954}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +92,7 @@ Global
 		{FE742124-F9F3-463D-83D2-2FA9E33E0505} = {C49387B4-769A-47F2-9D37-79A13956650D}
 		{E92ED650-5ED8-442B-840C-AF6AA7A2109C} = {C49387B4-769A-47F2-9D37-79A13956650D}
 		{EFA732BA-F81C-482D-9BDE-80753CB0C9A8} = {C49387B4-769A-47F2-9D37-79A13956650D}
+		{A732C040-1F30-4A0A-BE44-C93AE15CA954} = {C49387B4-769A-47F2-9D37-79A13956650D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {563C5B68-C47B-4FD9-9EB3-279A64EE805C}

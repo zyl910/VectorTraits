@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Zyl.VectorTraits.Benchmarks.NetCore {
+namespace Zyl.VectorTraits.Benchmarks.NetFw {
     class Program {
         static void Main(string[] args) {
             bool useBenchmark = false;
@@ -15,7 +19,7 @@ namespace Zyl.VectorTraits.Benchmarks.NetCore {
             } else {
                 string indent = "";
                 TextWriter writer = Console.Out;
-                writer.WriteLine("VectorTraits.Benchmarks.NetCore");
+                writer.WriteLine("VectorTraits.Benchmarks.NetFw");
                 writer.WriteLine();
                 BenchmarkUtil.OutputEnvironment(writer, indent);
                 BenchmarkMain.RunBenchmark(writer, indent);

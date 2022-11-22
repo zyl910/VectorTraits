@@ -52,12 +52,12 @@ namespace Zyl.VectorTraits {
             writer.WriteLine(indent + string.Format("Vector<float>.Count:\t{0}\t# {1}bit", Vector<float>.Count, Vector<float>.Count * sizeof(float) * 8));
             //writer.WriteLine(indent + string.Format("Vector<double>.Count:\t{0}\t# {1}bit", Vector<double>.Count, Vector<double>.Count * sizeof(double) * 8));
 #pragma warning disable SYSLIB0012 // Type or member is obsolete
-            //Assembly assembly;
+            Assembly assembly;
             //assembly = typeof(Vector4).GetTypeInfo().Assembly;
             //writer.WriteLine(string.Format("Vector4.Assembly:\t{0}", assembly));
             //writer.WriteLine(string.Format("Vector4.Assembly.CodeBase:\t{0}", assembly.CodeBase));
-            //assembly = typeof(Vector<float>).GetTypeInfo().Assembly;
-            //writer.WriteLine(string.Format("Vector<T>.Assembly.CodeBase:\t{0}", assembly.CodeBase));
+            assembly = typeof(Vector<float>).GetTypeInfo().Assembly;
+            writer.WriteLine(string.Format("Vector<T>.Assembly.CodeBase:\t{0}", assembly.CodeBase));
             //assembly = typeof(Vector128<float>).GetTypeInfo().Assembly;
             //writer.WriteLine(string.Format("Vector128<T>.Assembly.CodeBase:\t{0}", assembly.CodeBase));
 #if (NET35 || NET20)

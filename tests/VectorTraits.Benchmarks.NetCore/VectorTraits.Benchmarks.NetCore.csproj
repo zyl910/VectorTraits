@@ -6,7 +6,7 @@
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <RootNamespace>Zyl.VectorTraits</RootNamespace>
+    <RootNamespace>Zyl.VectorTraits.Benchmarks.NetCore</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
