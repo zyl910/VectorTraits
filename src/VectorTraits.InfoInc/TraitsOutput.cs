@@ -9,7 +9,7 @@ namespace Zyl.VectorTraits {
     /// <summary>
     /// VectorTraits output info.
     /// </summary>
-    internal class TraitsOutput {
+    internal partial class TraitsOutput {
 
         /// <summary>
         /// Is release make.
