@@ -13,7 +13,6 @@ namespace Zyl.VectorTraits.Output {
                 }
             }
             // run.
-            // run.
             TextWriter writer = Console.Out;
             string indent = "";
             writer.WriteLine("VectorTraits.Output");
