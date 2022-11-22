@@ -252,6 +252,19 @@ namespace Zyl.VectorTraits {
         /// Padding creates a new <see cref="Vector128{T}"/> from a given span starting at a specified index position (于指定索引位置开始，从指定跨度补齐创建一个 <see cref="Vector128{T}"/>). The element after values is initialized to 0(values 之后的元素会初始化为0).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="values">The array from which the vector is created (用于创建向量的数组).</param>
+        /// <param name="index">Starting index position of valid data in <paramref name="values"/> (<paramref name="values"/> 中有效数据的起始索引位置).</param>
+        /// <param name="length">Length of valid data in <paramref name="values"/> (<paramref name="values"/> 中有效数据的长度).</param>
+        /// <returns>A new <see cref="Vector128{T}"/> with its elements set to the first Count elements from <paramref name="values"/> (一个新<see cref="Vector128{T}"/>，其元素设置为来自<paramref name="values"/>首批满足长度的元素).</returns>
+        /// <exception cref="IndexOutOfRangeException">The <paramref name="index"/> is less than zero (<paramref name="index"/> 小于零). The length of <paramref name="values"/>, starting from <paramref name="index"/>, is less than <see cref="Vector128{T}.Count"/> (从 <paramref name="index"/> 开始的 <paramref name="values"/> 的长度小于 <see cref="Vector128{T}.Count"/>).</exception>
+        public static Vector128<T> CreatePadding<T>(T[] values, int index, int length) where T : struct {
+            return CreatePadding((ReadOnlySpan<T>)values, index, length);
+        }
+
+        /// <summary>
+        /// Padding creates a new <see cref="Vector128{T}"/> from a given span starting at a specified index position (于指定索引位置开始，从指定跨度补齐创建一个 <see cref="Vector128{T}"/>). The element after values is initialized to 0(values 之后的元素会初始化为0).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="values">The span from which the vector is created (用于创建向量的跨度).</param>
         /// <param name="index">Starting index position of valid data in <paramref name="values"/> (<paramref name="values"/> 中有效数据的起始索引位置).</param>
         /// <param name="length">Length of valid data in <paramref name="values"/> (<paramref name="values"/> 中有效数据的长度).</param>
@@ -296,6 +309,19 @@ namespace Zyl.VectorTraits {
         /// <returns>A new <see cref="Vector128{T}"/> with its elements set to the first Count elements from <paramref name="values"/> (一个新<see cref="Vector128{T}"/>，其元素设置为来自<paramref name="values"/>首批满足长度的元素).</returns>
         public static Vector128<T> CreatePadding<T>(params T[] values) where T : struct {
             return CreatePadding<T>(values, 0, values.Length);
+        }
+
+        /// <summary>
+        /// Rotate creates a new <see cref="Vector128{T}"/> from a given span starting at a specified index position (于指定索引位置开始，从指定跨度旋转创建一个 <see cref="Vector128{T}"/>).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="values">The array from which the vector is created (用于创建向量的数组).</param>
+        /// <param name="index">Starting index position of valid data in <paramref name="values"/> (<paramref name="values"/> 中有效数据的起始索引位置).</param>
+        /// <param name="length">Length of valid data in <paramref name="values"/> (<paramref name="values"/> 中有效数据的长度).</param>
+        /// <returns>A new <see cref="Vector128{T}"/> with its elements set to the first Count elements from <paramref name="values"/> (一个新<see cref="Vector128{T}"/>，其元素设置为来自<paramref name="values"/>首批满足长度的元素).</returns>
+        /// <exception cref="IndexOutOfRangeException">The <paramref name="index"/> is less than zero (<paramref name="index"/> 小于零). The length of <paramref name="values"/>, starting from <paramref name="index"/>, is less than <see cref="Vector128{T}.Count"/> (从 <paramref name="index"/> 开始的 <paramref name="values"/> 的长度小于 <see cref="Vector128{T}.Count"/>).</exception>
+        public static Vector128<T> CreateRotate<T>(T[] values, int index, int length) where T : struct {
+            return CreateRotate((ReadOnlySpan<T>)values, index, length);
         }
 
         /// <summary>

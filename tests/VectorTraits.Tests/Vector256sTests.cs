@@ -4,10 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Numerics;
+#if NETCOREAPP3_0_OR_GREATER
+using System.Runtime.Intrinsics;
+#endif
 
 namespace Zyl.VectorTraits.Tests {
     [TestFixture()]
-    public class VectorsTests {
+    public class Vector256sTests {
+#if NETCOREAPP3_0_OR_GREATER
 
         [TestCase((Single)1)]
         [TestCase((Double)2)]
@@ -19,30 +23,30 @@ namespace Zyl.VectorTraits.Tests {
         [TestCase((UInt32)8)]
         [TestCase((Int64)9)]
         [TestCase((UInt64)10)]
-        public void CreatePaddingTest<T>(T src) where T:struct {
-            Vector<T> vzero = Vector<T>.Zero;
+        public void CreatePaddingTest<T>(T src) where T : struct {
+            Vector256<T> vzero = Vector256<T>.Zero;
             T zero = default;
             // params
-            Vector<T> v1 = Vectors.CreatePadding(src);
-            Vector<T> v2 = Vectors.CreatePadding(src, src);
+            Vector256<T> v1 = Vector256s.CreatePadding(src);
+            Vector256<T> v2 = Vector256s.CreatePadding(src, src);
             Assert.AreNotEqual(vzero, v1);
             Assert.AreNotEqual(vzero, v2);
             // []
-            int vcount = Vector<T>.Count;
+            int vcount = Vector256<T>.Count;
             T[] arr = new T[vcount + 1];
             TraitsUtil.Fill(arr, src);
-            v1 = Vectors.CreatePadding(arr);
+            v1 = Vector256s.CreatePadding(arr);
             Assert.AreNotEqual(vzero, v1);
             // Use int index, int length
             for (int i = 0; i <= arr.Length; ++i) {
                 int srcCount = i;
                 if (srcCount > vcount) srcCount = vcount;
-                Vector<T> v = Vectors.CreatePadding(arr, 0, i);
+                Vector256<T> v = Vector256s.CreatePadding(arr, 0, i);
                 for (int j = 0; j < srcCount; ++j) {
-                    Assert.AreEqual(src, v[j]);
+                    Assert.AreEqual(src, v.GetElement(j));
                 }
                 for (int j = srcCount; j < vcount; ++j) {
-                    Assert.AreEqual(zero, v[j]);
+                    Assert.AreEqual(zero, v.GetElement(j));
                 }
             }
         }
@@ -58,28 +62,28 @@ namespace Zyl.VectorTraits.Tests {
         [TestCase((Int64)9)]
         [TestCase((UInt64)10)]
         public void CreateRotateTest<T>(T src) where T : struct {
-            Vector<T> vzero = Vector<T>.Zero;
+            Vector256<T> vzero = Vector256<T>.Zero;
             // params
-            Vector<T> v1 = Vectors.CreateRotate(src);
-            Vector<T> v2 = Vectors.CreateRotate(src, src);
+            Vector256<T> v1 = Vector256s.CreateRotate(src);
+            Vector256<T> v2 = Vector256s.CreateRotate(src, src);
             Assert.AreNotEqual(vzero, v1);
             Assert.AreNotEqual(vzero, v2);
             // []
-            int vcount = Vector<T>.Count;
+            int vcount = Vector256<T>.Count;
             T[] arr = new T[vcount + 1];
             arr[0] = src;
-            v1 = Vectors.CreateRotate(arr);
+            v1 = Vector256s.CreateRotate(arr);
             Assert.AreNotEqual(vzero, v1);
             // Use int index, int length
             for (int i = 0; i <= arr.Length; ++i) {
                 int srcCount = i;
                 if (srcCount > vcount) srcCount = vcount;
-                Vector<T> v = Vectors.CreateRotate(arr, 0, i);
-                if (i>0) {
+                Vector256<T> v = Vector256s.CreateRotate(arr, 0, i);
+                if (i > 0) {
                     for (int j = 0; j < srcCount; ++j) {
                         int pos = j % srcCount;
                         T cur = arr[pos];
-                        Assert.AreEqual(cur, v[j]);
+                        Assert.AreEqual(cur, v.GetElement(j));
                     }
                 } else {
                     Assert.AreNotEqual(vzero, v);
@@ -87,5 +91,6 @@ namespace Zyl.VectorTraits.Tests {
             }
         }
 
+#endif
     }
 }
