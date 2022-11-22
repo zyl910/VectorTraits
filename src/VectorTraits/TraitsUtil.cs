@@ -19,6 +19,9 @@ namespace Zyl.VectorTraits {
     /// </summary>
     public static class TraitsUtil {
 
+        /// <summary>Indent next separator (增加缩进的分隔符).</summary>
+        public static readonly string IndentNextSeparator = "\t";
+
         /// <summary>The default end-of-line comment separator (默认的行尾注释分隔符). </summary>
         public static readonly string DefaultLineCommentSeparator = "\t# ";
         /// <summary>The default end-of-line comment item separator (默认的行尾注释条目分隔符). </summary>

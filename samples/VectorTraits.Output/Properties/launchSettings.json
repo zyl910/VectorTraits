@@ -2,7 +2,7 @@
   "profiles": {
     "VectorTraits.Output": {
       "commandName": "Project",
-      "commandLineArgs": "1"
+      "commandLineArgs": "0"
     }
   }
 }

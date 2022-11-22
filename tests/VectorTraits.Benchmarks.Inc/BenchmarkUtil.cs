@@ -13,8 +13,8 @@ namespace Zyl.VectorTraits.Benchmarks {
     /// Benchmark util.
     /// </summary>
     public static class BenchmarkUtil {
-        /// <summary>Indent next separator.</summary>
-        public static readonly string IndentNextSeparator = "\t";
+        /// <summary>Indent next separator (增加缩进的分隔符).</summary>
+        public static readonly string IndentNextSeparator = TraitsUtil.IndentNextSeparator;
 
 
         /// <summary>Current <see cref="TextWriter"/>.</summary>

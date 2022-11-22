@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace Zyl.VectorTraits.Output {
     internal class OutputVectorTraits {
+        /// <summary>Indent next separator (增加缩进的分隔符).</summary>
+        internal static readonly string IndentNextSeparator = TraitsUtil.IndentNextSeparator;
+
         /// <summary>Show full text.</summary>
         public static bool ShowFull { get; set; }
 
@@ -33,6 +36,7 @@ namespace Zyl.VectorTraits.Output {
         /// <param name="writer">Output <see cref="TextWriter"/>.</param>
         /// <param name="indent">The indent.</param>
         public static void RunBaseInfo(TextWriter writer, string indent) {
+            string indentNext = indent + IndentNextSeparator;
             // Vector create .
             writer.WriteLine(indent + "[Vector create]");
             double[] arr = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -52,6 +56,22 @@ namespace Zyl.VectorTraits.Output {
             }
             WriteLine(writer, indent, "Vectors.CreatePadding(arrByte):\t{0}", Vectors.CreatePadding(arrByte));
             WriteLine(writer, indent, "Vectors.CreateRotate(arrByte):\t{0}", Vectors.CreateRotate(arrByte));
+            writer.WriteLine();
+
+            // TypeCodeFlagsUtil .
+            writer.WriteLine(indent + "[TypeCodeFlagsUtil]");
+            WriteLine(writer, indent, "IntPtrCode:\t{0}", TypeCodeFlagsUtil.IntPtrCode);
+            WriteLine(writer, indent, "UIntPtrCode:\t{0}", TypeCodeFlagsUtil.UIntPtrCode);
+            WriteLine(writer, indent, "IntPtrFlags:\t{0}", TypeCodeFlagsUtil.IntPtrFlags);
+            WriteLine(writer, indent, "UIntPtrFlags:\t{0}", TypeCodeFlagsUtil.UIntPtrFlags);
+            WriteLine(writer, indent, "FloatTypes:\t{0}", TypeCodeFlagsUtil.FloatTypes);
+            foreach(var code in TypeCodeFlagsUtil.ToEnumerable(TypeCodeFlagsUtil.FloatTypes)) {
+                WriteLine(writer, indentNext, "- {0}", code);
+            }
+            WriteLine(writer, indent, "IntTypes:\t{0}", TypeCodeFlagsUtil.IntTypes);
+            foreach (var code in TypeCodeFlagsUtil.ToEnumerable(TypeCodeFlagsUtil.IntTypes)) {
+                WriteLine(writer, indentNext, "- {0}", code);
+            }
             writer.WriteLine();
 
             // Scalars<T> .
