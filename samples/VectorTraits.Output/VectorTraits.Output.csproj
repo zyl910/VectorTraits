@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+      <LangVersion>9.0</LangVersion>
+      <Nullable>enable</Nullable>
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <RootNamespace>Zyl.VectorTraits.Output</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\VectorTraits\VectorTraits.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\..\src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems" Label="Shared" />
+
+</Project>

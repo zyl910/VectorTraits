@@ -18,6 +18,7 @@ namespace Zyl.VectorTraits.Benchmarks.NetCore {
                 writer.WriteLine("VectorTraits.Benchmarks.NetCore");
                 writer.WriteLine();
                 BenchmarkUtil.OutputEnvironment(writer, indent);
+                writer.WriteLine();
                 BenchmarkMain.RunBenchmark(writer, indent);
             }
             //Console.ReadLine();

@@ -67,7 +67,7 @@ namespace Zyl.VectorTraits {
 #endif
 #pragma warning restore SYSLIB0012 // Type or member is obsolete
 
-            writer.WriteLine();
+            //writer.WriteLine();
         }
 
     }
