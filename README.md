@@ -1,7 +1,7 @@
 # VectorTraits
 English | [Chinese(中文)](README_Chinese.md)
 
-VectorTraits: SIMD Vector type traits library (SIMD向量类型的特征库).
+VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 
 This library provides many constants and arithmetic methods for vector types, and can take full advantage of the X86 and Arm architecture's intrinsic functions for hardware acceleration of vector type computations, and can enjoy inline compilation optimization.
 

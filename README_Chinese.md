@@ -1,7 +1,7 @@
 # VectorTraits
 [English](README.md) | Chinese(中文)
 
-SIMD Vector type traits (SIMD向量类型的特征处理).
+VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 
 本库为向量类型提供许多常数与算术方法，能充分利用 X86、Arm架构的内在函数对向量类型的运算进行硬件加速，且能够享受内联编译优化。
 
