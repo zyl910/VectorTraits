@@ -36,11 +36,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IBaseTraits.IsSupported"/>
             public static bool IsSupported {
                 get {
-#if NET7_0_OR_GREATER
-                    return Vector256.IsSupported;
-#else
-                    return false;
-#endif // NET7_0_OR_GREATER
+                    return true;
                 }
             }
 

@@ -30,7 +30,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IBaseTraits.IsSupported"/>
             public static bool IsSupported {
                 get {
-                    return Vector.IsHardwareAccelerated;
+                    return true;
                 }
             }
 

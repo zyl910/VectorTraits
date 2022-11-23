@@ -9,17 +9,17 @@ namespace Zyl.VectorTraits.Impl {
     public interface IBaseTraits {
 
         /// <summary>
-        /// Get byte count. 
+        /// Get byte count (取得字节数量).
         /// </summary>
         int ByteCount { get; }
 
         /// <summary>
-        /// Gets a value that indicates whether vector operations are subject to hardware acceleration through JIT intrinsic support.
+        /// Whether to support the run (是否支持运行).
         /// </summary>
         bool IsSupported { get; }
 
         /// <summary>
-        /// Throw exception for unsupported.
+        /// Throw exception when not supported. (当不支持时抛出异常).
         /// </summary>
         /// <exception cref="NotSupportedException">If <see cref="IsSupported"/> return false.</exception>
         void ThrowForUnsupported();
