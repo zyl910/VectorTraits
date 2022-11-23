@@ -14,7 +14,7 @@ namespace Zyl.VectorTraits {
     /// <summary>
     /// Methods of <see cref="Vector{T}"/> .
     /// </summary>
-    public static class Vectors {
+    public static partial class Vectors {
 
         // == Mask array ==
         // It takes up too much space to construct a batch of mask arrays for each element type. Int32/UInt32/Single can share a 4-byte mask, and the total bit length of vector types is fixed. Therefore, arrays such as MaskBitPosArray1B can be shared by multiple element types. (若为每一种元素类型都构造一批掩码数组的话, 太占空间了. 考虑到 Int32/UInt32/Single 可共用4字节的掩码, 且向量类型的总位长是固定的, 于是 MaskBitPosArray1B 等数组可以给多种元素类型所共用.)

@@ -2,29 +2,23 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
-#if NETCOREAPP3_0_OR_GREATER
-using System.Runtime.Intrinsics;
-#endif
+using System.Numerics;
 
 namespace Zyl.VectorTraits.Impl {
+
     /// <summary>
-    /// <see cref="Vector256{T}"/> traits - Base.
+    /// <see cref="Vector{T}"/> traits 256 - base.
     /// </summary>
-    public sealed class WVectorTraits256Base : WVectorTraits256Abstract {
-        private static readonly WVectorTraits256Base _instance = new WVectorTraits256Base(); // Default instance.
+    public sealed class VectorTraits256Base : VectorTraits256Abstract {
+        private static readonly VectorTraits256Base _instance = new VectorTraits256Base(); // Default instance.
 
         /// <summary>Default instance. </summary>
-        public static WVectorTraits256Base Instance {
+        public static VectorTraits256Base Instance {
             get { return _instance; }
         }
 
-#if NETCOREAPP3_0_OR_GREATER
-
-
-#endif // NETCOREAPP3_0_OR_GREATER
-
         /// <summary>
-        /// <see cref="Vector256{T}"/> traits.Statics - Base.
+        /// <see cref="Vector{T}"/> traits.Statics 256 - base.
         /// </summary>
         public static class Statics {
 
@@ -36,27 +30,20 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IBaseTraits.IsSupported"/>
             public static bool IsSupported {
                 get {
-#if NET7_0_OR_GREATER
-                    return Vector256.IsSupported;
-#else
-                    return false;
-#endif // NET7_0_OR_GREATER
+                    return Vector<byte>.Count == ByteCountValue && Vector.IsHardwareAccelerated;
                 }
             }
 
             /// <inheritdoc cref="IBaseTraits.ThrowForUnsupported"/>
             public static void ThrowForUnsupported() {
                 if (IsSupported) return;
-                // No exceptions are thrown because of the software implementation.
-                // throw new NotSupportedException("The Vector256 does not support hardware acceleration!");
+                throw new NotSupportedException(string.Format("Vector count mismatch({0}!={1}) !", Vector<byte>.Count, ByteCountValue));
             }
 
-#if NETCOREAPP3_0_OR_GREATER
-
-            /// <inheritdoc cref="IVectorWTraits256.ShiftLeft(Vector256{Int16}, int)">
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{Int16}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<Int16> ShiftLeft(Vector256<Int16> value, int shiftCount) {
-                Vector256<Int16> rt = value;
+            public static unsafe Vector<Int16> ShiftLeft(Vector<Int16> value, int shiftCount) {
+                Vector<Int16> rt = value;
                 Int16* p = (Int16*)&rt;
                 p[0] <<= shiftCount;
                 p[1] <<= shiftCount;
@@ -77,10 +64,10 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-            /// <inheritdoc cref="IVectorWTraits256.ShiftLeft(Vector256{Int32}, int)">
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{Int32}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<Int32> ShiftLeft(Vector256<Int32> value, int shiftCount) {
-                Vector256<Int32> rt = value;
+            public static unsafe Vector<Int32> ShiftLeft(Vector<Int32> value, int shiftCount) {
+                Vector<Int32> rt = value;
                 Int32* p = (Int32*)&rt;
                 p[0] <<= shiftCount;
                 p[1] <<= shiftCount;
@@ -93,10 +80,10 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-            /// <inheritdoc cref="IVectorWTraits256.ShiftRightArithmetic(Vector256{Int32}, int)">
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{Int32}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<Int32> ShiftRightArithmetic(Vector256<Int32> value, int shiftCount) {
-                Vector256<Int32> rt = value;
+            public static unsafe Vector<Int32> ShiftRightArithmetic(Vector<Int32> value, int shiftCount) {
+                Vector<Int32> rt = value;
                 Int32* p = (Int32*)&rt;
                 p[0] >>= shiftCount;
                 p[1] >>= shiftCount;
@@ -109,7 +96,6 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-#endif // NETCOREAPP3_0_OR_GREATER
-        }
+        } // Statics
     }
 }

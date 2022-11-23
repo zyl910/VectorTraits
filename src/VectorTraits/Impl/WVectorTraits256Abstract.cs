@@ -13,6 +13,16 @@ namespace Zyl.VectorTraits.Impl {
     /// <see cref="Vector256{T}"/> traits - abstract.
     /// </summary>
     public abstract class WVectorTraits256Abstract : IWVectorTraits256 {
+
+        /// <summary>
+        /// Get best instance.
+        /// </summary>
+        /// <returns>Returns best instance.</returns>
+        public static IWVectorTraits256 GetBestInstance() {
+            if (WVectorTraits256Avx2.Instance.IsSupported) return WVectorTraits256Avx2.Instance;
+            return WVectorTraits256Base.Instance;
+        }
+
         /// <summary>ByteCount value</summary>
         public const int ByteCountValue = 32;
 

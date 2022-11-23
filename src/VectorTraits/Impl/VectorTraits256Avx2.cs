@@ -11,9 +11,16 @@ namespace Zyl.VectorTraits.Impl {
     using WStatics = WVectorTraits256Avx2.Statics;
 
     /// <summary>
-    /// <see cref="Vector{T}"/> traits - 256 Avx2.
+    /// <see cref="Vector{T}"/> traits 256 - Avx2 .
     /// </summary>
-    public sealed class VectorTraits256Avx2 {
+    public sealed class VectorTraits256Avx2 : VectorTraits256Avx2Abstract {
+        private static readonly VectorTraits256Avx2 _instance = new VectorTraits256Avx2(); // Default instance.
+
+        /// <summary>Default instance. </summary>
+        public static VectorTraits256Avx2 Instance {
+            get { return _instance; }
+        }
+
 #if NETCOREAPP3_0_OR_GREATER
 
 
@@ -26,7 +33,7 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IBaseTraits.ByteCount"/>
             public static int ByteCount {
-                get { return 32; }
+                get { return ByteCountValue; }
             }
 
             /// <inheritdoc cref="IBaseTraits.IsSupported"/>

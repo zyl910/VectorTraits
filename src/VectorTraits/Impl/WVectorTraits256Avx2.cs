@@ -12,6 +12,13 @@ namespace Zyl.VectorTraits.Impl {
     /// <see cref="Vector256{T}"/> traits - Avx2 .
     /// </summary>
     public sealed class WVectorTraits256Avx2 : WVectorTraits256Avx2Abstract {
+        private static readonly WVectorTraits256Avx2 _instance = new WVectorTraits256Avx2(); // Default instance.
+
+        /// <summary>Default instance. </summary>
+        public static WVectorTraits256Avx2 Instance {
+            get { return _instance; }
+        }
+
 #if NETCOREAPP3_0_OR_GREATER
 
 
@@ -48,13 +55,13 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{Int16}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<Int16> ShiftLeft(Vector256<Int16> value, int shiftCount) {
+            public static Vector256<Int16> ShiftLeft(Vector256<Int16> value, int shiftCount) {
                 return Avx2.ShiftLeftLogical(value, (byte)shiftCount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{Int32}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<Int32> ShiftLeft(Vector256<Int32> value, int shiftCount) {
+            public static Vector256<Int32> ShiftLeft(Vector256<Int32> value, int shiftCount) {
                 return Avx2.ShiftLeftLogical(value, (byte)shiftCount);
             }
 
