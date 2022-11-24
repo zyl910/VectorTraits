@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.4.33103.184
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33027.164
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorTraits.Sample", "samples\VectorTraits.Sample\VectorTraits.Sample.csproj", "{8ECAE95B-F799-4F02-B598-3FE3E3DE9291}"
 EndProject
@@ -35,9 +35,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorTraits.Benchmarks.Net
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits.Benchmarks.NetFw", "tests\VectorTraits.Benchmarks.NetFw\VectorTraits.Benchmarks.NetFw.csproj", "{A732C040-1F30-4A0A-BE44-C93AE15CA954}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorTraits.Output", "samples\VectorTraits.Output\VectorTraits.Output.csproj", "{DE1E8655-C240-4B92-9391-10D0B44D50A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits.Output", "samples\VectorTraits.Output\VectorTraits.Output.csproj", "{DE1E8655-C240-4B92-9391-10D0B44D50A0}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{22375bc5-630e-4414-9c45-f749ae13cae1}*SharedItemsImports = 13
+		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{6d794c59-52c2-4853-9124-84fa8fee0acb}*SharedItemsImports = 5
+		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{6d794c59-52c2-4853-9124-84fa8fee0acb}*SharedItemsImports = 5
+		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{81ccad3f-6606-410b-9d02-3f8fc65cace5}*SharedItemsImports = 13
+		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{8ecae95b-f799-4f02-b598-3fe3e3de9291}*SharedItemsImports = 5
+		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
+		tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
+		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
+		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{de1e8655-c240-4b92-9391-10d0b44d50a0}*SharedItemsImports = 5
+		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
+		tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
+		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
+		tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems*{fe742124-f9f3-463d-83d2-2fa9e33e0505}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -89,20 +104,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {563C5B68-C47B-4FD9-9EB3-279A64EE805C}
-	EndGlobalSection
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{22375bc5-630e-4414-9c45-f749ae13cae1}*SharedItemsImports = 13
-		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{6d794c59-52c2-4853-9124-84fa8fee0acb}*SharedItemsImports = 5
-		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{6d794c59-52c2-4853-9124-84fa8fee0acb}*SharedItemsImports = 5
-		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{81ccad3f-6606-410b-9d02-3f8fc65cace5}*SharedItemsImports = 13
-		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{8ecae95b-f799-4f02-b598-3fe3e3de9291}*SharedItemsImports = 5
-		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
-		tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
-		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
-		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{de1e8655-c240-4b92-9391-10d0b44d50a0}*SharedItemsImports = 5
-		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
-		tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
-		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
-		tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems*{fe742124-f9f3-463d-83d2-2fa9e33e0505}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
