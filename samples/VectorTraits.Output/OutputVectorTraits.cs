@@ -41,7 +41,7 @@ namespace Zyl.VectorTraits.Output {
             writer.WriteLine(indent + "[Vector create]");
             double[] arr = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
             byte[] arrByte = { byte.MinValue, byte.MaxValue, 0, 1 };
-            //writer.WriteLine(Vectors.Create<Byte>(null)); // ArgumentNullException
+            //writer.WriteLine(Vectors.Create<byte>(null)); // ArgumentNullException
             //writer.WriteLine(Vectors.Create(arrByte)); // IndexOutOfRangeException
             WriteLine(writer, indent, "Create by T[]:\t{0}", Vectors.Create(arr));
             var parr = new ReadOnlySpan<double>(arr);

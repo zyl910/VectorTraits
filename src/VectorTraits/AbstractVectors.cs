@@ -16,7 +16,7 @@ namespace Zyl.VectorTraits {
         /// <summary>(Element) All bit is 1 (所有位都是1的值).</summary>
         public static T ElementAllBitsSet { get { return Scalars<T>.AllBitsSet; } }
         // -- Number struct --
-        /// <summary>(Element) Byte size (字节大小).</summary>
+        /// <summary>(Element) byte size (字节大小).</summary>
         public static int ElementByteSize { get { return Scalars<T>.ByteSize; } }
         /// <summary>(Element) Bit size (位大小).</summary>
         public static int ElementBitSize { get { return Scalars<T>.BitSize; } }
@@ -105,20 +105,20 @@ namespace Zyl.VectorTraits {
         public static T ElementV7 { get { return Scalars<T>.V7; } }
         /// <summary>(Element) Value 8 .</summary>
         public static T ElementV8 { get { return Scalars<T>.V8; } }
-        /// <summary>(Element) Value 127 (SByte.MaxValue).</summary>
+        /// <summary>(Element) Value 127 (sbyte.MaxValue).</summary>
         public static T ElementVMaxSByte { get { return Scalars<T>.VMaxSByte; } }
-        /// <summary>(Element) Value 255 (Byte.MaxValue).</summary>
+        /// <summary>(Element) Value 255 (byte.MaxValue).</summary>
         public static T ElementVMaxByte { get { return Scalars<T>.VMaxByte; } }
-        /// <summary>(Element) Value 32767 (Int16.MaxValue) .</summary>
+        /// <summary>(Element) Value 32767 (short.MaxValue) .</summary>
         public static T ElementVMaxInt16 { get { return Scalars<T>.VMaxInt16; } }
-        /// <summary>(Element) Value 65535 (UInt16.MaxValue) .</summary>
+        /// <summary>(Element) Value 65535 (ushort.MaxValue) .</summary>
         public static T ElementVMaxUInt16 { get { return Scalars<T>.VMaxUInt16; } }
-        /// <summary>(Element) Value 2147483647 (Int32.MaxValue) .</summary>
+        /// <summary>(Element) Value 2147483647 (int.MaxValue) .</summary>
         public static T ElementVMaxInt32 { get { return Scalars<T>.VMaxInt32; } }
-        /// <summary>(Element) Value 4294967295 (UInt32.MaxValue) .</summary>
+        /// <summary>(Element) Value 4294967295 (uint.MaxValue) .</summary>
         public static T ElementVMaxUInt32 { get { return Scalars<T>.VMaxUInt32; } }
         // -- Negative number  --
-        /// <summary>(Element) Value -1 . When the type is unsigned integer, the value is a signed cast value (当类型为无符号整型时，值为带符号强制转换值). Example: '(Byte)(-1)=255' .</summary>
+        /// <summary>(Element) Value -1 . When the type is unsigned integer, the value is a signed cast value (当类型为无符号整型时，值为带符号强制转换值). Example: '(byte)(-1)=255' .</summary>
         public static T ElementV_1 { get { return Scalars<T>.V_1; } }
         /// <summary>(Element) Value -2 .</summary>
         public static T ElementV_2 { get { return Scalars<T>.V_2; } }
@@ -134,24 +134,24 @@ namespace Zyl.VectorTraits {
         public static T ElementV_7 { get { return Scalars<T>.V_7; } }
         /// <summary>(Element) Value -8 .</summary>
         public static T ElementV_8 { get { return Scalars<T>.V_8; } }
-        /// <summary>(Element) Value -128 (SByte.MinValue).</summary>
+        /// <summary>(Element) Value -128 (sbyte.MinValue).</summary>
         public static T ElementVMinSByte { get { return Scalars<T>.VMinSByte; } }
-        /// <summary>(Element) Value -32768 (Int16.MinValue) .</summary>
+        /// <summary>(Element) Value -32768 (short.MinValue) .</summary>
         public static T ElementVMinInt16 { get { return Scalars<T>.VMinInt16; } }
-        /// <summary>(Element) Value -2147483648 (Int32.MinValue) .</summary>
+        /// <summary>(Element) Value -2147483648 (int.MinValue) .</summary>
         public static T ElementVMinInt32 { get { return Scalars<T>.VMinInt32; } }
         // -- Reciprocal number --
-        /// <summary>Reciprocal value: 1/127 (SByte.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/127 (sbyte.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
         public static T ElementVReciprocalMaxSByte { get { return Scalars<T>.VReciprocalMaxSByte; } }
-        /// <summary>Reciprocal value: 1/255 (Byte.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/255 (byte.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
         public static T ElementVReciprocalMaxByte { get { return Scalars<T>.VReciprocalMaxByte; } }
-        /// <summary>Reciprocal value: 1/32767 (Int16.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/32767 (short.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
         public static T ElementVReciprocalMaxInt16 { get { return Scalars<T>.VReciprocalMaxInt16; } }
-        /// <summary>Reciprocal value: 1/65535 (UInt16.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/65535 (ushort.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
         public static T ElementVReciprocalMaxUInt16 { get { return Scalars<T>.VReciprocalMaxUInt16; } }
-        /// <summary>Reciprocal value: 1/2147483647 (Int32.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/2147483647 (int.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
         public static T ElementVReciprocalMaxInt32 { get { return Scalars<T>.VReciprocalMaxInt32; } }
-        /// <summary>Reciprocal value: 1/4294967295 (UInt32.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/4294967295 (uint.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
         public static T ElementVReciprocalMaxUInt32 { get { return Scalars<T>.VReciprocalMaxUInt32; } }
     }
 

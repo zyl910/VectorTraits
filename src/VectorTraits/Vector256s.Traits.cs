@@ -63,21 +63,21 @@ namespace Zyl.VectorTraits {
 
 #if NETCOREAPP3_0_OR_GREATER
 
-        /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{Int16}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector256<Int16> ShiftLeft(Vector256<Int16> value, int shiftCount) {
+        public static Vector256<short> ShiftLeft(Vector256<short> value, int shiftCount) {
             return _instance.ShiftLeft(value, shiftCount);
         }
 
-        /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{Int32}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector256<Int32> ShiftLeft(Vector256<Int32> value, int shiftCount) {
+        public static Vector256<int> ShiftLeft(Vector256<int> value, int shiftCount) {
             return _instance.ShiftLeft(value, shiftCount);
         }
 
-        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{Int32}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector256<Int32> ShiftRightArithmetic(Vector256<Int32> value, int shiftCount) {
+        public static Vector256<int> ShiftRightArithmetic(Vector256<int> value, int shiftCount) {
             return _instance.ShiftLeft(value, shiftCount);
         }
 

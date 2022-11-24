@@ -55,21 +55,21 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NET5_0_OR_GREATER
 
-            /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{Int16}, int)"/>
+            /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<Int16> ShiftLeft(Vector128<Int16> value, int shiftCount) {
+            public static Vector128<short> ShiftLeft(Vector128<short> value, int shiftCount) {
                 return AdvSimd.ShiftLeftLogical(value, (byte)shiftCount);
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{Int32}, int)"/>
+            /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<Int32> ShiftLeft(Vector128<Int32> value, int shiftCount) {
+            public static Vector128<int> ShiftLeft(Vector128<int> value, int shiftCount) {
                 return Vector128.AsInt32(AdvSimd.ShiftLeftLogical(Vector128.AsUInt32(value), (byte)shiftCount));
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{Int32}, int)"/>
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<Int32> ShiftRightArithmetic(Vector128<Int32> value, int shiftCount) {
+            public static Vector128<int> ShiftRightArithmetic(Vector128<int> value, int shiftCount) {
                 return AdvSimd.ShiftRightArithmetic(value, (byte)shiftCount);
             }
 

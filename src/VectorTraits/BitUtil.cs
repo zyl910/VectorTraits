@@ -52,11 +52,11 @@ namespace Zyl.VectorTraits {
         /// <param name="value">The number to convert (欲转换的值).</param>
         /// <returns>A 32-bit integer whose bits are identical to value (一个32位整数，表示转换的单精度浮点值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int32 SingleToInt32Bits(Single value) {
+        public static int SingleToInt32Bits(float value) {
 #if (NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
             return BitConverter.SingleToInt32Bits(value);
 #else
-            return Unsafe.As<Single, Int32>(ref value);
+            return Unsafe.As<float, int>(ref value);
 #endif // NET6_0_OR_GREATER
         }
 
@@ -67,11 +67,11 @@ namespace Zyl.VectorTraits {
         /// <returns>A 32-bit integer whose bits are identical to value (一个32位无符号整数，表示转换的单精度浮点值).</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static UInt32 SingleToUInt32Bits(Single value) {
+        public static uint SingleToUInt32Bits(float value) {
 #if NET6_0_OR_GREATER
             return BitConverter.SingleToUInt32Bits(value);
 #else
-            return Unsafe.As<Single, UInt32>(ref value);
+            return Unsafe.As<float, uint>(ref value);
 #endif // NET6_0_OR_GREATER
         }
 
@@ -81,11 +81,11 @@ namespace Zyl.VectorTraits {
         /// <param name="value">The 32-bit signed integer value to convert (欲转换的32位带符号整数值).</param>
         /// <returns>A single-precision floating-point value that represents the converted integer (表示根据整数转换后的单精度浮点值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Single Int32BitsToSingle(Int32 value) {
+        public static float Int32BitsToSingle(int value) {
 #if (NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
             return BitConverter.Int32BitsToSingle(value);
 #else
-            return Unsafe.As<Int32, Single>(ref value);
+            return Unsafe.As<int, float>(ref value);
 #endif // NET6_0_OR_GREATER
         }
 
@@ -96,11 +96,11 @@ namespace Zyl.VectorTraits {
         /// <returns>A single-precision floating-point value that represents the converted integer (表示根据整数转换后的单精度浮点值).</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Single UInt32BitsToSingle(UInt32 value) {
+        public static float UInt32BitsToSingle(uint value) {
 #if NET6_0_OR_GREATER
             return BitConverter.UInt32BitsToSingle(value);
 #else
-            return Unsafe.As<UInt32, Single>(ref value);
+            return Unsafe.As<uint, float>(ref value);
 #endif // NET6_0_OR_GREATER
         }
         /// <summary>
@@ -109,7 +109,7 @@ namespace Zyl.VectorTraits {
         /// <param name="value">The number to convert (欲转换的值).</param>
         /// <returns>A 64-bit integer whose bits are identical to value (一个64位整数，表示转换的单精度浮点值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int64 DoubleToInt64Bits(Double value) {
+        public static long DoubleToInt64Bits(double value) {
             return BitConverter.DoubleToInt64Bits(value);
         }
 
@@ -120,11 +120,11 @@ namespace Zyl.VectorTraits {
         /// <returns>A 64-bit integer whose bits are identical to value (一个64位无符号整数，表示转换的单精度浮点值).</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static UInt64 DoubleToUInt64Bits(Double value) {
+        public static ulong DoubleToUInt64Bits(double value) {
 #if NET6_0_OR_GREATER
             return BitConverter.DoubleToUInt64Bits(value);
 #else
-            return Unsafe.As<Double, UInt64>(ref value);
+            return Unsafe.As<double, ulong>(ref value);
 #endif // NET6_0_OR_GREATER
         }
 
@@ -134,7 +134,7 @@ namespace Zyl.VectorTraits {
         /// <param name="value">The 64-bit signed integer value to convert (欲转换的64位带符号整数值).</param>
         /// <returns>A double-precision floating-point value that represents the converted integer (表示根据整数转换后的单精度浮点值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Double Int64BitsToDouble(Int64 value) {
+        public static double Int64BitsToDouble(long value) {
             return BitConverter.Int64BitsToDouble(value);
         }
 
@@ -145,11 +145,11 @@ namespace Zyl.VectorTraits {
         /// <returns>A double-precision floating-point value that represents the converted integer (表示根据整数转换后的单精度浮点值).</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Double UInt64BitsToDouble(UInt64 value) {
+        public static double UInt64BitsToDouble(ulong value) {
 #if NET6_0_OR_GREATER
             return BitConverter.UInt64BitsToDouble(value);
 #else
-            return Unsafe.As<UInt64, Double>(ref value);
+            return Unsafe.As<ulong, double>(ref value);
 #endif // NET6_0_OR_GREATER
         }
 
@@ -160,11 +160,11 @@ namespace Zyl.VectorTraits {
         /// <param name="value">The number to convert (欲转换的值).</param>
         /// <returns>A 16-bit integer whose bits are identical to value (一个16位整数，表示转换的半精度浮点值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int16 HalfToInt16Bits(Half value) {
+        public static short HalfToInt16Bits(Half value) {
 #if NET6_0_OR_GREATER
             return BitConverter.HalfToInt16Bits(value);
 #else
-            return Unsafe.As<Half, Int16>(ref value);
+            return Unsafe.As<Half, short>(ref value);
 #endif // NET6_0_OR_GREATER
         }
 
@@ -175,11 +175,11 @@ namespace Zyl.VectorTraits {
         /// <returns>A 16-bit integer whose bits are identical to value (一个16位无符号整数，表示转换的半精度浮点值).</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static UInt16 HalfToUInt16Bits(Half value) {
+        public static ushort HalfToUInt16Bits(Half value) {
 #if NET6_0_OR_GREATER
             return BitConverter.HalfToUInt16Bits(value);
 #else
-            return Unsafe.As<Half, UInt16>(ref value);
+            return Unsafe.As<Half, ushort>(ref value);
 #endif // NET6_0_OR_GREATER
         }
 
@@ -189,11 +189,11 @@ namespace Zyl.VectorTraits {
         /// <param name="value">The 16-bit signed integer value to convert (欲转换的16位带符号整数值).</param>
         /// <returns>A half-precision floating-point value that represents the converted integer (表示根据整数转换后的半精度浮点值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Half Int16BitsToHalf(Int16 value) {
+        public static Half Int16BitsToHalf(short value) {
 #if NET6_0_OR_GREATER
             return BitConverter.Int16BitsToHalf(value);
 #else
-            return Unsafe.As<Int16, Half>(ref value);
+            return Unsafe.As<short, Half>(ref value);
 #endif // NET6_0_OR_GREATER
         }
 
@@ -204,11 +204,11 @@ namespace Zyl.VectorTraits {
         /// <returns>A half-precision floating-point value that represents the converted integer (表示根据整数转换后的半精度浮点值).</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Half UInt16BitsToHalf(UInt16 value) {
+        public static Half UInt16BitsToHalf(ushort value) {
 #if NET6_0_OR_GREATER
             return BitConverter.UInt16BitsToHalf(value);
 #else
-            return Unsafe.As<UInt16, Half>(ref value);
+            return Unsafe.As<ushort, Half>(ref value);
 #endif // NET6_0_OR_GREATER
         }
 

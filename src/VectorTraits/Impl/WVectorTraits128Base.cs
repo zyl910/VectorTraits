@@ -49,11 +49,11 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
-            /// <inheritdoc cref="IVectorWTraits128.ShiftLeft(Vector128{Int16}, int)">
+            /// <inheritdoc cref="IVectorWTraits128.ShiftLeft(Vector128{short}, int)">
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<Int16> ShiftLeft(Vector128<Int16> value, int shiftCount) {
-                Vector128<Int16> rt = value;
-                Int16* p = (Int16*)&rt;
+            public static unsafe Vector128<short> ShiftLeft(Vector128<short> value, int shiftCount) {
+                Vector128<short> rt = value;
+                short* p = (short*)&rt;
                 p[0] <<= shiftCount;
                 p[1] <<= shiftCount;
                 p[2] <<= shiftCount;
@@ -65,11 +65,11 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-            /// <inheritdoc cref="IVectorWTraits128.ShiftLeft(Vector128{Int32}, int)">
+            /// <inheritdoc cref="IVectorWTraits128.ShiftLeft(Vector128{int}, int)">
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<Int32> ShiftLeft(Vector128<Int32> value, int shiftCount) {
-                Vector128<Int32> rt = value;
-                Int32* p = (Int32*)&rt;
+            public static unsafe Vector128<int> ShiftLeft(Vector128<int> value, int shiftCount) {
+                Vector128<int> rt = value;
+                int* p = (int*)&rt;
                 p[0] <<= shiftCount;
                 p[1] <<= shiftCount;
                 p[2] <<= shiftCount;
@@ -77,11 +77,11 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-            /// <inheritdoc cref="IVectorWTraits128.ShiftRightArithmetic(Vector128{Int32}, int)">
+            /// <inheritdoc cref="IVectorWTraits128.ShiftRightArithmetic(Vector128{int}, int)">
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<Int32> ShiftRightArithmetic(Vector128<Int32> value, int shiftCount) {
-                Vector128<Int32> rt = value;
-                Int32* p = (Int32*)&rt;
+            public static unsafe Vector128<int> ShiftRightArithmetic(Vector128<int> value, int shiftCount) {
+                Vector128<int> rt = value;
+                int* p = (int*)&rt;
                 p[0] >>= shiftCount;
                 p[1] >>= shiftCount;
                 p[2] >>= shiftCount;

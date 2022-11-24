@@ -17,62 +17,62 @@ namespace Zyl.VectorTraits {
     public static partial class Vectors {
 
         // == Mask array ==
-        // It takes up too much space to construct a batch of mask arrays for each element type. Int32/UInt32/Single can share a 4-byte mask, and the total bit length of vector types is fixed. Therefore, arrays such as MaskBitPosArray1B can be shared by multiple element types. (若为每一种元素类型都构造一批掩码数组的话, 太占空间了. 考虑到 Int32/UInt32/Single 可共用4字节的掩码, 且向量类型的总位长是固定的, 于是 MaskBitPosArray1B 等数组可以给多种元素类型所共用.)
+        // It takes up too much space to construct a batch of mask arrays for each element type. int/uint/float can share a 4-byte mask, and the total bit length of vector types is fixed. Therefore, arrays such as MaskBitPosArray1B can be shared by multiple element types. (若为每一种元素类型都构造一批掩码数组的话, 太占空间了. 考虑到 int/uint/float 可共用4字节的掩码, 且向量类型的总位长是固定的, 于是 MaskBitPosArray1B 等数组可以给多种元素类型所共用.)
 
         /// <summary>Bit pos mask array - 1Byte (位偏移掩码的数组 - 1字节). e.g. 1, 2, 4, 8, 0x10 ...</summary>
-        private static readonly Vector<Byte>[] MaskBitPosArray1B;
+        private static readonly Vector<byte>[] MaskBitPosArray1B;
         /// <summary>Bit pos mask array - 2Byte (位偏移掩码的数组 - 2字节). e.g. 1, 2, 4, 8, 0x10 ...</summary>
-        private static readonly Vector<Byte>[] MaskBitPosArray2B;
+        private static readonly Vector<byte>[] MaskBitPosArray2B;
         /// <summary>Bit pos mask array - 4Byte (位偏移掩码的数组 - 4字节). e.g. 1, 2, 4, 8, 0x10 ...</summary>
-        private static readonly Vector<Byte>[] MaskBitPosArray4B;
+        private static readonly Vector<byte>[] MaskBitPosArray4B;
         /// <summary>Bit pos mask array - 8Byte (位偏移掩码的数组 - 8字节). e.g. 1, 2, 4, 8, 0x10 ...</summary>
-        private static readonly Vector<Byte>[] MaskBitPosArray8B;
+        private static readonly Vector<byte>[] MaskBitPosArray8B;
         /// <summary>Bits mask array - 1Byte (位集掩码的数组 - 1字节). e.g. 0, 1, 3, 7, 0xF, 0x1F ...</summary>
-        private static readonly Vector<Byte>[] MaskBitsArray1B;
+        private static readonly Vector<byte>[] MaskBitsArray1B;
         /// <summary>Bits mask array - 2Byte (位集掩码的数组 - 2字节). e.g. 0, 1, 3, 7, 0xF, 0x1F ...</summary>
-        private static readonly Vector<Byte>[] MaskBitsArray2B;
+        private static readonly Vector<byte>[] MaskBitsArray2B;
         /// <summary>Bits mask array - 4Byte (位集掩码的数组 - 4字节). e.g. 0, 1, 3, 7, 0xF, 0x1F ...</summary>
-        private static readonly Vector<Byte>[] MaskBitsArray4B;
+        private static readonly Vector<byte>[] MaskBitsArray4B;
         /// <summary>Bits mask array - 8Byte (位集掩码的数组 - 8字节). e.g. 0, 1, 3, 7, 0xF, 0x1F ...</summary>
-        private static readonly Vector<Byte>[] MaskBitsArray8B;
+        private static readonly Vector<byte>[] MaskBitsArray8B;
 
         /// <summary>
         /// Static constructor.
         /// </summary>
         static Vectors() {
-            Int64 bitpos;
-            Int64 bits;
+            long bitpos;
+            long bits;
             int i;
-            MaskBitPosArray1B = new Vector<Byte>[1 * 8];
-            MaskBitPosArray2B = new Vector<Byte>[2 * 8];
-            MaskBitPosArray4B = new Vector<Byte>[4 * 8];
-            MaskBitPosArray8B = new Vector<Byte>[8 * 8];
-            MaskBitsArray1B = new Vector<Byte>[1 * 8 + 1];
-            MaskBitsArray2B = new Vector<Byte>[2 * 8 + 1];
-            MaskBitsArray4B = new Vector<Byte>[4 * 8 + 1];
-            MaskBitsArray8B = new Vector<Byte>[8 * 8 + 1];
-            MaskBitsArray1B[0] = Vector<Byte>.Zero;
-            MaskBitsArray2B[0] = Vector<Byte>.Zero;
-            MaskBitsArray4B[0] = Vector<Byte>.Zero;
-            MaskBitsArray8B[0] = Vector<Byte>.Zero;
+            MaskBitPosArray1B = new Vector<byte>[1 * 8];
+            MaskBitPosArray2B = new Vector<byte>[2 * 8];
+            MaskBitPosArray4B = new Vector<byte>[4 * 8];
+            MaskBitPosArray8B = new Vector<byte>[8 * 8];
+            MaskBitsArray1B = new Vector<byte>[1 * 8 + 1];
+            MaskBitsArray2B = new Vector<byte>[2 * 8 + 1];
+            MaskBitsArray4B = new Vector<byte>[4 * 8 + 1];
+            MaskBitsArray8B = new Vector<byte>[8 * 8 + 1];
+            MaskBitsArray1B[0] = Vector<byte>.Zero;
+            MaskBitsArray2B[0] = Vector<byte>.Zero;
+            MaskBitsArray4B[0] = Vector<byte>.Zero;
+            MaskBitsArray8B[0] = Vector<byte>.Zero;
             bitpos = 1;
             bits = 1;
             for (i=0; i< MaskBitPosArray8B.Length; ++i) {
                 if (i < MaskBitPosArray1B.Length) {
-                    MaskBitPosArray1B[i] = Vectors.Create(Scalars.GetByBits<Byte>(bitpos));
-                    MaskBitsArray1B[1 + i] = Vectors.Create(Scalars.GetByBits<Byte>(bits));
+                    MaskBitPosArray1B[i] = Vectors.Create(Scalars.GetByBits<byte>(bitpos));
+                    MaskBitsArray1B[1 + i] = Vectors.Create(Scalars.GetByBits<byte>(bits));
                 }
                 if (i < MaskBitPosArray2B.Length) {
-                    MaskBitPosArray2B[i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<UInt16>(bitpos)));
-                    MaskBitsArray2B[1 + i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<UInt16>(bits)));
+                    MaskBitPosArray2B[i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<ushort>(bitpos)));
+                    MaskBitsArray2B[1 + i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<ushort>(bits)));
                 }
                 if (i < MaskBitPosArray4B.Length) {
-                    MaskBitPosArray4B[i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<UInt32>(bitpos)));
-                    MaskBitsArray4B[1 + i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<UInt32>(bits)));
+                    MaskBitPosArray4B[i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<uint>(bitpos)));
+                    MaskBitsArray4B[1 + i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<uint>(bits)));
                 }
                 if (i < MaskBitPosArray8B.Length) {
-                    MaskBitPosArray8B[i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<UInt64>(bitpos)));
-                    MaskBitsArray8B[1 + i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<UInt64>(bits)));
+                    MaskBitPosArray8B[i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<ulong>(bitpos)));
+                    MaskBitsArray8B[1 + i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<ulong>(bits)));
                 }
                 // next.
                 bitpos <<= 1;
@@ -88,7 +88,7 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <param name="byteSize">元素的字节大小 (元素的字节大小).</param>
         /// <returns>Returns bit pos mask array (返回位偏移掩码的数组). An 8-byte array is returned if not found, to avoid returning null (找不到时返回8字节的数组, 这是为了避免返回null).</returns>
-        internal static Vector<Byte>[] GetMaskBitPosArray(int byteSize) {
+        internal static Vector<byte>[] GetMaskBitPosArray(int byteSize) {
             if (1 == byteSize) {
                 return MaskBitPosArray1B;
             } else if (2 == byteSize) {
@@ -105,7 +105,7 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <param name="byteSize">元素的字节大小 (元素的字节大小).</param>
         /// <returns>Returns bits mask array (返回位集掩码的数组). An 8-byte array is returned if not found, to avoid returning null (找不到时返回8字节的数组, 这是为了避免返回null).</returns>
-        internal static Vector<Byte>[] GetMaskBitsArray(int byteSize) {
+        internal static Vector<byte>[] GetMaskBitsArray(int byteSize) {
             if (1 == byteSize) {
                 return MaskBitsArray1B;
             } else if (2 == byteSize) {
@@ -550,7 +550,7 @@ namespace Zyl.VectorTraits {
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="src">Source value (源值).</param>
         /// <returns>A new <see cref="Vector{T}"/> with all elements initialized to value (一个新的 <see cref="Vector{T}"/>，其中所有元素已初始化为 <paramref name="value"/> ).</returns>
-        public static Vector<T> CreateByBits<T>(Int64 src) where T : struct {
+        public static Vector<T> CreateByBits<T>(long src) where T : struct {
             return Create(Scalars.GetByBits<T>(src));
         }
 
@@ -629,20 +629,20 @@ namespace Zyl.VectorTraits {
         public static readonly Vector<T> V7;
         /// <summary>Value 8 .</summary>
         public static readonly Vector<T> V8;
-        /// <summary>Value 127 (SByte.MaxValue).</summary>
+        /// <summary>Value 127 (sbyte.MaxValue).</summary>
         public static readonly Vector<T> VMaxSByte;
-        /// <summary>Value 255 (Byte.MaxValue).</summary>
+        /// <summary>Value 255 (byte.MaxValue).</summary>
         public static readonly Vector<T> VMaxByte;
-        /// <summary>Value 32767 (Int16.MaxValue) .</summary>
+        /// <summary>Value 32767 (short.MaxValue) .</summary>
         public static readonly Vector<T> VMaxInt16;
-        /// <summary>Value 65535 (UInt16.MaxValue) .</summary>
+        /// <summary>Value 65535 (ushort.MaxValue) .</summary>
         public static readonly Vector<T> VMaxUInt16;
-        /// <summary>Value 2147483647 (Int32.MaxValue) .</summary>
+        /// <summary>Value 2147483647 (int.MaxValue) .</summary>
         public static readonly Vector<T> VMaxInt32;
-        /// <summary>Value 4294967295 (UInt32.MaxValue) .</summary>
+        /// <summary>Value 4294967295 (uint.MaxValue) .</summary>
         public static readonly Vector<T> VMaxUInt32;
         // -- Negative number --
-        /// <summary>Value -1 . When the type is unsigned integer, the value is a signed cast value (当类型为无符号整型时，值为带符号强制转换值). Example: '(Byte)(-1)=255' .</summary>
+        /// <summary>Value -1 . When the type is unsigned integer, the value is a signed cast value (当类型为无符号整型时，值为带符号强制转换值). Example: '(byte)(-1)=255' .</summary>
         public static readonly Vector<T> V_1;
         /// <summary>Value -2 .</summary>
         public static readonly Vector<T> V_2;
@@ -658,24 +658,24 @@ namespace Zyl.VectorTraits {
         public static readonly Vector<T> V_7;
         /// <summary>Value -8 .</summary>
         public static readonly Vector<T> V_8;
-        /// <summary>Value -128 (SByte.MinValue).</summary>
+        /// <summary>Value -128 (sbyte.MinValue).</summary>
         public static readonly Vector<T> VMinSByte;
-        /// <summary>Value -32768 (Int16.MinValue) .</summary>
+        /// <summary>Value -32768 (short.MinValue) .</summary>
         public static readonly Vector<T> VMinInt16;
-        /// <summary>Value -2147483648 (Int32.MinValue) .</summary>
+        /// <summary>Value -2147483648 (int.MinValue) .</summary>
         public static readonly Vector<T> VMinInt32;
         // -- Reciprocal number --
-        /// <summary>Reciprocal value: 1/127 (SByte.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/127 (sbyte.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
         public static readonly Vector<T> VReciprocalMaxSByte;
-        /// <summary>Reciprocal value: 1/255 (Byte.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/255 (byte.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
         public static readonly Vector<T> VReciprocalMaxByte;
-        /// <summary>Reciprocal value: 1/32767 (Int16.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/32767 (short.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
         public static readonly Vector<T> VReciprocalMaxInt16;
-        /// <summary>Reciprocal value: 1/65535 (UInt16.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/65535 (ushort.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
         public static readonly Vector<T> VReciprocalMaxUInt16;
-        /// <summary>Reciprocal value: 1/2147483647 (Int32.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/2147483647 (int.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
         public static readonly Vector<T> VReciprocalMaxInt32;
-        /// <summary>Reciprocal value: 1/4294967295 (UInt32.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/4294967295 (uint.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
         public static readonly Vector<T> VReciprocalMaxUInt32;
         // -- Specified value --
         /// <summary>Serial Value (顺序值). e.g. 0, 1, 2, 3 ...</summary>
@@ -729,9 +729,9 @@ namespace Zyl.VectorTraits {
         public static readonly Vector<T> XyzwWNormOne;
         // == Mask array ==
         /// <summary>Bit pos mask array (位偏移掩码的数组). e.g. 1, 2, 4, 8, 0x10 ...</summary>
-        private static readonly Vector<Byte>[] MaskBitPosArray;
+        private static readonly Vector<byte>[] MaskBitPosArray;
         /// <summary>Bits mask array (位集掩码的数组). e.g. 0, 1, 3, 7, 0xF, 0x1F ...</summary>
-        private static readonly Vector<Byte>[] MaskBitsArray;
+        private static readonly Vector<byte>[] MaskBitsArray;
 
         /// <summary>
         /// Static constructor.
@@ -852,7 +852,7 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns bit pos mask (返回位偏移掩码).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ref readonly Vector<T> GetMaskBitPos(int index) {
-            return ref Unsafe.As<Vector<Byte>, Vector<T>>(ref MaskBitPosArray[index]);
+            return ref Unsafe.As<Vector<byte>, Vector<T>>(ref MaskBitPosArray[index]);
         }
 
         /// <summary>
@@ -860,8 +860,8 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <returns>Returns bit pos mask span (返回位偏移掩码的跨度).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ReadOnlySpan<Vector<Byte>> GetMaskBitPosSpan() {
-            return new ReadOnlySpan<Vector<Byte>>(MaskBitPosArray);
+        public static ReadOnlySpan<Vector<byte>> GetMaskBitPosSpan() {
+            return new ReadOnlySpan<Vector<byte>>(MaskBitPosArray);
         }
 
         /// <summary>
@@ -871,7 +871,7 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ref readonly Vector<T> GetMaskBits(int index) {
-            return ref Unsafe.As<Vector<Byte>, Vector<T>>(ref MaskBitsArray[index]);
+            return ref Unsafe.As<Vector<byte>, Vector<T>>(ref MaskBitsArray[index]);
         }
 
         /// <summary>
@@ -879,8 +879,8 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <returns>Returns bits mask span (返回位集掩码的跨度).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ReadOnlySpan<Vector<Byte>> GetMaskBitsSpan() {
-            return new ReadOnlySpan<Vector<Byte>>(MaskBitsArray);
+        public static ReadOnlySpan<Vector<byte>> GetMaskBitsSpan() {
+            return new ReadOnlySpan<Vector<byte>>(MaskBitsArray);
         }
 
 

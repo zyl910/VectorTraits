@@ -9,7 +9,7 @@ namespace Zyl.VectorTraits.Tests {
     public class BitUtilTests {
         [Test()]
         public void SingleToInt32BitsTest() {
-            Int32 n = BitUtil.SingleToInt32Bits((Single)1);
+            int n = BitUtil.SingleToInt32Bits((float)1);
             Assert.AreNotEqual(0, n);
         }
     }

@@ -11,16 +11,16 @@ namespace Zyl.VectorTraits.Tests {
     public class TraitsUtilTests {
         private static readonly int[] LenArray = { 0, 0x10 };
 
-        [TestCase((Single)1)]
-        [TestCase((Double)2)]
-        [TestCase((Byte)3)]
-        [TestCase((SByte)4)]
-        [TestCase((Int16)5)]
-        [TestCase((UInt16)6)]
-        [TestCase((Int32)7)]
-        [TestCase((UInt32)8)]
-        [TestCase((Int64)9)]
-        [TestCase((UInt64)10)]
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((byte)3)]
+        [TestCase((sbyte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
         public void FillTest<T>(T src) {
             foreach(int len in LenArray) {
                 T[] arr = new T[len];

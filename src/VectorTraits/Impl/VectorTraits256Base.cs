@@ -40,11 +40,11 @@ namespace Zyl.VectorTraits.Impl {
                 throw new NotSupportedException(string.Format("Vector count mismatch({0}!={1}) !", Vector<byte>.Count, ByteCountValue));
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{Int16}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<Int16> ShiftLeft(Vector<Int16> value, int shiftCount) {
-                Vector<Int16> rt = value;
-                Int16* p = (Int16*)&rt;
+            public static unsafe Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
+                Vector<short> rt = value;
+                short* p = (short*)&rt;
                 p[0] <<= shiftCount;
                 p[1] <<= shiftCount;
                 p[2] <<= shiftCount;
@@ -64,11 +64,11 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{Int32}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<Int32> ShiftLeft(Vector<Int32> value, int shiftCount) {
-                Vector<Int32> rt = value;
-                Int32* p = (Int32*)&rt;
+            public static unsafe Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
+                Vector<int> rt = value;
+                int* p = (int*)&rt;
                 p[0] <<= shiftCount;
                 p[1] <<= shiftCount;
                 p[2] <<= shiftCount;
@@ -80,11 +80,11 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{Int32}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<Int32> ShiftRightArithmetic(Vector<Int32> value, int shiftCount) {
-                Vector<Int32> rt = value;
-                Int32* p = (Int32*)&rt;
+            public static unsafe Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftCount) {
+                Vector<int> rt = value;
+                int* p = (int*)&rt;
                 p[0] >>= shiftCount;
                 p[1] >>= shiftCount;
                 p[2] >>= shiftCount;

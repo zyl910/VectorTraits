@@ -79,19 +79,19 @@ namespace Zyl.VectorTraits {
             _instance.ThrowForUnsupported();
         }
 
-        /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{Int16}, int)"/>
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<Int16> ShiftLeft(Vector<Int16> value, int shiftCount) {
+        public static Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
             return _instance.ShiftLeft(value, shiftCount);
         }
 
-        /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{Int32}, int)"/>
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<Int32> ShiftLeft(Vector<Int32> value, int shiftCount) {
+        public static Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
             return _instance.ShiftLeft(value, shiftCount);
         }
 
-        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{Int32}, int)"/>
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftCount) {
             return _instance.ShiftLeft(value, shiftCount);

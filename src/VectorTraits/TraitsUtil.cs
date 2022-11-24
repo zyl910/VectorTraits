@@ -308,9 +308,9 @@ namespace Zyl.VectorTraits {
             if (null == separator) { } // Ignore warning disable 0168
             if (noFixEndian) { } // Ignore warning disable 0168
             string format = "X";
-            if (src is Single srcSingle) {
+            if (src is float srcSingle) {
                 rt = BitUtil.SingleToInt32Bits(srcSingle).ToString(format, null);
-            } else if (src is Double srcDouble) {
+            } else if (src is double srcDouble) {
                 rt = BitUtil.DoubleToInt64Bits(srcDouble).ToString(format, null);
 #if NET5_0_OR_GREATER
             } else if (src is Half srcHalf) {

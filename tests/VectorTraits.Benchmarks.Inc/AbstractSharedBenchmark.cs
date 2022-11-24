@@ -11,14 +11,14 @@ namespace Zyl.VectorTraits.Benchmarks {
     /// </summary>
     public abstract class AbstractSharedBenchmark : AbstractBenchmark {
 #pragma warning disable CA2211 // Non-constant fields should not be visible
-        protected static Byte[] srcArrayByte = { };
-        protected static Int16[] srcArrayInt16 = { };
-        protected static Int32[] srcArrayInt32 = { }, dstArrayInt32 = { }, baselinetArrayInt32 = { };
-        protected static Int64[] srcArrayInt64 = { };
-        protected static Byte dstByte, baselineByte;
-        protected static Int16 dstInt16, baselineInt16;
-        protected static Int32 dstInt32, baselineInt32;
-        protected static Int64 dstInt64, baselineInt64;
+        protected static byte[] srcArrayByte = { };
+        protected static short[] srcArrayInt16 = { };
+        protected static int[] srcArrayInt32 = { }, dstArrayInt32 = { }, baselinetArrayInt32 = { };
+        protected static long[] srcArrayInt64 = { };
+        protected static byte dstByte, baselineByte;
+        protected static short dstInt16, baselineInt16;
+        protected static int dstInt32, baselineInt32;
+        protected static long dstInt64, baselineInt64;
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
         /// <summary>
@@ -31,18 +31,18 @@ namespace Zyl.VectorTraits.Benchmarks {
                     if (N == srcArrayInt32.Length) return;
                 }
                 Random random = new Random(0);
-                srcArrayByte = new Byte[N];
-                srcArrayInt16 = new Int16[N];
-                srcArrayInt32 = new Int32[N];
-                srcArrayInt64 = new Int64[N];
-                dstArrayInt32 = new Int32[N];
-                baselinetArrayInt32 = new Int32[N];
+                srcArrayByte = new byte[N];
+                srcArrayInt16 = new short[N];
+                srcArrayInt32 = new int[N];
+                srcArrayInt64 = new long[N];
+                dstArrayInt32 = new int[N];
+                baselinetArrayInt32 = new int[N];
                 random.NextBytes(srcArrayByte);
                 for (int i = 0; i < N; i++) {
-                    Int32 a = random.Next(Int32.MinValue, Int32.MaxValue);
-                    Int32 b = random.Next(Int32.MinValue, Int32.MaxValue);
-                    Int64 n64 = (((Int64)a) << 32) | (Int64)b;
-                    srcArrayInt16[i] = (Int16)a;
+                    int a = random.Next(int.MinValue, int.MaxValue);
+                    int b = random.Next(int.MinValue, int.MaxValue);
+                    long n64 = (((long)a) << 32) | (long)b;
+                    srcArrayInt16[i] = (short)a;
                     srcArrayInt32[i] = a;
                     srcArrayInt64[i] = n64;
                 }
@@ -65,7 +65,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
-        /// Check before - Int32 array.
+        /// Check before - int array.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected void CheckBeforeArrayInt32() {
@@ -76,7 +76,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
-        /// Check result - Int32 array.
+        /// Check result - int array.
         /// </summary>
         /// <param name="name">Method name.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -100,7 +100,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
-        /// Check result - Int16.
+        /// Check result - short.
         /// </summary>
         /// <param name="name">Method name.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -117,7 +117,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
-        /// Check result - Int32.
+        /// Check result - int.
         /// </summary>
         /// <param name="name">Method name.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -14,7 +14,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector {
     using TMy = Int16;
 
     /// <summary>
-    /// Shift left benchmark - Int16.
+    /// Shift left benchmark - short.
     /// </summary>
     public partial class ShiftLeftBenchmark_Int16 : AbstractSharedBenchmark {
         // -- TMy ref --

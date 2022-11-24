@@ -50,24 +50,24 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{Int16}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<Int16> ShiftLeft(Vector<Int16> value, int shiftCount) {
-                Vector256<Int16> vtemp = WStatics.ShiftLeft(Vectors.AsVector256(value), shiftCount);
+            public static Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
+                Vector256<short> vtemp = WStatics.ShiftLeft(Vectors.AsVector256(value), shiftCount);
                 return Vectors.AsVector(vtemp);
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{Int32}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<Int32> ShiftLeft(Vector<Int32> value, int shiftCount) {
+            public static Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
                 var vtemp = WStatics.ShiftLeft(Vectors.AsVector256(value), shiftCount);
                 return Vectors.AsVector(vtemp);
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{Int32}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<Int32> ShiftRightArithmetic(Vector<Int32> value, int shiftCount) {
-                Vector256<Int32> vtemp = WStatics.ShiftRightArithmetic(Vectors.AsVector256(value), shiftCount);
+            public static Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftCount) {
+                Vector256<int> vtemp = WStatics.ShiftRightArithmetic(Vectors.AsVector256(value), shiftCount);
                 return Vectors.AsVector(vtemp);
             }
 

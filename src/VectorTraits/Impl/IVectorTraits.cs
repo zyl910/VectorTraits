@@ -14,8 +14,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted.</param>
         /// <param name="shiftCount">The number of bits by which to shift each element.</param>
         /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount"/>.</returns>
-        /// <seealso cref="Vector.ShiftLeft(Vector256{Int16}, int)"/> // .NET 7
-        Vector<Int16> ShiftLeft(Vector<Int16> value, int shiftCount);
+        /// <seealso cref="Vector.ShiftLeft(Vector256{short}, int)"/> // .NET 7
+        Vector<short> ShiftLeft(Vector<short> value, int shiftCount);
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount.
@@ -23,8 +23,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted.</param>
         /// <param name="shiftCount">The number of bits by which to shift each element.</param>
         /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount"/>.</returns>
-        /// <seealso cref="Vector.ShiftLeft(Vector256{Int32}, int)"/> // .NET 7
-        Vector<Int32> ShiftLeft(Vector<Int32> value, int shiftCount);
+        /// <seealso cref="Vector.ShiftLeft(Vector256{int}, int)"/> // .NET 7
+        Vector<int> ShiftLeft(Vector<int> value, int shiftCount);
 
 
         /// <summary>
@@ -33,8 +33,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted.</param>
         /// <param name="shiftCount">The number of bits by which to shift each element.</param>
         /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount"/>.</returns>
-        /// <seealso cref="Vector.ShiftRightArithmetic(Vector256{Int32}, int)"/> // .NET 7
-        Vector<Int32> ShiftRightArithmetic(Vector<Int32> value, int shiftCount);
+        /// <seealso cref="Vector.ShiftRightArithmetic(Vector256{int}, int)"/> // .NET 7
+        Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftCount);
 
     }
 }

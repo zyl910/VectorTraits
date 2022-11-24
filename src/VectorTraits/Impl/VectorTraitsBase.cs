@@ -41,36 +41,36 @@ namespace Zyl.VectorTraits.Impl {
                 // throw new NotSupportedException("The Vector does not support hardware acceleration!");
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{Int16}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<Int16> ShiftLeft(Vector<Int16> value, int shiftCount) {
-                Vector<Int16> rt = value;
-                int cnt = Vector<Int16>.Count;
-                Int16* p = (Int16*)&rt;
+            public static unsafe Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
+                Vector<short> rt = value;
+                int cnt = Vector<short>.Count;
+                short* p = (short*)&rt;
                 for (int i = 0; i < cnt; ++i) {
                     p[i] <<= shiftCount;
                 }
                 return rt;
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{Int32}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<Int32> ShiftLeft(Vector<Int32> value, int shiftCount) {
-                Vector<Int32> rt = value;
-                int cnt = Vector<Int32>.Count;
-                Int32* p = (Int32*)&rt;
+            public static unsafe Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
+                Vector<int> rt = value;
+                int cnt = Vector<int>.Count;
+                int* p = (int*)&rt;
                 for (int i = 0; i < cnt; ++i) {
                     p[i] <<= shiftCount;
                 }
                 return rt;
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{Int32}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftCount) {
-                Vector<Int32> rt = value;
-                int cnt = Vector<Int32>.Count;
-                Int32* p = (Int32*)&rt;
+                Vector<int> rt = value;
+                int cnt = Vector<int>.Count;
+                int* p = (int*)&rt;
                 for (int i = 0; i < cnt; ++i) {
                     p[i] >>= shiftCount;
                 }
