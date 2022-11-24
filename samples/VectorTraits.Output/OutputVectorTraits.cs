@@ -7,6 +7,12 @@ using System.Runtime.InteropServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+#if NET5_0_OR_GREATER
+using System.Runtime.Intrinsics.Arm;
+#endif // NET5_0_OR_GREATER
+#if NETCOREAPP3_0_OR_GREATER
+using System.Runtime.Intrinsics.X86;
+#endif // NETCOREAPP3_0_OR_GREATER
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +43,10 @@ namespace Zyl.VectorTraits.Output {
         /// <param name="indent">The indent.</param>
         public static void RunBaseInfo(TextWriter writer, string indent) {
             string indentNext = indent + IndentNextSeparator;
+            
+            OutputIntrinsics(writer, indent);
+            writer.WriteLine();
+
             // Vector create .
             writer.WriteLine(indent + "[Vector create]");
             double[] arr = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -73,6 +83,94 @@ namespace Zyl.VectorTraits.Output {
                 WriteLine(writer, indentNext, "- {0}", code);
             }
             writer.WriteLine();
+
+            RunConstants(writer, indent);
+        }
+
+        /// <summary>
+        /// Output Intrinsics.
+        /// </summary>
+        /// <param name="tw">Output <see cref="TextWriter"/>.</param>
+        /// <param name="indent">The indent.</param>
+        public static void OutputIntrinsics(TextWriter tw, string indent) {
+            if (null == tw) return;
+            if (null == indent) indent = "";
+#if NETCOREAPP3_0_OR_GREATER
+            tw.WriteLine();
+            tw.WriteLine(indent + "[Intrinsics.X86]");
+            WriteLine(tw, indent, "Aes.IsSupported:\t{0}", System.Runtime.Intrinsics.X86.Aes.IsSupported);
+            WriteLine(tw, indent, "Aes.X64.IsSupported:\t{0}", System.Runtime.Intrinsics.X86.Aes.X64.IsSupported);
+            WriteLine(tw, indent, "Avx.IsSupported:\t{0}", Avx.IsSupported);
+            WriteLine(tw, indent, "Avx.X64.IsSupported:\t{0}", Avx.X64.IsSupported);
+            WriteLine(tw, indent, "Avx2.IsSupported:\t{0}", Avx2.IsSupported);
+            WriteLine(tw, indent, "Avx2.X64.IsSupported:\t{0}", Avx2.X64.IsSupported);
+#if NET6_0_OR_GREATER
+            WriteLine(tw, indent, "AvxVnni.IsSupported:\t{0}", AvxVnni.IsSupported);
+            WriteLine(tw, indent, "AvxVnni.X64.IsSupported:\t{0}", AvxVnni.X64.IsSupported);
+#endif
+            WriteLine(tw, indent, "Bmi1.IsSupported:\t{0}", Bmi1.IsSupported);
+            WriteLine(tw, indent, "Bmi1.X64.IsSupported:\t{0}", Bmi1.X64.IsSupported);
+            WriteLine(tw, indent, "Bmi2.IsSupported:\t{0}", Bmi2.IsSupported);
+            WriteLine(tw, indent, "Bmi2.X64.IsSupported:\t{0}", Bmi2.X64.IsSupported);
+            WriteLine(tw, indent, "Fma.IsSupported:\t{0}", Fma.IsSupported);
+            WriteLine(tw, indent, "Fma.X64.IsSupported:\t{0}", Fma.X64.IsSupported);
+            WriteLine(tw, indent, "Lzcnt.IsSupported:\t{0}", Lzcnt.IsSupported);
+            WriteLine(tw, indent, "Lzcnt.X64.IsSupported:\t{0}", Lzcnt.X64.IsSupported);
+            WriteLine(tw, indent, "Pclmulqdq.IsSupported:\t{0}", Pclmulqdq.IsSupported);
+            WriteLine(tw, indent, "Pclmulqdq.X64.IsSupported:\t{0}", Pclmulqdq.X64.IsSupported);
+            WriteLine(tw, indent, "Popcnt.IsSupported:\t{0}", Popcnt.IsSupported);
+            WriteLine(tw, indent, "Popcnt.X64.IsSupported:\t{0}", Popcnt.X64.IsSupported);
+            WriteLine(tw, indent, "Sse.IsSupported:\t{0}", Sse.IsSupported);
+            WriteLine(tw, indent, "Sse.X64.IsSupported:\t{0}", Sse.X64.IsSupported);
+            WriteLine(tw, indent, "Sse2.IsSupported:\t{0}", Sse2.IsSupported);
+            WriteLine(tw, indent, "Sse2.X64.IsSupported:\t{0}", Sse2.X64.IsSupported);
+            WriteLine(tw, indent, "Sse3.IsSupported:\t{0}", Sse3.IsSupported);
+            WriteLine(tw, indent, "Sse3.X64.IsSupported:\t{0}", Sse3.X64.IsSupported);
+            WriteLine(tw, indent, "Sse41.IsSupported:\t{0}", Sse41.IsSupported);
+            WriteLine(tw, indent, "Sse41.X64.IsSupported:\t{0}", Sse41.X64.IsSupported);
+            WriteLine(tw, indent, "Sse42.IsSupported:\t{0}", Sse42.IsSupported);
+            WriteLine(tw, indent, "Sse42.X64.IsSupported:\t{0}", Sse42.X64.IsSupported);
+            WriteLine(tw, indent, "Ssse3.IsSupported:\t{0}", Ssse3.IsSupported);
+            WriteLine(tw, indent, "Ssse3.X64.IsSupported:\t{0}", Ssse3.X64.IsSupported);
+#if NET5_0_OR_GREATER
+            WriteLine(tw, indent, "X86Base.IsSupported:\t{0}", X86Base.IsSupported);
+            WriteLine(tw, indent, "X86Base.X64.IsSupported:\t{0}", X86Base.X64.IsSupported);
+#endif // NET5_0_OR_GREATER
+#if NET7_0_OR_GREATER
+            WriteLine(tw, indent, "X86Serialize.IsSupported:\t{0}", X86Serialize.IsSupported);
+            WriteLine(tw, indent, "X86Serialize.X64.IsSupported:\t{0}", X86Serialize.X64.IsSupported);
+#endif // NET7_0_OR_GREATER
+#endif // NETCOREAPP3_0_OR_GREATER
+
+#if NET5_0_OR_GREATER
+            tw.WriteLine();
+            tw.WriteLine(indent + "[Intrinsics.Arm]");
+            WriteLine(tw, indent, "AdvSimd.IsSupported:\t{0}", AdvSimd.IsSupported);
+            WriteLine(tw, indent, "AdvSimd.Arm64.IsSupported:\t{0}", AdvSimd.Arm64.IsSupported);
+            WriteLine(tw, indent, "Aes.IsSupported:\t{0}", System.Runtime.Intrinsics.Arm.Aes.IsSupported);
+            WriteLine(tw, indent, "Aes.Arm64.IsSupported:\t{0}", System.Runtime.Intrinsics.Arm.Aes.Arm64.IsSupported);
+            WriteLine(tw, indent, "ArmBase.IsSupported:\t{0}", ArmBase.IsSupported);
+            WriteLine(tw, indent, "ArmBase.Arm64.IsSupported:\t{0}", ArmBase.Arm64.IsSupported);
+            WriteLine(tw, indent, "Crc32.IsSupported:\t{0}", Crc32.IsSupported);
+            WriteLine(tw, indent, "Crc32.Arm64.IsSupported:\t{0}", Crc32.Arm64.IsSupported);
+            WriteLine(tw, indent, "Dp.IsSupported:\t{0}", Dp.IsSupported);
+            WriteLine(tw, indent, "Dp.Arm64.IsSupported:\t{0}", Dp.Arm64.IsSupported);
+            WriteLine(tw, indent, "Rdm.IsSupported:\t{0}", Rdm.IsSupported);
+            WriteLine(tw, indent, "Rdm.Arm64.IsSupported:\t{0}", Rdm.Arm64.IsSupported);
+            WriteLine(tw, indent, "Sha1.IsSupported:\t{0}", Sha1.IsSupported);
+            WriteLine(tw, indent, "Sha1.Arm64.IsSupported:\t{0}", Sha1.Arm64.IsSupported);
+            WriteLine(tw, indent, "Sha256.IsSupported:\t{0}", Sha256.IsSupported);
+            WriteLine(tw, indent, "Sha256.Arm64.IsSupported:\t{0}", Sha256.Arm64.IsSupported);
+#endif // NET5_0_OR_GREATER
+        }
+
+        /// <summary>
+        /// Run constants.
+        /// </summary>
+        /// <param name="writer">Output <see cref="TextWriter"/>.</param>
+        /// <param name="indent">The indent.</param>
+        public static void RunConstants(TextWriter writer, string indent) {
+            string indentNext = indent + IndentNextSeparator;
 
             // Scalars<T> .
             writer.WriteLine(indent + "[Scalar samples]");
