@@ -63,7 +63,6 @@ namespace Zyl.VectorTraits.Tests {
         [TestCase((UInt64)10)]
         public void CreateRotateTest<T>(T src) where T : struct {
             Vector64<T> vzero = Vector64<T>.Zero;
-            T zero = default;
             // params
             Vector64<T> v1 = Vector64s.CreateRotate(src);
             Vector64<T> v2 = Vector64s.CreateRotate(src, src);
