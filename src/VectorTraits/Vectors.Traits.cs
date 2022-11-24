@@ -14,14 +14,16 @@ namespace Zyl.VectorTraits {
 
         private static readonly string[] _traitsNames = {
             "VectorTraitsBase",
-            //"VectorTraits128Base",
-            //"VectorTraits128AdvSimd",
+            "VectorTraits128Base",
+            "VectorTraits128AdvSimd",
             "VectorTraits256Base",
             "VectorTraits256Avx2"
         };
 
         private static readonly IVectorTraits[] _traitsInstances = {
             VectorTraitsBase.Instance,
+            VectorTraits128Base.Instance,
+            VectorTraits128AdvSimd.Instance,
             VectorTraits256Base.Instance,
             VectorTraits256Avx2.Instance
         };

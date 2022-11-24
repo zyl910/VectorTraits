@@ -5,31 +5,12 @@ using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Zyl.VectorTraits.Impl {
-    using Statics = VectorTraits256Base.Statics;
+    using Statics = VectorTraits128AdvSimd.Statics;
 
     /// <summary>
-    /// <see cref="Vector{T}"/> traits 256 - abstract.
+    /// <see cref="Vector{T}"/> traits 128 - Avx2 abstract.
     /// </summary>
-    public abstract class VectorTraits256Abstract : VectorTraitsAbstract {
-
-        /// <summary>
-        /// Get best instance.
-        /// </summary>
-        /// <returns>Returns best instance.</returns>
-        public new static IVectorTraits GetBestInstance() {
-            if (VectorTraits256Avx2.Instance.IsSupported) return VectorTraits256Avx2.Instance;
-            return VectorTraits256Base.Instance;
-        }
-
-        /// <summary>ByteCount value</summary>
-        public const int ByteCountValue = 32;
-
-        /// <inheritdoc cref="IBaseTraits.ByteCount"/>
-        public override int ByteCount {
-            get {
-                return Statics.ByteCount;
-            }
-        }
+    public abstract class VectorTraits128AdvSimdAbstract : VectorTraits128Abstract {
 
         /// <inheritdoc cref="IBaseTraits.IsSupported"/>
         public override bool IsSupported {
@@ -42,6 +23,8 @@ namespace Zyl.VectorTraits.Impl {
         public override void ThrowForUnsupported() {
             Statics.ThrowForUnsupported();
         }
+
+#if NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{Int16}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -61,5 +44,7 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.ShiftRightArithmetic(value, shiftCount);
         }
 
+
+#endif // NET5_0_OR_GREATER
     }
 }

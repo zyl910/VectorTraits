@@ -21,8 +21,8 @@ namespace Zyl.VectorTraits.Impl {
             int byteCount = Vector<byte>.Count;
             if (VectorTraits256Abstract.ByteCountValue == byteCount) {
                 return VectorTraits256Abstract.GetBestInstance();
-            //} else if (VectorTraits128Abstract.ByteCountValue == byteCount) {
-            //    return VectorTraits128Abstract.GetBestInstance();
+            } else if (VectorTraits128Abstract.ByteCountValue == byteCount) {
+                return VectorTraits128Abstract.GetBestInstance();
             }
             // default.
             Debug.WriteLine("VectorTraitsAbstract.GetBestInstance fail! Can not found supported instance. Vector<byte>.Count={0}", byteCount);
@@ -37,8 +37,8 @@ namespace Zyl.VectorTraits.Impl {
             int byteCount = Vector<byte>.Count;
             if (VectorTraits256Abstract.ByteCountValue == byteCount) {
                 return VectorTraits256Base.Instance;
-            //} else if (VectorTraits128Abstract.ByteCountValue == byteCount) {
-            //    return VectorTraits128Base.Instance;
+            } else if (VectorTraits128Abstract.ByteCountValue == byteCount) {
+                return VectorTraits128Base.Instance;
             }
             // default.
             Debug.WriteLine("VectorTraitsAbstract.GetBaseInstance fail! Can not found supported instance. Vector<byte>.Count={0}", byteCount);

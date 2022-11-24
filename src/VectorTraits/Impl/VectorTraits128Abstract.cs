@@ -5,24 +5,24 @@ using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Zyl.VectorTraits.Impl {
-    using Statics = VectorTraits256Base.Statics;
+    using Statics = VectorTraits128Base.Statics;
 
     /// <summary>
-    /// <see cref="Vector{T}"/> traits 256 - abstract.
+    /// <see cref="Vector{T}"/> traits 128 - abstract.
     /// </summary>
-    public abstract class VectorTraits256Abstract : VectorTraitsAbstract {
+    public abstract class VectorTraits128Abstract : VectorTraitsAbstract {
 
         /// <summary>
         /// Get best instance.
         /// </summary>
         /// <returns>Returns best instance.</returns>
         public new static IVectorTraits GetBestInstance() {
-            if (VectorTraits256Avx2.Instance.IsSupported) return VectorTraits256Avx2.Instance;
-            return VectorTraits256Base.Instance;
+            if (VectorTraits128AdvSimd.Instance.IsSupported) return VectorTraits128AdvSimd.Instance;
+            return VectorTraits128Base.Instance;
         }
 
         /// <summary>ByteCount value</summary>
-        public const int ByteCountValue = 32;
+        public const int ByteCountValue = 16;
 
         /// <inheritdoc cref="IBaseTraits.ByteCount"/>
         public override int ByteCount {
