@@ -2,7 +2,10 @@
   "profiles": {
     "VectorTraits.Output": {
       "commandName": "Project",
-      "commandLineArgs": "0"
+      "commandLineArgs": "0",
+      "environmentVariables": {
+        "COMPlus_EnableAVX2": "1"
+      }
     }
   }
 }

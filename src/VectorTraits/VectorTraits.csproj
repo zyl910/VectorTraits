@@ -2,12 +2,17 @@
 
   <PropertyGroup>
     <RootNamespace>Zyl.VectorTraits</RootNamespace>
-    <TargetFrameworks>netstandard1.1;netstandard2.0;netstandard2.1;netcoreapp3.0;net5.0</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetFrameworks)' == '' ">netstandard1.1;netstandard2.0;netstandard2.1;netcoreapp3.0;net5.0</TargetFrameworks>
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <Title>VectorTraits for .NET and .NET Standard</Title>
+    <Product>VectorTraits</Product>
     <Authors>zyl910</Authors>
     <Company>zyl910</Company>
+    <CurrentYear>$([System.DateTime]::Now.ToString(yyyy))</CurrentYear>
+    <Copyright>Copyright (c) 2022~$(CurrentYear) zyl910</Copyright>
     <Description>VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 
 This library provides many constants and arithmetic methods for vector types, and can take full advantage of the X86 and Arm architecture's intrinsic functions for hardware acceleration of vector type computations, and can enjoy inline compilation optimization.
@@ -30,10 +35,41 @@ Types brief introduction:
 </Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/zyl910/VectorTraits</RepositoryUrl>
-    <Copyright>Copyright (c) 2022 zyl910</Copyright>
     <PackageProjectUrl>https://github.com/zyl910/VectorTraits</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>VectorTraits;vector;math;simd;intrinsic;x86;avx;arm</PackageTags>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
+    <Title>VectorTraits for .NET Standard 1.1</Title>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <Title>VectorTraits for .NET Standard 2.0</Title>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
+    <Title>VectorTraits for .NET Standard 2.1</Title>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
+    <Title>VectorTraits for .NET Core 3.0</Title>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
+    <Title>VectorTraits for .NET 5.0</Title>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+    <Title>VectorTraits for .NET 5.0</Title>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
+    <Title>VectorTraits for .NET 7.0</Title>
+  </PropertyGroup>
+    
+  <PropertyGroup>
+      <AssemblyTitle>$(Title)</AssemblyTitle>
   </PropertyGroup>
 
   <ItemGroup>
@@ -59,5 +95,10 @@ Types brief introduction:
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
         <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" />
     </ItemGroup>
+
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="echo building $(TargetFramework) ..." />
+  </Target>
 
 </Project>
