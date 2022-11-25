@@ -98,7 +98,7 @@ Types brief introduction:
 
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="echo building $(TargetFramework) ..." />
+    <Exec Command="echo VS $(VisualStudioVersion) building $(TargetFramework) ..." />
   </Target>
 
 </Project>

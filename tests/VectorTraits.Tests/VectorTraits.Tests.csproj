@@ -1,13 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-
-  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
-      <TargetFrameworks Condition=" '$(TargetFrameworks)' == '' ">netcoreapp2.1;netcoreapp3.0;net5.0;net6.0;net7.0;net45;net461</TargetFrameworks>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
-      <TargetFrameworks Condition=" '$(TargetFrameworks)' == '' ">netcoreapp2.1;netcoreapp3.0;net5.0;net6.0;net7.0</TargetFrameworks>
-  </PropertyGroup>
+  <Choose>
+    <When Condition=" '$(TargetFrameworks)' != '' ">
+      <PropertyGroup>
+        <TargetFrameworks>$(TargetFrameworks)</TargetFrameworks>
+      </PropertyGroup>
+    </When>
+    <When Condition=" $(VisualStudioVersion) &gt;= 17.0 AND '$(OS)' == 'Windows_NT' ">
+      <PropertyGroup>
+        <TargetFrameworks>netcoreapp2.1;netcoreapp3.0;net5.0;net6.0;net7.0;net45;net461</TargetFrameworks>
+      </PropertyGroup>
+    </When>
+    <When Condition=" $(VisualStudioVersion) &gt;= 17.0 AND '$(OS)' != 'Windows_NT' ">
+      <PropertyGroup>
+        <TargetFrameworks>netcoreapp2.1;netcoreapp3.0;net5.0;net6.0;net7.0</TargetFrameworks>
+      </PropertyGroup>
+    </When>
+    <When Condition=" '$(OS)' == 'Windows_NT' ">
+      <PropertyGroup>
+        <TargetFrameworks>netcoreapp2.1;netcoreapp3.0;net5.0;net45;net461</TargetFrameworks>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <TargetFrameworks>netcoreapp2.1;netcoreapp3.0;net5.0</TargetFrameworks>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
