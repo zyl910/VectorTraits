@@ -6,7 +6,7 @@ VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 本库为向量类型提供许多常数与算术方法，能充分利用 X86、Arm架构的内在函数对向量类型的运算进行硬件加速，且能够享受内联编译优化。
 
 特点:
-- 支持低版本的 `.NET` 程序。虽然在2016年的 `.NET Core 1.0` 就已经支持 `Vector<T>` 等向量类型，但是缺少ShiftLeft、ShiftRightArithmetic、ShiftRightLogical、Shuffle 等重要的向量函数，导致很多算法难以用向量类型来实现。直到2022年推出的 `.NET 7.0`, 才解决不支持ShiftLeft等向量函数等问题。若让类库仅支持 `.NET 7.0` 的话，会造成很多不便。本库解决了这一难题，能使低版本的 `.NET` 程序（`.NET Core 1.0`、`.NET Standard 1.1`、`.NET Framework 4.5`）也能使用ShiftLeft等向量函数。
+- 支持低版本的 `.NET` 程序。虽然在2016年的 `.NET Core 1.0` 就已经支持 `Vector<T>` 等向量类型，但是缺少ShiftLeft、ShiftRightArithmetic、ShiftRightLogical、Shuffle 等重要的向量函数，导致很多算法难以用向量类型来实现。直到2022年推出的 `.NET 7.0`, 才解决不支持ShiftLeft等向量函数等问题。若让类库仅支持 `.NET 7.0` 的话，会造成很多不便。本库解决了这一难题，能使低版本的 `.NET` 程序（`.NET Core 2.0`、`.NET Standard 1.1`、`.NET Framework 4.5`）也能使用ShiftLeft等向量函数。
 - 功能强. 除了参考高版本 `.NET` 的向量方法外，本库还参考内在函数，提供了很多有用的向量方法。例如 ShiftLeftLogicalVariable、ShiftRightArithmeticVariable、ShiftRightLogicalVariable ...
 - 性能高。本库能充分利用 X86、Arm架构的内在函数对向量类型的运算进行硬件加速，且能够享受内联编译优化。
 - 软件算法也很快。若发现向量类型的某个方法不支持硬件加速时，.NET Bcl会切换为软件算法，但它软件算法很多是含有分支语句的，性能较差。而本库的软件算法，是高度优化的无分支算法。
