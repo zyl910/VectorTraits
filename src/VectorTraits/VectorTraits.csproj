@@ -1,8 +1,35 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <Choose>
+    <When Condition=" '$(TargetFrameworks)' != '' ">
+      <PropertyGroup>
+        <TargetFrameworks>$(TargetFrameworks)</TargetFrameworks>
+      </PropertyGroup>
+    </When>
+    <When Condition=" $(VisualStudioVersion) &gt;= 17.0 AND '$(OS)' == 'Windows_NT' ">
+      <PropertyGroup>
+        <TargetFrameworks>netstandard1.1;netstandard2.0;netstandard2.1;netcoreapp3.0;net5.0;net6.0;net7.0;net461</TargetFrameworks>
+      </PropertyGroup>
+    </When>
+    <When Condition=" $(VisualStudioVersion) &gt;= 17.0 AND '$(OS)' != 'Windows_NT' ">
+      <PropertyGroup>
+        <TargetFrameworks>netstandard1.1;netstandard2.0;netstandard2.1;netcoreapp3.0;net5.0;net6.0;net7.0</TargetFrameworks>
+      </PropertyGroup>
+    </When>
+    <When Condition=" '$(OS)' == 'Windows_NT' ">
+      <PropertyGroup>
+        <TargetFrameworks>netstandard1.1;netstandard2.0;netstandard2.1;netcoreapp3.0;net5.0;net461</TargetFrameworks>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <TargetFrameworks>netstandard1.1;netstandard2.0;netstandard2.1;netcoreapp3.0;net5.0</TargetFrameworks>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+    
   <PropertyGroup>
     <RootNamespace>Zyl.VectorTraits</RootNamespace>
-    <TargetFrameworks Condition=" '$(TargetFrameworks)' == '' ">netstandard1.1;netstandard2.0;netstandard2.1;netcoreapp3.0;net5.0</TargetFrameworks>
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -38,6 +65,10 @@ Types brief introduction:
     <PackageProjectUrl>https://github.com/zyl910/VectorTraits</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>VectorTraits;vector;math;simd;intrinsic;x86;avx;arm</PackageTags>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
+    <Title>VectorTraits for .NET Framework 4.6.1</Title>
   </PropertyGroup>
   
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
@@ -78,6 +109,12 @@ Types brief introduction:
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
+        <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+        <PackageReference Include="System.Memory" Version="4.5.5" />
+        <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
