@@ -33,6 +33,8 @@
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
 
     <Title>VectorTraits for .NET and .NET Standard</Title>
     <Product>VectorTraits</Product>

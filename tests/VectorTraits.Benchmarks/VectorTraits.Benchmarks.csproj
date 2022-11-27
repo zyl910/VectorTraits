@@ -6,6 +6,8 @@
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
     <Company>zyl910</Company>
     <Authors>zyl910</Authors>
     <Product>VectorTraits</Product>
