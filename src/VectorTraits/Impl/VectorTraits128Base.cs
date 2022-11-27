@@ -30,15 +30,32 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IBaseTraits.IsSupported"/>
             public static bool IsSupported {
                 get {
-                    return Vector<byte>.Count == ByteCountValue;
+                    return GetIsSupported();
                 }
             }
 
-            /// <inheritdoc cref="IBaseTraits.ThrowForUnsupported"/>
-            public static void ThrowForUnsupported() {
-                if (IsSupported) return;
-                throw new NotSupportedException(string.Format("Vector count mismatch({0}!={1}) !", Vector<byte>.Count, ByteCountValue));
+            /// <inheritdoc cref="IBaseTraits.GetIsSupported"/>
+            public static bool GetIsSupported(bool noStrict = false) {
+                bool rt = (Vector<byte>.Count == ByteCountValue);
+                if (!noStrict) {
+                }
+                return rt;
             }
+
+            /// <inheritdoc cref="IBaseTraits.GetUnsupportedMessage"/>
+            public static string GetUnsupportedMessage(bool noStrict = false) {
+                string rt = string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, ByteCountValue);
+                if (!noStrict) {
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IBaseTraits.ThrowForUnsupported"/>
+            public static void ThrowForUnsupported(bool noStrict = false) {
+                if (GetIsSupported(noStrict)) return;
+                throw new NotSupportedException(GetUnsupportedMessage(noStrict));
+            }
+
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

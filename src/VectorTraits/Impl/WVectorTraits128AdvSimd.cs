@@ -39,18 +39,38 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IBaseTraits.IsSupported"/>
             public static bool IsSupported {
                 get {
-#if NET5_0_OR_GREATER
-                    return AdvSimd.IsSupported;
-#else
-                    return false;
-#endif // NET5_0_OR_GREATER
+                    return GetIsSupported();
                 }
             }
 
+            /// <inheritdoc cref="IBaseTraits.GetIsSupported"/>
+            public static bool GetIsSupported(bool noStrict = false) {
+                bool rt = false;
+#if NET5_0_OR_GREATER
+                rt = AdvSimd.IsSupported;
+#else
+#endif // NETCOREAPP3_0_OR_GREATER
+                if (!noStrict) {
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IBaseTraits.GetUnsupportedMessage"/>
+            public static string GetUnsupportedMessage(bool noStrict = false) {
+                string rt = "Hardware needs to support AdvSimd!";
+#if NETCOREAPP3_0_OR_GREATER
+#else
+                rt = "Vector128 type is not supported! " + rt;
+#endif // NETCOREAPP3_0_OR_GREATER
+                if (!noStrict) {
+                }
+                return rt;
+            }
+
             /// <inheritdoc cref="IBaseTraits.ThrowForUnsupported"/>
-            public static void ThrowForUnsupported() {
-                if (IsSupported) return;
-                throw new NotSupportedException("Not supported AdvSimd!");
+            public static void ThrowForUnsupported(bool noStrict = false) {
+                if (GetIsSupported(noStrict)) return;
+                throw new NotSupportedException(GetUnsupportedMessage(noStrict));
             }
 
 #if NET5_0_OR_GREATER

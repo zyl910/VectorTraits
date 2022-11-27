@@ -39,13 +39,27 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IBaseTraits.IsSupported"/>
             public static bool IsSupported {
                 get {
-                    return WStatics.IsSupported;
+                    return GetIsSupported();
                 }
             }
 
+            /// <inheritdoc cref="IBaseTraits.GetIsSupported"/>
+            public static bool GetIsSupported(bool noStrict = false) {
+                bool rt = (Vector<byte>.Count == ByteCountValue) && WStatics.GetIsSupported(noStrict);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IBaseTraits.GetUnsupportedMessage"/>
+            public static string GetUnsupportedMessage(bool noStrict = false) {
+                string rt = WStatics.GetUnsupportedMessage(noStrict);
+                VectorTraits128Abstract.GetUnsupportedMessage_VectorCount(ref rt);
+                return rt;
+            }
+
             /// <inheritdoc cref="IBaseTraits.ThrowForUnsupported"/>
-            public static void ThrowForUnsupported() {
-                WStatics.ThrowForUnsupported();
+            public static void ThrowForUnsupported(bool noStrict = false) {
+                if (GetIsSupported(noStrict)) return;
+                throw new NotSupportedException(GetUnsupportedMessage(noStrict));
             }
 
 #if NET5_0_OR_GREATER

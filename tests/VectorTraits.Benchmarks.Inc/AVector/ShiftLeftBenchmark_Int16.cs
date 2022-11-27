@@ -145,6 +145,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector {
 
         [Benchmark]
         public void SumSLLAvx2() {
+            VectorTraits256Avx2.Statics.ThrowForUnsupported(true);
             //Debugger.Break();
             dstTMy = StaticSumSLLAvx2(srcArray, srcArray.Length, DefaultShiftCount);
             CheckResult("SumSLLAvx2");

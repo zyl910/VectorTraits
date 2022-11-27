@@ -24,6 +24,16 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>ByteCount value</summary>
         public const int ByteCountValue = 32;
 
+        /// <summary>
+        /// <see cref="GetUnsupportedMessage"/> - Fill by <see cref="Vector{T}.Count"/> .
+        /// </summary>
+        /// <param name="rt">The in/out string.</param>
+        public static void GetUnsupportedMessage_VectorCount(ref string rt) {
+            if (Vector<byte>.Count != ByteCountValue) {
+                rt += string.Format(" Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, ByteCountValue);
+            }
+        }
+
         /// <inheritdoc cref="IBaseTraits.ByteCount"/>
         public override int ByteCount {
             get {
@@ -38,9 +48,19 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+        /// <inheritdoc cref="IBaseTraits.GetIsSupported"/>
+        public override bool GetIsSupported(bool noStrict = false) {
+            return Statics.GetIsSupported(noStrict);
+        }
+
+        /// <inheritdoc cref="IBaseTraits.GetUnsupportedMessage"/>
+        public override string GetUnsupportedMessage(bool noStrict = false) {
+            return Statics.GetUnsupportedMessage(noStrict);
+        }
+
         /// <inheritdoc cref="IBaseTraits.ThrowForUnsupported"/>
-        public override void ThrowForUnsupported() {
-            Statics.ThrowForUnsupported();
+        public override void ThrowForUnsupported(bool noStrict = false) {
+            Statics.ThrowForUnsupported(noStrict);
         }
 
         /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>

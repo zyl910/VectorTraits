@@ -11,7 +11,7 @@ namespace Zyl.VectorTraits.Impl {
     /// <summary>
     /// <see cref="Vector{T}"/> traits - abstract.
     /// </summary>
-    public abstract class VectorTraitsAbstract : IVectorTraits {
+    public abstract class VectorTraitsAbstract : IVectorTraits, IBaseTraits {
 
         /// <summary>
         /// Get best instance.
@@ -59,9 +59,19 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+        /// <inheritdoc cref="IBaseTraits.GetIsSupported"/>
+        public virtual bool GetIsSupported(bool noStrict = false) {
+            return Statics.GetIsSupported(noStrict);
+        }
+
+        /// <inheritdoc cref="IBaseTraits.GetUnsupportedMessage"/>
+        public virtual string GetUnsupportedMessage(bool noStrict = false) {
+            return Statics.GetUnsupportedMessage(noStrict);
+        }
+
         /// <inheritdoc cref="IBaseTraits.ThrowForUnsupported"/>
-        public virtual void ThrowForUnsupported() {
-            Statics.ThrowForUnsupported();
+        public virtual void ThrowForUnsupported(bool noStrict = false) {
+            Statics.ThrowForUnsupported(noStrict);
         }
 
         /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>

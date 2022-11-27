@@ -1,7 +1,10 @@
 {
   "profiles": {
     "VectorTraits.Benchmarks": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "environmentVariables": {
+        "COMPlus_EnableAVX2": "1"
+      }
     }
   }
 }

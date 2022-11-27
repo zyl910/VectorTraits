@@ -36,15 +36,34 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IBaseTraits.IsSupported"/>
             public static bool IsSupported {
                 get {
-                    return true;
+                    return GetIsSupported();
                 }
             }
 
+            /// <inheritdoc cref="IBaseTraits.GetIsSupported"/>
+            public static bool GetIsSupported(bool noStrict = false) {
+                bool rt = false;
+#if NETCOREAPP3_0_OR_GREATER
+                rt = true;
+#else
+#endif // NETCOREAPP3_0_OR_GREATER
+                if (!noStrict) {
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IBaseTraits.GetUnsupportedMessage"/>
+            public static string GetUnsupportedMessage(bool noStrict = false) {
+                string rt = "Vector128 type is not supported!";
+                if (!noStrict) {
+                }
+                return rt;
+            }
+
             /// <inheritdoc cref="IBaseTraits.ThrowForUnsupported"/>
-            public static void ThrowForUnsupported() {
-                if (IsSupported) return;
-                // No exceptions are thrown because of the software implementation.
-                // throw new NotSupportedException("The Vector128 does not support hardware acceleration!");
+            public static void ThrowForUnsupported(bool noStrict = false) {
+                if (GetIsSupported(noStrict)) return;
+                throw new NotSupportedException(GetUnsupportedMessage(noStrict));
             }
 
 #if NETCOREAPP3_0_OR_GREATER

@@ -34,11 +34,24 @@ namespace Zyl.VectorTraits.Impl {
                 }
             }
 
+            /// <inheritdoc cref="IBaseTraits.GetIsSupported"/>
+            public static bool GetIsSupported(bool noStrict = false) {
+                if (!noStrict) {
+                }
+                return true;
+            }
+
+            /// <inheritdoc cref="IBaseTraits.GetUnsupportedMessage"/>
+            public static string GetUnsupportedMessage(bool noStrict = false) {
+                if (!noStrict) {
+                }
+                return "Vector type is not supported!";
+            }
+
             /// <inheritdoc cref="IBaseTraits.ThrowForUnsupported"/>
-            public static void ThrowForUnsupported() {
-                if (IsSupported) return;
-                // No exceptions are thrown because of the software implementation.
-                // throw new NotSupportedException("The Vector does not support hardware acceleration!");
+            public static void ThrowForUnsupported(bool noStrict = false) {
+                if (GetIsSupported(noStrict)) return;
+                throw new NotSupportedException(GetUnsupportedMessage(noStrict));
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
