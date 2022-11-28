@@ -104,54 +104,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector {
         }
 #endif // NET7_0_OR_GREATER
 
-#if NETCOREAPP3_0_OR_GREATER
-        /// <summary>
-        /// Sum shift left logical - VectorT - Avx.
-        /// </summary>
-        /// <param name="src">Source array.</param>
-        /// <param name="srcCount">Source count</param>
-        /// <param name="shiftCount">Shift count.</param>
-        /// <returns>Returns the sum.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumSLLAvx2(TMy[] src, int srcCount, int shiftCount) {
-            TMy rt = 0; // Result.
-            int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
-            int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
-            int i;
-            // Body.
-            fixed (TMy* p0 = &src[0]) {
-                TMy* p = p0;
-                // Vector processs.
-                // Debugger.Break();
-                for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftLeft(*(Vector<TMy>*)p, shiftCount);
-                    vrt += vtemp; // Add.
-                    p += nBlockWidth;
-                }
-                // Remainder processs.
-                for (i = 0; i < cntRem; ++i) {
-                    rt += (TMy)(p[i] << shiftCount);
-                }
-            }
-            // Reduce.
-            for (i = 0; i < VectorWidth; ++i) {
-                rt += vrt[i];
-            }
-            return rt;
-        }
-
-        [Benchmark]
-        public void SumSLLAvx2() {
-            VectorTraits256Avx2.Statics.ThrowForUnsupported(true);
-            //Debugger.Break();
-            dstTMy = StaticSumSLLAvx2(srcArray, srcArray.Length, DefaultShiftCount);
-            CheckResult("SumSLLAvx2");
-        }
-#endif // NETCOREAPP3_0_OR_GREATER
-
         /// <summary>
         /// Sum shift left logical - Traits static.
         /// </summary>
@@ -249,5 +201,58 @@ namespace Zyl.VectorTraits.Benchmarks.AVector {
             CheckResult("SLLTraitsArgDynamic");
         }
 
+        #region OFF_RAW
+#if !OFF_RAW
+
+#if NETCOREAPP3_0_OR_GREATER
+        /// <summary>
+        /// Sum shift left logical - VectorT - Avx.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftCount">Shift count.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSLLRawAvx2(TMy[] src, int srcCount, int shiftCount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                // Debugger.Break();
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftLeft(*(Vector<TMy>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLRawAvx2() {
+            VectorTraits256Avx2.Statics.ThrowForUnsupported(true);
+            //Debugger.Break();
+            dstTMy = StaticSumSLLRawAvx2(srcArray, srcArray.Length, DefaultShiftCount);
+            CheckResult("SumSLLRawAvx2");
+        }
+#endif // NETCOREAPP3_0_OR_GREATER
+
+#endif // !OFF_RAW
+        #endregion // OFF_RAW
     }
 }
