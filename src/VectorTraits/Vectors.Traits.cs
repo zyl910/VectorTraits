@@ -16,6 +16,7 @@ namespace Zyl.VectorTraits {
             "VectorTraitsBase",
             "VectorTraits128Base",
             "VectorTraits128AdvSimd",
+            "VectorTraits128AdvSimdA64",
             "VectorTraits256Base",
             "VectorTraits256Avx2"
         };
@@ -24,6 +25,7 @@ namespace Zyl.VectorTraits {
             VectorTraitsBase.Instance,
             VectorTraits128Base.Instance,
             VectorTraits128AdvSimd.Instance,
+            VectorTraits128AdvSimdA64.Instance,
             VectorTraits256Base.Instance,
             VectorTraits256Avx2.Instance
         };

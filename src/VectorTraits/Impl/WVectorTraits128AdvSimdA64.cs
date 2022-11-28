@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -11,13 +10,13 @@ using System.Runtime.Intrinsics.Arm;
 
 namespace Zyl.VectorTraits.Impl {
     /// <summary>
-    /// <see cref="Vector128{T}"/> traits - AdvSimd .
+    /// <see cref="Vector128{T}"/> traits - AdvSimd architecture-64bit .
     /// </summary>
-    public sealed class WVectorTraits128AdvSimd : WVectorTraits128AdvSimdAbstract {
-        private static readonly WVectorTraits128AdvSimd _instance = new WVectorTraits128AdvSimd(); // Default instance.
+    public sealed class WVectorTraits128AdvSimdA64 : WVectorTraits128AdvSimdAbstract {
+        private static readonly WVectorTraits128AdvSimdA64 _instance = new WVectorTraits128AdvSimdA64(); // Default instance.
 
         /// <summary>Default instance. </summary>
-        public static WVectorTraits128AdvSimd Instance {
+        public static WVectorTraits128AdvSimdA64 Instance {
             get { return _instance; }
         }
 
@@ -27,7 +26,7 @@ namespace Zyl.VectorTraits.Impl {
 #endif // NETCOREAPP3_0_OR_GREATER
 
         /// <summary>
-        /// <see cref="Vector128{T}"/> traits.Statics - AdvSimd.
+        /// <see cref="Vector128{T}"/> traits.Statics - AdvSimd architecture-64bit.
         /// </summary>
         public static class Statics {
 
@@ -51,7 +50,7 @@ namespace Zyl.VectorTraits.Impl {
 #else
 #endif // NET5_0_OR_GREATER
                 if (!noStrict) {
-                    rt = rt && (sizeof(int) == IntPtr.Size);
+                    rt = rt && (sizeof(long) == IntPtr.Size);
                 }
                 return rt;
             }
@@ -64,8 +63,8 @@ namespace Zyl.VectorTraits.Impl {
                 rt = "Vector128 type is not supported! " + rt;
 #endif // NETCOREAPP3_0_OR_GREATER
                 if (!noStrict) {
-                    if (!(sizeof(int) == IntPtr.Size)) {
-                        rt += string.Format("This process({0}bit) is not 32-bit!", IntPtr.Size * 8);
+                    if (!(sizeof(long) == IntPtr.Size)) {
+                        rt += string.Format("This process({0}bit) is not 64-bit!", IntPtr.Size * 8);
                     }
                 }
                 return rt;
@@ -79,23 +78,7 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NET5_0_OR_GREATER
 
-            /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{short}, int)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<short> ShiftLeft(Vector128<short> value, int shiftCount) {
-                return AdvSimd.ShiftLeftLogical(value, (byte)shiftCount);
-            }
 
-            /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{int}, int)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<int> ShiftLeft(Vector128<int> value, int shiftCount) {
-                return Vector128.AsInt32(AdvSimd.ShiftLeftLogical(Vector128.AsUInt32(value), (byte)shiftCount));
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{int}, int)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<int> ShiftRightArithmetic(Vector128<int> value, int shiftCount) {
-                return AdvSimd.ShiftRightArithmetic(value, (byte)shiftCount);
-            }
 
 #endif // NET5_0_OR_GREATER
         }

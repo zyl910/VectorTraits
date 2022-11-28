@@ -8,16 +8,16 @@ using System.Runtime.Intrinsics;
 using System.Text;
 
 namespace Zyl.VectorTraits.Impl {
-    using WStatics = WVectorTraits128AdvSimd.Statics;
+    using WStatics = WVectorTraits128AdvSimdA64.Statics;
 
     /// <summary>
-    /// <see cref="Vector{T}"/> traits 128 - AdvSimd .
+    /// <see cref="Vector{T}"/> traits 128 - AdvSimd architecture-64bit .
     /// </summary>
-    public sealed class VectorTraits128AdvSimd : VectorTraits128AdvSimdAbstract {
-        private static readonly VectorTraits128AdvSimd _instance = new VectorTraits128AdvSimd(); // Default instance.
+    public sealed class VectorTraits128AdvSimdA64 : VectorTraits128AdvSimdA64Abstract {
+        private static readonly VectorTraits128AdvSimdA64 _instance = new VectorTraits128AdvSimdA64(); // Default instance.
 
         /// <summary>Default instance. </summary>
-        public static VectorTraits128AdvSimd Instance {
+        public static VectorTraits128AdvSimdA64 Instance {
             get { return _instance; }
         }
 
@@ -27,7 +27,7 @@ namespace Zyl.VectorTraits.Impl {
 #endif // NET5_0_OR_GREATER
 
         /// <summary>
-        /// <see cref="Vector128{T}"/> traits.Statics - AdvSimd.
+        /// <see cref="Vector128{T}"/> traits.Statics - AdvSimd architecture-64bit .
         /// </summary>
         public static class Statics {
 
@@ -64,26 +64,6 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NET5_0_OR_GREATER
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
-                Vector128<short> vtemp = WStatics.ShiftLeft(Vectors.AsVector128(value), shiftCount);
-                return Vectors.AsVector(vtemp);
-            }
-
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
-                Vector128<int> vtemp = WStatics.ShiftLeft(Vectors.AsVector128(value), shiftCount);
-                return Vectors.AsVector(vtemp);
-            }
-
-            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftCount) {
-                Vector128<int> vtemp = WStatics.ShiftRightArithmetic(Vectors.AsVector128(value), shiftCount);
-                return Vectors.AsVector(vtemp);
-            }
 
 #endif // NET5_0_OR_GREATER
         }

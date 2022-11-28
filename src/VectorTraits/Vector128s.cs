@@ -11,7 +11,7 @@ namespace Zyl.VectorTraits {
     /// <summary>
     /// Methods of <see cref="Vector128{T}"/> .
     /// </summary>
-    public static class Vector128s {
+    public static partial class Vector128s {
 #if NETCOREAPP3_0_OR_GREATER
 
         // == Mask array ==

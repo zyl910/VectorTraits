@@ -17,6 +17,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <returns>Returns best instance.</returns>
         public new static IVectorTraits GetBestInstance() {
+            if (VectorTraits128AdvSimdA64.Instance.IsSupported) return VectorTraits128AdvSimdA64.Instance;
             if (VectorTraits128AdvSimd.Instance.IsSupported) return VectorTraits128AdvSimd.Instance;
             return VectorTraits128Base.Instance;
         }

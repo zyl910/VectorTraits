@@ -8,7 +8,7 @@ namespace Zyl.VectorTraits.Impl {
     using Statics = VectorTraits128AdvSimd.Statics;
 
     /// <summary>
-    /// <see cref="Vector{T}"/> traits 128 - Avx2 abstract.
+    /// <see cref="Vector{T}"/> traits 128 - AdvSimd abstract.
     /// </summary>
     public abstract class VectorTraits128AdvSimdAbstract : VectorTraits128Abstract {
 
