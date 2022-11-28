@@ -20,6 +20,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                 writer.WriteLine("VectorTraits.Benchmarks");
                 writer.WriteLine();
                 BenchmarkUtil.OutputEnvironment(writer, indent);
+                TraitsOutput.ParseWaitDebugAndReadKey(args);
                 writer.WriteLine();
                 BenchmarkMain.RunBenchmark(writer, indent);
             }

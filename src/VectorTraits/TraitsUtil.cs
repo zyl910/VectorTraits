@@ -621,5 +621,41 @@ namespace Zyl.VectorTraits {
             return rt;
         }
 
+        /// <summary>
+        /// Try parse command args by prefix (根据前缀解析命令行参数).
+        /// </summary>
+        /// <param name="result">Output int value (输出 int 值).</param>
+        /// <param name="args">The command args (命令行参数).</param>
+        /// <param name="prefix">The prefix (前缀).</param>
+        /// <param name="defaultValue">Default value (默认值).</param>
+        /// <returns>true if s was converted successfully; otherwise, false (转换成功时为 true; 否则为 false).</returns>
+        public static bool TryParseArgsByPrefix(out int result, string[] args, string prefix, int defaultValue) {
+            bool rt = false;
+            string found = "";
+            if (!string.IsNullOrEmpty(prefix)) {
+                foreach (string arg in args) {
+                    if (string.IsNullOrEmpty(arg)) continue;
+                    if (arg.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)) {
+                        rt = true;
+                        found = arg.Trim();
+                        break;
+                    }
+                }
+            }
+            if (rt) {
+                if (found.Length > prefix.Length) {
+                    string str = found.Substring(prefix.Length);
+                    if (!int.TryParse(str, out result)) {
+                        result = defaultValue;
+                    }
+                } else {
+                    result = defaultValue;
+                }
+            } else {
+                result = defaultValue;
+            }
+            return rt;
+        }
+
     }
 }

@@ -10,6 +10,14 @@ namespace Zyl.VectorTraits {
     /// VectorTraits output info.
     /// </summary>
     internal partial class TraitsOutput {
+        /// <summary>Wait debug prefix.</summary>
+        public static readonly string WaitDebugPrefix = "-waitdebug";
+        /// <summary>Wait debug default timeout. Unit is milliseconds.</summary>
+        public const int WaitDebugTimeoutDefault = 10 * 60 * 1000;
+        /// <summary>Wait debug has.</summary>
+        public static bool WaitDebug { get; set; }
+        /// <summary>Wait debug timeout. Unit is milliseconds.</summary>
+        public static int WaitDebugTimeout { get; set; }
 
         /// <summary>
         /// Is release make.
@@ -70,5 +78,59 @@ namespace Zyl.VectorTraits {
             //writer.WriteLine();
         }
 
+        /// <summary>
+        /// Parse <see cref="WaitDebug"/> by <paramref name="args"/>, and <see cref="Console.ReadKey"/> with timeout (从 <paramref name="args"/> 解析出 <see cref="WaitDebug"/> 参数, 并以超时方式运行 <see cref="Console.ReadKey"/> ).
+        /// </summary>
+        /// <param name="args">The command args (命令行参数).</param>
+        /// <param name="defaultTimout">Default timeout (默认超时). Unit is milliseconds (单位为毫秒).</param>
+        /// <param name="onParseDone">On parse done (当解析完毕时触发). Prototype: `void onParseDone(bool WaitDebug, int WaitDebugTimeout)`.</param>
+        /// <returns>Returns ConsoleKeyInfo if a key is received, or null otherwise (若收到按键便返回 ConsoleKeyInfo, 否则返回null)</returns>
+        public static ConsoleKeyInfo? ParseWaitDebugAndReadKey(string[] args, int defaultTimout = 0, Action<bool, int>? onParseDone = null) {
+            ConsoleKeyInfo? rt = null;
+            WaitDebug = TraitsUtil.TryParseArgsByPrefix(out int timeout, args, WaitDebugPrefix, defaultTimout);
+            if (WaitDebug) {
+                WaitDebugTimeout = timeout;
+            }
+            if (null != onParseDone) {
+                onParseDone(WaitDebug, timeout);
+            }
+            if (WaitDebug) {
+                rt = WaitDebugReadKey();
+            }
+            return rt;
+        }
+
+        /// <summary>
+        /// WaitDebug - <see cref="Console.ReadKey"/> with timeout (以超时方式运行 <see cref="Console.ReadKey"/> ).
+        /// </summary>
+        /// <param name="intercept">Determines whether to display the pressed key in the console window. true to not display the pressed key; otherwise, false (确定是否在控制台窗口中显示按下的键。 如果为 true，则不显示按下的键；否则为 false).</param>
+        /// <returns>Returns ConsoleKeyInfo if a key is received, or null otherwise (若收到按键便返回 ConsoleKeyInfo, 否则返回null)</returns>
+        public static ConsoleKeyInfo? WaitDebugReadKey(bool intercept = false) {
+            int timeout = WaitDebugTimeout;
+            if (0 == timeout) timeout = WaitDebugTimeoutDefault;
+            return ReadKeyTimeout(timeout, intercept);
+        }
+
+        /// <summary>
+        /// WaitDebug - <see cref="Console.ReadKey"/> with timeout (以超时方式运行 <see cref="Console.ReadKey"/> ).
+        /// </summary>
+        /// <param name="timeout">Timeout milliseconds (超时毫秒数). When it is negative, no timeout control is performed (当它为负数时, 不进行超时控制).</param>
+        /// <param name="intercept">Determines whether to display the pressed key in the console window. true to not display the pressed key; otherwise, false (确定是否在控制台窗口中显示按下的键。 如果为 true，则不显示按下的键；否则为 false).</param>
+        /// <returns>Returns ConsoleKeyInfo if a key is received, or null otherwise (若收到按键便返回 ConsoleKeyInfo, 否则返回null)</returns>
+        /// <exception cref="InvalidOperationException">The <see cref="Console.In"/> property is redirected from some stream other than the console.</exception>
+        public static ConsoleKeyInfo? ReadKeyTimeout(int timeout, bool intercept = false) {
+            if (timeout >= 0) {
+                int tickBegin = Environment.TickCount;
+                int used;
+                bool isAvailable = false;
+                do {
+                    isAvailable = Console.KeyAvailable;
+                    if (isAvailable) break;
+                    used = Environment.TickCount - tickBegin;
+                }while(used <= timeout);
+                if (!isAvailable) return null;
+            }
+            return Console.ReadKey(intercept);
+        }
     }
 }

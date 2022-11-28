@@ -22,6 +22,7 @@ namespace Zyl.VectorTraits.Benchmarks.NetFw {
                 writer.WriteLine("VectorTraits.Benchmarks.NetFw");
                 writer.WriteLine();
                 BenchmarkUtil.OutputEnvironment(writer, indent);
+                TraitsOutput.ParseWaitDebugAndReadKey(args);
                 writer.WriteLine();
                 BenchmarkMain.RunBenchmark(writer, indent);
             }
