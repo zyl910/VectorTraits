@@ -12,6 +12,8 @@ namespace Zyl.VectorTraits {
     internal partial class TraitsOutput {
         /// <summary>Wait debug prefix.</summary>
         public static readonly string WaitDebugPrefix = "-waitdebug";
+        /// <summary>Wait debug hint.</summary>
+        public static readonly string WaitDebugHint = "(Press Any Key to Continue)";
         /// <summary>Wait debug default timeout. Unit is milliseconds.</summary>
         public const int WaitDebugTimeoutDefault = 10 * 60 * 1000;
         /// <summary>Wait debug has.</summary>
@@ -82,19 +84,22 @@ namespace Zyl.VectorTraits {
         /// Parse <see cref="WaitDebug"/> by <paramref name="args"/>, and <see cref="Console.ReadKey"/> with timeout (从 <paramref name="args"/> 解析出 <see cref="WaitDebug"/> 参数, 并以超时方式运行 <see cref="Console.ReadKey"/> ).
         /// </summary>
         /// <param name="args">The command args (命令行参数).</param>
-        /// <param name="defaultTimout">Default timeout (默认超时). Unit is milliseconds (单位为毫秒).</param>
+        /// <param name="hint">A hint of waiting (等待时的提示). null is <see cref="WaitDebugHint"/> </param>
+        /// <param name="defaultTimout">Default timeout (默认超时). Unit is milliseconds (单位为毫秒). 0 is <see cref="WaitDebugTimeoutDefault"/></param>
         /// <param name="onParseDone">On parse done (当解析完毕时触发). Prototype: `void onParseDone(bool WaitDebug, int WaitDebugTimeout)`.</param>
         /// <returns>Returns ConsoleKeyInfo if a key is received, or null otherwise (若收到按键便返回 ConsoleKeyInfo, 否则返回null)</returns>
-        public static ConsoleKeyInfo? ParseWaitDebugAndReadKey(string[] args, int defaultTimout = 0, Action<bool, int>? onParseDone = null) {
+        public static ConsoleKeyInfo? ParseWaitDebugAndReadKey(string[] args, string? hint = null, int defaultTimout = 0, Action<bool, int>? onParseDone = null) {
             ConsoleKeyInfo? rt = null;
             WaitDebug = TraitsUtil.TryParseArgsByPrefix(out int timeout, args, WaitDebugPrefix, defaultTimout);
             if (WaitDebug) {
                 WaitDebugTimeout = timeout;
             }
-            if (null != onParseDone) {
-                onParseDone(WaitDebug, timeout);
-            }
+            onParseDone?.Invoke(WaitDebug, timeout);
             if (WaitDebug) {
+                if (null == hint) hint = WaitDebugHint;
+                if (!string.IsNullOrEmpty(hint)) {
+                    Console.WriteLine(hint);
+                }
                 rt = WaitDebugReadKey();
             }
             return rt;
@@ -122,7 +127,7 @@ namespace Zyl.VectorTraits {
             if (timeout >= 0) {
                 int tickBegin = Environment.TickCount;
                 int used;
-                bool isAvailable = false;
+                bool isAvailable;
                 do {
                     isAvailable = Console.KeyAvailable;
                     if (isAvailable) break;

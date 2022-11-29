@@ -6,6 +6,9 @@ dotnet_diagnostic.IDE0018.severity = silent
 # IDE0039: Use local function
 dotnet_diagnostic.IDE0039.severity = silent
 
+# IDE0057: Substring can be simplified
+dotnet_diagnostic.IDE0057.severity = silent
+
 # IDE0090: Use 'new(...)'
 dotnet_diagnostic.IDE0090.severity = silent
 

@@ -8,12 +8,15 @@ namespace Zyl.VectorTraits.Benchmarks {
         static void Main(string[] args) {
             bool useBenchmark = false;
             if (args.Length>=1) {
-                bool.TryParse(args[0], out useBenchmark);
+                if (bool.TryParse(args[0], out useBenchmark)) {
+                }
             }
             // run.
             if (useBenchmark) {
                 //Summary summary = BenchmarkRunner.Run<ShiftLeftBenchmark_Int16>();
                 var summary = BenchmarkRunner.Run(typeof(ShiftLeftBenchmark_Int16).Assembly);
+                if (null!= summary) {
+                }
             } else {
                 string indent = "";
                 TextWriter writer = Console.Out;
