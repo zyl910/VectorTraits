@@ -15,5 +15,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)BenchmarkMain.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BenchmarkUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FakeBenchmarkAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IntroDisassemblyDry.cs" />
   </ItemGroup>
 </Project>

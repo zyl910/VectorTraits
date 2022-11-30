@@ -23,6 +23,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector {
     /// <summary>
     /// Shift left benchmark - short.
     /// </summary>
+#if NETCOREAPP3_0_OR_GREATER && DRY_JOB
+    [DryJob]
+#endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
     public partial class ShiftLeftBenchmark_Int16 : AbstractSharedBenchmark {
         // -- TMy ref --
         private static ref TMy dstTMy => ref dstInt16;

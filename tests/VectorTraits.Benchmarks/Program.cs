@@ -1,4 +1,6 @@
-﻿using BenchmarkDotNet.Running;
+﻿using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Diagnosers;
+using BenchmarkDotNet.Running;
 using System;
 using System.IO;
 using Zyl.VectorTraits.Benchmarks.AVector;
@@ -6,21 +8,29 @@ using Zyl.VectorTraits.Benchmarks.AVector;
 namespace Zyl.VectorTraits.Benchmarks {
     class Program {
         static void Main(string[] args) {
-            bool useBenchmark = false;
-            if (args.Length>=1) {
-                if (bool.TryParse(args[0], out useBenchmark)) {
+            TextWriter writer = Console.Out;
+            writer.WriteLine("VectorTraits.Benchmarks");
+            // benchmarkMode
+            int benchmarkMode = 0;
+            if (args.Length >= 1) {
+                if (!int.TryParse(args[0], out benchmarkMode)) {
+                    benchmarkMode = 0;
                 }
             }
-            // run.
-            if (useBenchmark) {
-                //Summary summary = BenchmarkRunner.Run<ShiftLeftBenchmark_Int16>();
-                var summary = BenchmarkRunner.Run(typeof(ShiftLeftBenchmark_Int16).Assembly);
-                if (null!= summary) {
+            writer.WriteLine("benchmarkMode:\t{0}", benchmarkMode);
+            if (benchmarkMode > 0) {
+                var config = DefaultConfig.Instance
+                    .AddDiagnoser(new DisassemblyDiagnoser(new DisassemblyDiagnoserConfig(maxDepth: 3, printSource: true, printInstructionAddresses: true, exportGithubMarkdown: true, exportHtml: true)))
+                ;
+                if (benchmarkMode >= 2) {
+                    var summary = BenchmarkRunner.Run<IntroDisassemblyDry>(config);
+                    writer.WriteLine(summary);
+                } else {
+                    var summary = BenchmarkRunner.Run(typeof(ShiftLeftBenchmark_Int16).Assembly, config);
+                    writer.WriteLine(summary);
                 }
             } else {
                 string indent = "";
-                TextWriter writer = Console.Out;
-                writer.WriteLine("VectorTraits.Benchmarks");
                 writer.WriteLine();
                 BenchmarkUtil.OutputEnvironment(writer, indent);
                 TraitsOutput.ParseWaitDebugAndReadKey(args);
