@@ -1,4 +1,8 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿#undef BENCHMARKS_OFF
+#define BENCHMARKS_ALGORITHM
+#define BENCHMARKS_RAW
+
+using BenchmarkDotNet.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +12,10 @@ using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector {
-    //using BenchmarkAttribute = FakeBenchmarkAttribute;
+#if BENCHMARKS_OFF
+    using BenchmarkAttribute = FakeBenchmarkAttribute;
+#else
+#endif // BENCHMARKS_OFF
 
     // My type.
     using TMy = Int16;
@@ -57,6 +64,20 @@ namespace Zyl.VectorTraits.Benchmarks.AVector {
             }
         }
 
+#region BENCHMARKS_ALGORITHM
+#if BENCHMARKS_ALGORITHM
+
+#if NETCOREAPP3_0_OR_GREATER
+
+#endif // NETCOREAPP3_0_OR_GREATER
+
+#if NET5_0_OR_GREATER
+
+#endif // NET5_0_OR_GREATER
+
+#endif // BENCHMARKS_ALGORITHM
+#endregion // BENCHMARKS_ALGORITHM
+
 #if NET7_0_OR_GREATER
         /// <summary>
         /// Sum shift left logical - VectorT - .NET7.
@@ -78,7 +99,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector {
             fixed (TMy* p0 = &src[0]) {
                 TMy* p = p0;
                 // Vector processs.
-                // Debugger.Break();
                 for (i = 0; i < cntBlock; ++i) {
                     Vector<TMy> vtemp = Vector.ShiftLeft(*(Vector<TMy>*)p, shiftCount);
                     vrt += vtemp; // Add.
@@ -124,7 +144,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector {
             fixed (TMy* p0 = &src[0]) {
                 TMy* p = p0;
                 // Vector processs.
-                // Debugger.Break();
                 for (i = 0; i < cntBlock; ++i) {
                     Vector<TMy> vtemp = Vectors.ShiftLeft(*(Vector<TMy>*)p, shiftCount);
                     vrt += vtemp; // Add.
@@ -170,7 +189,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector {
             fixed (TMy* p0 = &src[0]) {
                 TMy* p = p0;
                 // Vector processs.
-                // Debugger.Break();
                 for (i = 0; i < cntBlock; ++i) {
                     Vector<TMy> vtemp = vectorTraits.ShiftLeft(*(Vector<TMy>*)p, shiftCount);
                     vrt += vtemp; // Add.
@@ -201,8 +219,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector {
             CheckResult("SLLTraitsArgDynamic");
         }
 
-        #region OFF_RAW
-#if !OFF_RAW
+#region BENCHMARKS_RAW
+#if BENCHMARKS_RAW
 
 #if NETCOREAPP3_0_OR_GREATER
         /// <summary>
@@ -225,7 +243,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector {
             fixed (TMy* p0 = &src[0]) {
                 TMy* p = p0;
                 // Vector processs.
-                // Debugger.Break();
                 for (i = 0; i < cntBlock; ++i) {
                     Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftLeft(*(Vector<TMy>*)p, shiftCount);
                     vrt += vtemp; // Add.
@@ -252,7 +269,54 @@ namespace Zyl.VectorTraits.Benchmarks.AVector {
         }
 #endif // NETCOREAPP3_0_OR_GREATER
 
-#endif // !OFF_RAW
-        #endregion // OFF_RAW
+#if NET5_0_OR_GREATER
+        /// <summary>
+        /// Sum shift left logical - VectorT - Avx.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftCount">Shift count.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSLLRawAdvSimd(TMy[] src, int srcCount, int shiftCount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftLeft(*(Vector<TMy>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLRawAdvSimd() {
+            VectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
+            //Debugger.Break();
+            dstTMy = StaticSumSLLRawAdvSimd(srcArray, srcArray.Length, DefaultShiftCount);
+            CheckResult("SumSLLRawAdvSimd");
+        }
+#endif // NET5_0_OR_GREATER
+
+#endif // BENCHMARKS_RAW
+#endregion // BENCHMARKS_RAW
     }
 }

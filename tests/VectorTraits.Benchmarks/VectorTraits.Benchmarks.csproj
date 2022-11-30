@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>$(DefineConstants);BENCHMARKS_OFF</DefineConstants>
     <Company>zyl910</Company>
     <Authors>zyl910</Authors>
     <Product>VectorTraits</Product>
@@ -18,6 +19,14 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>VectorTraits;vector;math;simd;intrinsic;x86;avx;arm</PackageTags>
     <RootNamespace>Zyl.VectorTraits.Benchmarks</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
   </PropertyGroup>
 
   <Import Project="..\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems" Label="Shared" />
