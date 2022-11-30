@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,7 +8,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>$(DefineConstants);DRY_JOB;BENCHMARKS_OFF</DefineConstants>
+    <DefineConstants>$(DefineConstants);DRY_JOB0;BENCHMARKS_OFF</DefineConstants>
     <Company>zyl910</Company>
     <Authors>zyl910</Authors>
     <Product>VectorTraits</Product>
