@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
 using System.Numerics;
+using System.ComponentModel;
 
 namespace Zyl.VectorTraits.Impl {
     using BaseStatics = VectorTraitsBase.Statics;
@@ -60,7 +61,7 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
+            public static Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
 #if SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeft_Multiply(value, shiftCount);
 #else
@@ -70,7 +71,7 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
+            public static Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
 #if SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeft_Multiply(value, shiftCount);
 #else
@@ -79,6 +80,7 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             // ShiftLeft - Base.
+            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<short> ShiftLeft_Base(Vector<short> value, int shiftCount) {
                 Vector<short> rt = value;
@@ -95,6 +97,7 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             // ShiftLeft - Base.
+            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<int> ShiftLeft_Base(Vector<int> value, int shiftCount) {
                 Vector<int> rt = value;
