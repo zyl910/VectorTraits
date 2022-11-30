@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Numerics;
 
 namespace Zyl.VectorTraits.Impl {
+    using BaseStatics = VectorTraitsBase.Statics;
 
     /// <summary>
     /// <see cref="Vector{T}"/> traits 256 - base.
@@ -60,6 +61,26 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
+#if SOFTWARE_OPTIMIZATION
+                return BaseStatics.ShiftLeft_Multiply(value, shiftCount);
+#else
+                return ShiftLeft_Base(value, shiftCount);
+#endif // SOFTWARE_OPTIMIZATION
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
+#if SOFTWARE_OPTIMIZATION
+                return BaseStatics.ShiftLeft_Multiply(value, shiftCount);
+#else
+                return ShiftLeft_Base(value, shiftCount);
+#endif // SOFTWARE_OPTIMIZATION
+            }
+
+            // ShiftLeft - Base.
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<short> ShiftLeft_Base(Vector<short> value, int shiftCount) {
                 Vector<short> rt = value;
                 short* p = (short*)&rt;
                 p[0] <<= shiftCount;
@@ -81,9 +102,9 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
+            // ShiftLeft - Base.
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
+            public static unsafe Vector<int> ShiftLeft_Base(Vector<int> value, int shiftCount) {
                 Vector<int> rt = value;
                 int* p = (int*)&rt;
                 p[0] <<= shiftCount;
@@ -96,6 +117,7 @@ namespace Zyl.VectorTraits.Impl {
                 p[7] <<= shiftCount;
                 return rt;
             }
+
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
