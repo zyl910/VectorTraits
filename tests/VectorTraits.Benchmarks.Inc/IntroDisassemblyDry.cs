@@ -28,7 +28,6 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         [Benchmark]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int RunVector128() {
             StringWriter writer = new StringWriter();
             string indent = "";
@@ -163,9 +162,9 @@ namespace Zyl.VectorTraits.Benchmarks {
                 // Computes the ceiling of each element in a vector.
                 // Ceiling(Vector128<Single>)	
                 // Computes the ceiling of each element in a vector.
-                Tip_Delegate((Func<Vector128<Single>, Vector128<Single>>)Vector128.Ceiling);
+                Tip_Ceiling<Single>();
                 WriteLine(writer, indent, "Ceiling(Vector128s<Single>.Demo):\t{0}", Vector128.Ceiling(Vector128s<Single>.Demo));
-                Tip_Delegate((Func<Vector128<Double>, Vector128<Double>>)Vector128.Ceiling);
+                Tip_Ceiling<Double>();
                 WriteLine(writer, indent, "Ceiling(Vector128s<Double>.Demo):\t{0}", Vector128.Ceiling(Vector128s<Double>.Demo));
 
                 // ConditionalSelect<T>(Vector128<T>, Vector128<T>, Vector128<T>)	
@@ -438,9 +437,9 @@ namespace Zyl.VectorTraits.Benchmarks {
                 // Computes the floor of each element in a vector.
                 // Floor(Vector128<Single>)	
                 // Computes the floor of each element in a vector.
-                Tip_Delegate((Func<Vector128<Single>, Vector128<Single>>)Vector128.Floor);
+                Tip_Floor<Single>();
                 WriteLine(writer, indent, "Floor(Vector128s<Single>.Demo):\t{0}", Vector128.Floor(Vector128s<Single>.Demo));
-                Tip_Delegate((Func<Vector128<Double>, Vector128<Double>>)Vector128.Floor);
+                Tip_Floor<Double>();
                 WriteLine(writer, indent, "Floor(Vector128s<Double>.Demo):\t{0}", Vector128.Floor(Vector128s<Double>.Demo));
 
                 // GetElement<T>(Vector128<T>, Int32)	
@@ -632,14 +631,14 @@ namespace Zyl.VectorTraits.Benchmarks {
                 // Narrows writero Vector128<T> instances into one Vector128<T>.
                 // Narrow(Vector128<UInt64>, Vector128<UInt64>)	
                 // Narrows writero Vector128<T> instances into one Vector128<T>.
-                Tip_Delegate((Func<Vector128<Double>, Vector128<Double>, Vector128<Single>>)Vector128.Narrow);
+                Tip_Narrow<Single>();
                 WriteLine(writer, indent, "Narrow(Vector128s<Double>.Demo, Vector128s<Double>.SerialNegative):\t{0}", Vector128.Narrow(Vector128s<Double>.Demo, Vector128s<Double>.SerialNegative));
                 WriteLine(writer, indent, "Narrow(Vector128s<Int16>.Demo, Vector128s<Int16>.SerialNegative):\t{0}", Vector128.Narrow(Vector128s<Int16>.Demo, Vector128s<Int16>.SerialNegative));
                 WriteLine(writer, indent, "Narrow(Vector128s<Int32>.Demo, Vector128s<Int32>.SerialNegative):\t{0}", Vector128.Narrow(Vector128s<Int32>.Demo, Vector128s<Int32>.SerialNegative));
                 WriteLine(writer, indent, "Narrow(Vector128s<Int64>.Demo, Vector128s<Int64>.SerialNegative):\t{0}", Vector128.Narrow(Vector128s<Int64>.Demo, Vector128s<Int64>.SerialNegative));
                 WriteLine(writer, indent, "Narrow(Vector128s<UInt16>.Demo, Vector128s<UInt16>.SerialNegative):\t{0}", Vector128.Narrow(Vector128s<UInt16>.Demo, Vector128s<UInt16>.SerialNegative));
                 WriteLine(writer, indent, "Narrow(Vector128s<UInt32>.Demo, Vector128s<UInt32>.SerialNegative):\t{0}", Vector128.Narrow(Vector128s<UInt32>.Demo, Vector128s<UInt32>.SerialNegative));
-                Tip_Delegate((Func<Vector128<UInt64>, Vector128<UInt64>, Vector128<UInt32>>)Vector128.Narrow);
+                Tip_Narrow<UInt64>();
                 WriteLine(writer, indent, "Narrow(Vector128s<UInt64>.Demo, Vector128s<UInt64>.SerialNegative):\t{0}", Vector128.Narrow(Vector128s<UInt64>.Demo, Vector128s<UInt64>.SerialNegative));
 
                 // Negate<T>(Vector128<T>)	
@@ -690,7 +689,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                 // Shifts each element of a vector left by the specified amount.
                 shift = 4;
                 WriteLine(writer, indent, "shift:\t{0}", shift);
-                Tip_Delegate((Func<Vector128<SByte>, Int32, Vector128<SByte>>)Vector128.ShiftLeft);
+                Tip_ShiftLeft<SByte>();
                 WriteLine(writer, indent, "ShiftLeft(Vector128s<SByte>.Demo, shift):\t{0}", Vector128.ShiftLeft(Vector128s<SByte>.Demo, shift));
                 WriteLine(writer, indent, "ShiftLeft(Vector128s<Byte>.Demo, shift):\t{0}", Vector128.ShiftLeft(Vector128s<Byte>.Demo, shift));
                 WriteLine(writer, indent, "ShiftLeft(Vector128s<Int16>.Demo, shift):\t{0}", Vector128.ShiftLeft(Vector128s<Int16>.Demo, shift));
@@ -700,7 +699,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                 WriteLine(writer, indent, "ShiftLeft(Vector128s<Int64>.Demo, shift):\t{0}", Vector128.ShiftLeft(Vector128s<Int64>.Demo, shift));
                 WriteLine(writer, indent, "ShiftLeft(Vector128s<UInt64>.Demo, shift):\t{0}", Vector128.ShiftLeft(Vector128s<UInt64>.Demo, shift));
                 WriteLine(writer, indent, "ShiftLeft(Vector128s<IntPtr>.Demo, shift):\t{0}", Vector128.ShiftLeft(Vector128s<IntPtr>.Demo, shift));
-                Tip_Delegate((Func<Vector128<UIntPtr>, Int32, Vector128<UIntPtr>>)Vector128.ShiftLeft);
+                Tip_ShiftLeft<UIntPtr>();
                 WriteLine(writer, indent, "ShiftLeft(Vector128s<UIntPtr>.Demo, shift):\t{0}", Vector128.ShiftLeft(Vector128s<UIntPtr>.Demo, shift));
 
                 // ShiftRightArithmetic(Vector128<Int16>, Int32)	
@@ -713,12 +712,12 @@ namespace Zyl.VectorTraits.Benchmarks {
                 // Shifts (signed) each element of a vector right by the specified amount.
                 // ShiftRightArithmetic(Vector128<SByte>, Int32)	
                 // Shifts (signed) each element of a vector right by the specified amount.
-                Tip_Delegate((Func<Vector128<SByte>, Int32, Vector128<SByte>>)Vector128.ShiftRightArithmetic);
+                Tip_ShiftRightArithmetic<SByte>();
                 WriteLine(writer, indent, "ShiftRightArithmetic(Vector128s<SByte>.Demo, shift):\t{0}", Vector128.ShiftRightArithmetic(Vector128s<SByte>.Demo, shift));
                 WriteLine(writer, indent, "ShiftRightArithmetic(Vector128s<Int16>.Demo, shift):\t{0}", Vector128.ShiftRightArithmetic(Vector128s<Int16>.Demo, shift));
                 WriteLine(writer, indent, "ShiftRightArithmetic(Vector128s<Int32>.Demo, shift):\t{0}", Vector128.ShiftRightArithmetic(Vector128s<Int32>.Demo, shift));
                 WriteLine(writer, indent, "ShiftRightArithmetic(Vector128s<Int64>.Demo, shift):\t{0}", Vector128.ShiftRightArithmetic(Vector128s<Int64>.Demo, shift));
-                Tip_Delegate((Func<Vector128<IntPtr>, Int32, Vector128<IntPtr>>)Vector128.ShiftRightArithmetic);
+                Tip_ShiftRightArithmetic<IntPtr>();
                 WriteLine(writer, indent, "ShiftRightArithmetic(Vector128s<IntPtr>.Demo, shift):\t{0}", Vector128.ShiftRightArithmetic(Vector128s<IntPtr>.Demo, shift));
 
                 // ShiftRightLogical(Vector128<Byte>, Int32)	
@@ -741,7 +740,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                 // Shifts (unsigned) each element of a vector right by the specified amount.
                 // ShiftRightLogical(Vector128<UIntPtr>, Int32)	
                 // Shifts (unsigned) each element of a vector right by the specified amount.
-                Tip_Delegate((Func<Vector128<SByte>, Int32, Vector128<SByte>>)Vector128.ShiftRightLogical);
+                Tip_ShiftRightLogical<SByte>();
                 WriteLine(writer, indent, "ShiftRightLogical(Vector128s<SByte>.Demo, shift):\t{0}", Vector128.ShiftRightLogical(Vector128s<SByte>.Demo, shift));
                 WriteLine(writer, indent, "ShiftRightLogical(Vector128s<Byte>.Demo, shift):\t{0}", Vector128.ShiftRightLogical(Vector128s<Byte>.Demo, shift));
                 WriteLine(writer, indent, "ShiftRightLogical(Vector128s<Int16>.Demo, shift):\t{0}", Vector128.ShiftRightLogical(Vector128s<Int16>.Demo, shift));
@@ -751,7 +750,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                 WriteLine(writer, indent, "ShiftRightLogical(Vector128s<Int64>.Demo, shift):\t{0}", Vector128.ShiftRightLogical(Vector128s<Int64>.Demo, shift));
                 WriteLine(writer, indent, "ShiftRightLogical(Vector128s<UInt64>.Demo, shift):\t{0}", Vector128.ShiftRightLogical(Vector128s<UInt64>.Demo, shift));
                 WriteLine(writer, indent, "ShiftRightLogical(Vector128s<IntPtr>.Demo, shift):\t{0}", Vector128.ShiftRightLogical(Vector128s<IntPtr>.Demo, shift));
-                Tip_Delegate((Func<Vector128<UIntPtr>, Int32, Vector128<UIntPtr>>)Vector128.ShiftRightLogical);
+                Tip_ShiftRightLogical<UIntPtr>();
                 WriteLine(writer, indent, "ShiftRightLogical(Vector128s<UIntPtr>.Demo, shift):\t{0}", Vector128.ShiftRightLogical(Vector128s<UIntPtr>.Demo, shift));
 
                 // Shuffle(Vector128<Byte>, Vector128<Byte>)	
@@ -774,7 +773,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                 // Creates a new vector by selecting values from an input vector using a set of indices.
                 // Shuffle(Vector128<UInt64>, Vector128<UInt64>)	
                 // Creates a new vector by selecting values from an input vector using a set of indices.
-                Tip_Delegate((Func<Vector128<Single>, Vector128<Int32>, Vector128<Single>>)Vector128.Shuffle);
+                Tip_Shuffle<Single>();
                 WriteLine(writer, indent, "Shuffle(Vector128s<Single>.Demo, Vector128s<Int32>.SerialDesc):\t{0}", Vector128.Shuffle(Vector128s<Single>.Demo, Vector128s<Int32>.SerialDesc));
                 WriteLine(writer, indent, "Shuffle(Vector128s<Double>.Demo, Vector128s<Int64>.SerialDesc):\t{0}", Vector128.Shuffle(Vector128s<Double>.Demo, Vector128s<Int64>.SerialDesc));
                 WriteLine(writer, indent, "Shuffle(Vector128s<SByte>.Demo, Vector128s<SByte>.SerialDesc):\t{0}", Vector128.Shuffle(Vector128s<SByte>.Demo, Vector128s<SByte>.SerialDesc));
@@ -784,7 +783,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                 WriteLine(writer, indent, "Shuffle(Vector128s<Int32>.Demo, Vector128s<Int32>.SerialDesc):\t{0}", Vector128.Shuffle(Vector128s<Int32>.Demo, Vector128s<Int32>.SerialDesc));
                 WriteLine(writer, indent, "Shuffle(Vector128s<UInt32>.Demo, Vector128s<UInt32>.SerialDesc):\t{0}", Vector128.Shuffle(Vector128s<UInt32>.Demo, Vector128s<UInt32>.SerialDesc));
                 WriteLine(writer, indent, "Shuffle(Vector128s<Int64>.Demo, Vector128s<Int64>.SerialDesc):\t{0}", Vector128.Shuffle(Vector128s<Int64>.Demo, Vector128s<Int64>.SerialDesc));
-                Tip_Delegate((Func<Vector128<UInt64>, Vector128<UInt64>, Vector128<UInt64>>)Vector128.Shuffle);
+                Tip_Shuffle<UInt64>();
                 WriteLine(writer, indent, "Shuffle(Vector128s<UInt64>.Demo, Vector128s<UInt64>.SerialDesc):\t{0}", Vector128.Shuffle(Vector128s<UInt64>.Demo, Vector128s<UInt64>.SerialDesc));
 
                 // Sqrt<T>(Vector128<T>)	
@@ -827,7 +826,7 @@ namespace Zyl.VectorTraits.Benchmarks {
 
                 // Sum<T>(Vector128<T>)	
                 // Computes the sum of all elements in a vector.
-                Tip_Delegate((Func<Vector128<Single>, Single>)Vector128.Sum);
+                Tip_Sum<Single>();
                 WriteLine(writer, indent, "Sum(Vector128s<Single>.Demo):\t{0}", Vector128.Sum(Vector128s<Single>.Demo));
                 WriteLine(writer, indent, "Sum(Vector128s<Double>.Demo):\t{0}", Vector128.Sum(Vector128s<Double>.Demo));
                 WriteLine(writer, indent, "Sum(Vector128s<SByte>.Demo):\t{0}", Vector128.Sum(Vector128s<SByte>.Demo));
@@ -837,7 +836,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                 WriteLine(writer, indent, "Sum(Vector128s<Int32>.Demo):\t{0}", Vector128.Sum(Vector128s<Int32>.Demo));
                 WriteLine(writer, indent, "Sum(Vector128s<UInt32>.Demo):\t{0}", Vector128.Sum(Vector128s<UInt32>.Demo));
                 WriteLine(writer, indent, "Sum(Vector128s<Int64>.Demo):\t{0}", Vector128.Sum(Vector128s<Int64>.Demo));
-                Tip_Delegate((Func<Vector128<UInt64>, UInt64>)Vector128.Sum);
+                Tip_Sum<Single>();
                 WriteLine(writer, indent, "Sum(Vector128s<UInt64>.Demo):\t{0}", Vector128.Sum(Vector128s<UInt64>.Demo));
 
                 // ToScalar<T>(Vector128<T>)	
@@ -965,6 +964,7 @@ namespace Zyl.VectorTraits.Benchmarks {
             return writer.GetStringBuilder().Length;
         }
 
+        [Obsolete]
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void Tip_Delegate(Delegate d) {
             if (null!= d) {
@@ -973,7 +973,39 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
+        private static void Tip_Ceiling<T>() {
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
         private static void Tip_ExtractMostSignificantBits<T>() {
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static void Tip_Floor<T>() {
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static void Tip_Narrow<T>() {
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static void Tip_ShiftLeft<T>() {
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static void Tip_ShiftRightArithmetic<T>() {
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static void Tip_ShiftRightLogical<T>() {
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static void Tip_Shuffle<T>() {
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static void Tip_Sum<T>() {
         }
 
     }
