@@ -3,6 +3,7 @@ using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Running;
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using Zyl.VectorTraits.Benchmarks.AVector.S;
 
 namespace Zyl.VectorTraits.Benchmarks {
@@ -18,10 +19,18 @@ namespace Zyl.VectorTraits.Benchmarks {
                 }
             }
             writer.WriteLine("benchmarkMode:\t{0}", benchmarkMode);
-            if (benchmarkMode > 0) {
-                var config = DefaultConfig.Instance
-                    .AddDiagnoser(new DisassemblyDiagnoser(new DisassemblyDiagnoserConfig(maxDepth: 3, printSource: true, printInstructionAddresses: true, exportGithubMarkdown: true, exportHtml: true)))
-                ;
+            if (benchmarkMode == 3) {
+                var o = new IntroDisassemblyDry();
+                int n = o.RunVector128();
+                writer.WriteLine("RunVector128:\t{0}", n);
+            } else if (benchmarkMode > 0) {
+                Architecture architecture = RuntimeInformation.OSArchitecture;
+                var config = DefaultConfig.Instance;
+                if (architecture == Architecture.X86 || architecture == Architecture.X64) {
+                    config = config.AddDiagnoser(new DisassemblyDiagnoser(new DisassemblyDiagnoserConfig(maxDepth: 3, printSource: true, printInstructionAddresses: true, exportGithubMarkdown: true, exportHtml: true)));
+                } else {
+                    // Message: Arm64 is not supported (Iced library limitation)
+                }
                 if (benchmarkMode >= 2) {
                     var summary = BenchmarkRunner.Run<IntroDisassemblyDry>(config);
                     writer.WriteLine(summary);
