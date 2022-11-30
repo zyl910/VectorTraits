@@ -1,6 +1,8 @@
 ﻿using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;
+using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
+using BenchmarkDotNet.Toolchains.InProcess.Emit;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -31,6 +33,10 @@ namespace Zyl.VectorTraits.Benchmarks {
                 } else {
                     // Message: Arm64 is not supported (Iced library limitation)
                 }
+                config = config.AddJob(Job.MediumRun
+                    .WithLaunchCount(1)
+                    .WithToolchain(InProcessEmitToolchain.Instance)
+                    .WithId("InProcess"));
                 if (benchmarkMode >= 2) {
                     var summary = BenchmarkRunner.Run<IntroDisassemblyDry>(config);
                     writer.WriteLine(summary);
