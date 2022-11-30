@@ -3,7 +3,7 @@ using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Running;
 using System;
 using System.IO;
-using Zyl.VectorTraits.Benchmarks.AVector;
+using Zyl.VectorTraits.Benchmarks.AVector.S;
 
 namespace Zyl.VectorTraits.Benchmarks {
     class Program {

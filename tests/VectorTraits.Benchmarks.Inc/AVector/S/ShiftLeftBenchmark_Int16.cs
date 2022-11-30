@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using Zyl.VectorTraits.Impl;
 
-namespace Zyl.VectorTraits.Benchmarks.AVector {
+namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_OFF
     using BenchmarkAttribute = FakeBenchmarkAttribute;
 #else
