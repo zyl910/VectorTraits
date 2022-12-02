@@ -83,7 +83,7 @@ namespace Zyl.VectorTraits.Impl {
 #endif // SOFTWARE_BCL_OVERRIDE
             }
 
-            // ShiftLeft - Base.
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<short> ShiftLeft_Base(Vector<short> value, int shiftCount) {
@@ -108,7 +108,7 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-            // ShiftLeft - Base.
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<int> ShiftLeft_Base(Vector<int> value, int shiftCount) {

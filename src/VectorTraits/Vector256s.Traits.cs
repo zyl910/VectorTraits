@@ -66,13 +66,21 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<short> ShiftLeft(Vector256<short> value, int shiftCount) {
+#if SOFTWARE_BCL_OVERRIDE && (NET7_0_OR_GREATER)
+            return Vector256.ShiftLeft(value, shiftCount);
+#else
             return _instance.ShiftLeft(value, shiftCount);
+#endif // SOFTWARE_BCL_OVERRIDE
         }
 
         /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> ShiftLeft(Vector256<int> value, int shiftCount) {
+#if SOFTWARE_BCL_OVERRIDE && (NET7_0_OR_GREATER)
+            return Vector256.ShiftLeft(value, shiftCount);
+#else
             return _instance.ShiftLeft(value, shiftCount);
+#endif // SOFTWARE_BCL_OVERRIDE
         }
 
         /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{int}, int)"/>
