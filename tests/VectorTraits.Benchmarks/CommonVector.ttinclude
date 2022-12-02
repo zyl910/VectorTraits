@@ -1,0 +1,10 @@
+﻿<#
+    string[] typenameList_VectorTTraits = {
+            "VectorTraitsBase",
+            "VectorTraits128Base",
+            "VectorTraits128AdvSimd",
+            "VectorTraits128AdvSimdA64",
+            "VectorTraits256Base",
+            "VectorTraits256Avx2"
+        };
+#>

@@ -1,0 +1,83 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@include file="../../CommonVector.ttinclude"#>
+<#
+    //string[] typenameList = {
+    //        "VectorTraitsBase",
+    //        "VectorTraits128Base",
+    //        "VectorTraits128AdvSimd",
+    //        "VectorTraits128AdvSimdA64",
+    //        "VectorTraits256Base",
+    //        "VectorTraits256Avx2"
+    //    };
+    string[] typenameList = typenameList_VectorTTraits;
+    string[] tMyNameList = {
+            "Int16",
+            //"Int32"
+    };
+#>
+using BenchmarkDotNet.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Numerics;
+using System.Runtime.CompilerServices;
+using System.Text;
+using Zyl.VectorTraits.Impl;
+
+namespace Zyl.VectorTraits.Benchmarks.AVector.S {
+
+<#
+    foreach(string tMyName in tMyNameList) {
+#>
+    public partial class ShiftLeftBenchmark_<#=tMyName#> {
+
+<#
+    foreach(string aTypeName in typenameList) {
+#>
+        // StaticSLLTraitsOverload - <#=aTypeName#>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe <#=tMyName#> StaticSLLTraitsOverload(<#=aTypeName#> vtt, <#=tMyName#>[] src, int srcCount, int shiftCount) {
+            <#=tMyName#> rt = 0; // Result.
+            int VectorWidth = Vector<<#=tMyName#>>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<<#=tMyName#>> vrt = Vector<<#=tMyName#>>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (<#=tMyName#>* p0 = &src[0]) {
+                <#=tMyName#>* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<<#=tMyName#>> vtemp = vtt.ShiftLeft(*(Vector<<#=tMyName#>>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (<#=tMyName#>)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+<#
+    } // End: foreach(string aTypeName in typenameList)
+#>
+
+    } // End: public partial class ShiftLeftBenchmark_<#=tMyName#>
+<#
+    } // End: foreach(string aTypeName in typenameList)
+#>
+
+}
+
