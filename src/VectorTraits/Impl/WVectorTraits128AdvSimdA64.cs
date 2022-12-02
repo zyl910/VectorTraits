@@ -12,7 +12,7 @@ namespace Zyl.VectorTraits.Impl {
     /// <summary>
     /// <see cref="Vector128{T}"/> traits - AdvSimd architecture-64bit .
     /// </summary>
-    public sealed class WVectorTraits128AdvSimdA64 : WVectorTraits128AdvSimdAbstract {
+    public sealed class WVectorTraits128AdvSimdA64 : WVectorTraits128AdvSimdA64Abstract {
         private static readonly WVectorTraits128AdvSimdA64 _instance = new WVectorTraits128AdvSimdA64(); // Default instance.
 
         /// <summary>Default instance. </summary>

@@ -27,6 +27,13 @@ namespace Zyl.VectorTraits.Tests.Impl {
             int iMax = Vector256s<T>.ElementBitSize + 1;
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             IWVectorTraits256 instance0 = instances[0];
+            foreach (IWVectorTraits256 instance in instances) {
+                if (!instance.IsSupported) {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                    continue;
+                }
+            }
+            // run.
             Vector256<T>[] samples = {
                 Vector256s.Create(src),
                 Vector256s<T>.Demo,

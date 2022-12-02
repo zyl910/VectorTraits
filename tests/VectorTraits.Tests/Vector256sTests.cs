@@ -94,7 +94,7 @@ namespace Zyl.VectorTraits.Tests {
 
         [Test]
         public void TraitsInstances_SourceTest([ValueSource(typeof(Vector256s), nameof(Vector256s.TraitsInstances))] IWVectorTraits256 instances) {
-            Assert.Pass(instances.GetType().FullName);
+            Assert.Pass(instances.GetType().Name);
         }
 #endif
     }
