@@ -35,12 +35,12 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>Traits names array (特征名称数组). </summary>
-        public static string[] TraitsNames {
+        public static IReadOnlyList<string> TraitsNames {
             get { return _traitsNames; }
         }
 
         /// <summary>Traits instances array (特征实例数组). </summary>
-        public static IWVectorTraits256[] TraitsInstances {
+        public static IReadOnlyList<IWVectorTraits256> TraitsInstances {
             get { return _traitsInstances; }
         }
 
