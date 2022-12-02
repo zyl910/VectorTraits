@@ -149,6 +149,8 @@ namespace Zyl.VectorTraits.Benchmarks {
             } else {
                 msg = string.Format("Check-{0}: Fail! {1}", name, ex.Message);
                 Debug.WriteLine(ex);
+                bool ignoreException = ex is NotSupportedException;
+                if (ignoreException) return;
             }
             if (string.IsNullOrEmpty(msg)) return;
             WriteLine(msg);
