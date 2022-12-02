@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Numerics;
+using Zyl.VectorTraits.Impl;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -91,6 +92,10 @@ namespace Zyl.VectorTraits.Tests {
             }
         }
 
+        [Test]
+        public void TraitsInstances_SourceTest([ValueSource(typeof(Vector256s), nameof(Vector256s.TraitsInstances))] IWVectorTraits256 instances) {
+            Assert.Pass(instances.GetType().FullName);
+        }
 #endif
     }
 }
