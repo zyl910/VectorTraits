@@ -55,7 +55,7 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IBaseTraits.GetUnsupportedMessage"/>
             public static string GetUnsupportedMessage(bool noStrict = false) {
-                string rt = "Hardware needs to support Avx, Avx2!";
+                string rt = "Requires hardware support Avx, Avx2!";
 #if NETCOREAPP3_0_OR_GREATER
 #else
                 rt = "Vector256 type is not supported! " + rt;

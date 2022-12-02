@@ -58,7 +58,7 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IBaseTraits.GetUnsupportedMessage"/>
             public static string GetUnsupportedMessage(bool noStrict = false) {
-                string rt = "Hardware needs to support AdvSimd!";
+                string rt = "Requires hardware support AdvSimd!";
 #if NETCOREAPP3_0_OR_GREATER
 #else
                 rt = "Vector128 type is not supported! " + rt;
