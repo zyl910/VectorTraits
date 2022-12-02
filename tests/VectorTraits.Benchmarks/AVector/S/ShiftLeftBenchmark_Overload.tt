@@ -41,7 +41,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #>
         // StaticSLLTraitsOverload - <#=aTypeName#>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe <#=tMyName#> StaticSLLTraitsOverload(<#=aTypeName#> vtt, <#=tMyName#>[] src, int srcCount, int shiftCount) {
+        private static unsafe <#=tMyName#> StaticSLLTraitsOverload(<#=aTypeName#> vectorTraits, <#=tMyName#>[] src, int srcCount, int shiftCount) {
             <#=tMyName#> rt = 0; // Result.
             int VectorWidth = Vector<<#=tMyName#>>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -54,7 +54,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 <#=tMyName#>* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<<#=tMyName#>> vtemp = vtt.ShiftLeft(*(Vector<<#=tMyName#>>*)p, shiftCount);
+                    Vector<<#=tMyName#>> vtemp = vectorTraits.ShiftLeft(*(Vector<<#=tMyName#>>*)p, shiftCount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }

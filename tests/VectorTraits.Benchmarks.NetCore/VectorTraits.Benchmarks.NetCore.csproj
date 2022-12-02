@@ -10,7 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\VectorTraits.Benchmarks\AVector\S\ShiftLeftBenchmark_Overload.cs" Link="AVector\S\ShiftLeftBenchmark_Overload.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\VectorTraits\VectorTraits.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="AVector\S\" />
   </ItemGroup>
 
   <Import Project="..\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems" Label="Shared" />

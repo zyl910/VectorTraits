@@ -14,7 +14,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         // StaticSLLTraitsOverload - VectorTraitsBase
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe Int16 StaticSLLTraitsOverload(VectorTraitsBase vtt, Int16[] src, int srcCount, int shiftCount) {
+        private static unsafe Int16 StaticSLLTraitsOverload(VectorTraitsBase vectorTraits, Int16[] src, int srcCount, int shiftCount) {
             Int16 rt = 0; // Result.
             int VectorWidth = Vector<Int16>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -27,7 +27,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 Int16* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<Int16> vtemp = vtt.ShiftLeft(*(Vector<Int16>*)p, shiftCount);
+                    Vector<Int16> vtemp = vectorTraits.ShiftLeft(*(Vector<Int16>*)p, shiftCount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -45,7 +45,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         // StaticSLLTraitsOverload - VectorTraits128Base
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe Int16 StaticSLLTraitsOverload(VectorTraits128Base vtt, Int16[] src, int srcCount, int shiftCount) {
+        private static unsafe Int16 StaticSLLTraitsOverload(VectorTraits128Base vectorTraits, Int16[] src, int srcCount, int shiftCount) {
             Int16 rt = 0; // Result.
             int VectorWidth = Vector<Int16>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -58,7 +58,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 Int16* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<Int16> vtemp = vtt.ShiftLeft(*(Vector<Int16>*)p, shiftCount);
+                    Vector<Int16> vtemp = vectorTraits.ShiftLeft(*(Vector<Int16>*)p, shiftCount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -76,7 +76,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         // StaticSLLTraitsOverload - VectorTraits128AdvSimd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe Int16 StaticSLLTraitsOverload(VectorTraits128AdvSimd vtt, Int16[] src, int srcCount, int shiftCount) {
+        private static unsafe Int16 StaticSLLTraitsOverload(VectorTraits128AdvSimd vectorTraits, Int16[] src, int srcCount, int shiftCount) {
             Int16 rt = 0; // Result.
             int VectorWidth = Vector<Int16>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -89,7 +89,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 Int16* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<Int16> vtemp = vtt.ShiftLeft(*(Vector<Int16>*)p, shiftCount);
+                    Vector<Int16> vtemp = vectorTraits.ShiftLeft(*(Vector<Int16>*)p, shiftCount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -107,7 +107,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         // StaticSLLTraitsOverload - VectorTraits128AdvSimdA64
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe Int16 StaticSLLTraitsOverload(VectorTraits128AdvSimdA64 vtt, Int16[] src, int srcCount, int shiftCount) {
+        private static unsafe Int16 StaticSLLTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, Int16[] src, int srcCount, int shiftCount) {
             Int16 rt = 0; // Result.
             int VectorWidth = Vector<Int16>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -120,7 +120,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 Int16* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<Int16> vtemp = vtt.ShiftLeft(*(Vector<Int16>*)p, shiftCount);
+                    Vector<Int16> vtemp = vectorTraits.ShiftLeft(*(Vector<Int16>*)p, shiftCount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -138,7 +138,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         // StaticSLLTraitsOverload - VectorTraits256Base
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe Int16 StaticSLLTraitsOverload(VectorTraits256Base vtt, Int16[] src, int srcCount, int shiftCount) {
+        private static unsafe Int16 StaticSLLTraitsOverload(VectorTraits256Base vectorTraits, Int16[] src, int srcCount, int shiftCount) {
             Int16 rt = 0; // Result.
             int VectorWidth = Vector<Int16>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -151,7 +151,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 Int16* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<Int16> vtemp = vtt.ShiftLeft(*(Vector<Int16>*)p, shiftCount);
+                    Vector<Int16> vtemp = vectorTraits.ShiftLeft(*(Vector<Int16>*)p, shiftCount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -169,7 +169,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         // StaticSLLTraitsOverload - VectorTraits256Avx2
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe Int16 StaticSLLTraitsOverload(VectorTraits256Avx2 vtt, Int16[] src, int srcCount, int shiftCount) {
+        private static unsafe Int16 StaticSLLTraitsOverload(VectorTraits256Avx2 vectorTraits, Int16[] src, int srcCount, int shiftCount) {
             Int16 rt = 0; // Result.
             int VectorWidth = Vector<Int16>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -182,7 +182,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 Int16* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<Int16> vtemp = vtt.ShiftLeft(*(Vector<Int16>*)p, shiftCount);
+                    Vector<Int16> vtemp = vectorTraits.ShiftLeft(*(Vector<Int16>*)p, shiftCount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
