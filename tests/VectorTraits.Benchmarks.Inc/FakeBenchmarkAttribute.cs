@@ -9,8 +9,8 @@ namespace Zyl.VectorTraits.Benchmarks {
 	/// Fake <see cref="BenchmarkDotNet.Attributes.BenchmarkAttribute"/>.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Method)]
-	//[MeansImplicitUse]
-	public class FakeBenchmarkAttribute : Attribute {
+    //[MeansImplicitUse]
+    internal class FakeBenchmarkAttribute : Attribute {
 		public string Description { get; set; }
 
 		public bool Baseline { get; set; }

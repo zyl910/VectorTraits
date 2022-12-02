@@ -34,7 +34,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 <#
     foreach(string tMyName in tMyNameList) {
 #>
-    public partial class ShiftLeftBenchmark_<#=tMyName#> {
+    partial class ShiftLeftBenchmark_<#=tMyName#> {
 
 <#
     foreach(string aTypeName in typenameList) {
@@ -74,7 +74,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
     } // End: foreach(string aTypeName in typenameList)
 #>
 
-    } // End: public partial class ShiftLeftBenchmark_<#=tMyName#>
+    } // End: partial class ShiftLeftBenchmark_<#=tMyName#>
 <#
     } // End: foreach(string aTypeName in typenameList)
 #>

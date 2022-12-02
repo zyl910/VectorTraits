@@ -13,7 +13,7 @@ namespace Zyl.VectorTraits.Benchmarks {
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public class IntroDisassemblyDry {
+    internal class IntroDisassemblyDry {
 
         /// <summary>
         /// WriteLine with format.

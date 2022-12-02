@@ -7,7 +7,7 @@ namespace Zyl.VectorTraits.Benchmarks {
     /// <summary>
     /// Abstract demo
     /// </summary>
-    public abstract class AbstractBenchmark {
+    internal abstract class AbstractBenchmark {
         /// <summary>
         /// Is check mode.
         /// </summary>

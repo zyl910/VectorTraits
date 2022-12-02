@@ -10,7 +10,7 @@ using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
-    public partial class ShiftLeftBenchmark_Int16 {
+    partial class ShiftLeftBenchmark_Int16 {
 
         // StaticSLLTraitsOverload - VectorTraitsBase
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -199,7 +199,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
 
-    } // End: public partial class ShiftLeftBenchmark_Int16
+    } // End: partial class ShiftLeftBenchmark_Int16
 
 }
 

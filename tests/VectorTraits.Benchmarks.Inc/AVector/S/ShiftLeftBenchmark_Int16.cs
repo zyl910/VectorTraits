@@ -26,18 +26,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class ShiftLeftBenchmark_Int16 : AbstractSharedBenchmark {
-        // -- TMy ref --
-        private static ref TMy dstTMy => ref dstInt16;
-        private static ref TMy baselineTMy => ref baselineInt16;
-        private static TMy[] srcArray => srcArrayInt16;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void CheckResult(string name) {
-            CheckResultInt16(name);
-        }
-
-
+    internal partial class ShiftLeftBenchmark_Int16 : AbstractSharedBenchmark_Int16 {
 
         // -- var --
         private const byte DefaultShiftCount = 4;

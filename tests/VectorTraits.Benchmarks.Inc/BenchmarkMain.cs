@@ -6,7 +6,7 @@ using System.Text;
 //using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Benchmarks {
-    public class BenchmarkMain {
+    internal class BenchmarkMain {
 
         /// <summary>
         /// Run benchmark.
