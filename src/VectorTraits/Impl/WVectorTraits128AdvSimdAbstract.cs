@@ -37,6 +37,12 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NET5_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{byte}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<byte> ShiftLeft(Vector128<byte> value, int shiftCount) {
+            return Statics.ShiftLeft(value, shiftCount);
+        }
+
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector128<short> ShiftLeft(Vector128<short> value, int shiftCount) {

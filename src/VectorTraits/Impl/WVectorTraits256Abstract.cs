@@ -57,6 +57,12 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{byte}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<byte> ShiftLeft(Vector256<byte> value, int shiftCount) {
+            return Statics.ShiftLeft(value, shiftCount);
+        }
+
         /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector256<short> ShiftLeft(Vector256<short> value, int shiftCount) {

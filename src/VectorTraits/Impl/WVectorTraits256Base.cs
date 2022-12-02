@@ -69,6 +69,16 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{byte}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> ShiftLeft(Vector256<byte> value, int shiftCount) {
+#if SOFTWARE_BCL_OVERRIDE && (NET7_0_OR_GREATER)
+                return Vector256.ShiftLeft(value, shiftCount);
+#else
+                return ShiftLeft_Base(value, shiftCount);
+#endif // SOFTWARE_BCL_OVERRIDE
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> ShiftLeft(Vector256<short> value, int shiftCount) {
@@ -87,6 +97,47 @@ namespace Zyl.VectorTraits.Impl {
 #else
                 return ShiftLeft_Base(value, shiftCount);
 #endif // SOFTWARE_BCL_OVERRIDE
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{byte}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<byte> ShiftLeft_Base(Vector256<byte> value, int shiftCount) {
+                Vector256<byte> rt = value;
+                byte* p = (byte*)&rt;
+                p[0] <<= shiftCount;
+                p[1] <<= shiftCount;
+                p[2] <<= shiftCount;
+                p[3] <<= shiftCount;
+                p[4] <<= shiftCount;
+                p[5] <<= shiftCount;
+                p[6] <<= shiftCount;
+                p[7] <<= shiftCount;
+                p[8] <<= shiftCount;
+                p[9] <<= shiftCount;
+                p[10] <<= shiftCount;
+                p[11] <<= shiftCount;
+                p[12] <<= shiftCount;
+                p[13] <<= shiftCount;
+                p[14] <<= shiftCount;
+                p[15] <<= shiftCount;
+                p[16] <<= shiftCount;
+                p[17] <<= shiftCount;
+                p[18] <<= shiftCount;
+                p[19] <<= shiftCount;
+                p[20] <<= shiftCount;
+                p[21] <<= shiftCount;
+                p[22] <<= shiftCount;
+                p[23] <<= shiftCount;
+                p[24] <<= shiftCount;
+                p[25] <<= shiftCount;
+                p[26] <<= shiftCount;
+                p[27] <<= shiftCount;
+                p[28] <<= shiftCount;
+                p[29] <<= shiftCount;
+                p[30] <<= shiftCount;
+                p[31] <<= shiftCount;
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{short}, int)"/>

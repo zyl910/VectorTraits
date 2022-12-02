@@ -69,6 +69,16 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector128{byte}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> ShiftLeft(Vector128<byte> value, int shiftCount) {
+#if SOFTWARE_BCL_OVERRIDE && (NET7_0_OR_GREATER)
+                return Vector128.ShiftLeft(value, shiftCount);
+#else
+                return ShiftLeft_Base(value, shiftCount);
+#endif // SOFTWARE_BCL_OVERRIDE
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftLeft(Vector128<short> value, int shiftCount) {
@@ -87,6 +97,31 @@ namespace Zyl.VectorTraits.Impl {
 #else
                 return ShiftLeft_Base(value, shiftCount);
 #endif // SOFTWARE_BCL_OVERRIDE
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector128{byte}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<byte> ShiftLeft_Base(Vector128<byte> value, int shiftCount) {
+                Vector128<byte> rt = value;
+                byte* p = (byte*)&rt;
+                p[0] <<= shiftCount;
+                p[1] <<= shiftCount;
+                p[2] <<= shiftCount;
+                p[3] <<= shiftCount;
+                p[4] <<= shiftCount;
+                p[5] <<= shiftCount;
+                p[6] <<= shiftCount;
+                p[7] <<= shiftCount;
+                p[8] <<= shiftCount;
+                p[9] <<= shiftCount;
+                p[10] <<= shiftCount;
+                p[11] <<= shiftCount;
+                p[12] <<= shiftCount;
+                p[13] <<= shiftCount;
+                p[14] <<= shiftCount;
+                p[15] <<= shiftCount;
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector128{short}, int)"/>

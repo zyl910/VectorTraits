@@ -17,6 +17,15 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted.</param>
         /// <param name="shiftCount">The number of bits by which to shift each element.</param>
         /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount"/>.</returns>
+        /// <seealso cref="Vector256.ShiftLeft(Vector256{byte}, int)"/> // .NET 7
+        Vector256<byte> ShiftLeft(Vector256<byte> value, int shiftCount);
+
+        /// <summary>
+        /// Shifts each element of a vector left by the specified amount.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted.</param>
+        /// <param name="shiftCount">The number of bits by which to shift each element.</param>
+        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount"/>.</returns>
         /// <seealso cref="Vector256.ShiftLeft(Vector256{short}, int)"/> // .NET 7
         Vector256<short> ShiftLeft(Vector256<short> value, int shiftCount);
 
