@@ -17,7 +17,7 @@
     string[] typenameList = typenameList_VectorTTraits;
     string[] tMyNameList = {
             "Int16",
-            //"Int32"
+            "Int32"
     };
 #>
 using BenchmarkDotNet.Attributes;

@@ -12,13 +12,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)AbstractBenchmark.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftBenchmark_Int16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BenchmarkMain.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BenchmarkUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FakeBenchmarkAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IntroDisassemblyDry.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)AVector\S\" />
   </ItemGroup>
 </Project>

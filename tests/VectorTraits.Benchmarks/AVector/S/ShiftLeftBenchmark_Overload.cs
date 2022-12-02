@@ -200,6 +200,196 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 
     } // End: partial class ShiftLeftBenchmark_Int16
+    partial class ShiftLeftBenchmark_Int32 {
+
+        // StaticSLLTraitsOverload - VectorTraitsBase
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int32 StaticSLLTraitsOverload(VectorTraitsBase vectorTraits, Int32[] src, int srcCount, int shiftCount) {
+            Int32 rt = 0; // Result.
+            int VectorWidth = Vector<Int32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int32> vrt = Vector<Int32>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (Int32* p0 = &src[0]) {
+                Int32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int32> vtemp = vectorTraits.ShiftLeft(*(Vector<Int32>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int32)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits128Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int32 StaticSLLTraitsOverload(VectorTraits128Base vectorTraits, Int32[] src, int srcCount, int shiftCount) {
+            Int32 rt = 0; // Result.
+            int VectorWidth = Vector<Int32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int32> vrt = Vector<Int32>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (Int32* p0 = &src[0]) {
+                Int32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int32> vtemp = vectorTraits.ShiftLeft(*(Vector<Int32>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int32)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits128AdvSimd
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int32 StaticSLLTraitsOverload(VectorTraits128AdvSimd vectorTraits, Int32[] src, int srcCount, int shiftCount) {
+            Int32 rt = 0; // Result.
+            int VectorWidth = Vector<Int32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int32> vrt = Vector<Int32>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (Int32* p0 = &src[0]) {
+                Int32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int32> vtemp = vectorTraits.ShiftLeft(*(Vector<Int32>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int32)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits128AdvSimdA64
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int32 StaticSLLTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, Int32[] src, int srcCount, int shiftCount) {
+            Int32 rt = 0; // Result.
+            int VectorWidth = Vector<Int32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int32> vrt = Vector<Int32>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (Int32* p0 = &src[0]) {
+                Int32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int32> vtemp = vectorTraits.ShiftLeft(*(Vector<Int32>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int32)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits256Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int32 StaticSLLTraitsOverload(VectorTraits256Base vectorTraits, Int32[] src, int srcCount, int shiftCount) {
+            Int32 rt = 0; // Result.
+            int VectorWidth = Vector<Int32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int32> vrt = Vector<Int32>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (Int32* p0 = &src[0]) {
+                Int32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int32> vtemp = vectorTraits.ShiftLeft(*(Vector<Int32>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int32)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits256Avx2
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int32 StaticSLLTraitsOverload(VectorTraits256Avx2 vectorTraits, Int32[] src, int srcCount, int shiftCount) {
+            Int32 rt = 0; // Result.
+            int VectorWidth = Vector<Int32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int32> vrt = Vector<Int32>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (Int32* p0 = &src[0]) {
+                Int32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int32> vtemp = vectorTraits.ShiftLeft(*(Vector<Int32>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int32)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+
+    } // End: partial class ShiftLeftBenchmark_Int32
 
 }
 
