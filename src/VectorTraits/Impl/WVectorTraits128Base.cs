@@ -104,6 +104,7 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector128<byte> ShiftLeft_Base(Vector128<byte> value, int shiftCount) {
                 Vector128<byte> rt = value;
+                shiftCount &= 7;
                 byte* p = (byte*)&rt;
                 p[0] <<= shiftCount;
                 p[1] <<= shiftCount;
@@ -129,6 +130,7 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector128<short> ShiftLeft_Base(Vector128<short> value, int shiftCount) {
                 Vector128<short> rt = value;
+                shiftCount &= 0x0F;
                 short* p = (short*)&rt;
                 p[0] <<= shiftCount;
                 p[1] <<= shiftCount;
@@ -146,6 +148,7 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector128<int> ShiftLeft_Base(Vector128<int> value, int shiftCount) {
                 Vector128<int> rt = value;
+                shiftCount &= 0x1F;
                 int* p = (int*)&rt;
                 p[0] <<= shiftCount;
                 p[1] <<= shiftCount;
@@ -158,6 +161,7 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector128<int> ShiftRightArithmetic(Vector128<int> value, int shiftCount) {
                 Vector128<int> rt = value;
+                shiftCount &= 0x1F;
                 int* p = (int*)&rt;
                 p[0] >>= shiftCount;
                 p[1] >>= shiftCount;
