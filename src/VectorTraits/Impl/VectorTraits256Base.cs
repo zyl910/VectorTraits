@@ -62,37 +62,37 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> ShiftLeft(Vector<byte> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED_HW && (NET_X_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && (NET_X_0_OR_GREATER)
                 return Vector.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
-#endif // BCL_OVERRIDE_BASE_FIXED_HW
+#endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED_HW && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
-#endif // BCL_OVERRIDE_BASE_FIXED_HW
+#endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED_HW && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
-#endif // BCL_OVERRIDE_BASE_FIXED_HW
+#endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>

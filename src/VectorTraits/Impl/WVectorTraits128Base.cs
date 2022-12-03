@@ -72,31 +72,31 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector128{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftLeft(Vector128<byte> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED_HW && (NET_X_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && (NET_X_0_OR_GREATER)
                 return Vector128.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
                 return ShiftLeft_Base(value, shiftCount);
-#endif // BCL_OVERRIDE_BASE_FIXED_HW
+#endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftLeft(Vector128<short> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED_HW && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
                 return Vector128.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
-#endif // BCL_OVERRIDE_BASE_FIXED_HW
+#endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftLeft(Vector128<int> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED_HW && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
                 return Vector128.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
-#endif // BCL_OVERRIDE_BASE_FIXED_HW
+#endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector128{byte}, int)"/>
