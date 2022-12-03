@@ -147,6 +147,50 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("SumSLL_Base256");
         }
 
+        /// <summary>
+        /// Sum shift left logical - Algorithm - Multiply.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftCount">Shift count.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSLL_Multiply(TMy[] src, int srcCount, int shiftCount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftLeft_Multiply(*(Vector<TMy>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLL_Multiply() {
+            VectorTraitsBase.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumSLL_Multiply(srcArray, srcArray.Length, DefaultShiftCount);
+            CheckResult("SumSLL_Multiply");
+        }
+
 #if NETCOREAPP3_0_OR_GREATER
 
 #endif // NETCOREAPP3_0_OR_GREATER

@@ -58,10 +58,10 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> ShiftLeft(Vector<byte> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_VAR && (NET7_0_OR_GREATER)
-                return Vector.ShiftLeft(value, shiftCount);
-//#elif SOFTWARE_OPTIMIZATION
-//                return ShiftLeft_Bit64(value, shiftCount);
+#if BCL_OVERRIDE_BASE_VAR && (NET_X_0_OR_GREATER)
+                return Vector.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif SOFTWARE_OPTIMIZATION
+                return ShiftLeft_Multiply(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
 #endif // BCL_OVERRIDE_BASE_VAR
@@ -82,8 +82,8 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_VAR && (NET_X_0_OR_GREATER)
-                return Vector.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! (128: sse; 256: avx)
+#if BCL_OVERRIDE_BASE_VAR && (NET7_0_OR_GREATER)
+                return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return ShiftLeft_Multiply(value, shiftCount);
 #else
@@ -131,6 +131,17 @@ namespace Zyl.VectorTraits.Impl {
                     p[i] <<= shiftCount;
                 }
                 return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> ShiftLeft_Multiply(Vector<byte> value, int shiftCount) {
+                const int shiftMax = 7;
+                shiftCount &= shiftMax;
+                Vector<byte> t = Vector.BitwiseAnd(value, Vectors<byte>.GetMaskBits(1 + shiftMax - shiftCount));
+                uint m = (uint)(1 << shiftCount);
+                return Vector.AsVectorByte(Vector.Multiply(Vector.AsVectorUInt32(t), m));
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
