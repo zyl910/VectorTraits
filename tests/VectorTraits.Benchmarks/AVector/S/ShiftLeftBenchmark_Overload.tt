@@ -16,6 +16,7 @@
     //    };
     string[] typenameList = typenameList_VectorTTraits;
     string[] tMyNameList = {
+            "Byte",
             "Int16",
             "Int32"
     };

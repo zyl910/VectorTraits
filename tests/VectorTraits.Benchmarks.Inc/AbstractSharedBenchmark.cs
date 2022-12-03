@@ -65,7 +65,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
-        /// Check before - int array.
+        /// Check before - Int32 array.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected void CheckBeforeArrayInt32() {
@@ -76,7 +76,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
-        /// Check result - int array.
+        /// Check result - Int32 array.
         /// </summary>
         /// <param name="name">Method name.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -100,7 +100,24 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
-        /// Check result - short.
+        /// Check result - Byte.
+        /// </summary>
+        /// <param name="name">Method name.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected void CheckResultByte(string name) {
+            if (!CheckMode) return;
+            if (dstByte != baselineByte) {
+                throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstByte, baselineByte));
+            } else {
+                // Succeed. No output.
+                string msg = string.Format("Check `{0}` Succeed.", name);
+                //writer.WriteLine(indent + msg);
+                Debug.WriteLine(msg);
+            }
+        }
+
+        /// <summary>
+        /// Check result - Int16.
         /// </summary>
         /// <param name="name">Method name.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -117,7 +134,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
-        /// Check result - int.
+        /// Check result - Int32.
         /// </summary>
         /// <param name="name">Method name.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -82,8 +82,8 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_VAR && (NET7_0_OR_GREATER)
-                return Vector.ShiftLeft(value, shiftCount);
+#if BCL_OVERRIDE_BASE_VAR && (NET_X_0_OR_GREATER)
+                return Vector.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! (128: sse; 256: avx)
 #elif SOFTWARE_OPTIMIZATION
                 return ShiftLeft_Multiply(value, shiftCount);
 #else

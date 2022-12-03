@@ -81,6 +81,12 @@ namespace Zyl.VectorTraits {
             _instance.ThrowForUnsupported();
         }
 
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> ShiftLeft(Vector<byte> value, int shiftCount) {
+            return _instance.ShiftLeft(value, shiftCount);
+        }
+
         /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {

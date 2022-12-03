@@ -10,6 +10,196 @@ using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
+    partial class ShiftLeftBenchmark_Byte {
+
+        // StaticSLLTraitsOverload - VectorTraitsBase
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Byte StaticSLLTraitsOverload(VectorTraitsBase vectorTraits, Byte[] src, int srcCount, int shiftCount) {
+            Byte rt = 0; // Result.
+            int VectorWidth = Vector<Byte>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Byte> vrt = Vector<Byte>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (Byte* p0 = &src[0]) {
+                Byte* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Byte> vtemp = vectorTraits.ShiftLeft(*(Vector<Byte>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Byte)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits128Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Byte StaticSLLTraitsOverload(VectorTraits128Base vectorTraits, Byte[] src, int srcCount, int shiftCount) {
+            Byte rt = 0; // Result.
+            int VectorWidth = Vector<Byte>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Byte> vrt = Vector<Byte>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (Byte* p0 = &src[0]) {
+                Byte* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Byte> vtemp = vectorTraits.ShiftLeft(*(Vector<Byte>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Byte)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits128AdvSimd
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Byte StaticSLLTraitsOverload(VectorTraits128AdvSimd vectorTraits, Byte[] src, int srcCount, int shiftCount) {
+            Byte rt = 0; // Result.
+            int VectorWidth = Vector<Byte>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Byte> vrt = Vector<Byte>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (Byte* p0 = &src[0]) {
+                Byte* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Byte> vtemp = vectorTraits.ShiftLeft(*(Vector<Byte>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Byte)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits128AdvSimdA64
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Byte StaticSLLTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, Byte[] src, int srcCount, int shiftCount) {
+            Byte rt = 0; // Result.
+            int VectorWidth = Vector<Byte>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Byte> vrt = Vector<Byte>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (Byte* p0 = &src[0]) {
+                Byte* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Byte> vtemp = vectorTraits.ShiftLeft(*(Vector<Byte>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Byte)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits256Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Byte StaticSLLTraitsOverload(VectorTraits256Base vectorTraits, Byte[] src, int srcCount, int shiftCount) {
+            Byte rt = 0; // Result.
+            int VectorWidth = Vector<Byte>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Byte> vrt = Vector<Byte>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (Byte* p0 = &src[0]) {
+                Byte* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Byte> vtemp = vectorTraits.ShiftLeft(*(Vector<Byte>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Byte)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits256Avx2
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Byte StaticSLLTraitsOverload(VectorTraits256Avx2 vectorTraits, Byte[] src, int srcCount, int shiftCount) {
+            Byte rt = 0; // Result.
+            int VectorWidth = Vector<Byte>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Byte> vrt = Vector<Byte>.Zero; // Vector result.
+            int i;
+            // Body.
+            fixed (Byte* p0 = &src[0]) {
+                Byte* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Byte> vtemp = vectorTraits.ShiftLeft(*(Vector<Byte>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Byte)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+
+    } // End: partial class ShiftLeftBenchmark_Byte
     partial class ShiftLeftBenchmark_Int16 {
 
         // StaticSLLTraitsOverload - VectorTraitsBase
