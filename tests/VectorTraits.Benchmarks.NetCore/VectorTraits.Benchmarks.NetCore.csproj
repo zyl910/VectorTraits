@@ -6,6 +6,9 @@
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>$(DefineConstants);DRY_JOB0;BENCHMARKS_OFF;BENCHMARKS_TRAITS_USAGES</DefineConstants>
     <RootNamespace>Zyl.VectorTraits.Benchmarks.NetCore</RootNamespace>
   </PropertyGroup>
 
