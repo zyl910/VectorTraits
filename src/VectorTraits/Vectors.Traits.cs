@@ -84,25 +84,41 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<byte> ShiftLeft(Vector<byte> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
+            return Vector.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
             return _instance.ShiftLeft(value, shiftCount);
+#endif
         }
 
         /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && (NET7_0_OR_GREATER)
+            return Vector.ShiftLeft(value, shiftCount);
+#else
             return _instance.ShiftLeft(value, shiftCount);
+#endif
         }
 
         /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && (NET7_0_OR_GREATER)
+            return Vector.ShiftLeft(value, shiftCount);
+#else
             return _instance.ShiftLeft(value, shiftCount);
+#endif
         }
 
         /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && (NET7_0_OR_GREATER)
+            return Vector.ShiftRightArithmetic(value, shiftCount);
+#else
             return _instance.ShiftRightArithmetic(value, shiftCount);
+#endif
         }
 
 

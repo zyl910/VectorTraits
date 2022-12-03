@@ -63,22 +63,44 @@ namespace Zyl.VectorTraits {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{byte}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> ShiftLeft(Vector256<byte> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
+            return Vector256.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+            return _instance.ShiftLeft(value, shiftCount);
+#endif
+        }
+
         /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<short> ShiftLeft(Vector256<short> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && (NET7_0_OR_GREATER)
+            return Vector256.ShiftLeft(value, shiftCount);
+#else
             return _instance.ShiftLeft(value, shiftCount);
+#endif
         }
 
         /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> ShiftLeft(Vector256<int> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && (NET7_0_OR_GREATER)
+            return Vector256.ShiftLeft(value, shiftCount);
+#else
             return _instance.ShiftLeft(value, shiftCount);
+#endif
         }
 
         /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> ShiftRightArithmetic(Vector256<int> value, int shiftCount) {
-            return _instance.ShiftLeft(value, shiftCount);
+#if BCL_OVERRIDE_STATIC && (NET7_0_OR_GREATER)
+            return Vector256.ShiftRightArithmetic(value, shiftCount);
+#else
+            return _instance.ShiftRightArithmetic(value, shiftCount);
+#endif
         }
 
 #endif // NETCOREAPP3_0_OR_GREATER
