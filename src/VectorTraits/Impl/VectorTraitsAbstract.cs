@@ -74,6 +74,12 @@ namespace Zyl.VectorTraits.Impl {
             Statics.ThrowForUnsupported(noStrict);
         }
 
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<byte> ShiftLeft(Vector<byte> value, int shiftCount) {
+            return Statics.ShiftLeft(value, shiftCount);
+        }
+
         /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {

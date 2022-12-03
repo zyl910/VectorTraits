@@ -12,7 +12,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
     public class IVectorTraitsTests {
 
         //[TestCase((sbyte)3)]
-        //[TestCase((byte)4)]
+        [TestCase((byte)4)]
         [TestCase((short)5)]
         //[TestCase((ushort)6)]
         [TestCase((int)7)]

@@ -55,6 +55,18 @@ namespace Zyl.VectorTraits.Impl {
                 throw new NotSupportedException(GetUnsupportedMessage(noStrict));
             }
 
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> ShiftLeft(Vector<byte> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_VAR && (NET7_0_OR_GREATER)
+                return Vector.ShiftLeft(value, shiftCount);
+//#elif SOFTWARE_OPTIMIZATION
+//                return ShiftLeft_Bit64(value, shiftCount);
+#else
+                return ShiftLeft_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
@@ -77,6 +89,20 @@ namespace Zyl.VectorTraits.Impl {
 #else
                 return ShiftLeft_Base(value, shiftCount);
 #endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<byte> ShiftLeft_Base(Vector<byte> value, int shiftCount) {
+                Vector<byte> rt = value;
+                shiftCount &= 7;
+                int cnt = Vector<byte>.Count;
+                byte* p = (byte*)&rt;
+                for (int i = 0; i < cnt; ++i) {
+                    p[i] <<= shiftCount;
+                }
+                return rt;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>

@@ -59,13 +59,25 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> ShiftLeft(Vector<byte> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_FIXED_HW && (NET7_0_OR_GREATER)
+                return Vector.ShiftLeft(value, shiftCount);
+//#elif SOFTWARE_OPTIMIZATION
+//                return BaseStatics.ShiftLeft(value, shiftCount);
+#else
+                return ShiftLeft_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_FIXED_HW
+            }
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
 #if BCL_OVERRIDE_BASE_FIXED_HW && (NET7_0_OR_GREATER)
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
-                return BaseStatics.ShiftLeft_Multiply(value, shiftCount);
+                return BaseStatics.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
 #endif // BCL_OVERRIDE_BASE_FIXED_HW
@@ -77,10 +89,52 @@ namespace Zyl.VectorTraits.Impl {
 #if BCL_OVERRIDE_BASE_FIXED_HW && (NET7_0_OR_GREATER)
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
-                return BaseStatics.ShiftLeft_Multiply(value, shiftCount);
+                return BaseStatics.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
 #endif // BCL_OVERRIDE_BASE_FIXED_HW
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<byte> ShiftLeft_Base(Vector<byte> value, int shiftCount) {
+                Vector<byte> rt = value;
+                shiftCount &= 7;
+                byte* p = (byte*)&rt;
+                p[0] <<= shiftCount;
+                p[1] <<= shiftCount;
+                p[2] <<= shiftCount;
+                p[3] <<= shiftCount;
+                p[4] <<= shiftCount;
+                p[5] <<= shiftCount;
+                p[6] <<= shiftCount;
+                p[7] <<= shiftCount;
+                p[8] <<= shiftCount;
+                p[9] <<= shiftCount;
+                p[10] <<= shiftCount;
+                p[11] <<= shiftCount;
+                p[12] <<= shiftCount;
+                p[13] <<= shiftCount;
+                p[14] <<= shiftCount;
+                p[15] <<= shiftCount;
+                p[16] <<= shiftCount;
+                p[17] <<= shiftCount;
+                p[18] <<= shiftCount;
+                p[19] <<= shiftCount;
+                p[20] <<= shiftCount;
+                p[21] <<= shiftCount;
+                p[22] <<= shiftCount;
+                p[23] <<= shiftCount;
+                p[24] <<= shiftCount;
+                p[25] <<= shiftCount;
+                p[26] <<= shiftCount;
+                p[27] <<= shiftCount;
+                p[28] <<= shiftCount;
+                p[29] <<= shiftCount;
+                p[30] <<= shiftCount;
+                p[31] <<= shiftCount;
+                return rt;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
