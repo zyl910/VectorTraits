@@ -58,25 +58,25 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
-#if SOFTWARE_BCL_OVERRIDE && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_VAR && (NET7_0_OR_GREATER)
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return ShiftLeft_Multiply(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
-#endif // SOFTWARE_BCL_OVERRIDE
+#endif // BCL_OVERRIDE_BASE_VAR
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
-#if SOFTWARE_BCL_OVERRIDE && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_VAR && (NET7_0_OR_GREATER)
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return ShiftLeft_Multiply(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
-#endif // SOFTWARE_BCL_OVERRIDE
+#endif // BCL_OVERRIDE_BASE_VAR
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>

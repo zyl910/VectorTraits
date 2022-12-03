@@ -35,7 +35,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>$(DefineConstants);SOFTWARE_OPTIMIZATION;SOFTWARE_BCL_OVERRIDE</DefineConstants>
+    <DefineConstants>$(DefineConstants);SOFTWARE_OPTIMIZATION;BCL_OVERRIDE_BASE_FIXED_HW;BCL_OVERRIDE_BASE_VAR</DefineConstants>
 
     <Title>VectorTraits for .NET and .NET Standard</Title>
     <Product>VectorTraits</Product>

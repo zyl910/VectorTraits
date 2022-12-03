@@ -84,31 +84,19 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
-#if SOFTWARE_BCL_OVERRIDE && (NET7_0_OR_GREATER)
-            return Vector.ShiftLeft(value, shiftCount);
-#else
             return _instance.ShiftLeft(value, shiftCount);
-#endif // SOFTWARE_BCL_OVERRIDE
         }
 
         /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
-#if SOFTWARE_BCL_OVERRIDE && (NET7_0_OR_GREATER)
-            return Vector.ShiftLeft(value, shiftCount);
-#else
             return _instance.ShiftLeft(value, shiftCount);
-#endif // SOFTWARE_BCL_OVERRIDE
         }
 
         /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftCount) {
-#if SOFTWARE_BCL_OVERRIDE && (NET7_0_OR_GREATER)
-            return Vector.ShiftRightArithmetic(value, shiftCount);
-#else
             return _instance.ShiftRightArithmetic(value, shiftCount);
-#endif // SOFTWARE_BCL_OVERRIDE
         }
 
 

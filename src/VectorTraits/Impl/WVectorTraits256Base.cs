@@ -72,31 +72,31 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> ShiftLeft(Vector256<byte> value, int shiftCount) {
-#if SOFTWARE_BCL_OVERRIDE && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED_HW && (NET7_0_OR_GREATER)
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
-#endif // SOFTWARE_BCL_OVERRIDE
+#endif // BCL_OVERRIDE_BASE_FIXED_HW
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> ShiftLeft(Vector256<short> value, int shiftCount) {
-#if SOFTWARE_BCL_OVERRIDE && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED_HW && (NET7_0_OR_GREATER)
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
-#endif // SOFTWARE_BCL_OVERRIDE
+#endif // BCL_OVERRIDE_BASE_FIXED_HW
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> ShiftLeft(Vector256<int> value, int shiftCount) {
-#if SOFTWARE_BCL_OVERRIDE && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED_HW && (NET7_0_OR_GREATER)
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
-#endif // SOFTWARE_BCL_OVERRIDE
+#endif // BCL_OVERRIDE_BASE_FIXED_HW
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{byte}, int)"/>
