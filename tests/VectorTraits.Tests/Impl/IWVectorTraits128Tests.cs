@@ -21,13 +21,13 @@ namespace Zyl.VectorTraits.Tests.Impl {
         //[TestCase((uint)8)]
         //[TestCase((long)9)]
         //[TestCase((ulong)10)]
-        public void ShiftLeft<T>(T src) where T : struct {
+        public void ShiftLeftTest<T>(T src) where T : struct {
             //Vector128<T> vzero = Vector128<T>.Zero;
             //T zero = default;
-            int iMax = Vector128s<T>.ElementBitSize + 1;
+            int shiftCountMax = Vector128s<T>.ElementBitSize + 1;
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             IWVectorTraits128 instance0 = instances[0];
-            foreach(IWVectorTraits128 instance in instances) {
+            foreach (IWVectorTraits128 instance in instances) {
                 if (!instance.IsSupported) {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                     continue;
@@ -40,13 +40,13 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 Vector128s<T>.Serial,
             };
             foreach (Vector128<T> vsrc in samples) {
-                for (int i = -1; i <= iMax; ++i) {
-                    Vector128<T> vbaseline = (Vector128<T>)(object)instance0.ShiftLeft((dynamic)vsrc, i);
+                for (int shiftCount = -1; shiftCount <= shiftCountMax; ++shiftCount) {
+                    Vector128<T> vbaseline = (Vector128<T>)(object)instance0.ShiftLeft((dynamic)vsrc, shiftCount);
                     for (int j = 1; j < instances.Count; ++j) {
                         IWVectorTraits128 instance = instances[j];
                         if (!instance.IsSupported) continue;
-                        Vector128<T> vdst = (Vector128<T>)(object)instance.ShiftLeft((dynamic)vsrc, i);
-                        Assert.AreEqual(vbaseline, vdst, $"{instance.GetType().Name}, shiftCount={i}, vsrc={vsrc}");
+                        Vector128<T> vdst = (Vector128<T>)(object)instance.ShiftLeft((dynamic)vsrc, shiftCount);
+                        Assert.AreEqual(vbaseline, vdst, $"{instance.GetType().Name}, shiftCount={shiftCount}, vsrc={vsrc}");
                     }
                 }
             }
