@@ -24,7 +24,6 @@ namespace Zyl.VectorTraits.Tests.Impl {
             //T zero = default;
             int shiftCountMax = Vectors<T>.ElementBitSize + 1;
             IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
-            IVectorTraits instance0 = instances[0];
             foreach (IVectorTraits instance in instances) {
                 if (!instance.IsSupported) {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -39,11 +38,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
             };
             foreach (Vector<T> vsrc in samples) {
                 for (int shiftCount = -1; shiftCount <= shiftCountMax; ++shiftCount) {
-                    Vector<T> vbaseline = (Vector<T>)(object)instance0.ShiftLeft((dynamic)vsrc, shiftCount);
-                    for (int j = 1; j < instances.Count; ++j) {
-                        IVectorTraits instance = instances[j];
+                    Vector<T> vbaseline = (Vector<T>)Vectors.ShiftLeft((dynamic)vsrc, shiftCount);
+                    foreach (IVectorTraits instance in instances) {
                         if (!instance.IsSupported) continue;
-                        Vector<T> vdst = (Vector<T>)(object)instance.ShiftLeft((dynamic)vsrc, shiftCount);
+                        Vector<T> vdst = (Vector<T>)instance.ShiftLeft((dynamic)vsrc, shiftCount);
                         Assert.AreEqual(vbaseline, vdst, $"{instance.GetType().Name}, shiftCount={shiftCount}, vsrc={vsrc}");
                     }
                 }

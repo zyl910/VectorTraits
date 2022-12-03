@@ -26,7 +26,6 @@ namespace Zyl.VectorTraits.Tests.Impl {
             //T zero = default;
             int shiftCountMax = Vector256s<T>.ElementBitSize + 1;
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
-            IWVectorTraits256 instance0 = instances[0];
             foreach (IWVectorTraits256 instance in instances) {
                 if (!instance.IsSupported) {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -41,11 +40,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
             };
             foreach (Vector256<T> vsrc in samples) {
                 for (int shiftCount = -1; shiftCount <= shiftCountMax; ++shiftCount) {
-                    Vector256<T> vbaseline = (Vector256<T>)(object)instance0.ShiftLeft((dynamic)vsrc, shiftCount);
-                    for (int j = 1; j < instances.Count; ++j) {
-                        IWVectorTraits256 instance = instances[j];
+                    Vector256<T> vbaseline = (Vector256<T>)Vector256s.ShiftLeft((dynamic)vsrc, shiftCount);
+                    foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.IsSupported) continue;
-                        Vector256<T> vdst = (Vector256<T>)(object)instance.ShiftLeft((dynamic)vsrc, shiftCount);
+                        Vector256<T> vdst = (Vector256<T>)instance.ShiftLeft((dynamic)vsrc, shiftCount);
                         Assert.AreEqual(vbaseline, vdst, $"{instance.GetType().Name}, shiftCount={shiftCount}, vsrc={vsrc}");
                     }
                 }
