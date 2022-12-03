@@ -12,6 +12,18 @@
     <RootNamespace>Zyl.VectorTraits.Benchmarks.NetCore</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\VectorTraits.Benchmarks\AVector\S\ShiftLeftBenchmark_Overload.cs" Link="AVector\S\ShiftLeftBenchmark_Overload.cs" />
   </ItemGroup>

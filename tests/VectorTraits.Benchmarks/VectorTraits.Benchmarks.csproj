@@ -6,8 +6,6 @@
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DebugType>pdbonly</DebugType>
-    <DebugSymbols>true</DebugSymbols>
     <DefineConstants>$(DefineConstants);DRY_JOB0;BENCHMARKS_OFF;BENCHMARKS_TRAITS_USAGES</DefineConstants>
     <Company>zyl910</Company>
     <Authors>zyl910</Authors>
@@ -23,10 +21,14 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
   </PropertyGroup>
 
   <Import Project="..\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems" Label="Shared" />
