@@ -22,6 +22,20 @@ namespace Zyl.VectorTraits.Benchmarks {
             CheckResultInt32(name);
         }
 
+        // -- Params --
+        public static int ShiftCountMin {
+            get {
+                //return 1;
+                return -1;
+            }
+        }
+        public static int ShiftCountMax {
+            get {
+                //return 1;
+                return Scalars<TMy>.BitSize + 1;
+            }
+        }
+
 
     }
 }
