@@ -29,7 +29,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
     internal partial class ShiftLeftBenchmark_Byte : AbstractSharedBenchmark_Byte {
 
         // -- var --
-        private const byte DefaultShiftCount = 4;
 
         /// <summary>
         /// Sum shift left logical - base.
@@ -41,6 +40,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TMy StaticSumSLLScalar(TMy[] src, int srcCount, int shiftCount) {
             TMy rt = 0; // Result.
+            shiftCount = Scalars.LimitShiftCount<TMy>(shiftCount);
             for (int i = 0; i < srcCount; ++i) {
                 rt += (TMy)(src[i] << shiftCount);
             }
@@ -49,7 +49,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         [Benchmark(Baseline = true)]
         public void SumSLLScalar() {
-            dstTMy = StaticSumSLLScalar(srcArray, srcArray.Length, DefaultShiftCount);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLScalar(srcArray, srcArray.Length, shiftCount);
+            }
             if (CheckMode) {
                 baselineTMy = dstTMy;
                 BenchmarkUtil.WriteLine(string.Format("# StaticSumSLLScalar:\t{0}", baselineTMy));
@@ -97,7 +100,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         [Benchmark]
         public void SumSLLNet7() {
             //Debugger.Break();
-            dstTMy = StaticSumSLLNet7(srcArray, srcArray.Length, DefaultShiftCount);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLNet7(srcArray, srcArray.Length, shiftCount);
+            }
             CheckResult("SumSLLNet7");
         }
 #endif // NET7_0_OR_GREATER
@@ -145,7 +151,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         [Benchmark]
         public void SumSLL_Base128() {
             VectorTraits128Base.Statics.ThrowForUnsupported(true);
-            dstTMy = StaticSumSLL_Base128(srcArray, srcArray.Length, DefaultShiftCount);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLL_Base128(srcArray, srcArray.Length, shiftCount);
+            }
             CheckResult("SumSLL_Base128");
         }
 
@@ -189,7 +198,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         [Benchmark]
         public void SumSLL_Base256() {
             VectorTraits256Base.Statics.ThrowForUnsupported(true);
-            dstTMy = StaticSumSLL_Base256(srcArray, srcArray.Length, DefaultShiftCount);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLL_Base256(srcArray, srcArray.Length, shiftCount);
+            }
             CheckResult("SumSLL_Base256");
         }
 
@@ -233,7 +245,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         [Benchmark]
         public void SumSLL_Multiply() {
             VectorTraitsBase.Statics.ThrowForUnsupported(true);
-            dstTMy = StaticSumSLL_Multiply(srcArray, srcArray.Length, DefaultShiftCount);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLL_Multiply(srcArray, srcArray.Length, shiftCount);
+            }
             CheckResult("SumSLL_Multiply");
         }
 
@@ -293,7 +308,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         public void SumSLLRawAvx2() {
             VectorTraits256Avx2.Statics.ThrowForUnsupported(true);
             //Debugger.Break();
-            dstTMy = StaticSumSLLRawAvx2(srcArray, srcArray.Length, DefaultShiftCount);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLRawAvx2(srcArray, srcArray.Length, shiftCount);
+            }
             CheckResult("SumSLLRawAvx2");
         }
 #endif // NETCOREAPP3_0_OR_GREATER
@@ -340,7 +358,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         public void SumSLLRawAdvSimd() {
             VectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
             //Debugger.Break();
-            dstTMy = StaticSumSLLRawAdvSimd(srcArray, srcArray.Length, DefaultShiftCount);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLRawAdvSimd(srcArray, srcArray.Length, shiftCount);
+            }
             CheckResult("SumSLLRawAdvSimd");
         }
 #endif // NET5_0_OR_GREATER
@@ -388,7 +409,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         [Benchmark]
         public void SumSLLTraits() {
             //Debugger.Break();
-            dstTMy = StaticSumSLLTraits(srcArray, srcArray.Length, DefaultShiftCount);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLTraits(srcArray, srcArray.Length, shiftCount);
+            }
             CheckResult("SumSLLTraits");
         }
 
@@ -436,13 +460,19 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         [Benchmark]
         public void SumSLLTraitsArg() {
             //Debugger.Break();
-            dstTMy = StaticSLLTraitsArg(Vectors.Instance, srcArray, srcArray.Length, DefaultShiftCount);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSLLTraitsArg(Vectors.Instance, srcArray, srcArray.Length, shiftCount);
+            }
             CheckResult("SLLTraitsArg");
         }
 
         [Benchmark]
         public void SumSLLTraitsArgDynamic() {
-            dstTMy = StaticSLLTraitsArg(Vectors.InstanceDynamic, srcArray, srcArray.Length, DefaultShiftCount);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSLLTraitsArg(Vectors.InstanceDynamic, srcArray, srcArray.Length, shiftCount);
+            }
             CheckResult("SLLTraitsArgDynamic");
         }
 
@@ -486,7 +516,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         [Benchmark]
         public void SumSLLTraitsOverload() {
-            dstTMy = StaticSLLTraitsOverload(Vectors.InstanceDynamic, srcArray, srcArray.Length, DefaultShiftCount);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSLLTraitsOverload(Vectors.InstanceDynamic, srcArray, srcArray.Length, shiftCount);
+            }
             CheckResult("SumSLLTraitsOverload");
         }
 
