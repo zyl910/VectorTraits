@@ -82,20 +82,42 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftLeft(Vector128<byte> value, int shiftCount) {
-                return AdvSimd.ShiftLeftLogical(value, (byte)(shiftCount & 7));
+                shiftCount &= 7;
+                return ShiftLeftFast(value, shiftCount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftLeft(Vector128<short> value, int shiftCount) {
-                return AdvSimd.ShiftLeftLogical(value, (byte)(shiftCount & 0x0F));
+                shiftCount &= 0x0F;
+                return ShiftLeftFast(value, shiftCount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftLeft(Vector128<int> value, int shiftCount) {
-                return Vector128.AsInt32(AdvSimd.ShiftLeftLogical(Vector128.AsUInt32(value), (byte)(shiftCount & 0x1F)));
+                shiftCount &= 0x1F;
+                return ShiftLeftFast(value, shiftCount);
             }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{byte}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> ShiftLeftFast(Vector128<byte> value, int shiftCount) {
+                return AdvSimd.ShiftLeftLogical(value, (byte)shiftCount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{short}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> ShiftLeftFast(Vector128<short> value, int shiftCount) {
+                return AdvSimd.ShiftLeftLogical(value, (byte)shiftCount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{int}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> ShiftLeftFast(Vector128<int> value, int shiftCount) {
+                return Vector128.AsInt32(AdvSimd.ShiftLeftLogical(Vector128.AsUInt32(value), (byte)shiftCount));
+            }
+
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

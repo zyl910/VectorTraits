@@ -103,8 +103,61 @@ namespace Zyl.VectorTraits.Impl {
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector128<byte> ShiftLeft_Base(Vector128<byte> value, int shiftCount) {
-                Vector128<byte> rt = value;
                 shiftCount &= 7;
+                return ShiftLeftFast_Base(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector128{short}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<short> ShiftLeft_Base(Vector128<short> value, int shiftCount) {
+                shiftCount &= 0x0F;
+                return ShiftLeftFast_Base(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector128{int}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<int> ShiftLeft_Base(Vector128<int> value, int shiftCount) {
+                shiftCount &= 0x1F;
+                return ShiftLeftFast_Base(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector128{byte}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> ShiftLeftFast(Vector128<byte> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_FIXED && (NET_X_0_OR_GREATER)
+                return Vector128.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+                return ShiftLeftFast_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector128{short}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> ShiftLeftFast(Vector128<short> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+                return Vector128.ShiftLeft(value, shiftCount);
+#else
+                return ShiftLeftFast_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector128{int}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> ShiftLeftFast(Vector128<int> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+                return Vector128.ShiftLeft(value, shiftCount);
+#else
+                return ShiftLeftFast_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector128{byte}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<byte> ShiftLeftFast_Base(Vector128<byte> value, int shiftCount) {
+                Vector128<byte> rt = value;
                 byte* p = (byte*)&rt;
                 p[0] <<= shiftCount;
                 p[1] <<= shiftCount;
@@ -125,12 +178,11 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector128{short}, int)"/>
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector128{short}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<short> ShiftLeft_Base(Vector128<short> value, int shiftCount) {
+            public static unsafe Vector128<short> ShiftLeftFast_Base(Vector128<short> value, int shiftCount) {
                 Vector128<short> rt = value;
-                shiftCount &= 0x0F;
                 short* p = (short*)&rt;
                 p[0] <<= shiftCount;
                 p[1] <<= shiftCount;
@@ -143,12 +195,11 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector128{int}, int)"/>
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector128{int}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<int> ShiftLeft_Base(Vector128<int> value, int shiftCount) {
+            public static unsafe Vector128<int> ShiftLeftFast_Base(Vector128<int> value, int shiftCount) {
                 Vector128<int> rt = value;
-                shiftCount &= 0x1F;
                 int* p = (int*)&rt;
                 p[0] <<= shiftCount;
                 p[1] <<= shiftCount;
@@ -156,6 +207,7 @@ namespace Zyl.VectorTraits.Impl {
                 p[3] <<= shiftCount;
                 return rt;
             }
+
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

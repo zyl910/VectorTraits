@@ -104,13 +104,13 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> ShiftLeftFast(Vector256<short> value, int shiftCount) {
-                return Avx2.ShiftLeftLogical(value, (byte)(shiftCount & 0x0F));
+                return Avx2.ShiftLeftLogical(value, (byte)shiftCount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> ShiftLeftFast(Vector256<int> value, int shiftCount) {
-                return Avx2.ShiftLeftLogical(value, (byte)(shiftCount & 0x1F));
+                return Avx2.ShiftLeftLogical(value, (byte)shiftCount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{int}, int)"/>

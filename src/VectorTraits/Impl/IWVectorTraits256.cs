@@ -77,6 +77,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft(Vector256{int}, int)"/> // Since: VectorTraits 1.0
         Vector256<int> ShiftLeftFast(Vector256<int> value, int shiftCount);
 
+
         /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount (将向量的每个带符号元素算术右移指定量).
         /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &gt;&gt; shiftCount }</c>, <c>shiftCount &amp;= (T.BitSize-1)</c>.
