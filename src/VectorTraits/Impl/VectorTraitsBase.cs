@@ -140,8 +140,8 @@ namespace Zyl.VectorTraits.Impl {
                 const int shiftMax = 7;
                 shiftCount &= shiftMax;
                 Vector<byte> t = Vector.BitwiseAnd(value, Vectors<byte>.GetMaskBits(1 + shiftMax - shiftCount));
-                uint m = (uint)(1 << shiftCount);
-                return Vector.AsVectorByte(Vector.Multiply(Vector.AsVectorUInt32(t), m));
+                int m = 1 << shiftCount;
+                return Vector.AsVectorByte(Vector.Multiply(Vector.AsVectorInt32(t), m));
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
