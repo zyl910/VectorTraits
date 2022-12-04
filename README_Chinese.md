@@ -23,3 +23,7 @@ VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 
 在 Visual Studio 的 Disassembly窗口可以查看运行时的汇编代码. 例如在支持 Avx指令集的机器上运行时, `Vectors.ShiftLeft` 会被内联编译优化为使用 `vpsllw` 指令.
 ![Vectors.ShiftLeft_use_inline.png](docs/Vectors.ShiftLeft_use_inline.png)
+
+## 特征方法列表
+
+详见: [TraitsMethodList](TraitsMethodList.md)

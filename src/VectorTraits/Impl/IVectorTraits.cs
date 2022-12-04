@@ -9,7 +9,7 @@ namespace Zyl.VectorTraits.Impl {
     /// </summary>
     public interface IVectorTraits : IBaseTraits {
 
-        // SIMD有打包8、16位的移位需求，若也是扩展到32位，打包运算结果会不符。故应统一将掩码限制拓展到 8、16位. 发现.NET6仍然是扩展到32位, 而 .NET7 也统一将掩码限制拓展到 8、16位.
+        // 对于8、16位的移位, C# 会扩展到32位来处理. 但对于SIMD的紧缩8、16位数据来说, 扩展到32位后的运算结果会不符, 故应该先对 shiftCount 做 bitwise-and 运算限制在合理范围内. 实测发现.NET6仍然是扩展到32位, 而 .NET7 也用掩码处理, 故本类库与 .NET7 保持了一致.
         // ---
         // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators
         // Left-shift operator <<
@@ -26,40 +26,44 @@ namespace Zyl.VectorTraits.Impl {
         // If the type of x is long or ulong, the shift count is defined by the low-order six bits of the right-hand operand. That is, the shift count is computed from count & 0x3F (or count & 0b_11_1111).
 
         /// <summary>
-        /// Shifts each element of a vector left by the specified amount.
+        /// Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &lt;&lt; shiftCount }</c>, <c>shiftCount &amp;= (T.BitSize-1)</c>.
         /// </summary>
-        /// <param name="value">The vector whose elements are to be shifted.</param>
-        /// <param name="shiftCount">The number of bits by which to shift each element.</param>
-        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount"/>.</returns>
-        /// <seealso cref="Vector.ShiftLeft(Vector256{byte}, int)"/> // .NET 7
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftCount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted left by <paramref name="shiftCount" /> (每个元素的左移 <paramref name="shiftCount" /> 位的一个向量).</returns>
+        /// <seealso cref="Vector.ShiftLeft(Vector{byte}, int)"/> // Since: .NET 7
         Vector<byte> ShiftLeft(Vector<byte> value, int shiftCount);
 
         /// <summary>
-        /// Shifts each element of a vector left by the specified amount.
+        /// Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &lt;&lt; shiftCount }</c>, <c>shiftCount &amp;= (T.BitSize-1)</c>.
         /// </summary>
-        /// <param name="value">The vector whose elements are to be shifted.</param>
-        /// <param name="shiftCount">The number of bits by which to shift each element.</param>
-        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount"/>.</returns>
-        /// <seealso cref="Vector.ShiftLeft(Vector256{short}, int)"/> // .NET 7
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftCount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted left by <paramref name="shiftCount" /> (每个元素的左移 <paramref name="shiftCount" /> 位的一个向量).</returns>
+        /// <seealso cref="Vector.ShiftLeft(Vector{short}, int)"/> // Since: .NET 7
         Vector<short> ShiftLeft(Vector<short> value, int shiftCount);
 
         /// <summary>
-        /// Shifts each element of a vector left by the specified amount.
+        /// Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &lt;&lt; shiftCount }</c>, <c>shiftCount &amp;= (T.BitSize-1)</c>.
         /// </summary>
-        /// <param name="value">The vector whose elements are to be shifted.</param>
-        /// <param name="shiftCount">The number of bits by which to shift each element.</param>
-        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount"/>.</returns>
-        /// <seealso cref="Vector.ShiftLeft(Vector256{int}, int)"/> // .NET 7
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftCount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted left by <paramref name="shiftCount" /> (每个元素的左移 <paramref name="shiftCount" /> 位的一个向量).</returns>
+        /// <seealso cref="Vector.ShiftLeft(Vector{int}, int)"/> // Since: .NET 7
         Vector<int> ShiftLeft(Vector<int> value, int shiftCount);
 
 
         /// <summary>
-        /// Shifts (signed) each element of a vector right by the specified amount.
+        /// Shifts (signed) each element of a vector right by the specified amount (将向量的每个带符号元素算术右移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &gt;&gt; shiftCount }</c>, <c>shiftCount &amp;= (T.BitSize-1)</c>.
         /// </summary>
-        /// <param name="value">The vector whose elements are to be shifted.</param>
-        /// <param name="shiftCount">The number of bits by which to shift each element.</param>
-        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount"/>.</returns>
-        /// <seealso cref="Vector.ShiftRightArithmetic(Vector256{int}, int)"/> // .NET 7
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftCount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount"/> (每个元素的右移 <paramref name="shiftCount" /> 位的一个向量).</returns>
+        /// <seealso cref="Vector.ShiftRightArithmetic(Vector{int}, int)"/> // Since: .NET 7
         Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftCount);
 
     }

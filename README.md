@@ -24,3 +24,6 @@ Types brief introduction:
 The Disassembly window in Visual Studio allows you to view the assembly code at runtime.  For example, when running on a machine that supports the Avx instruction set, `Vectors.ShiftLeft` will be compiled inline and optimized to use the `vpsllw` instruction.
 ![Vectors.ShiftLeft_use_inline.png](docs/Vectors.ShiftLeft_use_inline.png)
 
+## Traits method list
+
+See: [TraitsMethodList](TraitsMethodList.md)

@@ -36,12 +36,12 @@ namespace Zyl.VectorTraits {
             get { return _instanceDynamic; }
         }
 
-        /// <summary>Traits names array (特征名称数组). </summary>
+        /// <summary>Traits name list (特征名称列表). </summary>
         public static IReadOnlyList<string> TraitsNames {
             get { return _traitsNames; }
         }
 
-        /// <summary>Traits instances array (特征实例数组). </summary>
+        /// <summary>Traits instance list (特征实例列表). </summary>
         public static IReadOnlyList<IWVectorTraits128> TraitsInstances {
             get { return _traitsInstances; }
         }
