@@ -182,6 +182,27 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
+        /// Limit shift count to a valid range by <paramref name="bitSize"/> (根据 <paramref name="bitSize"/> 将位移量限制在有效范围).
+        /// </summary>
+        /// <param name="shiftCount">Shift count (位移量).</param>
+        /// <param name="bitSize">Bit size (位数).</param>
+        /// <returns>Returns the value of <paramref name="shiftCount"/> after it has been limited (返回 <paramref name="shiftCount"/> 被限制后的值).</returns>
+        public static int LimitShiftCountByBitSize(int shiftCount, int bitSize) {
+            return shiftCount & (bitSize - 1);
+        }
+
+        /// <summary>
+        /// Limit shift count to a valid range (将位移量限制在有效范围).
+        /// </summary>
+        /// <typeparam name="T">Target type (目标类型).</typeparam>
+        /// <param name="shiftCount">Shift count (位移量).</param>
+        /// <returns>Returns the value of <paramref name="shiftCount"/> after it has been limited (返回 <paramref name="shiftCount"/> 被限制后的值).</returns>
+        public static int LimitShiftCount<T>(int shiftCount) where T : struct {
+            return LimitShiftCountByBitSize(shiftCount, Scalars<T>.BitSize);
+        }
+
+
+        /// <summary>
         /// Computes the ones-complement(~) (按位取反运算).
         /// </summary>
         /// <typeparam name="T">Target type (目标类型).</typeparam>
