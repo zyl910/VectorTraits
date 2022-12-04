@@ -111,6 +111,16 @@ namespace Zyl.VectorTraits {
 #endif
         }
 
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> ShiftLeft(Vector<long> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && (NET7_0_OR_GREATER)
+            return Vector.ShiftLeft(value, shiftCount);
+#else
+            return _instance.ShiftLeft(value, shiftCount);
+#endif
+        }
+
         /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<byte> ShiftLeftFast(Vector<byte> value, int shiftCount) {
@@ -134,6 +144,16 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> ShiftLeftFast(Vector<int> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && (NET7_0_OR_GREATER)
+            return Vector.ShiftLeft(value, shiftCount);
+#else
+            return _instance.ShiftLeftFast(value, shiftCount);
+#endif
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> ShiftLeftFast(Vector<long> value, int shiftCount) {
 #if BCL_OVERRIDE_STATIC && (NET7_0_OR_GREATER)
             return Vector.ShiftLeft(value, shiftCount);
 #else

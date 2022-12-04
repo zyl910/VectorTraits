@@ -91,12 +91,24 @@ namespace Zyl.VectorTraits.Impl {
 #endif // BCL_OVERRIDE_BASE_VAR
             }
 
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftLeft(Vector<long> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_VAR && (NET7_0_OR_GREATER)
+                return Vector.ShiftLeft(value, shiftCount);
+//#elif SOFTWARE_OPTIMIZATION
+//                return ShiftLeft_Multiply(value, shiftCount);
+#else
+                return ShiftLeft_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<byte> ShiftLeft_Base(Vector<byte> value, int shiftCount) {
                 shiftCount &= 7;
-                return ShiftLeft_Base(value, shiftCount);
+                return ShiftLeftFast_Base(value, shiftCount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
@@ -104,7 +116,7 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<short> ShiftLeft_Base(Vector<short> value, int shiftCount) {
                 shiftCount &= 0x0F;
-                return ShiftLeft_Base(value, shiftCount);
+                return ShiftLeftFast_Base(value, shiftCount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
@@ -112,7 +124,15 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<int> ShiftLeft_Base(Vector<int> value, int shiftCount) {
                 shiftCount &= 0x1F;
-                return ShiftLeft_Base(value, shiftCount);
+                return ShiftLeftFast_Base(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{long}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<long> ShiftLeft_Base(Vector<long> value, int shiftCount) {
+                shiftCount &= 0x3F;
+                return ShiftLeftFast_Base(value, shiftCount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
@@ -138,6 +158,15 @@ namespace Zyl.VectorTraits.Impl {
                 shiftCount &= 0x1F;
                 return ShiftLeftFast_Multiply(value, shiftCount);
             }
+
+            // No hardware acceleration!
+            ///// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{long}, int)"/>
+            //[EditorBrowsable(EditorBrowsableState.Never)]
+            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+            //public static Vector<long> ShiftLeft_Multiply(Vector<long> value, int shiftCount) {
+            //    shiftCount &= 0x3F;
+            //    return ShiftLeftFast_Multiply(value, shiftCount);
+            //}
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -170,6 +199,18 @@ namespace Zyl.VectorTraits.Impl {
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return ShiftLeftFast_Multiply(value, shiftCount);
+#else
+                return ShiftLeftFast_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftLeftFast(Vector<long> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_VAR && (NET7_0_OR_GREATER)
+                return Vector.ShiftLeft(value, shiftCount);
+//#elif SOFTWARE_OPTIMIZATION
+//                return ShiftLeftFast_Multiply(value, shiftCount);
 #else
                 return ShiftLeftFast_Base(value, shiftCount);
 #endif // BCL_OVERRIDE_BASE_VAR
@@ -214,6 +255,19 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{long}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<long> ShiftLeftFast_Base(Vector<long> value, int shiftCount) {
+                Vector<long> rt = value;
+                int cnt = Vector<long>.Count;
+                long* p = (long*)&rt;
+                for (int i = 0; i < cnt; ++i) {
+                    p[i] <<= shiftCount;
+                }
+                return rt;
+            }
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{byte}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -238,6 +292,15 @@ namespace Zyl.VectorTraits.Impl {
                 int m = 1 << shiftCount;
                 return Vector.Multiply(value, m);
             }
+
+            // No hardware acceleration!
+            ///// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{long}, int)"/>
+            //[EditorBrowsable(EditorBrowsableState.Never)]
+            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+            //public static Vector<long> ShiftLeftFast_Multiply(Vector<long> value, int shiftCount) {
+            //    int m = 1 << shiftCount;
+            //    return Vector.Multiply(value, m);
+            //}
 
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>

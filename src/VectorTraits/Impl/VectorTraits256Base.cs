@@ -95,6 +95,18 @@ namespace Zyl.VectorTraits.Impl {
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftLeft(Vector<long> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+                return Vector.ShiftLeft(value, shiftCount);
+#elif SOFTWARE_OPTIMIZATION
+                return BaseStatics.ShiftLeft(value, shiftCount);
+#else
+                return ShiftLeft_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -111,11 +123,19 @@ namespace Zyl.VectorTraits.Impl {
                 return ShiftLeftFast_Base(value, shiftCount);
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<int> ShiftLeft_Base(Vector<int> value, int shiftCount) {
                 shiftCount &= 0x1F;
+                return ShiftLeftFast_Base(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{long}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<long> ShiftLeft_Base(Vector<long> value, int shiftCount) {
+                shiftCount &= 0x3F;
                 return ShiftLeftFast_Base(value, shiftCount);
             }
 
@@ -146,6 +166,18 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftLeftFast(Vector<int> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+                return Vector.ShiftLeft(value, shiftCount);
+#elif SOFTWARE_OPTIMIZATION
+                return BaseStatics.ShiftLeftFast(value, shiftCount);
+#else
+                return ShiftLeftFast_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftLeftFast(Vector<long> value, int shiftCount) {
 #if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
@@ -221,7 +253,7 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{short}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{int}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<int> ShiftLeftFast_Base(Vector<int> value, int shiftCount) {
@@ -235,6 +267,19 @@ namespace Zyl.VectorTraits.Impl {
                 p[5] <<= shiftCount;
                 p[6] <<= shiftCount;
                 p[7] <<= shiftCount;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{long}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<long> ShiftLeftFast_Base(Vector<long> value, int shiftCount) {
+                Vector<long> rt = value;
+                long* p = (long*)&rt;
+                p[0] <<= shiftCount;
+                p[1] <<= shiftCount;
+                p[2] <<= shiftCount;
+                p[3] <<= shiftCount;
                 return rt;
             }
 
