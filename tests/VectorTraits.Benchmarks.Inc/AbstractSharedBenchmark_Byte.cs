@@ -18,18 +18,19 @@ namespace Zyl.VectorTraits.Benchmarks {
         protected static TMy[] srcArray => srcArrayByte;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected void CheckResult(string name) {
+        protected override void CheckResult(string name) {
             CheckResultByte(name);
         }
 
+
         // -- Params --
-        public static int ShiftCountMin {
+        public override int ShiftCountMin {
             get {
                 //return 1;
                 return -1;
             }
         }
-        public static int ShiftCountMax {
+        public override int ShiftCountMax {
             get {
                 //return 1;
                 return Scalars<TMy>.BitSize + 1;

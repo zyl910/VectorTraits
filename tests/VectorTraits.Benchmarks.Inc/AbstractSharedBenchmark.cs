@@ -150,5 +150,44 @@ namespace Zyl.VectorTraits.Benchmarks {
             }
         }
 
+        /// <summary>
+        /// Check result - Int64.
+        /// </summary>
+        /// <param name="name">Method name.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected void CheckResultInt64(string name) {
+            if (!CheckMode) return;
+            if (dstInt64 != baselineInt64) {
+                throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstInt64, baselineInt64));
+            } else {
+                // Succeed. No output.
+                string msg = string.Format("Check `{0}` Succeed.", name);
+                //writer.WriteLine(indent + msg);
+                Debug.WriteLine(msg);
+            }
+        }
+
+        /// <summary>
+        /// Check result.
+        /// </summary>
+        /// <param name="name">Method name.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected abstract void CheckResult(string name);
+
+
+        // -- Params --
+        /// <summary>The shiftCount min value.</summary>
+        public virtual int ShiftCountMin {
+            get {
+                return -1;
+            }
+        }
+        /// <summary>The shiftCount max value.</summary>
+        public virtual int ShiftCountMax {
+            get {
+                return 1;
+            }
+        }
+
     }
 }
