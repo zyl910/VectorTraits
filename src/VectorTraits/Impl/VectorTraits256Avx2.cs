@@ -85,6 +85,27 @@ namespace Zyl.VectorTraits.Impl {
                 return Vectors.AsVector(vtemp);
             }
 
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{byte}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> ShiftLeftFast(Vector<byte> value, int shiftCount) {
+                Vector256<byte> vtemp = WStatics.ShiftLeftFast(Vectors.AsVector256(value), shiftCount);
+                return Vectors.AsVector(vtemp);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{short}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftLeftFast(Vector<short> value, int shiftCount) {
+                Vector256<short> vtemp = WStatics.ShiftLeftFast(Vectors.AsVector256(value), shiftCount);
+                return Vectors.AsVector(vtemp);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{int}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> ShiftLeftFast(Vector<int> value, int shiftCount) {
+                var vtemp = WStatics.ShiftLeftFast(Vectors.AsVector256(value), shiftCount);
+                return Vectors.AsVector(vtemp);
+            }
+
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftCount) {

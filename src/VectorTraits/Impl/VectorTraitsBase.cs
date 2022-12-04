@@ -95,8 +95,91 @@ namespace Zyl.VectorTraits.Impl {
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<byte> ShiftLeft_Base(Vector<byte> value, int shiftCount) {
-                Vector<byte> rt = value;
                 shiftCount &= 7;
+                return ShiftLeft_Base(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<short> ShiftLeft_Base(Vector<short> value, int shiftCount) {
+                shiftCount &= 0x0F;
+                return ShiftLeft_Base(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<int> ShiftLeft_Base(Vector<int> value, int shiftCount) {
+                shiftCount &= 0x1F;
+                return ShiftLeft_Base(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> ShiftLeft_Multiply(Vector<byte> value, int shiftCount) {
+                shiftCount &= 7;
+                return ShiftLeftFast_Multiply(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftLeft_Multiply(Vector<short> value, int shiftCount) {
+                shiftCount &= 0x0F;
+                return ShiftLeftFast_Multiply(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> ShiftLeft_Multiply(Vector<int> value, int shiftCount) {
+                shiftCount &= 0x1F;
+                return ShiftLeftFast_Multiply(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{byte}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> ShiftLeftFast(Vector<byte> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_VAR && (NET_X_0_OR_GREATER)
+                return Vector.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif SOFTWARE_OPTIMIZATION
+                return ShiftLeftFast_Multiply(value, shiftCount);
+#else
+                return ShiftLeftFast_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{short}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftLeftFast(Vector<short> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_VAR && (NET7_0_OR_GREATER)
+                return Vector.ShiftLeft(value, shiftCount);
+#elif SOFTWARE_OPTIMIZATION
+                return ShiftLeftFast_Multiply(value, shiftCount);
+#else
+                return ShiftLeftFast_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{int}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> ShiftLeftFast(Vector<int> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_VAR && (NET7_0_OR_GREATER)
+                return Vector.ShiftLeft(value, shiftCount);
+#elif SOFTWARE_OPTIMIZATION
+                return ShiftLeftFast_Multiply(value, shiftCount);
+#else
+                return ShiftLeftFast_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{byte}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<byte> ShiftLeftFast_Base(Vector<byte> value, int shiftCount) {
+                Vector<byte> rt = value;
                 int cnt = Vector<byte>.Count;
                 byte* p = (byte*)&rt;
                 for (int i = 0; i < cnt; ++i) {
@@ -105,12 +188,11 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{short}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<short> ShiftLeft_Base(Vector<short> value, int shiftCount) {
+            public static unsafe Vector<short> ShiftLeftFast_Base(Vector<short> value, int shiftCount) {
                 Vector<short> rt = value;
-                shiftCount &= 0x0F;
                 int cnt = Vector<short>.Count;
                 short* p = (short*)&rt;
                 for (int i = 0; i < cnt; ++i) {
@@ -119,12 +201,11 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{int}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<int> ShiftLeft_Base(Vector<int> value, int shiftCount) {
+            public static unsafe Vector<int> ShiftLeftFast_Base(Vector<int> value, int shiftCount) {
                 Vector<int> rt = value;
-                shiftCount &= 0x1F;
                 int cnt = Vector<int>.Count;
                 int* p = (int*)&rt;
                 for (int i = 0; i < cnt; ++i) {
@@ -133,30 +214,28 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{byte}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<byte> ShiftLeft_Multiply(Vector<byte> value, int shiftCount) {
-                const int shiftMax = 7;
-                shiftCount &= shiftMax;
-                Vector<byte> t = Vector.BitwiseAnd(value, Vectors<byte>.GetMaskBits(1 + shiftMax - shiftCount));
+            public static Vector<byte> ShiftLeftFast_Multiply(Vector<byte> value, int shiftCount) {
+                Vector<byte> t = Vector.BitwiseAnd(value, Vectors<byte>.GetMaskBits(8 - shiftCount));
                 int m = 1 << shiftCount;
                 return Vector.AsVectorByte(Vector.Multiply(Vector.AsVectorInt32(t), m));
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{short}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<short> ShiftLeft_Multiply(Vector<short> value, int shiftCount) {
-                short m = (short)(1 << (shiftCount & 0x0F));
+            public static Vector<short> ShiftLeftFast_Multiply(Vector<short> value, int shiftCount) {
+                short m = (short)(1 << shiftCount);
                 return Vector.Multiply(value, m);
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{int}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<int> ShiftLeft_Multiply(Vector<int> value, int shiftCount) {
-                int m = 1 << (shiftCount & 0x1F);
+            public static Vector<int> ShiftLeftFast_Multiply(Vector<int> value, int shiftCount) {
+                int m = 1 << shiftCount;
                 return Vector.Multiply(value, m);
             }
 

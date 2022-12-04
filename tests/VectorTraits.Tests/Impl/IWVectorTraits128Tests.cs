@@ -24,7 +24,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
         public void ShiftLeftTest<T>(T src) where T : struct {
             //Vector128<T> vzero = Vector128<T>.Zero;
             //T zero = default;
-            int shiftCountMax = Vector128s<T>.ElementBitSize + 1;
+            int shiftCountMax = Scalars<T>.BitSize + 1;
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
                 if (!instance.IsSupported) {
@@ -61,7 +61,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
         public void ShiftLeftFastTest<T>(T src) where T : struct {
             //Vector128<T> vzero = Vector128<T>.Zero;
             //T zero = default;
-            int shiftCountMax = Vector128s<T>.ElementBitSize - 1;
+            int shiftCountMax = Scalars<T>.BitSize - 1;
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
                 if (!instance.IsSupported) {
