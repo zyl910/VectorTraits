@@ -51,6 +51,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<<#=tMyName#>> vrt = Vector<<#=tMyName#>>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<<#=tMyName#>>(shiftCount);
             fixed (<#=tMyName#>* p0 = &src[0]) {
                 <#=tMyName#>* p = p0;
                 // Vector processs.

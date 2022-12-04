@@ -23,6 +23,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Byte> vrt = Vector<Byte>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Byte>(shiftCount);
             fixed (Byte* p0 = &src[0]) {
                 Byte* p = p0;
                 // Vector processs.
@@ -54,6 +55,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Byte> vrt = Vector<Byte>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Byte>(shiftCount);
             fixed (Byte* p0 = &src[0]) {
                 Byte* p = p0;
                 // Vector processs.
@@ -85,6 +87,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Byte> vrt = Vector<Byte>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Byte>(shiftCount);
             fixed (Byte* p0 = &src[0]) {
                 Byte* p = p0;
                 // Vector processs.
@@ -116,6 +119,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Byte> vrt = Vector<Byte>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Byte>(shiftCount);
             fixed (Byte* p0 = &src[0]) {
                 Byte* p = p0;
                 // Vector processs.
@@ -147,6 +151,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Byte> vrt = Vector<Byte>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Byte>(shiftCount);
             fixed (Byte* p0 = &src[0]) {
                 Byte* p = p0;
                 // Vector processs.
@@ -178,6 +183,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Byte> vrt = Vector<Byte>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Byte>(shiftCount);
             fixed (Byte* p0 = &src[0]) {
                 Byte* p = p0;
                 // Vector processs.
@@ -213,6 +219,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Int16> vrt = Vector<Int16>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Int16>(shiftCount);
             fixed (Int16* p0 = &src[0]) {
                 Int16* p = p0;
                 // Vector processs.
@@ -244,6 +251,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Int16> vrt = Vector<Int16>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Int16>(shiftCount);
             fixed (Int16* p0 = &src[0]) {
                 Int16* p = p0;
                 // Vector processs.
@@ -275,6 +283,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Int16> vrt = Vector<Int16>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Int16>(shiftCount);
             fixed (Int16* p0 = &src[0]) {
                 Int16* p = p0;
                 // Vector processs.
@@ -306,6 +315,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Int16> vrt = Vector<Int16>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Int16>(shiftCount);
             fixed (Int16* p0 = &src[0]) {
                 Int16* p = p0;
                 // Vector processs.
@@ -337,6 +347,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Int16> vrt = Vector<Int16>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Int16>(shiftCount);
             fixed (Int16* p0 = &src[0]) {
                 Int16* p = p0;
                 // Vector processs.
@@ -368,6 +379,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Int16> vrt = Vector<Int16>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Int16>(shiftCount);
             fixed (Int16* p0 = &src[0]) {
                 Int16* p = p0;
                 // Vector processs.
@@ -403,6 +415,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Int32> vrt = Vector<Int32>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Int32>(shiftCount);
             fixed (Int32* p0 = &src[0]) {
                 Int32* p = p0;
                 // Vector processs.
@@ -434,6 +447,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Int32> vrt = Vector<Int32>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Int32>(shiftCount);
             fixed (Int32* p0 = &src[0]) {
                 Int32* p = p0;
                 // Vector processs.
@@ -465,6 +479,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Int32> vrt = Vector<Int32>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Int32>(shiftCount);
             fixed (Int32* p0 = &src[0]) {
                 Int32* p = p0;
                 // Vector processs.
@@ -496,6 +511,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Int32> vrt = Vector<Int32>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Int32>(shiftCount);
             fixed (Int32* p0 = &src[0]) {
                 Int32* p = p0;
                 // Vector processs.
@@ -527,6 +543,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Int32> vrt = Vector<Int32>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Int32>(shiftCount);
             fixed (Int32* p0 = &src[0]) {
                 Int32* p = p0;
                 // Vector processs.
@@ -558,6 +575,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<Int32> vrt = Vector<Int32>.Zero; // Vector result.
             int i;
             // Body.
+            shiftCount = Scalars.LimitShiftCount<Int32>(shiftCount);
             fixed (Int32* p0 = &src[0]) {
                 Int32* p = p0;
                 // Vector processs.
