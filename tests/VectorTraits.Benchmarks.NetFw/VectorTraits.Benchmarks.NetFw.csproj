@@ -39,7 +39,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <DefineConstants>$(DefineConstants);DRY_JOB0;BENCHMARKS_OFF;BENCHMARKS_TRAITS_USAGES</DefineConstants>
+    <DefineConstants>$(DefineConstants);DRY_JOB0;BENCHMARKS_OFF;BENCHMARKS_TRAITS_USAGES;BENCHMARKS_TARGET_FAST</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 #define BENCHMARKS_ALGORITHM
 #define BENCHMARKS_RAW
 
@@ -435,7 +435,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="shiftCount">Shift count.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSLLTraitsArg(IVectorTraits vectorTraits, TMy[] src, int srcCount, int shiftCount) {
+        private static unsafe TMy StaticSumSLLTraitsArg(IVectorTraits vectorTraits, TMy[] src, int srcCount, int shiftCount) {
             TMy rt = 0; // Result.
             int VectorWidth = Vector<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -470,18 +470,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             //Debugger.Break();
             dstTMy = 0;
             for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
-                dstTMy += StaticSLLTraitsArg(Vectors.Instance, srcArray, srcArray.Length, shiftCount);
+                dstTMy += StaticSumSLLTraitsArg(Vectors.Instance, srcArray, srcArray.Length, shiftCount);
             }
-            CheckResult("SLLTraitsArg");
+            CheckResult("SumSLLTraitsArg");
         }
 
         [Benchmark]
         public void SumSLLTraitsArgDynamic() {
             dstTMy = 0;
             for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
-                dstTMy += StaticSLLTraitsArg(Vectors.InstanceDynamic, srcArray, srcArray.Length, shiftCount);
+                dstTMy += StaticSumSLLTraitsArg(Vectors.InstanceDynamic, srcArray, srcArray.Length, shiftCount);
             }
-            CheckResult("SLLTraitsArgDynamic");
+            CheckResult("SumSLLTraitsArgDynamic");
         }
 
         /// <summary>
@@ -493,7 +493,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="shiftCount">Shift count.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSLLTraitsOverload(IVectorTraits vectorTraits, TMy[] src, int srcCount, int shiftCount) {
+        private static unsafe TMy StaticSumSLLTraitsOverload(IVectorTraits vectorTraits, TMy[] src, int srcCount, int shiftCount) {
             TMy rt = 0; // Result.
             int VectorWidth = Vector<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -527,13 +527,446 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         public void SumSLLTraitsOverload() {
             dstTMy = 0;
             for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
-                dstTMy += StaticSLLTraitsOverload(Vectors.InstanceDynamic, srcArray, srcArray.Length, shiftCount);
+                dstTMy += StaticSumSLLTraitsOverload(Vectors.InstanceDynamic, srcArray, srcArray.Length, shiftCount);
             }
             CheckResult("SumSLLTraitsOverload");
         }
 
 #endif // BENCHMARKS_TRAITS_USAGES
         #endregion // BENCHMARKS_TRAITS_USAGES
+
+
+        #region BENCHMARKS_TARGET_FAST
+#if BENCHMARKS_TARGET_FAST
+
+        #region BENCHMARKS_ALGORITHM
+#if BENCHMARKS_ALGORITHM
+
+        /// <summary>
+        /// Sum shift left logical fast - Algorithm - Base128.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftCount">Shift count.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSLLFast_Base128(TMy[] src, int srcCount, int shiftCount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<TMy>(shiftCount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraits128Base.Statics.ShiftLeftFast_Base(*(Vector<TMy>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLFast_Base128() {
+            VectorTraits128Base.Statics.ThrowForUnsupported(true);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLFast_Base128(srcArray, srcArray.Length, shiftCount);
+            }
+            CheckResult("SumSLLFast_Base128");
+        }
+
+        /// <summary>
+        /// Sum shift left logical fast - Algorithm - 256Base.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftCount">Shift count.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSLLFast_Base256(TMy[] src, int srcCount, int shiftCount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<TMy>(shiftCount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraits256Base.Statics.ShiftLeftFast_Base(*(Vector<TMy>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLFast_Base256() {
+            VectorTraits256Base.Statics.ThrowForUnsupported(true);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLFast_Base256(srcArray, srcArray.Length, shiftCount);
+            }
+            CheckResult("SumSLLFast_Base256");
+        }
+
+        /// <summary>
+        /// Sum shift left logical fast - Algorithm - Multiply.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftCount">Shift count.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSLLFast_Multiply(TMy[] src, int srcCount, int shiftCount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<TMy>(shiftCount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftLeftFast_Multiply(*(Vector<TMy>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLFast_Multiply() {
+            VectorTraitsBase.Statics.ThrowForUnsupported(true);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLFast_Multiply(srcArray, srcArray.Length, shiftCount);
+            }
+            CheckResult("SumSLLFast_Multiply");
+        }
+
+#if NETCOREAPP3_0_OR_GREATER
+
+#endif // NETCOREAPP3_0_OR_GREATER
+
+#if NET5_0_OR_GREATER
+
+#endif // NET5_0_OR_GREATER
+
+#endif // BENCHMARKS_ALGORITHM
+        #endregion // BENCHMARKS_ALGORITHM
+
+        #region BENCHMARKS_RAW
+#if BENCHMARKS_RAW
+
+#if NETCOREAPP3_0_OR_GREATER
+        /// <summary>
+        /// Sum shift left logical fast - Raw - Avx.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftCount">Shift count.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSLLFastRawAvx2(TMy[] src, int srcCount, int shiftCount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<TMy>(shiftCount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftLeftFast(*(Vector<TMy>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLFastRawAvx2() {
+            VectorTraits256Avx2.Statics.ThrowForUnsupported(true);
+            //Debugger.Break();
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLFastRawAvx2(srcArray, srcArray.Length, shiftCount);
+            }
+            CheckResult("SumSLLFastRawAvx2");
+        }
+#endif // NETCOREAPP3_0_OR_GREATER
+
+#if NET5_0_OR_GREATER
+        /// <summary>
+        /// Sum shift left logical fast - Raw - Avx.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftCount">Shift count.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSLLFastRawAdvSimd(TMy[] src, int srcCount, int shiftCount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<TMy>(shiftCount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftLeftFast(*(Vector<TMy>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLFastRawAdvSimd() {
+            VectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
+            //Debugger.Break();
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLFastRawAdvSimd(srcArray, srcArray.Length, shiftCount);
+            }
+            CheckResult("SumSLLFastRawAdvSimd");
+        }
+#endif // NET5_0_OR_GREATER
+
+#endif // BENCHMARKS_RAW
+        #endregion // BENCHMARKS_RAW
+
+        /// <summary>
+        /// Sum shift left logical fast - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftCount">Shift count.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] // 'VectorTTraits.Instance' is compiled inline to the actual type.
+        private static unsafe TMy StaticSumSLLFastTraits(TMy[] src, int srcCount, int shiftCount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<TMy>(shiftCount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = Vectors.ShiftLeftFast(*(Vector<TMy>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLFastTraits() {
+            //Debugger.Break();
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLFastTraits(srcArray, srcArray.Length, shiftCount);
+            }
+            CheckResult("SumSLLFastTraits");
+        }
+
+        #region BENCHMARKS_TRAITS_USAGES
+#if BENCHMARKS_TRAITS_USAGES
+
+        /// <summary>
+        /// Sum shift left logical fast - Traits argument.
+        /// </summary>
+        /// <param name="vectorTraits">The <see cref="IVectorTraits"/> instance.</param>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftCount">Shift count.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSLLFastTraitsArg(IVectorTraits vectorTraits, TMy[] src, int srcCount, int shiftCount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<TMy>(shiftCount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = vectorTraits.ShiftLeftFast(*(Vector<TMy>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLFastTraitsArg() {
+            //Debugger.Break();
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLFastTraitsArg(Vectors.Instance, srcArray, srcArray.Length, shiftCount);
+            }
+            CheckResult("SumSLLFastTraitsArg");
+        }
+
+        [Benchmark]
+        public void SumSLLFastTraitsArgDynamic() {
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLFastTraitsArg(Vectors.InstanceDynamic, srcArray, srcArray.Length, shiftCount);
+            }
+            CheckResult("SumSLLFastTraitsArgDynamic");
+        }
+
+        /// <summary>
+        /// Sum shift left logical fast - Traits overload.
+        /// </summary>
+        /// <param name="vectorTraits">The <see cref="IVectorTraits"/> instance.</param>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftCount">Shift count.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSLLFastTraitsOverload(IVectorTraits vectorTraits, TMy[] src, int srcCount, int shiftCount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<TMy>(shiftCount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = vectorTraits.ShiftLeftFast(*(Vector<TMy>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLFastTraitsOverload() {
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLFastTraitsOverload(Vectors.InstanceDynamic, srcArray, srcArray.Length, shiftCount);
+            }
+            CheckResult("SumSLLFastTraitsOverload");
+        }
+
+#endif // BENCHMARKS_TRAITS_USAGES
+        #endregion // BENCHMARKS_TRAITS_USAGES
+
+#endif // BENCHMARKS_TARGET_FAST
+        #endregion // BENCHMARKS_TARGET_FAST
 
     }
 }
