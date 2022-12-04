@@ -76,6 +76,12 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.ShiftLeft(value, shiftCount);
         }
 
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<long> ShiftLeft(Vector128<long> value, int shiftCount) {
+            return Statics.ShiftLeft(value, shiftCount);
+        }
+
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector128<byte> ShiftLeftFast(Vector128<byte> value, int shiftCount) {
@@ -93,6 +99,13 @@ namespace Zyl.VectorTraits.Impl {
         public virtual Vector128<int> ShiftLeftFast(Vector128<int> value, int shiftCount) {
             return Statics.ShiftLeftFast(value, shiftCount);
         }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<long> ShiftLeftFast(Vector128<long> value, int shiftCount) {
+            return Statics.ShiftLeftFast(value, shiftCount);
+        }
+
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

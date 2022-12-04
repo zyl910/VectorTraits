@@ -19,7 +19,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
         //[TestCase((ushort)6)]
         [TestCase((int)7)]
         //[TestCase((uint)8)]
-        //[TestCase((long)9)]
+        [TestCase((long)9)]
         //[TestCase((ulong)10)]
         public void ShiftLeftTest<T>(T src) where T : struct {
             //Vector128<T> vzero = Vector128<T>.Zero;
@@ -56,7 +56,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
         //[TestCase((ushort)6)]
         [TestCase((int)7)]
         //[TestCase((uint)8)]
-        //[TestCase((long)9)]
+        [TestCase((long)9)]
         //[TestCase((ulong)10)]
         public void ShiftLeftFastTest<T>(T src) where T : struct {
             //Vector128<T> vzero = Vector128<T>.Zero;

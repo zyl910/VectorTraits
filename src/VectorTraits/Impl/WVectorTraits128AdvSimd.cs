@@ -100,6 +100,13 @@ namespace Zyl.VectorTraits.Impl {
                 return ShiftLeftFast(value, shiftCount);
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ShiftLeft(Vector128<long> value, int shiftCount) {
+                shiftCount &= 0x3F;
+                return ShiftLeftFast(value, shiftCount);
+            }
+
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftLeftFast(Vector128<byte> value, int shiftCount) {
@@ -116,6 +123,12 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftLeftFast(Vector128<int> value, int shiftCount) {
                 return Vector128.AsInt32(AdvSimd.ShiftLeftLogical(Vector128.AsUInt32(value), (byte)shiftCount));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ShiftLeftFast(Vector128<long> value, int shiftCount) {
+                return AdvSimd.ShiftLeftLogical(value, (byte)shiftCount);
             }
 
 
