@@ -72,6 +72,38 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             return rt;
         }
 
+        // StaticSLLFastTraitsOverload - <#=aTypeName#>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe <#=tMyName#> StaticSLLFastTraitsOverload(<#=aTypeName#> vectorTraits, <#=tMyName#>[] src, int srcCount, int shiftCount) {
+            <#=tMyName#> rt = 0; // Result.
+            int VectorWidth = Vector<<#=tMyName#>>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<<#=tMyName#>> vrt = Vector<<#=tMyName#>>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<<#=tMyName#>>(shiftCount);
+            fixed (<#=tMyName#>* p0 = &src[0]) {
+                <#=tMyName#>* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<<#=tMyName#>> vtemp = vectorTraits.ShiftLeftFast(*(Vector<<#=tMyName#>>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (<#=tMyName#>)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
 <#
     } // End: foreach(string aTypeName in typenameList)
 #>
