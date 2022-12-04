@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftBenchmark_Byte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftBenchmark_Int32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftBenchmark_Int64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BenchmarkMain.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BenchmarkUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FakeBenchmarkAttribute.cs" />

@@ -1174,6 +1174,394 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 
     } // End: partial class ShiftLeftBenchmark_Int32
+    partial class ShiftLeftBenchmark_Int64 {
+
+        // StaticSLLTraitsOverload - VectorTraitsBase
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int64 StaticSLLTraitsOverload(VectorTraitsBase vectorTraits, Int64[] src, int srcCount, int shiftCount) {
+            Int64 rt = 0; // Result.
+            int VectorWidth = Vector<Int64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int64> vrt = Vector<Int64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<Int64>(shiftCount);
+            fixed (Int64* p0 = &src[0]) {
+                Int64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int64> vtemp = vectorTraits.ShiftLeft(*(Vector<Int64>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int64)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLFastTraitsOverload - VectorTraitsBase
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int64 StaticSLLFastTraitsOverload(VectorTraitsBase vectorTraits, Int64[] src, int srcCount, int shiftCount) {
+            Int64 rt = 0; // Result.
+            int VectorWidth = Vector<Int64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int64> vrt = Vector<Int64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<Int64>(shiftCount);
+            fixed (Int64* p0 = &src[0]) {
+                Int64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int64> vtemp = vectorTraits.ShiftLeftFast(*(Vector<Int64>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int64)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits128Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int64 StaticSLLTraitsOverload(VectorTraits128Base vectorTraits, Int64[] src, int srcCount, int shiftCount) {
+            Int64 rt = 0; // Result.
+            int VectorWidth = Vector<Int64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int64> vrt = Vector<Int64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<Int64>(shiftCount);
+            fixed (Int64* p0 = &src[0]) {
+                Int64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int64> vtemp = vectorTraits.ShiftLeft(*(Vector<Int64>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int64)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLFastTraitsOverload - VectorTraits128Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int64 StaticSLLFastTraitsOverload(VectorTraits128Base vectorTraits, Int64[] src, int srcCount, int shiftCount) {
+            Int64 rt = 0; // Result.
+            int VectorWidth = Vector<Int64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int64> vrt = Vector<Int64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<Int64>(shiftCount);
+            fixed (Int64* p0 = &src[0]) {
+                Int64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int64> vtemp = vectorTraits.ShiftLeftFast(*(Vector<Int64>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int64)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits128AdvSimd
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int64 StaticSLLTraitsOverload(VectorTraits128AdvSimd vectorTraits, Int64[] src, int srcCount, int shiftCount) {
+            Int64 rt = 0; // Result.
+            int VectorWidth = Vector<Int64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int64> vrt = Vector<Int64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<Int64>(shiftCount);
+            fixed (Int64* p0 = &src[0]) {
+                Int64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int64> vtemp = vectorTraits.ShiftLeft(*(Vector<Int64>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int64)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLFastTraitsOverload - VectorTraits128AdvSimd
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int64 StaticSLLFastTraitsOverload(VectorTraits128AdvSimd vectorTraits, Int64[] src, int srcCount, int shiftCount) {
+            Int64 rt = 0; // Result.
+            int VectorWidth = Vector<Int64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int64> vrt = Vector<Int64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<Int64>(shiftCount);
+            fixed (Int64* p0 = &src[0]) {
+                Int64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int64> vtemp = vectorTraits.ShiftLeftFast(*(Vector<Int64>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int64)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits128AdvSimdA64
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int64 StaticSLLTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, Int64[] src, int srcCount, int shiftCount) {
+            Int64 rt = 0; // Result.
+            int VectorWidth = Vector<Int64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int64> vrt = Vector<Int64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<Int64>(shiftCount);
+            fixed (Int64* p0 = &src[0]) {
+                Int64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int64> vtemp = vectorTraits.ShiftLeft(*(Vector<Int64>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int64)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLFastTraitsOverload - VectorTraits128AdvSimdA64
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int64 StaticSLLFastTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, Int64[] src, int srcCount, int shiftCount) {
+            Int64 rt = 0; // Result.
+            int VectorWidth = Vector<Int64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int64> vrt = Vector<Int64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<Int64>(shiftCount);
+            fixed (Int64* p0 = &src[0]) {
+                Int64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int64> vtemp = vectorTraits.ShiftLeftFast(*(Vector<Int64>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int64)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits256Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int64 StaticSLLTraitsOverload(VectorTraits256Base vectorTraits, Int64[] src, int srcCount, int shiftCount) {
+            Int64 rt = 0; // Result.
+            int VectorWidth = Vector<Int64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int64> vrt = Vector<Int64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<Int64>(shiftCount);
+            fixed (Int64* p0 = &src[0]) {
+                Int64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int64> vtemp = vectorTraits.ShiftLeft(*(Vector<Int64>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int64)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLFastTraitsOverload - VectorTraits256Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int64 StaticSLLFastTraitsOverload(VectorTraits256Base vectorTraits, Int64[] src, int srcCount, int shiftCount) {
+            Int64 rt = 0; // Result.
+            int VectorWidth = Vector<Int64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int64> vrt = Vector<Int64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<Int64>(shiftCount);
+            fixed (Int64* p0 = &src[0]) {
+                Int64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int64> vtemp = vectorTraits.ShiftLeftFast(*(Vector<Int64>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int64)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLTraitsOverload - VectorTraits256Avx2
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int64 StaticSLLTraitsOverload(VectorTraits256Avx2 vectorTraits, Int64[] src, int srcCount, int shiftCount) {
+            Int64 rt = 0; // Result.
+            int VectorWidth = Vector<Int64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int64> vrt = Vector<Int64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<Int64>(shiftCount);
+            fixed (Int64* p0 = &src[0]) {
+                Int64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int64> vtemp = vectorTraits.ShiftLeft(*(Vector<Int64>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int64)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSLLFastTraitsOverload - VectorTraits256Avx2
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe Int64 StaticSLLFastTraitsOverload(VectorTraits256Avx2 vectorTraits, Int64[] src, int srcCount, int shiftCount) {
+            Int64 rt = 0; // Result.
+            int VectorWidth = Vector<Int64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<Int64> vrt = Vector<Int64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<Int64>(shiftCount);
+            fixed (Int64* p0 = &src[0]) {
+                Int64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<Int64> vtemp = vectorTraits.ShiftLeftFast(*(Vector<Int64>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (Int64)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+
+    } // End: partial class ShiftLeftBenchmark_Int64
 
 }
 
