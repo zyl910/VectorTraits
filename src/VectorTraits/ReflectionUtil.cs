@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
+using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits {
     /// <summary>
@@ -37,14 +38,27 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Get static method list and output <paramref name="callback"/> (取得静态方法列表并输出到  <paramref name="callback"/> ).
+        /// Type invoke <see cref="IBaseTraits.GetIsSupported"/> method (对类型调用  <see cref="IBaseTraits.GetIsSupported"/> 方法).
+        /// </summary>
+        /// <param name="atype">Target type (目标类型.).</param>
+        /// <returns>Returns the value of <see cref="IBaseTraits.GetIsSupported"/> method (返回 GetIsSupported 方法的值).</returns>
+        public static bool TypeInvokeGetIsSupported(Type atype) {
+            MethodInfo? getIsSupportedMethod = atype.GetRuntimeMethod("GetIsSupported", GetIsSupported_ParameterTypes);
+            if (null == getIsSupportedMethod) return false;
+            bool isSupported = (bool)getIsSupportedMethod.Invoke(null, GetIsSupported_ParameterValues)!;
+            return isSupported;
+        }
+
+        /// <summary>
+        /// Get supported method list and output <paramref name="callback"/> (取得支持的方法列表并输出到  <paramref name="callback"/> ).
         /// </summary>
         /// <typeparam name="T">Delegate type (委托类型).</typeparam>
         /// <param name="callback">Output callback (输出的回调).</param>
+        /// <param name="checkType">Check type predicate (检查类型的谓词).</param>
         /// <param name="types">Source type list (源类型列表).</param>
         /// <param name="methodNames">Method name list (方法名列表).</param>
         /// <returns>Returns method count (返回方法数量)</returns>
-        public static int GetMethodListCallback<T>(Action<T> callback, IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
+        public static int GetSupportedMethodListCallback<T>(Action<T> callback, Predicate<Type> checkType, IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
             int rt = 0;
             Type tType = typeof(T);
             MethodInfo? tMethod = GetMethod(tType, "Invoke");
@@ -57,9 +71,7 @@ namespace Zyl.VectorTraits {
             foreach (Type tp in types) {
                 if (null == tp) continue;
                 // check.
-                MethodInfo? getIsSupportedMethod = tp.GetRuntimeMethod("GetIsSupported", GetIsSupported_ParameterTypes);
-                if (null == getIsSupportedMethod) continue;
-                bool isSupported = (bool)getIsSupportedMethod.Invoke(null, GetIsSupported_ParameterValues)!;
+                bool isSupported = checkType(tp);
                 if (!isSupported) continue;
                 // get.
                 foreach (string methodName in methodNames) {
@@ -75,30 +87,43 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Get static method list and fill (取得静态方法列表并填充).
+        /// Get supported method list and output <paramref name="callback"/> (取得支持的方法列表并输出到  <paramref name="callback"/> ).
+        /// </summary>
+        /// <typeparam name="T">Delegate type (委托类型).</typeparam>
+        /// <param name="callback">Output callback (输出的回调).</param>
+        /// <param name="types">Source type list (源类型列表).</param>
+        /// <param name="methodNames">Method name list (方法名列表).</param>
+        /// <returns>Returns method count (返回方法数量)</returns>
+        public static int GetSupportedMethodListCallback<T>(Action<T> callback, IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
+            int rt = GetSupportedMethodListCallback(callback, TypeInvokeGetIsSupported, types, methodNames);
+            return rt;
+        }
+
+        /// <summary>
+        /// Get supported method list and fill (取得支持的方法列表并填充).
         /// </summary>
         /// <typeparam name="T">Delegate type (委托类型).</typeparam>
         /// <param name="output">Output target (输出目标).</param>
         /// <param name="types">Source type list (源类型列表).</param>
         /// <param name="methodNames">Method name list (方法名列表).</param>
         /// <returns>Returns method count (返回方法数量)</returns>
-        public static int GetMethodListFill<T>(ICollection<T> output, IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
-            int rt = GetMethodListCallback(delegate (T x) {
+        public static int GetSupportedMethodListFill<T>(ICollection<T> output, IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
+            int rt = GetSupportedMethodListCallback(delegate (T x) {
                 output.Add(x);
             }, types, methodNames);
             return rt;
         }
 
         /// <summary>
-        /// Get static method list (取得静态方法列表).
+        /// Get supported method list (取得支持的方法列表).
         /// </summary>
         /// <typeparam name="T">Delegate type (委托类型).</typeparam>
         /// <param name="types">Source type list (源类型列表).</param>
         /// <param name="methodNames">Method name list (方法名列表).</param>
         /// <returns>Returns method list (返回方法列表)</returns>
-        public static List<T> GetMethodList<T>(IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
+        public static List<T> GetSupportedMethodList<T>(IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
             List<T> rt = new List<T>();
-            int cnt = GetMethodListFill(rt, types, methodNames);
+            int cnt = GetSupportedMethodListFill(rt, types, methodNames);
             if (cnt > 0) {
             }
             return rt;

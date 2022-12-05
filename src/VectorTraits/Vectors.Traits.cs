@@ -81,16 +81,36 @@ namespace Zyl.VectorTraits {
             get { return _staticsTypes; }
         }
 
-        public static int GetMethodListCallback<T>(Action<T> callback, params string[] methodNames) where T : Delegate {
-            return ReflectionUtil.GetMethodListCallback(callback, _staticsTypes, methodNames);
+        /// <summary>
+        /// Get supported method list and output <paramref name="callback"/> (取得支持的方法列表并输出到  <paramref name="callback"/> ).
+        /// </summary>
+        /// <typeparam name="T">Delegate type (委托类型).</typeparam>
+        /// <param name="callback">Output callback (输出的回调).</param>
+        /// <param name="methodNames">Method name list (方法名列表).</param>
+        /// <returns>Returns method count (返回方法数量)</returns>
+        public static int GetSupportedMethodListCallback<T>(Action<T> callback, params string[] methodNames) where T : Delegate {
+            return ReflectionUtil.GetSupportedMethodListCallback(callback, _staticsTypes, methodNames);
         }
 
-        public static int GetMethodListFill<T>(ICollection<T> output, params string[] methodNames) where T : Delegate {
-            return ReflectionUtil.GetMethodListFill(output, _staticsTypes, methodNames);
+        /// <summary>
+        /// Get supported method list and fill (取得支持的方法列表并填充).
+        /// </summary>
+        /// <typeparam name="T">Delegate type (委托类型).</typeparam>
+        /// <param name="output">Output target (输出目标).</param>
+        /// <param name="methodNames">Method name list (方法名列表).</param>
+        /// <returns>Returns method count (返回方法数量)</returns>
+        public static int GetSupportedMethodListFill<T>(ICollection<T> output, params string[] methodNames) where T : Delegate {
+            return ReflectionUtil.GetSupportedMethodListFill(output, _staticsTypes, methodNames);
         }
 
-        public static List<T> GetMethodList<T>(params string[] methodNames) where T : Delegate {
-            return ReflectionUtil.GetMethodList<T>(_staticsTypes, methodNames);
+        /// <summary>
+        /// Get supported method list (取得支持的方法列表).
+        /// </summary>
+        /// <typeparam name="T">Delegate type (委托类型).</typeparam>
+        /// <param name="methodNames">Method name list (方法名列表).</param>
+        /// <returns>Returns method list (返回方法列表)</returns>
+        public static List<T> GetSupportedMethodList<T>(params string[] methodNames) where T : Delegate {
+            return ReflectionUtil.GetSupportedMethodList<T>(_staticsTypes, methodNames);
         }
 
 

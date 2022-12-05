@@ -97,9 +97,9 @@ namespace Zyl.VectorTraits.Tests {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
-        public void GetMethodListTest<T>(T src) where T : struct {
+        public void GetSupportedMethodListTest<T>(T src) where T : struct {
             Console.WriteLine($"src:\t{src}\t//{typeof(T).Name}");
-            var list = Vectors.GetMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftLeft_Base", "ShiftLeft_Multiply");
+            var list = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftLeft_Base", "ShiftLeft_Multiply");
             foreach (var func in list) {
                 Console.WriteLine(func.Method);
             }
