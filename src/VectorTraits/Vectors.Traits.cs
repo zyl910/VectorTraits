@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Numerics;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Zyl.VectorTraits.Impl;
@@ -28,6 +30,16 @@ namespace Zyl.VectorTraits {
             VectorTraits128AdvSimdA64.Instance,
             VectorTraits256Base.Instance,
             VectorTraits256Avx2.Instance
+        };
+
+        // Statics types (静态类型集).
+        private static readonly Type[] _staticsTypes = {
+            typeof(VectorTraitsBase.Statics),
+            typeof(VectorTraits128Base.Statics),
+            typeof(VectorTraits128AdvSimd.Statics),
+            typeof(VectorTraits128AdvSimdA64.Statics),
+            typeof(VectorTraits256Base.Statics),
+            typeof(VectorTraits256Avx2.Statics)
         };
 
         /// <summary>Best traits instance (最佳特征实例). </summary>
@@ -64,6 +76,24 @@ namespace Zyl.VectorTraits {
             get { return _traitsInstances; }
         }
 
+        /// <summary>Statics types (静态类型集). </summary>
+        public static IReadOnlyList<Type> StaticsTypes {
+            get { return _staticsTypes; }
+        }
+
+        public static int GetMethodListCallback<T>(Action<T> callback, params string[] methodNames) where T : Delegate {
+            return ReflectionUtil.GetMethodListCallback(callback, _staticsTypes, methodNames);
+        }
+
+        public static int GetMethodListFill<T>(ICollection<T> output, params string[] methodNames) where T : Delegate {
+            return ReflectionUtil.GetMethodListFill(output, _staticsTypes, methodNames);
+        }
+
+        public static List<T> GetMethodList<T>(params string[] methodNames) where T : Delegate {
+            return ReflectionUtil.GetMethodList<T>(_staticsTypes, methodNames);
+        }
+
+
         /// <inheritdoc cref="IBaseTraits.ByteCount"/>
         public static int ByteCount {
             get { return _instance.ByteCount; }
@@ -77,8 +107,8 @@ namespace Zyl.VectorTraits {
         }
 
         /// <inheritdoc cref="IBaseTraits.ThrowForUnsupported"/>
-        public static void ThrowForUnsupported() {
-            _instance.ThrowForUnsupported();
+        public static void ThrowForUnsupported(bool noStrict = false) {
+            _instance.ThrowForUnsupported(noStrict);
         }
 
         /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>

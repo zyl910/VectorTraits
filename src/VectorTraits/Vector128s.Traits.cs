@@ -25,6 +25,7 @@ namespace Zyl.VectorTraits {
         };
 
         /// <summary>Best traits instance (最佳特征实例). </summary>
+        [CLSCompliant(false)]
         public static IWVectorTraits128 Instance {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return _instance; }
@@ -42,6 +43,7 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>Traits instance list (特征实例列表). </summary>
+        [CLSCompliant(false)]
         public static IReadOnlyList<IWVectorTraits128> TraitsInstances {
             get { return _traitsInstances; }
         }
