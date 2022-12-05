@@ -13,14 +13,14 @@ namespace Zyl.VectorTraits.Tests.Impl {
     public class IWVectorTraits128Tests {
 #if NETCOREAPP3_0_OR_GREATER
 
-        //[TestCase((sbyte)3)]
+        [TestCase((sbyte)3)]
         [TestCase((byte)4)]
         [TestCase((short)5)]
-        //[TestCase((ushort)6)]
+        [TestCase((ushort)6)]
         [TestCase((int)7)]
-        //[TestCase((uint)8)]
+        [TestCase((uint)8)]
         [TestCase((long)9)]
-        //[TestCase((ulong)10)]
+        [TestCase((ulong)10)]
         public void ShiftLeftTest<T>(T src) where T : struct {
             //Vector128<T> vzero = Vector128<T>.Zero;
             //T zero = default;
@@ -50,14 +50,14 @@ namespace Zyl.VectorTraits.Tests.Impl {
             }
         }
 
-        //[TestCase((sbyte)3)]
+        [TestCase((sbyte)3)]
         [TestCase((byte)4)]
         [TestCase((short)5)]
-        //[TestCase((ushort)6)]
+        [TestCase((ushort)6)]
         [TestCase((int)7)]
-        //[TestCase((uint)8)]
+        [TestCase((uint)8)]
         [TestCase((long)9)]
-        //[TestCase((ulong)10)]
+        [TestCase((ulong)10)]
         public void ShiftLeftFastTest<T>(T src) where T : struct {
             //Vector128<T> vzero = Vector128<T>.Zero;
             //T zero = default;
