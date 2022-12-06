@@ -23,9 +23,13 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <param name="atype">The type (此类型).</param>
         /// <returns>Short name (短名称).</returns>
-        public static string GetShortName(Type atype) {
-            string namespaceName = atype.Namespace;
-            string rt = atype.FullName.Substring(namespaceName.Length+1);
+        public static string? GetShortName(Type? atype) {
+            if (null == atype) return null;
+            string? rt = atype.FullName;
+            if (null == rt) return rt;
+            string? namespaceName = atype.Namespace;
+            if (null == namespaceName) return rt;
+            rt = rt.Substring(namespaceName.Length+1);
             return rt;
         }
 
@@ -34,7 +38,8 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <param name="methodInfo">The method info (方法信息).</param>
         /// <returns>Short name (短名称).</returns>
-        public static string GetShortNameWithType(MethodInfo methodInfo) {
+        public static string GetShortNameWithType(MethodInfo? methodInfo) {
+            if (null == methodInfo) return "";
             string rt = GetShortName(methodInfo.DeclaringType) + "." + methodInfo.Name;
             return rt;
         }
