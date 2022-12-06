@@ -11,14 +11,14 @@ namespace Zyl.VectorTraits.Tests.Impl {
     [TestFixture()]
     public class IVectorTraitsTests {
 
-        //[TestCase((sbyte)3)]
+        [TestCase((sbyte)3)]
         [TestCase((byte)4)]
         [TestCase((short)5)]
-        //[TestCase((ushort)6)]
+        [TestCase((ushort)6)]
         [TestCase((int)7)]
-        //[TestCase((uint)8)]
+        [TestCase((uint)8)]
         [TestCase((long)9)]
-        //[TestCase((ulong)10)]
+        [TestCase((ulong)10)]
         public void ShiftLeftTest<T>(T src) where T : struct {
             //Vector<T> vzero = Vector<T>.Zero;
             //T zero = default;
@@ -57,14 +57,14 @@ namespace Zyl.VectorTraits.Tests.Impl {
             }
         }
 
-        //[TestCase((sbyte)3)]
+        [TestCase((sbyte)3)]
         [TestCase((byte)4)]
         [TestCase((short)5)]
-        //[TestCase((ushort)6)]
+        [TestCase((ushort)6)]
         [TestCase((int)7)]
-        //[TestCase((uint)8)]
+        [TestCase((uint)8)]
         [TestCase((long)9)]
-        //[TestCase((ulong)10)]
+        [TestCase((ulong)10)]
         public void ShiftLeftFastTest<T>(T src) where T : struct {
             //Vector<T> vzero = Vector<T>.Zero;
             //T zero = default;

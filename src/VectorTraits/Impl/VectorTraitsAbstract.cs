@@ -17,6 +17,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Get best instance.
         /// </summary>
         /// <returns>Returns best instance.</returns>
+        [CLSCompliant(false)]
         public static IVectorTraits GetBestInstance() {
             int byteCount = Vector<byte>.Count;
             if (VectorTraits256Abstract.ByteCountValue == byteCount) {
@@ -33,6 +34,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Get base instance.
         /// </summary>
         /// <returns>Returns base instance.</returns>
+        [CLSCompliant(false)]
         public static IVectorTraits GetBaseInstance() {
             int byteCount = Vector<byte>.Count;
             if (VectorTraits256Abstract.ByteCountValue == byteCount) {
@@ -74,6 +76,13 @@ namespace Zyl.VectorTraits.Impl {
             Statics.ThrowForUnsupported(noStrict);
         }
 
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<sbyte> ShiftLeft(Vector<sbyte> value, int shiftCount) {
+            return Statics.ShiftLeft(value, shiftCount);
+        }
+
         /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector<byte> ShiftLeft(Vector<byte> value, int shiftCount) {
@@ -86,9 +95,23 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.ShiftLeft(value, shiftCount);
         }
 
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{ushort}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ushort> ShiftLeft(Vector<ushort> value, int shiftCount) {
+            return Statics.ShiftLeft(value, shiftCount);
+        }
+
         /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
+            return Statics.ShiftLeft(value, shiftCount);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{uint}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<uint> ShiftLeft(Vector<uint> value, int shiftCount) {
             return Statics.ShiftLeft(value, shiftCount);
         }
 
@@ -96,6 +119,20 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector<long> ShiftLeft(Vector<long> value, int shiftCount) {
             return Statics.ShiftLeft(value, shiftCount);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{ulong}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ulong> ShiftLeft(Vector<ulong> value, int shiftCount) {
+            return Statics.ShiftLeft(value, shiftCount);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<sbyte> ShiftLeftFast(Vector<sbyte> value, int shiftCount) {
+            return Statics.ShiftLeftFast(value, shiftCount);
         }
 
         /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{byte}, int)"/>
@@ -110,15 +147,36 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.ShiftLeftFast(value, shiftCount);
         }
 
+        /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{ushort}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ushort> ShiftLeftFast(Vector<ushort> value, int shiftCount) {
+            return Statics.ShiftLeftFast(value, shiftCount);
+        }
+
         /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector<int> ShiftLeftFast(Vector<int> value, int shiftCount) {
             return Statics.ShiftLeftFast(value, shiftCount);
         }
 
+        /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{uint}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<uint> ShiftLeftFast(Vector<uint> value, int shiftCount) {
+            return Statics.ShiftLeftFast(value, shiftCount);
+        }
+
         /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector<long> ShiftLeftFast(Vector<long> value, int shiftCount) {
+            return Statics.ShiftLeftFast(value, shiftCount);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{ulong}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ulong> ShiftLeftFast(Vector<ulong> value, int shiftCount) {
             return Statics.ShiftLeftFast(value, shiftCount);
         }
 
