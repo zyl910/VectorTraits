@@ -6,7 +6,7 @@ using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits {
     /// <summary>
-    /// Reflection util.
+    /// Reflection util (反射工具).
     /// </summary>
     public static class ReflectionUtil {
         // GetIsSupported - ParameterTypes
@@ -17,6 +17,27 @@ namespace Zyl.VectorTraits {
         private static readonly object[] GetIsSupported_ParameterValues = {
             false
         };
+
+        /// <summary>
+        /// Get short name of <see cref="Type"/> (取得 <see cref="Type"/> 的短名称).
+        /// </summary>
+        /// <param name="atype">The type (此类型).</param>
+        /// <returns>Short name (短名称).</returns>
+        public static string GetShortName(Type atype) {
+            string namespaceName = atype.Namespace;
+            string rt = atype.FullName.Substring(namespaceName.Length+1);
+            return rt;
+        }
+
+        /// <summary>
+        /// Get short name of <see cref="MethodInfo"/> with type (取得 <see cref="MethodInfo"/> 带类型的短名称).
+        /// </summary>
+        /// <param name="methodInfo">The method info (方法信息).</param>
+        /// <returns>Short name (短名称).</returns>
+        public static string GetShortNameWithType(MethodInfo methodInfo) {
+            string rt = GetShortName(methodInfo.DeclaringType) + "." + methodInfo.Name;
+            return rt;
+        }
 
         /// <summary>
         /// Searches for the public method with the specified name (搜索具有指定名称的公共方法).

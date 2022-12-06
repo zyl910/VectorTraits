@@ -101,7 +101,7 @@ namespace Zyl.VectorTraits.Tests {
             Console.WriteLine($"src:\t{src}\t//{typeof(T).Name}");
             var list = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftLeft_Base", "ShiftLeft_Multiply");
             foreach (var func in list) {
-                Console.WriteLine(func.Method);
+                Console.WriteLine(ReflectionUtil.GetShortNameWithType(func.Method));
             }
         }
 
