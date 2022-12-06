@@ -30,6 +30,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
                     continue;
                 }
             }
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftLeft_Base", "ShiftLeft_Multiply");
+            foreach (var func in funcList) {
+                Console.WriteLine(ReflectionUtil.GetShortNameWithType(func.Method));
+            }
             // run.
             Vector<T>[] samples = {
                 Vectors.Create(src),
@@ -43,6 +47,11 @@ namespace Zyl.VectorTraits.Tests.Impl {
                         if (!instance.IsSupported) continue;
                         Vector<T> vdst = (Vector<T>)instance.ShiftLeft((dynamic)vsrc, shiftCount);
                         Assert.AreEqual(vbaseline, vdst, $"{instance.GetType().Name}, shiftCount={shiftCount}, vsrc={vsrc}");
+                    }
+                    foreach (var func in funcList) {
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        Vector<T> vdst = func(vsrc, shiftCount);
+                        Assert.AreEqual(vbaseline, vdst, $"{funcName}, shiftCount={shiftCount}, vsrc={vsrc}");
                     }
                 }
             }
@@ -67,6 +76,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
                     continue;
                 }
             }
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftLeftFast_Base", "ShiftLeftFast_Multiply");
+            foreach (var func in funcList) {
+                Console.WriteLine(ReflectionUtil.GetShortNameWithType(func.Method));
+            }
             // run.
             Vector<T>[] samples = {
                 Vectors.Create(src),
@@ -80,6 +93,11 @@ namespace Zyl.VectorTraits.Tests.Impl {
                         if (!instance.IsSupported) continue;
                         Vector<T> vdst = (Vector<T>)instance.ShiftLeftFast((dynamic)vsrc, shiftCount);
                         Assert.AreEqual(vbaseline, vdst, $"{instance.GetType().Name}, shiftCount={shiftCount}, vsrc={vsrc}");
+                    }
+                    foreach (var func in funcList) {
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        Vector<T> vdst = func(vsrc, shiftCount);
+                        Assert.AreEqual(vbaseline, vdst, $"{funcName}, shiftCount={shiftCount}, vsrc={vsrc}");
                     }
                 }
             }
