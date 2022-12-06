@@ -38,6 +38,20 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
+        /// Get parameter types (取得参数类型数组).
+        /// </summary>
+        /// <param name="methodInfo">The method info (方法信息).</param>
+        /// <returns>Rerurns parameter types (返回参数类型数组).</returns>
+        public static Type[] GetParameterTypes(MethodInfo methodInfo) {
+            ParameterInfo[] parameterInfos = methodInfo.GetParameters();
+            Type[] parameterTypes = new Type[parameterInfos.Length];
+            for (int i = 0; i < parameterInfos.Length; ++i) {
+                parameterTypes[i] = parameterInfos[i].ParameterType;
+            }
+            return parameterTypes;
+        }
+
+        /// <summary>
         /// Type invoke <see cref="IBaseTraits.GetIsSupported"/> method (对类型调用  <see cref="IBaseTraits.GetIsSupported"/> 方法).
         /// </summary>
         /// <param name="atype">Target type (目标类型.).</param>
@@ -54,20 +68,17 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <typeparam name="T">Delegate type (委托类型).</typeparam>
         /// <param name="callback">Output callback (输出的回调).</param>
-        /// <param name="checkType">Check type predicate (检查类型的谓词).</param>
+        /// <param name="checkType">Check type predicate (检查类型的谓词). Default value is <see cref="TypeInvokeGetIsSupported"/>.</param>
         /// <param name="types">Source type list (源类型列表).</param>
         /// <param name="methodNames">Method name list (方法名列表).</param>
         /// <returns>Returns method count (返回方法数量)</returns>
-        public static int GetSupportedMethodListCallback<T>(Action<T> callback, Predicate<Type> checkType, IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
+        public static int GetSupportedMethodListCallback<T>(Action<T> callback, Predicate<Type>? checkType, IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
             int rt = 0;
+            if (null == checkType) checkType = TypeInvokeGetIsSupported;
             Type tType = typeof(T);
             MethodInfo? tMethod = GetMethod(tType, "Invoke");
             if (null == tMethod) return rt;
-            ParameterInfo[] parameterInfos = tMethod.GetParameters();
-            Type[] parameterTypes = new Type[parameterInfos.Length];
-            for (int i = 0; i < parameterInfos.Length; ++i) {
-                parameterTypes[i] = parameterInfos[i].ParameterType;
-            }
+            Type[] parameterTypes = GetParameterTypes(tMethod);
             foreach (Type tp in types) {
                 if (null == tp) continue;
                 // check.
