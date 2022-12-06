@@ -40,10 +40,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
             };
             foreach (Vector128<T> vsrc in samples) {
                 for (int shiftCount = -1; shiftCount <= shiftCountMax; ++shiftCount) {
-                    Vector128<T> vbaseline = (Vector128<T>)Vector128s.ShiftLeft((dynamic)vsrc, shiftCount);
+                    Vector128<T> vbaseline = Vector128s.ShiftLeft((dynamic)vsrc, shiftCount);
                     foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.IsSupported) continue;
-                        Vector128<T> vdst = (Vector128<T>)instance.ShiftLeft((dynamic)vsrc, shiftCount);
+                        Vector128<T> vdst = instance.ShiftLeft((dynamic)vsrc, shiftCount);
                         Assert.AreEqual(vbaseline, vdst, $"{instance.GetType().Name}, shiftCount={shiftCount}, vsrc={vsrc}");
                     }
                 }
@@ -77,10 +77,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
             };
             foreach (Vector128<T> vsrc in samples) {
                 for (int shiftCount = 0; shiftCount <= shiftCountMax; ++shiftCount) {
-                    Vector128<T> vbaseline = (Vector128<T>)Vector128s.ShiftLeftFast((dynamic)vsrc, shiftCount);
+                    Vector128<T> vbaseline = Vector128s.ShiftLeftFast((dynamic)vsrc, shiftCount);
                     foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.IsSupported) continue;
-                        Vector128<T> vdst = (Vector128<T>)instance.ShiftLeftFast((dynamic)vsrc, shiftCount);
+                        Vector128<T> vdst = instance.ShiftLeftFast((dynamic)vsrc, shiftCount);
                         Assert.AreEqual(vbaseline, vdst, $"{instance.GetType().Name}, shiftCount={shiftCount}, vsrc={vsrc}");
                     }
                 }

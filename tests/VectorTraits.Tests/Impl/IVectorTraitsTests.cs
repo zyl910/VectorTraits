@@ -42,10 +42,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
             };
             foreach (Vector<T> vsrc in samples) {
                 for (int shiftCount = -1; shiftCount <= shiftCountMax; ++shiftCount) {
-                    Vector<T> vbaseline = (Vector<T>)Vectors.ShiftLeft((dynamic)vsrc, shiftCount);
+                    Vector<T> vbaseline = Vectors.ShiftLeft((dynamic)vsrc, shiftCount);
                     foreach (IVectorTraits instance in instances) {
                         if (!instance.IsSupported) continue;
-                        Vector<T> vdst = (Vector<T>)instance.ShiftLeft((dynamic)vsrc, shiftCount);
+                        Vector<T> vdst = instance.ShiftLeft((dynamic)vsrc, shiftCount);
                         Assert.AreEqual(vbaseline, vdst, $"{instance.GetType().Name}, shiftCount={shiftCount}, vsrc={vsrc}");
                     }
                     foreach (var func in funcList) {
@@ -88,10 +88,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
             };
             foreach (Vector<T> vsrc in samples) {
                 for (int shiftCount = 0; shiftCount <= shiftCountMax; ++shiftCount) {
-                    Vector<T> vbaseline = (Vector<T>)Vectors.ShiftLeftFast((dynamic)vsrc, shiftCount);
+                    Vector<T> vbaseline = Vectors.ShiftLeftFast((dynamic)vsrc, shiftCount);
                     foreach (IVectorTraits instance in instances) {
                         if (!instance.IsSupported) continue;
-                        Vector<T> vdst = (Vector<T>)instance.ShiftLeftFast((dynamic)vsrc, shiftCount);
+                        Vector<T> vdst = instance.ShiftLeftFast((dynamic)vsrc, shiftCount);
                         Assert.AreEqual(vbaseline, vdst, $"{instance.GetType().Name}, shiftCount={shiftCount}, vsrc={vsrc}");
                     }
                     foreach (var func in funcList) {
