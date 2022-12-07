@@ -9,7 +9,7 @@ namespace Zyl.VectorTraits.Benchmarks {
     /// <summary>
     /// Abstract shared array benchmark.
     /// </summary>
-    internal abstract class AbstractSharedBenchmark : AbstractBenchmark {
+    internal abstract class AbstractSharedBenchmark : AbstractBenchmark, ILoopCountGetter {
 #pragma warning disable CA2211 // Non-constant fields should not be visible
         protected static byte[] srcArrayByte = { };
         protected static short[] srcArrayInt16 = { };
@@ -20,6 +20,9 @@ namespace Zyl.VectorTraits.Benchmarks {
         protected static int dstInt32, baselineInt32;
         protected static long dstInt64, baselineInt64;
 #pragma warning restore CA2211 // Non-constant fields should not be visible
+
+        /// <inheritdoc cref="ILoopCountGetter.LoopCount" />
+        public int LoopCount { get; set; }
 
         /// <summary>
         /// Array setup - static.
@@ -188,6 +191,5 @@ namespace Zyl.VectorTraits.Benchmarks {
                 return 1;
             }
         }
-
     }
 }

@@ -41,9 +41,10 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="srcCount">Source count within an <paramref name="action"/>.</param>
         /// <param name="mopsBaseline">Baseline's MOPS/s</param>
         /// <returns>Returns MOPS/s.</returns>
-        public static double RunTest(TextWriter writer, string indent, string name, Action action, int srcCount, double mopsBaseline) {
+        public static double RunTest(TextWriter writer, string indent, string name, Action action, int srcCount, double mopsBaseline, ILoopCountGetter? loopCountGetter = null) {
             double us;
-            double rt = RunTestCore(action, srcCount, mopsBaseline, out us);
+            int loopCount = loopCountGetter?.LoopCount ?? 0;
+            double rt = RunTestCore(action, srcCount, mopsBaseline, out us, loopCount);
             if (mopsBaseline>0) {
                 double scale = rt / mopsBaseline;
                 writer.WriteLine(indent + string.Format("{0}:\tus={1:F3}, MOPS/s={2}, scale={3}", name, us, rt, scale));
@@ -62,7 +63,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="us">Run time ms.</param>
         /// <returns>Returns MOPS/s.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
-        public static double RunTestCore(Action action, int srcCount, double mopsBaseline, out double us) {
+        public static double RunTestCore(Action action, int srcCount, double mopsBaseline, out double us, int loopCount = 0) {
             double rt;
             const int aMillion = 1000 * 1000;
             const int usPerSecond = 1000 * 1000;
@@ -76,8 +77,9 @@ namespace Zyl.VectorTraits.Benchmarks {
             long tickUsed;
             int loops = 1;
             int i, j;
+            if (loopCount <= 0) loopCount = 1;
             // Find best loops.
-            for(; ; ) {
+            for (; ; ) {
                 stopwatch.Restart();
                 for (i = 0; i < loops; ++i) {
                     action();
@@ -112,7 +114,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                 tickSum += tickArray[jStart + j];
             }
             us = tickSum / (tickPerUs * RepeatCountUsed * loops);
-            rt = (double)srcCount * usPerSecond / aMillion / us;
+            rt = (double)srcCount * loopCount * usPerSecond / us / aMillion;
             return rt;
         }
 
@@ -209,6 +211,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="obj">The object.</param>
         public static void RunBenchmarkObject(TextWriter writer, string indent, Type typ, AbstractBenchmark? obj) {
             if (null == obj) return;
+            ILoopCountGetter loopCountGetter = obj as ILoopCountGetter;
             List<MethodInfo> lst = new List<MethodInfo>();
             FillMethodInfoOfBenchmark(lst, obj);
             if (lst.Count <= 0) return;
@@ -225,7 +228,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                     try {
                         Action action = (Action)mi.CreateDelegate(typeof(Action), obj);
                         //Action action = (Action)Delegate.CreateDelegate(typeof(Action), obj, mi);
-                        double mops = BenchmarkUtil.RunTest(writer, indent, name, action, n, mopsBaseline);
+                        double mops = BenchmarkUtil.RunTest(writer, indent, name, action, n, mopsBaseline, loopCountGetter);
                         bool isBaseline = false;
                         BenchmarkAttribute? attr = mi.GetCustomAttribute<BenchmarkAttribute>();
                         if (null!= attr) {

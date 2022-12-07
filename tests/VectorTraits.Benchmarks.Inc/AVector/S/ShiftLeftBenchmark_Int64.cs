@@ -49,6 +49,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         [Benchmark(Baseline = true)]
         public void SumSLLScalar() {
+            LoopCount = ShiftCountMax - ShiftCountMin + 1;
             dstTMy = 0;
             for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
                 dstTMy += StaticSumSLLScalar(srcArray, srcArray.Length, shiftCount);
