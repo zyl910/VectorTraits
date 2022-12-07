@@ -74,6 +74,18 @@ namespace Zyl.VectorTraits {
         }
 
 #if NETCOREAPP3_0_OR_GREATER
+        /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_AcceleratedTypes"/>
+        public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.ShiftLeft_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
 
         /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{sbyte}, int)"/>
         [CLSCompliant(false)]
@@ -157,6 +169,19 @@ namespace Zyl.VectorTraits {
 #else
             return _instance.ShiftLeft(value, shiftCount);
 #endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast_AcceleratedTypes"/>
+        public static TypeCodeFlags ShiftLeftFast_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.ShiftLeftFast_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
         }
 
         /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector256{sbyte}, int)"/>

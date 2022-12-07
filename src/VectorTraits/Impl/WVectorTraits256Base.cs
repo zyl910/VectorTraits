@@ -69,6 +69,13 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
+                get {
+                    return ShiftLeftFast_AcceleratedTypes;
+                }
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -219,6 +226,19 @@ namespace Zyl.VectorTraits.Impl {
             public static unsafe Vector256<ulong> ShiftLeft_Base(Vector256<ulong> value, int shiftCount) {
                 shiftCount &= 0x3F;
                 return ShiftLeftFast_Base(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftLeftFast_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector256{sbyte}, int)"/>

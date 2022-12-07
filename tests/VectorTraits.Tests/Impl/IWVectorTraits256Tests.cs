@@ -27,9 +27,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
             int shiftCountMax = Scalars<T>.BitSize + 1;
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
-                if (!instance.IsSupported) {
+                if (instance.IsSupported) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftLeft_AcceleratedTypes}");
+                } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
-                    continue;
                 }
             }
             // run.
@@ -64,9 +65,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
             int shiftCountMax = Scalars<T>.BitSize - 1;
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
-                if (!instance.IsSupported) {
+                if (instance.IsSupported) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftLeftFast_AcceleratedTypes}");
+                } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
-                    continue;
                 }
             }
             // run.

@@ -13,6 +13,12 @@ namespace Zyl.VectorTraits.Impl {
     public interface IWVectorTraits256 : IWVectorTraits {
 #if NETCOREAPP3_0_OR_GREATER
         /// <summary>
+        /// Types with hardware acceleration when running <c>ShiftLeft</c> (运行 <c>ShiftLeft</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ShiftLeft"/>
+        TypeCodeFlags ShiftLeft_AcceleratedTypes { get; }
+
+        /// <summary>
         /// Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
         /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &lt;&lt; shiftCount }</c>, <c>shiftCount &amp;= (T.BitSize-1)</c>.
         /// </summary>
@@ -99,6 +105,12 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ShiftLeft(Vector256{ulong}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeftFast(Vector256{ulong}, int)"/> // Since: VectorTraits 1.0
         Vector256<ulong> ShiftLeft(Vector256<ulong> value, int shiftCount);
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>ShiftLeftFast</c> (运行 <c>ShiftLeftFast</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ShiftLeftFast"/>
+        TypeCodeFlags ShiftLeftFast_AcceleratedTypes { get; }
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check <paramref name="shiftCount"/>, please use <see cref="Scalars.LimitShiftCount"/> first.
