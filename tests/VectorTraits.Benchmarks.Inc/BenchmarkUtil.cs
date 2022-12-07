@@ -66,9 +66,9 @@ namespace Zyl.VectorTraits.Benchmarks {
             double rt;
             const int aMillion = 1000 * 1000;
             const int usPerSecond = 1000 * 1000;
-            const int tickPerSecond = 1000; // tick is ms.
-            const double tickPerUs = tickPerSecond / (double)usPerSecond;
-            const int tickMax = tickPerSecond / 4;
+            long tickPerSecond = Stopwatch.Frequency;
+            double tickPerUs = tickPerSecond / (double)usPerSecond;
+            long tickMax = tickPerSecond / 4;
             const int RepeatCount = 5;
             Stopwatch stopwatch = new Stopwatch();
             //int tickBegin;
@@ -82,7 +82,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                     action();
                 }
                 stopwatch.Stop();
-                tickUsed = stopwatch.ElapsedMilliseconds;
+                tickUsed = stopwatch.ElapsedTicks;
                 // Check.
                 int loopsNext = loops * 2;
                 bool flag = (tickUsed >= tickMax || loopsNext < loops);
@@ -99,7 +99,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                     action();
                 }
                 stopwatch.Stop();
-                tickUsed = stopwatch.ElapsedMilliseconds;
+                tickUsed = stopwatch.ElapsedTicks;
                 tickSum += tickUsed;
             }
             // done.
