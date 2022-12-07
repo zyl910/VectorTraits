@@ -68,8 +68,9 @@ namespace Zyl.VectorTraits.Benchmarks {
             const int usPerSecond = 1000 * 1000;
             long tickPerSecond = Stopwatch.Frequency;
             double tickPerUs = tickPerSecond / (double)usPerSecond;
-            long tickMax = tickPerSecond / 4;
-            const int RepeatCount = 5;
+            long tickMax = tickPerSecond / 8;
+            const int RepeatCount = 10;
+            const int RepeatCountUsed = 6;
             Stopwatch stopwatch = new Stopwatch();
             //int tickBegin;
             long tickUsed;
@@ -93,6 +94,8 @@ namespace Zyl.VectorTraits.Benchmarks {
             }
             // Repeat.
             long tickSum = 0;
+            //long[] tickArray = new long[RepeatCount];
+            Span<long> tickArray = stackalloc long[RepeatCount];
             for (j = 0; j < RepeatCount; ++j) {
                 stopwatch.Restart();
                 for (i = 0; i < loops; ++i) {
@@ -100,10 +103,15 @@ namespace Zyl.VectorTraits.Benchmarks {
                 }
                 stopwatch.Stop();
                 tickUsed = stopwatch.ElapsedTicks;
-                tickSum += tickUsed;
+                tickArray[j] = tickUsed;
             }
             // done.
-            us = tickSum / (tickPerUs * RepeatCount * loops);
+            tickArray.Sort();
+            int jStart = (RepeatCount - RepeatCountUsed) / 2;
+            for (j = 0; j < RepeatCountUsed; ++j) {
+                tickSum += tickArray[jStart + j];
+            }
+            us = tickSum / (tickPerUs * RepeatCountUsed * loops);
             rt = (double)srcCount * usPerSecond / aMillion / us;
             return rt;
         }
