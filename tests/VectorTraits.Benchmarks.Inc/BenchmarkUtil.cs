@@ -66,20 +66,23 @@ namespace Zyl.VectorTraits.Benchmarks {
             double rt;
             const int aMillion = 1000 * 1000;
             const int usPerSecond = 1000 * 1000;
-            const int tickPerSecond = 1000;
+            const int tickPerSecond = 1000; // tick is ms.
             const double tickPerUs = tickPerSecond / (double)usPerSecond;
             const int tickMax = tickPerSecond / 4;
             const int RepeatCount = 5;
-            int tickBegin, tickUsed;
+            Stopwatch stopwatch = new Stopwatch();
+            //int tickBegin;
+            long tickUsed;
             int loops = 1;
             int i, j;
             // Find best loops.
             for(; ; ) {
-                tickBegin = Environment.TickCount;
+                stopwatch.Restart();
                 for (i = 0; i < loops; ++i) {
                     action();
                 }
-                tickUsed = Environment.TickCount - tickBegin;
+                stopwatch.Stop();
+                tickUsed = stopwatch.ElapsedMilliseconds;
                 // Check.
                 int loopsNext = loops * 2;
                 bool flag = (tickUsed >= tickMax || loopsNext < loops);
@@ -89,13 +92,14 @@ namespace Zyl.VectorTraits.Benchmarks {
                 loops = loopsNext;
             }
             // Repeat.
-            int tickSum = 0;
+            long tickSum = 0;
             for (j = 0; j < RepeatCount; ++j) {
-                tickBegin = Environment.TickCount;
+                stopwatch.Restart();
                 for (i = 0; i < loops; ++i) {
                     action();
                 }
-                tickUsed = Environment.TickCount - tickBegin;
+                stopwatch.Stop();
+                tickUsed = stopwatch.ElapsedMilliseconds;
                 tickSum += tickUsed;
             }
             // done.
