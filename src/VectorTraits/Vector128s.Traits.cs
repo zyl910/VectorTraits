@@ -60,9 +60,19 @@ namespace Zyl.VectorTraits {
             }
         }
 
+        /// <inheritdoc cref="IBaseTraits.GetIsSupported"/>
+        public static bool GetIsSupported(bool noStrict = false) {
+            return _instance.GetIsSupported(noStrict);
+        }
+
+        /// <inheritdoc cref="IBaseTraits.GetUnsupportedMessage"/>
+        public static string GetUnsupportedMessage(bool noStrict = false) {
+            return _instance.GetUnsupportedMessage(noStrict);
+        }
+
         /// <inheritdoc cref="IBaseTraits.ThrowForUnsupported"/>
-        public static void ThrowForUnsupported() {
-            _instance.ThrowForUnsupported();
+        public static void ThrowForUnsupported(bool noStrict = false) {
+            _instance.ThrowForUnsupported(noStrict);
         }
 
 #if NETCOREAPP3_0_OR_GREATER
