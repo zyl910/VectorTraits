@@ -96,8 +96,8 @@ namespace Zyl.VectorTraits.Benchmarks {
             }
             // Repeat.
             long tickSum = 0;
-            //long[] tickArray = new long[RepeatCount];
-            Span<long> tickArray = stackalloc long[RepeatCount];
+            long[] tickArray = new long[RepeatCount];
+            //Span<long> tickArray = stackalloc long[RepeatCount];
             for (j = 0; j < RepeatCount; ++j) {
                 stopwatch.Restart();
                 for (i = 0; i < loops; ++i) {
@@ -108,7 +108,8 @@ namespace Zyl.VectorTraits.Benchmarks {
                 tickArray[j] = tickUsed;
             }
             // done.
-            tickArray.Sort();
+            //tickArray.Sort();
+            Array.Sort(tickArray);
             int jStart = (RepeatCount - RepeatCountUsed) / 2;
             for (j = 0; j < RepeatCountUsed; ++j) {
                 tickSum += tickArray[jStart + j];

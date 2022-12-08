@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 #define BENCHMARKS_ALGORITHM
 #define BENCHMARKS_RAW
 
@@ -18,7 +18,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = Int64;
+    using TMy = SByte;
 
     /// <summary>
     /// Shift left benchmark - short.
@@ -26,7 +26,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    internal partial class ShiftLeftBenchmark_Int64 : AbstractSharedBenchmark_Int64 {
+    internal partial class ShiftLeftBenchmark_SByte : AbstractSharedBenchmark_SByte {
 
         // -- var --
 
@@ -207,6 +207,54 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 dstTMy += StaticSumSLL_Base256(srcArray, srcArray.Length, shiftCount);
             }
             CheckResult("SumSLL_Base256");
+        }
+
+        /// <summary>
+        /// Sum shift left logical - Algorithm - Multiply.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftCount">Shift count.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSLL_Multiply(TMy[] src, int srcCount, int shiftCount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<TMy>(shiftCount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftLeft_Multiply(*(Vector<TMy>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLL_Multiply() {
+            VectorTraitsBase.Statics.ThrowForUnsupported(true);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLL_Multiply(srcArray, srcArray.Length, shiftCount);
+            }
+            CheckResult("SumSLL_Multiply");
         }
 
 #if NETCOREAPP3_0_OR_GREATER
@@ -589,6 +637,54 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 dstTMy += StaticSumSLLFast_Base256(srcArray, srcArray.Length, shiftCount);
             }
             CheckResult("SumSLLFast_Base256");
+        }
+
+        /// <summary>
+        /// Sum shift left logical fast - Algorithm - Multiply.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftCount">Shift count.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSLLFast_Multiply(TMy[] src, int srcCount, int shiftCount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftCount = Scalars.LimitShiftCount<TMy>(shiftCount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftLeftFast_Multiply(*(Vector<TMy>*)p, shiftCount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftCount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLFast_Multiply() {
+            VectorTraitsBase.Statics.ThrowForUnsupported(true);
+            dstTMy = 0;
+            for (int shiftCount = ShiftCountMin; shiftCount <= ShiftCountMax; ++shiftCount) {
+                dstTMy += StaticSumSLLFast_Multiply(srcArray, srcArray.Length, shiftCount);
+            }
+            CheckResult("SumSLLFast_Multiply");
         }
 
 #if NETCOREAPP3_0_OR_GREATER

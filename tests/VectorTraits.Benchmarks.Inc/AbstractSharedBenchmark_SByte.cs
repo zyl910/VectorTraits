@@ -6,20 +6,20 @@ using System.Text;
 namespace Zyl.VectorTraits.Benchmarks {
 
     // My type.
-    using TMy = Int64;
+    using TMy = SByte;
 
     /// <summary>
-    /// Abstract shared array benchmark - Int64.
+    /// Abstract shared array benchmark - SByte.
     /// </summary>
-    internal class AbstractSharedBenchmark_Int64 : AbstractSharedBenchmark {
+    internal class AbstractSharedBenchmark_SByte : AbstractSharedBenchmark {
         // -- TMy ref --
-        protected static ref TMy dstTMy => ref dstInt64;
-        protected static ref TMy baselineTMy => ref baselineInt64;
-        protected static TMy[] srcArray => srcArrayInt64;
+        protected static ref TMy dstTMy => ref dstSByte;
+        protected static ref TMy baselineTMy => ref baselineSByte;
+        protected static TMy[] srcArray => srcArraySByte;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override void CheckResult(string name) {
-            CheckResultInt64(name);
+            CheckResultSByte(name);
         }
 
 
@@ -36,7 +36,6 @@ namespace Zyl.VectorTraits.Benchmarks {
                 return Scalars<TMy>.BitSize + 1;
             }
         }
-
 
     }
 }

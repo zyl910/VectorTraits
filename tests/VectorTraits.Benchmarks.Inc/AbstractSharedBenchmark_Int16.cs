@@ -9,7 +9,7 @@ namespace Zyl.VectorTraits.Benchmarks {
     using TMy = Int16;
 
     /// <summary>
-    /// Abstract shared array benchmark.
+    /// Abstract shared array benchmark - Int16.
     /// </summary>
     internal class AbstractSharedBenchmark_Int16 : AbstractSharedBenchmark {
         // -- TMy ref --
