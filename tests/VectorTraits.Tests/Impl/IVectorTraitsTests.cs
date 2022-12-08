@@ -25,9 +25,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
             int shiftCountMax = Scalars<T>.BitSize + 1;
             IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
             foreach (IVectorTraits instance in instances) {
-                if (!instance.IsSupported) {
+                if (instance.IsSupported) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftLeft_AcceleratedTypes}");
+                } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
-                    continue;
                 }
             }
             var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftLeft_Base", "ShiftLeft_Multiply");
@@ -71,9 +72,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
             int shiftCountMax = Scalars<T>.BitSize - 1;
             IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
             foreach (IVectorTraits instance in instances) {
-                if (!instance.IsSupported) {
+                if (instance.IsSupported) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftLeft_AcceleratedTypes}");
+                } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
-                    continue;
                 }
             }
             var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftLeftFast_Base", "ShiftLeftFast_Multiply");

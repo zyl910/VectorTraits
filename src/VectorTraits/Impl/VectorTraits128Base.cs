@@ -60,11 +60,18 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
+                get {
+                    return ShiftLeftFast_AcceleratedTypes;
+                }
+            }
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftLeft(Vector<sbyte> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET_X_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeft(value, shiftCount);
@@ -76,7 +83,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> ShiftLeft(Vector<byte> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET_X_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeft(value, shiftCount);
@@ -88,7 +95,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftLeft(Vector<short> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeft(value, shiftCount);
@@ -101,7 +108,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> ShiftLeft(Vector<ushort> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeft(value, shiftCount);
@@ -113,7 +120,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftLeft(Vector<int> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeft(value, shiftCount);
@@ -126,7 +133,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> ShiftLeft(Vector<uint> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeft(value, shiftCount);
@@ -138,7 +145,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftLeft(Vector<long> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeft(value, shiftCount);
@@ -151,13 +158,29 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> ShiftLeft(Vector<ulong> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
 #endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftLeftFast_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+                    if (Vector.IsHardwareAccelerated) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                        rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if SOFTWARE_OPTIMIZATION
+                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+#endif // SOFTWARE_OPTIMIZATION
+                    }
+                    return rt;
+                }
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{sbyte}, int)"/>
@@ -232,7 +255,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftLeftFast(Vector<sbyte> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET_X_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeftFast(value, shiftCount);
@@ -244,7 +267,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> ShiftLeftFast(Vector<byte> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET_X_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeftFast(value, shiftCount);
@@ -256,7 +279,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftLeftFast(Vector<short> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeftFast(value, shiftCount);
@@ -269,7 +292,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> ShiftLeftFast(Vector<ushort> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeftFast(value, shiftCount);
@@ -281,7 +304,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftLeftFast(Vector<int> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeftFast(value, shiftCount);
@@ -294,7 +317,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> ShiftLeftFast(Vector<uint> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeftFast(value, shiftCount);
@@ -306,7 +329,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftLeftFast(Vector<long> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeftFast(value, shiftCount);
@@ -319,7 +342,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> ShiftLeftFast(Vector<ulong> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftCount);
 #elif SOFTWARE_OPTIMIZATION
                 return BaseStatics.ShiftLeftFast(value, shiftCount);

@@ -64,6 +64,13 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NET5_0_OR_GREATER
 
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
+                get {
+                    return ShiftLeftFast_AcceleratedTypes;
+                }
+            }
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -114,6 +121,13 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> ShiftLeft(Vector<ulong> value, int shiftCount) {
                 return WStatics.ShiftLeft(value.AsVector128(), shiftCount).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftLeftFast_AcceleratedTypes {
+                get {
+                    return WStatics.ShiftLeftFast_AcceleratedTypes;
+                }
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{sbyte}, int)"/>

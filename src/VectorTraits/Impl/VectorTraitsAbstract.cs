@@ -76,6 +76,13 @@ namespace Zyl.VectorTraits.Impl {
             Statics.ThrowForUnsupported(noStrict);
         }
 
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
+        public virtual TypeCodeFlags ShiftLeft_AcceleratedTypes {
+            get {
+                return Statics.ShiftLeft_AcceleratedTypes;
+            }
+        }
+
         /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -126,6 +133,13 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector<ulong> ShiftLeft(Vector<ulong> value, int shiftCount) {
             return Statics.ShiftLeft(value, shiftCount);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftLeftFast_AcceleratedTypes"/>
+        public virtual TypeCodeFlags ShiftLeftFast_AcceleratedTypes {
+            get {
+                return Statics.ShiftLeftFast_AcceleratedTypes;
+            }
         }
 
         /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{sbyte}, int)"/>

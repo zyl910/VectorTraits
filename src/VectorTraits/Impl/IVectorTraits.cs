@@ -27,6 +27,12 @@ namespace Zyl.VectorTraits.Impl {
         // If the type of x is long or ulong, the shift count is defined by the low-order six bits of the right-hand operand. That is, the shift count is computed from count & 0x3F (or count & 0b_11_1111).
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>ShiftLeft</c> (运行 <c>ShiftLeft</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ShiftLeft"/>
+        TypeCodeFlags ShiftLeft_AcceleratedTypes { get; }
+
+        /// <summary>
         /// Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
         /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &lt;&lt; shiftCount }</c>, <c>shiftCount &amp;= (T.BitSize-1)</c>.
         /// </summary>
@@ -113,6 +119,12 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector.ShiftLeft(Vector{ulong}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeftFast(Vector{ulong}, int)"/> // Since: VectorTraits 1.0
         Vector<ulong> ShiftLeft(Vector<ulong> value, int shiftCount);
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>ShiftLeftFast</c> (运行 <c>ShiftLeftFast</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ShiftLeftFast"/>
+        TypeCodeFlags ShiftLeftFast_AcceleratedTypes { get; }
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check <paramref name="shiftCount"/>, please use <see cref="Scalars.LimitShiftCount"/> first.

@@ -80,7 +80,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> ShiftLeft(Vector256<sbyte> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET_X_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
                 return ShiftLeft_Base(value, shiftCount);
@@ -90,7 +90,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> ShiftLeft(Vector256<byte> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET_X_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
                 return ShiftLeft_Base(value, shiftCount);
@@ -100,7 +100,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> ShiftLeft(Vector256<short> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
@@ -111,7 +111,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> ShiftLeft(Vector256<ushort> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
@@ -121,7 +121,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> ShiftLeft(Vector256<int> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
@@ -132,7 +132,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> ShiftLeft(Vector256<uint> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
@@ -142,7 +142,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftLeft(Vector256<long> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
@@ -153,7 +153,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> ShiftLeft(Vector256<ulong> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeft_Base(value, shiftCount);
@@ -245,7 +245,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> ShiftLeftFast(Vector256<sbyte> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET_X_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
                 return ShiftLeftFast_Base(value, shiftCount);
@@ -255,7 +255,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> ShiftLeftFast(Vector256<byte> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET_X_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
                 return ShiftLeftFast_Base(value, shiftCount);
@@ -265,7 +265,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> ShiftLeftFast(Vector256<short> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeftFast_Base(value, shiftCount);
@@ -276,7 +276,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> ShiftLeftFast(Vector256<ushort> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeftFast_Base(value, shiftCount);
@@ -286,7 +286,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> ShiftLeftFast(Vector256<int> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeftFast_Base(value, shiftCount);
@@ -297,7 +297,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> ShiftLeftFast(Vector256<uint> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeftFast_Base(value, shiftCount);
@@ -307,7 +307,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftLeftFast(Vector256<long> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeftFast_Base(value, shiftCount);
@@ -318,7 +318,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> ShiftLeftFast(Vector256<ulong> value, int shiftCount) {
-#if BCL_OVERRIDE_BASE_FIXED && (NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftCount);
 #else
                 return ShiftLeftFast_Base(value, shiftCount);
