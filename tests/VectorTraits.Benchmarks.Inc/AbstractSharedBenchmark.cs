@@ -48,7 +48,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                     int a = random.Next(int.MinValue, int.MaxValue);
                     int b = random.Next(int.MinValue, int.MaxValue);
                     long n64 = (((long)a) << 32) | (long)b;
-                    srcArraySByte[i] = (sbyte)a;
+                    srcArraySByte[i] = (sbyte)srcArrayByte[i];
                     srcArrayInt16[i] = (short)a;
                     srcArrayInt32[i] = a;
                     srcArrayInt64[i] = n64;

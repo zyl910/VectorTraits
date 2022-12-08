@@ -1,6 +1,4 @@
 ﻿#undef BENCHMARKS_OFF
-#define BENCHMARKS_ALGORITHM
-#define BENCHMARKS_RAW
 
 using BenchmarkDotNet.Attributes;
 using System;
