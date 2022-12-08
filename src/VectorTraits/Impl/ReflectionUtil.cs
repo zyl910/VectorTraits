@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
-using Zyl.VectorTraits.Impl;
 
-namespace Zyl.VectorTraits {
+namespace Zyl.VectorTraits.Impl {
     /// <summary>
     /// Reflection util (反射工具).
     /// </summary>
@@ -29,7 +28,7 @@ namespace Zyl.VectorTraits {
             if (null == rt) return rt;
             string? namespaceName = atype.Namespace;
             if (null == namespaceName) return rt;
-            rt = rt.Substring(namespaceName.Length+1);
+            rt = rt.Substring(namespaceName.Length + 1);
             return rt;
         }
 
