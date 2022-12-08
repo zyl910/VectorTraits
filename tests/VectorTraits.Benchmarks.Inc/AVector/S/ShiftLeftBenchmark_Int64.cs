@@ -54,7 +54,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             }
             if (CheckMode) {
                 baselineTMy = dstTMy;
-                BenchmarkUtil.WriteLine(string.Format("# StaticSumSLLScalar:\t{0}", baselineTMy));
+                BenchmarkUtil.WriteLine(string.Format("# SumSLLScalar:\t{0}", baselineTMy));
             }
         }
 
