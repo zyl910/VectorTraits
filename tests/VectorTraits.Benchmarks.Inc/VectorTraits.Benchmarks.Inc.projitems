@@ -9,6 +9,7 @@
     <Import_RootNamespace>Zyl.VectorTraits.Benchmarks</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ABitUtil\ClampBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ABitUtil\ConditionalSelectBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ABitUtil\ConditionalSelectBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractBenchmark.cs" />

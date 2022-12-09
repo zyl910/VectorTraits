@@ -1,4 +1,4 @@
-﻿#undef BENCHMARKS_OFF
+﻿//#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -31,7 +31,7 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
             0,
             2,
             TMy.MaxValue/4,
-            TMy.MinValue/2
+            TMy.MaxValue/2
         };
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
             foreach (TMy sample in samples) {
                 dstTMy += StaticSumConditionalSelect_Min(srcArray, srcArray.Length, sample);
             }
-            CheckResult("SumSLLNet7");
+            CheckResult("SumConditionalSelect_Min");
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
             foreach (TMy sample in samples) {
                 dstTMy += StaticSumConditionalSelect_BitUtil(srcArray, srcArray.Length, sample);
             }
-            CheckResult("SumSLLNet7");
+            CheckResult("SumConditionalSelect_BitUtil");
         }
 
     }
