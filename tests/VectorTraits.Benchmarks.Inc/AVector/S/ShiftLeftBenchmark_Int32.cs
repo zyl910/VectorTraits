@@ -19,7 +19,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
     using TMy = Int32;
 
     /// <summary>
-    /// Shift left benchmark - short.
+    /// Shift left benchmark - Int32.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]

@@ -14,15 +14,15 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = Int32;
+    using TMy = Int16;
 
     /// <summary>
-    /// Clamp benchmark - Int32.
+    /// Clamp benchmark - Int16.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    internal partial class ClampBenchmark_Int32 : AbstractSharedBenchmark_Int32 {
+    internal partial class ClampBenchmark_Int16 : AbstractSharedBenchmark_Int16 {
 
         // -- var --
         private const TMy valueMin = default;
@@ -47,7 +47,7 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
             TMy rt = 0; // Result.
             for (int i = 0; i < srcCount; ++i) {
                 TMy t = src[i];
-                rt += (t < amax) ? ( (t > amin) ? t : amin ) : amax;
+                rt += (t < amax) ? ((t > amin) ? t : amin) : amax;
             }
             return rt;
         }

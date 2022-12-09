@@ -16,7 +16,7 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
     using TMy = Int16;
 
     /// <summary>
-    /// Shift left benchmark - short.
+    /// ConditionalSelect benchmark - Int16.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
