@@ -78,5 +78,61 @@ namespace Zyl.VectorTraits.Tests {
             }
         }
 
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void ClampToBitMaxTest<T>(T src) where T : struct {
+            int nmin = 0;
+            int nmax = 7; // Pow(2, 3)-1.
+            T amin = Scalars.GetByDouble<T>(nmin);
+            T amax = Scalars.GetByDouble<T>(nmax);
+            T[] samples = new T[12];
+            samples[0] = src;
+            for (int i = 1; i < samples.Length; ++i) {
+                samples[i] = Scalars.GetByDouble<T>(i - 1);
+            }
+            // run.
+            for (int i = 1; i < samples.Length; ++i) {
+                T value = samples[i];
+                T baseline;
+#if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+                baseline = Math.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
+#else
+                baseline = Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
+#endif
+                T dst = BitUtil.ClampToBitMax((dynamic)value, (dynamic)amax);
+                Assert.AreEqual(baseline, dst, $"{value}, [{amin}, {nmax}]");
+            }
+        }
+
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void ClampToByteTest<T>(T src) where T : struct {
+            int nmin = 0;
+            int nmax = byte.MaxValue;
+            T amin = Scalars.GetByDouble<T>(nmin);
+            T amax = Scalars.GetByDouble<T>(nmax);
+            T[] samples = new T[20];
+            samples[0] = src;
+            for (int i = 1; i < samples.Length; ++i) {
+                samples[i] = Scalars.GetByDouble<T>(i - 10);
+            }
+            // run.
+            for (int i = 1; i < samples.Length; ++i) {
+                T value = samples[i];
+                byte baseline;
+#if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+                baseline = (byte)Math.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
+#else
+                baseline = (byte)Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
+#endif
+                byte dst = BitUtil.ClampToByte((dynamic)value);
+                Assert.AreEqual(baseline, dst, $"{value}, [{amin}, {nmax}]");
+            }
+        }
+
     }
 }

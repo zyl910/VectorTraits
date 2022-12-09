@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -706,6 +707,82 @@ namespace Zyl.VectorTraits {
         public static decimal Clamp(decimal value, decimal amin, decimal amax) {
             //return ConditionalSelect(value < amax, ConditionalSelect(value > amin, value, amin), amax);
             return Math.Min(Math.Max(value, amin), amax);
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of 0 and <paramref name="amax" /> (返回限制在 0 和 <paramref name="amax" /> 范围内的 <paramref name="value" />). <paramref name="amax" /> must be a `Pow(2,n)-1`.</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限). It must be a `Pow(2,n)-1`.</param>
+        /// <returns>Returns <c>(value&lt;amax)?( (value&gt;0)?value:0 ):amax</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int ClampToBitMax(int value, int amax) {
+            Debug.Assert(0 == (amax & (amax + 1)));
+            return (value & ToInt32Mask(value >= 0) | ToInt32Mask(value > amax)) & amax;
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of 0 and <paramref name="amax" /> (返回限制在 0 和 <paramref name="amax" /> 范围内的 <paramref name="value" />). <paramref name="amax" /> must be a `Pow(2,n)-1`.</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限). It must be a `Pow(2,n)-1`.</param>
+        /// <returns>Returns <c>(value&lt;amax)?( (value&gt;0)?value:0 ):amax</c>.</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint ClampToBitMax(uint value, uint amax) {
+            Debug.Assert(0 == (amax & (amax + 1)));
+            return (value | (uint)ToInt32Mask(value > amax)) & amax;
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of 0 and <paramref name="amax" /> (返回限制在 0 和 <paramref name="amax" /> 范围内的 <paramref name="value" />). <paramref name="amax" /> must be a `Pow(2,n)-1`.</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限). It must be a `Pow(2,n)-1`.</param>
+        /// <returns>Returns <c>(value&lt;amax)?( (value&gt;0)?value:0 ):amax</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long ClampToBitMax(long value, long amax) {
+            Debug.Assert(0 == (amax & (amax + 1)));
+            return (value & (long)ToInt32Mask(value >= 0) | (long)ToInt32Mask(value > amax)) & amax;
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of 0 and <paramref name="amax" /> (返回限制在 0 和 <paramref name="amax" /> 范围内的 <paramref name="value" />). <paramref name="amax" /> must be a `Pow(2,n)-1`.</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限). It must be a `Pow(2,n)-1`.</param>
+        /// <returns>Returns <c>(value&lt;amax)?( (value&gt;0)?value:0 ):amax</c>.</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ulong ClampToBitMax(ulong value, ulong amax) {
+            Debug.Assert(0 == (amax & (amax + 1)));
+            return (value | (ulong)(long)ToInt32Mask(value > amax)) & amax;
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of 0 and <c>byte.MaxValue</c> (返回限制在 0 和 <c>byte.MaxValue</c> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <returns>Returns clamped value (返回限制后的值).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte ClampToByte(int value) {
+            return (byte)(value & ToInt32Mask(value >= 0) | ToInt32Mask(value > byte.MaxValue));
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of 0 and <c>byte.MaxValue</c> (返回限制在 0 和 <c>byte.MaxValue</c> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <returns>Returns clamped value (返回限制后的值).</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte ClampToByte(uint value) {
+            return (byte)(value | (uint)ToInt32Mask(value > byte.MaxValue));
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of 0 and <c>byte.MaxValue</c> (返回限制在 0 和 <c>byte.MaxValue</c> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <returns>Returns clamped value (返回限制后的值).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte ClampToByte(long value) {
+            return (byte)(value & (long)ToInt32Mask(value >= 0) | (long)ToInt32Mask(value > byte.MaxValue));
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of 0 and <c>byte.MaxValue</c> (返回限制在 0 和 <c>byte.MaxValue</c> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <returns>Returns clamped value (返回限制后的值).</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte ClampToByte(ulong value) {
+            return (byte)(value | (ulong)(long)ToInt32Mask(value > byte.MaxValue));
         }
 
     }
