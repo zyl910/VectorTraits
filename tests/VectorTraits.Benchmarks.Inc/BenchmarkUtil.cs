@@ -212,7 +212,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="obj">The object.</param>
         public static void RunBenchmarkObject(TextWriter writer, string indent, Type typ, AbstractBenchmark? obj) {
             if (null == obj) return;
-            ILoopCountGetter loopCountGetter = obj as ILoopCountGetter;
+            ILoopCountGetter? loopCountGetter = obj as ILoopCountGetter;
             List<MethodInfo> lst = new List<MethodInfo>();
             FillMethodInfoOfBenchmark(lst, obj);
             if (lst.Count <= 0) return;
