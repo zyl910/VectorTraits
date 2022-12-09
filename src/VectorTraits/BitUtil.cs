@@ -544,5 +544,169 @@ namespace Zyl.VectorTraits {
 
 #endif // NET5_0_OR_GREATER
 
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amin">The lower bound of the result (结果的下限).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限).</param>
+        /// <returns>Returns <c>(value&lt;amin)?amin:( (value&gt;amax)?amax:value )</c>.</returns>
+        /// <seealso cref="Math.Clamp(sbyte, sbyte, sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static sbyte Clamp(sbyte value, sbyte amin, sbyte amax) {
+            return ConditionalSelect(value < amin, amin, ConditionalSelect(value > amax, amax, value));
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amin">The lower bound of the result (结果的下限).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限).</param>
+        /// <returns>Returns <c>(value&lt;amin)?amin:( (value&gt;amax)?amax:value )</c>.</returns>
+        /// <seealso cref="Math.Clamp(byte, byte, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte Clamp(byte value, byte amin, byte amax) {
+            return ConditionalSelect(value < amin, amin, ConditionalSelect(value > amax, amax, value));
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amin">The lower bound of the result (结果的下限).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限).</param>
+        /// <returns>Returns <c>(value&lt;amin)?amin:( (value&gt;amax)?amax:value )</c>.</returns>
+        /// <seealso cref="Math.Clamp(short, short, short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static short Clamp(short value, short amin, short amax) {
+            return ConditionalSelect(value < amin, amin, ConditionalSelect(value > amax, amax, value));
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amin">The lower bound of the result (结果的下限).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限).</param>
+        /// <returns>Returns <c>(value&lt;amin)?amin:( (value&gt;amax)?amax:value )</c>.</returns>
+        /// <seealso cref="Math.Clamp(ushort, ushort, ushort)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ushort Clamp(ushort value, ushort amin, ushort amax) {
+            return ConditionalSelect(value < amin, amin, ConditionalSelect(value > amax, amax, value));
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amin">The lower bound of the result (结果的下限).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限).</param>
+        /// <returns>Returns <c>(value&lt;amin)?amin:( (value&gt;amax)?amax:value )</c>.</returns>
+        /// <seealso cref="Math.Clamp(int, int, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Clamp(int value, int amin, int amax) {
+            return ConditionalSelect(value < amin, amin, ConditionalSelect(value > amax, amax, value));
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amin">The lower bound of the result (结果的下限).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限).</param>
+        /// <returns>Returns <c>(value&lt;amin)?amin:( (value&gt;amax)?amax:value )</c>.</returns>
+        /// <seealso cref="Math.Clamp(uint, uint, uint)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint Clamp(uint value, uint amin, uint amax) {
+            return ConditionalSelect(value < amin, amin, ConditionalSelect(value > amax, amax, value));
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amin">The lower bound of the result (结果的下限).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限).</param>
+        /// <returns>Returns <c>(value&lt;amin)?amin:( (value&gt;amax)?amax:value )</c>.</returns>
+        /// <seealso cref="Math.Clamp(long, long, long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long Clamp(long value, long amin, long amax) {
+            return ConditionalSelect(value < amin, amin, ConditionalSelect(value > amax, amax, value));
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amin">The lower bound of the result (结果的下限).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限).</param>
+        /// <returns>Returns <c>(value&lt;amin)?amin:( (value&gt;amax)?amax:value )</c>.</returns>
+        /// <seealso cref="Math.Clamp(ulong, ulong, ulong)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ulong Clamp(ulong value, ulong amin, ulong amax) {
+            return ConditionalSelect(value < amin, amin, ConditionalSelect(value > amax, amax, value));
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amin">The lower bound of the result (结果的下限).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限).</param>
+        /// <returns>Returns <c>(value&lt;amin)?amin:( (value&gt;amax)?amax:value )</c>.</returns>
+        /// <seealso cref="Math.Clamp(nint, nint, nint)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static nint Clamp(nint value, nint amin, nint amax) {
+            return ConditionalSelect(value < amin, amin, ConditionalSelect(value > amax, amax, value));
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amin">The lower bound of the result (结果的下限).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限).</param>
+        /// <returns>Returns <c>(value&lt;amin)?amin:( (value&gt;amax)?amax:value )</c>.</returns>
+        /// <seealso cref="Math.Clamp(nuint, nuint, nuint)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static nuint Clamp(nuint value, nuint amin, nuint amax) {
+            return ConditionalSelect(value < amin, amin, ConditionalSelect(value > amax, amax, value));
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amin">The lower bound of the result (结果的下限).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限).</param>
+        /// <returns>Returns <c>(value&lt;amin)?amin:( (value&gt;amax)?amax:value )</c>.</returns>
+        /// <seealso cref="Math.Clamp(float, float, float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Clamp(float value, float amin, float amax) {
+            return ConditionalSelect(value < amin, amin, ConditionalSelect(value > amax, amax, value));
+        }
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amin">The lower bound of the result (结果的下限).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限).</param>
+        /// <returns>Returns <c>(value&lt;amin)?amin:( (value&gt;amax)?amax:value )</c>.</returns>
+        /// <seealso cref="Math.Clamp(double, double, double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Clamp(double value, double amin, double amax) {
+            return ConditionalSelect(value < amin, amin, ConditionalSelect(value > amax, amax, value));
+        }
+
+#if NET5_0_OR_GREATER
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amin">The lower bound of the result (结果的下限).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限).</param>
+        /// <returns>Returns <c>(value&lt;amin)?amin:( (value&gt;amax)?amax:value )</c>.</returns>
+        /// <seealso cref="Math.Clamp(Half, Half, Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half Clamp(Half value, Half amin, Half amax) {
+            return ConditionalSelect(value < amin, amin, ConditionalSelect(value > amax, amax, value));
+        }
+
+#endif // NET5_0_OR_GREATER
+
+        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        /// <param name="value">The value to be clamped (要限制的值).</param>
+        /// <param name="amin">The lower bound of the result (结果的下限).</param>
+        /// <param name="amax">The upper bound of the result (结果的上限).</param>
+        /// <returns>Returns <c>(value&lt;amin)?amin:( (value&gt;amax)?amax:value )</c>.</returns>
+        /// <seealso cref="Math.Clamp(decimal, decimal, decimal)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static decimal Clamp(decimal value, decimal amin, decimal amax) {
+            //return ConditionalSelect(value < amin, amin, ConditionalSelect(value > amax, amax, value));
+            return Math.Max(amin, Math.Min(amax, value));
+        }
+
     }
 }
