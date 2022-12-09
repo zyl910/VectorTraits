@@ -88,7 +88,7 @@ namespace Zyl.VectorTraits.Tests {
 #if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                 baseline = Math.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
 #else
-                baseline = Math.Max((dynamic)amin, Math.Min((dynamic)amax, (dynamic)value));
+                baseline = Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
 #endif
                 T dst = BitUtil.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
                 Assert.AreEqual(baseline, dst, $"{value}, [{amin}, {nmax}]");
