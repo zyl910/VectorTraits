@@ -28,7 +28,7 @@ namespace Zyl.VectorTraits.Extensions {
             this
 #endif
                 Vector<T> value) where T : struct {
-            return value.AsVector256();
+            return Vectors.AsVector256(value);
         }
 
         /// <summary>Reinterprets a <see cref="Vector256{T}" /> as a new <see cref="Vector{T}" />.</summary>
