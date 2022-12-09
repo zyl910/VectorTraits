@@ -27,36 +27,19 @@ namespace Zyl.VectorTraits.Tests {
             T[] samples = new T[10];
             samples[0] = src;
             for (int i = 1; i < samples.Length; ++i) {
-                samples[1] = Scalars.GetByDouble<T>(i - 1);
+                samples[i] = Scalars.GetByDouble<T>(i - 1);
             }
             // run.
             for (int i = 1; i < samples.Length; ++i) {
+                T left = samples[i];
                 for (int j = 1; j < samples.Length; ++j) {
+                    T right = samples[j];
                     T baseline;
                     T dst;
-                    if (typeof(T) == typeof(sbyte)) {
-                        baseline = (T)(object)Math.Min((sbyte)i, (sbyte)j);
-                        dst = (T)(object)BitUtil.ConditionalSelect(i < j, (sbyte)i, (sbyte)j);
-                    } else if (typeof(T) == typeof(byte)) {
-                        baseline = (T)(object)Math.Min((byte)i, (byte)j);
-                        dst = (T)(object)BitUtil.ConditionalSelect(i < j, (byte)i, (byte)j);
-                    } else if (typeof(T) == typeof(short)) {
-                        baseline = (T)(object)Math.Min((short)i, (short)j);
-                        dst = (T)(object)BitUtil.ConditionalSelect(i < j, (short)i, (short)j);
-                    } else if (typeof(T) == typeof(ushort)) {
-                        baseline = (T)(object)Math.Min((ushort)i, (ushort)j);
-                        dst = (T)(object)BitUtil.ConditionalSelect(i < j, (ushort)i, (ushort)j);
-                    } else if (typeof(T) == typeof(uint)) {
-                        baseline = (T)(object)Math.Min((uint)i, (uint)j);
-                        dst = (T)(object)BitUtil.ConditionalSelect(i < j, (uint)i, (uint)j);
-                    } else if (typeof(T) == typeof(ulong)) {
-                        baseline = (T)(object)Math.Min((ulong)i, (ulong)j);
-                        dst = (T)(object)BitUtil.ConditionalSelect(i < j, (ulong)i, (ulong)j);
-                    } else {
-                        baseline = Math.Min((dynamic)i, (dynamic)j);
-                        dst = BitUtil.ConditionalSelect(i < j, (dynamic)i, (dynamic)j);
-                    }
-                    Assert.AreEqual(baseline, dst, $"{i} < {j}");
+                    baseline = Math.Min((dynamic)left, (dynamic)right);
+                    dst = BitUtil.ConditionalSelect((dynamic)left < (dynamic)right, (dynamic)left, (dynamic)right);
+                    Assert.AreEqual(baseline, dst, $"{left} < {right}");
+                    //Console.WriteLine($"{left} < {right}: {baseline}");
                 }
             }
         }
