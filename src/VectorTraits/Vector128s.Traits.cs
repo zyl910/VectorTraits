@@ -93,84 +93,84 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<sbyte> ShiftLeft(Vector128<sbyte> value, int shiftCount) {
+        public static Vector128<sbyte> ShiftLeft(Vector128<sbyte> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
-            return Vector128.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
+            return Vector128.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-            return _instance.ShiftLeft(value, shiftCount);
+            return _instance.ShiftLeft(value, shiftAmount);
 #endif
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<byte> ShiftLeft(Vector128<byte> value, int shiftCount) {
+        public static Vector128<byte> ShiftLeft(Vector128<byte> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
-            return Vector128.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
+            return Vector128.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-            return _instance.ShiftLeft(value, shiftCount);
+            return _instance.ShiftLeft(value, shiftAmount);
 #endif
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<short> ShiftLeft(Vector128<short> value, int shiftCount) {
+        public static Vector128<short> ShiftLeft(Vector128<short> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftCount);
+            return Vector128.ShiftLeft(value, shiftAmount);
 #else
-            return _instance.ShiftLeft(value, shiftCount);
+            return _instance.ShiftLeft(value, shiftAmount);
 #endif
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{ushort}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ushort> ShiftLeft(Vector128<ushort> value, int shiftCount) {
+        public static Vector128<ushort> ShiftLeft(Vector128<ushort> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftCount);
+            return Vector128.ShiftLeft(value, shiftAmount);
 #else
-            return _instance.ShiftLeft(value, shiftCount);
+            return _instance.ShiftLeft(value, shiftAmount);
 #endif
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<int> ShiftLeft(Vector128<int> value, int shiftCount) {
+        public static Vector128<int> ShiftLeft(Vector128<int> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftCount);
+            return Vector128.ShiftLeft(value, shiftAmount);
 #else
-            return _instance.ShiftLeft(value, shiftCount);
+            return _instance.ShiftLeft(value, shiftAmount);
 #endif
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{uint}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<uint> ShiftLeft(Vector128<uint> value, int shiftCount) {
+        public static Vector128<uint> ShiftLeft(Vector128<uint> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftCount);
+            return Vector128.ShiftLeft(value, shiftAmount);
 #else
-            return _instance.ShiftLeft(value, shiftCount);
+            return _instance.ShiftLeft(value, shiftAmount);
 #endif
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<long> ShiftLeft(Vector128<long> value, int shiftCount) {
+        public static Vector128<long> ShiftLeft(Vector128<long> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftCount);
+            return Vector128.ShiftLeft(value, shiftAmount);
 #else
-            return _instance.ShiftLeft(value, shiftCount);
+            return _instance.ShiftLeft(value, shiftAmount);
 #endif
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{ulong}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ulong> ShiftLeft(Vector128<ulong> value, int shiftCount) {
+        public static Vector128<ulong> ShiftLeft(Vector128<ulong> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftCount);
+            return Vector128.ShiftLeft(value, shiftAmount);
 #else
-            return _instance.ShiftLeft(value, shiftCount);
+            return _instance.ShiftLeft(value, shiftAmount);
 #endif
         }
 
@@ -190,95 +190,95 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<sbyte> ShiftLeftFast(Vector128<sbyte> value, int shiftCount) {
+        public static Vector128<sbyte> ShiftLeftFast(Vector128<sbyte> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
-            return Vector128.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
+            return Vector128.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-            return _instance.ShiftLeftFast(value, shiftCount);
+            return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<byte> ShiftLeftFast(Vector128<byte> value, int shiftCount) {
+        public static Vector128<byte> ShiftLeftFast(Vector128<byte> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
-            return Vector128.ShiftLeft(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
+            return Vector128.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-            return _instance.ShiftLeftFast(value, shiftCount);
+            return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<short> ShiftLeftFast(Vector128<short> value, int shiftCount) {
+        public static Vector128<short> ShiftLeftFast(Vector128<short> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftCount);
+            return Vector128.ShiftLeft(value, shiftAmount);
 #else
-            return _instance.ShiftLeftFast(value, shiftCount);
+            return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{ushort}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ushort> ShiftLeftFast(Vector128<ushort> value, int shiftCount) {
+        public static Vector128<ushort> ShiftLeftFast(Vector128<ushort> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftCount);
+            return Vector128.ShiftLeft(value, shiftAmount);
 #else
-            return _instance.ShiftLeftFast(value, shiftCount);
+            return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<int> ShiftLeftFast(Vector128<int> value, int shiftCount) {
+        public static Vector128<int> ShiftLeftFast(Vector128<int> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftCount);
+            return Vector128.ShiftLeft(value, shiftAmount);
 #else
-            return _instance.ShiftLeftFast(value, shiftCount);
+            return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{uint}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<uint> ShiftLeftFast(Vector128<uint> value, int shiftCount) {
+        public static Vector128<uint> ShiftLeftFast(Vector128<uint> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftCount);
+            return Vector128.ShiftLeft(value, shiftAmount);
 #else
-            return _instance.ShiftLeftFast(value, shiftCount);
+            return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<long> ShiftLeftFast(Vector128<long> value, int shiftCount) {
+        public static Vector128<long> ShiftLeftFast(Vector128<long> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftCount);
+            return Vector128.ShiftLeft(value, shiftAmount);
 #else
-            return _instance.ShiftLeftFast(value, shiftCount);
+            return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{ulong}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ulong> ShiftLeftFast(Vector128<ulong> value, int shiftCount) {
+        public static Vector128<ulong> ShiftLeftFast(Vector128<ulong> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftCount);
+            return Vector128.ShiftLeft(value, shiftAmount);
 #else
-            return _instance.ShiftLeftFast(value, shiftCount);
+            return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<int> ShiftRightArithmetic(Vector128<int> value, int shiftCount) {
+        public static Vector128<int> ShiftRightArithmetic(Vector128<int> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightArithmetic(value, shiftCount);
+            return Vector128.ShiftRightArithmetic(value, shiftAmount);
 #else
-            return _instance.ShiftRightArithmetic(value, shiftCount);
+            return _instance.ShiftRightArithmetic(value, shiftAmount);
 #endif
         }
 

@@ -200,14 +200,14 @@ namespace Zyl.VectorTraits.Benchmarks {
 
 
         // -- Params --
-        /// <summary>The shiftCount min value.</summary>
-        public virtual int ShiftCountMin {
+        /// <summary>The shiftAmount min value.</summary>
+        public virtual int ShiftAmountMin {
             get {
                 return -1;
             }
         }
-        /// <summary>The shiftCount max value.</summary>
-        public virtual int ShiftCountMax {
+        /// <summary>The shiftAmount max value.</summary>
+        public virtual int ShiftAmountMax {
             get {
                 return 1;
             }

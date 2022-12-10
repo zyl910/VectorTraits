@@ -24,13 +24,13 @@ namespace Zyl.VectorTraits.Benchmarks {
 
 
         // -- Params --
-        public override int ShiftCountMin {
+        public override int ShiftAmountMin {
             get {
                 //return 1;
                 return -1;
             }
         }
-        public override int ShiftCountMax {
+        public override int ShiftAmountMax {
             get {
                 //return 1;
                 return Scalars<TMy>.BitSize + 1;

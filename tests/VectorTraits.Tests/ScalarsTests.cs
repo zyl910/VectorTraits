@@ -32,13 +32,13 @@ namespace Zyl.VectorTraits.Tests {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
-        public void LimitShiftCountTest<T>(T src) where T : struct {
+        public void LimitShiftAmountTest<T>(T src) where T : struct {
             int iMin = 0;
             int iMax = Scalars<T>.BitSize - 1;
             int iMinLoop = iMin - 1;
             int iMaxLoop = iMax + (int)Scalars.GetInt64BitsFrom<T>(src);
             for (int i= iMinLoop; i<= iMaxLoop; ++i) {
-                int dst = Scalars.LimitShiftCount<T>(i);
+                int dst = Scalars.LimitShiftAmount<T>(i);
                 Assert.GreaterOrEqual(dst, iMin);
                 Assert.LessOrEqual(dst, iMax);
             }
