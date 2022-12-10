@@ -182,11 +182,11 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.ShiftRightArithmetic(value, shiftAmount);
         }
 
-        ///// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{long}, int)"/>
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public override Vector256<long> ShiftRightArithmetic(Vector256<long> value, int shiftAmount) {
-        //    return Statics.ShiftRightArithmetic(value, shiftAmount);
-        //}
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> ShiftRightArithmetic(Vector256<long> value, int shiftAmount) {
+            return Statics.ShiftRightArithmetic(value, shiftAmount);
+        }
 
         /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast_AcceleratedTypes"/>
         public override TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes {
@@ -214,11 +214,11 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.ShiftRightArithmeticFast(value, shiftAmount);
         }
 
-        ///// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public override Vector256<long> ShiftRightArithmeticFast(Vector256<long> value, int shiftAmount) {
-        //    return Statics.ShiftRightArithmeticFast(value, shiftAmount);
-        //}
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> ShiftRightArithmeticFast(Vector256<long> value, int shiftAmount) {
+            return Statics.ShiftRightArithmeticFast(value, shiftAmount);
+        }
 
 #endif
     }

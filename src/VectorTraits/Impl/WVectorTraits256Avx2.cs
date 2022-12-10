@@ -230,17 +230,17 @@ namespace Zyl.VectorTraits.Impl {
                 return ShiftRightArithmeticFast(value, shiftAmount);
             }
 
-            ///// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{long}, int)"/>
-            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-            //public static Vector256<long> ShiftRightArithmetic(Vector256<long> value, int shiftAmount) {
-            //    shiftAmount &= 0x3F;
-            //    return ShiftRightArithmeticFast(value, shiftAmount);
-            //}
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ShiftRightArithmetic(Vector256<long> value, int shiftAmount) {
+                shiftAmount &= 0x3F;
+                return ShiftRightArithmeticFast(value, shiftAmount);
+            }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes {
                 get {
-                    return TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+                    return TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
                 }
             }
 
@@ -266,6 +266,44 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> ShiftRightArithmeticFast(Vector256<int> value, int shiftAmount) {
                 return Avx2.ShiftRightArithmetic(value, (byte)shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ShiftRightArithmeticFast(Vector256<long> value, int shiftAmount) {
+                return ShiftRightArithmeticFast_If(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ShiftRightArithmeticFast_If(Vector256<long> value, int shiftAmount) {
+                if (0 == (shiftAmount & 0x3F)) {
+                    return value;
+                }
+                Vector256<long> rt;
+                Vector256<int> lower, upper;
+                Vector256<int> XyXMask = Vector256s<int>.XyXMask;
+                const byte controlInputUpper = 0b11_11_01_01; // GetByteByBit2(1, 1, 3, 3) = 0xF5 = 0b11_11_01_01;
+                Vector256<int> upperAtLower = Avx2.Shuffle(value.AsInt32(), controlInputUpper); // f({ v0.lower, v0.upper, v1.lower, v1.upper, ... }) = { v0.upper, v0.upper, v1.upper, v1.upper, ... }
+                upperAtLower = Avx2.And(XyXMask, upperAtLower); // = { v0.upper, 0, v1.upper, 0, ... }
+                Vector256<int> upperOld = Avx2.AndNot(XyXMask, value.AsInt32()); // = { 0, v0.upper, 0, v1.upper, ... }
+                if (32 <= shiftAmount) {
+                    // Scalar algorithm:
+                    //    uint lower = (uint)((int)value._upper >> (shiftAmount & 31));
+                    //    uint upper = (uint)((int)value._upper >> 31);
+                    lower = Avx2.ShiftRightArithmetic(upperAtLower, (byte)(shiftAmount & 31));
+                    upper = Avx2.ShiftRightArithmetic(upperOld, 31);
+                    rt = Avx2.Or(lower, upper).AsInt64();
+                } else {
+                    // Scalar algorithm:
+                    //    uint lower = (value._lower >> shiftAmount) | (value._upper << (32 - shiftAmount));
+                    //    uint upper = (uint)((int)value._upper >> shiftAmount);
+                    Vector256<int> lowerOld = Avx2.And(XyXMask, value.AsInt32());
+                    lower = Avx2.Or(Avx2.ShiftRightLogical(lowerOld, (byte)shiftAmount), Avx2.ShiftLeftLogical(upperAtLower, (byte)(32 - shiftAmount)));
+                    upper = Avx2.ShiftRightArithmetic(upperOld, (byte)shiftAmount);
+                    rt = Avx2.Or(lower, upper).AsInt64();
+                }
+                return rt;
             }
 
 #endif // NETCOREAPP3_0_OR_GREATER
