@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -10,6 +11,8 @@ namespace Zyl.VectorTraits {
     /// Bit manipulation util (位操控工具).
     /// </summary>
     /// <seealso cref="BitConverter"/>
+    /// <seealso cref="BitOperations"/>
+    /// <seealso cref="Math"/>
     public static class BitUtil {
 
         // == MemoryMarshal ==
