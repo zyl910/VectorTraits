@@ -698,34 +698,55 @@ namespace Zyl.VectorTraits {
         public static readonly Vector<T> InterlacedSign;
         /// <summary>Interlaced sign number starting with a negative number (负数开头的交错的符号数值). e.g. -1, 1, -1, 1, -1, 1 ...</summary>
         public static readonly Vector<T> InterlacedSignNegative;
-        // -- Xyzw --
-        /// <summary>Xy - X mask. For a 2-element group, select the mask of the 0th element (对于2个元素的组，选择第0个元素的掩码).</summary>
+        // -- Xy --
+        /// <summary>Xy - Address 0 mask. For a 2-element group, select the mask of the address 0th element (对于2个元素的组，选择地址为第0个元素的掩码).</summary>
+        public static readonly Vector<T> XyAddress0Mask;
+        /// <summary>Xy - Address 0 mask. For a 2-element group, select the mask of the address 1st element (对于2个元素的组，选择地址为第1个元素的掩码).</summary>
+        public static readonly Vector<T> XyAddress1Mask;
+        /// <summary>Xy - Address 0 is normalized number of value 1 (地址0为 值1的归一化数).</summary>
+        public static readonly Vector<T> XyAddress0NormOne;
+        /// <summary>Xy - Address 1 is normalized number of value 1 (地址1为 值1的归一化数).</summary>
+        public static readonly Vector<T> XyAddress1NormOne;
+        /// <summary>Xy - X mask. For a 2-element group, select the mask of the position 0th element (对于2个元素的组，选择位置为第0个元素的掩码).</summary>
         public static readonly Vector<T> XyXMask;
-        /// <summary>Xy - Y mask. For a 2-element group, select the mask of the 1st element (对于2个元素的组，选择第1个元素的掩码).</summary>
+        /// <summary>Xy - Y mask. For a 2-element group, select the mask of the position 1st element (对于2个元素的组，选择位置为第1个元素的掩码).</summary>
         public static readonly Vector<T> XyYMask;
-        /// <summary>Xyzw - X mask. For a 4-element group, select the mask of the 0th element (对于4个元素的组，选择第0个元素的掩码). Alias has <see cref="RgbaRMask"/>.</summary>
+        /// <summary>Xy - X is normalized number of value 1 (X为 值1的归一化数).</summary>
+        public static readonly Vector<T> XyXNormOne;
+        /// <summary>Xy - Y is normalized number of value 1 (Y为 值1的归一化数).</summary>
+        public static readonly Vector<T> XyYNormOne;
+        // -- Xyzw --
+        /// <summary>Xyzw - Address 0 mask. For a 4-element group, select the mask of the address 0th element (对于4个元素的组，选择地址为第0个元素的掩码).</summary>
+        public static readonly Vector<T> XyzwAddress0Mask;
+        /// <summary>Xyzw - Address 1 mask. For a 4-element group, select the mask of the address 0th element (对于4个元素的组，选择地址为第1个元素的掩码).</summary>
+        public static readonly Vector<T> XyzwAddress1Mask;
+        /// <summary>Xyzw - Address 2 mask. For a 4-element group, select the mask of the address 0th element (对于4个元素的组，选择地址为第2个元素的掩码).</summary>
+        public static readonly Vector<T> XyzwAddress2Mask;
+        /// <summary>Xyzw - Address 3 mask. For a 4-element group, select the mask of the address 0th element (对于4个元素的组，选择地址为第3个元素的掩码).</summary>
+        public static readonly Vector<T> XyzwAddress3Mask;
+        /// <summary>Xyzw - Address 0 is normalized number of value 1 (地址0为 值1的归一化数).</summary>
+        public static readonly Vector<T> XyzwAddress0NormOne;
+        /// <summary>Xyzw - Address 1 is normalized number of value 1 (地址1为 值1的归一化数).</summary>
+        public static readonly Vector<T> XyzwAddress1NormOne;
+        /// <summary>Xyzw - Address 2 is normalized number of value 1 (地址2为 值1的归一化数).</summary>
+        public static readonly Vector<T> XyzwAddress2NormOne;
+        /// <summary>Xyzw - Address 3 is normalized number of value 1 (地址3为 值1的归一化数).</summary>
+        public static readonly Vector<T> XyzwAddress3NormOne;
+        /// <summary>Xyzw - X mask. For a 4-element group, select the mask of the position 0th element (对于4个元素的组，选择位置为第0个元素的掩码). Alias has <see cref="RgbaRMask"/>.</summary>
         public static readonly Vector<T> XyzwXMask;
-        /// <summary>Xyzw - Y mask. For a 4-element group, select the mask of the 1th element (对于4个元素的组，选择第1个元素的掩码). Alias has <see cref="RgbaGMask"/>.</summary>
+        /// <summary>Xyzw - Y mask. For a 4-element group, select the mask of the position 1th element (对于4个元素的组，选择位置为第1个元素的掩码). Alias has <see cref="RgbaGMask"/>.</summary>
         public static readonly Vector<T> XyzwYMask;
-        /// <summary>Xyzw - Z mask. For a 4-element group, select the mask of the 2th element (对于4个元素的组，选择第2个元素的掩码). Alias has <see cref="RgbaBMask"/>.</summary>
+        /// <summary>Xyzw - Z mask. For a 4-element group, select the mask of the position 2th element (对于4个元素的组，选择位置为第2个元素的掩码). Alias has <see cref="RgbaBMask"/>.</summary>
         public static readonly Vector<T> XyzwZMask;
-        /// <summary>Xyzw - W mask. For a 4-element group, select the mask of the 3th element (对于4个元素的组，选择第3个元素的掩码). Alias has <see cref="RgbaAMask"/>.</summary>
+        /// <summary>Xyzw - W mask. For a 4-element group, select the mask of the position 3th element (对于4个元素的组，选择位置为第3个元素的掩码). Alias has <see cref="RgbaAMask"/>.</summary>
         public static readonly Vector<T> XyzwWMask;
-        /// <summary>Xyzw - Not X mask. For a 4-element group, not select the mask of the 0th element (对于4个元素的组，不选择第0个元素的掩码). Alias has <see cref="RgbaNotRMask"/>.</summary>
-        public static readonly Vector<T> XyzwNotXMask;
-        /// <summary>Xyzw - Not Y mask. For a 4-element group, not select the mask of the 1th element (对于4个元素的组，不选择第1个元素的掩码). Alias has <see cref="RgbaNotGMask"/>.</summary>
-        public static readonly Vector<T> XyzwNotYMask;
-        /// <summary>Xyzw - Not Z mask. For a 4-element group, not select the mask of the 2th element (对于4个元素的组，不选择第2个元素的掩码). Alias has <see cref="RgbaNotBMask"/>.</summary>
-        public static readonly Vector<T> XyzwNotZMask;
-        /// <summary>Xyzw - Not W mask. For a 4-element group, not select the mask of the 3th element (对于4个元素的组，不选择第3个元素的掩码). Alias has <see cref="RgbaNotAMask"/>.</summary>
-        public static readonly Vector<T> XyzwNotWMask;
-        /// <summary>Xyzw - X is normalized number of value 1 (X 为值1的归一化数).</summary>
+        /// <summary>Xyzw - X is normalized number of value 1 (X为 值1的归一化数).</summary>
         public static readonly Vector<T> XyzwXNormOne;
-        /// <summary>Xyzw - Y is normalized number of value 1 (Y 为值1的归一化数).</summary>
+        /// <summary>Xyzw - Y is normalized number of value 1 (Y为 值1的归一化数).</summary>
         public static readonly Vector<T> XyzwYNormOne;
-        /// <summary>Xyzw - Z is normalized number of value 1 (Z 为值1的归一化数).</summary>
+        /// <summary>Xyzw - Z is normalized number of value 1 (Z为 值1的归一化数).</summary>
         public static readonly Vector<T> XyzwZNormOne;
-        /// <summary>Xyzw - W is normalized number of value 1 (W 为值1的归一化数).</summary>
+        /// <summary>Xyzw - W is normalized number of value 1 (W为 值1的归一化数).</summary>
         public static readonly Vector<T> XyzwWNormOne;
         // == Mask array ==
         /// <summary>Bit pos mask array (位偏移掩码的数组). e.g. 1, 2, 4, 8, 0x10 ...</summary>
@@ -825,20 +846,45 @@ namespace Zyl.VectorTraits {
                 T o = ElementZero;
                 T f = ElementAllBitsSet;
                 T n = ElementNormOne;
-                XyXMask = Vectors.CreateRotate<T>(f, o);
-                XyYMask = Vectors.CreateRotate<T>(o, f);
-                XyzwXMask = Vectors.CreateRotate<T>(f, o, o, o);
-                XyzwYMask = Vectors.CreateRotate<T>(o, f, o, o);
-                XyzwZMask = Vectors.CreateRotate<T>(o, o, f, o);
-                XyzwWMask = Vectors.CreateRotate<T>(o, o, o, f);
-                XyzwNotXMask = Vectors.BaseOnesComplement(XyzwXMask);
-                XyzwNotYMask = Vectors.BaseOnesComplement(XyzwYMask);
-                XyzwNotZMask = Vectors.BaseOnesComplement(XyzwZMask);
-                XyzwNotWMask = Vectors.BaseOnesComplement(XyzwWMask);
-                XyzwXNormOne = Vectors.CreateRotate<T>(n, o, o, o);
-                XyzwYNormOne = Vectors.CreateRotate<T>(o, n, o, o);
-                XyzwZNormOne = Vectors.CreateRotate<T>(o, o, n, o);
-                XyzwWNormOne = Vectors.CreateRotate<T>(o, o, o, n);
+                XyAddress0Mask = Vectors.CreateRotate<T>(f, o);
+                XyAddress1Mask = Vectors.CreateRotate<T>(o, f);
+                XyAddress0NormOne = Vectors.CreateRotate<T>(n, o);
+                XyAddress1NormOne = Vectors.CreateRotate<T>(o, n);
+                XyzwAddress0Mask = Vectors.CreateRotate<T>(f, o, o, o);
+                XyzwAddress1Mask = Vectors.CreateRotate<T>(o, f, o, o);
+                XyzwAddress2Mask = Vectors.CreateRotate<T>(o, o, f, o);
+                XyzwAddress3Mask = Vectors.CreateRotate<T>(o, o, o, f);
+                XyzwAddress0NormOne = Vectors.CreateRotate<T>(n, o, o, o);
+                XyzwAddress1NormOne = Vectors.CreateRotate<T>(o, n, o, o);
+                XyzwAddress2NormOne = Vectors.CreateRotate<T>(o, o, n, o);
+                XyzwAddress3NormOne = Vectors.CreateRotate<T>(o, o, o, n);
+            }
+            if (BitConverter.IsLittleEndian) {
+                XyXMask = XyAddress0Mask;
+                XyYMask = XyAddress1Mask;
+                XyXNormOne = XyAddress0NormOne;
+                XyYNormOne = XyAddress1NormOne;
+                XyzwXMask = XyzwAddress0Mask;
+                XyzwYMask = XyzwAddress1Mask;
+                XyzwZMask = XyzwAddress2Mask;
+                XyzwWMask = XyzwAddress3Mask;
+                XyzwXNormOne = XyzwAddress0NormOne;
+                XyzwYNormOne = XyzwAddress1NormOne;
+                XyzwZNormOne = XyzwAddress2NormOne;
+                XyzwWNormOne = XyzwAddress3NormOne;
+            } else {
+                XyXMask = XyAddress1Mask;
+                XyYMask = XyAddress0Mask;
+                XyXNormOne = XyAddress1NormOne;
+                XyYNormOne = XyAddress0NormOne;
+                XyzwXMask = XyzwAddress3Mask;
+                XyzwYMask = XyzwAddress2Mask;
+                XyzwZMask = XyzwAddress1Mask;
+                XyzwWMask = XyzwAddress0Mask;
+                XyzwXNormOne = XyzwAddress3NormOne;
+                XyzwYNormOne = XyzwAddress2NormOne;
+                XyzwZNormOne = XyzwAddress1NormOne;
+                XyzwWNormOne = XyzwAddress0NormOne;
             }
             // == Mask array ==
             MaskBitPosArray = Vectors.GetMaskBitPosArray(ElementByteSize);
@@ -899,35 +945,6 @@ namespace Zyl.VectorTraits {
         public static ref readonly Vector<T> MaskBits16 { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref GetMaskBits(Math.Min(ElementBitSize, 16)); } }
         /// <summary>32 bits mask (32位掩码).</summary>
         public static ref readonly Vector<T> MaskBits32 { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref GetMaskBits(Math.Min(ElementBitSize, 32)); } }
-
-        /// <summary>Xy - Not X mask. For a 2-element group, not select the mask of the 0th element (对于2个元素的组，不选择第0个元素的掩码).</summary>
-        public static ref readonly Vector<T> XyNotXMask { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref XyYMask; } }
-        /// <summary>Xy - Not Y mask. For a 2-element group, not select the mask of the 1st element (对于2个元素的组，不选择第1个元素的掩码).</summary>
-        public static ref readonly Vector<T> XyNotYMask { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref XyXMask; } }
-        /// <summary>Rgba - R mask. For a 4-element group, select the mask of the 0th element (对于4个元素的组，选择第0个元素的掩码). Alias has <see cref="XyzwXMask"/>.</summary>
-        public static ref readonly Vector<T> RgbaRMask { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref XyzwXMask; } }
-        /// <summary>Rgba - G mask. For a 4-element group, select the mask of the 1th element (对于4个元素的组，选择第1个元素的掩码). Alias has <see cref="XyzwYMask"/>.</summary>
-        public static ref readonly Vector<T> RgbaGMask { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref XyzwYMask; } }
-        /// <summary>Rgba - B mask. For a 4-element group, select the mask of the 2th element (对于4个元素的组，选择第2个元素的掩码). Alias has <see cref="XyzwZMask"/>.</summary>
-        public static ref readonly Vector<T> RgbaBMask { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref XyzwZMask; } }
-        /// <summary>Rgba - A mask. For a 4-element group, select the mask of the 3th element (对于4个元素的组，选择第3个元素的掩码). Alias has <see cref="XyzwWMask"/>.</summary>
-        public static ref readonly Vector<T> RgbaAMask { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref XyzwWMask; } }
-        /// <summary>Rgba - Not R mask. For a 4-element group, not select the mask of the 0th element (对于4个元素的组，不选择第0个元素的掩码). Alias has <see cref="XyzwNotXMask"/>.</summary>
-        public static ref readonly Vector<T> RgbaNotRMask { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref XyzwNotXMask; } }
-        /// <summary>Rgba - Not G mask. For a 4-element group, not select the mask of the 1th element (对于4个元素的组，不选择第1个元素的掩码). Alias has <see cref="XyzwNotYMask"/>.</summary>
-        public static ref readonly Vector<T> RgbaNotGMask { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref XyzwNotYMask; } }
-        /// <summary>Rgba - Not B mask. For a 4-element group, not select the mask of the 2th element (对于4个元素的组，不选择第2个元素的掩码). Alias has <see cref="XyzwNotZMask"/>.</summary>
-        public static ref readonly Vector<T> RgbaNotBMask { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref XyzwNotZMask; } }
-        /// <summary>Rgba - Not A mask. For a 4-element group, not select the mask of the 3th element (对于4个元素的组，不选择第3个元素的掩码). Alias has <see cref="XyzwNotWMask"/>.</summary>
-        public static ref readonly Vector<T> RgbaNotAMask { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref XyzwNotWMask; } }
-        /// <summary>Rgba - R is normalized number of value 1 (R 为值1的归一化数).</summary>
-        public static ref readonly Vector<T> RgbaRNormOne { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref XyzwXNormOne; } }
-        /// <summary>Rgba - G is normalized number of value 1 (G 为值1的归一化数).</summary>
-        public static ref readonly Vector<T> RgbaGNormOne { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref XyzwYNormOne; } }
-        /// <summary>Rgba - B is normalized number of value 1 (B 为值1的归一化数).</summary>
-        public static ref readonly Vector<T> RgbaBNormOne { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref XyzwZNormOne; } }
-        /// <summary>Rgba - A is normalized number of value 1 (A 为值1的归一化数).</summary>
-        public static ref readonly Vector<T> RgbaANormOne { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref XyzwWNormOne; } }
 
     }
 }

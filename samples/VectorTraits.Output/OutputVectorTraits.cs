@@ -419,15 +419,10 @@ namespace Zyl.VectorTraits.Output {
                 WriteLine(writer, indent, "XyzwYMask:\t{0}", Vectors<T>.XyzwYMask);
                 WriteLine(writer, indent, "XyzwZMask:\t{0}", Vectors<T>.XyzwZMask);
                 WriteLine(writer, indent, "XyzwWMask:\t{0}", Vectors<T>.XyzwWMask);
-                WriteLine(writer, indent, "XyzwNotXMask:\t{0}", Vectors<T>.XyzwNotXMask);
-                WriteLine(writer, indent, "XyzwNotYMask:\t{0}", Vectors<T>.XyzwNotYMask);
-                WriteLine(writer, indent, "XyzwNotZMask:\t{0}", Vectors<T>.XyzwNotZMask);
-                WriteLine(writer, indent, "XyzwNotWMask:\t{0}", Vectors<T>.XyzwNotWMask);
                 WriteLine(writer, indent, "XyzwXNormOne:\t{0}", Vectors<T>.XyzwXNormOne);
                 WriteLine(writer, indent, "XyzwYNormOne:\t{0}", Vectors<T>.XyzwYNormOne);
                 WriteLine(writer, indent, "XyzwZNormOne:\t{0}", Vectors<T>.XyzwZNormOne);
                 WriteLine(writer, indent, "XyzwWNormOne:\t{0}", Vectors<T>.XyzwWNormOne);
-                WriteLine(writer, indent, "RgbaANormOne:\t{0}", Vectors<T>.RgbaANormOne);
             }
         }
 
@@ -515,15 +510,10 @@ namespace Zyl.VectorTraits.Output {
                 WriteLine(writer, indent, "XyzwYMask:\t{0}", Vector64s<T>.XyzwYMask);
                 WriteLine(writer, indent, "XyzwZMask:\t{0}", Vector64s<T>.XyzwZMask);
                 WriteLine(writer, indent, "XyzwWMask:\t{0}", Vector64s<T>.XyzwWMask);
-                WriteLine(writer, indent, "XyzwNotXMask:\t{0}", Vector64s<T>.XyzwNotXMask);
-                WriteLine(writer, indent, "XyzwNotYMask:\t{0}", Vector64s<T>.XyzwNotYMask);
-                WriteLine(writer, indent, "XyzwNotZMask:\t{0}", Vector64s<T>.XyzwNotZMask);
-                WriteLine(writer, indent, "XyzwNotWMask:\t{0}", Vector64s<T>.XyzwNotWMask);
                 WriteLine(writer, indent, "XyzwXNormOne:\t{0}", Vector64s<T>.XyzwXNormOne);
                 WriteLine(writer, indent, "XyzwYNormOne:\t{0}", Vector64s<T>.XyzwYNormOne);
                 WriteLine(writer, indent, "XyzwZNormOne:\t{0}", Vector64s<T>.XyzwZNormOne);
                 WriteLine(writer, indent, "XyzwWNormOne:\t{0}", Vector64s<T>.XyzwWNormOne);
-                WriteLine(writer, indent, "RgbaANormOne:\t{0}", Vector64s<T>.RgbaANormOne);
             }
         }
 
@@ -611,15 +601,10 @@ namespace Zyl.VectorTraits.Output {
                 WriteLine(writer, indent, "XyzwYMask:\t{0}", Vector128s<T>.XyzwYMask);
                 WriteLine(writer, indent, "XyzwZMask:\t{0}", Vector128s<T>.XyzwZMask);
                 WriteLine(writer, indent, "XyzwWMask:\t{0}", Vector128s<T>.XyzwWMask);
-                WriteLine(writer, indent, "XyzwNotXMask:\t{0}", Vector128s<T>.XyzwNotXMask);
-                WriteLine(writer, indent, "XyzwNotYMask:\t{0}", Vector128s<T>.XyzwNotYMask);
-                WriteLine(writer, indent, "XyzwNotZMask:\t{0}", Vector128s<T>.XyzwNotZMask);
-                WriteLine(writer, indent, "XyzwNotWMask:\t{0}", Vector128s<T>.XyzwNotWMask);
                 WriteLine(writer, indent, "XyzwXNormOne:\t{0}", Vector128s<T>.XyzwXNormOne);
                 WriteLine(writer, indent, "XyzwYNormOne:\t{0}", Vector128s<T>.XyzwYNormOne);
                 WriteLine(writer, indent, "XyzwZNormOne:\t{0}", Vector128s<T>.XyzwZNormOne);
                 WriteLine(writer, indent, "XyzwWNormOne:\t{0}", Vector128s<T>.XyzwWNormOne);
-                WriteLine(writer, indent, "RgbaANormOne:\t{0}", Vector128s<T>.RgbaANormOne);
             }
         }
 
@@ -707,15 +692,10 @@ namespace Zyl.VectorTraits.Output {
                 WriteLine(writer, indent, "XyzwYMask:\t{0}", Vector256s<T>.XyzwYMask);
                 WriteLine(writer, indent, "XyzwZMask:\t{0}", Vector256s<T>.XyzwZMask);
                 WriteLine(writer, indent, "XyzwWMask:\t{0}", Vector256s<T>.XyzwWMask);
-                WriteLine(writer, indent, "XyzwNotXMask:\t{0}", Vector256s<T>.XyzwNotXMask);
-                WriteLine(writer, indent, "XyzwNotYMask:\t{0}", Vector256s<T>.XyzwNotYMask);
-                WriteLine(writer, indent, "XyzwNotZMask:\t{0}", Vector256s<T>.XyzwNotZMask);
-                WriteLine(writer, indent, "XyzwNotWMask:\t{0}", Vector256s<T>.XyzwNotWMask);
                 WriteLine(writer, indent, "XyzwXNormOne:\t{0}", Vector256s<T>.XyzwXNormOne);
                 WriteLine(writer, indent, "XyzwYNormOne:\t{0}", Vector256s<T>.XyzwYNormOne);
                 WriteLine(writer, indent, "XyzwZNormOne:\t{0}", Vector256s<T>.XyzwZNormOne);
                 WriteLine(writer, indent, "XyzwWNormOne:\t{0}", Vector256s<T>.XyzwWNormOne);
-                WriteLine(writer, indent, "RgbaANormOne:\t{0}", Vector256s<T>.RgbaANormOne);
             }
         }
 
