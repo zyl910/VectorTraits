@@ -201,11 +201,74 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes {
+                get {
+                    return ShiftRightArithmeticFast_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> ShiftRightArithmetic(Vector256<sbyte> value, int shiftCount) {
+                shiftCount &= 7;
+                return ShiftRightArithmeticFast(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{short}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> ShiftRightArithmetic(Vector256<short> value, int shiftCount) {
+                shiftCount &= 0x0F;
+                return ShiftRightArithmeticFast(value, shiftCount);
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> ShiftRightArithmetic(Vector256<int> value, int shiftCount) {
-                return Avx2.ShiftRightArithmetic(value, (byte)(shiftCount & 0x1F));
+                shiftCount &= 0x1F;
+                return ShiftRightArithmeticFast(value, shiftCount);
             }
+
+            ///// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{long}, int)"/>
+            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+            //public static Vector256<long> ShiftRightArithmetic(Vector256<long> value, int shiftCount) {
+            //    shiftCount &= 0x3F;
+            //    return ShiftRightArithmeticFast(value, shiftCount);
+            //}
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> ShiftRightArithmeticFast(Vector256<sbyte> value, int shiftCount) {
+                Vector256<sbyte> t = Avx2.And(value, Vector256s<sbyte>.GetMaskBits(8 - shiftCount));
+                return Avx2.ShiftRightArithmetic(t.AsInt16(), (byte)shiftCount).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{short}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> ShiftRightArithmeticFast(Vector256<short> value, int shiftCount) {
+                return Avx2.ShiftRightArithmetic(value, (byte)shiftCount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{int}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> ShiftRightArithmeticFast(Vector256<int> value, int shiftCount) {
+                return Avx2.ShiftRightArithmetic(value, (byte)shiftCount);
+            }
+
+            ///// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
+            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+            //public static Vector256<long> ShiftRightArithmeticFast(Vector256<long> value, int shiftCount) {
+            //    return Avx2.ShiftRightArithmetic(value, (byte)shiftCount);
+            //}
 
 #endif // NETCOREAPP3_0_OR_GREATER
         }

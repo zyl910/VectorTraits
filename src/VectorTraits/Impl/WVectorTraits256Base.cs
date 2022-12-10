@@ -454,11 +454,213 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes {
+                get {
+                    return ShiftRightArithmeticFast_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> ShiftRightArithmetic(Vector256<sbyte> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
+                return Vector256.ShiftRightArithmetic(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+                return ShiftRightArithmetic_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{short}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> ShiftRightArithmetic(Vector256<short> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightArithmetic(value, shiftCount);
+#else
+                return ShiftRightArithmetic_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<int> ShiftRightArithmetic(Vector256<int> value, int shiftCount) {
-                Vector256<int> rt = value;
+            public static Vector256<int> ShiftRightArithmetic(Vector256<int> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightArithmetic(value, shiftCount);
+#else
+                return ShiftRightArithmetic_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ShiftRightArithmetic(Vector256<long> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
+                return Vector256.ShiftRightArithmetic(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+                return ShiftRightArithmetic_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<sbyte> ShiftRightArithmetic_Base(Vector256<sbyte> value, int shiftCount) {
+                shiftCount &= 7;
+                return ShiftRightArithmeticFast_Base(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{short}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<short> ShiftRightArithmetic_Base(Vector256<short> value, int shiftCount) {
+                shiftCount &= 0x0F;
+                return ShiftRightArithmeticFast_Base(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{int}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<int> ShiftRightArithmetic_Base(Vector256<int> value, int shiftCount) {
                 shiftCount &= 0x1F;
+                return ShiftRightArithmeticFast_Base(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{long}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<long> ShiftRightArithmetic_Base(Vector256<long> value, int shiftCount) {
+                shiftCount &= 0x3F;
+                return ShiftRightArithmeticFast_Base(value, shiftCount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> ShiftRightArithmeticFast(Vector256<sbyte> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
+                return Vector256.ShiftRightArithmetic(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+                return ShiftRightArithmeticFast_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{short}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> ShiftRightArithmeticFast(Vector256<short> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightArithmetic(value, shiftCount);
+#else
+                return ShiftRightArithmeticFast_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{int}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> ShiftRightArithmeticFast(Vector256<int> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightArithmetic(value, shiftCount);
+#else
+                return ShiftRightArithmeticFast_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ShiftRightArithmeticFast(Vector256<long> value, int shiftCount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightArithmetic(value, shiftCount);
+#else
+                return ShiftRightArithmeticFast_Base(value, shiftCount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<sbyte> ShiftRightArithmeticFast_Base(Vector256<sbyte> value, int shiftCount) {
+                Vector256<sbyte> rt = value;
+                sbyte* p = (sbyte*)&rt;
+                p[0] >>= shiftCount;
+                p[1] >>= shiftCount;
+                p[2] >>= shiftCount;
+                p[3] >>= shiftCount;
+                p[4] >>= shiftCount;
+                p[5] >>= shiftCount;
+                p[6] >>= shiftCount;
+                p[7] >>= shiftCount;
+                p[8] >>= shiftCount;
+                p[9] >>= shiftCount;
+                p[10] >>= shiftCount;
+                p[11] >>= shiftCount;
+                p[12] >>= shiftCount;
+                p[13] >>= shiftCount;
+                p[14] >>= shiftCount;
+                p[15] >>= shiftCount;
+                p[16] >>= shiftCount;
+                p[17] >>= shiftCount;
+                p[18] >>= shiftCount;
+                p[19] >>= shiftCount;
+                p[20] >>= shiftCount;
+                p[21] >>= shiftCount;
+                p[22] >>= shiftCount;
+                p[23] >>= shiftCount;
+                p[24] >>= shiftCount;
+                p[25] >>= shiftCount;
+                p[26] >>= shiftCount;
+                p[27] >>= shiftCount;
+                p[28] >>= shiftCount;
+                p[29] >>= shiftCount;
+                p[30] >>= shiftCount;
+                p[31] >>= shiftCount;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{short}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<short> ShiftRightArithmeticFast_Base(Vector256<short> value, int shiftCount) {
+                Vector256<short> rt = value;
+                short* p = (short*)&rt;
+                p[0] >>= shiftCount;
+                p[1] >>= shiftCount;
+                p[2] >>= shiftCount;
+                p[3] >>= shiftCount;
+                p[4] >>= shiftCount;
+                p[5] >>= shiftCount;
+                p[6] >>= shiftCount;
+                p[7] >>= shiftCount;
+                p[8] >>= shiftCount;
+                p[9] >>= shiftCount;
+                p[10] >>= shiftCount;
+                p[11] >>= shiftCount;
+                p[12] >>= shiftCount;
+                p[13] >>= shiftCount;
+                p[14] >>= shiftCount;
+                p[15] >>= shiftCount;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{int}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<int> ShiftRightArithmeticFast_Base(Vector256<int> value, int shiftCount) {
+                Vector256<int> rt = value;
                 int* p = (int*)&rt;
                 p[0] >>= shiftCount;
                 p[1] >>= shiftCount;
@@ -468,6 +670,19 @@ namespace Zyl.VectorTraits.Impl {
                 p[5] >>= shiftCount;
                 p[6] >>= shiftCount;
                 p[7] >>= shiftCount;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<long> ShiftRightArithmeticFast_Base(Vector256<long> value, int shiftCount) {
+                Vector256<long> rt = value;
+                long* p = (long*)&rt;
+                p[0] >>= shiftCount;
+                p[1] >>= shiftCount;
+                p[2] >>= shiftCount;
+                p[3] >>= shiftCount;
                 return rt;
             }
 

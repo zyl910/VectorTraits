@@ -82,7 +82,7 @@ namespace Zyl.VectorTraits {
         /// <summary>
         /// Reinterprets the specified 32-bit signed integer value as a single-precision floating-point value (将指定的 32 位有符号整数值重新解释为单精度浮点值).
         /// </summary>
-        /// <param name="value">The 32-bit signed integer value to convert (欲转换的32位带符号整数值).</param>
+        /// <param name="value">The 32-bit signed integer value to convert (欲转换的32位有符号整数值).</param>
         /// <returns>A single-precision floating-point value that represents the converted integer (表示根据整数转换后的单精度浮点值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Int32BitsToSingle(int value) {
@@ -135,7 +135,7 @@ namespace Zyl.VectorTraits {
         /// <summary>
         /// Reinterprets the specified 64-bit signed integer value as a double-precision floating-point value (将指定的 64 位有符号整数值重新解释为单精度浮点值).
         /// </summary>
-        /// <param name="value">The 64-bit signed integer value to convert (欲转换的64位带符号整数值).</param>
+        /// <param name="value">The 64-bit signed integer value to convert (欲转换的64位有符号整数值).</param>
         /// <returns>A double-precision floating-point value that represents the converted integer (表示根据整数转换后的单精度浮点值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Int64BitsToDouble(long value) {
@@ -190,7 +190,7 @@ namespace Zyl.VectorTraits {
         /// <summary>
         /// Reinterprets the specified 16-bit signed integer value as a half-precision floating-point value (将指定的 16 位有符号整数值重新解释为半精度浮点值).
         /// </summary>
-        /// <param name="value">The 16-bit signed integer value to convert (欲转换的16位带符号整数值).</param>
+        /// <param name="value">The 16-bit signed integer value to convert (欲转换的16位有符号整数值).</param>
         /// <returns>A half-precision floating-point value that represents the converted integer (表示根据整数转换后的半精度浮点值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Half Int16BitsToHalf(short value) {

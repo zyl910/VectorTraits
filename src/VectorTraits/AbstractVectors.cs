@@ -118,7 +118,7 @@ namespace Zyl.VectorTraits {
         /// <summary>(Element) Value 4294967295 (uint.MaxValue) .</summary>
         public static T ElementVMaxUInt32 { get { return Scalars<T>.VMaxUInt32; } }
         // -- Negative number  --
-        /// <summary>(Element) Value -1 . When the type is unsigned integer, the value is a signed cast value (当类型为无符号整型时，值为带符号强制转换值). Example: '(byte)(-1)=255' .</summary>
+        /// <summary>(Element) Value -1 . When the type is unsigned integer, the value is a signed cast value (当类型为无符号整型时，值为有符号强制转换值). Example: '(byte)(-1)=255' .</summary>
         public static T ElementV_1 { get { return Scalars<T>.V_1; } }
         /// <summary>(Element) Value -2 .</summary>
         public static T ElementV_2 { get { return Scalars<T>.V_2; } }

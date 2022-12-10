@@ -7,7 +7,7 @@ using System.Runtime.Intrinsics;
 
 namespace Zyl.VectorTraits.Impl {
     /// <summary>
-    /// <see cref="Vector128{T}"/> traits interface.
+    /// <see cref="Vector128{T}"/> traits interface (<see cref="Vector128{T}"/> 的特征接口).
     /// </summary>
     [CLSCompliant(false)]
     public interface IWVectorTraits128 : IWVectorTraits {
@@ -202,7 +202,7 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
-        /// Shifts (signed) each element of a vector right by the specified amount (将向量的每个带符号元素算术右移指定量).
+        /// Shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量).
         /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &gt;&gt; shiftCount }</c>, <c>shiftCount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>

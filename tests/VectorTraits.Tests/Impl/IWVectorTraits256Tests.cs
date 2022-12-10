@@ -89,6 +89,74 @@ namespace Zyl.VectorTraits.Tests.Impl {
             }
         }
 
+        [TestCase((sbyte)3)]
+        [TestCase((short)5)]
+        [TestCase((int)7)]
+        [TestCase((long)9)]
+        public void ShiftRightArithmeticTest<T>(T src) where T : struct {
+            //Vector256<T> vzero = Vector256<T>.Zero;
+            //T zero = default;
+            int shiftCountMax = Scalars<T>.BitSize + 1;
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.IsSupported) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightArithmetic_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            Vector256<T>[] samples = {
+                Vector256s.Create(src),
+                Vector256s<T>.Demo,
+                Vector256s<T>.Serial,
+            };
+            foreach (Vector256<T> vsrc in samples) {
+                for (int shiftCount = -1; shiftCount <= shiftCountMax; ++shiftCount) {
+                    Vector256<T> vbaseline = Vector256s.ShiftRightArithmetic((dynamic)vsrc, shiftCount);
+                    foreach (IWVectorTraits256 instance in instances) {
+                        if (!instance.IsSupported) continue;
+                        Vector256<T> vdst = instance.ShiftRightArithmetic((dynamic)vsrc, shiftCount);
+                        Assert.AreEqual(vbaseline, vdst, $"{instance.GetType().Name}, shiftCount={shiftCount}, vsrc={vsrc}");
+                    }
+                }
+            }
+        }
+
+        [TestCase((sbyte)3)]
+        [TestCase((short)5)]
+        [TestCase((int)7)]
+        [TestCase((long)9)]
+        public void ShiftRightArithmeticFastTest<T>(T src) where T : struct {
+            //Vector256<T> vzero = Vector256<T>.Zero;
+            //T zero = default;
+            int shiftCountMax = Scalars<T>.BitSize - 1;
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.IsSupported) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightArithmeticFast_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            Vector256<T>[] samples = {
+                Vector256s.Create(src),
+                Vector256s<T>.Demo,
+                Vector256s<T>.Serial,
+            };
+            foreach (Vector256<T> vsrc in samples) {
+                for (int shiftCount = 0; shiftCount <= shiftCountMax; ++shiftCount) {
+                    Vector256<T> vbaseline = Vector256s.ShiftRightArithmeticFast((dynamic)vsrc, shiftCount);
+                    foreach (IWVectorTraits256 instance in instances) {
+                        if (!instance.IsSupported) continue;
+                        Vector256<T> vdst = instance.ShiftRightArithmeticFast((dynamic)vsrc, shiftCount);
+                        Assert.AreEqual(vbaseline, vdst, $"{instance.GetType().Name}, shiftCount={shiftCount}, vsrc={vsrc}");
+                    }
+                }
+            }
+        }
+
 
 #endif
     }

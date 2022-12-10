@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Zyl.VectorTraits.Impl {
     /// <summary>
-    /// Base traits interface.
+    /// Base traits interface (基本的特征接口).
     /// </summary>
     public interface IBaseTraits {
 

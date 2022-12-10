@@ -156,11 +156,69 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_AcceleratedTypes"/>
+        public override TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes {
+            get {
+                return Statics.ShiftRightArithmetic_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> ShiftRightArithmetic(Vector256<sbyte> value, int shiftCount) {
+            return Statics.ShiftRightArithmetic(value, shiftCount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> ShiftRightArithmetic(Vector256<short> value, int shiftCount) {
+            return Statics.ShiftRightArithmetic(value, shiftCount);
+        }
+
         /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector256<int> ShiftRightArithmetic(Vector256<int> value, int shiftCount) {
             return Statics.ShiftRightArithmetic(value, shiftCount);
         }
+
+        ///// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{long}, int)"/>
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //public override Vector256<long> ShiftRightArithmetic(Vector256<long> value, int shiftCount) {
+        //    return Statics.ShiftRightArithmetic(value, shiftCount);
+        //}
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast_AcceleratedTypes"/>
+        public override TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes {
+            get {
+                return Statics.ShiftRightArithmeticFast_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> ShiftRightArithmeticFast(Vector256<sbyte> value, int shiftCount) {
+            return Statics.ShiftRightArithmeticFast(value, shiftCount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> ShiftRightArithmeticFast(Vector256<short> value, int shiftCount) {
+            return Statics.ShiftRightArithmeticFast(value, shiftCount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{int}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> ShiftRightArithmeticFast(Vector256<int> value, int shiftCount) {
+            return Statics.ShiftRightArithmeticFast(value, shiftCount);
+        }
+
+        ///// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //public override Vector256<long> ShiftRightArithmeticFast(Vector256<long> value, int shiftCount) {
+        //    return Statics.ShiftRightArithmeticFast(value, shiftCount);
+        //}
 
 #endif
     }

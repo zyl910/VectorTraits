@@ -269,6 +269,40 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_AcceleratedTypes"/>
+        public static TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.ShiftRightArithmetic_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+                }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> ShiftRightArithmetic(Vector256<sbyte> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
+            return Vector256.ShiftRightArithmetic(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+            return _instance.ShiftRightArithmetic(value, shiftCount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> ShiftRightArithmetic(Vector256<short> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightArithmetic(value, shiftCount);
+#else
+            return _instance.ShiftRightArithmetic(value, shiftCount);
+#endif
+        }
+
         /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> ShiftRightArithmetic(Vector256<int> value, int shiftCount) {
@@ -276,6 +310,70 @@ namespace Zyl.VectorTraits {
             return Vector256.ShiftRightArithmetic(value, shiftCount);
 #else
             return _instance.ShiftRightArithmetic(value, shiftCount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> ShiftRightArithmetic(Vector256<long> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightArithmetic(value, shiftCount);
+#else
+            return _instance.ShiftRightArithmetic(value, shiftCount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast_AcceleratedTypes"/>
+        public static TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.ShiftRightArithmeticFast_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+                }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> ShiftRightArithmeticFast(Vector256<sbyte> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
+            return Vector256.ShiftRightArithmetic(value, shiftCount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+            return _instance.ShiftRightArithmeticFast(value, shiftCount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> ShiftRightArithmeticFast(Vector256<short> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightArithmetic(value, shiftCount);
+#else
+            return _instance.ShiftRightArithmeticFast(value, shiftCount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{int}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> ShiftRightArithmeticFast(Vector256<int> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightArithmetic(value, shiftCount);
+#else
+            return _instance.ShiftRightArithmeticFast(value, shiftCount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> ShiftRightArithmeticFast(Vector256<long> value, int shiftCount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightArithmetic(value, shiftCount);
+#else
+            return _instance.ShiftRightArithmeticFast(value, shiftCount);
 #endif
         }
 

@@ -7,7 +7,7 @@ using System.Runtime.Intrinsics;
 
 namespace Zyl.VectorTraits.Impl {
     /// <summary>
-    /// <see cref="Vector256{T}"/> traits interface.
+    /// <see cref="Vector256{T}"/> traits interface (<see cref="Vector256{T}"/> 的特征接口).
     /// </summary>
     [CLSCompliant(false)]
     public interface IWVectorTraits256 : IWVectorTraits {
@@ -202,14 +202,104 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
-        /// Shifts (signed) each element of a vector right by the specified amount (将向量的每个带符号元素算术右移指定量).
+        /// Types with hardware acceleration when running <c>ShiftRightArithmetic</c> (运行 <c>ShiftRightArithmetic</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ShiftRightArithmetic"/>
+        TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量).
         /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &gt;&gt; shiftCount }</c>, <c>shiftCount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftCount">The number of bits by which to shift each element (每个元素的移位位数).</param>
-        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount"/> (每个元素的右移 <paramref name="shiftCount" /> 位的一个向量).</returns>
+        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount" /> (每个元素的右移 <paramref name="shiftCount" /> 位的一个向量).</returns>
+        /// <seealso cref="Vector256.ShiftRightArithmetic(Vector256{sbyte}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightArithmeticFast(Vector256{sbyte}, int)"/> // Since: VectorTraits 1.0
+        Vector256<sbyte> ShiftRightArithmetic(Vector256<sbyte> value, int shiftCount);
+
+        /// <summary>
+        /// Shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &gt;&gt; shiftCount }</c>, <c>shiftCount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftCount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount" /> (每个元素的右移 <paramref name="shiftCount" /> 位的一个向量).</returns>
+        /// <seealso cref="Vector256.ShiftRightArithmetic(Vector256{short}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightArithmeticFast(Vector256{short}, int)"/> // Since: VectorTraits 1.0
+        Vector256<short> ShiftRightArithmetic(Vector256<short> value, int shiftCount);
+
+        /// <summary>
+        /// Shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &gt;&gt; shiftCount }</c>, <c>shiftCount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftCount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount" /> (每个元素的右移 <paramref name="shiftCount" /> 位的一个向量).</returns>
         /// <seealso cref="Vector256.ShiftRightArithmetic(Vector256{int}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightArithmeticFast(Vector256{int}, int)"/> // Since: VectorTraits 1.0
         Vector256<int> ShiftRightArithmetic(Vector256<int> value, int shiftCount);
+
+        /// <summary>
+        /// Shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &gt;&gt; shiftCount }</c>, <c>shiftCount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftCount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount" /> (每个元素的右移 <paramref name="shiftCount" /> 位的一个向量).</returns>
+        /// <seealso cref="Vector256.ShiftRightArithmetic(Vector256{long}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightArithmeticFast(Vector256{long}, int)"/> // Since: VectorTraits 1.0
+        Vector256<long> ShiftRightArithmetic(Vector256<long> value, int shiftCount);
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>ShiftRightArithmeticFast</c> (运行 <c>ShiftRightArithmeticFast</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ShiftRightArithmeticFast"/>
+        TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftCount"/>, please use <see cref="Scalars.LimitShiftCount"/> first.
+        /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &lt;&lt; shiftCount }</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftCount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount" /> (每个元素的右移 <paramref name="shiftCount" /> 位的一个向量).</returns>
+        /// <seealso cref="Vector256.ShiftRightArithmetic(Vector256{sbyte}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightArithmetic(Vector256{sbyte}, int)"/> // Since: VectorTraits 1.0
+        Vector256<sbyte> ShiftRightArithmeticFast(Vector256<sbyte> value, int shiftCount);
+
+        /// <summary>
+        /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftCount"/>, please use <see cref="Scalars.LimitShiftCount"/> first.
+        /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &lt;&lt; shiftCount }</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftCount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount" /> (每个元素的右移 <paramref name="shiftCount" /> 位的一个向量).</returns>
+        /// <seealso cref="Vector256.ShiftRightArithmetic(Vector256{short}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightArithmetic(Vector256{short}, int)"/> // Since: VectorTraits 1.0
+        Vector256<short> ShiftRightArithmeticFast(Vector256<short> value, int shiftCount);
+
+        /// <summary>
+        /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftCount"/>, please use <see cref="Scalars.LimitShiftCount"/> first.
+        /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &lt;&lt; shiftCount }</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftCount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount" /> (每个元素的右移 <paramref name="shiftCount" /> 位的一个向量).</returns>
+        /// <seealso cref="Vector256.ShiftRightArithmetic(Vector256{int}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightArithmetic(Vector256{int}, int)"/> // Since: VectorTraits 1.0
+        Vector256<int> ShiftRightArithmeticFast(Vector256<int> value, int shiftCount);
+
+        /// <summary>
+        /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftCount"/>, please use <see cref="Scalars.LimitShiftCount"/> first.
+        /// Mnemonic: <c>f({ value[i] }, shiftCount) = { value[i] &lt;&lt; shiftCount }</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftCount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted right by <paramref name="shiftCount" /> (每个元素的右移 <paramref name="shiftCount" /> 位的一个向量).</returns>
+        /// <seealso cref="Vector256.ShiftRightArithmetic(Vector256{long}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightArithmetic(Vector256{long}, int)"/> // Since: VectorTraits 1.0
+        Vector256<long> ShiftRightArithmeticFast(Vector256<long> value, int shiftCount);
 
 #endif
     }

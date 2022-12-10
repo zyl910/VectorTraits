@@ -544,7 +544,7 @@ namespace Zyl.VectorTraits {
         /// <summary>Value 4294967295 (uint.MaxValue) .</summary>
         public static readonly Vector128<T> VMaxUInt32;
         // -- Negative number --
-        /// <summary>Value -1 . When the type is unsigned integer, the value is a signed cast value (当类型为无符号整型时，值为带符号强制转换值). Example: '(byte)(-1)=255' .</summary>
+        /// <summary>Value -1 . When the type is unsigned integer, the value is a signed cast value (当类型为无符号整型时，值为有符号强制转换值). Example: '(byte)(-1)=255' .</summary>
         public static readonly Vector128<T> V_1;
         /// <summary>Value -2 .</summary>
         public static readonly Vector128<T> V_2;
