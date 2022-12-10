@@ -248,8 +248,12 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> ShiftRightArithmeticFast(Vector256<sbyte> value, int shiftCount) {
-                Vector256<sbyte> t = Avx2.And(value, Vector256s<sbyte>.GetMaskBits(8 - shiftCount));
-                return Avx2.ShiftRightArithmetic(t.AsInt16(), (byte)shiftCount).AsSByte();
+                Vector256<short> lowerToHigh = Avx2.ShiftLeftLogical(value.AsInt16(), 8);
+                Vector256<short> lowerShifted = Avx2.ShiftRightArithmetic(lowerToHigh, (byte)shiftCount);
+                Vector256<sbyte> upper = Avx2.ShiftRightArithmetic(value.AsInt16(), (byte)shiftCount).AsSByte();
+                Vector256<sbyte> lower = Avx2.ShiftRightLogical(lowerShifted, 8).AsSByte();
+                Vector256<sbyte> rt = Avx2.Or(Avx2.And(Vector256s<sbyte>.XyYMask, upper), lower);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{short}, int)"/>
