@@ -297,8 +297,11 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftRightArithmeticFast(Vector256<long> value, int shiftAmount) {
-                //return ShiftRightArithmeticFast_If(value, shiftAmount);
+#if HARDWARE_OPTIMIZATION
                 return ShiftRightArithmeticFast_IfLess(value, shiftAmount);
+#else
+                return ShiftRightArithmeticFast_If(value, shiftAmount);
+#endif // HARDWARE_OPTIMIZATION
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
@@ -357,7 +360,7 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 #endif // NETCOREAPP3_0_OR_GREATER
-        }
+            }
 
     }
 }
