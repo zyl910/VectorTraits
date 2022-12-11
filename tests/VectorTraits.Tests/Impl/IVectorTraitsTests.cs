@@ -43,16 +43,16 @@ namespace Zyl.VectorTraits.Tests.Impl {
             };
             foreach (Vector<T> vsrc in samples) {
                 for (int shiftAmount = -1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
-                    Vector<T> vbaseline = Vectors.ShiftLeft((dynamic)vsrc, shiftAmount);
+                    Vector<T> vexpected = Vectors.ShiftLeft((dynamic)vsrc, shiftAmount);
                     foreach (IVectorTraits instance in instances) {
                         if (!instance.IsSupported) continue;
                         Vector<T> vdst = instance.ShiftLeft((dynamic)vsrc, shiftAmount);
-                        Assert.AreEqual(vbaseline, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                        Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                     foreach (var func in funcList) {
                         string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
                         Vector<T> vdst = func(vsrc, shiftAmount);
-                        Assert.AreEqual(vbaseline, vdst, $"{funcName}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                        Assert.AreEqual(vexpected, vdst, $"{funcName}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                 }
             }
@@ -90,16 +90,16 @@ namespace Zyl.VectorTraits.Tests.Impl {
             };
             foreach (Vector<T> vsrc in samples) {
                 for (int shiftAmount = 0; shiftAmount <= shiftAmountMax; ++shiftAmount) {
-                    Vector<T> vbaseline = Vectors.ShiftLeftFast((dynamic)vsrc, shiftAmount);
+                    Vector<T> vexpected = Vectors.ShiftLeftFast((dynamic)vsrc, shiftAmount);
                     foreach (IVectorTraits instance in instances) {
                         if (!instance.IsSupported) continue;
                         Vector<T> vdst = instance.ShiftLeftFast((dynamic)vsrc, shiftAmount);
-                        Assert.AreEqual(vbaseline, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                        Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                     foreach (var func in funcList) {
                         string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
                         Vector<T> vdst = func(vsrc, shiftAmount);
-                        Assert.AreEqual(vbaseline, vdst, $"{funcName}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                        Assert.AreEqual(vexpected, vdst, $"{funcName}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                 }
             }

@@ -109,12 +109,12 @@ namespace Zyl.VectorTraits.Tests {
                 T left = samples[i];
                 for (int j = 1; j < samples.Length; ++j) {
                     T right = samples[j];
-                    T baseline;
+                    T expected;
                     T dst;
-                    baseline = Math.Min((dynamic)left, (dynamic)right);
+                    expected = Math.Min((dynamic)left, (dynamic)right);
                     dst = BitUtil.ConditionalSelect((dynamic)left < (dynamic)right, (dynamic)left, (dynamic)right);
-                    Assert.AreEqual(baseline, dst, $"{left} < {right}");
-                    //Console.WriteLine($"{left} < {right}: {baseline}");
+                    Assert.AreEqual(expected, dst, $"{left} < {right}");
+                    //Console.WriteLine($"{left} < {right}: {expected}");
                 }
             }
         }
@@ -142,14 +142,14 @@ namespace Zyl.VectorTraits.Tests {
             // run.
             for (int i = 1; i < samples.Length; ++i) {
                 T value = samples[i];
-                T baseline;
+                T expected;
 #if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                baseline = Math.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
+                expected = Math.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
 #else
-                baseline = Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
+                expected = Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
 #endif
                 T dst = BitUtil.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
-                Assert.AreEqual(baseline, dst, $"{value}, [{amin}, {nmax}]");
+                Assert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
             }
         }
 
@@ -170,14 +170,14 @@ namespace Zyl.VectorTraits.Tests {
             // run.
             for (int i = 1; i < samples.Length; ++i) {
                 T value = samples[i];
-                T baseline;
+                T expected;
 #if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                baseline = Math.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
+                expected = Math.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
 #else
-                baseline = Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
+                expected = Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
 #endif
                 T dst = BitUtil.ClampToBitMax((dynamic)value, (dynamic)amax);
-                Assert.AreEqual(baseline, dst, $"{value}, [{amin}, {nmax}]");
+                Assert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
             }
         }
 
@@ -198,14 +198,14 @@ namespace Zyl.VectorTraits.Tests {
             // run.
             for (int i = 1; i < samples.Length; ++i) {
                 T value = samples[i];
-                byte baseline;
+                byte expected;
 #if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                baseline = (byte)Math.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
+                expected = (byte)Math.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
 #else
-                baseline = (byte)Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
+                expected = (byte)Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
 #endif
                 byte dst = BitUtil.ClampToByte((dynamic)value);
-                Assert.AreEqual(baseline, dst, $"{value}, [{amin}, {nmax}]");
+                Assert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
             }
         }
 
