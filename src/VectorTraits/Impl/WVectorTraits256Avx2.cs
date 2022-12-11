@@ -283,7 +283,7 @@ namespace Zyl.VectorTraits.Impl {
                 Vector256<long> rt;
                 Vector256<int> lower, upper;
                 Vector256<int> XyXMask = Vector256s<int>.XyXMask;
-                const byte controlInputUpper = 0b11_11_01_01; // GetByteByBit2(1, 1, 3, 3) = 0xF5 = 0b11_11_01_01;
+                const byte controlInputUpper = 0b11_11_01_01; // BitUtil._MM_SHUFFLE(3, 3, 1, 1) = 0xF5 = 0b11_11_01_01;
                 Vector256<int> upperAtLower = Avx2.Shuffle(value.AsInt32(), controlInputUpper); // f({ v0.lower, v0.upper, v1.lower, v1.upper, ... }) = { v0.upper, v0.upper, v1.upper, v1.upper, ... }
                 upperAtLower = Avx2.And(XyXMask, upperAtLower); // = { v0.upper, 0, v1.upper, 0, ... }
                 Vector256<int> upperOld = Avx2.AndNot(XyXMask, value.AsInt32()); // = { 0, v0.upper, 0, v1.upper, ... }

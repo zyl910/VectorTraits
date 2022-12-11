@@ -218,6 +218,99 @@ namespace Zyl.VectorTraits {
 
 #endif // NET5_0_OR_GREATER
 
+        /// <summary>
+        /// Get the byte made by the 2-bit value (获取由2位值构成的字节). Generally used to make shuffle control codes, like <see cref="_MM_SHUFFLE"/> (一般用于制作 shuffle 控制码, 类似 <see cref="_MM_SHUFFLE"/>).
+        /// </summary>
+        /// <param name="n3">The 3rd 2-bit value (第3个2位值).</param>
+        /// <param name="n2">The 2nd 2-bit value (第2个2位值).</param>
+        /// <param name="n1">The 1st 2-bit value (第1个2位值).</param>
+        /// <param name="n0">The 0th 2-bit value (第0个2位值).</param>
+        /// <returns>Return the byte of made (返回所构成的字节).</returns>
+        /// <seealso cref="GetByteByBit2R"/>
+        /// <seealso cref="_MM_SHUFFLE"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte GetByteByBit2(byte n3, byte n2, byte n1, byte n0) {
+            return (byte)((n3 << 6) | (n2 << 4) | (n1 << 2) | n0);
+        }
+
+        /// <summary>
+        /// Get the byte made by the 2-bit value - reversed (获取由2位值构成的字节 - 逆序). Generally used to make shuffle control codes, like <see cref="_MM_SHUFFLE"/> (一般用于制作 shuffle 控制码, 类似 <see cref="_MM_SHUFFLE"/>).
+        /// </summary>
+        /// <param name="n0">The 0th 2-bit value (第0个2位值).</param>
+        /// <param name="n1">The 1st 2-bit value (第1个2位值).</param>
+        /// <param name="n2">The 2nd 2-bit value (第2个2位值).</param>
+        /// <param name="n3">The 3rd 2-bit value (第3个2位值).</param>
+        /// <returns>Return the byte of made (返回所构成的字节).</returns>
+        /// <seealso cref="GetByteByBit2"/>
+        /// <seealso cref="_MM_SHUFFLE"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte GetByteByBit2R(byte n0, byte n1, byte n2, byte n3) {
+            return GetByteByBit2(n3, n2, n1, n0);
+        }
+
+        /// <summary>
+        /// Get the byte made by the 4-bit value (获取由4位值构成的字节). Generally used to make shuffle control codes, like <see cref="_MM_SHUFFLE"/> (一般用于制作 shuffle 控制码, 类似 <see cref="_MM_SHUFFLE"/>).
+        /// </summary>
+        /// <param name="n1">The 1st 4-bit value (第1个4位值).</param>
+        /// <param name="n0">The 0th 4-bit value (第0个4位值).</param>
+        /// <returns>Return the byte of made (返回所构成的字节).</returns>
+        /// <seealso cref="GetByteByBit4R"/>
+        /// <seealso cref="_MM_SHUFFLE"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte GetByteByBit4(byte n1, byte n0) {
+            return (byte)((n1 << 4) | n0);
+        }
+
+        /// <summary>
+        /// Get the byte made by the 4-bit value - reversed (获取由4位值构成的字节 - 逆序). Generally used to make shuffle control codes, like <see cref="_MM_SHUFFLE"/> (一般用于制作 shuffle 控制码, 类似 <see cref="_MM_SHUFFLE"/>).
+        /// </summary>
+        /// <param name="n0">The 0th 4-bit value (第0个4位值).</param>
+        /// <param name="n1">The 1st 4-bit value (第1个4位值).</param>
+        /// <returns>Return the byte of made (返回所构成的字节).</returns>
+        /// <seealso cref="GetByteByBit4"/>
+        /// <seealso cref="_MM_SHUFFLE"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte GetByteByBit4R(byte n0, byte n1) {
+            return GetByteByBit4(n1, n0);
+        }
+
+        /// <summary>
+        /// Make the shuffle control code for selecting four 2-bit values (制作shuffle控制码, 用于选择4个2位值).
+        /// </summary>
+        /// <param name="fp3">The 3rd 2-bit value (第3个2位值).</param>
+        /// <param name="fp2">The 2nd 2-bit value (第2个2位值).</param>
+        /// <param name="fp1">The 1st 2-bit value (第1个2位值).</param>
+        /// <param name="fp0">The 0th 2-bit value (第0个2位值).</param>
+        /// <returns>Returns shuffle control code (返回shuffle控制码).</returns>
+        /// <remarks>
+        /// <para>"xmmintrin.h": MACRO for shuffle parameter for _mm_shuffle_ps().</para>
+        /// <para>Argument fp3 is a digit[0123] that represents the fp from argument "b" of mm_shuffle_ps that will be placed in fp3 of result. fp2 is the same for fp2 in result.</para>
+        /// <para>fp1 is a digit[0123] that represents the fp from argument "a" of mm_shuffle_ps that will be places in fp1 of result. fp0 is the same for fp0 of result.</para>
+        /// </remarks>
+        /// <seealso cref="GetByteByBit2"/>
+        /// <seealso cref="_MM_SHUFFLE2"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte _MM_SHUFFLE(byte fp3, byte fp2, byte fp1, byte fp0) {
+            return GetByteByBit2(fp3, fp2, fp1, fp0);
+        }
+
+        /// <summary>
+        /// Make the shuffle control code for selecting two 1-bit values (制作shuffle控制码, 用于选择2个1位值).
+        /// </summary>
+        /// <param name="x">The 1st 1-bit value (第1个2位值).</param>
+        /// <param name="y">The 0th 1-bit value (第0个2位值).</param>
+        /// <returns>Returns shuffle control code (返回shuffle控制码).</returns>
+        /// <remarks>
+        /// <para>"emmintrin.h": Macro function for shuffle.</para>
+        /// </remarks>
+        /// <seealso cref="_MM_SHUFFLE"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte _MM_SHUFFLE2(byte x, byte y) {
+            return (byte)((x << 1) | y);
+        }
+
         /// <summary>Conditionally mask selects a value from two variables on a bitwise basis (按条件掩码从两个变量中按位选择值).</summary>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
         /// <param name="left">The variable that is selected when the corresponding bit in <paramref name="condition" /> is one (当 <paramref name="condition" /> 中的对应位为 1 时选择的变量).</param>

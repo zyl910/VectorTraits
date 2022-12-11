@@ -13,6 +13,81 @@ namespace Zyl.VectorTraits.Tests {
             Assert.AreNotEqual(0, n);
         }
 
+        [Test()]
+        public void GetByteByBit2Test() {
+            for (byte n3 = 0; n3 <= 3; ++n3) {
+                for (byte n2 = 0; n2 <= 3; ++n2) {
+                    for (byte n1 = 0; n1 <= 3; ++n1) {
+                        for (byte n0 = 0; n0 <= 3; ++n0) {
+                            byte dst = BitUtil.GetByteByBit2(n3, n2, n1, n0);
+                            Console.WriteLine($"GetByteByBit2({n3}, {n2}, {n1}, {n0}) = 0x{dst:X2}\t// {dst}");
+                        }
+                    }
+                }
+            }
+        }
+
+        [Test()]
+        public void GetByteByBit2RTest() {
+            for (byte n3 = 0; n3 <= 3; ++n3) {
+                for (byte n2 = 0; n2 <= 3; ++n2) {
+                    for (byte n1 = 0; n1 <= 3; ++n1) {
+                        for (byte n0 = 0; n0 <= 3; ++n0) {
+                            byte expected = BitUtil.GetByteByBit2(n3, n2, n1, n0);
+                            byte dst = BitUtil.GetByteByBit2R(n0, n1, n2, n3);
+                            Assert.AreEqual(expected, dst, $"({n0}, {n1}, {n2}, {n3})");
+                            //Console.WriteLine($"GetByteByBit2R({n0}, {n1}, {n2}, {n3}) = 0x{dst:X2}\t// {dst}");
+                        }
+                    }
+                }
+            }
+        }
+
+        [Test()]
+        public void GetByteByBit4Test() {
+            for (byte n1 = 0; n1 <= 15; ++n1) {
+                for (byte n0 = 0; n0 <= 15; ++n0) {
+                    byte dst = BitUtil.GetByteByBit4(n1, n0);
+                    Console.WriteLine($"GetByteByBit4({n1}, {n0}) = 0x{dst:X2}\t// {dst}");
+                }
+            }
+        }
+
+        [Test()]
+        public void GetByteByBit4RTest() {
+            for (byte n1 = 0; n1 <= 15; ++n1) {
+                for (byte n0 = 0; n0 <= 15; ++n0) {
+                    byte expected = BitUtil.GetByteByBit4(n1, n0);
+                    byte dst = BitUtil.GetByteByBit4R(n0, n1);
+                    //Console.WriteLine($"GetByteByBit4R({n0}, {n1}) = 0x{dst:X2}\t// {dst}");
+                }
+            }
+        }
+
+        [Test()]
+        public void _MM_SHUFFLETest() {
+            for (byte n3 = 0; n3 <= 3; ++n3) {
+                for (byte n2 = 0; n2 <= 3; ++n2) {
+                    for (byte n1 = 0; n1 <= 3; ++n1) {
+                        for (byte n0 = 0; n0 <= 3; ++n0) {
+                            byte dst = BitUtil._MM_SHUFFLE(n3, n2, n1, n0);
+                            Console.WriteLine($"_MM_SHUFFLE({n3}, {n2}, {n1}, {n0}) = 0x{dst:X2}\t// {dst}");
+                        }
+                    }
+                }
+            }
+        }
+
+        [Test()]
+        public void _MM_SHUFFLE2Test() {
+            for (byte n1 = 0; n1 <= 1; ++n1) {
+                for (byte n0 = 0; n0 <= 1; ++n0) {
+                    byte dst = BitUtil._MM_SHUFFLE2(n1, n0);
+                    Console.WriteLine($"_MM_SHUFFLE2({n1}, {n0}) = 0x{dst:X2}\t// {dst}");
+                }
+            }
+        }
+
         [TestCase((float)1)]
         [TestCase((double)2)]
         [TestCase((sbyte)3)]
