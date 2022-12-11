@@ -641,6 +641,258 @@ namespace Zyl.VectorTraits {
 
 #endif // NET5_0_OR_GREATER
 
+        /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the smaller of two variables (返回两个变量中较小的一个).</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static sbyte Min(sbyte val1, sbyte val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+        /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the smaller of two variables (返回两个变量中较小的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte Min(byte val1, byte val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+        /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the smaller of two variables (返回两个变量中较小的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static short Min(short val1, short val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+        /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the smaller of two variables (返回两个变量中较小的一个).</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ushort Min(ushort val1, ushort val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+        /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the smaller of two variables (返回两个变量中较小的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Min(int val1, int val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+        /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the smaller of two variables (返回两个变量中较小的一个).</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint Min(uint val1, uint val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+        /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the smaller of two variables (返回两个变量中较小的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long Min(long val1, long val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+        /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the smaller of two variables (返回两个变量中较小的一个).</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ulong Min(ulong val1, ulong val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+        /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the smaller of two variables (返回两个变量中较小的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static nint Min(nint val1, nint val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+        /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the smaller of two variables (返回两个变量中较小的一个).</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static nuint Min(nuint val1, nuint val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+        /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the smaller of two variables (返回两个变量中较小的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Min(float val1, float val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+        /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the smaller of two variables (返回两个变量中较小的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Min(double val1, double val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+#if NET5_0_OR_GREATER
+
+        /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the smaller of two variables (返回两个变量中较小的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half Min(Half val1, Half val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+#endif // NET5_0_OR_GREATER
+
+        /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the larger of two variables (返回两个变量中较大的一个).</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static sbyte Max(sbyte val1, sbyte val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+        /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the larger of two variables (返回两个变量中较大的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte Max(byte val1, byte val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+        /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the larger of two variables (返回两个变量中较大的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static short Max(short val1, short val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+        /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the larger of two variables (返回两个变量中较大的一个).</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ushort Max(ushort val1, ushort val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+        /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the larger of two variables (返回两个变量中较大的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Max(int val1, int val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+        /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the larger of two variables (返回两个变量中较大的一个).</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint Max(uint val1, uint val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+        /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the larger of two variables (返回两个变量中较大的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long Max(long val1, long val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+        /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the larger of two variables (返回两个变量中较大的一个).</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ulong Max(ulong val1, ulong val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+        /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the larger of two variables (返回两个变量中较大的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static nint Max(nint val1, nint val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+        /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the larger of two variables (返回两个变量中较大的一个).</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static nuint Max(nuint val1, nuint val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+        /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the larger of two variables (返回两个变量中较大的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Max(float val1, float val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+        /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the larger of two variables (返回两个变量中较大的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Max(double val1, double val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+#if NET5_0_OR_GREATER
+
+        /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
+        /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
+        /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
+        /// <returns>Return the larger of two variables (返回两个变量中较大的一个).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half Max(Half val1, Half val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+#endif // NET5_0_OR_GREATER
+
         /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
         /// <param name="value">The value to be clamped (要限制的值).</param>
         /// <param name="amin">The lower bound of the result (结果的下限).</param>
@@ -793,17 +1045,17 @@ namespace Zyl.VectorTraits {
 
 #endif // NET5_0_OR_GREATER
 
-        /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
-        /// <param name="value">The value to be clamped (要限制的值).</param>
-        /// <param name="amin">The lower bound of the result (结果的下限).</param>
-        /// <param name="amax">The upper bound of the result (结果的上限).</param>
-        /// <returns>Returns <c>(value&lt;amax)?( (value&gt;amin)?value:amin ):amax</c>.</returns>
-        /// <seealso cref="Math.Clamp(decimal, decimal, decimal)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static decimal Clamp(decimal value, decimal amin, decimal amax) {
-            //return ConditionalSelect(value < amax, ConditionalSelect(value > amin, value, amin), amax);
-            return Math.Min(Math.Max(value, amin), amax);
-        }
+        ///// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
+        ///// <param name="value">The value to be clamped (要限制的值).</param>
+        ///// <param name="amin">The lower bound of the result (结果的下限).</param>
+        ///// <param name="amax">The upper bound of the result (结果的上限).</param>
+        ///// <returns>Returns <c>(value&lt;amax)?( (value&gt;amin)?value:amin ):amax</c>.</returns>
+        ///// <seealso cref="Math.Clamp(decimal, decimal, decimal)"/>
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //public static decimal Clamp(decimal value, decimal amin, decimal amax) {
+        //    //return ConditionalSelect(value < amax, ConditionalSelect(value > amin, value, amin), amax);
+        //    return Math.Min(Math.Max(value, amin), amax);
+        //}
 
         /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of 0 and <paramref name="amax" /> (返回限制在 0 和 <paramref name="amax" /> 范围内的 <paramref name="value" />). <paramref name="amax" /> must be a `Pow(2,n)-1`.</summary>
         /// <param name="value">The value to be clamped (要限制的值).</param>
