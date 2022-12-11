@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -65,7 +65,7 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
         }
 
         /// <summary>
-        /// Sum ConditionalSelect - Min.
+        /// Sum ConditionalSelect - Math.Min.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -91,7 +91,33 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
         }
 
         /// <summary>
-        /// Sum ConditionalSelect - BitUtil.
+        /// Sum ConditionalSelect - BitUtil.Min .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="sample">Sample value.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TMy StaticSumConditionalSelect_Min_BitUtil(TMy[] src, int srcCount, TMy sample) {
+            TMy rt = 0; // Result.
+            for (int i = 0; i < srcCount; ++i) {
+                TMy t = src[i];
+                rt += BitUtil.ConditionalSelect(t < sample, t, sample);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumConditionalSelect_Min_BitUtil() {
+            dstTMy = 0;
+            foreach (TMy sample in samples) {
+                dstTMy += StaticSumConditionalSelect_Min_BitUtil(srcArray, srcArray.Length, sample);
+            }
+            CheckResult("SumConditionalSelect_Min_BitUtil");
+        }
+
+        /// <summary>
+        /// Sum ConditionalSelect - BitUtil.ConditionalSelect .
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
