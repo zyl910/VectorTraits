@@ -82,6 +82,8 @@ namespace Zyl.VectorTraits {
         public const TypeCodeFlags FloatTypes = TypeCodeFlags.Single | TypeCodeFlags.Double;
         /// <summary>TypeCodeFlags of integer types.</summary>
         public const TypeCodeFlags IntTypes = TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+        /// <summary>TypeCodeFlags of all types.</summary>
+        public const TypeCodeFlags AllTypes = FloatTypes | IntTypes;
 
         /// <summary>TypeCode of <see cref="IntPtr"/>.</summary>
         public static readonly TypeCode IntPtrCode;

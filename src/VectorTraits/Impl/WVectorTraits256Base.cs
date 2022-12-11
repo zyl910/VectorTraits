@@ -69,6 +69,61 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect_AcceleratedTypes"/>
+            public static TypeCodeFlags ConditionalSelect_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect{T}(Vector256{T}, Vector256{T}, Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> ConditionalSelect<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ConditionalSelect(condition, left, right);
+#else
+                return ConditionalSelect_Base(condition, left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            ///// <inheritdoc cref="IWVectorTraits256.ConditionalSelect(Vector256{int}, Vector256{float}, Vector256{float})"/>
+            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+            //public static Vector256<float> ConditionalSelect(Vector256<int> condition, Vector256<float> left, Vector256<float> right) {
+            //    return ConditionalSelect<float>(condition.AsSingle(), left, right);
+            //}
+
+            ///// <inheritdoc cref="IWVectorTraits256.ConditionalSelect(Vector256{long}, Vector256{double}, Vector256{double})"/>
+            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+            //public static Vector256<double> ConditionalSelect(Vector256<long> condition, Vector256<double> left, Vector256<double> right) {
+            //    return ConditionalSelect<double>(condition.AsDouble(), left, right);
+            //}
+
+            /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect{T}(Vector256{T}, Vector256{T}, Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<T> ConditionalSelect_Base<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector256<T> rt);
+#else
+                Vector256<T> rt = default;
+#endif // NET5_0_OR_GREATER
+                ulong* pcondition = (ulong*)&condition;
+                ulong* pleft = (ulong*)&left;
+                ulong* pright = (ulong*)&right;
+                ulong* q = (ulong*)&rt;
+                // result = (left & condition) | (right & ~condition);
+                q[0] = (pleft[0] & pcondition[0]) | (pright[0] & ~pcondition[0]);
+                q[1] = (pleft[1] & pcondition[1]) | (pright[1] & ~pcondition[1]);
+                q[2] = (pleft[2] & pcondition[2]) | (pright[2] & ~pcondition[2]);
+                q[3] = (pleft[3] & pcondition[3]) | (pright[3] & ~pcondition[3]);
+                return rt;
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {
@@ -687,6 +742,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 #endif // NETCOREAPP3_0_OR_GREATER
+            }
         }
-    }
 }

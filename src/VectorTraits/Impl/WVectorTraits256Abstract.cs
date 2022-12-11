@@ -58,6 +58,31 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect_AcceleratedTypes"/>
+        public virtual TypeCodeFlags ConditionalSelect_AcceleratedTypes {
+            get {
+                return Statics.ConditionalSelect_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect{T}(Vector256{T}, Vector256{T}, Vector256{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<T> ConditionalSelect<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
+            return Statics.ConditionalSelect(condition, left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect(Vector256{int}, Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> ConditionalSelect(Vector256<int> condition, Vector256<float> left, Vector256<float> right) {
+            return ConditionalSelect<float>(condition.AsSingle(), left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect(Vector256{long}, Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> ConditionalSelect(Vector256<long> condition, Vector256<double> left, Vector256<double> right) {
+            return ConditionalSelect<double>(condition.AsDouble(), left, right);
+        }
+
         /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_AcceleratedTypes"/>
         public virtual TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {

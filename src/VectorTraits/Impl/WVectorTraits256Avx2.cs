@@ -73,6 +73,32 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect_AcceleratedTypes"/>
+            public static TypeCodeFlags ConditionalSelect_AcceleratedTypes {
+                get {
+                    return TypeCodeFlagsUtil.AllTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect{T}(Vector256{T}, Vector256{T}, Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> ConditionalSelect<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ConditionalSelect(condition, left, right);
+#else
+                return ConditionalSelect_Avx(condition, left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect{T}(Vector256{T}, Vector256{T}, Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> ConditionalSelect_Avx<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
+                // result = (left & condition) | (right & ~condition);
+                return Avx.Or(Avx.And(condition.AsDouble(), left.AsDouble())
+                    , Avx.AndNot(condition.AsDouble(), right.AsDouble())
+                    ).As<double, T>();
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {
