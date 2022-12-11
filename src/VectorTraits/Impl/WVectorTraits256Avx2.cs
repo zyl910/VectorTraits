@@ -297,13 +297,14 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftRightArithmeticFast(Vector256<long> value, int shiftAmount) {
-                return ShiftRightArithmeticFast_If(value, shiftAmount);
+                //return ShiftRightArithmeticFast_If(value, shiftAmount);
+                return ShiftRightArithmeticFast_IfLess(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftRightArithmeticFast_If(Vector256<long> value, int shiftAmount) {
-                if (0 == (shiftAmount & 0x3F)) {
+                if (0 == shiftAmount) {
                     return value;
                 }
                 Vector256<long> rt;
@@ -329,6 +330,29 @@ namespace Zyl.VectorTraits.Impl {
                     upper = Avx2.ShiftRightArithmetic(upperOld, (byte)shiftAmount);
                     rt = Avx2.Or(lower, upper).AsInt64();
                 }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ShiftRightArithmeticFast_IfLess(Vector256<long> value, int shiftAmount) {
+                if (0 == shiftAmount) {
+                    return value;
+                }
+                Vector256<int> XyXMask = Vector256s<int>.XyXMask;
+                const byte controlInputUpper = 0b11_11_01_01; // BitUtil._MM_SHUFFLE(3, 3, 1, 1) = 0xF5 = 0b11_11_01_01;
+                Vector256<int> upperAtLower = Avx2.Shuffle(value.AsInt32(), controlInputUpper); // f({ v0.lower, v0.upper, v1.lower, v1.upper, ... }) = { v0.upper, v0.upper, v1.upper, v1.upper, ... }
+                byte shiftAmountUpper = (byte)BitUtil.Min(31, shiftAmount);
+                byte shiftAmountLeft = (byte)BitUtil.Max(0, 32 - shiftAmount);
+                Vector256<int> lowerUse1Mask = Vector256.Create(BitUtil.ToInt32Mask(32 <= shiftAmount));
+                upperAtLower = Avx2.And(XyXMask, upperAtLower); // = { v0.upper, 0, v1.upper, 0, ... }
+                Vector256<int> lowerOld = Avx2.And(XyXMask, value.AsInt32());
+                Vector256<int> upperOld = Avx2.AndNot(XyXMask, value.AsInt32()); // = { 0, v0.upper, 0, v1.upper, ... }
+                Vector256<int> lower2 = Avx2.Or(Avx2.ShiftRightLogical(lowerOld, (byte)shiftAmount), Avx2.ShiftLeftLogical(upperAtLower, shiftAmountLeft));
+                Vector256<int> upper = Avx2.ShiftRightArithmetic(upperOld, shiftAmountUpper);
+                Vector256<int> lower1 = Avx2.ShiftRightArithmetic(upperAtLower, (byte)(shiftAmount & 31));
+                Vector256<int> lower = ConditionalSelect(lowerUse1Mask, lower1, lower2);
+                Vector256<long> rt = Avx2.Or(lower, upper).AsInt64();
                 return rt;
             }
 
