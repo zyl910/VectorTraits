@@ -798,8 +798,7 @@ namespace Zyl.VectorTraits.Impl {
 #if NET7_0_OR_GREATER
                 Vector<sbyte> shifted = Vector.ShiftRightLogical(value.AsUInt16(), shiftAmount).AsSByte();
 #else
-                //Vector<sbyte> shifted = ShiftRightLogicalFast_Base(value.AsUInt64(), shiftAmount).AsSByte();
-                Vector<sbyte> shifted = ShiftRightArithmeticFast_Base(value.AsInt64(), shiftAmount).AsSByte();
+                Vector<sbyte> shifted = ShiftRightLogicalFast(value.AsUInt64(), shiftAmount).AsSByte();
 #endif // NET7_0_OR_GREATER
                 Vector<sbyte> mask = Vectors<sbyte>.GetMaskBits(8 - shiftAmount);
                 Vector<sbyte> sign = Vector.GreaterThan(Vector<sbyte>.Zero, value);
@@ -814,8 +813,7 @@ namespace Zyl.VectorTraits.Impl {
 #if NET7_0_OR_GREATER
                 Vector<short> shifted = Vector.ShiftRightLogical(value, shiftAmount);
 #else
-                //Vector<short> shifted = ShiftRightLogicalFast_Base(value.AsUInt64(), shiftAmount).AsInt16();
-                Vector<short> shifted = ShiftRightArithmeticFast_Base(value.AsInt64(), shiftAmount).AsInt16();
+                Vector<short> shifted = ShiftRightLogicalFast(value.AsUInt64(), shiftAmount).AsInt16();
 #endif // NET7_0_OR_GREATER
                 Vector<short> mask = Vectors<short>.GetMaskBits(16 - shiftAmount);
                 Vector<short> sign = Vector.GreaterThan(Vector<short>.Zero, value);
@@ -830,8 +828,7 @@ namespace Zyl.VectorTraits.Impl {
 #if NET7_0_OR_GREATER
                 Vector<int> shifted = Vector.ShiftRightLogical(value, shiftAmount);
 #else
-                //Vector<int> shifted = ShiftRightLogicalFast_Base(value.AsUInt64(), shiftAmount).AsInt32();
-                Vector<int> shifted = ShiftRightArithmeticFast_Base(value.AsInt64(), shiftAmount).AsInt32();
+                Vector<int> shifted = ShiftRightLogicalFast(value.AsUInt64(), shiftAmount).AsInt32();
 #endif // NET7_0_OR_GREATER
                 Vector<int> mask = Vectors<int>.GetMaskBits(32 - shiftAmount);
                 Vector<int> sign = Vector.GreaterThan(Vector<int>.Zero, value);
@@ -846,8 +843,7 @@ namespace Zyl.VectorTraits.Impl {
 #if NET7_0_OR_GREATER
                 Vector<long> shifted = Vector.ShiftRightLogical(value, shiftAmount);
 #else
-                //Vector<long> shifted = ShiftRightLogicalFast_Base(value, shiftAmount);
-                Vector<long> shifted = ShiftRightArithmeticFast_Base(value, shiftAmount);
+                Vector<long> shifted = ShiftRightLogicalFast(value.AsUInt64(), shiftAmount).AsInt64();
 #endif // NET7_0_OR_GREATER
                 Vector<long> mask = Vectors<long>.GetMaskBits(64 - shiftAmount);
                 Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
