@@ -64,6 +64,9 @@
     <Compile Include="..\VectorTraits.Benchmarks\AVector\S\ShiftLeftBenchmark_Overload.cs">
       <Link>AVector\S\ShiftLeftBenchmark_Overload.cs</Link>
     </Compile>
+    <Compile Include="..\VectorTraits.Benchmarks\AVector\S\ShiftRightArithmeticBenchmark_Overload.cs">
+      <Link>AVector\S\ShiftRightArithmeticBenchmark_Overload.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
