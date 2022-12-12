@@ -37,6 +37,20 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NET5_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect_AcceleratedTypes"/>
+        public override TypeCodeFlags ConditionalSelect_AcceleratedTypes {
+            get {
+                return Statics.ConditionalSelect_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<T> ConditionalSelect<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
+            return Statics.ConditionalSelect(condition, left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         public override TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {
@@ -156,10 +170,68 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_AcceleratedTypes"/>
+        public override TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes {
+            get {
+                return Statics.ShiftRightArithmetic_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<sbyte> ShiftRightArithmetic(Vector128<sbyte> value, int shiftAmount) {
+            return Statics.ShiftRightArithmetic(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<short> ShiftRightArithmetic(Vector128<short> value, int shiftAmount) {
+            return Statics.ShiftRightArithmetic(value, shiftAmount);
+        }
+
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector128<int> ShiftRightArithmetic(Vector128<int> value, int shiftAmount) {
             return Statics.ShiftRightArithmetic(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> ShiftRightArithmetic(Vector128<long> value, int shiftAmount) {
+            return Statics.ShiftRightArithmetic(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast_AcceleratedTypes"/>
+        public override TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes {
+            get {
+                return Statics.ShiftRightArithmeticFast_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<sbyte> ShiftRightArithmeticFast(Vector128<sbyte> value, int shiftAmount) {
+            return Statics.ShiftRightArithmeticFast(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<short> ShiftRightArithmeticFast(Vector128<short> value, int shiftAmount) {
+            return Statics.ShiftRightArithmeticFast(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{int}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<int> ShiftRightArithmeticFast(Vector128<int> value, int shiftAmount) {
+            return Statics.ShiftRightArithmeticFast(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> ShiftRightArithmeticFast(Vector128<long> value, int shiftAmount) {
+            return Statics.ShiftRightArithmeticFast(value, shiftAmount);
         }
 
 #endif // NET5_0_OR_GREATER

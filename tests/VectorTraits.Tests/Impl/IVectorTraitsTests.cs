@@ -33,7 +33,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
             }
             var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftLeft_Base", "ShiftLeft_Multiply");
             foreach (var func in funcList) {
-                Console.WriteLine(ReflectionUtil.GetShortNameWithType(func.Method));
+                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
             // run.
             Vector<T>[] samples = {
@@ -80,7 +80,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
             }
             var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftLeftFast_Base", "ShiftLeftFast_Multiply");
             foreach (var func in funcList) {
-                Console.WriteLine(ReflectionUtil.GetShortNameWithType(func.Method));
+                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
             // run.
             Vector<T>[] samples = {

@@ -117,6 +117,41 @@ namespace Zyl.VectorTraits {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect_AcceleratedTypes"/>
+        public static TypeCodeFlags ConditionalSelect_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.ConditionalSelect_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                if (Vector128.IsHardwareAccelerated) {
+                    rt |= TypeCodeFlagsUtil.AllTypes;
+                }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<T> ConditionalSelect<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.ConditionalSelect(condition, left, right);
+#else
+            return _instance.ConditionalSelect(condition, left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect(Vector128{int}, Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<float> ConditionalSelect(Vector128<int> condition, Vector128<float> left, Vector128<float> right) {
+            return _instance.ConditionalSelect(condition, left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect(Vector128{long}, Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<double> ConditionalSelect(Vector128<long> condition, Vector128<double> left, Vector128<double> right) {
+            return _instance.ConditionalSelect(condition, left, right);
+        }
+
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {
@@ -312,6 +347,40 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_AcceleratedTypes"/>
+        public static TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.ShiftRightArithmetic_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                if (Vector128.IsHardwareAccelerated) {
+                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+                }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<sbyte> ShiftRightArithmetic(Vector128<sbyte> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
+            return Vector128.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+            return _instance.ShiftRightArithmetic(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<short> ShiftRightArithmetic(Vector128<short> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.ShiftRightArithmetic(value, shiftAmount);
+#else
+            return _instance.ShiftRightArithmetic(value, shiftAmount);
+#endif
+        }
+
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightArithmetic(Vector128<int> value, int shiftAmount) {
@@ -319,6 +388,70 @@ namespace Zyl.VectorTraits {
             return Vector128.ShiftRightArithmetic(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmetic(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> ShiftRightArithmetic(Vector128<long> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.ShiftRightArithmetic(value, shiftAmount);
+#else
+            return _instance.ShiftRightArithmetic(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast_AcceleratedTypes"/>
+        public static TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.ShiftRightArithmeticFast_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                if (Vector128.IsHardwareAccelerated) {
+                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+                }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<sbyte> ShiftRightArithmeticFast(Vector128<sbyte> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
+            return Vector128.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+            return _instance.ShiftRightArithmeticFast(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<short> ShiftRightArithmeticFast(Vector128<short> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.ShiftRightArithmetic(value, shiftAmount);
+#else
+            return _instance.ShiftRightArithmeticFast(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{int}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> ShiftRightArithmeticFast(Vector128<int> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.ShiftRightArithmetic(value, shiftAmount);
+#else
+            return _instance.ShiftRightArithmeticFast(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> ShiftRightArithmeticFast(Vector128<long> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.ShiftRightArithmetic(value, shiftAmount);
+#else
+            return _instance.ShiftRightArithmeticFast(value, shiftAmount);
 #endif
         }
 

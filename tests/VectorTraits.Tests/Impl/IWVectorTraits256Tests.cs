@@ -57,7 +57,12 @@ namespace Zyl.VectorTraits.Tests.Impl {
                         foreach (IWVectorTraits256 instance in instances) {
                             if (!instance.IsSupported) continue;
                             Vector256<T> dst = instance.ConditionalSelect(condition, left, right);
-                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, condition={condition}, left={left}, right={right}");
+                            // NaN equality problem --
+                            // Expected: <-1.7976931348623157E+308, NaN>
+                            // But was:  <-1.7976931348623157E+308, NaN>
+                            //Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, condition={condition}, left={left}, right={right}");
+                            // Fixed NaN equality problem.
+                            Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, condition={condition}, left={left}, right={right}");
                         }
                     }
                 }
@@ -190,9 +195,9 @@ namespace Zyl.VectorTraits.Tests.Impl {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, int, Vector256<T>>>("ShiftRightArithmeticFast_Negative", "ShiftRightArithmeticFast_Widen", "ShiftRightArithmeticFast_Narrow", "ShiftRightArithmeticFast_NarrowIfLess");
+            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, int, Vector256<T>>>("ShiftRightArithmeticFast_Base", "ShiftRightArithmeticFast_Negative", "ShiftRightArithmeticFast_Widen", "ShiftRightArithmeticFast_Narrow", "ShiftRightArithmeticFast_NarrowIfLess");
             foreach (var func in funcList) {
-                Console.WriteLine(ReflectionUtil.GetShortNameWithType(func.Method));
+                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
             // run.
             Vector256<T>[] samples = {

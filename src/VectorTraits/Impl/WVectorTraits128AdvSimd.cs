@@ -79,6 +79,33 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NET5_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect_AcceleratedTypes"/>
+            public static TypeCodeFlags ConditionalSelect_AcceleratedTypes {
+                get {
+                    return TypeCodeFlagsUtil.AllTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<T> ConditionalSelect<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ConditionalSelect(condition, left, right);
+#else
+                return ConditionalSelect_OrAnd(condition, left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<T> ConditionalSelect_OrAnd<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
+                // result = (left & condition) | (right & ~condition);
+                return AdvSimd.Or(AdvSimd.And(condition.AsInt64(), left.AsInt64())
+                    , AdvSimd.And(AdvSimd.Not(condition.AsInt64()), right.AsInt64())
+                    ).As<long, T>();
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {
@@ -206,11 +233,74 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes {
+                get {
+                    return ShiftRightArithmeticFast_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> ShiftRightArithmetic(Vector128<sbyte> value, int shiftAmount) {
+                shiftAmount &= 7;
+                return ShiftRightArithmeticFast(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{short}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> ShiftRightArithmetic(Vector128<short> value, int shiftAmount) {
+                shiftAmount &= 0x0F;
+                return ShiftRightArithmeticFast(value, shiftAmount);
+            }
+
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic(Vector128<int> value, int shiftAmount) {
-                return AdvSimd.ShiftRightArithmetic(value, (byte)(shiftAmount & 0x1F));
+                shiftAmount &= 0x1F;
+                return ShiftRightArithmeticFast(value, shiftAmount);
             }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ShiftRightArithmetic(Vector128<long> value, int shiftAmount) {
+                shiftAmount &= 0x3F;
+                return ShiftRightArithmeticFast(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> ShiftRightArithmeticFast(Vector128<sbyte> value, int shiftAmount) {
+                return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{short}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> ShiftRightArithmeticFast(Vector128<short> value, int shiftAmount) {
+                return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{int}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> ShiftRightArithmeticFast(Vector128<int> value, int shiftAmount) {
+                return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ShiftRightArithmeticFast(Vector128<long> value, int shiftAmount) {
+                return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+            }
+
 
 #endif // NET5_0_OR_GREATER
         }
