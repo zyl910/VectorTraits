@@ -27,6 +27,7 @@
   <ItemGroup>
     <Compile Include="..\VectorTraits.Benchmarks\AVector\S\ShiftLeftBenchmark_Overload.cs" Link="AVector\S\ShiftLeftBenchmark_Overload.cs" />
     <Compile Include="..\VectorTraits.Benchmarks\AVector\S\ShiftRightArithmeticBenchmark_Overload.cs" Link="AVector\S\ShiftRightArithmeticBenchmark_Overload.cs" />
+    <Compile Include="..\VectorTraits.Benchmarks\AVector\S\ShiftRightLogicalBenchmark_Overload.cs" Link="AVector\S\ShiftRightLogicalBenchmark_Overload.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -110,6 +110,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #>
 
     } // End: partial class ShiftRightArithmeticBenchmark_<#=tMyName#>
+
 <#
     } // End: foreach(string aTypeName in typenameList)
 #>

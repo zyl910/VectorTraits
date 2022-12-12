@@ -398,6 +398,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 
     } // End: partial class ShiftRightArithmeticBenchmark_SByte
+
     partial class ShiftRightArithmeticBenchmark_Int16 {
 
         // StaticSumSRATraitsOverload - VectorTraitsBase
@@ -786,6 +787,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 
     } // End: partial class ShiftRightArithmeticBenchmark_Int16
+
     partial class ShiftRightArithmeticBenchmark_Int32 {
 
         // StaticSumSRATraitsOverload - VectorTraitsBase
@@ -1174,6 +1176,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 
     } // End: partial class ShiftRightArithmeticBenchmark_Int32
+
     partial class ShiftRightArithmeticBenchmark_Int64 {
 
         // StaticSumSRATraitsOverload - VectorTraitsBase
@@ -1562,6 +1565,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 
     } // End: partial class ShiftRightArithmeticBenchmark_Int64
+
 
 }
 

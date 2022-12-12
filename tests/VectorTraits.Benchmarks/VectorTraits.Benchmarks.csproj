@@ -54,6 +54,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ShiftRightArithmeticBenchmark_Overload.tt</DependentUpon>
     </None>
+    <None Include="AVector\S\ShiftRightLogicalBenchmark_Overload.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ShiftRightLogicalBenchmark_Overload.tt</DependentUpon>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -68,6 +73,10 @@
     <None Update="AVector\S\ShiftRightArithmeticBenchmark_Overload.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ShiftRightArithmeticBenchmark_Overload.cs</LastGenOutput>
+    </None>
+    <None Update="AVector\S\ShiftRightLogicalBenchmark_Overload.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ShiftRightLogicalBenchmark_Overload.cs</LastGenOutput>
     </None>
     <None Update="VectorTraits.Benchmarks_waitdebug.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -88,6 +97,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ShiftRightArithmeticBenchmark_Overload.tt</DependentUpon>
+    </Compile>
+    <Compile Update="AVector\S\ShiftRightLogicalBenchmark_Overload.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ShiftRightLogicalBenchmark_Overload.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 
