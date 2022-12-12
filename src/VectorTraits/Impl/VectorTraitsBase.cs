@@ -564,7 +564,7 @@ namespace Zyl.VectorTraits.Impl {
 #if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
                 return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #elif SOFTWARE_OPTIMIZATION
-                return ShiftRightArithmetic_Bit64(value, shiftAmount);
+                return ShiftRightArithmetic_Negative(value, shiftAmount);
 #else
                 return ShiftRightArithmetic_Base(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_VAR
@@ -576,7 +576,7 @@ namespace Zyl.VectorTraits.Impl {
 #if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                 return Vector.ShiftRightArithmetic(value, shiftAmount);
 #elif SOFTWARE_OPTIMIZATION
-                return ShiftRightArithmetic_Bit64(value, shiftAmount);
+                return ShiftRightArithmetic_Negative(value, shiftAmount);
 #else
                 return ShiftRightArithmetic_Base(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_VAR
@@ -588,7 +588,7 @@ namespace Zyl.VectorTraits.Impl {
 #if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                 return Vector.ShiftRightArithmetic(value, shiftAmount);
 #elif SOFTWARE_OPTIMIZATION
-                return ShiftRightArithmetic_Bit64(value, shiftAmount);
+                return ShiftRightArithmetic_Negative(value, shiftAmount);
 #else
                 return ShiftRightArithmetic_Base(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_VAR
@@ -597,10 +597,10 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic(Vector<long> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
-                return Vector.ShiftRightArithmetic(value, shiftAmount);
-//#elif SOFTWARE_OPTIMIZATION
-//                return ShiftRightArithmetic_Bit64(value, shiftAmount);
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
+                return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif SOFTWARE_OPTIMIZATION && NET7_0_OR_GREATER
+                return ShiftRightArithmetic_Negative(value, shiftAmount);
 #else
                 return ShiftRightArithmetic_Base(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_VAR
@@ -643,25 +643,33 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<sbyte> ShiftRightArithmetic_Bit64(Vector<sbyte> value, int shiftAmount) {
+            public static Vector<sbyte> ShiftRightArithmetic_Negative(Vector<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
-                return ShiftRightArithmeticFast_Bit64(value, shiftAmount);
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{short}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<short> ShiftRightArithmetic_Bit64(Vector<short> value, int shiftAmount) {
+            public static Vector<short> ShiftRightArithmetic_Negative(Vector<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
-                return ShiftRightArithmeticFast_Bit64(value, shiftAmount);
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<int> ShiftRightArithmetic_Bit64(Vector<int> value, int shiftAmount) {
+            public static Vector<int> ShiftRightArithmetic_Negative(Vector<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
-                return ShiftRightArithmeticFast_Bit64(value, shiftAmount);
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{long}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftRightArithmetic_Negative(Vector<long> value, int shiftAmount) {
+                shiftAmount &= 0x3F;
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast_AcceleratedTypes"/>
@@ -672,7 +680,8 @@ namespace Zyl.VectorTraits.Impl {
 #if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                         rt |= TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
 #endif // BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
-#if SOFTWARE_OPTIMIZATION
+#if SOFTWARE_OPTIMIZATION && NET7_0_OR_GREATER
+                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Int64; // ShiftRightArithmeticFast_Negative.
 #endif // SOFTWARE_OPTIMIZATION
                     }
                     return rt;
@@ -686,7 +695,7 @@ namespace Zyl.VectorTraits.Impl {
 #if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
                 return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #elif SOFTWARE_OPTIMIZATION
-                return ShiftRightArithmeticFast_Bit64(value, shiftAmount);
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
 #else
                 return ShiftRightArithmeticFast_Base(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_VAR
@@ -698,7 +707,7 @@ namespace Zyl.VectorTraits.Impl {
 #if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                 return Vector.ShiftRightArithmetic(value, shiftAmount);
 #elif SOFTWARE_OPTIMIZATION
-                return ShiftRightArithmeticFast_Bit64(value, shiftAmount);
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
 #else
                 return ShiftRightArithmeticFast_Base(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_VAR
@@ -710,7 +719,7 @@ namespace Zyl.VectorTraits.Impl {
 #if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                 return Vector.ShiftRightArithmetic(value, shiftAmount);
 #elif SOFTWARE_OPTIMIZATION
-                return ShiftRightArithmeticFast_Bit64(value, shiftAmount);
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
 #else
                 return ShiftRightArithmeticFast_Base(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_VAR
@@ -719,10 +728,10 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmeticFast(Vector<long> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
-                return Vector.ShiftRightArithmetic(value, shiftAmount);
-//#elif SOFTWARE_OPTIMIZATION
-//                return ShiftRightArithmeticFast_Bit64(value, shiftAmount);
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
+                return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif SOFTWARE_OPTIMIZATION && NET7_0_OR_GREATER
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
 #else
                 return ShiftRightArithmeticFast_Base(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_VAR
@@ -785,9 +794,13 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<sbyte> ShiftRightArithmeticFast_Bit64(Vector<sbyte> value, int shiftAmount) {
+            public static unsafe Vector<sbyte> ShiftRightArithmeticFast_Negative(Vector<sbyte> value, int shiftAmount) {
+#if NET7_0_OR_GREATER
+                Vector<sbyte> shifted = Vector.ShiftRightLogical(value.AsUInt16(), shiftAmount).AsSByte();
+#else
                 //Vector<sbyte> shifted = ShiftRightLogicalFast_Base(value.AsUInt64(), shiftAmount).AsSByte();
                 Vector<sbyte> shifted = ShiftRightArithmeticFast_Base(value.AsInt64(), shiftAmount).AsSByte();
+#endif // NET7_0_OR_GREATER
                 Vector<sbyte> mask = Vectors<sbyte>.GetMaskBits(8 - shiftAmount);
                 Vector<sbyte> sign = Vector.GreaterThan(Vector<sbyte>.Zero, value);
                 Vector<sbyte> rt = Vector.ConditionalSelect(mask, shifted, sign);
@@ -797,9 +810,13 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{short}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<short> ShiftRightArithmeticFast_Bit64(Vector<short> value, int shiftAmount) {
+            public static Vector<short> ShiftRightArithmeticFast_Negative(Vector<short> value, int shiftAmount) {
+#if NET7_0_OR_GREATER
+                Vector<short> shifted = Vector.ShiftRightLogical(value, shiftAmount);
+#else
                 //Vector<short> shifted = ShiftRightLogicalFast_Base(value.AsUInt64(), shiftAmount).AsInt16();
                 Vector<short> shifted = ShiftRightArithmeticFast_Base(value.AsInt64(), shiftAmount).AsInt16();
+#endif // NET7_0_OR_GREATER
                 Vector<short> mask = Vectors<short>.GetMaskBits(16 - shiftAmount);
                 Vector<short> sign = Vector.GreaterThan(Vector<short>.Zero, value);
                 Vector<short> rt = Vector.ConditionalSelect(mask, shifted, sign);
@@ -809,12 +826,32 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{int}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<int> ShiftRightArithmeticFast_Bit64(Vector<int> value, int shiftAmount) {
+            public static Vector<int> ShiftRightArithmeticFast_Negative(Vector<int> value, int shiftAmount) {
+#if NET7_0_OR_GREATER
+                Vector<int> shifted = Vector.ShiftRightLogical(value, shiftAmount);
+#else
                 //Vector<int> shifted = ShiftRightLogicalFast_Base(value.AsUInt64(), shiftAmount).AsInt32();
                 Vector<int> shifted = ShiftRightArithmeticFast_Base(value.AsInt64(), shiftAmount).AsInt32();
+#endif // NET7_0_OR_GREATER
                 Vector<int> mask = Vectors<int>.GetMaskBits(32 - shiftAmount);
                 Vector<int> sign = Vector.GreaterThan(Vector<int>.Zero, value);
                 Vector<int> rt = Vector.ConditionalSelect(mask, shifted, sign);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{long}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftRightArithmeticFast_Negative(Vector<long> value, int shiftAmount) {
+#if NET7_0_OR_GREATER
+                Vector<long> shifted = Vector.ShiftRightLogical(value, shiftAmount);
+#else
+                //Vector<long> shifted = ShiftRightLogicalFast_Base(value, shiftAmount);
+                Vector<long> shifted = ShiftRightArithmeticFast_Base(value, shiftAmount);
+#endif // NET7_0_OR_GREATER
+                Vector<long> mask = Vectors<long>.GetMaskBits(64 - shiftAmount);
+                Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
+                Vector<long> rt = Vector.ConditionalSelect(mask, shifted, sign);
                 return rt;
             }
 

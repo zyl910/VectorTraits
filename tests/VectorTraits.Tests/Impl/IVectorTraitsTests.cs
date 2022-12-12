@@ -122,7 +122,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftRightArithmetic_Base", "ShiftRightArithmetic_Bit64");
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftRightArithmetic_Base", "ShiftRightArithmetic_Negative");
             foreach (var func in funcList) {
                 Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
@@ -165,7 +165,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftRightArithmetic_Base", "ShiftRightArithmetic_Bit64", "ShiftRightArithmeticFast_Negative", "ShiftRightArithmeticFast_Widen", "ShiftRightArithmeticFast_Narrow", "ShiftRightArithmeticFast_NarrowIfLess");
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftRightArithmetic_Base", "ShiftRightArithmetic_Negative", "ShiftRightArithmeticFast_Negative", "ShiftRightArithmeticFast_Widen", "ShiftRightArithmeticFast_Narrow", "ShiftRightArithmeticFast_NarrowIfLess");
             foreach (var func in funcList) {
                 Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
