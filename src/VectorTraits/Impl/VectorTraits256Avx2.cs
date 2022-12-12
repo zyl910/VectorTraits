@@ -362,6 +362,20 @@ namespace Zyl.VectorTraits.Impl {
                 return WStatics.ShiftRightLogicalFast(value.AsVector256(), shiftAmount).AsVector();
             }
 
+            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{byte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> ShiftRightLogicalFast_FirstAnd(Vector<byte> value, int shiftAmount) {
+                return WStatics.ShiftRightLogicalFast_FirstAnd(value.AsVector256(), shiftAmount).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{byte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> ShiftRightLogicalFast_FirstShift(Vector<byte> value, int shiftAmount) {
+                return WStatics.ShiftRightLogicalFast_FirstShift(value.AsVector256(), shiftAmount).AsVector();
+            }
+
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftRightLogicalFast(Vector<short> value, int shiftAmount) {
