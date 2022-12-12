@@ -106,5 +106,92 @@ namespace Zyl.VectorTraits.Tests.Impl {
         }
 
 
+        [TestCase((sbyte)3)]
+        [TestCase((short)5)]
+        [TestCase((int)7)]
+        [TestCase((long)9)]
+        public void ShiftRightArithmeticTest<T>(T src) where T : struct {
+            //Vector<T> vzero = Vector<T>.Zero;
+            //T zero = default;
+            int shiftAmountMax = Scalars<T>.BitSize + 1;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.IsSupported) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightArithmetic_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftRightArithmetic_Base", "ShiftRightArithmetic_Bit64");
+            foreach (var func in funcList) {
+                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            // run.
+            Vector<T>[] samples = {
+                Vectors.Create(src),
+                Vectors<T>.Demo,
+                Vectors<T>.Serial,
+            };
+            foreach (Vector<T> vsrc in samples) {
+                for (int shiftAmount = -1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                    Vector<T> vexpected = Vectors.ShiftRightArithmetic((dynamic)vsrc, shiftAmount);
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.IsSupported) continue;
+                        Vector<T> vdst = instance.ShiftRightArithmetic((dynamic)vsrc, shiftAmount);
+                        Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                    }
+                    foreach (var func in funcList) {
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        Vector<T> vdst = func(vsrc, shiftAmount);
+                        Assert.AreEqual(vexpected, vdst, $"{funcName}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                    }
+                }
+            }
+        }
+
+        [TestCase((sbyte)3)]
+        [TestCase((short)5)]
+        [TestCase((int)7)]
+        [TestCase((long)9)]
+        public void ShiftRightArithmeticFastTest<T>(T src) where T : struct {
+            //Vector<T> vzero = Vector<T>.Zero;
+            //T zero = default;
+            int shiftAmountMax = Scalars<T>.BitSize - 1;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.IsSupported) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightArithmetic_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftRightArithmetic_Base", "ShiftRightArithmetic_Bit64");
+            foreach (var func in funcList) {
+                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            // run.
+            Vector<T>[] samples = {
+                Vectors.Create(src),
+                Vectors<T>.Demo,
+                Vectors<T>.Serial,
+            };
+            foreach (Vector<T> vsrc in samples) {
+                for (int shiftAmount = 0; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                    Vector<T> vexpected = Vectors.ShiftRightArithmeticFast((dynamic)vsrc, shiftAmount);
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.IsSupported) continue;
+                        Vector<T> vdst = instance.ShiftRightArithmeticFast((dynamic)vsrc, shiftAmount);
+                        Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                    }
+                    foreach (var func in funcList) {
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        Vector<T> vdst = func(vsrc, shiftAmount);
+                        Assert.AreEqual(vexpected, vdst, $"{funcName}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                    }
+                }
+            }
+        }
+
+
     }
 }

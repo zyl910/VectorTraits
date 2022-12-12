@@ -56,6 +56,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ConditionalSelect{T}(Vector256{T}, Vector256{T}, Vector256{T})"/> // Since: .NET 7
         Vector256<double> ConditionalSelect(Vector256<long> condition, Vector256<double> left, Vector256<double> right);
 
+
         /// <summary>
         /// Types with hardware acceleration when running <c>ShiftLeft</c> (运行 <c>ShiftLeft</c> 时具有硬件加速的类型).
         /// </summary>

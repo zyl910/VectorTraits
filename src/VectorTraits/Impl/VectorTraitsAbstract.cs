@@ -76,6 +76,7 @@ namespace Zyl.VectorTraits.Impl {
             Statics.ThrowForUnsupported(noStrict);
         }
 
+
         /// <inheritdoc cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
         public virtual TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {
@@ -195,10 +196,68 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_AcceleratedTypes"/>
+        public virtual TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes {
+            get {
+                return Statics.ShiftRightArithmetic_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<sbyte> ShiftRightArithmetic(Vector<sbyte> value, int shiftAmount) {
+            return Statics.ShiftRightArithmetic(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<short> ShiftRightArithmetic(Vector<short> value, int shiftAmount) {
+            return Statics.ShiftRightArithmetic(value, shiftAmount);
+        }
+
         /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftAmount) {
             return Statics.ShiftRightArithmetic(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<long> ShiftRightArithmetic(Vector<long> value, int shiftAmount) {
+            return Statics.ShiftRightArithmetic(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast_AcceleratedTypes"/>
+        public virtual TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes {
+            get {
+                return Statics.ShiftRightArithmeticFast_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<sbyte> ShiftRightArithmeticFast(Vector<sbyte> value, int shiftAmount) {
+            return Statics.ShiftRightArithmeticFast(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<short> ShiftRightArithmeticFast(Vector<short> value, int shiftAmount) {
+            return Statics.ShiftRightArithmeticFast(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{int}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<int> ShiftRightArithmeticFast(Vector<int> value, int shiftAmount) {
+            return Statics.ShiftRightArithmeticFast(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<long> ShiftRightArithmeticFast(Vector<long> value, int shiftAmount) {
+            return Statics.ShiftRightArithmeticFast(value, shiftAmount);
         }
 
     }

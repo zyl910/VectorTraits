@@ -144,6 +144,7 @@ namespace Zyl.VectorTraits {
             _instance.ThrowForUnsupported(noStrict);
         }
 
+
         /// <inheritdoc cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
         public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {
@@ -339,6 +340,40 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_AcceleratedTypes"/>
+        public static TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.ShiftRightArithmetic_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                if (Vector.IsHardwareAccelerated) {
+                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> ShiftRightArithmetic(Vector<sbyte> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
+            return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+            return _instance.ShiftRightArithmetic(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> ShiftRightArithmetic(Vector<short> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector.ShiftRightArithmetic(value, shiftAmount);
+#else
+            return _instance.ShiftRightArithmetic(value, shiftAmount);
+#endif
+        }
+
         /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftAmount) {
@@ -346,6 +381,70 @@ namespace Zyl.VectorTraits {
             return Vector.ShiftRightArithmetic(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmetic(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> ShiftRightArithmetic(Vector<long> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector.ShiftRightArithmetic(value, shiftAmount);
+#else
+            return _instance.ShiftRightArithmetic(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast_AcceleratedTypes"/>
+        public static TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.ShiftRightArithmeticFast_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                if (Vector.IsHardwareAccelerated) {
+                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+                }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> ShiftRightArithmeticFast(Vector<sbyte> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
+            return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+            return _instance.ShiftRightArithmeticFast(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> ShiftRightArithmeticFast(Vector<short> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector.ShiftRightArithmetic(value, shiftAmount);
+#else
+            return _instance.ShiftRightArithmeticFast(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{int}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> ShiftRightArithmeticFast(Vector<int> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector.ShiftRightArithmetic(value, shiftAmount);
+#else
+            return _instance.ShiftRightArithmeticFast(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> ShiftRightArithmeticFast(Vector<long> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector.ShiftRightArithmetic(value, shiftAmount);
+#else
+            return _instance.ShiftRightArithmeticFast(value, shiftAmount);
 #endif
         }
 
