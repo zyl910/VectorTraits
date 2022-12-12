@@ -86,13 +86,13 @@ namespace Zyl.VectorTraits.Impl {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ConditionalSelect(condition, left, right);
 #else
-                return ConditionalSelect_Avx(condition, left, right);
+                return ConditionalSelect_OrAnd(condition, left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect{T}(Vector256{T}, Vector256{T}, Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<T> ConditionalSelect_Avx<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
+            public static Vector256<T> ConditionalSelect_OrAnd<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
                 // result = (left & condition) | (right & ~condition);
                 return Avx.Or(Avx.And(condition.AsDouble(), left.AsDouble())
                     , Avx.AndNot(condition.AsDouble(), right.AsDouble())
@@ -274,7 +274,8 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> ShiftRightArithmeticFast(Vector256<sbyte> value, int shiftAmount) {
-                return ShiftRightArithmeticFast_16Sra(value, shiftAmount);
+                //return ShiftRightArithmeticFast_16Sra(value, shiftAmount);
+                return ShiftRightArithmeticFast_8Negative(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{sbyte}, int)"/>
@@ -286,6 +287,17 @@ namespace Zyl.VectorTraits.Impl {
                 Vector256<sbyte> upper = Avx2.ShiftRightArithmetic(value.AsInt16(), (byte)shiftAmount).AsSByte();
                 Vector256<sbyte> lower = Avx2.ShiftRightLogical(lowerShifted, 8).AsSByte();
                 Vector256<sbyte> rt = Avx2.Or(Avx2.And(Vector256s<sbyte>.XyYMask, upper), lower);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> ShiftRightArithmeticFast_8Negative(Vector256<sbyte> value, int shiftAmount) {
+                Vector256<sbyte> mask = Vector256s<sbyte>.GetMaskBits(8 - shiftAmount);
+                Vector256<sbyte> shifted = Avx2.ShiftRightLogical(value.AsUInt16(), (byte)shiftAmount).AsSByte();
+                Vector256<sbyte> sign = Avx2.CompareGreaterThan(Vector256<sbyte>.Zero, value);
+                Vector256<sbyte> rt = ConditionalSelect(mask, shifted, sign);
                 return rt;
             }
 

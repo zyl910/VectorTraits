@@ -19,7 +19,10 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ConditionalSelect"/>
         TypeCodeFlags ConditionalSelect_AcceleratedTypes { get; }
 
-        /// <summary>Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).</summary>
+        /// <summary>
+        /// Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
+        /// Mnemonic: <c>f(condition, left, right) = (left &amp; condition) | (right &amp; ~condition)</c>.
+        /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
         /// <param name="left">The vector that is selected when the corresponding bit in <paramref name="condition" /> is one (当 <paramref name="condition" /> 中的对应位为 1 时选择的向量).</param>
@@ -29,7 +32,10 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ConditionalSelect{T}(Vector256{T}, Vector256{T}, Vector256{T})"/> // Since: .NET 7
         Vector256<T> ConditionalSelect<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct;
 
-        /// <summary>Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).</summary>
+        /// <summary>
+        /// Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
+        /// Mnemonic: <c>f(condition, left, right) = (left &amp; condition) | (right &amp; ~condition)</c>.
+        /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
         /// <param name="left">The vector that is selected when the corresponding bit in <paramref name="condition" /> is one (当 <paramref name="condition" /> 中的对应位为 1 时选择的向量).</param>
@@ -38,7 +44,10 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ConditionalSelect{T}(Vector256{T}, Vector256{T}, Vector256{T})"/> // Since: .NET 7
         Vector256<float> ConditionalSelect(Vector256<int> condition, Vector256<float> left, Vector256<float> right);
 
-        /// <summary>Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).</summary>
+        /// <summary>
+        /// Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
+        /// Mnemonic: <c>f(condition, left, right) = (left &amp; condition) | (right &amp; ~condition)</c>.
+        /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
         /// <param name="left">The vector that is selected when the corresponding bit in <paramref name="condition" /> is one (当 <paramref name="condition" /> 中的对应位为 1 时选择的向量).</param>
