@@ -274,14 +274,14 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> ShiftRightArithmeticFast(Vector256<sbyte> value, int shiftAmount) {
-                //return ShiftRightArithmeticFast_16Sra(value, shiftAmount);
-                return ShiftRightArithmeticFast_8Negative(value, shiftAmount);
+                //return ShiftRightArithmeticFast_Widen(value, shiftAmount);
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> ShiftRightArithmeticFast_16Sra(Vector256<sbyte> value, int shiftAmount) {
+            public static Vector256<sbyte> ShiftRightArithmeticFast_Widen(Vector256<sbyte> value, int shiftAmount) {
                 Vector256<short> lowerToHigh = Avx2.ShiftLeftLogical(value.AsInt16(), 8);
                 Vector256<short> lowerShifted = Avx2.ShiftRightArithmetic(lowerToHigh, (byte)shiftAmount);
                 Vector256<sbyte> upper = Avx2.ShiftRightArithmetic(value.AsInt16(), (byte)shiftAmount).AsSByte();
@@ -293,7 +293,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> ShiftRightArithmeticFast_8Negative(Vector256<sbyte> value, int shiftAmount) {
+            public static Vector256<sbyte> ShiftRightArithmeticFast_Negative(Vector256<sbyte> value, int shiftAmount) {
                 Vector256<sbyte> mask = Vector256s<sbyte>.GetMaskBits(8 - shiftAmount);
                 Vector256<sbyte> shifted = Avx2.ShiftRightLogical(value.AsUInt16(), (byte)shiftAmount).AsSByte();
                 Vector256<sbyte> sign = Avx2.CompareGreaterThan(Vector256<sbyte>.Zero, value);
@@ -316,12 +316,12 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftRightArithmeticFast(Vector256<long> value, int shiftAmount) {
-                return ShiftRightArithmeticFast_64Negative(value, shiftAmount);
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> ShiftRightArithmeticFast_32If(Vector256<long> value, int shiftAmount) {
+            public static Vector256<long> ShiftRightArithmeticFast_Narrow(Vector256<long> value, int shiftAmount) {
                 if (0 == shiftAmount) {
                     return value;
                 }
@@ -353,7 +353,7 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> ShiftRightArithmeticFast_32IfLess(Vector256<long> value, int shiftAmount) {
+            public static Vector256<long> ShiftRightArithmeticFast_NarrowIfLess(Vector256<long> value, int shiftAmount) {
                 if (0 == shiftAmount) {
                     return value;
                 }
@@ -376,7 +376,7 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> ShiftRightArithmeticFast_64Negative(Vector256<long> value, int shiftAmount) {
+            public static Vector256<long> ShiftRightArithmeticFast_Negative(Vector256<long> value, int shiftAmount) {
                 Vector256<long> sign = Avx2.CompareGreaterThan(Vector256<long>.Zero, value);
                 byte shiftAmountLeft = (byte)(64 - shiftAmount);
                 Vector256<long> rt = Avx2.Or(Avx2.ShiftRightLogical(value, (byte)shiftAmount), Avx2.ShiftLeftLogical(sign, shiftAmountLeft));
