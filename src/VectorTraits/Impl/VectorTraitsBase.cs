@@ -786,28 +786,36 @@ namespace Zyl.VectorTraits.Impl {
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<sbyte> ShiftRightArithmeticFast_Bit64(Vector<sbyte> value, int shiftAmount) {
-                return ShiftRightArithmeticFast_Base(value, shiftAmount);
-                //Vector<byte> t = Vector.BitwiseAnd(value, Vectors<byte>.GetMaskBits(8 - shiftAmount));
-                //int m = 1 >> shiftAmount;
-                //return Vector.AsVectorByte(Vector.Multiply(Vector.AsVectorInt32(t), m));
+                //Vector<sbyte> shifted = ShiftRightLogicalFast_Base(value.AsUInt64(), shiftAmount).AsSByte();
+                Vector<sbyte> shifted = ShiftRightArithmeticFast_Base(value.AsInt64(), shiftAmount).AsSByte();
+                Vector<sbyte> mask = Vectors<sbyte>.GetMaskBits(8 - shiftAmount);
+                Vector<sbyte> sign = Vector.GreaterThan(Vector<sbyte>.Zero, value);
+                Vector<sbyte> rt = Vector.ConditionalSelect(mask, shifted, sign);
+                return rt;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{short}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftRightArithmeticFast_Bit64(Vector<short> value, int shiftAmount) {
-                return ShiftRightArithmeticFast_Base(value, shiftAmount);
-                //short m = (short)(1 >> shiftAmount);
-                //return Vector.Multiply(value, m);
+                //Vector<short> shifted = ShiftRightLogicalFast_Base(value.AsUInt64(), shiftAmount).AsInt16();
+                Vector<short> shifted = ShiftRightArithmeticFast_Base(value.AsInt64(), shiftAmount).AsInt16();
+                Vector<short> mask = Vectors<short>.GetMaskBits(16 - shiftAmount);
+                Vector<short> sign = Vector.GreaterThan(Vector<short>.Zero, value);
+                Vector<short> rt = Vector.ConditionalSelect(mask, shifted, sign);
+                return rt;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{int}, int)"/>
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftRightArithmeticFast_Bit64(Vector<int> value, int shiftAmount) {
-                return ShiftRightArithmeticFast_Base(value, shiftAmount);
-                //int m = 1 >> shiftAmount;
-                //return Vector.Multiply(value, m);
+                //Vector<int> shifted = ShiftRightLogicalFast_Base(value.AsUInt64(), shiftAmount).AsInt32();
+                Vector<int> shifted = ShiftRightArithmeticFast_Base(value.AsInt64(), shiftAmount).AsInt32();
+                Vector<int> mask = Vectors<int>.GetMaskBits(32 - shiftAmount);
+                Vector<int> sign = Vector.GreaterThan(Vector<int>.Zero, value);
+                Vector<int> rt = Vector.ConditionalSelect(mask, shifted, sign);
+                return rt;
             }
 
 
