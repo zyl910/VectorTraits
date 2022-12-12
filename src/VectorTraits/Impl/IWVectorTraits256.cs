@@ -370,6 +370,211 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightArithmetic(Vector256{long}, int)"/> // Since: VectorTraits 1.0
         Vector256<long> ShiftRightArithmeticFast(Vector256<long> value, int shiftAmount);
 
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>ShiftRightLogical</c> (运行 <c>ShiftRightLogical</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ShiftRightLogical"/>
+        TypeCodeFlags ShiftRightLogical_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{sbyte}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogicalFast(Vector256{sbyte}, int)"/> // Since: VectorTraits 1.0
+        Vector256<sbyte> ShiftRightLogical(Vector256<sbyte> value, int shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{byte}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogicalFast(Vector256{byte}, int)"/> // Since: VectorTraits 1.0
+        Vector256<byte> ShiftRightLogical(Vector256<byte> value, int shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{short}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogicalFast(Vector256{short}, int)"/> // Since: VectorTraits 1.0
+        Vector256<short> ShiftRightLogical(Vector256<short> value, int shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{ushort}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogicalFast(Vector256{ushort}, int)"/> // Since: VectorTraits 1.0
+        Vector256<ushort> ShiftRightLogical(Vector256<ushort> value, int shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{int}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogicalFast(Vector256{int}, int)"/> // Since: VectorTraits 1.0
+        Vector256<int> ShiftRightLogical(Vector256<int> value, int shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{uint}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogicalFast(Vector256{uint}, int)"/> // Since: VectorTraits 1.0
+        Vector256<uint> ShiftRightLogical(Vector256<uint> value, int shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{long}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogicalFast(Vector256{long}, int)"/> // Since: VectorTraits 1.0
+        Vector256<long> ShiftRightLogical(Vector256<long> value, int shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{ulong}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogicalFast(Vector256{ulong}, int)"/> // Since: VectorTraits 1.0
+        Vector256<ulong> ShiftRightLogical(Vector256<ulong> value, int shiftAmount);
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>ShiftRightLogicalFast</c> (运行 <c>ShiftRightLogicalFast</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ShiftRightLogicalFast"/>
+        TypeCodeFlags ShiftRightLogicalFast_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{sbyte}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector256{sbyte}, int)"/> // Since: VectorTraits 1.0
+        Vector256<sbyte> ShiftRightLogicalFast(Vector256<sbyte> value, int shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{byte}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector256{byte}, int)"/> // Since: VectorTraits 1.0
+        Vector256<byte> ShiftRightLogicalFast(Vector256<byte> value, int shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{short}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector256{short}, int)"/> // Since: VectorTraits 1.0
+        Vector256<short> ShiftRightLogicalFast(Vector256<short> value, int shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{ushort}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector256{ushort}, int)"/> // Since: VectorTraits 1.0
+        Vector256<ushort> ShiftRightLogicalFast(Vector256<ushort> value, int shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{int}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector256{int}, int)"/> // Since: VectorTraits 1.0
+        Vector256<int> ShiftRightLogicalFast(Vector256<int> value, int shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{uint}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector256{uint}, int)"/> // Since: VectorTraits 1.0
+        Vector256<uint> ShiftRightLogicalFast(Vector256<uint> value, int shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{long}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector256{long}, int)"/> // Since: VectorTraits 1.0
+        Vector256<long> ShiftRightLogicalFast(Vector256<long> value, int shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{ulong}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector256{ulong}, int)"/> // Since: VectorTraits 1.0
+        Vector256<ulong> ShiftRightLogicalFast(Vector256<ulong> value, int shiftAmount);
+
 #endif
     }
 }

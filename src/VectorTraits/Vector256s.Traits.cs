@@ -154,6 +154,7 @@ namespace Zyl.VectorTraits {
             return _instance.ConditionalSelect(condition, left, right);
         }
 
+
         /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_AcceleratedTypes"/>
         public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {
@@ -454,6 +455,201 @@ namespace Zyl.VectorTraits {
             return Vector256.ShiftRightArithmetic(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmeticFast(value, shiftAmount);
+#endif
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_AcceleratedTypes"/>
+        public static TypeCodeFlags ShiftRightLogical_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.ShiftRightLogical_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> ShiftRightLogical(Vector256<sbyte> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
+            return Vector256.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+            return _instance.ShiftRightLogical(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{byte}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> ShiftRightLogical(Vector256<byte> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
+            return Vector256.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+            return _instance.ShiftRightLogical(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> ShiftRightLogical(Vector256<short> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+            return _instance.ShiftRightLogical(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{ushort}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> ShiftRightLogical(Vector256<ushort> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+            return _instance.ShiftRightLogical(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{int}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> ShiftRightLogical(Vector256<int> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+            return _instance.ShiftRightLogical(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{uint}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> ShiftRightLogical(Vector256<uint> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+            return _instance.ShiftRightLogical(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> ShiftRightLogical(Vector256<long> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+            return _instance.ShiftRightLogical(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{ulong}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> ShiftRightLogical(Vector256<ulong> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+            return _instance.ShiftRightLogical(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast_AcceleratedTypes"/>
+        public static TypeCodeFlags ShiftRightLogicalFast_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.ShiftRightLogicalFast_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> ShiftRightLogicalFast(Vector256<sbyte> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
+            return Vector256.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{byte}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> ShiftRightLogicalFast(Vector256<byte> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
+            return Vector256.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> ShiftRightLogicalFast(Vector256<short> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{ushort}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> ShiftRightLogicalFast(Vector256<ushort> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{int}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> ShiftRightLogicalFast(Vector256<int> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{uint}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> ShiftRightLogicalFast(Vector256<uint> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> ShiftRightLogicalFast(Vector256<long> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+#endif
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{ulong}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> ShiftRightLogicalFast(Vector256<ulong> value, int shiftAmount) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+            return _instance.ShiftRightLogicalFast(value, shiftAmount);
 #endif
         }
 

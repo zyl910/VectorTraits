@@ -124,6 +124,7 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
+
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {
@@ -741,7 +742,392 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
-#endif // NETCOREAPP3_0_OR_GREATER
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftRightLogical_AcceleratedTypes {
+                get {
+                    return ShiftRightLogicalFast_AcceleratedTypes;
+                }
             }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> ShiftRightLogical(Vector256<sbyte> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+                return ShiftRightLogical_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{byte}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> ShiftRightLogical(Vector256<byte> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+                return ShiftRightLogical_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{short}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> ShiftRightLogical(Vector256<short> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+                return ShiftRightLogical_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{ushort}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> ShiftRightLogical(Vector256<ushort> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+                return ShiftRightLogical_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{int}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> ShiftRightLogical(Vector256<int> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+                return ShiftRightLogical_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{uint}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> ShiftRightLogical(Vector256<uint> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+                return ShiftRightLogical_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ShiftRightLogical(Vector256<long> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+                return ShiftRightLogical_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{ulong}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> ShiftRightLogical(Vector256<ulong> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+                return ShiftRightLogical_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<sbyte> ShiftRightLogical_Base(Vector256<sbyte> value, int shiftAmount) {
+                shiftAmount &= 7;
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{byte}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<byte> ShiftRightLogical_Base(Vector256<byte> value, int shiftAmount) {
+                shiftAmount &= 7;
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{short}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<short> ShiftRightLogical_Base(Vector256<short> value, int shiftAmount) {
+                shiftAmount &= 0x0F;
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{ushort}, int)"/>
+            [CLSCompliant(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<ushort> ShiftRightLogical_Base(Vector256<ushort> value, int shiftAmount) {
+                shiftAmount &= 0x0F;
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{int}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<int> ShiftRightLogical_Base(Vector256<int> value, int shiftAmount) {
+                shiftAmount &= 0x1F;
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{uint}, int)"/>
+            [CLSCompliant(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<uint> ShiftRightLogical_Base(Vector256<uint> value, int shiftAmount) {
+                shiftAmount &= 0x1F;
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{long}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<long> ShiftRightLogical_Base(Vector256<long> value, int shiftAmount) {
+                shiftAmount &= 0x3F;
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{ulong}, int)"/>
+            [CLSCompliant(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<ulong> ShiftRightLogical_Base(Vector256<ulong> value, int shiftAmount) {
+                shiftAmount &= 0x3F;
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftRightLogicalFast_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> ShiftRightLogicalFast(Vector256<sbyte> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{byte}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> ShiftRightLogicalFast(Vector256<byte> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{short}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> ShiftRightLogicalFast(Vector256<short> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{ushort}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> ShiftRightLogicalFast(Vector256<ushort> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{int}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> ShiftRightLogicalFast(Vector256<int> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{uint}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> ShiftRightLogicalFast(Vector256<uint> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ShiftRightLogicalFast(Vector256<long> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{ulong}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> ShiftRightLogicalFast(Vector256<ulong> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ShiftRightLogical(value, shiftAmount);
+#else
+                return ShiftRightLogicalFast_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<sbyte> ShiftRightLogicalFast_Base(Vector256<sbyte> value, int shiftAmount) {
+                return ShiftRightLogicalFast_Base(value.AsByte(), shiftAmount).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{byte}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<byte> ShiftRightLogicalFast_Base(Vector256<byte> value, int shiftAmount) {
+                Vector256<byte> rt = value;
+                byte* p = (byte*)&rt;
+                p[0] >>= shiftAmount;
+                p[1] >>= shiftAmount;
+                p[2] >>= shiftAmount;
+                p[3] >>= shiftAmount;
+                p[4] >>= shiftAmount;
+                p[5] >>= shiftAmount;
+                p[6] >>= shiftAmount;
+                p[7] >>= shiftAmount;
+                p[8] >>= shiftAmount;
+                p[9] >>= shiftAmount;
+                p[10] >>= shiftAmount;
+                p[11] >>= shiftAmount;
+                p[12] >>= shiftAmount;
+                p[13] >>= shiftAmount;
+                p[14] >>= shiftAmount;
+                p[15] >>= shiftAmount;
+                p[16] >>= shiftAmount;
+                p[17] >>= shiftAmount;
+                p[18] >>= shiftAmount;
+                p[19] >>= shiftAmount;
+                p[20] >>= shiftAmount;
+                p[21] >>= shiftAmount;
+                p[22] >>= shiftAmount;
+                p[23] >>= shiftAmount;
+                p[24] >>= shiftAmount;
+                p[25] >>= shiftAmount;
+                p[26] >>= shiftAmount;
+                p[27] >>= shiftAmount;
+                p[28] >>= shiftAmount;
+                p[29] >>= shiftAmount;
+                p[30] >>= shiftAmount;
+                p[31] >>= shiftAmount;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{short}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<short> ShiftRightLogicalFast_Base(Vector256<short> value, int shiftAmount) {
+                return ShiftRightLogicalFast_Base(value.AsUInt16(), shiftAmount).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{ushort}, int)"/>
+            [CLSCompliant(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<ushort> ShiftRightLogicalFast_Base(Vector256<ushort> value, int shiftAmount) {
+                Vector256<ushort> rt = value;
+                ushort* p = (ushort*)&rt;
+                p[0] >>= shiftAmount;
+                p[1] >>= shiftAmount;
+                p[2] >>= shiftAmount;
+                p[3] >>= shiftAmount;
+                p[4] >>= shiftAmount;
+                p[5] >>= shiftAmount;
+                p[6] >>= shiftAmount;
+                p[7] >>= shiftAmount;
+                p[8] >>= shiftAmount;
+                p[9] >>= shiftAmount;
+                p[10] >>= shiftAmount;
+                p[11] >>= shiftAmount;
+                p[12] >>= shiftAmount;
+                p[13] >>= shiftAmount;
+                p[14] >>= shiftAmount;
+                p[15] >>= shiftAmount;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{int}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<int> ShiftRightLogicalFast_Base(Vector256<int> value, int shiftAmount) {
+                return ShiftRightLogicalFast_Base(value.AsUInt32(), shiftAmount).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{uint}, int)"/>
+            [CLSCompliant(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<uint> ShiftRightLogicalFast_Base(Vector256<uint> value, int shiftAmount) {
+                Vector256<uint> rt = value;
+                uint* p = (uint*)&rt;
+                p[0] >>= shiftAmount;
+                p[1] >>= shiftAmount;
+                p[2] >>= shiftAmount;
+                p[3] >>= shiftAmount;
+                p[4] >>= shiftAmount;
+                p[5] >>= shiftAmount;
+                p[6] >>= shiftAmount;
+                p[7] >>= shiftAmount;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{long}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<long> ShiftRightLogicalFast_Base(Vector256<long> value, int shiftAmount) {
+                return ShiftRightLogicalFast_Base(value.AsUInt64(), shiftAmount).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{ulong}, int)"/>
+            [CLSCompliant(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<ulong> ShiftRightLogicalFast_Base(Vector256<ulong> value, int shiftAmount) {
+                Vector256<ulong> rt = value;
+                ulong* p = (ulong*)&rt;
+                p[0] >>= shiftAmount;
+                p[1] >>= shiftAmount;
+                p[2] >>= shiftAmount;
+                p[3] >>= shiftAmount;
+                return rt;
+            }
+
+#endif // NETCOREAPP3_0_OR_GREATER
         }
+    }
 }

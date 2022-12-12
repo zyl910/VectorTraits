@@ -234,6 +234,125 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.ShiftRightArithmeticFast(value, shiftAmount);
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_AcceleratedTypes"/>
+        public override TypeCodeFlags ShiftRightLogical_AcceleratedTypes {
+            get {
+                return Statics.ShiftRightLogical_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> ShiftRightLogical(Vector256<sbyte> value, int shiftAmount) {
+            return Statics.ShiftRightLogical(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{byte}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<byte> ShiftRightLogical(Vector256<byte> value, int shiftAmount) {
+            return Statics.ShiftRightLogical(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> ShiftRightLogical(Vector256<short> value, int shiftAmount) {
+            return Statics.ShiftRightLogical(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{ushort}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ushort> ShiftRightLogical(Vector256<ushort> value, int shiftAmount) {
+            return Statics.ShiftRightLogical(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{int}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> ShiftRightLogical(Vector256<int> value, int shiftAmount) {
+            return Statics.ShiftRightLogical(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{uint}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<uint> ShiftRightLogical(Vector256<uint> value, int shiftAmount) {
+            return Statics.ShiftRightLogical(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> ShiftRightLogical(Vector256<long> value, int shiftAmount) {
+            return Statics.ShiftRightLogical(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{ulong}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ulong> ShiftRightLogical(Vector256<ulong> value, int shiftAmount) {
+            return Statics.ShiftRightLogical(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast_AcceleratedTypes"/>
+        public override TypeCodeFlags ShiftRightLogicalFast_AcceleratedTypes {
+            get {
+                return Statics.ShiftRightLogicalFast_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> ShiftRightLogicalFast(Vector256<sbyte> value, int shiftAmount) {
+            return Statics.ShiftRightLogicalFast(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{byte}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<byte> ShiftRightLogicalFast(Vector256<byte> value, int shiftAmount) {
+            return Statics.ShiftRightLogicalFast(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{short}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> ShiftRightLogicalFast(Vector256<short> value, int shiftAmount) {
+            return Statics.ShiftRightLogicalFast(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{ushort}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ushort> ShiftRightLogicalFast(Vector256<ushort> value, int shiftAmount) {
+            return Statics.ShiftRightLogicalFast(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{int}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> ShiftRightLogicalFast(Vector256<int> value, int shiftAmount) {
+            return Statics.ShiftRightLogicalFast(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{uint}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<uint> ShiftRightLogicalFast(Vector256<uint> value, int shiftAmount) {
+            return Statics.ShiftRightLogicalFast(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{long}, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> ShiftRightLogicalFast(Vector256<long> value, int shiftAmount) {
+            return Statics.ShiftRightLogicalFast(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{ulong}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ulong> ShiftRightLogicalFast(Vector256<ulong> value, int shiftAmount) {
+            return Statics.ShiftRightLogicalFast(value, shiftAmount);
+        }
+
 #endif
     }
 }
