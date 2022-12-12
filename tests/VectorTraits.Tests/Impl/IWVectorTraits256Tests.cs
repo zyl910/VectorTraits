@@ -190,6 +190,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
+            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, int, Vector256<T>>>("ShiftRightArithmeticFast_Negative", "ShiftRightArithmeticFast_Widen", "ShiftRightArithmeticFast_Narrow", "ShiftRightArithmeticFast_NarrowIfLess");
+            foreach (var func in funcList) {
+                Console.WriteLine(ReflectionUtil.GetShortNameWithType(func.Method));
+            }
             // run.
             Vector256<T>[] samples = {
                 Vector256s.Create(src),
@@ -203,6 +207,11 @@ namespace Zyl.VectorTraits.Tests.Impl {
                         if (!instance.IsSupported) continue;
                         Vector256<T> vdst = instance.ShiftRightArithmeticFast((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                    }
+                    foreach (var func in funcList) {
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        Vector256<T> vdst = func(vsrc, shiftAmount);
+                        Assert.AreEqual(vexpected, vdst, $"{funcName}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                 }
             }
