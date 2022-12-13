@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
+using System.Security.Cryptography;
 #endif
 #if NET5_0_OR_GREATER
 using System.Runtime.Intrinsics.Arm;
@@ -78,6 +80,32 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 #if NET5_0_OR_GREATER
+
+            /// <summary>
+            /// Debug test.
+            /// </summary>
+            public static void DebugTest() {
+                Vector128<sbyte> src = Vector128<sbyte>.AllBitsSet;
+                byte shiftAmount = 0;
+                try {
+                    Vector128<sbyte> dst = AdvSimd.ShiftLeftLogical(src, shiftAmount);
+                    Trace.WriteLine($"ShiftLeftLogical:\tOK. {dst}");
+                } catch(Exception ex) {
+                    Trace.WriteLine($"ShiftLeftLogical:\tFail!. {ex}");
+                }
+                try {
+                    Vector128<sbyte> dst = AdvSimd.ShiftRightArithmetic(src, shiftAmount);
+                    Trace.WriteLine($"ShiftRightArithmetic:\tOK. {dst}");
+                } catch (Exception ex) {
+                    Trace.WriteLine($"ShiftRightArithmetic:\tFail!. {ex}");
+                }
+                try {
+                    Vector128<sbyte> dst = AdvSimd.ShiftRightLogical(src, shiftAmount);
+                    Trace.WriteLine($"ShiftRightLogical:\tOK. {dst}");
+                } catch (Exception ex) {
+                    Trace.WriteLine($"ShiftRightLogical:\tFail!. {ex}");
+                }
+            }
 
             /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect_AcceleratedTypes"/>
             public static TypeCodeFlags ConditionalSelect_AcceleratedTypes {
@@ -314,6 +342,10 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightLogical(Vector128<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
+                if (0 == shiftAmount) {
+                    // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+                    return value;
+                }
                 return ShiftRightLogicalFast(value, shiftAmount);
             }
 
@@ -321,6 +353,10 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftRightLogical(Vector128<byte> value, int shiftAmount) {
                 shiftAmount &= 7;
+                if (0 == shiftAmount) {
+                    // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+                    return value;
+                }
                 return ShiftRightLogicalFast(value, shiftAmount);
             }
 
@@ -328,6 +364,10 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightLogical(Vector128<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
+                if (0 == shiftAmount) {
+                    // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+                    return value;
+                }
                 return ShiftRightLogicalFast(value, shiftAmount);
             }
 
@@ -336,6 +376,10 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftRightLogical(Vector128<ushort> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
+                if (0 == shiftAmount) {
+                    // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+                    return value;
+                }
                 return ShiftRightLogicalFast(value, shiftAmount);
             }
 
@@ -343,6 +387,10 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightLogical(Vector128<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
+                if (0 == shiftAmount) {
+                    // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+                    return value;
+                }
                 return ShiftRightLogicalFast(value, shiftAmount);
             }
 
@@ -351,6 +399,10 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftRightLogical(Vector128<uint> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
+                if (0 == shiftAmount) {
+                    // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+                    return value;
+                }
                 return ShiftRightLogicalFast(value, shiftAmount);
             }
 
@@ -358,6 +410,10 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightLogical(Vector128<long> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
+                if (0 == shiftAmount) {
+                    // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+                    return value;
+                }
                 return ShiftRightLogicalFast(value, shiftAmount);
             }
 
@@ -366,6 +422,10 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftRightLogical(Vector128<ulong> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
+                if (0 == shiftAmount) {
+                    // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+                    return value;
+                }
                 return ShiftRightLogicalFast(value, shiftAmount);
             }
 
@@ -380,30 +440,21 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightLogicalFast(Vector128<sbyte> value, int shiftAmount) {
-                if (0 == shiftAmount) {
-                    // AdvSimd throws an exception when shiftAmount is 0! e.g.:	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                    return value;
-                }
+                Debug.Assert(1 <= shiftAmount && shiftAmount <= 7, "The shiftAmount parameter must be in the range [1,7]."); // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftRightLogicalFast(Vector128<byte> value, int shiftAmount) {
-                if (0 == shiftAmount) {
-                    // AdvSimd throws an exception when shiftAmount is 0! e.g.:	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                    return value;
-                }
+                Debug.Assert(1 <= shiftAmount && shiftAmount <= 7, "The shiftAmount parameter must be in the range [1,7]."); // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightLogicalFast(Vector128<short> value, int shiftAmount) {
-                if (0 == shiftAmount) {
-                    // AdvSimd throws an exception when shiftAmount is 0! e.g.:	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                    return value;
-                }
+                Debug.Assert(1 <= shiftAmount && shiftAmount <= 15, "The shiftAmount parameter must be in the range [1,15]."); // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
@@ -411,20 +462,14 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftRightLogicalFast(Vector128<ushort> value, int shiftAmount) {
-                if (0 == shiftAmount) {
-                    // AdvSimd throws an exception when shiftAmount is 0! e.g.:	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                    return value;
-                }
+                Debug.Assert(1 <= shiftAmount && shiftAmount <= 15, "The shiftAmount parameter must be in the range [1,15]."); // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightLogicalFast(Vector128<int> value, int shiftAmount) {
-                if (0 == shiftAmount) {
-                    // AdvSimd throws an exception when shiftAmount is 0! e.g.:	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                    return value;
-                }
+                Debug.Assert(1 <= shiftAmount && shiftAmount <= 31, "The shiftAmount parameter must be in the range [1,31]."); // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
@@ -432,20 +477,14 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftRightLogicalFast(Vector128<uint> value, int shiftAmount) {
-                if (0 == shiftAmount) {
-                    // AdvSimd throws an exception when shiftAmount is 0! e.g.:	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                    return value;
-                }
+                Debug.Assert(1 <= shiftAmount && shiftAmount <= 31, "The shiftAmount parameter must be in the range [1,31]."); // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightLogicalFast(Vector128<long> value, int shiftAmount) {
-                if (0 == shiftAmount) {
-                    // AdvSimd throws an exception when shiftAmount is 0! e.g.:	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                    return value;
-                }
+                Debug.Assert(1 <= shiftAmount && shiftAmount <= 63, "The shiftAmount parameter must be in the range [1,63]."); // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
@@ -453,10 +492,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftRightLogicalFast(Vector128<ulong> value, int shiftAmount) {
-                if (0 == shiftAmount) {
-                    // AdvSimd throws an exception when shiftAmount is 0! e.g.:	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                    return value;
-                }
+                Debug.Assert(1 <= shiftAmount && shiftAmount <= 63, "The shiftAmount parameter must be in the range [1,63]."); // AdvSimd.ShiftRightLogical throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
             }
 

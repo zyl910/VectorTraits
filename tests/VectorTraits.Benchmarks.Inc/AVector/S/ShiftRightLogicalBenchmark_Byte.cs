@@ -1017,10 +1017,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             fixed (TMy* p0 = &src[0]) {
                 TMy* p = p0;
                 // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftRightLogicalFast(*(Vector<TMy>*)p, shiftAmount);
-                    vrt += vtemp; // Add.
-                    p += nBlockWidth;
+                if (0 != shiftAmount) {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftRightLogicalFast(*(Vector<TMy>*)p, shiftAmount);
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
+                } else {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = *(Vector<TMy>*)p;
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
                 }
                 // Remainder processs.
                 for (i = 0; i < cntRem; ++i) {
@@ -1043,6 +1051,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 dstTMy += StaticSumSRLFastRawAvx2(srcArray, srcArray.Length, shiftAmount);
             }
             CheckResult("SumSRLFastRawAvx2");
+            if (CheckMode) {
+                WVectorTraits128AdvSimd.Statics.DebugTest();
+            }
         }
 
 #if BENCHMARKS_ALGORITHM
@@ -1067,10 +1078,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             fixed (TMy* p0 = &src[0]) {
                 TMy* p = p0;
                 // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftRightLogicalFast_FirstAnd(*(Vector<TMy>*)p, shiftAmount);
-                    vrt += vtemp; // Add.
-                    p += nBlockWidth;
+                if (0 != shiftAmount) {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftRightLogicalFast_FirstAnd(*(Vector<TMy>*)p, shiftAmount);
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
+                } else {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = *(Vector<TMy>*)p;
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
                 }
                 // Remainder processs.
                 for (i = 0; i < cntRem; ++i) {
@@ -1116,10 +1135,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             fixed (TMy* p0 = &src[0]) {
                 TMy* p = p0;
                 // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftRightLogicalFast_FirstShift(*(Vector<TMy>*)p, shiftAmount);
-                    vrt += vtemp; // Add.
-                    p += nBlockWidth;
+                if (0 != shiftAmount) {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftRightLogicalFast_FirstShift(*(Vector<TMy>*)p, shiftAmount);
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
+                } else {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = *(Vector<TMy>*)p;
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
                 }
                 // Remainder processs.
                 for (i = 0; i < cntRem; ++i) {
@@ -1169,10 +1196,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             fixed (TMy* p0 = &src[0]) {
                 TMy* p = p0;
                 // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftRightLogicalFast(*(Vector<TMy>*)p, shiftAmount);
-                    vrt += vtemp; // Add.
-                    p += nBlockWidth;
+                if (0 != shiftAmount) {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftRightLogicalFast(*(Vector<TMy>*)p, shiftAmount);
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
+                } else {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = *(Vector<TMy>*)p;
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
                 }
                 // Remainder processs.
                 for (i = 0; i < cntRem; ++i) {
@@ -1222,10 +1257,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             fixed (TMy* p0 = &src[0]) {
                 TMy* p = p0;
                 // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = Vectors.ShiftRightLogicalFast(*(Vector<TMy>*)p, shiftAmount);
-                    vrt += vtemp; // Add.
-                    p += nBlockWidth;
+                if (0 != shiftAmount) {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = Vectors.ShiftRightLogicalFast(*(Vector<TMy>*)p, shiftAmount);
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
+                } else {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = *(Vector<TMy>*)p;
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
                 }
                 // Remainder processs.
                 for (i = 0; i < cntRem; ++i) {
@@ -1274,10 +1317,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             fixed (TMy* p0 = &src[0]) {
                 TMy* p = p0;
                 // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<TMy>*)p, shiftAmount);
-                    vrt += vtemp; // Add.
-                    p += nBlockWidth;
+                if (0 != shiftAmount) {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<TMy>*)p, shiftAmount);
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
+                } else {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = *(Vector<TMy>*)p;
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
                 }
                 // Remainder processs.
                 for (i = 0; i < cntRem; ++i) {
@@ -1332,10 +1383,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             fixed (TMy* p0 = &src[0]) {
                 TMy* p = p0;
                 // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<TMy>*)p, shiftAmount);
-                    vrt += vtemp; // Add.
-                    p += nBlockWidth;
+                if (0 != shiftAmount) {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<TMy>*)p, shiftAmount);
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
+                } else {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = *(Vector<TMy>*)p;
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
                 }
                 // Remainder processs.
                 for (i = 0; i < cntRem; ++i) {
