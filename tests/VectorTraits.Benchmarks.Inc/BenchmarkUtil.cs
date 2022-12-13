@@ -162,8 +162,13 @@ namespace Zyl.VectorTraits.Benchmarks {
                 // Succeed. No output.
                 //msg = string.Format("Check-{0}: Succeed.", name);
             } else {
-                msg = string.Format("Check-{0}: Fail! {1}", name, ex.Message);
                 Debug.WriteLine(ex);
+                bool useFull = ex is not NotSupportedException;
+                if (useFull) {
+                    msg = string.Format("Check-{0}: Fail! {1}", name, ex.ToString());
+                } else {
+                    msg = string.Format("Check-{0}: Fail! {1}", name, ex.Message);
+                }
                 bool ignoreException = ex is NotSupportedException;
                 if (ignoreException) return;
             }
