@@ -33,7 +33,7 @@
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <DefineConstants>$(DefineConstants);SOFTWARE_OPTIMIZATION;HARDWARE_OPTIMIZATION;BCL_OVERRIDE_BASE_FIXED;BCL_OVERRIDE_BASE_VAR;BCL_OVERRIDE_STATIC0</DefineConstants>
 

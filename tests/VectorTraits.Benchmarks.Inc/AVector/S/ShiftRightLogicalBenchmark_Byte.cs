@@ -487,8 +487,16 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftRightLogical(*(Vector<TMy>*)p, shiftAmount);
-                    vrt += vtemp; // Add.
+                    try {
+                        Vector<TMy> vload = *(Vector<TMy>*)p;
+                        Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftRightLogical(vload, shiftAmount);
+                        vrt += vtemp; // Add.
+                    } catch (Exception ex) {
+                        string pStr = ((IntPtr)p).ToString("X");
+                        Debug.WriteLine($"VectorWidth={VectorWidth}, srcCount={srcCount}, cntBlock={cntBlock}, i={i}, p=0x{pStr}, shiftAmount={shiftAmount}:\t{ex}");
+                        // AdvSimd throws an exception when shiftAmount is 0! e.g.:	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+                        throw;
+                    }
                     p += nBlockWidth;
                 }
                 // Remainder processs.
