@@ -520,6 +520,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 dstTMy += StaticSumSRLRawAdvSimd(srcArray, srcArray.Length, shiftAmount);
             }
             CheckResult("SumSRLRawAdvSimd");
+            if (CheckMode) {
+                WVectorTraits128AdvSimd.Statics.DebugTest();
+            }
         }
 #endif // NET5_0_OR_GREATER
 
@@ -1051,9 +1054,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 dstTMy += StaticSumSRLFastRawAvx2(srcArray, srcArray.Length, shiftAmount);
             }
             CheckResult("SumSRLFastRawAvx2");
-            if (CheckMode) {
-                WVectorTraits128AdvSimd.Statics.DebugTest();
-            }
         }
 
 #if BENCHMARKS_ALGORITHM

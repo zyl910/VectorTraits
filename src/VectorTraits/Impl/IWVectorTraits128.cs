@@ -323,7 +323,7 @@ namespace Zyl.VectorTraits.Impl {
         TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &lt;&lt; shiftAmount }</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -335,7 +335,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<sbyte> ShiftRightArithmeticFast(Vector128<sbyte> value, int shiftAmount);
 
         /// <summary>
-        /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &lt;&lt; shiftAmount }</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -347,7 +347,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<short> ShiftRightArithmeticFast(Vector128<short> value, int shiftAmount);
 
         /// <summary>
-        /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &lt;&lt; shiftAmount }</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -359,7 +359,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<int> ShiftRightArithmeticFast(Vector128<int> value, int shiftAmount);
 
         /// <summary>
-        /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &lt;&lt; shiftAmount }</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -480,7 +480,7 @@ namespace Zyl.VectorTraits.Impl {
         TypeCodeFlags ShiftRightLogicalFast_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -492,7 +492,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<sbyte> ShiftRightLogicalFast(Vector128<sbyte> value, int shiftAmount);
 
         /// <summary>
-        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -504,7 +504,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<byte> ShiftRightLogicalFast(Vector128<byte> value, int shiftAmount);
 
         /// <summary>
-        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -516,7 +516,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<short> ShiftRightLogicalFast(Vector128<short> value, int shiftAmount);
 
         /// <summary>
-        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -528,7 +528,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<ushort> ShiftRightLogicalFast(Vector128<ushort> value, int shiftAmount);
 
         /// <summary>
-        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -540,7 +540,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<int> ShiftRightLogicalFast(Vector128<int> value, int shiftAmount);
 
         /// <summary>
-        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -552,7 +552,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<uint> ShiftRightLogicalFast(Vector128<uint> value, int shiftAmount);
 
         /// <summary>
-        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -564,7 +564,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<long> ShiftRightLogicalFast(Vector128<long> value, int shiftAmount);
 
         /// <summary>
-        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>f({ value[i] }, shiftAmount) = { value[i] &gt;&gt;&gt; shiftAmount }</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
