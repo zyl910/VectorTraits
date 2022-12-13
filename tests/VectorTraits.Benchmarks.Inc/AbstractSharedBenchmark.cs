@@ -14,11 +14,13 @@ namespace Zyl.VectorTraits.Benchmarks {
         protected static sbyte[] srcArraySByte = { };
         protected static byte[] srcArrayByte = { };
         protected static short[] srcArrayInt16 = { };
+        protected static ushort[] srcArrayUInt16 = { };
         protected static int[] srcArrayInt32 = { }, dstArrayInt32 = { }, baselinetArrayInt32 = { };
         protected static long[] srcArrayInt64 = { };
         protected static sbyte dstSByte, baselineSByte;
         protected static byte dstByte, baselineByte;
         protected static short dstInt16, baselineInt16;
+        protected static ushort dstUInt16, baselineUInt16;
         protected static int dstInt32, baselineInt32;
         protected static long dstInt64, baselineInt64;
 #pragma warning restore CA2211 // Non-constant fields should not be visible
@@ -39,6 +41,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                 srcArraySByte = new sbyte[N];
                 srcArrayByte = new byte[N];
                 srcArrayInt16 = new short[N];
+                srcArrayUInt16 = new ushort[N];
                 srcArrayInt32 = new int[N];
                 srcArrayInt64 = new long[N];
                 dstArrayInt32 = new int[N];
@@ -50,6 +53,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                     long n64 = (((long)a) << 32) | (long)b;
                     srcArraySByte[i] = (sbyte)srcArrayByte[i];
                     srcArrayInt16[i] = (short)a;
+                    srcArrayUInt16[i] = (ushort)a;
                     srcArrayInt32[i] = a;
                     srcArrayInt64[i] = n64;
                 }
@@ -149,6 +153,23 @@ namespace Zyl.VectorTraits.Benchmarks {
             if (!CheckMode) return;
             if (dstInt16 != baselineInt16) {
                 throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstInt16, baselineInt16));
+            } else {
+                // Succeed. No output.
+                string msg = string.Format("Check `{0}` Succeed.", name);
+                //writer.WriteLine(indent + msg);
+                Debug.WriteLine(msg);
+            }
+        }
+
+        /// <summary>
+        /// Check result - UInt16.
+        /// </summary>
+        /// <param name="name">Method name.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected void CheckResultUInt16(string name) {
+            if (!CheckMode) return;
+            if (dstUInt16 != baselineUInt16) {
+                throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstUInt16, baselineUInt16));
             } else {
                 // Succeed. No output.
                 string msg = string.Format("Check `{0}` Succeed.", name);
