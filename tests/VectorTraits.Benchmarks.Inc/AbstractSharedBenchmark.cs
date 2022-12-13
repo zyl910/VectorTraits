@@ -9,7 +9,7 @@ namespace Zyl.VectorTraits.Benchmarks {
     /// <summary>
     /// Abstract shared array benchmark.
     /// </summary>
-    internal abstract class AbstractSharedBenchmark : AbstractBenchmark, ILoopCountGetter {
+    public abstract class AbstractSharedBenchmark : AbstractBenchmark, ILoopCountGetter {
 #pragma warning disable CA2211 // Non-constant fields should not be visible
         protected static sbyte[] srcArraySByte = { };
         protected static byte[] srcArrayByte = { };

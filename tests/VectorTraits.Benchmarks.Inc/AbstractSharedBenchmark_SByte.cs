@@ -11,7 +11,7 @@ namespace Zyl.VectorTraits.Benchmarks {
     /// <summary>
     /// Abstract shared array benchmark - SByte.
     /// </summary>
-    internal class AbstractSharedBenchmark_SByte : AbstractSharedBenchmark {
+    public class AbstractSharedBenchmark_SByte : AbstractSharedBenchmark {
         // -- TMy ref --
         protected static ref TMy dstTMy => ref dstSByte;
         protected static ref TMy baselineTMy => ref baselineSByte;

@@ -24,7 +24,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    internal partial class ShiftRightLogicalBenchmark_UInt64 : AbstractSharedBenchmark_UInt64 {
+    public partial class ShiftRightLogicalBenchmark_UInt64 : AbstractSharedBenchmark_UInt64 {
 
         // -- var --
 

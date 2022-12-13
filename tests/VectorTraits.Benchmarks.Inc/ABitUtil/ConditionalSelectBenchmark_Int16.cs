@@ -21,7 +21,7 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    internal partial class ConditionalSelectBenchmark_Int16 : AbstractSharedBenchmark_Int16 {
+    public partial class ConditionalSelectBenchmark_Int16 : AbstractSharedBenchmark_Int16 {
 
         // -- var --
         private static readonly TMy[] samples = {

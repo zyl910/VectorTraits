@@ -22,7 +22,7 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    internal partial class ClampBenchmark_Int32 : AbstractSharedBenchmark_Int32 {
+    public partial class ClampBenchmark_Int32 : AbstractSharedBenchmark_Int32 {
 
         // -- var --
         private const TMy valueMin = default;

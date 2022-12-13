@@ -46,7 +46,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                     writer.WriteLine(summary);
                 } else {
                     var summary = BenchmarkRunner.Run(typeof(ShiftLeftBenchmark_Int16).Assembly, config);
-                    writer.WriteLine(summary);
+                    writer.WriteLine("Length={0}, {1}", summary.Length, summary);
                 }
             } else {
                 string indent = "";
