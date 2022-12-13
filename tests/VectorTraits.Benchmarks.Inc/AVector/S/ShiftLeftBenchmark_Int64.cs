@@ -160,7 +160,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift left logical - Algorithm - 256Base.
+        /// Sum shift left logical - Algorithm - Base256.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -542,7 +542,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift left logical fast - Algorithm - 256Base.
+        /// Sum shift left logical fast - Algorithm - Base256.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>

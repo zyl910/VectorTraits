@@ -112,6 +112,54 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_ALGORITHM
 
         /// <summary>
+        /// Sum shift right logical - Algorithm - Base.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSRL_Base(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<TMy>(shiftAmount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftRightLogical_Base(*(Vector<TMy>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRL_Base() {
+            VectorTraitsBase.Statics.ThrowForUnsupported(true);
+            dstTMy = 0;
+            for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
+                dstTMy += StaticSumSRL_Base(srcArray, srcArray.Length, shiftAmount);
+            }
+            CheckResult("SumSRL_Base");
+        }
+
+        /// <summary>
         /// Sum shift right logical - Algorithm - Base128.
         /// </summary>
         /// <param name="src">Source array.</param>
@@ -160,7 +208,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift right logical - Algorithm - 256Base.
+        /// Sum shift right logical - Algorithm - Base256.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -208,7 +256,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift right logical - Algorithm - Multiply.
+        /// Sum shift right logical - Algorithm - Widen.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -253,6 +301,102 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 dstTMy += StaticSumSRL_Widen(srcArray, srcArray.Length, shiftAmount);
             }
             CheckResult("SumSRL_Widen");
+        }
+
+        /// <summary>
+        /// Sum shift right logical - Algorithm - Widen128.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSRL_Widen128(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<TMy>(shiftAmount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraits128Base.Statics.ShiftRightLogical_Widen(*(Vector<TMy>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRL_Widen128() {
+            VectorTraits128Base.Statics.ThrowForUnsupported(true);
+            dstTMy = 0;
+            for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
+                dstTMy += StaticSumSRL_Widen128(srcArray, srcArray.Length, shiftAmount);
+            }
+            CheckResult("SumSRL_Widen128");
+        }
+
+        /// <summary>
+        /// Sum shift right logical - Algorithm - Widen256.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSRL_Widen256(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<TMy>(shiftAmount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraits256Base.Statics.ShiftRightLogical_Widen(*(Vector<TMy>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRL_Widen256() {
+            VectorTraits256Base.Statics.ThrowForUnsupported(true);
+            dstTMy = 0;
+            for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
+                dstTMy += StaticSumSRL_Widen256(srcArray, srcArray.Length, shiftAmount);
+            }
+            CheckResult("SumSRL_Widen256");
         }
 
 #if NETCOREAPP3_0_OR_GREATER
@@ -542,6 +686,54 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_ALGORITHM
 
         /// <summary>
+        /// Sum shift right logical fast - Algorithm - Base.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSRLFast_Base(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<TMy>(shiftAmount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftRightLogicalFast_Base(*(Vector<TMy>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRLFast_Base() {
+            VectorTraitsBase.Statics.ThrowForUnsupported(true);
+            dstTMy = 0;
+            for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
+                dstTMy += StaticSumSRLFast_Base(srcArray, srcArray.Length, shiftAmount);
+            }
+            CheckResult("SumSRLFast_Base");
+        }
+
+        /// <summary>
         /// Sum shift right logical fast - Algorithm - Base128.
         /// </summary>
         /// <param name="src">Source array.</param>
@@ -590,7 +782,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift right logical fast - Algorithm - 256Base.
+        /// Sum shift right logical fast - Algorithm - Base256.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -638,7 +830,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift right logical fast - Algorithm - Multiply.
+        /// Sum shift right logical fast - Algorithm - Widen.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -683,6 +875,102 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 dstTMy += StaticSumSRLFast_Widen(srcArray, srcArray.Length, shiftAmount);
             }
             CheckResult("SumSRLFast_Widen");
+        }
+
+        /// <summary>
+        /// Sum shift right logical fast - Algorithm - Widen128.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSRLFast_Widen128(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<TMy>(shiftAmount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraits128Base.Statics.ShiftRightLogicalFast_Widen(*(Vector<TMy>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRLFast_Widen128() {
+            VectorTraits128Base.Statics.ThrowForUnsupported(true);
+            dstTMy = 0;
+            for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
+                dstTMy += StaticSumSRLFast_Widen128(srcArray, srcArray.Length, shiftAmount);
+            }
+            CheckResult("SumSRLFast_Widen128");
+        }
+
+        /// <summary>
+        /// Sum shift right logical fast - Algorithm - Widen256.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSRLFast_Widen256(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<TMy>(shiftAmount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<TMy> vtemp = VectorTraits256Base.Statics.ShiftRightLogicalFast_Widen(*(Vector<TMy>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRLFast_Widen256() {
+            VectorTraits256Base.Statics.ThrowForUnsupported(true);
+            dstTMy = 0;
+            for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
+                dstTMy += StaticSumSRLFast_Widen256(srcArray, srcArray.Length, shiftAmount);
+            }
+            CheckResult("SumSRLFast_Widen256");
         }
 
 #if NETCOREAPP3_0_OR_GREATER
