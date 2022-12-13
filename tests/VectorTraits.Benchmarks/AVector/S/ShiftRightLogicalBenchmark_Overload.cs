@@ -788,6 +788,784 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
     } // End: partial class ShiftRightLogicalBenchmark_UInt16
 
+    partial class ShiftRightLogicalBenchmark_UInt32 {
+
+        // StaticSumSRLTraitsOverload - VectorTraitsBase
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt32 StaticSumSRLTraitsOverload(VectorTraitsBase vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
+            UInt32 rt = 0; // Result.
+            int VectorWidth = Vector<UInt32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt32> vrt = Vector<UInt32>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt32>(shiftAmount);
+            fixed (UInt32* p0 = &src[0]) {
+                UInt32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt32> vtemp = vectorTraits.ShiftRightLogical(*(Vector<UInt32>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt32)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLFastTraitsOverload - VectorTraitsBase
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt32 StaticSumSRLFastTraitsOverload(VectorTraitsBase vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
+            UInt32 rt = 0; // Result.
+            int VectorWidth = Vector<UInt32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt32> vrt = Vector<UInt32>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt32>(shiftAmount);
+            fixed (UInt32* p0 = &src[0]) {
+                UInt32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt32> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<UInt32>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt32)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLTraitsOverload - VectorTraits128Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt32 StaticSumSRLTraitsOverload(VectorTraits128Base vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
+            UInt32 rt = 0; // Result.
+            int VectorWidth = Vector<UInt32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt32> vrt = Vector<UInt32>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt32>(shiftAmount);
+            fixed (UInt32* p0 = &src[0]) {
+                UInt32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt32> vtemp = vectorTraits.ShiftRightLogical(*(Vector<UInt32>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt32)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLFastTraitsOverload - VectorTraits128Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt32 StaticSumSRLFastTraitsOverload(VectorTraits128Base vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
+            UInt32 rt = 0; // Result.
+            int VectorWidth = Vector<UInt32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt32> vrt = Vector<UInt32>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt32>(shiftAmount);
+            fixed (UInt32* p0 = &src[0]) {
+                UInt32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt32> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<UInt32>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt32)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLTraitsOverload - VectorTraits128AdvSimd
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt32 StaticSumSRLTraitsOverload(VectorTraits128AdvSimd vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
+            UInt32 rt = 0; // Result.
+            int VectorWidth = Vector<UInt32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt32> vrt = Vector<UInt32>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt32>(shiftAmount);
+            fixed (UInt32* p0 = &src[0]) {
+                UInt32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt32> vtemp = vectorTraits.ShiftRightLogical(*(Vector<UInt32>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt32)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLFastTraitsOverload - VectorTraits128AdvSimd
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt32 StaticSumSRLFastTraitsOverload(VectorTraits128AdvSimd vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
+            UInt32 rt = 0; // Result.
+            int VectorWidth = Vector<UInt32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt32> vrt = Vector<UInt32>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt32>(shiftAmount);
+            fixed (UInt32* p0 = &src[0]) {
+                UInt32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt32> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<UInt32>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt32)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLTraitsOverload - VectorTraits128AdvSimdA64
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt32 StaticSumSRLTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
+            UInt32 rt = 0; // Result.
+            int VectorWidth = Vector<UInt32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt32> vrt = Vector<UInt32>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt32>(shiftAmount);
+            fixed (UInt32* p0 = &src[0]) {
+                UInt32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt32> vtemp = vectorTraits.ShiftRightLogical(*(Vector<UInt32>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt32)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLFastTraitsOverload - VectorTraits128AdvSimdA64
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt32 StaticSumSRLFastTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
+            UInt32 rt = 0; // Result.
+            int VectorWidth = Vector<UInt32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt32> vrt = Vector<UInt32>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt32>(shiftAmount);
+            fixed (UInt32* p0 = &src[0]) {
+                UInt32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt32> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<UInt32>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt32)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLTraitsOverload - VectorTraits256Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt32 StaticSumSRLTraitsOverload(VectorTraits256Base vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
+            UInt32 rt = 0; // Result.
+            int VectorWidth = Vector<UInt32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt32> vrt = Vector<UInt32>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt32>(shiftAmount);
+            fixed (UInt32* p0 = &src[0]) {
+                UInt32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt32> vtemp = vectorTraits.ShiftRightLogical(*(Vector<UInt32>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt32)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLFastTraitsOverload - VectorTraits256Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt32 StaticSumSRLFastTraitsOverload(VectorTraits256Base vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
+            UInt32 rt = 0; // Result.
+            int VectorWidth = Vector<UInt32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt32> vrt = Vector<UInt32>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt32>(shiftAmount);
+            fixed (UInt32* p0 = &src[0]) {
+                UInt32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt32> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<UInt32>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt32)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLTraitsOverload - VectorTraits256Avx2
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt32 StaticSumSRLTraitsOverload(VectorTraits256Avx2 vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
+            UInt32 rt = 0; // Result.
+            int VectorWidth = Vector<UInt32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt32> vrt = Vector<UInt32>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt32>(shiftAmount);
+            fixed (UInt32* p0 = &src[0]) {
+                UInt32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt32> vtemp = vectorTraits.ShiftRightLogical(*(Vector<UInt32>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt32)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLFastTraitsOverload - VectorTraits256Avx2
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt32 StaticSumSRLFastTraitsOverload(VectorTraits256Avx2 vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
+            UInt32 rt = 0; // Result.
+            int VectorWidth = Vector<UInt32>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt32> vrt = Vector<UInt32>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt32>(shiftAmount);
+            fixed (UInt32* p0 = &src[0]) {
+                UInt32* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt32> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<UInt32>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt32)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+
+    } // End: partial class ShiftRightLogicalBenchmark_UInt32
+
+    partial class ShiftRightLogicalBenchmark_UInt64 {
+
+        // StaticSumSRLTraitsOverload - VectorTraitsBase
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt64 StaticSumSRLTraitsOverload(VectorTraitsBase vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
+            UInt64 rt = 0; // Result.
+            int VectorWidth = Vector<UInt64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt64> vrt = Vector<UInt64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt64>(shiftAmount);
+            fixed (UInt64* p0 = &src[0]) {
+                UInt64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt64> vtemp = vectorTraits.ShiftRightLogical(*(Vector<UInt64>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt64)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLFastTraitsOverload - VectorTraitsBase
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt64 StaticSumSRLFastTraitsOverload(VectorTraitsBase vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
+            UInt64 rt = 0; // Result.
+            int VectorWidth = Vector<UInt64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt64> vrt = Vector<UInt64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt64>(shiftAmount);
+            fixed (UInt64* p0 = &src[0]) {
+                UInt64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt64> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<UInt64>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt64)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLTraitsOverload - VectorTraits128Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt64 StaticSumSRLTraitsOverload(VectorTraits128Base vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
+            UInt64 rt = 0; // Result.
+            int VectorWidth = Vector<UInt64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt64> vrt = Vector<UInt64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt64>(shiftAmount);
+            fixed (UInt64* p0 = &src[0]) {
+                UInt64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt64> vtemp = vectorTraits.ShiftRightLogical(*(Vector<UInt64>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt64)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLFastTraitsOverload - VectorTraits128Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt64 StaticSumSRLFastTraitsOverload(VectorTraits128Base vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
+            UInt64 rt = 0; // Result.
+            int VectorWidth = Vector<UInt64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt64> vrt = Vector<UInt64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt64>(shiftAmount);
+            fixed (UInt64* p0 = &src[0]) {
+                UInt64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt64> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<UInt64>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt64)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLTraitsOverload - VectorTraits128AdvSimd
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt64 StaticSumSRLTraitsOverload(VectorTraits128AdvSimd vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
+            UInt64 rt = 0; // Result.
+            int VectorWidth = Vector<UInt64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt64> vrt = Vector<UInt64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt64>(shiftAmount);
+            fixed (UInt64* p0 = &src[0]) {
+                UInt64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt64> vtemp = vectorTraits.ShiftRightLogical(*(Vector<UInt64>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt64)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLFastTraitsOverload - VectorTraits128AdvSimd
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt64 StaticSumSRLFastTraitsOverload(VectorTraits128AdvSimd vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
+            UInt64 rt = 0; // Result.
+            int VectorWidth = Vector<UInt64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt64> vrt = Vector<UInt64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt64>(shiftAmount);
+            fixed (UInt64* p0 = &src[0]) {
+                UInt64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt64> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<UInt64>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt64)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLTraitsOverload - VectorTraits128AdvSimdA64
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt64 StaticSumSRLTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
+            UInt64 rt = 0; // Result.
+            int VectorWidth = Vector<UInt64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt64> vrt = Vector<UInt64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt64>(shiftAmount);
+            fixed (UInt64* p0 = &src[0]) {
+                UInt64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt64> vtemp = vectorTraits.ShiftRightLogical(*(Vector<UInt64>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt64)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLFastTraitsOverload - VectorTraits128AdvSimdA64
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt64 StaticSumSRLFastTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
+            UInt64 rt = 0; // Result.
+            int VectorWidth = Vector<UInt64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt64> vrt = Vector<UInt64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt64>(shiftAmount);
+            fixed (UInt64* p0 = &src[0]) {
+                UInt64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt64> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<UInt64>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt64)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLTraitsOverload - VectorTraits256Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt64 StaticSumSRLTraitsOverload(VectorTraits256Base vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
+            UInt64 rt = 0; // Result.
+            int VectorWidth = Vector<UInt64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt64> vrt = Vector<UInt64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt64>(shiftAmount);
+            fixed (UInt64* p0 = &src[0]) {
+                UInt64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt64> vtemp = vectorTraits.ShiftRightLogical(*(Vector<UInt64>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt64)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLFastTraitsOverload - VectorTraits256Base
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt64 StaticSumSRLFastTraitsOverload(VectorTraits256Base vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
+            UInt64 rt = 0; // Result.
+            int VectorWidth = Vector<UInt64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt64> vrt = Vector<UInt64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt64>(shiftAmount);
+            fixed (UInt64* p0 = &src[0]) {
+                UInt64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt64> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<UInt64>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt64)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLTraitsOverload - VectorTraits256Avx2
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt64 StaticSumSRLTraitsOverload(VectorTraits256Avx2 vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
+            UInt64 rt = 0; // Result.
+            int VectorWidth = Vector<UInt64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt64> vrt = Vector<UInt64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt64>(shiftAmount);
+            fixed (UInt64* p0 = &src[0]) {
+                UInt64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt64> vtemp = vectorTraits.ShiftRightLogical(*(Vector<UInt64>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt64)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        // StaticSumSRLFastTraitsOverload - VectorTraits256Avx2
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe UInt64 StaticSumSRLFastTraitsOverload(VectorTraits256Avx2 vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
+            UInt64 rt = 0; // Result.
+            int VectorWidth = Vector<UInt64>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<UInt64> vrt = Vector<UInt64>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<UInt64>(shiftAmount);
+            fixed (UInt64* p0 = &src[0]) {
+                UInt64* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector<UInt64> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<UInt64>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (UInt64)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+
+    } // End: partial class ShiftRightLogicalBenchmark_UInt64
+
 
 }
 

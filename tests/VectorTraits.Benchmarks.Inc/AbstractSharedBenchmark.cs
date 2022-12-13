@@ -16,13 +16,17 @@ namespace Zyl.VectorTraits.Benchmarks {
         protected static short[] srcArrayInt16 = { };
         protected static ushort[] srcArrayUInt16 = { };
         protected static int[] srcArrayInt32 = { }, dstArrayInt32 = { }, baselinetArrayInt32 = { };
+        protected static uint[] srcArrayUInt32 = { };
         protected static long[] srcArrayInt64 = { };
+        protected static ulong[] srcArrayUInt64 = { };
         protected static sbyte dstSByte, baselineSByte;
         protected static byte dstByte, baselineByte;
         protected static short dstInt16, baselineInt16;
         protected static ushort dstUInt16, baselineUInt16;
         protected static int dstInt32, baselineInt32;
+        protected static uint dstUInt32, baselineUInt32;
         protected static long dstInt64, baselineInt64;
+        protected static ulong dstUInt64, baselineUInt64;
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
         /// <inheritdoc cref="ILoopCountGetter.LoopCount" />
@@ -43,7 +47,9 @@ namespace Zyl.VectorTraits.Benchmarks {
                 srcArrayInt16 = new short[N];
                 srcArrayUInt16 = new ushort[N];
                 srcArrayInt32 = new int[N];
+                srcArrayUInt32 = new uint[N];
                 srcArrayInt64 = new long[N];
+                srcArrayUInt64 = new ulong[N];
                 dstArrayInt32 = new int[N];
                 baselinetArrayInt32 = new int[N];
                 random.NextBytes(srcArrayByte);
@@ -55,7 +61,9 @@ namespace Zyl.VectorTraits.Benchmarks {
                     srcArrayInt16[i] = (short)a;
                     srcArrayUInt16[i] = (ushort)a;
                     srcArrayInt32[i] = a;
+                    srcArrayUInt32[i] = (uint)a;
                     srcArrayInt64[i] = n64;
+                    srcArrayUInt64[i] = (ulong)n64;
                 }
             }
         }
@@ -196,6 +204,23 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
+        /// Check result - UInt32.
+        /// </summary>
+        /// <param name="name">Method name.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected void CheckResultUInt32(string name) {
+            if (!CheckMode) return;
+            if (dstUInt32 != baselineUInt32) {
+                throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstUInt32, baselineUInt32));
+            } else {
+                // Succeed. No output.
+                string msg = string.Format("Check `{0}` Succeed.", name);
+                //writer.WriteLine(indent + msg);
+                Debug.WriteLine(msg);
+            }
+        }
+
+        /// <summary>
         /// Check result - Int64.
         /// </summary>
         /// <param name="name">Method name.</param>
@@ -204,6 +229,23 @@ namespace Zyl.VectorTraits.Benchmarks {
             if (!CheckMode) return;
             if (dstInt64 != baselineInt64) {
                 throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstInt64, baselineInt64));
+            } else {
+                // Succeed. No output.
+                string msg = string.Format("Check `{0}` Succeed.", name);
+                //writer.WriteLine(indent + msg);
+                Debug.WriteLine(msg);
+            }
+        }
+
+        /// <summary>
+        /// Check result - UInt64.
+        /// </summary>
+        /// <param name="name">Method name.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected void CheckResultUInt64(string name) {
+            if (!CheckMode) return;
+            if (dstUInt64 != baselineUInt64) {
+                throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstUInt64, baselineUInt64));
             } else {
                 // Succeed. No output.
                 string msg = string.Format("Check `{0}` Succeed.", name);

@@ -14,6 +14,10 @@ namespace Zyl.VectorTraits.Benchmarks {
             TextWriter writer = Console.Out;
             writer.WriteLine("VectorTraits.Benchmarks");
             // benchmarkMode
+            // 0: Benchmark all with my BenchmarkMain.
+            // 1: Benchmark all with BenchmarkDotNet.
+            // 2: Benchmark item with BenchmarkDotNet.
+            // 3: Running special method (RunVector128).
             int benchmarkMode = 0;
             if (args.Length >= 1) {
                 if (!int.TryParse(args[0], out benchmarkMode)) {
@@ -38,7 +42,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                     .WithToolchain(InProcessEmitToolchain.Instance)
                     .WithId("InProcess"));
                 if (benchmarkMode >= 2) {
-                    var summary = BenchmarkRunner.Run<IntroDisassemblyDry>(config);
+                    var summary = BenchmarkRunner.Run<ShiftLeftBenchmark_Int16>(config);
                     writer.WriteLine(summary);
                 } else {
                     var summary = BenchmarkRunner.Run(typeof(ShiftLeftBenchmark_Int16).Assembly, config);

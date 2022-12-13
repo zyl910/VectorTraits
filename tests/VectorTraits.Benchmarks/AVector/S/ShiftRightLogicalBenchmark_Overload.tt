@@ -17,7 +17,9 @@
     string[] typenameList = typenameList_VectorTTraits;
     string[] tMyNameList = {
             "Byte",
-            "UInt16"
+            "UInt16",
+            "UInt32",
+            "UInt64",
     };
 #>
 using BenchmarkDotNet.Attributes;

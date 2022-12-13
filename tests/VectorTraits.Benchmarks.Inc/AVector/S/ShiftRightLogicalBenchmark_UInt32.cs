@@ -16,15 +16,15 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = Byte;
+    using TMy = UInt32;
 
     /// <summary>
-    /// Shift left benchmark - Byte.
+    /// Shift left benchmark - UInt32.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    internal partial class ShiftRightLogicalBenchmark_Byte : AbstractSharedBenchmark_Byte {
+    internal partial class ShiftRightLogicalBenchmark_UInt32 : AbstractSharedBenchmark_UInt32 {
 
         // -- var --
 
@@ -1036,106 +1036,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             }
             CheckResult("SumSRLFastRawAvx2");
         }
-
-#if BENCHMARKS_ALGORITHM
-        /// <summary>
-        /// Sum shift right logical fast - Raw - Avx - FirstAnd.
-        /// </summary>
-        /// <param name="src">Source array.</param>
-        /// <param name="srcCount">Source count</param>
-        /// <param name="shiftAmount">Shift amount.</param>
-        /// <returns>Returns the sum.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumSRLFastRawAvx2_FirstAnd(TMy[] src, int srcCount, int shiftAmount) {
-            TMy rt = 0; // Result.
-            int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
-            int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
-            int i;
-            // Body.
-            shiftAmount = Scalars.LimitShiftAmount<TMy>(shiftAmount);
-            fixed (TMy* p0 = &src[0]) {
-                TMy* p = p0;
-                // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftRightLogicalFast_FirstAnd(*(Vector<TMy>*)p, shiftAmount);
-                    vrt += vtemp; // Add.
-                    p += nBlockWidth;
-                }
-                // Remainder processs.
-                for (i = 0; i < cntRem; ++i) {
-                    rt += (TMy)(p[i] >> shiftAmount);
-                }
-            }
-            // Reduce.
-            for (i = 0; i < VectorWidth; ++i) {
-                rt += vrt[i];
-            }
-            return rt;
-        }
-
-        [Benchmark]
-        public void SumSRLFastRawAvx2_FirstAnd() {
-            VectorTraits256Avx2.Statics.ThrowForUnsupported(true);
-            //Debugger.Break();
-            dstTMy = 0;
-            for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
-                dstTMy += StaticSumSRLFastRawAvx2_FirstAnd(srcArray, srcArray.Length, shiftAmount);
-            }
-            CheckResult("SumSRLFastRawAvx2_FirstAnd");
-        }
-
-        /// <summary>
-        /// Sum shift right logical fast - Raw - Avx - FirstShift.
-        /// </summary>
-        /// <param name="src">Source array.</param>
-        /// <param name="srcCount">Source count</param>
-        /// <param name="shiftAmount">Shift amount.</param>
-        /// <returns>Returns the sum.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumSRLFastRawAvx2_FirstShift(TMy[] src, int srcCount, int shiftAmount) {
-            TMy rt = 0; // Result.
-            int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
-            int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
-            int i;
-            // Body.
-            shiftAmount = Scalars.LimitShiftAmount<TMy>(shiftAmount);
-            fixed (TMy* p0 = &src[0]) {
-                TMy* p = p0;
-                // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftRightLogicalFast_FirstShift(*(Vector<TMy>*)p, shiftAmount);
-                    vrt += vtemp; // Add.
-                    p += nBlockWidth;
-                }
-                // Remainder processs.
-                for (i = 0; i < cntRem; ++i) {
-                    rt += (TMy)(p[i] >> shiftAmount);
-                }
-            }
-            // Reduce.
-            for (i = 0; i < VectorWidth; ++i) {
-                rt += vrt[i];
-            }
-            return rt;
-        }
-
-        [Benchmark]
-        public void SumSRLFastRawAvx2_FirstShift() {
-            VectorTraits256Avx2.Statics.ThrowForUnsupported(true);
-            //Debugger.Break();
-            dstTMy = 0;
-            for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
-                dstTMy += StaticSumSRLFastRawAvx2_FirstShift(srcArray, srcArray.Length, shiftAmount);
-            }
-            CheckResult("SumSRLFastRawAvx2_FirstShift");
-        }
-#endif // BENCHMARKS_ALGORITHM
 
 #endif // NETCOREAPP3_0_OR_GREATER
 
