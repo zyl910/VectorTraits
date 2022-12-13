@@ -1290,12 +1290,12 @@ namespace Zyl.VectorTraits.Impl {
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> ShiftRightLogicalFast_Widen(Vector<byte> value, int shiftAmount) {
-                Vector<byte> t = Vector.AndNot(value, Vectors<byte>.GetMaskBits(shiftAmount));
 #if NET7_0_OR_GREATER
-                Vector<byte> rt = Vector.ShiftRightLogical(t.AsUInt64(), shiftAmount).AsByte();
+                Vector<byte> t = Vector.ShiftRightLogical(value.AsUInt64(), shiftAmount).AsByte();
 #else
-                Vector<byte> rt = ShiftRightLogicalFast_Base(t.AsUInt64(), shiftAmount).AsByte();
+                Vector<byte> t = ShiftRightLogicalFast_Base(value.AsUInt64(), shiftAmount).AsByte();
 #endif
+                Vector<byte> rt = Vector.BitwiseAnd(t, Vectors<byte>.GetMaskBits(8 - shiftAmount));
                 return rt;
             }
 
@@ -1311,12 +1311,12 @@ namespace Zyl.VectorTraits.Impl {
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<ushort> ShiftRightLogicalFast_Widen(Vector<ushort> value, int shiftAmount) {
-                Vector<ushort> t = Vector.AndNot(value, Vectors<ushort>.GetMaskBits(shiftAmount));
 #if NET7_0_OR_GREATER
-                Vector<ushort> rt = Vector.ShiftRightLogical(t.AsUInt64(), shiftAmount).AsUInt16();
+                Vector<ushort> t = Vector.ShiftRightLogical(value.AsUInt64(), shiftAmount).AsUInt16();
 #else
-                Vector<ushort> rt = ShiftRightLogicalFast_Base(t.AsUInt64(), shiftAmount).AsUInt16();
+                Vector<ushort> t = ShiftRightLogicalFast_Base(value.AsUInt64(), shiftAmount).AsUInt16();
 #endif
+                Vector<ushort> rt = Vector.BitwiseAnd(t, Vectors<ushort>.GetMaskBits(16 - shiftAmount));
                 return rt;
             }
 
@@ -1332,12 +1332,12 @@ namespace Zyl.VectorTraits.Impl {
             [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<uint> ShiftRightLogicalFast_Widen(Vector<uint> value, int shiftAmount) {
-                Vector<uint> t = Vector.AndNot(value, Vectors<uint>.GetMaskBits(shiftAmount));
 #if NET7_0_OR_GREATER
-                Vector<uint> rt = Vector.ShiftRightLogical(t.AsUInt64(), shiftAmount).AsUInt32();
+                Vector<uint> t = Vector.ShiftRightLogical(value.AsUInt64(), shiftAmount).AsUInt32();
 #else
-                Vector<uint> rt = ShiftRightLogicalFast_Base(t.AsUInt64(), shiftAmount).AsUInt32();
+                Vector<uint> t = ShiftRightLogicalFast_Base(value.AsUInt64(), shiftAmount).AsUInt32();
 #endif
+                Vector<uint> rt = Vector.BitwiseAnd(t, Vectors<uint>.GetMaskBits(32 - shiftAmount));
                 return rt;
             }
 
