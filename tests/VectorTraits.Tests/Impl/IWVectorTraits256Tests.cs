@@ -287,7 +287,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 Vector256s<T>.Serial,
             };
             foreach (Vector256<T> vsrc in samples) {
-                for (int shiftAmount = 0; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector256<T> vexpected = Vector256s.ShiftRightLogicalFast((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.IsSupported) continue;

@@ -270,7 +270,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 Vectors<T>.Serial,
             };
             foreach (Vector<T> vsrc in samples) {
-                for (int shiftAmount = 0; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector<T> vexpected = Vectors.ShiftRightLogicalFast((dynamic)vsrc, shiftAmount);
                     foreach (IVectorTraits instance in instances) {
                         if (!instance.IsSupported) continue;
