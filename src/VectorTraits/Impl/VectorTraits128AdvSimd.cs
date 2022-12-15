@@ -368,6 +368,20 @@ namespace Zyl.VectorTraits.Impl {
                 return WStatics.ShiftRightLogicalFast(value.AsVector128(), shiftAmount).AsVector();
             }
 
+            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{ulong}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> ShiftRightLogicalFast_HwVar(Vector<ulong> value, int shiftAmount) {
+                return WStatics.ShiftRightLogicalFast_HwVar(value.AsVector128(), shiftAmount).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{ulong}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> ShiftRightLogicalFast_HwImm(Vector<ulong> value, int shiftAmount) {
+                return WStatics.ShiftRightLogicalFast_HwImm(value.AsVector128(), shiftAmount).AsVector();
+            }
+
 
 #endif // NET5_0_OR_GREATER
         }

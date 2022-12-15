@@ -94,9 +94,9 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> ConditionalSelect_OrAnd<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
                 // result = (left & condition) | (right & ~condition);
-                return Avx.Or(Avx.And(condition.AsDouble(), left.AsDouble())
-                    , Avx.AndNot(condition.AsDouble(), right.AsDouble())
-                    ).As<double, T>();
+                return Avx.Or(Avx.And(condition.AsSingle(), left.AsSingle())
+                    , Avx.AndNot(condition.AsSingle(), right.AsSingle())
+                    ).As<float, T>();
             }
 
 

@@ -322,7 +322,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #if NET5_0_OR_GREATER
         /// <summary>
-        /// Sum shift right logical - Raw - Avx.
+        /// Sum shift right logical - Raw - AdvSimd.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -760,8 +760,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #endif // NETCOREAPP3_0_OR_GREATER
 
 #if NET5_0_OR_GREATER
+
         /// <summary>
-        /// Sum shift right logical fast - Raw - Avx.
+        /// Sum shift right logical fast - Raw - AdvSimd.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -816,6 +817,121 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             }
             CheckResult("SumSRLFastRawAdvSimd");
         }
+
+        /// <summary>
+        /// Sum shift right logical fast - Raw - AdvSimdImm.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSRLFastRawAdvSimdImm(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<TMy>(shiftAmount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                if (0 != shiftAmount) {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftRightLogicalFast_HwImm(*(Vector<TMy>*)p, shiftAmount);
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
+                } else {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = *(Vector<TMy>*)p;
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRLFastRawAdvSimdImm() {
+            VectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
+            //Debugger.Break();
+            dstTMy = 0;
+            for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
+                dstTMy += StaticSumSRLFastRawAdvSimdImm(srcArray, srcArray.Length, shiftAmount);
+            }
+            CheckResult("SumSRLFastRawAdvSimdImm");
+        }
+
+        /// <summary>
+        /// Sum shift right logical fast - Raw - AdvSimdVar.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSRLFastRawAdvSimdVar(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<TMy>(shiftAmount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                if (0 != shiftAmount) {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftRightLogicalFast_HwVar(*(Vector<TMy>*)p, shiftAmount);
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
+                } else {
+                    for (i = 0; i < cntBlock; ++i) {
+                        Vector<TMy> vtemp = *(Vector<TMy>*)p;
+                        vrt += vtemp; // Add.
+                        p += nBlockWidth;
+                    }
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] >> shiftAmount);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRLFastRawAdvSimdVar() {
+            VectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
+            //Debugger.Break();
+            dstTMy = 0;
+            for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
+                dstTMy += StaticSumSRLFastRawAdvSimdVar(srcArray, srcArray.Length, shiftAmount);
+            }
+            CheckResult("SumSRLFastRawAdvSimdVar");
+        }
+
 #endif // NET5_0_OR_GREATER
 
 #endif // BENCHMARKS_RAW

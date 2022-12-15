@@ -126,7 +126,7 @@ namespace Zyl.VectorTraits.Impl {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.ConditionalSelect(condition, left, right);
 #else
-                return ConditionalSelect_OrAnd(condition, left, right);
+                return ConditionalSelect_Hw(condition, left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -134,9 +134,15 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> ConditionalSelect_OrAnd<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
                 // result = (left & condition) | (right & ~condition);
-                return AdvSimd.Or(AdvSimd.And(condition.AsInt64(), left.AsInt64())
-                    , AdvSimd.And(AdvSimd.Not(condition.AsInt64()), right.AsInt64())
-                    ).As<long, T>();
+                return AdvSimd.Or(AdvSimd.And(condition.AsByte(), left.AsByte())
+                    , AdvSimd.And(AdvSimd.Not(condition.AsByte()), right.AsByte())
+                    ).As<byte, T>();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<T> ConditionalSelect_Hw<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
+                return AdvSimd.BitwiseSelect(condition.AsByte(), left.AsByte(), right.AsByte()).As<byte, T>();
             }
 
 
@@ -518,6 +524,23 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftRightLogicalFast(Vector128<ulong> value, int shiftAmount) {
+                return ShiftRightLogicalFast_HwVar(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{ulong}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ShiftRightLogicalFast_HwVar(Vector128<ulong> value, int shiftAmount) {
+                Vector128<long> vshift = Vector128.Create((long)(-shiftAmount));
+                // NEON intrinsics for shifts by signed variable
+                // uint64x2_t vshlq_u64(uint64x2_t a, int64x2_t b);  // VSHL.U64 q0,q0,q0
+                return AdvSimd.ShiftLogical(value, vshift);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{ulong}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ShiftRightLogicalFast_HwImm(Vector128<ulong> value, int shiftAmount) {
                 Debug.Assert(1 <= shiftAmount && shiftAmount <= 63, "The shiftAmount parameter must be in the range [1,63]."); // AdvSimd throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
             }

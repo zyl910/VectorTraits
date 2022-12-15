@@ -466,7 +466,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #if NET5_0_OR_GREATER
         /// <summary>
-        /// Sum shift right logical - Raw - Avx.
+        /// Sum shift right logical - Raw - AdvSimd.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -1049,7 +1049,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #if NET5_0_OR_GREATER
         /// <summary>
-        /// Sum shift right logical fast - Raw - Avx.
+        /// Sum shift right logical fast - Raw - AdvSimd.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
