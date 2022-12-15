@@ -17,36 +17,42 @@ namespace Zyl.VectorTraits {
         /// <param name="src">Source value (源值).</param>
         /// <returns>Returns target type value (返回目标类型的值).</returns>
         public static T GetByDouble<T>(double src) {
-            if (typeof(T) == typeof(float)) {
-                return (T)(object)(float)src;
-            } else if (typeof(T) == typeof(double)) {
-                return (T)(object)src;
-            } else if (typeof(T) == typeof(sbyte)) {
-                return (T)(object)(sbyte)src;
-            } else if (typeof(T) == typeof(short)) {
-                return (T)(object)(short)src;
-            } else if (typeof(T) == typeof(int)) {
-                return (T)(object)(int)src;
-            } else if (typeof(T) == typeof(long)) {
-                return (T)(object)(long)src;
-            } else if (typeof(T) == typeof(byte)) {
-                return (T)(object)(byte)src;
-            } else if (typeof(T) == typeof(ushort)) {
-                return (T)(object)(ushort)src;
-            } else if (typeof(T) == typeof(uint)) {
-                return (T)(object)(uint)src;
-            } else if (typeof(T) == typeof(ulong)) {
-                return (T)(object)(ulong)src;
-            } else if (typeof(T) == typeof(IntPtr)) {
-                return (T)(object)(IntPtr)(long)src;
-            } else if (typeof(T) == typeof(UIntPtr)) {
-                return (T)(object)(UIntPtr)(ulong)src;
+            unchecked {
+                if (typeof(T) == typeof(Single)) {
+                    return (T)(object)(Single)src;
+                } else if (typeof(T) == typeof(Double)) {
+                    return (T)(object)src;
+                } else if (typeof(T) == typeof(SByte)) {
+                    return (T)(object)(SByte)src;
+                } else if (typeof(T) == typeof(Int16)) {
+                    return (T)(object)(Int16)src;
+                } else if (typeof(T) == typeof(Int32)) {
+                    return (T)(object)(Int32)src;
+                } else if (typeof(T) == typeof(Int64)) {
+                    return (T)(object)(Int64)src;
+                } else if (typeof(T) == typeof(Byte)) {
+                    return (T)(object)((0 != (Byte)src) ? (Byte)src : (Byte)(SByte)src);
+                } else if (typeof(T) == typeof(UInt16)) {
+                    return (T)(object)((0 != (UInt16)src) ? (UInt16)src : (UInt16)(Int16)src);
+                } else if (typeof(T) == typeof(UInt32)) {
+                    return (T)(object)((0 != (UInt32)src) ? (UInt32)src : (UInt32)(Int32)src);
+                } else if (typeof(T) == typeof(UInt64)) {
+                    return (T)(object)((0 != (UInt64)src) ? (UInt64)src : (UInt64)(Int64)src);
+                } else if (typeof(T) == typeof(IntPtr)) {
+                    return (T)(object)(IntPtr)(long)src;
+                } else if (typeof(T) == typeof(UIntPtr)) {
+#if NET7_0_OR_GREATER
+                    return (T)(object)((0 != (UIntPtr)src) ? (UIntPtr)src : (UIntPtr)(IntPtr)src);
+#else
+                    return (T)(object)((0 != (ulong)(UIntPtr)src) ? (UIntPtr)src : (UIntPtr)(long)src);
+#endif // NET7_0_OR_GREATER
 #if NET5_0_OR_GREATER
-            } else if (typeof(T) == typeof(Half)) {
-                return (T)(object)(Half)src;
+                } else if (typeof(T) == typeof(Half)) {
+                    return (T)(object)(Half)src;
 #endif // NET5_0_OR_GREATER
-            } else {
-                return (T)Convert.ChangeType(src, typeof(T));
+                } else {
+                    return (T)Convert.ChangeType(src, typeof(T));
+                }
             }
         }
 
