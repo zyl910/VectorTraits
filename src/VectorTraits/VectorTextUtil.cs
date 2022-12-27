@@ -15,9 +15,9 @@ using System.Text;
 
 namespace Zyl.VectorTraits {
     /// <summary>
-    /// Traits misc util.
+    /// Provides some textual instrumental functions for vectors (提供了一些向量的文本性工具函数).
     /// </summary>
-    public static class TraitsUtil {
+    public static class VectorTextUtil {
 
         /// <summary>Indent next separator (增加缩进的分隔符).</summary>
         public static readonly string IndentNextSeparator = "\t";

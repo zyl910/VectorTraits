@@ -30,7 +30,7 @@ namespace Zyl.VectorTraits.Tests {
             // []
             int vcount = Vector<T>.Count;
             T[] arr = new T[vcount + 1];
-            TraitsUtil.Fill(arr, src);
+            VectorTextUtil.Fill(arr, src);
             v1 = Vectors.CreatePadding(arr);
             Assert.AreNotEqual(vzero, v1);
             // Use int index, int length

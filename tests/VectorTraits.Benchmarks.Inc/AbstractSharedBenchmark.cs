@@ -91,7 +91,7 @@ namespace Zyl.VectorTraits.Benchmarks {
             if (!CheckMode) {
                 //return; // [Debug]
             }
-            TraitsUtil.Fill(dstArrayInt32, 0);
+            VectorTextUtil.Fill(dstArrayInt32, 0);
         }
 
         /// <summary>

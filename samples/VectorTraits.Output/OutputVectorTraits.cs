@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace Zyl.VectorTraits.Output {
     internal class OutputVectorTraits {
         /// <summary>Indent next separator (增加缩进的分隔符).</summary>
-        internal static readonly string IndentNextSeparator = TraitsUtil.IndentNextSeparator;
+        internal static readonly string IndentNextSeparator = VectorTextUtil.IndentNextSeparator;
 
         /// <summary>Show full text.</summary>
         public static bool ShowFull { get; set; }
@@ -33,7 +33,7 @@ namespace Zyl.VectorTraits.Output {
         /// <param name="args">The args</param>
         private static void WriteLine(TextWriter writer, string indent, string format, params object?[] args) {
             if (null == writer) return;
-            TraitsUtil.WriteLine(indent, writer, format, args);
+            VectorTextUtil.WriteLine(indent, writer, format, args);
         }
 
         /// <summary>

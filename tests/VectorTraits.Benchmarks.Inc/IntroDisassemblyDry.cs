@@ -24,7 +24,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="args">The args</param>
         private static void WriteLine(TextWriter writer, string indent, string format, params object?[] args) {
             if (null == writer) return;
-            TraitsUtil.WriteLine(indent, writer, format, args);
+            VectorTextUtil.WriteLine(indent, writer, format, args);
         }
 
         [Benchmark]

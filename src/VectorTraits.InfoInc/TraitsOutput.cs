@@ -74,8 +74,8 @@ namespace Zyl.VectorTraits {
             //writer.WriteLine(string.Format("Vector128<T>.Assembly.CodeBase:\t{0}", assembly.CodeBase));
 #if (NET35 || NET20)
 #else
-            writer.WriteLine(indent + string.Format("GetTargetFrameworkDisplayName(TraitsUtil):\t{0}", TraitsUtil.GetTargetFrameworkDisplayName(typeof(TraitsUtil).Assembly)));
-            writer.WriteLine(indent + string.Format("GetTargetFrameworkDisplayName(TraitsOutput):\t{0}", TraitsUtil.GetTargetFrameworkDisplayName(typeof(TraitsOutput).Assembly)));
+            writer.WriteLine(indent + string.Format("GetTargetFrameworkDisplayName(TraitsUtil):\t{0}", VectorTextUtil.GetTargetFrameworkDisplayName(typeof(VectorTextUtil).Assembly)));
+            writer.WriteLine(indent + string.Format("GetTargetFrameworkDisplayName(TraitsOutput):\t{0}", VectorTextUtil.GetTargetFrameworkDisplayName(typeof(TraitsOutput).Assembly)));
 #endif
 #pragma warning restore SYSLIB0012 // Type or member is obsolete
 
@@ -92,7 +92,7 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns ConsoleKeyInfo if a key is received, or null otherwise (若收到按键便返回 ConsoleKeyInfo, 否则返回null)</returns>
         public static ConsoleKeyInfo? ParseWaitDebugAndReadKey(string[] args, string? hint = null, int defaultTimout = 0, Action<bool, int>? onParseDone = null) {
             ConsoleKeyInfo? rt = null;
-            WaitDebug = TraitsUtil.TryParseArgsByPrefix(out int timeout, args, WaitDebugPrefix, defaultTimout);
+            WaitDebug = VectorTextUtil.TryParseArgsByPrefix(out int timeout, args, WaitDebugPrefix, defaultTimout);
             if (WaitDebug) {
                 WaitDebugTimeout = timeout;
             }

@@ -13,7 +13,7 @@ namespace Zyl.VectorTraits.Sample {
             writer.WriteLine();
 
             Vector<short> src = Vectors.CreateRotate<short>(0, 1, 2, 3, 4, 5, 6, 7);
-            TraitsUtil.WriteLine(writer, "src:\t{0}", src);
+            VectorTextUtil.WriteLine(writer, "src:\t{0}", src);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Zyl.VectorTraits.Benchmarks {
     /// </summary>
     internal static class BenchmarkUtil {
         /// <summary>Indent next separator (增加缩进的分隔符).</summary>
-        public static readonly string IndentNextSeparator = TraitsUtil.IndentNextSeparator;
+        public static readonly string IndentNextSeparator = VectorTextUtil.IndentNextSeparator;
 
 
         /// <summary>Current <see cref="TextWriter"/>.</summary>
