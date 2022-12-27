@@ -18,7 +18,7 @@ namespace Zyl.VectorTraits {
             "VectorTraitsBase",
             "VectorTraits128Base",
             "VectorTraits128AdvSimd",
-            "VectorTraits128AdvSimdA64",
+            "VectorTraits128AdvSimdB64",
             "VectorTraits256Base",
             "VectorTraits256Avx2"
         };
@@ -27,7 +27,7 @@ namespace Zyl.VectorTraits {
             VectorTraitsBase.Instance,
             VectorTraits128Base.Instance,
             VectorTraits128AdvSimd.Instance,
-            VectorTraits128AdvSimdA64.Instance,
+            VectorTraits128AdvSimdB64.Instance,
             VectorTraits256Base.Instance,
             VectorTraits256Avx2.Instance
         };
@@ -37,7 +37,7 @@ namespace Zyl.VectorTraits {
             typeof(VectorTraitsBase.Statics),
             typeof(VectorTraits128Base.Statics),
             typeof(VectorTraits128AdvSimd.Statics),
-            typeof(VectorTraits128AdvSimdA64.Statics),
+            typeof(VectorTraits128AdvSimdB64.Statics),
             typeof(VectorTraits256Base.Statics),
             typeof(VectorTraits256Avx2.Statics)
         };

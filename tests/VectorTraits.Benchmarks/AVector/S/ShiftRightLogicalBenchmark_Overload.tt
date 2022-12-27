@@ -10,7 +10,7 @@
     //        "VectorTraitsBase",
     //        "VectorTraits128Base",
     //        "VectorTraits128AdvSimd",
-    //        "VectorTraits128AdvSimdA64",
+    //        "VectorTraits128AdvSimdB64",
     //        "VectorTraits256Base",
     //        "VectorTraits256Avx2"
     //    };

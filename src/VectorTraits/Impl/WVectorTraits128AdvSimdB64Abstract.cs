@@ -6,12 +6,12 @@ using System.Runtime.Intrinsics;
 #endif
 
 namespace Zyl.VectorTraits.Impl {
-    using Statics = WVectorTraits128AdvSimdA64.Statics;
+    using Statics = WVectorTraits128AdvSimdB64.Statics;
 
     /// <summary>
-    /// <see cref="Vector128{T}"/> traits - AdvSimd architecture-64bit abstract.
+    /// <see cref="Vector128{T}"/> traits - AdvSimd 64bit abstract.
     /// </summary>
-    public abstract class WVectorTraits128AdvSimdA64Abstract : WVectorTraits128AdvSimdAbstract {
+    public abstract class WVectorTraits128AdvSimdB64Abstract : WVectorTraits128AdvSimdAbstract {
         /// <inheritdoc cref="IBaseTraits.IsSupported"/>
         public override bool IsSupported {
             get {

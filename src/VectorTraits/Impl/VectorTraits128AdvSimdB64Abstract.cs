@@ -5,12 +5,12 @@ using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Zyl.VectorTraits.Impl {
-    using Statics = VectorTraits128AdvSimdA64.Statics;
+    using Statics = VectorTraits128AdvSimdB64.Statics;
 
     /// <summary>
-    /// <see cref="Vector{T}"/> traits 128 - AdvSimd architecture-64bit abstract.
+    /// <see cref="Vector{T}"/> traits 128 - AdvSimd 64bit abstract.
     /// </summary>
-    public abstract class VectorTraits128AdvSimdA64Abstract : VectorTraits128AdvSimdAbstract {
+    public abstract class VectorTraits128AdvSimdB64Abstract : VectorTraits128AdvSimdAbstract {
 
         /// <inheritdoc cref="IBaseTraits.IsSupported"/>
         public override bool IsSupported {

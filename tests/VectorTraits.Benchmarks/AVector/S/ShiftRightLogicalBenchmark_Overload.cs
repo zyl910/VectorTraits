@@ -228,9 +228,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             return rt;
         }
 
-        // StaticSumSRLTraitsOverload - VectorTraits128AdvSimdA64
+        // StaticSumSRLTraitsOverload - VectorTraits128AdvSimdB64
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe Byte StaticSumSRLTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, Byte[] src, int srcCount, int shiftAmount) {
+        private static unsafe Byte StaticSumSRLTraitsOverload(VectorTraits128AdvSimdB64 vectorTraits, Byte[] src, int srcCount, int shiftAmount) {
             Byte rt = 0; // Result.
             int VectorWidth = Vector<Byte>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -260,9 +260,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             return rt;
         }
 
-        // StaticSumSRLFastTraitsOverload - VectorTraits128AdvSimdA64
+        // StaticSumSRLFastTraitsOverload - VectorTraits128AdvSimdB64
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe Byte StaticSumSRLFastTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, Byte[] src, int srcCount, int shiftAmount) {
+        private static unsafe Byte StaticSumSRLFastTraitsOverload(VectorTraits128AdvSimdB64 vectorTraits, Byte[] src, int srcCount, int shiftAmount) {
             Byte rt = 0; // Result.
             int VectorWidth = Vector<Byte>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -665,9 +665,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             return rt;
         }
 
-        // StaticSumSRLTraitsOverload - VectorTraits128AdvSimdA64
+        // StaticSumSRLTraitsOverload - VectorTraits128AdvSimdB64
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe UInt16 StaticSumSRLTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, UInt16[] src, int srcCount, int shiftAmount) {
+        private static unsafe UInt16 StaticSumSRLTraitsOverload(VectorTraits128AdvSimdB64 vectorTraits, UInt16[] src, int srcCount, int shiftAmount) {
             UInt16 rt = 0; // Result.
             int VectorWidth = Vector<UInt16>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -697,9 +697,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             return rt;
         }
 
-        // StaticSumSRLFastTraitsOverload - VectorTraits128AdvSimdA64
+        // StaticSumSRLFastTraitsOverload - VectorTraits128AdvSimdB64
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe UInt16 StaticSumSRLFastTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, UInt16[] src, int srcCount, int shiftAmount) {
+        private static unsafe UInt16 StaticSumSRLFastTraitsOverload(VectorTraits128AdvSimdB64 vectorTraits, UInt16[] src, int srcCount, int shiftAmount) {
             UInt16 rt = 0; // Result.
             int VectorWidth = Vector<UInt16>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -1102,9 +1102,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             return rt;
         }
 
-        // StaticSumSRLTraitsOverload - VectorTraits128AdvSimdA64
+        // StaticSumSRLTraitsOverload - VectorTraits128AdvSimdB64
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe UInt32 StaticSumSRLTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
+        private static unsafe UInt32 StaticSumSRLTraitsOverload(VectorTraits128AdvSimdB64 vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
             UInt32 rt = 0; // Result.
             int VectorWidth = Vector<UInt32>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -1134,9 +1134,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             return rt;
         }
 
-        // StaticSumSRLFastTraitsOverload - VectorTraits128AdvSimdA64
+        // StaticSumSRLFastTraitsOverload - VectorTraits128AdvSimdB64
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe UInt32 StaticSumSRLFastTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
+        private static unsafe UInt32 StaticSumSRLFastTraitsOverload(VectorTraits128AdvSimdB64 vectorTraits, UInt32[] src, int srcCount, int shiftAmount) {
             UInt32 rt = 0; // Result.
             int VectorWidth = Vector<UInt32>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -1539,9 +1539,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             return rt;
         }
 
-        // StaticSumSRLTraitsOverload - VectorTraits128AdvSimdA64
+        // StaticSumSRLTraitsOverload - VectorTraits128AdvSimdB64
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe UInt64 StaticSumSRLTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
+        private static unsafe UInt64 StaticSumSRLTraitsOverload(VectorTraits128AdvSimdB64 vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
             UInt64 rt = 0; // Result.
             int VectorWidth = Vector<UInt64>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -1571,9 +1571,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             return rt;
         }
 
-        // StaticSumSRLFastTraitsOverload - VectorTraits128AdvSimdA64
+        // StaticSumSRLFastTraitsOverload - VectorTraits128AdvSimdB64
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe UInt64 StaticSumSRLFastTraitsOverload(VectorTraits128AdvSimdA64 vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
+        private static unsafe UInt64 StaticSumSRLFastTraitsOverload(VectorTraits128AdvSimdB64 vectorTraits, UInt64[] src, int srcCount, int shiftAmount) {
             UInt64 rt = 0; // Result.
             int VectorWidth = Vector<UInt64>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.

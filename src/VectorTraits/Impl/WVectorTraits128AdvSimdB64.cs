@@ -1,33 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Numerics;
-using System.Runtime.CompilerServices;
+using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
-using System.Text;
+#if NET5_0_OR_GREATER
+using System.Runtime.Intrinsics.Arm;
+#endif // NET5_0_OR_GREATER
 
 namespace Zyl.VectorTraits.Impl {
-    using WStatics = WVectorTraits128AdvSimdA64.Statics;
-
     /// <summary>
-    /// <see cref="Vector{T}"/> traits 128 - AdvSimd architecture-64bit .
+    /// <see cref="Vector128{T}"/> traits - AdvSimd 64bit .
     /// </summary>
-    public sealed class VectorTraits128AdvSimdA64 : VectorTraits128AdvSimdA64Abstract {
-        private static readonly VectorTraits128AdvSimdA64 _instance = new VectorTraits128AdvSimdA64(); // Default instance.
+    public sealed class WVectorTraits128AdvSimdB64 : WVectorTraits128AdvSimdB64Abstract {
+        private static readonly WVectorTraits128AdvSimdB64 _instance = new WVectorTraits128AdvSimdB64(); // Default instance.
 
         /// <summary>Default instance. </summary>
-        public static VectorTraits128AdvSimdA64 Instance {
+        public static WVectorTraits128AdvSimdB64 Instance {
             get { return _instance; }
         }
 
-#if NET5_0_OR_GREATER
+#if NETCOREAPP3_0_OR_GREATER
 
 
-#endif // NET5_0_OR_GREATER
+#endif // NETCOREAPP3_0_OR_GREATER
 
         /// <summary>
-        /// <see cref="Vector128{T}"/> traits.Statics - AdvSimd architecture-64bit .
+        /// <see cref="Vector128{T}"/> traits.Statics - AdvSimd architecture-64bit.
         /// </summary>
         public static class Statics {
 
@@ -45,14 +44,29 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IBaseTraits.GetIsSupported"/>
             public static bool GetIsSupported(bool noStrict = false) {
-                bool rt = (Vector<byte>.Count == ByteCountValue) && WStatics.GetIsSupported(noStrict);
+                bool rt = false;
+#if NET5_0_OR_GREATER
+                rt = AdvSimd.IsSupported;
+#else
+#endif // NET5_0_OR_GREATER
+                if (!noStrict) {
+                    rt = rt && (sizeof(long) == IntPtr.Size);
+                }
                 return rt;
             }
 
             /// <inheritdoc cref="IBaseTraits.GetUnsupportedMessage"/>
             public static string GetUnsupportedMessage(bool noStrict = false) {
-                string rt = WStatics.GetUnsupportedMessage(noStrict);
-                VectorTraits128Abstract.GetUnsupportedMessage_VectorCount(ref rt);
+                string rt = "Requires hardware support AdvSimd!";
+#if NETCOREAPP3_0_OR_GREATER
+#else
+                rt = "Vector128 type is not supported! " + rt;
+#endif // NETCOREAPP3_0_OR_GREATER
+                if (!noStrict) {
+                    if (!(sizeof(long) == IntPtr.Size)) {
+                        rt += string.Format("This process({0}bit) is not 64-bit!", IntPtr.Size * 8);
+                    }
+                }
                 return rt;
             }
 
@@ -63,6 +77,7 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 #if NET5_0_OR_GREATER
+
 
 
 #endif // NET5_0_OR_GREATER

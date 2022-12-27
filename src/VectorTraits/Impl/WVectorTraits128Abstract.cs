@@ -20,7 +20,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>Returns best instance.</returns>
         [CLSCompliant(false)]
         public static IWVectorTraits128 GetBestInstance() {
-            if (WVectorTraits128AdvSimdA64.Instance.IsSupported) return WVectorTraits128AdvSimdA64.Instance;
+            if (WVectorTraits128AdvSimdB64.Instance.IsSupported) return WVectorTraits128AdvSimdB64.Instance;
             if (WVectorTraits128AdvSimd.Instance.IsSupported) return WVectorTraits128AdvSimd.Instance;
             return WVectorTraits128Base.Instance;
         }
