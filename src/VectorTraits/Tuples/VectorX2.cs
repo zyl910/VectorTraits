@@ -10,6 +10,7 @@ namespace Zyl.VectorTraits.Tuples {
     /// <summary>
     /// Represents a <see cref="Vector"/> tuple with 2 components (表示具有2个组件的向量元组).
     /// </summary>
+    /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
 #if NET20_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
     [Serializable]
 #endif
@@ -26,66 +27,67 @@ namespace Zyl.VectorTraits.Tuples {
         /// Create VectorX2 .
         /// </summary>
         /// <param name="val">Source value.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public VectorX2((Vector<T>, Vector<T>) val) {
             Val = val;
         }
 
 #if NET471_OR_GREATER || NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
         /// <inheritdoc/>
-        int ITuple.Length => ((ITuple)Val).Length;
+        readonly int ITuple.Length => ((ITuple)Val).Length;
 
         /// <inheritdoc/>
-        object? ITuple.this[int index] => ((ITuple)Val)[index];
+        readonly object? ITuple.this[int index] => ((ITuple)Val)[index];
 #endif
 
         /// <inheritdoc/>
-        public int CompareTo(VectorX2<T> other) {
+        public readonly int CompareTo(VectorX2<T> other) {
             return Val.CompareTo(other.Val);
         }
 
         /// <inheritdoc/>
-        int IStructuralComparable.CompareTo(object? other, IComparer comparer) {
+        readonly int IStructuralComparable.CompareTo(object? other, IComparer comparer) {
             return ((IStructuralComparable)Val).CompareTo(other, comparer);
         }
 
         /// <inheritdoc/>
-        int IComparable.CompareTo(object? obj) {
+        readonly int IComparable.CompareTo(object? obj) {
             return ((IComparable)Val).CompareTo(obj);
         }
 
         /// <inheritdoc/>
-        public override bool Equals(object? obj) {
+        public override readonly bool Equals(object? obj) {
             return obj is VectorX2<T> x &&
                    Val.Equals(x.Val);
         }
 
         /// <inheritdoc/>
-        public bool Equals(VectorX2<T> other) {
+        public readonly bool Equals(VectorX2<T> other) {
             return Val.Equals(other.Val);
         }
 
         /// <inheritdoc/>
-        bool IStructuralEquatable.Equals(object? other, IEqualityComparer comparer) {
+        readonly bool IStructuralEquatable.Equals(object? other, IEqualityComparer comparer) {
             return ((IStructuralEquatable)Val).Equals(other, comparer);
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode() {
+        public override readonly int GetHashCode() {
             return Val.GetHashCode();
         }
 
         /// <inheritdoc/>
-        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer) {
+        readonly int IStructuralEquatable.GetHashCode(IEqualityComparer comparer) {
             return ((IStructuralEquatable)Val).GetHashCode(comparer);
         }
 
         /// <inheritdoc/>
-        public override string? ToString() {
+        public override readonly string? ToString() {
             return Val.ToString();
         }
 
         /// <inheritdoc/>
-        public string ToString(string? format, IFormatProvider? formatProvider) {
+        public readonly string ToString(string? format, IFormatProvider? formatProvider) {
             string rt = Val.Item1.ToString(format, formatProvider)
                 + ", " + Val.Item2.ToString(format, formatProvider)
             ;

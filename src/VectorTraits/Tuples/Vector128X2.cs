@@ -11,6 +11,7 @@ namespace Zyl.Vector128Traits.Tuples {
     /// <summary>
     /// Represents a <see cref="Vector128"/> tuple with 2 components (表示具有2个组件的向量128元组).
     /// </summary>
+    /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
 #if NETCOREAPP3_0_OR_GREATER
 #else
     [Obsolete("Need .NET Core 3.0+ / .NET 5.0+")]
@@ -35,6 +36,7 @@ namespace Zyl.Vector128Traits.Tuples {
         /// Create Vector128X2 .
         /// </summary>
         /// <param name="val">Source value.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector128X2((Vector128<T>, Vector128<T>) val) {
             Val = val;
         }
@@ -44,61 +46,61 @@ namespace Zyl.Vector128Traits.Tuples {
 
 #if NET471_OR_GREATER || NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
         /// <inheritdoc/>
-        int ITuple.Length => ((ITuple)Val).Length;
+        readonly int ITuple.Length => ((ITuple)Val).Length;
 
         /// <inheritdoc/>
-        object? ITuple.this[int index] => ((ITuple)Val)[index];
+        readonly object? ITuple.this[int index] => ((ITuple)Val)[index];
 #endif
 
         /// <inheritdoc/>
-        public int CompareTo(Vector128X2<T> other) {
+        public readonly int CompareTo(Vector128X2<T> other) {
             return Val.CompareTo(other.Val);
         }
 
         /// <inheritdoc/>
-        int IStructuralComparable.CompareTo(object? other, IComparer comparer) {
+        readonly int IStructuralComparable.CompareTo(object? other, IComparer comparer) {
             return ((IStructuralComparable)Val).CompareTo(other, comparer);
         }
 
         /// <inheritdoc/>
-        int IComparable.CompareTo(object? obj) {
+        readonly int IComparable.CompareTo(object? obj) {
             return ((IComparable)Val).CompareTo(obj);
         }
 
         /// <inheritdoc/>
-        public override bool Equals(object? obj) {
+        public override readonly bool Equals(object? obj) {
             return obj is Vector128X2<T> x &&
                    Val.Equals(x.Val);
         }
 
         /// <inheritdoc/>
-        public bool Equals(Vector128X2<T> other) {
+        public readonly bool Equals(Vector128X2<T> other) {
             return Val.Equals(other.Val);
         }
 
         /// <inheritdoc/>
-        bool IStructuralEquatable.Equals(object? other, IEqualityComparer comparer) {
+        readonly bool IStructuralEquatable.Equals(object? other, IEqualityComparer comparer) {
             return ((IStructuralEquatable)Val).Equals(other, comparer);
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode() {
+        public override readonly int GetHashCode() {
             return Val.GetHashCode();
         }
 
         /// <inheritdoc/>
-        int IStructuralEquatable.GetHashCode(IEqualityComparer comparer) {
+        readonly int IStructuralEquatable.GetHashCode(IEqualityComparer comparer) {
             return ((IStructuralEquatable)Val).GetHashCode(comparer);
         }
 
         /// <inheritdoc/>
-        public override string? ToString() {
+        public override readonly string? ToString() {
             return Val.ToString();
         }
 
 #if NETX_0_OR_GREATER
         /// <inheritdoc/>
-        public string ToString(string? format, IFormatProvider? formatProvider) {
+        public readonly string ToString(string? format, IFormatProvider? formatProvider) {
             string rt = Val.Item1.ToString(format, formatProvider)
                 + ", " + Val.Item2.ToString(format, formatProvider)
             ;
