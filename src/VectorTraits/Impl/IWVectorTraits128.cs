@@ -160,19 +160,13 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<ulong> ShiftLeft(Vector128<ulong> value, int shiftAmount);
 
         /// <summary>
-        /// Types with hardware acceleration when running <c>ShiftLeftFast</c> (运行 <c>ShiftLeftFast</c> 时具有硬件加速的类型).
-        /// </summary>
-        /// <seealso cref="ShiftLeftFast"/>
-        TypeCodeFlags ShiftLeftFast_AcceleratedTypes { get; }
-
-        /// <summary>
         /// Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
         /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftLeftFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{sbyte}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector128{sbyte}, int)"/> // Since: VectorTraits 1.0
         Vector128<sbyte> ShiftLeftFast(Vector128<sbyte> value, int shiftAmount);
@@ -184,7 +178,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftLeftFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{byte}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector128{byte}, int)"/> // Since: VectorTraits 1.0
         Vector128<byte> ShiftLeftFast(Vector128<byte> value, int shiftAmount);
@@ -196,7 +190,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftLeftFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{short}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector128{short}, int)"/> // Since: VectorTraits 1.0
         Vector128<short> ShiftLeftFast(Vector128<short> value, int shiftAmount);
@@ -208,7 +202,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftLeftFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{ushort}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector128{ushort}, int)"/> // Since: VectorTraits 1.0
         Vector128<ushort> ShiftLeftFast(Vector128<ushort> value, int shiftAmount);
@@ -220,7 +214,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftLeftFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{int}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector128{int}, int)"/> // Since: VectorTraits 1.0
         Vector128<int> ShiftLeftFast(Vector128<int> value, int shiftAmount);
@@ -232,7 +226,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftLeftFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{uint}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector128{uint}, int)"/> // Since: VectorTraits 1.0
         Vector128<uint> ShiftLeftFast(Vector128<uint> value, int shiftAmount);
@@ -244,7 +238,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftLeftFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{long}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector128{long}, int)"/> // Since: VectorTraits 1.0
         Vector128<long> ShiftLeftFast(Vector128<long> value, int shiftAmount);
@@ -256,7 +250,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftLeftFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{ulong}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector128{ulong}, int)"/> // Since: VectorTraits 1.0
         Vector128<ulong> ShiftLeftFast(Vector128<ulong> value, int shiftAmount);
@@ -317,19 +311,13 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<long> ShiftRightArithmetic(Vector128<long> value, int shiftAmount);
 
         /// <summary>
-        /// Types with hardware acceleration when running <c>ShiftRightArithmeticFast</c> (运行 <c>ShiftRightArithmeticFast</c> 时具有硬件加速的类型).
-        /// </summary>
-        /// <seealso cref="ShiftRightArithmeticFast"/>
-        TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes { get; }
-
-        /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted right by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftRightArithmeticFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{sbyte}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightArithmetic(Vector128{sbyte}, int)"/> // Since: VectorTraits 1.0
         Vector128<sbyte> ShiftRightArithmeticFast(Vector128<sbyte> value, int shiftAmount);
@@ -341,7 +329,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted right by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftRightArithmeticFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{short}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightArithmetic(Vector128{short}, int)"/> // Since: VectorTraits 1.0
         Vector128<short> ShiftRightArithmeticFast(Vector128<short> value, int shiftAmount);
@@ -353,7 +341,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted right by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftRightArithmeticFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{int}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightArithmetic(Vector128{int}, int)"/> // Since: VectorTraits 1.0
         Vector128<int> ShiftRightArithmeticFast(Vector128<int> value, int shiftAmount);
@@ -365,7 +353,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted right by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftRightArithmeticFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{long}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightArithmetic(Vector128{long}, int)"/> // Since: VectorTraits 1.0
         Vector128<long> ShiftRightArithmeticFast(Vector128<long> value, int shiftAmount);
@@ -474,19 +462,13 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<ulong> ShiftRightLogical(Vector128<ulong> value, int shiftAmount);
 
         /// <summary>
-        /// Types with hardware acceleration when running <c>ShiftRightLogicalFast</c> (运行 <c>ShiftRightLogicalFast</c> 时具有硬件加速的类型).
-        /// </summary>
-        /// <seealso cref="ShiftRightLogicalFast"/>
-        TypeCodeFlags ShiftRightLogicalFast_AcceleratedTypes { get; }
-
-        /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{sbyte}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector128{sbyte}, int)"/> // Since: VectorTraits 1.0
         Vector128<sbyte> ShiftRightLogicalFast(Vector128<sbyte> value, int shiftAmount);
@@ -498,7 +480,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{byte}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector128{byte}, int)"/> // Since: VectorTraits 1.0
         Vector128<byte> ShiftRightLogicalFast(Vector128<byte> value, int shiftAmount);
@@ -510,7 +492,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{short}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector128{short}, int)"/> // Since: VectorTraits 1.0
         Vector128<short> ShiftRightLogicalFast(Vector128<short> value, int shiftAmount);
@@ -522,7 +504,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{ushort}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector128{ushort}, int)"/> // Since: VectorTraits 1.0
         Vector128<ushort> ShiftRightLogicalFast(Vector128<ushort> value, int shiftAmount);
@@ -534,7 +516,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{int}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector128{int}, int)"/> // Since: VectorTraits 1.0
         Vector128<int> ShiftRightLogicalFast(Vector128<int> value, int shiftAmount);
@@ -546,7 +528,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{uint}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector128{uint}, int)"/> // Since: VectorTraits 1.0
         Vector128<uint> ShiftRightLogicalFast(Vector128<uint> value, int shiftAmount);
@@ -558,7 +540,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{long}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector128{long}, int)"/> // Since: VectorTraits 1.0
         Vector128<long> ShiftRightLogicalFast(Vector128<long> value, int shiftAmount);
@@ -570,7 +552,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
-        /// <seealso cref="ShiftRightLogicalFast_AcceleratedTypes"/>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{ulong}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector128{ulong}, int)"/> // Since: VectorTraits 1.0
         Vector128<ulong> ShiftRightLogicalFast(Vector128<ulong> value, int shiftAmount);

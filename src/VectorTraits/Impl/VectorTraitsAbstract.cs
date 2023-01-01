@@ -136,13 +136,6 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.ShiftLeft(value, shiftAmount);
         }
 
-        /// <inheritdoc cref="IVectorTraits.ShiftLeftFast_AcceleratedTypes"/>
-        public virtual TypeCodeFlags ShiftLeftFast_AcceleratedTypes {
-            get {
-                return Statics.ShiftLeftFast_AcceleratedTypes;
-            }
-        }
-
         /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -228,13 +221,6 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.ShiftRightArithmetic(value, shiftAmount);
         }
 
-        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast_AcceleratedTypes"/>
-        public virtual TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes {
-            get {
-                return Statics.ShiftRightArithmeticFast_AcceleratedTypes;
-            }
-        }
-
         /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -318,13 +304,6 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector<ulong> ShiftRightLogical(Vector<ulong> value, int shiftAmount) {
             return Statics.ShiftRightLogical(value, shiftAmount);
-        }
-
-        /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast_AcceleratedTypes"/>
-        public virtual TypeCodeFlags ShiftRightLogicalFast_AcceleratedTypes {
-            get {
-                return Statics.ShiftRightLogicalFast_AcceleratedTypes;
-            }
         }
 
         /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{sbyte}, int)"/>

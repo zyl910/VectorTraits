@@ -149,7 +149,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {
-                    return ShiftLeftFast_AcceleratedTypes;
+                    return TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
                 }
             }
 
@@ -213,13 +213,6 @@ namespace Zyl.VectorTraits.Impl {
                 return ShiftLeftFast(value, shiftAmount);
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast_AcceleratedTypes"/>
-            public static TypeCodeFlags ShiftLeftFast_AcceleratedTypes {
-                get {
-                    return TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-                }
-            }
-
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -276,7 +269,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes {
                 get {
-                    return ShiftRightArithmeticFast_AcceleratedTypes;
+                    return TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
                 }
             }
 
@@ -325,13 +318,6 @@ namespace Zyl.VectorTraits.Impl {
                 return ShiftRightArithmeticFast(value, shiftAmount);
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast_AcceleratedTypes"/>
-            public static TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes {
-                get {
-                    return TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
-                }
-            }
-
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -365,7 +351,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftRightLogical_AcceleratedTypes {
                 get {
-                    return ShiftRightLogicalFast_AcceleratedTypes;
+                    return TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
                 }
             }
 
@@ -459,13 +445,6 @@ namespace Zyl.VectorTraits.Impl {
                     return value;
                 }
                 return ShiftRightLogicalFast(value, shiftAmount);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast_AcceleratedTypes"/>
-            public static TypeCodeFlags ShiftRightLogicalFast_AcceleratedTypes {
-                get {
-                    return TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{sbyte}, int)"/>

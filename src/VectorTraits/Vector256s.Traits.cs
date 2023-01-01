@@ -252,19 +252,6 @@ namespace Zyl.VectorTraits {
 #endif
         }
 
-        /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast_AcceleratedTypes"/>
-        public static TypeCodeFlags ShiftLeftFast_AcceleratedTypes {
-            get {
-                TypeCodeFlags rt = _instance.ShiftLeftFast_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                if (Vector256.IsHardwareAccelerated) {
-                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-                }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
-            }
-        }
-
         /// <inheritdoc cref="IWVectorTraits256.ShiftLeftFast(Vector256{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -404,19 +391,6 @@ namespace Zyl.VectorTraits {
 #endif
         }
 
-        /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast_AcceleratedTypes"/>
-        public static TypeCodeFlags ShiftRightArithmeticFast_AcceleratedTypes {
-            get {
-                TypeCodeFlags rt = _instance.ShiftRightArithmeticFast_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                if (Vector256.IsHardwareAccelerated) {
-                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
-                }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
-            }
-        }
-
         /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmeticFast(Vector256{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -554,19 +528,6 @@ namespace Zyl.VectorTraits {
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
 #endif
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast_AcceleratedTypes"/>
-        public static TypeCodeFlags ShiftRightLogicalFast_AcceleratedTypes {
-            get {
-                TypeCodeFlags rt = _instance.ShiftRightLogicalFast_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                if (Vector256.IsHardwareAccelerated) {
-                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-                }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
-            }
         }
 
         /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogicalFast(Vector256{sbyte}, int)"/>

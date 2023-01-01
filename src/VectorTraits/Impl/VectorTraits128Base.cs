@@ -63,7 +63,16 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {
-                    return ShiftLeftFast_AcceleratedTypes;
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+                    if (Vector.IsHardwareAccelerated) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                        rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if SOFTWARE_OPTIMIZATION
+                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+#endif // SOFTWARE_OPTIMIZATION
+                    }
+                    return rt;
                 }
             }
 
@@ -165,22 +174,6 @@ namespace Zyl.VectorTraits.Impl {
 #else
                 return ShiftLeft_Base(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
-            }
-
-            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast_AcceleratedTypes"/>
-            public static TypeCodeFlags ShiftLeftFast_AcceleratedTypes {
-                get {
-                    TypeCodeFlags rt = TypeCodeFlags.None;
-                    if (Vector.IsHardwareAccelerated) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                        rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-#if SOFTWARE_OPTIMIZATION
-                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
-#endif // SOFTWARE_OPTIMIZATION
-                    }
-                    return rt;
-                }
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{sbyte}, int)"/>
@@ -467,7 +460,16 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftRightLogical_AcceleratedTypes {
                 get {
-                    return ShiftRightLogicalFast_AcceleratedTypes;
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+                    if (Vector.IsHardwareAccelerated) {
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+                        rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+#endif // BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+#if SOFTWARE_OPTIMIZATION && NET7_0_OR_GREATER
+                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte; // ShiftRightLogicalFast_Widen
+#endif // SOFTWARE_OPTIMIZATION
+                    }
+                    return rt;
                 }
             }
 
@@ -688,22 +690,6 @@ namespace Zyl.VectorTraits.Impl {
             public static Vector<uint> ShiftRightLogical_Widen(Vector<uint> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
                 return ShiftRightLogicalFast_Widen(value, shiftAmount);
-            }
-
-            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast_AcceleratedTypes"/>
-            public static TypeCodeFlags ShiftRightLogicalFast_AcceleratedTypes {
-                get {
-                    TypeCodeFlags rt = TypeCodeFlags.None;
-                    if (Vector.IsHardwareAccelerated) {
-#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
-                        rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-#endif // BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
-#if SOFTWARE_OPTIMIZATION && NET7_0_OR_GREATER
-                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte; // ShiftRightLogicalFast_Widen
-#endif // SOFTWARE_OPTIMIZATION
-                    }
-                    return rt;
-                }
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{sbyte}, int)"/>

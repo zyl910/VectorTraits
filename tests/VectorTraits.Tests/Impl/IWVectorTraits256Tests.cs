@@ -122,7 +122,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
                 if (instance.IsSupported) {
-                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftLeftFast_AcceleratedTypes}");
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftLeft_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
@@ -190,7 +190,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
                 if (instance.IsSupported) {
-                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightArithmeticFast_AcceleratedTypes}");
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightArithmetic_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
@@ -275,7 +275,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
                 if (instance.IsSupported) {
-                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightLogicalFast_AcceleratedTypes}");
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightLogical_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }

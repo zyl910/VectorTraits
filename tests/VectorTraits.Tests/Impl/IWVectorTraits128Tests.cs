@@ -191,7 +191,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
                 if (instance.IsSupported) {
-                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightArithmeticFast_AcceleratedTypes}");
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightArithmetic_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
