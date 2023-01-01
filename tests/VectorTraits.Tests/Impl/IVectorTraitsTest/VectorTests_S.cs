@@ -6,10 +6,9 @@ using System.Text;
 using System.Xml.Linq;
 using Zyl.VectorTraits.Impl;
 
-
-namespace Zyl.VectorTraits.Tests.Impl {
+namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
     [TestFixture()]
-    public class IVectorTraitsTests {
+    public class VectorTests_S {
 
         [TestCase((sbyte)3)]
         [TestCase((byte)4)]

@@ -8,9 +8,9 @@ using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
 
-namespace Zyl.VectorTraits.Tests.Impl {
+namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
     [TestFixture()]
-    public class IWVectorTraits256Tests {
+    public class Vector256Tests_S {
 #if NETCOREAPP3_0_OR_GREATER
 
         [TestCase((float)1)]
