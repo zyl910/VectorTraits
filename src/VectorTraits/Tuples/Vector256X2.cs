@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
-#endif // NETCOREAPP3_0_OR_GREATER
-using System.Text;
 
 namespace Zyl.Vector256Traits.Tuples {
     /// <summary>
@@ -138,3 +137,4 @@ namespace Zyl.Vector256Traits.Tuples {
         }
     }
 }
+#endif // NETCOREAPP3_0_OR_GREATER
