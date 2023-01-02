@@ -323,28 +323,28 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmeticFast(Vector128<sbyte> value, int shiftAmount) {
                 Debug.Assert(1 <= shiftAmount && shiftAmount <= 7, "The shiftAmount parameter must be in the range [1,7]."); // AdvSimd throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+                return AdvSimd.ShiftArithmetic(value, Vector128.Create((sbyte)(-shiftAmount)));
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmeticFast(Vector128<short> value, int shiftAmount) {
                 Debug.Assert(1 <= shiftAmount && shiftAmount <= 15, "The shiftAmount parameter must be in the range [1,15]."); // AdvSimd throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+                return AdvSimd.ShiftArithmetic(value, Vector128.Create((short)(-shiftAmount)));
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmeticFast(Vector128<int> value, int shiftAmount) {
                 Debug.Assert(1 <= shiftAmount && shiftAmount <= 31, "The shiftAmount parameter must be in the range [1,31]."); // AdvSimd throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+                return AdvSimd.ShiftArithmetic(value, Vector128.Create((int)(-shiftAmount)));
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightArithmeticFast(Vector128<long> value, int shiftAmount) {
                 Debug.Assert(1 <= shiftAmount && shiftAmount <= 63, "The shiftAmount parameter must be in the range [1,63]."); // AdvSimd throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+                return AdvSimd.ShiftArithmetic(value, Vector128.Create((long)(-shiftAmount)));
             }
 
 
