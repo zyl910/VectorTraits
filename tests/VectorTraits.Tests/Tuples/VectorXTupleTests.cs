@@ -42,8 +42,8 @@ namespace Zyl.VectorTraits.Tests.Tuples {
                 (Vectors<T>.Demo, Vectors.Create<T>(src), Vectors<T>.V3, Vectors<T>.V4, Vectors<T>.V5, Vectors<T>.V6, Vectors<T>.V7, Vectors<T>.V8);
             VectorX8<T> vx = VectorXTuple.Create(tuple);
             Console.WriteLine($"VectorXTuple.Create:\t{vx}");
-            //VectorX8<byte> vxByte = vx.AsByte();
-            //Console.WriteLine($"AsByte:\t{vxByte}");
+            VectorX8<byte> vxByte = vx.AsByte();
+            Console.WriteLine($"AsByte:\t{vxByte}");
         }
 
     }

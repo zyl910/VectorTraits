@@ -106,13 +106,6 @@ Types brief introduction:
       <AssemblyTitle>$(Title)</AssemblyTitle>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
-
     <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
         <PackageReference Include="System.Memory" Version="4.5.5" />
@@ -139,6 +132,37 @@ Types brief introduction:
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
         <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" />
     </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="Tuples\VectorXTuple_Extensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VectorXTuple_Extensions.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Tuples\VectorXTuple_Extensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>VectorXTuple_Extensions.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Tuples\VectorXTuple_Extensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VectorXTuple_Extensions.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
 
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
