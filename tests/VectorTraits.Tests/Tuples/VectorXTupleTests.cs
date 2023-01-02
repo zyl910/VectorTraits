@@ -27,5 +27,25 @@ namespace Zyl.VectorTraits.Tests.Tuples {
             Console.WriteLine($"AsByte:\t{vxByte}");
         }
 
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void AsByteX8Test<T>(T src) where T : struct {
+            // System.ArgumentException : The last element of an eight element ValueTuple must be a ValueTuple.
+            ValueTuple<Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>> tuple = new ValueTuple<Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>>
+                (Vectors<T>.Demo, Vectors.Create<T>(src), Vectors<T>.V3, Vectors<T>.V4, Vectors<T>.V5, Vectors<T>.V6, Vectors<T>.V7, Vectors<T>.V8);
+            VectorX8<T> vx = VectorXTuple.Create(tuple);
+            Console.WriteLine($"VectorXTuple.Create:\t{vx}");
+            //VectorX8<byte> vxByte = vx.AsByte();
+            //Console.WriteLine($"AsByte:\t{vxByte}");
+        }
+
     }
 }
