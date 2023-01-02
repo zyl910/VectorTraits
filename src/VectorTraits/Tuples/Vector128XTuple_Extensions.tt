@@ -1,0 +1,170 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Collections.Generic;
+using System.Numerics;
+using System.Runtime.CompilerServices;
+using System.Text;
+#if NETCOREAPP3_0_OR_GREATER
+using System.Runtime.Intrinsics;
+
+namespace Zyl.VectorTraits.Tuples {
+    partial class Vector128XTuple {
+<#
+    for(int cnt=3; cnt <= 8; ++cnt) {
+#>
+        // == Vector128X<#=cnt#> ==
+
+        /// <summary>Reinterprets a <see cref="Vector128X<#=cnt#>{T}" /> as a new <see cref="VectorX<#=cnt#>{T}" />.</summary>
+        /// <typeparam name="T">The type of the vectors.</typeparam>
+        /// <param name="value">The vector to reinterpret.</param>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see cref="VectorX<#=cnt#>{T}" />.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static VectorX<#=cnt#><T> AsVector<T>(this Vector128X<#=cnt#><T> value) where T : struct {
+            return Unsafe.As<Vector128X<#=cnt#><T>, VectorX<#=cnt#><T>>(ref value);
+        }
+
+        /// <summary>Reinterprets a <see cref="VectorX<#=cnt#>{T}" /> as a new <see cref="Vector128X<#=cnt#>{T}" />.</summary>
+        /// <typeparam name="T">The type of the vectors.</typeparam>
+        /// <param name="value">The vector to reinterpret.</param>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector128X<#=cnt#>{T}" />.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128X<#=cnt#><T> AsVector128<T>(this VectorX<#=cnt#><T> value) where T : struct {
+            return Unsafe.As<VectorX<#=cnt#><T>, Vector128X<#=cnt#><T>>(ref value);
+        }
+
+        /// <summary>Reinterprets a <see cref="Vector128X<#=cnt#>{TFrom}" /> as a new <see cref="Vector128X<#=cnt#>{TTo}" />.</summary>
+        /// <typeparam name="TFrom">The type of the input vector.</typeparam>
+        /// <typeparam name="TTo">The type of the vector <paramref name="vector" /> should be reinterpreted as.</typeparam>
+        /// <param name="src">The source to reinterpret.</param>
+        /// <returns><paramref name="src" /> reinterpreted as a new <see cref="Vector128X<#=cnt#>{TTo}" />.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128X<#=cnt#><TTo> As<TFrom, TTo>(this Vector128X<#=cnt#><TFrom> src)
+            where TFrom : struct
+            where TTo : struct {
+            return Unsafe.As<Vector128X<#=cnt#><TFrom>, Vector128X<#=cnt#><TTo>>(ref src);
+        }
+
+        /// <summary>Reinterprets the bits of a specified vector into those of a vector of unsigned bytes.</summary>
+        /// <param name="value">The source vector.</param>
+        /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
+        /// <returns>The reinterpreted vector.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128X<#=cnt#><byte> AsByte<T>(this Vector128X<#=cnt#><T> value) where T : struct {
+            return value.As<T, byte>();
+        }
+
+        /// <summary>Reinterprets the bits of a specified vector into those of a vector of signed bytes.</summary>
+        /// <param name="value">The source vector.</param>
+        /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
+        /// <returns>The reinterpreted vector.</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128X<#=cnt#><sbyte> AsSByte<T>(this Vector128X<#=cnt#><T> value) where T : struct {
+            return value.As<T, sbyte>();
+        }
+
+        /// <summary>Reinterprets the bits of a specified vector into those of a vector of unsigned 16-bit integers.</summary>
+        /// <param name="value">The source vector.</param>
+        /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
+        /// <returns>The reinterpreted vector.</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128X<#=cnt#><ushort> AsUInt16<T>(this Vector128X<#=cnt#><T> value) where T : struct {
+            return value.As<T, ushort>();
+        }
+
+        /// <summary>Reinterprets the bits of a specified vector into those of a vector of 16-bit integers.</summary>
+        /// <param name="value">The source vector.</param>
+        /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
+        /// <returns>The reinterpreted vector.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128X<#=cnt#><short> AsInt16<T>(this Vector128X<#=cnt#><T> value) where T : struct {
+            return value.As<T, short>();
+        }
+
+        /// <summary>Reinterprets the bits of a specified vector into those of a vector of unsigned integers.</summary>
+        /// <param name="value">The source vector.</param>
+        /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
+        /// <returns>The reinterpreted vector.</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128X<#=cnt#><uint> AsUInt32<T>(this Vector128X<#=cnt#><T> value) where T : struct {
+            return value.As<T, uint>();
+        }
+
+        /// <summary>Reinterprets the bits of a specified vector into those of a vector of integers.</summary>
+        /// <param name="value">The source vector.</param>
+        /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
+        /// <returns>The reinterpreted vector.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128X<#=cnt#><int> AsInt32<T>(this Vector128X<#=cnt#><T> value) where T : struct {
+            return value.As<T, int>();
+        }
+
+        /// <summary>Reinterprets the bits of a specified vector into those of a vector of unsigned long integers.</summary>
+        /// <param name="value">The source vector.</param>
+        /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
+        /// <returns>The reinterpreted vector.</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128X<#=cnt#><ulong> AsUInt64<T>(this Vector128X<#=cnt#><T> value) where T : struct {
+            return value.As<T, ulong>();
+        }
+
+        /// <summary>Reinterprets the bits of a specified vector into those of a vector of long integers.</summary>
+        /// <param name="value">The source vector.</param>
+        /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
+        /// <returns>The reinterpreted vector.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128X<#=cnt#><long> AsInt64<T>(this Vector128X<#=cnt#><T> value) where T : struct {
+            return value.As<T, long>();
+        }
+
+        /// <summary>Reinterprets the bits of a specified vector into those of a single-precision floating-point vector.</summary>
+        /// <param name="value">The source vector.</param>
+        /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
+        /// <returns>The reinterpreted vector.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128X<#=cnt#><float> AsSingle<T>(this Vector128X<#=cnt#><T> value) where T : struct {
+            return value.As<T, float>();
+        }
+
+        /// <summary>Reinterprets the bits of a specified vector into those of a double-precision floating-point vector.</summary>
+        /// <param name="value">The source vector.</param>
+        /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
+        /// <returns>The reinterpreted vector.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128X<#=cnt#><double> AsDouble<T>(this Vector128X<#=cnt#><T> value) where T : struct {
+            return value.As<T, double>();
+        }
+
+        /// <summary>Reinterprets the bits of a specified vector into those of a vector of native integers.</summary>
+        /// <param name="value">The source vector.</param>
+        /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
+        /// <returns>The reinterpreted vector.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128X<#=cnt#><nint> AsNInt<T>(this Vector128X<#=cnt#><T> value) where T : struct {
+            return value.As<T, nint>();
+        }
+
+        /// <summary>Reinterprets the bits of a specified vector into those of a vector of unsigned native integers.</summary>
+        /// <param name="value">The source vector.</param>
+        /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
+        /// <returns>The reinterpreted vector.</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128X<#=cnt#><nuint> AsNUInt<T>(this Vector128X<#=cnt#><T> value) where T : struct {
+            return value.As<T, nuint>();
+        }
+
+<#
+    } // End: for
+#>
+    } // End: class
+} // End: namespace
+#endif // NETCOREAPP3_0_OR_GREATER

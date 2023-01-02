@@ -50,12 +50,12 @@ namespace Zyl.VectorTraits.Tests.Tuples {
                 (Vector128s<T>.Demo, Vector128s.Create<T>(src), Vector128s<T>.V3, Vector128s<T>.V4, Vector128s<T>.V5, Vector128s<T>.V6, Vector128s<T>.V7, Vector128s<T>.V8);
             Vector128X8<T> vx = Vector128XTuple.Create(tuple);
             Console.WriteLine($"Vector128XTuple.Create:\t{vx}");
-            //Vector128X8<byte> vxByte = vx.AsByte();
-            //Console.WriteLine($"AsByte:\t{vxByte}");
-            //if (Vector<T>.Count == Vector128<T>.Count) {
-            //    VectorX8<byte> vScalable = vxByte.AsVector();
-            //    Console.WriteLine($"AsVector:\t{vScalable}");
-            //}
+            Vector128X8<byte> vxByte = vx.AsByte();
+            Console.WriteLine($"AsByte:\t{vxByte}");
+            if (Vector<T>.Count == Vector128<T>.Count) {
+                VectorX8<byte> vScalable = vxByte.AsVector();
+                Console.WriteLine($"AsVector:\t{vScalable}");
+            }
         }
 
 #endif // NETCOREAPP3_0_OR_GREATER
