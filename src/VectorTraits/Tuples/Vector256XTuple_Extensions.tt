@@ -9,24 +9,44 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
+#if NETCOREAPP3_0_OR_GREATER
+using System.Runtime.Intrinsics;
 
 namespace Zyl.VectorTraits.Tuples {
-    partial class VectorXTuple {
+    partial class Vector256XTuple {
 <#
     for(int cnt=3; cnt <= 8; ++cnt) {
 #>
-        // == VectorX<#=cnt#> ==
+        // == Vector256X<#=cnt#> ==
 
-        /// <summary>Reinterprets a <see cref="VectorX<#=cnt#>{TFrom}" /> as a new <see cref="VectorX<#=cnt#>{TTo}" />.</summary>
+        /// <summary>Reinterprets a <see cref="Vector256X<#=cnt#>{T}" /> as a new <see cref="VectorX<#=cnt#>{T}" />.</summary>
+        /// <typeparam name="T">The type of the vectors.</typeparam>
+        /// <param name="value">The vector to reinterpret.</param>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see cref="VectorX<#=cnt#>{T}" />.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static VectorX<#=cnt#><T> AsVector<T>(this Vector256X<#=cnt#><T> value) where T : struct {
+            return Unsafe.As<Vector256X<#=cnt#><T>, VectorX<#=cnt#><T>>(ref value);
+        }
+
+        /// <summary>Reinterprets a <see cref="VectorX<#=cnt#>{T}" /> as a new <see cref="Vector256X<#=cnt#>{T}" />.</summary>
+        /// <typeparam name="T">The type of the vectors.</typeparam>
+        /// <param name="value">The vector to reinterpret.</param>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector256X<#=cnt#>{T}" />.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256X<#=cnt#><T> AsVector256<T>(this VectorX<#=cnt#><T> value) where T : struct {
+            return Unsafe.As<VectorX<#=cnt#><T>, Vector256X<#=cnt#><T>>(ref value);
+        }
+
+        /// <summary>Reinterprets a <see cref="Vector256X<#=cnt#>{TFrom}" /> as a new <see cref="Vector256X<#=cnt#>{TTo}" />.</summary>
         /// <typeparam name="TFrom">The type of the input vector.</typeparam>
         /// <typeparam name="TTo">The type of the vector <paramref name="vector" /> should be reinterpreted as.</typeparam>
         /// <param name="src">The source to reinterpret.</param>
-        /// <returns><paramref name="src" /> reinterpreted as a new <see cref="VectorX<#=cnt#>{TTo}" />.</returns>
+        /// <returns><paramref name="src" /> reinterpreted as a new <see cref="Vector256X<#=cnt#>{TTo}" />.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static VectorX<#=cnt#><TTo> As<TFrom, TTo>(this VectorX<#=cnt#><TFrom> src)
+        public static Vector256X<#=cnt#><TTo> As<TFrom, TTo>(this Vector256X<#=cnt#><TFrom> src)
             where TFrom : struct
             where TTo : struct {
-            return Unsafe.As<VectorX<#=cnt#><TFrom>, VectorX<#=cnt#><TTo>>(ref src);
+            return Unsafe.As<Vector256X<#=cnt#><TFrom>, Vector256X<#=cnt#><TTo>>(ref src);
         }
 
         /// <summary>Reinterprets the bits of a specified vector into those of a vector of unsigned bytes.</summary>
@@ -34,7 +54,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
         /// <returns>The reinterpreted vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static VectorX<#=cnt#><byte> AsByte<T>(this VectorX<#=cnt#><T> value) where T : struct {
+        public static Vector256X<#=cnt#><byte> AsByte<T>(this Vector256X<#=cnt#><T> value) where T : struct {
             return value.As<T, byte>();
         }
 
@@ -44,7 +64,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// <returns>The reinterpreted vector.</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static VectorX<#=cnt#><sbyte> AsSByte<T>(this VectorX<#=cnt#><T> value) where T : struct {
+        public static Vector256X<#=cnt#><sbyte> AsSByte<T>(this Vector256X<#=cnt#><T> value) where T : struct {
             return value.As<T, sbyte>();
         }
 
@@ -54,7 +74,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// <returns>The reinterpreted vector.</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static VectorX<#=cnt#><ushort> AsUInt16<T>(this VectorX<#=cnt#><T> value) where T : struct {
+        public static Vector256X<#=cnt#><ushort> AsUInt16<T>(this Vector256X<#=cnt#><T> value) where T : struct {
             return value.As<T, ushort>();
         }
 
@@ -63,7 +83,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
         /// <returns>The reinterpreted vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static VectorX<#=cnt#><short> AsInt16<T>(this VectorX<#=cnt#><T> value) where T : struct {
+        public static Vector256X<#=cnt#><short> AsInt16<T>(this Vector256X<#=cnt#><T> value) where T : struct {
             return value.As<T, short>();
         }
 
@@ -73,7 +93,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// <returns>The reinterpreted vector.</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static VectorX<#=cnt#><uint> AsUInt3<#=cnt#><T>(this VectorX<#=cnt#><T> value) where T : struct {
+        public static Vector256X<#=cnt#><uint> AsUInt32<T>(this Vector256X<#=cnt#><T> value) where T : struct {
             return value.As<T, uint>();
         }
 
@@ -82,7 +102,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
         /// <returns>The reinterpreted vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static VectorX<#=cnt#><int> AsInt3<#=cnt#><T>(this VectorX<#=cnt#><T> value) where T : struct {
+        public static Vector256X<#=cnt#><int> AsInt32<T>(this Vector256X<#=cnt#><T> value) where T : struct {
             return value.As<T, int>();
         }
 
@@ -92,7 +112,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// <returns>The reinterpreted vector.</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static VectorX<#=cnt#><ulong> AsUInt64<T>(this VectorX<#=cnt#><T> value) where T : struct {
+        public static Vector256X<#=cnt#><ulong> AsUInt64<T>(this Vector256X<#=cnt#><T> value) where T : struct {
             return value.As<T, ulong>();
         }
 
@@ -101,7 +121,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
         /// <returns>The reinterpreted vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static VectorX<#=cnt#><long> AsInt64<T>(this VectorX<#=cnt#><T> value) where T : struct {
+        public static Vector256X<#=cnt#><long> AsInt64<T>(this Vector256X<#=cnt#><T> value) where T : struct {
             return value.As<T, long>();
         }
 
@@ -110,7 +130,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
         /// <returns>The reinterpreted vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static VectorX<#=cnt#><float> AsSingle<T>(this VectorX<#=cnt#><T> value) where T : struct {
+        public static Vector256X<#=cnt#><float> AsSingle<T>(this Vector256X<#=cnt#><T> value) where T : struct {
             return value.As<T, float>();
         }
 
@@ -119,7 +139,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
         /// <returns>The reinterpreted vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static VectorX<#=cnt#><double> AsDouble<T>(this VectorX<#=cnt#><T> value) where T : struct {
+        public static Vector256X<#=cnt#><double> AsDouble<T>(this Vector256X<#=cnt#><T> value) where T : struct {
             return value.As<T, double>();
         }
 
@@ -128,7 +148,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
         /// <returns>The reinterpreted vector.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static VectorX<#=cnt#><nint> AsNInt<T>(this VectorX<#=cnt#><T> value) where T : struct {
+        public static Vector256X<#=cnt#><nint> AsNInt<T>(this Vector256X<#=cnt#><T> value) where T : struct {
             return value.As<T, nint>();
         }
 
@@ -138,7 +158,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// <returns>The reinterpreted vector.</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static VectorX<#=cnt#><nuint> AsNUInt<T>(this VectorX<#=cnt#><T> value) where T : struct {
+        public static Vector256X<#=cnt#><nuint> AsNUInt<T>(this Vector256X<#=cnt#><T> value) where T : struct {
             return value.As<T, nuint>();
         }
 
@@ -147,3 +167,4 @@ namespace Zyl.VectorTraits.Tuples {
 #>
     } // End: class
 } // End: namespace
+#endif // NETCOREAPP3_0_OR_GREATER

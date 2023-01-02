@@ -143,12 +143,21 @@ Types brief introduction:
       <AutoGen>True</AutoGen>
       <DependentUpon>VectorXTuple_Extensions.tt</DependentUpon>
     </None>
+    <None Include="Tuples\Vector256XTuple_Extensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Vector256XTuple_Extensions.tt</DependentUpon>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
     <None Update="Tuples\VectorXTuple_Extensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>VectorXTuple_Extensions.cs</LastGenOutput>
+    </None>
+    <None Update="Tuples\Vector256XTuple_Extensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Vector256XTuple_Extensions.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
@@ -161,6 +170,11 @@ Types brief introduction:
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>VectorXTuple_Extensions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Tuples\Vector256XTuple_Extensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Vector256XTuple_Extensions.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 
