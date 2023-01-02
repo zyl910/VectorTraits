@@ -443,16 +443,327 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_AcceleratedTypes"/>
+            public static TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+                    if (Vector.IsHardwareAccelerated) {
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+                        rt |= TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+#endif // BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+#if SOFTWARE_OPTIMIZATION && NET7_0_OR_GREATER
+                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Int64; // ShiftRightArithmeticFast_Negative.
+#endif // SOFTWARE_OPTIMIZATION
+                    }
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> ShiftRightArithmetic(Vector<sbyte> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
+                return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif SOFTWARE_OPTIMIZATION
+                return ShiftRightArithmetic_Negative(value, shiftAmount);
+#else
+                return ShiftRightArithmetic_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{short}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftRightArithmetic(Vector<short> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
+#elif SOFTWARE_OPTIMIZATION
+                return ShiftRightArithmetic_Negative(value, shiftAmount);
+#else
+                return ShiftRightArithmetic_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftAmount) {
-                Vector<int> rt = value;
+            public static Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
+#elif SOFTWARE_OPTIMIZATION
+                return ShiftRightArithmetic_Negative(value, shiftAmount);
+#else
+                return ShiftRightArithmetic_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftRightArithmetic(Vector<long> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
+                return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif SOFTWARE_OPTIMIZATION && NET7_0_OR_GREATER
+                return ShiftRightArithmetic_Negative(value, shiftAmount);
+#else
+                return ShiftRightArithmetic_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<sbyte> ShiftRightArithmetic_Base(Vector<sbyte> value, int shiftAmount) {
+                shiftAmount &= 7;
+                return ShiftRightArithmeticFast_Base(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{short}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<short> ShiftRightArithmetic_Base(Vector<short> value, int shiftAmount) {
+                shiftAmount &= 0x0F;
+                return ShiftRightArithmeticFast_Base(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<int> ShiftRightArithmetic_Base(Vector<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
+                return ShiftRightArithmeticFast_Base(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{long}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<long> ShiftRightArithmetic_Base(Vector<long> value, int shiftAmount) {
+                shiftAmount &= 0x3F;
+                return ShiftRightArithmeticFast_Base(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> ShiftRightArithmetic_Negative(Vector<sbyte> value, int shiftAmount) {
+                shiftAmount &= 7;
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{short}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftRightArithmetic_Negative(Vector<short> value, int shiftAmount) {
+                shiftAmount &= 0x0F;
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> ShiftRightArithmetic_Negative(Vector<int> value, int shiftAmount) {
+                shiftAmount &= 0x1F;
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{long}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftRightArithmetic_Negative(Vector<long> value, int shiftAmount) {
+                shiftAmount &= 0x3F;
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> ShiftRightArithmeticFast(Vector<sbyte> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
+                return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif SOFTWARE_OPTIMIZATION
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
+#else
+                return ShiftRightArithmeticFast_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{short}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftRightArithmeticFast(Vector<short> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
+#elif SOFTWARE_OPTIMIZATION
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
+#else
+                return ShiftRightArithmeticFast_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{int}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> ShiftRightArithmeticFast(Vector<int> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
+#elif SOFTWARE_OPTIMIZATION
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
+#else
+                return ShiftRightArithmeticFast_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftRightArithmeticFast(Vector<long> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
+                return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif SOFTWARE_OPTIMIZATION && NET7_0_OR_GREATER
+                return ShiftRightArithmeticFast_Negative(value, shiftAmount);
+#else
+                return ShiftRightArithmeticFast_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<sbyte> ShiftRightArithmeticFast_Base(Vector<sbyte> value, int shiftAmount) {
+                Vector<sbyte> rt = value;
+                sbyte* p = (sbyte*)&rt;
+                p[0] >>= shiftAmount;
+                p[1] >>= shiftAmount;
+                p[2] >>= shiftAmount;
+                p[3] >>= shiftAmount;
+                p[4] >>= shiftAmount;
+                p[5] >>= shiftAmount;
+                p[6] >>= shiftAmount;
+                p[7] >>= shiftAmount;
+                p[8] >>= shiftAmount;
+                p[9] >>= shiftAmount;
+                p[10] >>= shiftAmount;
+                p[11] >>= shiftAmount;
+                p[12] >>= shiftAmount;
+                p[13] >>= shiftAmount;
+                p[14] >>= shiftAmount;
+                p[15] >>= shiftAmount;
+                p[16] >>= shiftAmount;
+                p[17] >>= shiftAmount;
+                p[18] >>= shiftAmount;
+                p[19] >>= shiftAmount;
+                p[20] >>= shiftAmount;
+                p[21] >>= shiftAmount;
+                p[22] >>= shiftAmount;
+                p[23] >>= shiftAmount;
+                p[24] >>= shiftAmount;
+                p[25] >>= shiftAmount;
+                p[26] >>= shiftAmount;
+                p[27] >>= shiftAmount;
+                p[28] >>= shiftAmount;
+                p[29] >>= shiftAmount;
+                p[30] >>= shiftAmount;
+                p[31] >>= shiftAmount;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{short}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<short> ShiftRightArithmeticFast_Base(Vector<short> value, int shiftAmount) {
+                Vector<short> rt = value;
+                short* p = (short*)&rt;
+                p[0] >>= shiftAmount;
+                p[1] >>= shiftAmount;
+                p[2] >>= shiftAmount;
+                p[3] >>= shiftAmount;
+                p[4] >>= shiftAmount;
+                p[5] >>= shiftAmount;
+                p[6] >>= shiftAmount;
+                p[7] >>= shiftAmount;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{int}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<int> ShiftRightArithmeticFast_Base(Vector<int> value, int shiftAmount) {
+                Vector<int> rt = value;
                 int* p = (int*)&rt;
                 p[0] >>= shiftAmount;
                 p[1] >>= shiftAmount;
                 p[2] >>= shiftAmount;
                 p[3] >>= shiftAmount;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{long}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<long> ShiftRightArithmeticFast_Base(Vector<long> value, int shiftAmount) {
+                Vector<long> rt = value;
+                long* p = (long*)&rt;
+                p[0] >>= shiftAmount;
+                p[1] >>= shiftAmount;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<sbyte> ShiftRightArithmeticFast_Negative(Vector<sbyte> value, int shiftAmount) {
+#if NET7_0_OR_GREATER
+                Vector<sbyte> shifted = Vector.ShiftRightLogical(value.AsUInt16(), shiftAmount).AsSByte();
+#else
+                Vector<sbyte> shifted = ShiftRightLogicalFast(value.AsUInt64(), shiftAmount).AsSByte();
+#endif // NET7_0_OR_GREATER
+                Vector<sbyte> mask = Vectors<sbyte>.GetMaskBits(8 - shiftAmount);
+                Vector<sbyte> sign = Vector.GreaterThan(Vector<sbyte>.Zero, value);
+                Vector<sbyte> rt = Vector.ConditionalSelect(mask, shifted, sign);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{short}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftRightArithmeticFast_Negative(Vector<short> value, int shiftAmount) {
+#if NET7_0_OR_GREATER
+                Vector<short> shifted = Vector.ShiftRightLogical(value, shiftAmount);
+#else
+                Vector<short> shifted = ShiftRightLogicalFast(value.AsUInt64(), shiftAmount).AsInt16();
+#endif // NET7_0_OR_GREATER
+                Vector<short> mask = Vectors<short>.GetMaskBits(16 - shiftAmount);
+                Vector<short> sign = Vector.GreaterThan(Vector<short>.Zero, value);
+                Vector<short> rt = Vector.ConditionalSelect(mask, shifted, sign);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{int}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> ShiftRightArithmeticFast_Negative(Vector<int> value, int shiftAmount) {
+#if NET7_0_OR_GREATER
+                Vector<int> shifted = Vector.ShiftRightLogical(value, shiftAmount);
+#else
+                Vector<int> shifted = ShiftRightLogicalFast(value.AsUInt64(), shiftAmount).AsInt32();
+#endif // NET7_0_OR_GREATER
+                Vector<int> mask = Vectors<int>.GetMaskBits(32 - shiftAmount);
+                Vector<int> sign = Vector.GreaterThan(Vector<int>.Zero, value);
+                Vector<int> rt = Vector.ConditionalSelect(mask, shifted, sign);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{long}, int)"/>
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftRightArithmeticFast_Negative(Vector<long> value, int shiftAmount) {
+#if NET7_0_OR_GREATER
+                Vector<long> shifted = Vector.ShiftRightLogical(value, shiftAmount);
+#else
+                Vector<long> shifted = ShiftRightLogicalFast(value.AsUInt64(), shiftAmount).AsInt64();
+#endif // NET7_0_OR_GREATER
+                Vector<long> mask = Vectors<long>.GetMaskBits(64 - shiftAmount);
+                Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
+                Vector<long> rt = Vector.ConditionalSelect(mask, shifted, sign);
                 return rt;
             }
 
