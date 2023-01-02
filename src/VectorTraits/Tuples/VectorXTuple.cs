@@ -112,7 +112,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// <returns>A vector tuple with 8 components (具有8个组件的向量元组).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static VectorX8<T> Create<T>(Vector<T> item1, Vector<T> item2, Vector<T> item3, Vector<T> item4, Vector<T> item5, Vector<T> item6, Vector<T> item7, Vector<T> item8) where T : struct {
-            return new VectorX8<T>(new ValueTuple<Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>>(item1, item2, item3, item4, item5, item6, item7, item8));
+            return new VectorX8<T>((item1, item2, item3, item4, item5, item6, item7, item8));
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// <param name="val">The value (值).</param>
         /// <returns>A vector tuple with 8 components (具有8个组件的向量元组).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static VectorX8<T> Create<T>(ValueTuple<Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>> val) where T : struct {
+        public static VectorX8<T> Create<T>((Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>) val) where T : struct {
             return new VectorX8<T>(val);
         }
 

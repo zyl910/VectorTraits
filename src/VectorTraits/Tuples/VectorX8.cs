@@ -21,14 +21,14 @@ namespace Zyl.VectorTraits.Tuples {
 #endif
             where T : struct {
         /// <summary>Value.</summary>
-        public ValueTuple<Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>> Val;
+        public (Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>) Val;
 
         /// <summary>
         /// Create VectorX8 .
         /// </summary>
         /// <param name="val">Source value.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public VectorX8(ValueTuple<Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>> val) {
+        public VectorX8((Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>) val) {
             Val = val;
         }
 
@@ -95,7 +95,7 @@ namespace Zyl.VectorTraits.Tuples {
                 + ", " + Val.Item5.ToString(format, formatProvider)
                 + ", " + Val.Item6.ToString(format, formatProvider)
                 + ", " + Val.Item7.ToString(format, formatProvider)
-                + ", " + Val.Rest.ToString(format, formatProvider)
+                + ", " + Val.Rest.Item1.ToString(format, formatProvider)
             ;
             return "(" + rt + ")";
         }
@@ -105,7 +105,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// </summary>
         /// <param name="src">Source value.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator ValueTuple<Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>>(VectorX8<T> src) {
+        public static implicit operator (Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>)(VectorX8<T> src) {
             return src.Val;
         }
 
@@ -114,7 +114,7 @@ namespace Zyl.VectorTraits.Tuples {
         /// </summary>
         /// <param name="src">Source value.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator VectorX8<T>(ValueTuple<Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>> src) {
+        public static explicit operator VectorX8<T>((Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>, Vector<T>) src) {
             return new VectorX8<T>(src);
         }
 
