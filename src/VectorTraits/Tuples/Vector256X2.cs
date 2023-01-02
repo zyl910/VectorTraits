@@ -7,7 +7,7 @@ using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 
-namespace Zyl.Vector256Traits.Tuples {
+namespace Zyl.VectorTraits.Tuples {
     /// <summary>
     /// Represents a <see cref="Vector256"/> tuple with 2 components (表示具有2个组件的向量256元组).
     /// </summary>
