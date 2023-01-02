@@ -8,6 +8,7 @@
 
 using System;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -23,6 +24,7 @@ namespace Zyl.VectorTraits.Extensions {
         /// <typeparam name="T">The type of the vectors.</typeparam>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector128{T}" />.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> AsVector128<T>(
 #if ALLOW_EXTENSION
             this
@@ -35,6 +37,7 @@ namespace Zyl.VectorTraits.Extensions {
         /// <typeparam name="T">The type of the vectors.</typeparam>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector{T}" />.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> AsVector<T>(
 #if ALLOW_EXTENSION
             this

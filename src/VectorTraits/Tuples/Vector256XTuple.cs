@@ -36,6 +36,24 @@ namespace Zyl.VectorTraits.Tuples {
         }
 
 
+        /// <summary>Reinterprets a <see cref="Vector256X2{T}" /> as a new <see cref="VectorX2{T}" />.</summary>
+        /// <typeparam name="T">The type of the vectors.</typeparam>
+        /// <param name="value">The vector to reinterpret.</param>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see cref="VectorX2{T}" />.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static VectorX2<T> AsVector<T>(this Vector256X2<T> value) where T : struct {
+            return Unsafe.As<Vector256X2<T>, VectorX2<T>>(ref value);
+        }
+
+        /// <summary>Reinterprets a <see cref="VectorX2{T}" /> as a new <see cref="Vector256X2{T}" />.</summary>
+        /// <typeparam name="T">The type of the vectors.</typeparam>
+        /// <param name="value">The vector to reinterpret.</param>
+        /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector256X2{T}" />.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256X2<T> AsVector256<T>(this VectorX2<T> value) where T : struct {
+            return Unsafe.As<VectorX2<T>, Vector256X2<T>>(ref value);
+        }
+
         /// <summary>Reinterprets a <see cref="Vector256X2{TFrom}" /> as a new <see cref="Vector256X2{TTo}" />.</summary>
         /// <typeparam name="TFrom">The type of the input vector.</typeparam>
         /// <typeparam name="TTo">The type of the vector <paramref name="vector" /> should be reinterpreted as.</typeparam>

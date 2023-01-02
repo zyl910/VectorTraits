@@ -29,6 +29,10 @@ namespace Zyl.VectorTraits.Tests.Tuples {
             Console.WriteLine($"Vector256XTuple.Create:\t{vx}");
             Vector256X2<byte> vxByte = vx.AsByte();
             Console.WriteLine($"AsByte:\t{vxByte}");
+            if (Vector<T>.Count == Vector256<T>.Count) {
+                VectorX2<byte> vScalable = vxByte.AsVector();
+                Console.WriteLine($"AsVector:\t{vScalable}");
+            }
         }
 
 #endif // NETCOREAPP3_0_OR_GREATER
