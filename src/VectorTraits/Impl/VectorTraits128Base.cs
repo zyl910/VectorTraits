@@ -646,22 +646,6 @@ namespace Zyl.VectorTraits.Impl {
                 p[13] >>= shiftAmount;
                 p[14] >>= shiftAmount;
                 p[15] >>= shiftAmount;
-                p[16] >>= shiftAmount;
-                p[17] >>= shiftAmount;
-                p[18] >>= shiftAmount;
-                p[19] >>= shiftAmount;
-                p[20] >>= shiftAmount;
-                p[21] >>= shiftAmount;
-                p[22] >>= shiftAmount;
-                p[23] >>= shiftAmount;
-                p[24] >>= shiftAmount;
-                p[25] >>= shiftAmount;
-                p[26] >>= shiftAmount;
-                p[27] >>= shiftAmount;
-                p[28] >>= shiftAmount;
-                p[29] >>= shiftAmount;
-                p[30] >>= shiftAmount;
-                p[31] >>= shiftAmount;
                 return rt;
             }
 
