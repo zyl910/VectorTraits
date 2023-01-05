@@ -28,3 +28,7 @@ VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 ## 特征方法列表
 
 详见: [TraitsMethodList](TraitsMethodList.md)
+
+## 变更日志
+
+详见: [ChangeLog](ChangeLog.md)

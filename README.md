@@ -28,3 +28,7 @@ The Disassembly window in Visual Studio allows you to view the assembly code at 
 ## Traits method list
 
 See: [TraitsMethodList](TraitsMethodList.md)
+
+## ChangeLog
+
+See: [ChangeLog](ChangeLog.md)
