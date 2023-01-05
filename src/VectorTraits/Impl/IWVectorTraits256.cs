@@ -13,6 +13,9 @@ namespace Zyl.VectorTraits.Impl {
     public interface IWVectorTraits256 : IWVectorTraits {
 #if NETCOREAPP3_0_OR_GREATER
 
+        // == .NET style  ==
+        #region .NET_style
+
         /// <summary>
         /// Types with hardware acceleration when running <c>ConditionalSelect</c> (运行 <c>ConditionalSelect</c> 时具有硬件加速的类型).
         /// </summary>
@@ -556,6 +559,16 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ShiftRightLogical(Vector256{ulong}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector256{ulong}, int)"/> // Since: VectorTraits 1.0
         Vector256<ulong> ShiftRightLogicalFast(Vector256<ulong> value, int shiftAmount);
+
+        #endregion // .NET_style
+
+        // == X86 style  ==
+        #region X86_style
+        #endregion // X86_style
+
+        // == mY style  ==
+        #region mY_style
+        #endregion // mY_style
 
 #endif
     }
