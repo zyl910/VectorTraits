@@ -73,6 +73,27 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.Ceiling_AcceleratedTypes"/>
+            public static TypeCodeFlags Ceiling_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Ceiling(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> Ceiling(Vector256<float> value) {
+                return Avx.Ceiling(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Ceiling(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> Ceiling(Vector256<double> value) {
+                return Avx.Ceiling(value);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect_AcceleratedTypes"/>
             public static TypeCodeFlags ConditionalSelect_AcceleratedTypes {
                 get {

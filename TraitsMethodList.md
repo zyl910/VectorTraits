@@ -3,6 +3,8 @@
 ## Vector traits methods (向量特性方法)
 Types: Vector, Vector128, Vector256 .
 
+- `Ceiling`: Computes the ceiling of each element in a vector (计算向量中每个元素的向上舍入).
+  Mnemonic: `r[i] := ceiling(value[i])` .
 - `ShiftLeft`: Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
   Mnemonic: `r[i] := value[i] << shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
 - `ShiftLeftFast`: Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check `shiftAmount`, please use `Scalars.LimitShiftCount` first.
@@ -20,4 +22,4 @@ Types: Vector, Vector128, Vector256 .
 Types: Vector128, Vector256 .
 
 - `ConditionalSelect`: Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
-  Mnemonic: `r[i] = (left[i] & condition[i]) | (right[i] & ~condition[i])`.
+  Mnemonic: `r[i] := (left[i] & condition[i]) | (right[i] & ~condition[i])`.

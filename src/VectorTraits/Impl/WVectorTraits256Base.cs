@@ -69,6 +69,68 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.Ceiling_AcceleratedTypes"/>
+            public static TypeCodeFlags Ceiling_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Ceiling(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> Ceiling(Vector256<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Ceiling(value);
+#else
+                return Ceiling_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Ceiling(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> Ceiling(Vector256<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Ceiling(value);
+#else
+                return Ceiling_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Ceiling(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<float> Ceiling_Base(Vector256<float> value) {
+                Vector256<float> rt = value;
+                float* p = (float*)&rt;
+                p[0] = MathF.Ceiling(p[0]);
+                p[1] = MathF.Ceiling(p[1]);
+                p[2] = MathF.Ceiling(p[2]);
+                p[3] = MathF.Ceiling(p[3]);
+                p[4] = MathF.Ceiling(p[4]);
+                p[5] = MathF.Ceiling(p[5]);
+                p[6] = MathF.Ceiling(p[6]);
+                p[7] = MathF.Ceiling(p[7]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Ceiling(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<double> Ceiling_Base(Vector256<double> value) {
+                Vector256<double> rt = value;
+                double* p = (double*)&rt;
+                p[0] = Math.Ceiling(p[0]);
+                p[1] = Math.Ceiling(p[1]);
+                p[2] = Math.Ceiling(p[2]);
+                p[3] = Math.Ceiling(p[3]);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect_AcceleratedTypes"/>
             public static TypeCodeFlags ConditionalSelect_AcceleratedTypes {
                 get {

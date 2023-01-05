@@ -119,6 +119,40 @@ namespace Zyl.VectorTraits {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits256.Ceiling_AcceleratedTypes"/>
+        public static TypeCodeFlags Ceiling_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.ConditionalSelect_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Ceiling(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> Ceiling(Vector256<float> value) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Ceiling(value);
+#else
+            return _instance.Ceiling(value);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Ceiling(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> Ceiling(Vector256<double> value) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Ceiling(value);
+#else
+            return _instance.Ceiling(value);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect_AcceleratedTypes"/>
         public static TypeCodeFlags ConditionalSelect_AcceleratedTypes {
             get {
@@ -136,7 +170,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> ConditionalSelect<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return Vector256.ConditionalSelect(condition, left, right);
+            return Vector256.ConditionalSelect(condition, left, right);
 #else
             return _instance.ConditionalSelect(condition, left, right);
 #endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER

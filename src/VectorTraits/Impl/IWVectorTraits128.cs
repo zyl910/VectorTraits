@@ -24,7 +24,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
-        /// Mnemonic: <c>r[i] = (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
+        /// Mnemonic: <c>r[i] := (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
@@ -37,7 +37,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
-        /// Mnemonic: <c>r[i] = (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
+        /// Mnemonic: <c>r[i] := (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
@@ -49,7 +49,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
-        /// Mnemonic: <c>r[i] = (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
+        /// Mnemonic: <c>r[i] := (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>

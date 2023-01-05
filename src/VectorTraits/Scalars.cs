@@ -120,6 +120,46 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
+        /// Get a <see cref="double"/> from target type value (从目标类型取得 <see cref="double"/> 类型的值).
+        /// </summary>
+        /// <typeparam name="T">Target type (目标类型).</typeparam>
+        /// <param name="src">Source value (源值).</param>
+        /// <returns>Returns a <see cref="double"/> value (返回 <see cref="double"/> 类型的值).</returns>
+        public static double GetDoubleFrom<T>(T src) where T : struct {
+            if (typeof(T) == typeof(float)) {
+                return (double)(float)(object)src;
+            } else if (typeof(T) == typeof(double)) {
+                return (double)(double)(object)src;
+            } else if (typeof(T) == typeof(sbyte)) {
+                return (double)(sbyte)(object)src;
+            } else if (typeof(T) == typeof(short)) {
+                return (double)(short)(object)src;
+            } else if (typeof(T) == typeof(int)) {
+                return (double)(int)(object)src;
+            } else if (typeof(T) == typeof(long)) {
+                return (double)(long)(object)src;
+            } else if (typeof(T) == typeof(byte)) {
+                return (double)(byte)(object)src;
+            } else if (typeof(T) == typeof(ushort)) {
+                return (double)(ushort)(object)src;
+            } else if (typeof(T) == typeof(uint)) {
+                return (double)(uint)(object)src;
+            } else if (typeof(T) == typeof(ulong)) {
+                return (double)(ulong)(object)src;
+            } else if (typeof(T) == typeof(IntPtr)) {
+                return (double)(IntPtr)(object)src;
+            } else if (typeof(T) == typeof(UIntPtr)) {
+                return (double)(UIntPtr)(object)src;
+#if NET5_0_OR_GREATER
+            } else if (typeof(T) == typeof(Half)) {
+                return (double)(Half)(object)src;
+#endif // NET5_0_OR_GREATER
+            } else {
+                return (double)Convert.ChangeType(src, typeof(double));
+            }
+        }
+
+        /// <summary>
         /// Get a <see cref="long"/> bits from target type value (从目标类型取得 <see cref="long"/> 类型的64位值).
         /// </summary>
         /// <typeparam name="T">Target type (目标类型).</typeparam>

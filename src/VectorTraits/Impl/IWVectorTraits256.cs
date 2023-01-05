@@ -17,6 +17,32 @@ namespace Zyl.VectorTraits.Impl {
         #region .NET_style
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Ceiling</c> (运行 <c>Ceiling</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Ceiling"/>
+        TypeCodeFlags Ceiling_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the ceiling of each element in a vector (计算向量中每个元素的向上舍入).
+        /// Mnemonic: <c>r[i] := ceiling(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its ceiling computed (将计算向上舍入的向量).</param>
+        /// <returns>A vector whose elements are the ceiling of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向上舍入).</returns>
+        /// <seealso cref="Ceiling_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Ceiling(Vector256{float})" />
+        Vector256<float> Ceiling(Vector256<float> value);
+
+        /// <summary>
+        /// Computes the ceiling of each element in a vector (计算向量中每个元素的向上舍入).
+        /// Mnemonic: <c>r[i] := ceiling(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its ceiling computed (将计算向上舍入的向量).</param>
+        /// <returns>A vector whose elements are the ceiling of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向上舍入).</returns>
+        /// <seealso cref="Ceiling_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Ceiling(Vector256{double})" />
+        Vector256<double> Ceiling(Vector256<double> value);
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>ConditionalSelect</c> (运行 <c>ConditionalSelect</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="ConditionalSelect"/>
@@ -24,7 +50,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
-        /// Mnemonic: <c>r[i] = (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
+        /// Mnemonic: <c>r[i] := (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
@@ -37,7 +63,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
-        /// Mnemonic: <c>r[i] = (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
+        /// Mnemonic: <c>r[i] := (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
@@ -49,7 +75,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
-        /// Mnemonic: <c>r[i] = (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
+        /// Mnemonic: <c>r[i] := (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>

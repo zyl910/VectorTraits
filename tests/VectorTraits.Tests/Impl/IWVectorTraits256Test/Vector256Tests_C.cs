@@ -15,6 +15,34 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
+        public void CeilingTest<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.IsSupported) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.Ceiling_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            Vector256<T>[] samples = {
+                Vector256s<T>.Demo,
+                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) + 0.4, 0.1)
+            };
+            foreach (Vector256<T> value in samples) {
+                Console.WriteLine($"Samples: {value}\t// {VectorTextUtil.GetHex(value)}");
+                Vector256<T> expected = Vector256s.Ceiling((dynamic)value);
+                Console.WriteLine($"Vector256s.Ceiling: {expected}\t// {VectorTextUtil.GetHex(expected)}");
+                foreach (IWVectorTraits256 instance in instances) {
+                    if (!instance.IsSupported) continue;
+                    Vector256<T> dst = instance.Ceiling((dynamic)value);
+                    Console.WriteLine($"{instance.GetType().Name}: {dst}\t// {VectorTextUtil.GetHex(dst)}");
+                }
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
         [TestCase((sbyte)3)]
         [TestCase((byte)4)]
         [TestCase((short)5)]
