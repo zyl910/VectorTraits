@@ -27,16 +27,16 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             // run.
             Vector128<T>[] samples = {
                 Vector128s<T>.Demo,
-                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) + 0.4, 0.2)
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) + 0.4, 0.3)
             };
             foreach (Vector128<T> value in samples) {
-                Console.WriteLine($"Samples: {value}\t// {VectorTextUtil.GetHex(value)}");
+                Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
                 Vector128<T> expected = Vector128s.Ceiling((dynamic)value);
-                Console.WriteLine($"Vector128s.Ceiling: {expected}\t// {VectorTextUtil.GetHex(expected)}");
+                Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
                 foreach (IWVectorTraits128 instance in instances) {
                     if (!instance.IsSupported) continue;
                     Vector128<T> dst = instance.Ceiling((dynamic)value);
-                    Console.WriteLine($"{instance.GetType().Name}: {dst}\t// {VectorTextUtil.GetHex(dst)}");
+                    Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                 }
             }
         }

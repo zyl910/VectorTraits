@@ -27,16 +27,16 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             // run.
             Vector256<T>[] samples = {
                 Vector256s<T>.Demo,
-                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) + 0.4, 0.2)
+                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) + 0.4, 0.3)
             };
             foreach (Vector256<T> value in samples) {
-                Console.WriteLine($"Samples: {value}\t// {VectorTextUtil.GetHex(value)}");
+                Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
                 Vector256<T> expected = Vector256s.Ceiling((dynamic)value);
-                Console.WriteLine($"Vector256s.Ceiling: {expected}\t// {VectorTextUtil.GetHex(expected)}");
+                Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
                 foreach (IWVectorTraits256 instance in instances) {
                     if (!instance.IsSupported) continue;
                     Vector256<T> dst = instance.Ceiling((dynamic)value);
-                    Console.WriteLine($"{instance.GetType().Name}: {dst}\t// {VectorTextUtil.GetHex(dst)}");
+                    Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                 }
             }
         }
