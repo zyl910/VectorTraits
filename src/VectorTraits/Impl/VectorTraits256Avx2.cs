@@ -65,6 +65,26 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IVectorTraits.Ceiling_AcceleratedTypes"/>
+            public static TypeCodeFlags Ceiling_AcceleratedTypes {
+                get {
+                    return WStatics.Ceiling_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Ceiling(Vector<float> value) {
+                return WStatics.Ceiling(value.AsVector256()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> Ceiling(Vector<double> value) {
+                return WStatics.Ceiling(value.AsVector256()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {

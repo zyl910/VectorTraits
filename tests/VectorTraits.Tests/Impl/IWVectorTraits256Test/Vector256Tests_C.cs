@@ -27,7 +27,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             // run.
             Vector256<T>[] samples = {
                 Vector256s<T>.Demo,
-                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) + 0.4, 0.1)
+                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) + 0.4, 0.2)
             };
             foreach (Vector256<T> value in samples) {
                 Console.WriteLine($"Samples: {value}\t// {VectorTextUtil.GetHex(value)}");

@@ -27,7 +27,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             // run.
             Vector128<T>[] samples = {
                 Vector128s<T>.Demo,
-                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) + 0.4, 0.1)
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) + 0.4, 0.2)
             };
             foreach (Vector128<T> value in samples) {
                 Console.WriteLine($"Samples: {value}\t// {VectorTextUtil.GetHex(value)}");

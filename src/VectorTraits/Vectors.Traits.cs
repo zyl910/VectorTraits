@@ -145,6 +145,40 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.Ceiling_AcceleratedTypes"/>
+        public static TypeCodeFlags Ceiling_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.Ceiling_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                    if (Vector.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> Ceiling(Vector<float> value) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector.Ceiling(value);
+#else
+            return _instance.Ceiling(value);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> Ceiling(Vector<double> value) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector.Ceiling(value);
+#else
+            return _instance.Ceiling(value);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
         public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {

@@ -120,7 +120,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>
         public static TypeCodeFlags Ceiling_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.ConditionalSelect_AcceleratedTypes;
+                TypeCodeFlags rt = _instance.Ceiling_AcceleratedTypes;
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
                     if (Vector128.IsHardwareAccelerated) {
                         rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;

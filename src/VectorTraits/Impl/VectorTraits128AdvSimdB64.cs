@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
-using System.Text;
 
 namespace Zyl.VectorTraits.Impl {
     using WStatics = WVectorTraits128AdvSimdB64.Statics;
@@ -63,6 +61,20 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 #if NET5_0_OR_GREATER
+
+            /// <inheritdoc cref="IVectorTraits.Ceiling_AcceleratedTypes"/>
+            public static TypeCodeFlags Ceiling_AcceleratedTypes {
+                get {
+                    return WStatics.Ceiling_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> Ceiling(Vector<double> value) {
+                return WStatics.Ceiling(value.AsVector128()).AsVector();
+            }
+
 
 
 #endif // NET5_0_OR_GREATER

@@ -77,6 +77,24 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.Ceiling_AcceleratedTypes"/>
+        public virtual TypeCodeFlags Ceiling_AcceleratedTypes {
+            get {
+                return Statics.Ceiling_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{float})"/>
+        public virtual Vector<float> Ceiling(Vector<float> value) {
+            return Statics.Ceiling(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{double})"/>
+        public virtual Vector<double> Ceiling(Vector<double> value) {
+            return Statics.Ceiling(value);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
         public virtual TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {

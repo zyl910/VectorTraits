@@ -57,6 +57,68 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.Ceiling_AcceleratedTypes"/>
+            public static TypeCodeFlags Ceiling_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+                    if (Vector.IsHardwareAccelerated) {
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+#endif // BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+                    }
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Ceiling(Vector<float> value) {
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+                return Vector.Ceiling(value);
+#else
+                return Ceiling_Base(value);
+#endif // BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> Ceiling(Vector<double> value) {
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+                return Vector.Ceiling(value);
+#else
+                return Ceiling_Base(value);
+#endif // BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<float> Ceiling_Base(Vector<float> value) {
+                Vector<float> rt = value;
+                float* p = (float*)&rt;
+                int cnt = Vector<float>.Count;
+                for (int i = 0; i < cnt; ++i) {
+#if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+                    p[i] = MathF.Ceiling(p[i]);
+#else
+                    p[i] = (float)Math.Ceiling(p[i]);
+#endif // NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<double> Ceiling_Base(Vector<double> value) {
+                Vector<double> rt = value;
+                double* p = (double*)&rt;
+                int cnt = Vector<double>.Count;
+                for (int i = 0; i < cnt; ++i) {
+                    p[i] = Math.Ceiling(p[i]);
+                }
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {
