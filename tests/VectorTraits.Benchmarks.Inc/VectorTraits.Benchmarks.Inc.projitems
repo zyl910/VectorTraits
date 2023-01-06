@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt64.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AloneTestUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftBenchmark_Byte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftBenchmark_Int32.cs" />
