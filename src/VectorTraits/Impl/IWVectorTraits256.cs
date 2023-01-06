@@ -42,6 +42,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.Ceiling(Vector256{double})" />
         Vector256<double> Ceiling(Vector256<double> value);
 
+
         /// <summary>
         /// Types with hardware acceleration when running <c>ConditionalSelect</c> (运行 <c>ConditionalSelect</c> 时具有硬件加速的类型).
         /// </summary>

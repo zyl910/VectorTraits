@@ -59,6 +59,24 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>
+        public virtual TypeCodeFlags Ceiling_AcceleratedTypes {
+            get {
+                return Statics.Ceiling_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{float})"/>
+        public virtual Vector128<float> Ceiling(Vector128<float> value) {
+            return Statics.Ceiling(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{double})"/>
+        public virtual Vector128<double> Ceiling(Vector128<double> value) {
+            return Statics.Ceiling(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect_AcceleratedTypes"/>
         public virtual TypeCodeFlags ConditionalSelect_AcceleratedTypes {
             get {

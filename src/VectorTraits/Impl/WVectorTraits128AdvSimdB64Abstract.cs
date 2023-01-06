@@ -36,6 +36,19 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NET5_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>
+        public override TypeCodeFlags Ceiling_AcceleratedTypes {
+            get {
+                return Statics.Ceiling_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{double})"/>
+        public override Vector128<double> Ceiling(Vector128<double> value) {
+            return Statics.Ceiling(value);
+        }
+
+
 
 #endif // NET5_0_OR_GREATER
     }

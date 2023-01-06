@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
+using System.Runtime.CompilerServices;
 #endif
 #if NET5_0_OR_GREATER
 using System.Runtime.Intrinsics.Arm;
@@ -77,6 +78,20 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 #if NET5_0_OR_GREATER
+
+            /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>
+            public static TypeCodeFlags Ceiling_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Ceiling(Vector128<double> value) {
+                return AdvSimd.Arm64.Ceiling(value);
+            }
 
 
 

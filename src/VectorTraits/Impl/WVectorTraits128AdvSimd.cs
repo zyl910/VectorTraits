@@ -113,6 +113,30 @@ namespace Zyl.VectorTraits.Impl {
                 // ShiftRightLogical:	Fail!. System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>
+            public static TypeCodeFlags Ceiling_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Ceiling(Vector128<float> value) {
+                return AdvSimd.Ceiling(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Ceiling(Vector128<double> value) {
+                Vector64<double> lower = AdvSimd.CeilingScalar(Vector128.GetLower(value));
+                Vector64<double> upper = AdvSimd.CeilingScalar(Vector128.GetUpper(value));
+                Vector128<double> rt = Vector128.Create(lower, upper);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect_AcceleratedTypes"/>
             public static TypeCodeFlags ConditionalSelect_AcceleratedTypes {
                 get {

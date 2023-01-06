@@ -15,6 +15,34 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
+        public void CeilingTest<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.IsSupported) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.Ceiling_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s<T>.Demo,
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) + 0.4, 0.1)
+            };
+            foreach (Vector128<T> value in samples) {
+                Console.WriteLine($"Samples: {value}\t// {VectorTextUtil.GetHex(value)}");
+                Vector128<T> expected = Vector128s.Ceiling((dynamic)value);
+                Console.WriteLine($"Vector128s.Ceiling: {expected}\t// {VectorTextUtil.GetHex(expected)}");
+                foreach (IWVectorTraits128 instance in instances) {
+                    if (!instance.IsSupported) continue;
+                    Vector128<T> dst = instance.Ceiling((dynamic)value);
+                    Console.WriteLine($"{instance.GetType().Name}: {dst}\t// {VectorTextUtil.GetHex(dst)}");
+                }
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
         [TestCase((sbyte)3)]
         [TestCase((byte)4)]
         [TestCase((short)5)]
