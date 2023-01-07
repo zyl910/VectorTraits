@@ -133,6 +133,79 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.Floor_AcceleratedTypes"/>
+            public static TypeCodeFlags Floor_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+                    if (Vector.IsHardwareAccelerated) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    }
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Floor(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Floor(Vector<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector.Floor(value);
+#else
+                return Floor_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Floor(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> Floor(Vector<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector.Floor(value);
+#else
+                return Floor_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Floor(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<float> Floor_Base(Vector<float> value) {
+                Vector<float> rt = value;
+                float* p = (float*)&rt;
+#if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+                p[0] = MathF.Floor(p[0]);
+                p[1] = MathF.Floor(p[1]);
+                p[2] = MathF.Floor(p[2]);
+                p[3] = MathF.Floor(p[3]);
+                p[4] = MathF.Floor(p[4]);
+                p[5] = MathF.Floor(p[5]);
+                p[6] = MathF.Floor(p[6]);
+                p[7] = MathF.Floor(p[7]);
+#else
+                p[0] = (float)Math.Floor(p[0]);
+                p[1] = (float)Math.Floor(p[1]);
+                p[2] = (float)Math.Floor(p[2]);
+                p[3] = (float)Math.Floor(p[3]);
+                p[4] = (float)Math.Floor(p[4]);
+                p[5] = (float)Math.Floor(p[5]);
+                p[6] = (float)Math.Floor(p[6]);
+                p[7] = (float)Math.Floor(p[7]);
+#endif // NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Floor(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector<double> Floor_Base(Vector<double> value) {
+                Vector<double> rt = value;
+                double* p = (double*)&rt;
+                p[0] = Math.Floor(p[0]);
+                p[1] = Math.Floor(p[1]);
+                p[2] = Math.Floor(p[2]);
+                p[3] = Math.Floor(p[3]);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {

@@ -85,13 +85,35 @@ namespace Zyl.VectorTraits.Impl {
         }
 
         /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector<float> Ceiling(Vector<float> value) {
             return Statics.Ceiling(value);
         }
 
         /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector<double> Ceiling(Vector<double> value) {
             return Statics.Ceiling(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.Floor_AcceleratedTypes"/>
+        public virtual TypeCodeFlags Floor_AcceleratedTypes {
+            get {
+                return Statics.Floor_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Floor(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<float> Floor(Vector<float> value) {
+            return Statics.Floor(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Floor(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<double> Floor(Vector<double> value) {
+            return Statics.Floor(value);
         }
 
 

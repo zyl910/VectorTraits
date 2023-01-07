@@ -35,6 +35,21 @@ namespace Zyl.VectorTraits.Benchmarks {
                 writer.WriteLine();
             }
 
+            // -- Floor --
+            if (true) {
+                try {
+                    var demo = Vectors<float>.Demo;
+                    VectorTextUtil.WriteLine(writer, "demo:\t{0}", demo);
+                    VectorTextUtil.WriteLine(writer, "Vectors.Floor(demo):\t{0}", Vectors.Floor(demo));
+                    VectorTextUtil.WriteLine(writer, "Vectors.BaseInstance.Floor(demo):\t{0}", Vectors.BaseInstance.Floor(demo));
+                    VectorTextUtil.WriteLine(writer, "Vectors.Floor_AcceleratedTypes:\t{0}", Vectors.Floor_AcceleratedTypes);
+                    VectorTextUtil.WriteLine(writer, "Vectors.BaseInstance.Floor_AcceleratedTypes:\t{0}", Vectors.BaseInstance.Floor_AcceleratedTypes);
+                } catch (Exception ex) {
+                    writer.WriteLine($"Floor:\tFail!. {ex}");
+                }
+                writer.WriteLine();
+            }
+
             // -- Shift --
             //if (false) {
             //    Vector<long> src = ~Vector<long>.Zero;
