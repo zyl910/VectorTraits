@@ -44,11 +44,13 @@ namespace Zyl.VectorTraits.Impl {
         }
 
         /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<float> Ceiling(Vector<float> value) {
             return Statics.Ceiling(value);
         }
 
         /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<double> Ceiling(Vector<double> value) {
             return Statics.Ceiling(value);
         }

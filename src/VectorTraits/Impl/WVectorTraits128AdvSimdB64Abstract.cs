@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -44,6 +45,7 @@ namespace Zyl.VectorTraits.Impl {
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector128<double> Ceiling(Vector128<double> value) {
             return Statics.Ceiling(value);
         }

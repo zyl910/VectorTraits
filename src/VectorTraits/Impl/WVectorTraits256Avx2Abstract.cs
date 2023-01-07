@@ -45,11 +45,13 @@ namespace Zyl.VectorTraits.Impl {
         }
 
         /// <inheritdoc cref="IWVectorTraits256.Ceiling(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector256<float> Ceiling(Vector256<float> value) {
             return Statics.Ceiling(value);
         }
 
         /// <inheritdoc cref="IWVectorTraits256.Ceiling(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector256<double> Ceiling(Vector256<double> value) {
             return Statics.Ceiling(value);
         }

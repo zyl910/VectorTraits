@@ -44,6 +44,7 @@ namespace Zyl.VectorTraits.Impl {
         }
 
         /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<double> Ceiling(Vector<double> value) {
             return Statics.Ceiling(value);
         }
