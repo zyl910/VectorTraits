@@ -88,6 +88,33 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Floor</c> (运行 <c>Floor</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Floor"/>
+        TypeCodeFlags Floor_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the floor of each element in a vector (计算向量中每个元素的向下舍入).
+        /// Mnemonic: <c>r[i] := floor(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its floor computed (将计算向下舍入的向量).</param>
+        /// <returns>A vector whose elements are the floor of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向下舍入).</returns>
+        /// <seealso cref="Floor_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Floor(Vector128{float})" />
+        Vector128<float> Floor(Vector128<float> value);
+
+        /// <summary>
+        /// Computes the floor of each element in a vector (计算向量中每个元素的向下舍入).
+        /// Mnemonic: <c>r[i] := floor(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its floor computed (将计算向下舍入的向量).</param>
+        /// <returns>A vector whose elements are the floor of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向下舍入).</returns>
+        /// <seealso cref="Floor_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Floor(Vector128{double})" />
+        Vector128<double> Floor(Vector128<double> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>ShiftLeft</c> (运行 <c>ShiftLeft</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="ShiftLeft"/>

@@ -179,6 +179,62 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Floor_AcceleratedTypes"/>
+            public static TypeCodeFlags Floor_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Floor(Vector128<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Floor(value);
+#else
+                return Floor_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Floor(Vector128<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Floor(value);
+#else
+                return Floor_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<float> Floor_Base(Vector128<float> value) {
+                Vector128<float> rt = value;
+                float* p = (float*)&rt;
+                p[0] = MathF.Floor(p[0]);
+                p[1] = MathF.Floor(p[1]);
+                p[2] = MathF.Floor(p[2]);
+                p[3] = MathF.Floor(p[3]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<double> Floor_Base(Vector128<double> value) {
+                Vector128<double> rt = value;
+                double* p = (double*)&rt;
+                p[0] = Math.Floor(p[0]);
+                p[1] = Math.Floor(p[1]);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {

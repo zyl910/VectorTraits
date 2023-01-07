@@ -170,6 +170,30 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Floor_AcceleratedTypes"/>
+            public static TypeCodeFlags Floor_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Floor(Vector128<float> value) {
+                return AdvSimd.Floor(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Floor(Vector128<double> value) {
+                Vector64<double> lower = AdvSimd.FloorScalar(Vector128.GetLower(value));
+                Vector64<double> upper = AdvSimd.FloorScalar(Vector128.GetUpper(value));
+                Vector128<double> rt = Vector128.Create(lower, upper);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {

@@ -187,6 +187,40 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.Floor_AcceleratedTypes"/>
+        public static TypeCodeFlags Floor_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.Floor_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<float> Floor(Vector128<float> value) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.Floor(value);
+#else
+            return _instance.Floor(value);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<double> Floor(Vector128<double> value) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.Floor(value);
+#else
+            return _instance.Floor(value);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {

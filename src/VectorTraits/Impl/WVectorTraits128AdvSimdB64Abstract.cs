@@ -51,6 +51,20 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.Floor_AcceleratedTypes"/>
+        public override TypeCodeFlags Floor_AcceleratedTypes {
+            get {
+                return Statics.Floor_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> Floor(Vector128<double> value) {
+            return Statics.Floor(value);
+        }
+
+
 
 #endif // NET5_0_OR_GREATER
     }
