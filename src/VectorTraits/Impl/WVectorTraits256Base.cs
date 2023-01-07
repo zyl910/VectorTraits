@@ -187,6 +187,68 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.Floor_AcceleratedTypes"/>
+            public static TypeCodeFlags Floor_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Floor(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> Floor(Vector256<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Floor(value);
+#else
+                return Floor_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Floor(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> Floor(Vector256<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Floor(value);
+#else
+                return Floor_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Floor(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<float> Floor_Base(Vector256<float> value) {
+                Vector256<float> rt = value;
+                float* p = (float*)&rt;
+                p[0] = MathF.Floor(p[0]);
+                p[1] = MathF.Floor(p[1]);
+                p[2] = MathF.Floor(p[2]);
+                p[3] = MathF.Floor(p[3]);
+                p[4] = MathF.Floor(p[4]);
+                p[5] = MathF.Floor(p[5]);
+                p[6] = MathF.Floor(p[6]);
+                p[7] = MathF.Floor(p[7]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Floor(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<double> Floor_Base(Vector256<double> value) {
+                Vector256<double> rt = value;
+                double* p = (double*)&rt;
+                p[0] = Math.Floor(p[0]);
+                p[1] = Math.Floor(p[1]);
+                p[2] = Math.Floor(p[2]);
+                p[3] = Math.Floor(p[3]);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {

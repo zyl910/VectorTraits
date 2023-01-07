@@ -66,11 +66,13 @@ namespace Zyl.VectorTraits.Impl {
         }
 
         /// <inheritdoc cref="IWVectorTraits256.Ceiling(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector256<float> Ceiling(Vector256<float> value) {
             return Statics.Ceiling(value);
         }
 
         /// <inheritdoc cref="IWVectorTraits256.Ceiling(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector256<double> Ceiling(Vector256<double> value) {
             return Statics.Ceiling(value);
         }
@@ -99,6 +101,26 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector256<double> ConditionalSelect(Vector256<long> condition, Vector256<double> left, Vector256<double> right) {
             return ConditionalSelect<double>(condition.AsDouble(), left, right);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.Floor_AcceleratedTypes"/>
+        public virtual TypeCodeFlags Floor_AcceleratedTypes {
+            get {
+                return Statics.Floor_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Floor(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> Floor(Vector256<float> value) {
+            return Statics.Floor(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Floor(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> Floor(Vector256<double> value) {
+            return Statics.Floor(value);
         }
 
 

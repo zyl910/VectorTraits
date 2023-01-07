@@ -71,6 +71,26 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.Floor_AcceleratedTypes"/>
+        public override TypeCodeFlags Floor_AcceleratedTypes {
+            get {
+                return Statics.Floor_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Floor(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<float> Floor(Vector256<float> value) {
+            return Statics.Floor(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Floor(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<double> Floor(Vector256<double> value) {
+            return Statics.Floor(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_AcceleratedTypes"/>
         public override TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {
