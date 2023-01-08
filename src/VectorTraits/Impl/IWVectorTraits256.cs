@@ -55,6 +55,25 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>BitwiseOr</c> (运行 <c>BitwiseOr</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="BitwiseOr"/>
+        TypeCodeFlags BitwiseOr_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the bitwise-or of two vectors (计算两个向量的位或).
+        /// Mnemonic: <c>r[i] := left[i] | right[i]</c>.
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="left">The vector to bitwise-or with <paramref name="right" /> (将会与<paramref name="right" />进行位或运算的向量).</param>
+        /// <param name="right">The vector to bitwise-or with <paramref name="left" /> (将会与<paramref name="left" />进行位或运算的向量).</param>
+        /// <returns>The bitwise-or of <paramref name="left" /> and <paramref name="right"/> (<paramref name="left" /> 与 <paramref name="right" /> 的位或运算结果).</returns>
+        /// <seealso cref="BitwiseOr_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.BitwiseOr{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<T> BitwiseOr<T>(Vector256<T> left, Vector256<T> right) where T : struct;
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Ceiling</c> (运行 <c>Ceiling</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Ceiling"/>
