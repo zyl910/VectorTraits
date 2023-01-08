@@ -20,7 +20,7 @@ Types: Vector, Vector128, Vector256 .
 - `ShiftRightLogicalFast`: Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check `shiftAmount`, please use `Scalars.LimitShiftCount` first, and shiftAmount must not be 0 .
   Mnemonic: `r[i] := value[i] >>> shiftAmount`.
 
-## WVector supplementary traits methods (W向量增补的特性方法)
+## WVector supplement traits methods (W向量补充的特性方法)
 Types: Vector128, Vector256 .
 
 - `AndNot`: Computes the bitwise-and of a given vector and the ones complement of another vector (计算一个给定的向量和另一个向量反码的位与).
@@ -32,6 +32,6 @@ Types: Vector128, Vector256 .
 - `ConditionalSelect`: Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
   Mnemonic: `r[i] := (left[i] & condition[i]) | (right[i] & ~condition[i])`.
 - `OnesComplement`: Computes the ones-complement of a vector (计算向量的反码).
-  Mnemonic: `r[i] := ~value[i]`.
+  Mnemonic: `r[i] := ~vector[i]`.
 - `Xor`: Computes the exclusive-or of two vectors (计算两个向量的位异或).
   Mnemonic: `r[i] := left[i] ^ right[i]`.
