@@ -378,6 +378,42 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.OnesComplement_AcceleratedTypes"/>
+            public static TypeCodeFlags OnesComplement_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.OnesComplement{T}(Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> OnesComplement<T>(Vector256<T> vector) where T : struct {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.OnesComplement(vector);
+#else
+                return OnesComplement_Base(vector);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.OnesComplement{T}(Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<T> OnesComplement_Base<T>(Vector256<T> vector) where T : struct {
+                Vector256<T> rt = vector;
+                ulong* p = (ulong*)&rt;
+                p[0] = ~p[0];
+                p[1] = ~p[1];
+                p[2] = ~p[2];
+                p[3] = ~p[3];
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {

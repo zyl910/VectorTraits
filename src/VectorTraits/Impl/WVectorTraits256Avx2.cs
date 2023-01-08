@@ -195,6 +195,24 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.OnesComplement_AcceleratedTypes"/>
+            public static TypeCodeFlags OnesComplement_AcceleratedTypes {
+                get {
+                    return TypeCodeFlagsUtil.AllTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.OnesComplement{T}(Vector256{T}, Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> OnesComplement<T>(Vector256<T> vector) where T : struct {
+#if NET5_0_OR_GREATER
+                return Avx.Xor(Vector256<float>.AllBitsSet, vector.AsSingle()).As<float, T>();
+#else
+                return Avx.Xor(Vector256s<float>.AllBitsSet, vector.AsSingle()).As<float, T>();
+#endif // NET5_0_OR_GREATER
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {
@@ -616,7 +634,7 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 #endif // NETCOREAPP3_0_OR_GREATER
-        }
+            }
 
     }
 }

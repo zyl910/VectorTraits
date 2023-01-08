@@ -172,6 +172,24 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>OnesComplement</c> (运行 <c>OnesComplement</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="OnesComplement"/>
+        TypeCodeFlags OnesComplement_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the ones-complement of a vector (计算向量的反码).
+        /// Mnemonic: <c>r[i] := ~vector[i]</c>.
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="vector">The vector whose ones-complement is to be computed (要计算其反码的向量).</param>
+        /// <returns>A vector whose elements are the ones-complement of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是<paramref name="vector" />相应元素的反码).</returns>
+        /// <seealso cref="OnesComplement_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.OnesComplement{T}(Vector256{T})"/> // Since: .NET 7
+        Vector256<T> OnesComplement<T>(Vector256<T> vector) where T : struct;
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>ShiftLeft</c> (运行 <c>ShiftLeft</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="ShiftLeft"/>
