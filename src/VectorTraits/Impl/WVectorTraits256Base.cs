@@ -112,6 +112,49 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.BitwiseAnd_AcceleratedTypes"/>
+            public static TypeCodeFlags BitwiseAnd_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.BitwiseAnd{T}(Vector256{T}, Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> BitwiseAnd<T>(Vector256<T> left, Vector256<T> right) where T : struct {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.BitwiseAnd(left, right);
+#else
+                return BitwiseAnd_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.BitwiseAnd{T}(Vector256{T}, Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<T> BitwiseAnd_Base<T>(Vector256<T> left, Vector256<T> right) where T : struct {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector256<T> rt);
+#else
+                Vector256<T> rt = default;
+#endif // NET5_0_OR_GREATER
+                ulong* pleft = (ulong*)&left;
+                ulong* pright = (ulong*)&right;
+                ulong* q = (ulong*)&rt;
+                // r[i] := left[i] & right[i];
+                q[0] = pleft[0] & pright[0];
+                q[1] = pleft[1] & pright[1];
+                q[2] = pleft[2] & pright[2];
+                q[3] = pleft[3] & pright[3];
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.Ceiling_AcceleratedTypes"/>
             public static TypeCodeFlags Ceiling_AcceleratedTypes {
                 get {

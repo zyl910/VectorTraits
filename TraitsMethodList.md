@@ -23,7 +23,9 @@ Types: Vector, Vector128, Vector256 .
 ## WVector supplementary traits methods (W向量增补的特性方法)
 Types: Vector128, Vector256 .
 
-- Computes the bitwise-and of a given vector and the ones complement of another vector (计算一个给定的向量和另一个向量反码的位与).
+- `AndNot`: Computes the bitwise-and of a given vector and the ones complement of another vector (计算一个给定的向量和另一个向量反码的位与).
   Mnemonic: `r[i] := left[i] & ~right[i]`.
+- `BitwiseAnd`: Computes the bitwise-and of two vectors (计算两个向量的位与).
+  Mnemonic: `r[i] := left[i] & right[i]`.
 - `ConditionalSelect`: Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
   Mnemonic: `r[i] := (left[i] & condition[i]) | (right[i] & ~condition[i])`.
