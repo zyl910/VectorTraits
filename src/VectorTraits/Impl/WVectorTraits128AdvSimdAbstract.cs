@@ -133,6 +133,20 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.OnesComplement_AcceleratedTypes"/>
+        public override TypeCodeFlags OnesComplement_AcceleratedTypes {
+            get {
+                return Statics.OnesComplement_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.OnesComplement{T}(Vector128{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<T> OnesComplement<T>(Vector128<T> vector) where T : struct {
+            return Statics.OnesComplement(vector);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         public override TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {

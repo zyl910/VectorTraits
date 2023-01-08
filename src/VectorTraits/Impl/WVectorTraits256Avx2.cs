@@ -202,7 +202,7 @@ namespace Zyl.VectorTraits.Impl {
                 }
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.OnesComplement{T}(Vector256{T}, Vector256{T})"/>
+            /// <inheritdoc cref="IWVectorTraits256.OnesComplement{T}(Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> OnesComplement<T>(Vector256<T> vector) where T : struct {
 #if NET5_0_OR_GREATER
