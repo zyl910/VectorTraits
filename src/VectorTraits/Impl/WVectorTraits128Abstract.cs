@@ -448,6 +448,20 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.ShiftRightLogicalFast(value, shiftAmount);
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits128.Xor_AcceleratedTypes"/>
+        public virtual TypeCodeFlags Xor_AcceleratedTypes {
+            get {
+                return Statics.Xor_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Xor{T}(Vector128{T}, Vector128{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<T> Xor<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+            return Statics.Xor(left, right);
+        }
+
 #endif // NETCOREAPP3_0_OR_GREATER
     }
 }

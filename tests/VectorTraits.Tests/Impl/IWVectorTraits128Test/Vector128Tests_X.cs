@@ -10,7 +10,7 @@ using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
     [TestFixture()]
-    public class Vector128Tests_A {
+    public class Vector128Tests_X {
 #if NETCOREAPP3_0_OR_GREATER
 
         [TestCase((float)1)]
@@ -23,7 +23,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
-        public void AndNotTest<T>(T src) where T : struct {
+        public void XorTest<T>(T src) where T : struct {
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
                 if (instance.IsSupported) {
@@ -44,10 +44,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             };
             foreach (Vector128<T> left in samples) {
                 foreach (Vector128<T> right in samples) {
-                    Vector128<T> expected = Vector128s.AndNot(left, right);
+                    Vector128<T> expected = Vector128s.Xor(left, right);
                     foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.IsSupported) continue;
-                        Vector128<T> dst = instance.AndNot(left, right);
+                        Vector128<T> dst = instance.Xor(left, right);
                         Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                     }
                 }

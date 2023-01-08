@@ -24,7 +24,6 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
         [TestCase((long)9)]
         [TestCase((ulong)10)]
         public void BitwiseAndTest<T>(T src) where T : struct {
-            int shiftAmountMax = Scalars<T>.BitSize + 1;
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
                 if (instance.IsSupported) {
@@ -66,7 +65,6 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
         [TestCase((long)9)]
         [TestCase((ulong)10)]
         public void BitwiseOrTest<T>(T src) where T : struct {
-            int shiftAmountMax = Scalars<T>.BitSize + 1;
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
                 if (instance.IsSupported) {

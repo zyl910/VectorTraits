@@ -24,7 +24,6 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((long)9)]
         [TestCase((ulong)10)]
         public void XorTest<T>(T src) where T : struct {
-            int shiftAmountMax = Scalars<T>.BitSize + 1;
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
                 if (instance.IsSupported) {

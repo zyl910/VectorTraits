@@ -752,6 +752,30 @@ namespace Zyl.VectorTraits {
 #endif
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits128.Xor_AcceleratedTypes"/>
+        public static TypeCodeFlags Xor_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.Xor_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Xor{T}(Vector128{T}, Vector128{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<T> Xor<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.Xor(left, right);
+#else
+            return _instance.Xor(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
 #endif // NETCOREAPP3_0_OR_GREATER
     }
 }

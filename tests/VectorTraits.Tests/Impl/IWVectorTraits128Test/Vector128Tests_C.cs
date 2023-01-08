@@ -54,7 +54,6 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
         public void ConditionalSelectTest<T>(T src) where T : struct {
             //Vector128<T> vzero = Vector128<T>.Zero;
             //T zero = default;
-            int shiftAmountMax = Scalars<T>.BitSize + 1;
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
                 if (instance.IsSupported) {
