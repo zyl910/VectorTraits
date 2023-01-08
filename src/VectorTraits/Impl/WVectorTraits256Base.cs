@@ -111,6 +111,7 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
+
             /// <inheritdoc cref="IWVectorTraits256.Ceiling_AcceleratedTypes"/>
             public static TypeCodeFlags Ceiling_AcceleratedTypes {
                 get {

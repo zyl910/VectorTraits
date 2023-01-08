@@ -142,6 +142,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
         }
 
+
         /// <inheritdoc cref="IWVectorTraits256.Ceiling_AcceleratedTypes"/>
         public static TypeCodeFlags Ceiling_AcceleratedTypes {
             get {

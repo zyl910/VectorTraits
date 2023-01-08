@@ -69,6 +69,47 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits128.AndNot_AcceleratedTypes"/>
+            public static TypeCodeFlags AndNot_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.AndNot{T}(Vector128{T}, Vector128{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<T> AndNot<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.AndNot(left, right);
+#else
+                return AndNot_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.AndNot{T}(Vector128{T}, Vector128{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<T> AndNot_Base<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<T> rt);
+#else
+                Vector128<T> rt = default;
+#endif // NET5_0_OR_GREATER
+                ulong* pleft = (ulong*)&left;
+                ulong* pright = (ulong*)&right;
+                ulong* q = (ulong*)&rt;
+                // r[i] := left[i] & ~right[i];
+                q[0] = pleft[0] & ~pright[0];
+                q[1] = pleft[1] & ~pright[1];
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>
             public static TypeCodeFlags Ceiling_AcceleratedTypes {
                 get {

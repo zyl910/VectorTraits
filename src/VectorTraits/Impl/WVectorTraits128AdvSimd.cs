@@ -113,6 +113,27 @@ namespace Zyl.VectorTraits.Impl {
                 // ShiftRightLogical:	Fail!. System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits128.AndNot_AcceleratedTypes"/>
+            public static TypeCodeFlags AndNot_AcceleratedTypes {
+                get {
+                    return TypeCodeFlagsUtil.AllTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.AndNot{T}(Vector128{T}, Vector128{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<T> AndNot<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+                // Bitwise bit Clear (vector, register). This instruction performs a bitwise AND between the first source SIMD&FP register and the complement of the second source SIMD&FP register, and writes the result to the destination SIMD&FP register.
+                // Operation
+                // if invert then operand2 = NOT(operand2);
+                // case op of
+                //     when LogicalOp_AND
+                //         result = operand1 AND operand2;
+                return AdvSimd.BitwiseClear(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>
             public static TypeCodeFlags Ceiling_AcceleratedTypes {
                 get {

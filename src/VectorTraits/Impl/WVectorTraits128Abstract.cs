@@ -59,6 +59,20 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits128.AndNot_AcceleratedTypes"/>
+        public virtual TypeCodeFlags AndNot_AcceleratedTypes {
+            get {
+                return Statics.AndNot_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.AndNot{T}(Vector128{T}, Vector128{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<T> AndNot<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+            return Statics.AndNot(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>
         public virtual TypeCodeFlags Ceiling_AcceleratedTypes {
             get {

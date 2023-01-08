@@ -8,9 +8,9 @@ using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
 
-namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
+namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
     [TestFixture()]
-    public class Vector256Tests_A {
+    public class Vector128Tests_A {
 #if NETCOREAPP3_0_OR_GREATER
 
         [TestCase((float)1)]
@@ -25,8 +25,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((ulong)10)]
         public void AndNotTest<T>(T src) where T : struct {
             int shiftAmountMax = Scalars<T>.BitSize + 1;
-            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
-            foreach (IWVectorTraits256 instance in instances) {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
                 if (instance.IsSupported) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ConditionalSelect_AcceleratedTypes}");
                 } else {
@@ -34,21 +34,21 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 }
             }
             // run.
-            Vector256<T>[] samples = {
-                Vector256s.Create(src),
-                Vector256s<T>.Demo,
-                Vector256s<T>.Serial,
-                Vector256s<T>.SerialNegative,
-                Vector256s<T>.XyXMask,
-                Vector256s<T>.XyYMask,
-                Vector256s<T>.XyzwXMask
+            Vector128<T>[] samples = {
+                Vector128s.Create(src),
+                Vector128s<T>.Demo,
+                Vector128s<T>.Serial,
+                Vector128s<T>.SerialNegative,
+                Vector128s<T>.XyXMask,
+                Vector128s<T>.XyYMask,
+                Vector128s<T>.XyzwXMask
             };
-            foreach (Vector256<T> left in samples) {
-                foreach (Vector256<T> right in samples) {
-                    Vector256<T> expected = Vector256s.AndNot(left, right);
-                    foreach (IWVectorTraits256 instance in instances) {
+            foreach (Vector128<T> left in samples) {
+                foreach (Vector128<T> right in samples) {
+                    Vector128<T> expected = Vector128s.AndNot(left, right);
+                    foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.IsSupported) continue;
-                        Vector256<T> dst = instance.AndNot(left, right);
+                        Vector128<T> dst = instance.AndNot(left, right);
                         Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                     }
                 }
