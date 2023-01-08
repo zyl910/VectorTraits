@@ -4,19 +4,18 @@ using System.Text;
 
 namespace Zyl.VectorTraits {
 
-#if NETSTANDARD1_2 || NETSTANDARD1_1 || NETSTANDARD1_0
-    /// <summary>Specifies the type of an object. https://learn.microsoft.com/en-us/dotnet/api/system.typecode </summary>
-    public enum TypeCode {
+    /// <summary>Specifies the type of an vector element. Reference from: https://learn.microsoft.com/en-us/dotnet/api/system.typecode </summary>
+    public enum ElementTypeCode {
         /// <summary>A null reference.</summary>
         Empty = 0,
-        /// <summary>A general type representing any reference or value type not explicitly represented by another TypeCode.</summary>
-        Object = 1,
-        /// <summary>A database null (column) value.</summary>
-        DBNull = 2,
-        /// <summary>A simple type representing Boolean values of true or false.</summary>
-        Boolean = 3,
-        /// <summary>An integral type representing unsigned 16-bit integers with values between 0 and 65535. The set of possible values for the System.TypeCode.Char type corresponds to the Unicode character set.</summary>
-        Char = 4,
+        // /// <summary>A general type representing any reference or value type not explicitly represented by another TypeCode.</summary>
+        // Object = 1,
+        // /// <summary>A database null (column) value.</summary>
+        // DBNull = 2,
+        // /// <summary>A simple type representing Boolean values of true or false.</summary>
+        // Boolean = 3,
+        // /// <summary>An integral type representing unsigned 16-bit integers with values between 0 and 65535. The set of possible values for the System.TypeCode.Char type corresponds to the Unicode character set.</summary>
+        // Char = 4,
         /// <summary>An integral type representing signed 8-bit integers with values between -128 and 127.</summary>
         SByte = 5,
         /// <summary>An integral type representing unsigned 8-bit integers with values between 0 and 255.</summary>
@@ -37,16 +36,15 @@ namespace Zyl.VectorTraits {
         Single = 13,
         /// <summary>A floating point type representing values ranging from approximately 5.0 x 10^-324 to 1.7 x 10^308 with a precision of 15-16 digits.</summary>
         Double = 14,
-        /// <summary>A simple type representing values ranging from 1.0 x 10^-28 to approximately 7.9 x 10^28 with 28-29 significant digits.</summary>
-        Decimal = 15,
-        /// <summary>A type representing a date and time value.</summary>
-        DateTime = 16,
-        /// <summary>A sealed class type representing Unicode character strings.</summary>
-        String = 18
+        // /// <summary>A simple type representing values ranging from 1.0 x 10^-28 to approximately 7.9 x 10^28 with 28-29 significant digits.</summary>
+        // Decimal = 15,
+        // /// <summary>A type representing a date and time value.</summary>
+        // DateTime = 16,
+        // /// <summary>A sealed class type representing Unicode character strings.</summary>
+        // String = 18
     }
-#endif // NETSTANDARD1_2 || NETSTANDARD1_1 || NETSTANDARD1_0
 
-    /// <summary><see cref="TypeCode"/> bit flags (类型代码位标识).</summary>
+    /// <summary><see cref="ElementTypeCode"/> bit flags (元素类型代码位标识).</summary>
     [Flags]
     public enum TypeCodeFlags : Int32 {
         /// <summary>None.</summary>
@@ -85,10 +83,10 @@ namespace Zyl.VectorTraits {
         /// <summary>TypeCodeFlags of all types.</summary>
         public const TypeCodeFlags AllTypes = FloatTypes | IntTypes;
 
-        /// <summary>TypeCode of <see cref="IntPtr"/>.</summary>
-        public static readonly TypeCode IntPtrCode;
-        /// <summary>TypeCode of <see cref="UIntPtr"/>.</summary>
-        public static readonly TypeCode UIntPtrCode;
+        /// <summary>ElementTypeCode of <see cref="IntPtr"/>.</summary>
+        public static readonly ElementTypeCode IntPtrCode;
+        /// <summary>ElementTypeCode of <see cref="UIntPtr"/>.</summary>
+        public static readonly ElementTypeCode UIntPtrCode;
         /// <summary>TypeCodeFlags of <see cref="IntPtr"/>.</summary>
         public static readonly TypeCodeFlags IntPtrFlags;
         /// <summary>TypeCodeFlags of <see cref="UIntPtr"/>.</summary>
@@ -96,34 +94,47 @@ namespace Zyl.VectorTraits {
 
         static TypeCodeFlagsUtil() {
             if (4 == IntPtr.Size) {
-                IntPtrCode = TypeCode.Int32;
-                UIntPtrCode = TypeCode.UInt32;
+                IntPtrCode = ElementTypeCode.Int32;
+                UIntPtrCode = ElementTypeCode.UInt32;
                 IntPtrFlags = TypeCodeFlags.Int32;
                 UIntPtrFlags = TypeCodeFlags.UInt32;
             } else {
-                IntPtrCode = TypeCode.Int64;
-                UIntPtrCode = TypeCode.UInt64;
+                IntPtrCode = ElementTypeCode.Int64;
+                UIntPtrCode = ElementTypeCode.UInt64;
                 IntPtrFlags = TypeCodeFlags.Int64;
                 UIntPtrFlags = TypeCodeFlags.UInt64;
             }
         }
 
+#if NETSTANDARD1_2 || NETSTANDARD1_1 || NETSTANDARD1_0
+#else
         /// <summary>
-        /// Convert <c>TypeCode</c> to <c>TypeCodeFlags</c> (将 <c>TypeCode</c> 转为 <c>TypeCodeFlags</c>).
+        /// Convert <c>TypeCode</c> to <c>ElementTypeCode</c> (将 <c>TypeCode</c> 转为 <c>ElementTypeCode</c>).
+        /// </summary>
+        /// <param name="code">Source code.</param>
+        /// <returns>Returns a <c>ElementTypeCode</c>.</returns>
+        public static ElementTypeCode FromTypeCode(TypeCode code) {
+            return (ElementTypeCode)code;
+        }
+
+#endif // #if NETSTANDARD1_2 || NETSTANDARD1_1 || NETSTANDARD1_0
+
+        /// <summary>
+        /// Convert <c>ElementTypeCode</c> to <c>TypeCodeFlags</c> (将 <c>ElementTypeCode</c> 转为 <c>TypeCodeFlags</c>).
         /// </summary>
         /// <param name="code">Source code.</param>
         /// <returns>Returns a <c>TypeCodeFlags</c>.</returns>
-        public static TypeCodeFlags FromTypeCode(TypeCode code) {
-            return FromTypeCode((int)code);
+        public static TypeCodeFlags FlagsFromTypeCode(ElementTypeCode code) {
+            return FlagsFromTypeCode((int)code);
         }
 
         /// <summary>
-        /// Convert <c>TypeCode</c> to <c>TypeCodeFlags</c> (将 <c>TypeCode</c> 转为 <c>TypeCodeFlags</c>). The code is int type.
+        /// Convert <c>ElementTypeCode</c> to <c>TypeCodeFlags</c> (将 <c>ElementTypeCode</c> 转为 <c>TypeCodeFlags</c>). The code is int value.
         /// </summary>
         /// <param name="code">Source code.</param>
         /// <returns>Returns a <c>TypeCodeFlags</c>.</returns>
         /// <summary>
-        public static TypeCodeFlags FromTypeCode(int code) {
+        public static TypeCodeFlags FlagsFromTypeCode(int code) {
             return (TypeCodeFlags)(1 << code);
         }
 
@@ -132,13 +143,13 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <param name="src">Source value.</param>
         /// <param name="action">The Action<T> to perform on each element of <paramref name="src"/>.</param>
-        public static void ForEach(TypeCodeFlags src, Action<TypeCode> action) {
+        public static void ForEach(TypeCodeFlags src, Action<ElementTypeCode> action) {
             int nsrc = (int)src;
             int cnt = sizeof(int) * 8;
             int mask = 1;
             for (int i = 0; i < cnt; ++i) {
                 if ((nsrc & mask) != 0) {
-                    action((TypeCode)i);
+                    action((ElementTypeCode)i);
                 }
                 // next.
                 mask <<= 1;
@@ -149,14 +160,14 @@ namespace Zyl.VectorTraits {
         /// Convert to <see cref="IEnumerable{T}"/> (转为 <see cref="IEnumerable{T}"/>).
         /// </summary>
         /// <param name="src">Source value.</param>
-        /// <returns>Returns a <c>IEnumerable</c>.</returns>
-        public static IEnumerable<TypeCode> ToEnumerable(TypeCodeFlags src) {
+        /// <returns>Returns a ElementTypeCode <c>IEnumerable</c>.</returns>
+        public static IEnumerable<ElementTypeCode> ToEnumerable(TypeCodeFlags src) {
             int nsrc = (int)src;
             int cnt = sizeof(int) * 8;
             int mask = 1;
             for(int i=0; i<cnt; ++i) {
                 if ((nsrc & mask) != 0) {
-                    yield return (TypeCode)i;
+                    yield return (ElementTypeCode)i;
                 }
                 // next.
                 mask <<= 1;
