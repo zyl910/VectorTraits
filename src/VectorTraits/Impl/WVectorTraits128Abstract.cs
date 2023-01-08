@@ -73,6 +73,20 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.BitwiseAnd_AcceleratedTypes"/>
+        public virtual TypeCodeFlags BitwiseAnd_AcceleratedTypes {
+            get {
+                return Statics.BitwiseAnd_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.BitwiseAnd{T}(Vector128{T}, Vector128{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<T> BitwiseAnd<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+            return Statics.BitwiseAnd(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>
         public virtual TypeCodeFlags Ceiling_AcceleratedTypes {
             get {
