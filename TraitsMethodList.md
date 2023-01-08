@@ -27,5 +27,9 @@ Types: Vector128, Vector256 .
   Mnemonic: `r[i] := left[i] & ~right[i]`.
 - `BitwiseAnd`: Computes the bitwise-and of two vectors (计算两个向量的位与).
   Mnemonic: `r[i] := left[i] & right[i]`.
+- `BitwiseOr`: Computes the bitwise-or of two vectors (计算两个向量的位或).
+  Mnemonic: `r[i] := left[i] | right[i]`.
 - `ConditionalSelect`: Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
   Mnemonic: `r[i] := (left[i] & condition[i]) | (right[i] & ~condition[i])`.
+- `Xor`: Computes the exclusive-or of two vectors (计算两个向量的位异或).
+  Mnemonic: `r[i] := left[i] ^ right[i]`.

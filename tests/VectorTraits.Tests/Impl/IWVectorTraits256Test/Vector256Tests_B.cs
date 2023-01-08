@@ -55,7 +55,6 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
         }
 
-
         [TestCase((float)1)]
         [TestCase((double)2)]
         [TestCase((sbyte)3)]

@@ -671,6 +671,25 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical(Vector256{ulong}, int)"/> // Since: VectorTraits 1.0
         Vector256<ulong> ShiftRightLogicalFast(Vector256<ulong> value, int shiftAmount);
 
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>Xor</c> (运行 <c>Xor</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Xor"/>
+        TypeCodeFlags Xor_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the exclusive-or of two vectors (计算两个向量的位异或).
+        /// Mnemonic: <c>r[i] := left[i] ^ right[i]</c>.
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="left">The vector to exclusive-or with <paramref name="right" /> (将会与<paramref name="right" />进行位异或运算的向量).</param>
+        /// <param name="right">The vector to exclusive-or with <paramref name="left" /> (将会与<paramref name="left" />进行位异或运算的向量).</param>
+        /// <returns>The exclusive-or of <paramref name="left" /> and <paramref name="right"/> (<paramref name="left" /> 与 <paramref name="right" /> 的位异或运算结果).</returns>
+        /// <seealso cref="Xor_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Xor{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<T> Xor<T>(Vector256<T> left, Vector256<T> right) where T : struct;
+
         #endregion // .NET_style
 
         // == X86 style  ==

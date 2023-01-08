@@ -601,6 +601,20 @@ namespace Zyl.VectorTraits.Impl {
                 return Avx2.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits256.Xor_AcceleratedTypes"/>
+            public static TypeCodeFlags Xor_AcceleratedTypes {
+                get {
+                    return TypeCodeFlagsUtil.AllTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Xor{T}(Vector256{T}, Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> Xor<T>(Vector256<T> left, Vector256<T> right) where T : struct {
+                return Avx.Xor(left.AsDouble(), right.AsDouble()).As<double, T>();
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 
