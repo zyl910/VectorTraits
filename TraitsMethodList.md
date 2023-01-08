@@ -5,6 +5,8 @@ Types: Vector, Vector128, Vector256 .
 
 - `Ceiling`: Computes the ceiling of each element in a vector (计算向量中每个元素的向上舍入).
   Mnemonic: `r[i] := ceiling(value[i])` .
+- `Floor`: Computes the floor of each element in a vector (计算向量中每个元素的向下舍入).
+  Mnemonic: `r[i] := floor(value[i])` .
 - `ShiftLeft`: Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
   Mnemonic: `r[i] := value[i] << shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
 - `ShiftLeftFast`: Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check `shiftAmount`, please use `Scalars.LimitShiftCount` first.
@@ -21,5 +23,7 @@ Types: Vector, Vector128, Vector256 .
 ## WVector supplementary traits methods (W向量增补的特性方法)
 Types: Vector128, Vector256 .
 
+- Computes the bitwise-and of a given vector and the ones complement of another vector (计算一个给定的向量和另一个向量反码的位与).
+  Mnemonic: `r[i] := left[i] & ~right[i]`.
 - `ConditionalSelect`: Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
   Mnemonic: `r[i] := (left[i] & condition[i]) | (right[i] & ~condition[i])`.

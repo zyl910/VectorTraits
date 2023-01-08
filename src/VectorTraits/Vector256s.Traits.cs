@@ -119,6 +119,29 @@ namespace Zyl.VectorTraits {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits256.AndNot_AcceleratedTypes"/>
+        public static TypeCodeFlags AndNot_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.AndNot_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.AndNot{T}(Vector256{T}, Vector256{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<T> AndNot<T>(Vector256<T> left, Vector256<T> right) where T : struct {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.AndNot(left, right);
+#else
+            return _instance.AndNot(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
         /// <inheritdoc cref="IWVectorTraits256.Ceiling_AcceleratedTypes"/>
         public static TypeCodeFlags Ceiling_AcceleratedTypes {
             get {

@@ -17,6 +17,25 @@ namespace Zyl.VectorTraits.Impl {
         #region .NET_style
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>AndNot</c> (运行 <c>AndNot</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="AndNot"/>
+        TypeCodeFlags AndNot_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the bitwise-and of a given vector and the ones complement of another vector (计算一个给定的向量和另一个向量反码的位与).
+        /// Mnemonic: <c>r[i] := left[i] &amp; ~right[i]</c>.
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="left">The vector to bitwise-and with <paramref name="right" /> (将会与<paramref name="right" />进行位与运算的向量).</param>
+        /// <param name="right">The vector to that is ones-complemented before being bitwise-and with <paramref name="left" /> (将会与<paramref name="left" />进行位与运算, 并使用反码的向量).</param>
+        /// <returns>The bitwise-and of <paramref name="left" /> and the ones-complement of <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />反码 的位与运算结果).</returns>
+        /// <seealso cref="AndNot_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.AndNot{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<T> AndNot<T>(Vector256<T> left, Vector256<T> right) where T : struct;
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Ceiling</c> (运行 <c>Ceiling</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Ceiling"/>

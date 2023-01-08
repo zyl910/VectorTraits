@@ -73,6 +73,31 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.AndNot_AcceleratedTypes"/>
+            public static TypeCodeFlags AndNot_AcceleratedTypes {
+                get {
+                    return TypeCodeFlagsUtil.AllTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.AndNot{T}(Vector256{T}, Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> AndNot<T>(Vector256<T> left, Vector256<T> right) where T : struct {
+                // __m256d _mm256_andnot_pd (__m256d a, __m256d b)
+                // #include <immintrin.h>
+                // Instruction: vandnpd ymm, ymm, ymm
+                // CPUID Flags: AVX
+                // Description
+                // Compute the bitwise NOT of packed double-precision (64-bit) floating-point elements in a and then AND with b, and store the results in dst.
+                // Operation
+                // FOR j := 0 to 3
+                // 	i := j*64
+                // 	dst[i+63:i] := ((NOT a[i+63:i]) AND b[i+63:i])
+                // ENDFOR
+                return Avx.AndNot(right.AsDouble(), left.AsDouble()).As<double, T>();
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.Ceiling_AcceleratedTypes"/>
             public static TypeCodeFlags Ceiling_AcceleratedTypes {
                 get {
