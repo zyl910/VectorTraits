@@ -7,8 +7,24 @@ using System.Text;
 namespace Zyl.VectorTraits.Tests {
     [TestFixture()]
     public class TypeCodeFlagsUtilTests {
+
+#if NETSTANDARD1_2 || NETSTANDARD1_1 || NETSTANDARD1_0 || NET45
+#else
         [Test()]
         public void FromTypeCodeTest() {
+            ElementTypeCode dst = TypeCodeFlagsUtil.FromTypeCode(TypeCode.Byte);
+            Assert.AreEqual(ElementTypeCode.Byte, dst);
+        }
+
+        [Test()]
+        public void ToTypeCodeTest() {
+            TypeCode dst = TypeCodeFlagsUtil.ToTypeCode(ElementTypeCode.Byte);
+            Assert.AreEqual(TypeCode.Byte, dst);
+        }
+#endif
+
+        [Test()]
+        public void FlagsFromTypeCodeTest() {
             TypeCodeFlags flags = TypeCodeFlagsUtil.FlagsFromTypeCode(ElementTypeCode.Byte);
             Assert.AreEqual(TypeCodeFlags.Byte, flags);
         }

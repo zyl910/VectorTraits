@@ -114,7 +114,46 @@ namespace Zyl.VectorTraits {
         /// <param name="code">Source code.</param>
         /// <returns>Returns a <c>ElementTypeCode</c>.</returns>
         public static ElementTypeCode FromTypeCode(TypeCode code) {
-            return (ElementTypeCode)code;
+            ElementTypeCode rt = ElementTypeCode.Empty;
+            switch (code) {
+                case TypeCode.SByte:
+                case TypeCode.Byte:
+                case TypeCode.Int16:
+                case TypeCode.UInt16:
+                case TypeCode.Int32:
+                case TypeCode.UInt32:
+                case TypeCode.Int64:
+                case TypeCode.UInt64:
+                case TypeCode.Single:
+                case TypeCode.Double:
+                    rt = (ElementTypeCode)code;
+                    break;
+            }
+            return rt;
+        }
+
+        /// <summary>
+        /// Convert <c>ElementTypeCode</c> to <c>TypeCode</c> (将 <c>ElementTypeCode</c> 转为 <c>TypeCode</c>).
+        /// </summary>
+        /// <param name="code">Source code.</param>
+        /// <returns>Returns a <c>TypeCode</c>.</returns>
+        public static TypeCode ToTypeCode(ElementTypeCode code) {
+            TypeCode rt = TypeCode.Empty;
+            switch (code) {
+                case ElementTypeCode.SByte:
+                case ElementTypeCode.Byte:
+                case ElementTypeCode.Int16:
+                case ElementTypeCode.UInt16:
+                case ElementTypeCode.Int32:
+                case ElementTypeCode.UInt32:
+                case ElementTypeCode.Int64:
+                case ElementTypeCode.UInt64:
+                case ElementTypeCode.Single:
+                case ElementTypeCode.Double:
+                    rt = (TypeCode)code;
+                    break;
+            }
+            return rt;
         }
 
 #endif // #if NETSTANDARD1_2 || NETSTANDARD1_1 || NETSTANDARD1_0
