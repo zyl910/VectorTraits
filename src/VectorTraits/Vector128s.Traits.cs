@@ -165,6 +165,30 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.BitwiseOr_AcceleratedTypes"/>
+        public static TypeCodeFlags BitwiseOr_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.BitwiseOr_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.BitwiseOr{T}(Vector128{T}, Vector128{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<T> BitwiseOr<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.BitwiseOr(left, right);
+#else
+            return _instance.BitwiseOr(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>
         public static TypeCodeFlags Ceiling_AcceleratedTypes {
             get {
