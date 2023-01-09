@@ -133,6 +133,78 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.Min_AcceleratedTypes"/>
+        public override TypeCodeFlags Min_AcceleratedTypes {
+            get {
+                return Statics.Min_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<float> Min(Vector256<float> left, Vector256<float> right) {
+            return Statics.Min(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<double> Min(Vector256<double> left, Vector256<double> right) {
+            return Statics.Min(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> Min(Vector256<sbyte> left, Vector256<sbyte> right) {
+            return Statics.Min(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<byte> Min(Vector256<byte> left, Vector256<byte> right) {
+            return Statics.Min(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> Min(Vector256<short> left, Vector256<short> right) {
+            return Statics.Min(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ushort> Min(Vector256<ushort> left, Vector256<ushort> right) {
+            return Statics.Min(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> Min(Vector256<int> left, Vector256<int> right) {
+            return Statics.Min(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<uint> Min(Vector256<uint> left, Vector256<uint> right) {
+            return Statics.Min(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> Min(Vector256<long> left, Vector256<long> right) {
+            return Statics.Min(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ulong> Min(Vector256<ulong> left, Vector256<ulong> right) {
+            return Statics.Min(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.Negate_AcceleratedTypes"/>
         public override TypeCodeFlags Negate_AcceleratedTypes {
             get {

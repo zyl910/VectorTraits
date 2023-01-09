@@ -52,7 +52,7 @@ namespace Zyl.VectorTraits {
         public static T ElementEpsilon { get { return Scalars<T>.Epsilon; } }
         /// <summary>(Element) Represents the largest possible value (表示最大可能值).</summary>
         public static T ElementMaxValue { get { return Scalars<T>.MaxValue; } }
-        /// <summary>(Element) Represents the smallest possible value (表示最大可能值).</summary>
+        /// <summary>(Element) Represents the smallest possible value (表示最小可能值).</summary>
         public static T ElementMinValue { get { return Scalars<T>.MinValue; } }
         /// <summary>(Element) Represents not a number (NaN) (表示“非数(NaN)”的值). When the type is an integer, the value is 0 (当类型为整数时，该值为0).</summary>
         public static T ElementNaN { get { return Scalars<T>.NaN; } }

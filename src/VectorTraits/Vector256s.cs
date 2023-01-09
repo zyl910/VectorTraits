@@ -497,7 +497,7 @@ namespace Zyl.VectorTraits {
         public static readonly Vector256<T> Epsilon;
         /// <summary>Represents the largest possible value (表示最大可能值).</summary>
         public static readonly Vector256<T> MaxValue;
-        /// <summary>Represents the smallest possible value (表示最大可能值).</summary>
+        /// <summary>Represents the smallest possible value (表示最小可能值).</summary>
         public static readonly Vector256<T> MinValue;
         /// <summary>Represents not a number (NaN) (表示“非数(NaN)”的值). When the type is an integer, the value is 0 (当类型为整数时，该值为0).</summary>
         public static readonly Vector256<T> NaN;
