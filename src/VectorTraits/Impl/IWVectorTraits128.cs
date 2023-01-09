@@ -172,6 +172,123 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Min</c> (运行 <c>Min</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Min"/>
+        TypeCodeFlags Min_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).
+        /// Mnemonic: <c>rt[i] := min(left[i], right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are the minimum of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> (一个向量，其元素是<paramref name="left" />和<paramref name="right" />的相应元素的较小值).</returns>
+        /// <seealso cref="Min_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Min{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<float> Min(Vector128<float> left, Vector128<float> right);
+
+        /// <summary>
+        /// Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).
+        /// Mnemonic: <c>rt[i] := min(left[i], right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are the minimum of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> (一个向量，其元素是<paramref name="left" />和<paramref name="right" />的相应元素的较小值).</returns>
+        /// <seealso cref="Min_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Min{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<double> Min(Vector128<double> left, Vector128<double> right);
+
+        /// <summary>
+        /// Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).
+        /// Mnemonic: <c>rt[i] := min(left[i], right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are the minimum of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> (一个向量，其元素是<paramref name="left" />和<paramref name="right" />的相应元素的较小值).</returns>
+        /// <seealso cref="Min_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Min{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<sbyte> Min(Vector128<sbyte> left, Vector128<sbyte> right);
+
+        /// <summary>
+        /// Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).
+        /// Mnemonic: <c>rt[i] := min(left[i], right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are the minimum of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> (一个向量，其元素是<paramref name="left" />和<paramref name="right" />的相应元素的较小值).</returns>
+        /// <seealso cref="Min_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Min{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<byte> Min(Vector128<byte> left, Vector128<byte> right);
+
+        /// <summary>
+        /// Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).
+        /// Mnemonic: <c>rt[i] := min(left[i], right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are the minimum of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> (一个向量，其元素是<paramref name="left" />和<paramref name="right" />的相应元素的较小值).</returns>
+        /// <seealso cref="Min_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Min{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<short> Min(Vector128<short> left, Vector128<short> right);
+
+        /// <summary>
+        /// Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).
+        /// Mnemonic: <c>rt[i] := min(left[i], right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are the minimum of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> (一个向量，其元素是<paramref name="left" />和<paramref name="right" />的相应元素的较小值).</returns>
+        /// <seealso cref="Min_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Min{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<ushort> Min(Vector128<ushort> left, Vector128<ushort> right);
+
+        /// <summary>
+        /// Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).
+        /// Mnemonic: <c>rt[i] := min(left[i], right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are the minimum of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> (一个向量，其元素是<paramref name="left" />和<paramref name="right" />的相应元素的较小值).</returns>
+        /// <seealso cref="Min_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Min{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<int> Min(Vector128<int> left, Vector128<int> right);
+
+        /// <summary>
+        /// Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).
+        /// Mnemonic: <c>rt[i] := min(left[i], right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are the minimum of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> (一个向量，其元素是<paramref name="left" />和<paramref name="right" />的相应元素的较小值).</returns>
+        /// <seealso cref="Min_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Min{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<uint> Min(Vector128<uint> left, Vector128<uint> right);
+
+        /// <summary>
+        /// Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).
+        /// Mnemonic: <c>rt[i] := min(left[i], right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are the minimum of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> (一个向量，其元素是<paramref name="left" />和<paramref name="right" />的相应元素的较小值).</returns>
+        /// <seealso cref="Min_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Min{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<long> Min(Vector128<long> left, Vector128<long> right);
+
+        /// <summary>
+        /// Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).
+        /// Mnemonic: <c>rt[i] := min(left[i], right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are the minimum of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> (一个向量，其元素是<paramref name="left" />和<paramref name="right" />的相应元素的较小值).</returns>
+        /// <seealso cref="Min_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Min{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<ulong> Min(Vector128<ulong> left, Vector128<ulong> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Negate</c> (运行 <c>Negate</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Negate"/>
