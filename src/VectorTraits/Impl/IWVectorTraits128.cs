@@ -24,7 +24,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the bitwise-and of a given vector and the ones complement of another vector (计算一个给定的向量和另一个向量反码的位与).
-        /// Mnemonic: <c>r[i] := left[i] &amp; ~right[i]</c>.
+        /// Mnemonic: <c>rt[i] := left[i] &amp; ~right[i]</c>.
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="left">The vector to bitwise-and with <paramref name="right" /> (将会与<paramref name="right" />进行位与运算的向量).</param>
@@ -43,7 +43,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the bitwise-and of two vectors (计算两个向量的位与).
-        /// Mnemonic: <c>r[i] := left[i] &amp; right[i]</c>.
+        /// Mnemonic: <c>rt[i] := left[i] &amp; right[i]</c>.
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="left">The vector to bitwise-and with <paramref name="right" /> (将会与<paramref name="right" />进行位与运算的向量).</param>
@@ -62,7 +62,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the bitwise-or of two vectors (计算两个向量的位或).
-        /// Mnemonic: <c>r[i] := left[i] | right[i]</c>.
+        /// Mnemonic: <c>rt[i] := left[i] | right[i]</c>.
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="left">The vector to bitwise-or with <paramref name="right" /> (将会与<paramref name="right" />进行位或运算的向量).</param>
@@ -81,7 +81,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the ceiling of each element in a vector (计算向量中每个元素的向上舍入).
-        /// Mnemonic: <c>r[i] := ceiling(value[i])</c>.
+        /// Mnemonic: <c>rt[i] := ceiling(value[i])</c>.
         /// </summary>
         /// <param name="value">The vector that will have its ceiling computed (将计算向上舍入的向量).</param>
         /// <returns>A vector whose elements are the ceiling of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向上舍入).</returns>
@@ -91,7 +91,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the ceiling of each element in a vector (计算向量中每个元素的向上舍入).
-        /// Mnemonic: <c>r[i] := ceiling(value[i])</c>.
+        /// Mnemonic: <c>rt[i] := ceiling(value[i])</c>.
         /// </summary>
         /// <param name="value">The vector that will have its ceiling computed (将计算向上舍入的向量).</param>
         /// <returns>A vector whose elements are the ceiling of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向上舍入).</returns>
@@ -108,7 +108,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
-        /// Mnemonic: <c>r[i] := (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
+        /// Mnemonic: <c>rt[i] := (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
@@ -121,7 +121,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
-        /// Mnemonic: <c>r[i] := (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
+        /// Mnemonic: <c>rt[i] := (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
@@ -133,7 +133,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
-        /// Mnemonic: <c>r[i] := (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
+        /// Mnemonic: <c>rt[i] := (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
@@ -152,7 +152,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the floor of each element in a vector (计算向量中每个元素的向下舍入).
-        /// Mnemonic: <c>r[i] := floor(value[i])</c>.
+        /// Mnemonic: <c>rt[i] := floor(value[i])</c>.
         /// </summary>
         /// <param name="value">The vector that will have its floor computed (将计算向下舍入的向量).</param>
         /// <returns>A vector whose elements are the floor of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向下舍入).</returns>
@@ -162,7 +162,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the floor of each element in a vector (计算向量中每个元素的向下舍入).
-        /// Mnemonic: <c>r[i] := floor(value[i])</c>.
+        /// Mnemonic: <c>rt[i] := floor(value[i])</c>.
         /// </summary>
         /// <param name="value">The vector that will have its floor computed (将计算向下舍入的向量).</param>
         /// <returns>A vector whose elements are the floor of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向下舍入).</returns>
@@ -179,7 +179,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the negate of a vector (计算向量的相反数).
-        /// Mnemonic: <c>r[i] := -vector[i]</c>.
+        /// Mnemonic: <c>rt[i] := -vector[i]</c>.
         /// </summary>
         /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
         /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
@@ -189,7 +189,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the negate of a vector (计算向量的相反数).
-        /// Mnemonic: <c>r[i] := -vector[i]</c>.
+        /// Mnemonic: <c>rt[i] := -vector[i]</c>.
         /// </summary>
         /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
         /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
@@ -199,7 +199,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the negate of a vector (计算向量的相反数).
-        /// Mnemonic: <c>r[i] := -vector[i]</c>.
+        /// Mnemonic: <c>rt[i] := -vector[i]</c>.
         /// </summary>
         /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
         /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
@@ -209,7 +209,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the negate of a vector (计算向量的相反数).
-        /// Mnemonic: <c>r[i] := -vector[i]</c>.
+        /// Mnemonic: <c>rt[i] := -vector[i]</c>.
         /// </summary>
         /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
         /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
@@ -219,7 +219,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the negate of a vector (计算向量的相反数).
-        /// Mnemonic: <c>r[i] := -vector[i]</c>.
+        /// Mnemonic: <c>rt[i] := -vector[i]</c>.
         /// </summary>
         /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
         /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
@@ -229,7 +229,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the negate of a vector (计算向量的相反数).
-        /// Mnemonic: <c>r[i] := -vector[i]</c>.
+        /// Mnemonic: <c>rt[i] := -vector[i]</c>.
         /// </summary>
         /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
         /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
@@ -246,7 +246,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the ones-complement of a vector (计算向量的反码).
-        /// Mnemonic: <c>r[i] := ~vector[i]</c>.
+        /// Mnemonic: <c>rt[i] := ~vector[i]</c>.
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="vector">The vector whose ones-complement is to be computed (要计算其反码的向量).</param>
@@ -264,7 +264,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -276,7 +276,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -288,7 +288,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -300,7 +300,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -312,7 +312,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -324,7 +324,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -336,7 +336,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -348,7 +348,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -360,7 +360,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -372,7 +372,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -384,7 +384,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -396,7 +396,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -408,7 +408,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -420,7 +420,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -432,7 +432,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -444,7 +444,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -463,7 +463,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -475,7 +475,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -487,7 +487,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -499,7 +499,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -511,7 +511,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -523,7 +523,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -535,7 +535,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -547,7 +547,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
-        /// Mnemonic: <c>r[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -566,7 +566,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -578,7 +578,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -590,7 +590,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -602,7 +602,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -614,7 +614,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -626,7 +626,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -638,7 +638,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -650,7 +650,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -662,7 +662,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -674,7 +674,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -686,7 +686,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -698,7 +698,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -710,7 +710,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -722,7 +722,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -734,7 +734,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -746,7 +746,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
-        /// Mnemonic: <c>r[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
@@ -765,7 +765,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Computes the exclusive-or of two vectors (计算两个向量的位异或).
-        /// Mnemonic: <c>r[i] := left[i] ^ right[i]</c>.
+        /// Mnemonic: <c>rt[i] := left[i] ^ right[i]</c>.
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="left">The vector to exclusive-or with <paramref name="right" /> (将会与<paramref name="right" />进行位异或运算的向量).</param>

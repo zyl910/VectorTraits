@@ -103,7 +103,7 @@ namespace Zyl.VectorTraits.Impl {
                 ulong* pleft = (ulong*)&left;
                 ulong* pright = (ulong*)&right;
                 ulong* q = (ulong*)&rt;
-                // r[i] := left[i] & ~right[i];
+                // rt[i] := left[i] & ~right[i];
                 q[0] = pleft[0] & ~pright[0];
                 q[1] = pleft[1] & ~pright[1];
                 q[2] = pleft[2] & ~pright[2];
@@ -146,7 +146,7 @@ namespace Zyl.VectorTraits.Impl {
                 ulong* pleft = (ulong*)&left;
                 ulong* pright = (ulong*)&right;
                 ulong* q = (ulong*)&rt;
-                // r[i] := left[i] & right[i];
+                // rt[i] := left[i] & right[i];
                 q[0] = pleft[0] & pright[0];
                 q[1] = pleft[1] & pright[1];
                 q[2] = pleft[2] & pright[2];
@@ -189,7 +189,7 @@ namespace Zyl.VectorTraits.Impl {
                 ulong* pleft = (ulong*)&left;
                 ulong* pright = (ulong*)&right;
                 ulong* q = (ulong*)&rt;
-                // r[i] := left[i] | right[i];
+                // rt[i] := left[i] | right[i];
                 q[0] = pleft[0] | pright[0];
                 q[1] = pleft[1] | pright[1];
                 q[2] = pleft[2] | pright[2];
@@ -1626,7 +1626,7 @@ namespace Zyl.VectorTraits.Impl {
                 ulong* pleft = (ulong*)&left;
                 ulong* pright = (ulong*)&right;
                 ulong* q = (ulong*)&rt;
-                // r[i] := left[i] ^ right[i];
+                // rt[i] := left[i] ^ right[i];
                 q[0] = pleft[0] ^ pright[0];
                 q[1] = pleft[1] ^ pright[1];
                 q[2] = pleft[2] ^ pright[2];
