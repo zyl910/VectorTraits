@@ -133,6 +133,51 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.Negate_AcceleratedTypes"/>
+        public override TypeCodeFlags Negate_AcceleratedTypes {
+            get {
+                return Statics.Negate_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<float> Negate(Vector256<float> value) {
+            return Statics.Negate(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<double> Negate(Vector256<double> value) {
+            return Statics.Negate(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> Negate(Vector256<sbyte> value) {
+            return Statics.Negate(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> Negate(Vector256<short> value) {
+            return Statics.Negate(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> Negate(Vector256<int> value) {
+            return Statics.Negate(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> Negate(Vector256<long> value) {
+            return Statics.Negate(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.OnesComplement_AcceleratedTypes"/>
         public override TypeCodeFlags OnesComplement_AcceleratedTypes {
             get {

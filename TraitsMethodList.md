@@ -31,6 +31,8 @@ Types: Vector128, Vector256 .
   Mnemonic: `r[i] := left[i] | right[i]`.
 - `ConditionalSelect`: Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
   Mnemonic: `r[i] := (left[i] & condition[i]) | (right[i] & ~condition[i])`.
+- `Negate`: Computes the negate of a vector (计算向量的相反数).
+  Mnemonic: `r[i] := -vector[i]`.
 - `OnesComplement`: Computes the ones-complement of a vector (计算向量的反码).
   Mnemonic: `r[i] := ~vector[i]`.
 - `Xor`: Computes the exclusive-or of two vectors (计算两个向量的位异或).

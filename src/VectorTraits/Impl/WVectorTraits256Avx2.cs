@@ -195,6 +195,52 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.Negate_AcceleratedTypes"/>
+            public static TypeCodeFlags Negate_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> Negate(Vector256<float> value) {
+                return Avx.Subtract(Vector256<float>.Zero, value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> Negate(Vector256<double> value) {
+                return Avx.Subtract(Vector256<double>.Zero, value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> Negate(Vector256<sbyte> value) {
+                return Avx2.Subtract(Vector256<sbyte>.Zero, value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> Negate(Vector256<short> value) {
+                return Avx2.Subtract(Vector256<short>.Zero, value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> Negate(Vector256<int> value) {
+                return Avx2.Subtract(Vector256<int>.Zero, value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> Negate(Vector256<long> value) {
+                return Avx2.Subtract(Vector256<long>.Zero, value);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.OnesComplement_AcceleratedTypes"/>
             public static TypeCodeFlags OnesComplement_AcceleratedTypes {
                 get {
