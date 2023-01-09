@@ -257,7 +257,7 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> Min(Vector256<long> left, Vector256<long> right) {
                 Vector256<long> mask = Avx2.CompareGreaterThan(right, left);
-                Vector256<long> rt = Avx2.BlendVariable(mask, left, right);
+                Vector256<long> rt = Avx2.BlendVariable(right, left, mask);
                 return rt;
             }
 
@@ -269,7 +269,7 @@ namespace Zyl.VectorTraits.Impl {
                 Vector256<long> left2 = Avx2.Add(mid, left.AsInt64());
                 Vector256<long> right2 = Avx2.Add(mid, right.AsInt64());
                 Vector256<long> mask = Avx2.CompareGreaterThan(right2, left2);
-                Vector256<ulong> rt = Avx2.BlendVariable(mask.AsUInt64(), left, right);
+                Vector256<ulong> rt = Avx2.BlendVariable(right, left, mask.AsUInt64());
                 return rt;
             }
 

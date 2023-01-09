@@ -534,10 +534,10 @@ namespace Zyl.VectorTraits.Impl {
                 long condition2 = BitUtil.ToInt32Mask(pleft[2] < pright[2]);
                 long condition3 = BitUtil.ToInt32Mask(pleft[3] < pright[3]);
                 // result = (left & condition) | (right & ~condition);
-                q[0] = (BitUtil.DoubleToInt64Bits(pleft[0]) & condition0) | (BitUtil.DoubleToInt64Bits(pright[0]) & condition0);
-                q[1] = (BitUtil.DoubleToInt64Bits(pleft[1]) & condition1) | (BitUtil.DoubleToInt64Bits(pright[1]) & condition1);
-                q[2] = (BitUtil.DoubleToInt64Bits(pleft[2]) & condition2) | (BitUtil.DoubleToInt64Bits(pright[2]) & condition2);
-                q[3] = (BitUtil.DoubleToInt64Bits(pleft[3]) & condition3) | (BitUtil.DoubleToInt64Bits(pright[3]) & condition3);
+                q[0] = (BitUtil.DoubleToInt64Bits(pleft[0]) & condition0) | (BitUtil.DoubleToInt64Bits(pright[0]) & ~condition0);
+                q[1] = (BitUtil.DoubleToInt64Bits(pleft[1]) & condition1) | (BitUtil.DoubleToInt64Bits(pright[1]) & ~condition1);
+                q[2] = (BitUtil.DoubleToInt64Bits(pleft[2]) & condition2) | (BitUtil.DoubleToInt64Bits(pright[2]) & ~condition2);
+                q[3] = (BitUtil.DoubleToInt64Bits(pleft[3]) & condition3) | (BitUtil.DoubleToInt64Bits(pright[3]) & ~condition3);
                 return rt.AsDouble();
             }
 
@@ -762,10 +762,10 @@ namespace Zyl.VectorTraits.Impl {
                 long condition2 = BitUtil.ToInt32Mask(pleft[2] < pright[2]);
                 long condition3 = BitUtil.ToInt32Mask(pleft[3] < pright[3]);
                 // result = (left & condition) | (right & ~condition);
-                q[0] = ((pleft[0]) & condition0) | ((pright[0]) & condition0);
-                q[1] = ((pleft[1]) & condition1) | ((pright[1]) & condition1);
-                q[2] = ((pleft[2]) & condition2) | ((pright[2]) & condition2);
-                q[3] = ((pleft[3]) & condition3) | ((pright[3]) & condition3);
+                q[0] = ((pleft[0]) & condition0) | ((pright[0]) & ~condition0);
+                q[1] = ((pleft[1]) & condition1) | ((pright[1]) & ~condition1);
+                q[2] = ((pleft[2]) & condition2) | ((pright[2]) & ~condition2);
+                q[3] = ((pleft[3]) & condition3) | ((pright[3]) & ~condition3);
                 return rt;
             }
 
@@ -786,10 +786,10 @@ namespace Zyl.VectorTraits.Impl {
                 long condition2 = BitUtil.ToInt32Mask(pleft[2] < pright[2]);
                 long condition3 = BitUtil.ToInt32Mask(pleft[3] < pright[3]);
                 // result = (left & condition) | (right & ~condition);
-                q[0] = ((long)(pleft[0]) & condition0) | ((long)(pright[0]) & condition0);
-                q[1] = ((long)(pleft[1]) & condition1) | ((long)(pright[1]) & condition1);
-                q[2] = ((long)(pleft[2]) & condition2) | ((long)(pright[2]) & condition2);
-                q[3] = ((long)(pleft[3]) & condition3) | ((long)(pright[3]) & condition3);
+                q[0] = ((long)(pleft[0]) & condition0) | ((long)(pright[0]) & ~condition0);
+                q[1] = ((long)(pleft[1]) & condition1) | ((long)(pright[1]) & ~condition1);
+                q[2] = ((long)(pleft[2]) & condition2) | ((long)(pright[2]) & ~condition2);
+                q[3] = ((long)(pleft[3]) & condition3) | ((long)(pright[3]) & ~condition3);
                 return rt.AsUInt64();
             }
 
