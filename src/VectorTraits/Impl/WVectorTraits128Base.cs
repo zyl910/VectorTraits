@@ -358,6 +358,166 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Negate_AcceleratedTypes"/>
+            public static TypeCodeFlags Negate_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Negate(Vector128<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Negate(value);
+#else
+                return Negate_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Negate(Vector128<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Negate(value);
+#else
+                return Negate_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Negate(Vector128<sbyte> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Negate(value);
+#else
+                return Negate_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Negate(Vector128<short> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Negate(value);
+#else
+                return Negate_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Negate(Vector128<int> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Negate(value);
+#else
+                return Negate_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Negate(Vector128<long> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Negate(value);
+#else
+                return Negate_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<float> Negate_Base(Vector128<float> value) {
+                Vector128<float> rt = value;
+                float* p = (float*)&rt;
+                p[0] = -p[0];
+                p[1] = -p[1];
+                p[2] = -p[2];
+                p[3] = -p[3];
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<double> Negate_Base(Vector128<double> value) {
+                Vector128<double> rt = value;
+                double* p = (double*)&rt;
+                p[0] = -p[0];
+                p[1] = -p[1];
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<sbyte> Negate_Base(Vector128<sbyte> value) {
+                Vector128<sbyte> rt = value;
+                sbyte* p = (sbyte*)&rt;
+                p[0] = (sbyte)-p[0];
+                p[1] = (sbyte)-p[1];
+                p[2] = (sbyte)-p[2];
+                p[3] = (sbyte)-p[3];
+                p[4] = (sbyte)-p[4];
+                p[5] = (sbyte)-p[5];
+                p[6] = (sbyte)-p[6];
+                p[7] = (sbyte)-p[7];
+                p[8] = (sbyte)-p[8];
+                p[9] = (sbyte)-p[9];
+                p[10] = (sbyte)-p[10];
+                p[11] = (sbyte)-p[11];
+                p[12] = (sbyte)-p[12];
+                p[13] = (sbyte)-p[13];
+                p[14] = (sbyte)-p[14];
+                p[15] = (sbyte)-p[15];
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<short> Negate_Base(Vector128<short> value) {
+                Vector128<short> rt = value;
+                short* p = (short*)&rt;
+                p[0] = (short)-p[0];
+                p[1] = (short)-p[1];
+                p[2] = (short)-p[2];
+                p[3] = (short)-p[3];
+                p[4] = (short)-p[4];
+                p[5] = (short)-p[5];
+                p[6] = (short)-p[6];
+                p[7] = (short)-p[7];
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<int> Negate_Base(Vector128<int> value) {
+                Vector128<int> rt = value;
+                int* p = (int*)&rt;
+                p[0] = -p[0];
+                p[1] = -p[1];
+                p[2] = -p[2];
+                p[3] = -p[3];
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<long> Negate_Base(Vector128<long> value) {
+                Vector128<long> rt = value;
+                long* p = (long*)&rt;
+                p[0] = -p[0];
+                p[1] = -p[1];
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.OnesComplement_AcceleratedTypes"/>
             public static TypeCodeFlags OnesComplement_AcceleratedTypes {
                 get {

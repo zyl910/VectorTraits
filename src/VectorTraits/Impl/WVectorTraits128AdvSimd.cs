@@ -243,6 +243,55 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Negate_AcceleratedTypes"/>
+            public static TypeCodeFlags Negate_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Negate(Vector128<float> value) {
+                return AdvSimd.Negate(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Negate(Vector128<double> value) {
+                Vector64<double> lower = AdvSimd.NegateScalar(Vector128.GetLower(value));
+                Vector64<double> upper = AdvSimd.NegateScalar(Vector128.GetUpper(value));
+                Vector128<double> rt = Vector128.Create(lower, upper);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Negate(Vector128<sbyte> value) {
+                return AdvSimd.Negate(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Negate(Vector128<short> value) {
+                return AdvSimd.Negate(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Negate(Vector128<int> value) {
+                return AdvSimd.Negate(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Negate(Vector128<long> value) {
+                return AdvSimd.Subtract(Vector128<long>.Zero, value);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.OnesComplement_AcceleratedTypes"/>
             public static TypeCodeFlags OnesComplement_AcceleratedTypes {
                 get {

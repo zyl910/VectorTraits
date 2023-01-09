@@ -172,6 +172,73 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Negate</c> (运行 <c>Negate</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Negate"/>
+        TypeCodeFlags Negate_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the negate of a vector (计算向量的相反数).
+        /// Mnemonic: <c>r[i] := -vector[i]</c>.
+        /// </summary>
+        /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
+        /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
+        /// <seealso cref="Negate_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Negate{T}(Vector128{T})" />
+        Vector128<float> Negate(Vector128<float> vector);
+
+        /// <summary>
+        /// Computes the negate of a vector (计算向量的相反数).
+        /// Mnemonic: <c>r[i] := -vector[i]</c>.
+        /// </summary>
+        /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
+        /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
+        /// <seealso cref="Negate_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Negate{T}(Vector128{T})" />
+        Vector128<double> Negate(Vector128<double> vector);
+
+        /// <summary>
+        /// Computes the negate of a vector (计算向量的相反数).
+        /// Mnemonic: <c>r[i] := -vector[i]</c>.
+        /// </summary>
+        /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
+        /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
+        /// <seealso cref="Negate_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Negate{T}(Vector128{T})" />
+        Vector128<sbyte> Negate(Vector128<sbyte> vector);
+
+        /// <summary>
+        /// Computes the negate of a vector (计算向量的相反数).
+        /// Mnemonic: <c>r[i] := -vector[i]</c>.
+        /// </summary>
+        /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
+        /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
+        /// <seealso cref="Negate_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Negate{T}(Vector128{T})" />
+        Vector128<short> Negate(Vector128<short> vector);
+
+        /// <summary>
+        /// Computes the negate of a vector (计算向量的相反数).
+        /// Mnemonic: <c>r[i] := -vector[i]</c>.
+        /// </summary>
+        /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
+        /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
+        /// <seealso cref="Negate_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Negate{T}(Vector128{T})" />
+        Vector128<int> Negate(Vector128<int> vector);
+
+        /// <summary>
+        /// Computes the negate of a vector (计算向量的相反数).
+        /// Mnemonic: <c>r[i] := -vector[i]</c>.
+        /// </summary>
+        /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
+        /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
+        /// <seealso cref="Negate_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Negate{T}(Vector128{T})" />
+        Vector128<long> Negate(Vector128<long> vector);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>OnesComplement</c> (运行 <c>OnesComplement</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="OnesComplement"/>

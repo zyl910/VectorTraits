@@ -10,6 +10,8 @@ using System.Runtime.Intrinsics.Arm;
 #endif // NET5_0_OR_GREATER
 
 namespace Zyl.VectorTraits.Impl {
+    using SuperStatics = WVectorTraits128AdvSimd.Statics;
+
     /// <summary>
     /// <see cref="Vector128{T}"/> traits - AdvSimd 64bit .
     /// </summary>
@@ -108,6 +110,27 @@ namespace Zyl.VectorTraits.Impl {
                 return AdvSimd.Arm64.Floor(value);
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate_AcceleratedTypes"/>
+            public static TypeCodeFlags Negate_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Double | TypeCodeFlags.Int64
+                        | SuperStatics.Negate_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Negate(Vector128<double> value) {
+                return AdvSimd.Arm64.Negate(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Negate(Vector128<long> value) {
+                return AdvSimd.Arm64.Negate(value);
+            }
 
 
 #endif // NET5_0_OR_GREATER
