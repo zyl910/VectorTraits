@@ -358,6 +358,350 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Max_AcceleratedTypes"/>
+            public static TypeCodeFlags Max_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Max(Vector128<float> left, Vector128<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Max(left, right);
+#else
+                return Max_Conditional(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Max(Vector128<double> left, Vector128<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Max(left, right);
+#else
+                return Max_Conditional(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Max(Vector128<sbyte> left, Vector128<sbyte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Max(left, right);
+#else
+                return Max_Conditional(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> Max(Vector128<byte> left, Vector128<byte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Max(left, right);
+#else
+                return Max_Conditional(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Max(Vector128<short> left, Vector128<short> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Max(left, right);
+#else
+                return Max_Conditional(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> Max(Vector128<ushort> left, Vector128<ushort> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Max(left, right);
+#else
+                return Max_Conditional(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Max(Vector128<int> left, Vector128<int> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Max(left, right);
+#else
+                return Max_Conditional(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> Max(Vector128<uint> left, Vector128<uint> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Max(left, right);
+#else
+                return Max_Conditional(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Max(Vector128<long> left, Vector128<long> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Max(left, right);
+#else
+                return Max_Conditional(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> Max(Vector128<ulong> left, Vector128<ulong> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Max(left, right);
+#else
+                return Max_Conditional(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<float> Max_Conditional(Vector128<float> left, Vector128<float> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<int> condition);
+#else
+                Vector128<int> condition = default;
+#endif // NET5_0_OR_GREATER
+                int* pcondition = (int*)&condition;
+                float* pleft = (float*)&left;
+                float* pright = (float*)&right;
+                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                Vector128<float> rt = ConditionalSelect(condition.AsSingle(), left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<double> Max_Conditional(Vector128<double> left, Vector128<double> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<long> rt);
+#else
+                Vector128<long> rt = default;
+#endif // NET5_0_OR_GREATER
+                double* pleft = (double*)&left;
+                double* pright = (double*)&right;
+                long* q = (long*)&rt;
+                long condition0 = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                long condition1 = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                // result = (left & condition) | (right & ~condition);
+                q[0] = (BitUtil.DoubleToInt64Bits(pleft[0]) & condition0) | (BitUtil.DoubleToInt64Bits(pright[0]) & ~condition0);
+                q[1] = (BitUtil.DoubleToInt64Bits(pleft[1]) & condition1) | (BitUtil.DoubleToInt64Bits(pright[1]) & ~condition1);
+                return rt.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<sbyte> Max_Conditional(Vector128<sbyte> left, Vector128<sbyte> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<sbyte> condition);
+#else
+                Vector128<sbyte> condition = default;
+#endif // NET5_0_OR_GREATER
+                sbyte* pcondition = (sbyte*)&condition;
+                sbyte* pleft = (sbyte*)&left;
+                sbyte* pright = (sbyte*)&right;
+                pcondition[0] = (sbyte)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = (sbyte)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = (sbyte)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = (sbyte)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = (sbyte)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = (sbyte)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = (sbyte)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = (sbyte)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
+                pcondition[8] = (sbyte)BitUtil.ToInt32Mask(pleft[8] > pright[8]);
+                pcondition[9] = (sbyte)BitUtil.ToInt32Mask(pleft[9] > pright[9]);
+                pcondition[10] = (sbyte)BitUtil.ToInt32Mask(pleft[10] > pright[10]);
+                pcondition[11] = (sbyte)BitUtil.ToInt32Mask(pleft[11] > pright[11]);
+                pcondition[12] = (sbyte)BitUtil.ToInt32Mask(pleft[12] > pright[12]);
+                pcondition[13] = (sbyte)BitUtil.ToInt32Mask(pleft[13] > pright[13]);
+                pcondition[14] = (sbyte)BitUtil.ToInt32Mask(pleft[14] > pright[14]);
+                pcondition[15] = (sbyte)BitUtil.ToInt32Mask(pleft[15] > pright[15]);
+                Vector128<sbyte> rt = ConditionalSelect(condition, left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<byte> Max_Conditional(Vector128<byte> left, Vector128<byte> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<sbyte> condition);
+#else
+                Vector128<sbyte> condition = default;
+#endif // NET5_0_OR_GREATER
+                sbyte* pcondition = (sbyte*)&condition;
+                byte* pleft = (byte*)&left;
+                byte* pright = (byte*)&right;
+                pcondition[0] = (sbyte)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = (sbyte)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = (sbyte)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = (sbyte)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = (sbyte)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = (sbyte)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = (sbyte)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = (sbyte)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
+                pcondition[8] = (sbyte)BitUtil.ToInt32Mask(pleft[8] > pright[8]);
+                pcondition[9] = (sbyte)BitUtil.ToInt32Mask(pleft[9] > pright[9]);
+                pcondition[10] = (sbyte)BitUtil.ToInt32Mask(pleft[10] > pright[10]);
+                pcondition[11] = (sbyte)BitUtil.ToInt32Mask(pleft[11] > pright[11]);
+                pcondition[12] = (sbyte)BitUtil.ToInt32Mask(pleft[12] > pright[12]);
+                pcondition[13] = (sbyte)BitUtil.ToInt32Mask(pleft[13] > pright[13]);
+                pcondition[14] = (sbyte)BitUtil.ToInt32Mask(pleft[14] > pright[14]);
+                pcondition[15] = (sbyte)BitUtil.ToInt32Mask(pleft[15] > pright[15]);
+                Vector128<byte> rt = ConditionalSelect(condition.AsByte(), left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<short> Max_Conditional(Vector128<short> left, Vector128<short> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<short> condition);
+#else
+                Vector128<short> condition = default;
+#endif // NET5_0_OR_GREATER
+                short* pcondition = (short*)&condition;
+                short* pleft = (short*)&left;
+                short* pright = (short*)&right;
+                pcondition[0] = (short)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = (short)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = (short)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = (short)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = (short)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = (short)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = (short)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = (short)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
+                Vector128<short> rt = ConditionalSelect(condition, left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<ushort> Max_Conditional(Vector128<ushort> left, Vector128<ushort> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<short> condition);
+#else
+                Vector128<short> condition = default;
+#endif // NET5_0_OR_GREATER
+                short* pcondition = (short*)&condition;
+                ushort* pleft = (ushort*)&left;
+                ushort* pright = (ushort*)&right;
+                pcondition[0] = (short)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = (short)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = (short)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = (short)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = (short)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = (short)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = (short)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = (short)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
+                Vector128<ushort> rt = ConditionalSelect(condition.AsUInt16(), left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<int> Max_Conditional(Vector128<int> left, Vector128<int> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<int> condition);
+#else
+                Vector128<int> condition = default;
+#endif // NET5_0_OR_GREATER
+                int* pcondition = (int*)&condition;
+                int* pleft = (int*)&left;
+                int* pright = (int*)&right;
+                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                Vector128<int> rt = ConditionalSelect(condition, left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<uint> Max_Conditional(Vector128<uint> left, Vector128<uint> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<int> condition);
+#else
+                Vector128<int> condition = default;
+#endif // NET5_0_OR_GREATER
+                int* pcondition = (int*)&condition;
+                uint* pleft = (uint*)&left;
+                uint* pright = (uint*)&right;
+                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                Vector128<uint> rt = ConditionalSelect(condition.AsUInt32(), left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<long> Max_Conditional(Vector128<long> left, Vector128<long> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<long> rt);
+#else
+                Vector128<long> rt = default;
+#endif // NET5_0_OR_GREATER
+                long* pleft = (long*)&left;
+                long* pright = (long*)&right;
+                long* q = (long*)&rt;
+                long condition0 = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                long condition1 = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                // result = (left & condition) | (right & ~condition);
+                q[0] = ((pleft[0]) & condition0) | ((pright[0]) & ~condition0);
+                q[1] = ((pleft[1]) & condition1) | ((pright[1]) & ~condition1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<ulong> Max_Conditional(Vector128<ulong> left, Vector128<ulong> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<long> rt);
+#else
+                Vector128<long> rt = default;
+#endif // NET5_0_OR_GREATER
+                ulong* pleft = (ulong*)&left;
+                ulong* pright = (ulong*)&right;
+                long* q = (long*)&rt;
+                long condition0 = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                long condition1 = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                // result = (left & condition) | (right & ~condition);
+                q[0] = ((long)(pleft[0]) & condition0) | ((long)(pright[0]) & ~condition0);
+                q[1] = ((long)(pleft[1]) & condition1) | ((long)(pright[1]) & ~condition1);
+                return rt.AsUInt64();
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Min_AcceleratedTypes"/>
             public static TypeCodeFlags Min_AcceleratedTypes {
                 get {
