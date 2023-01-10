@@ -265,7 +265,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Max(Vector256<ulong> left, Vector256<ulong> right) {
-                Vector256<long> mid = Vector256s<long>.MaxValue;
+                Vector256<long> mid = Vector256s<long>.MinValue;
                 Vector256<long> left2 = Avx2.Add(mid, left.AsInt64());
                 Vector256<long> right2 = Avx2.Add(mid, right.AsInt64());
                 Vector256<long> mask = Avx2.CompareGreaterThan(left2, right2);
