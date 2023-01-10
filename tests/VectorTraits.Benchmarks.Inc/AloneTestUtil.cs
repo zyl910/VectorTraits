@@ -40,15 +40,30 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static void AloneTestVector(TextWriter writer) {
+            string indentNext = IndentNextSeparator;
+
+            // -- TraitsInstances --
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK.");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage(true)}");
+                }
+            }
+            VectorTextUtil.WriteLine(writer, "Vectors<float>.Demo:\t{0}", Vectors<float>.Demo);
+            VectorTextUtil.WriteLine(writer, "Vectors<double>.Demo:\t{0}", Vectors<double>.Demo);
+            writer.WriteLine();
+
             // -- Ceiling --
             if (true) {
                 try {
-                    var demo = Vectors<float>.Demo;
-                    VectorTextUtil.WriteLine(writer, "demo:\t{0}", demo);
-                    VectorTextUtil.WriteLine(writer, "Vectors.Ceiling(demo):\t{0}", Vectors.Ceiling(demo));
-                    VectorTextUtil.WriteLine(writer, "Vectors.BaseInstance.Ceiling(demo):\t{0}", Vectors.BaseInstance.Ceiling(demo));
-                    VectorTextUtil.WriteLine(writer, "Vectors.Ceiling_AcceleratedTypes:\t{0}", Vectors.Ceiling_AcceleratedTypes);
-                    VectorTextUtil.WriteLine(writer, "Vectors.BaseInstance.Ceiling_AcceleratedTypes:\t{0}", Vectors.BaseInstance.Ceiling_AcceleratedTypes);
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        Console.WriteLine($"{instance.GetType().Name}: {instance.Ceiling_AcceleratedTypes}");
+                        VectorTextUtil.WriteLine(indentNext, writer, "Ceiling<float>(Demo):\t{0}", instance.Ceiling(Vectors<float>.Demo));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Ceiling<double>(Demo):\t{0}", instance.Ceiling(Vectors<double>.Demo));
+                    }
                 } catch (Exception ex) {
                     writer.WriteLine($"Ceiling:\tFail!. {ex}");
                 }
@@ -58,12 +73,12 @@ namespace Zyl.VectorTraits.Benchmarks {
             // -- Floor --
             if (true) {
                 try {
-                    var demo = Vectors<float>.Demo;
-                    VectorTextUtil.WriteLine(writer, "demo:\t{0}", demo);
-                    VectorTextUtil.WriteLine(writer, "Vectors.Floor(demo):\t{0}", Vectors.Floor(demo));
-                    VectorTextUtil.WriteLine(writer, "Vectors.BaseInstance.Floor(demo):\t{0}", Vectors.BaseInstance.Floor(demo));
-                    VectorTextUtil.WriteLine(writer, "Vectors.Floor_AcceleratedTypes:\t{0}", Vectors.Floor_AcceleratedTypes);
-                    VectorTextUtil.WriteLine(writer, "Vectors.BaseInstance.Floor_AcceleratedTypes:\t{0}", Vectors.BaseInstance.Floor_AcceleratedTypes);
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        Console.WriteLine($"{instance.GetType().Name}: {instance.Floor_AcceleratedTypes}");
+                        VectorTextUtil.WriteLine(indentNext, writer, "Floor<float>(Demo):\t{0}", instance.Floor(Vectors<float>.Demo));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Floor<double>(Demo):\t{0}", instance.Floor(Vectors<double>.Demo));
+                    }
                 } catch (Exception ex) {
                     writer.WriteLine($"Floor:\tFail!. {ex}");
                 }
@@ -122,12 +137,27 @@ namespace Zyl.VectorTraits.Benchmarks {
                 try {
                     foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        Console.WriteLine($"{instance.GetType().Name}: {instance.Floor_AcceleratedTypes}");
+                        Console.WriteLine($"{instance.GetType().Name}: {instance.Max_AcceleratedTypes}");
                         VectorTextUtil.WriteLine(indentNext, writer, "Max<float>(Demo, V1):\t{0}", instance.Max(Vector128s<float>.Demo, Vector128s<float>.V1));
                         VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(Demo, V1):\t{0}", instance.Max(Vector128s<double>.Demo, Vector128s<double>.V1));
                     }
                 } catch (Exception ex) {
-                    writer.WriteLine($"Floor:\tFail!. {ex}");
+                    writer.WriteLine($"Max:\tFail!. {ex}");
+                }
+                writer.WriteLine();
+            }
+
+            // -- Min --
+            if (true) {
+                try {
+                    foreach (IWVectorTraits128 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        Console.WriteLine($"{instance.GetType().Name}: {instance.Min_AcceleratedTypes}");
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<float>(Demo, V1):\t{0}", instance.Min(Vector128s<float>.Demo, Vector128s<float>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(Demo, V1):\t{0}", instance.Min(Vector128s<double>.Demo, Vector128s<double>.V1));
+                    }
+                } catch (Exception ex) {
+                    writer.WriteLine($"Min:\tFail!. {ex}");
                 }
                 writer.WriteLine();
             }
