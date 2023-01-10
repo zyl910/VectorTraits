@@ -49,10 +49,12 @@ namespace Zyl.VectorTraits.Impl {
             public static bool GetIsSupported(bool noStrict = false) {
                 bool rt = false;
 #if NET5_0_OR_GREATER
-                rt = AdvSimd.IsSupported;
+                rt = AdvSimd.Arm64.IsSupported;
 #else
 #endif // NET5_0_OR_GREATER
-                if (!noStrict) {
+                //if (!noStrict) {
+                if (true) {
+                    // Must be 64-bit to work
                     rt = rt && (sizeof(long) == IntPtr.Size);
                 }
                 return rt;
@@ -65,7 +67,9 @@ namespace Zyl.VectorTraits.Impl {
 #else
                 rt = "Vector128 type is not supported! " + rt;
 #endif // NETCOREAPP3_0_OR_GREATER
-                if (!noStrict) {
+                //if (!noStrict) {
+                if (true) {
+                    // Must be 64-bit to work
                     if (!(sizeof(long) == IntPtr.Size)) {
                         rt += string.Format("This process({0}bit) is not 64-bit!", IntPtr.Size * 8);
                     }
