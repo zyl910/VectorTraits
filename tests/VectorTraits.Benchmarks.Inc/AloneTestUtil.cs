@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
+#if NETCOREAPP3_0_OR_GREATER
+using System.Runtime.Intrinsics;
+#endif
 using System.Text;
+using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Benchmarks {
     /// <summary>
@@ -15,11 +18,28 @@ namespace Zyl.VectorTraits.Benchmarks {
         // export DOTNET_JitDisasm=AloneTest
         // dotnet VectorTraits.Benchmarks.dll 3 >1.txt
 
+        /// <summary>Indent next separator (增加缩进的分隔符).</summary>
+        internal static readonly string IndentNextSeparator = VectorTextUtil.IndentNextSeparator;
+
         /// <summary>
         /// Alone test.
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static void AloneTest(TextWriter writer) {
+            AloneTestVector(writer);
+            AloneTestVector128(writer);
+
+            // -- IntroDisassemblyDry --
+            var o = new IntroDisassemblyDry();
+            int n = o.RunVector128();
+            writer.WriteLine("RunVector128:\t{0}", n);
+        }
+
+        /// <summary>
+        /// Alone test Vector.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static void AloneTestVector(TextWriter writer) {
             // -- Ceiling --
             if (true) {
                 try {
@@ -74,10 +94,46 @@ namespace Zyl.VectorTraits.Benchmarks {
             //    }
             //}
 
-            // -- IntroDisassemblyDry --
-            var o = new IntroDisassemblyDry();
-            int n = o.RunVector128();
-            writer.WriteLine("RunVector128:\t{0}", n);
         }
+
+        /// <summary>
+        /// Alone test Vector128.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static void AloneTestVector128(TextWriter writer) {
+#if NETCOREAPP3_0_OR_GREATER
+            string indentNext = IndentNextSeparator;
+
+            // -- TraitsInstances --
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK.");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage(true)}");
+                }
+            }
+            VectorTextUtil.WriteLine(writer, "Vector128s<float>.Demo:\t{0}", Vector128s<float>.Demo);
+            VectorTextUtil.WriteLine(writer, "Vector128s<double>.Demo:\t{0}", Vector128s<double>.Demo);
+            writer.WriteLine();
+
+            // -- Max --
+            if (true) {
+                try {
+                    foreach (IWVectorTraits128 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        Console.WriteLine($"{instance.GetType().Name}: {instance.Floor_AcceleratedTypes}");
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<float>(Demo, V1):\t{0}", instance.Max(Vector128s<float>.Demo, Vector128s<float>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(Demo, V1):\t{0}", instance.Max(Vector128s<double>.Demo, Vector128s<double>.V1));
+                    }
+                } catch (Exception ex) {
+                    writer.WriteLine($"Floor:\tFail!. {ex}");
+                }
+                writer.WriteLine();
+            }
+
+#endif // NETCOREAPP3_0_OR_GREATER
+        }
+
     }
 }
