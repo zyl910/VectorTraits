@@ -119,7 +119,7 @@ namespace Zyl.VectorTraits.Impl {
             public static TypeCodeFlags Max_AcceleratedTypes {
                 get {
                     return TypeCodeFlags.Double | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64
-                        | SuperStatics.Negate_AcceleratedTypes;
+                        | SuperStatics.Max_AcceleratedTypes;
                 }
             }
 
@@ -151,7 +151,7 @@ namespace Zyl.VectorTraits.Impl {
             public static TypeCodeFlags Min_AcceleratedTypes {
                 get {
                     return TypeCodeFlags.Double | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64
-                        | SuperStatics.Negate_AcceleratedTypes;
+                        | SuperStatics.Min_AcceleratedTypes;
                 }
             }
 

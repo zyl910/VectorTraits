@@ -53,6 +53,8 @@ namespace Zyl.VectorTraits.Benchmarks {
             }
             VectorTextUtil.WriteLine(writer, "Vectors<float>.Demo:\t{0}", Vectors<float>.Demo);
             VectorTextUtil.WriteLine(writer, "Vectors<double>.Demo:\t{0}", Vectors<double>.Demo);
+            Vector<double> demo2Double = Vectors.CreateRotate(double.NegativeInfinity, double.NaN, double.PositiveInfinity, Scalars<double>.NegativeZero);
+            VectorTextUtil.WriteLine(writer, "Vector<double> Demo2:\t{0}", demo2Double);
             writer.WriteLine();
 
             // -- Ceiling --
@@ -63,6 +65,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                         Console.WriteLine($"{instance.GetType().Name}: {instance.Ceiling_AcceleratedTypes}");
                         VectorTextUtil.WriteLine(indentNext, writer, "Ceiling<float>(Demo):\t{0}", instance.Ceiling(Vectors<float>.Demo));
                         VectorTextUtil.WriteLine(indentNext, writer, "Ceiling<double>(Demo):\t{0}", instance.Ceiling(Vectors<double>.Demo));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Ceiling<double>(Demo2):\t{0}", instance.Ceiling(demo2Double));
                     }
                 } catch (Exception ex) {
                     writer.WriteLine($"Ceiling:\tFail!. {ex}");
@@ -78,6 +81,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                         Console.WriteLine($"{instance.GetType().Name}: {instance.Floor_AcceleratedTypes}");
                         VectorTextUtil.WriteLine(indentNext, writer, "Floor<float>(Demo):\t{0}", instance.Floor(Vectors<float>.Demo));
                         VectorTextUtil.WriteLine(indentNext, writer, "Floor<double>(Demo):\t{0}", instance.Floor(Vectors<double>.Demo));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Floor<double>(Demo2):\t{0}", instance.Floor(demo2Double));
                     }
                 } catch (Exception ex) {
                     writer.WriteLine($"Floor:\tFail!. {ex}");
@@ -130,6 +134,8 @@ namespace Zyl.VectorTraits.Benchmarks {
             }
             VectorTextUtil.WriteLine(writer, "Vector128s<float>.Demo:\t{0}", Vector128s<float>.Demo);
             VectorTextUtil.WriteLine(writer, "Vector128s<double>.Demo:\t{0}", Vector128s<double>.Demo);
+            Vector128<double> demo2Double = Vector128.Create(double.NegativeInfinity, double.NaN);
+            VectorTextUtil.WriteLine(writer, "Vector128<double> Demo2:\t{0}", demo2Double);
             writer.WriteLine();
 
             // -- Max --
@@ -140,6 +146,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                         Console.WriteLine($"{instance.GetType().Name}: {instance.Max_AcceleratedTypes}");
                         VectorTextUtil.WriteLine(indentNext, writer, "Max<float>(Demo, V1):\t{0}", instance.Max(Vector128s<float>.Demo, Vector128s<float>.V1));
                         VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(Demo, V1):\t{0}", instance.Max(Vector128s<double>.Demo, Vector128s<double>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(Demo2, V1):\t{0}", instance.Max(demo2Double, Vector128s<double>.V1));
                     }
                 } catch (Exception ex) {
                     writer.WriteLine($"Max:\tFail!. {ex}");
@@ -155,6 +162,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                         Console.WriteLine($"{instance.GetType().Name}: {instance.Min_AcceleratedTypes}");
                         VectorTextUtil.WriteLine(indentNext, writer, "Min<float>(Demo, V1):\t{0}", instance.Min(Vector128s<float>.Demo, Vector128s<float>.V1));
                         VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(Demo, V1):\t{0}", instance.Min(Vector128s<double>.Demo, Vector128s<double>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(Demo2, V1):\t{0}", instance.Min(demo2Double, Vector128s<double>.V1));
                     }
                 } catch (Exception ex) {
                     writer.WriteLine($"Min:\tFail!. {ex}");

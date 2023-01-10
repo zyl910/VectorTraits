@@ -310,6 +310,8 @@ namespace Zyl.VectorTraits {
         public static readonly T MinValue;
         /// <summary>Represents not a number (NaN) (表示“非数(NaN)”的值). When the type is an integer, the value is 0 (当类型为整数时，该值为0).</summary>
         public static readonly T NaN;
+        /// <summary>Represents the number negative zero (-0) (表示“负零(-0)”的值). When the type is an integer, the value is 0 (当类型为整数时，该值为0).</summary>
+        public static readonly T NegativeZero;
         /// <summary>Represents negative infinity (表示负无穷). When the type is an integer, the value is 0 (当类型为整数时，该值为0).</summary>
         public static readonly T NegativeInfinity;
         /// <summary>Represents positive infinity (表示正无穷). When the type is an integer, the value is 0 (当类型为整数时，该值为0).</summary>
@@ -414,6 +416,7 @@ namespace Zyl.VectorTraits {
         static Scalars() {
             V0 = default;
             AllBitsSet = Scalars.OnesComplement(V0);
+            NegativeZero = default;
             // -- Number struct --
             unchecked {
                 if (typeof(T) == typeof(float)) {
@@ -434,6 +437,7 @@ namespace Zyl.VectorTraits {
                     NaN = (T)(object)float.NaN;
                     NegativeInfinity = (T)(object)float.NegativeInfinity;
                     PositiveInfinity = (T)(object)float.PositiveInfinity;
+                    NegativeZero = (T)(object)BitUtil.Int32BitsToSingle((int)0x80000000 | BitUtil.SingleToInt32Bits(0));
                 } else if (typeof(T) == typeof(double)) {
                     ByteSize = sizeof(double);
                     ExponentBias = 1023;
@@ -452,6 +456,7 @@ namespace Zyl.VectorTraits {
                     NaN = (T)(object)double.NaN;
                     NegativeInfinity = (T)(object)double.NegativeInfinity;
                     PositiveInfinity = (T)(object)double.PositiveInfinity;
+                    NegativeZero = (T)(object)BitUtil.Int64BitsToDouble((long)0x8000000000000000L | BitUtil.DoubleToInt64Bits(0));
                 } else if (typeof(T) == typeof(sbyte)) {
                     ByteSize = sizeof(sbyte);
                     ExponentBias = 0;
@@ -679,6 +684,7 @@ namespace Zyl.VectorTraits {
                     NaN = (T)(object)Half.NaN;
                     NegativeInfinity = (T)(object)Half.NegativeInfinity;
                     PositiveInfinity = (T)(object)Half.PositiveInfinity;
+                    NegativeZero = (T)(object)BitUtil.Int16BitsToHalf((short)(0x8000 | BitUtil.HalfToInt16Bits((Half)0)));
 #endif // NET5_0_OR_GREATER
                 }
             }
