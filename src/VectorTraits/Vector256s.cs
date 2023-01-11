@@ -590,6 +590,10 @@ namespace Zyl.VectorTraits {
         public static readonly Vector256<T> SerialNegative;
         /// <summary>Demo Value (演示值). It is a value constructed for testing purposes (它是为测试目的而构造的值).</summary>
         public static readonly Vector256<T> Demo;
+        /// <summary>NaN Demo Value (NaN演示值). It is a value constructed for testing purposes (它是为测试目的而构造的值).</summary>
+        public static readonly Vector256<T> DemoNaN;
+        /// <summary>NaN Demo Value 2 (NaN演示值2). It is a value constructed for testing purposes (它是为测试目的而构造的值).</summary>
+        public static readonly Vector256<T> DemoNaN2;
         /// <summary>Serial bit pos mask (顺序位偏移的掩码). The element whose index exceeds the number of bits has a value of 0(索引超过位数的元素值为0). e.g. 1, 2, 4, 8, 0x10 ...</summary>
         public static readonly Vector256<T> MaskBitPosSerial;
         /// <summary>Serial bit pos rotate mask (顺序位偏移的旋转掩码). e.g. 1, 2, 4, 8, 0x10 ...</summary>
@@ -722,6 +726,8 @@ namespace Zyl.VectorTraits {
             SerialDesc = Vector256s.CreateByDoubleLoop<T>(Vector256<T>.Count - 1, -1);
             SerialNegative = Vector256s.CreateByDoubleLoop<T>(0, -1);
             Demo = Vector256s.CreateByFunc<T>(Vectors.GenerateDemoElement<T>);
+            DemoNaN = Vector256s.CreateRotate<T>(ElementNaN, ElementNegativeInfinity, ElementSignMask, ElementPositiveInfinity, ElementMaxValue, ElementMinValue, ElementV6, ElementV7);
+            DemoNaN2 = Vector256s.CreateRotate<T>(ElementPositiveInfinity, ElementNaN, ElementNegativeInfinity, ElementSignMask, ElementV_4, ElementMaxValue, ElementMinValue, ElementV_7);
             int bitLen = ElementByteSize * 8;
             MaskBitPosSerial = Vector256s.CreateByFunc<T>(delegate (int index) {
                 long n = 0;

@@ -28,6 +28,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         public static void AloneTest(TextWriter writer) {
             AloneTestVector(writer);
             AloneTestVector128(writer);
+            AloneTestVector256(writer);
 
             // -- IntroDisassemblyDry --
             var o = new IntroDisassemblyDry();
@@ -53,8 +54,8 @@ namespace Zyl.VectorTraits.Benchmarks {
             }
             VectorTextUtil.WriteLine(writer, "Vectors<float>.Demo:\t{0}", Vectors<float>.Demo);
             VectorTextUtil.WriteLine(writer, "Vectors<double>.Demo:\t{0}", Vectors<double>.Demo);
-            Vector<double> demo2Double = Vectors.CreateRotate(double.NegativeInfinity, double.NaN, double.PositiveInfinity, Scalars<double>.NegativeZero);
-            VectorTextUtil.WriteLine(writer, "Vector<double> Demo2:\t{0}", demo2Double);
+            VectorTextUtil.WriteLine(writer, "Vectors<double>.DemoNaN:\t{0}", Vectors<double>.DemoNaN);
+            VectorTextUtil.WriteLine(writer, "Vectors<double>.DemoNaN2:\t{0}", Vectors<double>.DemoNaN2);
             writer.WriteLine();
 
             // -- Ceiling --
@@ -65,7 +66,8 @@ namespace Zyl.VectorTraits.Benchmarks {
                         Console.WriteLine($"{instance.GetType().Name}: {instance.Ceiling_AcceleratedTypes}");
                         VectorTextUtil.WriteLine(indentNext, writer, "Ceiling<float>(Demo):\t{0}", instance.Ceiling(Vectors<float>.Demo));
                         VectorTextUtil.WriteLine(indentNext, writer, "Ceiling<double>(Demo):\t{0}", instance.Ceiling(Vectors<double>.Demo));
-                        VectorTextUtil.WriteLine(indentNext, writer, "Ceiling<double>(Demo2):\t{0}", instance.Ceiling(demo2Double));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Ceiling<double>(DemoNaN):\t{0}", instance.Ceiling(Vectors<double>.DemoNaN));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Ceiling<double>(DemoNaN2):\t{0}", instance.Ceiling(Vectors<double>.DemoNaN2));
                     }
                 } catch (Exception ex) {
                     writer.WriteLine($"Ceiling:\tFail!. {ex}");
@@ -81,7 +83,8 @@ namespace Zyl.VectorTraits.Benchmarks {
                         Console.WriteLine($"{instance.GetType().Name}: {instance.Floor_AcceleratedTypes}");
                         VectorTextUtil.WriteLine(indentNext, writer, "Floor<float>(Demo):\t{0}", instance.Floor(Vectors<float>.Demo));
                         VectorTextUtil.WriteLine(indentNext, writer, "Floor<double>(Demo):\t{0}", instance.Floor(Vectors<double>.Demo));
-                        VectorTextUtil.WriteLine(indentNext, writer, "Floor<double>(Demo2):\t{0}", instance.Floor(demo2Double));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Floor<double>(DemoNaN):\t{0}", instance.Floor(Vectors<double>.DemoNaN));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Floor<double>(DemoNaN2):\t{0}", instance.Floor(Vectors<double>.DemoNaN2));
                     }
                 } catch (Exception ex) {
                     writer.WriteLine($"Floor:\tFail!. {ex}");
@@ -134,8 +137,8 @@ namespace Zyl.VectorTraits.Benchmarks {
             }
             VectorTextUtil.WriteLine(writer, "Vector128s<float>.Demo:\t{0}", Vector128s<float>.Demo);
             VectorTextUtil.WriteLine(writer, "Vector128s<double>.Demo:\t{0}", Vector128s<double>.Demo);
-            Vector128<double> demo2Double = Vector128.Create(double.NegativeInfinity, double.NaN);
-            VectorTextUtil.WriteLine(writer, "Vector128<double> Demo2:\t{0}", demo2Double);
+            VectorTextUtil.WriteLine(writer, "Vector128s<double>.DemoNaN:\t{0}", Vector128s<double>.DemoNaN);
+            VectorTextUtil.WriteLine(writer, "Vector128s<double>.DemoNaN2:\t{0}", Vector128s<double>.DemoNaN2);
             writer.WriteLine();
 
             // -- Max --
@@ -146,7 +149,9 @@ namespace Zyl.VectorTraits.Benchmarks {
                         Console.WriteLine($"{instance.GetType().Name}: {instance.Max_AcceleratedTypes}");
                         VectorTextUtil.WriteLine(indentNext, writer, "Max<float>(Demo, V1):\t{0}", instance.Max(Vector128s<float>.Demo, Vector128s<float>.V1));
                         VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(Demo, V1):\t{0}", instance.Max(Vector128s<double>.Demo, Vector128s<double>.V1));
-                        VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(Demo2, V1):\t{0}", instance.Max(demo2Double, Vector128s<double>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(DemoNaN, V1):\t{0}", instance.Max(Vector128s<double>.DemoNaN, Vector128s<double>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(DemoNaN2, V1):\t{0}", instance.Max(Vector128s<double>.DemoNaN2, Vector128s<double>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(DemoNaN, DemoNaN2):\t{0}", instance.Max(Vector128s<double>.DemoNaN, Vector128s<double>.DemoNaN2));
                     }
                 } catch (Exception ex) {
                     writer.WriteLine($"Max:\tFail!. {ex}");
@@ -162,7 +167,71 @@ namespace Zyl.VectorTraits.Benchmarks {
                         Console.WriteLine($"{instance.GetType().Name}: {instance.Min_AcceleratedTypes}");
                         VectorTextUtil.WriteLine(indentNext, writer, "Min<float>(Demo, V1):\t{0}", instance.Min(Vector128s<float>.Demo, Vector128s<float>.V1));
                         VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(Demo, V1):\t{0}", instance.Min(Vector128s<double>.Demo, Vector128s<double>.V1));
-                        VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(Demo2, V1):\t{0}", instance.Min(demo2Double, Vector128s<double>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(DemoNaN, V1):\t{0}", instance.Min(Vector128s<double>.DemoNaN, Vector128s<double>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(DemoNaN2, V1):\t{0}", instance.Min(Vector128s<double>.DemoNaN2, Vector128s<double>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(DemoNaN, DemoNaN2):\t{0}", instance.Min(Vector128s<double>.DemoNaN, Vector128s<double>.DemoNaN2));
+                    }
+                } catch (Exception ex) {
+                    writer.WriteLine($"Min:\tFail!. {ex}");
+                }
+                writer.WriteLine();
+            }
+
+#endif // NETCOREAPP3_0_OR_GREATER
+        }
+
+        /// <summary>
+        /// Alone test Vector256.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static void AloneTestVector256(TextWriter writer) {
+#if NETCOREAPP3_0_OR_GREATER
+            string indentNext = IndentNextSeparator;
+
+            // -- TraitsInstances --
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK.");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage(true)}");
+                }
+            }
+            VectorTextUtil.WriteLine(writer, "Vector256s<float>.Demo:\t{0}", Vector256s<float>.Demo);
+            VectorTextUtil.WriteLine(writer, "Vector256s<double>.Demo:\t{0}", Vector256s<double>.Demo);
+            VectorTextUtil.WriteLine(writer, "Vector256s<double>.DemoNaN:\t{0}", Vector256s<double>.DemoNaN);
+            VectorTextUtil.WriteLine(writer, "Vector256s<double>.DemoNaN2:\t{0}", Vector256s<double>.DemoNaN2);
+            writer.WriteLine();
+
+            // -- Max --
+            if (true) {
+                try {
+                    foreach (IWVectorTraits256 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        Console.WriteLine($"{instance.GetType().Name}: {instance.Max_AcceleratedTypes}");
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<float>(Demo, V1):\t{0}", instance.Max(Vector256s<float>.Demo, Vector256s<float>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(Demo, V1):\t{0}", instance.Max(Vector256s<double>.Demo, Vector256s<double>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(DemoNaN, V1):\t{0}", instance.Max(Vector256s<double>.DemoNaN, Vector256s<double>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(DemoNaN2, V1):\t{0}", instance.Max(Vector256s<double>.DemoNaN2, Vector256s<double>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(DemoNaN, DemoNaN2):\t{0}", instance.Max(Vector256s<double>.DemoNaN, Vector256s<double>.DemoNaN2));
+                    }
+                } catch (Exception ex) {
+                    writer.WriteLine($"Max:\tFail!. {ex}");
+                }
+                writer.WriteLine();
+            }
+
+            // -- Min --
+            if (true) {
+                try {
+                    foreach (IWVectorTraits256 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        Console.WriteLine($"{instance.GetType().Name}: {instance.Min_AcceleratedTypes}");
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<float>(Demo, V1):\t{0}", instance.Min(Vector256s<float>.Demo, Vector256s<float>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(Demo, V1):\t{0}", instance.Min(Vector256s<double>.Demo, Vector256s<double>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(DemoNaN, V1):\t{0}", instance.Min(Vector256s<double>.DemoNaN, Vector256s<double>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(DemoNaN2, V1):\t{0}", instance.Min(Vector256s<double>.DemoNaN2, Vector256s<double>.V1));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(DemoNaN, DemoNaN2):\t{0}", instance.Min(Vector256s<double>.DemoNaN, Vector256s<double>.DemoNaN2));
                     }
                 } catch (Exception ex) {
                     writer.WriteLine($"Min:\tFail!. {ex}");
