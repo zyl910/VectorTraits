@@ -67,7 +67,6 @@ namespace Zyl.VectorTraits.Benchmarks {
                         VectorTextUtil.WriteLine(indentNext, writer, "Ceiling<float>(Demo):\t{0}", instance.Ceiling(Vectors<float>.Demo));
                         VectorTextUtil.WriteLine(indentNext, writer, "Ceiling<double>(Demo):\t{0}", instance.Ceiling(Vectors<double>.Demo));
                         VectorTextUtil.WriteLine(indentNext, writer, "Ceiling<double>(DemoNaN):\t{0}", instance.Ceiling(Vectors<double>.DemoNaN));
-                        VectorTextUtil.WriteLine(indentNext, writer, "Ceiling<double>(DemoNaN2):\t{0}", instance.Ceiling(Vectors<double>.DemoNaN2));
                     }
                 } catch (Exception ex) {
                     writer.WriteLine($"Ceiling:\tFail!. {ex}");
@@ -84,7 +83,6 @@ namespace Zyl.VectorTraits.Benchmarks {
                         VectorTextUtil.WriteLine(indentNext, writer, "Floor<float>(Demo):\t{0}", instance.Floor(Vectors<float>.Demo));
                         VectorTextUtil.WriteLine(indentNext, writer, "Floor<double>(Demo):\t{0}", instance.Floor(Vectors<double>.Demo));
                         VectorTextUtil.WriteLine(indentNext, writer, "Floor<double>(DemoNaN):\t{0}", instance.Floor(Vectors<double>.DemoNaN));
-                        VectorTextUtil.WriteLine(indentNext, writer, "Floor<double>(DemoNaN2):\t{0}", instance.Floor(Vectors<double>.DemoNaN2));
                     }
                 } catch (Exception ex) {
                     writer.WriteLine($"Floor:\tFail!. {ex}");
@@ -152,6 +150,8 @@ namespace Zyl.VectorTraits.Benchmarks {
                         VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(DemoNaN, V1):\t{0}", instance.Max(Vector128s<double>.DemoNaN, Vector128s<double>.V1));
                         VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(DemoNaN2, V1):\t{0}", instance.Max(Vector128s<double>.DemoNaN2, Vector128s<double>.V1));
                         VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(DemoNaN, DemoNaN2):\t{0}", instance.Max(Vector128s<double>.DemoNaN, Vector128s<double>.DemoNaN2));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(DemoNaN, NaN):\t{0}", instance.Max(Vector128s<double>.DemoNaN, Vector128s<double>.NaN));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(NaN, DemoNaN):\t{0}", instance.Max(Vector128s<double>.NaN, Vector128s<double>.DemoNaN));
                     }
                 } catch (Exception ex) {
                     writer.WriteLine($"Max:\tFail!. {ex}");
@@ -170,6 +170,8 @@ namespace Zyl.VectorTraits.Benchmarks {
                         VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(DemoNaN, V1):\t{0}", instance.Min(Vector128s<double>.DemoNaN, Vector128s<double>.V1));
                         VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(DemoNaN2, V1):\t{0}", instance.Min(Vector128s<double>.DemoNaN2, Vector128s<double>.V1));
                         VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(DemoNaN, DemoNaN2):\t{0}", instance.Min(Vector128s<double>.DemoNaN, Vector128s<double>.DemoNaN2));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(DemoNaN, NaN):\t{0}", instance.Min(Vector128s<double>.DemoNaN, Vector128s<double>.NaN));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(NaN, DemoNaN):\t{0}", instance.Min(Vector128s<double>.NaN, Vector128s<double>.DemoNaN));
                     }
                 } catch (Exception ex) {
                     writer.WriteLine($"Min:\tFail!. {ex}");
@@ -214,6 +216,8 @@ namespace Zyl.VectorTraits.Benchmarks {
                         VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(DemoNaN, V1):\t{0}", instance.Max(Vector256s<double>.DemoNaN, Vector256s<double>.V1));
                         VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(DemoNaN2, V1):\t{0}", instance.Max(Vector256s<double>.DemoNaN2, Vector256s<double>.V1));
                         VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(DemoNaN, DemoNaN2):\t{0}", instance.Max(Vector256s<double>.DemoNaN, Vector256s<double>.DemoNaN2));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(DemoNaN, NaN):\t{0}", instance.Max(Vector256s<double>.DemoNaN, Vector256s<double>.NaN));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Max<double>(NaN, DemoNaN):\t{0}", instance.Max(Vector256s<double>.NaN, Vector256s<double>.DemoNaN));
                     }
                 } catch (Exception ex) {
                     writer.WriteLine($"Max:\tFail!. {ex}");
@@ -232,6 +236,8 @@ namespace Zyl.VectorTraits.Benchmarks {
                         VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(DemoNaN, V1):\t{0}", instance.Min(Vector256s<double>.DemoNaN, Vector256s<double>.V1));
                         VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(DemoNaN2, V1):\t{0}", instance.Min(Vector256s<double>.DemoNaN2, Vector256s<double>.V1));
                         VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(DemoNaN, DemoNaN2):\t{0}", instance.Min(Vector256s<double>.DemoNaN, Vector256s<double>.DemoNaN2));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(DemoNaN, NaN):\t{0}", instance.Min(Vector256s<double>.DemoNaN, Vector256s<double>.NaN));
+                        VectorTextUtil.WriteLine(indentNext, writer, "Min<double>(NaN, DemoNaN):\t{0}", instance.Min(Vector256s<double>.NaN, Vector256s<double>.DemoNaN));
                     }
                 } catch (Exception ex) {
                     writer.WriteLine($"Min:\tFail!. {ex}");
