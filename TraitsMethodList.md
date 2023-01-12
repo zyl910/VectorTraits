@@ -20,6 +20,9 @@ Types: Vector, Vector128, Vector256 .
 - `ShiftRightLogicalFast`: Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check `shiftAmount`, please use `Scalars.LimitShiftCount` first, and shiftAmount must not be 0 .
   Mnemonic: `rt[i] := value[i] >>> shiftAmount`.
 
+- `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
+  Mnemonic: `rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])` .
+
 ## WVector supplement traits methods (W向量补充的特性方法)
 Types: Vector128, Vector256 .
 

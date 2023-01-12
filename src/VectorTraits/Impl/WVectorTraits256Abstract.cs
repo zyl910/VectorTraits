@@ -664,6 +664,78 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.Xor(left, right);
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits256.YClamp_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YClamp_AcceleratedTypes {
+            get {
+                return Statics.YClamp_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YClamp(Vector256{float}, Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> YClamp(Vector256<float> value, Vector256<float> amin, Vector256<float> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YClamp(Vector256{double}, Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> YClamp(Vector256<double> value, Vector256<double> amin, Vector256<double> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YClamp(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<sbyte> YClamp(Vector256<sbyte> value, Vector256<sbyte> amin, Vector256<sbyte> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YClamp(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<byte> YClamp(Vector256<byte> value, Vector256<byte> amin, Vector256<byte> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YClamp(Vector256{short}, Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<short> YClamp(Vector256<short> value, Vector256<short> amin, Vector256<short> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YClamp(Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ushort> YClamp(Vector256<ushort> value, Vector256<ushort> amin, Vector256<ushort> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YClamp(Vector256{int}, Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YClamp(Vector256<int> value, Vector256<int> amin, Vector256<int> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YClamp(Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<uint> YClamp(Vector256<uint> value, Vector256<uint> amin, Vector256<uint> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YClamp(Vector256{long}, Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YClamp(Vector256<long> value, Vector256<long> amin, Vector256<long> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YClamp(Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ulong> YClamp(Vector256<ulong> value, Vector256<ulong> amin, Vector256<ulong> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
 #endif // NETCOREAPP3_0_OR_GREATER
     }
 }
