@@ -1113,6 +1113,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
         }
 
+
         /// <inheritdoc cref="IWVectorTraits256.YClamp_AcceleratedTypes"/>
         public static TypeCodeFlags YClamp_AcceleratedTypes {
             get {

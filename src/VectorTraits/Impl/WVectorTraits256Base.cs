@@ -2466,6 +2466,7 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
+
             /// <inheritdoc cref="IWVectorTraits256.YClamp_AcceleratedTypes"/>
             public static TypeCodeFlags YClamp_AcceleratedTypes {
                 get {

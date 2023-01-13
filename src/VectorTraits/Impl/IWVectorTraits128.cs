@@ -1017,6 +1017,133 @@ namespace Zyl.VectorTraits.Impl {
 
         // == mY style  ==
         #region mY_style
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YClamp</c> (运行 <c>YClamp</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YClamp"/>
+        TypeCodeFlags YClamp_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
+        /// Mnemonic: <c>rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its clamp computed (将计算限制的向量).</param>
+        /// <param name="amin">The lower bound of the value (值的下限).</param>
+        /// <param name="amax">The upper bound of the value (值的上限).</param>
+        /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
+        /// <seealso cref="YClamp_AcceleratedTypes"/>
+        /// <seealso cref="BitUtil.Clamp(float, float, float)"/>
+        Vector128<float> YClamp(Vector128<float> value, Vector128<float> amin, Vector128<float> amax);
+
+        /// <summary>
+        /// Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
+        /// Mnemonic: <c>rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its clamp computed (将计算限制的向量).</param>
+        /// <param name="amin">The lower bound of the value (值的下限).</param>
+        /// <param name="amax">The upper bound of the value (值的上限).</param>
+        /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
+        /// <seealso cref="YClamp_AcceleratedTypes"/>
+        /// <seealso cref="BitUtil.Clamp(double, double, double)"/>
+        Vector128<double> YClamp(Vector128<double> value, Vector128<double> amin, Vector128<double> amax);
+
+        /// <summary>
+        /// Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
+        /// Mnemonic: <c>rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its clamp computed (将计算限制的向量).</param>
+        /// <param name="amin">The lower bound of the value (值的下限).</param>
+        /// <param name="amax">The upper bound of the value (值的上限).</param>
+        /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
+        /// <seealso cref="YClamp_AcceleratedTypes"/>
+        /// <seealso cref="BitUtil.Clamp(sbyte, sbyte, sbyte)"/>
+        Vector128<sbyte> YClamp(Vector128<sbyte> value, Vector128<sbyte> amin, Vector128<sbyte> amax);
+
+        /// <summary>
+        /// Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
+        /// Mnemonic: <c>rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its clamp computed (将计算限制的向量).</param>
+        /// <param name="amin">The lower bound of the value (值的下限).</param>
+        /// <param name="amax">The upper bound of the value (值的上限).</param>
+        /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
+        /// <seealso cref="YClamp_AcceleratedTypes"/>
+        /// <seealso cref="BitUtil.Clamp(byte, byte, byte)"/>
+        Vector128<byte> YClamp(Vector128<byte> value, Vector128<byte> amin, Vector128<byte> amax);
+
+        /// <summary>
+        /// Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
+        /// Mnemonic: <c>rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its clamp computed (将计算限制的向量).</param>
+        /// <param name="amin">The lower bound of the value (值的下限).</param>
+        /// <param name="amax">The upper bound of the value (值的上限).</param>
+        /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
+        /// <seealso cref="YClamp_AcceleratedTypes"/>
+        /// <seealso cref="BitUtil.Clamp(short, short, short)"/>
+        Vector128<short> YClamp(Vector128<short> value, Vector128<short> amin, Vector128<short> amax);
+
+        /// <summary>
+        /// Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
+        /// Mnemonic: <c>rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its clamp computed (将计算限制的向量).</param>
+        /// <param name="amin">The lower bound of the value (值的下限).</param>
+        /// <param name="amax">The upper bound of the value (值的上限).</param>
+        /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
+        /// <seealso cref="YClamp_AcceleratedTypes"/>
+        /// <seealso cref="BitUtil.Clamp(ushort, ushort, ushort)"/>
+        Vector128<ushort> YClamp(Vector128<ushort> value, Vector128<ushort> amin, Vector128<ushort> amax);
+
+        /// <summary>
+        /// Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
+        /// Mnemonic: <c>rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its clamp computed (将计算限制的向量).</param>
+        /// <param name="amin">The lower bound of the value (值的下限).</param>
+        /// <param name="amax">The upper bound of the value (值的上限).</param>
+        /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
+        /// <seealso cref="YClamp_AcceleratedTypes"/>
+        /// <seealso cref="BitUtil.Clamp(int, int, int)"/>
+        Vector128<int> YClamp(Vector128<int> value, Vector128<int> amin, Vector128<int> amax);
+
+        /// <summary>
+        /// Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
+        /// Mnemonic: <c>rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its clamp computed (将计算限制的向量).</param>
+        /// <param name="amin">The lower bound of the value (值的下限).</param>
+        /// <param name="amax">The upper bound of the value (值的上限).</param>
+        /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
+        /// <seealso cref="YClamp_AcceleratedTypes"/>
+        /// <seealso cref="BitUtil.Clamp(uint, uint, uint)"/>
+        Vector128<uint> YClamp(Vector128<uint> value, Vector128<uint> amin, Vector128<uint> amax);
+
+        /// <summary>
+        /// Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
+        /// Mnemonic: <c>rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its clamp computed (将计算限制的向量).</param>
+        /// <param name="amin">The lower bound of the value (值的下限).</param>
+        /// <param name="amax">The upper bound of the value (值的上限).</param>
+        /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
+        /// <seealso cref="YClamp_AcceleratedTypes"/>
+        /// <seealso cref="BitUtil.Clamp(long, long, long)"/>
+        Vector128<long> YClamp(Vector128<long> value, Vector128<long> amin, Vector128<long> amax);
+
+        /// <summary>
+        /// Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
+        /// Mnemonic: <c>rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its clamp computed (将计算限制的向量).</param>
+        /// <param name="amin">The lower bound of the value (值的下限).</param>
+        /// <param name="amax">The upper bound of the value (值的上限).</param>
+        /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
+        /// <seealso cref="YClamp_AcceleratedTypes"/>
+        /// <seealso cref="BitUtil.Clamp(ulong, ulong, ulong)"/>
+        Vector128<ulong> YClamp(Vector128<ulong> value, Vector128<ulong> amin, Vector128<ulong> amax);
+
         #endregion // mY_style
 
 #endif

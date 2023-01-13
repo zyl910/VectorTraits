@@ -1018,7 +1018,6 @@ namespace Zyl.VectorTraits.Impl {
         // == mY style  ==
         #region mY_style
 
-
         /// <summary>
         /// Types with hardware acceleration when running <c>YClamp</c> (运行 <c>YClamp</c> 时具有硬件加速的类型).
         /// </summary>

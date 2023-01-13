@@ -631,6 +631,7 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.Xor(left, right);
         }
 
+
         /// <inheritdoc cref="IWVectorTraits256.YClamp_AcceleratedTypes"/>
         public override TypeCodeFlags YClamp_AcceleratedTypes {
             get {

@@ -837,6 +837,7 @@ namespace Zyl.VectorTraits.Impl {
                 return Avx.Xor(left.AsDouble(), right.AsDouble()).As<double, T>();
             }
 
+
             /// <inheritdoc cref="IWVectorTraits256.YClamp_AcceleratedTypes"/>
             public static TypeCodeFlags YClamp_AcceleratedTypes {
                 get {

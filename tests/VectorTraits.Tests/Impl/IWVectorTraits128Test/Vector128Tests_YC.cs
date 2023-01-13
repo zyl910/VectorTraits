@@ -9,9 +9,9 @@ using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
 
-namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
+namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
     [TestFixture()]
-    public class Vector256Tests_YC {
+    public class Vector128Tests_YC {
 #if NETCOREAPP3_0_OR_GREATER
 
         [TestCase((float)1)]
@@ -28,8 +28,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             bool? noHex = true;
             string? lineCommentSeparator = null;
             string? lineCommentItemSeparator = null;
-            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
-            foreach (IWVectorTraits256 instance in instances) {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
                 if (instance.IsSupported) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.YClamp_AcceleratedTypes}");
                 } else {
@@ -37,31 +37,31 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 }
             }
             // run.
-            Vector256<T>[] samples = {
-                Vector256s.Create(src),
-                Vector256s<T>.Demo,
-                Vector256s<T>.Serial,
-                Vector256s<T>.SerialDesc
+            Vector128<T>[] samples = {
+                Vector128s.Create(src),
+                Vector128s<T>.Demo,
+                Vector128s<T>.Serial,
+                Vector128s<T>.SerialDesc
             };
-            Vector256<T>[] borders = {
-                Vector256s<T>.V_4,
-                Vector256s<T>.V0,
-                Vector256s<T>.V3,
-                Vector256s<T>.Serial
+            Vector128<T>[] borders = {
+                Vector128s<T>.V_4,
+                Vector128s<T>.V0,
+                Vector128s<T>.V3,
+                Vector128s<T>.Serial
             };
-            for(int i=0; i< borders.Length; ++i) {
-                Vector256<T> amin = borders[i];
+            for (int i = 0; i < borders.Length; ++i) {
+                Vector128<T> amin = borders[i];
                 for (int j = i + 1; j < borders.Length; ++j) {
-                    Vector256<T> amax = borders[j];
-                    foreach (Vector256<T> value in samples) {
-                        Vector256<T> expected = Vector256s.YClamp((dynamic)value, (dynamic)amin, (dynamic)amax);
+                    Vector128<T> amax = borders[j];
+                    foreach (Vector128<T> value in samples) {
+                        Vector128<T> expected = Vector128s.YClamp((dynamic)value, (dynamic)amin, (dynamic)amax);
                         if (Scalars<T>.ExponentBits > 0) {
                             // Compatible floating-point NaN.
                             Console.WriteLine(VectorTextUtil.Format(noHex, lineCommentSeparator, lineCommentItemSeparator, "f({0}, {1}, {2}):\t", value, amin, amax));
                         }
-                        foreach (IWVectorTraits256 instance in instances) {
+                        foreach (IWVectorTraits128 instance in instances) {
                             if (!instance.GetIsSupported(true)) continue;
-                            Vector256<T> dst = Vector256s.YClamp((dynamic)value, (dynamic)amin, (dynamic)amax);
+                            Vector128<T> dst = Vector128s.YClamp((dynamic)value, (dynamic)amin, (dynamic)amax);
                             if (Scalars<T>.ExponentBits > 0) {
                                 // Compatible floating-point NaN.
                                 Console.WriteLine(VectorTextUtil.Format(noHex, lineCommentSeparator, lineCommentItemSeparator, "\t{0}:\t{1}", instance.GetType().Name, dst));
