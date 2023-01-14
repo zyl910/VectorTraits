@@ -398,5 +398,77 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.ShiftRightLogicalFast(value, shiftAmount);
         }
 
+
+        /// <inheritdoc cref="IVectorTraits.YClamp_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YClamp_AcceleratedTypes {
+            get {
+                return Statics.YClamp_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YClamp(Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<float> YClamp(Vector<float> value, Vector<float> amin, Vector<float> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YClamp(Vector{double}, Vector{double}, Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<double> YClamp(Vector<double> value, Vector<double> amin, Vector<double> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YClamp(Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<sbyte> YClamp(Vector<sbyte> value, Vector<sbyte> amin, Vector<sbyte> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YClamp(Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<byte> YClamp(Vector<byte> value, Vector<byte> amin, Vector<byte> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YClamp(Vector{short}, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<short> YClamp(Vector<short> value, Vector<short> amin, Vector<short> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YClamp(Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ushort> YClamp(Vector<ushort> value, Vector<ushort> amin, Vector<ushort> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YClamp(Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<int> YClamp(Vector<int> value, Vector<int> amin, Vector<int> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YClamp(Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<uint> YClamp(Vector<uint> value, Vector<uint> amin, Vector<uint> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YClamp(Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<long> YClamp(Vector<long> value, Vector<long> amin, Vector<long> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YClamp(Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ulong> YClamp(Vector<ulong> value, Vector<ulong> amin, Vector<ulong> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
     }
 }
