@@ -21,21 +21,21 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Gets it is support the run (取得它是否支持运行).
         /// </summary>
-        /// <param name="noStrict">No strict check(不严格检查). When it is true, <see cref="IntPtr.Size"/> / <see cref="BitConverter.IsLittleEndian"/> is not checked (当它为true时, 不会检查 IntPtr.Size, IsLittleEndian)</param>
+        /// <param name="noStrict">No strict check(不严格检查). When it is true, it will allow for incomplete matches, but the ability to run (当它为true时, 会允许不完全匹配, 但能够运行的)</param>
         /// <returns>Returns true if the runtime is supported, false otherwise (当支持运行时返回 true, 否则返回 false).</returns>
         bool GetIsSupported(bool noStrict = false);
 
         /// <summary>
         /// Get unsupported messages (取得不支持时的消息).
         /// </summary>
-        /// <param name="noStrict">No strict check(不严格检查). When it is true, <see cref="IntPtr.Size"/> / <see cref="BitConverter.IsLittleEndian"/> is not checked (当它为true时, 不会检查 IntPtr.Size, IsLittleEndian)</param>
+        /// <param name="noStrict">No strict check(不严格检查). When it is true, it will allow for incomplete matches, but the ability to run (当它为true时, 会允许不完全匹配, 但能够运行的)</param>
         /// <returns>Returns unsupported messages (取得不支持时的消息).</returns>
         string GetUnsupportedMessage(bool noStrict = false);
 
         /// <summary>
         /// Throw exception when not supported. (当不支持时抛出异常).
         /// </summary>
-        /// <param name="noStrict">No strict check(不严格检查). When it is true, <see cref="IntPtr.Size"/> / <see cref="BitConverter.IsLittleEndian"/> is not checked (当它为true时, 不会检查 IntPtr.Size, IsLittleEndian)</param>
+        /// <param name="noStrict">No strict check(不严格检查). When it is true, it will allow for incomplete matches, but the ability to run (当它为true时, 会允许不完全匹配, 但能够运行的)</param>
         /// <exception cref="NotSupportedException">If <see cref="GetIsSupported"/> return false.</exception>
         void ThrowForUnsupported(bool noStrict = false);
     }
