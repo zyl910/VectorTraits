@@ -34,6 +34,10 @@ Types: Vector128, Vector256 .
   Mnemonic: `rt[i] := left[i] | right[i]`.
 - `ConditionalSelect`: Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
   Mnemonic: `rt[i] := (left[i] & condition[i]) | (right[i] & ~condition[i])`.
+- `GreaterThan`: Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+  Mnemonic: `rt[i] := to_mask(left[i] > right[i])`.
+- `LessThan`: Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+  Mnemonic: `rt[i] := to_mask(left[i] < right[i])`.
 - `Max`: Computes the maximum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最大值).
   Mnemonic: `rt[i] := max(left[i], right[i])`.
 - `Min`: Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).

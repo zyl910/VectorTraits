@@ -195,6 +195,103 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan_AcceleratedTypes"/>
+            public static TypeCodeFlags GreaterThan_AcceleratedTypes {
+                get {
+                    return TypeCodeFlagsUtil.AllTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> GreaterThan(Vector256<float> left, Vector256<float> right) {
+#if NET5_0_OR_GREATER
+                return Avx.CompareGreaterThan(left, right);
+#else
+                return Avx.Compare(left, right, FloatComparisonMode.OrderedGreaterThanSignaling);
+#endif // NET5_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> GreaterThan(Vector256<double> left, Vector256<double> right) {
+#if NET5_0_OR_GREATER
+                return Avx.CompareGreaterThan(left, right);
+#else
+                return Avx.Compare(left, right, FloatComparisonMode.OrderedGreaterThanSignaling);
+#endif // NET5_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> GreaterThan(Vector256<sbyte> left, Vector256<sbyte> right) {
+                return Avx2.CompareGreaterThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{byte}, Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> GreaterThan(Vector256<byte> left, Vector256<byte> right) {
+                Vector256<sbyte> mid = Vector256s<sbyte>.MinValue;
+                Vector256<sbyte> left2 = Avx2.Add(mid, left.AsSByte());
+                Vector256<sbyte> right2 = Avx2.Add(mid, right.AsSByte());
+                Vector256<sbyte> mask = Avx2.CompareGreaterThan(left2, right2);
+                return mask.AsByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{short}, Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> GreaterThan(Vector256<short> left, Vector256<short> right) {
+                return Avx2.CompareGreaterThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{ushort}, Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> GreaterThan(Vector256<ushort> left, Vector256<ushort> right) {
+                Vector256<short> mid = Vector256s<short>.MinValue;
+                Vector256<short> left2 = Avx2.Add(mid, left.AsInt16());
+                Vector256<short> right2 = Avx2.Add(mid, right.AsInt16());
+                Vector256<short> mask = Avx2.CompareGreaterThan(left2, right2);
+                return mask.AsUInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{int}, Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> GreaterThan(Vector256<int> left, Vector256<int> right) {
+                return Avx2.CompareGreaterThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{uint}, Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> GreaterThan(Vector256<uint> left, Vector256<uint> right) {
+                Vector256<int> mid = Vector256s<int>.MinValue;
+                Vector256<int> left2 = Avx2.Add(mid, left.AsInt32());
+                Vector256<int> right2 = Avx2.Add(mid, right.AsInt32());
+                Vector256<int> mask = Avx2.CompareGreaterThan(left2, right2);
+                return mask.AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{long}, Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> GreaterThan(Vector256<long> left, Vector256<long> right) {
+                Vector256<long> mask = Avx2.CompareGreaterThan(left, right);
+                return mask;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{ulong}, Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> GreaterThan(Vector256<ulong> left, Vector256<ulong> right) {
+                Vector256<long> mid = Vector256s<long>.MinValue;
+                Vector256<long> left2 = Avx2.Add(mid, left.AsInt64());
+                Vector256<long> right2 = Avx2.Add(mid, right.AsInt64());
+                Vector256<long> mask = Avx2.CompareGreaterThan(left2, right2);
+                return mask.AsUInt64();
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.Max_AcceleratedTypes"/>
             public static TypeCodeFlags Max_AcceleratedTypes {
                 get {

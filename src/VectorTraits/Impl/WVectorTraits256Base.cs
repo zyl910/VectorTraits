@@ -378,6 +378,400 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan_AcceleratedTypes"/>
+            public static TypeCodeFlags GreaterThan_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> GreaterThan(Vector256<float> left, Vector256<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThan(left, right);
+#else
+                return GreaterThan_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> GreaterThan(Vector256<double> left, Vector256<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThan(left, right);
+#else
+                return GreaterThan_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> GreaterThan(Vector256<sbyte> left, Vector256<sbyte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThan(left, right);
+#else
+                return GreaterThan_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{byte}, Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> GreaterThan(Vector256<byte> left, Vector256<byte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThan(left, right);
+#else
+                return GreaterThan_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{short}, Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> GreaterThan(Vector256<short> left, Vector256<short> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThan(left, right);
+#else
+                return GreaterThan_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{ushort}, Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> GreaterThan(Vector256<ushort> left, Vector256<ushort> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThan(left, right);
+#else
+                return GreaterThan_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{int}, Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> GreaterThan(Vector256<int> left, Vector256<int> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThan(left, right);
+#else
+                return GreaterThan_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{uint}, Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> GreaterThan(Vector256<uint> left, Vector256<uint> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThan(left, right);
+#else
+                return GreaterThan_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{long}, Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> GreaterThan(Vector256<long> left, Vector256<long> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThan(left, right);
+#else
+                return GreaterThan_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{ulong}, Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> GreaterThan(Vector256<ulong> left, Vector256<ulong> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThan(left, right);
+#else
+                return GreaterThan_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<float> GreaterThan_Base(Vector256<float> left, Vector256<float> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector256<int> condition);
+#else
+                Vector256<int> condition = default;
+#endif // NET5_0_OR_GREATER
+                int* pcondition = (int*)&condition;
+                float* pleft = (float*)&left;
+                float* pright = (float*)&right;
+                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = BitUtil.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = BitUtil.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = BitUtil.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = BitUtil.ToInt32Mask(pleft[7] > pright[7]);
+                return condition.AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<double> GreaterThan_Base(Vector256<double> left, Vector256<double> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector256<long> condition);
+#else
+                Vector256<long> condition = default;
+#endif // NET5_0_OR_GREATER
+                long* pcondition = (long*)&condition;
+                double* pleft = (double*)&left;
+                double* pright = (double*)&right;
+                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                return condition.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<sbyte> GreaterThan_Base(Vector256<sbyte> left, Vector256<sbyte> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector256<sbyte> condition);
+#else
+                Vector256<sbyte> condition = default;
+#endif // NET5_0_OR_GREATER
+                sbyte* pcondition = (sbyte*)&condition;
+                sbyte* pleft = (sbyte*)&left;
+                sbyte* pright = (sbyte*)&right;
+                pcondition[0] = (sbyte)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = (sbyte)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = (sbyte)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = (sbyte)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = (sbyte)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = (sbyte)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = (sbyte)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = (sbyte)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
+                pcondition[8] = (sbyte)BitUtil.ToInt32Mask(pleft[8] > pright[8]);
+                pcondition[9] = (sbyte)BitUtil.ToInt32Mask(pleft[9] > pright[9]);
+                pcondition[10] = (sbyte)BitUtil.ToInt32Mask(pleft[10] > pright[10]);
+                pcondition[11] = (sbyte)BitUtil.ToInt32Mask(pleft[11] > pright[11]);
+                pcondition[12] = (sbyte)BitUtil.ToInt32Mask(pleft[12] > pright[12]);
+                pcondition[13] = (sbyte)BitUtil.ToInt32Mask(pleft[13] > pright[13]);
+                pcondition[14] = (sbyte)BitUtil.ToInt32Mask(pleft[14] > pright[14]);
+                pcondition[15] = (sbyte)BitUtil.ToInt32Mask(pleft[15] > pright[15]);
+                pcondition[16] = (sbyte)BitUtil.ToInt32Mask(pleft[16] > pright[16]);
+                pcondition[17] = (sbyte)BitUtil.ToInt32Mask(pleft[17] > pright[17]);
+                pcondition[18] = (sbyte)BitUtil.ToInt32Mask(pleft[18] > pright[18]);
+                pcondition[19] = (sbyte)BitUtil.ToInt32Mask(pleft[19] > pright[19]);
+                pcondition[20] = (sbyte)BitUtil.ToInt32Mask(pleft[20] > pright[20]);
+                pcondition[21] = (sbyte)BitUtil.ToInt32Mask(pleft[21] > pright[21]);
+                pcondition[22] = (sbyte)BitUtil.ToInt32Mask(pleft[22] > pright[22]);
+                pcondition[23] = (sbyte)BitUtil.ToInt32Mask(pleft[23] > pright[23]);
+                pcondition[24] = (sbyte)BitUtil.ToInt32Mask(pleft[24] > pright[24]);
+                pcondition[25] = (sbyte)BitUtil.ToInt32Mask(pleft[25] > pright[25]);
+                pcondition[26] = (sbyte)BitUtil.ToInt32Mask(pleft[26] > pright[26]);
+                pcondition[27] = (sbyte)BitUtil.ToInt32Mask(pleft[27] > pright[27]);
+                pcondition[28] = (sbyte)BitUtil.ToInt32Mask(pleft[28] > pright[28]);
+                pcondition[29] = (sbyte)BitUtil.ToInt32Mask(pleft[29] > pright[29]);
+                pcondition[30] = (sbyte)BitUtil.ToInt32Mask(pleft[30] > pright[30]);
+                pcondition[31] = (sbyte)BitUtil.ToInt32Mask(pleft[31] > pright[31]);
+                return condition.AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{byte}, Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<byte> GreaterThan_Base(Vector256<byte> left, Vector256<byte> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector256<sbyte> condition);
+#else
+                Vector256<sbyte> condition = default;
+#endif // NET5_0_OR_GREATER
+                sbyte* pcondition = (sbyte*)&condition;
+                byte* pleft = (byte*)&left;
+                byte* pright = (byte*)&right;
+                pcondition[0] = (sbyte)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = (sbyte)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = (sbyte)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = (sbyte)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = (sbyte)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = (sbyte)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = (sbyte)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = (sbyte)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
+                pcondition[8] = (sbyte)BitUtil.ToInt32Mask(pleft[8] > pright[8]);
+                pcondition[9] = (sbyte)BitUtil.ToInt32Mask(pleft[9] > pright[9]);
+                pcondition[10] = (sbyte)BitUtil.ToInt32Mask(pleft[10] > pright[10]);
+                pcondition[11] = (sbyte)BitUtil.ToInt32Mask(pleft[11] > pright[11]);
+                pcondition[12] = (sbyte)BitUtil.ToInt32Mask(pleft[12] > pright[12]);
+                pcondition[13] = (sbyte)BitUtil.ToInt32Mask(pleft[13] > pright[13]);
+                pcondition[14] = (sbyte)BitUtil.ToInt32Mask(pleft[14] > pright[14]);
+                pcondition[15] = (sbyte)BitUtil.ToInt32Mask(pleft[15] > pright[15]);
+                pcondition[16] = (sbyte)BitUtil.ToInt32Mask(pleft[16] > pright[16]);
+                pcondition[17] = (sbyte)BitUtil.ToInt32Mask(pleft[17] > pright[17]);
+                pcondition[18] = (sbyte)BitUtil.ToInt32Mask(pleft[18] > pright[18]);
+                pcondition[19] = (sbyte)BitUtil.ToInt32Mask(pleft[19] > pright[19]);
+                pcondition[20] = (sbyte)BitUtil.ToInt32Mask(pleft[20] > pright[20]);
+                pcondition[21] = (sbyte)BitUtil.ToInt32Mask(pleft[21] > pright[21]);
+                pcondition[22] = (sbyte)BitUtil.ToInt32Mask(pleft[22] > pright[22]);
+                pcondition[23] = (sbyte)BitUtil.ToInt32Mask(pleft[23] > pright[23]);
+                pcondition[24] = (sbyte)BitUtil.ToInt32Mask(pleft[24] > pright[24]);
+                pcondition[25] = (sbyte)BitUtil.ToInt32Mask(pleft[25] > pright[25]);
+                pcondition[26] = (sbyte)BitUtil.ToInt32Mask(pleft[26] > pright[26]);
+                pcondition[27] = (sbyte)BitUtil.ToInt32Mask(pleft[27] > pright[27]);
+                pcondition[28] = (sbyte)BitUtil.ToInt32Mask(pleft[28] > pright[28]);
+                pcondition[29] = (sbyte)BitUtil.ToInt32Mask(pleft[29] > pright[29]);
+                pcondition[30] = (sbyte)BitUtil.ToInt32Mask(pleft[30] > pright[30]);
+                pcondition[31] = (sbyte)BitUtil.ToInt32Mask(pleft[31] > pright[31]);
+                return condition.AsByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{short}, Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<short> GreaterThan_Base(Vector256<short> left, Vector256<short> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector256<short> condition);
+#else
+                Vector256<short> condition = default;
+#endif // NET5_0_OR_GREATER
+                short* pcondition = (short*)&condition;
+                short* pleft = (short*)&left;
+                short* pright = (short*)&right;
+                pcondition[0] = (short)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = (short)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = (short)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = (short)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = (short)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = (short)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = (short)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = (short)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
+                pcondition[8] = (short)BitUtil.ToInt32Mask(pleft[8] > pright[8]);
+                pcondition[9] = (short)BitUtil.ToInt32Mask(pleft[9] > pright[9]);
+                pcondition[10] = (short)BitUtil.ToInt32Mask(pleft[10] > pright[10]);
+                pcondition[11] = (short)BitUtil.ToInt32Mask(pleft[11] > pright[11]);
+                pcondition[12] = (short)BitUtil.ToInt32Mask(pleft[12] > pright[12]);
+                pcondition[13] = (short)BitUtil.ToInt32Mask(pleft[13] > pright[13]);
+                pcondition[14] = (short)BitUtil.ToInt32Mask(pleft[14] > pright[14]);
+                pcondition[15] = (short)BitUtil.ToInt32Mask(pleft[15] > pright[15]);
+                return condition.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{ushort}, Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<ushort> GreaterThan_Base(Vector256<ushort> left, Vector256<ushort> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector256<short> condition);
+#else
+                Vector256<short> condition = default;
+#endif // NET5_0_OR_GREATER
+                short* pcondition = (short*)&condition;
+                ushort* pleft = (ushort*)&left;
+                ushort* pright = (ushort*)&right;
+                pcondition[0] = (short)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = (short)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = (short)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = (short)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = (short)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = (short)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = (short)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = (short)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
+                pcondition[8] = (short)BitUtil.ToInt32Mask(pleft[8] > pright[8]);
+                pcondition[9] = (short)BitUtil.ToInt32Mask(pleft[9] > pright[9]);
+                pcondition[10] = (short)BitUtil.ToInt32Mask(pleft[10] > pright[10]);
+                pcondition[11] = (short)BitUtil.ToInt32Mask(pleft[11] > pright[11]);
+                pcondition[12] = (short)BitUtil.ToInt32Mask(pleft[12] > pright[12]);
+                pcondition[13] = (short)BitUtil.ToInt32Mask(pleft[13] > pright[13]);
+                pcondition[14] = (short)BitUtil.ToInt32Mask(pleft[14] > pright[14]);
+                pcondition[15] = (short)BitUtil.ToInt32Mask(pleft[15] > pright[15]);
+                return condition.AsUInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{int}, Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<int> GreaterThan_Base(Vector256<int> left, Vector256<int> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector256<int> condition);
+#else
+                Vector256<int> condition = default;
+#endif // NET5_0_OR_GREATER
+                int* pcondition = (int*)&condition;
+                int* pleft = (int*)&left;
+                int* pright = (int*)&right;
+                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = BitUtil.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = BitUtil.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = BitUtil.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = BitUtil.ToInt32Mask(pleft[7] > pright[7]);
+                return condition.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{uint}, Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<uint> GreaterThan_Base(Vector256<uint> left, Vector256<uint> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector256<int> condition);
+#else
+                Vector256<int> condition = default;
+#endif // NET5_0_OR_GREATER
+                int* pcondition = (int*)&condition;
+                uint* pleft = (uint*)&left;
+                uint* pright = (uint*)&right;
+                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = BitUtil.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = BitUtil.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = BitUtil.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = BitUtil.ToInt32Mask(pleft[7] > pright[7]);
+                return condition.AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{long}, Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<long> GreaterThan_Base(Vector256<long> left, Vector256<long> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector256<long> condition);
+#else
+                Vector256<long> condition = default;
+#endif // NET5_0_OR_GREATER
+                long* pcondition = (long*)&condition;
+                long* pleft = (long*)&left;
+                long* pright = (long*)&right;
+                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                return condition;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{ulong}, Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<ulong> GreaterThan_Base(Vector256<ulong> left, Vector256<ulong> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector256<long> condition);
+#else
+                Vector256<long> condition = default;
+#endif // NET5_0_OR_GREATER
+                long* pcondition = (long*)&condition;
+                ulong* pleft = (ulong*)&left;
+                ulong* pright = (ulong*)&right;
+                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                return condition.AsUInt64();
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.Max_AcceleratedTypes"/>
             public static TypeCodeFlags Max_AcceleratedTypes {
                 get {
@@ -498,23 +892,8 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{float}, Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector256<float> Max_Conditional(Vector256<float> left, Vector256<float> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<int> condition);
-#else
-                Vector256<int> condition = default;
-#endif // NET5_0_OR_GREATER
-                int* pcondition = (int*)&condition;
-                float* pleft = (float*)&left;
-                float* pright = (float*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
-                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
-                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
-                pcondition[4] = BitUtil.ToInt32Mask(pleft[4] > pright[4]);
-                pcondition[5] = BitUtil.ToInt32Mask(pleft[5] > pright[5]);
-                pcondition[6] = BitUtil.ToInt32Mask(pleft[6] > pright[6]);
-                pcondition[7] = BitUtil.ToInt32Mask(pleft[7] > pright[7]);
-                Vector256<float> rt = ConditionalSelect(condition.AsSingle(), left, right);
+                Vector256<float> condition = GreaterThan(left, right);
+                Vector256<float> rt = ConditionalSelect(condition, left, right);
                 return rt;
             }
 
@@ -545,46 +924,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector256<sbyte> Max_Conditional(Vector256<sbyte> left, Vector256<sbyte> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<sbyte> condition);
-#else
-                Vector256<sbyte> condition = default;
-#endif // NET5_0_OR_GREATER
-                sbyte* pcondition = (sbyte*)&condition;
-                sbyte* pleft = (sbyte*)&left;
-                sbyte* pright = (sbyte*)&right;
-                pcondition[0] = (sbyte)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = (sbyte)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
-                pcondition[2] = (sbyte)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
-                pcondition[3] = (sbyte)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
-                pcondition[4] = (sbyte)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
-                pcondition[5] = (sbyte)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
-                pcondition[6] = (sbyte)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
-                pcondition[7] = (sbyte)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
-                pcondition[8] = (sbyte)BitUtil.ToInt32Mask(pleft[8] > pright[8]);
-                pcondition[9] = (sbyte)BitUtil.ToInt32Mask(pleft[9] > pright[9]);
-                pcondition[10] = (sbyte)BitUtil.ToInt32Mask(pleft[10] > pright[10]);
-                pcondition[11] = (sbyte)BitUtil.ToInt32Mask(pleft[11] > pright[11]);
-                pcondition[12] = (sbyte)BitUtil.ToInt32Mask(pleft[12] > pright[12]);
-                pcondition[13] = (sbyte)BitUtil.ToInt32Mask(pleft[13] > pright[13]);
-                pcondition[14] = (sbyte)BitUtil.ToInt32Mask(pleft[14] > pright[14]);
-                pcondition[15] = (sbyte)BitUtil.ToInt32Mask(pleft[15] > pright[15]);
-                pcondition[16] = (sbyte)BitUtil.ToInt32Mask(pleft[16] > pright[16]);
-                pcondition[17] = (sbyte)BitUtil.ToInt32Mask(pleft[17] > pright[17]);
-                pcondition[18] = (sbyte)BitUtil.ToInt32Mask(pleft[18] > pright[18]);
-                pcondition[19] = (sbyte)BitUtil.ToInt32Mask(pleft[19] > pright[19]);
-                pcondition[20] = (sbyte)BitUtil.ToInt32Mask(pleft[20] > pright[20]);
-                pcondition[21] = (sbyte)BitUtil.ToInt32Mask(pleft[21] > pright[21]);
-                pcondition[22] = (sbyte)BitUtil.ToInt32Mask(pleft[22] > pright[22]);
-                pcondition[23] = (sbyte)BitUtil.ToInt32Mask(pleft[23] > pright[23]);
-                pcondition[24] = (sbyte)BitUtil.ToInt32Mask(pleft[24] > pright[24]);
-                pcondition[25] = (sbyte)BitUtil.ToInt32Mask(pleft[25] > pright[25]);
-                pcondition[26] = (sbyte)BitUtil.ToInt32Mask(pleft[26] > pright[26]);
-                pcondition[27] = (sbyte)BitUtil.ToInt32Mask(pleft[27] > pright[27]);
-                pcondition[28] = (sbyte)BitUtil.ToInt32Mask(pleft[28] > pright[28]);
-                pcondition[29] = (sbyte)BitUtil.ToInt32Mask(pleft[29] > pright[29]);
-                pcondition[30] = (sbyte)BitUtil.ToInt32Mask(pleft[30] > pright[30]);
-                pcondition[31] = (sbyte)BitUtil.ToInt32Mask(pleft[31] > pright[31]);
+                Vector256<sbyte> condition = GreaterThan(left, right);
                 Vector256<sbyte> rt = ConditionalSelect(condition, left, right);
                 return rt;
             }
@@ -592,77 +932,15 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector256<byte> Max_Conditional(Vector256<byte> left, Vector256<byte> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<sbyte> condition);
-#else
-                Vector256<sbyte> condition = default;
-#endif // NET5_0_OR_GREATER
-                sbyte* pcondition = (sbyte*)&condition;
-                byte* pleft = (byte*)&left;
-                byte* pright = (byte*)&right;
-                pcondition[0] = (sbyte)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = (sbyte)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
-                pcondition[2] = (sbyte)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
-                pcondition[3] = (sbyte)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
-                pcondition[4] = (sbyte)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
-                pcondition[5] = (sbyte)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
-                pcondition[6] = (sbyte)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
-                pcondition[7] = (sbyte)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
-                pcondition[8] = (sbyte)BitUtil.ToInt32Mask(pleft[8] > pright[8]);
-                pcondition[9] = (sbyte)BitUtil.ToInt32Mask(pleft[9] > pright[9]);
-                pcondition[10] = (sbyte)BitUtil.ToInt32Mask(pleft[10] > pright[10]);
-                pcondition[11] = (sbyte)BitUtil.ToInt32Mask(pleft[11] > pright[11]);
-                pcondition[12] = (sbyte)BitUtil.ToInt32Mask(pleft[12] > pright[12]);
-                pcondition[13] = (sbyte)BitUtil.ToInt32Mask(pleft[13] > pright[13]);
-                pcondition[14] = (sbyte)BitUtil.ToInt32Mask(pleft[14] > pright[14]);
-                pcondition[15] = (sbyte)BitUtil.ToInt32Mask(pleft[15] > pright[15]);
-                pcondition[16] = (sbyte)BitUtil.ToInt32Mask(pleft[16] > pright[16]);
-                pcondition[17] = (sbyte)BitUtil.ToInt32Mask(pleft[17] > pright[17]);
-                pcondition[18] = (sbyte)BitUtil.ToInt32Mask(pleft[18] > pright[18]);
-                pcondition[19] = (sbyte)BitUtil.ToInt32Mask(pleft[19] > pright[19]);
-                pcondition[20] = (sbyte)BitUtil.ToInt32Mask(pleft[20] > pright[20]);
-                pcondition[21] = (sbyte)BitUtil.ToInt32Mask(pleft[21] > pright[21]);
-                pcondition[22] = (sbyte)BitUtil.ToInt32Mask(pleft[22] > pright[22]);
-                pcondition[23] = (sbyte)BitUtil.ToInt32Mask(pleft[23] > pright[23]);
-                pcondition[24] = (sbyte)BitUtil.ToInt32Mask(pleft[24] > pright[24]);
-                pcondition[25] = (sbyte)BitUtil.ToInt32Mask(pleft[25] > pright[25]);
-                pcondition[26] = (sbyte)BitUtil.ToInt32Mask(pleft[26] > pright[26]);
-                pcondition[27] = (sbyte)BitUtil.ToInt32Mask(pleft[27] > pright[27]);
-                pcondition[28] = (sbyte)BitUtil.ToInt32Mask(pleft[28] > pright[28]);
-                pcondition[29] = (sbyte)BitUtil.ToInt32Mask(pleft[29] > pright[29]);
-                pcondition[30] = (sbyte)BitUtil.ToInt32Mask(pleft[30] > pright[30]);
-                pcondition[31] = (sbyte)BitUtil.ToInt32Mask(pleft[31] > pright[31]);
-                Vector256<byte> rt = ConditionalSelect(condition.AsByte(), left, right);
+                Vector256<byte> condition = GreaterThan(left, right);
+                Vector256<byte> rt = ConditionalSelect(condition, left, right);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector256<short> Max_Conditional(Vector256<short> left, Vector256<short> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<short> condition);
-#else
-                Vector256<short> condition = default;
-#endif // NET5_0_OR_GREATER
-                short* pcondition = (short*)&condition;
-                short* pleft = (short*)&left;
-                short* pright = (short*)&right;
-                pcondition[0] = (short)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = (short)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
-                pcondition[2] = (short)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
-                pcondition[3] = (short)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
-                pcondition[4] = (short)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
-                pcondition[5] = (short)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
-                pcondition[6] = (short)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
-                pcondition[7] = (short)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
-                pcondition[8] = (short)BitUtil.ToInt32Mask(pleft[8] > pright[8]);
-                pcondition[9] = (short)BitUtil.ToInt32Mask(pleft[9] > pright[9]);
-                pcondition[10] = (short)BitUtil.ToInt32Mask(pleft[10] > pright[10]);
-                pcondition[11] = (short)BitUtil.ToInt32Mask(pleft[11] > pright[11]);
-                pcondition[12] = (short)BitUtil.ToInt32Mask(pleft[12] > pright[12]);
-                pcondition[13] = (short)BitUtil.ToInt32Mask(pleft[13] > pright[13]);
-                pcondition[14] = (short)BitUtil.ToInt32Mask(pleft[14] > pright[14]);
-                pcondition[15] = (short)BitUtil.ToInt32Mask(pleft[15] > pright[15]);
+                Vector256<short> condition = GreaterThan(left, right);
                 Vector256<short> rt = ConditionalSelect(condition, left, right);
                 return rt;
             }
@@ -671,53 +949,15 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector256<ushort> Max_Conditional(Vector256<ushort> left, Vector256<ushort> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<short> condition);
-#else
-                Vector256<short> condition = default;
-#endif // NET5_0_OR_GREATER
-                short* pcondition = (short*)&condition;
-                ushort* pleft = (ushort*)&left;
-                ushort* pright = (ushort*)&right;
-                pcondition[0] = (short)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = (short)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
-                pcondition[2] = (short)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
-                pcondition[3] = (short)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
-                pcondition[4] = (short)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
-                pcondition[5] = (short)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
-                pcondition[6] = (short)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
-                pcondition[7] = (short)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
-                pcondition[8] = (short)BitUtil.ToInt32Mask(pleft[8] > pright[8]);
-                pcondition[9] = (short)BitUtil.ToInt32Mask(pleft[9] > pright[9]);
-                pcondition[10] = (short)BitUtil.ToInt32Mask(pleft[10] > pright[10]);
-                pcondition[11] = (short)BitUtil.ToInt32Mask(pleft[11] > pright[11]);
-                pcondition[12] = (short)BitUtil.ToInt32Mask(pleft[12] > pright[12]);
-                pcondition[13] = (short)BitUtil.ToInt32Mask(pleft[13] > pright[13]);
-                pcondition[14] = (short)BitUtil.ToInt32Mask(pleft[14] > pright[14]);
-                pcondition[15] = (short)BitUtil.ToInt32Mask(pleft[15] > pright[15]);
-                Vector256<ushort> rt = ConditionalSelect(condition.AsUInt16(), left, right);
+                Vector256<ushort> condition = GreaterThan(left, right);
+                Vector256<ushort> rt = ConditionalSelect(condition, left, right);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector256<int> Max_Conditional(Vector256<int> left, Vector256<int> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<int> condition);
-#else
-                Vector256<int> condition = default;
-#endif // NET5_0_OR_GREATER
-                int* pcondition = (int*)&condition;
-                int* pleft = (int*)&left;
-                int* pright = (int*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
-                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
-                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
-                pcondition[4] = BitUtil.ToInt32Mask(pleft[4] > pright[4]);
-                pcondition[5] = BitUtil.ToInt32Mask(pleft[5] > pright[5]);
-                pcondition[6] = BitUtil.ToInt32Mask(pleft[6] > pright[6]);
-                pcondition[7] = BitUtil.ToInt32Mask(pleft[7] > pright[7]);
+                Vector256<int> condition = GreaterThan(left, right);
                 Vector256<int> rt = ConditionalSelect(condition, left, right);
                 return rt;
             }
@@ -726,23 +966,8 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector256<uint> Max_Conditional(Vector256<uint> left, Vector256<uint> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<int> condition);
-#else
-                Vector256<int> condition = default;
-#endif // NET5_0_OR_GREATER
-                int* pcondition = (int*)&condition;
-                uint* pleft = (uint*)&left;
-                uint* pright = (uint*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
-                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
-                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
-                pcondition[4] = BitUtil.ToInt32Mask(pleft[4] > pright[4]);
-                pcondition[5] = BitUtil.ToInt32Mask(pleft[5] > pright[5]);
-                pcondition[6] = BitUtil.ToInt32Mask(pleft[6] > pright[6]);
-                pcondition[7] = BitUtil.ToInt32Mask(pleft[7] > pright[7]);
-                Vector256<uint> rt = ConditionalSelect(condition.AsUInt32(), left, right);
+                Vector256<uint> condition = GreaterThan(left, right);
+                Vector256<uint> rt = ConditionalSelect(condition, left, right);
                 return rt;
             }
 
