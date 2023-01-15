@@ -413,6 +413,124 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.LessThan_AcceleratedTypes"/>
+        public static TypeCodeFlags LessThan_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.Floor_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> LessThan(Vector256<float> left, Vector256<float> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.LessThan(left, right);
+#else
+            return _instance.LessThan(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> LessThan(Vector256<double> left, Vector256<double> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.LessThan(left, right);
+#else
+            return _instance.LessThan(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> LessThan(Vector256<sbyte> left, Vector256<sbyte> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.LessThan(left, right);
+#else
+            return _instance.LessThan(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> LessThan(Vector256<byte> left, Vector256<byte> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.LessThan(left, right);
+#else
+            return _instance.LessThan(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> LessThan(Vector256<short> left, Vector256<short> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.LessThan(left, right);
+#else
+            return _instance.LessThan(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> LessThan(Vector256<ushort> left, Vector256<ushort> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.LessThan(left, right);
+#else
+            return _instance.LessThan(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> LessThan(Vector256<int> left, Vector256<int> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.LessThan(left, right);
+#else
+            return _instance.LessThan(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> LessThan(Vector256<uint> left, Vector256<uint> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.LessThan(left, right);
+#else
+            return _instance.LessThan(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> LessThan(Vector256<long> left, Vector256<long> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.LessThan(left, right);
+#else
+            return _instance.LessThan(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> LessThan(Vector256<ulong> left, Vector256<ulong> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.LessThan(left, right);
+#else
+            return _instance.LessThan(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.Max_AcceleratedTypes"/>
         public static TypeCodeFlags Max_AcceleratedTypes {
             get {

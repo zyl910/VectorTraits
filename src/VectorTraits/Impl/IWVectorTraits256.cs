@@ -289,6 +289,123 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>LessThan</c> (运行 <c>LessThan</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="LessThan"/>
+        TypeCodeFlags LessThan_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThan{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<float> LessThan(Vector256<float> left, Vector256<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThan{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<double> LessThan(Vector256<double> left, Vector256<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThan{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<sbyte> LessThan(Vector256<sbyte> left, Vector256<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThan{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<byte> LessThan(Vector256<byte> left, Vector256<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThan{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<short> LessThan(Vector256<short> left, Vector256<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThan{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<ushort> LessThan(Vector256<ushort> left, Vector256<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThan{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<int> LessThan(Vector256<int> left, Vector256<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThan{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<uint> LessThan(Vector256<uint> left, Vector256<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThan{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<long> LessThan(Vector256<long> left, Vector256<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThan{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<ulong> LessThan(Vector256<ulong> left, Vector256<ulong> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Max</c> (运行 <c>Max</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Max"/>
