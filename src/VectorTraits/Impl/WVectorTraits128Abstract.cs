@@ -167,6 +167,150 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan_AcceleratedTypes"/>
+        public virtual TypeCodeFlags GreaterThan_AcceleratedTypes {
+            get {
+                return Statics.GreaterThan_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<float> GreaterThan(Vector128<float> left, Vector128<float> right) {
+            return Statics.GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<double> GreaterThan(Vector128<double> left, Vector128<double> right) {
+            return Statics.GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{sbyte}, Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<sbyte> GreaterThan(Vector128<sbyte> left, Vector128<sbyte> right) {
+            return Statics.GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{byte}, Vector128{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<byte> GreaterThan(Vector128<byte> left, Vector128<byte> right) {
+            return Statics.GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{short}, Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<short> GreaterThan(Vector128<short> left, Vector128<short> right) {
+            return Statics.GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ushort}, Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<ushort> GreaterThan(Vector128<ushort> left, Vector128<ushort> right) {
+            return Statics.GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{int}, Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<int> GreaterThan(Vector128<int> left, Vector128<int> right) {
+            return Statics.GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{uint}, Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<uint> GreaterThan(Vector128<uint> left, Vector128<uint> right) {
+            return Statics.GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<long> GreaterThan(Vector128<long> left, Vector128<long> right) {
+            return Statics.GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<ulong> GreaterThan(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.GreaterThan(left, right);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan_AcceleratedTypes"/>
+        public virtual TypeCodeFlags LessThan_AcceleratedTypes {
+            get {
+                return Statics.LessThan_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<float> LessThan(Vector128<float> left, Vector128<float> right) {
+            return Statics.LessThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<double> LessThan(Vector128<double> left, Vector128<double> right) {
+            return Statics.LessThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{sbyte}, Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<sbyte> LessThan(Vector128<sbyte> left, Vector128<sbyte> right) {
+            return Statics.LessThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{byte}, Vector128{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<byte> LessThan(Vector128<byte> left, Vector128<byte> right) {
+            return Statics.LessThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{short}, Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<short> LessThan(Vector128<short> left, Vector128<short> right) {
+            return Statics.LessThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{ushort}, Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<ushort> LessThan(Vector128<ushort> left, Vector128<ushort> right) {
+            return Statics.LessThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{int}, Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<int> LessThan(Vector128<int> left, Vector128<int> right) {
+            return Statics.LessThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{uint}, Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<uint> LessThan(Vector128<uint> left, Vector128<uint> right) {
+            return Statics.LessThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<long> LessThan(Vector128<long> left, Vector128<long> right) {
+            return Statics.LessThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<ulong> LessThan(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.LessThan(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Max_AcceleratedTypes"/>
         public virtual TypeCodeFlags Max_AcceleratedTypes {
             get {

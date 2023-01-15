@@ -243,6 +243,174 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan_AcceleratedTypes"/>
+            public static TypeCodeFlags GreaterThan_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> GreaterThan(Vector128<float> left, Vector128<float> right) {
+                return AdvSimd.CompareGreaterThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> GreaterThan(Vector128<double> left, Vector128<double> right) {
+                //Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
+                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
+                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
+                Vector128<long> mask = Vector128.Create(m0, m1);
+                return mask.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> GreaterThan(Vector128<sbyte> left, Vector128<sbyte> right) {
+                return AdvSimd.CompareGreaterThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> GreaterThan(Vector128<byte> left, Vector128<byte> right) {
+                return AdvSimd.CompareGreaterThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> GreaterThan(Vector128<short> left, Vector128<short> right) {
+                return AdvSimd.CompareGreaterThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> GreaterThan(Vector128<ushort> left, Vector128<ushort> right) {
+                return AdvSimd.CompareGreaterThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> GreaterThan(Vector128<int> left, Vector128<int> right) {
+                return AdvSimd.CompareGreaterThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> GreaterThan(Vector128<uint> left, Vector128<uint> right) {
+                return AdvSimd.CompareGreaterThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> GreaterThan(Vector128<long> left, Vector128<long> right) {
+                // Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
+                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
+                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
+                Vector128<long> mask = Vector128.Create(m0, m1);
+                return mask.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> GreaterThan(Vector128<ulong> left, Vector128<ulong> right) {
+                //Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
+                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
+                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
+                Vector128<long> mask = Vector128.Create(m0, m1);
+                return mask.AsUInt64();
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan_AcceleratedTypes"/>
+            public static TypeCodeFlags LessThan_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> LessThan(Vector128<float> left, Vector128<float> right) {
+                return AdvSimd.CompareLessThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> LessThan(Vector128<double> left, Vector128<double> right) {
+                //Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
+                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
+                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
+                Vector128<long> mask = Vector128.Create(m0, m1);
+                return mask.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> LessThan(Vector128<sbyte> left, Vector128<sbyte> right) {
+                return AdvSimd.CompareLessThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> LessThan(Vector128<byte> left, Vector128<byte> right) {
+                return AdvSimd.CompareLessThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> LessThan(Vector128<short> left, Vector128<short> right) {
+                return AdvSimd.CompareLessThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> LessThan(Vector128<ushort> left, Vector128<ushort> right) {
+                return AdvSimd.CompareLessThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> LessThan(Vector128<int> left, Vector128<int> right) {
+                return AdvSimd.CompareLessThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> LessThan(Vector128<uint> left, Vector128<uint> right) {
+                return AdvSimd.CompareLessThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> LessThan(Vector128<long> left, Vector128<long> right) {
+                // Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
+                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
+                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
+                Vector128<long> mask = Vector128.Create(m0, m1);
+                return mask.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> LessThan(Vector128<ulong> left, Vector128<ulong> right) {
+                //Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
+                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
+                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
+                Vector128<long> mask = Vector128.Create(m0, m1);
+                return mask.AsUInt64();
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Max_AcceleratedTypes"/>
             public static TypeCodeFlags Max_AcceleratedTypes {
                 get {
@@ -346,7 +514,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Min(Vector128<double> left, Vector128<double> right) {
-                //Vector128<long> mask = AdvSimd.CompareGreaterThan(right, left);
+                //Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
                 long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
                 long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
@@ -396,7 +564,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Min(Vector128<long> left, Vector128<long> right) {
-                // Vector128<long> mask = AdvSimd.CompareGreaterThan(right, left);
+                // Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
                 long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
                 long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
@@ -408,7 +576,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> Min(Vector128<ulong> left, Vector128<ulong> right) {
-                //Vector128<long> mask = AdvSimd.CompareGreaterThan(right, left);
+                //Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
                 long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
                 long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);

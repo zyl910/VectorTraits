@@ -115,6 +115,62 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan_AcceleratedTypes"/>
+            public static TypeCodeFlags GreaterThan_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Double | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64
+                        | SuperStatics.GreaterThan_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> GreaterThan(Vector128<double> left, Vector128<double> right) {
+                return AdvSimd.Arm64.CompareGreaterThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> GreaterThan(Vector128<long> left, Vector128<long> right) {
+                return AdvSimd.Arm64.CompareGreaterThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> GreaterThan(Vector128<ulong> left, Vector128<ulong> right) {
+                return AdvSimd.Arm64.CompareGreaterThan(left, right);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan_AcceleratedTypes"/>
+            public static TypeCodeFlags LessThan_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Double | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64
+                        | SuperStatics.LessThan_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> LessThan(Vector128<double> left, Vector128<double> right) {
+                return AdvSimd.Arm64.CompareLessThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> LessThan(Vector128<long> left, Vector128<long> right) {
+                return AdvSimd.Arm64.CompareLessThan(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> LessThan(Vector128<ulong> left, Vector128<ulong> right) {
+                return AdvSimd.Arm64.CompareLessThan(left, right);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Max_AcceleratedTypes"/>
             public static TypeCodeFlags Max_AcceleratedTypes {
                 get {
@@ -164,7 +220,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Min(Vector128<long> left, Vector128<long> right) {
-                Vector128<long> mask = AdvSimd.Arm64.CompareGreaterThan(right, left);
+                Vector128<long> mask = AdvSimd.Arm64.CompareLessThan(left, right);
                 Vector128<long> rt = AdvSimd.BitwiseSelect(mask, left, right);
                 return rt;
             }
@@ -173,7 +229,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> Min(Vector128<ulong> left, Vector128<ulong> right) {
-                Vector128<ulong> mask = AdvSimd.Arm64.CompareGreaterThan(right, left);
+                Vector128<ulong> mask = AdvSimd.Arm64.CompareLessThan(left, right);
                 Vector128<ulong> rt = AdvSimd.BitwiseSelect(mask, left, right);
                 return rt;
             }

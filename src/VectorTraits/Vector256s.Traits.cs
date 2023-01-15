@@ -298,7 +298,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.GreaterThan_AcceleratedTypes"/>
         public static TypeCodeFlags GreaterThan_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Floor_AcceleratedTypes;
+                TypeCodeFlags rt = _instance.GreaterThan_AcceleratedTypes;
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
                     if (Vector256.IsHardwareAccelerated) {
                         rt |= TypeCodeFlagsUtil.AllTypes;
@@ -416,7 +416,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.LessThan_AcceleratedTypes"/>
         public static TypeCodeFlags LessThan_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Floor_AcceleratedTypes;
+                TypeCodeFlags rt = _instance.LessThan_AcceleratedTypes;
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
                     if (Vector256.IsHardwareAccelerated) {
                         rt |= TypeCodeFlagsUtil.AllTypes;
@@ -534,7 +534,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Max_AcceleratedTypes"/>
         public static TypeCodeFlags Max_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Floor_AcceleratedTypes;
+                TypeCodeFlags rt = _instance.Max_AcceleratedTypes;
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
                     if (Vector256.IsHardwareAccelerated) {
                         rt |= TypeCodeFlagsUtil.AllTypes;
@@ -652,7 +652,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Min_AcceleratedTypes"/>
         public static TypeCodeFlags Min_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Floor_AcceleratedTypes;
+                TypeCodeFlags rt = _instance.Min_AcceleratedTypes;
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
                     if (Vector256.IsHardwareAccelerated) {
                         rt |= TypeCodeFlagsUtil.AllTypes;

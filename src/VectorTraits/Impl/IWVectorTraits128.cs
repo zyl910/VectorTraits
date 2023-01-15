@@ -172,6 +172,240 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>GreaterThan</c> (运行 <c>GreaterThan</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="GreaterThan"/>
+        TypeCodeFlags GreaterThan_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大).</returns>
+        /// <seealso cref="GreaterThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.GreaterThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<float> GreaterThan(Vector128<float> left, Vector128<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大).</returns>
+        /// <seealso cref="GreaterThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.GreaterThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<double> GreaterThan(Vector128<double> left, Vector128<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大).</returns>
+        /// <seealso cref="GreaterThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.GreaterThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<sbyte> GreaterThan(Vector128<sbyte> left, Vector128<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大).</returns>
+        /// <seealso cref="GreaterThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.GreaterThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<byte> GreaterThan(Vector128<byte> left, Vector128<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大).</returns>
+        /// <seealso cref="GreaterThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.GreaterThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<short> GreaterThan(Vector128<short> left, Vector128<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大).</returns>
+        /// <seealso cref="GreaterThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.GreaterThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<ushort> GreaterThan(Vector128<ushort> left, Vector128<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大).</returns>
+        /// <seealso cref="GreaterThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.GreaterThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<int> GreaterThan(Vector128<int> left, Vector128<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大).</returns>
+        /// <seealso cref="GreaterThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.GreaterThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<uint> GreaterThan(Vector128<uint> left, Vector128<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大).</returns>
+        /// <seealso cref="GreaterThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.GreaterThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<long> GreaterThan(Vector128<long> left, Vector128<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大).</returns>
+        /// <seealso cref="GreaterThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.GreaterThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<ulong> GreaterThan(Vector128<ulong> left, Vector128<ulong> right);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>LessThan</c> (运行 <c>LessThan</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="LessThan"/>
+        TypeCodeFlags LessThan_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<float> LessThan(Vector128<float> left, Vector128<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<double> LessThan(Vector128<double> left, Vector128<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<sbyte> LessThan(Vector128<sbyte> left, Vector128<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<byte> LessThan(Vector128<byte> left, Vector128<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<short> LessThan(Vector128<short> left, Vector128<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<ushort> LessThan(Vector128<ushort> left, Vector128<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<int> LessThan(Vector128<int> left, Vector128<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<uint> LessThan(Vector128<uint> left, Vector128<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<long> LessThan(Vector128<long> left, Vector128<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小).</returns>
+        /// <seealso cref="LessThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThan{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<ulong> LessThan(Vector128<ulong> left, Vector128<ulong> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Max</c> (运行 <c>Max</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Max"/>

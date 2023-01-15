@@ -65,6 +65,60 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan_AcceleratedTypes"/>
+        public override TypeCodeFlags GreaterThan_AcceleratedTypes {
+            get {
+                return Statics.GreaterThan_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> GreaterThan(Vector128<double> left, Vector128<double> right) {
+            return Statics.GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> GreaterThan(Vector128<long> left, Vector128<long> right) {
+            return Statics.GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<ulong> GreaterThan(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.GreaterThan(left, right);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan_AcceleratedTypes"/>
+        public override TypeCodeFlags LessThan_AcceleratedTypes {
+            get {
+                return Statics.LessThan_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> LessThan(Vector128<double> left, Vector128<double> right) {
+            return Statics.LessThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> LessThan(Vector128<long> left, Vector128<long> right) {
+            return Statics.LessThan(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<ulong> LessThan(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.LessThan(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Max_AcceleratedTypes"/>
         public override TypeCodeFlags Max_AcceleratedTypes {
             get {
