@@ -35,6 +35,8 @@
 
   <Import Project="..\..\src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems" Label="Shared" />
 
+  <Import Project="..\VectorTraits.Benchmarks.Core.Inc\VectorTraits.Benchmarks.Core.Inc.projitems" Label="Shared" />
+
   <ItemGroup>
     <ProjectReference Include="..\..\src\VectorTraits\VectorTraits.csproj" />
   </ItemGroup>

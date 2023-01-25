@@ -25,6 +25,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "VectorTraits.InfoInc", "src
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "VectorTraits.Benchmarks.Inc", "tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.shproj", "{22375BC5-630E-4414-9C45-F749AE13CAE1}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "VectorTraits.Benchmarks.Core.Inc", "tests\VectorTraits.Benchmarks.Core.Inc\VectorTraits.Benchmarks.Core.Inc.shproj", "{FF651659-BDF2-4B61-81E6-EDBA29E1AB57}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorTraits.Benchmarks", "tests\VectorTraits.Benchmarks\VectorTraits.Benchmarks.csproj", "{6D794C59-52C2-4853-9124-84FA8FEE0ACB}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BenchmarkDotNet.Mock", "tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.shproj", "{FE742124-F9F3-463D-83D2-2FA9E33E0505}"
@@ -86,6 +88,7 @@ Global
 		{EFA732BA-F81C-482D-9BDE-80753CB0C9A8} = {C49387B4-769A-47F2-9D37-79A13956650D}
 		{A732C040-1F30-4A0A-BE44-C93AE15CA954} = {C49387B4-769A-47F2-9D37-79A13956650D}
 		{DE1E8655-C240-4B92-9391-10D0B44D50A0} = {7FEBEE53-6B60-400E-85F3-236B83B6311D}
+		{FF651659-BDF2-4B61-81E6-EDBA29E1AB57} = {C49387B4-769A-47F2-9D37-79A13956650D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {563C5B68-C47B-4FD9-9EB3-279A64EE805C}
@@ -93,16 +96,20 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{22375bc5-630e-4414-9c45-f749ae13cae1}*SharedItemsImports = 13
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{6d794c59-52c2-4853-9124-84fa8fee0acb}*SharedItemsImports = 5
+		tests\VectorTraits.Benchmarks.Core.Inc\VectorTraits.Benchmarks.Core.Inc.projitems*{6d794c59-52c2-4853-9124-84fa8fee0acb}*SharedItemsImports = 5
 		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{6d794c59-52c2-4853-9124-84fa8fee0acb}*SharedItemsImports = 5
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{81ccad3f-6606-410b-9d02-3f8fc65cace5}*SharedItemsImports = 13
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{8ecae95b-f799-4f02-b598-3fe3e3de9291}*SharedItemsImports = 5
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
 		tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
+		tests\VectorTraits.Benchmarks.Core.Inc\VectorTraits.Benchmarks.Core.Inc.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
 		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{de1e8655-c240-4b92-9391-10d0b44d50a0}*SharedItemsImports = 5
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
 		tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
+		tests\VectorTraits.Benchmarks.Core.Inc\VectorTraits.Benchmarks.Core.Inc.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
 		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
 		tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems*{fe742124-f9f3-463d-83d2-2fa9e33e0505}*SharedItemsImports = 13
+		tests\VectorTraits.Benchmarks.Core.Inc\VectorTraits.Benchmarks.Core.Inc.projitems*{ff651659-bdf2-4b61-81e6-edba29e1ab57}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
