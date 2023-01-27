@@ -21,7 +21,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         public static IBenchmarkWriter CurrentBenchmarkWriter { get; set; }
 
         static BenchmarkUtil() {
-            CurrentBenchmarkWriter = new SimpleBenchmarkWriter();
+            CurrentBenchmarkWriter = new TabBenchmarkWriter();
         }
 
         /// <summary>
