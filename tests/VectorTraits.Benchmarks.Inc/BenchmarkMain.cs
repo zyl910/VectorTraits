@@ -23,8 +23,8 @@ namespace Zyl.VectorTraits.Benchmarks {
             //writer.WriteLine(indent + string.Format("AccelerateState-VectorTTraits256Base.ShiftRightArithmetic:\t{0}", AccelerateStateAttribute.GetAttributeValue(typeof(VectorTTraits256Base).GetMethod("ShiftRightArithmetic"))));
             //writer.WriteLine(indent + string.Format("AccelerateState-VectorTTraits256Avx2.ShiftRightArithmetic:\t{0}", AccelerateStateAttribute.GetAttributeValue(typeof(VectorTTraits256Avx2).GetMethod("ShiftRightArithmetic"))));
             // RunBenchmark.
-            BenchmarkUtil.CurrentTextWriter = writer;
-            BenchmarkUtil.RunBenchmark(writer, indent, typeof(BenchmarkMain).Assembly);
+            BenchmarkUtil.CurrentBenchmarkWriter.CurrentTextWriter = writer;
+            BenchmarkUtil.RunBenchmark(BenchmarkUtil.CurrentBenchmarkWriter, typeof(BenchmarkMain).Assembly);
         }
     }
 }

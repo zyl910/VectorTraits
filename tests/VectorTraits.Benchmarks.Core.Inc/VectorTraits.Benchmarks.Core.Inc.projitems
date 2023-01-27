@@ -6,10 +6,11 @@
     <SharedGUID>ff651659-bdf2-4b61-81e6-edba29e1ab57</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>VectorTraits.Benchmarks</Import_RootNamespace>
+    <Import_RootNamespace>Zyl.VectorTraits.Benchmarks</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AbstractBenchmark.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractBenchmarkWriter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Byte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int16.cs" />
@@ -21,6 +22,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BenchmarkUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FakeBenchmarkAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IBenchmarkWriter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ILoopCountGetter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SimpleBenchmarkWriter.cs" />
   </ItemGroup>
 </Project>

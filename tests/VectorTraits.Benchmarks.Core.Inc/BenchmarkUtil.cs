@@ -17,8 +17,12 @@ namespace Zyl.VectorTraits.Benchmarks {
         public static readonly string IndentNextSeparator = VectorTextUtil.IndentNextSeparator;
 
 
-        /// <summary>Current <see cref="TextWriter"/>.</summary>
-        public static TextWriter? CurrentTextWriter { get; set; }
+        /// <summary>Current <see cref="IBenchmarkWriter"/>.</summary>
+        public static IBenchmarkWriter CurrentBenchmarkWriter { get; set; }
+
+        static BenchmarkUtil() {
+            CurrentBenchmarkWriter = new SimpleBenchmarkWriter();
+        }
 
         /// <summary>
         /// Output Environment.
@@ -34,22 +38,21 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <summary>
         /// Run action test.
         /// </summary>
-        /// <param name="writer">Output <see cref="TextWriter"/>.</param>
-        /// <param name="indent">The indent.</param>
+        /// <param name="writer">Output <see cref="IBenchmarkWriter"/>.</param>
         /// <param name="name">Test name.</param>
         /// <param name="action">Test action</param>
         /// <param name="srcCount">Source count within an <paramref name="action"/>.</param>
         /// <param name="mopsBaseline">Baseline's MOPS/s</param>
-        /// <returns>Returns MOPS/s.</returns>
-        public static double RunTest(TextWriter writer, string indent, string name, Action action, int srcCount, double mopsBaseline, ILoopCountGetter? loopCountGetter = null) {
+        /// <returns>Returns MOPS(Million operations per second).</returns>
+        public static double RunTest(IBenchmarkWriter writer, string name, Action action, int srcCount, double mopsBaseline, ILoopCountGetter? loopCountGetter = null) {
             double us;
             int loopCount = loopCountGetter?.LoopCount ?? 0;
             double rt = RunTestCore(action, srcCount, mopsBaseline, out us, loopCount);
             if (mopsBaseline>0) {
                 double scale = rt / mopsBaseline;
-                writer.WriteLine(indent + string.Format("{0}:\tus={1:F3}, MOPS/s={2}, scale={3}", name, us, rt, scale));
+                writer.WriteItemBenchmark(name, us, rt, scale);
             } else {
-                writer.WriteLine(indent + string.Format("{0}:\tus={1:F3}, MOPS/s={2}", name, us, rt));
+                writer.WriteItemBenchmark(name, us, rt);
             }
             return rt;
         }
@@ -61,7 +64,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="srcCount">Source count within an <paramref name="action"/>.</param>
         /// <param name="mopsBaseline">Baseline's MOPS/s</param>
         /// <param name="us">Run time ms.</param>
-        /// <returns>Returns MOPS/s.</returns>
+        /// <returns>Returns MOPS(Million operations per second).</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
         public static double RunTestCore(Action action, int srcCount, double mopsBaseline, out double us, int loopCount = 0) {
             double rt;
@@ -143,11 +146,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// </summary>
         /// <param name="value">The string to write. If value is null, only the line terminator is written.</param>
         public static void WriteLine(string? value) {
-            if (null != CurrentTextWriter) {
-                CurrentTextWriter.WriteLine(value);
-            } else {
-                // ignore.
-            }
+            CurrentBenchmarkWriter.WriteLine(value);
         }
 
         /// <summary>
@@ -160,20 +159,22 @@ namespace Zyl.VectorTraits.Benchmarks {
             string name = mi.Name;
             if (null == ex) {
                 // Succeed. No output.
-                //msg = string.Format("Check-{0}: Succeed.", name);
+                //msg = "Succeed";
             } else {
                 Debug.WriteLine(ex);
                 bool useFull = ex is not NotSupportedException;
                 if (useFull) {
-                    msg = string.Format("Check-{0}: Fail! {1}", name, ex.ToString());
+                    msg = string.Format("Fail! {0}", ex.ToString());
                 } else {
-                    msg = string.Format("Check-{0}: Fail! {1}", name, ex.Message);
+                    msg = string.Format("Fail! {0}", ex.Message);
                 }
                 bool ignoreException = ex is NotSupportedException;
                 if (ignoreException) return;
             }
             if (string.IsNullOrEmpty(msg)) return;
-            WriteLine(msg);
+            if (null == CurrentBenchmarkWriter) return;
+            string itemname = string.Format("Check-{0}", name);
+            CurrentBenchmarkWriter.WriteItem(itemname, msg);
         }
 
         /// <summary>
@@ -211,11 +212,11 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <summary>
         /// Run benchmark object
         /// </summary>
-        /// <param name="writer">Output <see cref="TextWriter"/>.</param>
+        /// <param name="writer">Output <see cref="IBenchmarkWriter"/>.</param>
         /// <param name="indent">The indent.</param>
         /// <param name="typ">The type.</param>
         /// <param name="obj">The object.</param>
-        public static void RunBenchmarkObject(TextWriter writer, string indent, Type typ, AbstractBenchmark? obj) {
+        public static void RunBenchmarkObject(IBenchmarkWriter writer, Type typ, AbstractBenchmark? obj) {
             if (null == obj) return;
             ILoopCountGetter? loopCountGetter = obj as ILoopCountGetter;
             List<MethodInfo> lst = new List<MethodInfo>();
@@ -224,7 +225,7 @@ namespace Zyl.VectorTraits.Benchmarks {
             foreach (int n in AbstractBenchmark.ValuesForN) {
                 double mopsBaseline = 0.0;
                 writer.WriteLine();
-                writer.WriteLine(indent + string.Format("[{0}: {1}]", typ.Name, n));
+                writer.WriteTitle(string.Format("{0}: {1}", typ.Name, n));
                 // GlobalSetup.
                 obj.N = n;
                 obj.GlobalSetup();
@@ -234,7 +235,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                     try {
                         Action action = (Action)mi.CreateDelegate(typeof(Action), obj);
                         //Action action = (Action)Delegate.CreateDelegate(typeof(Action), obj, mi);
-                        double mops = BenchmarkUtil.RunTest(writer, indent, name, action, n, mopsBaseline, loopCountGetter);
+                        double mops = BenchmarkUtil.RunTest(writer, name, action, n, mopsBaseline, loopCountGetter);
                         bool isBaseline = false;
                         BenchmarkAttribute? attr = mi.GetCustomAttribute<BenchmarkAttribute>();
                         if (null!= attr) {
@@ -245,7 +246,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                             mopsBaseline = mops;
                         }
                     } catch (Exception ex) {
-                        writer.WriteLine(indent + string.Format("{0}:\tRun fail! {1}", name, ex.Message));
+                        writer.WriteLine(string.Format("{0}:\tRun fail! {1}", name, ex.Message));
                     }
                 }
             }
@@ -254,10 +255,10 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <summary>
         /// Run benchmark.
         /// </summary>
-        /// <param name="writer">Output <see cref="TextWriter"/>.</param>
+        /// <param name="writer">Output <see cref="IBenchmarkWriter"/>.</param>
         /// <param name="indent">The indent.</param>
         /// <param name="assembly">The assembly.</param>
-        public static void RunBenchmark(TextWriter writer, string indent, Assembly assembly) {
+        public static void RunBenchmark(IBenchmarkWriter writer, Assembly assembly) {
             Type baseType = typeof(AbstractBenchmark);
             foreach (Type typ in assembly.GetTypes()) {
                 if (typ.ContainsGenericParameters) continue;
@@ -265,9 +266,9 @@ namespace Zyl.VectorTraits.Benchmarks {
                 if (!typ.IsSubclassOf(baseType)) continue;
                 try {
                     AbstractBenchmark? obj = Activator.CreateInstance(typ) as AbstractBenchmark;
-                    RunBenchmarkObject(writer, indent, typ, obj);
+                    RunBenchmarkObject(writer, typ, obj);
                 } catch (Exception ex) {
-                    writer.WriteLine(indent + string.Format("Run `{0} fail! {1}`", typ.FullName, ex.Message));
+                    writer.WriteLine(string.Format("Run `{0} fail! {1}`", typ.FullName, ex.Message));
                 }
             }
         }
