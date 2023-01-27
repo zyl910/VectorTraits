@@ -60,7 +60,7 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
             }
             if (CheckMode) {
                 baselineTMy = dstTMy;
-                BenchmarkUtil.WriteLine(string.Format("# SumConditionalSelect_If:\t{0}", baselineTMy));
+                BenchmarkUtil.WriteItem("# SumConditionalSelect_If", string.Format("{0}", baselineTMy));
             }
         }
 

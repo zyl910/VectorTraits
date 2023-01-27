@@ -54,7 +54,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             }
             if (CheckMode) {
                 baselineTMy = dstTMy;
-                BenchmarkUtil.WriteLine(string.Format("# SumSRAScalar:\t{0}", baselineTMy));
+                BenchmarkUtil.WriteItem("# SumSRAScalar", string.Format("{0}", baselineTMy));
             }
         }
 

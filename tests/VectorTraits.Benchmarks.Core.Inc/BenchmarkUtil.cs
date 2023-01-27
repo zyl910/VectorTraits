@@ -42,7 +42,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="name">Test name.</param>
         /// <param name="action">Test action</param>
         /// <param name="srcCount">Source count within an <paramref name="action"/>.</param>
-        /// <param name="mopsBaseline">Baseline's MOPS/s</param>
+        /// <param name="mopsBaseline">Baseline's MOPS</param>
         /// <returns>Returns MOPS(Million operations per second).</returns>
         public static double RunTest(IBenchmarkWriter writer, string name, Action action, int srcCount, double mopsBaseline, ILoopCountGetter? loopCountGetter = null) {
             double us;
@@ -62,7 +62,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// </summary>
         /// <param name="action">The action.</param>
         /// <param name="srcCount">Source count within an <paramref name="action"/>.</param>
-        /// <param name="mopsBaseline">Baseline's MOPS/s</param>
+        /// <param name="mopsBaseline">Baseline's MOPS</param>
         /// <param name="us">Run time ms.</param>
         /// <returns>Returns MOPS(Million operations per second).</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
@@ -150,6 +150,15 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
+        /// Write item text to the text stream (将条目文本输出到流).
+        /// </summary>
+        /// <param name="name">Item name (条目名).</param>
+        /// <param name="text">The text (文本).</param>
+        public static void WriteItem(string name, string text) {
+            CurrentBenchmarkWriter.WriteItem(name, text);
+        }
+
+        /// <summary>
         /// CheckAllBenchmark - default onafter.
         /// </summary>
         /// <param name="mi">The MethodInfo.</param>
@@ -225,7 +234,7 @@ namespace Zyl.VectorTraits.Benchmarks {
             foreach (int n in AbstractBenchmark.ValuesForN) {
                 double mopsBaseline = 0.0;
                 writer.WriteLine();
-                writer.WriteTitle(string.Format("{0}: {1}", typ.Name, n));
+                writer.WriteTitle(string.Format("{0}({1})", typ.Name, n));
                 // GlobalSetup.
                 obj.N = n;
                 obj.GlobalSetup();
@@ -246,7 +255,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                             mopsBaseline = mops;
                         }
                     } catch (Exception ex) {
-                        writer.WriteLine(string.Format("{0}:\tRun fail! {1}", name, ex.Message));
+                        writer.WriteItem(name, string.Format("Run fail! {0}", ex.Message));
                     }
                 }
             }

@@ -40,9 +40,9 @@ namespace Zyl.VectorTraits.Benchmarks {
         public override void WriteItemBenchmark(string name, double us, double mops, double? scale = null) {
             string msg;
             if (null!= scale) {
-                msg = string.Format("{0}:\tus={1:F3}, MOPS/s={2}, scale={3}", name, us, mops, scale);
+                msg = string.Format("{0}:\tus={1:F3}, MOPS={2:F3}, scale={3:F6}", name, us, mops, scale);
             } else {
-                msg = string.Format("{0}:\tus={1:F3}, MOPS/s={2}", name, us, mops);
+                msg = string.Format("{0}:\tus={1:F3}, MOPS={2:F3}", name, us, mops);
             }
             WriteLine(msg);
         }

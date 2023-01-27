@@ -61,7 +61,7 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
             }
             if (CheckMode) {
                 baselineTMy = dstTMy;
-                BenchmarkUtil.WriteLine(string.Format("# SumClamp_If:\t{0}", baselineTMy));
+                BenchmarkUtil.WriteItem("# SumClamp_If", string.Format("{0}", baselineTMy));
             }
         }
 
