@@ -8,7 +8,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>$(DefineConstants);DRY_JOB0;BENCHMARKS_OFF;BENCHMARKS_TRAITS_USAGES;BENCHMARKS_ALGORITHM;BENCHMARKS_RAW;BENCHMARKS_TARGET_FAST</DefineConstants>
+    <DefineConstants>$(DefineConstants);DRY_JOB0;BENCHMARKS_OFF;BENCHMARKS_TRAITS_USAGES;BENCHMARKS_128ALGORITHM;BENCHMARKS_256ALGORITHM;BENCHMARKS_ALGORITHM;BENCHMARKS_RAW;BENCHMARKS_TARGET_FAST</DefineConstants>
     <RootNamespace>Zyl.VectorTraits.Benchmarks.NetCore</RootNamespace>
   </PropertyGroup>
 

@@ -19,19 +19,19 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = Int16;
+    using TMy = Int32;
 
     /// <summary>
-    /// YClamp benchmark - Int16.
+    /// YClamp benchmark - Int32.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class YClampBenchmark_Int16 : AbstractSharedBenchmark_Int16 {
+    public partial class YClampBenchmark_Int32 : AbstractSharedBenchmark_Int32 {
 
         // -- var --
-        private const TMy valueMin = (TMy)SByte.MinValue;
-        private const TMy valueMax = (TMy)SByte.MaxValue;
+        private const TMy valueMin = (TMy)Int16.MinValue;
+        private const TMy valueMax = (TMy)Int16.MaxValue;
 
         /// <summary>
         /// Sum Clamp - if.
