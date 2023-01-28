@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
 using System.Text;
 using Zyl.VectorTraits.Impl;
 
@@ -27,8 +28,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
     public partial class YClampBenchmark_Int16 : AbstractSharedBenchmark_Int16 {
 
         // -- var --
-        private const TMy valueMin = (TMy)sbyte.MinValue;
-        private const TMy valueMax = (TMy)sbyte.MaxValue;
+        private const TMy valueMin = (TMy)SByte.MinValue;
+        private const TMy valueMax = (TMy)SByte.MaxValue;
 
         /// <summary>
         /// Sum Clamp - if.
@@ -136,7 +137,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
 #if BENCHMARKS_RAW
 
         /// <summary>
-        /// Sum Clamp - Vector use scalar.
+        /// Sum Clamp - Vector - use scalar.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -163,7 +164,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
         }
 
         /// <summary>
-        /// Sum Clamp - Vector base.
+        /// Sum Clamp - Vector - base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -212,7 +213,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
         #endregion // BENCHMARKS_RAW
 
         /// <summary>
-        /// Sum Clamp - Vector Traits static.
+        /// Sum Clamp - Vector Traits - static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -257,5 +258,168 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
             CheckResult("SumClampVectorTraits");
         }
 
+
+#if NETCOREAPP3_0_OR_GREATER
+
+        #region BENCHMARKS_128ALGORITHM
+#if BENCHMARKS_128ALGORITHM
+
+        /// <summary>
+        /// Sum Clamp - Vector128 - Arm.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumClampVector128_Arm(TMy[] src, int srcCount, TMy amin, TMy amax) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
+            Vector128<TMy> vectorMin = Vector128.Create(valueMin);
+            Vector128<TMy> vectorMax = Vector128.Create(valueMax);
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.YClamp(*(Vector128<TMy>*)p, vectorMin, vectorMax);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += BitUtil.Clamp(p[i], amin, amax);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumClampVector128_Arm() {
+            WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
+            //Debugger.Break();
+            dstTMy = StaticSumClampVector128_Arm(srcArray, srcArray.Length, valueMin, valueMax);
+            CheckResult("SumClampVector128_Arm");
+        }
+
+        #region BENCHMARKS_ALGORITHM
+#if BENCHMARKS_ALGORITHM
+
+#endif // BENCHMARKS_ALGORITHM
+        #endregion // BENCHMARKS_ALGORITHM
+
+        /// <summary>
+        /// Sum Clamp - Vector128 - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumClampVector128Traits(TMy[] src, int srcCount, TMy amin, TMy amax) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
+            Vector128<TMy> vectorMin = Vector128.Create(valueMin);
+            Vector128<TMy> vectorMax = Vector128.Create(valueMax);
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector128<TMy> vtemp = Vector128s.YClamp(*(Vector128<TMy>*)p, vectorMin, vectorMax);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += BitUtil.Clamp(p[i], amin, amax);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumClampVector128Traits() {
+            Vector128s.ThrowForUnsupported(true);
+            //Debugger.Break();
+            dstTMy = StaticSumClampVector128Traits(srcArray, srcArray.Length, valueMin, valueMax);
+            CheckResult("SumClampVector128Traits");
+        }
+
+#endif // BENCHMARKS_128ALGORITHM
+        #endregion // BENCHMARKS_128ALGORITHM
+
+        #region BENCHMARKS_256ALGORITHM
+#if BENCHMARKS_256ALGORITHM
+
+        /// <summary>
+        /// Sum Clamp - Vector256 - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumClampVector256Traits(TMy[] src, int srcCount, TMy amin, TMy amax) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
+            Vector256<TMy> vectorMin = Vector256.Create(valueMin);
+            Vector256<TMy> vectorMax = Vector256.Create(valueMax);
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector256<TMy> vtemp = Vector256s.YClamp(*(Vector256<TMy>*)p, vectorMin, vectorMax);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += BitUtil.Clamp(p[i], amin, amax);
+                }
+            }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumClampVector256Traits() {
+            Vector256s.ThrowForUnsupported(true);
+            //Debugger.Break();
+            dstTMy = StaticSumClampVector256Traits(srcArray, srcArray.Length, valueMin, valueMax);
+            CheckResult("SumClampVector256Traits");
+        }
+
+#endif // BENCHMARKS_256ALGORITHM
+        #endregion // BENCHMARKS_256ALGORITHM
+
+#endif
     }
 }
