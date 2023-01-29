@@ -5,7 +5,7 @@
 ### lntel Core i5-8250U
 `lntel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
 
-#### .NET Core 4.5
+#### .NET Framework 4.5
 
 ```
 VectorTraits.Benchmarks.NetFw

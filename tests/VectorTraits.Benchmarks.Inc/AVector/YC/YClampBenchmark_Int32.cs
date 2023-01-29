@@ -266,6 +266,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
         #region BENCHMARKS_128ALGORITHM
 #if BENCHMARKS_128ALGORITHM
 
+        #region BENCHMARKS_ALGORITHM
+#if BENCHMARKS_ALGORITHM
+#if NET5_0_OR_GREATER
+
         /// <summary>
         /// Sum Clamp - Vector128 - Arm.
         /// </summary>
@@ -290,7 +294,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
                     Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.YClamp(*(Vector128<TMy>*)p, vectorMin, vectorMax);
-                    vrt += vtemp; // Add.
+                    vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp); // Add.
                     p += nBlockWidth;
                 }
                 // Remainder processs.
@@ -300,7 +304,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
             }
             // Reduce.
             for (i = 0; i < VectorWidth; ++i) {
-                rt += vrt[i];
+                rt += vrt.GetElement(i);
             }
             return rt;
         }
@@ -313,8 +317,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
             CheckResult("SumClampVector128_Arm");
         }
 
-        #region BENCHMARKS_ALGORITHM
-#if BENCHMARKS_ALGORITHM
+#endif // NET5_0_OR_GREATER
 
 #endif // BENCHMARKS_ALGORITHM
         #endregion // BENCHMARKS_ALGORITHM
@@ -343,7 +346,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
                     Vector128<TMy> vtemp = Vector128s.YClamp(*(Vector128<TMy>*)p, vectorMin, vectorMax);
-                    vrt += vtemp; // Add.
+                    vrt = Vector128s.Add(vrt, vtemp); // Add.
                     p += nBlockWidth;
                 }
                 // Remainder processs.
@@ -353,7 +356,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
             }
             // Reduce.
             for (i = 0; i < VectorWidth; ++i) {
-                rt += vrt[i];
+                rt += vrt.GetElement(i);
             }
             return rt;
         }
@@ -396,7 +399,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
                     Vector256<TMy> vtemp = Vector256s.YClamp(*(Vector256<TMy>*)p, vectorMin, vectorMax);
-                    vrt += vtemp; // Add.
+                    vrt = Vector256s.Add(vrt, vtemp); // Add.
                     p += nBlockWidth;
                 }
                 // Remainder processs.
@@ -406,7 +409,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
             }
             // Reduce.
             for (i = 0; i < VectorWidth; ++i) {
-                rt += vrt[i];
+                rt += vrt.GetElement(i);
             }
             return rt;
         }
