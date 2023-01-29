@@ -85,6 +85,20 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NET5_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits128.Add_AcceleratedTypes"/>
+            public static TypeCodeFlags Add_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Double | SuperStatics.Add_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Add(Vector128<double> left, Vector128<double> right) {
+                return AdvSimd.Arm64.Add(left, right);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>
             public static TypeCodeFlags Ceiling_AcceleratedTypes {
                 get {
