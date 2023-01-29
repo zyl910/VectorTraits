@@ -119,6 +119,124 @@ namespace Zyl.VectorTraits {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits256.Add_AcceleratedTypes"/>
+        public static TypeCodeFlags Add_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.Add_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    rt |= TypeCodeFlagsUtil.AllTypes;
+                }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> Add(Vector256<float> left, Vector256<float> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> Add(Vector256<double> left, Vector256<double> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> Add(Vector256<sbyte> left, Vector256<sbyte> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> Add(Vector256<byte> left, Vector256<byte> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> Add(Vector256<short> left, Vector256<short> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> Add(Vector256<ushort> left, Vector256<ushort> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> Add(Vector256<int> left, Vector256<int> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> Add(Vector256<uint> left, Vector256<uint> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> Add(Vector256<long> left, Vector256<long> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> Add(Vector256<ulong> left, Vector256<ulong> right) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.AndNot_AcceleratedTypes"/>
         public static TypeCodeFlags AndNot_AcceleratedTypes {
             get {

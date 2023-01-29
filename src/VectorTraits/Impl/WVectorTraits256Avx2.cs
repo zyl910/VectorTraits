@@ -73,6 +73,78 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.Add_AcceleratedTypes"/>
+            public static TypeCodeFlags Add_AcceleratedTypes {
+                get {
+                    return TypeCodeFlagsUtil.AllTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> Add(Vector256<float> left, Vector256<float> right) {
+                return Avx.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> Add(Vector256<double> left, Vector256<double> right) {
+                return Avx.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> Add(Vector256<sbyte> left, Vector256<sbyte> right) {
+                return Avx2.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{byte}, Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> Add(Vector256<byte> left, Vector256<byte> right) {
+                return Avx2.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{short}, Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> Add(Vector256<short> left, Vector256<short> right) {
+                return Avx2.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{ushort}, Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> Add(Vector256<ushort> left, Vector256<ushort> right) {
+                return Avx2.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{int}, Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> Add(Vector256<int> left, Vector256<int> right) {
+                return Avx2.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{uint}, Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> Add(Vector256<uint> left, Vector256<uint> right) {
+                return Avx2.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{long}, Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> Add(Vector256<long> left, Vector256<long> right) {
+                return Avx2.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{ulong}, Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> Add(Vector256<ulong> left, Vector256<ulong> right) {
+                return Avx2.Add(left, right);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.AndNot_AcceleratedTypes"/>
             public static TypeCodeFlags AndNot_AcceleratedTypes {
                 get {
