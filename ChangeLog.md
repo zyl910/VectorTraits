@@ -8,7 +8,7 @@
 - Support for `.NET 5.0` new vector methods (支持 `.NET 5.0` 新增的向量方法): Ceiling, Floor .
 - Support for `.NET 6.0` new vector methods (支持 `.NET 6.0` 新增的向量方法): Sum .
 - Support for `.NET 7.0` new vector methods (支持 `.NET 7.0` 新增的向量方法): ExtractMostSignificantBits, Shuffle, ShiftLeft, ShiftRightArithmetic, ShiftRightLogical .
-- Supplement vector methods for Vector128/Vector256 (为 Vector128/Vector256 补充向量方法): Add, AndNot, BitwiseAnd, BitwiseOr, ConditionalSelect, GreaterThan, LessThan, Min, Max, Negate, OnesComplement, Xor .
+- Supplement vector methods for Vector128/Vector256 (为 Vector128/Vector256 补充向量方法): Add, AndNot, BitwiseAnd, BitwiseOr, ConditionalSelect, GreaterThan, LessThan, Min, Max, Negate, OnesComplement, Subtract, Xor .
 - Provides the vector methods of clamp (提供限制的向量方法): YClamp .
 - Provides the vector methods of saturation narrow (提供饱和变窄的向量方法): YNarrowSaturate, YNarrowSaturateUnsigned .
 - Provides the vector methods of shuffle (提供换位的向量方法): XShuffle, XShuffleInsert, YShuffleInsert, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG4 classes.

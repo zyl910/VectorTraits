@@ -1343,6 +1343,123 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Subtract</c> (运行 <c>Subtract</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Subtract"/>
+        TypeCodeFlags Subtract_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Subtracts two vectors to compute their difference (将两个向量相减来计算它们的差).
+        /// Mnemonic: <c>rt[i] := left[i] - right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector from which <paramref name="right" /> will be subtracted (将被减去<paramref name="right" />的向量).</param>
+        /// <param name="right">The vector to subtract from <paramref name="left" /> (要从<paramref name="left" />减去的向量).</param>
+        /// <returns>The difference of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" />与<paramref name="right" />的差).</returns>
+        /// <seealso cref="Subtract_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Subtract{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<float> Subtract(Vector256<float> left, Vector256<float> right);
+
+        /// <summary>
+        /// Subtracts two vectors to compute their difference (将两个向量相减来计算它们的差).
+        /// Mnemonic: <c>rt[i] := left[i] - right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector from which <paramref name="right" /> will be subtracted (将被减去<paramref name="right" />的向量).</param>
+        /// <param name="right">The vector to subtract from <paramref name="left" /> (要从<paramref name="left" />减去的向量).</param>
+        /// <returns>The difference of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" />与<paramref name="right" />的差).</returns>
+        /// <seealso cref="Subtract_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Subtract{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<double> Subtract(Vector256<double> left, Vector256<double> right);
+
+        /// <summary>
+        /// Subtracts two vectors to compute their difference (将两个向量相减来计算它们的差).
+        /// Mnemonic: <c>rt[i] := left[i] - right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector from which <paramref name="right" /> will be subtracted (将被减去<paramref name="right" />的向量).</param>
+        /// <param name="right">The vector to subtract from <paramref name="left" /> (要从<paramref name="left" />减去的向量).</param>
+        /// <returns>The difference of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" />与<paramref name="right" />的差).</returns>
+        /// <seealso cref="Subtract_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Subtract{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<sbyte> Subtract(Vector256<sbyte> left, Vector256<sbyte> right);
+
+        /// <summary>
+        /// Subtracts two vectors to compute their difference (将两个向量相减来计算它们的差).
+        /// Mnemonic: <c>rt[i] := left[i] - right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector from which <paramref name="right" /> will be subtracted (将被减去<paramref name="right" />的向量).</param>
+        /// <param name="right">The vector to subtract from <paramref name="left" /> (要从<paramref name="left" />减去的向量).</param>
+        /// <returns>The difference of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" />与<paramref name="right" />的差).</returns>
+        /// <seealso cref="Subtract_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Subtract{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<byte> Subtract(Vector256<byte> left, Vector256<byte> right);
+
+        /// <summary>
+        /// Subtracts two vectors to compute their difference (将两个向量相减来计算它们的差).
+        /// Mnemonic: <c>rt[i] := left[i] - right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector from which <paramref name="right" /> will be subtracted (将被减去<paramref name="right" />的向量).</param>
+        /// <param name="right">The vector to subtract from <paramref name="left" /> (要从<paramref name="left" />减去的向量).</param>
+        /// <returns>The difference of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" />与<paramref name="right" />的差).</returns>
+        /// <seealso cref="Subtract_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Subtract{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<short> Subtract(Vector256<short> left, Vector256<short> right);
+
+        /// <summary>
+        /// Subtracts two vectors to compute their difference (将两个向量相减来计算它们的差).
+        /// Mnemonic: <c>rt[i] := left[i] - right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector from which <paramref name="right" /> will be subtracted (将被减去<paramref name="right" />的向量).</param>
+        /// <param name="right">The vector to subtract from <paramref name="left" /> (要从<paramref name="left" />减去的向量).</param>
+        /// <returns>The difference of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" />与<paramref name="right" />的差).</returns>
+        /// <seealso cref="Subtract_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Subtract{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<ushort> Subtract(Vector256<ushort> left, Vector256<ushort> right);
+
+        /// <summary>
+        /// Subtracts two vectors to compute their difference (将两个向量相减来计算它们的差).
+        /// Mnemonic: <c>rt[i] := left[i] - right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector from which <paramref name="right" /> will be subtracted (将被减去<paramref name="right" />的向量).</param>
+        /// <param name="right">The vector to subtract from <paramref name="left" /> (要从<paramref name="left" />减去的向量).</param>
+        /// <returns>The difference of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" />与<paramref name="right" />的差).</returns>
+        /// <seealso cref="Subtract_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Subtract{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<int> Subtract(Vector256<int> left, Vector256<int> right);
+
+        /// <summary>
+        /// Subtracts two vectors to compute their difference (将两个向量相减来计算它们的差).
+        /// Mnemonic: <c>rt[i] := left[i] - right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector from which <paramref name="right" /> will be subtracted (将被减去<paramref name="right" />的向量).</param>
+        /// <param name="right">The vector to subtract from <paramref name="left" /> (要从<paramref name="left" />减去的向量).</param>
+        /// <returns>The difference of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" />与<paramref name="right" />的差).</returns>
+        /// <seealso cref="Subtract_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Subtract{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<uint> Subtract(Vector256<uint> left, Vector256<uint> right);
+
+        /// <summary>
+        /// Subtracts two vectors to compute their difference (将两个向量相减来计算它们的差).
+        /// Mnemonic: <c>rt[i] := left[i] - right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector from which <paramref name="right" /> will be subtracted (将被减去<paramref name="right" />的向量).</param>
+        /// <param name="right">The vector to subtract from <paramref name="left" /> (要从<paramref name="left" />减去的向量).</param>
+        /// <returns>The difference of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" />与<paramref name="right" />的差).</returns>
+        /// <seealso cref="Subtract_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Subtract{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<long> Subtract(Vector256<long> left, Vector256<long> right);
+
+        /// <summary>
+        /// Subtracts two vectors to compute their difference (将两个向量相减来计算它们的差).
+        /// Mnemonic: <c>rt[i] := left[i] - right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector from which <paramref name="right" /> will be subtracted (将被减去<paramref name="right" />的向量).</param>
+        /// <param name="right">The vector to subtract from <paramref name="left" /> (要从<paramref name="left" />减去的向量).</param>
+        /// <returns>The difference of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" />与<paramref name="right" />的差).</returns>
+        /// <seealso cref="Subtract_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Subtract{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<ulong> Subtract(Vector256<ulong> left, Vector256<ulong> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Xor</c> (运行 <c>Xor</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Xor"/>

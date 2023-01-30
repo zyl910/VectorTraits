@@ -48,5 +48,7 @@ Types: Vector128, Vector256 .
   Mnemonic: `rt[i] := -vector[i]`.
 - `OnesComplement`: Computes the ones-complement of a vector (计算向量的反码).
   Mnemonic: `rt[i] := ~vector[i]`.
+- `Subtract`: Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
+  Mnemonic: `rt[i] := left[i] - right[i]`.
 - `Xor`: Computes the exclusive-or of two vectors (计算两个向量的位异或).
   Mnemonic: `rt[i] := left[i] ^ right[i]`.
