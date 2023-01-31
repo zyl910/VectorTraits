@@ -271,6 +271,20 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Subtract_AcceleratedTypes"/>
+            public static TypeCodeFlags Subtract_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Double | SuperStatics.Subtract_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Subtract(Vector128<double> left, Vector128<double> right) {
+                return AdvSimd.Arm64.Subtract(left, right);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.YClamp_AcceleratedTypes"/>
             public static TypeCodeFlags YClamp_AcceleratedTypes {
                 get {

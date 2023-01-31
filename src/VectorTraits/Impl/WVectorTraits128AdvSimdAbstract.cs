@@ -834,6 +834,78 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.Subtract_AcceleratedTypes"/>
+        public override TypeCodeFlags Subtract_AcceleratedTypes {
+            get {
+                return Statics.Subtract_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<float> Subtract(Vector128<float> left, Vector128<float> right) {
+            return Statics.Subtract(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> Subtract(Vector128<double> left, Vector128<double> right) {
+            return Statics.Subtract(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{sbyte}, Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<sbyte> Subtract(Vector128<sbyte> left, Vector128<sbyte> right) {
+            return Statics.Subtract(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{byte}, Vector128{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<byte> Subtract(Vector128<byte> left, Vector128<byte> right) {
+            return Statics.Subtract(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{short}, Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<short> Subtract(Vector128<short> left, Vector128<short> right) {
+            return Statics.Subtract(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{ushort}, Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<ushort> Subtract(Vector128<ushort> left, Vector128<ushort> right) {
+            return Statics.Subtract(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{int}, Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<int> Subtract(Vector128<int> left, Vector128<int> right) {
+            return Statics.Subtract(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{uint}, Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<uint> Subtract(Vector128<uint> left, Vector128<uint> right) {
+            return Statics.Subtract(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> Subtract(Vector128<long> left, Vector128<long> right) {
+            return Statics.Subtract(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<ulong> Subtract(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.Subtract(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Xor_AcceleratedTypes"/>
         public override TypeCodeFlags Xor_AcceleratedTypes {
             get {

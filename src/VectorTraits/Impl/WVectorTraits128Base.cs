@@ -2898,6 +2898,334 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Subtract_AcceleratedTypes"/>
+            public static TypeCodeFlags Subtract_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Subtract(Vector128<float> left, Vector128<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Subtract(left, right);
+#else
+                return Subtract_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Subtract(Vector128<double> left, Vector128<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Subtract(left, right);
+#else
+                return Subtract_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Subtract(Vector128<sbyte> left, Vector128<sbyte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Subtract(left, right);
+#else
+                return Subtract_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> Subtract(Vector128<byte> left, Vector128<byte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Subtract(left, right);
+#else
+                return Subtract_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Subtract(Vector128<short> left, Vector128<short> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Subtract(left, right);
+#else
+                return Subtract_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> Subtract(Vector128<ushort> left, Vector128<ushort> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Subtract(left, right);
+#else
+                return Subtract_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Subtract(Vector128<int> left, Vector128<int> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Subtract(left, right);
+#else
+                return Subtract_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> Subtract(Vector128<uint> left, Vector128<uint> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Subtract(left, right);
+#else
+                return Subtract_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Subtract(Vector128<long> left, Vector128<long> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Subtract(left, right);
+#else
+                return Subtract_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> Subtract(Vector128<ulong> left, Vector128<ulong> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Subtract(left, right);
+#else
+                return Subtract_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<float> Subtract_Base(Vector128<float> left, Vector128<float> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<float> rt);
+#else
+                Vector128<float> rt = default;
+#endif // NET5_0_OR_GREATER
+                float* prt = (float*)&rt;
+                float* pleft = (float*)&left;
+                float* pright = (float*)&right;
+                prt[0] = (pleft[0] - pright[0]);
+                prt[1] = (pleft[1] - pright[1]);
+                prt[2] = (pleft[2] - pright[2]);
+                prt[3] = (pleft[3] - pright[3]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<double> Subtract_Base(Vector128<double> left, Vector128<double> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<double> rt);
+#else
+                Vector128<double> rt = default;
+#endif // NET5_0_OR_GREATER
+                double* prt = (double*)&rt;
+                double* pleft = (double*)&left;
+                double* pright = (double*)&right;
+                prt[0] = (pleft[0] - pright[0]);
+                prt[1] = (pleft[1] - pright[1]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<sbyte> Subtract_Base(Vector128<sbyte> left, Vector128<sbyte> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<sbyte> rt);
+#else
+                Vector128<sbyte> rt = default;
+#endif // NET5_0_OR_GREATER
+                sbyte* prt = (sbyte*)&rt;
+                sbyte* pleft = (sbyte*)&left;
+                sbyte* pright = (sbyte*)&right;
+                prt[0] = (sbyte)(pleft[0] - pright[0]);
+                prt[1] = (sbyte)(pleft[1] - pright[1]);
+                prt[2] = (sbyte)(pleft[2] - pright[2]);
+                prt[3] = (sbyte)(pleft[3] - pright[3]);
+                prt[4] = (sbyte)(pleft[4] - pright[4]);
+                prt[5] = (sbyte)(pleft[5] - pright[5]);
+                prt[6] = (sbyte)(pleft[6] - pright[6]);
+                prt[7] = (sbyte)(pleft[7] - pright[7]);
+                prt[8] = (sbyte)(pleft[8] - pright[8]);
+                prt[9] = (sbyte)(pleft[9] - pright[9]);
+                prt[10] = (sbyte)(pleft[10] - pright[10]);
+                prt[11] = (sbyte)(pleft[11] - pright[11]);
+                prt[12] = (sbyte)(pleft[12] - pright[12]);
+                prt[13] = (sbyte)(pleft[13] - pright[13]);
+                prt[14] = (sbyte)(pleft[14] - pright[14]);
+                prt[15] = (sbyte)(pleft[15] - pright[15]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<byte> Subtract_Base(Vector128<byte> left, Vector128<byte> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<byte> rt);
+#else
+                Vector128<byte> rt = default;
+#endif // NET5_0_OR_GREATER
+                byte* prt = (byte*)&rt;
+                byte* pleft = (byte*)&left;
+                byte* pright = (byte*)&right;
+                prt[0] = (byte)(pleft[0] - pright[0]);
+                prt[1] = (byte)(pleft[1] - pright[1]);
+                prt[2] = (byte)(pleft[2] - pright[2]);
+                prt[3] = (byte)(pleft[3] - pright[3]);
+                prt[4] = (byte)(pleft[4] - pright[4]);
+                prt[5] = (byte)(pleft[5] - pright[5]);
+                prt[6] = (byte)(pleft[6] - pright[6]);
+                prt[7] = (byte)(pleft[7] - pright[7]);
+                prt[8] = (byte)(pleft[8] - pright[8]);
+                prt[9] = (byte)(pleft[9] - pright[9]);
+                prt[10] = (byte)(pleft[10] - pright[10]);
+                prt[11] = (byte)(pleft[11] - pright[11]);
+                prt[12] = (byte)(pleft[12] - pright[12]);
+                prt[13] = (byte)(pleft[13] - pright[13]);
+                prt[14] = (byte)(pleft[14] - pright[14]);
+                prt[15] = (byte)(pleft[15] - pright[15]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<short> Subtract_Base(Vector128<short> left, Vector128<short> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<short> rt);
+#else
+                Vector128<short> rt = default;
+#endif // NET5_0_OR_GREATER
+                short* prt = (short*)&rt;
+                short* pleft = (short*)&left;
+                short* pright = (short*)&right;
+                prt[0] = (short)(pleft[0] - pright[0]);
+                prt[1] = (short)(pleft[1] - pright[1]);
+                prt[2] = (short)(pleft[2] - pright[2]);
+                prt[3] = (short)(pleft[3] - pright[3]);
+                prt[4] = (short)(pleft[4] - pright[4]);
+                prt[5] = (short)(pleft[5] - pright[5]);
+                prt[6] = (short)(pleft[6] - pright[6]);
+                prt[7] = (short)(pleft[7] - pright[7]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<ushort> Subtract_Base(Vector128<ushort> left, Vector128<ushort> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<ushort> rt);
+#else
+                Vector128<ushort> rt = default;
+#endif // NET5_0_OR_GREATER
+                ushort* prt = (ushort*)&rt;
+                ushort* pleft = (ushort*)&left;
+                ushort* pright = (ushort*)&right;
+                prt[0] = (ushort)(pleft[0] - pright[0]);
+                prt[1] = (ushort)(pleft[1] - pright[1]);
+                prt[2] = (ushort)(pleft[2] - pright[2]);
+                prt[3] = (ushort)(pleft[3] - pright[3]);
+                prt[4] = (ushort)(pleft[4] - pright[4]);
+                prt[5] = (ushort)(pleft[5] - pright[5]);
+                prt[6] = (ushort)(pleft[6] - pright[6]);
+                prt[7] = (ushort)(pleft[7] - pright[7]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<int> Subtract_Base(Vector128<int> left, Vector128<int> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<int> rt);
+#else
+                Vector128<int> rt = default;
+#endif // NET5_0_OR_GREATER
+                int* prt = (int*)&rt;
+                int* pleft = (int*)&left;
+                int* pright = (int*)&right;
+                prt[0] = (pleft[0] - pright[0]);
+                prt[1] = (pleft[1] - pright[1]);
+                prt[2] = (pleft[2] - pright[2]);
+                prt[3] = (pleft[3] - pright[3]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<uint> Subtract_Base(Vector128<uint> left, Vector128<uint> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<uint> rt);
+#else
+                Vector128<uint> rt = default;
+#endif // NET5_0_OR_GREATER
+                uint* prt = (uint*)&rt;
+                uint* pleft = (uint*)&left;
+                uint* pright = (uint*)&right;
+                prt[0] = (pleft[0] - pright[0]);
+                prt[1] = (pleft[1] - pright[1]);
+                prt[2] = (pleft[2] - pright[2]);
+                prt[3] = (pleft[3] - pright[3]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<long> Subtract_Base(Vector128<long> left, Vector128<long> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<long> rt);
+#else
+                Vector128<long> rt = default;
+#endif // NET5_0_OR_GREATER
+                long* prt = (long*)&rt;
+                long* pleft = (long*)&left;
+                long* pright = (long*)&right;
+                prt[0] = (pleft[0] - pright[0]);
+                prt[1] = (pleft[1] - pright[1]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<ulong> Subtract_Base(Vector128<ulong> left, Vector128<ulong> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector128<ulong> rt);
+#else
+                Vector128<ulong> rt = default;
+#endif // NET5_0_OR_GREATER
+                ulong* prt = (ulong*)&rt;
+                ulong* pleft = (ulong*)&left;
+                ulong* pright = (ulong*)&right;
+                prt[0] = (pleft[0] - pright[0]);
+                prt[1] = (pleft[1] - pright[1]);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Xor_AcceleratedTypes"/>
             public static TypeCodeFlags Xor_AcceleratedTypes {
                 get {
