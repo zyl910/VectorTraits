@@ -26,6 +26,8 @@ Types: Vector, Vector128, Vector256 .
 ## WVector supplement traits methods (W向量补充的特性方法)
 Types: Vector128, Vector256 .
 
+- `Abs`: Computes the absolute value of each element in a vector (计算向量中每个元素的绝对值).
+  Mnemonic: `rt[i] := abs(vector[i])`.
 - `Add`: Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
   Mnemonic: `rt[i] := left[i] + right[i]`.
 - `AndNot`: Computes the bitwise-and of a given vector and the ones complement of another vector (计算一个给定的向量和另一个向量反码的位与).

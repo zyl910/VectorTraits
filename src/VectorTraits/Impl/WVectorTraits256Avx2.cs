@@ -75,6 +75,55 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.Abs_AcceleratedTypes"/>
+            public static TypeCodeFlags Abs_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> Abs(Vector256<float> value) {
+                return Avx.AndNot(Vector256s<float>.SignMask, value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> Abs(Vector256<double> value) {
+                return Avx.AndNot(Vector256s<double>.SignMask, value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> Abs(Vector256<sbyte> value) {
+                return Avx2.Abs(value).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> Abs(Vector256<short> value) {
+                return Avx2.Abs(value).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> Abs(Vector256<int> value) {
+                return Avx2.Abs(value).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> Abs(Vector256<long> value) {
+                // If an integer value is positive or zero, no action is required. Otherwise complement and add 1.
+                Vector256<long> mask = Avx2.CompareGreaterThan(Vector256<long>.Zero, value); // 0>value => value<0
+                Vector256<long> rt = Avx2.Subtract(Avx2.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.Add_AcceleratedTypes"/>
             public static TypeCodeFlags Add_AcceleratedTypes {
                 get {

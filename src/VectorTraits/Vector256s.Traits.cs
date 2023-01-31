@@ -119,6 +119,81 @@ namespace Zyl.VectorTraits {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits256.Abs_AcceleratedTypes"/>
+        public static TypeCodeFlags Abs_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.Abs_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
+                    }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> Abs(Vector256<float> value) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Abs(value);
+#else
+            return _instance.Abs(value);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> Abs(Vector256<double> value) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Abs(value);
+#else
+            return _instance.Abs(value);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> Abs(Vector256<sbyte> value) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Abs(value);
+#else
+            return _instance.Abs(value);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> Abs(Vector256<short> value) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Abs(value);
+#else
+            return _instance.Abs(value);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> Abs(Vector256<int> value) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Abs(value);
+#else
+            return _instance.Abs(value);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> Abs(Vector256<long> value) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector256.Abs(value);
+#else
+            return _instance.Abs(value);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.Add_AcceleratedTypes"/>
         public static TypeCodeFlags Add_AcceleratedTypes {
             get {

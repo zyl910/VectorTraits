@@ -37,6 +37,51 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits256.Abs_AcceleratedTypes"/>
+        public override TypeCodeFlags Abs_AcceleratedTypes {
+            get {
+                return Statics.Abs_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<float> Abs(Vector256<float> value) {
+            return Statics.Abs(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<double> Abs(Vector256<double> value) {
+            return Statics.Abs(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> Abs(Vector256<sbyte> value) {
+            return Statics.Abs(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> Abs(Vector256<short> value) {
+            return Statics.Abs(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> Abs(Vector256<int> value) {
+            return Statics.Abs(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> Abs(Vector256<long> value) {
+            return Statics.Abs(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.Add_AcceleratedTypes"/>
         public override TypeCodeFlags Add_AcceleratedTypes {
             get {
