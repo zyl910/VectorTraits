@@ -44,6 +44,8 @@ Types: Vector128, Vector256 .
   Mnemonic: `rt[i] := max(left[i], right[i])`.
 - `Min`: Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).
   Mnemonic: `rt[i] := min(left[i], right[i])`.
+- `Multiply`: Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+  Mnemonic: `rt[i] := left[i] * right[i]`.
 - `Negate`: Computes the negate of a vector (计算向量的相反数).
   Mnemonic: `rt[i] := -vector[i]`.
 - `OnesComplement`: Computes the ones-complement of a vector (计算向量的反码).

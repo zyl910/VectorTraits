@@ -8,6 +8,8 @@ using System.Runtime.Intrinsics.X86;
 #endif
 
 namespace Zyl.VectorTraits.Impl {
+    using SuperStatics = WVectorTraits256Base.Statics;
+
     /// <summary>
     /// <see cref="Vector256{T}"/> traits - Avx2 .
     /// </summary>
@@ -615,6 +617,79 @@ namespace Zyl.VectorTraits.Impl {
                 Vector256<long> mask = Avx2.CompareGreaterThan(right2, left2);
                 Vector256<ulong> rt = Avx2.BlendVariable(right, left, mask.AsUInt64());
                 return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply_AcceleratedTypes"/>
+            public static TypeCodeFlags Multiply_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    //  | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> Multiply(Vector256<float> left, Vector256<float> right) {
+                return Avx.Multiply(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> Multiply(Vector256<double> left, Vector256<double> right) {
+                return Avx.Multiply(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> Multiply(Vector256<sbyte> left, Vector256<sbyte> right) {
+                return SuperStatics.Multiply(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{byte}, Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> Multiply(Vector256<byte> left, Vector256<byte> right) {
+                return SuperStatics.Multiply(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{short}, Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> Multiply(Vector256<short> left, Vector256<short> right) {
+                return Avx2.MultiplyLow(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{ushort}, Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> Multiply(Vector256<ushort> left, Vector256<ushort> right) {
+                return Avx2.MultiplyLow(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{int}, Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> Multiply(Vector256<int> left, Vector256<int> right) {
+                return Avx2.MultiplyLow(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{uint}, Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> Multiply(Vector256<uint> left, Vector256<uint> right) {
+                return Avx2.MultiplyLow(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{long}, Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> Multiply(Vector256<long> left, Vector256<long> right) {
+                return SuperStatics.Multiply(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{ulong}, Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> Multiply(Vector256<ulong> left, Vector256<ulong> right) {
+                return SuperStatics.Multiply(left, right);
             }
 
 

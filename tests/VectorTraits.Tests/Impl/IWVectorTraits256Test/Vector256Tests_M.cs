@@ -103,6 +103,53 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
         }
 
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void MultiplyTest<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.IsSupported) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.Multiply_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            Vector256<T>[] samples = {
+                Vector256s.Create(src),
+                Vector256s<T>.Demo,
+                Vector256s<T>.Serial,
+                Vector256s<T>.SerialNegative
+            };
+            foreach (Vector256<T> left in samples) {
+                foreach (Vector256<T> right in samples) {
+#if NET7_0_OR_GREATER
+                    Vector256<T> expected = Vector256.Multiply(left, right);
+#else
+                    Vector256<T> expected = Vector256s.Multiply((dynamic)left, (dynamic)right);
+#endif // NET7_0_OR_GREATER
+                    foreach (IWVectorTraits256 instance in instances) {
+                        if (!instance.IsSupported) continue;
+                        Vector256<T> dst = instance.Multiply((dynamic)left, (dynamic)right);
+                        if (Scalars<T>.ExponentBits > 0) {
+                            // Compatible floating-point NaN.
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
+                        } else {
+                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                        }
+                    }
+                }
+            }
+        }
+
 
 #endif
     }

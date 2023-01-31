@@ -757,6 +757,123 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Multiply</c> (运行 <c>Multiply</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Multiply"/>
+        TypeCodeFlags Multiply_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The element-wise product of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的各元素乘积).</returns>
+        /// <seealso cref="Multiply_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Multiply{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<float> Multiply(Vector256<float> left, Vector256<float> right);
+
+        /// <summary>
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The element-wise product of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的各元素乘积).</returns>
+        /// <seealso cref="Multiply_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Multiply{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<double> Multiply(Vector256<double> left, Vector256<double> right);
+
+        /// <summary>
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The element-wise product of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的各元素乘积).</returns>
+        /// <seealso cref="Multiply_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Multiply{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<sbyte> Multiply(Vector256<sbyte> left, Vector256<sbyte> right);
+
+        /// <summary>
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The element-wise product of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的各元素乘积).</returns>
+        /// <seealso cref="Multiply_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Multiply{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<byte> Multiply(Vector256<byte> left, Vector256<byte> right);
+
+        /// <summary>
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The element-wise product of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的各元素乘积).</returns>
+        /// <seealso cref="Multiply_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Multiply{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<short> Multiply(Vector256<short> left, Vector256<short> right);
+
+        /// <summary>
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The element-wise product of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的各元素乘积).</returns>
+        /// <seealso cref="Multiply_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Multiply{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<ushort> Multiply(Vector256<ushort> left, Vector256<ushort> right);
+
+        /// <summary>
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The element-wise product of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的各元素乘积).</returns>
+        /// <seealso cref="Multiply_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Multiply{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<int> Multiply(Vector256<int> left, Vector256<int> right);
+
+        /// <summary>
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The element-wise product of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的各元素乘积).</returns>
+        /// <seealso cref="Multiply_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Multiply{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<uint> Multiply(Vector256<uint> left, Vector256<uint> right);
+
+        /// <summary>
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The element-wise product of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的各元素乘积).</returns>
+        /// <seealso cref="Multiply_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Multiply{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<long> Multiply(Vector256<long> left, Vector256<long> right);
+
+        /// <summary>
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The element-wise product of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的各元素乘积).</returns>
+        /// <seealso cref="Multiply_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Multiply{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<ulong> Multiply(Vector256<ulong> left, Vector256<ulong> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Negate</c> (运行 <c>Negate</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Negate"/>
