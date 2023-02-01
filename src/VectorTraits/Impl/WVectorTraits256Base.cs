@@ -177,38 +177,38 @@ namespace Zyl.VectorTraits.Impl {
             public static unsafe Vector256<sbyte> Abs_Base(Vector256<sbyte> value) {
                 Vector256<sbyte> rt = value;
                 sbyte* p = (sbyte*)&rt;
-                p[0] = Math.Abs(p[0]);
-                p[1] = Math.Abs(p[1]);
-                p[2] = Math.Abs(p[2]);
-                p[3] = Math.Abs(p[3]);
-                p[4] = Math.Abs(p[4]);
-                p[5] = Math.Abs(p[5]);
-                p[6] = Math.Abs(p[6]);
-                p[7] = Math.Abs(p[7]);
-                p[8] = Math.Abs(p[8]);
-                p[9] = Math.Abs(p[9]);
-                p[10] = Math.Abs(p[10]);
-                p[11] = Math.Abs(p[11]);
-                p[12] = Math.Abs(p[12]);
-                p[13] = Math.Abs(p[13]);
-                p[14] = Math.Abs(p[14]);
-                p[15] = Math.Abs(p[15]);
-                p[16] = Math.Abs(p[16]);
-                p[17] = Math.Abs(p[17]);
-                p[18] = Math.Abs(p[18]);
-                p[19] = Math.Abs(p[19]);
-                p[20] = Math.Abs(p[20]);
-                p[21] = Math.Abs(p[21]);
-                p[22] = Math.Abs(p[22]);
-                p[23] = Math.Abs(p[23]);
-                p[24] = Math.Abs(p[24]);
-                p[25] = Math.Abs(p[25]);
-                p[26] = Math.Abs(p[26]);
-                p[27] = Math.Abs(p[27]);
-                p[28] = Math.Abs(p[28]);
-                p[29] = Math.Abs(p[29]);
-                p[30] = Math.Abs(p[30]);
-                p[31] = Math.Abs(p[31]);
+                p[0] = BitUtil.Abs(p[0]);
+                p[1] = BitUtil.Abs(p[1]);
+                p[2] = BitUtil.Abs(p[2]);
+                p[3] = BitUtil.Abs(p[3]);
+                p[4] = BitUtil.Abs(p[4]);
+                p[5] = BitUtil.Abs(p[5]);
+                p[6] = BitUtil.Abs(p[6]);
+                p[7] = BitUtil.Abs(p[7]);
+                p[8] = BitUtil.Abs(p[8]);
+                p[9] = BitUtil.Abs(p[9]);
+                p[10] = BitUtil.Abs(p[10]);
+                p[11] = BitUtil.Abs(p[11]);
+                p[12] = BitUtil.Abs(p[12]);
+                p[13] = BitUtil.Abs(p[13]);
+                p[14] = BitUtil.Abs(p[14]);
+                p[15] = BitUtil.Abs(p[15]);
+                p[16] = BitUtil.Abs(p[16]);
+                p[17] = BitUtil.Abs(p[17]);
+                p[18] = BitUtil.Abs(p[18]);
+                p[19] = BitUtil.Abs(p[19]);
+                p[20] = BitUtil.Abs(p[20]);
+                p[21] = BitUtil.Abs(p[21]);
+                p[22] = BitUtil.Abs(p[22]);
+                p[23] = BitUtil.Abs(p[23]);
+                p[24] = BitUtil.Abs(p[24]);
+                p[25] = BitUtil.Abs(p[25]);
+                p[26] = BitUtil.Abs(p[26]);
+                p[27] = BitUtil.Abs(p[27]);
+                p[28] = BitUtil.Abs(p[28]);
+                p[29] = BitUtil.Abs(p[29]);
+                p[30] = BitUtil.Abs(p[30]);
+                p[31] = BitUtil.Abs(p[31]);
                 return rt;
             }
 
@@ -217,22 +217,22 @@ namespace Zyl.VectorTraits.Impl {
             public static unsafe Vector256<short> Abs_Base(Vector256<short> value) {
                 Vector256<short> rt = value;
                 short* p = (short*)&rt;
-                p[0] = Math.Abs(p[0]);
-                p[1] = Math.Abs(p[1]);
-                p[2] = Math.Abs(p[2]);
-                p[3] = Math.Abs(p[3]);
-                p[4] = Math.Abs(p[4]);
-                p[5] = Math.Abs(p[5]);
-                p[6] = Math.Abs(p[6]);
-                p[7] = Math.Abs(p[7]);
-                p[8] = Math.Abs(p[8]);
-                p[9] = Math.Abs(p[9]);
-                p[10] = Math.Abs(p[10]);
-                p[11] = Math.Abs(p[11]);
-                p[12] = Math.Abs(p[12]);
-                p[13] = Math.Abs(p[13]);
-                p[14] = Math.Abs(p[14]);
-                p[15] = Math.Abs(p[15]);
+                p[0] = BitUtil.Abs(p[0]);
+                p[1] = BitUtil.Abs(p[1]);
+                p[2] = BitUtil.Abs(p[2]);
+                p[3] = BitUtil.Abs(p[3]);
+                p[4] = BitUtil.Abs(p[4]);
+                p[5] = BitUtil.Abs(p[5]);
+                p[6] = BitUtil.Abs(p[6]);
+                p[7] = BitUtil.Abs(p[7]);
+                p[8] = BitUtil.Abs(p[8]);
+                p[9] = BitUtil.Abs(p[9]);
+                p[10] = BitUtil.Abs(p[10]);
+                p[11] = BitUtil.Abs(p[11]);
+                p[12] = BitUtil.Abs(p[12]);
+                p[13] = BitUtil.Abs(p[13]);
+                p[14] = BitUtil.Abs(p[14]);
+                p[15] = BitUtil.Abs(p[15]);
                 return rt;
             }
 
@@ -241,14 +241,14 @@ namespace Zyl.VectorTraits.Impl {
             public static unsafe Vector256<int> Abs_Base(Vector256<int> value) {
                 Vector256<int> rt = value;
                 int* p = (int*)&rt;
-                p[0] = Math.Abs(p[0]);
-                p[1] = Math.Abs(p[1]);
-                p[2] = Math.Abs(p[2]);
-                p[3] = Math.Abs(p[3]);
-                p[4] = Math.Abs(p[4]);
-                p[5] = Math.Abs(p[5]);
-                p[6] = Math.Abs(p[6]);
-                p[7] = Math.Abs(p[7]);
+                p[0] = BitUtil.Abs(p[0]);
+                p[1] = BitUtil.Abs(p[1]);
+                p[2] = BitUtil.Abs(p[2]);
+                p[3] = BitUtil.Abs(p[3]);
+                p[4] = BitUtil.Abs(p[4]);
+                p[5] = BitUtil.Abs(p[5]);
+                p[6] = BitUtil.Abs(p[6]);
+                p[7] = BitUtil.Abs(p[7]);
                 return rt;
             }
 
@@ -257,10 +257,10 @@ namespace Zyl.VectorTraits.Impl {
             public static unsafe Vector256<long> Abs_Base(Vector256<long> value) {
                 Vector256<long> rt = value;
                 long* p = (long*)&rt;
-                p[0] = Math.Abs(p[0]);
-                p[1] = Math.Abs(p[1]);
-                p[2] = Math.Abs(p[2]);
-                p[3] = Math.Abs(p[3]);
+                p[0] = BitUtil.Abs(p[0]);
+                p[1] = BitUtil.Abs(p[1]);
+                p[2] = BitUtil.Abs(p[2]);
+                p[3] = BitUtil.Abs(p[3]);
                 return rt;
             }
 
