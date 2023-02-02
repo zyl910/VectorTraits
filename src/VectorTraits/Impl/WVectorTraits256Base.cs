@@ -906,6 +906,80 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.Divide_AcceleratedTypes"/>
+            public static TypeCodeFlags Divide_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Divide(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> Divide(Vector256<float> left, Vector256<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Divide(left, right);
+#else
+                return Divide_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Divide(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> Divide(Vector256<double> left, Vector256<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Divide(left, right);
+#else
+                return Divide_Base(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Divide(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<float> Divide_Base(Vector256<float> left, Vector256<float> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector256<float> rt);
+#else
+                Vector256<float> rt = default;
+#endif // NET5_0_OR_GREATER
+                float* prt = (float*)&rt;
+                float* pleft = (float*)&left;
+                float* pright = (float*)&right;
+                prt[0] = (pleft[0] / pright[0]);
+                prt[1] = (pleft[1] / pright[1]);
+                prt[2] = (pleft[2] / pright[2]);
+                prt[3] = (pleft[3] / pright[3]);
+                prt[4] = (pleft[4] / pright[4]);
+                prt[5] = (pleft[5] / pright[5]);
+                prt[6] = (pleft[6] / pright[6]);
+                prt[7] = (pleft[7] / pright[7]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Divide(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector256<double> Divide_Base(Vector256<double> left, Vector256<double> right) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out Vector256<double> rt);
+#else
+                Vector256<double> rt = default;
+#endif // NET5_0_OR_GREATER
+                double* prt = (double*)&rt;
+                double* pleft = (double*)&left;
+                double* pright = (double*)&right;
+                prt[0] = (pleft[0] / pright[0]);
+                prt[1] = (pleft[1] / pright[1]);
+                prt[2] = (pleft[2] / pright[2]);
+                prt[3] = (pleft[3] / pright[3]);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {

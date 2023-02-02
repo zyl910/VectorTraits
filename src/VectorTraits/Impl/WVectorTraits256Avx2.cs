@@ -297,6 +297,26 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.Divide_AcceleratedTypes"/>
+            public static TypeCodeFlags Divide_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Single | TypeCodeFlags.Double;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Divide(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> Divide(Vector256<float> left, Vector256<float> right) {
+                return Avx.Divide(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Divide(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> Divide(Vector256<double> left, Vector256<double> right) {
+                return Avx.Divide(left, right);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {
