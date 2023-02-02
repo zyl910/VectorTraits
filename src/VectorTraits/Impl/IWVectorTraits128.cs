@@ -328,6 +328,35 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Divide</c> (运行 <c>Divide</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Divide"/>
+        TypeCodeFlags Divide_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Divides two vectors to compute their quotient (将两个向量相除来计算它们的商).
+        /// Mnemonic: <c>rt[i] := left[i] / right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to divided with <paramref name="right" /> (将会与<paramref name="right" />进行相除的向量).</param>
+        /// <param name="right">The vector that will divide left <paramref name="left" /> (将会与<paramref name="left" />进行相除的向量).</param>
+        /// <returns>The quotient of <paramref name="left" /> divided <paramref name="right" /> (<paramref name="left" /> 除以 <paramref name="right" />的商).</returns>
+        /// <seealso cref="Divide_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Divide{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<float> Divide(Vector128<float> left, Vector128<float> right);
+
+        /// <summary>
+        /// Divides two vectors to compute their quotient (将两个向量相除来计算它们的商).
+        /// Mnemonic: <c>rt[i] := left[i] / right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to divided with <paramref name="right" /> (将会与<paramref name="right" />进行相除的向量).</param>
+        /// <param name="right">The vector that will divide left <paramref name="left" /> (将会与<paramref name="left" />进行相除的向量).</param>
+        /// <returns>The quotient of <paramref name="left" /> divided <paramref name="right" /> (<paramref name="left" /> 除以 <paramref name="right" />的商).</returns>
+        /// <seealso cref="Divide_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Divide{T}(Vector128{T}, Vector128{T})"/> // Since: .NET 7
+        Vector128<double> Divide(Vector128<double> left, Vector128<double> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Floor</c> (运行 <c>Floor</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Floor"/>

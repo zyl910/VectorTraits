@@ -356,6 +356,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.Divide{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
         Vector256<double> Divide(Vector256<double> left, Vector256<double> right);
 
+
         /// <summary>
         /// Types with hardware acceleration when running <c>Floor</c> (运行 <c>Floor</c> 时具有硬件加速的类型).
         /// </summary>

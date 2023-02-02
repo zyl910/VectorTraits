@@ -912,7 +912,7 @@ namespace Zyl.VectorTraits.Impl {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                     if (Vector256.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlagsUtil.AllTypes;
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
                     }
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                     return rt;
