@@ -59,6 +59,51 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits128.Abs_AcceleratedTypes"/>
+        public virtual TypeCodeFlags Abs_AcceleratedTypes {
+            get {
+                return Statics.Abs_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<float> Abs(Vector128<float> value) {
+            return Statics.Abs(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<double> Abs(Vector128<double> value) {
+            return Statics.Abs(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<sbyte> Abs(Vector128<sbyte> value) {
+            return Statics.Abs(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<short> Abs(Vector128<short> value) {
+            return Statics.Abs(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<int> Abs(Vector128<int> value) {
+            return Statics.Abs(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<long> Abs(Vector128<long> value) {
+            return Statics.Abs(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Add_AcceleratedTypes"/>
         public virtual TypeCodeFlags Add_AcceleratedTypes {
             get {

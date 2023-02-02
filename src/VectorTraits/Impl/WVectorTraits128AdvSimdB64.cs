@@ -85,6 +85,26 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NET5_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits128.Abs_AcceleratedTypes"/>
+            public static TypeCodeFlags Abs_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Double | TypeCodeFlags.Int64 | SuperStatics.Add_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Abs(Vector128<double> value) {
+                return AdvSimd.Arm64.Abs(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Abs(Vector128<long> value) {
+                return AdvSimd.Arm64.Abs(value).AsInt64();
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Add_AcceleratedTypes"/>
             public static TypeCodeFlags Add_AcceleratedTypes {
                 get {

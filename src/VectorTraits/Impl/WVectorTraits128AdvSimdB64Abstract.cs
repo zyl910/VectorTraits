@@ -37,6 +37,26 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NET5_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits128.Abs_AcceleratedTypes"/>
+        public override TypeCodeFlags Abs_AcceleratedTypes {
+            get {
+                return Statics.Abs_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> Abs(Vector128<double> value) {
+            return Statics.Abs(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> Abs(Vector128<long> value) {
+            return Statics.Abs(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Add_AcceleratedTypes"/>
         public override TypeCodeFlags Add_AcceleratedTypes {
             get {

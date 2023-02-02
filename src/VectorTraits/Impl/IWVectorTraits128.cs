@@ -17,6 +17,73 @@ namespace Zyl.VectorTraits.Impl {
         #region .NET_style
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Abs</c> (运行 <c>Abs</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Abs"/>
+        TypeCodeFlags Abs_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the absolute value of each element in a vector (计算向量中每个元素的绝对值).
+        /// Mnemonic: <c>rt[i] := abs(vector[i])</c>.
+        /// </summary>
+        /// <param name="vector">The vector that will have its absolute value computed (将被计算其绝对值的向量).</param>
+        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的绝对值).</returns>
+        /// <seealso cref="Abs_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Abs{T}(Vector128{T})" />
+        Vector128<float> Abs(Vector128<float> vector);
+
+        /// <summary>
+        /// Computes the absolute value of each element in a vector (计算向量中每个元素的绝对值).
+        /// Mnemonic: <c>rt[i] := abs(vector[i])</c>.
+        /// </summary>
+        /// <param name="vector">The vector that will have its absolute value computed (将被计算其绝对值的向量).</param>
+        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的绝对值).</returns>
+        /// <seealso cref="Abs_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Abs{T}(Vector128{T})" />
+        Vector128<double> Abs(Vector128<double> vector);
+
+        /// <summary>
+        /// Computes the absolute value of each element in a vector (计算向量中每个元素的绝对值).
+        /// Mnemonic: <c>rt[i] := abs(vector[i])</c>.
+        /// </summary>
+        /// <param name="vector">The vector that will have its absolute value computed (将被计算其绝对值的向量).</param>
+        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的绝对值).</returns>
+        /// <seealso cref="Abs_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Abs{T}(Vector128{T})" />
+        Vector128<sbyte> Abs(Vector128<sbyte> vector);
+
+        /// <summary>
+        /// Computes the absolute value of each element in a vector (计算向量中每个元素的绝对值).
+        /// Mnemonic: <c>rt[i] := abs(vector[i])</c>.
+        /// </summary>
+        /// <param name="vector">The vector that will have its absolute value computed (将被计算其绝对值的向量).</param>
+        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的绝对值).</returns>
+        /// <seealso cref="Abs_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Abs{T}(Vector128{T})" />
+        Vector128<short> Abs(Vector128<short> vector);
+
+        /// <summary>
+        /// Computes the absolute value of each element in a vector (计算向量中每个元素的绝对值).
+        /// Mnemonic: <c>rt[i] := abs(vector[i])</c>.
+        /// </summary>
+        /// <param name="vector">The vector that will have its absolute value computed (将被计算其绝对值的向量).</param>
+        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的绝对值).</returns>
+        /// <seealso cref="Abs_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Abs{T}(Vector128{T})" />
+        Vector128<int> Abs(Vector128<int> vector);
+
+        /// <summary>
+        /// Computes the absolute value of each element in a vector (计算向量中每个元素的绝对值).
+        /// Mnemonic: <c>rt[i] := abs(vector[i])</c>.
+        /// </summary>
+        /// <param name="vector">The vector that will have its absolute value computed (将被计算其绝对值的向量).</param>
+        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的绝对值).</returns>
+        /// <seealso cref="Abs_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Abs{T}(Vector128{T})" />
+        Vector128<long> Abs(Vector128<long> vector);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Add</c> (运行 <c>Add</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Add"/>

@@ -114,6 +114,58 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Abs_AcceleratedTypes"/>
+            public static TypeCodeFlags Abs_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Abs(Vector128<float> value) {
+                return AdvSimd.Abs(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Abs(Vector128<double> value) {
+                return AdvSimd.BitwiseClear(value, Vector128s<double>.SignMask);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Abs(Vector128<sbyte> value) {
+                return AdvSimd.Abs(value).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Abs(Vector128<short> value) {
+                return AdvSimd.Abs(value).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Abs(Vector128<int> value) {
+                return AdvSimd.Abs(value).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Abs(Vector128<long> value) {
+                // If an integer value is positive or zero, no action is required. Otherwise complement and add 1.
+                //Vector128<long> mask = AdvSimd.CompareGreaterThan(Vector128<long>.Zero, value); // 0>value => value<0
+                long m0 = BitUtil.ToInt32Mask(0 > AdvSimd.Extract(value, 0));
+                long m1 = BitUtil.ToInt32Mask(0 > AdvSimd.Extract(value, 1));
+                Vector128<long> mask = Vector128.Create(m0, m1);
+                Vector128<long> rt = AdvSimd.Subtract(AdvSimd.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Add_AcceleratedTypes"/>
             public static TypeCodeFlags Add_AcceleratedTypes {
                 get {

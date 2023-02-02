@@ -69,6 +69,166 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits128.Abs_AcceleratedTypes"/>
+            public static TypeCodeFlags Abs_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Abs(Vector128<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Abs(value);
+#else
+                return Abs_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Abs(Vector128<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Abs(value);
+#else
+                return Abs_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Abs(Vector128<sbyte> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Abs(value);
+#else
+                return Abs_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Abs(Vector128<short> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Abs(value);
+#else
+                return Abs_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Abs(Vector128<int> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Abs(value);
+#else
+                return Abs_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Abs(Vector128<long> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Abs(value);
+#else
+                return Abs_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<float> Abs_Base(Vector128<float> value) {
+                Vector128<float> rt = value;
+                float* p = (float*)&rt;
+                p[0] = Math.Abs(p[0]);
+                p[1] = Math.Abs(p[1]);
+                p[2] = Math.Abs(p[2]);
+                p[3] = Math.Abs(p[3]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<double> Abs_Base(Vector128<double> value) {
+                Vector128<double> rt = value;
+                double* p = (double*)&rt;
+                p[0] = Math.Abs(p[0]);
+                p[1] = Math.Abs(p[1]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<sbyte> Abs_Base(Vector128<sbyte> value) {
+                Vector128<sbyte> rt = value;
+                sbyte* p = (sbyte*)&rt;
+                p[0] = BitUtil.Abs(p[0]);
+                p[1] = BitUtil.Abs(p[1]);
+                p[2] = BitUtil.Abs(p[2]);
+                p[3] = BitUtil.Abs(p[3]);
+                p[4] = BitUtil.Abs(p[4]);
+                p[5] = BitUtil.Abs(p[5]);
+                p[6] = BitUtil.Abs(p[6]);
+                p[7] = BitUtil.Abs(p[7]);
+                p[8] = BitUtil.Abs(p[8]);
+                p[9] = BitUtil.Abs(p[9]);
+                p[10] = BitUtil.Abs(p[10]);
+                p[11] = BitUtil.Abs(p[11]);
+                p[12] = BitUtil.Abs(p[12]);
+                p[13] = BitUtil.Abs(p[13]);
+                p[14] = BitUtil.Abs(p[14]);
+                p[15] = BitUtil.Abs(p[15]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<short> Abs_Base(Vector128<short> value) {
+                Vector128<short> rt = value;
+                short* p = (short*)&rt;
+                p[0] = BitUtil.Abs(p[0]);
+                p[1] = BitUtil.Abs(p[1]);
+                p[2] = BitUtil.Abs(p[2]);
+                p[3] = BitUtil.Abs(p[3]);
+                p[4] = BitUtil.Abs(p[4]);
+                p[5] = BitUtil.Abs(p[5]);
+                p[6] = BitUtil.Abs(p[6]);
+                p[7] = BitUtil.Abs(p[7]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<int> Abs_Base(Vector128<int> value) {
+                Vector128<int> rt = value;
+                int* p = (int*)&rt;
+                p[0] = BitUtil.Abs(p[0]);
+                p[1] = BitUtil.Abs(p[1]);
+                p[2] = BitUtil.Abs(p[2]);
+                p[3] = BitUtil.Abs(p[3]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<long> Abs_Base(Vector128<long> value) {
+                Vector128<long> rt = value;
+                long* p = (long*)&rt;
+                p[0] = BitUtil.Abs(p[0]);
+                p[1] = BitUtil.Abs(p[1]);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Add_AcceleratedTypes"/>
             public static TypeCodeFlags Add_AcceleratedTypes {
                 get {
