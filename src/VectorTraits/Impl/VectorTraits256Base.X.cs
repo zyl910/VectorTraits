@@ -12,10 +12,6 @@ namespace Zyl.VectorTraits.Impl {
 
         partial class Statics {
 
-#if NETCOREAPP3_0_OR_GREATER
-
-
-#endif // NETCOREAPP3_0_OR_GREATER
         }
     }
 }
