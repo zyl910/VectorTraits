@@ -12,7 +12,7 @@ namespace Zyl.VectorTraits.Impl {
     /// <summary>
     /// <see cref="Vector{T}"/> traits 256 - base.
     /// </summary>
-    public sealed class VectorTraits256Base : VectorTraits256Abstract {
+    public sealed partial class VectorTraits256Base : VectorTraits256Abstract {
         private static readonly VectorTraits256Base _instance = new VectorTraits256Base(); // Default instance.
 
         /// <summary>Default instance. </summary>
@@ -23,7 +23,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// <see cref="Vector{T}"/> traits.Statics 256 - base.
         /// </summary>
-        public static class Statics {
+        public static partial class Statics {
 
             /// <inheritdoc cref="IBaseTraits.ByteCount"/>
             public static int ByteCount {

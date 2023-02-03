@@ -15,7 +15,7 @@ namespace Zyl.VectorTraits.Impl {
     /// <summary>
     /// <see cref="Vector128{T}"/> traits - AdvSimd 64bit .
     /// </summary>
-    public sealed class WVectorTraits128AdvSimdB64 : WVectorTraits128AdvSimdB64Abstract {
+    public sealed partial class WVectorTraits128AdvSimdB64 : WVectorTraits128AdvSimdB64Abstract {
         private static readonly WVectorTraits128AdvSimdB64 _instance = new WVectorTraits128AdvSimdB64(); // Default instance.
 
         /// <summary>Default instance. </summary>
@@ -31,7 +31,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// <see cref="Vector128{T}"/> traits.Statics - AdvSimd architecture-64bit.
         /// </summary>
-        public static class Statics {
+        public static partial class Statics {
 
             /// <inheritdoc cref="IBaseTraits.ByteCount"/>
             public static int ByteCount {

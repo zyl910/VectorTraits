@@ -13,7 +13,7 @@ namespace Zyl.VectorTraits.Impl {
     /// <summary>
     /// <see cref="Vector256{T}"/> traits - Avx2 .
     /// </summary>
-    public sealed class WVectorTraits256Avx2 : WVectorTraits256Avx2Abstract {
+    public sealed partial class WVectorTraits256Avx2 : WVectorTraits256Avx2Abstract {
         private static readonly WVectorTraits256Avx2 _instance = new WVectorTraits256Avx2(); // Default instance.
 
         /// <summary>Default instance. </summary>
@@ -29,7 +29,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// <see cref="Vector256{T}"/> traits.Statics - Avx2.
         /// </summary>
-        public static class Statics {
+        public static partial class Statics {
 
             /// <inheritdoc cref="IBaseTraits.ByteCount"/>
             public static int ByteCount {

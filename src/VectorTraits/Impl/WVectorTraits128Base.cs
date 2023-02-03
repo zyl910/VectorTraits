@@ -11,7 +11,7 @@ namespace Zyl.VectorTraits.Impl {
     /// <summary>
     /// <see cref="Vector128{T}"/> traits - Base.
     /// </summary>
-    public sealed class WVectorTraits128Base : WVectorTraits128Abstract {
+    public sealed partial class WVectorTraits128Base : WVectorTraits128Abstract {
         private static readonly WVectorTraits128Base _instance = new WVectorTraits128Base(); // Default instance.
 
         /// <summary>Default instance. </summary>
@@ -27,7 +27,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// <see cref="Vector128{T}"/> traits.Statics - Base.
         /// </summary>
-        public static class Statics {
+        public static partial class Statics {
 
             /// <inheritdoc cref="IBaseTraits.ByteCount"/>
             public static int ByteCount {
