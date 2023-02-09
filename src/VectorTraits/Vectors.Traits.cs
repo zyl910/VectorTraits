@@ -163,6 +163,8 @@ namespace Zyl.VectorTraits {
         public static Vector<float> Ceiling(Vector<float> value) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.Ceiling(value);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.Ceiling(value);
 #else
             return _instance.Ceiling(value);
 #endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
@@ -173,6 +175,8 @@ namespace Zyl.VectorTraits {
         public static Vector<double> Ceiling(Vector<double> value) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.Ceiling(value);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.Ceiling(value);
 #else
             return _instance.Ceiling(value);
 #endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
@@ -197,6 +201,8 @@ namespace Zyl.VectorTraits {
         public static Vector<float> Floor(Vector<float> value) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.Floor(value);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.Floor(value);
 #else
             return _instance.Floor(value);
 #endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
@@ -207,6 +213,8 @@ namespace Zyl.VectorTraits {
         public static Vector<double> Floor(Vector<double> value) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.Floor(value);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.Floor(value);
 #else
             return _instance.Floor(value);
 #endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
@@ -232,6 +240,8 @@ namespace Zyl.VectorTraits {
         public static Vector<sbyte> ShiftLeft(Vector<sbyte> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
             return Vector.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
 #endif
@@ -242,6 +252,8 @@ namespace Zyl.VectorTraits {
         public static Vector<byte> ShiftLeft(Vector<byte> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
             return Vector.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
 #endif
@@ -252,6 +264,8 @@ namespace Zyl.VectorTraits {
         public static Vector<short> ShiftLeft(Vector<short> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftLeft(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
 #endif
@@ -263,6 +277,8 @@ namespace Zyl.VectorTraits {
         public static Vector<ushort> ShiftLeft(Vector<ushort> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftLeft(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
 #endif
@@ -273,6 +289,8 @@ namespace Zyl.VectorTraits {
         public static Vector<int> ShiftLeft(Vector<int> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftLeft(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
 #endif
@@ -284,6 +302,8 @@ namespace Zyl.VectorTraits {
         public static Vector<uint> ShiftLeft(Vector<uint> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftLeft(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
 #endif
@@ -294,6 +314,8 @@ namespace Zyl.VectorTraits {
         public static Vector<long> ShiftLeft(Vector<long> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftLeft(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
 #endif
@@ -305,6 +327,8 @@ namespace Zyl.VectorTraits {
         public static Vector<ulong> ShiftLeft(Vector<ulong> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftLeft(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
 #endif
@@ -316,6 +340,8 @@ namespace Zyl.VectorTraits {
         public static Vector<sbyte> ShiftLeftFast(Vector<sbyte> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
             return Vector.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
@@ -326,6 +352,8 @@ namespace Zyl.VectorTraits {
         public static Vector<byte> ShiftLeftFast(Vector<byte> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
             return Vector.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
@@ -336,6 +364,8 @@ namespace Zyl.VectorTraits {
         public static Vector<short> ShiftLeftFast(Vector<short> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftLeft(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
@@ -347,6 +377,8 @@ namespace Zyl.VectorTraits {
         public static Vector<ushort> ShiftLeftFast(Vector<ushort> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftLeft(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
@@ -357,6 +389,8 @@ namespace Zyl.VectorTraits {
         public static Vector<int> ShiftLeftFast(Vector<int> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftLeft(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
@@ -368,6 +402,8 @@ namespace Zyl.VectorTraits {
         public static Vector<uint> ShiftLeftFast(Vector<uint> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftLeft(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
@@ -378,6 +414,8 @@ namespace Zyl.VectorTraits {
         public static Vector<long> ShiftLeftFast(Vector<long> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftLeft(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
@@ -389,6 +427,8 @@ namespace Zyl.VectorTraits {
         public static Vector<ulong> ShiftLeftFast(Vector<ulong> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftLeft(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
 #endif
@@ -414,6 +454,8 @@ namespace Zyl.VectorTraits {
         public static Vector<sbyte> ShiftRightArithmetic(Vector<sbyte> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
             return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightArithmetic(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmetic(value, shiftAmount);
 #endif
@@ -424,6 +466,8 @@ namespace Zyl.VectorTraits {
         public static Vector<short> ShiftRightArithmetic(Vector<short> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightArithmetic(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightArithmetic(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmetic(value, shiftAmount);
 #endif
@@ -434,6 +478,8 @@ namespace Zyl.VectorTraits {
         public static Vector<int> ShiftRightArithmetic(Vector<int> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightArithmetic(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightArithmetic(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmetic(value, shiftAmount);
 #endif
@@ -444,6 +490,8 @@ namespace Zyl.VectorTraits {
         public static Vector<long> ShiftRightArithmetic(Vector<long> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightArithmetic(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightArithmetic(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmetic(value, shiftAmount);
 #endif
@@ -455,6 +503,8 @@ namespace Zyl.VectorTraits {
         public static Vector<sbyte> ShiftRightArithmeticFast(Vector<sbyte> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
             return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightArithmeticFast(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmeticFast(value, shiftAmount);
 #endif
@@ -465,6 +515,8 @@ namespace Zyl.VectorTraits {
         public static Vector<short> ShiftRightArithmeticFast(Vector<short> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightArithmetic(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightArithmeticFast(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmeticFast(value, shiftAmount);
 #endif
@@ -475,6 +527,8 @@ namespace Zyl.VectorTraits {
         public static Vector<int> ShiftRightArithmeticFast(Vector<int> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightArithmetic(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightArithmeticFast(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmeticFast(value, shiftAmount);
 #endif
@@ -485,6 +539,8 @@ namespace Zyl.VectorTraits {
         public static Vector<long> ShiftRightArithmeticFast(Vector<long> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightArithmetic(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightArithmeticFast(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmeticFast(value, shiftAmount);
 #endif
@@ -510,6 +566,8 @@ namespace Zyl.VectorTraits {
         public static Vector<sbyte> ShiftRightLogical(Vector<sbyte> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
             return Vector.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
 #endif
@@ -520,6 +578,8 @@ namespace Zyl.VectorTraits {
         public static Vector<byte> ShiftRightLogical(Vector<byte> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
             return Vector.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
 #endif
@@ -530,6 +590,8 @@ namespace Zyl.VectorTraits {
         public static Vector<short> ShiftRightLogical(Vector<short> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightLogical(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
 #endif
@@ -541,6 +603,8 @@ namespace Zyl.VectorTraits {
         public static Vector<ushort> ShiftRightLogical(Vector<ushort> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightLogical(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
 #endif
@@ -551,6 +615,8 @@ namespace Zyl.VectorTraits {
         public static Vector<int> ShiftRightLogical(Vector<int> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightLogical(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
 #endif
@@ -562,6 +628,8 @@ namespace Zyl.VectorTraits {
         public static Vector<uint> ShiftRightLogical(Vector<uint> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightLogical(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
 #endif
@@ -572,6 +640,8 @@ namespace Zyl.VectorTraits {
         public static Vector<long> ShiftRightLogical(Vector<long> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightLogical(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
 #endif
@@ -583,6 +653,8 @@ namespace Zyl.VectorTraits {
         public static Vector<ulong> ShiftRightLogical(Vector<ulong> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightLogical(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
 #endif
@@ -594,6 +666,8 @@ namespace Zyl.VectorTraits {
         public static Vector<sbyte> ShiftRightLogicalFast(Vector<sbyte> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
             return Vector.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
 #endif
@@ -604,6 +678,8 @@ namespace Zyl.VectorTraits {
         public static Vector<byte> ShiftRightLogicalFast(Vector<byte> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
             return Vector.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
 #endif
@@ -614,6 +690,8 @@ namespace Zyl.VectorTraits {
         public static Vector<short> ShiftRightLogicalFast(Vector<short> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightLogical(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
 #endif
@@ -625,6 +703,8 @@ namespace Zyl.VectorTraits {
         public static Vector<ushort> ShiftRightLogicalFast(Vector<ushort> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightLogical(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
 #endif
@@ -635,6 +715,8 @@ namespace Zyl.VectorTraits {
         public static Vector<int> ShiftRightLogicalFast(Vector<int> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightLogical(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
 #endif
@@ -646,6 +728,8 @@ namespace Zyl.VectorTraits {
         public static Vector<uint> ShiftRightLogicalFast(Vector<uint> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightLogical(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
 #endif
@@ -656,6 +740,8 @@ namespace Zyl.VectorTraits {
         public static Vector<long> ShiftRightLogicalFast(Vector<long> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightLogical(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
 #endif
@@ -667,6 +753,8 @@ namespace Zyl.VectorTraits {
         public static Vector<ulong> ShiftRightLogicalFast(Vector<ulong> value, int shiftAmount) {
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
             return Vector.ShiftRightLogical(value, shiftAmount);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
 #endif
@@ -691,6 +779,8 @@ namespace Zyl.VectorTraits {
         public static Vector<float> YClamp(Vector<float> value, Vector<float> amin, Vector<float> amax) {
 #if BCL_OVERRIDE_STATIC
             return Vector.Min(Vector.Max(amin, value), amax);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.YClamp(value, amin, amax);
 #else
             return _instance.YClamp(value, amin, amax);
 #endif
@@ -701,6 +791,8 @@ namespace Zyl.VectorTraits {
         public static Vector<double> YClamp(Vector<double> value, Vector<double> amin, Vector<double> amax) {
 #if BCL_OVERRIDE_STATIC
             return Vector.Min(Vector.Max(amin, value), amax);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.YClamp(value, amin, amax);
 #else
             return _instance.YClamp(value, amin, amax);
 #endif
@@ -712,6 +804,8 @@ namespace Zyl.VectorTraits {
         public static Vector<sbyte> YClamp(Vector<sbyte> value, Vector<sbyte> amin, Vector<sbyte> amax) {
 #if BCL_OVERRIDE_STATIC
             return Vector.Min(Vector.Max(amin, value), amax);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.YClamp(value, amin, amax);
 #else
             return _instance.YClamp(value, amin, amax);
 #endif
@@ -722,6 +816,8 @@ namespace Zyl.VectorTraits {
         public static Vector<byte> YClamp(Vector<byte> value, Vector<byte> amin, Vector<byte> amax) {
 #if BCL_OVERRIDE_STATIC
             return Vector.Min(Vector.Max(amin, value), amax);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.YClamp(value, amin, amax);
 #else
             return _instance.YClamp(value, amin, amax);
 #endif
@@ -732,6 +828,8 @@ namespace Zyl.VectorTraits {
         public static Vector<short> YClamp(Vector<short> value, Vector<short> amin, Vector<short> amax) {
 #if BCL_OVERRIDE_STATIC
             return Vector.Min(Vector.Max(amin, value), amax);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.YClamp(value, amin, amax);
 #else
             return _instance.YClamp(value, amin, amax);
 #endif
@@ -743,6 +841,8 @@ namespace Zyl.VectorTraits {
         public static Vector<ushort> YClamp(Vector<ushort> value, Vector<ushort> amin, Vector<ushort> amax) {
 #if BCL_OVERRIDE_STATIC
             return Vector.Min(Vector.Max(amin, value), amax);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.YClamp(value, amin, amax);
 #else
             return _instance.YClamp(value, amin, amax);
 #endif
@@ -753,6 +853,8 @@ namespace Zyl.VectorTraits {
         public static Vector<int> YClamp(Vector<int> value, Vector<int> amin, Vector<int> amax) {
 #if BCL_OVERRIDE_STATIC
             return Vector.Min(Vector.Max(amin, value), amax);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.YClamp(value, amin, amax);
 #else
             return _instance.YClamp(value, amin, amax);
 #endif
@@ -764,6 +866,8 @@ namespace Zyl.VectorTraits {
         public static Vector<uint> YClamp(Vector<uint> value, Vector<uint> amin, Vector<uint> amax) {
 #if BCL_OVERRIDE_STATIC
             return Vector.Min(Vector.Max(amin, value), amax);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.YClamp(value, amin, amax);
 #else
             return _instance.YClamp(value, amin, amax);
 #endif
@@ -774,6 +878,8 @@ namespace Zyl.VectorTraits {
         public static Vector<long> YClamp(Vector<long> value, Vector<long> amin, Vector<long> amax) {
 #if BCL_OVERRIDE_STATIC
             return Vector.Min(Vector.Max(amin, value), amax);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.YClamp(value, amin, amax);
 #else
             return _instance.YClamp(value, amin, amax);
 #endif
@@ -785,6 +891,8 @@ namespace Zyl.VectorTraits {
         public static Vector<ulong> YClamp(Vector<ulong> value, Vector<ulong> amin, Vector<ulong> amax) {
 #if BCL_OVERRIDE_STATIC
             return Vector.Min(Vector.Max(amin, value), amax);
+#elif BCL_BASE_OVERRIDE_STATIC && !NETCOREAPP3_0_OR_GREATER
+            return VectorTraitsBase.Statics.YClamp(value, amin, amax);
 #else
             return _instance.YClamp(value, amin, amax);
 #endif
