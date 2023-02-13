@@ -1076,6 +1076,60 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.Widen_AcceleratedTypes"/>
+        public virtual TypeCodeFlags Widen_AcceleratedTypes {
+            get {
+                return Statics.Widen_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{float}, out Vector256{double}, out Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual void Widen(Vector256<float> source, out Vector256<double> lower, out Vector256<double> upper) {
+            Statics.Widen(source, out lower, out upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{sbyte}, out Vector256{short}, out Vector256{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual void Widen(Vector256<sbyte> source, out Vector256<short> lower, out Vector256<short> upper) {
+            Statics.Widen(source, out lower, out upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{byte}, out Vector256{ushort}, out Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual void Widen(Vector256<byte> source, out Vector256<ushort> lower, out Vector256<ushort> upper) {
+            Statics.Widen(source, out lower, out upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{short}, out Vector256{int}, out Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual void Widen(Vector256<short> source, out Vector256<int> lower, out Vector256<int> upper) {
+            Statics.Widen(source, out lower, out upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{ushort}, out Vector256{uint}, out Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual void Widen(Vector256<ushort> source, out Vector256<uint> lower, out Vector256<uint> upper) {
+            Statics.Widen(source, out lower, out upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{int}, out Vector256{long}, out Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual void Widen(Vector256<int> source, out Vector256<long> lower, out Vector256<long> upper) {
+            Statics.Widen(source, out lower, out upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{uint}, out Vector256{ulong}, out Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual void Widen(Vector256<uint> source, out Vector256<ulong> lower, out Vector256<ulong> upper) {
+            Statics.Widen(source, out lower, out upper);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.Xor_AcceleratedTypes"/>
         public virtual TypeCodeFlags Xor_AcceleratedTypes {
             get {

@@ -1789,6 +1789,93 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.Widen_AcceleratedTypes"/>
+        public static TypeCodeFlags Widen_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.Widen_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{float}, out Vector256{double}, out Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Widen(Vector256<float> source, out Vector256<double> lower, out Vector256<double> upper) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            (lower, upper) = Vector256.Widen(source);
+#else
+            _instance.Widen(source, out lower, out upper);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{sbyte}, out Vector256{short}, out Vector256{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Widen(Vector256<sbyte> source, out Vector256<short> lower, out Vector256<short> upper) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            (lower, upper) = Vector256.Widen(source);
+#else
+            _instance.Widen(source, out lower, out upper);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{byte}, out Vector256{ushort}, out Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Widen(Vector256<byte> source, out Vector256<ushort> lower, out Vector256<ushort> upper) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            (lower, upper) = Vector256.Widen(source);
+#else
+            _instance.Widen(source, out lower, out upper);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{short}, out Vector256{int}, out Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Widen(Vector256<short> source, out Vector256<int> lower, out Vector256<int> upper) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            (lower, upper) = Vector256.Widen(source);
+#else
+            _instance.Widen(source, out lower, out upper);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{ushort}, out Vector256{uint}, out Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Widen(Vector256<ushort> source, out Vector256<uint> lower, out Vector256<uint> upper) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            (lower, upper) = Vector256.Widen(source);
+#else
+            _instance.Widen(source, out lower, out upper);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{int}, out Vector256{long}, out Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Widen(Vector256<int> source, out Vector256<long> lower, out Vector256<long> upper) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            (lower, upper) = Vector256.Widen(source);
+#else
+            _instance.Widen(source, out lower, out upper);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{uint}, out Vector256{ulong}, out Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Widen(Vector256<uint> source, out Vector256<ulong> lower, out Vector256<ulong> upper) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            (lower, upper) = Vector256.Widen(source);
+#else
+            _instance.Widen(source, out lower, out upper);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
         /// <inheritdoc cref="IWVectorTraits256.Xor_AcceleratedTypes"/>
         public static TypeCodeFlags Xor_AcceleratedTypes {
             get {

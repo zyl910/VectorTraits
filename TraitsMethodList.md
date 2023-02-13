@@ -56,5 +56,7 @@ Types: Vector128, Vector256 .
   Mnemonic: `rt[i] := ~vector[i]`.
 - `Subtract`: Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
   Mnemonic: `rt[i] := left[i] - right[i]`.
+- `Widen`: Widens a Vector256<T> into two Vector256<T> instances (将一个 Vector256<T> 扩大为两个 Vector256<T> 实例).
+  Mnemonic: `element_ref(i, lower, upper) := widen(source[i])`.
 - `Xor`: Computes the exclusive-or of two vectors (计算两个向量的位异或).
   Mnemonic: `rt[i] := left[i] ^ right[i]`.
