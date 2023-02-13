@@ -3385,10 +3385,10 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe void Widen_Base(Vector256<ushort> source, out Vector256<uint> lower, out Vector256<uint> upper) {
-                short* p = (short*)&source;
+                ushort* p = (ushort*)&source;
                 fixed (void* plower0 = &lower, pupper0 = &upper) {
-                    int* plower = (int*)plower0;
-                    int* pupper = (int*)pupper0;
+                    uint* plower = (uint*)plower0;
+                    uint* pupper = (uint*)pupper0;
                     plower[0] = p[0];
                     plower[1] = p[1];
                     plower[2] = p[2];
