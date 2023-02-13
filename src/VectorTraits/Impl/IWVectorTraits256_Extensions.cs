@@ -16,36 +16,92 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <seealso cref="Vector256s.Widen(Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<double> Lower, Vector256<double> Upper) Widen(this IWVectorTraits256 athis, Vector256<float> source) {
+            athis.Widen(source, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <seealso cref="Vector256s.Widen(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<short> Lower, Vector256<short> Upper) Widen(this IWVectorTraits256 athis, Vector256<sbyte> source) {
+            athis.Widen(source, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <seealso cref="Vector256s.Widen(Vector256{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ushort> Lower, Vector256<ushort> Upper) Widen(this IWVectorTraits256 athis, Vector256<byte> source) {
+            athis.Widen(source, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <seealso cref="Vector256s.Widen(Vector256{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<int> Lower, Vector256<int> Upper) Widen(this IWVectorTraits256 athis, Vector256<short> source) {
+            athis.Widen(source, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <seealso cref="Vector256s.Widen(Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<uint> Lower, Vector256<uint> Upper) Widen(this IWVectorTraits256 athis, Vector256<ushort> source) {
+            athis.Widen(source, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <seealso cref="Vector256s.Widen(Vector256{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<long> Lower, Vector256<long> Upper) Widen(this IWVectorTraits256 athis, Vector256<int> source) {
+            athis.Widen(source, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <seealso cref="Vector256s.Widen(Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ulong> Lower, Vector256<ulong> Upper) Widen(this IWVectorTraits256 athis, Vector256<uint> source) {
+            athis.Widen(source, out var a, out var b);
+            return (a, b);
+        }
+
         /// <inheritdoc cref="Vector256Generic.Widen{T, TOut}(Vector256{T}, out Vector256{TOut}, out Vector256{TOut})"/>
         [CLSCompliant(false)]
         public static void Widen<T, TOut>(this IWVectorTraits256 athis, Vector256<T> source, out Vector256<TOut> lower, out Vector256<TOut> upper)
                  where T : struct where TOut : struct {
             if (typeof(float) == typeof(T) && typeof(double) == typeof(TOut)) {
-                athis.Widen((Vector256<float>)(object)source, out Vector256<double> a, out Vector256<double> b);
+                (Vector256<double> a, Vector256<double> b) = athis.Widen((Vector256<float>)(object)source);
                 lower = (Vector256<TOut>)(object)a;
                 upper = (Vector256<TOut>)(object)b;
             } else if (typeof(sbyte) == typeof(T) && typeof(short) == typeof(TOut)) {
-                athis.Widen((Vector256<sbyte>)(object)source, out Vector256<short> a, out Vector256<short> b);
+                (Vector256<short> a, Vector256<short> b) = athis.Widen((Vector256<sbyte>)(object)source);
                 lower = (Vector256<TOut>)(object)a;
                 upper = (Vector256<TOut>)(object)b;
             } else if (typeof(byte) == typeof(T) && typeof(ushort) == typeof(TOut)) {
-                athis.Widen((Vector256<byte>)(object)source, out Vector256<ushort> a, out Vector256<ushort> b);
+                (Vector256<ushort> a, Vector256<ushort> b) = athis.Widen((Vector256<byte>)(object)source);
                 lower = (Vector256<TOut>)(object)a;
                 upper = (Vector256<TOut>)(object)b;
             } else if (typeof(short) == typeof(T) && typeof(int) == typeof(TOut)) {
-                athis.Widen((Vector256<short>)(object)source, out Vector256<int> a, out Vector256<int> b);
+                (Vector256<int> a, Vector256<int> b) = athis.Widen((Vector256<short>)(object)source);
                 lower = (Vector256<TOut>)(object)a;
                 upper = (Vector256<TOut>)(object)b;
             } else if (typeof(ushort) == typeof(T) && typeof(uint) == typeof(TOut)) {
-                athis.Widen((Vector256<ushort>)(object)source, out Vector256<uint> a, out Vector256<uint> b);
+                (Vector256<uint> a, Vector256<uint> b) = athis.Widen((Vector256<ushort>)(object)source);
                 lower = (Vector256<TOut>)(object)a;
                 upper = (Vector256<TOut>)(object)b;
             } else if (typeof(int) == typeof(T) && typeof(long) == typeof(TOut)) {
-                athis.Widen((Vector256<int>)(object)source, out Vector256<long> a, out Vector256<long> b);
+                (Vector256<long> a, Vector256<long> b) = athis.Widen((Vector256<int>)(object)source);
                 lower = (Vector256<TOut>)(object)a;
                 upper = (Vector256<TOut>)(object)b;
             } else if (typeof(uint) == typeof(T) && typeof(ulong) == typeof(TOut)) {
-                athis.Widen((Vector256<uint>)(object)source, out Vector256<ulong> a, out Vector256<ulong> b);
+                (Vector256<ulong> a, Vector256<ulong> b) = athis.Widen((Vector256<uint>)(object)source);
                 lower = (Vector256<TOut>)(object)a;
                 upper = (Vector256<TOut>)(object)b;
             } else {

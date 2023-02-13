@@ -7,7 +7,7 @@ using System.IO;
 using System.Reflection;
 using Zyl.VectorTraits.Impl;
 
-namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraitsTest {
+namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
     [TestFixture()]
     public class VectorTests {
 
