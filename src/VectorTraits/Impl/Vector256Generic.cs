@@ -21,14 +21,14 @@ namespace Zyl.VectorTraits.Impl {
 #if NET7_0_OR_GREATER
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
         /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
         /// <typeparam name="TOut">The element type of the output parameter (输出参数的元素类型).</typeparam>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩大元素).</param>
-        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩大元素).</param>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
         /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TOut"/>) are not supported.</exception>
         /// <seealso cref="Vector256.Widen(Vector256{float})" />
         /// <seealso cref="IWVectorTraits256.Widen(Vector256{float}, out Vector256{double}, out Vector256{double})" />

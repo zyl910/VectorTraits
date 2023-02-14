@@ -15,11 +15,11 @@ namespace Zyl.VectorTraits {
 #if NETCOREAPP3_0_OR_GREATER
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩大向量).</returns>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩宽向量).</returns>
         /// <seealso cref="Vector256.Widen(Vector256{float})" />
         /// <seealso cref="IWVectorTraits256.Widen(Vector256{float}, out Vector256{double}, out Vector256{double})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -29,11 +29,11 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩大向量).</returns>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩宽向量).</returns>
         /// <seealso cref="Vector256.Widen(Vector256{sbyte})" />
         /// <seealso cref="IWVectorTraits256.Widen(Vector256{sbyte}, out Vector256{short}, out Vector256{short})" />
         [CLSCompliant(false)]
@@ -44,11 +44,11 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩大向量).</returns>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩宽向量).</returns>
         /// <seealso cref="Vector256.Widen(Vector256{byte})" />
         /// <seealso cref="IWVectorTraits256.Widen(Vector256{byte}, out Vector256{ushort}, out Vector256{ushort})" />
         [CLSCompliant(false)]
@@ -59,11 +59,11 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩大向量).</returns>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩宽向量).</returns>
         /// <seealso cref="Vector256.Widen(Vector256{short})" />
         /// <seealso cref="IWVectorTraits256.Widen(Vector256{short}, out Vector256{int}, out Vector256{int})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -73,11 +73,11 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩大向量).</returns>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩宽向量).</returns>
         /// <seealso cref="Vector256.Widen(Vector256{ushort})" />
         /// <seealso cref="IWVectorTraits256.Widen(Vector256{ushort}, out Vector256{uint}, out Vector256{uint})" />
         [CLSCompliant(false)]
@@ -88,11 +88,11 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩大向量).</returns>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩宽向量).</returns>
         /// <seealso cref="Vector256.Widen(Vector256{int})" />
         /// <seealso cref="IWVectorTraits256.Widen(Vector256{int}, out Vector256{long}, out Vector256{long})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -102,11 +102,11 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances - Generic version (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例 - 泛型版).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩大向量).</returns>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩宽向量).</returns>
         /// <seealso cref="Vector256.Widen(Vector256{uint})" />
         /// <seealso cref="IWVectorTraits256.Widen(Vector256{uint}, out Vector256{ulong}, out Vector256{ulong})" />
         [CLSCompliant(false)]

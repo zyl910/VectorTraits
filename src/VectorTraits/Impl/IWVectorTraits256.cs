@@ -1679,78 +1679,78 @@ namespace Zyl.VectorTraits.Impl {
         TypeCodeFlags Widen_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩大元素).</param>
-        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩大元素).</param>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
         /// <seealso cref="Widen_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Widen(Vector256{float})" />
         void Widen(Vector256<float> source, out Vector256<double> lower, out Vector256<double> upper);
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩大元素).</param>
-        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩大元素).</param>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
         /// <seealso cref="Widen_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Widen(Vector256{sbyte})" />
         void Widen(Vector256<sbyte> source, out Vector256<short> lower, out Vector256<short> upper);
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩大元素).</param>
-        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩大元素).</param>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
         /// <seealso cref="Widen_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Widen(Vector256{byte})" />
         void Widen(Vector256<byte> source, out Vector256<ushort> lower, out Vector256<ushort> upper);
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩大元素).</param>
-        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩大元素).</param>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
         /// <seealso cref="Widen_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Widen(Vector256{short})" />
         void Widen(Vector256<short> source, out Vector256<int> lower, out Vector256<int> upper);
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩大元素).</param>
-        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩大元素).</param>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
         /// <seealso cref="Widen_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Widen(Vector256{ushort})" />
         void Widen(Vector256<ushort> source, out Vector256<uint> lower, out Vector256<uint> upper);
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩大元素).</param>
-        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩大元素).</param>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
         /// <seealso cref="Widen_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Widen(Vector256{int})" />
         void Widen(Vector256<int> source, out Vector256<long> lower, out Vector256<long> upper);
 
         /// <summary>
-        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances (将一个 <seealso cref="Vector256{T}"/> 扩大为两个 <seealso cref="Vector256{T}"/> 实例).
+        /// Widens a <seealso cref="Vector256{T}"/> into two <seealso cref="Vector256{T}"/> instances (将一个 <seealso cref="Vector256{T}"/> 扩宽为两个 <seealso cref="Vector256{T}"/> 实例).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
-        /// <param name="source">The vector whose elements are to be widened (要扩大其元素的向量).</param>
-        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩大元素).</param>
-        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩大元素).</param>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
         /// <seealso cref="Widen_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Widen(Vector256{uint})" />
         void Widen(Vector256<uint> source, out Vector256<ulong> lower, out Vector256<ulong> upper);
