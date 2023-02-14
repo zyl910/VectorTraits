@@ -19,6 +19,8 @@ Types: Vector, Vector128, Vector256 .
   Mnemonic: `rt[i] := value[i] >>> shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
 - `ShiftRightLogicalFast`: Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check `shiftAmount`, please use `Scalars.LimitShiftCount` first, and shiftAmount must not be 0 .
   Mnemonic: `rt[i] := value[i] >>> shiftAmount`.
+- `Widen`: Widens a Vector256<T> into two Vector256<T> instances (将一个 Vector256<T> 扩宽为两个 Vector256<T> 实例).
+  Mnemonic: `element_ref(i, lower, upper) := widen(source[i])`.
 
 - `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
   Mnemonic: `rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])` .
@@ -56,7 +58,5 @@ Types: Vector128, Vector256 .
   Mnemonic: `rt[i] := ~vector[i]`.
 - `Subtract`: Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
   Mnemonic: `rt[i] := left[i] - right[i]`.
-- `Widen`: Widens a Vector256<T> into two Vector256<T> instances (将一个 Vector256<T> 扩宽为两个 Vector256<T> 实例).
-  Mnemonic: `element_ref(i, lower, upper) := widen(source[i])`.
 - `Xor`: Computes the exclusive-or of two vectors (计算两个向量的位异或).
   Mnemonic: `rt[i] := left[i] ^ right[i]`.

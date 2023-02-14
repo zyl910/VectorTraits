@@ -524,6 +524,114 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.Widen_AcceleratedTypes"/>
+            public static TypeCodeFlags Widen_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{float}, out Vector256{double}, out Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector256<float> source, out Vector256<double> lower, out Vector256<double> upper) {
+                lower = Avx.ConvertToVector256Double(source.GetLower());
+                upper = Avx.ConvertToVector256Double(source.GetUpper());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{sbyte}, out Vector256{short}, out Vector256{short})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector256<sbyte> source, out Vector256<short> lower, out Vector256<short> upper) {
+                // vmovupd     ymm0,ymmword ptr [rbp-790h]  
+                // vpermq      ymm0,ymm0,0D4h  
+                // vxorps      ymm1,ymm1,ymm1  
+                // vpcmpgtb    ymm1,ymm1,ymm0  
+                // vpunpcklbw  ymm0,ymm0,ymm1  
+                // vmovupd     ymmword ptr [rbp-70h],ymm0  
+                // vmovupd     ymm0,ymmword ptr [rbp-790h]  
+                // vpermq      ymm0,ymm0,0E8h  
+                // vxorps      ymm1,ymm1,ymm1  
+                // vpcmpgtb    ymm1,ymm1,ymm0  
+                // vpunpckhbw  ymm0,ymm0,ymm1  
+                // vmovupd     ymmword ptr [rbp-90h],ymm0  
+                Vector256<sbyte> zero = Vector256<sbyte>.Zero;
+                Vector256<sbyte> lower0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XYYW).AsSByte(); // UnpackLow uses only `X_Y_`.
+                Vector256<sbyte> lowerMask = Avx2.CompareGreaterThan(zero, lower0);
+                lower = Avx2.UnpackLow(lower0, lowerMask).AsInt16();
+                Vector256<sbyte> upper0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XZZW).AsSByte(); // UnpackHigh uses only `_Z_W`.
+                Vector256<sbyte> upperMask = Avx2.CompareGreaterThan(zero, upper0);
+                upper = Avx2.UnpackHigh(upper0, upperMask).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{byte}, out Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector256<byte> source, out Vector256<ushort> lower, out Vector256<ushort> upper) {
+                // vmovupd     ymm0,ymmword ptr [rbp-7D0h]  
+                // vpermq      ymm0,ymm0,0D4h  
+                // vxorps      ymm1,ymm1,ymm1  
+                // vpunpcklbw  ymm0,ymm0,ymm1  
+                // vmovupd     ymmword ptr [rbp-0B0h],ymm0  
+                // vmovupd     ymm0,ymmword ptr [rbp-7D0h]  
+                // vpermq      ymm0,ymm0,0E8h  
+                // vxorps      ymm1,ymm1,ymm1  
+                // vpunpckhbw  ymm0,ymm0,ymm1  
+                // vmovupd     ymmword ptr [rbp-0D0h],ymm0  
+                Vector256<byte> zero = Vector256<byte>.Zero;
+                Vector256<byte> lower0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XYYW).AsByte(); // UnpackLow uses only `X_Y_`.
+                lower = Avx2.UnpackLow(lower0, zero).AsUInt16();
+                Vector256<byte> upper0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XZZW).AsByte(); // UnpackHigh uses only `_Z_W`.
+                upper = Avx2.UnpackHigh(upper0, zero).AsUInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{short}, out Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector256<short> source, out Vector256<int> lower, out Vector256<int> upper) {
+                Vector256<short> zero = Vector256<short>.Zero;
+                Vector256<short> lower0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XYYW).AsInt16();
+                Vector256<short> lowerMask = Avx2.CompareGreaterThan(zero, lower0);
+                lower = Avx2.UnpackLow(lower0, lowerMask).AsInt32();
+                Vector256<short> upper0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XZZW).AsInt16();
+                Vector256<short> upperMask = Avx2.CompareGreaterThan(zero, upper0);
+                upper = Avx2.UnpackHigh(upper0, upperMask).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{ushort}, out Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector256<ushort> source, out Vector256<uint> lower, out Vector256<uint> upper) {
+                Vector256<ushort> zero = Vector256<ushort>.Zero;
+                Vector256<ushort> lower0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XYYW).AsUInt16();
+                lower = Avx2.UnpackLow(lower0, zero).AsUInt32();
+                Vector256<ushort> upper0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XZZW).AsUInt16();
+                upper = Avx2.UnpackHigh(upper0, zero).AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{int}, out Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector256<int> source, out Vector256<long> lower, out Vector256<long> upper) {
+                Vector256<int> zero = Vector256<int>.Zero;
+                Vector256<int> lower0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XYYW).AsInt32();
+                Vector256<int> lowerMask = Avx2.CompareGreaterThan(zero, lower0);
+                lower = Avx2.UnpackLow(lower0, lowerMask).AsInt64();
+                Vector256<int> upper0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XZZW).AsInt32();
+                Vector256<int> upperMask = Avx2.CompareGreaterThan(zero, upper0);
+                upper = Avx2.UnpackHigh(upper0, upperMask).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{uint}, out Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector256<uint> source, out Vector256<ulong> lower, out Vector256<ulong> upper) {
+                Vector256<uint> zero = Vector256<uint>.Zero;
+                Vector256<uint> lower0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XYYW).AsUInt32();
+                lower = Avx2.UnpackLow(lower0, zero).AsUInt64();
+                Vector256<uint> upper0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XZZW).AsUInt32();
+                upper = Avx2.UnpackHigh(upper0, zero).AsUInt64();
+            }
+
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 

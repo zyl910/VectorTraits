@@ -707,68 +707,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
-            /// <inheritdoc cref="IWVectorTraits128.Widen_AcceleratedTypes"/>
-            public static TypeCodeFlags Widen_AcceleratedTypes {
-                get {
-                    TypeCodeFlags rt = TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
-                    return rt;
-                }
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{float}, out Vector128{double}, out Vector128{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen(Vector128<float> source, out Vector128<double> lower, out Vector128<double> upper) {
-                // TypeCodeFlags.Single: Need 64bit .
-                SuperStatics.Widen(source, out lower, out upper);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{sbyte}, out Vector128{short}, out Vector128{short})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen(Vector128<sbyte> source, out Vector128<short> lower, out Vector128<short> upper) {
-                lower = AdvSimd.SignExtendWideningLower(source.GetLower());
-                upper = AdvSimd.SignExtendWideningUpper(source);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{byte}, out Vector128{ushort}, out Vector128{ushort})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen(Vector128<byte> source, out Vector128<ushort> lower, out Vector128<ushort> upper) {
-                lower = AdvSimd.ZeroExtendWideningLower(source.GetLower());
-                upper = AdvSimd.ZeroExtendWideningUpper(source);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{short}, out Vector128{int}, out Vector128{int})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen(Vector128<short> source, out Vector128<int> lower, out Vector128<int> upper) {
-                lower = AdvSimd.SignExtendWideningLower(source.GetLower());
-                upper = AdvSimd.SignExtendWideningUpper(source);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{ushort}, out Vector128{uint}, out Vector128{uint})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen(Vector128<ushort> source, out Vector128<uint> lower, out Vector128<uint> upper) {
-                lower = AdvSimd.ZeroExtendWideningLower(source.GetLower());
-                upper = AdvSimd.ZeroExtendWideningUpper(source);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{int}, out Vector128{long}, out Vector128{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen(Vector128<int> source, out Vector128<long> lower, out Vector128<long> upper) {
-                lower = AdvSimd.SignExtendWideningLower(source.GetLower());
-                upper = AdvSimd.SignExtendWideningUpper(source);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{uint}, out Vector128{ulong}, out Vector128{ulong})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen(Vector128<uint> source, out Vector128<ulong> lower, out Vector128<ulong> upper) {
-                lower = AdvSimd.ZeroExtendWideningLower(source.GetLower());
-                upper = AdvSimd.ZeroExtendWideningUpper(source);
-            }
-
-
             /// <inheritdoc cref="IWVectorTraits128.Xor_AcceleratedTypes"/>
             public static TypeCodeFlags Xor_AcceleratedTypes {
                 get {
