@@ -12,7 +12,7 @@ namespace Zyl.VectorTraits.Impl {
     /// </summary>
     public static class IWVectorTraits256_Extensions {
 
-        private static readonly string FORMAT_TYPE_NOT_SUPPORTED_2 = Vector256Generic.FORMAT_TYPE_NOT_SUPPORTED_2;
+        private static readonly string FORMAT_TYPE_NOT_SUPPORTED_2 = VectorGeneric.FORMAT_TYPE_NOT_SUPPORTED_2;
 
 #if NETCOREAPP3_0_OR_GREATER
 

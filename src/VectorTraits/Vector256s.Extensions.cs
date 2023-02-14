@@ -10,7 +10,7 @@ using Zyl.VectorTraits.Impl;
 namespace Zyl.VectorTraits {
     static partial class Vector256s {
 
-        private static readonly string FORMAT_TYPE_NOT_SUPPORTED_2 = Vector256Generic.FORMAT_TYPE_NOT_SUPPORTED_2;
+        private static readonly string FORMAT_TYPE_NOT_SUPPORTED_2 = VectorGeneric.FORMAT_TYPE_NOT_SUPPORTED_2;
 
 #if NETCOREAPP3_0_OR_GREATER
 

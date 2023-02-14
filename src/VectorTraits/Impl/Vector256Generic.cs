@@ -11,11 +11,8 @@ namespace Zyl.VectorTraits.Impl {
     /// </summary>
     public static class Vector256Generic {
 
-        /// <summary>
-        /// Message format of NOT_SUPPORTED in case of 2 types (2个类型时，NOT_SUPPORTED的消息格式).
-        /// </summary>
-        public static readonly string FORMAT_TYPE_NOT_SUPPORTED_2 = Vector128Generic.FORMAT_TYPE_NOT_SUPPORTED_2;
-
+        private static readonly string FORMAT_TYPE_NOT_SUPPORTED_2 = VectorGeneric.FORMAT_TYPE_NOT_SUPPORTED_2;
+ 
 #if NETCOREAPP3_0_OR_GREATER
 
 #if NET7_0_OR_GREATER
