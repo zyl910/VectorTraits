@@ -241,6 +241,20 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.Widen_AcceleratedTypes"/>
+        public override TypeCodeFlags Widen_AcceleratedTypes {
+            get {
+                return Statics.Widen_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{float}, out Vector128{double}, out Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override void Widen(Vector128<float> source, out Vector128<double> lower, out Vector128<double> upper) {
+            Statics.Widen(source, out lower, out upper);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.YClamp_AcceleratedTypes"/>
         public override TypeCodeFlags YClamp_AcceleratedTypes {
             get {

@@ -18,20 +18,6 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NET5_0_OR_GREATER
 
-            /// <inheritdoc cref="IWVectorTraits128.Xor_AcceleratedTypes"/>
-            public static TypeCodeFlags Xor_AcceleratedTypes {
-                get {
-                    return TypeCodeFlagsUtil.AllTypes;
-                }
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.Xor{T}(Vector128{T}, Vector128{T})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<T> Xor<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-                return AdvSimd.Xor(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
-            }
-
-
             /// <inheritdoc cref="IWVectorTraits128.YClamp_AcceleratedTypes"/>
             public static TypeCodeFlags YClamp_AcceleratedTypes {
                 get {

@@ -228,6 +228,23 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Widen_AcceleratedTypes"/>
+            public static TypeCodeFlags Widen_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single
+                        | SuperStatics.Negate_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{float}, out Vector128{double}, out Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector128<float> source, out Vector128<double> lower, out Vector128<double> upper) {
+                lower = AdvSimd.Arm64.ConvertToDouble(source.GetLower());
+                upper = AdvSimd.Arm64.ConvertToDoubleUpper(source);
+            }
+
+
 #endif // NET5_0_OR_GREATER
         }
     }

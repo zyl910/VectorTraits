@@ -1876,6 +1876,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
         }
 
+
         /// <inheritdoc cref="IWVectorTraits256.Xor_AcceleratedTypes"/>
         public static TypeCodeFlags Xor_AcceleratedTypes {
             get {
