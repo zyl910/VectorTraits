@@ -8,16 +8,19 @@
 
 ## Common command lines (常用的命令行)
 
+### Benchmark (基准测试)
+
 Prepare (准备):
 ```
 cd ~/Documents/VectorTraits
+rm -r *
+
+
+```
+
+Run (运行):
+```
 cd ~/Documents/VectorTraits/net7.0
-
-```
-
-
-Benchmark (基准测试).
-```
 dotnet VectorTraits.Benchmarks.dll >1.txt
 sz 1.txt
 
@@ -28,8 +31,23 @@ dotnet VectorTraits.Benchmarks.dll 3 >1.txt
 dotnet VectorTraits.Benchmarks.dll -waitdebug
 ```
 
-Unit test (单元测试).
+
+### Unit test (单元测试)
+
+Prepare (准备):
 ```
+cd ~/Documents/VectorTraits/tests
+rm -r *
+rz
+unzip Release.zip
+
+```
+
+Run (运行):
+```
+cd ~/Documents/VectorTraits/tests/net7.0
+
+dotnet test VectorTraits.Tests.dll
 dotnet test VectorTraits.Tests.dll /Tests:InstancesTest --logger:"trx;LogFileName=out.trx"
 sz TestResults/out.trx
 ```
