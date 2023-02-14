@@ -16,7 +16,7 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NETCOREAPP3_0_OR_GREATER
 
-        /// <seealso cref="Vector256s.Widen(Vector256{float})"/>
+        /// <inheritdoc cref="Vector256s.Widen(Vector256{float})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<double> Lower, Vector256<double> Upper) Widen(this IWVectorTraits256 athis, Vector256<float> source) {
@@ -24,7 +24,7 @@ namespace Zyl.VectorTraits.Impl {
             return (a, b);
         }
 
-        /// <seealso cref="Vector256s.Widen(Vector256{sbyte})"/>
+        /// <inheritdoc cref="Vector256s.Widen(Vector256{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<short> Lower, Vector256<short> Upper) Widen(this IWVectorTraits256 athis, Vector256<sbyte> source) {
@@ -32,7 +32,7 @@ namespace Zyl.VectorTraits.Impl {
             return (a, b);
         }
 
-        /// <seealso cref="Vector256s.Widen(Vector256{byte})"/>
+        /// <inheritdoc cref="Vector256s.Widen(Vector256{byte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<ushort> Lower, Vector256<ushort> Upper) Widen(this IWVectorTraits256 athis, Vector256<byte> source) {
@@ -40,7 +40,7 @@ namespace Zyl.VectorTraits.Impl {
             return (a, b);
         }
 
-        /// <seealso cref="Vector256s.Widen(Vector256{short})"/>
+        /// <inheritdoc cref="Vector256s.Widen(Vector256{short})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<int> Lower, Vector256<int> Upper) Widen(this IWVectorTraits256 athis, Vector256<short> source) {
@@ -48,7 +48,7 @@ namespace Zyl.VectorTraits.Impl {
             return (a, b);
         }
 
-        /// <seealso cref="Vector256s.Widen(Vector256{ushort})"/>
+        /// <inheritdoc cref="Vector256s.Widen(Vector256{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<uint> Lower, Vector256<uint> Upper) Widen(this IWVectorTraits256 athis, Vector256<ushort> source) {
@@ -56,7 +56,7 @@ namespace Zyl.VectorTraits.Impl {
             return (a, b);
         }
 
-        /// <seealso cref="Vector256s.Widen(Vector256{int})"/>
+        /// <inheritdoc cref="Vector256s.Widen(Vector256{int})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<long> Lower, Vector256<long> Upper) Widen(this IWVectorTraits256 athis, Vector256<int> source) {
@@ -64,7 +64,7 @@ namespace Zyl.VectorTraits.Impl {
             return (a, b);
         }
 
-        /// <seealso cref="Vector256s.Widen(Vector256{uint})"/>
+        /// <inheritdoc cref="Vector256s.Widen(Vector256{uint})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<ulong> Lower, Vector256<ulong> Upper) Widen(this IWVectorTraits256 athis, Vector256<uint> source) {
@@ -73,6 +73,7 @@ namespace Zyl.VectorTraits.Impl {
         }
 
         /// <inheritdoc cref="Vector256Generic.Widen{T, TOut}(Vector256{T}, out Vector256{TOut}, out Vector256{TOut})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         [CLSCompliant(false)]
         public static void Widen<T, TOut>(this IWVectorTraits256 athis, Vector256<T> source, out Vector256<TOut> lower, out Vector256<TOut> upper)
                  where T : struct where TOut : struct {

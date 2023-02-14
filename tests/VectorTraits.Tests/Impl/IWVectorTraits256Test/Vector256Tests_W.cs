@@ -23,6 +23,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((int)7, (long)1)]
         [TestCase((uint)8, (ulong)1)]
         public void WidenTest<T, TOut>(T src, TOut dst) where T : struct where TOut : struct {
+#pragma warning disable CS0618 // Type or member is obsolete
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
                 if (instance.IsSupported) {
@@ -68,9 +69,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     }
                 }
             }
+#pragma warning restore CS0618 // Type or member is obsolete
         }
 
 
 #endif
-            }
+    }
 }

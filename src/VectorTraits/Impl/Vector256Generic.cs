@@ -32,6 +32,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TOut"/>) are not supported.</exception>
         /// <seealso cref="Vector256.Widen(Vector256{float})" />
         /// <seealso cref="IWVectorTraits256.Widen(Vector256{float}, out Vector256{double}, out Vector256{double})" />
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         public static void Widen<T, TOut>(Vector256<T> source, out Vector256<TOut> lower, out Vector256<TOut> upper)
                  where T : struct where TOut : struct {
             if (typeof(float) == typeof(T) && typeof(double) == typeof(TOut)) {
