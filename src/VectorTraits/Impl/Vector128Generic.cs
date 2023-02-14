@@ -17,18 +17,7 @@ namespace Zyl.VectorTraits.Impl {
 
 #if NET7_0_OR_GREATER
 
-        /// <summary>
-        /// Widens a <seealso cref="Vector128{T}"/> into two <seealso cref="Vector128{T}"/> instances - Generic version (将一个 <seealso cref="Vector128{T}"/> 扩宽为两个 <seealso cref="Vector128{T}"/> 实例 - 泛型版).
-        /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
-        /// </summary>
-        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
-        /// <typeparam name="TOut">The element type of the output parameter (输出参数的元素类型).</typeparam>
-        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
-        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
-        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
-        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TOut"/>) are not supported.</exception>
-        /// <seealso cref="Vector128.Widen(Vector128{float})" />
-        /// <seealso cref="IWVectorTraits128.Widen(Vector128{float}, out Vector128{double}, out Vector128{double})" />
+        /// <inheritdoc cref="Vector128s.Widen{T, TOut}(Vector128{T}, out Vector128{TOut}, out Vector128{TOut})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         public static void Widen<T, TOut>(Vector128<T> source, out Vector128<TOut> lower, out Vector128<TOut> upper)
                  where T : struct where TOut : struct {

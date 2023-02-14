@@ -402,6 +402,74 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.Widen_AcceleratedTypes"/>
+            public static TypeCodeFlags Widen_AcceleratedTypes {
+                get {
+                    return WStatics.Widen_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{float}, out Vector{double}, out Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<float> source, out Vector<double> lower, out Vector<double> upper) {
+                WStatics.Widen(source.AsVector128(), out var a, out var b);
+                lower = a.AsVector();
+                upper = b.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{sbyte}, out Vector{short}, out Vector{short})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<sbyte> source, out Vector<short> lower, out Vector<short> upper) {
+                WStatics.Widen(source.AsVector128(), out var a, out var b);
+                lower = a.AsVector();
+                upper = b.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{byte}, out Vector{ushort}, out Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<byte> source, out Vector<ushort> lower, out Vector<ushort> upper) {
+                WStatics.Widen(source.AsVector128(), out var a, out var b);
+                lower = a.AsVector();
+                upper = b.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{short}, out Vector{int}, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<short> source, out Vector<int> lower, out Vector<int> upper) {
+                WStatics.Widen(source.AsVector128(), out var a, out var b);
+                lower = a.AsVector();
+                upper = b.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{ushort}, out Vector{uint}, out Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<ushort> source, out Vector<uint> lower, out Vector<uint> upper) {
+                WStatics.Widen(source.AsVector128(), out var a, out var b);
+                lower = a.AsVector();
+                upper = b.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
+                WStatics.Widen(source.AsVector128(), out var a, out var b);
+                lower = a.AsVector();
+                upper = b.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{uint}, out Vector{ulong}, out Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<uint> source, out Vector<ulong> lower, out Vector<ulong> upper) {
+                WStatics.Widen(source.AsVector128(), out var a, out var b);
+                lower = a.AsVector();
+                upper = b.AsVector();
+            }
+
+
 #endif // NET5_0_OR_GREATER
         }
 

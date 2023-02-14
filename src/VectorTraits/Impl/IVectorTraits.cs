@@ -583,6 +583,90 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical(Vector{ulong}, int)"/> // Since: VectorTraits 1.0
         Vector<ulong> ShiftRightLogicalFast(Vector<ulong> value, int shiftAmount);
 
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>Widen</c> (运行 <c>Widen</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Widen"/>
+        TypeCodeFlags Widen_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Widens a <seealso cref="Vector{T}"/> into two <seealso cref="Vector{T}"/> instances (将一个 <seealso cref="Vector{T}"/> 扩宽为两个 <seealso cref="Vector{T}"/> 实例).
+        /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
+        /// </summary>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
+        /// <seealso cref="Widen_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Widen(Vector{float}, out Vector{double}, out Vector{double})" />
+        void Widen(Vector<float> source, out Vector<double> lower, out Vector<double> upper);
+
+        /// <summary>
+        /// Widens a <seealso cref="Vector{T}"/> into two <seealso cref="Vector{T}"/> instances (将一个 <seealso cref="Vector{T}"/> 扩宽为两个 <seealso cref="Vector{T}"/> 实例).
+        /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
+        /// </summary>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
+        /// <seealso cref="Widen_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Widen(Vector{sbyte}, out Vector{short}, out Vector{short})" />
+        void Widen(Vector<sbyte> source, out Vector<short> lower, out Vector<short> upper);
+
+        /// <summary>
+        /// Widens a <seealso cref="Vector{T}"/> into two <seealso cref="Vector{T}"/> instances (将一个 <seealso cref="Vector{T}"/> 扩宽为两个 <seealso cref="Vector{T}"/> 实例).
+        /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
+        /// </summary>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
+        /// <seealso cref="Widen_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Widen(Vector{byte}, out Vector{ushort}, out Vector{ushort})" />
+        void Widen(Vector<byte> source, out Vector<ushort> lower, out Vector<ushort> upper);
+
+        /// <summary>
+        /// Widens a <seealso cref="Vector{T}"/> into two <seealso cref="Vector{T}"/> instances (将一个 <seealso cref="Vector{T}"/> 扩宽为两个 <seealso cref="Vector{T}"/> 实例).
+        /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
+        /// </summary>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
+        /// <seealso cref="Widen_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Widen(Vector{short}, out Vector{int}, out Vector{int})" />
+        void Widen(Vector<short> source, out Vector<int> lower, out Vector<int> upper);
+
+        /// <summary>
+        /// Widens a <seealso cref="Vector{T}"/> into two <seealso cref="Vector{T}"/> instances (将一个 <seealso cref="Vector{T}"/> 扩宽为两个 <seealso cref="Vector{T}"/> 实例).
+        /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
+        /// </summary>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
+        /// <seealso cref="Widen_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Widen(Vector{ushort}, out Vector{uint}, out Vector{uint})" />
+        void Widen(Vector<ushort> source, out Vector<uint> lower, out Vector<uint> upper);
+
+        /// <summary>
+        /// Widens a <seealso cref="Vector{T}"/> into two <seealso cref="Vector{T}"/> instances (将一个 <seealso cref="Vector{T}"/> 扩宽为两个 <seealso cref="Vector{T}"/> 实例).
+        /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
+        /// </summary>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
+        /// <seealso cref="Widen_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Widen(Vector{int}, out Vector{long}, out Vector{long})" />
+        void Widen(Vector<int> source, out Vector<long> lower, out Vector<long> upper);
+
+        /// <summary>
+        /// Widens a <seealso cref="Vector{T}"/> into two <seealso cref="Vector{T}"/> instances (将一个 <seealso cref="Vector{T}"/> 扩宽为两个 <seealso cref="Vector{T}"/> 实例).
+        /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
+        /// </summary>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
+        /// <seealso cref="Widen_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Widen(Vector{uint}, out Vector{ulong}, out Vector{ulong})" />
+        void Widen(Vector<uint> source, out Vector<ulong> lower, out Vector<ulong> upper);
+
         #endregion // .NET_style
 
         // == X86 style  ==

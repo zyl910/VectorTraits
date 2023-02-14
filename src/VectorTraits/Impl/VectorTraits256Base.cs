@@ -1484,6 +1484,288 @@ namespace Zyl.VectorTraits.Impl {
                 return rt;
             }
 
+
+            /// <inheritdoc cref="IVectorTraits.Widen_AcceleratedTypes"/>
+            public static TypeCodeFlags Widen_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+                    if (Vector.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{float}, out Vector{double}, out Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<float> source, out Vector<double> lower, out Vector<double> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+                Vector.Widen(source, out lower, out upper);
+#else
+                Widen_Base(source, out lower, out upper);
+#endif // BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{sbyte}, out Vector{short}, out Vector{short})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<sbyte> source, out Vector<short> lower, out Vector<short> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+                Vector.Widen(source, out lower, out upper);
+#else
+                Widen_Base(source, out lower, out upper);
+#endif // BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{byte}, out Vector{ushort}, out Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<byte> source, out Vector<ushort> lower, out Vector<ushort> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+                Vector.Widen(source, out lower, out upper);
+#else
+                Widen_Base(source, out lower, out upper);
+#endif // BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{short}, out Vector{int}, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<short> source, out Vector<int> lower, out Vector<int> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+                Vector.Widen(source, out lower, out upper);
+#else
+                Widen_Base(source, out lower, out upper);
+#endif // BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{ushort}, out Vector{uint}, out Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<ushort> source, out Vector<uint> lower, out Vector<uint> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+                Vector.Widen(source, out lower, out upper);
+#else
+                Widen_Base(source, out lower, out upper);
+#endif // BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+                Vector.Widen(source, out lower, out upper);
+#else
+                Widen_Base(source, out lower, out upper);
+#endif // BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{uint}, out Vector{ulong}, out Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<uint> source, out Vector<ulong> lower, out Vector<ulong> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+                Vector.Widen(source, out lower, out upper);
+#else
+                Widen_Base(source, out lower, out upper);
+#endif // BCL_OVERRIDE_BASE_FIXED && (NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{float}, out Vector{double}, out Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe void Widen_Base(Vector<float> source, out Vector<double> lower, out Vector<double> upper) {
+                float* p = (float*)&source;
+                fixed (void* plower0 = &lower, pupper0 = &upper) {
+                    double* plower = (double*)plower0;
+                    double* pupper = (double*)pupper0;
+                    plower[0] = p[0];
+                    plower[1] = p[1];
+                    plower[2] = p[2];
+                    plower[3] = p[3];
+                    pupper[0] = p[4];
+                    pupper[1] = p[5];
+                    pupper[2] = p[6];
+                    pupper[3] = p[7];
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{sbyte}, out Vector{short}, out Vector{short})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe void Widen_Base(Vector<sbyte> source, out Vector<short> lower, out Vector<short> upper) {
+                sbyte* p = (sbyte*)&source;
+                fixed (void* plower0 = &lower, pupper0 = &upper) {
+                    short* plower = (short*)plower0;
+                    short* pupper = (short*)pupper0;
+                    plower[0] = p[0];
+                    plower[1] = p[1];
+                    plower[2] = p[2];
+                    plower[3] = p[3];
+                    plower[4] = p[4];
+                    plower[5] = p[5];
+                    plower[6] = p[6];
+                    plower[7] = p[7];
+                    plower[8] = p[8];
+                    plower[9] = p[9];
+                    plower[10] = p[10];
+                    plower[11] = p[11];
+                    plower[12] = p[12];
+                    plower[13] = p[13];
+                    plower[14] = p[14];
+                    plower[15] = p[15];
+                    pupper[0] = p[16];
+                    pupper[1] = p[17];
+                    pupper[2] = p[18];
+                    pupper[3] = p[19];
+                    pupper[4] = p[20];
+                    pupper[5] = p[21];
+                    pupper[6] = p[22];
+                    pupper[7] = p[23];
+                    pupper[8] = p[24];
+                    pupper[9] = p[25];
+                    pupper[10] = p[26];
+                    pupper[11] = p[27];
+                    pupper[12] = p[28];
+                    pupper[13] = p[29];
+                    pupper[14] = p[30];
+                    pupper[15] = p[31];
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{byte}, out Vector{ushort}, out Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe void Widen_Base(Vector<byte> source, out Vector<ushort> lower, out Vector<ushort> upper) {
+                byte* p = (byte*)&source;
+                fixed (void* plower0 = &lower, pupper0 = &upper) {
+                    ushort* plower = (ushort*)plower0;
+                    ushort* pupper = (ushort*)pupper0;
+                    plower[0] = p[0];
+                    plower[1] = p[1];
+                    plower[2] = p[2];
+                    plower[3] = p[3];
+                    plower[4] = p[4];
+                    plower[5] = p[5];
+                    plower[6] = p[6];
+                    plower[7] = p[7];
+                    plower[8] = p[8];
+                    plower[9] = p[9];
+                    plower[10] = p[10];
+                    plower[11] = p[11];
+                    plower[12] = p[12];
+                    plower[13] = p[13];
+                    plower[14] = p[14];
+                    plower[15] = p[15];
+                    pupper[0] = p[16];
+                    pupper[1] = p[17];
+                    pupper[2] = p[18];
+                    pupper[3] = p[19];
+                    pupper[4] = p[20];
+                    pupper[5] = p[21];
+                    pupper[6] = p[22];
+                    pupper[7] = p[23];
+                    pupper[8] = p[24];
+                    pupper[9] = p[25];
+                    pupper[10] = p[26];
+                    pupper[11] = p[27];
+                    pupper[12] = p[28];
+                    pupper[13] = p[29];
+                    pupper[14] = p[30];
+                    pupper[15] = p[31];
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{short}, out Vector{int}, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe void Widen_Base(Vector<short> source, out Vector<int> lower, out Vector<int> upper) {
+                short* p = (short*)&source;
+                fixed (void* plower0 = &lower, pupper0 = &upper) {
+                    int* plower = (int*)plower0;
+                    int* pupper = (int*)pupper0;
+                    plower[0] = p[0];
+                    plower[1] = p[1];
+                    plower[2] = p[2];
+                    plower[3] = p[3];
+                    plower[4] = p[4];
+                    plower[5] = p[5];
+                    plower[6] = p[6];
+                    plower[7] = p[7];
+                    pupper[0] = p[8];
+                    pupper[1] = p[9];
+                    pupper[2] = p[10];
+                    pupper[3] = p[11];
+                    pupper[4] = p[12];
+                    pupper[5] = p[13];
+                    pupper[6] = p[14];
+                    pupper[7] = p[15];
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{ushort}, out Vector{uint}, out Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe void Widen_Base(Vector<ushort> source, out Vector<uint> lower, out Vector<uint> upper) {
+                ushort* p = (ushort*)&source;
+                fixed (void* plower0 = &lower, pupper0 = &upper) {
+                    uint* plower = (uint*)plower0;
+                    uint* pupper = (uint*)pupper0;
+                    plower[0] = p[0];
+                    plower[1] = p[1];
+                    plower[2] = p[2];
+                    plower[3] = p[3];
+                    plower[4] = p[4];
+                    plower[5] = p[5];
+                    plower[6] = p[6];
+                    plower[7] = p[7];
+                    pupper[0] = p[8];
+                    pupper[1] = p[9];
+                    pupper[2] = p[10];
+                    pupper[3] = p[11];
+                    pupper[4] = p[12];
+                    pupper[5] = p[13];
+                    pupper[6] = p[14];
+                    pupper[7] = p[15];
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe void Widen_Base(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
+                int* p = (int*)&source;
+                fixed (void* plower0 = &lower, pupper0 = &upper) {
+                    long* plower = (long*)plower0;
+                    long* pupper = (long*)pupper0;
+                    plower[0] = p[0];
+                    plower[1] = p[1];
+                    plower[2] = p[2];
+                    plower[3] = p[3];
+                    pupper[0] = p[4];
+                    pupper[1] = p[5];
+                    pupper[2] = p[6];
+                    pupper[3] = p[7];
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{uint}, out Vector{ulong}, out Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe void Widen_Base(Vector<uint> source, out Vector<ulong> lower, out Vector<ulong> upper) {
+                uint* p = (uint*)&source;
+                fixed (void* plower0 = &lower, pupper0 = &upper) {
+                    ulong* plower = (ulong*)plower0;
+                    ulong* pupper = (ulong*)pupper0;
+                    plower[0] = p[0];
+                    plower[1] = p[1];
+                    plower[2] = p[2];
+                    plower[3] = p[3];
+                    pupper[0] = p[4];
+                    pupper[1] = p[5];
+                    pupper[2] = p[6];
+                    pupper[3] = p[7];
+                }
+            }
+
         } // Statics
     }
 }

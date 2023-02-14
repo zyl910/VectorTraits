@@ -64,6 +64,18 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.Widen_AcceleratedTypes"/>
+        public override TypeCodeFlags Widen_AcceleratedTypes {
+            get {
+                return Statics.Widen_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Widen(Vector{float}, out Vector{double}, out Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override void Widen(Vector<float> source, out Vector<double> lower, out Vector<double> upper) {
+            Statics.Widen(source, out lower, out upper);
+        }
 
 
 #endif // NET5_0_OR_GREATER

@@ -90,6 +90,22 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.Widen_AcceleratedTypes"/>
+            public static TypeCodeFlags Widen_AcceleratedTypes {
+                get {
+                    return WStatics.Widen_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{float}, out Vector{double}, out Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen(Vector<float> source, out Vector<double> lower, out Vector<double> upper) {
+                WStatics.Widen(source.AsVector128(), out var a, out var b);
+                lower = a.AsVector();
+                upper = b.AsVector();
+            }
+
+
 
 #endif // NET5_0_OR_GREATER
         }
