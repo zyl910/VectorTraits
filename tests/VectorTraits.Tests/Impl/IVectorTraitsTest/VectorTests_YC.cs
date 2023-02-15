@@ -26,7 +26,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             string? lineCommentItemSeparator = null;
             IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
             foreach (IVectorTraits instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.YClamp_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");

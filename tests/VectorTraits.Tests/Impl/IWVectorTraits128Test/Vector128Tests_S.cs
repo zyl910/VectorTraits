@@ -27,7 +27,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             int shiftAmountMax = Scalars<T>.BitSize + 1;
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftLeft_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -43,7 +43,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 for (int shiftAmount = -1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector128<T> vexpected = Vector128s.ShiftLeft((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits128 instance in instances) {
-                        if (!instance.IsSupported) continue;
+                        if (!instance.GetIsSupported(true)) continue;
                         Vector128<T> vdst = instance.ShiftLeft((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
@@ -65,7 +65,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             int shiftAmountMax = Scalars<T>.BitSize - 1;
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftLeft_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -81,7 +81,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 for (int shiftAmount = 0; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector128<T> vexpected = Vector128s.ShiftLeftFast((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits128 instance in instances) {
-                        if (!instance.IsSupported) continue;
+                        if (!instance.GetIsSupported(true)) continue;
                         Vector128<T> vdst = instance.ShiftLeftFast((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
@@ -100,7 +100,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             int shiftAmountMax = Scalars<T>.BitSize + 1;
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightArithmetic_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -116,7 +116,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 for (int shiftAmount = -1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector128<T> vexpected = Vector128s.ShiftRightArithmetic((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits128 instance in instances) {
-                        if (!instance.IsSupported) continue;
+                        if (!instance.GetIsSupported(true)) continue;
                         Vector128<T> vdst = instance.ShiftRightArithmetic((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
@@ -134,7 +134,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             int shiftAmountMax = Scalars<T>.BitSize - 1;
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightArithmetic_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -154,7 +154,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 for (int shiftAmount = 0; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector128<T> vexpected = Vector128s.ShiftRightArithmeticFast((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits128 instance in instances) {
-                        if (!instance.IsSupported) continue;
+                        if (!instance.GetIsSupported(true)) continue;
                         Vector128<T> vdst = instance.ShiftRightArithmeticFast((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
@@ -181,7 +181,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             int shiftAmountMax = Scalars<T>.BitSize + 1;
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightLogical_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -197,7 +197,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 for (int shiftAmount = -1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector128<T> vexpected = Vector128s.ShiftRightLogical((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits128 instance in instances) {
-                        if (!instance.IsSupported) continue;
+                        if (!instance.GetIsSupported(true)) continue;
                         Vector128<T> vdst = instance.ShiftRightLogical((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
@@ -219,7 +219,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             int shiftAmountMax = Scalars<T>.BitSize - 1;
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightLogical_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -235,7 +235,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector128<T> vexpected = Vector128s.ShiftRightLogicalFast((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits128 instance in instances) {
-                        if (!instance.IsSupported) continue;
+                        if (!instance.GetIsSupported(true)) continue;
                         Vector128<T> vdst = instance.ShiftRightLogicalFast((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
@@ -256,7 +256,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
         public void SubtractTest<T>(T src) where T : struct {
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.Subtract_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -277,7 +277,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     Vector128<T> expected = Vector128s.Subtract((dynamic)left, (dynamic)right);
 #endif // NET7_0_OR_GREATER
                     foreach (IWVectorTraits128 instance in instances) {
-                        if (!instance.IsSupported) continue;
+                        if (!instance.GetIsSupported(true)) continue;
                         Vector128<T> dst = instance.Subtract((dynamic)left, (dynamic)right);
                         if (Scalars<T>.ExponentBits > 0) {
                             // Compatible floating-point NaN.

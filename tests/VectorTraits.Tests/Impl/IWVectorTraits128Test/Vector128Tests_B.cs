@@ -26,7 +26,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
         public void BitwiseAndTest<T>(T src) where T : struct {
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ConditionalSelect_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -46,7 +46,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 foreach (Vector128<T> right in samples) {
                     Vector128<T> expected = Vector128s.BitwiseAnd(left, right);
                     foreach (IWVectorTraits128 instance in instances) {
-                        if (!instance.IsSupported) continue;
+                        if (!instance.GetIsSupported(true)) continue;
                         Vector128<T> dst = instance.BitwiseAnd(left, right);
                         Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                     }
@@ -67,7 +67,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
         public void BitwiseOrTest<T>(T src) where T : struct {
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ConditionalSelect_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -87,7 +87,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 foreach (Vector128<T> right in samples) {
                     Vector128<T> expected = Vector128s.BitwiseOr(left, right);
                     foreach (IWVectorTraits128 instance in instances) {
-                        if (!instance.IsSupported) continue;
+                        if (!instance.GetIsSupported(true)) continue;
                         Vector128<T> dst = instance.BitwiseOr(left, right);
                         Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                     }

@@ -26,7 +26,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         public void OnesComplementTest<T>(T src) where T : struct {
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ConditionalSelect_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -45,7 +45,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             foreach (Vector256<T> vector in samples) {
                 Vector256<T> expected = Vector256s.OnesComplement(vector);
                 foreach (IWVectorTraits256 instance in instances) {
-                    if (!instance.IsSupported) continue;
+                    if (!instance.GetIsSupported(true)) continue;
                     Vector256<T> dst = instance.OnesComplement(vector);
                     Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, vector={vector}");
                 }

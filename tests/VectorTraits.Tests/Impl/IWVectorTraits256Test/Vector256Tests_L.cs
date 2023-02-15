@@ -26,7 +26,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         public void LessThanTest<T>(T src) where T : struct {
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.LessThan_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -50,7 +50,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Vector256<T> expected = Vector256s.LessThan((dynamic)left, (dynamic)right);
 #endif // NET7_0_OR_GREATER
                     foreach (IWVectorTraits256 instance in instances) {
-                        if (!instance.IsSupported) continue;
+                        if (!instance.GetIsSupported(true)) continue;
                         Vector256<T> dst = instance.LessThan((dynamic)left, (dynamic)right);
                         Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                     }

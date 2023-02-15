@@ -23,7 +23,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         public void AbsTest<T>(T src) where T : struct {
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.Abs_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -47,7 +47,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
                 }
                 foreach (IWVectorTraits256 instance in instances) {
-                    if (!instance.IsSupported) continue;
+                    if (!instance.GetIsSupported(true)) continue;
                     Vector256<T> dst = instance.Abs((dynamic)vector);
                     if (Scalars<T>.ExponentBits > 0) {
                         // Compatible floating-point NaN.
@@ -72,7 +72,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         public void AddTest<T>(T src) where T : struct {
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.Add_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -93,7 +93,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Vector256<T> expected = Vector256s.Add((dynamic)left, (dynamic)right);
 #endif // NET7_0_OR_GREATER
                     foreach (IWVectorTraits256 instance in instances) {
-                        if (!instance.IsSupported) continue;
+                        if (!instance.GetIsSupported(true)) continue;
                         Vector256<T> dst = instance.Add((dynamic)left, (dynamic)right);
                         if (Scalars<T>.ExponentBits > 0) {
                             // Compatible floating-point NaN.
@@ -119,7 +119,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         public void AndNotTest<T>(T src) where T : struct {
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ConditionalSelect_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -139,7 +139,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 foreach (Vector256<T> right in samples) {
                     Vector256<T> expected = Vector256s.AndNot(left, right);
                     foreach (IWVectorTraits256 instance in instances) {
-                        if (!instance.IsSupported) continue;
+                        if (!instance.GetIsSupported(true)) continue;
                         Vector256<T> dst = instance.AndNot(left, right);
                         Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                     }

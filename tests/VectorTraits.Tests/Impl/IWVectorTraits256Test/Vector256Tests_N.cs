@@ -22,7 +22,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         public void NegateTest<T>(T src) where T : struct {
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
-                if (instance.IsSupported) {
+                if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ConditionalSelect_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
@@ -46,7 +46,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
                 }
                 foreach (IWVectorTraits256 instance in instances) {
-                    if (!instance.IsSupported) continue;
+                    if (!instance.GetIsSupported(true)) continue;
                     Vector256<T> dst = instance.Negate((dynamic)vector);
                     if (Scalars<T>.ExponentBits > 0) {
                         // Compatible floating-point NaN.
