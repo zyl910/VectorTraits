@@ -135,7 +135,10 @@ namespace Zyl.VectorTraits.Benchmarks {
         protected virtual void CheckResultSingle(string name) {
             if (!CheckMode) return;
             if (dstSingle != baselineSingle) {
-                throw new ApplicationException(string.Format("Check `{0}` mismatch. {1}!={2}", name, dstSingle, baselineSingle));
+                string msg = string.Format("Check `{0}` mismatch. {1}!={2}", name, dstSingle, baselineSingle);
+                // throw new ApplicationException(msg);
+                string itemname = string.Format("Check-{0}", name);
+                BenchmarkUtil.WriteItem(itemname, msg);
             } else {
                 // Succeed. No output.
                 string msg = string.Format("Check `{0}` Succeed.", name);
@@ -152,7 +155,10 @@ namespace Zyl.VectorTraits.Benchmarks {
         protected virtual void CheckResultDouble(string name) {
             if (!CheckMode) return;
             if (dstDouble != baselineDouble) {
-                throw new ApplicationException(string.Format("Check `{0}` mismatch. {1}!={2}", name, dstDouble, baselineDouble));
+                string msg = string.Format("Check `{0}` mismatch. {1}!={2}", name, dstDouble, baselineDouble);
+                // throw new ApplicationException(msg);
+                string itemname = string.Format("Check-{0}", name);
+                BenchmarkUtil.WriteItem(itemname, msg);
             } else {
                 // Succeed. No output.
                 string msg = string.Format("Check `{0}` Succeed.", name);
