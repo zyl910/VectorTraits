@@ -5,14 +5,13 @@ using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
 namespace Zyl.VectorTraits.Impl {
     /// <summary>
     /// Extension methods of <seealso cref="IWVectorTraits256"/> (<seealso cref="IWVectorTraits256"/> 的扩展方法)
     /// </summary>
     public static class IWVectorTraits256_Extensions {
-
-        private static readonly string FORMAT_TYPE_NOT_SUPPORTED_2 = VectorGeneric.FORMAT_TYPE_NOT_SUPPORTED_2;
 
 #if NETCOREAPP3_0_OR_GREATER
 

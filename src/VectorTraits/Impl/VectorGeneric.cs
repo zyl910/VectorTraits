@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
+using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
 namespace Zyl.VectorTraits.Impl {
     /// <summary>
     /// Generic style methods for <see cref="Vector"/> (<see cref="Vector"/> 的泛型风格方法). 
     /// </summary>
     public static class VectorGeneric {
-
-        /// <summary>
-        /// Message format of NOT_SUPPORTED in case of 2 types (2个类型时，NOT_SUPPORTED的消息格式).
-        /// </summary>
-        public static readonly string FORMAT_TYPE_NOT_SUPPORTED_2 = "These element types({0}, {1}) are not supported!";
 
 #if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
 

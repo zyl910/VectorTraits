@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
+using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
 namespace Zyl.VectorTraits.Impl {
     /// <summary>
     /// Extension methods of <seealso cref="IVectorTraits"/> (<seealso cref="IVectorTraits"/> 的扩展方法)
     /// </summary>
     public static class IVectorTraits_Extensions {
-
-        private static readonly string FORMAT_TYPE_NOT_SUPPORTED_2 = VectorGeneric.FORMAT_TYPE_NOT_SUPPORTED_2;
-
 
         /// <inheritdoc cref="Vectors.Widen(Vector{float})"/>
         [CLSCompliant(false)]

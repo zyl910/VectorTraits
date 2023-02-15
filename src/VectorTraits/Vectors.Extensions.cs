@@ -4,12 +4,10 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Zyl.VectorTraits.Impl;
+using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
 namespace Zyl.VectorTraits {
     static partial class Vectors {
-
-        private static readonly string FORMAT_TYPE_NOT_SUPPORTED_2 = VectorGeneric.FORMAT_TYPE_NOT_SUPPORTED_2;
-
 
         /// <summary>
         /// Widens a <seealso cref="Vector{T}"/> into two <seealso cref="Vector{T}"/> instances - Generic version (将一个 <seealso cref="Vector{T}"/> 扩宽为两个 <seealso cref="Vector{T}"/> 实例 - 泛型版).

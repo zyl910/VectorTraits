@@ -6,11 +6,10 @@ using System.Text;
 using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
+using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
 namespace Zyl.VectorTraits {
     static partial class Vector128s {
-
-        private static readonly string FORMAT_TYPE_NOT_SUPPORTED_2 = VectorGeneric.FORMAT_TYPE_NOT_SUPPORTED_2;
 
 #if NETCOREAPP3_0_OR_GREATER
 

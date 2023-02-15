@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using System.Runtime.Intrinsics;
 #endif
 using System.Text;
+using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
 namespace Zyl.VectorTraits.Impl {
     /// <summary>
     /// Generic style methods for <see cref="Vector256"/> (<see cref="Vector256"/> 的泛型风格方法). 
     /// </summary>
     public static class Vector256Generic {
-
-        private static readonly string FORMAT_TYPE_NOT_SUPPORTED_2 = VectorGeneric.FORMAT_TYPE_NOT_SUPPORTED_2;
 
 #if NETCOREAPP3_0_OR_GREATER
 
