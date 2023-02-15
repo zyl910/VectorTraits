@@ -29,6 +29,8 @@ sz 1.txt
 set DOTNET_JitDisasm=AloneTest
 export DOTNET_JitDisasm=AloneTest
 dotnet VectorTraits.Benchmarks.dll 3 >1.txt
+set DOTNET_JitDisasm=WidenBenchmark_SByte.*
+dotnet VectorTraits.Benchmarks.dll >1.txt
 
 dotnet VectorTraits.Benchmarks.dll -waitdebug
 ```
