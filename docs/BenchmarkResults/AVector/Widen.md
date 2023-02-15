@@ -63,20 +63,13 @@ Vectors.BaseInstance:   VectorTraits256Base
 ---
 NAME    US      MOPS    SCALE
 # SumWidenScalar        6514
-SumWidenScalar  161.721 1620.961
-SumWidenBcl     7.634   34338.105       21.183789
-SumWidenVectorBase      7.652   34256.867       21.133672
-SumWidenVectorTraits    10.189  25727.682       15.871866
+SumWidenScalar  168.528 1555.496
+SumWidenBcl     8.162   32118.453       20.648372
+SumWidenVectorBase      7.793   33638.370       21.625500
+SumWidenVectorTraits    7.752   33818.223       21.741124
 SumWidenVector128_Arm   Run fail! Operation is not supported on this platform.
-SumWidenVector128Traits 14.956  17528.143       10.813424
-SumWidenVector256Traits 10.221  25648.831       15.823221
-
-VectorTraitsBase: OK.
-VectorTraits128Base: Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits256Base: OK.
-VectorTraits256Avx2: OK.
+SumWidenVector128Traits 15.009  17465.372       11.228172
+SumWidenVector256Traits 7.724   33940.179       21.819527
 ```
 
 ## Arm
