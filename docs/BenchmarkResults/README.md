@@ -12,16 +12,18 @@
 
 Prepare (准备):
 ```
-cd ~/Documents/VectorTraits
+cd ~/Documents/VectorTraits/benchmarks
 rm -r *
-
+rz
+unzip Release.zip
 
 ```
 
 Run (运行):
 ```
-cd ~/Documents/VectorTraits/net7.0
+cd ~/Documents/VectorTraits/benchmarks/net7.0
 dotnet VectorTraits.Benchmarks.dll >1.txt
+dotnet VectorTraits.Benchmarks.NetCore.dll >1.txt
 sz 1.txt
 
 set DOTNET_JitDisasm=AloneTest
