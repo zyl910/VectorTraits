@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
 using System.Numerics;
-using System.ComponentModel;
 using Zyl.VectorTraits.Extensions.SameW;
 
 namespace Zyl.VectorTraits.Impl {
@@ -304,7 +303,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<sbyte> ShiftLeft_Base(Vector<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
@@ -312,7 +310,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<byte> ShiftLeft_Base(Vector<byte> value, int shiftAmount) {
                 shiftAmount &= 7;
@@ -320,7 +317,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<short> ShiftLeft_Base(Vector<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
@@ -329,7 +325,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{ushort}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<ushort> ShiftLeft_Base(Vector<ushort> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
@@ -337,7 +332,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<int> ShiftLeft_Base(Vector<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
@@ -346,7 +340,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{uint}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<uint> ShiftLeft_Base(Vector<uint> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
@@ -354,7 +347,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{long}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<long> ShiftLeft_Base(Vector<long> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
@@ -363,7 +355,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{ulong}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<ulong> ShiftLeft_Base(Vector<ulong> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
@@ -472,14 +463,12 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftLeftFast_Base(Vector<sbyte> value, int shiftAmount) {
                 return ShiftLeftFast_Base(value.AsByte(), shiftAmount).AsSByte();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{byte}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<byte> ShiftLeftFast_Base(Vector<byte> value, int shiftAmount) {
                 Vector<byte> rt = value;
@@ -504,7 +493,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{short}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<short> ShiftLeftFast_Base(Vector<short> value, int shiftAmount) {
                 Vector<short> rt = value;
@@ -522,14 +510,12 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{ushort}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> ShiftLeftFast_Base(Vector<ushort> value, int shiftAmount) {
                 return ShiftLeftFast_Base(value.AsInt16(), shiftAmount).AsUInt16();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{int}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<int> ShiftLeftFast_Base(Vector<int> value, int shiftAmount) {
                 Vector<int> rt = value;
@@ -543,14 +529,12 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{uint}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> ShiftLeftFast_Base(Vector<uint> value, int shiftAmount) {
                 return ShiftLeftFast_Base(value.AsInt32(), shiftAmount).AsUInt32();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{long}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<long> ShiftLeftFast_Base(Vector<long> value, int shiftAmount) {
                 Vector<long> rt = value;
@@ -562,7 +546,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{ulong}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> ShiftLeftFast_Base(Vector<ulong> value, int shiftAmount) {
                 return ShiftLeftFast_Base(value.AsInt64(), shiftAmount).AsUInt64();
@@ -636,7 +619,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<sbyte> ShiftRightArithmetic_Base(Vector<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
@@ -644,7 +626,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{short}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<short> ShiftRightArithmetic_Base(Vector<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
@@ -652,7 +633,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<int> ShiftRightArithmetic_Base(Vector<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
@@ -660,7 +640,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{long}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<long> ShiftRightArithmetic_Base(Vector<long> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
@@ -669,7 +648,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftRightArithmetic_Negative(Vector<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
@@ -677,7 +655,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{short}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftRightArithmetic_Negative(Vector<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
@@ -685,7 +662,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftRightArithmetic_Negative(Vector<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
@@ -693,7 +669,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{long}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic_Negative(Vector<long> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
@@ -751,7 +726,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<sbyte> ShiftRightArithmeticFast_Base(Vector<sbyte> value, int shiftAmount) {
                 Vector<sbyte> rt = value;
@@ -776,7 +750,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{short}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<short> ShiftRightArithmeticFast_Base(Vector<short> value, int shiftAmount) {
                 Vector<short> rt = value;
@@ -793,7 +766,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{int}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<int> ShiftRightArithmeticFast_Base(Vector<int> value, int shiftAmount) {
                 Vector<int> rt = value;
@@ -806,7 +778,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{long}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<long> ShiftRightArithmeticFast_Base(Vector<long> value, int shiftAmount) {
                 Vector<long> rt = value;
@@ -818,7 +789,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<sbyte> ShiftRightArithmeticFast_Negative(Vector<sbyte> value, int shiftAmount) {
 #if NET7_0_OR_GREATER
@@ -833,7 +803,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{short}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftRightArithmeticFast_Negative(Vector<short> value, int shiftAmount) {
 #if NET7_0_OR_GREATER
@@ -848,7 +817,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{int}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftRightArithmeticFast_Negative(Vector<int> value, int shiftAmount) {
 #if NET7_0_OR_GREATER
@@ -863,7 +831,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{long}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmeticFast_Negative(Vector<long> value, int shiftAmount) {
 #if NET7_0_OR_GREATER
@@ -996,7 +963,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<sbyte> ShiftRightLogical_Base(Vector<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
@@ -1004,7 +970,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{byte}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<byte> ShiftRightLogical_Base(Vector<byte> value, int shiftAmount) {
                 shiftAmount &= 7;
@@ -1012,7 +977,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{short}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<short> ShiftRightLogical_Base(Vector<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
@@ -1021,7 +985,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{ushort}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<ushort> ShiftRightLogical_Base(Vector<ushort> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
@@ -1029,7 +992,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{int}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<int> ShiftRightLogical_Base(Vector<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
@@ -1038,7 +1000,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{uint}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<uint> ShiftRightLogical_Base(Vector<uint> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
@@ -1046,7 +1007,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{long}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<long> ShiftRightLogical_Base(Vector<long> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
@@ -1055,7 +1015,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{ulong}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<ulong> ShiftRightLogical_Base(Vector<ulong> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
@@ -1064,7 +1023,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftRightLogical_Widen(Vector<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
@@ -1072,7 +1030,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{byte}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> ShiftRightLogical_Widen(Vector<byte> value, int shiftAmount) {
                 shiftAmount &= 7;
@@ -1080,7 +1037,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{short}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftRightLogical_Widen(Vector<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
@@ -1089,7 +1045,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{ushort}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> ShiftRightLogical_Widen(Vector<ushort> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
@@ -1097,7 +1052,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{int}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftRightLogical_Widen(Vector<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
@@ -1106,7 +1060,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{uint}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> ShiftRightLogical_Widen(Vector<uint> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
@@ -1215,14 +1168,12 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<sbyte> ShiftRightLogicalFast_Base(Vector<sbyte> value, int shiftAmount) {
                 return ShiftRightLogicalFast_Base(value.AsByte(), shiftAmount).AsSByte();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{byte}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<byte> ShiftRightLogicalFast_Base(Vector<byte> value, int shiftAmount) {
                 Vector<byte> rt = value;
@@ -1247,7 +1198,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{short}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<short> ShiftRightLogicalFast_Base(Vector<short> value, int shiftAmount) {
                 return ShiftRightLogicalFast_Base(value.AsUInt16(), shiftAmount).AsInt16();
@@ -1255,7 +1205,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{ushort}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<ushort> ShiftRightLogicalFast_Base(Vector<ushort> value, int shiftAmount) {
                 Vector<ushort> rt = value;
@@ -1272,7 +1221,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{int}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<int> ShiftRightLogicalFast_Base(Vector<int> value, int shiftAmount) {
                 return ShiftRightLogicalFast_Base(value.AsUInt32(), shiftAmount).AsInt32();
@@ -1280,7 +1228,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{uint}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<uint> ShiftRightLogicalFast_Base(Vector<uint> value, int shiftAmount) {
                 Vector<uint> rt = value;
@@ -1293,7 +1240,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{long}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<long> ShiftRightLogicalFast_Base(Vector<long> value, int shiftAmount) {
                 return ShiftRightLogicalFast_Base(value.AsUInt64(), shiftAmount).AsInt64();
@@ -1301,7 +1247,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{ulong}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<ulong> ShiftRightLogicalFast_Base(Vector<ulong> value, int shiftAmount) {
                 Vector<ulong> rt = value;
@@ -1313,14 +1258,12 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<sbyte> ShiftRightLogicalFast_Widen(Vector<sbyte> value, int shiftAmount) {
                 return ShiftRightLogicalFast_Widen(value.AsByte(), shiftAmount).AsSByte();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{byte}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> ShiftRightLogicalFast_Widen(Vector<byte> value, int shiftAmount) {
 #if NET7_0_OR_GREATER
@@ -1333,7 +1276,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{short}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftRightLogicalFast_Widen(Vector<short> value, int shiftAmount) {
                 return ShiftRightLogicalFast_Widen(value.AsUInt16(), shiftAmount).AsInt16();
@@ -1341,7 +1283,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{ushort}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<ushort> ShiftRightLogicalFast_Widen(Vector<ushort> value, int shiftAmount) {
 #if NET7_0_OR_GREATER
@@ -1354,7 +1295,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{int}, int)"/>
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftRightLogicalFast_Widen(Vector<int> value, int shiftAmount) {
                 return ShiftRightLogicalFast_Widen(value.AsUInt32(), shiftAmount).AsInt32();
@@ -1362,7 +1302,6 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{uint}, int)"/>
             [CLSCompliant(false)]
-            [EditorBrowsable(EditorBrowsableState.Never)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe Vector<uint> ShiftRightLogicalFast_Widen(Vector<uint> value, int shiftAmount) {
 #if NET7_0_OR_GREATER
