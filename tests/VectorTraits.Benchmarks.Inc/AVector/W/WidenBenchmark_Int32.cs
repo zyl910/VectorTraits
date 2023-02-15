@@ -19,16 +19,16 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = SByte;
-    using TMyOut = Int16;
+    using TMy = Int32;
+    using TMyOut = Int64;
 
     /// <summary>
-    /// Widen benchmark - SByte.
+    /// Widen benchmark - Int32.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class WidenBenchmark_SByte : AbstractSharedBenchmark_SByte_Int16 {
+    public partial class WidenBenchmark_Int32 : AbstractSharedBenchmark_Int32_Int64 {
 
         // -- var --
 

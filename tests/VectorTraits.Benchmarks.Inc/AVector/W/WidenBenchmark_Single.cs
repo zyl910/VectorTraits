@@ -19,16 +19,16 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = SByte;
-    using TMyOut = Int16;
+    using TMy = Single;
+    using TMyOut = Double;
 
     /// <summary>
-    /// Widen benchmark - SByte.
+    /// Widen benchmark - Single.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class WidenBenchmark_SByte : AbstractSharedBenchmark_SByte_Int16 {
+    public partial class WidenBenchmark_Single : AbstractSharedBenchmark_Single_Double {
 
         // -- var --
 
@@ -256,6 +256,53 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
             dstTMy = StaticSumWidenVector128_Arm(srcArray, srcArray.Length);
             CheckResult("SumWidenVector128_Arm");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector128 - Arm 64bit.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVector128_ArmB64(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector result.
+            Vector128<TMyOut> vrt1 = Vector128<TMyOut>.Zero;
+            Vector128<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    WVectorTraits128AdvSimdB64.Statics.Widen(*(Vector128<TMy>*)p, out lower, out upper);
+                    vrt = WVectorTraits128AdvSimdB64.Statics.Add(vrt, lower);
+                    vrt1 = WVectorTraits128AdvSimdB64.Statics.Add(vrt1, upper);
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt = WVectorTraits128AdvSimdB64.Statics.Add(vrt, vrt1);
+            for (i = 0; i < Vector128<TMyOut>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVector128_ArmB64() {
+            WVectorTraits128AdvSimdB64.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumWidenVector128_ArmB64(srcArray, srcArray.Length);
+            CheckResult("SumWidenVector128_ArmB64");
         }
 
 #endif // NET5_0_OR_GREATER
