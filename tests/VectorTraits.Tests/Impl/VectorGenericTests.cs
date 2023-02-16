@@ -9,8 +9,6 @@ namespace Zyl.VectorTraits.Tests.Impl {
     [TestFixture()]
     public class VectorGenericTests {
 
-#if NETCOREAPP3_0_OR_GREATER
-
         [TestCase((float)1, (double)1)]
         [TestCase((sbyte)3, (short)1)]
         [TestCase((byte)4, (ushort)1)]
@@ -37,6 +35,5 @@ namespace Zyl.VectorTraits.Tests.Impl {
 #pragma warning restore CS0618 // Type or member is obsolete
         }
 
-#endif // NETCOREAPP3_0_OR_GREATER
     }
 }

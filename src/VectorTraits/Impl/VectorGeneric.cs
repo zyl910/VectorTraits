@@ -11,8 +11,6 @@ namespace Zyl.VectorTraits.Impl {
     /// </summary>
     public static class VectorGeneric {
 
-#if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-
         /// <inheritdoc cref="Vectors.Widen(Vector{float}, out Vector{double}, out Vector{double})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<double> Lower, Vector<double> Upper) Widen(Vector<float> source) {
@@ -103,6 +101,5 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
-#endif // NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     }
 }
