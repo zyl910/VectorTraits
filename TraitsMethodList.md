@@ -7,6 +7,8 @@ Types: Vector, Vector128, Vector256 .
   Mnemonic: `rt[i] := ceiling(value[i])` .
 - `Floor`: Computes the floor of each element in a vector (计算向量中每个元素的向下舍入).
   Mnemonic: `rt[i] := floor(value[i])` .
+- `Narrow`: Narrows two Vector instances into one Vector  (将两个 Vector 实例缩窄为一个 Vector ).
+  Mnemonic: `rt[i] := narrow(element_ref(i, lower, upper))`.
 - `ShiftLeft`: Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
   Mnemonic: `rt[i] := value[i] << shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
 - `ShiftLeftFast`: Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check `shiftAmount`, please use `Scalars.LimitShiftCount` first.
@@ -19,7 +21,7 @@ Types: Vector, Vector128, Vector256 .
   Mnemonic: `rt[i] := value[i] >>> shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
 - `ShiftRightLogicalFast`: Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check `shiftAmount`, please use `Scalars.LimitShiftCount` first, and shiftAmount must not be 0 .
   Mnemonic: `rt[i] := value[i] >>> shiftAmount`.
-- `Widen`: Widens a Vector256<T> into two Vector256<T> instances (将一个 Vector256<T> 扩宽为两个 Vector256<T> 实例).
+- `Widen`: Widens a Vector into two Vector instances (将一个 Vector 扩宽为两个 Vector 实例).
   Mnemonic: `element_ref(i, lower, upper) := widen(source[i])`.
 
 - `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).

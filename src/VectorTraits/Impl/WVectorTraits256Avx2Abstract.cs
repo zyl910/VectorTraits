@@ -630,6 +630,60 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.Narrow_AcceleratedTypes"/>
+        public override TypeCodeFlags Narrow_AcceleratedTypes {
+            get {
+                return Statics.Narrow_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{double}, Vector256{double})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<float> Narrow(Vector256<double> lower, Vector256<double> upper) {
+            return Statics.Narrow(lower, upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{short}, Vector256{short})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> Narrow(Vector256<short> lower, Vector256<short> upper) {
+            return Statics.Narrow(lower, upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{ushort}, Vector256{ushort})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<byte> Narrow(Vector256<ushort> lower, Vector256<ushort> upper) {
+            return Statics.Narrow(lower, upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{int}, Vector256{int})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> Narrow(Vector256<int> lower, Vector256<int> upper) {
+            return Statics.Narrow(lower, upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{uint}, Vector256{uint})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ushort> Narrow(Vector256<uint> lower, Vector256<uint> upper) {
+            return Statics.Narrow(lower, upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{long}, Vector256{long})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> Narrow(Vector256<long> lower, Vector256<long> upper) {
+            return Statics.Narrow(lower, upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{ulong}, Vector256{ulong})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<uint> Narrow(Vector256<ulong> lower, Vector256<ulong> upper) {
+            return Statics.Narrow(lower, upper);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.Negate_AcceleratedTypes"/>
         public override TypeCodeFlags Negate_AcceleratedTypes {
             get {

@@ -117,6 +117,80 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.Narrow_AcceleratedTypes"/>
+            public static TypeCodeFlags Narrow_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{double}, Vector256{double})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> Narrow(Vector256<double> lower, Vector256<double> upper) {
+                return Vector256.Create(Avx.ConvertToVector128Single(lower), Avx.ConvertToVector128Single(upper));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{short}, Vector256{short})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> Narrow(Vector256<short> lower, Vector256<short> upper) {
+                return Narrow(lower.AsUInt16(), upper.AsUInt16()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{ushort}, Vector256{ushort})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> Narrow(Vector256<ushort> lower, Vector256<ushort> upper) {
+                // Vector256<ushort> mask = Vector256.Create((ushort)0x0FFU);
+                Vector256<ushort> mask = Vector256s<ushort>.VMaxByte;
+                Vector256<byte> raw = Avx2.PackUnsignedSaturate(Avx2.And(lower, mask).AsInt16(), Avx2.And(upper, mask).AsInt16()); // bit64(x, z, y, w)
+                Vector256<byte> rt = Avx2.Permute4x64(raw.AsUInt64(), ShuffleControlG4.XZYW).AsByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{int}, Vector256{int})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> Narrow(Vector256<int> lower, Vector256<int> upper) {
+                return Narrow(lower.AsUInt32(), upper.AsUInt32()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{uint}, Vector256{uint})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> Narrow(Vector256<uint> lower, Vector256<uint> upper) {
+                // Vector256<uint> mask = Vector256.Create((uint)0x0FFFFU);
+                Vector256<uint> mask = Vector256s<uint>.VMaxUInt16;
+                Vector256<ushort> raw = Avx2.PackUnsignedSaturate(Avx2.And(lower, mask).AsInt32(), Avx2.And(upper, mask).AsInt32()); // bit64(x, z, y, w)
+                Vector256<ushort> rt = Avx2.Permute4x64(raw.AsUInt64(), ShuffleControlG4.XZYW).AsUInt16(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{long}, Vector256{long})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> Narrow(Vector256<long> lower, Vector256<long> upper) {
+                return Narrow(lower.AsUInt64(), upper.AsUInt64()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{ulong}, Vector256{ulong})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> Narrow(Vector256<ulong> lower, Vector256<ulong> upper) {
+                //  vmovupd     ymm0,ymmword ptr [rbp-2B70h]  
+                //  vpunpckldq  ymm0,ymm0,ymmword ptr [rbp-2B90h]  
+                //  vmovupd     ymm1,ymmword ptr [rbp-2B70h]  
+                //  vpunpckhdq  ymm1,ymm1,ymmword ptr [rbp-2B90h]  
+                //  vpunpckldq  ymm0,ymm0,ymm1  
+                //  vpermq      ymm0,ymm0,0D8h  
+                //  vmovupd     ymmword ptr [rbp-2BB0h],ymm0
+                Vector256<uint> l = Avx2.UnpackLow(lower.AsUInt32(), upper.AsUInt32()); // bit32(a0.L, b0.L, a0.H, b0.H, a2.L, b2.L, a2.H, b2.H)
+                Vector256<uint> h = Avx2.UnpackHigh(lower.AsUInt32(), upper.AsUInt32()); // bit32(a1.L, b1.L, a1.H, b1.H, a3.L, b3.L, a3.H, b3.H)
+                Vector256<uint> raw = Avx2.UnpackLow(l, h); // bit32(a0.L, a1.L, b0.L, b1.L, a2.L, a3.L, b2.L, b3.L). Need Permute4x64 to swap `b0.L, b1.L` and `a2.L, a3.L`.
+                Vector256<uint> rt = Avx2.Permute4x64(raw.AsUInt64(), ShuffleControlG4.XZYW).AsUInt32(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {

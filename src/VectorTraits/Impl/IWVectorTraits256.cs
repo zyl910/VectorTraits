@@ -970,6 +970,90 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Narrow</c> (运行 <c>Narrow</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Narrow"/>
+        TypeCodeFlags Narrow_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Narrows two <seealso cref="Vector256{T}"/> instances into one <seealso cref="Vector256{T}"/>"  (将两个 <seealso cref="Vector256{T}"/> 实例缩窄为一个 <seealso cref="Vector256{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow(element_ref(i, lower, upper))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector256{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Narrow(Vector256{double}, Vector256{double})" />
+        Vector256<float> Narrow(Vector256<double> lower, Vector256<double> upper);
+
+        /// <summary>
+        /// Narrows two <seealso cref="Vector256{T}"/> instances into one <seealso cref="Vector256{T}"/>"  (将两个 <seealso cref="Vector256{T}"/> 实例缩窄为一个 <seealso cref="Vector256{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow(element_ref(i, lower, upper))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector256{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Narrow(Vector256{short}, Vector256{short})" />
+        Vector256<sbyte> Narrow(Vector256<short> lower, Vector256<short> upper);
+
+        /// <summary>
+        /// Narrows two <seealso cref="Vector256{T}"/> instances into one <seealso cref="Vector256{T}"/>"  (将两个 <seealso cref="Vector256{T}"/> 实例缩窄为一个 <seealso cref="Vector256{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow(element_ref(i, lower, upper))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector256{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Narrow(Vector256{ushort}, Vector256{ushort})" />
+        Vector256<byte> Narrow(Vector256<ushort> lower, Vector256<ushort> upper);
+
+        /// <summary>
+        /// Narrows two <seealso cref="Vector256{T}"/> instances into one <seealso cref="Vector256{T}"/>"  (将两个 <seealso cref="Vector256{T}"/> 实例缩窄为一个 <seealso cref="Vector256{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow(element_ref(i, lower, upper))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector256{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Narrow(Vector256{int}, Vector256{int})" />
+        Vector256<short> Narrow(Vector256<int> lower, Vector256<int> upper);
+
+        /// <summary>
+        /// Narrows two <seealso cref="Vector256{T}"/> instances into one <seealso cref="Vector256{T}"/>"  (将两个 <seealso cref="Vector256{T}"/> 实例缩窄为一个 <seealso cref="Vector256{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow(element_ref(i, lower, upper))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector256{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Narrow(Vector256{uint}, Vector256{uint})" />
+        Vector256<ushort> Narrow(Vector256<uint> lower, Vector256<uint> upper);
+
+        /// <summary>
+        /// Narrows two <seealso cref="Vector256{T}"/> instances into one <seealso cref="Vector256{T}"/>"  (将两个 <seealso cref="Vector256{T}"/> 实例缩窄为一个 <seealso cref="Vector256{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow(element_ref(i, lower, upper))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector256{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Narrow(Vector256{long}, Vector256{long})" />
+        Vector256<int> Narrow(Vector256<long> lower, Vector256<long> upper);
+
+        /// <summary>
+        /// Narrows two <seealso cref="Vector256{T}"/> instances into one <seealso cref="Vector256{T}"/>"  (将两个 <seealso cref="Vector256{T}"/> 实例缩窄为一个 <seealso cref="Vector256{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow(element_ref(i, lower, upper))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector256{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Narrow(Vector256{ulong}, Vector256{ulong})" />
+        Vector256<uint> Narrow(Vector256<ulong> lower, Vector256<ulong> upper);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Negate</c> (运行 <c>Negate</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Negate"/>
