@@ -1543,7 +1543,7 @@ namespace Zyl.VectorTraits.Impl {
 #if UNSAFE
                 Widen_Base_Ptr(source, out lower, out upper);
 #else
-                Widen_Base_Ref(source, out lower, out upper);
+                Widen_Base_RefInc(source, out lower, out upper);
 #endif // UNSAFE
             }
 
@@ -1581,6 +1581,29 @@ namespace Zyl.VectorTraits.Impl {
                 for (int i = 0; i < cntOut; ++i) {
                     Unsafe.Add(ref plower, i) = Unsafe.Add(ref p, i);
                     Unsafe.Add(ref pupper, i) = Unsafe.Add(ref p, i + cntOut);
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen_Base_RefInc(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
+                int cntOut = Vector<long>.Count;
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out lower);
+                Unsafe.SkipInit(out upper);
+#else
+                lower = default;
+                upper = default;
+#endif // NET5_0_OR_GREATER
+                ref int p = ref Unsafe.As<Vector<int>, int>(ref source);
+                ref long plower = ref Unsafe.As<Vector<long>, long>(ref lower);
+                ref long pupper = ref Unsafe.As<Vector<long>, long>(ref upper);
+                for (int i = 0; i < cntOut; ++i) {
+                    plower = p;
+                    pupper = Unsafe.Add(ref p, cntOut);
+                    p = ref Unsafe.Add(ref p, 1);
+                    plower = ref Unsafe.Add(ref plower, 1);
+                    pupper = ref Unsafe.Add(ref pupper, 1);
                 }
             }
 
