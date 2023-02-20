@@ -1670,7 +1670,18 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe void Widen_Base(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
+            public static void Widen_Base(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
+#if UNSAFE
+                Widen_Base_Ptr(source, out lower, out upper);
+#else
+                Widen_Base_Ref(source, out lower, out upper);
+#endif // UNSAFE
+            }
+
+#if UNSAFE
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe void Widen_Base_Ptr(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
                 int* p = (int*)&source;
                 fixed (void* plower0 = &lower, pupper0 = &upper) {
                     long* plower = (long*)plower0;
@@ -1684,6 +1695,30 @@ namespace Zyl.VectorTraits.Impl {
                     pupper[2] = p[6];
                     pupper[3] = p[7];
                 }
+            }
+#endif // UNSAFE
+
+            /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen_Base_Ref(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
+#if NET5_0_OR_GREATER
+                Unsafe.SkipInit(out lower);
+                Unsafe.SkipInit(out upper);
+#else
+                lower = default;
+                upper = default;
+#endif // NET5_0_OR_GREATER
+                ref int p = ref Unsafe.As<Vector<int>, int>(ref source);
+                ref long plower = ref Unsafe.As<Vector<long>, long>(ref lower);
+                ref long pupper = ref Unsafe.As<Vector<long>, long>(ref upper);
+                plower = p;
+                Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref plower, 2) = Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref plower, 3) = Unsafe.Add(ref p, 3);
+                pupper = Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref pupper, 2) = Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref pupper, 3) = Unsafe.Add(ref p, 7);
             }
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{uint}, out Vector{ulong}, out Vector{ulong})"/>

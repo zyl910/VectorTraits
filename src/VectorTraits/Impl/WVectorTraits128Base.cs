@@ -1234,6 +1234,7 @@ namespace Zyl.VectorTraits.Impl {
 #endif // UNSAFE
             }
 
+#if UNSAFE
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{int}, out Vector128{long}, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe void Widen_Base_Ptr(Vector128<int> source, out Vector128<long> lower, out Vector128<long> upper) {
@@ -1247,6 +1248,7 @@ namespace Zyl.VectorTraits.Impl {
                     pupper[1] = p[3];
                 }
             }
+#endif // UNSAFE
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{int}, out Vector128{long}, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
