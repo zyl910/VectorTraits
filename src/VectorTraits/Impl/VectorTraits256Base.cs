@@ -1674,7 +1674,7 @@ namespace Zyl.VectorTraits.Impl {
 #if UNSAFE
                 Widen_Base_Ptr(source, out lower, out upper);
 #else
-                Widen_Base_RefInc2(source, out lower, out upper);
+                Widen_Base_Ref(source, out lower, out upper);
 #endif // UNSAFE
             }
 

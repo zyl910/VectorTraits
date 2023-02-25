@@ -7,6 +7,7 @@ using System.Runtime.Intrinsics;
 
 namespace Zyl.VectorTraits.Impl {
     using WStatics = WVectorTraits128AdvSimdB64.Statics;
+    using BaseStatics = VectorTraits128Base.Statics;
 
     /// <summary>
     /// <see cref="Vector{T}"/> traits 128 - AdvSimd 64bit .
@@ -93,16 +94,24 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.Widen_AcceleratedTypes"/>
             public static TypeCodeFlags Widen_AcceleratedTypes {
                 get {
+#if BCL_OVERRIDE_BASE_FIXED && !NET7_0_OR_GREATER // Prior to 7.0, the ARM version of the function was not as good as the system library.
+                    return BaseStatics.Widen_AcceleratedTypes;
+#else
                     return WStatics.Widen_AcceleratedTypes;
+#endif // BCL_OVERRIDE_BASE_FIXED && !NET7_0_OR_GREATER
                 }
             }
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{float}, out Vector{double}, out Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector<float> source, out Vector<double> lower, out Vector<double> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && !NET7_0_OR_GREATER
+                Vector.Widen(source, out lower, out upper);
+#else
                 WStatics.Widen(source.AsVector128(), out var a, out var b);
                 lower = a.AsVector();
                 upper = b.AsVector();
+#endif // BCL_OVERRIDE_BASE_FIXED && !NET7_0_OR_GREATER
             }
 
 
