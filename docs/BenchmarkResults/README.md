@@ -21,6 +21,12 @@ unzip Release.zip
 
 Run (运行):
 ```
+cd ~/Documents/VectorTraits/benchmarks
+dotnet netcoreapp3.1/VectorTraits.Benchmarks.dll
+dotnet net5.0/VectorTraits.Benchmarks.dll
+dotnet net6.0/VectorTraits.Benchmarks.dll
+dotnet net7.0/VectorTraits.Benchmarks.dll
+
 cd ~/Documents/VectorTraits/benchmarks/net7.0
 dotnet VectorTraits.Benchmarks.dll >1.txt
 dotnet VectorTraits.Benchmarks.NetCore.dll >1.txt

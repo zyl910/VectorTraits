@@ -152,6 +152,236 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         }
 
         /// <summary>
+        /// Sum Widen - Vector - base - Base_NPtr .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase_NPtr(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraitsBase.Statics.Widen_Base_NPtr(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase_NPtr() {
+            dstTMy = StaticSumWidenVectorBase_NPtr(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase_NPtr");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector - base - Base_NRef .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase_NRef(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraitsBase.Statics.Widen_Base_NRef(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase_NRef() {
+            dstTMy = StaticSumWidenVectorBase_NRef(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase_NRef");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector - base - Base_NRef2 .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase_NRef2(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraitsBase.Statics.Widen_Base_NRef2(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase_NRef2() {
+            dstTMy = StaticSumWidenVectorBase_NRef2(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase_NRef2");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector - base - Base_NRefInc .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase_NRefInc(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraitsBase.Statics.Widen_Base_NRefInc(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase_NRefInc() {
+            dstTMy = StaticSumWidenVectorBase_NRefInc(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase_NRefInc");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector - base - Base_NRefInc2 .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase_NRefInc2(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraitsBase.Statics.Widen_Base_NRefInc2(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase_NRefInc2() {
+            dstTMy = StaticSumWidenVectorBase_NRefInc2(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase_NRefInc2");
+        }
+
+        /// <summary>
         /// Sum Widen - Vector - base - Base_Ptr .
         /// </summary>
         /// <param name="src">Source array.</param>
@@ -241,6 +471,52 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         public void SumWidenVectorBase_Ref() {
             dstTMy = StaticSumWidenVectorBase_Ref(srcArray, srcArray.Length);
             CheckResult("SumWidenVectorBase_Ref");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector - base - Base_Ref2 .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase_Ref2(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraitsBase.Statics.Widen_Base_Ref2(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase_Ref2() {
+            dstTMy = StaticSumWidenVectorBase_Ref2(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase_Ref2");
         }
 
         /// <summary>
@@ -384,6 +660,241 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         }
 
         /// <summary>
+        /// Sum Widen - Vector - base - Base128_Ref2 .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase128_Ref2(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraits128Base.Statics.Widen_Base_Ref2(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase128_Ref2() {
+            VectorTraits128Base.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumWidenVectorBase128_Ref2(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase128_Ref2");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector - base - Base128_RefI .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase128_RefI(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraits128Base.Statics.Widen_Base_RefI(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase128_RefI() {
+            VectorTraits128Base.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumWidenVectorBase128_RefI(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase128_RefI");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector - base - Base128_RefI2 .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase128_RefI2(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraits128Base.Statics.Widen_Base_RefI2(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase128_RefI2() {
+            VectorTraits128Base.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumWidenVectorBase128_RefI2(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase128_RefI2");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector - base - Base128_RefInc .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase128_RefInc(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraits128Base.Statics.Widen_Base_RefInc(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase128_RefInc() {
+            VectorTraits128Base.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumWidenVectorBase128_RefInc(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase128_RefInc");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector - base - Base128_RefInc2 .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase128_RefInc2(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraits128Base.Statics.Widen_Base_RefInc2(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase128_RefInc2() {
+            VectorTraits128Base.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumWidenVectorBase128_RefInc2(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase128_RefInc2");
+        }
+
+        /// <summary>
         /// Sum Widen - Vector - base - Base256_Ptr .
         /// </summary>
         /// <param name="src">Source array.</param>
@@ -475,6 +986,241 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             VectorTraits256Base.Statics.ThrowForUnsupported(true);
             dstTMy = StaticSumWidenVectorBase256_Ref(srcArray, srcArray.Length);
             CheckResult("SumWidenVectorBase256_Ref");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector - base - Base256_Ref2 .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase256_Ref2(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraits256Base.Statics.Widen_Base_Ref2(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase256_Ref2() {
+            VectorTraits256Base.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumWidenVectorBase256_Ref2(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase256_Ref2");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector - base - Base256_RefI .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase256_RefI(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraits256Base.Statics.Widen_Base_RefI(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase256_RefI() {
+            VectorTraits256Base.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumWidenVectorBase256_RefI(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase256_RefI");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector - base - Base256_RefI2 .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase256_RefI2(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraits256Base.Statics.Widen_Base_RefI2(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase256_RefI2() {
+            VectorTraits256Base.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumWidenVectorBase256_RefI2(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase256_RefI2");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector - base - Base256_RefInc .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase256_RefInc(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraits256Base.Statics.Widen_Base_RefInc(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase256_RefInc() {
+            VectorTraits256Base.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumWidenVectorBase256_RefInc(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase256_RefInc");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector - base - Base256_RefInc2 .
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorBase256_RefInc2(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    VectorTraits256Base.Statics.Widen_Base_RefInc2(*(Vector<TMy>*)p, out lower, out upper);
+                    vrt += lower;
+                    vrt1 += upper;
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMyOut)p[i];
+                }
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorBase256_RefInc2() {
+            VectorTraits256Base.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumWidenVectorBase256_RefInc2(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorBase256_RefInc2");
         }
 
 #endif // BENCHMARKS_RAW

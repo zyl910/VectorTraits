@@ -38,17 +38,33 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumWidenScalar	-829396443174
-SumWidenScalar	162.457	1613.621
-SumWidenBcl	47.854	5477.952	3.394820
-SumWidenVectorBase	48.302	5427.145	3.363334
-SumWidenVectorBase_Ptr	321.066	816.480	0.505992
-SumWidenVectorBase_Ref	349.322	750.436	0.465063
-SumWidenVectorBase_RefInc	312.565	838.685	0.519754
+SumWidenScalar	147.504	1777.196
+SumWidenBcl	54.406	4818.288	2.711174
+SumWidenVectorBase	46.795	5601.928	3.152116
+SumWidenVectorBase_NPtr	325.292	805.873	0.453452
+SumWidenVectorBase_NRef	326.301	803.382	0.452050
+SumWidenVectorBase_NRef2	337.026	777.815	0.437664
+SumWidenVectorBase_NRefInc	324.192	808.608	0.454991
+SumWidenVectorBase_NRefInc2	328.860	797.130	0.448532
+SumWidenVectorBase_Ptr	330.110	794.110	0.446833
+SumWidenVectorBase_Ref	383.858	682.918	0.384267
+SumWidenVectorBase_Ref2	353.450	741.672	0.417327
+SumWidenVectorBase_RefInc	318.892	822.046	0.462552
 SumWidenVectorBase128_Ptr	Run fail! Vector byte size mismatch(32!=16) !
 SumWidenVectorBase128_Ref	Run fail! Vector byte size mismatch(32!=16) !
-SumWidenVectorBase256_Ptr	310.424	844.472	0.523340
-SumWidenVectorBase256_Ref	295.260	887.841	0.550217
-SumWidenVectorTraits	48.757	5376.507	3.331952
+SumWidenVectorBase128_Ref2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase256_Ptr	314.792	832.754	0.468577
+SumWidenVectorBase256_Ref	321.693	814.888	0.458525
+SumWidenVectorBase256_Ref2	326.238	803.537	0.452137
+SumWidenVectorBase256_RefI	320.946	816.786	0.459593
+SumWidenVectorBase256_RefI2	317.313	826.136	0.464853
+SumWidenVectorBase256_RefInc	324.776	807.153	0.454172
+SumWidenVectorBase256_RefInc2	318.563	822.897	0.463031
+SumWidenVectorTraits	46.599	5625.500	3.165379
 
 [WidenBenchmark_SByte(262144)]
 ---
@@ -108,17 +124,33 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumWidenScalar	-829396443174
-SumWidenScalar	157.953	1659.633
-SumWidenBcl	47.069	5569.393	3.355797
-SumWidenVectorBase	46.865	5593.621	3.370395
-SumWidenVectorBase_Ptr	326.446	803.025	0.483857
-SumWidenVectorBase_Ref	352.857	742.919	0.447640
-SumWidenVectorBase_RefInc	315.556	830.736	0.500554
+SumWidenScalar	147.376	1778.744
+SumWidenBcl	46.581	5627.688	3.163854
+SumWidenVectorBase	46.980	5579.964	3.137024
+SumWidenVectorBase_NPtr	318.255	823.691	0.463074
+SumWidenVectorBase_NRef	327.349	800.810	0.450211
+SumWidenVectorBase_NRef2	340.290	770.354	0.433088
+SumWidenVectorBase_NRefInc	315.648	830.495	0.466900
+SumWidenVectorBase_NRefInc2	325.636	805.022	0.452579
+SumWidenVectorBase_Ptr	327.602	800.190	0.449862
+SumWidenVectorBase_Ref	352.849	742.935	0.417674
+SumWidenVectorBase_Ref2	342.265	765.910	0.430590
+SumWidenVectorBase_RefInc	315.778	830.153	0.466708
 SumWidenVectorBase128_Ptr	Run fail! Vector byte size mismatch(32!=16) !
 SumWidenVectorBase128_Ref	Run fail! Vector byte size mismatch(32!=16) !
-SumWidenVectorBase256_Ptr	308.540	849.627	0.511936
-SumWidenVectorBase256_Ref	307.911	851.364	0.512983
-SumWidenVectorTraits	46.925	5586.443	3.366070
+SumWidenVectorBase128_Ref2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase256_Ptr	308.190	850.592	0.478198
+SumWidenVectorBase256_Ref	307.841	851.557	0.478741
+SumWidenVectorBase256_Ref2	307.272	853.132	0.479626
+SumWidenVectorBase256_RefI	308.674	849.259	0.477448
+SumWidenVectorBase256_RefI2	309.569	846.802	0.476067
+SumWidenVectorBase256_RefInc	309.506	846.976	0.476165
+SumWidenVectorBase256_RefInc2	309.693	846.464	0.475877
+SumWidenVectorTraits	46.771	5604.880	3.151032
 
 [WidenBenchmark_SByte(262144)]
 ---
@@ -178,19 +210,35 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumWidenScalar	-829396443174
-SumWidenScalar	138.863	1887.783
-SumWidenBcl	46.906	5588.654	2.960432
-SumWidenVectorBase	46.786	5603.044	2.968055
-SumWidenVectorBase_Ptr	334.213	784.363	0.415494
-SumWidenVectorBase_Ref	343.795	762.501	0.403914
-SumWidenVectorBase_RefInc	305.971	856.760	0.453845
+SumWidenScalar	160.505	1633.245
+SumWidenBcl	47.306	5541.438	3.392900
+SumWidenVectorBase	48.687	5384.220	3.296639
+SumWidenVectorBase_NPtr	311.429	841.745	0.515382
+SumWidenVectorBase_NRef	318.097	824.100	0.504578
+SumWidenVectorBase_NRef2	326.559	802.747	0.491504
+SumWidenVectorBase_NRefInc	308.446	849.887	0.520367
+SumWidenVectorBase_NRefInc2	326.551	802.765	0.491516
+SumWidenVectorBase_Ptr	357.446	733.382	0.449033
+SumWidenVectorBase_Ref	344.332	761.312	0.466135
+SumWidenVectorBase_Ref2	337.054	777.752	0.476200
+SumWidenVectorBase_RefInc	464.006	564.959	0.345912
 SumWidenVectorBase128_Ptr	Run fail! Vector byte size mismatch(32!=16) !
 SumWidenVectorBase128_Ref	Run fail! Vector byte size mismatch(32!=16) !
-SumWidenVectorBase256_Ptr	301.362	869.865	0.460786
-SumWidenVectorBase256_Ref	288.783	907.756	0.480858
-SumWidenVectorTraits	35.304	7425.424	3.933410
-SumWidenVector128Traits	1172.696	223.540	0.118414
-SumWidenVector256Traits	34.952	7500.172	3.973005
+SumWidenVectorBase128_Ref2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase256_Ptr	302.174	867.526	0.531167
+SumWidenVectorBase256_Ref	288.445	908.817	0.556449
+SumWidenVectorBase256_Ref2	288.111	909.871	0.557094
+SumWidenVectorBase256_RefI	289.827	904.485	0.553796
+SumWidenVectorBase256_RefI2	290.131	903.536	0.553215
+SumWidenVectorBase256_RefInc	291.563	899.100	0.550499
+SumWidenVectorBase256_RefInc2	299.102	876.436	0.536623
+SumWidenVectorTraits	35.569	7370.098	4.512549
+SumWidenVector128Traits	1176.089	222.895	0.136474
+SumWidenVector256Traits	36.081	7265.459	4.448480
 
 [WidenBenchmark_SByte(262144)]
 ---
@@ -254,20 +302,36 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumWidenScalar	-829396443174
-SumWidenScalar	158.007	1659.071
-SumWidenBcl	47.063	5570.024	3.357315
-SumWidenVectorBase	46.717	5611.336	3.382216
-SumWidenVectorBase_Ptr	322.695	812.357	0.489646
-SumWidenVectorBase_Ref	352.710	743.229	0.447979
-SumWidenVectorBase_RefInc	325.888	804.398	0.484849
+SumWidenScalar	159.077	1647.902
+SumWidenBcl	46.574	5628.493	3.415551
+SumWidenVectorBase	47.032	5573.746	3.382329
+SumWidenVectorBase_NPtr	327.502	800.435	0.485730
+SumWidenVectorBase_NRef	322.268	813.434	0.493618
+SumWidenVectorBase_NRef2	331.159	791.595	0.480365
+SumWidenVectorBase_NRefInc	303.943	862.476	0.523378
+SumWidenVectorBase_NRefInc2	314.489	833.557	0.505829
+SumWidenVectorBase_Ptr	324.940	806.747	0.489560
+SumWidenVectorBase_Ref	347.480	754.415	0.457803
+SumWidenVectorBase_Ref2	336.589	778.824	0.472616
+SumWidenVectorBase_RefInc	302.826	865.659	0.525310
 SumWidenVectorBase128_Ptr	Run fail! Vector byte size mismatch(32!=16) !
 SumWidenVectorBase128_Ref	Run fail! Vector byte size mismatch(32!=16) !
-SumWidenVectorBase256_Ptr	312.081	839.987	0.506300
-SumWidenVectorBase256_Ref	264.901	989.592	0.596474
-SumWidenVectorTraits	36.757	7131.718	4.298622
+SumWidenVectorBase128_Ref2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase256_Ptr	319.371	820.813	0.498096
+SumWidenVectorBase256_Ref	274.715	954.241	0.579065
+SumWidenVectorBase256_Ref2	274.735	954.170	0.579021
+SumWidenVectorBase256_RefI	285.291	918.864	0.557597
+SumWidenVectorBase256_RefI2	284.023	922.968	0.560087
+SumWidenVectorBase256_RefInc	287.396	912.136	0.553514
+SumWidenVectorBase256_RefInc2	296.243	884.895	0.536983
+SumWidenVectorTraits	36.021	7277.587	4.416275
 SumWidenVector128_Arm	Run fail! Requires hardware support AdvSimd!
-SumWidenVector128Traits	1157.925	226.391	0.136457
-SumWidenVector256Traits	36.152	7251.135	4.370600
+SumWidenVector128Traits	1172.317	223.612	0.135695
+SumWidenVector256Traits	35.849	7312.473	4.437445
 
 [WidenBenchmark_SByte(262144)]
 ---
@@ -334,20 +398,36 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumWidenScalar	-829396443174
-SumWidenScalar	139.909	1873.675
-SumWidenBcl	47.282	5544.270	2.959036
-SumWidenVectorBase	47.437	5526.156	2.949368
-SumWidenVectorBase_Ptr	319.417	820.696	0.438014
-SumWidenVectorBase_Ref	350.267	748.412	0.399435
-SumWidenVectorBase_RefInc	303.800	862.883	0.460530
+SumWidenScalar	141.739	1849.481
+SumWidenBcl	48.435	5412.270	2.926372
+SumWidenVectorBase	46.722	5610.768	3.033698
+SumWidenVectorBase_NPtr	314.922	832.408	0.450077
+SumWidenVectorBase_NRef	315.841	829.987	0.448767
+SumWidenVectorBase_NRef2	322.495	812.861	0.439508
+SumWidenVectorBase_NRefInc	300.356	872.777	0.471904
+SumWidenVectorBase_NRefInc2	313.016	837.479	0.452818
+SumWidenVectorBase_Ptr	321.432	815.550	0.440962
+SumWidenVectorBase_Ref	340.874	769.036	0.415812
+SumWidenVectorBase_Ref2	330.195	793.908	0.429260
+SumWidenVectorBase_RefInc	300.926	871.124	0.471010
 SumWidenVectorBase128_Ptr	Run fail! Vector byte size mismatch(32!=16) !
 SumWidenVectorBase128_Ref	Run fail! Vector byte size mismatch(32!=16) !
-SumWidenVectorBase256_Ptr	309.527	846.918	0.452009
-SumWidenVectorBase256_Ref	263.377	995.319	0.531212
-SumWidenVectorTraits	38.865	6744.970	3.599862
+SumWidenVectorBase128_Ref2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase256_Ptr	311.470	841.634	0.455065
+SumWidenVectorBase256_Ref	263.793	993.749	0.537312
+SumWidenVectorBase256_Ref2	274.270	955.789	0.516788
+SumWidenVectorBase256_RefI	275.070	953.008	0.515284
+SumWidenVectorBase256_RefI2	280.496	934.574	0.505317
+SumWidenVectorBase256_RefInc	283.679	924.088	0.499647
+SumWidenVectorBase256_RefInc2	291.251	900.061	0.486656
+SumWidenVectorTraits	35.176	7452.360	4.029433
 SumWidenVector128_Arm	Run fail! Requires hardware support AdvSimd!
-SumWidenVector128Traits	1177.094	222.704	0.118860
-SumWidenVector256Traits	37.940	6909.381	3.687609
+SumWidenVector128Traits	1151.439	227.666	0.123097
+SumWidenVector256Traits	34.798	7533.270	4.073180
 
 [WidenBenchmark_SByte(262144)]
 ---
@@ -414,20 +494,36 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumWidenScalar	-829396443174
-SumWidenScalar	124.526	2105.130
-SumWidenBcl	32.404	8089.955	3.842971
-SumWidenVectorBase	32.415	8087.170	3.841649
-SumWidenVectorBase_Ptr	311.868	840.561	0.399292
-SumWidenVectorBase_Ref	311.079	842.694	0.400305
-SumWidenVectorBase_RefInc	308.999	848.365	0.402999
+SumWidenScalar	157.789	1661.361
+SumWidenBcl	33.383	7852.721	4.726680
+SumWidenVectorBase	32.639	8031.714	4.834419
+SumWidenVectorBase_NPtr	283.126	925.892	0.557309
+SumWidenVectorBase_NRef	283.318	925.265	0.556932
+SumWidenVectorBase_NRef2	284.098	922.723	0.555402
+SumWidenVectorBase_NRefInc	300.528	872.279	0.525039
+SumWidenVectorBase_NRefInc2	311.300	842.096	0.506871
+SumWidenVectorBase_Ptr	309.704	846.433	0.509482
+SumWidenVectorBase_Ref	307.958	851.233	0.512371
+SumWidenVectorBase_Ref2	294.323	890.667	0.536107
+SumWidenVectorBase_RefInc	304.062	862.140	0.518936
 SumWidenVectorBase128_Ptr	Run fail! Vector byte size mismatch(32!=16) !
 SumWidenVectorBase128_Ref	Run fail! Vector byte size mismatch(32!=16) !
-SumWidenVectorBase256_Ptr	273.757	957.580	0.454879
-SumWidenVectorBase256_Ref	273.624	958.043	0.455099
-SumWidenVectorTraits	32.799	7992.493	3.796674
+SumWidenVectorBase128_Ref2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase256_Ptr	264.609	990.685	0.596309
+SumWidenVectorBase256_Ref	261.861	1001.080	0.602566
+SumWidenVectorBase256_Ref2	273.175	959.621	0.577611
+SumWidenVectorBase256_RefI	273.761	957.567	0.576375
+SumWidenVectorBase256_RefI2	279.594	937.587	0.564349
+SumWidenVectorBase256_RefInc	283.097	925.988	0.557367
+SumWidenVectorBase256_RefInc2	288.981	907.133	0.546018
+SumWidenVectorTraits	32.426	8084.349	4.866100
 SumWidenVector128_Arm	Run fail! Requires hardware support AdvSimd!
-SumWidenVector128Traits	59.205	4427.740	2.103310
-SumWidenVector256Traits	32.655	8027.705	3.813401
+SumWidenVector128Traits	59.420	4411.713	2.655481
+SumWidenVector256Traits	32.707	8014.970	4.824340
 
 [WidenBenchmark_SByte(262144)]
 ---
@@ -499,19 +595,35 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumWidenScalar	-829396443174
-SumWidenScalar	351.406	745.986
-SumWidenBcl	74.676	3510.415	4.705737
-SumWidenVectorBase	74.524	3517.587	4.715352
-SumWidenVectorBase_Ptr	533.601	491.273	0.658555
-SumWidenVectorBase_Ref	491.941	532.877	0.714326
-SumWidenVectorBase_RefInc	504.002	520.125	0.697232
-SumWidenVectorBase128_Ptr	536.099	488.984	0.655487
-SumWidenVectorBase128_Ref	504.167	519.955	0.697003
+SumWidenScalar	351.338	746.130
+SumWidenBcl	74.516	3517.936	4.714910
+SumWidenVectorBase	74.536	3517.029	4.713693
+SumWidenVectorBase_NPtr	552.921	474.108	0.635422
+SumWidenVectorBase_NRef	497.471	526.954	0.706249
+SumWidenVectorBase_NRef2	494.180	530.463	0.710952
+SumWidenVectorBase_NRefInc	508.912	515.106	0.690371
+SumWidenVectorBase_NRefInc2	502.583	521.594	0.699065
+SumWidenVectorBase_Ptr	554.701	472.586	0.633383
+SumWidenVectorBase_Ref	494.729	529.874	0.710163
+SumWidenVectorBase_Ref2	494.900	529.691	0.709918
+SumWidenVectorBase_RefInc	504.023	520.103	0.697068
+SumWidenVectorBase128_Ptr	551.888	474.995	0.636612
+SumWidenVectorBase128_Ref	501.683	522.529	0.700318
+SumWidenVectorBase128_Ref2	498.981	525.359	0.704112
+SumWidenVectorBase128_RefI	500.584	523.676	0.701856
+SumWidenVectorBase128_RefI2	499.986	524.303	0.702697
+SumWidenVectorBase128_RefInc	497.776	526.630	0.705815
+SumWidenVectorBase128_RefInc2	492.439	532.338	0.713465
 SumWidenVectorBase256_Ptr	Run fail! Vector byte size mismatch(16!=32) !
 SumWidenVectorBase256_Ref	Run fail! Vector byte size mismatch(16!=32) !
-SumWidenVectorTraits	80.601	3252.382	4.359842
-SumWidenVector128Traits	1168.159	224.408	0.300820
-SumWidenVector256Traits	2359.158	111.118	0.148954
+SumWidenVectorBase256_Ref2	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefI	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefI2	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefInc	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefInc2	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorTraits	74.583	3514.810	4.710720
+SumWidenVector128Traits	1153.310	227.297	0.304635
+SumWidenVector256Traits	2153.353	121.738	0.163159
 
 [WidenBenchmark_SByte(262144)]
 ---
@@ -575,20 +687,36 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumWidenScalar	-829396443174
-SumWidenScalar	350.892	747.079
-SumWidenBcl	76.480	3427.614	4.588022
-SumWidenVectorBase	81.775	3205.658	4.290923
-SumWidenVectorBase_Ptr	538.598	486.715	0.651491
-SumWidenVectorBase_Ref	494.690	529.916	0.709317
-SumWidenVectorBase_RefInc	513.906	510.101	0.682794
-SumWidenVectorBase128_Ptr	548.328	478.079	0.639931
-SumWidenVectorBase128_Ref	519.519	504.590	0.675417
+SumWidenScalar	349.460	750.140
+SumWidenBcl	76.497	3426.850	4.568283
+SumWidenVectorBase	81.502	3216.417	4.287759
+SumWidenVectorBase_NPtr	814.846	321.710	0.428867
+SumWidenVectorBase_NRef	494.583	530.030	0.706576
+SumWidenVectorBase_NRef2	498.227	526.154	0.701408
+SumWidenVectorBase_NRefInc	511.495	512.506	0.683214
+SumWidenVectorBase_NRefInc2	505.923	518.150	0.690738
+SumWidenVectorBase_Ptr	805.916	325.274	0.433619
+SumWidenVectorBase_Ref	494.042	530.611	0.707350
+SumWidenVectorBase_Ref2	494.032	530.621	0.707363
+SumWidenVectorBase_RefInc	511.553	512.448	0.683136
+SumWidenVectorBase128_Ptr	547.114	479.139	0.638734
+SumWidenVectorBase128_Ref	515.559	508.466	0.677828
+SumWidenVectorBase128_Ref2	515.686	508.341	0.677661
+SumWidenVectorBase128_RefI	514.657	509.357	0.679016
+SumWidenVectorBase128_RefI2	511.317	512.684	0.683451
+SumWidenVectorBase128_RefInc	507.414	516.628	0.688709
+SumWidenVectorBase128_RefInc2	499.169	525.161	0.700084
 SumWidenVectorBase256_Ptr	Run fail! Vector byte size mismatch(16!=32) !
 SumWidenVectorBase256_Ref	Run fail! Vector byte size mismatch(16!=32) !
-SumWidenVectorTraits	88.766	2953.196	3.952991
-SumWidenVector128_Arm	90.367	2900.890	3.882977
-SumWidenVector128Traits	97.391	2691.667	3.602923
-SumWidenVector256Traits	1143.079	229.331	0.306971
+SumWidenVectorBase256_Ref2	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefI	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefI2	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefInc	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefInc2	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorTraits	88.242	2970.741	3.960251
+SumWidenVector128_Arm	89.239	2937.540	3.915991
+SumWidenVector128Traits	89.535	2927.830	3.903047
+SumWidenVector256Traits	1110.418	236.077	0.314711
 
 [WidenBenchmark_SByte(262144)]
 ---
@@ -655,20 +783,36 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumWidenScalar	-829396443174
-SumWidenScalar	349.202	750.695
-SumWidenBcl	75.998	3449.375	4.594911
-SumWidenVectorBase	83.848	3126.435	4.164723
-SumWidenVectorBase_Ptr	541.647	483.976	0.644704
-SumWidenVectorBase_Ref	493.459	531.237	0.707661
-SumWidenVectorBase_RefInc	512.612	511.389	0.681221
-SumWidenVectorBase128_Ptr	535.869	489.194	0.651655
-SumWidenVectorBase128_Ref	517.937	506.131	0.674217
+SumWidenScalar	350.483	747.950
+SumWidenBcl	85.095	3080.590	4.118712
+SumWidenVectorBase	77.412	3386.367	4.527532
+SumWidenVectorBase_NPtr	545.626	480.447	0.642351
+SumWidenVectorBase_NRef	494.004	530.652	0.709475
+SumWidenVectorBase_NRef2	699.758	374.621	0.500864
+SumWidenVectorBase_NRefInc	514.508	509.505	0.681202
+SumWidenVectorBase_NRefInc2	507.888	516.146	0.690081
+SumWidenVectorBase_Ptr	547.745	478.587	0.639865
+SumWidenVectorBase_Ref	495.608	528.934	0.707179
+SumWidenVectorBase_Ref2	495.673	528.865	0.707086
+SumWidenVectorBase_RefInc	514.514	509.499	0.681194
+SumWidenVectorBase128_Ptr	540.737	484.790	0.648159
+SumWidenVectorBase128_Ref	520.597	503.545	0.673234
+SumWidenVectorBase128_Ref2	520.392	503.743	0.673499
+SumWidenVectorBase128_RefI	515.447	508.576	0.679960
+SumWidenVectorBase128_RefI2	514.870	509.146	0.680722
+SumWidenVectorBase128_RefInc	510.561	513.443	0.686467
+SumWidenVectorBase128_RefInc2	504.253	519.866	0.695054
 SumWidenVectorBase256_Ptr	Run fail! Vector byte size mismatch(16!=32) !
 SumWidenVectorBase256_Ref	Run fail! Vector byte size mismatch(16!=32) !
-SumWidenVectorTraits	87.378	3000.109	3.996443
-SumWidenVector128_Arm	87.839	2984.368	3.975475
-SumWidenVector128Traits	88.246	2970.612	3.957151
-SumWidenVector256Traits	1037.954	252.558	0.336433
+SumWidenVectorBase256_Ref2	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefI	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefI2	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefInc	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefInc2	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorTraits	88.866	2949.891	3.943968
+SumWidenVector128_Arm	88.661	2956.692	3.953061
+SumWidenVector128Traits	88.755	2953.562	3.948877
+SumWidenVector256Traits	1058.374	247.686	0.331153
 
 [WidenBenchmark_SByte(262144)]
 ---
@@ -735,20 +879,36 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumWidenScalar	-829396443174
-SumWidenScalar	211.062	1242.026
-SumWidenBcl	69.907	3749.874	3.019159
-SumWidenVectorBase	69.840	3753.499	3.022077
-SumWidenVectorBase_Ptr	478.145	548.252	0.441417
-SumWidenVectorBase_Ref	476.124	550.579	0.443291
-SumWidenVectorBase_RefInc	479.832	546.325	0.439866
-SumWidenVectorBase128_Ptr	489.663	535.356	0.431034
-SumWidenVectorBase128_Ref	488.134	537.033	0.432385
+SumWidenScalar	211.482	1239.558
+SumWidenBcl	70.428	3722.131	3.002789
+SumWidenVectorBase	70.332	3727.255	3.006922
+SumWidenVectorBase_NPtr	479.649	546.533	0.440910
+SumWidenVectorBase_NRef	481.821	544.069	0.438922
+SumWidenVectorBase_NRef2	479.402	546.815	0.441137
+SumWidenVectorBase_NRefInc	750.142	349.459	0.281922
+SumWidenVectorBase_NRefInc2	481.658	544.254	0.439071
+SumWidenVectorBase_Ptr	479.069	547.195	0.441444
+SumWidenVectorBase_Ref	480.685	545.355	0.439959
+SumWidenVectorBase_Ref2	476.711	549.902	0.443627
+SumWidenVectorBase_RefInc	481.020	544.975	0.439653
+SumWidenVectorBase128_Ptr	491.066	533.826	0.430658
+SumWidenVectorBase128_Ref	491.552	533.299	0.430233
+SumWidenVectorBase128_Ref2	490.943	533.960	0.430767
+SumWidenVectorBase128_RefI	490.129	534.847	0.431482
+SumWidenVectorBase128_RefI2	489.899	535.098	0.431685
+SumWidenVectorBase128_RefInc	490.030	534.955	0.431569
+SumWidenVectorBase128_RefInc2	488.350	536.796	0.433054
 SumWidenVectorBase256_Ptr	Run fail! Vector byte size mismatch(16!=32) !
 SumWidenVectorBase256_Ref	Run fail! Vector byte size mismatch(16!=32) !
-SumWidenVectorTraits	69.618	3765.467	3.031713
-SumWidenVector128_Arm	69.400	3777.313	3.041251
-SumWidenVector128Traits	70.218	3733.276	3.005795
-SumWidenVector256Traits	2619.923	100.058	0.080560
+SumWidenVectorBase256_Ref2	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefI	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefI2	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefInc	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorBase256_RefInc2	Run fail! Vector byte size mismatch(16!=32) !
+SumWidenVectorTraits	70.227	3732.821	3.011413
+SumWidenVector128_Arm	70.144	3737.222	3.014963
+SumWidenVector128Traits	70.343	3726.654	3.006438
+SumWidenVector256Traits	2221.371	118.010	0.095203
 
 [WidenBenchmark_SByte(262144)]
 ---
