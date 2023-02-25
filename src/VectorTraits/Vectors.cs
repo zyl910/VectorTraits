@@ -272,7 +272,7 @@ namespace Zyl.VectorTraits {
             if (values.Length < Vector<byte>.Count) {
                 throw new IndexOutOfRangeException(string.Format("Index was outside the bounds({0}) of the array!", values.Length));
             }
-            return Unsafe.ReadUnaligned<Vector<T>>(ref BitUtil.GetReference(values));
+            return Unsafe.ReadUnaligned<Vector<T>>(ref UnsafeEx.GetReference(values));
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 
@@ -292,7 +292,7 @@ namespace Zyl.VectorTraits {
             if (values.Length < Vector<T>.Count) {
                 throw new IndexOutOfRangeException(string.Format("Index was outside the bounds({0}) of the array!", values.Length));
             }
-            return Unsafe.ReadUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref BitUtil.GetReference(values)));
+            return Unsafe.ReadUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref UnsafeEx.GetReference(values)));
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 
@@ -312,7 +312,7 @@ namespace Zyl.VectorTraits {
             if (values.Length < Vector<T>.Count) {
                 throw new IndexOutOfRangeException(string.Format("Index was outside the bounds({0}) of the array!", values.Length));
             }
-            return Unsafe.ReadUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref BitUtil.GetReference(values)));
+            return Unsafe.ReadUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref UnsafeEx.GetReference(values)));
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
 
