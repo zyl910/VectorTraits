@@ -1547,8 +1547,9 @@ namespace Zyl.VectorTraits.Impl {
                 ref long pupper = ref Unsafe.As<Vector<long>, long>(ref upper);
                 plower = p;
                 Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
-                pupper = Unsafe.Add(ref p, 2);
-                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 3);
+                p = ref Unsafe.Add(ref p, Vector<long>.Count);
+                pupper = p;
+                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
             }
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>

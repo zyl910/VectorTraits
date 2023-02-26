@@ -1715,10 +1715,11 @@ namespace Zyl.VectorTraits.Impl {
                 Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref plower, 2) = Unsafe.Add(ref p, 2);
                 Unsafe.Add(ref plower, 3) = Unsafe.Add(ref p, 3);
-                pupper = Unsafe.Add(ref p, 4);
-                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 5);
-                Unsafe.Add(ref pupper, 2) = Unsafe.Add(ref p, 6);
-                Unsafe.Add(ref pupper, 3) = Unsafe.Add(ref p, 7);
+                p = ref Unsafe.Add(ref p, Vector<long>.Count);
+                pupper = p;
+                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref pupper, 2) = Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref pupper, 3) = Unsafe.Add(ref p, 3);
             }
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
