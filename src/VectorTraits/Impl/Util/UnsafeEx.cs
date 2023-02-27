@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Zyl.VectorTraits {
+namespace Zyl.VectorTraits.Impl.Util {
 
     /// <summary>
     /// Unsafe's extended utility functions .
