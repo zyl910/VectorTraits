@@ -4,6 +4,7 @@ using System.Text;
 using System.Runtime.CompilerServices;
 using System.Numerics;
 using Zyl.VectorTraits.Extensions.SameW;
+using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits.Impl {
     using BaseStatics = VectorTraitsBase.Statics;
@@ -1535,13 +1536,8 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_Ref(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out lower);
-                Unsafe.SkipInit(out upper);
-#else
-                lower = default;
-                upper = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
                 ref int p = ref Unsafe.As<Vector<int>, int>(ref source);
                 ref long plower = ref Unsafe.As<Vector<long>, long>(ref lower);
                 ref long pupper = ref Unsafe.As<Vector<long>, long>(ref upper);
@@ -1555,13 +1551,8 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_Ref2(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out lower);
-                Unsafe.SkipInit(out upper);
-#else
-                lower = default;
-                upper = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
                 ref int p = ref Unsafe.As<Vector<int>, int>(ref source);
                 ref int q = ref Unsafe.Add(ref p, 2);
                 ref long plower = ref Unsafe.As<Vector<long>, long>(ref lower);
@@ -1575,13 +1566,8 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_RefI(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out lower);
-                Unsafe.SkipInit(out upper);
-#else
-                lower = default;
-                upper = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
                 ref int p = ref Unsafe.As<Vector<int>, int>(ref source);
                 ref long plower = ref Unsafe.As<Vector<long>, long>(ref lower);
                 ref long pupper = ref Unsafe.As<Vector<long>, long>(ref upper);
@@ -1593,13 +1579,8 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_RefI2(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out lower);
-                Unsafe.SkipInit(out upper);
-#else
-                lower = default;
-                upper = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
                 ref int p = ref Unsafe.As<Vector<int>, int>(ref source);
                 ref int q = ref Unsafe.Add(ref p, 2);
                 ref long plower = ref Unsafe.As<Vector<long>, long>(ref lower);
@@ -1613,13 +1594,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_RefInc(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
                 nint cntOut = 2; // Vector<long>.Count;
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out lower);
-                Unsafe.SkipInit(out upper);
-#else
-                lower = default;
-                upper = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
                 ref int p = ref Unsafe.As<Vector<int>, int>(ref source);
                 ref long plower = ref Unsafe.As<Vector<long>, long>(ref lower);
                 ref long pupper = ref Unsafe.As<Vector<long>, long>(ref upper);
@@ -1631,13 +1607,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_RefInc2(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
                 nint cntOut = 2; // Vector<long>.Count;
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out lower);
-                Unsafe.SkipInit(out upper);
-#else
-                lower = default;
-                upper = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
                 ref int p = ref Unsafe.As<Vector<int>, int>(ref source);
                 ref int q = ref Unsafe.Add(ref p, cntOut);
                 ref long plower = ref Unsafe.As<Vector<long>, long>(ref lower);

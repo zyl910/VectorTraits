@@ -7,12 +7,12 @@ using System.Text;
 namespace Zyl.VectorTraits.Impl.Util {
 
     /// <summary>
-    /// Unsafe's extended utility functions .
+    /// Unsafe's extended utility functions (<see cref="Unsafe"/> 的扩展工具函数) .
     /// </summary>
     /// <seealso cref="Unsafe"/>
     /// <seealso cref="MemoryMarshal"/>
     public static class UnsafeEx {
- 
+
         // == MemoryMarshal ==
 
         /// <summary>
@@ -46,8 +46,25 @@ namespace Zyl.VectorTraits.Impl.Util {
             return ref span.GetPinnableReference();
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
- 
+
         // == Unsafe ==
+
+        /// <summary>
+        /// Bypasses definite assignment rules for a given reference (使给定引用, 绕过明确赋值规则).
+        /// </summary>
+        /// <typeparam name="T">The type of the reference (引用的类型).</typeparam>
+        /// <param name="value">The reference whose initialization should be skipped (应跳过其初始化的引用).</param>
+        /// <seealso cref="Unsafe.SkipInit{T}(out T)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SkipInit<T>(out T value) {
+#if NET5_0_OR_GREATER
+            Unsafe.SkipInit(out value);
+#else
+#pragma warning disable CS8601 // Possible null reference assignment.
+            value = default;
+#pragma warning restore CS8601 // Possible null reference assignment.
+#endif // NET5_0_OR_GREATER
+        }
 
     }
 
