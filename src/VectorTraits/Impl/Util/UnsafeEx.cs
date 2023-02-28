@@ -24,11 +24,11 @@ namespace Zyl.VectorTraits.Impl.Util {
         /// <seealso cref="MemoryMarshal.GetReference{T}(ReadOnlySpan{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ref T GetReference<T>(ReadOnlySpan<T> span) {
-#if (NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
             return ref MemoryMarshal.GetReference<T>(span);
-#else
-            return ref Unsafe.AsRef(span.GetPinnableReference());
-#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+//#if (NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+//#else
+//            return ref Unsafe.AsRef(span.GetPinnableReference());
+//#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
 
         /// <summary>
@@ -40,11 +40,11 @@ namespace Zyl.VectorTraits.Impl.Util {
         /// <seealso cref="MemoryMarshal.GetReference{T}(Span{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ref T GetReference<T>(Span<T> span) {
-#if (NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
             return ref MemoryMarshal.GetReference<T>(span);
-#else
-            return ref span.GetPinnableReference();
-#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+//#if (NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+//#else
+//            return ref span.GetPinnableReference();
+//#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
 
         // == Unsafe ==
