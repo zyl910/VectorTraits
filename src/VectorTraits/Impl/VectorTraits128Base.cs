@@ -1536,6 +1536,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_Ref(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
+                nint cnt = Vector<long>.Count;
                 UnsafeEx.SkipInit(out lower);
                 UnsafeEx.SkipInit(out upper);
                 ref int p = ref Unsafe.As<Vector<int>, int>(ref source);
@@ -1543,7 +1544,7 @@ namespace Zyl.VectorTraits.Impl {
                 ref long pupper = ref Unsafe.As<Vector<long>, long>(ref upper);
                 plower = p;
                 Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
-                p = ref Unsafe.Add(ref p, Vector<long>.Count);
+                p = ref Unsafe.Add(ref p, cnt);
                 pupper = p;
                 Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
             }
@@ -1597,25 +1598,25 @@ namespace Zyl.VectorTraits.Impl {
             [Obsolete("This method is for testing purposes only. Please use Widen_Base instead.")]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_RefInc(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
-                nint cntOut = 2; // Vector<long>.Count;
+                nint cnt = 2; // Vector<long>.Count;
                 UnsafeEx.SkipInit(out lower);
                 UnsafeEx.SkipInit(out upper);
                 ref int p = ref Unsafe.As<Vector<int>, int>(ref source);
                 ref long plower = ref Unsafe.As<Vector<long>, long>(ref lower);
                 ref long pupper = ref Unsafe.As<Vector<long>, long>(ref upper);
-                plower = p; pupper = Unsafe.Add(ref p, cntOut); plower = ref Unsafe.Add(ref plower, 1); pupper = ref Unsafe.Add(ref pupper, 1); p = ref Unsafe.Add(ref p, 1);
-                plower = p; pupper = Unsafe.Add(ref p, cntOut);
+                plower = p; pupper = Unsafe.Add(ref p, cnt); plower = ref Unsafe.Add(ref plower, 1); pupper = ref Unsafe.Add(ref pupper, 1); p = ref Unsafe.Add(ref p, 1);
+                plower = p; pupper = Unsafe.Add(ref p, cnt);
             }
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
             [Obsolete("This method is for testing purposes only. Please use Widen_Base instead.")]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_RefInc2(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
-                nint cntOut = 2; // Vector<long>.Count;
+                nint cnt = 2; // Vector<long>.Count;
                 UnsafeEx.SkipInit(out lower);
                 UnsafeEx.SkipInit(out upper);
                 ref int p = ref Unsafe.As<Vector<int>, int>(ref source);
-                ref int q = ref Unsafe.Add(ref p, cntOut);
+                ref int q = ref Unsafe.Add(ref p, cnt);
                 ref long plower = ref Unsafe.As<Vector<long>, long>(ref lower);
                 ref long pupper = ref Unsafe.As<Vector<long>, long>(ref upper);
                 plower = p; pupper = q; p = ref Unsafe.Add(ref p, 1); q = ref Unsafe.Add(ref q, 1); plower = ref Unsafe.Add(ref plower, 1); pupper = ref Unsafe.Add(ref pupper, 1);

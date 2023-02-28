@@ -1254,6 +1254,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{int}, out Vector128{long}, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_Ref(Vector128<int> source, out Vector128<long> lower, out Vector128<long> upper) {
+                nint cnt = Vector128<long>.Count;
                 UnsafeEx.SkipInit(out lower);
                 UnsafeEx.SkipInit(out upper);
                 ref int p = ref Unsafe.As<Vector128<int>, int>(ref source);
@@ -1261,8 +1262,9 @@ namespace Zyl.VectorTraits.Impl {
                 ref long pupper = ref Unsafe.As<Vector128<long>, long>(ref upper);
                 plower = p;
                 Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
-                pupper = Unsafe.Add(ref p, 2);
-                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 3);
+                p = ref Unsafe.Add(ref p, cnt);
+                pupper = p;
+                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{int}, out Vector128{long}, out Vector128{long})"/>

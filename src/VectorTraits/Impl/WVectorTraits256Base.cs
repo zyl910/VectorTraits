@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
+using Zyl.VectorTraits.Impl.Util;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -1691,19 +1692,21 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{int}, out Vector256{long}, out Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static unsafe void Widen_Base(Vector256<int> source, out Vector256<long> lower, out Vector256<long> upper) {
-                int* p = (int*)&source;
-                fixed (void* plower0 = &lower, pupper0 = &upper) {
-                    long* plower = (long*)plower0;
-                    long* pupper = (long*)pupper0;
-                    plower[0] = p[0];
-                    plower[1] = p[1];
-                    plower[2] = p[2];
-                    plower[3] = p[3];
-                    pupper[0] = p[4];
-                    pupper[1] = p[5];
-                    pupper[2] = p[6];
-                    pupper[3] = p[7];
-                }
+                nint cnt = Vector256<long>.Count;
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
+                ref int p = ref Unsafe.As<Vector256<int>, int>(ref source);
+                ref long plower = ref Unsafe.As<Vector256<long>, long>(ref lower);
+                ref long pupper = ref Unsafe.As<Vector256<long>, long>(ref upper);
+                plower = p;
+                Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref plower, 2) = Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref plower, 3) = Unsafe.Add(ref p, 3);
+                p = ref Unsafe.Add(ref p, cnt);
+                pupper = p;
+                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref pupper, 2) = Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref pupper, 3) = Unsafe.Add(ref p, 3);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{uint}, out Vector256{ulong}, out Vector256{ulong})"/>
