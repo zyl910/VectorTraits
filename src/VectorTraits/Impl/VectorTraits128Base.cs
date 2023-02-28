@@ -1549,6 +1549,7 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
+            [Obsolete("This method is for testing purposes only. Please use Widen_Base instead.")]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_Ref2(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
                 UnsafeEx.SkipInit(out lower);
@@ -1564,6 +1565,7 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
+            [Obsolete("This method is for testing purposes only. Please use Widen_Base instead.")]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_RefI(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
                 UnsafeEx.SkipInit(out lower);
@@ -1577,6 +1579,7 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
+            [Obsolete("This method is for testing purposes only. Please use Widen_Base instead.")]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_RefI2(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
                 UnsafeEx.SkipInit(out lower);
@@ -1591,6 +1594,7 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
+            [Obsolete("This method is for testing purposes only. Please use Widen_Base instead.")]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_RefInc(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
                 nint cntOut = 2; // Vector<long>.Count;
@@ -1604,6 +1608,7 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
+            [Obsolete("This method is for testing purposes only. Please use Widen_Base instead.")]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_RefInc2(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
                 nint cntOut = 2; // Vector<long>.Count;

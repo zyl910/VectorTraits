@@ -1266,6 +1266,7 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{int}, out Vector128{long}, out Vector128{long})"/>
+            [Obsolete("This method is for testing purposes only. Please use Widen_Base instead.")]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Base_Ref2(Vector128<int> source, out Vector128<long> lower, out Vector128<long> upper) {
                 UnsafeEx.SkipInit(out lower);

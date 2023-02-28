@@ -22,6 +22,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
     using TMy = Int32;
     using TMyOut = Int64;
 
+#pragma warning disable CS0618 // Type or member is obsolete
     /// <summary>
     /// Widen benchmark - Int32.
     /// </summary>
@@ -1530,4 +1531,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
 
 #endif // NETCOREAPP3_0_OR_GREATER
     }
+#pragma warning restore CS0618 // Type or member is obsolete
+
 }
