@@ -1462,79 +1462,79 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{float}, out Vector{double}, out Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe void Widen_Base(Vector<float> source, out Vector<double> lower, out Vector<double> upper) {
-                int cnt = Vector<double>.Count;
-                float* p = (float*)&source;
-                fixed (void* plower0 = &lower, pupper0 = &upper) {
-                    double* plower = (double*)plower0;
-                    double* pupper = (double*)pupper0;
-                    for (int i = 0; i < cnt; ++i) {
-                        plower[i] = p[i];
-                        pupper[i] = p[i + cnt];
-                    }
+            public static void Widen_Base(Vector<float> source, out Vector<double> lower, out Vector<double> upper) {
+                nint cnt = Vector<double>.Count;
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
+                ref float p = ref Unsafe.As<Vector<float>, float>(ref source);
+                ref double plower = ref Unsafe.As<Vector<double>, double>(ref lower);
+                ref double pupper = ref Unsafe.As<Vector<double>, double>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref plower, i) = Unsafe.Add(ref p, i);
+                    Unsafe.Add(ref pupper, i) = Unsafe.Add(ref p, i + cnt);
                 }
             }
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{sbyte}, out Vector{short}, out Vector{short})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe void Widen_Base(Vector<sbyte> source, out Vector<short> lower, out Vector<short> upper) {
-                int cnt = Vector<short>.Count;
-                sbyte* p = (sbyte*)&source;
-                fixed (void* plower0 = &lower, pupper0 = &upper) {
-                    short* plower = (short*)plower0;
-                    short* pupper = (short*)pupper0;
-                    for (int i = 0; i < cnt; ++i) {
-                        plower[i] = p[i];
-                        pupper[i] = p[i + cnt];
-                    }
+            public static void Widen_Base(Vector<sbyte> source, out Vector<short> lower, out Vector<short> upper) {
+                nint cnt = Vector<short>.Count;
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
+                ref sbyte p = ref Unsafe.As<Vector<sbyte>, sbyte>(ref source);
+                ref short plower = ref Unsafe.As<Vector<short>, short>(ref lower);
+                ref short pupper = ref Unsafe.As<Vector<short>, short>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref plower, i) = Unsafe.Add(ref p, i);
+                    Unsafe.Add(ref pupper, i) = Unsafe.Add(ref p, i + cnt);
                 }
             }
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{byte}, out Vector{ushort}, out Vector{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe void Widen_Base(Vector<byte> source, out Vector<ushort> lower, out Vector<ushort> upper) {
-                int cnt = Vector<ushort>.Count;
-                byte* p = (byte*)&source;
-                fixed (void* plower0 = &lower, pupper0 = &upper) {
-                    ushort* plower = (ushort*)plower0;
-                    ushort* pupper = (ushort*)pupper0;
-                    for (int i = 0; i < cnt; ++i) {
-                        plower[i] = p[i];
-                        pupper[i] = p[i + cnt];
-                    }
+            public static void Widen_Base(Vector<byte> source, out Vector<ushort> lower, out Vector<ushort> upper) {
+                nint cnt = Vector<ushort>.Count;
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
+                ref byte p = ref Unsafe.As<Vector<byte>, byte>(ref source);
+                ref ushort plower = ref Unsafe.As<Vector<ushort>, ushort>(ref lower);
+                ref ushort pupper = ref Unsafe.As<Vector<ushort>, ushort>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref plower, i) = Unsafe.Add(ref p, i);
+                    Unsafe.Add(ref pupper, i) = Unsafe.Add(ref p, i + cnt);
                 }
             }
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{short}, out Vector{int}, out Vector{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe void Widen_Base(Vector<short> source, out Vector<int> lower, out Vector<int> upper) {
-                int cnt = Vector<int>.Count;
-                short* p = (short*)&source;
-                fixed (void* plower0 = &lower, pupper0 = &upper) {
-                    int* plower = (int*)plower0;
-                    int* pupper = (int*)pupper0;
-                    for (int i = 0; i < cnt; ++i) {
-                        plower[i] = p[i];
-                        pupper[i] = p[i + cnt];
-                    }
+            public static void Widen_Base(Vector<short> source, out Vector<int> lower, out Vector<int> upper) {
+                nint cnt = Vector<int>.Count;
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
+                ref short p = ref Unsafe.As<Vector<short>, short>(ref source);
+                ref int plower = ref Unsafe.As<Vector<int>, int>(ref lower);
+                ref int pupper = ref Unsafe.As<Vector<int>, int>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref plower, i) = Unsafe.Add(ref p, i);
+                    Unsafe.Add(ref pupper, i) = Unsafe.Add(ref p, i + cnt);
                 }
             }
 
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{ushort}, out Vector{uint}, out Vector{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe void Widen_Base(Vector<ushort> source, out Vector<uint> lower, out Vector<uint> upper) {
-                int cnt = Vector<uint>.Count;
-                ushort* p = (ushort*)&source;
-                fixed (void* plower0 = &lower, pupper0 = &upper) {
-                    uint* plower = (uint*)plower0;
-                    uint* pupper = (uint*)pupper0;
-                    for (int i = 0; i < cnt; ++i) {
-                        plower[i] = p[i];
-                        pupper[i] = p[i + cnt];
-                    }
+            public static void Widen_Base(Vector<ushort> source, out Vector<uint> lower, out Vector<uint> upper) {
+                nint cnt = Vector<uint>.Count;
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
+                ref ushort p = ref Unsafe.As<Vector<ushort>, ushort>(ref source);
+                ref uint plower = ref Unsafe.As<Vector<uint>, uint>(ref lower);
+                ref uint pupper = ref Unsafe.As<Vector<uint>, uint>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref plower, i) = Unsafe.Add(ref p, i);
+                    Unsafe.Add(ref pupper, i) = Unsafe.Add(ref p, i + cnt);
                 }
             }
 
@@ -1711,16 +1711,16 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.Widen(Vector{uint}, out Vector{ulong}, out Vector{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe void Widen_Base(Vector<uint> source, out Vector<ulong> lower, out Vector<ulong> upper) {
-                int cnt = Vector<ulong>.Count;
-                uint* p = (uint*)&source;
-                fixed (void* plower0 = &lower, pupper0 = &upper) {
-                    ulong* plower = (ulong*)plower0;
-                    ulong* pupper = (ulong*)pupper0;
-                    for (int i = 0; i < cnt; ++i) {
-                        plower[i] = p[i];
-                        pupper[i] = p[i + cnt];
-                    }
+            public static void Widen_Base(Vector<uint> source, out Vector<ulong> lower, out Vector<ulong> upper) {
+                nint cnt = Vector<ulong>.Count;
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
+                ref uint p = ref Unsafe.As<Vector<uint>, uint>(ref source);
+                ref ulong plower = ref Unsafe.As<Vector<ulong>, ulong>(ref lower);
+                ref ulong pupper = ref Unsafe.As<Vector<ulong>, ulong>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref plower, i) = Unsafe.Add(ref p, i);
+                    Unsafe.Add(ref pupper, i) = Unsafe.Add(ref p, i + cnt);
                 }
             }
 

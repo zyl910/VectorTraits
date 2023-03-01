@@ -1122,107 +1122,117 @@ namespace Zyl.VectorTraits.Impl {
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{float}, out Vector128{double}, out Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe void Widen_Base(Vector128<float> source, out Vector128<double> lower, out Vector128<double> upper) {
-                float* p = (float*)&source;
-                fixed (void* plower0 = &lower, pupper0 = &upper) {
-                    double* plower = (double*)plower0;
-                    double* pupper = (double*)pupper0;
-                    plower[0] = p[0];
-                    plower[1] = p[1];
-                    pupper[0] = p[2];
-                    pupper[1] = p[3];
-                }
+            public static void Widen_Base(Vector128<float> source, out Vector128<double> lower, out Vector128<double> upper) {
+                nint cnt = Vector128<double>.Count;
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
+                ref float p = ref Unsafe.As<Vector128<float>, float>(ref source);
+                ref double plower = ref Unsafe.As<Vector128<double>, double>(ref lower);
+                ref double pupper = ref Unsafe.As<Vector128<double>, double>(ref upper);
+                plower = p;
+                Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
+                p = ref Unsafe.Add(ref p, cnt);
+                pupper = p;
+                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{sbyte}, out Vector128{short}, out Vector128{short})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe void Widen_Base(Vector128<sbyte> source, out Vector128<short> lower, out Vector128<short> upper) {
-                sbyte* p = (sbyte*)&source;
-                fixed (void* plower0 = &lower, pupper0 = &upper) {
-                    short* plower = (short*)plower0;
-                    short* pupper = (short*)pupper0;
-                    plower[0] = p[0];
-                    plower[1] = p[1];
-                    plower[2] = p[2];
-                    plower[3] = p[3];
-                    plower[4] = p[4];
-                    plower[5] = p[5];
-                    plower[6] = p[6];
-                    plower[7] = p[7];
-                    pupper[0] = p[8];
-                    pupper[1] = p[9];
-                    pupper[2] = p[10];
-                    pupper[3] = p[11];
-                    pupper[4] = p[12];
-                    pupper[5] = p[13];
-                    pupper[6] = p[14];
-                    pupper[7] = p[15];
-                }
+            public static void Widen_Base(Vector128<sbyte> source, out Vector128<short> lower, out Vector128<short> upper) {
+                nint cnt = Vector128<short>.Count;
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
+                ref sbyte p = ref Unsafe.As<Vector128<sbyte>, sbyte>(ref source);
+                ref short plower = ref Unsafe.As<Vector128<short>, short>(ref lower);
+                ref short pupper = ref Unsafe.As<Vector128<short>, short>(ref upper);
+                plower = p;
+                Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref plower, 2) = Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref plower, 3) = Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref plower, 4) = Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref plower, 5) = Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref plower, 6) = Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref plower, 7) = Unsafe.Add(ref p, 7);
+                p = ref Unsafe.Add(ref p, cnt);
+                pupper = p;
+                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref pupper, 2) = Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref pupper, 3) = Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref pupper, 4) = Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref pupper, 5) = Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref pupper, 6) = Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref pupper, 7) = Unsafe.Add(ref p, 7);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{byte}, out Vector128{ushort}, out Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe void Widen_Base(Vector128<byte> source, out Vector128<ushort> lower, out Vector128<ushort> upper) {
-                byte* p = (byte*)&source;
-                fixed (void* plower0 = &lower, pupper0 = &upper) {
-                    ushort* plower = (ushort*)plower0;
-                    ushort* pupper = (ushort*)pupper0;
-                    plower[0] = p[0];
-                    plower[1] = p[1];
-                    plower[2] = p[2];
-                    plower[3] = p[3];
-                    plower[4] = p[4];
-                    plower[5] = p[5];
-                    plower[6] = p[6];
-                    plower[7] = p[7];
-                    pupper[0] = p[8];
-                    pupper[1] = p[9];
-                    pupper[2] = p[10];
-                    pupper[3] = p[11];
-                    pupper[4] = p[12];
-                    pupper[5] = p[13];
-                    pupper[6] = p[14];
-                    pupper[7] = p[15];
-                }
+            public static void Widen_Base(Vector128<byte> source, out Vector128<ushort> lower, out Vector128<ushort> upper) {
+                nint cnt = Vector128<ushort>.Count;
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
+                ref byte p = ref Unsafe.As<Vector128<byte>, byte>(ref source);
+                ref ushort plower = ref Unsafe.As<Vector128<ushort>, ushort>(ref lower);
+                ref ushort pupper = ref Unsafe.As<Vector128<ushort>, ushort>(ref upper);
+                plower = p;
+                Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref plower, 2) = Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref plower, 3) = Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref plower, 4) = Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref plower, 5) = Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref plower, 6) = Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref plower, 7) = Unsafe.Add(ref p, 7);
+                p = ref Unsafe.Add(ref p, cnt);
+                pupper = p;
+                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref pupper, 2) = Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref pupper, 3) = Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref pupper, 4) = Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref pupper, 5) = Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref pupper, 6) = Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref pupper, 7) = Unsafe.Add(ref p, 7);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{short}, out Vector128{int}, out Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe void Widen_Base(Vector128<short> source, out Vector128<int> lower, out Vector128<int> upper) {
-                short* p = (short*)&source;
-                fixed (void* plower0 = &lower, pupper0 = &upper) {
-                    int* plower = (int*)plower0;
-                    int* pupper = (int*)pupper0;
-                    plower[0] = p[0];
-                    plower[1] = p[1];
-                    plower[2] = p[2];
-                    plower[3] = p[3];
-                    pupper[0] = p[4];
-                    pupper[1] = p[5];
-                    pupper[2] = p[6];
-                    pupper[3] = p[7];
-                }
+            public static void Widen_Base(Vector128<short> source, out Vector128<int> lower, out Vector128<int> upper) {
+                nint cnt = Vector128<int>.Count;
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
+                ref short p = ref Unsafe.As<Vector128<short>, short>(ref source);
+                ref int plower = ref Unsafe.As<Vector128<int>, int>(ref lower);
+                ref int pupper = ref Unsafe.As<Vector128<int>, int>(ref upper);
+                plower = p;
+                Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref plower, 2) = Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref plower, 3) = Unsafe.Add(ref p, 3);
+                p = ref Unsafe.Add(ref p, cnt);
+                pupper = p;
+                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref pupper, 2) = Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref pupper, 3) = Unsafe.Add(ref p, 3);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{ushort}, out Vector128{uint}, out Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe void Widen_Base(Vector128<ushort> source, out Vector128<uint> lower, out Vector128<uint> upper) {
-                ushort* p = (ushort*)&source;
-                fixed (void* plower0 = &lower, pupper0 = &upper) {
-                    uint* plower = (uint*)plower0;
-                    uint* pupper = (uint*)pupper0;
-                    plower[0] = p[0];
-                    plower[1] = p[1];
-                    plower[2] = p[2];
-                    plower[3] = p[3];
-                    pupper[0] = p[4];
-                    pupper[1] = p[5];
-                    pupper[2] = p[6];
-                    pupper[3] = p[7];
-                }
+            public static void Widen_Base(Vector128<ushort> source, out Vector128<uint> lower, out Vector128<uint> upper) {
+                nint cnt = Vector128<uint>.Count;
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
+                ref ushort p = ref Unsafe.As<Vector128<ushort>, ushort>(ref source);
+                ref uint plower = ref Unsafe.As<Vector128<uint>, uint>(ref lower);
+                ref uint pupper = ref Unsafe.As<Vector128<uint>, uint>(ref upper);
+                plower = p;
+                Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref plower, 2) = Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref plower, 3) = Unsafe.Add(ref p, 3);
+                p = ref Unsafe.Add(ref p, cnt);
+                pupper = p;
+                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref pupper, 2) = Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref pupper, 3) = Unsafe.Add(ref p, 3);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{int}, out Vector128{long}, out Vector128{long})"/>
@@ -1286,16 +1296,18 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{uint}, out Vector128{ulong}, out Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe void Widen_Base(Vector128<uint> source, out Vector128<ulong> lower, out Vector128<ulong> upper) {
-                uint* p = (uint*)&source;
-                fixed (void* plower0 = &lower, pupper0 = &upper) {
-                    ulong* plower = (ulong*)plower0;
-                    ulong* pupper = (ulong*)pupper0;
-                    plower[0] = p[0];
-                    plower[1] = p[1];
-                    pupper[0] = p[2];
-                    pupper[1] = p[3];
-                }
+            public static void Widen_Base(Vector128<uint> source, out Vector128<ulong> lower, out Vector128<ulong> upper) {
+                nint cnt = Vector128<ulong>.Count;
+                UnsafeEx.SkipInit(out lower);
+                UnsafeEx.SkipInit(out upper);
+                ref uint p = ref Unsafe.As<Vector128<uint>, uint>(ref source);
+                ref ulong plower = ref Unsafe.As<Vector128<ulong>, ulong>(ref lower);
+                ref ulong pupper = ref Unsafe.As<Vector128<ulong>, ulong>(ref upper);
+                plower = p;
+                Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
+                p = ref Unsafe.Add(ref p, cnt);
+                pupper = p;
+                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
             }
 
 
