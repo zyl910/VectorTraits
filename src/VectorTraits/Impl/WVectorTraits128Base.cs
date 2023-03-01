@@ -181,6 +181,242 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Narrow_AcceleratedTypes"/>
+            public static TypeCodeFlags Narrow_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{double}, Vector128{double})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Narrow(Vector128<double> lower, Vector128<double> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Narrow(lower, upper);
+#else
+                return Narrow_Base(lower, upper);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{short}, Vector128{short})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Narrow(Vector128<short> lower, Vector128<short> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Narrow(lower, upper);
+#else
+                return Narrow_Base(lower, upper);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{ushort}, Vector128{ushort})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> Narrow(Vector128<ushort> lower, Vector128<ushort> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Narrow(lower, upper);
+#else
+                return Narrow_Base(lower, upper);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{int}, Vector128{int})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Narrow(Vector128<int> lower, Vector128<int> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Narrow(lower, upper);
+#else
+                return Narrow_Base(lower, upper);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{uint}, Vector128{uint})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> Narrow(Vector128<uint> lower, Vector128<uint> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Narrow(lower, upper);
+#else
+                return Narrow_Base(lower, upper);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{long}, Vector128{long})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Narrow(Vector128<long> lower, Vector128<long> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Narrow(lower, upper);
+#else
+                return Narrow_Base(lower, upper);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{ulong}, Vector128{ulong})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> Narrow(Vector128<ulong> lower, Vector128<ulong> upper) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Narrow(lower, upper);
+#else
+                return Narrow_Base(lower, upper);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{double}, Vector128{double})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Narrow_Base(Vector128<double> lower, Vector128<double> upper) {
+                nint cnt = Vector128<double>.Count;
+                UnsafeEx.SkipInit(out Vector128<float> rt);
+                ref float p = ref Unsafe.As<Vector128<float>, float>(ref rt);
+                ref double plower = ref Unsafe.As<Vector128<double>, double>(ref lower);
+                ref double pupper = ref Unsafe.As<Vector128<double>, double>(ref upper);
+                p = (float)plower;
+                Unsafe.Add(ref p, 1) = (float)Unsafe.Add(ref plower, 1);
+                p = ref Unsafe.Add(ref p, cnt);
+                p = (float)pupper;
+                Unsafe.Add(ref p, 1) = (float)Unsafe.Add(ref pupper, 1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{short}, Vector128{short})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Narrow_Base(Vector128<short> lower, Vector128<short> upper) {
+                nint cnt = Vector128<short>.Count;
+                UnsafeEx.SkipInit(out Vector128<sbyte> rt);
+                ref sbyte p = ref Unsafe.As<Vector128<sbyte>, sbyte>(ref rt);
+                ref short plower = ref Unsafe.As<Vector128<short>, short>(ref lower);
+                ref short pupper = ref Unsafe.As<Vector128<short>, short>(ref upper);
+                p = (sbyte)plower;
+                Unsafe.Add(ref p, 1) = (sbyte)Unsafe.Add(ref plower, 1);
+                Unsafe.Add(ref p, 2) = (sbyte)Unsafe.Add(ref plower, 2);
+                Unsafe.Add(ref p, 3) = (sbyte)Unsafe.Add(ref plower, 3);
+                Unsafe.Add(ref p, 4) = (sbyte)Unsafe.Add(ref plower, 4);
+                Unsafe.Add(ref p, 5) = (sbyte)Unsafe.Add(ref plower, 5);
+                Unsafe.Add(ref p, 6) = (sbyte)Unsafe.Add(ref plower, 6);
+                Unsafe.Add(ref p, 7) = (sbyte)Unsafe.Add(ref plower, 7);
+                p = ref Unsafe.Add(ref p, cnt);
+                p = (sbyte)pupper;
+                Unsafe.Add(ref p, 1) = (sbyte)Unsafe.Add(ref pupper, 1);
+                Unsafe.Add(ref p, 2) = (sbyte)Unsafe.Add(ref pupper, 2);
+                Unsafe.Add(ref p, 3) = (sbyte)Unsafe.Add(ref pupper, 3);
+                Unsafe.Add(ref p, 4) = (sbyte)Unsafe.Add(ref pupper, 4);
+                Unsafe.Add(ref p, 5) = (sbyte)Unsafe.Add(ref pupper, 5);
+                Unsafe.Add(ref p, 6) = (sbyte)Unsafe.Add(ref pupper, 6);
+                Unsafe.Add(ref p, 7) = (sbyte)Unsafe.Add(ref pupper, 7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{ushort}, Vector128{ushort})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> Narrow_Base(Vector128<ushort> lower, Vector128<ushort> upper) {
+                nint cnt = Vector128<ushort>.Count;
+                UnsafeEx.SkipInit(out Vector128<byte> rt);
+                ref byte p = ref Unsafe.As<Vector128<byte>, byte>(ref rt);
+                ref ushort plower = ref Unsafe.As<Vector128<ushort>, ushort>(ref lower);
+                ref ushort pupper = ref Unsafe.As<Vector128<ushort>, ushort>(ref upper);
+                p = (byte)plower;
+                Unsafe.Add(ref p, 1) = (byte)Unsafe.Add(ref plower, 1);
+                Unsafe.Add(ref p, 2) = (byte)Unsafe.Add(ref plower, 2);
+                Unsafe.Add(ref p, 3) = (byte)Unsafe.Add(ref plower, 3);
+                Unsafe.Add(ref p, 4) = (byte)Unsafe.Add(ref plower, 4);
+                Unsafe.Add(ref p, 5) = (byte)Unsafe.Add(ref plower, 5);
+                Unsafe.Add(ref p, 6) = (byte)Unsafe.Add(ref plower, 6);
+                Unsafe.Add(ref p, 7) = (byte)Unsafe.Add(ref plower, 7);
+                p = ref Unsafe.Add(ref p, cnt);
+                p = (byte)pupper;
+                Unsafe.Add(ref p, 1) = (byte)Unsafe.Add(ref pupper, 1);
+                Unsafe.Add(ref p, 2) = (byte)Unsafe.Add(ref pupper, 2);
+                Unsafe.Add(ref p, 3) = (byte)Unsafe.Add(ref pupper, 3);
+                Unsafe.Add(ref p, 4) = (byte)Unsafe.Add(ref pupper, 4);
+                Unsafe.Add(ref p, 5) = (byte)Unsafe.Add(ref pupper, 5);
+                Unsafe.Add(ref p, 6) = (byte)Unsafe.Add(ref pupper, 6);
+                Unsafe.Add(ref p, 7) = (byte)Unsafe.Add(ref pupper, 7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{int}, Vector128{int})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Narrow_Base(Vector128<int> lower, Vector128<int> upper) {
+                nint cnt = Vector128<int>.Count;
+                UnsafeEx.SkipInit(out Vector128<short> rt);
+                ref short p = ref Unsafe.As<Vector128<short>, short>(ref rt);
+                ref int plower = ref Unsafe.As<Vector128<int>, int>(ref lower);
+                ref int pupper = ref Unsafe.As<Vector128<int>, int>(ref upper);
+                p = (short)plower;
+                Unsafe.Add(ref p, 1) = (short)Unsafe.Add(ref plower, 1);
+                Unsafe.Add(ref p, 2) = (short)Unsafe.Add(ref plower, 2);
+                Unsafe.Add(ref p, 3) = (short)Unsafe.Add(ref plower, 3);
+                p = ref Unsafe.Add(ref p, cnt);
+                p = (short)pupper;
+                Unsafe.Add(ref p, 1) = (short)Unsafe.Add(ref pupper, 1);
+                Unsafe.Add(ref p, 2) = (short)Unsafe.Add(ref pupper, 2);
+                Unsafe.Add(ref p, 3) = (short)Unsafe.Add(ref pupper, 3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{uint}, Vector128{uint})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> Narrow_Base(Vector128<uint> lower, Vector128<uint> upper) {
+                nint cnt = Vector128<uint>.Count;
+                UnsafeEx.SkipInit(out Vector128<ushort> rt);
+                ref ushort p = ref Unsafe.As<Vector128<ushort>, ushort>(ref rt);
+                ref uint plower = ref Unsafe.As<Vector128<uint>, uint>(ref lower);
+                ref uint pupper = ref Unsafe.As<Vector128<uint>, uint>(ref upper);
+                p = (ushort)plower;
+                Unsafe.Add(ref p, 1) = (ushort)Unsafe.Add(ref plower, 1);
+                Unsafe.Add(ref p, 2) = (ushort)Unsafe.Add(ref plower, 2);
+                Unsafe.Add(ref p, 3) = (ushort)Unsafe.Add(ref plower, 3);
+                p = ref Unsafe.Add(ref p, cnt);
+                p = (ushort)pupper;
+                Unsafe.Add(ref p, 1) = (ushort)Unsafe.Add(ref pupper, 1);
+                Unsafe.Add(ref p, 2) = (ushort)Unsafe.Add(ref pupper, 2);
+                Unsafe.Add(ref p, 3) = (ushort)Unsafe.Add(ref pupper, 3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{long}, Vector128{long})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Narrow_Base(Vector128<long> lower, Vector128<long> upper) {
+                nint cnt = Vector128<long>.Count;
+                UnsafeEx.SkipInit(out Vector128<int> rt);
+                ref int p = ref Unsafe.As<Vector128<int>, int>(ref rt);
+                ref long plower = ref Unsafe.As<Vector128<long>, long>(ref lower);
+                ref long pupper = ref Unsafe.As<Vector128<long>, long>(ref upper);
+                p = (int)plower;
+                Unsafe.Add(ref p, 1) = (int)Unsafe.Add(ref plower, 1);
+                p = ref Unsafe.Add(ref p, cnt);
+                p = (int)pupper;
+                Unsafe.Add(ref p, 1) = (int)Unsafe.Add(ref pupper, 1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{ulong}, Vector128{ulong})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> Narrow_Base(Vector128<ulong> lower, Vector128<ulong> upper) {
+                nint cnt = Vector128<ulong>.Count;
+                UnsafeEx.SkipInit(out Vector128<uint> rt);
+                ref uint p = ref Unsafe.As<Vector128<uint>, uint>(ref rt);
+                ref ulong plower = ref Unsafe.As<Vector128<ulong>, ulong>(ref lower);
+                ref ulong pupper = ref Unsafe.As<Vector128<ulong>, ulong>(ref upper);
+                p = (uint)plower;
+                Unsafe.Add(ref p, 1) = (uint)Unsafe.Add(ref plower, 1);
+                p = ref Unsafe.Add(ref p, cnt);
+                p = (uint)pupper;
+                Unsafe.Add(ref p, 1) = (uint)Unsafe.Add(ref pupper, 1);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {
@@ -1039,7 +1275,7 @@ namespace Zyl.VectorTraits.Impl {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                     if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
                     }
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                     return rt;

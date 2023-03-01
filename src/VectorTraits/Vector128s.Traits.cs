@@ -992,6 +992,94 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.Narrow_AcceleratedTypes"/>
+        public static TypeCodeFlags Narrow_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.Narrow_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                if (Vector128.IsHardwareAccelerated) {
+                    rt |= TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                }
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{double}, Vector128{double})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<float> Narrow(Vector128<double> lower, Vector128<double> upper) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.Narrow(lower, upper);
+#else
+            return _instance.Narrow(lower, upper);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{short}, Vector128{short})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<sbyte> Narrow(Vector128<short> lower, Vector128<short> upper) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.Narrow(lower, upper);
+#else
+            return _instance.Narrow(lower, upper);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{ushort}, Vector128{ushort})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<byte> Narrow(Vector128<ushort> lower, Vector128<ushort> upper) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.Narrow(lower, upper);
+#else
+            return _instance.Narrow(lower, upper);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{int}, Vector128{int})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<short> Narrow(Vector128<int> lower, Vector128<int> upper) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.Narrow(lower, upper);
+#else
+            return _instance.Narrow(lower, upper);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{uint}, Vector128{uint})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<ushort> Narrow(Vector128<uint> lower, Vector128<uint> upper) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.Narrow(lower, upper);
+#else
+            return _instance.Narrow(lower, upper);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{long}, Vector128{long})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> Narrow(Vector128<long> lower, Vector128<long> upper) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.Narrow(lower, upper);
+#else
+            return _instance.Narrow(lower, upper);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{ulong}, Vector128{ulong})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<uint> Narrow(Vector128<ulong> lower, Vector128<ulong> upper) {
+#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+            return Vector128.Narrow(lower, upper);
+#else
+            return _instance.Narrow(lower, upper);
+#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Negate_AcceleratedTypes"/>
         public static TypeCodeFlags Negate_AcceleratedTypes {
             get {
@@ -1675,7 +1763,7 @@ namespace Zyl.VectorTraits {
                 TypeCodeFlags rt = _instance.Widen_AcceleratedTypes;
 #if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
                     if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
                     }
 #endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
                 return rt;

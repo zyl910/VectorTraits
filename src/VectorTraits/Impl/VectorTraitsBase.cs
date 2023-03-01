@@ -1379,7 +1379,7 @@ namespace Zyl.VectorTraits.Impl {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if BCL_OVERRIDE_BASE_VAR
                     if (Vector.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
                     }
 #endif // BCL_OVERRIDE_BASE_VAR
                     return rt;
