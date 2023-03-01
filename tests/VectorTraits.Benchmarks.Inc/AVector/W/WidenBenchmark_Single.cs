@@ -63,7 +63,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe TMyOut StaticSumWidenBcl(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumWidenBcl(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             int VectorWidth = Vector<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -74,19 +74,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             Vector<TMyOut> lower, upper;
             int i;
             // Body.
-            fixed (TMy* p0 = &src[0]) {
-                TMy* p = p0;
-                // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    Vector.Widen(*(Vector<TMy>*)p, out lower, out upper);
-                    vrt += lower;
-                    vrt1 += upper;
-                    p += nBlockWidth;
-                }
-                // Remainder processs.
-                for (i = 0; i < cntRem; ++i) {
-                    rt += (TMyOut)p[i];
-                }
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector.Widen(p0, out lower, out upper);
+                vrt += lower;
+                vrt1 += upper;
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
             }
             // Reduce.
             vrt += vrt1;
@@ -112,7 +111,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe TMyOut StaticSumWidenVectorBase(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumWidenVectorBase(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             int VectorWidth = Vector<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -123,19 +122,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             Vector<TMyOut> lower, upper;
             int i;
             // Body.
-            fixed (TMy* p0 = &src[0]) {
-                TMy* p = p0;
-                // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    VectorTraitsBase.Statics.Widen(*(Vector<TMy>*)p, out lower, out upper);
-                    vrt += lower;
-                    vrt1 += upper;
-                    p += nBlockWidth;
-                }
-                // Remainder processs.
-                for (i = 0; i < cntRem; ++i) {
-                    rt += (TMyOut)p[i];
-                }
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                VectorTraitsBase.Statics.Widen(p0, out lower, out upper);
+                vrt += lower;
+                vrt1 += upper;
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
             }
             // Reduce.
             vrt += vrt1;
@@ -162,7 +160,52 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe TMyOut StaticSumWidenVectorTraits(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumWidenVectorTraits(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vectors.Widen(p0, out lower, out upper);
+                vrt += lower;
+                vrt1 += upper;
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            vrt += vrt1;
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorTraits() {
+            dstTMy = StaticSumWidenVectorTraits(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorTraits");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector Traits - static - Ptr.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe TMyOut StaticSumWidenVectorTraits_Ptr(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             int VectorWidth = Vector<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -196,9 +239,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         }
 
         [Benchmark]
-        public void SumWidenVectorTraits() {
-            dstTMy = StaticSumWidenVectorTraits(srcArray, srcArray.Length);
-            CheckResult("SumWidenVectorTraits");
+        public void SumWidenVectorTraits_Ptr() {
+            dstTMy = StaticSumWidenVectorTraits_Ptr(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorTraits_Ptr");
         }
 
 
@@ -218,7 +261,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe TMyOut StaticSumWidenVector128_Arm(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumWidenVector128_Arm(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             int VectorWidth = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -229,19 +272,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             Vector128<TMyOut> lower, upper;
             int i;
             // Body.
-            fixed (TMy* p0 = &src[0]) {
-                TMy* p = p0;
-                // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    WVectorTraits128AdvSimd.Statics.Widen(*(Vector128<TMy>*)p, out lower, out upper);
-                    vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, lower);
-                    vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, upper);
-                    p += nBlockWidth;
-                }
-                // Remainder processs.
-                for (i = 0; i < cntRem; ++i) {
-                    rt += (TMyOut)p[i];
-                }
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                WVectorTraits128AdvSimd.Statics.Widen(p0, out lower, out upper);
+                vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, lower);
+                vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, upper);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
             }
             // Reduce.
             vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vrt1);
@@ -265,7 +307,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe TMyOut StaticSumWidenVector128_ArmB64(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumWidenVector128_ArmB64(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             int VectorWidth = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -276,19 +318,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             Vector128<TMyOut> lower, upper;
             int i;
             // Body.
-            fixed (TMy* p0 = &src[0]) {
-                TMy* p = p0;
-                // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    WVectorTraits128AdvSimdB64.Statics.Widen(*(Vector128<TMy>*)p, out lower, out upper);
-                    vrt = WVectorTraits128AdvSimdB64.Statics.Add(vrt, lower);
-                    vrt1 = WVectorTraits128AdvSimdB64.Statics.Add(vrt1, upper);
-                    p += nBlockWidth;
-                }
-                // Remainder processs.
-                for (i = 0; i < cntRem; ++i) {
-                    rt += (TMyOut)p[i];
-                }
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                WVectorTraits128AdvSimdB64.Statics.Widen(p0, out lower, out upper);
+                vrt = WVectorTraits128AdvSimdB64.Statics.Add(vrt, lower);
+                vrt1 = WVectorTraits128AdvSimdB64.Statics.Add(vrt1, upper);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
             }
             // Reduce.
             vrt = WVectorTraits128AdvSimdB64.Statics.Add(vrt, vrt1);
@@ -317,7 +358,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe TMyOut StaticSumWidenVector128Traits(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumWidenVector128Traits(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             int VectorWidth = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -328,19 +369,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             Vector128<TMyOut> lower, upper;
             int i;
             // Body.
-            fixed (TMy* p0 = &src[0]) {
-                TMy* p = p0;
-                // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    Vector128s.Widen(*(Vector128<TMy>*)p, out lower, out upper);
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                    Vector128s.Widen(p0, out lower, out upper);
                     vrt = Vector128s.Add(vrt, lower);
                     vrt1 = Vector128s.Add(vrt1, upper);
-                    p += nBlockWidth;
-                }
-                // Remainder processs.
-                for (i = 0; i < cntRem; ++i) {
-                    rt += (TMyOut)p[i];
-                }
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
             }
             // Reduce.
             vrt = Vector128s.Add(vrt, vrt1);
@@ -369,7 +409,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe TMyOut StaticSumWidenVector256Traits(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumWidenVector256Traits(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             int VectorWidth = Vector256<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -380,19 +420,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             Vector256<TMyOut> lower, upper;
             int i;
             // Body.
-            fixed (TMy* p0 = &src[0]) {
-                TMy* p = p0;
-                // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    Vector256s.Widen(*(Vector256<TMy>*)p, out lower, out upper);
-                    vrt = Vector256s.Add(vrt, lower);
-                    vrt1 = Vector256s.Add(vrt1, upper);
-                    p += nBlockWidth;
-                }
-                // Remainder processs.
-                for (i = 0; i < cntRem; ++i) {
-                    rt += (TMyOut)p[i];
-                }
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector256s.Widen(p0, out lower, out upper);
+                vrt = Vector256s.Add(vrt, lower);
+                vrt1 = Vector256s.Add(vrt1, upper);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
             }
             // Reduce.
             vrt = Vector256s.Add(vrt, vrt1);
