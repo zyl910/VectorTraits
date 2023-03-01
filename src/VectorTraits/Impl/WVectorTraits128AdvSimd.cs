@@ -163,6 +163,62 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Narrow_AcceleratedTypes"/>
+            public static TypeCodeFlags Narrow_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{double}, Vector128{double})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Narrow(Vector128<double> lower, Vector128<double> upper) {
+                // TypeCodeFlags.Double: Need 64bit .
+                return SuperStatics.Narrow(lower, upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{short}, Vector128{short})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Narrow(Vector128<short> lower, Vector128<short> upper) {
+                return AdvSimd.ExtractNarrowingUpper(AdvSimd.ExtractNarrowingLower(lower), upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{ushort}, Vector128{ushort})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> Narrow(Vector128<ushort> lower, Vector128<ushort> upper) {
+                return AdvSimd.ExtractNarrowingUpper(AdvSimd.ExtractNarrowingLower(lower), upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{int}, Vector128{int})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Narrow(Vector128<int> lower, Vector128<int> upper) {
+                return AdvSimd.ExtractNarrowingUpper(AdvSimd.ExtractNarrowingLower(lower), upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{uint}, Vector128{uint})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> Narrow(Vector128<uint> lower, Vector128<uint> upper) {
+                return AdvSimd.ExtractNarrowingUpper(AdvSimd.ExtractNarrowingLower(lower), upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{long}, Vector128{long})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Narrow(Vector128<long> lower, Vector128<long> upper) {
+                return AdvSimd.ExtractNarrowingUpper(AdvSimd.ExtractNarrowingLower(lower), upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{ulong}, Vector128{ulong})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> Narrow(Vector128<ulong> lower, Vector128<ulong> upper) {
+                return AdvSimd.ExtractNarrowingUpper(AdvSimd.ExtractNarrowingLower(lower), upper);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {

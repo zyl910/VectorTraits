@@ -227,6 +227,20 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.Narrow_AcceleratedTypes"/>
+        public override TypeCodeFlags Narrow_AcceleratedTypes {
+            get {
+                return Statics.Narrow_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{double}, Vector128{double})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<float> Narrow(Vector128<double> lower, Vector128<double> upper) {
+            return Statics.Narrow(lower, upper);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Subtract_AcceleratedTypes"/>
         public override TypeCodeFlags Subtract_AcceleratedTypes {
             get {
