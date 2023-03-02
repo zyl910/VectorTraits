@@ -1,8 +1,15 @@
 # Traits method list
 
-## Vector traits methods (向量特性方法)
+## Vector traits method of official BCL library (官方BCL库的向量特性方法)
 Types: Vector, Vector128, Vector256 .
 
+Summary (概要):
+- Support for `.NET Standard 2.1` new vector methods (支持 `.NET Standard 2.1` 新增的向量方法): ConvertToDouble, ConvertToInt32, ConvertToInt64, ConvertToSingle, ConvertToUInt32, ConvertToUInt64, Narrow, Widen .
+- Support for `.NET 5.0` new vector methods (支持 `.NET 5.0` 新增的向量方法): Ceiling, Floor .
+- Support for `.NET 6.0` new vector methods (支持 `.NET 6.0` 新增的向量方法): Sum .
+- Support for `.NET 7.0` new vector methods (支持 `.NET 7.0` 新增的向量方法): ExtractMostSignificantBits, Shuffle, ShiftLeft, ShiftRightArithmetic, ShiftRightLogical .
+
+List (列表):
 - `Ceiling`: Computes the ceiling of each element in a vector (计算向量中每个元素的向上舍入).
   Mnemonic: `rt[i] := ceiling(value[i])` .
 - `Floor`: Computes the floor of each element in a vector (计算向量中每个元素的向下舍入).
@@ -24,12 +31,11 @@ Types: Vector, Vector128, Vector256 .
 - `Widen`: Widens a Vector into two Vector instances (将一个 Vector 扩宽为两个 Vector 实例).
   Mnemonic: `element_ref(i, lower, upper) := widen(source[i])`.
 
-- `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
-  Mnemonic: `rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])` .
 
-## WVector supplement traits methods (W向量补充的特性方法)
+## Fixed width Vector supplement traits methods (固定宽度向量补充的特性方法)
 Types: Vector128, Vector256 .
 
+List (列表):
 - `Abs`: Computes the absolute value of each element in a vector (计算向量中每个元素的绝对值).
   Mnemonic: `rt[i] := abs(vector[i])`.
 - `Add`: Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
@@ -62,3 +68,16 @@ Types: Vector128, Vector256 .
   Mnemonic: `rt[i] := left[i] - right[i]`.
 - `Xor`: Computes the exclusive-or of two vectors (计算两个向量的位异或).
   Mnemonic: `rt[i] := left[i] ^ right[i]`.
+
+
+## Vector traits method appended by this library (由本库追加的向量特性方法)
+Types: Vector, Vector128, Vector256 .
+
+Summary (概要):
+- Provides the vector methods of clamp (提供限制的向量方法): YClamp .
+- Provides the vector methods of narrow saturate (提供缩窄饱和的向量方法): YNarrowSaturate, YNarrowSaturateUnsigned .
+- Provides the vector methods of shuffle (提供换位的向量方法): YShuffleEach128, YShuffleInsert, YShuffleInsertEach128, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG4 classes.
+
+List (列表):
+- `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
+  Mnemonic: `rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])` .
