@@ -24,6 +24,12 @@ Traits methods:
 - ...
 - Full list: [TraitsMethodList](TraitsMethodList.md)
 
+Supported instruction set:
+- x86
+  - 256-bit vector: Avx, Avx2 .
+- Arm
+  - 128-bit vector: AdvSimd .
+
 Feature:
 - Support for lower versions of `.NET` programs. Although `.NET Core 1.0` in 2016 already supports vector types such as `Vector<T>`, the lack of important vector functions such as ShiftLeft, ShiftRightArithmetic, ShiftRightLogical, Shuffle, etc. makes it difficult to implement many algorithms with vector types. It was not until 2022 when `.NET 7.0` was released that the problem of not supporting vector functions such as ShiftLeft was solved. If the class library only supports `.NET 7.0`, it will cause a lot of inconvenience. This library solves this problem by enabling lower versions of `.NET` programs (`.NET Standard 1.1`, `.NET Core 1.0`, `.NET Framework 4.5`, ...) to use vector functions such as ShiftLeft.
 - Powerful functions . In addition to referencing vector methods from higher versions of `.NET`, this library also provides many useful vector methods by referring to intrinsic functions. e.g. ShiftLeftFast, YNarrowSaturate ...
@@ -32,7 +38,7 @@ Feature:
 - Easy to use. This library supports not only `Vector<T>`, but also `Vector128<T>`/`Vector256<T>` and other vector types. The class name of the tool class is easy to remember (Vectors/Vector64s/Vector128s/Vector256s) and provides many common vector constants through a generic class of the same name.
 - Provides the vector tuples. e.g. VectorXTuple, VectorX2, VectorX3, VectorX4, Vector128X2, Vector256X2 ...
 
-The Disassembly window in Visual Studio allows you to view the assembly code at runtime.  For example, when running on a machine that supports the Avx instruction set, `Vectors.ShiftLeft` will be compiled inline and optimized to use the `vpsllw` instruction.
+Tip: The Disassembly window in Visual Studio allows you to view the assembly code at runtime.  For example, when running on a machine that supports the Avx instruction set, `Vectors.ShiftLeft` will be compiled inline and optimized to use the `vpsllw` instruction.
 ![Vectors.ShiftLeft_use_inline.png](docs/Vectors.ShiftLeft_use_inline.png)
 
 

@@ -24,6 +24,12 @@ VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 - ...
 - 完整列表: [TraitsMethodList](TraitsMethodList.md)
 
+支持的指令集:
+- x86
+  - 256位向量: Avx, Avx2 .
+- Arm
+  - 128位向量: AdvSimd .
+
 特点:
 - 支持低版本的 `.NET` 程序。虽然在2016年的 `.NET Core 1.0` 就已经支持 `Vector<T>` 等向量类型，但是缺少ShiftLeft、ShiftRightArithmetic、ShiftRightLogical、Shuffle 等重要的向量函数，导致很多算法难以用向量类型来实现。直到2022年推出的 `.NET 7.0`, 才解决不支持ShiftLeft等向量函数等问题。若让类库仅支持 `.NET 7.0` 的话，会造成很多不便。本库解决了这一难题，能使低版本的 `.NET` 程序（`.NET Standard 1.1`, `.NET Core 1.0`, `.NET Framework 4.5`, ...）也能使用ShiftLeft等向量函数。
 - 功能强. 除了参考高版本 `.NET` 的向量方法外，本库还参考内在函数，提供了很多有用的向量方法。例如 ShiftLeftFast, YNarrowSaturate ...
@@ -32,7 +38,7 @@ VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 - 使用方便。本库不仅支持 `Vector<T>`，还支持 `Vector128<T>`/`Vector256<T>` 等向量类型。工具类的类名很好记（Vectors/Vector64s/Vector128s/Vector256s），且通过同名的泛型类提供了许多常用的向量常数。
 - 提供了向量元祖. e.g. VectorXTuple, VectorX2, VectorX3, VectorX4, Vector128X2, Vector256X2 ...
 
-在 Visual Studio 的 Disassembly窗口可以查看运行时的汇编代码. 例如在支持 Avx指令集的机器上运行时, `Vectors.ShiftLeft` 会被内联编译优化为使用 `vpsllw` 指令.
+提示: 在 Visual Studio 的 Disassembly窗口可以查看运行时的汇编代码. 例如在支持 Avx指令集的机器上运行时, `Vectors.ShiftLeft` 会被内联编译优化为使用 `vpsllw` 指令.
 ![Vectors.ShiftLeft_use_inline.png](docs/Vectors.ShiftLeft_use_inline.png)
 
 
