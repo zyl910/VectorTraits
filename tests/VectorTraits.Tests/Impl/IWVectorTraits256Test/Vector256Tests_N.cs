@@ -29,6 +29,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
+            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<T>, Vector256<TOut>>>("Narrow_Base");
+            foreach (var func in funcList) {
+                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
             // run.
             Vector256<T>[] samples = {
                 Vector256s.Create(src),
@@ -61,6 +65,16 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
                         Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
+                    }
+                }
+                foreach (var func in funcList) {
+                    string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                    Vector256<TOut> dst = func(lower, upper);
+                    if (Scalars<T>.ExponentBits > 0) {
+                    // Compatible floating-point NaN.
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
                     }
                 }
             }

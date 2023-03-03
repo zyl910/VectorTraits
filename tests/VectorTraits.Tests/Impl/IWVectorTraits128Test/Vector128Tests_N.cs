@@ -29,6 +29,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
+            var funcList = Vector128s.GetSupportedMethodList<Func<Vector128<T>, Vector128<T>, Vector128<TOut>>>("Narrow_Base");
+            foreach (var func in funcList) {
+                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
             // run.
             Vector128<T>[] samples = {
                 Vector128s.Create(src),
@@ -63,6 +67,16 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                         Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
                     }
                 }
+                foreach (var func in funcList) {
+                    string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                    Vector128<TOut> dst = func(lower, upper);
+                    if (Scalars<T>.ExponentBits > 0) {
+                    // Compatible floating-point NaN.
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
+                    }
+                }
             }
         }
 
@@ -76,7 +90,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
                 if (instance.GetIsSupported(true)) {
-                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ConditionalSelect_AcceleratedTypes}");
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.Negate_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }

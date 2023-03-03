@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Linq;
 using Zyl.VectorTraits.Impl;
@@ -25,6 +26,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
+            }
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, Vector<T>, Vector<TOut>>>("Narrow_Base");
+            foreach (var func in funcList) {
+                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
             // run.
             Vector<T>[] samples = {
@@ -58,6 +63,16 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
                         Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
+                    }
+                }
+                foreach (var func in funcList) {
+                    string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                    Vector<TOut> dst = func(lower, upper);
+                    if (Scalars<T>.ExponentBits > 0) {
+                    // Compatible floating-point NaN.
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
                     }
                 }
             }
