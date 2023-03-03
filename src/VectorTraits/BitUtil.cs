@@ -286,9 +286,26 @@ namespace Zyl.VectorTraits {
         /// <returns>A int value (一个整数值). false is 0, true is 1 . </returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe int ToInt32(bool b) {
+        public static int ToInt32(bool b) {
+#if UNSAFE
+            return ToInt32_Ptr(b);
+#else
+            return Convert.ToInt32(b);
+#endif // UNSAFE
+        }
+
+#if UNSAFE
+        /// <summary>
+        /// Convert bool to Int32 - Pointer (将 bool 转为 Int32 - 指针).
+        /// </summary>
+        /// <param name="b">Source bool value (源 bool 值)</param>
+        /// <returns>A int value (一个整数值). false is 0, true is 1 . </returns>
+        //[CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe int ToInt32_Ptr(bool b) {
             return *(sbyte*)&b;
         }
+#endif // UNSAFE
 
         /// <summary>
         /// Convert bool to Int32 mask (将 bool 转为 Int32 掩码).

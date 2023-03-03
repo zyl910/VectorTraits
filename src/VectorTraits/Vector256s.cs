@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits {
 
@@ -278,17 +279,14 @@ namespace Zyl.VectorTraits {
                 throw new IndexOutOfRangeException(string.Format("Index({0}) was outside the bounds{1} of the array!", index, values.Length));
             }
             Vector256<T> temp = default;
-            unsafe {
-                // T* arr = (T*)&temp; // CS0208	Cannot take the address of, get the size of, or declare a pointer to a managed type ('T')
-                Span<T> arr = new Span<T>(&temp, Vector256<T>.Count);
-                int m = Math.Min(arr.Length, length);
-                for (int i = 0; i < m; ++i) {
-                    arr[i] = values[idx];
-                    ++idx;
-                    if (idx >= idxEnd) break;
-                }
-                return Create(arr);
+            ref T p = ref Unsafe.As<Vector256<T>, T>(ref temp);
+            int m = Math.Min(Vector256<T>.Count, length);
+            for (int i = 0; i < m; ++i) {
+                p = values[idx];
+                ++idx;
+                p = ref Unsafe.Add(ref p, 1);
             }
+            return temp;
         }
 
         /// <summary>
@@ -340,17 +338,15 @@ namespace Zyl.VectorTraits {
             if (index < 0 || idxEnd > values.Length) {
                 throw new IndexOutOfRangeException(string.Format("Index({0}) was outside the bounds{1} of the array!", index, values.Length));
             }
-            Vector256<T> temp = default;
-            unsafe {
-                // T* arr = (T*)&temp; // CS0208	Cannot take the address of, get the size of, or declare a pointer to a managed type ('T')
-                Span<T> arr = new Span<T>(&temp, Vector256<T>.Count);
-                for (int i = 0; i < arr.Length; ++i) {
-                    arr[i] = values[idx];
-                    ++idx;
-                    if (idx >= idxEnd) idx = index;
-                }
-                return Create(arr);
+            UnsafeEx.SkipInit(out Vector256<T> temp);
+            ref T p = ref Unsafe.As<Vector256<T>, T>(ref temp);
+            for (int i = 0; i < Vector256<T>.Count; ++i) {
+                p = values[idx];
+                ++idx;
+                if (idx >= idxEnd) idx = index;
+                p = ref Unsafe.Add(ref p, 1);
             }
+            return temp;
         }
 
         /// <summary>
@@ -381,14 +377,13 @@ namespace Zyl.VectorTraits {
         /// <returns>A new <see cref="Vector256{T}"/> from a from the given <see cref="Func{T, TResult}"/> (一个新<see cref="Vector256{T}"/>，其元素来 <see cref="Func{T, TResult}"/>).</returns>
         public static Vector256<T> CreateByFunc<T>(Func<int, T> func) where T : struct {
             if (null == func) throw new ArgumentNullException(nameof(func));
-            Vector256<T> temp = default;
-            unsafe {
-                Span<T> arr = new Span<T>(&temp, Vector256<T>.Count);
-                for (int i = 0; i < Vector256<T>.Count; ++i) {
-                    arr[i] = func(i);
-                }
-                return Create(arr);
+            UnsafeEx.SkipInit(out Vector256<T> temp);
+            ref T p = ref Unsafe.As<Vector256<T>, T>(ref temp);
+            for (int i = 0; i < Vector256<T>.Count; ++i) {
+                p = func(i);
+                p = ref Unsafe.Add(ref p, 1);
             }
+            return temp;
         }
 
         /// <summary>
@@ -401,14 +396,13 @@ namespace Zyl.VectorTraits {
         /// <returns>A new <see cref="Vector256{T}"/> from a from the given <see cref="Func{T1, T2, TResult}"/> (一个新<see cref="Vector256{T}"/>，其元素来 <see cref="Func{T1, T2, TResult}"/>).</returns>
         public static Vector256<T> CreateByFunc<T, TUserdata>(Func<int, TUserdata, T> func, TUserdata userdata) where T : struct {
             if (null == func) throw new ArgumentNullException(nameof(func));
-            Vector256<T> temp = default;
-            unsafe {
-                Span<T> arr = new Span<T>(&temp, Vector256<T>.Count);
-                for (int i = 0; i < Vector256<T>.Count; ++i) {
-                    arr[i] = func(i, userdata);
-                }
-                return Create(arr);
+            UnsafeEx.SkipInit(out Vector256<T> temp);
+            ref T p = ref Unsafe.As<Vector256<T>, T>(ref temp);
+            for (int i = 0; i < Vector256<T>.Count; ++i) {
+                p = func(i, userdata);
+                p = ref Unsafe.Add(ref p, 1);
             }
+            return temp;
         }
 
         /// <summary>
@@ -456,14 +450,12 @@ namespace Zyl.VectorTraits {
 #if NET7_0_OR_GREATER
             return ~src;
 #else
-            unsafe {
-                ulong* p = (ulong*)&src;
-                p[0] = ~p[0];
-                p[1] = ~p[1];
-                p[2] = ~p[2];
-                p[3] = ~p[3];
-                return src;
-            }
+            ref ulong p = ref Unsafe.As<Vector256<T>, ulong>(ref src);
+            p = ~p;
+            Unsafe.Add(ref p, 1) = ~Unsafe.Add(ref p, 1);
+            Unsafe.Add(ref p, 2) = ~Unsafe.Add(ref p, 2);
+            Unsafe.Add(ref p, 3) = ~Unsafe.Add(ref p, 3);
+            return src;
 #endif // NET7_0_OR_GREATER
         }
 
@@ -844,17 +836,17 @@ namespace Zyl.VectorTraits {
         public static Vector256<T> Zero { get { return V0; } }
 
         /// <summary>1 bits mask (1位掩码).</summary>
-        public static ref readonly Vector256<T> MaskBits1 { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref GetMaskBits(1); } }
+        public static ref readonly Vector256<T> MaskBits1 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return ref GetMaskBits(1); } }
         /// <summary>2 bits mask (2位掩码).</summary>
-        public static ref readonly Vector256<T> MaskBits2 { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref GetMaskBits(2); } }
+        public static ref readonly Vector256<T> MaskBits2 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return ref GetMaskBits(2); } }
         /// <summary>4 bits mask (4位掩码).</summary>
-        public static ref readonly Vector256<T> MaskBits4 { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref GetMaskBits(4); } }
+        public static ref readonly Vector256<T> MaskBits4 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return ref GetMaskBits(4); } }
         /// <summary>8 bits mask (8位掩码).</summary>
-        public static ref readonly Vector256<T> MaskBits8 { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref GetMaskBits(8); } }
+        public static ref readonly Vector256<T> MaskBits8 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return ref GetMaskBits(8); } }
         /// <summary>16 bits mask (16位掩码).</summary>
-        public static ref readonly Vector256<T> MaskBits16 { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref GetMaskBits(Math.Min(ElementBitSize, 16)); } }
+        public static ref readonly Vector256<T> MaskBits16 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return ref GetMaskBits(Math.Min(ElementBitSize, 16)); } }
         /// <summary>32 bits mask (32位掩码).</summary>
-        public static ref readonly Vector256<T> MaskBits32 { [MethodImpl(MethodImplOptions.AggressiveInlining)]get { return ref GetMaskBits(Math.Min(ElementBitSize, 32)); } }
+        public static ref readonly Vector256<T> MaskBits32 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return ref GetMaskBits(Math.Min(ElementBitSize, 32)); } }
 
 #endif
     }
