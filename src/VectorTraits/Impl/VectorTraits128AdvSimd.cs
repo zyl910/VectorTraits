@@ -105,6 +105,60 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.Narrow_AcceleratedTypes"/>
+            public static TypeCodeFlags Narrow_AcceleratedTypes {
+                get {
+                    return WStatics.Narrow_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{double}, Vector{double})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Narrow(Vector<double> lower, Vector<double> upper) {
+                return WStatics.Narrow(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{short}, Vector{short})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> Narrow(Vector<short> lower, Vector<short> upper) {
+                return WStatics.Narrow(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{ushort}, Vector{ushort})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> Narrow(Vector<ushort> lower, Vector<ushort> upper) {
+                return WStatics.Narrow(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{int}, Vector{int})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> Narrow(Vector<int> lower, Vector<int> upper) {
+                return WStatics.Narrow(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{uint}, Vector{uint})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> Narrow(Vector<uint> lower, Vector<uint> upper) {
+                return WStatics.Narrow(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{long}, Vector{long})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> Narrow(Vector<long> lower, Vector<long> upper) {
+                return WStatics.Narrow(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{ulong}, Vector{ulong})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> Narrow(Vector<ulong> lower, Vector<ulong> upper) {
+                return WStatics.Narrow(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {

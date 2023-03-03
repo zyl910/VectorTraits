@@ -91,6 +91,20 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.Narrow_AcceleratedTypes"/>
+            public static TypeCodeFlags Narrow_AcceleratedTypes {
+                get {
+                    return WStatics.Narrow_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{double}, Vector{double})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Narrow(Vector<double> lower, Vector<double> upper) {
+                return WStatics.Narrow(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.Widen_AcceleratedTypes"/>
             public static TypeCodeFlags Widen_AcceleratedTypes {
                 get {

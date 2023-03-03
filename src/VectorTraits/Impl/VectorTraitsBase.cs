@@ -181,6 +181,203 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.Narrow_AcceleratedTypes"/>
+            public static TypeCodeFlags Narrow_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_VAR
+                    if (Vector.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    }
+#endif // BCL_OVERRIDE_BASE_VAR
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{double}, Vector{double})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Narrow(Vector<double> lower, Vector<double> upper) {
+#if BCL_OVERRIDE_BASE_VAR
+                return Vector.Narrow(lower, upper);
+#else
+                return Narrow_Base(lower, upper);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{short}, Vector{short})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> Narrow(Vector<short> lower, Vector<short> upper) {
+#if BCL_OVERRIDE_BASE_VAR
+                return Vector.Narrow(lower, upper);
+#else
+                return Narrow_Base(lower, upper);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{ushort}, Vector{ushort})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> Narrow(Vector<ushort> lower, Vector<ushort> upper) {
+#if BCL_OVERRIDE_BASE_VAR
+                return Vector.Narrow(lower, upper);
+#else
+                return Narrow_Base(lower, upper);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{int}, Vector{int})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> Narrow(Vector<int> lower, Vector<int> upper) {
+#if BCL_OVERRIDE_BASE_VAR
+                return Vector.Narrow(lower, upper);
+#else
+                return Narrow_Base(lower, upper);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{uint}, Vector{uint})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> Narrow(Vector<uint> lower, Vector<uint> upper) {
+#if BCL_OVERRIDE_BASE_VAR
+                return Vector.Narrow(lower, upper);
+#else
+                return Narrow_Base(lower, upper);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{long}, Vector{long})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> Narrow(Vector<long> lower, Vector<long> upper) {
+#if BCL_OVERRIDE_BASE_VAR
+                return Vector.Narrow(lower, upper);
+#else
+                return Narrow_Base(lower, upper);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{ulong}, Vector{ulong})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> Narrow(Vector<ulong> lower, Vector<ulong> upper) {
+#if BCL_OVERRIDE_BASE_VAR
+                return Vector.Narrow(lower, upper);
+#else
+                return Narrow_Base(lower, upper);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{double}, Vector{double})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Narrow_Base(Vector<double> lower, Vector<double> upper) {
+                nint cnt = Vector<double>.Count;
+                UnsafeEx.SkipInit(out Vector<float> rt);
+                ref float p = ref Unsafe.As<Vector<float>, float>(ref rt);
+                ref double plower = ref Unsafe.As<Vector<double>, double>(ref lower);
+                ref double pupper = ref Unsafe.As<Vector<double>, double>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref p, i) = (float)Unsafe.Add(ref plower, i);
+                    Unsafe.Add(ref p, i + cnt) = (float)Unsafe.Add(ref pupper, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{short}, Vector{short})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> Narrow_Base(Vector<short> lower, Vector<short> upper) {
+                nint cnt = Vector<short>.Count;
+                UnsafeEx.SkipInit(out Vector<sbyte> rt);
+                ref sbyte p = ref Unsafe.As<Vector<sbyte>, sbyte>(ref rt);
+                ref short plower = ref Unsafe.As<Vector<short>, short>(ref lower);
+                ref short pupper = ref Unsafe.As<Vector<short>, short>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref p, i) = (sbyte)Unsafe.Add(ref plower, i);
+                    Unsafe.Add(ref p, i + cnt) = (sbyte)Unsafe.Add(ref pupper, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{ushort}, Vector{ushort})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> Narrow_Base(Vector<ushort> lower, Vector<ushort> upper) {
+                nint cnt = Vector<ushort>.Count;
+                UnsafeEx.SkipInit(out Vector<byte> rt);
+                ref byte p = ref Unsafe.As<Vector<byte>, byte>(ref rt);
+                ref ushort plower = ref Unsafe.As<Vector<ushort>, ushort>(ref lower);
+                ref ushort pupper = ref Unsafe.As<Vector<ushort>, ushort>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref p, i) = (byte)Unsafe.Add(ref plower, i);
+                    Unsafe.Add(ref p, i + cnt) = (byte)Unsafe.Add(ref pupper, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{int}, Vector{int})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> Narrow_Base(Vector<int> lower, Vector<int> upper) {
+                nint cnt = Vector<int>.Count;
+                UnsafeEx.SkipInit(out Vector<short> rt);
+                ref short p = ref Unsafe.As<Vector<short>, short>(ref rt);
+                ref int plower = ref Unsafe.As<Vector<int>, int>(ref lower);
+                ref int pupper = ref Unsafe.As<Vector<int>, int>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref p, i) = (short)Unsafe.Add(ref plower, i);
+                    Unsafe.Add(ref p, i + cnt) = (short)Unsafe.Add(ref pupper, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{uint}, Vector{uint})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> Narrow_Base(Vector<uint> lower, Vector<uint> upper) {
+                nint cnt = Vector<uint>.Count;
+                UnsafeEx.SkipInit(out Vector<ushort> rt);
+                ref ushort p = ref Unsafe.As<Vector<ushort>, ushort>(ref rt);
+                ref uint plower = ref Unsafe.As<Vector<uint>, uint>(ref lower);
+                ref uint pupper = ref Unsafe.As<Vector<uint>, uint>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref p, i) = (ushort)Unsafe.Add(ref plower, i);
+                    Unsafe.Add(ref p, i + cnt) = (ushort)Unsafe.Add(ref pupper, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{long}, Vector{long})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> Narrow_Base(Vector<long> lower, Vector<long> upper) {
+                nint cnt = Vector<long>.Count;
+                UnsafeEx.SkipInit(out Vector<int> rt);
+                ref int p = ref Unsafe.As<Vector<int>, int>(ref rt);
+                ref long plower = ref Unsafe.As<Vector<long>, long>(ref lower);
+                ref long pupper = ref Unsafe.As<Vector<long>, long>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref p, i) = (int)Unsafe.Add(ref plower, i);
+                    Unsafe.Add(ref p, i + cnt) = (int)Unsafe.Add(ref pupper, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Narrow(Vector{ulong}, Vector{ulong})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> Narrow_Base(Vector<ulong> lower, Vector<ulong> upper) {
+                nint cnt = Vector<ulong>.Count;
+                UnsafeEx.SkipInit(out Vector<uint> rt);
+                ref uint p = ref Unsafe.As<Vector<uint>, uint>(ref rt);
+                ref ulong plower = ref Unsafe.As<Vector<ulong>, ulong>(ref lower);
+                ref ulong pupper = ref Unsafe.As<Vector<ulong>, ulong>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref p, i) = (uint)Unsafe.Add(ref plower, i);
+                    Unsafe.Add(ref p, i + cnt) = (uint)Unsafe.Add(ref pupper, i);
+                }
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {
@@ -1379,7 +1576,7 @@ namespace Zyl.VectorTraits.Impl {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if BCL_OVERRIDE_BASE_VAR
                     if (Vector.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
                     }
 #endif // BCL_OVERRIDE_BASE_VAR
                     return rt;

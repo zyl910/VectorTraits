@@ -67,6 +67,90 @@ namespace Zyl.VectorTraits.Impl {
         Vector<double> Floor(Vector<double> value);
 
 
+        /// <summary>
+        /// Types with hardware acceleration when running <c>Narrow</c> (运行 <c>Narrow</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Narrow"/>
+        TypeCodeFlags Narrow_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Narrows two <seealso cref="Vector{T}"/> instances into one <seealso cref="Vector{T}"/>"  (将两个 <seealso cref="Vector{T}"/> 实例缩窄为一个 <seealso cref="Vector{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow(element_ref(i, lower, upper))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Narrow(Vector{double}, Vector{double})" />
+        Vector<float> Narrow(Vector<double> lower, Vector<double> upper);
+
+        /// <summary>
+        /// Narrows two <seealso cref="Vector{T}"/> instances into one <seealso cref="Vector{T}"/>"  (将两个 <seealso cref="Vector{T}"/> 实例缩窄为一个 <seealso cref="Vector{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow(element_ref(i, lower, upper))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Narrow(Vector{short}, Vector{short})" />
+        Vector<sbyte> Narrow(Vector<short> lower, Vector<short> upper);
+
+        /// <summary>
+        /// Narrows two <seealso cref="Vector{T}"/> instances into one <seealso cref="Vector{T}"/>"  (将两个 <seealso cref="Vector{T}"/> 实例缩窄为一个 <seealso cref="Vector{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow(element_ref(i, lower, upper))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Narrow(Vector{ushort}, Vector{ushort})" />
+        Vector<byte> Narrow(Vector<ushort> lower, Vector<ushort> upper);
+
+        /// <summary>
+        /// Narrows two <seealso cref="Vector{T}"/> instances into one <seealso cref="Vector{T}"/>"  (将两个 <seealso cref="Vector{T}"/> 实例缩窄为一个 <seealso cref="Vector{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow(element_ref(i, lower, upper))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Narrow(Vector{int}, Vector{int})" />
+        Vector<short> Narrow(Vector<int> lower, Vector<int> upper);
+
+        /// <summary>
+        /// Narrows two <seealso cref="Vector{T}"/> instances into one <seealso cref="Vector{T}"/>"  (将两个 <seealso cref="Vector{T}"/> 实例缩窄为一个 <seealso cref="Vector{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow(element_ref(i, lower, upper))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Narrow(Vector{uint}, Vector{uint})" />
+        Vector<ushort> Narrow(Vector<uint> lower, Vector<uint> upper);
+
+        /// <summary>
+        /// Narrows two <seealso cref="Vector{T}"/> instances into one <seealso cref="Vector{T}"/>"  (将两个 <seealso cref="Vector{T}"/> 实例缩窄为一个 <seealso cref="Vector{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow(element_ref(i, lower, upper))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Narrow(Vector{long}, Vector{long})" />
+        Vector<int> Narrow(Vector<long> lower, Vector<long> upper);
+
+        /// <summary>
+        /// Narrows two <seealso cref="Vector{T}"/> instances into one <seealso cref="Vector{T}"/>"  (将两个 <seealso cref="Vector{T}"/> 实例缩窄为一个 <seealso cref="Vector{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow(element_ref(i, lower, upper))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Narrow(Vector{ulong}, Vector{ulong})" />
+        Vector<uint> Narrow(Vector<ulong> lower, Vector<ulong> upper);
+
+
         // 对于8、16位的移位, C# 会扩展到32位来处理. 但对于SIMD的紧缩8、16位数据来说, 扩展到32位后的运算结果会不符, 故应该先对 shiftAmount 做 bitwise-and 运算限制在合理范围内. 实测发现.NET6仍然是扩展到32位, 而 .NET7 也用掩码处理, 故本类库与 .NET7 保持了一致.
         // ---
         // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators

@@ -219,6 +219,94 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.Narrow_AcceleratedTypes"/>
+        public static TypeCodeFlags Narrow_AcceleratedTypes {
+            get {
+                TypeCodeFlags rt = _instance.Narrow_AcceleratedTypes;
+#if BCL_OVERRIDE_STATIC
+                if (Vector.IsHardwareAccelerated) {
+                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                }
+#endif // BCL_OVERRIDE_STATIC
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Narrow(Vector{double}, Vector{double})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> Narrow(Vector<double> lower, Vector<double> upper) {
+#if BCL_OVERRIDE_STATIC
+            return Vector.Narrow(lower, upper);
+#else
+            return _instance.Narrow(lower, upper);
+#endif // BCL_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Narrow(Vector{short}, Vector{short})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> Narrow(Vector<short> lower, Vector<short> upper) {
+#if BCL_OVERRIDE_STATIC
+            return Vector.Narrow(lower, upper);
+#else
+            return _instance.Narrow(lower, upper);
+#endif // BCL_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Narrow(Vector{ushort}, Vector{ushort})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> Narrow(Vector<ushort> lower, Vector<ushort> upper) {
+#if BCL_OVERRIDE_STATIC
+            return Vector.Narrow(lower, upper);
+#else
+            return _instance.Narrow(lower, upper);
+#endif // BCL_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Narrow(Vector{int}, Vector{int})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> Narrow(Vector<int> lower, Vector<int> upper) {
+#if BCL_OVERRIDE_STATIC
+            return Vector.Narrow(lower, upper);
+#else
+            return _instance.Narrow(lower, upper);
+#endif // BCL_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Narrow(Vector{uint}, Vector{uint})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> Narrow(Vector<uint> lower, Vector<uint> upper) {
+#if BCL_OVERRIDE_STATIC
+            return Vector.Narrow(lower, upper);
+#else
+            return _instance.Narrow(lower, upper);
+#endif // BCL_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Narrow(Vector{long}, Vector{long})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> Narrow(Vector<long> lower, Vector<long> upper) {
+#if BCL_OVERRIDE_STATIC
+            return Vector.Narrow(lower, upper);
+#else
+            return _instance.Narrow(lower, upper);
+#endif // BCL_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Narrow(Vector{ulong}, Vector{ulong})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> Narrow(Vector<ulong> lower, Vector<ulong> upper) {
+#if BCL_OVERRIDE_STATIC
+            return Vector.Narrow(lower, upper);
+#else
+            return _instance.Narrow(lower, upper);
+#endif // BCL_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
         public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {
