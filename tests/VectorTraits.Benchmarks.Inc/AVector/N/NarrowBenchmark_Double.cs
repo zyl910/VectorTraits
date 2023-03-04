@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -12,34 +12,34 @@ using System.Runtime.Intrinsics;
 using System.Text;
 using Zyl.VectorTraits.Impl;
 
-namespace Zyl.VectorTraits.Benchmarks.AVector.W {
+namespace Zyl.VectorTraits.Benchmarks.AVector.N {
 #if BENCHMARKS_OFF
     using BenchmarkAttribute = FakeBenchmarkAttribute;
 #else
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = SByte;
-    using TMyOut = Int16;
+    using TMy = Double;
+    using TMyOut = Single;
 
     /// <summary>
-    /// Widen benchmark - SByte.
+    /// Narrow benchmark - Double.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class WidenBenchmark_SByte : AbstractSharedBenchmark_SByte_Int16 {
+    public partial class NarrowBenchmark_Double : AbstractSharedBenchmark_Double_Single {
 
         // -- var --
 
         /// <summary>
-        /// Sum Widen - Scalar.
+        /// Sum Narrow - Scalar.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TMyOut StaticSumWidenScalar(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumNarrowScalar(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             for (int i = 0; i < srcCount; ++i) {
                 rt += (TMyOut)src[i];
@@ -48,39 +48,36 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         }
 
         [Benchmark(Baseline = true)]
-        public void SumWidenScalar() {
-            dstTMy = StaticSumWidenScalar(srcArray, srcArray.Length);
+        public void SumNarrowScalar() {
+            dstTMy = StaticSumNarrowScalar(srcArray, srcArray.Length);
             if (CheckMode) {
                 baselineTMy = dstTMy;
-                BenchmarkUtil.WriteItem("# SumWidenScalar", string.Format("{0}", baselineTMy));
+                BenchmarkUtil.WriteItem("# SumNarrowScalar", string.Format("{0}", baselineTMy));
             }
         }
 
         /// <summary>
-        /// Sum Widen - BCL.
+        /// Sum Narrow - BCL.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TMyOut StaticSumWidenBcl(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumNarrowBcl(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
-            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
-            Vector<TMyOut> lower, upper;
             int i;
             // Body.
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector.Widen(p0, out lower, out upper);
-                vrt += lower;
-                vrt1 += upper;
-                p0 = ref Unsafe.Add(ref p0, 1);
+                vrt += Vector.Narrow(p0, Unsafe.Add(ref p0, 1));
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
@@ -88,7 +85,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
                 rt += (TMyOut)Unsafe.Add(ref p, i);
             }
             // Reduce.
-            vrt += vrt1;
             for (i = 0; i < Vector<TMyOut>.Count; ++i) {
                 rt += vrt[i];
             }
@@ -96,39 +92,36 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         }
 
         [Benchmark]
-        public void SumWidenBcl() {
-            dstTMy = StaticSumWidenBcl(srcArray, srcArray.Length);
-            CheckResult("SumWidenBcl");
+        public void SumNarrowBcl() {
+            dstTMy = StaticSumNarrowBcl(srcArray, srcArray.Length);
+            CheckResult("SumNarrowBcl");
         }
 
         #region BENCHMARKS_RAW
 #if BENCHMARKS_RAW
 
         /// <summary>
-        /// Sum Widen - Vector - base.
+        /// Sum Narrow - Vector - base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TMyOut StaticSumWidenVectorBase(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumNarrowVectorBase(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
-            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
-            Vector<TMyOut> lower, upper;
             int i;
             // Body.
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                VectorTraitsBase.Statics.Widen(p0, out lower, out upper);
-                vrt += lower;
-                vrt1 += upper;
-                p0 = ref Unsafe.Add(ref p0, 1);
+                vrt += VectorTraitsBase.Statics.Narrow(p0, Unsafe.Add(ref p0, 1));
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
@@ -136,7 +129,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
                 rt += (TMyOut)Unsafe.Add(ref p, i);
             }
             // Reduce.
-            vrt += vrt1;
             for (i = 0; i < Vector<TMyOut>.Count; ++i) {
                 rt += vrt[i];
             }
@@ -144,9 +136,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         }
 
         [Benchmark]
-        public void SumWidenVectorBase() {
-            dstTMy = StaticSumWidenVectorBase(srcArray, srcArray.Length);
-            CheckResult("SumWidenVectorBase");
+        public void SumNarrowVectorBase() {
+            dstTMy = StaticSumNarrowVectorBase(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVectorBase");
         }
 
 #endif // BENCHMARKS_RAW
@@ -154,30 +146,27 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
 
 
         /// <summary>
-        /// Sum Widen - Vector Traits - static.
+        /// Sum Narrow - Vector Traits - static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TMyOut StaticSumWidenVectorTraits(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumNarrowVectorTraits(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
-            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
-            Vector<TMyOut> lower, upper;
             int i;
             // Body.
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vectors.Widen(p0, out lower, out upper);
-                vrt += lower;
-                vrt1 += upper;
-                p0 = ref Unsafe.Add(ref p0, 1);
+                vrt += Vectors.Narrow(p0, Unsafe.Add(ref p0, 1));
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
@@ -185,7 +174,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
                 rt += (TMyOut)Unsafe.Add(ref p, i);
             }
             // Reduce.
-            vrt += vrt1;
             for (i = 0; i < Vector<TMyOut>.Count; ++i) {
                 rt += vrt[i];
             }
@@ -193,55 +181,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         }
 
         [Benchmark]
-        public void SumWidenVectorTraits() {
-            dstTMy = StaticSumWidenVectorTraits(srcArray, srcArray.Length);
-            CheckResult("SumWidenVectorTraits");
-        }
-
-        /// <summary>
-        /// Sum Widen - Vector Traits - static - Ptr.
-        /// </summary>
-        /// <param name="src">Source array.</param>
-        /// <param name="srcCount">Source count</param>
-        /// <returns>Returns the sum.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe TMyOut StaticSumWidenVectorTraits_Ptr(TMy[] src, int srcCount) {
-            TMyOut rt = 0; // Result.
-            int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
-            int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
-            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
-            Vector<TMyOut> lower, upper;
-            int i;
-            // Body.
-            fixed (TMy* p0 = &src[0]) {
-                TMy* p = p0;
-                // Vector processs.
-                for (i = 0; i < cntBlock; ++i) {
-                    Vectors.Widen(*(Vector<TMy>*)p, out lower, out upper);
-                    vrt += lower;
-                    vrt1 += upper;
-                    p += nBlockWidth;
-                }
-                // Remainder processs.
-                for (i = 0; i < cntRem; ++i) {
-                    rt += (TMyOut)p[i];
-                }
-            }
-            // Reduce.
-            vrt += vrt1;
-            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
-                rt += vrt[i];
-            }
-            return rt;
-        }
-
-        [Benchmark]
-        public void SumWidenVectorTraits_Ptr() {
-            dstTMy = StaticSumWidenVectorTraits_Ptr(srcArray, srcArray.Length);
-            CheckResult("SumWidenVectorTraits_Ptr");
+        public void SumNarrowVectorTraits() {
+            dstTMy = StaticSumNarrowVectorTraits(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVectorTraits");
         }
 
 
@@ -255,30 +197,28 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
 #if NET5_0_OR_GREATER
 
         /// <summary>
-        /// Sum Widen - Vector128 - Arm.
+        /// Sum Narrow - Vector128 - Arm.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TMyOut StaticSumWidenVector128_Arm(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumNarrowVector128_Arm(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector result.
-            Vector128<TMyOut> vrt1 = Vector128<TMyOut>.Zero;
-            Vector128<TMyOut> lower, upper;
+            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector128 result.
             int i;
             // Body.
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
-            // a) Vector processs.
+            // a) Vector128 processs.
             for (i = 0; i < cntBlock; ++i) {
-                WVectorTraits128AdvSimd.Statics.Widen(p0, out lower, out upper);
-                vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, lower);
-                vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, upper);
-                p0 = ref Unsafe.Add(ref p0, 1);
+                var t = WVectorTraits128AdvSimd.Statics.Narrow(p0, Unsafe.Add(ref p0, 1));
+                vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
@@ -286,18 +226,60 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
                 rt += (TMyOut)Unsafe.Add(ref p, i);
             }
             // Reduce.
-            vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vrt1);
             for (i = 0; i < Vector128<TMyOut>.Count; ++i) {
-                rt += vrt.GetElement(i);
+                rt += vrt[i];
             }
             return rt;
         }
 
         [Benchmark]
-        public void SumWidenVector128_Arm() {
+        public void SumNarrowVector128_Arm() {
             WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
-            dstTMy = StaticSumWidenVector128_Arm(srcArray, srcArray.Length);
-            CheckResult("SumWidenVector128_Arm");
+            dstTMy = StaticSumNarrowVector128_Arm(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVector128_Arm");
+        }
+
+        /// <summary>
+        /// Sum Narrow - Vector128 - Arm 64bit.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TMyOut StaticSumNarrowVector128_ArmB64(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector128 result.
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector128 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                var t = WVectorTraits128AdvSimdB64.Statics.Narrow(p0, Unsafe.Add(ref p0, 1));
+                vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            for (i = 0; i < Vector128<TMyOut>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumNarrowVector128_ArmB64() {
+            WVectorTraits128AdvSimdB64.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumNarrowVector128_ArmB64(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVector128_ArmB64");
         }
 
 #endif // NET5_0_OR_GREATER
@@ -306,30 +288,28 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum Widen - Vector128 - Traits static.
+        /// Sum Narrow - Vector128 - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TMyOut StaticSumWidenVector128Traits(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumNarrowVector128Traits(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector result.
-            Vector128<TMyOut> vrt1 = Vector128<TMyOut>.Zero;
-            Vector128<TMyOut> lower, upper;
+            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector128 result.
             int i;
             // Body.
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
-            // a) Vector processs.
+            // a) Vector128 processs.
             for (i = 0; i < cntBlock; ++i) {
-                    Vector128s.Widen(p0, out lower, out upper);
-                    vrt = Vector128s.Add(vrt, lower);
-                    vrt1 = Vector128s.Add(vrt1, upper);
-                p0 = ref Unsafe.Add(ref p0, 1);
+                var t = Vector128s.Narrow(p0, Unsafe.Add(ref p0, 1));
+                vrt = Vector128s.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
@@ -337,17 +317,16 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
                 rt += (TMyOut)Unsafe.Add(ref p, i);
             }
             // Reduce.
-            vrt = Vector128s.Add(vrt, vrt1);
             for (i = 0; i < Vector128<TMyOut>.Count; ++i) {
-                rt += vrt.GetElement(i);
+                rt += vrt[i];
             }
             return rt;
         }
 
         [Benchmark]
-        public void SumWidenVector128Traits() {
-            dstTMy = StaticSumWidenVector128Traits(srcArray, srcArray.Length);
-            CheckResult("SumWidenVector128Traits");
+        public void SumNarrowVector128Traits() {
+            dstTMy = StaticSumNarrowVector128Traits(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVector128Traits");
         }
 
 #endif // BENCHMARKS_128ALGORITHM
@@ -357,30 +336,28 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
 #if BENCHMARKS_256ALGORITHM
 
         /// <summary>
-        /// Sum Widen - Vector256 - Traits static.
+        /// Sum Narrow - Vector256 - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TMyOut StaticSumWidenVector256Traits(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumNarrowVector256Traits(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector256<TMyOut> vrt = Vector256<TMyOut>.Zero; // Vector result.
-            Vector256<TMyOut> vrt1 = Vector256<TMyOut>.Zero;
-            Vector256<TMyOut> lower, upper;
+            Vector256<TMyOut> vrt = Vector256<TMyOut>.Zero; // Vector256 result.
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
-            // a) Vector processs.
+            // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256s.Widen(p0, out lower, out upper);
-                vrt = Vector256s.Add(vrt, lower);
-                vrt1 = Vector256s.Add(vrt1, upper);
-                p0 = ref Unsafe.Add(ref p0, 1);
+                var t = Vector256s.Narrow(p0, Unsafe.Add(ref p0, 1));
+                vrt = Vector256s.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
@@ -388,17 +365,16 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
                 rt += (TMyOut)Unsafe.Add(ref p, i);
             }
             // Reduce.
-            vrt = Vector256s.Add(vrt, vrt1);
             for (i = 0; i < Vector256<TMyOut>.Count; ++i) {
-                rt += vrt.GetElement(i);
+                rt += vrt[i];
             }
             return rt;
         }
 
         [Benchmark]
-        public void SumWidenVector256Traits() {
-            dstTMy = StaticSumWidenVector256Traits(srcArray, srcArray.Length);
-            CheckResult("SumWidenVector256Traits");
+        public void SumNarrowVector256Traits() {
+            dstTMy = StaticSumNarrowVector256Traits(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVector256Traits");
         }
 
 #endif // BENCHMARKS_256ALGORITHM

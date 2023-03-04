@@ -14,10 +14,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Byte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Double.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Double_Single.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int16_SByte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int32_Int64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int64.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int64_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_SByte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_SByte_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Single.cs" />

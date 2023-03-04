@@ -14,6 +14,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)ABitUtil\ConditionalSelectBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ABitUtil\ConditionalSelectBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AloneTestUtil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\N\NarrowBenchmark_Double.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\N\NarrowBenchmark_Int16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\N\NarrowBenchmark_Int64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftBenchmark_Byte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftBenchmark_Int32.cs" />
