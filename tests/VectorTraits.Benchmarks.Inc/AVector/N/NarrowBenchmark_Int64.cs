@@ -38,7 +38,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TMyOut StaticSumNarrowScalar(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             for (int i = 0; i < srcCount; ++i) {
@@ -62,7 +61,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TMyOut StaticSumNarrowBcl(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             const int GroupSize = 2;
@@ -106,7 +104,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TMyOut StaticSumNarrowVectorBase(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             const int GroupSize = 2;
@@ -151,7 +148,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TMyOut StaticSumNarrowVectorTraits(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             const int GroupSize = 2;
@@ -202,7 +198,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TMyOut StaticSumNarrowVector128_Arm(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             const int GroupSize = 2;
@@ -227,7 +222,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
             }
             // Reduce.
             for (i = 0; i < Vector128<TMyOut>.Count; ++i) {
-                rt += vrt[i];
+                rt += vrt.GetElement(i);
             }
             return rt;
         }
@@ -250,7 +245,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TMyOut StaticSumNarrowVector128Traits(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             const int GroupSize = 2;
@@ -275,7 +269,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
             }
             // Reduce.
             for (i = 0; i < Vector128<TMyOut>.Count; ++i) {
-                rt += vrt[i];
+                rt += vrt.GetElement(i);
             }
             return rt;
         }
@@ -298,7 +292,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TMyOut StaticSumNarrowVector256Traits(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             const int GroupSize = 2;
@@ -323,7 +316,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
             }
             // Reduce.
             for (i = 0; i < Vector256<TMyOut>.Count; ++i) {
-                rt += vrt[i];
+                rt += vrt.GetElement(i);
             }
             return rt;
         }

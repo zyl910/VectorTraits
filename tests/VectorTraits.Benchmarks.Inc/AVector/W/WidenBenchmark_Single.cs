@@ -372,9 +372,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                    Vector128s.Widen(p0, out lower, out upper);
-                    vrt = Vector128s.Add(vrt, lower);
-                    vrt1 = Vector128s.Add(vrt1, upper);
+                Vector128s.Widen(p0, out lower, out upper);
+                vrt = Vector128s.Add(vrt, lower);
+                vrt1 = Vector128s.Add(vrt1, upper);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
