@@ -1010,5 +1010,69 @@ namespace Zyl.VectorTraits {
             return ((value ^ mask) - mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
         }
 
+        /// <summary>
+        /// Produces the full product of unsigned big numbers (产生无符号大数字的完整乘积). `w = u * v`
+        /// </summary>
+        /// <param name="w">The full product of the specified numbers (指定数字的完整乘积).</param>
+        /// <param name="u">The first number to multiply (要相乘的第一个数).</param>
+        /// <param name="v">The second number to multiply (要相乘的第二个数).</param>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void BigNumMultiplyUnsigned(Span<uint> w, ReadOnlySpan<uint> u, ReadOnlySpan<uint> v) {
+            const int L = 32; // sizeof(uint) * 8;
+            int m = u.Length;
+            int n = v.Length;
+            ulong k, t;
+            int i, j;
+            for (i = 0; i < m; i++) {
+                w[i] = 0;
+            }
+            for (j = 0; j < n; j++) {
+                k = 0;
+                for (i = 0; i < m; i++) {
+                    t = (ulong)u[i] * v[j] + w[i + j] + k;
+                    w[i + j] = (uint)t; // 等价于 t & 0xFFFFFFFFU
+                    k = t >> L;
+                }
+                w[m + j] = (uint)k;
+            }
+        }
+
+        /// <summary>
+        /// Produces the full product of two unsigned 64-bit numbers (生成两个无符号 64 位数的完整乘积).
+        /// </summary>
+        /// <param name="a">The first number to multiply (要相乘的第一个数).</param>
+        /// <param name="b">The second number to multiply (要相乘的第二个数).</param>
+        /// <param name="low">When this method returns, contains the low 64-bit of the product of the specified numbers (此方法返回时，包含指定数字乘积的低 64 位).</param>
+        /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
+        [System.CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ulong BigMul (ulong a, ulong b, out ulong low) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            return BigMul_BigNum(a, b, out low);
+#pragma warning restore CS0618 // Type or member is obsolete
+        }
+
+        /// <summary>
+        /// Produces the full product of two unsigned 64-bit numbers - BigNum (生成两个无符号 64 位数的完整乘积 - 大数算法).
+        /// </summary>
+        /// <param name="a">The first number to multiply (要相乘的第一个数).</param>
+        /// <param name="b">The second number to multiply (要相乘的第二个数).</param>
+        /// <param name="low">When this method returns, contains the low 64-bit of the product of the specified numbers (此方法返回时，包含指定数字乘积的低 64 位).</param>
+        /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
+        [System.CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Obsolete("This method is for testing purposes only. Please use BigMul instead.")]
+        public static ulong BigMul_BigNum (ulong a, ulong b, out ulong low) {
+            Span<ulong> w = stackalloc ulong[2];
+            Span<ulong> u = stackalloc ulong[1];
+            Span<ulong> v = stackalloc ulong[1];
+            u[0] = a;
+            v[0] = b;
+            BigNumMultiplyUnsigned(MemoryMarshal.Cast<ulong, uint>(w), MemoryMarshal.Cast<ulong, uint>(u), MemoryMarshal.Cast<ulong, uint>(v));
+            low = w[0];
+            return w[1];
+        }
+
     }
 }
