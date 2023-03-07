@@ -8,6 +8,8 @@ using System.Runtime.Intrinsics;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits {
+    using BaseStatics = WVectorTraits128Base.Statics;
+
     static partial class Vector128s {
         private static readonly IWVectorTraits128 _instance = WVectorTraits128Abstract.GetBestInstance(); // Best traits instance.
         private static readonly dynamic _instanceDynamic = _instance; // Best traits instance dynamic value.
@@ -120,597 +122,583 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Abs_AcceleratedTypes"/>
         public static TypeCodeFlags Abs_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Abs_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
-                    }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Abs_AcceleratedTypes;
+#else
+                return _instance.Abs_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Abs(Vector128<float> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Abs(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Abs(value);
 #else
             return _instance.Abs(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> Abs(Vector128<double> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Abs(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Abs(value);
 #else
             return _instance.Abs(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> Abs(Vector128<sbyte> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Abs(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Abs(value);
 #else
             return _instance.Abs(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> Abs(Vector128<short> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Abs(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Abs(value);
 #else
             return _instance.Abs(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> Abs(Vector128<int> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Abs(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Abs(value);
 #else
             return _instance.Abs(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> Abs(Vector128<long> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Abs(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Abs(value);
 #else
             return _instance.Abs(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.Add_AcceleratedTypes"/>
         public static TypeCodeFlags Add_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Add_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                if (Vector128.IsHardwareAccelerated) {
-                    rt |= TypeCodeFlagsUtil.AllTypes;
-                }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Add_AcceleratedTypes;
+#else
+                return _instance.Add_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{float}, Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Add(Vector128<float> left, Vector128<float> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Add(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{double}, Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> Add(Vector128<double> left, Vector128<double> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Add(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{sbyte}, Vector128{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> Add(Vector128<sbyte> left, Vector128<sbyte> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Add(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> Add(Vector128<byte> left, Vector128<byte> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Add(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> Add(Vector128<short> left, Vector128<short> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Add(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{ushort}, Vector128{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> Add(Vector128<ushort> left, Vector128<ushort> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Add(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> Add(Vector128<int> left, Vector128<int> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Add(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{uint}, Vector128{uint})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> Add(Vector128<uint> left, Vector128<uint> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Add(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> Add(Vector128<long> left, Vector128<long> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Add(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{ulong}, Vector128{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> Add(Vector128<ulong> left, Vector128<ulong> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Add(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.AndNot_AcceleratedTypes"/>
         public static TypeCodeFlags AndNot_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.AndNot_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlagsUtil.AllTypes;
-                    }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.AndNot_AcceleratedTypes;
+#else
+                return _instance.AndNot_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.AndNot{T}(Vector128{T}, Vector128{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> AndNot<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.AndNot(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.AndNot(left, right);
 #else
             return _instance.AndNot(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.BitwiseAnd_AcceleratedTypes"/>
         public static TypeCodeFlags BitwiseAnd_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.BitwiseAnd_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlagsUtil.AllTypes;
-                    }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.BitwiseAnd_AcceleratedTypes;
+#else
+                return _instance.BitwiseAnd_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.BitwiseAnd{T}(Vector128{T}, Vector128{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> BitwiseAnd<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.BitwiseAnd(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.BitwiseAnd(left, right);
 #else
             return _instance.BitwiseAnd(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.BitwiseOr_AcceleratedTypes"/>
         public static TypeCodeFlags BitwiseOr_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.BitwiseOr_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlagsUtil.AllTypes;
-                    }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.BitwiseOr_AcceleratedTypes;
+#else
+                return _instance.BitwiseOr_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.BitwiseOr{T}(Vector128{T}, Vector128{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> BitwiseOr<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.BitwiseOr(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.BitwiseOr(left, right);
 #else
             return _instance.BitwiseOr(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>
         public static TypeCodeFlags Ceiling_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Ceiling_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
-                    }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Ceiling_AcceleratedTypes;
+#else
+                return _instance.Ceiling_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Ceiling(Vector128<float> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Ceiling(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Ceiling(value);
 #else
             return _instance.Ceiling(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> Ceiling(Vector128<double> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Ceiling(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Ceiling(value);
 #else
             return _instance.Ceiling(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect_AcceleratedTypes"/>
         public static TypeCodeFlags ConditionalSelect_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.ConditionalSelect_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                if (Vector128.IsHardwareAccelerated) {
-                    rt |= TypeCodeFlagsUtil.AllTypes;
-                }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.ConditionalSelect_AcceleratedTypes;
+#else
+                return _instance.ConditionalSelect_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> ConditionalSelect<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ConditionalSelect(condition, left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConditionalSelect(condition, left, right);
 #else
             return _instance.ConditionalSelect(condition, left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect(Vector128{int}, Vector128{float}, Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> ConditionalSelect(Vector128<int> condition, Vector128<float> left, Vector128<float> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return ConditionalSelect<float>(condition.AsSingle(), left, right);
+#else
             return _instance.ConditionalSelect(condition, left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect(Vector128{long}, Vector128{double}, Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> ConditionalSelect(Vector128<long> condition, Vector128<double> left, Vector128<double> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return ConditionalSelect<double>(condition.AsDouble(), left, right);
+#else
             return _instance.ConditionalSelect(condition, left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.Divide_AcceleratedTypes"/>
         public static TypeCodeFlags Divide_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Divide_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                if (Vector128.IsHardwareAccelerated) {
-                    // rt |= TypeCodeFlags.Single | TypeCodeFlags.Double; // Arm 32bit no hardware accelerated.
-                }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Divide_AcceleratedTypes;
+#else
+                return _instance.Divide_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Divide(Vector128{float}, Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Divide(Vector128<float> left, Vector128<float> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Divide(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Divide(left, right);
 #else
             return _instance.Divide(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Divide(Vector128{double}, Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> Divide(Vector128<double> left, Vector128<double> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Divide(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Divide(left, right);
 #else
             return _instance.Divide(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.Floor_AcceleratedTypes"/>
         public static TypeCodeFlags Floor_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Floor_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
-                    }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Floor_AcceleratedTypes;
+#else
+                return _instance.Floor_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Floor(Vector128<float> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Floor(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Floor(value);
 #else
             return _instance.Floor(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> Floor(Vector128<double> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Floor(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Floor(value);
 #else
             return _instance.Floor(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.GreaterThan_AcceleratedTypes"/>
         public static TypeCodeFlags GreaterThan_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.GreaterThan_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlagsUtil.AllTypes;
-                    }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.GreaterThan_AcceleratedTypes;
+#else
+                return _instance.GreaterThan_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{float}, Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> GreaterThan(Vector128<float> left, Vector128<float> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.GreaterThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{double}, Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> GreaterThan(Vector128<double> left, Vector128<double> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.GreaterThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{sbyte}, Vector128{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> GreaterThan(Vector128<sbyte> left, Vector128<sbyte> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.GreaterThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> GreaterThan(Vector128<byte> left, Vector128<byte> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.GreaterThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> GreaterThan(Vector128<short> left, Vector128<short> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.GreaterThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ushort}, Vector128{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> GreaterThan(Vector128<ushort> left, Vector128<ushort> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.GreaterThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> GreaterThan(Vector128<int> left, Vector128<int> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.GreaterThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{uint}, Vector128{uint})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> GreaterThan(Vector128<uint> left, Vector128<uint> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.GreaterThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> GreaterThan(Vector128<long> left, Vector128<long> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.GreaterThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ulong}, Vector128{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> GreaterThan(Vector128<ulong> left, Vector128<ulong> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.GreaterThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.LessThan_AcceleratedTypes"/>
         public static TypeCodeFlags LessThan_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.LessThan_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlagsUtil.AllTypes;
-                    }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.LessThan_AcceleratedTypes;
+#else
+                return _instance.LessThan_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{float}, Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> LessThan(Vector128<float> left, Vector128<float> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.LessThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{double}, Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> LessThan(Vector128<double> left, Vector128<double> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.LessThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{sbyte}, Vector128{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> LessThan(Vector128<sbyte> left, Vector128<sbyte> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.LessThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> LessThan(Vector128<byte> left, Vector128<byte> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.LessThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> LessThan(Vector128<short> left, Vector128<short> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.LessThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{ushort}, Vector128{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> LessThan(Vector128<ushort> left, Vector128<ushort> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.LessThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{int}, Vector128{int})"/>
@@ -727,468 +715,456 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> LessThan(Vector128<uint> left, Vector128<uint> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.LessThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> LessThan(Vector128<long> left, Vector128<long> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.LessThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{ulong}, Vector128{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> LessThan(Vector128<ulong> left, Vector128<ulong> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.LessThan(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.Max_AcceleratedTypes"/>
         public static TypeCodeFlags Max_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Max_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlagsUtil.AllTypes;
-                    }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Max_AcceleratedTypes;
+#else
+                return _instance.Max_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{float}, Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Max(Vector128<float> left, Vector128<float> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Max(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{double}, Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> Max(Vector128<double> left, Vector128<double> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Max(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{sbyte}, Vector128{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> Max(Vector128<sbyte> left, Vector128<sbyte> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Max(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> Max(Vector128<byte> left, Vector128<byte> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Max(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> Max(Vector128<short> left, Vector128<short> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Max(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{ushort}, Vector128{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> Max(Vector128<ushort> left, Vector128<ushort> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Max(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> Max(Vector128<int> left, Vector128<int> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Max(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{uint}, Vector128{uint})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> Max(Vector128<uint> left, Vector128<uint> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Max(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> Max(Vector128<long> left, Vector128<long> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Max(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{ulong}, Vector128{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> Max(Vector128<ulong> left, Vector128<ulong> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Max(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.Min_AcceleratedTypes"/>
         public static TypeCodeFlags Min_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Min_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlagsUtil.AllTypes;
-                    }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Min_AcceleratedTypes;
+#else
+                return _instance.Min_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{float}, Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Min(Vector128<float> left, Vector128<float> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Min(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{double}, Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> Min(Vector128<double> left, Vector128<double> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Min(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{sbyte}, Vector128{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> Min(Vector128<sbyte> left, Vector128<sbyte> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Min(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> Min(Vector128<byte> left, Vector128<byte> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Min(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> Min(Vector128<short> left, Vector128<short> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Min(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{ushort}, Vector128{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> Min(Vector128<ushort> left, Vector128<ushort> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Min(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> Min(Vector128<int> left, Vector128<int> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Min(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{uint}, Vector128{uint})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> Min(Vector128<uint> left, Vector128<uint> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Min(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> Min(Vector128<long> left, Vector128<long> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Min(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{ulong}, Vector128{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> Min(Vector128<ulong> left, Vector128<ulong> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Min(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.Narrow_AcceleratedTypes"/>
         public static TypeCodeFlags Narrow_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Narrow_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                if (Vector128.IsHardwareAccelerated) {
-                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-                }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Narrow_AcceleratedTypes;
+#else
+                return _instance.Narrow_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{double}, Vector128{double})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Narrow(Vector128<double> lower, Vector128<double> upper) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Narrow(lower, upper);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Narrow(lower, upper);
 #else
             return _instance.Narrow(lower, upper);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{short}, Vector128{short})" />
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> Narrow(Vector128<short> lower, Vector128<short> upper) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Narrow(lower, upper);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Narrow(lower, upper);
 #else
             return _instance.Narrow(lower, upper);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{ushort}, Vector128{ushort})" />
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> Narrow(Vector128<ushort> lower, Vector128<ushort> upper) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Narrow(lower, upper);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Narrow(lower, upper);
 #else
             return _instance.Narrow(lower, upper);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{int}, Vector128{int})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> Narrow(Vector128<int> lower, Vector128<int> upper) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Narrow(lower, upper);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Narrow(lower, upper);
 #else
             return _instance.Narrow(lower, upper);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{uint}, Vector128{uint})" />
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> Narrow(Vector128<uint> lower, Vector128<uint> upper) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Narrow(lower, upper);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Narrow(lower, upper);
 #else
             return _instance.Narrow(lower, upper);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{long}, Vector128{long})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> Narrow(Vector128<long> lower, Vector128<long> upper) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Narrow(lower, upper);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Narrow(lower, upper);
 #else
             return _instance.Narrow(lower, upper);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{ulong}, Vector128{ulong})" />
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> Narrow(Vector128<ulong> lower, Vector128<ulong> upper) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Narrow(lower, upper);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Narrow(lower, upper);
 #else
             return _instance.Narrow(lower, upper);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.Negate_AcceleratedTypes"/>
         public static TypeCodeFlags Negate_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Negate_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
-                    }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Negate_AcceleratedTypes;
+#else
+                return _instance.Negate_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Negate(Vector128<float> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Negate(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Negate(value);
 #else
             return _instance.Negate(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> Negate(Vector128<double> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Negate(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Negate(value);
 #else
             return _instance.Negate(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> Negate(Vector128<sbyte> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Negate(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Negate(value);
 #else
             return _instance.Negate(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> Negate(Vector128<short> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Negate(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Negate(value);
 #else
             return _instance.Negate(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> Negate(Vector128<int> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Negate(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Negate(value);
 #else
             return _instance.Negate(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> Negate(Vector128<long> value) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Negate(value);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Negate(value);
 #else
             return _instance.Negate(value);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.OnesComplement_AcceleratedTypes"/>
         public static TypeCodeFlags OnesComplement_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.OnesComplement_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlagsUtil.AllTypes;
-                    }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.OnesComplement_AcceleratedTypes;
+#else
+                return _instance.OnesComplement_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.OnesComplement{T}(Vector128{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> OnesComplement<T>(Vector128<T> vector) where T : struct {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.OnesComplement(vector);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.OnesComplement(vector);
 #else
             return _instance.OnesComplement(vector);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.ShiftLeft_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                if (Vector128.IsHardwareAccelerated) {
-                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-                }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.ShiftLeft_AcceleratedTypes;
+#else
+                return _instance.ShiftLeft_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
@@ -1196,181 +1172,179 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftLeft(Vector128<sbyte> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
-            return Vector128.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftLeft(Vector128<byte> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
-            return Vector128.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftLeft(Vector128<short> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{ushort}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftLeft(Vector128<ushort> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftLeft(Vector128<int> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{uint}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftLeft(Vector128<uint> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftLeft(Vector128<long> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{ulong}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftLeft(Vector128<ulong> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftLeftFast(Vector128<sbyte> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
-            return Vector128.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftLeftFast(Vector128<byte> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
-            return Vector128.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftLeftFast(Vector128<short> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{ushort}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftLeftFast(Vector128<ushort> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftLeftFast(Vector128<int> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{uint}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftLeftFast(Vector128<uint> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftLeftFast(Vector128<long> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{ulong}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftLeftFast(Vector128<ulong> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftLeft(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeftFast(value, shiftAmount);
 #else
             return _instance.ShiftLeftFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_AcceleratedTypes"/>
         public static TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.ShiftRightArithmetic_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                if (Vector128.IsHardwareAccelerated) {
-                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
-                }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.ShiftRightArithmetic_AcceleratedTypes;
+#else
+                return _instance.ShiftRightArithmetic_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
@@ -1378,95 +1352,93 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightArithmetic(Vector128<sbyte> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
-            return Vector128.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmetic(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightArithmetic(Vector128<short> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightArithmetic(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmetic(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightArithmetic(Vector128<int> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightArithmetic(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmetic(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightArithmetic(Vector128<long> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightArithmetic(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmetic(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightArithmeticFast(Vector128<sbyte> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
-            return Vector128.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmeticFast(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmeticFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightArithmeticFast(Vector128<short> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightArithmetic(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmeticFast(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmeticFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightArithmeticFast(Vector128<int> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightArithmetic(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmeticFast(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmeticFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightArithmeticFast(Vector128<long> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightArithmetic(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmeticFast(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmeticFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_AcceleratedTypes"/>
         public static TypeCodeFlags ShiftRightLogical_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.ShiftRightLogical_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                if (Vector128.IsHardwareAccelerated) {
-                    rt |= TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-                }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.ShiftRightLogical_AcceleratedTypes;
+#else
+                return _instance.ShiftRightLogical_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
@@ -1474,470 +1446,508 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightLogical(Vector128<sbyte> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
-            return Vector128.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftRightLogical(Vector128<byte> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
-            return Vector128.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightLogical(Vector128<short> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightLogical(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{ushort}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftRightLogical(Vector128<ushort> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightLogical(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightLogical(Vector128<int> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightLogical(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{uint}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftRightLogical(Vector128<uint> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightLogical(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightLogical(Vector128<long> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightLogical(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{ulong}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftRightLogical(Vector128<ulong> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightLogical(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
             return _instance.ShiftRightLogical(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightLogicalFast(Vector128<sbyte> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
-            return Vector128.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftRightLogicalFast(Vector128<byte> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && (NET_X_0_OR_GREATER)
-            return Vector128.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightLogicalFast(Vector128<short> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightLogical(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{ushort}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftRightLogicalFast(Vector128<ushort> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightLogical(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightLogicalFast(Vector128<int> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightLogical(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{uint}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftRightLogicalFast(Vector128<uint> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightLogical(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightLogicalFast(Vector128<long> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightLogical(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{ulong}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftRightLogicalFast(Vector128<ulong> value, int shiftAmount) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.ShiftRightLogical(value, shiftAmount);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
 #else
             return _instance.ShiftRightLogicalFast(value, shiftAmount);
-#endif
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.Subtract_AcceleratedTypes"/>
         public static TypeCodeFlags Subtract_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Subtract_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                if (Vector128.IsHardwareAccelerated) {
-                    rt |= TypeCodeFlagsUtil.AllTypes;
-                }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Subtract_AcceleratedTypes;
+#else
+                return _instance.Subtract_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{float}, Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Subtract(Vector128<float> left, Vector128<float> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Subtract(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{double}, Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> Subtract(Vector128<double> left, Vector128<double> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Subtract(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{sbyte}, Vector128{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> Subtract(Vector128<sbyte> left, Vector128<sbyte> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Subtract(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> Subtract(Vector128<byte> left, Vector128<byte> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Subtract(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> Subtract(Vector128<short> left, Vector128<short> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Subtract(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{ushort}, Vector128{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> Subtract(Vector128<ushort> left, Vector128<ushort> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Subtract(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> Subtract(Vector128<int> left, Vector128<int> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Subtract(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{uint}, Vector128{uint})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> Subtract(Vector128<uint> left, Vector128<uint> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Subtract(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> Subtract(Vector128<long> left, Vector128<long> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Subtract(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{ulong}, Vector128{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> Subtract(Vector128<ulong> left, Vector128<ulong> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Subtract(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.Widen_AcceleratedTypes"/>
         public static TypeCodeFlags Widen_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Widen_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
-                    }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Widen_AcceleratedTypes;
+#else
+                return _instance.Widen_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{float}, out Vector128{double}, out Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector128<float> source, out Vector128<double> lower, out Vector128<double> upper) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            (lower, upper) = Vector128.Widen(source);
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Widen(source, out lower, out upper);
 #else
             _instance.Widen(source, out lower, out upper);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{sbyte}, out Vector128{short}, out Vector128{short})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector128<sbyte> source, out Vector128<short> lower, out Vector128<short> upper) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            (lower, upper) = Vector128.Widen(source);
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Widen(source, out lower, out upper);
 #else
             _instance.Widen(source, out lower, out upper);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{byte}, out Vector128{ushort}, out Vector128{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector128<byte> source, out Vector128<ushort> lower, out Vector128<ushort> upper) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            (lower, upper) = Vector128.Widen(source);
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Widen(source, out lower, out upper);
 #else
             _instance.Widen(source, out lower, out upper);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{short}, out Vector128{int}, out Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector128<short> source, out Vector128<int> lower, out Vector128<int> upper) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            (lower, upper) = Vector128.Widen(source);
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Widen(source, out lower, out upper);
 #else
             _instance.Widen(source, out lower, out upper);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{ushort}, out Vector128{uint}, out Vector128{uint})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector128<ushort> source, out Vector128<uint> lower, out Vector128<uint> upper) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            (lower, upper) = Vector128.Widen(source);
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Widen(source, out lower, out upper);
 #else
             _instance.Widen(source, out lower, out upper);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{int}, out Vector128{long}, out Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector128<int> source, out Vector128<long> lower, out Vector128<long> upper) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            (lower, upper) = Vector128.Widen(source);
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Widen(source, out lower, out upper);
 #else
             _instance.Widen(source, out lower, out upper);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{uint}, out Vector128{ulong}, out Vector128{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector128<uint> source, out Vector128<ulong> lower, out Vector128<ulong> upper) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            (lower, upper) = Vector128.Widen(source);
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Widen(source, out lower, out upper);
 #else
             _instance.Widen(source, out lower, out upper);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.Xor_AcceleratedTypes"/>
         public static TypeCodeFlags Xor_AcceleratedTypes {
             get {
-                TypeCodeFlags rt = _instance.Xor_AcceleratedTypes;
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlagsUtil.AllTypes;
-                    }
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-                return rt;
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Xor_AcceleratedTypes;
+#else
+                return _instance.Xor_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Xor{T}(Vector128{T}, Vector128{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> Xor<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
-            return Vector128.Xor(left, right);
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Xor(left, right);
 #else
             return _instance.Xor(left, right);
-#endif // BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
         /// <inheritdoc cref="IWVectorTraits128.YClamp_AcceleratedTypes"/>
         public static TypeCodeFlags YClamp_AcceleratedTypes {
             get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YClamp_AcceleratedTypes;
+#else
                 return _instance.YClamp_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
             }
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YClamp(Vector128{float}, Vector128{float}, Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> YClamp(Vector128<float> value, Vector128<float> amin, Vector128<float> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
             return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YClamp(Vector128{double}, Vector128{double}, Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> YClamp(Vector128<double> value, Vector128<double> amin, Vector128<double> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
             return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YClamp(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> YClamp(Vector128<sbyte> value, Vector128<sbyte> amin, Vector128<sbyte> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
             return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YClamp(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> YClamp(Vector128<byte> value, Vector128<byte> amin, Vector128<byte> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
             return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YClamp(Vector128{short}, Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> YClamp(Vector128<short> value, Vector128<short> amin, Vector128<short> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
             return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YClamp(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> YClamp(Vector128<ushort> value, Vector128<ushort> amin, Vector128<ushort> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
             return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YClamp(Vector128{int}, Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> YClamp(Vector128<int> value, Vector128<int> amin, Vector128<int> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
             return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YClamp(Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> YClamp(Vector128<uint> value, Vector128<uint> amin, Vector128<uint> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
             return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YClamp(Vector128{long}, Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> YClamp(Vector128<long> value, Vector128<long> amin, Vector128<long> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
             return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YClamp(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> YClamp(Vector128<ulong> value, Vector128<ulong> amin, Vector128<ulong> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
             return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 #endif // NETCOREAPP3_0_OR_GREATER

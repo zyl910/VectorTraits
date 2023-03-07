@@ -35,7 +35,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>$(DefineConstants);SOFTWARE_OPTIMIZATION;HARDWARE_OPTIMIZATION;BCL_OVERRIDE_BASE_FIXED;BCL_OVERRIDE_BASE_VAR;BCL_OVERRIDE_STATIC0;BCL_BASE_OVERRIDE_STATIC;UNSAFE</DefineConstants>
+    <DefineConstants>$(DefineConstants);SOFTWARE_OPTIMIZATION;HARDWARE_OPTIMIZATION;BCL_OVERRIDE_BASE_FIXED;BCL_OVERRIDE_BASE_VAR;UNSAFE</DefineConstants>
 
     <Title>VectorTraits for .NET and .NET Standard</Title>
     <Product>VectorTraits</Product>
@@ -71,6 +71,21 @@ Traits methods:
     <RepositoryType>git</RepositoryType>
     <PackageTags>VectorTraits;vector;math;simd;intrinsic;x86;avx;arm</PackageTags>
   </PropertyGroup>
+
+  <Choose>
+    <When Condition=" '$(TargetFramework)'=='net461' OR '$(TargetFramework)'=='netstandard1.1' OR '$(TargetFramework)'=='netstandard2.0' OR '$(TargetFramework)'=='netstandard2.1' ">
+      <PropertyGroup>
+        <DefineConstants>$(DefineConstants);BCL_BASE_OVERRIDE_STATIC</DefineConstants>
+      </PropertyGroup>
+    </When>
+    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' ">
+      <PropertyGroup>
+        <DefineConstants>$(DefineConstants);BCL_BASE_OVERRIDE_STATIC0</DefineConstants>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+    </Otherwise>
+  </Choose>
   
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <Title>VectorTraits for .NET Framework 4.6.1</Title>
