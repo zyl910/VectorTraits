@@ -18,6 +18,7 @@ namespace Zyl.VectorTraits.Output {
             writer.WriteLine("VectorTraits.Output");
             writer.WriteLine();
             TraitsOutput.OutputEnvironment(writer, indent);
+            writer.WriteLine(indent + string.Format("sizeof(bool):\t{0}", sizeof(bool))); // =1. https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/sizeof
             writer.WriteLine();
             OutputVectorTraits.RunBaseInfo(writer, indent);
         }

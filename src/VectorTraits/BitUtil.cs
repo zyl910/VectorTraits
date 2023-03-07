@@ -287,11 +287,9 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int ToInt32(bool b) {
-#if UNSAFE
-            return ToInt32_Ptr(b);
-#else
-            return Convert.ToInt32(b);
-#endif // UNSAFE
+            //return Convert.ToInt32(b);
+            //return ToInt32_Ptr(b);
+            return Unsafe.As<bool, sbyte>(ref b);
         }
 
 #if UNSAFE
@@ -302,6 +300,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A int value (一个整数值). false is 0, true is 1 . </returns>
         //[CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Obsolete("This method is for testing purposes only. Please use ToInt32 instead.")]
         private static unsafe int ToInt32_Ptr(bool b) {
             return *(sbyte*)&b;
         }
