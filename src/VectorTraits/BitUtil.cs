@@ -1011,7 +1011,7 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Produces the full product of unsigned big numbers (产生无符号大数字的完整乘积). `w = u * v`
+        /// Produces the full product of unsigned big numbers (产生无符号大数字的完整乘积) (`w = u * v`). Use little endian to store (使用小端存储).
         /// </summary>
         /// <param name="w">The full product of the specified numbers (指定数字的完整乘积).</param>
         /// <param name="u">The first number to multiply (要相乘的第一个数).</param>
@@ -1064,14 +1064,17 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [Obsolete("This method is for testing purposes only. Please use BigMul instead.")]
         public static ulong BigMul_BigNum (ulong a, ulong b, out ulong low) {
-            Span<ulong> w = stackalloc ulong[2];
-            Span<ulong> u = stackalloc ulong[1];
-            Span<ulong> v = stackalloc ulong[1];
-            u[0] = a;
-            v[0] = b;
-            BigNumMultiplyUnsigned(MemoryMarshal.Cast<ulong, uint>(w), MemoryMarshal.Cast<ulong, uint>(u), MemoryMarshal.Cast<ulong, uint>(v));
-            low = w[0];
-            return w[1];
+            const int L = 32; // sizeof(uint) * 8;
+            Span<uint> w = stackalloc uint[4];
+            Span<uint> u = stackalloc uint[2];
+            Span<uint> v = stackalloc uint[2];
+            u[0] = (uint)a;
+            u[1] = (uint)(a >> L);
+            v[0] = (uint)b;
+            v[1] = (uint)(b >> L);
+            BigNumMultiplyUnsigned(w, u, v);
+            low = ((ulong)w[1] << L) | w[0];
+            return ((ulong)w[3] << L) | w[2];
         }
 
     }
