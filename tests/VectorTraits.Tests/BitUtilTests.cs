@@ -331,7 +331,7 @@ namespace Zyl.VectorTraits.Tests {
                 for (int j = 0; j <= i; ++j) {
                     long b = samples[j];
                     long low, high;
-                    high = BitUtil.BigMul(a, b, out low);
+                    high = BitUtil.BigMul_BigNum(a, b, out low);
                     long expectedLow =low;
                     long expectedHigh = high;
                     if (allowLog) {
@@ -340,13 +340,13 @@ namespace Zyl.VectorTraits.Tests {
                     // bcl.
 #if NET5_0_OR_GREATER
                     high = Math.BigMul(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("Math.BigMul({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("Math.BigMul({0}, {1}).high", a, b));
-#endif // NET5_0_OR_GREATER
-                    // BigMul_BigNum.
-                    high = BitUtil.BigMul_BigNum(a, b, out low);
                     Assert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
                     Assert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
+#endif // NET5_0_OR_GREATER
+                    // BitUtil.
+                    high = BitUtil.BigMul(a, b, out low);
+                    Assert.AreEqual(expectedLow, low, string.Format("BitUtil.BigMul({0}, {1}).low", a, b));
+                    Assert.AreEqual(expectedHigh, high, string.Format("BitUtil.BigMul({0}, {1}).high", a, b));
                 }
             }
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -375,7 +375,7 @@ namespace Zyl.VectorTraits.Tests {
                 for (int j = 0; j <= i; ++j) {
                     ulong b = samples[j];
                     ulong low, high;
-                    high = BitUtil.BigMul(a, b, out low);
+                    high = BitUtil.BigMul_BigNum(a, b, out low);
                     ulong expectedLow =low;
                     ulong expectedHigh = high;
                     if (allowLog) {
@@ -384,13 +384,13 @@ namespace Zyl.VectorTraits.Tests {
                     // bcl.
 #if NET5_0_OR_GREATER
                     high = Math.BigMul(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("Math.BigMul({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("Math.BigMul({0}, {1}).high", a, b));
-#endif // NET5_0_OR_GREATER
-                    // BigMul_BigNum.
-                    high = BitUtil.BigMul_BigNum(a, b, out low);
                     Assert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
                     Assert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
+#endif // NET5_0_OR_GREATER
+                    // BitUtil.
+                    high = BitUtil.BigMul(a, b, out low);
+                    Assert.AreEqual(expectedLow, low, string.Format("BitUtil.BigMul({0}, {1}).low", a, b));
+                    Assert.AreEqual(expectedHigh, high, string.Format("BitUtil.BigMul({0}, {1}).high", a, b));
                 }
             }
 #pragma warning restore CS0618 // Type or member is obsolete
