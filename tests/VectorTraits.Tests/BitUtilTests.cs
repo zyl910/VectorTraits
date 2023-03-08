@@ -305,6 +305,54 @@ namespace Zyl.VectorTraits.Tests {
         }
 
         [Test()]
+        public void BigMulTestTest_Int64() {
+#pragma warning disable CS0618 // Type or member is obsolete
+            long[] samples = {
+                -0xFFFFFFFFL,
+                -0x100000000L,
+                -0x100000001L,
+                -0x100000002L,
+                1,
+                2,
+                3,
+                0xFFFF,
+                0x100000,
+                0xFFFFFFFFL,
+                0x100000000L,
+                0x100000001L,
+                0x100000002L,
+                0x200000000L,
+                0x200000001L,
+                0x200000002L,
+            };
+            bool allowLog = false;
+            for (int i = 0; i < samples.Length; ++i) {
+                long a = samples[i];
+                for (int j = 0; j <= i; ++j) {
+                    long b = samples[j];
+                    long low, high;
+                    high = BitUtil.BigMul(a, b, out low);
+                    long expectedLow =low;
+                    long expectedHigh = high;
+                    if (allowLog) {
+                        Console.WriteLine(VectorTextUtil.Format("{0} * {1} = ({2}, {3})", a, b, expectedHigh, expectedLow));
+                    }
+                    // bcl.
+#if NET5_0_OR_GREATER
+                    high = Math.BigMul(a, b, out low);
+                    Assert.AreEqual(expectedLow, low, string.Format("Math.BigMul({0}, {1}).low", a, b));
+                    Assert.AreEqual(expectedHigh, high, string.Format("Math.BigMul({0}, {1}).high", a, b));
+#endif // NET5_0_OR_GREATER
+                    // BigMul_BigNum.
+                    high = BitUtil.BigMul_BigNum(a, b, out low);
+                    Assert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
+                    Assert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
+                }
+            }
+#pragma warning restore CS0618 // Type or member is obsolete
+        }
+
+        [Test()]
         public void BigMulTestTest_UInt64() {
 #pragma warning disable CS0618 // Type or member is obsolete
             ulong[] samples = {
@@ -327,7 +375,7 @@ namespace Zyl.VectorTraits.Tests {
                 for (int j = 0; j <= i; ++j) {
                     ulong b = samples[j];
                     ulong low, high;
-                    high = BitUtil.BigMul_BigNum(a, b, out low);
+                    high = BitUtil.BigMul(a, b, out low);
                     ulong expectedLow =low;
                     ulong expectedHigh = high;
                     if (allowLog) {
@@ -336,9 +384,13 @@ namespace Zyl.VectorTraits.Tests {
                     // bcl.
 #if NET5_0_OR_GREATER
                     high = Math.BigMul(a, b, out low);
+                    Assert.AreEqual(expectedLow, low, string.Format("Math.BigMul({0}, {1}).low", a, b));
+                    Assert.AreEqual(expectedHigh, high, string.Format("Math.BigMul({0}, {1}).high", a, b));
+#endif // NET5_0_OR_GREATER
+                    // BigMul_BigNum.
+                    high = BitUtil.BigMul_BigNum(a, b, out low);
                     Assert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
                     Assert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
-#endif // NET5_0_OR_GREATER
                 }
             }
 #pragma warning restore CS0618 // Type or member is obsolete

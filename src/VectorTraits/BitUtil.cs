@@ -1011,13 +1011,45 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
+        /// Produces the full product of signed big numbers (产生有符号大数字的完整乘积) (`w = u * v`). Use little endian to store (使用小端存储).
+        /// </summary>
+        /// <param name="w">The full product of the specified numbers (指定数字的完整乘积).</param>
+        /// <param name="u">The first number to multiply (要相乘的第一个数).</param>
+        /// <param name="v">The second number to multiply (要相乘的第二个数).</param>
+        [CLSCompliant(false)]
+        public static void BigNumMultiplySigned(Span<uint> w, ReadOnlySpan<uint> u, ReadOnlySpan<uint> v) {
+            const int L = 32; // sizeof(uint) * 8;
+            const int L2 = L * 2 - 1;
+            int m = u.Length;
+            int n = v.Length;
+            ulong t, b;
+            int i, j;
+            BigNumMultiplyUnsigned(w, u, v);
+            if ((int)u[m - 1] < 0) {
+                b = 0;
+                for (j = 0; j < n; j++) {
+                    t = (ulong)w[j + m] - v[j] - b;
+                    w[j + m] = (uint)t;
+                    b = t >> L2;
+                }
+            }
+            if ((int)v[n - 1] < 0) {
+                b = 0;
+                for (i = 0; i < m; i++) {
+                    t = (ulong)w[i + n] - u[i] - b;
+                    w[i + n] = (uint)t;
+                    b = t >> L2;
+                }
+            }
+        }
+
+        /// <summary>
         /// Produces the full product of unsigned big numbers (产生无符号大数字的完整乘积) (`w = u * v`). Use little endian to store (使用小端存储).
         /// </summary>
         /// <param name="w">The full product of the specified numbers (指定数字的完整乘积).</param>
         /// <param name="u">The first number to multiply (要相乘的第一个数).</param>
         /// <param name="v">The second number to multiply (要相乘的第二个数).</param>
         [CLSCompliant(false)]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void BigNumMultiplyUnsigned(Span<uint> w, ReadOnlySpan<uint> u, ReadOnlySpan<uint> v) {
             const int L = 32; // sizeof(uint) * 8;
             int m = u.Length;
@@ -1039,6 +1071,24 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
+        /// Produces the full product of two signed 64-bit numbers (生成两个有符号 64 位数的完整乘积).
+        /// </summary>
+        /// <param name="a">The first number to multiply (要相乘的第一个数).</param>
+        /// <param name="b">The second number to multiply (要相乘的第二个数).</param>
+        /// <param name="low">When this method returns, contains the low 64-bit of the product of the specified numbers (此方法返回时，包含指定数字乘积的低 64 位).</param>
+        /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long BigMul (long a, long b, out long low) {
+#pragma warning disable CS0618 // Type or member is obsolete
+#if NET5_0_OR_GREATER
+            return Math.BigMul(a, b, out low);
+#else
+            return BigMul_BigNum(a, b, out low);
+#endif // NET5_0_OR_GREATER
+#pragma warning restore CS0618 // Type or member is obsolete
+        }
+
+        /// <summary>
         /// Produces the full product of two unsigned 64-bit numbers (生成两个无符号 64 位数的完整乘积).
         /// </summary>
         /// <param name="a">The first number to multiply (要相乘的第一个数).</param>
@@ -1049,8 +1099,35 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong BigMul (ulong a, ulong b, out ulong low) {
 #pragma warning disable CS0618 // Type or member is obsolete
+#if NET5_0_OR_GREATER
+            return Math.BigMul(a, b, out low);
+#else
             return BigMul_BigNum(a, b, out low);
+#endif // NET5_0_OR_GREATER
 #pragma warning restore CS0618 // Type or member is obsolete
+        }
+
+        /// <summary>
+        /// Produces the full product of two signed 64-bit numbers - BigNum (生成两个有符号 64 位数的完整乘积 - 大数算法).
+        /// </summary>
+        /// <param name="a">The first number to multiply (要相乘的第一个数).</param>
+        /// <param name="b">The second number to multiply (要相乘的第二个数).</param>
+        /// <param name="low">When this method returns, contains the low 64-bit of the product of the specified numbers (此方法返回时，包含指定数字乘积的低 64 位).</param>
+        /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Obsolete("This method is for testing purposes only. Please use BigMul instead.")]
+        public static long BigMul_BigNum (long a, long b, out long low) {
+            const int L = 32; // sizeof(uint) * 8;
+            Span<uint> w = stackalloc uint[4];
+            Span<uint> u = stackalloc uint[2];
+            Span<uint> v = stackalloc uint[2];
+            u[0] = (uint)a;
+            u[1] = (uint)(a >> L);
+            v[0] = (uint)b;
+            v[1] = (uint)(b >> L);
+            BigNumMultiplySigned(w, u, v);
+            low = ((long)w[1] << L) | w[0];
+            return ((long)w[3] << L) | w[2];
         }
 
         /// <summary>
