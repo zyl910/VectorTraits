@@ -1083,7 +1083,7 @@ namespace Zyl.VectorTraits {
 #if NET5_0_OR_GREATER
             return Math.BigMul(a, b, out low);
 #else
-            return BigMul_BigNum(a, b, out low);
+            return BigMul_Two(a, b, out low);
 #endif // NET5_0_OR_GREATER
 #pragma warning restore CS0618 // Type or member is obsolete
         }
@@ -1102,7 +1102,7 @@ namespace Zyl.VectorTraits {
 #if NET5_0_OR_GREATER
             return Math.BigMul(a, b, out low);
 #else
-            return BigMul_BigNum(a, b, out low);
+            return BigMul_Two(a, b, out low);
 #endif // NET5_0_OR_GREATER
 #pragma warning restore CS0618 // Type or member is obsolete
         }
@@ -1174,11 +1174,11 @@ namespace Zyl.VectorTraits {
             // Part1 = u0*v0
             w0 = u0 * v0;
             // Part2 = (u1*v0)<<L + Part1
-            t = (long)((ulong)u1 * v0) + (long)(w0 >> L);
+            t = u1 * (long)v0 + (long)(w0 >> L);
             w1 = t & MASK;
             w2 = t >> L;
             // Part3 = (u0*v1)<<L + Part2
-            w1 = (long)(u0 * (ulong)v1) + w1;
+            w1 = (long)u0 * v1 + w1;
             // Part4 = (u1*v1)<<(2*L) + Part3
             low = (w1 << L) + (long)(w0 & MASK);
             high = (u1 * v1) + w2 + (w1 >> L);
