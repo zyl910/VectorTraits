@@ -569,6 +569,79 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Multiply_AcceleratedTypes"/>
+            public static TypeCodeFlags Multiply_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Single | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    //  | TypeCodeFlags.Double | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Multiply(Vector128<float> left, Vector128<float> right) {
+                return AdvSimd.Multiply(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Multiply(Vector128<double> left, Vector128<double> right) {
+                return SuperStatics.Multiply(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Multiply(Vector128<sbyte> left, Vector128<sbyte> right) {
+                return AdvSimd.Multiply(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> Multiply(Vector128<byte> left, Vector128<byte> right) {
+                return AdvSimd.Multiply(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Multiply(Vector128<short> left, Vector128<short> right) {
+                return AdvSimd.Multiply(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> Multiply(Vector128<ushort> left, Vector128<ushort> right) {
+                return AdvSimd.Multiply(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Multiply(Vector128<int> left, Vector128<int> right) {
+                return AdvSimd.Multiply(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> Multiply(Vector128<uint> left, Vector128<uint> right) {
+                return AdvSimd.Multiply(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Multiply(Vector128<long> left, Vector128<long> right) {
+                return SuperStatics.Multiply(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> Multiply(Vector128<ulong> left, Vector128<ulong> right) {
+                return SuperStatics.Multiply(left, right);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Negate_AcceleratedTypes"/>
             public static TypeCodeFlags Negate_AcceleratedTypes {
                 get {
