@@ -173,6 +173,92 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         #region BENCHMARKS_256ALGORITHM
 #if BENCHMARKS_256ALGORITHM
 
+        /// <summary>
+        /// Sum Multiply - Vector256 - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMy StaticSumMultiplyVector256Traits(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector256 result.
+            Vector256<TMy> t;
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector256 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                t = Vector256s.Multiply(p0, Unsafe.Add(ref p0, 1));
+                vrt = Vector256s.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            //ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
+            //for (i = 0; i < cntRem; ++i) {
+            //    rt += (TMy)Unsafe.Add(ref p, i);
+            //}
+            // Reduce.
+            for (i = 0; i < Vector256<TMy>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumMultiplyVector256Traits() {
+            Vector256s.ThrowForUnsupported(true);
+            dstTMy = StaticSumMultiplyVector256Traits(srcArray, srcArray.Length);
+            CheckResult("SumMultiplyVector256Traits");
+        }
+
+        /// <summary>
+        /// Sum Multiply - Vector256 - Avx.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMy StaticSumMultiplyVector256Avx(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector256 result.
+            Vector256<TMy> t;
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector256 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                t = WVectorTraits256Avx2.Statics.Multiply(p0, Unsafe.Add(ref p0, 1));
+                vrt = WVectorTraits256Avx2.Statics.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            //ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
+            //for (i = 0; i < cntRem; ++i) {
+            //    rt += (TMy)Unsafe.Add(ref p, i);
+            //}
+            // Reduce.
+            for (i = 0; i < Vector256<TMy>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumMultiplyVector256Avx() {
+            WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumMultiplyVector256Avx(srcArray, srcArray.Length);
+            CheckResult("SumMultiplyVector256Avx");
+        }
+
 #endif // BENCHMARKS_256ALGORITHM
         #endregion // BENCHMARKS_256ALGORITHM
 
