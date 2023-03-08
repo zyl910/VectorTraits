@@ -325,7 +325,7 @@ namespace Zyl.VectorTraits.Tests {
                 0x200000001L,
                 0x200000002L,
             };
-            bool allowLog = false;
+            bool allowLog = true;
             for (int i = 0; i < samples.Length; ++i) {
                 long a = samples[i];
                 for (int j = 0; j <= i; ++j) {
@@ -343,10 +343,14 @@ namespace Zyl.VectorTraits.Tests {
                     Assert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
                     Assert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
 #endif // NET5_0_OR_GREATER
-                    // BitUtil.
+                    // BitUtil.BigMul .
                     high = BitUtil.BigMul(a, b, out low);
                     Assert.AreEqual(expectedLow, low, string.Format("BitUtil.BigMul({0}, {1}).low", a, b));
                     Assert.AreEqual(expectedHigh, high, string.Format("BitUtil.BigMul({0}, {1}).high", a, b));
+                    // BigMul_Two.
+                    high = BitUtil.BigMul_Two(a, b, out low);
+                    Assert.AreEqual(expectedLow, low, string.Format("BigMul_Two({0}, {1}).low", a, b));
+                    Assert.AreEqual(expectedHigh, high, string.Format("BigMul_Two({0}, {1}).high", a, b));
                 }
             }
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -387,11 +391,11 @@ namespace Zyl.VectorTraits.Tests {
                     Assert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
                     Assert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
 #endif // NET5_0_OR_GREATER
-                    // BitUtil.
+                    // BitUtil.BigMul .
                     high = BitUtil.BigMul(a, b, out low);
                     Assert.AreEqual(expectedLow, low, string.Format("BitUtil.BigMul({0}, {1}).low", a, b));
                     Assert.AreEqual(expectedHigh, high, string.Format("BitUtil.BigMul({0}, {1}).high", a, b));
-                    // BitUtil.
+                    // BigMul_Two.
                     high = BitUtil.BigMul_Two(a, b, out low);
                     Assert.AreEqual(expectedLow, low, string.Format("BigMul_Two({0}, {1}).low", a, b));
                     Assert.AreEqual(expectedHigh, high, string.Format("BigMul_Two({0}, {1}).high", a, b));
