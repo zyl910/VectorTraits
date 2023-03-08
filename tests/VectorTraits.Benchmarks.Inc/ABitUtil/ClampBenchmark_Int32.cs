@@ -107,7 +107,7 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
             return rt;
         }
 
-        [Benchmark(Baseline = true)]
+        [Benchmark]
         public void SumClamp_IfUnrolling4() {
             dstTMy = 0;
             foreach (TMy amax in valueMaxList) {

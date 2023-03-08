@@ -1083,6 +1083,8 @@ namespace Zyl.VectorTraits {
 #pragma warning disable CS0618 // Type or member is obsolete
 #if NET5_0_OR_GREATER
             return Math.BigMul(a, b, out low);
+            // JIT will call hardware-specific instructions to do the optimization. For example:
+            // - x86: mulx rdx,r10,r9
 #else
             return BigMul_Two(a, b, out low);
 #endif // NET5_0_OR_GREATER
