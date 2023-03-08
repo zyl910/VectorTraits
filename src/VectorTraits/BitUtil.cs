@@ -1077,6 +1077,7 @@ namespace Zyl.VectorTraits {
         /// <param name="b">The second number to multiply (要相乘的第二个数).</param>
         /// <param name="low">When this method returns, contains the low 64-bit of the product of the specified numbers (此方法返回时，包含指定数字乘积的低 64 位).</param>
         /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
+        /// <seealso cref="Math.BigMul(long, long, out long)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long BigMul (long a, long b, out long low) {
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -1095,6 +1096,7 @@ namespace Zyl.VectorTraits {
         /// <param name="b">The second number to multiply (要相乘的第二个数).</param>
         /// <param name="low">When this method returns, contains the low 64-bit of the product of the specified numbers (此方法返回时，包含指定数字乘积的低 64 位).</param>
         /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
+        /// <seealso cref="Math.BigMul(ulong, ulong, out ulong)"/>
         [System.CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong BigMul (ulong a, ulong b, out ulong low) {
@@ -1114,6 +1116,7 @@ namespace Zyl.VectorTraits {
         /// <param name="b">The second number to multiply (要相乘的第二个数).</param>
         /// <param name="low">When this method returns, contains the low 64-bit of the product of the specified numbers (此方法返回时，包含指定数字乘积的低 64 位).</param>
         /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
+        /// <seealso cref="Math.BigMul(long, long, out long)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [Obsolete("This method is for testing purposes only. Please use BigMul instead.")]
         public static long BigMul_BigNum (long a, long b, out long low) {
@@ -1137,6 +1140,7 @@ namespace Zyl.VectorTraits {
         /// <param name="b">The second number to multiply (要相乘的第二个数).</param>
         /// <param name="low">When this method returns, contains the low 64-bit of the product of the specified numbers (此方法返回时，包含指定数字乘积的低 64 位).</param>
         /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
+        /// <seealso cref="Math.BigMul(ulong, ulong, out ulong)"/>
         [System.CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [Obsolete("This method is for testing purposes only. Please use BigMul instead.")]
@@ -1161,6 +1165,7 @@ namespace Zyl.VectorTraits {
         /// <param name="b">The second number to multiply (要相乘的第二个数).</param>
         /// <param name="low">When this method returns, contains the low 64-bit of the product of the specified numbers (此方法返回时，包含指定数字乘积的低 64 位).</param>
         /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
+        /// <seealso cref="Math.BigMul(long, long, out long)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [Obsolete("This method is for testing purposes only. Please use BigMul instead.")]
         public static long BigMul_Two(long u, long v, out long low) {
@@ -1192,6 +1197,7 @@ namespace Zyl.VectorTraits {
         /// <param name="v">The second number to multiply (要相乘的第二个数).</param>
         /// <param name="low">When this method returns, contains the low 64-bit of the product of the specified numbers (此方法返回时，包含指定数字乘积的低 64 位).</param>
         /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
+        /// <seealso cref="Math.BigMul(ulong, ulong, out ulong)"/>
         [System.CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [Obsolete("This method is for testing purposes only. Please use BigMul instead.")]
@@ -1213,6 +1219,63 @@ namespace Zyl.VectorTraits {
             w1 = u0 * v1 + w1;
             // Part4 = (u1*v1)<<(2*L) + Part3
             low = (w1 << L) + (w0 & MASK);
+            high = (u1 * v1) + w2 + (w1 >> L);
+            return high;
+        }
+
+        /// <summary>
+        /// Computes the product of two signed 64-bit numbers and returns the higher 64 bits (计算两个有符号 64 位数的乘积，并返回较高的64位).
+        /// </summary>
+        /// <param name="a">The first number to multiply (要相乘的第一个数).</param>
+        /// <param name="b">The second number to multiply (要相乘的第二个数).</param>
+        /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long BigMulHigh(long u, long v) {
+            const int L = 32; // sizeof(uint) * 8;
+            const long MASK = (1L << L) - 1;
+            ulong u0, v0, w0;
+            long u1, v1, w1, w2, t, high;
+            u0 = (ulong)(u & MASK); u1 = u >> L;
+            v0 = (ulong)(v & MASK); v1 = v >> L;
+            // u*v = (u1*v1)<<(2*L) + (u0*v1)<<L + (u1*v0)<<L + u0*v0
+            // Part1 = u0*v0
+            w0 = u0 * v0;
+            // Part2 = (u1*v0)<<L + Part1
+            t = u1 * (long)v0 + (long)(w0 >> L);
+            w1 = t & MASK;
+            w2 = t >> L;
+            // Part3 = (u0*v1)<<L + Part2
+            w1 = (long)u0 * v1 + w1;
+            // Part4 = (u1*v1)<<(2*L) + Part3
+            high = (u1 * v1) + w2 + (w1 >> L);
+            return high;
+        }
+
+        /// <summary>
+        /// Computes the product of two unsigned 64-bit numbers and returns the higher 64 bits (计算两个无符号 64 位数的乘积，并返回较高的64位).
+        /// </summary>
+        /// <param name="u">The first number to multiply (要相乘的第一个数).</param>
+        /// <param name="v">The second number to multiply (要相乘的第二个数).</param>
+        /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
+        [System.CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ulong BigMulHigh(ulong u, ulong v) {
+            const int L = 32; // sizeof(uint) * 8;
+            const ulong MASK = (1L << L) - 1;
+            ulong u0, v0, w0;
+            ulong u1, v1, w1, w2, t, high;
+            u0 = u & MASK; u1 = u >> L;
+            v0 = v & MASK; v1 = v >> L;
+            // u*v = (u1*v1)<<(2*L) + (u0*v1)<<L + (u1*v0)<<L + u0*v0
+            // Part1 = u0*v0
+            w0 = u0 * v0;
+            // Part2 = (u1*v0)<<L + Part1
+            t = u1 * v0 + (w0 >> L);
+            w1 = t & MASK;
+            w2 = t >> L;
+            // Part3 = (u0*v1)<<L + Part2
+            w1 = u0 * v1 + w1;
+            // Part4 = (u1*v1)<<(2*L) + Part3
             high = (u1 * v1) + w2 + (w1 >> L);
             return high;
         }
