@@ -1166,20 +1166,19 @@ namespace Zyl.VectorTraits {
         public static long BigMul_Two(long u, long v, out long low) {
             const int L = 32; // sizeof(uint) * 8;
             const long MASK = (1L << L) - 1;
-            ulong w0;
-            long u0, v0;
+            ulong u0, v0, w0;
             long u1, v1, w1, w2, t, high;
-            u0 = u & MASK; u1 = u >> L;
-            v0 = v & MASK; v1 = v >> L;
+            u0 = (ulong)(u & MASK); u1 = u >> L;
+            v0 = (ulong)(v & MASK); v1 = v >> L;
             // u*v = (u1*v1)<<(2*L) + (u0*v1)<<L + (u1*v0)<<L + u0*v0
             // Part1 = u0*v0
-            w0 = (ulong)u0 * (ulong)v0;
+            w0 = u0 * v0;
             // Part2 = (u1*v0)<<L + Part1
-            t = u1 * v0 + (long)(w0 >> L);
+            t = (long)((ulong)u1 * v0) + (long)(w0 >> L);
             w1 = t & MASK;
             w2 = t >> L;
             // Part3 = (u0*v1)<<L + Part2
-            w1 = u0 * v1 + w1;
+            w1 = (long)(u0 * (ulong)v1) + w1;
             // Part4 = (u1*v1)<<(2*L) + Part3
             low = (w1 << L) + (long)(w0 & MASK);
             high = (u1 * v1) + w2 + (w1 >> L);
