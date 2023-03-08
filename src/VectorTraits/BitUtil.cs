@@ -1154,5 +1154,37 @@ namespace Zyl.VectorTraits {
             return ((ulong)w[3] << L) | w[2];
         }
 
+        /// <summary>
+        /// Produces the full product of two unsigned 64-bit numbers - Length is two (生成两个无符号 64 位数的完整乘积 - 长度为二).
+        /// </summary>
+        /// <param name="u">The first number to multiply (要相乘的第一个数).</param>
+        /// <param name="v">The second number to multiply (要相乘的第二个数).</param>
+        /// <param name="low">When this method returns, contains the low 64-bit of the product of the specified numbers (此方法返回时，包含指定数字乘积的低 64 位).</param>
+        /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
+        [System.CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [Obsolete("This method is for testing purposes only. Please use BigMul instead.")]
+        public static ulong BigMul_Two(ulong u, ulong v, out ulong low) {
+            const int L = 32; // sizeof(uint) * 8;
+            const ulong MASK = (1L << L) - 1;
+            ulong u0, v0, w0;
+            ulong u1, v1, w1, w2, t, high;
+            u0 = u & MASK; u1 = u >> L;
+            v0 = v & MASK; v1 = v >> L;
+            // u*v = (u1*v1)<<(2*L) + (u0*v1)<<L + (u1*v0)<<L + u0*v0
+            // Part1 = u0*v0
+            w0 = u0 * v0;
+            // Part2 = (u1*v0)<<L + Part1
+            t = u1 * v0 + (w0 >> L);
+            w1 = t & MASK;
+            w2 = t >> L;
+            // Part3 = (u0*v1)<<L + Part2
+            w1 = u0 * v1 + w1;
+            // Part4 = (u1*v1)<<(2*L) + Part3
+            low = (w1 << L) + (w0 & MASK);
+            high = (u1 * v1) + w2 + (w1 >> L);
+            return high;
+        }
+
     }
 }

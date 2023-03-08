@@ -391,6 +391,10 @@ namespace Zyl.VectorTraits.Tests {
                     high = BitUtil.BigMul(a, b, out low);
                     Assert.AreEqual(expectedLow, low, string.Format("BitUtil.BigMul({0}, {1}).low", a, b));
                     Assert.AreEqual(expectedHigh, high, string.Format("BitUtil.BigMul({0}, {1}).high", a, b));
+                    // BitUtil.
+                    high = BitUtil.BigMul_Two(a, b, out low);
+                    Assert.AreEqual(expectedLow, low, string.Format("BigMul_Two({0}, {1}).low", a, b));
+                    Assert.AreEqual(expectedHigh, high, string.Format("BigMul_Two({0}, {1}).high", a, b));
                 }
             }
 #pragma warning restore CS0618 // Type or member is obsolete
