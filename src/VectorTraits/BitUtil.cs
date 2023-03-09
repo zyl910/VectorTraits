@@ -1294,15 +1294,16 @@ namespace Zyl.VectorTraits {
             const int L = 32; // sizeof(uint) * 8;
             const long MASK = (1L << L) - 1;
             ulong u0, v0, w0;
-            long u1, v1, w1, t, low;
+            long u1, v1, w1, low;
             u0 = (ulong)(u & MASK); u1 = u >> L;
             v0 = (ulong)(v & MASK); v1 = v >> L;
             // u*v = (u1*v1)<<(2*L) + (u0*v1)<<L + (u1*v0)<<L + u0*v0
             // Part1 = u0*v0
             w0 = u0 * v0;
             // Part2 = (u1*v0)<<L + Part1
-            t = u1 * (long)v0 + (long)(w0 >> L);
-            w1 = t & MASK;
+            //t = u1 * (long)v0 + (long)(w0 >> L);
+            //w1 = t & MASK;
+            w1 = u1 * (long)v0 + (long)(w0 >> L);
             // Part3 = (u0*v1)<<L + Part2
             w1 = (long)u0 * v1 + w1;
             low = (w1 << L) + (long)(w0 & MASK);
@@ -1322,15 +1323,16 @@ namespace Zyl.VectorTraits {
             const int L = 32; // sizeof(uint) * 8;
             const ulong MASK = (1L << L) - 1;
             ulong u0, v0, w0;
-            ulong u1, v1, w1, t, low;
+            ulong u1, v1, w1, low;
             u0 = u & MASK; u1 = u >> L;
             v0 = v & MASK; v1 = v >> L;
             // u*v = (u1*v1)<<(2*L) + (u0*v1)<<L + (u1*v0)<<L + u0*v0
             // Part1 = u0*v0
             w0 = u0 * v0;
             // Part2 = (u1*v0)<<L + Part1
-            t = u1 * v0 + (w0 >> L);
-            w1 = t & MASK;
+            //t = u1 * v0 + (w0 >> L);
+            //w1 = t & MASK;
+            w1 = u1 * v0 + (w0 >> L);
             // Part3 = (u0*v1)<<L + Part2
             w1 = u0 * v1 + w1;
             low = (w1 << L) + (w0 & MASK);
