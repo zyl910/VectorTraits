@@ -591,8 +591,12 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.Multiply_AcceleratedTypes"/>
             public static TypeCodeFlags Multiply_AcceleratedTypes {
                 get {
-                    return TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
-                    //  | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+#if HARDWARE_OPTIMIZATION
+                    rt |= TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+#endif // HARDWARE_OPTIMIZATION
+                    //  | TypeCodeFlags.SByte | TypeCodeFlags.Byte
+                    return rt;
                 }
             }
 
@@ -650,14 +654,60 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> Multiply(Vector256<long> left, Vector256<long> right) {
+#if HARDWARE_OPTIMIZATION
+                return Multiply_TwoWord(left, right);
+#else
                 return SuperStatics.Multiply(left, right);
+#endif // HARDWARE_OPTIMIZATION
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Multiply(Vector256<ulong> left, Vector256<ulong> right) {
+#if HARDWARE_OPTIMIZATION
+                return Multiply_TwoWord(left, right);
+#else
                 return SuperStatics.Multiply(left, right);
+#endif // HARDWARE_OPTIMIZATION
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{long}, Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> Multiply_TwoWord(Vector256<long> left, Vector256<long> right) {
+                return Multiply_TwoWord(left.AsUInt64(), right.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{ulong}, Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> Multiply_TwoWord(Vector256<ulong> left, Vector256<ulong> right) {
+                const int L = 32; // sizeof(uint) * 8;
+                const ulong MASK_VALUE = (1L << L) - 1;
+                Vector256<ulong> mask = Vector256.Create(MASK_VALUE);
+                Vector256<ulong> w0;
+                Vector256<ulong> u1, v1, w1, low;
+                // u=left; v=right;
+                //u0 = u & MASK_VALUE; u1 = u >> L;
+                //v0 = v & MASK_VALUE; v1 = v >> L;
+                u1 = Avx2.ShiftRightLogical(left, L);
+                v1 = Avx2.ShiftRightLogical(right, L);
+                // u*v = (u1*v1)<<(2*L) + (u0*v1)<<L + (u1*v0)<<L + u0*v0
+                // Part1 = u0*v0
+                //w0 = u0 * v0;
+                w0 = Avx2.Multiply(left.AsUInt32(), right.AsUInt32());
+                // Part2 = (u1*v0)<<L + Part1
+                //w1 = u1 * v0 + (w0 >> L);
+                w1 = Avx2.Add(Avx2.Multiply(u1.AsUInt32(), right.AsUInt32())
+                    , Avx2.ShiftRightLogical(w0, L));
+                // Part3 = (u0*v1)<<L + Part2
+                //w1 = u0 * v1 + w1;
+                //low = (w1 << L) + (w0 & MASK_VALUE);
+                w1 = Avx2.Add(w1
+                    , Avx2.Multiply(left.AsUInt32(), v1.AsUInt32()));
+                low = Avx2.Or(Avx2.ShiftLeftLogical(w1, L)
+                    , Avx2.And(w0, mask));
+                return low;
             }
 
 
@@ -812,6 +862,6 @@ namespace Zyl.VectorTraits.Impl {
 
 
 #endif // NETCOREAPP3_0_OR_GREATER
-        }
+            }
     }
 }

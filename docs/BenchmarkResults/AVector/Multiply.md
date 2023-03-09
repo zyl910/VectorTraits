@@ -63,10 +63,10 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumMultiplyScalar	12001033377966188484
-SumMultiplyScalar	141.627	1850.952
-SumMultiplyBcl	240.185	1091.424	0.589656
-SumMultiplyVector256Traits	239.890	1092.767	0.590381
-SumMultiplyVector256Avx	241.226	1086.715	0.587111
+SumMultiplyScalar	140.391	1867.243
+SumMultiplyBcl	236.393	1108.933	0.593888
+SumMultiplyVector256Traits	80.342	3262.857	1.747420
+SumMultiplyVector256Avx	81.447	3218.585	1.723710
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
