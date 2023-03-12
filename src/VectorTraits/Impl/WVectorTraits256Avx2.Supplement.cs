@@ -593,9 +593,8 @@ namespace Zyl.VectorTraits.Impl {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
 #if HARDWARE_OPTIMIZATION
-                    rt |= TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
 #endif // HARDWARE_OPTIMIZATION
-                    //  | TypeCodeFlags.SByte | TypeCodeFlags.Byte
                     return rt;
                 }
             }
@@ -624,13 +623,21 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> Multiply(Vector256<sbyte> left, Vector256<sbyte> right) {
+#if HARDWARE_OPTIMIZATION
+                return Multiply_Widen(left, right);
+#else
                 return SuperStatics.Multiply(left, right);
+#endif // HARDWARE_OPTIMIZATION
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> Multiply(Vector256<byte> left, Vector256<byte> right) {
+#if HARDWARE_OPTIMIZATION
+                return Multiply_Widen(left, right);
+#else
                 return SuperStatics.Multiply(left, right);
+#endif // HARDWARE_OPTIMIZATION
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{short}, Vector256{short})"/>
@@ -716,6 +723,24 @@ namespace Zyl.VectorTraits.Impl {
                 low = Avx2.Or(Avx2.ShiftLeftLogical(w1, L)
                     , Avx2.And(w0, mask));
                 return low;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> Multiply_Widen(Vector256<sbyte> left, Vector256<sbyte> right) {
+                return Multiply_Widen(left.AsByte(), right.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{byte}, Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> Multiply_Widen(Vector256<byte> left, Vector256<byte> right) {
+                Widen(left, out Vector256<ushort> u0, out Vector256<ushort> u1);
+                Widen(right, out Vector256<ushort> v0, out Vector256<ushort> v1);
+                Vector256<ushort> w0 = Multiply(u0, v0);
+                Vector256<ushort> w1 = Multiply(u1, v1);
+                Vector256<byte> rt = Narrow(w0, w1);
+                return rt;
             }
 
 

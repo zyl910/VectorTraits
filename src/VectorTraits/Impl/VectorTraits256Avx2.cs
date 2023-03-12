@@ -10,6 +10,7 @@ using Zyl.VectorTraits.Extensions;
 
 namespace Zyl.VectorTraits.Impl {
     using WStatics = WVectorTraits256Avx2.Statics;
+    using BaseStatics = VectorTraitsBase.Statics;
 
     /// <summary>
     /// <see cref="Vector{T}"/> traits 256 - Avx2 .
@@ -122,13 +123,13 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.Multiply(Vector{float}, Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<float> Multiply(Vector<float> left, Vector<float> right) {
-                return WStatics.Multiply(left.AsVector256(), right.AsVector256()).AsVector();
+                return BaseStatics.Multiply(left, right);
             }
 
             /// <inheritdoc cref="IVectorTraits.Multiply(Vector{double}, Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> Multiply(Vector<double> left, Vector<double> right) {
-                return WStatics.Multiply(left.AsVector256(), right.AsVector256()).AsVector();
+                return BaseStatics.Multiply(left, right);
             }
 
             /// <inheritdoc cref="IVectorTraits.Multiply(Vector{sbyte}, Vector{sbyte})"/>
@@ -147,27 +148,27 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IVectorTraits.Multiply(Vector{short}, Vector{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> Multiply(Vector<short> left, Vector<short> right) {
-                return WStatics.Multiply(left.AsVector256(), right.AsVector256()).AsVector();
+                return BaseStatics.Multiply(left, right);
             }
 
             /// <inheritdoc cref="IVectorTraits.Multiply(Vector{ushort}, Vector{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> Multiply(Vector<ushort> left, Vector<ushort> right) {
-                return WStatics.Multiply(left.AsVector256(), right.AsVector256()).AsVector();
+                return BaseStatics.Multiply(left, right);
             }
 
             /// <inheritdoc cref="IVectorTraits.Multiply(Vector{int}, Vector{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> Multiply(Vector<int> left, Vector<int> right) {
-                return WStatics.Multiply(left.AsVector256(), right.AsVector256()).AsVector();
+                return BaseStatics.Multiply(left, right);
             }
 
             /// <inheritdoc cref="IVectorTraits.Multiply(Vector{uint}, Vector{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> Multiply(Vector<uint> left, Vector<uint> right) {
-                return WStatics.Multiply(left.AsVector256(), right.AsVector256()).AsVector();
+                return BaseStatics.Multiply(left, right);
             }
 
             /// <inheritdoc cref="IVectorTraits.Multiply(Vector{long}, Vector{long})"/>
