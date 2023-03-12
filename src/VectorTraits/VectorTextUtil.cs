@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Numerics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -585,6 +586,40 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the length of the output string (返回输出字符串的长度).</returns>
         public static int WriteLine(TextWriter textWriter, string format, params object?[] args) {
             return WriteLine(null, textWriter, format, args);
+        }
+
+        /// Output the list of properties of the object (将对象的属性列表进行输出). With these parameters: <paramref name="indent"/> .
+        /// </summary>
+        /// <param name="indent">The indent.</param>
+        /// <param name="textWriter">Output <see cref="TextWriter"/>.</param>
+        /// <param name="instance">Object instance.</param>
+        public static void OutputProperties(string? indent, TextWriter textWriter, object instance) {
+            Type aType = instance.GetType();
+            var properties = aType.GetRuntimeProperties().OrderBy(x => x.Name);
+            foreach (PropertyInfo p in properties) {
+                if (!p.CanRead) continue;
+                if (p.GetIndexParameters().Length > 0) continue;
+                string key = p.Name;
+                object? v = null;
+                try {
+#if NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3 || NETSTANDARD1_4
+#else
+                    if (p.GetGetMethod()!.IsStatic) continue;
+#endif
+                    v = p.GetValue(instance);
+                } catch (Exception ex) {
+                    v = ex.Message;
+                }
+                WriteLine(indent, textWriter, "{0}:\t{1}", key, v);
+            }
+        }
+
+        /// Output the list of properties of the object (将对象的属性列表进行输出).
+        /// </summary>
+        /// <param name="textWriter">Output <see cref="TextWriter"/>.</param>
+        /// <param name="instance">Object instance.</param>
+        public static void OutputProperties(TextWriter textWriter, object instance) {
+            OutputProperties(null, textWriter, instance);
         }
 
 #if (NET35 || NET20)

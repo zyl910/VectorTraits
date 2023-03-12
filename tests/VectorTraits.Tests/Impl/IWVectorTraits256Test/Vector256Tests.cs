@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using System.IO;
-using System.Reflection;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -29,20 +28,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 writer.WriteLine("GetUnsupportedMessage(false):\t{0}", instance.GetUnsupportedMessage(false));
                 writer.WriteLine("GetUnsupportedMessage(true):\t{0}", instance.GetUnsupportedMessage(true));
                 // Properties
-                var properties = aType.GetRuntimeProperties().OrderBy(x => x.Name);
-                foreach (PropertyInfo p in properties) {
-                    if (!p.CanRead) continue;
-                    if (p.GetIndexParameters().Length > 0) continue;
-                    string key = p.Name;
-                    object? v = null;
-                    try {
-                        if (p.GetGetMethod()!.IsStatic) continue;
-                        v = p.GetValue(instance);
-                    } catch(Exception ex) {
-                        v = ex.Message;
-                    }
-                    VectorTextUtil.WriteLine(writer, "{0}:\t{1}", key, v);
-                }
+                VectorTextUtil.OutputProperties(writer, instance);
                 // done.
                 writer.WriteLine();
             }
