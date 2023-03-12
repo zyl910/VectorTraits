@@ -92,6 +92,24 @@ namespace Zyl.VectorTraits.Impl {
                 return Vector.Multiply(left, right);
             }
 
+            /// <inheritdoc cref="IVectorTraits.Multiply(Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> Multiply_Widen(Vector<sbyte> left, Vector<sbyte> right) {
+                return Multiply_Widen(left.AsByte(), right.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Multiply(Vector{byte}, Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> Multiply_Widen(Vector<byte> left, Vector<byte> right) {
+                Vector.Widen(left, out Vector<ushort> u0, out Vector<ushort> u1);
+                Vector.Widen(right, out Vector<ushort> v0, out Vector<ushort> v1);
+                Vector<ushort> w0 = Vector.Multiply(u0, v0);
+                Vector<ushort> w1 = Vector.Multiply(u1, v1);
+                Vector<byte> rt = Vector.Narrow(w0, w1);
+                return rt;
+            }
+
 
         }
     }

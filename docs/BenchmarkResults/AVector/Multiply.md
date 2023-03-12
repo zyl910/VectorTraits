@@ -187,44 +187,45 @@ Check-SumMultiplyBcl	Check `SumMultiplyBcl` mismatch. 32712.618471138107!=32712.
 Check-SumMultiplyVectorTraits	Check `SumMultiplyVectorTraits` mismatch. 32712.618471138107!=32712.618471138187
 Check-SumMultiplyVector128Traits	Check `SumMultiplyVector128Traits` mismatch. 32672.19972187258!=32712.618471138187
 Check-SumMultiplyVector256Traits	Check `SumMultiplyVector256Traits` mismatch. 32712.618471138107!=32712.618471138187
-SumMultiplyScalar	159.407	1644.493
-SumMultiplyBcl	40.304	6504.162	3.955117
-SumMultiplyVectorTraits	40.374	6492.811	3.948214
-SumMultiplyVector128Traits	79.789	3285.446	1.997847
-SumMultiplyVector256Traits	40.608	6455.493	3.925521
+SumMultiplyScalar	158.536	1653.533
+SumMultiplyBcl	40.061	6543.695	3.957402
+SumMultiplyVectorTraits	40.334	6499.269	3.930534
+SumMultiplyVector128Traits	79.773	3286.124	1.987335
+SumMultiplyVector256Traits	40.104	6536.641	3.953136
 
 [MultiplyBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumMultiplyScalar	-11701
 Check-SumMultiplyVector128Traits	Fail! Check `SumMultiplyVector128Traits` fail! 19479!=-11701
-SumMultiplyScalar	146.756	1786.263
-SumMultiplyBcl	9.020	29062.180	16.269825
-SumMultiplyVectorTraits	9.053	28956.092	16.210434
-SumMultiplyVector128Traits	12.363	21204.431	11.870836
-SumMultiplyVector256Traits	9.033	29022.226	16.247458
+SumMultiplyScalar	146.343	1791.300
+SumMultiplyBcl	9.079	28873.943	16.118985
+SumMultiplyVectorTraits	9.100	28807.352	16.081810
+SumMultiplyVector128Traits	12.349	21228.027	11.850624
+SumMultiplyVector256Traits	9.099	28809.020	16.082742
 
 [MultiplyBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumMultiplyScalar	-452441065
 Check-SumMultiplyVector128Traits	Fail! Check `SumMultiplyVector128Traits` fail! 575072105!=-452441065
-SumMultiplyScalar	120.914	2168.019
-SumMultiplyBcl	18.517	14157.296	6.530060
-SumMultiplyVectorTraits	18.475	14189.488	6.544909
-SumMultiplyVector128Traits	26.336	9953.966	4.591272
-SumMultiplyVector256Traits	20.416	12840.107	5.922506
+SumMultiplyScalar	120.901	2168.260
+SumMultiplyBcl	18.480	14185.276	6.542241
+SumMultiplyVectorTraits	18.794	13947.946	6.432784
+SumMultiplyVector128Traits	26.068	10056.205	4.637916
+SumMultiplyVector256Traits	18.584	14105.919	6.505641
 
 [MultiplyBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumMultiplyScalar	-41
 Check-SumMultiplyVector128Traits	Fail! Check `SumMultiplyVector128Traits` fail! -113!=-41
-SumMultiplyScalar	141.677	1850.298
-SumMultiplyBcl	130.501	2008.757	1.085640
-SumMultiplyVectorTraits	130.761	2004.759	1.083479
-SumMultiplyVector128Traits	155.413	1686.758	0.911614
-SumMultiplyVector256Traits	131.049	2000.349	1.081095
+SumMultiplyScalar	142.130	1844.396
+SumMultiplyBcl	130.726	2005.292	1.087235
+SumMultiplyBcl_Widen	10.104	25943.454	14.066096
+SumMultiplyVectorTraits	130.975	2001.489	1.085173
+SumMultiplyVector128Traits	198.315	1321.854	0.716687
+SumMultiplyVector256Traits	131.001	2001.077	1.084949
 
 [MultiplyBenchmark_Single(262144)]
 ---
@@ -234,23 +235,23 @@ Check-SumMultiplyBcl	Check `SumMultiplyBcl` mismatch. 32717.988!=32717.883
 Check-SumMultiplyVectorTraits	Check `SumMultiplyVectorTraits` mismatch. 32717.988!=32717.883
 Check-SumMultiplyVector128Traits	Check `SumMultiplyVector128Traits` mismatch. 32712.596!=32717.883
 Check-SumMultiplyVector256Traits	Check `SumMultiplyVector256Traits` mismatch. 32717.988!=32717.883
-SumMultiplyScalar	156.679	1673.124
-SumMultiplyBcl	20.028	13088.803	7.822973
-SumMultiplyVectorTraits	20.902	12541.319	7.495750
-SumMultiplyVector128Traits	39.837	6580.435	3.933023
-SumMultiplyVector256Traits	20.194	12981.279	7.758707
+SumMultiplyScalar	155.872	1681.787
+SumMultiplyBcl	19.588	13382.852	7.957517
+SumMultiplyVectorTraits	19.643	13345.564	7.935345
+SumMultiplyVector128Traits	39.053	6712.536	3.991310
+SumMultiplyVector256Traits	19.615	13364.360	7.946521
 
 [MultiplyBenchmark_UInt64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumMultiplyScalar	12001033377966188484
 Check-SumMultiplyVector128Traits	Fail! Check `SumMultiplyVector128Traits` fail! 12862679336949715101!=12001033377966188484
-SumMultiplyScalar	137.860	1901.517
-SumMultiplyBcl	253.089	1035.779	0.544712
-SumMultiplyVectorTraits	81.055	3234.145	1.700824
-SumMultiplyVector128Traits	405.564	646.369	0.339923
-SumMultiplyVector256Traits	81.096	3232.498	1.699958
-SumMultiplyVector256Avx	81.429	3219.295	1.693014
+SumMultiplyScalar	140.361	1867.643
+SumMultiplyBcl	249.255	1051.708	0.563120
+SumMultiplyVectorTraits	80.649	3250.416	1.740384
+SumMultiplyVector128Traits	406.100	645.516	0.345631
+SumMultiplyVector256Traits	80.998	3236.406	1.732882
+SumMultiplyVector256Avx	81.378	3221.324	1.724807
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !

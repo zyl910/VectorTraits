@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.M {
 #if BENCHMARKS_OFF
@@ -99,6 +100,46 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
             dstTMy = StaticSumMultiplyBcl(srcArray, srcArray.Length);
             CheckResult("SumMultiplyBcl");
         }
+        /// <summary>
+        /// Sum Multiply - BCL - Widen.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMy StaticSumMultiplyBcl_Widen(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                vrt += VectorTraitsBase.Statics.Multiply_Widen(p0, Unsafe.Add(ref p0, 1));
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            //ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            //for (i = 0; i < cntRem; ++i) {
+            //    rt += (TMy)Unsafe.Add(ref p, i);
+            //}
+            // Reduce.
+            for (i = 0; i < Vector<TMy>.Count; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumMultiplyBcl_Widen() {
+            dstTMy = StaticSumMultiplyBcl_Widen(srcArray, srcArray.Length);
+            CheckResult("SumMultiplyBcl_Widen");
+        }
+
 
         #region BENCHMARKS_RAW
 #if BENCHMARKS_RAW
