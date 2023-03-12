@@ -171,7 +171,8 @@ namespace Zyl.VectorTraits.Benchmarks {
                 //msg = "Succeed";
             } else {
                 Debug.WriteLine(ex);
-                bool useFull = ex is not NotSupportedException;
+                //bool useFull = ex is not NotSupportedException;
+                bool useFull = false;
                 if (useFull) {
                     msg = string.Format("Fail! {0}", ex.ToString());
                 } else {
@@ -208,6 +209,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                         action();
                     } catch (Exception ex) {
                         //writer.WriteLine(indent + string.Format("{0}:\tRun fail! {1}", name, ex.Message));
+                        //Debug.WriteLine(string.Format("{0}:\tRun fail! {1}", name, ex.ToString()));
                         ex1 = ex;
                     }
                     onafter?.Invoke(mi, ex1);
