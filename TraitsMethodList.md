@@ -58,7 +58,7 @@ List (列表):
   Mnemonic: `rt[i] := max(left[i], right[i])`.
 - `Min`: Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).
   Mnemonic: `rt[i] := min(left[i], right[i])`.
-- `Multiply`: Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+- `Multiply`*: Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
   Mnemonic: `rt[i] := left[i] * right[i]`.
 - `Negate`: Computes the negate of a vector (计算向量的相反数).
   Mnemonic: `rt[i] := -vector[i]`.
@@ -68,6 +68,8 @@ List (列表):
   Mnemonic: `rt[i] := left[i] - right[i]`.
 - `Xor`: Computes the exclusive-or of two vectors (计算两个向量的位异或).
   Mnemonic: `rt[i] := left[i] ^ right[i]`.
+
+*: It also works for Vector (它也适用于Vector).
 
 
 ## Vector traits method appended by this library (由本库追加的向量特性方法)
