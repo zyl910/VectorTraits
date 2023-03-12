@@ -599,6 +599,13 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+        /// <inheritdoc cref="IWVectorTraits128.Multiply_FullAcceleratedTypes"/>
+        public virtual TypeCodeFlags Multiply_FullAcceleratedTypes {
+            get {
+                return Statics.Multiply_FullAcceleratedTypes;
+            }
+        }
+
         /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{float}, Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector128<float> Multiply(Vector128<float> left, Vector128<float> right) {

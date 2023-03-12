@@ -1161,7 +1161,7 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Produces the full product of two signed 64-bit numbers - Length is two (生成两个有符号 64 位数的完整乘积 - 长度为二).
+        /// Produces the full product of two signed 64-bit numbers - Two word (生成两个有符号 64 位数的完整乘积 - 双字).
         /// </summary>
         /// <param name="a">The first number to multiply (要相乘的第一个数).</param>
         /// <param name="b">The second number to multiply (要相乘的第二个数).</param>
@@ -1193,7 +1193,7 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Produces the full product of two unsigned 64-bit numbers - Length is two (生成两个无符号 64 位数的完整乘积 - 长度为二).
+        /// Produces the full product of two unsigned 64-bit numbers - Two word (生成两个无符号 64 位数的完整乘积 - 双字).
         /// </summary>
         /// <param name="u">The first number to multiply (要相乘的第一个数).</param>
         /// <param name="v">The second number to multiply (要相乘的第二个数).</param>

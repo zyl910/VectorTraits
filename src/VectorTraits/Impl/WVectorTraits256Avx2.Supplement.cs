@@ -600,6 +600,14 @@ namespace Zyl.VectorTraits.Impl {
                 }
             }
 
+            /// <inheritdoc cref="IWVectorTraits256.Multiply_FullAcceleratedTypes"/>
+            public static TypeCodeFlags Multiply_FullAcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    return rt;
+                }
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{float}, Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Multiply(Vector256<float> left, Vector256<float> right) {

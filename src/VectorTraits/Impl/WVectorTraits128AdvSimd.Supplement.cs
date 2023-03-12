@@ -577,6 +577,13 @@ namespace Zyl.VectorTraits.Impl {
                 }
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.Multiply_FullAcceleratedTypes"/>
+            public static TypeCodeFlags Multiply_FullAcceleratedTypes {
+                get {
+                    return TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Single | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                }
+            }
+
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Multiply(Vector128<float> left, Vector128<float> right) {

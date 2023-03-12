@@ -201,6 +201,14 @@ namespace Zyl.VectorTraits.Impl {
                 }
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.Multiply_FullAcceleratedTypes"/>
+            public static TypeCodeFlags Multiply_FullAcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Double
+                        | SuperStatics.Multiply_FullAcceleratedTypes;
+                }
+            }
+
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Multiply(Vector128<double> left, Vector128<double> right) {
