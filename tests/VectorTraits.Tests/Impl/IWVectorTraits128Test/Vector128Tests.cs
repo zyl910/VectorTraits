@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using System.IO;
@@ -28,7 +29,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 writer.WriteLine("GetUnsupportedMessage(false):\t{0}", instance.GetUnsupportedMessage(false));
                 writer.WriteLine("GetUnsupportedMessage(true):\t{0}", instance.GetUnsupportedMessage(true));
                 // Properties
-                var properties = aType.GetRuntimeProperties();
+                var properties = aType.GetRuntimeProperties().OrderBy(x => x.Name);
                 foreach (PropertyInfo p in properties) {
                     if (!p.CanRead) continue;
                     if (p.GetIndexParameters().Length > 0) continue;
