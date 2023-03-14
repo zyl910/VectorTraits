@@ -698,8 +698,9 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Multiply_TwoWord(Vector256<ulong> left, Vector256<ulong> right) {
                 const int L = 32; // sizeof(uint) * 8;
-                const ulong MASK_VALUE = (1L << L) - 1;
-                Vector256<ulong> mask = Vector256.Create(MASK_VALUE);
+                //const ulong MASK_VALUE = (1L << L) - 1;
+                //Vector256<ulong> mask = Vector256.Create(MASK_VALUE);
+                Vector256<ulong> mask = Vector256s<ulong>.VMaxUInt32;
                 Vector256<ulong> w0;
                 Vector256<ulong> u1, v1, w1, low;
                 // u=left; v=right;
