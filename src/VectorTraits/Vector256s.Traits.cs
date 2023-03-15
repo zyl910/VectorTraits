@@ -989,6 +989,17 @@ namespace Zyl.VectorTraits {
             }
         }
 
+        /// <inheritdoc cref="IWVectorTraits256.Multiply_FullAcceleratedTypes"/>
+        public static TypeCodeFlags Multiply_FullAcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Multiply_FullAcceleratedTypes;
+#else
+                return _instance.Multiply_FullAcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
         /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{float}, Vector256{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> Multiply(Vector256<float> left, Vector256<float> right) {

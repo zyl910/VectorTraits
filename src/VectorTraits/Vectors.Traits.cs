@@ -220,6 +220,17 @@ namespace Zyl.VectorTraits {
             }
         }
 
+        /// <inheritdoc cref="IVectorTraits.Multiply_FullAcceleratedTypes"/>
+        public static TypeCodeFlags Multiply_FullAcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Multiply_FullAcceleratedTypes;
+#else
+                return _instance.Multiply_FullAcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
         /// <inheritdoc cref="IVectorTraits.Multiply(Vector{float}, Vector{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<float> Multiply(Vector<float> left, Vector<float> right) {
