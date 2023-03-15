@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int16_SByte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int32_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int32_Int64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int64_Int32.cs" />
@@ -26,8 +27,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Single.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Single_Double.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt16_Byte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt32_UInt16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt64.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt64_UInt32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BenchmarkUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FakeBenchmarkAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IBenchmarkWriter.cs" />

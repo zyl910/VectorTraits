@@ -46,6 +46,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YC\YClampBenchmark_Int64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YC\YClampBenchmark_SByte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YC\YClampBenchmark_Single.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YN\YNarrowSaturateBenchmark_Int16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YN\YNarrowSaturateBenchmark_Int32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YN\YNarrowSaturateBenchmark_Int64.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YN\YNarrowSaturateBenchmark_UInt16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YN\YNarrowSaturateBenchmark_UInt32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YN\YNarrowSaturateBenchmark_UInt64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BenchmarkMain.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IntroDisassemblyDry.cs" />
   </ItemGroup>
