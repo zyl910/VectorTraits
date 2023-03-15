@@ -85,6 +85,84 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
+            public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = (Narrow_AcceleratedTypes & YClamp_AcceleratedTypes)
+                        & (TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64);
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_FullAcceleratedTypes"/>
+            public static TypeCodeFlags YNarrowSaturate_FullAcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{short}, Vector256{short})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YNarrowSaturate(Vector256<short> lower, Vector256<short> upper) {
+                Vector256<short> amin = Vector256s<short>.VMinSByte;
+                Vector256<short> amax = Vector256s<short>.VMaxSByte;
+                Vector256<short> l = YClamp(lower, amin, amax);
+                Vector256<short> u = YClamp(upper, amin, amax);
+                return Narrow(l, u);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{ushort}, Vector256{ushort})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YNarrowSaturate(Vector256<ushort> lower, Vector256<ushort> upper) {
+                Vector256<ushort> amax = Vector256s<ushort>.VMaxByte;
+                Vector256<ushort> l = Min(lower, amax);
+                Vector256<ushort> u = Min(upper, amax);
+                return Narrow(l, u);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{int}, Vector256{int})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YNarrowSaturate(Vector256<int> lower, Vector256<int> upper) {
+                Vector256<int> amin = Vector256s<int>.VMinInt16;
+                Vector256<int> amax = Vector256s<int>.VMaxInt16;
+                Vector256<int> l = YClamp(lower, amin, amax);
+                Vector256<int> u = YClamp(upper, amin, amax);
+                return Narrow(l, u);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{uint}, Vector256{uint})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YNarrowSaturate(Vector256<uint> lower, Vector256<uint> upper) {
+                Vector256<uint> amax = Vector256s<uint>.VMaxUInt16;
+                Vector256<uint> l = Min(lower, amax);
+                Vector256<uint> u = Min(upper, amax);
+                return Narrow(l, u);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{long}, Vector256{long})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YNarrowSaturate(Vector256<long> lower, Vector256<long> upper) {
+                Vector256<long> amin = Vector256s<long>.VMinInt32;
+                Vector256<long> amax = Vector256s<long>.VMaxInt32;
+                Vector256<long> l = YClamp(lower, amin, amax);
+                Vector256<long> u = YClamp(upper, amin, amax);
+                return Narrow(l, u);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{ulong}, Vector256{ulong})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YNarrowSaturate(Vector256<ulong> lower, Vector256<ulong> upper) {
+                Vector256<ulong> amax = Vector256s<ulong>.VMaxUInt32;
+                Vector256<ulong> l = Min(lower, amax);
+                Vector256<ulong> u = Min(upper, amax);
+                return Narrow(l, u);
+            }
+
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }

@@ -1244,6 +1244,61 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
+        public override TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
+            get {
+                return Statics.YNarrowSaturate_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_FullAcceleratedTypes"/>
+        public override TypeCodeFlags YNarrowSaturate_FullAcceleratedTypes {
+            get {
+                return Statics.YNarrowSaturate_FullAcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{short}, Vector256{short})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> YNarrowSaturate(Vector256<short> lower, Vector256<short> upper) {
+            return Statics.YNarrowSaturate(lower, upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{ushort}, Vector256{ushort})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<byte> YNarrowSaturate(Vector256<ushort> lower, Vector256<ushort> upper) {
+            return Statics.YNarrowSaturate(lower, upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{int}, Vector256{int})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> YNarrowSaturate(Vector256<int> lower, Vector256<int> upper) {
+            return Statics.YNarrowSaturate(lower, upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{uint}, Vector256{uint})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ushort> YNarrowSaturate(Vector256<uint> lower, Vector256<uint> upper) {
+            return Statics.YNarrowSaturate(lower, upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{long}, Vector256{long})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> YNarrowSaturate(Vector256<long> lower, Vector256<long> upper) {
+            return Statics.YNarrowSaturate(lower, upper);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{ulong}, Vector256{ulong})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<uint> YNarrowSaturate(Vector256<ulong> lower, Vector256<ulong> upper) {
+            return Statics.YNarrowSaturate(lower, upper);
+        }
+
+
 #endif
     }
 }

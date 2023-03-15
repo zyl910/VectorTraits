@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
@@ -85,6 +86,80 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YClamp(Vector256<ulong> value, Vector256<ulong> amin, Vector256<ulong> amax) {
                 return Min(Max(amin, value), amax);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
+            public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_FullAcceleratedTypes"/>
+            public static TypeCodeFlags YNarrowSaturate_FullAcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{short}, Vector256{short})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YNarrowSaturate(Vector256<short> lower, Vector256<short> upper) {
+                Vector256<sbyte> raw = Avx2.PackSignedSaturate(lower, upper); // bit64(x, z, y, w)
+                Vector256<sbyte> rt = Avx2.Permute4x64(raw.AsUInt64(), ShuffleControlG4.XZYW).AsSByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{ushort}, Vector256{ushort})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YNarrowSaturate(Vector256<ushort> lower, Vector256<ushort> upper) {
+                Vector256<ushort> amax = Vector256s<ushort>.VMaxByte;
+                Vector256<byte> raw = Avx2.PackUnsignedSaturate(Avx2.Min(lower, amax).AsInt16(), Avx2.Min(upper, amax).AsInt16()); // bit64(x, z, y, w)
+                Vector256<byte> rt = Avx2.Permute4x64(raw.AsUInt64(), ShuffleControlG4.XZYW).AsByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{int}, Vector256{int})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YNarrowSaturate(Vector256<int> lower, Vector256<int> upper) {
+                Vector256<short> raw = Avx2.PackSignedSaturate(lower, upper); // bit64(x, z, y, w)
+                Vector256<short> rt = Avx2.Permute4x64(raw.AsUInt64(), ShuffleControlG4.XZYW).AsInt16(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{uint}, Vector256{uint})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YNarrowSaturate(Vector256<uint> lower, Vector256<uint> upper) {
+                Vector256<uint> amax = Vector256s<uint>.VMaxUInt16;
+                Vector256<ushort> raw = Avx2.PackUnsignedSaturate(Avx2.Min(lower, amax).AsInt32(), Avx2.Min(upper, amax).AsInt32()); // bit64(x, z, y, w)
+                Vector256<ushort> rt = Avx2.Permute4x64(raw.AsUInt64(), ShuffleControlG4.XZYW).AsUInt16(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{long}, Vector256{long})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YNarrowSaturate(Vector256<long> lower, Vector256<long> upper) {
+                Vector256<long> amin = Vector256s<long>.VMinInt32;
+                Vector256<long> amax = Vector256s<long>.VMaxInt32;
+                Vector256<long> l = YClamp(lower, amin, amax);
+                Vector256<long> u = YClamp(upper, amin, amax);
+                return Narrow(l, u);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{ulong}, Vector256{ulong})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YNarrowSaturate(Vector256<ulong> lower, Vector256<ulong> upper) {
+                Vector256<ulong> amax = Vector256s<ulong>.VMaxUInt32;
+                Vector256<ulong> l = Min(lower, amax);
+                Vector256<ulong> u = Min(upper, amax);
+                return Narrow(l, u);
             }
 
 
