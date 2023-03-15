@@ -8,9 +8,9 @@ using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
 
-namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
+namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
     [TestFixture()]
-    public class Vector256Tests_YN {
+    public class Vector128Tests_YN {
 #if NETCOREAPP3_0_OR_GREATER
 
         [TestCase((short)5, (sbyte)1)]
@@ -20,8 +20,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((long)9, (int)1)]
         [TestCase((ulong)10, (uint)1)]
         public void YNarrowSaturateTest<T, TOut>(T src, TOut srcOut) where T : struct where TOut : struct {
-            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
-            foreach (IWVectorTraits256 instance in instances) {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
                 if (instance.GetIsSupported(true)) {
                     Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1}); Full=({2})", instance.GetType().Name, instance.YNarrowSaturate_AcceleratedTypes, instance.YNarrowSaturate_FullAcceleratedTypes));
                 } else {
@@ -29,29 +29,29 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 }
             }
             // run.
-            Vector256<T>[] samples = {
-                Vector256s.Create(src),
-                Vector256s<T>.Demo,
-                Vector256s<T>.Serial,
-                Vector256s<T>.SerialNegative,
-                Vector256s<T>.InterlacedSign,
-                Vector256s<T>.InterlacedSignNegative,
-                Vector256s<T>.XyXMask,
-                Vector256s<T>.XyzwXMask
+            Vector128<T>[] samples = {
+                Vector128s.Create(src),
+                Vector128s<T>.Demo,
+                Vector128s<T>.Serial,
+                Vector128s<T>.SerialNegative,
+                Vector128s<T>.InterlacedSign,
+                Vector128s<T>.InterlacedSignNegative,
+                Vector128s<T>.XyXMask,
+                Vector128s<T>.XyzwXMask
             };
             bool allowLog = false;
             for (int i = 0; i < samples.Length; i += 2) {
-                Vector256<T> lower = samples[i];
-                Vector256<T> upper = samples[i+1];
-                Vector256<TOut> expected = Vector256s.YNarrowSaturate((dynamic)lower, (dynamic)upper);
+                Vector128<T> lower = samples[i];
+                Vector128<T> upper = samples[i+1];
+                Vector128<TOut> expected = Vector128s.YNarrowSaturate((dynamic)lower, (dynamic)upper);
                 if (allowLog) {
                     Console.WriteLine();
                     Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}, {1}", lower, upper));
                     Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
                 }
-                foreach (IWVectorTraits256 instance in instances) {
+                foreach (IWVectorTraits128 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
-                    Vector256<TOut> dst = instance.YNarrowSaturate((dynamic)lower, (dynamic)upper);
+                    Vector128<TOut> dst = instance.YNarrowSaturate((dynamic)lower, (dynamic)upper);
                     Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
                 }
             }
