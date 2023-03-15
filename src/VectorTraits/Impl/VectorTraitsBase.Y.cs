@@ -87,6 +87,84 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_AcceleratedTypes"/>
+            public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = (Narrow_AcceleratedTypes & YClamp_AcceleratedTypes)
+                        & (TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64);
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_FullAcceleratedTypes"/>
+            public static TypeCodeFlags YNarrowSaturate_FullAcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate(Vector{short}, Vector{short})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YNarrowSaturate(Vector<short> lower, Vector<short> upper) {
+                Vector<short> amin = Vectors<short>.VMinSByte;
+                Vector<short> amax = Vectors<short>.VMaxSByte;
+                Vector<short> l = YClamp(lower, amin, amax);
+                Vector<short> u = YClamp(upper, amin, amax);
+                return Narrow(l, u);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate(Vector{ushort}, Vector{ushort})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YNarrowSaturate(Vector<ushort> lower, Vector<ushort> upper) {
+                Vector<ushort> amax = Vectors<ushort>.VMaxByte;
+                Vector<ushort> l = Vector.Min(lower, amax);
+                Vector<ushort> u = Vector.Min(upper, amax);
+                return Narrow(l, u);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate(Vector{int}, Vector{int})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YNarrowSaturate(Vector<int> lower, Vector<int> upper) {
+                Vector<int> amin = Vectors<int>.VMinInt16;
+                Vector<int> amax = Vectors<int>.VMaxInt16;
+                Vector<int> l = YClamp(lower, amin, amax);
+                Vector<int> u = YClamp(upper, amin, amax);
+                return Narrow(l, u);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate(Vector{uint}, Vector{uint})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YNarrowSaturate(Vector<uint> lower, Vector<uint> upper) {
+                Vector<uint> amax = Vectors<uint>.VMaxUInt16;
+                Vector<uint> l = Vector.Min(lower, amax);
+                Vector<uint> u = Vector.Min(upper, amax);
+                return Narrow(l, u);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate(Vector{long}, Vector{long})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YNarrowSaturate(Vector<long> lower, Vector<long> upper) {
+                Vector<long> amin = Vectors<long>.VMinInt32;
+                Vector<long> amax = Vectors<long>.VMaxInt32;
+                Vector<long> l = YClamp(lower, amin, amax);
+                Vector<long> u = YClamp(upper, amin, amax);
+                return Narrow(l, u);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate(Vector{ulong}, Vector{ulong})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YNarrowSaturate(Vector<ulong> lower, Vector<ulong> upper) {
+                Vector<ulong> amax = Vectors<ulong>.VMaxUInt32;
+                Vector<ulong> l = Vector.Min(lower, amax);
+                Vector<ulong> u = Vector.Min(upper, amax);
+                return Narrow(l, u);
+            }
+
+
         }
     }
 }

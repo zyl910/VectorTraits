@@ -557,6 +557,61 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_AcceleratedTypes"/>
+            public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
+                get {
+                    return WStatics.YNarrowSaturate_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_FullAcceleratedTypes"/>
+            public static TypeCodeFlags YNarrowSaturate_FullAcceleratedTypes {
+                get {
+                    return WStatics.YNarrowSaturate_FullAcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate(Vector{short}, Vector{short})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YNarrowSaturate(Vector<short> lower, Vector<short> upper) {
+                return WStatics.YNarrowSaturate(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate(Vector{ushort}, Vector{ushort})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YNarrowSaturate(Vector<ushort> lower, Vector<ushort> upper) {
+                return WStatics.YNarrowSaturate(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate(Vector{int}, Vector{int})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YNarrowSaturate(Vector<int> lower, Vector<int> upper) {
+                return WStatics.YNarrowSaturate(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate(Vector{uint}, Vector{uint})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YNarrowSaturate(Vector<uint> lower, Vector<uint> upper) {
+                return WStatics.YNarrowSaturate(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate(Vector{long}, Vector{long})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YNarrowSaturate(Vector<long> lower, Vector<long> upper) {
+                return WStatics.YNarrowSaturate(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturate(Vector{ulong}, Vector{ulong})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YNarrowSaturate(Vector<ulong> lower, Vector<ulong> upper) {
+                return WStatics.YNarrowSaturate(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+
 #endif // NET5_0_OR_GREATER
         }
 

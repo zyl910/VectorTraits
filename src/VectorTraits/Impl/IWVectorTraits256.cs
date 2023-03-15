@@ -2010,6 +2010,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <seealso cref="YNarrowSaturate"/>
         /// <seealso cref="YNarrowSaturate_FullAcceleratedTypes"/>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
         TypeCodeFlags YNarrowSaturate_AcceleratedTypes { get; }
 
         /// <summary>
