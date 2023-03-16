@@ -2083,6 +2083,55 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="YNarrowSaturate_AcceleratedTypes"/>
         Vector256<uint> YNarrowSaturate(Vector256<ulong> lower, Vector256<ulong> upper);
 
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YNarrowSaturateUnsigned</c> (运行 <c>YNarrowSaturateUnsigned</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YNarrowSaturateUnsigned"/>
+        /// <seealso cref="YNarrowSaturateUnsigned_FullAcceleratedTypes"/>
+        /// <seealso cref="Narrow_AcceleratedTypes"/>
+        TypeCodeFlags YNarrowSaturateUnsigned_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Types with full hardware acceleration when running <c>YNarrowSaturateUnsigned</c> (运行 <c>YNarrowSaturateUnsigned</c> 时具有完全硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para>`AcceleratedTypes` only indicates the presence of hardware acceleration, possibly indirectly through some algorithm. And `FullAcceleratedTypes` means that dedicated instructions are used to achieve full hardware acceleration. (`AcceleratedTypes`仅表示存在硬件加速,有可能是通过一些算法间接实现的. 而 `FullAcceleratedTypes`意味着使用了专用指令，实现了完全的硬件加速)</para>
+        /// </remarks>
+        /// <seealso cref="YNarrowSaturateUnsigned"/>
+        /// <seealso cref="YNarrowSaturateUnsigned_AcceleratedTypes"/>
+        TypeCodeFlags YNarrowSaturateUnsigned_FullAcceleratedTypes { get; }
+
+        /// <summary>
+        /// Saturate narrows two signed <seealso cref="Vector256{T}"/> instances into one unsigned <seealso cref="Vector256{T}"/>"  (将两个有符号 <seealso cref="Vector256{T}"/> 实例饱和缩窄为一个无符号 <seealso cref="Vector256{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow_saturate(element_ref(i, lower, upper)) = narrow(clamp(element_ref(i, lower, upper), 0, TOut.MaxValue))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector256{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="YNarrowSaturateUnsigned_AcceleratedTypes"/>
+        Vector256<byte> YNarrowSaturateUnsigned(Vector256<short> lower, Vector256<short> upper);
+
+        /// <summary>
+        /// Saturate narrows two signed <seealso cref="Vector256{T}"/> instances into one unsigned <seealso cref="Vector256{T}"/>"  (将两个有符号 <seealso cref="Vector256{T}"/> 实例饱和缩窄为一个无符号 <seealso cref="Vector256{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow_saturate(element_ref(i, lower, upper)) = narrow(clamp(element_ref(i, lower, upper), 0, TOut.MaxValue))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector256{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="YNarrowSaturateUnsigned_AcceleratedTypes"/>
+        Vector256<ushort> YNarrowSaturateUnsigned(Vector256<int> lower, Vector256<int> upper);
+
+        /// <summary>
+        /// Saturate narrows two signed <seealso cref="Vector256{T}"/> instances into one unsigned <seealso cref="Vector256{T}"/>"  (将两个有符号 <seealso cref="Vector256{T}"/> 实例饱和缩窄为一个无符号 <seealso cref="Vector256{T}"/> ). />.
+        /// Mnemonic: <c>rt[i] := narrow_saturate(element_ref(i, lower, upper)) = narrow(clamp(element_ref(i, lower, upper), 0, TOut.MaxValue))</c>.
+        /// </summary>
+        /// <param name="lower">The vector that will be narrowed to the lower half of the result vector (构成缩窄结果向量的低半部分向量).</param>
+        /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
+        /// <returns>A <seealso cref="Vector256{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
+        /// <seealso cref="YNarrowSaturateUnsigned_AcceleratedTypes"/>
+        Vector256<uint> YNarrowSaturateUnsigned(Vector256<long> lower, Vector256<long> upper);
+
         #endregion // mY_style
 
 #endif

@@ -57,6 +57,47 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
         }
 
+        [TestCase((short)5, (byte)1)]
+        [TestCase((int)7, (ushort)1)]
+        [TestCase((long)9, (uint)1)]
+        public void YNarrowSaturateUnsignedTest<T, TOut>(T src, TOut srcOut) where T : struct where TOut : struct {
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1}); Full=({2})", instance.GetType().Name, instance.YNarrowSaturateUnsigned_AcceleratedTypes, instance.YNarrowSaturateUnsigned_FullAcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            Vector256<T>[] samples = {
+                Vector256s.Create(src),
+                Vector256s<T>.Demo,
+                Vector256s<T>.Serial,
+                Vector256s<T>.SerialNegative,
+                Vector256s<T>.InterlacedSign,
+                Vector256s<T>.InterlacedSignNegative,
+                Vector256s<T>.XyXMask,
+                Vector256s<T>.XyzwXMask
+            };
+            bool allowLog = false;
+            for (int i = 0; i < samples.Length; i += 2) {
+                Vector256<T> lower = samples[i];
+                Vector256<T> upper = samples[i+1];
+                Vector256<TOut> expected = Vector256s.YNarrowSaturateUnsigned((dynamic)lower, (dynamic)upper);
+                if (allowLog) {
+                    Console.WriteLine();
+                    Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}, {1}", lower, upper));
+                    Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                }
+                foreach (IWVectorTraits256 instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector256<TOut> dst = instance.YNarrowSaturateUnsigned((dynamic)lower, (dynamic)upper);
+                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
+                }
+            }
+        }
+
 
 #endif
     }
