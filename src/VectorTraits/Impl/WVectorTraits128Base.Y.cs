@@ -164,6 +164,56 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned_AcceleratedTypes"/>
+            public static TypeCodeFlags YNarrowSaturateUnsigned_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = (Narrow_AcceleratedTypes & YClamp_AcceleratedTypes)
+                        & (TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64);
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned_FullAcceleratedTypes"/>
+            public static TypeCodeFlags YNarrowSaturateUnsigned_FullAcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned(Vector128{short}, Vector128{short})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YNarrowSaturateUnsigned(Vector128<short> lower, Vector128<short> upper) {
+                Vector128<short> amin = Vector128<short>.Zero;
+                Vector128<short> amax = Vector128s<short>.VMaxByte;
+                Vector128<ushort> l = YClamp(lower, amin, amax).AsUInt16();
+                Vector128<ushort> u = YClamp(upper, amin, amax).AsUInt16();
+                return Narrow(l, u);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned(Vector128{int}, Vector128{int})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YNarrowSaturateUnsigned(Vector128<int> lower, Vector128<int> upper) {
+                Vector128<int> amin = Vector128<int>.Zero;
+                Vector128<int> amax = Vector128s<int>.VMaxUInt16;
+                Vector128<uint> l = YClamp(lower, amin, amax).AsUInt32();
+                Vector128<uint> u = YClamp(upper, amin, amax).AsUInt32();
+                return Narrow(l, u);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned(Vector128{long}, Vector128{long})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YNarrowSaturateUnsigned(Vector128<long> lower, Vector128<long> upper) {
+                Vector128<long> amin = Vector128<long>.Zero;
+                Vector128<long> amax = Vector128s<long>.VMaxUInt32;
+                Vector128<ulong> l = YClamp(lower, amin, amax).AsUInt64();
+                Vector128<ulong> u = YClamp(upper, amin, amax).AsUInt64();
+                return Narrow(l, u);
+            }
+
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }

@@ -2164,6 +2164,62 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned_AcceleratedTypes"/>
+        public static TypeCodeFlags YNarrowSaturateUnsigned_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YNarrowSaturateUnsigned_AcceleratedTypes;
+#else
+                return _instance.YNarrowSaturateUnsigned_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned_FullAcceleratedTypes"/>
+        public static TypeCodeFlags YNarrowSaturateUnsigned_FullAcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YNarrowSaturateUnsigned_FullAcceleratedTypes;
+#else
+                return _instance.YNarrowSaturateUnsigned_FullAcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned(Vector128{short}, Vector128{short})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<byte> YNarrowSaturateUnsigned(Vector128<short> lower, Vector128<short> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturateUnsigned(lower, upper);
+#else
+            return _instance.YNarrowSaturateUnsigned(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned(Vector128{int}, Vector128{int})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<ushort> YNarrowSaturateUnsigned(Vector128<int> lower, Vector128<int> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturateUnsigned(lower, upper);
+#else
+            return _instance.YNarrowSaturateUnsigned(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned(Vector128{long}, Vector128{long})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<uint> YNarrowSaturateUnsigned(Vector128<long> lower, Vector128<long> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturateUnsigned(lower, upper);
+#else
+            return _instance.YNarrowSaturateUnsigned(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
 #endif // NETCOREAPP3_0_OR_GREATER
     }
 }
