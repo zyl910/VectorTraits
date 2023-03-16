@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -19,16 +19,16 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = Int32;
-    using TMyOut = Int16;
+    using TMy = Int64;
+    using TMyOut = UInt32;
 
     /// <summary>
-    /// YNarrowSaturate benchmark - Int32.
+    /// YNarrowSaturateUnsigned benchmark - Int64.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class YNarrowSaturateBenchmark_Int32 : AbstractSharedBenchmark_Int32_Int16 {
+    public partial class YNarrowSaturateUnsignedBenchmark_Int64 : AbstractSharedBenchmark_Int64_UInt32 {
 
         // -- var --
         private const TMy amin = TMyOut.MinValue;
@@ -152,7 +152,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vrt += VectorTraitsBase.Statics.YNarrowSaturate(p0, Unsafe.Add(ref p0, 1));
+                vrt += VectorTraitsBase.Statics.YNarrowSaturateUnsigned(p0, Unsafe.Add(ref p0, 1));
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -196,7 +196,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vrt += Vectors.YNarrowSaturate(p0, Unsafe.Add(ref p0, 1));
+                vrt += Vectors.YNarrowSaturateUnsigned(p0, Unsafe.Add(ref p0, 1));
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -251,7 +251,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector128 processs.
             for (i = 0; i < cntBlock; ++i) {
-                var t = Vector128s.YNarrowSaturate(p0, Unsafe.Add(ref p0, 1));
+                var t = Vector128s.YNarrowSaturateUnsigned(p0, Unsafe.Add(ref p0, 1));
                 vrt = Vector128s.Add(vrt, t);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -298,7 +298,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                var t = Vector256s.YNarrowSaturate(p0, Unsafe.Add(ref p0, 1));
+                var t = Vector256s.YNarrowSaturateUnsigned(p0, Unsafe.Add(ref p0, 1));
                 vrt = Vector256s.Add(vrt, t);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }

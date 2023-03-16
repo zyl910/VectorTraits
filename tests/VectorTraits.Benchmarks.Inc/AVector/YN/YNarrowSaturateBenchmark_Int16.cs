@@ -1,4 +1,4 @@
-﻿#undef BENCHMARKS_OFF
+﻿//#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -23,7 +23,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
     using TMyOut = SByte;
 
     /// <summary>
-    /// Narrow benchmark - Int16.
+    /// YNarrowSaturate benchmark - Int16.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]

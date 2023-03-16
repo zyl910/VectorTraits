@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -19,16 +19,16 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = Int32;
-    using TMyOut = Int16;
+    using TMy = Int16;
+    using TMyOut = Byte;
 
     /// <summary>
-    /// YNarrowSaturate benchmark - Int32.
+    /// Narrow benchmark - Int16.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class YNarrowSaturateBenchmark_Int32 : AbstractSharedBenchmark_Int32_Int16 {
+    public partial class YNarrowSaturateUnsignedBenchmark_Int16 : AbstractSharedBenchmark_Int16_Byte {
 
         // -- var --
         private const TMy amin = TMyOut.MinValue;
@@ -91,6 +91,52 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
         }
 
         /// <summary>
+        /// Sum Narrow - if - Loop unrolling *4.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TMyOut StaticSumNarrow_IfUnrolling4(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            TMyOut rt1 = 0;
+            TMyOut rt2 = 0;
+            TMyOut rt3 = 0;
+            int nBlockWidth = 4; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            int p = 0; // Index for src data.
+            int i;
+            // Block processs.
+            for (i = 0; i < cntBlock; ++i) {
+                TMy t = src[p];
+                rt += Narrow_If(t);
+                TMy t1 = src[p + 1];
+                rt1 += Narrow_If(t1);
+                TMy t2 = src[p + 2];
+                rt2 += Narrow_If(t2);
+                TMy t3 = src[p + 3];
+                rt3 += Narrow_If(t3);
+                p += nBlockWidth;
+            }
+            // Remainder processs.
+            //p = cntBlock * nBlockWidth;
+            for (i = 0; i < cntRem; ++i) {
+                TMy t = src[p + i];
+                rt += Narrow_If(t);
+            }
+            // Reduce.
+            rt = (TMyOut)(rt + rt1 + rt2 + rt3);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumNarrow_IfUnrolling4() {
+            dstTMy = StaticSumNarrow_IfUnrolling4(srcArray, srcArray.Length);
+            CheckResult("SumNarrow_IfUnrolling4");
+        }
+
+        /// <summary>
         /// Sum Narrow - MinMax.
         /// </summary>
         /// <param name="src">Source array.</param>
@@ -111,6 +157,52 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
         }
 
         /// <summary>
+        /// Sum Narrow - MinMax - Loop unrolling *4.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TMyOut StaticSumNarrow_MinMaxUnrolling4(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            TMyOut rt1 = 0;
+            TMyOut rt2 = 0;
+            TMyOut rt3 = 0;
+            int nBlockWidth = 4; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            int p = 0; // Index for src data.
+            int i;
+            // Block processs.
+            for (i = 0; i < cntBlock; ++i) {
+                TMy t = src[p];
+                rt += Narrow_MinMax(t);
+                TMy t1 = src[p + 1];
+                rt1 += Narrow_MinMax(t1);
+                TMy t2 = src[p + 2];
+                rt2 += Narrow_MinMax(t2);
+                TMy t3 = src[p + 3];
+                rt3 += Narrow_MinMax(t3);
+                p += nBlockWidth;
+            }
+            // Remainder processs.
+            //p = cntBlock * nBlockWidth;
+            for (i = 0; i < cntRem; ++i) {
+                TMy t = src[p + i];
+                rt += Narrow_MinMax(t);
+            }
+            // Reduce.
+            rt = (TMyOut)(rt + rt1 + rt2 + rt3);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumNarrow_MinMaxUnrolling4() {
+            dstTMy = StaticSumNarrow_MinMaxUnrolling4(srcArray, srcArray.Length);
+            CheckResult("SumNarrow_MinMaxUnrolling4");
+        }
+
+        /// <summary>
         /// Sum Narrow - BitUtil.
         /// </summary>
         /// <param name="src">Source array.</param>
@@ -128,6 +220,52 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
         public void SumNarrow_BitUtil() {
             dstTMy = StaticSumNarrow_BitUtil(srcArray, srcArray.Length);
             CheckResult("SumNarrow_BitUtil");
+        }
+
+        /// <summary>
+        /// Sum Narrow - BitUtil - Loop unrolling *4.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TMyOut StaticSumNarrow_BitUtilUnrolling4(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            TMyOut rt1 = 0;
+            TMyOut rt2 = 0;
+            TMyOut rt3 = 0;
+            int nBlockWidth = 4; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            int p = 0; // Index for src data.
+            int i;
+            // Block processs.
+            for (i = 0; i < cntBlock; ++i) {
+                TMy t = src[p];
+                rt += Narrow_BitUtil(t);
+                TMy t1 = src[p + 1];
+                rt1 += Narrow_BitUtil(t1);
+                TMy t2 = src[p + 2];
+                rt2 += Narrow_BitUtil(t2);
+                TMy t3 = src[p + 3];
+                rt3 += Narrow_BitUtil(t3);
+                p += nBlockWidth;
+            }
+            // Remainder processs.
+            //p = cntBlock * nBlockWidth;
+            for (i = 0; i < cntRem; ++i) {
+                TMy t = src[p + i];
+                rt += Narrow_BitUtil(t);
+            }
+            // Reduce.
+            rt = (TMyOut)(rt + rt1 + rt2 + rt3);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumNarrow_BitUtilUnrolling4() {
+            dstTMy = StaticSumNarrow_BitUtilUnrolling4(srcArray, srcArray.Length);
+            CheckResult("SumNarrow_BitUtilUnrolling4");
         }
 
         #region BENCHMARKS_RAW
@@ -152,7 +290,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vrt += VectorTraitsBase.Statics.YNarrowSaturate(p0, Unsafe.Add(ref p0, 1));
+                vrt += VectorTraitsBase.Statics.YNarrowSaturateUnsigned(p0, Unsafe.Add(ref p0, 1));
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -196,7 +334,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vrt += Vectors.YNarrowSaturate(p0, Unsafe.Add(ref p0, 1));
+                vrt += Vectors.YNarrowSaturateUnsigned(p0, Unsafe.Add(ref p0, 1));
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -251,7 +389,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector128 processs.
             for (i = 0; i < cntBlock; ++i) {
-                var t = Vector128s.YNarrowSaturate(p0, Unsafe.Add(ref p0, 1));
+                var t = Vector128s.YNarrowSaturateUnsigned(p0, Unsafe.Add(ref p0, 1));
                 vrt = Vector128s.Add(vrt, t);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -298,7 +436,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                var t = Vector256s.YNarrowSaturate(p0, Unsafe.Add(ref p0, 1));
+                var t = Vector256s.YNarrowSaturateUnsigned(p0, Unsafe.Add(ref p0, 1));
                 vrt = Vector256s.Add(vrt, t);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
