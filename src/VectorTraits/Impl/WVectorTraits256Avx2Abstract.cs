@@ -1314,7 +1314,6 @@ namespace Zyl.VectorTraits.Impl {
         }
 
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturateUnsigned(Vector256{short}, Vector256{short})" />
-        [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector256<byte> YNarrowSaturateUnsigned(Vector256<short> lower, Vector256<short> upper) {
             return Statics.YNarrowSaturateUnsigned(lower, upper);

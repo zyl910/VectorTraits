@@ -1348,7 +1348,6 @@ namespace Zyl.VectorTraits.Impl {
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned(Vector128{short}, Vector128{short})" />
-        [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector128<byte> YNarrowSaturateUnsigned(Vector128<short> lower, Vector128<short> upper) {
             return Statics.YNarrowSaturateUnsigned(lower, upper);

@@ -1165,5 +1165,60 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.YNarrowSaturateUnsigned_AcceleratedTypes"/>
+        public static TypeCodeFlags YNarrowSaturateUnsigned_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YNarrowSaturateUnsigned_AcceleratedTypes;
+#else
+                return _instance.YNarrowSaturateUnsigned_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YNarrowSaturateUnsigned_FullAcceleratedTypes"/>
+        public static TypeCodeFlags YNarrowSaturateUnsigned_FullAcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YNarrowSaturateUnsigned_FullAcceleratedTypes;
+#else
+                return _instance.YNarrowSaturateUnsigned_FullAcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YNarrowSaturateUnsigned(Vector{short}, Vector{short})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> YNarrowSaturateUnsigned(Vector<short> lower, Vector<short> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturateUnsigned(lower, upper);
+#else
+            return _instance.YNarrowSaturateUnsigned(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YNarrowSaturateUnsigned(Vector{int}, Vector{int})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> YNarrowSaturateUnsigned(Vector<int> lower, Vector<int> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturateUnsigned(lower, upper);
+#else
+            return _instance.YNarrowSaturateUnsigned(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YNarrowSaturateUnsigned(Vector{long}, Vector{long})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> YNarrowSaturateUnsigned(Vector<long> lower, Vector<long> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturateUnsigned(lower, upper);
+#else
+            return _instance.YNarrowSaturateUnsigned(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
     }
 }

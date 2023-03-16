@@ -692,6 +692,41 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturateUnsigned_AcceleratedTypes"/>
+            public static TypeCodeFlags YNarrowSaturateUnsigned_AcceleratedTypes {
+                get {
+                    return WStatics.YNarrowSaturateUnsigned_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturateUnsigned_FullAcceleratedTypes"/>
+            public static TypeCodeFlags YNarrowSaturateUnsigned_FullAcceleratedTypes {
+                get {
+                    return WStatics.YNarrowSaturateUnsigned_FullAcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturateUnsigned(Vector{short}, Vector{short})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YNarrowSaturateUnsigned(Vector<short> lower, Vector<short> upper) {
+                return WStatics.YNarrowSaturateUnsigned(lower.AsVector256(), upper.AsVector256()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturateUnsigned(Vector{int}, Vector{int})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YNarrowSaturateUnsigned(Vector<int> lower, Vector<int> upper) {
+                return WStatics.YNarrowSaturateUnsigned(lower.AsVector256(), upper.AsVector256()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YNarrowSaturateUnsigned(Vector{long}, Vector{long})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YNarrowSaturateUnsigned(Vector<long> lower, Vector<long> upper) {
+                return WStatics.YNarrowSaturateUnsigned(lower.AsVector256(), upper.AsVector256()).AsVector();
+            }
+
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 

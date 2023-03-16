@@ -180,7 +180,6 @@ namespace Zyl.VectorTraits.Impl {
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturateUnsigned(Vector256{short}, Vector256{short})" />
-            [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YNarrowSaturateUnsigned(Vector256<short> lower, Vector256<short> upper) {
                 Vector256<byte> raw = Avx2.PackUnsignedSaturate(lower, upper); // bit64(x, z, y, w)
