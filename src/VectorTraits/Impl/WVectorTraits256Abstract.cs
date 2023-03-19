@@ -263,6 +263,27 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble_AcceleratedTypes"/>
+        public virtual TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+            get {
+                return Statics.ConvertToDouble_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> ConvertToDouble(Vector256<long> value) {
+            return Statics.ConvertToDouble(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> ConvertToDouble(Vector256<ulong> value) {
+            return Statics.ConvertToDouble(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.Divide_AcceleratedTypes"/>
         public virtual TypeCodeFlags Divide_AcceleratedTypes {
             get {

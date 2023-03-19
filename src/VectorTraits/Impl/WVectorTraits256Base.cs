@@ -131,6 +131,68 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> ConvertToDouble(Vector256<long> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ConvertToDouble(value);
+#else
+                return ConvertToDouble_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> ConvertToDouble(Vector256<ulong> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ConvertToDouble(value);
+#else
+                return ConvertToDouble_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> ConvertToDouble_Base(Vector256<long> value) {
+                UnsafeEx.SkipInit(out Vector256<double> rt);
+                ref double prt = ref Unsafe.As<Vector256<double>, double>(ref rt);
+                ref long p = ref Unsafe.As<Vector256<long>, long>(ref value);
+                prt = (Double)p;
+                Unsafe.Add(ref prt, 1) = (Double)Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref prt, 2) = (Double)Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref prt, 3) = (Double)Unsafe.Add(ref p, 3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> ConvertToDouble_Base(Vector256<ulong> value) {
+                UnsafeEx.SkipInit(out Vector256<double> rt);
+                ref double prt = ref Unsafe.As<Vector256<double>, double>(ref rt);
+                ref ulong p = ref Unsafe.As<Vector256<ulong>, ulong>(ref value);
+                prt = (Double)p;
+                Unsafe.Add(ref prt, 1) = (Double)Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref prt, 2) = (Double)Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref prt, 3) = (Double)Unsafe.Add(ref p, 3);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {

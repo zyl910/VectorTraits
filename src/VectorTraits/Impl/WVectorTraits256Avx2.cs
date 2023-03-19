@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
+using System.Numerics;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
@@ -93,6 +94,44 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> Ceiling(Vector256<double> value) {
                 return Avx.Ceiling(value);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> ConvertToDouble(Vector256<long> value) {
+                // Based on __m256d int64_to_double_fast_precise(const __m256i v)
+                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
+                Vector256<int> lowerBits;
+                lowerBits = value.AsInt32();
+                lowerBits = Avx2.Blend(lowerBits, Vector256.Create(0x43300000_00000000).AsInt32(), 0b10101010);           // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)
+                Vector256<long> upperBits = Avx2.ShiftRightLogical(value, 32);                                             // Extract the 32 most significant bits of vector
+                upperBits = Avx2.Xor(upperBits, Vector256.Create(0x45300000_80000000));                                   // Flip the msb of upperBits and blend with the bit representation of double(2^84 + 2^63)
+                Vector256<double> result = Avx.Subtract(upperBits.AsDouble(), Vector256.Create(0x45300000_80100000).AsDouble());        // Compute in double precision: (upper - (2^84 + 2^63 + 2^52)) + lower
+                return Avx.Add(result, lowerBits.AsDouble());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> ConvertToDouble(Vector256<ulong> value) {
+                // Based on __m256d uint64_to_double_fast_precise(const __m256i v)
+                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
+                Vector256<uint> lowerBits;
+                lowerBits = value.AsUInt32();
+                lowerBits = Avx2.Blend(lowerBits, Vector256.Create(0x43300000_00000000UL).AsUInt32(), 0b10101010);        // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)                                                 */
+                Vector256<ulong> upperBits = Avx2.ShiftRightLogical(value, 32);                                             // Extract the 32 most significant bits of vector
+                upperBits = Avx2.Xor(upperBits, Vector256.Create(0x45300000_00000000UL));                                 // Blend upperBits with the bit representation of double(2^84)
+                Vector256<double> result = Avx.Subtract(upperBits.AsDouble(), Vector256.Create(0x45300000_00100000UL).AsDouble());      // Compute in double precision: (upper - (2^84 + 2^52)) + lower
+                return Avx.Add(result, lowerBits.AsDouble());
             }
 
 

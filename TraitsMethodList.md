@@ -12,6 +12,8 @@ Summary (概要):
 List (列表):
 - `Ceiling`: Computes the ceiling of each element in a vector (计算向量中每个元素的向上舍入).
   Mnemonic: `rt[i] := ceiling(value[i])` .
+- `ConvertToDouble`: Convert to a vector whose elements are of type Double (转换为元素类型是Double的向量).
+  Mnemonic: `rt[i] := (Double)(value[i])` .
 - `Floor`: Computes the floor of each element in a vector (计算向量中每个元素的向下舍入).
   Mnemonic: `rt[i] := floor(value[i])` .
 - `Narrow`: Narrows two Vector instances into one Vector  (将两个 Vector 实例缩窄为一个 Vector ).
@@ -85,5 +87,5 @@ List (列表):
   Mnemonic: `rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])` .
 - `YNarrowSaturate`: Saturate narrows two Vector instances into one Vector  (将两个 Vector 实例饱和缩窄为一个 Vector ).
   Mnemonic: `rt[i] := narrow_saturate(element_ref(i, lower, upper)) = narrow(clamp(element_ref(i, lower, upper), TOut.MinValue, TOut.MaxValue))`.
-- `YNarrowSaturateUnsigned`: Saturate narrows two Vector instances into one Vector  (将两个 Vector 实例饱和缩窄为一个 Vector ).
-  Mnemonic: `rt[i] := narrow_saturate(element_ref(i, lower, upper)) = narrow(clamp(element_ref(i, lower, upper), TOut.MinValue, TOut.MaxValue))`.
+- `YNarrowSaturateUnsigned`: Saturate narrows two signed Vector instances into one unsigned Vector  (将两个有符号 Vector 实例饱和缩窄为一个无符号 Vector ).
+  Mnemonic: `rt[i] := narrow_saturate(element_ref(i, lower, upper)) = narrow(clamp(element_ref(i, lower, upper), 0, TOut.MaxValue))`.
