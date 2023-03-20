@@ -284,6 +284,85 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToInt32_AcceleratedTypes"/>
+        public virtual TypeCodeFlags ConvertToInt32_AcceleratedTypes {
+            get {
+                return Statics.ConvertToInt32_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToInt32(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> ConvertToInt32(Vector256<float> value) {
+            return Statics.ConvertToInt32(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_AcceleratedTypes"/>
+        public virtual TypeCodeFlags ConvertToInt64_AcceleratedTypes {
+            get {
+                return Statics.ConvertToInt64_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> ConvertToInt64(Vector256<double> value) {
+            return Statics.ConvertToInt64(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle_AcceleratedTypes"/>
+        public virtual TypeCodeFlags ConvertToSingle_AcceleratedTypes {
+            get {
+                return Statics.ConvertToSingle_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> ConvertToSingle(Vector256<int> value) {
+            return Statics.ConvertToSingle(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> ConvertToSingle(Vector256<uint> value) {
+            return Statics.ConvertToSingle(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32_AcceleratedTypes"/>
+        public virtual TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
+            get {
+                return Statics.ConvertToUInt32_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<uint> ConvertToUInt32(Vector256<float> value) {
+            return Statics.ConvertToUInt32(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64_AcceleratedTypes"/>
+        public virtual TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
+            get {
+                return Statics.ConvertToUInt64_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64(Vector256{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ulong> ConvertToUInt64(Vector256<double> value) {
+            return Statics.ConvertToUInt64(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.Divide_AcceleratedTypes"/>
         public virtual TypeCodeFlags Divide_AcceleratedTypes {
             get {

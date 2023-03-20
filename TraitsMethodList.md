@@ -14,6 +14,16 @@ List (列表):
   Mnemonic: `rt[i] := ceiling(value[i])` .
 - `ConvertToDouble`: Convert to a vector whose elements are of type Double (转换为元素类型是Double的向量).
   Mnemonic: `rt[i] := (Double)(value[i])` .
+- `ConvertToInt32`: Convert to a vector whose elements are of type Int32 (转换为元素类型是Int32的向量).
+  Mnemonic: `rt[i] := (Int32)(value[i])` .
+- `ConvertToInt64`: Convert to a vector whose elements are of type Int64 (转换为元素类型是Int64的向量).
+  Mnemonic: `rt[i] := (Int64)(value[i])` .
+- `ConvertToSingle`: Convert to a vector whose elements are of type Single (转换为元素类型是Single的向量).
+  Mnemonic: `rt[i] := (Single)(value[i])` .
+- `ConvertToUInt32`: Convert to a vector whose elements are of type UInt32 (转换为元素类型是UInt32的向量).
+  Mnemonic: `rt[i] := (UInt32)(value[i])` .
+- `ConvertToUInt64`: Convert to a vector whose elements are of type UInt64 (转换为元素类型是UInt64的向量).
+  Mnemonic: `rt[i] := (UInt64)(value[i])` .
 - `Floor`: Computes the floor of each element in a vector (计算向量中每个元素的向下舍入).
   Mnemonic: `rt[i] := floor(value[i])` .
 - `Narrow`: Narrows two Vector instances into one Vector  (将两个 Vector 实例缩窄为一个 Vector ).

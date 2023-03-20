@@ -190,6 +190,206 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt32_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToInt32_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt32(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> ConvertToInt32(Vector256<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ConvertToInt32(value);
+#else
+                return ConvertToInt32_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt32(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> ConvertToInt32_Base(Vector256<float> value) {
+                UnsafeEx.SkipInit(out Vector256<int> rt);
+                ref int prt = ref Unsafe.As<Vector256<int>, int>(ref rt);
+                ref float p = ref Unsafe.As<Vector256<float>, float>(ref value);
+                prt = (Int32)p;
+                Unsafe.Add(ref prt, 1) = (Int32)Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref prt, 2) = (Int32)Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref prt, 3) = (Int32)Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref prt, 4) = (Int32)Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref prt, 5) = (Int32)Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref prt, 6) = (Int32)Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref prt, 7) = (Int32)Unsafe.Add(ref p, 7);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ConvertToInt64(Vector256<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ConvertToInt64(value);
+#else
+                return ConvertToInt64_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ConvertToInt64_Base(Vector256<double> value) {
+                UnsafeEx.SkipInit(out Vector256<long> rt);
+                ref long prt = ref Unsafe.As<Vector256<long>, long>(ref rt);
+                ref double p = ref Unsafe.As<Vector256<double>, double>(ref value);
+                prt = (Int64)p;
+                Unsafe.Add(ref prt, 1) = (Int64)Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref prt, 2) = (Int64)Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref prt, 3) = (Int64)Unsafe.Add(ref p, 3);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> ConvertToSingle(Vector256<int> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ConvertToSingle(value);
+#else
+                return ConvertToSingle_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> ConvertToSingle(Vector256<uint> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ConvertToSingle(value);
+#else
+                return ConvertToSingle_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> ConvertToSingle_Base(Vector256<int> value) {
+                UnsafeEx.SkipInit(out Vector256<float> rt);
+                ref float prt = ref Unsafe.As<Vector256<float>, float>(ref rt);
+                ref int p = ref Unsafe.As<Vector256<int>, int>(ref value);
+                prt = (Single)p;
+                Unsafe.Add(ref prt, 1) = (Single)Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref prt, 2) = (Single)Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref prt, 3) = (Single)Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref prt, 4) = (Single)Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref prt, 5) = (Single)Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref prt, 6) = (Single)Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref prt, 7) = (Single)Unsafe.Add(ref p, 7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> ConvertToSingle_Base(Vector256<uint> value) {
+                UnsafeEx.SkipInit(out Vector256<float> rt);
+                ref float prt = ref Unsafe.As<Vector256<float>, float>(ref rt);
+                ref uint p = ref Unsafe.As<Vector256<uint>, uint>(ref value);
+                prt = (Single)p;
+                Unsafe.Add(ref prt, 1) = (Single)Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref prt, 2) = (Single)Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref prt, 3) = (Single)Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref prt, 4) = (Single)Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref prt, 5) = (Single)Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref prt, 6) = (Single)Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref prt, 7) = (Single)Unsafe.Add(ref p, 7);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> ConvertToUInt32(Vector256<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ConvertToUInt32(value);
+#else
+                return ConvertToUInt32_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> ConvertToUInt32_Base(Vector256<float> value) {
+                UnsafeEx.SkipInit(out Vector256<uint> rt);
+                ref uint prt = ref Unsafe.As<Vector256<uint>, uint>(ref rt);
+                ref float p = ref Unsafe.As<Vector256<float>, float>(ref value);
+                prt = (UInt32)p;
+                Unsafe.Add(ref prt, 1) = (UInt32)Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref prt, 2) = (UInt32)Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref prt, 3) = (UInt32)Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref prt, 4) = (UInt32)Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref prt, 5) = (UInt32)Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref prt, 6) = (UInt32)Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref prt, 7) = (UInt32)Unsafe.Add(ref p, 7);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64(Vector256{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> ConvertToUInt64(Vector256<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.ConvertToUInt64(value);
+#else
+                return ConvertToUInt64_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64(Vector256{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> ConvertToUInt64_Base(Vector256<double> value) {
+                UnsafeEx.SkipInit(out Vector256<ulong> rt);
+                ref ulong prt = ref Unsafe.As<Vector256<ulong>, ulong>(ref rt);
+                ref double p = ref Unsafe.As<Vector256<double>, double>(ref value);
+                prt = (UInt64)p;
+                Unsafe.Add(ref prt, 1) = (UInt64)Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref prt, 2) = (UInt64)Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref prt, 3) = (UInt64)Unsafe.Add(ref p, 3);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {
