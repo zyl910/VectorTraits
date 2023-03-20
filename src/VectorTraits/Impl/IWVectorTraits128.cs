@@ -328,6 +328,33 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>ConvertToDouble</c> (运行 <c>ConvertToDouble</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ConvertToDouble"/>
+        TypeCodeFlags ConvertToDouble_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type Double (转换为元素类型是Double的向量)..
+        /// Mnemonic: <c>rt[i] := (Double)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToDouble_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ConvertToDouble(Vector128{long})" />
+        Vector128<double> ConvertToDouble(Vector128<long> value);
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type Double (转换为元素类型是Double的向量)..
+        /// Mnemonic: <c>rt[i] := (Double)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToDouble_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ConvertToDouble(Vector128{ulong})" />
+        Vector128<double> ConvertToDouble(Vector128<ulong> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Divide</c> (运行 <c>Divide</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Divide"/>

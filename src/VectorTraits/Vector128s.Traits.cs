@@ -448,6 +448,39 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_AcceleratedTypes"/>
+        public static TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.ConvertToDouble_AcceleratedTypes;
+#else
+                return _instance.ConvertToDouble_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<double> ConvertToDouble(Vector128<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToDouble(value);
+#else
+            return _instance.ConvertToDouble(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<double> ConvertToDouble(Vector128<ulong> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToDouble(value);
+#else
+            return _instance.ConvertToDouble(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Divide_AcceleratedTypes"/>
         public static TypeCodeFlags Divide_AcceleratedTypes {
             get {

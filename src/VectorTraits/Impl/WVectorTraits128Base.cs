@@ -125,6 +125,61 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble(Vector128<long> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ConvertToDouble(value);
+#else
+                return ConvertToDouble_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble(Vector128<ulong> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ConvertToDouble(value);
+#else
+                return ConvertToDouble_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Base(Vector128<long> value) {
+                UnsafeEx.SkipInit(out Vector128<double> rt);
+                ref double prt = ref Unsafe.As<Vector128<double>, double>(ref rt);
+                ref long p = ref Unsafe.As<Vector128<long>, long>(ref value);
+                prt = (Double)p;
+                Unsafe.Add(ref prt, 1) = (Double)Unsafe.Add(ref p, 1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Base(Vector128<ulong> value) {
+                UnsafeEx.SkipInit(out Vector128<double> rt);
+                ref double prt = ref Unsafe.As<Vector128<double>, double>(ref rt);
+                ref ulong p = ref Unsafe.As<Vector128<ulong>, ulong>(ref value);
+                prt = (Double)p;
+                Unsafe.Add(ref prt, 1) = (Double)Unsafe.Add(ref p, 1);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {

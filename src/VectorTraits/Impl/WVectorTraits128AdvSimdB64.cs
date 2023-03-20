@@ -100,6 +100,28 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble(Vector128<long> value) {
+                return AdvSimd.Arm64.ConvertToDouble(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble(Vector128<ulong> value) {
+                return AdvSimd.Arm64.ConvertToDouble(value);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {
