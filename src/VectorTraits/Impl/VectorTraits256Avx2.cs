@@ -86,6 +86,27 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToDouble_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> ConvertToDouble(Vector<long> value) {
+                return WStatics.ConvertToDouble(value.AsVector256()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> ConvertToDouble(Vector<ulong> value) {
+                return WStatics.ConvertToDouble(value.AsVector256()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {

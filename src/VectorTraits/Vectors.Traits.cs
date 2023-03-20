@@ -177,6 +177,39 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble_AcceleratedTypes"/>
+        public static TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.ConvertToDouble_AcceleratedTypes;
+#else
+                return _instance.ConvertToDouble_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> ConvertToDouble(Vector<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToDouble(value);
+#else
+            return _instance.ConvertToDouble(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> ConvertToDouble(Vector<ulong> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToDouble(value);
+#else
+            return _instance.ConvertToDouble(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.Floor_AcceleratedTypes"/>
         public static TypeCodeFlags Floor_AcceleratedTypes {
             get {

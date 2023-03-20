@@ -41,6 +41,33 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>ConvertToDouble</c> (运行 <c>ConvertToDouble</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ConvertToDouble"/>
+        TypeCodeFlags ConvertToDouble_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type Double (转换为元素类型是Double的向量)..
+        /// Mnemonic: <c>rt[i] := (Double)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToDouble_AcceleratedTypes"/>
+        /// <seealso cref="Vector.ConvertToDouble(Vector{long})" />
+        Vector<double> ConvertToDouble(Vector<long> value);
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type Double (转换为元素类型是Double的向量)..
+        /// Mnemonic: <c>rt[i] := (Double)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToDouble_AcceleratedTypes"/>
+        /// <seealso cref="Vector.ConvertToDouble(Vector{ulong})" />
+        Vector<double> ConvertToDouble(Vector<ulong> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Floor</c> (运行 <c>Floor</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Floor"/>

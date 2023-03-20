@@ -119,6 +119,29 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_VAR
+#endif // BCL_OVERRIDE_BASE_VAR
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> ConvertToDouble(Vector<long> value) {
+                return Vector.ConvertToDouble(value);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> ConvertToDouble(Vector<ulong> value) {
+                return Vector.ConvertToDouble(value);
+            }
+
             /// <inheritdoc cref="IVectorTraits.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {

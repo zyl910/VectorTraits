@@ -39,5 +39,37 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             }
         }
 
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void ConvertToDoubleTest<T>(T src) where T : struct {
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.ConvertToDouble_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            Console.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors<T>.Serial,
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vectors<T>.Demo,
+                Vectors<T>.DemoNaN,
+            };
+            foreach (Vector<T> value in samples) {
+                Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
+                Vector<double> expected = Vectors.ConvertToDouble((dynamic)value);
+                Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                foreach (IVectorTraits instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector<double> dst = instance.ConvertToDouble((dynamic)value);
+                    Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                }
+                Console.WriteLine();
+            }
+        }
+
     }
 }
