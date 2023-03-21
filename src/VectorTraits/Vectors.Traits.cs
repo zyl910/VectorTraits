@@ -210,6 +210,129 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.ConvertToInt32_AcceleratedTypes"/>
+        public static TypeCodeFlags ConvertToInt32_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.ConvertToInt32_AcceleratedTypes;
+#else
+                return _instance.ConvertToInt32_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToInt32(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> ConvertToInt32(Vector<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToInt32(value);
+#else
+            return _instance.ConvertToInt32(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToInt64_AcceleratedTypes"/>
+        public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.ConvertToInt64_AcceleratedTypes;
+#else
+                return _instance.ConvertToInt64_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToInt64(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> ConvertToInt64(Vector<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToInt64(value);
+#else
+            return _instance.ConvertToInt64(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToSingle_AcceleratedTypes"/>
+        public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.ConvertToSingle_AcceleratedTypes;
+#else
+                return _instance.ConvertToSingle_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToSingle(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> ConvertToSingle(Vector<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToSingle(value);
+#else
+            return _instance.ConvertToSingle(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToSingle(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> ConvertToSingle(Vector<uint> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToSingle(value);
+#else
+            return _instance.ConvertToSingle(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt32_AcceleratedTypes"/>
+        public static TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.ConvertToUInt32_AcceleratedTypes;
+#else
+                return _instance.ConvertToUInt32_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt32(Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> ConvertToUInt32(Vector<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToUInt32(value);
+#else
+            return _instance.ConvertToUInt32(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_AcceleratedTypes"/>
+        public static TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.ConvertToUInt64_AcceleratedTypes;
+#else
+                return _instance.ConvertToUInt64_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt64(Vector{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> ConvertToUInt64(Vector<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToUInt64(value);
+#else
+            return _instance.ConvertToUInt64(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.Floor_AcceleratedTypes"/>
         public static TypeCodeFlags Floor_AcceleratedTypes {
             get {

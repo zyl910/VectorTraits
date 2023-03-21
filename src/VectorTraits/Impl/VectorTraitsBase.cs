@@ -142,6 +142,86 @@ namespace Zyl.VectorTraits.Impl {
                 return Vector.ConvertToDouble(value);
             }
 
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt32_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToInt32_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Single;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt32(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> ConvertToInt32(Vector<float> value) {
+                return Vector.ConvertToInt32(value);
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt64(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ConvertToInt64(Vector<double> value) {
+                return Vector.ConvertToInt64(value);
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToSingle_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Int32;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToSingle(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> ConvertToSingle(Vector<int> value) {
+                return Vector.ConvertToSingle(value);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToSingle(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> ConvertToSingle(Vector<uint> value) {
+                return Vector.ConvertToSingle(value);
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt32_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt32(Vector{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> ConvertToUInt32(Vector<float> value) {
+                return Vector.ConvertToUInt32(value);
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt64(Vector{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> ConvertToUInt64(Vector<double> value) {
+                return Vector.ConvertToUInt64(value);
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {

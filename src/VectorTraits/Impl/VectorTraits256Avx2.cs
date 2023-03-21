@@ -107,6 +107,27 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.ConvertToSingle_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToSingle_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToSingle(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> ConvertToSingle(Vector<int> value) {
+                return WStatics.ConvertToSingle(value.AsVector256()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToSingle(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> ConvertToSingle(Vector<uint> value) {
+                return WStatics.ConvertToSingle(value.AsVector256()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {
