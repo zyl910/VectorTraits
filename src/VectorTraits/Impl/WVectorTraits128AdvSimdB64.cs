@@ -122,6 +122,35 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Double;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ConvertToInt64(Vector128<double> value) {
+                return AdvSimd.Arm64.ConvertToInt64RoundToEven(value);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Double;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64(Vector128{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ConvertToUInt64(Vector128<double> value) {
+                return AdvSimd.Arm64.ConvertToUInt64RoundToEven(value);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {

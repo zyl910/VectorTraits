@@ -355,6 +355,101 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>ConvertToInt32</c> (运行 <c>ConvertToInt32</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ConvertToInt32"/>
+        TypeCodeFlags ConvertToInt32_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type Int32 (转换为元素类型是Int32的向量)..
+        /// Mnemonic: <c>rt[i] := (Int32)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToInt32_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ConvertToInt32(Vector128{float})" />
+        Vector128<int> ConvertToInt32(Vector128<float> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>ConvertToInt64</c> (运行 <c>ConvertToInt64</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ConvertToInt64"/>
+        TypeCodeFlags ConvertToInt64_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type Int64 (转换为元素类型是Int64的向量)..
+        /// Mnemonic: <c>rt[i] := (Int64)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToInt64_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ConvertToInt64(Vector128{long})" />
+        Vector128<long> ConvertToInt64(Vector128<double> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>ConvertToSingle</c> (运行 <c>ConvertToSingle</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ConvertToSingle"/>
+        TypeCodeFlags ConvertToSingle_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type Single (转换为元素类型是Single的向量)..
+        /// Mnemonic: <c>rt[i] := (Single)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToSingle_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ConvertToSingle(Vector128{int})" />
+        Vector128<float> ConvertToSingle(Vector128<int> value);
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type Single (转换为元素类型是Single的向量)..
+        /// Mnemonic: <c>rt[i] := (Single)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToSingle_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ConvertToSingle(Vector128{uint})" />
+        Vector128<float> ConvertToSingle(Vector128<uint> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>ConvertToUInt32</c> (运行 <c>ConvertToUInt32</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ConvertToUInt32"/>
+        TypeCodeFlags ConvertToUInt32_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type UInt32 (转换为元素类型是UInt32的向量)..
+        /// Mnemonic: <c>rt[i] := (UInt32)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToUInt32_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ConvertToUInt32(Vector128{float})" />
+        Vector128<uint> ConvertToUInt32(Vector128<float> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>ConvertToUInt64</c> (运行 <c>ConvertToUInt64</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ConvertToUInt64"/>
+        TypeCodeFlags ConvertToUInt64_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type UInt64 (转换为元素类型是UInt64的向量)..
+        /// Mnemonic: <c>rt[i] := (UInt64)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToUInt64_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ConvertToUInt64(Vector128{double})" />
+        Vector128<ulong> ConvertToUInt64(Vector128<double> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Divide</c> (运行 <c>Divide</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Divide"/>

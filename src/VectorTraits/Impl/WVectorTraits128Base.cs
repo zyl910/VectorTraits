@@ -180,6 +180,186 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt32_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToInt32_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt32(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> ConvertToInt32(Vector128<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ConvertToInt32(value);
+#else
+                return ConvertToInt32_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt32(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> ConvertToInt32_Base(Vector128<float> value) {
+                UnsafeEx.SkipInit(out Vector128<int> rt);
+                ref int prt = ref Unsafe.As<Vector128<int>, int>(ref rt);
+                ref float p = ref Unsafe.As<Vector128<float>, float>(ref value);
+                prt = (Int32)p;
+                Unsafe.Add(ref prt, 1) = (Int32)Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref prt, 2) = (Int32)Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref prt, 3) = (Int32)Unsafe.Add(ref p, 3);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ConvertToInt64(Vector128<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ConvertToInt64(value);
+#else
+                return ConvertToInt64_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ConvertToInt64_Base(Vector128<double> value) {
+                UnsafeEx.SkipInit(out Vector128<long> rt);
+                ref long prt = ref Unsafe.As<Vector128<long>, long>(ref rt);
+                ref double p = ref Unsafe.As<Vector128<double>, double>(ref value);
+                prt = (Int64)p;
+                Unsafe.Add(ref prt, 1) = (Int64)Unsafe.Add(ref p, 1);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> ConvertToSingle(Vector128<int> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ConvertToSingle(value);
+#else
+                return ConvertToSingle_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> ConvertToSingle(Vector128<uint> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ConvertToSingle(value);
+#else
+                return ConvertToSingle_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> ConvertToSingle_Base(Vector128<int> value) {
+                UnsafeEx.SkipInit(out Vector128<float> rt);
+                ref float prt = ref Unsafe.As<Vector128<float>, float>(ref rt);
+                ref int p = ref Unsafe.As<Vector128<int>, int>(ref value);
+                prt = (Single)p;
+                Unsafe.Add(ref prt, 1) = (Single)Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref prt, 2) = (Single)Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref prt, 3) = (Single)Unsafe.Add(ref p, 3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> ConvertToSingle_Base(Vector128<uint> value) {
+                UnsafeEx.SkipInit(out Vector128<float> rt);
+                ref float prt = ref Unsafe.As<Vector128<float>, float>(ref rt);
+                ref uint p = ref Unsafe.As<Vector128<uint>, uint>(ref value);
+                prt = (Single)p;
+                Unsafe.Add(ref prt, 1) = (Single)Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref prt, 2) = (Single)Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref prt, 3) = (Single)Unsafe.Add(ref p, 3);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32(Vector128{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> ConvertToUInt32(Vector128<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ConvertToUInt32(value);
+#else
+                return ConvertToUInt32_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32(Vector128{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> ConvertToUInt32_Base(Vector128<float> value) {
+                UnsafeEx.SkipInit(out Vector128<uint> rt);
+                ref uint prt = ref Unsafe.As<Vector128<uint>, uint>(ref rt);
+                ref float p = ref Unsafe.As<Vector128<float>, float>(ref value);
+                prt = (UInt32)p;
+                Unsafe.Add(ref prt, 1) = (UInt32)Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref prt, 2) = (UInt32)Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref prt, 3) = (UInt32)Unsafe.Add(ref p, 3);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.None;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64(Vector128{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ConvertToUInt64(Vector128<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ConvertToUInt64(value);
+#else
+                return ConvertToUInt64_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64(Vector128{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ConvertToUInt64_Base(Vector128<double> value) {
+                UnsafeEx.SkipInit(out Vector128<ulong> rt);
+                ref ulong prt = ref Unsafe.As<Vector128<ulong>, ulong>(ref rt);
+                ref double p = ref Unsafe.As<Vector128<double>, double>(ref value);
+                prt = (UInt64)p;
+                Unsafe.Add(ref prt, 1) = (UInt64)Unsafe.Add(ref p, 1);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {

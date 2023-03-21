@@ -166,7 +166,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {
                 get {
-                    return TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
+                    return TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
                 }
             }
 

@@ -128,6 +128,182 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             }
         }
 
+        [TestCase((float)1)]
+        public void ConvertToInt32Test<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.ConvertToInt32_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            Console.WriteLine();
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s<T>.Serial,
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vector128s<T>.Demo,
+                Vector128s<T>.DemoNaN,
+            };
+            bool allowLog = false;
+            foreach (Vector128<T> value in samples) {
+                Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
+                Vector128<int> expected = Vector128s.ConvertToInt32((dynamic)value);
+                Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                foreach (IWVectorTraits128 instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector128<int> dst = instance.ConvertToInt32((dynamic)value);
+                    if (allowLog) {
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+
+        [TestCase((double)2)]
+        public void ConvertToInt64Test<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.ConvertToInt64_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            Console.WriteLine();
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s<T>.Serial,
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vector128s<T>.Demo,
+                Vector128s<T>.DemoNaN,
+            };
+            bool allowLog = false;
+            foreach (Vector128<T> value in samples) {
+                Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
+                Vector128<long> expected = Vector128s.ConvertToInt64((dynamic)value);
+                Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                foreach (IWVectorTraits128 instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector128<long> dst = instance.ConvertToInt64((dynamic)value);
+                    if (allowLog) {
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        public void ConvertToSingleTest<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.ConvertToSingle_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            Console.WriteLine();
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s<T>.Serial,
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vector128s<T>.Demo,
+                Vector128s<T>.DemoNaN,
+            };
+            foreach (Vector128<T> value in samples) {
+                Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
+                Vector128<float> expected = Vector128s.ConvertToSingle((dynamic)value);
+                Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                foreach (IWVectorTraits128 instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector128<float> dst = instance.ConvertToSingle((dynamic)value);
+                    Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                }
+                Console.WriteLine();
+            }
+        }
+
+        [TestCase((float)1)]
+        public void ConvertToUInt32Test<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.ConvertToUInt32_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            Console.WriteLine();
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s<T>.Serial,
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vector128s<T>.Demo,
+                Vector128s<T>.DemoNaN,
+            };
+            bool allowLog = false;
+            foreach (Vector128<T> value in samples) {
+                Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
+                Vector128<uint> expected = Vector128s.ConvertToUInt32((dynamic)value);
+                Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                foreach (IWVectorTraits128 instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector128<uint> dst = instance.ConvertToUInt32((dynamic)value);
+                    if (allowLog) {
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+
+        [TestCase((double)2)]
+        public void ConvertToUInt64Test<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.ConvertToUInt64_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            Console.WriteLine();
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s<T>.Serial,
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vector128s<T>.Demo,
+                Vector128s<T>.DemoNaN,
+            };
+            bool allowLog = false;
+            foreach (Vector128<T> value in samples) {
+                Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
+                Vector128<ulong> expected = Vector128s.ConvertToUInt64((dynamic)value);
+                Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                foreach (IWVectorTraits128 instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector128<ulong> dst = instance.ConvertToUInt64((dynamic)value);
+                    if (allowLog) {
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+
 
 #endif
     }

@@ -230,6 +230,85 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToInt32_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToInt32_AcceleratedTypes {
+            get {
+                return Statics.ConvertToInt32_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToInt32(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<int> ConvertToInt32(Vector128<float> value) {
+            return Statics.ConvertToInt32(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToInt64_AcceleratedTypes {
+            get {
+                return Statics.ConvertToInt64_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> ConvertToInt64(Vector128<double> value) {
+            return Statics.ConvertToInt64(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToSingle_AcceleratedTypes {
+            get {
+                return Statics.ConvertToSingle_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle(Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<float> ConvertToSingle(Vector128<int> value) {
+            return Statics.ConvertToSingle(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle(Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<float> ConvertToSingle(Vector128<uint> value) {
+            return Statics.ConvertToSingle(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
+            get {
+                return Statics.ConvertToUInt32_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32(Vector128{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<uint> ConvertToUInt32(Vector128<float> value) {
+            return Statics.ConvertToUInt32(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
+            get {
+                return Statics.ConvertToUInt64_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64(Vector128{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<ulong> ConvertToUInt64(Vector128<double> value) {
+            return Statics.ConvertToUInt64(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Floor_AcceleratedTypes"/>
         public override TypeCodeFlags Floor_AcceleratedTypes {
             get {
