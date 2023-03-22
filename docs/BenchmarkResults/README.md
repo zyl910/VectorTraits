@@ -58,6 +58,7 @@ Run (运行):
 cd ~/Documents/VectorTraits/tests/net7.0
 
 dotnet test VectorTraits.Tests.dll
-dotnet test VectorTraits.Tests.dll /Tests:InstancesTest --logger:"trx;LogFileName=out.trx"
+dotnet test VectorTraits.Tests.dll --logger:"trx;LogFileName=out.trx"
+dotnet test VectorTraits.Tests.dll --logger:"trx;LogFileName=out.trx" /Tests:InstancesTest
 sz TestResults/out.trx
 ```

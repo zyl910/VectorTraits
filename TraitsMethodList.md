@@ -30,16 +30,10 @@ List (列表):
   Mnemonic: `rt[i] := narrow(element_ref(i, lower, upper))`.
 - `ShiftLeft`: Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
   Mnemonic: `rt[i] := value[i] << shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
-- `ShiftLeftFast`: Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check `shiftAmount`, please use `Scalars.LimitShiftCount` first.
-  Mnemonic: `rt[i] := value[i] << shiftAmount`.
 - `ShiftRightArithmetic`: Shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量).
   Mnemonic: `rt[i] := value[i] >> shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
-- `ShiftRightArithmeticFast`: Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check `shiftAmount`, please use `Scalars.LimitShiftCount` first, and shiftAmount must not be 0 .
-  Mnemonic: `rt[i] := value[i] >> shiftAmount`.
 - `ShiftRightLogical`: Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
   Mnemonic: `rt[i] := value[i] >>> shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
-- `ShiftRightLogicalFast`: Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check `shiftAmount`, please use `Scalars.LimitShiftCount` first, and shiftAmount must not be 0 .
-  Mnemonic: `rt[i] := value[i] >>> shiftAmount`.
 - `Widen`: Widens a Vector into two Vector instances (将一个 Vector 扩宽为两个 Vector 实例).
   Mnemonic: `element_ref(i, lower, upper) := widen(source[i])`.
 
