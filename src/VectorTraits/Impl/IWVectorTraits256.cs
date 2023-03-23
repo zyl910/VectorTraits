@@ -1890,6 +1890,113 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Sum</c> (运行 <c>Sum</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Sum"/>
+        TypeCodeFlags Sum_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Sum{T}(Vector256{T})" />
+        float Sum(Vector256<float> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Sum{T}(Vector256{T})" />
+        double Sum(Vector256<double> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Sum{T}(Vector256{T})" />
+        sbyte Sum(Vector256<sbyte> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Sum{T}(Vector256{T})" />
+        byte Sum(Vector256<byte> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Sum{T}(Vector256{T})" />
+        short Sum(Vector256<short> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Sum{T}(Vector256{T})" />
+        ushort Sum(Vector256<ushort> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Sum{T}(Vector256{T})" />
+        int Sum(Vector256<int> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Sum{T}(Vector256{T})" />
+        uint Sum(Vector256<uint> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Sum{T}(Vector256{T})" />
+        long Sum(Vector256<long> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Sum{T}(Vector256{T})" />
+        ulong Sum(Vector256<ulong> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Widen</c> (运行 <c>Widen</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Widen"/>

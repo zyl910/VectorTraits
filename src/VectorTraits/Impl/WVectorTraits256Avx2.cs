@@ -731,6 +731,108 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.Sum_AcceleratedTypes"/>
+            public static TypeCodeFlags Sum_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlagsUtil.IntTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static float Sum(Vector256<float> value) {
+                // 0 1 2 3 4 5 6 7
+                Vector256<float> m = Avx.HorizontalAdd(value, value); // Each 128-bit lane.
+                // 01 23 01 23 45 67 45 67
+                m = Avx.HorizontalAdd(m, m);
+                // 0123 0123 0123 0123 4567 4567 4567 4567
+                Vector128<float> n = Sse.Add(m.GetLower(), m.GetUpper());
+                return n.GetElement(0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static double Sum(Vector256<double> value) {
+                // 0 1 2 3
+                Vector256<double> m = Avx.HorizontalAdd(value, value); // Each 128-bit lane.
+                // 01 01 23 23
+                Vector128<double> n = Sse2.Add(m.GetLower(), m.GetUpper());
+                return n.GetElement(0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static sbyte Sum(Vector256<sbyte> value) {
+                Widen(value, out Vector256<short> l, out Vector256<short> h);
+                Vector256<short> t = Avx2.Add(l, h);
+                return (sbyte)Sum(t);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static byte Sum(Vector256<byte> value) {
+                return (byte)Sum(value.AsSByte());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static short Sum(Vector256<short> value) {
+                Vector256<short> m = Avx2.HorizontalAdd(value, value); // Each 128-bit lane.
+                m = Avx2.HorizontalAdd(m, m);
+                m = Avx2.HorizontalAdd(m, m);
+                Vector128<short> n = Sse2.Add(m.GetLower(), m.GetUpper());
+                return (short)Sse2.ConvertToInt32(n.AsInt32());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ushort Sum(Vector256<ushort> value) {
+                return (ushort)Sum(value.AsInt16());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static int Sum(Vector256<int> value) {
+                // 0 1 2 3 4 5 6 7
+                Vector256<int> m = Avx2.HorizontalAdd(value, value); // Each 128-bit lane.
+                // 01 23 01 23 45 67 45 67
+                m = Avx2.HorizontalAdd(m, m);
+                // 0123 0123 0123 0123 4567 4567 4567 4567
+                Vector128<int> n = Sse2.Add(m.GetLower(), m.GetUpper());
+                return Sse2.ConvertToInt32(n);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint Sum(Vector256<uint> value) {
+                return (uint)Sum(value.AsInt32());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static long Sum(Vector256<long> value) {
+                // 0 1 2 3
+                Vector256<long> m = Avx2.Permute4x64(value, ShuffleControlG4.ZWXY);
+                Vector256<long> n = Avx2.Add(value, m);
+                // 02 13 02 13
+                m = Avx2.Permute4x64(n, ShuffleControlG4.YZWX);
+                n = Avx2.Add(value, m);
+                // 0123 0123 0123 0123
+                return n.GetElement(0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong Sum(Vector256<ulong> value) {
+                return (ulong)Sum(value.AsInt64());
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.Widen_AcceleratedTypes"/>
             public static TypeCodeFlags Widen_AcceleratedTypes {
                 get {

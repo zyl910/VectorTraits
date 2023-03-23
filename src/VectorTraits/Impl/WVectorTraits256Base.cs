@@ -1690,6 +1690,340 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.Sum_AcceleratedTypes"/>
+            public static TypeCodeFlags Sum_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static float Sum(Vector256<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static double Sum(Vector256<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static sbyte Sum(Vector256<sbyte> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static byte Sum(Vector256<byte> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static short Sum(Vector256<short> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ushort Sum(Vector256<ushort> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static int Sum(Vector256<int> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint Sum(Vector256<uint> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static long Sum(Vector256<long> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong Sum(Vector256<ulong> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static float Sum_Base(Vector256<float> value) {
+                ref float p = ref Unsafe.As<Vector256<float>, float>(ref value);
+                float rt = p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                    + Unsafe.Add(ref p, 4)
+                    + Unsafe.Add(ref p, 5)
+                    + Unsafe.Add(ref p, 6)
+                    + Unsafe.Add(ref p, 7)
+                ;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static double Sum_Base(Vector256<double> value) {
+                ref double p = ref Unsafe.As<Vector256<double>, double>(ref value);
+                double rt = p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                ;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static sbyte Sum_Base(Vector256<sbyte> value) {
+                ref sbyte p = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref value);
+                sbyte rt = (sbyte)(p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                    + Unsafe.Add(ref p, 4)
+                    + Unsafe.Add(ref p, 5)
+                    + Unsafe.Add(ref p, 6)
+                    + Unsafe.Add(ref p, 7)
+                    + Unsafe.Add(ref p, 8)
+                    + Unsafe.Add(ref p, 9)
+                    + Unsafe.Add(ref p, 10)
+                    + Unsafe.Add(ref p, 11)
+                    + Unsafe.Add(ref p, 12)
+                    + Unsafe.Add(ref p, 13)
+                    + Unsafe.Add(ref p, 14)
+                    + Unsafe.Add(ref p, 15)
+                    + Unsafe.Add(ref p, 16)
+                    + Unsafe.Add(ref p, 17)
+                    + Unsafe.Add(ref p, 18)
+                    + Unsafe.Add(ref p, 19)
+                    + Unsafe.Add(ref p, 20)
+                    + Unsafe.Add(ref p, 21)
+                    + Unsafe.Add(ref p, 22)
+                    + Unsafe.Add(ref p, 23)
+                    + Unsafe.Add(ref p, 24)
+                    + Unsafe.Add(ref p, 25)
+                    + Unsafe.Add(ref p, 26)
+                    + Unsafe.Add(ref p, 27)
+                    + Unsafe.Add(ref p, 28)
+                    + Unsafe.Add(ref p, 29)
+                    + Unsafe.Add(ref p, 30)
+                    + Unsafe.Add(ref p, 31)
+                );
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static byte Sum_Base(Vector256<byte> value) {
+                ref byte p = ref Unsafe.As<Vector256<byte>, byte>(ref value);
+                byte rt = (byte)(p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                    + Unsafe.Add(ref p, 4)
+                    + Unsafe.Add(ref p, 5)
+                    + Unsafe.Add(ref p, 6)
+                    + Unsafe.Add(ref p, 7)
+                    + Unsafe.Add(ref p, 8)
+                    + Unsafe.Add(ref p, 9)
+                    + Unsafe.Add(ref p, 10)
+                    + Unsafe.Add(ref p, 11)
+                    + Unsafe.Add(ref p, 12)
+                    + Unsafe.Add(ref p, 13)
+                    + Unsafe.Add(ref p, 14)
+                    + Unsafe.Add(ref p, 15)
+                    + Unsafe.Add(ref p, 16)
+                    + Unsafe.Add(ref p, 17)
+                    + Unsafe.Add(ref p, 18)
+                    + Unsafe.Add(ref p, 19)
+                    + Unsafe.Add(ref p, 20)
+                    + Unsafe.Add(ref p, 21)
+                    + Unsafe.Add(ref p, 22)
+                    + Unsafe.Add(ref p, 23)
+                    + Unsafe.Add(ref p, 24)
+                    + Unsafe.Add(ref p, 25)
+                    + Unsafe.Add(ref p, 26)
+                    + Unsafe.Add(ref p, 27)
+                    + Unsafe.Add(ref p, 28)
+                    + Unsafe.Add(ref p, 29)
+                    + Unsafe.Add(ref p, 30)
+                    + Unsafe.Add(ref p, 31)
+                );
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static short Sum_Base(Vector256<short> value) {
+                ref short p = ref Unsafe.As<Vector256<short>, short>(ref value);
+                short rt = (short)(p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                    + Unsafe.Add(ref p, 4)
+                    + Unsafe.Add(ref p, 5)
+                    + Unsafe.Add(ref p, 6)
+                    + Unsafe.Add(ref p, 7)
+                    + Unsafe.Add(ref p, 8)
+                    + Unsafe.Add(ref p, 9)
+                    + Unsafe.Add(ref p, 10)
+                    + Unsafe.Add(ref p, 11)
+                    + Unsafe.Add(ref p, 12)
+                    + Unsafe.Add(ref p, 13)
+                    + Unsafe.Add(ref p, 14)
+                    + Unsafe.Add(ref p, 15)
+                );
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ushort Sum_Base(Vector256<ushort> value) {
+                ref ushort p = ref Unsafe.As<Vector256<ushort>, ushort>(ref value);
+                ushort rt = (ushort)(p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                    + Unsafe.Add(ref p, 4)
+                    + Unsafe.Add(ref p, 5)
+                    + Unsafe.Add(ref p, 6)
+                    + Unsafe.Add(ref p, 7)
+                    + Unsafe.Add(ref p, 8)
+                    + Unsafe.Add(ref p, 9)
+                    + Unsafe.Add(ref p, 10)
+                    + Unsafe.Add(ref p, 11)
+                    + Unsafe.Add(ref p, 12)
+                    + Unsafe.Add(ref p, 13)
+                    + Unsafe.Add(ref p, 14)
+                    + Unsafe.Add(ref p, 15)
+                );
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static int Sum_Base(Vector256<int> value) {
+                ref int p = ref Unsafe.As<Vector256<int>, int>(ref value);
+                int rt = p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                    + Unsafe.Add(ref p, 4)
+                    + Unsafe.Add(ref p, 5)
+                    + Unsafe.Add(ref p, 6)
+                    + Unsafe.Add(ref p, 7)
+                ;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint Sum_Base(Vector256<uint> value) {
+                ref uint p = ref Unsafe.As<Vector256<uint>, uint>(ref value);
+                uint rt = p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                    + Unsafe.Add(ref p, 4)
+                    + Unsafe.Add(ref p, 5)
+                    + Unsafe.Add(ref p, 6)
+                    + Unsafe.Add(ref p, 7)
+                ;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static long Sum_Base(Vector256<long> value) {
+                ref long p = ref Unsafe.As<Vector256<long>, long>(ref value);
+                long rt = p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                ;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong Sum_Base(Vector256<ulong> value) {
+                ref ulong p = ref Unsafe.As<Vector256<ulong>, ulong>(ref value);
+                ulong rt = p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                ;
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.Widen_AcceleratedTypes"/>
             public static TypeCodeFlags Widen_AcceleratedTypes {
                 get {
