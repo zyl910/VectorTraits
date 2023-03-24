@@ -87,9 +87,9 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns target type value (返回目标类型的值).</returns>
         public static T GetByBits<T>(long src) {
             if (typeof(T) == typeof(float)) {
-                return (T)(object)BitUtil.Int32BitsToSingle((int)src);
+                return (T)(object)BitMath.Int32BitsToSingle((int)src);
             } else if (typeof(T) == typeof(double)) {
-                return (T)(object)BitUtil.Int64BitsToDouble(src);
+                return (T)(object)BitMath.Int64BitsToDouble(src);
             } else if (typeof(T) == typeof(sbyte)) {
                 return (T)(object)(sbyte)src;
             } else if (typeof(T) == typeof(short)) {
@@ -112,7 +112,7 @@ namespace Zyl.VectorTraits {
                 return (T)(object)(UIntPtr)(ulong)src;
 #if NET5_0_OR_GREATER
             } else if (typeof(T) == typeof(Half)) {
-                return (T)(object)BitUtil.Int16BitsToHalf((short)src);
+                return (T)(object)BitMath.Int16BitsToHalf((short)src);
 #endif // NET5_0_OR_GREATER
             } else {
                 return (T)Convert.ChangeType(src, typeof(T));
@@ -167,9 +167,9 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns a <see cref="long"/> bits (返回 <see cref="long"/> 类型的64位值).</returns>
         public static long GetInt64BitsFrom<T>(T src) where T:struct {
             if (typeof(T) == typeof(float)) {
-                return (long)BitUtil.SingleToInt32Bits((float)(object)src);
+                return (long)BitMath.SingleToInt32Bits((float)(object)src);
             } else if (typeof(T) == typeof(double)) {
-                return (long)BitUtil.DoubleToInt64Bits((double)(object)src);
+                return (long)BitMath.DoubleToInt64Bits((double)(object)src);
             } else if (typeof(T) == typeof(sbyte)) {
                 return (long)(sbyte)(object)src;
             } else if (typeof(T) == typeof(short)) {
@@ -192,7 +192,7 @@ namespace Zyl.VectorTraits {
                 return (long)(UIntPtr)(object)src;
 #if NET5_0_OR_GREATER
             } else if (typeof(T) == typeof(Half)) {
-                return (long)BitUtil.HalfToInt16Bits((Half)(object)src);
+                return (long)BitMath.HalfToInt16Bits((Half)(object)src);
 #endif // NET5_0_OR_GREATER
             } else {
                 return (long)Convert.ChangeType(src, typeof(long));
@@ -425,38 +425,38 @@ namespace Zyl.VectorTraits {
                     SignBits = 1;
                     ExponentBits = 8;
                     MantissaBits = 23;
-                    SignMask = (T)(object)BitUtil.Int32BitsToSingle((int)0x80000000);
-                    ExponentMask = (T)(object)BitUtil.Int32BitsToSingle((int)0x7F800000);
-                    MantissaMask = (T)(object)BitUtil.Int32BitsToSingle((int)0x007FFFFF);
-                    NonSignMask = (T)(object)BitUtil.Int32BitsToSingle(~(int)0x80000000);
-                    NonExponentMask = (T)(object)BitUtil.Int32BitsToSingle(~(int)0x7F800000);
-                    NonMantissaMask = (T)(object)BitUtil.Int32BitsToSingle(~(int)0x007FFFFF);
+                    SignMask = (T)(object)BitMath.Int32BitsToSingle((int)0x80000000);
+                    ExponentMask = (T)(object)BitMath.Int32BitsToSingle((int)0x7F800000);
+                    MantissaMask = (T)(object)BitMath.Int32BitsToSingle((int)0x007FFFFF);
+                    NonSignMask = (T)(object)BitMath.Int32BitsToSingle(~(int)0x80000000);
+                    NonExponentMask = (T)(object)BitMath.Int32BitsToSingle(~(int)0x7F800000);
+                    NonMantissaMask = (T)(object)BitMath.Int32BitsToSingle(~(int)0x007FFFFF);
                     Epsilon = (T)(object)float.Epsilon;
                     MaxValue = (T)(object)float.MaxValue;
                     MinValue = (T)(object)float.MinValue;
                     NaN = (T)(object)float.NaN;
                     NegativeInfinity = (T)(object)float.NegativeInfinity;
                     PositiveInfinity = (T)(object)float.PositiveInfinity;
-                    NegativeZero = (T)(object)BitUtil.Int32BitsToSingle((int)0x80000000 | BitUtil.SingleToInt32Bits(0));
+                    NegativeZero = (T)(object)BitMath.Int32BitsToSingle((int)0x80000000 | BitMath.SingleToInt32Bits(0));
                 } else if (typeof(T) == typeof(double)) {
                     ByteSize = sizeof(double);
                     ExponentBias = 1023;
                     SignBits = 1;
                     ExponentBits = 11;
                     MantissaBits = 52;
-                    SignMask = (T)(object)BitUtil.Int64BitsToDouble((long)0x8000000000000000L);
-                    ExponentMask = (T)(object)BitUtil.Int64BitsToDouble((long)0x7FF0000000000000L);
-                    MantissaMask = (T)(object)BitUtil.Int64BitsToDouble((long)0x000FFFFFFFFFFFFFL);
-                    NonSignMask = (T)(object)BitUtil.Int64BitsToDouble(~(long)0x8000000000000000L);
-                    NonExponentMask = (T)(object)BitUtil.Int64BitsToDouble(~(long)0x7FF0000000000000L);
-                    NonMantissaMask = (T)(object)BitUtil.Int64BitsToDouble(~(long)0x000FFFFFFFFFFFFFL);
+                    SignMask = (T)(object)BitMath.Int64BitsToDouble((long)0x8000000000000000L);
+                    ExponentMask = (T)(object)BitMath.Int64BitsToDouble((long)0x7FF0000000000000L);
+                    MantissaMask = (T)(object)BitMath.Int64BitsToDouble((long)0x000FFFFFFFFFFFFFL);
+                    NonSignMask = (T)(object)BitMath.Int64BitsToDouble(~(long)0x8000000000000000L);
+                    NonExponentMask = (T)(object)BitMath.Int64BitsToDouble(~(long)0x7FF0000000000000L);
+                    NonMantissaMask = (T)(object)BitMath.Int64BitsToDouble(~(long)0x000FFFFFFFFFFFFFL);
                     Epsilon = (T)(object)double.Epsilon;
                     MaxValue = (T)(object)double.MaxValue;
                     MinValue = (T)(object)double.MinValue;
                     NaN = (T)(object)double.NaN;
                     NegativeInfinity = (T)(object)double.NegativeInfinity;
                     PositiveInfinity = (T)(object)double.PositiveInfinity;
-                    NegativeZero = (T)(object)BitUtil.Int64BitsToDouble((long)0x8000000000000000L | BitUtil.DoubleToInt64Bits(0));
+                    NegativeZero = (T)(object)BitMath.Int64BitsToDouble((long)0x8000000000000000L | BitMath.DoubleToInt64Bits(0));
                 } else if (typeof(T) == typeof(sbyte)) {
                     ByteSize = sizeof(sbyte);
                     ExponentBias = 0;
@@ -672,19 +672,19 @@ namespace Zyl.VectorTraits {
                     SignBits = 1;
                     ExponentBits = 5;
                     MantissaBits = 10;
-                    SignMask = (T)(object)BitUtil.Int16BitsToHalf((short)0x8000);
-                    ExponentMask = (T)(object)BitUtil.Int16BitsToHalf((short)0x7C00);
-                    MantissaMask = (T)(object)BitUtil.Int16BitsToHalf((short)0x03FF);
-                    NonSignMask = (T)(object)BitUtil.Int16BitsToHalf(~(short)0x8000);
-                    NonExponentMask = (T)(object)BitUtil.Int16BitsToHalf(~(short)0x7C00);
-                    NonMantissaMask = (T)(object)BitUtil.Int16BitsToHalf(~(short)0x03FF);
+                    SignMask = (T)(object)BitMath.Int16BitsToHalf((short)0x8000);
+                    ExponentMask = (T)(object)BitMath.Int16BitsToHalf((short)0x7C00);
+                    MantissaMask = (T)(object)BitMath.Int16BitsToHalf((short)0x03FF);
+                    NonSignMask = (T)(object)BitMath.Int16BitsToHalf(~(short)0x8000);
+                    NonExponentMask = (T)(object)BitMath.Int16BitsToHalf(~(short)0x7C00);
+                    NonMantissaMask = (T)(object)BitMath.Int16BitsToHalf(~(short)0x03FF);
                     Epsilon = (T)(object)Half.Epsilon;
                     MaxValue = (T)(object)Half.MaxValue;
                     MinValue = (T)(object)Half.MinValue;
                     NaN = (T)(object)Half.NaN;
                     NegativeInfinity = (T)(object)Half.NegativeInfinity;
                     PositiveInfinity = (T)(object)Half.PositiveInfinity;
-                    NegativeZero = (T)(object)BitUtil.Int16BitsToHalf((short)(0x8000 | BitUtil.HalfToInt16Bits((Half)0)));
+                    NegativeZero = (T)(object)BitMath.Int16BitsToHalf((short)(0x8000 | BitMath.HalfToInt16Bits((Half)0)));
 #endif // NET5_0_OR_GREATER
                 }
             }

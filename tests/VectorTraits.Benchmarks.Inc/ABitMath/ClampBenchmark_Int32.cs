@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
+namespace Zyl.VectorTraits.Benchmarks.ABitMath {
 #if BENCHMARKS_OFF
     using BenchmarkAttribute = FakeBenchmarkAttribute;
 #else
@@ -254,7 +254,7 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
 #endif // NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
 
         /// <summary>
-        /// Sum Clamp - BitUtil.
+        /// Sum Clamp - BitMath.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -262,26 +262,26 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
         /// <param name="amax">The upper bound of the result (结果的上限).</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TMy StaticSumClamp_BitUtil(TMy[] src, int srcCount, TMy amin, TMy amax) {
+        public static TMy StaticSumClamp_BitMath(TMy[] src, int srcCount, TMy amin, TMy amax) {
             TMy rt = 0; // Result.
             for (int i = 0; i < srcCount; ++i) {
                 TMy t = src[i];
-                rt += BitUtil.Clamp(t, amin, amax);
+                rt += BitMath.Clamp(t, amin, amax);
             }
             return rt;
         }
 
         [Benchmark]
-        public void SumClamp_BitUtil() {
+        public void SumClamp_BitMath() {
             dstTMy = 0;
             foreach (TMy amax in valueMaxList) {
-                dstTMy += StaticSumClamp_BitUtil(srcArray, srcArray.Length, valueMin, amax);
+                dstTMy += StaticSumClamp_BitMath(srcArray, srcArray.Length, valueMin, amax);
             }
-            CheckResult("SumClamp_BitUtil");
+            CheckResult("SumClamp_BitMath");
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TMy StaticSumClamp_BitUtilUnrolling4(TMy[] src, int srcCount, TMy amin, TMy amax) {
+        public static TMy StaticSumClamp_BitMathUnrolling4(TMy[] src, int srcCount, TMy amin, TMy amax) {
             TMy rt = 0; // Result.
             TMy rt1 = 0;
             TMy rt2 = 0;
@@ -293,16 +293,16 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
             int i;
             // Block processs.
             for (i = 0; i < cntBlock; ++i) {
-                rt += BitUtil.Clamp(src[p], amin, amax);
-                rt1 += BitUtil.Clamp(src[p + 1], amin, amax);
-                rt2 += BitUtil.Clamp(src[p + 2], amin, amax);
-                rt3 += BitUtil.Clamp(src[p + 3], amin, amax);
+                rt += BitMath.Clamp(src[p], amin, amax);
+                rt1 += BitMath.Clamp(src[p + 1], amin, amax);
+                rt2 += BitMath.Clamp(src[p + 2], amin, amax);
+                rt3 += BitMath.Clamp(src[p + 3], amin, amax);
                 p += nBlockWidth;
             }
             // Remainder processs.
             //p = cntBlock * nBlockWidth;
             for (i = 0; i < cntRem; ++i) {
-                rt += BitUtil.Clamp(src[p + i], amin, amax);
+                rt += BitMath.Clamp(src[p + i], amin, amax);
             }
             // Reduce.
             rt = (TMy)(rt + rt1 + rt2 + rt3);
@@ -310,12 +310,12 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
         }
 
         [Benchmark(Baseline = true)]
-        public void SumClamp_BitUtilUnrolling4() {
+        public void SumClamp_BitMathUnrolling4() {
             dstTMy = 0;
             foreach (TMy amax in valueMaxList) {
-                dstTMy += StaticSumClamp_BitUtilUnrolling4(srcArray, srcArray.Length, valueMin, amax);
+                dstTMy += StaticSumClamp_BitMathUnrolling4(srcArray, srcArray.Length, valueMin, amax);
             }
-            CheckResult("SumClamp_BitUtilUnrolling4");
+            CheckResult("SumClamp_BitMathUnrolling4");
         }
 
     }

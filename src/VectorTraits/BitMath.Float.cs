@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Zyl.VectorTraits {
-    partial class BitUtil {
+    partial class BitMath {
 
         // == BitConverter ==
         /// <summary>

@@ -117,22 +117,22 @@ namespace Zyl.VectorTraits.Impl {
             public static unsafe Vector128<sbyte> Abs_Base(Vector128<sbyte> value) {
                 Vector128<sbyte> rt = value;
                 sbyte* p = (sbyte*)&rt;
-                p[0] = BitUtil.Abs(p[0]);
-                p[1] = BitUtil.Abs(p[1]);
-                p[2] = BitUtil.Abs(p[2]);
-                p[3] = BitUtil.Abs(p[3]);
-                p[4] = BitUtil.Abs(p[4]);
-                p[5] = BitUtil.Abs(p[5]);
-                p[6] = BitUtil.Abs(p[6]);
-                p[7] = BitUtil.Abs(p[7]);
-                p[8] = BitUtil.Abs(p[8]);
-                p[9] = BitUtil.Abs(p[9]);
-                p[10] = BitUtil.Abs(p[10]);
-                p[11] = BitUtil.Abs(p[11]);
-                p[12] = BitUtil.Abs(p[12]);
-                p[13] = BitUtil.Abs(p[13]);
-                p[14] = BitUtil.Abs(p[14]);
-                p[15] = BitUtil.Abs(p[15]);
+                p[0] = BitMath.Abs(p[0]);
+                p[1] = BitMath.Abs(p[1]);
+                p[2] = BitMath.Abs(p[2]);
+                p[3] = BitMath.Abs(p[3]);
+                p[4] = BitMath.Abs(p[4]);
+                p[5] = BitMath.Abs(p[5]);
+                p[6] = BitMath.Abs(p[6]);
+                p[7] = BitMath.Abs(p[7]);
+                p[8] = BitMath.Abs(p[8]);
+                p[9] = BitMath.Abs(p[9]);
+                p[10] = BitMath.Abs(p[10]);
+                p[11] = BitMath.Abs(p[11]);
+                p[12] = BitMath.Abs(p[12]);
+                p[13] = BitMath.Abs(p[13]);
+                p[14] = BitMath.Abs(p[14]);
+                p[15] = BitMath.Abs(p[15]);
                 return rt;
             }
 
@@ -141,14 +141,14 @@ namespace Zyl.VectorTraits.Impl {
             public static unsafe Vector128<short> Abs_Base(Vector128<short> value) {
                 Vector128<short> rt = value;
                 short* p = (short*)&rt;
-                p[0] = BitUtil.Abs(p[0]);
-                p[1] = BitUtil.Abs(p[1]);
-                p[2] = BitUtil.Abs(p[2]);
-                p[3] = BitUtil.Abs(p[3]);
-                p[4] = BitUtil.Abs(p[4]);
-                p[5] = BitUtil.Abs(p[5]);
-                p[6] = BitUtil.Abs(p[6]);
-                p[7] = BitUtil.Abs(p[7]);
+                p[0] = BitMath.Abs(p[0]);
+                p[1] = BitMath.Abs(p[1]);
+                p[2] = BitMath.Abs(p[2]);
+                p[3] = BitMath.Abs(p[3]);
+                p[4] = BitMath.Abs(p[4]);
+                p[5] = BitMath.Abs(p[5]);
+                p[6] = BitMath.Abs(p[6]);
+                p[7] = BitMath.Abs(p[7]);
                 return rt;
             }
 
@@ -157,10 +157,10 @@ namespace Zyl.VectorTraits.Impl {
             public static unsafe Vector128<int> Abs_Base(Vector128<int> value) {
                 Vector128<int> rt = value;
                 int* p = (int*)&rt;
-                p[0] = BitUtil.Abs(p[0]);
-                p[1] = BitUtil.Abs(p[1]);
-                p[2] = BitUtil.Abs(p[2]);
-                p[3] = BitUtil.Abs(p[3]);
+                p[0] = BitMath.Abs(p[0]);
+                p[1] = BitMath.Abs(p[1]);
+                p[2] = BitMath.Abs(p[2]);
+                p[3] = BitMath.Abs(p[3]);
                 return rt;
             }
 
@@ -169,8 +169,8 @@ namespace Zyl.VectorTraits.Impl {
             public static unsafe Vector128<long> Abs_Base(Vector128<long> value) {
                 Vector128<long> rt = value;
                 long* p = (long*)&rt;
-                p[0] = BitUtil.Abs(p[0]);
-                p[1] = BitUtil.Abs(p[1]);
+                p[0] = BitMath.Abs(p[0]);
+                p[1] = BitMath.Abs(p[1]);
                 return rt;
             }
 
@@ -876,10 +876,10 @@ namespace Zyl.VectorTraits.Impl {
                 int* pcondition = (int*)&condition;
                 float* pleft = (float*)&left;
                 float* pright = (float*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
-                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
-                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[0] = BitMath.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitMath.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = BitMath.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = BitMath.ToInt32Mask(pleft[3] > pright[3]);
                 return condition.AsSingle();
             }
 
@@ -894,8 +894,8 @@ namespace Zyl.VectorTraits.Impl {
                 long* pcondition = (long*)&condition;
                 double* pleft = (double*)&left;
                 double* pright = (double*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[0] = BitMath.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitMath.ToInt32Mask(pleft[1] > pright[1]);
                 return condition.AsDouble();
             }
 
@@ -911,22 +911,22 @@ namespace Zyl.VectorTraits.Impl {
                 sbyte* pcondition = (sbyte*)&condition;
                 sbyte* pleft = (sbyte*)&left;
                 sbyte* pright = (sbyte*)&right;
-                pcondition[0] = (sbyte)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = (sbyte)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
-                pcondition[2] = (sbyte)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
-                pcondition[3] = (sbyte)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
-                pcondition[4] = (sbyte)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
-                pcondition[5] = (sbyte)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
-                pcondition[6] = (sbyte)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
-                pcondition[7] = (sbyte)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
-                pcondition[8] = (sbyte)BitUtil.ToInt32Mask(pleft[8] > pright[8]);
-                pcondition[9] = (sbyte)BitUtil.ToInt32Mask(pleft[9] > pright[9]);
-                pcondition[10] = (sbyte)BitUtil.ToInt32Mask(pleft[10] > pright[10]);
-                pcondition[11] = (sbyte)BitUtil.ToInt32Mask(pleft[11] > pright[11]);
-                pcondition[12] = (sbyte)BitUtil.ToInt32Mask(pleft[12] > pright[12]);
-                pcondition[13] = (sbyte)BitUtil.ToInt32Mask(pleft[13] > pright[13]);
-                pcondition[14] = (sbyte)BitUtil.ToInt32Mask(pleft[14] > pright[14]);
-                pcondition[15] = (sbyte)BitUtil.ToInt32Mask(pleft[15] > pright[15]);
+                pcondition[0] = (sbyte)BitMath.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = (sbyte)BitMath.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = (sbyte)BitMath.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = (sbyte)BitMath.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = (sbyte)BitMath.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = (sbyte)BitMath.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = (sbyte)BitMath.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = (sbyte)BitMath.ToInt32Mask(pleft[7] > pright[7]);
+                pcondition[8] = (sbyte)BitMath.ToInt32Mask(pleft[8] > pright[8]);
+                pcondition[9] = (sbyte)BitMath.ToInt32Mask(pleft[9] > pright[9]);
+                pcondition[10] = (sbyte)BitMath.ToInt32Mask(pleft[10] > pright[10]);
+                pcondition[11] = (sbyte)BitMath.ToInt32Mask(pleft[11] > pright[11]);
+                pcondition[12] = (sbyte)BitMath.ToInt32Mask(pleft[12] > pright[12]);
+                pcondition[13] = (sbyte)BitMath.ToInt32Mask(pleft[13] > pright[13]);
+                pcondition[14] = (sbyte)BitMath.ToInt32Mask(pleft[14] > pright[14]);
+                pcondition[15] = (sbyte)BitMath.ToInt32Mask(pleft[15] > pright[15]);
                 return condition.AsSByte();
             }
 
@@ -941,22 +941,22 @@ namespace Zyl.VectorTraits.Impl {
                 sbyte* pcondition = (sbyte*)&condition;
                 byte* pleft = (byte*)&left;
                 byte* pright = (byte*)&right;
-                pcondition[0] = (sbyte)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = (sbyte)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
-                pcondition[2] = (sbyte)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
-                pcondition[3] = (sbyte)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
-                pcondition[4] = (sbyte)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
-                pcondition[5] = (sbyte)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
-                pcondition[6] = (sbyte)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
-                pcondition[7] = (sbyte)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
-                pcondition[8] = (sbyte)BitUtil.ToInt32Mask(pleft[8] > pright[8]);
-                pcondition[9] = (sbyte)BitUtil.ToInt32Mask(pleft[9] > pright[9]);
-                pcondition[10] = (sbyte)BitUtil.ToInt32Mask(pleft[10] > pright[10]);
-                pcondition[11] = (sbyte)BitUtil.ToInt32Mask(pleft[11] > pright[11]);
-                pcondition[12] = (sbyte)BitUtil.ToInt32Mask(pleft[12] > pright[12]);
-                pcondition[13] = (sbyte)BitUtil.ToInt32Mask(pleft[13] > pright[13]);
-                pcondition[14] = (sbyte)BitUtil.ToInt32Mask(pleft[14] > pright[14]);
-                pcondition[15] = (sbyte)BitUtil.ToInt32Mask(pleft[15] > pright[15]);
+                pcondition[0] = (sbyte)BitMath.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = (sbyte)BitMath.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = (sbyte)BitMath.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = (sbyte)BitMath.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = (sbyte)BitMath.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = (sbyte)BitMath.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = (sbyte)BitMath.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = (sbyte)BitMath.ToInt32Mask(pleft[7] > pright[7]);
+                pcondition[8] = (sbyte)BitMath.ToInt32Mask(pleft[8] > pright[8]);
+                pcondition[9] = (sbyte)BitMath.ToInt32Mask(pleft[9] > pright[9]);
+                pcondition[10] = (sbyte)BitMath.ToInt32Mask(pleft[10] > pright[10]);
+                pcondition[11] = (sbyte)BitMath.ToInt32Mask(pleft[11] > pright[11]);
+                pcondition[12] = (sbyte)BitMath.ToInt32Mask(pleft[12] > pright[12]);
+                pcondition[13] = (sbyte)BitMath.ToInt32Mask(pleft[13] > pright[13]);
+                pcondition[14] = (sbyte)BitMath.ToInt32Mask(pleft[14] > pright[14]);
+                pcondition[15] = (sbyte)BitMath.ToInt32Mask(pleft[15] > pright[15]);
                 return condition.AsByte();
             }
 
@@ -971,14 +971,14 @@ namespace Zyl.VectorTraits.Impl {
                 short* pcondition = (short*)&condition;
                 short* pleft = (short*)&left;
                 short* pright = (short*)&right;
-                pcondition[0] = (short)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = (short)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
-                pcondition[2] = (short)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
-                pcondition[3] = (short)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
-                pcondition[4] = (short)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
-                pcondition[5] = (short)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
-                pcondition[6] = (short)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
-                pcondition[7] = (short)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
+                pcondition[0] = (short)BitMath.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = (short)BitMath.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = (short)BitMath.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = (short)BitMath.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = (short)BitMath.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = (short)BitMath.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = (short)BitMath.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = (short)BitMath.ToInt32Mask(pleft[7] > pright[7]);
                 return condition.AsInt16();
             }
 
@@ -994,14 +994,14 @@ namespace Zyl.VectorTraits.Impl {
                 short* pcondition = (short*)&condition;
                 ushort* pleft = (ushort*)&left;
                 ushort* pright = (ushort*)&right;
-                pcondition[0] = (short)BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = (short)BitUtil.ToInt32Mask(pleft[1] > pright[1]);
-                pcondition[2] = (short)BitUtil.ToInt32Mask(pleft[2] > pright[2]);
-                pcondition[3] = (short)BitUtil.ToInt32Mask(pleft[3] > pright[3]);
-                pcondition[4] = (short)BitUtil.ToInt32Mask(pleft[4] > pright[4]);
-                pcondition[5] = (short)BitUtil.ToInt32Mask(pleft[5] > pright[5]);
-                pcondition[6] = (short)BitUtil.ToInt32Mask(pleft[6] > pright[6]);
-                pcondition[7] = (short)BitUtil.ToInt32Mask(pleft[7] > pright[7]);
+                pcondition[0] = (short)BitMath.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = (short)BitMath.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = (short)BitMath.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = (short)BitMath.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[4] = (short)BitMath.ToInt32Mask(pleft[4] > pright[4]);
+                pcondition[5] = (short)BitMath.ToInt32Mask(pleft[5] > pright[5]);
+                pcondition[6] = (short)BitMath.ToInt32Mask(pleft[6] > pright[6]);
+                pcondition[7] = (short)BitMath.ToInt32Mask(pleft[7] > pright[7]);
                 return condition.AsUInt16();
             }
 
@@ -1016,10 +1016,10 @@ namespace Zyl.VectorTraits.Impl {
                 int* pcondition = (int*)&condition;
                 int* pleft = (int*)&left;
                 int* pright = (int*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
-                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
-                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[0] = BitMath.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitMath.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = BitMath.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = BitMath.ToInt32Mask(pleft[3] > pright[3]);
                 return condition.AsInt32();
             }
 
@@ -1035,10 +1035,10 @@ namespace Zyl.VectorTraits.Impl {
                 int* pcondition = (int*)&condition;
                 uint* pleft = (uint*)&left;
                 uint* pright = (uint*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
-                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] > pright[2]);
-                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] > pright[3]);
+                pcondition[0] = BitMath.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitMath.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[2] = BitMath.ToInt32Mask(pleft[2] > pright[2]);
+                pcondition[3] = BitMath.ToInt32Mask(pleft[3] > pright[3]);
                 return condition.AsUInt32();
             }
 
@@ -1053,8 +1053,8 @@ namespace Zyl.VectorTraits.Impl {
                 long* pcondition = (long*)&condition;
                 long* pleft = (long*)&left;
                 long* pright = (long*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[0] = BitMath.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitMath.ToInt32Mask(pleft[1] > pright[1]);
                 return condition;
             }
 
@@ -1070,8 +1070,8 @@ namespace Zyl.VectorTraits.Impl {
                 long* pcondition = (long*)&condition;
                 ulong* pleft = (ulong*)&left;
                 ulong* pright = (ulong*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                pcondition[0] = BitMath.ToInt32Mask(pleft[0] > pright[0]);
+                pcondition[1] = BitMath.ToInt32Mask(pleft[1] > pright[1]);
                 return condition.AsUInt64();
             }
 
@@ -1204,10 +1204,10 @@ namespace Zyl.VectorTraits.Impl {
                 int* pcondition = (int*)&condition;
                 float* pleft = (float*)&left;
                 float* pright = (float*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] < pright[3]);
+                pcondition[0] = BitMath.ToInt32Mask(pleft[0] < pright[0]);
+                pcondition[1] = BitMath.ToInt32Mask(pleft[1] < pright[1]);
+                pcondition[2] = BitMath.ToInt32Mask(pleft[2] < pright[2]);
+                pcondition[3] = BitMath.ToInt32Mask(pleft[3] < pright[3]);
                 return condition.AsSingle();
             }
 
@@ -1222,8 +1222,8 @@ namespace Zyl.VectorTraits.Impl {
                 long* pcondition = (long*)&condition;
                 double* pleft = (double*)&left;
                 double* pright = (double*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] < pright[1]);
+                pcondition[0] = BitMath.ToInt32Mask(pleft[0] < pright[0]);
+                pcondition[1] = BitMath.ToInt32Mask(pleft[1] < pright[1]);
                 return condition.AsDouble();
             }
 
@@ -1239,22 +1239,22 @@ namespace Zyl.VectorTraits.Impl {
                 sbyte* pcondition = (sbyte*)&condition;
                 sbyte* pleft = (sbyte*)&left;
                 sbyte* pright = (sbyte*)&right;
-                pcondition[0] = (sbyte)BitUtil.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = (sbyte)BitUtil.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = (sbyte)BitUtil.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = (sbyte)BitUtil.ToInt32Mask(pleft[3] < pright[3]);
-                pcondition[4] = (sbyte)BitUtil.ToInt32Mask(pleft[4] < pright[4]);
-                pcondition[5] = (sbyte)BitUtil.ToInt32Mask(pleft[5] < pright[5]);
-                pcondition[6] = (sbyte)BitUtil.ToInt32Mask(pleft[6] < pright[6]);
-                pcondition[7] = (sbyte)BitUtil.ToInt32Mask(pleft[7] < pright[7]);
-                pcondition[8] = (sbyte)BitUtil.ToInt32Mask(pleft[8] < pright[8]);
-                pcondition[9] = (sbyte)BitUtil.ToInt32Mask(pleft[9] < pright[9]);
-                pcondition[10] = (sbyte)BitUtil.ToInt32Mask(pleft[10] < pright[10]);
-                pcondition[11] = (sbyte)BitUtil.ToInt32Mask(pleft[11] < pright[11]);
-                pcondition[12] = (sbyte)BitUtil.ToInt32Mask(pleft[12] < pright[12]);
-                pcondition[13] = (sbyte)BitUtil.ToInt32Mask(pleft[13] < pright[13]);
-                pcondition[14] = (sbyte)BitUtil.ToInt32Mask(pleft[14] < pright[14]);
-                pcondition[15] = (sbyte)BitUtil.ToInt32Mask(pleft[15] < pright[15]);
+                pcondition[0] = (sbyte)BitMath.ToInt32Mask(pleft[0] < pright[0]);
+                pcondition[1] = (sbyte)BitMath.ToInt32Mask(pleft[1] < pright[1]);
+                pcondition[2] = (sbyte)BitMath.ToInt32Mask(pleft[2] < pright[2]);
+                pcondition[3] = (sbyte)BitMath.ToInt32Mask(pleft[3] < pright[3]);
+                pcondition[4] = (sbyte)BitMath.ToInt32Mask(pleft[4] < pright[4]);
+                pcondition[5] = (sbyte)BitMath.ToInt32Mask(pleft[5] < pright[5]);
+                pcondition[6] = (sbyte)BitMath.ToInt32Mask(pleft[6] < pright[6]);
+                pcondition[7] = (sbyte)BitMath.ToInt32Mask(pleft[7] < pright[7]);
+                pcondition[8] = (sbyte)BitMath.ToInt32Mask(pleft[8] < pright[8]);
+                pcondition[9] = (sbyte)BitMath.ToInt32Mask(pleft[9] < pright[9]);
+                pcondition[10] = (sbyte)BitMath.ToInt32Mask(pleft[10] < pright[10]);
+                pcondition[11] = (sbyte)BitMath.ToInt32Mask(pleft[11] < pright[11]);
+                pcondition[12] = (sbyte)BitMath.ToInt32Mask(pleft[12] < pright[12]);
+                pcondition[13] = (sbyte)BitMath.ToInt32Mask(pleft[13] < pright[13]);
+                pcondition[14] = (sbyte)BitMath.ToInt32Mask(pleft[14] < pright[14]);
+                pcondition[15] = (sbyte)BitMath.ToInt32Mask(pleft[15] < pright[15]);
                 return condition.AsSByte();
             }
 
@@ -1269,22 +1269,22 @@ namespace Zyl.VectorTraits.Impl {
                 sbyte* pcondition = (sbyte*)&condition;
                 byte* pleft = (byte*)&left;
                 byte* pright = (byte*)&right;
-                pcondition[0] = (sbyte)BitUtil.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = (sbyte)BitUtil.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = (sbyte)BitUtil.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = (sbyte)BitUtil.ToInt32Mask(pleft[3] < pright[3]);
-                pcondition[4] = (sbyte)BitUtil.ToInt32Mask(pleft[4] < pright[4]);
-                pcondition[5] = (sbyte)BitUtil.ToInt32Mask(pleft[5] < pright[5]);
-                pcondition[6] = (sbyte)BitUtil.ToInt32Mask(pleft[6] < pright[6]);
-                pcondition[7] = (sbyte)BitUtil.ToInt32Mask(pleft[7] < pright[7]);
-                pcondition[8] = (sbyte)BitUtil.ToInt32Mask(pleft[8] < pright[8]);
-                pcondition[9] = (sbyte)BitUtil.ToInt32Mask(pleft[9] < pright[9]);
-                pcondition[10] = (sbyte)BitUtil.ToInt32Mask(pleft[10] < pright[10]);
-                pcondition[11] = (sbyte)BitUtil.ToInt32Mask(pleft[11] < pright[11]);
-                pcondition[12] = (sbyte)BitUtil.ToInt32Mask(pleft[12] < pright[12]);
-                pcondition[13] = (sbyte)BitUtil.ToInt32Mask(pleft[13] < pright[13]);
-                pcondition[14] = (sbyte)BitUtil.ToInt32Mask(pleft[14] < pright[14]);
-                pcondition[15] = (sbyte)BitUtil.ToInt32Mask(pleft[15] < pright[15]);
+                pcondition[0] = (sbyte)BitMath.ToInt32Mask(pleft[0] < pright[0]);
+                pcondition[1] = (sbyte)BitMath.ToInt32Mask(pleft[1] < pright[1]);
+                pcondition[2] = (sbyte)BitMath.ToInt32Mask(pleft[2] < pright[2]);
+                pcondition[3] = (sbyte)BitMath.ToInt32Mask(pleft[3] < pright[3]);
+                pcondition[4] = (sbyte)BitMath.ToInt32Mask(pleft[4] < pright[4]);
+                pcondition[5] = (sbyte)BitMath.ToInt32Mask(pleft[5] < pright[5]);
+                pcondition[6] = (sbyte)BitMath.ToInt32Mask(pleft[6] < pright[6]);
+                pcondition[7] = (sbyte)BitMath.ToInt32Mask(pleft[7] < pright[7]);
+                pcondition[8] = (sbyte)BitMath.ToInt32Mask(pleft[8] < pright[8]);
+                pcondition[9] = (sbyte)BitMath.ToInt32Mask(pleft[9] < pright[9]);
+                pcondition[10] = (sbyte)BitMath.ToInt32Mask(pleft[10] < pright[10]);
+                pcondition[11] = (sbyte)BitMath.ToInt32Mask(pleft[11] < pright[11]);
+                pcondition[12] = (sbyte)BitMath.ToInt32Mask(pleft[12] < pright[12]);
+                pcondition[13] = (sbyte)BitMath.ToInt32Mask(pleft[13] < pright[13]);
+                pcondition[14] = (sbyte)BitMath.ToInt32Mask(pleft[14] < pright[14]);
+                pcondition[15] = (sbyte)BitMath.ToInt32Mask(pleft[15] < pright[15]);
                 return condition.AsByte();
             }
 
@@ -1299,14 +1299,14 @@ namespace Zyl.VectorTraits.Impl {
                 short* pcondition = (short*)&condition;
                 short* pleft = (short*)&left;
                 short* pright = (short*)&right;
-                pcondition[0] = (short)BitUtil.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = (short)BitUtil.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = (short)BitUtil.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = (short)BitUtil.ToInt32Mask(pleft[3] < pright[3]);
-                pcondition[4] = (short)BitUtil.ToInt32Mask(pleft[4] < pright[4]);
-                pcondition[5] = (short)BitUtil.ToInt32Mask(pleft[5] < pright[5]);
-                pcondition[6] = (short)BitUtil.ToInt32Mask(pleft[6] < pright[6]);
-                pcondition[7] = (short)BitUtil.ToInt32Mask(pleft[7] < pright[7]);
+                pcondition[0] = (short)BitMath.ToInt32Mask(pleft[0] < pright[0]);
+                pcondition[1] = (short)BitMath.ToInt32Mask(pleft[1] < pright[1]);
+                pcondition[2] = (short)BitMath.ToInt32Mask(pleft[2] < pright[2]);
+                pcondition[3] = (short)BitMath.ToInt32Mask(pleft[3] < pright[3]);
+                pcondition[4] = (short)BitMath.ToInt32Mask(pleft[4] < pright[4]);
+                pcondition[5] = (short)BitMath.ToInt32Mask(pleft[5] < pright[5]);
+                pcondition[6] = (short)BitMath.ToInt32Mask(pleft[6] < pright[6]);
+                pcondition[7] = (short)BitMath.ToInt32Mask(pleft[7] < pright[7]);
                 return condition.AsInt16();
             }
 
@@ -1322,14 +1322,14 @@ namespace Zyl.VectorTraits.Impl {
                 short* pcondition = (short*)&condition;
                 ushort* pleft = (ushort*)&left;
                 ushort* pright = (ushort*)&right;
-                pcondition[0] = (short)BitUtil.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = (short)BitUtil.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = (short)BitUtil.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = (short)BitUtil.ToInt32Mask(pleft[3] < pright[3]);
-                pcondition[4] = (short)BitUtil.ToInt32Mask(pleft[4] < pright[4]);
-                pcondition[5] = (short)BitUtil.ToInt32Mask(pleft[5] < pright[5]);
-                pcondition[6] = (short)BitUtil.ToInt32Mask(pleft[6] < pright[6]);
-                pcondition[7] = (short)BitUtil.ToInt32Mask(pleft[7] < pright[7]);
+                pcondition[0] = (short)BitMath.ToInt32Mask(pleft[0] < pright[0]);
+                pcondition[1] = (short)BitMath.ToInt32Mask(pleft[1] < pright[1]);
+                pcondition[2] = (short)BitMath.ToInt32Mask(pleft[2] < pright[2]);
+                pcondition[3] = (short)BitMath.ToInt32Mask(pleft[3] < pright[3]);
+                pcondition[4] = (short)BitMath.ToInt32Mask(pleft[4] < pright[4]);
+                pcondition[5] = (short)BitMath.ToInt32Mask(pleft[5] < pright[5]);
+                pcondition[6] = (short)BitMath.ToInt32Mask(pleft[6] < pright[6]);
+                pcondition[7] = (short)BitMath.ToInt32Mask(pleft[7] < pright[7]);
                 return condition.AsUInt16();
             }
 
@@ -1344,10 +1344,10 @@ namespace Zyl.VectorTraits.Impl {
                 int* pcondition = (int*)&condition;
                 int* pleft = (int*)&left;
                 int* pright = (int*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] < pright[3]);
+                pcondition[0] = BitMath.ToInt32Mask(pleft[0] < pright[0]);
+                pcondition[1] = BitMath.ToInt32Mask(pleft[1] < pright[1]);
+                pcondition[2] = BitMath.ToInt32Mask(pleft[2] < pright[2]);
+                pcondition[3] = BitMath.ToInt32Mask(pleft[3] < pright[3]);
                 return condition.AsInt32();
             }
 
@@ -1363,10 +1363,10 @@ namespace Zyl.VectorTraits.Impl {
                 int* pcondition = (int*)&condition;
                 uint* pleft = (uint*)&left;
                 uint* pright = (uint*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = BitUtil.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = BitUtil.ToInt32Mask(pleft[3] < pright[3]);
+                pcondition[0] = BitMath.ToInt32Mask(pleft[0] < pright[0]);
+                pcondition[1] = BitMath.ToInt32Mask(pleft[1] < pright[1]);
+                pcondition[2] = BitMath.ToInt32Mask(pleft[2] < pright[2]);
+                pcondition[3] = BitMath.ToInt32Mask(pleft[3] < pright[3]);
                 return condition.AsUInt32();
             }
 
@@ -1381,8 +1381,8 @@ namespace Zyl.VectorTraits.Impl {
                 long* pcondition = (long*)&condition;
                 long* pleft = (long*)&left;
                 long* pright = (long*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] < pright[1]);
+                pcondition[0] = BitMath.ToInt32Mask(pleft[0] < pright[0]);
+                pcondition[1] = BitMath.ToInt32Mask(pleft[1] < pright[1]);
                 return condition;
             }
 
@@ -1398,8 +1398,8 @@ namespace Zyl.VectorTraits.Impl {
                 long* pcondition = (long*)&condition;
                 ulong* pleft = (ulong*)&left;
                 ulong* pright = (ulong*)&right;
-                pcondition[0] = BitUtil.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = BitUtil.ToInt32Mask(pleft[1] < pright[1]);
+                pcondition[0] = BitMath.ToInt32Mask(pleft[0] < pright[0]);
+                pcondition[1] = BitMath.ToInt32Mask(pleft[1] < pright[1]);
                 return condition.AsUInt64();
             }
 
@@ -1540,11 +1540,11 @@ namespace Zyl.VectorTraits.Impl {
                 double* pleft = (double*)&left;
                 double* pright = (double*)&right;
                 long* q = (long*)&rt;
-                long condition0 = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                long condition1 = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                long condition0 = BitMath.ToInt32Mask(pleft[0] > pright[0]);
+                long condition1 = BitMath.ToInt32Mask(pleft[1] > pright[1]);
                 // result = (left & condition) | (right & ~condition);
-                q[0] = (BitUtil.DoubleToInt64Bits(pleft[0]) & condition0) | (BitUtil.DoubleToInt64Bits(pright[0]) & ~condition0);
-                q[1] = (BitUtil.DoubleToInt64Bits(pleft[1]) & condition1) | (BitUtil.DoubleToInt64Bits(pright[1]) & ~condition1);
+                q[0] = (BitMath.DoubleToInt64Bits(pleft[0]) & condition0) | (BitMath.DoubleToInt64Bits(pright[0]) & ~condition0);
+                q[1] = (BitMath.DoubleToInt64Bits(pleft[1]) & condition1) | (BitMath.DoubleToInt64Bits(pright[1]) & ~condition1);
                 return rt.AsDouble();
             }
 
@@ -1610,8 +1610,8 @@ namespace Zyl.VectorTraits.Impl {
                 long* pleft = (long*)&left;
                 long* pright = (long*)&right;
                 long* q = (long*)&rt;
-                long condition0 = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                long condition1 = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                long condition0 = BitMath.ToInt32Mask(pleft[0] > pright[0]);
+                long condition1 = BitMath.ToInt32Mask(pleft[1] > pright[1]);
                 // result = (left & condition) | (right & ~condition);
                 q[0] = ((pleft[0]) & condition0) | ((pright[0]) & ~condition0);
                 q[1] = ((pleft[1]) & condition1) | ((pright[1]) & ~condition1);
@@ -1630,8 +1630,8 @@ namespace Zyl.VectorTraits.Impl {
                 ulong* pleft = (ulong*)&left;
                 ulong* pright = (ulong*)&right;
                 long* q = (long*)&rt;
-                long condition0 = BitUtil.ToInt32Mask(pleft[0] > pright[0]);
-                long condition1 = BitUtil.ToInt32Mask(pleft[1] > pright[1]);
+                long condition0 = BitMath.ToInt32Mask(pleft[0] > pright[0]);
+                long condition1 = BitMath.ToInt32Mask(pleft[1] > pright[1]);
                 // result = (left & condition) | (right & ~condition);
                 q[0] = ((long)(pleft[0]) & condition0) | ((long)(pright[0]) & ~condition0);
                 q[1] = ((long)(pleft[1]) & condition1) | ((long)(pright[1]) & ~condition1);
@@ -1775,11 +1775,11 @@ namespace Zyl.VectorTraits.Impl {
                 double* pleft = (double*)&left;
                 double* pright = (double*)&right;
                 long* q = (long*)&rt;
-                long condition0 = BitUtil.ToInt32Mask(pleft[0] < pright[0]);
-                long condition1 = BitUtil.ToInt32Mask(pleft[1] < pright[1]);
+                long condition0 = BitMath.ToInt32Mask(pleft[0] < pright[0]);
+                long condition1 = BitMath.ToInt32Mask(pleft[1] < pright[1]);
                 // result = (left & condition) | (right & ~condition);
-                q[0] = (BitUtil.DoubleToInt64Bits(pleft[0]) & condition0) | (BitUtil.DoubleToInt64Bits(pright[0]) & ~condition0);
-                q[1] = (BitUtil.DoubleToInt64Bits(pleft[1]) & condition1) | (BitUtil.DoubleToInt64Bits(pright[1]) & ~condition1);
+                q[0] = (BitMath.DoubleToInt64Bits(pleft[0]) & condition0) | (BitMath.DoubleToInt64Bits(pright[0]) & ~condition0);
+                q[1] = (BitMath.DoubleToInt64Bits(pleft[1]) & condition1) | (BitMath.DoubleToInt64Bits(pright[1]) & ~condition1);
                 return rt.AsDouble();
             }
 
@@ -1845,8 +1845,8 @@ namespace Zyl.VectorTraits.Impl {
                 long* pleft = (long*)&left;
                 long* pright = (long*)&right;
                 long* q = (long*)&rt;
-                long condition0 = BitUtil.ToInt32Mask(pleft[0] < pright[0]);
-                long condition1 = BitUtil.ToInt32Mask(pleft[1] < pright[1]);
+                long condition0 = BitMath.ToInt32Mask(pleft[0] < pright[0]);
+                long condition1 = BitMath.ToInt32Mask(pleft[1] < pright[1]);
                 // result = (left & condition) | (right & ~condition);
                 q[0] = ((pleft[0]) & condition0) | ((pright[0]) & ~condition0);
                 q[1] = ((pleft[1]) & condition1) | ((pright[1]) & ~condition1);
@@ -1865,8 +1865,8 @@ namespace Zyl.VectorTraits.Impl {
                 ulong* pleft = (ulong*)&left;
                 ulong* pright = (ulong*)&right;
                 long* q = (long*)&rt;
-                long condition0 = BitUtil.ToInt32Mask(pleft[0] < pright[0]);
-                long condition1 = BitUtil.ToInt32Mask(pleft[1] < pright[1]);
+                long condition0 = BitMath.ToInt32Mask(pleft[0] < pright[0]);
+                long condition1 = BitMath.ToInt32Mask(pleft[1] < pright[1]);
                 // result = (left & condition) | (right & ~condition);
                 q[0] = ((long)(pleft[0]) & condition0) | ((long)(pright[0]) & ~condition0);
                 q[1] = ((long)(pleft[1]) & condition1) | ((long)(pright[1]) & ~condition1);

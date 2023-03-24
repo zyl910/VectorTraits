@@ -9,11 +9,11 @@
     <Import_RootNamespace>Zyl.VectorTraits.Benchmarks</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)ABitUtil\BigMulBenchmark_UInt64.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ABitUtil\ClampBenchmark_Int16.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ABitUtil\ClampBenchmark_Int32.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ABitUtil\ConditionalSelectBenchmark_Int16.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ABitUtil\ConditionalSelectBenchmark_Int32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ABitMath\BigMulBenchmark_UInt64.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ABitMath\ClampBenchmark_Int16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ABitMath\ClampBenchmark_Int32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ABitMath\ConditionalSelectBenchmark_Int16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ABitMath\ConditionalSelectBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AloneTestUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\M\MultiplyBenchmark_Double.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\M\MultiplyBenchmark_Int16.cs" />

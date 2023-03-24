@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
+namespace Zyl.VectorTraits.Benchmarks.ABitMath {
 #if BENCHMARKS_OFF
     using BenchmarkAttribute = FakeBenchmarkAttribute;
 #else
@@ -91,55 +91,55 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
         }
 
         /// <summary>
-        /// Sum ConditionalSelect - BitUtil.Min .
+        /// Sum ConditionalSelect - BitMath.Min .
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="sample">Sample value.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TMy StaticSumConditionalSelect_Min_BitUtil(TMy[] src, int srcCount, TMy sample) {
+        public static TMy StaticSumConditionalSelect_Min_BitMath(TMy[] src, int srcCount, TMy sample) {
             TMy rt = 0; // Result.
             for (int i = 0; i < srcCount; ++i) {
                 TMy t = src[i];
-                rt += BitUtil.ConditionalSelect(t < sample, t, sample);
+                rt += BitMath.ConditionalSelect(t < sample, t, sample);
             }
             return rt;
         }
 
         [Benchmark]
-        public void SumConditionalSelect_Min_BitUtil() {
+        public void SumConditionalSelect_Min_BitMath() {
             dstTMy = 0;
             foreach (TMy sample in samples) {
-                dstTMy += StaticSumConditionalSelect_Min_BitUtil(srcArray, srcArray.Length, sample);
+                dstTMy += StaticSumConditionalSelect_Min_BitMath(srcArray, srcArray.Length, sample);
             }
-            CheckResult("SumConditionalSelect_Min_BitUtil");
+            CheckResult("SumConditionalSelect_Min_BitMath");
         }
 
         /// <summary>
-        /// Sum ConditionalSelect - BitUtil.ConditionalSelect .
+        /// Sum ConditionalSelect - BitMath.ConditionalSelect .
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="sample">Sample value.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TMy StaticSumConditionalSelect_BitUtil(TMy[] src, int srcCount, TMy sample) {
+        public static TMy StaticSumConditionalSelect_BitMath(TMy[] src, int srcCount, TMy sample) {
             TMy rt = 0; // Result.
             for (int i = 0; i < srcCount; ++i) {
                 TMy t = src[i];
-                rt += BitUtil.ConditionalSelect(t < sample, t, sample);
+                rt += BitMath.ConditionalSelect(t < sample, t, sample);
             }
             return rt;
         }
 
         [Benchmark]
-        public void SumConditionalSelect_BitUtil() {
+        public void SumConditionalSelect_BitMath() {
             dstTMy = 0;
             foreach (TMy sample in samples) {
-                dstTMy += StaticSumConditionalSelect_BitUtil(srcArray, srcArray.Length, sample);
+                dstTMy += StaticSumConditionalSelect_BitMath(srcArray, srcArray.Length, sample);
             }
-            CheckResult("SumConditionalSelect_BitUtil");
+            CheckResult("SumConditionalSelect_BitMath");
         }
 
     }

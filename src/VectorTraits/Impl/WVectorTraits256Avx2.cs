@@ -539,7 +539,7 @@ namespace Zyl.VectorTraits.Impl {
                 Vector256<long> rt;
                 Vector256<int> lower, upper;
                 Vector256<int> XyXMask = Vector256s<int>.XyXMask;
-                const byte controlInputUpper = ShuffleControlG4.YYWW; // BitUtil._MM_SHUFFLE(3, 3, 1, 1) = 0xF5 = 0b11_11_01_01;
+                const byte controlInputUpper = ShuffleControlG4.YYWW; // BitMath._MM_SHUFFLE(3, 3, 1, 1) = 0xF5 = 0b11_11_01_01;
                 Vector256<int> upperAtLower = Avx2.Shuffle(value.AsInt32(), controlInputUpper); // f({ v0.lower, v0.upper, v1.lower, v1.upper, ... }) = { v0.upper, v0.upper, v1.upper, v1.upper, ... }
                 upperAtLower = Avx2.And(XyXMask, upperAtLower); // = { v0.upper, 0, v1.upper, 0, ... }
                 Vector256<int> upperOld = Avx2.AndNot(XyXMask, value.AsInt32()); // = { 0, v0.upper, 0, v1.upper, ... }
@@ -569,11 +569,11 @@ namespace Zyl.VectorTraits.Impl {
                     return value;
                 }
                 Vector256<int> XyXMask = Vector256s<int>.XyXMask;
-                const byte controlInputUpper = ShuffleControlG4.YYWW; // BitUtil._MM_SHUFFLE(3, 3, 1, 1) = 0xF5 = 0b11_11_01_01;
+                const byte controlInputUpper = ShuffleControlG4.YYWW; // BitMath._MM_SHUFFLE(3, 3, 1, 1) = 0xF5 = 0b11_11_01_01;
                 Vector256<int> upperAtLower = Avx2.Shuffle(value.AsInt32(), controlInputUpper); // f({ v0.lower, v0.upper, v1.lower, v1.upper, ... }) = { v0.upper, v0.upper, v1.upper, v1.upper, ... }
-                byte shiftAmountUpper = (byte)BitUtil.Min(31, shiftAmount);
-                byte shiftAmountLeft = (byte)BitUtil.Max(0, 32 - shiftAmount);
-                Vector256<int> lowerUse1Mask = Vector256.Create(BitUtil.ToInt32Mask(32 <= shiftAmount));
+                byte shiftAmountUpper = (byte)BitMath.Min(31, shiftAmount);
+                byte shiftAmountLeft = (byte)BitMath.Max(0, 32 - shiftAmount);
+                Vector256<int> lowerUse1Mask = Vector256.Create(BitMath.ToInt32Mask(32 <= shiftAmount));
                 upperAtLower = Avx2.And(XyXMask, upperAtLower); // = { v0.upper, 0, v1.upper, 0, ... }
                 Vector256<int> lowerOld = Avx2.And(XyXMask, value.AsInt32());
                 Vector256<int> upperOld = Avx2.AndNot(XyXMask, value.AsInt32()); // = { 0, v0.upper, 0, v1.upper, ... }

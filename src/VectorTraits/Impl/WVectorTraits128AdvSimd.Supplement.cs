@@ -63,8 +63,8 @@ namespace Zyl.VectorTraits.Impl {
             public static Vector128<long> Abs(Vector128<long> value) {
                 // If an integer value is positive or zero, no action is required. Otherwise complement and add 1.
                 //Vector128<long> mask = AdvSimd.CompareGreaterThan(Vector128<long>.Zero, value); // 0>value => value<0
-                long m0 = BitUtil.ToInt32Mask(0 > AdvSimd.Extract(value, 0));
-                long m1 = BitUtil.ToInt32Mask(0 > AdvSimd.Extract(value, 1));
+                long m0 = BitMath.ToInt32Mask(0 > AdvSimd.Extract(value, 0));
+                long m1 = BitMath.ToInt32Mask(0 > AdvSimd.Extract(value, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
                 Vector128<long> rt = AdvSimd.Subtract(AdvSimd.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
                 return rt;
@@ -244,8 +244,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> GreaterThan(Vector128<double> left, Vector128<double> right) {
                 //Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
-                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
-                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
+                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
+                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
                 return mask.AsDouble();
             }
@@ -293,8 +293,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> GreaterThan(Vector128<long> left, Vector128<long> right) {
                 // Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
-                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
-                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
+                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
+                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
                 return mask.AsInt64();
             }
@@ -304,8 +304,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> GreaterThan(Vector128<ulong> left, Vector128<ulong> right) {
                 //Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
-                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
-                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
+                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
+                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
                 return mask.AsUInt64();
             }
@@ -328,8 +328,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> LessThan(Vector128<double> left, Vector128<double> right) {
                 //Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
-                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
-                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
+                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
+                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
                 return mask.AsDouble();
             }
@@ -377,8 +377,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> LessThan(Vector128<long> left, Vector128<long> right) {
                 // Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
-                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
-                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
+                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
+                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
                 return mask.AsInt64();
             }
@@ -388,8 +388,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> LessThan(Vector128<ulong> left, Vector128<ulong> right) {
                 //Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
-                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
-                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
+                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
+                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
                 return mask.AsUInt64();
             }
@@ -412,8 +412,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Max(Vector128<double> left, Vector128<double> right) {
                 //Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
-                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
-                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
+                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
+                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
                 Vector128<double> rt = AdvSimd.BitwiseSelect(mask.AsDouble(), left, right);
                 return rt;
@@ -462,8 +462,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Max(Vector128<long> left, Vector128<long> right) {
                 // Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
-                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
-                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
+                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
+                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
                 Vector128<long> rt = AdvSimd.BitwiseSelect(mask, left, right);
                 return rt;
@@ -474,8 +474,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> Max(Vector128<ulong> left, Vector128<ulong> right) {
                 //Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
-                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
-                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
+                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
+                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
                 Vector128<ulong> rt = AdvSimd.BitwiseSelect(mask.AsUInt64(), left, right);
                 return rt;
@@ -499,8 +499,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Min(Vector128<double> left, Vector128<double> right) {
                 //Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
-                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
-                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
+                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
+                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
                 Vector128<double> rt = AdvSimd.BitwiseSelect(mask.AsDouble(), left, right);
                 return rt;
@@ -549,8 +549,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Min(Vector128<long> left, Vector128<long> right) {
                 // Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
-                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
-                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
+                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
+                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
                 Vector128<long> rt = AdvSimd.BitwiseSelect(mask, left, right);
                 return rt;
@@ -561,8 +561,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> Min(Vector128<ulong> left, Vector128<ulong> right) {
                 //Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
-                long m0 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
-                long m1 = BitUtil.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
+                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
+                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
                 Vector128<long> mask = Vector128.Create(m0, m1);
                 Vector128<ulong> rt = AdvSimd.BitwiseSelect(mask.AsUInt64(), left, right);
                 return rt;

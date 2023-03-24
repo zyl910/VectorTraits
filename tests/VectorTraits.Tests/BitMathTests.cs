@@ -7,10 +7,10 @@ using System.Security.Cryptography;
 
 namespace Zyl.VectorTraits.Tests {
     [TestFixture()]
-    public class BitUtilTests {
+    public class BitMathTests {
         [Test()]
         public void SingleToInt32BitsTest() {
-            int n = BitUtil.SingleToInt32Bits((float)1);
+            int n = BitMath.SingleToInt32Bits((float)1);
             Assert.AreNotEqual(0, n);
         }
 
@@ -20,7 +20,7 @@ namespace Zyl.VectorTraits.Tests {
                 for (byte n2 = 0; n2 <= 3; ++n2) {
                     for (byte n1 = 0; n1 <= 3; ++n1) {
                         for (byte n0 = 0; n0 <= 3; ++n0) {
-                            byte dst = BitUtil.GetByteByBit2(n3, n2, n1, n0);
+                            byte dst = BitMath.GetByteByBit2(n3, n2, n1, n0);
                             Console.WriteLine($"GetByteByBit2({n3}, {n2}, {n1}, {n0}) = 0x{dst:X2}\t// {dst}");
                         }
                     }
@@ -34,8 +34,8 @@ namespace Zyl.VectorTraits.Tests {
                 for (byte n2 = 0; n2 <= 3; ++n2) {
                     for (byte n1 = 0; n1 <= 3; ++n1) {
                         for (byte n0 = 0; n0 <= 3; ++n0) {
-                            byte expected = BitUtil.GetByteByBit2(n3, n2, n1, n0);
-                            byte dst = BitUtil.GetByteByBit2R(n0, n1, n2, n3);
+                            byte expected = BitMath.GetByteByBit2(n3, n2, n1, n0);
+                            byte dst = BitMath.GetByteByBit2R(n0, n1, n2, n3);
                             Assert.AreEqual(expected, dst, $"({n0}, {n1}, {n2}, {n3})");
                             //Console.WriteLine($"GetByteByBit2R({n0}, {n1}, {n2}, {n3}) = 0x{dst:X2}\t// {dst}");
                         }
@@ -48,7 +48,7 @@ namespace Zyl.VectorTraits.Tests {
         public void GetByteByBit4Test() {
             for (byte n1 = 0; n1 <= 15; ++n1) {
                 for (byte n0 = 0; n0 <= 15; ++n0) {
-                    byte dst = BitUtil.GetByteByBit4(n1, n0);
+                    byte dst = BitMath.GetByteByBit4(n1, n0);
                     Console.WriteLine($"GetByteByBit4({n1}, {n0}) = 0x{dst:X2}\t// {dst}");
                 }
             }
@@ -58,8 +58,8 @@ namespace Zyl.VectorTraits.Tests {
         public void GetByteByBit4RTest() {
             for (byte n1 = 0; n1 <= 15; ++n1) {
                 for (byte n0 = 0; n0 <= 15; ++n0) {
-                    byte expected = BitUtil.GetByteByBit4(n1, n0);
-                    byte dst = BitUtil.GetByteByBit4R(n0, n1);
+                    byte expected = BitMath.GetByteByBit4(n1, n0);
+                    byte dst = BitMath.GetByteByBit4R(n0, n1);
                     //Console.WriteLine($"GetByteByBit4R({n0}, {n1}) = 0x{dst:X2}\t// {dst}");
                 }
             }
@@ -71,7 +71,7 @@ namespace Zyl.VectorTraits.Tests {
                 for (byte n2 = 0; n2 <= 3; ++n2) {
                     for (byte n1 = 0; n1 <= 3; ++n1) {
                         for (byte n0 = 0; n0 <= 3; ++n0) {
-                            byte dst = BitUtil._MM_SHUFFLE(n3, n2, n1, n0);
+                            byte dst = BitMath._MM_SHUFFLE(n3, n2, n1, n0);
                             Console.WriteLine($"_MM_SHUFFLE({n3}, {n2}, {n1}, {n0}) = 0x{dst:X2}\t// {dst}");
                         }
                     }
@@ -83,7 +83,7 @@ namespace Zyl.VectorTraits.Tests {
         public void _MM_SHUFFLE2Test() {
             for (byte n1 = 0; n1 <= 1; ++n1) {
                 for (byte n0 = 0; n0 <= 1; ++n0) {
-                    byte dst = BitUtil._MM_SHUFFLE2(n1, n0);
+                    byte dst = BitMath._MM_SHUFFLE2(n1, n0);
                     Console.WriteLine($"_MM_SHUFFLE2({n1}, {n0}) = 0x{dst:X2}\t// {dst}");
                 }
             }
@@ -113,7 +113,7 @@ namespace Zyl.VectorTraits.Tests {
                     T expected;
                     T dst;
                     expected = Math.Min((dynamic)left, (dynamic)right);
-                    dst = BitUtil.ConditionalSelect((dynamic)left < (dynamic)right, (dynamic)left, (dynamic)right);
+                    dst = BitMath.ConditionalSelect((dynamic)left < (dynamic)right, (dynamic)left, (dynamic)right);
                     Assert.AreEqual(expected, dst, $"{left} < {right}");
                     //Console.WriteLine($"{left} < {right}: {expected}");
                 }
@@ -144,7 +144,7 @@ namespace Zyl.VectorTraits.Tests {
                     T expected;
                     T dst;
                     expected = Math.Min((dynamic)left, (dynamic)right);
-                    dst = BitUtil.Min((dynamic)left, (dynamic)right);
+                    dst = BitMath.Min((dynamic)left, (dynamic)right);
                     Assert.AreEqual(expected, dst, $"{left} < {right}");
                     //Console.WriteLine($"{left} < {right}: {expected}");
                 }
@@ -175,7 +175,7 @@ namespace Zyl.VectorTraits.Tests {
                     T expected;
                     T dst;
                     expected = Math.Max((dynamic)left, (dynamic)right);
-                    dst = BitUtil.Max((dynamic)left, (dynamic)right);
+                    dst = BitMath.Max((dynamic)left, (dynamic)right);
                     Assert.AreEqual(expected, dst, $"{left} < {right}");
                     //Console.WriteLine($"{left} < {right}: {expected}");
                 }
@@ -211,7 +211,7 @@ namespace Zyl.VectorTraits.Tests {
 #else
                 expected = Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
 #endif
-                T dst = BitUtil.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
+                T dst = BitMath.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
                 Assert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
             }
         }
@@ -239,7 +239,7 @@ namespace Zyl.VectorTraits.Tests {
 #else
                 expected = Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
 #endif
-                T dst = BitUtil.ClampToBitMax((dynamic)value, (dynamic)amax);
+                T dst = BitMath.ClampToBitMax((dynamic)value, (dynamic)amax);
                 Assert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
             }
         }
@@ -267,7 +267,7 @@ namespace Zyl.VectorTraits.Tests {
 #else
                 expected = (byte)Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
 #endif
-                byte dst = BitUtil.ClampToByte((dynamic)value);
+                byte dst = BitMath.ClampToByte((dynamic)value);
                 Assert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
             }
         }
@@ -288,7 +288,7 @@ namespace Zyl.VectorTraits.Tests {
             // run.
             for (int i = 0; i < samples.Length; ++i) {
                 T x = samples[i];
-                T dst = BitUtil.Abs((dynamic)x);
+                T dst = BitMath.Abs((dynamic)x);
                 T expected = default;
                 bool expectedError = false;
                 try {
@@ -331,7 +331,7 @@ namespace Zyl.VectorTraits.Tests {
                 for (int j = 0; j <= i; ++j) {
                     long b = samples[j];
                     long low, high;
-                    high = BitUtil.BigMul_BigNum(a, b, out low);
+                    high = BitMath.BigMul_BigNum(a, b, out low);
                     long expectedLow =low;
                     long expectedHigh = high;
                     if (allowLog) {
@@ -343,19 +343,19 @@ namespace Zyl.VectorTraits.Tests {
                     Assert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
                     Assert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
 #endif // NET5_0_OR_GREATER
-                    // BitUtil.BigMul .
-                    high = BitUtil.BigMul(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("BitUtil.BigMul({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("BitUtil.BigMul({0}, {1}).high", a, b));
+                    // BitMath.BigMul .
+                    high = BitMath.BigMul(a, b, out low);
+                    Assert.AreEqual(expectedLow, low, string.Format("BitMath.BigMul({0}, {1}).low", a, b));
+                    Assert.AreEqual(expectedHigh, high, string.Format("BitMath.BigMul({0}, {1}).high", a, b));
                     // BigMul_Two.
-                    high = BitUtil.BigMul_Two(a, b, out low);
+                    high = BitMath.BigMul_Two(a, b, out low);
                     Assert.AreEqual(expectedLow, low, string.Format("BigMul_Two({0}, {1}).low", a, b));
                     Assert.AreEqual(expectedHigh, high, string.Format("BigMul_Two({0}, {1}).high", a, b));
                     // BigMulHigh.
-                    high = BitUtil.BigMulHigh(a, b);
+                    high = BitMath.BigMulHigh(a, b);
                     Assert.AreEqual(expectedHigh, high, string.Format("BigMulHigh({0}, {1}).high", a, b));
                     // BigMulLow.
-                    low = BitUtil.BigMulLow(a, b);
+                    low = BitMath.BigMulLow(a, b);
                     Assert.AreEqual(expectedLow, low, string.Format("BigMulLow({0}, {1}).low", a, b));
                 }
             }
@@ -385,7 +385,7 @@ namespace Zyl.VectorTraits.Tests {
                 for (int j = 0; j <= i; ++j) {
                     ulong b = samples[j];
                     ulong low, high;
-                    high = BitUtil.BigMul_BigNum(a, b, out low);
+                    high = BitMath.BigMul_BigNum(a, b, out low);
                     ulong expectedLow =low;
                     ulong expectedHigh = high;
                     if (allowLog) {
@@ -397,19 +397,19 @@ namespace Zyl.VectorTraits.Tests {
                     Assert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
                     Assert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
 #endif // NET5_0_OR_GREATER
-                    // BitUtil.BigMul .
-                    high = BitUtil.BigMul(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("BitUtil.BigMul({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("BitUtil.BigMul({0}, {1}).high", a, b));
+                    // BitMath.BigMul .
+                    high = BitMath.BigMul(a, b, out low);
+                    Assert.AreEqual(expectedLow, low, string.Format("BitMath.BigMul({0}, {1}).low", a, b));
+                    Assert.AreEqual(expectedHigh, high, string.Format("BitMath.BigMul({0}, {1}).high", a, b));
                     // BigMul_Two.
-                    high = BitUtil.BigMul_Two(a, b, out low);
+                    high = BitMath.BigMul_Two(a, b, out low);
                     Assert.AreEqual(expectedLow, low, string.Format("BigMul_Two({0}, {1}).low", a, b));
                     Assert.AreEqual(expectedHigh, high, string.Format("BigMul_Two({0}, {1}).high", a, b));
                     // BigMulHigh.
-                    high = BitUtil.BigMulHigh(a, b);
+                    high = BitMath.BigMulHigh(a, b);
                     Assert.AreEqual(expectedHigh, high, string.Format("BigMulHigh({0}, {1}).high", a, b));
                     // BigMulLow.
-                    low = BitUtil.BigMulLow(a, b);
+                    low = BitMath.BigMulLow(a, b);
                     Assert.AreEqual(expectedLow, low, string.Format("BigMulLow({0}, {1}).low", a, b));
                 }
             }

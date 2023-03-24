@@ -3,7 +3,7 @@
 using BenchmarkDotNet.Attributes;
 using System;
 
-namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
+namespace Zyl.VectorTraits.Benchmarks.ABitMath {
 #if BENCHMARKS_OFF
     using BenchmarkAttribute = FakeBenchmarkAttribute;
 #else
@@ -34,7 +34,7 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
             TMy rtLow = 0;
             TMy high, low;
             for (int i = 0; i < srcCount; i += 2) {
-                high = BitUtil.BigMul_BigNum(src[i], src[i + 1], out low);
+                high = BitMath.BigMul_BigNum(src[i], src[i + 1], out low);
                 rt += high;
                 rtLow += low;
             }
@@ -81,17 +81,17 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
 #endif // NET5_0_OR_GREATER
 
         /// <summary>
-        /// Sum BigMul - BitUtil.
+        /// Sum BigMul - BitMath.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMy StaticSumBigMul_BitUtil(TMy[] src, int srcCount) {
+        public static TMy StaticSumBigMul_BitMath(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             TMy rtLow = 0;
             TMy high, low;
             for (int i = 0; i < srcCount; i += 2) {
-                high = BitUtil.BigMul(src[i], src[i + 1], out low);
+                high = BitMath.BigMul(src[i], src[i + 1], out low);
                 rt += high;
                 rtLow += low;
             }
@@ -100,9 +100,9 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
         }
 
         [Benchmark]
-        public void SumBigMul_BitUtil() {
-            dstTMy = StaticSumBigMul_BitUtil(srcArray, srcArray.Length);
-            CheckResult("SumBigMul_BitUtil");
+        public void SumBigMul_BitMath() {
+            dstTMy = StaticSumBigMul_BitMath(srcArray, srcArray.Length);
+            CheckResult("SumBigMul_BitMath");
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
             TMy rtLow = 0;
             TMy high, low;
             for (int i = 0; i < srcCount; i += 2) {
-                high = BitUtil.BigMul_Two(src[i], src[i + 1], out low);
+                high = BitMath.BigMul_Two(src[i], src[i + 1], out low);
                 rt += high;
                 rtLow += low;
             }
@@ -141,8 +141,8 @@ namespace Zyl.VectorTraits.Benchmarks.ABitUtil {
             TMy rtLow = 0;
             TMy high, low;
             for (int i = 0; i < srcCount; i += 2) {
-                high = BitUtil.BigMulHigh(src[i], src[i + 1]);
-                low = BitUtil.BigMulLow(src[i], src[i + 1]);
+                high = BitMath.BigMulHigh(src[i], src[i + 1]);
+                low = BitMath.BigMulLow(src[i], src[i + 1]);
                 rt += high;
                 rtLow += low;
             }

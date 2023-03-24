@@ -2014,7 +2014,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="amax">The upper bound of the value (值的上限).</param>
         /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
         /// <seealso cref="YClamp_AcceleratedTypes"/>
-        /// <seealso cref="BitUtil.Clamp(float, float, float)"/>
+        /// <seealso cref="BitMath.Clamp(float, float, float)"/>
         Vector128<float> YClamp(Vector128<float> value, Vector128<float> amin, Vector128<float> amax);
 
         /// <summary>
@@ -2026,7 +2026,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="amax">The upper bound of the value (值的上限).</param>
         /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
         /// <seealso cref="YClamp_AcceleratedTypes"/>
-        /// <seealso cref="BitUtil.Clamp(double, double, double)"/>
+        /// <seealso cref="BitMath.Clamp(double, double, double)"/>
         Vector128<double> YClamp(Vector128<double> value, Vector128<double> amin, Vector128<double> amax);
 
         /// <summary>
@@ -2038,7 +2038,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="amax">The upper bound of the value (值的上限).</param>
         /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
         /// <seealso cref="YClamp_AcceleratedTypes"/>
-        /// <seealso cref="BitUtil.Clamp(sbyte, sbyte, sbyte)"/>
+        /// <seealso cref="BitMath.Clamp(sbyte, sbyte, sbyte)"/>
         Vector128<sbyte> YClamp(Vector128<sbyte> value, Vector128<sbyte> amin, Vector128<sbyte> amax);
 
         /// <summary>
@@ -2050,7 +2050,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="amax">The upper bound of the value (值的上限).</param>
         /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
         /// <seealso cref="YClamp_AcceleratedTypes"/>
-        /// <seealso cref="BitUtil.Clamp(byte, byte, byte)"/>
+        /// <seealso cref="BitMath.Clamp(byte, byte, byte)"/>
         Vector128<byte> YClamp(Vector128<byte> value, Vector128<byte> amin, Vector128<byte> amax);
 
         /// <summary>
@@ -2062,7 +2062,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="amax">The upper bound of the value (值的上限).</param>
         /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
         /// <seealso cref="YClamp_AcceleratedTypes"/>
-        /// <seealso cref="BitUtil.Clamp(short, short, short)"/>
+        /// <seealso cref="BitMath.Clamp(short, short, short)"/>
         Vector128<short> YClamp(Vector128<short> value, Vector128<short> amin, Vector128<short> amax);
 
         /// <summary>
@@ -2074,7 +2074,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="amax">The upper bound of the value (值的上限).</param>
         /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
         /// <seealso cref="YClamp_AcceleratedTypes"/>
-        /// <seealso cref="BitUtil.Clamp(ushort, ushort, ushort)"/>
+        /// <seealso cref="BitMath.Clamp(ushort, ushort, ushort)"/>
         Vector128<ushort> YClamp(Vector128<ushort> value, Vector128<ushort> amin, Vector128<ushort> amax);
 
         /// <summary>
@@ -2086,7 +2086,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="amax">The upper bound of the value (值的上限).</param>
         /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
         /// <seealso cref="YClamp_AcceleratedTypes"/>
-        /// <seealso cref="BitUtil.Clamp(int, int, int)"/>
+        /// <seealso cref="BitMath.Clamp(int, int, int)"/>
         Vector128<int> YClamp(Vector128<int> value, Vector128<int> amin, Vector128<int> amax);
 
         /// <summary>
@@ -2098,7 +2098,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="amax">The upper bound of the value (值的上限).</param>
         /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
         /// <seealso cref="YClamp_AcceleratedTypes"/>
-        /// <seealso cref="BitUtil.Clamp(uint, uint, uint)"/>
+        /// <seealso cref="BitMath.Clamp(uint, uint, uint)"/>
         Vector128<uint> YClamp(Vector128<uint> value, Vector128<uint> amin, Vector128<uint> amax);
 
         /// <summary>
@@ -2110,7 +2110,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="amax">The upper bound of the value (值的上限).</param>
         /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
         /// <seealso cref="YClamp_AcceleratedTypes"/>
-        /// <seealso cref="BitUtil.Clamp(long, long, long)"/>
+        /// <seealso cref="BitMath.Clamp(long, long, long)"/>
         Vector128<long> YClamp(Vector128<long> value, Vector128<long> amin, Vector128<long> amax);
 
         /// <summary>
@@ -2122,7 +2122,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="amax">The upper bound of the value (值的上限).</param>
         /// <returns>A vector whose elements are the clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (一个向量，其元素是 限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的).</returns>
         /// <seealso cref="YClamp_AcceleratedTypes"/>
-        /// <seealso cref="BitUtil.Clamp(ulong, ulong, ulong)"/>
+        /// <seealso cref="BitMath.Clamp(ulong, ulong, ulong)"/>
         Vector128<ulong> YClamp(Vector128<ulong> value, Vector128<ulong> amin, Vector128<ulong> amax);
 
 

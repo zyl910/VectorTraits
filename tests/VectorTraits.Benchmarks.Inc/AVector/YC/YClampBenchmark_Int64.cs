@@ -112,7 +112,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
 #endif // NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
 
         /// <summary>
-        /// Sum Clamp - BitUtil.
+        /// Sum Clamp - BitMath.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -120,19 +120,19 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
         /// <param name="amax">The upper bound of the result (结果的上限).</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TMy StaticSumClamp_BitUtil(TMy[] src, int srcCount, TMy amin, TMy amax) {
+        public static TMy StaticSumClamp_BitMath(TMy[] src, int srcCount, TMy amin, TMy amax) {
             TMy rt = 0; // Result.
             for (int i = 0; i < srcCount; ++i) {
                 TMy t = src[i];
-                rt += BitUtil.Clamp(t, amin, amax);
+                rt += BitMath.Clamp(t, amin, amax);
             }
             return rt;
         }
 
         [Benchmark]
-        public void SumClamp_BitUtil() {
-            dstTMy = StaticSumClamp_BitUtil(srcArray, srcArray.Length, valueMin, valueMax);
-            CheckResult("SumClamp_BitUtil");
+        public void SumClamp_BitMath() {
+            dstTMy = StaticSumClamp_BitMath(srcArray, srcArray.Length, valueMin, valueMax);
+            CheckResult("SumClamp_BitMath");
         }
 
         #region BENCHMARKS_RAW
@@ -194,7 +194,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
                 }
                 // Remainder processs.
                 for (i = 0; i < cntRem; ++i) {
-                    rt += BitUtil.Clamp(p[i], amin, amax);
+                    rt += BitMath.Clamp(p[i], amin, amax);
                 }
             }
             // Reduce.
@@ -243,7 +243,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
                 }
                 // Remainder processs.
                 for (i = 0; i < cntRem; ++i) {
-                    rt += BitUtil.Clamp(p[i], amin, amax);
+                    rt += BitMath.Clamp(p[i], amin, amax);
                 }
             }
             // Reduce.
@@ -299,7 +299,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
                 }
                 // Remainder processs.
                 for (i = 0; i < cntRem; ++i) {
-                    rt += BitUtil.Clamp(p[i], amin, amax);
+                    rt += BitMath.Clamp(p[i], amin, amax);
                 }
             }
             // Reduce.
@@ -346,7 +346,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
                 }
                 // Remainder processs.
                 for (i = 0; i < cntRem; ++i) {
-                    rt += BitUtil.Clamp(p[i], amin, amax);
+                    rt += BitMath.Clamp(p[i], amin, amax);
                 }
             }
             // Reduce.
@@ -397,7 +397,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
                 }
                 // Remainder processs.
                 for (i = 0; i < cntRem; ++i) {
-                    rt += BitUtil.Clamp(p[i], amin, amax);
+                    rt += BitMath.Clamp(p[i], amin, amax);
                 }
             }
             // Reduce.
@@ -450,7 +450,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
                 }
                 // Remainder processs.
                 for (i = 0; i < cntRem; ++i) {
-                    rt += BitUtil.Clamp(p[i], amin, amax);
+                    rt += BitMath.Clamp(p[i], amin, amax);
                 }
             }
             // Reduce.

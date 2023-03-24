@@ -310,12 +310,12 @@ namespace Zyl.VectorTraits {
             if (noFixEndian) { } // Ignore warning disable 0168
             string format = "X";
             if (src is float srcSingle) {
-                rt = BitUtil.SingleToInt32Bits(srcSingle).ToString(format, null);
+                rt = BitMath.SingleToInt32Bits(srcSingle).ToString(format, null);
             } else if (src is double srcDouble) {
-                rt = BitUtil.DoubleToInt64Bits(srcDouble).ToString(format, null);
+                rt = BitMath.DoubleToInt64Bits(srcDouble).ToString(format, null);
 #if NET5_0_OR_GREATER
             } else if (src is Half srcHalf) {
-                rt = BitUtil.HalfToInt16Bits(srcHalf).ToString(format, null);
+                rt = BitMath.HalfToInt16Bits(srcHalf).ToString(format, null);
 #endif // NET5_0_OR_GREATER
             } else if (src is IFormattable formattable) {
                 rt = formattable.ToString(format, null);

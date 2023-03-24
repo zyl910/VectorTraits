@@ -57,13 +57,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
         }
 
         /// <summary>
-        /// Narrow - BitUtil .
+        /// Narrow - BitMath .
         /// </summary>
         /// <param name="t">Source value.</param>
         /// <returns>Returns narrowed.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static TMyOut Narrow_BitUtil(TMy t) {
-            TMy rt = BitUtil.Clamp(t, amin, amax);
+        public static TMyOut Narrow_BitMath(TMy t) {
+            TMy rt = BitMath.Clamp(t, amin, amax);
             return (TMyOut)rt;
         }
 
@@ -111,23 +111,23 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
         }
 
         /// <summary>
-        /// Sum Narrow - BitUtil.
+        /// Sum Narrow - BitMath.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSumNarrow_BitUtil(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumNarrow_BitMath(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             for (int i = 0; i < srcCount; ++i) {
-                rt += Narrow_BitUtil(src[i]);
+                rt += Narrow_BitMath(src[i]);
             }
             return rt;
         }
 
         [Benchmark]
-        public void SumNarrow_BitUtil() {
-            dstTMy = StaticSumNarrow_BitUtil(srcArray, srcArray.Length);
-            CheckResult("SumNarrow_BitUtil");
+        public void SumNarrow_BitMath() {
+            dstTMy = StaticSumNarrow_BitMath(srcArray, srcArray.Length);
+            CheckResult("SumNarrow_BitMath");
         }
 
         #region BENCHMARKS_RAW
@@ -158,7 +158,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += Narrow_BitUtil(Unsafe.Add(ref p, i));
+                rt += Narrow_BitMath(Unsafe.Add(ref p, i));
             }
             // Reduce.
             for (i = 0; i < Vector<TMyOut>.Count; ++i) {
@@ -202,7 +202,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += Narrow_BitUtil(Unsafe.Add(ref p, i));
+                rt += Narrow_BitMath(Unsafe.Add(ref p, i));
             }
             // Reduce.
             for (i = 0; i < Vector<TMyOut>.Count; ++i) {
@@ -258,7 +258,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += Narrow_BitUtil(Unsafe.Add(ref p, i));
+                rt += Narrow_BitMath(Unsafe.Add(ref p, i));
             }
             // Reduce.
             for (i = 0; i < Vector128<TMyOut>.Count; ++i) {
@@ -305,7 +305,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += Narrow_BitUtil(Unsafe.Add(ref p, i));
+                rt += Narrow_BitMath(Unsafe.Add(ref p, i));
             }
             // Reduce.
             for (i = 0; i < Vector256<TMyOut>.Count; ++i) {

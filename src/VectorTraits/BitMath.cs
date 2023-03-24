@@ -8,12 +8,12 @@ using System.Text;
 
 namespace Zyl.VectorTraits {
     /// <summary>
-    /// Bit manipulation util (位操控工具).
+    /// Provides constants and static methods for binary operations, and other common mathematical functions (为二进制运算和其他通用数学函数提供常数和静态方法).
     /// </summary>
     /// <seealso cref="BitConverter"/>
     /// <seealso cref="BitOperations"/>
     /// <seealso cref="Math"/>
-    public static partial class BitUtil {
+    public static partial class BitMath {
 
         // == My ==
 
