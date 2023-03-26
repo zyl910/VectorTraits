@@ -816,11 +816,11 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static long Sum(Vector256<long> value) {
                 // 0 1 2 3
-                Vector256<long> m = Avx2.Permute4x64(value, ShuffleControlG4.ZWXY);
+                Vector256<long> m = Avx2.Permute4x64(value, ShuffleControlG4.WZYX);
                 Vector256<long> n = Avx2.Add(value, m);
-                // 02 13 02 13
-                m = Avx2.Permute4x64(n, ShuffleControlG4.YZWX);
-                n = Avx2.Add(value, m);
+                // 03 12 12 03
+                m = Avx2.Permute4x64(n, ShuffleControlG4.YXWZ);
+                n = Avx2.Add(n, m);
                 // 0123 0123 0123 0123
                 return n.GetElement(0);
             }
