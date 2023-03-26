@@ -670,6 +670,103 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Sum_AcceleratedTypes"/>
+            public static TypeCodeFlags Sum_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlagsUtil.IntTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static float Sum(Vector128<float> value) {
+                Vector64<float> m = AdvSimd.Add(value.GetLower(), value.GetUpper()); // 4 -> 2
+                m = AdvSimd.AddPairwise(m, m); // 2 -> 1
+                return AdvSimd.Extract(m, 0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static double Sum(Vector128<double> value) {
+                return SuperStatics.Sum(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static sbyte Sum(Vector128<sbyte> value) {
+                Vector64<sbyte> m = AdvSimd.Add(value.GetLower(), value.GetUpper()); // 16 -> 8
+                m = AdvSimd.AddPairwise(m, m); // 8 -> 4
+                m = AdvSimd.AddPairwise(m, m); // 4 -> 2
+                m = AdvSimd.AddPairwise(m, m); // 2 -> 1
+                return AdvSimd.Extract(m, 0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static byte Sum(Vector128<byte> value) {
+                Vector64<byte> m = AdvSimd.Add(value.GetLower(), value.GetUpper()); // 16 -> 8
+                m = AdvSimd.AddPairwise(m, m); // 8 -> 4
+                m = AdvSimd.AddPairwise(m, m); // 4 -> 2
+                m = AdvSimd.AddPairwise(m, m); // 2 -> 1
+                return AdvSimd.Extract(m, 0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static short Sum(Vector128<short> value) {
+                Vector64<short> m = AdvSimd.Add(value.GetLower(), value.GetUpper()); // 8 -> 4
+                m = AdvSimd.AddPairwise(m, m); // 4 -> 2
+                m = AdvSimd.AddPairwise(m, m); // 2 -> 1
+                return AdvSimd.Extract(m, 0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ushort Sum(Vector128<ushort> value) {
+                Vector64<ushort> m = AdvSimd.Add(value.GetLower(), value.GetUpper()); // 8 -> 4
+                m = AdvSimd.AddPairwise(m, m); // 4 -> 2
+                m = AdvSimd.AddPairwise(m, m); // 2 -> 1
+                return AdvSimd.Extract(m, 0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static int Sum(Vector128<int> value) {
+                Vector64<int> m = AdvSimd.Add(value.GetLower(), value.GetUpper()); // 4 -> 2
+                m = AdvSimd.AddPairwise(m, m); // 2 -> 1
+                return AdvSimd.Extract(m, 0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint Sum(Vector128<uint> value) {
+                Vector64<uint> m = AdvSimd.Add(value.GetLower(), value.GetUpper()); // 4 -> 2
+                m = AdvSimd.AddPairwise(m, m); // 2 -> 1
+                return AdvSimd.Extract(m, 0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static long Sum(Vector128<long> value) {
+                Vector128<long> n = Vector128.Create(value.GetUpper(), value.GetLower());
+                Vector128<long> m = AdvSimd.Add(value, n); // 2->1
+                return AdvSimd.Extract(m, 0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong Sum(Vector128<ulong> value) {
+                Vector128<ulong> n = Vector128.Create(value.GetUpper(), value.GetLower());
+                Vector128<ulong> m = AdvSimd.Add(value, n); // 2->1
+                return AdvSimd.Extract(m, 0);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Widen_AcceleratedTypes"/>
             public static TypeCodeFlags Widen_AcceleratedTypes {
                 get {

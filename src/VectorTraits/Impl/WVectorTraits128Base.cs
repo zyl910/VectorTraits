@@ -1504,6 +1504,274 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Sum_AcceleratedTypes"/>
+            public static TypeCodeFlags Sum_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static float Sum(Vector128<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static double Sum(Vector128<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static sbyte Sum(Vector128<sbyte> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static byte Sum(Vector128<byte> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static short Sum(Vector128<short> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ushort Sum(Vector128<ushort> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static int Sum(Vector128<int> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint Sum(Vector128<uint> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static long Sum(Vector128<long> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong Sum(Vector128<ulong> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static float Sum_Base(Vector128<float> value) {
+                ref float p = ref Unsafe.As<Vector128<float>, float>(ref value);
+                float rt = p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                ;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static double Sum_Base(Vector128<double> value) {
+                ref double p = ref Unsafe.As<Vector128<double>, double>(ref value);
+                double rt = p
+                    + Unsafe.Add(ref p, 1)
+                ;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static sbyte Sum_Base(Vector128<sbyte> value) {
+                ref sbyte p = ref Unsafe.As<Vector128<sbyte>, sbyte>(ref value);
+                sbyte rt = (sbyte)(p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                    + Unsafe.Add(ref p, 4)
+                    + Unsafe.Add(ref p, 5)
+                    + Unsafe.Add(ref p, 6)
+                    + Unsafe.Add(ref p, 7)
+                    + Unsafe.Add(ref p, 8)
+                    + Unsafe.Add(ref p, 9)
+                    + Unsafe.Add(ref p, 10)
+                    + Unsafe.Add(ref p, 11)
+                    + Unsafe.Add(ref p, 12)
+                    + Unsafe.Add(ref p, 13)
+                    + Unsafe.Add(ref p, 14)
+                    + Unsafe.Add(ref p, 15)
+                );
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static byte Sum_Base(Vector128<byte> value) {
+                ref byte p = ref Unsafe.As<Vector128<byte>, byte>(ref value);
+                byte rt = (byte)(p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                    + Unsafe.Add(ref p, 4)
+                    + Unsafe.Add(ref p, 5)
+                    + Unsafe.Add(ref p, 6)
+                    + Unsafe.Add(ref p, 7)
+                    + Unsafe.Add(ref p, 8)
+                    + Unsafe.Add(ref p, 9)
+                    + Unsafe.Add(ref p, 10)
+                    + Unsafe.Add(ref p, 11)
+                    + Unsafe.Add(ref p, 12)
+                    + Unsafe.Add(ref p, 13)
+                    + Unsafe.Add(ref p, 14)
+                    + Unsafe.Add(ref p, 15)
+                );
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static short Sum_Base(Vector128<short> value) {
+                ref short p = ref Unsafe.As<Vector128<short>, short>(ref value);
+                short rt = (short)(p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                    + Unsafe.Add(ref p, 4)
+                    + Unsafe.Add(ref p, 5)
+                    + Unsafe.Add(ref p, 6)
+                    + Unsafe.Add(ref p, 7)
+                );
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ushort Sum_Base(Vector128<ushort> value) {
+                ref ushort p = ref Unsafe.As<Vector128<ushort>, ushort>(ref value);
+                ushort rt = (ushort)(p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                    + Unsafe.Add(ref p, 4)
+                    + Unsafe.Add(ref p, 5)
+                    + Unsafe.Add(ref p, 6)
+                    + Unsafe.Add(ref p, 7)
+                );
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static int Sum_Base(Vector128<int> value) {
+                ref int p = ref Unsafe.As<Vector128<int>, int>(ref value);
+                int rt = p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                ;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint Sum_Base(Vector128<uint> value) {
+                ref uint p = ref Unsafe.As<Vector128<uint>, uint>(ref value);
+                uint rt = p
+                    + Unsafe.Add(ref p, 1)
+                    + Unsafe.Add(ref p, 2)
+                    + Unsafe.Add(ref p, 3)
+                ;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static long Sum_Base(Vector128<long> value) {
+                ref long p = ref Unsafe.As<Vector128<long>, long>(ref value);
+                long rt = p
+                    + Unsafe.Add(ref p, 1)
+                ;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong Sum_Base(Vector128<ulong> value) {
+                ref ulong p = ref Unsafe.As<Vector128<ulong>, ulong>(ref value);
+                ulong rt = p
+                    + Unsafe.Add(ref p, 1)
+                ;
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Widen_AcceleratedTypes"/>
             public static TypeCodeFlags Widen_AcceleratedTypes {
                 get {

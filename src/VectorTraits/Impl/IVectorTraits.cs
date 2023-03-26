@@ -1003,10 +1003,6 @@ namespace Zyl.VectorTraits.Impl {
 
         #endregion // .NET_style
 
-        // == X86 style  ==
-        #region X86_style
-        #endregion // X86_style
-
         // == mY style  ==
         #region mY_style
 

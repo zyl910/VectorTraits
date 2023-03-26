@@ -1889,6 +1889,113 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Sum</c> (运行 <c>Sum</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Sum"/>
+        TypeCodeFlags Sum_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sum{T}(Vector128{T})" />
+        float Sum(Vector128<float> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sum{T}(Vector128{T})" />
+        double Sum(Vector128<double> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sum{T}(Vector128{T})" />
+        sbyte Sum(Vector128<sbyte> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sum{T}(Vector128{T})" />
+        byte Sum(Vector128<byte> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sum{T}(Vector128{T})" />
+        short Sum(Vector128<short> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sum{T}(Vector128{T})" />
+        ushort Sum(Vector128<ushort> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sum{T}(Vector128{T})" />
+        int Sum(Vector128<int> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sum{T}(Vector128{T})" />
+        uint Sum(Vector128<uint> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sum{T}(Vector128{T})" />
+        long Sum(Vector128<long> value);
+
+        /// <summary>
+        /// Computes the sum of all elements in a vector (计算向量中所有元素的总和).
+        /// Mnemonic: <c>rt := value[0] + value[1] + value[2] + ... + value[Count-1]</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements will be summed (将对其元素求和的向量).</param>
+        /// <returns>The sum of all elements in <paramref name="value" /> (<paramref name="value" /> 中所有元素的总和).</returns>
+        /// <seealso cref="Sum_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sum{T}(Vector128{T})" />
+        ulong Sum(Vector128<ulong> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Widen</c> (运行 <c>Widen</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Widen"/>
@@ -1991,10 +2098,6 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<T> Xor<T>(Vector128<T> left, Vector128<T> right) where T : struct;
 
         #endregion // .NET_style
-
-        // == X86 style  ==
-        #region X86_style
-        #endregion // X86_style
 
         // == mY style  ==
         #region mY_style
