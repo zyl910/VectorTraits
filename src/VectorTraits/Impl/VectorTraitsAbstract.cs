@@ -632,6 +632,78 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.Sum_AcceleratedTypes"/>
+        public virtual TypeCodeFlags Sum_AcceleratedTypes {
+            get {
+                return Statics.Sum_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual float Sum(Vector<float> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual double Sum(Vector<double> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual sbyte Sum(Vector<sbyte> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual byte Sum(Vector<byte> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual short Sum(Vector<short> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual ushort Sum(Vector<ushort> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual int Sum(Vector<int> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual uint Sum(Vector<uint> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual long Sum(Vector<long> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual ulong Sum(Vector<ulong> value) {
+            return Statics.Sum(value);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.Widen_AcceleratedTypes"/>
         public virtual TypeCodeFlags Widen_AcceleratedTypes {
             get {

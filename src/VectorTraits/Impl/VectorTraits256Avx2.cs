@@ -611,6 +611,78 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits.Sum_AcceleratedTypes"/>
+            public static TypeCodeFlags Sum_AcceleratedTypes {
+                get {
+                    return WStatics.Sum_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits.Sum(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static float Sum(Vector<float> value) {
+                return WStatics.Sum(value.AsVector256());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits.Sum(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static double Sum(Vector<double> value) {
+                return WStatics.Sum(value.AsVector256());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits.Sum(Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static sbyte Sum(Vector<sbyte> value) {
+                return WStatics.Sum(value.AsVector256());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits.Sum(Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static byte Sum(Vector<byte> value) {
+                return WStatics.Sum(value.AsVector256());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits.Sum(Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static short Sum(Vector<short> value) {
+                return WStatics.Sum(value.AsVector256());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits.Sum(Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ushort Sum(Vector<ushort> value) {
+                return WStatics.Sum(value.AsVector256());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits.Sum(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static int Sum(Vector<int> value) {
+                return WStatics.Sum(value.AsVector256());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits.Sum(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint Sum(Vector<uint> value) {
+                return WStatics.Sum(value.AsVector256());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits.Sum(Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static long Sum(Vector<long> value) {
+                return WStatics.Sum(value.AsVector256());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits.Sum(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong Sum(Vector<ulong> value) {
+                return WStatics.Sum(value.AsVector256());
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.Widen_AcceleratedTypes"/>
             public static TypeCodeFlags Widen_AcceleratedTypes {
                 get {

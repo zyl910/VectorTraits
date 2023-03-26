@@ -1673,6 +1673,238 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.Sum_AcceleratedTypes"/>
+            public static TypeCodeFlags Sum_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_VAR && NET6_0_OR_GREATER
+                    if (Vector.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    }
+#endif // BCL_OVERRIDE_BASE_VAR && NET6_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static float Sum(Vector<float> value) {
+#if BCL_OVERRIDE_BASE_VAR && NET6_0_OR_GREATER
+                return Vector.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static double Sum(Vector<double> value) {
+#if BCL_OVERRIDE_BASE_VAR && NET6_0_OR_GREATER
+                return Vector.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static sbyte Sum(Vector<sbyte> value) {
+#if BCL_OVERRIDE_BASE_VAR && NET6_0_OR_GREATER
+                return Vector.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static byte Sum(Vector<byte> value) {
+#if BCL_OVERRIDE_BASE_VAR && NET6_0_OR_GREATER
+                return Vector.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static short Sum(Vector<short> value) {
+#if BCL_OVERRIDE_BASE_VAR && NET6_0_OR_GREATER
+                return Vector.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ushort Sum(Vector<ushort> value) {
+#if BCL_OVERRIDE_BASE_VAR && NET6_0_OR_GREATER
+                return Vector.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static int Sum(Vector<int> value) {
+#if BCL_OVERRIDE_BASE_VAR && NET6_0_OR_GREATER
+                return Vector.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint Sum(Vector<uint> value) {
+#if BCL_OVERRIDE_BASE_VAR && NET6_0_OR_GREATER
+                return Vector.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static long Sum(Vector<long> value) {
+#if BCL_OVERRIDE_BASE_VAR && NET6_0_OR_GREATER
+                return Vector.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong Sum(Vector<ulong> value) {
+#if BCL_OVERRIDE_BASE_VAR && NET6_0_OR_GREATER
+                return Vector.Sum(value);
+#else
+                return Sum_Base(value);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static float Sum_Base(Vector<float> value) {
+                ref float p = ref Unsafe.As<Vector<float>, float>(ref value);
+                float rt = p;
+                for (nint i = 1; i < Vector<float>.Count; ++i) {
+                    rt += Unsafe.Add(ref p, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static double Sum_Base(Vector<double> value) {
+                ref double p = ref Unsafe.As<Vector<double>, double>(ref value);
+                double rt = p;
+                for (nint i = 1; i < Vector<double>.Count; ++i) {
+                    rt += Unsafe.Add(ref p, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static sbyte Sum_Base(Vector<sbyte> value) {
+                ref sbyte p = ref Unsafe.As<Vector<sbyte>, sbyte>(ref value);
+                sbyte rt = p;
+                for (nint i = 1; i < Vector<sbyte>.Count; ++i) {
+                    rt += Unsafe.Add(ref p, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static byte Sum_Base(Vector<byte> value) {
+                ref byte p = ref Unsafe.As<Vector<byte>, byte>(ref value);
+                byte rt = p;
+                for (nint i = 1; i < Vector<byte>.Count; ++i) {
+                    rt += Unsafe.Add(ref p, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static short Sum_Base(Vector<short> value) {
+                ref short p = ref Unsafe.As<Vector<short>, short>(ref value);
+                short rt = p;
+                for (nint i = 1; i < Vector<short>.Count; ++i) {
+                    rt += Unsafe.Add(ref p, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ushort Sum_Base(Vector<ushort> value) {
+                ref ushort p = ref Unsafe.As<Vector<ushort>, ushort>(ref value);
+                ushort rt = p;
+                for (nint i = 1; i < Vector<ushort>.Count; ++i) {
+                    rt += Unsafe.Add(ref p, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static int Sum_Base(Vector<int> value) {
+                ref int p = ref Unsafe.As<Vector<int>, int>(ref value);
+                int rt = p;
+                for (nint i = 1; i < Vector<int>.Count; ++i) {
+                    rt += Unsafe.Add(ref p, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint Sum_Base(Vector<uint> value) {
+                ref uint p = ref Unsafe.As<Vector<uint>, uint>(ref value);
+                uint rt = p;
+                for (nint i = 1; i < Vector<uint>.Count; ++i) {
+                    rt += Unsafe.Add(ref p, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static long Sum_Base(Vector<long> value) {
+                ref long p = ref Unsafe.As<Vector<long>, long>(ref value);
+                long rt = p;
+                for (nint i = 1; i < Vector<long>.Count; ++i) {
+                    rt += Unsafe.Add(ref p, i);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sum(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong Sum_Base(Vector<ulong> value) {
+                ref ulong p = ref Unsafe.As<Vector<ulong>, ulong>(ref value);
+                ulong rt = p;
+                for (nint i = 1; i < Vector<ulong>.Count; ++i) {
+                    rt += Unsafe.Add(ref p, i);
+                }
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.Widen_AcceleratedTypes"/>
             public static TypeCodeFlags Widen_AcceleratedTypes {
                 get {

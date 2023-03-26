@@ -1032,6 +1032,122 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.Sum_AcceleratedTypes"/>
+        public static TypeCodeFlags Sum_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Sum_AcceleratedTypes;
+#else
+                return _instance.Sum_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Sum(Vector<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sum(value);
+#else
+            return _instance.Sum(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Sum(Vector<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sum(value);
+#else
+            return _instance.Sum(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static sbyte Sum(Vector<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sum(value);
+#else
+            return _instance.Sum(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte Sum(Vector<byte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sum(value);
+#else
+            return _instance.Sum(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static short Sum(Vector<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sum(value);
+#else
+            return _instance.Sum(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ushort Sum(Vector<ushort> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sum(value);
+#else
+            return _instance.Sum(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sum(Vector<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sum(value);
+#else
+            return _instance.Sum(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint Sum(Vector<uint> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sum(value);
+#else
+            return _instance.Sum(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long Sum(Vector<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sum(value);
+#else
+            return _instance.Sum(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ulong Sum(Vector<ulong> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sum(value);
+#else
+            return _instance.Sum(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.Widen_AcceleratedTypes"/>
         public static TypeCodeFlags Widen_AcceleratedTypes {
             get {
