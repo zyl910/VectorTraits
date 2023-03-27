@@ -772,7 +772,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.Sum_AcceleratedTypes"/>
             public static TypeCodeFlags Sum_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlagsUtil.IntTypes;
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
                     return rt;
                 }
             }
@@ -788,7 +788,8 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static double Sum(Vector128<double> value) {
-                return SuperStatics.Sum(value);
+                double rt = AdvSimd.Extract(value, 0) + AdvSimd.Extract(value, 1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{sbyte})"/>
@@ -851,18 +852,16 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static long Sum(Vector128<long> value) {
-                Vector128<long> n = Vector128.Create(value.GetUpper(), value.GetLower());
-                Vector128<long> m = AdvSimd.Add(value, n); // 2->1
-                return AdvSimd.Extract(m, 0);
+                long rt = AdvSimd.Extract(value, 0) + AdvSimd.Extract(value, 1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static ulong Sum(Vector128<ulong> value) {
-                Vector128<ulong> n = Vector128.Create(value.GetUpper(), value.GetLower());
-                Vector128<ulong> m = AdvSimd.Add(value, n); // 2->1
-                return AdvSimd.Extract(m, 0);
+                ulong rt = AdvSimd.Extract(value, 0) + AdvSimd.Extract(value, 1);
+                return rt;
             }
 
 
