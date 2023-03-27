@@ -8,7 +8,7 @@ namespace Zyl.VectorTraits {
     /// <summary>
     /// Methods of scalar (标量的方法).
     /// </summary>
-    public static class Scalars {
+    public static partial class Scalars {
 
         /// <summary>
         /// Converts a <see cref="double"/> to the target type value (将 <see cref="double"/> 转换为目标类型值).
@@ -258,6 +258,7 @@ namespace Zyl.VectorTraits {
             long m = ~GetInt64BitsFrom(src);
             return GetByBits<T>(m);
         }
+
     }
 
     /// <summary>
