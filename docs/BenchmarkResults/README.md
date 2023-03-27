@@ -55,6 +55,9 @@ unzip Release.zip
 
 Run (运行):
 ```
+cd ~/Documents/VectorTraits/tests/netcoreapp3.0
+cd ~/Documents/VectorTraits/tests/net5.0
+cd ~/Documents/VectorTraits/tests/net6.0
 cd ~/Documents/VectorTraits/tests/net7.0
 
 dotnet test VectorTraits.Tests.dll

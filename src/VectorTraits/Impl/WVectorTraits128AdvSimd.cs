@@ -256,7 +256,7 @@ namespace Zyl.VectorTraits.Impl {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint ExtractMostSignificantBits(Vector128<byte> vector) {
-                Vector128<byte> m = AdvSimd.ShiftRightLogical(vector, 15); // Get MostSignificantBit .
+                Vector128<byte> m = AdvSimd.ShiftRightLogical(vector, 7); // Get MostSignificantBit .
                 m = AdvSimd.ShiftLogical(m, Vector128Constants.SerialRotate8.AsSByte());
                 Widen(m, out Vector128<ushort> l, out Vector128<ushort> h);
                 h = AdvSimd.ShiftLeftLogical(h, 8);
