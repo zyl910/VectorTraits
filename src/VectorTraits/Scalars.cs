@@ -252,7 +252,7 @@ namespace Zyl.VectorTraits {
         /// Computes the ones-complement(~) (按位取反运算).
         /// </summary>
         /// <typeparam name="T">Target type (目标类型).</typeparam>
-        /// <param name="src">Source value (原值).</param>
+        /// <param name="src">Source value (源值).</param>
         /// <returns>The ones-complement value (按位取反后的值).</returns>
         public static T OnesComplement<T>(T src) where T:struct {
             long m = ~GetInt64BitsFrom(src);

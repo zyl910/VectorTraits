@@ -371,9 +371,9 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static ulong ExtractMostSignificantBits_Base(Vector<byte> vector) {
                 ref byte p = ref Unsafe.As<Vector<byte>, byte>(ref vector);
-                ulong rt = Scalars.GetMostSignificantBit(p);
+                ulong rt = BitMath.GetMostSignificantBit(p);
                 for (int i = 1; i < Vector<byte>.Count; ++i) {
-                    rt |= ((ulong)Scalars.GetMostSignificantBit(Unsafe.Add(ref p, i))) << i;
+                    rt |= ((ulong)BitMath.GetMostSignificantBit(Unsafe.Add(ref p, i))) << i;
                 }
                 return rt;
             }
@@ -390,9 +390,9 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static ulong ExtractMostSignificantBits_Base(Vector<ushort> vector) {
                 ref ushort p = ref Unsafe.As<Vector<ushort>, ushort>(ref vector);
-                uint rt = Scalars.GetMostSignificantBit(p);
+                uint rt = BitMath.GetMostSignificantBit(p);
                 for (int i = 1; i < Vector<ushort>.Count; ++i) {
-                    rt |= Scalars.GetMostSignificantBit(Unsafe.Add(ref p, i)) << i;
+                    rt |= BitMath.GetMostSignificantBit(Unsafe.Add(ref p, i)) << i;
                 }
                 return rt;
             }
@@ -409,9 +409,9 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static ulong ExtractMostSignificantBits_Base(Vector<uint> vector) {
                 ref uint p = ref Unsafe.As<Vector<uint>, uint>(ref vector);
-                uint rt = Scalars.GetMostSignificantBit(p);
+                uint rt = BitMath.GetMostSignificantBit(p);
                 for (int i = 1; i < Vector<uint>.Count; ++i) {
-                    rt |= Scalars.GetMostSignificantBit(Unsafe.Add(ref p, i)) << i;
+                    rt |= BitMath.GetMostSignificantBit(Unsafe.Add(ref p, i)) << i;
                 }
                 return rt;
             }
@@ -428,9 +428,9 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static ulong ExtractMostSignificantBits_Base(Vector<ulong> vector) {
                 ref ulong p = ref Unsafe.As<Vector<ulong>, ulong>(ref vector);
-                uint rt = Scalars.GetMostSignificantBit(p);
+                uint rt = BitMath.GetMostSignificantBit(p);
                 for (int i = 1; i < Vector<ulong>.Count; ++i) {
-                    rt |= Scalars.GetMostSignificantBit(Unsafe.Add(ref p, i)) << i;
+                    rt |= BitMath.GetMostSignificantBit(Unsafe.Add(ref p, i)) << i;
                 }
                 return rt;
             }

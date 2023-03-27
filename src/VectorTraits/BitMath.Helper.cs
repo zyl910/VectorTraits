@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Zyl.VectorTraits {
-    partial class Scalars {
+    partial class BitMath {
+        // ## Used for Zyl.VectorTraits.Impl ## 
 
         /// <summary>
         /// Get the most significant bit (取得最高有效位).
         /// Mnemonic: <c>rt := src &gt;&gt;&gt; (sizeof(T)*8-1)</c>.
         /// </summary>
-        /// <param name="src">Source value (原值).</param>
+        /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
         public static uint GetMostSignificantBit(float src) {
@@ -20,7 +21,7 @@ namespace Zyl.VectorTraits {
         /// Get the most significant bit (取得最高有效位).
         /// Mnemonic: <c>rt := src &gt;&gt;&gt; (sizeof(T)*8-1)</c>.
         /// </summary>
-        /// <param name="src">Source value (原值).</param>
+        /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
         public static uint GetMostSignificantBit(double src) {
@@ -31,7 +32,7 @@ namespace Zyl.VectorTraits {
         /// Get the most significant bit (取得最高有效位).
         /// Mnemonic: <c>rt := src &gt;&gt;&gt; (sizeof(T)*8-1)</c>.
         /// </summary>
-        /// <param name="src">Source value (原值).</param>
+        /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
         public static uint GetMostSignificantBit(sbyte src) {
@@ -42,7 +43,7 @@ namespace Zyl.VectorTraits {
         /// Get the most significant bit (取得最高有效位).
         /// Mnemonic: <c>rt := src &gt;&gt;&gt; (sizeof(T)*8-1)</c>.
         /// </summary>
-        /// <param name="src">Source value (原值).</param>
+        /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
         public static uint GetMostSignificantBit(byte src) {
@@ -53,7 +54,7 @@ namespace Zyl.VectorTraits {
         /// Get the most significant bit (取得最高有效位).
         /// Mnemonic: <c>rt := src &gt;&gt;&gt; (sizeof(T)*8-1)</c>.
         /// </summary>
-        /// <param name="src">Source value (原值).</param>
+        /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
         public static uint GetMostSignificantBit(short src) {
@@ -64,7 +65,7 @@ namespace Zyl.VectorTraits {
         /// Get the most significant bit (取得最高有效位).
         /// Mnemonic: <c>rt := src &gt;&gt;&gt; (sizeof(T)*8-1)</c>.
         /// </summary>
-        /// <param name="src">Source value (原值).</param>
+        /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
         public static uint GetMostSignificantBit(ushort src) {
@@ -75,7 +76,7 @@ namespace Zyl.VectorTraits {
         /// Get the most significant bit (取得最高有效位).
         /// Mnemonic: <c>rt := src &gt;&gt;&gt; (sizeof(T)*8-1)</c>.
         /// </summary>
-        /// <param name="src">Source value (原值).</param>
+        /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
         public static uint GetMostSignificantBit(int src) {
@@ -86,7 +87,7 @@ namespace Zyl.VectorTraits {
         /// Get the most significant bit (取得最高有效位).
         /// Mnemonic: <c>rt := src &gt;&gt;&gt; (sizeof(T)*8-1)</c>.
         /// </summary>
-        /// <param name="src">Source value (原值).</param>
+        /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
         public static uint GetMostSignificantBit(uint src) {
@@ -97,7 +98,7 @@ namespace Zyl.VectorTraits {
         /// Get the most significant bit (取得最高有效位).
         /// Mnemonic: <c>rt := src &gt;&gt;&gt; (sizeof(T)*8-1)</c>.
         /// </summary>
-        /// <param name="src">Source value (原值).</param>
+        /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
         public static uint GetMostSignificantBit(long src) {
@@ -108,7 +109,7 @@ namespace Zyl.VectorTraits {
         /// Get the most significant bit (取得最高有效位).
         /// Mnemonic: <c>rt := src &gt;&gt;&gt; (sizeof(T)*8-1)</c>.
         /// </summary>
-        /// <param name="src">Source value (原值).</param>
+        /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
         public static uint GetMostSignificantBit(ulong src) {

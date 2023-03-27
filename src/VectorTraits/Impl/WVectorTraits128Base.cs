@@ -527,22 +527,22 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint ExtractMostSignificantBits_Base(Vector128<byte> vector) {
                 ref byte p = ref Unsafe.As<Vector128<byte>, byte>(ref vector);
-                uint rt = Scalars.GetMostSignificantBit(p)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 2)) << 2)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 3)) << 3)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 4)) << 4)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 5)) << 5)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 6)) << 6)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 7)) << 7)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 8)) << 8)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 9)) << 9)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 10)) << 10)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 11)) << 11)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 12)) << 12)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 13)) << 13)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 14)) << 14)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 15)) << 15)
+                uint rt = BitMath.GetMostSignificantBit(p)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 2)) << 2)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 3)) << 3)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 4)) << 4)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 5)) << 5)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 6)) << 6)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 7)) << 7)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 8)) << 8)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 9)) << 9)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 10)) << 10)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 11)) << 11)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 12)) << 12)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 13)) << 13)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 14)) << 14)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 15)) << 15)
                 ;
                 return rt;
             }
@@ -559,14 +559,14 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint ExtractMostSignificantBits_Base(Vector128<ushort> vector) {
                 ref ushort p = ref Unsafe.As<Vector128<ushort>, ushort>(ref vector);
-                uint rt = Scalars.GetMostSignificantBit(p)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 2)) << 2)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 3)) << 3)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 4)) << 4)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 5)) << 5)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 6)) << 6)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 7)) << 7)
+                uint rt = BitMath.GetMostSignificantBit(p)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 2)) << 2)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 3)) << 3)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 4)) << 4)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 5)) << 5)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 6)) << 6)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 7)) << 7)
                 ;
                 return rt;
             }
@@ -583,10 +583,10 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint ExtractMostSignificantBits_Base(Vector128<uint> vector) {
                 ref uint p = ref Unsafe.As<Vector128<uint>, uint>(ref vector);
-                uint rt = Scalars.GetMostSignificantBit(p)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 2)) << 2)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 3)) << 3)
+                uint rt = BitMath.GetMostSignificantBit(p)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 2)) << 2)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 3)) << 3)
                 ;
                 return rt;
             }
@@ -603,8 +603,8 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint ExtractMostSignificantBits_Base(Vector128<ulong> vector) {
                 ref ulong p = ref Unsafe.As<Vector128<ulong>, ulong>(ref vector);
-                uint rt = Scalars.GetMostSignificantBit(p)
-                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
+                uint rt = BitMath.GetMostSignificantBit(p)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
                 ;
                 return rt;
             }
