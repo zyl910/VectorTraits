@@ -638,6 +638,128 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits_AcceleratedTypes"/>
+        public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.ExtractMostSignificantBits_AcceleratedTypes;
+#else
+                return _instance.ExtractMostSignificantBits_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint ExtractMostSignificantBits(Vector256<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ExtractMostSignificantBits(value);
+#else
+            return _instance.ExtractMostSignificantBits(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint ExtractMostSignificantBits(Vector256<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ExtractMostSignificantBits(value);
+#else
+            return _instance.ExtractMostSignificantBits(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint ExtractMostSignificantBits(Vector256<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ExtractMostSignificantBits(value);
+#else
+            return _instance.ExtractMostSignificantBits(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint ExtractMostSignificantBits(Vector256<byte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ExtractMostSignificantBits(value);
+#else
+            return _instance.ExtractMostSignificantBits(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint ExtractMostSignificantBits(Vector256<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ExtractMostSignificantBits(value);
+#else
+            return _instance.ExtractMostSignificantBits(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint ExtractMostSignificantBits(Vector256<ushort> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ExtractMostSignificantBits(value);
+#else
+            return _instance.ExtractMostSignificantBits(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint ExtractMostSignificantBits(Vector256<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ExtractMostSignificantBits(value);
+#else
+            return _instance.ExtractMostSignificantBits(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint ExtractMostSignificantBits(Vector256<uint> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ExtractMostSignificantBits(value);
+#else
+            return _instance.ExtractMostSignificantBits(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint ExtractMostSignificantBits(Vector256<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ExtractMostSignificantBits(value);
+#else
+            return _instance.ExtractMostSignificantBits(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint ExtractMostSignificantBits(Vector256<ulong> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ExtractMostSignificantBits(value);
+#else
+            return _instance.ExtractMostSignificantBits(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.Floor_AcceleratedTypes"/>
         public static TypeCodeFlags Floor_AcceleratedTypes {
             get {

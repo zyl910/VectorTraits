@@ -229,6 +229,87 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits_AcceleratedTypes"/>
+            public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlagsUtil.IntTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector256<float> vector) {
+                return (uint)Avx.MoveMask(vector);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector256<double> vector) {
+                return (uint)Avx.MoveMask(vector);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector256<sbyte> vector) {
+                return ExtractMostSignificantBits(vector.AsByte());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector256<byte> vector) {
+                return (uint)Avx2.MoveMask(vector);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{short})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector256<short> vector) {
+                return ExtractMostSignificantBits(vector.AsUInt16());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector256<ushort> vector) {
+                Vector256<byte> m = Avx2.Shuffle(vector.AsByte(), Vector256Constants.ExtractMostSignificantBits_Shuffle_HiByteOf16); // Packed the high byte. 0~7 is the source 0~7, 16~23 is the source 8~15, and the rest is cleared.
+                m = Avx2.Permute4x64(m.AsUInt64(), ShuffleControlG4.XZYW).AsByte(); // Swap 16~23 bytes, to 8~15 .
+                return (uint)Avx2.MoveMask(m);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{int})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector256<int> vector) {
+                return ExtractMostSignificantBits(vector.AsSingle());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector256<uint> vector) {
+                return ExtractMostSignificantBits(vector.AsSingle());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{long})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector256<long> vector) {
+                return ExtractMostSignificantBits(vector.AsDouble());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector256<ulong> vector) {
+                return ExtractMostSignificantBits(vector.AsDouble());
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {

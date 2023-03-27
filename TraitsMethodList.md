@@ -24,6 +24,8 @@ List (列表):
   Mnemonic: `rt[i] := (UInt32)(value[i])` .
 - `ConvertToUInt64`: Convert to a vector whose elements are of type UInt64 (转换为元素类型是UInt64的向量).
   Mnemonic: `rt[i] := (UInt64)(value[i])` .
+- `ExtractMostSignificantBits`: Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
+  Mnemonic: `rt |= getMostSignificantBit(vector[i]) << i = ( vector[i] >>> (sizeof(T)*8-1) ) << i` .
 - `Floor`: Computes the floor of each element in a vector (计算向量中每个元素的向下舍入).
   Mnemonic: `rt[i] := floor(value[i])` .
 - `Narrow`: Narrows two Vector instances into one Vector  (将两个 Vector 实例缩窄为一个 Vector ).
@@ -86,7 +88,7 @@ Types: Vector, Vector128, Vector256 .
 Summary (概要):
 - Provides the vector methods of clamp (提供限制的向量方法): YClamp .
 - Provides the vector methods of narrow saturate (提供缩窄饱和的向量方法): YNarrowSaturate, YNarrowSaturateUnsigned .
-- Provides the vector methods of shuffle (提供换位的向量方法): YShuffleEach128, YShuffleInsert, YShuffleInsertEach128, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG4 classes.
+- Provides the vector methods of shuffle (提供换位的向量方法): YShuffleEach128, YShuffleInsert, YShuffleX86, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG4 classes.
 
 List (列表):
 - `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
