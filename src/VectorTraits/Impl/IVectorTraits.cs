@@ -163,6 +163,113 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>ExtractMostSignificantBits</c> (运行 <c>ExtractMostSignificantBits</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="ExtractMostSignificantBits"/>
+        TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
+        /// Mnemonic: <c>rt |= getMostSignificantBit(vector[i]) &lt;&lt; i = ( vector[i] &gt;&gt;&gt; (sizeof(T)*8-1) ) &lt;&lt; i</c>.
+        /// </summary>
+        /// <param name="vector">The vector whose elements should have their most significant bit extracted (欲对所有元素提取最高有效位的向量).</param>
+        /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
+        /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
+        /// <seealso cref="Vector.ExtractMostSignificantBits{T}(Vector{T})" />
+        ulong ExtractMostSignificantBits(Vector<float> vector);
+
+        /// <summary>
+        /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
+        /// Mnemonic: <c>rt |= getMostSignificantBit(vector[i]) &lt;&lt; i = ( vector[i] &gt;&gt;&gt; (sizeof(T)*8-1) ) &lt;&lt; i</c>.
+        /// </summary>
+        /// <param name="vector">The vector whose elements should have their most significant bit extracted (欲对所有元素提取最高有效位的向量).</param>
+        /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
+        /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
+        /// <seealso cref="Vector.ExtractMostSignificantBits{T}(Vector{T})" />
+        ulong ExtractMostSignificantBits(Vector<double> vector);
+
+        /// <summary>
+        /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
+        /// Mnemonic: <c>rt |= getMostSignificantBit(vector[i]) &lt;&lt; i = ( vector[i] &gt;&gt;&gt; (sizeof(T)*8-1) ) &lt;&lt; i</c>.
+        /// </summary>
+        /// <param name="vector">The vector whose elements should have their most significant bit extracted (欲对所有元素提取最高有效位的向量).</param>
+        /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
+        /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
+        /// <seealso cref="Vector.ExtractMostSignificantBits{T}(Vector{T})" />
+        ulong ExtractMostSignificantBits(Vector<sbyte> vector);
+
+        /// <summary>
+        /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
+        /// Mnemonic: <c>rt |= getMostSignificantBit(vector[i]) &lt;&lt; i = ( vector[i] &gt;&gt;&gt; (sizeof(T)*8-1) ) &lt;&lt; i</c>.
+        /// </summary>
+        /// <param name="vector">The vector whose elements should have their most significant bit extracted (欲对所有元素提取最高有效位的向量).</param>
+        /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
+        /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
+        /// <seealso cref="Vector.ExtractMostSignificantBits{T}(Vector{T})" />
+        ulong ExtractMostSignificantBits(Vector<byte> vector);
+
+        /// <summary>
+        /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
+        /// Mnemonic: <c>rt |= getMostSignificantBit(vector[i]) &lt;&lt; i = ( vector[i] &gt;&gt;&gt; (sizeof(T)*8-1) ) &lt;&lt; i</c>.
+        /// </summary>
+        /// <param name="vector">The vector whose elements should have their most significant bit extracted (欲对所有元素提取最高有效位的向量).</param>
+        /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
+        /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
+        /// <seealso cref="Vector.ExtractMostSignificantBits{T}(Vector{T})" />
+        ulong ExtractMostSignificantBits(Vector<short> vector);
+
+        /// <summary>
+        /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
+        /// Mnemonic: <c>rt |= getMostSignificantBit(vector[i]) &lt;&lt; i = ( vector[i] &gt;&gt;&gt; (sizeof(T)*8-1) ) &lt;&lt; i</c>.
+        /// </summary>
+        /// <param name="vector">The vector whose elements should have their most significant bit extracted (欲对所有元素提取最高有效位的向量).</param>
+        /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
+        /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
+        /// <seealso cref="Vector.ExtractMostSignificantBits{T}(Vector{T})" />
+        ulong ExtractMostSignificantBits(Vector<ushort> vector);
+
+        /// <summary>
+        /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
+        /// Mnemonic: <c>rt |= getMostSignificantBit(vector[i]) &lt;&lt; i = ( vector[i] &gt;&gt;&gt; (sizeof(T)*8-1) ) &lt;&lt; i</c>.
+        /// </summary>
+        /// <param name="vector">The vector whose elements should have their most significant bit extracted (欲对所有元素提取最高有效位的向量).</param>
+        /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
+        /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
+        /// <seealso cref="Vector.ExtractMostSignificantBits{T}(Vector{T})" />
+        ulong ExtractMostSignificantBits(Vector<int> vector);
+
+        /// <summary>
+        /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
+        /// Mnemonic: <c>rt |= getMostSignificantBit(vector[i]) &lt;&lt; i = ( vector[i] &gt;&gt;&gt; (sizeof(T)*8-1) ) &lt;&lt; i</c>.
+        /// </summary>
+        /// <param name="vector">The vector whose elements should have their most significant bit extracted (欲对所有元素提取最高有效位的向量).</param>
+        /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
+        /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
+        /// <seealso cref="Vector.ExtractMostSignificantBits{T}(Vector{T})" />
+        ulong ExtractMostSignificantBits(Vector<uint> vector);
+
+        /// <summary>
+        /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
+        /// Mnemonic: <c>rt |= getMostSignificantBit(vector[i]) &lt;&lt; i = ( vector[i] &gt;&gt;&gt; (sizeof(T)*8-1) ) &lt;&lt; i</c>.
+        /// </summary>
+        /// <param name="vector">The vector whose elements should have their most significant bit extracted (欲对所有元素提取最高有效位的向量).</param>
+        /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
+        /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
+        /// <seealso cref="Vector.ExtractMostSignificantBits{T}(Vector{T})" />
+        ulong ExtractMostSignificantBits(Vector<long> vector);
+
+        /// <summary>
+        /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
+        /// Mnemonic: <c>rt |= getMostSignificantBit(vector[i]) &lt;&lt; i = ( vector[i] &gt;&gt;&gt; (sizeof(T)*8-1) ) &lt;&lt; i</c>.
+        /// </summary>
+        /// <param name="vector">The vector whose elements should have their most significant bit extracted (欲对所有元素提取最高有效位的向量).</param>
+        /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
+        /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
+        /// <seealso cref="Vector.ExtractMostSignificantBits{T}(Vector{T})" />
+        ulong ExtractMostSignificantBits(Vector<ulong> vector);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Floor</c> (运行 <c>Floor</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Floor"/>

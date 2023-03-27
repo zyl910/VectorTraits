@@ -222,6 +222,220 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits_AcceleratedTypes"/>
+            public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+                    if (Vector.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    }
+#endif // BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits(Vector<float> vector) {
+#if BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+                return Vector.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits(Vector<double> vector) {
+#if BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+                return Vector.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits(Vector<sbyte> vector) {
+#if BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+                return Vector.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits(Vector<byte> vector) {
+#if BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+                return Vector.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{short})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits(Vector<short> vector) {
+#if BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+                return Vector.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits(Vector<ushort> vector) {
+#if BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+                return Vector.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{int})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits(Vector<int> vector) {
+#if BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+                return Vector.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits(Vector<uint> vector) {
+#if BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+                return Vector.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{long})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits(Vector<long> vector) {
+#if BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+                return Vector.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits(Vector<ulong> vector) {
+#if BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+                return Vector.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_VAR && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits_Base(Vector<float> vector) {
+                return ExtractMostSignificantBits_Base(vector.AsUInt32());
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits_Base(Vector<double> vector) {
+                return ExtractMostSignificantBits_Base(vector.AsUInt64());
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits_Base(Vector<sbyte> vector) {
+                return Statics.ExtractMostSignificantBits_Base(vector.AsByte());
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits_Base(Vector<byte> vector) {
+                ref byte p = ref Unsafe.As<Vector<byte>, byte>(ref vector);
+                ulong rt = Scalars.GetMostSignificantBit(p);
+                for (int i = 1; i < Vector<byte>.Count; ++i) {
+                    rt |= ((ulong)Scalars.GetMostSignificantBit(Unsafe.Add(ref p, i))) << i;
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{short})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits_Base(Vector<short> vector) {
+                return ExtractMostSignificantBits_Base(vector.AsUInt16());
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits_Base(Vector<ushort> vector) {
+                ref ushort p = ref Unsafe.As<Vector<ushort>, ushort>(ref vector);
+                uint rt = Scalars.GetMostSignificantBit(p);
+                for (int i = 1; i < Vector<ushort>.Count; ++i) {
+                    rt |= Scalars.GetMostSignificantBit(Unsafe.Add(ref p, i)) << i;
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{int})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits_Base(Vector<int> vector) {
+                return ExtractMostSignificantBits_Base(vector.AsUInt32());
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits_Base(Vector<uint> vector) {
+                ref uint p = ref Unsafe.As<Vector<uint>, uint>(ref vector);
+                uint rt = Scalars.GetMostSignificantBit(p);
+                for (int i = 1; i < Vector<uint>.Count; ++i) {
+                    rt |= Scalars.GetMostSignificantBit(Unsafe.Add(ref p, i)) << i;
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{long})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits_Base(Vector<long> vector) {
+                return ExtractMostSignificantBits_Base(vector.AsUInt64());
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong ExtractMostSignificantBits_Base(Vector<ulong> vector) {
+                ref ulong p = ref Unsafe.As<Vector<ulong>, ulong>(ref vector);
+                uint rt = Scalars.GetMostSignificantBit(p);
+                for (int i = 1; i < Vector<ulong>.Count; ++i) {
+                    rt |= Scalars.GetMostSignificantBit(Unsafe.Add(ref p, i)) << i;
+                }
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {

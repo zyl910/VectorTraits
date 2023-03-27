@@ -384,7 +384,7 @@ namespace Zyl.VectorTraits.Impl {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                     if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlagsUtil.IntTypes;
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
                     }
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                     return rt;

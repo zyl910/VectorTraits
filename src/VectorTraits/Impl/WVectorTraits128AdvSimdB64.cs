@@ -154,12 +154,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits_AcceleratedTypes"/>
             public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.None;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                    if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlagsUtil.IntTypes;
-                    }
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlagsUtil.IntTypes;
                     return rt;
                 }
             }
