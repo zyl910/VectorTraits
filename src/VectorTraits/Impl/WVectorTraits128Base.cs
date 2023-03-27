@@ -183,7 +183,13 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt32_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToInt32_AcceleratedTypes {
                 get {
-                    return TypeCodeFlags.None;
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
                 }
             }
 
@@ -214,7 +220,13 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
                 get {
-                    return TypeCodeFlags.None;
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        //rt |= TypeCodeFlags.Double;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
                 }
             }
 
@@ -243,7 +255,13 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {
                 get {
-                    return TypeCodeFlags.None;
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
                 }
             }
 
@@ -356,6 +374,238 @@ namespace Zyl.VectorTraits.Impl {
                 ref double p = ref Unsafe.As<Vector128<double>, double>(ref value);
                 prt = (UInt64)p;
                 Unsafe.Add(ref prt, 1) = (UInt64)Unsafe.Add(ref p, 1);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits_AcceleratedTypes"/>
+            public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlagsUtil.IntTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<float> vector) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<double> vector) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<sbyte> vector) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<byte> vector) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{short})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<short> vector) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<ushort> vector) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{int})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<int> vector) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<uint> vector) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{long})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<long> vector) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<ulong> vector) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ExtractMostSignificantBits(vector);
+#else
+                return ExtractMostSignificantBits_Base(vector);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_Base(Vector128<float> vector) {
+                return ExtractMostSignificantBits_Base(vector.AsUInt32());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_Base(Vector128<double> vector) {
+                return ExtractMostSignificantBits_Base(vector.AsUInt64());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_Base(Vector128<sbyte> vector) {
+                return Statics.ExtractMostSignificantBits_Base(vector.AsByte());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_Base(Vector128<byte> vector) {
+                ref byte p = ref Unsafe.As<Vector128<byte>, byte>(ref vector);
+                uint rt = Scalars.GetMostSignificantBit(p)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 2)) << 2)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 3)) << 3)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 4)) << 4)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 5)) << 5)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 6)) << 6)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 7)) << 7)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 8)) << 8)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 9)) << 9)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 10)) << 10)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 11)) << 11)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 12)) << 12)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 13)) << 13)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 14)) << 14)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 15)) << 15)
+                ;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{short})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_Base(Vector128<short> vector) {
+                return ExtractMostSignificantBits_Base(vector.AsUInt16());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_Base(Vector128<ushort> vector) {
+                ref ushort p = ref Unsafe.As<Vector128<ushort>, ushort>(ref vector);
+                uint rt = Scalars.GetMostSignificantBit(p)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 2)) << 2)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 3)) << 3)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 4)) << 4)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 5)) << 5)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 6)) << 6)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 7)) << 7)
+                ;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{int})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_Base(Vector128<int> vector) {
+                return ExtractMostSignificantBits_Base(vector.AsUInt32());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_Base(Vector128<uint> vector) {
+                ref uint p = ref Unsafe.As<Vector128<uint>, uint>(ref vector);
+                uint rt = Scalars.GetMostSignificantBit(p)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 2)) << 2)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 3)) << 3)
+                ;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{long})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_Base(Vector128<long> vector) {
+                return ExtractMostSignificantBits_Base(vector.AsUInt64());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_Base(Vector128<ulong> vector) {
+                ref ulong p = ref Unsafe.As<Vector128<ulong>, ulong>(ref vector);
+                uint rt = Scalars.GetMostSignificantBit(p)
+                    | (Scalars.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
+                ;
                 return rt;
             }
 
