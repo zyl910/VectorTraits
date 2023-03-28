@@ -7,7 +7,7 @@ Summary (概要):
 - Support for `.NET Standard 2.1` new vector methods (支持 `.NET Standard 2.1` 新增的向量方法): ConvertToDouble, ConvertToInt32, ConvertToInt64, ConvertToSingle, ConvertToUInt32, ConvertToUInt64, Narrow, Widen .
 - Support for `.NET 5.0` new vector methods (支持 `.NET 5.0` 新增的向量方法): Ceiling, Floor .
 - Support for `.NET 6.0` new vector methods (支持 `.NET 6.0` 新增的向量方法): Sum .
-- Support for `.NET 7.0` new vector methods (支持 `.NET 7.0` 新增的向量方法): ExtractMostSignificantBits, Shuffle, ShiftLeft, ShiftRightArithmetic, ShiftRightLogical .
+- Support for `.NET 7.0` new vector methods (支持 `.NET 7.0` 新增的向量方法): ExtractMostSignificantBits, ShiftLeft, ShiftRightArithmetic, ShiftRightLogical, Shuffle .
 
 List (列表):
 - `Ceiling`: Computes the ceiling of each element in a vector (计算向量中每个元素的向上舍入).
@@ -24,7 +24,7 @@ List (列表):
   Mnemonic: `rt[i] := (UInt32)(value[i])` .
 - `ConvertToUInt64`: Convert to a vector whose elements are of type UInt64 (转换为元素类型是UInt64的向量).
   Mnemonic: `rt[i] := (UInt64)(value[i])` .
-- `ExtractMostSignificantBits`: Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
+- `ExtractMostSignificantBits`[1]: Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
   Mnemonic: `rt |= getMostSignificantBit(vector[i]) << i = ( vector[i] >>> (sizeof(T)*8-1) ) << i` .
 - `Floor`: Computes the floor of each element in a vector (计算向量中每个元素的向下舍入).
   Mnemonic: `rt[i] := floor(value[i])` .
@@ -36,11 +36,15 @@ List (列表):
   Mnemonic: `rt[i] := value[i] >> shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
 - `ShiftRightLogical`: Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
   Mnemonic: `rt[i] := value[i] >>> shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
+- `Shuffle`[1]: Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量).
+  Mnemonic: `rt[i] := (0<=i && i<Count)?( vector[indices[i]] ):0`.
 - `Sum`: Computes the sum of all elements in a vector (计算向量中所有元素的总和).
   Mnemonic: `rt := value[0] + value[1] + value[2] + ... + value[Count-1]` .
 - `Widen`: Widens a Vector into two Vector instances (将一个 Vector 扩宽为两个 Vector 实例).
   Mnemonic: `element_ref(i, lower, upper) := widen(source[i])`.
 
+Remarks:
+[1]: It also works for Vector (它也适用于Vector).
 
 ## Fixed width Vector supplement traits methods (固定宽度向量补充的特性方法)
 Types: Vector128, Vector256 .
@@ -68,7 +72,7 @@ List (列表):
   Mnemonic: `rt[i] := max(left[i], right[i])`.
 - `Min`: Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).
   Mnemonic: `rt[i] := min(left[i], right[i])`.
-- `Multiply`*: Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+- `Multiply`[1]: Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
   Mnemonic: `rt[i] := left[i] * right[i]`.
 - `Negate`: Computes the negate of a vector (计算向量的相反数).
   Mnemonic: `rt[i] := -vector[i]`.
@@ -79,7 +83,8 @@ List (列表):
 - `Xor`: Computes the exclusive-or of two vectors (计算两个向量的位异或).
   Mnemonic: `rt[i] := left[i] ^ right[i]`.
 
-*: It also works for Vector (它也适用于Vector).
+Remarks:
+[1]: It also works for Vector (它也适用于Vector).
 
 
 ## Vector traits method appended by this library (由本库追加的向量特性方法)
@@ -88,7 +93,7 @@ Types: Vector, Vector128, Vector256 .
 Summary (概要):
 - Provides the vector methods of clamp (提供限制的向量方法): YClamp .
 - Provides the vector methods of narrow saturate (提供缩窄饱和的向量方法): YNarrowSaturate, YNarrowSaturateUnsigned .
-- Provides the vector methods of shuffle (提供换位的向量方法): YShuffleEach128, YShuffleInsert, YShuffleX86, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG4 classes.
+- Provides the vector methods of shuffle (提供换位的向量方法): YShuffleEach128, YShuffleEach128Insert, YShuffleInsert, YShuffleX86, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG4 classes.
 
 List (列表):
 - `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).

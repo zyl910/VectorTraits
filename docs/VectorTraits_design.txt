@@ -28,9 +28,9 @@ Name prefix (名称前缀):
 - `Y`: mY functions (自创的统一风格函数).
 
 Name suffix (名称后缀):
+- `Each128`: Process each 128-bit lane independently, i.e. x86 style（独立处理每个128位泳道，即x86风格）。
 - `Append`: 空缺元素将由另一向量进行逐个的添加. 例如循环移位.
 - `Insert`: 空缺元素将由另一向量进行原位替换. 例如将“值为零的元素”替换为其他值.
-- `Each128`: Process each 128-bit lane independently, i.e. x86 style（独立处理每个128位泳道，即x86风格）。
 - `G2`/`G3`/`G4`: Group of 4 elements (2/3/4 个元素的组).
 - `X2`/`X3`/`X4`: 参数数量翻倍的版本。例如 Vector128<double> 只有2个元素，想做 ShuffleG4 运算的话, 需用 X2 的版本.
 

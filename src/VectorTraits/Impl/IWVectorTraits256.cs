@@ -1880,6 +1880,123 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Shuffle</c> (运行 <c>Shuffle</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Shuffle"/>
+        TypeCodeFlags Shuffle_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量).
+        /// Mnemonic: <c>rt[i] := (0&lt;=i &amp;&amp; i&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Shuffle(Vector256{float}, Vector256{int})"/>
+        Vector256<float> Shuffle(Vector256<float> vector, Vector256<int> indices);
+
+        /// <summary>
+        /// Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量).
+        /// Mnemonic: <c>rt[i] := (0&lt;=i &amp;&amp; i&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Shuffle(Vector256{double}, Vector256{long})"/>
+        Vector256<double> Shuffle(Vector256<double> vector, Vector256<long> indices);
+
+        /// <summary>
+        /// Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量).
+        /// Mnemonic: <c>rt[i] := (0&lt;=i &amp;&amp; i&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Shuffle(Vector256{sbyte}, Vector256{sbyte})"/>
+        Vector256<sbyte> Shuffle(Vector256<sbyte> vector, Vector256<sbyte> indices);
+
+        /// <summary>
+        /// Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量).
+        /// Mnemonic: <c>rt[i] := (0&lt;=i &amp;&amp; i&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Shuffle(Vector256{byte}, Vector256{byte})"/>
+        Vector256<byte> Shuffle(Vector256<byte> vector, Vector256<byte> indices);
+
+        /// <summary>
+        /// Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量).
+        /// Mnemonic: <c>rt[i] := (0&lt;=i &amp;&amp; i&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Shuffle(Vector256{short}, Vector256{short})"/>
+        Vector256<short> Shuffle(Vector256<short> vector, Vector256<short> indices);
+
+        /// <summary>
+        /// Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量).
+        /// Mnemonic: <c>rt[i] := (0&lt;=i &amp;&amp; i&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Shuffle(Vector256{ushort}, Vector256{ushort})"/>
+        Vector256<ushort> Shuffle(Vector256<ushort> vector, Vector256<ushort> indices);
+
+        /// <summary>
+        /// Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量).
+        /// Mnemonic: <c>rt[i] := (0&lt;=i &amp;&amp; i&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Shuffle(Vector256{int}, Vector256{int})"/>
+        Vector256<int> Shuffle(Vector256<int> vector, Vector256<int> indices);
+
+        /// <summary>
+        /// Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量).
+        /// Mnemonic: <c>rt[i] := (0&lt;=i &amp;&amp; i&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Shuffle(Vector256{uint}, Vector256{uint})"/>
+        Vector256<uint> Shuffle(Vector256<uint> vector, Vector256<uint> indices);
+
+        /// <summary>
+        /// Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量).
+        /// Mnemonic: <c>rt[i] := (0&lt;=i &amp;&amp; i&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Shuffle(Vector256{long}, Vector256{long})"/>
+        Vector256<long> Shuffle(Vector256<long> vector, Vector256<long> indices);
+
+        /// <summary>
+        /// Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量).
+        /// Mnemonic: <c>rt[i] := (0&lt;=i &amp;&amp; i&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Shuffle(Vector256{ulong}, Vector256{ulong})"/>
+        Vector256<ulong> Shuffle(Vector256<ulong> vector, Vector256<ulong> indices);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Subtract</c> (运行 <c>Subtract</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Subtract"/>
