@@ -2589,7 +2589,7 @@ namespace Zyl.VectorTraits.Impl {
         TypeCodeFlags YShuffleKernel_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the YShuffleKernel_IndicesMask mask to constrain the parameters (可使用 YShuffleKernel_IndicesMask 掩码来约束参数).
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
@@ -2600,7 +2600,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<float> YShuffleKernel(Vector256<float> vector, Vector256<int> indices);
 
         /// <summary>
-        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the YShuffleKernel_IndicesMask mask to constrain the parameters (可使用 YShuffleKernel_IndicesMask 掩码来约束参数).
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
@@ -2611,7 +2611,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<double> YShuffleKernel(Vector256<double> vector, Vector256<long> indices);
 
         /// <summary>
-        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the YShuffleKernel_IndicesMask mask to constrain the parameters (可使用 YShuffleKernel_IndicesMask 掩码来约束参数).
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
@@ -2622,7 +2622,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<sbyte> YShuffleKernel(Vector256<sbyte> vector, Vector256<sbyte> indices);
 
         /// <summary>
-        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the YShuffleKernel_IndicesMask mask to constrain the parameters (可使用 YShuffleKernel_IndicesMask 掩码来约束参数).
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
@@ -2633,7 +2633,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<byte> YShuffleKernel(Vector256<byte> vector, Vector256<byte> indices);
 
         /// <summary>
-        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the YShuffleKernel_IndicesMask mask to constrain the parameters (可使用 YShuffleKernel_IndicesMask 掩码来约束参数).
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
@@ -2644,7 +2644,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<short> YShuffleKernel(Vector256<short> vector, Vector256<short> indices);
 
         /// <summary>
-        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the YShuffleKernel_IndicesMask mask to constrain the parameters (可使用 YShuffleKernel_IndicesMask 掩码来约束参数).
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
@@ -2655,7 +2655,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<ushort> YShuffleKernel(Vector256<ushort> vector, Vector256<ushort> indices);
 
         /// <summary>
-        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the YShuffleKernel_IndicesMask mask to constrain the parameters (可使用 YShuffleKernel_IndicesMask 掩码来约束参数).
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
@@ -2666,7 +2666,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<int> YShuffleKernel(Vector256<int> vector, Vector256<int> indices);
 
         /// <summary>
-        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the YShuffleKernel_IndicesMask mask to constrain the parameters (可使用 YShuffleKernel_IndicesMask 掩码来约束参数).
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
@@ -2677,7 +2677,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<uint> YShuffleKernel(Vector256<uint> vector, Vector256<uint> indices);
 
         /// <summary>
-        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the YShuffleKernel_IndicesMask mask to constrain the parameters (可使用 YShuffleKernel_IndicesMask 掩码来约束参数).
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
@@ -2688,7 +2688,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<long> YShuffleKernel(Vector256<long> vector, Vector256<long> indices);
 
         /// <summary>
-        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the YShuffleKernel_IndicesMask mask to constrain the parameters (可使用 YShuffleKernel_IndicesMask 掩码来约束参数).
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>

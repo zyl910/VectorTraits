@@ -54,7 +54,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Console.WriteLine();
                     Console.WriteLine(VectorTextUtil.Format("== Sample:\t{0}", vector));
                 }
-                foreach (Vector256<TIdx> indices in indicesList) {
+                foreach (Vector256<TIdx> indicesFor in indicesList) {
+                    Vector256<TIdx> indices = Vector256s.BitwiseAnd(indicesFor, Vector256s<TIdx>.IndexMask);
 #if NET7_0_OR_GREATER
                     Vector256<T> expected = Vector256.Shuffle((dynamic)vector, (dynamic)indices);
 #else

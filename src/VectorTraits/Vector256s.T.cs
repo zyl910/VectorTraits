@@ -119,6 +119,10 @@ namespace Zyl.VectorTraits {
         /// <summary>Reciprocal value: 1/4294967295 (uint.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
         public static readonly Vector256<T> VReciprocalMaxUInt32;
         // -- Specified value --
+        /// <summary>The mask of the index (索引的掩码). All the elements have a value of <c>Count-1</c>.</summary>
+        public static readonly Vector256<T> IndexMask;
+        /// <summary>The mask of the index on Each128 (Each128上索引的掩码). All the elements have a value of <c>(16/sizeof(T))-1</c>.</summary>
+        public static readonly Vector256<T> IndexMaskEach128;
         /// <summary>Serial Value (顺序值). e.g. 0, 1, 2, 3 ...</summary>
         public static readonly Vector256<T> Serial;
         /// <summary>Serial Value descend (顺序值降序). e.g. (Count-1), (Count-2), ... 2, 1, 0</summary>
@@ -259,6 +263,8 @@ namespace Zyl.VectorTraits {
             VReciprocalMaxInt32 = Vector256s.Create<T>(ElementVReciprocalMaxInt32);
             VReciprocalMaxUInt32 = Vector256s.Create<T>(ElementVReciprocalMaxUInt32);
             // -- Specified value --
+            IndexMask = Vector256s.CreateByBits<T>(Vector256<T>.Count - 1);
+            IndexMaskEach128 = Vector256s.CreateByBits<T>((16 / Scalars<T>.ByteSize) - 1);
             Serial = Vector256s.CreateByDoubleLoop<T>(0, 1);
             SerialDesc = Vector256s.CreateByDoubleLoop<T>(Vector256<T>.Count - 1, -1);
             SerialNegative = Vector256s.CreateByDoubleLoop<T>(0, -1);
