@@ -238,21 +238,21 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleKernel(Vector256<byte> vector, Vector256<byte> indices) {
-                return YShuffleKernel_ErmIg(vector, indices);
+                return YShuffleKernel_ByteAdd(vector, indices);
             }
 
-            private static readonly Vector256<byte> YShuffleKernel_ErmIg_K0 = Vector256.Create(0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0);
-            private static readonly Vector256<byte> YShuffleKernel_ErmIg_K1 = Vector256.Create(0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70);
+            private static readonly Vector256<byte> Shuffle_ByteAdd_K0 = Vector256.Create(0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0);
+            private static readonly Vector256<byte> Shuffle_ByteAdd_K1 = Vector256.Create(0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70);
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> YShuffleKernel_ErmIg(Vector256<byte> vector, Vector256<byte> indices) {
+            public static Vector256<byte> YShuffleKernel_ByteAdd(Vector256<byte> vector, Vector256<byte> indices) {
                 // Shuffle elements of __m256i vector
                 // https://stackoverflow.com/questions/30669556/shuffle-elements-of-m256i-vector
                 // ErmIg answered Jun 5, 2015 at 14:54
                 return Avx2.Or(
-                    Avx2.Shuffle(vector, Avx2.Add(indices, YShuffleKernel_ErmIg_K0)),
-                    Avx2.Shuffle(Avx2.Permute4x64(vector.AsInt64(), ShuffleControlG4.ZWXY).AsByte(), Avx2.Add(indices, YShuffleKernel_ErmIg_K1))
+                    Avx2.Shuffle(vector, Avx2.Add(indices, Shuffle_ByteAdd_K0)),
+                    Avx2.Shuffle(Avx2.Permute4x64(vector.AsInt64(), ShuffleControlG4.ZWXY).AsByte(), Avx2.Add(indices, Shuffle_ByteAdd_K1))
                 );
                 // Remark: The value of each element must be less than count
             }

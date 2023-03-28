@@ -843,10 +843,14 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> Shuffle(Vector256<byte> vector, Vector256<byte> indices) {
                 //Vector256<byte> mask = GreaterThan(Vector256.Create((byte)32), indices);
-                Vector256<byte> mask = Avx2.AndNot(
-                    Avx2.CompareGreaterThan(Vector256<sbyte>.Zero, indices.AsSByte()),
-                    Avx2.CompareGreaterThan(Vector256.Create((sbyte)32), indices.AsSByte())
-                ).AsByte(); // (0<=i && i<32)
+                //Vector256<byte> mask = Avx2.AndNot(
+                //    Avx2.CompareGreaterThan(Vector256<sbyte>.Zero, indices.AsSByte()),
+                //    Avx2.CompareGreaterThan(Vector256.Create((sbyte)32), indices.AsSByte())
+                //).AsByte(); // (0<=i && i<32)
+                Vector256<byte> mask = Avx2.CompareGreaterThan(
+                    Vector256.Create((sbyte)(32 + sbyte.MinValue)),
+                    Avx2.Add(indices.AsSByte(), Vector256s<sbyte>.MinValue)
+                ).AsByte(); // Unsigned compare: (i < 32)
                 Vector256<byte> raw = YShuffleKernel(vector, indices);
                 Vector256<byte> rt = Avx2.BlendVariable(Vector256<byte>.Zero, raw, mask);
                 return rt;
