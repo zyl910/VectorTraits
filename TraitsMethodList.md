@@ -36,8 +36,8 @@ List (列表):
   Mnemonic: `rt[i] := value[i] >> shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
 - `ShiftRightLogical`: Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
   Mnemonic: `rt[i] := value[i] >>> shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
-- `Shuffle`[1]: Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量).
-  Mnemonic: `rt[i] := (0<=i && i<Count)?( vector[indices[i]] ):0`.
+- `Shuffle`[1]: Shuffle and clear (换位并清零). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the indices value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+  Mnemonic: `rt[i] := (0<=indices[i] && indices[i]<Count)?( vector[indices[i]] ):0`.
 - `Sum`: Computes the sum of all elements in a vector (计算向量中所有元素的总和).
   Mnemonic: `rt := value[0] + value[1] + value[2] + ... + value[Count-1]` .
 - `Widen`: Widens a Vector into two Vector instances (将一个 Vector 扩宽为两个 Vector 实例).
@@ -93,7 +93,7 @@ Types: Vector, Vector128, Vector256 .
 Summary (概要):
 - Provides the vector methods of clamp (提供限制的向量方法): YClamp .
 - Provides the vector methods of narrow saturate (提供缩窄饱和的向量方法): YNarrowSaturate, YNarrowSaturateUnsigned .
-- Provides the vector methods of shuffle (提供换位的向量方法): YShuffleEach128, YShuffleEach128Insert, YShuffleInsert, YShuffleX86, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG4 classes.
+- Provides the vector methods of shuffle (提供换位的向量方法): YShuffleEach128, YShuffleEach128Insert, YShuffleEach128Kernel, YShuffleInsert, YShuffleKernel, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG4 classes.
 
 List (列表):
 - `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
@@ -102,3 +102,5 @@ List (列表):
   Mnemonic: `rt[i] := narrow_saturate(element_ref(i, lower, upper)) = narrow(clamp(element_ref(i, lower, upper), TOut.MinValue, TOut.MaxValue))`.
 - `YNarrowSaturateUnsigned`: Saturate narrows two signed Vector instances into one unsigned Vector  (将两个有符号 Vector 实例饱和缩窄为一个无符号 Vector ).
   Mnemonic: `rt[i] := narrow_saturate(element_ref(i, lower, upper)) = narrow(clamp(element_ref(i, lower, upper), 0, TOut.MaxValue))`.
+- `YShuffleKernel`: Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the YShuffleKernel_IndicesMask mask to constrain the parameters (可使用 YShuffleKernel_IndicesMask 掩码来约束参数).
+  Mnemonic: `rt[i] := vector[indices[i]]`. Conditions: `0<=indices[i] && indices[i]<Count`.

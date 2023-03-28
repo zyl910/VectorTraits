@@ -1688,6 +1688,78 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.YNarrowSaturateUnsigned(lower, upper);
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YShuffleKernel_AcceleratedTypes {
+            get {
+                return Statics.YShuffleKernel_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{float}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> YShuffleKernel(Vector256<float> vector, Vector256<int> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{float}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> YShuffleKernel(Vector256<double> vector, Vector256<long> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<sbyte> YShuffleKernel(Vector256<sbyte> vector, Vector256<sbyte> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<byte> YShuffleKernel(Vector256<byte> vector, Vector256<byte> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<short> YShuffleKernel(Vector256<short> vector, Vector256<short> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ushort> YShuffleKernel(Vector256<ushort> vector, Vector256<ushort> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YShuffleKernel(Vector256<int> vector, Vector256<int> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<uint> YShuffleKernel(Vector256<uint> vector, Vector256<uint> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YShuffleKernel(Vector256<long> vector, Vector256<long> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ulong> YShuffleKernel(Vector256<ulong> vector, Vector256<ulong> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
 #endif // NETCOREAPP3_0_OR_GREATER
     }
 }
