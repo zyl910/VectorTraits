@@ -2039,7 +2039,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{float}, Vector256{int})"/>
+        /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{double}, Vector256{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<double> Shuffle(Vector256<double> vector, Vector256<long> indices) {
 #if BCL_BASE_OVERRIDE_STATIC
@@ -2753,7 +2753,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{float}, Vector256{int})"/>
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{double}, Vector256{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<double> YShuffleKernel(Vector256<double> vector, Vector256<long> indices) {
 #if BCL_BASE_OVERRIDE_STATIC

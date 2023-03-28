@@ -225,7 +225,7 @@ namespace Zyl.VectorTraits.Impl {
                 return Shuffle(vector, indices);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{float}, Vector256{int})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{double}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YShuffleKernel(Vector256<double> vector, Vector256<long> indices) {
                 return Shuffle(vector, indices);

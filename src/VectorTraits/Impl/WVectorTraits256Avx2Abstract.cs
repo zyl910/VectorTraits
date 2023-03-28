@@ -1223,7 +1223,7 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.Shuffle(vector, indices);
         }
 
-        /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{float}, Vector256{int})"/>
+        /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{double}, Vector256{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector256<double> Shuffle(Vector256<double> vector, Vector256<long> indices) {
             return Statics.Shuffle(vector, indices);
@@ -1669,7 +1669,7 @@ namespace Zyl.VectorTraits.Impl {
             return Statics.YShuffleKernel(vector, indices);
         }
 
-        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{float}, Vector256{int})"/>
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{double}, Vector256{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector256<double> YShuffleKernel(Vector256<double> vector, Vector256<long> indices) {
             return Statics.YShuffleKernel(vector, indices);

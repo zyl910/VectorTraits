@@ -211,7 +211,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleKernel_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.SByte | TypeCodeFlags.Byte;
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlagsUtil.IntTypes;
                     return rt;
                 }
             }
@@ -219,13 +219,13 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{float}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YShuffleKernel(Vector256<float> vector, Vector256<int> indices) {
-                return SuperStatics.YShuffleKernel(vector, indices);
+                return Avx2.PermuteVar8x32(vector, indices);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{float}, Vector256{int})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{double}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YShuffleKernel(Vector256<double> vector, Vector256<long> indices) {
-                return SuperStatics.YShuffleKernel(vector, indices);
+                return YShuffleKernel(vector.AsUInt64(), indices.AsUInt64()).AsDouble();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{sbyte}, Vector256{sbyte})"/>
@@ -260,40 +260,42 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> YShuffleKernel(Vector256<short> vector, Vector256<short> indices) {
-                return SuperStatics.YShuffleKernel(vector, indices);
+                return YShuffleKernel(vector.AsUInt16(), indices.AsUInt16()).AsInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleKernel(Vector256<ushort> vector, Vector256<ushort> indices) {
-                return SuperStatics.YShuffleKernel(vector, indices);
+                Vector256<byte> indices2 = Avx2.Add(Multiply(indices, Vector256Constants.Shuffle_UInt16_Multiplier).AsByte(), Vector256Constants.Shuffle_UInt16_ByteOffset);
+                return YShuffleKernel(vector.AsByte(), indices2).AsUInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> YShuffleKernel(Vector256<int> vector, Vector256<int> indices) {
-                return SuperStatics.YShuffleKernel(vector, indices);
+                return Avx2.PermuteVar8x32(vector, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleKernel(Vector256<uint> vector, Vector256<uint> indices) {
-                return SuperStatics.YShuffleKernel(vector, indices);
+                return Avx2.PermuteVar8x32(vector, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YShuffleKernel(Vector256<long> vector, Vector256<long> indices) {
-                return SuperStatics.YShuffleKernel(vector, indices);
+                return YShuffleKernel(vector.AsUInt64(), indices.AsUInt64()).AsInt64();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel(Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleKernel(Vector256<ulong> vector, Vector256<ulong> indices) {
-                return SuperStatics.YShuffleKernel(vector, indices);
+                Vector256<uint> indices2 = Avx2.Add(Multiply(indices, Vector256Constants.Shuffle_UInt64_Multiplier).AsUInt32(), Vector256Constants.Shuffle_UInt64_UInt32Offset);
+                return Avx2.PermuteVar8x32(vector.AsUInt32(), indices2).AsUInt64();
             }
 
 

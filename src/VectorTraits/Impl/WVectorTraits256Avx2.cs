@@ -815,7 +815,7 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
             public static TypeCodeFlags Shuffle_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.SByte | TypeCodeFlags.Byte;
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlagsUtil.IntTypes;
                     return rt;
                 }
             }
@@ -823,13 +823,13 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{float}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Shuffle(Vector256<float> vector, Vector256<int> indices) {
-                return SuperStatics.Shuffle(vector, indices);
+                return Shuffle(vector.AsUInt32(), indices.AsUInt32()).AsSingle();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{float}, Vector256{int})"/>
+            /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{double}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> Shuffle(Vector256<double> vector, Vector256<long> indices) {
-                return SuperStatics.Shuffle(vector, indices);
+                return Shuffle(vector.AsUInt64(), indices.AsUInt64()).AsDouble();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{sbyte}, Vector256{sbyte})"/>
@@ -859,40 +859,58 @@ namespace Zyl.VectorTraits.Impl {
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> Shuffle(Vector256<short> vector, Vector256<short> indices) {
-                return SuperStatics.Shuffle(vector, indices);
+                return Shuffle(vector.AsUInt16(), indices.AsUInt16()).AsInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> Shuffle(Vector256<ushort> vector, Vector256<ushort> indices) {
-                return SuperStatics.Shuffle(vector, indices);
+                Vector256<ushort> mask = Avx2.CompareGreaterThan(
+                    Vector256.Create((short)(16 + short.MinValue)),
+                    Avx2.Add(indices.AsInt16(), Vector256s<short>.MinValue)
+                ).AsUInt16(); // Unsigned compare: (i < 16)
+                Vector256<ushort> raw = YShuffleKernel(vector, indices);
+                Vector256<ushort> rt = Avx2.BlendVariable(Vector256<ushort>.Zero, raw, mask);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> Shuffle(Vector256<int> vector, Vector256<int> indices) {
-                return SuperStatics.Shuffle(vector, indices);
+                return Shuffle(vector.AsUInt32(), indices.AsUInt32()).AsInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> Shuffle(Vector256<uint> vector, Vector256<uint> indices) {
-                return SuperStatics.Shuffle(vector, indices);
+                Vector256<uint> mask = Avx2.CompareGreaterThan(
+                    Vector256.Create((int)(8 + int.MinValue)),
+                    Avx2.Add(indices.AsInt32(), Vector256s<int>.MinValue)
+                ).AsUInt32(); // Unsigned compare: (i < 8)
+                Vector256<uint> raw = YShuffleKernel(vector, indices);
+                Vector256<uint> rt = Avx2.BlendVariable(Vector256<uint>.Zero, raw, mask);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> Shuffle(Vector256<long> vector, Vector256<long> indices) {
-                return SuperStatics.Shuffle(vector, indices);
+                return Shuffle(vector.AsUInt64(), indices.AsUInt64()).AsInt64();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Shuffle(Vector256<ulong> vector, Vector256<ulong> indices) {
-                return SuperStatics.Shuffle(vector, indices);
+                Vector256<ulong> mask = Avx2.CompareGreaterThan(
+                    Vector256.Create((long)(4 + long.MinValue)),
+                    Avx2.Add(indices.AsInt64(), Vector256s<long>.MinValue)
+                ).AsUInt64(); // Unsigned compare: (i < 4)
+                Vector256<ulong> raw = YShuffleKernel(vector, indices);
+                Vector256<ulong> rt = Avx2.BlendVariable(Vector256<ulong>.Zero, raw, mask);
+                return rt;
             }
 
 
