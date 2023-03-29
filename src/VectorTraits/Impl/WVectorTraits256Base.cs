@@ -2119,7 +2119,7 @@ namespace Zyl.VectorTraits.Impl {
                     byte selectedIndex = Unsafe.Add(ref pindices, i);
                     byte selectedValue = default;
                     if (selectedIndex < cnt) {
-                        selectedValue = Unsafe.Add(ref p, i);
+                        selectedValue = Unsafe.Add(ref p, selectedIndex);
                     }
                     Unsafe.Add(ref q, i) = selectedValue;
                 }
@@ -2145,7 +2145,7 @@ namespace Zyl.VectorTraits.Impl {
                     ushort selectedIndex = Unsafe.Add(ref pindices, i);
                     ushort selectedValue = default;
                     if (selectedIndex < cnt) {
-                        selectedValue = Unsafe.Add(ref p, i);
+                        selectedValue = Unsafe.Add(ref p, selectedIndex);
                     }
                     Unsafe.Add(ref q, i) = selectedValue;
                 }
@@ -2171,7 +2171,7 @@ namespace Zyl.VectorTraits.Impl {
                     uint selectedIndex = Unsafe.Add(ref pindices, i);
                     uint selectedValue = default;
                     if (selectedIndex < cnt) {
-                        selectedValue = Unsafe.Add(ref p, i);
+                        selectedValue = Unsafe.Add(ref p, (int)selectedIndex);
                     }
                     Unsafe.Add(ref q, i) = selectedValue;
                 }
@@ -2197,7 +2197,7 @@ namespace Zyl.VectorTraits.Impl {
                     ulong selectedIndex = Unsafe.Add(ref pindices, i);
                     ulong selectedValue = default;
                     if (selectedIndex < cnt) {
-                        selectedValue = Unsafe.Add(ref p, i);
+                        selectedValue = Unsafe.Add(ref p, (int)selectedIndex);
                     }
                     Unsafe.Add(ref q, i) = selectedValue;
                 }
