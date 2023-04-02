@@ -110,4 +110,5 @@ UpgradeLog*.XML
 # *.pfx
 project*.lock.json
 .vs
+.DS_Store
 AssemblyVer.cs

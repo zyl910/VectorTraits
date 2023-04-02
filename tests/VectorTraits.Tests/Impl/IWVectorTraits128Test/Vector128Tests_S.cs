@@ -232,7 +232,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 Vector128s<T>.Serial,
             };
             foreach (Vector128<T> vsrc in samples) {
-                for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                for (int shiftAmount = 0; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector128<T> vexpected = Vector128s.ShiftRightLogicalFast((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;

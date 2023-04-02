@@ -9,6 +9,6 @@
     <Import_RootNamespace>Zyl.VectorTraits</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\src\VectorTraits.InfoInc\TraitsOutput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)..\..\src\VectorTraits.InfoInc\TraitsOutput.cs" />
   </ItemGroup>
 </Project>
