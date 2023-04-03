@@ -769,6 +769,78 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Shuffle_AcceleratedTypes"/>
+            public static TypeCodeFlags Shuffle_AcceleratedTypes {
+                get {
+                    return YShuffleInsert_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Shuffle(Vector128<float> vector, Vector128<int> indices) {
+                return YShuffleInsert(Vector128<float>.Zero, vector, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Shuffle(Vector128<double> vector, Vector128<long> indices) {
+                return YShuffleInsert(Vector128<double>.Zero, vector, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Shuffle(Vector128<sbyte> vector, Vector128<sbyte> indices) {
+                return YShuffleInsert(Vector128<sbyte>.Zero, vector, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> Shuffle(Vector128<byte> vector, Vector128<byte> indices) {
+                return YShuffleInsert(Vector128<byte>.Zero, vector, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Shuffle(Vector128<short> vector, Vector128<short> indices) {
+                return YShuffleInsert(Vector128<short>.Zero, vector, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> Shuffle(Vector128<ushort> vector, Vector128<ushort> indices) {
+                return YShuffleInsert(Vector128<ushort>.Zero, vector, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Shuffle(Vector128<int> vector, Vector128<int> indices) {
+                return YShuffleInsert(Vector128<int>.Zero, vector, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> Shuffle(Vector128<uint> vector, Vector128<uint> indices) {
+                return YShuffleInsert(Vector128<uint>.Zero, vector, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Shuffle(Vector128<long> vector, Vector128<long> indices) {
+                return YShuffleInsert(Vector128<long>.Zero, vector, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> Shuffle(Vector128<ulong> vector, Vector128<ulong> indices) {
+                return YShuffleInsert(Vector128<ulong>.Zero, vector, indices);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Sum_AcceleratedTypes"/>
             public static TypeCodeFlags Sum_AcceleratedTypes {
                 get {
