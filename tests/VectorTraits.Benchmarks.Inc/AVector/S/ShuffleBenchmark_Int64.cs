@@ -19,15 +19,15 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = SByte;
+    using TMy = Int64;
 
     /// <summary>
-    /// Shuffle benchmark - SByte.
+    /// Shuffle benchmark - Int64.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class ShuffleBenchmark_SByte : AbstractSharedBenchmark_SByte {
+    public partial class ShuffleBenchmark_Int64 : AbstractSharedBenchmark_Int64 {
 
         // -- var --
         private static readonly Vector<TMy> indices = Vectors<TMy>.SerialDesc;
