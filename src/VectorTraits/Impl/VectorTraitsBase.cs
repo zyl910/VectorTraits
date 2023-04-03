@@ -1887,6 +1887,240 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+            public static TypeCodeFlags Shuffle_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+                    if (Vector.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.None; // `.NET 7.0` doesn't have hardware acceleration yet .
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{float}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Shuffle(Vector<float> vector, Vector<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+                return Vector.Shuffle(vector, indices);
+#else
+                return Shuffle_Base(vector, indices);
+#endif // BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{double}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> Shuffle(Vector<double> vector, Vector<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+                return Vector.Shuffle(vector, indices);
+#else
+                return Shuffle_Base(vector, indices);
+#endif // BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> Shuffle(Vector<sbyte> vector, Vector<sbyte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+                return Vector.Shuffle(vector, indices);
+#else
+                return Shuffle_Base(vector, indices);
+#endif // BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{byte}, Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> Shuffle(Vector<byte> vector, Vector<byte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+                return Vector.Shuffle(vector, indices);
+#else
+                return Shuffle_Base(vector, indices);
+#endif // BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> Shuffle(Vector<short> vector, Vector<short> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+                return Vector.Shuffle(vector, indices);
+#else
+                return Shuffle_Base(vector, indices);
+#endif // BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{ushort}, Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> Shuffle(Vector<ushort> vector, Vector<ushort> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+                return Vector.Shuffle(vector, indices);
+#else
+                return Shuffle_Base(vector, indices);
+#endif // BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{int}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> Shuffle(Vector<int> vector, Vector<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+                return Vector.Shuffle(vector, indices);
+#else
+                return Shuffle_Base(vector, indices);
+#endif // BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{uint}, Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> Shuffle(Vector<uint> vector, Vector<uint> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+                return Vector.Shuffle(vector, indices);
+#else
+                return Shuffle_Base(vector, indices);
+#endif // BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> Shuffle(Vector<long> vector, Vector<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+                return Vector.Shuffle(vector, indices);
+#else
+                return Shuffle_Base(vector, indices);
+#endif // BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{ulong}, Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> Shuffle(Vector<ulong> vector, Vector<ulong> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+                return Vector.Shuffle(vector, indices);
+#else
+                return Shuffle_Base(vector, indices);
+#endif // BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{float}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Shuffle_Base(Vector<float> vector, Vector<int> indices) {
+                return Shuffle_Base(vector.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{float}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> Shuffle_Base(Vector<double> vector, Vector<long> indices) {
+                return Shuffle_Base(vector.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> Shuffle_Base(Vector<sbyte> vector, Vector<sbyte> indices) {
+                return Shuffle_Base(vector.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{byte}, Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> Shuffle_Base(Vector<byte> vector, Vector<byte> indices) {
+                UnsafeEx.SkipInit(out Vector<byte> rt);
+                byte cnt = (byte)Vector<byte>.Count;
+                ref byte q = ref Unsafe.As<Vector<byte>, byte>(ref rt);
+                ref byte p = ref Unsafe.As<Vector<byte>, byte>(ref vector);
+                ref byte pindices = ref Unsafe.As<Vector<byte>, byte>(ref indices);
+                for (nint i = 0; i < Vector<byte>.Count; ++i) {
+                    byte selectedIndex = Unsafe.Add(ref pindices, i);
+                    byte selectedValue = default;
+                    if (selectedIndex < cnt) {
+                        selectedValue = Unsafe.Add(ref p, selectedIndex);
+                    }
+                    Unsafe.Add(ref q, i) = selectedValue;
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> Shuffle_Base(Vector<short> vector, Vector<short> indices) {
+                return Shuffle_Base(vector.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{ushort}, Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> Shuffle_Base(Vector<ushort> vector, Vector<ushort> indices) {
+                UnsafeEx.SkipInit(out Vector<ushort> rt);
+                ushort cnt = (ushort)Vector<ushort>.Count;
+                ref ushort q = ref Unsafe.As<Vector<ushort>, ushort>(ref rt);
+                ref ushort p = ref Unsafe.As<Vector<ushort>, ushort>(ref vector);
+                ref ushort pindices = ref Unsafe.As<Vector<ushort>, ushort>(ref indices);
+                for (nint i = 0; i < Vector<ushort>.Count; ++i) {
+                    ushort selectedIndex = Unsafe.Add(ref pindices, i);
+                    ushort selectedValue = default;
+                    if (selectedIndex < cnt) {
+                        selectedValue = Unsafe.Add(ref p, selectedIndex);
+                    }
+                    Unsafe.Add(ref q, i) = selectedValue;
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{int}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> Shuffle_Base(Vector<int> vector, Vector<int> indices) {
+                return Shuffle_Base(vector.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{uint}, Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> Shuffle_Base(Vector<uint> vector, Vector<uint> indices) {
+                UnsafeEx.SkipInit(out Vector<uint> rt);
+                uint cnt = (uint)Vector<uint>.Count;
+                ref uint q = ref Unsafe.As<Vector<uint>, uint>(ref rt);
+                ref uint p = ref Unsafe.As<Vector<uint>, uint>(ref vector);
+                ref uint pindices = ref Unsafe.As<Vector<uint>, uint>(ref indices);
+                for (nint i = 0; i < Vector<uint>.Count; ++i) {
+                    uint selectedIndex = Unsafe.Add(ref pindices, i);
+                    uint selectedValue = default;
+                    if (selectedIndex < cnt) {
+                        selectedValue = Unsafe.Add(ref p, (int)selectedIndex);
+                    }
+                    Unsafe.Add(ref q, i) = selectedValue;
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> Shuffle_Base(Vector<long> vector, Vector<long> indices) {
+                return Shuffle_Base(vector.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{ulong}, Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> Shuffle_Base(Vector<ulong> vector, Vector<ulong> indices) {
+                UnsafeEx.SkipInit(out Vector<ulong> rt);
+                ulong cnt = (ulong)Vector<ulong>.Count;
+                ref ulong q = ref Unsafe.As<Vector<ulong>, ulong>(ref rt);
+                ref ulong p = ref Unsafe.As<Vector<ulong>, ulong>(ref vector);
+                ref ulong pindices = ref Unsafe.As<Vector<ulong>, ulong>(ref indices);
+                for (nint i = 0; i < Vector<ulong>.Count; ++i) {
+                    ulong selectedIndex = Unsafe.Add(ref pindices, i);
+                    ulong selectedValue = default;
+                    if (selectedIndex < cnt) {
+                        selectedValue = Unsafe.Add(ref p, (int)selectedIndex);
+                    }
+                    Unsafe.Add(ref q, i) = selectedValue;
+                }
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.Sum_AcceleratedTypes"/>
             public static TypeCodeFlags Sum_AcceleratedTypes {
                 get {

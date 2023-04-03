@@ -1026,6 +1026,128 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Shuffle</c> (运行 <c>Shuffle</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para>- <see cref="YShuffleKernel"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
+        /// <para>- <see cref="Shuffle"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
+        /// <para>- <see cref="YShuffleInsert"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
+        /// </remarks>
+        /// <seealso cref="Shuffle"/>
+        TypeCodeFlags Shuffle_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Shuffle and clear (换位并清零). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{float}, Vector{int})"/>
+        Vector<float> Shuffle(Vector<float> vector, Vector<int> indices);
+
+        /// <summary>
+        /// Shuffle and clear (换位并清零). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{double}, Vector{long})"/>
+        Vector<double> Shuffle(Vector<double> vector, Vector<long> indices);
+
+        /// <summary>
+        /// Shuffle and clear (换位并清零). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{sbyte}, Vector{sbyte})"/>
+        Vector<sbyte> Shuffle(Vector<sbyte> vector, Vector<sbyte> indices);
+
+        /// <summary>
+        /// Shuffle and clear (换位并清零). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{byte}, Vector{byte})"/>
+        Vector<byte> Shuffle(Vector<byte> vector, Vector<byte> indices);
+
+        /// <summary>
+        /// Shuffle and clear (换位并清零). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{short}, Vector{short})"/>
+        Vector<short> Shuffle(Vector<short> vector, Vector<short> indices);
+
+        /// <summary>
+        /// Shuffle and clear (换位并清零). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{ushort}, Vector{ushort})"/>
+        Vector<ushort> Shuffle(Vector<ushort> vector, Vector<ushort> indices);
+
+        /// <summary>
+        /// Shuffle and clear (换位并清零). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{int}, Vector{int})"/>
+        Vector<int> Shuffle(Vector<int> vector, Vector<int> indices);
+
+        /// <summary>
+        /// Shuffle and clear (换位并清零). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{uint}, Vector{uint})"/>
+        Vector<uint> Shuffle(Vector<uint> vector, Vector<uint> indices);
+
+        /// <summary>
+        /// Shuffle and clear (换位并清零). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{long}, Vector{long})"/>
+        Vector<long> Shuffle(Vector<long> vector, Vector<long> indices);
+
+        /// <summary>
+        /// Shuffle and clear (换位并清零). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{ulong}, Vector{ulong})"/>
+        Vector<ulong> Shuffle(Vector<ulong> vector, Vector<ulong> indices);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Sum</c> (运行 <c>Sum</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Sum"/>
@@ -1473,6 +1595,260 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
         /// <seealso cref="YNarrowSaturateUnsigned_AcceleratedTypes"/>
         Vector<uint> YNarrowSaturateUnsigned(Vector<long> lower, Vector<long> upper);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YShuffleInsert</c> (运行 <c>YShuffleInsert</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para>- <see cref="YShuffleKernel"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
+        /// <para>- <see cref="Shuffle"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
+        /// <para>- <see cref="YShuffleInsert"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
+        /// </remarks>
+        /// <seealso cref="YShuffleInsert"/>
+        TypeCodeFlags YShuffleInsert_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Shuffle and insert (换位并插入). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{float}, Vector{int})"/>
+        Vector<float> YShuffleInsert(Vector<float> back, Vector<float> vector, Vector<int> indices);
+
+        /// <summary>
+        /// Shuffle and insert (换位并插入). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{double}, Vector{long})"/>
+        Vector<double> YShuffleInsert(Vector<double> back, Vector<double> vector, Vector<long> indices);
+
+        /// <summary>
+        /// Shuffle and insert (换位并插入). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{sbyte}, Vector{sbyte})"/>
+        Vector<sbyte> YShuffleInsert(Vector<sbyte> back, Vector<sbyte> vector, Vector<sbyte> indices);
+
+        /// <summary>
+        /// Shuffle and insert (换位并插入). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{byte}, Vector{byte})"/>
+        Vector<byte> YShuffleInsert(Vector<byte> back, Vector<byte> vector, Vector<byte> indices);
+
+        /// <summary>
+        /// Shuffle and insert (换位并插入). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{short}, Vector{short})"/>
+        Vector<short> YShuffleInsert(Vector<short> back, Vector<short> vector, Vector<short> indices);
+
+        /// <summary>
+        /// Shuffle and insert (换位并插入). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{ushort}, Vector{ushort})"/>
+        Vector<ushort> YShuffleInsert(Vector<ushort> back, Vector<ushort> vector, Vector<ushort> indices);
+
+        /// <summary>
+        /// Shuffle and insert (换位并插入). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{int}, Vector{int})"/>
+        Vector<int> YShuffleInsert(Vector<int> back, Vector<int> vector, Vector<int> indices);
+
+        /// <summary>
+        /// Shuffle and insert (换位并插入). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{uint}, Vector{uint})"/>
+        Vector<uint> YShuffleInsert(Vector<uint> back, Vector<uint> vector, Vector<uint> indices);
+
+        /// <summary>
+        /// Shuffle and insert (换位并插入). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{long}, Vector{long})"/>
+        Vector<long> YShuffleInsert(Vector<long> back, Vector<long> vector, Vector<long> indices);
+
+        /// <summary>
+        /// Shuffle and insert (换位并插入). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{ulong}, Vector{ulong})"/>
+        Vector<ulong> YShuffleInsert(Vector<ulong> back, Vector<ulong> vector, Vector<ulong> indices);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YShuffleKernel</c> (运行 <c>Shuffle</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para>- <see cref="YShuffleKernel"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
+        /// <para>- <see cref="Shuffle"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
+        /// <para>- <see cref="YShuffleInsert"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
+        /// </remarks>
+        /// <seealso cref="YShuffleKernel"/>
+        TypeCodeFlags YShuffleKernel_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{float}, Vector{int})"/>
+        Vector<float> YShuffleKernel(Vector<float> vector, Vector<int> indices);
+
+        /// <summary>
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{double}, Vector{long})"/>
+        Vector<double> YShuffleKernel(Vector<double> vector, Vector<long> indices);
+
+        /// <summary>
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{sbyte}, Vector{sbyte})"/>
+        Vector<sbyte> YShuffleKernel(Vector<sbyte> vector, Vector<sbyte> indices);
+
+        /// <summary>
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{byte}, Vector{byte})"/>
+        Vector<byte> YShuffleKernel(Vector<byte> vector, Vector<byte> indices);
+
+        /// <summary>
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{short}, Vector{short})"/>
+        Vector<short> YShuffleKernel(Vector<short> vector, Vector<short> indices);
+
+        /// <summary>
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{ushort}, Vector{ushort})"/>
+        Vector<ushort> YShuffleKernel(Vector<ushort> vector, Vector<ushort> indices);
+
+        /// <summary>
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{int}, Vector{int})"/>
+        Vector<int> YShuffleKernel(Vector<int> vector, Vector<int> indices);
+
+        /// <summary>
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{uint}, Vector{uint})"/>
+        Vector<uint> YShuffleKernel(Vector<uint> vector, Vector<uint> indices);
+
+        /// <summary>
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{long}, Vector{long})"/>
+        Vector<long> YShuffleKernel(Vector<long> vector, Vector<long> indices);
+
+        /// <summary>
+        /// Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Shuffle(Vector{ulong}, Vector{ulong})"/>
+        Vector<ulong> YShuffleKernel(Vector<ulong> vector, Vector<ulong> indices);
 
         #endregion // mY_style
 
