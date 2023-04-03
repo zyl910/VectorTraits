@@ -182,6 +182,59 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
 
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
+
+#if NET7_0_OR_GREATER
+
+        /// <summary>
+        /// Sum Shuffle - Vector128 - Bcl.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumShuffleVector128_Bcl(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
+            Vector128<TMy> indicesUsed = indices.AsVector128();
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = Vector128.Shuffle(p0, indicesUsed);
+                vrt += vtemp; // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumShuffleVector128_Bcl() {
+            if (Vector<byte>.Count != Vector128<byte>.Count) {
+                throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector128<byte>.Count));
+            }
+            //Debugger.Break();
+            dstTMy = StaticSumShuffleVector128_Bcl(srcArray, srcArray.Length, indices);
+            CheckResult("SumShuffleVector128_Bcl");
+        }
+
+#endif // NET7_0_OR_GREATER
+
 #if NET5_0_OR_GREATER
 
         /// <summary>
@@ -292,6 +345,59 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
 
         #region BENCHMARKS_256ALGORITHM
 #if BENCHMARKS_256ALGORITHM
+
+
+#if NET7_0_OR_GREATER
+
+        /// <summary>
+        /// Sum Shuffle - Vector256 - Bcl.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumShuffleVector256_Bcl(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
+            Vector256<TMy> indicesUsed = indices.AsVector256();
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector256<TMy> vtemp = Vector256.Shuffle(p0, indicesUsed);
+                vrt += vtemp; // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumShuffleVector256_Bcl() {
+            if (Vector<byte>.Count != Vector256<byte>.Count) {
+                throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
+            }
+            //Debugger.Break();
+            dstTMy = StaticSumShuffleVector256_Bcl(srcArray, srcArray.Length, indices);
+            CheckResult("SumShuffleVector256_Bcl");
+        }
+
+#endif // NET7_0_OR_GREATER
 
         /// <summary>
         /// Sum Shuffle - Vector256 - Traits static.
