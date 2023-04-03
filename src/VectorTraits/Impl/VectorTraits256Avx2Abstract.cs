@@ -590,6 +590,78 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        public override TypeCodeFlags Shuffle_AcceleratedTypes {
+            get {
+                return Statics.Shuffle_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{float}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<float> Shuffle(Vector<float> vector, Vector<int> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{double}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> Shuffle(Vector<double> vector, Vector<long> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<sbyte> Shuffle(Vector<sbyte> vector, Vector<sbyte> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<byte> Shuffle(Vector<byte> vector, Vector<byte> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<short> Shuffle(Vector<short> vector, Vector<short> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ushort> Shuffle(Vector<ushort> vector, Vector<ushort> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<int> Shuffle(Vector<int> vector, Vector<int> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<uint> Shuffle(Vector<uint> vector, Vector<uint> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> Shuffle(Vector<long> vector, Vector<long> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> Shuffle(Vector<ulong> vector, Vector<ulong> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.Sum_AcceleratedTypes"/>
         public override TypeCodeFlags Sum_AcceleratedTypes {
             get {
@@ -803,6 +875,150 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<uint> YNarrowSaturateUnsigned(Vector<long> lower, Vector<long> upper) {
             return Statics.YNarrowSaturateUnsigned(lower, upper);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        public override TypeCodeFlags YShuffleInsert_AcceleratedTypes {
+            get {
+                return Statics.YShuffleInsert_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleInsert(Vector{float}, Vector{float}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<float> YShuffleInsert(Vector<float> back, Vector<float> vector, Vector<int> indices) {
+            return Statics.YShuffleInsert(back, vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleInsert(Vector{double}, Vector{double}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> YShuffleInsert(Vector<double> back, Vector<double> vector, Vector<long> indices) {
+            return Statics.YShuffleInsert(back, vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleInsert(Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<sbyte> YShuffleInsert(Vector<sbyte> back, Vector<sbyte> vector, Vector<sbyte> indices) {
+            return Statics.YShuffleInsert(back, vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleInsert(Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<byte> YShuffleInsert(Vector<byte> back, Vector<byte> vector, Vector<byte> indices) {
+            return Statics.YShuffleInsert(back, vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleInsert(Vector{short}, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<short> YShuffleInsert(Vector<short> back, Vector<short> vector, Vector<short> indices) {
+            return Statics.YShuffleInsert(back, vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleInsert(Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ushort> YShuffleInsert(Vector<ushort> back, Vector<ushort> vector, Vector<ushort> indices) {
+            return Statics.YShuffleInsert(back, vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleInsert(Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<int> YShuffleInsert(Vector<int> back, Vector<int> vector, Vector<int> indices) {
+            return Statics.YShuffleInsert(back, vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleInsert(Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<uint> YShuffleInsert(Vector<uint> back, Vector<uint> vector, Vector<uint> indices) {
+            return Statics.YShuffleInsert(back, vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleInsert(Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> YShuffleInsert(Vector<long> back, Vector<long> vector, Vector<long> indices) {
+            return Statics.YShuffleInsert(back, vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleInsert(Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> YShuffleInsert(Vector<ulong> back, Vector<ulong> vector, Vector<ulong> indices) {
+            return Statics.YShuffleInsert(back, vector, indices);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        public override TypeCodeFlags YShuffleKernel_AcceleratedTypes {
+            get {
+                return Statics.YShuffleKernel_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleKernel(Vector{float}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<float> YShuffleKernel(Vector<float> vector, Vector<int> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleKernel(Vector{double}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> YShuffleKernel(Vector<double> vector, Vector<long> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleKernel(Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<sbyte> YShuffleKernel(Vector<sbyte> vector, Vector<sbyte> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleKernel(Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<byte> YShuffleKernel(Vector<byte> vector, Vector<byte> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleKernel(Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<short> YShuffleKernel(Vector<short> vector, Vector<short> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleKernel(Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ushort> YShuffleKernel(Vector<ushort> vector, Vector<ushort> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleKernel(Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<int> YShuffleKernel(Vector<int> vector, Vector<int> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleKernel(Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<uint> YShuffleKernel(Vector<uint> vector, Vector<uint> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleKernel(Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> YShuffleKernel(Vector<long> vector, Vector<long> indices) {
+            return Statics.YShuffleKernel(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleKernel(Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> YShuffleKernel(Vector<ulong> vector, Vector<ulong> indices) {
+            return Statics.YShuffleKernel(vector, indices);
         }
 
 
