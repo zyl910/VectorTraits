@@ -1,0 +1,81 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1705.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B509ACC3-C4D4-49F2-B66B-4A6A4EE68894}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5807E9C6-5AA2-418F-9C8F-72382523051B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{DBE02340-71D0-4D8C-84C8-EBA3E975A0FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits.Sample", "samples\VectorTraits.Sample\VectorTraits.Sample.csproj", "{D9B828D4-F6C5-4BA0-A0CF-CE66DC9105B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits", "src\VectorTraits\VectorTraits.csproj", "{3C843C42-206F-4879-8D7A-4594A00CD720}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9B8F293B-2D67-4F26-8535-EA84032B243A}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+		README_Chinese.md = README_Chinese.md
+	EndProjectSection
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "VectorTraits.InfoInc", "src\VectorTraits.InfoInc\VectorTraits.InfoInc.shproj", "{81CCAD3F-6606-410B-9D02-3F8FC65CACE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits.Output", "samples\VectorTraits.Output\VectorTraits.Output.csproj", "{A1673A71-50DE-4DD6-AE9E-DDDBF15B33ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits.Tests", "tests\VectorTraits.Tests\VectorTraits.Tests.csproj", "{9158CB65-241B-44B0-A7C2-B4F6AF35DE98}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BenchmarkDotNet.Mock", "tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.shproj", "{FE742124-F9F3-463D-83D2-2FA9E33E0505}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "VectorTraits.Benchmarks.Core.Inc", "tests\VectorTraits.Benchmarks.Core.Inc\VectorTraits.Benchmarks.Core.Inc.shproj", "{FF651659-BDF2-4B61-81E6-EDBA29E1AB57}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "VectorTraits.Benchmarks.Inc", "tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.shproj", "{22375BC5-630E-4414-9C45-F749AE13CAE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits.Benchmarks", "tests\VectorTraits.Benchmarks\VectorTraits.Benchmarks.csproj", "{C09E7295-8581-4127-8B46-CA44E6A327EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C843C42-206F-4879-8D7A-4594A00CD720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C843C42-206F-4879-8D7A-4594A00CD720}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C843C42-206F-4879-8D7A-4594A00CD720}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C843C42-206F-4879-8D7A-4594A00CD720}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9B828D4-F6C5-4BA0-A0CF-CE66DC9105B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9B828D4-F6C5-4BA0-A0CF-CE66DC9105B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9B828D4-F6C5-4BA0-A0CF-CE66DC9105B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9B828D4-F6C5-4BA0-A0CF-CE66DC9105B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1673A71-50DE-4DD6-AE9E-DDDBF15B33ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1673A71-50DE-4DD6-AE9E-DDDBF15B33ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1673A71-50DE-4DD6-AE9E-DDDBF15B33ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1673A71-50DE-4DD6-AE9E-DDDBF15B33ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9158CB65-241B-44B0-A7C2-B4F6AF35DE98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9158CB65-241B-44B0-A7C2-B4F6AF35DE98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9158CB65-241B-44B0-A7C2-B4F6AF35DE98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9158CB65-241B-44B0-A7C2-B4F6AF35DE98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C09E7295-8581-4127-8B46-CA44E6A327EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C09E7295-8581-4127-8B46-CA44E6A327EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C09E7295-8581-4127-8B46-CA44E6A327EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C09E7295-8581-4127-8B46-CA44E6A327EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EEA7E3A5-4105-4F41-9504-ABA4C0A9589E}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3C843C42-206F-4879-8D7A-4594A00CD720} = {B509ACC3-C4D4-49F2-B66B-4A6A4EE68894}
+		{81CCAD3F-6606-410B-9D02-3F8FC65CACE5} = {B509ACC3-C4D4-49F2-B66B-4A6A4EE68894}
+		{D9B828D4-F6C5-4BA0-A0CF-CE66DC9105B1} = {DBE02340-71D0-4D8C-84C8-EBA3E975A0FC}
+		{A1673A71-50DE-4DD6-AE9E-DDDBF15B33ED} = {DBE02340-71D0-4D8C-84C8-EBA3E975A0FC}
+		{9158CB65-241B-44B0-A7C2-B4F6AF35DE98} = {5807E9C6-5AA2-418F-9C8F-72382523051B}
+		{FE742124-F9F3-463D-83D2-2FA9E33E0505} = {5807E9C6-5AA2-418F-9C8F-72382523051B}
+		{FF651659-BDF2-4B61-81E6-EDBA29E1AB57} = {5807E9C6-5AA2-418F-9C8F-72382523051B}
+		{22375BC5-630E-4414-9C45-F749AE13CAE1} = {5807E9C6-5AA2-418F-9C8F-72382523051B}
+		{C09E7295-8581-4127-8B46-CA44E6A327EA} = {5807E9C6-5AA2-418F-9C8F-72382523051B}
+	EndGlobalSection
+EndGlobal
