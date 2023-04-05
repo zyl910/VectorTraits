@@ -174,6 +174,52 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("SumShuffleVectorTraits");
         }
 
+        /// <summary>
+        /// Sum Shuffle - Vector Traits - static if.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumShuffleVectorTraitsIf(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+#pragma warning disable CS0618 // Type or member is obsolete
+                Vector<TMy> vtemp = Vector_Shuffle.Shuffle(p0, indices);
+#pragma warning restore CS0618 // Type or member is obsolete
+                vrt += vtemp; // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumShuffleVectorTraitsIf() {
+            //Debugger.Break();
+            dstTMy = StaticSumShuffleVectorTraitsIf(srcArray, srcArray.Length, indices);
+            CheckResult("SumShuffleVectorTraitsIf");
+        }
+
 
 #if NETCOREAPP3_0_OR_GREATER
 
