@@ -17,8 +17,14 @@ namespace Zyl.VectorTraits.Benchmarks {
         public static readonly string IndentNextSeparator = VectorTextUtil.IndentNextSeparator;
 
 
+        /// <summary>Is last run (最后一次运行).</summary>
+        [ThreadStatic]
+        private static bool m_IsLastRun;
+
         /// <summary>Current <see cref="IBenchmarkWriter"/>.</summary>
         public static IBenchmarkWriter CurrentBenchmarkWriter { get; set; }
+        /// <summary>Is last run (最后一次运行).</summary>
+        public static bool IsLastRun { get => m_IsLastRun; }
 
         static BenchmarkUtil() {
             CurrentBenchmarkWriter = new TabBenchmarkWriter();
@@ -81,6 +87,7 @@ namespace Zyl.VectorTraits.Benchmarks {
             int loops = 1;
             int i, j;
             if (loopCount <= 0) loopCount = 1;
+            m_IsLastRun = false;
             // Find best loops.
             for (; ; ) {
                 stopwatch.Restart();
@@ -103,13 +110,23 @@ namespace Zyl.VectorTraits.Benchmarks {
             //Span<long> tickArray = stackalloc long[RepeatCount];
             for (j = 0; j < RepeatCount; ++j) {
                 stopwatch.Restart();
-                for (i = 0; i < loops; ++i) {
+                bool isLast = ((j + 1) == RepeatCount);
+                int loopsCount = loops;
+                if (isLast) {
+                    --loopsCount;
+                }
+                for (i = 0; i < loopsCount; ++i) {
+                    action();
+                }
+                if (isLast) {
+                    m_IsLastRun = true;
                     action();
                 }
                 stopwatch.Stop();
                 tickUsed = stopwatch.ElapsedTicks;
                 tickArray[j] = tickUsed;
             }
+            m_IsLastRun = false;
             // done.
             //tickArray.Sort();
             Array.Sort(tickArray);

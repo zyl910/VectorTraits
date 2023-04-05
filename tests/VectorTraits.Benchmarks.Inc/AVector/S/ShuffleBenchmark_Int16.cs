@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 #endif
 using System.Text;
+using System.Threading;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.S {
@@ -169,7 +170,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         [Benchmark]
         public void SumShuffleVectorTraits() {
-            //Debugger.Break();
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
             dstTMy = StaticSumShuffleVectorTraits(srcArray, srcArray.Length, indices);
             CheckResult("SumShuffleVectorTraits");
         }
@@ -215,7 +219,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         [Benchmark]
         public void SumShuffleVectorTraitsIf() {
-            //Debugger.Break();
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
             dstTMy = StaticSumShuffleVectorTraitsIf(srcArray, srcArray.Length, indices);
             CheckResult("SumShuffleVectorTraitsIf");
         }
