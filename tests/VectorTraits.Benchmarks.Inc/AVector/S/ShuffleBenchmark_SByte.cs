@@ -11,6 +11,7 @@ using System.Runtime.Intrinsics;
 #endif
 using System.Text;
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Extensions;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_OFF
@@ -306,7 +307,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.Shuffle(p0, indicesUsed);
-                vrt += vtemp; // Add.
+                vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -360,7 +361,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector128<TMy> vtemp = Vector128s.Shuffle(p0, indicesUsed);
-                vrt += vtemp; // Add.
+                vrt = Vector128s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -469,7 +470,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YShuffleInsert_Add1(back.AsByte(), p0.AsByte(), indicesUsed.AsByte()).AsSByte();
-                vrt += vtemp; // Add.
+                vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -519,7 +520,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YShuffleInsert_Add2(back.AsByte(), p0.AsByte(), indicesUsed.AsByte()).AsSByte();
-                vrt += vtemp; // Add.
+                vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -569,7 +570,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YShuffleInsert_Cmp2(back.AsByte(), p0.AsByte(), indicesUsed.AsByte()).AsSByte();
-                vrt += vtemp; // Add.
+                vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -618,7 +619,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector256<TMy> vtemp = Vector256s.Shuffle(p0, indicesUsed);
-                vrt += vtemp; // Add.
+                vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -727,7 +728,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.YShuffleKernel(p0, indicesUsed);
-                vrt += vtemp; // Add.
+                vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -781,7 +782,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector128<TMy> vtemp = Vector128s.YShuffleKernel(p0, indicesUsed);
-                vrt += vtemp; // Add.
+                vrt = Vector128s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -837,7 +838,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector256<TMy> vtemp = Vector256s.YShuffleKernel(p0, indicesUsed);
-                vrt += vtemp; // Add.
+                vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
