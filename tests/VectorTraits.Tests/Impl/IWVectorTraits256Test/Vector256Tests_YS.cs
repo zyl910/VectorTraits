@@ -8,6 +8,7 @@ using System.Numerics;
 using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Tuples;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
     [TestFixture()]
@@ -147,6 +148,16 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     } else {
                         Assert.AreEqual(expected, dst, "_Args, vector={vector}, indices={indices}");
                     }
+                    // Static: ArgsX and Core
+                    Vector256X2<TIdx> args = Vector256s.YShuffleKernel_ArgsX((dynamic)indices);
+                    dst = Vector256s.YShuffleKernel_Core((dynamic)vector, (dynamic)args);
+                    if (allowLogItem) {
+                        // Compatible floating-point NaN.
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args", dst, vector, indices));
+                    } else {
+                        Assert.AreEqual(expected, dst, "_ArgsX, vector={vector}, indices={indices}");
+                    }
+                    // Instances
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         dst = instance.YShuffleKernel((dynamic)vector, (dynamic)indices);

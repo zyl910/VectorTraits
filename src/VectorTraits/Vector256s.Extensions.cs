@@ -6,6 +6,7 @@ using System.Text;
 using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Tuples;
 using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
 namespace Zyl.VectorTraits {
@@ -329,6 +330,260 @@ namespace Zyl.VectorTraits {
         public static (Vector256<ulong> args0, Vector256<ulong> args1) YShuffleKernel_Args(Vector256<ulong> indices) {
             YShuffleKernel_Args(indices, out var a, out var b);
             return (a, b);
+        }
+
+
+        /// <summary>
+        /// Arguments calculation for only shuffle - X (仅换位的参数计算 - X). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256X2<sbyte> YShuffleKernel_ArgsX(Vector256<sbyte> indices) {
+            return new Vector256X2<sbyte>(YShuffleKernel_Args(indices));
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle - X (仅换位的参数计算 - X). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256X2<byte> YShuffleKernel_ArgsX(Vector256<byte> indices) {
+            return new Vector256X2<byte>(YShuffleKernel_Args(indices));
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle - X (仅换位的参数计算 - X). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256X2<short> YShuffleKernel_ArgsX(Vector256<short> indices) {
+            return new Vector256X2<short>(YShuffleKernel_Args(indices));
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle - X (仅换位的参数计算 - X). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256X2<ushort> YShuffleKernel_ArgsX(Vector256<ushort> indices) {
+            return new Vector256X2<ushort>(YShuffleKernel_Args(indices));
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle - X (仅换位的参数计算 - X). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256X2<int> YShuffleKernel_ArgsX(Vector256<int> indices) {
+            return new Vector256X2<int>(YShuffleKernel_Args(indices));
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle - X (仅换位的参数计算 - X). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256X2<uint> YShuffleKernel_ArgsX(Vector256<uint> indices) {
+            return new Vector256X2<uint>(YShuffleKernel_Args(indices));
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle - X (仅换位的参数计算 - X). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256X2<long> YShuffleKernel_ArgsX(Vector256<long> indices) {
+            return new Vector256X2<long>(YShuffleKernel_Args(indices));
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle - X (仅换位的参数计算 - X). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256X2<ulong> YShuffleKernel_ArgsX(Vector256<ulong> indices) {
+            return new Vector256X2<ulong>(YShuffleKernel_Args(indices));
+        }
+
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{float}, Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YShuffleKernel_Core(Vector256<float> vector, Vector256X2<int> args) {
+            return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{double}, Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YShuffleKernel_Core(Vector256<double> vector, Vector256X2<long> args) {
+            return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YShuffleKernel_Core(Vector256<sbyte> vector, Vector256X2<sbyte> args) {
+            return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YShuffleKernel_Core(Vector256<byte> vector, Vector256X2<byte> args) {
+            return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{short}, Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YShuffleKernel_Core(Vector256<short> vector, Vector256X2<short> args) {
+            return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{ushort}, Vector256X2{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> YShuffleKernel_Core(Vector256<ushort> vector, Vector256X2<ushort> args) {
+            return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{int}, Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YShuffleKernel_Core(Vector256<int> vector, Vector256X2<int> args) {
+            return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> YShuffleKernel_Core(Vector256<uint> vector, Vector256X2<uint> args) {
+            return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{long}, Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YShuffleKernel_Core(Vector256<long> vector, Vector256X2<long> args) {
+            return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> YShuffleKernel_Core(Vector256<ulong> vector, Vector256X2<ulong> args) {
+            return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
         }
 
 #endif // NETCOREAPP3_0_OR_GREATER
