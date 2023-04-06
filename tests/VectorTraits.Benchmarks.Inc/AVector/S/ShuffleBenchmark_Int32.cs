@@ -12,6 +12,7 @@ using System.Runtime.Intrinsics;
 using System.Text;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Extensions;
+using System.Threading;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_OFF
@@ -666,6 +667,112 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             //Debugger.Break();
             dstTMy = StaticSumYShuffleKernelVector256Traits(srcArray, srcArray.Length, indices);
             CheckResult("SumYShuffleKernelVector256Traits");
+        }
+
+        /// <summary>
+        /// Sum YShuffleKernel - Vector256 - Traits static - Args and Core.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumYShuffleKernelVector256Traits_Args(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
+            Vector256<TMy> indicesUsed = indices.AsVector256();
+            (var args0, var args1) = Vector256s.YShuffleKernel_Args(indicesUsed);
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector256<TMy> vtemp = Vector256s.YShuffleKernel_Core(p0, args0, args1);
+                vrt = Vector256s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumYShuffleKernelVector256Traits_Args() {
+            Vector256s.ThrowForUnsupported(true);
+            if (Vector<byte>.Count != Vector256<byte>.Count) {
+                throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
+            }
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumYShuffleKernelVector256Traits_Args(srcArray, srcArray.Length, indices);
+            CheckResult("SumYShuffleKernelVector256Traits_Args");
+        }
+
+        /// <summary>
+        /// Sum YShuffleKernel - Vector256 - Traits static - ArgsX and Core.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumYShuffleKernelVector256Traits_ArgsX(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
+            Vector256<TMy> indicesUsed = indices.AsVector256();
+            var args = Vector256s.YShuffleKernel_ArgsX(indicesUsed);
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector256<TMy> vtemp = Vector256s.YShuffleKernel_Core(p0, args);
+                vrt = Vector256s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumYShuffleKernelVector256Traits_ArgsX() {
+            Vector256s.ThrowForUnsupported(true);
+            if (Vector<byte>.Count != Vector256<byte>.Count) {
+                throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
+            }
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumYShuffleKernelVector256Traits_ArgsX(srcArray, srcArray.Length, indices);
+            CheckResult("SumYShuffleKernelVector256Traits_ArgsX");
         }
 
 #endif // BENCHMARKS_256ALGORITHM
