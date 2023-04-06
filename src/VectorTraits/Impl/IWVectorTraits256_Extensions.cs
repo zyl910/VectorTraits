@@ -109,6 +109,113 @@ namespace Zyl.VectorTraits.Impl {
             return (a, b);
         }
 
+
+        /// <inheritdoc cref="Vector256s.YShuffleKernel_Args{TIdx}(Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void YShuffleKernel_Args<TIdx>(this IWVectorTraits256 athis, Vector256<TIdx> indices, out Vector256<TIdx> args0, out Vector256<TIdx> args1)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b) = athis.YShuffleKernel_Args((Vector256<sbyte>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b) = athis.YShuffleKernel_Args((Vector256<byte>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b) = athis.YShuffleKernel_Args((Vector256<short>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b) = athis.YShuffleKernel_Args((Vector256<ushort>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b) = athis.YShuffleKernel_Args((Vector256<int>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b) = athis.YShuffleKernel_Args((Vector256<uint>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b) = athis.YShuffleKernel_Args((Vector256<long>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b) = athis.YShuffleKernel_Args((Vector256<ulong>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleKernel_Args(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<sbyte> args0, Vector256<sbyte> args1) YShuffleKernel_Args(this IWVectorTraits256 athis, Vector256<sbyte> indices) {
+            athis.YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleKernel_Args(Vector256{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<byte> args0, Vector256<byte> args1) YShuffleKernel_Args(this IWVectorTraits256 athis, Vector256<byte> indices) {
+            athis.YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleKernel_Args(Vector256{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<short> args0, Vector256<short> args1) YShuffleKernel_Args(this IWVectorTraits256 athis, Vector256<short> indices) {
+            athis.YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleKernel_Args(Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ushort> args0, Vector256<ushort> args1) YShuffleKernel_Args(this IWVectorTraits256 athis, Vector256<ushort> indices) {
+            athis.YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleKernel_Args(Vector256{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<int> args0, Vector256<int> args1) YShuffleKernel_Args(this IWVectorTraits256 athis, Vector256<int> indices) {
+            athis.YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleKernel_Args(Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<uint> args0, Vector256<uint> args1) YShuffleKernel_Args(this IWVectorTraits256 athis, Vector256<uint> indices) {
+            athis.YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleKernel_Args(Vector256{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<long> args0, Vector256<long> args1) YShuffleKernel_Args(this IWVectorTraits256 athis, Vector256<long> indices) {
+            athis.YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleKernel_Args(Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ulong> args0, Vector256<ulong> args1) YShuffleKernel_Args(this IWVectorTraits256 athis, Vector256<ulong> indices) {
+            athis.YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
 #endif // NETCOREAPP3_0_OR_GREATER
     }
 }

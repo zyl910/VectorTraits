@@ -169,6 +169,17 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         } else {
                             Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, vector={vector}, indices={indices}");
                         }
+                        // Static: Args and Core
+#pragma warning disable CS0618 // Type or member is obsolete
+                        instance.YShuffleKernel_Args<TIdx>(indices, out args0, out args1);
+#pragma warning restore CS0618 // Type or member is obsolete
+                        dst = instance.YShuffleKernel_Core((dynamic)vector, (dynamic)args0, (dynamic)args1);
+                        if (allowLogItem) {
+                            // Compatible floating-point NaN.
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args of " + instance.GetType().Name, dst, vector, indices));
+                        } else {
+                            Assert.AreEqual(expected, dst, "_Args of {instance.GetType().Name}, vector={vector}, indices={indices}");
+                        }
                     }
                     if (allowLog) {
                         Console.WriteLine();
