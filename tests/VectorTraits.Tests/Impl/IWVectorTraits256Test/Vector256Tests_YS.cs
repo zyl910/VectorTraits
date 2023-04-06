@@ -149,8 +149,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         Assert.AreEqual(expected, dst, "_Args, vector={vector}, indices={indices}");
                     }
                     // Static: ArgsX and Core
+#pragma warning disable CS0618 // Type or member is obsolete
                     Vector256X2<TIdx> args = Vector256s.YShuffleKernel_ArgsX((dynamic)indices);
                     dst = Vector256s.YShuffleKernel_Core((dynamic)vector, (dynamic)args);
+#pragma warning restore CS0618 // Type or member is obsolete
                     if (allowLogItem) {
                         // Compatible floating-point NaN.
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args", dst, vector, indices));

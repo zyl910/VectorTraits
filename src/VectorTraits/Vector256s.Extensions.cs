@@ -341,6 +341,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256X2<sbyte> YShuffleKernel_ArgsX(Vector256<sbyte> indices) {
@@ -355,6 +356,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256X2<byte> YShuffleKernel_ArgsX(Vector256<byte> indices) {
             return new Vector256X2<byte>(YShuffleKernel_Args(indices));
@@ -368,6 +370,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256X2<short> YShuffleKernel_ArgsX(Vector256<short> indices) {
             return new Vector256X2<short>(YShuffleKernel_Args(indices));
@@ -381,6 +384,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256X2<ushort> YShuffleKernel_ArgsX(Vector256<ushort> indices) {
@@ -395,6 +399,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256X2<int> YShuffleKernel_ArgsX(Vector256<int> indices) {
             return new Vector256X2<int>(YShuffleKernel_Args(indices));
@@ -408,6 +413,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256X2<uint> YShuffleKernel_ArgsX(Vector256<uint> indices) {
@@ -422,6 +428,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256X2<long> YShuffleKernel_ArgsX(Vector256<long> indices) {
             return new Vector256X2<long>(YShuffleKernel_Args(indices));
@@ -435,6 +442,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256X2<ulong> YShuffleKernel_ArgsX(Vector256<ulong> indices) {
@@ -451,6 +459,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{float}, Vector256{int}, Vector256{int})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> YShuffleKernel_Core(Vector256<float> vector, Vector256X2<int> args) {
             return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
@@ -465,6 +474,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{double}, Vector256{long}, Vector256{long})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<double> YShuffleKernel_Core(Vector256<double> vector, Vector256X2<long> args) {
             return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
@@ -479,6 +489,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<sbyte> YShuffleKernel_Core(Vector256<sbyte> vector, Vector256X2<sbyte> args) {
@@ -494,6 +505,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<byte> YShuffleKernel_Core(Vector256<byte> vector, Vector256X2<byte> args) {
             return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
@@ -508,6 +520,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{short}, Vector256{short}, Vector256{short})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<short> YShuffleKernel_Core(Vector256<short> vector, Vector256X2<short> args) {
             return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
@@ -522,6 +535,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{ushort}, Vector256X2{ushort}, Vector256{ushort})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ushort> YShuffleKernel_Core(Vector256<ushort> vector, Vector256X2<ushort> args) {
@@ -537,6 +551,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{int}, Vector256{int}, Vector256{int})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> YShuffleKernel_Core(Vector256<int> vector, Vector256X2<int> args) {
             return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
@@ -551,6 +566,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<uint> YShuffleKernel_Core(Vector256<uint> vector, Vector256X2<uint> args) {
@@ -566,6 +582,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{long}, Vector256{long}, Vector256{long})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<long> YShuffleKernel_Core(Vector256<long> vector, Vector256X2<long> args) {
             return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
@@ -580,6 +597,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits256.YShuffleKernel_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+        [Obsolete("It has poor performance and is only suitable for unit testing. In general, it is recommended to use the non-X version of the methods (它的性能较差, 仅适用于单元测试. 一般情况下, 建议使用非X版方法).")]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ulong> YShuffleKernel_Core(Vector256<ulong> vector, Vector256X2<ulong> args) {

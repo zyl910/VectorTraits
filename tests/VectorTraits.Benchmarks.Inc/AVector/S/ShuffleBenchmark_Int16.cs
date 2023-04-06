@@ -888,6 +888,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
             Vector256<TMy> indicesUsed = indices.AsVector256();
+#pragma warning disable CS0618 // Type or member is obsolete
             var args = Vector256s.YShuffleKernel_ArgsX(indicesUsed);
             int i;
             // Body.
@@ -898,6 +899,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
+#pragma warning restore CS0618 // Type or member is obsolete
             // b) Remainder processs.
             // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
             // for (i = 0; i < cntRem; ++i) {
