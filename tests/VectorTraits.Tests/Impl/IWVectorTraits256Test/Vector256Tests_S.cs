@@ -293,6 +293,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         Console.WriteLine(VectorTextUtil.Format("Indices:\t{0}", indices));
                         Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
                     }
+                    // Instances
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         Vector256<T> dst = instance.Shuffle((dynamic)vector, (dynamic)indices);
