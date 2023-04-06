@@ -473,88 +473,67 @@ namespace Zyl.VectorTraits.Impl {
             }
 
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{float}, Vector256{int}, out Vector256{int}, out Vector256{int})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void YShuffleKernel_Args(Vector256<float> vector, Vector256<int> indices, out Vector256<int> args0, out Vector256<int> args1) {
-                YShuffleKernel_Args(vector.AsUInt32(), indices.AsUInt32(), out var a0, out var a1);
-                args0 = a0.AsInt32();
-                args1 = a1.AsInt32();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{double}, Vector256{long}, out Vector256{long}, out Vector256{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void YShuffleKernel_Args(Vector256<double> vector, Vector256<long> indices, out Vector256<long> args0, out Vector256<long> args1) {
-                YShuffleKernel_Args(vector.AsUInt64(), indices.AsUInt64(), out var a0, out var a1);
-                args0 = a0.AsInt64();
-                args1 = a1.AsInt64();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void YShuffleKernel_Args(Vector256<sbyte> vector, Vector256<sbyte> indices, out Vector256<sbyte> args0, out Vector256<sbyte> args1) {
-                YShuffleKernel_Args(vector.AsByte(), indices.AsByte(), out var a0, out var a1);
+            public static void YShuffleKernel_Args(Vector256<sbyte> indices, out Vector256<sbyte> args0, out Vector256<sbyte> args1) {
+                YShuffleKernel_Args(indices.AsByte(), out var a0, out var a1);
                 args0 = a0.AsSByte();
                 args1 = a1.AsSByte();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void YShuffleKernel_Args(Vector256<byte> vector, Vector256<byte> indices, out Vector256<byte> args0, out Vector256<byte> args1) {
-                _ = vector;
+            public static void YShuffleKernel_Args(Vector256<byte> indices, out Vector256<byte> args0, out Vector256<byte> args1) {
                 args0 = Avx2.Add(indices, Vector256Constants.Shuffle_Byte_LaneAdd_K0);
                 args1 = Avx2.Add(indices, Vector256Constants.Shuffle_Byte_LaneAdd_K1);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{short}, out Vector256{short}, out Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void YShuffleKernel_Args(Vector256<short> vector, Vector256<short> indices, out Vector256<short> args0, out Vector256<short> args1) {
-                YShuffleKernel_Args(vector.AsUInt16(), indices.AsUInt16(), out var a0, out var a1);
+            public static void YShuffleKernel_Args(Vector256<short> indices, out Vector256<short> args0, out Vector256<short> args1) {
+                YShuffleKernel_Args(indices.AsUInt16(), out var a0, out var a1);
                 args0 = a0.AsInt16();
                 args1 = a1.AsInt16();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void YShuffleKernel_Args(Vector256<ushort> vector, Vector256<ushort> indices, out Vector256<ushort> args0, out Vector256<ushort> args1) {
-                _ = vector;
+            public static void YShuffleKernel_Args(Vector256<ushort> indices, out Vector256<ushort> args0, out Vector256<ushort> args1) {
                 Vector256<byte> indices2 = Avx2.Add(Multiply(indices, Vector256Constants.Shuffle_UInt16_Multiplier).AsByte(), Vector256Constants.Shuffle_UInt16_ByteOffset);
-                YShuffleKernel_Args(vector.AsByte(), indices2, out var a0, out var a1);
+                YShuffleKernel_Args(indices2, out var a0, out var a1);
                 args0 = a0.AsUInt16();
                 args1 = a1.AsUInt16();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{int}, out Vector256{int}, out Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void YShuffleKernel_Args(Vector256<int> vector, Vector256<int> indices, out Vector256<int> args0, out Vector256<int> args1) {
-                _ = vector;
+            public static void YShuffleKernel_Args(Vector256<int> indices, out Vector256<int> args0, out Vector256<int> args1) {
                 args0 = indices;
                 args1 = default;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void YShuffleKernel_Args(Vector256<uint> vector, Vector256<uint> indices, out Vector256<uint> args0, out Vector256<uint> args1) {
-                _ = vector;
+            public static void YShuffleKernel_Args(Vector256<uint> indices, out Vector256<uint> args0, out Vector256<uint> args1) {
                 args0 = indices;
                 args1 = default;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{long}, out Vector256{long}, out Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void YShuffleKernel_Args(Vector256<long> vector, Vector256<long> indices, out Vector256<long> args0, out Vector256<long> args1) {
-                YShuffleKernel_Args(vector.AsUInt64(), indices.AsUInt64(), out var a0, out var a1);
+            public static void YShuffleKernel_Args(Vector256<long> indices, out Vector256<long> args0, out Vector256<long> args1) {
+                YShuffleKernel_Args(indices.AsUInt64(), out var a0, out var a1);
                 args0 = a0.AsInt64();
                 args1 = a1.AsInt64();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleKernel_Args(Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void YShuffleKernel_Args(Vector256<ulong> vector, Vector256<ulong> indices, out Vector256<ulong> args0, out Vector256<ulong> args1) {
-                _ = vector;
+            public static void YShuffleKernel_Args(Vector256<ulong> indices, out Vector256<ulong> args0, out Vector256<ulong> args1) {
                 args1 = default;
                 Vector256<uint> temp = Avx.DuplicateEvenIndexed(indices.AsSingle()).AsUInt32();
                 temp = Avx2.ShiftLeftLogical(temp, 1); // n*2 = n << 1;

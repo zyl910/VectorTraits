@@ -138,7 +138,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     // Static: Args and Core
                     Vector256<TIdx> args0, args1;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    Vector256s.YShuffleKernel_Args<T, TIdx>(vector, indices, out args0, out args1);
+                    Vector256s.YShuffleKernel_Args<TIdx>(indices, out args0, out args1);
 #pragma warning restore CS0618 // Type or member is obsolete
                     Vector256<T> dst = Vector256s.YShuffleKernel_Core((dynamic)vector, (dynamic)args0, (dynamic)args1);
                     if (allowLogItem) {
