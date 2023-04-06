@@ -48,7 +48,7 @@ namespace Zyl.VectorTraits.Impl {
             public static bool GetIsSupported(bool noStrict = false) {
                 bool rt = false;
 #if NETCOREAPP3_0_OR_GREATER
-                rt = Avx.IsSupported && Avx2.IsSupported;
+                rt = Avx.IsSupported && Avx2.IsSupported && Sse.IsSupported && Sse2.IsSupported;
 #else
 #endif // NETCOREAPP3_0_OR_GREATER
                 if (!noStrict) {
@@ -60,6 +60,19 @@ namespace Zyl.VectorTraits.Impl {
             public static string GetUnsupportedMessage(bool noStrict = false) {
                 string rt = "Requires hardware support Avx, Avx2!";
 #if NETCOREAPP3_0_OR_GREATER
+                if (Avx.IsSupported && Avx2.IsSupported) {
+                    if (Sse.IsSupported && Sse2.IsSupported) {
+                        // done.
+                    } else {
+                        // Details.
+                        rt = "";
+                        if (!Sse.IsSupported) rt += ", Sse";
+                        if (!Sse2.IsSupported) rt += ", Sse2";
+                        if (!String.IsNullOrEmpty(rt)) {
+                            rt = "Requires hardware support " + rt.Substring(2) + "!";
+                        }
+                    }
+                }
 #else
                 rt = "Vector256 type is not supported! " + rt;
 #endif // NETCOREAPP3_0_OR_GREATER
