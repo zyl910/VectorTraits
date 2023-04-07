@@ -7,6 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Impl.AVector;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 

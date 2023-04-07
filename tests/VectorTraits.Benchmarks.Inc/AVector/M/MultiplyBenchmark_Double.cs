@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.Impl.AVector;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.M {
 #if BENCHMARKS_OFF

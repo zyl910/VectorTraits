@@ -10,7 +10,7 @@ using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.Arm;
 #endif // NET5_0_OR_GREATER
 
-namespace Zyl.VectorTraits.Impl {
+namespace Zyl.VectorTraits.Impl.AVector128 {
     using SuperStatics = WVectorTraits128Base.Statics;
 
     /// <summary>

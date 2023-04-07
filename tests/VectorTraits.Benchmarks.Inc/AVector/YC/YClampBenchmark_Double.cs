@@ -11,6 +11,8 @@ using System.Runtime.Intrinsics;
 #endif
 using System.Text;
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Impl.AVector;
+using Zyl.VectorTraits.Impl.AVector128;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
 #if BENCHMARKS_OFF

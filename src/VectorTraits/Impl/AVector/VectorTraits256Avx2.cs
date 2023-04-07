@@ -7,8 +7,9 @@ using System.Runtime.Intrinsics;
 #endif
 using System.Text;
 using Zyl.VectorTraits.Extensions;
+using Zyl.VectorTraits.Impl.AVector256;
 
-namespace Zyl.VectorTraits.Impl {
+namespace Zyl.VectorTraits.Impl.AVector {
     using WStatics = WVectorTraits256Avx2.Statics;
     using BaseStatics = VectorTraitsBase.Statics;
 

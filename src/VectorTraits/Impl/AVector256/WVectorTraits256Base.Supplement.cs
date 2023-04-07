@@ -7,7 +7,7 @@ using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl.Util;
 
-namespace Zyl.VectorTraits.Impl {
+namespace Zyl.VectorTraits.Impl.AVector256 {
     partial class WVectorTraits256Base {
 
         partial class Statics {

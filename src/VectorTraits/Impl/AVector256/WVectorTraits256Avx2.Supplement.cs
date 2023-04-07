@@ -7,7 +7,7 @@ using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 #endif
 
-namespace Zyl.VectorTraits.Impl {
+namespace Zyl.VectorTraits.Impl.AVector256 {
     using SuperStatics = WVectorTraits256Base.Statics;
 
     partial class WVectorTraits256Avx2 {

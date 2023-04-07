@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Numerics;
 using Zyl.VectorTraits.Extensions.SameW;
 
-namespace Zyl.VectorTraits.Impl {
+namespace Zyl.VectorTraits.Impl.AVector {
 
     partial class VectorTraitsBase {
 

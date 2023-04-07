@@ -4,8 +4,9 @@ using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.Impl.AVector128;
 
-namespace Zyl.VectorTraits.Impl {
+namespace Zyl.VectorTraits.Impl.AVector {
     using WStatics = WVectorTraits128AdvSimdB64.Statics;
     using BaseStatics = VectorTraits128Base.Statics;
 

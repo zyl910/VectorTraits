@@ -11,6 +11,8 @@ using System.Runtime.Intrinsics;
 #endif
 using System.Text;
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Impl.AVector;
+using Zyl.VectorTraits.Impl.AVector128;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
 #if BENCHMARKS_OFF
@@ -149,8 +151,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TMy StaticSumClampVectorScalar(TMy[] src, int srcCount, TMy amin, TMy amax) {
             TMy rt = 0; // Result.
-            Vector<TMy> vectorMin = new Vector<TMy>(valueMin);
-            Vector<TMy> vectorMax = new Vector<TMy>(valueMax);
+            Vector<TMy> vectorMin = new Vector<TMy>(amin);
+            Vector<TMy> vectorMax = new Vector<TMy>(amax);
             for (int i = 0; i < srcCount; ++i) {
                 TMy t = src[i];
                 Vector<TMy> vr = VectorTraitsBase.Statics.YClamp(new Vector<TMy>(t), vectorMin, vectorMax);

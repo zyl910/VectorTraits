@@ -6,8 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 #endif
 using System.Text;
+using Zyl.VectorTraits.Impl.AVector128;
 
-namespace Zyl.VectorTraits.Impl {
+namespace Zyl.VectorTraits.Impl.AVector {
     using WStatics = WVectorTraits128AdvSimd.Statics;
     using BaseStatics = VectorTraits128Base.Statics;
 

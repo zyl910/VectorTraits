@@ -7,7 +7,7 @@ using Zyl.VectorTraits.Impl.Util;
 using System.Runtime.Intrinsics;
 #endif
 
-namespace Zyl.VectorTraits.Impl {
+namespace Zyl.VectorTraits.Impl.AVector128 {
     /// <summary>
     /// <see cref="Vector128{T}"/> traits - Base.
     /// </summary>

@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 #endif
 
-namespace Zyl.VectorTraits.Impl {
+namespace Zyl.VectorTraits.Impl.AVector256 {
     using Statics = WVectorTraits256Avx2.Statics;
 
     /// <summary>

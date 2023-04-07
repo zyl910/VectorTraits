@@ -6,6 +6,7 @@ using System.Text;
 using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Impl.AVector256;
 
 namespace Zyl.VectorTraits {
     using BaseStatics = WVectorTraits256Base.Statics;

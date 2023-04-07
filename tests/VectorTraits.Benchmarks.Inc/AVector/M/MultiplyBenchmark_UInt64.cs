@@ -12,6 +12,7 @@ using System.Runtime.Intrinsics;
 using System.Text;
 using System.Threading;
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Impl.AVector256;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.M {
 #if BENCHMARKS_OFF

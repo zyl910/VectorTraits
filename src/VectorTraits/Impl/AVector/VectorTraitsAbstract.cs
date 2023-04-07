@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Numerics;
 using System.Diagnostics;
 
-namespace Zyl.VectorTraits.Impl {
+namespace Zyl.VectorTraits.Impl.AVector {
     using Statics = VectorTraitsBase.Statics;
 
     /// <summary>

@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Impl.AVector;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.M {
 #if BENCHMARKS_OFF

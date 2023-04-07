@@ -11,8 +11,11 @@ using System.Runtime.Intrinsics;
 #endif
 using System.Text;
 using System.Threading;
-using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Extensions;
+using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Impl.AVector;
+using Zyl.VectorTraits.Impl.AVector128;
+using Zyl.VectorTraits.Impl.AVector256;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_OFF

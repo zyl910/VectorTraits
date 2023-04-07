@@ -6,7 +6,7 @@ using System.Numerics;
 using Zyl.VectorTraits.Extensions.SameW;
 using Zyl.VectorTraits.Impl.Util;
 
-namespace Zyl.VectorTraits.Impl {
+namespace Zyl.VectorTraits.Impl.AVector {
 
     /// <summary>
     /// <see cref="Vector{T}"/> traits - Variable base.

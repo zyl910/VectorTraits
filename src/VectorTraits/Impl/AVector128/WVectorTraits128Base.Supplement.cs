@@ -7,7 +7,7 @@ using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl.Util;
 
-namespace Zyl.VectorTraits.Impl {
+namespace Zyl.VectorTraits.Impl.AVector128 {
 
     partial class WVectorTraits128Base {
 
