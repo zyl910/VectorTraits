@@ -46,7 +46,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumShuffleScalar(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumShuffleScalar(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -96,7 +96,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumShuffleVectorBase(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumShuffleVectorBase(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -143,7 +143,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumShuffleVectorTraits(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumShuffleVectorTraits(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -190,7 +190,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumShuffleVectorTraitsIf(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumShuffleVectorTraitsIf(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -250,7 +250,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumShuffleVector128_Bcl(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumShuffleVector128_Bcl(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -302,7 +302,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumShuffleVector128_Arm(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumShuffleVector128_Arm(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -356,7 +356,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumShuffleVector128Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumShuffleVector128Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -414,7 +414,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumShuffleVector256_Bcl(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumShuffleVector256_Bcl(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -464,7 +464,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumShuffleVector256Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumShuffleVector256Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -518,7 +518,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumYShuffleKernelVectorTraits(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumYShuffleKernelVectorTraits(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -573,7 +573,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumYShuffleKernelVector128_Arm(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumYShuffleKernelVector128_Arm(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -627,7 +627,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumYShuffleKernelVector128Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumYShuffleKernelVector128Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -682,7 +682,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumYShuffleKernelVector256_Avx2_Multiply(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumYShuffleKernelVector256_Avx2_Multiply(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -731,7 +731,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumYShuffleKernelVector256_Avx2_ShiftLane(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumYShuffleKernelVector256_Avx2_ShiftLane(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -780,7 +780,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumYShuffleKernelVector256Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumYShuffleKernelVector256Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -829,7 +829,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumYShuffleKernelVector256Traits_Args(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumYShuffleKernelVector256Traits_Args(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -875,6 +875,59 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
+        /// Sum YShuffleKernel - Vector256 - Traits static - Args and Core with ValueTuple.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static TMy StaticSumYShuffleKernelVector256Traits_Args2(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
+            Vector256<TMy> indicesUsed = indices.AsVector256();
+            var args = Vector256s.YShuffleKernel_Args(indicesUsed);
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector256<TMy> vtemp = Vector256s.YShuffleKernel_Core(p0, args);
+                vrt = Vector256s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumYShuffleKernelVector256Traits_Args2() {
+            Vector256s.ThrowForUnsupported(true);
+            if (Vector<byte>.Count != Vector256<byte>.Count) {
+                throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
+            }
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumYShuffleKernelVector256Traits_Args2(srcArray, srcArray.Length, indices);
+            CheckResult("SumYShuffleKernelVector256Traits_Args2");
+        }
+
+        /// <summary>
         /// Sum YShuffleKernel - Vector256 - Traits static - ArgsX and Core.
         /// </summary>
         /// <param name="src">Source array.</param>
@@ -882,7 +935,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumYShuffleKernelVector256Traits_ArgsX(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumYShuffleKernelVector256Traits_ArgsX(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
