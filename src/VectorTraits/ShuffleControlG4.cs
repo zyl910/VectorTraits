@@ -13,7 +13,7 @@ namespace Zyl.VectorTraits {
     /// </remarks>
     /// <seealso cref="BitMath.GetByteByBit2R(byte, byte, byte, byte)"/>
     /// <seealso cref="BitMath._MM_SHUFFLE(byte, byte, byte, byte)"/>
-    public enum ShuffleControlG4: byte {
+    public enum ShuffleControlG4 : byte {
         /// <summary>XXXX := GetByteByBit2R(0, 0, 0, 0) = _MM_SHUFFLE(0, 0, 0, 0) = (0 &lt;&lt; 6) | (0 &lt;&lt; 4) | (0 &lt;&lt; 2) | 0 = 0x00 = 0 .</summary>
         XXXX = 0x00,
         /// <summary>YXXX := GetByteByBit2R(1, 0, 0, 0) = _MM_SHUFFLE(0, 0, 0, 1) = (0 &lt;&lt; 6) | (0 &lt;&lt; 4) | (0 &lt;&lt; 2) | 1 = 0x01 = 1 .</summary>
