@@ -290,7 +290,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint ExtractMostSignificantBits(Vector256<ushort> vector) {
                 Vector256<byte> m = Avx2.Shuffle(vector.AsByte(), Vector256Constants.ExtractMostSignificantBits_Shuffle_HiByteOf16); // Packed the high byte. 0~7 is the source 0~7, 16~23 is the source 8~15, and the rest is cleared.
-                m = Avx2.Permute4x64(m.AsUInt64(), ShuffleControlG4.XZYW).AsByte(); // Swap 16~23 bytes, to 8~15 .
+                m = Avx2.Permute4x64(m.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsByte(); // Swap 16~23 bytes, to 8~15 .
                 return (uint)Avx2.MoveMask(m);
             }
 
@@ -372,7 +372,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // Vector256<ushort> mask = Vector256.Create((ushort)0x0FFU);
                 Vector256<ushort> mask = Vector256s<ushort>.VMaxByte;
                 Vector256<byte> raw = Avx2.PackUnsignedSaturate(Avx2.And(lower, mask).AsInt16(), Avx2.And(upper, mask).AsInt16()); // bit64(x, z, y, w)
-                Vector256<byte> rt = Avx2.Permute4x64(raw.AsUInt64(), ShuffleControlG4.XZYW).AsByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                Vector256<byte> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
                 return rt;
             }
 
@@ -389,7 +389,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // Vector256<uint> mask = Vector256.Create((uint)0x0FFFFU);
                 Vector256<uint> mask = Vector256s<uint>.VMaxUInt16;
                 Vector256<ushort> raw = Avx2.PackUnsignedSaturate(Avx2.And(lower, mask).AsInt32(), Avx2.And(upper, mask).AsInt32()); // bit64(x, z, y, w)
-                Vector256<ushort> rt = Avx2.Permute4x64(raw.AsUInt64(), ShuffleControlG4.XZYW).AsUInt16(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                Vector256<ushort> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsUInt16(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
                 return rt;
             }
 
@@ -413,7 +413,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<uint> l = Avx2.UnpackLow(lower.AsUInt32(), upper.AsUInt32()); // bit32(a0.L, b0.L, a0.H, b0.H, a2.L, b2.L, a2.H, b2.H)
                 Vector256<uint> h = Avx2.UnpackHigh(lower.AsUInt32(), upper.AsUInt32()); // bit32(a1.L, b1.L, a1.H, b1.H, a3.L, b3.L, a3.H, b3.H)
                 Vector256<uint> raw = Avx2.UnpackLow(l, h); // bit32(a0.L, a1.L, b0.L, b1.L, a2.L, a3.L, b2.L, b3.L). Need Permute4x64 to swap `b0.L, b1.L` and `a2.L, a3.L`.
-                Vector256<uint> rt = Avx2.Permute4x64(raw.AsUInt64(), ShuffleControlG4.XZYW).AsUInt32(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                Vector256<uint> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsUInt32(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
                 return rt;
             }
 
@@ -633,7 +633,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> rt;
                 Vector256<int> lower, upper;
                 Vector256<int> XyXMask = Vector256s<int>.XyXMask;
-                const byte controlInputUpper = ShuffleControlG4.YYWW; // BitMath._MM_SHUFFLE(3, 3, 1, 1) = 0xF5 = 0b11_11_01_01;
+                const byte controlInputUpper = (byte)ShuffleControlG4.YYWW; // BitMath._MM_SHUFFLE(3, 3, 1, 1) = 0xF5 = 0b11_11_01_01;
                 Vector256<int> upperAtLower = Avx2.Shuffle(value.AsInt32(), controlInputUpper); // f({ v0.lower, v0.upper, v1.lower, v1.upper, ... }) = { v0.upper, v0.upper, v1.upper, v1.upper, ... }
                 upperAtLower = Avx2.And(XyXMask, upperAtLower); // = { v0.upper, 0, v1.upper, 0, ... }
                 Vector256<int> upperOld = Avx2.AndNot(XyXMask, value.AsInt32()); // = { 0, v0.upper, 0, v1.upper, ... }
@@ -663,7 +663,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return value;
                 }
                 Vector256<int> XyXMask = Vector256s<int>.XyXMask;
-                const byte controlInputUpper = ShuffleControlG4.YYWW; // BitMath._MM_SHUFFLE(3, 3, 1, 1) = 0xF5 = 0b11_11_01_01;
+                const byte controlInputUpper = (byte)ShuffleControlG4.YYWW; // BitMath._MM_SHUFFLE(3, 3, 1, 1) = 0xF5 = 0b11_11_01_01;
                 Vector256<int> upperAtLower = Avx2.Shuffle(value.AsInt32(), controlInputUpper); // f({ v0.lower, v0.upper, v1.lower, v1.upper, ... }) = { v0.upper, v0.upper, v1.upper, v1.upper, ... }
                 byte shiftAmountUpper = (byte)BitMath.Min(31, shiftAmount);
                 byte shiftAmountLeft = (byte)BitMath.Max(0, 32 - shiftAmount);
@@ -982,10 +982,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static long Sum(Vector256<long> value) {
                 // 0 1 2 3
-                Vector256<long> m = Avx2.Permute4x64(value, ShuffleControlG4.WZYX);
+                Vector256<long> m = Avx2.Permute4x64(value, (byte)ShuffleControlG4.WZYX);
                 Vector256<long> n = Avx2.Add(value, m);
                 // 03 12 12 03
-                m = Avx2.Permute4x64(n, ShuffleControlG4.YXWZ);
+                m = Avx2.Permute4x64(n, (byte)ShuffleControlG4.YXWZ);
                 n = Avx2.Add(n, m);
                 // 0123 0123 0123 0123
                 return n.GetElement(0);
@@ -1077,10 +1077,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // vpunpckhbw  ymm0,ymm0,ymm1  
                 // vmovupd     ymmword ptr [rbp-90h],ymm0  
                 Vector256<sbyte> zero = Vector256<sbyte>.Zero;
-                Vector256<sbyte> lower0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XYYW).AsSByte(); // UnpackLow uses only `X_Y_`.
+                Vector256<sbyte> lower0 = Avx2.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XYYW).AsSByte(); // UnpackLow uses only `X_Y_`.
                 Vector256<sbyte> lowerMask = Avx2.CompareGreaterThan(zero, lower0);
                 lower = Avx2.UnpackLow(lower0, lowerMask).AsInt16();
-                Vector256<sbyte> upper0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XZZW).AsSByte(); // UnpackHigh uses only `_Z_W`.
+                Vector256<sbyte> upper0 = Avx2.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XZZW).AsSByte(); // UnpackHigh uses only `_Z_W`.
                 Vector256<sbyte> upperMask = Avx2.CompareGreaterThan(zero, upper0);
                 upper = Avx2.UnpackHigh(upper0, upperMask).AsInt16();
             }
@@ -1100,9 +1100,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // vpunpckhbw  ymm0,ymm0,ymm1  
                 // vmovupd     ymmword ptr [rbp-0D0h],ymm0  
                 Vector256<byte> zero = Vector256<byte>.Zero;
-                Vector256<byte> lower0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XYYW).AsByte(); // UnpackLow uses only `X_Y_`.
+                Vector256<byte> lower0 = Avx2.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XYYW).AsByte(); // UnpackLow uses only `X_Y_`.
                 lower = Avx2.UnpackLow(lower0, zero).AsUInt16();
-                Vector256<byte> upper0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XZZW).AsByte(); // UnpackHigh uses only `_Z_W`.
+                Vector256<byte> upper0 = Avx2.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XZZW).AsByte(); // UnpackHigh uses only `_Z_W`.
                 upper = Avx2.UnpackHigh(upper0, zero).AsUInt16();
             }
 
@@ -1110,10 +1110,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Unpack(Vector256<short> source, out Vector256<int> lower, out Vector256<int> upper) {
                 Vector256<short> zero = Vector256<short>.Zero;
-                Vector256<short> lower0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XYYW).AsInt16();
+                Vector256<short> lower0 = Avx2.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XYYW).AsInt16();
                 Vector256<short> lowerMask = Avx2.CompareGreaterThan(zero, lower0);
                 lower = Avx2.UnpackLow(lower0, lowerMask).AsInt32();
-                Vector256<short> upper0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XZZW).AsInt16();
+                Vector256<short> upper0 = Avx2.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XZZW).AsInt16();
                 Vector256<short> upperMask = Avx2.CompareGreaterThan(zero, upper0);
                 upper = Avx2.UnpackHigh(upper0, upperMask).AsInt32();
             }
@@ -1123,9 +1123,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Unpack(Vector256<ushort> source, out Vector256<uint> lower, out Vector256<uint> upper) {
                 Vector256<ushort> zero = Vector256<ushort>.Zero;
-                Vector256<ushort> lower0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XYYW).AsUInt16();
+                Vector256<ushort> lower0 = Avx2.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XYYW).AsUInt16();
                 lower = Avx2.UnpackLow(lower0, zero).AsUInt32();
-                Vector256<ushort> upper0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XZZW).AsUInt16();
+                Vector256<ushort> upper0 = Avx2.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XZZW).AsUInt16();
                 upper = Avx2.UnpackHigh(upper0, zero).AsUInt32();
             }
 
@@ -1133,10 +1133,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Unpack(Vector256<int> source, out Vector256<long> lower, out Vector256<long> upper) {
                 Vector256<int> zero = Vector256<int>.Zero;
-                Vector256<int> lower0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XYYW).AsInt32();
+                Vector256<int> lower0 = Avx2.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XYYW).AsInt32();
                 Vector256<int> lowerMask = Avx2.CompareGreaterThan(zero, lower0);
                 lower = Avx2.UnpackLow(lower0, lowerMask).AsInt64();
-                Vector256<int> upper0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XZZW).AsInt32();
+                Vector256<int> upper0 = Avx2.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XZZW).AsInt32();
                 Vector256<int> upperMask = Avx2.CompareGreaterThan(zero, upper0);
                 upper = Avx2.UnpackHigh(upper0, upperMask).AsInt64();
             }
@@ -1146,9 +1146,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Unpack(Vector256<uint> source, out Vector256<ulong> lower, out Vector256<ulong> upper) {
                 Vector256<uint> zero = Vector256<uint>.Zero;
-                Vector256<uint> lower0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XYYW).AsUInt32();
+                Vector256<uint> lower0 = Avx2.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XYYW).AsUInt32();
                 lower = Avx2.UnpackLow(lower0, zero).AsUInt64();
-                Vector256<uint> upper0 = Avx2.Permute4x64(source.AsUInt64(), ShuffleControlG4.XZZW).AsUInt32();
+                Vector256<uint> upper0 = Avx2.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XZZW).AsUInt32();
                 upper = Avx2.UnpackHigh(upper0, zero).AsUInt64();
             }
 

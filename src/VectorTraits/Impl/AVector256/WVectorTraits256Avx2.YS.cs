@@ -181,7 +181,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // ErmIg answered Jun 5, 2015 at 14:54
                 return Avx2.Or(
                     Avx2.Shuffle(vector, Avx2.Add(indices, Vector256Constants.Shuffle_Byte_LaneAdd_K0)),
-                    Avx2.Shuffle(Avx2.Permute4x64(vector.AsInt64(), ShuffleControlG4.ZWXY).AsByte(), Avx2.Add(indices, Vector256Constants.Shuffle_Byte_LaneAdd_K1))
+                    Avx2.Shuffle(Avx2.Permute4x64(vector.AsInt64(), (byte)ShuffleControlG4.ZWXY).AsByte(), Avx2.Add(indices, Vector256Constants.Shuffle_Byte_LaneAdd_K1))
                 );
                 // Remark: The value of each element must be less than count
             }
@@ -374,7 +374,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<byte> YShuffleKernel_Core(Vector256<byte> vector, Vector256<byte> args0, Vector256<byte> args1) {
                 return Avx2.Or(
                     Avx2.Shuffle(vector, args0),
-                    Avx2.Shuffle(Avx2.Permute4x64(vector.AsInt64(), ShuffleControlG4.ZWXY).AsByte(), args1)
+                    Avx2.Shuffle(Avx2.Permute4x64(vector.AsInt64(), (byte)ShuffleControlG4.ZWXY).AsByte(), args1)
                 );
             }
 
