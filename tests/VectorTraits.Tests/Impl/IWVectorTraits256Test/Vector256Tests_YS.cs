@@ -148,10 +148,19 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     } else {
                         Assert.AreEqual(expected, dst, "_Args, vector={vector}, indices={indices}");
                     }
+                    // Static: Args and Core with ValueTuple
+                    var args = Vector256s.YShuffleKernel_Args((dynamic)indices);
+                    dst = Vector256s.YShuffleKernel_Core((dynamic)vector, (dynamic)args);
+                    if (allowLogItem) {
+                        // Compatible floating-point NaN.
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args2", dst, vector, indices));
+                    } else {
+                        Assert.AreEqual(expected, dst, "_Args2, vector={vector}, indices={indices}");
+                    }
                     // Static: ArgsX and Core
 #pragma warning disable CS0618 // Type or member is obsolete
-                    Vector256X2<TIdx> args = Vector256s.YShuffleKernel_ArgsX((dynamic)indices);
-                    dst = Vector256s.YShuffleKernel_Core((dynamic)vector, (dynamic)args);
+                    Vector256X2<TIdx> argsX = Vector256s.YShuffleKernel_ArgsX((dynamic)indices);
+                    dst = Vector256s.YShuffleKernel_Core((dynamic)vector, (dynamic)argsX);
 #pragma warning restore CS0618 // Type or member is obsolete
                     if (allowLogItem) {
                         // Compatible floating-point NaN.
@@ -169,7 +178,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         } else {
                             Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, vector={vector}, indices={indices}");
                         }
-                        // Static: Args and Core
+                        // Instances: Args and Core
 #pragma warning disable CS0618 // Type or member is obsolete
                         instance.YShuffleKernel_Args<TIdx>(indices, out args0, out args1);
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -179,6 +188,18 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args of " + instance.GetType().Name, dst, vector, indices));
                         } else {
                             Assert.AreEqual(expected, dst, "_Args of {instance.GetType().Name}, vector={vector}, indices={indices}");
+                        }
+                        // Instances: Args and Core with ValueTuple
+#pragma warning disable CS0618 // Type or member is obsolete
+                        var argsI = instance.YShuffleKernel_Args<TIdx>(indices);
+                        // dst = instance.YShuffleKernel_Core((dynamic)vector, (dynamic)argsI); // CS1973	'IWVectorTraits256' has no applicable method named 'YShuffleKernel_Core' but appears to have an extension method by that name. Extension methods cannot be dynamically dispatched. Consider casting the dynamic arguments or calling the extension method without the extension method syntax.
+                        dst = instance.YShuffleKernel_Core<T, TIdx>(vector, argsI);
+#pragma warning restore CS0618 // Type or member is obsolete
+                        if (allowLogItem) {
+                            // Compatible floating-point NaN.
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args2 of " + instance.GetType().Name, dst, vector, indices));
+                        } else {
+                            Assert.AreEqual(expected, dst, "_Args2 of {instance.GetType().Name}, vector={vector}, indices={indices}");
                         }
                     }
                     if (allowLog) {
