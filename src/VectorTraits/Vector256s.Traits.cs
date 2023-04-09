@@ -7,6 +7,7 @@ using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector256;
+using System.Numerics;
 
 namespace Zyl.VectorTraits {
     using BaseStatics = WVectorTraits256Base.Statics;
@@ -2845,6 +2846,196 @@ namespace Zyl.VectorTraits {
             return BaseStatics.YShuffleInsert(back, vector, indices);
 #else
             return _instance.YShuffleInsert(back, vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}))"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector256<sbyte> indices, out Vector256<sbyte> args0, out Vector256<sbyte> args1, out Vector256<sbyte> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}))"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector256<byte> indices, out Vector256<byte> args0, out Vector256<byte> args1, out Vector256<byte> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short}))"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector256<short> indices, out Vector256<short> args0, out Vector256<short> args1, out Vector256<short> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}))"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector256<ushort> indices, out Vector256<ushort> args0, out Vector256<ushort> args1, out Vector256<ushort> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int}))"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector256<int> indices, out Vector256<int> args0, out Vector256<int> args1, out Vector256<int> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint}))"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector256<uint> indices, out Vector256<uint> args0, out Vector256<uint> args1, out Vector256<uint> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long}))"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector256<long> indices, out Vector256<long> args0, out Vector256<long> args1, out Vector256<long> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}))"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector256<ulong> indices, out Vector256<ulong> args0, out Vector256<ulong> args1, out Vector256<ulong> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{float}, Vector256{float}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YShuffleInsert_Core(Vector256<float> back, Vector256<float> vector, Vector256<int> args0, Vector256<int> args1, Vector256<int> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{double}, Vector256{double}, Vector256{long}, Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YShuffleInsert_Core(Vector256<double> back, Vector256<double> vector, Vector256<long> args0, Vector256<long> args1, Vector256<long> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YShuffleInsert_Core(Vector256<sbyte> back, Vector256<sbyte> vector, Vector256<sbyte> args0, Vector256<sbyte> args1, Vector256<sbyte> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YShuffleInsert_Core(Vector256<byte> back, Vector256<byte> vector, Vector256<byte> args0, Vector256<byte> args1, Vector256<byte> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YShuffleInsert_Core(Vector256<short> back, Vector256<short> vector, Vector256<short> args0, Vector256<short> args1, Vector256<short> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> YShuffleInsert_Core(Vector256<ushort> back, Vector256<ushort> vector, Vector256<ushort> args0, Vector256<ushort> args1, Vector256<ushort> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YShuffleInsert_Core(Vector256<int> back, Vector256<int> vector, Vector256<int> args0, Vector256<int> args1, Vector256<int> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> YShuffleInsert_Core(Vector256<uint> back, Vector256<uint> vector, Vector256<uint> args0, Vector256<uint> args1, Vector256<uint> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YShuffleInsert_Core(Vector256<long> back, Vector256<long> vector, Vector256<long> args0, Vector256<long> args1, Vector256<long> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> YShuffleInsert_Core(Vector256<ulong> back, Vector256<ulong> vector, Vector256<ulong> args0, Vector256<ulong> args1, Vector256<ulong> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 

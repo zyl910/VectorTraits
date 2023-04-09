@@ -166,6 +166,355 @@ namespace Zyl.VectorTraits {
 
 
         /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void YShuffleInsert_Args<TIdx>(Vector256<TIdx> indices, out Vector256<TIdx> args0, out Vector256<TIdx> args1, out Vector256<TIdx> args2)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector256<sbyte>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a0;
+                args1 = (Vector256<TIdx>)(object)a1;
+                args2 = (Vector256<TIdx>)(object)a2;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector256<byte>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a0;
+                args1 = (Vector256<TIdx>)(object)a1;
+                args2 = (Vector256<TIdx>)(object)a2;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector256<short>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a0;
+                args1 = (Vector256<TIdx>)(object)a1;
+                args2 = (Vector256<TIdx>)(object)a2;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector256<ushort>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a0;
+                args1 = (Vector256<TIdx>)(object)a1;
+                args2 = (Vector256<TIdx>)(object)a2;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector256<int>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a0;
+                args1 = (Vector256<TIdx>)(object)a1;
+                args2 = (Vector256<TIdx>)(object)a2;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector256<uint>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a0;
+                args1 = (Vector256<TIdx>)(object)a1;
+                args2 = (Vector256<TIdx>)(object)a2;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector256<long>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a0;
+                args1 = (Vector256<TIdx>)(object)a1;
+                args2 = (Vector256<TIdx>)(object)a2;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector256<ulong>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a0;
+                args1 = (Vector256<TIdx>)(object)a1;
+                args2 = (Vector256<TIdx>)(object)a2;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="Vector256s.YShuffleInsert_Args{TIdx}(Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static (Vector256<TIdx> args0, Vector256<TIdx> args1, Vector256<TIdx> args2) YShuffleInsert_Args<TIdx>(Vector256<TIdx> indices)
+                where TIdx : struct {
+            YShuffleInsert_Args<TIdx>(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<sbyte> args0, Vector256<sbyte> args1, Vector256<sbyte> args2) YShuffleInsert_Args(Vector256<sbyte> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<byte> args0, Vector256<byte> args1, Vector256<byte> args2) YShuffleInsert_Args(Vector256<byte> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<short> args0, Vector256<short> args1, Vector256<short> args2) YShuffleInsert_Args(Vector256<short> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ushort> args0, Vector256<ushort> args1, Vector256<ushort> args2) YShuffleInsert_Args(Vector256<ushort> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<int> args0, Vector256<int> args1, Vector256<int> args2) YShuffleInsert_Args(Vector256<int> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<uint> args0, Vector256<uint> args1, Vector256<uint> args2) YShuffleInsert_Args(Vector256<uint> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<long> args0, Vector256<long> args1, Vector256<long> args2) YShuffleInsert_Args(Vector256<long> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Args(Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ulong> args0, Vector256<ulong> args1, Vector256<ulong> args2) YShuffleInsert_Args(Vector256<ulong> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{float}, Vector256{float}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YShuffleInsert_Core(Vector256<float> back, Vector256<float> vector, (Vector256<int> args0, Vector256<int> args1, Vector256<int> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{double}, Vector256{double}, Vector256{long}, Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YShuffleInsert_Core(Vector256<double> back, Vector256<double> vector, (Vector256<long> args0, Vector256<long> args1, Vector256<long> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YShuffleInsert_Core(Vector256<sbyte> back, Vector256<sbyte> vector, (Vector256<sbyte> args0, Vector256<sbyte> args1, Vector256<sbyte> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YShuffleInsert_Core(Vector256<byte> back, Vector256<byte> vector, (Vector256<byte> args0, Vector256<byte> args1, Vector256<byte> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YShuffleInsert_Core(Vector256<short> back, Vector256<short> vector, (Vector256<short> args0, Vector256<short> args1, Vector256<short> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{ushort}, Vector256X2{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> YShuffleInsert_Core(Vector256<ushort> back, Vector256<ushort> vector, (Vector256<ushort> args0, Vector256<ushort> args1, Vector256<ushort> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YShuffleInsert_Core(Vector256<int> back, Vector256<int> vector, (Vector256<int> args0, Vector256<int> args1, Vector256<int> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> YShuffleInsert_Core(Vector256<uint> back, Vector256<uint> vector, (Vector256<uint> args0, Vector256<uint> args1, Vector256<uint> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YShuffleInsert_Core(Vector256<long> back, Vector256<long> vector, (Vector256<long> args0, Vector256<long> args1, Vector256<long> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleInsert_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> YShuffleInsert_Core(Vector256<ulong> back, Vector256<ulong> vector, (Vector256<ulong> args0, Vector256<ulong> args1, Vector256<ulong> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+
+        /// <summary>
         /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
