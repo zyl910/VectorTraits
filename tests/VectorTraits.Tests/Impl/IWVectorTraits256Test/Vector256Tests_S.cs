@@ -293,15 +293,59 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         Console.WriteLine(VectorTextUtil.Format("Indices:\t{0}", indices));
                         Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
                     }
+                    // Static: Args and Core
+                    Vector256<TIdx> args0, args1;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    Vector256s.Shuffle_Args<TIdx>(indices, out args0, out args1);
+#pragma warning restore CS0618 // Type or member is obsolete
+                    Vector256<T> dst = Vector256s.Shuffle_Core((dynamic)vector, (dynamic)args0, (dynamic)args1);
+                    if (allowLogItem) {
+                        // Compatible floating-point NaN.
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args", dst, vector, indices));
+                    } else {
+                        Assert.AreEqual(expected, dst, "_Args, vector={vector}, indices={indices}");
+                    }
+                    // Static: Args and Core with ValueTuple
+                    var args = Vector256s.Shuffle_Args((dynamic)indices);
+                    dst = Vector256s.Shuffle_Core((dynamic)vector, (dynamic)args);
+                    if (allowLogItem) {
+                        // Compatible floating-point NaN.
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args2", dst, vector, indices));
+                    } else {
+                        Assert.AreEqual(expected, dst, "_Args2, vector={vector}, indices={indices}");
+                    }
                     // Instances
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        Vector256<T> dst = instance.Shuffle((dynamic)vector, (dynamic)indices);
+                        dst = instance.Shuffle((dynamic)vector, (dynamic)indices);
                         if (allowLogItem) {
                             // Compatible floating-point NaN.
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", instance.GetType().Name, dst, vector, indices));
                         } else {
                             Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, vector={vector}, indices={indices}");
+                        }
+                        // Instances: Args and Core
+#pragma warning disable CS0618 // Type or member is obsolete
+                        instance.Shuffle_Args<TIdx>(indices, out args0, out args1);
+#pragma warning restore CS0618 // Type or member is obsolete
+                        dst = instance.Shuffle_Core((dynamic)vector, (dynamic)args0, (dynamic)args1);
+                        if (allowLogItem) {
+                            // Compatible floating-point NaN.
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args of " + instance.GetType().Name, dst, vector, indices));
+                        } else {
+                            Assert.AreEqual(expected, dst, "_Args of {instance.GetType().Name}, vector={vector}, indices={indices}");
+                        }
+                        // Instances: Args and Core with ValueTuple
+#pragma warning disable CS0618 // Type or member is obsolete
+                        var argsI = instance.Shuffle_Args<TIdx>(indices);
+                        // dst = instance.Shuffle_Core((dynamic)vector, (dynamic)argsI); // CS1973	'IWVectorTraits256' has no applicable method named 'Shuffle_Core' but appears to have an extension method by that name. Extension methods cannot be dynamically dispatched. Consider casting the dynamic arguments or calling the extension method without the extension method syntax.
+                        dst = instance.Shuffle_Core<T, TIdx>(vector, argsI);
+#pragma warning restore CS0618 // Type or member is obsolete
+                        if (allowLogItem) {
+                            // Compatible floating-point NaN.
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args2 of " + instance.GetType().Name, dst, vector, indices));
+                        } else {
+                            Assert.AreEqual(expected, dst, "_Args2 of {instance.GetType().Name}, vector={vector}, indices={indices}");
                         }
                     }
                     if (allowLog) {

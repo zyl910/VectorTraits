@@ -166,6 +166,337 @@ namespace Zyl.VectorTraits {
 
 
         /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for Shuffle_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for Shuffle_Core .</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Args"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void Shuffle_Args<TIdx>(Vector256<TIdx> indices, out Vector256<TIdx> args0, out Vector256<TIdx> args1)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector256<sbyte>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector256<byte>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector256<short>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector256<ushort>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector256<int>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector256<uint>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector256<long>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector256<ulong>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vector256s.Shuffle_Args{TIdx}(Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<TIdx> args0, Vector256<TIdx> args1) Shuffle_Args<TIdx>(Vector256<TIdx> indices)
+                where TIdx : struct {
+            Shuffle_Args<TIdx>(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Args(Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<sbyte> args0, Vector256<sbyte> args1) Shuffle_Args(Vector256<sbyte> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Args(Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<byte> args0, Vector256<byte> args1) Shuffle_Args(Vector256<byte> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Args(Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<short> args0, Vector256<short> args1) Shuffle_Args(Vector256<short> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Args(Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ushort> args0, Vector256<ushort> args1) Shuffle_Args(Vector256<ushort> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Args(Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<int> args0, Vector256<int> args1) Shuffle_Args(Vector256<int> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Args(Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<uint> args0, Vector256<uint> args1) Shuffle_Args(Vector256<uint> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Args(Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<long> args0, Vector256<long> args1) Shuffle_Args(Vector256<long> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Args(Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ulong> args0, Vector256<ulong> args1) Shuffle_Args(Vector256<ulong> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Core(Vector256{float}, Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> Shuffle_Core(Vector256<float> vector, (Vector256<int> args0, Vector256<int> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Core(Vector256{double}, Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> Shuffle_Core(Vector256<double> vector, (Vector256<long> args0, Vector256<long> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> Shuffle_Core(Vector256<sbyte> vector, (Vector256<sbyte> args0, Vector256<sbyte> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Core(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> Shuffle_Core(Vector256<byte> vector, (Vector256<byte> args0, Vector256<byte> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Core(Vector256{short}, Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> Shuffle_Core(Vector256<short> vector, (Vector256<short> args0, Vector256<short> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Core(Vector256{ushort}, Vector256X2{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> Shuffle_Core(Vector256<ushort> vector, (Vector256<ushort> args0, Vector256<ushort> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Core(Vector256{int}, Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> Shuffle_Core(Vector256<int> vector, (Vector256<int> args0, Vector256<int> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Core(Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> Shuffle_Core(Vector256<uint> vector, (Vector256<uint> args0, Vector256<uint> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Core(Vector256{long}, Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> Shuffle_Core(Vector256<long> vector, (Vector256<long> args0, Vector256<long> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits256.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.Shuffle_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> Shuffle_Core(Vector256<ulong> vector, (Vector256<ulong> args0, Vector256<ulong> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+
+        /// <summary>
         /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
         /// </summary>
