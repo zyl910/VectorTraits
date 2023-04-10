@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Zyl.VectorTraits.Tests {
     [TestFixture()]
-    public class TraitsUtilTests {
+    public class VectorTextUtilTests {
         private static readonly int[] LenArray = { 0, 0x10 };
 
         [TestCase((float)1)]

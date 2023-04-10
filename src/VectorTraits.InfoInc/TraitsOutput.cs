@@ -74,7 +74,7 @@ namespace Zyl.VectorTraits {
             //writer.WriteLine(string.Format("Vector128<T>.Assembly.CodeBase:\t{0}", assembly.CodeBase));
 #if (NET35 || NET20)
 #else
-            writer.WriteLine(indent + string.Format("GetTargetFrameworkDisplayName(TraitsUtil):\t{0}", VectorTextUtil.GetTargetFrameworkDisplayName(typeof(VectorTextUtil).Assembly)));
+            writer.WriteLine(indent + string.Format("GetTargetFrameworkDisplayName(VectorTextUtil):\t{0}", VectorTextUtil.GetTargetFrameworkDisplayName(typeof(VectorTextUtil).Assembly)));
             writer.WriteLine(indent + string.Format("GetTargetFrameworkDisplayName(TraitsOutput):\t{0}", VectorTextUtil.GetTargetFrameworkDisplayName(typeof(TraitsOutput).Assembly)));
 #endif
 #pragma warning restore SYSLIB0012 // Type or member is obsolete
