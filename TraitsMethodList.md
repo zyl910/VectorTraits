@@ -93,7 +93,7 @@ Types: Vector, Vector128, Vector256 .
 Summary (概要):
 - Provides the vector methods of clamp (提供限制的向量方法): YClamp .
 - Provides the vector methods of narrow saturate (提供缩窄饱和的向量方法): YNarrowSaturate, YNarrowSaturateUnsigned .
-- Provides the vector methods of shuffle (提供换位的向量方法): YShuffleEach128, YShuffleEach128Insert, YShuffleEach128Kernel, YShuffleInsert, YShuffleKernel, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG4 classes.
+- Provides the vector methods of shuffle (提供换位的向量方法): YShuffleInsert, YShuffleKernel, YShuffleG2, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG2/ShuffleControlG4 enum.
 
 List (列表):
 - `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
