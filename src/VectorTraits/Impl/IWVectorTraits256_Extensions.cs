@@ -12,7 +12,6 @@ namespace Zyl.VectorTraits.Impl {
     /// Extension methods of <seealso cref="IWVectorTraits256"/> (<seealso cref="IWVectorTraits256"/> 的扩展方法)
     /// </summary>
     public static class IWVectorTraits256_Extensions {
-
 #if NETCOREAPP3_0_OR_GREATER
 
         /// <inheritdoc cref="Vector256s.Widen{T, TOut}(Vector256{T}, out Vector256{TOut}, out Vector256{TOut})"/>

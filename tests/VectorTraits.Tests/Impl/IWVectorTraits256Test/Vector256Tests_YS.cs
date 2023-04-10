@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
-using System.Numerics;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
