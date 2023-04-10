@@ -301,18 +301,18 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     Vector128<T> dst = Vector128s.Shuffle_Core((dynamic)vector, (dynamic)args0, (dynamic)args1);
                     if (allowLogItem) {
                         // Compatible floating-point NaN.
-                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args", dst, vector, indices));
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args0", dst, vector, indices));
                     } else {
-                        Assert.AreEqual(expected, dst, "_Args, vector={vector}, indices={indices}");
+                        Assert.AreEqual(expected, dst, "_Args0, vector={vector}, indices={indices}");
                     }
                     // Static: Args and Core with ValueTuple
                     var args = Vector128s.Shuffle_Args((dynamic)indices);
                     dst = Vector128s.Shuffle_Core((dynamic)vector, (dynamic)args);
                     if (allowLogItem) {
                         // Compatible floating-point NaN.
-                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args2", dst, vector, indices));
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args", dst, vector, indices));
                     } else {
-                        Assert.AreEqual(expected, dst, "_Args2, vector={vector}, indices={indices}");
+                        Assert.AreEqual(expected, dst, "_Args, vector={vector}, indices={indices}");
                     }
                     // Instances
                     foreach (IWVectorTraits128 instance in instances) {
@@ -331,9 +331,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                         dst = instance.Shuffle_Core((dynamic)vector, (dynamic)args0, (dynamic)args1);
                         if (allowLogItem) {
                             // Compatible floating-point NaN.
-                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args of " + instance.GetType().Name, dst, vector, indices));
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args0 of " + instance.GetType().Name, dst, vector, indices));
                         } else {
-                            Assert.AreEqual(expected, dst, "_Args of {instance.GetType().Name}, vector={vector}, indices={indices}");
+                            Assert.AreEqual(expected, dst, "_Args0 of {instance.GetType().Name}, vector={vector}, indices={indices}");
                         }
                         // Instances: Args and Core with ValueTuple
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -343,9 +343,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
 #pragma warning restore CS0618 // Type or member is obsolete
                         if (allowLogItem) {
                             // Compatible floating-point NaN.
-                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args2 of " + instance.GetType().Name, dst, vector, indices));
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Args of " + instance.GetType().Name, dst, vector, indices));
                         } else {
-                            Assert.AreEqual(expected, dst, "_Args2 of {instance.GetType().Name}, vector={vector}, indices={indices}");
+                            Assert.AreEqual(expected, dst, "_Args of {instance.GetType().Name}, vector={vector}, indices={indices}");
                         }
                     }
                     if (allowLog) {
