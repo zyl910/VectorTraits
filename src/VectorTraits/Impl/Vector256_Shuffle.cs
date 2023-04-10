@@ -99,14 +99,28 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{byte}, Vector256{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<byte> Shuffle_Avx2(Vector256<byte> vector, Vector256<byte> indices) {
-            return YShuffleInsert_Avx2(Vector256<byte>.Zero, vector, indices); // Bind static
+            //return YShuffleInsert_Avx2(Vector256<byte>.Zero, vector, indices); // Bind static
+            Vector256<byte> mask = Avx2.AndNot(
+                Avx2.CompareGreaterThan(Vector256<sbyte>.Zero, indices.AsSByte()),
+                Avx2.CompareGreaterThan(Vector256.Create((sbyte)32), indices.AsSByte())
+            ).AsByte(); // (0<=i && i<32)
+            Vector256<byte> raw = YShuffleKernel_Avx2(vector, indices); // Bind static
+            Vector256<byte> rt = Avx2.And(raw, mask);
+            return rt;
         }
 
         /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{ushort}, Vector256{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ushort> Shuffle_Avx2(Vector256<ushort> vector, Vector256<ushort> indices) {
-            return YShuffleInsert(Vector256<ushort>.Zero, vector, indices); // Bind if
+            //return YShuffleInsert(Vector256<ushort>.Zero, vector, indices); // Bind if
+            Vector256<ushort> mask = Avx2.AndNot(
+                Avx2.CompareGreaterThan(Vector256<short>.Zero, indices.AsInt16()),
+                Avx2.CompareGreaterThan(Vector256.Create((short)16), indices.AsInt16())
+            ).AsUInt16(); // (0<=i && i<16)
+            Vector256<ushort> raw = YShuffleKernel(vector, indices); // Bind if
+            Vector256<ushort> rt = Avx2.And(raw, mask);
+            return rt;
         }
 
 
