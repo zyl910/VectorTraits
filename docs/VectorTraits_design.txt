@@ -47,4 +47,11 @@ Style suffix (风格后缀):
 
 注: Base name (基本名称)必会提供加速类型检测的属性. 而对于风格后缀, 一般不用提供加速类型检测.
 
+## nuget
+
+Install package .
+```
+Install-Package System.ValueTuple -Version 4.5.0
+```
+
 

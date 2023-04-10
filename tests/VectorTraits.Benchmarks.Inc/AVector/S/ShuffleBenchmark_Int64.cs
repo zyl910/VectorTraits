@@ -179,6 +179,54 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("SumShuffleVectorTraits");
         }
 
+        /// <summary>
+        /// Sum Shuffle - Vector Traits - static - Args and Core with ValueTuple.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static TMy StaticSumShuffleVectorTraits_Args2(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            var args = Vectors.Shuffle_Args(indices);
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = Vectors.Shuffle_Core(p0, args);
+                vrt += vtemp; // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumShuffleVectorTraits_Args2() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumShuffleVectorTraits_Args2(srcArray, srcArray.Length, indices);
+            CheckResult("SumShuffleVectorTraits_Args2");
+        }
+
 
 #if NETCOREAPP3_0_OR_GREATER
 
@@ -500,6 +548,54 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             //Debugger.Break();
             dstTMy = StaticSumYShuffleKernelVectorTraits(srcArray, srcArray.Length, indices);
             CheckResult("SumYShuffleKernelVectorTraits");
+        }
+
+        /// <summary>
+        /// Sum YShuffleKernel - Vector Traits - static - Args and Core with ValueTuple.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static TMy StaticSumYShuffleKernelVectorTraits_Args2(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            var args = Vectors.YShuffleKernel_Args(indices);
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = Vectors.YShuffleKernel_Core(p0, args);
+                vrt += vtemp; // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt[i];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumYShuffleKernelVectorTraits_Args2() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumYShuffleKernelVectorTraits_Args2(srcArray, srcArray.Length, indices);
+            CheckResult("SumYShuffleKernelVectorTraits_Args2");
         }
 
 
