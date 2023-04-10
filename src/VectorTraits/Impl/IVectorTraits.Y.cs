@@ -267,9 +267,14 @@ namespace Zyl.VectorTraits.Impl {
         /// Types with hardware acceleration when running <c>YShuffleInsert</c> (运行 <c>YShuffleInsert</c> 时具有硬件加速的类型).
         /// </summary>
         /// <remarks>
-        /// <para>- <see cref="YShuffleKernel"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
+        /// <para>Meaning of suffixes (后缀的含义).</para>
+        /// <para>- (none): Normal (常规).</para>
+        /// <para>- Args: Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</para>
+        /// <para>- Core. Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).</para>
+        /// <para>Similar methods (相似的方法).</para>
         /// <para>- <see cref="Shuffle"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
         /// <para>- <see cref="YShuffleInsert"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
+        /// <para>- <see cref="YShuffleKernel"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
         /// </remarks>
         /// <seealso cref="YShuffleInsert"/>
         TypeCodeFlags YShuffleInsert_AcceleratedTypes { get; }
@@ -396,14 +401,259 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        void YShuffleInsert_Args(Vector<sbyte> indices, out Vector<sbyte> args0, out Vector<sbyte> args1, out Vector<sbyte> args2);
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Core(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte})"/>
+        void YShuffleInsert_Args(Vector<byte> indices, out Vector<byte> args0, out Vector<byte> args1, out Vector<byte> args2);
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Core(Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short})"/>
+        void YShuffleInsert_Args(Vector<short> indices, out Vector<short> args0, out Vector<short> args1, out Vector<short> args2);
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Core(Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        void YShuffleInsert_Args(Vector<ushort> indices, out Vector<ushort> args0, out Vector<ushort> args1, out Vector<ushort> args2);
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Core(Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        void YShuffleInsert_Args(Vector<int> indices, out Vector<int> args0, out Vector<int> args1, out Vector<int> args2);
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Core(Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint})"/>
+        void YShuffleInsert_Args(Vector<uint> indices, out Vector<uint> args0, out Vector<uint> args1, out Vector<uint> args2);
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Core(Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        void YShuffleInsert_Args(Vector<long> indices, out Vector<long> args0, out Vector<long> args1, out Vector<long> args2);
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Core(Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        void YShuffleInsert_Args(Vector<ulong> indices, out Vector<ulong> args0, out Vector<ulong> args1, out Vector<ulong> args2);
+
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args2">Arguments 2 (参数2). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Args(Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+        Vector<float> YShuffleInsert_Core(Vector<float> back, Vector<float> vector, Vector<int> args0, Vector<int> args1, Vector<int> args2);
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args2">Arguments 2 (参数2). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Args(Vector{long}, out Vector{long}, out Vector{long}, out Vector{long})"/>
+        Vector<double> YShuffleInsert_Core(Vector<double> back, Vector<double> vector, Vector<long> args0, Vector<long> args1, Vector<long> args2);
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args2">Arguments 2 (参数2). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        Vector<sbyte> YShuffleInsert_Core(Vector<sbyte> back, Vector<sbyte> vector, Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2);
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args2">Arguments 2 (参数2). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        Vector<byte> YShuffleInsert_Core(Vector<byte> back, Vector<byte> vector, Vector<byte> args0, Vector<byte> args1, Vector<byte> args2);
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args2">Arguments 2 (参数2). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Args(Vector{short}, out Vector{short}, out Vector{short}, out Vector{short})"/>
+        Vector<short> YShuffleInsert_Core(Vector<short> back, Vector<short> vector, Vector<short> args0, Vector<short> args1, Vector<short> args2);
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args2">Arguments 2 (参数2). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        Vector<ushort> YShuffleInsert_Core(Vector<ushort> back, Vector<ushort> vector, Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2);
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args2">Arguments 2 (参数2). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Args(Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+        Vector<int> YShuffleInsert_Core(Vector<int> back, Vector<int> vector, Vector<int> args0, Vector<int> args1, Vector<int> args2);
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args2">Arguments 2 (参数2). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Args(Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{int})"/>
+        Vector<uint> YShuffleInsert_Core(Vector<uint> back, Vector<uint> vector, Vector<uint> args0, Vector<uint> args1, Vector<uint> args2);
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args2">Arguments 2 (参数2). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Args(Vector{long}, out Vector{long}, out Vector{long}, out Vector{int})"/>
+        Vector<long> YShuffleInsert_Core(Vector<long> back, Vector<long> vector, Vector<long> args0, Vector<long> args1, Vector<long> args2);
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleInsert_Args .</param>
+        /// <param name="args2">Arguments 2 (参数2). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleInsert_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        Vector<ulong> YShuffleInsert_Core(Vector<ulong> back, Vector<ulong> vector, Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YShuffleKernel</c> (运行 <c>Shuffle</c> 时具有硬件加速的类型).
         /// </summary>
         /// <remarks>
-        /// <para>- <see cref="YShuffleKernel"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
+        /// <para>Meaning of suffixes (后缀的含义).</para>
+        /// <para>- (none): Normal (常规).</para>
+        /// <para>- Args: Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</para>
+        /// <para>- Core. Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).</para>
+        /// <para>Similar methods (相似的方法).</para>
         /// <para>- <see cref="Shuffle"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
         /// <para>- <see cref="YShuffleInsert"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
+        /// <para>- <see cref="YShuffleKernel"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
         /// </remarks>
         /// <seealso cref="YShuffleKernel"/>
+        /// <seealso cref="YShuffleKernel_Args"/>
+        /// <seealso cref="YShuffleKernel_Core"/>
         TypeCodeFlags YShuffleKernel_AcceleratedTypes { get; }
 
         /// <summary>
@@ -515,6 +765,216 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="Vector.Shuffle(Vector{ulong}, Vector{ulong})"/>
         Vector<ulong> YShuffleKernel(Vector<ulong> vector, Vector<ulong> indices);
+
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        void YShuffleKernel_Args(Vector<sbyte> indices, out Vector<sbyte> args0, out Vector<sbyte> args1);
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Core(Vector{byte}, Vector{byte}, Vector{byte})"/>
+        void YShuffleKernel_Args(Vector<byte> indices, out Vector<byte> args0, out Vector<byte> args1);
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Core(Vector{short}, Vector{short}, Vector{short})"/>
+        void YShuffleKernel_Args(Vector<short> indices, out Vector<short> args0, out Vector<short> args1);
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Core(Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        void YShuffleKernel_Args(Vector<ushort> indices, out Vector<ushort> args0, out Vector<ushort> args1);
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Core(Vector{int}, Vector{int}, Vector{int})"/>
+        void YShuffleKernel_Args(Vector<int> indices, out Vector<int> args0, out Vector<int> args1);
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Core(Vector{uint}, Vector{uint}, Vector{uint})"/>
+        void YShuffleKernel_Args(Vector<uint> indices, out Vector<uint> args0, out Vector<uint> args1);
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Core(Vector{long}, Vector{long}, Vector{long})"/>
+        void YShuffleKernel_Args(Vector<long> indices, out Vector<long> args0, out Vector<long> args1);
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Core(Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        void YShuffleKernel_Args(Vector<ulong> indices, out Vector<ulong> args0, out Vector<ulong> args1);
+
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleKernel_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Args(Vector{int}, out Vector{int}, out Vector{int})"/>
+        Vector<float> YShuffleKernel_Core(Vector<float> vector, Vector<int> args0, Vector<int> args1);
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleKernel_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Args(Vector{long}, out Vector{long}, out Vector{long})"/>
+        Vector<double> YShuffleKernel_Core(Vector<double> vector, Vector<long> args0, Vector<long> args1);
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleKernel_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        Vector<sbyte> YShuffleKernel_Core(Vector<sbyte> vector, Vector<sbyte> args0, Vector<sbyte> args1);
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleKernel_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Args(Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        Vector<byte> YShuffleKernel_Core(Vector<byte> vector, Vector<byte> args0, Vector<byte> args1);
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleKernel_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Args(Vector{short}, out Vector{short}, out Vector{short})"/>
+        Vector<short> YShuffleKernel_Core(Vector<short> vector, Vector<short> args0, Vector<short> args1);
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleKernel_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        Vector<ushort> YShuffleKernel_Core(Vector<ushort> vector, Vector<ushort> args0, Vector<ushort> args1);
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleKernel_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Args(Vector{int}, out Vector{int}, out Vector{int})"/>
+        Vector<int> YShuffleKernel_Core(Vector<int> vector, Vector<int> args0, Vector<int> args1);
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleKernel_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Args(Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        Vector<uint> YShuffleKernel_Core(Vector<uint> vector, Vector<uint> args0, Vector<uint> args1);
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleKernel_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Args(Vector{long}, out Vector{long}, out Vector{long})"/>
+        Vector<long> YShuffleKernel_Core(Vector<long> vector, Vector<long> args0, Vector<long> args1);
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from YShuffleKernel_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="YShuffleKernel_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        Vector<ulong> YShuffleKernel_Core(Vector<ulong> vector, Vector<ulong> args0, Vector<ulong> args1);
 
     }
 }

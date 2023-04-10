@@ -13,6 +13,54 @@ namespace Zyl.VectorTraits {
         /// Widens a <seealso cref="Vector{T}"/> into two <seealso cref="Vector{T}"/> instances - Generic version (将一个 <seealso cref="Vector{T}"/> 扩宽为两个 <seealso cref="Vector{T}"/> 实例 - 泛型版).
         /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
         /// </summary>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        /// <typeparam name="TOut">The element type of the output parameter (输出参数的元素类型).</typeparam>
+        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
+        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
+        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TOut"/>) are not supported.</exception>
+        /// <seealso cref="Vector.Widen(Vector{float}, out Vector{double}, out Vector{double})" />
+        /// <seealso cref="IVectorTraits.Widen(Vector{float}, out Vector{double}, out Vector{double})" />
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void Widen<T, TOut>(Vector<T> source, out Vector<TOut> lower, out Vector<TOut> upper)
+                 where T : struct where TOut : struct {
+            if (typeof(float) == typeof(T) && typeof(double) == typeof(TOut)) {
+                (Vector<double> a, Vector<double> b) = Widen((Vector<float>)(object)source);
+                lower = (Vector<TOut>)(object)a;
+                upper = (Vector<TOut>)(object)b;
+            } else if (typeof(sbyte) == typeof(T) && typeof(short) == typeof(TOut)) {
+                (Vector<short> a, Vector<short> b) = Widen((Vector<sbyte>)(object)source);
+                lower = (Vector<TOut>)(object)a;
+                upper = (Vector<TOut>)(object)b;
+            } else if (typeof(byte) == typeof(T) && typeof(ushort) == typeof(TOut)) {
+                (Vector<ushort> a, Vector<ushort> b) = Widen((Vector<byte>)(object)source);
+                lower = (Vector<TOut>)(object)a;
+                upper = (Vector<TOut>)(object)b;
+            } else if (typeof(short) == typeof(T) && typeof(int) == typeof(TOut)) {
+                (Vector<int> a, Vector<int> b) = Widen((Vector<short>)(object)source);
+                lower = (Vector<TOut>)(object)a;
+                upper = (Vector<TOut>)(object)b;
+            } else if (typeof(ushort) == typeof(T) && typeof(uint) == typeof(TOut)) {
+                (Vector<uint> a, Vector<uint> b) = Widen((Vector<ushort>)(object)source);
+                lower = (Vector<TOut>)(object)a;
+                upper = (Vector<TOut>)(object)b;
+            } else if (typeof(int) == typeof(T) && typeof(long) == typeof(TOut)) {
+                (Vector<long> a, Vector<long> b) = Widen((Vector<int>)(object)source);
+                lower = (Vector<TOut>)(object)a;
+                upper = (Vector<TOut>)(object)b;
+            } else if (typeof(uint) == typeof(T) && typeof(ulong) == typeof(TOut)) {
+                (Vector<ulong> a, Vector<ulong> b) = Widen((Vector<uint>)(object)source);
+                lower = (Vector<TOut>)(object)a;
+                upper = (Vector<TOut>)(object)b;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TOut).Name));
+            }
+        }
+
+        /// <summary>
+        /// Widens a <seealso cref="Vector{T}"/> into two <seealso cref="Vector{T}"/> instances - Generic version (将一个 <seealso cref="Vector{T}"/> 扩宽为两个 <seealso cref="Vector{T}"/> 实例 - 泛型版).
+        /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
+        /// </summary>
         /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
         /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" /> (包含 <paramref name="source" /> 的下半部和上半部的一对扩宽向量).</returns>
         /// <seealso cref="Vector.Widen(Vector{float}, out Vector{double}, out Vector{double})" />
@@ -111,52 +159,1015 @@ namespace Zyl.VectorTraits {
             return (a, b);
         }
 
+
         /// <summary>
-        /// Widens a <seealso cref="Vector{T}"/> into two <seealso cref="Vector{T}"/> instances - Generic version (将一个 <seealso cref="Vector{T}"/> 扩宽为两个 <seealso cref="Vector{T}"/> 实例 - 泛型版).
-        /// Mnemonic: <c>element_ref(i, lower, upper) := widen(source[i])</c>.
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
-        /// <typeparam name="TOut">The element type of the output parameter (输出参数的元素类型).</typeparam>
-        /// <param name="source">The vector whose elements are to be widened (要扩宽其元素的向量).</param>
-        /// <param name="lower">When this method returns, contains the widened elements from lower indices in the source vector (当此方法返回时，包含源向量中来自较低下标的扩宽元素).</param>
-        /// <param name="upper">When this method returns, contains the widened elements from upper indices in the source vector (当此方法返回时，包含源向量中来自较高下标的扩宽元素).</param>
-        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TOut"/>) are not supported.</exception>
-        /// <seealso cref="Vector.Widen(Vector{float}, out Vector{double}, out Vector{double})" />
-        /// <seealso cref="IVectorTraits.Widen(Vector{float}, out Vector{double}, out Vector{double})" />
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for Shuffle_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for Shuffle_Core .</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Args"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
-        public static void Widen<T, TOut>(Vector<T> source, out Vector<TOut> lower, out Vector<TOut> upper)
-                 where T : struct where TOut : struct {
-            if (typeof(float) == typeof(T) && typeof(double) == typeof(TOut)) {
-                (Vector<double> a, Vector<double> b) = Widen((Vector<float>)(object)source);
-                lower = (Vector<TOut>)(object)a;
-                upper = (Vector<TOut>)(object)b;
-            } else if (typeof(sbyte) == typeof(T) && typeof(short) == typeof(TOut)) {
-                (Vector<short> a, Vector<short> b) = Widen((Vector<sbyte>)(object)source);
-                lower = (Vector<TOut>)(object)a;
-                upper = (Vector<TOut>)(object)b;
-            } else if (typeof(byte) == typeof(T) && typeof(ushort) == typeof(TOut)) {
-                (Vector<ushort> a, Vector<ushort> b) = Widen((Vector<byte>)(object)source);
-                lower = (Vector<TOut>)(object)a;
-                upper = (Vector<TOut>)(object)b;
-            } else if (typeof(short) == typeof(T) && typeof(int) == typeof(TOut)) {
-                (Vector<int> a, Vector<int> b) = Widen((Vector<short>)(object)source);
-                lower = (Vector<TOut>)(object)a;
-                upper = (Vector<TOut>)(object)b;
-            } else if (typeof(ushort) == typeof(T) && typeof(uint) == typeof(TOut)) {
-                (Vector<uint> a, Vector<uint> b) = Widen((Vector<ushort>)(object)source);
-                lower = (Vector<TOut>)(object)a;
-                upper = (Vector<TOut>)(object)b;
-            } else if (typeof(int) == typeof(T) && typeof(long) == typeof(TOut)) {
-                (Vector<long> a, Vector<long> b) = Widen((Vector<int>)(object)source);
-                lower = (Vector<TOut>)(object)a;
-                upper = (Vector<TOut>)(object)b;
-            } else if (typeof(uint) == typeof(T) && typeof(ulong) == typeof(TOut)) {
-                (Vector<ulong> a, Vector<ulong> b) = Widen((Vector<uint>)(object)source);
-                lower = (Vector<TOut>)(object)a;
-                upper = (Vector<TOut>)(object)b;
+        public static void Shuffle_Args<TIdx>(Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector<sbyte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector<byte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector<short>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector<ushort>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector<int>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector<uint>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector<long>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b) = Shuffle_Args((Vector<ulong>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
             } else {
-                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TOut).Name));
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
             }
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="Vectors.Shuffle_Args{TIdx}(Vector{TIdx}, out Vector{TIdx}, out Vector{TIdx})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<TIdx> args0, Vector<TIdx> args1) Shuffle_Args<TIdx>(Vector<TIdx> indices)
+                where TIdx : struct {
+            Shuffle_Args<TIdx>(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> args0, Vector<sbyte> args1) Shuffle_Args(Vector<sbyte> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> args0, Vector<byte> args1) Shuffle_Args(Vector<byte> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{short}, out Vector{short}, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> args0, Vector<short> args1) Shuffle_Args(Vector<short> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> args0, Vector<ushort> args1) Shuffle_Args(Vector<ushort> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{int}, out Vector{int}, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> args0, Vector<int> args1) Shuffle_Args(Vector<int> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> args0, Vector<uint> args1) Shuffle_Args(Vector<uint> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{long}, out Vector{long}, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> args0, Vector<long> args1) Shuffle_Args(Vector<long> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> args0, Vector<ulong> args1) Shuffle_Args(Vector<ulong> indices) {
+            Shuffle_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{float}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> Shuffle_Core(Vector<float> vector, (Vector<int> args0, Vector<int> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{double}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> Shuffle_Core(Vector<double> vector, (Vector<long> args0, Vector<long> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> Shuffle_Core(Vector<sbyte> vector, (Vector<sbyte> args0, Vector<sbyte> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> Shuffle_Core(Vector<byte> vector, (Vector<byte> args0, Vector<byte> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{short}, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> Shuffle_Core(Vector<short> vector, (Vector<short> args0, Vector<short> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{ushort}, VectorX2{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> Shuffle_Core(Vector<ushort> vector, (Vector<ushort> args0, Vector<ushort> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> Shuffle_Core(Vector<int> vector, (Vector<int> args0, Vector<int> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> Shuffle_Core(Vector<uint> vector, (Vector<uint> args0, Vector<uint> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> Shuffle_Core(Vector<long> vector, (Vector<long> args0, Vector<long> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear (换位并清零的核心计算). Its arguments are derived from Shuffle_Args (其参数来源于 Shuffle_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> Shuffle_Core(Vector<ulong> vector, (Vector<ulong> args0, Vector<ulong> args1) args) {
+            return Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Args(Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void YShuffleInsert_Args<TIdx>(Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector<sbyte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a0;
+                args1 = (Vector<TIdx>)(object)a1;
+                args2 = (Vector<TIdx>)(object)a2;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector<byte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a0;
+                args1 = (Vector<TIdx>)(object)a1;
+                args2 = (Vector<TIdx>)(object)a2;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector<short>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a0;
+                args1 = (Vector<TIdx>)(object)a1;
+                args2 = (Vector<TIdx>)(object)a2;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector<ushort>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a0;
+                args1 = (Vector<TIdx>)(object)a1;
+                args2 = (Vector<TIdx>)(object)a2;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector<int>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a0;
+                args1 = (Vector<TIdx>)(object)a1;
+                args2 = (Vector<TIdx>)(object)a2;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector<uint>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a0;
+                args1 = (Vector<TIdx>)(object)a1;
+                args2 = (Vector<TIdx>)(object)a2;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector<long>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a0;
+                args1 = (Vector<TIdx>)(object)a1;
+                args2 = (Vector<TIdx>)(object)a2;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a0, var a1, var a2) = YShuffleInsert_Args((Vector<ulong>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a0;
+                args1 = (Vector<TIdx>)(object)a1;
+                args2 = (Vector<TIdx>)(object)a2;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="Vectors.YShuffleInsert_Args{TIdx}(Vector{TIdx}, out Vector{TIdx}, out Vector{TIdx}, out Vector{TIdx})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2) YShuffleInsert_Args<TIdx>(Vector<TIdx> indices)
+                where TIdx : struct {
+            YShuffleInsert_Args<TIdx>(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2) YShuffleInsert_Args(Vector<sbyte> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2) YShuffleInsert_Args(Vector<byte> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Args(Vector{short}, out Vector{short}, out Vector{short}, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> args0, Vector<short> args1, Vector<short> args2) YShuffleInsert_Args(Vector<short> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2) YShuffleInsert_Args(Vector<ushort> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Args(Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> args0, Vector<int> args1, Vector<int> args2) YShuffleInsert_Args(Vector<int> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Args(Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2) YShuffleInsert_Args(Vector<uint> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Args(Vector{long}, out Vector{long}, out Vector{long}, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> args0, Vector<long> args1, Vector<long> args2) YShuffleInsert_Args(Vector<long> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2) YShuffleInsert_Args(Vector<ulong> indices) {
+            YShuffleInsert_Args(indices, out var a0, out var a1, out var a2);
+            return (a0, a1, a2);
+        }
+
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Core(Vector{float}, Vector{float}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YShuffleInsert_Core(Vector<float> back, Vector<float> vector, (Vector<int> args0, Vector<int> args1, Vector<int> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Core(Vector{double}, Vector{double}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YShuffleInsert_Core(Vector<double> back, Vector<double> vector, (Vector<long> args0, Vector<long> args1, Vector<long> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> YShuffleInsert_Core(Vector<sbyte> back, Vector<sbyte> vector, (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Core(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> YShuffleInsert_Core(Vector<byte> back, Vector<byte> vector, (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Core(Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> YShuffleInsert_Core(Vector<short> back, Vector<short> vector, (Vector<short> args0, Vector<short> args1, Vector<short> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Core(Vector{ushort}, VectorX2{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> YShuffleInsert_Core(Vector<ushort> back, Vector<ushort> vector, (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Core(Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> YShuffleInsert_Core(Vector<int> back, Vector<int> vector, (Vector<int> args0, Vector<int> args1, Vector<int> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Core(Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> YShuffleInsert_Core(Vector<uint> back, Vector<uint> vector, (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Core(Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> YShuffleInsert_Core(Vector<long> back, Vector<long> vector, (Vector<long> args0, Vector<long> args1, Vector<long> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert (换位并插入的核心计算). Its arguments are derived from YShuffleInsert_Args (其参数来源于 YShuffleInsert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleInsert_Core(Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> YShuffleInsert_Core(Vector<ulong> back, Vector<ulong> vector, (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2) args) {
+            return YShuffleInsert_Core(back, vector, args.args0, args.args1, args.args2);
+        }
+
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Args"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void YShuffleKernel_Args<TIdx>(Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b) = YShuffleKernel_Args((Vector<sbyte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b) = YShuffleKernel_Args((Vector<byte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b) = YShuffleKernel_Args((Vector<short>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b) = YShuffleKernel_Args((Vector<ushort>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b) = YShuffleKernel_Args((Vector<int>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b) = YShuffleKernel_Args((Vector<uint>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b) = YShuffleKernel_Args((Vector<long>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b) = YShuffleKernel_Args((Vector<ulong>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="Vectors.YShuffleKernel_Args{TIdx}(Vector{TIdx}, out Vector{TIdx}, out Vector{TIdx})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<TIdx> args0, Vector<TIdx> args1) YShuffleKernel_Args<TIdx>(Vector<TIdx> indices)
+                where TIdx : struct {
+            YShuffleKernel_Args<TIdx>(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> args0, Vector<sbyte> args1) YShuffleKernel_Args(Vector<sbyte> indices) {
+            YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Args(Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> args0, Vector<byte> args1) YShuffleKernel_Args(Vector<byte> indices) {
+            YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Args(Vector{short}, out Vector{short}, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> args0, Vector<short> args1) YShuffleKernel_Args(Vector<short> indices) {
+            YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> args0, Vector<ushort> args1) YShuffleKernel_Args(Vector<ushort> indices) {
+            YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Args(Vector{int}, out Vector{int}, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> args0, Vector<int> args1) YShuffleKernel_Args(Vector<int> indices) {
+            YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Args(Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> args0, Vector<uint> args1) YShuffleKernel_Args(Vector<uint> indices) {
+            YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Args(Vector{long}, out Vector{long}, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> args0, Vector<long> args1) YShuffleKernel_Args(Vector<long> indices) {
+            YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> args0, Vector<ulong> args1) YShuffleKernel_Args(Vector<ulong> indices) {
+            YShuffleKernel_Args(indices, out var a, out var b);
+            return (a, b);
+        }
+
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Core(Vector{float}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YShuffleKernel_Core(Vector<float> vector, (Vector<int> args0, Vector<int> args1) args) {
+            return YShuffleKernel_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Core(Vector{double}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YShuffleKernel_Core(Vector<double> vector, (Vector<long> args0, Vector<long> args1) args) {
+            return YShuffleKernel_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> YShuffleKernel_Core(Vector<sbyte> vector, (Vector<sbyte> args0, Vector<sbyte> args1) args) {
+            return YShuffleKernel_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Core(Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> YShuffleKernel_Core(Vector<byte> vector, (Vector<byte> args0, Vector<byte> args1) args) {
+            return YShuffleKernel_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Core(Vector{short}, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> YShuffleKernel_Core(Vector<short> vector, (Vector<short> args0, Vector<short> args1) args) {
+            return YShuffleKernel_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Core(Vector{ushort}, VectorX2{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> YShuffleKernel_Core(Vector<ushort> vector, (Vector<ushort> args0, Vector<ushort> args1) args) {
+            return YShuffleKernel_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Core(Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> YShuffleKernel_Core(Vector<int> vector, (Vector<int> args0, Vector<int> args1) args) {
+            return YShuffleKernel_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Core(Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> YShuffleKernel_Core(Vector<uint> vector, (Vector<uint> args0, Vector<uint> args1) args) {
+            return YShuffleKernel_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Core(Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> YShuffleKernel_Core(Vector<long> vector, (Vector<long> args0, Vector<long> args1) args) {
+            return YShuffleKernel_Core(vector, args.args0, args.args1);
+        }
+
+        /// <summary>
+        /// Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).
+        /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
+        /// </summary>
+        /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits.YShuffleKernel_Core(Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> YShuffleKernel_Core(Vector<ulong> vector, (Vector<ulong> args0, Vector<ulong> args1) args) {
+            return YShuffleKernel_Core(vector, args.args0, args.args1);
         }
 
     }

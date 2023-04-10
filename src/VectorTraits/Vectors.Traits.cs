@@ -1144,6 +1144,196 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Shuffle_Args(Vector<sbyte> indices, out Vector<sbyte> args0, out Vector<sbyte> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Shuffle_Args(indices, out args0, out args1);
+#else
+            _instance.Shuffle_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Shuffle_Args(Vector<byte> indices, out Vector<byte> args0, out Vector<byte> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Shuffle_Args(indices, out args0, out args1);
+#else
+            _instance.Shuffle_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{short}, out Vector{short}, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Shuffle_Args(Vector<short> indices, out Vector<short> args0, out Vector<short> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Shuffle_Args(indices, out args0, out args1);
+#else
+            _instance.Shuffle_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Shuffle_Args(Vector<ushort> indices, out Vector<ushort> args0, out Vector<ushort> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Shuffle_Args(indices, out args0, out args1);
+#else
+            _instance.Shuffle_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{int}, out Vector{int}, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Shuffle_Args(Vector<int> indices, out Vector<int> args0, out Vector<int> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Shuffle_Args(indices, out args0, out args1);
+#else
+            _instance.Shuffle_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Shuffle_Args(Vector<uint> indices, out Vector<uint> args0, out Vector<uint> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Shuffle_Args(indices, out args0, out args1);
+#else
+            _instance.Shuffle_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{long}, out Vector{long}, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Shuffle_Args(Vector<long> indices, out Vector<long> args0, out Vector<long> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Shuffle_Args(indices, out args0, out args1);
+#else
+            _instance.Shuffle_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Shuffle_Args(Vector<ulong> indices, out Vector<ulong> args0, out Vector<ulong> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.Shuffle_Args(indices, out args0, out args1);
+#else
+            _instance.Shuffle_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{float}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> Shuffle_Core(Vector<float> vector, Vector<int> args0, Vector<int> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Shuffle_Core(vector, args0, args1);
+#else
+            return _instance.Shuffle_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{double}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> Shuffle_Core(Vector<double> vector, Vector<long> args0, Vector<long> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Shuffle_Core(vector, args0, args1);
+#else
+            return _instance.Shuffle_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> Shuffle_Core(Vector<sbyte> vector, Vector<sbyte> args0, Vector<sbyte> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Shuffle_Core(vector, args0, args1);
+#else
+            return _instance.Shuffle_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> Shuffle_Core(Vector<byte> vector, Vector<byte> args0, Vector<byte> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Shuffle_Core(vector, args0, args1);
+#else
+            return _instance.Shuffle_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{short}, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> Shuffle_Core(Vector<short> vector, Vector<short> args0, Vector<short> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Shuffle_Core(vector, args0, args1);
+#else
+            return _instance.Shuffle_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> Shuffle_Core(Vector<ushort> vector, Vector<ushort> args0, Vector<ushort> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Shuffle_Core(vector, args0, args1);
+#else
+            return _instance.Shuffle_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> Shuffle_Core(Vector<int> vector, Vector<int> args0, Vector<int> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Shuffle_Core(vector, args0, args1);
+#else
+            return _instance.Shuffle_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> Shuffle_Core(Vector<uint> vector, Vector<uint> args0, Vector<uint> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Shuffle_Core(vector, args0, args1);
+#else
+            return _instance.Shuffle_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> Shuffle_Core(Vector<long> vector, Vector<long> args0, Vector<long> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Shuffle_Core(vector, args0, args1);
+#else
+            return _instance.Shuffle_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> Shuffle_Core(Vector<ulong> vector, Vector<ulong> args0, Vector<ulong> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Shuffle_Core(vector, args0, args1);
+#else
+            return _instance.Shuffle_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.Sum_AcceleratedTypes"/>
         public static TypeCodeFlags Sum_AcceleratedTypes {
             get {
