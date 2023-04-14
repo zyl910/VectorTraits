@@ -705,20 +705,20 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumShuffleScalar	-24614
-SumShuffleScalar	503.371	520.777
-SumShuffleVectorBase	500.411	523.857	1.005915
-SumShuffleVectorTraits	114.224	2295.000	4.406878
-SumShuffleVectorTraits_Args	511.522	512.479	0.984066
-SumShuffleVectorTraitsIf	502.819	521.349	1.001099
-SumShuffleVector128_Bcl	554.693	472.593	0.907477
-SumShuffleVector128_Arm	114.095	2297.588	4.411849
-SumShuffleVector128Traits	114.527	2288.934	4.395231
+SumShuffleScalar	497.900	526.499
+SumShuffleVectorBase	495.650	528.890	1.004541
+SumShuffleVectorTraits	112.833	2323.297	4.412728
+SumShuffleVectorTraits_Args	501.018	523.223	0.993777
+SumShuffleVectorTraitsIf	497.654	526.759	1.000494
+SumShuffleVector128_Bcl	549.984	476.639	0.905299
+SumShuffleVector128_Arm	112.972	2320.430	4.407281
+SumShuffleVector128Traits	113.481	2310.029	4.387527
 SumShuffleVector256_Bcl	Run fail! Vector byte size mismatch(16!=32) !
 SumShuffleVector256Traits	Run fail! Vector byte size mismatch(16!=32) !
-SumYShuffleKernelVectorTraits	100.267	2614.469	5.020327
-SumYShuffleKernelVectorTraits_Args	510.818	513.185	0.985422
-SumYShuffleKernelVector128_Arm	99.143	2644.102	5.077227
-SumYShuffleKernelVector128Traits	99.075	2645.919	5.080717
+SumYShuffleKernelVectorTraits	99.271	2640.696	5.015575
+SumYShuffleKernelVectorTraits_Args	500.788	523.463	0.994233
+SumYShuffleKernelVector128_Arm	99.219	2642.077	5.018199
+SumYShuffleKernelVector128Traits	99.178	2643.159	5.020254
 SumYShuffleKernelVector256_Avx2_Multiply	Run fail! Requires hardware support Avx, Avx2!
 SumYShuffleKernelVector256_Avx2_ShiftLane	Run fail! Requires hardware support Avx, Avx2!
 SumYShuffleKernelVector256Traits	Run fail! Vector byte size mismatch(16!=32) !
@@ -730,19 +730,19 @@ SumYShuffleKernelVector256Traits_ArgsX	Run fail! Vector byte size mismatch(16!=3
 ---
 NAME	US	MOPS	SCALE
 # SumShuffleScalar	-467755046
-SumShuffleScalar	824.132	318.085
-SumShuffleVectorBase	827.191	316.909	0.996302
-SumShuffleVectorTraits	227.441	1152.581	3.623499
-SumShuffleVectorTraits_Args	851.550	307.843	0.967802
-SumShuffleVector128_Bcl	867.666	302.125	0.949826
-SumShuffleVector128_Arm	226.029	1159.781	3.646136
-SumShuffleVector128Traits	228.333	1148.079	3.609346
+SumShuffleScalar	825.950	317.385
+SumShuffleVectorBase	827.429	316.818	0.998213
+SumShuffleVectorTraits	224.240	1169.031	3.683325
+SumShuffleVectorTraits_Args	841.494	311.522	0.981528
+SumShuffleVector128_Bcl	863.295	303.655	0.956741
+SumShuffleVector128_Arm	225.426	1162.882	3.663949
+SumShuffleVector128Traits	225.881	1160.541	3.656575
 SumShuffleVector256_Bcl	Run fail! Vector byte size mismatch(16!=32) !
 SumShuffleVector256Traits	Run fail! Vector byte size mismatch(16!=32) !
-SumYShuffleKernelVectorTraits	201.297	1302.273	4.094104
-SumYShuffleKernelVectorTraits_Args	850.263	308.309	0.969267
-SumYShuffleKernelVector128_Arm	200.174	1309.580	4.117077
-SumYShuffleKernelVector128Traits	200.727	1305.972	4.105732
+SumYShuffleKernelVectorTraits	199.123	1316.496	4.147949
+SumYShuffleKernelVectorTraits_Args	842.934	310.990	0.979851
+SumYShuffleKernelVector128_Arm	198.903	1317.951	4.152532
+SumYShuffleKernelVector128Traits	198.948	1317.650	4.151585
 SumYShuffleKernelVector256Traits	Run fail! Vector byte size mismatch(16!=32) !
 SumYShuffleKernelVector256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
 SumYShuffleKernelVector256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
@@ -752,20 +752,20 @@ SumYShuffleKernelVector256Traits_ArgsX	Run fail! Vector byte size mismatch(16!=3
 ---
 NAME	US	MOPS	SCALE
 # SumShuffleScalar	5910372263572008452
-SumShuffleScalar	478.797	547.506
-SumShuffleVectorBase	1223.037	214.339	0.391482
-SumShuffleVectorTraits	828.123	316.552	0.578171
-SumShuffleVectorTraits_Args	533.959	490.944	0.896691
-SumShuffleVector128_Bcl	373.784	701.324	1.280944
-SumShuffleVector128_Arm	828.402	316.445	0.577976
-SumShuffleVector128Traits	827.840	316.660	0.578368
+SumShuffleScalar	474.501	552.462
+SumShuffleVectorBase	474.524	552.436	0.999953
+SumShuffleVectorTraits	598.482	438.015	0.792842
+SumShuffleVectorTraits_Args	529.775	494.821	0.895665
+SumShuffleVector128_Bcl	368.389	711.595	1.288042
+SumShuffleVector128_Arm	598.976	437.654	0.792187
+SumShuffleVector128Traits	598.069	438.317	0.793389
 SumShuffleVector256_Bcl	Run fail! Vector byte size mismatch(16!=32) !
 SumShuffleVector256Traits	Run fail! Vector byte size mismatch(16!=32) !
-SumYShuffleKernelVectorTraits	397.912	658.799	1.203274
-SumYShuffleKernelVectorTraits_Args	532.854	491.963	0.898552
-SumYShuffleKernelVector128_Arm	396.835	660.586	1.206537
-SumYShuffleKernelVector128_Arm_Multiply	611.879	428.425	0.782503
-SumYShuffleKernelVector128Traits	396.243	661.573	1.208340
+SumYShuffleKernelVectorTraits	393.423	666.316	1.206084
+SumYShuffleKernelVectorTraits_Args	528.897	495.643	0.897153
+SumYShuffleKernelVector128_Arm	392.683	667.572	1.208357
+SumYShuffleKernelVector128_Arm_Multiply	601.877	435.544	0.788369
+SumYShuffleKernelVector128Traits	392.878	667.240	1.207756
 SumYShuffleKernelVector256_Avx2_AlignRight	Run fail! Requires hardware support Avx, Avx2!
 SumYShuffleKernelVector256_Avx2_DuplicateEven	Run fail! Requires hardware support Avx, Avx2!
 SumYShuffleKernelVector256_Avx2_Multiply	Run fail! Requires hardware support Avx, Avx2!
@@ -779,23 +779,23 @@ SumYShuffleKernelVector256Traits_ArgsX	Run fail! Vector byte size mismatch(16!=3
 ---
 NAME	US	MOPS	SCALE
 # SumShuffleScalar	114
-SumShuffleScalar	313.817	835.341
-SumShuffleVectorBase	315.817	830.050	0.993667
-SumShuffleVectorTraits	18.596	14097.005	16.875755
-SumShuffleVectorTraits_Args	316.828	827.403	0.990497
-SumShuffleVectorTraitsIf	317.392	825.931	0.988735
-SumShuffleVector128_Bcl	405.017	647.242	0.774823
-SumShuffleVector128_Arm	18.473	14190.523	16.987707
-SumShuffleVector128Traits	18.466	14196.030	16.994299
+SumShuffleScalar	312.449	838.997
+SumShuffleVectorBase	314.643	833.149	0.993029
+SumShuffleVectorTraits	18.399	14247.370	16.981431
+SumShuffleVectorTraits_Args	315.251	831.542	0.991114
+SumShuffleVectorTraitsIf	313.926	835.050	0.995296
+SumShuffleVector128_Bcl	401.703	652.581	0.777811
+SumShuffleVector128_Arm	18.397	14249.325	16.983762
+SumShuffleVector128Traits	18.401	14245.850	16.979619
 SumShuffleVector256_Bcl	Run fail! Vector byte size mismatch(16!=32) !
 SumShuffleVector256_Avx2_Add1	Run fail! Requires hardware support Avx, Avx2!
 SumShuffleVector256_Avx2_Add2	Run fail! Requires hardware support Avx, Avx2!
 SumShuffleVector256_Avx2_Cmp2	Run fail! Requires hardware support Avx, Avx2!
 SumShuffleVector256Traits	Run fail! Vector byte size mismatch(16!=32) !
-SumYShuffleKernelVectorTraits	18.599	14094.671	16.872961
-SumYShuffleKernelVectorTraits_Args	318.059	824.199	0.986662
-SumYShuffleKernelVector128_Arm	18.516	14157.853	16.948597
-SumYShuffleKernelVector128Traits	18.619	14079.188	16.854427
+SumYShuffleKernelVectorTraits	18.410	14239.391	16.971921
+SumYShuffleKernelVectorTraits_Args	315.542	830.775	0.990200
+SumYShuffleKernelVector128_Arm	18.406	14242.259	16.975339
+SumYShuffleKernelVector128Traits	18.409	14239.779	16.972383
 SumYShuffleKernelVector256Traits	Run fail! Vector byte size mismatch(16!=32) !
 SumYShuffleKernelVector256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
 SumYShuffleKernelVector256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !

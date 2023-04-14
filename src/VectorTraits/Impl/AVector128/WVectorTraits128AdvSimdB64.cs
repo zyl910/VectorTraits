@@ -49,7 +49,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static bool GetIsSupported(bool noStrict = false) {
                 bool rt = false;
 #if NET5_0_OR_GREATER
-                rt = AdvSimd.Arm64.IsSupported;
+                rt = AdvSimd.IsSupported && AdvSimd.Arm64.IsSupported;
 #else
 #endif // NET5_0_OR_GREATER
                 //if (!noStrict) {

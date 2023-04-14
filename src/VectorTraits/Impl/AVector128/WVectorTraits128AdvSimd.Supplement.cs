@@ -292,6 +292,28 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> GreaterThan(Vector128<long> left, Vector128<long> right) {
+                return GreaterThan_Half(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> GreaterThan_Half(Vector128<long> left, Vector128<long> right) {
+                const byte N = 32; // sizeof(int);
+                // rt = (a > b)
+                //    = (a1<<N + a0) > (b1<<N + b1)
+                //    = (a1>b1) || ((a1==b1) && (a0>b0))
+                Vector128<int> rawGreater = AdvSimd.CompareGreaterThan(left.AsInt32(), right.AsInt32());
+                Vector128<int> rawEqual = AdvSimd.CompareEqual(left.AsInt32(), right.AsInt32());
+                Vector128<long> lowGreater = AdvSimd.ShiftRightArithmetic(AdvSimd.ShiftLeftLogical(rawGreater.AsInt64(), N), N); // (a0>b0)
+                Vector128<long> lowEqual = AdvSimd.ShiftRightArithmetic(rawEqual.AsInt64(), N); // (a1==b1)
+                Vector128<long> high = AdvSimd.ShiftRightArithmetic(rawGreater.AsInt64(), N); // (a1>b1)
+                Vector128<long> low = AdvSimd.And(lowEqual, lowGreater); // ((a1==b1) && (a0>b0))
+                return AdvSimd.Or(low, high);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> GreaterThan_Scalar(Vector128<long> left, Vector128<long> right) {
                 // Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
                 long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
                 long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
@@ -303,6 +325,30 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> GreaterThan(Vector128<ulong> left, Vector128<ulong> right) {
+                return GreaterThan_Half(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> GreaterThan_Half(Vector128<ulong> left, Vector128<ulong> right) {
+                const byte N = 32; // sizeof(uint);
+                // rt = (a > b)
+                //    = (a1<<N + a0) > (b1<<N + b1)
+                //    = (a1>b1) || ((a1==b1) && (a0>b0))
+                Vector128<uint> rawGreater = AdvSimd.CompareGreaterThan(left.AsUInt32(), right.AsUInt32());
+                Vector128<uint> rawEqual = AdvSimd.CompareEqual(left.AsUInt32(), right.AsUInt32());
+                Vector128<ulong> lowGreater = AdvSimd.ShiftRightArithmetic(AdvSimd.ShiftLeftLogical(rawGreater.AsInt64(), N), N).AsUInt64(); // (a0>b0)
+                Vector128<ulong> lowEqual = AdvSimd.ShiftRightArithmetic(rawEqual.AsInt64(), N).AsUInt64(); // (a1==b1)
+                Vector128<ulong> high = AdvSimd.ShiftRightArithmetic(rawGreater.AsInt64(), N).AsUInt64(); // (a1>b1)
+                Vector128<ulong> low = AdvSimd.And(lowEqual, lowGreater); // ((a1==b1) && (a0>b0))
+                return AdvSimd.Or(low, high);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> GreaterThan_Scalar(Vector128<ulong> left, Vector128<ulong> right) {
                 //Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
                 long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
                 long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
