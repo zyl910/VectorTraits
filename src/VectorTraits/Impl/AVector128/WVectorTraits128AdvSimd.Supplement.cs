@@ -325,7 +325,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> GreaterThan(Vector128<ulong> left, Vector128<ulong> right) {
-                return GreaterThan_Half(left, right);
+                return GreaterThan_Saturate(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ulong}, Vector128{ulong})"/>
@@ -348,6 +348,16 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> GreaterThan_Saturate(Vector128<ulong> left, Vector128<ulong> right) {
+                Vector128<ulong> diff = AdvSimd.SubtractSaturate(left, right); // Elements: Zero is NotGreater, non-zero is Greater .
+                // Vector128<ulong> rt = AdvSimd.Not(AdvSimd.CompareEqual(diff, Vector128<ulong>.Zero));
+                Vector128<ulong> rt = AdvSimd.ShiftLeftLogicalSaturate(AdvSimd.ShiftLeftLogicalSaturate(diff, 63), 1); // = ShiftLeftLogicalSaturate(diff, 64)
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> GreaterThan_Scalar(Vector128<ulong> left, Vector128<ulong> right) {
                 //Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
                 long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
@@ -360,7 +370,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.LessThan_AcceleratedTypes"/>
             public static TypeCodeFlags LessThan_AcceleratedTypes {
                 get {
-                    return TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    return TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
                 }
             }
 
@@ -422,22 +432,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> LessThan(Vector128<long> left, Vector128<long> right) {
-                // Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
-                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
-                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
-                Vector128<long> mask = Vector128.Create(m0, m1);
-                return mask.AsInt64();
+                return GreaterThan(right, left);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> LessThan(Vector128<ulong> left, Vector128<ulong> right) {
-                //Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
-                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
-                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
-                Vector128<long> mask = Vector128.Create(m0, m1);
-                return mask.AsUInt64();
+                return GreaterThan(right, left);
             }
 
 
