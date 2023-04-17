@@ -97,8 +97,8 @@ namespace Zyl.VectorTraits {
         /// <summary>
         /// Make the shuffle control code for selecting two 1-bit values (制作shuffle控制码, 用于选择2个1位值).
         /// </summary>
-        /// <param name="x">The 1st 1-bit value (第1个2位值).</param>
-        /// <param name="y">The 0th 1-bit value (第0个2位值).</param>
+        /// <param name="x">The 1st 1-bit value (第1个1位值).</param>
+        /// <param name="y">The 0th 1-bit value (第0个1位值).</param>
         /// <returns>Returns shuffle control code (返回shuffle控制码).</returns>
         /// <remarks>
         /// <para>"emmintrin.h": Macro function for shuffle.</para>
