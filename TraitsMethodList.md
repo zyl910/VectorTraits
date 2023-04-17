@@ -24,7 +24,7 @@ List (列表):
   Mnemonic: `rt[i] := (UInt32)(value[i])` .
 - `ConvertToUInt64`: Convert to a vector whose elements are of type UInt64 (转换为元素类型是UInt64的向量).
   Mnemonic: `rt[i] := (UInt64)(value[i])` .
-- `ExtractMostSignificantBits`[1]: Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
+- `ExtractMostSignificantBits`①: Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
   Mnemonic: `rt |= getMostSignificantBit(vector[i]) << i = ( vector[i] >>> (sizeof(T)*8-1) ) << i` .
 - `Floor`: Computes the floor of each element in a vector (计算向量中每个元素的向下舍入).
   Mnemonic: `rt[i] := floor(value[i])` .
@@ -36,7 +36,7 @@ List (列表):
   Mnemonic: `rt[i] := value[i] >> shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
 - `ShiftRightLogical`: Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
   Mnemonic: `rt[i] := value[i] >>> shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
-- `Shuffle`[1]: Shuffle and clear (换位并清零). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the indices value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+- `Shuffle[/_Args/_Core]`①: Shuffle and clear (换位并清零). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the indices value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
   Mnemonic: `rt[i] := (0<=indices[i] && indices[i]<Count)?( vector[indices[i]] ):0`.
 - `Sum`: Computes the sum of all elements in a vector (计算向量中所有元素的总和).
   Mnemonic: `rt := value[0] + value[1] + value[2] + ... + value[Count-1]` .
@@ -44,7 +44,7 @@ List (列表):
   Mnemonic: `element_ref(i, lower, upper) := widen(source[i])`.
 
 Remarks:
-[1]: It also works for Vector (它也适用于Vector).
+- ①: It also works for Vector (它也适用于Vector).
 
 ## Fixed width Vector supplement traits methods (固定宽度向量补充的特性方法)
 Types: Vector128, Vector256 .
@@ -72,7 +72,7 @@ List (列表):
   Mnemonic: `rt[i] := max(left[i], right[i])`.
 - `Min`: Computes the minimum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小值).
   Mnemonic: `rt[i] := min(left[i], right[i])`.
-- `Multiply`[1]: Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+- `Multiply`①: Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
   Mnemonic: `rt[i] := left[i] * right[i]`.
 - `Negate`: Computes the negate of a vector (计算向量的相反数).
   Mnemonic: `rt[i] := -vector[i]`.
@@ -84,7 +84,7 @@ List (列表):
   Mnemonic: `rt[i] := left[i] ^ right[i]`.
 
 Remarks:
-[1]: It also works for Vector (它也适用于Vector).
+- ①: It also works for Vector (它也适用于Vector).
 
 
 ## Vector traits method appended by this library (由本库追加的向量特性方法)
@@ -102,7 +102,7 @@ List (列表):
   Mnemonic: `rt[i] := narrow_saturate(element_ref(i, lower, upper)) = narrow(clamp(element_ref(i, lower, upper), TOut.MinValue, TOut.MaxValue))`.
 - `YNarrowSaturateUnsigned`: Saturate narrows two signed Vector instances into one unsigned Vector  (将两个有符号 Vector 实例饱和缩窄为一个无符号 Vector ).
   Mnemonic: `rt[i] := narrow_saturate(element_ref(i, lower, upper)) = narrow(clamp(element_ref(i, lower, upper), 0, TOut.MaxValue))`.
-- `YShuffleInsert`: Shuffle and insert (换位并插入). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+- `YShuffleInsert[/_Args/_Core]`: Shuffle and insert (换位并插入). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
   Mnemonic: `rt[i] := (0<=indices[i] && indices[i]<Count)?( vector[indices[i]] ):back[i]`.
-- `YShuffleKernel`: Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the IndexMask mask to constrain the parameters (可使用 IndexMask 掩码来约束参数).
+- `YShuffleKernel[/_Args/_Core]`: Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the IndexMask mask to constrain the parameters (可使用 IndexMask 掩码来约束参数).
   Mnemonic: `rt[i] := vector[indices[i]]`. Conditions: `0<=indices[i] && indices[i]<Count`.
