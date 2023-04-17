@@ -28,7 +28,9 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<byte> Shuffle(Vector<byte> vector, Vector<byte> indices) {
 #if !BCL_BASE_OVERRIDE_STATIC
-            if (Vector<byte>.Count == Vector256<byte>.Count) {
+            if (Vector<byte>.Count == Vector128<byte>.Count) {
+                return Vector128_Shuffle.Shuffle(vector.AsVector128(), indices.AsVector128()).AsVector();
+            } else if (Vector<byte>.Count == Vector256<byte>.Count) {
                 return Vector256_Shuffle.Shuffle(vector.AsVector256(), indices.AsVector256()).AsVector();
             }
 #endif // !BCL_BASE_OVERRIDE_STATIC
@@ -46,7 +48,9 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ushort> Shuffle(Vector<ushort> vector, Vector<ushort> indices) {
 #if !BCL_BASE_OVERRIDE_STATIC
-            if (Vector<byte>.Count == Vector256<byte>.Count) {
+            if (Vector<byte>.Count == Vector128<byte>.Count) {
+                return Vector128_Shuffle.Shuffle(vector.AsVector128(), indices.AsVector128()).AsVector();
+            } else if (Vector<byte>.Count == Vector256<byte>.Count) {
                 return Vector256_Shuffle.Shuffle(vector.AsVector256(), indices.AsVector256()).AsVector();
             }
 #endif // !BCL_BASE_OVERRIDE_STATIC
@@ -124,7 +128,9 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<byte> YShuffleKernel(Vector<byte> vector, Vector<byte> indices) {
 #if !BCL_BASE_OVERRIDE_STATIC && NETCOREAPP3_0_OR_GREATER
-            if (Vector<byte>.Count == Vector256<byte>.Count) {
+            if (Vector<byte>.Count == Vector128<byte>.Count) {
+                return Vector128_Shuffle.YShuffleKernel(vector.AsVector128(), indices.AsVector128()).AsVector();
+            } else if (Vector<byte>.Count == Vector256<byte>.Count) {
                 return Vector256_Shuffle.YShuffleKernel(vector.AsVector256(), indices.AsVector256()).AsVector();
             }
 #endif // !BCL_BASE_OVERRIDE_STATIC && NETCOREAPP3_0_OR_GREATER
@@ -142,7 +148,9 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ushort> YShuffleKernel(Vector<ushort> vector, Vector<ushort> indices) {
 #if !BCL_BASE_OVERRIDE_STATIC && NETCOREAPP3_0_OR_GREATER
-            if (Vector<byte>.Count == Vector256<byte>.Count) {
+            if (Vector<byte>.Count == Vector128<byte>.Count) {
+                return Vector128_Shuffle.YShuffleKernel(vector.AsVector128(), indices.AsVector128()).AsVector();
+            } else if (Vector<byte>.Count == Vector256<byte>.Count) {
                 return Vector256_Shuffle.YShuffleKernel(vector.AsVector256(), indices.AsVector256()).AsVector();
             }
 #endif // !BCL_BASE_OVERRIDE_STATIC && NETCOREAPP3_0_OR_GREATER
