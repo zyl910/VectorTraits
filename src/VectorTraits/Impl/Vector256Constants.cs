@@ -39,24 +39,31 @@ namespace Zyl.VectorTraits.Impl {
             Vector256.Create((byte)1, 1, 3, 3, 5, 5, 7, 7, 9, 9, 11, 11, 13, 13, 15, 15, 17, 17, 19, 19, 21, 21, 23, 23, 25, 25, 27, 27, 29, 29, 31, 31), // YY
         };
 
-        /// <summary>YShuffleG2 - UInt16 - The indices.</summary>
-        public static readonly Vector256<byte>[] YShuffleG2_UInt16_Indices = {
+        /// <summary>YShuffleG2 - UInt16 - The byte indices.</summary>
+        public static readonly Vector256<byte>[] YShuffleG2_UInt16_ByteIndices = {
             Vector256.Create((byte)0, 1, 0, 1, 4, 5, 4, 5, 8, 9,  8,  9, 12, 13, 12, 13, 16, 17, 16, 17, 20, 21, 20, 21, 24, 25, 24, 25, 28, 29, 28, 29), // XX
             Vector256.Create((byte)2, 3, 0, 1, 6, 7, 4, 5, 10, 11, 8, 9, 14, 15, 12, 13, 18, 19, 16, 17, 22, 23, 20, 21, 26, 27, 24, 25, 30, 31, 28, 29), // YX
             Vector256.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31), // XY
             Vector256.Create((byte)2, 3, 2, 3, 6, 7, 6, 7,10,11, 10, 11, 14, 15, 14, 15, 18, 19, 18, 19, 22, 23, 22, 23, 26, 27, 26, 27, 30, 31, 30, 31), // YY
         };
 
-        /// <summary>YShuffleG2 - UInt32 - The indices.</summary>
-        public static readonly Vector256<byte>[] YShuffleG2_UInt32_Indices = {
+        /// <summary>YShuffleG2 - UInt32 - The uint32 indices.</summary>
+        public static readonly Vector256<uint>[] YShuffleG2_UInt32_Indices = {
+            Vector256.Create((uint)0, 0, 2, 2, 4, 4, 6, 6), // XX
+            Vector256.Create((uint)1, 0, 3, 2, 5, 4, 7, 6), // YX
+            Vector256.Create((uint)0, 1, 2, 3, 4, 5, 6, 7), // XY
+            Vector256.Create((uint)1, 1, 3, 3, 5, 5, 7, 7), // YY
+        };
+        /// <summary>YShuffleG2 - UInt32 - The byte indices.</summary>
+        public static readonly Vector256<byte>[] YShuffleG2_UInt32_ByteIndices = {
             Vector256.Create((byte)0, 1, 2, 3, 0, 1, 2, 3, 8, 9, 10, 11,  8,  9, 10, 11, 16, 17, 18, 19, 16, 17, 18, 19, 24, 25, 26, 27, 24, 25, 26, 27), // XX
             Vector256.Create((byte)4, 5, 6, 7, 0, 1, 2, 3, 12, 13, 14, 15, 8, 9, 10, 11, 20, 21, 22, 23, 16, 17, 18, 19, 28, 29, 30, 31, 24, 25, 26, 27), // YX
             Vector256.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31), // XY
             Vector256.Create((byte)4, 5, 6, 7, 4, 5, 6, 7,12,13, 14, 15, 12, 13, 14, 15, 20, 21, 22, 23, 20, 21, 22, 23, 28, 29, 30, 31, 28, 29, 30, 31), // YY
         };
 
-        /// <summary>YShuffleG2 - UInt64 - The indices.</summary>
-        public static readonly Vector256<byte>[] YShuffleG2_UInt64_Indices = {
+        /// <summary>YShuffleG2 - UInt64 - The byte indices.</summary>
+        public static readonly Vector256<byte>[] YShuffleG2_UInt64_ByteIndices = {
             Vector256.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 0, 1,  2,  3,  4,  5,  6,  7, 16, 17, 18, 19, 20, 21, 22, 23, 16, 17, 18, 19, 20, 21, 22, 23), // XX
             Vector256.Create((byte)8, 9, 10, 11, 12, 13, 14, 15, 0, 1, 2, 3, 4, 5, 6, 7, 24, 25, 26, 27, 28, 29, 30, 31, 16, 17, 18, 19, 20, 21, 22, 23), // YX
             Vector256.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31), // XY

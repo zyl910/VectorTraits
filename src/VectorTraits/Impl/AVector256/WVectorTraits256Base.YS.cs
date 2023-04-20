@@ -65,7 +65,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleG2(Vector256<ushort> source, ShuffleControlG2 control) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector256.Shuffle(source.AsByte(), Vector256Constants.YShuffleG2_UInt16_Indices[(int)control]).AsUInt16();
+                return Vector256.Shuffle(source.AsByte(), Vector256Constants.YShuffleG2_UInt16_ByteIndices[(int)control]).AsUInt16();
 #else
                 return YShuffleG2_Base(source, control);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
@@ -82,7 +82,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleG2(Vector256<uint> source, ShuffleControlG2 control) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector256.Shuffle(source.AsByte(), Vector256Constants.YShuffleG2_UInt32_Indices[(int)control]).AsUInt32();
+                return Vector256.Shuffle(source.AsByte(), Vector256Constants.YShuffleG2_UInt32_ByteIndices[(int)control]).AsUInt32();
 #else
                 return YShuffleG2_Base(source, control);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
@@ -99,7 +99,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleG2(Vector256<ulong> source, ShuffleControlG2 control) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector256.Shuffle(source.AsByte(), Vector256Constants.YShuffleG2_UInt64_Indices[(int)control]).AsUInt64();
+                return Vector256.Shuffle(source.AsByte(), Vector256Constants.YShuffleG2_UInt64_ByteIndices[(int)control]).AsUInt64();
 #else
                 return YShuffleG2_Base(source, control);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
