@@ -267,6 +267,120 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YShuffleG2</c> (运行 <c>YShuffleG2</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para>Meaning of suffixes (后缀的含义).</para>
+        /// <para>- (none): Normal (常规).</para>
+        /// <para>- Const. Constant version. This version can be used if you can ensure that the parameters are constants. It can take advantage of constants and make better use of hardware acceleration (常量版. 若能确保参数是常量, 可使用该版本. 它能利用常量, 更好的使用硬件加速).</para>
+        /// <para>Similar methods (相似的方法).</para>
+        /// <para>- <see cref="YShuffleG2"/>: For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).</para>
+        /// </remarks>
+        /// <seealso cref="YShuffleG2"/>
+        TypeCodeFlags YShuffleG2_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
+        /// </summary>
+        /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleG2_AcceleratedTypes"/>
+        Vector256<float> YShuffleG2(Vector256<float> source, ShuffleControlG2 control);
+
+        /// <summary>
+        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
+        /// </summary>
+        /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleG2_AcceleratedTypes"/>
+        Vector256<double> YShuffleG2(Vector256<double> source, ShuffleControlG2 control);
+
+        /// <summary>
+        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
+        /// </summary>
+        /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleG2_AcceleratedTypes"/>
+        Vector256<sbyte> YShuffleG2(Vector256<sbyte> source, ShuffleControlG2 control);
+
+        /// <summary>
+        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
+        /// </summary>
+        /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleG2_AcceleratedTypes"/>
+        Vector256<byte> YShuffleG2(Vector256<byte> source, ShuffleControlG2 control);
+
+        /// <summary>
+        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
+        /// </summary>
+        /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleG2_AcceleratedTypes"/>
+        Vector256<short> YShuffleG2(Vector256<short> source, ShuffleControlG2 control);
+
+        /// <summary>
+        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
+        /// </summary>
+        /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleG2_AcceleratedTypes"/>
+        Vector256<ushort> YShuffleG2(Vector256<ushort> source, ShuffleControlG2 control);
+
+        /// <summary>
+        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
+        /// </summary>
+        /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleG2_AcceleratedTypes"/>
+        Vector256<int> YShuffleG2(Vector256<int> source, ShuffleControlG2 control);
+
+        /// <summary>
+        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
+        /// </summary>
+        /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleG2_AcceleratedTypes"/>
+        Vector256<uint> YShuffleG2(Vector256<uint> source, ShuffleControlG2 control);
+
+        /// <summary>
+        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
+        /// </summary>
+        /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleG2_AcceleratedTypes"/>
+        Vector256<long> YShuffleG2(Vector256<long> source, ShuffleControlG2 control);
+
+        /// <summary>
+        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
+        /// </summary>
+        /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
+        /// <seealso cref="YShuffleG2_AcceleratedTypes"/>
+        Vector256<ulong> YShuffleG2(Vector256<ulong> source, ShuffleControlG2 control);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YShuffleInsert</c> (运行 <c>YShuffleInsert</c> 时具有硬件加速的类型).
         /// </summary>
         /// <remarks>
