@@ -59,7 +59,6 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
                     }
                     Vector256<T> dst;
-                    // Static: Const
                     // Instances
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
@@ -70,12 +69,71 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         } else {
                             Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, source={source}, control={control}");
                         }
-                        // Instances: Const
                     }
                     if (allowLog) {
                         Console.WriteLine();
                     }
                 } // j
+            } // samples
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void YShuffleG2_ConstTest<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.YShuffleG2_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            bool allowLog = true;
+            //bool allowLogItem = Scalars<T>.ExponentBits > 0;
+            bool allowLogItem = false;
+            Vector256<T>[] samples = {
+                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1),
+                //Vector256s<T>.Demo,
+                Vector256s<T>.Serial,
+                //Vector256s<T>.SerialNegative
+            };
+            ShuffleControlG2 control = ShuffleControlG2.YX;
+            foreach (Vector256<T> source in samples) {
+                if (allowLog) {
+                    Console.WriteLine();
+                    Console.WriteLine(VectorTextUtil.Format("== Sample:\t{0}", source));
+                }
+                if (allowLog) {
+                    Console.WriteLine(VectorTextUtil.Format("-- Control:\t{0}", control));
+                }
+                Vector256<T> expected = Vector256s.YShuffleG2_Const((dynamic)source, control);
+                if (allowLog) {
+                    Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                }
+                Vector256<T> dst;
+                // Instances
+                foreach (IWVectorTraits256 instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    dst = instance.YShuffleG2_Const((dynamic)source, control);
+                    if (allowLogItem) {
+                        // Compatible floating-point NaN.
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, source={2}, control={3}", instance.GetType().Name, dst, source, control));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, source={source}, control={control}");
+                    }
+                }
+                if (allowLog) {
+                    Console.WriteLine();
+                }
             } // samples
         }
 

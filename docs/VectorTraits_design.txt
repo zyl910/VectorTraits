@@ -42,10 +42,16 @@ Style suffix (风格后缀):
 - `Args`: 用于检查及转换参数. 用本方法转换参数后, 随后可调用 Core 版方法.
 - `ArgsX`: 用于检查及转换参数, 返回值用的是向量元祖类型 (e.g. VectorX2). 用本方法转换参数后, 随后可调用 Core 版方法.
 - `Core`: 核心运算. 需先调用 Args 版函数, 才可调用本方法. 例如 YShuffleG4 .
-- `Const`: 常量版. 用于能确保参数在范围内, 且参数是常量时. 参数会用 `ConstExpected` attribute 说明范围.
-- `Fast`: 快速版. 用于能确保参数在范围内, 且参数是变量时. 参数会用 `ConstExpected` attribute 说明范围.
+- `Const`: 常量版. 用于能确保参数在范围内, 且参数是常量时. 参数会用 `ConstantExpected` attribute 说明范围.
+- `Fast`: 快速版. 用于能确保参数在范围内, 且参数是变量时. 参数会用 `ConstantExpected` attribute 说明范围.
 
 注: Base name (基本名称)必会提供加速类型检测的属性. 而对于风格后缀, 一般不用提供加速类型检测.
+
+Attribute:
+- ConstantExpected: .NET 7.0 就存在了. 位于System.Diagnostics.CodeAnalysis
+- ConstExpected: 据说 .NET 8.0会用上. 也可能就是 ConstantExpected .
+https://github.com/dotnet/runtime/pull/80192
+
 
 ## nuget
 

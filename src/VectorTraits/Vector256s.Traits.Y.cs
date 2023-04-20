@@ -387,6 +387,110 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{float}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YShuffleG2_Const(Vector256<float> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{double}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YShuffleG2_Const(Vector256<double> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{sbyte}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YShuffleG2_Const(Vector256<sbyte> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{byte}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YShuffleG2_Const(Vector256<byte> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{short}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YShuffleG2_Const(Vector256<short> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{ushort}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> YShuffleG2_Const(Vector256<ushort> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{int}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YShuffleG2_Const(Vector256<int> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{uint}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> YShuffleG2_Const(Vector256<uint> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{long}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YShuffleG2_Const(Vector256<long> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{ulong}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> YShuffleG2_Const(Vector256<ulong> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
 
         /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
         public static TypeCodeFlags YShuffleInsert_AcceleratedTypes {
