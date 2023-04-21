@@ -120,8 +120,12 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{double}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YShuffleG2_Const(Vector256<double> source, [ConstantExpected] ShuffleControlG2 control) {
+#if NETX_0_OR_GREATER // Requires support for compiling constants to immediate numbers
                 byte ctl = (byte)((byte)control * 5);
                 return Avx.Shuffle(source, source, ctl);
+#else
+                return YShuffleG2(source, control);
+#endif // NETX_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{sbyte}, ShuffleControlG2)"/>
@@ -147,9 +151,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleG2_Const(Vector256<ushort> source, [ConstantExpected] ShuffleControlG2 control) {
+#if NETX_0_OR_GREATER // Requires support for compiling constants to immediate numbers
                 byte n = (byte)control;
                 byte ctl = (byte)(0xA0 + (n & 2) * 0x22 + (n & 1) * 0x11); // ShuffleControlG2 to ShuffleControlG4
                 return Avx2.ShuffleHigh(Avx2.ShuffleLow(source, ctl), ctl);
+#else
+                return YShuffleG2(source, control);
+#endif // NETX_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{int}, ShuffleControlG2)"/>
@@ -162,9 +170,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleG2_Const(Vector256<uint> source, [ConstantExpected] ShuffleControlG2 control) {
+#if NETX_0_OR_GREATER // Requires support for compiling constants to immediate numbers
                 byte n = (byte)control;
                 byte ctl = (byte)(0xA0 + (n & 2) * 0x22 + (n & 1) * 0x11); // ShuffleControlG2 to ShuffleControlG4
                 return Avx2.Shuffle(source, ctl);
+#else
+                return YShuffleG2(source, control);
+#endif // NETX_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{long}, ShuffleControlG2)"/>
@@ -742,6 +754,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 #endif // NETCOREAPP3_0_OR_GREATER
-        }
+            }
     }
 }
