@@ -106,34 +106,37 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.Serial,
                 //Vector256s<T>.SerialNegative
             };
-            ShuffleControlG2 control = ShuffleControlG2.YX;
+            //ShuffleControlG2 control = ShuffleControlG2.YX;
             foreach (Vector256<T> source in samples) {
                 if (allowLog) {
                     Console.WriteLine();
                     Console.WriteLine(VectorTextUtil.Format("== Sample:\t{0}", source));
                 }
-                if (allowLog) {
-                    Console.WriteLine(VectorTextUtil.Format("-- Control:\t{0}", control));
-                }
-                Vector256<T> expected = Vector256s.YShuffleG2_Const((dynamic)source, control);
-                if (allowLog) {
-                    Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
-                }
-                Vector256<T> dst;
-                // Instances
-                foreach (IWVectorTraits256 instance in instances) {
-                    if (!instance.GetIsSupported(true)) continue;
-                    dst = instance.YShuffleG2_Const((dynamic)source, control);
-                    if (allowLogItem) {
-                        // Compatible floating-point NaN.
-                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, source={2}, control={3}", instance.GetType().Name, dst, source, control));
-                    } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, source={source}, control={control}");
+                for (int j = 0; j <= 3; ++j) {
+                    ShuffleControlG2 control = (ShuffleControlG2)j;
+                    if (allowLog) {
+                        Console.WriteLine(VectorTextUtil.Format("-- Control:\t{0}", control));
                     }
-                }
-                if (allowLog) {
-                    Console.WriteLine();
-                }
+                    Vector256<T> expected = Vector256s.YShuffleG2_Const((dynamic)source, control);
+                    if (allowLog) {
+                        Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                    }
+                    Vector256<T> dst;
+                    // Instances
+                    foreach (IWVectorTraits256 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        dst = instance.YShuffleG2_Const((dynamic)source, control);
+                        if (allowLogItem) {
+                            // Compatible floating-point NaN.
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, source={2}, control={3}", instance.GetType().Name, dst, source, control));
+                        } else {
+                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, source={source}, control={control}");
+                        }
+                    }
+                    if (allowLog) {
+                        Console.WriteLine();
+                    }
+                } // j
             } // samples
         }
 
