@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+#if !NET7_0_OR_GREATER
+using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
+#endif // !NET7_0_OR_GREATER
 using System.Runtime.CompilerServices;
 using System.Numerics;
-using System.Diagnostics;
 
 namespace Zyl.VectorTraits.Impl.AVector {
     using Statics = VectorTraitsBase.Statics;
@@ -1185,6 +1188,142 @@ namespace Zyl.VectorTraits.Impl.AVector {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector<uint> YNarrowSaturateUnsigned(Vector<long> lower, Vector<long> upper) {
             return Statics.YNarrowSaturateUnsigned(lower, upper);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YShuffleG2_AcceleratedTypes {
+            get {
+                return Statics.YShuffleG2_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2(Vector{float}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<float> YShuffleG2(Vector<float> source, ShuffleControlG2 control) {
+            return Statics.YShuffleG2(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2(Vector{double}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<double> YShuffleG2(Vector<double> source, ShuffleControlG2 control) {
+            return Statics.YShuffleG2(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2(Vector{sbyte}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<sbyte> YShuffleG2(Vector<sbyte> source, ShuffleControlG2 control) {
+            return Statics.YShuffleG2(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2(Vector{byte}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<byte> YShuffleG2(Vector<byte> source, ShuffleControlG2 control) {
+            return Statics.YShuffleG2(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2(Vector{short}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<short> YShuffleG2(Vector<short> source, ShuffleControlG2 control) {
+            return Statics.YShuffleG2(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2(Vector{ushort}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ushort> YShuffleG2(Vector<ushort> source, ShuffleControlG2 control) {
+            return Statics.YShuffleG2(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2(Vector{int}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<int> YShuffleG2(Vector<int> source, ShuffleControlG2 control) {
+            return Statics.YShuffleG2(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2(Vector{uint}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<uint> YShuffleG2(Vector<uint> source, ShuffleControlG2 control) {
+            return Statics.YShuffleG2(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2(Vector{long}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<long> YShuffleG2(Vector<long> source, ShuffleControlG2 control) {
+            return Statics.YShuffleG2(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2(Vector{ulong}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ulong> YShuffleG2(Vector<ulong> source, ShuffleControlG2 control) {
+            return Statics.YShuffleG2(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2_Const(Vector{float}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<float> YShuffleG2_Const(Vector<float> source, [ConstantExpected] ShuffleControlG2 control) {
+            return Statics.YShuffleG2_Const(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2_Const(Vector{double}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<double> YShuffleG2_Const(Vector<double> source, [ConstantExpected] ShuffleControlG2 control) {
+            return Statics.YShuffleG2_Const(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2_Const(Vector{sbyte}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<sbyte> YShuffleG2_Const(Vector<sbyte> source, [ConstantExpected] ShuffleControlG2 control) {
+            return Statics.YShuffleG2_Const(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2_Const(Vector{byte}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<byte> YShuffleG2_Const(Vector<byte> source, [ConstantExpected] ShuffleControlG2 control) {
+            return Statics.YShuffleG2_Const(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2_Const(Vector{short}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<short> YShuffleG2_Const(Vector<short> source, [ConstantExpected] ShuffleControlG2 control) {
+            return Statics.YShuffleG2_Const(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2_Const(Vector{ushort}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ushort> YShuffleG2_Const(Vector<ushort> source, [ConstantExpected] ShuffleControlG2 control) {
+            return Statics.YShuffleG2_Const(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2_Const(Vector{int}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<int> YShuffleG2_Const(Vector<int> source, [ConstantExpected] ShuffleControlG2 control) {
+            return Statics.YShuffleG2_Const(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2_Const(Vector{uint}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<uint> YShuffleG2_Const(Vector<uint> source, [ConstantExpected] ShuffleControlG2 control) {
+            return Statics.YShuffleG2_Const(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2_Const(Vector{long}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<long> YShuffleG2_Const(Vector<long> source, [ConstantExpected] ShuffleControlG2 control) {
+            return Statics.YShuffleG2_Const(source, control);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YShuffleG2_Const(Vector{ulong}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ulong> YShuffleG2_Const(Vector<ulong> source, [ConstantExpected] ShuffleControlG2 control) {
+            return Statics.YShuffleG2_Const(source, control);
         }
 
 
