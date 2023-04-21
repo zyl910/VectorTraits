@@ -10,4 +10,5 @@
 - [YClamp](YClamp.md): Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制)
 - [YNarrowSaturate](YNarrowSaturate.md): Saturate narrows two Vector instances into one Vector  (将两个 Vector 实例饱和缩窄为一个 Vector ).
 - [YNarrowSaturateUnsigned](YNarrowSaturateUnsigned.md): Saturate narrows two signed Vector instances into one unsigned Vector  (将两个有符号 Vector 实例饱和缩窄为一个无符号 Vector ).
+- [YShuffleG2](YShuffleG2.md): For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
 
