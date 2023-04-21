@@ -13,6 +13,131 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
     public class Vector128Tests_YS {
 #if NETCOREAPP3_0_OR_GREATER
 
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void YShuffleG2Test<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.YShuffleG2_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            bool allowLog = true;
+            //bool allowLogItem = Scalars<T>.ExponentBits > 0;
+            bool allowLogItem = false;
+            Vector128<T>[] samples = {
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1),
+                //Vector128s<T>.Demo,
+                Vector128s<T>.Serial,
+                //Vector128s<T>.SerialNegative
+            };
+            foreach (Vector128<T> source in samples) {
+                if (allowLog) {
+                    Console.WriteLine();
+                    Console.WriteLine(VectorTextUtil.Format("== Sample:\t{0}", source));
+                }
+                for (int j = 0; j <= 3; ++j) {
+                    ShuffleControlG2 control = (ShuffleControlG2)j;
+                    if (allowLog) {
+                        Console.WriteLine(VectorTextUtil.Format("-- Control:\t{0}", control));
+                    }
+                    Vector128<T> expected = Vector128s.YShuffleG2((dynamic)source, control);
+                    if (allowLog) {
+                        Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                    }
+                    Vector128<T> dst;
+                    // Instances
+                    foreach (IWVectorTraits128 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        dst = instance.YShuffleG2((dynamic)source, control);
+                        if (allowLogItem) {
+                            // Compatible floating-point NaN.
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, source={2}, control={3}", instance.GetType().Name, dst, source, control));
+                        } else {
+                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, source={source}, control={control}");
+                        }
+                    }
+                    if (allowLog) {
+                        Console.WriteLine();
+                    }
+                } // j
+            } // samples
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void YShuffleG2_ConstTest<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.YShuffleG2_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            bool allowLog = true;
+            //bool allowLogItem = Scalars<T>.ExponentBits > 0;
+            bool allowLogItem = false;
+            Vector128<T>[] samples = {
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1),
+                //Vector128s<T>.Demo,
+                Vector128s<T>.Serial,
+                //Vector128s<T>.SerialNegative
+            };
+            //ShuffleControlG2 control = ShuffleControlG2.YX;
+            foreach (Vector128<T> source in samples) {
+                if (allowLog) {
+                    Console.WriteLine();
+                    Console.WriteLine(VectorTextUtil.Format("== Sample:\t{0}", source));
+                }
+                for (int j = 0; j <= 3; ++j) {
+                    ShuffleControlG2 control = (ShuffleControlG2)j;
+                    if (allowLog) {
+                        Console.WriteLine(VectorTextUtil.Format("-- Control:\t{0}", control));
+                    }
+                    Vector128<T> expected = Vector128s.YShuffleG2_Const((dynamic)source, control);
+                    if (allowLog) {
+                        Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                    }
+                    Vector128<T> dst;
+                    // Instances
+                    foreach (IWVectorTraits128 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        dst = instance.YShuffleG2_Const((dynamic)source, control);
+                        if (allowLogItem) {
+                            // Compatible floating-point NaN.
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, source={2}, control={3}", instance.GetType().Name, dst, source, control));
+                        } else {
+                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, source={source}, control={control}");
+                        }
+                    }
+                    if (allowLog) {
+                        Console.WriteLine();
+                    }
+                } // j
+            } // samples
+        }
+
         [TestCase((float)1, (int)7)]
         [TestCase((double)2, (long)9)]
         [TestCase((sbyte)3, (sbyte)3)]
