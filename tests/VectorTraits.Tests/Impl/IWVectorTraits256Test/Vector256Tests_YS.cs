@@ -96,6 +96,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
+            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, ShuffleControlG2, Vector256<T>>>("YShuffleG2_Const_Imm");
+            foreach (var func in funcList) {
+                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
             // run.
             bool allowLog = true;
             //bool allowLogItem = Scalars<T>.ExponentBits > 0;
@@ -133,6 +137,15 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                             Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, source={source}, control={control}");
                         }
                     }
+                    foreach (var func in funcList) {
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        dst = func(source, control);
+                        if (allowLogItem) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, source={2}, control={3}", funcName, dst, source, control));
+                        } else {
+                            Assert.AreEqual(expected, dst, $"{funcName}, source={source}, control={control}");
+                        }
+                    } // funcList
                     if (allowLog) {
                         Console.WriteLine();
                     }
