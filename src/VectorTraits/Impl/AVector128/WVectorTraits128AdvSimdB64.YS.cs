@@ -164,7 +164,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleInsert_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = SuperStatics.YShuffleInsert_AcceleratedTypes;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
