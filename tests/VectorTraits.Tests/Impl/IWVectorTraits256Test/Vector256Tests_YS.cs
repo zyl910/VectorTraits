@@ -248,7 +248,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.Serial,
                 //Vector256s<T>.SerialNegative
             };
-            //ShuffleControlG4 control = ShuffleControlG4.YX;
+            //ShuffleControlG4 control = ShuffleControlG4.WZYX;
             foreach (Vector256<T> source in samples) {
                 if (allowLog) {
                     Console.WriteLine();
