@@ -275,13 +275,13 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- (none): Normal (常规).</para>
         /// <para>- Const. Constant version. This version can be used if you can ensure that the parameters are constants. It can take advantage of constants and make better use of hardware acceleration (常量版. 若能确保参数是常量, 可使用该版本. 它能利用常量, 更好的使用硬件加速).</para>
         /// <para>Similar methods (相似的方法).</para>
-        /// <para>- <see cref="YShuffleG2"/>: For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).</para>
+        /// <para>- <see cref="YShuffleG2"/>: For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).</para>
         /// </remarks>
         /// <seealso cref="YShuffleG2"/>
         TypeCodeFlags YShuffleG2_AcceleratedTypes { get; }
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -291,7 +291,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<float> YShuffleG2(Vector<float> source, ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -301,7 +301,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<double> YShuffleG2(Vector<double> source, ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -311,7 +311,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<sbyte> YShuffleG2(Vector<sbyte> source, ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -321,7 +321,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<byte> YShuffleG2(Vector<byte> source, ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -331,7 +331,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<short> YShuffleG2(Vector<short> source, ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -341,7 +341,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<ushort> YShuffleG2(Vector<ushort> source, ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -351,7 +351,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<int> YShuffleG2(Vector<int> source, ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -361,7 +361,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<uint> YShuffleG2(Vector<uint> source, ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -371,7 +371,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<long> YShuffleG2(Vector<long> source, ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed (对于每个 2-元素的组, 进行换位).
+        /// For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -381,7 +381,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<ulong> YShuffleG2(Vector<ulong> source, ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed - Constant version (对于每个 2-元素的组, 进行换位 - 常量版).
+        /// For each 2-element group in a vector, shuffle is performed - Constant version (对于一个向量中的每个 2-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -391,7 +391,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<float> YShuffleG2_Const(Vector<float> source, [ConstantExpected] ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed - Constant version (对于每个 2-元素的组, 进行换位 - 常量版).
+        /// For each 2-element group in a vector, shuffle is performed - Constant version (对于一个向量中的每个 2-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -401,7 +401,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<double> YShuffleG2_Const(Vector<double> source, [ConstantExpected] ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed - Constant version (对于每个 2-元素的组, 进行换位 - 常量版).
+        /// For each 2-element group in a vector, shuffle is performed - Constant version (对于一个向量中的每个 2-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -411,7 +411,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<sbyte> YShuffleG2_Const(Vector<sbyte> source, [ConstantExpected] ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed - Constant version (对于每个 2-元素的组, 进行换位 - 常量版).
+        /// For each 2-element group in a vector, shuffle is performed - Constant version (对于一个向量中的每个 2-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -421,7 +421,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<byte> YShuffleG2_Const(Vector<byte> source, [ConstantExpected] ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed - Constant version (对于每个 2-元素的组, 进行换位 - 常量版).
+        /// For each 2-element group in a vector, shuffle is performed - Constant version (对于一个向量中的每个 2-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -431,7 +431,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<short> YShuffleG2_Const(Vector<short> source, [ConstantExpected] ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed - Constant version (对于每个 2-元素的组, 进行换位 - 常量版).
+        /// For each 2-element group in a vector, shuffle is performed - Constant version (对于一个向量中的每个 2-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -441,7 +441,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<ushort> YShuffleG2_Const(Vector<ushort> source, [ConstantExpected] ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed - Constant version (对于每个 2-元素的组, 进行换位 - 常量版).
+        /// For each 2-element group in a vector, shuffle is performed - Constant version (对于一个向量中的每个 2-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -451,7 +451,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<int> YShuffleG2_Const(Vector<int> source, [ConstantExpected] ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed - Constant version (对于每个 2-元素的组, 进行换位 - 常量版).
+        /// For each 2-element group in a vector, shuffle is performed - Constant version (对于一个向量中的每个 2-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -461,7 +461,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<uint> YShuffleG2_Const(Vector<uint> source, [ConstantExpected] ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed - Constant version (对于每个 2-元素的组, 进行换位 - 常量版).
+        /// For each 2-element group in a vector, shuffle is performed - Constant version (对于一个向量中的每个 2-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -471,7 +471,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<long> YShuffleG2_Const(Vector<long> source, [ConstantExpected] ShuffleControlG2 control);
 
         /// <summary>
-        /// For each 2-element group, shuffle is performed - Constant version (对于每个 2-元素的组, 进行换位 - 常量版).
+        /// For each 2-element group in a vector, shuffle is performed - Constant version (对于一个向量中的每个 2-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
