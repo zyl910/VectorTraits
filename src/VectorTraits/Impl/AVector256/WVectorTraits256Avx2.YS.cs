@@ -241,6 +241,18 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return YShuffleG2_Const_Imm(source.AsUInt32(), control).AsInt32();
             }
 
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{int}, ShuffleControlG2)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YShuffleG2_Const_ImmByte(Vector256<int> source, [ConstantExpected(Max = 3)] byte control) {
+                byte ctl = (byte)(0xA0 + (control & 2) * 0x22 + (control & 1) * 0x11); // ShuffleControlG2 to ShuffleControlG4
+                return Avx2.Shuffle(source, ctl);
+            }
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YShuffleG4_Const_ImmByte(Vector256<int> source, [ConstantExpected(Max = 255)] byte control) {
+                return Avx2.Shuffle(source, control);
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{uint}, ShuffleControlG2)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

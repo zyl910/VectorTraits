@@ -182,56 +182,58 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	28917
-SumYShuffleG2Scalar	431.628	607.337
-SumYShuffleG2VectorBase	477.598	548.880	0.903748
-SumYShuffleG2VectorTraits	15.364	17062.597	28.094097
+SumYShuffleG2Scalar	440.851	594.632
+SumYShuffleG2VectorBase	431.354	607.723	1.022016
+SumYShuffleG2VectorTraits	14.720	17808.150	29.948194
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256Traits	17.057	15369.029	25.305584
-SumYShuffleG2_ConstVectorTraits	17.159	15276.939	25.153956
+SumYShuffleG2Vector256Traits	19.023	13780.350	23.174591
+SumYShuffleG2_ConstVectorTraits	24.760	10587.192	17.804616
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256Traits	17.536	14948.660	24.613434
+SumYShuffleG2_ConstVector256Traits	18.141	14450.362	24.301358
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	-1234767990
-SumYShuffleG2Scalar	531.855	492.886
-SumYShuffleG2VectorBase	529.022	495.526	1.005355
-SumYShuffleG2VectorTraits	52.343	5008.234	10.161033
+SumYShuffleG2Scalar	539.690	485.730
+SumYShuffleG2VectorBase	527.366	497.082	1.023369
+SumYShuffleG2VectorTraits	43.288	6055.763	12.467331
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256_AvxByte	49.079	5341.304	10.836788
-SumYShuffleG2Vector256_AvxInt32	57.151	4586.903	9.306210
-SumYShuffleG2Vector256Traits	50.736	5166.812	10.482768
-SumYShuffleG2_ConstVectorTraits	45.332	5782.725	11.732371
+SumYShuffleG2Vector256_AvxByte	42.901	6110.387	12.579789
+SumYShuffleG2Vector256_AvxInt32	43.984	5959.943	12.270063
+SumYShuffleG2Vector256Traits	42.936	6105.449	12.569623
+SumYShuffleG2_ConstVectorTraits	43.412	6038.536	12.431866
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256_AvxImm	96.269	2723.049	5.524701
-SumYShuffleG2_ConstVector256Traits	46.917	5587.444	11.336173
+SumYShuffleG2_ConstVector256_AvxImm	98.396	2664.175	5.484883
+SumYShuffleG2_ConstVector256_AvxImmByte	109.304	2398.304	4.937520
+SumYShuffleG2_ConstVector256_AvxImmByteG4	25.584	10246.277	21.094574
+SumYShuffleG2_ConstVector256Traits	45.278	5789.693	11.919559
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	-5475020453166212109
-SumYShuffleG2Scalar	529.742	494.852
-SumYShuffleG2VectorBase	529.648	494.940	1.000178
-SumYShuffleG2VectorTraits	71.947	3643.553	7.362918
+SumYShuffleG2Scalar	551.414	475.403
+SumYShuffleG2VectorBase	531.741	492.992	1.036998
+SumYShuffleG2VectorTraits	71.720	3655.084	7.688389
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256Traits	82.196	3189.246	6.444850
-SumYShuffleG2_ConstVectorTraits	86.378	3034.854	6.132855
+SumYShuffleG2Vector256Traits	72.349	3623.312	7.621559
+SumYShuffleG2_ConstVectorTraits	75.853	3455.963	7.269543
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256Traits	83.728	3130.908	6.326960
+SumYShuffleG2_ConstVector256Traits	74.956	3497.315	7.356527
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	-47
-SumYShuffleG2Scalar	415.067	631.571
-SumYShuffleG2VectorBase	398.530	657.777	1.041494
-SumYShuffleG2VectorTraits	12.926	20281.052	32.112067
+SumYShuffleG2Scalar	394.571	664.377
+SumYShuffleG2VectorBase	381.446	687.238	1.034410
+SumYShuffleG2VectorTraits	10.776	24327.486	36.616987
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256Traits	17.181	15258.175	24.159080
-SumYShuffleG2_ConstVectorTraits	15.855	16533.872	26.178959
+SumYShuffleG2Vector256Traits	10.576	24786.279	37.307549
+SumYShuffleG2_ConstVectorTraits	10.889	24074.846	36.236721
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256Traits	10.694	24513.606	38.813697
+SumYShuffleG2_ConstVector256Traits	10.884	24086.006	36.253520
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -273,60 +275,62 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	28917
-SumYShuffleG2Scalar	430.051	609.565
-SumYShuffleG2VectorBase	437.426	599.288	0.983141
-SumYShuffleG2VectorTraits	35.009	7487.972	12.284133
+SumYShuffleG2Scalar	430.482	608.954
+SumYShuffleG2VectorBase	470.396	557.284	0.915149
+SumYShuffleG2VectorTraits	37.611	6969.829	11.445574
 SumYShuffleG2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256Traits	22.019	11905.225	19.530704
-SumYShuffleG2_ConstVectorTraits	23.003	11395.950	18.695232
+SumYShuffleG2Vector256Traits	22.659	11569.001	18.998149
+SumYShuffleG2_ConstVectorTraits	22.993	11401.080	18.722396
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256Traits	22.175	11821.441	19.393257
+SumYShuffleG2_ConstVector256Traits	22.254	11779.643	19.344057
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	-1234767990
-SumYShuffleG2Scalar	526.058	498.318
-SumYShuffleG2VectorBase	526.544	497.858	0.999077
-SumYShuffleG2VectorTraits	44.958	5830.844	11.701055
+SumYShuffleG2Scalar	527.888	496.590
+SumYShuffleG2VectorBase	528.135	496.358	0.999532
+SumYShuffleG2VectorTraits	44.466	5895.394	11.871753
 SumYShuffleG2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256_AvxByte	45.100	5812.449	11.664142
-SumYShuffleG2Vector256_AvxInt32	43.376	6043.458	12.127718
-SumYShuffleG2Vector256Traits	45.275	5790.020	11.619132
-SumYShuffleG2_ConstVectorTraits	46.342	5656.729	11.351649
+SumYShuffleG2Vector256_AvxByte	45.098	5812.763	11.705356
+SumYShuffleG2Vector256_AvxInt32	43.476	6029.602	12.142012
+SumYShuffleG2Vector256Traits	46.207	5673.209	11.424331
+SumYShuffleG2_ConstVectorTraits	45.052	5818.690	11.717291
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256_AvxImm	104.246	2514.662	5.046301
-SumYShuffleG2_ConstVector256Traits	46.468	5641.366	11.320820
+SumYShuffleG2_ConstVector256_AvxImm	118.480	2212.566	4.455519
+SumYShuffleG2_ConstVector256_AvxImmByte	136.503	1920.426	3.867225
+SumYShuffleG2_ConstVector256_AvxImmByteG4	26.870	9756.039	19.646062
+SumYShuffleG2_ConstVector256Traits	50.470	5194.092	10.459517
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	-5475020453166212109
-SumYShuffleG2Scalar	509.016	515.001
-SumYShuffleG2VectorBase	507.876	516.157	1.002245
-SumYShuffleG2VectorTraits	94.174	2783.603	5.405043
+SumYShuffleG2Scalar	540.779	484.752
+SumYShuffleG2VectorBase	514.094	509.915	1.051907
+SumYShuffleG2VectorTraits	100.325	2612.943	5.390262
 SumYShuffleG2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256Traits	145.233	1804.989	3.504825
-SumYShuffleG2_ConstVectorTraits	128.950	2032.911	3.947391
+SumYShuffleG2Vector256Traits	90.996	2880.818	5.942865
+SumYShuffleG2_ConstVectorTraits	95.609	2741.820	5.656124
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256Traits	103.762	2526.387	4.905595
+SumYShuffleG2_ConstVector256Traits	95.233	2752.663	5.678493
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	-47
-SumYShuffleG2Scalar	384.049	682.580
-SumYShuffleG2VectorBase	385.769	679.537	0.995542
-SumYShuffleG2VectorTraits	10.352	25323.689	37.099977
+SumYShuffleG2Scalar	384.324	682.091
+SumYShuffleG2VectorBase	442.211	592.803	0.869097
+SumYShuffleG2VectorTraits	12.096	21672.670	31.773858
 SumYShuffleG2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256Traits	10.227	25632.784	37.552810
-SumYShuffleG2_ConstVectorTraits	10.523	24912.218	36.497160
+SumYShuffleG2Vector256Traits	11.117	23580.835	34.571380
+SumYShuffleG2_ConstVectorTraits	11.871	22081.897	32.373818
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256Traits	10.598	24734.297	36.236500
+SumYShuffleG2_ConstVector256Traits	12.340	21242.581	31.143313
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -368,60 +372,62 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	28917
-SumYShuffleG2Scalar	438.982	597.164
-SumYShuffleG2VectorBase	433.148	605.207	1.013469
-SumYShuffleG2VectorTraits	36.453	7191.259	12.042357
+SumYShuffleG2Scalar	436.806	600.139
+SumYShuffleG2VectorBase	429.787	609.940	1.016331
+SumYShuffleG2VectorTraits	38.273	6849.321	11.412900
 SumYShuffleG2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256Traits	14.433	18162.644	30.414849
-SumYShuffleG2_ConstVectorTraits	15.135	17320.210	29.004124
+SumYShuffleG2Vector256Traits	15.497	16915.962	28.186761
+SumYShuffleG2_ConstVectorTraits	15.639	16762.267	27.930662
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256Traits	15.396	17026.636	28.512510
+SumYShuffleG2_ConstVector256Traits	15.804	16587.324	27.639156
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	-1234767990
-SumYShuffleG2Scalar	537.295	487.896
-SumYShuffleG2VectorBase	531.392	493.316	1.011109
-SumYShuffleG2VectorTraits	25.375	10330.888	21.174377
+SumYShuffleG2Scalar	526.830	497.587
+SumYShuffleG2VectorBase	527.865	496.612	0.998039
+SumYShuffleG2VectorTraits	54.191	4837.393	9.721702
 SumYShuffleG2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256_AvxByte	28.364	9242.277	18.943140
-SumYShuffleG2Vector256_AvxInt32	28.564	9177.363	18.810090
-SumYShuffleG2Vector256Traits	29.719	8820.722	18.079113
-SumYShuffleG2_ConstVectorTraits	31.785	8247.323	16.903864
+SumYShuffleG2Vector256_AvxByte	31.041	8445.187	16.972281
+SumYShuffleG2Vector256_AvxInt32	29.847	8782.981	17.651144
+SumYShuffleG2Vector256Traits	32.087	8169.786	16.418808
+SumYShuffleG2_ConstVectorTraits	31.917	8213.234	16.506124
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256_AvxImm	117.499	2231.041	4.572781
-SumYShuffleG2_ConstVector256Traits	60.063	4364.454	8.945464
+SumYShuffleG2_ConstVector256_AvxImm	114.585	2287.765	4.597717
+SumYShuffleG2_ConstVector256_AvxImmByte	99.614	2631.604	5.288731
+SumYShuffleG2_ConstVector256_AvxImmByteG4	21.591	12141.632	24.401020
+SumYShuffleG2_ConstVector256Traits	30.916	8479.137	17.040509
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	-5475020453166212109
-SumYShuffleG2Scalar	813.847	322.105
-SumYShuffleG2VectorBase	700.641	374.149	1.161575
-SumYShuffleG2VectorTraits	67.815	3865.567	12.000960
+SumYShuffleG2Scalar	505.775	518.301
+SumYShuffleG2VectorBase	504.961	519.137	1.001612
+SumYShuffleG2VectorTraits	64.614	4057.054	7.827596
 SumYShuffleG2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256Traits	64.261	4079.334	12.664615
-SumYShuffleG2_ConstVectorTraits	73.932	3545.724	11.007980
+SumYShuffleG2Vector256Traits	61.375	4271.161	8.240690
+SumYShuffleG2_ConstVectorTraits	65.425	4006.810	7.730658
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256Traits	68.473	3828.441	11.885699
+SumYShuffleG2_ConstVector256Traits	65.322	4013.077	7.742749
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	-47
-SumYShuffleG2Scalar	537.664	487.561
-SumYShuffleG2VectorBase	387.720	676.117	1.386733
-SumYShuffleG2VectorTraits	8.208	31937.914	65.505500
+SumYShuffleG2Scalar	380.398	689.131
+SumYShuffleG2VectorBase	386.162	678.845	0.985074
+SumYShuffleG2VectorTraits	6.471	40509.926	58.784065
 SumYShuffleG2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256Traits	14.136	18544.573	38.035406
-SumYShuffleG2_ConstVectorTraits	9.356	28018.361	57.466395
+SumYShuffleG2Vector256Traits	7.035	37264.251	54.074257
+SumYShuffleG2_ConstVectorTraits	7.131	36762.105	53.345593
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256Traits	9.087	28846.809	59.165563
+SumYShuffleG2_ConstVector256Traits	7.135	36738.159	53.310845
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -463,60 +469,62 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	28917
-SumYShuffleG2Scalar	352.905	742.818
-SumYShuffleG2VectorBase	348.112	753.045	1.013767
-SumYShuffleG2VectorTraits	13.141	19948.681	26.855404
+SumYShuffleG2Scalar	352.218	744.265
+SumYShuffleG2VectorBase	355.298	737.814	0.991332
+SumYShuffleG2VectorTraits	14.060	18644.205	25.050480
 SumYShuffleG2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256Traits	14.696	17837.805	24.013691
-SumYShuffleG2_ConstVectorTraits	15.003	17473.320	23.523012
+SumYShuffleG2Vector256Traits	14.700	17832.656	23.960078
+SumYShuffleG2_ConstVectorTraits	14.769	17750.194	23.849280
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256Traits	14.945	17540.619	23.613612
+SumYShuffleG2_ConstVector256Traits	14.704	17827.513	23.953167
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	-1234767990
-SumYShuffleG2Scalar	449.696	582.935
-SumYShuffleG2VectorBase	460.996	568.647	0.975489
-SumYShuffleG2VectorTraits	26.966	9721.452	16.676721
+SumYShuffleG2Scalar	449.745	582.873
+SumYShuffleG2VectorBase	450.072	582.449	0.999273
+SumYShuffleG2VectorTraits	27.617	9492.012	16.284884
 SumYShuffleG2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256_AvxByte	27.745	9448.317	16.208170
-SumYShuffleG2Vector256_AvxInt32	31.156	8413.956	14.433770
-SumYShuffleG2Vector256Traits	29.767	8806.626	15.107377
-SumYShuffleG2_ConstVectorTraits	30.418	8618.127	14.784017
+SumYShuffleG2Vector256_AvxByte	27.926	9386.933	16.104608
+SumYShuffleG2Vector256_AvxInt32	27.868	9406.607	16.138360
+SumYShuffleG2Vector256Traits	26.583	9861.162	16.918213
+SumYShuffleG2_ConstVectorTraits	27.698	9464.280	16.237307
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256_AvxImm	99.162	2643.603	4.534985
-SumYShuffleG2_ConstVector256Traits	29.322	8940.305	15.336697
+SumYShuffleG2_ConstVector256_AvxImm	96.924	2704.632	4.640178
+SumYShuffleG2_ConstVector256_AvxImmByte	92.872	2822.631	4.842621
+SumYShuffleG2_ConstVector256_AvxImmByteG4	24.021	10913.275	18.723261
+SumYShuffleG2_ConstVector256Traits	28.823	9095.020	15.603790
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	-5475020453166212109
-SumYShuffleG2Scalar	500.734	523.519
-SumYShuffleG2VectorBase	527.995	496.489	0.948368
-SumYShuffleG2VectorTraits	60.726	4316.827	8.245784
+SumYShuffleG2Scalar	499.601	524.707
+SumYShuffleG2VectorBase	519.391	504.714	0.961897
+SumYShuffleG2VectorTraits	59.681	4392.433	8.371208
 SumYShuffleG2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256Traits	61.878	4236.441	8.092236
-SumYShuffleG2_ConstVectorTraits	63.792	4109.338	7.849449
+SumYShuffleG2Vector256Traits	59.286	4421.712	8.427009
+SumYShuffleG2_ConstVectorTraits	60.471	4335.051	8.261848
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256Traits	62.725	4179.272	7.983034
+SumYShuffleG2_ConstVector256Traits	63.909	4101.815	7.817341
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG2Scalar	-47
-SumYShuffleG2Scalar	301.767	868.698
-SumYShuffleG2VectorBase	303.769	862.971	0.993407
-SumYShuffleG2VectorTraits	6.213	42192.431	48.569753
+SumYShuffleG2Scalar	305.404	858.351
+SumYShuffleG2VectorBase	306.024	856.611	0.997973
+SumYShuffleG2VectorTraits	6.501	40321.043	46.974996
 SumYShuffleG2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2Vector256Traits	7.054	37160.549	42.777309
-SumYShuffleG2_ConstVectorTraits	6.687	39204.539	45.130245
+SumYShuffleG2Vector256Traits	6.913	37919.636	44.177298
+SumYShuffleG2_ConstVectorTraits	6.661	39353.248	45.847491
 SumYShuffleG2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG2_ConstVector256Traits	7.034	37268.123	42.901143
+SumYShuffleG2_ConstVector256Traits	7.026	37309.780	43.466801
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
