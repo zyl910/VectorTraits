@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -69,6 +70,89 @@ namespace Zyl.VectorTraits.Impl {
             Vector256.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31), // XY
             Vector256.Create((byte)8, 9,10,11,12,13,14,15, 8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31, 24, 25, 26, 27, 28, 29, 30, 31), // YY
         };
+
+        /// <summary>YShuffleG4 - Byte - The indices.</summary>
+        public static readonly Vector256<byte>[] YShuffleG4_Byte_Indices = new Vector256<byte>[256];
+        /// <summary>YShuffleG4 - UInt16 - The byte indices.</summary>
+        public static readonly Vector256<byte>[] YShuffleG4_UInt16_ByteIndices = new Vector256<byte>[256];
+        /// <summary>YShuffleG4 - UInt32 - The indices.</summary>
+        public static readonly Vector256<uint>[] YShuffleG4_UInt32_Indices = new Vector256<uint>[256];
+        /// <summary>YShuffleG4 - UInt32 - The byte indices.</summary>
+        public static readonly Vector256<byte>[] YShuffleG4_UInt32_ByteIndices = new Vector256<byte>[256];
+        /// <summary>YShuffleG4 - UInt64 - The byte indices.</summary>
+        public static readonly Vector256<byte>[] YShuffleG4_UInt64_ByteIndices = new Vector256<byte>[256];
+        /// <summary>YShuffleG4 - UInt64 - The UInt32 indices.</summary>
+        public static readonly Vector256<uint>[] YShuffleG4_UInt64_UInt32Indices = new Vector256<uint>[256];
+
+        static Vector256Constants() {
+            // == YShuffleG4 ==
+            for (int ctl = 0; ctl <= 255; ++ctl) {
+                int idx;
+                Vector256<byte> indices = default;
+                ref byte q = ref Unsafe.As<Vector256<byte>, byte>(ref indices);
+                // -- Byte --
+                for (int i = 0; i < Vector256<byte>.Count; ++i) {
+                    int selectedIndex = (i & (~3)) | ((ctl >> ((i & 3) * 2)) & 3);
+                    Unsafe.Add(ref q, i) = (byte)selectedIndex;
+                }
+                YShuffleG4_Byte_Indices[ctl] = indices;
+                // -- UInt16 --
+                Vector256<ushort> indicesUInt16 = default;
+                ref ushort qUInt16 = ref Unsafe.As<Vector256<ushort>, ushort>(ref indicesUInt16);
+                idx = 0;
+                for (int i = 0; i < Vector256<ushort>.Count; ++i) {
+                    int selectedIndex = (i & (~3)) | ((ctl >> ((i & 3) * 2)) & 3);
+                    Unsafe.Add(ref qUInt16, i) = (ushort)selectedIndex;
+                    // Byte indices
+                    int byteSize = sizeof(ushort);
+                    int m = selectedIndex * byteSize;
+                    for (int j = 0; j < byteSize; ++j) {
+                        Unsafe.Add(ref q, idx++) = (byte)(m + j);
+                    }
+                }
+                YShuffleG4_UInt16_ByteIndices[ctl] = indices;
+                // -- UInt32 --
+                Vector256<uint> indicesUInt32 = default;
+                ref uint qUInt32 = ref Unsafe.As<Vector256<uint>, uint>(ref indicesUInt32);
+                idx = 0;
+                for (int i = 0; i < Vector256<uint>.Count; ++i) {
+                    int selectedIndex = (i & (~3)) | ((ctl >> ((i & 3) * 2)) & 3);
+                    Unsafe.Add(ref qUInt32, i) = (uint)selectedIndex;
+                    // Byte indices
+                    int byteSize = sizeof(uint);
+                    int m = selectedIndex * byteSize;
+                    for (int j = 0; j < byteSize; ++j) {
+                        Unsafe.Add(ref q, idx++) = (byte)(m + j);
+                    }
+                }
+                YShuffleG4_UInt32_Indices[ctl] = indicesUInt32;
+                YShuffleG4_UInt32_ByteIndices[ctl] = indices;
+                // -- UInt64 --
+                Vector256<ulong> indicesUInt64 = default;
+                ref ulong qUInt64 = ref Unsafe.As<Vector256<ulong>, ulong>(ref indicesUInt64);
+                idx = 0;
+                int idxUInt32 = 0;
+                for (int i = 0; i < Vector256<ulong>.Count; ++i) {
+                    int selectedIndex = (i & (~3)) | ((ctl >> ((i & 3) * 2)) & 3);
+                    Unsafe.Add(ref qUInt64, i) = (ulong)selectedIndex;
+                    // Byte indices
+                    int byteSize = sizeof(ulong);
+                    int m = selectedIndex * byteSize;
+                    for (int j = 0; j < byteSize; ++j) {
+                        Unsafe.Add(ref q, idx++) = (byte)(m + j);
+                    }
+                    // UInt32 indices
+                    int itemSize = sizeof(ulong) / sizeof(uint);
+                    m = selectedIndex * itemSize;
+                    for (int j = 0; j < itemSize; ++j) {
+                        Unsafe.Add(ref qUInt32, idxUInt32++) = (byte)(m + j);
+                    }
+                }
+                YShuffleG4_UInt64_ByteIndices[ctl] = indices;
+                YShuffleG4_UInt64_UInt32Indices[ctl] = indicesUInt32;
+            } // ctl
+
+        }
 
 #endif
     }
