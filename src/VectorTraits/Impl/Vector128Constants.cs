@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using System.Runtime.CompilerServices;
+using System.Threading;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -63,6 +66,120 @@ namespace Zyl.VectorTraits.Impl {
             Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), // XY
             Vector128.Create((byte)8, 9,10,11,12,13,14,15, 8, 9, 10, 11, 12, 13, 14, 15), // YY
         };
+
+
+        /// <summary>YShuffleG4 - Byte - The indices.</summary>
+        public static readonly Vector128<byte>[] YShuffleG4_Byte_Indices = new Vector128<byte>[256];
+        /// <summary>YShuffleG4 - UInt16 - The byte indices.</summary>
+        public static readonly Vector128<byte>[] YShuffleG4_UInt16_ByteIndices = new Vector128<byte>[256];
+        /// <summary>YShuffleG4 - UInt32 - The byte indices.</summary>
+        public static readonly Vector128<byte>[] YShuffleG4_UInt32_ByteIndices = new Vector128<byte>[256];
+
+        /// <summary>YShuffleG4X2 - UInt64 - The byte indices (result0_indices0, result0_indices1, result1_indices0, result1_indices1) .</summary>
+        public static readonly Vector128<byte>[] YShuffleG4X2_UInt64_ByteIndices = new Vector128<byte>[256 * 4];
+
+
+        static Vector128Constants() {
+            // == YShuffleG4, YShuffleG4X2 ==
+            int idx = 0;
+            var vectorX4Bytes = new byte[Vector128<byte>.Count * 4];
+            for (int ctl = 0; ctl <= 255; ++ctl) {
+                Vector128<byte> indices = default;
+                ref byte q = ref Unsafe.As<Vector128<byte>, byte>(ref indices);
+                // -- Byte --
+                for (int i = 0; i < Vector128<byte>.Count; ++i) {
+                    int selectedIndex = (i & (~3)) | ((ctl >> ((i & 3) * 2)) & 3);
+                    Unsafe.Add(ref q, i) = (byte)selectedIndex;
+                }
+                YShuffleG4_Byte_Indices[ctl] = indices;
+                // -- UInt16 --
+                //Vector128<ushort> indicesUInt16 = default;
+                //ref ushort qUInt16 = ref Unsafe.As<Vector128<ushort>, ushort>(ref indicesUInt16);
+                idx = 0;
+                for (int i = 0; i < Vector128<ushort>.Count; ++i) {
+                    int selectedIndex = (i & (~3)) | ((ctl >> ((i & 3) * 2)) & 3);
+                    // Byte indices
+                    int byteSize = sizeof(ushort);
+                    int m = selectedIndex * byteSize;
+                    for (int j = 0; j < byteSize; ++j) {
+                        Unsafe.Add(ref q, idx++) = (byte)(m + j);
+                    }
+                }
+                YShuffleG4_UInt16_ByteIndices[ctl] = indices;
+                // -- UInt32 --
+                //Vector128<uint> indicesUInt32 = default;
+                //ref uint qUInt32 = ref Unsafe.As<Vector128<uint>, uint>(ref indicesUInt32);
+                idx = 0;
+                for (int i = 0; i < Vector128<uint>.Count; ++i) {
+                    int selectedIndex = (i & (~3)) | ((ctl >> ((i & 3) * 2)) & 3);
+                    //Unsafe.Add(ref qUInt32, i) = (uint)selectedIndex;
+                    // Byte indices
+                    int byteSize = sizeof(uint);
+                    int m = selectedIndex * byteSize;
+                    for (int j = 0; j < byteSize; ++j) {
+                        Unsafe.Add(ref q, idx++) = (byte)(m + j);
+                    }
+                }
+                YShuffleG4_UInt32_ByteIndices[ctl] = indices;
+                // -- UInt64 - X2 --
+                const byte byFillZero = (byte)0xFFU; // VectorTableLookup: 0xFF is is out of range, so it will be set to 0. That can be used for the next `or` operation.
+                for (int i = 0; i < 4; ++i) {
+                    int selectedIndex = (i & (~3)) | ((ctl >> ((i & 3) * 2)) & 3);
+                    // Byte indices
+                    int byteSize = sizeof(ulong);
+                    int m = (selectedIndex & 1) * byteSize;
+                    idx = (i & 1) * byteSize;
+                    if (i >= 2) {
+                        idx += Vector128<byte>.Count * 2;
+                    }
+                    for (int j = 0; j < byteSize; ++j) {
+                        byte by = (byte)(m + j);
+                        if (selectedIndex < 2) {
+                            // lo
+                            vectorX4Bytes[idx + Vector128<byte>.Count * 0] = by;
+                            vectorX4Bytes[idx + Vector128<byte>.Count * 1] = byFillZero;
+                        } else {
+                            // hi
+                            vectorX4Bytes[idx + Vector128<byte>.Count * 0] = byFillZero;
+                            vectorX4Bytes[idx + Vector128<byte>.Count * 1] = by;
+                        }
+                        //if (i < 2) {
+                        //    // (result0_indices0, result0_indices1)
+                        //    if (selectedIndex < 2) {
+                        //        // lo
+                        //        vectorX4Bytes[idx + Vector128<byte>.Count * 0] = by;
+                        //        vectorX4Bytes[idx + Vector128<byte>.Count * 1] = byFillZero;
+                        //    } else {
+                        //        // hi
+                        //        vectorX4Bytes[idx + Vector128<byte>.Count * 2] = by;
+                        //        vectorX4Bytes[idx + Vector128<byte>.Count * 3] = byFillZero;
+                        //    }
+                        //} else {
+                        //    // (result1_indices0, result1_indices1)
+                        //    if (selectedIndex < 2) {
+                        //        // lo
+                        //        vectorX4Bytes[idx + Vector128<byte>.Count * 0] = byFillZero;
+                        //        vectorX4Bytes[idx + Vector128<byte>.Count * 2] = by;
+                        //    } else {
+                        //        // hi
+                        //        vectorX4Bytes[idx + Vector128<byte>.Count * 1] = byFillZero;
+                        //        vectorX4Bytes[idx + Vector128<byte>.Count * 3] = by;
+                        //    }
+                        //}
+                        ++idx;
+                    }
+                }
+                idx = ctl * 4;
+                for (int i = 0; i < 4; ++i) {
+                    //int n = ((i & 2) >> 1) | ((i & 1) << 1);
+                    int n = i;
+                    YShuffleG4X2_UInt64_ByteIndices[idx + i] = Unsafe.As<byte, Vector128<byte>>(ref vectorX4Bytes[Vector128<byte>.Count * n]);
+                }
+            } // ctl
+            // Done.
+            // Debug.Break.
+            //Trace.WriteLine(string.Format("YShuffleG4X2_UInt64_ByteIndices.Length: {0}", YShuffleG4X2_UInt64_ByteIndices.Length));
+        }
 
 #endif
     }

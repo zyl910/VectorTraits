@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits {
@@ -75,6 +77,11 @@ namespace Zyl.VectorTraits {
                 bitpos <<= 1;
                 bits = bits << 1 | 1;
             }
+            // Vector128Constants
+#if NETCOREAPP3_0_OR_GREATER
+            //Trace.WriteLine(string.Format("YShuffleG4X2_UInt64_ByteIndices.Length: {0}", Vector128Constants.YShuffleG4X2_UInt64_ByteIndices.Length));
+#endif // NETCOREAPP3_0_OR_GREATER
+            // Done.
             if (0 != bits) {
                 // [Debug]
             }
