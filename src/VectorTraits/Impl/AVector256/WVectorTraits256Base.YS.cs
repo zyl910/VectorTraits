@@ -514,6 +514,142 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_AcceleratedTypes"/>
+            public static TypeCodeFlags YShuffleG4X2_AcceleratedTypes {
+                get {
+                    return YShuffleG4_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{float}, Vector256{float}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<float> Result0, Vector256<float> Result1) YShuffleG4X2(Vector256<float> source0, Vector256<float> source1, ShuffleControlG4 control) {
+                return (YShuffleG4(source0, control), YShuffleG4(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{double}, Vector256{double}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<double> Result0, Vector256<double> Result1) YShuffleG4X2(Vector256<double> source0, Vector256<double> source1, ShuffleControlG4 control) {
+                return (YShuffleG4(source0, control), YShuffleG4(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{sbyte}, Vector256{sbyte}, ShuffleControlG4)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<sbyte> Result0, Vector256<sbyte> Result1) YShuffleG4X2(Vector256<sbyte> source0, Vector256<sbyte> source1, ShuffleControlG4 control) {
+                return (YShuffleG4(source0, control), YShuffleG4(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{byte}, Vector256{byte}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<byte> Result0, Vector256<byte> Result1) YShuffleG4X2(Vector256<byte> source0, Vector256<byte> source1, ShuffleControlG4 control) {
+                return (YShuffleG4(source0, control), YShuffleG4(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{short}, Vector256{short}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<short> Result0, Vector256<short> Result1) YShuffleG4X2(Vector256<short> source0, Vector256<short> source1, ShuffleControlG4 control) {
+                return (YShuffleG4(source0, control), YShuffleG4(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{ushort}, Vector256{ushort}, ShuffleControlG4)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<ushort> Result0, Vector256<ushort> Result1) YShuffleG4X2(Vector256<ushort> source0, Vector256<ushort> source1, ShuffleControlG4 control) {
+                return (YShuffleG4(source0, control), YShuffleG4(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{int}, Vector256{int}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<int> Result0, Vector256<int> Result1) YShuffleG4X2(Vector256<int> source0, Vector256<int> source1, ShuffleControlG4 control) {
+                return (YShuffleG4(source0, control), YShuffleG4(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{uint}, Vector256{uint}, ShuffleControlG4)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<uint> Result0, Vector256<uint> Result1) YShuffleG4X2(Vector256<uint> source0, Vector256<uint> source1, ShuffleControlG4 control) {
+                return (YShuffleG4(source0, control), YShuffleG4(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{long}, Vector256{long}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<long> Result0, Vector256<long> Result1) YShuffleG4X2(Vector256<long> source0, Vector256<long> source1, ShuffleControlG4 control) {
+                return (YShuffleG4(source0, control), YShuffleG4(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{ulong}, Vector256{ulong}, ShuffleControlG4)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<ulong> Result0, Vector256<ulong> Result1) YShuffleG4X2(Vector256<ulong> source0, Vector256<ulong> source1, ShuffleControlG4 control) {
+                return (YShuffleG4(source0, control), YShuffleG4(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{float}, Vector256{float}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<float> Result0, Vector256<float> Result1) YShuffleG4X2_Const(Vector256<float> source0, Vector256<float> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return (YShuffleG4_Const(source0, control), YShuffleG4_Const(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{double}, Vector256{double}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<double> Result0, Vector256<double> Result1) YShuffleG4X2_Const(Vector256<double> source0, Vector256<double> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return (YShuffleG4_Const(source0, control), YShuffleG4_Const(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{sbyte}, Vector256{sbyte}, ShuffleControlG4)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<sbyte> Result0, Vector256<sbyte> Result1) YShuffleG4X2_Const(Vector256<sbyte> source0, Vector256<sbyte> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return (YShuffleG4_Const(source0, control), YShuffleG4_Const(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{byte}, Vector256{byte}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<byte> Result0, Vector256<byte> Result1) YShuffleG4X2_Const(Vector256<byte> source0, Vector256<byte> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return (YShuffleG4_Const(source0, control), YShuffleG4_Const(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{short}, Vector256{short}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<short> Result0, Vector256<short> Result1) YShuffleG4X2_Const(Vector256<short> source0, Vector256<short> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return (YShuffleG4_Const(source0, control), YShuffleG4_Const(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{ushort}, Vector256{ushort}, ShuffleControlG4)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<ushort> Result0, Vector256<ushort> Result1) YShuffleG4X2_Const(Vector256<ushort> source0, Vector256<ushort> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return (YShuffleG4_Const(source0, control), YShuffleG4_Const(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{int}, Vector256{int}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<int> Result0, Vector256<int> Result1) YShuffleG4X2_Const(Vector256<int> source0, Vector256<int> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return (YShuffleG4_Const(source0, control), YShuffleG4_Const(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{uint}, Vector256{uint}, ShuffleControlG4)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<uint> Result0, Vector256<uint> Result1) YShuffleG4X2_Const(Vector256<uint> source0, Vector256<uint> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return (YShuffleG4_Const(source0, control), YShuffleG4_Const(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{long}, Vector256{long}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<long> Result0, Vector256<long> Result1) YShuffleG4X2_Const(Vector256<long> source0, Vector256<long> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return (YShuffleG4_Const(source0, control), YShuffleG4_Const(source1, control));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{ulong}, Vector256{ulong}, ShuffleControlG4)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector256<ulong> Result0, Vector256<ulong> Result1) YShuffleG4X2_Const(Vector256<ulong> source0, Vector256<ulong> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return (YShuffleG4_Const(source0, control), YShuffleG4_Const(source1, control));
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleInsert_AcceleratedTypes {
                 get {
