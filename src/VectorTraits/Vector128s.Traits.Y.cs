@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+#if !NET7_0_OR_GREATER
+using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
+#endif // !NET7_0_OR_GREATER
 using System.Runtime.CompilerServices;
 using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
@@ -389,7 +393,7 @@ namespace Zyl.VectorTraits {
 
         /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{float}, ShuffleControlG2)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<float> YShuffleG2_Const(Vector128<float> source, ShuffleControlG2 control) {
+        public static Vector128<float> YShuffleG2_Const(Vector128<float> source, [ConstantExpected] ShuffleControlG2 control) {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YShuffleG2_Const(source, control);
 #else
@@ -399,7 +403,7 @@ namespace Zyl.VectorTraits {
 
         /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{double}, ShuffleControlG2)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<double> YShuffleG2_Const(Vector128<double> source, ShuffleControlG2 control) {
+        public static Vector128<double> YShuffleG2_Const(Vector128<double> source, [ConstantExpected] ShuffleControlG2 control) {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YShuffleG2_Const(source, control);
 #else
@@ -410,7 +414,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{sbyte}, ShuffleControlG2)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<sbyte> YShuffleG2_Const(Vector128<sbyte> source, ShuffleControlG2 control) {
+        public static Vector128<sbyte> YShuffleG2_Const(Vector128<sbyte> source, [ConstantExpected] ShuffleControlG2 control) {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YShuffleG2_Const(source, control);
 #else
@@ -420,7 +424,7 @@ namespace Zyl.VectorTraits {
 
         /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{byte}, ShuffleControlG2)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<byte> YShuffleG2_Const(Vector128<byte> source, ShuffleControlG2 control) {
+        public static Vector128<byte> YShuffleG2_Const(Vector128<byte> source, [ConstantExpected] ShuffleControlG2 control) {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YShuffleG2_Const(source, control);
 #else
@@ -430,7 +434,7 @@ namespace Zyl.VectorTraits {
 
         /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{short}, ShuffleControlG2)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<short> YShuffleG2_Const(Vector128<short> source, ShuffleControlG2 control) {
+        public static Vector128<short> YShuffleG2_Const(Vector128<short> source, [ConstantExpected] ShuffleControlG2 control) {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YShuffleG2_Const(source, control);
 #else
@@ -441,7 +445,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{ushort}, ShuffleControlG2)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ushort> YShuffleG2_Const(Vector128<ushort> source, ShuffleControlG2 control) {
+        public static Vector128<ushort> YShuffleG2_Const(Vector128<ushort> source, [ConstantExpected] ShuffleControlG2 control) {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YShuffleG2_Const(source, control);
 #else
@@ -451,7 +455,7 @@ namespace Zyl.VectorTraits {
 
         /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{int}, ShuffleControlG2)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<int> YShuffleG2_Const(Vector128<int> source, ShuffleControlG2 control) {
+        public static Vector128<int> YShuffleG2_Const(Vector128<int> source, [ConstantExpected] ShuffleControlG2 control) {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YShuffleG2_Const(source, control);
 #else
@@ -462,7 +466,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{uint}, ShuffleControlG2)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<uint> YShuffleG2_Const(Vector128<uint> source, ShuffleControlG2 control) {
+        public static Vector128<uint> YShuffleG2_Const(Vector128<uint> source, [ConstantExpected] ShuffleControlG2 control) {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YShuffleG2_Const(source, control);
 #else
@@ -472,7 +476,7 @@ namespace Zyl.VectorTraits {
 
         /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{long}, ShuffleControlG2)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<long> YShuffleG2_Const(Vector128<long> source, ShuffleControlG2 control) {
+        public static Vector128<long> YShuffleG2_Const(Vector128<long> source, [ConstantExpected] ShuffleControlG2 control) {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YShuffleG2_Const(source, control);
 #else
@@ -483,7 +487,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{ulong}, ShuffleControlG2)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ulong> YShuffleG2_Const(Vector128<ulong> source, ShuffleControlG2 control) {
+        public static Vector128<ulong> YShuffleG2_Const(Vector128<ulong> source, [ConstantExpected] ShuffleControlG2 control) {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YShuffleG2_Const(source, control);
 #else

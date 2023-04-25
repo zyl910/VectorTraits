@@ -107,7 +107,7 @@ List (列表):
 - `YShuffleG4[/_Const]`: For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of the vector is less than 4, please use YShuffleG4X2 instead (如果向量的数量小于4，请使用 YShuffleG4X2 代替).
   Mnemonic: View for group: `rt.xyzw = shuffleG4_ref(control, source)`. View for element: `rt[i] := source[(i&(~3)) | ((control >> ((i&3)*2)) & 3)]`.
 - `YShuffleG4X2[/_Const]`: For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
-  Mnemonic: View for group: `rt.xyzw = shuffleG4_ref(control, source0, source1)`. View for element: `rt[i] := element_ref((i&(~3)) | ((control >> ((i&3)*2)) & 3), source0, source1)`.
+  Mnemonic: View for group: `rt.xyzw = shuffleG4_ref(control, source0, source1)`. View for element: `element_ref(i, result0, result1) := element_ref((i&(~3)) | ((control >> ((i&3)*2)) & 3), source0, source1)`.
 - `YShuffleInsert[/_Args/_Core]`: Shuffle and insert (换位并插入). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
   Mnemonic: `rt[i] := (0<=indices[i] && indices[i]<Count)?( vector[indices[i]] ):back[i]`.
 - `YShuffleKernel[/_Args/_Core]`: Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the IndexMask mask to constrain the parameters (可使用 IndexMask 掩码来约束参数).
