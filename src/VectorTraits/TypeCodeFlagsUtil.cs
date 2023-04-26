@@ -80,8 +80,15 @@ namespace Zyl.VectorTraits {
         public const TypeCodeFlags FloatTypes = TypeCodeFlags.Single | TypeCodeFlags.Double;
         /// <summary>TypeCodeFlags of integer types.</summary>
         public const TypeCodeFlags IntTypes = TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-        /// <summary>TypeCodeFlags of all types.</summary>
+        /// <summary>TypeCodeFlags of all types. <c>AllTypes = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64</c>.</summary>
         public const TypeCodeFlags AllTypes = FloatTypes | IntTypes;
+
+        /// <summary>TypeCodeFlags of most32 float types.</summary>
+        public const TypeCodeFlags Most32FloatTypes = TypeCodeFlags.Single;
+        /// <summary>TypeCodeFlags of most32 integer types.</summary>
+        public const TypeCodeFlags Most32IntTypes = TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+        /// <summary>TypeCodeFlags of most32 types. <c>Most32BaseTypes = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32</c>.</summary>
+        public const TypeCodeFlags Most32Types = Most32FloatTypes | Most32IntTypes;
 
         /// <summary>ElementTypeCode of <see cref="IntPtr"/>.</summary>
         public static readonly ElementTypeCode IntPtrCode;
