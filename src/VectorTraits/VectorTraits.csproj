@@ -8,22 +8,22 @@
     </When>
     <When Condition=" $(VisualStudioVersion) &gt;= 17.0 AND '$(OS)' == 'Windows_NT' ">
       <PropertyGroup>
-        <TargetFrameworks>netstandard1.1;netstandard2.0;netstandard2.1;netcoreapp3.0;net5.0;net6.0;net7.0;net461</TargetFrameworks>
+        <TargetFrameworks>netstandard1.1;netstandard2.0;netcoreapp3.0;net5.0;net6.0;net7.0</TargetFrameworks>
       </PropertyGroup>
     </When>
     <When Condition=" $(VisualStudioVersion) &gt;= 17.0 AND '$(OS)' != 'Windows_NT' ">
       <PropertyGroup>
-        <TargetFrameworks>netstandard1.1;netstandard2.0;netstandard2.1;net6.0;net7.0</TargetFrameworks>
+        <TargetFrameworks>netstandard1.1;netstandard2.0;net6.0;net7.0</TargetFrameworks>
       </PropertyGroup>
     </When>
     <When Condition=" '$(OS)' == 'Windows_NT' ">
       <PropertyGroup>
-        <TargetFrameworks>netstandard1.1;netstandard2.0;netstandard2.1;netcoreapp3.0;net5.0;net461</TargetFrameworks>
+        <TargetFrameworks>netstandard1.1;netstandard2.0;netcoreapp3.0;net5.0</TargetFrameworks>
       </PropertyGroup>
     </When>
     <Otherwise>
       <PropertyGroup>
-        <TargetFrameworks>netstandard1.1;netstandard2.0;netstandard2.1;netcoreapp3.0;net5.0</TargetFrameworks>
+        <TargetFrameworks>netstandard1.1;netstandard2.0;netcoreapp3.0;net5.0</TargetFrameworks>
       </PropertyGroup>
     </Otherwise>
   </Choose>
@@ -112,7 +112,7 @@ Traits methods:
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
-    <Title>VectorTraits for .NET 5.0</Title>
+    <Title>VectorTraits for .NET 6.0</Title>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
