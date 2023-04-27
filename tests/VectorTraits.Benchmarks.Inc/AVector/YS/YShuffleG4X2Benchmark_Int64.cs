@@ -168,7 +168,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             int VectorWidth = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             int i;
@@ -178,7 +178,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             for (i = 0; i < cntBlock; ++i) {
                 (var temp0, var temp1) = WVectorTraits128AdvSimd.Statics.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control);
                 vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, temp0);
-                vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt, temp1);
+                vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -227,7 +227,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             int VectorWidth = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             int i;
@@ -237,7 +237,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             for (i = 0; i < cntBlock; ++i) {
                 (var temp0, var temp1) = Vector128s.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control);
                 vrt = Vector128s.Add(vrt, temp0);
-                vrt1 = Vector128s.Add(vrt, temp1);
+                vrt1 = Vector128s.Add(vrt1, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -289,7 +289,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             int VectorWidth = Vector256<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
             Vector256<TMy> vrt1 = Vector256<TMy>.Zero;
             int i;
@@ -299,7 +299,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             for (i = 0; i < cntBlock; ++i) {
                 (var temp0, var temp1) = Vector256s.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control);
                 vrt = Vector256s.Add(vrt, temp0);
-                vrt1 = Vector256s.Add(vrt, temp1);
+                vrt1 = Vector256s.Add(vrt1, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -414,7 +414,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             int VectorWidth = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             int i;
@@ -424,7 +424,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             for (i = 0; i < cntBlock; ++i) {
                 (var temp0, var temp1) = Vector128s.YShuffleG4X2_Const(p0, Unsafe.Add(ref p0, 1), control);
                 vrt = Vector128s.Add(vrt, temp0);
-                vrt1 = Vector128s.Add(vrt, temp1);
+                vrt1 = Vector128s.Add(vrt1, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -476,7 +476,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             int VectorWidth = Vector256<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
             Vector256<TMy> vrt1 = Vector256<TMy>.Zero;
             int i;
@@ -486,7 +486,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             for (i = 0; i < cntBlock; ++i) {
                 (var temp0, var temp1) = Vector256s.YShuffleG4X2_Const(p0, Unsafe.Add(ref p0, 1), control);
                 vrt = Vector256s.Add(vrt, temp0);
-                vrt1 = Vector256s.Add(vrt, temp1);
+                vrt1 = Vector256s.Add(vrt1, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
