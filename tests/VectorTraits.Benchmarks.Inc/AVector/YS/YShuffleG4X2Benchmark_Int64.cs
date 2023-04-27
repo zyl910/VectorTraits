@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -27,40 +27,42 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
     using TMy = Int64;
 
     /// <summary>
-    /// YShuffleG2 benchmark - Int64.
+    /// YShuffleG4X2 benchmark - Int64.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class YShuffleG2Benchmark_Int64 : AbstractSharedBenchmark_Int64 {
+    public partial class YShuffleG4X2Benchmark_Int64 : AbstractSharedBenchmark_Int64 {
 #pragma warning disable CS0162 // Unreachable code detected
 
         // -- var --
         private const bool UseReduce = false;
-        private const ShuffleControlG2 control = ShuffleControlG2.YX;
+        private const ShuffleControlG4 control = ShuffleControlG4.WZYX;
 
         /// <summary>
-        /// Sum YShuffleG2 - Scalar.
+        /// Sum YShuffleG4X2 - Vector - base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleG2Scalar(TMy[] src, int srcCount, ShuffleControlG2 control) {
+        private static TMy StaticSumYShuffleG4X2VectorBase(TMy[] src, int srcCount, ShuffleControlG4 control) {
             TMy rt = 0; // Result.
-            const int GroupSize = 1;
+            const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            Vector<TMy> vrt1 = Vector<TMy>.Zero;
             int i;
             // Body.
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = VectorTraitsBase.Statics.YShuffleG2_Base(p0, control);
-                vrt += vtemp; // Add.
+                (var temp0, var temp1) = VectorTraitsBase.Statics.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control);
+                vrt += temp0;
+                vrt1 += temp1;
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -69,6 +71,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             //     // Ignore
             // }
             // Reduce.
+            vrt += vrt1;
             if (UseReduce) {
                 for (i = 0; i < VectorWidth; ++i) {
                     rt += vrt[i];
@@ -80,40 +83,39 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark(Baseline = true)]
-        public void SumYShuffleG2Scalar() {
+        public void SumYShuffleG4X2VectorBase() {
             //Debugger.Break();
-            dstTMy = StaticSumYShuffleG2Scalar(srcArray, srcArray.Length, control);
+            dstTMy = StaticSumYShuffleG4X2VectorBase(srcArray, srcArray.Length, control);
             if (CheckMode) {
                 baselineTMy = dstTMy;
-                BenchmarkUtil.WriteItem("# SumYShuffleG2Scalar", string.Format("{0}", baselineTMy));
+                BenchmarkUtil.WriteItem("# SumYShuffleG4X2VectorBase", string.Format("{0}", baselineTMy));
             }
         }
 
-        #region BENCHMARKS_RAW
-#if BENCHMARKS_RAW
-
         /// <summary>
-        /// Sum YShuffleG2 - Vector - base.
+        /// Sum YShuffleG4X2 - Vector Traits - static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleG2VectorBase(TMy[] src, int srcCount, ShuffleControlG2 control) {
+        private static TMy StaticSumYShuffleG4X2VectorTraits(TMy[] src, int srcCount, ShuffleControlG4 control) {
             TMy rt = 0; // Result.
-            const int GroupSize = 1;
+            const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            Vector<TMy> vrt1 = Vector<TMy>.Zero;
             int i;
             // Body.
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = VectorTraitsBase.Statics.YShuffleG2(p0, control);
-                vrt += vtemp; // Add.
+                (var temp0, var temp1) = Vectors.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control);
+                vrt += temp0;
+                vrt1 += temp1;
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -122,6 +124,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             //     // Ignore
             // }
             // Reduce.
+            vrt += vrt1;
             if (UseReduce) {
                 for (i = 0; i < VectorWidth; ++i) {
                     rt += vrt[i];
@@ -133,62 +136,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleG2VectorBase() {
-            //Debugger.Break();
-            dstTMy = StaticSumYShuffleG2VectorBase(srcArray, srcArray.Length, control);
-            CheckResult("SumYShuffleG2VectorBase");
-        }
-
-#endif // BENCHMARKS_RAW
-        #endregion // BENCHMARKS_RAW
-
-        /// <summary>
-        /// Sum YShuffleG2 - Vector Traits - static.
-        /// </summary>
-        /// <param name="src">Source array.</param>
-        /// <param name="srcCount">Source count</param>
-        /// <param name="control">The control.</param>
-        /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleG2VectorTraits(TMy[] src, int srcCount, ShuffleControlG2 control) {
-            TMy rt = 0; // Result.
-            const int GroupSize = 1;
-            int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
-            int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
-            int i;
-            // Body.
-            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
-            // a) Vector processs.
-            for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = Vectors.YShuffleG2(p0, control);
-                vrt += vtemp; // Add.
-                p0 = ref Unsafe.Add(ref p0, GroupSize);
-            }
-            // b) Remainder processs.
-            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
-            // for (i = 0; i < cntRem; ++i) {
-            //     // Ignore
-            // }
-            // Reduce.
-            if (UseReduce) {
-                for (i = 0; i < VectorWidth; ++i) {
-                    rt += vrt[i];
-                }
-            } else {
-                rt = vrt[0];
-            }
-            return rt;
-        }
-
-        [Benchmark]
-        public void SumYShuffleG2VectorTraits() {
+        public void SumYShuffleG4X2VectorTraits() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumYShuffleG2VectorTraits(srcArray, srcArray.Length, control);
-            CheckResult("SumYShuffleG2VectorTraits");
+            dstTMy = StaticSumYShuffleG4X2VectorTraits(srcArray, srcArray.Length, control);
+            CheckResult("SumYShuffleG4X2VectorTraits");
         }
 
 
@@ -203,27 +156,29 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if NET5_0_OR_GREATER
 
         /// <summary>
-        /// Sum YShuffleG2 - Vector128 - Arm.
+        /// Sum YShuffleG4X2 - Vector128 - Arm.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleG2Vector128_Arm(TMy[] src, int srcCount, ShuffleControlG2 control) {
+        private static TMy StaticSumYShuffleG4X2Vector128_Arm(TMy[] src, int srcCount, ShuffleControlG4 control) {
             TMy rt = 0; // Result.
-            const int GroupSize = 1;
+            const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
+            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             int i;
             // Body.
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.YShuffleG2(p0, control);
-                vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
+                (var temp0, var temp1) = WVectorTraits128AdvSimd.Statics.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control);
+                vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, temp0);
+                vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -232,6 +187,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             //     // Ignore
             // }
             // Reduce.
+            vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vrt1);
             if (UseReduce) {
                 for (i = 0; i < VectorWidth; ++i) {
                     rt += vrt.GetElement(i);
@@ -243,14 +199,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleG2Vector128_Arm() {
+        public void SumYShuffleG4X2Vector128_Arm() {
             WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector128<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector128<byte>.Count));
             }
             //Debugger.Break();
-            dstTMy = StaticSumYShuffleG2Vector128_Arm(srcArray, srcArray.Length, control);
-            CheckResult("SumYShuffleG2Vector128_Arm");
+            dstTMy = StaticSumYShuffleG4X2Vector128_Arm(srcArray, srcArray.Length, control);
+            CheckResult("SumYShuffleG4X2Vector128_Arm");
         }
 
 #endif // NET5_0_OR_GREATER
@@ -259,27 +215,29 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum YShuffleG2 - Vector128 - Traits static.
+        /// Sum YShuffleG4X2 - Vector128 - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleG2Vector128Traits(TMy[] src, int srcCount, ShuffleControlG2 control) {
+        private static TMy StaticSumYShuffleG4X2Vector128Traits(TMy[] src, int srcCount, ShuffleControlG4 control) {
             TMy rt = 0; // Result.
-            const int GroupSize = 1;
+            const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
+            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             int i;
             // Body.
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = Vector128s.YShuffleG2(p0, control);
-                vrt = Vector128s.Add(vrt, vtemp);
+                (var temp0, var temp1) = Vector128s.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control);
+                vrt = Vector128s.Add(vrt, temp0);
+                vrt1 = Vector128s.Add(vrt, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -288,6 +246,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             //     // Ignore
             // }
             // Reduce.
+            vrt = Vector128s.Add(vrt, vrt1);
             if (UseReduce) {
                 for (i = 0; i < VectorWidth; ++i) {
                     rt += vrt.GetElement(i);
@@ -299,7 +258,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleG2Vector128Traits() {
+        public void SumYShuffleG4X2Vector128Traits() {
             Vector128s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector128<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector128<byte>.Count));
@@ -307,8 +266,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumYShuffleG2Vector128Traits(srcArray, srcArray.Length, control);
-            CheckResult("SumYShuffleG2Vector128Traits");
+            dstTMy = StaticSumYShuffleG4X2Vector128Traits(srcArray, srcArray.Length, control);
+            CheckResult("SumYShuffleG4X2Vector128Traits");
         }
 
 #endif // BENCHMARKS_128ALGORITHM
@@ -318,27 +277,29 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_256ALGORITHM
 
         /// <summary>
-        /// Sum YShuffleG2 - Vector256 - Traits static.
+        /// Sum YShuffleG4X2 - Vector256 - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleG2Vector256Traits(TMy[] src, int srcCount, ShuffleControlG2 control) {
+        private static TMy StaticSumYShuffleG4X2Vector256Traits(TMy[] src, int srcCount, ShuffleControlG4 control) {
             TMy rt = 0; // Result.
-            const int GroupSize = 1;
+            const int GroupSize = 2;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
+            Vector256<TMy> vrt1 = Vector256<TMy>.Zero;
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = Vector256s.YShuffleG2(p0, control);
-                vrt = Vector256s.Add(vrt, vtemp);
+                (var temp0, var temp1) = Vector256s.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control);
+                vrt = Vector256s.Add(vrt, temp0);
+                vrt1 = Vector256s.Add(vrt, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -347,6 +308,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             //     // Ignore
             // }
             // Reduce.
+            vrt = Vector256s.Add(vrt, vrt1);
             if (UseReduce) {
                 for (i = 0; i < VectorWidth; ++i) {
                     rt += vrt.GetElement(i);
@@ -358,7 +320,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleG2Vector256Traits() {
+        public void SumYShuffleG4X2Vector256Traits() {
             Vector256s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
@@ -366,8 +328,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumYShuffleG2Vector256Traits(srcArray, srcArray.Length, control);
-            CheckResult("SumYShuffleG2Vector256Traits");
+            dstTMy = StaticSumYShuffleG4X2Vector256Traits(srcArray, srcArray.Length, control);
+            CheckResult("SumYShuffleG4X2Vector256Traits");
         }
 
 #endif // BENCHMARKS_256ALGORITHM
@@ -376,27 +338,29 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #endif
 
         /// <summary>
-        /// Sum YShuffleG2_Const - Vector Traits - static.
+        /// Sum YShuffleG4X2_Const - Vector Traits - static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleG2_ConstVectorTraits(TMy[] src, int srcCount) {
+        private static TMy StaticSumYShuffleG4X2_ConstVectorTraits(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
-            const int GroupSize = 1;
+            const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            Vector<TMy> vrt1 = Vector<TMy>.Zero;
             int i;
             // Body.
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = Vectors.YShuffleG2_Const(p0, control);
-                vrt += vtemp; // Add.
+                (var temp0, var temp1) = Vectors.YShuffleG4X2_Const(p0, Unsafe.Add(ref p0, 1), control);
+                vrt += temp0;
+                vrt1 += temp1;
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -405,6 +369,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             //     // Ignore
             // }
             // Reduce.
+            vrt += vrt1;
             if (UseReduce) {
                 for (i = 0; i < VectorWidth; ++i) {
                     rt += vrt[i];
@@ -416,12 +381,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleG2_ConstVectorTraits() {
+        public void SumYShuffleG4X2_ConstVectorTraits() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumYShuffleG2_ConstVectorTraits(srcArray, srcArray.Length);
-            CheckResult("SumYShuffleG2_ConstVectorTraits");
+            dstTMy = StaticSumYShuffleG4X2_ConstVectorTraits(srcArray, srcArray.Length);
+            CheckResult("SumYShuffleG4X2_ConstVectorTraits");
         }
 
 
@@ -437,27 +402,29 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum YShuffleG2_Const - Vector128 - Traits static.
+        /// Sum YShuffleG4X2_Const - Vector128 - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleG2_ConstVector128Traits(TMy[] src, int srcCount) {
+        private static TMy StaticSumYShuffleG4X2_ConstVector128Traits(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
-            const int GroupSize = 1;
+            const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
+            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             int i;
             // Body.
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = Vector128s.YShuffleG2_Const(p0, control);
-                vrt = Vector128s.Add(vrt, vtemp);
+                (var temp0, var temp1) = Vector128s.YShuffleG4X2_Const(p0, Unsafe.Add(ref p0, 1), control);
+                vrt = Vector128s.Add(vrt, temp0);
+                vrt1 = Vector128s.Add(vrt, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -466,6 +433,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             //     // Ignore
             // }
             // Reduce.
+            vrt = Vector128s.Add(vrt, vrt1);
             if (UseReduce) {
                 for (i = 0; i < VectorWidth; ++i) {
                     rt += vrt.GetElement(i);
@@ -477,7 +445,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleG2_ConstVector128Traits() {
+        public void SumYShuffleG4X2_ConstVector128Traits() {
             Vector128s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector128<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector128<byte>.Count));
@@ -485,8 +453,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumYShuffleG2_ConstVector128Traits(srcArray, srcArray.Length);
-            CheckResult("SumYShuffleG2_ConstVector128Traits");
+            dstTMy = StaticSumYShuffleG4X2_ConstVector128Traits(srcArray, srcArray.Length);
+            CheckResult("SumYShuffleG4X2_ConstVector128Traits");
         }
 
 #endif // BENCHMARKS_128ALGORITHM
@@ -496,27 +464,29 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_256ALGORITHM
 
         /// <summary>
-        /// Sum YShuffleG2_Const - Vector256 - Traits static.
+        /// Sum YShuffleG4X2_Const - Vector256 - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleG2_ConstVector256Traits(TMy[] src, int srcCount) {
+        private static TMy StaticSumYShuffleG4X2_ConstVector256Traits(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
-            const int GroupSize = 1;
+            const int GroupSize = 2;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
+            Vector256<TMy> vrt1 = Vector256<TMy>.Zero;
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = Vector256s.YShuffleG2_Const(p0, control);
-                vrt = Vector256s.Add(vrt, vtemp);
+                (var temp0, var temp1) = Vector256s.YShuffleG4X2_Const(p0, Unsafe.Add(ref p0, 1), control);
+                vrt = Vector256s.Add(vrt, temp0);
+                vrt1 = Vector256s.Add(vrt, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -525,6 +495,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             //     // Ignore
             // }
             // Reduce.
+            vrt = Vector256s.Add(vrt, vrt1);
             if (UseReduce) {
                 for (i = 0; i < VectorWidth; ++i) {
                     rt += vrt.GetElement(i);
@@ -536,7 +507,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleG2_ConstVector256Traits() {
+        public void SumYShuffleG4X2_ConstVector256Traits() {
             Vector256s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
@@ -544,8 +515,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumYShuffleG2_ConstVector256Traits(srcArray, srcArray.Length);
-            CheckResult("SumYShuffleG2_ConstVector256Traits");
+            dstTMy = StaticSumYShuffleG4X2_ConstVector256Traits(srcArray, srcArray.Length);
+            CheckResult("SumYShuffleG4X2_ConstVector256Traits");
         }
 
 #endif // BENCHMARKS_256ALGORITHM
