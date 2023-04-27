@@ -279,7 +279,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- Const. Constant version. This version can be used if you can ensure that the parameters are constants. It can take advantage of constants and make better use of hardware acceleration (常量版. 若能确保参数是常量, 可使用该版本. 它能利用常量, 更好的使用硬件加速).</para>
         /// <para>Similar methods (相似的方法).</para>
         /// <para>- <see cref="YShuffleG2"/>: For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).</para>
-        /// <para>- <see cref="YShuffleG4"/>: For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of the vector is less than 4, please use <see cref="YShuffleG4X2"/> instead (如果向量的数量小于4，请使用 <see cref="YShuffleG4X2"/> 代替).</para>
+        /// <para>- <see cref="YShuffleG4"/>: For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use <see cref="YShuffleG4X2"/> instead (如果向量的元素数量小于4，请使用 <see cref="YShuffleG4X2"/> 代替).</para>
         /// <para>- <see cref="YShuffleG4X2"/>: For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).</para>
         /// </remarks>
         /// <seealso cref="YShuffleG2"/>
@@ -497,7 +497,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- Const. Constant version. This version can be used if you can ensure that the parameters are constants. It can take advantage of constants and make better use of hardware acceleration (常量版. 若能确保参数是常量, 可使用该版本. 它能利用常量, 更好的使用硬件加速).</para>
         /// <para>Similar methods (相似的方法).</para>
         /// <para>- <see cref="YShuffleG2"/>: For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).</para>
-        /// <para>- <see cref="YShuffleG4"/>: For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of the vector is less than 4, please use <see cref="YShuffleG4X2"/> instead (如果向量的数量小于4，请使用 <see cref="YShuffleG4X2"/> 代替).</para>
+        /// <para>- <see cref="YShuffleG4"/>: For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use <see cref="YShuffleG4X2"/> instead (如果向量的元素数量小于4，请使用 <see cref="YShuffleG4X2"/> 代替).</para>
         /// <para>- <see cref="YShuffleG4X2"/>: For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).</para>
         /// </remarks>
         /// <seealso cref="YShuffleG2"/>
@@ -506,7 +506,7 @@ namespace Zyl.VectorTraits.Impl {
         TypeCodeFlags YShuffleG4_AcceleratedTypes { get; }
 
         /// <summary>
-        /// For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of the vector is less than 4, please use YShuffleG4X2 instead (如果向量的数量小于4，请使用 YShuffleG4X2 代替).
+        /// For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use YShuffleG4X2 instead (如果向量的元素数量小于4，请使用 YShuffleG4X2 代替).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -516,7 +516,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<float> YShuffleG4(Vector128<float> source, ShuffleControlG4 control);
 
         /// <summary>
-        /// For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of the vector is less than 4, please use YShuffleG4X2 instead (如果向量的数量小于4，请使用 YShuffleG4X2 代替).
+        /// For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use YShuffleG4X2 instead (如果向量的元素数量小于4，请使用 YShuffleG4X2 代替).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -526,7 +526,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<sbyte> YShuffleG4(Vector128<sbyte> source, ShuffleControlG4 control);
 
         /// <summary>
-        /// For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of the vector is less than 4, please use YShuffleG4X2 instead (如果向量的数量小于4，请使用 YShuffleG4X2 代替).
+        /// For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use YShuffleG4X2 instead (如果向量的元素数量小于4，请使用 YShuffleG4X2 代替).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -536,7 +536,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<byte> YShuffleG4(Vector128<byte> source, ShuffleControlG4 control);
 
         /// <summary>
-        /// For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of the vector is less than 4, please use YShuffleG4X2 instead (如果向量的数量小于4，请使用 YShuffleG4X2 代替).
+        /// For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use YShuffleG4X2 instead (如果向量的元素数量小于4，请使用 YShuffleG4X2 代替).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -546,7 +546,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<short> YShuffleG4(Vector128<short> source, ShuffleControlG4 control);
 
         /// <summary>
-        /// For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of the vector is less than 4, please use YShuffleG4X2 instead (如果向量的数量小于4，请使用 YShuffleG4X2 代替).
+        /// For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use YShuffleG4X2 instead (如果向量的元素数量小于4，请使用 YShuffleG4X2 代替).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -556,7 +556,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<ushort> YShuffleG4(Vector128<ushort> source, ShuffleControlG4 control);
 
         /// <summary>
-        /// For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of the vector is less than 4, please use YShuffleG4X2 instead (如果向量的数量小于4，请使用 YShuffleG4X2 代替).
+        /// For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use YShuffleG4X2 instead (如果向量的元素数量小于4，请使用 YShuffleG4X2 代替).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -566,7 +566,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<int> YShuffleG4(Vector128<int> source, ShuffleControlG4 control);
 
         /// <summary>
-        /// For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of the vector is less than 4, please use YShuffleG4X2 instead (如果向量的数量小于4，请使用 YShuffleG4X2 代替).
+        /// For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use YShuffleG4X2 instead (如果向量的元素数量小于4，请使用 YShuffleG4X2 代替).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3)]</c>.
         /// </summary>
         /// <param name="source">The input source from which values are selected (从中选择值的输入向量).</param>
@@ -655,7 +655,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- Const. Constant version. This version can be used if you can ensure that the parameters are constants. It can take advantage of constants and make better use of hardware acceleration (常量版. 若能确保参数是常量, 可使用该版本. 它能利用常量, 更好的使用硬件加速).</para>
         /// <para>Similar methods (相似的方法).</para>
         /// <para>- <see cref="YShuffleG2"/>: For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).</para>
-        /// <para>- <see cref="YShuffleG4"/>: For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of the vector is less than 4, please use <see cref="YShuffleG4X2"/> instead (如果向量的数量小于4，请使用 <see cref="YShuffleG4X2"/> 代替).</para>
+        /// <para>- <see cref="YShuffleG4"/>: For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use <see cref="YShuffleG4X2"/> instead (如果向量的元素数量小于4，请使用 <see cref="YShuffleG4X2"/> 代替).</para>
         /// <para>- <see cref="YShuffleG4X2"/>: For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).</para>
         /// </remarks>
         /// <seealso cref="YShuffleG2"/>

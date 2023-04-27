@@ -135,6 +135,156 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             } // samples
         }
 
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void YShuffleG4X2Test<T>(T src) where T : struct {
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.YShuffleG4X2_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            bool allowLog = false;
+            //bool allowLogItem = Scalars<T>.ExponentBits > 0;
+            bool allowLogItem = false;
+            Vector<T>[] samples = {
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1),
+                //Vectors<T>.Demo,
+                //Vectors<T>.Serial,
+                Vectors<T>.SerialNegative
+            };
+            try {
+                for (int i = 0; i < samples.Length; i += 2) {
+                    Vector<T> source0 = samples[i];
+                    Vector<T> source1 = samples[i + 1];
+                    if (allowLog) {
+                        Console.WriteLine();
+                        Console.WriteLine(VectorTextUtil.Format("== Sample:\t{0}-{1}", source0, source1));
+                    }
+                    for (int j = 0; j <= 255; ++j) {
+                        ShuffleControlG4 control = (ShuffleControlG4)j;
+                        if (allowLog) {
+                            Console.WriteLine(VectorTextUtil.Format("-- Control:\t{0}", control));
+                        }
+                        Vector<T> expected0, expected1;
+                        dynamic expected = Vectors.YShuffleG4X2((dynamic)source0, (dynamic)source1, control);
+                        expected0 = expected.Item1;
+                        expected1 = expected.Item2;
+                        if (allowLog) {
+                            Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}-{1}", expected0, expected1));
+                        }
+                        // Instances
+                        Vector<T> dst0, dst1;
+                        foreach (IVectorTraits instance in instances) {
+                            if (!instance.GetIsSupported(true)) continue;
+                            dynamic dst = instance.YShuffleG4X2((dynamic)source0, (dynamic)source1, control);
+                            dst0 = dst.Item1;
+                            dst1 = dst.Item2;
+                            if (allowLogItem) {
+                                // Compatible floating-point NaN.
+                                Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}-{2}, source0={3}, source1={4}, control={3}", instance.GetType().Name, dst0, dst1, source0, source1, control));
+                            } else {
+                                Assert.AreEqual(expected0, dst0, $"{instance.GetType().Name}, source0={source0}, control={control}");
+                                Assert.AreEqual(expected1, dst1, $"{instance.GetType().Name}, source1={source1}, control={control}");
+                            }
+                        }
+                        if (allowLog) {
+                            Console.WriteLine();
+                        }
+                    } // j
+                } // samples
+            } catch (Exception ex) {
+                Console.WriteLine(ex);
+                throw;
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void YShuffleG4X2_ConstTest<T>(T src) where T : struct {
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.YShuffleG4X2_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            bool allowLog = false;
+            //bool allowLogItem = Scalars<T>.ExponentBits > 0;
+            bool allowLogItem = false;
+            Vector<T>[] samples = {
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1),
+                //Vectors<T>.Demo,
+                //Vectors<T>.Serial,
+                Vectors<T>.SerialNegative
+            };
+            try {
+                for (int i = 0; i < samples.Length; i += 2) {
+                    Vector<T> source0 = samples[i];
+                    Vector<T> source1 = samples[i + 1];
+                    if (allowLog) {
+                        Console.WriteLine();
+                        Console.WriteLine(VectorTextUtil.Format("== Sample:\t{0}-{1}", source0, source1));
+                    }
+                    for (int j = 0; j <= 255; ++j) {
+                        ShuffleControlG4 control = (ShuffleControlG4)j;
+                        if (allowLog) {
+                            Console.WriteLine(VectorTextUtil.Format("-- Control:\t{0}", control));
+                        }
+                        Vector<T> expected0, expected1;
+                        dynamic expected = Vectors.YShuffleG4X2_Const((dynamic)source0, (dynamic)source1, control);
+                        expected0 = expected.Item1;
+                        expected1 = expected.Item2;
+                        if (allowLog) {
+                            Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}-{1}", expected0, expected1));
+                        }
+                        // Instances
+                        Vector<T> dst0, dst1;
+                        foreach (IVectorTraits instance in instances) {
+                            if (!instance.GetIsSupported(true)) continue;
+                            dynamic dst = instance.YShuffleG4X2_Const((dynamic)source0, (dynamic)source1, control);
+                            dst0 = dst.Item1;
+                            dst1 = dst.Item2;
+                            if (allowLogItem) {
+                                // Compatible floating-point NaN.
+                                Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}-{2}, source0={3}, source1={4}, control={3}", instance.GetType().Name, dst0, dst1, source0, source1, control));
+                            } else {
+                                Assert.AreEqual(expected0, dst0, $"{instance.GetType().Name}, source0={source0}, control={control}");
+                                Assert.AreEqual(expected1, dst1, $"{instance.GetType().Name}, source1={source1}, control={control}");
+                            }
+                        }
+                        if (allowLog) {
+                            Console.WriteLine();
+                        }
+                    } // j
+                } // samples
+            } catch (Exception ex) {
+                Console.WriteLine(ex);
+                throw;
+            }
+        }
+
         [TestCase((float)1, (int)7)]
         [TestCase((double)2, (long)9)]
         [TestCase((sbyte)3, (sbyte)3)]
