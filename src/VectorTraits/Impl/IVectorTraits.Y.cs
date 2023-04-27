@@ -5,6 +5,13 @@ using System.Diagnostics.CodeAnalysis;
 using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 #endif // !NET7_0_OR_GREATER
 using System.Numerics;
+#if NETCOREAPP3_0_OR_GREATER
+using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
+#endif
+#if NET5_0_OR_GREATER
+using System.Runtime.Intrinsics.Arm;
+#endif
 using System.Text;
 
 namespace Zyl.VectorTraits.Impl {
@@ -165,6 +172,9 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
         /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
         /// <seealso cref="YNarrowSaturate_AcceleratedTypes"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateLower(Vector128{short})"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateUpper(Vector64{sbyte}, Vector128{short})"/>
+        /// <seealso cref="Avx2.PackSignedSaturate(Vector256{short}, Vector256{short})"/>
         Vector<sbyte> YNarrowSaturate(Vector<short> lower, Vector<short> upper);
 
         /// <summary>
@@ -175,6 +185,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
         /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
         /// <seealso cref="YNarrowSaturate_AcceleratedTypes"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateLower(Vector128{ushort})"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateUpper(Vector64{byte}, Vector128{ushort})"/>
         Vector<byte> YNarrowSaturate(Vector<ushort> lower, Vector<ushort> upper);
 
         /// <summary>
@@ -185,6 +197,9 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
         /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
         /// <seealso cref="YNarrowSaturate_AcceleratedTypes"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateLower(Vector128{int})"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateUpper(Vector64{short}, Vector128{int})"/>
+        /// <seealso cref="Avx2.PackSignedSaturate(Vector256{int}, Vector256{int})"/>
         Vector<short> YNarrowSaturate(Vector<int> lower, Vector<int> upper);
 
         /// <summary>
@@ -195,6 +210,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
         /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
         /// <seealso cref="YNarrowSaturate_AcceleratedTypes"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateLower(Vector128{uint})"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateUpper(Vector64{ushort}, Vector128{uint})"/>
         Vector<ushort> YNarrowSaturate(Vector<uint> lower, Vector<uint> upper);
 
         /// <summary>
@@ -205,6 +222,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
         /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
         /// <seealso cref="YNarrowSaturate_AcceleratedTypes"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateLower(Vector128{long})"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateUpper(Vector64{int}, Vector128{long})"/>
         Vector<int> YNarrowSaturate(Vector<long> lower, Vector<long> upper);
 
         /// <summary>
@@ -215,6 +234,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
         /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
         /// <seealso cref="YNarrowSaturate_AcceleratedTypes"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateLower(Vector128{ulong})"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateUpper(Vector64{uint}, Vector128{ulong})"/>
         Vector<uint> YNarrowSaturate(Vector<ulong> lower, Vector<ulong> upper);
 
 
@@ -244,6 +265,9 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
         /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
         /// <seealso cref="YNarrowSaturateUnsigned_AcceleratedTypes"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateUnsignedLower(Vector128{short})"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateUnsignedUpper(Vector64{byte}, Vector128{short})"/>
+        /// <seealso cref="Avx2.PackUnsignedSaturate(Vector256{short}, Vector256{short})"/>
         Vector<byte> YNarrowSaturateUnsigned(Vector<short> lower, Vector<short> upper);
 
         /// <summary>
@@ -254,6 +278,9 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
         /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
         /// <seealso cref="YNarrowSaturateUnsigned_AcceleratedTypes"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateUnsignedLower(Vector128{int})"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateUnsignedUpper(Vector64{ushort}, Vector128{int})"/>
+        /// <seealso cref="Avx2.PackUnsignedSaturate(Vector256{int}, Vector256{int})"/>
         Vector<ushort> YNarrowSaturateUnsigned(Vector<int> lower, Vector<int> upper);
 
         /// <summary>
@@ -264,6 +291,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
         /// <returns>A <seealso cref="Vector{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
         /// <seealso cref="YNarrowSaturateUnsigned_AcceleratedTypes"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateUnsignedLower(Vector128{long})"/>
+        /// <seealso cref="AdvSimd.ExtractNarrowingSaturateUnsignedUpper(Vector64{uint}, Vector128{long})"/>
         Vector<uint> YNarrowSaturateUnsigned(Vector<long> lower, Vector<long> upper);
 
 
@@ -613,6 +642,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
+        /// <seealso cref="Avx.Permute(Vector256{float}, byte)"/>
+        /// <seealso cref="Avx2.Shuffle(Vector256{int}, byte)"/>
         Vector<float> YShuffleG4_Const(Vector<float> source, [ConstantExpected] ShuffleControlG4 control);
 
         /// <summary>
@@ -623,6 +654,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
+        /// <seealso cref="Avx2.Permute4x64(Vector256{double}, byte)"/>
         Vector<double> YShuffleG4_Const(Vector<double> source, [ConstantExpected] ShuffleControlG4 control);
 
         /// <summary>
@@ -653,6 +685,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
+        /// <seealso cref="Avx2.ShuffleHigh(Vector256{short}, byte)"/>
+        /// <seealso cref="Avx2.ShuffleLow(Vector256{short}, byte)"/>
         Vector<short> YShuffleG4_Const(Vector<short> source, [ConstantExpected] ShuffleControlG4 control);
 
         /// <summary>
@@ -663,6 +697,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
+        /// <seealso cref="Avx2.ShuffleHigh(Vector256{ushort}, byte)"/>
+        /// <seealso cref="Avx2.ShuffleLow(Vector256{ushort}, byte)"/>
         Vector<ushort> YShuffleG4_Const(Vector<ushort> source, [ConstantExpected] ShuffleControlG4 control);
 
         /// <summary>
@@ -673,6 +709,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
+        /// <seealso cref="Avx2.Shuffle(Vector256{int}, byte)"/>
         Vector<int> YShuffleG4_Const(Vector<int> source, [ConstantExpected] ShuffleControlG4 control);
 
         /// <summary>
@@ -683,6 +720,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
+        /// <seealso cref="Avx2.Shuffle(Vector256{uint}, byte)"/>
         Vector<uint> YShuffleG4_Const(Vector<uint> source, [ConstantExpected] ShuffleControlG4 control);
 
         /// <summary>
@@ -693,6 +731,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
+        /// <seealso cref="Avx2.Permute4x64(Vector256{long}, byte)"/>
         Vector<long> YShuffleG4_Const(Vector<long> source, [ConstantExpected] ShuffleControlG4 control);
 
         /// <summary>
@@ -703,6 +742,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
+        /// <seealso cref="Avx2.Permute4x64(Vector256{ulong}, byte)"/>
         Vector<ulong> YShuffleG4_Const(Vector<ulong> source, [ConstantExpected] ShuffleControlG4 control);
 
 
@@ -994,6 +1034,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
         /// <seealso cref="Vector.Shuffle(Vector{sbyte}, Vector{sbyte})"/>
+        /// <seealso cref="AdvSimd.VectorTableLookupExtension(Vector64{sbyte}, Vector128{sbyte}, Vector64{sbyte})"/>
         Vector<sbyte> YShuffleInsert(Vector<sbyte> back, Vector<sbyte> vector, Vector<sbyte> indices);
 
         /// <summary>
@@ -1006,6 +1047,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
         /// <seealso cref="Vector.Shuffle(Vector{byte}, Vector{byte})"/>
+        /// <seealso cref="AdvSimd.VectorTableLookupExtension(Vector64{byte}, Vector128{byte}, Vector64{byte})"/>
         Vector<byte> YShuffleInsert(Vector<byte> back, Vector<byte> vector, Vector<byte> indices);
 
         /// <summary>
@@ -1218,6 +1260,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
         /// <seealso cref="YShuffleInsert_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        /// <seealso cref="AdvSimd.VectorTableLookupExtension(Vector64{sbyte}, Vector128{sbyte}, Vector64{sbyte})"/>
         Vector<sbyte> YShuffleInsert_Core(Vector<sbyte> back, Vector<sbyte> vector, Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2);
 
         /// <summary>
@@ -1232,6 +1275,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
         /// <seealso cref="YShuffleInsert_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        /// <seealso cref="AdvSimd.VectorTableLookupExtension(Vector64{byte}, Vector128{byte}, Vector64{byte})"/>
         Vector<byte> YShuffleInsert_Core(Vector<byte> back, Vector<byte> vector, Vector<byte> args0, Vector<byte> args1, Vector<byte> args2);
 
         /// <summary>
@@ -1346,6 +1390,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="Vector.Shuffle(Vector{float}, Vector{int})"/>
+        /// <seealso cref="Avx2.PermuteVar8x32(Vector256{float}, Vector256{int})"/>
         Vector<float> YShuffleKernel(Vector<float> vector, Vector<int> indices);
 
         /// <summary>
@@ -1368,6 +1413,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="Vector.Shuffle(Vector{sbyte}, Vector{sbyte})"/>
+        /// <seealso cref="AdvSimd.VectorTableLookup(Vector128{sbyte}, Vector64{sbyte})"/>
+        /// <seealso cref="Avx2.Shuffle(Vector256{sbyte}, Vector256{sbyte})"/>
         Vector<sbyte> YShuffleKernel(Vector<sbyte> vector, Vector<sbyte> indices);
 
         /// <summary>
@@ -1379,6 +1426,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="Vector.Shuffle(Vector{byte}, Vector{byte})"/>
+        /// <seealso cref="AdvSimd.VectorTableLookup(Vector128{byte}, Vector64{byte})"/>
+        /// <seealso cref="Avx2.Shuffle(Vector256{byte}, Vector256{byte})"/>
         Vector<byte> YShuffleKernel(Vector<byte> vector, Vector<byte> indices);
 
         /// <summary>
@@ -1412,6 +1461,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="Vector.Shuffle(Vector{int}, Vector{int})"/>
+        /// <seealso cref="Avx2.PermuteVar8x32(Vector256{int}, Vector256{int})"/>
         Vector<int> YShuffleKernel(Vector<int> vector, Vector<int> indices);
 
         /// <summary>
@@ -1423,6 +1473,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="Vector.Shuffle(Vector{uint}, Vector{uint})"/>
+        /// <seealso cref="Avx2.PermuteVar8x32(Vector256{uint}, Vector256{uint})"/>
         Vector<uint> YShuffleKernel(Vector<uint> vector, Vector<uint> indices);
 
         /// <summary>
@@ -1547,6 +1598,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="YShuffleKernel_Args(Vector{int}, out Vector{int}, out Vector{int})"/>
+        /// <seealso cref="Avx2.PermuteVar8x32(Vector256{float}, Vector256{int})"/>
         Vector<float> YShuffleKernel_Core(Vector<float> vector, Vector<int> args0, Vector<int> args1);
 
         /// <summary>
@@ -1571,6 +1623,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="YShuffleKernel_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        /// <seealso cref="AdvSimd.VectorTableLookup(Vector128{sbyte}, Vector64{sbyte})"/>
+        /// <seealso cref="Avx2.Shuffle(Vector256{sbyte}, Vector256{sbyte})"/>
         Vector<sbyte> YShuffleKernel_Core(Vector<sbyte> vector, Vector<sbyte> args0, Vector<sbyte> args1);
 
         /// <summary>
@@ -1583,6 +1637,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="YShuffleKernel_Args(Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        /// <seealso cref="AdvSimd.VectorTableLookup(Vector128{byte}, Vector64{byte})"/>
+        /// <seealso cref="Avx2.Shuffle(Vector256{byte}, Vector256{byte})"/>
         Vector<byte> YShuffleKernel_Core(Vector<byte> vector, Vector<byte> args0, Vector<byte> args1);
 
         /// <summary>
@@ -1619,6 +1675,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="YShuffleKernel_Args(Vector{int}, out Vector{int}, out Vector{int})"/>
+        /// <seealso cref="Avx2.PermuteVar8x32(Vector256{int}, Vector256{int})"/>
         Vector<int> YShuffleKernel_Core(Vector<int> vector, Vector<int> args0, Vector<int> args1);
 
         /// <summary>
@@ -1631,6 +1688,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="YShuffleKernel_Args(Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        /// <seealso cref="Avx2.PermuteVar8x32(Vector256{uint}, Vector256{uint})"/>
         Vector<uint> YShuffleKernel_Core(Vector<uint> vector, Vector<uint> args0, Vector<uint> args1);
 
         /// <summary>

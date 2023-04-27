@@ -1,6 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+#if NETCOREAPP3_0_OR_GREATER
+using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
+#endif
+#if NET5_0_OR_GREATER
+using System.Runtime.Intrinsics.Arm;
+#endif
 using System.Text;
 
 namespace Zyl.VectorTraits.Impl {
@@ -923,6 +930,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Vector.Shuffle(Vector{float}, Vector{int})"/>
+        /// <seealso cref="Avx2.PermuteVar8x32(Vector256{float}, Vector256{int})"/>
         Vector<float> Shuffle(Vector<float> vector, Vector<int> indices);
 
         /// <summary>
@@ -945,6 +953,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Vector.Shuffle(Vector{sbyte}, Vector{sbyte})"/>
+        /// <seealso cref="AdvSimd.VectorTableLookup(Vector128{byte}, Vector64{byte})"/>
+        /// <seealso cref="Avx2.Shuffle(Vector256{sbyte}, Vector256{sbyte})"/>
         Vector<sbyte> Shuffle(Vector<sbyte> vector, Vector<sbyte> indices);
 
         /// <summary>
@@ -956,6 +966,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Vector.Shuffle(Vector{byte}, Vector{byte})"/>
+        /// <seealso cref="AdvSimd.VectorTableLookup(Vector128{byte}, Vector64{byte})"/>
+        /// <seealso cref="Avx2.Shuffle(Vector256{byte}, Vector256{byte})"/>
         Vector<byte> Shuffle(Vector<byte> vector, Vector<byte> indices);
 
         /// <summary>
@@ -989,6 +1001,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Vector.Shuffle(Vector{int}, Vector{int})"/>
+        /// <seealso cref="Avx2.PermuteVar8x32(Vector256{int}, Vector256{int})"/>
         Vector<int> Shuffle(Vector<int> vector, Vector<int> indices);
 
         /// <summary>
@@ -1000,6 +1013,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Vector.Shuffle(Vector{uint}, Vector{uint})"/>
+        /// <seealso cref="Avx2.PermuteVar8x32(Vector256{uint}, Vector256{uint})"/>
         Vector<uint> Shuffle(Vector<uint> vector, Vector<uint> indices);
 
         /// <summary>
@@ -1124,6 +1138,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Shuffle_Args(Vector{int}, out Vector{int}, out Vector{int})"/>
+        /// <seealso cref="Avx2.PermuteVar8x32(Vector256{float}, Vector256{int})"/>
         Vector<float> Shuffle_Core(Vector<float> vector, Vector<int> args0, Vector<int> args1);
 
         /// <summary>
@@ -1148,6 +1163,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Shuffle_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        /// <seealso cref="AdvSimd.VectorTableLookup(Vector128{sbyte}, Vector64{sbyte})"/>
+        /// <seealso cref="Avx2.Shuffle(Vector256{sbyte}, Vector256{sbyte})"/>
         Vector<sbyte> Shuffle_Core(Vector<sbyte> vector, Vector<sbyte> args0, Vector<sbyte> args1);
 
         /// <summary>
@@ -1160,6 +1177,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Shuffle_Args(Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        /// <seealso cref="AdvSimd.VectorTableLookup(Vector128{byte}, Vector64{byte})"/>
+        /// <seealso cref="Avx2.Shuffle(Vector256{byte}, Vector256{byte})"/>
         Vector<byte> Shuffle_Core(Vector<byte> vector, Vector<byte> args0, Vector<byte> args1);
 
         /// <summary>
@@ -1196,6 +1215,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Shuffle_Args(Vector{int}, out Vector{int}, out Vector{int})"/>
+        /// <seealso cref="Avx2.PermuteVar8x32(Vector256{int}, Vector256{int})"/>
         Vector<int> Shuffle_Core(Vector<int> vector, Vector<int> args0, Vector<int> args1);
 
         /// <summary>
@@ -1208,6 +1228,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Shuffle_Args(Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        /// <seealso cref="Avx2.PermuteVar8x32(Vector256{uint}, Vector256{uint})"/>
         Vector<uint> Shuffle_Core(Vector<uint> vector, Vector<uint> args0, Vector<uint> args1);
 
         /// <summary>

@@ -4,6 +4,9 @@ using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+#if NET5_0_OR_GREATER
+using System.Runtime.Intrinsics.Arm;
+#endif
 
 namespace Zyl.VectorTraits.Impl {
     partial interface IWVectorTraits128 {
