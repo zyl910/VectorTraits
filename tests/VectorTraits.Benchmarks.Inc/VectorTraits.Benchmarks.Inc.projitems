@@ -63,7 +63,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleG2Benchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleG2Benchmark_Int64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleG2Benchmark_SByte.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleG4X2Benchmark_Int16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleG4X2Benchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleG4X2Benchmark_Int64.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleG4X2Benchmark_SByte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BenchmarkMain.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IntroDisassemblyDry.cs" />
   </ItemGroup>
