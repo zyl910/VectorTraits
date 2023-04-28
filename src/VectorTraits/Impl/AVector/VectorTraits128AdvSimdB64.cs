@@ -913,8 +913,10 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YShuffleG4X2_Const(Vector{long}, Vector{long}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static (Vector<long> Result0, Vector<long> Result1) YShuffleG4X2_Const(Vector<long> source0, Vector<long> source1, [ConstantExpected] ShuffleControlG4 control) {
-                (var rt0, var rt1) = WStatics.YShuffleG4X2_Const(source0.AsVector128(), source1.AsVector128(), control);
-                return (rt0.AsVector(), rt1.AsVector());
+                //(var rt0, var rt1) = WStatics.YShuffleG4X2_Const(source0.AsVector128(), source1.AsVector128(), control);
+                //return (rt0.AsVector(), rt1.AsVector());
+                var rt = WStatics.YShuffleG4X2_Const(source0.AsVector128(), source1.AsVector128(), control);
+                return Unsafe.As<ValueTuple<Vector128<long>, Vector128<long>>, ValueTuple<Vector<long>, Vector<long>>>(ref rt);
             }
 
             /// <inheritdoc cref="IVectorTraits.YShuffleG4X2_Const(Vector{ulong}, Vector{ulong}, ShuffleControlG4)"/>
