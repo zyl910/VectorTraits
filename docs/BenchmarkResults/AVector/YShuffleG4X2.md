@@ -440,55 +440,60 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG4X2VectorBase	-30719
-SumYShuffleG4X2VectorBase	366.698	714.878
-SumYShuffleG4X2VectorTraits	12.410	21123.119	29.547875
+SumYShuffleG4X2VectorBase	436.288	600.850
+SumYShuffleG4VectorTraits	19.783	13250.943	22.053645
+SumYShuffleG4X2VectorTraits	15.205	17240.126	28.692872
 SumYShuffleG4X2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG4X2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG4X2Vector256Traits	13.272	19751.202	27.628782
-SumYShuffleG4X2_ConstVectorTraits	12.501	20970.259	29.334048
+SumYShuffleG4X2Vector256Traits	13.608	19264.372	32.061840
+SumYShuffleG4X2_ConstVectorTraits	13.311	19693.943	32.776778
 SumYShuffleG4X2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG4X2_ConstVector256Traits	12.653	20718.377	28.981706
+SumYShuffleG4X2_ConstVector256Traits	14.574	17987.251	29.936318
 
 [YShuffleG4X2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG4X2VectorBase	1670557139
-SumYShuffleG4X2VectorBase	444.736	589.438
-SumYShuffleG4X2VectorTraits	22.484	11658.978	19.779834
+SumYShuffleG4X2VectorBase	443.616	590.926
+SumYShuffleG4VectorTraits	26.242	9989.468	16.904771
+SumYShuffleG4X2VectorTraits	26.145	10026.704	16.967783
 SumYShuffleG4X2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG4X2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG4X2Vector256_AvxByte	23.339	11232.110	19.055640
-SumYShuffleG4X2Vector256_AvxUInt32	29.104	9007.076	15.280797
-SumYShuffleG4X2Vector256Traits	25.104	10442.522	17.716078
-SumYShuffleG4X2_ConstVectorTraits	21.624	12122.726	20.566597
+SumYShuffleG4X2Vector256_AvxByte	27.797	9430.618	15.959052
+SumYShuffleG4X2Vector256_AvxUInt32	27.719	9457.254	16.004127
+SumYShuffleG4X2Vector256Traits	22.899	11448.051	19.373071
+SumYShuffleG4X2_ConstVectorTraits	20.778	12616.435	21.350280
 SumYShuffleG4X2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG4X2_ConstVector256Traits	23.119	11339.055	19.237075
+SumYShuffleG4X2_ConstVector256Traits	20.927	12526.652	21.198344
 
 [YShuffleG4X2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG4X2VectorBase	-7093169134606779633
-SumYShuffleG4X2VectorBase	457.429	573.081
-SumYShuffleG4X2VectorTraits	54.145	4841.541	8.448260
+SumYShuffleG4X2VectorBase	453.489	578.061
+SumYShuffleG4VectorTraits	73.898	3547.390	6.136707
+SumYShuffleG4X2VectorTraits	51.350	5105.006	8.831261
+SumYShuffleG4X2VectorTraits_Out	51.940	5047.047	8.730996
 SumYShuffleG4X2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG4X2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG4X2Vector256Traits	51.080	5132.020	8.955131
-SumYShuffleG4X2_ConstVectorTraits	46.902	5589.197	9.752884
+SumYShuffleG4X2Vector256Traits	55.016	4764.906	8.242914
+SumYShuffleG4X2_ConstVectorTraits	44.433	5899.792	10.206179
 SumYShuffleG4X2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG4X2_ConstVector256Traits	51.214	5118.587	8.931692
+SumYShuffleG4X2_ConstVector256Traits	43.883	5973.717	10.334063
 
 [YShuffleG4X2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG4X2VectorBase	90
-SumYShuffleG4X2VectorBase	323.939	809.238
-SumYShuffleG4X2VectorTraits	4.540	57738.648	71.349406
+SumYShuffleG4X2VectorBase	356.091	736.171
+SumYShuffleG4VectorTraits	5.236	50061.842	68.002995
+SumYShuffleG4X2VectorTraits	4.600	56991.103	77.415563
 SumYShuffleG4X2Vector128_Arm	Run fail! Requires hardware support AdvSimd!
 SumYShuffleG4X2Vector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG4X2Vector256Traits	4.935	53124.557	65.647633
-SumYShuffleG4X2_ConstVectorTraits	4.897	53535.357	66.155271
+SumYShuffleG4X2Vector256Traits	4.425	59245.232	80.477526
+SumYShuffleG4X2_ConstVectorTraits	4.534	57818.824	78.539923
 SumYShuffleG4X2_ConstVector128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumYShuffleG4X2_ConstVector256Traits	4.773	54925.115	67.872637
+SumYShuffleG4X2_ConstVector256Traits	5.015	52269.525	71.001867
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -801,54 +806,59 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG4X2VectorBase	-21037
-SumYShuffleG4X2VectorBase	598.825	437.764
-SumYShuffleG4X2VectorTraits	217.783	1203.691	2.749636
-SumYShuffleG4X2Vector128_Arm	157.327	1666.236	3.806245
-SumYShuffleG4X2Vector128Traits	145.030	1807.520	4.128986
+SumYShuffleG4X2VectorBase	595.051	440.540
+SumYShuffleG4VectorTraits	33.733	7771.105	17.639945
+SumYShuffleG4X2VectorTraits	240.912	1088.130	2.469990
+SumYShuffleG4X2Vector128_Arm	181.976	1440.539	3.269937
+SumYShuffleG4X2Vector128Traits	155.680	1683.865	3.822273
 SumYShuffleG4X2Vector256Traits	Run fail! Vector byte size mismatch(16!=32) !
-SumYShuffleG4X2_ConstVectorTraits	216.380	1211.497	2.767469
-SumYShuffleG4X2_ConstVector128Traits	146.218	1792.825	4.095416
+SumYShuffleG4X2_ConstVectorTraits	237.998	1101.457	2.500241
+SumYShuffleG4X2_ConstVector128Traits	157.902	1660.168	3.768483
 SumYShuffleG4X2_ConstVector256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG4X2VectorBase	2018061718
-SumYShuffleG4X2VectorBase	894.021	293.219
-SumYShuffleG4X2VectorTraits	451.883	580.114	1.978433
-SumYShuffleG4X2Vector128_Arm	316.586	828.033	2.823940
-SumYShuffleG4X2Vector128Traits	285.510	918.162	3.131316
+SumYShuffleG4X2VectorBase	890.275	294.453
+SumYShuffleG4VectorTraits	65.828	3982.237	13.524193
+SumYShuffleG4X2VectorTraits	439.437	596.546	2.025947
+SumYShuffleG4X2Vector128_Arm	323.215	811.051	2.754435
+SumYShuffleG4X2Vector128Traits	292.070	897.537	3.048153
 SumYShuffleG4X2Vector256_AvxByte	Run fail! Requires hardware support Avx, Avx2!
 SumYShuffleG4X2Vector256_AvxUInt32	Run fail! Requires hardware support Avx, Avx2!
 SumYShuffleG4X2Vector256Traits	Run fail! Vector byte size mismatch(16!=32) !
-SumYShuffleG4X2_ConstVectorTraits	437.427	599.286	2.043816
-SumYShuffleG4X2_ConstVector128Traits	287.397	912.133	3.110755
+SumYShuffleG4X2_ConstVectorTraits	439.036	597.090	2.027795
+SumYShuffleG4X2_ConstVector128Traits	291.883	898.113	3.050107
 SumYShuffleG4X2_ConstVector256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG4X2VectorBase	5878554485936559874
-SumYShuffleG4X2VectorBase	1086.040	241.376
-SumYShuffleG4X2VectorTraits	1141.693	229.610	0.951254
-SumYShuffleG4X2Vector128_Arm	1042.843	251.374	1.041422
-SumYShuffleG4X2Vector128Traits	787.453	332.901	1.379180
+SumYShuffleG4X2VectorBase	1052.329	249.108
+SumYShuffleG4VectorTraits	Run fail! The count(2) of elements in a vector cannot be less than 4! Please use YShuffleG4X2 instead.
+SumYShuffleG4X2VectorTraits	1203.496	217.819	0.874393
+SumYShuffleG4X2VectorTraits_Out	173.579	1510.229	6.062537
+SumYShuffleG4X2Vector128_Arm	1073.824	244.122	0.979983
+SumYShuffleG4X2Vector128Traits	866.479	302.539	1.214489
 SumYShuffleG4X2Vector256Traits	Run fail! Vector byte size mismatch(16!=32) !
-SumYShuffleG4X2_ConstVectorTraits	1130.757	231.831	0.960454
-SumYShuffleG4X2_ConstVector128Traits	783.321	334.657	1.386456
+SumYShuffleG4X2_ConstVectorTraits	1031.926	254.034	1.019772
+SumYShuffleG4X2_ConstVector128Traits	859.161	305.116	1.224833
 SumYShuffleG4X2_ConstVector256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumYShuffleG4X2VectorBase	91
-SumYShuffleG4X2VectorBase	451.361	580.786
-SumYShuffleG4X2VectorTraits	110.522	2371.868	4.083891
-SumYShuffleG4X2Vector128_Arm	83.213	3150.270	5.424147
-SumYShuffleG4X2Vector128Traits	71.643	3659.054	6.300173
+SumYShuffleG4X2VectorBase	448.466	584.535
+SumYShuffleG4VectorTraits	14.844	17660.103	30.212225
+SumYShuffleG4X2VectorTraits	117.185	2237.012	3.826994
+SumYShuffleG4X2Vector128_Arm	81.381	3221.195	5.510697
+SumYShuffleG4X2Vector128Traits	80.516	3255.784	5.569870
 SumYShuffleG4X2Vector256Traits	Run fail! Vector byte size mismatch(16!=32) !
-SumYShuffleG4X2_ConstVectorTraits	110.107	2380.808	4.099285
-SumYShuffleG4X2_ConstVector128Traits	80.900	3240.353	5.579252
+SumYShuffleG4X2_ConstVectorTraits	114.696	2285.550	3.910032
+SumYShuffleG4X2_ConstVector128Traits	80.409	3260.123	5.577294
 SumYShuffleG4X2_ConstVector256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 VectorTraitsBase: OK.
@@ -857,135 +867,5 @@ VectorTraits128AdvSimd: OK.
 VectorTraits128AdvSimdB64: OK.
 VectorTraits256Base: Vector byte size mismatch(16!=32) !
 VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-[Vectors.Instance: VectorTraits128AdvSimdB64]
-ByteCount:	16	# (10)
-Ceiling_AcceleratedTypes:	Single, Double	# (00006000)
-ConvertToDouble_AcceleratedTypes:	None	# (00000000)
-ConvertToInt32_AcceleratedTypes:	Single	# (00002000)
-ConvertToInt64_AcceleratedTypes:	None	# (00000000)
-ConvertToSingle_AcceleratedTypes:	Int32	# (00000200)
-ConvertToUInt32_AcceleratedTypes:	None	# (00000000)
-ConvertToUInt64_AcceleratedTypes:	None	# (00000000)
-ExtractMostSignificantBits_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-Floor_AcceleratedTypes:	Single, Double	# (00006000)
-IsSupported:	True
-Multiply_AcceleratedTypes:	Int16, UInt16, Int32, UInt32, Single	# (00002780)
-Multiply_FullAcceleratedTypes:	Int16, UInt16, Int32, UInt32, Single	# (00002780)
-Narrow_AcceleratedTypes:	Int16, UInt16, Int32, UInt32, Int64, UInt64, Double	# (00005F80)
-ShiftLeft_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64	# (00001FE0)
-ShiftRightArithmetic_AcceleratedTypes:	SByte, Int16, Int32, Int64	# (00000AA0)
-ShiftRightLogical_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64	# (00001FE0)
-Shuffle_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-Sum_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-Widen_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Single	# (000027E0)
-YClamp_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-YNarrowSaturate_AcceleratedTypes:	Int16, UInt16, Int32, UInt32, Int64, UInt64	# (00001F80)
-YNarrowSaturate_FullAcceleratedTypes:	Int16, UInt16, Int32, UInt32, Int64, UInt64	# (00001F80)
-YNarrowSaturateUnsigned_AcceleratedTypes:	Int16, Int32, Int64	# (00000A80)
-YNarrowSaturateUnsigned_FullAcceleratedTypes:	Int16, Int32, Int64	# (00000A80)
-YShuffleG2_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-YShuffleG4_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Single	# (000027E0)
-YShuffleG4X2_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-YShuffleInsert_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-YShuffleKernel_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-
-WVectorTraits128Base: OK.
-WVectorTraits128AdvSimd: OK.
-WVectorTraits128AdvSimdB64: OK.
-[Vector128s.Instance: WVectorTraits128AdvSimdB64]
-Abs_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-Add_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-AndNot_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-BitwiseAnd_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-BitwiseOr_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-ByteCount:	32	# (20)
-Ceiling_AcceleratedTypes:	Single, Double	# (00006000)
-ConditionalSelect_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-ConvertToDouble_AcceleratedTypes:	Int64, UInt64	# (00001800)
-ConvertToInt32_AcceleratedTypes:	Single	# (00002000)
-ConvertToInt64_AcceleratedTypes:	Double	# (00004000)
-ConvertToSingle_AcceleratedTypes:	Int32, UInt32	# (00000600)
-ConvertToUInt32_AcceleratedTypes:	Single	# (00002000)
-ConvertToUInt64_AcceleratedTypes:	Double	# (00004000)
-Divide_AcceleratedTypes:	Single, Double	# (00006000)
-ExtractMostSignificantBits_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-Floor_AcceleratedTypes:	Single, Double	# (00006000)
-GreaterThan_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-IsSupported:	True
-LessThan_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-Max_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-Min_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-Multiply_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Single, Double	# (000067E0)
-Multiply_FullAcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Single, Double	# (000067E0)
-Narrow_AcceleratedTypes:	Int16, UInt16, Int32, UInt32, Int64, UInt64, Double	# (00005F80)
-Negate_AcceleratedTypes:	SByte, Int16, Int32, Int64, Single	# (00002AA0)
-OnesComplement_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-ShiftLeft_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64	# (00001FE0)
-ShiftRightArithmetic_AcceleratedTypes:	SByte, Int16, Int32, Int64	# (00000AA0)
-ShiftRightLogical_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64	# (00001FE0)
-Shuffle_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-Subtract_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-Sum_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-Widen_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Single	# (000027E0)
-Xor_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-YClamp_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-YNarrowSaturate_AcceleratedTypes:	Int16, UInt16, Int32, UInt32, Int64, UInt64	# (00001F80)
-YNarrowSaturate_FullAcceleratedTypes:	Int16, UInt16, Int32, UInt32, Int64, UInt64	# (00001F80)
-YNarrowSaturateUnsigned_AcceleratedTypes:	Int16, Int32, Int64	# (00000A80)
-YNarrowSaturateUnsigned_FullAcceleratedTypes:	Int16, Int32, Int64	# (00000A80)
-YShuffleG2_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-YShuffleG4_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Single	# (000027E0)
-YShuffleG4X2_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-YShuffleInsert_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-YShuffleKernel_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
-
-WVectorTraits256Base: OK.
-WVectorTraits256Avx2: Requires hardware support Avx, Avx2!
-[Vector256s.Instance: WVectorTraits256Base]
-Abs_AcceleratedTypes:	None	# (00000000)
-Add_AcceleratedTypes:	None	# (00000000)
-AndNot_AcceleratedTypes:	None	# (00000000)
-BitwiseAnd_AcceleratedTypes:	None	# (00000000)
-BitwiseOr_AcceleratedTypes:	None	# (00000000)
-ByteCount:	32	# (20)
-Ceiling_AcceleratedTypes:	None	# (00000000)
-ConditionalSelect_AcceleratedTypes:	None	# (00000000)
-ConvertToDouble_AcceleratedTypes:	None	# (00000000)
-ConvertToInt32_AcceleratedTypes:	None	# (00000000)
-ConvertToInt64_AcceleratedTypes:	None	# (00000000)
-ConvertToSingle_AcceleratedTypes:	None	# (00000000)
-ConvertToUInt32_AcceleratedTypes:	None	# (00000000)
-ConvertToUInt64_AcceleratedTypes:	None	# (00000000)
-Divide_AcceleratedTypes:	None	# (00000000)
-ExtractMostSignificantBits_AcceleratedTypes:	None	# (00000000)
-Floor_AcceleratedTypes:	None	# (00000000)
-GreaterThan_AcceleratedTypes:	None	# (00000000)
-IsSupported:	True
-LessThan_AcceleratedTypes:	None	# (00000000)
-Max_AcceleratedTypes:	None	# (00000000)
-Min_AcceleratedTypes:	None	# (00000000)
-Multiply_AcceleratedTypes:	None	# (00000000)
-Multiply_FullAcceleratedTypes:	None	# (00000000)
-Narrow_AcceleratedTypes:	None	# (00000000)
-Negate_AcceleratedTypes:	None	# (00000000)
-OnesComplement_AcceleratedTypes:	None	# (00000000)
-ShiftLeft_AcceleratedTypes:	None	# (00000000)
-ShiftRightArithmetic_AcceleratedTypes:	None	# (00000000)
-ShiftRightLogical_AcceleratedTypes:	None	# (00000000)
-Shuffle_AcceleratedTypes:	None	# (00000000)
-Subtract_AcceleratedTypes:	None	# (00000000)
-Sum_AcceleratedTypes:	None	# (00000000)
-Widen_AcceleratedTypes:	None	# (00000000)
-Xor_AcceleratedTypes:	None	# (00000000)
-YClamp_AcceleratedTypes:	None	# (00000000)
-YNarrowSaturate_AcceleratedTypes:	None	# (00000000)
-YNarrowSaturate_FullAcceleratedTypes:	None	# (00000000)
-YNarrowSaturateUnsigned_AcceleratedTypes:	None	# (00000000)
-YNarrowSaturateUnsigned_FullAcceleratedTypes:	None	# (00000000)
-YShuffleG2_AcceleratedTypes:	None	# (00000000)
-YShuffleG4_AcceleratedTypes:	None	# (00000000)
-YShuffleG4X2_AcceleratedTypes:	None	# (00000000)
-YShuffleInsert_AcceleratedTypes:	None	# (00000000)
-YShuffleKernel_AcceleratedTypes:	None	# (00000000)
 ```
 
