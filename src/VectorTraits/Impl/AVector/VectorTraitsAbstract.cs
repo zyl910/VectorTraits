@@ -1527,6 +1527,14 @@ namespace Zyl.VectorTraits.Impl.AVector {
             return Statics.YShuffleG4X2(source0, source1, control);
         }
 
+        /// <inheritdoc cref="IVectorTraits.YShuffleG4X2(Vector{long}, Vector{long}, ShuffleControlG4, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<long> YShuffleG4X2(Vector<long> source0, Vector<long> source1, ShuffleControlG4 control, out Vector<long> result1) {
+            (var rt0, var rt1) = Statics.YShuffleG4X2(source0, source1, control);
+            result1 = rt1;
+            return rt0;
+        }
+
         /// <inheritdoc cref="IVectorTraits.YShuffleG4X2(Vector{ulong}, Vector{ulong}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1977,6 +1985,5 @@ namespace Zyl.VectorTraits.Impl.AVector {
         public virtual Vector<ulong> YShuffleKernel_Core(Vector<ulong> vector, Vector<ulong> args0, Vector<ulong> args1) {
             return Statics.YShuffleKernel_Core(vector, args0, args1);
         }
-
     }
 }

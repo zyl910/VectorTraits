@@ -592,6 +592,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return (rt0.AsInt64(), rt1.AsInt64());
             }
 
+            /// <inheritdoc cref="IVectorTraits.YShuffleG4X2(Vector{long}, Vector{long}, ShuffleControlG4, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YShuffleG4X2(Vector256<long> source0, Vector256<long> source1, ShuffleControlG4 control, out Vector256<long> result1) {
+                Vector256<uint> indices = Vector256Constants.YShuffleG4_UInt64_UInt32Indices[(int)control];
+                result1 = Avx2.PermuteVar8x32(source1.AsUInt32(), indices).AsInt64();
+                return Avx2.PermuteVar8x32(source0.AsUInt32(), indices).AsInt64();
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{ulong}, Vector256{ulong}, ShuffleControlG4)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -334,6 +334,23 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return (rt0.AsInt64(), rt1.AsInt64());
             }
 
+            /// <inheritdoc cref="IVectorTraits.YShuffleG4X2(Vector{long}, Vector{long}, ShuffleControlG4, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleG4X2(Vector128<long> source0, Vector128<long> source1, ShuffleControlG4 control, out Vector128<long> result1) {
+                int idx = (int)control * 4;
+                //var indices = new ReadOnlySpan<Vector128<byte>>(Vector128Constants.YShuffleG4_UInt32_ByteIndices, idx, 4);
+                ref Vector128<byte> indices = ref Vector128Constants.YShuffleG4X2_UInt64_ByteIndices[idx];
+                var result0 = AdvSimd.Or(
+                    YShuffleKernel(source0.AsByte(), indices),
+                    YShuffleKernel(source1.AsByte(), Unsafe.Add(ref indices, 1))
+                ).AsInt64();
+                result1 = AdvSimd.Or(
+                    YShuffleKernel(source0.AsByte(), Unsafe.Add(ref indices, 2)),
+                    YShuffleKernel(source1.AsByte(), Unsafe.Add(ref indices, 3))
+                ).AsInt64();
+                return result0;
+            }
+
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4X2(Vector128{ulong}, Vector128{ulong}, ShuffleControlG4)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

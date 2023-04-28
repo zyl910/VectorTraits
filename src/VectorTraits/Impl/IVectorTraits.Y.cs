@@ -869,6 +869,18 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
         /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
         /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第0个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector<long> YShuffleG4X2(Vector<long> source0, Vector<long> source1, ShuffleControlG4 control, out Vector<long> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         (Vector<ulong> Result0, Vector<ulong> Result1) YShuffleG4X2(Vector<ulong> source0, Vector<ulong> source1, ShuffleControlG4 control);

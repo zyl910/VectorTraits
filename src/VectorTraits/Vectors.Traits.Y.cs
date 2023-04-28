@@ -817,6 +817,16 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
+        /// <inheritdoc cref="IVectorTraits.YShuffleG4X2(Vector{long}, Vector{long}, ShuffleControlG4, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> YShuffleG4X2(Vector<long> source0, Vector<long> source1, ShuffleControlG4 control, out Vector<long> result1) {
+//#if BCL_BASE_OVERRIDE_STATIC
+//            return BaseStatics.YShuffleG4X2(source0, source1, control, out result1);
+//#else
+            return _instance.YShuffleG4X2(source0, source1, control, out result1);
+//#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
         /// <inheritdoc cref="IVectorTraits.YShuffleG4X2(Vector{ulong}, Vector{ulong}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
