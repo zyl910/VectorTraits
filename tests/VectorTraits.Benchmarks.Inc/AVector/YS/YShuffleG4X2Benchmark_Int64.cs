@@ -60,7 +60,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                (var temp0, var temp1) = VectorTraitsBase.Statics.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control);
+                var temp0 = VectorTraitsBase.Statics.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control, out var temp1);
                 vrt += temp0;
                 vrt1 += temp1;
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
@@ -166,7 +166,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                (var temp0, var temp1) = Vectors.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control);
+                var temp0 = Vectors.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control, out var temp1);
                 vrt += temp0;
                 vrt1 += temp1;
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
@@ -198,13 +198,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum YShuffleG4X2 - Vector Traits - static - out.
+        /// Sum YShuffleG4X2 - Vector Traits - static - Tuple.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleG4X2VectorTraits_Out(TMy[] src, int srcCount, ShuffleControlG4 control) {
+        private static TMy StaticSumYShuffleG4X2VectorTraits_Tuple(TMy[] src, int srcCount, ShuffleControlG4 control) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -218,7 +218,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                var temp0 = Vectors.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control, out var temp1);
+                (var temp0, var temp1) = Vectors.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control);
                 vrt += temp0;
                 vrt1 += temp1;
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
@@ -241,12 +241,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleG4X2VectorTraits_Out() {
+        public void SumYShuffleG4X2VectorTraits_Tuple() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumYShuffleG4X2VectorTraits_Out(srcArray, srcArray.Length, control);
-            CheckResult("SumYShuffleG4X2VectorTraits_Out");
+            dstTMy = StaticSumYShuffleG4X2VectorTraits_Tuple(srcArray, srcArray.Length, control);
+            CheckResult("SumYShuffleG4X2VectorTraits_Tuple");
         }
 
 
@@ -281,7 +281,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                (var temp0, var temp1) = WVectorTraits128AdvSimd.Statics.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control);
+                var temp0 = WVectorTraits128AdvSimd.Statics.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control, out var temp1);
                 vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, temp0);
                 vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
@@ -340,7 +340,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                (var temp0, var temp1) = Vector128s.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control);
+                var temp0 = Vector128s.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control, out var temp1);
                 vrt = Vector128s.Add(vrt, temp0);
                 vrt1 = Vector128s.Add(vrt1, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
@@ -402,7 +402,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                (var temp0, var temp1) = Vector256s.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control);
+                var temp0 = Vector256s.YShuffleG4X2(p0, Unsafe.Add(ref p0, 1), control, out var temp1);
                 vrt = Vector256s.Add(vrt, temp0);
                 vrt1 = Vector256s.Add(vrt1, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
@@ -463,7 +463,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                (var temp0, var temp1) = Vectors.YShuffleG4X2_Const(p0, Unsafe.Add(ref p0, 1), control);
+                var temp0 = Vectors.YShuffleG4X2_Const(p0, Unsafe.Add(ref p0, 1), control, out var temp1);
                 vrt += temp0;
                 vrt1 += temp1;
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
@@ -492,6 +492,58 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             }
             dstTMy = StaticSumYShuffleG4X2_ConstVectorTraits(srcArray, srcArray.Length);
             CheckResult("SumYShuffleG4X2_ConstVectorTraits");
+        }
+
+        /// <summary>
+        /// Sum YShuffleG4X2_Const - Vector Traits - static - Tuple.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="control">The control.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumYShuffleG4X2_ConstVectorTraits_Tuple(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            Vector<TMy> vrt1 = Vector<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                (var temp0, var temp1) = Vectors.YShuffleG4X2_Const(p0, Unsafe.Add(ref p0, 1), control);
+                vrt += temp0;
+                vrt1 += temp1;
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt += vrt1;
+            if (UseReduce) {
+                for (i = 0; i < VectorWidth; ++i) {
+                    rt += vrt[i];
+                }
+            } else {
+                rt = vrt[0];
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumYShuffleG4X2_ConstVectorTraits_Tuple() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstTMy = StaticSumYShuffleG4X2_ConstVectorTraits_Tuple(srcArray, srcArray.Length);
+            CheckResult("SumYShuffleG4X2_ConstVectorTraits_Tuple");
         }
 
 
@@ -527,7 +579,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                (var temp0, var temp1) = Vector128s.YShuffleG4X2_Const(p0, Unsafe.Add(ref p0, 1), control);
+                var temp0 = Vector128s.YShuffleG4X2_Const(p0, Unsafe.Add(ref p0, 1), control, out var temp1);
                 vrt = Vector128s.Add(vrt, temp0);
                 vrt1 = Vector128s.Add(vrt1, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
@@ -589,7 +641,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                (var temp0, var temp1) = Vector256s.YShuffleG4X2_Const(p0, Unsafe.Add(ref p0, 1), control);
+                var temp0 = Vector256s.YShuffleG4X2_Const(p0, Unsafe.Add(ref p0, 1), control, out var temp1);
                 vrt = Vector256s.Add(vrt, temp0);
                 vrt1 = Vector256s.Add(vrt1, temp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
