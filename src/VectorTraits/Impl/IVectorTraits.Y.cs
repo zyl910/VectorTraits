@@ -869,7 +869,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
         /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
         /// <param name="control">Shuffle control code (换位控制码).</param>
-        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第0个向量).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
         /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         Vector<long> YShuffleG4X2(Vector<long> source0, Vector<long> source1, ShuffleControlG4 control, out Vector<long> result1);

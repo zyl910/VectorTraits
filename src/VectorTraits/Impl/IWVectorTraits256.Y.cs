@@ -746,6 +746,246 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
         /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
         /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<float> YShuffleG4X2(Vector256<float> source0, Vector256<float> source1, ShuffleControlG4 control, out Vector256<float> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<double> YShuffleG4X2(Vector256<double> source0, Vector256<double> source1, ShuffleControlG4 control, out Vector256<double> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<sbyte> YShuffleG4X2(Vector256<sbyte> source0, Vector256<sbyte> source1, ShuffleControlG4 control, out Vector256<sbyte> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<byte> YShuffleG4X2(Vector256<byte> source0, Vector256<byte> source1, ShuffleControlG4 control, out Vector256<byte> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<short> YShuffleG4X2(Vector256<short> source0, Vector256<short> source1, ShuffleControlG4 control, out Vector256<short> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<ushort> YShuffleG4X2(Vector256<ushort> source0, Vector256<ushort> source1, ShuffleControlG4 control, out Vector256<ushort> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<int> YShuffleG4X2(Vector256<int> source0, Vector256<int> source1, ShuffleControlG4 control, out Vector256<int> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<uint> YShuffleG4X2(Vector256<uint> source0, Vector256<uint> source1, ShuffleControlG4 control, out Vector256<uint> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<long> YShuffleG4X2(Vector256<long> source0, Vector256<long> source1, ShuffleControlG4 control, out Vector256<long> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<ulong> YShuffleG4X2(Vector256<ulong> source0, Vector256<ulong> source1, ShuffleControlG4 control, out Vector256<ulong> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<float> YShuffleG4X2_Const(Vector256<float> source0, Vector256<float> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<float> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<double> YShuffleG4X2_Const(Vector256<double> source0, Vector256<double> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<double> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<sbyte> YShuffleG4X2_Const(Vector256<sbyte> source0, Vector256<sbyte> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<sbyte> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<byte> YShuffleG4X2_Const(Vector256<byte> source0, Vector256<byte> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<byte> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<short> YShuffleG4X2_Const(Vector256<short> source0, Vector256<short> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<short> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<ushort> YShuffleG4X2_Const(Vector256<ushort> source0, Vector256<ushort> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<ushort> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<int> YShuffleG4X2_Const(Vector256<int> source0, Vector256<int> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<int> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<uint> YShuffleG4X2_Const(Vector256<uint> source0, Vector256<uint> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<uint> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<long> YShuffleG4X2_Const(Vector256<long> source0, Vector256<long> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<long> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
+        /// <param name="result1">Returns the 1st vector after shuffle (返回换位后的第1个向量).</param>
+        /// <returns>Returns the 0th vector after shuffle (返回换位后的第0个向量).</returns>
+        /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        Vector256<ulong> YShuffleG4X2_Const(Vector256<ulong> source0, Vector256<ulong> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<ulong> result1);
+
+        /// <summary>
+        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
+        /// </summary>
+        /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
+        /// <param name="source1">The input source 1 from which values are selected (从中选择值的输入源1).</param>
+        /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         (Vector256<float> Result0, Vector256<float> Result1) YShuffleG4X2(Vector256<float> source0, Vector256<float> source1, ShuffleControlG4 control);
