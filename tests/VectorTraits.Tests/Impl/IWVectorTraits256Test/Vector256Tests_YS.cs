@@ -343,9 +343,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Vector256<T> dst0, dst1;
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        dynamic dst = instance.YShuffleG4X2((dynamic)source0, (dynamic)source1, control);
-                        dst0 = dst.Item1;
-                        dst1 = dst.Item2;
+                        (dst0, dst1) = instance.YShuffleG4X2<T>(source0, source1, control);
                         if (allowLogItem) {
                             // Compatible floating-point NaN.
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}-{2}, source0={3}, source1={4}, control={3}", instance.GetType().Name, dst0, dst1, source0, source1, control));
@@ -413,9 +411,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Vector256<T> dst0, dst1;
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        dynamic dst = instance.YShuffleG4X2_Const((dynamic)source0, (dynamic)source1, control);
-                        dst0 = dst.Item1;
-                        dst1 = dst.Item2;
+                        (dst0, dst1) = instance.YShuffleG4X2_Const<T>(source0, source1, control);
                         if (allowLogItem) {
                             // Compatible floating-point NaN.
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}-{2}, source0={3}, source1={4}, control={3}", instance.GetType().Name, dst0, dst1, source0, source1, control));

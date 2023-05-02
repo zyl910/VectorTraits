@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+#if !NET7_0_OR_GREATER
+using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
+#endif // !NET7_0_OR_GREATER
 using System.Runtime.CompilerServices;
 using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
@@ -336,6 +340,225 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ulong> Shuffle_Core(this IWVectorTraits256 athis, Vector256<ulong> vector, (Vector256<ulong> args0, Vector256<ulong> args1) args) {
             return athis.Shuffle_Core(vector, args.args0, args.args1);
+        }
+
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2{T}(Vector256{T}, Vector256{T}, ShuffleControlG4)"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [CLSCompliant(false)]
+        public static (Vector256<T> Result0, Vector256<T> Result1) YShuffleG4X2<T>(this IWVectorTraits256 athis, Vector256<T> source0, Vector256<T> source1, ShuffleControlG4 control) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector256<float>)(object)source0, (Vector256<float>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(double) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector256<double>)(object)source0, (Vector256<double>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector256<sbyte>)(object)source0, (Vector256<sbyte>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(byte) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector256<byte>)(object)source0, (Vector256<byte>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(short) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector256<short>)(object)source0, (Vector256<short>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector256<ushort>)(object)source0, (Vector256<ushort>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(int) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector256<int>)(object)source0, (Vector256<int>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(uint) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector256<uint>)(object)source0, (Vector256<uint>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(long) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector256<long>)(object)source0, (Vector256<long>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector256<ulong>)(object)source0, (Vector256<ulong>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2(Vector256{float}, Vector256{float}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<float> Result0, Vector256<float> Result1) YShuffleG4X2(this IWVectorTraits256 athis, Vector256<float> source0, Vector256<float> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2(Vector256{double}, Vector256{double}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<double> Result0, Vector256<double> Result1) YShuffleG4X2(this IWVectorTraits256 athis, Vector256<double> source0, Vector256<double> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2(Vector256{sbyte}, Vector256{sbyte}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<sbyte> Result0, Vector256<sbyte> Result1) YShuffleG4X2(this IWVectorTraits256 athis, Vector256<sbyte> source0, Vector256<sbyte> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2(Vector256{byte}, Vector256{byte}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<byte> Result0, Vector256<byte> Result1) YShuffleG4X2(this IWVectorTraits256 athis, Vector256<byte> source0, Vector256<byte> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2(Vector256{short}, Vector256{short}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<short> Result0, Vector256<short> Result1) YShuffleG4X2(this IWVectorTraits256 athis, Vector256<short> source0, Vector256<short> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2(Vector256{ushort}, Vector256{ushort}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<ushort> Result0, Vector256<ushort> Result1) YShuffleG4X2(this IWVectorTraits256 athis, Vector256<ushort> source0, Vector256<ushort> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2(Vector256{int}, Vector256{int}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<int> Result0, Vector256<int> Result1) YShuffleG4X2(this IWVectorTraits256 athis, Vector256<int> source0, Vector256<int> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2(Vector256{uint}, Vector256{uint}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<uint> Result0, Vector256<uint> Result1) YShuffleG4X2(this IWVectorTraits256 athis, Vector256<uint> source0, Vector256<uint> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2(Vector256{long}, Vector256{long}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<long> Result0, Vector256<long> Result1) YShuffleG4X2(this IWVectorTraits256 athis, Vector256<long> source0, Vector256<long> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2(Vector256{ulong}, Vector256{ulong}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<ulong> Result0, Vector256<ulong> Result1) YShuffleG4X2(this IWVectorTraits256 athis, Vector256<ulong> source0, Vector256<ulong> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2_Const{T}(Vector256{T}, Vector256{T}, ShuffleControlG4)"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [CLSCompliant(false)]
+        public static (Vector256<T> Result0, Vector256<T> Result1) YShuffleG4X2_Const<T>(this IWVectorTraits256 athis, Vector256<T> source0, Vector256<T> source1, ShuffleControlG4 control) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector256<float>)(object)source0, (Vector256<float>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(double) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector256<double>)(object)source0, (Vector256<double>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector256<sbyte>)(object)source0, (Vector256<sbyte>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(byte) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector256<byte>)(object)source0, (Vector256<byte>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(short) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector256<short>)(object)source0, (Vector256<short>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector256<ushort>)(object)source0, (Vector256<ushort>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(int) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector256<int>)(object)source0, (Vector256<int>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(uint) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector256<uint>)(object)source0, (Vector256<uint>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(long) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector256<long>)(object)source0, (Vector256<long>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector256<ulong>)(object)source0, (Vector256<ulong>)(object)source1, control);
+                return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2_Const(Vector256{float}, Vector256{float}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<float> Result0, Vector256<float> Result1) YShuffleG4X2_Const(this IWVectorTraits256 athis, Vector256<float> source0, Vector256<float> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2_Const(Vector256{double}, Vector256{double}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<double> Result0, Vector256<double> Result1) YShuffleG4X2_Const(this IWVectorTraits256 athis, Vector256<double> source0, Vector256<double> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2_Const(Vector256{sbyte}, Vector256{sbyte}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<sbyte> Result0, Vector256<sbyte> Result1) YShuffleG4X2_Const(this IWVectorTraits256 athis, Vector256<sbyte> source0, Vector256<sbyte> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2_Const(Vector256{byte}, Vector256{byte}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<byte> Result0, Vector256<byte> Result1) YShuffleG4X2_Const(this IWVectorTraits256 athis, Vector256<byte> source0, Vector256<byte> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2_Const(Vector256{short}, Vector256{short}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<short> Result0, Vector256<short> Result1) YShuffleG4X2_Const(this IWVectorTraits256 athis, Vector256<short> source0, Vector256<short> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2_Const(Vector256{ushort}, Vector256{ushort}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<ushort> Result0, Vector256<ushort> Result1) YShuffleG4X2_Const(this IWVectorTraits256 athis, Vector256<ushort> source0, Vector256<ushort> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2_Const(Vector256{int}, Vector256{int}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<int> Result0, Vector256<int> Result1) YShuffleG4X2_Const(this IWVectorTraits256 athis, Vector256<int> source0, Vector256<int> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2_Const(Vector256{uint}, Vector256{uint}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<uint> Result0, Vector256<uint> Result1) YShuffleG4X2_Const(this IWVectorTraits256 athis, Vector256<uint> source0, Vector256<uint> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2_Const(Vector256{long}, Vector256{long}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<long> Result0, Vector256<long> Result1) YShuffleG4X2_Const(this IWVectorTraits256 athis, Vector256<long> source0, Vector256<long> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleG4X2_Const(Vector256{ulong}, Vector256{ulong}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector256<ulong> Result0, Vector256<ulong> Result1) YShuffleG4X2_Const(this IWVectorTraits256 athis, Vector256<ulong> source0, Vector256<ulong> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
         }
 
 
