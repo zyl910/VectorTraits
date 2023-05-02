@@ -555,8 +555,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleG4X2(Vector256<byte> source0, Vector256<byte> source1, ShuffleControlG4 control, out Vector256<byte> result1) {
                 Vector256<byte> indices = Vector256Constants.YShuffleG4_Byte_Indices[(int)control]; // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
+                var rt0 = Avx2.Shuffle(source0, indices);
                 result1 = Avx2.Shuffle(source1, indices);
-                return Avx2.Shuffle(source0, indices);
+                return rt0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{short}, Vector256{short}, ShuffleControlG4, out Vector256{short})"/>
@@ -572,8 +573,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleG4X2(Vector256<ushort> source0, Vector256<ushort> source1, ShuffleControlG4 control, out Vector256<ushort> result1) {
                 Vector256<byte> indices = Vector256Constants.YShuffleG4_UInt16_ByteIndices[(int)control].AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
+                var rt0 = Avx2.Shuffle(source0.AsByte(), indices).AsUInt16();
                 result1 = Avx2.Shuffle(source1.AsByte(), indices).AsUInt16();
-                return Avx2.Shuffle(source0.AsByte(), indices).AsUInt16();
+                return rt0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{int}, Vector256{int}, ShuffleControlG4, out Vector256{int})"/>
@@ -589,16 +591,18 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleG4X2(Vector256<uint> source0, Vector256<uint> source1, ShuffleControlG4 control, out Vector256<uint> result1) {
                 Vector256<byte> indices = Vector256Constants.YShuffleG4_UInt32_ByteIndices[(int)control].AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
+                var rt0 = Avx2.Shuffle(source0.AsByte(), indices).AsUInt32();
                 result1 = Avx2.Shuffle(source1.AsByte(), indices).AsUInt32();
-                return Avx2.Shuffle(source0.AsByte(), indices).AsUInt32();
+                return rt0;
             }
 
             /// <inheritdoc cref="IVectorTraits.YShuffleG4X2(Vector{long}, Vector{long}, ShuffleControlG4, out Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YShuffleG4X2(Vector256<long> source0, Vector256<long> source1, ShuffleControlG4 control, out Vector256<long> result1) {
                 Vector256<uint> indices = Vector256Constants.YShuffleG4_UInt64_UInt32Indices[(int)control];
+                var rt0 = Avx2.PermuteVar8x32(source0.AsUInt32(), indices).AsInt64();
                 result1 = Avx2.PermuteVar8x32(source1.AsUInt32(), indices).AsInt64();
-                return Avx2.PermuteVar8x32(source0.AsUInt32(), indices).AsInt64();
+                return rt0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{ulong}, Vector256{ulong}, ShuffleControlG4, out Vector256{ulong})"/>
@@ -606,22 +610,25 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleG4X2(Vector256<ulong> source0, Vector256<ulong> source1, ShuffleControlG4 control, out Vector256<ulong> result1) {
                 Vector256<uint> indices = Vector256Constants.YShuffleG4_UInt64_UInt32Indices[(int)control];
+                var rt0 = Avx2.PermuteVar8x32(source0.AsUInt32(), indices).AsUInt64();
                 result1 = Avx2.PermuteVar8x32(source1.AsUInt32(), indices).AsUInt64();
-                return Avx2.PermuteVar8x32(source0.AsUInt32(), indices).AsUInt64();
+                return rt0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{float}, Vector256{float}, ShuffleControlG4, out Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YShuffleG4X2_Const(Vector256<float> source0, Vector256<float> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<float> result1) {
+                var rt0 = YShuffleG4_Const(source0, control);
                 result1 = YShuffleG4_Const(source1, control);
-                return YShuffleG4_Const(source0, control);
+                return rt0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{double}, Vector256{double}, ShuffleControlG4, out Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YShuffleG4X2_Const(Vector256<double> source0, Vector256<double> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<double> result1) {
+                var rt0 = YShuffleG4_Const(source0, control);
                 result1 = YShuffleG4_Const(source1, control);
-                return YShuffleG4_Const(source0, control);
+                return rt0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{sbyte}, Vector256{sbyte}, ShuffleControlG4, out Vector256{sbyte})"/>
@@ -640,46 +647,52 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{short}, Vector256{short}, ShuffleControlG4, out Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> YShuffleG4X2_Const(Vector256<short> source0, Vector256<short> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<short> result1) {
+                var rt0 = YShuffleG4_Const(source0, control);
                 result1 = YShuffleG4_Const(source1, control);
-                return YShuffleG4_Const(source0, control);
+                return rt0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{ushort}, Vector256{ushort}, ShuffleControlG4, out Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleG4X2_Const(Vector256<ushort> source0, Vector256<ushort> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<ushort> result1) {
+                var rt0 = YShuffleG4_Const(source0, control);
                 result1 = YShuffleG4_Const(source1, control);
-                return YShuffleG4_Const(source0, control);
+                return rt0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{int}, Vector256{int}, ShuffleControlG4, out Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> YShuffleG4X2_Const(Vector256<int> source0, Vector256<int> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<int> result1) {
+                var rt0 = YShuffleG4_Const(source0, control);
                 result1 = YShuffleG4_Const(source1, control);
-                return YShuffleG4_Const(source0, control);
+                return rt0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{uint}, Vector256{uint}, ShuffleControlG4, out Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleG4X2_Const(Vector256<uint> source0, Vector256<uint> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<uint> result1) {
+                var rt0 = YShuffleG4_Const(source0, control);
                 result1 = YShuffleG4_Const(source1, control);
-                return YShuffleG4_Const(source0, control);
+                return rt0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{long}, Vector256{long}, ShuffleControlG4, out Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YShuffleG4X2_Const(Vector256<long> source0, Vector256<long> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<long> result1) {
+                var rt0 = YShuffleG4_Const(source0, control);
                 result1 = YShuffleG4_Const(source1, control);
-                return YShuffleG4_Const(source0, control);
+                return rt0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2_Const(Vector256{ulong}, Vector256{ulong}, ShuffleControlG4, out Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleG4X2_Const(Vector256<ulong> source0, Vector256<ulong> source1, [ConstantExpected] ShuffleControlG4 control, out Vector256<ulong> result1) {
+                var rt0 = YShuffleG4_Const(source0, control);
                 result1 = YShuffleG4_Const(source1, control);
-                return YShuffleG4_Const(source0, control);
+                return rt0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{float}, Vector256{float}, ShuffleControlG4)"/>
