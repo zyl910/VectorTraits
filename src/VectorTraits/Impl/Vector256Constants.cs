@@ -22,13 +22,16 @@ namespace Zyl.VectorTraits.Impl {
         public static readonly Vector256<byte> Shuffle_Byte_LaneAdd_K1 = Vector256.Create(0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70);
 
         /// <summary>Shuffle - UInt16 - The multiplier.</summary>
+        [CLSCompliant(false)]
         public static readonly Vector256<ushort> Shuffle_UInt16_Multiplier = Vector256.Create((ushort)0x202);
         /// <summary>Shuffle - UInt16 - The offset of each byte within an element.</summary>
         public static readonly Vector256<byte> Shuffle_UInt16_ByteOffset = Vector256s.CreateRotate<byte>(0, 1);
 
         /// <summary>Shuffle - UInt64 - The multiplier.</summary>
+        [CLSCompliant(false)]
         public static readonly Vector256<ulong> Shuffle_UInt64_Multiplier = Vector256.Create((ulong)0x200000002UL);
         /// <summary>Shuffle - UInt64 - The offset of each byte within an element.</summary>
+        [CLSCompliant(false)]
         public static readonly Vector256<uint> Shuffle_UInt64_UInt32Offset = Vector256s.CreateRotate<uint>(0, 1);
 
 
@@ -49,6 +52,7 @@ namespace Zyl.VectorTraits.Impl {
         };
 
         /// <summary>YShuffleG2 - UInt32 - The uint32 indices.</summary>
+        [CLSCompliant(false)]
         public static readonly Vector256<uint>[] YShuffleG2_UInt32_Indices = {
             Vector256.Create((uint)0, 0, 2, 2, 4, 4, 6, 6), // XX
             Vector256.Create((uint)1, 0, 3, 2, 5, 4, 7, 6), // YX
