@@ -6,7 +6,7 @@
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants>$(DefineConstants);DRY_JOB0;BENCHMARKS_OFF;BENCHMARKS_TRAITS_USAGES;BENCHMARKS_128ALGORITHM;BENCHMARKS_256ALGORITHM;BENCHMARKS_ALGORITHM;BENCHMARKS_RAW;BENCHMARKS_TARGET_FAST</DefineConstants>
+    <DefineConstants>$(DefineConstants);REDUCE_MEMORY_USAGE;DRY_JOB0;BENCHMARKS_OFF;BENCHMARKS_TRAITS_USAGES;BENCHMARKS_128ALGORITHM;BENCHMARKS_256ALGORITHM;BENCHMARKS_ALGORITHM;BENCHMARKS_RAW;BENCHMARKS_TARGET_FAST</DefineConstants>
     <Company>zyl910</Company>
     <Authors>zyl910</Authors>
     <Product>VectorTraits</Product>

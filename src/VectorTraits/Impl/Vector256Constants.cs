@@ -51,6 +51,7 @@ namespace Zyl.VectorTraits.Impl {
             Vector256.Create((byte)2, 3, 2, 3, 6, 7, 6, 7,10,11, 10, 11, 14, 15, 14, 15, 18, 19, 18, 19, 22, 23, 22, 23, 26, 27, 26, 27, 30, 31, 30, 31), // YY
         };
 
+#if !REDUCE_MEMORY_USAGE
         /// <summary>YShuffleG2 - UInt32 - The uint32 indices.</summary>
         [CLSCompliant(false)]
         public static readonly Vector256<uint>[] YShuffleG2_UInt32_Indices = {
@@ -59,6 +60,7 @@ namespace Zyl.VectorTraits.Impl {
             Vector256.Create((uint)0, 1, 2, 3, 4, 5, 6, 7), // XY
             Vector256.Create((uint)1, 1, 3, 3, 5, 5, 7, 7), // YY
         };
+#endif // !REDUCE_MEMORY_USAGE
         /// <summary>YShuffleG2 - UInt32 - The byte indices.</summary>
         public static readonly Vector256<byte>[] YShuffleG2_UInt32_ByteIndices = {
             Vector256.Create((byte)0, 1, 2, 3, 0, 1, 2, 3, 8, 9, 10, 11,  8,  9, 10, 11, 16, 17, 18, 19, 16, 17, 18, 19, 24, 25, 26, 27, 24, 25, 26, 27), // XX
@@ -79,13 +81,17 @@ namespace Zyl.VectorTraits.Impl {
         public static readonly Vector256<byte>[] YShuffleG4_Byte_Indices = new Vector256<byte>[256];
         /// <summary>YShuffleG4 - UInt16 - The byte indices.</summary>
         public static readonly Vector256<byte>[] YShuffleG4_UInt16_ByteIndices = new Vector256<byte>[256];
+#if !REDUCE_MEMORY_USAGE
         /// <summary>YShuffleG4 - UInt32 - The indices.</summary>
+        [CLSCompliant(false)]
         public static readonly Vector256<uint>[] YShuffleG4_UInt32_Indices = new Vector256<uint>[256];
+#endif // !REDUCE_MEMORY_USAGE
         /// <summary>YShuffleG4 - UInt32 - The byte indices.</summary>
         public static readonly Vector256<byte>[] YShuffleG4_UInt32_ByteIndices = new Vector256<byte>[256];
         /// <summary>YShuffleG4 - UInt64 - The byte indices.</summary>
         public static readonly Vector256<byte>[] YShuffleG4_UInt64_ByteIndices = new Vector256<byte>[256];
         /// <summary>YShuffleG4 - UInt64 - The UInt32 indices.</summary>
+        [CLSCompliant(false)]
         public static readonly Vector256<uint>[] YShuffleG4_UInt64_UInt32Indices = new Vector256<uint>[256];
 
         static Vector256Constants() {
@@ -129,7 +135,9 @@ namespace Zyl.VectorTraits.Impl {
                         Unsafe.Add(ref q, idx++) = (byte)(m + j);
                     }
                 }
+#if !REDUCE_MEMORY_USAGE
                 YShuffleG4_UInt32_Indices[ctl] = indicesUInt32;
+#endif // !REDUCE_MEMORY_USAGE
                 YShuffleG4_UInt32_ByteIndices[ctl] = indices;
                 // -- UInt64 --
                 Vector256<ulong> indicesUInt64 = default;

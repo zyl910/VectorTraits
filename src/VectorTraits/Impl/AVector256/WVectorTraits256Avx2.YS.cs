@@ -89,6 +89,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return Avx2.Shuffle(source.AsByte(), indices).AsUInt32();
             }
 
+#if !REDUCE_MEMORY_USAGE
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG2(Vector256{uint}, ShuffleControlG2)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -96,6 +97,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<int> indices = Vector256Constants.YShuffleG2_UInt32_Indices[(int)control].AsInt32(); // It also supports _mm256_permutevar_ps for 128-bit lanes .
                 return Avx.PermuteVar(source.AsSingle(), indices).AsUInt32();
             }
+#endif // !REDUCE_MEMORY_USAGE
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG2(Vector256{long}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -343,6 +345,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return Avx2.Shuffle(source.AsByte(), indices).AsUInt32(); // _mm256_shuffle_epi8
             }
 
+#if !REDUCE_MEMORY_USAGE
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4(Vector256{uint}, ShuffleControlG4)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -350,6 +353,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<int> indices = Vector256Constants.YShuffleG4_UInt32_Indices[(int)control].AsInt32(); // It also supports _mm256_permutevar_ps for 128-bit lanes .
                 return Avx.PermuteVar(source.AsSingle(), indices).AsUInt32(); // _mm256_permutevar_ps
             }
+#endif // !REDUCE_MEMORY_USAGE
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4(Vector256{long}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

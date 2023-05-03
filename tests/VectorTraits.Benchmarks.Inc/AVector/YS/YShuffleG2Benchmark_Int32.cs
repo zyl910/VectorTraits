@@ -370,6 +370,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("SumYShuffleG2Vector256_AvxByte");
         }
 
+#if !REDUCE_MEMORY_USAGE
         /// <summary>
         /// Sum YShuffleG2 - Vector256 - Avx - Int32.
         /// </summary>
@@ -422,6 +423,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             dstTMy = StaticSumYShuffleG2Vector256_AvxInt32(srcArray, srcArray.Length, control);
             CheckResult("SumYShuffleG2Vector256_AvxInt32");
         }
+#endif // !REDUCE_MEMORY_USAGE
 
         /// <summary>
         /// Sum YShuffleG2 - Vector256 - Traits static.
@@ -477,7 +479,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
 #endif // BENCHMARKS_256ALGORITHM
-        #endregion // BENCHMARKS_256ALGORITHM
+#endregion // BENCHMARKS_256ALGORITHM
 
 #endif
 
