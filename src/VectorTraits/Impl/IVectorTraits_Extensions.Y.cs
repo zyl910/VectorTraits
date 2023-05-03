@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+#if !NET7_0_OR_GREATER
+using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
+#endif // !NET7_0_OR_GREATER
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -7,6 +11,225 @@ using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
 namespace Zyl.VectorTraits.Impl {
     partial class IVectorTraits_Extensions {
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2{T}(Vector{T}, Vector{T}, ShuffleControlG4)"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [CLSCompliant(false)]
+        public static (Vector<T> Result0, Vector<T> Result1) YShuffleG4X2<T>(this IVectorTraits athis, Vector<T> source0, Vector<T> source1, ShuffleControlG4 control) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector<float>)(object)source0, (Vector<float>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(double) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector<double>)(object)source0, (Vector<double>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector<sbyte>)(object)source0, (Vector<sbyte>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(byte) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector<byte>)(object)source0, (Vector<byte>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(short) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector<short>)(object)source0, (Vector<short>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector<ushort>)(object)source0, (Vector<ushort>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(int) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector<int>)(object)source0, (Vector<int>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(uint) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector<uint>)(object)source0, (Vector<uint>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(long) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector<long>)(object)source0, (Vector<long>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2((Vector<ulong>)(object)source0, (Vector<ulong>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2(Vector{float}, Vector{float}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<float> Result0, Vector<float> Result1) YShuffleG4X2(this IVectorTraits athis, Vector<float> source0, Vector<float> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2(Vector{double}, Vector{double}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<double> Result0, Vector<double> Result1) YShuffleG4X2(this IVectorTraits athis, Vector<double> source0, Vector<double> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2(Vector{sbyte}, Vector{sbyte}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<sbyte> Result0, Vector<sbyte> Result1) YShuffleG4X2(this IVectorTraits athis, Vector<sbyte> source0, Vector<sbyte> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2(Vector{byte}, Vector{byte}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<byte> Result0, Vector<byte> Result1) YShuffleG4X2(this IVectorTraits athis, Vector<byte> source0, Vector<byte> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2(Vector{short}, Vector{short}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<short> Result0, Vector<short> Result1) YShuffleG4X2(this IVectorTraits athis, Vector<short> source0, Vector<short> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2(Vector{ushort}, Vector{ushort}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<ushort> Result0, Vector<ushort> Result1) YShuffleG4X2(this IVectorTraits athis, Vector<ushort> source0, Vector<ushort> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2(Vector{int}, Vector{int}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<int> Result0, Vector<int> Result1) YShuffleG4X2(this IVectorTraits athis, Vector<int> source0, Vector<int> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2(Vector{uint}, Vector{uint}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<uint> Result0, Vector<uint> Result1) YShuffleG4X2(this IVectorTraits athis, Vector<uint> source0, Vector<uint> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2(Vector{long}, Vector{long}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<long> Result0, Vector<long> Result1) YShuffleG4X2(this IVectorTraits athis, Vector<long> source0, Vector<long> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2(Vector{ulong}, Vector{ulong}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<ulong> Result0, Vector<ulong> Result1) YShuffleG4X2(this IVectorTraits athis, Vector<ulong> source0, Vector<ulong> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2_Const{T}(Vector{T}, Vector{T}, ShuffleControlG4)"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [CLSCompliant(false)]
+        public static (Vector<T> Result0, Vector<T> Result1) YShuffleG4X2_Const<T>(this IVectorTraits athis, Vector<T> source0, Vector<T> source1, ShuffleControlG4 control) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<float>)(object)source0, (Vector<float>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(double) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<double>)(object)source0, (Vector<double>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<sbyte>)(object)source0, (Vector<sbyte>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(byte) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<byte>)(object)source0, (Vector<byte>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(short) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<short>)(object)source0, (Vector<short>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<ushort>)(object)source0, (Vector<ushort>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(int) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<int>)(object)source0, (Vector<int>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(uint) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<uint>)(object)source0, (Vector<uint>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(long) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<long>)(object)source0, (Vector<long>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<ulong>)(object)source0, (Vector<ulong>)(object)source1, control);
+                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2_Const(Vector{float}, Vector{float}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<float> Result0, Vector<float> Result1) YShuffleG4X2_Const(this IVectorTraits athis, Vector<float> source0, Vector<float> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2_Const(Vector{double}, Vector{double}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<double> Result0, Vector<double> Result1) YShuffleG4X2_Const(this IVectorTraits athis, Vector<double> source0, Vector<double> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2_Const(Vector{sbyte}, Vector{sbyte}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<sbyte> Result0, Vector<sbyte> Result1) YShuffleG4X2_Const(this IVectorTraits athis, Vector<sbyte> source0, Vector<sbyte> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2_Const(Vector{byte}, Vector{byte}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<byte> Result0, Vector<byte> Result1) YShuffleG4X2_Const(this IVectorTraits athis, Vector<byte> source0, Vector<byte> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2_Const(Vector{short}, Vector{short}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<short> Result0, Vector<short> Result1) YShuffleG4X2_Const(this IVectorTraits athis, Vector<short> source0, Vector<short> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2_Const(Vector{ushort}, Vector{ushort}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<ushort> Result0, Vector<ushort> Result1) YShuffleG4X2_Const(this IVectorTraits athis, Vector<ushort> source0, Vector<ushort> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2_Const(Vector{int}, Vector{int}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<int> Result0, Vector<int> Result1) YShuffleG4X2_Const(this IVectorTraits athis, Vector<int> source0, Vector<int> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2_Const(Vector{uint}, Vector{uint}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<uint> Result0, Vector<uint> Result1) YShuffleG4X2_Const(this IVectorTraits athis, Vector<uint> source0, Vector<uint> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2_Const(Vector{long}, Vector{long}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<long> Result0, Vector<long> Result1) YShuffleG4X2_Const(this IVectorTraits athis, Vector<long> source0, Vector<long> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
+        /// <inheritdoc cref="Vectors.YShuffleG4X2_Const(Vector{ulong}, Vector{ulong}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        public static (Vector<ulong> Result0, Vector<ulong> Result1) YShuffleG4X2_Const(this IVectorTraits athis, Vector<ulong> source0, Vector<ulong> source1, [ConstantExpected] ShuffleControlG4 control) {
+            var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
+            return (result0, result1);
+        }
+
 
         /// <inheritdoc cref="Vectors.YShuffleInsert_Args{TIdx}(Vector{TIdx}, out Vector{TIdx}, out Vector{TIdx}, out Vector{TIdx})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
