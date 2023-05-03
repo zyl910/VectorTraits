@@ -146,6 +146,27 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.Multiply_AcceleratedTypes"/>
+        public override TypeCodeFlags Multiply_AcceleratedTypes {
+            get {
+                return Statics.Multiply_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Multiply_FullAcceleratedTypes"/>
+        public override TypeCodeFlags Multiply_FullAcceleratedTypes {
+            get {
+                return Statics.Multiply_FullAcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Multiply(Vector{double}, Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> Multiply(Vector<double> left, Vector<double> right) {
+            return Statics.Multiply(left, right);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.Narrow_AcceleratedTypes"/>
         public override TypeCodeFlags Narrow_AcceleratedTypes {
             get {
