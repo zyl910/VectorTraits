@@ -10,7 +10,7 @@ namespace Zyl.VectorTraits.Impl {
     /// <summary>
     /// The constants used in <see cref="Vector256{T}"/> methods (<see cref="Vector256{T}"/> 方法所用的常数).
     /// </summary>
-    internal static class Vector256Constants {
+    public static class Vector256Constants {
 #if NETCOREAPP3_0_OR_GREATER
 
         /// <summary>ExtractMostSignificantBits - Shuffle - Get high byte of 16bit.</summary>

@@ -12,7 +12,7 @@ namespace Zyl.VectorTraits.Impl {
     /// <summary>
     /// The constants used in <see cref="Vector128{T}"/> methods (<see cref="Vector128{T}"/> 方法所用的常数).
     /// </summary>
-    internal static class Vector128Constants {
+    public static class Vector128Constants {
 #if NETCOREAPP3_0_OR_GREATER
 
         /// <summary>Serial value with rotate 8.</summary>
