@@ -192,9 +192,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                         Vector128<T> dst0, dst1;
                         foreach (IWVectorTraits128 instance in instances) {
                             if (!instance.GetIsSupported(true)) continue;
-                            dynamic dst = instance.YShuffleG4X2((dynamic)source0, (dynamic)source1, control);
-                            dst0 = dst.Item1;
-                            dst1 = dst.Item2;
+#pragma warning disable CS0618 // Type or member is obsolete
+                            (dst0, dst1) = instance.YShuffleG4X2<T>(source0, source1, control);
+#pragma warning restore CS0618 // Type or member is obsolete
                             if (allowLogItem) {
                                 // Compatible floating-point NaN.
                                 Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}-{2}, source0={3}, source1={4}, control={3}", instance.GetType().Name, dst0, dst1, source0, source1, control));
@@ -267,9 +267,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                         Vector128<T> dst0, dst1;
                         foreach (IWVectorTraits128 instance in instances) {
                             if (!instance.GetIsSupported(true)) continue;
-                            dynamic dst = instance.YShuffleG4X2_Const((dynamic)source0, (dynamic)source1, control);
-                            dst0 = dst.Item1;
-                            dst1 = dst.Item2;
+#pragma warning disable CS0618 // Type or member is obsolete
+                            (dst0, dst1) = instance.YShuffleG4X2_Const<T>(source0, source1, control);
+#pragma warning restore CS0618 // Type or member is obsolete
                             if (allowLogItem) {
                                 // Compatible floating-point NaN.
                                 Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}-{2}, source0={3}, source1={4}, control={3}", instance.GetType().Name, dst0, dst1, source0, source1, control));

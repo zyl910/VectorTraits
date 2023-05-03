@@ -11,7 +11,7 @@ namespace Zyl.VectorTraits.Impl {
     /// <summary>
     /// Extension methods of <seealso cref="IWVectorTraits128"/> (<seealso cref="IWVectorTraits128"/> 的扩展方法)
     /// </summary>
-    public static class IWVectorTraits128_Extensions {
+    public static partial class IWVectorTraits128_Extensions {
 #if NETCOREAPP3_0_OR_GREATER
 
         /// <inheritdoc cref="Vector128s.Widen{T, TOut}(Vector128{T}, out Vector128{TOut}, out Vector128{TOut})"/>
