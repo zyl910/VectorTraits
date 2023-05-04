@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -148,6 +148,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
 
         [Benchmark]
         public void SumMultiplyVectorTraits() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+            }
             dstTMy = StaticSumMultiplyVectorTraits(srcArray, srcArray.Length);
             CheckResult("SumMultiplyVectorTraits");
         }
@@ -256,6 +259,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         [Benchmark]
         public void SumMultiplyVector256Traits() {
             Vector256s.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+            }
             dstTMy = StaticSumMultiplyVector256Traits(srcArray, srcArray.Length);
             CheckResult("SumMultiplyVector256Traits");
         }

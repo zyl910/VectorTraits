@@ -102,6 +102,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.Multiply(Vector{byte}, Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> Multiply_Widen(Vector<byte> left, Vector<byte> right) {
+                // It only outperformed `Vector.Multiply` on net6 (实测发现它在 net6 下的性能才超过 `Vector.Multiply`)
                 Vector.Widen(left, out Vector<ushort> u0, out Vector<ushort> u1);
                 Vector.Widen(right, out Vector<ushort> v0, out Vector<ushort> v1);
                 Vector<ushort> w0 = Vector.Multiply(u0, v0);
