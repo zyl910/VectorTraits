@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -13,6 +13,7 @@ using System.Text;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
 using Zyl.VectorTraits.Impl.AVector128;
+using Zyl.VectorTraits.Impl.AVector256;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.W {
 #if BENCHMARKS_OFF
@@ -401,6 +402,98 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         public void SumWidenVector256Traits() {
             dstTMy = StaticSumWidenVector256Traits(srcArray, srcArray.Length);
             CheckResult("SumWidenVector256Traits");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector256 - Avx2 - ConvertTo.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TMyOut StaticSumWidenVector256Avx_ConvertTo(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMyOut> vrt = Vector256<TMyOut>.Zero; // Vector result.
+            Vector256<TMyOut> vrt1 = Vector256<TMyOut>.Zero;
+            Vector256<TMyOut> lower, upper;
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                WVectorTraits256Avx2.Statics.Widen_ConvertTo(p0, out lower, out upper);
+                vrt = WVectorTraits256Avx2.Statics.Add(vrt, lower);
+                vrt1 = WVectorTraits256Avx2.Statics.Add(vrt1, upper);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            vrt = WVectorTraits256Avx2.Statics.Add(vrt, vrt1);
+            for (i = 0; i < Vector256<TMyOut>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVector256Avx_ConvertTo() {
+            WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumWidenVector256Avx_ConvertTo(srcArray, srcArray.Length);
+            CheckResult("SumWidenVector256Avx_ConvertTo");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector256 - Avx2 - Unpack.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TMyOut StaticSumWidenVector256Avx_Unpack(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMyOut> vrt = Vector256<TMyOut>.Zero; // Vector result.
+            Vector256<TMyOut> vrt1 = Vector256<TMyOut>.Zero;
+            Vector256<TMyOut> lower, upper;
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                WVectorTraits256Avx2.Statics.Widen_Unpack(p0, out lower, out upper);
+                vrt = WVectorTraits256Avx2.Statics.Add(vrt, lower);
+                vrt1 = WVectorTraits256Avx2.Statics.Add(vrt1, upper);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            vrt = WVectorTraits256Avx2.Statics.Add(vrt, vrt1);
+            for (i = 0; i < Vector256<TMyOut>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVector256Avx_Unpack() {
+            WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumWidenVector256Avx_Unpack(srcArray, srcArray.Length);
+            CheckResult("SumWidenVector256Avx_Unpack");
         }
 
 #endif // BENCHMARKS_256ALGORITHM
