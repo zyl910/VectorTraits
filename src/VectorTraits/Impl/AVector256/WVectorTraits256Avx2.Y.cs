@@ -118,7 +118,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YNarrowSaturate(Vector256<ushort> lower, Vector256<ushort> upper) {
-                Vector256<ushort> amax = Vector256s<ushort>.VMaxByte;
+                // Vector256<ushort> amax = Vector256s<ushort>.VMaxByte;
+                Vector256<ushort> amax = Vector256.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
                 Vector256<byte> raw = Avx2.PackUnsignedSaturate(Avx2.Min(lower, amax).AsInt16(), Avx2.Min(upper, amax).AsInt16()); // bit64(x, z, y, w)
                 Vector256<byte> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
                 return rt;
@@ -136,7 +137,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YNarrowSaturate(Vector256<uint> lower, Vector256<uint> upper) {
-                Vector256<uint> amax = Vector256s<uint>.VMaxUInt16;
+                //Vector256<uint> amax = Vector256s<uint>.VMaxUInt16;
+                Vector256<uint> amax = Vector256.Create((uint)ushort.MaxValue); // .NET5+ has better performance .
                 Vector256<ushort> raw = Avx2.PackUnsignedSaturate(Avx2.Min(lower, amax).AsInt32(), Avx2.Min(upper, amax).AsInt32()); // bit64(x, z, y, w)
                 Vector256<ushort> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsUInt16(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
                 return rt;
@@ -145,8 +147,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{long}, Vector256{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> YNarrowSaturate(Vector256<long> lower, Vector256<long> upper) {
-                Vector256<long> amin = Vector256s<long>.VMinInt32;
-                Vector256<long> amax = Vector256s<long>.VMaxInt32;
+                //Vector256<long> amin = Vector256s<long>.VMinInt32;
+                //Vector256<long> amax = Vector256s<long>.VMaxInt32;
+                Vector256<long> amin = Vector256.Create((long)int.MinValue); // .NET5+ has better performance .
+                Vector256<long> amax = Vector256.Create((long)int.MaxValue);
                 Vector256<long> l = YClamp(lower, amin, amax);
                 Vector256<long> u = YClamp(upper, amin, amax);
                 return Narrow(l, u);
@@ -156,7 +160,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YNarrowSaturate(Vector256<ulong> lower, Vector256<ulong> upper) {
-                Vector256<ulong> amax = Vector256s<ulong>.VMaxUInt32;
+                //Vector256<ulong> amax = Vector256s<ulong>.VMaxUInt32;
+                Vector256<ulong> amax = Vector256.Create((ulong)uint.MaxValue); // .NET5+ has better performance .
                 Vector256<ulong> l = Min(lower, amax);
                 Vector256<ulong> u = Min(upper, amax);
                 return Narrow(l, u);
@@ -201,7 +206,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YNarrowSaturateUnsigned(Vector256<long> lower, Vector256<long> upper) {
                 Vector256<long> amin = Vector256<long>.Zero;
-                Vector256<long> amax = Vector256s<long>.VMaxUInt32;
+                //Vector256<long> amax = Vector256s<long>.VMaxUInt32;
+                Vector256<long> amax = Vector256.Create((long)uint.MaxValue); // .NET5+ has better performance .
                 Vector256<ulong> l = YClamp(lower, amin, amax).AsUInt64();
                 Vector256<ulong> u = YClamp(upper, amin, amax).AsUInt64();
                 return Narrow(l, u);

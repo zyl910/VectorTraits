@@ -737,7 +737,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<byte> YShuffleInsert_Add1(Vector256<byte> back, Vector256<byte> vector, Vector256<byte> indices) {
                 Vector256<byte> mask = Avx2.CompareGreaterThan(
                     Vector256.Create((sbyte)(32 + sbyte.MinValue)),
-                    Avx2.Add(indices.AsSByte(), Vector256s<sbyte>.MinValue)
+                    Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue))
                 ).AsByte(); // Unsigned compare: (i < 32)
                 Vector256<byte> raw = YShuffleKernel(vector, indices);
                 Vector256<byte> rt = Avx2.BlendVariable(back, raw, mask);

@@ -106,8 +106,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YNarrowSaturate(Vector256<short> lower, Vector256<short> upper) {
-                Vector256<short> amin = Vector256s<short>.VMinSByte;
-                Vector256<short> amax = Vector256s<short>.VMaxSByte;
+                //Vector256<short> amin = Vector256s<short>.VMinInt32;
+                //Vector256<short> amax = Vector256s<short>.VMaxInt32;
+                Vector256<short> amin = Vector256.Create((short)sbyte.MinValue); // .NET5+ has better performance .
+                Vector256<short> amax = Vector256.Create((short)sbyte.MaxValue);
                 Vector256<short> l = YClamp(lower, amin, amax);
                 Vector256<short> u = YClamp(upper, amin, amax);
                 return Narrow(l, u);
@@ -117,7 +119,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YNarrowSaturate(Vector256<ushort> lower, Vector256<ushort> upper) {
-                Vector256<ushort> amax = Vector256s<ushort>.VMaxByte;
+                // Vector256<ushort> amax = Vector256s<ushort>.VMaxByte;
+                Vector256<ushort> amax = Vector256.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
                 Vector256<ushort> l = Min(lower, amax);
                 Vector256<ushort> u = Min(upper, amax);
                 return Narrow(l, u);
@@ -126,8 +129,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{int}, Vector256{int})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> YNarrowSaturate(Vector256<int> lower, Vector256<int> upper) {
-                Vector256<int> amin = Vector256s<int>.VMinInt16;
-                Vector256<int> amax = Vector256s<int>.VMaxInt16;
+                //Vector256<int> amin = Vector256s<int>.VMinInt32;
+                //Vector256<int> amax = Vector256s<int>.VMaxInt32;
+                Vector256<int> amin = Vector256.Create((int)short.MinValue); // .NET5+ has better performance .
+                Vector256<int> amax = Vector256.Create((int)short.MaxValue);
                 Vector256<int> l = YClamp(lower, amin, amax);
                 Vector256<int> u = YClamp(upper, amin, amax);
                 return Narrow(l, u);
@@ -137,7 +142,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YNarrowSaturate(Vector256<uint> lower, Vector256<uint> upper) {
-                Vector256<uint> amax = Vector256s<uint>.VMaxUInt16;
+                //Vector256<uint> amax = Vector256s<uint>.VMaxUInt16;
+                Vector256<uint> amax = Vector256.Create((uint)ushort.MaxValue); // .NET5+ has better performance .
                 Vector256<uint> l = Min(lower, amax);
                 Vector256<uint> u = Min(upper, amax);
                 return Narrow(l, u);
@@ -146,8 +152,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{long}, Vector256{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> YNarrowSaturate(Vector256<long> lower, Vector256<long> upper) {
-                Vector256<long> amin = Vector256s<long>.VMinInt32;
-                Vector256<long> amax = Vector256s<long>.VMaxInt32;
+                //Vector256<long> amin = Vector256s<long>.VMinInt32;
+                //Vector256<long> amax = Vector256s<long>.VMaxInt32;
+                Vector256<long> amin = Vector256.Create((long)int.MinValue); // .NET5+ has better performance .
+                Vector256<long> amax = Vector256.Create((long)int.MaxValue);
                 Vector256<long> l = YClamp(lower, amin, amax);
                 Vector256<long> u = YClamp(upper, amin, amax);
                 return Narrow(l, u);
@@ -157,7 +165,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YNarrowSaturate(Vector256<ulong> lower, Vector256<ulong> upper) {
-                Vector256<ulong> amax = Vector256s<ulong>.VMaxUInt32;
+                //Vector256<ulong> amax = Vector256s<ulong>.VMaxUInt32;
+                Vector256<ulong> amax = Vector256.Create((ulong)uint.MaxValue); // .NET5+ has better performance .
                 Vector256<ulong> l = Min(lower, amax);
                 Vector256<ulong> u = Min(upper, amax);
                 return Narrow(l, u);
@@ -184,7 +193,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YNarrowSaturateUnsigned(Vector256<short> lower, Vector256<short> upper) {
                 Vector256<short> amin = Vector256<short>.Zero;
-                Vector256<short> amax = Vector256s<short>.VMaxByte;
+                //Vector256<short> amax = Vector256s<short>.VMaxByte;
+                Vector256<short> amax = Vector256.Create((short)byte.MaxValue); // .NET5+ has better performance .
                 Vector256<ushort> l = YClamp(lower, amin, amax).AsUInt16();
                 Vector256<ushort> u = YClamp(upper, amin, amax).AsUInt16();
                 return Narrow(l, u);
@@ -195,7 +205,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YNarrowSaturateUnsigned(Vector256<int> lower, Vector256<int> upper) {
                 Vector256<int> amin = Vector256<int>.Zero;
-                Vector256<int> amax = Vector256s<int>.VMaxUInt16;
+                //Vector256<int> amax = Vector256s<int>.VMaxUInt16;
+                Vector256<int> amax = Vector256.Create((int)ushort.MaxValue); // .NET5+ has better performance .
                 Vector256<uint> l = YClamp(lower, amin, amax).AsUInt32();
                 Vector256<uint> u = YClamp(upper, amin, amax).AsUInt32();
                 return Narrow(l, u);
@@ -206,7 +217,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YNarrowSaturateUnsigned(Vector256<long> lower, Vector256<long> upper) {
                 Vector256<long> amin = Vector256<long>.Zero;
-                Vector256<long> amax = Vector256s<long>.VMaxUInt32;
+                //Vector256<long> amax = Vector256s<long>.VMaxUInt32;
+                Vector256<long> amax = Vector256.Create((long)uint.MaxValue); // .NET5+ has better performance .
                 Vector256<ulong> l = YClamp(lower, amin, amax).AsUInt64();
                 Vector256<ulong> u = YClamp(upper, amin, amax).AsUInt64();
                 return Narrow(l, u);
