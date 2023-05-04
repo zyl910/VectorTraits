@@ -150,6 +150,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         public void SumMultiplyVectorTraits() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
             }
             dstTMy = StaticSumMultiplyVectorTraits(srcArray, srcArray.Length);
             CheckResult("SumMultiplyVectorTraits");
