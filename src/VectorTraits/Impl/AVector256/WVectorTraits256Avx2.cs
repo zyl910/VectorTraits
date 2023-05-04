@@ -369,8 +369,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> Narrow(Vector256<ushort> lower, Vector256<ushort> upper) {
-                // Vector256<ushort> mask = Vector256.Create((ushort)0x0FFU);
-                Vector256<ushort> mask = Vector256s<ushort>.VMaxByte;
+                // Vector256<ushort> mask = Vector256s<ushort>.VMaxByte;
+                Vector256<ushort> mask = Vector256.Create((ushort)0x0FFU); // .NET5+ has better performance .
                 Vector256<byte> raw = Avx2.PackUnsignedSaturate(Avx2.And(lower, mask).AsInt16(), Avx2.And(upper, mask).AsInt16()); // bit64(x, z, y, w)
                 Vector256<byte> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
                 return rt;
@@ -386,8 +386,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> Narrow(Vector256<uint> lower, Vector256<uint> upper) {
-                // Vector256<uint> mask = Vector256.Create((uint)0x0FFFFU);
-                Vector256<uint> mask = Vector256s<uint>.VMaxUInt16;
+                //Vector256<uint> mask = Vector256s<uint>.VMaxUInt16;
+                Vector256<uint> mask = Vector256.Create((uint)0x0FFFFU); // .NET5+ has better performance .
                 Vector256<ushort> raw = Avx2.PackUnsignedSaturate(Avx2.And(lower, mask).AsInt32(), Avx2.And(upper, mask).AsInt32()); // bit64(x, z, y, w)
                 Vector256<ushort> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsUInt16(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
                 return rt;
