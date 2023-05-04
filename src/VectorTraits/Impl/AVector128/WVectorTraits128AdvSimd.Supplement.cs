@@ -36,7 +36,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Abs(Vector128<double> value) {
-                return AdvSimd.BitwiseClear(value, Vector128s<double>.SignMask);
+                //var mask = Vector128s<double>.SignMask;
+                var mask = Vector128.Create((ulong)0x8000000000000000L).AsDouble(); // .NET5+ has better performance .
+                return AdvSimd.BitwiseClear(value, mask);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{sbyte})"/>

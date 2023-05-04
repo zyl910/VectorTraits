@@ -107,8 +107,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YNarrowSaturate(Vector128<short> lower, Vector128<short> upper) {
-                Vector128<short> amin = Vector128s<short>.VMinSByte;
-                Vector128<short> amax = Vector128s<short>.VMaxSByte;
+                //Vector128<short> amin = Vector128s<short>.VMinSByte;
+                //Vector128<short> amax = Vector128s<short>.VMaxSByte;
+                Vector128<short> amin = Vector128.Create((short)sbyte.MinValue); // .NET5+ has better performance .
+                Vector128<short> amax = Vector128.Create((short)sbyte.MaxValue);
                 Vector128<short> l = YClamp(lower, amin, amax);
                 Vector128<short> u = YClamp(upper, amin, amax);
                 return Narrow(l, u);
@@ -118,7 +120,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YNarrowSaturate(Vector128<ushort> lower, Vector128<ushort> upper) {
-                Vector128<ushort> amax = Vector128s<ushort>.VMaxByte;
+                // Vector128<ushort> amax = Vector128s<ushort>.VMaxByte;
+                Vector128<ushort> amax = Vector128.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
                 Vector128<ushort> l = Min(lower, amax);
                 Vector128<ushort> u = Min(upper, amax);
                 return Narrow(l, u);
@@ -127,8 +130,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate(Vector128{int}, Vector128{int})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YNarrowSaturate(Vector128<int> lower, Vector128<int> upper) {
-                Vector128<int> amin = Vector128s<int>.VMinInt16;
-                Vector128<int> amax = Vector128s<int>.VMaxInt16;
+                //Vector128<int> amin = Vector128s<int>.VMinInt16;
+                //Vector128<int> amax = Vector128s<int>.VMaxInt16;
+                Vector128<int> amin = Vector128.Create((int)short.MinValue); // .NET5+ has better performance .
+                Vector128<int> amax = Vector128.Create((int)short.MaxValue);
                 Vector128<int> l = YClamp(lower, amin, amax);
                 Vector128<int> u = YClamp(upper, amin, amax);
                 return Narrow(l, u);
@@ -138,7 +143,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YNarrowSaturate(Vector128<uint> lower, Vector128<uint> upper) {
-                Vector128<uint> amax = Vector128s<uint>.VMaxUInt16;
+                //Vector128<uint> amax = Vector128s<uint>.VMaxUInt16;
+                Vector128<uint> amax = Vector128.Create((uint)ushort.MaxValue); // .NET5+ has better performance .
                 Vector128<uint> l = Min(lower, amax);
                 Vector128<uint> u = Min(upper, amax);
                 return Narrow(l, u);
@@ -147,8 +153,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate(Vector128{long}, Vector128{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YNarrowSaturate(Vector128<long> lower, Vector128<long> upper) {
-                Vector128<long> amin = Vector128s<long>.VMinInt32;
-                Vector128<long> amax = Vector128s<long>.VMaxInt32;
+                //Vector128<long> amin = Vector128s<long>.VMinInt32;
+                //Vector128<long> amax = Vector128s<long>.VMaxInt32;
+                Vector128<long> amin = Vector128.Create((long)int.MinValue); // .NET5+ has better performance .
+                Vector128<long> amax = Vector128.Create((long)int.MaxValue);
                 Vector128<long> l = YClamp(lower, amin, amax);
                 Vector128<long> u = YClamp(upper, amin, amax);
                 return Narrow(l, u);
@@ -158,7 +166,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YNarrowSaturate(Vector128<ulong> lower, Vector128<ulong> upper) {
-                Vector128<ulong> amax = Vector128s<ulong>.VMaxUInt32;
+                //Vector128<ulong> amax = Vector128s<ulong>.VMaxUInt32;
+                Vector128<ulong> amax = Vector128.Create((ulong)uint.MaxValue); // .NET5+ has better performance .
                 Vector128<ulong> l = Min(lower, amax);
                 Vector128<ulong> u = Min(upper, amax);
                 return Narrow(l, u);
@@ -185,7 +194,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YNarrowSaturateUnsigned(Vector128<short> lower, Vector128<short> upper) {
                 Vector128<short> amin = Vector128<short>.Zero;
-                Vector128<short> amax = Vector128s<short>.VMaxByte;
+                //Vector128<short> amax = Vector128s<short>.VMaxByte;
+                Vector128<short> amax = Vector128.Create((short)byte.MaxValue); // .NET5+ has better performance .
                 Vector128<ushort> l = YClamp(lower, amin, amax).AsUInt16();
                 Vector128<ushort> u = YClamp(upper, amin, amax).AsUInt16();
                 return Narrow(l, u);
@@ -196,7 +206,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YNarrowSaturateUnsigned(Vector128<int> lower, Vector128<int> upper) {
                 Vector128<int> amin = Vector128<int>.Zero;
-                Vector128<int> amax = Vector128s<int>.VMaxUInt16;
+                //Vector128<int> amax = Vector128s<int>.VMaxUInt16;
+                Vector128<int> amax = Vector128.Create((int)ushort.MaxValue); // .NET5+ has better performance .
                 Vector128<uint> l = YClamp(lower, amin, amax).AsUInt32();
                 Vector128<uint> u = YClamp(upper, amin, amax).AsUInt32();
                 return Narrow(l, u);
@@ -207,7 +218,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YNarrowSaturateUnsigned(Vector128<long> lower, Vector128<long> upper) {
                 Vector128<long> amin = Vector128<long>.Zero;
-                Vector128<long> amax = Vector128s<long>.VMaxUInt32;
+                //Vector128<long> amax = Vector128s<long>.VMaxUInt32;
+                Vector128<long> amax = Vector128.Create((long)uint.MaxValue); // .NET5+ has better performance .
                 Vector128<ulong> l = YClamp(lower, amin, amax).AsUInt64();
                 Vector128<ulong> u = YClamp(upper, amin, amax).AsUInt64();
                 return Narrow(l, u);
