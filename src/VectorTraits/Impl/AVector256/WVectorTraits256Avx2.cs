@@ -369,8 +369,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> Narrow(Vector256<ushort> lower, Vector256<ushort> upper) {
-                // Vector256<ushort> mask = Vector256s<ushort>.VMaxByte;
-                Vector256<ushort> mask = Vector256.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
+                //Vector256<ushort> mask = Vector256s<ushort>.VMaxByte;
+                //Vector256<ushort> mask = Vector256.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
+                Vector256<ushort> mask = Vector256Constants.VMaxByte_UInt16;
                 Vector256<byte> raw = Avx2.PackUnsignedSaturate(Avx2.And(lower, mask).AsInt16(), Avx2.And(upper, mask).AsInt16()); // bit64(x, z, y, w)
                 Vector256<byte> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
                 return rt;

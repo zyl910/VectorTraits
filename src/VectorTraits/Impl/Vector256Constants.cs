@@ -16,6 +16,30 @@ namespace Zyl.VectorTraits.Impl {
         #region Vectors_T
         // == Vectors_T: originate from Vectors<T> ==
 
+        /// <summary>Value 255 (byte.MaxValue).</summary>
+        [CLSCompliant(false)]
+        public static Vector256<ushort> VMaxByte_UInt16 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector256.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
+#else
+                return Vector256s<ushort>.VMaxByte;
+#endif // NET5_0_OR_GREATER
+            }
+        }
+
+        /// <summary>Value 255 (byte.MaxValue).</summary>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> GetVMaxByte_UInt16() {
+#if NET5_0_OR_GREATER
+            return Vector256.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
+#else
+            return Vector256s<ushort>.VMaxByte;
+#endif // NET5_0_OR_GREATER
+        }
+
         #endregion // Vectors_T
 
         #region Shared
