@@ -13,6 +13,19 @@ namespace Zyl.VectorTraits.Impl {
     public static class Vector256Constants {
 #if NETCOREAPP3_0_OR_GREATER
 
+        #region Vectors_T
+        // == Vectors_T: originate from Vectors<T> ==
+
+        #endregion // Vectors_T
+
+        #region Shared
+        // == Shared ==
+
+        #endregion // Shared
+
+        #region TraitsMethod
+        // == TraitsMethod ==
+
         /// <summary>ExtractMostSignificantBits - Shuffle - Get high byte of 16bit.</summary>
         public static readonly Vector256<byte> ExtractMostSignificantBits_Shuffle_HiByteOf16 = Vector256.Create((byte)1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80);
 
@@ -93,6 +106,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>YShuffleG4 - UInt64 - The UInt32 indices.</summary>
         [CLSCompliant(false)]
         public static readonly Vector256<uint>[] YShuffleG4_UInt64_UInt32Indices = new Vector256<uint>[256];
+
+        #endregion // TraitsMethod
 
         static Vector256Constants() {
             // == YShuffleG4 ==

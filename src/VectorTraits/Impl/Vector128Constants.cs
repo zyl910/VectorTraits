@@ -15,9 +15,21 @@ namespace Zyl.VectorTraits.Impl {
     public static class Vector128Constants {
 #if NETCOREAPP3_0_OR_GREATER
 
+        #region Vectors_T
+        // == Vectors_T: originate from Vectors<T> ==
+
+        #endregion // Vectors_T
+
+        #region Shared
+        // == Shared ==
+
         /// <summary>Serial value with rotate 8.</summary>
         public static readonly Vector128<byte> SerialRotate8 = Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7);
 
+        #endregion // Shared
+
+        #region TraitsMethod
+        // == TraitsMethod ==
 
         /// <summary>Shuffle - UInt16 - The multiplier.</summary>
         [CLSCompliant(false)]
@@ -80,6 +92,8 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>YShuffleG4X2 - UInt64 - The byte indices (result0_indices0, result0_indices1, result1_indices0, result1_indices1) .</summary>
         public static readonly Vector128<byte>[] YShuffleG4X2_UInt64_ByteIndices = new Vector128<byte>[256 * 4];
+
+        #endregion // TraitsMethod
 
 
         static Vector128Constants() {
