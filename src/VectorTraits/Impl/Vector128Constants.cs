@@ -31,11 +31,30 @@ namespace Zyl.VectorTraits.Impl {
         #region TraitsMethod
         // == TraitsMethod ==
 
+#if !NET5_0_OR_GREATER
+        private static readonly Vector128<ushort> m_Shuffle_UInt16_Multiplier = Vector128.Create((ushort)0x202);
+#endif // !NET5_0_OR_GREATER
         /// <summary>Shuffle - UInt16 - The multiplier.</summary>
         [CLSCompliant(false)]
-        public static readonly Vector128<ushort> Shuffle_UInt16_Multiplier = Vector128.Create((ushort)0x202);
+        public static Vector128<ushort> Shuffle_UInt16_Multiplier {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector128.Create((ushort)0x202);
+#else
+                return m_Shuffle_UInt16_Multiplier;
+#endif // NET5_0_OR_GREATER
+            }
+        }
+
+        private static readonly Vector128<byte> m_Shuffle_UInt16_ByteOffset = Vector128s.CreateRotate<byte>(0, 1);
         /// <summary>Shuffle - UInt16 - The offset of each byte within an element.</summary>
-        public static readonly Vector128<byte> Shuffle_UInt16_ByteOffset = Vector128s.CreateRotate<byte>(0, 1);
+        public static Vector128<byte> Shuffle_UInt16_ByteOffset {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+                return m_Shuffle_UInt16_ByteOffset;
+            }
+        }
 
         /// <summary>Shuffle - UInt32 - The multiplier.</summary>
         [CLSCompliant(false)]
