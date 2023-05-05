@@ -63,6 +63,12 @@ namespace Zyl.VectorTraits {
             writer.WriteLine(indent + string.Format("Vector<byte>.Count:\t{0}\t# {1}bit", Vector<byte>.Count, Vector<byte>.Count * sizeof(byte) * 8));
             writer.WriteLine(indent + string.Format("Vector<float>.Count:\t{0}\t# {1}bit", Vector<float>.Count, Vector<float>.Count * sizeof(float) * 8));
             //writer.WriteLine(indent + string.Format("Vector<double>.Count:\t{0}\t# {1}bit", Vector<double>.Count, Vector<double>.Count * sizeof(double) * 8));
+
+            // VectorTraitsGlobal
+            VectorTraitsGlobal.Init();
+            writer.WriteLine(indent + string.Format("VectorTraitsGlobal.InitCheckSum:\t{0}\t# 0x{0:X8}", VectorTraitsGlobal.InitCheckSum));
+
+            // Assembly
 #pragma warning disable SYSLIB0012 // Type or member is obsolete
             Assembly assembly;
             //assembly = typeof(Vector4).GetTypeInfo().Assembly;

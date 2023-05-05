@@ -12,8 +12,6 @@ using System.Runtime.Intrinsics;
 #endif
 using System.Text;
 
-[assembly: CLSCompliant(true)]
-
 namespace Zyl.VectorTraits {
     /// <summary>
     /// Provides some textual instrumental functions for vectors (提供了一些向量的文本性工具函数).
