@@ -66,6 +66,78 @@ namespace Zyl.VectorTraits.Impl.Util {
 #endif // NET5_0_OR_GREATER
         }
 
+        // == My ==
+
+        /// <summary>
+        /// Get a reference to an array item, and bypass the array bounds check if possible (获取数组项目的引用, 并尽可能绕过数组边界检查).
+        /// </summary>
+        /// <typeparam name="T">Type of array item (数组项目的类型).</typeparam>
+        /// <param name="array">Source array (源数组).</param>
+        /// <param name="index">The item index (项目的索引).</param>
+        /// <returns>Return a reference to an array item (返回数组项目的引用).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ref T UncheckGetItemReference<T>(T[] array, int index) {
+#if NET5_0_OR_GREATER
+            ref var data = ref MemoryMarshal.GetArrayDataReference(array);
+            return ref Unsafe.Add(ref data, index);
+#else
+            return ref array[index];
+#endif // NET5_0_OR_GREATER
+        }
+
+        /// <summary>
+        /// Get a reference to an array item, and bypass the array bounds check if possible (获取数组项目的引用, 并尽可能绕过数组边界检查).
+        /// </summary>
+        /// <typeparam name="T">Type of array item (数组项目的类型).</typeparam>
+        /// <param name="array">Source array (源数组).</param>
+        /// <param name="index">The item index (项目的索引).</param>
+        /// <returns>Return a reference to an array item (返回数组项目的引用).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ref T UncheckGetItemReference<T>(T[] array, nint index) {
+#if NET5_0_OR_GREATER
+            ref var data = ref MemoryMarshal.GetArrayDataReference(array);
+            return ref Unsafe.Add(ref data, index);
+#else
+            return ref array[index];
+#endif // NET5_0_OR_GREATER
+        }
+
+        /// <summary>
+        /// Get a reference to an array item, and bypass the array bounds check if possible (获取数组项目的引用, 并尽可能绕过数组边界检查).
+        /// </summary>
+        /// <typeparam name="T">Type of array item (数组项目的类型).</typeparam>
+        /// <param name="array">Source array (源数组).</param>
+        /// <param name="index">The item index (项目的索引).</param>
+        /// <param name="indexMask">The index mask. When bypassing the array range check, index will do an `and` operation with this parameter (索引的掩码. 当绕过数组范围检查时, index会与本参数做 and运算).</param>
+        /// <returns>Return a reference to an array item (返回数组项目的引用).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ref T UncheckGetItemReference<T>(T[] array, int index, int indexMask) {
+#if NET5_0_OR_GREATER
+            ref var data = ref MemoryMarshal.GetArrayDataReference(array);
+            return ref Unsafe.Add(ref data, indexMask & index);
+#else
+            return ref array[index];
+#endif // NET5_0_OR_GREATER
+        }
+
+        /// <summary>
+        /// Get a reference to an array item, and bypass the array bounds check if possible (获取数组项目的引用, 并尽可能绕过数组边界检查).
+        /// </summary>
+        /// <typeparam name="T">Type of array item (数组项目的类型).</typeparam>
+        /// <param name="array">Source array (源数组).</param>
+        /// <param name="index">The item index (项目的索引).</param>
+        /// <param name="indexMask">The index mask. When bypassing the array range check, index will do an `and` operation with this parameter (索引的掩码. 当绕过数组范围检查时, index会与本参数做 and运算).</param>
+        /// <returns>Return a reference to an array item (返回数组项目的引用).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ref T UncheckGetItemReference<T>(T[] array, nint index, nint indexMask) {
+#if NET5_0_OR_GREATER
+            ref var data = ref MemoryMarshal.GetArrayDataReference(array);
+            return ref Unsafe.Add(ref data, indexMask & index);
+#else
+            return ref array[index];
+#endif // NET5_0_OR_GREATER
+        }
+
     }
 
 }

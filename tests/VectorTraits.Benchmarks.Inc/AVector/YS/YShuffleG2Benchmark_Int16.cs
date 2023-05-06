@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -186,6 +186,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         public void SumYShuffleG2VectorTraits() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
             }
             dstTMy = StaticSumYShuffleG2VectorTraits(srcArray, srcArray.Length, control);
             CheckResult("SumYShuffleG2VectorTraits");

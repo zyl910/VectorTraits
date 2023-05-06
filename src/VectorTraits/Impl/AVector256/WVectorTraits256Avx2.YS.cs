@@ -64,7 +64,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleG2(Vector256<ushort> source, ShuffleControlG2 control) {
-                Vector256<byte> indices = Vector256Constants.YShuffleG2_UInt16_ByteIndices[(int)control].AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
+                Vector256<byte> indices = Vector256Constants.GetYShuffleG2_UInt16_ByteIndices(control).AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
                 return Avx2.Shuffle(source.AsByte(), indices).AsUInt16();
             }
 

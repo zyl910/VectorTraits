@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits.Impl {
     /// <summary>
@@ -129,13 +131,17 @@ namespace Zyl.VectorTraits.Impl {
             Vector256.Create((byte)1, 1, 3, 3, 5, 5, 7, 7, 9, 9, 11, 11, 13, 13, 15, 15, 17, 17, 19, 19, 21, 21, 23, 23, 25, 25, 27, 27, 29, 29, 31, 31), // YY
         };
 
-        /// <summary>YShuffleG2 - UInt16 - The byte indices.</summary>
-        public static readonly Vector256<byte>[] YShuffleG2_UInt16_ByteIndices = {
+        private static readonly Vector256<byte>[] m_YShuffleG2_UInt16_ByteIndices = {
             Vector256.Create((byte)0, 1, 0, 1, 4, 5, 4, 5, 8, 9,  8,  9, 12, 13, 12, 13, 16, 17, 16, 17, 20, 21, 20, 21, 24, 25, 24, 25, 28, 29, 28, 29), // XX
             Vector256.Create((byte)2, 3, 0, 1, 6, 7, 4, 5, 10, 11, 8, 9, 14, 15, 12, 13, 18, 19, 16, 17, 22, 23, 20, 21, 26, 27, 24, 25, 30, 31, 28, 29), // YX
             Vector256.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31), // XY
             Vector256.Create((byte)2, 3, 2, 3, 6, 7, 6, 7,10,11, 10, 11, 14, 15, 14, 15, 18, 19, 18, 19, 22, 23, 22, 23, 26, 27, 26, 27, 30, 31, 30, 31), // YY
         };
+        /// <summary>YShuffleG2 - UInt16 - The byte indices.</summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> GetYShuffleG2_UInt16_ByteIndices(ShuffleControlG2 index) {
+            return m_YShuffleG2_UInt16_ByteIndices[(nint)(byte)index];
+        }
 
 #if !REDUCE_MEMORY_USAGE
         /// <summary>YShuffleG2 - UInt32 - The uint32 indices.</summary>
@@ -255,5 +261,5 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 #endif
-    }
+        }
 }
