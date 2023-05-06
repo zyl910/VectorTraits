@@ -23,8 +23,20 @@ namespace Zyl.VectorTraits.Impl {
         #region Shared
         // == Shared ==
 
+#if !NET5_0_OR_GREATER
+        private static readonly Vector128<byte> m_SerialRotate8 = Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7);
+#endif // !NET5_0_OR_GREATER
         /// <summary>Serial value with rotate 8.</summary>
-        public static readonly Vector128<byte> SerialRotate8 = Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7);
+        public static Vector128<byte> SerialRotate8 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7);
+#else
+                return m_SerialRotate8;
+#endif // NET5_0_OR_GREATER
+            }
+        }
 
         #endregion // Shared
 
@@ -47,26 +59,82 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+#if !NET5_0_OR_GREATER
         private static readonly Vector128<byte> m_Shuffle_UInt16_ByteOffset = Vector128s.CreateRotate<byte>(0, 1);
+#endif // !NET5_0_OR_GREATER
         /// <summary>Shuffle - UInt16 - The offset of each byte within an element.</summary>
         public static Vector128<byte> Shuffle_UInt16_ByteOffset {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
+#if NET5_0_OR_GREATER
+                return Vector128.Create((byte)0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1);
+#else
                 return m_Shuffle_UInt16_ByteOffset;
+#endif // NET5_0_OR_GREATER
             }
         }
 
+#if !NET5_0_OR_GREATER
+        private static readonly Vector128<uint> m_Shuffle_UInt32_Multiplier = Vector128.Create((uint)0x4040404U);
+#endif // !NET5_0_OR_GREATER
         /// <summary>Shuffle - UInt32 - The multiplier.</summary>
         [CLSCompliant(false)]
-        public static readonly Vector128<uint> Shuffle_UInt32_Multiplier = Vector128.Create((uint)0x4040404U);
-        /// <summary>Shuffle - UInt32 - The offset of each byte within an element.</summary>
-        public static readonly Vector128<byte> Shuffle_UInt32_ByteOffset = Vector128s.CreateRotate<byte>(0, 1, 2, 3);
+        public static Vector128<uint> Shuffle_UInt32_Multiplier {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector128.Create((uint)0x4040404U);
+#else
+                return m_Shuffle_UInt32_Multiplier;
+#endif // NET5_0_OR_GREATER
+            }
+        }
 
+#if !NET5_0_OR_GREATER
+        private static readonly Vector128<byte> m_Shuffle_UInt32_ByteOffset = Vector128s.CreateRotate<byte>(0, 1, 2, 3);
+#endif // !NET5_0_OR_GREATER
+        /// <summary>Shuffle - UInt32 - The offset of each byte within an element.</summary>
+        public static Vector128<byte> Shuffle_UInt32_ByteOffset {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector128.Create((byte)0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3);
+#else
+                return m_Shuffle_UInt32_ByteOffset;
+#endif // NET5_0_OR_GREATER
+            }
+        }
+
+#if !NET5_0_OR_GREATER
+        private static readonly Vector128<ulong> m_Shuffle_UInt64_Multiplier = Vector128.Create((ulong)0x808080808080808UL);
+#endif // !NET5_0_OR_GREATER
         /// <summary>Shuffle - UInt64 - The multiplier.</summary>
         [CLSCompliant(false)]
-        public static readonly Vector128<ulong> Shuffle_UInt64_Multiplier = Vector128.Create((ulong)0x808080808080808UL);
+        public static Vector128<ulong> Shuffle_UInt64_Multiplier {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector128.Create((ulong)0x808080808080808UL);
+#else
+                return m_Shuffle_UInt64_Multiplier;
+#endif // NET5_0_OR_GREATER
+            }
+        }
+
+#if !NET5_0_OR_GREATER
+        private static readonly Vector128<byte> m_Shuffle_UInt64_ByteOffset = Vector128s.CreateRotate<byte>(0, 1, 2, 3, 4, 5, 6, 7);
+#endif // !NET5_0_OR_GREATER
         /// <summary>Shuffle - UInt64 - The offset of each byte within an element.</summary>
-        public static readonly Vector128<byte> Shuffle_UInt64_ByteOffset = Vector128s.CreateRotate<byte>(0, 1, 2, 3, 4, 5, 6, 7);
+        public static Vector128<byte> Shuffle_UInt64_ByteOffset {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7);
+#else
+                return m_Shuffle_UInt64_ByteOffset;
+#endif // NET5_0_OR_GREATER
+            }
+        }
 
 
         /// <summary>YShuffleG2 - Byte - The indices.</summary>

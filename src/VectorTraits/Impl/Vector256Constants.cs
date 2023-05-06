@@ -39,8 +39,20 @@ namespace Zyl.VectorTraits.Impl {
         #region TraitsMethod
         // == TraitsMethod ==
 
+#if !NET5_0_OR_GREATER
+        private static readonly Vector256<byte> m_ExtractMostSignificantBits_Shuffle_HiByteOf16 = Vector256.Create((byte)1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80);
+#endif // !NET5_0_OR_GREATER
         /// <summary>ExtractMostSignificantBits - Shuffle - Get high byte of 16bit.</summary>
-        public static readonly Vector256<byte> ExtractMostSignificantBits_Shuffle_HiByteOf16 = Vector256.Create((byte)1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80);
+        public static Vector256<byte> ExtractMostSignificantBits_Shuffle_HiByteOf16 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector256.Create((byte)1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80);
+#else
+                return m_ExtractMostSignificantBits_Shuffle_HiByteOf16;
+#endif // NET5_0_OR_GREATER
+            }
+        }
 
 #if !NET5_0_OR_GREATER
         private static readonly Vector256<byte> m_Shuffle_Byte_LaneAdd_K0 = Vector256.Create(0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0);
@@ -72,18 +84,69 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+
+#if !NET5_0_OR_GREATER
+        private static readonly Vector256<ushort> m_Shuffle_UInt16_Multiplier = Vector256.Create((ushort)0x202);
+#endif // !NET5_0_OR_GREATER
         /// <summary>Shuffle - UInt16 - The multiplier.</summary>
         [CLSCompliant(false)]
-        public static readonly Vector256<ushort> Shuffle_UInt16_Multiplier = Vector256.Create((ushort)0x202);
-        /// <summary>Shuffle - UInt16 - The offset of each byte within an element.</summary>
-        public static readonly Vector256<byte> Shuffle_UInt16_ByteOffset = Vector256s.CreateRotate<byte>(0, 1);
+        public static Vector256<ushort> Shuffle_UInt16_Multiplier {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector256.Create((ushort)0x202);
+#else
+                return m_Shuffle_UInt16_Multiplier;
+#endif // NET5_0_OR_GREATER
+            }
+        }
 
+#if !NET5_0_OR_GREATER
+        private static readonly Vector256<byte> m_Shuffle_UInt16_ByteOffset = Vector256s.CreateRotate<byte>(0, 1);
+#endif // !NET5_0_OR_GREATER
+        /// <summary>Shuffle - UInt16 - The offset of each byte within an element.</summary>
+        public static Vector256<byte> Shuffle_UInt16_ByteOffset {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector256.Create((byte)0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1);
+#else
+                return m_Shuffle_UInt16_ByteOffset;
+#endif // NET5_0_OR_GREATER
+            }
+        }
+
+#if !NET5_0_OR_GREATER
+        private static readonly Vector256<ulong> m_Shuffle_UInt64_Multiplier = Vector256.Create((ulong)0x200000002UL);
+#endif // !NET5_0_OR_GREATER
         /// <summary>Shuffle - UInt64 - The multiplier.</summary>
         [CLSCompliant(false)]
-        public static readonly Vector256<ulong> Shuffle_UInt64_Multiplier = Vector256.Create((ulong)0x200000002UL);
+        public static Vector256<ulong> Shuffle_UInt64_Multiplier {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector256.Create((ulong)0x200000002UL);
+#else
+                return m_Shuffle_UInt64_Multiplier;
+#endif // NET5_0_OR_GREATER
+            }
+        }
+
+#if !NET5_0_OR_GREATER
+        private static readonly Vector256<uint> m_Shuffle_UInt64_UInt32Offset = Vector256s.CreateRotate<uint>(0, 1);
+#endif // !NET5_0_OR_GREATER
         /// <summary>Shuffle - UInt64 - The offset of each byte within an element.</summary>
         [CLSCompliant(false)]
-        public static readonly Vector256<uint> Shuffle_UInt64_UInt32Offset = Vector256s.CreateRotate<uint>(0, 1);
+        public static Vector256<uint> Shuffle_UInt64_UInt32Offset {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector256.Create((uint)0, 1, 0, 1, 0, 1, 0, 1);
+#else
+                return m_Shuffle_UInt64_UInt32Offset;
+#endif // NET5_0_OR_GREATER
+            }
+        }
 
 
         /// <summary>YShuffleG2 - Byte - The indices.</summary>
