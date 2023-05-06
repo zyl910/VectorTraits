@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 #endif
 using System.Text;
+using System.Threading;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
 
@@ -308,6 +309,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
 
         [Benchmark]
         public void SumNarrowVectorBase() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
             dstTMy = StaticSumNarrowVectorBase(srcArray, srcArray.Length);
             CheckResult("SumNarrowVectorBase");
         }
