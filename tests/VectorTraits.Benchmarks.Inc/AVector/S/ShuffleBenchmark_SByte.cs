@@ -171,7 +171,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         [Benchmark]
         public void SumShuffleVectorTraits() {
-            //Debugger.Break();
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
             dstTMy = StaticSumShuffleVectorTraits(srcArray, srcArray.Length, indices);
             CheckResult("SumShuffleVectorTraits");
         }
