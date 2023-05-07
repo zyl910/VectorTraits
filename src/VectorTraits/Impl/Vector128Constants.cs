@@ -109,48 +109,98 @@ namespace Zyl.VectorTraits.Impl {
 #endif // NET5_0_OR_GREATER
 
 
-        /// <summary>YShuffleG2 - Byte - The indices.</summary>
-        public static readonly Vector128<byte>[] YShuffleG2_Byte_Indices = {
+        private static readonly Vector128<byte>[] m_YShuffleG2_Byte_Indices = {
             Vector128.Create((byte)0, 0, 2, 2, 4, 4, 6, 6, 8, 8, 10, 10, 12, 12, 14, 14), // XX
             Vector128.Create((byte)1, 0, 3, 2, 5, 4, 7, 6, 9, 8, 11, 10, 13, 12, 15, 14), // YX
             Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), // XY
             Vector128.Create((byte)1, 1, 3, 3, 5, 5, 7, 7, 9, 9, 11, 11, 13, 13, 15, 15), // YY
         };
+        /// <summary>YShuffleG2 - Byte - The indices.</summary>
+        /// <param name="index">The index (索引).</param>
+        /// <returns>Return vector value (返回向量值).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<byte> GetYShuffleG2_Byte_Indices(ShuffleControlG2 index) {
+            return m_YShuffleG2_Byte_Indices[(nint)(byte)index];
+        }
 
-        /// <summary>YShuffleG2 - UInt16 - The byte indices.</summary>
-        public static readonly Vector128<byte>[] YShuffleG2_UInt16_ByteIndices = {
+        private static readonly Vector128<byte>[] m_YShuffleG2_UInt16_ByteIndices = {
             Vector128.Create((byte)0, 1, 0, 1, 4, 5, 4, 5, 8, 9,  8,  9, 12, 13, 12, 13), // XX
             Vector128.Create((byte)2, 3, 0, 1, 6, 7, 4, 5, 10, 11, 8, 9, 14, 15, 12, 13), // YX
             Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), // XY
             Vector128.Create((byte)2, 3, 2, 3, 6, 7, 6, 7,10,11, 10, 11, 14, 15, 14, 15), // YY
         };
+        /// <summary>YShuffleG2 - UInt16 - The byte indices.</summary>
+        /// <param name="index">The index (索引).</param>
+        /// <returns>Return vector value (返回向量值).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<byte> GetYShuffleG2_UInt16_ByteIndices(ShuffleControlG2 index) {
+            return m_YShuffleG2_UInt16_ByteIndices[(nint)(byte)index];
+        }
 
-        /// <summary>YShuffleG2 - UInt32 - The byte indices.</summary>
-        public static readonly Vector128<byte>[] YShuffleG2_UInt32_ByteIndices = {
+        private static readonly Vector128<byte>[] m_YShuffleG2_UInt32_ByteIndices = {
             Vector128.Create((byte)0, 1, 2, 3, 0, 1, 2, 3, 8, 9, 10, 11,  8,  9, 10, 11), // XX
             Vector128.Create((byte)4, 5, 6, 7, 0, 1, 2, 3, 12, 13, 14, 15, 8, 9, 10, 11), // YX
             Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), // XY
             Vector128.Create((byte)4, 5, 6, 7, 4, 5, 6, 7,12,13, 14, 15, 12, 13, 14, 15), // YY
         };
+        /// <summary>YShuffleG2 - UInt32 - The byte indices.</summary>
+        /// <param name="index">The index (索引).</param>
+        /// <returns>Return vector value (返回向量值).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<byte> GetYShuffleG2_UInt32_ByteIndices(ShuffleControlG2 index) {
+            return m_YShuffleG2_UInt32_ByteIndices[(nint)(byte)index];
+        }
 
-        /// <summary>YShuffleG2 - UInt64 - The byte indices.</summary>
-        public static readonly Vector128<byte>[] YShuffleG2_UInt64_ByteIndices = {
+        private static readonly Vector128<byte>[] m_YShuffleG2_UInt64_ByteIndices = {
             Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 0, 1,  2,  3,  4,  5,  6,  7), // XX
             Vector128.Create((byte)8, 9, 10, 11, 12, 13, 14, 15, 0, 1, 2, 3, 4, 5, 6, 7), // YX
             Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), // XY
             Vector128.Create((byte)8, 9,10,11,12,13,14,15, 8, 9, 10, 11, 12, 13, 14, 15), // YY
         };
+        /// <summary>YShuffleG2 - UInt64 - The byte indices.</summary>
+        /// <param name="index">The index (索引).</param>
+        /// <returns>Return vector value (返回向量值).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<byte> GetYShuffleG2_UInt64_ByteIndices(ShuffleControlG2 index) {
+            return m_YShuffleG2_UInt64_ByteIndices[(nint)(byte)index];
+        }
 
 
+        private static readonly Vector128<byte>[] m_YShuffleG4_Byte_Indices = new Vector128<byte>[256];
         /// <summary>YShuffleG4 - Byte - The indices.</summary>
-        public static readonly Vector128<byte>[] YShuffleG4_Byte_Indices = new Vector128<byte>[256];
-        /// <summary>YShuffleG4 - UInt16 - The byte indices.</summary>
-        public static readonly Vector128<byte>[] YShuffleG4_UInt16_ByteIndices = new Vector128<byte>[256];
-        /// <summary>YShuffleG4 - UInt32 - The byte indices.</summary>
-        public static readonly Vector128<byte>[] YShuffleG4_UInt32_ByteIndices = new Vector128<byte>[256];
+        /// <param name="index">The index (索引).</param>
+        /// <returns>Return vector value (返回向量值).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<byte> GetYShuffleG4_Byte_Indices(ShuffleControlG4 index) {
+            return m_YShuffleG4_Byte_Indices[(nint)(byte)index];
+        }
 
+        private static readonly Vector128<byte>[] m_YShuffleG4_UInt16_ByteIndices = new Vector128<byte>[256];
+        /// <summary>YShuffleG4 - UInt16 - The byte indices.</summary>
+        /// <param name="index">The index (索引).</param>
+        /// <returns>Return vector value (返回向量值).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<byte> GetYShuffleG4_UInt16_ByteIndices(ShuffleControlG4 index) {
+            return m_YShuffleG4_UInt16_ByteIndices[(nint)(byte)index];
+        }
+
+        private static readonly Vector128<byte>[] m_YShuffleG4_UInt32_ByteIndices = new Vector128<byte>[256];
+        /// <summary>YShuffleG4 - UInt32 - The byte indices.</summary>
+        /// <param name="index">The index (索引).</param>
+        /// <returns>Return vector value (返回向量值).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<byte> GetYShuffleG4_UInt32_ByteIndices(ShuffleControlG4 index) {
+            return m_YShuffleG4_UInt32_ByteIndices[(nint)(byte)index];
+        }
+
+        private static readonly Vector128<byte>[] m_YShuffleG4X2_UInt64_ByteIndices = new Vector128<byte>[256 * 4];
         /// <summary>YShuffleG4X2 - UInt64 - The byte indices (result0_indices0, result0_indices1, result1_indices0, result1_indices1) .</summary>
-        public static readonly Vector128<byte>[] YShuffleG4X2_UInt64_ByteIndices = new Vector128<byte>[256 * 4];
+        /// <param name="index">The index (索引).</param>
+        /// <returns>Returns the first reference to the four vector values(result0_indices0, result0_indices1, result1_indices0, result1_indices1) (返回4个向量值的首个引用).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ref Vector128<byte> GetYShuffleG4X2_UInt64_ByteIndices(ShuffleControlG4 index) {
+            return ref m_YShuffleG4X2_UInt64_ByteIndices[(nint)(byte)index * 4];
+        }
 
         #endregion // TraitsMethod
 
@@ -167,7 +217,7 @@ namespace Zyl.VectorTraits.Impl {
                     int selectedIndex = (i & (~3)) | ((ctl >> ((i & 3) * 2)) & 3);
                     Unsafe.Add(ref q, i) = (byte)selectedIndex;
                 }
-                YShuffleG4_Byte_Indices[ctl] = indices;
+                m_YShuffleG4_Byte_Indices[ctl] = indices;
                 // -- UInt16 --
                 //Vector128<ushort> indicesUInt16 = default;
                 //ref ushort qUInt16 = ref Unsafe.As<Vector128<ushort>, ushort>(ref indicesUInt16);
@@ -181,7 +231,7 @@ namespace Zyl.VectorTraits.Impl {
                         Unsafe.Add(ref q, idx++) = (byte)(m + j);
                     }
                 }
-                YShuffleG4_UInt16_ByteIndices[ctl] = indices;
+                m_YShuffleG4_UInt16_ByteIndices[ctl] = indices;
                 // -- UInt32 --
                 //Vector128<uint> indicesUInt32 = default;
                 //ref uint qUInt32 = ref Unsafe.As<Vector128<uint>, uint>(ref indicesUInt32);
@@ -196,7 +246,7 @@ namespace Zyl.VectorTraits.Impl {
                         Unsafe.Add(ref q, idx++) = (byte)(m + j);
                     }
                 }
-                YShuffleG4_UInt32_ByteIndices[ctl] = indices;
+                m_YShuffleG4_UInt32_ByteIndices[ctl] = indices;
                 // -- UInt64 - X2 --
                 const byte byFillZero = (byte)0xFFU; // VectorTableLookup: 0xFF is is out of range, so it will be set to 0. That can be used for the next `or` operation.
                 for (int i = 0; i < 4; ++i) {
@@ -249,7 +299,7 @@ namespace Zyl.VectorTraits.Impl {
                 for (int i = 0; i < 4; ++i) {
                     //int n = ((i & 2) >> 1) | ((i & 1) << 1);
                     int n = i;
-                    YShuffleG4X2_UInt64_ByteIndices[idx + i] = Unsafe.As<byte, Vector128<byte>>(ref vectorX4Bytes[Vector128<byte>.Count * n]);
+                    m_YShuffleG4X2_UInt64_ByteIndices[idx + i] = Unsafe.As<byte, Vector128<byte>>(ref vectorX4Bytes[Vector128<byte>.Count * n]);
                 }
             } // ctl
             // Done.

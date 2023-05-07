@@ -50,7 +50,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG2(Vector256{byte}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleG2(Vector256<byte> source, ShuffleControlG2 control) {
-                Vector256<byte> indices = Vector256Constants.YShuffleG2_Byte_Indices[(int)control]; // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
+                Vector256<byte> indices = Vector256Constants.GetYShuffleG2_Byte_Indices(control); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
                 return Avx2.Shuffle(source, indices);
             }
 
@@ -85,7 +85,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleG2_Byte(Vector256<uint> source, ShuffleControlG2 control) {
-                Vector256<byte> indices = Vector256Constants.YShuffleG2_UInt32_ByteIndices[(int)control].AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
+                Vector256<byte> indices = Vector256Constants.GetYShuffleG2_UInt32_ByteIndices(control); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
                 return Avx2.Shuffle(source.AsByte(), indices).AsUInt32();
             }
 
@@ -94,7 +94,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleG2_UInt32(Vector256<uint> source, ShuffleControlG2 control) {
-                Vector256<int> indices = Vector256Constants.YShuffleG2_UInt32_Indices[(int)control].AsInt32(); // It also supports _mm256_permutevar_ps for 128-bit lanes .
+                Vector256<int> indices = Vector256Constants.GetYShuffleG2_UInt32_Indices(control).AsInt32(); // It also supports _mm256_permutevar_ps for 128-bit lanes .
                 return Avx.PermuteVar(source.AsSingle(), indices).AsUInt32();
             }
 #endif // !REDUCE_MEMORY_USAGE
@@ -109,7 +109,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleG2(Vector256<ulong> source, ShuffleControlG2 control) {
-                Vector256<byte> indices = Vector256Constants.YShuffleG2_UInt64_ByteIndices[(int)control].AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
+                Vector256<byte> indices = Vector256Constants.GetYShuffleG2_UInt64_ByteIndices(control).AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
                 return Avx2.Shuffle(source.AsByte(), indices).AsUInt64();
             }
 
@@ -306,7 +306,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4(Vector256{byte}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleG4(Vector256<byte> source, ShuffleControlG4 control) {
-                Vector256<byte> indices = Vector256Constants.YShuffleG4_Byte_Indices[(int)control]; // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
+                Vector256<byte> indices = Vector256Constants.GetYShuffleG4_Byte_Indices(control); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
                 return Avx2.Shuffle(source, indices);
             }
 
@@ -320,7 +320,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleG4(Vector256<ushort> source, ShuffleControlG4 control) {
-                Vector256<byte> indices = Vector256Constants.YShuffleG4_UInt16_ByteIndices[(int)control].AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
+                Vector256<byte> indices = Vector256Constants.GetYShuffleG4_UInt16_ByteIndices(control).AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
                 return Avx2.Shuffle(source.AsByte(), indices).AsUInt16();
             }
 
@@ -341,7 +341,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleG4_Byte(Vector256<uint> source, ShuffleControlG4 control) {
-                Vector256<byte> indices = Vector256Constants.YShuffleG4_UInt32_ByteIndices[(int)control].AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
+                Vector256<byte> indices = Vector256Constants.GetYShuffleG4_UInt32_ByteIndices(control).AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
                 return Avx2.Shuffle(source.AsByte(), indices).AsUInt32(); // _mm256_shuffle_epi8
             }
 
@@ -350,7 +350,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleG4_UInt32(Vector256<uint> source, ShuffleControlG4 control) {
-                Vector256<int> indices = Vector256Constants.YShuffleG4_UInt32_Indices[(int)control].AsInt32(); // It also supports _mm256_permutevar_ps for 128-bit lanes .
+                Vector256<int> indices = Vector256Constants.GetYShuffleG4_UInt32_Indices(control).AsInt32(); // It also supports _mm256_permutevar_ps for 128-bit lanes .
                 return Avx.PermuteVar(source.AsSingle(), indices).AsUInt32(); // _mm256_permutevar_ps
             }
 #endif // !REDUCE_MEMORY_USAGE
@@ -365,7 +365,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleG4(Vector256<ulong> source, ShuffleControlG4 control) {
-                Vector256<uint> indices = Vector256Constants.YShuffleG4_UInt64_UInt32Indices[(int)control];
+                Vector256<uint> indices = Vector256Constants.GetYShuffleG4_UInt64_UInt32Indices(control);
                 return Avx2.PermuteVar8x32(source.AsUInt32(), indices).AsUInt64();
             }
 
@@ -558,7 +558,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4X2(Vector256{byte}, Vector256{byte}, ShuffleControlG4, out Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleG4X2(Vector256<byte> source0, Vector256<byte> source1, ShuffleControlG4 control, out Vector256<byte> result1) {
-                Vector256<byte> indices = Vector256Constants.YShuffleG4_Byte_Indices[(int)control]; // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
+                Vector256<byte> indices = Vector256Constants.GetYShuffleG4_Byte_Indices(control); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
                 var rt0 = Avx2.Shuffle(source0, indices);
                 result1 = Avx2.Shuffle(source1, indices);
                 return rt0;
@@ -576,7 +576,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleG4X2(Vector256<ushort> source0, Vector256<ushort> source1, ShuffleControlG4 control, out Vector256<ushort> result1) {
-                Vector256<byte> indices = Vector256Constants.YShuffleG4_UInt16_ByteIndices[(int)control].AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
+                Vector256<byte> indices = Vector256Constants.GetYShuffleG4_UInt16_ByteIndices(control).AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
                 var rt0 = Avx2.Shuffle(source0.AsByte(), indices).AsUInt16();
                 result1 = Avx2.Shuffle(source1.AsByte(), indices).AsUInt16();
                 return rt0;
@@ -594,7 +594,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleG4X2(Vector256<uint> source0, Vector256<uint> source1, ShuffleControlG4 control, out Vector256<uint> result1) {
-                Vector256<byte> indices = Vector256Constants.YShuffleG4_UInt32_ByteIndices[(int)control].AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
+                Vector256<byte> indices = Vector256Constants.GetYShuffleG4_UInt32_ByteIndices(control).AsByte(); // It also supports _mm256_shuffle_epi8 for 128-bit lanes .
                 var rt0 = Avx2.Shuffle(source0.AsByte(), indices).AsUInt32();
                 result1 = Avx2.Shuffle(source1.AsByte(), indices).AsUInt32();
                 return rt0;
@@ -603,7 +603,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IVectorTraits.YShuffleG4X2(Vector{long}, Vector{long}, ShuffleControlG4, out Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YShuffleG4X2(Vector256<long> source0, Vector256<long> source1, ShuffleControlG4 control, out Vector256<long> result1) {
-                Vector256<uint> indices = Vector256Constants.YShuffleG4_UInt64_UInt32Indices[(int)control];
+                Vector256<uint> indices = Vector256Constants.GetYShuffleG4_UInt64_UInt32Indices(control);
                 var rt0 = Avx2.PermuteVar8x32(source0.AsUInt32(), indices).AsInt64();
                 result1 = Avx2.PermuteVar8x32(source1.AsUInt32(), indices).AsInt64();
                 return rt0;
@@ -613,7 +613,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleG4X2(Vector256<ulong> source0, Vector256<ulong> source1, ShuffleControlG4 control, out Vector256<ulong> result1) {
-                Vector256<uint> indices = Vector256Constants.YShuffleG4_UInt64_UInt32Indices[(int)control];
+                Vector256<uint> indices = Vector256Constants.GetYShuffleG4_UInt64_UInt32Indices(control);
                 var rt0 = Avx2.PermuteVar8x32(source0.AsUInt32(), indices).AsUInt64();
                 result1 = Avx2.PermuteVar8x32(source1.AsUInt32(), indices).AsUInt64();
                 return rt0;
