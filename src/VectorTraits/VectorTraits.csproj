@@ -35,7 +35,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>$(DefineConstants);SOFTWARE_OPTIMIZATION;HARDWARE_OPTIMIZATION;BCL_OVERRIDE_BASE_FIXED;BCL_OVERRIDE_BASE_VAR;REDUCE_MEMORY_USAGE;UNSAFE</DefineConstants>
+    <DefineConstants>$(DefineConstants);SOFTWARE_OPTIMIZATION;HARDWARE_OPTIMIZATION;BCL_OVERRIDE_BASE_FIXED;BCL_OVERRIDE_BASE_VAR;REDUCE_MEMORY_USAGE;OFF_VECTOR_TUPLES;UNSAFE</DefineConstants>
 
     <Title>VectorTraits for .NET and .NET Standard</Title>
     <Product>VectorTraits</Product>

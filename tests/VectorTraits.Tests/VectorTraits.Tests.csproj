@@ -35,6 +35,7 @@
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants>$(DefineConstants);REDUCE_MEMORY_USAGE;OFF_VECTOR_TUPLES</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

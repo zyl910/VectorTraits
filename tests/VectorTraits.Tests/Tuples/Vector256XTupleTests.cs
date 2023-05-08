@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿#if !OFF_VECTOR_TUPLES
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -61,3 +62,4 @@ namespace Zyl.VectorTraits.Tests.Tuples {
 #endif // NETCOREAPP3_0_OR_GREATER
     }
 }
+#endif // !OFF_VECTOR_TUPLES

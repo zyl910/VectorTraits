@@ -5,14 +5,16 @@ using System.Diagnostics.CodeAnalysis;
 using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 #endif // !NET7_0_OR_GREATER
 using System.Runtime.CompilerServices;
+using System.Numerics;
 using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
-using Zyl.VectorTraits.Tuples;
 using static Zyl.VectorTraits.Impl.VectorMessageFormats;
-using System.Numerics;
+#if !OFF_VECTOR_TUPLES
+using Zyl.VectorTraits.Tuples;
+#endif // !OFF_VECTOR_TUPLES
 
 namespace Zyl.VectorTraits {
     static partial class Vector256s {
@@ -941,6 +943,7 @@ namespace Zyl.VectorTraits {
 
 
         // -- YShuffleKernel_ArgsX: Vector256X2 --
+#if !OFF_VECTOR_TUPLES
         /// <summary>
         /// Arguments calculation for only shuffle - X (仅换位的参数计算 - X). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
@@ -1212,6 +1215,7 @@ namespace Zyl.VectorTraits {
         public static Vector256<ulong> YShuffleKernel_Core(Vector256<ulong> vector, Vector256X2<ulong> args) {
             return YShuffleKernel_Core(vector, args.Val.Item1, args.Val.Item2);
         }
+#endif // !OFF_VECTOR_TUPLES
 
 
         // -- YShuffleKernel_Core: ValueTuple --
