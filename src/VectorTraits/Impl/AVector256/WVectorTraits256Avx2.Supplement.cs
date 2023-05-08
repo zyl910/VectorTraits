@@ -29,7 +29,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Abs(Vector256<float> value) {
                 //var mask = Vector256s<float>.SignMask;
-                var mask = Vector256.Create((uint)0x80000000U).AsSingle(); // .NET5+ has better performance .
+                var mask = Vector256Constants.SignMask_Single;
                 return Avx.AndNot(mask, value);
             }
 
@@ -37,7 +37,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> Abs(Vector256<double> value) {
                 //var mask = Vector256s<double>.SignMask;
-                var mask = Vector256.Create((ulong)0x8000000000000000L).AsDouble(); // .NET5+ has better performance .
+                var mask = Vector256Constants.SignMask_Double;
                 return Avx.AndNot(mask, value);
             }
 

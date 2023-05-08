@@ -10,6 +10,7 @@
 - BCL_OVERRIDE_BASE_VAR: 用新版 BCL 库的方法来覆盖可变长度向量的算法. 它一般需要通过分支或循环来实现，性能不一定比BCL算法优化。且能获得.NET版本更新带来的改进，故用它。
 - BCL_BASE_OVERRIDE_STATIC: 对于特性静态方法（Vectors.Traits.cs等文件）, 是否直接调用Base版的静态方法, 而不是动态调用接口方法。因为低版本.NET（< `.NET Core 3.0`）在通过接口调用封固类方法时，不会内联。实际测试后发现，`.NET Core 3.0`才开始支持“在通过接口调用封固类方法时的内联”，而且该版本才支持内在函数。
 - REDUCE_MEMORY_USAGE: 减少内存占用. 若启用它, 会屏蔽 废弃的或实验性的数据.
+- OFF_VECTOR_TUPLES: 禁用Tuples命名空间. 实测发现它的效率不佳, 故屏蔽. 预留给未来找到更好办法.
 - DRY_JOB: 性能评测时使用 DryJob , 仅运行一次快速得到汇编代码.
 - BENCHMARKS_OFF: 关闭评测 . 用于专门测试某个评测时，此时仅需专门打开某一个评测。
 - BENCHMARKS_128ALGORITHM: [废弃] 评测各种128位底层算法.

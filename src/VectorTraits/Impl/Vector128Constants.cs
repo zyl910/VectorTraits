@@ -18,6 +18,78 @@ namespace Zyl.VectorTraits.Impl {
         #region Vectors_T
         // == Vectors_T: originate from Vectors<T> ==
 
+        /// <summary>Sign mask (符号掩码) - Single.</summary>
+        public static Vector128<float> SignMask_Single {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector128.Create(0x80000000U).AsSingle(); // .NET5+ has better performance .
+#else
+                return Vector128s<float>.SignMask;
+#endif // NET5_0_OR_GREATER
+            }
+        }
+
+        /// <summary>Sign mask (符号掩码) - Double.</summary>
+        public static Vector128<double> SignMask_Double {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector128.Create(0x8000000000000000L).AsDouble();
+#else
+                return Vector128s<double>.SignMask;
+#endif // NET5_0_OR_GREATER
+            }
+        }
+
+        /// <summary>Exponent mask (指数掩码) - Single.</summary>
+        public static Vector128<float> ExponentMask_Single {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector128.Create(0x7F800000).AsSingle();
+#else
+                return Vector128s<float>.ExponentMask;
+#endif // NET5_0_OR_GREATER
+            }
+        }
+
+        /// <summary>Exponent mask (指数掩码) - Double.</summary>
+        public static Vector128<double> ExponentMask_Double {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector128.Create(0x7FF0000000000000L).AsDouble();
+#else
+                return Vector128s<double>.ExponentMask;
+#endif // NET5_0_OR_GREATER
+            }
+        }
+
+        /// <summary>Mantissa mask (尾数掩码) - Single.</summary>
+        public static Vector128<float> MantissaMask_Single {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector128.Create(0x007FFFFF).AsSingle();
+#else
+                return Vector128s<float>.MantissaMask;
+#endif // NET5_0_OR_GREATER
+            }
+        }
+
+        /// <summary>Mantissa mask (尾数掩码) - Double.</summary>
+        public static Vector128<double> MantissaMask_Double {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector128.Create(0x000FFFFFFFFFFFFFL).AsDouble();
+#else
+                return Vector128s<double>.MantissaMask;
+#endif // NET5_0_OR_GREATER
+            }
+        }
+
         #endregion // Vectors_T
 
         #region Shared

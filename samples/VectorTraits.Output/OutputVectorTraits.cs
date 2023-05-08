@@ -213,8 +213,8 @@ namespace Zyl.VectorTraits.Output {
                 //    WriteLine(writer, indent, "&Vectors<ulong>.Zero:\t0x{0:X}", (IntPtr)p);
                 //}
                 // When the return type is `ref readonly T`, you cannot get a pointer.
-                fixed (void* p = &Vectors<ulong>.V0) {
-                    WriteLine(writer, indent, "&Vectors<ulong>.V0:\t0x{0:X}", (IntPtr)p);
+                fixed (void* p = &Vectors<ulong>.Serial) {
+                    WriteLine(writer, indent, "&Vectors<ulong>.Serial:\t0x{0:X}", (IntPtr)p);
                 }
             }
             writer.WriteLine();
