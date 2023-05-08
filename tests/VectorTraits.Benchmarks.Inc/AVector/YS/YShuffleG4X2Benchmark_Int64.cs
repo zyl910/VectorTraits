@@ -192,6 +192,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         public void SumYShuffleG4X2VectorTraits() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
             }
             dstTMy = StaticSumYShuffleG4X2VectorTraits(srcArray, srcArray.Length, control);
             CheckResult("SumYShuffleG4X2VectorTraits");
@@ -489,6 +490,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         public void SumYShuffleG4X2_ConstVectorTraits() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
             }
             dstTMy = StaticSumYShuffleG4X2_ConstVectorTraits(srcArray, srcArray.Length);
             CheckResult("SumYShuffleG4X2_ConstVectorTraits");

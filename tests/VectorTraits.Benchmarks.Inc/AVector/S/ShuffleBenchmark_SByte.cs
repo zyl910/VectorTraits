@@ -274,6 +274,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("SumShuffleVectorTraits_Args");
         }
 
+#if !REDUCE_MEMORY_USAGE
         /// <summary>
         /// Sum Shuffle - Vector Traits - static if.
         /// </summary>
@@ -318,6 +319,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             dstTMy = StaticSumShuffleVectorTraitsIf(srcArray, srcArray.Length, indices);
             CheckResult("SumShuffleVectorTraitsIf");
         }
+#endif // !REDUCE_MEMORY_USAGE
 
 
 #if NETCOREAPP3_0_OR_GREATER

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !REDUCE_MEMORY_USAGE
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -173,3 +174,4 @@ namespace Zyl.VectorTraits.Impl {
 
     }
 }
+#endif // !REDUCE_MEMORY_USAGE
