@@ -816,23 +816,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.OnesComplement{T}(Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> OnesComplement<T>(Vector256<T> vector) where T : struct {
-#if NET5_0_OR_GREATER
-                var mask = Vector256<float>.AllBitsSet;
-#else
-                var mask = Vector256s<float>.AllBitsSet;
-#endif // NET5_0_OR_GREATER
-                return Avx.Xor(mask, vector.AsSingle()).As<float, T>();
+                return Avx.Xor(Vector256s<float>.AllBitsSet, vector.AsSingle()).As<float, T>();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.OnesComplement{T}(Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> OnesComplement_Byte<T>(Vector256<T> vector) where T : struct {
-#if NET5_0_OR_GREATER
-                var mask = Vector256<byte>.AllBitsSet;
-#else
-                var mask = Vector256s<byte>.AllBitsSet;
-#endif // NET5_0_OR_GREATER
-                return Avx2.Xor(mask, vector.AsByte()).As<byte, T>();
+                return Avx2.Xor(Vector256s<byte>.AllBitsSet, vector.AsByte()).As<byte, T>();
             }
 
 

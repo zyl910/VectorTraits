@@ -13,10 +13,6 @@ namespace Zyl.VectorTraits {
     /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
     public abstract class Vector128s<T> : AbstractVectors<T> where T : struct {
 #if NETCOREAPP3_0_OR_GREATER
-        /// <summary>Value 0 (0的值).</summary>
-        public static readonly Vector128<T> V0;
-        /// <summary>All bit is 1 (所有位都是1的值).</summary>
-        public static readonly Vector128<T> AllBitsSet;
         // -- Number struct --
         /// <summary>Sign mask (符号掩码).</summary>
         public static readonly Vector128<T> SignMask;
@@ -207,8 +203,6 @@ namespace Zyl.VectorTraits {
         /// Static constructor.
         /// </summary>
         static Vector128s() {
-            V0 = Vector128s.Create<T>(ElementV0);
-            AllBitsSet = Vector128s.Create<T>(ElementAllBitsSet);
             // -- Number struct --
             SignMask = Vector128s.Create<T>(ElementSignMask);
             ExponentMask = Vector128s.Create<T>(ElementExponentMask);
@@ -384,7 +378,20 @@ namespace Zyl.VectorTraits {
 
 
         /// <summary>Zero (0).</summary>
-        public static Vector128<T> Zero { get { return V0; } }
+        public static Vector128<T> Zero { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return Vector128<T>.Zero; } }
+        /// <summary>Value 0 (0的值).</summary>
+        public static Vector128<T> V0 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return Vector128<T>.Zero; } }
+        /// <summary>All bit is 1 (所有位都是1的值).</summary>
+        public static Vector128<T> AllBitsSet {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector128<T>.AllBitsSet;
+#else
+                return Vector128.Create((int)-1).As<int, T>();
+#endif // NET5_0_OR_GREATER
+            }
+        }
 
         /// <summary>1 bits mask (1位掩码).</summary>
         public static ref readonly Vector128<T> MaskBits1 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return ref GetMaskBits(1); } }

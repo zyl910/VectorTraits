@@ -847,7 +847,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Xor{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> Xor<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-                return AdvSimd.Xor(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
+                return AdvSimd.Xor(left.AsUInt32(), right.AsUInt32()).As<uint, T>();
             }
 
 
