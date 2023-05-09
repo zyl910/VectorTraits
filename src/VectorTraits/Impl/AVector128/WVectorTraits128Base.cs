@@ -1154,7 +1154,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftLeft_Fast_Base(Vector128<byte> value, int shiftAmount) {
                 Vector128<byte> rt = value;
-                ref byte p = ref Unsafe.As<Vector128<byte>, byte>(ref value);
+                ref byte p = ref Unsafe.As<Vector128<byte>, byte>(ref rt);
                 p <<= shiftAmount;
                 Unsafe.Add(ref p, 1) <<= shiftAmount;
                 Unsafe.Add(ref p, 2) <<= shiftAmount;
@@ -1178,7 +1178,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftLeft_Fast_Base(Vector128<short> value, int shiftAmount) {
                 Vector128<short> rt = value;
-                ref short p = ref Unsafe.As<Vector128<short>, short>(ref value);
+                ref short p = ref Unsafe.As<Vector128<short>, short>(ref rt);
                 p <<= shiftAmount;
                 Unsafe.Add(ref p, 1) <<= shiftAmount;
                 Unsafe.Add(ref p, 2) <<= shiftAmount;
@@ -1201,7 +1201,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftLeft_Fast_Base(Vector128<int> value, int shiftAmount) {
                 Vector128<int> rt = value;
-                ref int p = ref Unsafe.As<Vector128<int>, int>(ref value);
+                ref int p = ref Unsafe.As<Vector128<int>, int>(ref rt);
                 p <<= shiftAmount;
                 Unsafe.Add(ref p, 1) <<= shiftAmount;
                 Unsafe.Add(ref p, 2) <<= shiftAmount;
@@ -1220,7 +1220,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftLeft_Fast_Base(Vector128<long> value, int shiftAmount) {
                 Vector128<long> rt = value;
-                ref long p = ref Unsafe.As<Vector128<long>, long>(ref value);
+                ref long p = ref Unsafe.As<Vector128<long>, long>(ref rt);
                 p <<= shiftAmount;
                 Unsafe.Add(ref p, 1) <<= shiftAmount;
                 return rt;
@@ -1363,7 +1363,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic_Fast_Base(Vector128<sbyte> value, int shiftAmount) {
                 Vector128<sbyte> rt = value;
-                ref sbyte p = ref Unsafe.As<Vector128<sbyte>, sbyte>(ref value);
+                ref sbyte p = ref Unsafe.As<Vector128<sbyte>, sbyte>(ref rt);
                 p >>= shiftAmount;
                 Unsafe.Add(ref p, 1) >>= shiftAmount;
                 Unsafe.Add(ref p, 2) >>= shiftAmount;
@@ -1387,7 +1387,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_Fast_Base(Vector128<short> value, int shiftAmount) {
                 Vector128<short> rt = value;
-                ref short p = ref Unsafe.As<Vector128<short>, short>(ref value);
+                ref short p = ref Unsafe.As<Vector128<short>, short>(ref rt);
                 p >>= shiftAmount;
                 Unsafe.Add(ref p, 1) >>= shiftAmount;
                 Unsafe.Add(ref p, 2) >>= shiftAmount;
@@ -1403,7 +1403,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_Fast_Base(Vector128<int> value, int shiftAmount) {
                 Vector128<int> rt = value;
-                ref int p = ref Unsafe.As<Vector128<int>, int>(ref value);
+                ref int p = ref Unsafe.As<Vector128<int>, int>(ref rt);
                 p >>= shiftAmount;
                 Unsafe.Add(ref p, 1) >>= shiftAmount;
                 Unsafe.Add(ref p, 2) >>= shiftAmount;
@@ -1415,7 +1415,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightArithmetic_Fast_Base(Vector128<long> value, int shiftAmount) {
                 Vector128<long> rt = value;
-                ref long p = ref Unsafe.As<Vector128<long>, long>(ref value);
+                ref long p = ref Unsafe.As<Vector128<long>, long>(ref rt);
                 p >>= shiftAmount;
                 Unsafe.Add(ref p, 1) >>= shiftAmount;
                 return rt;
@@ -1674,7 +1674,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftRightLogical_Fast_Base(Vector128<byte> value, int shiftAmount) {
                 Vector128<byte> rt = value;
-                ref byte p = ref Unsafe.As<Vector128<byte>, byte>(ref value);
+                ref byte p = ref Unsafe.As<Vector128<byte>, byte>(ref rt);
                 p >>= shiftAmount;
                 Unsafe.Add(ref p, 1) >>= shiftAmount;
                 Unsafe.Add(ref p, 2) >>= shiftAmount;
@@ -1705,7 +1705,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftRightLogical_Fast_Base(Vector128<ushort> value, int shiftAmount) {
                 Vector128<ushort> rt = value;
-                ref ushort p = ref Unsafe.As<Vector128<ushort>, ushort>(ref value);
+                ref ushort p = ref Unsafe.As<Vector128<ushort>, ushort>(ref rt);
                 p >>= shiftAmount;
                 Unsafe.Add(ref p, 1) >>= shiftAmount;
                 Unsafe.Add(ref p, 2) >>= shiftAmount;
@@ -1728,7 +1728,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftRightLogical_Fast_Base(Vector128<uint> value, int shiftAmount) {
                 Vector128<uint> rt = value;
-                ref uint p = ref Unsafe.As<Vector128<uint>, uint>(ref value);
+                ref uint p = ref Unsafe.As<Vector128<uint>, uint>(ref rt);
                 p >>= shiftAmount;
                 Unsafe.Add(ref p, 1) >>= shiftAmount;
                 Unsafe.Add(ref p, 2) >>= shiftAmount;
@@ -1747,7 +1747,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftRightLogical_Fast_Base(Vector128<ulong> value, int shiftAmount) {
                 Vector128<ulong> rt = value;
-                ref ulong p = ref Unsafe.As<Vector128<ulong>, ulong>(ref value);
+                ref ulong p = ref Unsafe.As<Vector128<ulong>, ulong>(ref rt);
                 p >>= shiftAmount;
                 Unsafe.Add(ref p, 1) >>= shiftAmount;
                 return rt;
