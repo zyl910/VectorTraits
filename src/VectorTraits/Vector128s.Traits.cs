@@ -643,87 +643,87 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{sbyte}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<sbyte> ShiftLeftFast(Vector128<sbyte> value, int shiftAmount) {
+        public static Vector128<sbyte> ShiftLeft_Fast(Vector128<sbyte> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftLeftFast(value, shiftAmount);
+            return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftLeftFast(value, shiftAmount);
+            return _instance.ShiftLeft_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{byte}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<byte> ShiftLeftFast(Vector128<byte> value, int shiftAmount) {
+        public static Vector128<byte> ShiftLeft_Fast(Vector128<byte> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftLeftFast(value, shiftAmount);
+            return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftLeftFast(value, shiftAmount);
+            return _instance.ShiftLeft_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{short}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<short> ShiftLeftFast(Vector128<short> value, int shiftAmount) {
+        public static Vector128<short> ShiftLeft_Fast(Vector128<short> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftLeftFast(value, shiftAmount);
+            return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftLeftFast(value, shiftAmount);
+            return _instance.ShiftLeft_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{ushort}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{ushort}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ushort> ShiftLeftFast(Vector128<ushort> value, int shiftAmount) {
+        public static Vector128<ushort> ShiftLeft_Fast(Vector128<ushort> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftLeftFast(value, shiftAmount);
+            return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftLeftFast(value, shiftAmount);
+            return _instance.ShiftLeft_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{int}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<int> ShiftLeftFast(Vector128<int> value, int shiftAmount) {
+        public static Vector128<int> ShiftLeft_Fast(Vector128<int> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftLeftFast(value, shiftAmount);
+            return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftLeftFast(value, shiftAmount);
+            return _instance.ShiftLeft_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{uint}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{uint}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<uint> ShiftLeftFast(Vector128<uint> value, int shiftAmount) {
+        public static Vector128<uint> ShiftLeft_Fast(Vector128<uint> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftLeftFast(value, shiftAmount);
+            return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftLeftFast(value, shiftAmount);
+            return _instance.ShiftLeft_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{long}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<long> ShiftLeftFast(Vector128<long> value, int shiftAmount) {
+        public static Vector128<long> ShiftLeft_Fast(Vector128<long> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftLeftFast(value, shiftAmount);
+            return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftLeftFast(value, shiftAmount);
+            return _instance.ShiftLeft_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftLeftFast(Vector128{ulong}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{ulong}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ulong> ShiftLeftFast(Vector128<ulong> value, int shiftAmount) {
+        public static Vector128<ulong> ShiftLeft_Fast(Vector128<ulong> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftLeftFast(value, shiftAmount);
+            return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftLeftFast(value, shiftAmount);
+            return _instance.ShiftLeft_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
@@ -780,44 +780,44 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{sbyte}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<sbyte> ShiftRightArithmeticFast(Vector128<sbyte> value, int shiftAmount) {
+        public static Vector128<sbyte> ShiftRightArithmetic_Fast(Vector128<sbyte> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftRightArithmeticFast(value, shiftAmount);
+            return BaseStatics.ShiftRightArithmetic_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftRightArithmeticFast(value, shiftAmount);
+            return _instance.ShiftRightArithmetic_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{short}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<short> ShiftRightArithmeticFast(Vector128<short> value, int shiftAmount) {
+        public static Vector128<short> ShiftRightArithmetic_Fast(Vector128<short> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftRightArithmeticFast(value, shiftAmount);
+            return BaseStatics.ShiftRightArithmetic_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftRightArithmeticFast(value, shiftAmount);
+            return _instance.ShiftRightArithmetic_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{int}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<int> ShiftRightArithmeticFast(Vector128<int> value, int shiftAmount) {
+        public static Vector128<int> ShiftRightArithmetic_Fast(Vector128<int> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftRightArithmeticFast(value, shiftAmount);
+            return BaseStatics.ShiftRightArithmetic_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftRightArithmeticFast(value, shiftAmount);
+            return _instance.ShiftRightArithmetic_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmeticFast(Vector128{long}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<long> ShiftRightArithmeticFast(Vector128<long> value, int shiftAmount) {
+        public static Vector128<long> ShiftRightArithmetic_Fast(Vector128<long> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftRightArithmeticFast(value, shiftAmount);
+            return BaseStatics.ShiftRightArithmetic_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftRightArithmeticFast(value, shiftAmount);
+            return _instance.ShiftRightArithmetic_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
@@ -917,87 +917,87 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{sbyte}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<sbyte> ShiftRightLogicalFast(Vector128<sbyte> value, int shiftAmount) {
+        public static Vector128<sbyte> ShiftRightLogical_Fast(Vector128<sbyte> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
+            return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+            return _instance.ShiftRightLogical_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{byte}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<byte> ShiftRightLogicalFast(Vector128<byte> value, int shiftAmount) {
+        public static Vector128<byte> ShiftRightLogical_Fast(Vector128<byte> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
+            return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+            return _instance.ShiftRightLogical_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{short}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<short> ShiftRightLogicalFast(Vector128<short> value, int shiftAmount) {
+        public static Vector128<short> ShiftRightLogical_Fast(Vector128<short> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
+            return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+            return _instance.ShiftRightLogical_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{ushort}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{ushort}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ushort> ShiftRightLogicalFast(Vector128<ushort> value, int shiftAmount) {
+        public static Vector128<ushort> ShiftRightLogical_Fast(Vector128<ushort> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
+            return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+            return _instance.ShiftRightLogical_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{int}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<int> ShiftRightLogicalFast(Vector128<int> value, int shiftAmount) {
+        public static Vector128<int> ShiftRightLogical_Fast(Vector128<int> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
+            return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+            return _instance.ShiftRightLogical_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{uint}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{uint}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<uint> ShiftRightLogicalFast(Vector128<uint> value, int shiftAmount) {
+        public static Vector128<uint> ShiftRightLogical_Fast(Vector128<uint> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
+            return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+            return _instance.ShiftRightLogical_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{long}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<long> ShiftRightLogicalFast(Vector128<long> value, int shiftAmount) {
+        public static Vector128<long> ShiftRightLogical_Fast(Vector128<long> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
+            return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+            return _instance.ShiftRightLogical_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogicalFast(Vector128{ulong}, int)"/>
+        /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{ulong}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ulong> ShiftRightLogicalFast(Vector128<ulong> value, int shiftAmount) {
+        public static Vector128<ulong> ShiftRightLogical_Fast(Vector128<ulong> value, int shiftAmount) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.ShiftRightLogicalFast(value, shiftAmount);
+            return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
-            return _instance.ShiftRightLogicalFast(value, shiftAmount);
+            return _instance.ShiftRightLogical_Fast(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 

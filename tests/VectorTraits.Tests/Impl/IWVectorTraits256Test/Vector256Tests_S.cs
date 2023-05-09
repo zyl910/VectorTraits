@@ -59,7 +59,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
-        public void ShiftLeftFastTest<T>(T src) where T : struct {
+        public void ShiftLeft_FastTest<T>(T src) where T : struct {
             //Vector256<T> vzero = Vector256<T>.Zero;
             //T zero = default;
             int shiftAmountMax = Scalars<T>.BitSize - 1;
@@ -79,10 +79,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             };
             foreach (Vector256<T> vsrc in samples) {
                 for (int shiftAmount = 0; shiftAmount <= shiftAmountMax; ++shiftAmount) {
-                    Vector256<T> vexpected = Vector256s.ShiftLeftFast((dynamic)vsrc, shiftAmount);
+                    Vector256<T> vexpected = Vector256s.ShiftLeft_Fast((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        Vector256<T> vdst = instance.ShiftLeftFast((dynamic)vsrc, shiftAmount);
+                        Vector256<T> vdst = instance.ShiftLeft_Fast((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                 }

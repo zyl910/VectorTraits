@@ -301,57 +301,57 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.ShiftLeft(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{sbyte}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<sbyte> ShiftLeftFast(Vector<sbyte> value, int shiftAmount) {
-                return WStatics.ShiftLeftFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<sbyte> ShiftLeft_Fast(Vector<sbyte> value, int shiftAmount) {
+                return WStatics.ShiftLeft_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{byte}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{byte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<byte> ShiftLeftFast(Vector<byte> value, int shiftAmount) {
-                return WStatics.ShiftLeftFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<byte> ShiftLeft_Fast(Vector<byte> value, int shiftAmount) {
+                return WStatics.ShiftLeft_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{short}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<short> ShiftLeftFast(Vector<short> value, int shiftAmount) {
-                return WStatics.ShiftLeftFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<short> ShiftLeft_Fast(Vector<short> value, int shiftAmount) {
+                return WStatics.ShiftLeft_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{ushort}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ushort> ShiftLeftFast(Vector<ushort> value, int shiftAmount) {
-                return WStatics.ShiftLeftFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<ushort> ShiftLeft_Fast(Vector<ushort> value, int shiftAmount) {
+                return WStatics.ShiftLeft_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{int}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<int> ShiftLeftFast(Vector<int> value, int shiftAmount) {
-                return WStatics.ShiftLeftFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<int> ShiftLeft_Fast(Vector<int> value, int shiftAmount) {
+                return WStatics.ShiftLeft_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{uint}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<uint> ShiftLeftFast(Vector<uint> value, int shiftAmount) {
-                return WStatics.ShiftLeftFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<uint> ShiftLeft_Fast(Vector<uint> value, int shiftAmount) {
+                return WStatics.ShiftLeft_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{long}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<long> ShiftLeftFast(Vector<long> value, int shiftAmount) {
-                return WStatics.ShiftLeftFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<long> ShiftLeft_Fast(Vector<long> value, int shiftAmount) {
+                return WStatics.ShiftLeft_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeftFast(Vector{ulong}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ulong> ShiftLeftFast(Vector<ulong> value, int shiftAmount) {
-                return WStatics.ShiftLeftFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<ulong> ShiftLeft_Fast(Vector<ulong> value, int shiftAmount) {
+                return WStatics.ShiftLeft_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
 
@@ -387,29 +387,29 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.ShiftRightArithmetic(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{sbyte}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<sbyte> ShiftRightArithmeticFast(Vector<sbyte> value, int shiftAmount) {
-                return WStatics.ShiftRightArithmeticFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<sbyte> ShiftRightArithmetic_Fast(Vector<sbyte> value, int shiftAmount) {
+                return WStatics.ShiftRightArithmetic_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{short}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<short> ShiftRightArithmeticFast(Vector<short> value, int shiftAmount) {
-                return WStatics.ShiftRightArithmeticFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<short> ShiftRightArithmetic_Fast(Vector<short> value, int shiftAmount) {
+                return WStatics.ShiftRightArithmetic_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{int}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<int> ShiftRightArithmeticFast(Vector<int> value, int shiftAmount) {
-                return WStatics.ShiftRightArithmeticFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<int> ShiftRightArithmetic_Fast(Vector<int> value, int shiftAmount) {
+                return WStatics.ShiftRightArithmetic_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmeticFast(Vector{long}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<long> ShiftRightArithmeticFast(Vector<long> value, int shiftAmount) {
-                return WStatics.ShiftRightArithmeticFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<long> ShiftRightArithmetic_Fast(Vector<long> value, int shiftAmount) {
+                return WStatics.ShiftRightArithmetic_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
 
@@ -472,71 +472,71 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.ShiftRightLogical(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{sbyte}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<sbyte> ShiftRightLogicalFast(Vector<sbyte> value, int shiftAmount) {
-                return WStatics.ShiftRightLogicalFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<sbyte> ShiftRightLogical_Fast(Vector<sbyte> value, int shiftAmount) {
+                return WStatics.ShiftRightLogical_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{byte}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{byte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<byte> ShiftRightLogicalFast(Vector<byte> value, int shiftAmount) {
-                return WStatics.ShiftRightLogicalFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<byte> ShiftRightLogical_Fast(Vector<byte> value, int shiftAmount) {
+                return WStatics.ShiftRightLogical_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{short}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<short> ShiftRightLogicalFast(Vector<short> value, int shiftAmount) {
-                return WStatics.ShiftRightLogicalFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<short> ShiftRightLogical_Fast(Vector<short> value, int shiftAmount) {
+                return WStatics.ShiftRightLogical_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{ushort}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ushort> ShiftRightLogicalFast(Vector<ushort> value, int shiftAmount) {
-                return WStatics.ShiftRightLogicalFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<ushort> ShiftRightLogical_Fast(Vector<ushort> value, int shiftAmount) {
+                return WStatics.ShiftRightLogical_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{int}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<int> ShiftRightLogicalFast(Vector<int> value, int shiftAmount) {
-                return WStatics.ShiftRightLogicalFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<int> ShiftRightLogical_Fast(Vector<int> value, int shiftAmount) {
+                return WStatics.ShiftRightLogical_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{uint}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<uint> ShiftRightLogicalFast(Vector<uint> value, int shiftAmount) {
-                return WStatics.ShiftRightLogicalFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<uint> ShiftRightLogical_Fast(Vector<uint> value, int shiftAmount) {
+                return WStatics.ShiftRightLogical_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{long}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<long> ShiftRightLogicalFast(Vector<long> value, int shiftAmount) {
-                return WStatics.ShiftRightLogicalFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<long> ShiftRightLogical_Fast(Vector<long> value, int shiftAmount) {
+                return WStatics.ShiftRightLogical_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{ulong}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ulong> ShiftRightLogicalFast(Vector<ulong> value, int shiftAmount) {
-                return WStatics.ShiftRightLogicalFast(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<ulong> ShiftRightLogical_Fast(Vector<ulong> value, int shiftAmount) {
+                return WStatics.ShiftRightLogical_Fast(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{ulong}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ulong> ShiftRightLogicalFast_HwVar(Vector<ulong> value, int shiftAmount) {
-                return WStatics.ShiftRightLogicalFast_HwVar(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<ulong> ShiftRightLogical_Fast_HwVar(Vector<ulong> value, int shiftAmount) {
+                return WStatics.ShiftRightLogical_Fast_HwVar(value.AsVector128(), shiftAmount).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftRightLogicalFast(Vector{ulong}, int)"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ulong> ShiftRightLogicalFast_HwImm(Vector<ulong> value, int shiftAmount) {
-                return WStatics.ShiftRightLogicalFast_HwImm(value.AsVector128(), shiftAmount).AsVector();
+            public static Vector<ulong> ShiftRightLogical_Fast_HwImm(Vector<ulong> value, int shiftAmount) {
+                return WStatics.ShiftRightLogical_Fast_HwImm(value.AsVector128(), shiftAmount).AsVector();
             }
 
 

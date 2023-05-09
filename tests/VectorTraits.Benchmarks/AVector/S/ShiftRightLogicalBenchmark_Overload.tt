@@ -91,7 +91,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 // Vector processs.
                 if (0 != shiftAmount) {
                     for (i = 0; i < cntBlock; ++i) {
-                        Vector<<#=tMyName#>> vtemp = vectorTraits.ShiftRightLogicalFast(*(Vector<<#=tMyName#>>*)p, shiftAmount);
+                        Vector<<#=tMyName#>> vtemp = vectorTraits.ShiftRightLogical_Fast(*(Vector<<#=tMyName#>>*)p, shiftAmount);
                         vrt += vtemp; // Add.
                         p += nBlockWidth;
                     }

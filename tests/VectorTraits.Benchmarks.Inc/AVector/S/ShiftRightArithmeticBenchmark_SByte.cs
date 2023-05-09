@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -564,7 +564,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits128Base.Statics.ShiftRightArithmeticFast_Base(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraits128Base.Statics.ShiftRightArithmetic_Fast_Base(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -612,7 +612,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits256Base.Statics.ShiftRightArithmeticFast_Base(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraits256Base.Statics.ShiftRightArithmetic_Fast_Base(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -660,7 +660,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftRightArithmeticFast_Negative(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftRightArithmetic_Fast_Negative(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -723,7 +723,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftRightArithmeticFast(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftRightArithmetic_Fast(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -774,7 +774,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftRightArithmeticFast(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftRightArithmetic_Fast(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -827,7 +827,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = Vectors.ShiftRightArithmeticFast(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = Vectors.ShiftRightArithmetic_Fast(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -879,7 +879,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = vectorTraits.ShiftRightArithmeticFast(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = vectorTraits.ShiftRightArithmetic_Fast(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -937,7 +937,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = vectorTraits.ShiftRightArithmeticFast(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = vectorTraits.ShiftRightArithmetic_Fast(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }

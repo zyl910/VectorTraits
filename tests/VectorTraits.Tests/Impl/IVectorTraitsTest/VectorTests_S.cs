@@ -65,7 +65,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
-        public void ShiftLeftFastTest<T>(T src) where T : struct {
+        public void ShiftLeft_FastTest<T>(T src) where T : struct {
             //Vector<T> vzero = Vector<T>.Zero;
             //T zero = default;
             int shiftAmountMax = Scalars<T>.BitSize - 1;
@@ -77,7 +77,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftLeftFast_Base", "ShiftLeftFast_Multiply");
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftLeft_Fast_Base", "ShiftLeft_Fast_Multiply");
             foreach (var func in funcList) {
                 Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
@@ -89,10 +89,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             };
             foreach (Vector<T> vsrc in samples) {
                 for (int shiftAmount = 0; shiftAmount <= shiftAmountMax; ++shiftAmount) {
-                    Vector<T> vexpected = Vectors.ShiftLeftFast((dynamic)vsrc, shiftAmount);
+                    Vector<T> vexpected = Vectors.ShiftLeft_Fast((dynamic)vsrc, shiftAmount);
                     foreach (IVectorTraits instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        Vector<T> vdst = instance.ShiftLeftFast((dynamic)vsrc, shiftAmount);
+                        Vector<T> vdst = instance.ShiftLeft_Fast((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                     foreach (var func in funcList) {
@@ -152,7 +152,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
         [TestCase((short)5)]
         [TestCase((int)7)]
         [TestCase((long)9)]
-        public void ShiftRightArithmeticFastTest<T>(T src) where T : struct {
+        public void ShiftRightArithmetic_FastTest<T>(T src) where T : struct {
             //Vector<T> vzero = Vector<T>.Zero;
             //T zero = default;
             int shiftAmountMax = Scalars<T>.BitSize - 1;
@@ -164,7 +164,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftRightArithmetic_Base", "ShiftRightArithmetic_Negative", "ShiftRightArithmeticFast_Negative", "ShiftRightArithmeticFast_Widen", "ShiftRightArithmeticFast_Narrow", "ShiftRightArithmeticFast_NarrowIfLess");
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftRightArithmetic_Base", "ShiftRightArithmetic_Negative", "ShiftRightArithmetic_Fast_Negative", "ShiftRightArithmetic_Fast_Widen", "ShiftRightArithmetic_Fast_Narrow", "ShiftRightArithmetic_Fast_NarrowIfLess");
             foreach (var func in funcList) {
                 Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
@@ -176,10 +176,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             };
             foreach (Vector<T> vsrc in samples) {
                 for (int shiftAmount = 0; shiftAmount <= shiftAmountMax; ++shiftAmount) {
-                    Vector<T> vexpected = Vectors.ShiftRightArithmeticFast((dynamic)vsrc, shiftAmount);
+                    Vector<T> vexpected = Vectors.ShiftRightArithmetic_Fast((dynamic)vsrc, shiftAmount);
                     foreach (IVectorTraits instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        Vector<T> vdst = instance.ShiftRightArithmeticFast((dynamic)vsrc, shiftAmount);
+                        Vector<T> vdst = instance.ShiftRightArithmetic_Fast((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                     foreach (var func in funcList) {
@@ -246,7 +246,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
-        public void ShiftRightLogicalFastTest<T>(T src) where T : struct {
+        public void ShiftRightLogical_FastTest<T>(T src) where T : struct {
             //Vector<T> vzero = Vector<T>.Zero;
             //T zero = default;
             int shiftAmountMax = Scalars<T>.BitSize - 1;
@@ -258,7 +258,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftRightLogicalFast_Base", "ShiftRightLogicalFast_Widen");
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftRightLogical_Fast_Base", "ShiftRightLogical_Fast_Widen");
             foreach (var func in funcList) {
                 Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
@@ -270,10 +270,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             };
             foreach (Vector<T> vsrc in samples) {
                 for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
-                    Vector<T> vexpected = Vectors.ShiftRightLogicalFast((dynamic)vsrc, shiftAmount);
+                    Vector<T> vexpected = Vectors.ShiftRightLogical_Fast((dynamic)vsrc, shiftAmount);
                     foreach (IVectorTraits instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        Vector<T> vdst = instance.ShiftRightLogicalFast((dynamic)vsrc, shiftAmount);
+                        Vector<T> vdst = instance.ShiftRightLogical_Fast((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                     foreach (var func in funcList) {
