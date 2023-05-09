@@ -127,7 +127,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((short)5)]
         [TestCase((int)7)]
         [TestCase((long)9)]
-        public void ShiftRightArithmeticFastTest<T>(T src) where T : struct {
+        public void ShiftRightArithmetic_FastTest<T>(T src) where T : struct {
             //Vector256<T> vzero = Vector256<T>.Zero;
             //T zero = default;
             int shiftAmountMax = Scalars<T>.BitSize - 1;
@@ -139,7 +139,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, int, Vector256<T>>>("ShiftRightArithmeticFast_Base", "ShiftRightArithmeticFast_Negative", "ShiftRightArithmeticFast_Widen", "ShiftRightArithmeticFast_Narrow", "ShiftRightArithmeticFast_NarrowIfLess");
+            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, int, Vector256<T>>>("ShiftRightArithmetic_Fast_Base", "ShiftRightArithmetic_Fast_Negative", "ShiftRightArithmetic_Fast_Widen", "ShiftRightArithmetic_Fast_Narrow", "ShiftRightArithmetic_Fast_NarrowIfLess");
             foreach (var func in funcList) {
                 Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
@@ -151,10 +151,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             };
             foreach (Vector256<T> vsrc in samples) {
                 for (int shiftAmount = 0; shiftAmount <= shiftAmountMax; ++shiftAmount) {
-                    Vector256<T> vexpected = Vector256s.ShiftRightArithmeticFast((dynamic)vsrc, shiftAmount);
+                    Vector256<T> vexpected = Vector256s.ShiftRightArithmetic_Fast((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        Vector256<T> vdst = instance.ShiftRightArithmeticFast((dynamic)vsrc, shiftAmount);
+                        Vector256<T> vdst = instance.ShiftRightArithmetic_Fast((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                     foreach (var func in funcList) {
@@ -212,7 +212,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
-        public void ShiftRightLogicalFastTest<T>(T src) where T : struct {
+        public void ShiftRightLogical_FastTest<T>(T src) where T : struct {
             //Vector256<T> vzero = Vector256<T>.Zero;
             //T zero = default;
             int shiftAmountMax = Scalars<T>.BitSize - 1;
@@ -232,10 +232,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             };
             foreach (Vector256<T> vsrc in samples) {
                 for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
-                    Vector256<T> vexpected = Vector256s.ShiftRightLogicalFast((dynamic)vsrc, shiftAmount);
+                    Vector256<T> vexpected = Vector256s.ShiftRightLogical_Fast((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        Vector256<T> vdst = instance.ShiftRightLogicalFast((dynamic)vsrc, shiftAmount);
+                        Vector256<T> vdst = instance.ShiftRightLogical_Fast((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                 }

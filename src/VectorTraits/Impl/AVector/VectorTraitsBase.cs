@@ -814,21 +814,21 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<sbyte> ShiftLeft_Base(Vector<sbyte> value, int shiftAmount) {
+            public static Vector<sbyte> ShiftLeft_Base(Vector<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
                 return ShiftLeft_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<byte> ShiftLeft_Base(Vector<byte> value, int shiftAmount) {
+            public static Vector<byte> ShiftLeft_Base(Vector<byte> value, int shiftAmount) {
                 shiftAmount &= 7;
                 return ShiftLeft_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<short> ShiftLeft_Base(Vector<short> value, int shiftAmount) {
+            public static Vector<short> ShiftLeft_Base(Vector<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
                 return ShiftLeft_Fast_Base(value, shiftAmount);
             }
@@ -836,14 +836,14 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<ushort> ShiftLeft_Base(Vector<ushort> value, int shiftAmount) {
+            public static Vector<ushort> ShiftLeft_Base(Vector<ushort> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
                 return ShiftLeft_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<int> ShiftLeft_Base(Vector<int> value, int shiftAmount) {
+            public static Vector<int> ShiftLeft_Base(Vector<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
                 return ShiftLeft_Fast_Base(value, shiftAmount);
             }
@@ -851,14 +851,14 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<uint> ShiftLeft_Base(Vector<uint> value, int shiftAmount) {
+            public static Vector<uint> ShiftLeft_Base(Vector<uint> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
                 return ShiftLeft_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<long> ShiftLeft_Base(Vector<long> value, int shiftAmount) {
+            public static Vector<long> ShiftLeft_Base(Vector<long> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
                 return ShiftLeft_Fast_Base(value, shiftAmount);
             }
@@ -866,7 +866,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<ulong> ShiftLeft_Base(Vector<ulong> value, int shiftAmount) {
+            public static Vector<ulong> ShiftLeft_Base(Vector<ulong> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
                 return ShiftLeft_Fast_Base(value, shiftAmount);
             }
@@ -1028,30 +1028,30 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<sbyte> ShiftLeft_Fast_Base(Vector<sbyte> value, int shiftAmount) {
+            public static Vector<sbyte> ShiftLeft_Fast_Base(Vector<sbyte> value, int shiftAmount) {
                 return ShiftLeft_Fast_Base(value.AsByte(), shiftAmount).AsSByte();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<byte> ShiftLeft_Fast_Base(Vector<byte> value, int shiftAmount) {
+            public static Vector<byte> ShiftLeft_Fast_Base(Vector<byte> value, int shiftAmount) {
                 Vector<byte> rt = value;
-                int cnt = Vector<byte>.Count;
-                byte* p = (byte*)&rt;
-                for (int i = 0; i < cnt; ++i) {
-                    p[i] <<= shiftAmount;
+                ref byte p = ref Unsafe.As<Vector<byte>, byte>(ref value);
+                for (nint i = 0; i < Vector<byte>.Count; ++i) {
+                    p <<= shiftAmount;
+                    p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<short> ShiftLeft_Fast_Base(Vector<short> value, int shiftAmount) {
+            public static Vector<short> ShiftLeft_Fast_Base(Vector<short> value, int shiftAmount) {
                 Vector<short> rt = value;
-                int cnt = Vector<short>.Count;
-                short* p = (short*)&rt;
-                for (int i = 0; i < cnt; ++i) {
-                    p[i] <<= shiftAmount;
+                ref short p = ref Unsafe.As<Vector<short>, short>(ref value);
+                for (nint i = 0; i < Vector<short>.Count; ++i) {
+                    p <<= shiftAmount;
+                    p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
             }
@@ -1059,18 +1059,18 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<ushort> ShiftLeft_Fast_Base(Vector<ushort> value, int shiftAmount) {
+            public static Vector<ushort> ShiftLeft_Fast_Base(Vector<ushort> value, int shiftAmount) {
                 return ShiftLeft_Fast_Base(value.AsInt16(), shiftAmount).AsUInt16();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<int> ShiftLeft_Fast_Base(Vector<int> value, int shiftAmount) {
+            public static Vector<int> ShiftLeft_Fast_Base(Vector<int> value, int shiftAmount) {
                 Vector<int> rt = value;
-                int cnt = Vector<int>.Count;
-                int* p = (int*)&rt;
-                for (int i = 0; i < cnt; ++i) {
-                    p[i] <<= shiftAmount;
+                ref int p = ref Unsafe.As<Vector<int>, int>(ref value);
+                for (nint i = 0; i < Vector<int>.Count; ++i) {
+                    p <<= shiftAmount;
+                    p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
             }
@@ -1078,18 +1078,18 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<uint> ShiftLeft_Fast_Base(Vector<uint> value, int shiftAmount) {
+            public static Vector<uint> ShiftLeft_Fast_Base(Vector<uint> value, int shiftAmount) {
                 return ShiftLeft_Fast_Base(value.AsInt32(), shiftAmount).AsUInt32();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<long> ShiftLeft_Fast_Base(Vector<long> value, int shiftAmount) {
+            public static Vector<long> ShiftLeft_Fast_Base(Vector<long> value, int shiftAmount) {
                 Vector<long> rt = value;
-                int cnt = Vector<long>.Count;
-                long* p = (long*)&rt;
-                for (int i = 0; i < cnt; ++i) {
-                    p[i] <<= shiftAmount;
+                ref long p = ref Unsafe.As<Vector<long>, long>(ref value);
+                for (nint i = 0; i < Vector<long>.Count; ++i) {
+                    p <<= shiftAmount;
+                    p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
             }
@@ -1097,13 +1097,13 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<ulong> ShiftLeft_Fast_Base(Vector<ulong> value, int shiftAmount) {
+            public static Vector<ulong> ShiftLeft_Fast_Base(Vector<ulong> value, int shiftAmount) {
                 return ShiftLeft_Fast_Base(value.AsInt64(), shiftAmount).AsUInt64();
             }
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<sbyte> ShiftLeft_Fast_Multiply(Vector<sbyte> value, int shiftAmount) {
+            public static Vector<sbyte> ShiftLeft_Fast_Multiply(Vector<sbyte> value, int shiftAmount) {
                 return ShiftLeft_Fast_Multiply(value.AsByte(), shiftAmount).AsSByte();
             }
 
@@ -1125,7 +1125,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<ushort> ShiftLeft_Fast_Multiply(Vector<ushort> value, int shiftAmount) {
+            public static Vector<ushort> ShiftLeft_Fast_Multiply(Vector<ushort> value, int shiftAmount) {
                 return ShiftLeft_Fast_Multiply(value.AsInt16(), shiftAmount).AsUInt16();
             }
 
@@ -1139,7 +1139,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<uint> ShiftLeft_Fast_Multiply(Vector<uint> value, int shiftAmount) {
+            public static Vector<uint> ShiftLeft_Fast_Multiply(Vector<uint> value, int shiftAmount) {
                 return ShiftLeft_Fast_Multiply(value.AsInt32(), shiftAmount).AsUInt32();
             }
 
@@ -1221,28 +1221,28 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<sbyte> ShiftRightArithmetic_Base(Vector<sbyte> value, int shiftAmount) {
+            public static Vector<sbyte> ShiftRightArithmetic_Base(Vector<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
                 return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<short> ShiftRightArithmetic_Base(Vector<short> value, int shiftAmount) {
+            public static Vector<short> ShiftRightArithmetic_Base(Vector<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
                 return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<int> ShiftRightArithmetic_Base(Vector<int> value, int shiftAmount) {
+            public static Vector<int> ShiftRightArithmetic_Base(Vector<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
                 return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<long> ShiftRightArithmetic_Base(Vector<long> value, int shiftAmount) {
+            public static Vector<long> ShiftRightArithmetic_Base(Vector<long> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
                 return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
             }
@@ -1328,48 +1328,48 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<sbyte> ShiftRightArithmetic_Fast_Base(Vector<sbyte> value, int shiftAmount) {
+            public static Vector<sbyte> ShiftRightArithmetic_Fast_Base(Vector<sbyte> value, int shiftAmount) {
                 Vector<sbyte> rt = value;
-                int cnt = Vector<sbyte>.Count;
-                sbyte* p = (sbyte*)&rt;
-                for (int i = 0; i < cnt; ++i) {
-                    p[i] >>= shiftAmount;
+                ref sbyte p = ref Unsafe.As<Vector<sbyte>, sbyte>(ref value);
+                for (nint i = 0; i < Vector<sbyte>.Count; ++i) {
+                    p >>= shiftAmount;
+                    p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<short> ShiftRightArithmetic_Fast_Base(Vector<short> value, int shiftAmount) {
+            public static Vector<short> ShiftRightArithmetic_Fast_Base(Vector<short> value, int shiftAmount) {
                 Vector<short> rt = value;
-                int cnt = Vector<short>.Count;
-                short* p = (short*)&rt;
-                for (int i = 0; i < cnt; ++i) {
-                    p[i] >>= shiftAmount;
+                ref short p = ref Unsafe.As<Vector<short>, short>(ref value);
+                for (nint i = 0; i < Vector<short>.Count; ++i) {
+                    p >>= shiftAmount;
+                    p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<int> ShiftRightArithmetic_Fast_Base(Vector<int> value, int shiftAmount) {
+            public static Vector<int> ShiftRightArithmetic_Fast_Base(Vector<int> value, int shiftAmount) {
                 Vector<int> rt = value;
-                int cnt = Vector<int>.Count;
-                int* p = (int*)&rt;
-                for (int i = 0; i < cnt; ++i) {
-                    p[i] >>= shiftAmount;
+                ref int p = ref Unsafe.As<Vector<int>, int>(ref value);
+                for (nint i = 0; i < Vector<int>.Count; ++i) {
+                    p >>= shiftAmount;
+                    p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<long> ShiftRightArithmetic_Fast_Base(Vector<long> value, int shiftAmount) {
+            public static Vector<long> ShiftRightArithmetic_Fast_Base(Vector<long> value, int shiftAmount) {
                 Vector<long> rt = value;
-                int cnt = Vector<long>.Count;
-                long* p = (long*)&rt;
-                for (int i = 0; i < cnt; ++i) {
-                    p[i] >>= shiftAmount;
+                ref long p = ref Unsafe.As<Vector<long>, long>(ref value);
+                for (nint i = 0; i < Vector<long>.Count; ++i) {
+                    p >>= shiftAmount;
+                    p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
             }
@@ -1377,7 +1377,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<sbyte> ShiftRightArithmetic_Fast_Negative(Vector<sbyte> value, int shiftAmount) {
+            public static Vector<sbyte> ShiftRightArithmetic_Fast_Negative(Vector<sbyte> value, int shiftAmount) {
 #if NET7_0_OR_GREATER
                 Vector<sbyte> shifted = Vector.ShiftRightLogical(value.AsUInt16(), shiftAmount).AsSByte();
 #else
@@ -1551,21 +1551,21 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<sbyte> ShiftRightLogical_Base(Vector<sbyte> value, int shiftAmount) {
+            public static Vector<sbyte> ShiftRightLogical_Base(Vector<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<byte> ShiftRightLogical_Base(Vector<byte> value, int shiftAmount) {
+            public static Vector<byte> ShiftRightLogical_Base(Vector<byte> value, int shiftAmount) {
                 shiftAmount &= 7;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<short> ShiftRightLogical_Base(Vector<short> value, int shiftAmount) {
+            public static Vector<short> ShiftRightLogical_Base(Vector<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
@@ -1573,14 +1573,14 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<ushort> ShiftRightLogical_Base(Vector<ushort> value, int shiftAmount) {
+            public static Vector<ushort> ShiftRightLogical_Base(Vector<ushort> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<int> ShiftRightLogical_Base(Vector<int> value, int shiftAmount) {
+            public static Vector<int> ShiftRightLogical_Base(Vector<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
@@ -1588,14 +1588,14 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<uint> ShiftRightLogical_Base(Vector<uint> value, int shiftAmount) {
+            public static Vector<uint> ShiftRightLogical_Base(Vector<uint> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<long> ShiftRightLogical_Base(Vector<long> value, int shiftAmount) {
+            public static Vector<long> ShiftRightLogical_Base(Vector<long> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
@@ -1603,7 +1603,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical(Vector{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<ulong> ShiftRightLogical_Base(Vector<ulong> value, int shiftAmount) {
+            public static Vector<ulong> ShiftRightLogical_Base(Vector<ulong> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
@@ -1756,75 +1756,75 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<sbyte> ShiftRightLogical_Fast_Base(Vector<sbyte> value, int shiftAmount) {
+            public static Vector<sbyte> ShiftRightLogical_Fast_Base(Vector<sbyte> value, int shiftAmount) {
                 return ShiftRightLogical_Fast_Base(value.AsByte(), shiftAmount).AsSByte();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<byte> ShiftRightLogical_Fast_Base(Vector<byte> value, int shiftAmount) {
+            public static Vector<byte> ShiftRightLogical_Fast_Base(Vector<byte> value, int shiftAmount) {
                 Vector<byte> rt = value;
-                int cnt = Vector<byte>.Count;
-                byte* p = (byte*)&rt;
-                for (int i = 0; i < cnt; ++i) {
-                    p[i] >>= shiftAmount;
+                ref byte p = ref Unsafe.As<Vector<byte>, byte>(ref value);
+                for (nint i = 0; i < Vector<byte>.Count; ++i) {
+                    p >>= shiftAmount;
+                    p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<short> ShiftRightLogical_Fast_Base(Vector<short> value, int shiftAmount) {
+            public static Vector<short> ShiftRightLogical_Fast_Base(Vector<short> value, int shiftAmount) {
                 return ShiftRightLogical_Fast_Base(value.AsUInt16(), shiftAmount).AsInt16();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<ushort> ShiftRightLogical_Fast_Base(Vector<ushort> value, int shiftAmount) {
+            public static Vector<ushort> ShiftRightLogical_Fast_Base(Vector<ushort> value, int shiftAmount) {
                 Vector<ushort> rt = value;
-                int cnt = Vector<ushort>.Count;
-                ushort* p = (ushort*)&rt;
-                for (int i = 0; i < cnt; ++i) {
-                    p[i] >>= shiftAmount;
+                ref ushort p = ref Unsafe.As<Vector<ushort>, ushort>(ref value);
+                for (nint i = 0; i < Vector<ushort>.Count; ++i) {
+                    p >>= shiftAmount;
+                    p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<int> ShiftRightLogical_Fast_Base(Vector<int> value, int shiftAmount) {
+            public static Vector<int> ShiftRightLogical_Fast_Base(Vector<int> value, int shiftAmount) {
                 return ShiftRightLogical_Fast_Base(value.AsUInt32(), shiftAmount).AsInt32();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<uint> ShiftRightLogical_Fast_Base(Vector<uint> value, int shiftAmount) {
+            public static Vector<uint> ShiftRightLogical_Fast_Base(Vector<uint> value, int shiftAmount) {
                 Vector<uint> rt = value;
-                int cnt = Vector<uint>.Count;
-                uint* p = (uint*)&rt;
-                for (int i = 0; i < cnt; ++i) {
-                    p[i] >>= shiftAmount;
+                ref uint p = ref Unsafe.As<Vector<uint>, uint>(ref value);
+                for (nint i = 0; i < Vector<uint>.Count; ++i) {
+                    p >>= shiftAmount;
+                    p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<long> ShiftRightLogical_Fast_Base(Vector<long> value, int shiftAmount) {
+            public static Vector<long> ShiftRightLogical_Fast_Base(Vector<long> value, int shiftAmount) {
                 return ShiftRightLogical_Fast_Base(value.AsUInt64(), shiftAmount).AsInt64();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<ulong> ShiftRightLogical_Fast_Base(Vector<ulong> value, int shiftAmount) {
+            public static Vector<ulong> ShiftRightLogical_Fast_Base(Vector<ulong> value, int shiftAmount) {
                 Vector<ulong> rt = value;
-                int cnt = Vector<ulong>.Count;
-                ulong* p = (ulong*)&rt;
-                for (int i = 0; i < cnt; ++i) {
-                    p[i] >>= shiftAmount;
+                ref ulong p = ref Unsafe.As<Vector<ulong>, ulong>(ref value);
+                for (nint i = 0; i < Vector<ulong>.Count; ++i) {
+                    p >>= shiftAmount;
+                    p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
             }
@@ -1832,7 +1832,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<sbyte> ShiftRightLogical_Fast_Widen(Vector<sbyte> value, int shiftAmount) {
+            public static Vector<sbyte> ShiftRightLogical_Fast_Widen(Vector<sbyte> value, int shiftAmount) {
                 return ShiftRightLogical_Fast_Widen(value.AsByte(), shiftAmount).AsSByte();
             }
 
@@ -1857,7 +1857,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<ushort> ShiftRightLogical_Fast_Widen(Vector<ushort> value, int shiftAmount) {
+            public static Vector<ushort> ShiftRightLogical_Fast_Widen(Vector<ushort> value, int shiftAmount) {
 #if NET7_0_OR_GREATER
                 Vector<ushort> t = Vector.ShiftRightLogical(value.AsUInt64(), shiftAmount).AsUInt16();
 #else
@@ -1876,7 +1876,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Fast(Vector{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<uint> ShiftRightLogical_Fast_Widen(Vector<uint> value, int shiftAmount) {
+            public static Vector<uint> ShiftRightLogical_Fast_Widen(Vector<uint> value, int shiftAmount) {
 #if NET7_0_OR_GREATER
                 Vector<uint> t = Vector.ShiftRightLogical(value.AsUInt64(), shiftAmount).AsUInt32();
 #else

@@ -1279,114 +1279,114 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<byte> ShiftLeft_Fast_Base(Vector256<byte> value, int shiftAmount) {
+            public static Vector256<byte> ShiftLeft_Fast_Base(Vector256<byte> value, int shiftAmount) {
                 Vector256<byte> rt = value;
-                byte* p = (byte*)&rt;
-                p[0] <<= shiftAmount;
-                p[1] <<= shiftAmount;
-                p[2] <<= shiftAmount;
-                p[3] <<= shiftAmount;
-                p[4] <<= shiftAmount;
-                p[5] <<= shiftAmount;
-                p[6] <<= shiftAmount;
-                p[7] <<= shiftAmount;
-                p[8] <<= shiftAmount;
-                p[9] <<= shiftAmount;
-                p[10] <<= shiftAmount;
-                p[11] <<= shiftAmount;
-                p[12] <<= shiftAmount;
-                p[13] <<= shiftAmount;
-                p[14] <<= shiftAmount;
-                p[15] <<= shiftAmount;
-                p[16] <<= shiftAmount;
-                p[17] <<= shiftAmount;
-                p[18] <<= shiftAmount;
-                p[19] <<= shiftAmount;
-                p[20] <<= shiftAmount;
-                p[21] <<= shiftAmount;
-                p[22] <<= shiftAmount;
-                p[23] <<= shiftAmount;
-                p[24] <<= shiftAmount;
-                p[25] <<= shiftAmount;
-                p[26] <<= shiftAmount;
-                p[27] <<= shiftAmount;
-                p[28] <<= shiftAmount;
-                p[29] <<= shiftAmount;
-                p[30] <<= shiftAmount;
-                p[31] <<= shiftAmount;
+                ref byte p = ref Unsafe.As<Vector256<byte>, byte>(ref value);
+                p <<= shiftAmount;
+                Unsafe.Add(ref p, 1) <<= shiftAmount;
+                Unsafe.Add(ref p, 2) <<= shiftAmount;
+                Unsafe.Add(ref p, 3) <<= shiftAmount;
+                Unsafe.Add(ref p, 4) <<= shiftAmount;
+                Unsafe.Add(ref p, 5) <<= shiftAmount;
+                Unsafe.Add(ref p, 6) <<= shiftAmount;
+                Unsafe.Add(ref p, 7) <<= shiftAmount;
+                Unsafe.Add(ref p, 8) <<= shiftAmount;
+                Unsafe.Add(ref p, 9) <<= shiftAmount;
+                Unsafe.Add(ref p, 10) <<= shiftAmount;
+                Unsafe.Add(ref p, 11) <<= shiftAmount;
+                Unsafe.Add(ref p, 12) <<= shiftAmount;
+                Unsafe.Add(ref p, 13) <<= shiftAmount;
+                Unsafe.Add(ref p, 14) <<= shiftAmount;
+                Unsafe.Add(ref p, 15) <<= shiftAmount;
+                Unsafe.Add(ref p, 16) <<= shiftAmount;
+                Unsafe.Add(ref p, 17) <<= shiftAmount;
+                Unsafe.Add(ref p, 18) <<= shiftAmount;
+                Unsafe.Add(ref p, 19) <<= shiftAmount;
+                Unsafe.Add(ref p, 20) <<= shiftAmount;
+                Unsafe.Add(ref p, 21) <<= shiftAmount;
+                Unsafe.Add(ref p, 22) <<= shiftAmount;
+                Unsafe.Add(ref p, 23) <<= shiftAmount;
+                Unsafe.Add(ref p, 24) <<= shiftAmount;
+                Unsafe.Add(ref p, 25) <<= shiftAmount;
+                Unsafe.Add(ref p, 26) <<= shiftAmount;
+                Unsafe.Add(ref p, 27) <<= shiftAmount;
+                Unsafe.Add(ref p, 28) <<= shiftAmount;
+                Unsafe.Add(ref p, 29) <<= shiftAmount;
+                Unsafe.Add(ref p, 30) <<= shiftAmount;
+                Unsafe.Add(ref p, 31) <<= shiftAmount;
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<short> ShiftLeft_Fast_Base(Vector256<short> value, int shiftAmount) {
+            public static Vector256<short> ShiftLeft_Fast_Base(Vector256<short> value, int shiftAmount) {
                 Vector256<short> rt = value;
-                short* p = (short*)&rt;
-                p[0] <<= shiftAmount;
-                p[1] <<= shiftAmount;
-                p[2] <<= shiftAmount;
-                p[3] <<= shiftAmount;
-                p[4] <<= shiftAmount;
-                p[5] <<= shiftAmount;
-                p[6] <<= shiftAmount;
-                p[7] <<= shiftAmount;
-                p[8] <<= shiftAmount;
-                p[9] <<= shiftAmount;
-                p[10] <<= shiftAmount;
-                p[11] <<= shiftAmount;
-                p[12] <<= shiftAmount;
-                p[13] <<= shiftAmount;
-                p[14] <<= shiftAmount;
-                p[15] <<= shiftAmount;
+                ref short p = ref Unsafe.As<Vector256<short>, short>(ref value);
+                p <<= shiftAmount;
+                Unsafe.Add(ref p, 1) <<= shiftAmount;
+                Unsafe.Add(ref p, 2) <<= shiftAmount;
+                Unsafe.Add(ref p, 3) <<= shiftAmount;
+                Unsafe.Add(ref p, 4) <<= shiftAmount;
+                Unsafe.Add(ref p, 5) <<= shiftAmount;
+                Unsafe.Add(ref p, 6) <<= shiftAmount;
+                Unsafe.Add(ref p, 7) <<= shiftAmount;
+                Unsafe.Add(ref p, 8) <<= shiftAmount;
+                Unsafe.Add(ref p, 9) <<= shiftAmount;
+                Unsafe.Add(ref p, 10) <<= shiftAmount;
+                Unsafe.Add(ref p, 11) <<= shiftAmount;
+                Unsafe.Add(ref p, 12) <<= shiftAmount;
+                Unsafe.Add(ref p, 13) <<= shiftAmount;
+                Unsafe.Add(ref p, 14) <<= shiftAmount;
+                Unsafe.Add(ref p, 15) <<= shiftAmount;
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<ushort> ShiftLeft_Fast_Base(Vector256<ushort> value, int shiftAmount) {
+            public static Vector256<ushort> ShiftLeft_Fast_Base(Vector256<ushort> value, int shiftAmount) {
                 return ShiftLeft_Fast_Base(value.AsInt16(), shiftAmount).AsUInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<int> ShiftLeft_Fast_Base(Vector256<int> value, int shiftAmount) {
+            public static Vector256<int> ShiftLeft_Fast_Base(Vector256<int> value, int shiftAmount) {
                 Vector256<int> rt = value;
-                int* p = (int*)&rt;
-                p[0] <<= shiftAmount;
-                p[1] <<= shiftAmount;
-                p[2] <<= shiftAmount;
-                p[3] <<= shiftAmount;
-                p[4] <<= shiftAmount;
-                p[5] <<= shiftAmount;
-                p[6] <<= shiftAmount;
-                p[7] <<= shiftAmount;
+                ref int p = ref Unsafe.As<Vector256<int>, int>(ref value);
+                p <<= shiftAmount;
+                Unsafe.Add(ref p, 1) <<= shiftAmount;
+                Unsafe.Add(ref p, 2) <<= shiftAmount;
+                Unsafe.Add(ref p, 3) <<= shiftAmount;
+                Unsafe.Add(ref p, 4) <<= shiftAmount;
+                Unsafe.Add(ref p, 5) <<= shiftAmount;
+                Unsafe.Add(ref p, 6) <<= shiftAmount;
+                Unsafe.Add(ref p, 7) <<= shiftAmount;
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<uint> ShiftLeft_Fast_Base(Vector256<uint> value, int shiftAmount) {
+            public static Vector256<uint> ShiftLeft_Fast_Base(Vector256<uint> value, int shiftAmount) {
                 return ShiftLeft_Fast_Base(value.AsInt32(), shiftAmount).AsUInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<long> ShiftLeft_Fast_Base(Vector256<long> value, int shiftAmount) {
+            public static Vector256<long> ShiftLeft_Fast_Base(Vector256<long> value, int shiftAmount) {
                 Vector256<long> rt = value;
-                long* p = (long*)&rt;
-                p[0] <<= shiftAmount;
-                p[1] <<= shiftAmount;
-                p[2] <<= shiftAmount;
-                p[3] <<= shiftAmount;
+                ref long p = ref Unsafe.As<Vector256<long>, long>(ref value);
+                p <<= shiftAmount;
+                Unsafe.Add(ref p, 1) <<= shiftAmount;
+                Unsafe.Add(ref p, 2) <<= shiftAmount;
+                Unsafe.Add(ref p, 3) <<= shiftAmount;
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<ulong> ShiftLeft_Fast_Base(Vector256<ulong> value, int shiftAmount) {
+            public static Vector256<ulong> ShiftLeft_Fast_Base(Vector256<ulong> value, int shiftAmount) {
                 return ShiftLeft_Fast_Base(value.AsInt64(), shiftAmount).AsUInt64();
             }
 
@@ -1448,28 +1448,28 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<sbyte> ShiftRightArithmetic_Base(Vector256<sbyte> value, int shiftAmount) {
+            public static Vector256<sbyte> ShiftRightArithmetic_Base(Vector256<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
                 return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<short> ShiftRightArithmetic_Base(Vector256<short> value, int shiftAmount) {
+            public static Vector256<short> ShiftRightArithmetic_Base(Vector256<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
                 return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<int> ShiftRightArithmetic_Base(Vector256<int> value, int shiftAmount) {
+            public static Vector256<int> ShiftRightArithmetic_Base(Vector256<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
                 return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<long> ShiftRightArithmetic_Base(Vector256<long> value, int shiftAmount) {
+            public static Vector256<long> ShiftRightArithmetic_Base(Vector256<long> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
                 return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
             }
@@ -1518,93 +1518,93 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<sbyte> ShiftRightArithmetic_Fast_Base(Vector256<sbyte> value, int shiftAmount) {
+            public static Vector256<sbyte> ShiftRightArithmetic_Fast_Base(Vector256<sbyte> value, int shiftAmount) {
                 Vector256<sbyte> rt = value;
-                sbyte* p = (sbyte*)&rt;
-                p[0] >>= shiftAmount;
-                p[1] >>= shiftAmount;
-                p[2] >>= shiftAmount;
-                p[3] >>= shiftAmount;
-                p[4] >>= shiftAmount;
-                p[5] >>= shiftAmount;
-                p[6] >>= shiftAmount;
-                p[7] >>= shiftAmount;
-                p[8] >>= shiftAmount;
-                p[9] >>= shiftAmount;
-                p[10] >>= shiftAmount;
-                p[11] >>= shiftAmount;
-                p[12] >>= shiftAmount;
-                p[13] >>= shiftAmount;
-                p[14] >>= shiftAmount;
-                p[15] >>= shiftAmount;
-                p[16] >>= shiftAmount;
-                p[17] >>= shiftAmount;
-                p[18] >>= shiftAmount;
-                p[19] >>= shiftAmount;
-                p[20] >>= shiftAmount;
-                p[21] >>= shiftAmount;
-                p[22] >>= shiftAmount;
-                p[23] >>= shiftAmount;
-                p[24] >>= shiftAmount;
-                p[25] >>= shiftAmount;
-                p[26] >>= shiftAmount;
-                p[27] >>= shiftAmount;
-                p[28] >>= shiftAmount;
-                p[29] >>= shiftAmount;
-                p[30] >>= shiftAmount;
-                p[31] >>= shiftAmount;
+                ref sbyte p = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref value);
+                p >>= shiftAmount;
+                Unsafe.Add(ref p, 1) >>= shiftAmount;
+                Unsafe.Add(ref p, 2) >>= shiftAmount;
+                Unsafe.Add(ref p, 3) >>= shiftAmount;
+                Unsafe.Add(ref p, 4) >>= shiftAmount;
+                Unsafe.Add(ref p, 5) >>= shiftAmount;
+                Unsafe.Add(ref p, 6) >>= shiftAmount;
+                Unsafe.Add(ref p, 7) >>= shiftAmount;
+                Unsafe.Add(ref p, 8) >>= shiftAmount;
+                Unsafe.Add(ref p, 9) >>= shiftAmount;
+                Unsafe.Add(ref p, 10) >>= shiftAmount;
+                Unsafe.Add(ref p, 11) >>= shiftAmount;
+                Unsafe.Add(ref p, 12) >>= shiftAmount;
+                Unsafe.Add(ref p, 13) >>= shiftAmount;
+                Unsafe.Add(ref p, 14) >>= shiftAmount;
+                Unsafe.Add(ref p, 15) >>= shiftAmount;
+                Unsafe.Add(ref p, 16) >>= shiftAmount;
+                Unsafe.Add(ref p, 17) >>= shiftAmount;
+                Unsafe.Add(ref p, 18) >>= shiftAmount;
+                Unsafe.Add(ref p, 19) >>= shiftAmount;
+                Unsafe.Add(ref p, 20) >>= shiftAmount;
+                Unsafe.Add(ref p, 21) >>= shiftAmount;
+                Unsafe.Add(ref p, 22) >>= shiftAmount;
+                Unsafe.Add(ref p, 23) >>= shiftAmount;
+                Unsafe.Add(ref p, 24) >>= shiftAmount;
+                Unsafe.Add(ref p, 25) >>= shiftAmount;
+                Unsafe.Add(ref p, 26) >>= shiftAmount;
+                Unsafe.Add(ref p, 27) >>= shiftAmount;
+                Unsafe.Add(ref p, 28) >>= shiftAmount;
+                Unsafe.Add(ref p, 29) >>= shiftAmount;
+                Unsafe.Add(ref p, 30) >>= shiftAmount;
+                Unsafe.Add(ref p, 31) >>= shiftAmount;
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<short> ShiftRightArithmetic_Fast_Base(Vector256<short> value, int shiftAmount) {
+            public static Vector256<short> ShiftRightArithmetic_Fast_Base(Vector256<short> value, int shiftAmount) {
                 Vector256<short> rt = value;
-                short* p = (short*)&rt;
-                p[0] >>= shiftAmount;
-                p[1] >>= shiftAmount;
-                p[2] >>= shiftAmount;
-                p[3] >>= shiftAmount;
-                p[4] >>= shiftAmount;
-                p[5] >>= shiftAmount;
-                p[6] >>= shiftAmount;
-                p[7] >>= shiftAmount;
-                p[8] >>= shiftAmount;
-                p[9] >>= shiftAmount;
-                p[10] >>= shiftAmount;
-                p[11] >>= shiftAmount;
-                p[12] >>= shiftAmount;
-                p[13] >>= shiftAmount;
-                p[14] >>= shiftAmount;
-                p[15] >>= shiftAmount;
+                ref short p = ref Unsafe.As<Vector256<short>, short>(ref value);
+                p >>= shiftAmount;
+                Unsafe.Add(ref p, 1) >>= shiftAmount;
+                Unsafe.Add(ref p, 2) >>= shiftAmount;
+                Unsafe.Add(ref p, 3) >>= shiftAmount;
+                Unsafe.Add(ref p, 4) >>= shiftAmount;
+                Unsafe.Add(ref p, 5) >>= shiftAmount;
+                Unsafe.Add(ref p, 6) >>= shiftAmount;
+                Unsafe.Add(ref p, 7) >>= shiftAmount;
+                Unsafe.Add(ref p, 8) >>= shiftAmount;
+                Unsafe.Add(ref p, 9) >>= shiftAmount;
+                Unsafe.Add(ref p, 10) >>= shiftAmount;
+                Unsafe.Add(ref p, 11) >>= shiftAmount;
+                Unsafe.Add(ref p, 12) >>= shiftAmount;
+                Unsafe.Add(ref p, 13) >>= shiftAmount;
+                Unsafe.Add(ref p, 14) >>= shiftAmount;
+                Unsafe.Add(ref p, 15) >>= shiftAmount;
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<int> ShiftRightArithmetic_Fast_Base(Vector256<int> value, int shiftAmount) {
+            public static Vector256<int> ShiftRightArithmetic_Fast_Base(Vector256<int> value, int shiftAmount) {
                 Vector256<int> rt = value;
-                int* p = (int*)&rt;
-                p[0] >>= shiftAmount;
-                p[1] >>= shiftAmount;
-                p[2] >>= shiftAmount;
-                p[3] >>= shiftAmount;
-                p[4] >>= shiftAmount;
-                p[5] >>= shiftAmount;
-                p[6] >>= shiftAmount;
-                p[7] >>= shiftAmount;
+                ref int p = ref Unsafe.As<Vector256<int>, int>(ref value);
+                p >>= shiftAmount;
+                Unsafe.Add(ref p, 1) >>= shiftAmount;
+                Unsafe.Add(ref p, 2) >>= shiftAmount;
+                Unsafe.Add(ref p, 3) >>= shiftAmount;
+                Unsafe.Add(ref p, 4) >>= shiftAmount;
+                Unsafe.Add(ref p, 5) >>= shiftAmount;
+                Unsafe.Add(ref p, 6) >>= shiftAmount;
+                Unsafe.Add(ref p, 7) >>= shiftAmount;
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<long> ShiftRightArithmetic_Fast_Base(Vector256<long> value, int shiftAmount) {
+            public static Vector256<long> ShiftRightArithmetic_Fast_Base(Vector256<long> value, int shiftAmount) {
                 Vector256<long> rt = value;
-                long* p = (long*)&rt;
-                p[0] >>= shiftAmount;
-                p[1] >>= shiftAmount;
-                p[2] >>= shiftAmount;
-                p[3] >>= shiftAmount;
+                ref long p = ref Unsafe.As<Vector256<long>, long>(ref value);
+                p >>= shiftAmount;
+                Unsafe.Add(ref p, 1) >>= shiftAmount;
+                Unsafe.Add(ref p, 2) >>= shiftAmount;
+                Unsafe.Add(ref p, 3) >>= shiftAmount;
                 return rt;
             }
 
@@ -1709,21 +1709,21 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<sbyte> ShiftRightLogical_Base(Vector256<sbyte> value, int shiftAmount) {
+            public static Vector256<sbyte> ShiftRightLogical_Base(Vector256<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<byte> ShiftRightLogical_Base(Vector256<byte> value, int shiftAmount) {
+            public static Vector256<byte> ShiftRightLogical_Base(Vector256<byte> value, int shiftAmount) {
                 shiftAmount &= 7;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<short> ShiftRightLogical_Base(Vector256<short> value, int shiftAmount) {
+            public static Vector256<short> ShiftRightLogical_Base(Vector256<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
@@ -1731,14 +1731,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<ushort> ShiftRightLogical_Base(Vector256<ushort> value, int shiftAmount) {
+            public static Vector256<ushort> ShiftRightLogical_Base(Vector256<ushort> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<int> ShiftRightLogical_Base(Vector256<int> value, int shiftAmount) {
+            public static Vector256<int> ShiftRightLogical_Base(Vector256<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
@@ -1746,14 +1746,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<uint> ShiftRightLogical_Base(Vector256<uint> value, int shiftAmount) {
+            public static Vector256<uint> ShiftRightLogical_Base(Vector256<uint> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<long> ShiftRightLogical_Base(Vector256<long> value, int shiftAmount) {
+            public static Vector256<long> ShiftRightLogical_Base(Vector256<long> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
@@ -1761,7 +1761,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<ulong> ShiftRightLogical_Base(Vector256<ulong> value, int shiftAmount) {
+            public static Vector256<ulong> ShiftRightLogical_Base(Vector256<ulong> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
                 return ShiftRightLogical_Fast_Base(value, shiftAmount);
             }
@@ -1853,120 +1853,120 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<sbyte> ShiftRightLogical_Fast_Base(Vector256<sbyte> value, int shiftAmount) {
+            public static Vector256<sbyte> ShiftRightLogical_Fast_Base(Vector256<sbyte> value, int shiftAmount) {
                 return ShiftRightLogical_Fast_Base(value.AsByte(), shiftAmount).AsSByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<byte> ShiftRightLogical_Fast_Base(Vector256<byte> value, int shiftAmount) {
+            public static Vector256<byte> ShiftRightLogical_Fast_Base(Vector256<byte> value, int shiftAmount) {
                 Vector256<byte> rt = value;
-                byte* p = (byte*)&rt;
-                p[0] >>= shiftAmount;
-                p[1] >>= shiftAmount;
-                p[2] >>= shiftAmount;
-                p[3] >>= shiftAmount;
-                p[4] >>= shiftAmount;
-                p[5] >>= shiftAmount;
-                p[6] >>= shiftAmount;
-                p[7] >>= shiftAmount;
-                p[8] >>= shiftAmount;
-                p[9] >>= shiftAmount;
-                p[10] >>= shiftAmount;
-                p[11] >>= shiftAmount;
-                p[12] >>= shiftAmount;
-                p[13] >>= shiftAmount;
-                p[14] >>= shiftAmount;
-                p[15] >>= shiftAmount;
-                p[16] >>= shiftAmount;
-                p[17] >>= shiftAmount;
-                p[18] >>= shiftAmount;
-                p[19] >>= shiftAmount;
-                p[20] >>= shiftAmount;
-                p[21] >>= shiftAmount;
-                p[22] >>= shiftAmount;
-                p[23] >>= shiftAmount;
-                p[24] >>= shiftAmount;
-                p[25] >>= shiftAmount;
-                p[26] >>= shiftAmount;
-                p[27] >>= shiftAmount;
-                p[28] >>= shiftAmount;
-                p[29] >>= shiftAmount;
-                p[30] >>= shiftAmount;
-                p[31] >>= shiftAmount;
+                ref byte p = ref Unsafe.As<Vector256<byte>, byte>(ref value);
+                p >>= shiftAmount;
+                Unsafe.Add(ref p, 1) >>= shiftAmount;
+                Unsafe.Add(ref p, 2) >>= shiftAmount;
+                Unsafe.Add(ref p, 3) >>= shiftAmount;
+                Unsafe.Add(ref p, 4) >>= shiftAmount;
+                Unsafe.Add(ref p, 5) >>= shiftAmount;
+                Unsafe.Add(ref p, 6) >>= shiftAmount;
+                Unsafe.Add(ref p, 7) >>= shiftAmount;
+                Unsafe.Add(ref p, 8) >>= shiftAmount;
+                Unsafe.Add(ref p, 9) >>= shiftAmount;
+                Unsafe.Add(ref p, 10) >>= shiftAmount;
+                Unsafe.Add(ref p, 11) >>= shiftAmount;
+                Unsafe.Add(ref p, 12) >>= shiftAmount;
+                Unsafe.Add(ref p, 13) >>= shiftAmount;
+                Unsafe.Add(ref p, 14) >>= shiftAmount;
+                Unsafe.Add(ref p, 15) >>= shiftAmount;
+                Unsafe.Add(ref p, 16) >>= shiftAmount;
+                Unsafe.Add(ref p, 17) >>= shiftAmount;
+                Unsafe.Add(ref p, 18) >>= shiftAmount;
+                Unsafe.Add(ref p, 19) >>= shiftAmount;
+                Unsafe.Add(ref p, 20) >>= shiftAmount;
+                Unsafe.Add(ref p, 21) >>= shiftAmount;
+                Unsafe.Add(ref p, 22) >>= shiftAmount;
+                Unsafe.Add(ref p, 23) >>= shiftAmount;
+                Unsafe.Add(ref p, 24) >>= shiftAmount;
+                Unsafe.Add(ref p, 25) >>= shiftAmount;
+                Unsafe.Add(ref p, 26) >>= shiftAmount;
+                Unsafe.Add(ref p, 27) >>= shiftAmount;
+                Unsafe.Add(ref p, 28) >>= shiftAmount;
+                Unsafe.Add(ref p, 29) >>= shiftAmount;
+                Unsafe.Add(ref p, 30) >>= shiftAmount;
+                Unsafe.Add(ref p, 31) >>= shiftAmount;
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<short> ShiftRightLogical_Fast_Base(Vector256<short> value, int shiftAmount) {
+            public static Vector256<short> ShiftRightLogical_Fast_Base(Vector256<short> value, int shiftAmount) {
                 return ShiftRightLogical_Fast_Base(value.AsUInt16(), shiftAmount).AsInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<ushort> ShiftRightLogical_Fast_Base(Vector256<ushort> value, int shiftAmount) {
+            public static Vector256<ushort> ShiftRightLogical_Fast_Base(Vector256<ushort> value, int shiftAmount) {
                 Vector256<ushort> rt = value;
-                ushort* p = (ushort*)&rt;
-                p[0] >>= shiftAmount;
-                p[1] >>= shiftAmount;
-                p[2] >>= shiftAmount;
-                p[3] >>= shiftAmount;
-                p[4] >>= shiftAmount;
-                p[5] >>= shiftAmount;
-                p[6] >>= shiftAmount;
-                p[7] >>= shiftAmount;
-                p[8] >>= shiftAmount;
-                p[9] >>= shiftAmount;
-                p[10] >>= shiftAmount;
-                p[11] >>= shiftAmount;
-                p[12] >>= shiftAmount;
-                p[13] >>= shiftAmount;
-                p[14] >>= shiftAmount;
-                p[15] >>= shiftAmount;
+                ref ushort p = ref Unsafe.As<Vector256<ushort>, ushort>(ref value);
+                p >>= shiftAmount;
+                Unsafe.Add(ref p, 1) >>= shiftAmount;
+                Unsafe.Add(ref p, 2) >>= shiftAmount;
+                Unsafe.Add(ref p, 3) >>= shiftAmount;
+                Unsafe.Add(ref p, 4) >>= shiftAmount;
+                Unsafe.Add(ref p, 5) >>= shiftAmount;
+                Unsafe.Add(ref p, 6) >>= shiftAmount;
+                Unsafe.Add(ref p, 7) >>= shiftAmount;
+                Unsafe.Add(ref p, 8) >>= shiftAmount;
+                Unsafe.Add(ref p, 9) >>= shiftAmount;
+                Unsafe.Add(ref p, 10) >>= shiftAmount;
+                Unsafe.Add(ref p, 11) >>= shiftAmount;
+                Unsafe.Add(ref p, 12) >>= shiftAmount;
+                Unsafe.Add(ref p, 13) >>= shiftAmount;
+                Unsafe.Add(ref p, 14) >>= shiftAmount;
+                Unsafe.Add(ref p, 15) >>= shiftAmount;
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<int> ShiftRightLogical_Fast_Base(Vector256<int> value, int shiftAmount) {
+            public static Vector256<int> ShiftRightLogical_Fast_Base(Vector256<int> value, int shiftAmount) {
                 return ShiftRightLogical_Fast_Base(value.AsUInt32(), shiftAmount).AsInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<uint> ShiftRightLogical_Fast_Base(Vector256<uint> value, int shiftAmount) {
+            public static Vector256<uint> ShiftRightLogical_Fast_Base(Vector256<uint> value, int shiftAmount) {
                 Vector256<uint> rt = value;
-                uint* p = (uint*)&rt;
-                p[0] >>= shiftAmount;
-                p[1] >>= shiftAmount;
-                p[2] >>= shiftAmount;
-                p[3] >>= shiftAmount;
-                p[4] >>= shiftAmount;
-                p[5] >>= shiftAmount;
-                p[6] >>= shiftAmount;
-                p[7] >>= shiftAmount;
+                ref uint p = ref Unsafe.As<Vector256<uint>, uint>(ref value);
+                p >>= shiftAmount;
+                Unsafe.Add(ref p, 1) >>= shiftAmount;
+                Unsafe.Add(ref p, 2) >>= shiftAmount;
+                Unsafe.Add(ref p, 3) >>= shiftAmount;
+                Unsafe.Add(ref p, 4) >>= shiftAmount;
+                Unsafe.Add(ref p, 5) >>= shiftAmount;
+                Unsafe.Add(ref p, 6) >>= shiftAmount;
+                Unsafe.Add(ref p, 7) >>= shiftAmount;
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<long> ShiftRightLogical_Fast_Base(Vector256<long> value, int shiftAmount) {
+            public static Vector256<long> ShiftRightLogical_Fast_Base(Vector256<long> value, int shiftAmount) {
                 return ShiftRightLogical_Fast_Base(value.AsUInt64(), shiftAmount).AsInt64();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<ulong> ShiftRightLogical_Fast_Base(Vector256<ulong> value, int shiftAmount) {
+            public static Vector256<ulong> ShiftRightLogical_Fast_Base(Vector256<ulong> value, int shiftAmount) {
                 Vector256<ulong> rt = value;
-                ulong* p = (ulong*)&rt;
-                p[0] >>= shiftAmount;
-                p[1] >>= shiftAmount;
-                p[2] >>= shiftAmount;
-                p[3] >>= shiftAmount;
+                ref ulong p = ref Unsafe.As<Vector256<ulong>, ulong>(ref value);
+                p >>= shiftAmount;
+                Unsafe.Add(ref p, 1) >>= shiftAmount;
+                Unsafe.Add(ref p, 2) >>= shiftAmount;
+                Unsafe.Add(ref p, 3) >>= shiftAmount;
                 return rt;
             }
 
