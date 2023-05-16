@@ -394,6 +394,58 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.ShiftLeft(value, shiftAmount);
         }
 
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{sbyte}, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<sbyte> ShiftLeft_Const(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount) {
+            return Statics.ShiftLeft_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{byte}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<byte> ShiftLeft_Const(Vector128<byte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount) {
+            return Statics.ShiftLeft_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{short}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<short> ShiftLeft_Const(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount) {
+            return Statics.ShiftLeft_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{ushort}, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<ushort> ShiftLeft_Const(Vector128<ushort> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount) {
+            return Statics.ShiftLeft_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{int}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<int> ShiftLeft_Const(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount) {
+            return Statics.ShiftLeft_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{uint}, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<uint> ShiftLeft_Const(Vector128<uint> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount) {
+            return Statics.ShiftLeft_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{long}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<long> ShiftLeft_Const(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount) {
+            return Statics.ShiftLeft_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{ulong}, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<ulong> ShiftLeft_Const(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount) {
+            return Statics.ShiftLeft_Const(value, shiftAmount);
+        }
+
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

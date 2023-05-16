@@ -78,7 +78,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.Serial,
             };
             foreach (Vector256<T> vsrc in samples) {
-                for (byte shiftAmount = 0; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                for (byte shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector256<T> vexpected = Vector256s.ShiftLeft_Const((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;

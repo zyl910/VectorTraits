@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics.CodeAnalysis;
+#if !NET7_0_OR_GREATER
+using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
+#endif // !NET7_0_OR_GREATER
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 using System.Runtime.CompilerServices;
@@ -8,6 +11,7 @@ using System.Runtime.CompilerServices;
 #if NET5_0_OR_GREATER
 using System.Runtime.Intrinsics.Arm;
 #endif // NET5_0_OR_GREATER
+using System.Text;
 
 namespace Zyl.VectorTraits.Impl.AVector128 {
     using SuperStatics = WVectorTraits128AdvSimd.Statics;

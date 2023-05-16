@@ -492,6 +492,102 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<ulong> ShiftLeft(Vector128<ulong> value, int shiftAmount);
 
         /// <summary>
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~7 (有效范围是 1~7).</param>
+        /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftLeft(Vector128{sbyte}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftLeft(Vector128{sbyte}, int)"/>
+        Vector128<sbyte> ShiftLeft_Const(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount);
+
+        /// <summary>
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~7 (有效范围是 1~7).</param>
+        /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftLeft(Vector128{byte}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftLeft(Vector128{byte}, int)"/>
+        Vector128<byte> ShiftLeft_Const(Vector128<byte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount);
+
+        /// <summary>
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~15 (有效范围是 1~15).</param>
+        /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftLeft(Vector128{short}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftLeft(Vector128{short}, int)"/>
+        Vector128<short> ShiftLeft_Const(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount);
+
+        /// <summary>
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~15 (有效范围是 1~15).</param>
+        /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftLeft(Vector128{ushort}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftLeft(Vector128{ushort}, int)"/>
+        Vector128<ushort> ShiftLeft_Const(Vector128<ushort> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount);
+
+        /// <summary>
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~31 (有效范围是 1~31).</param>
+        /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftLeft(Vector128{int}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftLeft(Vector128{int}, int)"/>
+        Vector128<int> ShiftLeft_Const(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount);
+
+        /// <summary>
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~31 (有效范围是 1~31).</param>
+        /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftLeft(Vector128{uint}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftLeft(Vector128{uint}, int)"/>
+        Vector128<uint> ShiftLeft_Const(Vector128<uint> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount);
+
+        /// <summary>
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~63 (有效范围是 1~63).</param>
+        /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftLeft(Vector128{long}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftLeft(Vector128{long}, int)"/>
+        Vector128<long> ShiftLeft_Const(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount);
+
+        /// <summary>
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~63 (有效范围是 1~63).</param>
+        /// <returns>A vector whose elements where shifted left by <paramref name="shiftAmount" /> (每个元素的左移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftLeft(Vector128{ulong}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftLeft(Vector128{ulong}, int)"/>
+        Vector128<ulong> ShiftLeft_Const(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount);
+
+        /// <summary>
         /// Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
