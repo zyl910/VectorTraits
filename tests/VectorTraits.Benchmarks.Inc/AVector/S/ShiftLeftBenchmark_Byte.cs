@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
 using Zyl.VectorTraits.Impl.AVector128;
@@ -416,7 +417,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         [Benchmark]
         public void SumSLLTraits() {
-            //Debugger.Break();
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
             dstTMy = 0;
             for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
                 dstTMy += StaticSumSLLTraits(srcArray, srcArray.Length, shiftAmount);

@@ -12,6 +12,9 @@
 
 Prepare (准备):
 ```
+mkdir ~/Documents/VectorTraits
+mkdir ~/Documents/VectorTraits/benchmarks
+
 cd ~/Documents/VectorTraits/benchmarks
 rm -r *
 rz
