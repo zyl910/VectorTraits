@@ -906,6 +906,102 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<ulong> ShiftRightLogical(Vector128<ulong> value, int shiftAmount);
 
         /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~7 (有效范围是 1~7).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightLogical(Vector128{sbyte}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector128{sbyte}, int)"/>
+        Vector128<sbyte> ShiftRightLogical_Const(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~7 (有效范围是 1~7).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightLogical(Vector128{byte}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector128{byte}, int)"/>
+        Vector128<byte> ShiftRightLogical_Const(Vector128<byte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~15 (有效范围是 1~15).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightLogical(Vector128{short}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector128{short}, int)"/>
+        Vector128<short> ShiftRightLogical_Const(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~15 (有效范围是 1~15).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightLogical(Vector128{ushort}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector128{ushort}, int)"/>
+        Vector128<ushort> ShiftRightLogical_Const(Vector128<ushort> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~31 (有效范围是 1~31).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightLogical(Vector128{int}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector128{int}, int)"/>
+        Vector128<int> ShiftRightLogical_Const(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~31 (有效范围是 1~31).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightLogical(Vector128{uint}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector128{uint}, int)"/>
+        Vector128<uint> ShiftRightLogical_Const(Vector128<uint> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~63 (有效范围是 1~63).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightLogical(Vector128{long}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector128{long}, int)"/>
+        Vector128<long> ShiftRightLogical_Const(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount);
+
+        /// <summary>
+        /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~63 (有效范围是 1~63).</param>
+        /// <returns>A vector whose elements where shifted righ by <paramref name="shiftAmount" /> (每个元素的右移 <paramref name="shiftAmount" /> 位的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightLogical(Vector128{ulong}, int)"/> // Since: .NET 7
+        /// <seealso cref="ShiftRightLogical(Vector128{ulong}, int)"/>
+        Vector128<ulong> ShiftRightLogical_Const(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount);
+
+        /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
         /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
         /// </summary>

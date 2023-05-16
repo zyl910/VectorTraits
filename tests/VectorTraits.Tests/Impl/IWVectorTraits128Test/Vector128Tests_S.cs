@@ -250,6 +250,44 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        public void ShiftRightLogical_ConstTest<T>(T src) where T : struct {
+            //Vector128<T> vzero = Vector128<T>.Zero;
+            //T zero = default;
+            int shiftAmountMax = Scalars<T>.BitSize - 1;
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightLogical_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s.Create(src),
+                Vector128s<T>.Demo,
+                Vector128s<T>.Serial,
+            };
+            foreach (Vector128<T> vsrc in samples) {
+                for (byte shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                    Vector128<T> vexpected = Vector128s.ShiftRightLogical_Const((dynamic)vsrc, shiftAmount);
+                    foreach (IWVectorTraits128 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        Vector128<T> vdst = instance.ShiftRightLogical_Const((dynamic)vsrc, shiftAmount);
+                        Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                    }
+                }
+            }
+        }
+
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
         public void ShiftRightLogical_FastTest<T>(T src) where T : struct {
             //Vector128<T> vzero = Vector128<T>.Zero;
             //T zero = default;
