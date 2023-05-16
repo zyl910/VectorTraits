@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+#if !NET7_0_OR_GREATER
+using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
+#endif // !NET7_0_OR_GREATER
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -666,6 +670,90 @@ namespace Zyl.VectorTraits {
             return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
             return _instance.ShiftLeft(value, shiftAmount);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{sbyte}, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> ShiftLeft_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft_Const(value, shiftAmount);
+#else
+            return _instance.ShiftLeft_Const(value, shiftAmount);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{byte}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> ShiftLeft_Const(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft_Const(value, shiftAmount);
+#else
+            return _instance.ShiftLeft_Const(value, shiftAmount);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{short}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> ShiftLeft_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft_Const(value, shiftAmount);
+#else
+            return _instance.ShiftLeft_Const(value, shiftAmount);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{ushort}, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> ShiftLeft_Const(Vector<ushort> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft_Const(value, shiftAmount);
+#else
+            return _instance.ShiftLeft_Const(value, shiftAmount);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{int}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> ShiftLeft_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft_Const(value, shiftAmount);
+#else
+            return _instance.ShiftLeft_Const(value, shiftAmount);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{uint}, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> ShiftLeft_Const(Vector<uint> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft_Const(value, shiftAmount);
+#else
+            return _instance.ShiftLeft_Const(value, shiftAmount);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{long}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> ShiftLeft_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft_Const(value, shiftAmount);
+#else
+            return _instance.ShiftLeft_Const(value, shiftAmount);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{ulong}, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> ShiftLeft_Const(Vector<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftLeft_Const(value, shiftAmount);
+#else
+            return _instance.ShiftLeft_Const(value, shiftAmount);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
