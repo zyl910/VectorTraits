@@ -615,6 +615,58 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             return Statics.ShiftRightLogical(value, shiftAmount);
         }
 
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Const(Vector256{sbyte}, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<sbyte> ShiftRightLogical_Const(Vector256<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount) {
+            return Statics.ShiftRightLogical_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Const(Vector256{byte}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<byte> ShiftRightLogical_Const(Vector256<byte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount) {
+            return Statics.ShiftRightLogical_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Const(Vector256{short}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<short> ShiftRightLogical_Const(Vector256<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount) {
+            return Statics.ShiftRightLogical_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Const(Vector256{ushort}, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ushort> ShiftRightLogical_Const(Vector256<ushort> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount) {
+            return Statics.ShiftRightLogical_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Const(Vector256{int}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> ShiftRightLogical_Const(Vector256<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount) {
+            return Statics.ShiftRightLogical_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Const(Vector256{uint}, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<uint> ShiftRightLogical_Const(Vector256<uint> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount) {
+            return Statics.ShiftRightLogical_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Const(Vector256{long}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> ShiftRightLogical_Const(Vector256<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount) {
+            return Statics.ShiftRightLogical_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Const(Vector256{ulong}, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ulong> ShiftRightLogical_Const(Vector256<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount) {
+            return Statics.ShiftRightLogical_Const(value, shiftAmount);
+        }
+
         /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

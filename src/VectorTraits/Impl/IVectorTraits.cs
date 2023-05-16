@@ -409,7 +409,15 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>ShiftLeft</c> (运行 <c>ShiftLeft</c> 时具有硬件加速的类型).
         /// </summary>
+        /// <remarks>
+        /// <para>Meaning of suffixes (后缀的含义).</para>
+        /// <para>- (none): Normal (常规).</para>
+        /// <para>- Const: Constant version. This version can be used if you can ensure that the parameters are constants. It can take advantage of constants and make better use of hardware acceleration (常量版. 若能确保参数是常量, 可使用该版本. 它能利用常量, 更好的使用硬件加速).</para>
+        /// <para>- Fast: Fast version. This version can be used if you can ensure that the parameter variables are always in the valid range (快速版. 若能确保参数变量总是在有效范围内的, 可使用该版本).</para>
+        /// </remarks>
         /// <seealso cref="ShiftLeft"/>
+        /// <seealso cref="ShiftLeft_Const"/>
+        /// <seealso cref="ShiftLeft_Fast"/>
         TypeCodeFlags ShiftLeft_AcceleratedTypes { get; }
 
         /// <summary>
@@ -509,7 +517,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<ulong> ShiftLeft(Vector<ulong> value, int shiftAmount);
 
         /// <summary>
-        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -521,7 +529,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<sbyte> ShiftLeft_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount);
 
         /// <summary>
-        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -533,7 +541,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<byte> ShiftLeft_Const(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount);
 
         /// <summary>
-        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -545,7 +553,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<short> ShiftLeft_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount);
 
         /// <summary>
-        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -557,7 +565,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<ushort> ShiftLeft_Const(Vector<ushort> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount);
 
         /// <summary>
-        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -569,7 +577,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<int> ShiftLeft_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount);
 
         /// <summary>
-        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -581,7 +589,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<uint> ShiftLeft_Const(Vector<uint> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount);
 
         /// <summary>
-        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -593,7 +601,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<long> ShiftLeft_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount);
 
         /// <summary>
-        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
+        /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
@@ -807,7 +815,15 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>ShiftRightLogical</c> (运行 <c>ShiftRightLogical</c> 时具有硬件加速的类型).
         /// </summary>
+        /// <remarks>
+        /// <para>Meaning of suffixes (后缀的含义).</para>
+        /// <para>- (none): Normal (常规).</para>
+        /// <para>- Const: Constant version. This version can be used if you can ensure that the parameters are constants. It can take advantage of constants and make better use of hardware acceleration (常量版. 若能确保参数是常量, 可使用该版本. 它能利用常量, 更好的使用硬件加速).</para>
+        /// <para>- Fast: Fast version. This version can be used if you can ensure that the parameter variables are always in the valid range (快速版. 若能确保参数变量总是在有效范围内的, 可使用该版本).</para>
+        /// </remarks>
         /// <seealso cref="ShiftRightLogical"/>
+        /// <seealso cref="ShiftRightLogical_Const"/>
+        /// <seealso cref="ShiftRightLogical_Fast"/>
         TypeCodeFlags ShiftRightLogical_AcceleratedTypes { get; }
 
         /// <summary>
