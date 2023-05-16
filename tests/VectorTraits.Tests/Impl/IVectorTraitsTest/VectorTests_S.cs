@@ -284,6 +284,44 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        public void ShiftRightLogical_ConstTest<T>(T src) where T : struct {
+            //Vector<T> vzero = Vector<T>.Zero;
+            //T zero = default;
+            int shiftAmountMax = Scalars<T>.BitSize - 1;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ShiftRightLogical_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            Vector<T>[] samples = {
+                Vectors.Create(src),
+                Vectors<T>.Demo,
+                Vectors<T>.Serial,
+            };
+            foreach (Vector<T> vsrc in samples) {
+                for (byte shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                    Vector<T> vexpected = Vectors.ShiftRightLogical_Const((dynamic)vsrc, shiftAmount);
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        Vector<T> vdst = instance.ShiftRightLogical_Const((dynamic)vsrc, shiftAmount);
+                        Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                    }
+                }
+            }
+        }
+
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
         public void ShiftRightLogical_FastTest<T>(T src) where T : struct {
             //Vector<T> vzero = Vector<T>.Zero;
             //T zero = default;
