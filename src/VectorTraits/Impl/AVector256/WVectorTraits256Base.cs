@@ -1530,17 +1530,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{sbyte}, int)"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> ShiftRightArithmetic_Fast(Vector256<sbyte> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
-                return Vector256.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
-#else
-                return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
-#endif // BCL_OVERRIDE_BASE_FIXED
-            }
-
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Const(Vector256{sbyte}, byte)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1564,6 +1553,17 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftRightArithmetic_Const(Vector256<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount) {
                 return ShiftRightArithmetic_Fast(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> ShiftRightArithmetic_Fast(Vector256<sbyte> value, int shiftAmount) {
+#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
+                return Vector256.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#else
+                return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{short}, int)"/>

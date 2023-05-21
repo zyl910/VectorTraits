@@ -693,7 +693,15 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>ShiftRightArithmetic</c> (运行 <c>ShiftRightArithmetic</c> 时具有硬件加速的类型).
         /// </summary>
+        /// <remarks>
+        /// <para>Meaning of suffixes (后缀的含义).</para>
+        /// <para>- (none): Normal (常规).</para>
+        /// <para>- Const: Constant version. This version can be used if you can ensure that the parameters are constants. It can take advantage of constants and make better use of hardware acceleration (常量版. 若能确保参数是常量, 可使用该版本. 它能利用常量, 更好的使用硬件加速).</para>
+        /// <para>- Fast: Fast version. This version can be used if you can ensure that the parameter variables are always in the valid range (快速版. 若能确保参数变量总是在有效范围内的, 可使用该版本).</para>
+        /// </remarks>
         /// <seealso cref="ShiftRightArithmetic"/>
+        /// <seealso cref="ShiftRightArithmetic_Const"/>
+        /// <seealso cref="ShiftRightArithmetic_Fast"/>
         TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes { get; }
 
         /// <summary>
