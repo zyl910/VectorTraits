@@ -85,7 +85,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             // run.
             Vector<T>[] samples = {
                 Vectors<T>.Serial,
-                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vectors.CreateByDoubleLoop<T>(-0.5 - Scalars.GetDoubleFrom(src), 1),
                 Vectors<T>.Demo,
                 Vectors<T>.DemoNaN,
             };
@@ -121,7 +121,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             // run.
             Vector<T>[] samples = {
                 Vectors<T>.Serial,
-                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vectors.CreateByDoubleLoop<T>(-0.5 - Scalars.GetDoubleFrom(src), 1),
                 Vectors<T>.Demo,
                 Vectors<T>.DemoNaN,
             };
@@ -189,7 +189,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             // run.
             Vector<T>[] samples = {
                 Vectors<T>.Serial,
-                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vectors.CreateByDoubleLoop<T>(-0.5 - Scalars.GetDoubleFrom(src), 1),
                 Vectors<T>.Demo,
                 Vectors<T>.DemoNaN,
             };
@@ -225,7 +225,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             // run.
             Vector<T>[] samples = {
                 Vectors<T>.Serial,
-                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vectors.CreateByDoubleLoop<T>(-0.5 - Scalars.GetDoubleFrom(src), 1),
                 Vectors<T>.Demo,
                 Vectors<T>.DemoNaN,
             };

@@ -142,7 +142,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             // run.
             Vector256<T>[] samples = {
                 Vector256s<T>.Serial,
-                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vector256s.CreateByDoubleLoop<T>(-0.5 - Scalars.GetDoubleFrom(src), 1),
                 Vector256s<T>.Demo,
                 Vector256s<T>.DemoNaN,
             };
@@ -178,7 +178,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             // run.
             Vector256<T>[] samples = {
                 Vector256s<T>.Serial,
-                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vector256s.CreateByDoubleLoop<T>(-0.5 - Scalars.GetDoubleFrom(src), 1),
                 Vector256s<T>.Demo,
                 Vector256s<T>.DemoNaN,
             };
@@ -246,7 +246,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             // run.
             Vector256<T>[] samples = {
                 Vector256s<T>.Serial,
-                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vector256s.CreateByDoubleLoop<T>(-0.5 - Scalars.GetDoubleFrom(src), 1),
                 Vector256s<T>.Demo,
                 Vector256s<T>.DemoNaN,
             };
@@ -282,7 +282,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             // run.
             Vector256<T>[] samples = {
                 Vector256s<T>.Serial,
-                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vector256s.CreateByDoubleLoop<T>(-0.5 - Scalars.GetDoubleFrom(src), 1),
                 Vector256s<T>.Demo,
                 Vector256s<T>.DemoNaN,
             };

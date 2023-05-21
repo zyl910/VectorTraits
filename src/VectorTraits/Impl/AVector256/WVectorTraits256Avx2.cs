@@ -162,7 +162,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt32(Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> ConvertToInt32(Vector256<float> value) {
-                return Avx.ConvertToVector256Int32(value);
+                return Avx.ConvertToVector256Int32WithTruncation(value);
             }
 
 
