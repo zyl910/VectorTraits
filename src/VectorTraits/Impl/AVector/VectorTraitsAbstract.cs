@@ -548,6 +548,31 @@ namespace Zyl.VectorTraits.Impl.AVector {
             return Statics.ShiftRightArithmetic(value, shiftAmount);
         }
 
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Const(Vector{sbyte}, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<sbyte> ShiftRightArithmetic_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount) {
+            return Statics.ShiftRightArithmetic_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Const(Vector{short}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<short> ShiftRightArithmetic_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount) {
+            return Statics.ShiftRightArithmetic_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Const(Vector{int}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<int> ShiftRightArithmetic_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount) {
+            return Statics.ShiftRightArithmetic_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Const(Vector{long}, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<long> ShiftRightArithmetic_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount) {
+            return Statics.ShiftRightArithmetic_Const(value, shiftAmount);
+        }
+
         /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
