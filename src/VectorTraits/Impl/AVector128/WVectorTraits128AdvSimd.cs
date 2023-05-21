@@ -153,7 +153,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt32(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ConvertToInt32(Vector128<float> value) {
-                return AdvSimd.ConvertToInt32RoundToEven(value);
+                return AdvSimd.ConvertToInt32RoundToZero(value);
             }
 
 
@@ -203,7 +203,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ConvertToUInt32(Vector128<float> value) {
-                return AdvSimd.ConvertToUInt32RoundToEven(value);
+                return AdvSimd.ConvertToUInt32RoundToZero(value);
             }
 
 

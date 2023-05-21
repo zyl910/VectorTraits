@@ -136,7 +136,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64(Vector128<double> value) {
-                return AdvSimd.Arm64.ConvertToInt64RoundToEven(value);
+                return AdvSimd.Arm64.ConvertToInt64RoundToZero(value);
             }
 
 
@@ -151,7 +151,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ConvertToUInt64(Vector128<double> value) {
-                return AdvSimd.Arm64.ConvertToUInt64RoundToEven(value);
+                return AdvSimd.Arm64.ConvertToUInt64RoundToZero(value);
             }
 
 
