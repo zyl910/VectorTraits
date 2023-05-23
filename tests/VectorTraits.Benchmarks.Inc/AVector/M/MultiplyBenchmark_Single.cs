@@ -36,7 +36,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMy StaticSumMultiplyScalar(TMy[] src, int srcCount) {
+        public static TMy StaticSumScalar(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -53,11 +53,11 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         }
 
         [Benchmark(Baseline = true)]
-        public void SumMultiplyScalar() {
-            dstTMy = StaticSumMultiplyScalar(srcArray, srcArray.Length);
+        public void SumScalar() {
+            dstTMy = StaticSumScalar(srcArray, srcArray.Length);
             if (CheckMode) {
                 baselineTMy = dstTMy;
-                BenchmarkUtil.WriteItem("# SumMultiplyScalar", string.Format("{0}", baselineTMy));
+                BenchmarkUtil.WriteItem("# SumScalar", string.Format("{0}", baselineTMy));
             }
         }
 
@@ -67,7 +67,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMy StaticSumMultiplyBcl(TMy[] src, int srcCount) {
+        public static TMy StaticSumBcl(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -96,9 +96,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         }
 
         [Benchmark]
-        public void SumMultiplyBcl() {
-            dstTMy = StaticSumMultiplyBcl(srcArray, srcArray.Length);
-            CheckResult("SumMultiplyBcl");
+        public void SumBcl() {
+            dstTMy = StaticSumBcl(srcArray, srcArray.Length);
+            CheckResult("SumBcl");
         }
 
         #region BENCHMARKS_RAW
@@ -115,7 +115,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMy StaticSumMultiplyVectorTraits(TMy[] src, int srcCount) {
+        public static TMy StaticSumTraits(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -144,9 +144,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         }
 
         [Benchmark]
-        public void SumMultiplyVectorTraits() {
-            dstTMy = StaticSumMultiplyVectorTraits(srcArray, srcArray.Length);
-            CheckResult("SumMultiplyVectorTraits");
+        public void SumTraits() {
+            dstTMy = StaticSumTraits(srcArray, srcArray.Length);
+            CheckResult("SumTraits");
         }
 
 
@@ -161,7 +161,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMy StaticSumMultiplyVector128Traits(TMy[] src, int srcCount) {
+        public static TMy StaticSum128Traits(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -192,10 +192,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         }
 
         [Benchmark]
-        public void SumMultiplyVector128Traits() {
+        public void Sum128Traits() {
             Vector128s.ThrowForUnsupported(true);
-            dstTMy = StaticSumMultiplyVector128Traits(srcArray, srcArray.Length);
-            CheckResult("SumMultiplyVector128Traits");
+            dstTMy = StaticSum128Traits(srcArray, srcArray.Length);
+            CheckResult("Sum128Traits");
         }
 
         #region BENCHMARKS_ALGORITHM
@@ -220,7 +220,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMy StaticSumMultiplyVector256Traits(TMy[] src, int srcCount) {
+        public static TMy StaticSum256Traits(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -251,10 +251,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         }
 
         [Benchmark]
-        public void SumMultiplyVector256Traits() {
+        public void Sum256Traits() {
             Vector256s.ThrowForUnsupported(true);
-            dstTMy = StaticSumMultiplyVector256Traits(srcArray, srcArray.Length);
-            CheckResult("SumMultiplyVector256Traits");
+            dstTMy = StaticSum256Traits(srcArray, srcArray.Length);
+            CheckResult("Sum256Traits");
         }
 
 #endif // BENCHMARKS_256ALGORITHM
