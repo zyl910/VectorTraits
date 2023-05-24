@@ -30,6 +30,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftBenchmark_Int64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftBenchmark_SByte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftConstBenchmark_Byte.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftConstBenchmark_Int16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftConstBenchmark_Int32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftLeftConstBenchmark_Int64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftRightArithmeticBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftRightArithmeticBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftRightArithmeticBenchmark_Int64.cs" />
