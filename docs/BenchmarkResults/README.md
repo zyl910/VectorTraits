@@ -35,6 +35,11 @@ dotnet VectorTraits.Benchmarks.dll >1.txt
 dotnet VectorTraits.Benchmarks.NetCore.dll >1.txt
 sz 1.txt
 
+dotnet VectorTraits.Benchmarks.dll 1>1.txt
+rm -r BenchmarkDotNet.Artifacts
+tar -cvf BenchmarkDotNet.Artifacts.tar BenchmarkDotNet.Artifacts
+sz BenchmarkDotNet.Artifacts.tar
+
 set DOTNET_JitDisasm=AloneTest
 export DOTNET_JitDisasm=AloneTest
 dotnet VectorTraits.Benchmarks.dll 3 >1.txt
