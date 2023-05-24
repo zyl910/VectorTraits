@@ -289,11 +289,55 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift left logical const - Traits static.
+        /// Sum shift left logical - Traits static - Args.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumSLLTraits_Args(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            var args0 = Vectors.ShiftLeft_Args(vrt, shiftAmount, out var args1);
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = Vectors.ShiftLeft_Core(p0, args0, args1);
+                vrt += vtemp; // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)(Unsafe.Add(ref p, i) << shiftAmount);
+            }
+            // Reduce.
+            rt += Vectors.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLTraits_Args() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumSLLTraits_Args(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSLLTraits_Args");
+        }
+
+        /// <summary>
+        /// Sum shift left logical const - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         private static TMy StaticSumSLLConstTraits(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.

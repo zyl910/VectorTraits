@@ -929,6 +929,42 @@ namespace Zyl.VectorTraits.Impl.AVector {
             //    return ShiftLeft_Fast_Multiply(value, shiftAmount);
             //}
 
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Args(Vector{short}, int, out Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftLeft_Args(Vector<short> dummy, int shiftAmount, out Vector<short> args1) {
+                _ = dummy;
+                Vector<short> args0 = default;
+                Unsafe.As<Vector<short>, int>(ref args0) = shiftAmount & 7;
+                args1 = default;
+                return args0;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Args(Vector{int}, int, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> ShiftLeft_Args(Vector<int> dummy, int shiftAmount, out Vector<int> args1) {
+                _ = dummy;
+                Vector<int> args0 = default;
+                Unsafe.As<Vector<int>, int>(ref args0) = shiftAmount & 0x0F;
+                args1 = default;
+                return args0;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Core(Vector{short}, Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftLeft_Core(Vector<short> value, Vector<short> args0, Vector<short> args1) {
+                _ = args1;
+                int shiftAmount = Unsafe.As<Vector<short>, int>(ref args0);
+                return ShiftLeft_Fast(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Core(Vector{short}, int, Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftLeft_Core(Vector<short> value, int shiftAmount, Vector<short> args0, Vector<short> args1) {
+                _ = args0;
+                _ = args1;
+                return ShiftLeft_Fast(value, shiftAmount);
+            }
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{sbyte}, byte)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -345,6 +345,34 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.ShiftLeft(value.AsVector256(), shiftAmount).AsVector();
             }
 
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Args(Vector{short}, int, out Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftLeft_Args(Vector<short> dummy, int shiftAmount, out Vector<short> args1) {
+                var args0 = WStatics.ShiftLeft_Args(dummy.AsVector256(), shiftAmount, out var a1).AsVector();
+                args1 = a1.AsVector();
+                return args0;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Args(Vector{int}, int, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> ShiftLeft_Args(Vector<int> dummy, int shiftAmount, out Vector<int> args1) {
+                var args0 = WStatics.ShiftLeft_Args(dummy.AsVector256(), shiftAmount, out var a1).AsVector();
+                args1 = a1.AsVector();
+                return args0;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Core(Vector{short}, Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftLeft_Core(Vector<short> value, Vector<short> args0, Vector<short> args1) {
+                return WStatics.ShiftLeft_Core(value.AsVector256(), args0.AsVector256(), args1.AsVector256()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Core(Vector{short}, int, Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftLeft_Core(Vector<short> value, int shiftAmount, Vector<short> args0, Vector<short> args1) {
+                return WStatics.ShiftLeft_Core(value.AsVector256(), shiftAmount, args0.AsVector256(), args1.AsVector256()).AsVector();
+            }
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{sbyte}, byte)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

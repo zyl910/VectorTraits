@@ -516,6 +516,14 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_Fast(Vector{ulong}, int)"/>
         Vector<ulong> ShiftLeft(Vector<ulong> value, int shiftAmount);
 
+        Vector<short> ShiftLeft_Args(Vector<short> dummy, int shiftAmount, out Vector<short> args1);
+
+        Vector<int> ShiftLeft_Args(Vector<int> dummy, int shiftAmount, out Vector<int> args1);
+
+        Vector<short> ShiftLeft_Core(Vector<short> value, Vector<short> args0, Vector<short> args1);
+
+        Vector<short> ShiftLeft_Core(Vector<short> value, int shiftAmount, Vector<short> args0, Vector<short> args1);
+
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
