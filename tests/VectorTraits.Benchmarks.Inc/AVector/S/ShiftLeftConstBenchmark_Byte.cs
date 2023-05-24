@@ -147,63 +147,15 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("SumSLL_Multiply");
         }
 
-
-#if NETCOREAPP3_0_OR_GREATER
-        /// <summary>
-        /// Sum shift left logical - Raw - Avx.
-        /// </summary>
-        /// <param name="src">Source array.</param>
-        /// <param name="srcCount">Source count</param>
-        /// <param name="shiftAmount">Shift amount.</param>
-        /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSLLRawAvx2(TMy[] src, int srcCount, int shiftAmount) {
-            TMy rt = 0; // Result.
-            const int GroupSize = 1;
-            int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
-            int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
-            int i;
-            // Body.
-            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
-            // Vector processs.
-            for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftLeft(p0, shiftAmount);
-                vrt += vtemp; // Add.
-                p0 = ref Unsafe.Add(ref p0, GroupSize);
-            }
-            // Remainder processs.
-            ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
-            for (i = 0; i < cntRem; ++i) {
-                rt += (TMy)(Unsafe.Add(ref p, i) << shiftAmount);
-            }
-            // Reduce.
-            rt += Vectors.Sum(vrt);
-            return rt;
-        }
-
-        [Benchmark]
-        public void SumSLLRawAvx2() {
-            VectorTraits256Avx2.Statics.ThrowForUnsupported(true);
-            if (BenchmarkUtil.IsLastRun) {
-                Volatile.Write(ref dstTMy, 0);
-                //Debugger.Break();
-            }
-            dstTMy = StaticSumSLLRawAvx2(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSLLRawAvx2");
-        }
-#endif // NETCOREAPP3_0_OR_GREATER
-
 #if NET5_0_OR_GREATER
         /// <summary>
-        /// Sum shift left logical - Raw - Avx.
+        /// Sum shift left logical - Raw - AdvSimd.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSLLRawAdvSimd(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSLL_AdvSimd(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -231,16 +183,63 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSLLRawAdvSimd() {
+        public void SumSLL_AdvSimd() {
             VectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSLLRawAdvSimd(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSLLRawAdvSimd");
+            dstTMy = StaticSumSLL_AdvSimd(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSLL_AdvSimd");
         }
 #endif // NET5_0_OR_GREATER
+
+#if NETCOREAPP3_0_OR_GREATER
+        /// <summary>
+        /// Sum shift left logical - Raw - Avx.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumSLL_Avx2(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftLeft(p0, shiftAmount);
+                vrt += vtemp; // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)(Unsafe.Add(ref p, i) << shiftAmount);
+            }
+            // Reduce.
+            rt += Vectors.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLL_Avx2() {
+            VectorTraits256Avx2.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumSLL_Avx2(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSLL_Avx2");
+        }
+#endif // NETCOREAPP3_0_OR_GREATER
 
 #endif // BENCHMARKS_ALGORITHM
         #endregion // BENCHMARKS_ALGORITHM
@@ -333,59 +332,15 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("SumSLLFast_Multiply");
         }
 
-#if NETCOREAPP3_0_OR_GREATER
-        /// <summary>
-        /// Sum shift left logical fast - Raw - Avx.
-        /// </summary>
-        /// <param name="src">Source array.</param>
-        /// <param name="srcCount">Source count</param>
-        /// <param name="shiftAmount">Shift amount.</param>
-        /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSLLFastRawAvx2(TMy[] src, int srcCount, int shiftAmount) {
-            TMy rt = 0; // Result.
-            const int GroupSize = 1;
-            int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
-            int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
-            int i;
-            // Body.
-            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
-            // Vector processs.
-            for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftLeft_Fast(p0, shiftAmount);
-                vrt += vtemp; // Add.
-                p0 = ref Unsafe.Add(ref p0, GroupSize);
-            }
-            // Remainder processs.
-            ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
-            for (i = 0; i < cntRem; ++i) {
-                rt += (TMy)(Unsafe.Add(ref p, i) << shiftAmount);
-            }
-            // Reduce.
-            rt += Vectors.Sum(vrt);
-            return rt;
-        }
-
-        [Benchmark]
-        public void SumSLLFastRawAvx2() {
-            VectorTraits256Avx2.Statics.ThrowForUnsupported(true);
-            //Debugger.Break();
-            dstTMy = StaticSumSLLFastRawAvx2(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSLLFastRawAvx2");
-        }
-#endif // NETCOREAPP3_0_OR_GREATER
-
 #if NET5_0_OR_GREATER
         /// <summary>
-        /// Sum shift left logical fast - Raw - Avx.
+        /// Sum shift left logical fast - Raw - AdvSimd.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSLLFastRawAdvSimd(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSLLFast_AdvSimd(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -413,13 +368,58 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSLLFastRawAdvSimd() {
+        public void SumSLLFast_AdvSimd() {
             VectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
             //Debugger.Break();
-            dstTMy = StaticSumSLLFastRawAdvSimd(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSLLFastRawAdvSimd");
+            dstTMy = StaticSumSLLFast_AdvSimd(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSLLFast_AdvSimd");
         }
 #endif // NET5_0_OR_GREATER
+
+#if NETCOREAPP3_0_OR_GREATER
+        /// <summary>
+        /// Sum shift left logical fast - Raw - Avx.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumSLLFast_Avx2(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftLeft_Fast(p0, shiftAmount);
+                vrt += vtemp; // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)(Unsafe.Add(ref p, i) << shiftAmount);
+            }
+            // Reduce.
+            rt += Vectors.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLFast_Avx2() {
+            VectorTraits256Avx2.Statics.ThrowForUnsupported(true);
+            //Debugger.Break();
+            dstTMy = StaticSumSLLFast_Avx2(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSLLFast_Avx2");
+        }
+
+#endif // NETCOREAPP3_0_OR_GREATER
 
 #endif // BENCHMARKS_ALGORITHM
         #endregion // BENCHMARKS_ALGORITHM
