@@ -58,14 +58,57 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #if NET7_0_OR_GREATER
         /// <summary>
-        /// Sum shift left logical - VectorT - .NET Bcl.
+        /// Sum shift left logical - VectorT - .NET Bcl - variate .
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static TMy StaticSumSLLNetBcl(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            int shiftAmount2 = Volatile.Read(ref shiftAmount);
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = Vector.ShiftLeft(p0, shiftAmount2);
+                vrt += vtemp; // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)(Unsafe.Add(ref p, i) << shiftAmount2);
+            }
+            // Reduce.
+            rt += Vectors.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLNetBcl() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumSLLNetBcl(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSLLNetBcl");
+        }
+        /// <summary>
+        /// Sum shift left logical - VectorT - .NET Bcl - Const.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static TMy StaticSumSLLNetBcl_Const(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -93,14 +136,16 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSLLNetBcl() {
+        public void SumSLLNetBcl_Const() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSLLNetBcl(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSLLNetBcl");
+            dstTMy = StaticSumSLLNetBcl_Const(srcArray, srcArray.Length);
+            CheckResult("SumSLLNetBcl_Const");
         }
+
+
 #endif // NET7_0_OR_GREATER
 
         #region BENCHMARKS_ALGORITHM
