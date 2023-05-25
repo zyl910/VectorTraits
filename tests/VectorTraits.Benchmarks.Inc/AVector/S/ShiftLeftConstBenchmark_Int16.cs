@@ -193,13 +193,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift left logical - Base - Args.
+        /// Sum shift left logical - Base - Core.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSLL_Base_Args(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSLL_Base_Core(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -228,24 +228,24 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSLL_Base_Args() {
+        public void SumSLL_Base_Core() {
             VectorTraitsBase.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSLL_Base_Args(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSLL_Base_Args");
+            dstTMy = StaticSumSLL_Base_Core(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSLL_Base_Core");
         }
 
         /// <summary>
-        /// Sum shift left logical - Base - Args - Element.
+        /// Sum shift left logical - Base - Core - Element.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSLL_Base_Args_Element(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSLL_Base_Core_Element(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -274,14 +274,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSLL_Base_Args_Element() {
+        public void SumSLL_Base_Core_Element() {
             VectorTraitsBase.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSLL_Base_Args_Element(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSLL_Base_Args_Element");
+            dstTMy = StaticSumSLL_Base_Core_Element(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSLL_Base_Core_Element");
         }
 
         /// <summary>
@@ -467,13 +467,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift left logical - Traits static - Args.
+        /// Sum shift left logical - Traits static - Core.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSLLTraits_Args(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSLLTraits_Core(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -502,13 +502,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSLLTraits_Args() {
+        public void SumSLLTraits_Core() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSLLTraits_Args(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSLLTraits_Args");
+            dstTMy = StaticSumSLLTraits_Core(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSLLTraits_Core");
         }
 
         /// <summary>
