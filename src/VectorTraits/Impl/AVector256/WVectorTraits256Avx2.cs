@@ -494,7 +494,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> ShiftLeft_Args(Vector256<short> dummy, int shiftAmount, out Vector256<short> args1) {
                 _ = dummy;
-                Vector128<short> xmm = Sse2.ConvertScalarToVector128Int32(shiftAmount & 7).AsInt16();
+                Vector128<short> xmm = Sse2.ConvertScalarToVector128Int32(shiftAmount & 0x0F).AsInt16();
                 //Vector256<short> args0 = default;
                 //Unsafe.As<Vector256<short>, Vector128<int>>(ref args0) = xmm;
                 Vector256<short> args0 = Vector256.Create(xmm, xmm);
@@ -506,7 +506,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> ShiftLeft_Args(Vector256<int> dummy, int shiftAmount, out Vector256<int> args1) {
                 _ = dummy;
-                var args0 = Vector256.Create((int)(shiftAmount & 0x0F));
+                var args0 = Vector256.Create((int)(shiftAmount & 0x1F));
                 args1 = default;
                 return args0;
             }

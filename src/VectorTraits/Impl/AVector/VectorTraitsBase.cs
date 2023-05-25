@@ -934,7 +934,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<short> ShiftLeft_Args(Vector<short> dummy, int shiftAmount, out Vector<short> args1) {
                 _ = dummy;
                 Vector<short> args0 = default;
-                Unsafe.As<Vector<short>, int>(ref args0) = shiftAmount & 7;
+                Unsafe.As<Vector<short>, int>(ref args0) = shiftAmount & 0x0F;
                 args1 = default;
                 return args0;
             }
@@ -944,7 +944,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<int> ShiftLeft_Args(Vector<int> dummy, int shiftAmount, out Vector<int> args1) {
                 _ = dummy;
                 Vector<int> args0 = default;
-                Unsafe.As<Vector<int>, int>(ref args0) = shiftAmount & 0x0F;
+                Unsafe.As<Vector<int>, int>(ref args0) = shiftAmount & 0x1F;
                 args1 = default;
                 return args0;
             }
