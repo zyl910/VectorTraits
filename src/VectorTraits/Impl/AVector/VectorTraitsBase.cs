@@ -932,11 +932,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Args(Vector{short}, int, out Vector{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftLeft_Args(Vector<short> dummy, int shiftAmount, out Vector<short> args1) {
-                _ = dummy;
-                Vector<short> args0 = default;
-                Unsafe.As<Vector<short>, int>(ref args0) = shiftAmount & 0x0F;
-                args1 = default;
-                return args0;
+                return ShiftLeft_Args_Mov(dummy, shiftAmount, out args1);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Args(Vector{short}, int, out Vector{short})"/>
@@ -946,6 +942,16 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 Vector<int> args0 = new Vector<int>(shiftAmount & 0x0F);
                 args1 = default;
                 return args0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Args(Vector{short}, int, out Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftLeft_Args_Mov(Vector<short> dummy, int shiftAmount, out Vector<short> args1) {
+                _ = dummy;
+                Vector<short> args0 = default;
+                Unsafe.As<Vector<short>, int>(ref args0) = shiftAmount & 0x0F;
+                args1 = default;
+                return args0;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Args(Vector{int}, int, out Vector{int})"/>
@@ -961,9 +967,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Core(Vector{short}, Vector{short}, Vector{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftLeft_Core(Vector<short> value, Vector<short> args0, Vector<short> args1) {
-                _ = args1;
-                int shiftAmount = Unsafe.As<Vector<short>, int>(ref args0);
-                return ShiftLeft_Fast(value, shiftAmount);
+                return ShiftLeft_Core_Mov(value, args0, args1);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Core(Vector{short}, Vector{short}, Vector{short})"/>
@@ -971,6 +975,14 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<short> ShiftLeft_Core_Element(Vector<short> value, Vector<short> args0, Vector<short> args1) {
                 _ = args1;
                 int shiftAmount = args0.AsInt32()[0];
+                return ShiftLeft_Fast(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Core(Vector{short}, Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> ShiftLeft_Core_Mov(Vector<short> value, Vector<short> args0, Vector<short> args1) {
+                _ = args1;
+                int shiftAmount = Unsafe.As<Vector<short>, int>(ref args0);
                 return ShiftLeft_Fast(value, shiftAmount);
             }
 
