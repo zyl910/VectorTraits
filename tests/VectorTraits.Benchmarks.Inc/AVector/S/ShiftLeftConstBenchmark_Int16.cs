@@ -533,7 +533,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = Vectors.ShiftLeft_Core(p0, args0, args1);
+                Vector<TMy> vtemp = Vectors.ShiftLeft_Core(p0, shiftAmount, args0, args1);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }

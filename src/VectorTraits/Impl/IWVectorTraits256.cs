@@ -830,6 +830,126 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<ulong> ShiftLeft_Const(Vector256<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount);
 
         /// <summary>
+        /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~7 (有效范围是 1~7).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftLeft(Vector256{sbyte}, int)"/>
+        /// <seealso cref="ShiftLeft(Vector256{sbyte}, int)"/>
+        /// <seealso cref="ShiftLeft_Args(Vector256{sbyte}, int, out Vector256{sbyte})"/>
+        Vector256<sbyte> ShiftLeft_ConstCore(Vector256<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount, Vector256<sbyte> args0, Vector256<sbyte> args1);
+
+        /// <summary>
+        /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~7 (有效范围是 1~7).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftLeft(Vector256{byte}, int)"/>
+        /// <seealso cref="ShiftLeft(Vector256{byte}, int)"/>
+        /// <seealso cref="ShiftLeft_Args(Vector256{byte}, int, out Vector256{byte})"/>
+        Vector256<byte> ShiftLeft_ConstCore(Vector256<byte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount, Vector256<byte> args0, Vector256<byte> args1);
+
+        /// <summary>
+        /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~15 (有效范围是 1~15).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftLeft(Vector256{short}, int)"/>
+        /// <seealso cref="ShiftLeft(Vector256{short}, int)"/>
+        /// <seealso cref="ShiftLeft_Args(Vector256{short}, int, out Vector256{short})"/>
+        Vector256<short> ShiftLeft_ConstCore(Vector256<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount, Vector256<short> args0, Vector256<short> args1);
+
+        /// <summary>
+        /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~15 (有效范围是 1~15).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftLeft(Vector256{ushort}, int)"/>
+        /// <seealso cref="ShiftLeft(Vector256{ushort}, int)"/>
+        /// <seealso cref="ShiftLeft_Args(Vector256{ushort}, int, out Vector256{ushort})"/>
+        Vector256<ushort> ShiftLeft_ConstCore(Vector256<ushort> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount, Vector256<ushort> args0, Vector256<ushort> args1);
+
+        /// <summary>
+        /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~31 (有效范围是 1~31).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftLeft(Vector256{int}, int)"/>
+        /// <seealso cref="ShiftLeft(Vector256{int}, int)"/>
+        /// <seealso cref="ShiftLeft_Args(Vector256{int}, int, out Vector256{int})"/>
+        Vector256<int> ShiftLeft_ConstCore(Vector256<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount, Vector256<int> args0, Vector256<int> args1);
+
+        /// <summary>
+        /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~31 (有效范围是 1~31).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftLeft(Vector256{uint}, int)"/>
+        /// <seealso cref="ShiftLeft(Vector256{uint}, int)"/>
+        /// <seealso cref="ShiftLeft_Args(Vector256{uint}, int, out Vector256{uint})"/>
+        Vector256<uint> ShiftLeft_ConstCore(Vector256<uint> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount, Vector256<uint> args0, Vector256<uint> args1);
+
+        /// <summary>
+        /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~63 (有效范围是 1~63).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftLeft(Vector256{long}, int)"/>
+        /// <seealso cref="ShiftLeft(Vector256{long}, int)"/>
+        /// <seealso cref="ShiftLeft_Args(Vector256{long}, int, out Vector256{long})"/>
+        Vector256<long> ShiftLeft_ConstCore(Vector256<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount, Vector256<long> args0, Vector256<long> args1);
+
+        /// <summary>
+        /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~63 (有效范围是 1~63).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftLeft(Vector256{ulong}, int)"/>
+        /// <seealso cref="ShiftLeft(Vector256{ulong}, int)"/>
+        /// <seealso cref="ShiftLeft_Args(Vector256{ulong}, int, out Vector256{ulong})"/>
+        Vector256<ulong> ShiftLeft_ConstCore(Vector256<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount, Vector256<ulong> args0, Vector256<ulong> args1);
+
+        /// <summary>
         /// Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>.
         /// </summary>
