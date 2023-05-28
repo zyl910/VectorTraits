@@ -112,6 +112,103 @@ namespace Zyl.VectorTraits.Impl {
             return (a, b);
         }
 
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args{T}(Vector256{T}, int)"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [CLSCompliant(false)]
+        public static (Vector256<T> args0, Vector256<T> args1) ShiftLeft_Args<T>(this IWVectorTraits256 athis, Vector256<T> dummy, int shiftAmount) where T : struct {
+            if (typeof(sbyte) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftLeft_Args((Vector256<sbyte>)(object)dummy, shiftAmount);
+                return ((Vector256<T>)(object)args0, (Vector256<T>)(object)args1);
+            } else if (typeof(byte) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftLeft_Args((Vector256<byte>)(object)dummy, shiftAmount);
+                return ((Vector256<T>)(object)args0, (Vector256<T>)(object)args1);
+            } else if (typeof(short) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftLeft_Args((Vector256<short>)(object)dummy, shiftAmount);
+                return ((Vector256<T>)(object)args0, (Vector256<T>)(object)args1);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftLeft_Args((Vector256<ushort>)(object)dummy, shiftAmount);
+                return ((Vector256<T>)(object)args0, (Vector256<T>)(object)args1);
+            } else if (typeof(int) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftLeft_Args((Vector256<int>)(object)dummy, shiftAmount);
+                return ((Vector256<T>)(object)args0, (Vector256<T>)(object)args1);
+            } else if (typeof(uint) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftLeft_Args((Vector256<uint>)(object)dummy, shiftAmount);
+                return ((Vector256<T>)(object)args0, (Vector256<T>)(object)args1);
+            } else if (typeof(long) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftLeft_Args((Vector256<long>)(object)dummy, shiftAmount);
+                return ((Vector256<T>)(object)args0, (Vector256<T>)(object)args1);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftLeft_Args((Vector256<ulong>)(object)dummy, shiftAmount);
+                return ((Vector256<T>)(object)args0, (Vector256<T>)(object)args1);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{sbyte}, int)/">
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<sbyte> args0, Vector256<sbyte> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<sbyte> dummy, int shiftAmount) {
+            var args0 = athis.ShiftLeft_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{byte}, int)/">
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<byte> args0, Vector256<byte> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<byte> dummy, int shiftAmount) {
+            var args0 = athis.ShiftLeft_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{short}, int)/">
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<short> args0, Vector256<short> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<short> dummy, int shiftAmount) {
+            var args0 = athis.ShiftLeft_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{ushort}, int)/">
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ushort> args0, Vector256<ushort> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<ushort> dummy, int shiftAmount) {
+            var args0 = athis.ShiftLeft_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{int}, int)/">
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<int> args0, Vector256<int> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<int> dummy, int shiftAmount) {
+            var args0 = athis.ShiftLeft_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{uint}, int)/">
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<uint> args0, Vector256<uint> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<uint> dummy, int shiftAmount) {
+            var args0 = athis.ShiftLeft_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{long}, int)/">
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<long> args0, Vector256<long> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<long> dummy, int shiftAmount) {
+            var args0 = athis.ShiftLeft_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{ulong}, int)/">
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ulong> args0, Vector256<ulong> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<ulong> dummy, int shiftAmount) {
+            var args0 = athis.ShiftLeft_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
 
         /// <inheritdoc cref="Vector256s.Shuffle_Args{TIdx}(Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
