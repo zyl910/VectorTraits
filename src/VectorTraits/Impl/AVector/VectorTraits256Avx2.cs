@@ -361,10 +361,10 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return args0;
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Core(Vector{short}, Vector{short}, Vector{short})"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_Core(Vector{short}, int, Vector{short}, Vector{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<short> ShiftLeft_Core(Vector<short> value, Vector<short> args0, Vector<short> args1) {
-                return WStatics.ShiftLeft_Core(value.AsVector256(), args0.AsVector256(), args1.AsVector256()).AsVector();
+            public static Vector<short> ShiftLeft_Core(Vector<short> value, int shiftAmount, Vector<short> args0, Vector<short> args1) {
+                return WStatics.ShiftLeft_Core(value.AsVector256(), shiftAmount, args0.AsVector256(), args1.AsVector256()).AsVector();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{sbyte}, byte)"/>

@@ -618,6 +618,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
         /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
@@ -625,13 +626,14 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ShiftLeft(Vector256{sbyte}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{sbyte}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector256{sbyte}, int, out Vector256{sbyte})"/>
-        Vector256<sbyte> ShiftLeft_Core(Vector256<sbyte> value, Vector256<sbyte> args0, Vector256<sbyte> args1);
+        Vector256<sbyte> ShiftLeft_Core(Vector256<sbyte> value, int shiftAmount, Vector256<sbyte> args0, Vector256<sbyte> args1);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量的核心计算). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
         /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
@@ -639,13 +641,14 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ShiftLeft(Vector256{byte}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{byte}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector256{byte}, int, out Vector256{byte})"/>
-        Vector256<byte> ShiftLeft_Core(Vector256<byte> value, Vector256<byte> args0, Vector256<byte> args1);
+        Vector256<byte> ShiftLeft_Core(Vector256<byte> value, int shiftAmount, Vector256<byte> args0, Vector256<byte> args1);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量的核心计算). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
         /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
@@ -653,13 +656,14 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ShiftLeft(Vector256{short}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{short}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector256{short}, int, out Vector256{short})"/>
-        Vector256<short> ShiftLeft_Core(Vector256<short> value, Vector256<short> args0, Vector256<short> args1);
+        Vector256<short> ShiftLeft_Core(Vector256<short> value, int shiftAmount, Vector256<short> args0, Vector256<short> args1);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量的核心计算). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
         /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
@@ -667,13 +671,14 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ShiftLeft(Vector256{ushort}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{ushort}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector256{ushort}, int, out Vector256{ushort})"/>
-        Vector256<ushort> ShiftLeft_Core(Vector256<ushort> value, Vector256<ushort> args0, Vector256<ushort> args1);
+        Vector256<ushort> ShiftLeft_Core(Vector256<ushort> value, int shiftAmount, Vector256<ushort> args0, Vector256<ushort> args1);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量的核心计算). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
         /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
@@ -681,13 +686,14 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ShiftLeft(Vector256{int}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{int}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector256{int}, int, out Vector256{int})"/>
-        Vector256<int> ShiftLeft_Core(Vector256<int> value, Vector256<int> args0, Vector256<int> args1);
+        Vector256<int> ShiftLeft_Core(Vector256<int> value, int shiftAmount, Vector256<int> args0, Vector256<int> args1);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量的核心计算). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
         /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
@@ -695,13 +701,14 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ShiftLeft(Vector256{uint}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{uint}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector256{uint}, int, out Vector256{uint})"/>
-        Vector256<uint> ShiftLeft_Core(Vector256<uint> value, Vector256<uint> args0, Vector256<uint> args1);
+        Vector256<uint> ShiftLeft_Core(Vector256<uint> value, int shiftAmount, Vector256<uint> args0, Vector256<uint> args1);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量的核心计算). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
         /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
@@ -709,13 +716,14 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ShiftLeft(Vector256{long}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{long}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector256{long}, int, out Vector256{long})"/>
-        Vector256<long> ShiftLeft_Core(Vector256<long> value, Vector256<long> args0, Vector256<long> args1);
+        Vector256<long> ShiftLeft_Core(Vector256<long> value, int shiftAmount, Vector256<long> args0, Vector256<long> args1);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量的核心计算). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
         /// Mnemonic: <c>rt[i] := value[i] &lt;&lt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
         /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftLeft_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftLeft_Args .</param>
         /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
@@ -723,7 +731,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ShiftLeft(Vector256{ulong}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{ulong}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector256{ulong}, int, out Vector256{ulong})"/>
-        Vector256<ulong> ShiftLeft_Core(Vector256<ulong> value, Vector256<ulong> args0, Vector256<ulong> args1);
+        Vector256<ulong> ShiftLeft_Core(Vector256<ulong> value, int shiftAmount, Vector256<ulong> args0, Vector256<ulong> args1);
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).

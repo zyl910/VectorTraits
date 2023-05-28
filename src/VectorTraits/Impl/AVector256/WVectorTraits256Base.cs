@@ -1195,30 +1195,29 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> ShiftLeft_Args(Vector256<sbyte> dummy, int shiftAmount, out Vector256<sbyte> args1) {
                 _ = dummy;
-                Vector256<sbyte> args0 = default;
-                Unsafe.As<Vector256<sbyte>, int>(ref args0) = shiftAmount & 7;
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return args1;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Args(Vector256{byte}, int, out Vector256{byte})"/>
+            [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> ShiftLeft_Args(Vector256<byte> dummy, int shiftAmount, out Vector256<byte> args1) {
                 _ = dummy;
-                Vector256<byte> args0 = default;
-                Unsafe.As<Vector256<byte>, int>(ref args0) = shiftAmount & 7;
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return args1;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Args(Vector256{short}, int, out Vector256{short})"/>
+            [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> ShiftLeft_Args(Vector256<short> dummy, int shiftAmount, out Vector256<short> args1) {
                 _ = dummy;
-                Vector256<short> args0 = default;
-                Unsafe.As<Vector256<short>, int>(ref args0) = shiftAmount & 0x0F;
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return args1;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Args(Vector256{ushort}, int, out Vector256{ushort})"/>
@@ -1226,20 +1225,19 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> ShiftLeft_Args(Vector256<ushort> dummy, int shiftAmount, out Vector256<ushort> args1) {
                 _ = dummy;
-                Vector256<ushort> args0 = default;
-                Unsafe.As<Vector256<ushort>, int>(ref args0) = shiftAmount & 0x0F;
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return args1;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Args(Vector256{int}, int, out Vector256{int})"/>
+            [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> ShiftLeft_Args(Vector256<int> dummy, int shiftAmount, out Vector256<int> args1) {
                 _ = dummy;
-                Vector256<int> args0 = default;
-                Unsafe.As<Vector256<int>, int>(ref args0) = shiftAmount & 0x1F;
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return args1;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Args(Vector256{uint}, int, out Vector256{uint})"/>
@@ -1247,20 +1245,19 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> ShiftLeft_Args(Vector256<uint> dummy, int shiftAmount, out Vector256<uint> args1) {
                 _ = dummy;
-                Vector256<uint> args0 = default;
-                Unsafe.As<Vector256<uint>, int>(ref args0) = shiftAmount & 0x1F;
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return args1;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Args(Vector256{long}, int, out Vector256{long})"/>
+            [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftLeft_Args(Vector256<long> dummy, int shiftAmount, out Vector256<long> args1) {
                 _ = dummy;
-                Vector256<long> args0 = default;
-                Unsafe.As<Vector256<long>, int>(ref args0) = shiftAmount & 0x3F;
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return args1;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Args(Vector256{ulong}, int, out Vector256{ulong})"/>
@@ -1268,70 +1265,77 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> ShiftLeft_Args(Vector256<ulong> dummy, int shiftAmount, out Vector256<ulong> args1) {
                 _ = dummy;
-                Vector256<ulong> args0 = default;
-                Unsafe.As<Vector256<ulong>, int>(ref args0) = shiftAmount & 0x3F;
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return args1;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{sbyte}, int, Vector256{sbyte}, Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> ShiftLeft_Core(Vector256<sbyte> value, Vector256<sbyte> args0, Vector256<sbyte> args1) {
+            public static Vector256<sbyte> ShiftLeft_Core(Vector256<sbyte> value, int shiftAmount, Vector256<sbyte> args0, Vector256<sbyte> args1) {
+                _ = args0;
                 _ = args1;
-                return ShiftLeft_Fast(value, Unsafe.As<Vector256<sbyte>, int>(ref args0));
+                return ShiftLeft_Fast(value, shiftAmount);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{byte}, int, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> ShiftLeft_Core(Vector256<byte> value, Vector256<byte> args0, Vector256<byte> args1) {
+            public static Vector256<byte> ShiftLeft_Core(Vector256<byte> value, int shiftAmount, Vector256<byte> args0, Vector256<byte> args1) {
+                _ = args0;
                 _ = args1;
-                return ShiftLeft_Fast(value, Unsafe.As<Vector256<byte>, int>(ref args0));
+                return ShiftLeft_Fast(value, shiftAmount);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{short}, Vector256{short}, Vector256{short})"/>
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{short}, int, Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> ShiftLeft_Core(Vector256<short> value, Vector256<short> args0, Vector256<short> args1) {
+            public static Vector256<short> ShiftLeft_Core(Vector256<short> value, int shiftAmount, Vector256<short> args0, Vector256<short> args1) {
+                _ = args0;
                 _ = args1;
-                return ShiftLeft_Fast(value, Unsafe.As<Vector256<short>, int>(ref args0));
+                return ShiftLeft_Fast(value, shiftAmount);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{ushort}, int, Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ushort> ShiftLeft_Core(Vector256<ushort> value, Vector256<ushort> args0, Vector256<ushort> args1) {
+            public static Vector256<ushort> ShiftLeft_Core(Vector256<ushort> value, int shiftAmount, Vector256<ushort> args0, Vector256<ushort> args1) {
+                _ = args0;
                 _ = args1;
-                return ShiftLeft_Fast(value, Unsafe.As<Vector256<ushort>, int>(ref args0));
+                return ShiftLeft_Fast(value, shiftAmount);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{int}, Vector256{int}, Vector256{int})"/>
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{int}, int, Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> ShiftLeft_Core(Vector256<int> value, Vector256<int> args0, Vector256<int> args1) {
+            public static Vector256<int> ShiftLeft_Core(Vector256<int> value, int shiftAmount, Vector256<int> args0, Vector256<int> args1) {
+                _ = args0;
                 _ = args1;
-                return ShiftLeft_Fast(value, Unsafe.As<Vector256<int>, int>(ref args0));
+                return ShiftLeft_Fast(value, shiftAmount);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{uint}, int, Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<uint> ShiftLeft_Core(Vector256<uint> value, Vector256<uint> args0, Vector256<uint> args1) {
+            public static Vector256<uint> ShiftLeft_Core(Vector256<uint> value, int shiftAmount, Vector256<uint> args0, Vector256<uint> args1) {
+                _ = args0;
                 _ = args1;
-                return ShiftLeft_Fast(value, Unsafe.As<Vector256<uint>, int>(ref args0));
+                return ShiftLeft_Fast(value, shiftAmount);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{long}, Vector256{long}, Vector256{long})"/>
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{long}, int, Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> ShiftLeft_Core(Vector256<long> value, Vector256<long> args0, Vector256<long> args1) {
+            public static Vector256<long> ShiftLeft_Core(Vector256<long> value, int shiftAmount, Vector256<long> args0, Vector256<long> args1) {
+                _ = args0;
                 _ = args1;
-                return ShiftLeft_Fast(value, Unsafe.As<Vector256<long>, int>(ref args0));
+                return ShiftLeft_Fast(value, shiftAmount);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+            /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Core(Vector256{ulong}, int, Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ulong> ShiftLeft_Core(Vector256<ulong> value, Vector256<ulong> args0, Vector256<ulong> args1) {
+            public static Vector256<ulong> ShiftLeft_Core(Vector256<ulong> value, int shiftAmount, Vector256<ulong> args0, Vector256<ulong> args1) {
+                _ = args0;
                 _ = args1;
-                return ShiftLeft_Fast(value, Unsafe.As<Vector256<ulong>, int>(ref args0));
+                return ShiftLeft_Fast(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Const(Vector256{sbyte}, byte)"/>
