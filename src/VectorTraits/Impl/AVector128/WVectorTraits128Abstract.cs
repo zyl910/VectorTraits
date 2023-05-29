@@ -394,6 +394,110 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.ShiftLeft(value, shiftAmount);
         }
 
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{sbyte}, int, out Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<sbyte> ShiftLeft_Args(Vector128<sbyte> dummy, int shiftAmount, out Vector128<sbyte> args1) {
+            return Statics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{byte}, int, out Vector128{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<byte> ShiftLeft_Args(Vector128<byte> dummy, int shiftAmount, out Vector128<byte> args1) {
+            return Statics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{short}, int, out Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<short> ShiftLeft_Args(Vector128<short> dummy, int shiftAmount, out Vector128<short> args1) {
+            return Statics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{ushort}, int, out Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<ushort> ShiftLeft_Args(Vector128<ushort> dummy, int shiftAmount, out Vector128<ushort> args1) {
+            return Statics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{int}, int, out Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<int> ShiftLeft_Args(Vector128<int> dummy, int shiftAmount, out Vector128<int> args1) {
+            return Statics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{uint}, int, out Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<uint> ShiftLeft_Args(Vector128<uint> dummy, int shiftAmount, out Vector128<uint> args1) {
+            return Statics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{long}, int, out Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<long> ShiftLeft_Args(Vector128<long> dummy, int shiftAmount, out Vector128<long> args1) {
+            return Statics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{ulong}, int, out Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<ulong> ShiftLeft_Args(Vector128<ulong> dummy, int shiftAmount, out Vector128<ulong> args1) {
+            return Statics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<sbyte> ShiftLeft_Core(Vector128<sbyte> value, int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
+            return Statics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<byte> ShiftLeft_Core(Vector128<byte> value, int shiftAmount, Vector128<byte> args0, Vector128<byte> args1) {
+            return Statics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<short> ShiftLeft_Core(Vector128<short> value, int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
+            return Statics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{ushort}, int, Vector128{ushort}, Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<ushort> ShiftLeft_Core(Vector128<ushort> value, int shiftAmount, Vector128<ushort> args0, Vector128<ushort> args1) {
+            return Statics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<int> ShiftLeft_Core(Vector128<int> value, int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
+            return Statics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{uint}, int, Vector128{uint}, Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<uint> ShiftLeft_Core(Vector128<uint> value, int shiftAmount, Vector128<uint> args0, Vector128<uint> args1) {
+            return Statics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<long> ShiftLeft_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+            return Statics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{ulong}, int, Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<ulong> ShiftLeft_Core(Vector128<ulong> value, int shiftAmount, Vector128<ulong> args0, Vector128<ulong> args1) {
+            return Statics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+        }
+
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{sbyte}, byte)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -444,6 +548,58 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector128<ulong> ShiftLeft_Const(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount) {
             return Statics.ShiftLeft_Const(value, shiftAmount);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{sbyte}, byte, Vector128{sbyte}, Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<sbyte> ShiftLeft_ConstCore(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
+            return Statics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{byte}, byte, Vector128{byte}, Vector128{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<byte> ShiftLeft_ConstCore(Vector128<byte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount, Vector128<byte> args0, Vector128<byte> args1) {
+            return Statics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{short}, byte, Vector128{short}, Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<short> ShiftLeft_ConstCore(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount, Vector128<short> args0, Vector128<short> args1) {
+            return Statics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{ushort}, byte, Vector128{ushort}, Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<ushort> ShiftLeft_ConstCore(Vector128<ushort> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount, Vector128<ushort> args0, Vector128<ushort> args1) {
+            return Statics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{int}, byte, Vector128{int}, Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<int> ShiftLeft_ConstCore(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount, Vector128<int> args0, Vector128<int> args1) {
+            return Statics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{uint}, byte, Vector128{uint}, Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<uint> ShiftLeft_ConstCore(Vector128<uint> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount, Vector128<uint> args0, Vector128<uint> args1) {
+            return Statics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{long}, byte, Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<long> ShiftLeft_ConstCore(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+            return Statics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{ulong}, byte, Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<ulong> ShiftLeft_ConstCore(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount, Vector128<ulong> args0, Vector128<ulong> args1) {
+            return Statics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
         }
 
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{sbyte}, int)"/>

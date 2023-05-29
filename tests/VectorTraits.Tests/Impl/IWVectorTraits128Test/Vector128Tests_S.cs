@@ -42,10 +42,23 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             foreach (Vector128<T> vsrc in samples) {
                 for (int shiftAmount = -1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector128<T> vexpected = Vector128s.ShiftLeft((dynamic)vsrc, shiftAmount);
+                    // Static: Args and Core
+                    Vector128<T> args0, args1;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    (args0, args1) = Vector128s.ShiftLeft_Args<T>(vsrc, shiftAmount);
+#pragma warning restore CS0618 // Type or member is obsolete
+                    Vector128<T> vdst = Vector128s.ShiftLeft_Core((dynamic)vsrc, shiftAmount, (dynamic)args0, (dynamic)args1);
+                    Assert.AreEqual(vexpected, vdst, $"_Core, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        Vector128<T> vdst = instance.ShiftLeft((dynamic)vsrc, shiftAmount);
+                        vdst = instance.ShiftLeft((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                        // Instances: Args and Core
+#pragma warning disable CS0618 // Type or member is obsolete
+                        (args0, args1) = instance.ShiftLeft_Args<T>(vsrc, shiftAmount);
+#pragma warning restore CS0618 // Type or member is obsolete
+                        vdst = instance.ShiftLeft_Core((dynamic)vsrc, shiftAmount, (dynamic)args0, (dynamic)args1);
+                        Assert.AreEqual(vexpected, vdst, $"_Core of {instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                 }
             }
@@ -80,10 +93,24 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             foreach (Vector128<T> vsrc in samples) {
                 for (byte shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector128<T> vexpected = Vector128s.ShiftLeft_Const((dynamic)vsrc, shiftAmount);
+                    // Static: Args and Core
+                    Vector128<T> args0, args1;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    (args0, args1) = Vector128s.ShiftLeft_Args<T>(vsrc, shiftAmount);
+#pragma warning restore CS0618 // Type or member is obsolete
+                    Vector128<T> vdst = Vector128s.ShiftLeft_ConstCore((dynamic)vsrc, shiftAmount, (dynamic)args0, (dynamic)args1);
+                    Assert.AreEqual(vexpected, vdst, $"_Core, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                    // Instances
                     foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        Vector128<T> vdst = instance.ShiftLeft_Const((dynamic)vsrc, shiftAmount);
+                        vdst = instance.ShiftLeft_Const((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                        // Instances: Args and Core
+#pragma warning disable CS0618 // Type or member is obsolete
+                        (args0, args1) = instance.ShiftLeft_Args<T>(vsrc, shiftAmount);
+#pragma warning restore CS0618 // Type or member is obsolete
+                        vdst = instance.ShiftLeft_ConstCore((dynamic)vsrc, shiftAmount, (dynamic)args0, (dynamic)args1);
+                        Assert.AreEqual(vexpected, vdst, $"_Core of {instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                 }
             }

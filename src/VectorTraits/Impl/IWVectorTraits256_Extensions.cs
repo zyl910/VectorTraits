@@ -112,6 +112,7 @@ namespace Zyl.VectorTraits.Impl {
             return (a, b);
         }
 
+
         /// <inheritdoc cref="Vector256s.ShiftLeft_Args{T}(Vector256{T}, int)"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         [CLSCompliant(false)]
@@ -145,7 +146,7 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
-        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{sbyte}, int)/">
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<sbyte> args0, Vector256<sbyte> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<sbyte> dummy, int shiftAmount) {
@@ -153,7 +154,7 @@ namespace Zyl.VectorTraits.Impl {
             return (args0, args1);
         }
 
-        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{byte}, int)/">
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{byte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<byte> args0, Vector256<byte> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<byte> dummy, int shiftAmount) {
@@ -161,7 +162,7 @@ namespace Zyl.VectorTraits.Impl {
             return (args0, args1);
         }
 
-        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{short}, int)/">
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{short}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<short> args0, Vector256<short> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<short> dummy, int shiftAmount) {
@@ -169,7 +170,7 @@ namespace Zyl.VectorTraits.Impl {
             return (args0, args1);
         }
 
-        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{ushort}, int)/">
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{ushort}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<ushort> args0, Vector256<ushort> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<ushort> dummy, int shiftAmount) {
@@ -177,7 +178,7 @@ namespace Zyl.VectorTraits.Impl {
             return (args0, args1);
         }
 
-        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{int}, int)/">
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{int}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<int> args0, Vector256<int> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<int> dummy, int shiftAmount) {
@@ -185,7 +186,7 @@ namespace Zyl.VectorTraits.Impl {
             return (args0, args1);
         }
 
-        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{uint}, int)/">
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{uint}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<uint> args0, Vector256<uint> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<uint> dummy, int shiftAmount) {
@@ -193,7 +194,7 @@ namespace Zyl.VectorTraits.Impl {
             return (args0, args1);
         }
 
-        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{long}, int)/">
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{long}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<long> args0, Vector256<long> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<long> dummy, int shiftAmount) {
@@ -201,7 +202,7 @@ namespace Zyl.VectorTraits.Impl {
             return (args0, args1);
         }
 
-        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{ulong}, int)/">
+        /// <inheritdoc cref="Vector256s.ShiftLeft_Args(Vector256{ulong}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<ulong> args0, Vector256<ulong> args1) ShiftLeft_Args(this IWVectorTraits256 athis, Vector256<ulong> dummy, int shiftAmount) {
