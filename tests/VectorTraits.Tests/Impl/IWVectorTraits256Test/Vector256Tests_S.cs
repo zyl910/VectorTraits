@@ -91,7 +91,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.Serial,
             };
             foreach (Vector256<T> vsrc in samples) {
-                for (byte shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector256<T> vexpected = Vector256s.ShiftLeft_Const((dynamic)vsrc, shiftAmount);
                     // Static: Args and Core
                     Vector256<T> args0, args1;
@@ -211,7 +211,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.Serial,
             };
             foreach (Vector256<T> vsrc in samples) {
-                for (byte shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector256<T> vexpected = Vector256s.ShiftRightArithmetic_Const((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
@@ -330,7 +330,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.Serial,
             };
             foreach (Vector256<T> vsrc in samples) {
-                for (byte shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector256<T> vexpected = Vector256s.ShiftRightLogical_Const((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;

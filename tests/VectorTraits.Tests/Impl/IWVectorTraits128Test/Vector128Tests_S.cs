@@ -91,7 +91,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 Vector128s<T>.Serial,
             };
             foreach (Vector128<T> vsrc in samples) {
-                for (byte shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector128<T> vexpected = Vector128s.ShiftLeft_Const((dynamic)vsrc, shiftAmount);
                     // Static: Args and Core
                     Vector128<T> args0, args1;
@@ -211,7 +211,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 Vector128s<T>.Serial,
             };
             foreach (Vector128<T> vsrc in samples) {
-                for (byte shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector128<T> vexpected = Vector128s.ShiftRightArithmetic_Const((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
@@ -330,7 +330,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 Vector128s<T>.Serial,
             };
             foreach (Vector128<T> vsrc in samples) {
-                for (byte shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector128<T> vexpected = Vector128s.ShiftRightLogical_Const((dynamic)vsrc, shiftAmount);
                     foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;

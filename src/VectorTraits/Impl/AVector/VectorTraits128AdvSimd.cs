@@ -424,104 +424,104 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{sbyte}, byte)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<sbyte> ShiftLeft_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount) {
+            public static Vector<sbyte> ShiftLeft_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
                 return ShiftLeft_Fast(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{byte}, byte)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<byte> ShiftLeft_Const(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount) {
+            public static Vector<byte> ShiftLeft_Const(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
                 return ShiftLeft_Fast(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{short}, byte)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<short> ShiftLeft_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount) {
+            public static Vector<short> ShiftLeft_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
                 return ShiftLeft_Fast(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{ushort}, byte)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ushort> ShiftLeft_Const(Vector<ushort> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount) {
+            public static Vector<ushort> ShiftLeft_Const(Vector<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
                 return ShiftLeft_Fast(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{int}, byte)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<int> ShiftLeft_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount) {
+            public static Vector<int> ShiftLeft_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
                 return ShiftLeft_Fast(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{uint}, byte)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<uint> ShiftLeft_Const(Vector<uint> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount) {
+            public static Vector<uint> ShiftLeft_Const(Vector<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
                 return ShiftLeft_Fast(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{long}, byte)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<long> ShiftLeft_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount) {
+            public static Vector<long> ShiftLeft_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
                 return ShiftLeft_Fast(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Const(Vector{ulong}, byte)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ulong> ShiftLeft_Const(Vector<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount) {
+            public static Vector<ulong> ShiftLeft_Const(Vector<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
                 return ShiftLeft_Fast(value, shiftAmount);
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{sbyte}, byte, Vector{sbyte}, Vector{sbyte})"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{sbyte}, int, Vector{sbyte}, Vector{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<sbyte> ShiftLeft_ConstCore(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount, Vector<sbyte> args0, Vector<sbyte> args1) {
+            public static Vector<sbyte> ShiftLeft_ConstCore(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector<sbyte> args0, Vector<sbyte> args1) {
                 return WStatics.ShiftLeft_ConstCore(value.AsVector128(), shiftAmount, args0.AsVector128(), args1.AsVector128()).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{byte}, byte, Vector{byte}, Vector{byte})"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{byte}, int, Vector{byte}, Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<byte> ShiftLeft_ConstCore(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount, Vector<byte> args0, Vector<byte> args1) {
+            public static Vector<byte> ShiftLeft_ConstCore(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector<byte> args0, Vector<byte> args1) {
                 return WStatics.ShiftLeft_ConstCore(value.AsVector128(), shiftAmount, args0.AsVector128(), args1.AsVector128()).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{short}, byte, Vector{short}, Vector{short})"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{short}, int, Vector{short}, Vector{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<short> ShiftLeft_ConstCore(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount, Vector<short> args0, Vector<short> args1) {
+            public static Vector<short> ShiftLeft_ConstCore(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector<short> args0, Vector<short> args1) {
                 return WStatics.ShiftLeft_ConstCore(value.AsVector128(), shiftAmount, args0.AsVector128(), args1.AsVector128()).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{ushort}, byte, Vector{ushort}, Vector{ushort})"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{ushort}, int, Vector{ushort}, Vector{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ushort> ShiftLeft_ConstCore(Vector<ushort> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount, Vector<ushort> args0, Vector<ushort> args1) {
+            public static Vector<ushort> ShiftLeft_ConstCore(Vector<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector<ushort> args0, Vector<ushort> args1) {
                 return WStatics.ShiftLeft_ConstCore(value.AsVector128(), shiftAmount, args0.AsVector128(), args1.AsVector128()).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{int}, byte, Vector{int}, Vector{int})"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{int}, int, Vector{int}, Vector{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<int> ShiftLeft_ConstCore(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount, Vector<int> args0, Vector<int> args1) {
+            public static Vector<int> ShiftLeft_ConstCore(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector<int> args0, Vector<int> args1) {
                 return WStatics.ShiftLeft_ConstCore(value.AsVector128(), shiftAmount, args0.AsVector128(), args1.AsVector128()).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{uint}, byte, Vector{uint}, Vector{uint})"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{uint}, int, Vector{uint}, Vector{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<uint> ShiftLeft_ConstCore(Vector<uint> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount, Vector<uint> args0, Vector<uint> args1) {
+            public static Vector<uint> ShiftLeft_ConstCore(Vector<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector<uint> args0, Vector<uint> args1) {
                 return WStatics.ShiftLeft_ConstCore(value.AsVector128(), shiftAmount, args0.AsVector128(), args1.AsVector128()).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{long}, byte, Vector{long}, Vector{long})"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{long}, int, Vector{long}, Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<long> ShiftLeft_ConstCore(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount, Vector<long> args0, Vector<long> args1) {
+            public static Vector<long> ShiftLeft_ConstCore(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector<long> args0, Vector<long> args1) {
                 return WStatics.ShiftLeft_ConstCore(value.AsVector128(), shiftAmount, args0.AsVector128(), args1.AsVector128()).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{ulong}, byte, Vector{ulong}, Vector{ulong})"/>
+            /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{ulong}, int, Vector{ulong}, Vector{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ulong> ShiftLeft_ConstCore(Vector<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount, Vector<ulong> args0, Vector<ulong> args1) {
+            public static Vector<ulong> ShiftLeft_ConstCore(Vector<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector<ulong> args0, Vector<ulong> args1) {
                 return WStatics.ShiftLeft_ConstCore(value.AsVector128(), shiftAmount, args0.AsVector128(), args1.AsVector128()).AsVector();
             }
 
@@ -614,25 +614,25 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Const(Vector{sbyte}, byte)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<sbyte> ShiftRightArithmetic_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount) {
+            public static Vector<sbyte> ShiftRightArithmetic_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
                 return WStatics.ShiftRightArithmetic_Const(value.AsVector128(), shiftAmount).AsVector();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Const(Vector{short}, byte)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<short> ShiftRightArithmetic_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount) {
+            public static Vector<short> ShiftRightArithmetic_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
                 return WStatics.ShiftRightArithmetic_Const(value.AsVector128(), shiftAmount).AsVector();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Const(Vector{int}, byte)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<int> ShiftRightArithmetic_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount) {
+            public static Vector<int> ShiftRightArithmetic_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
                 return WStatics.ShiftRightArithmetic_Const(value.AsVector128(), shiftAmount).AsVector();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Const(Vector{long}, byte)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<long> ShiftRightArithmetic_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount) {
+            public static Vector<long> ShiftRightArithmetic_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
                 return WStatics.ShiftRightArithmetic_Const(value.AsVector128(), shiftAmount).AsVector();
             }
 
@@ -724,52 +724,52 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Const(Vector{sbyte}, byte)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<sbyte> ShiftRightLogical_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount) {
+            public static Vector<sbyte> ShiftRightLogical_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
                 return WStatics.ShiftRightLogical_Const(value.AsVector128(), shiftAmount).AsVector();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Const(Vector{byte}, byte)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<byte> ShiftRightLogical_Const(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount) {
+            public static Vector<byte> ShiftRightLogical_Const(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
                 return WStatics.ShiftRightLogical_Const(value.AsVector128(), shiftAmount).AsVector();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Const(Vector{short}, byte)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<short> ShiftRightLogical_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount) {
+            public static Vector<short> ShiftRightLogical_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
                 return WStatics.ShiftRightLogical_Const(value.AsVector128(), shiftAmount).AsVector();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Const(Vector{ushort}, byte)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ushort> ShiftRightLogical_Const(Vector<ushort> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount) {
+            public static Vector<ushort> ShiftRightLogical_Const(Vector<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
                 return WStatics.ShiftRightLogical_Const(value.AsVector128(), shiftAmount).AsVector();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Const(Vector{int}, byte)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<int> ShiftRightLogical_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount) {
+            public static Vector<int> ShiftRightLogical_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
                 return WStatics.ShiftRightLogical_Const(value.AsVector128(), shiftAmount).AsVector();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Const(Vector{uint}, byte)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<uint> ShiftRightLogical_Const(Vector<uint> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount) {
+            public static Vector<uint> ShiftRightLogical_Const(Vector<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
                 return WStatics.ShiftRightLogical_Const(value.AsVector128(), shiftAmount).AsVector();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Const(Vector{long}, byte)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<long> ShiftRightLogical_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount) {
+            public static Vector<long> ShiftRightLogical_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
                 return WStatics.ShiftRightLogical_Const(value.AsVector128(), shiftAmount).AsVector();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightLogical_Const(Vector{ulong}, byte)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ulong> ShiftRightLogical_Const(Vector<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount) {
+            public static Vector<ulong> ShiftRightLogical_Const(Vector<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
                 return WStatics.ShiftRightLogical_Const(value.AsVector128(), shiftAmount).AsVector();
             }
 

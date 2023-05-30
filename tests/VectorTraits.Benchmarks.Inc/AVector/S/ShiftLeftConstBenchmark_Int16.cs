@@ -29,7 +29,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
     public partial class ShiftLeftConstBenchmark_Int16 : AbstractSharedBenchmark_Int16 {
 
         // -- var --
-        private const byte shiftAmount = 1;
+        private const int shiftAmount = 1;
 
         /// <summary>
         /// Sum shift left logical - base.

@@ -88,7 +88,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                 Vectors<T>.Serial,
             };
             foreach (Vector<T> vsrc in samples) {
-                for (byte shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector<T> vexpected = Vectors.ShiftLeft_Const((dynamic)vsrc, shiftAmount);
                     // Static: Args and Core
                     Vector<T> args0, args1;
@@ -227,7 +227,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                 Vectors<T>.Serial,
             };
             foreach (Vector<T> vsrc in samples) {
-                for (byte shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector<T> vexpected = Vectors.ShiftRightArithmetic_Const((dynamic)vsrc, shiftAmount);
                     foreach (IVectorTraits instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
@@ -355,7 +355,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                 Vectors<T>.Serial,
             };
             foreach (Vector<T> vsrc in samples) {
-                for (byte shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
+                for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector<T> vexpected = Vectors.ShiftRightLogical_Const((dynamic)vsrc, shiftAmount);
                     foreach (IVectorTraits instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;

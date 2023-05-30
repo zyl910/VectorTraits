@@ -762,7 +762,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{sbyte}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector{sbyte}, int)"/>
-        Vector<sbyte> ShiftLeft_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount);
+        Vector<sbyte> ShiftLeft_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount);
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
@@ -774,7 +774,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{byte}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector{byte}, int)"/>
-        Vector<byte> ShiftLeft_Const(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount);
+        Vector<byte> ShiftLeft_Const(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount);
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
@@ -786,7 +786,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{short}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector{short}, int)"/>
-        Vector<short> ShiftLeft_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount);
+        Vector<short> ShiftLeft_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount);
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
@@ -798,7 +798,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{ushort}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector{ushort}, int)"/>
-        Vector<ushort> ShiftLeft_Const(Vector<ushort> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount);
+        Vector<ushort> ShiftLeft_Const(Vector<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount);
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
@@ -810,7 +810,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{int}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector{int}, int)"/>
-        Vector<int> ShiftLeft_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount);
+        Vector<int> ShiftLeft_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount);
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
@@ -822,7 +822,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{uint}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector{uint}, int)"/>
-        Vector<uint> ShiftLeft_Const(Vector<uint> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount);
+        Vector<uint> ShiftLeft_Const(Vector<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount);
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
@@ -834,7 +834,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{long}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector{long}, int)"/>
-        Vector<long> ShiftLeft_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount);
+        Vector<long> ShiftLeft_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount);
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量 - 常量).
@@ -846,7 +846,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{ulong}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftLeft(Vector{ulong}, int)"/>
-        Vector<ulong> ShiftLeft_Const(Vector<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount);
+        Vector<ulong> ShiftLeft_Const(Vector<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
@@ -861,7 +861,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector.ShiftLeft(Vector{sbyte}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{sbyte}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector{sbyte}, int, out Vector{sbyte})"/>
-        Vector<sbyte> ShiftLeft_ConstCore(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount, Vector<sbyte> args0, Vector<sbyte> args1);
+        Vector<sbyte> ShiftLeft_ConstCore(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector<sbyte> args0, Vector<sbyte> args1);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
@@ -876,7 +876,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector.ShiftLeft(Vector{byte}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{byte}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector{byte}, int, out Vector{byte})"/>
-        Vector<byte> ShiftLeft_ConstCore(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount, Vector<byte> args0, Vector<byte> args1);
+        Vector<byte> ShiftLeft_ConstCore(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector<byte> args0, Vector<byte> args1);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
@@ -891,7 +891,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector.ShiftLeft(Vector{short}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{short}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector{short}, int, out Vector{short})"/>
-        Vector<short> ShiftLeft_ConstCore(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount, Vector<short> args0, Vector<short> args1);
+        Vector<short> ShiftLeft_ConstCore(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector<short> args0, Vector<short> args1);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
@@ -906,7 +906,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector.ShiftLeft(Vector{ushort}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{ushort}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector{ushort}, int, out Vector{ushort})"/>
-        Vector<ushort> ShiftLeft_ConstCore(Vector<ushort> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount, Vector<ushort> args0, Vector<ushort> args1);
+        Vector<ushort> ShiftLeft_ConstCore(Vector<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector<ushort> args0, Vector<ushort> args1);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
@@ -921,7 +921,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector.ShiftLeft(Vector{int}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{int}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector{int}, int, out Vector{int})"/>
-        Vector<int> ShiftLeft_ConstCore(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount, Vector<int> args0, Vector<int> args1);
+        Vector<int> ShiftLeft_ConstCore(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector<int> args0, Vector<int> args1);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
@@ -936,7 +936,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector.ShiftLeft(Vector{uint}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{uint}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector{uint}, int, out Vector{uint})"/>
-        Vector<uint> ShiftLeft_ConstCore(Vector<uint> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount, Vector<uint> args0, Vector<uint> args1);
+        Vector<uint> ShiftLeft_ConstCore(Vector<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector<uint> args0, Vector<uint> args1);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
@@ -951,7 +951,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector.ShiftLeft(Vector{long}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{long}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector{long}, int, out Vector{long})"/>
-        Vector<long> ShiftLeft_ConstCore(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount, Vector<long> args0, Vector<long> args1);
+        Vector<long> ShiftLeft_ConstCore(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector<long> args0, Vector<long> args1);
 
         /// <summary>
         /// Core calculation for shifts each element of a vector left by the specified amount - Const (将向量的每个元素左移指定量的核心计算 - 常量). Its arguments are derived from ShiftLeft_Args (其参数来源于 ShiftLeft_Args).
@@ -966,7 +966,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector.ShiftLeft(Vector{ulong}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{ulong}, int)"/>
         /// <seealso cref="ShiftLeft_Args(Vector{ulong}, int, out Vector{ulong})"/>
-        Vector<ulong> ShiftLeft_ConstCore(Vector<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount, Vector<ulong> args0, Vector<ulong> args1);
+        Vector<ulong> ShiftLeft_ConstCore(Vector<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector<ulong> args0, Vector<ulong> args1);
 
         /// <summary>
         /// Shifts each element of a vector left by the specified amount - Fast (将向量的每个元素左移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first.
@@ -1136,7 +1136,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftRightArithmetic(Vector{sbyte}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightArithmetic(Vector{sbyte}, int)"/>
-        Vector<sbyte> ShiftRightArithmetic_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount);
+        Vector<sbyte> ShiftRightArithmetic_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount);
 
         /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount - Const(将向量的每个有符号元素算术右移指定量 - 常量).
@@ -1148,7 +1148,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftRightArithmetic(Vector{short}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightArithmetic(Vector{short}, int)"/>
-        Vector<short> ShiftRightArithmetic_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount);
+        Vector<short> ShiftRightArithmetic_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount);
 
         /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount - Const(将向量的每个有符号元素算术右移指定量 - 常量).
@@ -1160,7 +1160,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftRightArithmetic(Vector{int}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightArithmetic(Vector{int}, int)"/>
-        Vector<int> ShiftRightArithmetic_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount);
+        Vector<int> ShiftRightArithmetic_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount);
 
         /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount - Const(将向量的每个有符号元素算术右移指定量 - 常量).
@@ -1172,7 +1172,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftRightArithmetic(Vector{long}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightArithmetic(Vector{long}, int)"/>
-        Vector<long> ShiftRightArithmetic_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount);
+        Vector<long> ShiftRightArithmetic_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount);
 
         /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
@@ -1343,7 +1343,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftRightLogical(Vector{sbyte}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector{sbyte}, int)"/>
-        Vector<sbyte> ShiftRightLogical_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount);
+        Vector<sbyte> ShiftRightLogical_Const(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount);
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
@@ -1355,7 +1355,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftRightLogical(Vector{byte}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector{byte}, int)"/>
-        Vector<byte> ShiftRightLogical_Const(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] byte shiftAmount);
+        Vector<byte> ShiftRightLogical_Const(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount);
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
@@ -1367,7 +1367,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftRightLogical(Vector{short}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector{short}, int)"/>
-        Vector<short> ShiftRightLogical_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount);
+        Vector<short> ShiftRightLogical_Const(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount);
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
@@ -1379,7 +1379,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftRightLogical(Vector{ushort}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector{ushort}, int)"/>
-        Vector<ushort> ShiftRightLogical_Const(Vector<ushort> value, [ConstantExpected(Min = 1, Max = 15)] byte shiftAmount);
+        Vector<ushort> ShiftRightLogical_Const(Vector<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount);
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
@@ -1391,7 +1391,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftRightLogical(Vector{int}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector{int}, int)"/>
-        Vector<int> ShiftRightLogical_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount);
+        Vector<int> ShiftRightLogical_Const(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount);
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
@@ -1403,7 +1403,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftRightLogical(Vector{uint}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector{uint}, int)"/>
-        Vector<uint> ShiftRightLogical_Const(Vector<uint> value, [ConstantExpected(Min = 1, Max = 31)] byte shiftAmount);
+        Vector<uint> ShiftRightLogical_Const(Vector<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount);
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
@@ -1415,7 +1415,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftRightLogical(Vector{long}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector{long}, int)"/>
-        Vector<long> ShiftRightLogical_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount);
+        Vector<long> ShiftRightLogical_Const(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount);
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
@@ -1427,7 +1427,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftRightLogical(Vector{ulong}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector{ulong}, int)"/>
-        Vector<ulong> ShiftRightLogical_Const(Vector<ulong> value, [ConstantExpected(Min = 1, Max = 63)] byte shiftAmount);
+        Vector<ulong> ShiftRightLogical_Const(Vector<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount);
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
