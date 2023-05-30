@@ -45,9 +45,8 @@ Style suffix (风格后缀):
 - `ArgsX`: [废弃] 用于检查及转换参数, 返回值用的是向量元祖类型 (e.g. VectorX2). 用本方法转换参数后, 随后可调用 Core 版方法.
 - `Core`: 核心运算. 需先调用 Args 版函数, 才可调用本方法. 例如 Shuffle_Core .
 - `Const`: 常量版. 用于能确保参数在范围内, 且参数是常量时. 参数会用 `ConstantExpected` attribute 说明范围.
-- `ConstArgs`: 常量版参数转换. 用于能确保参数在范围内, 且参数是常量时. 参数会用 `ConstantExpected` attribute 说明范围.
-- `ConstCore`: 常量版核心运算. 需先调用 ConstArgs 版函数, 才可调用本方法. 用于能确保参数在范围内, 且参数是常量时. 参数会用 `ConstantExpected` attribute 说明范围.
-- `Fast`: 快速版. 用于能确保参数在范围内, 且参数是变量时. 会在参数的文档注释里说明范围.
+- `ConstCore`: 常量版核心运算. 需先调用 Args 版函数, 才可调用本方法. 用于能确保参数在范围内, 且参数是常量时. 参数会用 `ConstantExpected` attribute 说明范围.
+- `Fast`: 快速版. 用于能确保参数在范围内, 且参数是变量时.
 
 注: Base name (基本名称)必会提供加速类型检测的属性. 而对于风格后缀, 一般不用提供加速类型检测.
 
