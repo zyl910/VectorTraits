@@ -701,52 +701,77 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_ConstCore(Vector256{short}, int, Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> ShiftLeft_ConstCore(Vector256<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector256<short> args0, Vector256<short> args1) {
+#if NET6_0_OR_GREATER
+                // The net6 JIT can compile constants to immediate numbers
                 _ = args0;
                 _ = args1;
                 return Avx2.ShiftLeftLogical(value, (byte)shiftAmount);
+#else
+                return ShiftLeft_Core(value, shiftAmount, args0, args1);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_ConstCore(Vector256{ushort}, int, Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> ShiftLeft_ConstCore(Vector256<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector256<ushort> args0, Vector256<ushort> args1) {
+#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
                 return Avx2.ShiftLeftLogical(value, (byte)shiftAmount);
+#else
+                return ShiftLeft_Core(value, shiftAmount, args0, args1);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_ConstCore(Vector256{int}, int, Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> ShiftLeft_ConstCore(Vector256<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector256<int> args0, Vector256<int> args1) {
+#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
                 return Avx2.ShiftLeftLogical(value, (byte)shiftAmount);
+#else
+                return ShiftLeft_Core(value, shiftAmount, args0, args1);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_ConstCore(Vector256{uint}, int, Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> ShiftLeft_ConstCore(Vector256<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector256<uint> args0, Vector256<uint> args1) {
+#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
                 return Avx2.ShiftLeftLogical(value, (byte)shiftAmount);
+#else
+                return ShiftLeft_Core(value, shiftAmount, args0, args1);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_ConstCore(Vector256{long}, int, Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftLeft_ConstCore(Vector256<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector256<long> args0, Vector256<long> args1) {
+#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
                 return Avx2.ShiftLeftLogical(value, (byte)shiftAmount);
+#else
+                return ShiftLeft_Core(value, shiftAmount, args0, args1);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_ConstCore(Vector256{ulong}, int, Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> ShiftLeft_ConstCore(Vector256<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector256<ulong> args0, Vector256<ulong> args1) {
+#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
                 return Avx2.ShiftLeftLogical(value, (byte)shiftAmount);
+#else
+                return ShiftLeft_Core(value, shiftAmount, args0, args1);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{sbyte}, int)"/>
