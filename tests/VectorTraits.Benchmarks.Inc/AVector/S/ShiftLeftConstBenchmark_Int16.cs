@@ -10,7 +10,6 @@ using System.Text;
 using System.Threading;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
-using Zyl.VectorTraits.Impl.AVector128;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_OFF

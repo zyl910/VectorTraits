@@ -1410,6 +1410,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<ulong> ShiftLeft_Fast_Base(Vector<ulong> value, int shiftAmount) {
                 return ShiftLeft_Fast_Base(value.AsInt64(), shiftAmount).AsUInt64();
             }
+
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
