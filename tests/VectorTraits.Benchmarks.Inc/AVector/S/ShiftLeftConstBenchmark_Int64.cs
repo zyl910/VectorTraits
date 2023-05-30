@@ -466,6 +466,50 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("SumSLLConstTraits");
         }
 
+        /// <summary>
+        /// Sum shift left logical - Traits static - ConstCore.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumSLLConstTraits_Core(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            var args0 = Vectors.ShiftLeft_Args(vrt, shiftAmount, out var args1);
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = Vectors.ShiftLeft_ConstCore(p0, shiftAmount, args0, args1);
+                vrt += vtemp; // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)(Unsafe.Add(ref p, i) << shiftAmount);
+            }
+            // Reduce.
+            rt += Vectors.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSLLConstTraits_Core() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumSLLConstTraits_Core(srcArray, srcArray.Length);
+            CheckResult("SumSLLConstTraits_Core");
+        }
+
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
 
