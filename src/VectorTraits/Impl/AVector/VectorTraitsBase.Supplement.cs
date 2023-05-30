@@ -63,7 +63,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> Multiply(Vector<ushort> left, Vector<ushort> right) {
-                return Vector.Multiply(left, right);
+                return Multiply(left.AsInt16(), right.AsInt16()).AsUInt16();
             }
 
             /// <inheritdoc cref="IVectorTraits.Multiply(Vector{int}, Vector{int})"/>
@@ -76,7 +76,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> Multiply(Vector<uint> left, Vector<uint> right) {
-                return Vector.Multiply(left, right);
+                return Multiply(left.AsInt32(), right.AsInt32()).AsUInt32();
             }
 
             /// <inheritdoc cref="IVectorTraits.Multiply(Vector{long}, Vector{long})"/>
