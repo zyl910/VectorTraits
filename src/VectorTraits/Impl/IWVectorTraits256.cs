@@ -1211,10 +1211,14 @@ namespace Zyl.VectorTraits.Impl {
         /// <remarks>
         /// <para>Meaning of suffixes (后缀的含义).</para>
         /// <para>- (none): Normal (常规).</para>
+        /// <para>- Args: Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</para>
+        /// <para>- Core. Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).</para>
         /// <para>- Const: Constant version. This version can be used if you can ensure that the parameters are constants. It can take advantage of constants and make better use of hardware acceleration (常量版. 若能确保参数是常量, 可使用该版本. 它能利用常量, 更好的使用硬件加速).</para>
         /// <para>- Fast: Fast version. This version can be used if you can ensure that the parameter variables are always in the valid range (快速版. 若能确保参数变量总是在有效范围内的, 可使用该版本).</para>
         /// </remarks>
         /// <seealso cref="ShiftRightLogical"/>
+        /// <seealso cref="ShiftRightLogical_Args"/>
+        /// <seealso cref="ShiftRightLogical_Core"/>
         /// <seealso cref="ShiftRightLogical_Const"/>
         /// <seealso cref="ShiftRightLogical_Fast"/>
         TypeCodeFlags ShiftRightLogical_AcceleratedTypes { get; }
