@@ -531,7 +531,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{sbyte}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{sbyte}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector{sbyte}, int, Vector{sbyte}, Vector{sbyte})"/>
         Vector<sbyte> ShiftLeft_Args(Vector<sbyte> dummy, int shiftAmount, out Vector<sbyte> args1);
 
         /// <summary>
@@ -545,7 +545,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{byte}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{byte}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector{byte}, Vector{byte}, Vector{byte})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector{byte}, int, Vector{byte}, Vector{byte})"/>
         Vector<byte> ShiftLeft_Args(Vector<byte> dummy, int shiftAmount, out Vector<byte> args1);
 
         /// <summary>
@@ -559,7 +559,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{short}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{short}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector{short}, Vector{short}, Vector{short})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector{short}, int, Vector{short}, Vector{short})"/>
         Vector<short> ShiftLeft_Args(Vector<short> dummy, int shiftAmount, out Vector<short> args1);
 
         /// <summary>
@@ -573,7 +573,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{ushort}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{ushort}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector{ushort}, int, Vector{ushort}, Vector{ushort})"/>
         Vector<ushort> ShiftLeft_Args(Vector<ushort> dummy, int shiftAmount, out Vector<ushort> args1);
 
         /// <summary>
@@ -587,7 +587,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{int}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{int}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector{int}, Vector{int}, Vector{int})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector{int}, int, Vector{int}, Vector{int})"/>
         Vector<int> ShiftLeft_Args(Vector<int> dummy, int shiftAmount, out Vector<int> args1);
 
         /// <summary>
@@ -601,7 +601,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{uint}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{uint}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector{uint}, Vector{uint}, Vector{uint})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector{uint}, int, Vector{uint}, Vector{uint})"/>
         Vector<uint> ShiftLeft_Args(Vector<uint> dummy, int shiftAmount, out Vector<uint> args1);
 
         /// <summary>
@@ -615,7 +615,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{long}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{long}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector{long}, Vector{long}, Vector{long})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector{long}, int, Vector{long}, Vector{long})"/>
         Vector<long> ShiftLeft_Args(Vector<long> dummy, int shiftAmount, out Vector<long> args1);
 
         /// <summary>
@@ -629,7 +629,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector.ShiftLeft(Vector{ulong}, int)"/>
         /// <seealso cref="ShiftLeft(Vector{ulong}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector{ulong}, int, Vector{ulong}, Vector{ulong})"/>
         Vector<ulong> ShiftLeft_Args(Vector<ulong> dummy, int shiftAmount, out Vector<ulong> args1);
 
         /// <summary>

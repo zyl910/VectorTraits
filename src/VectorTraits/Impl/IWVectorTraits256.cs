@@ -512,7 +512,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftLeft(Vector256{sbyte}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{sbyte}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector256{sbyte}, int, Vector256{sbyte}, Vector256{sbyte})"/>
         Vector256<sbyte> ShiftLeft_Args(Vector256<sbyte> dummy, int shiftAmount, out Vector256<sbyte> args1);
 
         /// <summary>
@@ -526,7 +526,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftLeft(Vector256{byte}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{byte}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector256{byte}, int, Vector256{byte}, Vector256{byte})"/>
         Vector256<byte> ShiftLeft_Args(Vector256<byte> dummy, int shiftAmount, out Vector256<byte> args1);
 
         /// <summary>
@@ -540,7 +540,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftLeft(Vector256{short}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{short}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector256{short}, Vector256{short}, Vector256{short})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector256{short}, int, Vector256{short}, Vector256{short})"/>
         Vector256<short> ShiftLeft_Args(Vector256<short> dummy, int shiftAmount, out Vector256<short> args1);
 
         /// <summary>
@@ -554,7 +554,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftLeft(Vector256{ushort}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{ushort}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector256{ushort}, int, Vector256{ushort}, Vector256{ushort})"/>
         Vector256<ushort> ShiftLeft_Args(Vector256<ushort> dummy, int shiftAmount, out Vector256<ushort> args1);
 
         /// <summary>
@@ -568,7 +568,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftLeft(Vector256{int}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{int}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector256{int}, Vector256{int}, Vector256{int})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector256{int}, int, Vector256{int}, Vector256{int})"/>
         Vector256<int> ShiftLeft_Args(Vector256<int> dummy, int shiftAmount, out Vector256<int> args1);
 
         /// <summary>
@@ -582,7 +582,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftLeft(Vector256{uint}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{uint}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector256{uint}, int, Vector256{uint}, Vector256{uint})"/>
         Vector256<uint> ShiftLeft_Args(Vector256<uint> dummy, int shiftAmount, out Vector256<uint> args1);
 
         /// <summary>
@@ -596,7 +596,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftLeft(Vector256{long}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{long}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector256{long}, Vector256{long}, Vector256{long})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector256{long}, int, Vector256{long}, Vector256{long})"/>
         Vector256<long> ShiftLeft_Args(Vector256<long> dummy, int shiftAmount, out Vector256<long> args1);
 
         /// <summary>
@@ -610,7 +610,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftLeft(Vector256{ulong}, int)"/>
         /// <seealso cref="ShiftLeft(Vector256{ulong}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector256{ulong}, int, Vector256{ulong}, Vector256{ulong})"/>
         Vector256<ulong> ShiftLeft_Args(Vector256<ulong> dummy, int shiftAmount, out Vector256<ulong> args1);
 
         /// <summary>
@@ -1330,7 +1330,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftRightLogical(Vector256{sbyte}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector256{sbyte}, int)"/>
-        /// <seealso cref="ShiftRightLogical_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{sbyte}, int, Vector256{sbyte}, Vector256{sbyte})"/>
         Vector256<sbyte> ShiftRightLogical_Args(Vector256<sbyte> dummy, int shiftAmount, out Vector256<sbyte> args1);
 
         /// <summary>
@@ -1344,7 +1344,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftRightLogical(Vector256{byte}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector256{byte}, int)"/>
-        /// <seealso cref="ShiftRightLogical_Core(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{byte}, int, Vector256{byte}, Vector256{byte})"/>
         Vector256<byte> ShiftRightLogical_Args(Vector256<byte> dummy, int shiftAmount, out Vector256<byte> args1);
 
         /// <summary>
@@ -1358,7 +1358,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftRightLogical(Vector256{short}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector256{short}, int)"/>
-        /// <seealso cref="ShiftRightLogical_Core(Vector256{short}, Vector256{short}, Vector256{short})"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{short}, int, Vector256{short}, Vector256{short})"/>
         Vector256<short> ShiftRightLogical_Args(Vector256<short> dummy, int shiftAmount, out Vector256<short> args1);
 
         /// <summary>
@@ -1372,7 +1372,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftRightLogical(Vector256{ushort}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector256{ushort}, int)"/>
-        /// <seealso cref="ShiftRightLogical_Core(Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{ushort}, int, Vector256{ushort}, Vector256{ushort})"/>
         Vector256<ushort> ShiftRightLogical_Args(Vector256<ushort> dummy, int shiftAmount, out Vector256<ushort> args1);
 
         /// <summary>
@@ -1386,7 +1386,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftRightLogical(Vector256{int}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector256{int}, int)"/>
-        /// <seealso cref="ShiftRightLogical_Core(Vector256{int}, Vector256{int}, Vector256{int})"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{int}, int, Vector256{int}, Vector256{int})"/>
         Vector256<int> ShiftRightLogical_Args(Vector256<int> dummy, int shiftAmount, out Vector256<int> args1);
 
         /// <summary>
@@ -1400,7 +1400,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftRightLogical(Vector256{uint}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector256{uint}, int)"/>
-        /// <seealso cref="ShiftRightLogical_Core(Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{uint}, int, Vector256{uint}, Vector256{uint})"/>
         Vector256<uint> ShiftRightLogical_Args(Vector256<uint> dummy, int shiftAmount, out Vector256<uint> args1);
 
         /// <summary>
@@ -1414,7 +1414,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftRightLogical(Vector256{long}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector256{long}, int)"/>
-        /// <seealso cref="ShiftRightLogical_Core(Vector256{long}, Vector256{long}, Vector256{long})"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{long}, int, Vector256{long}, Vector256{long})"/>
         Vector256<long> ShiftRightLogical_Args(Vector256<long> dummy, int shiftAmount, out Vector256<long> args1);
 
         /// <summary>
@@ -1428,7 +1428,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ShiftRightLogical(Vector256{ulong}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector256{ulong}, int)"/>
-        /// <seealso cref="ShiftRightLogical_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{ulong}, int, Vector256{ulong}, Vector256{ulong})"/>
         Vector256<ulong> ShiftRightLogical_Args(Vector256<ulong> dummy, int shiftAmount, out Vector256<ulong> args1);
 
         /// <summary>

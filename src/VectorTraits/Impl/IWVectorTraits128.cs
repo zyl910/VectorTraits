@@ -515,7 +515,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{sbyte}, int)"/>
         /// <seealso cref="ShiftLeft(Vector128{sbyte}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
         Vector128<sbyte> ShiftLeft_Args(Vector128<sbyte> dummy, int shiftAmount, out Vector128<sbyte> args1);
 
         /// <summary>
@@ -529,7 +529,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{byte}, int)"/>
         /// <seealso cref="ShiftLeft(Vector128{byte}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
         Vector128<byte> ShiftLeft_Args(Vector128<byte> dummy, int shiftAmount, out Vector128<byte> args1);
 
         /// <summary>
@@ -543,7 +543,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{short}, int)"/>
         /// <seealso cref="ShiftLeft(Vector128{short}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector128{short}, Vector128{short}, Vector128{short})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
         Vector128<short> ShiftLeft_Args(Vector128<short> dummy, int shiftAmount, out Vector128<short> args1);
 
         /// <summary>
@@ -557,7 +557,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{ushort}, int)"/>
         /// <seealso cref="ShiftLeft(Vector128{ushort}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector128{ushort}, int, Vector128{ushort}, Vector128{ushort})"/>
         Vector128<ushort> ShiftLeft_Args(Vector128<ushort> dummy, int shiftAmount, out Vector128<ushort> args1);
 
         /// <summary>
@@ -571,7 +571,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{int}, int)"/>
         /// <seealso cref="ShiftLeft(Vector128{int}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector128{int}, Vector128{int}, Vector128{int})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
         Vector128<int> ShiftLeft_Args(Vector128<int> dummy, int shiftAmount, out Vector128<int> args1);
 
         /// <summary>
@@ -585,7 +585,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{uint}, int)"/>
         /// <seealso cref="ShiftLeft(Vector128{uint}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector128{uint}, int, Vector128{uint}, Vector128{uint})"/>
         Vector128<uint> ShiftLeft_Args(Vector128<uint> dummy, int shiftAmount, out Vector128<uint> args1);
 
         /// <summary>
@@ -599,7 +599,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{long}, int)"/>
         /// <seealso cref="ShiftLeft(Vector128{long}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector128{long}, Vector128{long}, Vector128{long})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
         Vector128<long> ShiftLeft_Args(Vector128<long> dummy, int shiftAmount, out Vector128<long> args1);
 
         /// <summary>
@@ -613,7 +613,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftLeft(Vector128{ulong}, int)"/>
         /// <seealso cref="ShiftLeft(Vector128{ulong}, int)"/>
-        /// <seealso cref="ShiftLeft_Core(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector128{ulong}, int, Vector128{ulong}, Vector128{ulong})"/>
         Vector128<ulong> ShiftLeft_Args(Vector128<ulong> dummy, int shiftAmount, out Vector128<ulong> args1);
 
         /// <summary>
