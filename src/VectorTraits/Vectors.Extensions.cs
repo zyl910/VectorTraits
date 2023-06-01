@@ -211,7 +211,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IVectorTraits.ShiftLeft(Vector{sbyte}, int)"/>
-        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{sbyte}, int, Vector{sbyte}, Vector{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<sbyte> args0, Vector<sbyte> args1) ShiftLeft_Args(Vector<sbyte> dummy, int shiftAmount) {
@@ -228,7 +228,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
-        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{byte}, Vector{byte}, Vector{byte})"/>
+        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{byte}, int, Vector{byte}, Vector{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<byte> args0, Vector<byte> args1) ShiftLeft_Args(Vector<byte> dummy, int shiftAmount) {
             var args0 = ShiftLeft_Args(dummy, shiftAmount, out var args1);
@@ -244,7 +244,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IVectorTraits.ShiftLeft(Vector{short}, int)"/>
-        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{short}, Vector{short}, Vector{short})"/>
+        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{short}, int, Vector{short}, Vector{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<short> args0, Vector<short> args1) ShiftLeft_Args(Vector<short> dummy, int shiftAmount) {
             var args0 = ShiftLeft_Args(dummy, shiftAmount, out var args1);
@@ -260,7 +260,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IVectorTraits.ShiftLeft(Vector{ushort}, int)"/>
-        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{ushort}, int, Vector{ushort}, Vector{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<ushort> args0, Vector<ushort> args1) ShiftLeft_Args(Vector<ushort> dummy, int shiftAmount) {
@@ -277,7 +277,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IVectorTraits.ShiftLeft(Vector{int}, int)"/>
-        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{int}, Vector{int}, Vector{int})"/>
+        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{int}, int, Vector{int}, Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<int> args0, Vector<int> args1) ShiftLeft_Args(Vector<int> dummy, int shiftAmount) {
             var args0 = ShiftLeft_Args(dummy, shiftAmount, out var args1);
@@ -293,7 +293,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IVectorTraits.ShiftLeft(Vector{uint}, int)"/>
-        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{uint}, Vector{uint}, Vector{uint})"/>
+        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{uint}, int, Vector{uint}, Vector{uint})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<uint> args0, Vector<uint> args1) ShiftLeft_Args(Vector<uint> dummy, int shiftAmount) {
@@ -310,7 +310,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IVectorTraits.ShiftLeft(Vector{long}, int)"/>
-        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{long}, Vector{long}, Vector{long})"/>
+        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{long}, int, Vector{long}, Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<long> args0, Vector<long> args1) ShiftLeft_Args(Vector<long> dummy, int shiftAmount) {
             var args0 = ShiftLeft_Args(dummy, shiftAmount, out var args1);
@@ -326,7 +326,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IVectorTraits.ShiftLeft(Vector{ulong}, int)"/>
-        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{ulong}, int, Vector{ulong}, Vector{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<ulong> args0, Vector<ulong> args1) ShiftLeft_Args(Vector<ulong> dummy, int shiftAmount) {

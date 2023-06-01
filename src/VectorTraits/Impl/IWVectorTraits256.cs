@@ -1320,6 +1320,238 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<ulong> ShiftRightLogical(Vector256<ulong> value, int shiftAmount);
 
         /// <summary>
+        /// Arguments calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的参数计算). Provide arguments for ShiftRightLogical_Core (为 ShiftRightLogical_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args1">Returns arguments 1 (返回参数1). Used for ShiftRightLogical_Core .</param>
+        /// <returns>Returns arguments 0 (返回参数0). Used for ShiftRightLogical_Core .</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{sbyte}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{sbyte}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+        Vector256<sbyte> ShiftRightLogical_Args(Vector256<sbyte> dummy, int shiftAmount, out Vector256<sbyte> args1);
+
+        /// <summary>
+        /// Arguments calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的参数计算). Provide arguments for ShiftRightLogical_Core (为 ShiftRightLogical_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args1">Returns arguments 1 (返回参数1). Used for ShiftRightLogical_Core .</param>
+        /// <returns>Returns arguments 0 (返回参数0). Used for ShiftRightLogical_Core .</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{byte}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{byte}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+        Vector256<byte> ShiftRightLogical_Args(Vector256<byte> dummy, int shiftAmount, out Vector256<byte> args1);
+
+        /// <summary>
+        /// Arguments calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的参数计算). Provide arguments for ShiftRightLogical_Core (为 ShiftRightLogical_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args1">Returns arguments 1 (返回参数1). Used for ShiftRightLogical_Core .</param>
+        /// <returns>Returns arguments 0 (返回参数0). Used for ShiftRightLogical_Core .</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{short}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{short}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{short}, Vector256{short}, Vector256{short})"/>
+        Vector256<short> ShiftRightLogical_Args(Vector256<short> dummy, int shiftAmount, out Vector256<short> args1);
+
+        /// <summary>
+        /// Arguments calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的参数计算). Provide arguments for ShiftRightLogical_Core (为 ShiftRightLogical_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args1">Returns arguments 1 (返回参数1). Used for ShiftRightLogical_Core .</param>
+        /// <returns>Returns arguments 0 (返回参数0). Used for ShiftRightLogical_Core .</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{ushort}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{ushort}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+        Vector256<ushort> ShiftRightLogical_Args(Vector256<ushort> dummy, int shiftAmount, out Vector256<ushort> args1);
+
+        /// <summary>
+        /// Arguments calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的参数计算). Provide arguments for ShiftRightLogical_Core (为 ShiftRightLogical_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args1">Returns arguments 1 (返回参数1). Used for ShiftRightLogical_Core .</param>
+        /// <returns>Returns arguments 0 (返回参数0). Used for ShiftRightLogical_Core .</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{int}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{int}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{int}, Vector256{int}, Vector256{int})"/>
+        Vector256<int> ShiftRightLogical_Args(Vector256<int> dummy, int shiftAmount, out Vector256<int> args1);
+
+        /// <summary>
+        /// Arguments calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的参数计算). Provide arguments for ShiftRightLogical_Core (为 ShiftRightLogical_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args1">Returns arguments 1 (返回参数1). Used for ShiftRightLogical_Core .</param>
+        /// <returns>Returns arguments 0 (返回参数0). Used for ShiftRightLogical_Core .</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{uint}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{uint}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+        Vector256<uint> ShiftRightLogical_Args(Vector256<uint> dummy, int shiftAmount, out Vector256<uint> args1);
+
+        /// <summary>
+        /// Arguments calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的参数计算). Provide arguments for ShiftRightLogical_Core (为 ShiftRightLogical_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args1">Returns arguments 1 (返回参数1). Used for ShiftRightLogical_Core .</param>
+        /// <returns>Returns arguments 0 (返回参数0). Used for ShiftRightLogical_Core .</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{long}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{long}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{long}, Vector256{long}, Vector256{long})"/>
+        Vector256<long> ShiftRightLogical_Args(Vector256<long> dummy, int shiftAmount, out Vector256<long> args1);
+
+        /// <summary>
+        /// Arguments calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的参数计算). Provide arguments for ShiftRightLogical_Core (为 ShiftRightLogical_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args1">Returns arguments 1 (返回参数1). Used for ShiftRightLogical_Core .</param>
+        /// <returns>Returns arguments 0 (返回参数0). Used for ShiftRightLogical_Core .</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{ulong}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{ulong}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+        Vector256<ulong> ShiftRightLogical_Args(Vector256<ulong> dummy, int shiftAmount, out Vector256<ulong> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的核心计算). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{sbyte}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{sbyte}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{sbyte}, int, out Vector256{sbyte})"/>
+        Vector256<sbyte> ShiftRightLogical_Core(Vector256<sbyte> value, int shiftAmount, Vector256<sbyte> args0, Vector256<sbyte> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的核心计算). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{byte}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{byte}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{byte}, int, out Vector256{byte})"/>
+        Vector256<byte> ShiftRightLogical_Core(Vector256<byte> value, int shiftAmount, Vector256<byte> args0, Vector256<byte> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的核心计算). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{short}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{short}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{short}, int, out Vector256{short})"/>
+        Vector256<short> ShiftRightLogical_Core(Vector256<short> value, int shiftAmount, Vector256<short> args0, Vector256<short> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的核心计算). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{ushort}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{ushort}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{ushort}, int, out Vector256{ushort})"/>
+        Vector256<ushort> ShiftRightLogical_Core(Vector256<ushort> value, int shiftAmount, Vector256<ushort> args0, Vector256<ushort> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的核心计算). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{int}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{int}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{int}, int, out Vector256{int})"/>
+        Vector256<int> ShiftRightLogical_Core(Vector256<int> value, int shiftAmount, Vector256<int> args0, Vector256<int> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的核心计算). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{uint}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{uint}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{uint}, int, out Vector256{uint})"/>
+        Vector256<uint> ShiftRightLogical_Core(Vector256<uint> value, int shiftAmount, Vector256<uint> args0, Vector256<uint> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的核心计算). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{long}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{long}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{long}, int, out Vector256{long})"/>
+        Vector256<long> ShiftRightLogical_Core(Vector256<long> value, int shiftAmount, Vector256<long> args0, Vector256<long> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的核心计算). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{ulong}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{ulong}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{ulong}, int, out Vector256{ulong})"/>
+        Vector256<ulong> ShiftRightLogical_Core(Vector256<ulong> value, int shiftAmount, Vector256<ulong> args0, Vector256<ulong> args1);
+
+        /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量 - 常量).
         /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>
@@ -1414,6 +1646,126 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ShiftRightLogical(Vector256{ulong}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightLogical(Vector256{ulong}, int)"/>
         Vector256<ulong> ShiftRightLogical_Const(Vector256<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量的核心计算 - 常量). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~7 (有效范围是 1~7).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{sbyte}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{sbyte}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{sbyte}, int, out Vector256{sbyte})"/>
+        Vector256<sbyte> ShiftRightLogical_ConstCore(Vector256<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector256<sbyte> args0, Vector256<sbyte> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量的核心计算 - 常量). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~7 (有效范围是 1~7).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{byte}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{byte}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{byte}, int, out Vector256{byte})"/>
+        Vector256<byte> ShiftRightLogical_ConstCore(Vector256<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector256<byte> args0, Vector256<byte> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量的核心计算 - 常量). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~15 (有效范围是 1~15).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{short}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{short}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{short}, int, out Vector256{short})"/>
+        Vector256<short> ShiftRightLogical_ConstCore(Vector256<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector256<short> args0, Vector256<short> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量的核心计算 - 常量). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~15 (有效范围是 1~15).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{ushort}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{ushort}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{ushort}, int, out Vector256{ushort})"/>
+        Vector256<ushort> ShiftRightLogical_ConstCore(Vector256<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector256<ushort> args0, Vector256<ushort> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量的核心计算 - 常量). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~31 (有效范围是 1~31).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{int}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{int}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{int}, int, out Vector256{int})"/>
+        Vector256<int> ShiftRightLogical_ConstCore(Vector256<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector256<int> args0, Vector256<int> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量的核心计算 - 常量). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~31 (有效范围是 1~31).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{uint}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{uint}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{uint}, int, out Vector256{uint})"/>
+        Vector256<uint> ShiftRightLogical_ConstCore(Vector256<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector256<uint> args0, Vector256<uint> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量的核心计算 - 常量). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~63 (有效范围是 1~63).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{long}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{long}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{long}, int, out Vector256{long})"/>
+        Vector256<long> ShiftRightLogical_ConstCore(Vector256<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector256<long> args0, Vector256<long> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (unsigned) each element of a vector right by the specified amount - Const (将向量的每个无符号元素逻辑右移指定量的核心计算 - 常量). Its arguments are derived from ShiftRightLogical_Args (其参数来源于 ShiftRightLogical_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~63 (有效范围是 1~63).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
+        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ShiftRightLogical(Vector256{ulong}, int)"/>
+        /// <seealso cref="ShiftRightLogical(Vector256{ulong}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector256{ulong}, int, out Vector256{ulong})"/>
+        Vector256<ulong> ShiftRightLogical_ConstCore(Vector256<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector256<ulong> args0, Vector256<ulong> args1);
 
         /// <summary>
         /// Shifts (unsigned) each element of a vector right by the specified amount. - Fast(将向量的每个无符号元素逻辑右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .

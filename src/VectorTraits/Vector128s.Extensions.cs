@@ -215,7 +215,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits128.ShiftLeft(Vector128{sbyte}, int)"/>
-        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<sbyte> args0, Vector128<sbyte> args1) ShiftLeft_Args(Vector128<sbyte> dummy, int shiftAmount) {
@@ -232,7 +232,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits128.ShiftLeft(Vector128{byte}, int)"/>
-        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<byte> args0, Vector128<byte> args1) ShiftLeft_Args(Vector128<byte> dummy, int shiftAmount) {
             var args0 = ShiftLeft_Args(dummy, shiftAmount, out var args1);
@@ -248,7 +248,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits128.ShiftLeft(Vector128{short}, int)"/>
-        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{short}, Vector128{short}, Vector128{short})"/>
+        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<short> args0, Vector128<short> args1) ShiftLeft_Args(Vector128<short> dummy, int shiftAmount) {
             var args0 = ShiftLeft_Args(dummy, shiftAmount, out var args1);
@@ -264,7 +264,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits128.ShiftLeft(Vector128{ushort}, int)"/>
-        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{ushort}, int, Vector128{ushort}, Vector128{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<ushort> args0, Vector128<ushort> args1) ShiftLeft_Args(Vector128<ushort> dummy, int shiftAmount) {
@@ -281,7 +281,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits128.ShiftLeft(Vector128{int}, int)"/>
-        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{int}, Vector128{int}, Vector128{int})"/>
+        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<int> args0, Vector128<int> args1) ShiftLeft_Args(Vector128<int> dummy, int shiftAmount) {
             var args0 = ShiftLeft_Args(dummy, shiftAmount, out var args1);
@@ -297,7 +297,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits128.ShiftLeft(Vector128{uint}, int)"/>
-        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{uint}, int, Vector128{uint}, Vector128{uint})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<uint> args0, Vector128<uint> args1) ShiftLeft_Args(Vector128<uint> dummy, int shiftAmount) {
@@ -314,7 +314,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits128.ShiftLeft(Vector128{long}, int)"/>
-        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{long}, Vector128{long}, Vector128{long})"/>
+        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<long> args0, Vector128<long> args1) ShiftLeft_Args(Vector128<long> dummy, int shiftAmount) {
             var args0 = ShiftLeft_Args(dummy, shiftAmount, out var args1);
@@ -330,7 +330,7 @@ namespace Zyl.VectorTraits {
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         /// <seealso cref="IWVectorTraits128.ShiftLeft(Vector128{ulong}, int)"/>
-        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+        /// <seealso cref="IWVectorTraits128.ShiftLeft_Core(Vector128{ulong}, int, Vector128{ulong}, Vector128{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<ulong> args0, Vector128<ulong> args1) ShiftLeft_Args(Vector128<ulong> dummy, int shiftAmount) {
