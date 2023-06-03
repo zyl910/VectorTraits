@@ -112,3 +112,5 @@ project*.lock.json
 .vs
 .DS_Store
 AssemblyVer.cs
+
+/tests/*.txt
