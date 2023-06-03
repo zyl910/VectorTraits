@@ -204,6 +204,104 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="Vectors.ShiftRightLogical_Args{T}(Vector{T}, int)"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [CLSCompliant(false)]
+        public static (Vector<T> args0, Vector<T> args1) ShiftRightLogical_Args<T>(this IVectorTraits athis, Vector<T> dummy, int shiftAmount) where T : struct {
+            if (typeof(sbyte) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<sbyte>)(object)dummy, shiftAmount);
+                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+            } else if (typeof(byte) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<byte>)(object)dummy, shiftAmount);
+                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+            } else if (typeof(short) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<short>)(object)dummy, shiftAmount);
+                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<ushort>)(object)dummy, shiftAmount);
+                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+            } else if (typeof(int) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<int>)(object)dummy, shiftAmount);
+                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+            } else if (typeof(uint) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<uint>)(object)dummy, shiftAmount);
+                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+            } else if (typeof(long) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<long>)(object)dummy, shiftAmount);
+                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<ulong>)(object)dummy, shiftAmount);
+                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vectors.ShiftRightLogical_Args(Vector{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> args0, Vector<sbyte> args1) ShiftRightLogical_Args(this IVectorTraits athis, Vector<sbyte> dummy, int shiftAmount) {
+            var args0 = athis.ShiftRightLogical_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vectors.ShiftRightLogical_Args(Vector{byte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> args0, Vector<byte> args1) ShiftRightLogical_Args(this IVectorTraits athis, Vector<byte> dummy, int shiftAmount) {
+            var args0 = athis.ShiftRightLogical_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vectors.ShiftRightLogical_Args(Vector{short}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> args0, Vector<short> args1) ShiftRightLogical_Args(this IVectorTraits athis, Vector<short> dummy, int shiftAmount) {
+            var args0 = athis.ShiftRightLogical_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vectors.ShiftRightLogical_Args(Vector{ushort}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> args0, Vector<ushort> args1) ShiftRightLogical_Args(this IVectorTraits athis, Vector<ushort> dummy, int shiftAmount) {
+            var args0 = athis.ShiftRightLogical_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vectors.ShiftRightLogical_Args(Vector{int}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> args0, Vector<int> args1) ShiftRightLogical_Args(this IVectorTraits athis, Vector<int> dummy, int shiftAmount) {
+            var args0 = athis.ShiftRightLogical_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vectors.ShiftRightLogical_Args(Vector{uint}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> args0, Vector<uint> args1) ShiftRightLogical_Args(this IVectorTraits athis, Vector<uint> dummy, int shiftAmount) {
+            var args0 = athis.ShiftRightLogical_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vectors.ShiftRightLogical_Args(Vector{long}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> args0, Vector<long> args1) ShiftRightLogical_Args(this IVectorTraits athis, Vector<long> dummy, int shiftAmount) {
+            var args0 = athis.ShiftRightLogical_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vectors.ShiftRightLogical_Args(Vector{ulong}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> args0, Vector<ulong> args1) ShiftRightLogical_Args(this IVectorTraits athis, Vector<ulong> dummy, int shiftAmount) {
+            var args0 = athis.ShiftRightLogical_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+
         /// <inheritdoc cref="Vectors.Shuffle_Args{TIdx}(Vector{TIdx}, out Vector{TIdx}, out Vector{TIdx})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         [CLSCompliant(false)]

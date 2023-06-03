@@ -301,10 +301,6 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, int, Vector<T>>>("ShiftRightLogical_Base", "ShiftRightLogical_Widen");
-            foreach (var func in funcList) {
-                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
-            }
             // run.
             Vector<T>[] samples = {
                 Vectors.Create(src),
@@ -314,15 +310,23 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             foreach (Vector<T> vsrc in samples) {
                 for (int shiftAmount = -1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector<T> vexpected = Vectors.ShiftRightLogical((dynamic)vsrc, shiftAmount);
+                    // Static: Args and Core
+                    Vector<T> args0, args1;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    (args0, args1) = Vectors.ShiftRightLogical_Args<T>(vsrc, shiftAmount);
+#pragma warning restore CS0618 // Type or member is obsolete
+                    Vector<T> vdst = Vectors.ShiftRightLogical_Core((dynamic)vsrc, shiftAmount, (dynamic)args0, (dynamic)args1);
+                    Assert.AreEqual(vexpected, vdst, $"_Core, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     foreach (IVectorTraits instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        Vector<T> vdst = instance.ShiftRightLogical((dynamic)vsrc, shiftAmount);
+                        vdst = instance.ShiftRightLogical((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
-                    }
-                    foreach (var func in funcList) {
-                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
-                        Vector<T> vdst = func(vsrc, shiftAmount);
-                        Assert.AreEqual(vexpected, vdst, $"{funcName}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                        // Instances: Args and Core
+#pragma warning disable CS0618 // Type or member is obsolete
+                        (args0, args1) = instance.ShiftRightLogical_Args<T>(vsrc, shiftAmount);
+#pragma warning restore CS0618 // Type or member is obsolete
+                        vdst = instance.ShiftRightLogical_Core((dynamic)vsrc, shiftAmount, (dynamic)args0, (dynamic)args1);
+                        Assert.AreEqual(vexpected, vdst, $"_Core of {instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                 }
             }
@@ -357,10 +361,24 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             foreach (Vector<T> vsrc in samples) {
                 for (int shiftAmount = 1; shiftAmount <= shiftAmountMax; ++shiftAmount) {
                     Vector<T> vexpected = Vectors.ShiftRightLogical_Const((dynamic)vsrc, shiftAmount);
+                    // Static: Args and Core
+                    Vector<T> args0, args1;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    (args0, args1) = Vectors.ShiftRightLogical_Args<T>(vsrc, shiftAmount);
+#pragma warning restore CS0618 // Type or member is obsolete
+                    Vector<T> vdst = Vectors.ShiftRightLogical_ConstCore((dynamic)vsrc, shiftAmount, (dynamic)args0, (dynamic)args1);
+                    Assert.AreEqual(vexpected, vdst, $"_Core, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                    // Instances
                     foreach (IVectorTraits instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        Vector<T> vdst = instance.ShiftRightLogical_Const((dynamic)vsrc, shiftAmount);
+                        vdst = instance.ShiftRightLogical_Const((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                        // Instances: Args and Core
+#pragma warning disable CS0618 // Type or member is obsolete
+                        (args0, args1) = instance.ShiftRightLogical_Args<T>(vsrc, shiftAmount);
+#pragma warning restore CS0618 // Type or member is obsolete
+                        vdst = instance.ShiftRightLogical_ConstCore((dynamic)vsrc, shiftAmount, (dynamic)args0, (dynamic)args1);
+                        Assert.AreEqual(vexpected, vdst, $"_Core of {instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                     }
                 }
             }
