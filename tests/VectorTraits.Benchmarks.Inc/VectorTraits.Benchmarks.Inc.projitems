@@ -41,6 +41,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftRightLogicalBenchmark_UInt16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftRightLogicalBenchmark_UInt32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftRightLogicalBenchmark_UInt64.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftRightLogicalConstBenchmark_Byte.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftRightLogicalConstBenchmark_UInt16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftRightLogicalConstBenchmark_UInt32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShiftRightLogicalConstBenchmark_UInt64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShuffleBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShuffleBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\S\ShuffleBenchmark_Int64.cs" />
