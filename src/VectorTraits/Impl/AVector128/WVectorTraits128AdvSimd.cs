@@ -8,6 +8,7 @@ using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
+using System.Threading;
 #endif
 #if NET5_0_OR_GREATER
 using System.Runtime.Intrinsics.Arm;
@@ -1009,10 +1010,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftRightLogical_Args(Vector128<byte> dummy, int shiftAmount, out Vector128<byte> args1) {
-                _ = dummy;
-                var args0 = Vector128.Create((byte)-(shiftAmount & 7));
-                args1 = default;
-                return args0;
+                var a0 = ShiftRightLogical_Args(dummy.AsSByte(), shiftAmount, out var a1);
+                args1 = a1.AsByte();
+                return a0.AsByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{short}, int, out Vector128{short})"/>
@@ -1020,6 +1020,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightLogical_Args(Vector128<short> dummy, int shiftAmount, out Vector128<short> args1) {
                 _ = dummy;
+#if NET6_0_OR_GREATER
+#else
+                shiftAmount = Volatile.Read(ref shiftAmount); // Fixed a bug when it runs on net5 arm. If shiftAmount is constant byte 1, the element of args0 should be -1(0xFFFF), but it is -256(0xFF00) .
+#endif
                 var args0 = Vector128.Create((short)-(shiftAmount & 0x0F));
                 args1 = default;
                 return args0;
@@ -1029,10 +1033,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftRightLogical_Args(Vector128<ushort> dummy, int shiftAmount, out Vector128<ushort> args1) {
-                _ = dummy;
-                var args0 = Vector128.Create((ushort)-(shiftAmount & 0x0F));
-                args1 = default;
-                return args0;
+                var a0 = ShiftRightLogical_Args(dummy.AsInt16(), shiftAmount, out var a1);
+                args1 = a1.AsUInt16();
+                return a0.AsUInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{int}, int, out Vector128{int})"/>
@@ -1049,10 +1052,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftRightLogical_Args(Vector128<uint> dummy, int shiftAmount, out Vector128<uint> args1) {
-                _ = dummy;
-                var args0 = Vector128.Create((uint)-(shiftAmount & 0x1F));
-                args1 = default;
-                return args0;
+                var a0 = ShiftRightLogical_Args(dummy.AsInt32(), shiftAmount, out var a1);
+                args1 = a1.AsUInt32();
+                return a0.AsUInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{long}, int, out Vector128{long})"/>
@@ -1069,10 +1071,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftRightLogical_Args(Vector128<ulong> dummy, int shiftAmount, out Vector128<ulong> args1) {
-                _ = dummy;
-                var args0 = Vector128.Create((ulong)-(shiftAmount & 0x3F));
-                args1 = default;
-                return args0;
+                var a0 = ShiftRightLogical_Args(dummy.AsInt64(), shiftAmount, out var a1);
+                args1 = a1.AsUInt64();
+                return a0.AsUInt64();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Core(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>

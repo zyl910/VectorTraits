@@ -4,6 +4,7 @@ using BenchmarkDotNet.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -509,6 +510,65 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             dstTMy = StaticSumSRLConstTraits_Core(srcArray, srcArray.Length);
             CheckResult("SumSRLConstTraits_Core");
         }
+
+        ///// <summary>
+        ///// Sum shift left logical - Traits static - ConstCore - AdvSimd.
+        ///// </summary>
+        ///// <param name="src">Source array.</param>
+        ///// <param name="srcCount">Source count</param>
+        ///// <returns>Returns the sum.</returns>
+        //private static TMy StaticSumSRLConstTraits_Core_AdvSimd(TMy[] src, int srcCount) {
+        //    TMy rt = 0; // Result.
+        //    const int GroupSize = 1;
+        //    int VectorWidth = Vector<TMy>.Count; // Block width.
+        //    int nBlockWidth = VectorWidth; // Block width.
+        //    int cntBlock = srcCount / nBlockWidth; // Block count.
+        //    int cntRem = srcCount % nBlockWidth; // Remainder count.
+        //    Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+        //    int i;
+        //    // Body.
+        //    var args0 = Vectors.ShiftRightLogical_Args(vrt, shiftAmount, out var args1);
+        //    ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+        //    bool testValue = true;
+        //    if (testValue) {
+        //        TextWriter writer = Console.Out;
+        //        VectorTextUtil.WriteLine(writer, "shiftAmount:\t{0}", shiftAmount);
+        //        VectorTextUtil.WriteLine(writer, "args0:\t{0}", args0);
+        //        VectorTextUtil.WriteLine(writer, "args1:\t{0}", args1);
+        //        VectorTextUtil.WriteLine(writer, "p0:\t{0}", p0);
+        //        VectorTextUtil.WriteLine(writer, "ShiftRightLogical:\t{0}", Vectors.ShiftRightLogical(p0, shiftAmount));
+        //        VectorTextUtil.WriteLine(writer, "ShiftRightLogical_Const:\t{0}", Vectors.ShiftRightLogical_Const(p0, shiftAmount));
+        //        VectorTextUtil.WriteLine(writer, "ShiftRightLogical_Core:\t{0}", Vectors.ShiftRightLogical_Core(p0, shiftAmount, args0, args1));
+        //        VectorTextUtil.WriteLine(writer, "ShiftRightLogical_ConstCore:\t{0}", Vectors.ShiftRightLogical_ConstCore(p0, shiftAmount, args0, args1));
+        //        VectorTextUtil.WriteLine(writer, "VectorTraits128AdvSimd.ShiftRightLogical_ConstCore:\t{0}", VectorTraits128AdvSimd.Statics.ShiftRightLogical_ConstCore(p0, shiftAmount, args0, args1));
+        //        throw new ApplicationException("Test done.");
+        //    }
+        //    // Vector processs.
+        //    for (i = 0; i < cntBlock; ++i) {
+        //        Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftRightLogical_ConstCore(p0, shiftAmount, args0, args1);
+        //        vrt += vtemp; // Add.
+        //        p0 = ref Unsafe.Add(ref p0, GroupSize);
+        //    }
+        //    // Remainder processs.
+        //    ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+        //    for (i = 0; i < cntRem; ++i) {
+        //        rt += (TMy)(Unsafe.Add(ref p, i) >> shiftAmount);
+        //    }
+        //    // Reduce.
+        //    rt += Vectors.Sum(vrt);
+        //    return rt;
+        //}
+
+        //[Benchmark]
+        //public void SumSRLConstTraits_Core_AdvSimd() {
+        //    VectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
+        //    if (BenchmarkUtil.IsLastRun) {
+        //        Volatile.Write(ref dstTMy, 0);
+        //        //Debugger.Break();
+        //    }
+        //    dstTMy = StaticSumSRLConstTraits_Core_AdvSimd(srcArray, srcArray.Length);
+        //    CheckResult("SumSRLConstTraits_Core_AdvSimd");
+        //}
 
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
