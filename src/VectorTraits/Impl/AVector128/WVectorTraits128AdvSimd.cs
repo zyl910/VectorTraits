@@ -1148,52 +1148,81 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightLogical_Const(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
+#if NET6_0_OR_GREATER
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
+#else
+                return ShiftRightLogical_Fast(value, shiftAmount);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftRightLogical_Const(Vector128<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
+#if NET6_0_OR_GREATER
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
+#else
+                return ShiftRightLogical_Fast(value, shiftAmount);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightLogical_Const(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
+#if NET6_0_OR_GREATER
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
+#else
+                shiftAmount = Volatile.Read(ref shiftAmount); // Fixed a bug when it runs on net5 arm. If shiftAmount is constant byte 1, the element of args0 should be -1(0xFFFF), but it is -256(0xFF00) .
+                return ShiftRightLogical_Fast(value, shiftAmount);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftRightLogical_Const(Vector128<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
-                return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
+                return ShiftRightLogical_Const(value.AsInt16(), shiftAmount).AsUInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightLogical_Const(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
+#if NET6_0_OR_GREATER
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
+#else
+                return ShiftRightLogical_Fast(value, shiftAmount);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftRightLogical_Const(Vector128<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
+#if NET6_0_OR_GREATER
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
+#else
+                return ShiftRightLogical_Fast(value, shiftAmount);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightLogical_Const(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
+#if NET6_0_OR_GREATER
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
+#else
+                return ShiftRightLogical_Fast(value, shiftAmount);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftRightLogical_Const(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
+#if NET6_0_OR_GREATER
                 return AdvSimd.ShiftRightLogical(value, (byte)shiftAmount);
+#else
+                return ShiftRightLogical_Fast(value, shiftAmount);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_ConstCore(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
