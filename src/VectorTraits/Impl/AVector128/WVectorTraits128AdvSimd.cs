@@ -870,57 +870,192 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return ShiftRightArithmetic_Fast(value, shiftAmount);
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{sbyte}, int, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> ShiftRightArithmetic_Args(Vector128<sbyte> dummy, int shiftAmount, out Vector128<sbyte> args1) {
+                _ = dummy;
+                var args0 = Vector128.Create((sbyte)-(shiftAmount & 7));
+                args1 = default;
+                return args0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{short}, int, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> ShiftRightArithmetic_Args(Vector128<short> dummy, int shiftAmount, out Vector128<short> args1) {
+                _ = dummy;
+#if NET6_0_OR_GREATER
+#else
+                shiftAmount = Volatile.Read(ref shiftAmount); // Fixed a bug when it runs on net5 arm. If shiftAmount is constant byte 1, the element of args0 should be -1(0xFFFF), but it is -256(0xFF00) .
+#endif
+                var args0 = Vector128.Create((short)-(shiftAmount & 0x0F));
+                args1 = default;
+                return args0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{int}, int, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> ShiftRightArithmetic_Args(Vector128<int> dummy, int shiftAmount, out Vector128<int> args1) {
+                _ = dummy;
+                var args0 = Vector128.Create((int)-(shiftAmount & 0x1F));
+                args1 = default;
+                return args0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{long}, int, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ShiftRightArithmetic_Args(Vector128<long> dummy, int shiftAmount, out Vector128<long> args1) {
+                _ = dummy;
+                var args0 = Vector128.Create((long)-(shiftAmount & 0x3F));
+                args1 = default;
+                return args0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> ShiftRightArithmetic_Core(Vector128<sbyte> value, int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
+                _ = shiftAmount;
+                _ = args1;
+                return AdvSimd.ShiftArithmetic(value, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> ShiftRightArithmetic_Core(Vector128<short> value, int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
+                _ = shiftAmount;
+                _ = args1;
+                return AdvSimd.ShiftArithmetic(value, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> ShiftRightArithmetic_Core(Vector128<int> value, int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
+                _ = shiftAmount;
+                _ = args1;
+                return AdvSimd.ShiftArithmetic(value, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ShiftRightArithmetic_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+                _ = shiftAmount;
+                _ = args1;
+                return AdvSimd.ShiftArithmetic(value, args0);
+            }
+
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic_Const(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
+#if NET6_0_OR_GREATER
                 return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+#else
+                return ShiftRightArithmetic_Fast(value, shiftAmount);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_Const(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
+#if NET6_0_OR_GREATER
                 return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+#else
+                return ShiftRightArithmetic_Fast(value, shiftAmount);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_Const(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
+#if NET6_0_OR_GREATER
                 return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+#else
+                return ShiftRightArithmetic_Fast(value, shiftAmount);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightArithmetic_Const(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
+#if NET6_0_OR_GREATER
                 return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+#else
+                return ShiftRightArithmetic_Fast(value, shiftAmount);
+#endif
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> ShiftRightArithmetic_ConstCore(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
+#if NET6_0_OR_GREATER
+                _ = shiftAmount;
+                _ = args1;
+                return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+#else
+                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#endif
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> ShiftRightArithmetic_ConstCore(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
+#if NET6_0_OR_GREATER
+                _ = shiftAmount;
+                _ = args1;
+                return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+#else
+                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#endif
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> ShiftRightArithmetic_ConstCore(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
+#if NET6_0_OR_GREATER
+                _ = shiftAmount;
+                _ = args1;
+                return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+#else
+                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#endif
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ShiftRightArithmetic_ConstCore(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+#if NET6_0_OR_GREATER
+                _ = shiftAmount;
+                _ = args1;
+                return AdvSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
+#else
+                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic_Fast(Vector128<sbyte> value, int shiftAmount) {
-                Debug.Assert(1 <= shiftAmount && shiftAmount <= 7, "The shiftAmount parameter must be in the range [1,7]."); // AdvSimd throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
                 return AdvSimd.ShiftArithmetic(value, Vector128.Create((sbyte)(-shiftAmount)));
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_Fast(Vector128<short> value, int shiftAmount) {
-                Debug.Assert(1 <= shiftAmount && shiftAmount <= 15, "The shiftAmount parameter must be in the range [1,15]."); // AdvSimd throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
                 return AdvSimd.ShiftArithmetic(value, Vector128.Create((short)(-shiftAmount)));
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_Fast(Vector128<int> value, int shiftAmount) {
-                Debug.Assert(1 <= shiftAmount && shiftAmount <= 31, "The shiftAmount parameter must be in the range [1,31]."); // AdvSimd throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
                 return AdvSimd.ShiftArithmetic(value, Vector128.Create((int)(-shiftAmount)));
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightArithmetic_Fast(Vector128<long> value, int shiftAmount) {
-                Debug.Assert(1 <= shiftAmount && shiftAmount <= 63, "The shiftAmount parameter must be in the range [1,63]."); // AdvSimd throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
                 return AdvSimd.ShiftArithmetic(value, Vector128.Create((long)(-shiftAmount)));
             }
 

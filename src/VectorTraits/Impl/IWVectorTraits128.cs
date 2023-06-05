@@ -1057,11 +1057,17 @@ namespace Zyl.VectorTraits.Impl {
         /// <remarks>
         /// <para>Meaning of suffixes (后缀的含义).</para>
         /// <para>- (none): Normal (常规).</para>
+        /// <para>- Args: Arguments calculation. Provide arguments for ShiftRightArithmetic_Core (参数计算. 为 ShiftRightArithmetic_Core 提供参数).</para>
+        /// <para>- Core. Core calculation. Its arguments are derived from ShiftRightArithmetic_Args (核心计算. 其参数来源于 ShiftRightArithmetic_Args).</para>
         /// <para>- Const: Constant version. This version can be used if you can ensure that the parameters are constants. It can take advantage of constants and make better use of hardware acceleration (常量版. 若能确保参数是常量, 可使用该版本. 它能利用常量, 更好的使用硬件加速).</para>
+        /// <para>- ConstCore: Core calculation of constant version. Its arguments are derived from ShiftRightArithmetic_Args (常量版的核心计算. 其参数来源于 ShiftRightArithmetic_Args).</para>
         /// <para>- Fast: Fast version. This version can be used if you can ensure that the parameter variables are always in the valid range (快速版. 若能确保参数变量总是在有效范围内的, 可使用该版本).</para>
         /// </remarks>
         /// <seealso cref="ShiftRightArithmetic"/>
+        /// <seealso cref="ShiftRightArithmetic_Args"/>
+        /// <seealso cref="ShiftRightArithmetic_Core"/>
         /// <seealso cref="ShiftRightArithmetic_Const"/>
+        /// <seealso cref="ShiftRightArithmetic_ConstCore"/>
         /// <seealso cref="ShiftRightArithmetic_Fast"/>
         TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes { get; }
 
@@ -1114,6 +1120,122 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<long> ShiftRightArithmetic(Vector128<long> value, int shiftAmount);
 
         /// <summary>
+        /// Arguments calculation for shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量的参数计算). Provide arguments for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args1">Returns arguments 1 (返回参数1). Used for ShiftRightArithmetic_Core .</param>
+        /// <returns>Returns arguments 0 (返回参数0). Used for ShiftRightArithmetic_Core .</returns>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{sbyte}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic(Vector128{sbyte}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic_Core(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
+        Vector128<sbyte> ShiftRightArithmetic_Args(Vector128<sbyte> dummy, int shiftAmount, out Vector128<sbyte> args1);
+
+        /// <summary>
+        /// Arguments calculation for shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量的参数计算). Provide arguments for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args1">Returns arguments 1 (返回参数1). Used for ShiftRightArithmetic_Core .</param>
+        /// <returns>Returns arguments 0 (返回参数0). Used for ShiftRightArithmetic_Core .</returns>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{short}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic(Vector128{short}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic_Core(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
+        Vector128<short> ShiftRightArithmetic_Args(Vector128<short> dummy, int shiftAmount, out Vector128<short> args1);
+
+        /// <summary>
+        /// Arguments calculation for shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量的参数计算). Provide arguments for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args1">Returns arguments 1 (返回参数1). Used for ShiftRightArithmetic_Core .</param>
+        /// <returns>Returns arguments 0 (返回参数0). Used for ShiftRightArithmetic_Core .</returns>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{int}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic(Vector128{int}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic_Core(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
+        Vector128<int> ShiftRightArithmetic_Args(Vector128<int> dummy, int shiftAmount, out Vector128<int> args1);
+
+        /// <summary>
+        /// Arguments calculation for shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量的参数计算). Provide arguments for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args1">Returns arguments 1 (返回参数1). Used for ShiftRightArithmetic_Core .</param>
+        /// <returns>Returns arguments 0 (返回参数0). Used for ShiftRightArithmetic_Core .</returns>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{long}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic(Vector128{long}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
+        Vector128<long> ShiftRightArithmetic_Args(Vector128<long> dummy, int shiftAmount, out Vector128<long> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量的核心计算). Its arguments are derived from ShiftRightArithmetic_Args (其参数来源于 ShiftRightArithmetic_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightArithmetic_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightArithmetic_Args .</param>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{sbyte}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic(Vector128{sbyte}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic_Args(Vector128{sbyte}, int, out Vector128{sbyte})"/>
+        Vector128<sbyte> ShiftRightArithmetic_Core(Vector128<sbyte> value, int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量的核心计算). Its arguments are derived from ShiftRightArithmetic_Args (其参数来源于 ShiftRightArithmetic_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightArithmetic_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightArithmetic_Args .</param>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{short}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic(Vector128{short}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic_Args(Vector128{short}, int, out Vector128{short})"/>
+        Vector128<short> ShiftRightArithmetic_Core(Vector128<short> value, int shiftAmount, Vector128<short> args0, Vector128<short> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量的核心计算). Its arguments are derived from ShiftRightArithmetic_Args (其参数来源于 ShiftRightArithmetic_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightArithmetic_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightArithmetic_Args .</param>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{int}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic(Vector128{int}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic_Args(Vector128{int}, int, out Vector128{int})"/>
+        Vector128<int> ShiftRightArithmetic_Core(Vector128<int> value, int shiftAmount, Vector128<int> args0, Vector128<int> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量的核心计算). Its arguments are derived from ShiftRightArithmetic_Args (其参数来源于 ShiftRightArithmetic_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightArithmetic_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightArithmetic_Args .</param>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{long}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic(Vector128{long}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic_Args(Vector128{long}, int, out Vector128{long})"/>
+        Vector128<long> ShiftRightArithmetic_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1);
+
+        /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount - Const(将向量的每个有符号元素算术右移指定量 - 常量).
         /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>.
         /// </summary>
@@ -1160,6 +1282,66 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{long}, int)"/> // Since: .NET 7
         /// <seealso cref="ShiftRightArithmetic(Vector128{long}, int)"/>
         Vector128<long> ShiftRightArithmetic_Const(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount);
+
+        /// <summary>
+        /// Core calculation for shifts (signed) each element of a vector right by the specified amount - Const (将向量的每个有符号元素算术右移指定量的核心计算 - 常量). Its arguments are derived from ShiftRightArithmetic_Args (其参数来源于 ShiftRightArithmetic_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~7 (有效范围是 1~7).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightArithmetic_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightArithmetic_Args .</param>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{sbyte}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic(Vector128{sbyte}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic_Args(Vector128{sbyte}, int, out Vector128{sbyte})"/>
+        Vector128<sbyte> ShiftRightArithmetic_ConstCore(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (signed) each element of a vector right by the specified amount - Const (将向量的每个有符号元素算术右移指定量的核心计算 - 常量). Its arguments are derived from ShiftRightArithmetic_Args (其参数来源于 ShiftRightArithmetic_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~15 (有效范围是 1~15).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightArithmetic_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightArithmetic_Args .</param>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{short}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic(Vector128{short}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic_Args(Vector128{short}, int, out Vector128{short})"/>
+        Vector128<short> ShiftRightArithmetic_ConstCore(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<short> args0, Vector128<short> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (signed) each element of a vector right by the specified amount - Const (将向量的每个有符号元素算术右移指定量的核心计算 - 常量). Its arguments are derived from ShiftRightArithmetic_Args (其参数来源于 ShiftRightArithmetic_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~31 (有效范围是 1~31).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightArithmetic_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightArithmetic_Args .</param>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{int}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic(Vector128{int}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic_Args(Vector128{int}, int, out Vector128{int})"/>
+        Vector128<int> ShiftRightArithmetic_ConstCore(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<int> args0, Vector128<int> args1);
+
+        /// <summary>
+        /// Core calculation for shifts (signed) each element of a vector right by the specified amount - Const (将向量的每个有符号元素算术右移指定量的核心计算 - 常量). Its arguments are derived from ShiftRightArithmetic_Args (其参数来源于 ShiftRightArithmetic_Args).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>.
+        /// </summary>
+        /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~63 (有效范围是 1~63).</param>
+        /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightArithmetic_Args .</param>
+        /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightArithmetic_Args .</param>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
+        /// <seealso cref="ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ShiftRightArithmetic(Vector128{long}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic(Vector128{long}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic_Args(Vector128{long}, int, out Vector128{long})"/>
+        Vector128<long> ShiftRightArithmetic_ConstCore(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<long> args0, Vector128<long> args1);
 
         /// <summary>
         /// Shifts (signed) each element of a vector right by the specified amount - Fast(将向量的每个有符号元素算术右移指定量 - 快速). No check <paramref name="shiftAmount"/>, please use <see cref="Scalars.LimitShiftAmount"/> first, and shiftAmount must not be 0 .
