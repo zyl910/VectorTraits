@@ -513,8 +513,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> ShiftLeft_Args(Vector256<short> dummy, int shiftAmount, out Vector256<short> args1) {
                 _ = dummy;
-                Vector128<short> xmm = Sse2.ConvertScalarToVector128Int32(shiftAmount & 0x0F).AsInt16();
-                Vector256<short> args0 = Vector256.Create(xmm, xmm);
+                //Vector128<short> xmm = Sse2.ConvertScalarToVector128Int32(shiftAmount & 0x0F).AsInt16();
+                //Vector256<short> args0 = Vector256.Create(xmm, xmm);
+                Vector256<short> args0 = Vector256.CreateScalarUnsafe((int)(shiftAmount & 0x0F)).AsInt16();
                 args1 = default;
                 return args0;
             }
@@ -879,8 +880,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> ShiftRightArithmetic_Args(Vector256<short> dummy, int shiftAmount, out Vector256<short> args1) {
                 _ = dummy;
-                Vector128<short> xmm = Sse2.ConvertScalarToVector128Int32(shiftAmount & 0x0F).AsInt16();
-                Vector256<short> args0 = Vector256.Create(xmm, xmm);
+                Vector256<short> args0 = Vector256.CreateScalarUnsafe((int)(shiftAmount & 0x0F)).AsInt16();
                 args1 = default;
                 return args0;
             }
@@ -1206,8 +1206,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> ShiftRightLogical_Args(Vector256<short> dummy, int shiftAmount, out Vector256<short> args1) {
                 _ = dummy;
-                Vector128<short> xmm = Sse2.ConvertScalarToVector128Int32(shiftAmount & 0x0F).AsInt16();
-                Vector256<short> args0 = Vector256.Create(xmm, xmm);
+                Vector256<short> args0 = Vector256.CreateScalarUnsafe((int)(shiftAmount & 0x0F)).AsInt16();
                 args1 = default;
                 return args0;
             }
