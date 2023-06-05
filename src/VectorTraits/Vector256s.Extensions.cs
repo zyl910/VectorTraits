@@ -348,6 +348,101 @@ namespace Zyl.VectorTraits {
 
 
         /// <summary>
+        /// Arguments calculation for shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量的参数计算). Provide arguments for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>The arguments provided for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic"/>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic_Core"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static (Vector256<T> args0, Vector256<T> args1) ShiftRightArithmetic_Args<T>(Vector256<T> dummy, int shiftAmount) where T : struct {
+            if (typeof(sbyte) == typeof(T)) {
+                (var args0, var args1) = ShiftRightArithmetic_Args((Vector256<sbyte>)(object)dummy, shiftAmount);
+                return ((Vector256<T>)(object)args0, (Vector256<T>)(object)args1);
+            } else if (typeof(short) == typeof(T)) {
+                (var args0, var args1) = ShiftRightArithmetic_Args((Vector256<short>)(object)dummy, shiftAmount);
+                return ((Vector256<T>)(object)args0, (Vector256<T>)(object)args1);
+            } else if (typeof(int) == typeof(T)) {
+                (var args0, var args1) = ShiftRightArithmetic_Args((Vector256<int>)(object)dummy, shiftAmount);
+                return ((Vector256<T>)(object)args0, (Vector256<T>)(object)args1);
+            } else if (typeof(long) == typeof(T)) {
+                (var args0, var args1) = ShiftRightArithmetic_Args((Vector256<long>)(object)dummy, shiftAmount);
+                return ((Vector256<T>)(object)args0, (Vector256<T>)(object)args1);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <summary>
+        /// Arguments calculation for shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量的参数计算). Provide arguments for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>The arguments provided for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{sbyte}, int)"/>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic_Core(Vector256{sbyte}, int, Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<sbyte> args0, Vector256<sbyte> args1) ShiftRightArithmetic_Args(Vector256<sbyte> dummy, int shiftAmount) {
+            var args0 = ShiftRightArithmetic_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量的参数计算). Provide arguments for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>The arguments provided for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{short}, int)"/>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic_Core(Vector256{short}, int, Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<short> args0, Vector256<short> args1) ShiftRightArithmetic_Args(Vector256<short> dummy, int shiftAmount) {
+            var args0 = ShiftRightArithmetic_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量的参数计算). Provide arguments for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>The arguments provided for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{int}, int)"/>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic_Core(Vector256{int}, int, Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<int> args0, Vector256<int> args1) ShiftRightArithmetic_Args(Vector256<int> dummy, int shiftAmount) {
+            var args0 = ShiftRightArithmetic_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量的参数计算). Provide arguments for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).
+        /// Mnemonic: <c>rt[i] := value[i] &gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
+        /// </summary>
+        /// <param name="dummy">Not actually used, it is only used to distinguish overloaded methods (实际上没有使用, 它仅用于区分重载方法)..</param>
+        /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
+        /// <returns>The arguments provided for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).</returns>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{long}, int)"/>
+        /// <seealso cref="IWVectorTraits256.ShiftRightArithmetic_Core(Vector256{long}, int, Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<long> args0, Vector256<long> args1) ShiftRightArithmetic_Args(Vector256<long> dummy, int shiftAmount) {
+            var args0 = ShiftRightArithmetic_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <summary>
         /// Arguments calculation for shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量的参数计算). Provide arguments for ShiftRightLogical_Core (为 ShiftRightLogical_Core 提供参数).
         /// Mnemonic: <c>rt[i] := value[i] &gt;&gt;&gt; shiftAmount</c>, <c>shiftAmount &amp;= (T.BitSize-1)</c>.
         /// </summary>

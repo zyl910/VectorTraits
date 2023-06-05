@@ -1446,7 +1446,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{sbyte}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{sbyte}, int)"/>
@@ -1461,7 +1461,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{byte}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{byte}, int)"/>
@@ -1476,7 +1476,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{short}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{short}, int)"/>
@@ -1491,7 +1491,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{ushort}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{ushort}, int)"/>
@@ -1506,7 +1506,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{int}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{int}, int)"/>
@@ -1521,7 +1521,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{uint}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{uint}, int)"/>
@@ -1536,7 +1536,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{long}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{long}, int)"/>
@@ -1551,7 +1551,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{ulong}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{ulong}, int)"/>
@@ -1662,7 +1662,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~7 (有效范围是 1~7).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{sbyte}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{sbyte}, int)"/>
@@ -1677,7 +1677,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~7 (有效范围是 1~7).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{byte}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{byte}, int)"/>
@@ -1692,7 +1692,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~15 (有效范围是 1~15).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{short}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{short}, int)"/>
@@ -1707,7 +1707,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~15 (有效范围是 1~15).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{ushort}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{ushort}, int)"/>
@@ -1722,7 +1722,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~31 (有效范围是 1~31).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{int}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{int}, int)"/>
@@ -1737,7 +1737,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~31 (有效范围是 1~31).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{uint}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{uint}, int)"/>
@@ -1752,7 +1752,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~63 (有效范围是 1~63).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{long}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{long}, int)"/>
@@ -1767,7 +1767,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数). The valid range is 1~63 (有效范围是 1~63).</param>
         /// <param name="args0">Arguments 0 (参数0). Derived from ShiftRightLogical_Args .</param>
         /// <param name="args1">Arguments 1 (参数1). Derived from ShiftRightLogical_Args .</param>
-        /// <returns>A vector for each element after left shift (每个元素左移位后的一个向量).</returns>
+        /// <returns>A vector for each element after shift right (每个元素右移位后的一个向量).</returns>
         /// <seealso cref="ShiftRightLogical_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ShiftRightLogical(Vector128{ulong}, int)"/>
         /// <seealso cref="ShiftRightLogical(Vector128{ulong}, int)"/>

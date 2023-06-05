@@ -864,6 +864,82 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return ShiftRightArithmetic_Fast(value, shiftAmount);
             }
 
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Args(Vector256{sbyte}, int, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> ShiftRightArithmetic_Args(Vector256<sbyte> dummy, int shiftAmount, out Vector256<sbyte> args1) {
+                _ = dummy;
+                shiftAmount &= 7;
+                var args0 = Vector256.Create((int)shiftAmount).AsSByte();
+                args1 = Vector256.Create((sbyte)((1U << (8 - shiftAmount)) - 1));
+                return args0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Args(Vector256{short}, int, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> ShiftRightArithmetic_Args(Vector256<short> dummy, int shiftAmount, out Vector256<short> args1) {
+                _ = dummy;
+                Vector128<short> xmm = Sse2.ConvertScalarToVector128Int32(shiftAmount & 0x0F).AsInt16();
+                Vector256<short> args0 = Vector256.Create(xmm, xmm);
+                args1 = default;
+                return args0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Args(Vector256{int}, int, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> ShiftRightArithmetic_Args(Vector256<int> dummy, int shiftAmount, out Vector256<int> args1) {
+                _ = dummy;
+                var args0 = Vector256.Create((int)(shiftAmount & 0x1F));
+                args1 = default;
+                return args0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Args(Vector256{long}, int, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ShiftRightArithmetic_Args(Vector256<long> dummy, int shiftAmount, out Vector256<long> args1) {
+                _ = dummy;
+                shiftAmount &= 0x3F;
+                var args0 = Vector256.Create((long)shiftAmount);
+                args1 = Vector256.Create((long)(64 - shiftAmount));
+                return args0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Core(Vector256{sbyte}, int, Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> ShiftRightArithmetic_Core(Vector256<sbyte> value, int shiftAmount, Vector256<sbyte> args0, Vector256<sbyte> args1) {
+                _ = shiftAmount;
+                Vector256<sbyte> sign = Avx2.CompareGreaterThan(Vector256<sbyte>.Zero, value);
+                Vector256<sbyte> shifted = Avx2.ShiftRightLogicalVariable(value.AsUInt32(), args0.AsUInt32()).AsSByte();
+                Vector256<sbyte> rt = ConditionalSelect(args1, shifted, sign);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Core(Vector256{short}, int, Vector256{short}, Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> ShiftRightArithmetic_Core(Vector256<short> value, int shiftAmount, Vector256<short> args0, Vector256<short> args1) {
+                _ = shiftAmount;
+                _ = args1;
+                return Avx2.ShiftRightArithmetic(value, args0.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Core(Vector256{int}, int, Vector256{int}, Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> ShiftRightArithmetic_Core(Vector256<int> value, int shiftAmount, Vector256<int> args0, Vector256<int> args1) {
+                _ = shiftAmount;
+                _ = args1;
+                return Avx2.ShiftRightArithmeticVariable(value, args0.AsUInt32());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Core(Vector256{long}, int, Vector256{long}, Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ShiftRightArithmetic_Core(Vector256<long> value, int shiftAmount, Vector256<long> args0, Vector256<long> args1) {
+                _ = shiftAmount;
+                Vector256<long> sign = Avx2.CompareGreaterThan(Vector256<long>.Zero, value);
+                Vector256<long> rt = Avx2.Or(Avx2.ShiftRightLogicalVariable(value, args0.AsUInt64()), Avx2.ShiftLeftLogicalVariable(sign, args1.AsUInt64()));
+                return rt;
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Const(Vector256{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -887,6 +963,43 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftRightArithmetic_Const(Vector256<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
                 return ShiftRightArithmetic_Fast(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_ConstCore(Vector256{sbyte}, int, Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> ShiftRightArithmetic_ConstCore(Vector256<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector256<sbyte> args0, Vector256<sbyte> args1) {
+                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_ConstCore(Vector256{short}, int, Vector256{short}, Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> ShiftRightArithmetic_ConstCore(Vector256<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector256<short> args0, Vector256<short> args1) {
+#if NET6_0_OR_GREATER
+                _ = args0;
+                _ = args1;
+                return Avx2.ShiftRightArithmetic(value, (byte)shiftAmount);
+#else
+                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#endif
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_ConstCore(Vector256{int}, int, Vector256{int}, Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> ShiftRightArithmetic_ConstCore(Vector256<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector256<int> args0, Vector256<int> args1) {
+#if NET6_0_OR_GREATER
+                _ = args0;
+                _ = args1;
+                return Avx2.ShiftRightArithmetic(value, (byte)shiftAmount);
+#else
+                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#endif
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_ConstCore(Vector256{long}, int, Vector256{long}, Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ShiftRightArithmetic_ConstCore(Vector256<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector256<long> args0, Vector256<long> args1) {
+                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{sbyte}, int)"/>
@@ -913,7 +1026,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> ShiftRightArithmetic_Fast_Negative(Vector256<sbyte> value, int shiftAmount) {
-                Vector256<sbyte> mask = Vector256s<sbyte>.GetMaskBits(8 - shiftAmount);
+                Vector256<sbyte> mask = Vector256.Create((sbyte)((1U << (8 - shiftAmount)) - 1)); // Vector256s<sbyte>.GetMaskBits(8 - shiftAmount);
                 Vector256<sbyte> shifted = Avx2.ShiftRightLogical(value.AsUInt16(), (byte)shiftAmount).AsSByte();
                 Vector256<sbyte> sign = Avx2.CompareGreaterThan(Vector256<sbyte>.Zero, value);
                 Vector256<sbyte> rt = ConditionalSelect(mask, shifted, sign);
