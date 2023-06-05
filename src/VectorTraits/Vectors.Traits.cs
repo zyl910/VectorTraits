@@ -1158,6 +1158,88 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Args(Vector{sbyte}, int, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> ShiftRightArithmetic_Args(Vector<sbyte> dummy, int shiftAmount, out Vector<sbyte> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
+#else
+            return _instance.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Args(Vector{short}, int, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> ShiftRightArithmetic_Args(Vector<short> dummy, int shiftAmount, out Vector<short> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
+#else
+            return _instance.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Args(Vector{int}, int, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> ShiftRightArithmetic_Args(Vector<int> dummy, int shiftAmount, out Vector<int> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
+#else
+            return _instance.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Args(Vector{long}, int, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> ShiftRightArithmetic_Args(Vector<long> dummy, int shiftAmount, out Vector<long> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
+#else
+            return _instance.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Core(Vector{sbyte}, int, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> ShiftRightArithmetic_Core(Vector<sbyte> value, int shiftAmount, Vector<sbyte> args0, Vector<sbyte> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#else
+            return _instance.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Core(Vector{short}, int, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> ShiftRightArithmetic_Core(Vector<short> value, int shiftAmount, Vector<short> args0, Vector<short> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#else
+            return _instance.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Core(Vector{int}, int, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> ShiftRightArithmetic_Core(Vector<int> value, int shiftAmount, Vector<int> args0, Vector<int> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#else
+            return _instance.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Core(Vector{long}, int, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> ShiftRightArithmetic_Core(Vector<long> value, int shiftAmount, Vector<long> args0, Vector<long> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#else
+            return _instance.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
         /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Const(Vector{sbyte}, int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1196,6 +1278,47 @@ namespace Zyl.VectorTraits {
             return BaseStatics.ShiftRightArithmetic_Const(value, shiftAmount);
 #else
             return _instance.ShiftRightArithmetic_Const(value, shiftAmount);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_ConstCore(Vector{sbyte}, int, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> ShiftRightArithmetic_ConstCore(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector<sbyte> args0, Vector<sbyte> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
+#else
+            return _instance.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_ConstCore(Vector{short}, int, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> ShiftRightArithmetic_ConstCore(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector<short> args0, Vector<short> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
+#else
+            return _instance.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_ConstCore(Vector{int}, int, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> ShiftRightArithmetic_ConstCore(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector<int> args0, Vector<int> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
+#else
+            return _instance.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_ConstCore(Vector{long}, int, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> ShiftRightArithmetic_ConstCore(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector<long> args0, Vector<long> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
+#else
+            return _instance.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 

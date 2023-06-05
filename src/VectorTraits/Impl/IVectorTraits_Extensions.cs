@@ -204,6 +204,60 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="Vectors.ShiftRightArithmetic_Args{T}(Vector{T}, int)"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [CLSCompliant(false)]
+        public static (Vector<T> args0, Vector<T> args1) ShiftRightArithmetic_Args<T>(this IVectorTraits athis, Vector<T> dummy, int shiftAmount) where T : struct {
+            if (typeof(sbyte) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftRightArithmetic_Args((Vector<sbyte>)(object)dummy, shiftAmount);
+                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+            } else if (typeof(short) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftRightArithmetic_Args((Vector<short>)(object)dummy, shiftAmount);
+                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+            } else if (typeof(int) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftRightArithmetic_Args((Vector<int>)(object)dummy, shiftAmount);
+                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+            } else if (typeof(long) == typeof(T)) {
+                (var args0, var args1) = athis.ShiftRightArithmetic_Args((Vector<long>)(object)dummy, shiftAmount);
+                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vectors.ShiftRightArithmetic_Args(Vector{sbyte}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> args0, Vector<sbyte> args1) ShiftRightArithmetic_Args(this IVectorTraits athis, Vector<sbyte> dummy, int shiftAmount) {
+            var args0 = athis.ShiftRightArithmetic_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vectors.ShiftRightArithmetic_Args(Vector{short}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> args0, Vector<short> args1) ShiftRightArithmetic_Args(this IVectorTraits athis, Vector<short> dummy, int shiftAmount) {
+            var args0 = athis.ShiftRightArithmetic_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vectors.ShiftRightArithmetic_Args(Vector{int}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> args0, Vector<int> args1) ShiftRightArithmetic_Args(this IVectorTraits athis, Vector<int> dummy, int shiftAmount) {
+            var args0 = athis.ShiftRightArithmetic_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+        /// <inheritdoc cref="Vectors.ShiftRightArithmetic_Args(Vector{long}, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> args0, Vector<long> args1) ShiftRightArithmetic_Args(this IVectorTraits athis, Vector<long> dummy, int shiftAmount) {
+            var args0 = athis.ShiftRightArithmetic_Args(dummy, shiftAmount, out var args1);
+            return (args0, args1);
+        }
+
+
         /// <inheritdoc cref="Vectors.ShiftRightLogical_Args{T}(Vector{T}, int)"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         [CLSCompliant(false)]
