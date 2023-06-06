@@ -344,8 +344,8 @@ namespace Zyl.VectorTraits {
         /// <param name="index">The index (索引). The value ranges from 0 to <c>ElementBitSize-1</c> (值的范围是 0 ~ <c>ElementBitSize-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bit pos mask (返回位偏移掩码).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ref readonly Vector128<T> GetMaskBitPos(int index) {
-            return ref Unsafe.As<Vector128<byte>, Vector128<T>>(ref MaskBitPosArray[index]);
+        public static Vector128<T> GetMaskBitPos(int index) {
+            return Unsafe.As<Vector128<byte>, Vector128<T>>(ref MaskBitPosArray[index]);
         }
 
         /// <summary>
@@ -363,8 +363,8 @@ namespace Zyl.VectorTraits {
         /// <param name="index">The index (索引). The value ranges from 0 to <c>ElementBitSize</c> (值的范围是 0 ~ <c>ElementBitSize</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ref readonly Vector128<T> GetMaskBits(int index) {
-            return ref Unsafe.As<Vector128<byte>, Vector128<T>>(ref MaskBitsArray[index]);
+        public static Vector128<T> GetMaskBits(int index) {
+            return Unsafe.As<Vector128<byte>, Vector128<T>>(ref MaskBitsArray[index]);
         }
 
         /// <summary>
@@ -394,17 +394,17 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>1 bits mask (1位掩码).</summary>
-        public static ref readonly Vector128<T> MaskBits1 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return ref GetMaskBits(1); } }
+        public static Vector128<T> MaskBits1 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return GetMaskBits(1); } }
         /// <summary>2 bits mask (2位掩码).</summary>
-        public static ref readonly Vector128<T> MaskBits2 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return ref GetMaskBits(2); } }
+        public static Vector128<T> MaskBits2 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return GetMaskBits(2); } }
         /// <summary>4 bits mask (4位掩码).</summary>
-        public static ref readonly Vector128<T> MaskBits4 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return ref GetMaskBits(4); } }
+        public static Vector128<T> MaskBits4 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return GetMaskBits(4); } }
         /// <summary>8 bits mask (8位掩码).</summary>
-        public static ref readonly Vector128<T> MaskBits8 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return ref GetMaskBits(8); } }
+        public static Vector128<T> MaskBits8 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return GetMaskBits(8); } }
         /// <summary>16 bits mask (16位掩码).</summary>
-        public static ref readonly Vector128<T> MaskBits16 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return ref GetMaskBits(Math.Min(ElementBitSize, 16)); } }
+        public static Vector128<T> MaskBits16 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return GetMaskBits(Math.Min(ElementBitSize, 16)); } }
         /// <summary>32 bits mask (32位掩码).</summary>
-        public static ref readonly Vector128<T> MaskBits32 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return ref GetMaskBits(Math.Min(ElementBitSize, 32)); } }
+        public static Vector128<T> MaskBits32 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return GetMaskBits(Math.Min(ElementBitSize, 32)); } }
 
 #endif
     }
