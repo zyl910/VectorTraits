@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -18,15 +18,15 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = UInt32;
+    using TMy = SByte;
 
     /// <summary>
-    /// Shift left benchmark - UInt32.
+    /// Shift left benchmark - SByte.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class ShiftRightLogicalConstBenchmark_UInt32 : AbstractSharedBenchmark_UInt32 {
+    public partial class ShiftRightArithmeticConstBenchmark_SByte : AbstractSharedBenchmark_SByte {
 
         // -- var --
         private const int shiftAmount = 1;
@@ -38,7 +38,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        public static TMy StaticSumSRLScalar(TMy[] src, int srcCount, int shiftAmount) {
+        public static TMy StaticSumSRAScalar(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             for (int i = 0; i < srcCount; ++i) {
                 rt += (TMy)(src[i] >> shiftAmount);
@@ -47,11 +47,11 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark(Baseline = true)]
-        public void SumSRLScalar() {
-            dstTMy = StaticSumSRLScalar(srcArray, srcArray.Length, shiftAmount);
+        public void SumSRAScalar() {
+            dstTMy = StaticSumSRAScalar(srcArray, srcArray.Length, shiftAmount);
             if (CheckMode) {
                 baselineTMy = dstTMy;
-                BenchmarkUtil.WriteItem("# SumSRLScalar", string.Format("{0}", baselineTMy));
+                BenchmarkUtil.WriteItem("# SumSRAScalar", string.Format("{0}", baselineTMy));
             }
         }
 
@@ -63,7 +63,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSRLNetBcl(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSRANetBcl(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -77,7 +77,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = Vector.ShiftRightLogical(p0, shiftAmount2);
+                Vector<TMy> vtemp = Vector.ShiftRightArithmetic(p0, shiftAmount2);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -92,13 +92,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRLNetBcl() {
+        public void SumSRANetBcl() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSRLNetBcl(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSRLNetBcl");
+            dstTMy = StaticSumSRANetBcl(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRANetBcl");
         }
         /// <summary>
         /// Sum shift left logical - VectorT - .NET Bcl - Const.
@@ -107,7 +107,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static TMy StaticSumSRLNetBcl_Const(TMy[] src, int srcCount) {
+        private static TMy StaticSumSRANetBcl_Const(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -120,7 +120,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = Vector.ShiftRightLogical(p0, shiftAmount);
+                Vector<TMy> vtemp = Vector.ShiftRightArithmetic(p0, shiftAmount);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -135,13 +135,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRLNetBcl_Const() {
+        public void SumSRANetBcl_Const() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSRLNetBcl_Const(srcArray, srcArray.Length);
-            CheckResult("SumSRLNetBcl_Const");
+            dstTMy = StaticSumSRANetBcl_Const(srcArray, srcArray.Length);
+            CheckResult("SumSRANetBcl_Const");
         }
 
 
@@ -157,7 +157,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSRL_Base(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSRA_Base(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -170,7 +170,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftRightLogical(p0, shiftAmount);
+                Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftRightArithmetic(p0, shiftAmount);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -185,10 +185,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRL_Base() {
+        public void SumSRA_Base() {
             VectorTraitsBase.Statics.ThrowForUnsupported(true);
-            dstTMy = StaticSumSRL_Base(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSRL_Base");
+            dstTMy = StaticSumSRA_Base(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRA_Base");
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSRL_Base_Core(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSRA_Base_Core(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -208,11 +208,11 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
             int i;
             // Body.
-            var args0 = VectorTraitsBase.Statics.ShiftRightLogical_Args(vrt, shiftAmount, out var args1);
+            var args0 = VectorTraitsBase.Statics.ShiftRightArithmetic_Args(vrt, shiftAmount, out var args1);
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftRightLogical_Core(p0, shiftAmount, args0, args1);
+                Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftRightArithmetic_Core(p0, shiftAmount, args0, args1);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -227,14 +227,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRL_Base_Core() {
+        public void SumSRA_Base_Core() {
             VectorTraitsBase.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSRL_Base_Core(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSRL_Base_Core");
+            dstTMy = StaticSumSRA_Base_Core(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRA_Base_Core");
         }
 
 #if NET5_0_OR_GREATER
@@ -245,7 +245,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSRL_AdvSimd(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSRA_AdvSimd(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -258,7 +258,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftRightLogical(p0, shiftAmount);
+                Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftRightArithmetic(p0, shiftAmount);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -273,14 +273,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRL_AdvSimd() {
+        public void SumSRA_AdvSimd() {
             VectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSRL_AdvSimd(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSRL_AdvSimd");
+            dstTMy = StaticSumSRA_AdvSimd(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRA_AdvSimd");
         }
 #endif // NET5_0_OR_GREATER
 
@@ -292,7 +292,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSRL_Avx2(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSRA_Avx2(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -305,7 +305,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftRightLogical(p0, shiftAmount);
+                Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftRightArithmetic(p0, shiftAmount);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -320,14 +320,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRL_Avx2() {
+        public void SumSRA_Avx2() {
             VectorTraits256Avx2.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSRL_Avx2(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSRL_Avx2");
+            dstTMy = StaticSumSRA_Avx2(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRA_Avx2");
         }
 #endif // NETCOREAPP3_0_OR_GREATER
 
@@ -341,7 +341,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSRLTraits(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSRATraits(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -354,7 +354,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = Vectors.ShiftRightLogical(p0, shiftAmount);
+                Vector<TMy> vtemp = Vectors.ShiftRightArithmetic(p0, shiftAmount);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -369,13 +369,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRLTraits() {
+        public void SumSRATraits() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSRLTraits(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSRLTraits");
+            dstTMy = StaticSumSRATraits(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRATraits");
         }
 
         /// <summary>
@@ -385,7 +385,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSRLTraits_Core(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSRATraits_Core(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -395,11 +395,11 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
             int i;
             // Body.
-            var args0 = Vectors.ShiftRightLogical_Args(vrt, shiftAmount, out var args1);
+            var args0 = Vectors.ShiftRightArithmetic_Args(vrt, shiftAmount, out var args1);
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = Vectors.ShiftRightLogical_Core(p0, shiftAmount, args0, args1);
+                Vector<TMy> vtemp = Vectors.ShiftRightArithmetic_Core(p0, shiftAmount, args0, args1);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -414,13 +414,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRLTraits_Core() {
+        public void SumSRATraits_Core() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSRLTraits_Core(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSRLTraits_Core");
+            dstTMy = StaticSumSRATraits_Core(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRATraits_Core");
         }
 
         /// <summary>
@@ -429,7 +429,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSRLConstTraits(TMy[] src, int srcCount) {
+        private static TMy StaticSumSRAConstTraits(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -442,7 +442,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = Vectors.ShiftRightLogical_Const(p0, shiftAmount);
+                Vector<TMy> vtemp = Vectors.ShiftRightArithmetic_Const(p0, shiftAmount);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -457,13 +457,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRLConstTraits() {
+        public void SumSRAConstTraits() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSRLConstTraits(srcArray, srcArray.Length);
-            CheckResult("SumSRLConstTraits");
+            dstTMy = StaticSumSRAConstTraits(srcArray, srcArray.Length);
+            CheckResult("SumSRAConstTraits");
         }
 
         /// <summary>
@@ -472,7 +472,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSRLConstTraits_Core(TMy[] src, int srcCount) {
+        private static TMy StaticSumSRAConstTraits_Core(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -482,11 +482,11 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
             int i;
             // Body.
-            var args0 = Vectors.ShiftRightLogical_Args(vrt, shiftAmount, out var args1);
+            var args0 = Vectors.ShiftRightArithmetic_Args(vrt, shiftAmount, out var args1);
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = Vectors.ShiftRightLogical_ConstCore(p0, shiftAmount, args0, args1);
+                Vector<TMy> vtemp = Vectors.ShiftRightArithmetic_ConstCore(p0, shiftAmount, args0, args1);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -501,13 +501,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRLConstTraits_Core() {
+        public void SumSRAConstTraits_Core() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSRLConstTraits_Core(srcArray, srcArray.Length);
-            CheckResult("SumSRLConstTraits_Core");
+            dstTMy = StaticSumSRAConstTraits_Core(srcArray, srcArray.Length);
+            CheckResult("SumSRAConstTraits_Core");
         }
 
         #region BENCHMARKS_ALGORITHM
@@ -521,7 +521,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSRLFast_AdvSimd(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSRAFast_AdvSimd(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -534,7 +534,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftRightLogical_Fast(p0, shiftAmount);
+                Vector<TMy> vtemp = VectorTraits128AdvSimd.Statics.ShiftRightArithmetic_Fast(p0, shiftAmount);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -549,11 +549,11 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRLFast_AdvSimd() {
+        public void SumSRAFast_AdvSimd() {
             VectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
             //Debugger.Break();
-            dstTMy = StaticSumSRLFast_AdvSimd(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSRLFast_AdvSimd");
+            dstTMy = StaticSumSRAFast_AdvSimd(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRAFast_AdvSimd");
         }
 #endif // NET5_0_OR_GREATER
 
@@ -565,7 +565,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSRLFast_Avx2(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSRAFast_Avx2(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -578,7 +578,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftRightLogical_Fast(p0, shiftAmount);
+                Vector<TMy> vtemp = VectorTraits256Avx2.Statics.ShiftRightArithmetic_Fast(p0, shiftAmount);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -593,11 +593,11 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRLFast_Avx2() {
+        public void SumSRAFast_Avx2() {
             VectorTraits256Avx2.Statics.ThrowForUnsupported(true);
             //Debugger.Break();
-            dstTMy = StaticSumSRLFast_Avx2(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSRLFast_Avx2");
+            dstTMy = StaticSumSRAFast_Avx2(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRAFast_Avx2");
         }
 
 #endif // NETCOREAPP3_0_OR_GREATER
@@ -612,7 +612,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSRLFastTraits(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSRAFastTraits(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -625,7 +625,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = Vectors.ShiftRightLogical_Fast(p0, shiftAmount);
+                Vector<TMy> vtemp = Vectors.ShiftRightArithmetic_Fast(p0, shiftAmount);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -640,13 +640,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRLFastTraits() {
+        public void SumSRAFastTraits() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSRLFastTraits(srcArray, srcArray.Length, shiftAmount);
-            CheckResult("SumSRLFastTraits");
+            dstTMy = StaticSumSRAFastTraits(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRAFastTraits");
         }
 
     }
