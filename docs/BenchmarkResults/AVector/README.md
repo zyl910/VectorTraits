@@ -6,6 +6,7 @@
 - [Multiply](Multiply.md): Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
 - [Narrow](Narrow.md): Narrows two Vector instances into one Vector  (将两个 Vector 实例缩窄为一个 Vector ).
 - [ShiftLeft](ShiftLeft.md): Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
+- [ShiftRightArithmetic](ShiftRightArithmetic.md): Shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量).
 - [ShiftRightLogical](ShiftRightLogical.md): Shifts (unsigned) each element of a vector right by the specified amount. (将向量的每个无符号元素逻辑右移指定量).
 - [Shuffle](Shuffle.md): Shuffle and clear (换位并清零). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the indices value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
 - [Widen](Widen.md): Widens a Vector into two Vector instances (将一个 Vector 扩宽为两个 Vector 实例).
