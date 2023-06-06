@@ -1650,36 +1650,36 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftRightArithmetic_Args(Vector<sbyte> dummy, int shiftAmount, out Vector<sbyte> args1) {
                 _ = dummy;
-                _ = shiftAmount;
-                args1 = default;
-                return args1;
+                Vector<sbyte> args0 = default;
+                args1 = Vectors<sbyte>.GetMaskBits(8 - shiftAmount);
+                return args0;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Args(Vector{short}, int, out Vector{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftRightArithmetic_Args(Vector<short> dummy, int shiftAmount, out Vector<short> args1) {
                 _ = dummy;
-                _ = shiftAmount;
-                args1 = default;
-                return args1;
+                Vector<short> args0 = default;
+                args1 = Vectors<short>.GetMaskBits(16 - shiftAmount);
+                return args0;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Args(Vector{int}, int, out Vector{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftRightArithmetic_Args(Vector<int> dummy, int shiftAmount, out Vector<int> args1) {
                 _ = dummy;
-                _ = shiftAmount;
-                args1 = default;
-                return args1;
+                Vector<int> args0 = default;
+                args1 = Vectors<int>.GetMaskBits(32 - shiftAmount);
+                return args0;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Args(Vector{long}, int, out Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic_Args(Vector<long> dummy, int shiftAmount, out Vector<long> args1) {
                 _ = dummy;
-                _ = shiftAmount;
-                args1 = default;
-                return args1;
+                Vector<long> args0 = default;
+                args1 = Vectors<long>.GetMaskBits(64 - shiftAmount);
+                return args0;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Core(Vector{sbyte}, int, Vector{sbyte}, Vector{sbyte})"/>
@@ -1687,32 +1687,64 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftRightArithmetic_Core(Vector<sbyte> value, int shiftAmount, Vector<sbyte> args0, Vector<sbyte> args1) {
                 _ = args0;
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER // .NET7 no hardware acceleration! X86(sse, avx)
                 _ = args1;
-                return ShiftRightArithmetic(value, shiftAmount);
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
+#else
+                shiftAmount &= 7;
+                Vector<sbyte> sign = Vector.GreaterThan(Vector<sbyte>.Zero, value);
+                Vector<sbyte> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsSByte();
+                Vector<sbyte> rt = Vector.ConditionalSelect(args1, shifted, sign);
+                return rt;
+#endif // BCL_OVERRIDE_BASE_VAR
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Core(Vector{short}, int, Vector{short}, Vector{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftRightArithmetic_Core(Vector<short> value, int shiftAmount, Vector<short> args0, Vector<short> args1) {
                 _ = args0;
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                 _ = args1;
-                return ShiftRightArithmetic(value, shiftAmount);
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
+#else
+                shiftAmount &= 0x0F;
+                Vector<short> sign = Vector.GreaterThan(Vector<short>.Zero, value);
+                Vector<short> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt16();
+                Vector<short> rt = Vector.ConditionalSelect(args1, shifted, sign);
+                return rt;
+#endif // BCL_OVERRIDE_BASE_VAR
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Core(Vector{int}, int, Vector{int}, Vector{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftRightArithmetic_Core(Vector<int> value, int shiftAmount, Vector<int> args0, Vector<int> args1) {
                 _ = args0;
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                 _ = args1;
-                return ShiftRightArithmetic(value, shiftAmount);
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
+#else
+                shiftAmount &= 0x1F;
+                Vector<int> sign = Vector.GreaterThan(Vector<int>.Zero, value);
+                Vector<int> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt32();
+                Vector<int> rt = Vector.ConditionalSelect(args1, shifted, sign);
+                return rt;
+#endif // BCL_OVERRIDE_BASE_VAR
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Core(Vector{long}, int, Vector{long}, Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic_Core(Vector<long> value, int shiftAmount, Vector<long> args0, Vector<long> args1) {
                 _ = args0;
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER // .NET7 no hardware acceleration! X86(sse, avx)
                 _ = args1;
-                return ShiftRightArithmetic(value, shiftAmount);
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
+#else
+                shiftAmount &= 0x3F;
+                Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
+                Vector<long> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt64();
+                Vector<long> rt = Vector.ConditionalSelect(args1, shifted, sign);
+                return rt;
+#endif // BCL_OVERRIDE_BASE_VAR
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Const(Vector{sbyte}, int)"/>
@@ -1745,40 +1777,68 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftRightArithmetic_ConstCore(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector<sbyte> args0, Vector<sbyte> args1) {
                 _ = args0;
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER // .NET7 no hardware acceleration! X86(sse, avx)
                 _ = args1;
-                return ShiftRightArithmetic_Fast(value, shiftAmount);
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
+#else
+                Vector<sbyte> sign = Vector.GreaterThan(Vector<sbyte>.Zero, value);
+                Vector<sbyte> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsSByte();
+                Vector<sbyte> rt = Vector.ConditionalSelect(args1, shifted, sign);
+                return rt;
+#endif // BCL_OVERRIDE_BASE_VAR
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_ConstCore(Vector{short}, int, Vector{short}, Vector{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftRightArithmetic_ConstCore(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector<short> args0, Vector<short> args1) {
                 _ = args0;
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                 _ = args1;
-                return ShiftRightArithmetic_Fast(value, shiftAmount);
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
+#else
+                Vector<short> sign = Vector.GreaterThan(Vector<short>.Zero, value);
+                Vector<short> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt16();
+                Vector<short> rt = Vector.ConditionalSelect(args1, shifted, sign);
+                return rt;
+#endif // BCL_OVERRIDE_BASE_VAR
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_ConstCore(Vector{int}, int, Vector{int}, Vector{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftRightArithmetic_ConstCore(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector<int> args0, Vector<int> args1) {
                 _ = args0;
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                 _ = args1;
-                return ShiftRightArithmetic_Fast(value, shiftAmount);
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
+#else
+                Vector<int> sign = Vector.GreaterThan(Vector<int>.Zero, value);
+                Vector<int> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt32();
+                Vector<int> rt = Vector.ConditionalSelect(args1, shifted, sign);
+                return rt;
+#endif // BCL_OVERRIDE_BASE_VAR
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_ConstCore(Vector{long}, int, Vector{long}, Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic_ConstCore(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector<long> args0, Vector<long> args1) {
                 _ = args0;
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER // .NET7 no hardware acceleration! X86(sse, avx)
                 _ = args1;
-                return ShiftRightArithmetic_Fast(value, shiftAmount);
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
+#else
+                Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
+                Vector<long> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt64();
+                Vector<long> rt = Vector.ConditionalSelect(args1, shifted, sign);
+                return rt;
+#endif // BCL_OVERRIDE_BASE_VAR
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftRightArithmetic_Fast(Vector<sbyte> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
-                return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER // .NET7 no hardware acceleration! X86(sse, avx)
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
 #elif SOFTWARE_OPTIMIZATION
                 return ShiftRightArithmetic_Fast_Negative(value, shiftAmount);
 #else
@@ -1813,8 +1873,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic_Fast(Vector<long> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
-                return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER // .NET7 no hardware acceleration! X86(sse, avx)
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
 #elif SOFTWARE_OPTIMIZATION && NET7_0_OR_GREATER
                 return ShiftRightArithmetic_Fast_Negative(value, shiftAmount);
 #else
@@ -1875,13 +1935,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftRightArithmetic_Fast_Negative(Vector<sbyte> value, int shiftAmount) {
-#if NET7_0_OR_GREATER
-                Vector<sbyte> shifted = Vector.ShiftRightLogical(value.AsUInt16(), shiftAmount).AsSByte();
-#else
-                Vector<sbyte> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsSByte();
-#endif // NET7_0_OR_GREATER
                 Vector<sbyte> mask = Vectors<sbyte>.GetMaskBits(8 - shiftAmount);
                 Vector<sbyte> sign = Vector.GreaterThan(Vector<sbyte>.Zero, value);
+                Vector<sbyte> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsSByte();
                 Vector<sbyte> rt = Vector.ConditionalSelect(mask, shifted, sign);
                 return rt;
             }
@@ -1889,13 +1945,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftRightArithmetic_Fast_Negative(Vector<short> value, int shiftAmount) {
-#if NET7_0_OR_GREATER
-                Vector<short> shifted = Vector.ShiftRightLogical(value, shiftAmount);
-#else
-                Vector<short> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt16();
-#endif // NET7_0_OR_GREATER
                 Vector<short> mask = Vectors<short>.GetMaskBits(16 - shiftAmount);
                 Vector<short> sign = Vector.GreaterThan(Vector<short>.Zero, value);
+                Vector<short> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt16();
                 Vector<short> rt = Vector.ConditionalSelect(mask, shifted, sign);
                 return rt;
             }
@@ -1903,13 +1955,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftRightArithmetic_Fast_Negative(Vector<int> value, int shiftAmount) {
-#if NET7_0_OR_GREATER
-                Vector<int> shifted = Vector.ShiftRightLogical(value, shiftAmount);
-#else
-                Vector<int> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt32();
-#endif // NET7_0_OR_GREATER
                 Vector<int> mask = Vectors<int>.GetMaskBits(32 - shiftAmount);
                 Vector<int> sign = Vector.GreaterThan(Vector<int>.Zero, value);
+                Vector<int> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt32();
                 Vector<int> rt = Vector.ConditionalSelect(mask, shifted, sign);
                 return rt;
             }
@@ -1917,13 +1965,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic_Fast_Negative(Vector<long> value, int shiftAmount) {
-#if NET7_0_OR_GREATER
-                Vector<long> shifted = Vector.ShiftRightLogical(value, shiftAmount);
-#else
-                Vector<long> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt64();
-#endif // NET7_0_OR_GREATER
                 Vector<long> mask = Vectors<long>.GetMaskBits(64 - shiftAmount);
                 Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
+                Vector<long> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt64();
                 Vector<long> rt = Vector.ConditionalSelect(mask, shifted, sign);
                 return rt;
             }
