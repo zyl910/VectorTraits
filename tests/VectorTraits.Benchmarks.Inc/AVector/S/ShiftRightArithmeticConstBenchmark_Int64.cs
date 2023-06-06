@@ -151,6 +151,47 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_ALGORITHM
 
         /// <summary>
+        /// Sum shift left logical - Base - Basic.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumSRA_Base_Basic(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftRightArithmetic_Base(p0, shiftAmount);
+                vrt += vtemp; // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)(Unsafe.Add(ref p, i) >> shiftAmount);
+            }
+            // Reduce.
+            rt += Vectors.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRA_Base_Basic() {
+            VectorTraitsBase.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSumSRA_Base_Basic(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRA_Base_Basic");
+        }
+
+        /// <summary>
         /// Sum shift left logical - Base.
         /// </summary>
         /// <param name="src">Source array.</param>
