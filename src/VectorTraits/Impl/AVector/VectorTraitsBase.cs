@@ -1656,6 +1656,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftRightArithmetic_Args(Vector<sbyte> dummy, int shiftAmount, out Vector<sbyte> args1) {
                 _ = dummy;
+                shiftAmount &= 7;
                 Vector<sbyte> args0 = default;
                 args1 = Vectors<sbyte>.GetMaskBits(8 - shiftAmount);
                 return args0;
@@ -1665,6 +1666,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftRightArithmetic_Args(Vector<short> dummy, int shiftAmount, out Vector<short> args1) {
                 _ = dummy;
+                shiftAmount &= 0x0F;
                 Vector<short> args0 = default;
                 args1 = Vectors<short>.GetMaskBits(16 - shiftAmount);
                 return args0;
@@ -1674,6 +1676,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftRightArithmetic_Args(Vector<int> dummy, int shiftAmount, out Vector<int> args1) {
                 _ = dummy;
+                shiftAmount &= 0x1F;
                 Vector<int> args0 = default;
                 args1 = Vectors<int>.GetMaskBits(32 - shiftAmount);
                 return args0;
@@ -1683,6 +1686,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic_Args(Vector<long> dummy, int shiftAmount, out Vector<long> args1) {
                 _ = dummy;
+                shiftAmount &= 0x3F;
                 Vector<long> args0 = default;
                 args1 = Vectors<long>.GetMaskBits(64 - shiftAmount);
                 return args0;

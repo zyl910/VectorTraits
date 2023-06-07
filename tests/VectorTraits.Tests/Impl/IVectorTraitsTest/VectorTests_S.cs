@@ -198,11 +198,16 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                         vdst = instance.ShiftRightArithmetic((dynamic)vsrc, shiftAmount);
                         Assert.AreEqual(vexpected, vdst, $"{instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                         // Instances: Args and Core
+                        try {
 #pragma warning disable CS0618 // Type or member is obsolete
-                        (args0, args1) = instance.ShiftRightArithmetic_Args<T>(vsrc, shiftAmount);
+                            (args0, args1) = instance.ShiftRightArithmetic_Args<T>(vsrc, shiftAmount);
 #pragma warning restore CS0618 // Type or member is obsolete
-                        vdst = instance.ShiftRightArithmetic_Core((dynamic)vsrc, shiftAmount, (dynamic)args0, (dynamic)args1);
-                        Assert.AreEqual(vexpected, vdst, $"_Core of {instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                            vdst = instance.ShiftRightArithmetic_Core((dynamic)vsrc, shiftAmount, (dynamic)args0, (dynamic)args1);
+                            Assert.AreEqual(vexpected, vdst, $"_Core of {instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                        } catch (Exception ex) {
+                            Console.WriteLine("Exception at:" + $"_Core of {instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                            throw;
+                        }
                     }
                 }
             }
