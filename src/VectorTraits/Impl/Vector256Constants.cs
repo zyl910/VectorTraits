@@ -1,4 +1,9 @@
-﻿using System;
+﻿#if NET5_0_OR_GREATER
+#define USE_VECTOR_CREATE // .NET5+ has better performance .
+#else
+#endif // NET5_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
@@ -22,11 +27,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<float> SignMask_Single {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if NET5_0_OR_GREATER
-                return Vector256.Create(0x80000000U).AsSingle(); // .NET5+ has better performance .
+#if USE_VECTOR_CREATE
+                return Vector256.Create(0x80000000U).AsSingle();
 #else
                 return Vector256s<float>.SignMask;
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
             }
         }
 
@@ -34,11 +39,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<double> SignMask_Double {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if NET5_0_OR_GREATER
+#if USE_VECTOR_CREATE
                 return Vector256.Create(0x8000000000000000L).AsDouble();
 #else
                 return Vector256s<double>.SignMask;
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
             }
         }
 
@@ -46,11 +51,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<float> ExponentMask_Single {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if NET5_0_OR_GREATER
+#if USE_VECTOR_CREATE
                 return Vector256.Create(0x7F800000).AsSingle();
 #else
                 return Vector256s<float>.ExponentMask;
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
             }
         }
 
@@ -58,11 +63,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<double> ExponentMask_Double {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if NET5_0_OR_GREATER
+#if USE_VECTOR_CREATE
                 return Vector256.Create(0x7FF0000000000000L).AsDouble();
 #else
                 return Vector256s<double>.ExponentMask;
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
             }
         }
 
@@ -70,11 +75,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<float> MantissaMask_Single {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if NET5_0_OR_GREATER
+#if USE_VECTOR_CREATE
                 return Vector256.Create(0x007FFFFF).AsSingle();
 #else
                 return Vector256s<float>.MantissaMask;
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
             }
         }
 
@@ -82,11 +87,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<double> MantissaMask_Double {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if NET5_0_OR_GREATER
+#if USE_VECTOR_CREATE
                 return Vector256.Create(0x000FFFFFFFFFFFFFL).AsDouble();
 #else
                 return Vector256s<double>.MantissaMask;
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
             }
         }
 
@@ -95,11 +100,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<ushort> VMaxByte_UInt16 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if NET5_0_OR_GREATER
+#if USE_VECTOR_CREATE
                 return Vector256.Create((ushort)byte.MaxValue);
 #else
                 return Vector256s<ushort>.VMaxByte;
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
             }
         }
 
@@ -166,7 +171,11 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256s{T}.GetMaskBits(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<byte> GetMaskBits_Byte(int index) {
+#if USE_VECTOR_CREATE_BY_ARRAY
             return Vector256.Create((byte)((1U << index) - 1));
+#else
+            return Vector256s<byte>.GetMaskBits(index);
+#endif // USE_VECTOR_CREATE_BY_ARRAY
         }
 
         /// <summary>
@@ -197,7 +206,11 @@ namespace Zyl.VectorTraits.Impl {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ushort> GetMaskBits_UInt16(int index) {
+#if USE_VECTOR_CREATE_BY_ARRAY
             return Vector256.Create((ushort)((1U << index) - 1));
+#else
+            return Vector256s<ushort>.GetMaskBits(index);
+#endif // USE_VECTOR_CREATE_BY_ARRAY
         }
 
         /// <summary>
@@ -228,7 +241,11 @@ namespace Zyl.VectorTraits.Impl {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<uint> GetMaskBits_UInt32(int index) {
+#if USE_VECTOR_CREATE_BY_ARRAY
             return Vector256.Create((uint)((1U << index) - 1));
+#else
+            return Vector256s<uint>.GetMaskBits(index);
+#endif // USE_VECTOR_CREATE_BY_ARRAY
         }
 
         /// <summary>
@@ -259,7 +276,11 @@ namespace Zyl.VectorTraits.Impl {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ulong> GetMaskBits_UInt64(int index) {
+#if USE_VECTOR_CREATE_BY_ARRAY
             return Vector256.Create((ulong)((1UL << index) - 1));
+#else
+            return Vector256s<ulong>.GetMaskBits(index);
+#endif // USE_VECTOR_CREATE_BY_ARRAY
         }
 
 
@@ -326,7 +347,11 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256s{T}.GetMaskBits(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<byte> GetResidueMaskBits_Byte(int index) {
+#if USE_VECTOR_CREATE_BY_ARRAY
             return Vector256.Create((byte)(0xFFU >> index));
+#else
+            return Vector256s<byte>.GetMaskBits(8 - index);
+#endif // USE_VECTOR_CREATE_BY_ARRAY
         }
 
         /// <summary>
@@ -357,7 +382,11 @@ namespace Zyl.VectorTraits.Impl {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ushort> GetResidueMaskBits_UInt16(int index) {
+#if USE_VECTOR_CREATE_BY_ARRAY
             return Vector256.Create((ushort)(0xFFFFU >> index));
+#else
+            return Vector256s<ushort>.GetMaskBits(16 - index);
+#endif // USE_VECTOR_CREATE_BY_ARRAY
         }
 
         /// <summary>
@@ -388,7 +417,11 @@ namespace Zyl.VectorTraits.Impl {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<uint> GetResidueMaskBits_UInt32(int index) {
+#if USE_VECTOR_CREATE_BY_ARRAY
             return Vector256.Create((uint)(0xFFFFFFFFU >> index));
+#else
+            return Vector256s<uint>.GetMaskBits(32 - index);
+#endif // USE_VECTOR_CREATE_BY_ARRAY
         }
 
         /// <summary>
@@ -419,7 +452,11 @@ namespace Zyl.VectorTraits.Impl {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ulong> GetResidueMaskBits_UInt64(int index) {
+#if USE_VECTOR_CREATE_BY_ARRAY
             return Vector256.Create((ulong)(0xFFFFFFFFFFFFFFFFUL >> index));
+#else
+            return Vector256s<ulong>.GetMaskBits(64 - index);
+#endif // USE_VECTOR_CREATE_BY_ARRAY
         }
 
         #endregion // Vectors_T
@@ -435,83 +472,83 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>ExtractMostSignificantBits - Shuffle - Get high byte of 16bit.</summary>
         public static Vector256<byte> ExtractMostSignificantBits_Shuffle_HiByteOf16 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NET5_0_OR_GREATER
+#if USE_VECTOR_CREATE
             get => Vector256.Create((byte)1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80);
         }
 #else
             get;
         } = Vector256.Create((byte)1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80);
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
 
 
         /// <summary>Shuffle - Byte - LaneAdd - K0 .</summary>
         public static Vector256<byte> Shuffle_Byte_LaneAdd_K0 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NET5_0_OR_GREATER
+#if USE_VECTOR_CREATE
             get => Vector256.Create(0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0);
         }
 #else
             get;
         } = Vector256.Create(0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0);
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
 
         /// <summary>Shuffle - Byte - LaneAdd - K1 .</summary>
         public static Vector256<byte> Shuffle_Byte_LaneAdd_K1 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NET5_0_OR_GREATER
+#if USE_VECTOR_CREATE
             get => Vector256.Create(0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70);
         }
 #else
             get;
         } = Vector256.Create(0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0xF0, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70);
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
 
         /// <summary>Shuffle - UInt16 - The multiplier.</summary>
         [CLSCompliant(false)]
         public static Vector256<ushort> Shuffle_UInt16_Multiplier {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NET5_0_OR_GREATER
+#if USE_VECTOR_CREATE
             get => Vector256.Create((ushort)0x202);
         }
 #else
             get;
         } = Vector256.Create((ushort)0x202);
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
 
         /// <summary>Shuffle - UInt16 - The offset of each byte within an element.</summary>
         public static Vector256<byte> Shuffle_UInt16_ByteOffset {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NET5_0_OR_GREATER
+#if USE_VECTOR_CREATE
             get => Vector256.Create((byte)0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1);
         }
 #else
             get;
         } = Vector256s.CreateRotate<byte>(0, 1);
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
 
         /// <summary>Shuffle - UInt64 - The multiplier.</summary>
         [CLSCompliant(false)]
         public static Vector256<ulong> Shuffle_UInt64_Multiplier {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NET5_0_OR_GREATER
+#if USE_VECTOR_CREATE
             get => Vector256.Create((ulong)0x200000002UL);
         }
 #else
             get;
         } = Vector256.Create((ulong)0x200000002UL);
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
 
         /// <summary>Shuffle - UInt64 - The offset of each byte within an element.</summary>
         [CLSCompliant(false)]
         public static Vector256<uint> Shuffle_UInt64_UInt32Offset {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NET5_0_OR_GREATER
+#if USE_VECTOR_CREATE
             get => Vector256.Create((uint)0, 1, 0, 1, 0, 1, 0, 1);
         }
 #else
             get;
         } = Vector256s.CreateRotate<uint>(0, 1);
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
 
 
         private static readonly Vector256<byte>[] m_YShuffleG2_Byte_Indices = {
@@ -721,5 +758,5 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 #endif
-        }
+    }
 }
