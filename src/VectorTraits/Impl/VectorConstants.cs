@@ -101,6 +101,115 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+
+        /// <summary>
+        /// Get bits mask by index (根据索引获取位集掩码). The equivalent of <c>Vectors.Create(Scalars.GetBitsMask&lt;T&gt;(0, index))</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The value ranges from 0 to <c>ElementBitSize</c> (值的范围是 0 ~ <c>ElementBitSize</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// </remarks>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> GetMaskBits_SByte(int index) {
+            return GetMaskBits_Byte(index).AsSByte();
+        }
+
+        /// <summary>
+        /// Get bits mask by index (根据索引获取位集掩码). The equivalent of <c>Vectors.Create(Scalars.GetBitsMask&lt;T&gt;(0, index))</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The value ranges from 0 to <c>ElementBitSize</c> (值的范围是 0 ~ <c>ElementBitSize</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// </remarks>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> GetMaskBits_Byte(int index) {
+            return new Vector<byte>((byte)((1U << index) - 1));
+        }
+
+        /// <summary>
+        /// Get bits mask by index (根据索引获取位集掩码). The equivalent of <c>Vectors.Create(Scalars.GetBitsMask&lt;T&gt;(0, index))</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The value ranges from 0 to <c>ElementBitSize</c> (值的范围是 0 ~ <c>ElementBitSize</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// </remarks>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> GetMaskBits_Int16(int index) {
+            return GetMaskBits_UInt16(index).AsInt16();
+        }
+
+        /// <summary>
+        /// Get bits mask by index (根据索引获取位集掩码). The equivalent of <c>Vectors.Create(Scalars.GetBitsMask&lt;T&gt;(0, index))</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The value ranges from 0 to <c>ElementBitSize</c> (值的范围是 0 ~ <c>ElementBitSize</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// </remarks>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> GetMaskBits_UInt16(int index) {
+            return new Vector<ushort>((ushort)((1U << index) - 1));
+        }
+
+        /// <summary>
+        /// Get bits mask by index (根据索引获取位集掩码). The equivalent of <c>Vectors.Create(Scalars.GetBitsMask&lt;T&gt;(0, index))</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The value ranges from 0 to <c>ElementBitSize</c> (值的范围是 0 ~ <c>ElementBitSize</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// </remarks>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> GetMaskBits_Int32(int index) {
+            return GetMaskBits_UInt32(index).AsInt32();
+        }
+
+        /// <summary>
+        /// Get bits mask by index (根据索引获取位集掩码). The equivalent of <c>Vectors.Create(Scalars.GetBitsMask&lt;T&gt;(0, index))</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The value ranges from 0 to <c>ElementBitSize</c> (值的范围是 0 ~ <c>ElementBitSize</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// </remarks>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> GetMaskBits_UInt32(int index) {
+            return new Vector<uint>((uint)((1U << index) - 1));
+        }
+
+        /// <summary>
+        /// Get bits mask by index (根据索引获取位集掩码). The equivalent of <c>Vectors.Create(Scalars.GetBitsMask&lt;T&gt;(0, index))</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The value ranges from 0 to <c>ElementBitSize</c> (值的范围是 0 ~ <c>ElementBitSize</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// </remarks>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> GetMaskBits_Int64(int index) {
+            return GetMaskBits_UInt64(index).AsInt64();
+        }
+
+        /// <summary>
+        /// Get bits mask by index (根据索引获取位集掩码). The equivalent of <c>Vectors.Create(Scalars.GetBitsMask&lt;T&gt;(0, index))</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The value ranges from 0 to <c>ElementBitSize</c> (值的范围是 0 ~ <c>ElementBitSize</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// </remarks>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> GetMaskBits_UInt64(int index) {
+            return new Vector<ulong>((ulong)((1UL << index) - 1));
+        }
+
         #endregion // Vectors_T
 
         #region Shared

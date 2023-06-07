@@ -1994,6 +1994,22 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic_Fast_Negative(Vector<long> value, int shiftAmount) {
+                return ShiftRightArithmetic_Fast_Negative_LoadArray(value, shiftAmount);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftRightArithmetic_Fast_Negative_Create(Vector<long> value, int shiftAmount) {
+                Vector<long> mask = VectorConstants.GetMaskBits_Int64(64 - shiftAmount);
+                Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
+                Vector<long> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt64();
+                Vector<long> rt = Vector.ConditionalSelect(mask, shifted, sign);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftRightArithmetic_Fast_Negative_LoadArray(Vector<long> value, int shiftAmount) {
                 Vector<long> mask = Vectors<long>.GetMaskBits(64 - shiftAmount);
                 Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
                 Vector<long> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt64();
