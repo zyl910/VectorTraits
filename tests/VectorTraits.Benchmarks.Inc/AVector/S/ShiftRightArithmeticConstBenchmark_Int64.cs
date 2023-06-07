@@ -187,6 +187,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         [Benchmark]
         public void SumSRA_Base_Basic() {
             VectorTraitsBase.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
             dstTMy = StaticSumSRA_Base_Basic(srcArray, srcArray.Length, shiftAmount);
             CheckResult("SumSRA_Base_Basic");
         }
@@ -228,6 +232,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         [Benchmark]
         public void SumSRA_Base() {
             VectorTraitsBase.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
             dstTMy = StaticSumSRA_Base(srcArray, srcArray.Length, shiftAmount);
             CheckResult("SumSRA_Base");
         }

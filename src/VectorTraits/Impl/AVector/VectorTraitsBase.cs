@@ -6,6 +6,7 @@ using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 #endif // !NET7_0_OR_GREATER
 using System.Text;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Numerics;
 using Zyl.VectorTraits.Extensions.SameW;
 using Zyl.VectorTraits.Impl.Util;
@@ -1578,10 +1579,15 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic(Vector<long> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
-                return Vector.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
-#elif SOFTWARE_OPTIMIZATION && NET7_0_OR_GREATER
-                return ShiftRightArithmetic_Negative(value, shiftAmount);
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER && SOFTWARE_OPTIMIZATION
+                // .NET7 no hardware acceleration! X86(sse, avx)
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64) {
+                    return ShiftRightArithmetic_Negative(value, shiftAmount);
+                } else {
+                    return Vector.ShiftRightArithmetic(value, shiftAmount);
+                }
+#elif BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+                return Vector.ShiftRightArithmetic(value, shiftAmount);
 #else
                 return ShiftRightArithmetic_Base(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_VAR
@@ -1735,15 +1741,24 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic_Core(Vector<long> value, int shiftAmount, Vector<long> args0, Vector<long> args1) {
                 _ = args0;
-#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER && SOFTWARE_OPTIMIZATION
+                // .NET7 no hardware acceleration! X86(sse, avx)
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64) {
+                    shiftAmount &= 0x3F;
+                    Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
+                    Vector<long> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt64();
+                    Vector<long> rt = Vector.ConditionalSelect(args1, shifted, sign);
+                    return rt;
+                } else {
+                    _ = args1;
+                    return Vector.ShiftRightArithmetic(value, shiftAmount);
+                }
+#elif BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                 _ = args1;
                 return Vector.ShiftRightArithmetic(value, shiftAmount);
 #else
-                shiftAmount &= 0x3F;
-                Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
-                Vector<long> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt64();
-                Vector<long> rt = Vector.ConditionalSelect(args1, shifted, sign);
-                return rt;
+                _ = args1;
+                return ShiftRightArithmetic_Base(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_VAR
             }
 
@@ -1822,14 +1837,23 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic_ConstCore(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector<long> args0, Vector<long> args1) {
                 _ = args0;
-#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER && SOFTWARE_OPTIMIZATION
+                // .NET7 no hardware acceleration! X86(sse, avx)
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64) {
+                    Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
+                    Vector<long> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt64();
+                    Vector<long> rt = Vector.ConditionalSelect(args1, shifted, sign);
+                    return rt;
+                } else {
+                    _ = args1;
+                    return Vector.ShiftRightArithmetic(value, shiftAmount);
+                }
+#elif BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                 _ = args1;
                 return Vector.ShiftRightArithmetic(value, shiftAmount);
 #else
-                Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
-                Vector<long> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt64();
-                Vector<long> rt = Vector.ConditionalSelect(args1, shifted, sign);
-                return rt;
+                _ = args1;
+                return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_VAR
             }
 
@@ -1873,10 +1897,15 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic_Fast(Vector<long> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER && SOFTWARE_OPTIMIZATION
+                // .NET7 no hardware acceleration! X86(sse, avx)
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64) {
+                    return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
+                } else {
+                    return Vector.ShiftRightArithmetic(value, shiftAmount);
+                }
+#elif BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                 return Vector.ShiftRightArithmetic(value, shiftAmount);
-#elif SOFTWARE_OPTIMIZATION && NET7_0_OR_GREATER
-                return ShiftRightArithmetic_Fast_Negative(value, shiftAmount);
 #else
                 return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_VAR
