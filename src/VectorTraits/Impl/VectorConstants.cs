@@ -110,6 +110,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <remarks>
         /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
         /// </remarks>
+        /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<sbyte> GetMaskBits_SByte(int index) {
@@ -124,6 +125,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <remarks>
         /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
         /// </remarks>
+        /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<byte> GetMaskBits_Byte(int index) {
             return new Vector<byte>((byte)((1U << index) - 1));
@@ -137,6 +139,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <remarks>
         /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
         /// </remarks>
+        /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<short> GetMaskBits_Int16(int index) {
             return GetMaskBits_UInt16(index).AsInt16();
@@ -150,6 +153,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <remarks>
         /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
         /// </remarks>
+        /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ushort> GetMaskBits_UInt16(int index) {
@@ -164,6 +168,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <remarks>
         /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
         /// </remarks>
+        /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> GetMaskBits_Int32(int index) {
             return GetMaskBits_UInt32(index).AsInt32();
@@ -177,6 +182,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <remarks>
         /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
         /// </remarks>
+        /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<uint> GetMaskBits_UInt32(int index) {
@@ -191,6 +197,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <remarks>
         /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
         /// </remarks>
+        /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<long> GetMaskBits_Int64(int index) {
             return GetMaskBits_UInt64(index).AsInt64();
@@ -204,6 +211,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <remarks>
         /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
         /// </remarks>
+        /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ulong> GetMaskBits_UInt64(int index) {

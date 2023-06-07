@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits {
 
@@ -359,6 +360,7 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <param name="index">The index (索引). The value ranges from 0 to <c>ElementBitSize</c> (值的范围是 0 ~ <c>ElementBitSize</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <seealso cref="VectorConstants.GetMaskBits_Int32"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> GetMaskBits(int index) {
             return Unsafe.As<Vector<byte>, Vector<T>>(ref MaskBitsArray[index]);
