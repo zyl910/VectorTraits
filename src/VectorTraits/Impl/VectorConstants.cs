@@ -111,9 +111,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
-        /// </remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
@@ -147,7 +145,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [CLSCompliant(false)]
@@ -163,7 +161,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -178,7 +176,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -193,7 +191,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [CLSCompliant(false)]
@@ -209,7 +207,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -224,7 +222,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [CLSCompliant(false)]
@@ -240,7 +238,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -255,7 +253,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The value ranges from 0 to <c>sizeof(T)*8-1</c> (值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [CLSCompliant(false)]
@@ -273,7 +271,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The value ranges from 0 to <c>sizeof(T)*8-1</c> (值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
@@ -307,7 +305,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [CLSCompliant(false)]
@@ -323,7 +321,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -338,7 +336,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -353,7 +351,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [CLSCompliant(false)]
@@ -369,7 +367,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -384,7 +382,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [CLSCompliant(false)]
@@ -400,7 +398,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -415,7 +413,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="index">The index (索引). The value ranges from 0 to <c>sizeof(T)*8-1</c> (值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
         /// <returns>Returns bits mask mask (返回位集掩码).</returns>
         /// <remarks>
-        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net6+.
+        /// It performs better than <see cref="Vectors{T}.GetMaskBits(int)"/> when running net5+.
         /// </remarks>
         /// <seealso cref="Vectors{T}.GetMaskBits(int)"/>
         [CLSCompliant(false)]
