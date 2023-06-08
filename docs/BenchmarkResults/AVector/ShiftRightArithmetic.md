@@ -28,7 +28,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	2130476158	# 0x7EFC7C7E
+VectorTraitsGlobal.InitCheckSum:	-25396098	# 0xFE7C7C7E
 Vector<T>.Assembly.CodeBase:	file:///E:/zylSelf/Code/cs/base/VectorTraits/tests/VectorTraits.Benchmarks.NetFw/bin/Release/System.Numerics.Vectors.DLL
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 1.1
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Framework 4.5
@@ -40,57 +40,59 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-12499
-SumSRAScalar	315.306	831.395
-SumSRA_Base_Basic	252.141	1039.673	1.250517
-SumSRA_Base	168.961	1551.510	1.866153
-SumSRA_Base_Core	149.260	1756.290	2.112463
-SumSRATraits	168.872	1552.321	1.867129
-SumSRATraits_Core	153.906	1703.274	2.048694
-SumSRAConstTraits	149.844	1749.451	2.104237
-SumSRAConstTraits_Core	141.367	1854.357	2.230417
-SumSRAFastTraits	161.735	1620.828	1.949529
+SumSRAScalar	373.375	702.093
+SumSRA_Base_Basic	294.380	890.496	1.268345
+SumSRA_Base	192.120	1364.479	1.943444
+SumSRA_Base_Core	328.363	798.336	1.137080
+SumSRATraits	186.600	1404.847	2.000941
+SumSRATraits_Core	175.727	1491.773	2.124751
+SumSRAConstTraits	184.569	1420.306	2.022960
+SumSRAConstTraits_Core	213.032	1230.536	1.752668
+SumSRAFastTraits	283.180	925.717	1.318510
 
 [ShiftRightArithmeticConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	1913540397
-SumSRAScalar	315.540	830.778
-SumSRA_Base_Basic	489.445	535.594	0.644690
-SumSRA_Base	352.392	743.898	0.895423
-SumSRA_Base_Core	318.899	822.029	0.989469
-SumSRATraits	350.751	747.378	0.899613
-SumSRATraits_Core	306.388	855.595	1.029872
-SumSRAConstTraits	300.202	873.224	1.051092
-SumSRAConstTraits_Core	283.573	924.433	1.112732
-SumSRAFastTraits	316.792	827.497	0.996050
+SumSRAScalar	511.251	512.750
+SumSRA_Base_Basic	764.334	342.970	0.668884
+SumSRA_Base	499.904	524.388	1.022698
+SumSRA_Base_Core	424.566	617.439	1.204173
+SumSRATraits	463.226	565.910	1.103677
+SumSRATraits_Core	400.225	654.991	1.277409
+SumSRAConstTraits	376.138	696.936	1.359212
+SumSRAConstTraits_Core	368.779	710.843	1.386335
+SumSRAFastTraits	407.593	643.151	1.254318
 
 [ShiftRightArithmeticConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-6268185905068837132
-SumSRAScalar	318.004	824.341
-SumSRA_Base_Basic	605.251	433.116	0.525409
-SumSRA_Base	589.982	444.326	0.539007
-SumSRA_Base_Core	645.233	406.278	0.492852
-SumSRATraits	589.623	444.596	0.539336
-SumSRATraits_Core	623.660	420.331	0.509900
-SumSRAConstTraits	485.501	539.946	0.655003
-SumSRAConstTraits_Core	568.346	461.240	0.559526
-SumSRAFastTraits	526.305	498.084	0.604221
+SumSRAScalar	434.275	603.636
+SumSRA_Base_Basic	644.631	406.657	0.673680
+SumSRA_Base	654.867	400.301	0.663150
+SumSRA_Base_Create	712.220	368.066	0.609748
+SumSRA_Base_LoadArray	736.075	356.137	0.589987
+SumSRA_Base_Core	643.056	407.654	0.675330
+SumSRATraits	640.051	409.568	0.678501
+SumSRATraits_Core	638.940	410.280	0.679681
+SumSRAConstTraits	548.225	478.169	0.792148
+SumSRAConstTraits_Core	550.179	476.470	0.789334
+SumSRAFastTraits	620.186	422.686	0.700234
 
 [ShiftRightArithmeticConstBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	97
-SumSRAScalar	312.582	838.640
-SumSRA_Base_Basic	206.204	1271.287	1.515890
-SumSRA_Base	84.405	3105.804	3.703380
-SumSRA_Base_Core	74.695	3509.521	4.184775
-SumSRATraits	84.686	3095.495	3.691088
-SumSRATraits_Core	76.639	3420.508	4.078635
-SumSRAConstTraits	75.032	3493.784	4.166010
-SumSRAConstTraits_Core	70.945	3695.034	4.405983
-SumSRAFastTraits	79.533	3296.059	3.930241
+SumSRAScalar	377.694	694.064
+SumSRA_Base_Basic	251.943	1040.489	1.499126
+SumSRA_Base	91.618	2861.264	4.122480
+SumSRA_Base_Core	84.938	3086.314	4.446729
+SumSRATraits	94.012	2788.400	4.017498
+SumSRATraits_Core	86.988	3013.549	4.341891
+SumSRAConstTraits	81.506	3216.235	4.633918
+SumSRAConstTraits_Core	78.544	3337.539	4.808691
+SumSRAFastTraits	89.618	2925.110	4.214469
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -122,7 +124,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	2130476158	# 0x7EFC7C7E
+VectorTraitsGlobal.InitCheckSum:	-25396098	# 0xFE7C7C7E
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/2.1.30/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 2.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 2.1
@@ -134,57 +136,59 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-12499
-SumSRAScalar	317.638	825.291
-SumSRA_Base_Basic	251.451	1042.527	1.263223
-SumSRA_Base	168.746	1553.481	1.882342
-SumSRA_Base_Core	148.790	1761.835	2.134804
-SumSRATraits	168.820	1552.797	1.881514
-SumSRATraits_Core	156.491	1675.133	2.029747
-SumSRAConstTraits	150.730	1739.167	2.107337
-SumSRAConstTraits_Core	141.708	1849.886	2.241495
-SumSRAFastTraits	158.927	1649.465	1.998646
+SumSRAScalar	396.351	661.393
+SumSRA_Base_Basic	292.131	897.350	1.356756
+SumSRA_Base	192.434	1362.254	2.059673
+SumSRA_Base_Core	178.903	1465.288	2.215456
+SumSRATraits	194.010	1351.186	2.042939
+SumSRATraits_Core	179.048	1464.097	2.213656
+SumSRAConstTraits	176.697	1483.577	2.243108
+SumSRAConstTraits_Core	168.397	1556.703	2.353671
+SumSRAFastTraits	182.169	1439.019	2.175738
 
 [ShiftRightArithmeticConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	1913540397
-SumSRAScalar	314.098	834.594
-SumSRA_Base_Basic	488.772	536.331	0.642626
-SumSRA_Base	352.839	742.956	0.890201
-SumSRA_Base_Core	319.406	820.723	0.983380
-SumSRATraits	352.026	744.671	0.892256
-SumSRATraits_Core	308.381	850.065	1.018537
-SumSRAConstTraits	300.930	871.113	1.043757
-SumSRAConstTraits_Core	282.295	928.618	1.112659
-SumSRAFastTraits	317.555	825.507	0.989112
+SumSRAScalar	366.002	716.236
+SumSRA_Base_Basic	603.846	434.124	0.606118
+SumSRA_Base	403.457	649.745	0.907166
+SumSRA_Base_Core	367.485	713.346	0.995965
+SumSRATraits	411.276	637.392	0.889919
+SumSRATraits_Core	370.148	708.215	0.988800
+SumSRAConstTraits	359.971	728.237	1.016755
+SumSRAConstTraits_Core	350.867	747.132	1.043136
+SumSRAFastTraits	375.979	697.230	0.973464
 
 [ShiftRightArithmeticConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-6268185905068837132
-SumSRAScalar	317.269	826.251
-SumSRA_Base_Basic	559.851	468.239	0.566703
-SumSRA_Base	560.519	467.681	0.566028
-SumSRA_Base_Core	644.041	407.030	0.492622
-SumSRATraits	558.733	469.176	0.567837
-SumSRATraits_Core	618.864	423.589	0.512664
-SumSRAConstTraits	484.957	540.551	0.654221
-SumSRAConstTraits_Core	569.689	460.153	0.556916
-SumSRAFastTraits	524.830	499.484	0.604518
+SumSRAScalar	389.524	672.985
+SumSRA_Base_Basic	712.048	368.155	0.547048
+SumSRA_Base	686.918	381.624	0.567061
+SumSRA_Base_Create	740.675	353.926	0.525904
+SumSRA_Base_LoadArray	760.305	344.788	0.512326
+SumSRA_Base_Core	723.618	362.268	0.538300
+SumSRATraits	700.368	374.295	0.556170
+SumSRATraits_Core	673.626	389.153	0.578249
+SumSRAConstTraits	625.086	419.373	0.623153
+SumSRAConstTraits_Core	615.837	425.671	0.632512
+SumSRAFastTraits	638.733	410.412	0.609838
 
 [ShiftRightArithmeticConstBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	97
-SumSRAScalar	312.600	838.592
-SumSRA_Base_Basic	204.888	1279.452	1.525715
-SumSRA_Base	84.645	3096.986	3.693079
-SumSRA_Base_Core	74.860	3501.772	4.175777
-SumSRATraits	84.471	3103.361	3.700681
-SumSRATraits_Core	76.854	3410.951	4.067475
-SumSRAConstTraits	75.011	3494.747	4.167400
-SumSRAConstTraits_Core	70.829	3701.103	4.413473
-SumSRAFastTraits	79.380	3302.410	3.938042
+SumSRAScalar	364.078	720.023
+SumSRA_Base_Basic	247.913	1057.404	1.468570
+SumSRA_Base	97.666	2684.095	3.727793
+SumSRA_Base_Core	88.208	2971.869	4.127467
+SumSRATraits	95.179	2754.216	3.825180
+SumSRATraits_Core	88.908	2948.503	4.095014
+SumSRAConstTraits	86.903	3016.510	4.189466
+SumSRAConstTraits_Core	85.555	3064.053	4.255496
+SumSRAFastTraits	94.442	2775.703	3.855023
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -216,7 +220,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
+VectorTraitsGlobal.InitCheckSum:	7960958	# 0x0079797E
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
@@ -228,65 +232,67 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-12499
-SumSRAScalar	220.963	1186.371
-SumSRA_Base_Basic	271.333	966.134	0.814361
-SumSRA_Base	175.417	1494.403	1.259643
-SumSRA_Base_Core	154.628	1695.321	1.428998
-SumSRA_Avx2	14.769	17749.684	14.961329
-SumSRATraits	14.813	17697.463	14.917312
-SumSRATraits_Core	14.339	18282.060	15.410073
-SumSRAConstTraits	14.830	17676.100	14.899304
-SumSRAConstTraits_Core	13.667	19180.978	16.167777
-SumSRAFast_Avx2	14.693	17840.876	15.038195
-SumSRAFastTraits	14.392	18215.047	15.353587
+SumSRAScalar	262.285	999.463
+SumSRA_Base_Basic	318.978	821.825	0.822267
+SumSRA_Base	190.264	1377.793	1.378533
+SumSRA_Base_Core	185.677	1411.826	1.412585
+SumSRA_Avx2	19.528	13424.248	13.431463
+SumSRATraits	18.671	14040.396	14.047942
+SumSRATraits_Core	15.461	16954.769	16.963881
+SumSRAConstTraits	17.993	14568.822	14.576652
+SumSRAConstTraits_Core	15.237	17204.435	17.213682
+SumSRAFast_Avx2	17.265	15183.697	15.191858
+SumSRAFastTraits	17.876	14664.683	14.672564
 
 [ShiftRightArithmeticConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	1913540397
-SumSRAScalar	196.929	1331.158
-SumSRA_Base_Basic	501.086	523.152	0.393005
-SumSRA_Base	341.395	767.862	0.576838
-SumSRA_Base_Core	309.037	848.261	0.637235
-SumSRA_Avx2	32.119	8161.658	6.131246
-SumSRATraits	29.135	8997.447	6.759112
-SumSRATraits_Core	24.573	10667.783	8.013911
-SumSRAConstTraits	31.156	8413.944	6.320770
-SumSRAConstTraits_Core	24.601	10655.919	8.004998
-SumSRAFast_Avx2	31.077	8435.303	6.336815
-SumSRAFastTraits	29.628	8847.752	6.646657
+SumSRAScalar	231.915	1130.344
+SumSRA_Base_Basic	598.793	437.787	0.387304
+SumSRA_Base	383.991	682.682	0.603960
+SumSRA_Base_Core	368.289	711.789	0.629710
+SumSRA_Avx2	37.159	7054.651	6.241152
+SumSRATraits	37.269	7033.899	6.222793
+SumSRATraits_Core	31.321	8369.465	7.404349
+SumSRAConstTraits	36.853	7113.141	6.292897
+SumSRAConstTraits_Core	30.380	8628.813	7.633791
+SumSRAFast_Avx2	35.453	7394.178	6.541526
+SumSRAFastTraits	36.144	7252.708	6.416370
 
 [ShiftRightArithmeticConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-6268185905068837132
-SumSRAScalar	200.898	1304.863
-SumSRA_Base_Basic	539.958	485.489	0.372062
-SumSRA_Base	542.340	483.358	0.370428
-SumSRA_Base_Core	621.031	422.111	0.323491
-SumSRA_Avx2	112.208	2336.230	1.790403
-SumSRATraits	117.580	2229.499	1.708608
-SumSRATraits_Core	75.075	3491.771	2.675968
-SumSRAConstTraits	107.495	2438.654	1.868897
-SumSRAConstTraits_Core	70.490	3718.894	2.850027
-SumSRAFast_Avx2	110.542	2371.443	1.817389
-SumSRAFastTraits	108.910	2406.983	1.844625
+SumSRAScalar	262.198	999.795
+SumSRA_Base_Basic	660.226	397.052	0.397133
+SumSRA_Base	664.482	394.509	0.394590
+SumSRA_Base_Create	738.502	354.967	0.355040
+SumSRA_Base_LoadArray	775.536	338.017	0.338086
+SumSRA_Base_Core	652.519	401.741	0.401824
+SumSRA_Avx2	145.948	1796.148	1.796516
+SumSRATraits	145.082	1806.868	1.807239
+SumSRATraits_Core	96.183	2725.484	2.726043
+SumSRAConstTraits	135.179	1939.231	1.939628
+SumSRAConstTraits_Core	92.579	2831.561	2.832141
+SumSRAFast_Avx2	129.332	2026.911	2.027327
+SumSRAFastTraits	134.916	1943.022	1.943420
 
 [ShiftRightArithmeticConstBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	97
-SumSRAScalar	235.014	1115.439
-SumSRA_Base_Basic	224.281	1168.817	1.047854
-SumSRA_Base	87.870	2983.306	2.674557
-SumSRA_Base_Core	77.339	3389.525	3.038735
-SumSRA_Avx2	17.261	15187.112	13.615362
-SumSRATraits	16.571	15819.894	14.182657
-SumSRATraits_Core	10.683	24539.183	21.999567
-SumSRAConstTraits	12.967	20216.123	18.123910
-SumSRAConstTraits_Core	9.070	28901.754	25.910645
-SumSRAFast_Avx2	12.318	21280.698	19.078309
-SumSRAFastTraits	22.938	11428.157	10.245431
+SumSRAScalar	280.145	935.744
+SumSRA_Base_Basic	275.275	952.300	1.017693
+SumSRA_Base	97.422	2690.819	2.875593
+SumSRA_Base_Core	105.217	2491.451	2.662535
+SumSRA_Avx2	19.237	13626.962	14.562703
+SumSRATraits	18.734	13992.988	14.953863
+SumSRATraits_Core	10.711	24474.777	26.155419
+SumSRAConstTraits	15.306	17127.425	18.303536
+SumSRAConstTraits_Core	11.551	22695.017	24.253446
+SumSRAFast_Avx2	14.973	17507.704	18.709929
+SumSRAFastTraits	14.076	18623.264	19.902092
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -319,7 +325,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
+VectorTraitsGlobal.InitCheckSum:	7960958	# 0x0079797E
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
@@ -331,73 +337,75 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-12499
-SumSRAScalar	365.569	717.085
-SumSRA_Base_Basic	447.024	586.420	0.817784
-SumSRA_Base	266.248	984.584	1.373037
-SumSRA_Base_Core	247.142	1060.700	1.479183
+SumSRAScalar	266.041	985.350
+SumSRA_Base_Basic	325.543	805.250	0.817222
+SumSRA_Base	194.166	1350.105	1.370178
+SumSRA_Base_Core	178.175	1471.275	1.493149
 SumSRA_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRA_Avx2	24.697	10614.203	14.801875
-SumSRATraits	21.509	12187.852	16.996383
-SumSRATraits_Core	15.077	17386.455	24.246015
-SumSRAConstTraits	15.356	17071.651	23.807010
-SumSRAConstTraits_Core	15.899	16487.586	22.992512
+SumSRA_Avx2	19.441	13484.234	13.684710
+SumSRATraits	19.712	13298.853	13.496572
+SumSRATraits_Core	18.464	14197.408	14.408487
+SumSRAConstTraits	17.081	15347.296	15.575470
+SumSRAConstTraits_Core	16.024	16359.771	16.602999
 SumSRAFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRAFast_Avx2	16.049	16333.993	22.778320
-SumSRAFastTraits	15.130	17325.813	24.161447
+SumSRAFast_Avx2	17.631	14868.196	15.089248
+SumSRAFastTraits	15.957	16428.024	16.672267
 
 [ShiftRightArithmeticConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	1913540397
-SumSRAScalar	199.081	1316.772
-SumSRA_Base_Basic	577.489	453.938	0.344735
-SumSRA_Base	380.329	689.256	0.523443
-SumSRA_Base_Core	356.914	734.474	0.557784
+SumSRAScalar	229.178	1143.847
+SumSRA_Base_Basic	591.295	443.339	0.387586
+SumSRA_Base	405.979	645.708	0.564506
+SumSRA_Base_Core	371.633	705.384	0.616677
 SumSRA_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRA_Avx2	32.398	8091.390	6.144866
-SumSRATraits	34.946	7501.443	5.696842
-SumSRATraits_Core	27.042	9693.943	7.361898
-SumSRAConstTraits	26.384	9935.786	7.545561
-SumSRAConstTraits_Core	25.112	10439.092	7.927789
+SumSRA_Avx2	40.562	6462.745	5.650010
+SumSRATraits	39.037	6715.292	5.870797
+SumSRATraits_Core	29.085	9013.045	7.879592
+SumSRAConstTraits	33.563	7810.563	6.828331
+SumSRAConstTraits_Core	31.526	8315.196	7.269502
 SumSRAFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRAFast_Avx2	28.465	9209.283	6.993832
-SumSRAFastTraits	28.748	9118.616	6.924976
+SumSRAFast_Avx2	33.686	7781.886	6.803260
+SumSRAFastTraits	32.919	7963.255	6.961820
 
 [ShiftRightArithmeticConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-6268185905068837132
-SumSRAScalar	199.826	1311.859
-SumSRA_Base_Basic	591.066	443.510	0.338078
-SumSRA_Base	590.777	443.728	0.338243
-SumSRA_Base_Core	637.315	411.325	0.313544
+SumSRAScalar	255.871	1024.516
+SumSRA_Base_Basic	670.715	390.843	0.381490
+SumSRA_Base	674.560	388.615	0.379316
+SumSRA_Base_Create	728.803	359.691	0.351084
+SumSRA_Base_LoadArray	747.814	350.547	0.342159
+SumSRA_Base_Core	663.505	395.090	0.385635
 SumSRA_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRA_Avx2	110.281	2377.066	1.811983
-SumSRATraits	111.799	2344.783	1.787374
-SumSRATraits_Core	76.560	3424.020	2.610052
-SumSRAConstTraits	112.298	2334.351	1.779422
-SumSRAConstTraits_Core	77.863	3366.730	2.566381
+SumSRA_Avx2	141.356	1854.497	1.810120
+SumSRATraits	139.530	1878.760	1.833802
+SumSRATraits_Core	90.440	2898.529	2.829168
+SumSRAConstTraits	131.746	1989.769	1.942155
+SumSRAConstTraits_Core	97.265	2695.154	2.630660
 SumSRAFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRAFast_Avx2	110.572	2370.796	1.807204
-SumSRAFastTraits	109.674	2390.220	1.822010
+SumSRAFast_Avx2	134.040	1955.717	1.908918
+SumSRAFastTraits	135.550	1933.931	1.887653
 
 [ShiftRightArithmeticConstBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	97
-SumSRAScalar	241.927	1083.566
-SumSRA_Base_Basic	253.100	1035.732	0.955855
-SumSRA_Base	82.005	3196.698	2.950165
-SumSRA_Base_Core	77.275	3392.347	3.130725
+SumSRAScalar	294.400	890.434
+SumSRA_Base_Basic	294.316	890.689	1.000287
+SumSRA_Base	99.800	2626.683	2.949892
+SumSRA_Base_Core	88.953	2946.990	3.309611
 SumSRA_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRA_Avx2	16.372	16011.957	14.777098
-SumSRATraits	16.482	15904.386	14.677823
-SumSRATraits_Core	9.959	26322.594	24.292568
-SumSRAConstTraits	10.420	25158.517	23.218266
-SumSRAConstTraits_Core	8.455	31004.968	28.613832
+SumSRA_Avx2	17.594	14899.290	16.732622
+SumSRATraits	17.357	15103.419	16.961868
+SumSRATraits_Core	10.562	24819.521	27.873520
+SumSRAConstTraits	11.880	22065.680	24.780823
+SumSRAConstTraits_Core	10.532	24889.146	27.951712
 SumSRAFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRAFast_Avx2	10.770	24340.956	22.463756
-SumSRAFastTraits	10.344	25341.893	23.387500
+SumSRAFast_Avx2	12.501	20969.587	23.549857
+SumSRAFastTraits	12.393	21152.867	23.755690
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -430,7 +438,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
+VectorTraitsGlobal.InitCheckSum:	7960958	# 0x0079797E
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.14/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
@@ -442,73 +450,75 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-12499
-SumSRAScalar	225.794	1160.986
-SumSRA_Base_Basic	311.494	841.571	0.724876
-SumSRA_Base	193.968	1351.478	1.164078
-SumSRA_Base_Core	159.138	1647.273	1.418857
+SumSRAScalar	222.931	1175.895
+SumSRA_Base_Basic	319.546	820.364	0.697651
+SumSRA_Base	189.405	1384.036	1.177007
+SumSRA_Base_Core	177.088	1480.305	1.258875
 SumSRA_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRA_Avx2	15.211	17233.336	14.843711
-SumSRATraits	16.154	16227.890	13.977683
-SumSRATraits_Core	13.525	19382.840	16.695158
-SumSRAConstTraits	13.329	19667.458	16.940310
-SumSRAConstTraits_Core	13.316	19685.816	16.956122
+SumSRA_Avx2	18.220	14387.967	12.235759
+SumSRATraits	19.139	13696.511	11.647734
+SumSRATraits_Core	16.435	15950.067	13.564195
+SumSRAConstTraits	14.762	17758.148	15.101816
+SumSRAConstTraits_Core	14.714	17815.552	15.150633
 SumSRAFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRAFast_Avx2	14.129	18553.536	15.980848
-SumSRAFastTraits	13.654	19198.820	16.536654
+SumSRAFast_Avx2	16.008	16375.344	13.925857
+SumSRAFastTraits	17.040	15384.450	13.083185
 
 [ShiftRightArithmeticConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	1913540397
-SumSRAScalar	160.175	1636.611
-SumSRA_Base_Basic	507.553	516.486	0.315582
-SumSRA_Base	339.236	772.747	0.472163
-SumSRA_Base_Core	319.987	819.233	0.500567
+SumSRAScalar	185.692	1411.714
+SumSRA_Base_Basic	570.391	459.587	0.325552
+SumSRA_Base	377.446	694.520	0.491969
+SumSRA_Base_Core	357.904	732.441	0.518831
 SumSRA_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRA_Avx2	30.536	8584.613	5.245360
-SumSRATraits	32.806	7990.775	4.882514
-SumSRATraits_Core	22.270	11771.379	7.192534
-SumSRAConstTraits	24.919	10519.995	6.427915
-SumSRAConstTraits_Core	26.608	9852.050	6.019788
+SumSRA_Avx2	39.066	6710.236	4.753255
+SumSRATraits	36.700	7142.890	5.059728
+SumSRATraits_Core	29.569	8865.607	6.280030
+SumSRAConstTraits	28.880	9077.101	6.429844
+SumSRAConstTraits_Core	30.011	8734.785	6.187361
 SumSRAFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRAFast_Avx2	26.305	9965.608	6.089174
-SumSRAFastTraits	26.168	10017.603	6.120944
+SumSRAFast_Avx2	33.203	7895.274	5.592686
+SumSRAFastTraits	33.546	7814.563	5.535514
 
 [ShiftRightArithmeticConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-6268185905068837132
-SumSRAScalar	200.640	1306.540
-SumSRA_Base_Basic	560.326	467.842	0.358077
-SumSRA_Base	541.974	483.684	0.370202
-SumSRA_Base_Core	621.081	422.077	0.323049
+SumSRAScalar	244.203	1073.467
+SumSRA_Base_Basic	636.150	412.079	0.383877
+SumSRA_Base	624.620	419.686	0.390963
+SumSRA_Base_Create	715.925	366.161	0.341102
+SumSRA_Base_LoadArray	736.973	355.704	0.331360
+SumSRA_Base_Core	653.613	401.069	0.373621
 SumSRA_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRA_Avx2	121.200	2162.907	1.655446
-SumSRATraits	120.951	2167.350	1.658846
-SumSRATraits_Core	87.969	2979.956	2.280799
-SumSRAConstTraits	83.451	3141.279	2.404273
-SumSRAConstTraits_Core	72.824	3599.670	2.755116
+SumSRA_Avx2	137.358	1908.478	1.777864
+SumSRATraits	139.695	1876.551	1.748123
+SumSRATraits_Core	103.264	2538.591	2.364854
+SumSRAConstTraits	110.069	2381.632	2.218637
+SumSRAConstTraits_Core	92.414	2836.640	2.642504
 SumSRAFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRAFast_Avx2	111.270	2355.924	1.803178
-SumSRAFastTraits	108.820	2408.959	1.843770
+SumSRAFast_Avx2	129.319	2027.105	1.888373
+SumSRAFastTraits	129.212	2028.785	1.889938
 
 [ShiftRightArithmeticConstBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	97
-SumSRAScalar	195.048	1343.995
-SumSRA_Base_Basic	221.584	1183.043	0.880244
-SumSRA_Base	84.081	3117.764	2.319774
-SumSRA_Base_Core	77.154	3397.651	2.528024
+SumSRAScalar	222.753	1176.838
+SumSRA_Base_Basic	259.603	1009.787	0.858051
+SumSRA_Base	94.461	2775.165	2.358153
+SumSRA_Base_Core	87.911	2981.920	2.533840
 SumSRA_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRA_Avx2	16.969	15448.248	11.494279
-SumSRATraits	16.230	16151.959	12.017875
-SumSRATraits_Core	8.384	31266.900	23.264156
-SumSRAConstTraits	8.645	30324.127	22.562685
-SumSRAConstTraits_Core	8.381	31277.924	23.272359
+SumSRA_Avx2	17.950	14604.303	12.409780
+SumSRATraits	18.260	14356.315	12.199056
+SumSRATraits_Core	10.539	24872.623	21.135126
+SumSRAConstTraits	10.688	24527.494	20.841857
+SumSRAConstTraits_Core	10.445	25098.230	21.326832
 SumSRAFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRAFast_Avx2	9.602	27299.860	20.312478
-SumSRAFastTraits	9.615	27263.001	20.285053
+SumSRAFast_Avx2	11.164	23481.786	19.953283
+SumSRAFastTraits	11.816	22185.694	18.851949
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -541,7 +551,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
+VectorTraitsGlobal.InitCheckSum:	7960958	# 0x0079797E
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.3/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
@@ -553,81 +563,83 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-12499
-SumSRAScalar	171.229	1530.954
-SumSRANetBcl	13.976	18756.271	12.251365
-SumSRANetBcl_Const	14.569	17993.370	11.753048
-SumSRA_Base_Basic	221.648	1182.704	0.772528
-SumSRA_Base	14.930	17558.252	11.468834
-SumSRA_Base_Core	13.869	18900.966	12.345878
+SumSRAScalar	189.019	1386.868
+SumSRANetBcl	16.846	15561.485	11.220592
+SumSRANetBcl_Const	15.300	17133.315	12.353958
+SumSRA_Base_Basic	265.151	988.659	0.712872
+SumSRA_Base	16.380	16003.624	11.539396
+SumSRA_Base_Core	16.629	15764.564	11.367022
 SumSRA_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRA_Avx2	16.126	16256.229	10.618369
-SumSRATraits	15.697	16700.509	10.908567
-SumSRATraits_Core	13.395	19569.672	12.782669
-SumSRAConstTraits	12.723	20604.672	13.458718
-SumSRAConstTraits_Core	12.689	20659.815	13.494737
+SumSRA_Avx2	17.986	14574.903	10.509218
+SumSRATraits	18.267	14350.990	10.347766
+SumSRATraits_Core	15.419	17000.906	12.258485
+SumSRAConstTraits	15.849	16540.240	11.926323
+SumSRAConstTraits_Core	14.542	18026.411	12.997925
 SumSRAFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRAFast_Avx2	13.426	19525.249	12.753652
-SumSRAFastTraits	13.215	19836.618	12.957034
+SumSRAFast_Avx2	16.300	16082.689	11.596406
+SumSRAFastTraits	16.505	15882.748	11.452239
 
 [ShiftRightArithmeticConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	1913540397
-SumSRAScalar	122.952	2132.092
-SumSRANetBcl	26.099	10044.358	4.711034
-SumSRANetBcl_Const	25.341	10344.479	4.851798
-SumSRA_Base_Basic	515.298	508.723	0.238603
-SumSRA_Base	26.457	9908.423	4.647278
-SumSRA_Base_Core	26.575	9864.151	4.626513
+SumSRAScalar	186.301	1407.096
+SumSRANetBcl	32.350	8103.354	5.758921
+SumSRANetBcl_Const	28.648	9150.476	6.503093
+SumSRA_Base_Basic	586.806	446.730	0.317484
+SumSRA_Base	29.398	8917.115	6.337248
+SumSRA_Base_Core	31.676	8275.910	5.881554
 SumSRA_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRA_Avx2	29.060	9020.731	4.230930
-SumSRATraits	29.264	8958.028	4.201520
-SumSRATraits_Core	23.395	11205.294	5.255540
-SumSRAConstTraits	24.745	10594.020	4.968838
-SumSRAConstTraits_Core	26.119	10036.706	4.707445
+SumSRA_Avx2	36.495	7182.959	5.104811
+SumSRATraits	36.204	7240.780	5.145904
+SumSRATraits_Core	28.722	9127.018	6.486422
+SumSRAConstTraits	31.492	8324.080	5.915787
+SumSRAConstTraits_Core	31.234	8392.985	5.964757
 SumSRAFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRAFast_Avx2	30.026	8730.452	4.094782
-SumSRAFastTraits	25.835	10146.827	4.759095
+SumSRAFast_Avx2	30.230	8671.785	6.162895
+SumSRAFastTraits	32.255	8127.186	5.775858
 
 [ShiftRightArithmeticConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-6268185905068837132
-SumSRAScalar	158.911	1649.628
-SumSRANetBcl	447.957	585.199	0.354746
-SumSRANetBcl_Const	467.341	560.927	0.340032
-SumSRA_Base_Basic	541.097	484.468	0.293683
-SumSRA_Base	117.641	2228.346	1.350817
-SumSRA_Base_Core	92.571	2831.810	1.716636
+SumSRAScalar	193.557	1354.353
+SumSRANetBcl	498.193	526.189	0.388517
+SumSRANetBcl_Const	521.334	502.833	0.371272
+SumSRA_Base_Basic	647.460	404.880	0.298948
+SumSRA_Base	154.920	1692.126	1.249398
+SumSRA_Base_Create	114.144	2296.599	1.695716
+SumSRA_Base_LoadArray	120.034	2183.917	1.612517
+SumSRA_Base_Core	111.204	2357.332	1.740560
 SumSRA_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRA_Avx2	117.518	2230.673	1.352228
-SumSRATraits	118.999	2202.901	1.335392
-SumSRATraits_Core	69.076	3794.994	2.300515
-SumSRAConstTraits	83.184	3151.375	1.910355
-SumSRAConstTraits_Core	71.807	3650.650	2.213014
+SumSRA_Avx2	141.601	1851.285	1.366915
+SumSRATraits	137.562	1905.640	1.407048
+SumSRATraits_Core	89.713	2922.042	2.157519
+SumSRAConstTraits	107.582	2436.681	1.799148
+SumSRAConstTraits_Core	93.383	2807.207	2.072729
 SumSRAFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRAFast_Avx2	107.719	2433.581	1.475230
-SumSRAFastTraits	108.759	2410.313	1.461125
+SumSRAFast_Avx2	128.659	2037.505	1.504412
+SumSRAFastTraits	130.601	2007.209	1.482043
 
 [ShiftRightArithmeticConstBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	97
-SumSRAScalar	162.310	1615.084
-SumSRANetBcl	229.024	1144.616	0.708704
-SumSRANetBcl_Const	229.715	1141.171	0.706570
-SumSRA_Base_Basic	211.103	1241.785	0.768867
-SumSRA_Base	15.362	17064.554	10.565736
-SumSRA_Base_Core	10.237	25607.493	15.855206
+SumSRAScalar	193.533	1354.520
+SumSRANetBcl	267.968	978.265	0.722222
+SumSRANetBcl_Const	259.805	1009.002	0.744914
+SumSRA_Base_Basic	238.610	1098.628	0.811083
+SumSRA_Base	15.844	16545.597	12.215096
+SumSRA_Base_Core	12.121	21626.852	15.966427
 SumSRA_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRA_Avx2	14.951	17533.072	10.855825
-SumSRATraits	16.101	16280.942	10.080553
-SumSRATraits_Core	7.795	33629.810	20.822325
-SumSRAConstTraits	9.025	29045.965	17.984179
-SumSRAConstTraits_Core	8.123	32270.463	19.980668
+SumSRA_Avx2	15.312	17119.958	12.639129
+SumSRATraits	15.253	17186.103	12.687961
+SumSRATraits_Core	9.442	27764.407	20.497592
+SumSRAConstTraits	10.027	26142.905	19.300487
+SumSRAConstTraits_Core	10.039	26113.489	19.278770
 SumSRAFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSRAFast_Avx2	9.357	28014.496	17.345532
-SumSRAFastTraits	9.433	27790.252	17.206689
+SumSRAFast_Avx2	10.987	23858.806	17.614209
+SumSRAFastTraits	10.813	24243.615	17.898301
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -664,7 +676,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
+VectorTraitsGlobal.InitCheckSum:	7960958	# 0x0079797E
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.31/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
@@ -676,65 +688,67 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-12499
-SumSRAScalar	440.527	595.069
-SumSRA_Base_Basic	515.625	508.401	0.854357
-SumSRA_Base	190.211	1378.172	2.315989
-SumSRA_Base_Core	146.550	1788.764	3.005979
+SumSRAScalar	431.853	607.022
+SumSRA_Base_Basic	500.529	523.734	0.862793
+SumSRA_Base	163.592	1602.422	2.639810
+SumSRA_Base_Core	313.094	837.268	1.379305
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	161.765	1620.520	2.723248
-SumSRATraits_Core	143.556	1826.074	3.068678
-SumSRAConstTraits	165.796	1581.126	2.657048
-SumSRAConstTraits_Core	139.600	1877.828	3.155650
+SumSRATraits	160.075	1637.633	2.697817
+SumSRATraits_Core	137.819	1902.091	3.133481
+SumSRAConstTraits	139.755	1875.738	3.090067
+SumSRAConstTraits_Core	138.573	1891.736	3.116423
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	143.683	1824.457	3.065960
+SumSRAFastTraits	142.033	1845.660	3.040519
 
 [ShiftRightArithmeticConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	1913540397
-SumSRAScalar	361.992	724.170
-SumSRA_Base_Basic	820.484	319.499	0.441193
-SumSRA_Base	385.092	680.731	0.940015
-SumSRA_Base_Core	296.357	884.554	1.221472
+SumSRAScalar	350.762	747.356
+SumSRA_Base_Basic	799.666	327.817	0.438636
+SumSRA_Base	304.737	860.231	1.151034
+SumSRA_Base_Core	286.275	915.706	1.225261
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	328.042	799.116	1.103492
-SumSRATraits_Core	715.827	366.212	0.505698
-SumSRAConstTraits	333.602	785.799	1.085103
-SumSRAConstTraits_Core	284.772	920.541	1.271166
+SumSRATraits	322.334	813.269	1.088195
+SumSRATraits_Core	272.209	963.024	1.288576
+SumSRAConstTraits	281.158	932.371	1.247560
+SumSRAConstTraits_Core	275.753	950.649	1.272016
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	293.239	893.961	1.234462
+SumSRAFastTraits	286.957	913.530	1.222350
 
 [ShiftRightArithmeticConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-6268185905068837132
-SumSRAScalar	364.301	719.580
-SumSRA_Base_Basic	564.781	464.151	0.645030
-SumSRA_Base	550.317	476.350	0.661984
-SumSRA_Base_Core	587.355	446.313	0.620241
+SumSRAScalar	353.315	741.955
+SumSRA_Base_Basic	547.892	478.459	0.644862
+SumSRA_Base	547.825	478.518	0.644941
+SumSRA_Base_Create	1273.540	205.839	0.277428
+SumSRA_Base_LoadArray	675.353	388.158	0.523156
+SumSRA_Base_Core	539.120	486.244	0.655355
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	568.535	461.087	0.640772
-SumSRATraits_Core	589.308	444.833	0.618184
-SumSRAConstTraits	558.611	469.278	0.652156
-SumSRAConstTraits_Core	580.929	451.250	0.627102
+SumSRATraits	558.024	469.772	0.633154
+SumSRATraits_Core	560.128	468.007	0.630775
+SumSRAConstTraits	558.038	469.760	0.633138
+SumSRAConstTraits_Core	557.717	470.031	0.633503
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	575.604	455.424	0.632903
+SumSRAFastTraits	559.065	468.897	0.631975
 
 [ShiftRightArithmeticConstBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	97
-SumSRAScalar	437.091	599.746
-SumSRA_Base_Basic	374.904	699.230	1.165876
-SumSRA_Base	96.886	2705.686	4.511383
-SumSRA_Base_Core	72.219	3629.869	6.052339
+SumSRAScalar	429.356	610.552
+SumSRA_Base_Basic	364.390	719.405	1.178287
+SumSRA_Base	81.350	3222.411	5.277868
+SumSRA_Base_Core	70.238	3732.210	6.112849
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	82.872	3163.252	5.274315
-SumSRATraits_Core	72.758	3602.976	6.007498
-SumSRAConstTraits	82.865	3163.517	5.274757
-SumSRAConstTraits_Core	70.445	3721.236	6.204682
+SumSRATraits	80.951	3238.324	5.303932
+SumSRATraits_Core	67.963	3857.160	6.317500
+SumSRAConstTraits	69.370	3778.934	6.189376
+SumSRAConstTraits_Core	68.782	3811.242	6.242293
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	73.117	3585.268	5.977972
+SumSRAFastTraits	72.388	3621.377	5.931320
 
 VectorTraitsBase: OK.
 VectorTraits128Base: OK.
@@ -767,7 +781,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
+VectorTraitsGlobal.InitCheckSum:	7960958	# 0x0079797E
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
@@ -780,73 +794,75 @@ Vectors.BaseInstance:	VectorTraits128Base
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-12499
 Check-SumSRAConstTraits	Fail! Check `SumSRAConstTraits` fail! -24614!=-12499
-SumSRAScalar	432.985	605.434
-SumSRA_Base_Basic	501.835	522.371	0.862804
-SumSRA_Base	181.695	1442.768	2.383032
-SumSRA_Base_Core	135.968	1927.981	3.184462
-SumSRA_AdvSimd	53.423	4906.934	8.104824
+SumSRAScalar	432.450	606.184
+SumSRA_Base_Basic	502.033	522.165	0.861397
+SumSRA_Base	154.200	1700.029	2.804476
+SumSRA_Base_Core	134.588	1947.752	3.213136
+SumSRA_AdvSimd	53.130	4934.040	8.139507
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	47.104	5565.239	9.192151
-SumSRATraits_Core	33.884	7736.523	12.778479
-SumSRAConstTraits	34.308	7640.971	12.620654
-SumSRAConstTraits_Core	33.913	7729.829	12.767422
-SumSRAFast_AdvSimd	40.419	6485.611	10.712337
+SumSRATraits	46.655	5618.766	9.269075
+SumSRATraits_Core	33.481	7829.695	12.916366
+SumSRAConstTraits	33.799	7756.066	12.794903
+SumSRAConstTraits_Core	33.489	7827.648	12.912988
+SumSRAFast_AdvSimd	40.028	6548.964	10.803590
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	34.219	7660.815	12.653432
+SumSRAFastTraits	33.715	7775.248	12.826546
 
 [ShiftRightArithmeticConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	1913540397
-SumSRAScalar	351.949	744.836
-SumSRA_Base_Basic	794.257	330.049	0.443117
-SumSRA_Base	363.512	721.143	0.968191
-SumSRA_Base_Core	271.902	964.111	1.294394
-SumSRA_AdvSimd	93.637	2799.579	3.758654
+SumSRAScalar	351.215	746.393
+SumSRA_Base_Basic	793.631	330.310	0.442542
+SumSRA_Base	283.472	924.763	1.238977
+SumSRA_Base_Core	270.664	968.521	1.297602
+SumSRA_AdvSimd	93.494	2803.856	3.756543
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	89.382	2932.853	3.937584
-SumSRATraits_Core	63.470	4130.188	5.545100
-SumSRAConstTraits	80.398	3260.589	4.377596
-SumSRAConstTraits_Core	63.593	4122.246	5.534438
-SumSRAFast_AdvSimd	68.121	3848.197	5.166506
+SumSRATraits	93.366	2807.705	3.761700
+SumSRATraits_Core	67.585	3878.725	5.196628
+SumSRAConstTraits	68.126	3847.901	5.155331
+SumSRAConstTraits_Core	67.608	3877.401	5.194855
+SumSRAFast_AdvSimd	68.210	3843.199	5.149031
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	68.026	3853.562	5.173708
+SumSRAFastTraits	68.430	3830.823	5.132451
 
 [ShiftRightArithmeticConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-6268185905068837132
-SumSRAScalar	354.602	739.262
-SumSRA_Base_Basic	543.015	482.757	0.653025
-SumSRA_Base	543.928	481.946	0.651929
-SumSRA_Base_Core	546.070	480.056	0.649372
-SumSRA_AdvSimd	213.600	1227.264	1.660119
+SumSRAScalar	352.728	743.190
+SumSRA_Base_Basic	542.738	483.003	0.649905
+SumSRA_Base	542.635	483.095	0.650028
+SumSRA_Base_Create	549.224	477.299	0.642230
+SumSRA_Base_LoadArray	635.335	412.607	0.555184
+SumSRA_Base_Core	543.604	482.233	0.648869
+SumSRA_AdvSimd	212.738	1232.240	1.658041
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	186.463	1405.880	1.901733
-SumSRATraits_Core	124.881	2099.154	2.839525
-SumSRAConstTraits	134.060	1955.425	2.645104
-SumSRAConstTraits_Core	133.476	1963.986	2.656684
-SumSRAFast_AdvSimd	134.187	1953.566	2.642588
+SumSRATraits	186.130	1408.393	1.895064
+SumSRATraits_Core	124.958	2097.849	2.822761
+SumSRAConstTraits	133.661	1961.259	2.638973
+SumSRAConstTraits_Core	133.139	1968.949	2.649321
+SumSRAFast_AdvSimd	134.053	1955.532	2.631267
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	134.620	1947.289	2.634098
+SumSRAFastTraits	133.838	1958.661	2.635478
 
 [ShiftRightArithmeticConstBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	97
-SumSRAScalar	430.424	609.036
-SumSRA_Base_Basic	369.738	709.000	1.164133
-SumSRA_Base	91.157	2875.757	4.721815
-SumSRA_Base_Core	67.277	3896.489	6.397793
-SumSRA_AdvSimd	26.562	9869.057	16.204379
+SumSRAScalar	429.192	610.785
+SumSRA_Base_Basic	367.977	712.393	1.166357
+SumSRA_Base	76.416	3430.466	5.616491
+SumSRA_Base_Core	67.273	3896.724	6.379866
+SumSRA_AdvSimd	23.264	11268.036	18.448462
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	26.578	9863.100	16.194598
-SumSRATraits_Core	16.620	15772.364	25.897243
-SumSRAConstTraits	19.934	13150.335	21.592035
-SumSRAConstTraits_Core	16.687	15709.181	25.793501
-SumSRAFast_AdvSimd	19.839	13213.692	21.696062
+SumSRATraits	23.220	11289.392	18.483428
+SumSRATraits_Core	15.620	16782.354	27.476716
+SumSRAConstTraits	16.718	15680.394	25.672544
+SumSRAConstTraits_Core	15.580	16825.439	27.547257
+SumSRAFast_AdvSimd	16.684	15711.871	25.724080
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	19.828	13221.024	21.708102
+SumSRAFastTraits	16.860	15548.694	25.456920
 
 VectorTraitsBase: OK.
 VectorTraits128Base: OK.
@@ -879,7 +895,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
+VectorTraitsGlobal.InitCheckSum:	7960958	# 0x0079797E
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.11/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
@@ -891,73 +907,75 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-12499
-SumSRAScalar	432.000	606.815
-SumSRA_Base_Basic	499.948	524.343	0.864089
-SumSRA_Base	167.707	1563.104	2.575914
-SumSRA_Base_Core	326.363	803.228	1.323678
-SumSRA_AdvSimd	53.113	4935.630	8.133662
+SumSRAScalar	432.005	606.807
+SumSRA_Base_Basic	503.339	520.810	0.858278
+SumSRA_Base	152.502	1718.959	2.832793
+SumSRA_Base_Core	134.627	1947.184	3.208901
+SumSRA_AdvSimd	46.584	5627.322	9.273656
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	52.989	4947.109	8.152578
-SumSRATraits_Core	31.295	8376.507	13.804048
-SumSRAConstTraits	31.293	8377.006	13.804871
-SumSRAConstTraits_Core	31.290	8377.950	13.806427
-SumSRAFast_AdvSimd	31.269	8383.421	13.815442
+SumSRATraits	46.563	5629.872	9.277859
+SumSRATraits_Core	33.322	7867.061	12.964678
+SumSRAConstTraits	33.297	7872.830	12.974186
+SumSRAConstTraits_Core	33.213	7892.796	13.007089
+SumSRAFast_AdvSimd	33.252	7883.568	12.991881
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	33.179	7900.983	13.020410
+SumSRAFastTraits	31.220	8396.787	13.837651
 
 [ShiftRightArithmeticConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	1913540397
-SumSRAScalar	350.678	747.534
-SumSRA_Base_Basic	795.128	329.688	0.441034
-SumSRA_Base	337.928	775.740	1.037732
-SumSRA_Base_Core	270.056	970.704	1.298541
-SumSRA_AdvSimd	89.059	2943.503	3.937618
+SumSRAScalar	349.670	749.690
+SumSRA_Base_Basic	793.235	330.475	0.440815
+SumSRA_Base	286.692	914.376	1.219672
+SumSRA_Base_Core	270.760	968.180	1.291440
+SumSRA_AdvSimd	89.138	2940.869	3.922780
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	93.570	2801.567	3.747745
-SumSRATraits_Core	67.339	3892.927	5.207691
-SumSRAConstTraits	63.441	4132.061	5.527588
-SumSRAConstTraits_Core	63.544	4125.361	5.518627
-SumSRAFast_AdvSimd	67.377	3890.686	5.204694
+SumSRATraits	106.239	2467.487	3.291343
+SumSRATraits_Core	67.373	3890.935	5.190059
+SumSRAConstTraits	63.516	4127.197	5.505205
+SumSRAConstTraits_Core	63.447	4131.731	5.511253
+SumSRAFast_AdvSimd	67.366	3891.328	5.190582
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	63.410	4134.142	5.530373
+SumSRAFastTraits	63.492	4128.745	5.507270
 
 [ShiftRightArithmeticConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-6268185905068837132
-SumSRAScalar	353.349	741.885
-SumSRA_Base_Basic	542.853	482.900	0.650910
-SumSRA_Base	542.741	483.000	0.651045
-SumSRA_Base_Core	540.889	484.654	0.653274
-SumSRA_AdvSimd	186.826	1403.145	1.891326
+SumSRAScalar	354.052	740.411
+SumSRA_Base_Basic	549.372	477.170	0.644467
+SumSRA_Base	542.411	483.294	0.652738
+SumSRA_Base_Create	540.849	484.689	0.654622
+SumSRA_Base_LoadArray	599.195	437.493	0.590879
+SumSRA_Base_Core	541.971	483.686	0.653267
+SumSRA_AdvSimd	185.947	1409.775	1.904044
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	212.603	1233.020	1.662010
-SumSRATraits_Core	133.301	1966.555	2.650755
-SumSRAConstTraits	133.122	1969.201	2.654323
-SumSRAConstTraits_Core	124.966	2097.725	2.827562
-SumSRAFast_AdvSimd	125.166	2094.376	2.823048
+SumSRATraits	212.410	1234.141	1.666833
+SumSRATraits_Core	133.280	1966.865	2.656451
+SumSRAConstTraits	132.924	1972.135	2.663569
+SumSRAConstTraits_Core	126.512	2072.094	2.798574
+SumSRAFast_AdvSimd	125.347	2091.349	2.824581
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	125.049	2096.336	2.825690
+SumSRAFastTraits	124.934	2098.265	2.833920
 
 [ShiftRightArithmeticConstBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	97
-SumSRAScalar	402.421	651.417
-SumSRA_Base_Basic	368.989	710.438	1.090604
-SumSRA_Base	84.577	3099.473	4.758049
-SumSRA_Base_Core	151.061	1735.346	2.663956
-SumSRA_AdvSimd	26.543	9876.357	15.161346
+SumSRAScalar	398.939	657.103
+SumSRA_Base_Basic	368.140	712.076	1.083659
+SumSRA_Base	77.038	3402.767	5.178434
+SumSRA_Base_Core	67.447	3886.680	5.914868
+SumSRA_AdvSimd	26.509	9888.768	15.049029
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	26.516	9886.169	15.176408
-SumSRATraits_Core	16.578	15812.670	24.274270
-SumSRAConstTraits	16.574	15816.435	24.280050
-SumSRAConstTraits_Core	15.607	16796.769	25.784975
-SumSRAFast_AdvSimd	15.572	16833.801	25.841824
+SumSRATraits	26.484	9898.131	15.063278
+SumSRATraits_Core	16.567	15823.471	24.080642
+SumSRAConstTraits	16.555	15834.775	24.097845
+SumSRAConstTraits_Core	15.585	16820.135	25.597396
+SumSRAFast_AdvSimd	15.594	16811.021	25.583526
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	15.592	16812.338	25.808876
+SumSRAFastTraits	15.679	16719.545	25.444315
 
 VectorTraitsBase: OK.
 VectorTraits128Base: OK.
@@ -990,7 +1008,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
+VectorTraitsGlobal.InitCheckSum:	7960958	# 0x0079797E
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.1/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
@@ -1002,81 +1020,83 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-12499
-SumSRAScalar	322.555	812.710
-SumSRANetBcl	27.242	9622.657	11.840207
-SumSRANetBcl_Const	27.256	9617.911	11.834367
-SumSRA_Base_Basic	485.797	539.616	0.663971
-SumSRA_Base	26.967	9720.837	11.961013
-SumSRA_Base_Core	27.265	9614.609	11.830304
-SumSRA_AdvSimd	46.962	5581.987	6.868361
+SumSRAScalar	318.860	822.128
+SumSRANetBcl	26.387	9934.492	12.083877
+SumSRANetBcl_Const	26.367	9942.126	12.093163
+SumSRA_Base_Basic	476.969	549.604	0.668514
+SumSRA_Base	26.339	9952.668	12.105986
+SumSRA_Base_Core	26.387	9934.629	12.084044
+SumSRA_AdvSimd	46.080	5688.943	6.919779
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	46.965	5581.673	6.867975
-SumSRATraits_Core	27.295	9604.042	11.817302
-SumSRAConstTraits	27.314	9597.359	11.809079
-SumSRAConstTraits_Core	27.377	9575.299	11.781935
-SumSRAFast_AdvSimd	27.131	9662.285	11.888967
+SumSRATraits	46.079	5689.049	6.919908
+SumSRATraits_Core	26.375	9939.044	12.089414
+SumSRAConstTraits	26.404	9928.330	12.076382
+SumSRAConstTraits_Core	26.420	9922.240	12.068974
+SumSRAFast_AdvSimd	26.343	9951.358	12.104392
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	27.244	9622.087	11.839505
+SumSRAFastTraits	26.366	9942.575	12.093709
 
 [ShiftRightArithmeticConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	1913540397
-SumSRAScalar	226.164	1159.088
-SumSRANetBcl	54.839	4780.214	4.124117
-SumSRANetBcl_Const	54.392	4819.563	4.158065
-SumSRA_Base_Basic	783.223	334.699	0.288761
-SumSRA_Base	54.747	4788.298	4.131091
-SumSRA_Base_Core	54.731	4789.653	4.132260
-SumSRA_AdvSimd	81.118	3231.651	2.788098
+SumSRAScalar	223.901	1170.805
+SumSRANetBcl	53.929	4860.899	4.151759
+SumSRANetBcl_Const	53.961	4858.019	4.149299
+SumSRA_Base_Basic	774.754	338.358	0.288996
+SumSRA_Base	53.936	4860.276	4.151226
+SumSRA_Base_Core	53.970	4857.179	4.148581
+SumSRA_AdvSimd	79.633	3291.914	2.811668
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	80.718	3247.648	2.801900
-SumSRATraits_Core	54.400	4818.781	4.157390
-SumSRAConstTraits	54.709	4791.612	4.133950
-SumSRAConstTraits_Core	54.900	4774.969	4.119592
-SumSRAFast_AdvSimd	54.907	4774.314	4.119027
+SumSRATraits	79.597	3293.371	2.812912
+SumSRATraits_Core	54.025	4852.282	4.144399
+SumSRAConstTraits	54.150	4841.111	4.134857
+SumSRAConstTraits_Core	54.143	4841.735	4.135391
+SumSRAFast_AdvSimd	53.921	4861.587	4.152346
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	54.884	4776.308	4.120746
+SumSRAFastTraits	53.990	4855.400	4.147062
 
 [ShiftRightArithmeticConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	-6268185905068837132
-SumSRAScalar	227.788	1150.826
-SumSRANetBcl	107.324	2442.540	2.122422
-SumSRANetBcl_Const	107.543	2437.570	2.118104
-SumSRA_Base_Basic	556.212	471.303	0.409534
-SumSRA_Base	320.887	816.935	0.709869
-SumSRA_Base_Core	185.975	1409.567	1.224830
-SumSRA_AdvSimd	185.902	1410.118	1.225309
+SumSRAScalar	221.008	1186.131
+SumSRANetBcl	106.114	2470.410	2.082747
+SumSRANetBcl_Const	105.978	2473.566	2.085407
+SumSRA_Base_Basic	549.395	477.151	0.402275
+SumSRA_Base	107.351	2441.937	2.058742
+SumSRA_Base_Create	147.641	1775.549	1.496926
+SumSRA_Base_LoadArray	197.921	1324.486	1.116644
+SumSRA_Base_Core	106.300	2466.085	2.079101
+SumSRA_AdvSimd	184.365	1421.879	1.198754
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	186.679	1404.248	1.220209
-SumSRATraits_Core	106.613	2458.848	2.136593
-SumSRAConstTraits	107.784	2432.131	2.113378
-SumSRAConstTraits_Core	107.487	2438.851	2.119217
-SumSRAFast_AdvSimd	107.604	2436.191	2.116906
+SumSRATraits	184.354	1421.963	1.198825
+SumSRATraits_Core	106.204	2468.310	2.080977
+SumSRAConstTraits	105.982	2473.474	2.085330
+SumSRAConstTraits_Core	106.119	2470.286	2.082642
+SumSRAFast_AdvSimd	105.937	2474.530	2.086220
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	106.503	2461.377	2.138791
+SumSRAFastTraits	106.095	2470.841	2.083110
 
 [ShiftRightArithmeticConstBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRAScalar	97
-SumSRAScalar	295.534	887.017
-SumSRANetBcl	13.255	19776.310	22.295299
-SumSRANetBcl_Const	13.275	19747.444	22.262756
-SumSRA_Base_Basic	348.760	751.645	0.847385
-SumSRA_Base	38.286	6846.953	7.719077
-SumSRA_Base_Core	23.385	11209.760	12.637594
-SumSRA_AdvSimd	23.340	11231.568	12.662179
+SumSRAScalar	294.060	891.465
+SumSRANetBcl	13.200	19859.179	22.277005
+SumSRANetBcl_Const	13.198	19862.796	22.281063
+SumSRA_Base_Basic	344.076	761.878	0.854636
+SumSRA_Base	32.873	7974.465	8.945344
+SumSRA_Base_Core	23.064	11365.760	12.749525
+SumSRA_AdvSimd	23.050	11372.933	12.757571
 SumSRA_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRATraits	23.283	11259.137	12.693260
-SumSRATraits_Core	13.329	19667.777	22.172942
-SumSRAConstTraits	13.250	19784.672	22.304726
-SumSRAConstTraits_Core	13.350	19635.698	22.136777
-SumSRAFast_AdvSimd	13.309	19697.044	22.205937
+SumSRATraits	23.054	11370.679	12.755043
+SumSRATraits_Core	13.204	19853.636	22.270787
+SumSRAConstTraits	13.223	19825.456	22.239177
+SumSRAConstTraits_Core	13.215	19836.530	22.251599
+SumSRAFast_AdvSimd	13.184	19883.116	22.303856
 SumSRAFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRAFastTraits	13.386	19583.392	22.077809
+SumSRAFastTraits	13.199	19860.853	22.278883
 
 VectorTraitsBase: OK.
 VectorTraits128Base: OK.
