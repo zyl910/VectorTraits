@@ -348,7 +348,7 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<byte> GetResidueMaskBits_Byte(int index) {
 #if USE_VECTOR_CREATE_BY_ARRAY
-            return new Vector<byte>((byte)(0xFFU >> index));
+            return new Vector<byte>((byte)(byte.MaxValue >> index));
 #else
             return Vectors<byte>.GetMaskBits(8 - index);
 #endif // USE_VECTOR_CREATE_BY_ARRAY
@@ -383,7 +383,7 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ushort> GetResidueMaskBits_UInt16(int index) {
 #if USE_VECTOR_CREATE_BY_ARRAY
-            return new Vector<ushort>((ushort)(0xFFFFU >> index));
+            return new Vector<ushort>((ushort)(ushort.MaxValue >> index));
 #else
             return Vectors<ushort>.GetMaskBits(16 - index);
 #endif // USE_VECTOR_CREATE_BY_ARRAY
@@ -418,7 +418,7 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<uint> GetResidueMaskBits_UInt32(int index) {
 #if USE_VECTOR_CREATE_BY_ARRAY
-            return new Vector<uint>((uint)(0xFFFFFFFFU >> index));
+            return new Vector<uint>((uint)(uint.MaxValue >> index));
 #else
             return Vectors<uint>.GetMaskBits(32 - index);
 #endif // USE_VECTOR_CREATE_BY_ARRAY
@@ -453,7 +453,7 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ulong> GetResidueMaskBits_UInt64(int index) {
 #if USE_VECTOR_CREATE_BY_ARRAY
-            return new Vector<ulong>((ulong)(0xFFFFFFFFFFFFFFFFUL >> index));
+            return new Vector<ulong>((ulong)(ulong.MaxValue >> index));
 #else
             return Vectors<ulong>.GetMaskBits(64 - index);
 #endif // USE_VECTOR_CREATE_BY_ARRAY
