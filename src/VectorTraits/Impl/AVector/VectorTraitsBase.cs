@@ -945,8 +945,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #if SOFTWARE_OPTIMIZATION && !(BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER)
                 _ = dummy;
                 shiftAmount &= 7;
-                var args0 = new Vector<ushort>((ushort)(1 << shiftAmount)).AsByte();
-                args1 = new Vector<byte>((byte)((1U << (8 - shiftAmount)) - 1));
+                var args0 = VectorConstants.GetMaskBits_UInt16(shiftAmount).AsByte();
+                args1 = VectorConstants.GetResidueMaskBits_Byte(shiftAmount);
                 return args0;
 #else
                 _ = dummy;

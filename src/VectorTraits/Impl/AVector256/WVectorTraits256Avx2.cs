@@ -505,7 +505,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 _ = dummy;
                 shiftAmount &= 7;
                 var args0 = Vector256.Create((uint)shiftAmount).AsByte();
-                args1 = Vector256.Create((byte)((1U << (8 - shiftAmount)) - 1));
+                args1 = Vector256Constants.GetResidueMaskBits_Byte(shiftAmount);
                 return args0;
             }
 
@@ -643,7 +643,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Const(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> ShiftLeft_Const(Vector256<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
-                Vector256<byte> t = Avx2.And(value, Vector256.Create((byte)((1U << (8 - shiftAmount)) - 1)));
+                Vector256<byte> t = Avx2.And(value, Vector256Constants.GetResidueMaskBits_Byte(shiftAmount));
                 return Avx2.ShiftLeftLogical(t.AsUInt32(), (byte)shiftAmount).AsByte();
             }
 
@@ -785,7 +785,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> ShiftLeft_Fast(Vector256<byte> value, int shiftAmount) {
-                Vector256<byte> t = Avx2.And(value, Vector256.Create((byte)((1U << (8 - shiftAmount)) - 1)));
+                Vector256<byte> t = Avx2.And(value, Vector256Constants.GetResidueMaskBits_Byte(shiftAmount));
                 return Avx2.ShiftLeftLogical(t.AsUInt32(), (byte)shiftAmount).AsByte();
             }
 
@@ -872,7 +872,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 _ = dummy;
                 shiftAmount &= 7;
                 var args0 = Vector256.Create((int)shiftAmount).AsSByte();
-                args1 = Vector256.Create((sbyte)((1U << (8 - shiftAmount)) - 1));
+                args1 = Vector256Constants.GetResidueMaskBits_SByte(shiftAmount);
                 return args0;
             }
 
@@ -1026,7 +1026,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> ShiftRightArithmetic_Fast_Negative(Vector256<sbyte> value, int shiftAmount) {
-                Vector256<sbyte> mask = Vector256.Create((sbyte)((1U << (8 - shiftAmount)) - 1)); // Vector256s<sbyte>.GetMaskBits(8 - shiftAmount);
+                Vector256<sbyte> mask = Vector256Constants.GetResidueMaskBits_SByte(shiftAmount);
                 Vector256<sbyte> shifted = Avx2.ShiftRightLogical(value.AsUInt16(), (byte)shiftAmount).AsSByte();
                 Vector256<sbyte> sign = Avx2.CompareGreaterThan(Vector256<sbyte>.Zero, value);
                 Vector256<sbyte> rt = ConditionalSelect(mask, shifted, sign);
@@ -1198,7 +1198,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 _ = dummy;
                 shiftAmount &= 7;
                 var args0 = Vector256.Create((uint)shiftAmount).AsByte();
-                args1 = Vector256.Create((byte)((1U << (8 - shiftAmount)) - 1));
+                args1 = Vector256Constants.GetResidueMaskBits_Byte(shiftAmount);
                 return args0;
             }
 
@@ -1335,7 +1335,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Const(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> ShiftRightLogical_Const(Vector256<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
-                Vector256<byte> mask = Vector256.Create((byte)((1U << (8 - shiftAmount)) - 1));
+                Vector256<byte> mask = Vector256Constants.GetResidueMaskBits_Byte(shiftAmount);
                 Vector256<byte> t = Avx2.ShiftRightLogical(value.AsUInt16(), (byte)shiftAmount).AsByte();
                 Vector256<byte> rt = Avx2.And(t, mask);
                 return rt;
@@ -1485,7 +1485,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> ShiftRightLogical_Fast_FirstAnd(Vector256<byte> value, int shiftAmount) {
-                Vector256<byte> mask = Vector256.Create((byte)((1U << shiftAmount) - 1)); // Vector256s<byte>.GetMaskBits(shiftAmount)
+                Vector256<byte> mask = Vector256Constants.GetMaskBits_Byte(shiftAmount);
                 Vector256<byte> t = Avx2.AndNot(mask, value);
                 Vector256<byte> rt = Avx2.ShiftRightLogical(t.AsUInt16(), (byte)shiftAmount).AsByte();
                 return rt;
@@ -1494,7 +1494,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> ShiftRightLogical_Fast_FirstShift(Vector256<byte> value, int shiftAmount) {
-                Vector256<byte> mask = Vector256.Create((byte)((1U << (8 - shiftAmount)) - 1)); // Vector256s<byte>.GetMaskBits(8 - shiftAmount)
+                Vector256<byte> mask = Vector256Constants.GetResidueMaskBits_Byte(shiftAmount);
                 Vector256<byte> t = Avx2.ShiftRightLogical(value.AsUInt16(), (byte)shiftAmount).AsByte();
                 Vector256<byte> rt = Avx2.And(t, mask);
                 return rt;
