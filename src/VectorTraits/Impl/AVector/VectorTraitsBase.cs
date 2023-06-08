@@ -1480,7 +1480,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> ShiftLeft_Fast_Multiply(Vector<byte> value, int shiftAmount) {
                 //Vector<byte> t = Vector.BitwiseAnd(value, Vectors<byte>.GetMaskBits(8 - shiftAmount));
-                Vector<byte> t = Vector.BitwiseAnd(value, new Vector<byte>((byte)((1U << (8 - shiftAmount)) - 1)));
+                Vector<byte> t = Vector.BitwiseAnd(value, VectorConstants.GetResidueMaskBits_Byte(shiftAmount));
                 short m = (short)(1 << shiftAmount);
                 return Vector.AsVectorByte(Vector.Multiply(Vector.AsVectorInt16(t), m));
             }
@@ -1658,7 +1658,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 _ = dummy;
                 shiftAmount &= 7;
                 Vector<sbyte> args0 = default;
-                args1 = Vectors<sbyte>.GetMaskBits(8 - shiftAmount);
+                args1 = VectorConstants.GetResidueMaskBits_SByte(shiftAmount);
                 return args0;
             }
 
@@ -1668,7 +1668,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 _ = dummy;
                 shiftAmount &= 0x0F;
                 Vector<short> args0 = default;
-                args1 = Vectors<short>.GetMaskBits(16 - shiftAmount);
+                args1 = VectorConstants.GetResidueMaskBits_Int16(shiftAmount);
                 return args0;
             }
 
@@ -1678,7 +1678,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 _ = dummy;
                 shiftAmount &= 0x1F;
                 Vector<int> args0 = default;
-                args1 = Vectors<int>.GetMaskBits(32 - shiftAmount);
+                args1 = VectorConstants.GetResidueMaskBits_Int32(shiftAmount);
                 return args0;
             }
 
@@ -1688,7 +1688,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 _ = dummy;
                 shiftAmount &= 0x3F;
                 Vector<long> args0 = default;
-                args1 = Vectors<long>.GetMaskBits(64 - shiftAmount);
+                args1 = VectorConstants.GetResidueMaskBits_Int64(shiftAmount);
                 return args0;
             }
 
@@ -1968,7 +1968,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftRightArithmetic_Fast_Negative(Vector<sbyte> value, int shiftAmount) {
-                Vector<sbyte> mask = Vectors<sbyte>.GetMaskBits(8 - shiftAmount);
+                Vector<sbyte> mask = VectorConstants.GetResidueMaskBits_SByte(shiftAmount);
                 Vector<sbyte> sign = Vector.GreaterThan(Vector<sbyte>.Zero, value);
                 Vector<sbyte> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsSByte();
                 Vector<sbyte> rt = Vector.ConditionalSelect(mask, shifted, sign);
@@ -1978,7 +1978,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> ShiftRightArithmetic_Fast_Negative(Vector<short> value, int shiftAmount) {
-                Vector<short> mask = Vectors<short>.GetMaskBits(16 - shiftAmount);
+                Vector<short> mask = VectorConstants.GetResidueMaskBits_Int16(shiftAmount);
                 Vector<short> sign = Vector.GreaterThan(Vector<short>.Zero, value);
                 Vector<short> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt16();
                 Vector<short> rt = Vector.ConditionalSelect(mask, shifted, sign);
@@ -1988,7 +1988,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> ShiftRightArithmetic_Fast_Negative(Vector<int> value, int shiftAmount) {
-                Vector<int> mask = Vectors<int>.GetMaskBits(32 - shiftAmount);
+                Vector<int> mask = VectorConstants.GetResidueMaskBits_Int32(shiftAmount);
                 Vector<int> sign = Vector.GreaterThan(Vector<int>.Zero, value);
                 Vector<int> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt32();
                 Vector<int> rt = Vector.ConditionalSelect(mask, shifted, sign);
@@ -2004,7 +2004,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic_Fast_Negative_Create(Vector<long> value, int shiftAmount) {
-                Vector<long> mask = VectorConstants.GetMaskBits_Int64(64 - shiftAmount);
+                Vector<long> mask = VectorConstants.GetResidueMaskBits_Int64(shiftAmount);
                 Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
                 Vector<long> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt64();
                 Vector<long> rt = Vector.ConditionalSelect(mask, shifted, sign);
@@ -2698,7 +2698,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #else
                 Vector<byte> t = ShiftRightLogical_Fast_Base(value.AsUInt64(), shiftAmount).AsByte();
 #endif
-                Vector<byte> rt = Vector.BitwiseAnd(t, Vectors<byte>.GetMaskBits(8 - shiftAmount));
+                Vector<byte> rt = Vector.BitwiseAnd(t, VectorConstants.GetResidueMaskBits_Byte(shiftAmount));
                 return rt;
             }
 
@@ -2717,7 +2717,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #else
                 Vector<ushort> t = ShiftRightLogical_Fast_Base(value.AsUInt64(), shiftAmount).AsUInt16();
 #endif
-                Vector<ushort> rt = Vector.BitwiseAnd(t, Vectors<ushort>.GetMaskBits(16 - shiftAmount));
+                Vector<ushort> rt = Vector.BitwiseAnd(t, VectorConstants.GetResidueMaskBits_UInt16(shiftAmount));
                 return rt;
             }
 
@@ -2736,7 +2736,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #else
                 Vector<uint> t = ShiftRightLogical_Fast_Base(value.AsUInt64(), shiftAmount).AsUInt32();
 #endif
-                Vector<uint> rt = Vector.BitwiseAnd(t, Vectors<uint>.GetMaskBits(32 - shiftAmount));
+                Vector<uint> rt = Vector.BitwiseAnd(t, VectorConstants.GetResidueMaskBits_UInt32(shiftAmount));
                 return rt;
             }
 
