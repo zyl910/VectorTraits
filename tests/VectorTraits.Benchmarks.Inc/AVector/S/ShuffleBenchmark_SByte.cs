@@ -45,7 +45,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumShuffleScalar(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumScalar(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -75,12 +75,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark(Baseline = true)]
-        public void SumShuffleScalar() {
+        public void SumScalar() {
             //Debugger.Break();
-            dstTMy = StaticSumShuffleScalar(srcArray, srcArray.Length, indices);
+            dstTMy = StaticSumScalar(srcArray, srcArray.Length, indices);
             if (CheckMode) {
                 baselineTMy = dstTMy;
-                BenchmarkUtil.WriteItem("# SumShuffleScalar", string.Format("{0}", baselineTMy));
+                BenchmarkUtil.WriteItem("# SumScalar", string.Format("{0}", baselineTMy));
             }
         }
 
@@ -94,7 +94,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumShuffleVectorBase(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumBase(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -124,10 +124,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumShuffleVectorBase() {
+        public void SumBase() {
             //Debugger.Break();
-            dstTMy = StaticSumShuffleVectorBase(srcArray, srcArray.Length, indices);
-            CheckResult("SumShuffleVectorBase");
+            dstTMy = StaticSumBase(srcArray, srcArray.Length, indices);
+            CheckResult("SumBase");
         }
 
 #endif // BENCHMARKS_RAW
@@ -140,7 +140,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumShuffleVectorTraits(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumTraits(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -170,13 +170,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumShuffleVectorTraits() {
+        public void SumTraits() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumShuffleVectorTraits(srcArray, srcArray.Length, indices);
-            CheckResult("SumShuffleVectorTraits");
+            dstTMy = StaticSumTraits(srcArray, srcArray.Length, indices);
+            CheckResult("SumTraits");
         }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumShuffleVectorTraits_Args0(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumTraits_Args0(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -218,13 +218,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumShuffleVectorTraits_Args0() {
+        public void SumTraits_Args0() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumShuffleVectorTraits_Args0(srcArray, srcArray.Length, indices);
-            CheckResult("SumShuffleVectorTraits_Args0");
+            dstTMy = StaticSumTraits_Args0(srcArray, srcArray.Length, indices);
+            CheckResult("SumTraits_Args0");
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumShuffleVectorTraits_Args(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumTraits_Args(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -265,13 +265,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumShuffleVectorTraits_Args() {
+        public void SumTraits_Args() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumShuffleVectorTraits_Args(srcArray, srcArray.Length, indices);
-            CheckResult("SumShuffleVectorTraits_Args");
+            dstTMy = StaticSumTraits_Args(srcArray, srcArray.Length, indices);
+            CheckResult("SumTraits_Args");
         }
 
 #if !REDUCE_MEMORY_USAGE
@@ -282,7 +282,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumShuffleVectorTraitsIf(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumTraitsIf(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -314,10 +314,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumShuffleVectorTraitsIf() {
+        public void SumTraitsIf() {
             //Debugger.Break();
-            dstTMy = StaticSumShuffleVectorTraitsIf(srcArray, srcArray.Length, indices);
-            CheckResult("SumShuffleVectorTraitsIf");
+            dstTMy = StaticSumTraitsIf(srcArray, srcArray.Length, indices);
+            CheckResult("SumTraitsIf");
         }
 #endif // !REDUCE_MEMORY_USAGE
 
@@ -339,7 +339,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumShuffleVector128_Bcl(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSum128_Bcl(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -370,13 +370,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumShuffleVector128_Bcl() {
+        public void Sum128_Bcl() {
             if (Vector<byte>.Count != Vector128<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector128<byte>.Count));
             }
             //Debugger.Break();
-            dstTMy = StaticSumShuffleVector128_Bcl(srcArray, srcArray.Length, indices);
-            CheckResult("SumShuffleVector128_Bcl");
+            dstTMy = StaticSum128_Bcl(srcArray, srcArray.Length, indices);
+            CheckResult("Sum128_Bcl");
         }
 
 #endif // NET7_0_OR_GREATER
@@ -390,7 +390,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumShuffleVector128_Arm(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSum128_Arm(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -421,14 +421,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumShuffleVector128_Arm() {
+        public void Sum128_Arm() {
             WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector128<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector128<byte>.Count));
             }
             //Debugger.Break();
-            dstTMy = StaticSumShuffleVector128_Arm(srcArray, srcArray.Length, indices);
-            CheckResult("SumShuffleVector128_Arm");
+            dstTMy = StaticSum128_Arm(srcArray, srcArray.Length, indices);
+            CheckResult("Sum128_Arm");
         }
 
 #endif // NET5_0_OR_GREATER
@@ -443,7 +443,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumShuffleVector128Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSum128Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -474,14 +474,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumShuffleVector128Traits() {
+        public void Sum128Traits() {
             Vector128s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector128<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector128<byte>.Count));
             }
             //Debugger.Break();
-            dstTMy = StaticSumShuffleVector128Traits(srcArray, srcArray.Length, indices);
-            CheckResult("SumShuffleVector128Traits");
+            dstTMy = StaticSum128Traits(srcArray, srcArray.Length, indices);
+            CheckResult("Sum128Traits");
         }
 
 #endif // BENCHMARKS_128ALGORITHM
@@ -500,7 +500,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumShuffleVector256_Bcl(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSum256_Bcl(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -531,13 +531,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumShuffleVector256_Bcl() {
+        public void Sum256_Bcl() {
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
             }
             //Debugger.Break();
-            dstTMy = StaticSumShuffleVector256_Bcl(srcArray, srcArray.Length, indices);
-            CheckResult("SumShuffleVector256_Bcl");
+            dstTMy = StaticSum256_Bcl(srcArray, srcArray.Length, indices);
+            CheckResult("Sum256_Bcl");
         }
 
 #endif // NET7_0_OR_GREATER
@@ -549,7 +549,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumShuffleVector256_Avx2_Add1(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSum256_Avx2_Add1(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -581,14 +581,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumShuffleVector256_Avx2_Add1() {
+        public void Sum256_Avx2_Add1() {
             WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
             }
             //Debugger.Break();
-            dstTMy = StaticSumShuffleVector256_Avx2_Add1(srcArray, srcArray.Length, indices);
-            CheckResult("SumShuffleVector256_Avx2_Add1");
+            dstTMy = StaticSum256_Avx2_Add1(srcArray, srcArray.Length, indices);
+            CheckResult("Sum256_Avx2_Add1");
         }
 
         /// <summary>
@@ -598,7 +598,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumShuffleVector256_Avx2_Add2(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSum256_Avx2_Add2(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -630,14 +630,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumShuffleVector256_Avx2_Add2() {
+        public void Sum256_Avx2_Add2() {
             WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
             }
             //Debugger.Break();
-            dstTMy = StaticSumShuffleVector256_Avx2_Add2(srcArray, srcArray.Length, indices);
-            CheckResult("SumShuffleVector256_Avx2_Add2");
+            dstTMy = StaticSum256_Avx2_Add2(srcArray, srcArray.Length, indices);
+            CheckResult("Sum256_Avx2_Add2");
         }
 
         /// <summary>
@@ -647,7 +647,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumShuffleVector256_Avx2_Cmp2(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSum256_Avx2_Cmp2(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -679,14 +679,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumShuffleVector256_Avx2_Cmp2() {
+        public void Sum256_Avx2_Cmp2() {
             WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
             }
             //Debugger.Break();
-            dstTMy = StaticSumShuffleVector256_Avx2_Cmp2(srcArray, srcArray.Length, indices);
-            CheckResult("SumShuffleVector256_Avx2_Cmp2");
+            dstTMy = StaticSum256_Avx2_Cmp2(srcArray, srcArray.Length, indices);
+            CheckResult("Sum256_Avx2_Cmp2");
         }
 
         /// <summary>
@@ -696,7 +696,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumShuffleVector256Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSum256Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -727,14 +727,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumShuffleVector256Traits() {
+        public void Sum256Traits() {
             Vector256s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
             }
             //Debugger.Break();
-            dstTMy = StaticSumShuffleVector256Traits(srcArray, srcArray.Length, indices);
-            CheckResult("SumShuffleVector256Traits");
+            dstTMy = StaticSum256Traits(srcArray, srcArray.Length, indices);
+            CheckResult("Sum256Traits");
         }
 
 #endif // BENCHMARKS_256ALGORITHM
@@ -749,7 +749,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleKernelVectorTraits(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumKernelTraits(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -779,13 +779,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleKernelVectorTraits() {
+        public void SumKernelTraits() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumYShuffleKernelVectorTraits(srcArray, srcArray.Length, indices);
-            CheckResult("SumYShuffleKernelVectorTraits");
+            dstTMy = StaticSumKernelTraits(srcArray, srcArray.Length, indices);
+            CheckResult("SumKernelTraits");
         }
 
         /// <summary>
@@ -795,7 +795,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleKernelVectorTraits_Args0(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumKernelTraits_Args0(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -827,13 +827,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleKernelVectorTraits_Args0() {
+        public void SumKernelTraits_Args0() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumYShuffleKernelVectorTraits_Args0(srcArray, srcArray.Length, indices);
-            CheckResult("SumYShuffleKernelVectorTraits_Args0");
+            dstTMy = StaticSumKernelTraits_Args0(srcArray, srcArray.Length, indices);
+            CheckResult("SumKernelTraits_Args0");
         }
 
         /// <summary>
@@ -843,7 +843,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleKernelVectorTraits_Args(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumKernelTraits_Args(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -874,13 +874,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleKernelVectorTraits_Args() {
+        public void SumKernelTraits_Args() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumYShuffleKernelVectorTraits_Args(srcArray, srcArray.Length, indices);
-            CheckResult("SumYShuffleKernelVectorTraits_Args");
+            dstTMy = StaticSumKernelTraits_Args(srcArray, srcArray.Length, indices);
+            CheckResult("SumKernelTraits_Args");
         }
 
 
@@ -901,7 +901,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleKernelVector128_Arm(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumKernel128_Arm(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -932,14 +932,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleKernelVector128_Arm() {
+        public void SumKernel128_Arm() {
             WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector128<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector128<byte>.Count));
             }
             //Debugger.Break();
-            dstTMy = StaticSumYShuffleKernelVector128_Arm(srcArray, srcArray.Length, indices);
-            CheckResult("SumYShuffleKernelVector128_Arm");
+            dstTMy = StaticSumKernel128_Arm(srcArray, srcArray.Length, indices);
+            CheckResult("SumKernel128_Arm");
         }
 
 #endif // NET5_0_OR_GREATER
@@ -954,7 +954,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleKernelVector128Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumKernel128Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -985,14 +985,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleKernelVector128Traits() {
+        public void SumKernel128Traits() {
             Vector128s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector128<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector128<byte>.Count));
             }
             //Debugger.Break();
-            dstTMy = StaticSumYShuffleKernelVector128Traits(srcArray, srcArray.Length, indices);
-            CheckResult("SumYShuffleKernelVector128Traits");
+            dstTMy = StaticSumKernel128Traits(srcArray, srcArray.Length, indices);
+            CheckResult("SumKernel128Traits");
         }
 
 #endif // BENCHMARKS_128ALGORITHM
@@ -1009,7 +1009,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleKernelVector256Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumKernel256Traits(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -1040,14 +1040,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleKernelVector256Traits() {
+        public void SumKernel256Traits() {
             Vector256s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
             }
             //Debugger.Break();
-            dstTMy = StaticSumYShuffleKernelVector256Traits(srcArray, srcArray.Length, indices);
-            CheckResult("SumYShuffleKernelVector256Traits");
+            dstTMy = StaticSumKernel256Traits(srcArray, srcArray.Length, indices);
+            CheckResult("SumKernel256Traits");
         }
 
         /// <summary>
@@ -1057,7 +1057,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleKernelVector256Traits_Args0(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumKernel256Traits_Args0(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -1089,7 +1089,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleKernelVector256Traits_Args0() {
+        public void SumKernel256Traits_Args0() {
             Vector256s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
@@ -1098,8 +1098,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumYShuffleKernelVector256Traits_Args0(srcArray, srcArray.Length, indices);
-            CheckResult("SumYShuffleKernelVector256Traits_Args0");
+            dstTMy = StaticSumKernel256Traits_Args0(srcArray, srcArray.Length, indices);
+            CheckResult("SumKernel256Traits_Args0");
         }
 
         /// <summary>
@@ -1109,7 +1109,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleKernelVector256Traits_Args(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumKernel256Traits_Args(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -1141,7 +1141,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleKernelVector256Traits_Args() {
+        public void SumKernel256Traits_Args() {
             Vector256s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
@@ -1150,8 +1150,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumYShuffleKernelVector256Traits_Args(srcArray, srcArray.Length, indices);
-            CheckResult("SumYShuffleKernelVector256Traits_Args");
+            dstTMy = StaticSumKernel256Traits_Args(srcArray, srcArray.Length, indices);
+            CheckResult("SumKernel256Traits_Args");
         }
 
 #if !OFF_VECTOR_TUPLES
@@ -1162,7 +1162,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="indices">The indices.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleKernelVector256Traits_ArgsX(TMy[] src, int srcCount, Vector<TMy> indices) {
+        private static TMy StaticSumKernel256Traits_ArgsX(TMy[] src, int srcCount, Vector<TMy> indices) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -1196,7 +1196,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleKernelVector256Traits_ArgsX() {
+        public void SumKernel256Traits_ArgsX() {
             Vector256s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
@@ -1205,8 +1205,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumYShuffleKernelVector256Traits_ArgsX(srcArray, srcArray.Length, indices);
-            CheckResult("SumYShuffleKernelVector256Traits_ArgsX");
+            dstTMy = StaticSumKernel256Traits_ArgsX(srcArray, srcArray.Length, indices);
+            CheckResult("SumKernel256Traits_ArgsX");
         }
 #endif // !OFF_VECTOR_TUPLES
 
