@@ -395,7 +395,7 @@ SumClamp_BitUtil	1289.799	203.244	1.010582
 SumClampVectorScalar	321.534	815.291	4.053838
 SumClampVectorBase	86.183	3041.701	15.124130
 SumClampVectorTraits	87.897	2982.414	14.829342
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	3691.367	71.015	0.353107
 SumClampVector256Traits	86.465	3031.777	15.074786
 
@@ -410,7 +410,7 @@ SumClamp_BitUtil	1173.174	223.448	1.048095
 SumClampVectorScalar	393.790	665.695	3.122470
 SumClampVectorBase	13.569	19319.646	90.619647
 SumClampVectorTraits	14.817	17691.715	82.983766
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	1626.591	161.162	0.755935
 SumClampVector256Traits	14.268	18373.474	86.181583
 
@@ -425,7 +425,7 @@ SumClamp_BitUtil	857.776	305.609	1.531616
 SumClampVectorScalar	240.223	1091.252	5.469013
 SumClampVectorBase	28.963	9051.076	45.361135
 SumClampVectorTraits	28.550	9181.877	46.016670
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	2670.314	98.170	0.491996
 SumClampVector256Traits	27.908	9393.211	47.075809
 
@@ -440,8 +440,8 @@ SumClamp_BitUtil	1007.046	260.310	1.361752
 SumClampVectorScalar	436.253	600.898	3.143463
 SumClampVectorBase	107.094	2447.795	12.805082
 SumClampVectorTraits	106.505	2461.332	12.875899
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
-SumClampVector128_Arm64	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd64	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	3172.968	82.618	0.432197
 SumClampVector256Traits	89.697	2922.554	15.288679
 
@@ -456,7 +456,7 @@ SumClamp_BitUtil	1139.867	229.978	1.229838
 SumClampVectorScalar	419.489	624.913	3.341810
 SumClampVectorBase	6.199	42288.784	226.145331
 SumClampVectorTraits	6.157	42575.769	227.680026
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	1039.102	252.279	1.349100
 SumClampVector256Traits	5.989	43770.958	234.071472
 
@@ -475,7 +475,7 @@ SumClamp_BitUtil	1081.881	242.304	1.186703
 SumClampVectorScalar	312.344	839.279	4.110436
 SumClampVectorBase	39.148	6696.206	32.795210
 SumClampVectorTraits	39.249	6679.069	32.711278
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	3174.490	82.578	0.404434
 SumClampVector256Traits	39.327	6665.739	32.645991
 
@@ -530,7 +530,7 @@ SumClamp_BitUtil	1060.192	247.261	1.168091
 SumClampVectorScalar	315.673	830.429	3.923050
 SumClampVectorBase	81.826	3203.663	15.134508
 SumClampVectorTraits	82.084	3193.609	15.087013
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	3602.025	72.777	0.343807
 SumClampVector256Traits	82.716	3169.204	14.971720
 
@@ -545,7 +545,7 @@ SumClamp_BitUtil	920.677	284.729	1.327004
 SumClampVectorScalar	404.403	648.225	3.021102
 SumClampVectorBase	13.653	19200.505	89.485451
 SumClampVectorTraits	14.217	18438.419	85.933692
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	1587.180	165.163	0.769757
 SumClampVector256Traits	13.035	20110.578	93.726921
 
@@ -560,7 +560,7 @@ SumClamp_BitUtil	857.663	305.649	1.400536
 SumClampVectorScalar	235.747	1111.974	5.095249
 SumClampVectorBase	26.632	9843.205	45.103210
 SumClampVectorTraits	26.960	9723.548	44.554922
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	2660.893	98.517	0.451423
 SumClampVector256Traits	26.342	9951.716	45.600427
 
@@ -575,8 +575,8 @@ SumClamp_BitUtil	956.949	273.937	1.357542
 SumClampVectorScalar	432.497	606.118	3.003719
 SumClampVectorBase	103.090	2542.859	12.601571
 SumClampVectorTraits	103.289	2537.960	12.577292
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
-SumClampVector128_Arm64	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd64	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	3171.931	82.645	0.409561
 SumClampVector256Traits	87.836	2984.483	14.790116
 
@@ -591,7 +591,7 @@ SumClamp_BitUtil	921.446	284.492	1.507366
 SumClampVectorScalar	406.499	644.882	3.416872
 SumClampVectorBase	5.844	44860.280	237.689842
 SumClampVectorTraits	6.019	43554.301	230.770182
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	1019.631	257.097	1.362214
 SumClampVector256Traits	5.925	44244.131	234.425209
 
@@ -610,7 +610,7 @@ SumClamp_BitUtil	991.618	264.360	1.233271
 SumClampVectorScalar	312.702	838.319	3.910858
 SumClampVectorBase	39.568	6625.083	30.906825
 SumClampVectorTraits	39.282	6673.399	31.132225
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	3185.721	82.287	0.383880
 SumClampVector256Traits	39.384	6656.059	31.051331
 
@@ -665,7 +665,7 @@ SumClamp_BitUtil	842.105	311.296	1.521664
 SumClampVectorScalar	314.875	832.534	4.069559
 SumClampVectorBase	80.917	3239.645	15.835899
 SumClampVectorTraits	81.020	3235.564	15.815948
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	159.054	1648.140	8.056371
 SumClampVector256Traits	85.640	3061.013	14.962714
 
@@ -680,7 +680,7 @@ SumClamp_BitUtil	717.331	365.444	1.663539
 SumClampVectorScalar	373.756	701.377	3.192744
 SumClampVectorBase	13.606	19266.375	87.702660
 SumClampVectorTraits	13.780	19023.052	86.595026
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	23.356	11223.871	51.092296
 SumClampVector256Traits	15.114	17344.316	78.953237
 
@@ -695,7 +695,7 @@ SumClamp_BitUtil	545.258	480.770	2.197632
 SumClampVectorScalar	197.849	1324.968	6.056518
 SumClampVectorBase	25.328	10350.095	47.310966
 SumClampVectorTraits	27.585	9503.202	43.439764
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	99.950	2622.757	11.988794
 SumClampVector256Traits	28.467	9208.810	42.094078
 
@@ -710,8 +710,8 @@ SumClamp_BitUtil	611.124	428.954	2.139780
 SumClampVectorScalar	337.589	776.519	3.873563
 SumClampVectorBase	87.569	2993.575	14.933054
 SumClampVectorTraits	87.263	3004.058	14.985346
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
-SumClampVector128_Arm64	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd64	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	205.230	1277.319	6.371735
 SumClampVector256Traits	116.934	2241.818	11.183012
 
@@ -726,7 +726,7 @@ SumClamp_BitUtil	703.129	372.825	1.887161
 SumClampVectorScalar	371.066	706.461	3.575960
 SumClampVectorBase	5.804	45163.208	228.606804
 SumClampVectorTraits	5.775	45390.898	229.759320
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	23.782	11022.757	55.794912
 SumClampVector256Traits	6.160	42557.906	215.419304
 
@@ -745,7 +745,7 @@ SumClamp_BitUtil	765.063	342.644	1.634649
 SumClampVectorScalar	315.059	832.048	3.969448
 SumClampVectorBase	39.228	6682.598	31.880649
 SumClampVectorTraits	39.245	6679.743	31.867030
-SumClampVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumClampVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumClampVector128Traits	78.521	3338.523	15.927081
 SumClampVector256Traits	40.318	6501.880	31.018498
 
@@ -924,7 +924,7 @@ NAME	US	MOPS	SCALE
 # SumClamp_If	130882.25684481156
 Check-SumClampVectorBase	Check `SumClampVectorBase` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVectorTraits	Check `SumClampVectorTraits` mismatch. 130882.25684480942!=130882.25684481156
-Check-SumClampVector128_Arm	Check `SumClampVector128_Arm` mismatch. 130882.25684480942!=130882.25684481156
+Check-SumClampVector128_AdvSimd	Check `SumClampVector128_AdvSimd` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVector128Traits	Check `SumClampVector128Traits` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVector256Traits	Check `SumClampVector256Traits` mismatch. 130882.25684481168!=130882.25684481156
 SumClamp_If	1545.658	169.600
@@ -934,7 +934,7 @@ SumClamp_BitUtil	2320.424	112.972	0.666110
 SumClampVectorScalar	389.378	673.237	3.969551
 SumClampVectorBase	133.863	1958.302	11.546574
 SumClampVectorTraits	133.869	1958.206	11.546006
-SumClampVector128_Arm	1485.092	176.517	1.040783
+SumClampVector128_AdvSimd	1485.092	176.517	1.040783
 SumClampVector128Traits	133.392	1965.215	11.587332
 SumClampVector256Traits	3008.985	87.120	0.513681
 
@@ -949,7 +949,7 @@ SumClamp_BitUtil	1553.268	168.769	0.998909
 SumClampVectorScalar	614.415	426.656	2.525286
 SumClampVectorBase	40.043	6546.640	38.748137
 SumClampVectorTraits	34.095	7688.617	45.507251
-SumClampVector128_Arm	33.918	7728.677	45.744359
+SumClampVector128_AdvSimd	33.918	7728.677	45.744359
 SumClampVector128Traits	40.314	6502.519	38.486995
 SumClampVector256Traits	2387.483	109.799	0.649878
 
@@ -964,7 +964,7 @@ SumClamp_BitUtil	1242.354	211.006	1.192069
 SumClampVectorScalar	399.912	655.504	3.703241
 SumClampVectorBase	68.779	3811.396	21.532319
 SumClampVectorTraits	68.541	3824.629	21.607079
-SumClampVector128_Arm	80.577	3253.323	18.379512
+SumClampVector128_AdvSimd	80.577	3253.323	18.379512
 SumClampVector128Traits	80.209	3268.265	18.463925
 SumClampVector256Traits	3175.573	82.550	0.466364
 
@@ -979,8 +979,8 @@ SumClamp_BitUtil	1377.648	190.284	1.185922
 SumClampVectorScalar	467.718	560.475	3.493096
 SumClampVectorBase	184.843	1418.196	8.838744
 SumClampVectorTraits	186.486	1405.707	8.760906
-SumClampVector128_Arm	1433.062	182.926	1.140064
-SumClampVector128_Arm64	184.592	1420.127	8.850777
+SumClampVector128_AdvSimd	1433.062	182.926	1.140064
+SumClampVector128_AdvSimd64	184.592	1420.127	8.850777
 SumClampVector128Traits	184.916	1417.636	8.835252
 SumClampVector256Traits	2571.964	101.924	0.635228
 
@@ -995,7 +995,7 @@ SumClamp_BitUtil	1502.352	174.489	1.049182
 SumClampVectorScalar	598.317	438.135	2.634455
 SumClampVectorBase	16.892	15518.749	93.312369
 SumClampVectorTraits	16.965	15452.052	92.911328
-SumClampVector128_Arm	20.029	13088.214	78.697854
+SumClampVector128_AdvSimd	20.029	13088.214	78.697854
 SumClampVector128Traits	20.017	13096.164	78.745654
 SumClampVector256Traits	1828.070	143.399	0.862243
 
@@ -1005,7 +1005,7 @@ NAME	US	MOPS	SCALE
 # SumClamp_If	130883.55
 Check-SumClampVectorBase	Check `SumClampVectorBase` mismatch. 130881.91!=130883.55
 Check-SumClampVectorTraits	Check `SumClampVectorTraits` mismatch. 130881.91!=130883.55
-Check-SumClampVector128_Arm	Check `SumClampVector128_Arm` mismatch. 130881.91!=130883.55
+Check-SumClampVector128_AdvSimd	Check `SumClampVector128_AdvSimd` mismatch. 130881.91!=130883.55
 Check-SumClampVector128Traits	Check `SumClampVector128Traits` mismatch. 130881.91!=130883.55
 Check-SumClampVector256Traits	Check `SumClampVector256Traits` mismatch. 130882.305!=130883.55
 SumClamp_If	1462.712	179.218
@@ -1015,7 +1015,7 @@ SumClamp_BitUtil	2055.388	127.540	0.711648
 SumClampVectorScalar	383.274	683.960	3.816363
 SumClampVectorBase	80.646	3250.539	18.137367
 SumClampVectorTraits	68.422	3831.290	21.377847
-SumClampVector128_Arm	68.899	3804.758	21.229801
+SumClampVector128_AdvSimd	68.899	3804.758	21.229801
 SumClampVector128Traits	68.923	3803.452	21.222516
 SumClampVector256Traits	3089.452	84.851	0.473454
 
@@ -1061,7 +1061,7 @@ NAME	US	MOPS	SCALE
 # SumClamp_If	130882.25684481156
 Check-SumClampVectorBase	Check `SumClampVectorBase` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVectorTraits	Check `SumClampVectorTraits` mismatch. 130882.25684480942!=130882.25684481156
-Check-SumClampVector128_Arm	Check `SumClampVector128_Arm` mismatch. 130882.25684480942!=130882.25684481156
+Check-SumClampVector128_AdvSimd	Check `SumClampVector128_AdvSimd` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVector128Traits	Check `SumClampVector128Traits` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVector256Traits	Check `SumClampVector256Traits` mismatch. 130882.25684481168!=130882.25684481156
 SumClamp_If	1490.817	175.839
@@ -1071,7 +1071,7 @@ SumClamp_BitUtil	2337.483	112.148	0.637788
 SumClampVectorScalar	426.213	615.053	3.497819
 SumClampVectorBase	134.121	1954.541	11.115508
 SumClampVectorTraits	133.522	1963.298	11.165311
-SumClampVector128_Arm	1481.306	176.968	1.006421
+SumClampVector128_AdvSimd	1481.306	176.968	1.006421
 SumClampVector128Traits	134.207	1953.280	11.108339
 SumClampVector256Traits	3199.120	81.943	0.466009
 
@@ -1086,7 +1086,7 @@ SumClamp_BitUtil	1551.969	168.911	1.003900
 SumClampVectorScalar	616.165	425.445	2.528577
 SumClampVectorBase	33.748	7767.658	46.166123
 SumClampVectorTraits	34.062	7696.191	45.741370
-SumClampVector128_Arm	34.062	7696.195	45.741390
+SumClampVector128_AdvSimd	34.062	7696.195	45.741390
 SumClampVector128Traits	34.016	7706.450	45.802340
 SumClampVector256Traits	2529.319	103.642	0.615984
 
@@ -1101,7 +1101,7 @@ SumClamp_BitUtil	1246.213	210.353	1.185077
 SumClampVectorScalar	408.270	642.084	3.617352
 SumClampVectorBase	68.809	3809.717	21.463049
 SumClampVectorTraits	68.795	3810.521	21.467577
-SumClampVector128_Arm	68.485	3827.758	21.564685
+SumClampVector128_AdvSimd	68.485	3827.758	21.564685
 SumClampVector128Traits	68.780	3811.325	21.472103
 SumClampVector256Traits	3205.332	81.784	0.460750
 
@@ -1116,8 +1116,8 @@ SumClamp_BitUtil	1374.063	190.780	1.154524
 SumClampVectorScalar	507.200	516.846	3.127739
 SumClampVectorBase	184.843	1418.199	8.582366
 SumClampVectorTraits	184.533	1420.583	8.596791
-SumClampVector128_Arm	1428.160	183.554	1.110792
-SumClampVector128_Arm64	184.449	1421.224	8.600668
+SumClampVector128_AdvSimd	1428.160	183.554	1.110792
+SumClampVector128_AdvSimd64	184.449	1421.224	8.600668
 SumClampVector128Traits	186.012	1409.283	8.528407
 SumClampVector256Traits	2702.764	96.991	0.586951
 
@@ -1132,7 +1132,7 @@ SumClamp_BitUtil	1469.260	178.419	1.077909
 SumClampVectorScalar	566.095	463.074	2.797636
 SumClampVectorBase	17.036	15387.905	92.965177
 SumClampVectorTraits	17.035	15388.486	92.968686
-SumClampVector128_Arm	16.940	15474.626	93.489100
+SumClampVector128_AdvSimd	16.940	15474.626	93.489100
 SumClampVector128Traits	17.058	15367.514	92.841987
 SumClampVector256Traits	1908.234	137.375	0.829944
 
@@ -1142,7 +1142,7 @@ NAME	US	MOPS	SCALE
 # SumClamp_If	130883.55
 Check-SumClampVectorBase	Check `SumClampVectorBase` mismatch. 130881.91!=130883.55
 Check-SumClampVectorTraits	Check `SumClampVectorTraits` mismatch. 130881.91!=130883.55
-Check-SumClampVector128_Arm	Check `SumClampVector128_Arm` mismatch. 130881.91!=130883.55
+Check-SumClampVector128_AdvSimd	Check `SumClampVector128_AdvSimd` mismatch. 130881.91!=130883.55
 Check-SumClampVector128Traits	Check `SumClampVector128Traits` mismatch. 130881.91!=130883.55
 Check-SumClampVector256Traits	Check `SumClampVector256Traits` mismatch. 130882.305!=130883.55
 SumClamp_If	1475.081	177.715
@@ -1152,7 +1152,7 @@ SumClamp_BitUtil	2047.835	128.010	0.720312
 SumClampVectorScalar	425.848	615.581	3.463865
 SumClampVectorBase	69.252	3785.379	21.300284
 SumClampVectorTraits	69.797	3755.782	21.133740
-SumClampVector128_Arm	69.067	3795.518	21.357336
+SumClampVector128_AdvSimd	69.067	3795.518	21.357336
 SumClampVector128Traits	69.155	3790.700	21.330227
 SumClampVector256Traits	3164.462	82.840	0.466140
 
@@ -1198,7 +1198,7 @@ NAME	US	MOPS	SCALE
 # SumClamp_If	130882.25684481156
 Check-SumClampVectorBase	Check `SumClampVectorBase` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVectorTraits	Check `SumClampVectorTraits` mismatch. 130882.25684480942!=130882.25684481156
-Check-SumClampVector128_Arm	Check `SumClampVector128_Arm` mismatch. 130882.25684480942!=130882.25684481156
+Check-SumClampVector128_AdvSimd	Check `SumClampVector128_AdvSimd` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVector128Traits	Check `SumClampVector128Traits` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVector256Traits	Check `SumClampVector256Traits` mismatch. 130882.25684481168!=130882.25684481156
 SumClamp_If	1242.012	211.064
@@ -1208,7 +1208,7 @@ SumClamp_BitUtil	1018.869	257.289	1.219010
 SumClampVectorScalar	308.497	849.746	4.026009
 SumClampVectorBase	112.888	2322.158	11.002150
 SumClampVectorTraits	112.892	2322.076	11.001762
-SumClampVector128_Arm	1465.925	178.825	0.847255
+SumClampVector128_AdvSimd	1465.925	178.825	0.847255
 SumClampVector128Traits	136.025	1927.171	9.130739
 SumClampVector256Traits	3018.289	86.852	0.411495
 
@@ -1223,7 +1223,7 @@ SumClamp_BitUtil	1231.898	212.797	1.074158
 SumClampVectorScalar	469.642	558.178	2.817575
 SumClampVectorBase	26.780	9788.683	49.411401
 SumClampVectorTraits	26.843	9765.709	49.295434
-SumClampVector128_Arm	33.195	7897.137	39.863238
+SumClampVector128_AdvSimd	33.195	7897.137	39.863238
 SumClampVector128Traits	33.165	7904.151	39.898645
 SumClampVector256Traits	4170.027	62.864	0.317325
 
@@ -1238,7 +1238,7 @@ SumClamp_BitUtil	936.393	279.951	1.393312
 SumClampVectorScalar	265.359	987.884	4.916686
 SumClampVectorBase	55.208	4748.260	23.632030
 SumClampVectorTraits	55.197	4749.250	23.636953
-SumClampVector128_Arm	67.499	3883.688	19.329065
+SumClampVector128_AdvSimd	67.499	3883.688	19.329065
 SumClampVector128Traits	67.505	3883.312	19.327194
 SumClampVector256Traits	3604.374	72.729	0.361973
 
@@ -1253,8 +1253,8 @@ SumClamp_BitUtil	1065.777	245.965	1.234224
 SumClampVectorScalar	508.650	515.372	2.586075
 SumClampVectorBase	153.943	1702.859	8.544743
 SumClampVectorTraits	153.899	1703.353	8.547222
-SumClampVector128_Arm	1423.875	184.106	0.923822
-SumClampVector128_Arm64	187.516	1397.983	7.014911
+SumClampVector128_AdvSimd	1423.875	184.106	0.923822
+SumClampVector128_AdvSimd64	187.516	1397.983	7.014911
 SumClampVector128Traits	187.715	1396.501	7.007476
 SumClampVector256Traits	3090.383	84.826	0.425645
 
@@ -1269,7 +1269,7 @@ SumClamp_BitUtil	1136.966	230.565	1.159530
 SumClampVectorScalar	429.084	610.939	3.072465
 SumClampVectorBase	13.477	19450.689	97.819251
 SumClampVectorTraits	13.466	19467.714	97.904871
-SumClampVector128_Arm	16.624	15768.957	79.303491
+SumClampVector128_AdvSimd	16.624	15768.957	79.303491
 SumClampVector128Traits	16.640	15753.675	79.226640
 SumClampVector256Traits	3059.376	85.685	0.430920
 
@@ -1279,7 +1279,7 @@ NAME	US	MOPS	SCALE
 # SumClamp_If	130883.55
 Check-SumClampVectorBase	Check `SumClampVectorBase` mismatch. 130881.91!=130883.55
 Check-SumClampVectorTraits	Check `SumClampVectorTraits` mismatch. 130881.91!=130883.55
-Check-SumClampVector128_Arm	Check `SumClampVector128_Arm` mismatch. 130881.91!=130883.55
+Check-SumClampVector128_AdvSimd	Check `SumClampVector128_AdvSimd` mismatch. 130881.91!=130883.55
 Check-SumClampVector128Traits	Check `SumClampVector128Traits` mismatch. 130881.91!=130883.55
 Check-SumClampVector256Traits	Check `SumClampVector256Traits` mismatch. 130882.305!=130883.55
 SumClamp_If	1239.933	211.418
@@ -1289,7 +1289,7 @@ SumClamp_BitUtil	937.140	279.728	1.323103
 SumClampVectorScalar	307.763	851.772	4.028856
 SumClampVectorBase	55.491	4724.083	22.344763
 SumClampVectorTraits	55.541	4719.848	22.324734
-SumClampVector128_Arm	68.011	3854.423	18.231298
+SumClampVector128_AdvSimd	68.011	3854.423	18.231298
 SumClampVector128Traits	67.863	3862.869	18.271251
 SumClampVector256Traits	2887.323	90.791	0.429440
 

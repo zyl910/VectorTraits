@@ -339,7 +339,7 @@ SumWidenVectorBase256_RefInc	287.565	911.599	0.558631
 SumWidenVectorBase256_RefInc2	289.569	905.291	0.554765
 SumWidenVectorTraits	35.570	7369.780	4.516223
 SumWidenVectorTraits_Ptr	35.525	7379.089	4.521928
-SumWidenVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumWidenVector128Traits	1155.798	226.808	0.138989
 SumWidenVector256Traits	36.914	7101.392	4.351754
 
@@ -352,7 +352,7 @@ SumWidenBcl	11.243	23316.407	14.877261
 SumWidenVectorBase	12.370	21191.863	13.521676
 SumWidenVectorTraits	8.873	29542.919	18.850148
 SumWidenVectorTraits_Ptr	8.507	30815.069	19.661856
-SumWidenVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumWidenVector128Traits	392.683	667.572	0.425951
 SumWidenVector256Traits	8.734	30014.597	19.151107
 
@@ -365,8 +365,8 @@ SumWidenBcl	54.742	4788.705	6.565073
 SumWidenVectorBase	52.098	5031.759	6.898288
 SumWidenVectorTraits	48.321	5425.087	7.437520
 SumWidenVectorTraits_Ptr	52.687	4975.496	6.821154
-SumWidenVector128_Arm	Run fail! Requires hardware support AdvSimd!
-SumWidenVector128_ArmB64	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_AdvSimdB64	Run fail! Requires hardware support AdvSimd!
 SumWidenVector128Traits	1152.325	227.491	0.311879
 SumWidenVector256Traits	49.271	5320.413	7.294018
 
@@ -438,7 +438,7 @@ SumWidenVectorBase256_RefInc	329.554	795.450	0.432349
 SumWidenVectorBase256_RefInc2	292.395	896.540	0.487295
 SumWidenVectorTraits	36.674	7147.941	3.885105
 SumWidenVectorTraits_Ptr	35.395	7406.270	4.025514
-SumWidenVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumWidenVector128Traits	1162.538	225.493	0.122562
 SumWidenVector256Traits	36.193	7242.959	3.936750
 SumWidenVector256Avx_ConvertTo	35.104	7467.615	4.058857
@@ -454,7 +454,7 @@ SumWidenBcl	11.184	23438.933	14.003405
 SumWidenVectorBase	11.701	22404.194	13.385208
 SumWidenVectorTraits	8.487	30889.501	18.454687
 SumWidenVectorTraits_Ptr	8.584	30538.913	18.245231
-SumWidenVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumWidenVector128Traits	380.807	688.392	0.411274
 SumWidenVector256Traits	8.373	31308.481	18.705003
 SumWidenVector256Avx_ConvertTo	8.583	30540.821	18.246371
@@ -469,8 +469,8 @@ SumWidenBcl	57.886	4528.610	5.613272
 SumWidenVectorBase	58.474	4483.068	5.556823
 SumWidenVectorTraits	57.161	4586.102	5.684534
 SumWidenVectorTraits_Ptr	50.555	5185.288	6.427233
-SumWidenVector128_Arm	Run fail! Requires hardware support AdvSimd!
-SumWidenVector128_ArmB64	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_AdvSimdB64	Run fail! Requires hardware support AdvSimd!
 SumWidenVector128Traits	1131.117	231.757	0.287265
 SumWidenVector256Traits	44.450	5897.483	7.310009
 
@@ -542,7 +542,7 @@ SumWidenVectorBase256_RefInc	290.347	902.865	0.563262
 SumWidenVectorBase256_RefInc2	300.928	871.119	0.543457
 SumWidenVectorTraits	38.825	6751.874	4.212230
 SumWidenVectorTraits_Ptr	34.677	7559.593	4.716135
-SumWidenVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumWidenVector128Traits	61.125	4288.660	2.675527
 SumWidenVector256Traits	34.289	7645.190	4.769535
 SumWidenVector256Avx_ConvertTo	34.651	7565.187	4.719625
@@ -558,7 +558,7 @@ SumWidenBcl	7.983	32837.150	19.645588
 SumWidenVectorBase	7.899	33186.122	19.854369
 SumWidenVectorTraits	7.994	32792.781	19.619043
 SumWidenVectorTraits_Ptr	8.528	30739.242	18.390466
-SumWidenVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumWidenVector128Traits	15.717	16679.282	9.978768
 SumWidenVector256Traits	8.004	32751.887	19.594578
 SumWidenVector256Avx_ConvertTo	8.402	31199.197	18.665645
@@ -573,8 +573,8 @@ SumWidenBcl	46.247	5668.356	6.801269
 SumWidenVectorBase	47.791	5485.231	6.581543
 SumWidenVectorTraits	48.116	5448.111	6.537005
 SumWidenVectorTraits_Ptr	48.473	5408.079	6.488972
-SumWidenVector128_Arm	Run fail! Requires hardware support AdvSimd!
-SumWidenVector128_ArmB64	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_AdvSimdB64	Run fail! Requires hardware support AdvSimd!
 SumWidenVector128Traits	80.020	3275.992	3.930752
 SumWidenVector256Traits	46.702	5613.091	6.734958
 
@@ -746,7 +746,7 @@ SumWidenVectorBase256_RefInc	Run fail! Vector byte size mismatch(16!=32) !
 SumWidenVectorBase256_RefInc2	Run fail! Vector byte size mismatch(16!=32) !
 SumWidenVectorTraits	84.107	3116.778	4.153693
 SumWidenVectorTraits_Ptr	76.013	3448.677	4.596010
-SumWidenVector128_Arm	88.228	2971.200	3.959682
+SumWidenVector128_AdvSimd	88.228	2971.200	3.959682
 SumWidenVector128Traits	88.093	2975.763	3.965765
 SumWidenVector256Traits	854.042	306.945	0.409062
 
@@ -759,7 +759,7 @@ SumWidenBcl	20.848	12573.830	16.922777
 SumWidenVectorBase	21.189	12371.942	16.651061
 SumWidenVectorTraits	18.702	14017.035	18.865146
 SumWidenVectorTraits_Ptr	20.149	13009.998	17.509803
-SumWidenVector128_Arm	21.900	11970.238	16.110418
+SumWidenVector128_AdvSimd	21.900	11970.238	16.110418
 SumWidenVector128Traits	21.643	12112.350	16.301683
 SumWidenVector256Traits	409.297	640.474	0.861997
 
@@ -772,8 +772,8 @@ SumWidenBcl	76.838	3411.624	3.783933
 SumWidenVectorBase	76.879	3409.835	3.781949
 SumWidenVectorTraits	83.139	3153.065	3.497157
 SumWidenVectorTraits_Ptr	76.478	3427.690	3.801752
-SumWidenVector128_Arm	647.481	404.867	0.449050
-SumWidenVector128_ArmB64	90.509	2896.346	3.212423
+SumWidenVector128_AdvSimd	647.481	404.867	0.449050
+SumWidenVector128_AdvSimdB64	90.509	2896.346	3.212423
 SumWidenVector128Traits	89.158	2940.233	3.261099
 SumWidenVector256Traits	892.728	293.644	0.325689
 
@@ -845,7 +845,7 @@ SumWidenVectorBase256_RefInc	Run fail! Vector byte size mismatch(16!=32) !
 SumWidenVectorBase256_RefInc2	Run fail! Vector byte size mismatch(16!=32) !
 SumWidenVectorTraits	76.616	3421.535	4.564854
 SumWidenVectorTraits_Ptr	84.803	3091.220	4.124164
-SumWidenVector128_Arm	88.431	2964.398	3.954963
+SumWidenVector128_AdvSimd	88.431	2964.398	3.954963
 SumWidenVector128Traits	88.071	2976.512	3.971126
 SumWidenVector256Traits	858.303	305.421	0.407479
 
@@ -858,7 +858,7 @@ SumWidenBcl	18.680	14033.774	16.561687
 SumWidenVectorBase	20.875	12557.837	14.819889
 SumWidenVectorTraits	18.691	14024.904	16.551220
 SumWidenVectorTraits_Ptr	18.898	13871.441	16.370114
-SumWidenVector128_Arm	21.812	12018.280	14.183141
+SumWidenVector128_AdvSimd	21.812	12018.280	14.183141
 SumWidenVector128Traits	21.851	11996.728	14.157707
 SumWidenVector256Traits	409.674	639.884	0.755147
 
@@ -871,8 +871,8 @@ SumWidenBcl	76.679	3418.702	4.130874
 SumWidenVectorBase	83.013	3157.879	3.815717
 SumWidenVectorTraits	83.883	3125.112	3.776124
 SumWidenVectorTraits_Ptr	77.160	3397.429	4.105169
-SumWidenVector128_Arm	649.231	403.776	0.487889
-SumWidenVector128_ArmB64	89.950	2914.340	3.521445
+SumWidenVector128_AdvSimd	649.231	403.776	0.487889
+SumWidenVector128_AdvSimdB64	89.950	2914.340	3.521445
 SumWidenVector128Traits	89.557	2927.117	3.536883
 SumWidenVector256Traits	893.955	293.241	0.354327
 
@@ -944,7 +944,7 @@ SumWidenVectorBase256_RefInc	Run fail! Vector byte size mismatch(16!=32) !
 SumWidenVectorBase256_RefInc2	Run fail! Vector byte size mismatch(16!=32) !
 SumWidenVectorTraits	69.519	3770.815	3.034956
 SumWidenVectorTraits_Ptr	69.663	3763.011	3.028675
-SumWidenVector128_Arm	69.797	3755.802	3.022872
+SumWidenVector128_AdvSimd	69.797	3755.802	3.022872
 SumWidenVector128Traits	69.894	3750.581	3.018670
 SumWidenVector256Traits	2305.560	113.701	0.091513
 
@@ -957,7 +957,7 @@ SumWidenBcl	17.111	15320.446	12.578356
 SumWidenVectorBase	17.264	15184.279	12.466561
 SumWidenVectorTraits	17.118	15314.270	12.573285
 SumWidenVectorTraits_Ptr	16.914	15498.275	12.724357
-SumWidenVector128_Arm	17.031	15392.120	12.637202
+SumWidenVector128_AdvSimd	17.031	15392.120	12.637202
 SumWidenVector128Traits	17.156	15280.250	12.545355
 SumWidenVector256Traits	1534.270	170.859	0.140278
 
@@ -970,8 +970,8 @@ SumWidenBcl	73.359	3573.416	2.877502
 SumWidenVectorBase	73.413	3570.790	2.875388
 SumWidenVectorTraits	73.414	3570.762	2.875365
 SumWidenVectorTraits_Ptr	73.405	3571.221	2.875735
-SumWidenVector128_Arm	433.601	604.574	0.486834
-SumWidenVector128_ArmB64	73.270	3577.799	2.881031
+SumWidenVector128_AdvSimd	433.601	604.574	0.486834
+SumWidenVector128_AdvSimdB64	73.270	3577.799	2.881031
 SumWidenVector128Traits	73.229	3579.760	2.882611
 SumWidenVector256Traits	2449.326	107.027	0.086184
 

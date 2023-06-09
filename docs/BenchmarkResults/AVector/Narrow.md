@@ -253,8 +253,8 @@ SumNarrowScalar	350.928	747.002
 SumNarrowBcl	58.797	4458.440	5.968444
 SumNarrowVectorBase	55.342	4736.787	6.341063
 SumNarrowVectorTraits	52.519	4991.367	6.681866
-SumNarrowVector128_Arm	Run fail! Requires hardware support AdvSimd!
-SumNarrowVector128_ArmB64	Run fail! Requires hardware support AdvSimd!
+SumNarrowVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumNarrowVector128_AdvSimdB64	Run fail! Requires hardware support AdvSimd!
 SumNarrowVector128Traits	1353.031	193.746	0.259364
 SumNarrowVector256Traits	262.298	999.412	1.337897
 
@@ -266,7 +266,7 @@ SumNarrowScalar	156.713	1672.760
 SumNarrowBcl	14.596	17960.142	10.736834
 SumNarrowVectorBase	14.113	18574.971	11.104388
 SumNarrowVectorTraits	25.371	10332.393	6.176855
-SumNarrowVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumNarrowVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumNarrowVector128Traits	355.009	738.415	0.441435
 SumNarrowVector256Traits	13.259	19770.730	11.819230
 
@@ -278,7 +278,7 @@ SumNarrowScalar	174.361	1503.454
 SumNarrowBcl	76.228	3438.955	2.287370
 SumNarrowVectorBase	77.557	3379.996	2.248154
 SumNarrowVectorTraits	50.536	5187.229	3.450209
-SumNarrowVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumNarrowVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumNarrowVector128Traits	876.771	298.988	0.198867
 SumNarrowVector256Traits	48.048	5455.908	3.628916
 
@@ -331,8 +331,8 @@ SumNarrowScalar	318.851	822.151
 SumNarrowBcl	47.440	5525.849	6.721209
 SumNarrowVectorBase	47.446	5525.085	6.720281
 SumNarrowVectorTraits	46.716	5611.390	6.825255
-SumNarrowVector128_Arm	Run fail! Requires hardware support AdvSimd!
-SumNarrowVector128_ArmB64	Run fail! Requires hardware support AdvSimd!
+SumNarrowVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumNarrowVector128_AdvSimdB64	Run fail! Requires hardware support AdvSimd!
 SumNarrowVector128Traits	1365.727	191.945	0.233467
 SumNarrowVector256Traits	260.201	1007.467	1.225404
 
@@ -344,7 +344,7 @@ SumNarrowScalar	161.469	1623.491
 SumNarrowBcl	13.993	18733.836	11.539229
 SumNarrowVectorBase	14.275	18364.141	11.311513
 SumNarrowVectorTraits	24.497	10700.904	6.591292
-SumNarrowVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumNarrowVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumNarrowVector128Traits	356.554	735.215	0.452860
 SumNarrowVector256Traits	13.047	20092.067	12.375841
 
@@ -356,7 +356,7 @@ SumNarrowScalar	166.604	1573.460
 SumNarrowBcl	77.468	3383.896	2.150609
 SumNarrowVectorBase	76.300	3435.694	2.183528
 SumNarrowVectorTraits	57.900	4527.496	2.877414
-SumNarrowVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumNarrowVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumNarrowVector128Traits	874.868	299.638	0.190433
 SumNarrowVector256Traits	54.086	4846.844	3.080374
 
@@ -409,8 +409,8 @@ SumNarrowScalar	319.566	820.312
 SumNarrowBcl	49.158	5332.672	6.500788
 SumNarrowVectorBase	52.182	5023.694	6.124129
 SumNarrowVectorTraits	51.093	5130.718	6.254596
-SumNarrowVector128_Arm	Run fail! Requires hardware support AdvSimd!
-SumNarrowVector128_ArmB64	Run fail! Requires hardware support AdvSimd!
+SumNarrowVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumNarrowVector128_AdvSimdB64	Run fail! Requires hardware support AdvSimd!
 SumNarrowVector128Traits	80.711	3247.950	3.959410
 SumNarrowVector256Traits	51.501	5090.033	6.204999
 
@@ -422,7 +422,7 @@ SumNarrowScalar	155.345	1687.493
 SumNarrowBcl	17.718	14795.391	8.767673
 SumNarrowVectorBase	11.908	22013.759	13.045241
 SumNarrowVectorTraits	10.908	24032.546	14.241564
-SumNarrowVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumNarrowVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumNarrowVector128Traits	16.704	15693.384	9.299819
 SumNarrowVector256Traits	10.979	23877.066	14.149428
 
@@ -434,7 +434,7 @@ SumNarrowScalar	105.295	2489.626
 SumNarrowBcl	45.404	5773.532	2.319035
 SumNarrowVectorBase	45.567	5752.873	2.310738
 SumNarrowVectorTraits	50.340	5207.492	2.091676
-SumNarrowVector128_Arm	Run fail! Requires hardware support AdvSimd!
+SumNarrowVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumNarrowVector128Traits	64.828	4043.678	1.624211
 SumNarrowVector256Traits	52.582	4985.410	2.002473
 
@@ -560,16 +560,16 @@ NAME	US	MOPS	SCALE
 Check-SumNarrowBcl	Check `SumNarrowBcl` mismatch. 130888.75!=130889.58
 Check-SumNarrowVectorBase	Check `SumNarrowVectorBase` mismatch. 130888.75!=130889.58
 Check-SumNarrowVectorTraits	Check `SumNarrowVectorTraits` mismatch. 130888.75!=130889.58
-Check-SumNarrowVector128_Arm	Check `SumNarrowVector128_Arm` mismatch. 130888.75!=130889.58
-Check-SumNarrowVector128_ArmB64	Check `SumNarrowVector128_ArmB64` mismatch. 130888.75!=130889.58
+Check-SumNarrowVector128_AdvSimd	Check `SumNarrowVector128_AdvSimd` mismatch. 130888.75!=130889.58
+Check-SumNarrowVector128_AdvSimdB64	Check `SumNarrowVector128_AdvSimdB64` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector128Traits	Check `SumNarrowVector128Traits` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector256Traits	Check `SumNarrowVector256Traits` mismatch. 130888.7!=130889.58
 SumNarrowScalar	290.354	902.841
 SumNarrowBcl	81.007	3236.050	3.584296
 SumNarrowVectorBase	75.113	3489.994	3.865568
 SumNarrowVectorTraits	81.215	3227.759	3.575112
-SumNarrowVector128_Arm	562.115	466.353	0.516539
-SumNarrowVector128_ArmB64	82.825	3165.039	3.505643
+SumNarrowVector128_AdvSimd	562.115	466.353	0.516539
+SumNarrowVector128_AdvSimdB64	82.825	3165.039	3.505643
 SumNarrowVector128Traits	579.494	452.367	0.501048
 SumNarrowVector256Traits	1304.321	200.981	0.222610
 
@@ -581,7 +581,7 @@ SumNarrowScalar	348.389	752.447
 SumNarrowBcl	20.872	12559.431	16.691461
 SumNarrowVectorBase	20.901	12542.386	16.668808
 SumNarrowVectorTraits	20.892	12547.789	16.675989
-SumNarrowVector128_Arm	20.073	13059.461	17.355999
+SumNarrowVector128_AdvSimd	20.073	13059.461	17.355999
 SumNarrowVector128Traits	19.838	13214.069	17.561473
 SumNarrowVector256Traits	391.835	669.017	0.889122
 
@@ -593,7 +593,7 @@ SumNarrowScalar	312.581	838.644
 SumNarrowBcl	79.242	3308.158	3.944651
 SumNarrowVectorBase	83.340	3145.471	3.750663
 SumNarrowVectorTraits	79.116	3313.423	3.950929
-SumNarrowVector128_Arm	79.170	3311.155	3.948224
+SumNarrowVector128_AdvSimd	79.170	3311.155	3.948224
 SumNarrowVector128Traits	83.061	3156.056	3.763284
 SumNarrowVector256Traits	880.877	297.594	0.354852
 
@@ -640,16 +640,16 @@ NAME	US	MOPS	SCALE
 Check-SumNarrowBcl	Check `SumNarrowBcl` mismatch. 130888.75!=130889.58
 Check-SumNarrowVectorBase	Check `SumNarrowVectorBase` mismatch. 130888.75!=130889.58
 Check-SumNarrowVectorTraits	Check `SumNarrowVectorTraits` mismatch. 130888.75!=130889.58
-Check-SumNarrowVector128_Arm	Check `SumNarrowVector128_Arm` mismatch. 130888.75!=130889.58
-Check-SumNarrowVector128_ArmB64	Check `SumNarrowVector128_ArmB64` mismatch. 130888.75!=130889.58
+Check-SumNarrowVector128_AdvSimd	Check `SumNarrowVector128_AdvSimd` mismatch. 130888.75!=130889.58
+Check-SumNarrowVector128_AdvSimdB64	Check `SumNarrowVector128_AdvSimdB64` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector128Traits	Check `SumNarrowVector128Traits` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector256Traits	Check `SumNarrowVector256Traits` mismatch. 130888.7!=130889.58
 SumNarrowScalar	290.303	903.002
 SumNarrowBcl	75.130	3489.223	3.864026
 SumNarrowVectorBase	81.086	3232.929	3.580201
 SumNarrowVectorTraits	75.071	3491.952	3.867048
-SumNarrowVector128_Arm	561.076	467.217	0.517404
-SumNarrowVector128_ArmB64	75.248	3483.750	3.857965
+SumNarrowVector128_AdvSimd	561.076	467.217	0.517404
+SumNarrowVector128_AdvSimdB64	75.248	3483.750	3.857965
 SumNarrowVector128Traits	792.276	330.874	0.366416
 SumNarrowVector256Traits	1291.282	203.011	0.224818
 
@@ -661,7 +661,7 @@ SumNarrowScalar	347.281	754.846
 SumNarrowBcl	19.662	13332.469	17.662492
 SumNarrowVectorBase	19.665	13330.678	17.660121
 SumNarrowVectorTraits	19.784	13250.364	17.553722
-SumNarrowVector128_Arm	19.803	13237.430	17.536588
+SumNarrowVector128_AdvSimd	19.803	13237.430	17.536588
 SumNarrowVector128Traits	19.587	13383.242	17.729756
 SumNarrowVector256Traits	392.386	668.077	0.885050
 
@@ -673,7 +673,7 @@ SumNarrowScalar	312.726	838.254
 SumNarrowBcl	79.271	3306.919	3.945006
 SumNarrowVectorBase	82.884	3162.797	3.773076
 SumNarrowVectorTraits	82.803	3165.871	3.776743
-SumNarrowVector128_Arm	79.086	3314.682	3.954267
+SumNarrowVector128_AdvSimd	79.086	3314.682	3.954267
 SumNarrowVector128Traits	82.753	3167.792	3.779034
 SumNarrowVector256Traits	872.872	300.324	0.358273
 
@@ -720,16 +720,16 @@ NAME	US	MOPS	SCALE
 Check-SumNarrowBcl	Check `SumNarrowBcl` mismatch. 130888.75!=130889.58
 Check-SumNarrowVectorBase	Check `SumNarrowVectorBase` mismatch. 130888.75!=130889.58
 Check-SumNarrowVectorTraits	Check `SumNarrowVectorTraits` mismatch. 130888.75!=130889.58
-Check-SumNarrowVector128_Arm	Check `SumNarrowVector128_Arm` mismatch. 130888.75!=130889.58
-Check-SumNarrowVector128_ArmB64	Check `SumNarrowVector128_ArmB64` mismatch. 130888.75!=130889.58
+Check-SumNarrowVector128_AdvSimd	Check `SumNarrowVector128_AdvSimd` mismatch. 130888.75!=130889.58
+Check-SumNarrowVector128_AdvSimdB64	Check `SumNarrowVector128_AdvSimdB64` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector128Traits	Check `SumNarrowVector128Traits` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector256Traits	Check `SumNarrowVector256Traits` mismatch. 130888.7!=130889.58
 SumNarrowScalar	210.605	1244.722
 SumNarrowBcl	75.298	3481.401	2.796932
 SumNarrowVectorBase	75.476	3473.223	2.790362
 SumNarrowVectorTraits	74.895	3500.169	2.812009
-SumNarrowVector128_Arm	75.439	3474.922	2.791726
-SumNarrowVector128_ArmB64	75.376	3477.835	2.794066
+SumNarrowVector128_AdvSimd	75.439	3474.922	2.791726
+SumNarrowVector128_AdvSimdB64	75.376	3477.835	2.794066
 SumNarrowVector128Traits	75.593	3467.840	2.786036
 SumNarrowVector256Traits	958.777	273.415	0.219660
 
@@ -741,7 +741,7 @@ SumNarrowScalar	253.988	1032.113
 SumNarrowBcl	16.991	15428.521	14.948478
 SumNarrowVectorBase	16.972	15445.908	14.965325
 SumNarrowVectorTraits	16.981	15437.910	14.957575
-SumNarrowVector128_Arm	16.988	15430.867	14.950752
+SumNarrowVector128_AdvSimd	16.988	15430.867	14.950752
 SumNarrowVector128Traits	16.962	15454.345	14.973499
 SumNarrowVector256Traits	687.066	381.541	0.369670
 
@@ -753,7 +753,7 @@ SumNarrowScalar	226.683	1156.432
 SumNarrowBcl	64.490	4064.873	3.515011
 SumNarrowVectorBase	64.229	4081.370	3.529276
 SumNarrowVectorTraits	64.266	4079.025	3.527248
-SumNarrowVector128_Arm	64.668	4053.662	3.505317
+SumNarrowVector128_AdvSimd	64.668	4053.662	3.505317
 SumNarrowVector128Traits	64.421	4069.220	3.518770
 SumNarrowVector256Traits	933.311	280.875	0.242881
 
