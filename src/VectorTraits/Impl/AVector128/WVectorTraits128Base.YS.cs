@@ -51,7 +51,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Shuffle(source, Vector128Constants.GetYShuffleG2_Byte_Indices(control));
 #else
-                return YShuffleG2_Base(source, control);
+                return YShuffleG2_Basic(source, control);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -68,7 +68,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Shuffle(source.AsByte(), Vector128Constants.GetYShuffleG2_UInt16_ByteIndices(control)).AsUInt16();
 #else
-                return YShuffleG2_Base(source, control);
+                return YShuffleG2_Basic(source, control);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -85,7 +85,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Shuffle(source.AsByte(), Vector128Constants.GetYShuffleG2_UInt32_ByteIndices(control)).AsUInt32();
 #else
-                return YShuffleG2_Base(source, control);
+                return YShuffleG2_Basic(source, control);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -102,32 +102,32 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Shuffle(source.AsByte(), Vector128Constants.GetYShuffleG2_UInt64_ByteIndices(control)).AsUInt64();
 #else
-                return YShuffleG2_Base(source, control);
+                return YShuffleG2_Basic(source, control);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{float}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<float> YShuffleG2_Base(Vector128<float> source, ShuffleControlG2 control) {
-                return YShuffleG2_Base(source.AsUInt32(), control).AsSingle();
+            public static Vector128<float> YShuffleG2_Basic(Vector128<float> source, ShuffleControlG2 control) {
+                return YShuffleG2_Basic(source.AsUInt32(), control).AsSingle();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{double}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<double> YShuffleG2_Base(Vector128<double> source, ShuffleControlG2 control) {
-                return YShuffleG2_Base(source.AsUInt64(), control).AsDouble();
+            public static Vector128<double> YShuffleG2_Basic(Vector128<double> source, ShuffleControlG2 control) {
+                return YShuffleG2_Basic(source.AsUInt64(), control).AsDouble();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{sbyte}, ShuffleControlG2)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<sbyte> YShuffleG2_Base(Vector128<sbyte> source, ShuffleControlG2 control) {
-                return YShuffleG2_Base(source.AsByte(), control).AsSByte();
+            public static Vector128<sbyte> YShuffleG2_Basic(Vector128<sbyte> source, ShuffleControlG2 control) {
+                return YShuffleG2_Basic(source.AsByte(), control).AsSByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{byte}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<byte> YShuffleG2_Base(Vector128<byte> source, ShuffleControlG2 control) {
+            public static Vector128<byte> YShuffleG2_Basic(Vector128<byte> source, ShuffleControlG2 control) {
                 UnsafeEx.SkipInit(out Vector128<byte> rt);
                 ref byte q = ref Unsafe.As<Vector128<byte>, byte>(ref rt);
                 ref byte p = ref Unsafe.As<Vector128<byte>, byte>(ref source);
@@ -141,14 +141,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{short}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<short> YShuffleG2_Base(Vector128<short> source, ShuffleControlG2 control) {
-                return YShuffleG2_Base(source.AsUInt16(), control).AsInt16();
+            public static Vector128<short> YShuffleG2_Basic(Vector128<short> source, ShuffleControlG2 control) {
+                return YShuffleG2_Basic(source.AsUInt16(), control).AsInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{ushort}, ShuffleControlG2)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ushort> YShuffleG2_Base(Vector128<ushort> source, ShuffleControlG2 control) {
+            public static Vector128<ushort> YShuffleG2_Basic(Vector128<ushort> source, ShuffleControlG2 control) {
                 UnsafeEx.SkipInit(out Vector128<ushort> rt);
                 ref ushort q = ref Unsafe.As<Vector128<ushort>, ushort>(ref rt);
                 ref ushort p = ref Unsafe.As<Vector128<ushort>, ushort>(ref source);
@@ -162,14 +162,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{int}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<int> YShuffleG2_Base(Vector128<int> source, ShuffleControlG2 control) {
-                return YShuffleG2_Base(source.AsUInt32(), control).AsInt32();
+            public static Vector128<int> YShuffleG2_Basic(Vector128<int> source, ShuffleControlG2 control) {
+                return YShuffleG2_Basic(source.AsUInt32(), control).AsInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{uint}, ShuffleControlG2)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<uint> YShuffleG2_Base(Vector128<uint> source, ShuffleControlG2 control) {
+            public static Vector128<uint> YShuffleG2_Basic(Vector128<uint> source, ShuffleControlG2 control) {
                 UnsafeEx.SkipInit(out Vector128<uint> rt);
                 ref uint q = ref Unsafe.As<Vector128<uint>, uint>(ref rt);
                 ref uint p = ref Unsafe.As<Vector128<uint>, uint>(ref source);
@@ -183,14 +183,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{long}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<long> YShuffleG2_Base(Vector128<long> source, ShuffleControlG2 control) {
-                return YShuffleG2_Base(source.AsUInt64(), control).AsInt64();
+            public static Vector128<long> YShuffleG2_Basic(Vector128<long> source, ShuffleControlG2 control) {
+                return YShuffleG2_Basic(source.AsUInt64(), control).AsInt64();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{ulong}, ShuffleControlG2)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ulong> YShuffleG2_Base(Vector128<ulong> source, ShuffleControlG2 control) {
+            public static Vector128<ulong> YShuffleG2_Basic(Vector128<ulong> source, ShuffleControlG2 control) {
                 UnsafeEx.SkipInit(out Vector128<ulong> rt);
                 ref ulong q = ref Unsafe.As<Vector128<ulong>, ulong>(ref rt);
                 ref ulong p = ref Unsafe.As<Vector128<ulong>, ulong>(ref source);
@@ -293,7 +293,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Shuffle(source, Vector128Constants.GetYShuffleG4_Byte_Indices(control));
 #else
-                return YShuffleG4_Base(source, control);
+                return YShuffleG4_Basic(source, control);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -310,7 +310,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Shuffle(source.AsByte(), Vector128Constants.GetYShuffleG4_UInt16_ByteIndices(control)).AsUInt16();
 #else
-                return YShuffleG4_Base(source, control);
+                return YShuffleG4_Basic(source, control);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -327,26 +327,26 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Shuffle(source.AsByte(), Vector128Constants.GetYShuffleG4_UInt32_ByteIndices(control)).AsUInt32();
 #else
-                return YShuffleG4_Base(source, control);
+                return YShuffleG4_Basic(source, control);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{float}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<float> YShuffleG4_Base(Vector128<float> source, ShuffleControlG4 control) {
-                return YShuffleG4_Base(source.AsUInt32(), control).AsSingle();
+            public static Vector128<float> YShuffleG4_Basic(Vector128<float> source, ShuffleControlG4 control) {
+                return YShuffleG4_Basic(source.AsUInt32(), control).AsSingle();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{sbyte}, ShuffleControlG4)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<sbyte> YShuffleG4_Base(Vector128<sbyte> source, ShuffleControlG4 control) {
-                return YShuffleG4_Base(source.AsByte(), control).AsSByte();
+            public static Vector128<sbyte> YShuffleG4_Basic(Vector128<sbyte> source, ShuffleControlG4 control) {
+                return YShuffleG4_Basic(source.AsByte(), control).AsSByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{byte}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<byte> YShuffleG4_Base(Vector128<byte> source, ShuffleControlG4 control) {
+            public static Vector128<byte> YShuffleG4_Basic(Vector128<byte> source, ShuffleControlG4 control) {
                 UnsafeEx.SkipInit(out Vector128<byte> rt);
                 ref byte q = ref Unsafe.As<Vector128<byte>, byte>(ref rt);
                 ref byte p = ref Unsafe.As<Vector128<byte>, byte>(ref source);
@@ -360,14 +360,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{short}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<short> YShuffleG4_Base(Vector128<short> source, ShuffleControlG4 control) {
-                return YShuffleG4_Base(source.AsUInt16(), control).AsInt16();
+            public static Vector128<short> YShuffleG4_Basic(Vector128<short> source, ShuffleControlG4 control) {
+                return YShuffleG4_Basic(source.AsUInt16(), control).AsInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{ushort}, ShuffleControlG4)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ushort> YShuffleG4_Base(Vector128<ushort> source, ShuffleControlG4 control) {
+            public static Vector128<ushort> YShuffleG4_Basic(Vector128<ushort> source, ShuffleControlG4 control) {
                 UnsafeEx.SkipInit(out Vector128<ushort> rt);
                 ref ushort q = ref Unsafe.As<Vector128<ushort>, ushort>(ref rt);
                 ref ushort p = ref Unsafe.As<Vector128<ushort>, ushort>(ref source);
@@ -381,14 +381,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{int}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<int> YShuffleG4_Base(Vector128<int> source, ShuffleControlG4 control) {
-                return YShuffleG4_Base(source.AsUInt32(), control).AsInt32();
+            public static Vector128<int> YShuffleG4_Basic(Vector128<int> source, ShuffleControlG4 control) {
+                return YShuffleG4_Basic(source.AsUInt32(), control).AsInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{uint}, ShuffleControlG4)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<uint> YShuffleG4_Base(Vector128<uint> source, ShuffleControlG4 control) {
+            public static Vector128<uint> YShuffleG4_Basic(Vector128<uint> source, ShuffleControlG4 control) {
                 UnsafeEx.SkipInit(out Vector128<uint> rt);
                 ref uint q = ref Unsafe.As<Vector128<uint>, uint>(ref rt);
                 ref uint p = ref Unsafe.As<Vector128<uint>, uint>(ref source);
@@ -548,14 +548,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 ).AsUInt64();
                 return result0;
 #else
-                return YShuffleG4X2_Base(source0, source1, control, out result1);
+                return YShuffleG4X2_Basic(source0, source1, control, out result1);
 #endif // BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4X2(Vector128{ulong}, Vector128{ulong}, ShuffleControlG4, out Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ulong> YShuffleG4X2_Base(Vector128<ulong> source0, Vector128<ulong> source1, [ConstantExpected] ShuffleControlG4 control, out Vector128<ulong> result1) {
+            public static Vector128<ulong> YShuffleG4X2_Basic(Vector128<ulong> source0, Vector128<ulong> source1, [ConstantExpected] ShuffleControlG4 control, out Vector128<ulong> result1) {
                 //(Vector128<ulong> Result0, Vector128<ulong> Result1) rt = default;
                 UnsafeEx.SkipInit(out (Vector128<ulong> Result0, Vector128<ulong> Result1) rt);
                 ValueTuple<Vector128<ulong>, Vector128<ulong>> src = (source0, source1);
@@ -670,7 +670,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<byte> rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
 #else
-                return YShuffleInsert_Base(back, vector, indices);
+                return YShuffleInsert_Basic(back, vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -690,7 +690,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<ushort> rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
 #else
-                return YShuffleInsert_Base(back, vector, indices);
+                return YShuffleInsert_Basic(back, vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -710,7 +710,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<uint> rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
 #else
-                return YShuffleInsert_Base(back, vector, indices);
+                return YShuffleInsert_Basic(back, vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -730,13 +730,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<ulong> rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
 #else
-                return YShuffleInsert_Base(back, vector, indices);
+                return YShuffleInsert_Basic(back, vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<byte> YShuffleInsert_Base(Vector128<byte> back, Vector128<byte> vector, Vector128<byte> indices) {
+            public static Vector128<byte> YShuffleInsert_Basic(Vector128<byte> back, Vector128<byte> vector, Vector128<byte> indices) {
                 UnsafeEx.SkipInit(out Vector128<byte> rt);
                 byte cnt = (byte)Vector128<byte>.Count;
                 ref byte q = ref Unsafe.As<Vector128<byte>, byte>(ref rt);
@@ -757,7 +757,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ushort> YShuffleInsert_Base(Vector128<ushort> back, Vector128<ushort> vector, Vector128<ushort> indices) {
+            public static Vector128<ushort> YShuffleInsert_Basic(Vector128<ushort> back, Vector128<ushort> vector, Vector128<ushort> indices) {
                 UnsafeEx.SkipInit(out Vector128<ushort> rt);
                 ushort cnt = (ushort)Vector128<ushort>.Count;
                 ref ushort q = ref Unsafe.As<Vector128<ushort>, ushort>(ref rt);
@@ -778,7 +778,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<uint> YShuffleInsert_Base(Vector128<uint> back, Vector128<uint> vector, Vector128<uint> indices) {
+            public static Vector128<uint> YShuffleInsert_Basic(Vector128<uint> back, Vector128<uint> vector, Vector128<uint> indices) {
                 UnsafeEx.SkipInit(out Vector128<uint> rt);
                 uint cnt = (uint)Vector128<uint>.Count;
                 ref uint q = ref Unsafe.As<Vector128<uint>, uint>(ref rt);
@@ -799,7 +799,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ulong> YShuffleInsert_Base(Vector128<ulong> back, Vector128<ulong> vector, Vector128<ulong> indices) {
+            public static Vector128<ulong> YShuffleInsert_Basic(Vector128<ulong> back, Vector128<ulong> vector, Vector128<ulong> indices) {
                 UnsafeEx.SkipInit(out Vector128<ulong> rt);
                 ulong cnt = (ulong)Vector128<ulong>.Count;
                 ref ulong q = ref Unsafe.As<Vector128<ulong>, ulong>(ref rt);
@@ -948,7 +948,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
 #else
                 _ = args2;
-                return YShuffleInsert_Base(back, vector, args0);
+                return YShuffleInsert_Basic(back, vector, args0);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -969,7 +969,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
 #else
                 _ = args2;
-                return YShuffleInsert_Base(back, vector, args0);
+                return YShuffleInsert_Basic(back, vector, args0);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -990,7 +990,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
 #else
                 _ = args2;
-                return YShuffleInsert_Base(back, vector, args0);
+                return YShuffleInsert_Basic(back, vector, args0);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1011,7 +1011,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
 #else
                 _ = args2;
-                return YShuffleInsert_Base(back, vector, args0);
+                return YShuffleInsert_Basic(back, vector, args0);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 

@@ -28,7 +28,7 @@ namespace Zyl.VectorTraits.Impl {
                 return Shuffle_AdvSimd(vector, indices);
             }
 #endif // NET5_0_OR_GREATER
-            return Shuffle_Base(vector, indices);
+            return Shuffle_Basic(vector, indices);
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{ushort}, Vector128{ushort})"/>
@@ -40,12 +40,12 @@ namespace Zyl.VectorTraits.Impl {
                 return Shuffle_AdvSimd(vector, indices);
             }
 #endif // NET5_0_OR_GREATER
-            return Shuffle_Base(vector, indices);
+            return Shuffle_Basic(vector, indices);
         }
 
         /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<byte> Shuffle_Base(Vector128<byte> vector, Vector128<byte> indices) {
+        public static Vector128<byte> Shuffle_Basic(Vector128<byte> vector, Vector128<byte> indices) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             return Vector128.Shuffle(vector, indices);
 #else
@@ -56,7 +56,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{ushort}, Vector128{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ushort> Shuffle_Base(Vector128<ushort> vector, Vector128<ushort> indices) {
+        public static Vector128<ushort> Shuffle_Basic(Vector128<ushort> vector, Vector128<ushort> indices) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             return Vector128.Shuffle(vector, indices);
 #else
@@ -131,7 +131,7 @@ namespace Zyl.VectorTraits.Impl {
                 return YShuffleInsert_AdvSimd(back, vector, indices);
             }
 #endif // NET5_0_OR_GREATER
-            return YShuffleInsert_Base(back, vector, indices);
+            return YShuffleInsert_Basic(back, vector, indices);
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
@@ -143,12 +143,12 @@ namespace Zyl.VectorTraits.Impl {
                 return YShuffleInsert_AdvSimd(back, vector, indices);
             }
 #endif // NET5_0_OR_GREATER
-            return YShuffleInsert_Base(back, vector, indices);
+            return YShuffleInsert_Basic(back, vector, indices);
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<byte> YShuffleInsert_Base(Vector128<byte> back, Vector128<byte> vector, Vector128<byte> indices) {
+        public static Vector128<byte> YShuffleInsert_Basic(Vector128<byte> back, Vector128<byte> vector, Vector128<byte> indices) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             Vector128<byte> mask = Vector128.GreaterThan(Vector128.Create((byte)Vector128<byte>.Count), indices);
             Vector128<byte> raw = Vector128.Shuffle(vector, indices);
@@ -162,7 +162,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ushort> YShuffleInsert_Base(Vector128<ushort> back, Vector128<ushort> vector, Vector128<ushort> indices) {
+        public static Vector128<ushort> YShuffleInsert_Basic(Vector128<ushort> back, Vector128<ushort> vector, Vector128<ushort> indices) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             Vector128<ushort> mask = Vector128.GreaterThan(Vector128.Create((ushort)Vector128<ushort>.Count), indices);
             Vector128<ushort> raw = Vector128.Shuffle(vector, indices);
@@ -258,7 +258,7 @@ namespace Zyl.VectorTraits.Impl {
                 return YShuffleKernel_AdvSimd(vector, indices);
             }
 #endif // NET5_0_OR_GREATER
-            return YShuffleKernel_Base(vector, indices);
+            return YShuffleKernel_Basic(vector, indices);
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YShuffleKernel(Vector128{short}, Vector128{short})"/>
@@ -276,20 +276,20 @@ namespace Zyl.VectorTraits.Impl {
                 return YShuffleKernel_AdvSimd(vector, indices);
             }
 #endif // NET5_0_OR_GREATER
-            return YShuffleKernel_Base(vector, indices);
+            return YShuffleKernel_Basic(vector, indices);
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YShuffleKernel(Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<byte> YShuffleKernel_Base(Vector128<byte> vector, Vector128<byte> indices) {
-            return Shuffle_Base(vector, indices);
+        public static Vector128<byte> YShuffleKernel_Basic(Vector128<byte> vector, Vector128<byte> indices) {
+            return Shuffle_Basic(vector, indices);
         }
 
         /// <inheritdoc cref="IWVectorTraits128.YShuffleKernel(Vector128{ushort}, Vector128{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector128<ushort> YShuffleKernel_Base(Vector128<ushort> vector, Vector128<ushort> indices) {
-            return Shuffle_Base(vector, indices);
+        public static Vector128<ushort> YShuffleKernel_Basic(Vector128<ushort> vector, Vector128<ushort> indices) {
+            return Shuffle_Basic(vector, indices);
         }
 
 #if NET5_0_OR_GREATER

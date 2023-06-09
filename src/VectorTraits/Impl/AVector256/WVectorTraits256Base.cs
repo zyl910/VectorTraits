@@ -93,7 +93,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Ceiling(value);
 #else
-                return Ceiling_Base(value);
+                return Ceiling_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -103,13 +103,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Ceiling(value);
 #else
-                return Ceiling_Base(value);
+                return Ceiling_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Ceiling(Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<float> Ceiling_Base(Vector256<float> value) {
+            public static unsafe Vector256<float> Ceiling_Basic(Vector256<float> value) {
                 Vector256<float> rt = value;
                 float* p = (float*)&rt;
                 p[0] = MathF.Ceiling(p[0]);
@@ -125,7 +125,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Ceiling(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<double> Ceiling_Base(Vector256<double> value) {
+            public static unsafe Vector256<double> Ceiling_Basic(Vector256<double> value) {
                 Vector256<double> rt = value;
                 double* p = (double*)&rt;
                 p[0] = Math.Ceiling(p[0]);
@@ -152,7 +152,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ConvertToDouble(value);
 #else
-                return ConvertToDouble_Base(value);
+                return ConvertToDouble_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -163,13 +163,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ConvertToDouble(value);
 #else
-                return ConvertToDouble_Base(value);
+                return ConvertToDouble_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> ConvertToDouble_Base(Vector256<long> value) {
+            public static Vector256<double> ConvertToDouble_Basic(Vector256<long> value) {
                 UnsafeEx.SkipInit(out Vector256<double> rt);
                 ref double prt = ref Unsafe.As<Vector256<double>, double>(ref rt);
                 ref long p = ref Unsafe.As<Vector256<long>, long>(ref value);
@@ -183,7 +183,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> ConvertToDouble_Base(Vector256<ulong> value) {
+            public static Vector256<double> ConvertToDouble_Basic(Vector256<ulong> value) {
                 UnsafeEx.SkipInit(out Vector256<double> rt);
                 ref double prt = ref Unsafe.As<Vector256<double>, double>(ref rt);
                 ref ulong p = ref Unsafe.As<Vector256<ulong>, ulong>(ref value);
@@ -214,13 +214,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ConvertToInt32(value);
 #else
-                return ConvertToInt32_Base(value);
+                return ConvertToInt32_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt32(Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> ConvertToInt32_Base(Vector256<float> value) {
+            public static Vector256<int> ConvertToInt32_Basic(Vector256<float> value) {
                 UnsafeEx.SkipInit(out Vector256<int> rt);
                 ref int prt = ref Unsafe.As<Vector256<int>, int>(ref rt);
                 ref float p = ref Unsafe.As<Vector256<float>, float>(ref value);
@@ -255,13 +255,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ConvertToInt64(value);
 #else
-                return ConvertToInt64_Base(value);
+                return ConvertToInt64_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> ConvertToInt64_Base(Vector256<double> value) {
+            public static Vector256<long> ConvertToInt64_Basic(Vector256<double> value) {
                 UnsafeEx.SkipInit(out Vector256<long> rt);
                 ref long prt = ref Unsafe.As<Vector256<long>, long>(ref rt);
                 ref double p = ref Unsafe.As<Vector256<double>, double>(ref value);
@@ -292,7 +292,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ConvertToSingle(value);
 #else
-                return ConvertToSingle_Base(value);
+                return ConvertToSingle_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -303,13 +303,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ConvertToSingle(value);
 #else
-                return ConvertToSingle_Base(value);
+                return ConvertToSingle_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<float> ConvertToSingle_Base(Vector256<int> value) {
+            public static Vector256<float> ConvertToSingle_Basic(Vector256<int> value) {
                 UnsafeEx.SkipInit(out Vector256<float> rt);
                 ref float prt = ref Unsafe.As<Vector256<float>, float>(ref rt);
                 ref int p = ref Unsafe.As<Vector256<int>, int>(ref value);
@@ -327,7 +327,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<float> ConvertToSingle_Base(Vector256<uint> value) {
+            public static Vector256<float> ConvertToSingle_Basic(Vector256<uint> value) {
                 UnsafeEx.SkipInit(out Vector256<float> rt);
                 ref float prt = ref Unsafe.As<Vector256<float>, float>(ref rt);
                 ref uint p = ref Unsafe.As<Vector256<uint>, uint>(ref value);
@@ -357,14 +357,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ConvertToUInt32(value);
 #else
-                return ConvertToUInt32_Base(value);
+                return ConvertToUInt32_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<uint> ConvertToUInt32_Base(Vector256<float> value) {
+            public static Vector256<uint> ConvertToUInt32_Basic(Vector256<float> value) {
                 UnsafeEx.SkipInit(out Vector256<uint> rt);
                 ref uint prt = ref Unsafe.As<Vector256<uint>, uint>(ref rt);
                 ref float p = ref Unsafe.As<Vector256<float>, float>(ref value);
@@ -394,14 +394,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ConvertToUInt64(value);
 #else
-                return ConvertToUInt64_Base(value);
+                return ConvertToUInt64_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64(Vector256{double})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ulong> ConvertToUInt64_Base(Vector256<double> value) {
+            public static Vector256<ulong> ConvertToUInt64_Basic(Vector256<double> value) {
                 UnsafeEx.SkipInit(out Vector256<ulong> rt);
                 ref ulong prt = ref Unsafe.As<Vector256<ulong>, ulong>(ref rt);
                 ref double p = ref Unsafe.As<Vector256<double>, double>(ref value);
@@ -433,7 +433,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ExtractMostSignificantBits(vector);
 #else
-                return ExtractMostSignificantBits_Base(vector);
+                return ExtractMostSignificantBits_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -444,7 +444,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ExtractMostSignificantBits(vector);
 #else
-                return ExtractMostSignificantBits_Base(vector);
+                return ExtractMostSignificantBits_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -455,7 +455,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ExtractMostSignificantBits(vector);
 #else
-                return ExtractMostSignificantBits_Base(vector);
+                return ExtractMostSignificantBits_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -466,7 +466,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ExtractMostSignificantBits(vector);
 #else
-                return ExtractMostSignificantBits_Base(vector);
+                return ExtractMostSignificantBits_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -477,7 +477,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ExtractMostSignificantBits(vector);
 #else
-                return ExtractMostSignificantBits_Base(vector);
+                return ExtractMostSignificantBits_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -488,7 +488,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ExtractMostSignificantBits(vector);
 #else
-                return ExtractMostSignificantBits_Base(vector);
+                return ExtractMostSignificantBits_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -499,7 +499,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ExtractMostSignificantBits(vector);
 #else
-                return ExtractMostSignificantBits_Base(vector);
+                return ExtractMostSignificantBits_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -510,7 +510,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ExtractMostSignificantBits(vector);
 #else
-                return ExtractMostSignificantBits_Base(vector);
+                return ExtractMostSignificantBits_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -521,7 +521,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ExtractMostSignificantBits(vector);
 #else
-                return ExtractMostSignificantBits_Base(vector);
+                return ExtractMostSignificantBits_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -532,35 +532,35 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ExtractMostSignificantBits(vector);
 #else
-                return ExtractMostSignificantBits_Base(vector);
+                return ExtractMostSignificantBits_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{float})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits_Base(Vector256<float> vector) {
-                return ExtractMostSignificantBits_Base(vector.AsUInt32());
+            public static uint ExtractMostSignificantBits_Basic(Vector256<float> vector) {
+                return ExtractMostSignificantBits_Basic(vector.AsUInt32());
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{double})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits_Base(Vector256<double> vector) {
-                return ExtractMostSignificantBits_Base(vector.AsUInt64());
+            public static uint ExtractMostSignificantBits_Basic(Vector256<double> vector) {
+                return ExtractMostSignificantBits_Basic(vector.AsUInt64());
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits_Base(Vector256<sbyte> vector) {
-                return Statics.ExtractMostSignificantBits_Base(vector.AsByte());
+            public static uint ExtractMostSignificantBits_Basic(Vector256<sbyte> vector) {
+                return Statics.ExtractMostSignificantBits_Basic(vector.AsByte());
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{byte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits_Base(Vector256<byte> vector) {
+            public static uint ExtractMostSignificantBits_Basic(Vector256<byte> vector) {
                 ref byte p = ref Unsafe.As<Vector256<byte>, byte>(ref vector);
                 uint rt = BitMath.GetMostSignificantBit(p)
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
@@ -601,14 +601,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{short})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits_Base(Vector256<short> vector) {
-                return ExtractMostSignificantBits_Base(vector.AsUInt16());
+            public static uint ExtractMostSignificantBits_Basic(Vector256<short> vector) {
+                return ExtractMostSignificantBits_Basic(vector.AsUInt16());
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits_Base(Vector256<ushort> vector) {
+            public static uint ExtractMostSignificantBits_Basic(Vector256<ushort> vector) {
                 ref ushort p = ref Unsafe.As<Vector256<ushort>, ushort>(ref vector);
                 uint rt = BitMath.GetMostSignificantBit(p)
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
@@ -633,14 +633,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{int})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits_Base(Vector256<int> vector) {
-                return ExtractMostSignificantBits_Base(vector.AsUInt32());
+            public static uint ExtractMostSignificantBits_Basic(Vector256<int> vector) {
+                return ExtractMostSignificantBits_Basic(vector.AsUInt32());
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits_Base(Vector256<uint> vector) {
+            public static uint ExtractMostSignificantBits_Basic(Vector256<uint> vector) {
                 ref uint p = ref Unsafe.As<Vector256<uint>, uint>(ref vector);
                 uint rt = BitMath.GetMostSignificantBit(p)
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
@@ -657,14 +657,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{long})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits_Base(Vector256<long> vector) {
-                return ExtractMostSignificantBits_Base(vector.AsUInt64());
+            public static uint ExtractMostSignificantBits_Basic(Vector256<long> vector) {
+                return ExtractMostSignificantBits_Basic(vector.AsUInt64());
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits(Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits_Base(Vector256<ulong> vector) {
+            public static uint ExtractMostSignificantBits_Basic(Vector256<ulong> vector) {
                 ref ulong p = ref Unsafe.As<Vector256<ulong>, ulong>(ref vector);
                 uint rt = BitMath.GetMostSignificantBit(p)
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
@@ -694,7 +694,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Floor(value);
 #else
-                return Floor_Base(value);
+                return Floor_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -704,13 +704,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Floor(value);
 #else
-                return Floor_Base(value);
+                return Floor_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Floor(Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<float> Floor_Base(Vector256<float> value) {
+            public static unsafe Vector256<float> Floor_Basic(Vector256<float> value) {
                 Vector256<float> rt = value;
                 float* p = (float*)&rt;
                 p[0] = MathF.Floor(p[0]);
@@ -726,7 +726,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Floor(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<double> Floor_Base(Vector256<double> value) {
+            public static unsafe Vector256<double> Floor_Basic(Vector256<double> value) {
                 Vector256<double> rt = value;
                 double* p = (double*)&rt;
                 p[0] = Math.Floor(p[0]);
@@ -756,7 +756,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Narrow(lower, upper);
 #else
-                return Narrow_Base(lower, upper);
+                return Narrow_Basic(lower, upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -767,7 +767,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Narrow(lower, upper);
 #else
-                return Narrow_Base(lower, upper);
+                return Narrow_Basic(lower, upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -778,7 +778,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Narrow(lower, upper);
 #else
-                return Narrow_Base(lower, upper);
+                return Narrow_Basic(lower, upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -788,7 +788,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Narrow(lower, upper);
 #else
-                return Narrow_Base(lower, upper);
+                return Narrow_Basic(lower, upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -799,7 +799,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Narrow(lower, upper);
 #else
-                return Narrow_Base(lower, upper);
+                return Narrow_Basic(lower, upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -809,7 +809,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Narrow(lower, upper);
 #else
-                return Narrow_Base(lower, upper);
+                return Narrow_Basic(lower, upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -820,13 +820,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Narrow(lower, upper);
 #else
-                return Narrow_Base(lower, upper);
+                return Narrow_Basic(lower, upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{double}, Vector256{double})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<float> Narrow_Base(Vector256<double> lower, Vector256<double> upper) {
+            public static Vector256<float> Narrow_Basic(Vector256<double> lower, Vector256<double> upper) {
                 nint cnt = Vector256<double>.Count;
                 UnsafeEx.SkipInit(out Vector256<float> rt);
                 ref float p = ref Unsafe.As<Vector256<float>, float>(ref rt);
@@ -847,7 +847,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{short}, Vector256{short})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> Narrow_Base(Vector256<short> lower, Vector256<short> upper) {
+            public static Vector256<sbyte> Narrow_Basic(Vector256<short> lower, Vector256<short> upper) {
                 nint cnt = Vector256<short>.Count;
                 UnsafeEx.SkipInit(out Vector256<sbyte> rt);
                 ref sbyte p = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref rt);
@@ -892,7 +892,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{ushort}, Vector256{ushort})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> Narrow_Base(Vector256<ushort> lower, Vector256<ushort> upper) {
+            public static Vector256<byte> Narrow_Basic(Vector256<ushort> lower, Vector256<ushort> upper) {
                 nint cnt = Vector256<ushort>.Count;
                 UnsafeEx.SkipInit(out Vector256<byte> rt);
                 ref byte p = ref Unsafe.As<Vector256<byte>, byte>(ref rt);
@@ -936,7 +936,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{int}, Vector256{int})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> Narrow_Base(Vector256<int> lower, Vector256<int> upper) {
+            public static Vector256<short> Narrow_Basic(Vector256<int> lower, Vector256<int> upper) {
                 nint cnt = Vector256<int>.Count;
                 UnsafeEx.SkipInit(out Vector256<short> rt);
                 ref short p = ref Unsafe.As<Vector256<short>, short>(ref rt);
@@ -965,7 +965,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{uint}, Vector256{uint})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ushort> Narrow_Base(Vector256<uint> lower, Vector256<uint> upper) {
+            public static Vector256<ushort> Narrow_Basic(Vector256<uint> lower, Vector256<uint> upper) {
                 nint cnt = Vector256<uint>.Count;
                 UnsafeEx.SkipInit(out Vector256<ushort> rt);
                 ref ushort p = ref Unsafe.As<Vector256<ushort>, ushort>(ref rt);
@@ -993,7 +993,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{long}, Vector256{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> Narrow_Base(Vector256<long> lower, Vector256<long> upper) {
+            public static Vector256<int> Narrow_Basic(Vector256<long> lower, Vector256<long> upper) {
                 nint cnt = Vector256<long>.Count;
                 UnsafeEx.SkipInit(out Vector256<int> rt);
                 ref int p = ref Unsafe.As<Vector256<int>, int>(ref rt);
@@ -1014,7 +1014,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{ulong}, Vector256{ulong})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<uint> Narrow_Base(Vector256<ulong> lower, Vector256<ulong> upper) {
+            public static Vector256<uint> Narrow_Basic(Vector256<ulong> lower, Vector256<ulong> upper) {
                 nint cnt = Vector256<ulong>.Count;
                 UnsafeEx.SkipInit(out Vector256<uint> rt);
                 ref uint p = ref Unsafe.As<Vector256<uint>, uint>(ref rt);
@@ -1053,7 +1053,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-                return ShiftLeft_Base(value, shiftAmount);
+                return ShiftLeft_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1063,7 +1063,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-                return ShiftLeft_Base(value, shiftAmount);
+                return ShiftLeft_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1073,7 +1073,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount);
 #else
-                return ShiftLeft_Base(value, shiftAmount);
+                return ShiftLeft_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1084,7 +1084,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount);
 #else
-                return ShiftLeft_Base(value, shiftAmount);
+                return ShiftLeft_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1094,7 +1094,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount);
 #else
-                return ShiftLeft_Base(value, shiftAmount);
+                return ShiftLeft_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1105,7 +1105,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount);
 #else
-                return ShiftLeft_Base(value, shiftAmount);
+                return ShiftLeft_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1115,7 +1115,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount);
 #else
-                return ShiftLeft_Base(value, shiftAmount);
+                return ShiftLeft_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1126,68 +1126,68 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount);
 #else
-                return ShiftLeft_Base(value, shiftAmount);
+                return ShiftLeft_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> ShiftLeft_Base(Vector256<sbyte> value, int shiftAmount) {
+            public static Vector256<sbyte> ShiftLeft_Basic(Vector256<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> ShiftLeft_Base(Vector256<byte> value, int shiftAmount) {
+            public static Vector256<byte> ShiftLeft_Basic(Vector256<byte> value, int shiftAmount) {
                 shiftAmount &= 7;
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> ShiftLeft_Base(Vector256<short> value, int shiftAmount) {
+            public static Vector256<short> ShiftLeft_Basic(Vector256<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ushort> ShiftLeft_Base(Vector256<ushort> value, int shiftAmount) {
+            public static Vector256<ushort> ShiftLeft_Basic(Vector256<ushort> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> ShiftLeft_Base(Vector256<int> value, int shiftAmount) {
+            public static Vector256<int> ShiftLeft_Basic(Vector256<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<uint> ShiftLeft_Base(Vector256<uint> value, int shiftAmount) {
+            public static Vector256<uint> ShiftLeft_Basic(Vector256<uint> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> ShiftLeft_Base(Vector256<long> value, int shiftAmount) {
+            public static Vector256<long> ShiftLeft_Basic(Vector256<long> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft(Vector256{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ulong> ShiftLeft_Base(Vector256<ulong> value, int shiftAmount) {
+            public static Vector256<ulong> ShiftLeft_Basic(Vector256<ulong> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Args(Vector256{sbyte}, int, out Vector256{sbyte})"/>
@@ -1461,7 +1461,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1471,7 +1471,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1481,7 +1481,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount);
 #else
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1492,7 +1492,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount);
 #else
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1502,7 +1502,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount);
 #else
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1513,7 +1513,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount);
 #else
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1523,7 +1523,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount);
 #else
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1534,20 +1534,20 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftLeft(value, shiftAmount);
 #else
-                return ShiftLeft_Fast_Base(value, shiftAmount);
+                return ShiftLeft_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> ShiftLeft_Fast_Base(Vector256<sbyte> value, int shiftAmount) {
-                return ShiftLeft_Fast_Base(value.AsByte(), shiftAmount).AsSByte();
+            public static Vector256<sbyte> ShiftLeft_Fast_Basic(Vector256<sbyte> value, int shiftAmount) {
+                return ShiftLeft_Fast_Basic(value.AsByte(), shiftAmount).AsSByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> ShiftLeft_Fast_Base(Vector256<byte> value, int shiftAmount) {
+            public static Vector256<byte> ShiftLeft_Fast_Basic(Vector256<byte> value, int shiftAmount) {
                 Vector256<byte> rt = value;
                 ref byte p = ref Unsafe.As<Vector256<byte>, byte>(ref rt);
                 p <<= shiftAmount;
@@ -1587,7 +1587,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> ShiftLeft_Fast_Base(Vector256<short> value, int shiftAmount) {
+            public static Vector256<short> ShiftLeft_Fast_Basic(Vector256<short> value, int shiftAmount) {
                 Vector256<short> rt = value;
                 ref short p = ref Unsafe.As<Vector256<short>, short>(ref rt);
                 p <<= shiftAmount;
@@ -1612,13 +1612,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ushort> ShiftLeft_Fast_Base(Vector256<ushort> value, int shiftAmount) {
-                return ShiftLeft_Fast_Base(value.AsInt16(), shiftAmount).AsUInt16();
+            public static Vector256<ushort> ShiftLeft_Fast_Basic(Vector256<ushort> value, int shiftAmount) {
+                return ShiftLeft_Fast_Basic(value.AsInt16(), shiftAmount).AsUInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> ShiftLeft_Fast_Base(Vector256<int> value, int shiftAmount) {
+            public static Vector256<int> ShiftLeft_Fast_Basic(Vector256<int> value, int shiftAmount) {
                 Vector256<int> rt = value;
                 ref int p = ref Unsafe.As<Vector256<int>, int>(ref rt);
                 p <<= shiftAmount;
@@ -1635,13 +1635,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<uint> ShiftLeft_Fast_Base(Vector256<uint> value, int shiftAmount) {
-                return ShiftLeft_Fast_Base(value.AsInt32(), shiftAmount).AsUInt32();
+            public static Vector256<uint> ShiftLeft_Fast_Basic(Vector256<uint> value, int shiftAmount) {
+                return ShiftLeft_Fast_Basic(value.AsInt32(), shiftAmount).AsUInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> ShiftLeft_Fast_Base(Vector256<long> value, int shiftAmount) {
+            public static Vector256<long> ShiftLeft_Fast_Basic(Vector256<long> value, int shiftAmount) {
                 Vector256<long> rt = value;
                 ref long p = ref Unsafe.As<Vector256<long>, long>(ref rt);
                 p <<= shiftAmount;
@@ -1654,8 +1654,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftLeft_Fast(Vector256{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ulong> ShiftLeft_Fast_Base(Vector256<ulong> value, int shiftAmount) {
-                return ShiftLeft_Fast_Base(value.AsInt64(), shiftAmount).AsUInt64();
+            public static Vector256<ulong> ShiftLeft_Fast_Basic(Vector256<ulong> value, int shiftAmount) {
+                return ShiftLeft_Fast_Basic(value.AsInt64(), shiftAmount).AsUInt64();
             }
 
 
@@ -1679,7 +1679,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-                return ShiftRightArithmetic_Base(value, shiftAmount);
+                return ShiftRightArithmetic_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1689,7 +1689,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightArithmetic(value, shiftAmount);
 #else
-                return ShiftRightArithmetic_Base(value, shiftAmount);
+                return ShiftRightArithmetic_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1699,7 +1699,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightArithmetic(value, shiftAmount);
 #else
-                return ShiftRightArithmetic_Base(value, shiftAmount);
+                return ShiftRightArithmetic_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1709,37 +1709,37 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-                return ShiftRightArithmetic_Base(value, shiftAmount);
+                return ShiftRightArithmetic_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> ShiftRightArithmetic_Base(Vector256<sbyte> value, int shiftAmount) {
+            public static Vector256<sbyte> ShiftRightArithmetic_Basic(Vector256<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
-                return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
+                return ShiftRightArithmetic_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> ShiftRightArithmetic_Base(Vector256<short> value, int shiftAmount) {
+            public static Vector256<short> ShiftRightArithmetic_Basic(Vector256<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
-                return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
+                return ShiftRightArithmetic_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> ShiftRightArithmetic_Base(Vector256<int> value, int shiftAmount) {
+            public static Vector256<int> ShiftRightArithmetic_Basic(Vector256<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
-                return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
+                return ShiftRightArithmetic_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> ShiftRightArithmetic_Base(Vector256<long> value, int shiftAmount) {
+            public static Vector256<long> ShiftRightArithmetic_Basic(Vector256<long> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
-                return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
+                return ShiftRightArithmetic_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Args(Vector256{sbyte}, int, out Vector256{sbyte})"/>
@@ -1877,7 +1877,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-                return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
+                return ShiftRightArithmetic_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1887,7 +1887,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightArithmetic(value, shiftAmount);
 #else
-                return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
+                return ShiftRightArithmetic_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1897,7 +1897,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightArithmetic(value, shiftAmount);
 #else
-                return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
+                return ShiftRightArithmetic_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -1907,14 +1907,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightArithmetic(value, shiftAmount);
 #else
-                return ShiftRightArithmetic_Fast_Base(value, shiftAmount);
+                return ShiftRightArithmetic_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> ShiftRightArithmetic_Fast_Base(Vector256<sbyte> value, int shiftAmount) {
+            public static Vector256<sbyte> ShiftRightArithmetic_Fast_Basic(Vector256<sbyte> value, int shiftAmount) {
                 Vector256<sbyte> rt = value;
                 ref sbyte p = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref rt);
                 p >>= shiftAmount;
@@ -1954,7 +1954,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> ShiftRightArithmetic_Fast_Base(Vector256<short> value, int shiftAmount) {
+            public static Vector256<short> ShiftRightArithmetic_Fast_Basic(Vector256<short> value, int shiftAmount) {
                 Vector256<short> rt = value;
                 ref short p = ref Unsafe.As<Vector256<short>, short>(ref rt);
                 p >>= shiftAmount;
@@ -1978,7 +1978,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> ShiftRightArithmetic_Fast_Base(Vector256<int> value, int shiftAmount) {
+            public static Vector256<int> ShiftRightArithmetic_Fast_Basic(Vector256<int> value, int shiftAmount) {
                 Vector256<int> rt = value;
                 ref int p = ref Unsafe.As<Vector256<int>, int>(ref rt);
                 p >>= shiftAmount;
@@ -1994,7 +1994,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> ShiftRightArithmetic_Fast_Base(Vector256<long> value, int shiftAmount) {
+            public static Vector256<long> ShiftRightArithmetic_Fast_Basic(Vector256<long> value, int shiftAmount) {
                 Vector256<long> rt = value;
                 ref long p = ref Unsafe.As<Vector256<long>, long>(ref rt);
                 p >>= shiftAmount;
@@ -2025,7 +2025,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-                return ShiftRightLogical_Base(value, shiftAmount);
+                return ShiftRightLogical_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -2035,7 +2035,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-                return ShiftRightLogical_Base(value, shiftAmount);
+                return ShiftRightLogical_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -2045,7 +2045,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount);
 #else
-                return ShiftRightLogical_Base(value, shiftAmount);
+                return ShiftRightLogical_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -2056,7 +2056,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount);
 #else
-                return ShiftRightLogical_Base(value, shiftAmount);
+                return ShiftRightLogical_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -2066,7 +2066,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount);
 #else
-                return ShiftRightLogical_Base(value, shiftAmount);
+                return ShiftRightLogical_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -2077,7 +2077,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount);
 #else
-                return ShiftRightLogical_Base(value, shiftAmount);
+                return ShiftRightLogical_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -2087,7 +2087,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount);
 #else
-                return ShiftRightLogical_Base(value, shiftAmount);
+                return ShiftRightLogical_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -2098,68 +2098,68 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount);
 #else
-                return ShiftRightLogical_Base(value, shiftAmount);
+                return ShiftRightLogical_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> ShiftRightLogical_Base(Vector256<sbyte> value, int shiftAmount) {
+            public static Vector256<sbyte> ShiftRightLogical_Basic(Vector256<sbyte> value, int shiftAmount) {
                 shiftAmount &= 7;
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> ShiftRightLogical_Base(Vector256<byte> value, int shiftAmount) {
+            public static Vector256<byte> ShiftRightLogical_Basic(Vector256<byte> value, int shiftAmount) {
                 shiftAmount &= 7;
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> ShiftRightLogical_Base(Vector256<short> value, int shiftAmount) {
+            public static Vector256<short> ShiftRightLogical_Basic(Vector256<short> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ushort> ShiftRightLogical_Base(Vector256<ushort> value, int shiftAmount) {
+            public static Vector256<ushort> ShiftRightLogical_Basic(Vector256<ushort> value, int shiftAmount) {
                 shiftAmount &= 0x0F;
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> ShiftRightLogical_Base(Vector256<int> value, int shiftAmount) {
+            public static Vector256<int> ShiftRightLogical_Basic(Vector256<int> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<uint> ShiftRightLogical_Base(Vector256<uint> value, int shiftAmount) {
+            public static Vector256<uint> ShiftRightLogical_Basic(Vector256<uint> value, int shiftAmount) {
                 shiftAmount &= 0x1F;
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> ShiftRightLogical_Base(Vector256<long> value, int shiftAmount) {
+            public static Vector256<long> ShiftRightLogical_Basic(Vector256<long> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical(Vector256{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ulong> ShiftRightLogical_Base(Vector256<ulong> value, int shiftAmount) {
+            public static Vector256<ulong> ShiftRightLogical_Basic(Vector256<ulong> value, int shiftAmount) {
                 shiftAmount &= 0x3F;
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Args(Vector256{sbyte}, int, out Vector256{sbyte})"/>
@@ -2433,7 +2433,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -2443,7 +2443,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
 #else
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -2453,7 +2453,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount);
 #else
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -2464,7 +2464,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount);
 #else
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -2474,7 +2474,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount);
 #else
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -2485,7 +2485,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount);
 #else
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -2495,7 +2495,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount);
 #else
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
@@ -2506,20 +2506,20 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.ShiftRightLogical(value, shiftAmount);
 #else
-                return ShiftRightLogical_Fast_Base(value, shiftAmount);
+                return ShiftRightLogical_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> ShiftRightLogical_Fast_Base(Vector256<sbyte> value, int shiftAmount) {
-                return ShiftRightLogical_Fast_Base(value.AsByte(), shiftAmount).AsSByte();
+            public static Vector256<sbyte> ShiftRightLogical_Fast_Basic(Vector256<sbyte> value, int shiftAmount) {
+                return ShiftRightLogical_Fast_Basic(value.AsByte(), shiftAmount).AsSByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> ShiftRightLogical_Fast_Base(Vector256<byte> value, int shiftAmount) {
+            public static Vector256<byte> ShiftRightLogical_Fast_Basic(Vector256<byte> value, int shiftAmount) {
                 Vector256<byte> rt = value;
                 ref byte p = ref Unsafe.As<Vector256<byte>, byte>(ref rt);
                 p >>= shiftAmount;
@@ -2559,14 +2559,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> ShiftRightLogical_Fast_Base(Vector256<short> value, int shiftAmount) {
-                return ShiftRightLogical_Fast_Base(value.AsUInt16(), shiftAmount).AsInt16();
+            public static Vector256<short> ShiftRightLogical_Fast_Basic(Vector256<short> value, int shiftAmount) {
+                return ShiftRightLogical_Fast_Basic(value.AsUInt16(), shiftAmount).AsInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ushort> ShiftRightLogical_Fast_Base(Vector256<ushort> value, int shiftAmount) {
+            public static Vector256<ushort> ShiftRightLogical_Fast_Basic(Vector256<ushort> value, int shiftAmount) {
                 Vector256<ushort> rt = value;
                 ref ushort p = ref Unsafe.As<Vector256<ushort>, ushort>(ref rt);
                 p >>= shiftAmount;
@@ -2590,14 +2590,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> ShiftRightLogical_Fast_Base(Vector256<int> value, int shiftAmount) {
-                return ShiftRightLogical_Fast_Base(value.AsUInt32(), shiftAmount).AsInt32();
+            public static Vector256<int> ShiftRightLogical_Fast_Basic(Vector256<int> value, int shiftAmount) {
+                return ShiftRightLogical_Fast_Basic(value.AsUInt32(), shiftAmount).AsInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<uint> ShiftRightLogical_Fast_Base(Vector256<uint> value, int shiftAmount) {
+            public static Vector256<uint> ShiftRightLogical_Fast_Basic(Vector256<uint> value, int shiftAmount) {
                 Vector256<uint> rt = value;
                 ref uint p = ref Unsafe.As<Vector256<uint>, uint>(ref rt);
                 p >>= shiftAmount;
@@ -2613,14 +2613,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> ShiftRightLogical_Fast_Base(Vector256<long> value, int shiftAmount) {
-                return ShiftRightLogical_Fast_Base(value.AsUInt64(), shiftAmount).AsInt64();
+            public static Vector256<long> ShiftRightLogical_Fast_Basic(Vector256<long> value, int shiftAmount) {
+                return ShiftRightLogical_Fast_Basic(value.AsUInt64(), shiftAmount).AsInt64();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightLogical_Fast(Vector256{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ulong> ShiftRightLogical_Fast_Base(Vector256<ulong> value, int shiftAmount) {
+            public static Vector256<ulong> ShiftRightLogical_Fast_Basic(Vector256<ulong> value, int shiftAmount) {
                 Vector256<ulong> rt = value;
                 ref ulong p = ref Unsafe.As<Vector256<ulong>, ulong>(ref rt);
                 p >>= shiftAmount;
@@ -2650,7 +2650,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Shuffle(vector, indices);
 #else
-                return Shuffle_Base(vector, indices);
+                return Shuffle_Basic(vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2660,7 +2660,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Shuffle(vector, indices);
 #else
-                return Shuffle_Base(vector, indices);
+                return Shuffle_Basic(vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2671,7 +2671,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Shuffle(vector, indices);
 #else
-                return Shuffle_Base(vector, indices);
+                return Shuffle_Basic(vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2681,7 +2681,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Shuffle(vector, indices);
 #else
-                return Shuffle_Base(vector, indices);
+                return Shuffle_Basic(vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2691,7 +2691,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Shuffle(vector, indices);
 #else
-                return Shuffle_Base(vector, indices);
+                return Shuffle_Basic(vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2702,7 +2702,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Shuffle(vector, indices);
 #else
-                return Shuffle_Base(vector, indices);
+                return Shuffle_Basic(vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2712,7 +2712,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Shuffle(vector, indices);
 #else
-                return Shuffle_Base(vector, indices);
+                return Shuffle_Basic(vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2723,7 +2723,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Shuffle(vector, indices);
 #else
-                return Shuffle_Base(vector, indices);
+                return Shuffle_Basic(vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2733,7 +2733,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Shuffle(vector, indices);
 #else
-                return Shuffle_Base(vector, indices);
+                return Shuffle_Basic(vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2744,32 +2744,32 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Shuffle(vector, indices);
 #else
-                return Shuffle_Base(vector, indices);
+                return Shuffle_Basic(vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{float}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<float> Shuffle_Base(Vector256<float> vector, Vector256<int> indices) {
-                return Shuffle_Base(vector.AsUInt32(), indices.AsUInt32()).AsSingle();
+            public static Vector256<float> Shuffle_Basic(Vector256<float> vector, Vector256<int> indices) {
+                return Shuffle_Basic(vector.AsUInt32(), indices.AsUInt32()).AsSingle();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{float}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> Shuffle_Base(Vector256<double> vector, Vector256<long> indices) {
-                return Shuffle_Base(vector.AsUInt64(), indices.AsUInt64()).AsDouble();
+            public static Vector256<double> Shuffle_Basic(Vector256<double> vector, Vector256<long> indices) {
+                return Shuffle_Basic(vector.AsUInt64(), indices.AsUInt64()).AsDouble();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{sbyte}, Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> Shuffle_Base(Vector256<sbyte> vector, Vector256<sbyte> indices) {
-                return Shuffle_Base(vector.AsByte(), indices.AsByte()).AsSByte();
+            public static Vector256<sbyte> Shuffle_Basic(Vector256<sbyte> vector, Vector256<sbyte> indices) {
+                return Shuffle_Basic(vector.AsByte(), indices.AsByte()).AsSByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> Shuffle_Base(Vector256<byte> vector, Vector256<byte> indices) {
+            public static Vector256<byte> Shuffle_Basic(Vector256<byte> vector, Vector256<byte> indices) {
                 UnsafeEx.SkipInit(out Vector256<byte> rt);
                 byte cnt = (byte)Vector256<byte>.Count;
                 ref byte q = ref Unsafe.As<Vector256<byte>, byte>(ref rt);
@@ -2788,14 +2788,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> Shuffle_Base(Vector256<short> vector, Vector256<short> indices) {
-                return Shuffle_Base(vector.AsUInt16(), indices.AsUInt16()).AsInt16();
+            public static Vector256<short> Shuffle_Basic(Vector256<short> vector, Vector256<short> indices) {
+                return Shuffle_Basic(vector.AsUInt16(), indices.AsUInt16()).AsInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ushort> Shuffle_Base(Vector256<ushort> vector, Vector256<ushort> indices) {
+            public static Vector256<ushort> Shuffle_Basic(Vector256<ushort> vector, Vector256<ushort> indices) {
                 UnsafeEx.SkipInit(out Vector256<ushort> rt);
                 ushort cnt = (ushort)Vector256<ushort>.Count;
                 ref ushort q = ref Unsafe.As<Vector256<ushort>, ushort>(ref rt);
@@ -2814,14 +2814,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> Shuffle_Base(Vector256<int> vector, Vector256<int> indices) {
-                return Shuffle_Base(vector.AsUInt32(), indices.AsUInt32()).AsInt32();
+            public static Vector256<int> Shuffle_Basic(Vector256<int> vector, Vector256<int> indices) {
+                return Shuffle_Basic(vector.AsUInt32(), indices.AsUInt32()).AsInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<uint> Shuffle_Base(Vector256<uint> vector, Vector256<uint> indices) {
+            public static Vector256<uint> Shuffle_Basic(Vector256<uint> vector, Vector256<uint> indices) {
                 UnsafeEx.SkipInit(out Vector256<uint> rt);
                 uint cnt = (uint)Vector256<uint>.Count;
                 ref uint q = ref Unsafe.As<Vector256<uint>, uint>(ref rt);
@@ -2840,14 +2840,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> Shuffle_Base(Vector256<long> vector, Vector256<long> indices) {
-                return Shuffle_Base(vector.AsUInt64(), indices.AsUInt64()).AsInt64();
+            public static Vector256<long> Shuffle_Basic(Vector256<long> vector, Vector256<long> indices) {
+                return Shuffle_Basic(vector.AsUInt64(), indices.AsUInt64()).AsInt64();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ulong> Shuffle_Base(Vector256<ulong> vector, Vector256<ulong> indices) {
+            public static Vector256<ulong> Shuffle_Basic(Vector256<ulong> vector, Vector256<ulong> indices) {
                 UnsafeEx.SkipInit(out Vector256<ulong> rt);
                 ulong cnt = (ulong)Vector256<ulong>.Count;
                 ref ulong q = ref Unsafe.As<Vector256<ulong>, ulong>(ref rt);
@@ -3020,7 +3020,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Sum(value);
 #else
-                return Sum_Base(value);
+                return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3030,7 +3030,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Sum(value);
 #else
-                return Sum_Base(value);
+                return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3041,7 +3041,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Sum(value);
 #else
-                return Sum_Base(value);
+                return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3051,7 +3051,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Sum(value);
 #else
-                return Sum_Base(value);
+                return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3061,7 +3061,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Sum(value);
 #else
-                return Sum_Base(value);
+                return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3072,7 +3072,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Sum(value);
 #else
-                return Sum_Base(value);
+                return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3082,7 +3082,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Sum(value);
 #else
-                return Sum_Base(value);
+                return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3093,7 +3093,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Sum(value);
 #else
-                return Sum_Base(value);
+                return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3103,7 +3103,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Sum(value);
 #else
-                return Sum_Base(value);
+                return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3114,13 +3114,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector256.Sum(value);
 #else
-                return Sum_Base(value);
+                return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static float Sum_Base(Vector256<float> value) {
+            public static float Sum_Basic(Vector256<float> value) {
                 ref float p = ref Unsafe.As<Vector256<float>, float>(ref value);
                 float rt = p
                     + Unsafe.Add(ref p, 1)
@@ -3136,7 +3136,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static double Sum_Base(Vector256<double> value) {
+            public static double Sum_Basic(Vector256<double> value) {
                 ref double p = ref Unsafe.As<Vector256<double>, double>(ref value);
                 double rt = p
                     + Unsafe.Add(ref p, 1)
@@ -3149,7 +3149,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static sbyte Sum_Base(Vector256<sbyte> value) {
+            public static sbyte Sum_Basic(Vector256<sbyte> value) {
                 ref sbyte p = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref value);
                 sbyte rt = (sbyte)(p
                     + Unsafe.Add(ref p, 1)
@@ -3189,7 +3189,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static byte Sum_Base(Vector256<byte> value) {
+            public static byte Sum_Basic(Vector256<byte> value) {
                 ref byte p = ref Unsafe.As<Vector256<byte>, byte>(ref value);
                 byte rt = (byte)(p
                     + Unsafe.Add(ref p, 1)
@@ -3229,7 +3229,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static short Sum_Base(Vector256<short> value) {
+            public static short Sum_Basic(Vector256<short> value) {
                 ref short p = ref Unsafe.As<Vector256<short>, short>(ref value);
                 short rt = (short)(p
                     + Unsafe.Add(ref p, 1)
@@ -3254,7 +3254,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static ushort Sum_Base(Vector256<ushort> value) {
+            public static ushort Sum_Basic(Vector256<ushort> value) {
                 ref ushort p = ref Unsafe.As<Vector256<ushort>, ushort>(ref value);
                 ushort rt = (ushort)(p
                     + Unsafe.Add(ref p, 1)
@@ -3278,7 +3278,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static int Sum_Base(Vector256<int> value) {
+            public static int Sum_Basic(Vector256<int> value) {
                 ref int p = ref Unsafe.As<Vector256<int>, int>(ref value);
                 int rt = p
                     + Unsafe.Add(ref p, 1)
@@ -3295,7 +3295,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint Sum_Base(Vector256<uint> value) {
+            public static uint Sum_Basic(Vector256<uint> value) {
                 ref uint p = ref Unsafe.As<Vector256<uint>, uint>(ref value);
                 uint rt = p
                     + Unsafe.Add(ref p, 1)
@@ -3311,7 +3311,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static long Sum_Base(Vector256<long> value) {
+            public static long Sum_Basic(Vector256<long> value) {
                 ref long p = ref Unsafe.As<Vector256<long>, long>(ref value);
                 long rt = p
                     + Unsafe.Add(ref p, 1)
@@ -3324,7 +3324,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Sum(Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static ulong Sum_Base(Vector256<ulong> value) {
+            public static ulong Sum_Basic(Vector256<ulong> value) {
                 ref ulong p = ref Unsafe.As<Vector256<ulong>, ulong>(ref value);
                 ulong rt = p
                     + Unsafe.Add(ref p, 1)
@@ -3354,7 +3354,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 (lower, upper) = Vector256.Widen(source);
 #else
-                Widen_Base(source, out lower, out upper);
+                Widen_Basic(source, out lower, out upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3365,7 +3365,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 (lower, upper) = Vector256.Widen(source);
 #else
-                Widen_Base(source, out lower, out upper);
+                Widen_Basic(source, out lower, out upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3376,7 +3376,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 (lower, upper) = Vector256.Widen(source);
 #else
-                Widen_Base(source, out lower, out upper);
+                Widen_Basic(source, out lower, out upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3386,7 +3386,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 (lower, upper) = Vector256.Widen(source);
 #else
-                Widen_Base(source, out lower, out upper);
+                Widen_Basic(source, out lower, out upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3397,7 +3397,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 (lower, upper) = Vector256.Widen(source);
 #else
-                Widen_Base(source, out lower, out upper);
+                Widen_Basic(source, out lower, out upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3407,7 +3407,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 (lower, upper) = Vector256.Widen(source);
 #else
-                Widen_Base(source, out lower, out upper);
+                Widen_Basic(source, out lower, out upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -3418,13 +3418,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 (lower, upper) = Vector256.Widen(source);
 #else
-                Widen_Base(source, out lower, out upper);
+                Widen_Basic(source, out lower, out upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{float}, out Vector256{double}, out Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_Base(Vector256<float> source, out Vector256<double> lower, out Vector256<double> upper) {
+            public static void Widen_Basic(Vector256<float> source, out Vector256<double> lower, out Vector256<double> upper) {
                 nint cnt = Vector256<double>.Count;
                 UnsafeEx.SkipInit(out lower);
                 UnsafeEx.SkipInit(out upper);
@@ -3445,7 +3445,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{sbyte}, out Vector256{short}, out Vector256{short})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_Base(Vector256<sbyte> source, out Vector256<short> lower, out Vector256<short> upper) {
+            public static void Widen_Basic(Vector256<sbyte> source, out Vector256<short> lower, out Vector256<short> upper) {
                 nint cnt = Vector256<short>.Count;
                 UnsafeEx.SkipInit(out lower);
                 UnsafeEx.SkipInit(out upper);
@@ -3490,7 +3490,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{byte}, out Vector256{ushort}, out Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_Base(Vector256<byte> source, out Vector256<ushort> lower, out Vector256<ushort> upper) {
+            public static void Widen_Basic(Vector256<byte> source, out Vector256<ushort> lower, out Vector256<ushort> upper) {
                 nint cnt = Vector256<ushort>.Count;
                 UnsafeEx.SkipInit(out lower);
                 UnsafeEx.SkipInit(out upper);
@@ -3534,7 +3534,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{short}, out Vector256{int}, out Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_Base(Vector256<short> source, out Vector256<int> lower, out Vector256<int> upper) {
+            public static void Widen_Basic(Vector256<short> source, out Vector256<int> lower, out Vector256<int> upper) {
                 nint cnt = Vector256<int>.Count;
                 UnsafeEx.SkipInit(out lower);
                 UnsafeEx.SkipInit(out upper);
@@ -3563,7 +3563,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{ushort}, out Vector256{uint}, out Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_Base(Vector256<ushort> source, out Vector256<uint> lower, out Vector256<uint> upper) {
+            public static void Widen_Basic(Vector256<ushort> source, out Vector256<uint> lower, out Vector256<uint> upper) {
                 nint cnt = Vector256<uint>.Count;
                 UnsafeEx.SkipInit(out lower);
                 UnsafeEx.SkipInit(out upper);
@@ -3591,7 +3591,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{int}, out Vector256{long}, out Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_Base(Vector256<int> source, out Vector256<long> lower, out Vector256<long> upper) {
+            public static void Widen_Basic(Vector256<int> source, out Vector256<long> lower, out Vector256<long> upper) {
                 nint cnt = Vector256<long>.Count;
                 UnsafeEx.SkipInit(out lower);
                 UnsafeEx.SkipInit(out upper);
@@ -3612,7 +3612,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Widen(Vector256{uint}, out Vector256{ulong}, out Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_Base(Vector256<uint> source, out Vector256<ulong> lower, out Vector256<ulong> upper) {
+            public static void Widen_Basic(Vector256<uint> source, out Vector256<ulong> lower, out Vector256<ulong> upper) {
                 nint cnt = Vector256<ulong>.Count;
                 UnsafeEx.SkipInit(out lower);
                 UnsafeEx.SkipInit(out upper);

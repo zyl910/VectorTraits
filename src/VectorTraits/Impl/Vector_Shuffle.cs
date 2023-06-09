@@ -35,7 +35,7 @@ namespace Zyl.VectorTraits.Impl {
                 return Vector256_Shuffle.Shuffle(vector.AsVector256(), indices.AsVector256()).AsVector();
             }
 #endif // !BCL_BASE_OVERRIDE_STATIC
-            return Shuffle_Base(vector, indices);
+            return Shuffle_Basic(vector, indices);
         }
 
         /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{short}, Vector{short})"/>
@@ -55,12 +55,12 @@ namespace Zyl.VectorTraits.Impl {
                 return Vector256_Shuffle.Shuffle(vector.AsVector256(), indices.AsVector256()).AsVector();
             }
 #endif // !BCL_BASE_OVERRIDE_STATIC
-            return Shuffle_Base(vector, indices);
+            return Shuffle_Basic(vector, indices);
         }
 
         /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{byte}, Vector{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<byte> Shuffle_Base(Vector<byte> vector, Vector<byte> indices) {
+        public static Vector<byte> Shuffle_Basic(Vector<byte> vector, Vector<byte> indices) {
 #if BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
             return Vector.Shuffle(vector, indices);
 #else
@@ -71,7 +71,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{ushort}, Vector{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<ushort> Shuffle_Base(Vector<ushort> vector, Vector<ushort> indices) {
+        public static Vector<ushort> Shuffle_Basic(Vector<ushort> vector, Vector<ushort> indices) {
 #if BCL_OVERRIDE_BASE_FIXED && NETX_0_OR_GREATER
             return Vector.Shuffle(vector, indices);
 #else
@@ -135,7 +135,7 @@ namespace Zyl.VectorTraits.Impl {
                 return Vector256_Shuffle.YShuffleKernel(vector.AsVector256(), indices.AsVector256()).AsVector();
             }
 #endif // !BCL_BASE_OVERRIDE_STATIC && NETCOREAPP3_0_OR_GREATER
-            return YShuffleKernel_Base(vector, indices);
+            return YShuffleKernel_Basic(vector, indices);
         }
 
         /// <inheritdoc cref="IVectorTraits.YShuffleKernel(Vector{short}, Vector{short})"/>
@@ -155,20 +155,20 @@ namespace Zyl.VectorTraits.Impl {
                 return Vector256_Shuffle.YShuffleKernel(vector.AsVector256(), indices.AsVector256()).AsVector();
             }
 #endif // !BCL_BASE_OVERRIDE_STATIC && NETCOREAPP3_0_OR_GREATER
-            return YShuffleKernel_Base(vector, indices);
+            return YShuffleKernel_Basic(vector, indices);
         }
 
         /// <inheritdoc cref="IVectorTraits.YShuffleKernel(Vector{byte}, Vector{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<byte> YShuffleKernel_Base(Vector<byte> vector, Vector<byte> indices) {
-            return Shuffle_Base(vector, indices);
+        public static Vector<byte> YShuffleKernel_Basic(Vector<byte> vector, Vector<byte> indices) {
+            return Shuffle_Basic(vector, indices);
         }
 
         /// <inheritdoc cref="IVectorTraits.YShuffleKernel(Vector{ushort}, Vector{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<ushort> YShuffleKernel_Base(Vector<ushort> vector, Vector<ushort> indices) {
-            return Shuffle_Base(vector, indices);
+        public static Vector<ushort> YShuffleKernel_Basic(Vector<ushort> vector, Vector<ushort> indices) {
+            return Shuffle_Basic(vector, indices);
         }
 
 

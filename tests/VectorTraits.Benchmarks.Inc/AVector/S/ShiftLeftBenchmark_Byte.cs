@@ -136,7 +136,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits128Base.Statics.ShiftLeft_Base(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraits128Base.Statics.ShiftLeft_Basic(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -184,7 +184,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits256Base.Statics.ShiftLeft_Base(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraits256Base.Statics.ShiftLeft_Basic(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -569,7 +569,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits128Base.Statics.ShiftLeft_Fast_Base(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraits128Base.Statics.ShiftLeft_Fast_Basic(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -617,7 +617,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits256Base.Statics.ShiftLeft_Fast_Base(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraits256Base.Statics.ShiftLeft_Fast_Basic(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }

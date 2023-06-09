@@ -34,7 +34,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Abs(value);
 #else
-                return Abs_Base(value);
+                return Abs_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -44,7 +44,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Abs(value);
 #else
-                return Abs_Base(value);
+                return Abs_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -55,7 +55,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Abs(value);
 #else
-                return Abs_Base(value);
+                return Abs_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -65,7 +65,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Abs(value);
 #else
-                return Abs_Base(value);
+                return Abs_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -75,7 +75,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Abs(value);
 #else
-                return Abs_Base(value);
+                return Abs_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -85,13 +85,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Abs(value);
 #else
-                return Abs_Base(value);
+                return Abs_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<float> Abs_Base(Vector128<float> value) {
+            public static unsafe Vector128<float> Abs_Basic(Vector128<float> value) {
                 Vector128<float> rt = value;
                 float* p = (float*)&rt;
                 p[0] = Math.Abs(p[0]);
@@ -103,7 +103,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<double> Abs_Base(Vector128<double> value) {
+            public static unsafe Vector128<double> Abs_Basic(Vector128<double> value) {
                 Vector128<double> rt = value;
                 double* p = (double*)&rt;
                 p[0] = Math.Abs(p[0]);
@@ -114,7 +114,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<sbyte> Abs_Base(Vector128<sbyte> value) {
+            public static unsafe Vector128<sbyte> Abs_Basic(Vector128<sbyte> value) {
                 Vector128<sbyte> rt = value;
                 sbyte* p = (sbyte*)&rt;
                 p[0] = BitMath.Abs(p[0]);
@@ -138,7 +138,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<short> Abs_Base(Vector128<short> value) {
+            public static unsafe Vector128<short> Abs_Basic(Vector128<short> value) {
                 Vector128<short> rt = value;
                 short* p = (short*)&rt;
                 p[0] = BitMath.Abs(p[0]);
@@ -154,7 +154,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<int> Abs_Base(Vector128<int> value) {
+            public static unsafe Vector128<int> Abs_Basic(Vector128<int> value) {
                 Vector128<int> rt = value;
                 int* p = (int*)&rt;
                 p[0] = BitMath.Abs(p[0]);
@@ -166,7 +166,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<long> Abs_Base(Vector128<long> value) {
+            public static unsafe Vector128<long> Abs_Basic(Vector128<long> value) {
                 Vector128<long> rt = value;
                 long* p = (long*)&rt;
                 p[0] = BitMath.Abs(p[0]);
@@ -194,7 +194,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Add(left, right);
 #else
-                return Add_Base(left, right);
+                return Add_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -204,7 +204,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Add(left, right);
 #else
-                return Add_Base(left, right);
+                return Add_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -215,7 +215,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Add(left, right);
 #else
-                return Add_Base(left, right);
+                return Add_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -225,7 +225,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Add(left, right);
 #else
-                return Add_Base(left, right);
+                return Add_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -235,7 +235,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Add(left, right);
 #else
-                return Add_Base(left, right);
+                return Add_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -246,7 +246,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Add(left, right);
 #else
-                return Add_Base(left, right);
+                return Add_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -256,7 +256,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Add(left, right);
 #else
-                return Add_Base(left, right);
+                return Add_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -267,7 +267,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Add(left, right);
 #else
-                return Add_Base(left, right);
+                return Add_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -277,7 +277,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Add(left, right);
 #else
-                return Add_Base(left, right);
+                return Add_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -288,13 +288,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Add(left, right);
 #else
-                return Add_Base(left, right);
+                return Add_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<float> Add_Base(Vector128<float> left, Vector128<float> right) {
+            public static unsafe Vector128<float> Add_Basic(Vector128<float> left, Vector128<float> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<float> rt);
 #else
@@ -312,7 +312,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<double> Add_Base(Vector128<double> left, Vector128<double> right) {
+            public static unsafe Vector128<double> Add_Basic(Vector128<double> left, Vector128<double> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<double> rt);
 #else
@@ -329,7 +329,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<sbyte> Add_Base(Vector128<sbyte> left, Vector128<sbyte> right) {
+            public static unsafe Vector128<sbyte> Add_Basic(Vector128<sbyte> left, Vector128<sbyte> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<sbyte> rt);
 #else
@@ -359,7 +359,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<byte> Add_Base(Vector128<byte> left, Vector128<byte> right) {
+            public static unsafe Vector128<byte> Add_Basic(Vector128<byte> left, Vector128<byte> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<byte> rt);
 #else
@@ -389,7 +389,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<short> Add_Base(Vector128<short> left, Vector128<short> right) {
+            public static unsafe Vector128<short> Add_Basic(Vector128<short> left, Vector128<short> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<short> rt);
 #else
@@ -412,7 +412,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<ushort> Add_Base(Vector128<ushort> left, Vector128<ushort> right) {
+            public static unsafe Vector128<ushort> Add_Basic(Vector128<ushort> left, Vector128<ushort> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<ushort> rt);
 #else
@@ -434,7 +434,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<int> Add_Base(Vector128<int> left, Vector128<int> right) {
+            public static unsafe Vector128<int> Add_Basic(Vector128<int> left, Vector128<int> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<int> rt);
 #else
@@ -453,7 +453,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<uint> Add_Base(Vector128<uint> left, Vector128<uint> right) {
+            public static unsafe Vector128<uint> Add_Basic(Vector128<uint> left, Vector128<uint> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<uint> rt);
 #else
@@ -471,7 +471,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<long> Add_Base(Vector128<long> left, Vector128<long> right) {
+            public static unsafe Vector128<long> Add_Basic(Vector128<long> left, Vector128<long> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<long> rt);
 #else
@@ -488,7 +488,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<ulong> Add_Base(Vector128<ulong> left, Vector128<ulong> right) {
+            public static unsafe Vector128<ulong> Add_Basic(Vector128<ulong> left, Vector128<ulong> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<ulong> rt);
 #else
@@ -522,13 +522,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.AndNot(left, right);
 #else
-                return AndNot_Base(left, right);
+                return AndNot_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.AndNot{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<T> AndNot_Base<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+            public static unsafe Vector128<T> AndNot_Basic<T>(Vector128<T> left, Vector128<T> right) where T : struct {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<T> rt);
 #else
@@ -563,13 +563,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.BitwiseAnd(left, right);
 #else
-                return BitwiseAnd_Base(left, right);
+                return BitwiseAnd_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.BitwiseAnd{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<T> BitwiseAnd_Base<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+            public static unsafe Vector128<T> BitwiseAnd_Basic<T>(Vector128<T> left, Vector128<T> right) where T : struct {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<T> rt);
 #else
@@ -604,13 +604,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.BitwiseOr(left, right);
 #else
-                return BitwiseOr_Base(left, right);
+                return BitwiseOr_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.BitwiseOr{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<T> BitwiseOr_Base<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+            public static unsafe Vector128<T> BitwiseOr_Basic<T>(Vector128<T> left, Vector128<T> right) where T : struct {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<T> rt);
 #else
@@ -645,7 +645,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.ConditionalSelect(condition, left, right);
 #else
-                return ConditionalSelect_Base(condition, left, right);
+                return ConditionalSelect_Basic(condition, left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -663,7 +663,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<T> ConditionalSelect_Base<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
+            public static unsafe Vector128<T> ConditionalSelect_Basic<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<T> rt);
 #else
@@ -699,7 +699,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Divide(left, right);
 #else
-                return Divide_Base(left, right);
+                return Divide_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -709,13 +709,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Divide(left, right);
 #else
-                return Divide_Base(left, right);
+                return Divide_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Divide(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<float> Divide_Base(Vector128<float> left, Vector128<float> right) {
+            public static unsafe Vector128<float> Divide_Basic(Vector128<float> left, Vector128<float> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<float> rt);
 #else
@@ -733,7 +733,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Divide(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<double> Divide_Base(Vector128<double> left, Vector128<double> right) {
+            public static unsafe Vector128<double> Divide_Basic(Vector128<double> left, Vector128<double> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<double> rt);
 #else
@@ -767,7 +767,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.GreaterThan(left, right);
 #else
-                return GreaterThan_Base(left, right);
+                return GreaterThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -777,7 +777,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.GreaterThan(left, right);
 #else
-                return GreaterThan_Base(left, right);
+                return GreaterThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -788,7 +788,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.GreaterThan(left, right);
 #else
-                return GreaterThan_Base(left, right);
+                return GreaterThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -798,7 +798,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.GreaterThan(left, right);
 #else
-                return GreaterThan_Base(left, right);
+                return GreaterThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -808,7 +808,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.GreaterThan(left, right);
 #else
-                return GreaterThan_Base(left, right);
+                return GreaterThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -819,7 +819,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.GreaterThan(left, right);
 #else
-                return GreaterThan_Base(left, right);
+                return GreaterThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -829,7 +829,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.GreaterThan(left, right);
 #else
-                return GreaterThan_Base(left, right);
+                return GreaterThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -840,7 +840,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.GreaterThan(left, right);
 #else
-                return GreaterThan_Base(left, right);
+                return GreaterThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -850,7 +850,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.GreaterThan(left, right);
 #else
-                return GreaterThan_Base(left, right);
+                return GreaterThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -861,13 +861,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.GreaterThan(left, right);
 #else
-                return GreaterThan_Base(left, right);
+                return GreaterThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<float> GreaterThan_Base(Vector128<float> left, Vector128<float> right) {
+            public static unsafe Vector128<float> GreaterThan_Basic(Vector128<float> left, Vector128<float> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<int> condition);
 #else
@@ -885,7 +885,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<double> GreaterThan_Base(Vector128<double> left, Vector128<double> right) {
+            public static unsafe Vector128<double> GreaterThan_Basic(Vector128<double> left, Vector128<double> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<long> condition);
 #else
@@ -902,7 +902,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<sbyte> GreaterThan_Base(Vector128<sbyte> left, Vector128<sbyte> right) {
+            public static unsafe Vector128<sbyte> GreaterThan_Basic(Vector128<sbyte> left, Vector128<sbyte> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<sbyte> condition);
 #else
@@ -932,7 +932,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<byte> GreaterThan_Base(Vector128<byte> left, Vector128<byte> right) {
+            public static unsafe Vector128<byte> GreaterThan_Basic(Vector128<byte> left, Vector128<byte> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<sbyte> condition);
 #else
@@ -962,7 +962,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<short> GreaterThan_Base(Vector128<short> left, Vector128<short> right) {
+            public static unsafe Vector128<short> GreaterThan_Basic(Vector128<short> left, Vector128<short> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<short> condition);
 #else
@@ -985,7 +985,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<ushort> GreaterThan_Base(Vector128<ushort> left, Vector128<ushort> right) {
+            public static unsafe Vector128<ushort> GreaterThan_Basic(Vector128<ushort> left, Vector128<ushort> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<short> condition);
 #else
@@ -1007,7 +1007,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<int> GreaterThan_Base(Vector128<int> left, Vector128<int> right) {
+            public static unsafe Vector128<int> GreaterThan_Basic(Vector128<int> left, Vector128<int> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<int> condition);
 #else
@@ -1026,7 +1026,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<uint> GreaterThan_Base(Vector128<uint> left, Vector128<uint> right) {
+            public static unsafe Vector128<uint> GreaterThan_Basic(Vector128<uint> left, Vector128<uint> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<int> condition);
 #else
@@ -1044,7 +1044,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<long> GreaterThan_Base(Vector128<long> left, Vector128<long> right) {
+            public static unsafe Vector128<long> GreaterThan_Basic(Vector128<long> left, Vector128<long> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<long> condition);
 #else
@@ -1061,7 +1061,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<ulong> GreaterThan_Base(Vector128<ulong> left, Vector128<ulong> right) {
+            public static unsafe Vector128<ulong> GreaterThan_Basic(Vector128<ulong> left, Vector128<ulong> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<long> condition);
 #else
@@ -1095,7 +1095,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.LessThan(left, right);
 #else
-                return LessThan_Base(left, right);
+                return LessThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1105,7 +1105,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.LessThan(left, right);
 #else
-                return LessThan_Base(left, right);
+                return LessThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1116,7 +1116,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.LessThan(left, right);
 #else
-                return LessThan_Base(left, right);
+                return LessThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1126,7 +1126,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.LessThan(left, right);
 #else
-                return LessThan_Base(left, right);
+                return LessThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1136,7 +1136,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.LessThan(left, right);
 #else
-                return LessThan_Base(left, right);
+                return LessThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1147,7 +1147,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.LessThan(left, right);
 #else
-                return LessThan_Base(left, right);
+                return LessThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1157,7 +1157,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.LessThan(left, right);
 #else
-                return LessThan_Base(left, right);
+                return LessThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1168,7 +1168,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.LessThan(left, right);
 #else
-                return LessThan_Base(left, right);
+                return LessThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1178,7 +1178,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.LessThan(left, right);
 #else
-                return LessThan_Base(left, right);
+                return LessThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1189,13 +1189,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.LessThan(left, right);
 #else
-                return LessThan_Base(left, right);
+                return LessThan_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<float> LessThan_Base(Vector128<float> left, Vector128<float> right) {
+            public static unsafe Vector128<float> LessThan_Basic(Vector128<float> left, Vector128<float> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<int> condition);
 #else
@@ -1213,7 +1213,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<double> LessThan_Base(Vector128<double> left, Vector128<double> right) {
+            public static unsafe Vector128<double> LessThan_Basic(Vector128<double> left, Vector128<double> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<long> condition);
 #else
@@ -1230,7 +1230,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<sbyte> LessThan_Base(Vector128<sbyte> left, Vector128<sbyte> right) {
+            public static unsafe Vector128<sbyte> LessThan_Basic(Vector128<sbyte> left, Vector128<sbyte> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<sbyte> condition);
 #else
@@ -1260,7 +1260,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<byte> LessThan_Base(Vector128<byte> left, Vector128<byte> right) {
+            public static unsafe Vector128<byte> LessThan_Basic(Vector128<byte> left, Vector128<byte> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<sbyte> condition);
 #else
@@ -1290,7 +1290,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<short> LessThan_Base(Vector128<short> left, Vector128<short> right) {
+            public static unsafe Vector128<short> LessThan_Basic(Vector128<short> left, Vector128<short> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<short> condition);
 #else
@@ -1313,7 +1313,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<ushort> LessThan_Base(Vector128<ushort> left, Vector128<ushort> right) {
+            public static unsafe Vector128<ushort> LessThan_Basic(Vector128<ushort> left, Vector128<ushort> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<short> condition);
 #else
@@ -1335,7 +1335,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<int> LessThan_Base(Vector128<int> left, Vector128<int> right) {
+            public static unsafe Vector128<int> LessThan_Basic(Vector128<int> left, Vector128<int> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<int> condition);
 #else
@@ -1354,7 +1354,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<uint> LessThan_Base(Vector128<uint> left, Vector128<uint> right) {
+            public static unsafe Vector128<uint> LessThan_Basic(Vector128<uint> left, Vector128<uint> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<int> condition);
 #else
@@ -1372,7 +1372,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<long> LessThan_Base(Vector128<long> left, Vector128<long> right) {
+            public static unsafe Vector128<long> LessThan_Basic(Vector128<long> left, Vector128<long> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<long> condition);
 #else
@@ -1389,7 +1389,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<ulong> LessThan_Base(Vector128<ulong> left, Vector128<ulong> right) {
+            public static unsafe Vector128<ulong> LessThan_Basic(Vector128<ulong> left, Vector128<ulong> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<long> condition);
 #else
@@ -1906,7 +1906,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Multiply(left, right);
 #else
-                return Multiply_Base(left, right);
+                return Multiply_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1916,7 +1916,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Multiply(left, right);
 #else
-                return Multiply_Base(left, right);
+                return Multiply_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1927,7 +1927,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Multiply(left, right);
 #else
-                return Multiply_Base(left, right);
+                return Multiply_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1937,7 +1937,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Multiply(left, right);
 #else
-                return Multiply_Base(left, right);
+                return Multiply_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1947,7 +1947,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Multiply(left, right);
 #else
-                return Multiply_Base(left, right);
+                return Multiply_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1958,7 +1958,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Multiply(left, right);
 #else
-                return Multiply_Base(left, right);
+                return Multiply_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1968,7 +1968,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Multiply(left, right);
 #else
-                return Multiply_Base(left, right);
+                return Multiply_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1979,7 +1979,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Multiply(left, right);
 #else
-                return Multiply_Base(left, right);
+                return Multiply_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -1989,7 +1989,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Multiply(left, right);
 #else
-                return Multiply_Base(left, right);
+                return Multiply_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2000,13 +2000,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Multiply(left, right);
 #else
-                return Multiply_Base(left, right);
+                return Multiply_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<float> Multiply_Base(Vector128<float> left, Vector128<float> right) {
+            public static Vector128<float> Multiply_Basic(Vector128<float> left, Vector128<float> right) {
                 UnsafeEx.SkipInit(out Vector128<float> rt);
                 ref float prt = ref Unsafe.As<Vector128<float>, float>(ref rt);
                 ref float pleft = ref Unsafe.As<Vector128<float>, float>(ref left);
@@ -2020,7 +2020,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<double> Multiply_Base(Vector128<double> left, Vector128<double> right) {
+            public static Vector128<double> Multiply_Basic(Vector128<double> left, Vector128<double> right) {
                 UnsafeEx.SkipInit(out Vector128<double> rt);
                 ref double prt = ref Unsafe.As<Vector128<double>, double>(ref rt);
                 ref double pleft = ref Unsafe.As<Vector128<double>, double>(ref left);
@@ -2033,7 +2033,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<sbyte> Multiply_Base(Vector128<sbyte> left, Vector128<sbyte> right) {
+            public static Vector128<sbyte> Multiply_Basic(Vector128<sbyte> left, Vector128<sbyte> right) {
                 UnsafeEx.SkipInit(out Vector128<sbyte> rt);
                 ref sbyte prt = ref Unsafe.As<Vector128<sbyte>, sbyte>(ref rt);
                 ref sbyte pleft = ref Unsafe.As<Vector128<sbyte>, sbyte>(ref left);
@@ -2059,7 +2059,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<byte> Multiply_Base(Vector128<byte> left, Vector128<byte> right) {
+            public static Vector128<byte> Multiply_Basic(Vector128<byte> left, Vector128<byte> right) {
                 UnsafeEx.SkipInit(out Vector128<byte> rt);
                 ref byte prt = ref Unsafe.As<Vector128<byte>, byte>(ref rt);
                 ref byte pleft = ref Unsafe.As<Vector128<byte>, byte>(ref left);
@@ -2085,7 +2085,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<short> Multiply_Base(Vector128<short> left, Vector128<short> right) {
+            public static Vector128<short> Multiply_Basic(Vector128<short> left, Vector128<short> right) {
                 UnsafeEx.SkipInit(out Vector128<short> rt);
                 ref short prt = ref Unsafe.As<Vector128<short>, short>(ref rt);
                 ref short pleft = ref Unsafe.As<Vector128<short>, short>(ref left);
@@ -2104,7 +2104,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ushort> Multiply_Base(Vector128<ushort> left, Vector128<ushort> right) {
+            public static Vector128<ushort> Multiply_Basic(Vector128<ushort> left, Vector128<ushort> right) {
                 UnsafeEx.SkipInit(out Vector128<ushort> rt);
                 ref ushort prt = ref Unsafe.As<Vector128<ushort>, ushort>(ref rt);
                 ref ushort pleft = ref Unsafe.As<Vector128<ushort>, ushort>(ref left);
@@ -2122,7 +2122,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<int> Multiply_Base(Vector128<int> left, Vector128<int> right) {
+            public static Vector128<int> Multiply_Basic(Vector128<int> left, Vector128<int> right) {
                 UnsafeEx.SkipInit(out Vector128<int> rt);
                 ref int prt = ref Unsafe.As<Vector128<int>, int>(ref rt);
                 ref int pleft = ref Unsafe.As<Vector128<int>, int>(ref left);
@@ -2137,7 +2137,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<uint> Multiply_Base(Vector128<uint> left, Vector128<uint> right) {
+            public static Vector128<uint> Multiply_Basic(Vector128<uint> left, Vector128<uint> right) {
                 UnsafeEx.SkipInit(out Vector128<uint> rt);
                 ref uint prt = ref Unsafe.As<Vector128<uint>, uint>(ref rt);
                 ref uint pleft = ref Unsafe.As<Vector128<uint>, uint>(ref left);
@@ -2151,7 +2151,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<long> Multiply_Base(Vector128<long> left, Vector128<long> right) {
+            public static Vector128<long> Multiply_Basic(Vector128<long> left, Vector128<long> right) {
                 UnsafeEx.SkipInit(out Vector128<long> rt);
                 ref long prt = ref Unsafe.As<Vector128<long>, long>(ref rt);
                 ref long pleft = ref Unsafe.As<Vector128<long>, long>(ref left);
@@ -2164,7 +2164,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ulong> Multiply_Base(Vector128<ulong> left, Vector128<ulong> right) {
+            public static Vector128<ulong> Multiply_Basic(Vector128<ulong> left, Vector128<ulong> right) {
                 UnsafeEx.SkipInit(out Vector128<ulong> rt);
                 ref ulong prt = ref Unsafe.As<Vector128<ulong>, ulong>(ref rt);
                 ref ulong pleft = ref Unsafe.As<Vector128<ulong>, ulong>(ref left);
@@ -2194,7 +2194,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Negate(value);
 #else
-                return Negate_Base(value);
+                return Negate_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2204,7 +2204,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Negate(value);
 #else
-                return Negate_Base(value);
+                return Negate_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2215,7 +2215,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Negate(value);
 #else
-                return Negate_Base(value);
+                return Negate_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2225,7 +2225,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Negate(value);
 #else
-                return Negate_Base(value);
+                return Negate_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2235,7 +2235,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Negate(value);
 #else
-                return Negate_Base(value);
+                return Negate_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2245,13 +2245,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Negate(value);
 #else
-                return Negate_Base(value);
+                return Negate_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<float> Negate_Base(Vector128<float> value) {
+            public static unsafe Vector128<float> Negate_Basic(Vector128<float> value) {
                 Vector128<float> rt = value;
                 float* p = (float*)&rt;
                 p[0] = -p[0];
@@ -2263,7 +2263,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<double> Negate_Base(Vector128<double> value) {
+            public static unsafe Vector128<double> Negate_Basic(Vector128<double> value) {
                 Vector128<double> rt = value;
                 double* p = (double*)&rt;
                 p[0] = -p[0];
@@ -2274,7 +2274,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<sbyte> Negate_Base(Vector128<sbyte> value) {
+            public static unsafe Vector128<sbyte> Negate_Basic(Vector128<sbyte> value) {
                 Vector128<sbyte> rt = value;
                 sbyte* p = (sbyte*)&rt;
                 p[0] = (sbyte)-p[0];
@@ -2298,7 +2298,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<short> Negate_Base(Vector128<short> value) {
+            public static unsafe Vector128<short> Negate_Basic(Vector128<short> value) {
                 Vector128<short> rt = value;
                 short* p = (short*)&rt;
                 p[0] = (short)-p[0];
@@ -2314,7 +2314,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<int> Negate_Base(Vector128<int> value) {
+            public static unsafe Vector128<int> Negate_Basic(Vector128<int> value) {
                 Vector128<int> rt = value;
                 int* p = (int*)&rt;
                 p[0] = -p[0];
@@ -2326,7 +2326,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<long> Negate_Base(Vector128<long> value) {
+            public static unsafe Vector128<long> Negate_Basic(Vector128<long> value) {
                 Vector128<long> rt = value;
                 long* p = (long*)&rt;
                 p[0] = -p[0];
@@ -2354,13 +2354,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.OnesComplement(vector);
 #else
-                return OnesComplement_Base(vector);
+                return OnesComplement_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.OnesComplement{T}(Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<T> OnesComplement_Base<T>(Vector128<T> vector) where T : struct {
+            public static unsafe Vector128<T> OnesComplement_Basic<T>(Vector128<T> vector) where T : struct {
                 Vector128<T> rt = vector;
                 ulong* p = (ulong*)&rt;
                 p[0] = ~p[0];
@@ -2388,7 +2388,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Subtract(left, right);
 #else
-                return Subtract_Base(left, right);
+                return Subtract_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2398,7 +2398,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Subtract(left, right);
 #else
-                return Subtract_Base(left, right);
+                return Subtract_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2409,7 +2409,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Subtract(left, right);
 #else
-                return Subtract_Base(left, right);
+                return Subtract_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2419,7 +2419,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Subtract(left, right);
 #else
-                return Subtract_Base(left, right);
+                return Subtract_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2429,7 +2429,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Subtract(left, right);
 #else
-                return Subtract_Base(left, right);
+                return Subtract_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2440,7 +2440,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Subtract(left, right);
 #else
-                return Subtract_Base(left, right);
+                return Subtract_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2450,7 +2450,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Subtract(left, right);
 #else
-                return Subtract_Base(left, right);
+                return Subtract_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2461,7 +2461,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Subtract(left, right);
 #else
-                return Subtract_Base(left, right);
+                return Subtract_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2471,7 +2471,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Subtract(left, right);
 #else
-                return Subtract_Base(left, right);
+                return Subtract_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -2482,13 +2482,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Subtract(left, right);
 #else
-                return Subtract_Base(left, right);
+                return Subtract_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<float> Subtract_Base(Vector128<float> left, Vector128<float> right) {
+            public static unsafe Vector128<float> Subtract_Basic(Vector128<float> left, Vector128<float> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<float> rt);
 #else
@@ -2506,7 +2506,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<double> Subtract_Base(Vector128<double> left, Vector128<double> right) {
+            public static unsafe Vector128<double> Subtract_Basic(Vector128<double> left, Vector128<double> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<double> rt);
 #else
@@ -2523,7 +2523,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<sbyte> Subtract_Base(Vector128<sbyte> left, Vector128<sbyte> right) {
+            public static unsafe Vector128<sbyte> Subtract_Basic(Vector128<sbyte> left, Vector128<sbyte> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<sbyte> rt);
 #else
@@ -2553,7 +2553,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<byte> Subtract_Base(Vector128<byte> left, Vector128<byte> right) {
+            public static unsafe Vector128<byte> Subtract_Basic(Vector128<byte> left, Vector128<byte> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<byte> rt);
 #else
@@ -2583,7 +2583,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<short> Subtract_Base(Vector128<short> left, Vector128<short> right) {
+            public static unsafe Vector128<short> Subtract_Basic(Vector128<short> left, Vector128<short> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<short> rt);
 #else
@@ -2606,7 +2606,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<ushort> Subtract_Base(Vector128<ushort> left, Vector128<ushort> right) {
+            public static unsafe Vector128<ushort> Subtract_Basic(Vector128<ushort> left, Vector128<ushort> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<ushort> rt);
 #else
@@ -2628,7 +2628,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<int> Subtract_Base(Vector128<int> left, Vector128<int> right) {
+            public static unsafe Vector128<int> Subtract_Basic(Vector128<int> left, Vector128<int> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<int> rt);
 #else
@@ -2647,7 +2647,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<uint> Subtract_Base(Vector128<uint> left, Vector128<uint> right) {
+            public static unsafe Vector128<uint> Subtract_Basic(Vector128<uint> left, Vector128<uint> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<uint> rt);
 #else
@@ -2665,7 +2665,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<long> Subtract_Base(Vector128<long> left, Vector128<long> right) {
+            public static unsafe Vector128<long> Subtract_Basic(Vector128<long> left, Vector128<long> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<long> rt);
 #else
@@ -2682,7 +2682,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Subtract(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<ulong> Subtract_Base(Vector128<ulong> left, Vector128<ulong> right) {
+            public static unsafe Vector128<ulong> Subtract_Basic(Vector128<ulong> left, Vector128<ulong> right) {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<ulong> rt);
 #else
@@ -2716,13 +2716,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 return Vector128.Xor(left, right);
 #else
-                return Xor_Base(left, right);
+                return Xor_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Xor{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<T> Xor_Base<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+            public static unsafe Vector128<T> Xor_Basic<T>(Vector128<T> left, Vector128<T> right) where T : struct {
 #if NET5_0_OR_GREATER
                 Unsafe.SkipInit(out Vector128<T> rt);
 #else

@@ -59,7 +59,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = VectorTraitsBase.Statics.YShuffleG2_Base(p0, control);
+                Vector<TMy> vtemp = VectorTraitsBase.Statics.YShuffleG2_Basic(p0, control);
                 vrt += vtemp; // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }

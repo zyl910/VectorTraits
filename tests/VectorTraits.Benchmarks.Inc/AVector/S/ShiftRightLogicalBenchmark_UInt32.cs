@@ -120,7 +120,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumSRL_Base(TMy[] src, int srcCount, int shiftAmount) {
+        private static unsafe TMy StaticSumSRL_Basic(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             int VectorWidth = Vector<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -134,7 +134,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftRightLogical_Base(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftRightLogical_Basic(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -151,11 +151,11 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRL_Base() {
+        public void SumSRL_Basic() {
             VectorTraitsBase.Statics.ThrowForUnsupported(true);
             dstTMy = 0;
             for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
-                dstTMy += StaticSumSRL_Base(srcArray, srcArray.Length, shiftAmount);
+                dstTMy += StaticSumSRL_Basic(srcArray, srcArray.Length, shiftAmount);
             }
             CheckResult("SumSRL_Base");
         }
@@ -182,7 +182,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits128Base.Statics.ShiftRightLogical_Base(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraits128Base.Statics.ShiftRightLogical_Basic(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -230,7 +230,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits256Base.Statics.ShiftRightLogical_Base(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraits256Base.Statics.ShiftRightLogical_Basic(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -694,7 +694,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumSRLFast_Base(TMy[] src, int srcCount, int shiftAmount) {
+        private static unsafe TMy StaticSumSRLFast_Basic(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             int VectorWidth = Vector<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -708,7 +708,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftRightLogical_Fast_Base(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraitsBase.Statics.ShiftRightLogical_Fast_Basic(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -725,11 +725,11 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRLFast_Base() {
+        public void SumSRLFast_Basic() {
             VectorTraitsBase.Statics.ThrowForUnsupported(true);
             dstTMy = 0;
             for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
-                dstTMy += StaticSumSRLFast_Base(srcArray, srcArray.Length, shiftAmount);
+                dstTMy += StaticSumSRLFast_Basic(srcArray, srcArray.Length, shiftAmount);
             }
             CheckResult("SumSRLFast_Base");
         }
@@ -756,7 +756,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits128Base.Statics.ShiftRightLogical_Fast_Base(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraits128Base.Statics.ShiftRightLogical_Fast_Basic(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }
@@ -804,7 +804,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
                 TMy* p = p0;
                 // Vector processs.
                 for (i = 0; i < cntBlock; ++i) {
-                    Vector<TMy> vtemp = VectorTraits256Base.Statics.ShiftRightLogical_Fast_Base(*(Vector<TMy>*)p, shiftAmount);
+                    Vector<TMy> vtemp = VectorTraits256Base.Statics.ShiftRightLogical_Fast_Basic(*(Vector<TMy>*)p, shiftAmount);
                     vrt += vtemp; // Add.
                     p += nBlockWidth;
                 }

@@ -157,7 +157,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSLL_Base(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSLL_Basic(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -185,9 +185,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSLL_Base() {
+        public void SumSLL_Basic() {
             VectorTraitsBase.Statics.ThrowForUnsupported(true);
-            dstTMy = StaticSumSLL_Base(srcArray, srcArray.Length, shiftAmount);
+            dstTMy = StaticSumSLL_Basic(srcArray, srcArray.Length, shiftAmount);
             CheckResult("SumSLL_Base");
         }
 
