@@ -195,12 +195,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
 #if NET5_0_OR_GREATER
 
         /// <summary>
-        /// Sum Narrow - Vector128 - Arm.
+        /// Sum Narrow - Vector128 - AdvSimd.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSumNarrowVector128_Arm(TMy[] src, int srcCount) {
+        public static TMyOut StaticSumNarrowVector128_AdvSimd(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -230,10 +230,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
         }
 
         [Benchmark]
-        public void SumNarrowVector128_Arm() {
+        public void SumNarrowVector128_AdvSimd() {
             WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
-            dstTMy = StaticSumNarrowVector128_Arm(srcArray, srcArray.Length);
-            CheckResult("SumNarrowVector128_Arm");
+            dstTMy = StaticSumNarrowVector128_AdvSimd(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVector128_AdvSimd");
         }
 
 #endif // NET5_0_OR_GREATER

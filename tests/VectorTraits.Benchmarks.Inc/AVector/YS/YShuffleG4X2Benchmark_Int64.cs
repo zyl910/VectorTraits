@@ -262,13 +262,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if NET5_0_OR_GREATER
 
         /// <summary>
-        /// Sum YShuffleG4X2 - Vector128 - Arm.
+        /// Sum YShuffleG4X2 - Vector128 - AdvSimd.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumYShuffleG4X2Vector128_Arm(TMy[] src, int srcCount, ShuffleControlG4 control) {
+        private static TMy StaticSumYShuffleG4X2Vector128_AdvSimd(TMy[] src, int srcCount, ShuffleControlG4 control) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -305,14 +305,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumYShuffleG4X2Vector128_Arm() {
+        public void SumYShuffleG4X2Vector128_AdvSimd() {
             WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector128<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector128<byte>.Count));
             }
             //Debugger.Break();
-            dstTMy = StaticSumYShuffleG4X2Vector128_Arm(srcArray, srcArray.Length, control);
-            CheckResult("SumYShuffleG4X2Vector128_Arm");
+            dstTMy = StaticSumYShuffleG4X2Vector128_AdvSimd(srcArray, srcArray.Length, control);
+            CheckResult("SumYShuffleG4X2Vector128_AdvSimd");
         }
 
 #endif // NET5_0_OR_GREATER

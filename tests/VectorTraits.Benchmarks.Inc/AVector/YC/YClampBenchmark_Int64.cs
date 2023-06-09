@@ -273,14 +273,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
 
 #if NET5_0_OR_GREATER
         /// <summary>
-        /// Sum Clamp - Vector128 - Arm.
+        /// Sum Clamp - Vector128 - AdvSimd.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TMy StaticSumClampVector128_Arm(TMy[] src, int srcCount, TMy amin, TMy amax) {
+        private static unsafe TMy StaticSumClampVector128_AdvSimd(TMy[] src, int srcCount, TMy amin, TMy amax) {
             TMy rt = 0; // Result.
             int VectorWidth = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
@@ -312,15 +312,15 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
         }
 
         [Benchmark]
-        public void SumClampVector128_Arm() {
+        public void SumClampVector128_AdvSimd() {
             WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
             //Debugger.Break();
-            dstTMy = StaticSumClampVector128_Arm(srcArray, srcArray.Length, valueMin, valueMax);
-            CheckResult("SumClampVector128_Arm");
+            dstTMy = StaticSumClampVector128_AdvSimd(srcArray, srcArray.Length, valueMin, valueMax);
+            CheckResult("SumClampVector128_AdvSimd");
         }
 
         /// <summary>
-        /// Sum Clamp - Vector128 - Arm 64bit.
+        /// Sum Clamp - Vector128 - AdvSimd 64bit.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
