@@ -11,6 +11,9 @@ SET my_path=bin/Release/netcoreapp3.1/VectorTraits.Benchmarks.exe
 IF EXIST "%my_path%" GOTO Run_netcore3_1
 SET my_path=VectorTraits.Benchmarks/bin/Release/netcoreapp3.1/VectorTraits.Benchmarks.exe
 IF EXIST "%my_path%" GOTO Run_netcore3_1
+@ECHO ON
+del netcore3.1.txt
+@ECHO OFF
 GOTO Done_netcore3_1
 :Run_netcore3_1
 @ECHO ON
@@ -27,6 +30,9 @@ SET my_path=bin/Release/net5.0/VectorTraits.Benchmarks.exe
 IF EXIST "%my_path%" GOTO Run_net5_0
 SET my_path=VectorTraits.Benchmarks/bin/Release/net5.0/VectorTraits.Benchmarks.exe
 IF EXIST "%my_path%" GOTO Run_net5_0
+@ECHO ON
+del net5.0.txt
+@ECHO OFF
 GOTO Done_net5_0
 :Run_net5_0
 @ECHO ON
@@ -43,6 +49,9 @@ SET my_path=bin/Release/net6.0/VectorTraits.Benchmarks.exe
 IF EXIST "%my_path%" GOTO Run_net6_0
 SET my_path=VectorTraits.Benchmarks/bin/Release/net6.0/VectorTraits.Benchmarks.exe
 IF EXIST "%my_path%" GOTO Run_net6_0
+@ECHO ON
+del net6.0.txt
+@ECHO OFF
 GOTO Done_net6_0
 :Run_net6_0
 @ECHO ON
@@ -59,6 +68,9 @@ SET my_path=bin/Release/net7.0/VectorTraits.Benchmarks.exe
 IF EXIST "%my_path%" GOTO Run_net7_0
 SET my_path=VectorTraits.Benchmarks/bin/Release/net7.0/VectorTraits.Benchmarks.exe
 IF EXIST "%my_path%" GOTO Run_net7_0
+@ECHO ON
+del net7.0.txt
+@ECHO OFF
 GOTO Done_net7_0
 :Run_net7_0
 @ECHO ON

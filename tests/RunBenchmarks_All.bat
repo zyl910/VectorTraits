@@ -13,6 +13,9 @@ SET my_path=bin/Release/Release/VectorTraits.Benchmarks.NetFw.exe
 IF EXIST "%my_path%" GOTO Run_netFw
 SET my_path=VectorTraits.Benchmarks.NetFw/bin/Release/VectorTraits.Benchmarks.NetFw.exe
 IF EXIST "%my_path%" GOTO Run_netFw
+@ECHO ON
+del netFw.txt
+@ECHO OFF
 GOTO Done_netFw
 :Run_netFw
 @ECHO ON
@@ -31,6 +34,9 @@ SET my_path=bin/Release/netcoreapp2.1/VectorTraits.Benchmarks.NetCore.dll
 IF EXIST "%my_path%" GOTO Run_netcore2_1
 SET my_path=VectorTraits.Benchmarks.NetCore/bin/Release/netcoreapp2.1/VectorTraits.Benchmarks.NetCore.dll
 IF EXIST "%my_path%" GOTO Run_netcore2_1
+@ECHO ON
+del netcore2.1.txt
+@ECHO OFF
 GOTO Done_netcore2_1
 :Run_netcore2_1
 @ECHO ON
