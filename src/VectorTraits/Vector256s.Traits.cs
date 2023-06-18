@@ -249,7 +249,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> ConvertToSingle(Vector256<int> value) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ConvertToSingle(value);
 #else
             return _instance.ConvertToSingle(value);

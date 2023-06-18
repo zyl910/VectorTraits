@@ -9,6 +9,7 @@
 - BCL_OVERRIDE_BASE_FIXED: 用有硬件加速的新版 BCL 库的方法来覆盖固定长度向量的算法. 仅对有硬件加速的来使用.
 - BCL_OVERRIDE_BASE_VAR: 用新版 BCL 库的方法来覆盖可变长度向量的算法. 它一般需要通过分支或循环来实现，性能不一定比BCL算法优化。且能获得.NET版本更新带来的改进，故用它。
 - BCL_BASE_OVERRIDE_STATIC: 对于特性静态方法（Vectors.Traits.cs等文件）, 是否直接调用Base版的静态方法, 而不是动态调用接口方法。因为低版本.NET（< `.NET Core 3.0`）在通过接口调用封固类方法时，不会内联。实际测试后发现，`.NET Core 3.0`才开始支持“在通过接口调用封固类方法时的内联”，而且该版本才支持内在函数。
+- BCL_VER_OVERRIDE_STATIC: 对于特性静态方法（Vectors.Traits.cs等文件）, 是否根据版本直接调用BCL方法, 而不是动态调用接口方法。这是为了简化JIT编译优化的工作量, 仅 X86、Arm都存在硬件优化时才应用它。仅发布时（如master分支）启用, 开发阶段（如develop分支）会屏蔽此标志（BCL_VER_OVERRIDE_STATIC0）. 
 - USE_VECTOR_CREATE: 用向量创建（如 `new Vector<T>`、`Vector128.Create`）代替静态字段. net5能优化常量访问.
 - USE_VECTOR_CREATE_BY_ARRAY: 用向量创建（如 `new Vector<T>`、`Vector128.Create`）代替查询数组. 它能避免数组越界检查.
 - REDUCE_MEMORY_USAGE: 减少内存占用. 若启用它, 会屏蔽 废弃的或实验性的数据.
