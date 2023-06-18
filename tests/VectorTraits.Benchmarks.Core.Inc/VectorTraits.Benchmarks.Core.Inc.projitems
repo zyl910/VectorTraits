@@ -33,6 +33,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt16_Byte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt32_Single.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt32_UInt16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt64_UInt32.cs" />

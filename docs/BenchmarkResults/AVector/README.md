@@ -3,6 +3,7 @@
 
 ## Benchmark results of Vector (向量的基准测试结果)
 
+- [ConvertToSingle](ConvertToSingle.md): Convert to a vector whose elements are of type Single (转换为元素类型是Single的向量).
 - [Multiply](Multiply.md): Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
 - [Narrow](Narrow.md): Narrows two Vector instances into one Vector  (将两个 Vector 实例缩窄为一个 Vector ).
 - [ShiftLeft](ShiftLeft.md): Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
