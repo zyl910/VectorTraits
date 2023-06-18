@@ -217,15 +217,15 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> ConditionalSelect_OrAnd<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
                 // result = (left & condition) | (right & ~condition);
-                return AdvSimd.Or(AdvSimd.And(condition.AsByte(), left.AsByte())
-                    , AdvSimd.And(AdvSimd.Not(condition.AsByte()), right.AsByte())
-                    ).As<byte, T>();
+                return AdvSimd.Or(AdvSimd.And(condition.AsUInt64(), left.AsUInt64())
+                    , AdvSimd.And(AdvSimd.Not(condition.AsUInt64()), right.AsUInt64())
+                    ).As<ulong, T>();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> ConditionalSelect_Hw<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
-                return AdvSimd.BitwiseSelect(condition.AsByte(), left.AsByte(), right.AsByte()).As<byte, T>();
+                return AdvSimd.BitwiseSelect(condition.AsUInt64(), left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
             }
 
 
@@ -847,7 +847,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Xor{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> Xor<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-                return AdvSimd.Xor(left.AsUInt32(), right.AsUInt32()).As<uint, T>();
+                return AdvSimd.Xor(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
             }
 
 

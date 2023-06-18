@@ -152,18 +152,15 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.AndNot{T}(Vector256{T}, Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> AndNot<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-                // __m256d _mm256_andnot_pd (__m256d a, __m256d b)
+                // __m256i _mm256_andnot_si256 (__m256i a, __m256i b)
                 // #include <immintrin.h>
-                // Instruction: vandnpd ymm, ymm, ymm
-                // CPUID Flags: AVX
+                // Instruction: vpandn ymm, ymm, ymm
+                // CPUID Flags: AVX2
                 // Description
-                // Compute the bitwise NOT of packed double-precision (64-bit) floating-point elements in a and then AND with b, and store the results in dst.
+                // Compute the bitwise NOT of 256 bits (representing integer data) in a and then AND with b, and store the result in dst.
                 // Operation
-                // FOR j := 0 to 3
-                // 	i := j*64
-                // 	dst[i+63:i] := ((NOT a[i+63:i]) AND b[i+63:i])
-                // ENDFOR
-                return Avx.AndNot(right.AsDouble(), left.AsDouble()).As<double, T>();
+                // dst[255:0] := ((NOT a[255:0]) AND b[255:0])
+                return Avx2.AndNot(right.AsUInt64(), left.AsUInt64()).As<ulong, T>();
             }
 
 
@@ -177,7 +174,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.BitwiseAnd{T}(Vector256{T}, Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> BitwiseAnd<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-                return Avx.And(left.AsDouble(), right.AsDouble()).As<double, T>();
+                return Avx2.And(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
             }
 
 
@@ -191,7 +188,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.BitwiseOr{T}(Vector256{T}, Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> BitwiseOr<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-                return Avx.Or(left.AsDouble(), right.AsDouble()).As<double, T>();
+                return Avx2.Or(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
             }
 
 
@@ -216,9 +213,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> ConditionalSelect_OrAnd<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
                 // result = (left & condition) | (right & ~condition);
-                return Avx.Or(Avx.And(condition.AsSingle(), left.AsSingle())
-                    , Avx.AndNot(condition.AsSingle(), right.AsSingle())
-                    ).As<float, T>();
+                return Avx2.Or(Avx2.And(condition.AsUInt64(), left.AsUInt64())
+                    , Avx2.AndNot(condition.AsUInt64(), right.AsUInt64())
+                    ).As<ulong, T>();
             }
 
 
@@ -816,13 +813,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.OnesComplement{T}(Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> OnesComplement<T>(Vector256<T> vector) where T : struct {
-                return Avx.Xor(Vector256s<float>.AllBitsSet, vector.AsSingle()).As<float, T>();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.OnesComplement{T}(Vector256{T})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<T> OnesComplement_Byte<T>(Vector256<T> vector) where T : struct {
-                return Avx2.Xor(Vector256s<byte>.AllBitsSet, vector.AsByte()).As<byte, T>();
+                return Avx2.Xor(Vector256s<ulong>.AllBitsSet, vector.AsUInt64()).As<ulong, T>();
             }
 
 
@@ -908,7 +899,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Xor{T}(Vector256{T}, Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> Xor<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-                return Avx.Xor(left.AsDouble(), right.AsDouble()).As<double, T>();
+                return Avx2.Xor(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
             }
 
 

@@ -1658,7 +1658,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     Vector256.Create((sbyte)(32 + sbyte.MinValue)),
                     indicesAdded
                 ).AsByte(); // Unsigned compare: (i < 32)
-                mask = OnesComplement_Byte(mask); // Used for _mm256_shuffle_epi8. Change mask to `0 is keep; AllBitsSet is set zero`.
+                mask = OnesComplement(mask); // Used for _mm256_shuffle_epi8. Change mask to `0 is keep; AllBitsSet is set zero`.
                 args0 = Avx2.Or(args0, mask);
                 args1 = Avx2.Or(args1, mask);
             }
@@ -1681,7 +1681,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     Vector256.Create((short)(16 + short.MinValue)),
                     indicesAdded
                 ).AsUInt16(); // Unsigned compare: (i < 16)
-                mask = OnesComplement_Byte(mask); // Used for _mm256_shuffle_epi8. Change mask to `0 is keep; AllBitsSet is set zero`.
+                mask = OnesComplement(mask); // Used for _mm256_shuffle_epi8. Change mask to `0 is keep; AllBitsSet is set zero`.
                 args0 = Avx2.Or(args0, mask);
                 args1 = Avx2.Or(args1, mask);
             }
