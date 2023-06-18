@@ -197,7 +197,17 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> ConvertToSingle(Vector256<uint> value) {
-                return ConvertToSingle_Multiply(value);
+                return ConvertToSingle_Add(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> ConvertToSingle_Add(Vector256<uint> value) {
+                Vector256<int> translated = Avx2.Add(value.AsInt32(), Vector256.Create(int.MinValue));
+                Vector256<float> rtTranslated = Avx.ConvertToVector256Single(translated);
+                Vector256<float> rt = Avx.Subtract(rtTranslated, Vector256.Create((float)int.MinValue));
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{uint})"/>
