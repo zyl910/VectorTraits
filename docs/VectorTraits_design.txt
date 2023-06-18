@@ -15,6 +15,8 @@
 - OFF_VECTOR_TUPLES: 禁用Tuples命名空间. 实测发现它的效率不佳, 故屏蔽. 预留给未来找到更好办法.
 - DRY_JOB: 性能评测时使用 DryJob , 仅运行一次快速得到汇编代码.
 - BENCHMARKS_OFF: 关闭评测 . 用于专门测试某个评测时，此时仅需专门打开某一个评测。
+- BENCHMARKS_128: 评测128位算法.
+- BENCHMARKS_256: 评测256位算法.
 - BENCHMARKS_128ALGORITHM: [废弃] 评测各种128位底层算法.
 - BENCHMARKS_256ALGORITHM: [废弃] 评测各种256位底层算法.
 - BENCHMARKS_ALGORITHM: 评测各种底层算法. 如 ShiftLeft_Multiply .
