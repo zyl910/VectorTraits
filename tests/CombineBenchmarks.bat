@@ -36,7 +36,7 @@ ECHO+>>%my_file%
 :CombineDone_netcore3_1
 
 IF NOT EXIST "net5.0.txt" GOTO CombineDone_net5_0
-ECHO #### .NET 5 >>%my_file%
+ECHO #### .NET 5.0 >>%my_file%
 ECHO ``` >>%my_file%
 @ECHO ON
 copy "%my_file%"/a+"net5.0.txt"/a %my_file%
@@ -46,7 +46,7 @@ ECHO+>>%my_file%
 :CombineDone_net5_0
 
 IF NOT EXIST "net6.0.txt" GOTO CombineDone_net6_0
-ECHO #### .NET 6 >>%my_file%
+ECHO #### .NET 6.0 >>%my_file%
 ECHO ``` >>%my_file%
 @ECHO ON
 copy "%my_file%"/a+"net6.0.txt"/a %my_file%
@@ -56,7 +56,7 @@ ECHO+>>%my_file%
 :CombineDone_net6_0
 
 IF NOT EXIST "net7.0.txt" GOTO CombineDone_net7_0
-ECHO #### .NET 7 >>%my_file%
+ECHO #### .NET 7.0 >>%my_file%
 ECHO ``` >>%my_file%
 @ECHO ON
 copy "%my_file%"/a+"net7.0.txt"/a %my_file%
