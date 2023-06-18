@@ -197,6 +197,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> ConvertToSingle(Vector256<uint> value) {
+                return ConvertToSingle_Multiply(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> ConvertToSingle_Multiply(Vector256<uint> value) {
+                // Reference: System.Private.CoreLib/src/System/Runtime/Intrinsics/Vector256.cs
                 // This first bit of magic works because float can exactly represent integers up to 2^24
                 //
                 // This means everything between 0 and 2^16 (ushort.MaxValue + 1) are exact and so
@@ -211,8 +219,12 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // This means that scaling upper by 65536 gives us the exactly representable base value
                 // and then the remaining lower value, which is likewise up to 65535 can be added on
                 // giving us a result that will correctly round to the nearest representable value
-                Vector256<float> result = Avx.Multiply(upper, Vector256.Create(65536.0f));
-                return Avx.Add(result, lower);
+                if (Fma.IsSupported) {
+                    return Fma.MultiplyAdd(upper, Vector256.Create(65536.0f), lower);
+                } else {
+                    Vector256<float> result = Avx.Multiply(upper, Vector256.Create(65536.0f));
+                    return Avx.Add(result, lower);
+                }
             }
 
 
