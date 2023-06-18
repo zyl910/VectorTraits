@@ -1,4 +1,4 @@
-﻿#undef BENCHMARKS_OFF
+﻿//#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -202,7 +202,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="shiftAmount">Shift amount.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumSRA_Basic(TMy[] src, int srcCount, int shiftAmount) {
+        private static TMy StaticSumSRA_Base(TMy[] src, int srcCount, int shiftAmount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -230,13 +230,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumSRA_Basic() {
+        public void SumSRA_Base() {
             VectorTraitsBase.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumSRA_Basic(srcArray, srcArray.Length, shiftAmount);
+            dstTMy = StaticSumSRA_Base(srcArray, srcArray.Length, shiftAmount);
             CheckResult("SumSRA_Base");
         }
 

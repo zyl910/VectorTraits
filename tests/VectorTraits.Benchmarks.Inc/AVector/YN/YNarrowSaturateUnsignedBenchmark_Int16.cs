@@ -393,7 +393,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
             int i;
             // Body.
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
-            // a) Vector128 processs.
+            // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 var t = Vector128s.YNarrowSaturateUnsigned(p0, Unsafe.Add(ref p0, 1));
                 vrt = Vector128s.Add(vrt, t);
@@ -440,7 +440,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
-            // a) Vector256 processs.
+            // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 var t = Vector256s.YNarrowSaturateUnsigned(p0, Unsafe.Add(ref p0, 1));
                 vrt = Vector256s.Add(vrt, t);

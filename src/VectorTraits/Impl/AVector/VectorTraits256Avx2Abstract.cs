@@ -81,6 +81,27 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.ConvertToSingle_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToSingle_AcceleratedTypes {
+            get {
+                return Statics.ConvertToSingle_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToSingle(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<float> ConvertToSingle(Vector<int> value) {
+            return Statics.ConvertToSingle(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToSingle(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<float> ConvertToSingle(Vector<uint> value) {
+            return Statics.ConvertToSingle(value);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits_AcceleratedTypes"/>
         public override TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
             get {
