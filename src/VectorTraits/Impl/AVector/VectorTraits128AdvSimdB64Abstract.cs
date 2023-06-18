@@ -54,6 +54,56 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+            get {
+                return Statics.ConvertToDouble_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> ConvertToDouble(Vector<long> value) {
+            return Statics.ConvertToDouble(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> ConvertToDouble(Vector<ulong> value) {
+            return Statics.ConvertToDouble(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToInt64_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToInt64_AcceleratedTypes {
+            get {
+                return Statics.ConvertToInt64_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToInt64(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> ConvertToInt64(Vector<double> value) {
+            return Statics.ConvertToInt64(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
+            get {
+                return Statics.ConvertToUInt64_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt64(Vector{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> ConvertToUInt64(Vector<double> value) {
+            return Statics.ConvertToUInt64(value);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits_AcceleratedTypes"/>
         public override TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
             get {

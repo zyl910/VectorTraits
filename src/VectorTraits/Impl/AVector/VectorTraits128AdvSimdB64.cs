@@ -82,6 +82,56 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToDouble_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> ConvertToDouble(Vector<long> value) {
+                return WStatics.ConvertToDouble(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> ConvertToDouble(Vector<ulong> value) {
+                return WStatics.ConvertToDouble(value.AsVector128()).AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToInt64_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt64(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ConvertToInt64(Vector<double> value) {
+                return WStatics.ConvertToInt64(value.AsVector128()).AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToUInt64_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt64(Vector{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> ConvertToUInt64(Vector<double> value) {
+                return WStatics.ConvertToUInt64(value.AsVector128()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits_AcceleratedTypes"/>
             public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
                 get {

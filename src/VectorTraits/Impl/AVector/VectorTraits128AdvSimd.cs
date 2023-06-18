@@ -90,6 +90,56 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt32_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToInt32_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToInt32_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt32(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> ConvertToInt32(Vector<float> value) {
+                return WStatics.ConvertToInt32(value.AsVector128()).AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToSingle_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToSingle_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToSingle(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> ConvertToSingle(Vector<int> value) {
+                return WStatics.ConvertToSingle(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToSingle(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> ConvertToSingle(Vector<uint> value) {
+                return WStatics.ConvertToSingle(value.AsVector128()).AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt32_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToUInt32_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt32(Vector{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> ConvertToUInt32(Vector<float> value) {
+                return WStatics.ConvertToUInt32(value.AsVector128()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits_AcceleratedTypes"/>
             public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
                 get {
