@@ -229,7 +229,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.ConvertToInt32(Vector{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> ConvertToInt32(Vector<float> value) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
             return BaseStatics.ConvertToInt32(value);
 #else
             return _instance.ConvertToInt32(value);
