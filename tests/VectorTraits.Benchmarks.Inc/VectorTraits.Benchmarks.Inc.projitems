@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AVector\C\ConvertToInt32Benchmark_Single.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\C\ConvertToSingleBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\C\ConvertToSingleBenchmark_UInt32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\C\ConvertToUInt32Benchmark_Single.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\M\MultiplyBenchmark_Double.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\M\MultiplyBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\M\MultiplyBenchmark_Int32.cs" />
