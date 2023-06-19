@@ -28,7 +28,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
 
 #pragma warning disable CS0618 // Type or member is obsolete
     /// <summary>
-    /// Widen benchmark - Int32.
+    /// ConvertToSingle benchmark - Int32.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]

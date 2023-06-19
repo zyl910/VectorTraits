@@ -113,6 +113,20 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt32_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToInt32_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToInt32_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt32(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> ConvertToInt32(Vector<float> value) {
+                return WStatics.ConvertToInt32(value.AsVector256()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.ConvertToSingle_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {
                 get {
