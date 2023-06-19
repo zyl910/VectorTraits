@@ -197,10 +197,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> ConvertToSingle(Vector256<uint> value) {
-                return ConvertToSingle_Add(value);
+                return ConvertToSingle_Multiply(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{uint})"/>
+            [Obsolete("The Uint32 value after the translation will exceed the trailing precision range of Single(e7m23)")]
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> ConvertToSingle_Add(Vector256<uint> value) {
@@ -242,6 +243,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
                 get {
                     return SuperStatics.ConvertToUInt32_AcceleratedTypes;
+                    //return TypeCodeFlags.Single;
                 }
             }
 
@@ -250,6 +252,18 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> ConvertToUInt32(Vector256<float> value) {
                 return SuperStatics.ConvertToUInt32(value);
+                //return ConvertToUInt32_Add(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
+            [Obsolete("The Uint32 value after the translation will exceed the trailing precision range of Single(e7m23)")]
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> ConvertToUInt32_Add(Vector256<float> value) {
+                Vector256<float> translated = Avx.Add(value, Vector256.Create((float)int.MinValue));
+                Vector256<int> rtTranslated = Avx.ConvertToVector256Int32WithTruncation(translated);
+                Vector256<uint> rt = Avx2.Subtract(rtTranslated, Vector256.Create(int.MinValue)).AsUInt32();
+                return rt;
             }
 
 
