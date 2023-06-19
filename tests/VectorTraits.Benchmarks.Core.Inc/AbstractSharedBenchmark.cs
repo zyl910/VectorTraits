@@ -12,6 +12,8 @@ namespace Zyl.VectorTraits.Benchmarks {
     public abstract class AbstractSharedBenchmark : AbstractBenchmark, ILoopCountGetter {
 #pragma warning disable CA2211 // Non-constant fields should not be visible
         protected static float[] srcArraySingle = { };
+        protected static float[] srcArraySingle_RangeInt32 = { };
+        protected static float[] srcArraySingle_RangeUInt32 = { };
         protected static double[] srcArrayDouble = { };
         protected static sbyte[] srcArraySByte = { };
         protected static byte[] srcArrayByte = { };
@@ -45,8 +47,12 @@ namespace Zyl.VectorTraits.Benchmarks {
                 if (null!= srcArrayInt32) {
                     if (N == srcArrayInt32.Length) return;
                 }
+                double pow2_32 = Math.Pow(2, 32);
+                double minValueInt32 = Int32.MinValue;
                 Random random = new Random(0);
                 srcArraySingle = new float[N];
+                srcArraySingle_RangeInt32 = new float[N];
+                srcArraySingle_RangeUInt32 = new float[N];
                 srcArrayDouble = new double[N];
                 srcArraySByte = new sbyte[N];
                 srcArrayByte = new byte[N];
@@ -64,7 +70,11 @@ namespace Zyl.VectorTraits.Benchmarks {
                     int b = random.Next(int.MinValue, int.MaxValue);
                     long n64 = (((long)a) << 32) | (long)b;
                     double f = random.NextDouble();
+                    double fUInt32 = f * pow2_32;
+                    double fInt32 = fUInt32 + minValueInt32;
                     srcArraySingle[i] = (float)f;
+                    srcArraySingle_RangeInt32[i] = (float)fInt32;
+                    srcArraySingle_RangeUInt32[i] = (float)fUInt32;
                     srcArrayDouble[i] = f;
                     srcArraySByte[i] = (sbyte)srcArrayByte[i];
                     srcArrayInt16[i] = (short)a;

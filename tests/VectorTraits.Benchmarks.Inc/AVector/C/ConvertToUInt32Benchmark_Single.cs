@@ -33,7 +33,17 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class ConvertToUInt32Benchmark_Single : AbstractSharedBenchmark_Single_UInt32 {
+    public partial class ConvertToUInt32Benchmark_Single : AbstractSharedBenchmark {
+
+        // -- TMy ref --
+        protected static ref TMyOut dstTMy => ref dstUInt32;
+        protected static ref TMyOut baselineTMy => ref baselineUInt32;
+        protected static TMy[] srcArray => srcArraySingle_RangeUInt32;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected override void CheckResult(string name) {
+            CheckResultUInt32(name);
+        }
 
         // -- var --
 
@@ -81,6 +91,9 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             for (i = 0; i < cntBlock; ++i) {
                 vtemp = Vector.ConvertToUInt32(p0);
                 vrt += vtemp;
+                //if (BenchmarkUtil.IsLastRun && i < 3) {
+                //    VectorTextUtil.WriteLine(Console.Out, "SumBcl[{0}]: {1}, {2}", i, p0, vtemp);
+                //}
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
