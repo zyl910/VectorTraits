@@ -242,8 +242,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
                 get {
+#if NET5_0_OR_GREATER
+                    return TypeCodeFlags.Single;
+#else
                     return SuperStatics.ConvertToUInt32_AcceleratedTypes;
-                    //return TypeCodeFlags.Single;
+#endif
                 }
             }
 
@@ -251,13 +254,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> ConvertToUInt32(Vector256<float> value) {
-                return SuperStatics.ConvertToUInt32(value);
+                //return SuperStatics.ConvertToUInt32(value);
                 //return ConvertToUInt32_Add(value);
                 //return ConvertToUInt32_Mapping(value);
+                return ConvertToUInt32_MappingFix(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
-            [Obsolete("The Uint32 value after the translation will exceed the trailing precision range of Single(e7m23)")]
+            [Obsolete("The Uint32 value after the translation will exceed the trailing precision range of Single(e7m24)")]
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> ConvertToUInt32_Add(Vector256<float> value) {
@@ -268,6 +272,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
+            /// <remarks>Input range is `[-pow(2,31), pow(2,31))`. Out of range results in `2147483648`(pow(2,31)).</remarks>
+            [Obsolete("It has a different valid range.")]
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> ConvertToUInt32_As(Vector256<float> value) {
@@ -275,6 +281,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
+            /// <remarks>Input range is `[-pow(2,31), pow(2,32))`. Out of range results in `2147483648`(pow(2,31)).</remarks>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> ConvertToUInt32_Mapping(Vector256<float> value) {
@@ -284,11 +291,37 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<float> highBegin = Vector256.Create(ScalarConstants.BitSingle_Pow2_31).AsSingle();
                 Vector256<float> highMapped = Avx.Subtract(value, highEnd);
                 Vector256<float> highMask = Avx.And(Avx.CompareLessThanOrEqual(highBegin, value), Avx.CompareLessThan(value, highEnd)); // highBegin <= value < highEnd .
-                Vector256<float> value2 = ConditionalSelect(highMask, highMapped, value);
+                //Vector256<float> value2 = ConditionalSelect(highMask, highMapped, value);
+                Vector256<float> value2 = Avx2.BlendVariable(value, highMapped, highMask);
                 Vector256<uint> rt = Avx.ConvertToVector256Int32WithTruncation(value2).AsUInt32();
                 return rt;
 #else
-                // Because: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector256<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
+                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector256<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
+                return SuperStatics.ConvertToUInt32(value);
+#endif
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
+            /// <remarks>Input range is `[-pow(2,31), pow(2,32))`. Out of range results in `0`.</remarks>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> ConvertToUInt32_MappingFix(Vector256<float> value) {
+#if NET5_0_OR_GREATER
+                // [pow(2,31), pow(2,32)-1] mapping to [-pow(2,31), -1]. Subtract `pow(2,32)`.
+                Vector256<float> highEnd = Vector256.Create(ScalarConstants.BitSingle_Pow2_32).AsSingle();
+                Vector256<float> lowBegin = Vector256.Create(ScalarConstants.BitSingle_NegativePow2_31).AsSingle();
+                Vector256<float> highBegin = Vector256.Create(ScalarConstants.BitSingle_Pow2_31).AsSingle();
+                Vector256<float> lessHighEnd = Avx.CompareLessThan(value, highEnd); // value < highEnd .
+                Vector256<float> highMapped = Avx.Subtract(value, highEnd);
+                Vector256<float> lowMask = Avx.And(Avx.CompareLessThanOrEqual(lowBegin, value), lessHighEnd); // lowBegin <= value < highEnd .
+                Vector256<float> value0 = Avx.And(value, lowMask); // If out of range, set to 0.
+                Vector256<float> highMask = Avx.And(Avx.CompareLessThanOrEqual(highBegin, value), lessHighEnd); // highBegin <= value < highEnd .
+                //Vector256<float> value2 = ConditionalSelect(highMask, highMapped, value0);
+                Vector256<float> value2 = Avx2.BlendVariable(value0, highMapped, highMask);
+                Vector256<uint> rt = Avx.ConvertToVector256Int32WithTruncation(value2).AsUInt32();
+                return rt;
+#else
+                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector256<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
                 return SuperStatics.ConvertToUInt32(value);
 #endif
             }

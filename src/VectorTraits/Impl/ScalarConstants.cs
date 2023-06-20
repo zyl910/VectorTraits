@@ -9,6 +9,11 @@ namespace Zyl.VectorTraits.Impl {
     public static class ScalarConstants {
 
         // == BitSingle: Bit of Single ==
+        /// <summary>BitSingle - `-pow(2, 31) = -2147483648`.</summary>
+        public const int BitSingle_NegativePow2_31 = unchecked((int)0xCF000000U); // BitConverter.SingleToInt32Bits((float)-Math.Pow(2, 31)).ToString("X")
+        /// <summary>BitSingle - `-pow(2, 32) = -4294967296`.</summary>
+        public const int BitSingle_NegativePow2_32 = unchecked((int)0xCF800000U);
+
         /// <summary>BitSingle - `pow(2, 31) = 2147483648`.</summary>
         public const int BitSingle_Pow2_31 = 0x4F000000; // BitConverter.SingleToInt32Bits((float)Math.Pow(2, 31)).ToString("X")
         /// <summary>BitSingle - `pow(2, 32) = 4294967296`.</summary>
