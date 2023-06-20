@@ -300,14 +300,17 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             int rangeItemCount = (int)Math.Pow(2, 12);
             int rangeItemCountVector = rangeItemCount / Vector256<T>.Count;
             double[] rangeStarts = new double[] {
-                (double)0.0,
-                (double)Math.Pow(2, 31),
-                (double)(Math.Pow(2, 32)-rangeItemCount)
+                0.0,
+                Math.Pow(2, 31),
+                (Math.Pow(2, 32)-rangeItemCount)
             };
+            float maxValueOut = (float)Math.Pow(2, 32);
             SortedDictionary<string, long> dict = new SortedDictionary<string, long>();
             foreach (double start in rangeStarts) {
                 for (int i = 0; i < rangeItemCountVector; ++i) {
                     double startNumber = start + Vector256<T>.Count * i;
+                    float startNumberSingle = (float)startNumber;
+                    if (startNumberSingle >= maxValueOut) continue;
                     Vector256<T> value = Vector256s.CreateByDoubleLoop<T>(startNumber, 1);
                     Vector256<uint> expected = Vector256s.BaseInstance.ConvertToUInt32((dynamic)value);
                     foreach (IWVectorTraits256 instance in instances) {
