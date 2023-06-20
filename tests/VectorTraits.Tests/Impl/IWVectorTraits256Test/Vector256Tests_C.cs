@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 using System.Reflection;
-using NUnit.Framework.Internal;
-using System.Security.Cryptography;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using NUnit.Framework.Internal;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
@@ -247,16 +246,19 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
             var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<uint>>>("ConvertToUInt32_As", "ConvertToUInt32_Mapping");
             foreach (var func in funcList) {
-                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+                Console.WriteLine("{0}: Found", ReflectionUtil.GetShortNameWithType(func.Method));
             }
             Console.WriteLine();
             // run.
             Vector256<T>[] samples = {
                 Vector256s<T>.Serial,
                 Vector256s.CreateByDoubleLoop<T>(-0.5 - Scalars.GetDoubleFrom(src), 1),
+                // It is out of the range of Int32, but still in the range of UInt32.
                 Vector256s.CreateByDoubleLoop<T>(Math.Pow(2, 31), Math.Pow(2, 6)),
                 Vector256s.CreateByDoubleLoop<T>(Math.Pow(2, 32), -Math.Pow(2, 8)),
+                // It is out of range of UInt32, but still in the range of Int32.
                 Vector256s.CreateByDoubleLoop<T>(-Math.Pow(2, 31), Math.Pow(2, 6)),
+                // It is out of range.
                 Vector256s.CreateByDoubleLoop<T>(-Math.Pow(2, 31), -Math.Pow(2, 8)),
                 Vector256s.CreateByDoubleLoop<T>(Math.Pow(2, 32), Math.Pow(2, 8)),
                 Vector256s.CreateByFunc<T>(index=>Scalars.GetByDouble<T>(Math.Pow(2, 31+index))),
@@ -265,15 +267,18 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.DemoNaN,
             };
             bool allowLog = true;
+            bool hideEquals = true;
             foreach (Vector256<T> value in samples) {
                 Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
-                Vector256<uint> expected = Vector256s.ConvertToUInt32((dynamic)value);
+                Vector256<uint> expected = Vector256s.BaseInstance.ConvertToUInt32((dynamic)value);
                 Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
                 foreach (IWVectorTraits256 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector256<uint> dst = instance.ConvertToUInt32((dynamic)value);
                     if (allowLog) {
-                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                        if (!hideEquals || !expected.Equals(dst)) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                        }
                     } else {
                         Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
@@ -282,12 +287,65 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
                     try {
                         Vector256<uint> dst = func(value);
-                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
+                        if (!hideEquals || !expected.Equals(dst)) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
+                        }
                     } catch (Exception ex) {
                         Console.WriteLine(string.Format("{0}:\t{1}", funcName, ex.Message));
                     }
                 }
                 Console.WriteLine();
+            }
+            // Check data in the valid range.
+            int rangeItemCount = (int)Math.Pow(2, 12);
+            int rangeItemCountVector = rangeItemCount / Vector256<T>.Count;
+            double[] rangeStarts = new double[] {
+                (double)0.0,
+                (double)Math.Pow(2, 31),
+                (double)(Math.Pow(2, 32)-rangeItemCount)
+            };
+            SortedDictionary<string, long> dict = new SortedDictionary<string, long>();
+            foreach (double start in rangeStarts) {
+                for (int i = 0; i < rangeItemCountVector; ++i) {
+                    double startNumber = start + Vector256<T>.Count * i;
+                    Vector256<T> value = Vector256s.CreateByDoubleLoop<T>(startNumber, 1);
+                    Vector256<uint> expected = Vector256s.BaseInstance.ConvertToUInt32((dynamic)value);
+                    foreach (IWVectorTraits256 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        Vector256<uint> dst = instance.ConvertToUInt32((dynamic)value);
+                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    }
+                    // funcList.
+                    foreach (var func in funcList) {
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        try {
+                            Vector256<uint> dst = func(value);
+                            if (!expected.Equals(dst)) {
+                                long countError;
+                                if (!dict.TryGetValue(funcName, out countError)) {
+                                    countError = 0;
+                                }
+                                if (countError <= 0) {
+                                    //Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}!={2}, sample={3}", funcName, dst, expected, value));
+                                    Console.WriteLine(VectorTextUtil.Format("Sample({0}):\t{1}", startNumber, value));
+                                    Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                                    Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
+                                    Console.WriteLine();
+                                }
+                                ++countError;
+                                dict[funcName] = countError;
+                            }
+                        } catch (Exception ex) {
+                            //Console.WriteLine(string.Format("{0}:\t{1}", funcName, ex.Message));
+                            _ = ex; // Ignore.
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("Count error:");
+            foreach (var kvp in dict) {
+                Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", kvp.Key, kvp.Value));
             }
         }
 

@@ -18,6 +18,7 @@ namespace Zyl.VectorTraits {
     static partial class Vector256s {
         private static readonly IWVectorTraits256 _instance = WVectorTraits256Abstract.GetBestInstance(); // Best traits instance.
         private static readonly dynamic _instanceDynamic = _instance; // Best traits instance dynamic value.
+        private static readonly WVectorTraits256Base _baseInstance = WVectorTraits256Base.Instance; // Best traits instance.
 
         private static readonly string[] _traitsNames = {
             "WVectorTraits256Base",
@@ -46,6 +47,13 @@ namespace Zyl.VectorTraits {
         public static dynamic InstanceDynamic {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return _instanceDynamic; }
+        }
+
+        /// <summary>Base traits instance (基本特征实例). </summary>
+        [CLSCompliant(false)]
+        public static WVectorTraits256Base BaseInstance {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get { return _baseInstance; }
         }
 
         /// <summary>Traits name list (特征名称列表). </summary>
