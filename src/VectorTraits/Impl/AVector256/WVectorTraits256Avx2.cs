@@ -253,6 +253,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<uint> ConvertToUInt32(Vector256<float> value) {
                 return SuperStatics.ConvertToUInt32(value);
                 //return ConvertToUInt32_Add(value);
+                //return ConvertToUInt32_Mapping(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
@@ -264,6 +265,32 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<int> rtTranslated = Avx.ConvertToVector256Int32WithTruncation(translated);
                 Vector256<uint> rt = Avx2.Subtract(rtTranslated, Vector256.Create(int.MinValue)).AsUInt32();
                 return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> ConvertToUInt32_As(Vector256<float> value) {
+                return Avx.ConvertToVector256Int32WithTruncation(value).AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> ConvertToUInt32_Mapping(Vector256<float> value) {
+#if NET5_0_OR_GREATER
+                // [pow(2,31), pow(2,32)-1] mapping to [-pow(2,31), -1]. Subtract `pow(2,32)`.
+                Vector256<float> highEnd = Vector256.Create(ScalarConstants.BitSingle_Pow2_32).AsSingle();
+                Vector256<float> highBegin = Vector256.Create(ScalarConstants.BitSingle_Pow2_31).AsSingle();
+                Vector256<float> highMapped = Avx.Subtract(value, highEnd);
+                Vector256<float> highMask = Avx.And(Avx.CompareLessThanOrEqual(highBegin, value), Avx.CompareLessThan(value, highEnd)); // highBegin <= value < highEnd .
+                Vector256<float> value2 = ConditionalSelect(highMask, highMapped, value);
+                Vector256<uint> rt = Avx.ConvertToVector256Int32WithTruncation(value2).AsUInt32();
+                return rt;
+#else
+                // Because: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector256<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
+                return SuperStatics.ConvertToUInt32(value);
+#endif
             }
 
 
@@ -2128,7 +2155,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
 
 #endif // NETCOREAPP3_0_OR_GREATER
-        }
+            }
 
-    }
+        }
 }

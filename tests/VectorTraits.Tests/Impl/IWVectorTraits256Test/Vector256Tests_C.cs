@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
+using System.Reflection;
+using NUnit.Framework.Internal;
+using System.Security.Cryptography;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -242,15 +245,26 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
+            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<uint>>>("ConvertToUInt32_As", "ConvertToUInt32_Mapping");
+            foreach (var func in funcList) {
+                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
             Console.WriteLine();
             // run.
             Vector256<T>[] samples = {
                 Vector256s<T>.Serial,
                 Vector256s.CreateByDoubleLoop<T>(-0.5 - Scalars.GetDoubleFrom(src), 1),
+                Vector256s.CreateByDoubleLoop<T>(Math.Pow(2, 31), Math.Pow(2, 6)),
+                Vector256s.CreateByDoubleLoop<T>(Math.Pow(2, 32), -Math.Pow(2, 8)),
+                Vector256s.CreateByDoubleLoop<T>(-Math.Pow(2, 31), Math.Pow(2, 6)),
+                Vector256s.CreateByDoubleLoop<T>(-Math.Pow(2, 31), -Math.Pow(2, 8)),
+                Vector256s.CreateByDoubleLoop<T>(Math.Pow(2, 32), Math.Pow(2, 8)),
+                Vector256s.CreateByFunc<T>(index=>Scalars.GetByDouble<T>(Math.Pow(2, 31+index))),
+                Vector256s.CreateByFunc<T>(index=>Scalars.GetByDouble<T>(Math.Pow(2, 127-index))),
                 Vector256s<T>.Demo,
                 Vector256s<T>.DemoNaN,
             };
-            bool allowLog = false;
+            bool allowLog = true;
             foreach (Vector256<T> value in samples) {
                 Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
                 Vector256<uint> expected = Vector256s.ConvertToUInt32((dynamic)value);
@@ -262,6 +276,15 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
                         Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    }
+                }
+                foreach (var func in funcList) {
+                    string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                    try {
+                        Vector256<uint> dst = func(value);
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
+                    } catch (Exception ex) {
+                        Console.WriteLine(string.Format("{0}:\t{1}", funcName, ex.Message));
                     }
                 }
                 Console.WriteLine();
