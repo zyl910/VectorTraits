@@ -244,7 +244,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<uint>>>("ConvertToUInt32_As", "ConvertToUInt32_Mapping", "ConvertToUInt32_MappingFix");
+            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<uint>>>("ConvertToUInt32_As", "ConvertToUInt32_Mapping", "ConvertToUInt32_MappingFix", "ConvertToUInt32_Mod");
             foreach (var func in funcList) {
                 Console.WriteLine("{0}: Found", ReflectionUtil.GetShortNameWithType(func.Method));
             }

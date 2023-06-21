@@ -326,6 +326,36 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #endif
             }
 
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
+            /// <remarks>Input range is all number (Use mod function). Out of range results in `0`.</remarks>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> ConvertToUInt32_Mod(Vector256<float> value) {
+#if NET5_0_OR_GREATER
+                // remainder = mod(value, highEnd) = value - floor(value/highEnd)*highEnd
+                Vector256<float> highEnd = Vector256.Create(ScalarConstants.BitSingle_Pow2_32).AsSingle();
+                Vector256<float> lowBegin = Vector256.Create(ScalarConstants.BitSingle_NegativePow2_31).AsSingle();
+                Vector256<float> highBegin = Vector256.Create(ScalarConstants.BitSingle_Pow2_31).AsSingle();
+                Vector256<float> quotientFloor = Avx.Floor(Avx.Divide(value, highEnd));
+                Vector256<float> intRangeMask = Avx.And(Avx.CompareLessThanOrEqual(lowBegin, value), Avx.CompareLessThan(value, highBegin)); // lowBegin <= value < highBegin .
+                Vector256<float> remainder = Avx.Subtract(value, Avx.Multiply(quotientFloor, highEnd));
+                // [pow(2,31), pow(2,32)-1] mapping to [-pow(2,31), -1]. Subtract `pow(2,32)`.
+                Vector256<float> uintRangeMask = Avx.And(Avx.CompareLessThanOrEqual(Vector256<float>.Zero, remainder), Avx.CompareLessThan(remainder, highEnd)); // lowBegin <= remainder < highEnd .
+                Vector256<float> highMask = Avx.CompareLessThanOrEqual(highBegin, remainder); // highBegin <= value .
+                Vector256<float> remainder0 = Avx.And(remainder, uintRangeMask); // If out of range, set to 0.
+                Vector256<float> highMapped = Avx.Subtract(remainder0, highEnd);
+                //Vector256<float> value2 = ConditionalSelect(highMask, highMapped, remainder0);
+                Vector256<float> value2 = Avx2.BlendVariable(remainder0, highMapped, highMask);
+                // If within the signed integer range, return value, otherwise return value2 .
+                Vector256<float> value3 = Avx2.BlendVariable(value2, value, intRangeMask);
+                Vector256<uint> rt = Avx.ConvertToVector256Int32WithTruncation(value3).AsUInt32();
+                return rt;
+#else
+                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector256<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
+                return SuperStatics.ConvertToUInt32(value);
+#endif
+            }
+
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
