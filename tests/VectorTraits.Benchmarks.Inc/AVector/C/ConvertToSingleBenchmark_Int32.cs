@@ -26,7 +26,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
     using TMy = Int32;
     using TMyOut = Single;
 
-#pragma warning disable CS0618 // Type or member is obsolete
     /// <summary>
     /// ConvertToSingle benchmark - Int32.
     /// </summary>

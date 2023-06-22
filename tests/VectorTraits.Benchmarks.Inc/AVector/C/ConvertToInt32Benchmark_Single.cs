@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -26,14 +26,23 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
     using TMy = Single;
     using TMyOut = Int32;
 
-#pragma warning disable CS0618 // Type or member is obsolete
     /// <summary>
     /// ConvertToInt32 benchmark - Single.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class ConvertToInt32Benchmark_Single : AbstractSharedBenchmark_Single_Int32 {
+    public partial class ConvertToInt32Benchmark_Single : AbstractSharedBenchmark {
+
+        // -- TMy ref --
+        protected static ref TMyOut dstTMy => ref dstInt32;
+        protected static ref TMyOut baselineTMy => ref baselineInt32;
+        protected static TMy[] srcArray => srcArraySingle_RangeInt32;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected override void CheckResult(string name) {
+            CheckResultInt32(name);
+        }
 
         // -- var --
 
@@ -100,11 +109,11 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
                 //Debugger.Break();
             }
             dstTMy = StaticSumBcl(srcArray, srcArray.Length);
-            //CheckResult("SumBcl");
-            if (CheckMode) {
-                baselineTMy = dstTMy;
-                BenchmarkUtil.WriteItem("# SumBcl", string.Format("{0}", baselineTMy));
-            }
+            CheckResult("SumBcl");
+            //if (CheckMode) {
+            //    baselineTMy = dstTMy;
+            //    BenchmarkUtil.WriteItem("# SumBcl", string.Format("{0}", baselineTMy));
+            //}
         }
 
         #region BENCHMARKS_ALGORITHM
