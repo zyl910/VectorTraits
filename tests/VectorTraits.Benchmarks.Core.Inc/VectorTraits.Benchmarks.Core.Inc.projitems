@@ -39,6 +39,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt32_Single.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt32_UInt16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt64.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt64_Double.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt64_UInt32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BenchmarkUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FakeBenchmarkAttribute.cs" />
