@@ -200,16 +200,16 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return ConvertToSingle_Multiply(value);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{uint})"/>
-            [Obsolete("The Uint32 value after the translation will exceed the trailing precision range of Single(e7m23)")]
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<float> ConvertToSingle_Add(Vector256<uint> value) {
-                Vector256<int> translated = Avx2.Add(value.AsInt32(), Vector256.Create(int.MinValue));
-                Vector256<float> rtTranslated = Avx.ConvertToVector256Single(translated);
-                Vector256<float> rt = Avx.Subtract(rtTranslated, Vector256.Create((float)int.MinValue));
-                return rt;
-            }
+            ///// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{uint})"/>
+            //[Obsolete("The Uint32 value after the translation will exceed the trailing precision range of Single(e7m23)")]
+            //[CLSCompliant(false)]
+            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+            //public static Vector256<float> ConvertToSingle_Add(Vector256<uint> value) {
+            //    Vector256<int> translated = Avx2.Add(value.AsInt32(), Vector256.Create(int.MinValue));
+            //    Vector256<float> rtTranslated = Avx.ConvertToVector256Single(translated);
+            //    Vector256<float> rt = Avx.Subtract(rtTranslated, Vector256.Create((float)int.MinValue));
+            //    return rt;
+            //}
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{uint})"/>
             [CLSCompliant(false)]
@@ -260,16 +260,16 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return ConvertToUInt32_MappingFix(value);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
-            [Obsolete("The Uint32 value after the translation will exceed the trailing precision range of Single(e7m24)")]
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<uint> ConvertToUInt32_Add(Vector256<float> value) {
-                Vector256<float> translated = Avx.Add(value, Vector256.Create((float)int.MinValue));
-                Vector256<int> rtTranslated = Avx.ConvertToVector256Int32WithTruncation(translated);
-                Vector256<uint> rt = Avx2.Subtract(rtTranslated, Vector256.Create(int.MinValue)).AsUInt32();
-                return rt;
-            }
+            ///// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
+            //[Obsolete("The Uint32 value after the translation will exceed the trailing precision range of Single(e7m24)")]
+            //[CLSCompliant(false)]
+            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+            //public static Vector256<uint> ConvertToUInt32_Add(Vector256<float> value) {
+            //    Vector256<float> translated = Avx.Add(value, Vector256.Create((float)int.MinValue));
+            //    Vector256<int> rtTranslated = Avx.ConvertToVector256Int32WithTruncation(translated);
+            //    Vector256<uint> rt = Avx2.Subtract(rtTranslated, Vector256.Create(int.MinValue)).AsUInt32();
+            //    return rt;
+            //}
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
             /// <remarks>Input range is `[-pow(2,31), pow(2,31))`. Out of range results in `2147483648`(pow(2,31)).</remarks>
