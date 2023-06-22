@@ -158,6 +158,42 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return result;
             }
 
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> ConvertToDouble_HwScalar(Vector256<long> value) {
+                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
+                // answered Dec 19, 2016 at 12:51 wim
+                // __m256d int64_to_double_based_on_cvtsi2sd(const __m256i v){
+                //     __m128d zero         = _mm_setzero_pd();                            /* to avoid uninitialized variables in_mm_cvtsi64_sd                       */
+                //     __m128i v_lo         = _mm256_castsi256_si128(v);
+                //     __m128i v_hi         = _mm256_extracti128_si256(v,1);
+                //     __m128d v_0          = _mm_cvtsi64_sd(zero,_mm_cvtsi128_si64(v_lo));
+                //     __m128d v_2          = _mm_cvtsi64_sd(zero,_mm_cvtsi128_si64(v_hi));
+                //     __m128d v_1          = _mm_cvtsi64_sd(zero,_mm_extract_epi64(v_lo,1));
+                //     __m128d v_3          = _mm_cvtsi64_sd(zero,_mm_extract_epi64(v_hi,1));
+                //     __m128d v_01         = _mm_unpacklo_pd(v_0,v_1);
+                //     __m128d v_23         = _mm_unpacklo_pd(v_2,v_3);
+                //     __m256d v_dbl        = _mm256_castpd128_pd256(v_01);
+                //             v_dbl        = _mm256_insertf128_pd(v_dbl,v_23,1);
+                //     return v_dbl;
+                // }
+                if (Sse2.X64.IsSupported && Sse41.X64.IsSupported) {
+                    Vector128<double> zero = Vector128<double>.Zero;
+                    Vector128<long> v_lo = value.GetLower();
+                    Vector128<long> v_hi = value.GetUpper();
+                    Vector128<double> v_0 = Sse2.X64.ConvertScalarToVector128Double(zero, Sse2.X64.ConvertToInt64(v_lo));
+                    Vector128<double> v_2 = Sse2.X64.ConvertScalarToVector128Double(zero, Sse2.X64.ConvertToInt64(v_hi));
+                    Vector128<double> v_1 = Sse2.X64.ConvertScalarToVector128Double(zero, Sse41.X64.Extract(v_lo, 1));
+                    Vector128<double> v_3 = Sse2.X64.ConvertScalarToVector128Double(zero, Sse41.X64.Extract(v_hi, 1));
+                    Vector128<double> v_01 = Sse2.UnpackLow(v_0, v_1);
+                    Vector128<double> v_23 = Sse2.UnpackLow(v_2, v_3);
+                    Vector256<double> result = Vector256.Create(v_01, v_23);
+                    return result;
+                } else {
+                    return SuperStatics.ConvertToDouble(value);
+                }
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
