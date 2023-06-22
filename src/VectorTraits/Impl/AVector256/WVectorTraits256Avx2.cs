@@ -194,6 +194,22 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 }
             }
 
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{long})"/>
+            /// <remarks>Works for inputs in the range: (-2^51, 2^51)</remarks>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> ConvertToDouble_Low52(Vector256<long> value) {
+                // inline __m256d int64_to_double256(__m256i x){
+                //     /*  Mysticial's fast int64_to_double. Works for inputs in the range: (-2^51, 2^51)  */
+                //     x = _mm256_add_epi64(x, _mm256_castpd_si256(_mm256_set1_pd(0x0018000000000000)));
+                //     return _mm256_sub_pd(_mm256_castsi256_pd(x), _mm256_set1_pd(0x0018000000000000));
+                // }
+                // [Bug number] Vector256<long> magicNumber = Vector256.Create(0x00180000_00000000L); // BitConverter.DoubleToInt64Bits(1.5*Math.Pow(2, -1022)).ToString("X")
+                Vector256<long> magicNumber = Vector256.Create(0x43380000_00000000L); // BitConverter.DoubleToInt64Bits(Math.Pow(2, 52)).ToString("X")
+                Vector256<long> x = Avx2.Add(value, magicNumber);
+                Vector256<double> result = Avx.Subtract(x.AsDouble(), magicNumber.AsDouble());
+                return result;
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -229,6 +245,23 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 v_hi = Avx2.Xor(v_hi, magic_i_hi32);                                                 // Blend v_hi with magic_i_hi32 (double(2^84))
                 Vector256<double> v_hi_dbl = Avx.Subtract(v_hi.AsDouble(), magic_d_all);             // Compute in double precision:
                 Vector256<double> result = Avx.Add(v_hi_dbl, v_lo.AsDouble());                       // (v_hi - magic_d_all) + v_lo  Do not assume associativity of floating point addition !!
+                return result;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{ulong})"/>
+            /// <remarks>Works for inputs in the range: [0, 2^52)</remarks>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> ConvertToDouble_Low52(Vector256<ulong> value) {
+                // inline __m256d uint64_to_double256(__m256i x){
+                //     /*  Mysticial's fast uint64_to_double. Works for inputs in the range: [0, 2^52)     */
+                //     x = _mm256_or_si256(x, _mm256_castpd_si256(_mm256_set1_pd(0x0010000000000000)));
+                //     return _mm256_sub_pd(_mm256_castsi256_pd(x), _mm256_set1_pd(0x0010000000000000));
+                // }
+                // [Bug number] Vector256<ulong> magicNumber = Vector256.Create(0x00100000_00000000UL); // BitConverter.DoubleToInt64Bits(Math.Pow(2, -1022)).ToString("X")
+                Vector256<ulong> magicNumber = Vector256.Create(0x43300000_00000000UL); // BitConverter.DoubleToInt64Bits(Math.Pow(2, 52)).ToString("X")
+                Vector256<ulong> x = Avx2.Or(value, magicNumber);
+                Vector256<double> result = Avx.Subtract(x.AsDouble(), magicNumber.AsDouble());
                 return result;
             }
 

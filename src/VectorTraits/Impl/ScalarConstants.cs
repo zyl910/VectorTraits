@@ -8,14 +8,20 @@ namespace Zyl.VectorTraits.Impl {
     /// </summary>
     public static class ScalarConstants {
 
+        // == BitDouble: Bit of Double ==
+        /// <summary>BitDouble - `pow(2, 52) = 4503599627370496`.</summary>
+        public const long BitDouble_2Pow52 = 0x43300000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 52)).ToString("X")
+
         // == BitSingle: Bit of Single ==
         /// <summary>BitSingle - `-pow(2, 31) = -2147483648`.</summary>
         public const int BitSingle_Negative2Pow31 = unchecked((int)0xCF000000U); // BitConverter.SingleToInt32Bits((float)-Math.Pow(2, 31)).ToString("X")
         /// <summary>BitSingle - `-pow(2, 32) = -4294967296`.</summary>
         public const int BitSingle_Negative2Pow32 = unchecked((int)0xCF800000U);
 
+        /// <summary>BitSingle - `pow(2, 23) = 8388608`.</summary>
+        public const int BitSingle_2Pow23 = 0x4B000000; // BitConverter.SingleToInt32Bits((float)Math.Pow(2, 23)).ToString("X")
         /// <summary>BitSingle - `pow(2, 31) = 2147483648`.</summary>
-        public const int BitSingle_2Pow31 = 0x4F000000; // BitConverter.SingleToInt32Bits((float)Math.Pow(2, 31)).ToString("X")
+        public const int BitSingle_2Pow31 = 0x4F000000;
         /// <summary>BitSingle - `pow(2, 32) = 4294967296`.</summary>
         public const int BitSingle_2Pow32 = 0x4F800000;
 

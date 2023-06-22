@@ -524,6 +524,50 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         }
 
         /// <summary>
+        /// Sum ConvertToDouble - 256 - Avx2 - Low52.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSum256Avx2_Low52(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int Vector256Width = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = Vector256Width; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMyOut> vrt = Vector256<TMyOut>.Zero; // Vector result.
+            Vector256<TMyOut> vtemp;
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                vtemp = WVectorTraits256Avx2.Statics.ConvertToDouble_Low52(p0);
+                vrt = Vector256s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            rt += Vector256s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum256Avx2_Low52() {
+            WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSum256Avx2_Low52(srcArray, srcArray.Length);
+            CheckResult("Sum256Avx2_Low52");
+        }
+
+        /// <summary>
         /// Sum ConvertToDouble - 256 - Avx2 - Bcl.
         /// </summary>
         /// <param name="src">Source array.</param>
