@@ -154,9 +154,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         Vector256<double> expected = Vector256s.BaseInstance.ConvertToDouble((dynamic)value);
                         Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
                         Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
-                        string funcName = "ConvertToDouble_Low52";
+                        string funcName = "ConvertToDouble_Range52";
                         try {
-                            Vector256<double> dst = WVectorTraits256Avx2.Statics.ConvertToDouble_Low52((dynamic)value);
+                            Vector256<double> dst = WVectorTraits256Avx2.Statics.ConvertToDouble_Range52((dynamic)value);
                             if (!hideEquals || !expected.Equals(dst)) {
                                 Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
                             }
@@ -189,9 +189,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         Vector256<double> expected = Vector256s.BaseInstance.ConvertToDouble((dynamic)value);
                         Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
                         Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
-                        string funcName = "ConvertToDouble_Low52";
+                        string funcName = "ConvertToDouble_Range52";
                         try {
-                            Vector256<double> dst = WVectorTraits256Avx2.Statics.ConvertToDouble_Low52((dynamic)value);
+                            Vector256<double> dst = WVectorTraits256Avx2.Statics.ConvertToDouble_Range52((dynamic)value);
                             if (!hideEquals || !expected.Equals(dst)) {
                                 Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
                             }

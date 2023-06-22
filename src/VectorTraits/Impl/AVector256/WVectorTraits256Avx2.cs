@@ -197,7 +197,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{long})"/>
             /// <remarks>Works for inputs in the range: (-2^51, 2^51)</remarks>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> ConvertToDouble_Low52(Vector256<long> value) {
+            public static Vector256<double> ConvertToDouble_Range52(Vector256<long> value) {
+                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
+                // answered Dec 14, 2016 at 17:23 Mysticial
                 // inline __m256d int64_to_double256(__m256i x){
                 //     /*  Mysticial's fast int64_to_double. Works for inputs in the range: (-2^51, 2^51)  */
                 //     x = _mm256_add_epi64(x, _mm256_castpd_si256(_mm256_set1_pd(0x0018000000000000)));
@@ -252,7 +254,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <remarks>Works for inputs in the range: [0, 2^52)</remarks>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> ConvertToDouble_Low52(Vector256<ulong> value) {
+            public static Vector256<double> ConvertToDouble_Range52(Vector256<ulong> value) {
+                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
+                // answered Dec 14, 2016 at 17:23 Mysticial
                 // inline __m256d uint64_to_double256(__m256i x){
                 //     /*  Mysticial's fast uint64_to_double. Works for inputs in the range: [0, 2^52)     */
                 //     x = _mm256_or_si256(x, _mm256_castpd_si256(_mm256_set1_pd(0x0010000000000000)));

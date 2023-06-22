@@ -524,12 +524,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         }
 
         /// <summary>
-        /// Sum ConvertToDouble - 256 - Avx2 - Low52.
+        /// Sum ConvertToDouble - 256 - Avx2 - Range52.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSum256Avx2_Low52(TMy[] src, int srcCount) {
+        public static TMyOut StaticSum256Avx2_Range52(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             int Vector256Width = Vector256<TMy>.Count; // Block width.
             int nBlockWidth = Vector256Width; // Block width.
@@ -542,7 +542,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = WVectorTraits256Avx2.Statics.ConvertToDouble_Low52(p0);
+                vtemp = WVectorTraits256Avx2.Statics.ConvertToDouble_Range52(p0);
                 vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
@@ -557,14 +557,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         }
 
         [Benchmark]
-        public void Sum256Avx2_Low52() {
+        public void Sum256Avx2_Range52() {
             WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSum256Avx2_Low52(srcArray, srcArray.Length);
-            CheckResult("Sum256Avx2_Low52");
+            dstTMy = StaticSum256Avx2_Range52(srcArray, srcArray.Length);
+            CheckResult("Sum256Avx2_Range52");
         }
 
         /// <summary>
