@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -23,31 +23,21 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = Single;
-    using TMyOut = Int32;
+    using TMy = Int64;
+    using TMyOut = Double;
 
     /// <summary>
-    /// ConvertToInt32 benchmark - Single.
+    /// ConvertToDouble benchmark - Int64.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class ConvertToInt32Benchmark_Single : AbstractSharedBenchmark {
-
-        // -- TMy ref --
-        protected static ref TMyOut dstTMy => ref dstInt32;
-        protected static ref TMyOut baselineTMy => ref baselineInt32;
-        protected static TMy[] srcArray => srcArraySingle_RangeInt32;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected override void CheckResult(string name) {
-            CheckResultInt32(name);
-        }
+    public partial class ConvertToDoubleBenchmark_Int64 : AbstractSharedBenchmark_Int64_Double {
 
         // -- var --
 
         /// <summary>
-        /// Sum ConvertToInt32 - Scalar.
+        /// Sum ConvertToDouble - Scalar.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -70,7 +60,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         }
 
         /// <summary>
-        /// Sum ConvertToInt32 - BCL.
+        /// Sum ConvertToDouble - BCL.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -88,7 +78,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = Vector.ConvertToInt32(p0);
+                vtemp = Vector.ConvertToDouble(p0);
                 vrt += vtemp;
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
@@ -109,18 +99,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
                 //Debugger.Break();
             }
             dstTMy = StaticSumBcl(srcArray, srcArray.Length);
-            CheckResult("SumBcl");
-            //if (CheckMode) {
-            //    baselineTMy = dstTMy;
-            //    BenchmarkUtil.WriteItem("# SumBcl", string.Format("{0}", baselineTMy));
-            //}
+            //CheckResult("SumBcl");
+            if (CheckMode) {
+                baselineTMy = dstTMy;
+                BenchmarkUtil.WriteItem("# SumBcl", string.Format("{0}", baselineTMy));
+            }
         }
 
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum ConvertToInt32 - Base.
+        /// Sum ConvertToDouble - Base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -138,7 +128,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = VectorTraitsBase.Statics.ConvertToInt32(p0);
+                vtemp = VectorTraitsBase.Statics.ConvertToDouble(p0);
                 vrt += vtemp;
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
@@ -166,7 +156,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum ConvertToInt32 - Traits static.
+        /// Sum ConvertToDouble - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -184,7 +174,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = Vectors.ConvertToInt32(p0);
+                vtemp = Vectors.ConvertToDouble(p0);
                 vrt += vtemp;
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
@@ -214,7 +204,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
 
 #if NET7_0_OR_GREATER
         /// <summary>
-        /// Sum ConvertToInt32 - 128 - BCL.
+        /// Sum ConvertToDouble - 128 - BCL.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -232,7 +222,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = Vector128.ConvertToInt32(p0);
+                vtemp = Vector128.ConvertToDouble(p0);
                 vrt = Vector128s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
@@ -261,7 +251,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
 #if BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum ConvertToInt32 - 128 - Base - Basic.
+        /// Sum ConvertToDouble - 128 - Base - Basic.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -279,7 +269,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = WVectorTraits128Base.Statics.ConvertToInt32_Basic(p0);
+                vtemp = WVectorTraits128Base.Statics.ConvertToDouble_Basic(p0);
                 vrt = Vector128s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
@@ -304,7 +294,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         }
 
         /// <summary>
-        /// Sum ConvertToInt32 - 128 - Base.
+        /// Sum ConvertToDouble - 128 - Base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -322,7 +312,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = WVectorTraits128Base.Statics.ConvertToInt32(p0);
+                vtemp = WVectorTraits128Base.Statics.ConvertToDouble(p0);
                 vrt = Vector128s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
@@ -350,7 +340,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum ConvertToInt32 - 128 - Traits static.
+        /// Sum ConvertToDouble - 128 - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -368,7 +358,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = Vector128s.ConvertToInt32(p0);
+                vtemp = Vector128s.ConvertToDouble(p0);
                 vrt = Vector128s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
@@ -401,7 +391,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
 
 #if NET7_0_OR_GREATER
         /// <summary>
-        /// Sum ConvertToInt32 - 256 - BCL.
+        /// Sum ConvertToDouble - 256 - BCL.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -419,7 +409,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = Vector256.ConvertToInt32(p0);
+                vtemp = Vector256.ConvertToDouble(p0);
                 vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
@@ -448,7 +438,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
 #if BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum ConvertToInt32 - 256 - Base - Basic.
+        /// Sum ConvertToDouble - 256 - Base - Basic.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -466,7 +456,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = WVectorTraits256Base.Statics.ConvertToInt32_Basic(p0);
+                vtemp = WVectorTraits256Base.Statics.ConvertToDouble_Basic(p0);
                 vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
@@ -491,7 +481,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         }
 
         /// <summary>
-        /// Sum ConvertToInt32 - 256 - Base.
+        /// Sum ConvertToDouble - 256 - Base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -509,7 +499,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = WVectorTraits256Base.Statics.ConvertToInt32(p0);
+                vtemp = WVectorTraits256Base.Statics.ConvertToDouble(p0);
                 vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
@@ -537,7 +527,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum ConvertToInt32 - 256 - Traits static.
+        /// Sum ConvertToDouble - 256 - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -555,7 +545,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = Vector256s.ConvertToInt32(p0);
+                vtemp = Vector256s.ConvertToDouble(p0);
                 vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
