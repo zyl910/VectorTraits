@@ -125,14 +125,15 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> ConvertToDouble(Vector256<long> value) {
-                return ConvertToDouble_Wim(value);
+                return ConvertToDouble_Bcl(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> ConvertToDouble_Wim(Vector256<long> value) {
+            public static Vector256<double> ConvertToDouble_Bcl(Vector256<long> value) {
+                // Same: // src/libraries/System.Private.CoreLib/src/System/Runtime/Intrinsics/Vector256.cs
+                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
                 // answered Dec 19, 2016 at 12:51 wim
-                // https://stackoverflow.com/a/41223013/12860347
                 //__m256d int64_to_double_fast_precise(const __m256i v) {
                 //    __m256i magic_i_lo   = _mm256_set1_epi64x(0x4330000000000000);                /* 2^52               encoded as floating-point  */
                 //    __m256i magic_i_hi32 = _mm256_set1_epi64x(0x4530000080000000);                /* 2^84 + 2^63        encoded as floating-point  */
@@ -143,7 +144,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //            v_hi         = _mm256_xor_si256(v_hi, magic_i_hi32);                  /* Flip the msb of v_hi and blend with 0x45300000                                                                */
                 //    __m256d v_hi_dbl     = _mm256_sub_pd(_mm256_castsi256_pd(v_hi), magic_d_all); /* Compute in double precision:                                                                                  */
                 //    __m256d result       = _mm256_add_pd(v_hi_dbl, _mm256_castsi256_pd(v_lo));    /* (v_hi - magic_d_all) + v_lo  Do not assume associativity of floating point addition !!                        */
-                //            return result;                                                        /* With gcc use -O3, then -fno-associative-math is default. Do not use -Ofast, which enables -fassociative-math! With icc use -fp-model precise */
+                //            return result;                                                        /* With gcc use -O3, then -fno-associative-math is default. Do not use -Ofast, which enables -fassociative-math! */
                 //}
                 Vector256<long> magic_i_lo   = Vector256.Create(0x43300000_00000000); // 2^52               encoded as floating-point
                 Vector256<long> magic_i_hi32 = Vector256.Create(0x45300000_80000000); // 2^84 + 2^63        encoded as floating-point
@@ -157,34 +158,20 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return result;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> ConvertToDouble_Wim_Bak1(Vector256<long> value) {
-                // answered Dec 19, 2016 at 12:51 wim
-                // https://stackoverflow.com/a/41223013/12860347
-                //__m256d int64_to_double_fast_precise(const __m256i v)
-                Vector256<int> lowerBits;
-                lowerBits = value.AsInt32();
-                lowerBits = Avx2.Blend(lowerBits, Vector256.Create(0x43300000_00000000).AsInt32(), 0b10101010);           // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)
-                Vector256<long> upperBits = Avx2.ShiftRightLogical(value, 32);                                             // Extract the 32 most significant bits of vector
-                upperBits = Avx2.Xor(upperBits, Vector256.Create(0x45300000_80000000));                                   // Flip the msb of upperBits and blend with the bit representation of double(2^84 + 2^63)
-                Vector256<double> result = Avx.Subtract(upperBits.AsDouble(), Vector256.Create(0x45300000_80100000).AsDouble());        // Compute in double precision: (upper - (2^84 + 2^63 + 2^52)) + lower
-                return Avx.Add(result, lowerBits.AsDouble());
-            }
-
             /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> ConvertToDouble(Vector256<ulong> value) {
-                return ConvertToDouble_Wim(value);
+                return ConvertToDouble_Bcl(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> ConvertToDouble_Wim(Vector256<ulong> value) {
+            public static Vector256<double> ConvertToDouble_Bcl(Vector256<ulong> value) {
+                // Same: // src/libraries/System.Private.CoreLib/src/System/Runtime/Intrinsics/Vector256.cs
+                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
                 // answered Dec 19, 2016 at 12:51 wim
-                // https://stackoverflow.com/a/41223013/12860347
                 //__m256d uint64_to_double_fast_precise(const __m256i v) {
                 //    __m256i magic_i_lo   = _mm256_set1_epi64x(0x4330000000000000);                /* 2^52        encoded as floating-point  */
                 //    __m256i magic_i_hi32 = _mm256_set1_epi64x(0x4530000000000000);                /* 2^84        encoded as floating-point  */
@@ -207,22 +194,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<double> v_hi_dbl = Avx.Subtract(v_hi.AsDouble(), magic_d_all);             // Compute in double precision:
                 Vector256<double> result = Avx.Add(v_hi_dbl, v_lo.AsDouble());                       // (v_hi - magic_d_all) + v_lo  Do not assume associativity of floating point addition !!
                 return result;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{ulong})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> ConvertToDouble_Wim_Bak1(Vector256<ulong> value) {
-                // answered Dec 19, 2016 at 12:51 wim
-                // https://stackoverflow.com/a/41223013/12860347
-                //__m256d uint64_to_double_fast_precise(const __m256i v)
-                Vector256<uint> lowerBits;
-                lowerBits = value.AsUInt32();
-                lowerBits = Avx2.Blend(lowerBits, Vector256.Create(0x43300000_00000000UL).AsUInt32(), 0b10101010);        // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)                                                 */
-                Vector256<ulong> upperBits = Avx2.ShiftRightLogical(value, 32);                                             // Extract the 32 most significant bits of vector
-                upperBits = Avx2.Xor(upperBits, Vector256.Create(0x45300000_00000000UL));                                 // Blend upperBits with the bit representation of double(2^84)
-                Vector256<double> result = Avx.Subtract(upperBits.AsDouble(), Vector256.Create(0x45300000_00100000UL).AsDouble());      // Compute in double precision: (upper - (2^84 + 2^52)) + lower
-                return Avx.Add(result, lowerBits.AsDouble());
             }
 
 
