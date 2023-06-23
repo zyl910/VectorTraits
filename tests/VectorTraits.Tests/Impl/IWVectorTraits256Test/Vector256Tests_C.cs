@@ -132,10 +132,11 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Console.WriteLine();
             }
             // Check data in the valid range.
+            int rangeItemCount = (int)Math.Pow(2, 4);
+            int rangeItemCountVector = rangeItemCount / Vector256<T>.Count;
+            long[] rangeStarts = new long[0];
             if (typeof(long) == typeof(T)) {
-                int rangeItemCount = (int)Math.Pow(2, 4);
-                int rangeItemCountVector = rangeItemCount / Vector256<T>.Count;
-                long[] rangeStarts = new long[] {
+                rangeStarts = new long[] {
                     -(1L<<51),
                     -(1L<<50),
                     0L,
@@ -146,46 +147,21 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     //(1L<<52) - rangeItemCount,
                     //1L<<52,
                 };
+            } else if (typeof(ulong) == typeof(T)) {
+                rangeStarts = new long[] {
+                    0L,
+                    1L<<51,
+                    (1L<<52) - rangeItemCount,
+                    // Out of range.
+                    //1L<<52,
+                };
+            }
+            if (rangeStarts.Length>0) {
                 SortedDictionary<string, long> dict = new SortedDictionary<string, long>();
                 foreach (long start in rangeStarts) {
                     for (int i = 0; i < rangeItemCountVector; ++i) {
                         long startNumber = start + Vector256<T>.Count * i;
                         Vector256<T> value = Vector256s.CreateByFunc<T>(index => Scalars.GetByBits<T>(startNumber + index));
-                        Vector256<double> expected = Vector256s.BaseInstance.ConvertToDouble((dynamic)value);
-                        Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
-                        Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
-                        string funcName = "ConvertToDouble_Range52";
-                        try {
-                            Vector256<double> dst = WVectorTraits256Avx2.Statics.ConvertToDouble_Range52((dynamic)value);
-                            if (!hideEquals || !expected.Equals(dst)) {
-                                Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
-                            }
-                        } catch (Exception ex) {
-                            Console.WriteLine(string.Format("{0}:\t{1}", funcName, ex.Message));
-                        }
-                        //foreach (IWVectorTraits256 instance in instances) {
-                        //    if (!instance.GetIsSupported(true)) continue;
-                        //    string funcName = instance.GetType().Name;
-                        //    Vector256<uint> dst = instance.ConvertToDouble((dynamic)value);
-                        //    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
-                        //}
-                        Console.WriteLine();
-                    }
-                }
-            } else if (typeof(ulong) == typeof(T)) {
-                ulong rangeItemCount = (ulong)Math.Pow(2, 4);
-                ulong rangeItemCountVector = rangeItemCount / (ulong)Vector256<T>.Count;
-                ulong[] rangeStarts = new ulong[] {
-                    0L,
-                    1L<<51,
-                    (ulong)((1L<<52) - rangeItemCount),
-                    //1L<<52, // Out of range.
-                };
-                SortedDictionary<string, ulong> dict = new SortedDictionary<string, ulong>();
-                foreach (ulong start in rangeStarts) {
-                    for (ulong i = 0; i < rangeItemCountVector; ++i) {
-                        ulong startNumber = start + (ulong)Vector256<T>.Count * i;
-                        Vector256<T> value = Vector256s.CreateByFunc<T>(index => Scalars.GetByBits<T>((long)startNumber + index));
                         Vector256<double> expected = Vector256s.BaseInstance.ConvertToDouble((dynamic)value);
                         Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
                         Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
@@ -326,7 +302,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
             var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<uint>>>("ConvertToUInt32_As", "ConvertToUInt32_Mapping", "ConvertToUInt32_MappingFix", "ConvertToUInt32_Mod");
             foreach (var func in funcList) {
-                Console.WriteLine("{0}: Found", ReflectionUtil.GetShortNameWithType(func.Method));
+                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
             Console.WriteLine();
             // run.
