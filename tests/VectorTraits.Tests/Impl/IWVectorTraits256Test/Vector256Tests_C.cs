@@ -156,7 +156,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.Demo,
                 Vector256s<T>.DemoNaN,
             };
-            bool allowLog = true;
+            //bool allowLog = false;
             bool hideEquals = true;
             foreach (Vector256<T> value in samples) {
                 Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
@@ -181,6 +181,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Console.WriteLine();
             }
             // Check data in the valid range.
+            bool allowLogAll = false;
             int rangeItemCount = (int)Math.Pow(2, 4);
             long[] rangeStarts = new long[0];
             if (typeof(long) == typeof(T)) {
@@ -218,7 +219,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                             string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
                             try {
                                 Vector256<double> dst = func(value);
-                                bool showLog = allowLog;
+                                bool showLog = allowLogAll;
                                 if (!expected.Equals(dst)) {
                                     long countError;
                                     if (!dict.TryGetValue(funcName, out countError)) {
@@ -428,6 +429,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Console.WriteLine();
             }
             // Check data in the valid range.
+            bool allowLogAll = false;
             int rangeItemCount = (int)Math.Pow(2, 12);
             int rangeItemCountVector = rangeItemCount / Vector256<T>.Count;
             double[] rangeStarts = new double[] {
@@ -450,34 +452,49 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         Vector256<uint> dst = instance.ConvertToUInt32((dynamic)value);
                         Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
+                    bool usedWrite = false;
                     // funcList.
                     foreach (var func in funcList) {
                         string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
                         try {
                             Vector256<uint> dst = func(value);
+                            bool showLog = allowLogAll;
                             if (!expected.Equals(dst)) {
                                 long countError;
                                 if (!dict.TryGetValue(funcName, out countError)) {
                                     countError = 0;
                                 }
                                 if (countError <= 0) {
-                                    //Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}!={2}, sample={3}", funcName, dst, expected, value));
-                                    Console.WriteLine(VectorTextUtil.Format("Sample({0}):\t{1}", startNumber, value));
-                                    Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
-                                    Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
-                                    Console.WriteLine();
+                                    showLog = true;
                                 }
                                 ++countError;
                                 dict[funcName] = countError;
+                            }
+                            if (showLog) {
+                                if (!usedWrite) {
+                                    usedWrite = true;
+                                    Console.WriteLine(VectorTextUtil.Format("Sample({0}):\t{1}", startNumber, value));
+                                    Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                                }
+                                Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
                             }
                         } catch (Exception ex) {
                             //Console.WriteLine(string.Format("{0}:\t{1}", funcName, ex.Message));
                             _ = ex; // Ignore.
                         }
                     }
+                    if (usedWrite) {
+                        Console.WriteLine();
+                    }
+                }
+            } // foreach (long start in rangeStarts)
+            Console.WriteLine("Count error:");
+            foreach (var func in funcList) {
+                string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                if (!dict.ContainsKey(funcName)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}:\t0 // OK", funcName));
                 }
             }
-            Console.WriteLine("Count error:");
             foreach (var kvp in dict) {
                 Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", kvp.Key, kvp.Value));
             }
