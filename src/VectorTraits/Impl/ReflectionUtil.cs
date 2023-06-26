@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Zyl.VectorTraits.Impl {
     /// <summary>
@@ -231,8 +232,14 @@ namespace Zyl.VectorTraits.Impl {
         public static int CheckBindMethodsOn(Func<MethodInfo, MethodInfo, bool> funcEquals, Type staticType, Type objectType, IDictionary<string, List<MethodInfo>>? interfaceMethodsDictionary, Func<MethodInfo, MethodInfo?, object?, bool>? onMissed = null, object? userdata = null) {
             int rt = 0;
             if (null == onMissed) onMissed = OnMissed_Default;
-            var staticDictionary = GetMethodGroup(staticType);
-            var objectDictionary = objectType.GetRuntimeMethods().GroupBy(o => o.Name)
+            var staticDictionaryBy = staticType.GetRuntimeMethods()
+                .Where(o => staticType.Equals(o.DeclaringType))
+                .GroupBy(o => o.Name)
+                .ToDictionary(g => g.Key, g => g.ToList());
+            var staticDictionary = new SortedDictionary<string, List<MethodInfo>>(staticDictionaryBy);
+            var objectDictionary = objectType.GetRuntimeMethods()
+                .Where(o => objectType.Equals(o.DeclaringType))
+                .GroupBy(o => o.Name)
                 .ToDictionary(g => g.Key, g => g.ToList());
             foreach (KeyValuePair<string, List<MethodInfo>> kvp in staticDictionary) {
                 string methodName = kvp.Key;
