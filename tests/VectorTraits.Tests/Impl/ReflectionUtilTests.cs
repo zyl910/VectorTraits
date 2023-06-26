@@ -44,6 +44,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 totalMissed += n;
             }
             writer.WriteLine("Total missed: {0}", totalMissed);
+            Assert.Zero(totalMissed);
         }
 
 #if NETCOREAPP3_0_OR_GREATER
@@ -75,6 +76,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 totalMissed += n;
             }
             writer.WriteLine("Total missed: {0}", totalMissed);
+            Assert.Zero(totalMissed);
         }
 
         [Test()]
@@ -103,6 +105,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 totalMissed += n;
             }
             writer.WriteLine("Total missed: {0}", totalMissed);
+            Assert.Zero(totalMissed);
         }
 
 #endif // NETCOREAPP3_0_OR_GREATER

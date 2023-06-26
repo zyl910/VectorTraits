@@ -150,6 +150,26 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.Negate_AcceleratedTypes"/>
+        public override TypeCodeFlags Negate_AcceleratedTypes {
+            get {
+                return Statics.Negate_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> Negate(Vector128<double> value) {
+            return Statics.Negate(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> Negate(Vector128<long> value) {
+            return Statics.Negate(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Min_AcceleratedTypes"/>
         public override TypeCodeFlags Min_AcceleratedTypes {
             get {
