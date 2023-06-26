@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using Zyl.VectorTraits;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
-using System.Reflection;
+using Zyl.VectorTraits.Impl.AVector128;
+using Zyl.VectorTraits.Impl.AVector256;
 
 namespace Zyl.VectorTraits.Tests.Impl {
     [TestFixture()]
@@ -41,6 +43,60 @@ namespace Zyl.VectorTraits.Tests.Impl {
             }
         }
 
+#if NETCOREAPP3_0_OR_GREATER
+
+        [Test()]
+        public void CheckBindMethodsTest_128() {
+            TextWriter writer = Console.Out;
+            Type? interfaceType = null;
+            interfaceType = typeof(IVectorTraits);
+            Type[] types = new Type[] {
+                typeof(WVectorTraits128Base.Statics), typeof(WVectorTraits128Abstract),
+                typeof(WVectorTraits128AdvSimd.Statics), typeof(WVectorTraits128AdvSimdAbstract),
+                typeof(WVectorTraits128AdvSimdB64.Statics), typeof(WVectorTraits128AdvSimdB64Abstract),
+            };
+            for (int i = 0; i < types.Length; i += 2) {
+                Type staticType = types[i];
+                Type objectType = types[i + 1];
+                writer.WriteLine("{0}:", staticType.FullName);
+                int n = ReflectionUtil.CheckBindMethods(staticType, objectType, interfaceType, delegate (MethodInfo methodStatic, MethodInfo? methodInterface, object? userdata) {
+                    bool isIgnore = (null == methodInterface); // If it is not in the method list of the interface, it is ignored.
+                    _ = userdata;
+                    if (!isIgnore) {
+                        writer.WriteLine("  {0}", methodStatic.ToString());
+                    }
+                    return isIgnore;
+                });
+                writer.WriteLine("{0} missed count: {1}", staticType.FullName, n);
+            }
+        }
+
+        [Test()]
+        public void CheckBindMethodsTest_256() {
+            TextWriter writer = Console.Out;
+            Type? interfaceType = null;
+            interfaceType = typeof(IVectorTraits);
+            Type[] types = new Type[] {
+                typeof(WVectorTraits256Base.Statics), typeof(WVectorTraits256Abstract),
+                typeof(WVectorTraits256Avx2.Statics), typeof(WVectorTraits256Avx2Abstract),
+            };
+            for (int i = 0; i < types.Length; i += 2) {
+                Type staticType = types[i];
+                Type objectType = types[i + 1];
+                writer.WriteLine("{0}:", staticType.FullName);
+                int n = ReflectionUtil.CheckBindMethods(staticType, objectType, interfaceType, delegate (MethodInfo methodStatic, MethodInfo? methodInterface, object? userdata) {
+                    bool isIgnore = (null == methodInterface); // If it is not in the method list of the interface, it is ignored.
+                    _ = userdata;
+                    if (!isIgnore) {
+                        writer.WriteLine("  {0}", methodStatic.ToString());
+                    }
+                    return isIgnore;
+                });
+                writer.WriteLine("{0} missed count: {1}", staticType.FullName, n);
+            }
+        }
+
+#endif // NETCOREAPP3_0_OR_GREATER
 
     }
 }
