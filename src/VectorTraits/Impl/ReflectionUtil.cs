@@ -180,7 +180,7 @@ namespace Zyl.VectorTraits.Impl {
         }
 
         /// <summary>
-        /// Check if the parameter list of the methods is the same.
+        /// Check that the parameter list of the methods are the same (检查方法的参数列表是否相同).
         /// </summary>
         /// <param name="a">The first value (第一个值).</param>
         /// <param name="b">The second value (第二个值).</param>
@@ -197,6 +197,65 @@ namespace Zyl.VectorTraits.Impl {
             for (int i = 0; i < parameters1.Length; i++) {
                 Type parameterType1 = parameters1[i].ParameterType;
                 Type parameterType2 = parameters2[i].ParameterType;
+                if (!parameterType1.Equals(parameterType2)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Check that the parameter list of the methods are the same, ignoring the difference in the bit length of the vectors (检查方法的参数列表是否相同, 忽略向量的位长的差异).
+        /// </summary>
+        /// <param name="a">The first value (第一个值).</param>
+        /// <param name="b">The second value (第二个值).</param>
+        /// <returns>Returns true if equal, otherwise false (若相等便返回true, 否则返回false).</returns>
+        public static bool EqualsParametersTypeAnyVector(MethodInfo a, MethodInfo b) {
+            if (a == b) return true;
+            if (null == a) return false;
+            if (null == b) return false;
+            ParameterInfo[] parameters1 = a.GetParameters();
+            ParameterInfo[] parameters2 = b.GetParameters();
+            if (parameters1.Length != parameters2.Length) {
+                return false;
+            }
+            for (int i = 0; i < parameters1.Length; i++) {
+                Type parameterType1 = parameters1[i].ParameterType;
+                Type parameterType2 = parameters2[i].ParameterType;
+                if (!EqualsTypeAnyVector(parameterType1, parameterType2)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Check that the type are the same, ignoring the difference in the bit length of the vectors (检查类型是否相同, 忽略向量的位长的差异).
+        /// </summary>
+        /// <param name="a">The first value (第一个值).</param>
+        /// <param name="b">The second value (第二个值).</param>
+        /// <returns>Returns true if equal, otherwise false (若相等便返回true, 否则返回false).</returns>
+        public static bool EqualsTypeAnyVector(Type a, Type b) {
+            if (a == b) return true;
+            if (null == a) return false;
+            if (null == b) return false;
+            if (a.Equals(b)) return true;
+            TypeInfo aInfo = a.GetTypeInfo();
+            TypeInfo bInfo = b.GetTypeInfo();
+            if (!aInfo.IsGenericType) return false;
+            if (!bInfo.IsGenericType) return false;
+            if (aInfo.IsByRef != bInfo.IsByRef) return false;
+            if (aInfo.IsPointer != bInfo.IsPointer) return false;
+            if (!a.Name.StartsWith("Vector")) return false;
+            if (!b.Name.StartsWith("Vector")) return false;
+            Type[] aTypeArguments = a.GenericTypeArguments;
+            Type[] bTypeArguments = b.GenericTypeArguments;
+            if (aTypeArguments.Length != bTypeArguments.Length) {
+                return false;
+            }
+            for (int i = 0; i < aTypeArguments.Length; i++) {
+                Type parameterType1 = aTypeArguments[i];
+                Type parameterType2 = bTypeArguments[i];
                 if (!parameterType1.Equals(parameterType2)) {
                     return false;
                 }
@@ -302,6 +361,38 @@ namespace Zyl.VectorTraits.Impl {
                 interfaceMethodsDictionary = GetMethodGroup(interfaceType);
             }
             int rt = CheckBindMethods(staticType, objectType, interfaceMethodsDictionary, onMissed, userdata);
+            return rt;
+        }
+
+        /// <summary>
+        /// Check the binding of the method set, ignoring the difference in the bit length of the vectors (检查方法集的绑定, 忽略向量的位长的差异). e.g. <see cref="WVectorTraits256Avx2.Statics"/> and <see cref="VectorTraits256Avx2.Statics"/> . It has the interfaceMethodsDictionary parameter.
+        /// </summary>
+        /// <param name="staticType">The type of a static class (静态类的类型).</param>
+        /// <param name="objectType">The type of a object class (对象类的类型).</param>
+        /// <param name="interfaceMethodsDictionary">The methods of interface (接口类型的方法集合). If it is not null, the <paramref name="staticType"/> is checked in the scope of the method set of the interface (如果它非空，则在接口的方法集范围内检查 <paramref name="staticType"/> ).</param>
+        /// <param name="onMissed">The callback function for finding a missed method (找到未命中方法时的回调函数). Prototype: <c>bool isIgnore = onMissed(MethodInfo methodStatic, MethodInfo? methodInterface, object? userdata)</c>. If it is null, <see cref="OnMissed_Default"/> will be used.</param>
+        /// <param name="userdata">The userdata.</param>
+        /// <returns>Returns the number of missed methods. Specifically, the number of times when <paramref name="onMissed"/> returns false (返回未命中方法的个数。具体来说，是 <paramref name="onMissed"/> 返回false的次数).</returns>
+        public static int CheckBindMethodsAnyVector(Type staticType, Type objectType, IDictionary<string, List<MethodInfo>>? interfaceMethodsDictionary, Func<MethodInfo, MethodInfo?, object?, bool>? onMissed = null, object? userdata = null) {
+            int rt = CheckBindMethodsOn(EqualsParametersTypeAnyVector, staticType, objectType, interfaceMethodsDictionary, onMissed, userdata);
+            return rt;
+        }
+
+        /// <summary>
+        /// Check the binding of the method set, ignoring the difference in the bit length of the vectors (检查方法集的绑定, 忽略向量的位长的差异). e.g. <see cref="WVectorTraits256Avx2.Statics"/> and <see cref="VectorTraits256Avx2.Statics"/> .
+        /// </summary>
+        /// <param name="staticType">The type of a static class (静态类的类型).</param>
+        /// <param name="objectType">The type of a object class (对象类的类型).</param>
+        /// <param name="interfaceType">The type of interface (接口的类型). If it is not null, the <paramref name="staticType"/> is checked in the scope of the method set of the interface (如果它非空，则在接口的方法集范围内检查 <paramref name="staticType"/> ).</param>
+        /// <param name="onMissed">The callback function for finding a missed method (找到未命中方法时的回调函数). Prototype: <c>bool isIgnore = onMissed(MethodInfo methodStatic, MethodInfo? methodInterface, object? userdata)</c>. If it is null, <see cref="OnMissed_Default"/> will be used.</param>
+        /// <param name="userdata">The userdata.</param>
+        /// <returns>Returns the number of missed methods. Specifically, the number of times when <paramref name="onMissed"/> returns false (返回未命中方法的个数。具体来说，是 <paramref name="onMissed"/> 返回false的次数).</returns>
+        public static int CheckBindMethodsAnyVector(Type staticType, Type objectType, Type? interfaceType, Func<MethodInfo, MethodInfo?, object?, bool>? onMissed = null, object? userdata = null) {
+            SortedDictionary<string, List<MethodInfo>>? interfaceMethodsDictionary = null;
+            if (null != interfaceType) {
+                interfaceMethodsDictionary = GetMethodGroup(interfaceType);
+            }
+            int rt = CheckBindMethodsAnyVector(staticType, objectType, interfaceMethodsDictionary, onMissed, userdata);
             return rt;
         }
 

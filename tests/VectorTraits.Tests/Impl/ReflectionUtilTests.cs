@@ -108,6 +108,38 @@ namespace Zyl.VectorTraits.Tests.Impl {
             Assert.Zero(totalMissed);
         }
 
+        [Test()]
+        public void CheckBindMethodsAnyVectorTest() {
+            TextWriter writer = Console.Out;
+            Type? interfaceType = null;
+            interfaceType = typeof(IVectorTraits);
+            Type[] types = new Type[] {
+                // -- 128 --
+                typeof(WVectorTraits128AdvSimd.Statics), typeof(VectorTraits128AdvSimd.Statics),
+                typeof(WVectorTraits128AdvSimdB64.Statics), typeof(VectorTraits128AdvSimdB64.Statics),
+                // -- 256 --
+                typeof(WVectorTraits256Avx2.Statics), typeof(VectorTraits256Avx2.Statics),
+            };
+            int totalMissed = 0;
+            for (int i = 0; i < types.Length; i += 2) {
+                Type staticType = types[i];
+                Type objectType = types[i + 1];
+                writer.WriteLine("{0}:", staticType.FullName);
+                int n = ReflectionUtil.CheckBindMethodsAnyVector(staticType, objectType, interfaceType, delegate (MethodInfo methodStatic, MethodInfo? methodInterface, object? userdata) {
+                    bool isIgnore = (null == methodInterface); // If it is not in the method list of the interface, it is ignored.
+                    _ = userdata;
+                    if (!isIgnore) {
+                        writer.WriteLine("  {0}", methodStatic.ToString());
+                    }
+                    return isIgnore;
+                });
+                writer.WriteLine("{0} missed count: {1}", staticType.FullName, n);
+                totalMissed += n;
+            }
+            writer.WriteLine("Total missed: {0}", totalMissed);
+            //Assert.Zero(totalMissed);
+        }
+
 #endif // NETCOREAPP3_0_OR_GREATER
 
     }
