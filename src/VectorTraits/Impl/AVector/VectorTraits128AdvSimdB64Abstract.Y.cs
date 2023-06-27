@@ -14,6 +14,33 @@ namespace Zyl.VectorTraits.Impl.AVector {
     partial class VectorTraits128AdvSimdB64Abstract {
 #if NET5_0_OR_GREATER
 
+        /// <inheritdoc cref="IVectorTraits.YClamp_AcceleratedTypes"/>
+        public override TypeCodeFlags YClamp_AcceleratedTypes {
+            get {
+                return Statics.YClamp_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YClamp(Vector{double}, Vector{double}, Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> YClamp(Vector<double> value, Vector<double> amin, Vector<double> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YClamp(Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> YClamp(Vector<long> value, Vector<long> amin, Vector<long> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YClamp(Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> YClamp(Vector<ulong> value, Vector<ulong> amin, Vector<ulong> amax) {
+            return Statics.YClamp(value, amin, amax);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.YShuffleG2_AcceleratedTypes"/>
         public override TypeCodeFlags YShuffleG2_AcceleratedTypes {
             get {

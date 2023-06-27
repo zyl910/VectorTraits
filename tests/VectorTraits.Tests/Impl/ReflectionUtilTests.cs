@@ -137,7 +137,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 totalMissed += n;
             }
             writer.WriteLine("Total missed: {0}", totalMissed);
-            //Assert.Zero(totalMissed);
+            Assert.Zero(totalMissed);
         }
 
 #endif // NETCOREAPP3_0_OR_GREATER

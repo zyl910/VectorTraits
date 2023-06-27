@@ -18,6 +18,33 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #if NET5_0_OR_GREATER
         partial class Statics {
 
+            /// <inheritdoc cref="IVectorTraits.YClamp_AcceleratedTypes"/>
+            public static TypeCodeFlags YClamp_AcceleratedTypes {
+                get {
+                    return WStatics.YClamp_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YClamp(Vector{double}, Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YClamp(Vector<double> value, Vector<double> amin, Vector<double> amax) {
+                return WStatics.YClamp(value.AsVector128(), amin.AsVector128(), amax.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YClamp(Vector{long}, Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YClamp(Vector<long> value, Vector<long> amin, Vector<long> amax) {
+                return WStatics.YClamp(value.AsVector128(), amin.AsVector128(), amax.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YClamp(Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YClamp(Vector<ulong> value, Vector<ulong> amin, Vector<ulong> amax) {
+                return WStatics.YClamp(value.AsVector128(), amin.AsVector128(), amax.AsVector128()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.YShuffleG2_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleG2_AcceleratedTypes {
                 get {

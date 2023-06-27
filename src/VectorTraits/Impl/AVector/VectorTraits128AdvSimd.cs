@@ -104,6 +104,20 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToInt64_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt64(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ConvertToInt64(Vector<double> value) {
+                return WStatics.ConvertToInt64(value.AsVector128()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.ConvertToSingle_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {
                 get {
@@ -137,6 +151,21 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> ConvertToUInt32(Vector<float> value) {
                 return WStatics.ConvertToUInt32(value.AsVector128()).AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToUInt64_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt64(Vector{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> ConvertToUInt64(Vector<double> value) {
+                return WStatics.ConvertToUInt64(value.AsVector128()).AsVector();
             }
 
 
