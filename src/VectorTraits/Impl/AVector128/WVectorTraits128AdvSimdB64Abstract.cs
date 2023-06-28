@@ -74,6 +74,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.ConvertToDouble(value);
         }
 
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> ConvertToDouble_Range52(Vector128<long> value) {
+            return Statics.ConvertToDouble_Range52(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> ConvertToDouble_Range52(Vector128<ulong> value) {
+            return Statics.ConvertToDouble_Range52(value);
+        }
+
 
         /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_AcceleratedTypes"/>
         public override TypeCodeFlags ConvertToInt64_AcceleratedTypes {

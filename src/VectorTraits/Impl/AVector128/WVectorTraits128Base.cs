@@ -183,6 +183,27 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Range52(Vector128<long> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ConvertToDouble(value);
+#else
+                return ConvertToDouble_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Range52(Vector128<ulong> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ConvertToDouble(value);
+#else
+                return ConvertToDouble_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt32_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToInt32_AcceleratedTypes {

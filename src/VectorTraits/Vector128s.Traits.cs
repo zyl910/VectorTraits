@@ -18,6 +18,7 @@ namespace Zyl.VectorTraits {
     static partial class Vector128s {
         private static readonly IWVectorTraits128 _instance = WVectorTraits128Abstract.GetBestInstance(); // Best traits instance.
         private static readonly dynamic _instanceDynamic = _instance; // Best traits instance dynamic value.
+        private static readonly WVectorTraits128Base _baseInstance = WVectorTraits128Base.Instance; // Best traits instance.
 
         private static readonly string[] _traitsNames = {
             "WVectorTraits128Base",
@@ -49,6 +50,13 @@ namespace Zyl.VectorTraits {
         public static dynamic InstanceDynamic {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return _instanceDynamic; }
+        }
+
+        /// <summary>Base traits instance (基本特征实例). </summary>
+        [CLSCompliant(false)]
+        public static WVectorTraits128Base BaseInstance {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get { return _baseInstance; }
         }
 
         /// <summary>Traits name list (特征名称列表). </summary>
@@ -185,6 +193,27 @@ namespace Zyl.VectorTraits {
             return BaseStatics.ConvertToDouble(value);
 #else
             return _instance.ConvertToDouble(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<double> ConvertToDouble_Range52(Vector128<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToDouble_Range52(value);
+#else
+            return _instance.ConvertToDouble_Range52(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<double> ConvertToDouble_Range52(Vector128<ulong> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToDouble_Range52(value);
+#else
+            return _instance.ConvertToDouble_Range52(value);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 

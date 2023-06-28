@@ -128,6 +128,135 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             }
         }
 
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void ConvertToDouble_Range52Test<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.ConvertToDouble_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vector128s.GetSupportedMethodList<Func<Vector128<T>, Vector128<double>>>("ConvertToDouble_Bcl", "ConvertToDouble_Range52");
+            foreach (var func in funcList) {
+                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            Console.WriteLine();
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s<T>.Serial,
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) - 16, 8),
+                Vector128s<T>.Demo,
+                Vector128s<T>.DemoNaN,
+            };
+            bool allowLog = false;
+            bool hideEquals = true;
+            foreach (Vector128<T> value in samples) {
+                Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
+                Vector128<double> expected = Vector128s.ConvertToDouble_Range52((dynamic)value);
+                Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                foreach (IWVectorTraits128 instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector128<double> dst = instance.ConvertToDouble_Range52((dynamic)value);
+                    Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                }
+                foreach (var func in funcList) {
+                    string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                    try {
+                        Vector128<double> dst = func(value);
+                        if (allowLog || !hideEquals || !expected.Equals(dst)) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
+                        }
+                    } catch (Exception ex) {
+                        Console.WriteLine(string.Format("{0}:\t{1}", funcName, ex.Message));
+                    }
+                }
+                Console.WriteLine();
+            }
+            // Check data in the valid range.
+            bool allowLogAll = false;
+            int rangeItemCount = (int)Math.Pow(2, 4);
+            long[] rangeStarts = new long[0];
+            if (typeof(long) == typeof(T)) {
+                rangeStarts = new long[] {
+                    -(1L<<51),
+                    -(1L<<50),
+                    0L,
+                    1L<<50,
+                    (1L<<51) - rangeItemCount,
+                    // Out of range.
+                    //1L<<51,
+                    //(1L<<52) - rangeItemCount,
+                    //1L<<52,
+                };
+            } else if (typeof(ulong) == typeof(T)) {
+                rangeStarts = new long[] {
+                    0L,
+                    1L<<51,
+                    (1L<<52) - rangeItemCount,
+                    // Out of range.
+                    //1L<<52,
+                };
+            }
+            if (rangeStarts.Length > 0) {
+                int rangeItemCountVector = rangeItemCount / Vector128<T>.Count;
+                SortedDictionary<string, long> dict = new SortedDictionary<string, long>();
+                foreach (long start in rangeStarts) {
+                    for (int i = 0; i < rangeItemCountVector; ++i) {
+                        long startNumber = start + Vector128<T>.Count * i;
+                        Vector128<T> value = Vector128s.CreateByFunc<T>(index => Scalars.GetByBits<T>(startNumber + index));
+                        Vector128<double> expected = Vector128s.BaseInstance.ConvertToDouble((dynamic)value);
+                        bool usedWrite = false;
+                        // funcList.
+                        foreach (var func in funcList) {
+                            string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                            try {
+                                Vector128<double> dst = func(value);
+                                bool showLog = allowLogAll;
+                                if (!expected.Equals(dst)) {
+                                    long countError;
+                                    if (!dict.TryGetValue(funcName, out countError)) {
+                                        countError = 0;
+                                    }
+                                    if (countError <= 0) {
+                                        showLog = true;
+                                    }
+                                    ++countError;
+                                    dict[funcName] = countError;
+                                }
+                                if (showLog) {
+                                    if (!usedWrite) {
+                                        usedWrite = true;
+                                        Console.WriteLine(VectorTextUtil.Format("Sample({0}):\t{1}", startNumber, value));
+                                        Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                                    }
+                                    Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
+                                }
+                            } catch (Exception ex) {
+                                //Console.WriteLine(string.Format("{0}:\t{1}", funcName, ex.Message));
+                                _ = ex; // Ignore.
+                            }
+                        }
+                        if (usedWrite) {
+                            Console.WriteLine();
+                        }
+                    }
+                } // foreach (long start in rangeStarts)
+                Console.WriteLine("Count error:");
+                foreach (var func in funcList) {
+                    string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                    if (!dict.ContainsKey(funcName)) {
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t0 // OK", funcName));
+                    }
+                }
+                foreach (var kvp in dict) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", kvp.Key, kvp.Value));
+                }
+            } // if (rangeStarts.Length > 0)
+        }
+
         [TestCase((float)1)]
         public void ConvertToInt32Test<T>(T src) where T : struct {
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;

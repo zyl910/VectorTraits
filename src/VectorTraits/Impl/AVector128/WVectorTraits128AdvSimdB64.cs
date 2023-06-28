@@ -125,6 +125,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return AdvSimd.Arm64.ConvertToDouble(value);
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Range52(Vector128<long> value) {
+                return ConvertToDouble(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Range52(Vector128<ulong> value) {
+                return ConvertToDouble(value);
+            }
+
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
