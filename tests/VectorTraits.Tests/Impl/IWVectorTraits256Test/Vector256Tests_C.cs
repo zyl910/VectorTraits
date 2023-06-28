@@ -160,11 +160,11 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             bool hideEquals = true;
             foreach (Vector256<T> value in samples) {
                 Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
-                Vector256<double> expected = Vector256s.ConvertToDouble((dynamic)value);
+                Vector256<double> expected = Vector256s.ConvertToDouble_Range52((dynamic)value);
                 Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
                 foreach (IWVectorTraits256 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
-                    Vector256<double> dst = instance.ConvertToDouble((dynamic)value);
+                    Vector256<double> dst = instance.ConvertToDouble_Range52((dynamic)value);
                     Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                 }
                 foreach (var func in funcList) {

@@ -73,6 +73,26 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector256.ConvertToDouble(Vector256{ulong})" />
         Vector256<double> ConvertToDouble(Vector256<ulong> value);
 
+        /// <summary>
+        /// Convert to a vector whose elements are of type Double (转换为元素类型是Double的向量). Works for inputs in the range: [-2^51, 2^51).
+        /// Mnemonic: <c>rt[i] := (Double)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToDouble_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ConvertToDouble(Vector256{long})" />
+        Vector256<double> ConvertToDouble_Range52(Vector256<long> value);
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type Double (转换为元素类型是Double的向量). Works for inputs in the range: [0, 2^52).
+        /// Mnemonic: <c>rt[i] := (Double)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToDouble_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ConvertToDouble(Vector256{ulong})" />
+        Vector256<double> ConvertToDouble_Range52(Vector256<ulong> value);
+
 
         /// <summary>
         /// Types with hardware acceleration when running <c>ConvertToInt32</c> (运行 <c>ConvertToInt32</c> 时具有硬件加速的类型).

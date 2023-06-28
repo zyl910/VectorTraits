@@ -209,8 +209,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 }
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{long})"/>
-            /// <remarks>Works for inputs in the range: (-2^51, 2^51)</remarks>
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble_Range52(Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> ConvertToDouble_Range52(Vector256<long> value) {
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
@@ -281,8 +280,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return result;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{ulong})"/>
-            /// <remarks>Works for inputs in the range: [0, 2^52)</remarks>
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble_Range52(Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> ConvertToDouble_Range52(Vector256<ulong> value) {
