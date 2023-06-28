@@ -328,6 +328,41 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return SuperStatics.ConvertToInt64(value);
             }
 
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
+            /// <remarks>Works for inputs in the range: (-2^51, 2^51)</remarks>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ConvertToInt64_Range52(Vector256<double> value) {
+                return ConvertToInt64_Range52_Impl(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
+            /// <remarks>Works for inputs in the range: (-2^51, 2^51)</remarks>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ConvertToInt64_Range52_Impl(Vector256<double> value) {
+                value = Avx.RoundToZero(value); // Truncate.
+                return ConvertToInt64_Range52_NoTruncate(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
+            /// <remarks>Works for inputs in the range: (-2^51, 2^51)</remarks>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ConvertToInt64_Range52_NoTruncate(Vector256<double> value) {
+                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
+                // answered Dec 14, 2016 at 17:23 Mysticial
+                // //  Only works for inputs in the range: [-2^51, 2^51]
+                // __m128i double_to_int64(__m128d x){
+                //     x = _mm_add_pd(x, _mm_set1_pd(0x0018000000000000));
+                //     return _mm_sub_epi64(
+                //         _mm_castpd_si128(x),
+                //         _mm_castpd_si128(_mm_set1_pd(0x0018000000000000))
+                //     );
+                // }
+                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector256<double> x = Avx.Add(value, magicNumber.AsDouble());
+                Vector256<long> result = Avx2.Subtract(x.AsInt64(), magicNumber);
+                return result;
+            }
+
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {
@@ -518,6 +553,44 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> ConvertToUInt64(Vector256<double> value) {
                 return SuperStatics.ConvertToUInt64(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64(Vector256{double})"/>
+            /// <remarks>Works for inputs in the range: [0, 2^52)</remarks>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> ConvertToUInt64_Range52(Vector256<double> value) {
+                return ConvertToUInt64_Range52_Impl(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64(Vector256{double})"/>
+            /// <remarks>Works for inputs in the range: [0, 2^52)</remarks>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> ConvertToUInt64_Range52_Impl(Vector256<double> value) {
+                value = Avx.RoundToZero(value); // Truncate.
+                return ConvertToUInt64_Range52_NoTruncate(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64(Vector256{double})"/>
+            /// <remarks>Works for inputs in the range: [0, 2^52)</remarks>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> ConvertToUInt64_Range52_NoTruncate(Vector256<double> value) {
+                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
+                // answered Dec 14, 2016 at 17:23 Mysticial
+                // //  Only works for inputs in the range: [0, 2^52)
+                // __m128i double_to_uint64(__m128d x){
+                //     x = _mm_add_pd(x, _mm_set1_pd(0x0010000000000000));
+                //     return _mm_xor_si128(
+                //         _mm_castpd_si128(x),
+                //         _mm_castpd_si128(_mm_set1_pd(0x0010000000000000))
+                //     );
+                // }
+                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector256<double> x = Avx.Add(value, magicNumber.AsDouble());
+                Vector256<ulong> result = Avx2.Xor(x.AsUInt64(), magicNumber);
+                return result;
             }
 
 
