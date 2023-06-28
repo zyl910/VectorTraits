@@ -11,6 +11,8 @@ namespace Zyl.VectorTraits.Impl {
         // == BitDouble: Bit of Double ==
         /// <summary>BitDouble - `pow(2, 52) = 4503599627370496`.</summary>
         public const long BitDouble_2Pow52 = 0x43300000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 52)).ToString("X")
+        /// <summary>BitDouble - `1.5*pow(2, 52) = pow(2, 52) + pow(2, 51) = 6755399441055744`.</summary>
+        public const long BitDouble_2Pow52_2Pow51 = 0x43380000_00000000L; // BitConverter.DoubleToInt64Bits(1.5*Math.Pow(2, 52)).ToString("X")
 
         // == BitSingle: Bit of Single ==
         /// <summary>BitSingle - `-pow(2, 31) = -2147483648`.</summary>

@@ -221,7 +221,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //     return _mm256_sub_pd(_mm256_castsi256_pd(x), _mm256_set1_pd(0x0018000000000000));
                 // }
                 // [Bug number] Vector256<long> magicNumber = Vector256.Create(0x00180000_00000000L); // BitConverter.DoubleToInt64Bits(1.5*Math.Pow(2, -1022)).ToString("X")
-                Vector256<long> magicNumber = Vector256.Create(0x43380000_00000000L); // BitConverter.DoubleToInt64Bits(Math.Pow(2, 52)).ToString("X")
+                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector256<long> x = Avx2.Add(value, magicNumber);
                 Vector256<double> result = Avx.Subtract(x.AsDouble(), magicNumber.AsDouble());
                 return result;
@@ -294,7 +294,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //     return _mm256_sub_pd(_mm256_castsi256_pd(x), _mm256_set1_pd(0x0010000000000000));
                 // }
                 // [Bug number] Vector256<ulong> magicNumber = Vector256.Create(0x00100000_00000000UL); // BitConverter.DoubleToInt64Bits(Math.Pow(2, -1022)).ToString("X")
-                Vector256<ulong> magicNumber = Vector256.Create(0x43300000_00000000UL); // BitConverter.DoubleToInt64Bits(Math.Pow(2, 52)).ToString("X")
+                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
                 Vector256<ulong> x = Avx2.Or(value, magicNumber);
                 Vector256<double> result = Avx.Subtract(x.AsDouble(), magicNumber.AsDouble());
                 return result;
