@@ -422,6 +422,49 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             CheckResult("Sum128Base");
         }
 
+        /// <summary>
+        /// Sum ConvertToDouble - 128 - Base - Range52 - Impl.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSum128Base_Range52_Impl(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int Vector128Width = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = Vector128Width; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector result.
+            Vector128<TMyOut> vtemp;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                vtemp = WVectorTraits128Base.Statics.ConvertToDouble_Range52_Impl(p0);
+                vrt = Vector128s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            rt += Vector128s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128Base_Range52_Impl() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSum128Base_Range52_Impl(srcArray, srcArray.Length);
+            CheckResult("Sum128Base_Range52_Impl");
+        }
+
 #endif // BENCHMARKS_ALGORITHM
         #endregion // BENCHMARKS_ALGORITHM
 
@@ -650,6 +693,49 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             }
             dstTMy = StaticSum256Base(srcArray, srcArray.Length);
             CheckResult("Sum256Base");
+        }
+
+        /// <summary>
+        /// Sum ConvertToDouble - 256 - Base - Range52 - Impl.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSum256Base_Range52_Impl(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int Vector256Width = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = Vector256Width; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMyOut> vrt = Vector256<TMyOut>.Zero; // Vector result.
+            Vector256<TMyOut> vtemp;
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                vtemp = WVectorTraits256Base.Statics.ConvertToDouble_Range52_Impl(p0);
+                vrt = Vector256s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            rt += Vector256s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum256Base_Range52_Impl() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSum256Base_Range52_Impl(srcArray, srcArray.Length);
+            CheckResult("Sum256Base_Range52_Impl");
         }
 
         /// <summary>

@@ -6,10 +6,12 @@ using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 #endif // !NET7_0_OR_GREATER
 using System.Text;
 using System.Runtime.CompilerServices;
-using Zyl.VectorTraits.Impl.Util;
+using System.Runtime.InteropServices;
+using System.Numerics;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits.Impl.AVector128 {
     /// <summary>
@@ -187,7 +189,17 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble_Range52(Vector128<long> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector128.ConvertToDouble(value);
+                if ((RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count <= 32)
+                    || (RuntimeInformation.ProcessArchitecture == Architecture.Arm)
+                    || (RuntimeInformation.ProcessArchitecture == Architecture.Armv6)
+                ) {
+                    // `Vector<byte>.Count <= 32`: It is used to check that it is not Avx-512. Because Avx-512 adds special instructions, you should switch back to using system functions.
+                    return ConvertToDouble_Range52_Impl(value);
+                } else {
+                    return Vector128.ConvertToDouble(value);
+                }
+#elif NET7_0_OR_GREATER
+                return ConvertToDouble_Range52_Impl(value);
 #else
                 return ConvertToDouble_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
@@ -198,10 +210,48 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble_Range52(Vector128<ulong> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector128.ConvertToDouble(value);
+                if ((RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count <= 32)
+                    || (RuntimeInformation.ProcessArchitecture == Architecture.Arm)
+                    || (RuntimeInformation.ProcessArchitecture == Architecture.Armv6)
+                ) {
+                    return ConvertToDouble_Range52_Impl(value);
+                } else {
+                    return Vector128.ConvertToDouble(value);
+                }
+#elif NET7_0_OR_GREATER
+                return ConvertToDouble_Range52_Impl(value);
 #else
                 return ConvertToDouble_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Range52_Impl(Vector128<long> value) {
+#if NET7_0_OR_GREATER
+                // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
+                Vector128<long> magicNumber = Vector128.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector128<long> x = Vector128.Add(value, magicNumber);
+                Vector128<double> result = Vector128.Subtract(x.AsDouble(), magicNumber.AsDouble());
+#else
+                Vector128<double> result = ConvertToDouble_Basic(value);
+#endif // NET7_0_OR_GREATER
+                return result;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Range52_Impl(Vector128<ulong> value) {
+#if NET7_0_OR_GREATER
+                // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
+                Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector128<ulong> x = Vector128.BitwiseOr(value, magicNumber);
+                Vector128<double> result = Vector128.Subtract(x.AsDouble(), magicNumber.AsDouble());
+#else
+                Vector128<double> result = ConvertToDouble_Basic(value);
+#endif // NET7_0_OR_GREATER
+                return result;
             }
 
 

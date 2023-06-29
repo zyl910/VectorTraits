@@ -6,11 +6,12 @@ using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 #endif // !NET7_0_OR_GREATER
 using System.Text;
 using System.Runtime.CompilerServices;
-using Zyl.VectorTraits.Impl.Util;
-using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Numerics;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits.Impl.AVector256 {
     /// <summary>
@@ -198,7 +199,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> ConvertToDouble_Range52(Vector256<long> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector256.ConvertToDouble(value);
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count <= 32) {
+                    // `Vector<byte>.Count <= 32`: It is used to check that it is not Avx-512. Because Avx-512 adds special instructions, you should switch back to using system functions.
+                    return ConvertToDouble_Range52_Impl(value);
+                } else {
+                    return Vector256.ConvertToDouble(value);
+                }
+#elif NET7_0_OR_GREATER
+                return ConvertToDouble_Range52_Impl(value);
 #else
                 return ConvertToDouble_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
@@ -209,10 +217,45 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> ConvertToDouble_Range52(Vector256<ulong> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector256.ConvertToDouble(value);
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count <= 32) {
+                    return ConvertToDouble_Range52_Impl(value);
+                } else {
+                    return Vector256.ConvertToDouble(value);
+                }
+#elif NET7_0_OR_GREATER
+                return ConvertToDouble_Range52_Impl(value);
 #else
                 return ConvertToDouble_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble_Range52(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> ConvertToDouble_Range52_Impl(Vector256<long> value) {
+#if NET7_0_OR_GREATER
+                // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
+                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector256<long> x = Vector256.Add(value, magicNumber);
+                Vector256<double> result = Vector256.Subtract(x.AsDouble(), magicNumber.AsDouble());
+#else
+                Vector256<double> result = ConvertToDouble_Basic(value);
+#endif // NET7_0_OR_GREATER
+                return result;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble_Range52(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> ConvertToDouble_Range52_Impl(Vector256<ulong> value) {
+#if NET7_0_OR_GREATER
+                // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
+                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector256<ulong> x = Vector256.BitwiseOr(value, magicNumber);
+                Vector256<double> result = Vector256.Subtract(x.AsDouble(), magicNumber.AsDouble());
+#else
+                Vector256<double> result = ConvertToDouble_Basic(value);
+#endif // NET7_0_OR_GREATER
+                return result;
             }
 
 
