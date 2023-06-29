@@ -144,7 +144,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<double>>>("ConvertToDouble_Bcl", "ConvertToDouble_Range52");
+            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<double>>>("ConvertToDouble_Bcl", "ConvertToDouble_Range52", "ConvertToDouble_Range52_Impl");
             foreach (var func in funcList) {
                 Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }

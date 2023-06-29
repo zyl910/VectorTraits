@@ -150,14 +150,45 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> ConvertToDouble_Range52(Vector<long> value) {
-                return Vector.ConvertToDouble(value);
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count <= 32) {
+                    // `Vector<byte>.Count <= 32`: It is used to check that it is not Avx-512. Because Avx-512 adds special instructions, you should switch back to using system functions.
+                    return ConvertToDouble_Range52_Impl(value);
+                } else {
+                    return Vector.ConvertToDouble(value);
+                }
             }
 
             /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> ConvertToDouble_Range52(Vector<ulong> value) {
-                return Vector.ConvertToDouble(value);
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count <= 32) {
+                    // `Vector<byte>.Count <= 32`: It is used to check that it is not Avx-512. Because Avx-512 adds special instructions, you should switch back to using system functions.
+                    return ConvertToDouble_Range52_Impl(value);
+                } else {
+                    return Vector.ConvertToDouble(value);
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> ConvertToDouble_Range52_Impl(Vector<long> value) {
+                // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
+                Vector<long> magicNumber = new Vector<long>(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector<long> x = Vector.Add(value, magicNumber);
+                Vector<double> result = Vector.Subtract(x.AsDouble(), magicNumber.AsDouble());
+                return result;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> ConvertToDouble_Range52_Impl(Vector<ulong> value) {
+                // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
+                Vector<ulong> magicNumber = new Vector<ulong>(ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector<ulong> x = Vector.BitwiseOr(value, magicNumber);
+                Vector<double> result = Vector.Subtract(x.AsDouble(), magicNumber.AsDouble());
+                return result;
             }
 
 

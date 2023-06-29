@@ -82,7 +82,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, Vector<double>>>("ConvertToDouble_Bcl", "ConvertToDouble_Range52");
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, Vector<double>>>("ConvertToDouble_Bcl", "ConvertToDouble_Range52", "ConvertToDouble_Range52_Impl");
             foreach (var func in funcList) {
                 Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }

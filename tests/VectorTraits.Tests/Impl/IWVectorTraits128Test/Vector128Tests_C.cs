@@ -139,7 +139,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector128s.GetSupportedMethodList<Func<Vector128<T>, Vector128<double>>>("ConvertToDouble_Bcl", "ConvertToDouble_Range52");
+            var funcList = Vector128s.GetSupportedMethodList<Func<Vector128<T>, Vector128<double>>>("ConvertToDouble_Bcl", "ConvertToDouble_Range52", "ConvertToDouble_Range52_Impl");
             foreach (var func in funcList) {
                 Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }

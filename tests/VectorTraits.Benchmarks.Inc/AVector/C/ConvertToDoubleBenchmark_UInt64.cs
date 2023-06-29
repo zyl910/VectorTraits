@@ -152,6 +152,49 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             CheckResult("SumBase");
         }
 
+        /// <summary>
+        /// Sum ConvertToDouble - Base - Range52 - Impl
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSumBase_Range52_Impl(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vtemp;
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                vtemp = VectorTraitsBase.Statics.ConvertToDouble_Range52_Impl(p0);
+                vrt += vtemp;
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            rt += Vectors.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumBase_Range52_Impl() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumBase_Range52_Impl(srcArray, srcArray.Length);
+            CheckResult("SumBase_Range52_Impl");
+        }
+
 #endif // BENCHMARKS_ALGORITHM
         #endregion // BENCHMARKS_ALGORITHM
 
@@ -198,6 +241,49 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             CheckResult("SumTraits");
         }
 
+
+        /// <summary>
+        /// Sum ConvertToDouble - Traits static - Range52.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSumTraits_Range52(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vtemp;
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                vtemp = Vectors.ConvertToDouble_Range52(p0);
+                vrt += vtemp;
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            rt += Vectors.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumTraits_Range52() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumTraits_Range52(srcArray, srcArray.Length);
+            CheckResult("SumTraits_Range52");
+        }
 
         #region BENCHMARKS_128
 #if BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
@@ -382,6 +468,49 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             CheckResult("Sum128Traits");
         }
 
+        /// <summary>
+        /// Sum ConvertToDouble - 128 - Traits static - Range52.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSum128Traits_Range52(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int Vector128Width = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = Vector128Width; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector result.
+            Vector128<TMyOut> vtemp;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                vtemp = Vector128s.ConvertToDouble_Range52(p0);
+                vrt = Vector128s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            rt += Vector128s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128Traits_Range52() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSum128Traits_Range52(srcArray, srcArray.Length);
+            CheckResult("Sum128Traits_Range52");
+        }
+
 #endif // BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
         #endregion // BENCHMARKS_128
 
@@ -524,6 +653,50 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         }
 
         /// <summary>
+        /// Sum ConvertToDouble - 256 - Avx2 - Bcl.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSum256Avx2_Bcl(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int Vector256Width = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = Vector256Width; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMyOut> vrt = Vector256<TMyOut>.Zero; // Vector result.
+            Vector256<TMyOut> vtemp;
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                vtemp = WVectorTraits256Avx2.Statics.ConvertToDouble_Bcl(p0);
+                vrt = Vector256s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            rt += Vector256s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum256Avx2_Bcl() {
+            WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSum256Avx2_Bcl(srcArray, srcArray.Length);
+            CheckResult("Sum256Avx2_Bcl");
+        }
+
+        /// <summary>
         /// Sum ConvertToDouble - 256 - Avx2 - Range52.
         /// </summary>
         /// <param name="src">Source array.</param>
@@ -611,6 +784,49 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             }
             dstTMy = StaticSum256Traits(srcArray, srcArray.Length);
             CheckResult("Sum256Traits");
+        }
+
+        /// <summary>
+        /// Sum ConvertToDouble - 256 - Traits static - Range52.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSum256Traits_Range52(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int Vector256Width = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = Vector256Width; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMyOut> vrt = Vector256<TMyOut>.Zero; // Vector result.
+            Vector256<TMyOut> vtemp;
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                vtemp = Vector256s.ConvertToDouble_Range52(p0);
+                vrt = Vector256s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            rt += Vector256s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum256Traits_Range52() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSum256Traits_Range52(srcArray, srcArray.Length);
+            CheckResult("Sum256Traits_Range52");
         }
 
 #endif // BENCHMARKS_256 && NETCOREAPP3_0_OR_GREATER
