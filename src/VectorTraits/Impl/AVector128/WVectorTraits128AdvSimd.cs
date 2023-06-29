@@ -6,14 +6,16 @@ using System.Diagnostics.CodeAnalysis;
 using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 #endif // !NET7_0_OR_GREATER
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
+using System.Text;
 using System.Threading;
 #endif
 #if NET5_0_OR_GREATER
 using System.Runtime.Intrinsics.Arm;
 #endif // NET5_0_OR_GREATER
-using System.Text;
+using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits.Impl.AVector128 {
     using SuperStatics = WVectorTraits128Base.Statics;
@@ -141,6 +143,92 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector64<double> upper = AdvSimd.CeilingScalar(Vector128.GetUpper(value));
                 Vector128<double> rt = Vector128.Create(lower, upper);
                 return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble(Vector128<long> value) {
+                return SuperStatics.ConvertToDouble(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble(Vector128<ulong> value) {
+                return SuperStatics.ConvertToDouble(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Range52(Vector128<long> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (BitOfByte.Bit32 == IntPtr.Size) {
+                    return ConvertToDouble_Range52_Impl(value);
+                } else {
+                    return Vector128.ConvertToDouble(value);
+                }
+#elif NET7_0_OR_GREATER
+                return ConvertToDouble_Range52_Impl(value);
+#else
+                return SuperStatics.ConvertToDouble(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Range52(Vector128<ulong> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (BitOfByte.Bit32 == IntPtr.Size) {
+                    return ConvertToDouble_Range52_Impl(value);
+                } else {
+                    return Vector128.ConvertToDouble(value);
+                }
+#elif NET7_0_OR_GREATER
+                return ConvertToDouble_Range52_Impl(value);
+#else
+                return SuperStatics.ConvertToDouble(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Range52_Impl(Vector128<long> value) {
+#if NET7_0_OR_GREATER
+                // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
+                Vector128<long> magicNumber = Vector128.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector128<long> x = AdvSimd.Add(value, magicNumber);
+                Vector128<double> result = Subtract(x.AsDouble(), magicNumber.AsDouble());
+#else
+                Vector128<double> result = SuperStatics.ConvertToDouble(value);
+#endif // NET7_0_OR_GREATER
+                return result;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Range52_Impl(Vector128<ulong> value) {
+#if NET7_0_OR_GREATER
+                // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
+                Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector128<ulong> x = AdvSimd.Or(value, magicNumber);
+                Vector128<double> result = Subtract(x.AsDouble(), magicNumber.AsDouble());
+#else
+                Vector128<double> result = SuperStatics.ConvertToDouble(value);
+#endif // NET7_0_OR_GREATER
+                return result;
             }
 
 
@@ -557,6 +645,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftLeft_Core(Vector128<sbyte> value, int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
+                _ = shiftAmount;
                 _ = args1;
                 return AdvSimd.ShiftLogical(value, args0);
             }
@@ -564,6 +653,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftLeft_Core(Vector128<byte> value, int shiftAmount, Vector128<byte> args0, Vector128<byte> args1) {
+                _ = shiftAmount;
                 _ = args1;
                 return AdvSimd.ShiftLogical(value, args0.AsSByte());
             }
@@ -571,6 +661,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftLeft_Core(Vector128<short> value, int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
+                _ = shiftAmount;
                 _ = args1;
                 return AdvSimd.ShiftLogical(value, args0);
             }
@@ -579,6 +670,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftLeft_Core(Vector128<ushort> value, int shiftAmount, Vector128<ushort> args0, Vector128<ushort> args1) {
+                _ = shiftAmount;
                 _ = args1;
                 return AdvSimd.ShiftLogical(value, args0.AsInt16());
             }
@@ -586,6 +678,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftLeft_Core(Vector128<int> value, int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
+                _ = shiftAmount;
                 _ = args1;
                 return AdvSimd.ShiftLogical(value, args0);
             }
@@ -594,6 +687,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftLeft_Core(Vector128<uint> value, int shiftAmount, Vector128<uint> args0, Vector128<uint> args1) {
+                _ = shiftAmount;
                 _ = args1;
                 return AdvSimd.ShiftLogical(value, args0.AsInt32());
             }
@@ -601,6 +695,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftLeft_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+                _ = shiftAmount;
                 _ = args1;
                 return AdvSimd.ShiftLogical(value, args0);
             }
@@ -609,6 +704,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftLeft_Core(Vector128<ulong> value, int shiftAmount, Vector128<ulong> args0, Vector128<ulong> args1) {
+                _ = shiftAmount;
                 _ = args1;
                 return AdvSimd.ShiftLogical(value, args0.AsInt64());
             }

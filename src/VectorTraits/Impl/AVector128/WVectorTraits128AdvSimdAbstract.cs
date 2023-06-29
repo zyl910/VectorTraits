@@ -60,6 +60,40 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+            get {
+                return Statics.ConvertToDouble_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> ConvertToDouble(Vector128<long> value) {
+            return Statics.ConvertToDouble(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> ConvertToDouble(Vector128<ulong> value) {
+            return Statics.ConvertToDouble(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> ConvertToDouble_Range52(Vector128<long> value) {
+            return Statics.ConvertToDouble_Range52(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> ConvertToDouble_Range52(Vector128<ulong> value) {
+            return Statics.ConvertToDouble_Range52(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.ConvertToInt32_AcceleratedTypes"/>
         public override TypeCodeFlags ConvertToInt32_AcceleratedTypes {
             get {

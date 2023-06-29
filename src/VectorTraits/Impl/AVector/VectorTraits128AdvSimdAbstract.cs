@@ -60,6 +60,40 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+            get {
+                return Statics.ConvertToDouble_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> ConvertToDouble(Vector<long> value) {
+            return Statics.ConvertToDouble(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> ConvertToDouble(Vector<ulong> value) {
+            return Statics.ConvertToDouble(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> ConvertToDouble_Range52(Vector<long> value) {
+            return Statics.ConvertToDouble_Range52(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> ConvertToDouble_Range52(Vector<ulong> value) {
+            return Statics.ConvertToDouble_Range52(value);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.ConvertToInt32_AcceleratedTypes"/>
         public override TypeCodeFlags ConvertToInt32_AcceleratedTypes {
             get {
