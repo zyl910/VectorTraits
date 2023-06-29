@@ -151,8 +151,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> ConvertToDouble_Range52(Vector<long> value) {
 #if NETCOREAPP3_0_OR_GREATER
-                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count <= 32) {
-                    // `Vector<byte>.Count <= 32`: It is used to check that it is not Avx-512. Because Avx-512 adds special instructions, you should switch back to using system functions.
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512) {
                     return ConvertToDouble_Range52_Impl(value);
                 } else {
                     return Vector.ConvertToDouble(value);
@@ -167,7 +166,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> ConvertToDouble_Range52(Vector<ulong> value) {
 #if NETCOREAPP3_0_OR_GREATER
-                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count <= 32) {
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512) {
                     return ConvertToDouble_Range52_Impl(value);
                 } else {
                     return Vector.ConvertToDouble(value);

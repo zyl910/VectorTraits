@@ -205,7 +205,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                             vdst = instance.ShiftRightArithmetic_Core((dynamic)vsrc, shiftAmount, (dynamic)args0, (dynamic)args1);
                             Assert.AreEqual(vexpected, vdst, $"_Core of {instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
                         } catch (Exception ex) {
-                            Console.WriteLine("Exception at:" + $"_Core of {instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}");
+                            Console.WriteLine("Exception at:" + $"_Core of {instance.GetType().Name}, shiftAmount={shiftAmount}, vsrc={vsrc}. {ex.Message}");
                             throw;
                         }
                     }

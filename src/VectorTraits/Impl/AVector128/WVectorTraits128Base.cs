@@ -189,11 +189,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble_Range52(Vector128<long> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                if ((RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count <= 32)
-                    || (RuntimeInformation.ProcessArchitecture == Architecture.Arm)
-                    || (RuntimeInformation.ProcessArchitecture == Architecture.Armv6)
+                if ((RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512)
+                //|| (RuntimeInformation.ProcessArchitecture == Architecture.Arm) // Only AdvSimd.SubtractScalar
+                //|| (RuntimeInformation.ProcessArchitecture == Architecture.Armv6)
                 ) {
-                    // `Vector<byte>.Count <= 32`: It is used to check that it is not Avx-512. Because Avx-512 adds special instructions, you should switch back to using system functions.
                     return ConvertToDouble_Range52_Impl(value);
                 } else {
                     return Vector128.ConvertToDouble(value);
@@ -210,9 +209,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble_Range52(Vector128<ulong> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                if ((RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count <= 32)
-                    || (RuntimeInformation.ProcessArchitecture == Architecture.Arm)
-                    || (RuntimeInformation.ProcessArchitecture == Architecture.Armv6)
+                if ((RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512)
+                //|| (RuntimeInformation.ProcessArchitecture == Architecture.Arm) // Only AdvSimd.SubtractScalar
+                //|| (RuntimeInformation.ProcessArchitecture == Architecture.Armv6)
                 ) {
                     return ConvertToDouble_Range52_Impl(value);
                 } else {
