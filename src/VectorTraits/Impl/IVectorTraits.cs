@@ -53,7 +53,13 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>ConvertToDouble</c> (运行 <c>ConvertToDouble</c> 时具有硬件加速的类型).
         /// </summary>
+        /// <remarks>
+        /// <para>Meaning of suffixes (后缀的含义).</para>
+        /// <para>- (none): Normal (常规). Full 64-bit integer range (完全的64位整数范围).</para>
+        /// <para>- Range52: Supports up to 52-bit integer range (最多支持52位整数范围).</para>
+        /// </remarks>
         /// <seealso cref="ConvertToDouble"/>
+        /// <seealso cref="ConvertToDouble_Range52"/>
         TypeCodeFlags ConvertToDouble_AcceleratedTypes { get; }
 
         /// <summary>
@@ -75,6 +81,26 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ConvertToDouble_AcceleratedTypes"/>
         /// <seealso cref="Vector.ConvertToDouble(Vector{ulong})" />
         Vector<double> ConvertToDouble(Vector<ulong> value);
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type Double (转换为元素类型是Double的向量). Works for inputs in the range: [-2^51, 2^51).
+        /// Mnemonic: <c>rt[i] := (Double)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToDouble_AcceleratedTypes"/>
+        /// <seealso cref="Vector.ConvertToDouble(Vector{long})" />
+        Vector<double> ConvertToDouble_Range52(Vector<long> value);
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type Double (转换为元素类型是Double的向量). Works for inputs in the range: [0, 2^52).
+        /// Mnemonic: <c>rt[i] := (Double)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToDouble_AcceleratedTypes"/>
+        /// <seealso cref="Vector.ConvertToDouble(Vector{ulong})" />
+        Vector<double> ConvertToDouble_Range52(Vector<ulong> value);
 
 
         /// <summary>

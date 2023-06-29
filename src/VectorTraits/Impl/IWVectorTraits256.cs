@@ -50,7 +50,13 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>ConvertToDouble</c> (运行 <c>ConvertToDouble</c> 时具有硬件加速的类型).
         /// </summary>
+        /// <remarks>
+        /// <para>Meaning of suffixes (后缀的含义).</para>
+        /// <para>- (none): Normal (常规). Full 64-bit integer range (完全的64位整数范围).</para>
+        /// <para>- Range52: Supports up to 52-bit integer range (最多支持52位整数范围).</para>
+        /// </remarks>
         /// <seealso cref="ConvertToDouble"/>
+        /// <seealso cref="ConvertToDouble_Range52"/>
         TypeCodeFlags ConvertToDouble_AcceleratedTypes { get; }
 
         /// <summary>

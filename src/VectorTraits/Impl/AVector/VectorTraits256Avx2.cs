@@ -112,6 +112,19 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.ConvertToDouble(value.AsVector256()).AsVector();
             }
 
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> ConvertToDouble_Range52(Vector<long> value) {
+                return WStatics.ConvertToDouble_Range52(value.AsVector256()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> ConvertToDouble_Range52(Vector<ulong> value) {
+                return WStatics.ConvertToDouble_Range52(value.AsVector256()).AsVector();
+            }
+
 
             /// <inheritdoc cref="IVectorTraits.ConvertToInt32_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToInt32_AcceleratedTypes {

@@ -214,6 +214,27 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> ConvertToDouble_Range52(Vector<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToDouble_Range52(value);
+#else
+            return _instance.ConvertToDouble_Range52(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> ConvertToDouble_Range52(Vector<ulong> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToDouble_Range52(value);
+#else
+            return _instance.ConvertToDouble_Range52(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
 
         /// <inheritdoc cref="IVectorTraits.ConvertToInt32_AcceleratedTypes"/>
         public static TypeCodeFlags ConvertToInt32_AcceleratedTypes {

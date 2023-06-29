@@ -120,6 +120,19 @@ namespace Zyl.VectorTraits.Impl.AVector {
             return Statics.ConvertToDouble(value);
         }
 
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<double> ConvertToDouble_Range52(Vector<long> value) {
+            return Statics.ConvertToDouble_Range52(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<double> ConvertToDouble_Range52(Vector<ulong> value) {
+            return Statics.ConvertToDouble_Range52(value);
+        }
+
 
         /// <inheritdoc cref="IVectorTraits.ConvertToInt32_AcceleratedTypes"/>
         public virtual TypeCodeFlags ConvertToInt32_AcceleratedTypes {
