@@ -150,24 +150,32 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> ConvertToDouble_Range52(Vector<long> value) {
+#if NETCOREAPP3_0_OR_GREATER
                 if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count <= 32) {
                     // `Vector<byte>.Count <= 32`: It is used to check that it is not Avx-512. Because Avx-512 adds special instructions, you should switch back to using system functions.
                     return ConvertToDouble_Range52_Impl(value);
                 } else {
                     return Vector.ConvertToDouble(value);
                 }
+#else
+                return Vector.ConvertToDouble(value);
+#endif // NETCOREAPP3_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> ConvertToDouble_Range52(Vector<ulong> value) {
+#if NETCOREAPP3_0_OR_GREATER
                 if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count <= 32) {
                     // `Vector<byte>.Count <= 32`: It is used to check that it is not Avx-512. Because Avx-512 adds special instructions, you should switch back to using system functions.
                     return ConvertToDouble_Range52_Impl(value);
                 } else {
                     return Vector.ConvertToDouble(value);
                 }
+#else
+                return Vector.ConvertToDouble(value);
+#endif // NETCOREAPP3_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{long})"/>
