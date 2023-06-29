@@ -178,10 +178,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 } else {
                     return Vector128.ConvertToDouble(value);
                 }
-#elif NET7_0_OR_GREATER
-                return ConvertToDouble_Range52_Impl(value);
 #else
-                return SuperStatics.ConvertToDouble(value);
+                return ConvertToDouble_Range52_Impl(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
@@ -195,24 +193,18 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 } else {
                     return Vector128.ConvertToDouble(value);
                 }
-#elif NET7_0_OR_GREATER
-                return ConvertToDouble_Range52_Impl(value);
 #else
-                return SuperStatics.ConvertToDouble(value);
+                return ConvertToDouble_Range52_Impl(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble_Range52_Impl(Vector128<long> value) {
-#if NET7_0_OR_GREATER
                 // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
                 Vector128<long> magicNumber = Vector128.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector128<long> x = AdvSimd.Add(value, magicNumber);
                 Vector128<double> result = Subtract(x.AsDouble(), magicNumber.AsDouble());
-#else
-                Vector128<double> result = SuperStatics.ConvertToDouble(value);
-#endif // NET7_0_OR_GREATER
                 return result;
             }
 
@@ -220,14 +212,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble_Range52_Impl(Vector128<ulong> value) {
-#if NET7_0_OR_GREATER
                 // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
                 Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
                 Vector128<ulong> x = AdvSimd.Or(value, magicNumber);
                 Vector128<double> result = Subtract(x.AsDouble(), magicNumber.AsDouble());
-#else
-                Vector128<double> result = SuperStatics.ConvertToDouble(value);
-#endif // NET7_0_OR_GREATER
                 return result;
             }
 

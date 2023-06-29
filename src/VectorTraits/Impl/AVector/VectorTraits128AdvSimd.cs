@@ -100,16 +100,22 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> ConvertToDouble(Vector<long> value) {
-                //return WStatics.ConvertToDouble(value.AsVector128()).AsVector();
+#if BCL_OVERRIDE_BASE_FIXED
                 return Vector.ConvertToDouble(value);
+#else
+                return WStatics.ConvertToDouble(value.AsVector128()).AsVector();
+#endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> ConvertToDouble(Vector<ulong> value) {
-                //return WStatics.ConvertToDouble(value.AsVector128()).AsVector();
+#if BCL_OVERRIDE_BASE_FIXED
                 return Vector.ConvertToDouble(value);
+#else
+                return WStatics.ConvertToDouble(value.AsVector128()).AsVector();
+#endif // BCL_OVERRIDE_BASE_FIXED
             }
 
             /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{long})"/>
@@ -1589,7 +1595,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 #endif // NET5_0_OR_GREATER
-        }
+            }
 
     }
 }
