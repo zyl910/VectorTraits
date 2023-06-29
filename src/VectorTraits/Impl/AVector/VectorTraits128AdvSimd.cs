@@ -100,14 +100,16 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> ConvertToDouble(Vector<long> value) {
-                return WStatics.ConvertToDouble(value.AsVector128()).AsVector();
+                //return WStatics.ConvertToDouble(value.AsVector128()).AsVector();
+                return Vector.ConvertToDouble(value);
             }
 
             /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> ConvertToDouble(Vector<ulong> value) {
-                return WStatics.ConvertToDouble(value.AsVector128()).AsVector();
+                //return WStatics.ConvertToDouble(value.AsVector128()).AsVector();
+                return Vector.ConvertToDouble(value);
             }
 
             /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{long})"/>
