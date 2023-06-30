@@ -225,6 +225,18 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return Vector.ConvertToInt64(value);
             }
 
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt64_Range52(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ConvertToInt64_Range52(Vector<double> value) {
+                return ConvertToInt64_Range52_Impl(value);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt64_Range52(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ConvertToInt64_Range52_Impl(Vector<double> value) {
+                return Vector.ConvertToInt64(value);
+            }
+
 
             /// <inheritdoc cref="IVectorTraits.ConvertToSingle_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {

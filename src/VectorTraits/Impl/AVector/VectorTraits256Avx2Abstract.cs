@@ -121,6 +121,12 @@ namespace Zyl.VectorTraits.Impl.AVector {
             return Statics.ConvertToInt64(value);
         }
 
+        /// <inheritdoc cref="IVectorTraits.ConvertToInt64_Range52(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> ConvertToInt64_Range52(Vector<double> value) {
+            return Statics.ConvertToInt64_Range52(value);
+        }
+
 
         /// <inheritdoc cref="IVectorTraits.ConvertToSingle_AcceleratedTypes"/>
         public override TypeCodeFlags ConvertToSingle_AcceleratedTypes {

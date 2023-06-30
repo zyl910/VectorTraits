@@ -153,6 +153,12 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.ConvertToInt64(value.AsVector256()).AsVector();
             }
 
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt64_Range52(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ConvertToInt64_Range52(Vector<double> value) {
+                return WStatics.ConvertToInt64_Range52(value.AsVector256()).AsVector();
+            }
+
 
             /// <inheritdoc cref="IVectorTraits.ConvertToSingle_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {

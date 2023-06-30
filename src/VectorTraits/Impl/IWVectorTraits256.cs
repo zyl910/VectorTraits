@@ -136,7 +136,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The source vector (源向量).</param>
         /// <returns>The converted vector (转换后的向量).</returns>
         /// <seealso cref="ConvertToInt64_AcceleratedTypes"/>
-        /// <seealso cref="Vector256.ConvertToInt64(Vector256{long})" />
+        /// <seealso cref="Vector256.ConvertToInt64(Vector256{double})" />
         Vector256<long> ConvertToInt64(Vector256<double> value);
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">The source vector (源向量).</param>
         /// <returns>The converted vector (转换后的向量).</returns>
         /// <seealso cref="ConvertToInt64_AcceleratedTypes"/>
-        /// <seealso cref="Vector256.ConvertToInt64(Vector256{long})" />
+        /// <seealso cref="Vector256.ConvertToInt64(Vector256{double})" />
         Vector256<long> ConvertToInt64_Range52(Vector256<double> value);
 
 
