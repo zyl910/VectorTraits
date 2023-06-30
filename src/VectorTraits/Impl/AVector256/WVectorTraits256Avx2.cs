@@ -316,14 +316,33 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
                 get {
-                    return SuperStatics.ConvertToInt64_AcceleratedTypes;
+                    //TypeCodeFlags rt = SuperStatics.ConvertToInt64_AcceleratedTypes;
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+                    return rt;
                 }
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64(Vector256<double> value) {
-                return SuperStatics.ConvertToInt64(value);
+                // return SuperStatics.ConvertToInt64(value);
+                return ConvertToInt64_HwScalar(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ConvertToInt64_HwScalar(Vector256<double> value) {
+                if (Sse2.X64.IsSupported) {
+                    Vector256<double> valueOdd = Avx2.Permute4x64(value, (byte)ShuffleControlG4.YYWW);
+                    long v_0 = Sse2.X64.ConvertToInt64WithTruncation(value.GetLower());
+                    long v_2 = Sse2.X64.ConvertToInt64WithTruncation(value.GetUpper());
+                    long v_1 = Sse2.X64.ConvertToInt64WithTruncation(valueOdd.GetLower());
+                    long v_3 = Sse2.X64.ConvertToInt64WithTruncation(valueOdd.GetUpper());
+                    Vector256<long> result = Vector256.Create(v_0, v_1, v_2, v_3);
+                    return result;
+                } else {
+                    return SuperStatics.ConvertToInt64(value);
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_Range52(Vector256{double})"/>
