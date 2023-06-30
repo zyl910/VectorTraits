@@ -122,11 +122,17 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>ConvertToInt64</c> (运行 <c>ConvertToInt64</c> 时具有硬件加速的类型).
         /// </summary>
+        /// <remarks>
+        /// <para>Meaning of suffixes (后缀的含义).</para>
+        /// <para>- (none): Normal (常规). Full 64-bit integer range (完全的64位整数范围).</para>
+        /// <para>- Range52: Supports up to 52-bit integer range (最多支持52位整数范围).</para>
+        /// </remarks>
         /// <seealso cref="ConvertToInt64"/>
+        /// <seealso cref="ConvertToInt64_Range52"/>
         TypeCodeFlags ConvertToInt64_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Convert to a vector whose elements are of type Int64 (转换为元素类型是Int64的向量)..
+        /// Convert to a vector whose elements are of type Int64 (转换为元素类型是Int64的向量).
         /// Mnemonic: <c>rt[i] := (Int64)(value[i])</c>.
         /// </summary>
         /// <param name="value">The source vector (源向量).</param>
@@ -134,6 +140,16 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ConvertToInt64_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ConvertToInt64(Vector128{long})" />
         Vector128<long> ConvertToInt64(Vector128<double> value);
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type Int64 (转换为元素类型是Int64的向量). Works for inputs in the range: [-2^51, 2^51).
+        /// Mnemonic: <c>rt[i] := (Int64)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToInt64_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.ConvertToInt64(Vector128{long})" />
+        Vector128<long> ConvertToInt64_Range52(Vector128<double> value);
 
 
         /// <summary>

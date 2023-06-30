@@ -130,7 +130,7 @@ namespace Zyl.VectorTraits.Impl {
         TypeCodeFlags ConvertToInt64_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Convert to a vector whose elements are of type Int64 (转换为元素类型是Int64的向量)..
+        /// Convert to a vector whose elements are of type Int64 (转换为元素类型是Int64的向量).
         /// Mnemonic: <c>rt[i] := (Int64)(value[i])</c>.
         /// </summary>
         /// <param name="value">The source vector (源向量).</param>

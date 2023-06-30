@@ -152,6 +152,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return AdvSimd.Arm64.ConvertToInt64RoundToZero(value);
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ConvertToInt64_Range52(Vector128<double> value) {
+                return ConvertToInt64(value);
+            }
+
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToUInt64_AcceleratedTypes {

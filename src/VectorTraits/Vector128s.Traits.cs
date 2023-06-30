@@ -261,6 +261,16 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> ConvertToInt64_Range52(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToInt64_Range52(value);
+#else
+            return _instance.ConvertToInt64_Range52(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
 
         /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle_AcceleratedTypes"/>
         public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {

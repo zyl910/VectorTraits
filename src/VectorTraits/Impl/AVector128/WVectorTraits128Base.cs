@@ -325,6 +325,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ConvertToInt64_Range52(Vector128<double> value) {
+                return ConvertToInt64_Range52_Impl(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ConvertToInt64_Range52_Impl(Vector128<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.ConvertToInt64(value);
+#else
+                return ConvertToInt64_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {
