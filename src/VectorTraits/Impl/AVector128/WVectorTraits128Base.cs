@@ -328,18 +328,57 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64_Range52(Vector128<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512) {
+                    return ConvertToInt64_Range52_Impl(value);
+                } else {
+                    return Vector128.ConvertToInt64(value);
+                }
+#elif NET7_0_OR_GREATER
                 return ConvertToInt64_Range52_Impl(value);
+#else
+                return ConvertToInt64_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64_Range52_Impl(Vector128<double> value) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector128.ConvertToInt64(value);
+#if NET7_0_OR_GREATER
+                // See more: WVectorTraits128Avx2.ConvertToInt64_Range52_Impl
+                value = YTruncate(value); // Truncate.
+                return ConvertToInt64_Range52_NoTruncate(value);
 #else
                 return ConvertToInt64_Basic(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // NET7_0_OR_GREATER
             }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ConvertToInt64_Range52_NoTruncate(Vector128<double> value) {
+#if NET7_0_OR_GREATER
+                // See more: WVector128Traits128Avx2.ConvertToInt64_Range52_NoTruncate
+                Vector128<long> magicNumber = Vector128.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector128<double> x = Vector128.Add(value, magicNumber.AsDouble());
+                Vector128<long> result = Vector128.Subtract(x.AsInt64(), magicNumber);
+                return result;
+#else
+                return ConvertToInt64_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits128.YTruncate(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YTruncate(Vector128<double> value) {
+                Vector128<double> signMask = Vector128.Create(long.MinValue).AsDouble();
+                Vector128<double> valueAbs = Vector128.AndNot(value, signMask);
+                Vector128<double> signData = Vector128.BitwiseAnd(value, signMask);
+                Vector128<double> rt = Floor(valueAbs); // Vector128.Floor need .NET 5+ .
+                rt = Vector128.BitwiseOr(rt, signData);
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
 
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle_AcceleratedTypes"/>

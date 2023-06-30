@@ -338,18 +338,57 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_Range52(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64_Range52(Vector256<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512) {
+                    return ConvertToInt64_Range52_Impl(value);
+                } else {
+                    return Vector256.ConvertToInt64(value);
+                }
+#elif NET7_0_OR_GREATER
                 return ConvertToInt64_Range52_Impl(value);
+#else
+                return ConvertToInt64_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_Range52(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64_Range52_Impl(Vector256<double> value) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector256.ConvertToInt64(value);
+#if NET7_0_OR_GREATER
+                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_Impl
+                value = YTruncate(value); // Truncate.
+                return ConvertToInt64_Range52_NoTruncate(value);
 #else
                 return ConvertToInt64_Basic(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // NET7_0_OR_GREATER
             }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_Range52(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ConvertToInt64_Range52_NoTruncate(Vector256<double> value) {
+#if NET7_0_OR_GREATER
+                // See more: WVector256Traits256Avx2.ConvertToInt64_Range52_NoTruncate
+                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector256<double> x = Vector256.Add(value, magicNumber.AsDouble());
+                Vector256<long> result = Vector256.Subtract(x.AsInt64(), magicNumber);
+                return result;
+#else
+                return ConvertToInt64_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits256.YTruncate(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YTruncate(Vector256<double> value) {
+                Vector256<double> signMask = Vector256.Create(long.MinValue).AsDouble();
+                Vector256<double> valueAbs = Vector256.AndNot(value, signMask);
+                Vector256<double> signData = Vector256.BitwiseAnd(value, signMask);
+                Vector256<double> rt = Floor(valueAbs); // Vector256.Floor need .NET 5+ .
+                rt = Vector256.BitwiseOr(rt, signData);
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
 
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle_AcceleratedTypes"/>
