@@ -345,6 +345,59 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 }
             }
 
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
+            /// <remarks>Input range is `[-pow(2,63), pow(2,63))`. Out of range results in `0`.</remarks>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ConvertToInt64_Veloctor(Vector256<double> value) {
+                // From Veloctor . MIT
+                // https://github.com/Veloctor/Int128/blob/main/include/AVX2Ext.h
+                // inline __m256i double_to_int64_fast(const __m256d v) //13 instructions
+                // {
+                // 	//constants
+                // 	__m256i mat_mask = _mm256_set1_epi64x(0x0FFFFFFFFFFFFF);	//0_00000000000_1111111111111111111111111111111111111111111111111111
+                // 	__m256i hidden_1 = _mm256_set1_epi64x(0x10000000000000);	//0_00000000001_0000000000000000000000000000000000000000000000000000
+                // 	__m256i exp_bias = _mm256_set1_epi64x(1023LL + 52);			//0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
+                // 	#define zero256 _mm256_setzero_si256()
+                // 	//majik operations										  //Latency, Throughput(references IceLake)
+                // 	__m256i bin = _mm256_castpd_si256(v);
+                // 	__m256i negative = _mm256_cmpgt_epi64(zero256, bin);			//3,1
+                // 	__m256i mat = _mm256_and_si256(bin, mat_mask);					//1,1/3
+                // 	mat = _mm256_or_si256(mat, hidden_1);							//1,1/3
+                // 	__m256i exp_enc = _mm256_slli_epi64(bin, 1);					//1,1/2
+                // 	exp_enc = _mm256_srli_epi64(exp_enc, 53);						//1,1/2
+                // 	__m256i exp_frac = _mm256_sub_epi64(exp_enc, exp_bias);			//1,1/3
+                // 	__m256i msl = _mm256_sllv_epi64(mat, exp_frac);					//1,1/2
+                // 	__m256i exp_frac_n = _mm256_sub_epi64(zero256, exp_frac);		//1,1/3
+                // 	__m256i msr = _mm256_srlv_epi64(mat, exp_frac_n);				//1,1/2
+                // 	__m256i exp_is_pos = _mm256_cmpgt_epi64(exp_frac, zero256);		//3,1
+                // 	__m256i result_abs = _mm256_blendv_epi8(msr, msl, exp_is_pos);	//2,1
+                // 	__m256i result = _mm256_xor_si256(result_abs, negative);		//1,1/3
+                // 	result = _mm256_sub_epi64(result, negative);					//1,1/3
+                // 	return result;	//total latency: 18, total throughput CPI: 7
+                // }
+                //constants
+                Vector256<long> mat_mask = Vector256.Create(0x0FFFFF_FFFFFFFF);  //0_00000000000_1111111111111111111111111111111111111111111111111111
+                Vector256<long> hidden_1 = Vector256.Create(0x100000_00000000);  //0_00000000001_0000000000000000000000000000000000000000000000000000
+                Vector256<long> exp_bias = Vector256.Create(1023L + 52);         //0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
+                Vector256<long> zero = Vector256<long>.Zero;
+                //majik operations										  //Latency, Throughput(references IceLake)
+                Vector256<long> bin = value.AsInt64();
+                Vector256<long> negative = Avx2.CompareGreaterThan(zero, bin);           //3,1
+                Vector256<long> mat = Avx2.And(bin, mat_mask);                  //1,1/3
+                mat = Avx2.Or(mat, hidden_1);                           //1,1/3
+                Vector256<long> exp_enc = Avx2.ShiftLeftLogical(bin, 1);                    //1,1/2
+                exp_enc = Avx2.ShiftRightLogical(exp_enc, 53);                       //1,1/2
+                Vector256<long> exp_frac = Avx2.Subtract(exp_enc, exp_bias);         //1,1/3
+                Vector256<long> msl = Avx2.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt64());                 //1,1/2
+                Vector256<long> exp_frac_n = Avx2.Subtract(zero, exp_frac);      //1,1/3
+                Vector256<long> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64());               //1,1/2
+                Vector256<long> exp_is_pos = Avx2.CompareGreaterThan(exp_frac, zero);        //3,1
+                Vector256<long> result_abs = Avx2.BlendVariable(msr, msl, exp_is_pos);  //2,1
+                Vector256<long> result = Avx2.Xor(result_abs, negative);        //1,1/3
+                result = Avx2.Subtract(result, negative);                    //1,1/3
+                return result;  //total latency: 18, total throughput CPI: 7
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_Range52(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64_Range52(Vector256<double> value) {
@@ -2454,7 +2507,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
 
 #endif // NETCOREAPP3_0_OR_GREATER
-            }
-
         }
+
+    }
 }
