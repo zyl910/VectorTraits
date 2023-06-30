@@ -326,23 +326,20 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return SuperStatics.ConvertToInt64(value);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
-            /// <remarks>Works for inputs in the range: (-2^51, 2^51)</remarks>
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_Range52(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64_Range52(Vector256<double> value) {
                 return ConvertToInt64_Range52_Impl(value);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
-            /// <remarks>Works for inputs in the range: (-2^51, 2^51)</remarks>
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_Range52(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64_Range52_Impl(Vector256<double> value) {
                 value = Avx.RoundToZero(value); // Truncate.
                 return ConvertToInt64_Range52_NoTruncate(value);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
-            /// <remarks>Works for inputs in the range: (-2^51, 2^51)</remarks>
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_Range52(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64_Range52_NoTruncate(Vector256<double> value) {
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0

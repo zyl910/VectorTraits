@@ -356,7 +356,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.Demo,
                 Vector256s<T>.DemoNaN,
             };
-            bool allowLog = false;
+            bool allowLog = true;
             bool hideEquals = true;
             foreach (Vector256<T> value in samples) {
                 Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
@@ -364,7 +364,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
                 foreach (IWVectorTraits256 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
-                    Vector256<long> dst = instance.ConvertToInt64((dynamic)value);
+                    Vector256<long> dst = instance.ConvertToInt64_Range52((dynamic)value);
                     if (allowLog) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
