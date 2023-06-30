@@ -15,6 +15,8 @@ namespace Zyl.VectorTraits.Benchmarks {
         protected static float[] srcArraySingle_RangeInt32 = { };
         protected static float[] srcArraySingle_RangeUInt32 = { };
         protected static double[] srcArrayDouble = { };
+        protected static double[] srcArrayDouble_RangeInt64 = { };
+        protected static double[] srcArrayDouble_RangeUInt64 = { };
         protected static sbyte[] srcArraySByte = { };
         protected static byte[] srcArrayByte = { };
         protected static short[] srcArrayInt16 = { };
@@ -47,13 +49,17 @@ namespace Zyl.VectorTraits.Benchmarks {
                 if (null!= srcArrayInt32) {
                     if (N == srcArrayInt32.Length) return;
                 }
+                const double minValueInt32 = Int32.MinValue;
+                const double minValueInt64 = Int64.MinValue;
                 double pow2_32 = Math.Pow(2, 32);
-                double minValueInt32 = Int32.MinValue;
+                double pow2_64 = Math.Pow(2, 64);
                 Random random = new Random(0);
                 srcArraySingle = new float[N];
                 srcArraySingle_RangeInt32 = new float[N];
                 srcArraySingle_RangeUInt32 = new float[N];
                 srcArrayDouble = new double[N];
+                srcArrayDouble_RangeInt64 = new double[N];
+                srcArrayDouble_RangeUInt64 = new double[N];
                 srcArraySByte = new sbyte[N];
                 srcArrayByte = new byte[N];
                 srcArrayInt16 = new short[N];
@@ -72,10 +78,14 @@ namespace Zyl.VectorTraits.Benchmarks {
                     double f = random.NextDouble();
                     double fUInt32 = f * pow2_32;
                     double fInt32 = fUInt32 + minValueInt32;
+                    double fUInt64 = f * pow2_64;
+                    double fInt64 = fUInt64 + minValueInt64;
                     srcArraySingle[i] = (float)f;
                     srcArraySingle_RangeInt32[i] = (float)fInt32;
                     srcArraySingle_RangeUInt32[i] = (float)fUInt32;
                     srcArrayDouble[i] = f;
+                    srcArrayDouble_RangeInt64[i] = (float)fInt64;
+                    srcArrayDouble_RangeUInt64[i] = (float)fUInt64;
                     srcArraySByte[i] = (sbyte)srcArrayByte[i];
                     srcArrayInt16[i] = (short)a;
                     srcArrayUInt16[i] = (ushort)a;
