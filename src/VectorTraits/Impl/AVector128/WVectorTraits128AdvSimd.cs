@@ -337,6 +337,48 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return SuperStatics.ConvertToUInt64(value);
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52(Vector128{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ConvertToUInt64_Range52(Vector128<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (BitOfByte.Bit32 == IntPtr.Size) {
+                    return ConvertToUInt64_Range52_Impl(value);
+                } else {
+                    return Vector128.ConvertToUInt64(value);
+                }
+#else
+                return ConvertToUInt64_Range52_Impl(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52(Vector128{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ConvertToUInt64_Range52_Impl(Vector128<double> value) {
+                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_NoTruncate
+                Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                // value = YTruncate(value); // Truncate.
+                // Vector128<double> x = Add(value, magicNumber.AsDouble());
+                Vector64<double> right = magicNumber.AsDouble().GetLower();
+                Vector64<double> lower = AdvSimd.AddScalar(AdvSimd.RoundToZeroScalar(value.GetLower()), right);
+                Vector64<double> upper = AdvSimd.AddScalar(AdvSimd.RoundToZeroScalar(value.GetUpper()), right);
+                Vector128<double> x = Vector128.Create(lower, upper);
+                Vector128<ulong> result = AdvSimd.Xor(x.AsUInt64(), magicNumber);
+                return result;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52(Vector128{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ConvertToUInt64_Range52_NoTruncate(Vector128<double> value) {
+                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_NoTruncate
+                Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector128<double> x = Add(value, magicNumber.AsDouble());
+                Vector128<ulong> result = AdvSimd.Xor(x.AsUInt64(), magicNumber);
+                return result;
+            }
+
 
             /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits_AcceleratedTypes"/>
             public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
