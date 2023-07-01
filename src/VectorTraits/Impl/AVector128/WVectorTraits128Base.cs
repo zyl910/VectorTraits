@@ -345,7 +345,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64_Range52_Impl(Vector128<double> value) {
 #if NET7_0_OR_GREATER
-                // See more: WVectorTraits128Avx2.ConvertToInt64_Range52_Impl
+                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_Impl
                 value = YTruncate(value); // Truncate.
                 return ConvertToInt64_Range52_NoTruncate(value);
 #else
@@ -357,7 +357,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64_Range52_NoTruncate(Vector128<double> value) {
 #if NET7_0_OR_GREATER
-                // See more: WVector128Traits128Avx2.ConvertToInt64_Range52_NoTruncate
+                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_NoTruncate
                 Vector128<long> magicNumber = Vector128.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector128<double> x = Vector128.Add(value, magicNumber.AsDouble());
                 Vector128<long> result = Vector128.Subtract(x.AsInt64(), magicNumber);
@@ -504,6 +504,51 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 prt = (UInt64)p;
                 Unsafe.Add(ref prt, 1) = (UInt64)Unsafe.Add(ref p, 1);
                 return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52(Vector128{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ConvertToUInt64_Range52(Vector128<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512) {
+                    return ConvertToUInt64_Range52_Impl(value);
+                } else {
+                    return Vector128.ConvertToUInt64(value);
+                }
+#elif NET7_0_OR_GREATER
+                return ConvertToUInt64_Range52_Impl(value);
+#else
+                return ConvertToUInt64_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52(Vector128{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ConvertToUInt64_Range52_Impl(Vector128<double> value) {
+#if NET7_0_OR_GREATER
+                // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52_Impl
+                value = YTruncate(value); // Truncate.
+                return ConvertToUInt64_Range52_NoTruncate(value);
+#else
+                return ConvertToUInt64_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52(Vector128{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ConvertToUInt64_Range52_NoTruncate(Vector128<double> value) {
+#if NET7_0_OR_GREATER
+                // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52_NoTruncate
+                Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector128<double> x = Vector128.Add(value, magicNumber.AsDouble());
+                Vector128<ulong> result = Vector128.Xor(x.AsUInt64(), magicNumber);
+                return result;
+#else
+                return ConvertToUInt64_Basic(value);
+#endif // NET7_0_OR_GREATER
             }
 
 

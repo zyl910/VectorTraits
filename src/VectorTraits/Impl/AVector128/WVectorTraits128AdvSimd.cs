@@ -264,7 +264,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64_Range52_Impl(Vector128<double> value) {
-                // See more: WVectorTraits128Avx2.ConvertToInt64_Range52_Impl
+                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_Impl
                 Vector128<long> magicNumber = Vector128.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 // value = YTruncate(value); // Truncate.
                 // Vector128<double> x = Add(value, magicNumber.AsDouble());
@@ -279,7 +279,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64_Range52_NoTruncate(Vector128<double> value) {
-                // See more: WVector128Traits128Avx2.ConvertToInt64_Range52_NoTruncate
+                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_NoTruncate
                 Vector128<long> magicNumber = Vector128.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector128<double> x = Add(value, magicNumber.AsDouble());
                 Vector128<long> result = AdvSimd.Subtract(x.AsInt64(), magicNumber);

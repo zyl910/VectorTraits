@@ -173,6 +173,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return AdvSimd.Arm64.ConvertToUInt64RoundToZero(value);
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52(Vector128{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ConvertToUInt64_Range52(Vector128<double> value) {
+                return AdvSimd.Arm64.ConvertToUInt64RoundToZero(value);
+            }
+
 
             /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits_AcceleratedTypes"/>
             public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {

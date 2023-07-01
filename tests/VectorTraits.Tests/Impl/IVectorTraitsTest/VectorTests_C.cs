@@ -345,7 +345,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                 foreach (double start in rangeStarts) {
                     for (int i = 0; i < rangeItemCountVector; ++i) {
                         double startNumber = start + Vector<T>.Count * i * stepDelta;
-                        Vector<T> value = Vectors.CreateByDoubleLoop<T>(start, stepDelta);
+                        Vector<T> value = Vectors.CreateByDoubleLoop<T>(startNumber, stepDelta);
                         Vector<long> expected = Vectors.BaseInstance.ConvertToInt64((dynamic)value);
                         bool usedWrite = false;
                         // funcList.

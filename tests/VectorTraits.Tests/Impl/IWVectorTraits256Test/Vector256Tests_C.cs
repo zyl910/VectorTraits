@@ -503,7 +503,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 foreach (double start in rangeStarts) {
                     for (int i = 0; i < rangeItemCountVector; ++i) {
                         double startNumber = start + Vector256<T>.Count * i * stepDelta;
-                        Vector256<T> value = Vector256s.CreateByDoubleLoop<T>(start, stepDelta);
+                        Vector256<T> value = Vector256s.CreateByDoubleLoop<T>(startNumber, stepDelta);
                         Vector256<long> expected = Vector256s.BaseInstance.ConvertToInt64((dynamic)value);
                         bool usedWrite = false;
                         // funcList.
@@ -811,7 +811,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             bool allowLogAll = false;
             const int stepCount = 2;
             const double stepDelta = 1.0 / stepCount;
-            double rangeItemNumber = Math.Pow(2, 4);
+            double rangeItemNumber = Math.Pow(2, 12);
             int rangeItemCount = (int)(rangeItemNumber * stepCount);
             double[] rangeStarts = new double[] {
                     0,
@@ -826,7 +826,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 foreach (double start in rangeStarts) {
                     for (int i = 0; i < rangeItemCountVector; ++i) {
                         double startNumber = start + Vector256<T>.Count * i * stepDelta;
-                        Vector256<T> value = Vector256s.CreateByDoubleLoop<T>(start, stepDelta);
+                        Vector256<T> value = Vector256s.CreateByDoubleLoop<T>(startNumber, stepDelta);
                         Vector256<ulong> expected = Vector256s.BaseInstance.ConvertToUInt64((dynamic)value);
                         bool usedWrite = false;
                         // funcList.
