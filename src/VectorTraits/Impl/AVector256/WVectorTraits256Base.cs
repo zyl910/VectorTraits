@@ -530,6 +530,51 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64_Range52(Vector256{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> ConvertToUInt64_Range52(Vector256<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512) {
+                    return ConvertToUInt64_Range52_Impl(value);
+                } else {
+                    return Vector256.ConvertToUInt64(value);
+                }
+#elif NET7_0_OR_GREATER
+                return ConvertToUInt64_Range52_Impl(value);
+#else
+                return ConvertToUInt64_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64_Range52(Vector256{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> ConvertToUInt64_Range52_Impl(Vector256<double> value) {
+#if NET7_0_OR_GREATER
+                // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52_Impl
+                value = YTruncate(value); // Truncate.
+                return ConvertToUInt64_Range52_NoTruncate(value);
+#else
+                return ConvertToUInt64_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64_Range52(Vector256{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> ConvertToUInt64_Range52_NoTruncate(Vector256<double> value) {
+#if NET7_0_OR_GREATER
+                // See more: WVector256Traits256Avx2.ConvertToUInt64_Range52_NoTruncate
+                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector256<double> x = Vector256.Add(value, magicNumber.AsDouble());
+                Vector256<ulong> result = Vector256.Xor(x.AsUInt64(), magicNumber);
+                return result;
+#else
+                return ConvertToUInt64_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
 
             /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits_AcceleratedTypes"/>
             public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {

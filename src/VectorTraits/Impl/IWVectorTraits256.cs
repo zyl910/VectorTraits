@@ -197,7 +197,13 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>ConvertToUInt64</c> (运行 <c>ConvertToUInt64</c> 时具有硬件加速的类型).
         /// </summary>
+        /// <remarks>
+        /// <para>Meaning of suffixes (后缀的含义).</para>
+        /// <para>- (none): Normal (常规). Full 64-bit integer range (完全的64位整数范围).</para>
+        /// <para>- Range52: Supports up to 52-bit integer range (最多支持52位整数范围).</para>
+        /// </remarks>
         /// <seealso cref="ConvertToUInt64"/>
+        /// <seealso cref="ConvertToUInt64_Range52"/>
         TypeCodeFlags ConvertToUInt64_AcceleratedTypes { get; }
 
         /// <summary>
@@ -209,6 +215,16 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ConvertToUInt64_AcceleratedTypes"/>
         /// <seealso cref="Vector256.ConvertToUInt64(Vector256{double})" />
         Vector256<ulong> ConvertToUInt64(Vector256<double> value);
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type UInt64 (转换为元素类型是UInt64的向量). Works for inputs in the range: [0, 2^52).
+        /// Mnemonic: <c>rt[i] := (UInt64)(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToUInt64_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.ConvertToUInt64(Vector256{double})" />
+        Vector256<ulong> ConvertToUInt64_Range52(Vector256<double> value);
 
 
         /// <summary>

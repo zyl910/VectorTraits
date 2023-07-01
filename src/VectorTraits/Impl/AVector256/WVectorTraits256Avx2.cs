@@ -622,16 +622,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return SuperStatics.ConvertToUInt64(value);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64(Vector256{double})"/>
-            /// <remarks>Works for inputs in the range: [0, 2^52)</remarks>
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64_Range52(Vector256{double})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> ConvertToUInt64_Range52(Vector256<double> value) {
                 return ConvertToUInt64_Range52_Impl(value);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64(Vector256{double})"/>
-            /// <remarks>Works for inputs in the range: [0, 2^52)</remarks>
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64_Range52(Vector256{double})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> ConvertToUInt64_Range52_Impl(Vector256<double> value) {
@@ -639,8 +637,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return ConvertToUInt64_Range52_NoTruncate(value);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64(Vector256{double})"/>
-            /// <remarks>Works for inputs in the range: [0, 2^52)</remarks>
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64_Range52(Vector256{double})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> ConvertToUInt64_Range52_NoTruncate(Vector256<double> value) {

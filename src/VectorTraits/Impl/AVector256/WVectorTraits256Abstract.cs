@@ -200,6 +200,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             return Statics.ConvertToUInt64(value);
         }
 
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64_Range52(Vector256{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ulong> ConvertToUInt64_Range52(Vector256<double> value) {
+            return Statics.ConvertToUInt64_Range52(value);
+        }
+
 
         /// <inheritdoc cref="IWVectorTraits256.ExtractMostSignificantBits_AcceleratedTypes"/>
         public virtual TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
