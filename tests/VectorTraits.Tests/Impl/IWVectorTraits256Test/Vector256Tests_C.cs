@@ -779,7 +779,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.Demo,
                 Vector256s<T>.DemoNaN,
             };
-            bool allowLog = false;
+            bool allowLog = true;
             bool hideEquals = true;
             foreach (Vector256<T> value in samples) {
                 Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));

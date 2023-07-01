@@ -596,7 +596,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 Vector128s<T>.Demo,
                 Vector128s<T>.DemoNaN,
             };
-            bool allowLog = false;
+            bool allowLog = true;
             bool hideEquals = true;
             foreach (Vector128<T> value in samples) {
                 Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));

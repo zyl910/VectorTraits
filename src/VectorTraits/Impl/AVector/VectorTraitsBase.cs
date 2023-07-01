@@ -319,6 +319,41 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return Vector.ConvertToUInt64(value);
             }
 
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_Range52(Vector{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> ConvertToUInt64_Range52(Vector<double> value) {
+#if NET5_0_OR_GREATER // Vector.Floor need .NET 5+ .
+                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512) {
+                    return ConvertToUInt64_Range52_Impl(value);
+                } else {
+                    return Vector.ConvertToUInt64(value);
+                }
+#else
+                return Vector.ConvertToUInt64(value);
+#endif // NET5_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_Range52(Vector{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> ConvertToUInt64_Range52_Impl(Vector<double> value) {
+                // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52_Impl
+                value = YTruncate(value); // Truncate.
+                return ConvertToUInt64_Range52_NoTruncate(value);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_Range52(Vector{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> ConvertToUInt64_Range52_NoTruncate(Vector<double> value) {
+                // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52_NoTruncate
+                Vector<ulong> magicNumber = new Vector<ulong>((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector<double> x = Vector.Add(value, magicNumber.AsDouble());
+                Vector<ulong> result = Vector.Xor(x.AsUInt64(), magicNumber);
+                return result;
+            }
+
 
             /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits_AcceleratedTypes"/>
             public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {

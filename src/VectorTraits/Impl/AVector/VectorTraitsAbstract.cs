@@ -218,6 +218,13 @@ namespace Zyl.VectorTraits.Impl.AVector {
             return Statics.ConvertToUInt64(value);
         }
 
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_Range52(Vector{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ulong> ConvertToUInt64_Range52(Vector<double> value) {
+            return Statics.ConvertToUInt64_Range52(value);
+        }
+
 
         /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits_AcceleratedTypes"/>
         public virtual TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {

@@ -368,6 +368,17 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_Range52(Vector{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> ConvertToUInt64_Range52(Vector<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToUInt64_Range52(value);
+#else
+            return _instance.ConvertToUInt64_Range52(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
 
         /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits_AcceleratedTypes"/>
         public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {

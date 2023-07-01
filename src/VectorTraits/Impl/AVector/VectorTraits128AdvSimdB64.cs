@@ -150,6 +150,13 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.ConvertToUInt64(value.AsVector128()).AsVector();
             }
 
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_Range52(Vector{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> ConvertToUInt64_Range52(Vector<double> value) {
+                return WStatics.ConvertToUInt64_Range52(value.AsVector128()).AsVector();
+            }
+
 
             /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits_AcceleratedTypes"/>
             public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {

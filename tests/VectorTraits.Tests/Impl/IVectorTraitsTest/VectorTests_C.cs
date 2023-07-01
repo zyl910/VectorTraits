@@ -500,5 +500,126 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             }
         }
 
+        [TestCase((double)2)]
+        public void ConvertToUInt64_Range52Test<T>(T src) where T : struct {
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.ConvertToUInt64_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, Vector<ulong>>>("ConvertToUInt64_Range52_Impl", "ConvertToUInt64_Range52_NoTruncate");
+            foreach (var func in funcList) {
+                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors<T>.Serial,
+                Vectors.CreateByDoubleLoop<T>(-0.5 - Scalars.GetDoubleFrom(src), 1),
+                Vectors<T>.Demo,
+                Vectors<T>.DemoNaN,
+            };
+            bool allowLog = true;
+            bool hideEquals = true;
+            foreach (Vector<T> value in samples) {
+                Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
+                Vector<ulong> expected = Vectors.ConvertToUInt64_Range52((dynamic)value);
+                Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                foreach (IVectorTraits instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector<ulong> dst = instance.ConvertToUInt64_Range52((dynamic)value);
+                    if (allowLog) {
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    }
+                }
+                foreach (var func in funcList) {
+                    string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                    try {
+                        Vector<ulong> dst = func(value);
+                        if (allowLog || !hideEquals || !expected.Equals(dst)) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
+                        }
+                    } catch (Exception ex) {
+                        Console.WriteLine(string.Format("{0}:\t{1}", funcName, ex.Message));
+                    }
+                }
+                Console.WriteLine();
+            }
+            // Check data in the valid range.
+            bool allowLogAll = false;
+            const int stepCount = 2;
+            const double stepDelta = 1.0 / stepCount;
+            double rangeItemNumber = Math.Pow(2, 12);
+            int rangeItemCount = (int)(rangeItemNumber * stepCount);
+            double[] rangeStarts = new double[] {
+                    0,
+                    Math.Pow(2, 51),
+                    Math.Pow(2, 52) - rangeItemNumber,
+                    // Out of range.
+                    //Math.Pow(2, 52),
+            };
+            if (rangeStarts.Length > 0) {
+                int rangeItemCountVector = rangeItemCount / Vector<T>.Count;
+                SortedDictionary<string, ulong> dict = new SortedDictionary<string, ulong>();
+                foreach (double start in rangeStarts) {
+                    for (int i = 0; i < rangeItemCountVector; ++i) {
+                        double startNumber = start + Vector<T>.Count * i * stepDelta;
+                        Vector<T> value = Vectors.CreateByDoubleLoop<T>(startNumber, stepDelta);
+                        Vector<ulong> expected = Vectors.BaseInstance.ConvertToUInt64((dynamic)value);
+                        bool usedWrite = false;
+                        // funcList.
+                        foreach (var func in funcList) {
+                            string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                            try {
+                                Vector<ulong> dst = func(value);
+                                bool showLog = allowLogAll;
+                                if (!expected.Equals(dst)) {
+                                    ulong countError;
+                                    if (!dict.TryGetValue(funcName, out countError)) {
+                                        countError = 0;
+                                    }
+                                    if (countError <= 0) {
+                                        showLog = true;
+                                    }
+                                    ++countError;
+                                    dict[funcName] = countError;
+                                }
+                                if (showLog) {
+                                    if (!usedWrite) {
+                                        usedWrite = true;
+                                        Console.WriteLine(VectorTextUtil.Format("Sample({0}):\t{1}", startNumber, value));
+                                        Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                                    }
+                                    Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
+                                }
+                            } catch (Exception ex) {
+                                //Console.WriteLine(string.Format("{0}:\t{1}", funcName, ex.Message));
+                                _ = ex; // Ignore.
+                            }
+                        }
+                        if (usedWrite) {
+                            Console.WriteLine();
+                        }
+                    }
+                } // foreach (ulong start in rangeStarts)
+                Console.WriteLine("Count error:");
+                foreach (var func in funcList) {
+                    string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                    if (!dict.ContainsKey(funcName)) {
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t0 // OK", funcName));
+                    }
+                }
+                foreach (var kvp in dict) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", kvp.Key, kvp.Value));
+                }
+            } // if (rangeStarts.Length > 0)
+        }
+
     }
 }
