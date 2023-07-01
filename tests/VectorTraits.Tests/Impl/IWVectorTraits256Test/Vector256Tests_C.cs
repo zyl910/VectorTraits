@@ -730,15 +730,32 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
+            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<ulong>>>("ConvertToUInt64_ExpBias");
+            foreach (var func in funcList) {
+                Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
             Console.WriteLine();
             // run.
             Vector256<T>[] samples = {
                 Vector256s<T>.Serial,
+                Vector256s.CreateByDoubleLoop<T>(0.5, 1),
+                // It is out of the range of Int64, but still in the range of UInt64.
+                Vector256s.CreateByDoubleLoop<T>(Math.Pow(2, 63), Math.Pow(2, 11)),
+                Vector256s.CreateByDoubleLoop<T>(Math.Pow(2, 64), -Math.Pow(2, 11)),
+                // It is out of range of UInt64, but still in the range of Int64.
                 Vector256s.CreateByDoubleLoop<T>(-0.5 - Scalars.GetDoubleFrom(src), 1),
+                Vector256s.CreateByDoubleLoop<T>(-Math.Pow(2, 63), Math.Pow(2, 10)),
+                // It is out of range.
+                Vector256s.CreateByDoubleLoop<T>(-Math.Pow(2, 63), -Math.Pow(2, 11)),
+                Vector256s.CreateByDoubleLoop<T>(Math.Pow(2, 64), Math.Pow(2, 12)),
+                Vector256s.CreateByFunc<T>(index=>Scalars.GetByDouble<T>(Math.Pow(2, 63+index))),
+                Vector256s.CreateByFunc<T>(index=>Scalars.GetByDouble<T>(Math.Pow(2, 1023-index))),
                 Vector256s<T>.Demo,
                 Vector256s<T>.DemoNaN,
             };
-            bool allowLog = false;
+            bool allowLog = true;
+            bool allowLogAll = false;
+            bool hideEquals = true;
             foreach (Vector256<T> value in samples) {
                 Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
                 Vector256<ulong> expected = Vector256s.ConvertToUInt64((dynamic)value);
@@ -747,9 +764,22 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector256<ulong> dst = instance.ConvertToUInt64((dynamic)value);
                     if (allowLog) {
-                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                        if (!hideEquals || !expected.Equals(dst)) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                        }
                     } else {
                         Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    }
+                }
+                foreach (var func in funcList) {
+                    string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                    try {
+                        Vector256<ulong> dst = func(value);
+                        if (allowLogAll || !hideEquals || !expected.Equals(dst)) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
+                        }
+                    } catch (Exception ex) {
+                        Console.WriteLine(string.Format("{0}:\t{1}", funcName, ex.Message));
                     }
                 }
                 Console.WriteLine();
