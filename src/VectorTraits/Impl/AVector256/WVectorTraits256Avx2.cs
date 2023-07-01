@@ -348,7 +348,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
             /// <remarks>Input range is `[-pow(2,63), pow(2,63))`. Out of range results in `0`.</remarks>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> ConvertToInt64_ExpBias(Vector256<double> value) {
+            public static Vector256<long> ConvertToInt64_ShiftVar(Vector256<double> value) {
                 // From Veloctor . MIT
                 // https://github.com/Veloctor/Int128/blob/main/include/AVX2Ext.h
                 // inline __m256i double_to_int64_fast(const __m256d v) //13 instructions
@@ -626,7 +626,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <remarks>Input range is `[0, pow(2,64))`. Out of range results in `0`.</remarks>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ulong> ConvertToUInt64_ExpBias(Vector256<double> value) {
+            public static Vector256<ulong> ConvertToUInt64_ShiftVar(Vector256<double> value) {
                 // From Veloctor . MIT
                 // https://github.com/Veloctor/Int128/blob/main/include/AVX2Ext.h
                 // //  Only works for inputs in full uint64 range, otherwise result undefined

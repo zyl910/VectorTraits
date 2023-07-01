@@ -841,12 +841,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         }
 
         /// <summary>
-        /// Sum ConvertToUInt64 - 256 - Avx2 - ExpBias.
+        /// Sum ConvertToUInt64 - 256 - Avx2 - ShiftVar.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSum256Avx2_ExpBias(TMy[] src, int srcCount) {
+        public static TMyOut StaticSum256Avx2_ShiftVar(TMy[] src, int srcCount) {
             TMyOut rt = 0; // Result.
             int Vector256Width = Vector256<TMy>.Count; // Block width.
             int nBlockWidth = Vector256Width; // Block width.
@@ -859,7 +859,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = WVectorTraits256Avx2.Statics.ConvertToUInt64_ExpBias(p0);
+                vtemp = WVectorTraits256Avx2.Statics.ConvertToUInt64_ShiftVar(p0);
                 vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
@@ -874,14 +874,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         }
 
         [Benchmark]
-        public void Sum256Avx2_ExpBias() {
+        public void Sum256Avx2_ShiftVar() {
             WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSum256Avx2_ExpBias(srcArray, srcArray.Length);
-            CheckResult("Sum256Avx2_ExpBias");
+            dstTMy = StaticSum256Avx2_ShiftVar(srcArray, srcArray.Length);
+            CheckResult("Sum256Avx2_ShiftVar");
         }
 
         /// <summary>
