@@ -12,8 +12,8 @@
 
 Prepare (准备):
 ```
-mkdir ~/Documents/VectorTraits
-mkdir ~/Documents/VectorTraits/benchmarks
+mkdir -p ~/Documents/VectorTraits
+mkdir -p ~/Documents/VectorTraits/benchmarks
 
 cd ~/Documents/VectorTraits/benchmarks
 rm -r *
@@ -65,6 +65,8 @@ sz CombineBenchmarks_out.txt
 
 Prepare (准备):
 ```
+mkdir -p ~/Documents/VectorTraits/tests
+
 cd ~/Documents/VectorTraits/tests
 rm -r *
 rz

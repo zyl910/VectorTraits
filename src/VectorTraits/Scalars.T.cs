@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits {
     /// <summary>
@@ -168,38 +169,38 @@ namespace Zyl.VectorTraits {
                     SignBits = 1;
                     ExponentBits = 8;
                     MantissaBits = 23;
-                    SignMask = (T)(object)BitMath.Int32BitsToSingle((int)0x80000000);
-                    ExponentMask = (T)(object)BitMath.Int32BitsToSingle((int)0x7F800000);
-                    MantissaMask = (T)(object)BitMath.Int32BitsToSingle((int)0x007FFFFF);
-                    NonSignMask = (T)(object)BitMath.Int32BitsToSingle(~(int)0x80000000);
-                    NonExponentMask = (T)(object)BitMath.Int32BitsToSingle(~(int)0x7F800000);
-                    NonMantissaMask = (T)(object)BitMath.Int32BitsToSingle(~(int)0x007FFFFF);
+                    SignMask = (T)(object)BitMath.Int32BitsToSingle(ScalarConstants.Single_SignMask);
+                    ExponentMask = (T)(object)BitMath.Int32BitsToSingle(ScalarConstants.Single_ExponentMask);
+                    MantissaMask = (T)(object)BitMath.Int32BitsToSingle(ScalarConstants.Single_MantissaMask);
+                    NonSignMask = (T)(object)BitMath.Int32BitsToSingle(ScalarConstants.Single_NonSignMask);
+                    NonExponentMask = (T)(object)BitMath.Int32BitsToSingle(ScalarConstants.Single_NonExponentMask);
+                    NonMantissaMask = (T)(object)BitMath.Int32BitsToSingle(ScalarConstants.Single_NonMantissaMask);
                     Epsilon = (T)(object)float.Epsilon;
                     MaxValue = (T)(object)float.MaxValue;
                     MinValue = (T)(object)float.MinValue;
                     NaN = (T)(object)float.NaN;
                     NegativeInfinity = (T)(object)float.NegativeInfinity;
                     PositiveInfinity = (T)(object)float.PositiveInfinity;
-                    NegativeZero = (T)(object)BitMath.Int32BitsToSingle((int)0x80000000 | BitMath.SingleToInt32Bits(0));
+                    NegativeZero = SignMask;
                 } else if (typeof(T) == typeof(double)) {
                     ByteSize = sizeof(double);
                     ExponentBias = 1023;
                     SignBits = 1;
                     ExponentBits = 11;
                     MantissaBits = 52;
-                    SignMask = (T)(object)BitMath.Int64BitsToDouble((long)0x8000000000000000L);
-                    ExponentMask = (T)(object)BitMath.Int64BitsToDouble((long)0x7FF0000000000000L);
-                    MantissaMask = (T)(object)BitMath.Int64BitsToDouble((long)0x000FFFFFFFFFFFFFL);
-                    NonSignMask = (T)(object)BitMath.Int64BitsToDouble(~(long)0x8000000000000000L);
-                    NonExponentMask = (T)(object)BitMath.Int64BitsToDouble(~(long)0x7FF0000000000000L);
-                    NonMantissaMask = (T)(object)BitMath.Int64BitsToDouble(~(long)0x000FFFFFFFFFFFFFL);
+                    SignMask = (T)(object)BitMath.Int64BitsToDouble(ScalarConstants.Double_SignMask);
+                    ExponentMask = (T)(object)BitMath.Int64BitsToDouble(ScalarConstants.Double_ExponentMask);
+                    MantissaMask = (T)(object)BitMath.Int64BitsToDouble(ScalarConstants.Double_MantissaMask);
+                    NonSignMask = (T)(object)BitMath.Int64BitsToDouble(ScalarConstants.Double_NonSignMask);
+                    NonExponentMask = (T)(object)BitMath.Int64BitsToDouble(ScalarConstants.Double_NonExponentMask);
+                    NonMantissaMask = (T)(object)BitMath.Int64BitsToDouble(ScalarConstants.Double_NonMantissaMask);
                     Epsilon = (T)(object)double.Epsilon;
                     MaxValue = (T)(object)double.MaxValue;
                     MinValue = (T)(object)double.MinValue;
                     NaN = (T)(object)double.NaN;
                     NegativeInfinity = (T)(object)double.NegativeInfinity;
                     PositiveInfinity = (T)(object)double.PositiveInfinity;
-                    NegativeZero = (T)(object)BitMath.Int64BitsToDouble((long)0x8000000000000000L | BitMath.DoubleToInt64Bits(0));
+                    NegativeZero = SignMask;
                 } else if (typeof(T) == typeof(sbyte)) {
                     ByteSize = sizeof(sbyte);
                     ExponentBias = 0;
@@ -415,19 +416,19 @@ namespace Zyl.VectorTraits {
                     SignBits = 1;
                     ExponentBits = 5;
                     MantissaBits = 10;
-                    SignMask = (T)(object)BitMath.Int16BitsToHalf((short)0x8000);
-                    ExponentMask = (T)(object)BitMath.Int16BitsToHalf((short)0x7C00);
-                    MantissaMask = (T)(object)BitMath.Int16BitsToHalf((short)0x03FF);
-                    NonSignMask = (T)(object)BitMath.Int16BitsToHalf(~(short)0x8000);
-                    NonExponentMask = (T)(object)BitMath.Int16BitsToHalf(~(short)0x7C00);
-                    NonMantissaMask = (T)(object)BitMath.Int16BitsToHalf(~(short)0x03FF);
+                    SignMask = (T)(object)BitMath.Int16BitsToHalf(ScalarConstants.Half_SignMask);
+                    ExponentMask = (T)(object)BitMath.Int16BitsToHalf(ScalarConstants.Half_ExponentMask);
+                    MantissaMask = (T)(object)BitMath.Int16BitsToHalf(ScalarConstants.Half_MantissaMask);
+                    NonSignMask = (T)(object)BitMath.Int16BitsToHalf(ScalarConstants.Half_NonSignMask);
+                    NonExponentMask = (T)(object)BitMath.Int16BitsToHalf(ScalarConstants.Half_NonExponentMask);
+                    NonMantissaMask = (T)(object)BitMath.Int16BitsToHalf(ScalarConstants.Half_NonMantissaMask);
                     Epsilon = (T)(object)Half.Epsilon;
                     MaxValue = (T)(object)Half.MaxValue;
                     MinValue = (T)(object)Half.MinValue;
                     NaN = (T)(object)Half.NaN;
                     NegativeInfinity = (T)(object)Half.NegativeInfinity;
                     PositiveInfinity = (T)(object)Half.PositiveInfinity;
-                    NegativeZero = (T)(object)BitMath.Int16BitsToHalf((short)(0x8000 | BitMath.HalfToInt16Bits((Half)0)));
+                    NegativeZero = SignMask;
 #endif // NET5_0_OR_GREATER
                 }
             }

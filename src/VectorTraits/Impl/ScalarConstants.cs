@@ -9,6 +9,40 @@ namespace Zyl.VectorTraits.Impl {
     public static class ScalarConstants {
 
         // ## Number struct ##
+        // == Half (s1e5m10, sometimes called FP16 or float16) ==
+        /// <summary>Half - Sign bit size (符号位数). Value is `1`.</summary>
+        public const int Half_SignBits = 1;
+        /// <summary>Half - Exponent bit size (指数位数). Value is `5`.</summary>
+        public const int Half_ExponentBits = 5;
+        /// <summary>Half - Mantissa bit size (尾数位数). Value is `10`.</summary>
+        public const int Half_MantissaBits = 10;
+        /// <summary>Half - Sign shift bit (符号位移). Value is `10+5=15`.</summary>
+        public const int Half_SignShift = Half_MantissaBits + Half_ExponentBits;
+        /// <summary>Half - Exponent shift bit (指数位移). Value is `10`.</summary>
+        public const int Half_ExponentShift = Half_MantissaBits;
+        /// <summary>Half - Mantissa shift bit (尾数位移). Value is `0`.</summary>
+        public const int Half_MantissaShift = 0;
+        /// <summary>Half - Exponent bias (指数偏移值). Value is `15`.</summary>
+        public const int Half_ExponentBias = 15;
+        /// <summary>Half - The minimum value for exponential bias (指数偏移时的最小值). Value is `-14`.</summary>
+        public const int Half_ExponentBias_Min = -14;
+        /// <summary>Half - The maximum value for exponential bias (指数偏移时的最大值). Value is `15`.</summary>
+        public const int Half_ExponentBias_Max = 15;
+        /// <summary>Half - Exponent value at infinite or NaN (无穷或非数时的指数值). Value is `31`.</summary>
+        public const int Half_ExponentInfinity = 31;
+        /// <summary>Half - Sign mask (符号掩码). Value is `0x8000`.</summary>
+        public const short Half_SignMask = short.MinValue;
+        /// <summary>Half - Exponent mask (指数掩码). Value is `0x7C00`.</summary>
+        public const short Half_ExponentMask = 0x7C00;
+        /// <summary>Half - Mantissa mask (尾数掩码). Value is `0x03FF`.</summary>
+        public const short Half_MantissaMask = 0x03FF;
+        /// <summary>Half - Non-sign mask (非符号掩码). Value is `0x7FFF`.</summary>
+        public const short Half_NonSignMask = ~Half_SignMask;
+        /// <summary>Half - Non-exponent mask (非指数掩码). Value is `0x83FF`.</summary>
+        public const short Half_NonExponentMask = ~Half_ExponentMask;
+        /// <summary>Half - Non-mantissa mask (非尾数掩码). Value is `0xFC00`.</summary>
+        public const short Half_NonMantissaMask = ~Half_MantissaMask;
+
         // == Single (s1e8m23) ==
         /// <summary>Single - Sign bit size (符号位数). Value is `1`.</summary>
         public const int Single_SignBits = 1;
