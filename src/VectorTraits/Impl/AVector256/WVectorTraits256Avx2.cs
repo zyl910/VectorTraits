@@ -378,23 +378,23 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //constants
                 Vector256<long> mat_mask = Vector256.Create(0x0FFFFF_FFFFFFFF);  //0_00000000000_1111111111111111111111111111111111111111111111111111
                 Vector256<long> hidden_1 = Vector256.Create(0x100000_00000000);  //0_00000000001_0000000000000000000000000000000000000000000000000000
-                Vector256<long> exp_bias = Vector256.Create(1023L + 52);         //0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
+                Vector256<long> exp_bias = Vector256.Create((long)ScalarConstants.Double_ExponentBias + 52); //0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
                 Vector256<long> zero = Vector256<long>.Zero;
                 //majik operations										  //Latency, Throughput(references IceLake)
                 Vector256<long> bin = value.AsInt64();
-                Vector256<long> negative = Avx2.CompareGreaterThan(zero, bin);           //3,1
-                Vector256<long> mat = Avx2.And(bin, mat_mask);                  //1,1/3
-                mat = Avx2.Or(mat, hidden_1);                           //1,1/3
-                Vector256<long> exp_enc = Avx2.ShiftLeftLogical(bin, 1);                    //1,1/2
-                exp_enc = Avx2.ShiftRightLogical(exp_enc, 53);                       //1,1/2
-                Vector256<long> exp_frac = Avx2.Subtract(exp_enc, exp_bias);         //1,1/3
-                Vector256<long> msl = Avx2.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt64());                 //1,1/2
-                Vector256<long> exp_frac_n = Avx2.Subtract(zero, exp_frac);      //1,1/3
-                Vector256<long> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64());               //1,1/2
-                Vector256<long> exp_is_pos = Avx2.CompareGreaterThan(exp_frac, zero);        //3,1
-                Vector256<long> result_abs = Avx2.BlendVariable(msr, msl, exp_is_pos);  //2,1
-                Vector256<long> result = Avx2.Xor(result_abs, negative);        //1,1/3
-                result = Avx2.Subtract(result, negative);                    //1,1/3
+                Vector256<long> negative = Avx2.CompareGreaterThan(zero, bin);                    //3,1
+                Vector256<long> mat = Avx2.And(bin, mat_mask);                                    //1,1/3
+                mat = Avx2.Or(mat, hidden_1);                                                     //1,1/3
+                Vector256<long> exp_enc = Avx2.ShiftLeftLogical(bin, 1);                          //1,1/2
+                exp_enc = Avx2.ShiftRightLogical(exp_enc, 53);                                    //1,1/2
+                Vector256<long> exp_frac = Avx2.Subtract(exp_enc, exp_bias);                      //1,1/3
+                Vector256<long> msl = Avx2.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt64());    //1,1/2
+                Vector256<long> exp_frac_n = Avx2.Subtract(zero, exp_frac);                       //1,1/3
+                Vector256<long> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64()); //1,1/2
+                Vector256<long> exp_is_pos = Avx2.CompareGreaterThan(exp_frac, zero);             //3,1
+                Vector256<long> result_abs = Avx2.BlendVariable(msr, msl, exp_is_pos);            //2,1
+                Vector256<long> result = Avx2.Xor(result_abs, negative);                          //1,1/3
+                result = Avx2.Subtract(result, negative);                                         //1,1/3
                 return result;  //total latency: 18, total throughput CPI: 7
             }
 
