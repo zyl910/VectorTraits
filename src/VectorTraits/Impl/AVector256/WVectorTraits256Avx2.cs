@@ -317,7 +317,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
                 get {
                     //TypeCodeFlags rt = SuperStatics.ConvertToInt64_AcceleratedTypes;
-                    TypeCodeFlags rt = TypeCodeFlags.None;
+                    TypeCodeFlags rt = TypeCodeFlags.Double;
                     return rt;
                 }
             }
@@ -326,7 +326,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64(Vector256<double> value) {
                 // return SuperStatics.ConvertToInt64(value);
-                return ConvertToInt64_HwScalar(value);
+                //return ConvertToInt64_HwScalar(value);
+                return ConvertToInt64_ShiftVarFix(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
@@ -396,6 +397,36 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> result = Avx2.Xor(result_abs, negative);                          //1,1/3
                 result = Avx2.Subtract(result, negative);                                         //1,1/3
                 return result;  //total latency: 18, total throughput CPI: 7
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
+            /// <remarks>Input range is all number. Out of range results is `-pow(2,63)`.</remarks>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ConvertToInt64_ShiftVarFix(Vector256<double> value) {
+                Vector256<long> mat_mask = Vector256.Create(ScalarConstants.Double_MantissaMask);
+                Vector256<long> hidden_1 = Vector256.Create(ScalarConstants.Int_2Pow52);
+                Vector256<long> exp_bias = Vector256.Create((long)ScalarConstants.Double_ExponentBias + ScalarConstants.Double_MantissaBits);
+                Vector256<long> zero = Vector256<long>.Zero;
+                Vector256<long> exp_max = Vector256.Create((long)ScalarConstants.Double_ExponentBias + 63-1); // long.MaxValue is `pow(2,63)-1`.
+                Vector256<long> defValue = Vector256.Create(long.MinValue); // Out of range results is `-pow(2,63)`
+                //majik operations										  //Latency, Throughput(references IceLake)
+                Vector256<long> bin = value.AsInt64();
+                Vector256<long> negative = Avx2.CompareGreaterThan(zero, bin);                     //3,1. negative[i] = (0 < bin[i])
+                Vector256<long> mat = Avx2.And(bin, mat_mask);                                     //1,1/3. Get mantissa field.
+                mat = Avx2.Or(mat, hidden_1);                                                      //1,1/3. Convert mantissa field to integer.
+                Vector256<long> exp_enc = Avx2.ShiftLeftLogical(bin, 1);                           //1,1/2. Remove sign bit.
+                exp_enc = Avx2.ShiftRightLogical(exp_enc, 1 + ScalarConstants.Double_MantissaBits);//1,1/2. (bin[i]<<1)>>(1+52) = abs_double(bin[i])>>52
+                Vector256<long> exp_frac = Avx2.Subtract(exp_enc, exp_bias);                       //1,1/3. Convert exponent field to shift amount .
+                Vector256<long> exp_frac_n = Avx2.Subtract(zero, exp_frac);                        //1,1/3. exp_frac_n[i] = -exp_frac[i]
+                Vector256<long> exp_is_end = Avx2.CompareGreaterThan(exp_enc, exp_max);            //3,1.  exp_is_end[i] = (exp_enc[i] > exp_max[i]) .
+                Vector256<long> msl = Avx2.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt64());     //1,1/2. msl[i] = mat << exp_frac[i]
+                Vector256<long> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64());  //1,1/2. msr[i] = mat >> exp_frac_n[i] = mat >> (-exp_frac[i])
+                Vector256<long> exp_is_pos = Avx2.CompareGreaterThan(exp_frac, zero);              //3,1. The mask of exp_frac is a positive
+                Vector256<long> result_abs = Avx2.BlendVariable(msr, msl, exp_is_pos);             //2,1. result_abs[i] = (exp_is_pos[i])?msl[i]:msl[i]
+                result_abs = Avx2.BlendVariable(result_abs, defValue, exp_is_end);                 //2,1.  result_abs[i] = (exp_is_end[i])?defValue[i]:result_abs[i]
+                Vector256<long> result = Avx2.Xor(result_abs, negative);                           //1,1/3. ~x = xor(x, -1)
+                result = Avx2.Subtract(result, negative);                                          //1,1/3 -(x) = (~x)+1 = (~x) - (-1)
+                return result;  //total latency: 23, total throughput CPI: 9
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_Range52(Vector256{double})"/>

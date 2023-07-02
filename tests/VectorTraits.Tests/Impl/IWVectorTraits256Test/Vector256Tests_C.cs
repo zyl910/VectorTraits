@@ -308,7 +308,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<long>>>("ConvertToInt64_HwScalar", "ConvertToInt64_ShiftVar");
+            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<long>>>("ConvertToInt64_HwScalar", "ConvertToInt64_ShiftVar", "ConvertToInt64_ShiftVarFix");
             foreach (var func in funcList) {
                 Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
