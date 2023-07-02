@@ -611,7 +611,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
                 get {
-                    return SuperStatics.ConvertToUInt64_AcceleratedTypes;
+                    //return SuperStatics.ConvertToUInt64_AcceleratedTypes;
+                    return TypeCodeFlags.Double;
                 }
             }
 
@@ -619,7 +620,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> ConvertToUInt64(Vector256<double> value) {
-                return SuperStatics.ConvertToUInt64(value);
+                //return SuperStatics.ConvertToUInt64(value);
+                return ConvertToUInt64_ShiftVar(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64(Vector256{double})"/>
