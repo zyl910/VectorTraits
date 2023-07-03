@@ -127,6 +127,8 @@ namespace Zyl.VectorTraits.Impl {
         public const int BitSingle_2Pow32 = 0x4F800000;
 
         // == BitDouble: Bit of Double ==
+        /// <summary>BitDouble - `(double)0x0008000000000000 = pow(2, 51) = 2251799813685248`.</summary>
+        public const long BitDouble_2Pow51 = 0x43200000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 51)).ToString("X")
         /// <summary>BitDouble - `(double)0x0010000000000000 = pow(2, 52) = 4503599627370496`.</summary>
         public const long BitDouble_2Pow52 = 0x43300000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 52)).ToString("X")
         /// <summary>BitDouble - `(double)0x0018000000000000 = pow(2, 52) + pow(2, 51) = 1.5*pow(2, 52) = 6755399441055744`.</summary>

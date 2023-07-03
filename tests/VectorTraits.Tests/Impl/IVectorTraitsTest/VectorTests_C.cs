@@ -482,7 +482,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                 Vectors<T>.Demo,
                 Vectors<T>.DemoNaN,
             };
-            bool allowLog = false;
+            bool allowLog = true;
             foreach (Vector<T> value in samples) {
                 Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
                 Vector<ulong> expected = Vectors.ConvertToUInt64((dynamic)value);

@@ -326,8 +326,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64(Vector256<double> value) {
                 // return SuperStatics.ConvertToInt64(value);
-                //return ConvertToInt64_HwScalar(value);
+#if NET5_0_OR_GREATER
                 return ConvertToInt64_ShiftVarFix(value);
+#else
+                return ConvertToInt64_HwScalar(value); // On .NET Core 3.x, HwScalar is faster.
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>

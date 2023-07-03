@@ -228,15 +228,16 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ConvertToInt64_Range52(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ConvertToInt64_Range52(Vector<double> value) {
-#if NET5_0_OR_GREATER // Vector.Floor need .NET 5+ .
-                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512) {
-                    return ConvertToInt64_Range52_Impl(value);
-                } else {
-                    return Vector.ConvertToInt64(value);
-                }
-#else
-                return Vector.ConvertToInt64(value);
-#endif // NET5_0_OR_GREATER
+//#if NET5_0_OR_GREATER // Vector.Floor need .NET 5+ .
+//                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512) {
+//                    return ConvertToInt64_Range52_Impl(value);
+//                } else {
+//                    return Vector.ConvertToInt64(value);
+//                }
+//#else
+//                return Vector.ConvertToInt64(value);
+//#endif // NET5_0_OR_GREATER
+                return Vector.ConvertToInt64(value); // `Vector.ConvertToInt64` is faster on x86 or arm.
             }
 
             /// <inheritdoc cref="IVectorTraits.ConvertToInt64_Range52(Vector{double})"/>
@@ -260,6 +261,48 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YTruncate(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YTruncate(Vector<double> value) {
+#if NET5_0_OR_GREATER
+                return YTruncate_Floor(value);
+#else
+                return YTruncate_ClearBit(value);
+#endif
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YTruncate(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YTruncate_ClearBit(Vector<double> value) {
+                //constants.
+                Vector<double> signMask = new Vector<long>(ScalarConstants.Double_SignMask).AsDouble();
+                Vector<double> exponentMask = new Vector<long>(ScalarConstants.Double_ExponentMask).AsDouble();
+                Vector<long> expMinuend = new Vector<long>(((long)ScalarConstants.Double_ExponentBias * 2 + ScalarConstants.Double_ExponentShift) << ScalarConstants.Double_ExponentShift); // Item is `(1023*2 + 52)<<52`.
+                Vector<double> rangeBegin = new Vector<double>(1.0);
+                Vector<double> rangeBegin2 = new Vector<double>(2.0);
+                Vector<double> rangeEnd = new Vector<long>(ScalarConstants.BitDouble_2Pow52).AsDouble(); // Double value: pow(2, 52)
+                Vector<long> nonMantissaMask = new Vector<long>(ScalarConstants.Double_NonMantissaMask);
+                // operations
+                Vector<double> valueAbs = Vector.AndNot(value, signMask);
+                Vector<double> valueExpData = Vector.BitwiseAnd(value, exponentMask);
+                // AndNot will be used instead of BitwiseAnd: Vector<long> maskBegin = Vector.OnesComplement(Vector.GreaterThan(rangeBegin.AsInt64(), valueAbs.AsInt64())); // Vector.GreaterThanOrEqual(valueAbs, rangeBegin);
+                Vector<long> maskBegin = Vector.GreaterThan(rangeBegin.AsInt64(), valueAbs.AsInt64()); // Vector.GreaterThanOrEqual(valueAbs, rangeBegin);
+                Vector<long> maskless2 = Vector.GreaterThan(rangeBegin2.AsInt64(), valueAbs.AsInt64()); // (2>valueAbs[i])
+                Vector<long> maskEnd = Vector.OnesComplement(Vector.GreaterThan(rangeEnd.AsInt64(), valueAbs.AsInt64())); // (a>=b) = ~(a<b) = ~(b>a) //Vector.GreaterThanOrEqual(valueAbs, rangeEnd);
+                Vector<double> maskRawPow = Vector.Subtract(expMinuend.AsUInt64(), valueExpData.AsUInt64()).AsDouble(); // If valueExpData is `(1023 + e)<<52`, `expMinuend-valueExpData` exponent field is `(1023*2 + 52) - (1023 + e) = 1023 + (52-e)`
+                Vector<double> valueFix = Vector.AndNot(value, maskBegin.AsDouble());
+                //Vector<long> mask = ConvertToUInt64_Range52_NoTruncate(maskRawPow).AsInt64();
+                Vector<long> mask = Vector.Add(maskRawPow, rangeEnd).AsInt64();
+                mask = Vector.Xor(mask, rangeEnd.AsInt64()); // mask = ConvertToUInt64_Range52_NoTruncate(maskRawPow).AsInt64();
+                mask = Vector.Subtract(Vector<long>.Zero, mask); // The mask is `~(pow(2,52-e)-1)`. Because `-(x) = ~x+1`, the inverse is `~(x-1) = -(x) = 0 - x`.
+                mask = Vector.ConditionalSelect(maskless2, nonMantissaMask, mask);
+                mask = Vector.BitwiseOr(mask, maskEnd.AsInt64());
+                //writer.WriteLine(VectorTextUtil.Format("The maskBegin:\t{0}", maskBegin));
+                //writer.WriteLine(VectorTextUtil.Format("The mask:\t{0}", mask));
+                Vector<double> rt = Vector.BitwiseAnd(valueFix, mask.AsDouble());
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YTruncate(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YTruncate_Floor(Vector<double> value) {
                 Vector<double> signMask = new Vector<long>(long.MinValue).AsDouble();
                 Vector<double> valueAbs = Vector.AndNot(value, signMask);
                 Vector<double> signData = Vector.BitwiseAnd(value, signMask);
@@ -330,7 +373,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                     return Vector.ConvertToUInt64(value);
                 }
 #else
-                return Vector.ConvertToUInt64(value);
+                return ConvertToUInt64_Range52_Impl(value);
 #endif // NET5_0_OR_GREATER
             }
 
