@@ -75,45 +75,57 @@ namespace Zyl.VectorTraits.Impl {
         public const int Single_ExponentBias_Max = 127;
         /// <summary>Single - Exponent value at infinite or NaN (无穷或非数时的指数值). Value is `255`.</summary>
         public const int Single_ExponentInfinity = 255;
-        /// <summary>Single - Sign mask (符号掩码). Value is `0x80000000`.</summary>
+        /// <summary>Single - Sign mask (符号掩码). Binary is `0x80000000`.</summary>
         public const int Single_SignMask = int.MinValue;
-        /// <summary>Single - Exponent mask (指数掩码). Value is `0x7F800000`.</summary>
+        /// <summary>Single - Exponent mask (指数掩码). Binary is `0x7F800000`.</summary>
         public const int Single_ExponentMask = 0x7F800000;
-        /// <summary>Single - Mantissa mask (尾数掩码). Value is `0x007FFFFF`.</summary>
+        /// <summary>Single - Mantissa mask (尾数掩码). Binary is `0x007FFFFF`.</summary>
         public const int Single_MantissaMask = 0x007FFFFF;
-        /// <summary>Single - Non-sign mask (非符号掩码). Value is `0x7FFFFFFF`.</summary>
+        /// <summary>Single - Non-sign mask (非符号掩码). Binary is `0x7FFFFFFF`.</summary>
         public const int Single_NonSignMask = ~Single_SignMask;
-        /// <summary>Single - Non-exponent mask (非指数掩码). Value is `0x807FFFFF`.</summary>
+        /// <summary>Single - Non-exponent mask (非指数掩码). Binary is `0x807FFFFF`.</summary>
         public const int Single_NonExponentMask = ~Single_ExponentMask;
-        /// <summary>Single - Non-mantissa mask (非尾数掩码). Value is `0xFF800000`.</summary>
+        /// <summary>Single - Non-mantissa mask (非尾数掩码). Binary is `0xFF800000`.</summary>
         public const int Single_NonMantissaMask = ~Single_MantissaMask;
 
         // -- SingleBit: Bit of Single --
-        /// <summary>SingleBit - `-pow(2, 31) = -2147483648`.</summary>
+        /// <summary>SingleBit - `(float)0x80000000 = -pow(2, 31) = -2147483648`. Binary is `0xCF000000`.</summary>
         public const int SingleBit_Negative2Pow31 = unchecked((int)0xCF000000U); // BitConverter.SingleToInt32Bits((float)-Math.Pow(2, 31)).ToString("X")
-        /// <summary>SingleBit - `-pow(2, 32) = -4294967296`.</summary>
+        /// <summary>SingleBit - `-pow(2, 32) = -4294967296`. Binary is `0xCF800000`.</summary>
         public const int SingleBit_Negative2Pow32 = unchecked((int)0xCF800000U);
 
-        /// <summary>SingleBit - `pow(2, 23) = 8388608`.</summary>
+        /// <summary>SingleBit - `(float)0x00800000 = pow(2, 23) = 8388608`. Binary is `0x4B000000`.</summary>
         public const int SingleBit_2Pow23 = 0x4B000000; // BitConverter.SingleToInt32Bits((float)Math.Pow(2, 23)).ToString("X")
-        /// <summary>SingleBit - `pow(2, 31) = 2147483648`.</summary>
+        /// <summary>SingleBit - `(float)0x80000000U = pow(2, 31) = 2147483648`. Binary is `0x4F000000`.</summary>
         public const int SingleBit_2Pow31 = 0x4F000000;
-        /// <summary>SingleBit - `pow(2, 32) = 4294967296`.</summary>
+        /// <summary>SingleBit - `pow(2, 32) = 4294967296`. Binary is `0x4F800000`.</summary>
         public const int SingleBit_2Pow32 = 0x4F800000;
 
         // -- SingleVal: Value of Single --
-        /// <summary>SingleVal - Sign mask (符号掩码). Value is `0x80000000`.</summary>
+        /// <summary>SingleVal - Sign mask (符号掩码). Binary is `0x80000000`.</summary>
         public const float SingleVal_SignMask = -0.0f; // float.NegativeZero
-        /// <summary>SingleVal - Exponent mask (指数掩码). Value is `0x7F800000`.</summary>
+        /// <summary>SingleVal - Exponent mask (指数掩码). Binary is `0x7F800000`.</summary>
         public const float SingleVal_ExponentMask = float.PositiveInfinity;
-        /// <summary>SingleVal - Mantissa mask (尾数掩码). Value is `0x007FFFFF`.</summary>
+        /// <summary>SingleVal - Mantissa mask (尾数掩码). Binary is `0x007FFFFF`.</summary>
         public const float SingleVal_MantissaMask = 1.1754942E-38f; // BitConverter.Int32BitsToSingle(0x007FFFFF)
-        // /// <summary>SingleVal - Non-sign mask (非符号掩码). Value is `0x7FFFFFFF`.</summary>
+        // /// <summary>SingleVal - Non-sign mask (非符号掩码). Binary is `0x7FFFFFFF`.</summary>
         // public const float SingleVal_NonSignMask = float.NaN; // The `0x7FFFFFFF` can't be equal to `BitConverter.SingleToInt32Bits(float.NaN).ToString("X")` .
-        /// <summary>SingleVal - Non-exponent mask (非指数掩码). Value is `0x807FFFFF`.</summary>
+        /// <summary>SingleVal - Non-exponent mask (非指数掩码). Binary is `0x807FFFFF`.</summary>
         public const float SingleVal_NonExponentMask = -1.1754942E-38f; // BitConverter.Int32BitsToSingle(unchecked((int)0x807FFFFF))
-        /// <summary>SingleVal - Non-mantissa mask (非尾数掩码). Value is `0xFF800000`.</summary>
+        /// <summary>SingleVal - Non-mantissa mask (非尾数掩码). Binary is `0xFF800000`.</summary>
         public const float SingleVal_NonMantissaMask = float.NegativeInfinity;
+
+        /// <summary>SingleVal - `(float)0x80000000 = -pow(2, 31) = -2147483648`. Binary is `0xCF000000`.</summary>
+        public const float SingleVal_Negative2Pow31 = 0x80000000;
+        /// <summary>SingleVal - `-pow(2, 32) = -4294967296`. Binary is `0xCF800000`.</summary>
+        public const float SingleVal_Negative2Pow32 = -4294967296;
+
+        /// <summary>SingleVal - `(float)0x00800000 = pow(2, 23) = 8388608`. Binary is `0x4B000000`.</summary>
+        public const float SingleVal_2Pow23 = 0x00800000;
+        /// <summary>SingleVal - `(float)0x80000000U = pow(2, 31) = 2147483648`. Binary is `0x4F000000`.</summary>
+        public const float SingleVal_2Pow31 = 0x80000000U;
+        /// <summary>SingleVal - `pow(2, 32) = 4294967296`. Binary is `0x4F800000`.</summary>
+        public const float SingleVal_2Pow32 = 4294967296;
 
 
         // == Double (s1e11m52) ==
@@ -138,40 +150,47 @@ namespace Zyl.VectorTraits.Impl {
         public const int Double_ExponentBias_Max = 1023;
         /// <summary>Double - Exponent value at infinite or NaN (无穷或非数时的指数值). Value is `2047`.</summary>
         public const int Double_ExponentInfinity = 2047;
-        /// <summary>Double - Sign mask (符号掩码). Value is `0x8000000000000000L`.</summary>
+        /// <summary>Double - Sign mask (符号掩码). Binary is `0x8000000000000000L`.</summary>
         public const long Double_SignMask = long.MinValue;
-        /// <summary>Double - Exponent mask (指数掩码). Value is `0x7FF0000000000000L`.</summary>
+        /// <summary>Double - Exponent mask (指数掩码). Binary is `0x7FF0000000000000L`.</summary>
         public const long Double_ExponentMask = 0x7FF0000000000000L;
-        /// <summary>Double - Mantissa mask (尾数掩码). Value is `0x000FFFFFFFFFFFFFL`.</summary>
+        /// <summary>Double - Mantissa mask (尾数掩码). Binary is `0x000FFFFFFFFFFFFFL`.</summary>
         public const long Double_MantissaMask = 0x000FFFFFFFFFFFFFL;
-        /// <summary>Double - Non-sign mask (非符号掩码). Value is `0x7FFFFFFFFFFFFFFFL`.</summary>
+        /// <summary>Double - Non-sign mask (非符号掩码). Binary is `0x7FFFFFFFFFFFFFFFL`.</summary>
         public const long Double_NonSignMask = ~Double_SignMask;
-        /// <summary>Double - Non-exponent mask (非指数掩码). Value is `0x800FFFFFFFFFFFFFL`.</summary>
+        /// <summary>Double - Non-exponent mask (非指数掩码). Binary is `0x800FFFFFFFFFFFFFL`.</summary>
         public const long Double_NonExponentMask = ~Double_ExponentMask;
-        /// <summary>Double - Non-mantissa mask (非尾数掩码). Value is `0xFFF0000000000000L`.</summary>
+        /// <summary>Double - Non-mantissa mask (非尾数掩码). Binary is `0xFFF0000000000000L`.</summary>
         public const long Double_NonMantissaMask = ~Double_MantissaMask;
 
         // -- DoubleBit: Bit of Double --
-        /// <summary>DoubleBit - `(double)0x0008000000000000 = pow(2, 51) = 2251799813685248`.</summary>
+        /// <summary>DoubleBit - `(double)0x0008000000000000 = pow(2, 51) = 2251799813685248`. Binary is `0x43200000_00000000`.</summary>
         public const long DoubleBit_2Pow51 = 0x43200000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 51)).ToString("X")
-        /// <summary>DoubleBit - `(double)0x0010000000000000 = pow(2, 52) = 4503599627370496`.</summary>
+        /// <summary>DoubleBit - `(double)0x0010000000000000 = pow(2, 52) = 4503599627370496`. Binary is `0x43300000_00000000`.</summary>
         public const long DoubleBit_2Pow52 = 0x43300000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 52)).ToString("X")
-        /// <summary>DoubleBit - `(double)0x0018000000000000 = pow(2, 52) + pow(2, 51) = 1.5*pow(2, 52) = 6755399441055744`.</summary>
+        /// <summary>DoubleBit - `(double)0x0018000000000000 = pow(2, 52) + pow(2, 51) = 1.5*pow(2, 52) = 6755399441055744`. Binary is `0x43380000_00000000L`.</summary>
         public const long DoubleBit_2Pow52_2Pow51 = 0x43380000_00000000L; // BitConverter.DoubleToInt64Bits(1.5*Math.Pow(2, 52)).ToString("X")
 
         // -- DoubleVal: Value of Double --
-        /// <summary>DoubleVal - Sign mask (符号掩码). Value is `0x8000000000000000L`.</summary>
+        /// <summary>DoubleVal - Sign mask (符号掩码). Binary is `0x8000000000000000L`.</summary>
         public const double DoubleVal_SignMask = -0.0; // double.NegativeZero
-        /// <summary>DoubleVal - Exponent mask (指数掩码). Value is `0x7FF0000000000000L`.</summary>
+        /// <summary>DoubleVal - Exponent mask (指数掩码). Binary is `0x7FF0000000000000L`.</summary>
         public const double DoubleVal_ExponentMask = double.PositiveInfinity;
-        /// <summary>DoubleVal - Mantissa mask (尾数掩码). Value is `0x000FFFFFFFFFFFFFL`.</summary>
+        /// <summary>DoubleVal - Mantissa mask (尾数掩码). Binary is `0x000FFFFFFFFFFFFFL`.</summary>
         public const double DoubleVal_MantissaMask = 2.2250738585072009E-308; // BitConverter.Int64BitsToDouble(0x000FFFFFFFFFFFFFL)
-        // /// <summary>DoubleVal - Non-sign mask (非符号掩码). Value is `0x7FFFFFFFFFFFFFFFL`.</summary>
+        // /// <summary>DoubleVal - Non-sign mask (非符号掩码). Binary is `0x7FFFFFFFFFFFFFFFL`.</summary>
         // public const double DoubleVal_NonSignMask = double.NaN; // The `7FFFFFFFFFFFFFFF` can't be equal to `BitConverter.DoubleToInt64Bits(double.NaN).ToString("X")` .
-        /// <summary>DoubleVal - Non-exponent mask (非指数掩码). Value is `0x800FFFFFFFFFFFFFL`.</summary>
+        /// <summary>DoubleVal - Non-exponent mask (非指数掩码). Binary is `0x800FFFFFFFFFFFFFL`.</summary>
         public const double DoubleVal_NonExponentMask = -2.2250738585072009E-308; // BitConverter.Int64BitsToDouble(unchecked((long)0x800FFFFFFFFFFFFFUL))
-        /// <summary>DoubleVal - Non-mantissa mask (非尾数掩码). Value is `0xFFF0000000000000L`.</summary>
+        /// <summary>DoubleVal - Non-mantissa mask (非尾数掩码). Binary is `0xFFF0000000000000L`.</summary>
         public const double DoubleVal_NonMantissaMask = double.NegativeInfinity;
+
+        /// <summary>DoubleVal - `(double)0x0008000000000000 = pow(2, 51) = 2251799813685248`. Binary is `0x43200000_00000000`.</summary>
+        public const double DoubleVal_2Pow51 = 0x0008000000000000L;
+        /// <summary>DoubleVal - `(double)0x0010000000000000 = pow(2, 52) = 4503599627370496`. Binary is `0x43300000_00000000`.</summary>
+        public const double DoubleVal_2Pow52 = 0x0010000000000000L;
+        /// <summary>DoubleVal - `(double)0x0018000000000000 = pow(2, 52) + pow(2, 51) = 1.5*pow(2, 52) = 6755399441055744`. Binary is `0x43380000_00000000L`.</summary>
+        public const double DoubleVal_2Pow52_2Pow51 = 0x0018000000000000L;
 
     }
 }
