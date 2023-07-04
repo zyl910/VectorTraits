@@ -220,7 +220,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //     return _mm256_sub_pd(_mm256_castsi256_pd(x), _mm256_set1_pd(0x0018000000000000));
                 // }
                 // BitConverter.DoubleToInt64Bits((double)0x0018000000000000).ToString("X") = "4338000000000000"
-                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.DoubleBit_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector256<long> x = Avx2.Add(value, magicNumber);
                 Vector256<double> result = Avx.Subtract(x.AsDouble(), magicNumber.AsDouble());
                 return result;
@@ -292,7 +292,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //     return _mm256_sub_pd(_mm256_castsi256_pd(x), _mm256_set1_pd(0x0010000000000000));
                 // }
                 // BitConverter.DoubleToInt64Bits((double)0x0010000000000000).ToString("X") = "4330000000000000"
-                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.DoubleBit_2Pow52); // Double value: pow(2, 52)
                 Vector256<ulong> x = Avx2.Or(value, magicNumber);
                 Vector256<double> result = Avx.Subtract(x.AsDouble(), magicNumber.AsDouble());
                 return result;
@@ -458,7 +458,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //         _mm_castpd_si128(_mm_set1_pd(0x0018000000000000))
                 //     );
                 // }
-                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.DoubleBit_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector256<double> x = Avx.Add(value, magicNumber.AsDouble());
                 Vector256<long> result = Avx2.Subtract(x.AsInt64(), magicNumber);
                 return result;
@@ -572,8 +572,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<uint> ConvertToUInt32_Mapping(Vector256<float> value) {
 #if NET5_0_OR_GREATER
                 // [pow(2,31), pow(2,32)-1] mapping to [-pow(2,31), -1]. Subtract `pow(2,32)`.
-                Vector256<float> highEnd = Vector256.Create(ScalarConstants.BitSingle_2Pow32).AsSingle();
-                Vector256<float> highBegin = Vector256.Create(ScalarConstants.BitSingle_2Pow31).AsSingle();
+                Vector256<float> highEnd = Vector256.Create(ScalarConstants.SingleBit_2Pow32).AsSingle();
+                Vector256<float> highBegin = Vector256.Create(ScalarConstants.SingleBit_2Pow31).AsSingle();
                 Vector256<float> highMapped = Avx.Subtract(value, highEnd);
                 Vector256<float> highMask = Avx.And(Avx.CompareLessThanOrEqual(highBegin, value), Avx.CompareLessThan(value, highEnd)); // highBegin <= value < highEnd .
                 //Vector256<float> value2 = ConditionalSelect(highMask, highMapped, value);
@@ -593,9 +593,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<uint> ConvertToUInt32_MappingFix(Vector256<float> value) {
 #if NET5_0_OR_GREATER
                 // [pow(2,31), pow(2,32)-1] mapping to [-pow(2,31), -1]. Subtract `pow(2,32)`.
-                Vector256<float> highEnd = Vector256.Create(ScalarConstants.BitSingle_2Pow32).AsSingle();
-                Vector256<float> lowBegin = Vector256.Create(ScalarConstants.BitSingle_Negative2Pow31).AsSingle();
-                Vector256<float> highBegin = Vector256.Create(ScalarConstants.BitSingle_2Pow31).AsSingle();
+                Vector256<float> highEnd = Vector256.Create(ScalarConstants.SingleBit_2Pow32).AsSingle();
+                Vector256<float> lowBegin = Vector256.Create(ScalarConstants.SingleBit_Negative2Pow31).AsSingle();
+                Vector256<float> highBegin = Vector256.Create(ScalarConstants.SingleBit_2Pow31).AsSingle();
                 Vector256<float> lessHighEnd = Avx.CompareLessThan(value, highEnd); // value < highEnd .
                 Vector256<float> highMapped = Avx.Subtract(value, highEnd);
                 Vector256<float> lowMask = Avx.And(Avx.CompareLessThanOrEqual(lowBegin, value), lessHighEnd); // lowBegin <= value < highEnd .
@@ -618,9 +618,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<uint> ConvertToUInt32_Mod(Vector256<float> value) {
 #if NET5_0_OR_GREATER
                 // remainder = mod(value, highEnd) = value - floor(value/highEnd)*highEnd
-                Vector256<float> highEnd = Vector256.Create(ScalarConstants.BitSingle_2Pow32).AsSingle();
-                Vector256<float> lowBegin = Vector256.Create(ScalarConstants.BitSingle_Negative2Pow31).AsSingle();
-                Vector256<float> highBegin = Vector256.Create(ScalarConstants.BitSingle_2Pow31).AsSingle();
+                Vector256<float> highEnd = Vector256.Create(ScalarConstants.SingleBit_2Pow32).AsSingle();
+                Vector256<float> lowBegin = Vector256.Create(ScalarConstants.SingleBit_Negative2Pow31).AsSingle();
+                Vector256<float> highBegin = Vector256.Create(ScalarConstants.SingleBit_2Pow31).AsSingle();
                 Vector256<float> quotientFloor = Avx.Floor(Avx.Divide(value, highEnd));
                 Vector256<float> intRangeMask = Avx.And(Avx.CompareLessThanOrEqual(lowBegin, value), Avx.CompareLessThan(value, highBegin)); // lowBegin <= value < highBegin .
                 Vector256<float> remainder = Avx.Subtract(value, Avx.Multiply(quotientFloor, highEnd));
@@ -734,7 +734,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //         _mm_castpd_si128(_mm_set1_pd(0x0010000000000000))
                 //     );
                 // }
-                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.DoubleBit_2Pow52); // Double value: pow(2, 52)
                 Vector256<double> x = Avx.Add(value, magicNumber.AsDouble());
                 Vector256<ulong> result = Avx2.Xor(x.AsUInt64(), magicNumber);
                 return result;

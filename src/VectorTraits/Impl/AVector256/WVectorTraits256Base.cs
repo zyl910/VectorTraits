@@ -233,7 +233,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<double> ConvertToDouble_Range52_Impl(Vector256<long> value) {
 #if NET7_0_OR_GREATER
                 // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
-                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.DoubleBit_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector256<long> x = Vector256.Add(value, magicNumber);
                 Vector256<double> result = Vector256.Subtract(x.AsDouble(), magicNumber.AsDouble());
 #else
@@ -248,7 +248,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<double> ConvertToDouble_Range52_Impl(Vector256<ulong> value) {
 #if NET7_0_OR_GREATER
                 // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
-                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.DoubleBit_2Pow52); // Double value: pow(2, 52)
                 Vector256<ulong> x = Vector256.BitwiseOr(value, magicNumber);
                 Vector256<double> result = Vector256.Subtract(x.AsDouble(), magicNumber.AsDouble());
 #else
@@ -368,7 +368,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<long> ConvertToInt64_Range52_NoTruncate(Vector256<double> value) {
 #if NET7_0_OR_GREATER
                 // See more: WVector256Traits256Avx2.ConvertToInt64_Range52_NoTruncate
-                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.DoubleBit_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector256<double> x = Vector256.Add(value, magicNumber.AsDouble());
                 Vector256<long> result = Vector256.Subtract(x.AsInt64(), magicNumber);
                 return result;
@@ -566,7 +566,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<ulong> ConvertToUInt64_Range52_NoTruncate(Vector256<double> value) {
 #if NET7_0_OR_GREATER
                 // See more: WVector256Traits256Avx2.ConvertToUInt64_Range52_NoTruncate
-                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.DoubleBit_2Pow52); // Double value: pow(2, 52)
                 Vector256<double> x = Vector256.Add(value, magicNumber.AsDouble());
                 Vector256<ulong> result = Vector256.Xor(x.AsUInt64(), magicNumber);
                 return result;

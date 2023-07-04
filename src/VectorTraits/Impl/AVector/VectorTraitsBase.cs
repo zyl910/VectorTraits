@@ -180,7 +180,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> ConvertToDouble_Range52_Impl(Vector<long> value) {
                 // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
-                Vector<long> magicNumber = new Vector<long>(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector<long> magicNumber = new Vector<long>(ScalarConstants.DoubleBit_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector<long> x = Vector.Add(value, magicNumber);
                 Vector<double> result = Vector.Subtract(x.AsDouble(), magicNumber.AsDouble());
                 return result;
@@ -191,7 +191,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> ConvertToDouble_Range52_Impl(Vector<ulong> value) {
                 // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
-                Vector<ulong> magicNumber = new Vector<ulong>(ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector<ulong> magicNumber = new Vector<ulong>(ScalarConstants.DoubleBit_2Pow52); // Double value: pow(2, 52)
                 Vector<ulong> x = Vector.BitwiseOr(value, magicNumber);
                 Vector<double> result = Vector.Subtract(x.AsDouble(), magicNumber.AsDouble());
                 return result;
@@ -252,7 +252,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ConvertToInt64_Range52_NoTruncate(Vector<double> value) {
                 // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_NoTruncate
-                Vector<long> magicNumber = new Vector<long>(ScalarConstants.BitDouble_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector<long> magicNumber = new Vector<long>(ScalarConstants.DoubleBit_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector<double> x = Vector.Add(value, magicNumber.AsDouble());
                 Vector<long> result = Vector.Subtract(x.AsInt64(), magicNumber);
                 return result;
@@ -280,7 +280,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 Vector<double> rangeBegin2 = new Vector<double>(2.0);
                 // AndNot will be used instead of BitwiseAnd: Vector<long> maskBegin = Vector.OnesComplement(Vector.GreaterThan(rangeBegin.AsInt64(), valueAbs.AsInt64())); // Vector.GreaterThanOrEqual(valueAbs, rangeBegin);
                 Vector<long> maskBegin = Vector.GreaterThan(rangeBegin.AsInt64(), valueAbs.AsInt64()); // Vector.GreaterThanOrEqual(valueAbs, rangeBegin);
-                Vector<double> rangeEnd = new Vector<long>(ScalarConstants.BitDouble_2Pow52).AsDouble(); // Double value: pow(2, 52)
+                Vector<double> rangeEnd = new Vector<long>(ScalarConstants.DoubleBit_2Pow52).AsDouble(); // Double value: pow(2, 52)
                 Vector<double> valueExpData = Vector.BitwiseAnd(value, exponentMask);
                 Vector<long> expMinuend = new Vector<long>(((long)ScalarConstants.Double_ExponentBias * 2 + ScalarConstants.Double_ExponentShift) << ScalarConstants.Double_ExponentShift); // Item is `(1023*2 + 52)<<52`.
                 Vector<long> maskless2 = Vector.GreaterThan(rangeBegin2.AsInt64(), valueAbs.AsInt64()); // (2>valueAbs[i])
@@ -306,7 +306,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             //    Vector<long> expMinuend = new Vector<long>(((long)ScalarConstants.Double_ExponentBias * 2 + ScalarConstants.Double_ExponentShift) << ScalarConstants.Double_ExponentShift); // Item is `(1023*2 + 52)<<52`.
             //    Vector<double> rangeBegin = new Vector<double>(1.0);
             //    Vector<double> rangeBegin2 = new Vector<double>(2.0);
-            //    Vector<double> rangeEnd = new Vector<long>(ScalarConstants.BitDouble_2Pow52).AsDouble(); // Double value: pow(2, 52)
+            //    Vector<double> rangeEnd = new Vector<long>(ScalarConstants.DoubleBit_2Pow52).AsDouble(); // Double value: pow(2, 52)
             //    Vector<long> nonMantissaMask = new Vector<long>(ScalarConstants.Double_NonMantissaMask);
             //    // operations
             //    Vector<double> valueAbs = Vector.AndNot(value, signMask);
@@ -420,7 +420,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> ConvertToUInt64_Range52_NoTruncate(Vector<double> value) {
                 // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52_NoTruncate
-                Vector<ulong> magicNumber = new Vector<ulong>((ulong)ScalarConstants.BitDouble_2Pow52); // Double value: pow(2, 52)
+                Vector<ulong> magicNumber = new Vector<ulong>((ulong)ScalarConstants.DoubleBit_2Pow52); // Double value: pow(2, 52)
                 Vector<double> x = Vector.Add(value, magicNumber.AsDouble());
                 Vector<ulong> result = Vector.Xor(x.AsUInt64(), magicNumber);
                 return result;

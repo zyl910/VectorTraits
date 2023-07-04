@@ -8,8 +8,13 @@ namespace Zyl.VectorTraits.Impl {
     /// </summary>
     public static class ScalarConstants {
 
-        // ## Number struct ##
+        // == Integer value ==
+        /// <summary>Integer - `(long)pow(2, 52) = 0x00100000_00000000 = 4503599627370496`.</summary>
+        public const long Int_2Pow52 = 0x00100000_00000000;
+
+
         // == Half (s1e5m10, sometimes called FP16 or float16) ==
+        // -- Half - Number struct --
         /// <summary>Half - Sign bit size (符号位数). Value is `1`.</summary>
         public const int Half_SignBits = 1;
         /// <summary>Half - Exponent bit size (指数位数). Value is `5`.</summary>
@@ -43,7 +48,13 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>Half - Non-mantissa mask (非尾数掩码). Value is `0xFC00`.</summary>
         public const short Half_NonMantissaMask = ~Half_MantissaMask;
 
+        // -- HalfBit: Bit of Half --
+
+        // -- HalfVal: Value of Half --
+
+
         // == Single (s1e8m23) ==
+        // -- Single - Number struct --
         /// <summary>Single - Sign bit size (符号位数). Value is `1`.</summary>
         public const int Single_SignBits = 1;
         /// <summary>Single - Exponent bit size (指数位数). Value is `8`.</summary>
@@ -77,7 +88,24 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>Single - Non-mantissa mask (非尾数掩码). Value is `0xFF800000`.</summary>
         public const int Single_NonMantissaMask = ~Single_MantissaMask;
 
+        // -- SingleBit: Bit of Single --
+        /// <summary>SingleBit - `-pow(2, 31) = -2147483648`.</summary>
+        public const int SingleBit_Negative2Pow31 = unchecked((int)0xCF000000U); // BitConverter.SingleToInt32Bits((float)-Math.Pow(2, 31)).ToString("X")
+        /// <summary>SingleBit - `-pow(2, 32) = -4294967296`.</summary>
+        public const int SingleBit_Negative2Pow32 = unchecked((int)0xCF800000U);
+
+        /// <summary>SingleBit - `pow(2, 23) = 8388608`.</summary>
+        public const int SingleBit_2Pow23 = 0x4B000000; // BitConverter.SingleToInt32Bits((float)Math.Pow(2, 23)).ToString("X")
+        /// <summary>SingleBit - `pow(2, 31) = 2147483648`.</summary>
+        public const int SingleBit_2Pow31 = 0x4F000000;
+        /// <summary>SingleBit - `pow(2, 32) = 4294967296`.</summary>
+        public const int SingleBit_2Pow32 = 0x4F800000;
+
+        // -- SingleVal: Value of Single --
+
+
         // == Double (s1e11m52) ==
+        // -- Double - Number struct --
         /// <summary>Double - Sign bit size (符号位数). Value is `1`.</summary>
         public const int Double_SignBits = 1;
         /// <summary>Double - Exponent bit size (指数位数). Value is `11`.</summary>
@@ -111,32 +139,15 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>Double - Non-mantissa mask (非尾数掩码). Value is `0xFFF0000000000000L`.</summary>
         public const long Double_NonMantissaMask = ~Double_MantissaMask;
 
+        // -- DoubleBit: Bit of Double --
+        /// <summary>DoubleBit - `(double)0x0008000000000000 = pow(2, 51) = 2251799813685248`.</summary>
+        public const long DoubleBit_2Pow51 = 0x43200000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 51)).ToString("X")
+        /// <summary>DoubleBit - `(double)0x0010000000000000 = pow(2, 52) = 4503599627370496`.</summary>
+        public const long DoubleBit_2Pow52 = 0x43300000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 52)).ToString("X")
+        /// <summary>DoubleBit - `(double)0x0018000000000000 = pow(2, 52) + pow(2, 51) = 1.5*pow(2, 52) = 6755399441055744`.</summary>
+        public const long DoubleBit_2Pow52_2Pow51 = 0x43380000_00000000L; // BitConverter.DoubleToInt64Bits(1.5*Math.Pow(2, 52)).ToString("X")
 
-        // ## Bit of float ##
-        // == BitSingle: Bit of Single ==
-        /// <summary>BitSingle - `-pow(2, 31) = -2147483648`.</summary>
-        public const int BitSingle_Negative2Pow31 = unchecked((int)0xCF000000U); // BitConverter.SingleToInt32Bits((float)-Math.Pow(2, 31)).ToString("X")
-        /// <summary>BitSingle - `-pow(2, 32) = -4294967296`.</summary>
-        public const int BitSingle_Negative2Pow32 = unchecked((int)0xCF800000U);
-
-        /// <summary>BitSingle - `pow(2, 23) = 8388608`.</summary>
-        public const int BitSingle_2Pow23 = 0x4B000000; // BitConverter.SingleToInt32Bits((float)Math.Pow(2, 23)).ToString("X")
-        /// <summary>BitSingle - `pow(2, 31) = 2147483648`.</summary>
-        public const int BitSingle_2Pow31 = 0x4F000000;
-        /// <summary>BitSingle - `pow(2, 32) = 4294967296`.</summary>
-        public const int BitSingle_2Pow32 = 0x4F800000;
-
-        // == BitDouble: Bit of Double ==
-        /// <summary>BitDouble - `(double)0x0008000000000000 = pow(2, 51) = 2251799813685248`.</summary>
-        public const long BitDouble_2Pow51 = 0x43200000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 51)).ToString("X")
-        /// <summary>BitDouble - `(double)0x0010000000000000 = pow(2, 52) = 4503599627370496`.</summary>
-        public const long BitDouble_2Pow52 = 0x43300000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 52)).ToString("X")
-        /// <summary>BitDouble - `(double)0x0018000000000000 = pow(2, 52) + pow(2, 51) = 1.5*pow(2, 52) = 6755399441055744`.</summary>
-        public const long BitDouble_2Pow52_2Pow51 = 0x43380000_00000000L; // BitConverter.DoubleToInt64Bits(1.5*Math.Pow(2, 52)).ToString("X")
-
-        // == Integer value ==
-        /// <summary>Integer - `(long)pow(2, 52) = 0x00100000_00000000 = 4503599627370496`.</summary>
-        public const long Int_2Pow52 = 0x00100000_00000000;
+        // -- DoubleVal: Value of Double --
 
     }
 }
