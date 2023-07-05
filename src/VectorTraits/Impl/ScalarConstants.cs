@@ -185,6 +185,7 @@ namespace Zyl.VectorTraits.Impl {
         public const double DoubleVal_MantissaMask = 2.2250738585072009E-308; // BitConverter.Int64BitsToDouble(0x000FFFFFFFFFFFFFL)
         // /// <summary>DoubleVal - Non-sign mask (非符号掩码). Binary is `0x7FFFFFFFFFFFFFFFL`.</summary>
         // public const double DoubleVal_NonSignMask = double.NaN; // The `7FFFFFFFFFFFFFFF` can't be equal to `BitConverter.DoubleToInt64Bits(double.NaN).ToString("X")` .
+        // BitConverter.DoubleToInt64Bits(Math.Abs(BitConverter.Int64BitsToDouble(-1L))).ToString("X") = "7FFFFFFFFFFFFFFF"
         /// <summary>DoubleVal - Non-exponent mask (非指数掩码). Binary is `0x800FFFFFFFFFFFFFL`.</summary>
         public const double DoubleVal_NonExponentMask = -2.2250738585072009E-308; // BitConverter.Int64BitsToDouble(unchecked((long)0x800FFFFFFFFFFFFFUL))
         /// <summary>DoubleVal - Non-mantissa mask (非尾数掩码). Binary is `0xFFF0000000000000L`.</summary>

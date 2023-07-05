@@ -272,13 +272,13 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YTruncate_ClearBit(Vector<double> value) {
                 // constants.
-                Vector<double> nonSignMask = new Vector<long>(ScalarConstants.Double_NonSignMask).AsDouble();
+                Vector<double> allBitsSet = Vectors<double>.AllBitsSet;
                 Vector<double> rangeBegin = new Vector<double>(1.0);
+                Vector<double> nonSignMask = Vector.Abs(allBitsSet); // Non-sign mask (非符号掩码). Binary is `0x7FFFFFFFFFFFFFFFL`.
                 Vector<double> rangeBegin2 = new Vector<double>(2.0);
-                Vector<double> exponentMask = new Vector<double>(ScalarConstants.DoubleVal_ExponentMask);
                 // operations
                 Vector<double> valueAbs = Vector.BitwiseAnd(value, nonSignMask);
-                Vector<double> allBitsSet = Vectors<double>.AllBitsSet;
+                Vector<double> exponentMask = new Vector<double>(ScalarConstants.DoubleVal_ExponentMask);
                 Vector<long> maskBegin = Vector.GreaterThan(rangeBegin.AsInt64(), valueAbs.AsInt64()); // (a>=b) = ~(a<b) = ~(b>a)
                 Vector<double> rangeEnd = new Vector<double>(ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
                 maskBegin = Vector.BitwiseAnd(maskBegin, nonSignMask.AsInt64()); // Support NegativeZero (`Math.Truncate(-0.0)` is `-0.0`) .
