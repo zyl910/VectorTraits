@@ -283,8 +283,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 Vector<double> rangeEnd = new Vector<double>(ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
                 maskBegin = Vector.BitwiseAnd(maskBegin, nonSignMask.AsInt64()); // Support NegativeZero (`Math.Truncate(-0.0)` is `-0.0`) .
                 Vector<double> valueExpData = Vector.BitwiseAnd(value, exponentMask);
-                Vector<long> expMinuend = new Vector<long>(((long)ScalarConstants.Double_ExponentBias * 2 + ScalarConstants.Double_ExponentShift) << ScalarConstants.Double_ExponentShift); // Item is `(long)(1023*2 + 52)<<52`. Binary is `0x8320000000000000`.
-                maskBegin = Vector.Xor(maskBegin, allBitsSet.AsInt64()); // maskBegin[i] = ~(maskBegin[i] > valueAbs[i]) = (valueAbs[i] >= maskBegin[i]) //Vector.GreaterThanOrEqual(valueAbs, rangeBegin);
+                Vector<double> expMinuend = new Vector<double>(ScalarConstants.DoubleVal_Truncate_expMinuend); // Item is `(long)(1023*2 + 52)<<52`. Binary is `0x8320000000000000`.
+                maskBegin = Vector.Xor(maskBegin, allBitsSet.AsInt64()); // maskBegin[i] = ~((maskBegin[i] > valueAbs[i])&nonSignMask[i]) = (valueAbs[i] >= maskBegin[i])|nonSignMask[i] // Vector.BitwiseOr(Vector.GreaterThanOrEqual(valueAbs, rangeBegin), nonSignMask);
                 Vector<long> maskless2 = Vector.GreaterThan(rangeBegin2.AsInt64(), valueAbs.AsInt64()); // (2>valueAbs[i])
                 Vector<long> maskEnd = Vector.GreaterThan(rangeEnd.AsInt64(), valueAbs.AsInt64()); // (a>=b) = ~(a<b) = ~(b>a)
                 maskEnd = Vector.Xor(maskEnd, allBitsSet.AsInt64()); // maskEnd[i] = ~(rangeEnd[i] > valueAbs[i]) = (valueAbs[i] >= rangeEnd[i]) //Vector.GreaterThanOrEqual(valueAbs, rangeEnd);
