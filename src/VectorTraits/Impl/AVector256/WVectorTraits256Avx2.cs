@@ -734,9 +734,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //         _mm_castpd_si128(_mm_set1_pd(0x0010000000000000))
                 //     );
                 // }
-                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.DoubleBit_2Pow52); // Double value: pow(2, 52)
-                Vector256<double> x = Avx.Add(value, magicNumber.AsDouble());
-                Vector256<ulong> result = Avx2.Xor(x.AsUInt64(), magicNumber);
+                Vector256<double> magicNumber = Vector256.Create(ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
+                Vector256<double> x = Avx.Add(value, magicNumber);
+                Vector256<ulong> result = Avx2.Xor(x.AsUInt64(), magicNumber.AsUInt64());
                 return result;
             }
 
