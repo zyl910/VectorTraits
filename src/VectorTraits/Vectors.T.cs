@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using Zyl.VectorTraits.Extensions.SameW;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits {
@@ -383,13 +384,16 @@ namespace Zyl.VectorTraits {
         /// <summary>All bit is 1 (所有位都是1的值).</summary>
         public static Vector<T> AllBitsSet {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
 #if NET8_0_OR_GREATER
-            get => Vector.AllBitsSet;
-        }
+                return Vector.AllBitsSet;
 #else
-            get;
-        } = Vectors.Create<T>(ElementAllBitsSet);
+                var zero = Vector<int>.Zero;
+                var rt = Vector.Equals(zero, zero);
+                return Unsafe.As<Vector<int>, Vector<T>>(ref rt);
 #endif // NET8_0_OR_GREATER
+            }
+        }
 
         /// <summary>1 bits mask (1位掩码).</summary>
         public static Vector<T> MaskBits1 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return GetMaskBits(1); } }
