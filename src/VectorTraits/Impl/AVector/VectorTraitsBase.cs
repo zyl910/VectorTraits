@@ -273,10 +273,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<double> YTruncate_ClearBit(Vector<double> value) {
                 //constants.
                 Vector<double> allBitsSet = Vectors<double>.AllBitsSet;
-                //Vector<double> signMask = new Vector<double>(ScalarConstants.Double_SignMask).AsDouble();
-                Vector<double> signMask = VectorConstants.SignMask_Double;
+                Vector<double> nonSignMask = VectorConstants.Double_NonSignMask;
                 Vector<double> rangeBegin = new Vector<double>(1.0);
-                Vector<double> nonSignMask = Vector.Xor(signMask, allBitsSet);
                 Vector<double> exponentMask = new Vector<double>(ScalarConstants.DoubleVal_ExponentMask);
                 // operations
                 Vector<double> valueAbs = Vector.BitwiseAnd(value, nonSignMask);
@@ -309,7 +307,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YTruncate_Floor(Vector<double> value) {
                 //Vector<double> signMask = new Vector<long>(ScalarConstants.Double_SignMask).AsDouble();
-                Vector<double> signMask = VectorConstants.SignMask_Double;
+                Vector<double> signMask = VectorConstants.Double_SignMask;
                 Vector<double> valueAbs = Vector.AndNot(value, signMask);
                 Vector<double> signData = Vector.BitwiseAnd(value, signMask);
                 Vector<double> rt = Floor(valueAbs); // Vector.Floor need .NET 5+ .

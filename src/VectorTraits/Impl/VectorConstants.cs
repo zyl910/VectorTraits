@@ -22,6 +22,72 @@ namespace Zyl.VectorTraits.Impl {
         #region Vectors_T
         // == Vectors_T: originate from Vectors<T> ==
 
+        // -- Vectors_T: Vectors<Single> --
+
+        // -- Vectors_T: Vectors<Double> --
+
+        /// <inheritdoc cref="ScalarConstants.Double_SignMask"/>
+        public static Vector<double> Double_SignMask {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if USE_VECTOR_CREATE
+                return new Vector<long>(ScalarConstants.Double_SignMask).AsDouble();
+#else
+                return Vectors<double>.SignMask;
+#endif // USE_VECTOR_CREATE
+            }
+        }
+
+        /// <inheritdoc cref="ScalarConstants.Double_ExponentMask"/>
+        public static Vector<double> Double_ExponentMask {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+                //return Vectors<double>.ExponentMask;
+                return new Vector<double>(ScalarConstants.DoubleVal_ExponentMask);
+            }
+        }
+
+        /// <inheritdoc cref="ScalarConstants.Double_MantissaMask"/>
+        public static Vector<double> Double_MantissaMask {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+                //return Vectors<double>.MantissaMask;
+                return new Vector<double>(ScalarConstants.DoubleVal_MantissaMask);
+            }
+        }
+
+        /// <inheritdoc cref="ScalarConstants.Double_NonSignMask"/>
+        public static Vector<double> Double_NonSignMask {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if USE_VECTOR_CREATE
+                return new Vector<long>(ScalarConstants.Double_NonSignMask).AsDouble();
+#else
+                return Vectors<double>.NonSignMask;
+#endif // USE_VECTOR_CREATE
+            }
+        }
+
+        /// <inheritdoc cref="ScalarConstants.Double_NonExponentMask"/>
+        public static Vector<double> Double_NonExponentMask {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+                //return Vectors<double>.NonExponentMask;
+                return new Vector<double>(ScalarConstants.DoubleVal_NonExponentMask);
+            }
+        }
+
+        /// <inheritdoc cref="ScalarConstants.Double_NonMantissaMask"/>
+        public static Vector<double> Double_NonMantissaMask {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+                //return Vectors<double>.NonMantissaMask;
+                return new Vector<double>(ScalarConstants.DoubleVal_NonMantissaMask);
+            }
+        }
+
+        // -- Vectors_T: others --
+
         /// <summary>Sign mask (符号掩码) - Single.</summary>
         public static Vector<float> SignMask_Single {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -42,7 +108,7 @@ namespace Zyl.VectorTraits.Impl {
                 return new Vector<long>(ScalarConstants.Double_SignMask).AsDouble();
 #else
                 return Vectors<double>.SignMask;
-#endif // NETX_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
             }
         }
 
