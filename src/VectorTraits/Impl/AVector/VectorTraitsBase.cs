@@ -215,7 +215,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ConvertToInt64_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
                 get {
-                    return TypeCodeFlags.None;
+                    return TypeCodeFlags.Double;
                 }
             }
 
@@ -271,14 +271,16 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YTruncate(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YTruncate_ClearBit(Vector<double> value) {
-                // constants.
+                //constants.
                 Vector<double> allBitsSet = Vectors<double>.AllBitsSet;
+                //Vector<double> signMask = new Vector<double>(ScalarConstants.Double_SignMask).AsDouble();
+                Vector<double> signMask = VectorConstants.SignMask_Double;
                 Vector<double> rangeBegin = new Vector<double>(1.0);
-                Vector<double> nonSignMask = Vector.Abs(allBitsSet); // Non-sign mask (非符号掩码). Binary is `0x7FFFFFFFFFFFFFFFL`.
-                Vector<double> rangeBegin2 = new Vector<double>(2.0);
+                Vector<double> nonSignMask = Vector.Xor(signMask, allBitsSet);
+                Vector<double> exponentMask = new Vector<double>(ScalarConstants.DoubleVal_ExponentMask);
                 // operations
                 Vector<double> valueAbs = Vector.BitwiseAnd(value, nonSignMask);
-                Vector<double> exponentMask = new Vector<double>(ScalarConstants.DoubleVal_ExponentMask);
+                Vector<double> rangeBegin2 = new Vector<double>(2.0);
                 Vector<long> maskBegin = Vector.GreaterThan(rangeBegin.AsInt64(), valueAbs.AsInt64()); // (a>=b) = ~(a<b) = ~(b>a)
                 Vector<double> rangeEnd = new Vector<double>(ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
                 maskBegin = Vector.BitwiseAnd(maskBegin, nonSignMask.AsInt64()); // Support NegativeZero (`Math.Truncate(-0.0)` is `-0.0`) .
@@ -306,7 +308,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YTruncate(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YTruncate_Floor(Vector<double> value) {
-                Vector<double> signMask = new Vector<long>(ScalarConstants.Double_SignMask).AsDouble();
+                //Vector<double> signMask = new Vector<long>(ScalarConstants.Double_SignMask).AsDouble();
+                Vector<double> signMask = VectorConstants.SignMask_Double;
                 Vector<double> valueAbs = Vector.AndNot(value, signMask);
                 Vector<double> signData = Vector.BitwiseAnd(value, signMask);
                 Vector<double> rt = Floor(valueAbs); // Vector.Floor need .NET 5+ .

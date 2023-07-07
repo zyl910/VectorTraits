@@ -1,7 +1,7 @@
-﻿#if NET5_0_OR_GREATER
-#define USE_VECTOR_CREATE // .NET5+ has better performance .
+﻿#if NETX_0_OR_GREATER
+#define USE_VECTOR_CREATE // .NET?+ has better performance .
 #else
-#endif // NET5_0_OR_GREATER
+#endif // NETX_0_OR_GREATER
 
 using System;
 using System.Collections.Generic;
@@ -26,11 +26,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<float> SignMask_Single {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if NET5_0_OR_GREATER
-                return new Vector<uint>(0x80000000U).AsSingle(); // .NET5+ has better performance .
+#if USE_VECTOR_CREATE
+                return new Vector<int>(ScalarConstants.Single_SignMask).AsSingle();
 #else
                 return Vectors<float>.SignMask;
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
             }
         }
 
@@ -38,11 +38,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<double> SignMask_Double {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if NET5_0_OR_GREATER
-                return new Vector<ulong>(0x8000000000000000L).AsDouble();
+#if USE_VECTOR_CREATE
+                return new Vector<long>(ScalarConstants.Double_SignMask).AsDouble();
 #else
                 return Vectors<double>.SignMask;
-#endif // NET5_0_OR_GREATER
+#endif // NETX_0_OR_GREATER
             }
         }
 
@@ -50,11 +50,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<float> ExponentMask_Single {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if NET5_0_OR_GREATER
-                return new Vector<int>(0x7F800000).AsSingle();
+#if USE_VECTOR_CREATE
+                return new Vector<float>(ScalarConstants.SingleVal_ExponentMask);
 #else
                 return Vectors<float>.ExponentMask;
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
             }
         }
 
@@ -62,11 +62,8 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<double> ExponentMask_Double {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if NET5_0_OR_GREATER
-                return new Vector<long>(0x7FF0000000000000L).AsDouble();
-#else
-                return Vectors<double>.ExponentMask;
-#endif // NET5_0_OR_GREATER
+                //return Vectors<double>.ExponentMask;
+                return new Vector<double>(ScalarConstants.DoubleVal_ExponentMask);
             }
         }
 
@@ -74,11 +71,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<float> MantissaMask_Single {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if NET5_0_OR_GREATER
-                return new Vector<int>(0x007FFFFF).AsSingle();
+#if USE_VECTOR_CREATE
+                return new Vector<float>(ScalarConstants.SingleVal_MantissaMask);
 #else
                 return Vectors<float>.MantissaMask;
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
             }
         }
 
@@ -86,11 +83,8 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<double> MantissaMask_Double {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if NET5_0_OR_GREATER
-                return new Vector<long>(0x000FFFFFFFFFFFFFL).AsDouble();
-#else
-                return Vectors<double>.MantissaMask;
-#endif // NET5_0_OR_GREATER
+                //return Vectors<double>.MantissaMask;
+                return new Vector<double>(ScalarConstants.DoubleVal_MantissaMask);
             }
         }
 
@@ -99,11 +93,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<ushort> VMaxByte_UInt16 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if NET5_0_OR_GREATER
+#if USE_VECTOR_CREATE
                 return new Vector<ushort>((ushort)byte.MaxValue);
 #else
                 return Vectors<ushort>.VMaxByte;
-#endif // NET5_0_OR_GREATER
+#endif // USE_VECTOR_CREATE
             }
         }
 
