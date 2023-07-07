@@ -326,11 +326,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64(Vector256<double> value) {
                 // return SuperStatics.ConvertToInt64(value);
-#if NET5_0_OR_GREATER
+                // return ConvertToInt64_HwScalar(value);
                 return ConvertToInt64_ShiftVarFix(value);
-#else
-                return ConvertToInt64_HwScalar(value); // On .NET Core 3.x, HwScalar is faster.
-#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
@@ -380,9 +377,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // 	return result;	//total latency: 18, total throughput CPI: 7
                 // }
                 //constants
-                Vector256<long> mat_mask = Vector256.Create(0x0FFFFF_FFFFFFFF);  //0_00000000000_1111111111111111111111111111111111111111111111111111
-                Vector256<long> hidden_1 = Vector256.Create(0x100000_00000000);  //0_00000000001_0000000000000000000000000000000000000000000000000000 // 2^(-1022)
-                Vector256<long> exp_bias = Vector256.Create((long)ScalarConstants.Double_ExponentBias + 52); //0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
+                Vector256<long> mat_mask = Vector256.Create(ScalarConstants.DoubleVal_MantissaMask).AsInt64();  //0_00000000000_1111111111111111111111111111111111111111111111111111
+                Vector256<long> hidden_1 = Vector256.Create(ScalarConstants.IntDbl_2Pow52).AsInt64();  //0_00000000001_0000000000000000000000000000000000000000000000000000 // Int64: 2^52
+                Vector256<long> exp_bias = Vector256.Create(ScalarConstants.IntDbl_DoubleBias52).AsInt64(); //0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
                 Vector256<long> zero = Vector256<long>.Zero;
                 //majik operations										  //Latency, Throughput(references IceLake)
                 Vector256<long> bin = value.AsInt64();
@@ -406,12 +403,12 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <remarks>Input range is all number. Out of range results is `-pow(2,63)`.</remarks>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64_ShiftVarFix(Vector256<double> value) {
-                Vector256<long> mat_mask = Vector256.Create(ScalarConstants.Double_MantissaMask);
-                Vector256<long> hidden_1 = Vector256.Create(ScalarConstants.Int_2Pow52);
-                Vector256<long> exp_bias = Vector256.Create((long)ScalarConstants.Double_ExponentBias + ScalarConstants.Double_MantissaBits);
+                Vector256<long> mat_mask = Vector256.Create(ScalarConstants.DoubleVal_MantissaMask).AsInt64(); // Element: 0x000FFFFF_FFFFFFFF
+                Vector256<long> hidden_1 = Vector256.Create(ScalarConstants.IntDbl_2Pow52).AsInt64(); // Element: 0x00100000_00000000
+                Vector256<long> exp_bias = Vector256.Create(ScalarConstants.IntDbl_DoubleBias52).AsInt64(); // Element: ScalarConstants.Double_ExponentBias + ScalarConstants.Double_MantissaBits =  = 1023 + 52 = 1075 = 0x433
                 Vector256<long> zero = Vector256<long>.Zero;
-                Vector256<long> exp_max = Vector256.Create((long)ScalarConstants.Double_ExponentBias + 63-1); // long.MaxValue is `pow(2,63)-1`.
-                Vector256<long> defValue = Vector256.Create(long.MinValue); // Out of range results is `-pow(2,63)`
+                Vector256<long> exp_max = Vector256.Create(ScalarConstants.IntDbl_DoubleBias62).AsInt64(); // Element: ScalarConstants.Double_ExponentBias + 63-1 = 1023 + 62 = 1085 = 0x43D. Because `long.MaxValue` is `pow(2,63)-1`.
+                Vector256<long> defValue = Vector256.Create(ScalarConstants.DoubleVal_SignMask).AsInt64(); // Out of range results is `-pow(2,63)`
                 //majik operations										  //Latency, Throughput(references IceLake)
                 Vector256<long> bin = value.AsInt64();
                 Vector256<long> negative = Avx2.CompareGreaterThan(zero, bin);                     //3,1. negative[i] = (0 < bin[i])
@@ -458,9 +455,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //         _mm_castpd_si128(_mm_set1_pd(0x0018000000000000))
                 //     );
                 // }
-                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.DoubleBit_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
-                Vector256<double> x = Avx.Add(value, magicNumber.AsDouble());
-                Vector256<long> result = Avx2.Subtract(x.AsInt64(), magicNumber);
+                Vector256<double> magicNumber = Vector256.Create(ScalarConstants.DoubleVal_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector256<double> x = Avx.Add(value, magicNumber);
+                Vector256<long> result = Avx2.Subtract(x.AsInt64(), magicNumber.AsInt64());
                 return result;
             }
 
@@ -687,9 +684,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // 	return result_abs;	//total latency: 12, total throughput CPI: 4.8
                 // }
                 //constants
-                Vector256<long> mat_mask = Vector256.Create(0x0FFFFF_FFFFFFFF);  //0_00000000000_1111111111111111111111111111111111111111111111111111
-                Vector256<long> hidden_1 = Vector256.Create(0x100000_00000000);  //0_00000000001_0000000000000000000000000000000000000000000000000000 // Int64: 2^52
-                Vector256<long> exp_bias = Vector256.Create((long)ScalarConstants.Double_ExponentBias + 52); //0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
+                Vector256<long> mat_mask = Vector256.Create(ScalarConstants.DoubleVal_MantissaMask).AsInt64();  //0_00000000000_1111111111111111111111111111111111111111111111111111
+                Vector256<long> hidden_1 = Vector256.Create(ScalarConstants.IntDbl_2Pow52).AsInt64();  //0_00000000001_0000000000000000000000000000000000000000000000000000 // Int64: 2^52
+                Vector256<long> exp_bias = Vector256.Create(ScalarConstants.IntDbl_DoubleBias52).AsInt64(); //0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
                 Vector256<long> zero = Vector256<long>.Zero;
                 //majik operations										  //Latency, Throughput(references IceLake)
                 Vector256<long> bin = value.AsInt64();
