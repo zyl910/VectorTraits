@@ -53,7 +53,7 @@ namespace Zyl.VectorTraits {
             m_InitCheckSum += Vectors<ulong>.Demo.AsInt32()[0];
             m_InitCheckSum += Vectors<float>.Demo.AsInt32()[0];
             m_InitCheckSum += Vectors<double>.Demo.AsInt32()[0];
-            m_InitCheckSum += VectorConstants.ExponentMask_Single.AsInt32()[0];
+            m_InitCheckSum += VectorConstants.Single_ExponentMask.AsInt32()[0];
 
 #if NETCOREAPP3_0_OR_GREATER
             // Vector128
