@@ -220,7 +220,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //     return _mm256_sub_pd(_mm256_castsi256_pd(x), _mm256_set1_pd(0x0018000000000000));
                 // }
                 // BitConverter.DoubleToInt64Bits((double)0x0018000000000000).ToString("X") = "4338000000000000"
-                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.DoubleBit_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector256<long> magicNumber = Vector256.Create(ScalarConstants.DoubleVal_2Pow52_2Pow51).AsInt64(); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector256<long> x = Avx2.Add(value, magicNumber);
                 Vector256<double> result = Avx.Subtract(x.AsDouble(), magicNumber.AsDouble());
                 return result;
@@ -292,7 +292,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //     return _mm256_sub_pd(_mm256_castsi256_pd(x), _mm256_set1_pd(0x0010000000000000));
                 // }
                 // BitConverter.DoubleToInt64Bits((double)0x0010000000000000).ToString("X") = "4330000000000000"
-                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.DoubleBit_2Pow52); // Double value: pow(2, 52)
+                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
                 Vector256<ulong> x = Avx2.Or(value, magicNumber);
                 Vector256<double> result = Avx.Subtract(x.AsDouble(), magicNumber.AsDouble());
                 return result;
@@ -408,7 +408,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> exp_bias = Vector256.Create(ScalarConstants.IntDbl_DoubleBias52).AsInt64(); // Element: ScalarConstants.Double_ExponentBias + ScalarConstants.Double_MantissaBits =  = 1023 + 52 = 1075 = 0x433
                 Vector256<long> zero = Vector256<long>.Zero;
                 Vector256<long> exp_max = Vector256.Create(ScalarConstants.IntDbl_DoubleBias62).AsInt64(); // Element: ScalarConstants.Double_ExponentBias + 63-1 = 1023 + 62 = 1085 = 0x43D. Because `long.MaxValue` is `pow(2,63)-1`.
-                Vector256<long> defValue = Vector256.Create(VectorConstant256.DoubleVal_SignMask).AsInt64(); // Out of range results is `-pow(2,63)`
+                Vector256<long> defValue = Vector256Constants.Double_SignMask.AsInt64(); // Out of range results is `-pow(2,63)`
                 //majik operations										  //Latency, Throughput(references IceLake)
                 Vector256<long> bin = value.AsInt64();
                 Vector256<long> negative = Avx2.CompareGreaterThan(zero, bin);                     //3,1. negative[i] = (0 < bin[i])

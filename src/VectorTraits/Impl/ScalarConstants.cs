@@ -11,9 +11,10 @@ namespace Zyl.VectorTraits.Impl {
         // == Integer value ==
         // -- Int: Integer value. --
         // -- IntDbl: Integer value reinterpret cast to double. --
+        // If you create a Vector with a 64-bit integer, the performance of the JIT-generated code is very low. If you create a Vector with a double, the performance is much better(若用64位整数创建Vector, JIT生成的代码的性能很低. 换成用double创建Vector, 性能能提高很多).
 
-        /// <summary>Integer - `(long)pow(2, 52) = 0x00100000_00000000 = 4503599627370496`.</summary>
-        public const long Int_2Pow52 = 0x00100000_00000000;
+        ///// <summary>Integer - `(long)pow(2, 52) = 0x00100000_00000000 = 4503599627370496`.</summary>
+        //public const long Int_2Pow52 = 0x00100000_00000000;
 
         /// <summary>IntDbl - `(long)pow(2, 52) = 0x00100000_00000000 = 4503599627370496`. `BitConverter.Int64BitsToDouble(0x00100000_00000000) = 2.2250738585072014E-308`, `BitConverter.DoubleToInt64Bits(2.2250738585072014E-308).ToString("X16") = "0010000000000000"`.</summary>
         public const double IntDbl_2Pow52 = 2.2250738585072014E-308;
@@ -164,14 +165,18 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>Double - Sign mask (符号掩码). Binary is `0x8000000000000000L`.</summary>
         public const long Double_SignMask = long.MinValue;
         /// <summary>Double - Exponent mask (指数掩码). Binary is `0x7FF0000000000000L`.</summary>
+        [Obsolete("Please use the better performing DoubleVal_ExponentMask (请使用性能更好的 DoubleVal_ExponentMask).")]
         public const long Double_ExponentMask = 0x7FF0000000000000L;
         /// <summary>Double - Mantissa mask (尾数掩码). Binary is `0x000FFFFFFFFFFFFFL`.</summary>
+        [Obsolete("Please use the better performing DoubleVal_MantissaMask (请使用性能更好的 DoubleVal_MantissaMask).")]
         public const long Double_MantissaMask = 0x000FFFFFFFFFFFFFL;
         /// <summary>Double - Non-sign mask (非符号掩码). Binary is `0x7FFFFFFFFFFFFFFFL`.</summary>
         public const long Double_NonSignMask = ~Double_SignMask;
         /// <summary>Double - Non-exponent mask (非指数掩码). Binary is `0x800FFFFFFFFFFFFFL`.</summary>
+        [Obsolete("Please use the better performing DoubleVal_NonExponentMask (请使用性能更好的 DoubleVal_NonExponentMask).")]
         public const long Double_NonExponentMask = ~Double_ExponentMask;
         /// <summary>Double - Non-mantissa mask (非尾数掩码). Binary is `0xFFF0000000000000L`.</summary>
+        [Obsolete("Please use the better performing DoubleVal_NonMantissaMask (请使用性能更好的 DoubleVal_NonMantissaMask).")]
         public const long Double_NonMantissaMask = ~Double_MantissaMask;
 
         // -- DoubleBit: Bit of Double --
@@ -199,19 +204,19 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>DoubleVal - `(double)0x0018000000000000 = pow(2, 52) + pow(2, 51) = 1.5*pow(2, 52) = 6755399441055744`. Binary is `0x43380000_00000000L`.</summary>
         public const double DoubleVal_2Pow52_2Pow51 = 0x0018000000000000L;
 
-        /// <summary>DoubleBit - `(double)0x0008000000000000 = pow(2, 51) = 2251799813685248`. Binary is `0x43200000_00000000`.</summary>
-        public const long DoubleBit_2Pow51 = 0x43200000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 51)).ToString("X")
-        /// <summary>DoubleBit - `(double)0x0010000000000000 = pow(2, 52) = 4503599627370496`. Binary is `0x43300000_00000000`.</summary>
-        public const long DoubleBit_2Pow52 = 0x43300000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 52)).ToString("X")
-        /// <summary>DoubleBit - `(double)0x0018000000000000 = pow(2, 52) + pow(2, 51) = 1.5*pow(2, 52) = 6755399441055744`. Binary is `0x43380000_00000000L`.</summary>
-        public const long DoubleBit_2Pow52_2Pow51 = 0x43380000_00000000L; // BitConverter.DoubleToInt64Bits(1.5*Math.Pow(2, 52)).ToString("X")
+        ///// <summary>DoubleBit - `(double)0x0008000000000000 = pow(2, 51) = 2251799813685248`. Binary is `0x43200000_00000000`.</summary>
+        //public const long DoubleBit_2Pow51 = 0x43200000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 51)).ToString("X")
+        ///// <summary>DoubleBit - `(double)0x0010000000000000 = pow(2, 52) = 4503599627370496`. Binary is `0x43300000_00000000`.</summary>
+        //public const long DoubleBit_2Pow52 = 0x43300000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 52)).ToString("X")
+        ///// <summary>DoubleBit - `(double)0x0018000000000000 = pow(2, 52) + pow(2, 51) = 1.5*pow(2, 52) = 6755399441055744`. Binary is `0x43380000_00000000L`.</summary>
+        //public const long DoubleBit_2Pow52_2Pow51 = 0x43380000_00000000L; // BitConverter.DoubleToInt64Bits(1.5*Math.Pow(2, 52)).ToString("X")
 
         /// <summary>DoubleVal - Truncate - expMinuend.`((long)Double_ExponentBias * 2 + Double_ExponentShift) &lt;&lt; Double_ExponentShift = ((long)1023*2 + 52)&lt;&lt;52 = 0x8320000000000000 = -8998192055486251008`. `BitConverter.Int64BitsToDouble(-8998192055486251008) = -1.252605225005608E-293`, `BitConverter.DoubleToInt64Bits(-1.252605225005608E-293).ToString("X") = "8320000000000000"`.</summary>
         /// <remarks>If valueExpData is `(1023 + e)&lt;&lt;52`, `expMinuend-valueExpData` exponent field will be `(1023*2 + 52) - (1023 + e) = 1023 + (52-e)`</remarks>
         public const double DoubleVal_Truncate_expMinuend = -1.252605225005608E-293;
-        /// <summary>DoubleBit - Truncate - expMinuend.`((long)Double_ExponentBias * 2 + Double_ExponentShift) &lt;&lt; Double_ExponentShift = ((long)1023*2 + 52)&lt;&lt;52 = 0x8320000000000000 = -8998192055486251008`. `BitConverter.Int64BitsToDouble(-8998192055486251008) = -1.252605225005608E-293`, `BitConverter.DoubleToInt64Bits(-1.252605225005608E-293).ToString("X") = "8320000000000000"`.</summary>
-        /// <remarks>If valueExpData is `(1023 + e)&lt;&lt;52`, `expMinuend-valueExpData` exponent field will be `(1023*2 + 52) - (1023 + e) = 1023 + (52-e)`</remarks>
-        public const long DoubleBit_Truncate_expMinuend = ((long)Double_ExponentBias * 2 + Double_ExponentShift) << Double_ExponentShift;
+        ///// <summary>DoubleBit - Truncate - expMinuend.`((long)Double_ExponentBias * 2 + Double_ExponentShift) &lt;&lt; Double_ExponentShift = ((long)1023*2 + 52)&lt;&lt;52 = 0x8320000000000000 = -8998192055486251008`. `BitConverter.Int64BitsToDouble(-8998192055486251008) = -1.252605225005608E-293`, `BitConverter.DoubleToInt64Bits(-1.252605225005608E-293).ToString("X") = "8320000000000000"`.</summary>
+        ///// <remarks>If valueExpData is `(1023 + e)&lt;&lt;52`, `expMinuend-valueExpData` exponent field will be `(1023*2 + 52) - (1023 + e) = 1023 + (52-e)`</remarks>
+        //public const long DoubleBit_Truncate_expMinuend = ((long)Double_ExponentBias * 2 + Double_ExponentShift) << Double_ExponentShift;
 
     }
 }

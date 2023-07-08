@@ -158,6 +158,7 @@ namespace Zyl.VectorTraits {
         /// Static constructor.
         /// </summary>
         static Scalars() {
+#pragma warning disable CS0618 // Type or member is obsolete
             V0 = default;
             AllBitsSet = Scalars.OnesComplement(V0);
             NegativeZero = default;
@@ -500,6 +501,7 @@ namespace Zyl.VectorTraits {
             VReciprocalMaxUInt16 = Scalars.GetFixedByDoubleUseOne<T>(1.0 / 65535, FixedOneDouble);
             VReciprocalMaxInt32 = Scalars.GetFixedByDoubleUseOne<T>(1.0 / 2147483647, FixedOneDouble);
             VReciprocalMaxUInt32 = Scalars.GetFixedByDoubleUseOne<T>(1.0 / 4294967295, FixedOneDouble);
+#pragma warning restore CS0618 // Type or member is obsolete
         }
 
     }

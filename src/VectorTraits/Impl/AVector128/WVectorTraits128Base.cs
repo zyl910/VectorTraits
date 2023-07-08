@@ -229,7 +229,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<double> ConvertToDouble_Range52_Impl(Vector128<long> value) {
 #if NET7_0_OR_GREATER
                 // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
-                Vector128<long> magicNumber = Vector128.Create(ScalarConstants.DoubleBit_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector128<long> magicNumber = Vector128.Create(ScalarConstants.DoubleVal_2Pow52_2Pow51).AsInt64(); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector128<long> x = Vector128.Add(value, magicNumber);
                 Vector128<double> result = Vector128.Subtract(x.AsDouble(), magicNumber.AsDouble());
 #else
@@ -244,7 +244,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<double> ConvertToDouble_Range52_Impl(Vector128<ulong> value) {
 #if NET7_0_OR_GREATER
                 // See more: WVectorTraits256Avx2.ConvertToDouble_Range52
-                Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.DoubleBit_2Pow52); // Double value: pow(2, 52)
+                Vector128<ulong> magicNumber = Vector128.Create(ScalarConstants.DoubleVal_2Pow52).AsUInt64(); // Double value: pow(2, 52)
                 Vector128<ulong> x = Vector128.BitwiseOr(value, magicNumber);
                 Vector128<double> result = Vector128.Subtract(x.AsDouble(), magicNumber.AsDouble());
 #else
@@ -358,7 +358,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<long> ConvertToInt64_Range52_NoTruncate(Vector128<double> value) {
 #if NET7_0_OR_GREATER
                 // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_NoTruncate
-                Vector128<long> magicNumber = Vector128.Create(ScalarConstants.DoubleBit_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                Vector128<long> magicNumber = Vector128.Create(ScalarConstants.DoubleVal_2Pow52_2Pow51).AsInt64(); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector128<double> x = Vector128.Add(value, magicNumber.AsDouble());
                 Vector128<long> result = Vector128.Subtract(x.AsInt64(), magicNumber);
                 return result;
@@ -542,7 +542,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> ConvertToUInt64_Range52_NoTruncate(Vector128<double> value) {
 #if NET7_0_OR_GREATER
                 // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52_NoTruncate
-                Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.DoubleBit_2Pow52); // Double value: pow(2, 52)
+                Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
                 Vector128<double> x = Vector128.Add(value, magicNumber.AsDouble());
                 Vector128<ulong> result = Vector128.Xor(x.AsUInt64(), magicNumber);
                 return result;

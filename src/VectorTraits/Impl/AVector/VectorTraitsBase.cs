@@ -306,7 +306,6 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YTruncate(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YTruncate_Floor(Vector<double> value) {
-                //Vector<double> signMask = new Vector<long>(ScalarConstants.Double_SignMask).AsDouble();
                 Vector<double> signMask = VectorConstants.Double_SignMask;
                 Vector<double> valueAbs = Vector.AndNot(value, signMask);
                 Vector<double> signData = Vector.BitwiseAnd(value, signMask);
