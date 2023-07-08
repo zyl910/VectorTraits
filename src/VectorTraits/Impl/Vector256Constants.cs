@@ -163,6 +163,71 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+        // -- Vectors_T: Vector256s<Int64> --
+
+        /// <inheritdoc cref="Vector256s{long}.MinValue"/>
+        /// <remarks>For Int64.</remarks>
+        public static Vector256<long> Int64_MinValue {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if USE_VECTOR_CREATE
+                return Vector256.Create(long.MinValue);
+#else
+                return Vector256s<long>.MinValue;
+#endif // USE_VECTOR_CREATE
+            }
+        }
+
+        /// <summary>Int64 - `long.MinValue + 4 = 0x8000000000000004 = -9223372036854775804`.</summary>
+        public static Vector256<long> Int64_MinValue_4 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector256.Create(long.MinValue + 4);
+        }
+#else
+            get;
+        } = Vector256.Create(long.MinValue + 4);
+#endif // USE_VECTOR_CREATE
+
+        /// <inheritdoc cref="Vector256s{long}.VMaxInt32"/>
+        /// <remarks>For Int64.</remarks>
+        public static Vector256<long> Int64_VMaxInt32 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if USE_VECTOR_CREATE
+                return Vector256.Create((long)int.MaxValue);
+#else
+                return Vector256s<long>.VMaxInt32;
+#endif // USE_VECTOR_CREATE
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s{long}.VMinInt32"/>
+        /// <remarks>For Int64.</remarks>
+        public static Vector256<long> Int64_VMinInt32 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if USE_VECTOR_CREATE
+                return Vector256.Create((long)int.MinValue);
+#else
+                return Vector256s<long>.VMinInt32;
+#endif // USE_VECTOR_CREATE
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s{long}.VMaxUInt32"/>
+        /// <remarks>For Int64.</remarks>
+        public static Vector256<long> Int64_VMaxUInt32 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if USE_VECTOR_CREATE
+                return Vector256.Create((long)uint.MaxValue);
+#else
+                return Vector256s<long>.VMaxUInt32;
+#endif // USE_VECTOR_CREATE
+            }
+        }
+
         // -- Vectors_T: others --
 
         /// <summary>

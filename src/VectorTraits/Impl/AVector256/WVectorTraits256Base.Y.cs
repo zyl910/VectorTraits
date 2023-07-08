@@ -154,8 +154,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<int> YNarrowSaturate(Vector256<long> lower, Vector256<long> upper) {
                 //Vector256<long> amin = Vector256s<long>.VMinInt32;
                 //Vector256<long> amax = Vector256s<long>.VMaxInt32;
-                Vector256<long> amin = Vector256.Create((long)int.MinValue); // .NET5+ has better performance .
-                Vector256<long> amax = Vector256.Create((long)int.MaxValue);
+                Vector256<long> amin = Vector256Constants.Int64_VMinInt32;
+                Vector256<long> amax = Vector256Constants.Int64_VMaxInt32;
                 Vector256<long> l = YClamp(lower, amin, amax);
                 Vector256<long> u = YClamp(upper, amin, amax);
                 return Narrow(l, u);
@@ -166,7 +166,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YNarrowSaturate(Vector256<ulong> lower, Vector256<ulong> upper) {
                 //Vector256<ulong> amax = Vector256s<ulong>.VMaxUInt32;
-                Vector256<ulong> amax = Vector256.Create((ulong)uint.MaxValue); // .NET5+ has better performance .
+                Vector256<ulong> amax = Vector256Constants.Int64_VMaxUInt32.AsUInt64();
                 Vector256<ulong> l = Min(lower, amax);
                 Vector256<ulong> u = Min(upper, amax);
                 return Narrow(l, u);
@@ -218,7 +218,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<uint> YNarrowSaturateUnsigned(Vector256<long> lower, Vector256<long> upper) {
                 Vector256<long> amin = Vector256<long>.Zero;
                 //Vector256<long> amax = Vector256s<long>.VMaxUInt32;
-                Vector256<long> amax = Vector256.Create((long)uint.MaxValue); // .NET5+ has better performance .
+                Vector256<long> amax = Vector256Constants.Int64_VMaxUInt32;
                 Vector256<ulong> l = YClamp(lower, amin, amax).AsUInt64();
                 Vector256<ulong> u = YClamp(upper, amin, amax).AsUInt64();
                 return Narrow(l, u);

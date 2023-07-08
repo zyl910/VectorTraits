@@ -201,8 +201,17 @@ namespace Zyl.VectorTraits.Impl {
         public const double DoubleVal_2Pow51 = 0x0008000000000000L;
         /// <summary>DoubleVal - `(double)0x0010000000000000 = pow(2, 52) = 4503599627370496`. Binary is `0x43300000_00000000`.</summary>
         public const double DoubleVal_2Pow52 = 0x0010000000000000L;
-        /// <summary>DoubleVal - `(double)0x0018000000000000 = pow(2, 52) + pow(2, 51) = 1.5*pow(2, 52) = 6755399441055744`. Binary is `0x43380000_00000000L`.</summary>
+        /// <summary>DoubleVal - `(double)0x0018000000000000 = pow(2, 52) + pow(2, 51) = 1.5*pow(2, 52) = 6755399441055744`. Binary is `0x43380000_00000000`.</summary>
         public const double DoubleVal_2Pow52_2Pow51 = 0x0018000000000000L;
+
+        /// <summary>DoubleVal - `(double)pow(2, 84). `BitConverter.Int64BitsToDouble(0x45300000_00000000) = 1.9342813113834067E+25`, `BitConverter.DoubleToInt64Bits(1.9342813113834067E+25).ToString("X16") = "4530000000000000"`.</summary>
+        public const double DoubleVal_2Pow84 = 1.9342813113834067E+25;
+        /// <summary>DoubleVal - `(double)pow(2, 84) + pow(2, 52). `BitConverter.Int64BitsToDouble(0x45300000_00100000) = 1.9342813118337666E+25`, `BitConverter.DoubleToInt64Bits(1.9342813118337666E+25).ToString("X16") = "4530000000100000"`.</summary>
+        public const double DoubleVal_2Pow84_2Pow52 = 1.9342813118337666E+25;
+        /// <summary>DoubleVal - `(double)pow(2, 84) + pow(2, 63). `BitConverter.Int64BitsToDouble(0x45300000_80000000) = 1.9342822337206104E+25`, `BitConverter.DoubleToInt64Bits(1.9342822337206104E+25).ToString("X16") = "4530000080000000"`.</summary>
+        public const double DoubleVal_2Pow84_2Pow63 = 1.9342822337206104E+25;
+        /// <summary>DoubleVal - `(double)pow(2, 84) + pow(2, 63) + pow(2, 52)`. `BitConverter.Int64BitsToDouble(0x45300000_80100000) = 1.9342822337206104E+25`, `BitConverter.DoubleToInt64Bits(1.9342822341709703E+25).ToString("X16") = "4530000080100000"`.</summary>
+        public const double DoubleVal_2Pow84_2Pow63_2Pow52 = 1.9342822341709703E+25;
 
         ///// <summary>DoubleBit - `(double)0x0008000000000000 = pow(2, 51) = 2251799813685248`. Binary is `0x43200000_00000000`.</summary>
         //public const long DoubleBit_2Pow51 = 0x43200000_00000000; // BitConverter.DoubleToInt64Bits(Math.Pow(2, 51)).ToString("X")

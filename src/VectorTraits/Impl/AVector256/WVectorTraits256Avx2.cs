@@ -136,10 +136,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
                 Vector256<int> lowerBits;
                 lowerBits = value.AsInt32();
-                lowerBits = Avx2.Blend(lowerBits, Vector256.Create(0x43300000_00000000).AsInt32(), 0b10101010);           // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)
-                Vector256<long> upperBits = Avx2.ShiftRightLogical(value, 32);                                             // Extract the 32 most significant bits of vector
-                upperBits = Avx2.Xor(upperBits, Vector256.Create(0x45300000_80000000));                                   // Flip the msb of upperBits and blend with the bit representation of double(2^84 + 2^63)
-                Vector256<double> result = Avx.Subtract(upperBits.AsDouble(), Vector256.Create(0x45300000_80100000).AsDouble());        // Compute in double precision: (upper - (2^84 + 2^63 + 2^52)) + lower
+                lowerBits = Avx2.Blend(lowerBits, Vector256.Create(ScalarConstants.DoubleVal_2Pow52).AsInt32(), 0b10101010); // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)
+                Vector256<long> upperBits = Avx2.ShiftRightLogical(value, 32);                                               // Extract the 32 most significant bits of vector
+                upperBits = Avx2.Xor(upperBits, Vector256.Create(ScalarConstants.DoubleVal_2Pow84_2Pow63).AsInt64());        // Flip the msb of upperBits and blend with the bit representation of double(2^84 + 2^63)
+                Vector256<double> result = Avx.Subtract(upperBits.AsDouble(), Vector256.Create(ScalarConstants.DoubleVal_2Pow84_2Pow63_2Pow52)); // Compute in double precision: (upper - (2^84 + 2^63 + 2^52)) + lower
                 return Avx.Add(result, lowerBits.AsDouble());
             }
 
@@ -242,10 +242,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
                 Vector256<uint> lowerBits;
                 lowerBits = value.AsUInt32();
-                lowerBits = Avx2.Blend(lowerBits, Vector256.Create(0x43300000_00000000UL).AsUInt32(), 0b10101010);        // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)                                                 */
-                Vector256<ulong> upperBits = Avx2.ShiftRightLogical(value, 32);                                             // Extract the 32 most significant bits of vector
-                upperBits = Avx2.Xor(upperBits, Vector256.Create(0x45300000_00000000UL));                                 // Blend upperBits with the bit representation of double(2^84)
-                Vector256<double> result = Avx.Subtract(upperBits.AsDouble(), Vector256.Create(0x45300000_00100000UL).AsDouble());      // Compute in double precision: (upper - (2^84 + 2^52)) + lower
+                lowerBits = Avx2.Blend(lowerBits, Vector256.Create(ScalarConstants.DoubleVal_2Pow52).AsUInt32(), 0b10101010); // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)                                                 */
+                Vector256<ulong> upperBits = Avx2.ShiftRightLogical(value, 32);                                               // Extract the 32 most significant bits of vector
+                upperBits = Avx2.Xor(upperBits, Vector256.Create(ScalarConstants.DoubleVal_2Pow84).AsUInt64());               // Blend upperBits with the bit representation of double(2^84)
+                Vector256<double> result = Avx.Subtract(upperBits.AsDouble(), Vector256.Create(ScalarConstants.DoubleVal_2Pow84_2Pow52)); // Compute in double precision: (upper - (2^84 + 2^52)) + lower
                 return Avx.Add(result, lowerBits.AsDouble());
             }
 
@@ -292,7 +292,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //     return _mm256_sub_pd(_mm256_castsi256_pd(x), _mm256_set1_pd(0x0010000000000000));
                 // }
                 // BitConverter.DoubleToInt64Bits((double)0x0010000000000000).ToString("X") = "4330000000000000"
-                Vector256<ulong> magicNumber = Vector256.Create((ulong)ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
+                Vector256<ulong> magicNumber = Vector256.Create(ScalarConstants.DoubleVal_2Pow52).AsUInt64(); // Double value: pow(2, 52)
                 Vector256<ulong> x = Avx2.Or(value, magicNumber);
                 Vector256<double> result = Avx.Subtract(x.AsDouble(), magicNumber.AsDouble());
                 return result;
@@ -482,17 +482,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return ConvertToSingle_Multiply(value);
             }
 
-            ///// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{uint})"/>
-            //[Obsolete("The Uint32 value after the translation will exceed the trailing precision range of Single(e7m23)")]
-            //[CLSCompliant(false)]
-            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-            //public static Vector256<float> ConvertToSingle_Add(Vector256<uint> value) {
-            //    Vector256<int> translated = Avx2.Add(value.AsInt32(), Vector256.Create(int.MinValue));
-            //    Vector256<float> rtTranslated = Avx.ConvertToVector256Single(translated);
-            //    Vector256<float> rt = Avx.Subtract(rtTranslated, Vector256.Create((float)int.MinValue));
-            //    return rt;
-            //}
-
             /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle(Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -541,17 +530,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //return ConvertToUInt32_Mapping(value);
                 return ConvertToUInt32_MappingFix(value);
             }
-
-            ///// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
-            //[Obsolete("The Uint32 value after the translation will exceed the trailing precision range of Single(e7m24)")]
-            //[CLSCompliant(false)]
-            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-            //public static Vector256<uint> ConvertToUInt32_Add(Vector256<float> value) {
-            //    Vector256<float> translated = Avx.Add(value, Vector256.Create((float)int.MinValue));
-            //    Vector256<int> rtTranslated = Avx.ConvertToVector256Int32WithTruncation(translated);
-            //    Vector256<uint> rt = Avx2.Subtract(rtTranslated, Vector256.Create(int.MinValue)).AsUInt32();
-            //    return rt;
-            //}
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
             /// <remarks>Input range is `[-pow(2,31), pow(2,31))`. Out of range results in `2147483648`(pow(2,31)).</remarks>
@@ -2121,9 +2099,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Shuffle(Vector256<ulong> vector, Vector256<ulong> indices) {
-                var indicesAdded = Avx2.Add(indices.AsInt64(), Vector256.Create(long.MinValue));
+                var indicesAdded = Avx2.Add(indices.AsInt64(), Vector256Constants.Int64_MinValue);
                 Vector256<ulong> mask = Avx2.CompareGreaterThan(
-                    Vector256.Create((long)(4 + long.MinValue)),
+                    Vector256Constants.Int64_MinValue_4,
                     indicesAdded
                 ).AsUInt64(); // Unsigned compare: (i < 4)
                 Vector256<ulong> raw = YShuffleKernel(vector, indices);
@@ -2211,9 +2189,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Shuffle_Args(Vector256<ulong> indices, out Vector256<ulong> args0, out Vector256<ulong> args1) {
                 YShuffleKernel_Args(indices, out args0, out _);
-                var indicesAdded = Avx2.Add(indices.AsInt64(), Vector256.Create(long.MinValue));
+                var indicesAdded = Avx2.Add(indices.AsInt64(), Vector256Constants.Int64_MinValue);
                 args1 = Avx2.CompareGreaterThan(
-                    Vector256.Create((long)(4 + long.MinValue)),
+                    Vector256Constants.Int64_MinValue_4,
                     indicesAdded
                 ).AsUInt64(); // Unsigned compare: (i < 4)
             }

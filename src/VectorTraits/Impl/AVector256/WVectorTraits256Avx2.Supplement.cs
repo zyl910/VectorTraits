@@ -332,7 +332,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> GreaterThan(Vector256<ulong> left, Vector256<ulong> right) {
                 //Vector256<long> mid = Vector256s<long>.MinValue;
-                Vector256<long> mid = Vector256.Create(long.MinValue); // .NET5+ has better performance .
+                Vector256<long> mid = Vector256Constants.Int64_MinValue;
                 Vector256<long> left2 = Avx2.Add(mid, left.AsInt64());
                 Vector256<long> right2 = Avx2.Add(mid, right.AsInt64());
                 Vector256<long> mask = Avx2.CompareGreaterThan(left2, right2);
@@ -432,7 +432,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> LessThan(Vector256<ulong> left, Vector256<ulong> right) {
                 //Vector256<long> mid = Vector256s<long>.MinValue;
-                Vector256<long> mid = Vector256.Create(long.MinValue); // .NET5+ has better performance .
+                Vector256<long> mid = Vector256Constants.Int64_MinValue;
                 Vector256<long> left2 = Avx2.Add(mid, left.AsInt64());
                 Vector256<long> right2 = Avx2.Add(mid, right.AsInt64());
                 Vector256<long> mask = Avx2.CompareGreaterThan(right2, left2);
@@ -511,7 +511,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Max(Vector256<ulong> left, Vector256<ulong> right) {
                 //Vector256<long> mid = Vector256s<long>.MinValue;
-                Vector256<long> mid = Vector256.Create(long.MinValue); // .NET5+ has better performance .
+                Vector256<long> mid = Vector256Constants.Int64_MinValue;
                 Vector256<long> left2 = Avx2.Add(mid, left.AsInt64());
                 Vector256<long> right2 = Avx2.Add(mid, right.AsInt64());
                 Vector256<long> mask = Avx2.CompareGreaterThan(left2, right2);
@@ -591,7 +591,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Min(Vector256<ulong> left, Vector256<ulong> right) {
                 //Vector256<long> mid = Vector256s<long>.MinValue;
-                Vector256<long> mid = Vector256.Create(long.MinValue); // .NET5+ has better performance .
+                Vector256<long> mid = Vector256Constants.Int64_MinValue;
                 Vector256<long> left2 = Avx2.Add(mid, left.AsInt64());
                 Vector256<long> right2 = Avx2.Add(mid, right.AsInt64());
                 Vector256<long> mask = Avx2.CompareGreaterThan(right2, left2);
@@ -710,9 +710,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Multiply_TwoWord(Vector256<ulong> left, Vector256<ulong> right) {
                 const int L = 32; // sizeof(uint) * 8;
-                const ulong MASK_VALUE = (1L << L) - 1;
-                //Vector256<ulong> mask = Vector256s<ulong>.VMaxUInt32;
-                Vector256<ulong> mask = Vector256.Create(MASK_VALUE); // .NET5+ has better performance .
+                //const ulong MASK_VALUE = (1L << L) - 1;
+                //Vector256<ulong> mask = Vector256.Create(MASK_VALUE);
+                Vector256<ulong> mask = Vector256Constants.Int64_VMaxUInt32.AsUInt64();
                 Vector256<ulong> w0;
                 Vector256<ulong> u1, v1, w1, low;
                 // u=left; v=right;
