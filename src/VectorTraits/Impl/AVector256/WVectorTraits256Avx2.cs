@@ -408,7 +408,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> exp_bias = Vector256.Create(ScalarConstants.IntDbl_DoubleBias52).AsInt64(); // Element: ScalarConstants.Double_ExponentBias + ScalarConstants.Double_MantissaBits =  = 1023 + 52 = 1075 = 0x433
                 Vector256<long> zero = Vector256<long>.Zero;
                 Vector256<long> exp_max = Vector256.Create(ScalarConstants.IntDbl_DoubleBias62).AsInt64(); // Element: ScalarConstants.Double_ExponentBias + 63-1 = 1023 + 62 = 1085 = 0x43D. Because `long.MaxValue` is `pow(2,63)-1`.
-                Vector256<long> defValue = Vector256.Create(ScalarConstants.DoubleVal_SignMask).AsInt64(); // Out of range results is `-pow(2,63)`
+                Vector256<long> defValue = Vector256.Create(VectorConstant256.DoubleVal_SignMask).AsInt64(); // Out of range results is `-pow(2,63)`
                 //majik operations										  //Latency, Throughput(references IceLake)
                 Vector256<long> bin = value.AsInt64();
                 Vector256<long> negative = Avx2.CompareGreaterThan(zero, bin);                     //3,1. negative[i] = (0 < bin[i])
@@ -867,7 +867,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<byte> Narrow(Vector256<ushort> lower, Vector256<ushort> upper) {
                 //Vector256<ushort> mask = Vector256s<ushort>.VMaxByte;
                 //Vector256<ushort> mask = Vector256.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
-                Vector256<ushort> mask = Vector256Constants.VMaxByte_UInt16;
+                Vector256<ushort> mask = Vector256Constants.UInt16_VMaxByte;
                 Vector256<byte> raw = Avx2.PackUnsignedSaturate(Avx2.And(lower, mask).AsInt16(), Avx2.And(upper, mask).AsInt16()); // bit64(x, z, y, w)
                 Vector256<byte> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
                 return rt;

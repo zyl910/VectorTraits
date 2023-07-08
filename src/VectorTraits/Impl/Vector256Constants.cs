@@ -21,83 +21,138 @@ namespace Zyl.VectorTraits.Impl {
 #if NETCOREAPP3_0_OR_GREATER
 
         #region Vectors_T
-        // == Vectors_T: originate from Vectors<T> ==
+        // == Vectors_T: originate from Vector256s<T> ==
 
-        /// <summary>Sign mask (符号掩码) - Single.</summary>
-        public static Vector256<float> SignMask_Single {
+        // -- Vectors_T: Vector256s<Single> --
+
+        /// <inheritdoc cref="ScalarConstants.Single_SignMask"/>
+        public static Vector256<float> Single_SignMask {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
 #if USE_VECTOR_CREATE
-                return Vector256.Create(0x80000000U).AsSingle();
+                return Vector256.Create(ScalarConstants.Single_SignMask).AsSingle();
 #else
                 return Vector256s<float>.SignMask;
 #endif // USE_VECTOR_CREATE
             }
         }
 
-        /// <summary>Sign mask (符号掩码) - Double.</summary>
-        public static Vector256<double> SignMask_Double {
+        /// <inheritdoc cref="ScalarConstants.Single_ExponentMask"/>
+        public static Vector256<float> Single_ExponentMask {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+                //return Vector256s<float>.ExponentMask;
+                return Vector256.Create(ScalarConstants.SingleVal_ExponentMask);
+            }
+        }
+
+        /// <inheritdoc cref="ScalarConstants.Single_MantissaMask"/>
+        public static Vector256<float> Single_MantissaMask {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+                //return Vector256s<float>.MantissaMask;
+                return Vector256.Create(ScalarConstants.SingleVal_MantissaMask);
+            }
+        }
+
+        /// <inheritdoc cref="ScalarConstants.Single_NonSignMask"/>
+        public static Vector256<float> Single_NonSignMask {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
 #if USE_VECTOR_CREATE
-                return Vector256.Create(0x8000000000000000L).AsDouble();
+                return Vector256.Create(ScalarConstants.Single_NonSignMask).AsSingle();
+#else
+                return Vector256s<float>.NonSignMask;
+#endif // USE_VECTOR_CREATE
+            }
+        }
+
+        /// <inheritdoc cref="ScalarConstants.Single_NonExponentMask"/>
+        public static Vector256<float> Single_NonExponentMask {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+                //return Vector256s<float>.NonExponentMask;
+                return Vector256.Create(ScalarConstants.SingleVal_NonExponentMask);
+            }
+        }
+
+        /// <inheritdoc cref="ScalarConstants.Single_NonMantissaMask"/>
+        public static Vector256<float> Single_NonMantissaMask {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+                //return Vector256s<float>.NonMantissaMask;
+                return Vector256.Create(ScalarConstants.SingleVal_NonMantissaMask);
+            }
+        }
+
+        // -- Vectors_T: Vector256s<Double> --
+
+        /// <inheritdoc cref="ScalarConstants.Double_SignMask"/>
+        public static Vector256<double> Double_SignMask {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if USE_VECTOR_CREATE
+                return Vector256.Create(ScalarConstants.Double_SignMask).AsDouble();
 #else
                 return Vector256s<double>.SignMask;
 #endif // USE_VECTOR_CREATE
             }
         }
 
-        /// <summary>Exponent mask (指数掩码) - Single.</summary>
-        public static Vector256<float> ExponentMask_Single {
+        /// <inheritdoc cref="ScalarConstants.Double_ExponentMask"/>
+        public static Vector256<double> Double_ExponentMask {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+                //return Vector256s<double>.ExponentMask;
+                return Vector256.Create(ScalarConstants.DoubleVal_ExponentMask);
+            }
+        }
+
+        /// <inheritdoc cref="ScalarConstants.Double_MantissaMask"/>
+        public static Vector256<double> Double_MantissaMask {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+                //return Vector256s<double>.MantissaMask;
+                return Vector256.Create(ScalarConstants.DoubleVal_MantissaMask);
+            }
+        }
+
+        /// <inheritdoc cref="ScalarConstants.Double_NonSignMask"/>
+        public static Vector256<double> Double_NonSignMask {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
 #if USE_VECTOR_CREATE
-                return Vector256.Create(0x7F800000).AsSingle();
+                return Vector256.Create(ScalarConstants.Double_NonSignMask).AsDouble();
 #else
-                return Vector256s<float>.ExponentMask;
+                return Vector256s<double>.NonSignMask;
 #endif // USE_VECTOR_CREATE
             }
         }
 
-        /// <summary>Exponent mask (指数掩码) - Double.</summary>
-        public static Vector256<double> ExponentMask_Double {
+        /// <inheritdoc cref="ScalarConstants.Double_NonExponentMask"/>
+        public static Vector256<double> Double_NonExponentMask {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if USE_VECTOR_CREATE
-                return Vector256.Create(0x7FF0000000000000L).AsDouble();
-#else
-                return Vector256s<double>.ExponentMask;
-#endif // USE_VECTOR_CREATE
+                //return Vector256s<double>.NonExponentMask;
+                return Vector256.Create(ScalarConstants.DoubleVal_NonExponentMask);
             }
         }
 
-        /// <summary>Mantissa mask (尾数掩码) - Single.</summary>
-        public static Vector256<float> MantissaMask_Single {
+        /// <inheritdoc cref="ScalarConstants.Double_NonMantissaMask"/>
+        public static Vector256<double> Double_NonMantissaMask {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if USE_VECTOR_CREATE
-                return Vector256.Create(0x007FFFFF).AsSingle();
-#else
-                return Vector256s<float>.MantissaMask;
-#endif // USE_VECTOR_CREATE
+                //return Vector256s<double>.NonMantissaMask;
+                return Vector256.Create(ScalarConstants.DoubleVal_NonMantissaMask);
             }
         }
 
-        /// <summary>Mantissa mask (尾数掩码) - Double.</summary>
-        public static Vector256<double> MantissaMask_Double {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get {
-#if USE_VECTOR_CREATE
-                return Vector256.Create(0x000FFFFFFFFFFFFFL).AsDouble();
-#else
-                return Vector256s<double>.MantissaMask;
-#endif // USE_VECTOR_CREATE
-            }
-        }
+        // -- Vectors_T: Vector256s<UInt16> --
 
-        /// <summary>Value 255 (byte.MaxValue) - UInt16.</summary>
+        /// <inheritdoc cref="Vector256s{ushort}.VMaxByte"/>
+        /// <remarks>For UInt16.</remarks>
         [CLSCompliant(false)]
-        public static Vector256<ushort> VMaxByte_UInt16 {
+        public static Vector256<ushort> UInt16_VMaxByte {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
 #if USE_VECTOR_CREATE
@@ -107,6 +162,8 @@ namespace Zyl.VectorTraits.Impl {
 #endif // USE_VECTOR_CREATE
             }
         }
+
+        // -- Vectors_T: others --
 
         /// <summary>
         /// Get bits mask by index (根据索引获取位集掩码). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>).
