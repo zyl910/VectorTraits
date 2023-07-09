@@ -439,12 +439,12 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64_Range52_Impl(Vector256<double> value) {
                 value = Avx.RoundToZero(value); // Truncate.
-                return ConvertToInt64_Range52_NoTruncate(value);
+                return ConvertToInt64_Range52RoundToEven(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_Range52(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> ConvertToInt64_Range52_NoTruncate(Vector256<double> value) {
+            public static Vector256<long> ConvertToInt64_Range52RoundToEven(Vector256<double> value) {
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
                 // answered Dec 14, 2016 at 17:23 Mysticial
                 // //  Only works for inputs in the range: [-2^51, 2^51]

@@ -355,7 +355,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector128s.GetSupportedMethodList<Func<Vector128<T>, Vector128<long>>>("ConvertToInt64_Range52", "ConvertToInt64_Range52_Impl", "ConvertToInt64_Range52_NoTruncate");
+            var funcList = Vector128s.GetSupportedMethodList<Func<Vector128<T>, Vector128<long>>>("ConvertToInt64_Range52", "ConvertToInt64_Range52_Impl", "ConvertToInt64_Range52RoundToEven");
             foreach (var func in funcList) {
                 Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }

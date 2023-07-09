@@ -278,8 +278,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<long> ConvertToInt64_Range52_NoTruncate(Vector128<double> value) {
-                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_NoTruncate
+            public static Vector128<long> ConvertToInt64_Range52RoundToEven(Vector128<double> value) {
+                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52RoundToEven
                 Vector128<long> magicNumber = Vector128.Create(ScalarConstants.DoubleVal_2Pow52_2Pow51).AsInt64(); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector128<double> x = Add(value, magicNumber.AsDouble());
                 Vector128<long> result = AdvSimd.Subtract(x.AsInt64(), magicNumber);
@@ -356,7 +356,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ConvertToUInt64_Range52_Impl(Vector128<double> value) {
-                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_NoTruncate
+                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52RoundToEven
                 Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
                 // value = YTruncate(value); // Truncate.
                 // Vector128<double> x = Add(value, magicNumber.AsDouble());
@@ -372,7 +372,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ConvertToUInt64_Range52_NoTruncate(Vector128<double> value) {
-                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_NoTruncate
+                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52RoundToEven
                 Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
                 Vector128<double> x = Add(value, magicNumber.AsDouble());
                 Vector128<ulong> result = AdvSimd.Xor(x.AsUInt64(), magicNumber);

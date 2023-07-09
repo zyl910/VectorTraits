@@ -347,7 +347,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if NET7_0_OR_GREATER
                 // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_Impl
                 value = YTruncate(value); // Truncate.
-                return ConvertToInt64_Range52_NoTruncate(value);
+                return ConvertToInt64_Range52RoundToEven(value);
 #else
                 return ConvertToInt64_Basic(value);
 #endif // NET7_0_OR_GREATER
@@ -355,9 +355,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<long> ConvertToInt64_Range52_NoTruncate(Vector128<double> value) {
+            public static Vector128<long> ConvertToInt64_Range52RoundToEven(Vector128<double> value) {
 #if NET7_0_OR_GREATER
-                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_NoTruncate
+                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52RoundToEven
                 Vector128<long> magicNumber = Vector128.Create(ScalarConstants.DoubleVal_2Pow52_2Pow51).AsInt64(); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector128<double> x = Vector128.Add(value, magicNumber.AsDouble());
                 Vector128<long> result = Vector128.Subtract(x.AsInt64(), magicNumber);

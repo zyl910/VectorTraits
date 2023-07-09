@@ -245,13 +245,13 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<long> ConvertToInt64_Range52_Impl(Vector<double> value) {
                 // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_Impl
                 value = YTruncate(value); // Truncate.
-                return ConvertToInt64_Range52_NoTruncate(value);
+                return ConvertToInt64_Range52RoundToEven(value);
             }
 
             /// <inheritdoc cref="IVectorTraits.ConvertToInt64_Range52(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<long> ConvertToInt64_Range52_NoTruncate(Vector<double> value) {
-                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_NoTruncate
+            public static Vector<long> ConvertToInt64_Range52RoundToEven(Vector<double> value) {
+                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52RoundToEven
                 Vector<double> magicNumber = new Vector<double>(ScalarConstants.DoubleVal_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector<double> x = Vector.Add(value, magicNumber);
                 Vector<long> result = Vector.Subtract(x.AsInt64(), magicNumber.AsInt64());
