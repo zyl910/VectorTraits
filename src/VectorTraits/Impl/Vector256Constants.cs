@@ -1,7 +1,9 @@
 ﻿#if NET5_0_OR_GREATER
-#define USE_VECTOR_CREATE // .NET5+ has better performance .
-#else
+#define USE_VECTOR_CREATE // .NET5+ has better performance (Without int64/uint64 on 32bit system) .
 #endif // NET5_0_OR_GREATER
+#if NET7_0_OR_GREATER
+#define USE_VECTOR_CREATE_INT64 // .NET7+ has better performance of int64/uint64 on 32bit system .
+#endif // NET7_0_OR_GREATER
 
 using System;
 using System.Collections.Generic;
@@ -91,8 +93,14 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<double> Double_SignMask {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if USE_VECTOR_CREATE
+#if USE_VECTOR_CREATE_INT64
                 return Vector256.Create(ScalarConstants.Double_SignMask).AsDouble();
+#elif USE_VECTOR_CREATE
+                if (IntPtr.Size > BitOfByte.Bit32) {
+                    return Vector256.Create(ScalarConstants.Double_SignMask).AsDouble();
+                } else {
+                    return Vector256s<double>.SignMask;
+                }
 #else
                 return Vector256s<double>.SignMask;
 #endif // USE_VECTOR_CREATE
@@ -121,8 +129,14 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<double> Double_NonSignMask {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if USE_VECTOR_CREATE
+#if USE_VECTOR_CREATE_INT64
                 return Vector256.Create(ScalarConstants.Double_NonSignMask).AsDouble();
+#elif USE_VECTOR_CREATE
+                if (IntPtr.Size > BitOfByte.Bit32) {
+                    return Vector256.Create(ScalarConstants.Double_NonSignMask).AsDouble();
+                } else {
+                    return Vector256s<double>.NonSignMask;
+                }
 #else
                 return Vector256s<double>.NonSignMask;
 #endif // USE_VECTOR_CREATE
@@ -170,8 +184,14 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<long> Int64_MinValue {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if USE_VECTOR_CREATE
+#if USE_VECTOR_CREATE_INT64
                 return Vector256.Create(long.MinValue);
+#elif USE_VECTOR_CREATE
+                if (IntPtr.Size > BitOfByte.Bit32) {
+                    return Vector256.Create(long.MinValue);
+                } else {
+                    return Vector256s<long>.MinValue;
+                }
 #else
                 return Vector256s<long>.MinValue;
 #endif // USE_VECTOR_CREATE
@@ -181,21 +201,27 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>Int64 - `long.MinValue + 4 = 0x8000000000000004 = -9223372036854775804`.</summary>
         public static Vector256<long> Int64_MinValue_4 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if USE_VECTOR_CREATE
+#if USE_VECTOR_CREATE_INT64
             get => Vector256.Create(long.MinValue + 4);
         }
 #else
             get;
         } = Vector256.Create(long.MinValue + 4);
-#endif // USE_VECTOR_CREATE
+#endif // USE_VECTOR_CREATE_INT64
 
         /// <inheritdoc cref="Vector256s{long}.VMaxInt32"/>
         /// <remarks>For Int64.</remarks>
         public static Vector256<long> Int64_VMaxInt32 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if USE_VECTOR_CREATE
+#if USE_VECTOR_CREATE_INT64
                 return Vector256.Create((long)int.MaxValue);
+#elif USE_VECTOR_CREATE
+                if (IntPtr.Size > BitOfByte.Bit32) {
+                    return Vector256.Create((long)int.MaxValue);
+                } else {
+                    return Vector256s<long>.VMaxInt32;
+                }
 #else
                 return Vector256s<long>.VMaxInt32;
 #endif // USE_VECTOR_CREATE
@@ -207,8 +233,14 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<long> Int64_VMinInt32 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if USE_VECTOR_CREATE
+#if USE_VECTOR_CREATE_INT64
                 return Vector256.Create((long)int.MinValue);
+#elif USE_VECTOR_CREATE
+                if (IntPtr.Size > BitOfByte.Bit32) {
+                    return Vector256.Create((long)int.MinValue);
+                } else {
+                    return Vector256s<long>.VMinInt32;
+                }
 #else
                 return Vector256s<long>.VMinInt32;
 #endif // USE_VECTOR_CREATE
@@ -220,8 +252,14 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<long> Int64_VMaxUInt32 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if USE_VECTOR_CREATE
+#if USE_VECTOR_CREATE_INT64
                 return Vector256.Create((long)uint.MaxValue);
+#elif USE_VECTOR_CREATE
+                if (IntPtr.Size > BitOfByte.Bit32) {
+                    return Vector256.Create((long)uint.MaxValue);
+                } else {
+                    return Vector256s<long>.VMaxUInt32;
+                }
 #else
                 return Vector256s<long>.VMaxUInt32;
 #endif // USE_VECTOR_CREATE
@@ -581,14 +619,14 @@ namespace Zyl.VectorTraits.Impl {
 #endif // USE_VECTOR_CREATE_BY_ARRAY
         }
 
-        #endregion // Vectors_T
+#endregion // Vectors_T
 
-        #region Shared
+                #region Shared
         // == Shared ==
 
-        #endregion // Shared
+                #endregion // Shared
 
-        #region TraitsMethod
+                #region TraitsMethod
         // == TraitsMethod ==
 
         /// <summary>ExtractMostSignificantBits - Shuffle - Get high byte of 16bit.</summary>
@@ -805,7 +843,7 @@ namespace Zyl.VectorTraits.Impl {
             return m_YShuffleG4_UInt64_UInt32Indices[(nint)(uint)index];
         }
 
-        #endregion // TraitsMethod
+                #endregion // TraitsMethod
 
         static Vector256Constants() {
             // == YShuffleG4 ==
@@ -880,5 +918,5 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 #endif
-    }
-}
+            }
+        }
