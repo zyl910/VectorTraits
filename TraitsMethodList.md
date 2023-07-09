@@ -16,13 +16,13 @@ List (列表):
   Mnemonic: `rt[i] := (Double)(value[i])` .
 - `ConvertToInt32`: Convert to a vector whose elements are of type Int32 (转换为元素类型是Int32的向量).
   Mnemonic: `rt[i] := (Int32)(value[i])` .
-- `ConvertToInt64[/_Range52]`: Convert to a vector whose elements are of type Int64 (转换为元素类型是Int64的向量).
+- `ConvertToInt64[/_Range52/Range52RoundToEven]`: Convert to a vector whose elements are of type Int64 (转换为元素类型是Int64的向量).
   Mnemonic: `rt[i] := (Int64)(value[i])` .
 - `ConvertToSingle`: Convert to a vector whose elements are of type Single (转换为元素类型是Single的向量).
   Mnemonic: `rt[i] := (Single)(value[i])` .
 - `ConvertToUInt32`: Convert to a vector whose elements are of type UInt32 (转换为元素类型是UInt32的向量).
   Mnemonic: `rt[i] := (UInt32)(value[i])` .
-- `ConvertToUInt64[/_Range52]`: Convert to a vector whose elements are of type UInt64 (转换为元素类型是UInt64的向量).
+- `ConvertToUInt64[/_Range52/Range52RoundToEven]`: Convert to a vector whose elements are of type UInt64 (转换为元素类型是UInt64的向量).
   Mnemonic: `rt[i] := (UInt64)(value[i])` .
 - `ExtractMostSignificantBits`①: Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
   Mnemonic: `rt |= getMostSignificantBit(vector[i]) << i = ( vector[i] >>> (sizeof(T)*8-1) ) << i` .

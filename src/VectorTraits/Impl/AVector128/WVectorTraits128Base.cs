@@ -353,7 +353,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #endif // NET7_0_OR_GREATER
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52RoundToEven(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64_Range52RoundToEven(Vector128<double> value) {
 #if NET7_0_OR_GREATER
@@ -530,18 +530,18 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if NET7_0_OR_GREATER
                 // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52_Impl
                 value = YTruncate(value); // Truncate.
-                return ConvertToUInt64_Range52_NoTruncate(value);
+                return ConvertToUInt64_Range52RoundToEven(value);
 #else
                 return ConvertToUInt64_Basic(value);
 #endif // NET7_0_OR_GREATER
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52(Vector128{double})"/>
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52RoundToEven(Vector128{double})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ulong> ConvertToUInt64_Range52_NoTruncate(Vector128<double> value) {
+            public static Vector128<ulong> ConvertToUInt64_Range52RoundToEven(Vector128<double> value) {
 #if NET7_0_OR_GREATER
-                // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52_NoTruncate
+                // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52RoundToEven
                 Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
                 Vector128<double> x = Vector128.Add(value, magicNumber.AsDouble());
                 Vector128<ulong> result = Vector128.Xor(x.AsUInt64(), magicNumber);

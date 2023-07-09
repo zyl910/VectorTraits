@@ -273,6 +273,16 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_Range52RoundToEven(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> ConvertToInt64_Range52RoundToEven(Vector256<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToInt64_Range52RoundToEven(value);
+#else
+            return _instance.ConvertToInt64_Range52RoundToEven(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
 
         /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle_AcceleratedTypes"/>
         public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {
@@ -360,6 +370,17 @@ namespace Zyl.VectorTraits {
             return BaseStatics.ConvertToUInt64_Range52(value);
 #else
             return _instance.ConvertToUInt64_Range52(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt64_Range52RoundToEven(Vector256{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> ConvertToUInt64_Range52RoundToEven(Vector256<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToUInt64_Range52RoundToEven(value);
+#else
+            return _instance.ConvertToUInt64_Range52RoundToEven(value);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 

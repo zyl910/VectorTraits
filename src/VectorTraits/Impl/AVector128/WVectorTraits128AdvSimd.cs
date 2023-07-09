@@ -276,7 +276,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return result;
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52RoundToEven(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64_Range52RoundToEven(Vector128<double> value) {
                 // See more: WVectorTraits256Avx2.ConvertToInt64_Range52RoundToEven
@@ -368,10 +368,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return result;
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52(Vector128{double})"/>
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52RoundToEven(Vector128{double})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ulong> ConvertToUInt64_Range52_NoTruncate(Vector128<double> value) {
+            public static Vector128<ulong> ConvertToUInt64_Range52RoundToEven(Vector128<double> value) {
                 // See more: WVectorTraits256Avx2.ConvertToInt64_Range52RoundToEven
                 Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
                 Vector128<double> x = Add(value, magicNumber.AsDouble());

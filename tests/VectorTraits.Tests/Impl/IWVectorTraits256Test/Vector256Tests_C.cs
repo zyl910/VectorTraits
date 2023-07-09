@@ -796,7 +796,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<ulong>>>("ConvertToUInt64_Range52_Impl", "ConvertToUInt64_Range52_NoTruncate");
+            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<ulong>>>("ConvertToUInt64_Range52_Impl", "ConvertToUInt64_Range52RoundToEven");
             foreach (var func in funcList) {
                 Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }

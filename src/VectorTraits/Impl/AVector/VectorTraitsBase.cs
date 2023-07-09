@@ -248,7 +248,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return ConvertToInt64_Range52RoundToEven(value);
             }
 
-            /// <inheritdoc cref="IVectorTraits.ConvertToInt64_Range52(Vector{double})"/>
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt64_Range52RoundToEven(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ConvertToInt64_Range52RoundToEven(Vector<double> value) {
                 // See more: WVectorTraits256Avx2.ConvertToInt64_Range52RoundToEven
@@ -290,10 +290,10 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 maskEnd = Vector.Xor(maskEnd, allBitsSet.AsInt64()); // maskEnd[i] = ~(rangeEnd[i] > valueAbs[i]) = (valueAbs[i] >= rangeEnd[i]) //Vector.GreaterThanOrEqual(valueAbs, rangeEnd);
                 Vector<double> maskRawPow = Vector.Subtract(expMinuend.AsUInt64(), valueExpData.AsUInt64()).AsDouble(); // If valueExpData is `(1023 + e)<<52`, `expMinuend-valueExpData` exponent field will be `(1023*2 + 52) - (1023 + e) = 1023 + (52-e)`
                 Vector<double> valueFix = Vector.BitwiseAnd(value, maskBegin.AsDouble());
-                //Vector<long> mask = ConvertToUInt64_Range52_NoTruncate(maskRawPow).AsInt64();
+                //Vector<long> mask = ConvertToUInt64_Range52RoundToEven(maskRawPow).AsInt64();
                 Vector<long> mask = Vector.Add(maskRawPow, rangeEnd).AsInt64();
                 Vector<long> nonMantissaMask = new Vector<double>(ScalarConstants.DoubleVal_NonMantissaMask).AsInt64();
-                mask = Vector.Xor(mask, rangeEnd.AsInt64()); // mask = ConvertToUInt64_Range52_NoTruncate(maskRawPow).AsInt64();
+                mask = Vector.Xor(mask, rangeEnd.AsInt64()); // mask = ConvertToUInt64_Range52RoundToEven(maskRawPow).AsInt64();
                 mask = Vector.Subtract(Vector<long>.Zero, mask); // The mask is `~(pow(2,52-e)-1)`. Because `-(x) = ~x+1`, the inverse is `~(x-1) = -(x) = 0 - x`.
                 mask = Vector.ConditionalSelect(maskless2, nonMantissaMask, mask);
                 mask = Vector.BitwiseOr(mask, maskEnd.AsInt64());
@@ -386,14 +386,14 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<ulong> ConvertToUInt64_Range52_Impl(Vector<double> value) {
                 // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52_Impl
                 value = YTruncate(value); // Truncate.
-                return ConvertToUInt64_Range52_NoTruncate(value);
+                return ConvertToUInt64_Range52RoundToEven(value);
             }
 
-            /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_Range52(Vector{double})"/>
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_Range52RoundToEven(Vector{double})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ulong> ConvertToUInt64_Range52_NoTruncate(Vector<double> value) {
-                // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52_NoTruncate
+            public static Vector<ulong> ConvertToUInt64_Range52RoundToEven(Vector<double> value) {
+                // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52RoundToEven
                 Vector<double> magicNumber = new Vector<double>(ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
                 Vector<double> x = Vector.Add(value, magicNumber.AsDouble());
                 Vector<ulong> result = Vector.Xor(x.AsUInt64(), magicNumber.AsUInt64());

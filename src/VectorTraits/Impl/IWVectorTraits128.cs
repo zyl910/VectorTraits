@@ -124,15 +124,17 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <remarks>
         /// <para>Meaning of suffixes (后缀的含义).</para>
-        /// <para>- (none): Normal (常规). Full 64-bit integer range (完全的64位整数范围).</para>
-        /// <para>- Range52: Supports up to 52-bit integer range (最多支持52位整数范围).</para>
+        /// <para>- (none): Normal (常规). Full 64-bit integer range (完全的64位整数范围). Rounding mode is truncate(round to zero) (舍入模式为截断(舍入到零)).</para>
+        /// <para>- Range52: Supports up to 52-bit integer range (最多支持52位整数范围). Rounding mode is truncate(round to zero) (舍入模式为截断(舍入到零)).</para>
+        /// <para>- Range52RoundToEven: Supports up to 52-bit integer range (最多支持52位整数范围). Rounding mode is round to even(round to nearest integer) (舍入模式为舍入到偶数(舍入到最近整数)).</para>
         /// </remarks>
         /// <seealso cref="ConvertToInt64"/>
         /// <seealso cref="ConvertToInt64_Range52"/>
+        /// <seealso cref="ConvertToInt64_Range52RoundToEven"/>
         TypeCodeFlags ConvertToInt64_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Convert to a vector whose elements are of type Int64 (转换为元素类型是Int64的向量).
+        /// Convert to a vector whose elements are of type Int64, rounding mode is truncate(round to zero) (转换为元素类型是Int64的向量, 舍入模式为截断(舍入到零)).
         /// Mnemonic: <c>rt[i] := (Int64)(value[i])</c>.
         /// </summary>
         /// <param name="value">The source vector (源向量).</param>
@@ -142,7 +144,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<long> ConvertToInt64(Vector128<double> value);
 
         /// <summary>
-        /// Convert to a vector whose elements are of type Int64 (转换为元素类型是Int64的向量). Works for inputs in the range: [-2^51, 2^51).
+        /// Convert to a vector whose elements are of type Int64, rounding mode is truncate(round to zero) (转换为元素类型是Int64的向量, 舍入模式为截断(舍入到零)). Works for inputs in the range: [-2^51, 2^51).
         /// Mnemonic: <c>rt[i] := (Int64)(value[i])</c>.
         /// </summary>
         /// <param name="value">The source vector (源向量).</param>
@@ -150,6 +152,15 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ConvertToInt64_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ConvertToInt64(Vector128{double})" />
         Vector128<long> ConvertToInt64_Range52(Vector128<double> value);
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type Int64, rounding mode is round to even(round to nearest integer) (转换为元素类型是Int64的向量, 舍入模式为舍入到偶数(舍入到最近整数)). Works for inputs in the range: [-2^51, 2^51).
+        /// Mnemonic: <c>rt[i] := (Int64)(round_to_even(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToInt64_AcceleratedTypes"/>
+        Vector128<long> ConvertToInt64_Range52RoundToEven(Vector128<double> value);
 
 
         /// <summary>
@@ -201,15 +212,17 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <remarks>
         /// <para>Meaning of suffixes (后缀的含义).</para>
-        /// <para>- (none): Normal (常规). Full 64-bit integer range (完全的64位整数范围).</para>
-        /// <para>- Range52: Supports up to 52-bit integer range (最多支持52位整数范围).</para>
+        /// <para>- (none): Normal (常规). Full 64-bit integer range (完全的64位整数范围). Rounding mode is truncate(round to zero) (舍入模式为截断(舍入到零)).</para>
+        /// <para>- Range52: Supports up to 52-bit integer range (最多支持52位整数范围). Rounding mode is truncate(round to zero) (舍入模式为截断(舍入到零)).</para>
+        /// <para>- Range52RoundToEven: Supports up to 52-bit integer range (最多支持52位整数范围). Rounding mode is round to even(round to nearest integer) (舍入模式为舍入到偶数(舍入到最近整数)).</para>
         /// </remarks>
         /// <seealso cref="ConvertToUInt64"/>
         /// <seealso cref="ConvertToUInt64_Range52"/>
+        /// <seealso cref="ConvertToUInt64_Range52RoundToEven"/>
         TypeCodeFlags ConvertToUInt64_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Convert to a vector whose elements are of type UInt64 (转换为元素类型是UInt64的向量)..
+        /// Convert to a vector whose elements are of type UInt64, rounding mode is truncate(round to zero) (转换为元素类型是UInt64的向量, 舍入模式为截断(舍入到零)).
         /// Mnemonic: <c>rt[i] := (UInt64)(value[i])</c>.
         /// </summary>
         /// <param name="value">The source vector (源向量).</param>
@@ -219,7 +232,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<ulong> ConvertToUInt64(Vector128<double> value);
 
         /// <summary>
-        /// Convert to a vector whose elements are of type UInt64 (转换为元素类型是UInt64的向量). Works for inputs in the range: [0, 2^52).
+        /// Convert to a vector whose elements are of type UInt64, rounding mode is truncate(round to zero) (转换为元素类型是UInt64的向量, 舍入模式为截断(舍入到零)). Works for inputs in the range: [0, 2^52).
         /// Mnemonic: <c>rt[i] := (UInt64)(value[i])</c>.
         /// </summary>
         /// <param name="value">The source vector (源向量).</param>
@@ -227,6 +240,15 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="ConvertToUInt64_AcceleratedTypes"/>
         /// <seealso cref="Vector128.ConvertToUInt64(Vector128{double})" />
         Vector128<ulong> ConvertToUInt64_Range52(Vector128<double> value);
+
+        /// <summary>
+        /// Convert to a vector whose elements are of type UInt64, rounding mode is round to even(round to nearest integer) (转换为元素类型是UInt64的向量, 舍入模式为舍入到偶数(舍入到最近整数)). Works for inputs in the range: [0, 2^52).
+        /// Mnemonic: <c>rt[i] := (UInt64)(round_to_even(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The source vector (源向量).</param>
+        /// <returns>The converted vector (转换后的向量).</returns>
+        /// <seealso cref="ConvertToUInt64_AcceleratedTypes"/>
+        Vector128<ulong> ConvertToUInt64_Range52RoundToEven(Vector128<double> value);
 
 
         /// <summary>
