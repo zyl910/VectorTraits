@@ -21,7 +21,7 @@ namespace Zyl.VectorTraits.Benchmarks.NetFw {
             }
             writer.WriteLine("benchmarkMode:\t{0}", benchmarkMode);
             if (benchmarkMode == 3) {
-                AloneTestUtil.AloneTest(writer);
+                AloneTestUtil.AloneTestByCommand(writer, args);
                 //} else if (benchmarkMode > 0) {
                 //    Summary summary = BenchmarkRunner.Run<ShiftLeftBenchmark_Int16>();
                 //    var summary = BenchmarkRunner.Run(typeof(ShiftLeftBenchmark_Int16).Assembly);
@@ -33,7 +33,7 @@ namespace Zyl.VectorTraits.Benchmarks.NetFw {
                 writer.WriteLine();
                 BenchmarkMain.RunBenchmark(writer, indent);
                 writer.WriteLine();
-                AloneTestUtil.AloneTest(writer);
+                AloneTestUtil.AloneTestByCommand(writer, args);
             }
             //Console.ReadLine();
         }

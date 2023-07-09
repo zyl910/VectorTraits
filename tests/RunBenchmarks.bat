@@ -2,6 +2,8 @@
 cd /d "%~dp0"
 @ECHO OFF
 
+SET my_args=-accelerated0 -fixedVector0 -test0
+
 :Check_netcore3_1
 SET my_path=netcoreapp3.1/VectorTraits.Benchmarks.exe
 IF EXIST "%my_path%" GOTO Run_netcore3_1
@@ -17,7 +19,7 @@ del netcore3.1.txt
 GOTO Done_netcore3_1
 :Run_netcore3_1
 @ECHO ON
-start /realtime /wait /b %my_path% >netcore3.1.txt
+start /realtime /wait /b %my_path% %my_args% >netcore3.1.txt
 @ECHO OFF
 :Done_netcore3_1
 
@@ -36,7 +38,7 @@ del net5.0.txt
 GOTO Done_net5_0
 :Run_net5_0
 @ECHO ON
-start /realtime /wait /b %my_path% >net5.0.txt
+start /realtime /wait /b %my_path% %my_args% >net5.0.txt
 @ECHO OFF
 :Done_net5_0
 
@@ -55,7 +57,7 @@ del net6.0.txt
 GOTO Done_net6_0
 :Run_net6_0
 @ECHO ON
-start /realtime /wait /b %my_path% >net6.0.txt
+start /realtime /wait /b %my_path% %my_args% >net6.0.txt
 @ECHO OFF
 :Done_net6_0
 
@@ -74,7 +76,7 @@ del net7.0.txt
 GOTO Done_net7_0
 :Run_net7_0
 @ECHO ON
-start /realtime /wait /b %my_path% >net7.0.txt
+start /realtime /wait /b %my_path% %my_args% >net7.0.txt
 @ECHO OFF
 :Done_net7_0
 

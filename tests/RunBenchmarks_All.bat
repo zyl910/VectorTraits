@@ -2,6 +2,8 @@
 cd /d "%~dp0"
 @ECHO OFF
 
+SET my_args=-accelerated0 -fixedVector0 -test0
+
 :Check_netFw
 SET my_path=VectorTraits.Benchmarks.NetFw.exe
 IF EXIST "%my_path%" GOTO Run_netFw
@@ -19,7 +21,7 @@ del netFw.txt
 GOTO Done_netFw
 :Run_netFw
 @ECHO ON
-start /realtime /wait /b %my_path% >netFw.txt
+start /realtime /wait /b %my_path% %my_args% >netFw.txt
 @ECHO OFF
 :Done_netFw
 
@@ -40,7 +42,7 @@ del netcore2.1.txt
 GOTO Done_netcore2_1
 :Run_netcore2_1
 @ECHO ON
-start /realtime /wait /b dotnet %my_path% >netcore2.1.txt
+start /realtime /wait /b dotnet %my_path% %my_args% >netcore2.1.txt
 @ECHO OFF
 :Done_netcore2_1
 

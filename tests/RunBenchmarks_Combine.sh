@@ -3,6 +3,8 @@
 
 # == RunBenchmarks ==
 
+my_args="-accelerated0 -fixedVector0 -test0"
+
 exe_file="netcoreapp3.1/VectorTraits.Benchmarks.dll"
 log_file="netcore3.1.txt"
 if [ ! -f "$exe_file" ];then
@@ -19,7 +21,7 @@ if [ ! -f "$exe_file" ];then
 fi
 if [ -n "$exe_file" ]; then 
   set -x
-  dotnet $exe_file >$log_file
+  dotnet $exe_file $my_args >$log_file
   set +x
 else 
   set -x
@@ -43,7 +45,7 @@ if [ ! -f "$exe_file" ];then
 fi
 if [ -n "$exe_file" ]; then 
   set -x
-  dotnet $exe_file >$log_file
+  dotnet $exe_file $my_args >$log_file
   set +x
 else 
   set -x
@@ -67,7 +69,7 @@ if [ ! -f "$exe_file" ];then
 fi
 if [ -n "$exe_file" ]; then 
   set -x
-  dotnet $exe_file >$log_file
+  dotnet $exe_file $my_args >$log_file
   set +x
 else 
   set -x
@@ -91,7 +93,7 @@ if [ ! -f "$exe_file" ];then
 fi
 if [ -n "$exe_file" ]; then 
   set -x
-  dotnet $exe_file >$log_file
+  dotnet $exe_file $my_args >$log_file
   set +x
 else 
   set -x

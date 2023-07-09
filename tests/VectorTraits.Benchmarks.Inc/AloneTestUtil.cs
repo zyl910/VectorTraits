@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -22,10 +23,51 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <summary>Indent next separator (增加缩进的分隔符).</summary>
         internal static readonly string IndentNextSeparator = VectorTextUtil.IndentNextSeparator;
 
-        /// <summary>Show accelerated info.</summary>
-        internal static readonly bool ShowAccelerated = true;
-        /// <summary>Show tests.</summary>
-        internal static readonly bool ShowTest = false;
+        /// <summary>Show accelerated info. Command is `-accelerated`.</summary>
+        internal static bool ShowAccelerated = true;
+        /// <summary>Show tests. Command is `-test`.</summary>
+        internal static bool ShowTest = false;
+        /// <summary>Show fixed width Vector. Command is `-fixedVector`.</summary>
+        internal static bool ShowFixedVector = true;
+
+        /// <summary>
+        /// Alone test by commnad.
+        /// </summary>
+        /// <param name="args">Command line args.</param>
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static void AloneTestByCommand(TextWriter writer, string[] args) {
+            ParseCommand(args);
+            //Debugger.Break();
+            AloneTest(writer);
+        }
+
+        /// <summary>
+        /// Parse command line args.
+        /// </summary>
+        /// <param name="args">Command line args.</param>
+        public static void ParseCommand(string[] args) {
+            if (null == args) return;
+            foreach(string arg in args) {
+                if ("-accelerated".Equals(arg, StringComparison.OrdinalIgnoreCase)) {
+                    ShowAccelerated = true;
+                }
+                if ("-accelerated0".Equals(arg, StringComparison.OrdinalIgnoreCase)) {
+                    ShowAccelerated = false;
+                }
+                if ("-test".Equals(arg, StringComparison.OrdinalIgnoreCase)) {
+                    ShowTest = true;
+                }
+                if ("-test0".Equals(arg, StringComparison.OrdinalIgnoreCase)) {
+                    ShowTest = false;
+                }
+                if ("-fixedVector".Equals(arg, StringComparison.OrdinalIgnoreCase)) {
+                    ShowFixedVector = true;
+                }
+                if ("-fixedVector0".Equals(arg, StringComparison.OrdinalIgnoreCase)) {
+                    ShowFixedVector = false;
+                }
+            }
+        }
 
         /// <summary>
         /// Alone test.
@@ -33,8 +75,10 @@ namespace Zyl.VectorTraits.Benchmarks {
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static void AloneTest(TextWriter writer) {
             AloneTestVector(writer);
-            AloneTestVector128(writer);
-            AloneTestVector256(writer);
+            if (ShowFixedVector) {
+                AloneTestVector128(writer);
+                AloneTestVector256(writer);
+            }
 
             // -- IntroDisassemblyDry --
             //var o = new IntroDisassemblyDry();

@@ -18,10 +18,10 @@ namespace Zyl.VectorTraits.Benchmarks.NetCore {
             }
             writer.WriteLine("benchmarkMode:\t{0}", benchmarkMode);
             if (benchmarkMode == 3) {
-                AloneTestUtil.AloneTest(writer);
-            //} else if (benchmarkMode > 0) {
-            //    Summary summary = BenchmarkRunner.Run<ShiftLeftBenchmark_Int16>();
-            //    var summary = BenchmarkRunner.Run(typeof(ShiftLeftBenchmark_Int16).Assembly);
+                AloneTestUtil.AloneTestByCommand(writer, args);
+                //} else if (benchmarkMode > 0) {
+                //    Summary summary = BenchmarkRunner.Run<ShiftLeftBenchmark_Int16>();
+                //    var summary = BenchmarkRunner.Run(typeof(ShiftLeftBenchmark_Int16).Assembly);
             } else {
                 string indent = "";
                 writer.WriteLine();
@@ -30,7 +30,7 @@ namespace Zyl.VectorTraits.Benchmarks.NetCore {
                 writer.WriteLine();
                 BenchmarkMain.RunBenchmark(writer, indent);
                 writer.WriteLine();
-                AloneTestUtil.AloneTest(writer);
+                AloneTestUtil.AloneTestByCommand(writer, args);
             }
             //Console.ReadLine();
         }

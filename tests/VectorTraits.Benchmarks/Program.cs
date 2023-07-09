@@ -29,7 +29,7 @@ namespace Zyl.VectorTraits.Benchmarks {
             }
             writer.WriteLine("benchmarkMode:\t{0}", benchmarkMode);
             if (benchmarkMode == 3) {
-                AloneTestUtil.AloneTest(writer);
+                AloneTestUtil.AloneTestByCommand(writer, args);
             } else if (benchmarkMode > 0) {
                 Architecture architecture = RuntimeInformation.OSArchitecture;
                 var config = DefaultConfig.Instance;
@@ -57,7 +57,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                 writer.WriteLine();
                 BenchmarkMain.RunBenchmark(writer, indent);
                 writer.WriteLine();
-                AloneTestUtil.AloneTest(writer);
+                AloneTestUtil.AloneTestByCommand(writer, args);
             }
             //Console.ReadLine();
         }

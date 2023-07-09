@@ -1,4 +1,5 @@
 ﻿#undef BENCHMARKS_OFF
+//#undef BENCHMARKS_128
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -203,6 +204,11 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             }
             dstTMy = StaticSumBase_Range52_Impl(srcArray, srcArray.Length);
             CheckResult("SumBase_Range52_Impl");
+            //if (BenchmarkUtil.IsLastRun) {
+            //    if (dstTMy != baselineTMy) {
+            //        Console.WriteLine(string.Format("Check `{0}` fail! {1}!={2}", "SumBase_Range52_Impl", dstInt64, baselineInt64));
+            //    }
+            //}
         }
 
 #endif // BENCHMARKS_ALGORITHM
