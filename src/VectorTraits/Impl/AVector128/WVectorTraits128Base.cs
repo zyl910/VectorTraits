@@ -371,7 +371,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YTruncate(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YTruncate(Vector128<double> value) {
-                Vector128<double> signMask = Vector128.Create(long.MinValue).AsDouble();
+                Vector128<double> signMask = Vector128Constants.Double_SignMask;
                 Vector128<double> valueAbs = Vector128.AndNot(value, signMask);
                 Vector128<double> signData = Vector128.BitwiseAnd(value, signMask);
                 Vector128<double> rt = Floor(valueAbs); // Vector128.Floor need .NET 5+ .

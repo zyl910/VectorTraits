@@ -155,8 +155,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<int> YNarrowSaturate(Vector128<long> lower, Vector128<long> upper) {
                 //Vector128<long> amin = Vector128s<long>.VMinInt32;
                 //Vector128<long> amax = Vector128s<long>.VMaxInt32;
-                Vector128<long> amin = Vector128.Create((long)int.MinValue); // .NET5+ has better performance .
-                Vector128<long> amax = Vector128.Create((long)int.MaxValue);
+                Vector128<long> amin = Vector128Constants.Int64_VMinInt32;
+                Vector128<long> amax = Vector128Constants.Int64_VMaxInt32;
                 Vector128<long> l = YClamp(lower, amin, amax);
                 Vector128<long> u = YClamp(upper, amin, amax);
                 return Narrow(l, u);
@@ -167,7 +167,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YNarrowSaturate(Vector128<ulong> lower, Vector128<ulong> upper) {
                 //Vector128<ulong> amax = Vector128s<ulong>.VMaxUInt32;
-                Vector128<ulong> amax = Vector128.Create((ulong)uint.MaxValue); // .NET5+ has better performance .
+                Vector128<ulong> amax = Vector128Constants.Int64_VMaxUInt32.AsUInt64();
                 Vector128<ulong> l = Min(lower, amax);
                 Vector128<ulong> u = Min(upper, amax);
                 return Narrow(l, u);
@@ -219,7 +219,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<uint> YNarrowSaturateUnsigned(Vector128<long> lower, Vector128<long> upper) {
                 Vector128<long> amin = Vector128<long>.Zero;
                 //Vector128<long> amax = Vector128s<long>.VMaxUInt32;
-                Vector128<long> amax = Vector128.Create((long)uint.MaxValue); // .NET5+ has better performance .
+                Vector128<long> amax = Vector128Constants.Int64_VMaxUInt32; // .NET5+ has better performance .
                 Vector128<ulong> l = YClamp(lower, amin, amax).AsUInt64();
                 Vector128<ulong> u = YClamp(upper, amin, amax).AsUInt64();
                 return Narrow(l, u);
