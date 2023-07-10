@@ -371,6 +371,17 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52RoundToEven(Vector128{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<ulong> ConvertToUInt64_Range52RoundToEven(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.ConvertToUInt64_Range52RoundToEven(value);
+#else
+            return _instance.ConvertToUInt64_Range52RoundToEven(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
 
         /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits_AcceleratedTypes"/>
         public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
