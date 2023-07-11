@@ -49,10 +49,11 @@ namespace Zyl.VectorTraits.Benchmarks {
                 if (null!= srcArrayInt32) {
                     if (N == srcArrayInt32.Length) return;
                 }
-                const double minValueInt32 = Int32.MinValue;
-                const double minValueInt64 = Int64.MinValue;
+                //const long lowbit_mask = 0x0_000FFFFFL;
                 double pow2_32 = Math.Pow(2, 32);
                 double pow2_64 = Math.Pow(2, 64);
+                double pow2_32_low = Math.Pow(2, 23 - 4);
+                double pow2_64_low = Math.Pow(2, 52 - 4);
                 Random random = new Random(0);
                 srcArraySingle = new float[N];
                 srcArraySingle_RangeInt32 = new float[N];
@@ -72,20 +73,24 @@ namespace Zyl.VectorTraits.Benchmarks {
                 baselinetArrayInt32 = new int[N];
                 random.NextBytes(srcArrayByte);
                 for (int i = 0; i < N; i++) {
+                    //bool lowRangeFlag = true;
+                    bool lowRangeFlag = (i & 1) != 0;
                     int a = random.Next(int.MinValue, int.MaxValue);
                     int b = random.Next(int.MinValue, int.MaxValue);
                     long n64 = (((long)a) << 32) | (long)b;
                     double f = random.NextDouble();
-                    double fUInt32 = f * pow2_32;
-                    double fInt32 = fUInt32 + minValueInt32;
-                    double fUInt64 = f * pow2_64;
-                    double fInt64 = fUInt64 + minValueInt64;
+                    //f = BitConverter.Int64BitsToDouble((BitConverter.DoubleToInt64Bits(f)&~lowbit_mask) | (a&lowbit_mask));
+                    double fN = f - 0.5;
+                    double fUInt32 = f * (lowRangeFlag ? pow2_32_low : pow2_32);
+                    double fInt32 = fN * (lowRangeFlag ? pow2_32_low : pow2_32);
+                    double fUInt64 = f * (lowRangeFlag ? pow2_64_low : pow2_64);
+                    double fInt64 = fN * (lowRangeFlag ? pow2_64_low : pow2_64);
                     srcArraySingle[i] = (float)f;
                     srcArraySingle_RangeInt32[i] = (float)fInt32;
                     srcArraySingle_RangeUInt32[i] = (float)fUInt32;
                     srcArrayDouble[i] = f;
-                    srcArrayDouble_RangeInt64[i] = (float)fInt64;
-                    srcArrayDouble_RangeUInt64[i] = (float)fUInt64;
+                    srcArrayDouble_RangeInt64[i] = fInt64;
+                    srcArrayDouble_RangeUInt64[i] =fUInt64;
                     srcArraySByte[i] = (sbyte)srcArrayByte[i];
                     srcArrayInt16[i] = (short)a;
                     srcArrayUInt16[i] = (ushort)a;
@@ -148,14 +153,18 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
-        /// Check result - Single.
+        /// Check result - report.
         /// </summary>
-        /// <param name="name">Method name.</param>
+        /// <typeparam name="T">Type of dst.</typeparam>
+        /// <param name="name">The name.</param>
+        /// <param name="isok">The isok.</param>
+        /// <param name="dstT">The dstT.</param>
+        /// <param name="baselineT">The baselineT.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected virtual void CheckResultSingle(string name) {
+        protected virtual void CheckResult_Report<T>(string name, bool isok, T dstT, T baselineT) {
             if (!CheckMode) return;
-            if (dstSingle != baselineSingle) {
-                string msg = string.Format("Check `{0}` mismatch. {1}!={2}", name, dstSingle, baselineSingle);
+            if (isok) {
+                string msg = string.Format("Check `{0}` mismatch. {1}!={2}", name, dstT, baselineT);
                 // throw new ApplicationException(msg);
                 string itemname = string.Format("Check-{0}", name);
                 BenchmarkUtil.WriteItem(itemname, msg);
@@ -165,6 +174,15 @@ namespace Zyl.VectorTraits.Benchmarks {
                 //writer.WriteLine(indent + msg);
                 Debug.WriteLine(msg);
             }
+        }
+
+        /// <summary>
+        /// Check result - Single.
+        /// </summary>
+        /// <param name="name">Method name.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected virtual void CheckResultSingle(string name) {
+            CheckResult_Report(name, dstSingle != baselineSingle, dstSingle, baselineSingle);
         }
 
         /// <summary>
@@ -173,18 +191,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="name">Method name.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual void CheckResultDouble(string name) {
-            if (!CheckMode) return;
-            if (dstDouble != baselineDouble) {
-                string msg = string.Format("Check `{0}` mismatch. {1}!={2}", name, dstDouble, baselineDouble);
-                // throw new ApplicationException(msg);
-                string itemname = string.Format("Check-{0}", name);
-                BenchmarkUtil.WriteItem(itemname, msg);
-            } else {
-                // Succeed. No output.
-                string msg = string.Format("Check `{0}` Succeed.", name);
-                //writer.WriteLine(indent + msg);
-                Debug.WriteLine(msg);
-            }
+            CheckResult_Report(name, dstDouble != baselineDouble, dstDouble, baselineDouble);
         }
 
         /// <summary>
@@ -193,15 +200,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="name">Method name.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual void CheckResultSByte(string name) {
-            if (!CheckMode) return;
-            if (dstSByte != baselineSByte) {
-                throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstSByte, baselineSByte));
-            } else {
-                // Succeed. No output.
-                string msg = string.Format("Check `{0}` Succeed.", name);
-                //writer.WriteLine(indent + msg);
-                Debug.WriteLine(msg);
-            }
+            CheckResult_Report(name, dstSByte != baselineSByte, dstSByte, baselineSByte);
         }
 
         /// <summary>
@@ -210,15 +209,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="name">Method name.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual void CheckResultByte(string name) {
-            if (!CheckMode) return;
-            if (dstByte != baselineByte) {
-                throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstByte, baselineByte));
-            } else {
-                // Succeed. No output.
-                string msg = string.Format("Check `{0}` Succeed.", name);
-                //writer.WriteLine(indent + msg);
-                Debug.WriteLine(msg);
-            }
+            CheckResult_Report(name, dstByte != baselineByte, dstByte, baselineByte);
         }
 
         /// <summary>
@@ -228,14 +219,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual void CheckResultInt16(string name) {
             if (!CheckMode) return;
-            if (dstInt16 != baselineInt16) {
-                throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstInt16, baselineInt16));
-            } else {
-                // Succeed. No output.
-                string msg = string.Format("Check `{0}` Succeed.", name);
-                //writer.WriteLine(indent + msg);
-                Debug.WriteLine(msg);
-            }
+            CheckResult_Report(name, dstInt16 != baselineInt16, dstInt16, baselineInt16);
         }
 
         /// <summary>
@@ -244,15 +228,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="name">Method name.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual void CheckResultUInt16(string name) {
-            if (!CheckMode) return;
-            if (dstUInt16 != baselineUInt16) {
-                throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstUInt16, baselineUInt16));
-            } else {
-                // Succeed. No output.
-                string msg = string.Format("Check `{0}` Succeed.", name);
-                //writer.WriteLine(indent + msg);
-                Debug.WriteLine(msg);
-            }
+            CheckResult_Report(name, dstUInt16 != baselineUInt16, dstUInt16, baselineUInt16);
         }
 
         /// <summary>
@@ -261,15 +237,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="name">Method name.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual void CheckResultInt32(string name) {
-            if (!CheckMode) return;
-            if (dstInt32 != baselineInt32) {
-                throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstInt32, baselineInt32));
-            } else {
-                // Succeed. No output.
-                string msg = string.Format("Check `{0}` Succeed.", name);
-                //writer.WriteLine(indent + msg);
-                Debug.WriteLine(msg);
-            }
+            CheckResult_Report(name, dstInt32 != baselineInt32, dstInt32, baselineInt32);
         }
 
         /// <summary>
@@ -278,15 +246,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="name">Method name.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual void CheckResultUInt32(string name) {
-            if (!CheckMode) return;
-            if (dstUInt32 != baselineUInt32) {
-                throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstUInt32, baselineUInt32));
-            } else {
-                // Succeed. No output.
-                string msg = string.Format("Check `{0}` Succeed.", name);
-                //writer.WriteLine(indent + msg);
-                Debug.WriteLine(msg);
-            }
+            CheckResult_Report(name, dstUInt32 != baselineUInt32, dstUInt32, baselineUInt32);
         }
 
         /// <summary>
@@ -295,15 +255,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="name">Method name.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual void CheckResultInt64(string name) {
-            if (!CheckMode) return;
-            if (dstInt64 != baselineInt64) {
-                throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstInt64, baselineInt64));
-            } else {
-                // Succeed. No output.
-                string msg = string.Format("Check `{0}` Succeed.", name);
-                //writer.WriteLine(indent + msg);
-                Debug.WriteLine(msg);
-            }
+            CheckResult_Report(name, dstInt64 != baselineInt64, dstInt64, baselineInt64);
         }
 
         /// <summary>
@@ -312,15 +264,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="name">Method name.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual void CheckResultUInt64(string name) {
-            if (!CheckMode) return;
-            if (dstUInt64 != baselineUInt64) {
-                throw new ApplicationException(string.Format("Check `{0}` fail! {1}!={2}", name, dstUInt64, baselineUInt64));
-            } else {
-                // Succeed. No output.
-                string msg = string.Format("Check `{0}` Succeed.", name);
-                //writer.WriteLine(indent + msg);
-                Debug.WriteLine(msg);
-            }
+            CheckResult_Report(name, dstUInt64 != baselineUInt64, dstUInt64, baselineUInt64);
         }
 
         /// <summary>

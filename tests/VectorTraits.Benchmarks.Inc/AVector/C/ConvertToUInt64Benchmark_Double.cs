@@ -42,7 +42,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override void CheckResult(string name) {
-            CheckResultUInt64(name);
+            CheckResult_Report(name, dstTMy != baselineTMy, dstTMy, baselineTMy);
         }
 
         // -- var --
