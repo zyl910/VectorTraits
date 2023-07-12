@@ -27,5 +27,59 @@ namespace Zyl.VectorTraits {
             }
         }
 
+#if NETCOREAPP3_0_OR_GREATER
+#else
+        private static readonly Architecture _ProcessArchitecture = RuntimeInformation.ProcessArchitecture;
+        private static readonly bool _ProcessIsX86Family = _ProcessArchitecture <= Architecture.X64;
+        private static readonly bool _ProcessIsArmFamily = (Architecture.Arm <= _ProcessArchitecture) && (_ProcessArchitecture <= Architecture.Arm64);
+#endif
+
+        /// <summary>
+        /// Gets the process architecture of the currently running app (获取当前正在运行的应用的进程架构).
+        /// </summary>
+        /// <value>The process architecture of the currently running app (当前正在运行的应用的进程架构).</value>
+        public static Architecture ProcessArchitecture {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_0_OR_GREATER
+                return RuntimeInformation.ProcessArchitecture;
+#else
+                return _ProcessArchitecture;
+#endif
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that indicates whether the current process architecture is a X86 family (获取一个值，该值指示当前进程架构是否为 X86 家族的). e.g. X86, X64 .
+        /// </summary>
+        public static bool ProcessIsX86Family {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return System.Runtime.Intrinsics.X86.X86Base.IsSupported;
+#elif NETCOREAPP3_0_OR_GREATER
+                return VectorEnvironment.ProcessIsX86Family;
+#else
+                return _ProcessIsX86Family;
+#endif
+            }
+        }
+
+        /// <summary>
+        /// Gets a value that indicates whether the current process architecture is a Arm family (获取一个值，该值指示当前进程架构是否为 Arm 家族的). e.g. Arm, Arm64, Armv6 .
+        /// </summary>
+        public static bool ProcessIsArmFamily {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return System.Runtime.Intrinsics.Arm.ArmBase.IsSupported;
+#elif NETCOREAPP3_0_OR_GREATER
+                return (Architecture.Arm <= ProcessArchitecture) && (ProcessArchitecture <= Architecture.Arm64);
+#else
+                return _ProcessIsArmFamily;
+#endif
+            }
+        }
+
     }
 }

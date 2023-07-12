@@ -199,7 +199,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> ConvertToDouble_Range52(Vector256<long> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512) {
+                if (VectorEnvironment.ProcessIsX86Family && Vector<byte>.Count < BitOfByte.Bit512) {
                     return ConvertToDouble_Range52_Impl(value);
                 } else {
                     return Vector256.ConvertToDouble(value);
@@ -216,7 +216,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> ConvertToDouble_Range52(Vector256<ulong> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512) {
+                if (VectorEnvironment.ProcessIsX86Family && Vector<byte>.Count < BitOfByte.Bit512) {
                     return ConvertToDouble_Range52_Impl(value);
                 } else {
                     return Vector256.ConvertToDouble(value);
@@ -339,7 +339,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64_Range52(Vector256<double> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512) {
+                if (VectorEnvironment.ProcessIsX86Family && Vector<byte>.Count < BitOfByte.Bit512) {
                     return ConvertToInt64_Range52_Impl(value);
                 } else {
                     return Vector256.ConvertToInt64(value);
@@ -535,7 +535,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> ConvertToUInt64_Range52(Vector256<double> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64 && Vector<byte>.Count < BitOfByte.Bit512) {
+                if (VectorEnvironment.ProcessIsX86Family && Vector<byte>.Count < BitOfByte.Bit512) {
                     return ConvertToUInt64_Range52_Impl(value);
                 } else {
                     return Vector256.ConvertToUInt64(value);

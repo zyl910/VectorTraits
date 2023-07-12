@@ -32,8 +32,8 @@ namespace Zyl.VectorTraits {
             m_Inited = true;
             // Initialize on static constructor.
             // done.
-#if (NETSTANDARD1_1)
             Debug.WriteLine("VectorTraitsGlobal initialize done.");
+#if (NETSTANDARD1_1)
 #else
             Trace.WriteLine("VectorTraitsGlobal initialize done.");
 #endif
@@ -41,6 +41,9 @@ namespace Zyl.VectorTraits {
 
         static VectorTraitsGlobal() {
             m_InitCheckSum = 0;
+
+            // VectorEnvironment
+            m_InitCheckSum += (int)VectorEnvironment.ProcessArchitecture;
 
             // Vector
             m_InitCheckSum += Vectors<sbyte>.Demo.AsInt32()[0];

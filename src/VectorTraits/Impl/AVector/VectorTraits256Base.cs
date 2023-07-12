@@ -1486,7 +1486,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 _ = args0;
 #if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER && SOFTWARE_OPTIMIZATION
                 // .NET7 no hardware acceleration! X86(sse, avx)
-                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64) {
+                if (VectorEnvironment.ProcessIsX86Family) {
                     shiftAmount &= 0x3F;
                     Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
                     Vector<long> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt64();
@@ -1582,7 +1582,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 _ = args0;
 #if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER && SOFTWARE_OPTIMIZATION
                 // .NET7 no hardware acceleration! X86(sse, avx)
-                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64) {
+                if (VectorEnvironment.ProcessIsX86Family) {
                     Vector<long> sign = Vector.GreaterThan(Vector<long>.Zero, value);
                     Vector<long> shifted = ShiftRightLogical_Fast(value.AsUInt64(), shiftAmount).AsInt64();
                     Vector<long> rt = Vector.ConditionalSelect(args1, shifted, sign);
@@ -1642,7 +1642,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<long> ShiftRightArithmetic_Fast(Vector<long> value, int shiftAmount) {
 #if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER && SOFTWARE_OPTIMIZATION
                 // .NET7 no hardware acceleration! X86(sse, avx)
-                if (RuntimeInformation.ProcessArchitecture <= Architecture.X64) {
+                if (VectorEnvironment.ProcessIsX86Family) {
                     return ShiftRightArithmetic_Fast_Basic(value, shiftAmount);
                 } else {
                     return Vector.ShiftRightArithmetic(value, shiftAmount);

@@ -62,6 +62,9 @@ namespace Zyl.VectorTraits {
 #if NET5_0_OR_GREATER
             writer.WriteLine(indent + string.Format("RuntimeInformation.RuntimeIdentifier:\t{0}", System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier)); // e.g. win10-x64
 #endif // NET5_0_OR_GREATER
+#if NETCOREAPP1_0_OR_GREATER || NETSTANDARD1_6_OR_GREATER || NET471_OR_GREATER
+            // writer.WriteLine(indent + string.Format("RUNTIME_IDENTIFIER:\t{0}", AppContext.GetData("RUNTIME_IDENTIFIER"))); // Need NET5_0+
+#endif // NETCOREAPP1_0_OR_GREATER || NETSTANDARD1_6_OR_GREATER || NET471_OR_GREATER
             writer.WriteLine(indent + string.Format("IntPtr.Size:\t{0}", IntPtr.Size));
             writer.WriteLine(indent + string.Format("BitConverter.IsLittleEndian:\t{0}", BitConverter.IsLittleEndian));
             writer.WriteLine(indent + string.Format("Vector.IsHardwareAccelerated:\t{0}", Vector.IsHardwareAccelerated));
