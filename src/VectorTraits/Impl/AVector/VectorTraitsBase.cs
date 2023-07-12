@@ -150,7 +150,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> ConvertToDouble_Range52(Vector<long> value) {
-#if NETCOREAPP3_0_OR_GREATER
+#if NET5_0_OR_GREATER
                 if (VectorEnvironment.ProcessIsX86Family && Vector<byte>.Count < BitOfByte.Bit512) {
                     return ConvertToDouble_Range52_Impl(value);
                 } else {
@@ -158,14 +158,14 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 }
 #else
                 return Vector.ConvertToDouble(value);
-#endif // NETCOREAPP3_0_OR_GREATER
+#endif // NET5_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> ConvertToDouble_Range52(Vector<ulong> value) {
-#if NETCOREAPP3_0_OR_GREATER
+#if NET5_0_OR_GREATER
                 if (VectorEnvironment.ProcessIsX86Family && Vector<byte>.Count < BitOfByte.Bit512) {
                     return ConvertToDouble_Range52_Impl(value);
                 } else {
@@ -173,7 +173,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 }
 #else
                 return Vector.ConvertToDouble(value);
-#endif // NETCOREAPP3_0_OR_GREATER
+#endif // NET5_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{long})"/>
@@ -371,12 +371,13 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<ulong> ConvertToUInt64_Range52(Vector<double> value) {
 #if NET5_0_OR_GREATER // Vector.Floor need .NET 5+ .
                 if (VectorEnvironment.ProcessIsX86Family && Vector<byte>.Count < BitOfByte.Bit512) {
-                    return ConvertToUInt64_Range52_Impl(value);
+                    return ConvertToUInt64_Range52_Impl(value); // only fast on net5+ of x86.
                 } else {
                     return Vector.ConvertToUInt64(value);
                 }
 #else
-                return ConvertToUInt64_Range52_Impl(value);
+                //return Vector.ConvertToUInt64(value);
+                return ConvertToUInt64_Range52_Impl(value); // Fast on x86 .
 #endif // NET5_0_OR_GREATER
             }
 
