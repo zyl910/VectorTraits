@@ -173,10 +173,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble_Range52(Vector128<long> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                if (BitOfByte.Bit32 == IntPtr.Size) {
-                    return ConvertToDouble_Range52_Impl(value);
-                } else {
+                if (VectorEnvironment.Is64BitProcess) {
                     return Vector128.ConvertToDouble(value);
+                } else {
+                    return ConvertToDouble_Range52_Impl(value);
                 }
 #else
                 return ConvertToDouble_Range52_Impl(value);
@@ -188,10 +188,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble_Range52(Vector128<ulong> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                if (BitOfByte.Bit32 == IntPtr.Size) {
-                    return ConvertToDouble_Range52_Impl(value);
-                } else {
+                if (VectorEnvironment.Is64BitProcess) {
                     return Vector128.ConvertToDouble(value);
+                } else {
+                    return ConvertToDouble_Range52_Impl(value);
                 }
 #else
                 return ConvertToDouble_Range52_Impl(value);
@@ -251,10 +251,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64_Range52(Vector128<double> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                if (BitOfByte.Bit32 == IntPtr.Size) {
-                    return ConvertToInt64_Range52_Impl(value);
-                } else {
+                if (VectorEnvironment.Is64BitProcess) {
                     return Vector128.ConvertToInt64(value);
+                } else {
+                    return ConvertToInt64_Range52_Impl(value);
                 }
 #else
                 return ConvertToInt64_Range52_Impl(value);
@@ -342,10 +342,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ConvertToUInt64_Range52(Vector128<double> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                if (BitOfByte.Bit32 == IntPtr.Size) {
-                    return ConvertToUInt64_Range52_Impl(value);
-                } else {
+                if (VectorEnvironment.Is64BitProcess) {
                     return Vector128.ConvertToUInt64(value);
+                } else {
+                    return ConvertToUInt64_Range52_Impl(value);
                 }
 #else
                 return ConvertToUInt64_Range52_Impl(value);

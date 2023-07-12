@@ -100,7 +100,7 @@ namespace Zyl.VectorTraits {
         public static readonly TypeCodeFlags UIntPtrFlags;
 
         static TypeCodeFlagsUtil() {
-            if (4 == IntPtr.Size) {
+            if (sizeof(int) == IntPtr.Size) {
                 IntPtrCode = ElementTypeCode.Int32;
                 UIntPtrCode = ElementTypeCode.UInt32;
                 IntPtrFlags = TypeCodeFlags.Int32;

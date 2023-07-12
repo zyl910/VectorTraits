@@ -97,7 +97,7 @@ namespace Zyl.VectorTraits.Impl {
 #if USE_VECTOR_CREATE_INT64
                 return Vector128.Create(ScalarConstants.Double_SignMask).AsDouble();
 #elif USE_VECTOR_CREATE
-                if (IntPtr.Size > BitOfByte.Bit32) {
+                if (VectorEnvironment.Is64BitProcess) {
                     return Vector128.Create(ScalarConstants.Double_SignMask).AsDouble();
                 } else {
                     return Vector128s<double>.SignMask;
@@ -133,7 +133,7 @@ namespace Zyl.VectorTraits.Impl {
 #if USE_VECTOR_CREATE_INT64
                 return Vector128.Create(ScalarConstants.Double_NonSignMask).AsDouble();
 #elif USE_VECTOR_CREATE
-                if (IntPtr.Size > BitOfByte.Bit32) {
+                if (VectorEnvironment.Is64BitProcess) {
                     return Vector128.Create(ScalarConstants.Double_NonSignMask).AsDouble();
                 } else {
                     return Vector128s<double>.NonSignMask;
@@ -188,7 +188,7 @@ namespace Zyl.VectorTraits.Impl {
 #if USE_VECTOR_CREATE_INT64
                 return Vector128.Create(long.MinValue);
 #elif USE_VECTOR_CREATE
-                if (IntPtr.Size > BitOfByte.Bit32) {
+                if (VectorEnvironment.Is64BitProcess) {
                     return Vector128.Create(long.MinValue);
                 } else {
                     return Vector128s<long>.MinValue;
@@ -218,7 +218,7 @@ namespace Zyl.VectorTraits.Impl {
 #if USE_VECTOR_CREATE_INT64
                 return Vector128.Create((long)int.MaxValue);
 #elif USE_VECTOR_CREATE
-                if (IntPtr.Size > BitOfByte.Bit32) {
+                if (VectorEnvironment.Is64BitProcess) {
                     return Vector128.Create((long)int.MaxValue);
                 } else {
                     return Vector128s<long>.VMaxInt32;
@@ -237,7 +237,7 @@ namespace Zyl.VectorTraits.Impl {
 #if USE_VECTOR_CREATE_INT64
                 return Vector128.Create((long)int.MinValue);
 #elif USE_VECTOR_CREATE
-                if (IntPtr.Size > BitOfByte.Bit32) {
+                if (VectorEnvironment.Is64BitProcess) {
                     return Vector128.Create((long)int.MinValue);
                 } else {
                     return Vector128s<long>.VMinInt32;
@@ -256,7 +256,7 @@ namespace Zyl.VectorTraits.Impl {
 #if USE_VECTOR_CREATE_INT64
                 return Vector128.Create((long)uint.MaxValue);
 #elif USE_VECTOR_CREATE
-                if (IntPtr.Size > BitOfByte.Bit32) {
+                if (VectorEnvironment.Is64BitProcess) {
                     return Vector128.Create((long)uint.MaxValue);
                 } else {
                     return Vector128s<long>.VMaxUInt32;
