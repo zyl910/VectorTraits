@@ -13,8 +13,13 @@ namespace Zyl.VectorTraits.Impl {
         // -- IntDbl: Integer value reinterpret cast to double. --
         // If you create a Vector with a 64-bit integer, the performance of the JIT-generated code is very low. If you create a Vector with a double, the performance is much better(若用64位整数创建Vector, JIT生成的代码的性能很低. 换成用double创建Vector, 性能能提高很多).
 
+        /// <summary>Integer - `(int)pow(2, 23) = 0x00800000 = 8388608`.</summary>
+        public const int Int_2Pow23 = 0x00800000;
         ///// <summary>Integer - `(long)pow(2, 52) = 0x00100000_00000000 = 4503599627370496`.</summary>
         //public const long Int_2Pow52 = 0x00100000_00000000;
+
+        /// <summary>Integer - `(int)Single_ExponentBias + Single_MantissaBits = 127 + 23 = 150 = 0x96`.</summary>
+        public const int Int_SingleBias23 = Single_ExponentBias + Single_MantissaBits;
 
         /// <summary>IntDbl - `(long)pow(2, 52) = 0x00100000_00000000 = 4503599627370496`. `BitConverter.Int64BitsToDouble(0x00100000_00000000) = 2.2250738585072014E-308`, `BitConverter.DoubleToInt64Bits(2.2250738585072014E-308).ToString("X16") = "0010000000000000"`.</summary>
         public const double IntDbl_2Pow52 = 2.2250738585072014E-308;

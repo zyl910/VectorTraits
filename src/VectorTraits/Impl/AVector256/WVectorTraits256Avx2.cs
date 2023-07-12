@@ -526,18 +526,42 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> ConvertToUInt32(Vector256<float> value) {
                 //return SuperStatics.ConvertToUInt32(value);
-                //return ConvertToUInt32_Add(value);
                 //return ConvertToUInt32_Mapping(value);
-                return ConvertToUInt32_MappingFix(value);
+                //return ConvertToUInt32_MappingFix(value);
+                return ConvertToUInt32_ShiftVar(value);
             }
 
+            ///// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
+            ///// <remarks>Input range is `[-pow(2,31), pow(2,31))`. Out of range results in `2147483648`(pow(2,31)).</remarks>
+            //[Obsolete("It has a different valid range.")]
+            //[CLSCompliant(false)]
+            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+            //public static Vector256<uint> ConvertToUInt32_As(Vector256<float> value) {
+            //    return Avx.ConvertToVector256Int32WithTruncation(value).AsUInt32();
+            //}
+
             /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
-            /// <remarks>Input range is `[-pow(2,31), pow(2,31))`. Out of range results in `2147483648`(pow(2,31)).</remarks>
-            [Obsolete("It has a different valid range.")]
+            /// <remarks>Input range is `[0, pow(2,32))`. Out of range results in `0`.</remarks>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<uint> ConvertToUInt32_As(Vector256<float> value) {
-                return Avx.ConvertToVector256Int32WithTruncation(value).AsUInt32();
+            public static Vector256<uint> ConvertToUInt32_ShiftVar(Vector256<float> value) {
+                //constants
+                Vector256<int> mat_mask = Vector256.Create(ScalarConstants.SingleVal_MantissaMask).AsInt32(); // 0x007FFFFF
+                Vector256<int> hidden_1 = Vector256.Create(ScalarConstants.Int_2Pow23).AsInt32();             // 0x00800000 // Int32: 2^23
+                Vector256<int> exp_bias = Vector256.Create(ScalarConstants.Int_SingleBias23).AsInt32(); // Single_ExponentBias + Single_MantissaBits = 127 + 23 = 150 = 0x96
+                Vector256<int> zero = Vector256<int>.Zero;
+                //majik operations										  //Latency, Throughput(references IceLake)
+                Vector256<int> bin = value.AsInt32();
+                Vector256<int> mat = Avx2.And(bin, mat_mask);                                    //1,1/3
+                mat = Avx2.Or(mat, hidden_1);                                                    //1,1/3
+                Vector256<int> exp_enc = Avx2.ShiftRightLogical(bin, 23);                        //1,1/2
+                Vector256<int> exp_frac = Avx2.Subtract(exp_enc, exp_bias);                      //1,1/3
+                Vector256<int> msl = Avx2.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt32());    //1,1/2
+                Vector256<int> exp_frac_n = Avx2.Subtract(zero, exp_frac);                       //1,1/3
+                Vector256<int> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt32()); //1,1/2
+                Vector256<int> exp_is_pos = Avx2.CompareGreaterThan(exp_frac, zero);             //3,1
+                Vector256<int> result_abs = Avx2.BlendVariable(msr, msl, exp_is_pos);            //2,1
+                return result_abs.AsUInt32();	//total latency: 12, total throughput CPI: 4.8
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToUInt32(Vector256{float})"/>
