@@ -617,10 +617,12 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<uint> ConvertToUInt32_Mod(Vector256<float> value) {
 #if NET5_0_OR_GREATER
                 // remainder = mod(value, highEnd) = value - floor(value/highEnd)*highEnd
+                Vector256<float> highEndDiv = Vector256.Create(ScalarConstants.SingleBit_2PowNegative32).AsSingle();
                 Vector256<float> highEnd = Vector256.Create(ScalarConstants.SingleBit_2Pow32).AsSingle();
                 Vector256<float> lowBegin = Vector256.Create(ScalarConstants.SingleBit_Negative2Pow31).AsSingle();
                 Vector256<float> highBegin = Vector256.Create(ScalarConstants.SingleBit_2Pow31).AsSingle();
-                Vector256<float> quotientFloor = Avx.Floor(Avx.Divide(value, highEnd));
+                Vector256<float> quotientFloor = Avx.Multiply(value, highEndDiv); // Avx.Divide(value, highEnd);
+                quotientFloor = Avx.Floor(quotientFloor);
                 Vector256<float> intRangeMask = Avx.And(Avx.CompareLessThanOrEqual(lowBegin, value), Avx.CompareLessThan(value, highBegin)); // lowBegin <= value < highBegin .
                 Vector256<float> remainder = Avx.Subtract(value, Avx.Multiply(quotientFloor, highEnd));
                 // [pow(2,31), pow(2,32)-1] mapping to [-pow(2,31), -1]. Subtract `pow(2,32)`.

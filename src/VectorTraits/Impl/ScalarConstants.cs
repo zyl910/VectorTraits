@@ -144,6 +144,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>SingleBit - `pow(2, 32) = 4294967296`. Binary is `0x4F800000`.</summary>
         public const int SingleBit_2Pow32 = 0x4F800000;
 
+        /// <summary>SingleBit - `pow(2, -32) = 1.0/pow(2, 32) = 1.0/4294967296 = 2.3283064365386963E-10`. `BitConverter.SingleToInt32Bits((float)Math.Pow(2, -32)).ToString("X8") = "2F800000"`.</summary>
+        public const int SingleBit_2PowNegative32 = 0x2F800000;
 
         // == Double (s1e11m52) ==
         // -- Double - Number struct --
