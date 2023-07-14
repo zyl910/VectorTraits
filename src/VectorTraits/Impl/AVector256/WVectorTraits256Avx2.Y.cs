@@ -89,6 +89,27 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.YRoundToZero_AcceleratedTypes"/>
+            public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YRoundToZero(Vector256<float> value) {
+                return Avx.RoundToZero(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YRoundToZero(Vector256<double> value) {
+                return Avx.RoundToZero(value);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
                 get {

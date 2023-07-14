@@ -23,25 +23,32 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>Ceiling</c> (运行 <c>Ceiling</c> 时具有硬件加速的类型).
         /// </summary>
+        /// <remarks>
+        /// <para>Methods used to calculate rounding (用于计算舍入的方法):</para>
+        /// <para>- <see cref="Ceiling"/>: Computes the ceiling of each element in a vector (计算向量中每个元素的向上取整). It is also known as round to positive infinity (它也被称作向正无穷舍入). See more: <see cref="MidpointRounding.ToPositiveInfinity"/>.</para>
+        /// <para>- <see cref="Floor"/>: Computes the floor of each element in a vector (计算向量中每个元素的向下取整). It is also known as round to negative infinity (它也被称作向负无穷舍入). See more: <see cref="MidpointRounding.ToNegativeInfinity"/>.</para>
+        /// <para>- <see cref="YRoundToEven"/>: Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.</para>
+        /// <para>- <see cref="YRoundToZero"/>: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: <see cref="MidpointRounding.ToZero"/>.</para>
+        /// </remarks>
         /// <seealso cref="Ceiling"/>
         TypeCodeFlags Ceiling_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Computes the ceiling of each element in a vector (计算向量中每个元素的向上舍入).
+        /// Computes the ceiling of each element in a vector (计算向量中每个元素的向上取整). It is also known as round to positive infinity (它也被称作向正无穷舍入). See more: <see cref="MidpointRounding.ToPositiveInfinity"/>.
         /// Mnemonic: <c>rt[i] := ceiling(value[i])</c>.
         /// </summary>
         /// <param name="value">The vector that will have its ceiling computed (将计算向上舍入的向量).</param>
-        /// <returns>A vector whose elements are the ceiling of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向上舍入).</returns>
+        /// <returns>A vector whose elements are the ceiling of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向上取整).</returns>
         /// <seealso cref="Ceiling_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Ceiling(Vector256{float})" />
         Vector256<float> Ceiling(Vector256<float> value);
 
         /// <summary>
-        /// Computes the ceiling of each element in a vector (计算向量中每个元素的向上舍入).
+        /// Computes the ceiling of each element in a vector (计算向量中每个元素的向上取整). It is also known as round to positive infinity (它也被称作向正无穷舍入). See more: <see cref="MidpointRounding.ToPositiveInfinity"/>.
         /// Mnemonic: <c>rt[i] := ceiling(value[i])</c>.
         /// </summary>
         /// <param name="value">The vector that will have its ceiling computed (将计算向上舍入的向量).</param>
-        /// <returns>A vector whose elements are the ceiling of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向上舍入).</returns>
+        /// <returns>A vector whose elements are the ceiling of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向上取整).</returns>
         /// <seealso cref="Ceiling_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Ceiling(Vector256{double})" />
         Vector256<double> Ceiling(Vector256<double> value);
@@ -359,25 +366,32 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>Floor</c> (运行 <c>Floor</c> 时具有硬件加速的类型).
         /// </summary>
+        /// <remarks>
+        /// <para>Methods used to calculate rounding (用于计算舍入的方法):</para>
+        /// <para>- <see cref="Ceiling"/>: Computes the ceiling of each element in a vector (计算向量中每个元素的向上取整). It is also known as round to positive infinity (它也被称作向正无穷舍入). See more: <see cref="MidpointRounding.ToPositiveInfinity"/>.</para>
+        /// <para>- <see cref="Floor"/>: Computes the floor of each element in a vector (计算向量中每个元素的向下取整). It is also known as round to negative infinity (它也被称作向负无穷舍入). See more: <see cref="MidpointRounding.ToNegativeInfinity"/>.</para>
+        /// <para>- <see cref="YRoundToEven"/>: Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.</para>
+        /// <para>- <see cref="YRoundToZero"/>: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: <see cref="MidpointRounding.ToZero"/>.</para>
+        /// </remarks>
         /// <seealso cref="Floor"/>
         TypeCodeFlags Floor_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Computes the floor of each element in a vector (计算向量中每个元素的向下舍入).
+        /// Computes the floor of each element in a vector (计算向量中每个元素的向下取整). It is also known as round to negative infinity (它也被称作向负无穷舍入). See more: <see cref="MidpointRounding.ToNegativeInfinity"/>.
         /// Mnemonic: <c>rt[i] := floor(value[i])</c>.
         /// </summary>
         /// <param name="value">The vector that will have its floor computed (将计算向下舍入的向量).</param>
-        /// <returns>A vector whose elements are the floor of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向下舍入).</returns>
+        /// <returns>A vector whose elements are the floor of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向下取整).</returns>
         /// <seealso cref="Floor_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Floor(Vector256{float})" />
         Vector256<float> Floor(Vector256<float> value);
 
         /// <summary>
-        /// Computes the floor of each element in a vector (计算向量中每个元素的向下舍入).
+        /// Computes the floor of each element in a vector (计算向量中每个元素的向下取整). It is also known as round to negative infinity (它也被称作向负无穷舍入). See more: <see cref="MidpointRounding.ToNegativeInfinity"/>.
         /// Mnemonic: <c>rt[i] := floor(value[i])</c>.
         /// </summary>
         /// <param name="value">The vector that will have its floor computed (将计算向下舍入的向量).</param>
-        /// <returns>A vector whose elements are the floor of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向下舍入).</returns>
+        /// <returns>A vector whose elements are the floor of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向下取整).</returns>
         /// <seealso cref="Floor_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Floor(Vector256{double})" />
         Vector256<double> Floor(Vector256<double> value);

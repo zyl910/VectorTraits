@@ -377,19 +377,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #endif // NET7_0_OR_GREATER
             }
 
-#if NET7_0_OR_GREATER
-            /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> YRoundToZero(Vector256<double> value) {
-                Vector256<double> signMask = Vector256Constants.Double_SignMask;
-                Vector256<double> valueAbs = Vector256.AndNot(value, signMask);
-                Vector256<double> signData = Vector256.BitwiseAnd(value, signMask);
-                Vector256<double> rt = Floor(valueAbs); // Vector256.Floor need .NET 5+ .
-                rt = Vector256.BitwiseOr(rt, signData);
-                return rt;
-            }
-#endif // NET7_0_OR_GREATER
-
 
             /// <inheritdoc cref="IWVectorTraits256.ConvertToSingle_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToSingle_AcceleratedTypes {
