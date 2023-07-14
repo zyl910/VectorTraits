@@ -447,6 +447,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                 Vectors<T>.DemoNaN,
             };
             bool allowLog = false;
+            bool showNotEquals = true;
             foreach (Vector<T> value in samples) {
                 Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
                 Vector<uint> expected = Vectors.ConvertToUInt32((dynamic)value);
@@ -454,7 +455,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                 foreach (IVectorTraits instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector<uint> dst = instance.ConvertToUInt32((dynamic)value);
-                    if (allowLog) {
+                    if (allowLog || (showNotEquals && !expected.Equals(dst))) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
                         Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
