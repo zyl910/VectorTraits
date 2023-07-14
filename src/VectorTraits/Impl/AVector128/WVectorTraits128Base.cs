@@ -344,7 +344,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<long> ConvertToInt64_Range52_Impl(Vector128<double> value) {
 #if NET7_0_OR_GREATER
                 // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_Impl
-                value = YTruncate(value); // Truncate.
+                value = YRoundToZero(value); // Truncate.
                 return ConvertToInt64_Range52RoundToEven(value);
 #else
                 return ConvertToInt64_Basic(value);
@@ -366,9 +366,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 #if NET7_0_OR_GREATER
-            /// <inheritdoc cref="IWVectorTraits128.YTruncate(Vector128{double})"/>
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<double> YTruncate(Vector128<double> value) {
+            public static Vector128<double> YRoundToZero(Vector128<double> value) {
                 Vector128<double> signMask = Vector128Constants.Double_SignMask;
                 Vector128<double> valueAbs = Vector128.AndNot(value, signMask);
                 Vector128<double> signData = Vector128.BitwiseAnd(value, signMask);
@@ -527,7 +527,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> ConvertToUInt64_Range52_Impl(Vector128<double> value) {
 #if NET7_0_OR_GREATER
                 // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52_Impl
-                value = YTruncate(value); // Truncate.
+                value = YRoundToZero(value); // Truncate.
                 return ConvertToUInt64_Range52RoundToEven(value);
 #else
                 return ConvertToUInt64_Basic(value);

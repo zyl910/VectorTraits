@@ -244,7 +244,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ConvertToInt64_Range52_Impl(Vector<double> value) {
                 // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_Impl
-                value = YTruncate(value); // Truncate.
+                value = YRoundToZero(value); // Truncate.
                 return ConvertToInt64_Range52RoundToEven(value);
             }
 
@@ -258,19 +258,19 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return result;
             }
 
-            /// <inheritdoc cref="IVectorTraits.YTruncate(Vector{double})"/>
+            /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<double> YTruncate(Vector<double> value) {
+            public static Vector<double> YRoundToZero(Vector<double> value) {
 #if NET5_0_OR_GREATER
-                return YTruncate_Floor(value);
+                return YRoundToZero_Floor(value);
 #else
-                return YTruncate_ClearBit(value);
+                return YRoundToZero_ClearBit(value);
 #endif
             }
 
-            /// <inheritdoc cref="IVectorTraits.YTruncate(Vector{double})"/>
+            /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<double> YTruncate_ClearBit(Vector<double> value) {
+            public static Vector<double> YRoundToZero_ClearBit(Vector<double> value) {
                 //constants.
                 Vector<double> allBitsSet = Vectors<double>.AllBitsSet;
                 Vector<double> nonSignMask = VectorConstants.Double_NonSignMask;
@@ -303,9 +303,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-            /// <inheritdoc cref="IVectorTraits.YTruncate(Vector{double})"/>
+            /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<double> YTruncate_Floor(Vector<double> value) {
+            public static Vector<double> YRoundToZero_Floor(Vector<double> value) {
                 Vector<double> signMask = VectorConstants.Double_SignMask;
                 Vector<double> valueAbs = Vector.AndNot(value, signMask);
                 Vector<double> signData = Vector.BitwiseAnd(value, signMask);
@@ -386,7 +386,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> ConvertToUInt64_Range52_Impl(Vector<double> value) {
                 // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52_Impl
-                value = YTruncate(value); // Truncate.
+                value = YRoundToZero(value); // Truncate.
                 return ConvertToUInt64_Range52RoundToEven(value);
             }
 

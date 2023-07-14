@@ -37,17 +37,17 @@ namespace Zyl.VectorTraits.Sample {
                 Vectors.CreateByDoubleLoop<double>(BitConverter.Int64BitsToDouble(-((ScalarConstants.Double_ExponentBias + 52L)<<52) | ScalarConstants.Double_MantissaMask), 1),
             };
             foreach(var sample in samples) {
-                var expected = VectorTraitsBase.Statics.YTruncate_Floor(sample);
+                var expected = VectorTraitsBase.Statics.YRoundToZero_Floor(sample);
                 writer.WriteLine(VectorTextUtil.Format("Sample:\t{0}", sample));
                 writer.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
-                var dst = YTruncate_ClearBit(sample);
+                var dst = YRoundToZero_ClearBit(sample);
                 if (!dst.AsInt32().Equals(expected.AsInt32())) {
                     writer.WriteLine(VectorTextUtil.Format("Dst:\t{0}", dst));
                 }
                 writer.WriteLine();
             }
         }
-        public static Vector<double> YTruncate_ClearBit(Vector<double> value) {
+        public static Vector<double> YRoundToZero_ClearBit(Vector<double> value) {
             //constants.
             Vector<double> nonSignMask = new Vector<long>(ScalarConstants.Double_NonSignMask).AsDouble();
             Vector<double> rangeBegin = new Vector<double>(1.0);
