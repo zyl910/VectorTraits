@@ -565,7 +565,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
                     if (Vector.IsHardwareAccelerated) {
-#if BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
+#if (BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER) || HARDWARE_OPTIMIZATION
                         rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
 #endif // BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                     }
@@ -578,6 +578,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<float> Floor(Vector<float> value) {
 #if BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                 return Vector.Floor(value);
+#elif HARDWARE_OPTIMIZATION
+                return Floor_ClearBit(value);
 #else
                 return Floor_Basic(value);
 #endif // BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
@@ -588,6 +590,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<double> Floor(Vector<double> value) {
 #if BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                 return Vector.Floor(value);
+#elif HARDWARE_OPTIMIZATION
+                return Floor_ClearBit(value);
 #else
                 return Floor_Basic(value);
 #endif // BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
@@ -618,6 +622,28 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 for (int i = 0; i < cnt; ++i) {
                     p[i] = Math.Floor(p[i]);
                 }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Floor(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Floor_ClearBit(Vector<float> value) {
+                Vector<int> fixMask = Vector.LessThan(value, Vector<float>.Zero);
+                Vector<float> valueTrun = YRoundToZero_ClearBit(value);
+                fixMask = Vector.AndNot(fixMask, Vector.Equals(value, valueTrun));
+                Vector<float> valueTrunFix = Vector.Subtract(valueTrun, new Vector<float>(1.0f));
+                Vector<float> rt = Vector.ConditionalSelect(fixMask, valueTrunFix, valueTrun);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Floor(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> Floor_ClearBit(Vector<double> value) {
+                Vector<long> fixMask = Vector.LessThan(value, Vector<double>.Zero);
+                Vector<double> valueTrun = YRoundToZero_ClearBit(value);
+                fixMask = Vector.AndNot(fixMask, Vector.Equals(value, valueTrun));
+                Vector<double> valueTrunFix = Vector.Subtract(valueTrun, new Vector<double>(1.0d));
+                Vector<double> rt = Vector.ConditionalSelect(fixMask, valueTrunFix, valueTrun);
                 return rt;
             }
 
