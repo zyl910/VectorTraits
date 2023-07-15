@@ -145,35 +145,29 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 
+#if NET7_0_OR_GREATER
             /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YRoundToZero_Floor(Vector256<float> value) {
-#if NET7_0_OR_GREATER
                 Vector256<float> signMask = Vector256Constants.Single_SignMask;
                 Vector256<float> valueAbs = Vector256.AndNot(value, signMask);
                 Vector256<float> signData = Vector256.BitwiseAnd(value, signMask);
                 Vector256<float> rt = Vector256.Floor(valueAbs);
                 rt = Vector256.BitwiseOr(rt, signData);
                 return rt;
-#else
-                return YRoundToZero_Basic(value);
-#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YRoundToZero_Floor(Vector256<double> value) {
-#if NET7_0_OR_GREATER
                 Vector256<double> signMask = Vector256Constants.Double_SignMask;
                 Vector256<double> valueAbs = Vector256.AndNot(value, signMask);
                 Vector256<double> signData = Vector256.BitwiseAnd(value, signMask);
                 Vector256<double> rt = Vector256.Floor(valueAbs);
                 rt = Vector256.BitwiseOr(rt, signData);
                 return rt;
-#else
-                return YRoundToZero_Basic(value);
-#endif // NET7_0_OR_GREATER
             }
+#endif // NET7_0_OR_GREATER
 
 
             /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
