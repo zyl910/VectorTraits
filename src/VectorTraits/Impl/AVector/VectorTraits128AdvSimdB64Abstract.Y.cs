@@ -41,6 +41,20 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.YRoundToZero_AcceleratedTypes"/>
+        public override TypeCodeFlags YRoundToZero_AcceleratedTypes {
+            get {
+                return Statics.YRoundToZero_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> YRoundToZero(Vector<double> value) {
+            return Statics.YRoundToZero(value);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.YShuffleG2_AcceleratedTypes"/>
         public override TypeCodeFlags YShuffleG2_AcceleratedTypes {
             get {

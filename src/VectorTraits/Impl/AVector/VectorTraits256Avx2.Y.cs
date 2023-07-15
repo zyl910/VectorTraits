@@ -94,6 +94,26 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.YRoundToZero_AcceleratedTypes"/>
+            public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
+                get {
+                    return WStatics.YRoundToZero_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YRoundToZero(Vector<float> value) {
+                return WStatics.YRoundToZero(value.AsVector256()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YRoundToZero(Vector<double> value) {
+                return WStatics.YRoundToZero(value.AsVector256()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
                 get {
