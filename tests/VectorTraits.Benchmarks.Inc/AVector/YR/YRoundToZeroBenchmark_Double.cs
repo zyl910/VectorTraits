@@ -21,20 +21,20 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = Single;
+    using TMy = Double;
 
     /// <summary>
-    /// YRoundToZero benchmark - Single.
+    /// YRoundToZero benchmark - Double.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class YRoundToZeroBenchmark_Single : AbstractSharedBenchmark {
+    public partial class YRoundToZeroBenchmark_Double : AbstractSharedBenchmark {
 
         // -- TMy ref --
-        protected static ref TMy dstTMy => ref dstSingle;
-        protected static ref TMy baselineTMy => ref baselineSingle;
-        protected static TMy[] srcArray => srcArraySingle_RangeInt32;
+        protected static ref TMy dstTMy => ref dstDouble;
+        protected static ref TMy baselineTMy => ref baselineDouble;
+        protected static TMy[] srcArray => srcArrayDouble_RangeInt64;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override void CheckResult(string name) {
@@ -53,11 +53,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
         public static TMy StaticSumScalar(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             for (int i = 0; i < srcCount; ++i) {
-#if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1
-                rt += MathF.Truncate(src[i]);
-#else
                 rt += (TMy)Math.Truncate(src[i]);
-#endif
             }
             return rt;
         }
