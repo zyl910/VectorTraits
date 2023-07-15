@@ -134,6 +134,38 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.YRoundToZero_AcceleratedTypes"/>
+        public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YRoundToZero_AcceleratedTypes;
+#else
+                return _instance.YRoundToZero_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<float> YRoundToZero(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToZero(value);
+#else
+            return _instance.YRoundToZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<double> YRoundToZero(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToZero(value);
+#else
+            return _instance.YRoundToZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate_AcceleratedTypes"/>
         public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

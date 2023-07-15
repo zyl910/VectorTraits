@@ -13,6 +13,7 @@
 - Provides the vector methods of clamp (提供限制的向量方法): YClamp .
 - Provides the vector methods of narrow saturate (提供缩窄饱和的向量方法): YNarrowSaturate, YNarrowSaturateUnsigned .
 - Provides the vector methods of shuffle (提供换位的向量方法): YShuffleInsert, YShuffleKernel, YShuffleG2, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG2/ShuffleControlG4 enum.
+- Provides the vector methods of round (提供舍入的向量方法): YRoundToEven, YRoundToZero .
 
 
 

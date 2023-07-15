@@ -88,6 +88,26 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.YRoundToZero_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YRoundToZero_AcceleratedTypes {
+            get {
+                return Statics.YRoundToZero_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<float> YRoundToZero(Vector128<float> value) {
+            return Statics.YRoundToZero(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<double> YRoundToZero(Vector128<double> value) {
+            return Statics.YRoundToZero(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate_AcceleratedTypes"/>
         public virtual TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

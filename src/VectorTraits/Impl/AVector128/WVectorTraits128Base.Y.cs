@@ -87,6 +87,84 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero_AcceleratedTypes"/>
+            public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if NET7_0_OR_GREATER
+                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+#endif // NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YRoundToZero(Vector128<float> value) {
+#if NET7_0_OR_GREATER
+                return YRoundToZero_Floor(value);
+#else
+                return YRoundToZero_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YRoundToZero(Vector128<double> value) {
+#if NET7_0_OR_GREATER
+                return YRoundToZero_Floor(value);
+#else
+                return YRoundToZero_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<float> YRoundToZero_Basic(Vector128<float> value) {
+                Vector128<float> rt = value;
+                float* p = (float*)&rt;
+                p[0] = MathF.Truncate(p[0]);
+                p[1] = MathF.Truncate(p[1]);
+                p[2] = MathF.Truncate(p[2]);
+                p[3] = MathF.Truncate(p[3]);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static unsafe Vector128<double> YRoundToZero_Basic(Vector128<double> value) {
+                Vector128<double> rt = value;
+                double* p = (double*)&rt;
+                p[0] = Math.Truncate(p[0]);
+                p[1] = Math.Truncate(p[1]);
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YRoundToZero_Floor(Vector128<float> value) {
+                Vector128<float> signMask = Vector128Constants.Single_SignMask;
+                Vector128<float> valueAbs = Vector128.AndNot(value, signMask);
+                Vector128<float> signData = Vector128.BitwiseAnd(value, signMask);
+                Vector128<float> rt = Vector128.Floor(valueAbs);
+                rt = Vector128.BitwiseOr(rt, signData);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YRoundToZero_Floor(Vector128<double> value) {
+                Vector128<double> signMask = Vector128Constants.Double_SignMask;
+                Vector128<double> valueAbs = Vector128.AndNot(value, signMask);
+                Vector128<double> signData = Vector128.BitwiseAnd(value, signMask);
+                Vector128<double> rt = Vector128.Floor(valueAbs);
+                rt = Vector128.BitwiseOr(rt, signData);
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
+
+
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
                 get {

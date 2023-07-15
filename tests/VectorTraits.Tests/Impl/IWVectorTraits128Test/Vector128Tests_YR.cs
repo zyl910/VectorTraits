@@ -7,50 +7,50 @@ using System.Xml.Linq;
 using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
-using Zyl.VectorTraits.Impl.AVector256;
+using Zyl.VectorTraits.Impl.AVector128;
 using System.IO;
 
-namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
+namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
     [TestFixture()]
-    public class Vector256Tests_YR {
+    public class Vector128Tests_YR {
 #if NETCOREAPP3_0_OR_GREATER
 
         [TestCase((float)1)]
         [TestCase((double)2)]
         public void YRoundToZeroTest<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
-            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
-            foreach (IWVectorTraits256 instance in instances) {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
                 if (instance.GetIsSupported(true)) {
                     writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YRoundToZero_AcceleratedTypes}");
                 } else {
                     writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<T>>>("YRoundToZero_Floor");
-            var funcListFull = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<T>>>("YRoundToZero", "YRoundToZero_Floor");
+            var funcList = Vector128s.GetSupportedMethodList<Func<Vector128<T>, Vector128<T>>>("YRoundToZero_Floor");
+            var funcListFull = Vector128s.GetSupportedMethodList<Func<Vector128<T>, Vector128<T>>>("YRoundToZero", "YRoundToZero_Floor");
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
             writer.WriteLine();
             // run.
-            Vector256<T>[] samples = {
-                Vector256s<T>.Serial,
-                Vector256s.CreateByDoubleLoop<T>(-0.5, 1),
-                Vector256s.CreateByDoubleLoop<T>(-0.5, -1),
-                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) + 0.4, 0.3),
-                Vector256s<T>.Demo,
-                Vector256s<T>.DemoNaN,
+            Vector128<T>[] samples = {
+                Vector128s<T>.Serial,
+                Vector128s.CreateByDoubleLoop<T>(-0.5, 1),
+                Vector128s.CreateByDoubleLoop<T>(-0.5, -1),
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src) + 0.4, 0.3),
+                Vector128s<T>.Demo,
+                Vector128s<T>.DemoNaN,
             };
             bool allowLog = false;
             bool showNotEquals = true;
-            foreach (Vector256<T> value in samples) {
+            foreach (Vector128<T> value in samples) {
                 writer.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
-                Vector256<T> expected = Vector256s.YRoundToZero((dynamic)value);
+                Vector128<T> expected = Vector128s.YRoundToZero((dynamic)value);
                 writer.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
-                foreach (IWVectorTraits256 instance in instances) {
+                foreach (IWVectorTraits128 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
-                    Vector256<T> dst = instance.YRoundToZero((dynamic)value);
+                    Vector128<T> dst = instance.YRoundToZero((dynamic)value);
                     if (allowLog || (showNotEquals && !expected.Equals(dst))) {
                         writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
@@ -68,7 +68,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 0.0,
                 rangeItemNumber,
             };
-            if (rangeStarts.Count> 0) {
+            if (rangeStarts.Count > 0) {
                 var funcListCurrent = funcListFull;
                 for (int i = -3; i <= 1; ++i) {
                     int n = Scalars<T>.MantissaBits + i;
@@ -79,19 +79,19 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     rangeStarts.Add(-powValueSub);
                     rangeStarts.Add(-powValue);
                 }
-                int rangeItemCountVector256 = rangeItemCount / Vector256<T>.Count;
+                int rangeItemCountVector128 = rangeItemCount / Vector128<T>.Count;
                 SortedDictionary<string, long> dict = new SortedDictionary<string, long>();
                 foreach (double start in rangeStarts) {
-                    for (int i = 0; i < rangeItemCountVector256; ++i) {
-                        double startNumber = start + Vector256<T>.Count * i * stepDelta;
-                        Vector256<T> value = Vector256s.CreateByDoubleLoop<T>(startNumber, stepDelta);
-                        Vector256<T> expected = Vector256s.BaseInstance.YRoundToZero((dynamic)value);
+                    for (int i = 0; i < rangeItemCountVector128; ++i) {
+                        double startNumber = start + Vector128<T>.Count * i * stepDelta;
+                        Vector128<T> value = Vector128s.CreateByDoubleLoop<T>(startNumber, stepDelta);
+                        Vector128<T> expected = Vector128s.BaseInstance.YRoundToZero((dynamic)value);
                         bool usedWrite = false;
                         // funcList.
                         foreach (var func in funcListCurrent) {
                             string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
                             try {
-                                Vector256<T> dst = func(value);
+                                Vector128<T> dst = func(value);
                                 bool showLog = allowLog;
                                 if (!expected.Equals(dst)) {
                                     long countError;
