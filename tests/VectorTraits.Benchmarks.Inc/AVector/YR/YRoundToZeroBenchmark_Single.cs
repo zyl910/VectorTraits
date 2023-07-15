@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -8,44 +8,56 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
-#endif
-using System.Text;
 using System.Threading;
-using Zyl.VectorTraits.Impl;
+#endif
 using Zyl.VectorTraits.Impl.AVector;
 using Zyl.VectorTraits.Impl.AVector128;
 using Zyl.VectorTraits.Impl.AVector256;
 
-namespace Zyl.VectorTraits.Benchmarks.AVector.C {
+namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
 #if BENCHMARKS_OFF
     using BenchmarkAttribute = FakeBenchmarkAttribute;
 #else
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = UInt32;
-    using TMyOut = Single;
+    using TMy = Single;
 
     /// <summary>
-    /// ConvertToSingle benchmark - UInt32.
+    /// YRoundToZero benchmark - Single.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class ConvertToSingleBenchmark_UInt32 : AbstractSharedBenchmark_UInt32_Single {
+    public partial class YRoundToZeroBenchmark_Single : AbstractSharedBenchmark {
+
+        // -- TMy ref --
+        protected static ref TMy dstTMy => ref dstSingle;
+        protected static ref TMy baselineTMy => ref baselineSingle;
+        protected static TMy[] srcArray => srcArraySingle_RangeInt32;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected override void CheckResult(string name) {
+            CheckResult_Report(name, dstTMy != baselineTMy, dstTMy, baselineTMy);
+        }
 
         // -- var --
 
+
         /// <summary>
-        /// Sum ConvertToSingle - Scalar.
+        /// Sum YRoundToZero - Scalar.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSumScalar(TMy[] src, int srcCount) {
-            TMyOut rt = 0; // Result.
+        public static TMy StaticSumScalar(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
             for (int i = 0; i < srcCount; ++i) {
-                rt += (TMyOut)src[i];
+#if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1
+                rt += MathF.Truncate(src[i]);
+#else
+                rt += (TMy)Math.Truncate(src[i]);
+#endif
             }
             return rt;
         }
@@ -59,33 +71,34 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             }
         }
 
+#if NETX_0_OR_GREATER
         /// <summary>
-        /// Sum ConvertToSingle - BCL.
+        /// Sum YRoundToZero - BCL.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSumBcl(TMy[] src, int srcCount) {
-            TMyOut rt = 0; // Result.
+        public static TMy StaticSumBcl(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
             int VectorWidth = Vector<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
-            Vector<TMyOut> vtemp;
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            Vector<TMy> vtemp;
             int i;
             // Body.
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = Vector.ConvertToSingle(p0);
+                vtemp = Vector.YRoundToZero(p0);
                 vrt += vtemp;
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += (TMyOut)Unsafe.Add(ref p, i);
+                rt += (TMy)Unsafe.Add(ref p, i);
             }
             // Reduce.
             rt += Vectors.Sum(vrt);
@@ -99,89 +112,91 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
                 //Debugger.Break();
             }
             dstTMy = StaticSumBcl(srcArray, srcArray.Length);
-            //CheckResult("SumBcl");
-            if (CheckMode) {
-                baselineTMy = dstTMy;
-                BenchmarkUtil.WriteItem("# SumBcl", string.Format("{0}", baselineTMy));
-            }
+            CheckResult("SumBcl");
         }
+#endif // NETX_0_OR_GREATER
 
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum ConvertToSingle - Base.
+        /// Sum YRoundToZero - Base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSumBase(TMy[] src, int srcCount) {
-            TMyOut rt = 0; // Result.
+        public static TMy StaticSumBase(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
             int VectorWidth = Vector<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
-            Vector<TMyOut> vtemp;
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            Vector<TMy> vtemp;
             int i;
             // Body.
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = VectorTraitsBase.Statics.ConvertToSingle(p0);
+                vtemp = VectorTraitsBase.Statics.YRoundToZero(p0);
                 vrt += vtemp;
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += (TMyOut)Unsafe.Add(ref p, i);
+                rt += (TMy)Unsafe.Add(ref p, i);
             }
             // Reduce.
             rt += Vectors.Sum(vrt);
             return rt;
         }
 
-        // [Benchmark] // Same as SumBcl
+        [Benchmark]
         public void SumBase() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
             dstTMy = StaticSumBase(srcArray, srcArray.Length);
-            CheckResult("SumBase");
+            if (CheckMode) {
+                baselineTMy = dstTMy;
+                BenchmarkUtil.WriteItem("# SumBase", string.Format("{0}", baselineTMy));
+            } else {
+                CheckResult("SumBase");
+            }
         }
 
 #endif // BENCHMARKS_ALGORITHM
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum ConvertToSingle - Traits static.
+        /// Sum YRoundToZero - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSumTraits(TMy[] src, int srcCount) {
-            TMyOut rt = 0; // Result.
+        public static TMy StaticSumTraits(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
             int VectorWidth = Vector<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
-            Vector<TMyOut> vtemp;
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            Vector<TMy> vtemp;
             int i;
             // Body.
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = Vectors.ConvertToSingle(p0);
+                vtemp = Vectors.YRoundToZero(p0);
                 vrt += vtemp;
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += (TMyOut)Unsafe.Add(ref p, i);
+                rt += (TMy)Unsafe.Add(ref p, i);
             }
             // Reduce.
             rt += Vectors.Sum(vrt);
@@ -202,34 +217,34 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         #region BENCHMARKS_128
 #if BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
 
-#if NET7_0_OR_GREATER
+#if NETX_0_OR_GREATER
         /// <summary>
-        /// Sum ConvertToSingle - 128 - BCL.
+        /// Sum YRoundToZero - 128 - BCL.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSum128Bcl(TMy[] src, int srcCount) {
-            TMyOut rt = 0; // Result.
+        public static TMy StaticSum128Bcl(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
             int Vector128Width = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = Vector128Width; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector result.
-            Vector128<TMyOut> vtemp;
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
+            Vector128<TMy> vtemp;
             int i;
             // Body.
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = Vector128.ConvertToSingle(p0);
+                vtemp = Vector128.YRoundToZero(p0);
                 vrt = Vector128s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += (TMyOut)Unsafe.Add(ref p, i);
+                rt += (TMy)Unsafe.Add(ref p, i);
             }
             // Reduce.
             rt += Vector128s.Sum(vrt);
@@ -245,38 +260,38 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             dstTMy = StaticSum128Bcl(srcArray, srcArray.Length);
             CheckResult("Sum128Bcl");
         }
-#endif // NET7_0_OR_GREATER
+#endif // NETX_0_OR_GREATER
 
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum ConvertToSingle - 128 - Base - Basic.
+        /// Sum YRoundToZero - 128 - Base - Basic.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSum128Base_Basic(TMy[] src, int srcCount) {
-            TMyOut rt = 0; // Result.
+        public static TMy StaticSum128Base_Basic(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
             int Vector128Width = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = Vector128Width; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector result.
-            Vector128<TMyOut> vtemp;
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
+            Vector128<TMy> vtemp;
             int i;
             // Body.
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = WVectorTraits128Base.Statics.ConvertToSingle_Basic(p0);
+                vtemp = WVectorTraits128Base.Statics.YRoundToZero_Basic(p0);
                 vrt = Vector128s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += (TMyOut)Unsafe.Add(ref p, i);
+                rt += (TMy)Unsafe.Add(ref p, i);
             }
             // Reduce.
             rt += Vector128s.Sum(vrt);
@@ -294,32 +309,32 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         }
 
         /// <summary>
-        /// Sum ConvertToSingle - 128 - Base.
+        /// Sum YRoundToZero - 128 - Base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSum128Base(TMy[] src, int srcCount) {
-            TMyOut rt = 0; // Result.
+        public static TMy StaticSum128Base(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
             int Vector128Width = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = Vector128Width; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector result.
-            Vector128<TMyOut> vtemp;
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
+            Vector128<TMy> vtemp;
             int i;
             // Body.
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = WVectorTraits128Base.Statics.ConvertToSingle(p0);
+                vtemp = WVectorTraits128Base.Statics.YRoundToZero(p0);
                 vrt = Vector128s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += (TMyOut)Unsafe.Add(ref p, i);
+                rt += (TMy)Unsafe.Add(ref p, i);
             }
             // Reduce.
             rt += Vector128s.Sum(vrt);
@@ -340,32 +355,32 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum ConvertToSingle - 128 - Traits static.
+        /// Sum YRoundToZero - 128 - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSum128Traits(TMy[] src, int srcCount) {
-            TMyOut rt = 0; // Result.
+        public static TMy StaticSum128Traits(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
             int Vector128Width = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = Vector128Width; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector result.
-            Vector128<TMyOut> vtemp;
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
+            Vector128<TMy> vtemp;
             int i;
             // Body.
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = Vector128s.ConvertToSingle(p0);
+                vtemp = Vector128s.YRoundToZero(p0);
                 vrt = Vector128s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += (TMyOut)Unsafe.Add(ref p, i);
+                rt += (TMy)Unsafe.Add(ref p, i);
             }
             // Reduce.
             rt += Vector128s.Sum(vrt);
@@ -389,34 +404,34 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         #region BENCHMARKS_256
 #if BENCHMARKS_256 && NETCOREAPP3_0_OR_GREATER
 
-#if NET7_0_OR_GREATER
+#if NETX_0_OR_GREATER
         /// <summary>
-        /// Sum ConvertToSingle - 256 - BCL.
+        /// Sum YRoundToZero - 256 - BCL.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSum256Bcl(TMy[] src, int srcCount) {
-            TMyOut rt = 0; // Result.
+        public static TMy StaticSum256Bcl(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
             int Vector256Width = Vector256<TMy>.Count; // Block width.
             int nBlockWidth = Vector256Width; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector256<TMyOut> vrt = Vector256<TMyOut>.Zero; // Vector result.
-            Vector256<TMyOut> vtemp;
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
+            Vector256<TMy> vtemp;
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = Vector256.ConvertToSingle(p0);
+                vtemp = Vector256.YRoundToZero(p0);
                 vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += (TMyOut)Unsafe.Add(ref p, i);
+                rt += (TMy)Unsafe.Add(ref p, i);
             }
             // Reduce.
             rt += Vector256s.Sum(vrt);
@@ -432,38 +447,38 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             dstTMy = StaticSum256Bcl(srcArray, srcArray.Length);
             CheckResult("Sum256Bcl");
         }
-#endif // NET7_0_OR_GREATER
+#endif // NETX_0_OR_GREATER
 
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum ConvertToSingle - 256 - Base - Basic.
+        /// Sum YRoundToZero - 256 - Base - Basic.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSum256Base_Basic(TMy[] src, int srcCount) {
-            TMyOut rt = 0; // Result.
+        public static TMy StaticSum256Base_Basic(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
             int Vector256Width = Vector256<TMy>.Count; // Block width.
             int nBlockWidth = Vector256Width; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector256<TMyOut> vrt = Vector256<TMyOut>.Zero; // Vector result.
-            Vector256<TMyOut> vtemp;
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
+            Vector256<TMy> vtemp;
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = WVectorTraits256Base.Statics.ConvertToSingle_Basic(p0);
+                vtemp = WVectorTraits256Base.Statics.YRoundToZero_Basic(p0);
                 vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += (TMyOut)Unsafe.Add(ref p, i);
+                rt += (TMy)Unsafe.Add(ref p, i);
             }
             // Reduce.
             rt += Vector256s.Sum(vrt);
@@ -481,32 +496,32 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         }
 
         /// <summary>
-        /// Sum ConvertToSingle - 256 - Base.
+        /// Sum YRoundToZero - 256 - Base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSum256Base(TMy[] src, int srcCount) {
-            TMyOut rt = 0; // Result.
+        public static TMy StaticSum256Base(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
             int Vector256Width = Vector256<TMy>.Count; // Block width.
             int nBlockWidth = Vector256Width; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector256<TMyOut> vrt = Vector256<TMyOut>.Zero; // Vector result.
-            Vector256<TMyOut> vtemp;
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
+            Vector256<TMy> vtemp;
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = WVectorTraits256Base.Statics.ConvertToSingle(p0);
+                vtemp = WVectorTraits256Base.Statics.YRoundToZero(p0);
                 vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += (TMyOut)Unsafe.Add(ref p, i);
+                rt += (TMy)Unsafe.Add(ref p, i);
             }
             // Reduce.
             rt += Vector256s.Sum(vrt);
@@ -527,32 +542,32 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum ConvertToSingle - 256 - Traits static.
+        /// Sum YRoundToZero - 256 - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        public static TMyOut StaticSum256Traits(TMy[] src, int srcCount) {
-            TMyOut rt = 0; // Result.
+        public static TMy StaticSum256Traits(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
             int Vector256Width = Vector256<TMy>.Count; // Block width.
             int nBlockWidth = Vector256Width; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector256<TMyOut> vrt = Vector256<TMyOut>.Zero; // Vector result.
-            Vector256<TMyOut> vtemp;
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
+            Vector256<TMy> vtemp;
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vtemp = Vector256s.ConvertToSingle(p0);
+                vtemp = Vector256s.YRoundToZero(p0);
                 vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
             ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
             for (i = 0; i < cntRem; ++i) {
-                rt += (TMyOut)Unsafe.Add(ref p, i);
+                rt += (TMy)Unsafe.Add(ref p, i);
             }
             // Reduce.
             rt += Vector256s.Sum(vrt);
@@ -574,5 +589,4 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
 
 
     }
-
 }
