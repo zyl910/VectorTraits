@@ -147,6 +147,11 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>SingleBit - `pow(2, -32) = 1.0/pow(2, 32) = 1.0/4294967296 = 2.3283064365386963E-10`. `BitConverter.SingleToInt32Bits((float)Math.Pow(2, -32)).ToString("X8") = "2F800000"`.</summary>
         public const int SingleBit_2PowNegative32 = 0x2F800000;
 
+        /// <summary>SingleBit - Truncate - expMinuend.`((int)Single_ExponentBias * 2 + Single_ExponentShift) &lt;&lt; Single_ExponentShift = ((int)127*2 + 23)&lt;&lt;23 = 0x8A800000 = -1971322880`. `BitConverter.Int32BitsToSingle(-1971322880) = -1.2325952E-32`, `BitConverter.SingleToInt32Bits(-1.2325952E-32).ToString("X") = "8A800000"`.</summary>
+        /// <remarks>If valueExpData is `(127 + e)&lt;&lt;23`, `expMinuend-valueExpData` exponent field will be `(127*2 + 23) - (127 + e) = 127 + (23-e)`</remarks>
+        public const int SingleBit_Truncate_expMinuend = ((int)Single_ExponentBias * 2 + Single_ExponentShift) << Single_ExponentShift;
+
+
         // == Double (s1e11m52) ==
         // -- Double - Number struct --
         /// <summary>Double - Sign bit size (符号位数). Value is `1`.</summary>

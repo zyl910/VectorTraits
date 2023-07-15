@@ -1,14 +1,13 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
-using System.Xml.Linq;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
-using Zyl.VectorTraits.Impl.AVector128;
-using System.IO;
+using Zyl.VectorTraits.Impl.AVector256;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
     [TestFixture()]
