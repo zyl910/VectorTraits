@@ -92,26 +92,6 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
-            /// <inheritdoc cref="IVectorTraits.YRoundToZero_AcceleratedTypes"/>
-            public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
-                get {
-                    return WStatics.YRoundToZero_AcceleratedTypes;
-                }
-            }
-
-            /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{float})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<float> YRoundToZero(Vector<float> value) {
-                return WStatics.YRoundToZero(value.AsVector128()).AsVector();
-            }
-
-            /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<double> YRoundToZero(Vector<double> value) {
-                return WStatics.YRoundToZero(value.AsVector128()).AsVector();
-            }
-
-
             /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
                 get {
@@ -199,6 +179,26 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> YNarrowSaturateUnsigned(Vector<long> lower, Vector<long> upper) {
                 return WStatics.YNarrowSaturateUnsigned(lower.AsVector128(), upper.AsVector128()).AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.YRoundToZero_AcceleratedTypes"/>
+            public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
+                get {
+                    return WStatics.YRoundToZero_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YRoundToZero(Vector<float> value) {
+                return WStatics.YRoundToZero(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YRoundToZero(Vector<double> value) {
+                return WStatics.YRoundToZero(value.AsVector128()).AsVector();
             }
 
 

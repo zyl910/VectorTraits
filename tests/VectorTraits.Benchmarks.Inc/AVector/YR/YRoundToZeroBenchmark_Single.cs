@@ -8,8 +8,8 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
-using System.Threading;
 #endif
+using System.Threading;
 using Zyl.VectorTraits.Impl.AVector;
 using Zyl.VectorTraits.Impl.AVector128;
 using Zyl.VectorTraits.Impl.AVector256;

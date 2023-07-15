@@ -131,38 +131,6 @@ namespace Zyl.VectorTraits {
         }
 
 
-        /// <inheritdoc cref="IVectorTraits.YRoundToZero_AcceleratedTypes"/>
-        public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
-            get {
-#if BCL_BASE_OVERRIDE_STATIC
-                return BaseStatics.YRoundToZero_AcceleratedTypes;
-#else
-                return _instance.YRoundToZero_AcceleratedTypes;
-#endif // BCL_BASE_OVERRIDE_STATIC
-            }
-        }
-
-        /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{float})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<float> YRoundToZero(Vector<float> value) {
-#if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YRoundToZero(value);
-#else
-            return _instance.YRoundToZero(value);
-#endif // BCL_BASE_OVERRIDE_STATIC
-        }
-
-        /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{double})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<double> YRoundToZero(Vector<double> value) {
-#if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YRoundToZero(value);
-#else
-            return _instance.YRoundToZero(value);
-#endif // BCL_BASE_OVERRIDE_STATIC
-        }
-
-
         /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_AcceleratedTypes"/>
         public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {
@@ -301,6 +269,38 @@ namespace Zyl.VectorTraits {
             return BaseStatics.YNarrowSaturateUnsigned(lower, upper);
 #else
             return _instance.YNarrowSaturateUnsigned(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YRoundToZero_AcceleratedTypes"/>
+        public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YRoundToZero_AcceleratedTypes;
+#else
+                return _instance.YRoundToZero_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YRoundToZero(Vector<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToZero(value);
+#else
+            return _instance.YRoundToZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YRoundToZero(Vector<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToZero(value);
+#else
+            return _instance.YRoundToZero(value);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 

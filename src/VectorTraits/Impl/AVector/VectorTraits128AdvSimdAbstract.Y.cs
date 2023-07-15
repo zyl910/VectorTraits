@@ -86,26 +86,6 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
 
-        /// <inheritdoc cref="IVectorTraits.YRoundToZero_AcceleratedTypes"/>
-        public override TypeCodeFlags YRoundToZero_AcceleratedTypes {
-            get {
-                return Statics.YRoundToZero_AcceleratedTypes;
-            }
-        }
-
-        /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{float})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override Vector<float> YRoundToZero(Vector<float> value) {
-            return Statics.YRoundToZero(value);
-        }
-
-        /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{double})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override Vector<double> YRoundToZero(Vector<double> value) {
-            return Statics.YRoundToZero(value);
-        }
-
-
         /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_AcceleratedTypes"/>
         public override TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {
@@ -193,6 +173,26 @@ namespace Zyl.VectorTraits.Impl.AVector {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<uint> YNarrowSaturateUnsigned(Vector<long> lower, Vector<long> upper) {
             return Statics.YNarrowSaturateUnsigned(lower, upper);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YRoundToZero_AcceleratedTypes"/>
+        public override TypeCodeFlags YRoundToZero_AcceleratedTypes {
+            get {
+                return Statics.YRoundToZero_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<float> YRoundToZero(Vector<float> value) {
+            return Statics.YRoundToZero(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> YRoundToZero(Vector<double> value) {
+            return Statics.YRoundToZero(value);
         }
 
 

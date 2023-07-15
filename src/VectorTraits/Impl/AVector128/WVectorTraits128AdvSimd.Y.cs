@@ -91,30 +91,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
-            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero_AcceleratedTypes"/>
-            public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
-                get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single;
-                    return rt;
-                }
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<float> YRoundToZero(Vector128<float> value) {
-                return AdvSimd.RoundToZero(value);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<double> YRoundToZero(Vector128<double> value) {
-                Vector64<double> lower = AdvSimd.RoundToZeroScalar(Vector128.GetLower(value));
-                Vector64<double> upper = AdvSimd.RoundToZeroScalar(Vector128.GetUpper(value));
-                Vector128<double> rt = Vector128.Create(lower, upper);
-                return rt;
-            }
-
-
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
                 get {
@@ -206,6 +182,30 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YNarrowSaturateUnsigned(Vector128<long> lower, Vector128<long> upper) {
                 return AdvSimd.ExtractNarrowingSaturateUnsignedUpper(AdvSimd.ExtractNarrowingSaturateUnsignedLower(lower), upper);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero_AcceleratedTypes"/>
+            public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YRoundToZero(Vector128<float> value) {
+                return AdvSimd.RoundToZero(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YRoundToZero(Vector128<double> value) {
+                Vector64<double> lower = AdvSimd.RoundToZeroScalar(Vector128.GetLower(value));
+                Vector64<double> upper = AdvSimd.RoundToZeroScalar(Vector128.GetUpper(value));
+                Vector128<double> rt = Vector128.Create(lower, upper);
+                return rt;
             }
 
 

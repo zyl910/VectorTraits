@@ -88,26 +88,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero_AcceleratedTypes"/>
-        public override TypeCodeFlags YRoundToZero_AcceleratedTypes {
-            get {
-                return Statics.YRoundToZero_AcceleratedTypes;
-            }
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{float})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override Vector256<float> YRoundToZero(Vector256<float> value) {
-            return Statics.YRoundToZero(value);
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{double})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override Vector256<double> YRoundToZero(Vector256<double> value) {
-            return Statics.YRoundToZero(value);
-        }
-
-
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public override TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {
@@ -195,6 +175,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector256<uint> YNarrowSaturateUnsigned(Vector256<long> lower, Vector256<long> upper) {
             return Statics.YNarrowSaturateUnsigned(lower, upper);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero_AcceleratedTypes"/>
+        public override TypeCodeFlags YRoundToZero_AcceleratedTypes {
+            get {
+                return Statics.YRoundToZero_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<float> YRoundToZero(Vector256<float> value) {
+            return Statics.YRoundToZero(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<double> YRoundToZero(Vector256<double> value) {
+            return Statics.YRoundToZero(value);
         }
 
 
