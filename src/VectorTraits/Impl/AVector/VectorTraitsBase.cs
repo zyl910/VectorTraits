@@ -67,7 +67,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
                     if (Vector.IsHardwareAccelerated) {
-#if BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
+#if (BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER) || SOFTWARE_OPTIMIZATION
                         rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
 #endif // BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                     }
@@ -80,6 +80,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<float> Ceiling(Vector<float> value) {
 #if BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                 return Vector.Ceiling(value);
+#elif SOFTWARE_OPTIMIZATION
+                return Ceiling_ClearBit(value);
 #else
                 return Ceiling_Basic(value);
 #endif // BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
@@ -90,6 +92,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<double> Ceiling(Vector<double> value) {
 #if BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                 return Vector.Ceiling(value);
+#elif SOFTWARE_OPTIMIZATION
+                return Ceiling_ClearBit(value);
 #else
                 return Ceiling_Basic(value);
 #endif // BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
@@ -120,6 +124,28 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 for (int i = 0; i < cnt; ++i) {
                     p[i] = Math.Ceiling(p[i]);
                 }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Ceiling_ClearBit(Vector<float> value) {
+                Vector<int> fixMask = Vector.GreaterThan(value, Vector<float>.Zero);
+                Vector<float> valueTrun = YRoundToZero_ClearBit(value);
+                fixMask = Vector.AndNot(fixMask, Vector.Equals(value, valueTrun));
+                Vector<float> valueTrunFix = Vector.Add(valueTrun, new Vector<float>(1.0f));
+                Vector<float> rt = Vector.ConditionalSelect(fixMask, valueTrunFix, valueTrun);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> Ceiling_ClearBit(Vector<double> value) {
+                Vector<long> fixMask = Vector.GreaterThan(value, Vector<double>.Zero);
+                Vector<double> valueTrun = YRoundToZero_ClearBit(value);
+                fixMask = Vector.AndNot(fixMask, Vector.Equals(value, valueTrun));
+                Vector<double> valueTrunFix = Vector.Add(valueTrun, new Vector<double>(1.0d));
+                Vector<double> rt = Vector.ConditionalSelect(fixMask, valueTrunFix, valueTrun);
                 return rt;
             }
 
@@ -565,7 +591,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
                     if (Vector.IsHardwareAccelerated) {
-#if (BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER) || HARDWARE_OPTIMIZATION
+#if (BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER) || SOFTWARE_OPTIMIZATION
                         rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
 #endif // BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                     }
@@ -578,7 +604,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<float> Floor(Vector<float> value) {
 #if BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                 return Vector.Floor(value);
-#elif HARDWARE_OPTIMIZATION
+#elif SOFTWARE_OPTIMIZATION
                 return Floor_ClearBit(value);
 #else
                 return Floor_Basic(value);
@@ -590,7 +616,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<double> Floor(Vector<double> value) {
 #if BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                 return Vector.Floor(value);
-#elif HARDWARE_OPTIMIZATION
+#elif SOFTWARE_OPTIMIZATION
                 return Floor_ClearBit(value);
 #else
                 return Floor_Basic(value);
