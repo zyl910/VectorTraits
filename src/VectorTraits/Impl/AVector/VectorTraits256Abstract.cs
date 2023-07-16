@@ -70,26 +70,6 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
 
-        /// <inheritdoc cref="IVectorTraits.Ceiling_AcceleratedTypes"/>
-        public override TypeCodeFlags Ceiling_AcceleratedTypes {
-            get {
-                return Statics.Ceiling_AcceleratedTypes;
-            }
-        }
-
-        /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{float})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override Vector<float> Ceiling(Vector<float> value) {
-            return Statics.Ceiling(value);
-        }
-
-        /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{double})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override Vector<double> Ceiling(Vector<double> value) {
-            return Statics.Ceiling(value);
-        }
-
-
         /// <inheritdoc cref="IVectorTraits.Narrow_AcceleratedTypes"/>
         public override TypeCodeFlags Narrow_AcceleratedTypes {
             get {
