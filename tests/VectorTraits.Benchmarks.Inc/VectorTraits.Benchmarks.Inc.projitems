@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ABitMath\ConditionalSelectBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ABitMath\ConditionalSelectBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AloneTestUtil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\C\CeilingBenchmark_Double.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\C\CeilingBenchmark_Single.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\C\ConvertToDoubleBenchmark_Int64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\C\ConvertToDoubleBenchmark_UInt64.cs" />
