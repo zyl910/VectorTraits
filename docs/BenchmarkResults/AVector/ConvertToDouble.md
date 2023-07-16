@@ -1,6 +1,13 @@
 # Benchmark - ConvertToDouble
 ([← Back](README.md))
 
+- `ConvertToDouble[/_Range52]`: Convert to a vector whose elements are of type Double (转换为元素类型是Double的向量).
+  Mnemonic: `rt[i] := (Double)(value[i])` .
+- `ConvertToInt64[/_Range52/Range52RoundToEven]`: Convert to a vector whose elements are of type Int64 (转换为元素类型是Int64的向量).
+  Mnemonic: `rt[i] := (Int64)(value[i])` .
+- `ConvertToUInt64[/_Range52/Range52RoundToEven]`: Convert to a vector whose elements are of type UInt64 (转换为元素类型是UInt64的向量).
+  Mnemonic: `rt[i] := (UInt64)(value[i])` .
+
 ## x86
 
 ### lntel Core i5-8250U

@@ -1,6 +1,13 @@
 # Benchmark - ConvertToSingle
 ([← Back](README.md))
 
+- `ConvertToInt32`: Convert to a vector whose elements are of type Int32 (转换为元素类型是Int32的向量).
+  Mnemonic: `rt[i] := (Int32)(value[i])` .
+- `ConvertToSingle`: Convert to a vector whose elements are of type Single (转换为元素类型是Single的向量).
+  Mnemonic: `rt[i] := (Single)(value[i])` .
+- `ConvertToUInt32`: Convert to a vector whose elements are of type UInt32 (转换为元素类型是UInt32的向量).
+  Mnemonic: `rt[i] := (UInt32)(value[i])` .
+
 ## x86
 
 ### lntel Core i5-8250U
