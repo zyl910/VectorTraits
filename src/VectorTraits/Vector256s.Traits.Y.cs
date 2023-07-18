@@ -276,38 +276,6 @@ namespace Zyl.VectorTraits {
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero_AcceleratedTypes"/>
-        public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
-            get {
-#if BCL_BASE_OVERRIDE_STATIC
-                return BaseStatics.YRoundToZero_AcceleratedTypes;
-#else
-                return _instance.YRoundToZero_AcceleratedTypes;
-#endif // BCL_BASE_OVERRIDE_STATIC
-            }
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{float})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector256<float> YRoundToZero(Vector256<float> value) {
-#if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YRoundToZero(value);
-#else
-            return _instance.YRoundToZero(value);
-#endif // BCL_BASE_OVERRIDE_STATIC
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{double})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector256<double> YRoundToZero(Vector256<double> value) {
-#if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YRoundToZero(value);
-#else
-            return _instance.YRoundToZero(value);
-#endif // BCL_BASE_OVERRIDE_STATIC
-        }
-
-
         /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_AcceleratedTypes"/>
         public static TypeCodeFlags YShuffleG2_AcceleratedTypes {
             get {
@@ -1576,6 +1544,70 @@ namespace Zyl.VectorTraits {
             return BaseStatics.YShuffleKernel_Core(vector, args0, args1);
 #else
             return _instance.YShuffleKernel_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToEven_AcceleratedTypes"/>
+        public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YRoundToEven_AcceleratedTypes;
+#else
+                return _instance.YRoundToEven_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YRoundToEven(Vector256<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToEven(value);
+#else
+            return _instance.YRoundToEven(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YRoundToEven(Vector256<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToEven(value);
+#else
+            return _instance.YRoundToEven(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero_AcceleratedTypes"/>
+        public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YRoundToZero_AcceleratedTypes;
+#else
+                return _instance.YRoundToZero_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YRoundToZero(Vector256<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToZero(value);
+#else
+            return _instance.YRoundToZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YRoundToZero(Vector256<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToZero(value);
+#else
+            return _instance.YRoundToZero(value);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 

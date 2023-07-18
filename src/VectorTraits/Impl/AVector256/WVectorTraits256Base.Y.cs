@@ -225,6 +225,100 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.YRoundToEven_AcceleratedTypes"/>
+            public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if NET7_0_OR_GREATER
+                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+#endif // NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YRoundToEven(Vector256<float> value) {
+#if NET7_0_OR_GREATER
+                return YRoundToEven_Add(value);
+#else
+                return YRoundToEven_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YRoundToEven(Vector256<double> value) {
+#if NET7_0_OR_GREATER
+                return YRoundToEven_Add(value);
+#else
+                return YRoundToEven_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YRoundToEven_Basic(Vector256<float> value) {
+                Vector256<float> rt = value;
+                ref float p = ref Unsafe.As<Vector256<float>, float>(ref rt);
+                p = MathF.Round(p);
+                Unsafe.Add(ref p, 1) = MathF.Round(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = MathF.Round(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = MathF.Round(Unsafe.Add(ref p, 3));
+                Unsafe.Add(ref p, 4) = MathF.Round(Unsafe.Add(ref p, 4));
+                Unsafe.Add(ref p, 5) = MathF.Round(Unsafe.Add(ref p, 5));
+                Unsafe.Add(ref p, 6) = MathF.Round(Unsafe.Add(ref p, 6));
+                Unsafe.Add(ref p, 7) = MathF.Round(Unsafe.Add(ref p, 7));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YRoundToEven_Basic(Vector256<double> value) {
+                Vector256<double> rt = value;
+                ref double p = ref Unsafe.As<Vector256<double>, double>(ref rt);
+                p = Math.Round(p);
+                Unsafe.Add(ref p, 1) = Math.Round(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = Math.Round(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = Math.Round(Unsafe.Add(ref p, 3));
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YRoundToEven_Add(Vector256<float> value) {
+                // if (0<=x && x<pow(2,23)), `round_to_even(x) = x + pow(2,23) - pow(2,23)`. Next generalize this approach to all number ranges.
+                Vector256<float> delta = Vector256.Create(ScalarConstants.SingleVal_2Pow23);
+                Vector256<float> signMask = Vector256Constants.Single_SignMask;
+                Vector256<float> valueAbs = Vector256.AndNot(value, signMask);
+                Vector256<float> signData = Vector256.BitwiseAnd(value, signMask);
+                Vector256<float> allowMask = Vector256.LessThan(valueAbs, delta); // Allow is `(value[i] < pow(2,23) )`.
+                delta = Vector256.BitwiseOr(delta, signData);
+                delta = Vector256.BitwiseAnd(delta, allowMask);
+                Vector256<float> rt = Vector256.Add(value, delta);
+                rt = Vector256.Subtract(rt, delta);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YRoundToEven_Add(Vector256<double> value) {
+                // if (0<=x && x<pow(2,52)), `round_to_even(x) = x + pow(2,52) - pow(2,52)`. Next generalize this approach to all number ranges.
+                Vector256<double> delta = Vector256.Create(ScalarConstants.DoubleVal_2Pow52);
+                Vector256<double> signMask = Vector256Constants.Double_SignMask;
+                Vector256<double> valueAbs = Vector256.AndNot(value, signMask);
+                Vector256<double> signData = Vector256.BitwiseAnd(value, signMask);
+                Vector256<double> allowMask = Vector256.LessThan(valueAbs, delta); // Allow is `(value[i] < pow(2,52) )`.
+                delta = Vector256.BitwiseOr(delta, signData);
+                delta = Vector256.BitwiseAnd(delta, allowMask);
+                Vector256<double> rt = Vector256.Add(value, delta);
+                rt = Vector256.Subtract(rt, delta);
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
+
+
             /// <inheritdoc cref="IWVectorTraits256.YRoundToZero_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
                 get {

@@ -310,7 +310,7 @@ namespace Zyl.VectorTraits.Impl {
         TypeCodeFlags YRoundToZero_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: `MidpointRounding.ToZero`.
+        /// Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: <see cref="MidpointRounding.ToZero"/>.
         /// Mnemonic: <c>rt[i] := round_to_zero(value[i])</c>.
         /// </summary>
         /// <param name="value">The vector that will have its round to zero computed (将计算向零舍入的向量).</param>
@@ -319,7 +319,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector<float> YRoundToZero(Vector<float> value);
 
         /// <summary>
-        /// Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: `MidpointRounding.ToZero`.
+        /// Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: <see cref="MidpointRounding.ToZero"/>.
         /// Mnemonic: <c>rt[i] := round_to_zero(value[i])</c>.
         /// </summary>
         /// <param name="value">The vector that will have its round to zero computed (将计算向零舍入的向量).</param>

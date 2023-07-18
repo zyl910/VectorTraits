@@ -178,26 +178,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero_AcceleratedTypes"/>
-        public virtual TypeCodeFlags YRoundToZero_AcceleratedTypes {
-            get {
-                return Statics.YRoundToZero_AcceleratedTypes;
-            }
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{float})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector256<float> YRoundToZero(Vector256<float> value) {
-            return Statics.YRoundToZero(value);
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{double})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector256<double> YRoundToZero(Vector256<double> value) {
-            return Statics.YRoundToZero(value);
-        }
-
-
         /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_AcceleratedTypes"/>
         public virtual TypeCodeFlags YShuffleG2_AcceleratedTypes {
             get {
@@ -983,6 +963,46 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector256<ulong> YShuffleKernel_Core(Vector256<ulong> vector, Vector256<ulong> args0, Vector256<ulong> args1) {
             return Statics.YShuffleKernel_Core(vector, args0, args1);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToEven_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YRoundToEven_AcceleratedTypes {
+            get {
+                return Statics.YRoundToEven_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> YRoundToEven(Vector256<float> value) {
+            return Statics.YRoundToEven(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> YRoundToEven(Vector256<double> value) {
+            return Statics.YRoundToEven(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YRoundToZero_AcceleratedTypes {
+            get {
+                return Statics.YRoundToZero_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> YRoundToZero(Vector256<float> value) {
+            return Statics.YRoundToZero(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToZero(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> YRoundToZero(Vector256<double> value) {
+            return Statics.YRoundToZero(value);
         }
 
 #endif

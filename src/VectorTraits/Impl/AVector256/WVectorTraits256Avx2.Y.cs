@@ -214,6 +214,27 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.YRoundToEven_AcceleratedTypes"/>
+            public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YRoundToEven(Vector256<float> value) {
+                return Avx.RoundToNearestInteger(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YRoundToEven(Vector256<double> value) {
+                return Avx.RoundToNearestInteger(value);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.YRoundToZero_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
                 get {
