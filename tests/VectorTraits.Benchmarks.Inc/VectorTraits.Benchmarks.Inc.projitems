@@ -83,6 +83,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YN\YNarrowSaturateUnsignedBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YN\YNarrowSaturateUnsignedBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YN\YNarrowSaturateUnsignedBenchmark_Int64.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YR\YRoundToEvenBenchmark_Double.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YR\YRoundToEvenBenchmark_Single.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YR\YRoundToZeroBenchmark_Double.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YR\YRoundToZeroBenchmark_Single.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleG2Benchmark_Int16.cs" />
