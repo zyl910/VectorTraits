@@ -182,6 +182,26 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.YRoundToEven_AcceleratedTypes"/>
+            public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
+                get {
+                    return WStatics.YRoundToEven_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YRoundToEven(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YRoundToEven(Vector<float> value) {
+                return WStatics.YRoundToEven(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YRoundToEven(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YRoundToEven(Vector<double> value) {
+                return WStatics.YRoundToEven(value.AsVector128()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.YRoundToZero_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
                 get {

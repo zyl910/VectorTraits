@@ -215,6 +215,58 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.YRoundToEven_AcceleratedTypes"/>
+            public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YRoundToEven(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YRoundToEven(Vector<float> value) {
+                return YRoundToEven_Add(value);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YRoundToEven(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YRoundToEven(Vector<double> value) {
+                return YRoundToEven_Add(value);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YRoundToEven(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YRoundToEven_Add(Vector<float> value) {
+                // [Single type] If (0<=x && x<pow(2,23)), `round_to_even(x) = x + pow(2,23) - pow(2,23)`. Next generalize this approach to all number ranges.
+                Vector<float> delta = new Vector<float>(ScalarConstants.SingleVal_2Pow23);
+                Vector<float> signMask = VectorConstants.Single_SignMask;
+                Vector<float> valueAbs = Vector.AndNot(value, signMask);
+                Vector<float> signData = Vector.BitwiseAnd(value, signMask);
+                Vector<float> allowMask = Vector.LessThan(valueAbs, delta).AsSingle(); // Allow is `(value[i] < pow(2,23) )`.
+                delta = Vector.BitwiseOr(delta, signData);
+                delta = Vector.BitwiseAnd(delta, allowMask);
+                Vector<float> rt = Vector.Add(value, delta);
+                rt = Vector.Subtract(rt, delta);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YRoundToEven(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YRoundToEven_Add(Vector<double> value) {
+                // [Double type] If (0<=x && x<pow(2,52)), `round_to_even(x) = x + pow(2,52) - pow(2,52)`. Next generalize this approach to all number ranges.
+                Vector<double> delta = new Vector<double>(ScalarConstants.DoubleVal_2Pow52);
+                Vector<double> signMask = VectorConstants.Double_SignMask;
+                Vector<double> valueAbs = Vector.AndNot(value, signMask);
+                Vector<double> signData = Vector.BitwiseAnd(value, signMask);
+                Vector<double> allowMask = Vector.LessThan(valueAbs, delta).AsDouble(); // Allow is `(value[i] < pow(2,52) )`.
+                delta = Vector.BitwiseOr(delta, signData);
+                delta = Vector.BitwiseAnd(delta, allowMask);
+                Vector<double> rt = Vector.Add(value, delta);
+                rt = Vector.Subtract(rt, delta);
+                return rt;
+            }
+
             /// <inheritdoc cref="IVectorTraits.YRoundToZero_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
                 get {

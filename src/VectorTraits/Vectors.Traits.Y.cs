@@ -273,6 +273,38 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.YRoundToEven_AcceleratedTypes"/>
+        public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YRoundToEven_AcceleratedTypes;
+#else
+                return _instance.YRoundToEven_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YRoundToEven(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YRoundToEven(Vector<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToEven(value);
+#else
+            return _instance.YRoundToEven(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YRoundToEven(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YRoundToEven(Vector<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToEven(value);
+#else
+            return _instance.YRoundToEven(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.YRoundToZero_AcceleratedTypes"/>
         public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
             get {

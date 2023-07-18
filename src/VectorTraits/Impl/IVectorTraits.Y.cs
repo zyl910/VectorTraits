@@ -297,6 +297,38 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YRoundToEven</c> (运行 <c>YRoundToEven</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para>Methods used to calculate rounding (用于计算舍入的方法):</para>
+        /// <para>- <see cref="Ceiling"/>: Computes the ceiling of each element in a vector (计算向量中每个元素的向上取整). It is also known as round to positive infinity (它也被称作向正无穷舍入). See more: <see cref="MidpointRounding.ToPositiveInfinity"/>.</para>
+        /// <para>- <see cref="Floor"/>: Computes the floor of each element in a vector (计算向量中每个元素的向下取整). It is also known as round to negative infinity (它也被称作向负无穷舍入). See more: <see cref="MidpointRounding.ToNegativeInfinity"/>.</para>
+        /// <para>- <see cref="YRoundToEven"/>: Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.</para>
+        /// <para>- <see cref="YRoundToZero"/>: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: <see cref="MidpointRounding.ToZero"/>.</para>
+        /// </remarks>
+        /// <seealso cref="YRoundToEven"/>
+        TypeCodeFlags YRoundToEven_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.
+        /// Mnemonic: <c>rt[i] := round_to_even(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its round to zero computed (将计算向零舍入的向量).</param>
+        /// <returns>A vector whose elements are the round to zero of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向零舍入).</returns>
+        /// <seealso cref="YRoundToEven_AcceleratedTypes"/>
+        Vector<float> YRoundToEven(Vector<float> value);
+
+        /// <summary>
+        /// Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.
+        /// Mnemonic: <c>rt[i] := round_to_even(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The vector that will have its round to zero computed (将计算向零舍入的向量).</param>
+        /// <returns>A vector whose elements are the round to zero of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向零舍入).</returns>
+        /// <seealso cref="YRoundToEven_AcceleratedTypes"/>
+        Vector<double> YRoundToEven(Vector<double> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YRoundToZero</c> (运行 <c>YRoundToZero</c> 时具有硬件加速的类型).
         /// </summary>
         /// <remarks>
