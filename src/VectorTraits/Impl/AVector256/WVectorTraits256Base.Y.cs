@@ -288,7 +288,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YRoundToEven_Add(Vector256<float> value) {
-                // if (0<=x && x<pow(2,23)), `round_to_even(x) = x + pow(2,23) - pow(2,23)`. Next generalize this approach to all number ranges.
+                // [Single type] If (0<=x && x<pow(2,23)), `round_to_even(x) = x + pow(2,23) - pow(2,23)`. Next generalize this approach to all number ranges.
                 Vector256<float> delta = Vector256.Create(ScalarConstants.SingleVal_2Pow23);
                 Vector256<float> signMask = Vector256Constants.Single_SignMask;
                 Vector256<float> valueAbs = Vector256.AndNot(value, signMask);
@@ -304,7 +304,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YRoundToEven_Add(Vector256<double> value) {
-                // if (0<=x && x<pow(2,52)), `round_to_even(x) = x + pow(2,52) - pow(2,52)`. Next generalize this approach to all number ranges.
+                // [Double type] If (0<=x && x<pow(2,52)), `round_to_even(x) = x + pow(2,52) - pow(2,52)`. Next generalize this approach to all number ranges.
                 Vector256<double> delta = Vector256.Create(ScalarConstants.DoubleVal_2Pow52);
                 Vector256<double> signMask = Vector256Constants.Double_SignMask;
                 Vector256<double> valueAbs = Vector256.AndNot(value, signMask);

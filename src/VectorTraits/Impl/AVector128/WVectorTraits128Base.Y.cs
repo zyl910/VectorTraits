@@ -226,6 +226,94 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToEven_AcceleratedTypes"/>
+            public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if NET7_0_OR_GREATER
+                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+#endif // NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToEven(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YRoundToEven(Vector128<float> value) {
+#if NET7_0_OR_GREATER
+                return YRoundToEven_Add(value);
+#else
+                return YRoundToEven_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToEven(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YRoundToEven(Vector128<double> value) {
+#if NET7_0_OR_GREATER
+                return YRoundToEven_Add(value);
+#else
+                return YRoundToEven_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToEven(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YRoundToEven_Basic(Vector128<float> value) {
+                Vector128<float> rt = value;
+                ref float p = ref Unsafe.As<Vector128<float>, float>(ref rt);
+                p = MathF.Round(p);
+                Unsafe.Add(ref p, 1) = MathF.Round(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = MathF.Round(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = MathF.Round(Unsafe.Add(ref p, 3));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToEven(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YRoundToEven_Basic(Vector128<double> value) {
+                Vector128<double> rt = value;
+                ref double p = ref Unsafe.As<Vector128<double>, double>(ref rt);
+                p = Math.Round(p);
+                Unsafe.Add(ref p, 1) = Math.Round(Unsafe.Add(ref p, 1));
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToEven(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YRoundToEven_Add(Vector128<float> value) {
+                // [Single type] If (0<=x && x<pow(2,23)), `round_to_even(x) = x + pow(2,23) - pow(2,23)`. Next generalize this approach to all number ranges.
+                Vector128<float> delta = Vector128.Create(ScalarConstants.SingleVal_2Pow23);
+                Vector128<float> signMask = Vector128Constants.Single_SignMask;
+                Vector128<float> valueAbs = Vector128.AndNot(value, signMask);
+                Vector128<float> signData = Vector128.BitwiseAnd(value, signMask);
+                Vector128<float> allowMask = Vector128.LessThan(valueAbs, delta); // Allow is `(value[i] < pow(2,23) )`.
+                delta = Vector128.BitwiseOr(delta, signData);
+                delta = Vector128.BitwiseAnd(delta, allowMask);
+                Vector128<float> rt = Vector128.Add(value, delta);
+                rt = Vector128.Subtract(rt, delta);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToEven(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YRoundToEven_Add(Vector128<double> value) {
+                // [Double type] If (0<=x && x<pow(2,52)), `round_to_even(x) = x + pow(2,52) - pow(2,52)`. Next generalize this approach to all number ranges.
+                Vector128<double> delta = Vector128.Create(ScalarConstants.DoubleVal_2Pow52);
+                Vector128<double> signMask = Vector128Constants.Double_SignMask;
+                Vector128<double> valueAbs = Vector128.AndNot(value, signMask);
+                Vector128<double> signData = Vector128.BitwiseAnd(value, signMask);
+                Vector128<double> allowMask = Vector128.LessThan(valueAbs, delta); // Allow is `(value[i] < pow(2,52) )`.
+                delta = Vector128.BitwiseOr(delta, signData);
+                delta = Vector128.BitwiseAnd(delta, allowMask);
+                Vector128<double> rt = Vector128.Add(value, delta);
+                rt = Vector128.Subtract(rt, delta);
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
+
+
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
                 get {
