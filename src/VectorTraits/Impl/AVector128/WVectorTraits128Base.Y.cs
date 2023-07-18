@@ -259,23 +259,23 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<float> YRoundToZero_Basic(Vector128<float> value) {
+            public static Vector128<float> YRoundToZero_Basic(Vector128<float> value) {
                 Vector128<float> rt = value;
-                float* p = (float*)&rt;
-                p[0] = MathF.Truncate(p[0]);
-                p[1] = MathF.Truncate(p[1]);
-                p[2] = MathF.Truncate(p[2]);
-                p[3] = MathF.Truncate(p[3]);
+                ref float p = ref Unsafe.As<Vector128<float>, float>(ref rt);
+                p = MathF.Truncate(p);
+                Unsafe.Add(ref p, 1) = MathF.Truncate(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = MathF.Truncate(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = MathF.Truncate(Unsafe.Add(ref p, 3));
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<double> YRoundToZero_Basic(Vector128<double> value) {
+            public static Vector128<double> YRoundToZero_Basic(Vector128<double> value) {
                 Vector128<double> rt = value;
-                double* p = (double*)&rt;
-                p[0] = Math.Truncate(p[0]);
-                p[1] = Math.Truncate(p[1]);
+                ref double p = ref Unsafe.As<Vector128<double>, double>(ref rt);
+                p = Math.Truncate(p);
+                Unsafe.Add(ref p, 1) = Math.Truncate(Unsafe.Add(ref p, 1));
                 return rt;
             }
 
