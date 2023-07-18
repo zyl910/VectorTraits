@@ -804,23 +804,23 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<float> Floor_Basic(Vector128<float> value) {
+            public static Vector128<float> Floor_Basic(Vector128<float> value) {
                 Vector128<float> rt = value;
-                float* p = (float*)&rt;
-                p[0] = MathF.Floor(p[0]);
-                p[1] = MathF.Floor(p[1]);
-                p[2] = MathF.Floor(p[2]);
-                p[3] = MathF.Floor(p[3]);
+                ref float p = ref Unsafe.As<Vector128<float>, float>(ref rt);
+                p = MathF.Floor(p);
+                Unsafe.Add(ref p, 1) = MathF.Floor(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = MathF.Floor(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = MathF.Floor(Unsafe.Add(ref p, 3));
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<double> Floor_Basic(Vector128<double> value) {
+            public static Vector128<double> Floor_Basic(Vector128<double> value) {
                 Vector128<double> rt = value;
-                double* p = (double*)&rt;
-                p[0] = Math.Floor(p[0]);
-                p[1] = Math.Floor(p[1]);
+                ref double p = ref Unsafe.As<Vector128<double>, double>(ref rt);
+                p = Math.Floor(p);
+                Unsafe.Add(ref p, 1) = Math.Floor(Unsafe.Add(ref p, 1));
                 return rt;
             }
 

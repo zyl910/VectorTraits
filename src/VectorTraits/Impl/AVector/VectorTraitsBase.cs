@@ -625,28 +625,28 @@ namespace Zyl.VectorTraits.Impl.AVector {
 
             /// <inheritdoc cref="IVectorTraits.Floor(Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<float> Floor_Basic(Vector<float> value) {
+            public static Vector<float> Floor_Basic(Vector<float> value) {
                 Vector<float> rt = value;
-                float* p = (float*)&rt;
-                int cnt = Vector<float>.Count;
-                for (int i = 0; i < cnt; ++i) {
+                ref float p = ref Unsafe.As<Vector<float>, float>(ref rt);
+                for (nint i = 0; i < Vector<float>.Count; ++i) {
 #if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                    p[i] = MathF.Floor(p[i]);
+                    p = MathF.Floor(p);
 #else
-                    p[i] = (float)Math.Floor(p[i]);
+                    p = (float)Math.Floor(p);
 #endif // NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+                    p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
             }
 
             /// <inheritdoc cref="IVectorTraits.Floor(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector<double> Floor_Basic(Vector<double> value) {
+            public static Vector<double> Floor_Basic(Vector<double> value) {
                 Vector<double> rt = value;
-                double* p = (double*)&rt;
-                int cnt = Vector<double>.Count;
-                for (int i = 0; i < cnt; ++i) {
-                    p[i] = Math.Floor(p[i]);
+                ref double p = ref Unsafe.As<Vector<double>, double>(ref rt);
+                for (nint i = 0; i < Vector<double>.Count; ++i) {
+                    p = Math.Floor(p);
+                    p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
             }

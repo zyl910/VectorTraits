@@ -860,29 +860,29 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Floor(Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<float> Floor_Basic(Vector256<float> value) {
+            public static Vector256<float> Floor_Basic(Vector256<float> value) {
                 Vector256<float> rt = value;
-                float* p = (float*)&rt;
-                p[0] = MathF.Floor(p[0]);
-                p[1] = MathF.Floor(p[1]);
-                p[2] = MathF.Floor(p[2]);
-                p[3] = MathF.Floor(p[3]);
-                p[4] = MathF.Floor(p[4]);
-                p[5] = MathF.Floor(p[5]);
-                p[6] = MathF.Floor(p[6]);
-                p[7] = MathF.Floor(p[7]);
+                ref float p = ref Unsafe.As<Vector256<float>, float>(ref rt);
+                p = MathF.Floor(p);
+                Unsafe.Add(ref p, 1) = MathF.Floor(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = MathF.Floor(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = MathF.Floor(Unsafe.Add(ref p, 3));
+                Unsafe.Add(ref p, 4) = MathF.Floor(Unsafe.Add(ref p, 4));
+                Unsafe.Add(ref p, 5) = MathF.Floor(Unsafe.Add(ref p, 5));
+                Unsafe.Add(ref p, 6) = MathF.Floor(Unsafe.Add(ref p, 6));
+                Unsafe.Add(ref p, 7) = MathF.Floor(Unsafe.Add(ref p, 7));
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Floor(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<double> Floor_Basic(Vector256<double> value) {
+            public static Vector256<double> Floor_Basic(Vector256<double> value) {
                 Vector256<double> rt = value;
-                double* p = (double*)&rt;
-                p[0] = Math.Floor(p[0]);
-                p[1] = Math.Floor(p[1]);
-                p[2] = Math.Floor(p[2]);
-                p[3] = Math.Floor(p[3]);
+                ref double p = ref Unsafe.As<Vector256<double>, double>(ref rt);
+                p = Math.Floor(p);
+                Unsafe.Add(ref p, 1) = Math.Floor(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = Math.Floor(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = Math.Floor(Unsafe.Add(ref p, 3));
                 return rt;
             }
 
