@@ -21,6 +21,7 @@
 - BENCHMARKS_128ALGORITHM: [废弃] 评测各种128位底层算法.
 - BENCHMARKS_256ALGORITHM: [废弃] 评测各种256位底层算法.
 - BENCHMARKS_ALGORITHM: 评测各种底层算法. 如 ShiftLeft_Multiply .
+- BENCHMARKS_CONST: 是否测试常量. 单独申明, 用于 YShuffleG2_Const 等可能会取消的函数的评测.
 - BENCHMARKS_RAW: [废弃] 评测各种原始用法. 如 SumSLLRawAvx2 . 【注】原始用法改为根据 BENCHMARKS_ALGORITHM, 使用下划线连接.
 - BENCHMARKS_TRAITS_USAGES: [废弃] 评测特征的各种用法. 如 SumSLLTraitsArg, SumSLLTraitsOverload .
 - BENCHMARKS_TARGET_FAST: [废弃] 评测目标方法的快速版.
