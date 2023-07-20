@@ -113,6 +113,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return Avx2.Shuffle(source.AsByte(), indices).AsUInt64();
             }
 
+#if !REDUCE_MEMORY_USAGE
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{float}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YShuffleG2_Const(Vector256<float> source, [ConstantExpected] ShuffleControlG2 control) {
@@ -275,6 +276,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //byte ctl = (byte)(0xA0 + (n & 2) * 0x22 + (n & 1) * 0x11); // ShuffleControlG2 to ShuffleControlG4
                 //return Avx2.Permute4x64(source, ctl);
             }
+#endif // !REDUCE_MEMORY_USAGE
 
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG4_AcceleratedTypes"/>
@@ -1267,6 +1269,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 #endif // NETCOREAPP3_0_OR_GREATER
-            }
+        }
     }
 }

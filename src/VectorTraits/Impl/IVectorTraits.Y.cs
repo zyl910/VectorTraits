@@ -477,6 +477,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="YShuffleG2_AcceleratedTypes"/>
         Vector<ulong> YShuffleG2(Vector<ulong> source, ShuffleControlG2 control);
 
+#if !REDUCE_MEMORY_USAGE
         /// <summary>
         /// For each 2-element group in a vector, shuffle is performed - Constant version (对于一个向量中的每个 2-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xy = shuffleG2_ref(control, source)</c>. View for element: <c>rt[i] := source[(i&amp;(~1)) | ((control &gt;&gt; (i&amp;1)) &amp; 1)]</c>.
@@ -576,6 +577,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG2_AcceleratedTypes"/>
         Vector<ulong> YShuffleG2_Const(Vector<ulong> source, [ConstantExpected] ShuffleControlG2 control);
+#endif // !REDUCE_MEMORY_USAGE
 
 
         /// <summary>

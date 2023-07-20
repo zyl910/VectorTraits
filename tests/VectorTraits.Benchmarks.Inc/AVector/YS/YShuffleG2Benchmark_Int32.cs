@@ -1,5 +1,7 @@
 ﻿//#undef BENCHMARKS_OFF
+#if !REDUCE_MEMORY_USAGE
 #define BENCHMARKS_CONST
+#endif
 
 using BenchmarkDotNet.Attributes;
 using System;

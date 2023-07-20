@@ -198,6 +198,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
+#if !REDUCE_MEMORY_USAGE
             /// <inheritdoc cref="IVectorTraits.YShuffleG2_Const(Vector{float}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<float> YShuffleG2_Const(Vector<float> source, [ConstantExpected] ShuffleControlG2 control) {
@@ -261,6 +262,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<ulong> YShuffleG2_Const(Vector<ulong> source, [ConstantExpected] ShuffleControlG2 control) {
                 return YShuffleG2(source, control);
             }
+#endif // !REDUCE_MEMORY_USAGE
 
 
             /// <inheritdoc cref="IVectorTraits.YShuffleG4_AcceleratedTypes"/>

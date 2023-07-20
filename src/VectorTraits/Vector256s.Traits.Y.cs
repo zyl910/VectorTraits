@@ -423,6 +423,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
+#if !REDUCE_MEMORY_USAGE
         /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_Const(Vector256{float}, ShuffleControlG2)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> YShuffleG2_Const(Vector256<float> source, [ConstantExpected] ShuffleControlG2 control) {
@@ -526,6 +527,7 @@ namespace Zyl.VectorTraits {
             return _instance.YShuffleG2_Const(source, control);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
+#endif // !REDUCE_MEMORY_USAGE
 
 
         /// <inheritdoc cref="IWVectorTraits256.YShuffleG4_AcceleratedTypes"/>

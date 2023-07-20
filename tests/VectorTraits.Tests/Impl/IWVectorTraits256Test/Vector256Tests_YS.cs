@@ -78,6 +78,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             } // samples
         }
 
+#if !REDUCE_MEMORY_USAGE
         [TestCase((float)1)]
         [TestCase((double)2)]
         [TestCase((sbyte)3)]
@@ -153,6 +154,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 } // j
             } // samples
         }
+#endif // !REDUCE_MEMORY_USAGE
 
         [TestCase((float)1)]
         [TestCase((double)2)]
