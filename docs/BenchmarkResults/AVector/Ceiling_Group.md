@@ -1,10 +1,10 @@
 # Benchmark group - Ceiling
 ([← Back](Ceiling.md))
 
-Cell unit: Mega/Second .
+Cell unit: Million operations per second.
 
 ### x86 - lntel Core i5-8250U
-| Class                        | Name             | .NET Framework | .NET Core 2.1 | .NET Core 3.1 | .NET 5.0 | .NET 6.0 | .NET 7.0 |
+| Class                        | Method           | .NET Framework | .NET Core 2.1 | .NET Core 3.1 | .NET 5.0 | .NET 6.0 | .NET 7.0 |
 | :--------------------------- | :--------------- | -------------: | ------------: | ------------: | -------: | -------: | -------: |
 | CeilingBenchmark_Double      | SumScalar        |        414.692 |       280.555 |       280.831 |  277.753 |  280.509 |  280.037 |
 | CeilingBenchmark_Double      | SumBcl           |                |               |               | 3117.382 | 3220.868 | 3187.029 |
@@ -104,7 +104,7 @@ Cell unit: Mega/Second .
 | YRoundToZeroBenchmark_Single | Sum256Traits     |                |               |      6508.660 | 6581.566 | 6582.179 | 6406.911 |
 
 ### Arm - AWS Arm t4g.small
-| Class                        | Name             | .NET Core 3.1 | .NET 5.0 | .NET 6.0 | .NET 7.0 |
+| Class                        | Method           | .NET Core 3.1 | .NET 5.0 | .NET 6.0 | .NET 7.0 |
 | :--------------------------- | :--------------- | ------------: | -------: | -------: | -------: |
 | CeilingBenchmark_Double      | SumScalar        |       830.483 |  902.454 |  899.267 | 1242.191 |
 | CeilingBenchmark_Double      | SumBcl           |               | 1966.868 | 1963.219 | 2470.381 |

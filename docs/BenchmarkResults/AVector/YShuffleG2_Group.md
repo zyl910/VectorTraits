@@ -1,10 +1,10 @@
 # Benchmark group - YShuffleG2
 ([← Back](YShuffleG2.md))
 
-Cell unit: Mega/Second .
+Cell unit: Million operations per second.
 
 ### x86 - lntel Core i5-8250U
-| Class                     | Name                      | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| Class                     | Method                    | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
 | :------------------------ | :------------------------ | -------------: | ------------: | ------------: | --------: | --------: | --------: |
 | YShuffleG2Benchmark_Int16 | SumScalar                 |        603.563 |       611.557 |       602.263 |   610.740 |   599.868 |   746.208 |
 | YShuffleG2Benchmark_Int16 | SumBase                   |        606.674 |       609.081 |       607.799 |   609.765 |   597.298 |   751.141 |
@@ -48,7 +48,7 @@ Cell unit: Mega/Second .
 | YShuffleG2Benchmark_SByte | Sum_Const256Traits        |                |               |     25514.129 | 23525.222 | 37278.811 | 36700.467 |
 
 ### Arm - AWS Arm t4g.small
-| Class                     | Name                      | .NET Core 3.1 | .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| Class                     | Method                    | .NET Core 3.1 | .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
 | :------------------------ | :------------------------ | ------------: | -------: | --------: | --------: |
 | YShuffleG2Benchmark_Int16 | SumScalar                 |       408.867 |  414.314 |   414.875 |   564.690 |
 | YShuffleG2Benchmark_Int16 | SumBase                   |       408.089 |  414.527 |   414.641 |   562.215 |
