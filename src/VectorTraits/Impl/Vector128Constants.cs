@@ -775,7 +775,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>Return vector value (返回向量值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> GetYShuffleG4_Byte_Indices(ShuffleControlG4 index) {
-            return m_YShuffleG4_Byte_Indices[(nint)(byte)index];
+            return m_YShuffleG4_Byte_Indices[(byte)index];
         }
 
         private static readonly Vector128<byte>[] m_YShuffleG4_UInt16_ByteIndices = new Vector128<byte>[256];
@@ -784,7 +784,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>Return vector value (返回向量值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> GetYShuffleG4_UInt16_ByteIndices(ShuffleControlG4 index) {
-            return m_YShuffleG4_UInt16_ByteIndices[(nint)(byte)index];
+            return m_YShuffleG4_UInt16_ByteIndices[(byte)index];
         }
 
         private static readonly Vector128<byte>[] m_YShuffleG4_UInt32_ByteIndices = new Vector128<byte>[256];
@@ -793,7 +793,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>Return vector value (返回向量值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> GetYShuffleG4_UInt32_ByteIndices(ShuffleControlG4 index) {
-            return m_YShuffleG4_UInt32_ByteIndices[(nint)(byte)index];
+            return m_YShuffleG4_UInt32_ByteIndices[(byte)index];
         }
 
         private static readonly Vector128<byte>[] m_YShuffleG4X2_UInt64_ByteIndices = new Vector128<byte>[256 * 4];
@@ -802,7 +802,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>Returns the first reference to the four vector values(result0_indices0, result0_indices1, result1_indices0, result1_indices1) (返回4个向量值的首个引用).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ref Vector128<byte> GetYShuffleG4X2_UInt64_ByteIndices(ShuffleControlG4 index) {
-            return ref m_YShuffleG4X2_UInt64_ByteIndices[(nint)(byte)index * 4];
+            return ref m_YShuffleG4X2_UInt64_ByteIndices[(byte)index * 4];
         }
 
         #endregion // TraitsMethod
