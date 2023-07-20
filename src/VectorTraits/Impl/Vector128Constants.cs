@@ -723,7 +723,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>Return vector value (返回向量值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> GetYShuffleG2_Byte_Indices(ShuffleControlG2 index) {
-            return m_YShuffleG2_Byte_Indices[(nint)(byte)index];
+            return m_YShuffleG2_Byte_Indices[(byte)index];
         }
 
         private static readonly Vector128<byte>[] m_YShuffleG2_UInt16_ByteIndices = {
@@ -737,7 +737,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>Return vector value (返回向量值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> GetYShuffleG2_UInt16_ByteIndices(ShuffleControlG2 index) {
-            return m_YShuffleG2_UInt16_ByteIndices[(nint)(byte)index];
+            return m_YShuffleG2_UInt16_ByteIndices[(byte)index];
         }
 
         private static readonly Vector128<byte>[] m_YShuffleG2_UInt32_ByteIndices = {
@@ -751,7 +751,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>Return vector value (返回向量值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> GetYShuffleG2_UInt32_ByteIndices(ShuffleControlG2 index) {
-            return m_YShuffleG2_UInt32_ByteIndices[(nint)(byte)index];
+            return m_YShuffleG2_UInt32_ByteIndices[(byte)index];
         }
 
         private static readonly Vector128<byte>[] m_YShuffleG2_UInt64_ByteIndices = {
@@ -765,7 +765,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>Return vector value (返回向量值).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> GetYShuffleG2_UInt64_ByteIndices(ShuffleControlG2 index) {
-            return m_YShuffleG2_UInt64_ByteIndices[(nint)(byte)index];
+            return m_YShuffleG2_UInt64_ByteIndices[(byte)index];
         }
 
 

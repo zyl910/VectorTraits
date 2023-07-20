@@ -40,37 +40,37 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	28917
-SumScalar	435.701	601.661
-SumBase	429.554	610.271	1.014310
-SumTraits	433.186	605.154	1.005805
-Sum_ConstTraits	428.180	612.229	1.017565
+SumScalar	434.328	603.563
+SumBase	432.100	606.674	1.005155
+SumTraits	438.687	597.564	0.990062
+Sum_ConstTraits	431.139	608.027	1.007397
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-1234767990
-SumScalar	537.889	487.357
-SumBase	528.583	495.938	1.017606
-SumTraits	526.851	497.567	1.020950
-Sum_ConstTraits	525.372	498.969	1.023826
+SumScalar	527.060	497.370
+SumBase	528.789	495.744	0.996730
+SumTraits	528.244	496.255	0.997758
+Sum_ConstTraits	526.551	497.851	1.000967
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-5475020453166212109
-SumScalar	551.963	474.930
-SumBase	531.018	493.663	1.039444
-SumTraits	529.021	495.526	1.043366
-Sum_ConstTraits	518.446	505.635	1.064650
+SumScalar	531.217	493.478
+SumBase	529.326	495.242	1.003574
+SumTraits	528.985	495.560	1.004219
+Sum_ConstTraits	499.466	524.849	1.063571
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-47
-SumScalar	385.031	680.839
-SumBase	381.932	686.362	1.008113
-SumTraits	398.644	657.589	0.965850
-Sum_ConstTraits	383.028	684.398	1.005228
+SumScalar	381.422	687.281
+SumBase	382.460	685.415	0.997285
+SumTraits	398.284	658.184	0.957662
+Sum_ConstTraits	380.630	688.711	1.002080
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -114,37 +114,37 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	28917
-SumScalar	429.319	610.604
-SumBase	429.695	610.069	0.999125
-SumTraits	429.559	610.264	0.999443
-Sum_ConstTraits	430.342	609.153	0.997625
+SumScalar	428.650	611.557
+SumBase	430.392	609.081	0.995951
+SumTraits	430.114	609.475	0.996595
+Sum_ConstTraits	429.310	610.617	0.998462
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-1234767990
-SumScalar	528.537	495.980
-SumBase	528.419	496.091	1.000223
-SumTraits	527.935	496.546	1.001141
-Sum_ConstTraits	526.044	498.331	1.004740
+SumScalar	527.337	497.109
+SumBase	534.264	490.663	0.987034
+SumTraits	533.460	491.403	0.988523
+Sum_ConstTraits	536.596	488.532	0.982747
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-5475020453166212109
-SumScalar	531.184	493.509
-SumBase	530.040	494.574	1.002159
-SumTraits	530.963	493.714	1.000416
-Sum_ConstTraits	497.495	526.928	1.067718
+SumScalar	536.988	488.174
+SumBase	538.795	486.538	0.996647
+SumTraits	541.013	484.543	0.992562
+Sum_ConstTraits	503.076	521.083	1.067411
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-47
-SumScalar	383.030	684.396
-SumBase	381.284	687.529	1.004579
-SumTraits	381.904	686.413	1.002947
-Sum_ConstTraits	392.530	667.831	0.975796
+SumScalar	382.755	684.887
+SumBase	383.261	683.982	0.998679
+SumTraits	382.588	685.187	1.000438
+Sum_ConstTraits	392.108	668.551	0.976148
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -188,57 +188,57 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	28917
-SumScalar	430.353	609.137
-SumBase	430.511	608.914	0.999634
-SumTraits	21.637	12115.302	19.889273
+SumScalar	435.265	602.263
+SumBase	431.301	607.799	1.009191
+SumTraits	21.473	12207.818	20.269897
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	21.446	12223.608	20.067076
-Sum_ConstTraits	21.430	12232.550	20.081755
+Sum256Traits	21.440	12227.133	20.301967
+Sum_ConstTraits	21.454	12219.112	20.288648
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	21.742	12056.756	19.793160
+Sum_Const256Traits	22.046	11890.565	19.743129
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-1234767990
-SumScalar	527.230	497.210
-SumBase	528.336	496.169	0.997908
-SumTraits	44.203	5930.524	11.927611
+SumScalar	540.468	485.032
+SumBase	528.176	496.319	1.023272
+SumTraits	44.157	5936.641	12.239700
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_AvxByte	44.540	5885.550	11.837159
-Sum256Traits	44.505	5890.157	11.846424
-Sum_ConstTraits	44.573	5881.220	11.828449
+Sum256_AvxByte	44.137	5939.308	12.245198
+Sum256Traits	44.209	5929.641	12.225268
+Sum_ConstTraits	44.595	5878.300	12.119417
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256_AvxImm	113.175	2316.265	4.658528
-Sum_Const256_AvxImmByte	96.911	2704.986	5.440332
-Sum_Const256_AvxImmByteG4	22.471	11665.863	23.462663
-Sum_Const256Traits	45.302	5786.600	11.638148
+Sum_Const256_AvxImm	92.564	2832.045	5.838888
+Sum_Const256_AvxImmByte	118.556	2211.134	4.558743
+Sum_Const256_AvxImmByteG4	21.964	11934.933	24.606506
+Sum_Const256Traits	46.674	5616.497	11.579653
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-5475020453166212109
-SumScalar	528.733	495.797
-SumBase	529.481	495.096	0.998587
-SumTraits	88.355	2966.933	5.984174
+SumScalar	554.621	472.655
+SumBase	529.481	495.096	1.047479
+SumTraits	88.679	2956.109	6.254271
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	89.458	2930.342	5.910373
-Sum_ConstTraits	90.726	2889.393	5.827780
+Sum256Traits	89.880	2916.597	6.170674
+Sum_ConstTraits	93.149	2814.256	5.954150
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	97.007	2702.333	5.450487
+Sum_Const256Traits	91.498	2865.033	6.061580
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-47
-SumScalar	380.235	689.426
-SumBase	380.458	689.022	0.999415
-SumTraits	10.094	25969.580	37.668428
+SumScalar	383.389	683.754
+SumBase	381.181	687.714	1.005792
+SumTraits	10.463	25055.009	36.643310
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	10.110	25928.280	37.608523
-Sum_ConstTraits	10.245	25587.549	37.114298
+Sum256Traits	10.372	25274.170	36.963835
+Sum_ConstTraits	10.557	24830.939	36.315603
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	10.304	25440.344	36.900780
+Sum_Const256Traits	10.274	25514.129	37.314780
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -283,61 +283,61 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	28917
-SumScalar	429.095	610.923
-SumBase	434.708	603.034	0.987087
-SumTraits	21.607	12132.537	19.859339
+SumScalar	429.224	610.740
+SumBase	429.910	609.765	0.998403
+SumTraits	21.570	12153.266	19.899246
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	22.013	11908.610	19.492802
-Sum_ConstTraits	22.373	11716.767	19.178780
+Sum256Traits	21.559	12159.311	19.909144
+Sum_ConstTraits	21.714	12072.395	19.766832
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	22.376	11715.588	19.176850
+Sum_Const256Traits	21.696	12082.761	19.783805
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-1234767990
-SumScalar	526.615	497.791
-SumBase	537.378	487.820	0.979971
-SumTraits	44.969	5829.429	11.710608
+SumScalar	527.777	496.694
+SumBase	524.376	499.916	1.006487
+SumTraits	43.735	5993.975	12.067736
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_AvxByte	46.424	5646.748	11.343624
-Sum256Traits	46.540	5632.720	11.315442
-Sum_ConstTraits	57.465	4561.814	9.164124
+Sum256_AvxByte	43.662	6003.943	12.087805
+Sum256Traits	44.164	5935.686	11.950383
+Sum_ConstTraits	44.166	5935.378	11.949762
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256_AvxImm	98.334	2665.846	5.355358
-Sum_Const256_AvxImmByte	97.502	2688.603	5.401072
-Sum_Const256_AvxImmByteG4	25.157	10420.470	20.933445
-Sum_Const256Traits	46.868	5593.286	11.236224
+Sum_Const256_AvxImm	116.664	2247.003	4.523916
+Sum_Const256_AvxImmByte	105.998	2473.094	4.979108
+Sum_Const256_AvxImmByteG4	22.428	11688.258	23.532099
+Sum_Const256Traits	46.458	5642.545	11.360198
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-5475020453166212109
-SumScalar	506.690	517.366
-SumBase	527.284	497.159	0.960944
-SumTraits	90.224	2905.467	5.615889
+SumScalar	513.438	510.566
+SumBase	512.916	511.085	1.001016
+SumTraits	92.896	2821.899	5.526997
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	102.215	2564.635	4.957104
-Sum_ConstTraits	97.194	2697.113	5.213167
+Sum256Traits	97.224	2696.281	5.280959
+Sum_ConstTraits	94.799	2765.271	5.416084
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	91.860	2853.727	5.515881
+Sum_Const256Traits	95.518	2744.432	5.375270
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-47
-SumScalar	381.658	686.856
-SumBase	381.611	686.940	1.000122
-SumTraits	10.110	25929.590	37.751136
+SumScalar	385.939	679.237
+SumBase	388.105	675.446	0.994418
+SumTraits	10.881	24092.316	35.469682
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	10.338	25356.755	36.917141
-Sum_ConstTraits	10.670	24567.565	35.768152
+Sum256Traits	10.772	24336.080	35.828561
+Sum_ConstTraits	10.869	24118.642	35.508439
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	10.710	24477.325	35.636770
+Sum_Const256Traits	11.143	23525.222	34.634784
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -382,61 +382,61 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	28917
-SumScalar	436.376	600.729
-SumBase	433.865	604.206	1.005788
-SumTraits	17.842	14692.144	24.457172
+SumScalar	437.003	599.868
+SumBase	438.883	597.298	0.995717
+SumTraits	14.146	18531.389	30.892456
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	16.084	16298.808	27.131694
-Sum_ConstTraits	16.496	15891.814	26.454195
+Sum256Traits	15.656	16744.514	27.913674
+Sum_ConstTraits	15.702	16694.599	27.830465
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	16.798	15605.467	25.977529
+Sum_Const256Traits	15.738	16656.231	27.766503
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-1234767990
-SumScalar	530.504	494.142
-SumBase	542.097	483.574	0.978614
-SumTraits	33.087	7922.891	16.033647
+SumScalar	528.517	495.999
+SumBase	538.090	487.175	0.982210
+SumTraits	30.134	8699.256	17.538864
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_AvxByte	34.057	7697.192	15.576898
-Sum256Traits	33.733	7771.078	15.726423
-Sum_ConstTraits	33.214	7892.578	15.972303
+Sum256_AvxByte	30.550	8580.903	17.300250
+Sum256Traits	32.014	8188.328	16.508765
+Sum_ConstTraits	31.661	8279.822	16.693229
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256_AvxImm	99.494	2634.768	5.332010
-Sum_Const256_AvxImmByte	113.217	2315.412	4.685727
-Sum_Const256_AvxImmByteG4	23.988	10928.142	22.115409
-Sum_Const256Traits	32.665	8025.215	16.240723
+Sum_Const256_AvxImm	98.180	2670.028	5.383134
+Sum_Const256_AvxImmByte	109.491	2394.198	4.827024
+Sum_Const256_AvxImmByteG4	24.254	10808.298	21.790975
+Sum_Const256Traits	31.504	8320.925	16.776098
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-5475020453166212109
-SumScalar	505.631	518.450
-SumBase	526.615	497.791	0.960153
-SumTraits	65.814	3983.118	7.682748
+SumScalar	506.624	517.433
+SumBase	526.641	497.766	0.961991
+SumTraits	58.657	4469.086	8.637031
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	64.558	4060.597	7.832192
-Sum_ConstTraits	67.407	3888.951	7.501116
+Sum256Traits	56.460	4642.996	8.973133
+Sum_ConstTraits	63.079	4155.818	8.031603
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	70.852	3699.864	7.136400
+Sum_Const256Traits	65.207	4020.205	7.769515
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-47
-SumScalar	385.959	679.202
-SumBase	386.758	677.799	0.997934
-SumTraits	7.824	33504.420	49.329074
+SumScalar	381.342	687.424
+SumBase	380.738	688.516	1.001588
+SumTraits	6.530	40141.594	58.394223
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	7.780	33694.567	49.609032
-Sum_ConstTraits	7.633	34341.574	50.561630
+Sum256Traits	6.784	38642.844	56.213982
+Sum_ConstTraits	7.189	36462.187	53.041766
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	7.485	35023.889	51.566213
+Sum_Const256Traits	7.032	37278.811	54.229714
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -481,61 +481,61 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	28917
-SumScalar	349.329	750.421
-SumBase	352.934	742.757	0.989787
-SumTraits	14.616	17934.933	23.899828
+SumScalar	351.301	746.208
+SumBase	348.994	751.141	1.006610
+SumTraits	12.842	20412.731	27.355282
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	14.644	17900.610	23.854089
-Sum_ConstTraits	14.800	17711.836	23.602532
+Sum256Traits	15.057	17409.773	23.330992
+Sum_ConstTraits	15.109	17350.418	23.251449
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	15.510	16901.518	22.522714
+Sum_Const256Traits	15.130	17326.438	23.219313
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-1234767990
-SumScalar	471.362	556.141
-SumBase	463.659	565.380	1.016613
-SumTraits	31.024	8449.735	15.193501
+SumScalar	450.567	581.809
+SumBase	458.882	571.266	0.981880
+SumTraits	28.984	9044.568	15.545606
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_AvxByte	31.596	8296.838	14.918576
-Sum256Traits	30.586	8570.734	15.411069
-Sum_ConstTraits	31.279	8380.869	15.069672
+Sum256_AvxByte	33.069	7927.193	13.625086
+Sum256Traits	31.477	8327.988	14.313964
+Sum_ConstTraits	32.094	8168.093	14.039140
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256_AvxImm	96.814	2707.700	4.868726
-Sum_Const256_AvxImmByte	101.362	2586.209	4.650272
-Sum_Const256_AvxImmByteG4	22.899	11447.921	20.584550
-Sum_Const256Traits	31.296	8376.151	15.061188
+Sum_Const256_AvxImm	105.167	2492.633	4.284284
+Sum_Const256_AvxImmByte	97.735	2682.200	4.610107
+Sum_Const256_AvxImmByteG4	23.273	11263.914	19.360170
+Sum_Const256Traits	31.393	8350.406	14.352495
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-5475020453166212109
-SumScalar	501.757	522.452
-SumBase	522.742	501.479	0.959856
-SumTraits	58.225	4502.237	8.617512
+SumScalar	499.618	524.689
+SumBase	500.759	523.493	0.997721
+SumTraits	59.303	4420.383	8.424771
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	59.322	4419.006	8.458202
-Sum_ConstTraits	59.515	4404.702	8.430824
+Sum256Traits	61.562	4258.220	8.115705
+Sum_ConstTraits	63.392	4135.294	7.881421
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	64.038	4093.564	7.835291
+Sum_Const256Traits	64.421	4069.263	7.755573
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-47
-SumScalar	307.148	853.476
-SumBase	306.981	853.942	1.000546
-SumTraits	6.896	38013.166	44.539207
+SumScalar	306.846	854.318
+SumBase	304.089	862.064	1.009067
+SumTraits	5.912	44339.044	51.899908
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	6.945	37748.060	44.228587
-Sum_ConstTraits	6.758	38789.379	45.448679
+Sum256Traits	7.173	36544.143	42.775790
+Sum_ConstTraits	7.052	37174.087	43.513155
 Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	6.821	38432.414	45.030430
+Sum_Const256Traits	7.143	36700.467	42.958772
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -585,27 +585,27 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-4214
-SumScalar	640.698	409.154
-SumBase	642.162	408.221	0.997721
-SumTraits	641.875	408.404	0.998167
-Sum128Traits	1031.169	254.220	0.621332
+SumScalar	641.147	408.867
+SumBase	642.370	408.089	0.998097
+SumTraits	642.977	407.703	0.997153
+Sum128Traits	1032.773	253.825	0.620801
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	660.252	397.036	0.970384
-Sum_Const128Traits	1045.528	250.729	0.612798
+Sum_ConstTraits	662.836	395.489	0.967279
+Sum_Const128Traits	1048.264	250.075	0.611628
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	1787346957
-SumScalar	734.539	356.882
-SumBase	735.735	356.302	0.998374
-SumTraits	736.021	356.164	0.997986
-Sum128Traits	1484.115	176.633	0.494934
+SumScalar	734.179	357.057
+SumBase	736.233	356.061	0.997210
+SumTraits	736.612	355.878	0.996698
+Sum128Traits	1482.588	176.815	0.495201
 Sum256_AvxByte	Run fail! Requires hardware support Avx, Avx2!
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	710.994	368.701	1.033116
-Sum_Const128Traits	1482.698	176.802	0.495407
+Sum_ConstTraits	711.971	368.195	1.031193
+Sum_Const128Traits	1484.191	176.624	0.494666
 Sum_Const256_AvxImm	Run fail! Requires hardware support Avx, Avx2!
 Sum_Const256_AvxImmByte	Run fail! Requires hardware support Avx, Avx2!
 Sum_Const256_AvxImmByteG4	Run fail! Requires hardware support Avx, Avx2!
@@ -615,26 +615,26 @@ Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	5878554485936559874
-SumScalar	676.932	387.253
-SumBase	675.198	388.248	1.002569
-SumTraits	676.730	387.369	1.000298
-Sum128Traits	1262.948	207.565	0.535993
+SumScalar	702.348	373.239
+SumBase	680.468	385.241	1.032154
+SumTraits	675.432	388.113	1.039851
+Sum128Traits	1265.155	207.203	0.555148
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	680.671	385.126	0.994507
-Sum_Const128Traits	1276.459	205.368	0.530320
+Sum_ConstTraits	674.650	388.563	1.041055
+Sum_Const128Traits	2014.728	130.114	0.348607
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	99
-SumScalar	529.038	495.511
-SumBase	529.465	495.111	0.999192
-SumTraits	528.461	496.051	1.001090
-Sum128Traits	797.404	328.747	0.663450
+SumScalar	527.228	497.212
+SumBase	526.947	497.477	1.000533
+SumTraits	527.700	496.767	0.999105
+Sum128Traits	795.886	329.374	0.662441
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	550.472	476.216	0.961061
-Sum_Const128Traits	815.139	321.594	0.649015
+Sum_ConstTraits	547.993	478.371	0.962106
+Sum_Const128Traits	809.591	323.798	0.651228
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 VectorTraitsBase: OK.
@@ -680,29 +680,29 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-4214
-SumScalar	632.172	414.672
-SumBase	631.707	414.977	1.000736
-SumTraits	60.927	4302.595	10.375906
-Sum128_AdvSimd	80.360	3262.138	7.866796
-Sum128Traits	61.362	4272.100	10.302367
+SumScalar	632.719	414.314
+SumBase	632.393	414.527	1.000516
+SumTraits	61.072	4292.406	10.360284
+Sum128_AdvSimd	77.850	3367.297	8.127413
+Sum128Traits	59.193	4428.609	10.689028
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	66.092	3966.361	9.565063
-Sum_Const128Traits	66.159	3962.327	9.555334
+Sum_ConstTraits	61.224	4281.729	10.334512
+Sum_Const128Traits	59.176	4429.919	10.692188
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	1787346957
-SumScalar	684.862	382.769
-SumBase	690.991	379.374	0.991129
-SumTraits	123.115	2129.258	5.562771
-Sum128_AdvSimd	162.151	1616.664	4.223598
-Sum128Traits	123.485	2122.873	5.546091
+SumScalar	688.092	380.972
+SumBase	680.304	385.334	1.011447
+SumTraits	123.179	2128.149	5.586099
+Sum128_AdvSimd	156.532	1674.701	4.395859
+Sum128Traits	123.032	2130.689	5.592766
 Sum256_AvxByte	Run fail! Requires hardware support Avx, Avx2!
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	123.701	2119.166	5.536406
-Sum_Const128Traits	132.764	1974.510	5.158487
+Sum_ConstTraits	120.213	2180.661	5.723934
+Sum_Const128Traits	120.846	2169.232	5.693935
 Sum_Const256_AvxImm	Run fail! Requires hardware support Avx, Avx2!
 Sum_Const256_AvxImmByte	Run fail! Requires hardware support Avx, Avx2!
 Sum_Const256_AvxImmByteG4	Run fail! Requires hardware support Avx, Avx2!
@@ -712,28 +712,28 @@ Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	5878554485936559874
-SumScalar	407.478	643.332
-SumBase	405.883	645.861	1.003931
-SumTraits	264.097	992.606	1.542914
-Sum128_AdvSimd	323.030	811.517	1.261428
-Sum128Traits	248.540	1054.736	1.639489
+SumScalar	407.702	642.980
+SumBase	408.777	641.289	0.997370
+SumTraits	242.649	1080.341	1.680209
+Sum128_AdvSimd	319.141	821.406	1.277499
+Sum128Traits	244.010	1074.316	1.670839
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	246.001	1065.621	1.656409
-Sum_Const128Traits	245.407	1068.202	1.660420
+Sum_ConstTraits	244.756	1071.043	1.665749
+Sum_Const128Traits	245.296	1068.682	1.662078
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	99
-SumScalar	524.675	499.631
-SumBase	525.442	498.902	0.998540
-SumTraits	30.106	8707.354	17.427553
-Sum128_AdvSimd	40.726	6436.756	12.883008
-Sum128Traits	31.267	8384.063	16.780494
+SumScalar	524.980	499.341
+SumBase	525.695	498.662	0.998640
+SumTraits	28.722	9127.030	18.278142
+Sum128_AdvSimd	39.031	6716.285	13.450292
+Sum128Traits	29.821	8790.495	17.604185
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	30.330	8643.008	17.298767
-Sum_Const128Traits	30.264	8661.896	17.336570
+Sum_ConstTraits	30.154	8693.426	17.409790
+Sum_Const128Traits	30.733	8529.797	17.082101
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 VectorTraitsBase: OK.
@@ -779,29 +779,29 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-4214
-SumScalar	634.192	413.351
-SumBase	634.371	413.235	0.999718
-SumTraits	53.269	4921.160	11.905512
-Sum128_AdvSimd	73.215	3580.481	8.662075
-Sum128Traits	53.159	4931.318	11.930089
+SumScalar	631.863	414.875
+SumBase	632.219	414.641	0.999436
+SumTraits	46.598	5625.606	13.559764
+Sum128_AdvSimd	66.702	3930.065	9.472891
+Sum128Traits	46.585	5627.211	13.563632
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	49.901	5253.318	12.709087
-Sum_Const128Traits	53.119	4935.012	11.939025
+Sum_ConstTraits	52.850	4960.118	11.955695
+Sum_Const128Traits	46.643	5620.166	13.546652
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	1787346957
-SumScalar	685.317	382.515
-SumBase	681.696	384.547	1.005311
-SumTraits	106.314	2465.741	6.446128
-Sum128_AdvSimd	146.691	1787.049	4.671839
-Sum128Traits	100.502	2608.349	6.818944
+SumScalar	681.772	384.504
+SumBase	684.484	382.980	0.996037
+SumTraits	94.200	2782.839	7.237476
+Sum128_AdvSimd	134.586	1947.774	5.065677
+Sum128Traits	106.492	2461.635	6.402103
 Sum256_AvxByte	Run fail! Requires hardware support Avx, Avx2!
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	106.571	2459.813	6.430629
-Sum_Const128Traits	100.238	2615.225	6.836920
+Sum_ConstTraits	94.148	2784.380	7.241483
+Sum_Const128Traits	106.586	2459.462	6.396452
 Sum_Const256_AvxImm	Run fail! Requires hardware support Avx, Avx2!
 Sum_Const256_AvxImmByte	Run fail! Requires hardware support Avx, Avx2!
 Sum_Const256_AvxImmByteG4	Run fail! Requires hardware support Avx, Avx2!
@@ -811,28 +811,28 @@ Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	5878554485936559874
-SumScalar	408.279	642.071
-SumBase	408.196	642.201	1.000202
-SumTraits	211.799	1237.701	1.927669
-Sum128_AdvSimd	292.518	896.163	1.395738
-Sum128Traits	200.318	1308.638	2.038151
+SumScalar	407.790	642.840
+SumBase	407.856	642.737	0.999839
+SumTraits	211.148	1241.516	1.931297
+Sum128_AdvSimd	266.683	982.979	1.529119
+Sum128Traits	186.338	1406.823	2.188449
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	199.922	1311.234	2.042193
-Sum_Const128Traits	200.145	1309.772	2.039917
+Sum_ConstTraits	186.073	1408.820	2.191556
+Sum_Const128Traits	186.282	1407.240	2.189098
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	99
-SumScalar	527.236	497.205
-SumBase	526.159	498.222	1.002046
-SumTraits	24.930	10515.270	21.148781
-Sum128_AdvSimd	36.565	7169.175	14.418965
-Sum128Traits	25.008	10482.216	21.082303
+SumScalar	525.510	498.837
+SumBase	524.890	499.426	1.001182
+SumTraits	23.249	11275.733	22.604050
+Sum128_AdvSimd	33.311	7869.652	15.776004
+Sum128Traits	26.379	9937.638	19.921619
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	24.936	10512.627	21.143467
-Sum_Const128Traits	26.594	9857.265	19.825372
+Sum_ConstTraits	26.359	9945.001	19.936380
+Sum_Const128Traits	23.250	11275.200	22.602981
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 VectorTraitsBase: OK.
@@ -878,29 +878,29 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-4214
-SumScalar	465.576	563.053
-SumBase	467.163	561.141	0.996605
-SumTraits	39.706	6602.053	11.725463
-Sum128_AdvSimd	59.503	4405.554	7.824409
-Sum128Traits	39.696	6603.788	11.728545
+SumScalar	464.227	564.690
+SumBase	466.270	562.215	0.995618
+SumTraits	39.637	6613.609	11.711937
+Sum128_AdvSimd	58.448	4485.065	7.942532
+Sum128Traits	39.558	6626.837	11.735364
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	39.686	6605.427	11.731456
-Sum_Const128Traits	39.704	6602.437	11.726145
+Sum_ConstTraits	39.576	6623.755	11.729904
+Sum_Const128Traits	39.592	6621.201	11.725382
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	1787346957
-SumScalar	695.645	376.836
-SumBase	698.914	375.073	0.995324
-SumTraits	79.506	3297.153	8.749578
-Sum128_AdvSimd	114.428	2290.914	6.079346
-Sum128Traits	79.575	3294.304	8.742017
+SumScalar	695.247	377.051
+SumBase	698.013	375.558	0.996038
+SumTraits	79.975	3277.805	8.693258
+Sum128_AdvSimd	129.443	2025.177	5.371090
+Sum128Traits	79.843	3283.247	8.707690
 Sum256_AvxByte	Run fail! Requires hardware support Avx, Avx2!
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	79.565	3294.727	8.743140
-Sum_Const128Traits	79.506	3297.170	8.749623
+Sum_ConstTraits	79.920	3280.066	8.699253
+Sum_Const128Traits	79.863	3282.427	8.705515
 Sum_Const256_AvxImm	Run fail! Requires hardware support Avx, Avx2!
 Sum_Const256_AvxImmByte	Run fail! Requires hardware support Avx, Avx2!
 Sum_Const256_AvxImmByteG4	Run fail! Requires hardware support Avx, Avx2!
@@ -910,28 +910,28 @@ Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	5878554485936559874
-SumScalar	357.964	732.319
-SumBase	358.685	730.847	0.997989
-SumTraits	160.643	1631.844	2.228323
-Sum128_AdvSimd	251.518	1042.249	1.423217
-Sum128Traits	160.501	1633.288	2.230294
+SumScalar	358.414	731.401
+SumBase	357.971	732.306	1.001237
+SumTraits	160.467	1633.636	2.233571
+Sum128_AdvSimd	249.916	1048.929	1.434136
+Sum128Traits	160.549	1632.801	2.232429
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	160.363	1634.691	2.232210
-Sum_Const128Traits	160.416	1634.150	2.231471
+Sum_ConstTraits	160.506	1633.239	2.233029
+Sum_Const128Traits	160.776	1630.490	2.229270
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	99
-SumScalar	373.597	701.675
-SumBase	373.603	701.665	0.999985
-SumTraits	19.796	13242.276	18.872374
-Sum128_AdvSimd	28.929	9061.620	12.914266
-Sum128Traits	19.798	13240.881	18.870385
+SumScalar	373.884	701.137
+SumBase	374.219	700.510	0.999106
+SumTraits	19.874	13190.553	18.813082
+Sum128_AdvSimd	31.083	8433.558	12.028398
+Sum128Traits	19.832	13218.098	18.852368
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	19.809	13233.426	18.859762
-Sum_Const128Traits	19.805	13236.416	18.864022
+Sum_ConstTraits	19.839	13213.780	18.846210
+Sum_Const128Traits	19.830	13219.879	18.854909
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 VectorTraitsBase: OK.
