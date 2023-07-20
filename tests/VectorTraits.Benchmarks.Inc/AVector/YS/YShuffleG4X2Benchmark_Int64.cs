@@ -251,10 +251,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
 
-#if NETCOREAPP3_0_OR_GREATER
-
-        #region BENCHMARKS_128ALGORITHM
-#if BENCHMARKS_128ALGORITHM
+        #region BENCHMARKS_128
+#if BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
 
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
@@ -376,11 +374,11 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("Sum128Traits");
         }
 
-#endif // BENCHMARKS_128ALGORITHM
-        #endregion // BENCHMARKS_128ALGORITHM
+#endif // BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
+        #endregion // BENCHMARKS_128
 
-        #region BENCHMARKS_256ALGORITHM
-#if BENCHMARKS_256ALGORITHM
+        #region BENCHMARKS_256
+#if BENCHMARKS_256 && NETCOREAPP3_0_OR_GREATER
 
         /// <summary>
         /// Sum YShuffleG4X2 - Vector256 - Traits static.
@@ -438,10 +436,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("Sum256Traits");
         }
 
-#endif // BENCHMARKS_256ALGORITHM
-        #endregion // BENCHMARKS_256ALGORITHM
-
-#endif
+#endif // BENCHMARKS_256 && NETCOREAPP3_0_OR_GREATER
+        #endregion // BENCHMARKS_256
 
         /// <summary>
         /// Sum YShuffleG4X2_Const - Vector Traits - static.
@@ -549,10 +545,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
 
-#if NETCOREAPP3_0_OR_GREATER
-
-        #region BENCHMARKS_128ALGORITHM
-#if BENCHMARKS_128ALGORITHM
+        #region BENCHMARKS_128
+#if BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
 
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
@@ -616,11 +610,11 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("Sum_Const128Traits");
         }
 
-#endif // BENCHMARKS_128ALGORITHM
-        #endregion // BENCHMARKS_128ALGORITHM
+#endif // BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
+        #endregion // BENCHMARKS_128
 
-        #region BENCHMARKS_256ALGORITHM
-#if BENCHMARKS_256ALGORITHM
+        #region BENCHMARKS_256
+#if BENCHMARKS_256 && NETCOREAPP3_0_OR_GREATER
 
         /// <summary>
         /// Sum YShuffleG4X2_Const - Vector256 - Traits static.
@@ -678,10 +672,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("Sum_Const256Traits");
         }
 
-#endif // BENCHMARKS_256ALGORITHM
-        #endregion // BENCHMARKS_256ALGORITHM
-
-#endif
+#endif // BENCHMARKS_256 && NETCOREAPP3_0_OR_GREATER
+        #endregion // BENCHMARKS_256
 
 #pragma warning restore CS0162 // Unreachable code detected
     }
