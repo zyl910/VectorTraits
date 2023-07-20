@@ -1,4 +1,4 @@
-﻿#undef BENCHMARKS_OFF
+﻿//#undef BENCHMARKS_OFF
 #define BENCHMARKS_CONST
 
 using BenchmarkDotNet.Attributes;

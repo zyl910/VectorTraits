@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -46,7 +46,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumX2Base(TMy[] src, int srcCount, ShuffleControlG4 control) {
+        private static TMy StaticSumBase(TMy[] src, int srcCount, ShuffleControlG4 control) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -83,12 +83,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark(Baseline = true)]
-        public void SumX2Base() {
+        public void SumBase() {
             //Debugger.Break();
-            dstTMy = StaticSumX2Base(srcArray, srcArray.Length, control);
+            dstTMy = StaticSumBase(srcArray, srcArray.Length, control);
             if (CheckMode) {
                 baselineTMy = dstTMy;
-                BenchmarkUtil.WriteItem("# SumX2Base", string.Format("{0}", baselineTMy));
+                BenchmarkUtil.WriteItem("# SumBase", string.Format("{0}", baselineTMy));
             }
         }
 
@@ -99,7 +99,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumTraits(TMy[] src, int srcCount, ShuffleControlG4 control) {
+        private static TMy StaticSumX1Traits(TMy[] src, int srcCount, ShuffleControlG4 control) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -137,12 +137,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumTraits() {
+        public void SumX1Traits() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumTraits(srcArray, srcArray.Length, control);
-            CheckResult("SumTraits");
+            dstTMy = StaticSumX1Traits(srcArray, srcArray.Length, control);
+            CheckResult("SumX1Traits");
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumX2Traits(TMy[] src, int srcCount, ShuffleControlG4 control) {
+        private static TMy StaticSumTraits(TMy[] src, int srcCount, ShuffleControlG4 control) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -189,13 +189,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumX2Traits() {
+        public void SumTraits() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumX2Traits(srcArray, srcArray.Length, control);
-            CheckResult("SumX2Traits");
+            dstTMy = StaticSumTraits(srcArray, srcArray.Length, control);
+            CheckResult("SumTraits");
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumX2Traits_Tuple(TMy[] src, int srcCount, ShuffleControlG4 control) {
+        private static TMy StaticSumTraits_Tuple(TMy[] src, int srcCount, ShuffleControlG4 control) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -242,12 +242,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumX2Traits_Tuple() {
+        public void SumTraits_Tuple() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumX2Traits_Tuple(srcArray, srcArray.Length, control);
-            CheckResult("SumX2Traits_Tuple");
+            dstTMy = StaticSumTraits_Tuple(srcArray, srcArray.Length, control);
+            CheckResult("SumTraits_Tuple");
         }
 
 
@@ -268,7 +268,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumX2128_AdvSimd(TMy[] src, int srcCount, ShuffleControlG4 control) {
+        private static TMy StaticSum128_AdvSimd(TMy[] src, int srcCount, ShuffleControlG4 control) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -305,14 +305,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumX2128_AdvSimd() {
+        public void Sum128_AdvSimd() {
             WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector128<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector128<byte>.Count));
             }
             //Debugger.Break();
-            dstTMy = StaticSumX2128_AdvSimd(srcArray, srcArray.Length, control);
-            CheckResult("SumX2128_AdvSimd");
+            dstTMy = StaticSum128_AdvSimd(srcArray, srcArray.Length, control);
+            CheckResult("Sum128_AdvSimd");
         }
 
 #endif // NET5_0_OR_GREATER
@@ -327,7 +327,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumX2128Traits(TMy[] src, int srcCount, ShuffleControlG4 control) {
+        private static TMy StaticSum128Traits(TMy[] src, int srcCount, ShuffleControlG4 control) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -364,7 +364,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumX2128Traits() {
+        public void Sum128Traits() {
             Vector128s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector128<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector128<byte>.Count));
@@ -372,8 +372,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumX2128Traits(srcArray, srcArray.Length, control);
-            CheckResult("SumX2128Traits");
+            dstTMy = StaticSum128Traits(srcArray, srcArray.Length, control);
+            CheckResult("Sum128Traits");
         }
 
 #endif // BENCHMARKS_128ALGORITHM
@@ -389,7 +389,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumX2256Traits(TMy[] src, int srcCount, ShuffleControlG4 control) {
+        private static TMy StaticSum256Traits(TMy[] src, int srcCount, ShuffleControlG4 control) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -426,7 +426,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumX2256Traits() {
+        public void Sum256Traits() {
             Vector256s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
@@ -434,8 +434,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumX2256Traits(srcArray, srcArray.Length, control);
-            CheckResult("SumX2256Traits");
+            dstTMy = StaticSum256Traits(srcArray, srcArray.Length, control);
+            CheckResult("Sum256Traits");
         }
 
 #endif // BENCHMARKS_256ALGORITHM
@@ -450,7 +450,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumX2_ConstTraits(TMy[] src, int srcCount) {
+        private static TMy StaticSum_ConstTraits(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -487,13 +487,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumX2_ConstTraits() {
+        public void Sum_ConstTraits() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
                 //Debugger.Break();
             }
-            dstTMy = StaticSumX2_ConstTraits(srcArray, srcArray.Length);
-            CheckResult("SumX2_ConstTraits");
+            dstTMy = StaticSum_ConstTraits(srcArray, srcArray.Length);
+            CheckResult("Sum_ConstTraits");
         }
 
         /// <summary>
@@ -503,7 +503,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumX2_ConstTraits_Tuple(TMy[] src, int srcCount) {
+        private static TMy StaticSum_ConstTraits_Tuple(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
@@ -540,12 +540,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumX2_ConstTraits_Tuple() {
+        public void Sum_ConstTraits_Tuple() {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumX2_ConstTraits_Tuple(srcArray, srcArray.Length);
-            CheckResult("SumX2_ConstTraits_Tuple");
+            dstTMy = StaticSum_ConstTraits_Tuple(srcArray, srcArray.Length);
+            CheckResult("Sum_ConstTraits_Tuple");
         }
 
 
@@ -567,7 +567,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumX2_Const128Traits(TMy[] src, int srcCount) {
+        private static TMy StaticSum_Const128Traits(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
@@ -604,7 +604,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumX2_Const128Traits() {
+        public void Sum_Const128Traits() {
             Vector128s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector128<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector128<byte>.Count));
@@ -612,8 +612,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumX2_Const128Traits(srcArray, srcArray.Length);
-            CheckResult("SumX2_Const128Traits");
+            dstTMy = StaticSum_Const128Traits(srcArray, srcArray.Length);
+            CheckResult("Sum_Const128Traits");
         }
 
 #endif // BENCHMARKS_128ALGORITHM
@@ -629,7 +629,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         /// <param name="srcCount">Source count</param>
         /// <param name="control">The control.</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumX2_Const256Traits(TMy[] src, int srcCount) {
+        private static TMy StaticSum_Const256Traits(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -666,7 +666,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
-        public void SumX2_Const256Traits() {
+        public void Sum_Const256Traits() {
             Vector256s.ThrowForUnsupported(true);
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
@@ -674,8 +674,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             if (BenchmarkUtil.IsLastRun) {
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumX2_Const256Traits(srcArray, srcArray.Length);
-            CheckResult("SumX2_Const256Traits");
+            dstTMy = StaticSum_Const256Traits(srcArray, srcArray.Length);
+            CheckResult("Sum_Const256Traits");
         }
 
 #endif // BENCHMARKS_256ALGORITHM
