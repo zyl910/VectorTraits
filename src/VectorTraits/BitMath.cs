@@ -958,8 +958,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static sbyte Abs(sbyte value) {
-            sbyte mask = (sbyte)ToInt32Mask(0 > value);
-            return (sbyte)((value ^ mask) - mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
+            return (sbyte)Abs((int)value);
         }
 
         /// <summary>
@@ -970,8 +969,7 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="Math.Abs(short)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static short Abs(short value) {
-            short mask = (short)ToInt32Mask(0 > value);
-            return (short)((value ^ mask) - mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
+            return (short)Abs((int)value);
         }
 
         /// <summary>
@@ -982,7 +980,7 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="Math.Abs(int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Abs(int value) {
-            int mask = ToInt32Mask(0 > value);
+            int mask = value >> 31; //ToInt32Mask(0 > value);
             return (value ^ mask) - mask; // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
         }
 
@@ -994,7 +992,7 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="Math.Abs(long)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Abs(long value) {
-            long mask = ToInt32Mask(0 > value);
+            long mask = value >> 63; //ToInt32Mask(0 > value);
             return (value ^ mask) - mask; // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
         }
 
@@ -1006,8 +1004,8 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="Math.Abs(nint)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static nint Abs(nint value) {
-            nint mask = ToInt32Mask(0 > value);
-            return ((value ^ mask) - mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
+            nint mask = (nint)(((long)value) >> 63); //ToInt32Mask(0 > value);
+            return (value ^ mask) - mask; // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
         }
 
         /// <summary>
