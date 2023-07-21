@@ -90,122 +90,122 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<float> Abs_Basic(Vector256<float> value) {
+            public static Vector256<float> Abs_Basic(Vector256<float> value) {
                 Vector256<float> rt = value;
-                float* p = (float*)&rt;
-                p[0] = Math.Abs(p[0]);
-                p[1] = Math.Abs(p[1]);
-                p[2] = Math.Abs(p[2]);
-                p[3] = Math.Abs(p[3]);
-                p[4] = Math.Abs(p[4]);
-                p[5] = Math.Abs(p[5]);
-                p[6] = Math.Abs(p[6]);
-                p[7] = Math.Abs(p[7]);
+                ref float p = ref Unsafe.As<Vector256<float>, float>(ref rt);
+                p = Math.Abs(p);
+                Unsafe.Add(ref p, 1) = Math.Abs(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = Math.Abs(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = Math.Abs(Unsafe.Add(ref p, 3));
+                Unsafe.Add(ref p, 4) = Math.Abs(Unsafe.Add(ref p, 4));
+                Unsafe.Add(ref p, 5) = Math.Abs(Unsafe.Add(ref p, 5));
+                Unsafe.Add(ref p, 6) = Math.Abs(Unsafe.Add(ref p, 6));
+                Unsafe.Add(ref p, 7) = Math.Abs(Unsafe.Add(ref p, 7));
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<double> Abs_Basic(Vector256<double> value) {
+            public static Vector256<double> Abs_Basic(Vector256<double> value) {
                 Vector256<double> rt = value;
-                double* p = (double*)&rt;
-                p[0] = Math.Abs(p[0]);
-                p[1] = Math.Abs(p[1]);
-                p[2] = Math.Abs(p[2]);
-                p[3] = Math.Abs(p[3]);
+                ref double p = ref Unsafe.As<Vector256<double>, double>(ref rt);
+                p = Math.Abs(p);
+                Unsafe.Add(ref p, 1) = Math.Abs(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = Math.Abs(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = Math.Abs(Unsafe.Add(ref p, 3));
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<sbyte> Abs_Basic(Vector256<sbyte> value) {
+            public static Vector256<sbyte> Abs_Basic(Vector256<sbyte> value) {
                 Vector256<sbyte> rt = value;
-                sbyte* p = (sbyte*)&rt;
-                p[0] = BitMath.Abs(p[0]);
-                p[1] = BitMath.Abs(p[1]);
-                p[2] = BitMath.Abs(p[2]);
-                p[3] = BitMath.Abs(p[3]);
-                p[4] = BitMath.Abs(p[4]);
-                p[5] = BitMath.Abs(p[5]);
-                p[6] = BitMath.Abs(p[6]);
-                p[7] = BitMath.Abs(p[7]);
-                p[8] = BitMath.Abs(p[8]);
-                p[9] = BitMath.Abs(p[9]);
-                p[10] = BitMath.Abs(p[10]);
-                p[11] = BitMath.Abs(p[11]);
-                p[12] = BitMath.Abs(p[12]);
-                p[13] = BitMath.Abs(p[13]);
-                p[14] = BitMath.Abs(p[14]);
-                p[15] = BitMath.Abs(p[15]);
-                p[16] = BitMath.Abs(p[16]);
-                p[17] = BitMath.Abs(p[17]);
-                p[18] = BitMath.Abs(p[18]);
-                p[19] = BitMath.Abs(p[19]);
-                p[20] = BitMath.Abs(p[20]);
-                p[21] = BitMath.Abs(p[21]);
-                p[22] = BitMath.Abs(p[22]);
-                p[23] = BitMath.Abs(p[23]);
-                p[24] = BitMath.Abs(p[24]);
-                p[25] = BitMath.Abs(p[25]);
-                p[26] = BitMath.Abs(p[26]);
-                p[27] = BitMath.Abs(p[27]);
-                p[28] = BitMath.Abs(p[28]);
-                p[29] = BitMath.Abs(p[29]);
-                p[30] = BitMath.Abs(p[30]);
-                p[31] = BitMath.Abs(p[31]);
+                ref sbyte p = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref rt);
+                p = Math.Abs(p);
+                Unsafe.Add(ref p, 1) = Math.Abs(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = Math.Abs(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = Math.Abs(Unsafe.Add(ref p, 3));
+                Unsafe.Add(ref p, 4) = Math.Abs(Unsafe.Add(ref p, 4));
+                Unsafe.Add(ref p, 5) = Math.Abs(Unsafe.Add(ref p, 5));
+                Unsafe.Add(ref p, 6) = Math.Abs(Unsafe.Add(ref p, 6));
+                Unsafe.Add(ref p, 7) = Math.Abs(Unsafe.Add(ref p, 7));
+                Unsafe.Add(ref p, 8) = Math.Abs(Unsafe.Add(ref p, 8));
+                Unsafe.Add(ref p, 9) = Math.Abs(Unsafe.Add(ref p, 9));
+                Unsafe.Add(ref p, 10) = Math.Abs(Unsafe.Add(ref p, 10));
+                Unsafe.Add(ref p, 11) = Math.Abs(Unsafe.Add(ref p, 11));
+                Unsafe.Add(ref p, 12) = Math.Abs(Unsafe.Add(ref p, 12));
+                Unsafe.Add(ref p, 13) = Math.Abs(Unsafe.Add(ref p, 13));
+                Unsafe.Add(ref p, 14) = Math.Abs(Unsafe.Add(ref p, 14));
+                Unsafe.Add(ref p, 15) = Math.Abs(Unsafe.Add(ref p, 15));
+                Unsafe.Add(ref p, 16) = Math.Abs(Unsafe.Add(ref p, 16));
+                Unsafe.Add(ref p, 17) = Math.Abs(Unsafe.Add(ref p, 17));
+                Unsafe.Add(ref p, 18) = Math.Abs(Unsafe.Add(ref p, 18));
+                Unsafe.Add(ref p, 19) = Math.Abs(Unsafe.Add(ref p, 19));
+                Unsafe.Add(ref p, 20) = Math.Abs(Unsafe.Add(ref p, 20));
+                Unsafe.Add(ref p, 21) = Math.Abs(Unsafe.Add(ref p, 21));
+                Unsafe.Add(ref p, 22) = Math.Abs(Unsafe.Add(ref p, 22));
+                Unsafe.Add(ref p, 23) = Math.Abs(Unsafe.Add(ref p, 23));
+                Unsafe.Add(ref p, 24) = Math.Abs(Unsafe.Add(ref p, 24));
+                Unsafe.Add(ref p, 25) = Math.Abs(Unsafe.Add(ref p, 25));
+                Unsafe.Add(ref p, 26) = Math.Abs(Unsafe.Add(ref p, 26));
+                Unsafe.Add(ref p, 27) = Math.Abs(Unsafe.Add(ref p, 27));
+                Unsafe.Add(ref p, 28) = Math.Abs(Unsafe.Add(ref p, 28));
+                Unsafe.Add(ref p, 29) = Math.Abs(Unsafe.Add(ref p, 29));
+                Unsafe.Add(ref p, 30) = Math.Abs(Unsafe.Add(ref p, 30));
+                Unsafe.Add(ref p, 31) = Math.Abs(Unsafe.Add(ref p, 31));
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<short> Abs_Basic(Vector256<short> value) {
+            public static Vector256<short> Abs_Basic(Vector256<short> value) {
                 Vector256<short> rt = value;
-                short* p = (short*)&rt;
-                p[0] = BitMath.Abs(p[0]);
-                p[1] = BitMath.Abs(p[1]);
-                p[2] = BitMath.Abs(p[2]);
-                p[3] = BitMath.Abs(p[3]);
-                p[4] = BitMath.Abs(p[4]);
-                p[5] = BitMath.Abs(p[5]);
-                p[6] = BitMath.Abs(p[6]);
-                p[7] = BitMath.Abs(p[7]);
-                p[8] = BitMath.Abs(p[8]);
-                p[9] = BitMath.Abs(p[9]);
-                p[10] = BitMath.Abs(p[10]);
-                p[11] = BitMath.Abs(p[11]);
-                p[12] = BitMath.Abs(p[12]);
-                p[13] = BitMath.Abs(p[13]);
-                p[14] = BitMath.Abs(p[14]);
-                p[15] = BitMath.Abs(p[15]);
+                ref short p = ref Unsafe.As<Vector256<short>, short>(ref rt);
+                p = Math.Abs(p);
+                Unsafe.Add(ref p, 1) = Math.Abs(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = Math.Abs(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = Math.Abs(Unsafe.Add(ref p, 3));
+                Unsafe.Add(ref p, 4) = Math.Abs(Unsafe.Add(ref p, 4));
+                Unsafe.Add(ref p, 5) = Math.Abs(Unsafe.Add(ref p, 5));
+                Unsafe.Add(ref p, 6) = Math.Abs(Unsafe.Add(ref p, 6));
+                Unsafe.Add(ref p, 7) = Math.Abs(Unsafe.Add(ref p, 7));
+                Unsafe.Add(ref p, 8) = Math.Abs(Unsafe.Add(ref p, 8));
+                Unsafe.Add(ref p, 9) = Math.Abs(Unsafe.Add(ref p, 9));
+                Unsafe.Add(ref p, 10) = Math.Abs(Unsafe.Add(ref p, 10));
+                Unsafe.Add(ref p, 11) = Math.Abs(Unsafe.Add(ref p, 11));
+                Unsafe.Add(ref p, 12) = Math.Abs(Unsafe.Add(ref p, 12));
+                Unsafe.Add(ref p, 13) = Math.Abs(Unsafe.Add(ref p, 13));
+                Unsafe.Add(ref p, 14) = Math.Abs(Unsafe.Add(ref p, 14));
+                Unsafe.Add(ref p, 15) = Math.Abs(Unsafe.Add(ref p, 15));
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<int> Abs_Basic(Vector256<int> value) {
+            public static Vector256<int> Abs_Basic(Vector256<int> value) {
                 Vector256<int> rt = value;
-                int* p = (int*)&rt;
-                p[0] = BitMath.Abs(p[0]);
-                p[1] = BitMath.Abs(p[1]);
-                p[2] = BitMath.Abs(p[2]);
-                p[3] = BitMath.Abs(p[3]);
-                p[4] = BitMath.Abs(p[4]);
-                p[5] = BitMath.Abs(p[5]);
-                p[6] = BitMath.Abs(p[6]);
-                p[7] = BitMath.Abs(p[7]);
+                ref int p = ref Unsafe.As<Vector256<int>, int>(ref rt);
+                p = Math.Abs(p);
+                Unsafe.Add(ref p, 1) = Math.Abs(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = Math.Abs(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = Math.Abs(Unsafe.Add(ref p, 3));
+                Unsafe.Add(ref p, 4) = Math.Abs(Unsafe.Add(ref p, 4));
+                Unsafe.Add(ref p, 5) = Math.Abs(Unsafe.Add(ref p, 5));
+                Unsafe.Add(ref p, 6) = Math.Abs(Unsafe.Add(ref p, 6));
+                Unsafe.Add(ref p, 7) = Math.Abs(Unsafe.Add(ref p, 7));
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<long> Abs_Basic(Vector256<long> value) {
+            public static Vector256<long> Abs_Basic(Vector256<long> value) {
                 Vector256<long> rt = value;
-                long* p = (long*)&rt;
-                p[0] = BitMath.Abs(p[0]);
-                p[1] = BitMath.Abs(p[1]);
-                p[2] = BitMath.Abs(p[2]);
-                p[3] = BitMath.Abs(p[3]);
+                ref long p = ref Unsafe.As<Vector256<long>, long>(ref rt);
+                p = Math.Abs(p);
+                Unsafe.Add(ref p, 1) = Math.Abs(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = Math.Abs(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = Math.Abs(Unsafe.Add(ref p, 3));
                 return rt;
             }
 
