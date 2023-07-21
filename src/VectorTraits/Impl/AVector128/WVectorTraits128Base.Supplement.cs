@@ -117,22 +117,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<sbyte> Abs_Basic(Vector128<sbyte> value) {
                 Vector128<sbyte> rt = value;
                 ref sbyte p = ref Unsafe.As<Vector128<sbyte>, sbyte>(ref rt);
-                p = Math.Abs(p);
-                Unsafe.Add(ref p, 1) = Math.Abs(Unsafe.Add(ref p, 1));
-                Unsafe.Add(ref p, 2) = Math.Abs(Unsafe.Add(ref p, 2));
-                Unsafe.Add(ref p, 3) = Math.Abs(Unsafe.Add(ref p, 3));
-                Unsafe.Add(ref p, 4) = Math.Abs(Unsafe.Add(ref p, 4));
-                Unsafe.Add(ref p, 5) = Math.Abs(Unsafe.Add(ref p, 5));
-                Unsafe.Add(ref p, 6) = Math.Abs(Unsafe.Add(ref p, 6));
-                Unsafe.Add(ref p, 7) = Math.Abs(Unsafe.Add(ref p, 7));
-                Unsafe.Add(ref p, 8) = Math.Abs(Unsafe.Add(ref p, 8));
-                Unsafe.Add(ref p, 9) = Math.Abs(Unsafe.Add(ref p, 9));
-                Unsafe.Add(ref p, 10) = Math.Abs(Unsafe.Add(ref p, 10));
-                Unsafe.Add(ref p, 11) = Math.Abs(Unsafe.Add(ref p, 11));
-                Unsafe.Add(ref p, 12) = Math.Abs(Unsafe.Add(ref p, 12));
-                Unsafe.Add(ref p, 13) = Math.Abs(Unsafe.Add(ref p, 13));
-                Unsafe.Add(ref p, 14) = Math.Abs(Unsafe.Add(ref p, 14));
-                Unsafe.Add(ref p, 15) = Math.Abs(Unsafe.Add(ref p, 15));
+                p = BitMath.Abs(p);
+                Unsafe.Add(ref p, 1) = BitMath.Abs(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = BitMath.Abs(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = BitMath.Abs(Unsafe.Add(ref p, 3));
+                Unsafe.Add(ref p, 4) = BitMath.Abs(Unsafe.Add(ref p, 4));
+                Unsafe.Add(ref p, 5) = BitMath.Abs(Unsafe.Add(ref p, 5));
+                Unsafe.Add(ref p, 6) = BitMath.Abs(Unsafe.Add(ref p, 6));
+                Unsafe.Add(ref p, 7) = BitMath.Abs(Unsafe.Add(ref p, 7));
+                Unsafe.Add(ref p, 8) = BitMath.Abs(Unsafe.Add(ref p, 8));
+                Unsafe.Add(ref p, 9) = BitMath.Abs(Unsafe.Add(ref p, 9));
+                Unsafe.Add(ref p, 10) = BitMath.Abs(Unsafe.Add(ref p, 10));
+                Unsafe.Add(ref p, 11) = BitMath.Abs(Unsafe.Add(ref p, 11));
+                Unsafe.Add(ref p, 12) = BitMath.Abs(Unsafe.Add(ref p, 12));
+                Unsafe.Add(ref p, 13) = BitMath.Abs(Unsafe.Add(ref p, 13));
+                Unsafe.Add(ref p, 14) = BitMath.Abs(Unsafe.Add(ref p, 14));
+                Unsafe.Add(ref p, 15) = BitMath.Abs(Unsafe.Add(ref p, 15));
                 return rt;
             }
 
@@ -141,14 +141,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<short> Abs_Basic(Vector128<short> value) {
                 Vector128<short> rt = value;
                 ref short p = ref Unsafe.As<Vector128<short>, short>(ref rt);
-                p = Math.Abs(p);
-                Unsafe.Add(ref p, 1) = Math.Abs(Unsafe.Add(ref p, 1));
-                Unsafe.Add(ref p, 2) = Math.Abs(Unsafe.Add(ref p, 2));
-                Unsafe.Add(ref p, 3) = Math.Abs(Unsafe.Add(ref p, 3));
-                Unsafe.Add(ref p, 4) = Math.Abs(Unsafe.Add(ref p, 4));
-                Unsafe.Add(ref p, 5) = Math.Abs(Unsafe.Add(ref p, 5));
-                Unsafe.Add(ref p, 6) = Math.Abs(Unsafe.Add(ref p, 6));
-                Unsafe.Add(ref p, 7) = Math.Abs(Unsafe.Add(ref p, 7));
+                p = BitMath.Abs(p);
+                Unsafe.Add(ref p, 1) = BitMath.Abs(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = BitMath.Abs(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = BitMath.Abs(Unsafe.Add(ref p, 3));
+                Unsafe.Add(ref p, 4) = BitMath.Abs(Unsafe.Add(ref p, 4));
+                Unsafe.Add(ref p, 5) = BitMath.Abs(Unsafe.Add(ref p, 5));
+                Unsafe.Add(ref p, 6) = BitMath.Abs(Unsafe.Add(ref p, 6));
+                Unsafe.Add(ref p, 7) = BitMath.Abs(Unsafe.Add(ref p, 7));
                 return rt;
             }
 
@@ -157,10 +157,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<int> Abs_Basic(Vector128<int> value) {
                 Vector128<int> rt = value;
                 ref int p = ref Unsafe.As<Vector128<int>, int>(ref rt);
-                p = Math.Abs(p);
-                Unsafe.Add(ref p, 1) = Math.Abs(Unsafe.Add(ref p, 1));
-                Unsafe.Add(ref p, 2) = Math.Abs(Unsafe.Add(ref p, 2));
-                Unsafe.Add(ref p, 3) = Math.Abs(Unsafe.Add(ref p, 3));
+                p = BitMath.Abs(p);
+                Unsafe.Add(ref p, 1) = BitMath.Abs(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = BitMath.Abs(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = BitMath.Abs(Unsafe.Add(ref p, 3));
                 return rt;
             }
 
@@ -169,8 +169,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<long> Abs_Basic(Vector128<long> value) {
                 Vector128<long> rt = value;
                 ref long p = ref Unsafe.As<Vector128<long>, long>(ref rt);
-                p = Math.Abs(p);
-                Unsafe.Add(ref p, 1) = Math.Abs(Unsafe.Add(ref p, 1));
+                p = BitMath.Abs(p);
+                Unsafe.Add(ref p, 1) = BitMath.Abs(Unsafe.Add(ref p, 1));
                 return rt;
             }
 
