@@ -2863,277 +2863,237 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{float}, Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<float> Subtract_Basic(Vector256<float> left, Vector256<float> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<float> rt);
-#else
-                Vector256<float> rt = default;
-#endif // NET5_0_OR_GREATER
-                float* prt = (float*)&rt;
-                float* pleft = (float*)&left;
-                float* pright = (float*)&right;
-                prt[0] = (pleft[0] - pright[0]);
-                prt[1] = (pleft[1] - pright[1]);
-                prt[2] = (pleft[2] - pright[2]);
-                prt[3] = (pleft[3] - pright[3]);
-                prt[4] = (pleft[4] - pright[4]);
-                prt[5] = (pleft[5] - pright[5]);
-                prt[6] = (pleft[6] - pright[6]);
-                prt[7] = (pleft[7] - pright[7]);
+            public static Vector256<float> Subtract_Basic(Vector256<float> left, Vector256<float> right) {
+                UnsafeEx.SkipInit(out Vector256<float> rt);
+                ref float prt = ref Unsafe.As<Vector256<float>, float>(ref rt);
+                ref float pleft = ref Unsafe.As<Vector256<float>, float>(ref left);
+                ref float pright = ref Unsafe.As<Vector256<float>, float>(ref right);
+                prt = pleft - pright;
+                Unsafe.Add(ref prt, 1) = Unsafe.Add(ref pleft, 1) - Unsafe.Add(ref pright, 1);
+                Unsafe.Add(ref prt, 2) = Unsafe.Add(ref pleft, 2) - Unsafe.Add(ref pright, 2);
+                Unsafe.Add(ref prt, 3) = Unsafe.Add(ref pleft, 3) - Unsafe.Add(ref pright, 3);
+                Unsafe.Add(ref prt, 4) = Unsafe.Add(ref pleft, 4) - Unsafe.Add(ref pright, 4);
+                Unsafe.Add(ref prt, 5) = Unsafe.Add(ref pleft, 5) - Unsafe.Add(ref pright, 5);
+                Unsafe.Add(ref prt, 6) = Unsafe.Add(ref pleft, 6) - Unsafe.Add(ref pright, 6);
+                Unsafe.Add(ref prt, 7) = Unsafe.Add(ref pleft, 7) - Unsafe.Add(ref pright, 7);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{double}, Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<double> Subtract_Basic(Vector256<double> left, Vector256<double> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<double> rt);
-#else
-                Vector256<double> rt = default;
-#endif // NET5_0_OR_GREATER
-                double* prt = (double*)&rt;
-                double* pleft = (double*)&left;
-                double* pright = (double*)&right;
-                prt[0] = (pleft[0] - pright[0]);
-                prt[1] = (pleft[1] - pright[1]);
-                prt[2] = (pleft[2] - pright[2]);
-                prt[3] = (pleft[3] - pright[3]);
+            public static Vector256<double> Subtract_Basic(Vector256<double> left, Vector256<double> right) {
+                UnsafeEx.SkipInit(out Vector256<double> rt);
+                ref double prt = ref Unsafe.As<Vector256<double>, double>(ref rt);
+                ref double pleft = ref Unsafe.As<Vector256<double>, double>(ref left);
+                ref double pright = ref Unsafe.As<Vector256<double>, double>(ref right);
+                prt = pleft - pright;
+                Unsafe.Add(ref prt, 1) = Unsafe.Add(ref pleft, 1) - Unsafe.Add(ref pright, 1);
+                Unsafe.Add(ref prt, 2) = Unsafe.Add(ref pleft, 2) - Unsafe.Add(ref pright, 2);
+                Unsafe.Add(ref prt, 3) = Unsafe.Add(ref pleft, 3) - Unsafe.Add(ref pright, 3);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{sbyte}, Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<sbyte> Subtract_Basic(Vector256<sbyte> left, Vector256<sbyte> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<sbyte> rt);
-#else
-                Vector256<sbyte> rt = default;
-#endif // NET5_0_OR_GREATER
-                sbyte* prt = (sbyte*)&rt;
-                sbyte* pleft = (sbyte*)&left;
-                sbyte* pright = (sbyte*)&right;
-                prt[0] = (sbyte)(pleft[0] - pright[0]);
-                prt[1] = (sbyte)(pleft[1] - pright[1]);
-                prt[2] = (sbyte)(pleft[2] - pright[2]);
-                prt[3] = (sbyte)(pleft[3] - pright[3]);
-                prt[4] = (sbyte)(pleft[4] - pright[4]);
-                prt[5] = (sbyte)(pleft[5] - pright[5]);
-                prt[6] = (sbyte)(pleft[6] - pright[6]);
-                prt[7] = (sbyte)(pleft[7] - pright[7]);
-                prt[8] = (sbyte)(pleft[8] - pright[8]);
-                prt[9] = (sbyte)(pleft[9] - pright[9]);
-                prt[10] = (sbyte)(pleft[10] - pright[10]);
-                prt[11] = (sbyte)(pleft[11] - pright[11]);
-                prt[12] = (sbyte)(pleft[12] - pright[12]);
-                prt[13] = (sbyte)(pleft[13] - pright[13]);
-                prt[14] = (sbyte)(pleft[14] - pright[14]);
-                prt[15] = (sbyte)(pleft[15] - pright[15]);
-                prt[16] = (sbyte)(pleft[16] - pright[16]);
-                prt[17] = (sbyte)(pleft[17] - pright[17]);
-                prt[18] = (sbyte)(pleft[18] - pright[18]);
-                prt[19] = (sbyte)(pleft[19] - pright[19]);
-                prt[20] = (sbyte)(pleft[20] - pright[20]);
-                prt[21] = (sbyte)(pleft[21] - pright[21]);
-                prt[22] = (sbyte)(pleft[22] - pright[22]);
-                prt[23] = (sbyte)(pleft[23] - pright[23]);
-                prt[24] = (sbyte)(pleft[24] - pright[24]);
-                prt[25] = (sbyte)(pleft[25] - pright[25]);
-                prt[26] = (sbyte)(pleft[26] - pright[26]);
-                prt[27] = (sbyte)(pleft[27] - pright[27]);
-                prt[28] = (sbyte)(pleft[28] - pright[28]);
-                prt[29] = (sbyte)(pleft[29] - pright[29]);
-                prt[30] = (sbyte)(pleft[30] - pright[30]);
-                prt[31] = (sbyte)(pleft[31] - pright[31]);
+            public static Vector256<sbyte> Subtract_Basic(Vector256<sbyte> left, Vector256<sbyte> right) {
+                UnsafeEx.SkipInit(out Vector256<sbyte> rt);
+                ref sbyte prt = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref rt);
+                ref sbyte pleft = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref left);
+                ref sbyte pright = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref right);
+                prt = (sbyte)(pleft - pright);
+                Unsafe.Add(ref prt, 1) = (sbyte)(Unsafe.Add(ref pleft, 1) - Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = (sbyte)(Unsafe.Add(ref pleft, 2) - Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = (sbyte)(Unsafe.Add(ref pleft, 3) - Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = (sbyte)(Unsafe.Add(ref pleft, 4) - Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = (sbyte)(Unsafe.Add(ref pleft, 5) - Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = (sbyte)(Unsafe.Add(ref pleft, 6) - Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = (sbyte)(Unsafe.Add(ref pleft, 7) - Unsafe.Add(ref pright, 7));
+                Unsafe.Add(ref prt, 8) = (sbyte)(Unsafe.Add(ref pleft, 8) - Unsafe.Add(ref pright, 8));
+                Unsafe.Add(ref prt, 9) = (sbyte)(Unsafe.Add(ref pleft, 9) - Unsafe.Add(ref pright, 9));
+                Unsafe.Add(ref prt, 10) = (sbyte)(Unsafe.Add(ref pleft, 10) - Unsafe.Add(ref pright, 10));
+                Unsafe.Add(ref prt, 11) = (sbyte)(Unsafe.Add(ref pleft, 11) - Unsafe.Add(ref pright, 11));
+                Unsafe.Add(ref prt, 12) = (sbyte)(Unsafe.Add(ref pleft, 12) - Unsafe.Add(ref pright, 12));
+                Unsafe.Add(ref prt, 13) = (sbyte)(Unsafe.Add(ref pleft, 13) - Unsafe.Add(ref pright, 13));
+                Unsafe.Add(ref prt, 14) = (sbyte)(Unsafe.Add(ref pleft, 14) - Unsafe.Add(ref pright, 14));
+                Unsafe.Add(ref prt, 15) = (sbyte)(Unsafe.Add(ref pleft, 15) - Unsafe.Add(ref pright, 15));
+                Unsafe.Add(ref prt, 16) = (sbyte)(Unsafe.Add(ref pleft, 16) - Unsafe.Add(ref pright, 16));
+                Unsafe.Add(ref prt, 17) = (sbyte)(Unsafe.Add(ref pleft, 17) - Unsafe.Add(ref pright, 17));
+                Unsafe.Add(ref prt, 18) = (sbyte)(Unsafe.Add(ref pleft, 18) - Unsafe.Add(ref pright, 18));
+                Unsafe.Add(ref prt, 19) = (sbyte)(Unsafe.Add(ref pleft, 19) - Unsafe.Add(ref pright, 19));
+                Unsafe.Add(ref prt, 20) = (sbyte)(Unsafe.Add(ref pleft, 20) - Unsafe.Add(ref pright, 20));
+                Unsafe.Add(ref prt, 21) = (sbyte)(Unsafe.Add(ref pleft, 21) - Unsafe.Add(ref pright, 21));
+                Unsafe.Add(ref prt, 22) = (sbyte)(Unsafe.Add(ref pleft, 22) - Unsafe.Add(ref pright, 22));
+                Unsafe.Add(ref prt, 23) = (sbyte)(Unsafe.Add(ref pleft, 23) - Unsafe.Add(ref pright, 23));
+                Unsafe.Add(ref prt, 24) = (sbyte)(Unsafe.Add(ref pleft, 24) - Unsafe.Add(ref pright, 24));
+                Unsafe.Add(ref prt, 25) = (sbyte)(Unsafe.Add(ref pleft, 25) - Unsafe.Add(ref pright, 25));
+                Unsafe.Add(ref prt, 26) = (sbyte)(Unsafe.Add(ref pleft, 26) - Unsafe.Add(ref pright, 26));
+                Unsafe.Add(ref prt, 27) = (sbyte)(Unsafe.Add(ref pleft, 27) - Unsafe.Add(ref pright, 27));
+                Unsafe.Add(ref prt, 28) = (sbyte)(Unsafe.Add(ref pleft, 28) - Unsafe.Add(ref pright, 28));
+                Unsafe.Add(ref prt, 29) = (sbyte)(Unsafe.Add(ref pleft, 29) - Unsafe.Add(ref pright, 29));
+                Unsafe.Add(ref prt, 30) = (sbyte)(Unsafe.Add(ref pleft, 30) - Unsafe.Add(ref pright, 30));
+                Unsafe.Add(ref prt, 31) = (sbyte)(Unsafe.Add(ref pleft, 31) - Unsafe.Add(ref pright, 31));
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<byte> Subtract_Basic(Vector256<byte> left, Vector256<byte> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<byte> rt);
-#else
-                Vector256<byte> rt = default;
-#endif // NET5_0_OR_GREATER
-                byte* prt = (byte*)&rt;
-                byte* pleft = (byte*)&left;
-                byte* pright = (byte*)&right;
-                prt[0] = (byte)(pleft[0] - pright[0]);
-                prt[1] = (byte)(pleft[1] - pright[1]);
-                prt[2] = (byte)(pleft[2] - pright[2]);
-                prt[3] = (byte)(pleft[3] - pright[3]);
-                prt[4] = (byte)(pleft[4] - pright[4]);
-                prt[5] = (byte)(pleft[5] - pright[5]);
-                prt[6] = (byte)(pleft[6] - pright[6]);
-                prt[7] = (byte)(pleft[7] - pright[7]);
-                prt[8] = (byte)(pleft[8] - pright[8]);
-                prt[9] = (byte)(pleft[9] - pright[9]);
-                prt[10] = (byte)(pleft[10] - pright[10]);
-                prt[11] = (byte)(pleft[11] - pright[11]);
-                prt[12] = (byte)(pleft[12] - pright[12]);
-                prt[13] = (byte)(pleft[13] - pright[13]);
-                prt[14] = (byte)(pleft[14] - pright[14]);
-                prt[15] = (byte)(pleft[15] - pright[15]);
-                prt[16] = (byte)(pleft[16] - pright[16]);
-                prt[17] = (byte)(pleft[17] - pright[17]);
-                prt[18] = (byte)(pleft[18] - pright[18]);
-                prt[19] = (byte)(pleft[19] - pright[19]);
-                prt[20] = (byte)(pleft[20] - pright[20]);
-                prt[21] = (byte)(pleft[21] - pright[21]);
-                prt[22] = (byte)(pleft[22] - pright[22]);
-                prt[23] = (byte)(pleft[23] - pright[23]);
-                prt[24] = (byte)(pleft[24] - pright[24]);
-                prt[25] = (byte)(pleft[25] - pright[25]);
-                prt[26] = (byte)(pleft[26] - pright[26]);
-                prt[27] = (byte)(pleft[27] - pright[27]);
-                prt[28] = (byte)(pleft[28] - pright[28]);
-                prt[29] = (byte)(pleft[29] - pright[29]);
-                prt[30] = (byte)(pleft[30] - pright[30]);
-                prt[31] = (byte)(pleft[31] - pright[31]);
+            public static Vector256<byte> Subtract_Basic(Vector256<byte> left, Vector256<byte> right) {
+                UnsafeEx.SkipInit(out Vector256<byte> rt);
+                ref byte prt = ref Unsafe.As<Vector256<byte>, byte>(ref rt);
+                ref byte pleft = ref Unsafe.As<Vector256<byte>, byte>(ref left);
+                ref byte pright = ref Unsafe.As<Vector256<byte>, byte>(ref right);
+                prt = (byte)(pleft - pright);
+                Unsafe.Add(ref prt, 1) = (byte)(Unsafe.Add(ref pleft, 1) - Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = (byte)(Unsafe.Add(ref pleft, 2) - Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = (byte)(Unsafe.Add(ref pleft, 3) - Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = (byte)(Unsafe.Add(ref pleft, 4) - Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = (byte)(Unsafe.Add(ref pleft, 5) - Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = (byte)(Unsafe.Add(ref pleft, 6) - Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = (byte)(Unsafe.Add(ref pleft, 7) - Unsafe.Add(ref pright, 7));
+                Unsafe.Add(ref prt, 8) = (byte)(Unsafe.Add(ref pleft, 8) - Unsafe.Add(ref pright, 8));
+                Unsafe.Add(ref prt, 9) = (byte)(Unsafe.Add(ref pleft, 9) - Unsafe.Add(ref pright, 9));
+                Unsafe.Add(ref prt, 10) = (byte)(Unsafe.Add(ref pleft, 10) - Unsafe.Add(ref pright, 10));
+                Unsafe.Add(ref prt, 11) = (byte)(Unsafe.Add(ref pleft, 11) - Unsafe.Add(ref pright, 11));
+                Unsafe.Add(ref prt, 12) = (byte)(Unsafe.Add(ref pleft, 12) - Unsafe.Add(ref pright, 12));
+                Unsafe.Add(ref prt, 13) = (byte)(Unsafe.Add(ref pleft, 13) - Unsafe.Add(ref pright, 13));
+                Unsafe.Add(ref prt, 14) = (byte)(Unsafe.Add(ref pleft, 14) - Unsafe.Add(ref pright, 14));
+                Unsafe.Add(ref prt, 15) = (byte)(Unsafe.Add(ref pleft, 15) - Unsafe.Add(ref pright, 15));
+                Unsafe.Add(ref prt, 16) = (byte)(Unsafe.Add(ref pleft, 16) - Unsafe.Add(ref pright, 16));
+                Unsafe.Add(ref prt, 17) = (byte)(Unsafe.Add(ref pleft, 17) - Unsafe.Add(ref pright, 17));
+                Unsafe.Add(ref prt, 18) = (byte)(Unsafe.Add(ref pleft, 18) - Unsafe.Add(ref pright, 18));
+                Unsafe.Add(ref prt, 19) = (byte)(Unsafe.Add(ref pleft, 19) - Unsafe.Add(ref pright, 19));
+                Unsafe.Add(ref prt, 20) = (byte)(Unsafe.Add(ref pleft, 20) - Unsafe.Add(ref pright, 20));
+                Unsafe.Add(ref prt, 21) = (byte)(Unsafe.Add(ref pleft, 21) - Unsafe.Add(ref pright, 21));
+                Unsafe.Add(ref prt, 22) = (byte)(Unsafe.Add(ref pleft, 22) - Unsafe.Add(ref pright, 22));
+                Unsafe.Add(ref prt, 23) = (byte)(Unsafe.Add(ref pleft, 23) - Unsafe.Add(ref pright, 23));
+                Unsafe.Add(ref prt, 24) = (byte)(Unsafe.Add(ref pleft, 24) - Unsafe.Add(ref pright, 24));
+                Unsafe.Add(ref prt, 25) = (byte)(Unsafe.Add(ref pleft, 25) - Unsafe.Add(ref pright, 25));
+                Unsafe.Add(ref prt, 26) = (byte)(Unsafe.Add(ref pleft, 26) - Unsafe.Add(ref pright, 26));
+                Unsafe.Add(ref prt, 27) = (byte)(Unsafe.Add(ref pleft, 27) - Unsafe.Add(ref pright, 27));
+                Unsafe.Add(ref prt, 28) = (byte)(Unsafe.Add(ref pleft, 28) - Unsafe.Add(ref pright, 28));
+                Unsafe.Add(ref prt, 29) = (byte)(Unsafe.Add(ref pleft, 29) - Unsafe.Add(ref pright, 29));
+                Unsafe.Add(ref prt, 30) = (byte)(Unsafe.Add(ref pleft, 30) - Unsafe.Add(ref pright, 30));
+                Unsafe.Add(ref prt, 31) = (byte)(Unsafe.Add(ref pleft, 31) - Unsafe.Add(ref pright, 31));
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<short> Subtract_Basic(Vector256<short> left, Vector256<short> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<short> rt);
-#else
-                Vector256<short> rt = default;
-#endif // NET5_0_OR_GREATER
-                short* prt = (short*)&rt;
-                short* pleft = (short*)&left;
-                short* pright = (short*)&right;
-                prt[0] = (short)(pleft[0] - pright[0]);
-                prt[1] = (short)(pleft[1] - pright[1]);
-                prt[2] = (short)(pleft[2] - pright[2]);
-                prt[3] = (short)(pleft[3] - pright[3]);
-                prt[4] = (short)(pleft[4] - pright[4]);
-                prt[5] = (short)(pleft[5] - pright[5]);
-                prt[6] = (short)(pleft[6] - pright[6]);
-                prt[7] = (short)(pleft[7] - pright[7]);
-                prt[8] = (short)(pleft[8] - pright[8]);
-                prt[9] = (short)(pleft[9] - pright[9]);
-                prt[10] = (short)(pleft[10] - pright[10]);
-                prt[11] = (short)(pleft[11] - pright[11]);
-                prt[12] = (short)(pleft[12] - pright[12]);
-                prt[13] = (short)(pleft[13] - pright[13]);
-                prt[14] = (short)(pleft[14] - pright[14]);
-                prt[15] = (short)(pleft[15] - pright[15]);
+            public static Vector256<short> Subtract_Basic(Vector256<short> left, Vector256<short> right) {
+                UnsafeEx.SkipInit(out Vector256<short> rt);
+                ref short prt = ref Unsafe.As<Vector256<short>, short>(ref rt);
+                ref short pleft = ref Unsafe.As<Vector256<short>, short>(ref left);
+                ref short pright = ref Unsafe.As<Vector256<short>, short>(ref right);
+                prt = (short)(pleft - pright);
+                Unsafe.Add(ref prt, 1) = (short)(Unsafe.Add(ref pleft, 1) - Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = (short)(Unsafe.Add(ref pleft, 2) - Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = (short)(Unsafe.Add(ref pleft, 3) - Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = (short)(Unsafe.Add(ref pleft, 4) - Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = (short)(Unsafe.Add(ref pleft, 5) - Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = (short)(Unsafe.Add(ref pleft, 6) - Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = (short)(Unsafe.Add(ref pleft, 7) - Unsafe.Add(ref pright, 7));
+                Unsafe.Add(ref prt, 8) = (short)(Unsafe.Add(ref pleft, 8) - Unsafe.Add(ref pright, 8));
+                Unsafe.Add(ref prt, 9) = (short)(Unsafe.Add(ref pleft, 9) - Unsafe.Add(ref pright, 9));
+                Unsafe.Add(ref prt, 10) = (short)(Unsafe.Add(ref pleft, 10) - Unsafe.Add(ref pright, 10));
+                Unsafe.Add(ref prt, 11) = (short)(Unsafe.Add(ref pleft, 11) - Unsafe.Add(ref pright, 11));
+                Unsafe.Add(ref prt, 12) = (short)(Unsafe.Add(ref pleft, 12) - Unsafe.Add(ref pright, 12));
+                Unsafe.Add(ref prt, 13) = (short)(Unsafe.Add(ref pleft, 13) - Unsafe.Add(ref pright, 13));
+                Unsafe.Add(ref prt, 14) = (short)(Unsafe.Add(ref pleft, 14) - Unsafe.Add(ref pright, 14));
+                Unsafe.Add(ref prt, 15) = (short)(Unsafe.Add(ref pleft, 15) - Unsafe.Add(ref pright, 15));
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<ushort> Subtract_Basic(Vector256<ushort> left, Vector256<ushort> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<ushort> rt);
-#else
-                Vector256<ushort> rt = default;
-#endif // NET5_0_OR_GREATER
-                ushort* prt = (ushort*)&rt;
-                ushort* pleft = (ushort*)&left;
-                ushort* pright = (ushort*)&right;
-                prt[0] = (ushort)(pleft[0] - pright[0]);
-                prt[1] = (ushort)(pleft[1] - pright[1]);
-                prt[2] = (ushort)(pleft[2] - pright[2]);
-                prt[3] = (ushort)(pleft[3] - pright[3]);
-                prt[4] = (ushort)(pleft[4] - pright[4]);
-                prt[5] = (ushort)(pleft[5] - pright[5]);
-                prt[6] = (ushort)(pleft[6] - pright[6]);
-                prt[7] = (ushort)(pleft[7] - pright[7]);
-                prt[8] = (ushort)(pleft[8] - pright[8]);
-                prt[9] = (ushort)(pleft[9] - pright[9]);
-                prt[10] = (ushort)(pleft[10] - pright[10]);
-                prt[11] = (ushort)(pleft[11] - pright[11]);
-                prt[12] = (ushort)(pleft[12] - pright[12]);
-                prt[13] = (ushort)(pleft[13] - pright[13]);
-                prt[14] = (ushort)(pleft[14] - pright[14]);
-                prt[15] = (ushort)(pleft[15] - pright[15]);
+            public static Vector256<ushort> Subtract_Basic(Vector256<ushort> left, Vector256<ushort> right) {
+                UnsafeEx.SkipInit(out Vector256<ushort> rt);
+                ref ushort prt = ref Unsafe.As<Vector256<ushort>, ushort>(ref rt);
+                ref ushort pleft = ref Unsafe.As<Vector256<ushort>, ushort>(ref left);
+                ref ushort pright = ref Unsafe.As<Vector256<ushort>, ushort>(ref right);
+                prt = (ushort)(pleft - pright);
+                Unsafe.Add(ref prt, 1) = (ushort)(Unsafe.Add(ref pleft, 1) - Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = (ushort)(Unsafe.Add(ref pleft, 2) - Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = (ushort)(Unsafe.Add(ref pleft, 3) - Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = (ushort)(Unsafe.Add(ref pleft, 4) - Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = (ushort)(Unsafe.Add(ref pleft, 5) - Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = (ushort)(Unsafe.Add(ref pleft, 6) - Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = (ushort)(Unsafe.Add(ref pleft, 7) - Unsafe.Add(ref pright, 7));
+                Unsafe.Add(ref prt, 8) = (ushort)(Unsafe.Add(ref pleft, 8) - Unsafe.Add(ref pright, 8));
+                Unsafe.Add(ref prt, 9) = (ushort)(Unsafe.Add(ref pleft, 9) - Unsafe.Add(ref pright, 9));
+                Unsafe.Add(ref prt, 10) = (ushort)(Unsafe.Add(ref pleft, 10) - Unsafe.Add(ref pright, 10));
+                Unsafe.Add(ref prt, 11) = (ushort)(Unsafe.Add(ref pleft, 11) - Unsafe.Add(ref pright, 11));
+                Unsafe.Add(ref prt, 12) = (ushort)(Unsafe.Add(ref pleft, 12) - Unsafe.Add(ref pright, 12));
+                Unsafe.Add(ref prt, 13) = (ushort)(Unsafe.Add(ref pleft, 13) - Unsafe.Add(ref pright, 13));
+                Unsafe.Add(ref prt, 14) = (ushort)(Unsafe.Add(ref pleft, 14) - Unsafe.Add(ref pright, 14));
+                Unsafe.Add(ref prt, 15) = (ushort)(Unsafe.Add(ref pleft, 15) - Unsafe.Add(ref pright, 15));
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<int> Subtract_Basic(Vector256<int> left, Vector256<int> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<int> rt);
-#else
-                Vector256<int> rt = default;
-#endif // NET5_0_OR_GREATER
-                int* prt = (int*)&rt;
-                int* pleft = (int*)&left;
-                int* pright = (int*)&right;
-                prt[0] = (pleft[0] - pright[0]);
-                prt[1] = (pleft[1] - pright[1]);
-                prt[2] = (pleft[2] - pright[2]);
-                prt[3] = (pleft[3] - pright[3]);
-                prt[4] = (pleft[4] - pright[4]);
-                prt[5] = (pleft[5] - pright[5]);
-                prt[6] = (pleft[6] - pright[6]);
-                prt[7] = (pleft[7] - pright[7]);
+            public static Vector256<int> Subtract_Basic(Vector256<int> left, Vector256<int> right) {
+                UnsafeEx.SkipInit(out Vector256<int> rt);
+                ref int prt = ref Unsafe.As<Vector256<int>, int>(ref rt);
+                ref int pleft = ref Unsafe.As<Vector256<int>, int>(ref left);
+                ref int pright = ref Unsafe.As<Vector256<int>, int>(ref right);
+                prt = pleft - pright;
+                Unsafe.Add(ref prt, 1) = Unsafe.Add(ref pleft, 1) - Unsafe.Add(ref pright, 1);
+                Unsafe.Add(ref prt, 2) = Unsafe.Add(ref pleft, 2) - Unsafe.Add(ref pright, 2);
+                Unsafe.Add(ref prt, 3) = Unsafe.Add(ref pleft, 3) - Unsafe.Add(ref pright, 3);
+                Unsafe.Add(ref prt, 4) = Unsafe.Add(ref pleft, 4) - Unsafe.Add(ref pright, 4);
+                Unsafe.Add(ref prt, 5) = Unsafe.Add(ref pleft, 5) - Unsafe.Add(ref pright, 5);
+                Unsafe.Add(ref prt, 6) = Unsafe.Add(ref pleft, 6) - Unsafe.Add(ref pright, 6);
+                Unsafe.Add(ref prt, 7) = Unsafe.Add(ref pleft, 7) - Unsafe.Add(ref pright, 7);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<uint> Subtract_Basic(Vector256<uint> left, Vector256<uint> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<uint> rt);
-#else
-                Vector256<uint> rt = default;
-#endif // NET5_0_OR_GREATER
-                uint* prt = (uint*)&rt;
-                uint* pleft = (uint*)&left;
-                uint* pright = (uint*)&right;
-                prt[0] = (pleft[0] - pright[0]);
-                prt[1] = (pleft[1] - pright[1]);
-                prt[2] = (pleft[2] - pright[2]);
-                prt[3] = (pleft[3] - pright[3]);
-                prt[4] = (pleft[4] - pright[4]);
-                prt[5] = (pleft[5] - pright[5]);
-                prt[6] = (pleft[6] - pright[6]);
-                prt[7] = (pleft[7] - pright[7]);
+            public static Vector256<uint> Subtract_Basic(Vector256<uint> left, Vector256<uint> right) {
+                UnsafeEx.SkipInit(out Vector256<uint> rt);
+                ref uint prt = ref Unsafe.As<Vector256<uint>, uint>(ref rt);
+                ref uint pleft = ref Unsafe.As<Vector256<uint>, uint>(ref left);
+                ref uint pright = ref Unsafe.As<Vector256<uint>, uint>(ref right);
+                prt = pleft - pright;
+                Unsafe.Add(ref prt, 1) = Unsafe.Add(ref pleft, 1) - Unsafe.Add(ref pright, 1);
+                Unsafe.Add(ref prt, 2) = Unsafe.Add(ref pleft, 2) - Unsafe.Add(ref pright, 2);
+                Unsafe.Add(ref prt, 3) = Unsafe.Add(ref pleft, 3) - Unsafe.Add(ref pright, 3);
+                Unsafe.Add(ref prt, 4) = Unsafe.Add(ref pleft, 4) - Unsafe.Add(ref pright, 4);
+                Unsafe.Add(ref prt, 5) = Unsafe.Add(ref pleft, 5) - Unsafe.Add(ref pright, 5);
+                Unsafe.Add(ref prt, 6) = Unsafe.Add(ref pleft, 6) - Unsafe.Add(ref pright, 6);
+                Unsafe.Add(ref prt, 7) = Unsafe.Add(ref pleft, 7) - Unsafe.Add(ref pright, 7);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<long> Subtract_Basic(Vector256<long> left, Vector256<long> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<long> rt);
-#else
-                Vector256<long> rt = default;
-#endif // NET5_0_OR_GREATER
-                long* prt = (long*)&rt;
-                long* pleft = (long*)&left;
-                long* pright = (long*)&right;
-                prt[0] = (pleft[0] - pright[0]);
-                prt[1] = (pleft[1] - pright[1]);
-                prt[2] = (pleft[2] - pright[2]);
-                prt[3] = (pleft[3] - pright[3]);
+            public static Vector256<long> Subtract_Basic(Vector256<long> left, Vector256<long> right) {
+                UnsafeEx.SkipInit(out Vector256<long> rt);
+                ref long prt = ref Unsafe.As<Vector256<long>, long>(ref rt);
+                ref long pleft = ref Unsafe.As<Vector256<long>, long>(ref left);
+                ref long pright = ref Unsafe.As<Vector256<long>, long>(ref right);
+                prt = pleft - pright;
+                Unsafe.Add(ref prt, 1) = Unsafe.Add(ref pleft, 1) - Unsafe.Add(ref pright, 1);
+                Unsafe.Add(ref prt, 2) = Unsafe.Add(ref pleft, 2) - Unsafe.Add(ref pright, 2);
+                Unsafe.Add(ref prt, 3) = Unsafe.Add(ref pleft, 3) - Unsafe.Add(ref pright, 3);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<ulong> Subtract_Basic(Vector256<ulong> left, Vector256<ulong> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<ulong> rt);
-#else
-                Vector256<ulong> rt = default;
-#endif // NET5_0_OR_GREATER
-                ulong* prt = (ulong*)&rt;
-                ulong* pleft = (ulong*)&left;
-                ulong* pright = (ulong*)&right;
-                prt[0] = (pleft[0] - pright[0]);
-                prt[1] = (pleft[1] - pright[1]);
-                prt[2] = (pleft[2] - pright[2]);
-                prt[3] = (pleft[3] - pright[3]);
+            public static Vector256<ulong> Subtract_Basic(Vector256<ulong> left, Vector256<ulong> right) {
+                UnsafeEx.SkipInit(out Vector256<ulong> rt);
+                ref ulong prt = ref Unsafe.As<Vector256<ulong>, ulong>(ref rt);
+                ref ulong pleft = ref Unsafe.As<Vector256<ulong>, ulong>(ref left);
+                ref ulong pright = ref Unsafe.As<Vector256<ulong>, ulong>(ref right);
+                prt = pleft - pright;
+                Unsafe.Add(ref prt, 1) = Unsafe.Add(ref pleft, 1) - Unsafe.Add(ref pright, 1);
+                Unsafe.Add(ref prt, 2) = Unsafe.Add(ref pleft, 2) - Unsafe.Add(ref pright, 2);
+                Unsafe.Add(ref prt, 3) = Unsafe.Add(ref pleft, 3) - Unsafe.Add(ref pright, 3);
                 return rt;
             }
 
