@@ -295,11 +295,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Add_Basic(Vector128<float> left, Vector128<float> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<float> rt);
-#else
-                Vector128<float> rt = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out Vector128<float> rt);
                 ref float prt = ref Unsafe.As<Vector128<float>, float>(ref rt);
                 ref float pleft = ref Unsafe.As<Vector128<float>, float>(ref left);
                 ref float pright = ref Unsafe.As<Vector128<float>, float>(ref right);
@@ -313,11 +309,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Add_Basic(Vector128<double> left, Vector128<double> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<double> rt);
-#else
-                Vector128<double> rt = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out Vector128<double> rt);
                 ref double prt = ref Unsafe.As<Vector128<double>, double>(ref rt);
                 ref double pleft = ref Unsafe.As<Vector128<double>, double>(ref left);
                 ref double pright = ref Unsafe.As<Vector128<double>, double>(ref right);
@@ -330,11 +322,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> Add_Basic(Vector128<sbyte> left, Vector128<sbyte> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<sbyte> rt);
-#else
-                Vector128<sbyte> rt = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out Vector128<sbyte> rt);
                 ref sbyte prt = ref Unsafe.As<Vector128<sbyte>, sbyte>(ref rt);
                 ref sbyte pleft = ref Unsafe.As<Vector128<sbyte>, sbyte>(ref left);
                 ref sbyte pright = ref Unsafe.As<Vector128<sbyte>, sbyte>(ref right);
@@ -360,11 +348,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> Add_Basic(Vector128<byte> left, Vector128<byte> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<byte> rt);
-#else
-                Vector128<byte> rt = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out Vector128<byte> rt);
                 ref byte prt = ref Unsafe.As<Vector128<byte>, byte>(ref rt);
                 ref byte pleft = ref Unsafe.As<Vector128<byte>, byte>(ref left);
                 ref byte pright = ref Unsafe.As<Vector128<byte>, byte>(ref right);
@@ -390,11 +374,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> Add_Basic(Vector128<short> left, Vector128<short> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<short> rt);
-#else
-                Vector128<short> rt = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out Vector128<short> rt);
                 ref short prt = ref Unsafe.As<Vector128<short>, short>(ref rt);
                 ref short pleft = ref Unsafe.As<Vector128<short>, short>(ref left);
                 ref short pright = ref Unsafe.As<Vector128<short>, short>(ref right);
@@ -413,11 +393,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> Add_Basic(Vector128<ushort> left, Vector128<ushort> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<ushort> rt);
-#else
-                Vector128<ushort> rt = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out Vector128<ushort> rt);
                 ref ushort prt = ref Unsafe.As<Vector128<ushort>, ushort>(ref rt);
                 ref ushort pleft = ref Unsafe.As<Vector128<ushort>, ushort>(ref left);
                 ref ushort pright = ref Unsafe.As<Vector128<ushort>, ushort>(ref right);
@@ -435,11 +411,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> Add_Basic(Vector128<int> left, Vector128<int> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<int> rt);
-#else
-                Vector128<int> rt = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out Vector128<int> rt);
                 ref int prt = ref Unsafe.As<Vector128<int>, int>(ref rt);
                 ref int pleft = ref Unsafe.As<Vector128<int>, int>(ref left);
                 ref int pright = ref Unsafe.As<Vector128<int>, int>(ref right);
@@ -454,11 +426,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> Add_Basic(Vector128<uint> left, Vector128<uint> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<uint> rt);
-#else
-                Vector128<uint> rt = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out Vector128<uint> rt);
                 ref uint prt = ref Unsafe.As<Vector128<uint>, uint>(ref rt);
                 ref uint pleft = ref Unsafe.As<Vector128<uint>, uint>(ref left);
                 ref uint pright = ref Unsafe.As<Vector128<uint>, uint>(ref right);
@@ -472,11 +440,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Add_Basic(Vector128<long> left, Vector128<long> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<long> rt);
-#else
-                Vector128<long> rt = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out Vector128<long> rt);
                 ref long prt = ref Unsafe.As<Vector128<long>, long>(ref rt);
                 ref long pleft = ref Unsafe.As<Vector128<long>, long>(ref left);
                 ref long pright = ref Unsafe.As<Vector128<long>, long>(ref right);
@@ -489,11 +453,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> Add_Basic(Vector128<ulong> left, Vector128<ulong> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<ulong> rt);
-#else
-                Vector128<ulong> rt = default;
-#endif // NET5_0_OR_GREATER
+                UnsafeEx.SkipInit(out Vector128<ulong> rt);
                 ref ulong prt = ref Unsafe.As<Vector128<ulong>, ulong>(ref rt);
                 ref ulong pleft = ref Unsafe.As<Vector128<ulong>, ulong>(ref left);
                 ref ulong pright = ref Unsafe.As<Vector128<ulong>, ulong>(ref right);
