@@ -1376,7 +1376,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<float> Max_Conditional(Vector128<float> left, Vector128<float> right) {
+            public static Vector128<float> Max_Conditional(Vector128<float> left, Vector128<float> right) {
                 Vector128<float> condition = GreaterThan(left, right);
                 Vector128<float> rt = ConditionalSelect(condition, left, right);
                 return rt;
@@ -1384,27 +1384,16 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<double> Max_Conditional(Vector128<double> left, Vector128<double> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<long> rt);
-#else
-                Vector128<long> rt = default;
-#endif // NET5_0_OR_GREATER
-                double* pleft = (double*)&left;
-                double* pright = (double*)&right;
-                long* q = (long*)&rt;
-                long condition0 = BitMath.ToInt32Mask(pleft[0] > pright[0]);
-                long condition1 = BitMath.ToInt32Mask(pleft[1] > pright[1]);
-                // result = (left & condition) | (right & ~condition);
-                q[0] = (BitMath.DoubleToInt64Bits(pleft[0]) & condition0) | (BitMath.DoubleToInt64Bits(pright[0]) & ~condition0);
-                q[1] = (BitMath.DoubleToInt64Bits(pleft[1]) & condition1) | (BitMath.DoubleToInt64Bits(pright[1]) & ~condition1);
-                return rt.AsDouble();
+            public static Vector128<double> Max_Conditional(Vector128<double> left, Vector128<double> right) {
+                Vector128<double> condition = GreaterThan(left, right);
+                Vector128<double> rt = ConditionalSelect(condition, left, right);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<sbyte> Max_Conditional(Vector128<sbyte> left, Vector128<sbyte> right) {
+            public static Vector128<sbyte> Max_Conditional(Vector128<sbyte> left, Vector128<sbyte> right) {
                 Vector128<sbyte> condition = GreaterThan(left, right);
                 Vector128<sbyte> rt = ConditionalSelect(condition, left, right);
                 return rt;
@@ -1412,7 +1401,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<byte> Max_Conditional(Vector128<byte> left, Vector128<byte> right) {
+            public static Vector128<byte> Max_Conditional(Vector128<byte> left, Vector128<byte> right) {
                 Vector128<byte> condition = GreaterThan(left, right);
                 Vector128<byte> rt = ConditionalSelect(condition, left, right);
                 return rt;
@@ -1420,7 +1409,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<short> Max_Conditional(Vector128<short> left, Vector128<short> right) {
+            public static Vector128<short> Max_Conditional(Vector128<short> left, Vector128<short> right) {
                 Vector128<short> condition = GreaterThan(left, right);
                 Vector128<short> rt = ConditionalSelect(condition, left, right);
                 return rt;
@@ -1429,7 +1418,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<ushort> Max_Conditional(Vector128<ushort> left, Vector128<ushort> right) {
+            public static Vector128<ushort> Max_Conditional(Vector128<ushort> left, Vector128<ushort> right) {
                 Vector128<ushort> condition = GreaterThan(left, right);
                 Vector128<ushort> rt = ConditionalSelect(condition, left, right);
                 return rt;
@@ -1437,7 +1426,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<int> Max_Conditional(Vector128<int> left, Vector128<int> right) {
+            public static Vector128<int> Max_Conditional(Vector128<int> left, Vector128<int> right) {
                 Vector128<int> condition = GreaterThan(left, right);
                 Vector128<int> rt = ConditionalSelect(condition, left, right);
                 return rt;
@@ -1446,7 +1435,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<uint> Max_Conditional(Vector128<uint> left, Vector128<uint> right) {
+            public static Vector128<uint> Max_Conditional(Vector128<uint> left, Vector128<uint> right) {
                 Vector128<uint> condition = GreaterThan(left, right);
                 Vector128<uint> rt = ConditionalSelect(condition, left, right);
                 return rt;
@@ -1454,41 +1443,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<long> Max_Conditional(Vector128<long> left, Vector128<long> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<long> rt);
-#else
-                Vector128<long> rt = default;
-#endif // NET5_0_OR_GREATER
-                long* pleft = (long*)&left;
-                long* pright = (long*)&right;
-                long* q = (long*)&rt;
-                long condition0 = BitMath.ToInt32Mask(pleft[0] > pright[0]);
-                long condition1 = BitMath.ToInt32Mask(pleft[1] > pright[1]);
-                // result = (left & condition) | (right & ~condition);
-                q[0] = ((pleft[0]) & condition0) | ((pright[0]) & ~condition0);
-                q[1] = ((pleft[1]) & condition1) | ((pright[1]) & ~condition1);
+            public static Vector128<long> Max_Conditional(Vector128<long> left, Vector128<long> right) {
+                Vector128<long> condition = GreaterThan(left, right);
+                Vector128<long> rt = ConditionalSelect(condition, left, right);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<ulong> Max_Conditional(Vector128<ulong> left, Vector128<ulong> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<long> rt);
-#else
-                Vector128<long> rt = default;
-#endif // NET5_0_OR_GREATER
-                ulong* pleft = (ulong*)&left;
-                ulong* pright = (ulong*)&right;
-                long* q = (long*)&rt;
-                long condition0 = BitMath.ToInt32Mask(pleft[0] > pright[0]);
-                long condition1 = BitMath.ToInt32Mask(pleft[1] > pright[1]);
-                // result = (left & condition) | (right & ~condition);
-                q[0] = ((long)(pleft[0]) & condition0) | ((long)(pright[0]) & ~condition0);
-                q[1] = ((long)(pleft[1]) & condition1) | ((long)(pright[1]) & ~condition1);
-                return rt.AsUInt64();
+            public static Vector128<ulong> Max_Conditional(Vector128<ulong> left, Vector128<ulong> right) {
+                Vector128<ulong> condition = GreaterThan(left, right);
+                Vector128<ulong> rt = ConditionalSelect(condition, left, right);
+                return rt;
             }
 
 

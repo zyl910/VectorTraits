@@ -1623,7 +1623,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{float}, Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<float> Max_Conditional(Vector256<float> left, Vector256<float> right) {
+            public static Vector256<float> Max_Conditional(Vector256<float> left, Vector256<float> right) {
                 Vector256<float> condition = GreaterThan(left, right);
                 Vector256<float> rt = ConditionalSelect(condition, left, right);
                 return rt;
@@ -1631,31 +1631,16 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{double}, Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<double> Max_Conditional(Vector256<double> left, Vector256<double> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<long> rt);
-#else
-                Vector256<long> rt = default;
-#endif // NET5_0_OR_GREATER
-                double* pleft = (double*)&left;
-                double* pright = (double*)&right;
-                long* q = (long*)&rt;
-                long condition0 = BitMath.ToInt32Mask(pleft[0] > pright[0]);
-                long condition1 = BitMath.ToInt32Mask(pleft[1] > pright[1]);
-                long condition2 = BitMath.ToInt32Mask(pleft[2] > pright[2]);
-                long condition3 = BitMath.ToInt32Mask(pleft[3] > pright[3]);
-                // result = (left & condition) | (right & ~condition);
-                q[0] = (BitMath.DoubleToInt64Bits(pleft[0]) & condition0) | (BitMath.DoubleToInt64Bits(pright[0]) & ~condition0);
-                q[1] = (BitMath.DoubleToInt64Bits(pleft[1]) & condition1) | (BitMath.DoubleToInt64Bits(pright[1]) & ~condition1);
-                q[2] = (BitMath.DoubleToInt64Bits(pleft[2]) & condition2) | (BitMath.DoubleToInt64Bits(pright[2]) & ~condition2);
-                q[3] = (BitMath.DoubleToInt64Bits(pleft[3]) & condition3) | (BitMath.DoubleToInt64Bits(pright[3]) & ~condition3);
-                return rt.AsDouble();
+            public static Vector256<double> Max_Conditional(Vector256<double> left, Vector256<double> right) {
+                Vector256<double> condition = GreaterThan(left, right);
+                Vector256<double> rt = ConditionalSelect(condition, left, right);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{sbyte}, Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<sbyte> Max_Conditional(Vector256<sbyte> left, Vector256<sbyte> right) {
+            public static Vector256<sbyte> Max_Conditional(Vector256<sbyte> left, Vector256<sbyte> right) {
                 Vector256<sbyte> condition = GreaterThan(left, right);
                 Vector256<sbyte> rt = ConditionalSelect(condition, left, right);
                 return rt;
@@ -1663,7 +1648,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<byte> Max_Conditional(Vector256<byte> left, Vector256<byte> right) {
+            public static Vector256<byte> Max_Conditional(Vector256<byte> left, Vector256<byte> right) {
                 Vector256<byte> condition = GreaterThan(left, right);
                 Vector256<byte> rt = ConditionalSelect(condition, left, right);
                 return rt;
@@ -1671,7 +1656,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<short> Max_Conditional(Vector256<short> left, Vector256<short> right) {
+            public static Vector256<short> Max_Conditional(Vector256<short> left, Vector256<short> right) {
                 Vector256<short> condition = GreaterThan(left, right);
                 Vector256<short> rt = ConditionalSelect(condition, left, right);
                 return rt;
@@ -1680,7 +1665,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<ushort> Max_Conditional(Vector256<ushort> left, Vector256<ushort> right) {
+            public static Vector256<ushort> Max_Conditional(Vector256<ushort> left, Vector256<ushort> right) {
                 Vector256<ushort> condition = GreaterThan(left, right);
                 Vector256<ushort> rt = ConditionalSelect(condition, left, right);
                 return rt;
@@ -1688,7 +1673,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<int> Max_Conditional(Vector256<int> left, Vector256<int> right) {
+            public static Vector256<int> Max_Conditional(Vector256<int> left, Vector256<int> right) {
                 Vector256<int> condition = GreaterThan(left, right);
                 Vector256<int> rt = ConditionalSelect(condition, left, right);
                 return rt;
@@ -1697,7 +1682,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<uint> Max_Conditional(Vector256<uint> left, Vector256<uint> right) {
+            public static Vector256<uint> Max_Conditional(Vector256<uint> left, Vector256<uint> right) {
                 Vector256<uint> condition = GreaterThan(left, right);
                 Vector256<uint> rt = ConditionalSelect(condition, left, right);
                 return rt;
@@ -1705,49 +1690,19 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<long> Max_Conditional(Vector256<long> left, Vector256<long> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<long> rt);
-#else
-                Vector256<long> rt = default;
-#endif // NET5_0_OR_GREATER
-                long* pleft = (long*)&left;
-                long* pright = (long*)&right;
-                long* q = (long*)&rt;
-                long condition0 = BitMath.ToInt32Mask(pleft[0] > pright[0]);
-                long condition1 = BitMath.ToInt32Mask(pleft[1] > pright[1]);
-                long condition2 = BitMath.ToInt32Mask(pleft[2] > pright[2]);
-                long condition3 = BitMath.ToInt32Mask(pleft[3] > pright[3]);
-                // result = (left & condition) | (right & ~condition);
-                q[0] = ((pleft[0]) & condition0) | ((pright[0]) & ~condition0);
-                q[1] = ((pleft[1]) & condition1) | ((pright[1]) & ~condition1);
-                q[2] = ((pleft[2]) & condition2) | ((pright[2]) & ~condition2);
-                q[3] = ((pleft[3]) & condition3) | ((pright[3]) & ~condition3);
+            public static Vector256<long> Max_Conditional(Vector256<long> left, Vector256<long> right) {
+                Vector256<long> condition = GreaterThan(left, right);
+                Vector256<long> rt = ConditionalSelect(condition, left, right);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<ulong> Max_Conditional(Vector256<ulong> left, Vector256<ulong> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<long> rt);
-#else
-                Vector256<long> rt = default;
-#endif // NET5_0_OR_GREATER
-                ulong* pleft = (ulong*)&left;
-                ulong* pright = (ulong*)&right;
-                long* q = (long*)&rt;
-                long condition0 = BitMath.ToInt32Mask(pleft[0] > pright[0]);
-                long condition1 = BitMath.ToInt32Mask(pleft[1] > pright[1]);
-                long condition2 = BitMath.ToInt32Mask(pleft[2] > pright[2]);
-                long condition3 = BitMath.ToInt32Mask(pleft[3] > pright[3]);
-                // result = (left & condition) | (right & ~condition);
-                q[0] = ((long)(pleft[0]) & condition0) | ((long)(pright[0]) & ~condition0);
-                q[1] = ((long)(pleft[1]) & condition1) | ((long)(pright[1]) & ~condition1);
-                q[2] = ((long)(pleft[2]) & condition2) | ((long)(pright[2]) & ~condition2);
-                q[3] = ((long)(pleft[3]) & condition3) | ((long)(pright[3]) & ~condition3);
-                return rt.AsUInt64();
+            public static Vector256<ulong> Max_Conditional(Vector256<ulong> left, Vector256<ulong> right) {
+                Vector256<ulong> condition = GreaterThan(left, right);
+                Vector256<ulong> rt = ConditionalSelect(condition, left, right);
+                return rt;
             }
 
 
