@@ -1269,278 +1269,238 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{float}, Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<float> LessThan_Basic(Vector256<float> left, Vector256<float> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<int> condition);
-#else
-                Vector256<int> condition = default;
-#endif // NET5_0_OR_GREATER
-                int* pcondition = (int*)&condition;
-                float* pleft = (float*)&left;
-                float* pright = (float*)&right;
-                pcondition[0] = BitMath.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = BitMath.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = BitMath.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = BitMath.ToInt32Mask(pleft[3] < pright[3]);
-                pcondition[4] = BitMath.ToInt32Mask(pleft[4] < pright[4]);
-                pcondition[5] = BitMath.ToInt32Mask(pleft[5] < pright[5]);
-                pcondition[6] = BitMath.ToInt32Mask(pleft[6] < pright[6]);
-                pcondition[7] = BitMath.ToInt32Mask(pleft[7] < pright[7]);
-                return condition.AsSingle();
+            public static Vector256<float> LessThan_Basic(Vector256<float> left, Vector256<float> right) {
+                UnsafeEx.SkipInit(out Vector256<float> rt);
+                ref int prt = ref Unsafe.As<Vector256<float>, int>(ref rt);
+                ref float pleft = ref Unsafe.As<Vector256<float>, float>(ref left);
+                ref float pright = ref Unsafe.As<Vector256<float>, float>(ref right);
+                prt = BitMath.ToInt32Mask(pleft < pright);
+                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) < Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) < Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) < Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) < Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) < Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) < Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) < Unsafe.Add(ref pright, 7));
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{double}, Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<double> LessThan_Basic(Vector256<double> left, Vector256<double> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<long> condition);
-#else
-                Vector256<long> condition = default;
-#endif // NET5_0_OR_GREATER
-                long* pcondition = (long*)&condition;
-                double* pleft = (double*)&left;
-                double* pright = (double*)&right;
-                pcondition[0] = BitMath.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = BitMath.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = BitMath.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = BitMath.ToInt32Mask(pleft[3] < pright[3]);
-                return condition.AsDouble();
+            public static Vector256<double> LessThan_Basic(Vector256<double> left, Vector256<double> right) {
+                UnsafeEx.SkipInit(out Vector256<double> rt);
+                ref long prt = ref Unsafe.As<Vector256<double>, long>(ref rt);
+                ref double pleft = ref Unsafe.As<Vector256<double>, double>(ref left);
+                ref double pright = ref Unsafe.As<Vector256<double>, double>(ref right);
+                prt = BitMath.ToInt32Mask(pleft < pright);
+                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) < Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) < Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) < Unsafe.Add(ref pright, 3));
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{sbyte}, Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<sbyte> LessThan_Basic(Vector256<sbyte> left, Vector256<sbyte> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<sbyte> condition);
-#else
-                Vector256<sbyte> condition = default;
-#endif // NET5_0_OR_GREATER
-                sbyte* pcondition = (sbyte*)&condition;
-                sbyte* pleft = (sbyte*)&left;
-                sbyte* pright = (sbyte*)&right;
-                pcondition[0] = (sbyte)BitMath.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = (sbyte)BitMath.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = (sbyte)BitMath.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = (sbyte)BitMath.ToInt32Mask(pleft[3] < pright[3]);
-                pcondition[4] = (sbyte)BitMath.ToInt32Mask(pleft[4] < pright[4]);
-                pcondition[5] = (sbyte)BitMath.ToInt32Mask(pleft[5] < pright[5]);
-                pcondition[6] = (sbyte)BitMath.ToInt32Mask(pleft[6] < pright[6]);
-                pcondition[7] = (sbyte)BitMath.ToInt32Mask(pleft[7] < pright[7]);
-                pcondition[8] = (sbyte)BitMath.ToInt32Mask(pleft[8] < pright[8]);
-                pcondition[9] = (sbyte)BitMath.ToInt32Mask(pleft[9] < pright[9]);
-                pcondition[10] = (sbyte)BitMath.ToInt32Mask(pleft[10] < pright[10]);
-                pcondition[11] = (sbyte)BitMath.ToInt32Mask(pleft[11] < pright[11]);
-                pcondition[12] = (sbyte)BitMath.ToInt32Mask(pleft[12] < pright[12]);
-                pcondition[13] = (sbyte)BitMath.ToInt32Mask(pleft[13] < pright[13]);
-                pcondition[14] = (sbyte)BitMath.ToInt32Mask(pleft[14] < pright[14]);
-                pcondition[15] = (sbyte)BitMath.ToInt32Mask(pleft[15] < pright[15]);
-                pcondition[16] = (sbyte)BitMath.ToInt32Mask(pleft[16] < pright[16]);
-                pcondition[17] = (sbyte)BitMath.ToInt32Mask(pleft[17] < pright[17]);
-                pcondition[18] = (sbyte)BitMath.ToInt32Mask(pleft[18] < pright[18]);
-                pcondition[19] = (sbyte)BitMath.ToInt32Mask(pleft[19] < pright[19]);
-                pcondition[20] = (sbyte)BitMath.ToInt32Mask(pleft[20] < pright[20]);
-                pcondition[21] = (sbyte)BitMath.ToInt32Mask(pleft[21] < pright[21]);
-                pcondition[22] = (sbyte)BitMath.ToInt32Mask(pleft[22] < pright[22]);
-                pcondition[23] = (sbyte)BitMath.ToInt32Mask(pleft[23] < pright[23]);
-                pcondition[24] = (sbyte)BitMath.ToInt32Mask(pleft[24] < pright[24]);
-                pcondition[25] = (sbyte)BitMath.ToInt32Mask(pleft[25] < pright[25]);
-                pcondition[26] = (sbyte)BitMath.ToInt32Mask(pleft[26] < pright[26]);
-                pcondition[27] = (sbyte)BitMath.ToInt32Mask(pleft[27] < pright[27]);
-                pcondition[28] = (sbyte)BitMath.ToInt32Mask(pleft[28] < pright[28]);
-                pcondition[29] = (sbyte)BitMath.ToInt32Mask(pleft[29] < pright[29]);
-                pcondition[30] = (sbyte)BitMath.ToInt32Mask(pleft[30] < pright[30]);
-                pcondition[31] = (sbyte)BitMath.ToInt32Mask(pleft[31] < pright[31]);
-                return condition.AsSByte();
+            public static Vector256<sbyte> LessThan_Basic(Vector256<sbyte> left, Vector256<sbyte> right) {
+                UnsafeEx.SkipInit(out Vector256<sbyte> rt);
+                ref sbyte prt = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref rt);
+                ref sbyte pleft = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref left);
+                ref sbyte pright = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref right);
+                prt = (sbyte)BitMath.ToInt32Mask(pleft < pright);
+                Unsafe.Add(ref prt, 1) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) < Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) < Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) < Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) < Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) < Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) < Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) < Unsafe.Add(ref pright, 7));
+                Unsafe.Add(ref prt, 8) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 8) < Unsafe.Add(ref pright, 8));
+                Unsafe.Add(ref prt, 9) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 9) < Unsafe.Add(ref pright, 9));
+                Unsafe.Add(ref prt, 10) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 10) < Unsafe.Add(ref pright, 10));
+                Unsafe.Add(ref prt, 11) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 11) < Unsafe.Add(ref pright, 11));
+                Unsafe.Add(ref prt, 12) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 12) < Unsafe.Add(ref pright, 12));
+                Unsafe.Add(ref prt, 13) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 13) < Unsafe.Add(ref pright, 13));
+                Unsafe.Add(ref prt, 14) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 14) < Unsafe.Add(ref pright, 14));
+                Unsafe.Add(ref prt, 15) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 15) < Unsafe.Add(ref pright, 15));
+                Unsafe.Add(ref prt, 16) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 16) < Unsafe.Add(ref pright, 16));
+                Unsafe.Add(ref prt, 17) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 17) < Unsafe.Add(ref pright, 17));
+                Unsafe.Add(ref prt, 18) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 18) < Unsafe.Add(ref pright, 18));
+                Unsafe.Add(ref prt, 19) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 19) < Unsafe.Add(ref pright, 19));
+                Unsafe.Add(ref prt, 20) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 20) < Unsafe.Add(ref pright, 20));
+                Unsafe.Add(ref prt, 21) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 21) < Unsafe.Add(ref pright, 21));
+                Unsafe.Add(ref prt, 22) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 22) < Unsafe.Add(ref pright, 22));
+                Unsafe.Add(ref prt, 23) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 23) < Unsafe.Add(ref pright, 23));
+                Unsafe.Add(ref prt, 24) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 24) < Unsafe.Add(ref pright, 24));
+                Unsafe.Add(ref prt, 25) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 25) < Unsafe.Add(ref pright, 25));
+                Unsafe.Add(ref prt, 26) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 26) < Unsafe.Add(ref pright, 26));
+                Unsafe.Add(ref prt, 27) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 27) < Unsafe.Add(ref pright, 27));
+                Unsafe.Add(ref prt, 28) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 28) < Unsafe.Add(ref pright, 28));
+                Unsafe.Add(ref prt, 29) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 29) < Unsafe.Add(ref pright, 29));
+                Unsafe.Add(ref prt, 30) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 30) < Unsafe.Add(ref pright, 30));
+                Unsafe.Add(ref prt, 31) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 31) < Unsafe.Add(ref pright, 31));
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<byte> LessThan_Basic(Vector256<byte> left, Vector256<byte> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<sbyte> condition);
-#else
-                Vector256<sbyte> condition = default;
-#endif // NET5_0_OR_GREATER
-                sbyte* pcondition = (sbyte*)&condition;
-                byte* pleft = (byte*)&left;
-                byte* pright = (byte*)&right;
-                pcondition[0] = (sbyte)BitMath.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = (sbyte)BitMath.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = (sbyte)BitMath.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = (sbyte)BitMath.ToInt32Mask(pleft[3] < pright[3]);
-                pcondition[4] = (sbyte)BitMath.ToInt32Mask(pleft[4] < pright[4]);
-                pcondition[5] = (sbyte)BitMath.ToInt32Mask(pleft[5] < pright[5]);
-                pcondition[6] = (sbyte)BitMath.ToInt32Mask(pleft[6] < pright[6]);
-                pcondition[7] = (sbyte)BitMath.ToInt32Mask(pleft[7] < pright[7]);
-                pcondition[8] = (sbyte)BitMath.ToInt32Mask(pleft[8] < pright[8]);
-                pcondition[9] = (sbyte)BitMath.ToInt32Mask(pleft[9] < pright[9]);
-                pcondition[10] = (sbyte)BitMath.ToInt32Mask(pleft[10] < pright[10]);
-                pcondition[11] = (sbyte)BitMath.ToInt32Mask(pleft[11] < pright[11]);
-                pcondition[12] = (sbyte)BitMath.ToInt32Mask(pleft[12] < pright[12]);
-                pcondition[13] = (sbyte)BitMath.ToInt32Mask(pleft[13] < pright[13]);
-                pcondition[14] = (sbyte)BitMath.ToInt32Mask(pleft[14] < pright[14]);
-                pcondition[15] = (sbyte)BitMath.ToInt32Mask(pleft[15] < pright[15]);
-                pcondition[16] = (sbyte)BitMath.ToInt32Mask(pleft[16] < pright[16]);
-                pcondition[17] = (sbyte)BitMath.ToInt32Mask(pleft[17] < pright[17]);
-                pcondition[18] = (sbyte)BitMath.ToInt32Mask(pleft[18] < pright[18]);
-                pcondition[19] = (sbyte)BitMath.ToInt32Mask(pleft[19] < pright[19]);
-                pcondition[20] = (sbyte)BitMath.ToInt32Mask(pleft[20] < pright[20]);
-                pcondition[21] = (sbyte)BitMath.ToInt32Mask(pleft[21] < pright[21]);
-                pcondition[22] = (sbyte)BitMath.ToInt32Mask(pleft[22] < pright[22]);
-                pcondition[23] = (sbyte)BitMath.ToInt32Mask(pleft[23] < pright[23]);
-                pcondition[24] = (sbyte)BitMath.ToInt32Mask(pleft[24] < pright[24]);
-                pcondition[25] = (sbyte)BitMath.ToInt32Mask(pleft[25] < pright[25]);
-                pcondition[26] = (sbyte)BitMath.ToInt32Mask(pleft[26] < pright[26]);
-                pcondition[27] = (sbyte)BitMath.ToInt32Mask(pleft[27] < pright[27]);
-                pcondition[28] = (sbyte)BitMath.ToInt32Mask(pleft[28] < pright[28]);
-                pcondition[29] = (sbyte)BitMath.ToInt32Mask(pleft[29] < pright[29]);
-                pcondition[30] = (sbyte)BitMath.ToInt32Mask(pleft[30] < pright[30]);
-                pcondition[31] = (sbyte)BitMath.ToInt32Mask(pleft[31] < pright[31]);
-                return condition.AsByte();
+            public static Vector256<byte> LessThan_Basic(Vector256<byte> left, Vector256<byte> right) {
+                UnsafeEx.SkipInit(out Vector256<byte> rt);
+                ref sbyte prt = ref Unsafe.As<Vector256<byte>, sbyte>(ref rt);
+                ref byte pleft = ref Unsafe.As<Vector256<byte>, byte>(ref left);
+                ref byte pright = ref Unsafe.As<Vector256<byte>, byte>(ref right);
+                prt = (sbyte)BitMath.ToInt32Mask(pleft < pright);
+                Unsafe.Add(ref prt, 1) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) < Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) < Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) < Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) < Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) < Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) < Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) < Unsafe.Add(ref pright, 7));
+                Unsafe.Add(ref prt, 8) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 8) < Unsafe.Add(ref pright, 8));
+                Unsafe.Add(ref prt, 9) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 9) < Unsafe.Add(ref pright, 9));
+                Unsafe.Add(ref prt, 10) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 10) < Unsafe.Add(ref pright, 10));
+                Unsafe.Add(ref prt, 11) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 11) < Unsafe.Add(ref pright, 11));
+                Unsafe.Add(ref prt, 12) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 12) < Unsafe.Add(ref pright, 12));
+                Unsafe.Add(ref prt, 13) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 13) < Unsafe.Add(ref pright, 13));
+                Unsafe.Add(ref prt, 14) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 14) < Unsafe.Add(ref pright, 14));
+                Unsafe.Add(ref prt, 15) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 15) < Unsafe.Add(ref pright, 15));
+                Unsafe.Add(ref prt, 16) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 16) < Unsafe.Add(ref pright, 16));
+                Unsafe.Add(ref prt, 17) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 17) < Unsafe.Add(ref pright, 17));
+                Unsafe.Add(ref prt, 18) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 18) < Unsafe.Add(ref pright, 18));
+                Unsafe.Add(ref prt, 19) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 19) < Unsafe.Add(ref pright, 19));
+                Unsafe.Add(ref prt, 20) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 20) < Unsafe.Add(ref pright, 20));
+                Unsafe.Add(ref prt, 21) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 21) < Unsafe.Add(ref pright, 21));
+                Unsafe.Add(ref prt, 22) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 22) < Unsafe.Add(ref pright, 22));
+                Unsafe.Add(ref prt, 23) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 23) < Unsafe.Add(ref pright, 23));
+                Unsafe.Add(ref prt, 24) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 24) < Unsafe.Add(ref pright, 24));
+                Unsafe.Add(ref prt, 25) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 25) < Unsafe.Add(ref pright, 25));
+                Unsafe.Add(ref prt, 26) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 26) < Unsafe.Add(ref pright, 26));
+                Unsafe.Add(ref prt, 27) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 27) < Unsafe.Add(ref pright, 27));
+                Unsafe.Add(ref prt, 28) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 28) < Unsafe.Add(ref pright, 28));
+                Unsafe.Add(ref prt, 29) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 29) < Unsafe.Add(ref pright, 29));
+                Unsafe.Add(ref prt, 30) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 30) < Unsafe.Add(ref pright, 30));
+                Unsafe.Add(ref prt, 31) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 31) < Unsafe.Add(ref pright, 31));
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<short> LessThan_Basic(Vector256<short> left, Vector256<short> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<short> condition);
-#else
-                Vector256<short> condition = default;
-#endif // NET5_0_OR_GREATER
-                short* pcondition = (short*)&condition;
-                short* pleft = (short*)&left;
-                short* pright = (short*)&right;
-                pcondition[0] = (short)BitMath.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = (short)BitMath.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = (short)BitMath.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = (short)BitMath.ToInt32Mask(pleft[3] < pright[3]);
-                pcondition[4] = (short)BitMath.ToInt32Mask(pleft[4] < pright[4]);
-                pcondition[5] = (short)BitMath.ToInt32Mask(pleft[5] < pright[5]);
-                pcondition[6] = (short)BitMath.ToInt32Mask(pleft[6] < pright[6]);
-                pcondition[7] = (short)BitMath.ToInt32Mask(pleft[7] < pright[7]);
-                pcondition[8] = (short)BitMath.ToInt32Mask(pleft[8] < pright[8]);
-                pcondition[9] = (short)BitMath.ToInt32Mask(pleft[9] < pright[9]);
-                pcondition[10] = (short)BitMath.ToInt32Mask(pleft[10] < pright[10]);
-                pcondition[11] = (short)BitMath.ToInt32Mask(pleft[11] < pright[11]);
-                pcondition[12] = (short)BitMath.ToInt32Mask(pleft[12] < pright[12]);
-                pcondition[13] = (short)BitMath.ToInt32Mask(pleft[13] < pright[13]);
-                pcondition[14] = (short)BitMath.ToInt32Mask(pleft[14] < pright[14]);
-                pcondition[15] = (short)BitMath.ToInt32Mask(pleft[15] < pright[15]);
-                return condition.AsInt16();
+            public static Vector256<short> LessThan_Basic(Vector256<short> left, Vector256<short> right) {
+                UnsafeEx.SkipInit(out Vector256<short> rt);
+                ref short prt = ref Unsafe.As<Vector256<short>, short>(ref rt);
+                ref short pleft = ref Unsafe.As<Vector256<short>, short>(ref left);
+                ref short pright = ref Unsafe.As<Vector256<short>, short>(ref right);
+                prt = (short)BitMath.ToInt32Mask(pleft < pright);
+                Unsafe.Add(ref prt, 1) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) < Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) < Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) < Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) < Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) < Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) < Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) < Unsafe.Add(ref pright, 7));
+                Unsafe.Add(ref prt, 8) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 8) < Unsafe.Add(ref pright, 8));
+                Unsafe.Add(ref prt, 9) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 9) < Unsafe.Add(ref pright, 9));
+                Unsafe.Add(ref prt, 10) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 10) < Unsafe.Add(ref pright, 10));
+                Unsafe.Add(ref prt, 11) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 11) < Unsafe.Add(ref pright, 11));
+                Unsafe.Add(ref prt, 12) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 12) < Unsafe.Add(ref pright, 12));
+                Unsafe.Add(ref prt, 13) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 13) < Unsafe.Add(ref pright, 13));
+                Unsafe.Add(ref prt, 14) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 14) < Unsafe.Add(ref pright, 14));
+                Unsafe.Add(ref prt, 15) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 15) < Unsafe.Add(ref pright, 15));
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<ushort> LessThan_Basic(Vector256<ushort> left, Vector256<ushort> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<short> condition);
-#else
-                Vector256<short> condition = default;
-#endif // NET5_0_OR_GREATER
-                short* pcondition = (short*)&condition;
-                ushort* pleft = (ushort*)&left;
-                ushort* pright = (ushort*)&right;
-                pcondition[0] = (short)BitMath.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = (short)BitMath.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = (short)BitMath.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = (short)BitMath.ToInt32Mask(pleft[3] < pright[3]);
-                pcondition[4] = (short)BitMath.ToInt32Mask(pleft[4] < pright[4]);
-                pcondition[5] = (short)BitMath.ToInt32Mask(pleft[5] < pright[5]);
-                pcondition[6] = (short)BitMath.ToInt32Mask(pleft[6] < pright[6]);
-                pcondition[7] = (short)BitMath.ToInt32Mask(pleft[7] < pright[7]);
-                pcondition[8] = (short)BitMath.ToInt32Mask(pleft[8] < pright[8]);
-                pcondition[9] = (short)BitMath.ToInt32Mask(pleft[9] < pright[9]);
-                pcondition[10] = (short)BitMath.ToInt32Mask(pleft[10] < pright[10]);
-                pcondition[11] = (short)BitMath.ToInt32Mask(pleft[11] < pright[11]);
-                pcondition[12] = (short)BitMath.ToInt32Mask(pleft[12] < pright[12]);
-                pcondition[13] = (short)BitMath.ToInt32Mask(pleft[13] < pright[13]);
-                pcondition[14] = (short)BitMath.ToInt32Mask(pleft[14] < pright[14]);
-                pcondition[15] = (short)BitMath.ToInt32Mask(pleft[15] < pright[15]);
-                return condition.AsUInt16();
+            public static Vector256<ushort> LessThan_Basic(Vector256<ushort> left, Vector256<ushort> right) {
+                UnsafeEx.SkipInit(out Vector256<ushort> rt);
+                ref short prt = ref Unsafe.As<Vector256<ushort>, short>(ref rt);
+                ref ushort pleft = ref Unsafe.As<Vector256<ushort>, ushort>(ref left);
+                ref ushort pright = ref Unsafe.As<Vector256<ushort>, ushort>(ref right);
+                prt = (short)BitMath.ToInt32Mask(pleft < pright);
+                Unsafe.Add(ref prt, 1) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) < Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) < Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) < Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) < Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) < Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) < Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) < Unsafe.Add(ref pright, 7));
+                Unsafe.Add(ref prt, 8) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 8) < Unsafe.Add(ref pright, 8));
+                Unsafe.Add(ref prt, 9) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 9) < Unsafe.Add(ref pright, 9));
+                Unsafe.Add(ref prt, 10) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 10) < Unsafe.Add(ref pright, 10));
+                Unsafe.Add(ref prt, 11) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 11) < Unsafe.Add(ref pright, 11));
+                Unsafe.Add(ref prt, 12) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 12) < Unsafe.Add(ref pright, 12));
+                Unsafe.Add(ref prt, 13) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 13) < Unsafe.Add(ref pright, 13));
+                Unsafe.Add(ref prt, 14) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 14) < Unsafe.Add(ref pright, 14));
+                Unsafe.Add(ref prt, 15) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 15) < Unsafe.Add(ref pright, 15));
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<int> LessThan_Basic(Vector256<int> left, Vector256<int> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<int> condition);
-#else
-                Vector256<int> condition = default;
-#endif // NET5_0_OR_GREATER
-                int* pcondition = (int*)&condition;
-                int* pleft = (int*)&left;
-                int* pright = (int*)&right;
-                pcondition[0] = BitMath.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = BitMath.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = BitMath.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = BitMath.ToInt32Mask(pleft[3] < pright[3]);
-                pcondition[4] = BitMath.ToInt32Mask(pleft[4] < pright[4]);
-                pcondition[5] = BitMath.ToInt32Mask(pleft[5] < pright[5]);
-                pcondition[6] = BitMath.ToInt32Mask(pleft[6] < pright[6]);
-                pcondition[7] = BitMath.ToInt32Mask(pleft[7] < pright[7]);
-                return condition.AsInt32();
+            public static Vector256<int> LessThan_Basic(Vector256<int> left, Vector256<int> right) {
+                UnsafeEx.SkipInit(out Vector256<int> rt);
+                ref int prt = ref Unsafe.As<Vector256<int>, int>(ref rt);
+                ref int pleft = ref Unsafe.As<Vector256<int>, int>(ref left);
+                ref int pright = ref Unsafe.As<Vector256<int>, int>(ref right);
+                prt = BitMath.ToInt32Mask(pleft < pright);
+                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) < Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) < Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) < Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) < Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) < Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) < Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) < Unsafe.Add(ref pright, 7));
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<uint> LessThan_Basic(Vector256<uint> left, Vector256<uint> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<int> condition);
-#else
-                Vector256<int> condition = default;
-#endif // NET5_0_OR_GREATER
-                int* pcondition = (int*)&condition;
-                uint* pleft = (uint*)&left;
-                uint* pright = (uint*)&right;
-                pcondition[0] = BitMath.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = BitMath.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = BitMath.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = BitMath.ToInt32Mask(pleft[3] < pright[3]);
-                pcondition[4] = BitMath.ToInt32Mask(pleft[4] < pright[4]);
-                pcondition[5] = BitMath.ToInt32Mask(pleft[5] < pright[5]);
-                pcondition[6] = BitMath.ToInt32Mask(pleft[6] < pright[6]);
-                pcondition[7] = BitMath.ToInt32Mask(pleft[7] < pright[7]);
-                return condition.AsUInt32();
+            public static Vector256<uint> LessThan_Basic(Vector256<uint> left, Vector256<uint> right) {
+                UnsafeEx.SkipInit(out Vector256<uint> rt);
+                ref int prt = ref Unsafe.As<Vector256<uint>, int>(ref rt);
+                ref uint pleft = ref Unsafe.As<Vector256<uint>, uint>(ref left);
+                ref uint pright = ref Unsafe.As<Vector256<uint>, uint>(ref right);
+                prt = BitMath.ToInt32Mask(pleft < pright);
+                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) < Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) < Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) < Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) < Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) < Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) < Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) < Unsafe.Add(ref pright, 7));
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<long> LessThan_Basic(Vector256<long> left, Vector256<long> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<long> condition);
-#else
-                Vector256<long> condition = default;
-#endif // NET5_0_OR_GREATER
-                long* pcondition = (long*)&condition;
-                long* pleft = (long*)&left;
-                long* pright = (long*)&right;
-                pcondition[0] = BitMath.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = BitMath.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = BitMath.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = BitMath.ToInt32Mask(pleft[3] < pright[3]);
-                return condition;
+            public static Vector256<long> LessThan_Basic(Vector256<long> left, Vector256<long> right) {
+                UnsafeEx.SkipInit(out Vector256<long> rt);
+                ref long prt = ref Unsafe.As<Vector256<long>, long>(ref rt);
+                ref long pleft = ref Unsafe.As<Vector256<long>, long>(ref left);
+                ref long pright = ref Unsafe.As<Vector256<long>, long>(ref right);
+                prt = BitMath.ToInt32Mask(pleft < pright);
+                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) < Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) < Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) < Unsafe.Add(ref pright, 3));
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<ulong> LessThan_Basic(Vector256<ulong> left, Vector256<ulong> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<long> condition);
-#else
-                Vector256<long> condition = default;
-#endif // NET5_0_OR_GREATER
-                long* pcondition = (long*)&condition;
-                ulong* pleft = (ulong*)&left;
-                ulong* pright = (ulong*)&right;
-                pcondition[0] = BitMath.ToInt32Mask(pleft[0] < pright[0]);
-                pcondition[1] = BitMath.ToInt32Mask(pleft[1] < pright[1]);
-                pcondition[2] = BitMath.ToInt32Mask(pleft[2] < pright[2]);
-                pcondition[3] = BitMath.ToInt32Mask(pleft[3] < pright[3]);
-                return condition.AsUInt64();
+            public static Vector256<ulong> LessThan_Basic(Vector256<ulong> left, Vector256<ulong> right) {
+                UnsafeEx.SkipInit(out Vector256<ulong> rt);
+                ref long prt = ref Unsafe.As<Vector256<ulong>, long>(ref rt);
+                ref ulong pleft = ref Unsafe.As<Vector256<ulong>, ulong>(ref left);
+                ref ulong pright = ref Unsafe.As<Vector256<ulong>, ulong>(ref right);
+                prt = BitMath.ToInt32Mask(pleft < pright);
+                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) < Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) < Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) < Unsafe.Add(ref pright, 3));
+                return rt;
             }
 
 
