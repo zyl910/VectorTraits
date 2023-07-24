@@ -608,19 +608,15 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<T> ConditionalSelect_Basic<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<T> rt);
-#else
-                Vector128<T> rt = default;
-#endif // NET5_0_OR_GREATER
-                ulong* pcondition = (ulong*)&condition;
-                ulong* pleft = (ulong*)&left;
-                ulong* pright = (ulong*)&right;
-                ulong* q = (ulong*)&rt;
+            public static Vector128<T> ConditionalSelect_Basic<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
+                UnsafeEx.SkipInit(out Vector128<T> rt);
+                ref ulong pcondition = ref Unsafe.As<Vector128<T>, ulong>(ref condition);
+                ref ulong pleft = ref Unsafe.As<Vector128<T>, ulong>(ref left);
+                ref ulong pright = ref Unsafe.As<Vector128<T>, ulong>(ref right);
+                ref ulong prt = ref Unsafe.As<Vector128<T>, ulong>(ref rt);
                 // result = (left & condition) | (right & ~condition);
-                q[0] = (pleft[0] & pcondition[0]) | (pright[0] & ~pcondition[0]);
-                q[1] = (pleft[1] & pcondition[1]) | (pright[1] & ~pcondition[1]);
+                prt = (pleft & pcondition) | (pright & ~pcondition);
+                Unsafe.Add(ref prt, 1) = (Unsafe.Add(ref pleft, 1) & Unsafe.Add(ref pcondition, 1)) | (Unsafe.Add(ref pright, 1) & ~Unsafe.Add(ref pcondition, 1));
                 return rt;
             }
 

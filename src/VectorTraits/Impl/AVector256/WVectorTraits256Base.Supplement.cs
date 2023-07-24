@@ -715,21 +715,17 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect{T}(Vector256{T}, Vector256{T}, Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<T> ConditionalSelect_Basic<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<T> rt);
-#else
-                Vector256<T> rt = default;
-#endif // NET5_0_OR_GREATER
-                ulong* pcondition = (ulong*)&condition;
-                ulong* pleft = (ulong*)&left;
-                ulong* pright = (ulong*)&right;
-                ulong* q = (ulong*)&rt;
+            public static Vector256<T> ConditionalSelect_Basic<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
+                UnsafeEx.SkipInit(out Vector256<T> rt);
+                ref ulong pcondition = ref Unsafe.As<Vector256<T>, ulong>(ref condition);
+                ref ulong pleft = ref Unsafe.As<Vector256<T>, ulong>(ref left);
+                ref ulong pright = ref Unsafe.As<Vector256<T>, ulong>(ref right);
+                ref ulong prt = ref Unsafe.As<Vector256<T>, ulong>(ref rt);
                 // result = (left & condition) | (right & ~condition);
-                q[0] = (pleft[0] & pcondition[0]) | (pright[0] & ~pcondition[0]);
-                q[1] = (pleft[1] & pcondition[1]) | (pright[1] & ~pcondition[1]);
-                q[2] = (pleft[2] & pcondition[2]) | (pright[2] & ~pcondition[2]);
-                q[3] = (pleft[3] & pcondition[3]) | (pright[3] & ~pcondition[3]);
+                prt = (pleft & pcondition) | (pright & ~pcondition);
+                Unsafe.Add(ref prt, 1) = (Unsafe.Add(ref pleft, 1) & Unsafe.Add(ref pcondition, 1)) | (Unsafe.Add(ref pright, 1) & ~Unsafe.Add(ref pcondition, 1));
+                Unsafe.Add(ref prt, 2) = (Unsafe.Add(ref pleft, 2) & Unsafe.Add(ref pcondition, 2)) | (Unsafe.Add(ref pright, 2) & ~Unsafe.Add(ref pcondition, 2));
+                Unsafe.Add(ref prt, 3) = (Unsafe.Add(ref pleft, 3) & Unsafe.Add(ref pcondition, 3)) | (Unsafe.Add(ref pright, 3) & ~Unsafe.Add(ref pcondition, 3));
                 return rt;
             }
 
