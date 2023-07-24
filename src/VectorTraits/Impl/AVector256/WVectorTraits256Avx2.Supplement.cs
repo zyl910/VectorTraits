@@ -28,17 +28,15 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Abs(Vector256<float> value) {
-                //var mask = Vector256s<float>.SignMask;
-                var mask = Vector256Constants.Single_SignMask;
-                return Avx.AndNot(mask, value);
+                var mask = Vector256Constants.Single_NonSignMask;
+                return Avx.And(mask, value);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> Abs(Vector256<double> value) {
-                //var mask = Vector256s<double>.SignMask;
-                var mask = Vector256Constants.Double_SignMask;
-                return Avx.AndNot(mask, value);
+                var mask = Vector256Constants.Double_NonSignMask;
+                return Avx.And(mask, value);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{sbyte})"/>
