@@ -2153,11 +2153,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.OnesComplement{T}(Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<T> OnesComplement_Basic<T>(Vector128<T> vector) where T : struct {
+            public static Vector128<T> OnesComplement_Basic<T>(Vector128<T> vector) where T : struct {
                 Vector128<T> rt = vector;
-                ulong* p = (ulong*)&rt;
-                p[0] = ~p[0];
-                p[1] = ~p[1];
+                ref long p = ref Unsafe.As<Vector128<T>, long>(ref rt);
+                p = ~p;
+                Unsafe.Add(ref p, 1) = ~Unsafe.Add(ref p, 1);
                 return rt;
             }
 

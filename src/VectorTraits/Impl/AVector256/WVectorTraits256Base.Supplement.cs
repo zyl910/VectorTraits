@@ -2496,13 +2496,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.OnesComplement{T}(Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<T> OnesComplement_Basic<T>(Vector256<T> vector) where T : struct {
+            public static Vector256<T> OnesComplement_Basic<T>(Vector256<T> vector) where T : struct {
                 Vector256<T> rt = vector;
-                ulong* p = (ulong*)&rt;
-                p[0] = ~p[0];
-                p[1] = ~p[1];
-                p[2] = ~p[2];
-                p[3] = ~p[3];
+                ref long p = ref Unsafe.As<Vector256<T>, long>(ref rt);
+                p = ~p;
+                Unsafe.Add(ref p, 1) = ~Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref p, 2) = ~Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref p, 3) = ~Unsafe.Add(ref p, 3);
                 return rt;
             }
 
