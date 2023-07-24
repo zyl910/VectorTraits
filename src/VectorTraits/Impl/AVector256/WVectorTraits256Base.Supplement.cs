@@ -589,20 +589,15 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.AndNot{T}(Vector256{T}, Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<T> AndNot_Basic<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector256<T> rt);
-#else
-                Vector256<T> rt = default;
-#endif // NET5_0_OR_GREATER
-                ulong* pleft = (ulong*)&left;
-                ulong* pright = (ulong*)&right;
-                ulong* q = (ulong*)&rt;
-                // rt[i] := left[i] & ~right[i];
-                q[0] = pleft[0] & ~pright[0];
-                q[1] = pleft[1] & ~pright[1];
-                q[2] = pleft[2] & ~pright[2];
-                q[3] = pleft[3] & ~pright[3];
+            public static Vector256<T> AndNot_Basic<T>(Vector256<T> left, Vector256<T> right) where T : struct {
+                UnsafeEx.SkipInit(out Vector256<T> rt);
+                ref ulong prt = ref Unsafe.As<Vector256<T>, ulong>(ref rt);
+                ref ulong pleft = ref Unsafe.As<Vector256<T>, ulong>(ref left);
+                ref ulong pright = ref Unsafe.As<Vector256<T>, ulong>(ref right);
+                prt = pleft & ~pright;
+                Unsafe.Add(ref prt, 1) = Unsafe.Add(ref pleft, 1) & ~Unsafe.Add(ref pright, 1);
+                Unsafe.Add(ref prt, 2) = Unsafe.Add(ref pleft, 2) & ~Unsafe.Add(ref pright, 2);
+                Unsafe.Add(ref prt, 3) = Unsafe.Add(ref pleft, 3) & ~Unsafe.Add(ref pright, 3);
                 return rt;
             }
 

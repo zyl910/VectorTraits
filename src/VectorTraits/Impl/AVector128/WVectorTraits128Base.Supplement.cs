@@ -488,18 +488,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.AndNot{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<T> AndNot_Basic<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<T> rt);
-#else
-                Vector128<T> rt = default;
-#endif // NET5_0_OR_GREATER
-                ulong* pleft = (ulong*)&left;
-                ulong* pright = (ulong*)&right;
-                ulong* q = (ulong*)&rt;
-                // rt[i] := left[i] & ~right[i];
-                q[0] = pleft[0] & ~pright[0];
-                q[1] = pleft[1] & ~pright[1];
+            public static Vector128<T> AndNot_Basic<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+                UnsafeEx.SkipInit(out Vector128<T> rt);
+                ref ulong prt = ref Unsafe.As<Vector128<T>, ulong>(ref rt);
+                ref ulong pleft = ref Unsafe.As<Vector128<T>, ulong>(ref left);
+                ref ulong pright = ref Unsafe.As<Vector128<T>, ulong>(ref right);
+                prt = pleft & ~pright;
+                Unsafe.Add(ref prt, 1) = Unsafe.Add(ref pleft, 1) & ~Unsafe.Add(ref pright, 1);
                 return rt;
             }
 
