@@ -154,6 +154,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             CheckResult("SumWidenVectorBase");
         }
 
+#if UNSAFE_USE_TRAITS
         /// <summary>
         /// Sum Widen - Vector - base - Base_NPtr .
         /// </summary>
@@ -199,6 +200,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             dstTMy = StaticSumWidenVectorBase_NPtr(srcArray, srcArray.Length);
             CheckResult("SumWidenVectorBase_NPtr");
         }
+#endif // UNSAFE_USE_TRAITS
 
         /// <summary>
         /// Sum Widen - Vector - base - Base_NRef .
@@ -380,6 +382,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             CheckResult("SumWidenVectorBase_NRefInc2");
         }
 
+#if UNSAFE_USE_TRAITS
         /// <summary>
         /// Sum Widen - Vector - base - Base_Ptr .
         /// </summary>
@@ -425,6 +428,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             dstTMy = StaticSumWidenVectorBase_Ptr(srcArray, srcArray.Length);
             CheckResult("SumWidenVectorBase_Ptr");
         }
+#endif // UNSAFE_USE_TRAITS
 
         /// <summary>
         /// Sum Widen - Vector - base - Base_Ref .
@@ -561,6 +565,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             CheckResult("SumWidenVectorBase_RefInc");
         }
 
+#if UNSAFE_USE_TRAITS
         /// <summary>
         /// Sum Widen - Vector - base - Base128_Ptr .
         /// </summary>
@@ -607,6 +612,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             dstTMy = StaticSumWidenVectorBase128_Ptr(srcArray, srcArray.Length);
             CheckResult("SumWidenVectorBase128_Ptr");
         }
+#endif // UNSAFE_USE_TRAITS
 
         /// <summary>
         /// Sum Widen - Vector - base - Base128_Ref .
@@ -884,6 +890,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             CheckResult("SumWidenVectorBase128_RefInc2");
         }
 
+#if UNSAFE_USE_TRAITS
         /// <summary>
         /// Sum Widen - Vector - base - Base256_Ptr .
         /// </summary>
@@ -930,6 +937,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             dstTMy = StaticSumWidenVectorBase256_Ptr(srcArray, srcArray.Length);
             CheckResult("SumWidenVectorBase256_Ptr");
         }
+#endif // UNSAFE_USE_TRAITS
 
         /// <summary>
         /// Sum Widen - Vector - base - Base256_Ref .
@@ -1208,7 +1216,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         }
 
 #endif // BENCHMARKS_RAW
-        #endregion // BENCHMARKS_RAW
+#endregion // BENCHMARKS_RAW
 
 
         /// <summary>
@@ -1312,6 +1320,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
 #if BENCHMARKS_ALGORITHM
 #if NET5_0_OR_GREATER
 
+#if UNSAFE_USE_TRAITS
         /// <summary>
         /// Sum Widen - Vector128 - Base_Ptr.
         /// </summary>
@@ -1357,6 +1366,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             dstTMy = StaticSumWidenVector128_BasePtr(srcArray, srcArray.Length);
             CheckResult("SumWidenVector128_BasePtr");
         }
+#endif // UNSAFE_USE_TRAITS
 
         /// <summary>
         /// Sum Widen - Vector128 - Base_Ref.
@@ -1452,7 +1462,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
 #endif // NET5_0_OR_GREATER
 
 #endif // BENCHMARKS_ALGORITHM
-        #endregion // BENCHMARKS_ALGORITHM
+#endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
         /// Sum Widen - Vector128 - Traits static.
