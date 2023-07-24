@@ -2038,86 +2038,92 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<float> Negate_Basic(Vector128<float> value) {
+            public static Vector128<float> Negate_Basic(Vector128<float> value) {
                 Vector128<float> rt = value;
-                float* p = (float*)&rt;
-                p[0] = -p[0];
-                p[1] = -p[1];
-                p[2] = -p[2];
-                p[3] = -p[3];
+                ref float p = ref Unsafe.As<Vector128<float>, float>(ref rt);
+                p = -p;
+                Unsafe.Add(ref p, 1) = -Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref p, 2) = -Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref p, 3) = -Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref p, 4) = -Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref p, 5) = -Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref p, 6) = -Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref p, 7) = -Unsafe.Add(ref p, 7);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<double> Negate_Basic(Vector128<double> value) {
+            public static Vector128<double> Negate_Basic(Vector128<double> value) {
                 Vector128<double> rt = value;
-                double* p = (double*)&rt;
-                p[0] = -p[0];
-                p[1] = -p[1];
+                ref double p = ref Unsafe.As<Vector128<double>, double>(ref rt);
+                p = -p;
+                Unsafe.Add(ref p, 1) = -Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref p, 2) = -Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref p, 3) = -Unsafe.Add(ref p, 3);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<sbyte> Negate_Basic(Vector128<sbyte> value) {
+            public static Vector128<sbyte> Negate_Basic(Vector128<sbyte> value) {
                 Vector128<sbyte> rt = value;
-                sbyte* p = (sbyte*)&rt;
-                p[0] = (sbyte)-p[0];
-                p[1] = (sbyte)-p[1];
-                p[2] = (sbyte)-p[2];
-                p[3] = (sbyte)-p[3];
-                p[4] = (sbyte)-p[4];
-                p[5] = (sbyte)-p[5];
-                p[6] = (sbyte)-p[6];
-                p[7] = (sbyte)-p[7];
-                p[8] = (sbyte)-p[8];
-                p[9] = (sbyte)-p[9];
-                p[10] = (sbyte)-p[10];
-                p[11] = (sbyte)-p[11];
-                p[12] = (sbyte)-p[12];
-                p[13] = (sbyte)-p[13];
-                p[14] = (sbyte)-p[14];
-                p[15] = (sbyte)-p[15];
+                ref sbyte p = ref Unsafe.As<Vector128<sbyte>, sbyte>(ref rt);
+                p = (sbyte)-p;
+                Unsafe.Add(ref p, 1) = (sbyte)-Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref p, 2) = (sbyte)-Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref p, 3) = (sbyte)-Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref p, 4) = (sbyte)-Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref p, 5) = (sbyte)-Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref p, 6) = (sbyte)-Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref p, 7) = (sbyte)-Unsafe.Add(ref p, 7);
+                Unsafe.Add(ref p, 8) = (sbyte)-Unsafe.Add(ref p, 8);
+                Unsafe.Add(ref p, 9) = (sbyte)-Unsafe.Add(ref p, 9);
+                Unsafe.Add(ref p, 10) = (sbyte)-Unsafe.Add(ref p, 10);
+                Unsafe.Add(ref p, 11) = (sbyte)-Unsafe.Add(ref p, 11);
+                Unsafe.Add(ref p, 12) = (sbyte)-Unsafe.Add(ref p, 12);
+                Unsafe.Add(ref p, 13) = (sbyte)-Unsafe.Add(ref p, 13);
+                Unsafe.Add(ref p, 14) = (sbyte)-Unsafe.Add(ref p, 14);
+                Unsafe.Add(ref p, 15) = (sbyte)-Unsafe.Add(ref p, 15);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<short> Negate_Basic(Vector128<short> value) {
+            public static Vector128<short> Negate_Basic(Vector128<short> value) {
                 Vector128<short> rt = value;
-                short* p = (short*)&rt;
-                p[0] = (short)-p[0];
-                p[1] = (short)-p[1];
-                p[2] = (short)-p[2];
-                p[3] = (short)-p[3];
-                p[4] = (short)-p[4];
-                p[5] = (short)-p[5];
-                p[6] = (short)-p[6];
-                p[7] = (short)-p[7];
+                ref short p = ref Unsafe.As<Vector128<short>, short>(ref rt);
+                p = (short)-p;
+                Unsafe.Add(ref p, 1) = (short)-Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref p, 2) = (short)-Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref p, 3) = (short)-Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref p, 4) = (short)-Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref p, 5) = (short)-Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref p, 6) = (short)-Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref p, 7) = (short)-Unsafe.Add(ref p, 7);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<int> Negate_Basic(Vector128<int> value) {
+            public static Vector128<int> Negate_Basic(Vector128<int> value) {
                 Vector128<int> rt = value;
-                int* p = (int*)&rt;
-                p[0] = -p[0];
-                p[1] = -p[1];
-                p[2] = -p[2];
-                p[3] = -p[3];
+                ref int p = ref Unsafe.As<Vector128<int>, int>(ref rt);
+                p = -p;
+                Unsafe.Add(ref p, 1) = -Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref p, 2) = -Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref p, 3) = -Unsafe.Add(ref p, 3);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<long> Negate_Basic(Vector128<long> value) {
+            public static Vector128<long> Negate_Basic(Vector128<long> value) {
                 Vector128<long> rt = value;
-                long* p = (long*)&rt;
-                p[0] = -p[0];
-                p[1] = -p[1];
+                ref long p = ref Unsafe.As<Vector128<long>, long>(ref rt);
+                p = -p;
+                Unsafe.Add(ref p, 1) = -Unsafe.Add(ref p, 1);
                 return rt;
             }
 

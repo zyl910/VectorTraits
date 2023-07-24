@@ -2351,122 +2351,122 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
             /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<float> Negate_Basic(Vector256<float> value) {
+            public static Vector256<float> Negate_Basic(Vector256<float> value) {
                 Vector256<float> rt = value;
-                float* p = (float*)&rt;
-                p[0] = -p[0];
-                p[1] = -p[1];
-                p[2] = -p[2];
-                p[3] = -p[3];
-                p[4] = -p[4];
-                p[5] = -p[5];
-                p[6] = -p[6];
-                p[7] = -p[7];
+                ref float p = ref Unsafe.As<Vector256<float>, float>(ref rt);
+                p = -p;
+                Unsafe.Add(ref p, 1) = -Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref p, 2) = -Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref p, 3) = -Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref p, 4) = -Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref p, 5) = -Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref p, 6) = -Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref p, 7) = -Unsafe.Add(ref p, 7);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<double> Negate_Basic(Vector256<double> value) {
+            public static Vector256<double> Negate_Basic(Vector256<double> value) {
                 Vector256<double> rt = value;
-                double* p = (double*)&rt;
-                p[0] = -p[0];
-                p[1] = -p[1];
-                p[2] = -p[2];
-                p[3] = -p[3];
+                ref double p = ref Unsafe.As<Vector256<double>, double>(ref rt);
+                p = -p;
+                Unsafe.Add(ref p, 1) = -Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref p, 2) = -Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref p, 3) = -Unsafe.Add(ref p, 3);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<sbyte> Negate_Basic(Vector256<sbyte> value) {
+            public static Vector256<sbyte> Negate_Basic(Vector256<sbyte> value) {
                 Vector256<sbyte> rt = value;
-                sbyte* p = (sbyte*)&rt;
-                p[0] = (sbyte)-p[0];
-                p[1] = (sbyte)-p[1];
-                p[2] = (sbyte)-p[2];
-                p[3] = (sbyte)-p[3];
-                p[4] = (sbyte)-p[4];
-                p[5] = (sbyte)-p[5];
-                p[6] = (sbyte)-p[6];
-                p[7] = (sbyte)-p[7];
-                p[8] = (sbyte)-p[8];
-                p[9] = (sbyte)-p[9];
-                p[10] = (sbyte)-p[10];
-                p[11] = (sbyte)-p[11];
-                p[12] = (sbyte)-p[12];
-                p[13] = (sbyte)-p[13];
-                p[14] = (sbyte)-p[14];
-                p[15] = (sbyte)-p[15];
-                p[16] = (sbyte)-p[16];
-                p[17] = (sbyte)-p[17];
-                p[18] = (sbyte)-p[18];
-                p[19] = (sbyte)-p[19];
-                p[20] = (sbyte)-p[20];
-                p[21] = (sbyte)-p[21];
-                p[22] = (sbyte)-p[22];
-                p[23] = (sbyte)-p[23];
-                p[24] = (sbyte)-p[24];
-                p[25] = (sbyte)-p[25];
-                p[26] = (sbyte)-p[26];
-                p[27] = (sbyte)-p[27];
-                p[28] = (sbyte)-p[28];
-                p[29] = (sbyte)-p[29];
-                p[30] = (sbyte)-p[30];
-                p[31] = (sbyte)-p[31];
+                ref sbyte p = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref rt);
+                p = (sbyte)-p;
+                Unsafe.Add(ref p, 1) = (sbyte)-Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref p, 2) = (sbyte)-Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref p, 3) = (sbyte)-Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref p, 4) = (sbyte)-Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref p, 5) = (sbyte)-Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref p, 6) = (sbyte)-Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref p, 7) = (sbyte)-Unsafe.Add(ref p, 7);
+                Unsafe.Add(ref p, 8) = (sbyte)-Unsafe.Add(ref p, 8);
+                Unsafe.Add(ref p, 9) = (sbyte)-Unsafe.Add(ref p, 9);
+                Unsafe.Add(ref p, 10) = (sbyte)-Unsafe.Add(ref p, 10);
+                Unsafe.Add(ref p, 11) = (sbyte)-Unsafe.Add(ref p, 11);
+                Unsafe.Add(ref p, 12) = (sbyte)-Unsafe.Add(ref p, 12);
+                Unsafe.Add(ref p, 13) = (sbyte)-Unsafe.Add(ref p, 13);
+                Unsafe.Add(ref p, 14) = (sbyte)-Unsafe.Add(ref p, 14);
+                Unsafe.Add(ref p, 15) = (sbyte)-Unsafe.Add(ref p, 15);
+                Unsafe.Add(ref p, 16) = (sbyte)-Unsafe.Add(ref p, 16);
+                Unsafe.Add(ref p, 17) = (sbyte)-Unsafe.Add(ref p, 17);
+                Unsafe.Add(ref p, 18) = (sbyte)-Unsafe.Add(ref p, 18);
+                Unsafe.Add(ref p, 19) = (sbyte)-Unsafe.Add(ref p, 19);
+                Unsafe.Add(ref p, 20) = (sbyte)-Unsafe.Add(ref p, 20);
+                Unsafe.Add(ref p, 21) = (sbyte)-Unsafe.Add(ref p, 21);
+                Unsafe.Add(ref p, 22) = (sbyte)-Unsafe.Add(ref p, 22);
+                Unsafe.Add(ref p, 23) = (sbyte)-Unsafe.Add(ref p, 23);
+                Unsafe.Add(ref p, 24) = (sbyte)-Unsafe.Add(ref p, 24);
+                Unsafe.Add(ref p, 25) = (sbyte)-Unsafe.Add(ref p, 25);
+                Unsafe.Add(ref p, 26) = (sbyte)-Unsafe.Add(ref p, 26);
+                Unsafe.Add(ref p, 27) = (sbyte)-Unsafe.Add(ref p, 27);
+                Unsafe.Add(ref p, 28) = (sbyte)-Unsafe.Add(ref p, 28);
+                Unsafe.Add(ref p, 29) = (sbyte)-Unsafe.Add(ref p, 29);
+                Unsafe.Add(ref p, 30) = (sbyte)-Unsafe.Add(ref p, 30);
+                Unsafe.Add(ref p, 31) = (sbyte)-Unsafe.Add(ref p, 31);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<short> Negate_Basic(Vector256<short> value) {
+            public static Vector256<short> Negate_Basic(Vector256<short> value) {
                 Vector256<short> rt = value;
-                short* p = (short*)&rt;
-                p[0] = (short)-p[0];
-                p[1] = (short)-p[1];
-                p[2] = (short)-p[2];
-                p[3] = (short)-p[3];
-                p[4] = (short)-p[4];
-                p[5] = (short)-p[5];
-                p[6] = (short)-p[6];
-                p[7] = (short)-p[7];
-                p[8] = (short)-p[8];
-                p[9] = (short)-p[9];
-                p[10] = (short)-p[10];
-                p[11] = (short)-p[11];
-                p[12] = (short)-p[12];
-                p[13] = (short)-p[13];
-                p[14] = (short)-p[14];
-                p[15] = (short)-p[15];
+                ref short p = ref Unsafe.As<Vector256<short>, short>(ref rt);
+                p = (short)-p;
+                Unsafe.Add(ref p, 1) = (short)-Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref p, 2) = (short)-Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref p, 3) = (short)-Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref p, 4) = (short)-Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref p, 5) = (short)-Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref p, 6) = (short)-Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref p, 7) = (short)-Unsafe.Add(ref p, 7);
+                Unsafe.Add(ref p, 8) = (short)-Unsafe.Add(ref p, 8);
+                Unsafe.Add(ref p, 9) = (short)-Unsafe.Add(ref p, 9);
+                Unsafe.Add(ref p, 10) = (short)-Unsafe.Add(ref p, 10);
+                Unsafe.Add(ref p, 11) = (short)-Unsafe.Add(ref p, 11);
+                Unsafe.Add(ref p, 12) = (short)-Unsafe.Add(ref p, 12);
+                Unsafe.Add(ref p, 13) = (short)-Unsafe.Add(ref p, 13);
+                Unsafe.Add(ref p, 14) = (short)-Unsafe.Add(ref p, 14);
+                Unsafe.Add(ref p, 15) = (short)-Unsafe.Add(ref p, 15);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<int> Negate_Basic(Vector256<int> value) {
+            public static Vector256<int> Negate_Basic(Vector256<int> value) {
                 Vector256<int> rt = value;
-                int* p = (int*)&rt;
-                p[0] = -p[0];
-                p[1] = -p[1];
-                p[2] = -p[2];
-                p[3] = -p[3];
-                p[4] = -p[4];
-                p[5] = -p[5];
-                p[6] = -p[6];
-                p[7] = -p[7];
+                ref int p = ref Unsafe.As<Vector256<int>, int>(ref rt);
+                p = -p;
+                Unsafe.Add(ref p, 1) = -Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref p, 2) = -Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref p, 3) = -Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref p, 4) = -Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref p, 5) = -Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref p, 6) = -Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref p, 7) = -Unsafe.Add(ref p, 7);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector256<long> Negate_Basic(Vector256<long> value) {
+            public static Vector256<long> Negate_Basic(Vector256<long> value) {
                 Vector256<long> rt = value;
-                long* p = (long*)&rt;
-                p[0] = -p[0];
-                p[1] = -p[1];
-                p[2] = -p[2];
-                p[3] = -p[3];
+                ref long p = ref Unsafe.As<Vector256<long>, long>(ref rt);
+                p = -p;
+                Unsafe.Add(ref p, 1) = -Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref p, 2) = -Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref p, 3) = -Unsafe.Add(ref p, 3);
                 return rt;
             }
 
