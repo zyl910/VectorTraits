@@ -675,35 +675,27 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.Divide(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<float> Divide_Basic(Vector128<float> left, Vector128<float> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<float> rt);
-#else
-                Vector128<float> rt = default;
-#endif // NET5_0_OR_GREATER
-                float* prt = (float*)&rt;
-                float* pleft = (float*)&left;
-                float* pright = (float*)&right;
-                prt[0] = (pleft[0] / pright[0]);
-                prt[1] = (pleft[1] / pright[1]);
-                prt[2] = (pleft[2] / pright[2]);
-                prt[3] = (pleft[3] / pright[3]);
+            public static Vector128<float> Divide_Basic(Vector128<float> left, Vector128<float> right) {
+                UnsafeEx.SkipInit(out Vector128<float> rt);
+                ref float prt = ref Unsafe.As<Vector128<float>, float>(ref rt);
+                ref float pleft = ref Unsafe.As<Vector128<float>, float>(ref left);
+                ref float pright = ref Unsafe.As<Vector128<float>, float>(ref right);
+                prt = pleft / pright;
+                Unsafe.Add(ref prt, 1) = Unsafe.Add(ref pleft, 1) / Unsafe.Add(ref pright, 1);
+                Unsafe.Add(ref prt, 2) = Unsafe.Add(ref pleft, 2) / Unsafe.Add(ref pright, 2);
+                Unsafe.Add(ref prt, 3) = Unsafe.Add(ref pleft, 3) / Unsafe.Add(ref pright, 3);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Divide(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static unsafe Vector128<double> Divide_Basic(Vector128<double> left, Vector128<double> right) {
-#if NET5_0_OR_GREATER
-                Unsafe.SkipInit(out Vector128<double> rt);
-#else
-                Vector128<double> rt = default;
-#endif // NET5_0_OR_GREATER
-                double* prt = (double*)&rt;
-                double* pleft = (double*)&left;
-                double* pright = (double*)&right;
-                prt[0] = (pleft[0] / pright[0]);
-                prt[1] = (pleft[1] / pright[1]);
+            public static Vector128<double> Divide_Basic(Vector128<double> left, Vector128<double> right) {
+                UnsafeEx.SkipInit(out Vector128<double> rt);
+                ref double prt = ref Unsafe.As<Vector128<double>, double>(ref rt);
+                ref double pleft = ref Unsafe.As<Vector128<double>, double>(ref left);
+                ref double pright = ref Unsafe.As<Vector128<double>, double>(ref right);
+                prt = pleft / pright;
+                Unsafe.Add(ref prt, 1) = Unsafe.Add(ref pleft, 1) / Unsafe.Add(ref pright, 1);
                 return rt;
             }
 
