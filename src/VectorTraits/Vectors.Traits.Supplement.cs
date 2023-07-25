@@ -36,7 +36,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Multiply(Vector{float}, Vector{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<float> Multiply(Vector<float> left, Vector<float> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
             return BaseStatics.Multiply(left, right);
 #else
             return _instance.Multiply(left, right);
@@ -77,7 +77,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Multiply(Vector{short}, Vector{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<short> Multiply(Vector<short> left, Vector<short> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
             return BaseStatics.Multiply(left, right);
 #else
             return _instance.Multiply(left, right);
@@ -98,7 +98,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Multiply(Vector{int}, Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> Multiply(Vector<int> left, Vector<int> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
             return BaseStatics.Multiply(left, right);
 #else
             return _instance.Multiply(left, right);

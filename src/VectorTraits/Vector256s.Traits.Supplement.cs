@@ -28,7 +28,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> Abs(Vector256<float> value) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Abs(value);
 #else
             return _instance.Abs(value);
@@ -49,7 +49,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<sbyte> Abs(Vector256<sbyte> value) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Abs(value);
 #else
             return _instance.Abs(value);
@@ -59,7 +59,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<short> Abs(Vector256<short> value) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Abs(value);
 #else
             return _instance.Abs(value);
@@ -69,7 +69,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> Abs(Vector256<int> value) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Abs(value);
 #else
             return _instance.Abs(value);
@@ -101,7 +101,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{float}, Vector256{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> Add(Vector256<float> left, Vector256<float> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
@@ -122,7 +122,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<sbyte> Add(Vector256<sbyte> left, Vector256<sbyte> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
@@ -132,7 +132,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{byte}, Vector256{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<byte> Add(Vector256<byte> left, Vector256<byte> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
@@ -142,7 +142,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{short}, Vector256{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<short> Add(Vector256<short> left, Vector256<short> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
@@ -153,7 +153,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ushort> Add(Vector256<ushort> left, Vector256<ushort> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
@@ -163,7 +163,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{int}, Vector256{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> Add(Vector256<int> left, Vector256<int> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
@@ -174,7 +174,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<uint> Add(Vector256<uint> left, Vector256<uint> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Add(left, right);
 #else
             return _instance.Add(left, right);
@@ -217,7 +217,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.AndNot{T}(Vector256{T}, Vector256{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> AndNot<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.AndNot(left, right);
 #else
             return _instance.AndNot(left, right);
@@ -239,7 +239,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.BitwiseAnd{T}(Vector256{T}, Vector256{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> BitwiseAnd<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.BitwiseAnd(left, right);
 #else
             return _instance.BitwiseAnd(left, right);
@@ -261,7 +261,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.BitwiseOr{T}(Vector256{T}, Vector256{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> BitwiseOr<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.BitwiseOr(left, right);
 #else
             return _instance.BitwiseOr(left, right);
@@ -283,7 +283,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect{T}(Vector256{T}, Vector256{T}, Vector256{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> ConditionalSelect<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ConditionalSelect(condition, left, right);
 #else
             return _instance.ConditionalSelect(condition, left, right);
@@ -293,7 +293,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect(Vector256{int}, Vector256{float}, Vector256{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> ConditionalSelect(Vector256<int> condition, Vector256<float> left, Vector256<float> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return ConditionalSelect<float>(condition.AsSingle(), left, right);
 #else
             return _instance.ConditionalSelect(condition, left, right);
@@ -303,7 +303,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect(Vector256{long}, Vector256{double}, Vector256{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<double> ConditionalSelect(Vector256<long> condition, Vector256<double> left, Vector256<double> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return ConditionalSelect<double>(condition.AsDouble(), left, right);
 #else
             return _instance.ConditionalSelect(condition, left, right);
@@ -325,7 +325,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Divide(Vector256{float}, Vector256{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> Divide(Vector256<float> left, Vector256<float> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Divide(left, right);
 #else
             return _instance.Divide(left, right);
@@ -357,7 +357,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{float}, Vector256{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> GreaterThan(Vector256<float> left, Vector256<float> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
@@ -378,7 +378,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<sbyte> GreaterThan(Vector256<sbyte> left, Vector256<sbyte> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
@@ -388,7 +388,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{byte}, Vector256{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<byte> GreaterThan(Vector256<byte> left, Vector256<byte> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
@@ -398,7 +398,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{short}, Vector256{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<short> GreaterThan(Vector256<short> left, Vector256<short> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
@@ -409,7 +409,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ushort> GreaterThan(Vector256<ushort> left, Vector256<ushort> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
@@ -419,7 +419,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{int}, Vector256{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> GreaterThan(Vector256<int> left, Vector256<int> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
@@ -430,7 +430,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<uint> GreaterThan(Vector256<uint> left, Vector256<uint> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.GreaterThan(left, right);
 #else
             return _instance.GreaterThan(left, right);
@@ -473,7 +473,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{float}, Vector256{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> LessThan(Vector256<float> left, Vector256<float> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
@@ -494,7 +494,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<sbyte> LessThan(Vector256<sbyte> left, Vector256<sbyte> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
@@ -504,7 +504,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{byte}, Vector256{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<byte> LessThan(Vector256<byte> left, Vector256<byte> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
@@ -514,7 +514,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{short}, Vector256{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<short> LessThan(Vector256<short> left, Vector256<short> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
@@ -525,7 +525,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ushort> LessThan(Vector256<ushort> left, Vector256<ushort> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
@@ -535,7 +535,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{int}, Vector256{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> LessThan(Vector256<int> left, Vector256<int> right) {
-#if BCL_OVERRIDE_STATIC && NET7_0_OR_GREATER
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return Vector256.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
@@ -546,7 +546,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<uint> LessThan(Vector256<uint> left, Vector256<uint> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.LessThan(left, right);
 #else
             return _instance.LessThan(left, right);
@@ -589,7 +589,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{float}, Vector256{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> Max(Vector256<float> left, Vector256<float> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
@@ -610,7 +610,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<sbyte> Max(Vector256<sbyte> left, Vector256<sbyte> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
@@ -620,7 +620,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{byte}, Vector256{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<byte> Max(Vector256<byte> left, Vector256<byte> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
@@ -630,7 +630,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{short}, Vector256{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<short> Max(Vector256<short> left, Vector256<short> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
@@ -641,7 +641,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ushort> Max(Vector256<ushort> left, Vector256<ushort> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
@@ -651,7 +651,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{int}, Vector256{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> Max(Vector256<int> left, Vector256<int> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
@@ -662,7 +662,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<uint> Max(Vector256<uint> left, Vector256<uint> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Max(left, right);
 #else
             return _instance.Max(left, right);
@@ -705,7 +705,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{float}, Vector256{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> Min(Vector256<float> left, Vector256<float> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
@@ -726,7 +726,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<sbyte> Min(Vector256<sbyte> left, Vector256<sbyte> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
@@ -736,7 +736,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{byte}, Vector256{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<byte> Min(Vector256<byte> left, Vector256<byte> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
@@ -746,7 +746,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{short}, Vector256{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<short> Min(Vector256<short> left, Vector256<short> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
@@ -757,7 +757,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ushort> Min(Vector256<ushort> left, Vector256<ushort> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
@@ -767,7 +767,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{int}, Vector256{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> Min(Vector256<int> left, Vector256<int> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
@@ -778,7 +778,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<uint> Min(Vector256<uint> left, Vector256<uint> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Min(left, right);
 #else
             return _instance.Min(left, right);
@@ -832,7 +832,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{float}, Vector256{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> Multiply(Vector256<float> left, Vector256<float> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Multiply(left, right);
 #else
             return _instance.Multiply(left, right);
@@ -873,7 +873,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{short}, Vector256{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<short> Multiply(Vector256<short> left, Vector256<short> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Multiply(left, right);
 #else
             return _instance.Multiply(left, right);
@@ -894,7 +894,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{int}, Vector256{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> Multiply(Vector256<int> left, Vector256<int> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Multiply(left, right);
 #else
             return _instance.Multiply(left, right);
@@ -948,7 +948,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> Negate(Vector256<float> value) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Negate(value);
 #else
             return _instance.Negate(value);
@@ -969,7 +969,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<sbyte> Negate(Vector256<sbyte> value) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Negate(value);
 #else
             return _instance.Negate(value);
@@ -979,7 +979,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<short> Negate(Vector256<short> value) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Negate(value);
 #else
             return _instance.Negate(value);
@@ -989,7 +989,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Negate(Vector256{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> Negate(Vector256<int> value) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Negate(value);
 #else
             return _instance.Negate(value);
@@ -1021,7 +1021,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.OnesComplement{T}(Vector256{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> OnesComplement<T>(Vector256<T> vector) where T : struct {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.OnesComplement(vector);
 #else
             return _instance.OnesComplement(vector);
@@ -1043,7 +1043,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{float}, Vector256{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<float> Subtract(Vector256<float> left, Vector256<float> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
@@ -1064,7 +1064,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<sbyte> Subtract(Vector256<sbyte> left, Vector256<sbyte> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
@@ -1074,7 +1074,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{byte}, Vector256{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<byte> Subtract(Vector256<byte> left, Vector256<byte> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
@@ -1084,7 +1084,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{short}, Vector256{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<short> Subtract(Vector256<short> left, Vector256<short> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
@@ -1095,7 +1095,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ushort> Subtract(Vector256<ushort> left, Vector256<ushort> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
@@ -1105,7 +1105,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{int}, Vector256{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> Subtract(Vector256<int> left, Vector256<int> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
@@ -1116,7 +1116,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<uint> Subtract(Vector256<uint> left, Vector256<uint> right) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Subtract(left, right);
 #else
             return _instance.Subtract(left, right);
@@ -1159,7 +1159,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Xor{T}(Vector256{T}, Vector256{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> Xor<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Xor(left, right);
 #else
             return _instance.Xor(left, right);
