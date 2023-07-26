@@ -93,7 +93,11 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #if BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                 return Vector.Ceiling(value);
 #elif SOFTWARE_OPTIMIZATION
-                return Ceiling_ClearBit(value);
+                if (Vector<byte>.Count > BitOfByte.Bit128) {
+                    return Ceiling_ClearBit(value);
+                } else {
+                    return Ceiling_Basic(value);
+                }
 #else
                 return Ceiling_Basic(value);
 #endif // BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
@@ -617,7 +621,11 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #if BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                 return Vector.Floor(value);
 #elif SOFTWARE_OPTIMIZATION
-                return Floor_ClearBit(value);
+                if (Vector<byte>.Count > BitOfByte.Bit128) {
+                    return Floor_ClearBit(value);
+                } else {
+                    return Floor_Basic(value);
+                }
 #else
                 return Floor_Basic(value);
 #endif // BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
