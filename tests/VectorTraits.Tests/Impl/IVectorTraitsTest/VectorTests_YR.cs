@@ -143,8 +143,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, Vector<T>>>("YRoundToZero_ClearBit", "YRoundToZero_Floor");
-            var funcListFull = Vectors.GetSupportedMethodList<Func<Vector<T>, Vector<T>>>("YRoundToZero", "YRoundToZero_ClearBit", "YRoundToZero_Floor");
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, Vector<T>>>("YRoundToZero_ClearBit", "YRoundToZero_ClearBit_Not", "YRoundToZero_Floor");
+            var funcListFull = Vectors.GetSupportedMethodList<Func<Vector<T>, Vector<T>>>("YRoundToZero", "YRoundToZero_ClearBit", "YRoundToZero_ClearBit_Not", "YRoundToZero_Floor");
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
