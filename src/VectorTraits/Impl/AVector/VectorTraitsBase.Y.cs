@@ -322,11 +322,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 maskRawPow = Vector.Subtract(maskRawPow, one); // The mask is `pow(2,23-e) - 1`.
                 Vector<int> mask = Vector.Add(maskRawPow, rangeEnd).AsInt32(); // Step 1 of ConvertToUInt32_Range23RoundToEven .
                 mask = Vector.Xor(mask, rangeEnd.AsInt32()); // mask = ConvertToUInt32_Range23RoundToEven(maskRawPow).AsInt32();
-                Vector<int> allBitsSet = Vectors<int>.AllBitsSet;
                 mask = Vector.BitwiseOr(mask, maskBegin); // Choose (e<0).
                 //writer.WriteLine(VectorTextUtil.Format("The mask:\t{0}", mask));
-                mask = Vector.Xor(mask, allBitsSet); // mask = ~mask;
-                Vector<float> rt = Vector.BitwiseAnd(value, mask.AsSingle());
+                Vector<float> rt = Vector.AndNot(value, mask.AsSingle());
                 return rt;
             }
 
@@ -357,11 +355,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 maskRawPow = Vector.Subtract(maskRawPow, one); // The mask is `pow(2,52-e) - 1`.
                 Vector<long> mask = Vector.Add(maskRawPow, rangeEnd).AsInt64(); // Step 1 of ConvertToUInt64_Range52RoundToEven .
                 mask = Vector.Xor(mask, rangeEnd.AsInt64()); // mask = ConvertToUInt64_Range52RoundToEven(maskRawPow).AsInt64();
-                Vector<long> allBitsSet = Vectors<long>.AllBitsSet;
                 mask = Vector.BitwiseOr(mask, maskBegin); // Choose (e<0).
                 //writer.WriteLine(VectorTextUtil.Format("The mask:\t{0}", mask));
-                mask = Vector.Xor(mask, allBitsSet); // mask = ~mask;
-                Vector<double> rt = Vector.BitwiseAnd(value, mask.AsDouble());
+                Vector<double> rt = Vector.AndNot(value, mask.AsDouble()); // If lower than netcore3.0, AndNot is not a single instruction, performance is worse (split into 2 parts of And and Not, and Not is loaded in memory).
                 return rt;
             }
 
@@ -392,9 +388,11 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 maskRawPow = Vector.Subtract(maskRawPow, one); // The mask is `pow(2,52-e) - 1`.
                 Vector<long> mask = Vector.Add(maskRawPow, rangeEnd).AsInt64(); // Step 1 of ConvertToUInt64_Range52RoundToEven .
                 mask = Vector.Xor(mask, rangeEnd.AsInt64()); // mask = ConvertToUInt64_Range52RoundToEven(maskRawPow).AsInt64();
+                Vector<long> allBitsSet = Vectors<long>.AllBitsSet;
                 mask = Vector.BitwiseOr(mask, maskBegin); // Choose (e<0).
                 //writer.WriteLine(VectorTextUtil.Format("The mask:\t{0}", mask));
-                Vector<double> rt = Vector.AndNot(value, mask.AsDouble()); // If lower than netcore3.0, AndNot is not a single instruction, performance is worse (split into 2 parts of And and Not, and Not is loaded in memory).
+                mask = Vector.Xor(mask, allBitsSet); // mask = ~mask;
+                Vector<double> rt = Vector.BitwiseAnd(value, mask.AsDouble());
                 return rt;
             }
 
