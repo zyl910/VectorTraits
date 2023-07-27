@@ -332,35 +332,35 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YRoundToZero(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YRoundToZero_ClearBit(Vector<double> value) {
-                //constants.
-                Vector<double> allBitsSet = Vectors<double>.AllBitsSet;
-                Vector<double> nonSignMask = VectorConstants.Double_NonSignMask;
-                Vector<double> rangeBegin = new Vector<double>(1.0);
+                // Float encode is `sign*(1.m)*pow(2,e) = sign*(1.m)*pow(2,eBias - BIAS)`. Double's BIAS is `1023`.
+                // If (e>=52): Has 0bit fractional part. The mask is `0`.
+                // If (e==51): Has 1bit fractional part. The mask is `0x1`.
+                // ...
+                // If (e==1): Has 51bit fractional part. The mask is `0x0007FFFF_FFFFFFFF`.
+                // If (e==0): Has 52bit fractional part. The mask is `0x000FFFFF_FFFFFFFF`.
+                // If (e< 0): Need set to zero (0.0 / -0.0). The mask is `0x7FFFFFFF_FFFFFFFF`.
+                //
+                // If (0<=e && e<=52): The mask is `pow(2,52-e) - 1`. So `RoundToZero(x) = x & ~mask`.
+                //Constants.
                 Vector<double> exponentMask = new Vector<double>(ScalarConstants.DoubleVal_ExponentMask);
-                // operations
-                Vector<double> valueAbs = Vector.BitwiseAnd(value, nonSignMask);
-                Vector<double> rangeBegin2 = new Vector<double>(2.0);
-                Vector<long> maskBegin = Vector.GreaterThan(rangeBegin.AsInt64(), valueAbs.AsInt64()); // (a>=b) = ~(a<b) = ~(b>a)
+                Vector<double> one = new Vector<double>(1.0);
                 Vector<double> rangeEnd = new Vector<double>(ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
-                maskBegin = Vector.BitwiseAnd(maskBegin, nonSignMask.AsInt64()); // Support NegativeZero (`Math.Truncate(-0.0)` is `-0.0`) .
-                Vector<double> valueExpData = Vector.BitwiseAnd(value, exponentMask);
+                Vector<double> nonSignMask = VectorConstants.Double_NonSignMask;
                 Vector<double> expMinuend = new Vector<double>(ScalarConstants.DoubleVal_Truncate_expMinuend); // Item is `(long)(1023*2 + 52)<<52`. Binary is `0x8320000000000000`.
-                maskBegin = Vector.Xor(maskBegin, allBitsSet.AsInt64()); // maskBegin[i] = ~((maskBegin[i] > valueAbs[i])&nonSignMask[i]) = (valueAbs[i] >= maskBegin[i])|nonSignMask[i] // Vector.BitwiseOr(Vector.GreaterThanOrEqual(valueAbs, rangeBegin), nonSignMask);
-                Vector<long> maskless2 = Vector.GreaterThan(rangeBegin2.AsInt64(), valueAbs.AsInt64()); // (2>valueAbs[i])
-                Vector<long> maskEnd = Vector.GreaterThan(rangeEnd.AsInt64(), valueAbs.AsInt64()); // (a>=b) = ~(a<b) = ~(b>a)
-                maskEnd = Vector.Xor(maskEnd, allBitsSet.AsInt64()); // maskEnd[i] = ~(rangeEnd[i] > valueAbs[i]) = (valueAbs[i] >= rangeEnd[i]) //Vector.GreaterThanOrEqual(valueAbs, rangeEnd);
+                //Operations.
+                Vector<double> valueExpData = Vector.BitwiseAnd(value, exponentMask); // Get exponent field.
+                Vector<long> maskBegin = Vector.GreaterThan(one, valueExpData); // `1 > valueExpData[i] = pow(2,0) > pow(2,e)`, it mean `e<0`.
+                valueExpData = Vector.Min(valueExpData, rangeEnd); // Clamp to `e<=52`.
+                maskBegin = Vector.BitwiseAnd(maskBegin, nonSignMask.AsInt64()); // Keep sign flag.
                 Vector<double> maskRawPow = Vector.Subtract(expMinuend.AsUInt64(), valueExpData.AsUInt64()).AsDouble(); // If valueExpData is `(1023 + e)<<52`, `expMinuend-valueExpData` exponent field will be `(1023*2 + 52) - (1023 + e) = 1023 + (52-e)`
-                Vector<double> valueFix = Vector.BitwiseAnd(value, maskBegin.AsDouble());
-                //Vector<long> mask = ConvertToUInt64_Range52RoundToEven(maskRawPow).AsInt64();
-                Vector<long> mask = Vector.Add(maskRawPow, rangeEnd).AsInt64();
-                Vector<long> nonMantissaMask = new Vector<double>(ScalarConstants.DoubleVal_NonMantissaMask).AsInt64();
+                maskRawPow = Vector.Subtract(maskRawPow, one); // The mask is `pow(2,52-e) - 1`.
+                Vector<long> mask = Vector.Add(maskRawPow, rangeEnd).AsInt64(); // Step 1 of ConvertToUInt64_Range52RoundToEven .
                 mask = Vector.Xor(mask, rangeEnd.AsInt64()); // mask = ConvertToUInt64_Range52RoundToEven(maskRawPow).AsInt64();
-                mask = Vector.Subtract(Vector<long>.Zero, mask); // The mask is `~(pow(2,52-e)-1)`. Because `-(x) = ~x+1`, the inverse is `~(x-1) = -(x) = 0 - x`.
-                mask = Vector.ConditionalSelect(maskless2, nonMantissaMask, mask);
-                mask = Vector.BitwiseOr(mask, maskEnd.AsInt64());
-                //writer.WriteLine(VectorTextUtil.Format("The maskBegin:\t{0}", maskBegin));
+                Vector<long> allBitsSet = Vectors<long>.AllBitsSet;
+                mask = Vector.BitwiseOr(mask, maskBegin); // Choose (e<0).
                 //writer.WriteLine(VectorTextUtil.Format("The mask:\t{0}", mask));
-                Vector<double> rt = Vector.BitwiseAnd(valueFix, mask.AsDouble());
+                mask = Vector.Xor(mask, allBitsSet); // mask = ~mask;
+                Vector<double> rt = Vector.BitwiseAnd(value, mask.AsDouble());
                 return rt;
             }
 
