@@ -67,8 +67,13 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
                     if (Vector.IsHardwareAccelerated) {
-#if (BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER) || SOFTWARE_OPTIMIZATION
+#if BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                         rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+#elif SOFTWARE_OPTIMIZATION
+                        rt |= TypeCodeFlags.Single;
+                        if (Vector<byte>.Count > BitOfByte.Bit128) {
+                            rt |= TypeCodeFlags.Double;
+                        }
 #endif // BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                     }
                     return rt;
@@ -595,8 +600,13 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
                     if (Vector.IsHardwareAccelerated) {
-#if (BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER) || SOFTWARE_OPTIMIZATION
+#if BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                         rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+#elif SOFTWARE_OPTIMIZATION
+                        rt |= TypeCodeFlags.Single;
+                        if (Vector<byte>.Count > BitOfByte.Bit128) {
+                            rt |= TypeCodeFlags.Double;
+                        }
 #endif // BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
                     }
                     return rt;
