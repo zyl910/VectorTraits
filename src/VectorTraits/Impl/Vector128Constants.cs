@@ -254,10 +254,10 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
 #if USE_VECTOR_CREATE_INT64
-                return Vector128.Create((long)uint.MaxValue);
+                return Vector128.Create(ScalarConstants.Int_VMaxUInt32);
 #elif USE_VECTOR_CREATE
                 if (VectorEnvironment.Is64BitProcess) {
-                    return Vector128.Create((long)uint.MaxValue);
+                    return Vector128.Create(ScalarConstants.Int_VMaxUInt32);
                 } else {
                     return Vector128s<long>.VMaxUInt32;
                 }

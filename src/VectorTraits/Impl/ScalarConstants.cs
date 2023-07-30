@@ -13,6 +13,9 @@ namespace Zyl.VectorTraits.Impl {
         // -- IntDbl: Integer value reinterpret cast to double. --
         // If you create a Vector with a 64-bit integer, the performance of the JIT-generated code is very low. If you create a Vector with a double, the performance is much better(若用64位整数创建Vector, JIT生成的代码的性能很低. 换成用double创建Vector, 性能能提高很多).
 
+        /// <summary>Integer - `(long)uint.MaxValue = 0x0_FFFFFFFFL = 4294967295`. Fixed a bug in Arm: wrongly optimize `(long)uint.MaxValue` to `(long)-1`.</summary>
+        public const long Int_VMaxUInt32 = 0x0_FFFFFFFFL;
+
         /// <summary>Integer - `(int)pow(2, 23) = 0x00800000 = 8388608`.</summary>
         public const int Int_2Pow23 = 0x00800000;
         ///// <summary>Integer - `(long)pow(2, 52) = 0x00100000_00000000 = 4503599627370496`.</summary>

@@ -220,7 +220,7 @@ namespace Zyl.VectorTraits.Impl {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
 #if USE_VECTOR_CREATE
-                return new Vector<long>((long)uint.MaxValue);
+                return new Vector<long>(ScalarConstants.Int_VMaxUInt32);
 #else
                 return Vectors<long>.VMaxUInt32;
 #endif // USE_VECTOR_CREATE
