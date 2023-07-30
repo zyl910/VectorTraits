@@ -253,10 +253,17 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector128<long> Int64_VMaxUInt32 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-#if USE_VECTOR_CREATE_INT64
+                // Even with net7, there's still a bug under Arm: Int64_VMaxUInt32(Vector128.Create(ScalarConstants.Int_VMaxUInt32)) return `<-1,-1>`.
+#if NETX_0_OR_GREATER
                 return Vector128.Create(ScalarConstants.Int_VMaxUInt32);
+#elif USE_VECTOR_CREATE_INT64
+                if (!VectorEnvironment.ProcessIsArmFamily) {
+                    return Vector128.Create(ScalarConstants.Int_VMaxUInt32);
+                } else {
+                    return Vector128s<long>.VMaxUInt32;
+                }
 #elif USE_VECTOR_CREATE
-                if (VectorEnvironment.Is64BitProcess) {
+                if (VectorEnvironment.Is64BitProcess && !VectorEnvironment.ProcessIsArmFamily) {
                     return Vector128.Create(ScalarConstants.Int_VMaxUInt32);
                 } else {
                     return Vector128s<long>.VMaxUInt32;
