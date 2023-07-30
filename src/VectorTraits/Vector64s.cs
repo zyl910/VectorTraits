@@ -338,7 +338,7 @@ namespace Zyl.VectorTraits {
             if (index < 0 || idxEnd > values.Length) {
                 throw new IndexOutOfRangeException(string.Format("Index({0}) was outside the bounds{1} of the array!", index, values.Length));
             }
-            UnsafeEx.SkipInit(out Vector64<T> temp);
+            UnsafeUtil.SkipInit(out Vector64<T> temp);
             ref T p = ref Unsafe.As<Vector64<T>, T>(ref temp);
             for (int i = 0; i < Vector64<T>.Count; ++i) {
                 p = values[idx];
@@ -377,7 +377,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A new <see cref="Vector64{T}"/> from a from the given <see cref="Func{T, TResult}"/> (一个新<see cref="Vector64{T}"/>，其元素来 <see cref="Func{T, TResult}"/>).</returns>
         public static Vector64<T> CreateByFunc<T>(Func<int, T> func) where T : struct {
             if (null == func) throw new ArgumentNullException(nameof(func));
-            UnsafeEx.SkipInit(out Vector64<T> temp);
+            UnsafeUtil.SkipInit(out Vector64<T> temp);
             ref T p = ref Unsafe.As<Vector64<T>, T>(ref temp);
             for (int i = 0; i < Vector64<T>.Count; ++i) {
                 p = func(i);
@@ -396,7 +396,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A new <see cref="Vector64{T}"/> from a from the given <see cref="Func{T1, T2, TResult}"/> (一个新<see cref="Vector64{T}"/>，其元素来 <see cref="Func{T1, T2, TResult}"/>).</returns>
         public static Vector64<T> CreateByFunc<T, TUserdata>(Func<int, TUserdata, T> func, TUserdata userdata) where T : struct {
             if (null == func) throw new ArgumentNullException(nameof(func));
-            UnsafeEx.SkipInit(out Vector64<T> temp);
+            UnsafeUtil.SkipInit(out Vector64<T> temp);
             ref T p = ref Unsafe.As<Vector64<T>, T>(ref temp);
             for (int i = 0; i < Vector64<T>.Count; ++i) {
                 p = func(i, userdata);

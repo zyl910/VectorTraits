@@ -7,11 +7,11 @@ using System.Text;
 namespace Zyl.VectorTraits.Impl.Util {
 
     /// <summary>
-    /// Unsafe's extended utility functions (<see cref="Unsafe"/> 的扩展工具函数) .
+    /// Unsafe's utility functions (<see cref="Unsafe"/> 的工具函数) .
     /// </summary>
     /// <seealso cref="Unsafe"/>
     /// <seealso cref="MemoryMarshal"/>
-    public static class UnsafeEx {
+    public static class UnsafeUtil {
 
         // == MemoryMarshal ==
 

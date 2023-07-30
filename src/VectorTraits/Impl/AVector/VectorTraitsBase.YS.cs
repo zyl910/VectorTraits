@@ -124,7 +124,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YShuffleG2(Vector{byte}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YShuffleG2_Basic(Vector<byte> source, ShuffleControlG2 control) {
-                UnsafeEx.SkipInit(out Vector<byte> rt);
+                UnsafeUtil.SkipInit(out Vector<byte> rt);
                 ref byte q = ref Unsafe.As<Vector<byte>, byte>(ref rt);
                 ref byte p = ref Unsafe.As<Vector<byte>, byte>(ref source);
                 int ctl = (byte)control;
@@ -145,7 +145,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> YShuffleG2_Basic(Vector<ushort> source, ShuffleControlG2 control) {
-                UnsafeEx.SkipInit(out Vector<ushort> rt);
+                UnsafeUtil.SkipInit(out Vector<ushort> rt);
                 ref ushort q = ref Unsafe.As<Vector<ushort>, ushort>(ref rt);
                 ref ushort p = ref Unsafe.As<Vector<ushort>, ushort>(ref source);
                 int ctl = (byte)control;
@@ -166,7 +166,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> YShuffleG2_Basic(Vector<uint> source, ShuffleControlG2 control) {
-                UnsafeEx.SkipInit(out Vector<uint> rt);
+                UnsafeUtil.SkipInit(out Vector<uint> rt);
                 ref uint q = ref Unsafe.As<Vector<uint>, uint>(ref rt);
                 ref uint p = ref Unsafe.As<Vector<uint>, uint>(ref source);
                 int ctl = (byte)control;
@@ -187,7 +187,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> YShuffleG2_Basic(Vector<ulong> source, ShuffleControlG2 control) {
-                UnsafeEx.SkipInit(out Vector<ulong> rt);
+                UnsafeUtil.SkipInit(out Vector<ulong> rt);
                 ref ulong q = ref Unsafe.As<Vector<ulong>, ulong>(ref rt);
                 ref ulong p = ref Unsafe.As<Vector<ulong>, ulong>(ref source);
                 int ctl = (byte)control;
@@ -374,7 +374,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YShuffleG4(Vector{byte}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YShuffleG4_Basic(Vector<byte> source, ShuffleControlG4 control) {
-                UnsafeEx.SkipInit(out Vector<byte> rt);
+                UnsafeUtil.SkipInit(out Vector<byte> rt);
                 ref byte q = ref Unsafe.As<Vector<byte>, byte>(ref rt);
                 ref byte p = ref Unsafe.As<Vector<byte>, byte>(ref source);
                 int ctl = (byte)control;
@@ -395,7 +395,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> YShuffleG4_Basic(Vector<ushort> source, ShuffleControlG4 control) {
-                UnsafeEx.SkipInit(out Vector<ushort> rt);
+                UnsafeUtil.SkipInit(out Vector<ushort> rt);
                 ref ushort q = ref Unsafe.As<Vector<ushort>, ushort>(ref rt);
                 ref ushort p = ref Unsafe.As<Vector<ushort>, ushort>(ref source);
                 int ctl = (byte)control;
@@ -416,7 +416,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> YShuffleG4_Basic(Vector<uint> source, ShuffleControlG4 control) {
-                UnsafeEx.SkipInit(out Vector<uint> rt);
+                UnsafeUtil.SkipInit(out Vector<uint> rt);
                 ref uint q = ref Unsafe.As<Vector<uint>, uint>(ref rt);
                 ref uint p = ref Unsafe.As<Vector<uint>, uint>(ref source);
                 int ctl = (byte)control;
@@ -440,7 +440,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 if (Vector<ulong>.Count < 4) {
                     throw new NotSupportedException(string.Format(VectorMessageFormats.FORMAT_YSHUFFLEG4_MUST4_1, Vector<ulong>.Count));
                 }
-                UnsafeEx.SkipInit(out Vector<ulong> rt);
+                UnsafeUtil.SkipInit(out Vector<ulong> rt);
                 ref ulong q = ref Unsafe.As<Vector<ulong>, ulong>(ref rt);
                 ref ulong p = ref Unsafe.As<Vector<ulong>, ulong>(ref source);
                 int ctl = (byte)control;
@@ -618,7 +618,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                     result1 = YShuffleG4(source1, control);
                     return rt0;
                 }
-                UnsafeEx.SkipInit(out (Vector<ulong> Result0, Vector<ulong> Result1) rt);
+                UnsafeUtil.SkipInit(out (Vector<ulong> Result0, Vector<ulong> Result1) rt);
                 ValueTuple<Vector<ulong>, Vector<ulong>> src = (source0, source1);
                 ref ulong q = ref Unsafe.As<ValueTuple<Vector<ulong>, Vector<ulong>>, ulong>(ref rt);
                 ref ulong p = ref Unsafe.As<ValueTuple<Vector<ulong>, Vector<ulong>>, ulong>(ref src);
@@ -798,7 +798,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YShuffleInsert(Vector{byte}, Vector{byte}, Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YShuffleInsert_Basic(Vector<byte> back, Vector<byte> vector, Vector<byte> indices) {
-                UnsafeEx.SkipInit(out Vector<byte> rt);
+                UnsafeUtil.SkipInit(out Vector<byte> rt);
                 byte cnt = (byte)Vector<byte>.Count;
                 ref byte q = ref Unsafe.As<Vector<byte>, byte>(ref rt);
                 ref byte p = ref Unsafe.As<Vector<byte>, byte>(ref vector);
@@ -819,7 +819,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> YShuffleInsert_Basic(Vector<ushort> back, Vector<ushort> vector, Vector<ushort> indices) {
-                UnsafeEx.SkipInit(out Vector<ushort> rt);
+                UnsafeUtil.SkipInit(out Vector<ushort> rt);
                 ushort cnt = (ushort)Vector<ushort>.Count;
                 ref ushort q = ref Unsafe.As<Vector<ushort>, ushort>(ref rt);
                 ref ushort p = ref Unsafe.As<Vector<ushort>, ushort>(ref vector);
@@ -840,7 +840,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> YShuffleInsert_Basic(Vector<uint> back, Vector<uint> vector, Vector<uint> indices) {
-                UnsafeEx.SkipInit(out Vector<uint> rt);
+                UnsafeUtil.SkipInit(out Vector<uint> rt);
                 uint cnt = (uint)Vector<uint>.Count;
                 ref uint q = ref Unsafe.As<Vector<uint>, uint>(ref rt);
                 ref uint p = ref Unsafe.As<Vector<uint>, uint>(ref vector);
@@ -861,7 +861,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> YShuffleInsert_Basic(Vector<ulong> back, Vector<ulong> vector, Vector<ulong> indices) {
-                UnsafeEx.SkipInit(out Vector<ulong> rt);
+                UnsafeUtil.SkipInit(out Vector<ulong> rt);
                 ulong cnt = (ulong)Vector<ulong>.Count;
                 ref ulong q = ref Unsafe.As<Vector<ulong>, ulong>(ref rt);
                 ref ulong p = ref Unsafe.As<Vector<ulong>, ulong>(ref vector);

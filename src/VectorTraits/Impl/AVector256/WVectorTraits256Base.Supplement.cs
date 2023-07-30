@@ -330,7 +330,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{float}, Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Add_Basic(Vector256<float> left, Vector256<float> right) {
-                UnsafeEx.SkipInit(out Vector256<float> rt);
+                UnsafeUtil.SkipInit(out Vector256<float> rt);
                 ref float prt = ref Unsafe.As<Vector256<float>, float>(ref rt);
                 ref float pleft = ref Unsafe.As<Vector256<float>, float>(ref left);
                 ref float pright = ref Unsafe.As<Vector256<float>, float>(ref right);
@@ -348,7 +348,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{double}, Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> Add_Basic(Vector256<double> left, Vector256<double> right) {
-                UnsafeEx.SkipInit(out Vector256<double> rt);
+                UnsafeUtil.SkipInit(out Vector256<double> rt);
                 ref double prt = ref Unsafe.As<Vector256<double>, double>(ref rt);
                 ref double pleft = ref Unsafe.As<Vector256<double>, double>(ref left);
                 ref double pright = ref Unsafe.As<Vector256<double>, double>(ref right);
@@ -363,7 +363,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> Add_Basic(Vector256<sbyte> left, Vector256<sbyte> right) {
-                UnsafeEx.SkipInit(out Vector256<sbyte> rt);
+                UnsafeUtil.SkipInit(out Vector256<sbyte> rt);
                 ref sbyte prt = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref rt);
                 ref sbyte pleft = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref left);
                 ref sbyte pright = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref right);
@@ -405,7 +405,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> Add_Basic(Vector256<byte> left, Vector256<byte> right) {
-                UnsafeEx.SkipInit(out Vector256<byte> rt);
+                UnsafeUtil.SkipInit(out Vector256<byte> rt);
                 ref byte prt = ref Unsafe.As<Vector256<byte>, byte>(ref rt);
                 ref byte pleft = ref Unsafe.As<Vector256<byte>, byte>(ref left);
                 ref byte pright = ref Unsafe.As<Vector256<byte>, byte>(ref right);
@@ -447,7 +447,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> Add_Basic(Vector256<short> left, Vector256<short> right) {
-                UnsafeEx.SkipInit(out Vector256<short> rt);
+                UnsafeUtil.SkipInit(out Vector256<short> rt);
                 ref short prt = ref Unsafe.As<Vector256<short>, short>(ref rt);
                 ref short pleft = ref Unsafe.As<Vector256<short>, short>(ref left);
                 ref short pright = ref Unsafe.As<Vector256<short>, short>(ref right);
@@ -474,7 +474,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> Add_Basic(Vector256<ushort> left, Vector256<ushort> right) {
-                UnsafeEx.SkipInit(out Vector256<ushort> rt);
+                UnsafeUtil.SkipInit(out Vector256<ushort> rt);
                 ref ushort prt = ref Unsafe.As<Vector256<ushort>, ushort>(ref rt);
                 ref ushort pleft = ref Unsafe.As<Vector256<ushort>, ushort>(ref left);
                 ref ushort pright = ref Unsafe.As<Vector256<ushort>, ushort>(ref right);
@@ -500,7 +500,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> Add_Basic(Vector256<int> left, Vector256<int> right) {
-                UnsafeEx.SkipInit(out Vector256<int> rt);
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
                 ref int prt = ref Unsafe.As<Vector256<int>, int>(ref rt);
                 ref int pleft = ref Unsafe.As<Vector256<int>, int>(ref left);
                 ref int pright = ref Unsafe.As<Vector256<int>, int>(ref right);
@@ -519,7 +519,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> Add_Basic(Vector256<uint> left, Vector256<uint> right) {
-                UnsafeEx.SkipInit(out Vector256<uint> rt);
+                UnsafeUtil.SkipInit(out Vector256<uint> rt);
                 ref uint prt = ref Unsafe.As<Vector256<uint>, uint>(ref rt);
                 ref uint pleft = ref Unsafe.As<Vector256<uint>, uint>(ref left);
                 ref uint pright = ref Unsafe.As<Vector256<uint>, uint>(ref right);
@@ -537,7 +537,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Add(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> Add_Basic(Vector256<long> left, Vector256<long> right) {
-                UnsafeEx.SkipInit(out Vector256<long> rt);
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
                 ref long prt = ref Unsafe.As<Vector256<long>, long>(ref rt);
                 ref long pleft = ref Unsafe.As<Vector256<long>, long>(ref left);
                 ref long pright = ref Unsafe.As<Vector256<long>, long>(ref right);
@@ -552,7 +552,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Add_Basic(Vector256<ulong> left, Vector256<ulong> right) {
-                UnsafeEx.SkipInit(out Vector256<ulong> rt);
+                UnsafeUtil.SkipInit(out Vector256<ulong> rt);
                 ref ulong prt = ref Unsafe.As<Vector256<ulong>, ulong>(ref rt);
                 ref ulong pleft = ref Unsafe.As<Vector256<ulong>, ulong>(ref left);
                 ref ulong pright = ref Unsafe.As<Vector256<ulong>, ulong>(ref right);
@@ -590,7 +590,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.AndNot{T}(Vector256{T}, Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> AndNot_Basic<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-                UnsafeEx.SkipInit(out Vector256<T> rt);
+                UnsafeUtil.SkipInit(out Vector256<T> rt);
                 ref ulong prt = ref Unsafe.As<Vector256<T>, ulong>(ref rt);
                 ref ulong pleft = ref Unsafe.As<Vector256<T>, ulong>(ref left);
                 ref ulong pright = ref Unsafe.As<Vector256<T>, ulong>(ref right);
@@ -628,7 +628,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.BitwiseAnd{T}(Vector256{T}, Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> BitwiseAnd_Basic<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-                UnsafeEx.SkipInit(out Vector256<T> rt);
+                UnsafeUtil.SkipInit(out Vector256<T> rt);
                 ref ulong prt = ref Unsafe.As<Vector256<T>, ulong>(ref rt);
                 ref ulong pleft = ref Unsafe.As<Vector256<T>, ulong>(ref left);
                 ref ulong pright = ref Unsafe.As<Vector256<T>, ulong>(ref right);
@@ -666,7 +666,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.BitwiseOr{T}(Vector256{T}, Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> BitwiseOr_Basic<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-                UnsafeEx.SkipInit(out Vector256<T> rt);
+                UnsafeUtil.SkipInit(out Vector256<T> rt);
                 ref ulong prt = ref Unsafe.As<Vector256<T>, ulong>(ref rt);
                 ref ulong pleft = ref Unsafe.As<Vector256<T>, ulong>(ref left);
                 ref ulong pright = ref Unsafe.As<Vector256<T>, ulong>(ref right);
@@ -716,7 +716,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect{T}(Vector256{T}, Vector256{T}, Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> ConditionalSelect_Basic<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
-                UnsafeEx.SkipInit(out Vector256<T> rt);
+                UnsafeUtil.SkipInit(out Vector256<T> rt);
                 ref ulong pcondition = ref Unsafe.As<Vector256<T>, ulong>(ref condition);
                 ref ulong pleft = ref Unsafe.As<Vector256<T>, ulong>(ref left);
                 ref ulong pright = ref Unsafe.As<Vector256<T>, ulong>(ref right);
@@ -766,7 +766,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Divide(Vector256{float}, Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Divide_Basic(Vector256<float> left, Vector256<float> right) {
-                UnsafeEx.SkipInit(out Vector256<float> rt);
+                UnsafeUtil.SkipInit(out Vector256<float> rt);
                 ref float prt = ref Unsafe.As<Vector256<float>, float>(ref rt);
                 ref float pleft = ref Unsafe.As<Vector256<float>, float>(ref left);
                 ref float pright = ref Unsafe.As<Vector256<float>, float>(ref right);
@@ -784,7 +784,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Divide(Vector256{double}, Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> Divide_Basic(Vector256<double> left, Vector256<double> right) {
-                UnsafeEx.SkipInit(out Vector256<double> rt);
+                UnsafeUtil.SkipInit(out Vector256<double> rt);
                 ref double prt = ref Unsafe.As<Vector256<double>, double>(ref rt);
                 ref double pleft = ref Unsafe.As<Vector256<double>, double>(ref left);
                 ref double pright = ref Unsafe.As<Vector256<double>, double>(ref right);
@@ -916,7 +916,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{float}, Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> GreaterThan_Basic(Vector256<float> left, Vector256<float> right) {
-                UnsafeEx.SkipInit(out Vector256<float> rt);
+                UnsafeUtil.SkipInit(out Vector256<float> rt);
                 ref int prt = ref Unsafe.As<Vector256<float>, int>(ref rt);
                 ref float pleft = ref Unsafe.As<Vector256<float>, float>(ref left);
                 ref float pright = ref Unsafe.As<Vector256<float>, float>(ref right);
@@ -934,7 +934,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{double}, Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> GreaterThan_Basic(Vector256<double> left, Vector256<double> right) {
-                UnsafeEx.SkipInit(out Vector256<double> rt);
+                UnsafeUtil.SkipInit(out Vector256<double> rt);
                 ref long prt = ref Unsafe.As<Vector256<double>, long>(ref rt);
                 ref double pleft = ref Unsafe.As<Vector256<double>, double>(ref left);
                 ref double pright = ref Unsafe.As<Vector256<double>, double>(ref right);
@@ -949,7 +949,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> GreaterThan_Basic(Vector256<sbyte> left, Vector256<sbyte> right) {
-                UnsafeEx.SkipInit(out Vector256<sbyte> rt);
+                UnsafeUtil.SkipInit(out Vector256<sbyte> rt);
                 ref sbyte prt = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref rt);
                 ref sbyte pleft = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref left);
                 ref sbyte pright = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref right);
@@ -991,7 +991,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> GreaterThan_Basic(Vector256<byte> left, Vector256<byte> right) {
-                UnsafeEx.SkipInit(out Vector256<byte> rt);
+                UnsafeUtil.SkipInit(out Vector256<byte> rt);
                 ref sbyte prt = ref Unsafe.As<Vector256<byte>, sbyte>(ref rt);
                 ref byte pleft = ref Unsafe.As<Vector256<byte>, byte>(ref left);
                 ref byte pright = ref Unsafe.As<Vector256<byte>, byte>(ref right);
@@ -1033,7 +1033,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> GreaterThan_Basic(Vector256<short> left, Vector256<short> right) {
-                UnsafeEx.SkipInit(out Vector256<short> rt);
+                UnsafeUtil.SkipInit(out Vector256<short> rt);
                 ref short prt = ref Unsafe.As<Vector256<short>, short>(ref rt);
                 ref short pleft = ref Unsafe.As<Vector256<short>, short>(ref left);
                 ref short pright = ref Unsafe.As<Vector256<short>, short>(ref right);
@@ -1060,7 +1060,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> GreaterThan_Basic(Vector256<ushort> left, Vector256<ushort> right) {
-                UnsafeEx.SkipInit(out Vector256<ushort> rt);
+                UnsafeUtil.SkipInit(out Vector256<ushort> rt);
                 ref short prt = ref Unsafe.As<Vector256<ushort>, short>(ref rt);
                 ref ushort pleft = ref Unsafe.As<Vector256<ushort>, ushort>(ref left);
                 ref ushort pright = ref Unsafe.As<Vector256<ushort>, ushort>(ref right);
@@ -1086,7 +1086,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> GreaterThan_Basic(Vector256<int> left, Vector256<int> right) {
-                UnsafeEx.SkipInit(out Vector256<int> rt);
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
                 ref int prt = ref Unsafe.As<Vector256<int>, int>(ref rt);
                 ref int pleft = ref Unsafe.As<Vector256<int>, int>(ref left);
                 ref int pright = ref Unsafe.As<Vector256<int>, int>(ref right);
@@ -1105,7 +1105,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> GreaterThan_Basic(Vector256<uint> left, Vector256<uint> right) {
-                UnsafeEx.SkipInit(out Vector256<uint> rt);
+                UnsafeUtil.SkipInit(out Vector256<uint> rt);
                 ref int prt = ref Unsafe.As<Vector256<uint>, int>(ref rt);
                 ref uint pleft = ref Unsafe.As<Vector256<uint>, uint>(ref left);
                 ref uint pright = ref Unsafe.As<Vector256<uint>, uint>(ref right);
@@ -1123,7 +1123,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> GreaterThan_Basic(Vector256<long> left, Vector256<long> right) {
-                UnsafeEx.SkipInit(out Vector256<long> rt);
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
                 ref long prt = ref Unsafe.As<Vector256<long>, long>(ref rt);
                 ref long pleft = ref Unsafe.As<Vector256<long>, long>(ref left);
                 ref long pright = ref Unsafe.As<Vector256<long>, long>(ref right);
@@ -1138,7 +1138,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> GreaterThan_Basic(Vector256<ulong> left, Vector256<ulong> right) {
-                UnsafeEx.SkipInit(out Vector256<ulong> rt);
+                UnsafeUtil.SkipInit(out Vector256<ulong> rt);
                 ref long prt = ref Unsafe.As<Vector256<ulong>, long>(ref rt);
                 ref ulong pleft = ref Unsafe.As<Vector256<ulong>, ulong>(ref left);
                 ref ulong pright = ref Unsafe.As<Vector256<ulong>, ulong>(ref right);
@@ -1270,7 +1270,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{float}, Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> LessThan_Basic(Vector256<float> left, Vector256<float> right) {
-                UnsafeEx.SkipInit(out Vector256<float> rt);
+                UnsafeUtil.SkipInit(out Vector256<float> rt);
                 ref int prt = ref Unsafe.As<Vector256<float>, int>(ref rt);
                 ref float pleft = ref Unsafe.As<Vector256<float>, float>(ref left);
                 ref float pright = ref Unsafe.As<Vector256<float>, float>(ref right);
@@ -1288,7 +1288,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{double}, Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> LessThan_Basic(Vector256<double> left, Vector256<double> right) {
-                UnsafeEx.SkipInit(out Vector256<double> rt);
+                UnsafeUtil.SkipInit(out Vector256<double> rt);
                 ref long prt = ref Unsafe.As<Vector256<double>, long>(ref rt);
                 ref double pleft = ref Unsafe.As<Vector256<double>, double>(ref left);
                 ref double pright = ref Unsafe.As<Vector256<double>, double>(ref right);
@@ -1303,7 +1303,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> LessThan_Basic(Vector256<sbyte> left, Vector256<sbyte> right) {
-                UnsafeEx.SkipInit(out Vector256<sbyte> rt);
+                UnsafeUtil.SkipInit(out Vector256<sbyte> rt);
                 ref sbyte prt = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref rt);
                 ref sbyte pleft = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref left);
                 ref sbyte pright = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref right);
@@ -1345,7 +1345,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> LessThan_Basic(Vector256<byte> left, Vector256<byte> right) {
-                UnsafeEx.SkipInit(out Vector256<byte> rt);
+                UnsafeUtil.SkipInit(out Vector256<byte> rt);
                 ref sbyte prt = ref Unsafe.As<Vector256<byte>, sbyte>(ref rt);
                 ref byte pleft = ref Unsafe.As<Vector256<byte>, byte>(ref left);
                 ref byte pright = ref Unsafe.As<Vector256<byte>, byte>(ref right);
@@ -1387,7 +1387,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> LessThan_Basic(Vector256<short> left, Vector256<short> right) {
-                UnsafeEx.SkipInit(out Vector256<short> rt);
+                UnsafeUtil.SkipInit(out Vector256<short> rt);
                 ref short prt = ref Unsafe.As<Vector256<short>, short>(ref rt);
                 ref short pleft = ref Unsafe.As<Vector256<short>, short>(ref left);
                 ref short pright = ref Unsafe.As<Vector256<short>, short>(ref right);
@@ -1414,7 +1414,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> LessThan_Basic(Vector256<ushort> left, Vector256<ushort> right) {
-                UnsafeEx.SkipInit(out Vector256<ushort> rt);
+                UnsafeUtil.SkipInit(out Vector256<ushort> rt);
                 ref short prt = ref Unsafe.As<Vector256<ushort>, short>(ref rt);
                 ref ushort pleft = ref Unsafe.As<Vector256<ushort>, ushort>(ref left);
                 ref ushort pright = ref Unsafe.As<Vector256<ushort>, ushort>(ref right);
@@ -1440,7 +1440,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> LessThan_Basic(Vector256<int> left, Vector256<int> right) {
-                UnsafeEx.SkipInit(out Vector256<int> rt);
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
                 ref int prt = ref Unsafe.As<Vector256<int>, int>(ref rt);
                 ref int pleft = ref Unsafe.As<Vector256<int>, int>(ref left);
                 ref int pright = ref Unsafe.As<Vector256<int>, int>(ref right);
@@ -1459,7 +1459,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> LessThan_Basic(Vector256<uint> left, Vector256<uint> right) {
-                UnsafeEx.SkipInit(out Vector256<uint> rt);
+                UnsafeUtil.SkipInit(out Vector256<uint> rt);
                 ref int prt = ref Unsafe.As<Vector256<uint>, int>(ref rt);
                 ref uint pleft = ref Unsafe.As<Vector256<uint>, uint>(ref left);
                 ref uint pright = ref Unsafe.As<Vector256<uint>, uint>(ref right);
@@ -1477,7 +1477,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> LessThan_Basic(Vector256<long> left, Vector256<long> right) {
-                UnsafeEx.SkipInit(out Vector256<long> rt);
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
                 ref long prt = ref Unsafe.As<Vector256<long>, long>(ref rt);
                 ref long pleft = ref Unsafe.As<Vector256<long>, long>(ref left);
                 ref long pright = ref Unsafe.As<Vector256<long>, long>(ref right);
@@ -1492,7 +1492,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> LessThan_Basic(Vector256<ulong> left, Vector256<ulong> right) {
-                UnsafeEx.SkipInit(out Vector256<ulong> rt);
+                UnsafeUtil.SkipInit(out Vector256<ulong> rt);
                 ref long prt = ref Unsafe.As<Vector256<ulong>, long>(ref rt);
                 ref ulong pleft = ref Unsafe.As<Vector256<ulong>, ulong>(ref left);
                 ref ulong pright = ref Unsafe.As<Vector256<ulong>, ulong>(ref right);
@@ -2041,7 +2041,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{float}, Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Multiply_Basic(Vector256<float> left, Vector256<float> right) {
-                UnsafeEx.SkipInit(out Vector256<float> rt);
+                UnsafeUtil.SkipInit(out Vector256<float> rt);
                 ref float prt = ref Unsafe.As<Vector256<float>, float>(ref rt);
                 ref float pleft = ref Unsafe.As<Vector256<float>, float>(ref left);
                 ref float pright = ref Unsafe.As<Vector256<float>, float>(ref right);
@@ -2059,7 +2059,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{double}, Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> Multiply_Basic(Vector256<double> left, Vector256<double> right) {
-                UnsafeEx.SkipInit(out Vector256<double> rt);
+                UnsafeUtil.SkipInit(out Vector256<double> rt);
                 ref double prt = ref Unsafe.As<Vector256<double>, double>(ref rt);
                 ref double pleft = ref Unsafe.As<Vector256<double>, double>(ref left);
                 ref double pright = ref Unsafe.As<Vector256<double>, double>(ref right);
@@ -2074,7 +2074,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> Multiply_Basic(Vector256<sbyte> left, Vector256<sbyte> right) {
-                UnsafeEx.SkipInit(out Vector256<sbyte> rt);
+                UnsafeUtil.SkipInit(out Vector256<sbyte> rt);
                 ref sbyte prt = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref rt);
                 ref sbyte pleft = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref left);
                 ref sbyte pright = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref right);
@@ -2116,7 +2116,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> Multiply_Basic(Vector256<byte> left, Vector256<byte> right) {
-                UnsafeEx.SkipInit(out Vector256<byte> rt);
+                UnsafeUtil.SkipInit(out Vector256<byte> rt);
                 ref byte prt = ref Unsafe.As<Vector256<byte>, byte>(ref rt);
                 ref byte pleft = ref Unsafe.As<Vector256<byte>, byte>(ref left);
                 ref byte pright = ref Unsafe.As<Vector256<byte>, byte>(ref right);
@@ -2158,7 +2158,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> Multiply_Basic(Vector256<short> left, Vector256<short> right) {
-                UnsafeEx.SkipInit(out Vector256<short> rt);
+                UnsafeUtil.SkipInit(out Vector256<short> rt);
                 ref short prt = ref Unsafe.As<Vector256<short>, short>(ref rt);
                 ref short pleft = ref Unsafe.As<Vector256<short>, short>(ref left);
                 ref short pright = ref Unsafe.As<Vector256<short>, short>(ref right);
@@ -2185,7 +2185,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> Multiply_Basic(Vector256<ushort> left, Vector256<ushort> right) {
-                UnsafeEx.SkipInit(out Vector256<ushort> rt);
+                UnsafeUtil.SkipInit(out Vector256<ushort> rt);
                 ref ushort prt = ref Unsafe.As<Vector256<ushort>, ushort>(ref rt);
                 ref ushort pleft = ref Unsafe.As<Vector256<ushort>, ushort>(ref left);
                 ref ushort pright = ref Unsafe.As<Vector256<ushort>, ushort>(ref right);
@@ -2211,7 +2211,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> Multiply_Basic(Vector256<int> left, Vector256<int> right) {
-                UnsafeEx.SkipInit(out Vector256<int> rt);
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
                 ref int prt = ref Unsafe.As<Vector256<int>, int>(ref rt);
                 ref int pleft = ref Unsafe.As<Vector256<int>, int>(ref left);
                 ref int pright = ref Unsafe.As<Vector256<int>, int>(ref right);
@@ -2230,7 +2230,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> Multiply_Basic(Vector256<uint> left, Vector256<uint> right) {
-                UnsafeEx.SkipInit(out Vector256<uint> rt);
+                UnsafeUtil.SkipInit(out Vector256<uint> rt);
                 ref uint prt = ref Unsafe.As<Vector256<uint>, uint>(ref rt);
                 ref uint pleft = ref Unsafe.As<Vector256<uint>, uint>(ref left);
                 ref uint pright = ref Unsafe.As<Vector256<uint>, uint>(ref right);
@@ -2248,7 +2248,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> Multiply_Basic(Vector256<long> left, Vector256<long> right) {
-                UnsafeEx.SkipInit(out Vector256<long> rt);
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
                 ref long prt = ref Unsafe.As<Vector256<long>, long>(ref rt);
                 ref long pleft = ref Unsafe.As<Vector256<long>, long>(ref left);
                 ref long pright = ref Unsafe.As<Vector256<long>, long>(ref right);
@@ -2263,7 +2263,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Multiply_Basic(Vector256<ulong> left, Vector256<ulong> right) {
-                UnsafeEx.SkipInit(out Vector256<ulong> rt);
+                UnsafeUtil.SkipInit(out Vector256<ulong> rt);
                 ref ulong prt = ref Unsafe.As<Vector256<ulong>, ulong>(ref rt);
                 ref ulong pleft = ref Unsafe.As<Vector256<ulong>, ulong>(ref left);
                 ref ulong pright = ref Unsafe.As<Vector256<ulong>, ulong>(ref right);
@@ -2627,7 +2627,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{float}, Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Subtract_Basic(Vector256<float> left, Vector256<float> right) {
-                UnsafeEx.SkipInit(out Vector256<float> rt);
+                UnsafeUtil.SkipInit(out Vector256<float> rt);
                 ref float prt = ref Unsafe.As<Vector256<float>, float>(ref rt);
                 ref float pleft = ref Unsafe.As<Vector256<float>, float>(ref left);
                 ref float pright = ref Unsafe.As<Vector256<float>, float>(ref right);
@@ -2645,7 +2645,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{double}, Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> Subtract_Basic(Vector256<double> left, Vector256<double> right) {
-                UnsafeEx.SkipInit(out Vector256<double> rt);
+                UnsafeUtil.SkipInit(out Vector256<double> rt);
                 ref double prt = ref Unsafe.As<Vector256<double>, double>(ref rt);
                 ref double pleft = ref Unsafe.As<Vector256<double>, double>(ref left);
                 ref double pright = ref Unsafe.As<Vector256<double>, double>(ref right);
@@ -2660,7 +2660,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> Subtract_Basic(Vector256<sbyte> left, Vector256<sbyte> right) {
-                UnsafeEx.SkipInit(out Vector256<sbyte> rt);
+                UnsafeUtil.SkipInit(out Vector256<sbyte> rt);
                 ref sbyte prt = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref rt);
                 ref sbyte pleft = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref left);
                 ref sbyte pright = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref right);
@@ -2702,7 +2702,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> Subtract_Basic(Vector256<byte> left, Vector256<byte> right) {
-                UnsafeEx.SkipInit(out Vector256<byte> rt);
+                UnsafeUtil.SkipInit(out Vector256<byte> rt);
                 ref byte prt = ref Unsafe.As<Vector256<byte>, byte>(ref rt);
                 ref byte pleft = ref Unsafe.As<Vector256<byte>, byte>(ref left);
                 ref byte pright = ref Unsafe.As<Vector256<byte>, byte>(ref right);
@@ -2744,7 +2744,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> Subtract_Basic(Vector256<short> left, Vector256<short> right) {
-                UnsafeEx.SkipInit(out Vector256<short> rt);
+                UnsafeUtil.SkipInit(out Vector256<short> rt);
                 ref short prt = ref Unsafe.As<Vector256<short>, short>(ref rt);
                 ref short pleft = ref Unsafe.As<Vector256<short>, short>(ref left);
                 ref short pright = ref Unsafe.As<Vector256<short>, short>(ref right);
@@ -2771,7 +2771,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> Subtract_Basic(Vector256<ushort> left, Vector256<ushort> right) {
-                UnsafeEx.SkipInit(out Vector256<ushort> rt);
+                UnsafeUtil.SkipInit(out Vector256<ushort> rt);
                 ref ushort prt = ref Unsafe.As<Vector256<ushort>, ushort>(ref rt);
                 ref ushort pleft = ref Unsafe.As<Vector256<ushort>, ushort>(ref left);
                 ref ushort pright = ref Unsafe.As<Vector256<ushort>, ushort>(ref right);
@@ -2797,7 +2797,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> Subtract_Basic(Vector256<int> left, Vector256<int> right) {
-                UnsafeEx.SkipInit(out Vector256<int> rt);
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
                 ref int prt = ref Unsafe.As<Vector256<int>, int>(ref rt);
                 ref int pleft = ref Unsafe.As<Vector256<int>, int>(ref left);
                 ref int pright = ref Unsafe.As<Vector256<int>, int>(ref right);
@@ -2816,7 +2816,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> Subtract_Basic(Vector256<uint> left, Vector256<uint> right) {
-                UnsafeEx.SkipInit(out Vector256<uint> rt);
+                UnsafeUtil.SkipInit(out Vector256<uint> rt);
                 ref uint prt = ref Unsafe.As<Vector256<uint>, uint>(ref rt);
                 ref uint pleft = ref Unsafe.As<Vector256<uint>, uint>(ref left);
                 ref uint pright = ref Unsafe.As<Vector256<uint>, uint>(ref right);
@@ -2834,7 +2834,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Subtract(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> Subtract_Basic(Vector256<long> left, Vector256<long> right) {
-                UnsafeEx.SkipInit(out Vector256<long> rt);
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
                 ref long prt = ref Unsafe.As<Vector256<long>, long>(ref rt);
                 ref long pleft = ref Unsafe.As<Vector256<long>, long>(ref left);
                 ref long pright = ref Unsafe.As<Vector256<long>, long>(ref right);
@@ -2849,7 +2849,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Subtract_Basic(Vector256<ulong> left, Vector256<ulong> right) {
-                UnsafeEx.SkipInit(out Vector256<ulong> rt);
+                UnsafeUtil.SkipInit(out Vector256<ulong> rt);
                 ref ulong prt = ref Unsafe.As<Vector256<ulong>, ulong>(ref rt);
                 ref ulong pleft = ref Unsafe.As<Vector256<ulong>, ulong>(ref left);
                 ref ulong pright = ref Unsafe.As<Vector256<ulong>, ulong>(ref right);
@@ -2887,7 +2887,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Xor{T}(Vector256{T}, Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> Xor_Basic<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-                UnsafeEx.SkipInit(out Vector256<T> rt);
+                UnsafeUtil.SkipInit(out Vector256<T> rt);
                 ref ulong prt = ref Unsafe.As<Vector256<T>, ulong>(ref rt);
                 ref ulong pleft = ref Unsafe.As<Vector256<T>, ulong>(ref left);
                 ref ulong pright = ref Unsafe.As<Vector256<T>, ulong>(ref right);

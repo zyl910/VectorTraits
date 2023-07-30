@@ -276,7 +276,7 @@ namespace Zyl.VectorTraits {
             if (values.Length < Vector<byte>.Count) {
                 throw new IndexOutOfRangeException(string.Format("Index was outside the bounds({0}) of the array!", values.Length));
             }
-            return Unsafe.ReadUnaligned<Vector<T>>(ref UnsafeEx.GetReference(values));
+            return Unsafe.ReadUnaligned<Vector<T>>(ref UnsafeUtil.GetReference(values));
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 
@@ -296,7 +296,7 @@ namespace Zyl.VectorTraits {
             if (values.Length < Vector<T>.Count) {
                 throw new IndexOutOfRangeException(string.Format("Index was outside the bounds({0}) of the array!", values.Length));
             }
-            return Unsafe.ReadUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref UnsafeEx.GetReference(values)));
+            return Unsafe.ReadUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref UnsafeUtil.GetReference(values)));
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 
@@ -316,7 +316,7 @@ namespace Zyl.VectorTraits {
             if (values.Length < Vector<T>.Count) {
                 throw new IndexOutOfRangeException(string.Format("Index was outside the bounds({0}) of the array!", values.Length));
             }
-            return Unsafe.ReadUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref UnsafeEx.GetReference(values)));
+            return Unsafe.ReadUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref UnsafeUtil.GetReference(values)));
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
 
@@ -409,7 +409,7 @@ namespace Zyl.VectorTraits {
             if (index < 0 || idxEnd > values.Length) {
                 throw new IndexOutOfRangeException(string.Format("Index({0}) was outside the bounds{1} of the array!", index, values.Length));
             }
-            UnsafeEx.SkipInit(out Vector<T> temp);
+            UnsafeUtil.SkipInit(out Vector<T> temp);
             ref T p = ref Unsafe.As<Vector<T>, T>(ref temp);
             for (int i = 0; i < Vector<T>.Count; ++i) {
                 p = values[idx];
@@ -448,7 +448,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A new <see cref="Vector{T}"/> from a from the given <see cref="Func{T, TResult}"/> (一个新<see cref="Vector{T}"/>，其元素来 <see cref="Func{T, TResult}"/>).</returns>
         public static Vector<T> CreateByFunc<T>(Func<int, T> func) where T : struct {
             if (null == func) throw new ArgumentNullException(nameof(func));
-            UnsafeEx.SkipInit(out Vector<T> temp);
+            UnsafeUtil.SkipInit(out Vector<T> temp);
             ref T p = ref Unsafe.As<Vector<T>, T>(ref temp);
             for (int i = 0; i < Vector<T>.Count; ++i) {
                 p = func(i);
@@ -467,7 +467,7 @@ namespace Zyl.VectorTraits {
         /// <returns>A new <see cref="Vector{T}"/> from a from the given <see cref="Func{T1, T2, TResult}"/> (一个新<see cref="Vector{T}"/>，其元素来 <see cref="Func{T1, T2, TResult}"/>).</returns>
         public static Vector<T> CreateByFunc<T, TUserdata>(Func<int, TUserdata, T> func, TUserdata userdata) where T : struct {
             if (null == func) throw new ArgumentNullException(nameof(func));
-            UnsafeEx.SkipInit(out Vector<T> temp);
+            UnsafeUtil.SkipInit(out Vector<T> temp);
             ref T p = ref Unsafe.As<Vector<T>, T>(ref temp);
             for (int i = 0; i < Vector<T>.Count; ++i) {
                 p = func(i, userdata);
