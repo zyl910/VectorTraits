@@ -24,12 +24,14 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
         [TestCase((long)9)]
         [TestCase((ulong)10)]
         public void MaxTest<T>(T src) where T : struct {
+            var writer = Console.Out;
+            writer.WriteLine("[Vector128-MaxTest<{0}>({1})]", typeof(T).Name, src);
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
                 if (instance.GetIsSupported(true)) {
-                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.Max_AcceleratedTypes}");
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.Max_AcceleratedTypes}");
                 } else {
-                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
             // run.
@@ -42,6 +44,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 Vector128s<T>.XyYMask,
                 Vector128s<T>.XyzwXMask
             };
+            bool allowLog = false;
+            //bool showNotEquals = false;
+            bool showNotEquals = Scalars<T>.ExponentBits > 0;
             foreach (Vector128<T> left in samples) {
                 foreach (Vector128<T> right in samples) {
 #if NET7_0_OR_GREATER
@@ -49,10 +54,29 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
 #else
                     Vector128<T> expected = Vector128s.Max((dynamic)left, (dynamic)right);
 #endif // NET7_0_OR_GREATER
+                    bool usedWrite = false;
                     foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
                         Vector128<T> dst = instance.Max((dynamic)left, (dynamic)right);
-                        Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        bool showLog = allowLog;
+                        if (!expected.Equals(dst)) {
+                            if (showNotEquals) {
+                                showLog = true;
+                            }
+                        }
+                        if (showLog) {
+                            if (!usedWrite) {
+                                usedWrite = true;
+                                writer.WriteLine();
+                                writer.WriteLine(VectorTextUtil.Format("Sample:\t{0}, {1}", left, right));
+                                writer.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                            }
+                            dst = instance.Max((dynamic)left, (dynamic)right); // [Debug] It is easy to debug the function again.
+                            writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
+                        } else {
+                            Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{funcName}, left={left}, right={right}");
+                        }
                     }
                 }
             }
@@ -69,12 +93,14 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
         [TestCase((long)9)]
         [TestCase((ulong)10)]
         public void MinTest<T>(T src) where T : struct {
+            var writer = Console.Out;
+            writer.WriteLine("[Vector128-MinTest<{0}>({1})]", typeof(T).Name, src);
             IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
             foreach (IWVectorTraits128 instance in instances) {
                 if (instance.GetIsSupported(true)) {
-                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.Min_AcceleratedTypes}");
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.Min_AcceleratedTypes}");
                 } else {
-                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
             // run.
@@ -87,6 +113,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 Vector128s<T>.XyYMask,
                 Vector128s<T>.XyzwXMask
             };
+            bool allowLog = false;
+            //bool showNotEquals = false;
+            bool showNotEquals = Scalars<T>.ExponentBits > 0;
             foreach (Vector128<T> left in samples) {
                 foreach (Vector128<T> right in samples) {
 #if NET7_0_OR_GREATER
@@ -94,10 +123,29 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
 #else
                     Vector128<T> expected = Vector128s.Min((dynamic)left, (dynamic)right);
 #endif // NET7_0_OR_GREATER
+                    bool usedWrite = false;
                     foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
                         Vector128<T> dst = instance.Min((dynamic)left, (dynamic)right);
-                        Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        bool showLog = allowLog;
+                        if (!expected.Equals(dst)) {
+                            if (showNotEquals) {
+                                showLog = true;
+                            }
+                        }
+                        if (showLog) {
+                            if (!usedWrite) {
+                                usedWrite = true;
+                                writer.WriteLine();
+                                writer.WriteLine(VectorTextUtil.Format("Sample:\t{0}, {1}", left, right));
+                                writer.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                            }
+                            dst = instance.Min((dynamic)left, (dynamic)right); // [Debug] It is easy to debug the function again.
+                            writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
+                        } else {
+                            Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{funcName}, left={left}, right={right}");
+                        }
                     }
                 }
             }
