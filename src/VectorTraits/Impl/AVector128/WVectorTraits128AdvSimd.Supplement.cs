@@ -65,9 +65,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<long> Abs(Vector128<long> value) {
                 // If an integer value is positive or zero, no action is required. Otherwise complement and add 1.
                 //Vector128<long> mask = AdvSimd.CompareGreaterThan(Vector128<long>.Zero, value); // 0>value => value<0
-                long m0 = BitMath.ToInt32Mask(0 > AdvSimd.Extract(value, 0));
-                long m1 = BitMath.ToInt32Mask(0 > AdvSimd.Extract(value, 1));
-                Vector128<long> mask = Vector128.Create(m0, m1);
+                Vector128<long> mask = AdvSimd.ShiftRightArithmetic(value, 63);
                 Vector128<long> rt = AdvSimd.Subtract(AdvSimd.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
                 return rt;
             }
