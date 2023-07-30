@@ -69,4 +69,173 @@ Install package .
 Install-Package System.ValueTuple -Version 4.5.0
 ```
 
+## Differences between platforms (各平台的差异)
+### Abs
 
+#### Abs - Arm
+System.OverflowException : Negating the minimum value of a twos complement number is invalid.
+
+### Max/Min
+
+#### Max with NaN
+
+##### Max with NaN - Conclusion(总结)
+
+Max of C#(or x86 SIMD): (a>b)?a:b; // If a or b is NaN, alway return b.
+Min of C#(or x86 SIMD): (a<b)?a:b; // If a or b is NaN, alway return b.
+-
+Max of Arm SIMD: (IsNaN(a))?a:(IsNaN(b))?b: (a>b)?a:b; // If a or b is NaN, alway return NaN.
+Min of Arm SIMD: (IsNaN(a))?a:(IsNaN(b))?b: (a<b)?a:b; // If a or b is NaN, alway return NaN.
+MaxNumber of Arm SIMD: Think of NaN as -Infinity.
+MinNumber of Arm SIMD: Think of NaN as +Infinity.
+
+##### Max with NaN - `C#`
+https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/comparison-operators
+```
+For the ==, <, >, <=, and >= operators, if any of the operands is not a number (Double.NaN or Single.NaN), the result of operation is false. That means that the NaN value is neither greater than, less than, nor equal to any other double (or float) value, including NaN. 
+```
+
+https://learn.microsoft.com/en-us/dotnet/api/system.double.nan?view=net-7.0#system-double-nan
+```
+Use the IsNaN method to determine whether a value is not a number. The Equality operator considers two NaN values to be unequal to one another. In general, Double operators cannot be used to compare Double.NaN with other Double values, although comparison methods (such as Equals and CompareTo) can. The following example illustrates the difference in behavior between Double comparison operators and methods.
+ The example displays the following output:
+       NaN == NaN: False
+       NaN != NaN: True
+       NaN.Equals(NaN): True
+       ! NaN.Equals(NaN): False
+       IsNaN: True
+
+       NaN > NaN: False
+       NaN >= NaN: False
+       NaN < NaN: False
+       NaN < 100.0: False
+       NaN <= 100.0: False
+       NaN >= 100.0: False
+       NaN.CompareTo(NaN): 0
+       NaN.CompareTo(100.0): -1
+       (100.0).CompareTo(Double.NaN): 1
+```
+
+C# Interactive Windows
+```
+> (100.0).CompareTo(Double.NaN)
+1
+> (-100.0).CompareTo(Double.NaN)
+1
+> (Double.NegativeInfinity).CompareTo(Double.NaN)
+1
+> (Double.NaN).CompareTo(Double.NegativeInfinity)
+-1
+> Double.NegativeInfinity > Double.NaN
+false
+> Double.NegativeInfinity < Double.NaN
+false
+> Double.NaN < Double.NegativeInfinity
+false
+```
+
+##### Max with NaN - Arm
+Vector128<double> Max(Vector128<double> left, Vector128<double> right) { throw new PlatformNotSupportedException(); }
+`float64x2_t vmaxq_f64 (float64x2_t a, float64x2_t b)`
+```
+https://developer.arm.com/documentation/ddi0596/2021-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.FPMax.4
+Library pseudocode for shared/functions/float/fpmax/FPMax
+bits(N) FPMax(bits(N) op1, bits(N) op2, FPCRType fpcr)
+...
+    (done,result) = FPProcessNaNs(type1, type2, op1, op2, fpcr, altfp, TRUE);
+-
+https://developer.arm.com/documentation/ddi0596/2021-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.FPProcessNaNs.7
+Library pseudocode for shared/functions/float/fpprocessnans/FPProcessNaNs
+(boolean, bits(N)) FPProcessNaNs(FPType type1, FPType type2, bits(N) op1,
+                                 bits(N) op2, FPCRType fpcr)
+...
+    boolean altfp    = HaveAltFP() && !UsingAArch32() && fpcr.AH == '1';
+    boolean op1_nan  = type1 IN {FPType_SNaN, FPType_QNaN};
+    boolean op2_nan  = type2 IN {FPType_SNaN, FPType_QNaN};
+    boolean any_snan = type1 == FPType_SNaN || type2 == FPType_SNaN;
+    FPType  type_nan = if any_snan then FPType_SNaN else FPType_QNaN;
+
+    if altfmaxfmin && (op1_nan || op2_nan) then
+        FPProcessException(FPExc_InvalidOp, fpcr);
+        done = TRUE; sign2 = op2<N-1>;
+        result = if type2 == FPType_Zero then FPZero(sign2) else op2;
+    elsif altfp && op1_nan && op2_nan then
+        done = TRUE;  result = FPProcessNaN(type_nan, op1, fpcr, fpexc);   // <n> register NaN selected
+    elsif type1 == FPType_SNaN then
+        done = TRUE;  result = FPProcessNaN(type1, op1, fpcr, fpexc);
+    elsif type2 == FPType_SNaN then
+        done = TRUE;  result = FPProcessNaN(type2, op2, fpcr, fpexc);
+    elsif type1 == FPType_QNaN then
+        done = TRUE;  result = FPProcessNaN(type1, op1, fpcr, fpexc);
+    elsif type2 == FPType_QNaN then
+        done = TRUE;  result = FPProcessNaN(type2, op2, fpcr, fpexc);
+    else
+        done = FALSE;  result = Zeros();  // 'Don't care' result
+    return (done, result);
+-
+https://developer.arm.com/documentation/ddi0596/2021-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.FPProcessNaN.4
+Library pseudocode for shared/functions/float/fpprocessnan/FPProcessNaN
+bits(N) FPProcessNaN(FPType fptype, bits(N) op, FPCRType fpcr)
+...
+    case N of
+        when 16 topfrac =  9;
+        when 32 topfrac = 22;
+        when 64 topfrac = 51;
+    result = op;
+    if fptype == FPType_SNaN then
+        result<topfrac> = '1';
+        if fpexc then FPProcessException(FPExc_InvalidOp, fpcr);
+    if fpcr.DN == '1' then  // DefaultNaN requested
+        result = FPDefaultNaN(fpcr);
+    return result;
+```
+
+Vector128<double> MaxNumber(Vector128<double> left, Vector128<double> right)
+`float64x2_t vmaxnmq_f64 (float64x2_t a, float64x2_t b)`
+```
+https://developer.arm.com/documentation/ddi0596/2021-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.FPMaxNum.3
+Library pseudocode for shared/functions/float/fpmaxnum/FPMaxNum
+bits(N) FPMaxNum(bits(N) op1, bits(N) op2, FPCRType fpcr)...
+...
+    if !(altfp && type1_nan && type2_nan) then
+        // Treat a single quiet-NaN as -Infinity.
+        if type1 == FPType_QNaN && type2 != FPType_QNaN then
+            op1 = FPInfinity('1');
+        elsif type1 != FPType_QNaN && type2 == FPType_QNaN then
+            op2 = FPInfinity('1');
+```
+
+Vector128<double> MinNumber(Vector128<double> left, Vector128<double> right)
+`float64x2_t vminnmq_f64 (float64x2_t a, float64x2_t b)`
+```
+https://developer.arm.com/documentation/ddi0596/2021-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.FPMinNum.3
+Library pseudocode for shared/functions/float/fpminnum/FPMinNum
+bits(N) FPMinNum(bits(N) op1, bits(N) op2, FPCRType fpcr)
+...
+    if !(altfp && type1_nan && type2_nan) then
+        // Treat a single quiet-NaN as +Infinity.
+        if type1 == FPType_QNaN && type2 != FPType_QNaN then
+            op1 = FPInfinity('0');
+        elsif type1 != FPType_QNaN && type2 == FPType_QNaN then
+            op2 = FPInfinity('0');
+
+```
+
+### Shift series
+对于8、16位的移位, C# 会扩展到32位来处理. 但对于SIMD的紧缩8、16位数据来说, 扩展到32位后的运算结果有时会不符. 故应该先对 shiftAmount 做 bitwise-and 运算, 使其限制在合理范围内. 实测发现.NET6仍然是扩展到32位, 而 .NET7 也用掩码处理, 故本类库与 .NET7 保持了一致.
+
+https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators
+```
+Left-shift operator <<
+...
+Because the shift operators are defined only for the int, uint, long, and ulong types, the result of an operation always contains at least 32 bits. If the left-hand operand is of another integral type (sbyte, byte, short, ushort, or char), its value is converted to the int type, as the following example shows:
+C#
+byte a = 0b_1111_0001;
+var b = a << 8;
+...
+Shift amount of the shift operators
+For the built-in shift operators <<, >>, and >>>, the type of the right-hand operand must be int or a type that has a predefined implicit numeric conversion to int.
+For the x << count, x >> count, and x >>> count expressions, the actual shift amount depends on the type of x as follows:
+If the type of x is int or uint, the shift amount is defined by the low-order five bits of the right-hand operand. That is, the shift amount is computed from count & 0x1F (or count & 0b_1_1111).
+If the type of x is long or ulong, the shift amount is defined by the low-order six bits of the right-hand operand. That is, the shift amount is computed from count & 0x3F (or count & 0b_11_1111).
+```
