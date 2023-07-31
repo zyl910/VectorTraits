@@ -459,11 +459,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Max(Vector128<double> left, Vector128<double> right) {
-                //Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
-                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
-                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
-                Vector128<long> mask = Vector128.Create(m0, m1);
-                Vector128<double> rt = AdvSimd.BitwiseSelect(mask.AsDouble(), left, right);
+                double m0 = Math.Max(AdvSimd.Extract(left, 0), AdvSimd.Extract(right, 0));
+                double m1 = Math.Max(AdvSimd.Extract(left, 1), AdvSimd.Extract(right, 1));
+                Vector128<double> rt = Vector128.Create(m0, m1);
                 return rt;
             }
 
@@ -509,11 +507,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Max(Vector128<long> left, Vector128<long> right) {
-                // Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
-                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
-                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
-                Vector128<long> mask = Vector128.Create(m0, m1);
-                Vector128<long> rt = AdvSimd.BitwiseSelect(mask, left, right);
+                long m0 = Math.Max(AdvSimd.Extract(left, 0), AdvSimd.Extract(right, 0));
+                long m1 = Math.Max(AdvSimd.Extract(left, 1), AdvSimd.Extract(right, 1));
+                Vector128<long> rt = Vector128.Create(m0, m1);
                 return rt;
             }
 
@@ -521,11 +517,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> Max(Vector128<ulong> left, Vector128<ulong> right) {
-                //Vector128<long> mask = AdvSimd.CompareGreaterThan(left, right);
-                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) > AdvSimd.Extract(right, 0));
-                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) > AdvSimd.Extract(right, 1));
-                Vector128<long> mask = Vector128.Create(m0, m1);
-                Vector128<ulong> rt = AdvSimd.BitwiseSelect(mask.AsUInt64(), left, right);
+                ulong m0 = Math.Max(AdvSimd.Extract(left, 0), AdvSimd.Extract(right, 0));
+                ulong m1 = Math.Max(AdvSimd.Extract(left, 1), AdvSimd.Extract(right, 1));
+                Vector128<ulong> rt = Vector128.Create(m0, m1);
                 return rt;
             }
 
@@ -546,11 +540,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Min(Vector128<double> left, Vector128<double> right) {
-                //Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
-                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
-                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
-                Vector128<long> mask = Vector128.Create(m0, m1);
-                Vector128<double> rt = AdvSimd.BitwiseSelect(mask.AsDouble(), left, right);
+                double m0 = Math.Min(AdvSimd.Extract(left, 0), AdvSimd.Extract(right, 0));
+                double m1 = Math.Min(AdvSimd.Extract(left, 1), AdvSimd.Extract(right, 1));
+                Vector128<double> rt = Vector128.Create(m0, m1);
                 return rt;
             }
 
@@ -596,11 +588,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Min(Vector128<long> left, Vector128<long> right) {
-                // Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
-                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
-                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
-                Vector128<long> mask = Vector128.Create(m0, m1);
-                Vector128<long> rt = AdvSimd.BitwiseSelect(mask, left, right);
+                long m0 = Math.Min(AdvSimd.Extract(left, 0), AdvSimd.Extract(right, 0));
+                long m1 = Math.Min(AdvSimd.Extract(left, 1), AdvSimd.Extract(right, 1));
+                Vector128<long> rt = Vector128.Create(m0, m1);
                 return rt;
             }
 
@@ -608,11 +598,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> Min(Vector128<ulong> left, Vector128<ulong> right) {
-                //Vector128<long> mask = AdvSimd.CompareLessThan(left, right);
-                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) < AdvSimd.Extract(right, 0));
-                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) < AdvSimd.Extract(right, 1));
-                Vector128<long> mask = Vector128.Create(m0, m1);
-                Vector128<ulong> rt = AdvSimd.BitwiseSelect(mask.AsUInt64(), left, right);
+                ulong m0 = Math.Min(AdvSimd.Extract(left, 0), AdvSimd.Extract(right, 0));
+                ulong m1 = Math.Min(AdvSimd.Extract(left, 1), AdvSimd.Extract(right, 1));
+                Vector128<ulong> rt = Vector128.Create(m0, m1);
                 return rt;
             }
 
