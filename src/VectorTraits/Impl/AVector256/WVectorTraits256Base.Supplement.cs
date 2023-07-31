@@ -52,7 +52,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> Abs(Vector256<sbyte> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector256.Abs(value);
+                if (Vector256.IsHardwareAccelerated) {
+                    return Vector256.Abs(value);
+                } else {
+                    return Abs_Basic(value);
+                }
 #else
                 return Abs_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
@@ -62,7 +66,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> Abs(Vector256<short> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector256.Abs(value);
+                if (Vector256.IsHardwareAccelerated) {
+                    return Vector256.Abs(value);
+                } else {
+                    return Abs_Basic(value);
+                }
 #else
                 return Abs_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
@@ -72,7 +80,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> Abs(Vector256<int> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector256.Abs(value);
+                if (Vector256.IsHardwareAccelerated) {
+                    return Vector256.Abs(value);
+                } else {
+                    return Abs_Basic(value);
+                }
 #else
                 return Abs_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
@@ -82,7 +94,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> Abs(Vector256<long> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector256.Abs(value);
+                if (Vector256.IsHardwareAccelerated) {
+                    return Vector256.Abs(value);
+                } else {
+                    return Abs_Basic(value);
+                }
 #else
                 return Abs_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER

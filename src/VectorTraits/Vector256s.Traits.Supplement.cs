@@ -49,7 +49,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<sbyte> Abs(Vector256<sbyte> value) {
-#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+#if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Abs(value);
 #else
             return _instance.Abs(value);
@@ -59,7 +59,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<short> Abs(Vector256<short> value) {
-#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+#if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Abs(value);
 #else
             return _instance.Abs(value);
@@ -69,7 +69,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<int> Abs(Vector256<int> value) {
-#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+#if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Abs(value);
 #else
             return _instance.Abs(value);
