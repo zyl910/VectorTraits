@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -143,12 +143,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         }
 
 
-        #region BENCHMARKS_RAW
-#if BENCHMARKS_RAW
+        #region BENCHMARKS_ALGORITHM
+#if BENCHMARKS_ALGORITHM
 
 
-#endif // BENCHMARKS_RAW
-        #endregion // BENCHMARKS_RAW
+#endif // BENCHMARKS_ALGORITHM
+        #endregion // BENCHMARKS_ALGORITHM
 
 
         /// <summary>
@@ -196,10 +196,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         }
 
 
-#if NETCOREAPP3_0_OR_GREATER
-
-        #region BENCHMARKS_128ALGORITHM
-#if BENCHMARKS_128ALGORITHM
+        #region BENCHMARKS_128
+#if BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
 
         /// <summary>
         /// Sum Multiply - Vector128 - Traits static.
@@ -254,11 +252,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         #endregion // BENCHMARKS_ALGORITHM
 
 
-#endif // BENCHMARKS_128ALGORITHM
-        #endregion // BENCHMARKS_128ALGORITHM
+#endif // BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
+        #endregion // BENCHMARKS_128
 
-        #region BENCHMARKS_256ALGORITHM
-#if BENCHMARKS_256ALGORITHM
+
+        #region BENCHMARKS_256
+#if BENCHMARKS_256 && NETCOREAPP3_0_OR_GREATER
 
         /// <summary>
         /// Sum Multiply - Vector256 - Traits static.
@@ -307,9 +306,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
             CheckResult("Sum256Traits");
         }
 
-#endif // BENCHMARKS_256ALGORITHM
-        #endregion // BENCHMARKS_256ALGORITHM
-
-#endif // NETCOREAPP3_0_OR_GREATER
+#endif // BENCHMARKS_256 && NETCOREAPP3_0_OR_GREATER
+        #endregion // BENCHMARKS_256
     }
 }
