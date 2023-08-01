@@ -21,7 +21,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
     using TMy = Int16;
 
     /// <summary>
-    /// Shift left benchmark - Int16.
+    /// ShiftRightArithmetic benchmark - Int16.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
@@ -32,7 +32,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         private const int shiftAmount = 1;
 
         /// <summary>
-        /// Sum shift left logical - base.
+        /// Sum ShiftRightArithmetic - base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -57,7 +57,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #if NET7_0_OR_GREATER
         /// <summary>
-        /// Sum shift left logical - VectorT - .NET Bcl - variate .
+        /// Sum ShiftRightArithmetic - VectorT - .NET Bcl - variate .
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -101,7 +101,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("SumSRANetBcl");
         }
         /// <summary>
-        /// Sum shift left logical - VectorT - .NET Bcl - Const.
+        /// Sum ShiftRightArithmetic - VectorT - .NET Bcl - Const.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -151,7 +151,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum shift left logical - Base - Basic.
+        /// Sum ShiftRightArithmetic - Base - Basic.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -192,7 +192,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift left logical - Base.
+        /// Sum ShiftRightArithmetic - Base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -233,7 +233,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift left logical - Base - Core.
+        /// Sum ShiftRightArithmetic - Base - Core.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -280,7 +280,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #if NET5_0_OR_GREATER
         /// <summary>
-        /// Sum shift left logical - Raw - AdvSimd.
+        /// Sum ShiftRightArithmetic - Raw - AdvSimd.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -327,7 +327,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #if NETCOREAPP3_0_OR_GREATER
         /// <summary>
-        /// Sum shift left logical - Raw - Avx.
+        /// Sum ShiftRightArithmetic - Raw - Avx.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -376,7 +376,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum shift left logical - Traits static.
+        /// Sum ShiftRightArithmetic - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -420,7 +420,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift left logical - Traits static - Core.
+        /// Sum ShiftRightArithmetic - Traits static - Core.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -465,7 +465,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift left logical const - Traits static.
+        /// Sum ShiftRightArithmetic const - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -508,7 +508,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift left logical - Traits static - ConstCore.
+        /// Sum ShiftRightArithmetic - Traits static - ConstCore.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -556,7 +556,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #if NET5_0_OR_GREATER
         /// <summary>
-        /// Sum shift left logical fast - Raw - AdvSimd.
+        /// Sum ShiftRightArithmetic fast - Raw - AdvSimd.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -600,7 +600,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #if NETCOREAPP3_0_OR_GREATER
         /// <summary>
-        /// Sum shift left logical fast - Raw - Avx.
+        /// Sum ShiftRightArithmetic fast - Raw - Avx.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -647,7 +647,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum shift left logical fast - Traits static.
+        /// Sum ShiftRightArithmetic fast - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
