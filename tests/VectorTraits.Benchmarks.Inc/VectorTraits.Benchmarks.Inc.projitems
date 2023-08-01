@@ -32,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AVector\M\MultiplyBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\M\MultiplyBenchmark_SByte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\M\MultiplyBenchmark_Single.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\M\MultiplyBenchmark_UInt32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\M\MultiplyBenchmark_UInt64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\N\NarrowBenchmark_Double.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\N\NarrowBenchmark_Int16.cs" />
