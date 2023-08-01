@@ -1396,7 +1396,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 _ = dummy;
                 shiftAmount &= 0x3F;
                 var args0 = Vector256.Create((long)shiftAmount);
-                args1 = Vector256.Create((long)(64 - shiftAmount));
+                args1 = default;
                 return args0;
             }
 
@@ -1431,8 +1431,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftRightArithmetic_Core(Vector256<long> value, int shiftAmount, Vector256<long> args0, Vector256<long> args1) {
                 _ = shiftAmount;
+                _ = args1;
                 Vector256<long> sign = Avx2.CompareGreaterThan(Vector256<long>.Zero, value);
-                Vector256<long> rt = Avx2.Or(Avx2.ShiftRightLogicalVariable(value, args0.AsUInt64()), Avx2.ShiftLeftLogicalVariable(sign, args1.AsUInt64()));
+                Vector256<long> rt = Avx2.Xor(value, sign);
+                rt = Avx2.ShiftRightLogicalVariable(rt, args0.AsUInt64());
+                rt = Avx2.Xor(rt, sign);
                 return rt;
             }
 
