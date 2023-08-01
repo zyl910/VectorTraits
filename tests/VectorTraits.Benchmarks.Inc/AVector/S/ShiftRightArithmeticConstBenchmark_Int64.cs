@@ -6,10 +6,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+#if NETCOREAPP3_0_OR_GREATER
+using System.Runtime.Intrinsics;
+#endif
 using System.Text;
 using System.Threading;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
+using Zyl.VectorTraits.Impl.AVector256;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_OFF
@@ -737,6 +741,48 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             //Debugger.Break();
             dstTMy = StaticSumSRAFast_Avx2(srcArray, srcArray.Length, shiftAmount);
             CheckResult("SumSRAFast_Avx2");
+        }
+
+        /// <summary>
+        /// Sum ShiftRightArithmetic fast - Raw - Avx - Negative.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumSRAFast_Avx2_Negative(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector256 result.
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // Vector256 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.ShiftRightArithmetic_Fast_Negative(p0, shiftAmount);
+                vrt += vtemp; // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)(Unsafe.Add(ref p, i) >> shiftAmount);
+            }
+            // Reduce.
+            rt += Vector256s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRAFast_Avx2_Negative() {
+            WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
+            //Debugger.Break();
+            dstTMy = StaticSumSRAFast_Avx2_Negative(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRAFast_Avx2_Negative");
         }
 
 #endif // NETCOREAPP3_0_OR_GREATER

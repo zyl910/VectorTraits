@@ -1544,7 +1544,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftRightArithmetic_Fast(Vector256<long> value, int shiftAmount) {
-                return ShiftRightArithmetic_Fast_Negative(value, shiftAmount);
+                return ShiftRightArithmetic_Fast_Xor(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{long}, int)"/>
@@ -1608,6 +1608,17 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> sign = Avx2.CompareGreaterThan(Vector256<long>.Zero, value);
                 byte shiftAmountLeft = (byte)(64 - shiftAmount);
                 Vector256<long> rt = Avx2.Or(Avx2.ShiftRightLogical(value, (byte)shiftAmount), Avx2.ShiftLeftLogical(sign, shiftAmountLeft));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> ShiftRightArithmetic_Fast_Xor(Vector256<long> value, int shiftAmount) {
+                // t = -(x>>>31); return ((x^t)>>>n)^t; // From "Hacker's Delight", Page 18.
+                Vector256<long> sign = Avx2.CompareGreaterThan(Vector256<long>.Zero, value); // Mask `0>x` is `-(x>>>31)`.
+                Vector256<long> rt = Avx2.Xor(value, sign);
+                rt = Avx2.ShiftRightLogical(rt, (byte)shiftAmount);
+                rt = Avx2.Xor(rt, sign);
                 return rt;
             }
 
