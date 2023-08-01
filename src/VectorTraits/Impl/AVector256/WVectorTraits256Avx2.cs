@@ -1550,6 +1550,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return ShiftRightArithmetic_Fast_Xor(value, shiftAmount);
             }
 
+#if !REDUCE_MEMORY_USAGE
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftRightArithmetic_Fast_Narrow(Vector256<long> value, int shiftAmount) {
@@ -1604,6 +1605,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> rt = Avx2.Or(lower, upper).AsInt64();
                 return rt;
             }
+#endif // !REDUCE_MEMORY_USAGE
 
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

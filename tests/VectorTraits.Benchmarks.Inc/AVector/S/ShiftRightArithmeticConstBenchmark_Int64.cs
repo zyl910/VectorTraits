@@ -764,7 +764,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.ShiftRightArithmetic_Fast_Negative(p0, shiftAmount);
-                vrt += vtemp; // Add.
+                vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp); // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // Remainder processs.

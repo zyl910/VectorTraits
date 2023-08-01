@@ -899,6 +899,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.ShiftRightArithmetic_Fast_Negative(value.AsVector256(), shiftAmount).AsVector();
             }
 
+#if !REDUCE_MEMORY_USAGE
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> ShiftRightArithmetic_Fast_Narrow(Vector<long> value, int shiftAmount) {
@@ -910,6 +911,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<long> ShiftRightArithmetic_Fast_NarrowIfLess(Vector<long> value, int shiftAmount) {
                 return WStatics.ShiftRightArithmetic_Fast_NarrowIfLess(value.AsVector256(), shiftAmount).AsVector();
             }
+#endif // !REDUCE_MEMORY_USAGE
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Fast(Vector{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
