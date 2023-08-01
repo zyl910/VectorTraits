@@ -66,8 +66,12 @@ https://github.com/dotnet/runtime/pull/80192
 
 Install package .
 ```
+Install-Package System.Numerics.Vectors -Version 4.5.0
+Install-Package System.Runtime.CompilerServices.Unsafe -Version 4.5.3
+Install-Package System.Runtime.InteropServices.RuntimeInformation -Version 4.3.0
 Install-Package System.ValueTuple -Version 4.5.0
 ```
+
 
 ## Differences between platforms (各平台的差异)
 ### Abs
