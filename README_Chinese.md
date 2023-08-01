@@ -62,6 +62,159 @@ VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 例2: 使用 `Vectors.ShiftLeft_Args` 与 `Vectors.ShiftLeft_Core`, 能将部分运算挪到循环外去提前处理. 例如在支持 Avx指令集的机器上运行时, 会在循环外设置好 `xmm1`, 随后在内循环的`vpsllw`指令里使用了它. 且这里展示了: 内联编译优化消除了冗余的 xmm/ymm 转换.
 ![Vectors.ShiftLeft_Core_use_inline.png](docs/Vectors.ShiftLeft_Core_use_inline.png)
 
+## 范例
+范例代码在 `samples/VectorTraits.Sample` 文件夹.
+源代码如下。
+```cs
+using System;
+using System.IO;
+using System.Numerics;
+
+namespace Zyl.VectorTraits.Sample {
+    class Program {
+        private static readonly TextWriter writer = Console.Out;
+        static void Main(string[] args) {
+            writer.WriteLine("VectorTraits.Sample");
+            writer.WriteLine();
+            VectorTraitsGlobal.Init(); // Initialization (初始化).
+            //TraitsOutput.OutputEnvironment(writer); // Output environment info (输出环境信息).
+            writer.WriteLine(string.Format("Vectors.Instance:\t{0}", Vectors.Instance.GetType().Name));
+            writer.WriteLine();
+
+            // -- Start --
+            Vector<short> src = Vectors.CreateRotate<short>(0, 1, 2, 3, 4, 5, 6, 7); // The `Vectors` class provides some methods. For example, 'CreateRotate' is rotate fill (`Vectors` 类提供了许多方法. 例如 `CreateRotate` 是旋转填充).
+            VectorTextUtil.WriteLine(writer, "src:\t{0}", src); // It can not only format the string, but also display the hexadecimal of each element in the vector on the right Easy to view vector data (它不仅能格式化字符串, 且会在右侧显示向量中各元素的十六进制. 便于查看向量数据).
+
+            // ShiftLeft. It is a new vector method in `.NET 7.0` (左移位. 它是 `.NET 7.0` 新增的向量方法)
+            Vector<short> shifted = Vectors.ShiftLeft(src, 1); // shifted[i] = src[i] << 1.
+            VectorTextUtil.WriteLine(writer, "ShiftLeft:\t{0}", shifted);
+#if NET7_0_OR_GREATER
+            VectorTextUtil.WriteLine(writer, "Equals to BCL ShiftLeft:\t{0}", shifted.Equals(Vector.ShiftLeft(src, 1))); // Compare the results of the same function in BCL with it (将BCL里相同函数的结果与它做对比).
+#endif
+            VectorTextUtil.WriteLine(writer, "Equals to ShiftLeft_Const:\t{0}", shifted.Equals(Vectors.ShiftLeft_Const(src, 1))); // If the parameter shiftAmount is a constant, you can also use the ShiftLeft of Vectors_ Const method It is faster in many scenarios (若参数 shiftAmount 是常数, 还可以使用 Vectors 的 ShiftLeft_Const 方法. 它在不少场景下更快).
+            writer.WriteLine();
+
+            // Shuffle. It is a new vector method in `.NET 7.0` (换位. 它是 `.NET 7.0` 新增的向量方法)
+            Vector<short> desc = Vectors<short>.SerialDesc; // The generic structure 'Vectors<T>' provides fields for commonly used constants For example, 'SerialDesc' is a descending order value (泛型结构体 `Vectors<T>` 为常用常数提供了字段. 例如 `SerialDesc` 是降序的顺序值).
+            VectorTextUtil.WriteLine(writer, "desc:\t{0}", desc);
+            Vector<short> dst = Vectors.Shuffle(shifted, desc);
+            VectorTextUtil.WriteLine(writer, "Shuffle:\t{0}", dst);
+#if NET7_0_OR_GREATER
+            VectorTextUtil.WriteLine(writer, "Equals to BCL Shuffle:\t{0}", dst.Equals(Vectors.Shuffle(shifted, desc))); // Compare the results of the same function in BCL with it (将BCL里相同函数的结果与它做对比).
+#endif
+            // Shuffle_Args and Shuffle_Core
+            Vectors.Shuffle_Args(desc, out var args0, out var args1); // The suffix is the `Args' method used for parameter calculation, which involves processing such as parameter transformation in advance It is suitable for external loop (后缀是 `Args` 的方法, 用于参数计算, 即提前进行参数变换等处理. 它适合放在外循环).
+            Vector<short> dst2 = Vectors.Shuffle_Core(shifted, args0, args1); // The suffix is the `Core` method used for core calculations, which calculates based on cached parameters It is suitable for internal loop to improve performance (后缀是 `Core` 方法, 用于核心计算, 既根据已缓存的参数进行计算. 它适合放在内循环, 便于改善性能).
+            VectorTextUtil.WriteLine(writer, "Equals to Shuffle_Core:\t{0}", dst.Equals(dst2));
+            writer.WriteLine();
+
+            // Show AcceleratedTypes.
+            VectorTextUtil.WriteLine(writer, "ShiftLeft_AcceleratedTypes:\t{0}", Vectors.ShiftLeft_AcceleratedTypes);
+            VectorTextUtil.WriteLine(writer, "Shuffle_AcceleratedTypes:\t{0}", Vectors.Shuffle_AcceleratedTypes);
+
+        }
+    }
+}
+```
+
+`Vectors` 类提供了许多方法. 详见该列表: [TraitsMethodList](TraitsMethodList.md)
+
+### X86 `.NET7.0`中的运行结果
+程序: `VectorTraits.Sample`
+
+```
+VectorTraits.Sample
+
+IsRelease:      True
+EnvironmentVariable(PROCESSOR_IDENTIFIER):      Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
+Environment.ProcessorCount:     8
+Environment.Is64BitProcess:     True
+Environment.OSVersion:  Microsoft Windows NT 10.0.19045.0
+Environment.Version:    7.0.3
+Stopwatch.Frequency:    10000000
+RuntimeEnvironment.GetRuntimeDirectory: C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.3\
+RuntimeInformation.FrameworkDescription:        .NET 7.0.3
+RuntimeInformation.OSArchitecture:      X64
+RuntimeInformation.OSDescription:       Microsoft Windows 10.0.19045
+RuntimeInformation.RuntimeIdentifier:   win10-x64
+IntPtr.Size:    8
+BitConverter.IsLittleEndian:    True
+Vector.IsHardwareAccelerated:   True
+Vector<byte>.Count:     32      # 256bit
+Vector<float>.Count:    8       # 256bit
+VectorTraitsGlobal.InitCheckSum:        7960959 # 0x0079797F
+Vector<T>.Assembly.CodeBase:    file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.3/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):  .NET 7.0
+GetTargetFrameworkDisplayName(TraitsOutput):    .NET 7.0
+Vectors.Instance:       VectorTraits256Avx2
+
+src:    <0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7>        # (0000 0001 0002 0003 0004 0005 0006 0007 0000 0001 0002 0003 0004 0005 0006 0007)
+ShiftLeft:      <0, 2, 4, 6, 8, 10, 12, 14, 0, 2, 4, 6, 8, 10, 12, 14>  # (0000 0002 0004 0006 0008 000A 000C 000E 0000 0002 0004 0006 0008 000A 000C 000E)
+Equals to BCL ShiftLeft:        True
+Equals to ShiftLeft_Const:      True
+
+desc:   <15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0>  # (000F 000E 000D 000C 000B 000A 0009 0008 0007 0006 0005 0004 0003 0002 0001 0000)
+Shuffle:        <14, 12, 10, 8, 6, 4, 2, 0, 14, 12, 10, 8, 6, 4, 2, 0>  # (000E 000C 000A 0008 0006 0004 0002 0000 000E 000C 000A 0008 0006 0004 0002 0000)
+Equals to BCL Shuffle:  True
+Equals to Shuffle_Core: True
+
+ShiftLeft_AcceleratedTypes:     SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64        # (00001FE0)
+Shuffle_AcceleratedTypes:       SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double        # (00007FE0)
+```
+
+注: `Vectors.Instance` 及之前的文本, 是环境信息. 而从 `src` 开始的, 才是主要的测试代码.
+
+### Arm `.NET7.0`中的运行结果
+程序: `VectorTraits.Sample`
+
+```
+```
+
+### X86 `.NET Framework 4.5`中的运行结果
+程序: `VectorTraits.Sample.NetFw`.
+
+```
+VectorTraits.Sample
+
+IsRelease:      True
+EnvironmentVariable(PROCESSOR_IDENTIFIER):      Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
+Environment.ProcessorCount:     8
+Environment.Is64BitProcess:     True
+Environment.OSVersion:  Microsoft Windows NT 6.2.9200.0
+Environment.Version:    4.0.30319.42000
+Stopwatch.Frequency:    10000000
+RuntimeEnvironment.GetRuntimeDirectory: C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
+RuntimeInformation.FrameworkDescription:        .NET Framework 4.8.9167.0
+RuntimeInformation.OSArchitecture:      X64
+RuntimeInformation.OSDescription:       Microsoft Windows 10.0.19045
+IntPtr.Size:    8
+BitConverter.IsLittleEndian:    True
+Vector.IsHardwareAccelerated:   True
+Vector<byte>.Count:     32      # 256bit
+Vector<float>.Count:    8       # 256bit
+VectorTraitsGlobal.InitCheckSum:        -25396097       # 0xFE7C7C7F
+Vector<T>.Assembly.CodeBase:    file:///E:/zylSelf/Code/cs/base/VectorTraits/samples/VectorTraits.Sample.NetFw/bin/Release/System.Numerics.Vectors.DLL
+GetTargetFrameworkDisplayName(VectorTextUtil):  .NET Standard 1.1
+GetTargetFrameworkDisplayName(TraitsOutput):    .NET Framework 4.5
+Vectors.Instance:       VectorTraits256Base
+
+src:    <0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7>        # (0000 0001 0002 0003 0004 0005 0006 0007 0000 0001 0002 0003 0004 0005 0006 0007)
+ShiftLeft:      <0, 2, 4, 6, 8, 10, 12, 14, 0, 2, 4, 6, 8, 10, 12, 14>  # (0000 0002 0004 0006 0008 000A 000C 000E 0000 0002 0004 0006 0008 000A 000C 000E)
+Equals to ShiftLeft_Const:      True
+
+desc:   <15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0>  # (000F 000E 000D 000C 000B 000A 0009 0008 0007 0006 0005 0004 0003 0002 0001 0000)
+Shuffle:        <14, 12, 10, 8, 6, 4, 2, 0, 14, 12, 10, 8, 6, 4, 2, 0>  # (000E 000C 000A 0008 0006 0004 0002 0000 000E 000C 000A 0008 0006 0004 0002 0000)
+Equals to Shuffle_Core: True
+
+ShiftLeft_AcceleratedTypes:     SByte, Byte, Int16, UInt16, Int32, UInt32       # (000007E0)
+Shuffle_AcceleratedTypes:       None    # (00000000)
+```
+
+Vectors 的 ShiftLeft/Shuffle 都能正常工作.
+且从 ShiftLeft_AcceleratedTypes 中可以看出, Int16类型的ShiftLeft方法是存在硬件加速的. 本库巧妙利用了其他向量方法, 实现了ShiftLeft的硬件加速.
+
+## 基准测试结果
+
 ## 变更日志
 
 完整列表: [ChangeLog](ChangeLog.md)
