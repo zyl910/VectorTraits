@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -84,8 +84,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             }
         }
 
-        #region BENCHMARKS_RAW
-#if BENCHMARKS_RAW
+        #region BENCHMARKS_ALGORITHM
+#if BENCHMARKS_ALGORITHM
 
         /// <summary>
         /// Sum Shuffle - Vector - base.
@@ -130,8 +130,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("SumBase");
         }
 
-#endif // BENCHMARKS_RAW
-        #endregion // BENCHMARKS_RAW
+#endif // BENCHMARKS_ALGORITHM
+        #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
         /// Sum Shuffle - Vector Traits - static.

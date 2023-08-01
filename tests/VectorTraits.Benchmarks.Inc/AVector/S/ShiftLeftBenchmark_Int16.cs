@@ -268,8 +268,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #endif // BENCHMARKS_ALGORITHM
         #endregion // BENCHMARKS_ALGORITHM
 
-        #region BENCHMARKS_RAW
-#if BENCHMARKS_RAW
+        #region BENCHMARKS_ALGORITHM
+#if BENCHMARKS_ALGORITHM
 
 #if NETCOREAPP3_0_OR_GREATER
         /// <summary>
@@ -373,8 +373,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 #endif // NET5_0_OR_GREATER
 
-#endif // BENCHMARKS_RAW
-        #endregion // BENCHMARKS_RAW
+#endif // BENCHMARKS_ALGORITHM
+        #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
         /// Sum shift left logical - Traits static.
@@ -698,8 +698,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #endif // BENCHMARKS_ALGORITHM
         #endregion // BENCHMARKS_ALGORITHM
 
-        #region BENCHMARKS_RAW
-#if BENCHMARKS_RAW
+        #region BENCHMARKS_ALGORITHM
+#if BENCHMARKS_ALGORITHM
 
 #if NETCOREAPP3_0_OR_GREATER
         /// <summary>
@@ -803,8 +803,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 #endif // NET5_0_OR_GREATER
 
-#endif // BENCHMARKS_RAW
-        #endregion // BENCHMARKS_RAW
+#endif // BENCHMARKS_ALGORITHM
+        #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
         /// Sum shift left logical fast - Traits static.
