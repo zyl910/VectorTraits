@@ -86,3 +86,23 @@ dotnet test VectorTraits.Tests.dll --logger:"trx;LogFileName=out.trx"
 dotnet test VectorTraits.Tests.dll --logger:"trx;LogFileName=out.trx" /Tests:InstancesTest
 sz TestResults/out.trx
 ```
+
+
+### VectorTraits.Sample (范例)
+
+Prepare (准备):
+```
+mkdir -p ~/Documents/VectorTraits/samples
+
+cd ~/Documents/VectorTraits/samples
+rm -r *
+rz
+unzip Release.zip
+
+```
+
+Run (运行):
+```
+cd ~/Documents/VectorTraits/samples
+dotnet net7.0/VectorTraits.Sample.dll
+```
