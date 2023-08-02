@@ -37,7 +37,6 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="indent">The indent.</param>
         public static void OutputEnvironment(TextWriter writer, string? indent = null) {
             TraitsOutput.OutputEnvironment(writer, indent);
-            writer.WriteLine(indent + string.Format("Vectors.Instance:\t{0}", Vectors.Instance.GetType().Name));
             writer.WriteLine(indent + string.Format("Vectors.BaseInstance:\t{0}", Vectors.BaseInstance.GetType().Name));
         }
 

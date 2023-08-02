@@ -13,7 +13,6 @@ namespace Zyl.VectorTraits.Sample {
             writer.WriteLine();
             VectorTraitsGlobal.Init(); // Initialization (初始化).
             TraitsOutput.OutputEnvironment(writer); // Output environment info (输出环境信息).
-            writer.WriteLine(string.Format("Vectors.Instance:\t{0}", Vectors.Instance.GetType().Name));
             writer.WriteLine();
 
             // -- Start --
