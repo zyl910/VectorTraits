@@ -1,14 +1,14 @@
 # Benchmark - ShiftLeft
 ([← Back](README.md))
+See [Group](ShiftLeft_Group.md)
 
 ## x86
 
 ### lntel Core i5-8250U
 `lntel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
 
-#### .NET Framework 4.5
-
-```
+#### .NET Framework 
+``` 
 VectorTraits.Benchmarks.NetFw
 benchmarkMode:	0
 
@@ -20,7 +20,7 @@ Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
 Environment.Version:	4.0.30319.42000
 Stopwatch.Frequency:	10000000
 RuntimeEnvironment.GetRuntimeDirectory:	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
-RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.4614.0
+RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9167.0
 RuntimeInformation.OSArchitecture:	X64
 RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045 
 IntPtr.Size:	8
@@ -28,7 +28,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	2130476158	# 0x7EFC7C7E
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
 Vector<T>.Assembly.CodeBase:	file:///E:/zylSelf/Code/cs/base/VectorTraits/tests/VectorTraits.Benchmarks.NetFw/bin/Release/System.Numerics.Vectors.DLL
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 1.1
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Framework 4.5
@@ -40,61 +40,61 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	228
-SumSLLScalar	430.784	608.527
-SumSLL_Base	50.039	5238.835	8.609041
-SumSLL_Base_Core	9.106	28787.358	47.306614
-SumSLL_Multiply	42.187	6213.845	10.211287
-SumSLLTraits	37.169	7052.690	11.589771
-SumSLLTraits_Core	7.962	32924.090	54.104556
-SumSLLConstTraits	26.964	9721.913	15.976137
-SumSLLConstTraits_Core	8.968	29230.154	48.034266
-SumSLLFast_Multiply	24.462	10716.316	17.610252
-SumSLLFastTraits	24.959	10502.998	17.259704
+SumSLLScalar	372.899	702.989
+SumSLL_Basic	41.019	6390.804	9.090897
+SumSLL_Base_Core	8.493	30865.116	43.905524
+SumSLL_Multiply	37.827	6930.163	9.858134
+SumSLLTraits	38.330	6839.084	9.728573
+SumSLLTraits_Core	9.521	27532.274	39.164567
+SumSLLConstTraits	30.137	8698.413	12.373463
+SumSLLConstTraits_Core	8.601	30479.708	43.357282
+SumSLLFast_Multiply	28.182	9301.726	13.231673
+SumSLLFastTraits	29.216	8972.513	12.763370
 
 [ShiftLeftConstBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	16308
-SumSLLScalar	332.314	788.844
-SumSLL_Base	54.976	4768.343	6.044720
-SumSLL_Base_Core	14.127	18556.219	23.523299
-SumSLL_Base_Core_Element	54.618	4799.554	6.084286
-SumSLL_Base_Core_Mov	55.775	4699.988	5.958069
-SumSLL_Multiply	51.453	5094.790	6.458551
-SumSLLTraits	52.967	4949.226	6.274022
-SumSLLTraits_Core	14.180	18486.944	23.435482
-SumSLLConstTraits	48.019	5459.134	6.920421
-SumSLLConstTraits_Core	13.469	19462.218	24.671814
-SumSLLFast_Multiply	48.155	5443.719	6.900880
-SumSLLFastTraits	45.855	5716.779	7.247031
+SumSLLScalar	380.602	688.762
+SumSLL_Basic	60.457	4336.013	6.295375
+SumSLL_Base_Core	16.336	16046.658	23.297836
+SumSLL_Base_Core_Element	62.717	4179.765	6.068521
+SumSLL_Base_Core_Mov	66.761	3926.580	5.700926
+SumSLL_Multiply	61.131	4288.238	6.226011
+SumSLLTraits	61.024	4295.741	6.236905
+SumSLLTraits_Core	16.598	15793.797	22.930712
+SumSLLConstTraits	54.060	4849.121	7.040346
+SumSLLConstTraits_Core	15.496	16917.224	24.561793
+SumSLLFast_Multiply	56.701	4623.241	6.712396
+SumSLLFastTraits	55.090	4758.473	6.908736
 
 [ShiftLeftConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-935510092
-SumSLLScalar	323.849	809.465
-SumSLL_Base	104.100	2518.183	3.110923
-SumSLL_Base_Core	30.211	8677.162	10.719629
-SumSLL_Multiply	104.224	2515.195	3.107232
-SumSLLTraits	104.130	2517.480	3.110055
-SumSLLTraits_Core	33.154	7906.848	9.767996
-SumSLLConstTraits	80.057	3274.477	4.045238
-SumSLLConstTraits_Core	30.379	8629.134	10.660297
-SumSLLFast_Multiply	89.024	2944.630	3.637749
-SumSLLFastTraits	92.468	2834.964	3.502270
+SumSLLScalar	374.283	700.389
+SumSLL_Basic	127.566	2054.961	2.934029
+SumSLL_Base_Core	36.678	7147.102	10.204475
+SumSLL_Multiply	119.288	2197.576	3.137651
+SumSLLTraits	114.445	2290.570	3.270426
+SumSLLTraits_Core	42.450	6175.384	8.817077
+SumSLLConstTraits	105.884	2475.758	3.534834
+SumSLLConstTraits_Core	35.724	7337.960	10.476979
+SumSLLFast_Multiply	110.352	2375.530	3.391730
+SumSLLFastTraits	114.396	2291.540	3.271811
 
 [ShiftLeftConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-6625999546565534712
-SumSLLScalar	328.407	798.230
-SumSLL_Base	568.111	461.431	0.578068
-SumSLL_Base_Core	597.501	438.734	0.549634
-SumSLLTraits	565.323	463.706	0.580918
-SumSLLTraits_Core	565.894	463.239	0.580332
-SumSLLConstTraits	490.481	534.463	0.669561
-SumSLLConstTraits_Core	489.046	536.031	0.671524
-SumSLLFastTraits	531.807	492.931	0.617530
+SumSLLScalar	381.512	687.118
+SumSLL_Basic	692.157	378.735	0.551193
+SumSLL_Base_Core	698.028	375.550	0.546558
+SumSLLTraits	692.212	378.705	0.551149
+SumSLLTraits_Core	730.824	358.696	0.522030
+SumSLLConstTraits	602.244	435.279	0.633485
+SumSLLConstTraits_Core	611.967	428.363	0.623420
+SumSLLFastTraits	640.360	409.370	0.595778
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -102,11 +102,11 @@ VectorTraits128AdvSimd: Vector128 type is not supported! Requires hardware suppo
 VectorTraits128AdvSimdB64: Vector128 type is not supported! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
 VectorTraits256Base: OK.
 VectorTraits256Avx2: Vector256 type is not supported! Requires hardware support Avx, Avx2!
-```
 
-#### .NET Core 2.1
+``` 
 
-```
+#### .NET Core 2.1 
+``` 
 VectorTraits.Benchmarks.NetCore
 benchmarkMode:	0
 
@@ -126,7 +126,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	2130476158	# 0x7EFC7C7E
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/2.1.30/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 2.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 2.1
@@ -138,61 +138,61 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	228
-SumSLLScalar	309.985	845.666
-SumSLL_Base	34.863	7519.195	8.891444
-SumSLL_Base_Core	6.684	39217.139	46.374244
-SumSLL_Multiply	33.919	7728.507	9.138955
-SumSLLTraits	34.403	7619.821	9.010433
-SumSLLTraits_Core	7.008	37404.448	44.230737
-SumSLLConstTraits	24.612	10651.236	12.595081
-SumSLLConstTraits_Core	8.069	32487.018	38.415879
-SumSLLFast_Multiply	23.166	11316.050	13.381223
-SumSLLFastTraits	23.284	11258.499	13.313168
+SumSLLScalar	370.477	707.586
+SumSLL_Basic	39.573	6624.372	9.361935
+SumSLL_Base_Core	8.671	30231.303	42.724576
+SumSLL_Multiply	36.979	7088.927	10.018470
+SumSLLTraits	37.312	7025.806	9.929263
+SumSLLTraits_Core	9.771	26828.943	37.916170
+SumSLLConstTraits	29.315	8942.308	12.637772
+SumSLLConstTraits_Core	8.932	29350.310	41.479507
+SumSLLFast_Multiply	30.215	8676.092	12.261541
+SumSLLFastTraits	29.198	8978.044	12.688276
 
 [ShiftLeftConstBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	16308
-SumSLLScalar	315.309	831.388
-SumSLL_Base	48.738	5378.595	6.469414
-SumSLL_Base_Core	12.658	20710.562	24.910818
-SumSLL_Base_Core_Element	54.970	4768.884	5.736049
-SumSLL_Base_Core_Mov	56.003	4680.910	5.630234
-SumSLL_Multiply	52.975	4948.423	5.952000
-SumSLLTraits	51.167	5123.305	6.162349
-SumSLLTraits_Core	13.686	19154.325	23.038965
-SumSLLConstTraits	44.756	5857.152	7.045026
-SumSLLConstTraits_Core	14.004	18719.634	22.516115
-SumSLLFast_Multiply	47.038	5572.996	6.703241
-SumSLLFastTraits	46.735	5609.164	6.746744
+SumSLLScalar	384.441	681.884
+SumSLL_Basic	58.926	4448.691	6.524120
+SumSLL_Base_Core	16.330	16052.598	23.541552
+SumSLL_Base_Core_Element	64.655	4054.507	5.946040
+SumSLL_Base_Core_Mov	66.708	3929.746	5.763075
+SumSLL_Multiply	59.974	4370.965	6.410134
+SumSLLTraits	59.176	4429.872	6.496523
+SumSLLTraits_Core	15.780	16612.726	24.362994
+SumSLLConstTraits	53.864	4866.811	7.137304
+SumSLLConstTraits_Core	16.935	15479.262	22.700739
+SumSLLFast_Multiply	53.902	4863.332	7.132203
+SumSLLFastTraits	53.388	4910.179	7.200905
 
 [ShiftLeftConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-935510092
-SumSLLScalar	328.781	797.321
-SumSLL_Base	106.090	2470.949	3.099063
-SumSLL_Base_Core	31.547	8309.729	10.422058
-SumSLL_Multiply	99.725	2628.665	3.296870
-SumSLLTraits	99.315	2639.512	3.310475
-SumSLLTraits_Core	30.768	8520.035	10.685823
-SumSLLConstTraits	92.515	2833.541	3.553825
-SumSLLConstTraits_Core	33.244	7885.350	9.889802
-SumSLLFast_Multiply	90.255	2904.493	3.642814
-SumSLLFastTraits	91.763	2856.755	3.582940
+SumSLLScalar	372.643	703.471
+SumSLL_Basic	124.936	2098.220	2.982666
+SumSLL_Base_Core	36.307	7220.161	10.263617
+SumSLL_Multiply	116.616	2247.924	3.195472
+SumSLLTraits	119.617	2191.532	3.115311
+SumSLLTraits_Core	39.087	6706.747	9.533788
+SumSLLConstTraits	101.881	2573.044	3.657639
+SumSLLConstTraits_Core	36.520	7178.159	10.203910
+SumSLLFast_Multiply	108.570	2414.508	3.432276
+SumSLLFastTraits	103.115	2542.243	3.613855
 
 [ShiftLeftConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-6625999546565534712
-SumSLLScalar	325.495	805.369
-SumSLL_Base	590.817	443.698	0.550925
-SumSLL_Base_Core	597.971	438.390	0.544333
-SumSLLTraits	588.985	445.078	0.552638
-SumSLLTraits_Core	562.738	465.837	0.578414
-SumSLLConstTraits	488.275	536.878	0.666623
-SumSLLConstTraits_Core	485.381	540.079	0.670598
-SumSLLFastTraits	528.031	496.456	0.616433
+SumSLLScalar	381.869	686.477
+SumSLL_Basic	673.475	389.241	0.567013
+SumSLL_Base_Core	734.372	356.963	0.519993
+SumSLLTraits	662.258	395.834	0.576616
+SumSLLTraits_Core	670.001	391.259	0.569952
+SumSLLConstTraits	549.245	477.280	0.695261
+SumSLLConstTraits_Core	554.240	472.980	0.688996
+SumSLLFastTraits	881.133	297.508	0.433384
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -200,11 +200,11 @@ VectorTraits128AdvSimd: Vector128 type is not supported! Requires hardware suppo
 VectorTraits128AdvSimdB64: Vector128 type is not supported! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
 VectorTraits256Base: OK.
 VectorTraits256Avx2: Vector256 type is not supported! Requires hardware support Avx, Avx2!
-```
 
-#### .NET Core 3.1
+``` 
 
-```
+#### .NET Core 3.1 
+``` 
 VectorTraits.Benchmarks
 benchmarkMode:	0
 
@@ -224,7 +224,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
@@ -236,69 +236,69 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	228
-SumSLLScalar	240.966	1087.888
-SumSLL_Base	19.361	13539.759	12.445914
-SumSLL_Base_Core	6.247	41965.307	38.575028
-SumSLL_Multiply	19.802	13238.233	12.168747
-SumSLL_Avx2	14.377	18233.938	16.760861
-SumSLLTraits	14.446	18146.133	16.680149
-SumSLLTraits_Core	7.403	35411.731	32.550900
-SumSLLConstTraits	11.241	23320.937	21.436893
-SumSLLConstTraits_Core	6.518	40220.438	36.971123
-SumSLLFast_Multiply	11.251	23298.649	21.416406
-SumSLLFast_Avx2	10.473	25029.443	23.007373
-SumSLLFastTraits	10.679	24548.515	22.565298
+SumSLLScalar	287.125	912.995
+SumSLL_Basic	20.632	12705.510	13.916292
+SumSLL_Base_Core	7.597	34508.336	37.796836
+SumSLL_Multiply	20.370	12869.416	14.095818
+SumSLL_Avx2	14.443	18150.707	19.880393
+SumSLLTraits	15.861	16527.720	18.102742
+SumSLLTraits_Core	7.708	34009.630	37.250605
+SumSLLConstTraits	12.708	20628.738	22.594571
+SumSLLConstTraits_Core	7.793	33637.813	36.843356
+SumSLLFast_Multiply	12.373	21185.978	23.204913
+SumSLLFast_Avx2	12.037	21778.525	23.853928
+SumSLLFastTraits	12.429	21090.553	23.100394
 
 [ShiftLeftConstBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	16308
-SumSLLScalar	227.399	1152.796
-SumSLL_Base	24.016	10915.508	9.468728
-SumSLL_Base_Core	14.546	18021.387	15.632769
-SumSLL_Base_Core_Element	26.452	9910.059	8.596544
-SumSLL_Base_Core_Mov	26.134	10030.642	8.701145
-SumSLL_Multiply	24.253	10808.887	9.376238
-SumSLL_Avx2	16.523	15865.345	13.762496
-SumSLLTraits	16.480	15907.088	13.798706
-SumSLLTraits_Core	13.719	19107.888	16.575261
-SumSLLConstTraits	15.940	16445.249	14.265537
-SumSLLConstTraits_Core	14.856	17645.864	15.307018
-SumSLLFast_Multiply	18.259	14356.763	12.453867
-SumSLLFast_Avx2	15.030	17441.704	15.129919
-SumSLLFastTraits	16.304	16078.972	13.947808
+SumSLLScalar	267.722	979.166
+SumSLL_Basic	28.472	9206.985	9.402886
+SumSLL_Base_Core	17.860	14677.376	14.989673
+SumSLL_Base_Core_Element	31.831	8235.392	8.410620
+SumSLL_Base_Core_Mov	29.637	8845.021	9.033221
+SumSLL_Multiply	27.684	9469.301	9.670783
+SumSLL_Avx2	18.445	14212.252	14.514652
+SumSLLTraits	18.927	13850.121	14.144816
+SumSLLTraits_Core	18.572	14115.234	14.415569
+SumSLLConstTraits	18.346	14288.791	14.592820
+SumSLLConstTraits_Core	15.505	16907.403	17.267149
+SumSLLFast_Multiply	21.253	12334.222	12.596662
+SumSLLFast_Avx2	17.730	14785.540	15.100138
+SumSLLFastTraits	18.522	14152.985	14.454124
 
 [ShiftLeftConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-935510092
-SumSLLScalar	211.907	1237.069
-SumSLL_Base	46.410	5648.392	4.565946
-SumSLL_Base_Core	32.103	8165.823	6.600943
-SumSLL_Multiply	46.631	5621.619	4.544304
-SumSLL_Avx2	32.991	7945.817	6.423098
-SumSLLTraits	32.490	8068.411	6.522198
-SumSLLTraits_Core	26.963	9722.438	7.859251
-SumSLLConstTraits	32.710	8014.096	6.478292
-SumSLLConstTraits_Core	27.714	9459.045	7.646334
-SumSLLFast_Multiply	35.002	7489.353	6.054110
-SumSLLFast_Avx2	30.826	8503.927	6.874253
-SumSLLFastTraits	30.145	8696.035	7.029546
+SumSLLScalar	241.501	1085.480
+SumSLL_Basic	52.096	5031.961	4.635703
+SumSLL_Base_Core	35.916	7298.794	6.724026
+SumSLL_Multiply	52.819	4963.079	4.572245
+SumSLL_Avx2	42.543	6161.886	5.676647
+SumSLLTraits	36.408	7200.099	6.633103
+SumSLLTraits_Core	31.810	8240.907	7.591949
+SumSLLConstTraits	37.108	7064.383	6.508074
+SumSLLConstTraits_Core	30.620	8561.253	7.887068
+SumSLLFast_Multiply	39.591	6621.280	6.099865
+SumSLLFast_Avx2	36.182	7245.150	6.674606
+SumSLLFastTraits	35.771	7328.439	6.751336
 
 [ShiftLeftConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-6625999546565534712
-SumSLLScalar	213.633	1227.075
-SumSLL_Base	558.788	469.129	0.382315
-SumSLL_Base_Core	552.077	474.832	0.386963
-SumSLL_Avx2	66.236	3957.699	3.225310
-SumSLLTraits	77.129	3398.794	2.769833
-SumSLLTraits_Core	54.569	4803.934	3.914946
-SumSLLConstTraits	67.625	3876.425	3.159077
-SumSLLConstTraits_Core	55.135	4754.545	3.874697
-SumSLLFast_Avx2	65.176	4022.123	3.277812
-SumSLLFastTraits	61.367	4271.717	3.481218
+SumSLLScalar	241.928	1083.563
+SumSLL_Basic	642.912	407.745	0.376300
+SumSLL_Base_Core	639.137	410.153	0.378522
+SumSLL_Avx2	75.403	3476.589	3.208479
+SumSLLTraits	76.968	3405.878	3.143222
+SumSLLTraits_Core	63.344	4138.440	3.819290
+SumSLLConstTraits	75.787	3458.963	3.192213
+SumSLLConstTraits_Core	65.171	4022.378	3.712178
+SumSLLFast_Avx2	73.516	3565.830	3.290838
+SumSLLFastTraits	71.667	3657.788	3.375705
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -306,11 +306,11 @@ VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mism
 VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
 VectorTraits256Base: OK.
 VectorTraits256Avx2: OK.
-```
 
-#### .NET 5
+``` 
 
-```
+#### .NET 5.0 
+``` 
 VectorTraits.Benchmarks
 benchmarkMode:	0
 
@@ -331,7 +331,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
@@ -343,77 +343,77 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	228
-SumSLLScalar	241.172	1086.961
-SumSLL_Base	19.517	13431.606	12.357029
-SumSLL_Base_Core	6.744	38869.564	35.759858
-SumSLL_Multiply	19.286	13592.747	12.505278
+SumSLLScalar	273.500	958.479
+SumSLL_Basic	21.467	12211.638	12.740644
+SumSLL_Base_Core	8.578	30559.773	31.883617
+SumSLL_Multiply	21.877	11982.441	12.501518
 SumSLL_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLL_Avx2	14.228	18425.067	16.950995
-SumSLLTraits	14.149	18527.322	17.045069
-SumSLLTraits_Core	7.139	36720.345	33.782585
-SumSLLConstTraits	8.374	31304.742	28.800250
-SumSLLConstTraits_Core	7.280	36007.071	33.126376
-SumSLLFast_Multiply	10.714	24467.007	22.509558
+SumSLL_Avx2	16.396	15988.311	16.680922
+SumSLLTraits	14.631	17917.063	18.693227
+SumSLLTraits_Core	8.406	31183.779	32.534654
+SumSLLConstTraits	10.394	25220.267	26.312804
+SumSLLConstTraits_Core	8.662	30264.244	31.575285
+SumSLLFast_Multiply	12.857	20389.800	21.273083
 SumSLLFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLLFast_Avx2	8.264	31721.144	29.183338
-SumSLLFastTraits	8.259	31740.296	29.200958
+SumSLLFast_Avx2	9.824	26684.523	27.840491
+SumSLLFastTraits	9.658	27143.873	28.319741
 
 [ShiftLeftConstBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	16308
-SumSLLScalar	230.211	1138.713
-SumSLL_Base	23.871	10981.470	9.643752
-SumSLL_Base_Core	12.998	20168.185	17.711378
-SumSLL_Base_Core_Element	24.327	10776.051	9.463356
-SumSLL_Base_Core_Mov	26.588	9859.583	8.658529
-SumSLL_Multiply	23.995	10925.164	9.594305
+SumSLLScalar	269.879	971.341
+SumSLL_Basic	27.993	9364.735	9.641042
+SumSLL_Base_Core	15.166	17285.330	17.795336
+SumSLL_Base_Core_Element	28.584	9170.905	9.441493
+SumSLL_Base_Core_Mov	30.394	8624.911	8.879390
+SumSLL_Multiply	27.548	9515.880	9.796647
 SumSLL_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLL_Avx2	17.566	14923.396	13.105488
-SumSLLTraits	18.457	14203.113	12.472947
-SumSLLTraits_Core	14.466	18121.377	15.913904
-SumSLLConstTraits	15.764	16629.214	14.603510
-SumSLLConstTraits_Core	17.932	14618.766	12.837967
-SumSLLFast_Multiply	20.764	12624.897	11.086983
+SumSLL_Avx2	19.003	13795.022	14.202045
+SumSLLTraits	18.559	14125.173	14.541937
+SumSLLTraits_Core	16.178	16203.782	16.681876
+SumSLLConstTraits	18.836	13917.256	14.327886
+SumSLLConstTraits_Core	17.523	14960.127	15.401527
+SumSLLFast_Multiply	20.230	12958.415	13.340754
 SumSLLFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLLFast_Avx2	15.341	17088.104	15.006500
-SumSLLFastTraits	15.330	17099.815	15.016784
+SumSLLFast_Avx2	15.732	16663.593	17.155254
+SumSLLFastTraits	17.142	15292.245	15.743444
 
 [ShiftLeftConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-935510092
-SumSLLScalar	216.296	1211.966
-SumSLL_Base	49.676	5277.124	4.354184
-SumSLL_Base_Core	30.910	8480.747	6.997511
-SumSLL_Multiply	46.898	5589.639	4.612042
+SumSLLScalar	233.167	1124.277
+SumSLL_Basic	53.233	4924.451	4.380106
+SumSLL_Base_Core	35.263	7433.905	6.612167
+SumSLL_Multiply	52.788	4965.937	4.417006
 SumSLL_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLL_Avx2	32.964	7952.425	6.561590
-SumSLLTraits	33.435	7840.509	6.469248
-SumSLLTraits_Core	25.460	10296.430	8.495641
-SumSLLConstTraits	28.869	9080.604	7.492457
-SumSLLConstTraits_Core	28.525	9190.098	7.582800
-SumSLLFast_Multiply	34.435	7612.690	6.281273
+SumSLL_Avx2	37.460	6998.017	6.224462
+SumSLLTraits	37.499	6990.621	6.217884
+SumSLLTraits_Core	29.564	8866.891	7.886752
+SumSLLConstTraits	33.952	7720.911	6.867448
+SumSLLConstTraits_Core	29.895	8768.824	7.799526
+SumSLLFast_Multiply	39.380	6656.762	5.920929
 SumSLLFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLLFast_Avx2	28.073	9338.049	7.704876
-SumSLLFastTraits	33.062	7928.938	6.542210
+SumSLLFast_Avx2	35.713	7340.360	6.528962
+SumSLLFastTraits	33.777	7760.968	6.903077
 
 [ShiftLeftConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-6625999546565534712
-SumSLLScalar	210.924	1242.834
-SumSLL_Base	586.870	446.681	0.359405
-SumSLL_Base_Core	574.653	456.178	0.367046
+SumSLLScalar	240.371	1090.582
+SumSLL_Basic	695.141	377.109	0.345787
+SumSLL_Base_Core	687.681	381.200	0.349538
 SumSLL_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLL_Avx2	67.409	3888.873	3.129037
-SumSLLTraits	69.057	3796.045	3.054346
-SumSLLTraits_Core	53.326	4915.842	3.955349
-SumSLLConstTraits	71.257	3678.832	2.960035
-SumSLLConstTraits_Core	59.693	4391.541	3.533489
+SumSLL_Avx2	76.025	3448.141	3.161745
+SumSLLTraits	76.867	3410.351	3.127093
+SumSLLTraits_Core	59.211	4427.322	4.059597
+SumSLLConstTraits	79.111	3313.622	3.038399
+SumSLLConstTraits_Core	60.252	4350.820	3.989449
 SumSLLFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLLFast_Avx2	62.869	4169.674	3.354973
-SumSLLFastTraits	66.292	3954.382	3.181746
+SumSLLFast_Avx2	69.597	3766.616	3.453768
+SumSLLFastTraits	71.147	3684.556	3.378524
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -421,11 +421,11 @@ VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mism
 VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
 VectorTraits256Base: OK.
 VectorTraits256Avx2: OK.
-```
 
-#### .NET 6
+``` 
 
-```
+#### .NET 6.0 
+``` 
 VectorTraits.Benchmarks
 benchmarkMode:	0
 
@@ -446,7 +446,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.14/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
@@ -458,77 +458,77 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	228
-SumSLLScalar	196.075	1336.955
-SumSLL_Base	17.877	14663.997	10.968209
-SumSLL_Base_Core	7.002	37438.882	28.003107
-SumSLL_Multiply	18.986	13806.871	10.327105
+SumSLLScalar	222.455	1178.414
+SumSLL_Basic	20.144	13013.599	11.043319
+SumSLL_Base_Core	8.433	31084.857	26.378560
+SumSLL_Multiply	19.740	13279.775	11.269196
 SumSLL_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLL_Avx2	15.533	16876.171	12.622846
-SumSLLTraits	14.387	18221.224	13.628903
-SumSLLTraits_Core	6.977	37575.089	28.104985
-SumSLLConstTraits	6.968	37623.788	28.141410
-SumSLLConstTraits_Core	7.086	36995.256	27.671288
-SumSLLFast_Multiply	10.533	24887.788	18.615283
+SumSLL_Avx2	15.012	17462.775	14.818883
+SumSLLTraits	14.687	17849.148	15.146759
+SumSLLTraits_Core	8.501	30838.282	26.169317
+SumSLLConstTraits	7.821	33518.465	28.443716
+SumSLLConstTraits_Core	8.788	29831.199	25.314708
+SumSLLFast_Multiply	12.738	20579.514	17.463743
 SumSLLFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLLFast_Avx2	7.186	36479.940	27.285849
-SumSLLFastTraits	7.310	35860.415	26.822464
+SumSLLFast_Avx2	8.897	29464.590	25.003604
+SumSLLFastTraits	9.219	28436.339	24.131032
 
 [ShiftLeftConstBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	16308
-SumSLLScalar	195.061	1343.909
-SumSLL_Base	22.541	11629.847	8.653745
-SumSLL_Base_Core	14.675	17863.704	13.292345
-SumSLL_Base_Core_Element	22.969	11413.084	8.492452
-SumSLL_Base_Core_Mov	24.018	10914.636	8.121558
-SumSLL_Multiply	21.522	12180.226	9.063281
+SumSLLScalar	237.534	1103.607
+SumSLL_Basic	24.749	10592.035	9.597649
+SumSLL_Base_Core	15.196	17251.387	15.631816
+SumSLL_Base_Core_Element	26.185	10011.226	9.071365
+SumSLL_Base_Core_Mov	26.951	9726.792	8.813634
+SumSLL_Multiply	24.775	10580.946	9.587600
 SumSLL_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLL_Avx2	15.896	16491.161	12.271039
-SumSLLTraits	15.926	16460.562	12.248270
-SumSLLTraits_Core	13.522	19386.292	14.425299
-SumSLLConstTraits	13.662	19187.357	14.277272
-SumSLLConstTraits_Core	12.802	20476.171	15.236276
-SumSLLFast_Multiply	15.223	17219.828	12.813239
+SumSLL_Avx2	19.145	13692.307	12.406865
+SumSLLTraits	17.966	14591.112	13.221289
+SumSLLTraits_Core	16.482	15904.696	14.411553
+SumSLLConstTraits	14.787	17727.500	16.063231
+SumSLLConstTraits_Core	14.772	17746.234	16.080207
+SumSLLFast_Multiply	17.676	14830.091	13.437832
 SumSLLFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLLFast_Avx2	13.305	19702.397	14.660513
-SumSLLFastTraits	14.917	17572.965	13.076007
+SumSLLFast_Avx2	18.818	13930.337	12.622549
+SumSLLFastTraits	17.483	14994.523	13.586828
 
 [ShiftLeftConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-935510092
-SumSLLScalar	126.649	2069.853
-SumSLL_Base	47.857	5477.626	2.646384
-SumSLL_Base_Core	32.953	7954.988	3.843262
-SumSLL_Multiply	56.458	4643.128	2.243216
+SumSLLScalar	140.809	1861.695
+SumSLL_Basic	52.766	4968.010	2.668542
+SumSLL_Base_Core	36.062	7269.351	3.904695
+SumSLL_Multiply	51.440	5096.160	2.737377
 SumSLL_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLL_Avx2	56.929	4604.778	2.224689
-SumSLLTraits	48.233	5434.901	2.625743
-SumSLLTraits_Core	38.860	6745.862	3.259102
-SumSLLConstTraits	27.116	9667.497	4.670620
-SumSLLConstTraits_Core	27.365	9579.479	4.628097
-SumSLLFast_Multiply	35.816	7319.087	3.536042
+SumSLL_Avx2	36.922	7099.849	3.813648
+SumSLLTraits	37.627	6966.909	3.742240
+SumSLLTraits_Core	29.857	8779.970	4.716117
+SumSLLConstTraits	31.463	8331.775	4.475371
+SumSLLConstTraits_Core	29.996	8739.208	4.694221
+SumSLLFast_Multiply	42.240	6206.111	3.333581
 SumSLLFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLLFast_Avx2	30.299	8651.773	4.179898
-SumSLLFastTraits	35.567	7370.478	3.560871
+SumSLLFast_Avx2	36.240	7233.623	3.885504
+SumSLLFastTraits	34.072	7693.780	4.132675
 
 [ShiftLeftConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-6625999546565534712
-SumSLLScalar	142.880	1834.713
-SumSLL_Base	594.915	440.641	0.240169
-SumSLL_Base_Core	571.314	458.844	0.250090
+SumSLLScalar	151.103	1734.873
+SumSLL_Basic	628.820	416.882	0.240296
+SumSLL_Base_Core	641.291	408.775	0.235623
 SumSLL_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLL_Avx2	69.140	3791.485	2.066527
-SumSLLTraits	82.102	3192.922	1.740284
-SumSLLTraits_Core	66.351	3950.854	2.153391
-SumSLLConstTraits	86.759	3021.524	1.646865
-SumSLLConstTraits_Core	82.185	3189.686	1.738520
+SumSLL_Avx2	79.959	3278.499	1.889763
+SumSLLTraits	76.421	3430.241	1.977229
+SumSLLTraits_Core	59.837	4380.972	2.525241
+SumSLLConstTraits	62.695	4181.281	2.410137
+SumSLLConstTraits_Core	64.281	4078.089	2.350655
 SumSLLFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLLFast_Avx2	79.196	3310.065	1.804132
-SumSLLFastTraits	71.395	3671.750	2.001267
+SumSLLFast_Avx2	71.089	3687.528	2.125532
+SumSLLFastTraits	69.151	3790.882	2.185106
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -536,11 +536,11 @@ VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mism
 VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
 VectorTraits256Base: OK.
 VectorTraits256Avx2: OK.
-```
 
-#### .NET 7
+``` 
 
-```
+#### .NET 7.0 
+``` 
 VectorTraits.Benchmarks
 benchmarkMode:	0
 
@@ -561,7 +561,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.3/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
@@ -573,85 +573,85 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	228
-SumSLLScalar	172.905	1516.120
-SumSLLNetBcl	229.779	1140.850	0.752480
-SumSLLNetBcl_Const	230.237	1138.585	0.750986
-SumSLL_Base	14.567	17995.462	11.869417
-SumSLL_Base_Core	14.261	18381.409	12.123980
-SumSLL_Multiply	14.199	18461.514	12.176815
+SumSLLScalar	204.016	1284.920
+SumSLLNetBcl	265.618	986.920	0.768079
+SumSLLNetBcl_Const	264.400	991.468	0.771618
+SumSLL_Basic	16.054	16328.607	12.707876
+SumSLL_Base_Core	16.369	16014.270	12.463241
+SumSLL_Multiply	16.617	15775.508	12.277423
 SumSLL_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLL_Avx2	13.403	19559.243	12.900854
-SumSLLTraits	13.074	20051.145	13.225301
-SumSLLTraits_Core	6.955	37690.917	24.860113
-SumSLLConstTraits	6.999	37456.235	24.705322
-SumSLLConstTraits_Core	6.514	40241.337	26.542315
-SumSLLFast_Multiply	7.789	33653.719	22.197265
+SumSLL_Avx2	13.051	20086.875	15.632781
+SumSLLTraits	12.881	20350.851	15.838222
+SumSLLTraits_Core	8.444	31044.717	24.160814
+SumSLLConstTraits	8.544	30680.398	23.877279
+SumSLLConstTraits_Core	8.103	32350.096	25.176737
+SumSLLFast_Multiply	9.774	26821.848	20.874330
 SumSLLFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLLFast_Avx2	7.223	36290.701	23.936561
-SumSLLFastTraits	7.259	36113.165	23.819462
+SumSLLFast_Avx2	8.383	31272.106	24.337781
+SumSLLFastTraits	8.358	31363.732	24.409090
 
 [ShiftLeftConstBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	16308
-SumSLLScalar	170.880	1534.085
-SumSLLNetBcl	14.299	18333.553	11.950805
-SumSLLNetBcl_Const	12.425	21098.350	13.753050
-SumSLL_Base	13.989	18738.895	12.215029
-SumSLL_Base_Core	14.249	18397.967	11.992793
-SumSLL_Base_Core_Element	17.194	15245.969	9.938150
-SumSLL_Base_Core_Mov	15.579	16826.695	10.968553
-SumSLL_Multiply	18.497	14172.039	9.238104
+SumSLLScalar	202.650	1293.578
+SumSLLNetBcl	16.800	15603.602	12.062356
+SumSLLNetBcl_Const	15.684	16713.688	12.920507
+SumSLL_Basic	16.987	15431.765	11.929518
+SumSLL_Base_Core	16.477	15909.433	12.298779
+SumSLL_Base_Core_Element	19.909	13167.032	10.178767
+SumSLL_Base_Core_Mov	18.502	14168.092	10.952636
+SumSLL_Multiply	21.803	12023.373	9.294662
 SumSLL_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLL_Avx2	16.049	16333.645	10.647156
-SumSLLTraits	15.795	16596.677	10.818615
-SumSLLTraits_Core	13.396	19568.750	12.755974
-SumSLLConstTraits	12.410	21124.172	13.769882
-SumSLLConstTraits_Core	12.348	21229.410	13.838482
-SumSLLFast_Multiply	15.047	17421.918	11.356552
+SumSLL_Avx2	19.413	13503.724	10.439046
+SumSLLTraits	20.888	12550.094	9.701844
+SumSLLTraits_Core	24.777	10580.334	8.179121
+SumSLLConstTraits	18.699	14019.203	10.837537
+SumSLLConstTraits_Core	19.534	13419.777	10.374151
+SumSLLFast_Multiply	23.482	11163.718	8.630106
 SumSLLFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLLFast_Avx2	13.420	19534.252	12.733486
-SumSLLFastTraits	13.397	19567.262	12.755003
+SumSLLFast_Avx2	22.322	11743.655	9.078426
+SumSLLFastTraits	20.276	12929.051	9.994796
 
 [ShiftLeftConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-935510092
-SumSLLScalar	159.669	1641.800
-SumSLLNetBcl	25.387	10326.057	6.289475
-SumSLLNetBcl_Const	24.012	10917.113	6.649480
-SumSLL_Base	26.282	9974.238	6.075186
-SumSLL_Base_Core	28.211	9292.198	5.659764
-SumSLL_Multiply	38.362	6833.467	4.162181
+SumSLLScalar	136.478	1920.772
+SumSLLNetBcl	35.028	7483.762	3.896225
+SumSLLNetBcl_Const	35.299	7426.378	3.866350
+SumSLL_Basic	36.905	7103.115	3.698052
+SumSLL_Base_Core	35.318	7422.319	3.864237
+SumSLL_Multiply	50.900	5150.216	2.681326
 SumSLL_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLL_Avx2	31.508	8320.026	5.067626
-SumSLLTraits	30.821	8505.305	5.180477
-SumSLLTraits_Core	24.961	10501.946	6.396607
-SumSLLConstTraits	26.959	9723.702	5.922588
-SumSLLConstTraits_Core	26.560	9869.977	6.011682
-SumSLLFast_Multiply	32.573	8047.825	4.901831
+SumSLL_Avx2	42.856	6116.803	3.184554
+SumSLLTraits	38.972	6726.526	3.501990
+SumSLLTraits_Core	33.436	7840.156	4.081773
+SumSLLConstTraits	30.619	8561.389	4.457264
+SumSLLConstTraits_Core	29.862	8778.513	4.570304
+SumSLLFast_Multiply	37.386	7011.858	3.650541
 SumSLLFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLLFast_Avx2	28.348	9247.357	5.632452
-SumSLLFastTraits	28.436	9218.867	5.615099
+SumSLLFast_Avx2	33.531	7818.042	4.070259
+SumSLLFastTraits	32.766	8000.584	4.165296
 
 [ShiftLeftConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-6625999546565534712
-SumSLLScalar	162.718	1611.029
-SumSLLNetBcl	59.214	4427.098	2.747993
-SumSLLNetBcl_Const	49.791	5264.870	3.268016
-SumSLL_Base	60.266	4349.762	2.699989
-SumSLL_Base_Core	58.495	4481.441	2.781725
+SumSLLScalar	123.258	2126.795
+SumSLLNetBcl	71.499	3666.401	1.723909
+SumSLLNetBcl_Const	57.993	4520.260	2.125386
+SumSLL_Basic	68.118	3848.398	1.809482
+SumSLL_Base_Core	72.544	3613.605	1.699085
 SumSLL_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLL_Avx2	67.001	3912.523	2.428586
-SumSLLTraits	67.084	3907.670	2.425574
-SumSLLTraits_Core	58.871	4452.843	2.763974
-SumSLLConstTraits	52.827	4962.331	3.080224
-SumSLLConstTraits_Core	55.200	4749.017	2.947816
+SumSLL_Avx2	74.678	3510.332	1.650527
+SumSLLTraits	78.593	3335.470	1.568308
+SumSLLTraits_Core	62.911	4166.878	1.959229
+SumSLLConstTraits	58.850	4454.434	2.094435
+SumSLLConstTraits_Core	61.963	4230.642	1.989210
 SumSLLFast_AdvSimd	Run fail! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-SumSLLFast_Avx2	63.116	4153.395	2.578100
-SumSLLFastTraits	63.000	4161.015	2.582830
+SumSLLFast_Avx2	73.892	3547.678	1.668086
+SumSLLFastTraits	73.706	3556.618	1.672290
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
@@ -659,7 +659,9 @@ VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mism
 VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
 VectorTraits256Base: OK.
 VectorTraits256Avx2: OK.
-```
+
+``` 
+
 
 ## Arm
 
@@ -667,7 +669,6 @@ VectorTraits256Avx2: OK.
 `AWS Arm t4g.small`
 
 #### .NET Core 3.1
-
 ```
 VectorTraits.Benchmarks
 benchmarkMode:	0
@@ -676,20 +677,20 @@ IsRelease:	True
 EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.15.0.1026
-Environment.Version:	3.1.31
+Environment.OSVersion:	Unix 5.19.0.1025
+Environment.Version:	3.1.32
 Stopwatch.Frequency:	1000000000
-RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.31/
-RuntimeInformation.FrameworkDescription:	.NET Core 3.1.31
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/
+RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.15.0-1026-aws #30-Ubuntu SMP Wed Nov 23 17:01:09 UTC 2022
+RuntimeInformation.OSDescription:	Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:03 UTC 2023
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
-Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.31/System.Private.CoreLib.dll
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
 Vectors.Instance:	VectorTraits128Base
@@ -700,69 +701,69 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	228
-SumSLLScalar	429.137	610.863
-SumSLL_Base	54.902	4774.732	7.816370
-SumSLL_Base_Core	18.250	14364.000	23.514271
-SumSLL_Multiply	54.894	4775.469	7.817577
+SumSLLScalar	434.225	603.706
+SumSLL_Basic	46.428	5646.259	9.352664
+SumSLL_Base_Core	20.079	13055.629	21.625808
+SumSLL_Multiply	46.419	5647.400	9.354553
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	54.941	4771.370	7.810867
-SumSLLTraits_Core	18.247	14366.763	23.518795
-SumSLLConstTraits	26.342	9951.667	16.291159
-SumSLLConstTraits_Core	19.818	13227.483	21.653762
-SumSLLFast_Multiply	26.334	9954.744	16.296196
+SumSLLTraits	46.751	5607.205	9.287974
+SumSLLTraits_Core	19.982	13118.993	21.730766
+SumSLLConstTraits	23.387	11208.733	18.566543
+SumSLLConstTraits_Core	18.294	14329.362	23.735664
+SumSLLFast_Multiply	26.661	9832.305	16.286579
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	26.354	9946.897	16.283350
+SumSLLFastTraits	26.568	9866.766	16.343662
 
 [ShiftLeftConstBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	16308
-SumSLLScalar	432.090	606.688
-SumSLL_Base	61.897	4235.151	6.980770
-SumSLL_Base_Core	31.397	8349.374	13.762216
-SumSLL_Base_Core_Element	62.032	4225.954	6.965611
-SumSLL_Base_Core_Mov	62.479	4195.692	6.915730
-SumSLL_Multiply	62.109	4220.698	6.956948
+SumSLLScalar	434.116	603.857
+SumSLL_Basic	71.138	3685.026	6.102480
+SumSLL_Base_Core	35.637	7356.050	12.181773
+SumSLL_Base_Core_Element	70.034	3743.090	6.198635
+SumSLL_Base_Core_Mov	70.946	3694.994	6.118987
+SumSLL_Multiply	70.331	3727.278	6.172451
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	62.306	4207.387	6.935008
-SumSLLTraits_Core	33.485	7828.797	12.904153
-SumSLLConstTraits	39.984	6556.199	10.806538
-SumSLLConstTraits_Core	31.682	8274.176	13.638268
-SumSLLFast_Multiply	47.671	5499.035	9.064021
+SumSLLTraits	68.548	3824.256	6.333047
+SumSLLTraits_Core	31.474	8328.793	13.792655
+SumSLLConstTraits	37.273	7033.015	11.646819
+SumSLLConstTraits_Core	33.442	7838.663	12.980990
+SumSLLFast_Multiply	52.767	4967.933	8.227000
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	52.815	4963.440	8.181205
+SumSLLFastTraits	47.613	5505.719	9.117585
 
 [ShiftLeftConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-935510092
-SumSLLScalar	350.031	748.917
-SumSLL_Base	80.793	3244.628	4.332425
-SumSLL_Base_Core	67.246	3898.279	5.205219
-SumSLL_Multiply	80.894	3240.586	4.327027
+SumSLLScalar	351.044	746.756
+SumSLL_Basic	81.289	3224.821	4.318443
+SumSLL_Base_Core	69.338	3780.691	5.062823
+SumSLL_Multiply	91.692	2858.966	3.828516
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	80.794	3244.608	4.332397
-SumSLLTraits_Core	63.348	4138.176	5.525545
-SumSLLConstTraits	80.650	3250.374	4.340097
-SumSLLConstTraits_Core	63.291	4141.892	5.530507
-SumSLLFast_Multiply	74.793	3504.933	4.679999
+SumSLLTraits	81.338	3222.900	4.315870
+SumSLLTraits_Core	63.929	4100.563	5.491171
+SumSLLConstTraits	80.501	3256.415	4.360751
+SumSLLConstTraits_Core	64.120	4088.318	5.474773
+SumSLLFast_Multiply	75.430	3475.343	4.653923
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	80.675	3249.385	4.338776
+SumSLLFastTraits	80.570	3253.603	4.356986
 
 [ShiftLeftConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-6625999546565534712
-SumSLLScalar	354.047	740.421
-SumSLL_Base	539.364	486.024	0.656415
-SumSLL_Base_Core	1285.583	203.911	0.275398
+SumSLLScalar	353.843	740.847
+SumSLL_Basic	539.269	486.110	0.656154
+SumSLL_Base_Core	548.522	477.910	0.645085
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	539.026	486.329	0.656828
-SumSLLTraits_Core	541.766	483.869	0.653505
-SumSLLConstTraits	544.667	481.293	0.650025
-SumSLLConstTraits_Core	1263.047	207.549	0.280312
+SumSLLTraits	538.934	486.412	0.656562
+SumSLLTraits_Core	541.732	483.900	0.653171
+SumSLLConstTraits	559.295	468.705	0.632660
+SumSLLConstTraits_Core	560.575	467.634	0.631215
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	542.747	482.994	0.652324
+SumSLLFastTraits	560.615	467.601	0.631170
 
 VectorTraitsBase: OK.
 VectorTraits128Base: OK.
@@ -770,10 +771,10 @@ VectorTraits128AdvSimd: Requires hardware support AdvSimd!
 VectorTraits128AdvSimdB64: Requires hardware support AdvSimd!
 VectorTraits256Base: Vector byte size mismatch(16!=32) !
 VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+
 ```
 
-#### .NET 5
-
+#### .NET 5.0
 ```
 VectorTraits.Benchmarks
 benchmarkMode:	0
@@ -782,20 +783,20 @@ IsRelease:	True
 EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.15.0.1026
+Environment.OSVersion:	Unix 5.19.0.1025
 Environment.Version:	5.0.17
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/
 RuntimeInformation.FrameworkDescription:	.NET 5.0.17
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.15.0-1026-aws #30-Ubuntu SMP Wed Nov 23 17:01:09 UTC 2022
+RuntimeInformation.OSDescription:	Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:03 UTC 2023
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
@@ -807,77 +808,77 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	228
-SumSLLScalar	437.053	599.799
-SumSLL_Base	55.919	4687.955	7.815870
-SumSLL_Base_Core	16.897	15513.972	25.865266
-SumSLL_Multiply	55.917	4688.088	7.816092
-SumSLL_AdvSimd	20.131	13021.886	21.710400
+SumSLLScalar	429.381	610.516
+SumSLL_Basic	46.216	5672.107	9.290676
+SumSLL_Base_Core	16.610	15782.407	25.850927
+SumSLL_Multiply	46.225	5671.097	9.289021
+SumSLL_AdvSimd	19.826	13222.322	21.657614
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	20.184	12987.836	21.653632
-SumSLLTraits_Core	16.865	15543.293	25.914150
-SumSLLConstTraits	20.070	13061.278	21.776076
-SumSLLConstTraits_Core	16.860	15548.462	25.922768
-SumSLLFast_Multiply	26.748	9800.626	16.339839
-SumSLLFast_AdvSimd	16.591	15800.657	26.343234
+SumSLLTraits	19.806	13235.621	21.679398
+SumSLLTraits_Core	16.500	15887.664	26.023334
+SumSLLConstTraits	19.797	13241.436	21.688923
+SumSLLConstTraits_Core	16.502	15885.257	26.019392
+SumSLLFast_Multiply	26.346	9949.954	16.297611
+SumSLLFast_AdvSimd	16.502	15885.321	26.019498
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	16.627	15765.879	26.285251
+SumSLLFastTraits	16.501	15886.532	26.021480
 
 [ShiftLeftConstBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	16308
-SumSLLScalar	436.437	600.645
-SumSLL_Base	63.572	4123.563	6.865222
-SumSLL_Base_Core	31.840	8233.071	13.707042
-SumSLL_Base_Core_Element	62.548	4191.070	6.977612
-SumSLL_Base_Core_Mov	64.254	4079.792	6.792348
-SumSLL_Multiply	63.961	4098.510	6.823512
-SumSLL_AdvSimd	40.761	6431.296	10.707312
+SumSLLScalar	431.772	607.135
+SumSLL_Basic	61.922	4233.448	6.972827
+SumSLL_Base_Core	33.318	7867.964	12.959165
+SumSLL_Base_Core_Element	61.157	4286.400	7.060043
+SumSLL_Base_Core_Mov	66.124	3964.427	6.529727
+SumSLL_Multiply	61.357	4272.425	7.037024
+SumSLL_AdvSimd	39.915	6567.495	10.817188
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	40.173	6525.381	10.863950
-SumSLLTraits_Core	31.295	8376.673	13.946123
-SumSLLConstTraits	34.020	7705.485	12.828677
-SumSLLConstTraits_Core	31.848	8231.001	13.703597
-SumSLLFast_Multiply	53.634	4887.630	8.137298
-SumSLLFast_AdvSimd	34.127	7681.346	12.788489
+SumSLLTraits	39.951	6561.644	10.807552
+SumSLLTraits_Core	33.214	7892.546	12.999653
+SumSLLConstTraits	39.509	6635.069	10.928489
+SumSLLConstTraits_Core	33.091	7921.999	13.048164
+SumSLLFast_Multiply	47.435	5526.437	9.102483
+SumSLLFast_AdvSimd	33.346	7861.443	12.948425
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	34.190	7667.336	12.765165
+SumSLLFastTraits	33.421	7843.736	12.919259
 
 [ShiftLeftConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-935510092
-SumSLLScalar	359.031	730.143
-SumSLL_Base	83.518	3138.755	4.298821
-SumSLL_Base_Core	65.630	3994.256	5.470510
-SumSLL_Multiply	81.180	3229.158	4.422636
-SumSLL_AdvSimd	82.383	3182.017	4.358072
+SumSLLScalar	351.297	746.217
+SumSLL_Basic	81.788	3205.170	4.295225
+SumSLL_Base_Core	64.068	4091.668	5.483214
+SumSLL_Multiply	81.617	3211.895	4.304236
+SumSLL_AdvSimd	80.142	3270.976	4.383411
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	81.121	3231.508	4.425854
-SumSLLTraits_Core	64.565	4060.181	5.560800
-SumSLLConstTraits	69.485	3772.647	5.166996
-SumSLLConstTraits_Core	68.625	3819.926	5.231749
-SumSLLFast_Multiply	83.091	3154.905	4.320939
-SumSLLFast_AdvSimd	70.027	3743.489	5.127061
+SumSLLTraits	74.780	3505.532	4.697737
+SumSLLTraits_Core	63.707	4114.834	5.514259
+SumSLLConstTraits	68.153	3846.424	5.154564
+SumSLLConstTraits_Core	67.754	3869.073	5.184916
+SumSLLFast_Multiply	81.179	3229.223	4.327458
+SumSLLFast_AdvSimd	80.306	3264.295	4.374458
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	69.291	3783.260	5.181530
+SumSLLFastTraits	79.989	3277.264	4.391837
 
 [ShiftLeftConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-6625999546565534712
-SumSLLScalar	362.218	723.719
-SumSLL_Base	562.926	465.681	0.643456
-SumSLL_Base_Core	559.746	468.327	0.647111
-SumSLL_AdvSimd	181.631	1443.276	1.994249
+SumSLLScalar	352.996	742.626
+SumSLL_Basic	542.406	483.299	0.650797
+SumSLL_Base_Core	547.746	478.587	0.644452
+SumSLL_AdvSimd	160.100	1637.381	2.204854
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	182.347	1437.612	1.986424
-SumSLLTraits_Core	136.898	1914.880	2.645889
-SumSLLConstTraits	136.841	1915.689	2.647008
-SumSLLConstTraits_Core	135.553	1933.882	2.672145
-SumSLLFast_AdvSimd	137.127	1911.689	2.641481
+SumSLLTraits	160.381	1634.506	2.200982
+SumSLLTraits_Core	133.087	1969.717	2.652368
+SumSLLConstTraits	134.143	1954.213	2.631490
+SumSLLConstTraits_Core	133.005	1970.938	2.654012
+SumSLLFast_AdvSimd	134.213	1953.192	2.630116
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	137.394	1907.979	2.636354
+SumSLLFastTraits	159.386	1644.716	2.214730
 
 VectorTraitsBase: OK.
 VectorTraits128Base: OK.
@@ -885,10 +886,10 @@ VectorTraits128AdvSimd: OK.
 VectorTraits128AdvSimdB64: OK.
 VectorTraits256Base: Vector byte size mismatch(16!=32) !
 VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+
 ```
 
-#### .NET 6
-
+#### .NET 6.0
 ```
 VectorTraits.Benchmarks
 benchmarkMode:	0
@@ -897,21 +898,21 @@ IsRelease:	True
 EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.15.0.1026
-Environment.Version:	6.0.11
+Environment.OSVersion:	Unix 5.19.0.1025
+Environment.Version:	6.0.19
 Stopwatch.Frequency:	1000000000
-RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.11/
-RuntimeInformation.FrameworkDescription:	.NET 6.0.11
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/
+RuntimeInformation.FrameworkDescription:	.NET 6.0.19
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.15.0-1026-aws #30-Ubuntu SMP Wed Nov 23 17:01:09 UTC 2022
+RuntimeInformation.OSDescription:	Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:03 UTC 2023
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
-Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.11/System.Private.CoreLib.dll
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
 Vectors.Instance:	VectorTraits128AdvSimdB64
@@ -922,77 +923,77 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	228
-SumSLLScalar	421.190	622.389
-SumSLL_Base	47.554	5512.589	8.857140
-SumSLL_Base_Core	17.462	15011.845	24.119707
-SumSLL_Multiply	47.283	5544.153	8.907855
-SumSLL_AdvSimd	20.529	12769.623	20.517103
+SumSLLScalar	389.200	673.546
+SumSLL_Basic	36.869	7110.113	10.556243
+SumSLL_Base_Core	16.615	15777.964	23.425228
+SumSLL_Multiply	37.208	7045.315	10.460038
+SumSLL_AdvSimd	19.820	13226.185	19.636653
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	20.850	12572.663	20.200645
-SumSLLTraits_Core	17.374	15088.497	24.242864
-SumSLLConstTraits	17.236	15209.184	24.436773
-SumSLLConstTraits_Core	17.092	15336.977	24.642100
-SumSLLFast_Multiply	24.686	10618.987	17.061651
-SumSLLFast_AdvSimd	20.629	12707.839	20.417833
+SumSLLTraits	19.788	13247.338	19.668059
+SumSLLTraits_Core	15.417	17003.282	25.244434
+SumSLLConstTraits	15.425	16994.514	25.231415
+SumSLLConstTraits_Core	15.428	16991.730	25.227282
+SumSLLFast_Multiply	23.563	11125.190	16.517348
+SumSLLFast_AdvSimd	16.492	15895.407	23.599594
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	20.779	12615.799	20.269952
+SumSLLFastTraits	16.500	15887.817	23.588325
 
 [ShiftLeftConstBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	16308
-SumSLLScalar	453.655	577.849
-SumSLL_Base	49.098	5339.172	9.239735
-SumSLL_Base_Core	35.528	7378.550	12.768992
-SumSLL_Base_Core_Element	51.359	5104.110	8.832947
-SumSLL_Base_Core_Mov	54.134	4842.528	8.380265
-SumSLL_Multiply	49.093	5339.711	9.240667
-SumSLL_AdvSimd	41.658	6292.828	10.890089
+SumSLLScalar	431.793	607.105
+SumSLL_Basic	46.634	5621.349	9.259265
+SumSLL_Base_Core	31.458	8333.205	13.726128
+SumSLL_Base_Core_Element	52.945	4951.286	8.155563
+SumSLL_Base_Core_Mov	53.278	4920.346	8.104601
+SumSLL_Multiply	46.701	5613.295	9.245999
+SumSLL_AdvSimd	40.029	6548.788	10.786907
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	40.125	6533.258	11.306167
-SumSLLTraits_Core	32.780	7997.038	13.839321
-SumSLLConstTraits	34.992	7491.509	12.964473
-SumSLLConstTraits_Core	35.055	7478.102	12.941273
-SumSLLFast_Multiply	42.761	6130.411	10.609017
-SumSLLFast_AdvSimd	41.725	6282.634	10.872448
+SumSLLTraits	40.097	6537.762	10.768745
+SumSLLTraits_Core	33.305	7870.912	12.964657
+SumSLLConstTraits	33.214	7892.477	13.000178
+SumSLLConstTraits_Core	33.238	7886.939	12.991056
+SumSLLFast_Multiply	40.582	6459.647	10.640076
+SumSLLFast_AdvSimd	33.203	7895.085	13.004474
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	35.394	7406.469	12.817307
+SumSLLFastTraits	33.326	7866.037	12.956628
 
 [ShiftLeftConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-935510092
-SumSLLScalar	367.967	712.412
-SumSLL_Base	91.908	2852.258	4.003665
-SumSLL_Base_Core	67.148	3903.987	5.479958
-SumSLL_Multiply	91.810	2855.296	4.007929
-SumSLL_AdvSimd	85.203	3076.715	4.318731
+SumSLLScalar	350.273	748.400
+SumSLL_Basic	87.644	2991.012	3.996543
+SumSLL_Base_Core	68.038	3852.914	5.148202
+SumSLL_Multiply	87.670	2990.129	3.995362
+SumSLL_AdvSimd	74.812	3504.041	4.682044
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	85.251	3074.975	4.316289
-SumSLLTraits_Core	67.347	3892.438	5.463747
-SumSLLConstTraits	71.093	3687.346	5.175862
-SumSLLConstTraits_Core	71.229	3680.316	5.165995
-SumSLLFast_Multiply	87.016	3012.597	4.228729
-SumSLLFast_AdvSimd	71.738	3654.200	5.129336
+SumSLLTraits	80.678	3249.259	4.341607
+SumSLLTraits_Core	67.733	3870.271	5.171394
+SumSLLConstTraits	67.803	3866.282	5.166063
+SumSLLConstTraits_Core	63.853	4105.409	5.485582
+SumSLLFast_Multiply	81.810	3204.317	4.281557
+SumSLLFast_AdvSimd	64.004	4095.751	5.472677
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	85.072	3081.438	4.325360
+SumSLLFastTraits	63.849	4105.693	5.485960
 
 [ShiftLeftConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-6625999546565534712
-SumSLLScalar	374.564	699.864
-SumSLL_Base	556.493	471.064	0.673080
-SumSLL_Base_Core	570.979	459.113	0.656003
-SumSLL_AdvSimd	186.656	1404.426	2.006713
+SumSLLScalar	353.827	740.883
+SumSLL_Basic	541.742	483.891	0.653128
+SumSLL_Base_Core	541.922	483.730	0.652910
+SumSLL_AdvSimd	160.097	1637.409	2.210078
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	186.595	1404.883	2.007366
-SumSLLTraits_Core	139.989	1872.604	2.675669
-SumSLLConstTraits	167.866	1561.622	2.231323
-SumSLLConstTraits_Core	131.545	1992.805	2.847419
-SumSLLFast_AdvSimd	142.334	1841.751	2.631586
+SumSLLTraits	160.230	1636.045	2.208238
+SumSLLTraits_Core	133.049	1970.279	2.659368
+SumSLLConstTraits	133.120	1969.238	2.657962
+SumSLLConstTraits_Core	132.925	1972.121	2.661853
+SumSLLFast_AdvSimd	124.999	2097.162	2.830626
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	141.389	1854.069	2.649185
+SumSLLFastTraits	133.081	1969.802	2.658723
 
 VectorTraitsBase: OK.
 VectorTraits128Base: OK.
@@ -1000,10 +1001,10 @@ VectorTraits128AdvSimd: OK.
 VectorTraits128AdvSimdB64: OK.
 VectorTraits256Base: Vector byte size mismatch(16!=32) !
 VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+
 ```
 
-#### .NET 7
-
+#### .NET 7.0
 ```
 VectorTraits.Benchmarks
 benchmarkMode:	0
@@ -1012,21 +1013,21 @@ IsRelease:	True
 EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.15.0.1026
-Environment.Version:	7.0.1
+Environment.OSVersion:	Unix 5.19.0.1025
+Environment.Version:	7.0.8
 Stopwatch.Frequency:	1000000000
-RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.1/
-RuntimeInformation.FrameworkDescription:	.NET 7.0.1
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/
+RuntimeInformation.FrameworkDescription:	.NET 7.0.8
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.15.0-1026-aws #30-Ubuntu SMP Wed Nov 23 17:01:09 UTC 2022
+RuntimeInformation.OSDescription:	Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:03 UTC 2023
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	-2131134082	# 0x80F9797E
-Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.1/System.Private.CoreLib.dll
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
 Vectors.Instance:	VectorTraits128AdvSimdB64
@@ -1037,85 +1038,85 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	228
-SumSLLScalar	294.551	889.979
-SumSLLNetBcl	13.380	19592.428	22.014484
-SumSLLNetBcl_Const	13.391	19576.849	21.996980
-SumSLL_Base	40.607	6455.689	7.253754
-SumSLL_Base_Core	40.737	6435.025	7.230536
-SumSLL_Multiply	40.581	6459.693	7.258253
-SumSLL_AdvSimd	19.785	13249.798	14.887765
+SumSLLScalar	295.552	886.963
+SumSLLNetBcl	13.384	19586.570	22.082746
+SumSLLNetBcl_Const	13.386	19583.990	22.079836
+SumSLL_Basic	35.423	7400.491	8.343634
+SumSLL_Base_Core	35.476	7389.258	8.330969
+SumSLL_Multiply	35.426	7399.725	8.342770
+SumSLL_AdvSimd	19.809	13233.450	14.919964
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	19.792	13244.698	14.882034
-SumSLLTraits_Core	13.369	19608.046	22.032033
-SumSLLConstTraits	13.556	19337.787	21.728364
-SumSLLConstTraits_Core	13.461	19474.237	21.881682
-SumSLLFast_Multiply	23.430	11188.575	12.571729
-SumSLLFast_AdvSimd	13.414	19541.925	21.957738
+SumSLLTraits	19.818	13227.773	14.913563
+SumSLLTraits_Core	13.383	19588.388	22.084796
+SumSLLConstTraits	13.471	19460.477	21.940583
+SumSLLConstTraits_Core	13.480	19447.305	21.925732
+SumSLLFast_Multiply	22.936	11429.354	12.885948
+SumSLLFast_AdvSimd	13.365	19614.806	22.114580
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	13.495	19425.881	21.827348
+SumSLLFastTraits	13.406	19553.951	22.045970
 
 [ShiftLeftConstBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	16308
-SumSLLScalar	318.954	821.886
-SumSLLNetBcl	26.586	9860.322	11.997184
-SumSLLNetBcl_Const	26.558	9870.640	12.009738
-SumSLL_Base	26.525	9882.990	12.024765
-SumSLL_Base_Core	26.585	9860.638	11.997569
-SumSLL_Base_Core_Element	36.437	7194.392	8.753512
-SumSLL_Base_Core_Mov	33.138	7910.792	9.625165
-SumSLL_Multiply	42.893	6111.626	7.436096
-SumSLL_AdvSimd	39.634	6614.174	8.047553
+SumSLLScalar	318.968	821.851
+SumSLLNetBcl	26.532	9880.161	12.021835
+SumSLLNetBcl_Const	26.521	9884.262	12.026825
+SumSLL_Basic	26.475	9901.496	12.047794
+SumSLL_Base_Core	26.529	9881.348	12.023279
+SumSLL_Base_Core_Element	36.376	7206.607	8.768747
+SumSLL_Base_Core_Mov	33.079	7924.840	9.642669
+SumSLL_Multiply	42.799	6124.986	7.452669
+SumSLL_AdvSimd	39.596	6620.389	8.055459
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	39.637	6613.672	8.046942
-SumSLLTraits_Core	26.578	9863.062	12.000518
-SumSLLConstTraits	26.700	9818.311	11.946069
-SumSLLConstTraits_Core	26.655	9834.832	11.966170
-SumSLLFast_Multiply	35.636	7356.250	8.950447
-SumSLLFast_AdvSimd	26.607	9852.398	11.987543
+SumSLLTraits	26.519	9885.127	12.027878
+SumSLLTraits_Core	26.529	9881.255	12.023167
+SumSLLConstTraits	26.611	9850.836	11.986153
+SumSLLConstTraits_Core	26.585	9860.506	11.997920
+SumSLLFast_Multiply	37.122	7061.733	8.592470
+SumSLLFast_AdvSimd	26.580	9862.607	12.000476
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	26.539	9877.648	12.018265
+SumSLLFastTraits	26.607	9852.284	11.987915
 
 [ShiftLeftConstBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-935510092
-SumSLLScalar	186.620	1404.693
-SumSLLNetBcl	53.864	4866.808	3.464676
-SumSLLNetBcl_Const	53.782	4874.203	3.469941
-SumSLL_Base	53.835	4869.360	3.466493
-SumSLL_Base_Core	53.793	4873.204	3.469230
-SumSLL_Multiply	79.763	3286.518	2.339669
-SumSLL_AdvSimd	79.496	3297.566	2.347534
+SumSLLScalar	186.322	1406.943
+SumSLLNetBcl	53.801	4872.472	3.463162
+SumSLLNetBcl_Const	53.944	4859.541	3.453971
+SumSLL_Basic	53.911	4862.536	3.456099
+SumSLL_Base_Core	53.875	4865.826	3.458438
+SumSLL_Multiply	79.652	3291.103	2.339187
+SumSLL_AdvSimd	66.648	3933.287	2.795626
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	79.485	3298.017	2.347855
-SumSLLTraits_Core	53.800	4872.551	3.468765
-SumSLLConstTraits	54.267	4830.590	3.438893
-SumSLLConstTraits_Core	54.072	4848.092	3.451352
-SumSLLFast_Multiply	75.582	3468.322	2.469095
-SumSLLFast_AdvSimd	54.144	4841.647	3.446764
+SumSLLTraits	53.818	4870.908	3.462050
+SumSLLTraits_Core	54.320	4825.955	3.430099
+SumSLLConstTraits	54.241	4832.987	3.435097
+SumSLLConstTraits_Core	54.130	4842.866	3.442119
+SumSLLFast_Multiply	77.251	3393.409	2.411902
+SumSLLFast_AdvSimd	54.121	4843.690	3.442705
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	54.103	4845.268	3.449342
+SumSLLFastTraits	53.928	4860.993	3.455003
 
 [ShiftLeftConstBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSLLScalar	-6625999546565534712
-SumSLLScalar	191.057	1372.074
-SumSLLNetBcl	105.945	2474.334	1.803353
-SumSLLNetBcl_Const	105.998	2473.100	1.802454
-SumSLL_Base	106.413	2463.468	1.795433
-SumSLL_Base_Core	106.524	2460.884	1.793550
-SumSLL_AdvSimd	158.140	1657.667	1.208146
+SumSLLScalar	191.007	1372.433
+SumSLLNetBcl	107.093	2447.827	1.783567
+SumSLLNetBcl_Const	106.313	2465.779	1.796648
+SumSLL_Basic	106.455	2462.489	1.794251
+SumSLL_Base_Core	106.427	2463.136	1.794722
+SumSLL_AdvSimd	132.352	1980.659	1.443173
 SumSLL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLTraits	158.033	1658.788	1.208964
-SumSLLTraits_Core	106.047	2471.959	1.801622
-SumSLLConstTraits	106.678	2457.350	1.790974
-SumSLLConstTraits_Core	105.944	2474.356	1.803369
-SumSLLFast_AdvSimd	106.451	2462.569	1.794778
+SumSLLTraits	132.358	1980.563	1.443103
+SumSLLTraits_Core	106.246	2467.329	1.797777
+SumSLLConstTraits	106.464	2462.272	1.794092
+SumSLLConstTraits_Core	106.262	2466.961	1.797509
+SumSLLFast_AdvSimd	106.346	2465.009	1.796087
 SumSLLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSLLFastTraits	106.429	2463.079	1.795150
+SumSLLFastTraits	106.515	2461.104	1.793242
 
 VectorTraitsBase: OK.
 VectorTraits128Base: OK.
@@ -1123,5 +1124,6 @@ VectorTraits128AdvSimd: OK.
 VectorTraits128AdvSimdB64: OK.
 VectorTraits256Base: Vector byte size mismatch(16!=32) !
 VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+
 ```
 
