@@ -129,6 +129,7 @@ namespace Zyl.VectorTraits.Sample {
             // Show AcceleratedTypes.
             VectorTextUtil.WriteLine(writer, "ShiftLeft_AcceleratedTypes:\t{0}", Vectors.ShiftLeft_AcceleratedTypes);
             VectorTextUtil.WriteLine(writer, "Shuffle_AcceleratedTypes:\t{0}", Vectors.Shuffle_AcceleratedTypes);
+
         }
     }
 }
@@ -178,7 +179,7 @@ Shuffle_AcceleratedTypes:       SByte, Byte, Int16, UInt16, Int32, UInt32, Int64
 ```
 
 注: `Vectors.Instance` 及之前的文本, 是`TraitsOutput.OutputEnvironment`输出的环境信息. 而从 `src` 开始的, 才是主要的测试代码.
-该CPU支持X86的Avx2指令集, 于是 `Vector<byte>.Count` 为 32(256bit), `Vectors.Instance` 为 `VectorTraits256Avx2`.
+因CPU支持X86的Avx2指令集, 于是 `Vector<byte>.Count` 为 32(256bit), `Vectors.Instance` 为 `VectorTraits256Avx2`.
 
 ### Arm `.NET7.0`中的运行结果
 程序: `VectorTraits.Sample`
@@ -224,7 +225,7 @@ Shuffle_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt
 ```
 
 运算结果与X86的相同，只是环境信息不同。
-该CPU支持Arm的AdvSimd指令集, 于是 `Vector<byte>.Count` 为 16(128bit), `Vectors.Instance` 为 `VectorTraits128AdvSimdB64`.
+因CPU支持Arm的AdvSimd指令集, 于是 `Vector<byte>.Count` 为 16(128bit), `Vectors.Instance` 为 `VectorTraits128AdvSimdB64`.
 
 ### X86 `.NET Framework 4.5`中的运行结果
 程序: `VectorTraits.Sample.NetFw`.
@@ -267,10 +268,134 @@ Shuffle_AcceleratedTypes:       None    # (00000000)
 ```
 
 Vectors 的 ShiftLeft/Shuffle 都能正常工作.
-该CPU支持X86的Avx2指令集, 于是 `Vector<byte>.Count` 为 32(256bit). `Vectors.Instance` 为 `VectorTraits256Base`, 是因为 `.NET Framework` 不支持内在函数（Intrinsics Functions. 直到 `.NET Core 3.0` 才支持）.
+因CPU支持X86的Avx2指令集, 于是 `Vector<byte>.Count` 为 32(256bit). `Vectors.Instance` 为 `VectorTraits256Base`, 是因为 `.NET Framework` 不支持内在函数（Intrinsics Functions. 直到 `.NET Core 3.0` 才支持）.
 且从 ShiftLeft_AcceleratedTypes 中的“Int16”可以看出, Int16类型的ShiftLeft方法是存在硬件加速的. 本库巧妙利用了其他向量方法, 实现了ShiftLeft的硬件加速.
 
 ## 基准测试结果
+### ShiftLeft
+
+数据的单位: 百万次操作/秒. 数字越大, 性能越好.
+
+#### ShiftLeft - x86 - lntel Core i5-8250U
+| Type  | Method                 | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| :---- | :--------------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: |
+| Byte  | SumSLLScalar           |        702.989 |       707.586 |       912.995 |   958.479 |  1178.414 |  1284.920 |
+| Byte  | SumSLLNetBcl           |                |               |               |           |           |   986.920 |
+| Byte  | SumSLLNetBcl_Const     |                |               |               |           |           |   991.468 |
+| Byte  | SumSLLTraits           |       6839.084 |      7025.806 |     16527.720 | 17917.063 | 17849.148 | 20350.851 |
+| Byte  | SumSLLTraits_Core      |      27532.274 |     26828.943 |     34009.630 | 31183.779 | 30838.282 | 31044.717 |
+| Byte  | SumSLLConstTraits      |       8698.413 |      8942.308 |     20628.738 | 25220.267 | 33518.465 | 30680.398 |
+| Byte  | SumSLLConstTraits_Core |      30479.708 |     29350.310 |     33637.813 | 30264.244 | 29831.199 | 32350.096 |
+| Int16 | SumSLLScalar           |        688.762 |       681.884 |       979.166 |   971.341 |  1103.607 |  1293.578 |
+| Int16 | SumSLLNetBcl           |                |               |               |           |           | 15603.602 |
+| Int16 | SumSLLNetBcl_Const     |                |               |               |           |           | 16713.688 |
+| Int16 | SumSLLTraits           |       4295.741 |      4429.872 |     13850.121 | 14125.173 | 14591.112 | 12550.094 |
+| Int16 | SumSLLTraits_Core      |      15793.797 |     16612.726 |     14115.234 | 16203.782 | 15904.696 | 10580.334 |
+| Int16 | SumSLLConstTraits      |       4849.121 |      4866.811 |     14288.791 | 13917.256 | 17727.500 | 14019.203 |
+| Int16 | SumSLLConstTraits_Core |      16917.224 |     15479.262 |     16907.403 | 14960.127 | 17746.234 | 13419.777 |
+| Int32 | SumSLLScalar           |        700.389 |       703.471 |      1085.480 |  1124.277 |  1861.695 |  1920.772 |
+| Int32 | SumSLLNetBcl           |                |               |               |           |           |  7483.762 |
+| Int32 | SumSLLNetBcl_Const     |                |               |               |           |           |  7426.378 |
+| Int32 | SumSLLTraits           |       2290.570 |      2191.532 |      7200.099 |  6990.621 |  6966.909 |  6726.526 |
+| Int32 | SumSLLTraits_Core      |       6175.384 |      6706.747 |      8240.907 |  8866.891 |  8779.970 |  7840.156 |
+| Int32 | SumSLLConstTraits      |       2475.758 |      2573.044 |      7064.383 |  7720.911 |  8331.775 |  8561.389 |
+| Int32 | SumSLLConstTraits_Core |       7337.960 |      7178.159 |      8561.253 |  8768.824 |  8739.208 |  8778.513 |
+| Int64 | SumSLLScalar           |        687.118 |       686.477 |      1083.563 |  1090.582 |  1734.873 |  2126.795 |
+| Int64 | SumSLLNetBcl           |                |               |               |           |           |  3666.401 |
+| Int64 | SumSLLNetBcl_Const     |                |               |               |           |           |  4520.260 |
+| Int64 | SumSLLTraits           |        378.705 |       395.834 |      3405.878 |  3410.351 |  3430.241 |  3335.470 |
+| Int64 | SumSLLTraits_Core      |        358.696 |       391.259 |      4138.440 |  4427.322 |  4380.972 |  4166.878 |
+| Int64 | SumSLLConstTraits      |        435.279 |       477.280 |      3458.963 |  3313.622 |  4181.281 |  4454.434 |
+| Int64 | SumSLLConstTraits_Core |        428.363 |       472.980 |      4022.378 |  4350.820 |  4078.089 |  4230.642 |
+
+说明:
+- SumSLLScalar: 使用标量算法.
+- SumSLLNetBcl: 使用BCL的方法(`Vector.ShiftLeft`), 参数是变量. 注意 `.NET 7.0` 才提供该方法.
+- SumSLLNetBcl_Const: 使用BCL的方法(`Vector.ShiftLeft`), 参数是常量. 注意 `.NET 7.0` 才提供该方法.
+- SumSLLTraits: 使用本库的普通方法(`Vectors.ShiftLeft`), 参数是变量.
+- SumSLLTraits_Core: 使用本库的 `Core` 后缀的方法(`Vectors.ShiftLeft_Args`, `Vectors.ShiftLeft_Core`), 参数是变量.
+- SumSLLConstTraits: 使用本库的 `Const` 后缀的方法(`Vectors.ShiftLeft_Const`), 参数是常量.
+- SumSLLConstTraits_Core: 使用本库的 `ConstCore` 后缀的方法(`Vectors.ShiftLeft_Args`, `Vectors.ShiftLeft_ConstCore`), 参数是常量.
+
+BCL的方法(`Vector.ShiftLeft`) 在X86平台运行时, 仅 Int16/Int32/Int64 有硬件加速, 而 Byte 没有硬件加速. 这是可能是因为 Avx2 指令集仅有 16~64位 的左移位指令, 不支持Byte这样的8位整数, BCL的方法便转为软件算法了.
+而本库对于这种情况, 会换成由其他指令组合实现的高效算法. 例如对于 Byte类型, SumSLLConstTraits_Core 在`.NET 7.0`的值为“32350.096”, 性能是 标量算法的 `32350.096/1284.920≈25.1767` 倍, 且是BCL方法的 `32350.096/991.468≈32.6285` 倍.
+本库对于 Int64, 在 `.NET Core 3.0` 之后才有硬件加速. 因为从 `.NET Core 3.0`开始, 才提供了 X86的内在函数.
+对于ShiftLeft来说, 当参数`shiftAmount` 是常量时, 性能一般会比用变量时更高. 无论是 BCL还是本库的方法, 都是如此.
+使用本库的 `Core` 后缀的方法,  能将部分运算挪到循环外去提前处理, 从而优化了性能. 而当 CPU提供了常数参数的指令时（专业术语是“立即数参数的指令”）, 该指令的性能一般会更高. 于是本库还提供了 `ConstCore` 后缀的方法, 会选择该平台最快的指令.
+因“CPU睿频”、“其他进程抢占CPU资源”等因素, 有时性能波动比较大. 但请放心, 已经检查过了Release的程序运行时的汇编指令, 它已经是按最佳硬件指令运行的. 例如下图.
+![Vectors.ShiftLeft_Core_use_inline.png](docs/Vectors.ShiftLeft_Core_use_inline.png)
+
+#### ShiftLeft - Arm - AWS Arm t4g.small
+| Type  | Method                 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| :---- | :--------------------- | ------------: | --------: | --------: | --------: |
+| Byte  | SumSLLScalar           |       603.706 |   610.516 |   673.546 |   886.963 |
+| Byte  | SumSLLNetBcl           |               |           |           | 19586.570 |
+| Byte  | SumSLLNetBcl_Const     |               |           |           | 19583.990 |
+| Byte  | SumSLLTraits           |      5607.205 | 13235.621 | 13247.338 | 13227.773 |
+| Byte  | SumSLLTraits_Core      |     13118.993 | 15887.664 | 17003.282 | 19588.388 |
+| Byte  | SumSLLConstTraits      |     11208.733 | 13241.436 | 16994.514 | 19460.477 |
+| Byte  | SumSLLConstTraits_Core |     14329.362 | 15885.257 | 16991.730 | 19447.305 |
+| Int16 | SumSLLScalar           |       603.857 |   607.135 |   607.105 |   821.851 |
+| Int16 | SumSLLNetBcl           |               |           |           |  9880.161 |
+| Int16 | SumSLLNetBcl_Const     |               |           |           |  9884.262 |
+| Int16 | SumSLLTraits           |      3824.256 |  6561.644 |  6537.762 |  9885.127 |
+| Int16 | SumSLLTraits_Core      |      8328.793 |  7892.546 |  7870.912 |  9881.255 |
+| Int16 | SumSLLConstTraits      |      7033.015 |  6635.069 |  7892.477 |  9850.836 |
+| Int16 | SumSLLConstTraits_Core |      7838.663 |  7921.999 |  7886.939 |  9860.506 |
+| Int32 | SumSLLScalar           |       746.756 |   746.217 |   748.400 |  1406.943 |
+| Int32 | SumSLLNetBcl           |               |           |           |  4872.472 |
+| Int32 | SumSLLNetBcl_Const     |               |           |           |  4859.541 |
+| Int32 | SumSLLTraits           |      3222.900 |  3505.532 |  3249.259 |  4870.908 |
+| Int32 | SumSLLTraits_Core      |      4100.563 |  4114.834 |  3870.271 |  4825.955 |
+| Int32 | SumSLLConstTraits      |      3256.415 |  3846.424 |  3866.282 |  4832.987 |
+| Int32 | SumSLLConstTraits_Core |      4088.318 |  3869.073 |  4105.409 |  4842.866 |
+| Int64 | SumSLLScalar           |       740.847 |   742.626 |   740.883 |  1372.433 |
+| Int64 | SumSLLNetBcl           |               |           |           |  2447.827 |
+| Int64 | SumSLLNetBcl_Const     |               |           |           |  2465.779 |
+| Int64 | SumSLLTraits           |       486.412 |  1634.506 |  1636.045 |  1980.563 |
+| Int64 | SumSLLTraits_Core      |       483.900 |  1969.717 |  1970.279 |  2467.329 |
+| Int64 | SumSLLConstTraits      |       468.705 |  1954.213 |  1969.238 |  2462.272 |
+| Int64 | SumSLLConstTraits_Core |       467.634 |  1970.938 |  1972.121 |  2466.961 |
+
+说明:
+- SumSLLScalar: 使用标量算法.
+- SumSLLNetBcl: 使用BCL的方法(`Vector.ShiftLeft`), 参数是变量. 注意 `.NET 7.0` 才提供该方法.
+- SumSLLNetBcl_Const: 使用BCL的方法(`Vector.ShiftLeft`), 参数是常量. 注意 `.NET 7.0` 才提供该方法.
+- SumSLLTraits: 使用本库的普通方法(`Vectors.ShiftLeft`), 参数是变量.
+- SumSLLTraits_Core: 使用本库的 `Core` 后缀的方法(`Vectors.ShiftLeft_Args`, `Vectors.ShiftLeft_Core`), 参数是变量.
+- SumSLLConstTraits: 使用本库的 `Const` 后缀的方法(`Vectors.ShiftLeft_Const`), 参数是常量.
+- SumSLLConstTraits_Core: 使用本库的 `ConstCore` 后缀的方法(`Vectors.ShiftLeft_Args`, `Vectors.ShiftLeft_ConstCore`), 参数是常量.
+
+BCL的方法(`Vector.ShiftLeft`) 在Arm平台运行时, 整数类型都有硬件加速. 对于8~64位整数的左移位, AdvSimd指令集都提供了专用指令.
+本库在Arm平台运行时, 也使用了同样的指令. 于是性能接近.
+本库对于 Int64, 在 `.NET 5.0` 之后才有硬件加速. 因为从 `.NET 5.0`开始, 才提供了 Arm的内在函数.
+
+### ShiftRightArithmetic
+
+#### ShiftRightArithmetic - x86 - lntel Core i5-8250U
+
+#### ShiftRightArithmetic - Arm - AWS Arm t4g.small
+
+### Shuffle
+
+#### Shuffle - x86 - lntel Core i5-8250U
+
+#### Shuffle - Arm - AWS Arm t4g.small
+
+### Multiply
+
+#### Multiply - x86 - lntel Core i5-8250U
+
+#### Multiply - Arm - AWS Arm t4g.small
+
+### YNarrowSaturate
+
+#### YNarrowSaturate - x86 - lntel Core i5-8250U
+
+#### YNarrowSaturate - Arm - AWS Arm t4g.small
+
+### 更多结果
+详见: [BenchmarkResults](docs/BenchmarkResults/AVector/README.md)
 
 ## 变更日志
 
