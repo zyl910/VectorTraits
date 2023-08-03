@@ -909,13 +909,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftLeft(Vector<sbyte> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
-                return Vector.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
-#elif SOFTWARE_OPTIMIZATION
-                return ShiftLeft_Multiply(value, shiftAmount);
-#else
-                return ShiftLeft_Basic(value, shiftAmount);
-#endif // BCL_OVERRIDE_BASE_VAR
+                return ShiftLeft(value.AsByte(), shiftAmount).AsSByte();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
@@ -923,6 +917,12 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<byte> ShiftLeft(Vector<byte> value, int shiftAmount) {
 #if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif BCL_OVERRIDE_BASE_VAR &&NET7_0_OR_GREATER
+                if (!VectorEnvironment.ProcessIsX86Family) {
+                    return Vector.ShiftLeft(value, shiftAmount);
+                } else {
+                    return ShiftLeft_Multiply(value, shiftAmount);
+                }
 #elif SOFTWARE_OPTIMIZATION
                 return ShiftLeft_Multiply(value, shiftAmount);
 #else
@@ -1131,7 +1131,12 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Args(Vector{byte}, int, out Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> ShiftLeft_Args(Vector<byte> dummy, int shiftAmount, out Vector<byte> args1) {
-#if SOFTWARE_OPTIMIZATION && !(BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
+                _ = dummy;
+                _ = shiftAmount;
+                args1 = default;
+                return args1;
+#elif SOFTWARE_OPTIMIZATION
                 _ = dummy;
                 shiftAmount &= 7;
                 var args0 = new Vector<ushort>((ushort)(1 << shiftAmount)).AsByte();
@@ -1246,7 +1251,21 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Core(Vector{byte}, int, Vector{byte}, Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> ShiftLeft_Core(Vector<byte> value, int shiftAmount, Vector<byte> args0, Vector<byte> args1) {
-#if SOFTWARE_OPTIMIZATION && !(BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER)
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
+                _ = args0;
+                _ = args1;
+                return Vector.ShiftLeft(value, shiftAmount);
+#elif BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
+                if (!VectorEnvironment.ProcessIsX86Family) {
+                    _ = args0;
+                    _ = args1;
+                    return Vector.ShiftLeft(value, shiftAmount);
+                } else {
+                    _ = shiftAmount;
+                    Vector<byte> t = Vector.BitwiseAnd(value, args1);
+                    return Vector.Multiply(t.AsInt16(), args0.AsInt16()).AsByte();
+                }
+#elif SOFTWARE_OPTIMIZATION
                 _ = shiftAmount;
                 Vector<byte> t = Vector.BitwiseAnd(value, args1);
                 return Vector.Multiply(t.AsInt16(), args0.AsInt16()).AsByte();
@@ -1254,7 +1273,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 _ = args0;
                 _ = args1;
                 return ShiftLeft(value, shiftAmount);
-#endif // SOFTWARE_OPTIMIZATION
+#endif // BCL_OVERRIDE_BASE_VAR
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Core(Vector{short}, Vector{short}, Vector{short})"/>
@@ -1394,25 +1413,35 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftLeft_ConstCore(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector<sbyte> args0, Vector<sbyte> args1) {
-#if SOFTWARE_OPTIMIZATION && !(BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER)
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#else
-                _ = args0;
-                _ = args1;
-                return ShiftLeft_Const(value, shiftAmount);
-#endif // SOFTWARE_OPTIMIZATION
+                return ShiftLeft_ConstCore(value.AsByte(), shiftAmount, args0.AsByte(), args1.AsByte()).AsSByte();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{byte}, int, Vector{byte}, Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> ShiftLeft_ConstCore(Vector<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector<byte> args0, Vector<byte> args1) {
-#if SOFTWARE_OPTIMIZATION && !(BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER)
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
+#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
+                _ = args0;
+                _ = args1;
+                return Vector.ShiftLeft(value, shiftAmount);
+#elif NET7_0_OR_GREATER
+                if (!VectorEnvironment.ProcessIsX86Family) {
+                    _ = args0;
+                    _ = args1;
+                    return Vector.ShiftLeft(value, shiftAmount);
+                } else {
+                    _ = shiftAmount;
+                    Vector<byte> t = Vector.BitwiseAnd(value, args1);
+                    return Vector.Multiply(t.AsInt16(), args0.AsInt16()).AsByte();
+                }
+#elif SOFTWARE_OPTIMIZATION
+                _ = shiftAmount;
+                Vector<byte> t = Vector.BitwiseAnd(value, args1);
+                return Vector.Multiply(t.AsInt16(), args0.AsInt16()).AsByte();
 #else
                 _ = args0;
                 _ = args1;
-                return ShiftLeft_Const(value, shiftAmount);
-#endif // SOFTWARE_OPTIMIZATION
+                return ShiftLeft(value, shiftAmount);
+#endif // BCL_OVERRIDE_BASE_VAR
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_ConstCore(Vector{short}, int, Vector{short}, Vector{short})"/>
@@ -1486,13 +1515,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> ShiftLeft_Fast(Vector<sbyte> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
-                return Vector.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
-#elif SOFTWARE_OPTIMIZATION
-                return ShiftLeft_Fast_Multiply(value, shiftAmount);
-#else
-                return ShiftLeft_Fast_Basic(value, shiftAmount);
-#endif // BCL_OVERRIDE_BASE_VAR
+                return ShiftLeft_Fast(value.AsByte(), shiftAmount).AsSByte();
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{byte}, int)"/>
@@ -1500,6 +1523,12 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<byte> ShiftLeft_Fast(Vector<byte> value, int shiftAmount) {
 #if BCL_OVERRIDE_BASE_VAR && NET_X_0_OR_GREATER
                 return Vector.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#elif BCL_OVERRIDE_BASE_VAR &&NET7_0_OR_GREATER
+                if (!VectorEnvironment.ProcessIsX86Family) {
+                    return Vector.ShiftLeft(value, shiftAmount);
+                } else {
+                    return ShiftLeft_Fast_Multiply(value, shiftAmount);
+                }
 #elif SOFTWARE_OPTIMIZATION
                 return ShiftLeft_Fast_Multiply(value, shiftAmount);
 #else
