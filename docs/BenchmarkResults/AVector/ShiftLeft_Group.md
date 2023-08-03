@@ -4,7 +4,7 @@
 Cell unit: Million operations per second.
 
 ### x86 - lntel Core i5-8250U
-| Class                         | Method                   | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| Type                          | Method                   | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
 | :---------------------------- | :----------------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: |
 | ShiftLeftConstBenchmark_Byte  | SumSLLScalar             |        702.989 |       707.586 |       912.995 |   958.479 |  1178.414 |  1284.920 |
 | ShiftLeftConstBenchmark_Byte  | SumSLLNetBcl             |                |               |               |           |           |   986.920 |
@@ -72,7 +72,7 @@ Cell unit: Million operations per second.
 | ShiftLeftConstBenchmark_Int64 | SumSLLFastTraits         |        409.370 |       297.508 |      3657.788 |  3684.556 |  3790.882 |  3556.618 |
 
 ### Arm - AWS Arm t4g.small
-| Class                         | Method                   | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| Type                          | Method                   | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
 | :---------------------------- | :----------------------- | ------------: | --------: | --------: | --------: |
 | ShiftLeftConstBenchmark_Byte  | SumSLLScalar             |       603.706 |   610.516 |   673.546 |   886.963 |
 | ShiftLeftConstBenchmark_Byte  | SumSLLNetBcl             |               |           |           | 19586.570 |

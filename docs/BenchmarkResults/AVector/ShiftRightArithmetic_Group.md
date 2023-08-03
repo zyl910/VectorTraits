@@ -4,7 +4,7 @@
 Cell unit: Million operations per second.
 
 ### x86 - lntel Core i5-8250U
-| Class                                    | Method                   | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| Type                                     | Method                   | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
 | :--------------------------------------- | :----------------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: |
 | ShiftRightArithmeticConstBenchmark_Int16 | SumSRAScalar             |        823.804 |       827.734 |      1180.933 |  1182.307 |  1341.171 |  1592.939 |
 | ShiftRightArithmeticConstBenchmark_Int16 | SumSRANetBcl             |                |               |               |           |           | 18480.038 |
@@ -71,7 +71,7 @@ Cell unit: Million operations per second.
 | ShiftRightArithmeticConstBenchmark_SByte | SumSRAFastTraits         |       3308.286 |      3310.614 |     23929.818 | 24211.858 | 27143.567 | 29227.714 |
 
 ### Arm - AWS Arm t4g.small
-| Class                                    | Method                   | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| Type                                     | Method                   | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
 | :--------------------------------------- | :----------------------- | ------------: | --------: | --------: | --------: |
 | ShiftRightArithmeticConstBenchmark_Int16 | SumSRAScalar             |       587.279 |   541.166 |   607.230 |   822.580 |
 | ShiftRightArithmeticConstBenchmark_Int16 | SumSRANetBcl             |               |           |           |  9941.333 |

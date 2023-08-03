@@ -4,7 +4,7 @@
 Cell unit: Million operations per second.
 
 ### x86 - lntel Core i5-8250U
-| Class                  | Method                          | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| Type                   | Method                          | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
 | :--------------------- | :------------------------------ | -------------: | ------------: | ------------: | --------: | --------: | --------: |
 | ShuffleBenchmark_Int16 | SumScalar                       |       1009.132 |      1007.748 |       992.299 |  1004.370 |  1034.912 |   989.043 |
 | ShuffleBenchmark_Int16 | SumBase                         |       1013.240 |      1013.121 |      1008.682 |  1033.930 |  1014.877 |  1006.813 |
@@ -90,7 +90,7 @@ Cell unit: Million operations per second.
 | ShuffleBenchmark_SByte | SumKernel256Traits_Args         |                |               |     31005.994 | 31250.668 | 32222.099 | 32176.595 |
 
 ### Arm - AWS Arm t4g.small
-| Class                  | Method                          | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| Type                   | Method                          | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
 | :--------------------- | :------------------------------ | ------------: | --------: | --------: | --------: |
 | ShuffleBenchmark_Int16 | SumScalar                       |       424.835 |   422.286 |   423.070 |   526.071 |
 | ShuffleBenchmark_Int16 | SumBase                         |       424.034 |   423.118 |   422.888 |   526.673 |

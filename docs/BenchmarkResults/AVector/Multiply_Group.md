@@ -4,7 +4,7 @@
 Cell unit: Million operations per second.
 
 ### x86 - lntel Core i5-8250U
-| Class                    | Method       | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| Type                     | Method       | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
 | :----------------------- | :----------- | -------------: | ------------: | ------------: | --------: | --------: | --------: |
 | MultiplyBenchmark_Double | SumScalar    |       1600.703 |      1632.773 |      1611.595 |  1642.460 |  1249.202 |  1358.019 |
 | MultiplyBenchmark_Double | SumBcl       |       6284.448 |      6189.051 |      6102.798 |  6587.568 |  5658.033 |  5055.220 |
@@ -45,7 +45,7 @@ Cell unit: Million operations per second.
 | MultiplyBenchmark_UInt64 | Sum256Avx    |                |               |      3561.889 |  2686.452 |  2873.353 |  3478.228 |
 
 ### Arm - AWS Arm t4g.small
-| Class                    | Method       | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| Type                     | Method       | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
 | :----------------------- | :----------- | ------------: | --------: | --------: | --------: |
 | MultiplyBenchmark_Double | SumScalar    |       765.649 |   766.031 |   758.644 |  1014.141 |
 | MultiplyBenchmark_Double | SumBcl       |      3833.182 |  3822.467 |  3179.536 |  3657.731 |
