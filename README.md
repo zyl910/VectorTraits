@@ -20,7 +20,8 @@ Traits methods:
 - Support for `.NET 6.0` new vector methods: Sum .
 - Support for `.NET 7.0` new vector methods: ExtractMostSignificantBits, Shuffle, ShiftLeft, ShiftRightArithmetic, ShiftRightLogical .
 - Provides the vector methods of narrow saturate: YNarrowSaturate, YNarrowSaturateUnsigned .
-- Provides the vector methods of shuffle: YShuffleEach128, YShuffleInsert, YShuffleInsertEach128, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG4 classes.
+- Provides the vector methods of round: YRoundToEven, YRoundToZero .
+- Provides the vector methods of shuffle: YShuffleInsert, YShuffleKernel, YShuffleG2, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG2/ShuffleControlG4 enum.
 - ...
 - Full list: [TraitsMethodList](TraitsMethodList.md)
 

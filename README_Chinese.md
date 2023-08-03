@@ -20,7 +20,8 @@ VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 - 支持 `.NET 6.0` 新增的向量方法: Sum .
 - 支持 `.NET 7.0` 新增的向量方法: ExtractMostSignificantBits, Shuffle, ShiftLeft, ShiftRightArithmetic, ShiftRightLogical .
 - 提供缩窄饱和的向量方法: YNarrowSaturate, YNarrowSaturateUnsigned .
-- 提供换位的向量方法: YShuffleEach128, YShuffleInsert, YShuffleInsertEach128, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG4 classes.
+- 提供舍入的向量方法: YRoundToEven, YRoundToZero .
+- 提供换位的向量方法: YShuffleInsert, YShuffleKernel, YShuffleG2, YShuffleG4, YShuffleG4X2 . 且提供了 ShuffleControlG2/ShuffleControlG4 enum.
 - ...
 - 完整列表: [TraitsMethodList](TraitsMethodList.md)
 
