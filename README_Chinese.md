@@ -66,10 +66,10 @@ VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 ## 范例
 范例代码在 `samples/VectorTraits.Sample` 文件夹.
 
-`Vectors` 类提供了许多方法, 例如 `CreateRotate`, ShiftLeft, Shuffle. 详见: [TraitsMethodList](TraitsMethodList.md)
+`Vectors` 类提供了许多方法, 例如 CreateRotate, ShiftLeft, Shuffle. 特征方法的清单见: [TraitsMethodList](TraitsMethodList.md)
 泛型结构体 `Vectors<T>` 为常用常数提供了字段.
 
-范例的源代码如下。
+范例源代码如下。
 ```cs
 using System;
 using System.IO;
@@ -93,15 +93,16 @@ namespace Zyl.VectorTraits.Sample {
             VectorTextUtil.WriteLine(writer, "src:\t{0}", src); // It can not only format the string, but also display the hexadecimal of each element in the vector on the right Easy to view vector data (它不仅能格式化字符串, 且会在右侧显示向量中各元素的十六进制. 便于查看向量数据).
 
             // ShiftLeft. It is a new vector method in `.NET 7.0` (左移位. 它是 `.NET 7.0` 新增的向量方法)
-            Vector<short> shifted = Vectors.ShiftLeft(src, 1); // shifted[i] = src[i] << 1.
+            const int shiftAmount = 1;
+            Vector<short> shifted = Vectors.ShiftLeft(src, shiftAmount); // shifted[i] = src[i] << shiftAmount.
             VectorTextUtil.WriteLine(writer, "ShiftLeft:\t{0}", shifted);
 #if NET7_0_OR_GREATER
             // Compare BCL function (与BCL的函数做对比).
-            Vector<short> shiftedBCL = Vector.ShiftLeft(src, 1);
+            Vector<short> shiftedBCL = Vector.ShiftLeft(src, shiftAmount);
             VectorTextUtil.WriteLine(writer, "Equals to BCL ShiftLeft:\t{0}", shifted.Equals(shiftedBCL));
 #endif
             // ShiftLeft_Const
-            VectorTextUtil.WriteLine(writer, "Equals to ShiftLeft_Const:\t{0}", shifted.Equals(Vectors.ShiftLeft_Const(src, 1))); // If the parameter shiftAmount is a constant, you can also use the ShiftLeft of Vectors_ Const method It is faster in many scenarios (若参数 shiftAmount 是常数, 还可以使用 Vectors 的 ShiftLeft_Const 方法. 它在不少场景下更快).
+            VectorTextUtil.WriteLine(writer, "Equals to ShiftLeft_Const:\t{0}", shifted.Equals(Vectors.ShiftLeft_Const(src, shiftAmount))); // If the parameter shiftAmount is a constant, you can also use the Vectors' ShiftLeft_Const method. It is faster in many scenarios (若参数 shiftAmount 是常数, 还可以使用 Vectors 的 ShiftLeft_Const 方法. 它在不少场景下更快).
             writer.WriteLine();
 
             // Shuffle. It is a new vector method in `.NET 7.0` (换位. 它是 `.NET 7.0` 新增的向量方法)
