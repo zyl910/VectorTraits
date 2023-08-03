@@ -1,7 +1,7 @@
 # Benchmark group - ShiftRightLogical
 ([← Back](ShiftRightLogical.md))
 
-Cell unit: Million operations per second.
+Unit of data: Million operations per second. The larger the number, the better the performance.
 
 ### x86 - lntel Core i5-8250U
 | Type                                   | Method                 | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
