@@ -812,7 +812,7 @@ namespace Zyl.VectorTraits.Impl {
         TypeCodeFlags Multiply_FullAcceleratedTypes { get; }
 
         /// <summary>
-        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们各元素的积).
         /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
         /// </summary>
         /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
@@ -823,7 +823,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<float> Multiply(Vector128<float> left, Vector128<float> right);
 
         /// <summary>
-        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们各元素的积).
         /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
         /// </summary>
         /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
@@ -834,7 +834,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<double> Multiply(Vector128<double> left, Vector128<double> right);
 
         /// <summary>
-        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们各元素的积).
         /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
         /// </summary>
         /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
@@ -845,7 +845,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<sbyte> Multiply(Vector128<sbyte> left, Vector128<sbyte> right);
 
         /// <summary>
-        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们各元素的积).
         /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
         /// </summary>
         /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
@@ -856,7 +856,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<byte> Multiply(Vector128<byte> left, Vector128<byte> right);
 
         /// <summary>
-        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们各元素的积).
         /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
         /// </summary>
         /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
@@ -867,7 +867,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<short> Multiply(Vector128<short> left, Vector128<short> right);
 
         /// <summary>
-        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们各元素的积).
         /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
         /// </summary>
         /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
@@ -878,7 +878,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<ushort> Multiply(Vector128<ushort> left, Vector128<ushort> right);
 
         /// <summary>
-        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们各元素的积).
         /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
         /// </summary>
         /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
@@ -889,7 +889,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<int> Multiply(Vector128<int> left, Vector128<int> right);
 
         /// <summary>
-        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们各元素的积).
         /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
         /// </summary>
         /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
@@ -900,7 +900,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<uint> Multiply(Vector128<uint> left, Vector128<uint> right);
 
         /// <summary>
-        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们各元素的积).
         /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
         /// </summary>
         /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>
@@ -911,7 +911,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<long> Multiply(Vector128<long> left, Vector128<long> right);
 
         /// <summary>
-        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+        /// Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们各元素的积).
         /// Mnemonic: <c>rt[i] := left[i] * right[i]</c>.
         /// </summary>
         /// <param name="left">The vector to multiply with <paramref name="right" /> (将会与<paramref name="right" />进行相乘的向量).</param>

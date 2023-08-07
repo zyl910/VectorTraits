@@ -11,7 +11,7 @@
 - [ConvertToUInt32](ConvertToSingle.md): Convert to a vector whose elements are of type UInt32 (转换为元素类型是UInt32的向量).
 - [ConvertToUInt64](ConvertToDouble.md): Convert to a vector whose elements are of type UInt64 (转换为元素类型是UInt64的向量).
 - [Floor](Ceiling.md): Computes the floor of each element in a vector (计算向量中每个元素的向下取整). It is also known as round to negative infinity (它也被称作向负无穷舍入). See more: `MidpointRounding.ToNegativeInfinity`.
-- [Multiply](Multiply.md): Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们的积).
+- [Multiply](Multiply.md): Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们各元素的积).
 - [Narrow](Narrow.md): Narrows two Vector instances into one Vector  (将两个 Vector 实例缩窄为一个 Vector ).
 - [ShiftLeft](ShiftLeft.md): Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
 - [ShiftRightArithmetic](ShiftRightArithmetic.md): Shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量).
