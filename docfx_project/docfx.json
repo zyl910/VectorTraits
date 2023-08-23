@@ -4,8 +4,10 @@
       "src": [
         {
           "files": [
-            "bin/**/*.dll"
-          ]
+            "docfx_project/bin/**/*.dll"
+            ,"src/VectorTraits/VectorTraits.csproj"
+          ],
+          "src": "../"
         }
       ],
       "dest": "api",

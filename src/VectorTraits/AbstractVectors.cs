@@ -61,9 +61,9 @@ namespace Zyl.VectorTraits {
         /// <summary>(Element) Represents positive infinity (表示正无穷). When the type is an integer, the value is 0 (当类型为整数时，该值为0).</summary>
         public static T ElementPositiveInfinity { get { return Scalars<T>.PositiveInfinity; } }
         // -- Math --
-        /// <summary>(Element) Normalized number of value 1 (值1的归一化数). When the type is an integer, the value is'<see cref="MaxValue"/>'; Otherwise it's 1 (当类型为整数时，它的值为 `<see cref="MaxValue"/>`; 其他情况下为 1).</summary>
+        /// <summary>(Element) Normalized number of value 1 (值1的归一化数). When the type is an integer, the value is '<see cref="ElementMaxValue"/>'; Otherwise it's 1 (当类型为整数时，它的值为 `<see cref="ElementMaxValue"/>`; 其他情况下为 1).</summary>
         public static T ElementNormOne { get { return Scalars<T>.NormOne; } }
-        /// <summary>(Element) Binary shift of fixed point number (定点数的位移). When the type is an integer, the value is' <see cref="BitSize"/>/2 '; Otherwise it's 0 (当类型为整数时，它的值为 `<see cref="BitSize"/>/2`; 其他情况下为 0).</summary>
+        /// <summary>(Element) Binary shift of fixed point number (定点数的位移). When the type is an integer, the value is '<see cref="ElementBitSize"/>/2'; Otherwise it's 0 (当类型为整数时，它的值为 `<see cref="ElementBitSize"/>/2`; 其他情况下为 0).</summary>
         public static int ElementFixedShift { get { return Scalars<T>.FixedShift; } }
         /// <summary>(Element) The fixed point number of the value 1 (值1的定点数). When the type is an integer, the value is'Pow(2, <see cref="ElementFixedShift"/>)'; Otherwise it's 1 (当类型为整数时，它的值为 `Pow(2, <see cref="ElementFixedShift"/>)`; 其他情况下为 1).</summary>
         public static T ElementFixedOne { get { return Scalars<T>.FixedOne; } }

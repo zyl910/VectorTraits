@@ -1,2 +1,3 @@
-# PLACEHOLDER
-TODO: Add .NET projects to the *src* folder and run `docfx` to generate **REAL** *API Documentation*!
+# VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
+
+See: Api Documentation

@@ -727,6 +727,7 @@ YNarrowSaturate: 将两个 Vector 实例饱和缩窄为一个 Vector .
 ## 文档
 
 - 特征方法列表: [TraitsMethodList](TraitsMethodList.md)
+- DocFX: 运行命令 `docfx docfx_project/docfx.json --serve -p 8080`. 随后浏览 `http://localhost:8080/`.
 - Doxygen: 运行 Doxywizard, 点击菜单栏的 File->Open. 选择 `Doxyfile` 文件，并点击“OK”. 点击“Run”Tab, 点击“Run doxygen”按钮. 它会在“doc_gen”文件夹生成文档.
 
 ## 变更日志
