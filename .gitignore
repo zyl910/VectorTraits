@@ -114,3 +114,4 @@ project*.lock.json
 AssemblyVer.cs
 
 /tests/*.txt
+/doc_gen
