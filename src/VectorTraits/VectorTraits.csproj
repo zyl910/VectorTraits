@@ -37,6 +37,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DefineConstants>$(DefineConstants);SOFTWARE_OPTIMIZATION;HARDWARE_OPTIMIZATION;BCL_OVERRIDE_BASE_FIXED;BCL_OVERRIDE_BASE_VAR;BCL_VER_OVERRIDE_STATIC;USE_VECTOR_CREATE_BY_ARRAY;REDUCE_MEMORY_USAGE;OFF_VECTOR_TUPLES</DefineConstants>
 
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Title>VectorTraits for .NET and .NET Standard</Title>
     <Product>VectorTraits</Product>
     <Authors>zyl910</Authors>
