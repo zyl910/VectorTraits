@@ -65,6 +65,11 @@ Example 2: Using `Vectors.ShiftLeft_Args` and `Vectors.ShiftLeft_Core`, you can 
 
 ## Getting started
 
+## Documentation
+
+- Traits method list: [TraitsMethodList](TraitsMethodList.md)
+- Doxygen: Run the Doxywizard and click File ->Open on the menu bar. Select the `Doxyfile` file and click "OK". Click on the "Run" tab and click on the "Run doxygen" button. It will generate documents in the "doc_gen" folder.
+
 ## ChangeLog
 
 Full list: [ChangeLog](ChangeLog.md)
