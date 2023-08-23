@@ -63,6 +63,8 @@ Tip: The Disassembly window in Visual Studio allows you to view the assembly cod
 Example 2: Using `Vectors.ShiftLeft_Args` and `Vectors.ShiftLeft_Core`, you can move some of the operations outside the loop to be processed earlier.   For example, when running on a machine that supports the Avx instruction set, `xmm1` is set outside the loop, and then used it in the `vpsllw` instruction of the inner loop.   And here it is shown: the inline compilation optimization eliminates redundant xmm/ymm conversions.
 ![Vectors.ShiftLeft_Core_use_inline.png](docs/Vectors.ShiftLeft_Core_use_inline.png)
 
+## Getting started
+
 ## ChangeLog
 
 Full list: [ChangeLog](ChangeLog.md)

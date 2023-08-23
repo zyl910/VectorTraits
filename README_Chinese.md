@@ -63,7 +63,7 @@ VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 例2: 使用 `Vectors.ShiftLeft_Args` 与 `Vectors.ShiftLeft_Core`, 能将部分运算挪到循环外去提前处理. 例如在支持 Avx指令集的机器上运行时, 会在循环外设置好 `xmm1`, 随后在内循环的`vpsllw`指令里使用了它. 且这里展示了: 内联编译优化消除了冗余的 xmm/ymm 转换.
 ![Vectors.ShiftLeft_Core_use_inline.png](docs/Vectors.ShiftLeft_Core_use_inline.png)
 
-## 范例
+## 入门指南
 范例代码在 `samples/VectorTraits.Sample` 文件夹.
 
 `Vectors` 类提供了许多方法, 例如 CreateRotate, ShiftLeft, Shuffle. 特征方法的清单见: [TraitsMethodList](TraitsMethodList.md)
