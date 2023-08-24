@@ -11,6 +11,10 @@
         }
       ],
       "dest": "api",
+      "properties": {
+        "TargetFramework": "net7.0",
+        "DefineConstants": "REDUCE_MEMORY_USAGE;NETCOREAPP3_0_OR_GREATER;NET5_0_OR_GREATE;NET6_0_OR_GREATE;NET7_0_OR_GREATE"
+      },
       "includePrivateMembers": false,
       "disableGitFeatures": false,
       "disableDefaultFilter": false,
@@ -34,6 +38,7 @@
           "articles/**.md",
           "articles/**/toc.yml",
           "toc.yml",
+          "../*.md",
           "*.md"
         ]
       }
