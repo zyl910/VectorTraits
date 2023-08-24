@@ -12,9 +12,9 @@ using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
 using static Zyl.VectorTraits.Impl.VectorMessageFormats;
-#if !OFF_VECTOR_TUPLES
+#if ALLOW_VECTOR_TUPLES
 using Zyl.VectorTraits.Tuples;
-#endif // !OFF_VECTOR_TUPLES
+#endif // ALLOW_VECTOR_TUPLES
 
 namespace Zyl.VectorTraits {
     static partial class Vector256s {

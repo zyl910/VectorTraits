@@ -13,7 +13,7 @@
 - USE_VECTOR_CREATE: 用向量创建（如 `new Vector<T>`、`Vector128.Create`）代替静态字段. net5能优化常量访问.
 - USE_VECTOR_CREATE_BY_ARRAY: 用向量创建（如 `new Vector<T>`、`Vector128.Create`）代替查询数组. 它能避免数组越界检查.
 - REDUCE_MEMORY_USAGE: 减少内存占用. 若启用它, 会屏蔽 废弃的或实验性的数据.
-- OFF_VECTOR_TUPLES: 禁用Tuples命名空间. 实测发现它的效率不佳, 故屏蔽. 预留给未来找到更好办法.
+- ALLOW_VECTOR_TUPLES: 允许Tuples命名空间. 实测发现它的效率不佳, 故屏蔽. 预留给未来找到更好办法.
 - DRY_JOB: 性能评测时使用 DryJob , 仅运行一次快速得到汇编代码.
 - BENCHMARKS_OFF: 关闭评测 . 用于专门测试某个评测时，此时仅需专门打开某一个评测。
 - BENCHMARKS_128: 评测128位算法.

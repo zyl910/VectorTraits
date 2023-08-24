@@ -1,4 +1,4 @@
-﻿#if !OFF_VECTOR_TUPLES
+﻿#if ALLOW_VECTOR_TUPLES
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -127,4 +127,4 @@ namespace Zyl.VectorTraits.Tuples {
         }
     }
 }
-#endif // !OFF_VECTOR_TUPLES
+#endif // ALLOW_VECTOR_TUPLES

@@ -7,9 +7,9 @@ using System.Xml.Linq;
 using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
-#if !OFF_VECTOR_TUPLES
+#if ALLOW_VECTOR_TUPLES
 using Zyl.VectorTraits.Tuples;
-#endif // !OFF_VECTOR_TUPLES
+#endif // ALLOW_VECTOR_TUPLES
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
     [TestFixture()]
@@ -622,7 +622,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         Assert.AreEqual(expected, dst, "_Core, vector={vector}, indices={indices}");
                     }
                     // Static: ArgsX and Core
-#if !OFF_VECTOR_TUPLES
+#if ALLOW_VECTOR_TUPLES
 #pragma warning disable CS0618 // Type or member is obsolete
                     Vector256X2<TIdx> argsX = Vector256s.YShuffleKernel_ArgsX((dynamic)indices);
                     dst = Vector256s.YShuffleKernel_Core((dynamic)vector, (dynamic)argsX);
@@ -633,7 +633,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     } else {
                         Assert.AreEqual(expected, dst, "_CoreX, vector={vector}, indices={indices}");
                     }
-#endif // !OFF_VECTOR_TUPLES
+#endif // ALLOW_VECTOR_TUPLES
                     // Instances
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;

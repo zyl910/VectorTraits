@@ -1154,7 +1154,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("SumKernel256Traits_Args");
         }
 
-#if !OFF_VECTOR_TUPLES
+#if ALLOW_VECTOR_TUPLES
         /// <summary>
         /// Sum YShuffleKernel - Vector256 - Traits static - ArgsX and Core.
         /// </summary>
@@ -1208,7 +1208,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             dstTMy = StaticSumKernel256Traits_ArgsX(srcArray, srcArray.Length, indices);
             CheckResult("SumKernel256Traits_ArgsX");
         }
-#endif // !OFF_VECTOR_TUPLES
+#endif // ALLOW_VECTOR_TUPLES
 
 #endif // BENCHMARKS_256ALGORITHM
         #endregion // BENCHMARKS_256ALGORITHM
