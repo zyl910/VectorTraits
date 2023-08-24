@@ -126,7 +126,7 @@ namespace Zyl.VectorTraits {
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="value">The value that all elements will be initialized to (所有元素的初始化目标值).</param>
         /// <returns>A new <see cref="Vector256{T}"/> with all elements initialized to value (一个新的 <see cref="Vector256{T}"/>，其中所有元素已初始化为 <paramref name="value"/> ).</returns>
-        /// <seealso cref="Vector256{T}(T)"/>
+        /// <seealso cref="Vector256.Create{T}(T)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> Create<T>(T value) where T : struct {
 #if NET7_0_OR_GREATER
@@ -164,7 +164,7 @@ namespace Zyl.VectorTraits {
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="values">The array from which the vector is created (用于创建向量的数组).</param>
         /// <returns>A new <see cref="Vector256{T}"/> with its elements set to the first Count elements from <paramref name="values"/> (一个新<see cref="Vector256{T}"/>，其元素设置为来自<paramref name="values"/>首批满足长度的元素).</returns>
-        /// <seealso cref="Vector256{T}(T[])"/>
+        /// <seealso cref="Vector256.Create{T}(T[])"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> Create<T>(T[] values) where T : struct {
 #if NET7_0_OR_GREATER
@@ -182,7 +182,7 @@ namespace Zyl.VectorTraits {
         /// <param name="index">The starting index position from which to create the vector (欲创建向量的起始索引位置).</param>
         /// <returns>A new <see cref="Vector256{T}"/> with its elements set to the first Count elements from <paramref name="values"/> (一个新<see cref="Vector256{T}"/>，其元素设置为来自<paramref name="values"/>首批满足长度的元素).</returns>
         /// <exception cref="IndexOutOfRangeException">The <paramref name="index"/> is less than zero (<paramref name="index"/> 小于零). The length of <paramref name="values"/>, starting from <paramref name="index"/>, is less than <see cref="Vector256{T}.Count"/> (从 <paramref name="index"/> 开始的 <paramref name="values"/> 的长度小于 <see cref="Vector256{T}.Count"/>).</exception>
-        /// <seealso cref="Vector256{T}(T[], int)"/>
+        /// <seealso cref="Vector256.Create{T}(T[], int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> Create<T>(T[] values, int index) where T : struct {
 #if NET7_0_OR_GREATER
@@ -204,7 +204,7 @@ namespace Zyl.VectorTraits {
         /// <param name="values">A read-only span of bytes that contains the values to add to the vector (从中创建向量的只读字节跨度).</param>
         /// <returns>A new <see cref="Vector256{T}"/> with its elements set to the first Count elements from <paramref name="values"/> (一个新<see cref="Vector256{T}"/>，其元素设置为来自<paramref name="values"/>首批满足长度的元素).</returns>
         /// <exception cref="IndexOutOfRangeException"><paramref name="values"/> did not contain at least <see cref="Vector256{T}.Count"/> elements (<paramref name="values"/> 的长度小于 <see cref="Vector256{T}.Count"/>).</exception>
-        /// <seealso cref="Vector256{T}(ReadOnlySpan{byte})"/>
+        /// <seealso cref="Vector256.Create{T}(ReadOnlySpan{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> Create<T>(ReadOnlySpan<byte> values) where T : struct {
             if (values.Length < Vector256<byte>.Count) {
@@ -220,7 +220,7 @@ namespace Zyl.VectorTraits {
         /// <param name="values">The readonly span from which the vector is created (从中创建向量的只读跨度).</param>
         /// <returns>A new <see cref="Vector256{T}"/> with its elements set to the first Count elements from <paramref name="values"/> (一个新<see cref="Vector256{T}"/>，其元素设置为来自<paramref name="values"/>首批满足长度的元素).</returns>
         /// <exception cref="IndexOutOfRangeException"><paramref name="values"/> did not contain at least <see cref="Vector256{T}.Count"/> elements (<paramref name="values"/> 的长度小于 <see cref="Vector256{T}.Count"/>).</exception>
-        /// <seealso cref="Vector256{T}(ReadOnlySpan{T})"/>
+        /// <seealso cref="Vector256.Create{T}(ReadOnlySpan{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> Create<T>(ReadOnlySpan<T> values) where T : struct {
 #if NET7_0_OR_GREATER
@@ -240,7 +240,7 @@ namespace Zyl.VectorTraits {
         /// <param name="values">The span from which the vector is created (从中创建向量的跨度).</param>
         /// <returns>A new <see cref="Vector256{T}"/> with its elements set to the first Count elements from <paramref name="values"/> (一个新<see cref="Vector256{T}"/>，其元素设置为来自<paramref name="values"/>首批满足长度的元素).</returns>
         /// <exception cref="IndexOutOfRangeException"><paramref name="values"/> did not contain at least <see cref="Vector256{T}.Count"/> elements (<paramref name="values"/> 的长度小于 <see cref="Vector256{T}.Count"/>).</exception>
-        /// <seealso cref="Vector256{T}(Span{T})"/>
+        /// <seealso cref="Vector256.Create{T}(ReadOnlySpan{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> Create<T>(Span<T> values) where T : struct {
             if (values.Length < Vector256<T>.Count) {
@@ -410,7 +410,7 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="src">Source value (源值).</param>
-        /// <returns>A new <see cref="Vector256{T}"/> with all elements initialized to value (一个新的 <see cref="Vector256{T}"/>，其中所有元素已初始化为 <paramref name="value"/> ).</returns>
+        /// <returns>A new <see cref="Vector256{T}"/> with all elements initialized to value (一个新的 <see cref="Vector256{T}"/>，其中所有元素已初始化为 <paramref name="src"/> ).</returns>
         public static Vector256<T> CreateByDouble<T>(double src) where T : struct {
             return Create(Scalars.GetByDouble<T>(src));
         }
@@ -434,7 +434,7 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="src">Source value (源值).</param>
-        /// <returns>A new <see cref="Vector256{T}"/> with all elements initialized to value (一个新的 <see cref="Vector256{T}"/>，其中所有元素已初始化为 <paramref name="value"/> ).</returns>
+        /// <returns>A new <see cref="Vector256{T}"/> with all elements initialized to value (一个新的 <see cref="Vector256{T}"/>，其中所有元素已初始化为 <paramref name="src"/> ).</returns>
         public static Vector256<T> CreateByBits<T>(long src) where T : struct {
             return Create(Scalars.GetByBits<T>(src));
         }
