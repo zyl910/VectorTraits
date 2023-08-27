@@ -365,6 +365,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
         /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
         /// <param name="athis">This object.</param>
+        /// <param name="back">The background vector (背景向量).</param>
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
         /// <param name="args">The arguments(参数). Derived from YShuffleInsert_Args .</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
@@ -514,7 +515,7 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
-        /// <inheritdoc cref="Vector256s.YShuffleKernel_Args{TIdx}(Vector256{TIdx}"/>
+        /// <inheritdoc cref="Vector256s.YShuffleKernel_Args{TIdx}(Vector256{TIdx})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

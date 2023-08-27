@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Zyl.VectorTraits.Impl.AVector;
+using Zyl.VectorTraits.Impl.AVector256;
 
 namespace Zyl.VectorTraits.Impl {
     /// <summary>
@@ -270,7 +272,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="methodInterface">The method of a static class (接口的方法).</param>
         /// <param name="userdata">The userdata.</param>
         /// <returns>Returns true if you want to ignore <paramref name="methodStatic"/>, false otherwise (若需忽略 <paramref name="methodStatic"/>，便返回true, 否则会返回false).</returns>
-        /// <seealso cref="CheckBindMethods"/>
+        /// <seealso cref="CheckBindMethods(Type, Type, Type?, Func{MethodInfo, MethodInfo?, object?, bool}?, object?)"/>
         public static bool OnMissed_Default(MethodInfo methodStatic, MethodInfo? methodInterface, object? userdata) {
             bool isIgnore = (null == methodInterface); // If it is not in the method list of the interface, it is ignored.
             _ = methodStatic;

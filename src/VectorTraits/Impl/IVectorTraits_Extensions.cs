@@ -398,7 +398,7 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
-        /// <inheritdoc cref="Vectors.Shuffle_Args{TIdx}(Vector{TIdx}"/>
+        /// <inheritdoc cref="Vectors.Shuffle_Args{TIdx}(Vector{TIdx})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

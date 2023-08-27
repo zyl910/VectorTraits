@@ -15,7 +15,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>Abs</c> (运行 <c>Abs</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="Abs"/>
+        /// <seealso cref="Abs(Vector128{sbyte})"/>
         TypeCodeFlags Abs_AcceleratedTypes { get; }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Mnemonic: <c>rt[i] := abs(vector[i])</c>.
         /// </summary>
         /// <param name="vector">The vector that will have its absolute value computed (将被计算其绝对值的向量).</param>
-        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的绝对值).</returns>
+        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中各元素的绝对值).</returns>
         /// <seealso cref="Abs_AcceleratedTypes"/>
         /// <seealso cref="Vector128.Abs{T}(Vector128{T})" />
         Vector128<float> Abs(Vector128<float> vector);
@@ -33,7 +33,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Mnemonic: <c>rt[i] := abs(vector[i])</c>.
         /// </summary>
         /// <param name="vector">The vector that will have its absolute value computed (将被计算其绝对值的向量).</param>
-        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的绝对值).</returns>
+        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中各元素的绝对值).</returns>
         /// <seealso cref="Abs_AcceleratedTypes"/>
         /// <seealso cref="Vector128.Abs{T}(Vector128{T})" />
         Vector128<double> Abs(Vector128<double> vector);
@@ -43,7 +43,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Mnemonic: <c>rt[i] := abs(vector[i])</c>.
         /// </summary>
         /// <param name="vector">The vector that will have its absolute value computed (将被计算其绝对值的向量).</param>
-        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的绝对值).</returns>
+        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中各元素的绝对值).</returns>
         /// <seealso cref="Abs_AcceleratedTypes"/>
         /// <seealso cref="Vector128.Abs{T}(Vector128{T})" />
         Vector128<sbyte> Abs(Vector128<sbyte> vector);
@@ -53,7 +53,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Mnemonic: <c>rt[i] := abs(vector[i])</c>.
         /// </summary>
         /// <param name="vector">The vector that will have its absolute value computed (将被计算其绝对值的向量).</param>
-        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的绝对值).</returns>
+        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中各元素的绝对值).</returns>
         /// <seealso cref="Abs_AcceleratedTypes"/>
         /// <seealso cref="Vector128.Abs{T}(Vector128{T})" />
         Vector128<short> Abs(Vector128<short> vector);
@@ -63,7 +63,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Mnemonic: <c>rt[i] := abs(vector[i])</c>.
         /// </summary>
         /// <param name="vector">The vector that will have its absolute value computed (将被计算其绝对值的向量).</param>
-        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的绝对值).</returns>
+        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中各元素的绝对值).</returns>
         /// <seealso cref="Abs_AcceleratedTypes"/>
         /// <seealso cref="Vector128.Abs{T}(Vector128{T})" />
         Vector128<int> Abs(Vector128<int> vector);
@@ -73,7 +73,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Mnemonic: <c>rt[i] := abs(vector[i])</c>.
         /// </summary>
         /// <param name="vector">The vector that will have its absolute value computed (将被计算其绝对值的向量).</param>
-        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的绝对值).</returns>
+        /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中各元素的绝对值).</returns>
         /// <seealso cref="Abs_AcceleratedTypes"/>
         /// <seealso cref="Vector128.Abs{T}(Vector128{T})" />
         Vector128<long> Abs(Vector128<long> vector);
@@ -82,7 +82,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>Add</c> (运行 <c>Add</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="Add"/>
+        /// <seealso cref="Add(Vector128{byte}, Vector128{byte})"/>
         TypeCodeFlags Add_AcceleratedTypes { get; }
 
         /// <summary>
@@ -256,7 +256,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>ConditionalSelect</c> (运行 <c>ConditionalSelect</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="ConditionalSelect"/>
+        /// <seealso cref="ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
         TypeCodeFlags ConditionalSelect_AcceleratedTypes { get; }
 
         /// <summary>
@@ -276,7 +276,6 @@ namespace Zyl.VectorTraits.Impl {
         /// Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
         /// Mnemonic: <c>rt[i] := (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
         /// </summary>
-        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
         /// <param name="left">The vector that is selected when the corresponding bit in <paramref name="condition" /> is one (当 <paramref name="condition" /> 中的对应位为 1 时选择的向量).</param>
         /// <param name="right">The vector that is selected when the corresponding bit in <paramref name="condition" /> is zero (当 <paramref name="condition" /> 中的对应位为 0 时选择的向量).</param>
@@ -288,7 +287,6 @@ namespace Zyl.VectorTraits.Impl {
         /// Conditionally selects a value from two vectors on a bitwise basis (按条件从两个向量中按位选择值).
         /// Mnemonic: <c>rt[i] := (left[i] &amp; condition[i]) | (right[i] &amp; ~condition[i])</c>.
         /// </summary>
-        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
         /// <param name="left">The vector that is selected when the corresponding bit in <paramref name="condition" /> is one (当 <paramref name="condition" /> 中的对应位为 1 时选择的向量).</param>
         /// <param name="right">The vector that is selected when the corresponding bit in <paramref name="condition" /> is zero (当 <paramref name="condition" /> 中的对应位为 0 时选择的向量).</param>
@@ -300,7 +298,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>Divide</c> (运行 <c>Divide</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="Divide"/>
+        /// <seealso cref="Divide(Vector128{float}, Vector128{float})"/>
         TypeCodeFlags Divide_AcceleratedTypes { get; }
 
         /// <summary>
@@ -329,7 +327,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>GreaterThan</c> (运行 <c>GreaterThan</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="GreaterThan"/>
+        /// <seealso cref="GreaterThan(Vector128{byte}, Vector128{byte})"/>
         TypeCodeFlags GreaterThan_AcceleratedTypes { get; }
 
         /// <summary>
@@ -446,7 +444,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>LessThan</c> (运行 <c>LessThan</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="LessThan"/>
+        /// <seealso cref="LessThan(Vector128{byte}, Vector128{byte})"/>
         TypeCodeFlags LessThan_AcceleratedTypes { get; }
 
         /// <summary>
@@ -563,7 +561,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>Max</c> (运行 <c>Max</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="Max"/>
+        /// <seealso cref="Max(Vector128{byte}, Vector128{byte})"/>
         TypeCodeFlags Max_AcceleratedTypes { get; }
 
         /// <summary>
@@ -680,7 +678,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>Min</c> (运行 <c>Min</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="Min"/>
+        /// <seealso cref="Min(Vector128{byte}, Vector128{byte})"/>
         TypeCodeFlags Min_AcceleratedTypes { get; }
 
         /// <summary>
@@ -797,7 +795,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>Multiply</c> (运行 <c>Multiply</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="Multiply"/>
+        /// <seealso cref="Multiply(Vector128{byte}, Vector128{byte})"/>
         /// <seealso cref="Multiply_FullAcceleratedTypes"/>
         TypeCodeFlags Multiply_AcceleratedTypes { get; }
 
@@ -807,7 +805,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <remarks>
         /// <para>`AcceleratedTypes` only indicates the presence of hardware acceleration, possibly indirectly through some algorithm. And `FullAcceleratedTypes` means that dedicated instructions are used to achieve full hardware acceleration. (`AcceleratedTypes`仅表示存在硬件加速,有可能是通过一些算法间接实现的. 而 `FullAcceleratedTypes`意味着使用了专用指令，实现了完全的硬件加速)</para>
         /// </remarks>
-        /// <seealso cref="Multiply"/>
+        /// <seealso cref="Multiply(Vector128{byte}, Vector128{byte})"/>
         /// <seealso cref="Multiply_AcceleratedTypes"/>
         TypeCodeFlags Multiply_FullAcceleratedTypes { get; }
 
@@ -925,7 +923,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>Negate</c> (运行 <c>Negate</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="Negate"/>
+        /// <seealso cref="Negate(Vector128{float})"/>
         TypeCodeFlags Negate_AcceleratedTypes { get; }
 
         /// <summary>
@@ -933,7 +931,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Mnemonic: <c>rt[i] := -vector[i]</c>.
         /// </summary>
         /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
-        /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
+        /// <returns>A vector whose elements are the negate of the elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中各元素的相反数).</returns>
         /// <seealso cref="Negate_AcceleratedTypes"/>
         /// <seealso cref="Vector128.Negate{T}(Vector128{T})" />
         Vector128<float> Negate(Vector128<float> vector);
@@ -943,7 +941,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Mnemonic: <c>rt[i] := -vector[i]</c>.
         /// </summary>
         /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
-        /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
+        /// <returns>A vector whose elements are the negate of the elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中各元素的相反数).</returns>
         /// <seealso cref="Negate_AcceleratedTypes"/>
         /// <seealso cref="Vector128.Negate{T}(Vector128{T})" />
         Vector128<double> Negate(Vector128<double> vector);
@@ -953,7 +951,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Mnemonic: <c>rt[i] := -vector[i]</c>.
         /// </summary>
         /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
-        /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
+        /// <returns>A vector whose elements are the negate of the elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中各元素的相反数).</returns>
         /// <seealso cref="Negate_AcceleratedTypes"/>
         /// <seealso cref="Vector128.Negate{T}(Vector128{T})" />
         Vector128<sbyte> Negate(Vector128<sbyte> vector);
@@ -963,7 +961,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Mnemonic: <c>rt[i] := -vector[i]</c>.
         /// </summary>
         /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
-        /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
+        /// <returns>A vector whose elements are the negate of the elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中各元素的相反数).</returns>
         /// <seealso cref="Negate_AcceleratedTypes"/>
         /// <seealso cref="Vector128.Negate{T}(Vector128{T})" />
         Vector128<short> Negate(Vector128<short> vector);
@@ -973,7 +971,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Mnemonic: <c>rt[i] := -vector[i]</c>.
         /// </summary>
         /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
-        /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
+        /// <returns>A vector whose elements are the negate of the elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中各元素的相反数).</returns>
         /// <seealso cref="Negate_AcceleratedTypes"/>
         /// <seealso cref="Vector128.Negate{T}(Vector128{T})" />
         Vector128<int> Negate(Vector128<int> vector);
@@ -983,7 +981,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Mnemonic: <c>rt[i] := -vector[i]</c>.
         /// </summary>
         /// <param name="vector">The vector to negate (将计算相反数的向量).</param>
-        /// <returns>A vector whose elements are the negate of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的相反数).</returns>
+        /// <returns>A vector whose elements are the negate of the elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中各元素的相反数).</returns>
         /// <seealso cref="Negate_AcceleratedTypes"/>
         /// <seealso cref="Vector128.Negate{T}(Vector128{T})" />
         Vector128<long> Negate(Vector128<long> vector);
@@ -1010,7 +1008,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>Subtract</c> (运行 <c>Subtract</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="Subtract"/>
+        /// <seealso cref="Subtract(Vector128{byte}, Vector128{byte})"/>
         TypeCodeFlags Subtract_AcceleratedTypes { get; }
 
         /// <summary>

@@ -164,7 +164,7 @@ namespace Zyl.VectorTraits.Impl {
 
         // -- Vectors_T: Vector128s<UInt16> --
 
-        /// <inheritdoc cref="Vector128s{ushort}.VMaxByte"/>
+        /// <inheritdoc cref="Vector128s{T}.VMaxByte"/>
         /// <remarks>For UInt16.</remarks>
         [CLSCompliant(false)]
         public static Vector128<ushort> UInt16_VMaxByte {
@@ -180,7 +180,7 @@ namespace Zyl.VectorTraits.Impl {
 
         // -- Vectors_T: Vector128s<Int64> --
 
-        /// <inheritdoc cref="Vector128s{long}.MinValue"/>
+        /// <inheritdoc cref="Vector128s{T}.MinValue"/>
         /// <remarks>For Int64.</remarks>
         public static Vector128<long> Int64_MinValue {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -210,7 +210,7 @@ namespace Zyl.VectorTraits.Impl {
         } = Vector128.Create(long.MinValue + 4);
 #endif // USE_VECTOR_CREATE_INT64
 
-        /// <inheritdoc cref="Vector128s{long}.VMaxInt32"/>
+        /// <inheritdoc cref="Vector128s{T}.VMaxInt32"/>
         /// <remarks>For Int64.</remarks>
         public static Vector128<long> Int64_VMaxInt32 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -229,7 +229,7 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
-        /// <inheritdoc cref="Vector128s{long}.VMinInt32"/>
+        /// <inheritdoc cref="Vector128s{T}.VMinInt32"/>
         /// <remarks>For Int64.</remarks>
         public static Vector128<long> Int64_VMinInt32 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -248,7 +248,7 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
-        /// <inheritdoc cref="Vector128s{long}.VMaxUInt32"/>
+        /// <inheritdoc cref="Vector128s{T}.VMaxUInt32"/>
         /// <remarks>For Int64.</remarks>
         public static Vector128<long> Int64_VMaxUInt32 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

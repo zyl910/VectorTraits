@@ -22,7 +22,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>YClamp</c> (运行 <c>YClamp</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="YClamp"/>
+        /// <seealso cref="YClamp(Vector{byte}, Vector{byte}, Vector{byte})"/>
         TypeCodeFlags YClamp_AcceleratedTypes { get; }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>YNarrowSaturate</c> (运行 <c>YNarrowSaturate</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="YNarrowSaturate"/>
+        /// <seealso cref="YNarrowSaturate(Vector{short}, Vector{short})"/>
         /// <seealso cref="YNarrowSaturate_FullAcceleratedTypes"/>
         /// <seealso cref="Narrow_AcceleratedTypes"/>
         TypeCodeFlags YNarrowSaturate_AcceleratedTypes { get; }
@@ -160,7 +160,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <remarks>
         /// <para>`AcceleratedTypes` only indicates the presence of hardware acceleration, possibly indirectly through some algorithm. And `FullAcceleratedTypes` means that dedicated instructions are used to achieve full hardware acceleration. (`AcceleratedTypes`仅表示存在硬件加速,有可能是通过一些算法间接实现的. 而 `FullAcceleratedTypes`意味着使用了专用指令，实现了完全的硬件加速)</para>
         /// </remarks>
-        /// <seealso cref="YNarrowSaturate"/>
+        /// <seealso cref="YNarrowSaturate(Vector{short}, Vector{short})"/>
         /// <seealso cref="YNarrowSaturate_AcceleratedTypes"/>
         TypeCodeFlags YNarrowSaturate_FullAcceleratedTypes { get; }
 
@@ -242,7 +242,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>YNarrowSaturateUnsigned</c> (运行 <c>YNarrowSaturateUnsigned</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="YNarrowSaturateUnsigned"/>
+        /// <seealso cref="YNarrowSaturateUnsigned(Vector{short}, Vector{short})"/>
         /// <seealso cref="YNarrowSaturateUnsigned_FullAcceleratedTypes"/>
         /// <seealso cref="Narrow_AcceleratedTypes"/>
         TypeCodeFlags YNarrowSaturateUnsigned_AcceleratedTypes { get; }
@@ -253,7 +253,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <remarks>
         /// <para>`AcceleratedTypes` only indicates the presence of hardware acceleration, possibly indirectly through some algorithm. And `FullAcceleratedTypes` means that dedicated instructions are used to achieve full hardware acceleration. (`AcceleratedTypes`仅表示存在硬件加速,有可能是通过一些算法间接实现的. 而 `FullAcceleratedTypes`意味着使用了专用指令，实现了完全的硬件加速)</para>
         /// </remarks>
-        /// <seealso cref="YNarrowSaturateUnsigned"/>
+        /// <seealso cref="YNarrowSaturateUnsigned(Vector{short}, Vector{short})"/>
         /// <seealso cref="YNarrowSaturateUnsigned_AcceleratedTypes"/>
         TypeCodeFlags YNarrowSaturateUnsigned_FullAcceleratedTypes { get; }
 
@@ -301,12 +301,12 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <remarks>
         /// <para>Methods used to calculate rounding (用于计算舍入的方法):</para>
-        /// <para>- <see cref="Ceiling"/>: Computes the ceiling of each element in a vector (计算向量中每个元素的向上取整). It is also known as round to positive infinity (它也被称作向正无穷舍入). See more: <see cref="MidpointRounding.ToPositiveInfinity"/>.</para>
-        /// <para>- <see cref="Floor"/>: Computes the floor of each element in a vector (计算向量中每个元素的向下取整). It is also known as round to negative infinity (它也被称作向负无穷舍入). See more: <see cref="MidpointRounding.ToNegativeInfinity"/>.</para>
-        /// <para>- <see cref="YRoundToEven"/>: Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.</para>
-        /// <para>- <see cref="YRoundToZero"/>: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: <see cref="MidpointRounding.ToZero"/>.</para>
+        /// <para>- <see cref="Ceiling(Vector{float})"/>: Computes the ceiling of each element in a vector (计算向量中每个元素的向上取整). It is also known as round to positive infinity (它也被称作向正无穷舍入). See more: <see cref="MidpointRounding.ToPositiveInfinity"/>.</para>
+        /// <para>- <see cref="Floor(Vector{float})"/>: Computes the floor of each element in a vector (计算向量中每个元素的向下取整). It is also known as round to negative infinity (它也被称作向负无穷舍入). See more: <see cref="MidpointRounding.ToNegativeInfinity"/>.</para>
+        /// <para>- <see cref="YRoundToEven(Vector{float})"/>: Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.</para>
+        /// <para>- <see cref="YRoundToZero(Vector{float})"/>: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: <see cref="MidpointRounding.ToZero"/>.</para>
         /// </remarks>
-        /// <seealso cref="YRoundToEven"/>
+        /// <seealso cref="YRoundToEven(Vector{float})"/>
         TypeCodeFlags YRoundToEven_AcceleratedTypes { get; }
 
         /// <summary>
@@ -333,12 +333,12 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <remarks>
         /// <para>Methods used to calculate rounding (用于计算舍入的方法):</para>
-        /// <para>- <see cref="Ceiling"/>: Computes the ceiling of each element in a vector (计算向量中每个元素的向上取整). It is also known as round to positive infinity (它也被称作向正无穷舍入). See more: <see cref="MidpointRounding.ToPositiveInfinity"/>.</para>
-        /// <para>- <see cref="Floor"/>: Computes the floor of each element in a vector (计算向量中每个元素的向下取整). It is also known as round to negative infinity (它也被称作向负无穷舍入). See more: <see cref="MidpointRounding.ToNegativeInfinity"/>.</para>
-        /// <para>- <see cref="YRoundToEven"/>: Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.</para>
-        /// <para>- <see cref="YRoundToZero"/>: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: <see cref="MidpointRounding.ToZero"/>.</para>
+        /// <para>- <see cref="Ceiling(Vector{float})"/>: Computes the ceiling of each element in a vector (计算向量中每个元素的向上取整). It is also known as round to positive infinity (它也被称作向正无穷舍入). See more: <see cref="MidpointRounding.ToPositiveInfinity"/>.</para>
+        /// <para>- <see cref="Floor(Vector{float})"/>: Computes the floor of each element in a vector (计算向量中每个元素的向下取整). It is also known as round to negative infinity (它也被称作向负无穷舍入). See more: <see cref="MidpointRounding.ToNegativeInfinity"/>.</para>
+        /// <para>- <see cref="YRoundToEven(Vector{float})"/>: Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.</para>
+        /// <para>- <see cref="YRoundToZero(Vector{float})"/>: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: <see cref="MidpointRounding.ToZero"/>.</para>
         /// </remarks>
-        /// <seealso cref="YRoundToZero"/>
+        /// <seealso cref="YRoundToZero(Vector{float})"/>
         TypeCodeFlags YRoundToZero_AcceleratedTypes { get; }
 
         /// <summary>
@@ -368,13 +368,13 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- (none): Normal (常规).</para>
         /// <para>- Const: Constant version. This version can be used if you can ensure that the parameters are constants. It can take advantage of constants and make better use of hardware acceleration (常量版. 若能确保参数是常量, 可使用该版本. 它能利用常量, 更好的使用硬件加速).</para>
         /// <para>Similar methods (相似的方法).</para>
-        /// <para>- <see cref="YShuffleG2"/>: For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).</para>
-        /// <para>- <see cref="YShuffleG4"/>: For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use <see cref="YShuffleG4X2"/> instead (如果向量的元素数量小于4，请使用 <see cref="YShuffleG4X2"/> 代替).</para>
-        /// <para>- <see cref="YShuffleG4X2"/>: For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).</para>
+        /// <para>- <see cref="YShuffleG2(Vector{byte}, ShuffleControlG2)"/>: For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).</para>
+        /// <para>- <see cref="YShuffleG4(Vector{byte}, ShuffleControlG4)"/>: For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use YShuffleG4X2 instead (如果向量的元素数量小于4，请使用 YShuffleG4X2 代替).</para>
+        /// <para>- <see cref="YShuffleG4X2(Vector{byte}, Vector{byte}, ShuffleControlG4, out Vector{byte})"/>: For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).</para>
         /// </remarks>
-        /// <seealso cref="YShuffleG2"/>
-        /// <seealso cref="YShuffleG4"/>
-        /// <seealso cref="YShuffleG4X2"/>
+        /// <seealso cref="YShuffleG2(Vector{byte}, ShuffleControlG2)"/>
+        /// <seealso cref="YShuffleG4(Vector{byte}, ShuffleControlG4)"/>
+        /// <seealso cref="YShuffleG4X2(Vector{byte}, Vector{byte}, ShuffleControlG4, out Vector{byte})"/>
         TypeCodeFlags YShuffleG2_AcceleratedTypes { get; }
 
         /// <summary>
@@ -588,13 +588,13 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- (none): Normal (常规).</para>
         /// <para>- Const: Constant version. This version can be used if you can ensure that the parameters are constants. It can take advantage of constants and make better use of hardware acceleration (常量版. 若能确保参数是常量, 可使用该版本. 它能利用常量, 更好的使用硬件加速).</para>
         /// <para>Similar methods (相似的方法).</para>
-        /// <para>- <see cref="YShuffleG2"/>: For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).</para>
-        /// <para>- <see cref="YShuffleG4"/>: For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use <see cref="YShuffleG4X2"/> instead (如果向量的元素数量小于4，请使用 <see cref="YShuffleG4X2"/> 代替).</para>
-        /// <para>- <see cref="YShuffleG4X2"/>: For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).</para>
+        /// <para>- <see cref="YShuffleG2(Vector{byte}, ShuffleControlG2)"/>: For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).</para>
+        /// <para>- <see cref="YShuffleG4(Vector{byte}, ShuffleControlG4)"/>: For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use YShuffleG4X2 instead (如果向量的元素数量小于4，请使用 YShuffleG4X2 代替).</para>
+        /// <para>- <see cref="YShuffleG4X2(Vector{byte}, Vector{byte}, ShuffleControlG4, out Vector{byte})"/>: For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).</para>
         /// </remarks>
-        /// <seealso cref="YShuffleG2"/>
-        /// <seealso cref="YShuffleG4"/>
-        /// <seealso cref="YShuffleG4X2"/>
+        /// <seealso cref="YShuffleG2(Vector{byte}, ShuffleControlG2)"/>
+        /// <seealso cref="YShuffleG4(Vector{byte}, ShuffleControlG4)"/>
+        /// <seealso cref="YShuffleG4X2(Vector{byte}, Vector{byte}, ShuffleControlG4, out Vector{byte})"/>
         TypeCodeFlags YShuffleG4_AcceleratedTypes { get; }
 
         /// <summary>
@@ -820,13 +820,13 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- (none): Normal (常规).</para>
         /// <para>- Const: Constant version. This version can be used if you can ensure that the parameters are constants. It can take advantage of constants and make better use of hardware acceleration (常量版. 若能确保参数是常量, 可使用该版本. 它能利用常量, 更好的使用硬件加速).</para>
         /// <para>Similar methods (相似的方法).</para>
-        /// <para>- <see cref="YShuffleG2"/>: For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).</para>
-        /// <para>- <see cref="YShuffleG4"/>: For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use <see cref="YShuffleG4X2"/> instead (如果向量的元素数量小于4，请使用 <see cref="YShuffleG4X2"/> 代替).</para>
-        /// <para>- <see cref="YShuffleG4X2"/>: For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).</para>
+        /// <para>- <see cref="YShuffleG2(Vector{byte}, ShuffleControlG2)"/>: For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).</para>
+        /// <para>- <see cref="YShuffleG4(Vector{byte}, ShuffleControlG4)"/>: For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use YShuffleG4X2 instead (如果向量的元素数量小于4，请使用 YShuffleG4X2 代替).</para>
+        /// <para>- <see cref="YShuffleG4X2(Vector{byte}, Vector{byte}, ShuffleControlG4, out Vector{byte})"/>: For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).</para>
         /// </remarks>
-        /// <seealso cref="YShuffleG2"/>
-        /// <seealso cref="YShuffleG4"/>
-        /// <seealso cref="YShuffleG4X2"/>
+        /// <seealso cref="YShuffleG2(Vector{byte}, ShuffleControlG2)"/>
+        /// <seealso cref="YShuffleG4(Vector{byte}, ShuffleControlG4)"/>
+        /// <seealso cref="YShuffleG4X2(Vector{byte}, Vector{byte}, ShuffleControlG4, out Vector{byte})"/>
         TypeCodeFlags YShuffleG4X2_AcceleratedTypes { get; }
 
         /// <summary>
@@ -1079,11 +1079,11 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- Args: Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</para>
         /// <para>- Core. Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).</para>
         /// <para>Similar methods (相似的方法).</para>
-        /// <para>- <see cref="Shuffle"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
-        /// <para>- <see cref="YShuffleInsert"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
-        /// <para>- <see cref="YShuffleKernel"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
+        /// <para>- <see cref="Shuffle(Vector{byte}, Vector{byte})"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
+        /// <para>- <see cref="YShuffleInsert(Vector{byte}, Vector{byte}, Vector{byte})"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
+        /// <para>- <see cref="YShuffleKernel(Vector{byte}, Vector{byte})"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
         /// </remarks>
-        /// <seealso cref="YShuffleInsert"/>
+        /// <seealso cref="YShuffleInsert(Vector{byte}, Vector{byte}, Vector{byte})"/>
         TypeCodeFlags YShuffleInsert_AcceleratedTypes { get; }
 
         /// <summary>
@@ -1095,7 +1095,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{float}, Vector{int})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{float}, Vector128{int})"/>
         Vector<float> YShuffleInsert(Vector<float> back, Vector<float> vector, Vector<int> indices);
 
         /// <summary>
@@ -1107,7 +1107,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{double}, Vector{long})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{double}, Vector128{long})"/>
         Vector<double> YShuffleInsert(Vector<double> back, Vector<double> vector, Vector<long> indices);
 
         /// <summary>
@@ -1119,7 +1119,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{sbyte}, Vector{sbyte})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{sbyte}, Vector128{sbyte})"/>
         /// <seealso cref="AdvSimd.VectorTableLookupExtension(Vector64{sbyte}, Vector128{sbyte}, Vector64{sbyte})"/>
         Vector<sbyte> YShuffleInsert(Vector<sbyte> back, Vector<sbyte> vector, Vector<sbyte> indices);
 
@@ -1132,7 +1132,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{byte}, Vector{byte})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{byte}, Vector128{byte})"/>
         /// <seealso cref="AdvSimd.VectorTableLookupExtension(Vector64{byte}, Vector128{byte}, Vector64{byte})"/>
         Vector<byte> YShuffleInsert(Vector<byte> back, Vector<byte> vector, Vector<byte> indices);
 
@@ -1145,7 +1145,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{short}, Vector{short})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{short}, Vector128{short})"/>
         Vector<short> YShuffleInsert(Vector<short> back, Vector<short> vector, Vector<short> indices);
 
         /// <summary>
@@ -1157,7 +1157,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{ushort}, Vector{ushort})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{ushort}, Vector128{ushort})"/>
         Vector<ushort> YShuffleInsert(Vector<ushort> back, Vector<ushort> vector, Vector<ushort> indices);
 
         /// <summary>
@@ -1169,7 +1169,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{int}, Vector{int})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{int}, Vector128{int})"/>
         Vector<int> YShuffleInsert(Vector<int> back, Vector<int> vector, Vector<int> indices);
 
         /// <summary>
@@ -1181,7 +1181,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{uint}, Vector{uint})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{uint}, Vector128{uint})"/>
         Vector<uint> YShuffleInsert(Vector<uint> back, Vector<uint> vector, Vector<uint> indices);
 
         /// <summary>
@@ -1193,7 +1193,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{long}, Vector{long})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{long}, Vector128{long})"/>
         Vector<long> YShuffleInsert(Vector<long> back, Vector<long> vector, Vector<long> indices);
 
         /// <summary>
@@ -1205,7 +1205,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{ulong}, Vector{ulong})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{ulong}, Vector128{ulong})"/>
         Vector<ulong> YShuffleInsert(Vector<ulong> back, Vector<ulong> vector, Vector<ulong> indices);
 
 
@@ -1213,7 +1213,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
         /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
@@ -1225,7 +1225,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
         /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
@@ -1237,7 +1237,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
         /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
@@ -1249,7 +1249,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
         /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
@@ -1261,7 +1261,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
         /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
@@ -1273,7 +1273,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
         /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
@@ -1285,7 +1285,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
         /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
@@ -1297,7 +1297,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and insert (换位并插入的参数计算). Provide arguments for YShuffleInsert_Core (为 YShuffleInsert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):back[i]</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleInsert_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleInsert_Core .</param>
         /// <param name="args2">Arguments 2 (参数2). Used for YShuffleInsert_Core .</param>
@@ -1417,7 +1417,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="args2">Arguments 2 (参数2). Derived from YShuffleInsert_Args .</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
-        /// <seealso cref="YShuffleInsert_Args(Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{int})"/>
+        /// <seealso cref="YShuffleInsert_Args(Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint})"/>
         Vector<uint> YShuffleInsert_Core(Vector<uint> back, Vector<uint> vector, Vector<uint> args0, Vector<uint> args1, Vector<uint> args2);
 
         /// <summary>
@@ -1431,7 +1431,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="args2">Arguments 2 (参数2). Derived from YShuffleInsert_Args .</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleInsert_AcceleratedTypes"/>
-        /// <seealso cref="YShuffleInsert_Args(Vector{long}, out Vector{long}, out Vector{long}, out Vector{int})"/>
+        /// <seealso cref="YShuffleInsert_Args(Vector{long}, out Vector{long}, out Vector{long}, out Vector{long})"/>
         Vector<long> YShuffleInsert_Core(Vector<long> back, Vector<long> vector, Vector<long> args0, Vector<long> args1, Vector<long> args2);
 
         /// <summary>
@@ -1458,13 +1458,13 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- Args: Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</para>
         /// <para>- Core. Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).</para>
         /// <para>Similar methods (相似的方法).</para>
-        /// <para>- <see cref="Shuffle"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
-        /// <para>- <see cref="YShuffleInsert"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
-        /// <para>- <see cref="YShuffleKernel"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
+        /// <para>- <see cref="Shuffle(Vector{byte}, Vector{byte})"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
+        /// <para>- <see cref="YShuffleInsert(Vector{byte}, Vector{byte}, Vector{byte})"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
+        /// <para>- <see cref="YShuffleKernel(Vector{byte}, Vector{byte})"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
         /// </remarks>
-        /// <seealso cref="YShuffleKernel"/>
-        /// <seealso cref="YShuffleKernel_Args"/>
-        /// <seealso cref="YShuffleKernel_Core"/>
+        /// <seealso cref="YShuffleKernel(Vector{byte}, Vector{byte})"/>
+        /// <seealso cref="YShuffleKernel_Args(Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        /// <seealso cref="YShuffleKernel_Core(Vector{byte}, Vector{byte}, Vector{byte})"/>
         TypeCodeFlags YShuffleKernel_AcceleratedTypes { get; }
 
         /// <summary>
@@ -1475,7 +1475,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{float}, Vector{int})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{float}, Vector128{int})"/>
         /// <seealso cref="Avx2.PermuteVar8x32(Vector256{float}, Vector256{int})"/>
         Vector<float> YShuffleKernel(Vector<float> vector, Vector<int> indices);
 
@@ -1487,7 +1487,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{double}, Vector{long})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{double}, Vector128{long})"/>
         Vector<double> YShuffleKernel(Vector<double> vector, Vector<long> indices);
 
         /// <summary>
@@ -1498,7 +1498,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{sbyte}, Vector{sbyte})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{sbyte}, Vector128{sbyte})"/>
         /// <seealso cref="AdvSimd.VectorTableLookup(Vector128{sbyte}, Vector64{sbyte})"/>
         /// <seealso cref="Avx2.Shuffle(Vector256{sbyte}, Vector256{sbyte})"/>
         Vector<sbyte> YShuffleKernel(Vector<sbyte> vector, Vector<sbyte> indices);
@@ -1511,7 +1511,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{byte}, Vector{byte})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{byte}, Vector128{byte})"/>
         /// <seealso cref="AdvSimd.VectorTableLookup(Vector128{byte}, Vector64{byte})"/>
         /// <seealso cref="Avx2.Shuffle(Vector256{byte}, Vector256{byte})"/>
         Vector<byte> YShuffleKernel(Vector<byte> vector, Vector<byte> indices);
@@ -1524,7 +1524,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{short}, Vector{short})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{short}, Vector128{short})"/>
         Vector<short> YShuffleKernel(Vector<short> vector, Vector<short> indices);
 
         /// <summary>
@@ -1535,7 +1535,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{ushort}, Vector{ushort})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{ushort}, Vector128{ushort})"/>
         Vector<ushort> YShuffleKernel(Vector<ushort> vector, Vector<ushort> indices);
 
         /// <summary>
@@ -1546,7 +1546,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{int}, Vector{int})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{int}, Vector128{int})"/>
         /// <seealso cref="Avx2.PermuteVar8x32(Vector256{int}, Vector256{int})"/>
         Vector<int> YShuffleKernel(Vector<int> vector, Vector<int> indices);
 
@@ -1558,7 +1558,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{uint}, Vector{uint})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{uint}, Vector128{uint})"/>
         /// <seealso cref="Avx2.PermuteVar8x32(Vector256{uint}, Vector256{uint})"/>
         Vector<uint> YShuffleKernel(Vector<uint> vector, Vector<uint> indices);
 
@@ -1570,7 +1570,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{long}, Vector{long})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{long}, Vector128{long})"/>
         Vector<long> YShuffleKernel(Vector<long> vector, Vector<long> indices);
 
         /// <summary>
@@ -1581,7 +1581,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
-        /// <seealso cref="Vector.Shuffle(Vector{ulong}, Vector{ulong})"/>
+        /// <seealso cref="Vector128.Shuffle(Vector128{ulong}, Vector128{ulong})"/>
         Vector<ulong> YShuffleKernel(Vector<ulong> vector, Vector<ulong> indices);
 
 
@@ -1589,7 +1589,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
@@ -1600,7 +1600,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
@@ -1611,7 +1611,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
@@ -1622,7 +1622,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
@@ -1633,7 +1633,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
@@ -1644,7 +1644,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
@@ -1655,7 +1655,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
@@ -1666,7 +1666,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexMask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexMask"/> 掩码来约束参数).
         /// Mnemonic: <c>rt[i] := vector[indices[i]]</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for YShuffleKernel_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for YShuffleKernel_Core .</param>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>

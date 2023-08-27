@@ -9,7 +9,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>Multiply</c> (运行 <c>Multiply</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="Multiply"/>
+        /// <seealso cref="Multiply(Vector{byte}, Vector{byte})"/>
         /// <seealso cref="Multiply_FullAcceleratedTypes"/>
         TypeCodeFlags Multiply_AcceleratedTypes { get; }
 
@@ -19,7 +19,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <remarks>
         /// <para>`AcceleratedTypes` only indicates the presence of hardware acceleration, possibly indirectly through some algorithm. And `FullAcceleratedTypes` means that dedicated instructions are used to achieve full hardware acceleration. (`AcceleratedTypes`仅表示存在硬件加速,有可能是通过一些算法间接实现的. 而 `FullAcceleratedTypes`意味着使用了专用指令，实现了完全的硬件加速)</para>
         /// </remarks>
-        /// <seealso cref="Multiply"/>
+        /// <seealso cref="Multiply(Vector{byte}, Vector{byte})"/>
         /// <seealso cref="Multiply_AcceleratedTypes"/>
         TypeCodeFlags Multiply_FullAcceleratedTypes { get; }
 

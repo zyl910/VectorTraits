@@ -27,12 +27,12 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <remarks>
         /// <para>Methods used to calculate rounding (用于计算舍入的方法):</para>
-        /// <para>- <see cref="Ceiling"/>: Computes the ceiling of each element in a vector (计算向量中每个元素的向上取整). It is also known as round to positive infinity (它也被称作向正无穷舍入). See more: <see cref="MidpointRounding.ToPositiveInfinity"/>.</para>
-        /// <para>- <see cref="Floor"/>: Computes the floor of each element in a vector (计算向量中每个元素的向下取整). It is also known as round to negative infinity (它也被称作向负无穷舍入). See more: <see cref="MidpointRounding.ToNegativeInfinity"/>.</para>
-        /// <para>- <see cref="YRoundToEven"/>: Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.</para>
-        /// <para>- <see cref="YRoundToZero"/>: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: <see cref="MidpointRounding.ToZero"/>.</para>
+        /// <para>- <see cref="Ceiling(Vector128{float})"/>: Computes the ceiling of each element in a vector (计算向量中每个元素的向上取整). It is also known as round to positive infinity (它也被称作向正无穷舍入). See more: <see cref="MidpointRounding.ToPositiveInfinity"/>.</para>
+        /// <para>- <see cref="Floor(Vector128{float})"/>: Computes the floor of each element in a vector (计算向量中每个元素的向下取整). It is also known as round to negative infinity (它也被称作向负无穷舍入). See more: <see cref="MidpointRounding.ToNegativeInfinity"/>.</para>
+        /// <para>- <see cref="YRoundToEven(Vector128{float})"/>: Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.</para>
+        /// <para>- <see cref="YRoundToZero(Vector128{float})"/>: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: <see cref="MidpointRounding.ToZero"/>.</para>
         /// </remarks>
-        /// <seealso cref="Ceiling"/>
+        /// <seealso cref="Ceiling(Vector128{float})"/>
         TypeCodeFlags Ceiling_AcceleratedTypes { get; }
 
         /// <summary>
@@ -64,8 +64,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- (none): Normal (常规). Full 64-bit integer range (完全的64位整数范围).</para>
         /// <para>- Range52: Supports up to 52-bit integer range (最多支持52位整数范围).</para>
         /// </remarks>
-        /// <seealso cref="ConvertToDouble"/>
-        /// <seealso cref="ConvertToDouble_Range52"/>
+        /// <seealso cref="ConvertToDouble(Vector128{long})"/>
+        /// <seealso cref="ConvertToDouble_Range52(Vector128{long})"/>
         TypeCodeFlags ConvertToDouble_AcceleratedTypes { get; }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>ConvertToSingle</c> (运行 <c>ConvertToSingle</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="ConvertToSingle"/>
+        /// <seealso cref="ConvertToSingle(Vector128{int})"/>
         TypeCodeFlags ConvertToSingle_AcceleratedTypes { get; }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>ExtractMostSignificantBits</c> (运行 <c>ExtractMostSignificantBits</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="ExtractMostSignificantBits"/>
+        /// <seealso cref="ExtractMostSignificantBits(Vector128{byte})"/>
         TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes { get; }
 
         /// <summary>
@@ -370,12 +370,12 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <remarks>
         /// <para>Methods used to calculate rounding (用于计算舍入的方法):</para>
-        /// <para>- <see cref="Ceiling"/>: Computes the ceiling of each element in a vector (计算向量中每个元素的向上取整). It is also known as round to positive infinity (它也被称作向正无穷舍入). See more: <see cref="MidpointRounding.ToPositiveInfinity"/>.</para>
-        /// <para>- <see cref="Floor"/>: Computes the floor of each element in a vector (计算向量中每个元素的向下取整). It is also known as round to negative infinity (它也被称作向负无穷舍入). See more: <see cref="MidpointRounding.ToNegativeInfinity"/>.</para>
-        /// <para>- <see cref="YRoundToEven"/>: Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.</para>
-        /// <para>- <see cref="YRoundToZero"/>: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: <see cref="MidpointRounding.ToZero"/>.</para>
+        /// <para>- <see cref="Ceiling(Vector128{float})"/>: Computes the ceiling of each element in a vector (计算向量中每个元素的向上取整). It is also known as round to positive infinity (它也被称作向正无穷舍入). See more: <see cref="MidpointRounding.ToPositiveInfinity"/>.</para>
+        /// <para>- <see cref="Floor(Vector128{float})"/>: Computes the floor of each element in a vector (计算向量中每个元素的向下取整). It is also known as round to negative infinity (它也被称作向负无穷舍入). See more: <see cref="MidpointRounding.ToNegativeInfinity"/>.</para>
+        /// <para>- <see cref="YRoundToEven(Vector128{float})"/>: Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.</para>
+        /// <para>- <see cref="YRoundToZero(Vector128{float})"/>: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: <see cref="MidpointRounding.ToZero"/>.</para>
         /// </remarks>
-        /// <seealso cref="Floor"/>
+        /// <seealso cref="Floor(Vector128{float})"/>
         TypeCodeFlags Floor_AcceleratedTypes { get; }
 
         /// <summary>
@@ -402,7 +402,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>Narrow</c> (运行 <c>Narrow</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="Narrow"/>
+        /// <seealso cref="Narrow(Vector128{short}, Vector128{short})"/>
         TypeCodeFlags Narrow_AcceleratedTypes { get; }
 
         /// <summary>
@@ -495,12 +495,12 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- ConstCore: Core calculation of constant version. Its arguments are derived from ShiftLeft_Args (常量版的核心计算. 其参数来源于 ShiftLeft_Args).</para>
         /// <para>- Fast: Fast version. This version can be used if you can ensure that the parameter variables are always in the valid range (快速版. 若能确保参数变量总是在有效范围内的, 可使用该版本).</para>
         /// </remarks>
-        /// <seealso cref="ShiftLeft"/>
-        /// <seealso cref="ShiftLeft_Args"/>
-        /// <seealso cref="ShiftLeft_Core"/>
-        /// <seealso cref="ShiftLeft_Const"/>
-        /// <seealso cref="ShiftLeft_ConstCore"/>
-        /// <seealso cref="ShiftLeft_Fast"/>
+        /// <seealso cref="ShiftLeft(Vector128{byte}, int)"/>
+        /// <seealso cref="ShiftLeft_Args(Vector128{byte}, int, out Vector128{byte})"/>
+        /// <seealso cref="ShiftLeft_Core(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
+        /// <seealso cref="ShiftLeft_Const(Vector128{byte}, int)"/>
+        /// <seealso cref="ShiftLeft_ConstCore(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
+        /// <seealso cref="ShiftLeft_Fast(Vector128{byte}, int)"/>
         TypeCodeFlags ShiftLeft_AcceleratedTypes { get; }
 
         /// <summary>
@@ -1157,12 +1157,12 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- ConstCore: Core calculation of constant version. Its arguments are derived from ShiftRightArithmetic_Args (常量版的核心计算. 其参数来源于 ShiftRightArithmetic_Args).</para>
         /// <para>- Fast: Fast version. This version can be used if you can ensure that the parameter variables are always in the valid range (快速版. 若能确保参数变量总是在有效范围内的, 可使用该版本).</para>
         /// </remarks>
-        /// <seealso cref="ShiftRightArithmetic"/>
-        /// <seealso cref="ShiftRightArithmetic_Args"/>
-        /// <seealso cref="ShiftRightArithmetic_Core"/>
-        /// <seealso cref="ShiftRightArithmetic_Const"/>
-        /// <seealso cref="ShiftRightArithmetic_ConstCore"/>
-        /// <seealso cref="ShiftRightArithmetic_Fast"/>
+        /// <seealso cref="ShiftRightArithmetic(Vector128{sbyte}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic_Args(Vector128{sbyte}, int, out Vector128{sbyte})"/>
+        /// <seealso cref="ShiftRightArithmetic_Core(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
+        /// <seealso cref="ShiftRightArithmetic_Const(Vector128{sbyte}, int)"/>
+        /// <seealso cref="ShiftRightArithmetic_ConstCore(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
+        /// <seealso cref="ShiftRightArithmetic_Fast(Vector128{sbyte}, int)"/>
         TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes { get; }
 
         /// <summary>
@@ -1498,12 +1498,12 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- ConstCore: Core calculation of constant version. Its arguments are derived from ShiftRightLogical_Args (常量版的核心计算. 其参数来源于 ShiftRightLogical_Args).</para>
         /// <para>- Fast: Fast version. This version can be used if you can ensure that the parameter variables are always in the valid range (快速版. 若能确保参数变量总是在有效范围内的, 可使用该版本).</para>
         /// </remarks>
-        /// <seealso cref="ShiftRightLogical"/>
-        /// <seealso cref="ShiftRightLogical_Args"/>
-        /// <seealso cref="ShiftRightLogical_Core"/>
-        /// <seealso cref="ShiftRightLogical_Const"/>
-        /// <seealso cref="ShiftRightLogical_ConstCore"/>
-        /// <seealso cref="ShiftRightLogical_Fast"/>
+        /// <seealso cref="ShiftRightLogical(Vector128{byte}, int)"/>
+        /// <seealso cref="ShiftRightLogical_Args(Vector128{byte}, int, out Vector128{byte})"/>
+        /// <seealso cref="ShiftRightLogical_Core(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
+        /// <seealso cref="ShiftRightLogical_Const(Vector128{byte}, int)"/>
+        /// <seealso cref="ShiftRightLogical_ConstCore(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
+        /// <seealso cref="ShiftRightLogical_Fast(Vector128{byte}, int)"/>
         TypeCodeFlags ShiftRightLogical_AcceleratedTypes { get; }
 
         /// <summary>
@@ -2156,13 +2156,13 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- Args: Arguments calculation for only shuffle (仅换位的参数计算). Provide arguments for YShuffleKernel_Core (为 YShuffleKernel_Core 提供参数).</para>
         /// <para>- Core. Core calculation for only shuffle (仅换位的核心计算). Its arguments are derived from YShuffleKernel_Args (其参数来源于 YShuffleKernel_Args).</para>
         /// <para>Similar methods (相似的方法).</para>
-        /// <para>- <see cref="Shuffle"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
-        /// <para>- <see cref="YShuffleInsert"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
-        /// <para>- <see cref="YShuffleKernel"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
+        /// <para>- <see cref="Shuffle(Vector128{byte}, Vector128{byte})"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
+        /// <para>- <see cref="YShuffleInsert(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
+        /// <para>- <see cref="YShuffleKernel(Vector128{byte}, Vector128{byte})"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
         /// </remarks>
-        /// <seealso cref="Shuffle"/>
-        /// <seealso cref="Shuffle_Args"/>
-        /// <seealso cref="Shuffle_Core"/>
+        /// <seealso cref="Shuffle(Vector128{byte}, Vector128{byte})"/>
+        /// <seealso cref="Shuffle_Args(Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+        /// <seealso cref="Shuffle_Core(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
         TypeCodeFlags Shuffle_AcceleratedTypes { get; }
 
         /// <summary>
@@ -2282,7 +2282,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for Shuffle_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for Shuffle_Core .</param>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
@@ -2293,7 +2293,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for Shuffle_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for Shuffle_Core .</param>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
@@ -2304,7 +2304,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for Shuffle_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for Shuffle_Core .</param>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
@@ -2315,7 +2315,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for Shuffle_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for Shuffle_Core .</param>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
@@ -2326,7 +2326,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for Shuffle_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for Shuffle_Core .</param>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
@@ -2337,7 +2337,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for Shuffle_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for Shuffle_Core .</param>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
@@ -2348,7 +2348,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for Shuffle_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for Shuffle_Core .</param>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
@@ -2359,7 +2359,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for Shuffle_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for Shuffle_Core .</param>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
@@ -2493,7 +2493,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>Sum</c> (运行 <c>Sum</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="Sum"/>
+        /// <seealso cref="Sum(Vector128{byte})"/>
         TypeCodeFlags Sum_AcceleratedTypes { get; }
 
         /// <summary>
@@ -2600,7 +2600,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>Widen</c> (运行 <c>Widen</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="Widen"/>
+        /// <seealso cref="Widen(Vector128{byte}, out Vector128{ushort}, out Vector128{ushort})"/>
         TypeCodeFlags Widen_AcceleratedTypes { get; }
 
         /// <summary>
