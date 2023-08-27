@@ -522,7 +522,7 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="src">Source value (源值).</param>
-        /// <returns>A new <see cref="Vector{T}"/> with all elements initialized to value (一个新的 <see cref="Vector{T}"/>，其中所有元素已初始化为 <paramref name="value"/> ).</returns>
+        /// <returns>A new <see cref="Vector{T}"/> with all elements initialized to <paramref name="src"/> (一个新的 <see cref="Vector{T}"/>，其中所有元素已初始化为 <paramref name="src"/> ).</returns>
         public static Vector<T> CreateByDouble<T>(double src) where T : struct {
             return Create(Scalars.GetByDouble<T>(src));
         }
@@ -546,7 +546,7 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="src">Source value (源值).</param>
-        /// <returns>A new <see cref="Vector{T}"/> with all elements initialized to value (一个新的 <see cref="Vector{T}"/>，其中所有元素已初始化为 <paramref name="value"/> ).</returns>
+        /// <returns>A new <see cref="Vector{T}"/> with all elements initialized to <paramref name="src"/> (一个新的 <see cref="Vector{T}"/>，其中所有元素已初始化为 <paramref name="src"/> ).</returns>
         public static Vector<T> CreateByBits<T>(long src) where T : struct {
             return Create(Scalars.GetByBits<T>(src));
         }

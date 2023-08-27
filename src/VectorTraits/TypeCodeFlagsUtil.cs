@@ -179,7 +179,6 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <param name="code">Source code.</param>
         /// <returns>Returns a <c>TypeCodeFlags</c>.</returns>
-        /// <summary>
         public static TypeCodeFlags FlagsFromTypeCode(int code) {
             return (TypeCodeFlags)(1 << code);
         }
@@ -188,7 +187,7 @@ namespace Zyl.VectorTraits {
         /// Performs the specified action on each element of the specified <see cref="TypeCodeFlags"/> (对指定 TypeCodeFlags 的每个元素执行指定动作).
         /// </summary>
         /// <param name="src">Source value.</param>
-        /// <param name="action">The Action<T> to perform on each element of <paramref name="src"/>.</param>
+        /// <param name="action">The Action to perform on each element of <paramref name="src"/>.</param>
         public static void ForEach(TypeCodeFlags src, Action<ElementTypeCode> action) {
             int nsrc = (int)src;
             int cnt = sizeof(int) * 8;

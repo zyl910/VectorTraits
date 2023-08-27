@@ -525,6 +525,7 @@ namespace Zyl.VectorTraits {
         /// <summary>
         /// Writes a formatted string to the text stream, using the same semantics as the <see cref="Format(string, object?[])"/> method (使用与 Format 方法相同的语义，将格式化的字符串写入文本流). With these parameters: <paramref name="indent"/> .
         /// </summary>
+        /// <param name="indent">The indent.</param>
         /// <param name="textWriter">Output <see cref="TextWriter"/>.</param>
         /// <param name="format">Format string (格式化字符串).</param>
         /// <param name="args">The args (参数列表).</param>
@@ -586,6 +587,7 @@ namespace Zyl.VectorTraits {
             return WriteLine(null, textWriter, format, args);
         }
 
+        /// <summary>
         /// Output the list of properties of the object (将对象的属性列表进行输出). With these parameters: <paramref name="indent"/> .
         /// </summary>
         /// <param name="indent">The indent.</param>
@@ -612,6 +614,7 @@ namespace Zyl.VectorTraits {
             }
         }
 
+        /// <summary>
         /// Output the list of properties of the object (将对象的属性列表进行输出).
         /// </summary>
         /// <param name="textWriter">Output <see cref="TextWriter"/>.</param>

@@ -852,7 +852,8 @@ namespace Zyl.VectorTraits {
         /// <param name="amin">The lower bound of the result (结果的下限).</param>
         /// <param name="amax">The upper bound of the result (结果的上限).</param>
         /// <returns>Returns <c>(value&lt;amax)?( (value&gt;amin)?value:amin ):amax</c>.</returns>
-        /// <seealso cref="Math.Clamp(Half, Half, Half)"/>
+        /// <seealso cref="Math.Clamp(float, float, float)"/>
+        // /// <seealso cref="Math.Clamp(Half, Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Half Clamp(Half value, Half amin, Half amax) {
             return ConditionalSelect(value < amax, ConditionalSelect(value > amin, value, amin), amax);
@@ -1162,17 +1163,19 @@ namespace Zyl.VectorTraits {
         /// Produces the full product of two signed 64-bit numbers - Two word (生成两个有符号 64 位数的完整乘积 - 双字).
         /// </summary>
         /// <param name="a">The first number to multiply (要相乘的第一个数).</param>
-        /// <param name="b">The second number to multiply (要相乘的第二个数).</param>
+        /// <param name="  b">The second number to multiply (要相乘的第二个数).</param>
         /// <param name="low">When this method returns, contains the low 64-bit of the product of the specified numbers (此方法返回时，包含指定数字乘积的低 64 位).</param>
         /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
         /// <seealso cref="Math.BigMul(long, long, out long)"/>
         [Obsolete("This method is for testing purposes only. Please use BigMul instead.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static long BigMul_Two(long u, long v, out long low) {
+        public static long BigMul_Two(long a, long b, out long low) {
             const int L = 32; // sizeof(uint) * 8;
             const long MASK = (1L << L) - 1;
             ulong u0, v0, w0;
             long u1, v1, w1, w2, t, high;
+            long u = a;
+            long v = b;
             u0 = (ulong)(u & MASK); u1 = u >> L;
             v0 = (ulong)(v & MASK); v1 = v >> L;
             // u*v = (u1*v1)<<(2*L) + (u0*v1)<<L + (u1*v0)<<L + u0*v0
@@ -1230,11 +1233,13 @@ namespace Zyl.VectorTraits {
         /// <param name="b">The second number to multiply (要相乘的第二个数).</param>
         /// <returns>The high 64-bit of the product of the specified numbers (指定数字乘积的高 64 位).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static long BigMulHigh(long u, long v) {
+        public static long BigMulHigh(long a, long b) {
             const int L = 32; // sizeof(uint) * 8;
             const long MASK = (1L << L) - 1;
             ulong u0, v0, w0;
             long u1, v1, w1, w2, t, high;
+            long u = a;
+            long v = b;
             u0 = (ulong)(u & MASK); u1 = u >> L;
             v0 = (ulong)(v & MASK); v1 = v >> L;
             // u*v = (u1*v1)<<(2*L) + (u0*v1)<<L + (u1*v0)<<L + u0*v0
@@ -1288,11 +1293,13 @@ namespace Zyl.VectorTraits {
         /// <returns>The low 64-bit of the product of the specified numbers (指定数字乘积的低 64 位).</returns>
         [Obsolete("This method is for testing purposes only. Please use the multiplication operator(*) instead.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static long BigMulLow(long u, long v) {
+        public static long BigMulLow(long a, long b) {
             const int L = 32; // sizeof(uint) * 8;
             const long MASK = (1L << L) - 1;
             ulong u0, v0, w0;
             long u1, v1, w1, low;
+            long u = a;
+            long v = b;
             u0 = (ulong)(u & MASK); u1 = u >> L;
             v0 = (ulong)(v & MASK); v1 = v >> L;
             // u*v = (u1*v1)<<(2*L) + (u0*v1)<<L + (u1*v0)<<L + u0*v0

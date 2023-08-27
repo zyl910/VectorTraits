@@ -169,8 +169,8 @@ namespace Zyl.VectorTraits {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>The arguments provided for ShiftLeft_Core (为 ShiftLeft_Core 提供参数).</returns>
         /// <seealso cref="IVectorTraits.ShiftLeft_AcceleratedTypes"/>
-        /// <seealso cref="IVectorTraits.ShiftLeft"/>
-        /// <seealso cref="IVectorTraits.ShiftLeft_Core"/>
+        /// <seealso cref="IVectorTraits.ShiftLeft(Vector{byte}, int)"/>
+        /// <seealso cref="IVectorTraits.ShiftLeft_Core(Vector{byte}, int, Vector{byte}, Vector{byte})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         public static (Vector<T> args0, Vector<T> args1) ShiftLeft_Args<T>(Vector<T> dummy, int shiftAmount) where T : struct {
             if (typeof(sbyte) == typeof(T)) {
@@ -344,8 +344,8 @@ namespace Zyl.VectorTraits {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>The arguments provided for ShiftRightArithmetic_Core (为 ShiftRightArithmetic_Core 提供参数).</returns>
         /// <seealso cref="IVectorTraits.ShiftRightArithmetic_AcceleratedTypes"/>
-        /// <seealso cref="IVectorTraits.ShiftRightArithmetic"/>
-        /// <seealso cref="IVectorTraits.ShiftRightArithmetic_Core"/>
+        /// <seealso cref="IVectorTraits.ShiftRightArithmetic(Vector{sbyte}, int)"/>
+        /// <seealso cref="IVectorTraits.ShiftRightArithmetic_Core(Vector{sbyte}, int, Vector{sbyte}, Vector{sbyte})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         public static (Vector<T> args0, Vector<T> args1) ShiftRightArithmetic_Args<T>(Vector<T> dummy, int shiftAmount) where T : struct {
             if (typeof(sbyte) == typeof(T)) {
@@ -440,8 +440,8 @@ namespace Zyl.VectorTraits {
         /// <param name="shiftAmount">The number of bits by which to shift each element (每个元素的移位位数).</param>
         /// <returns>The arguments provided for ShiftRightLogical_Core (为 ShiftRightLogical_Core 提供参数).</returns>
         /// <seealso cref="IVectorTraits.ShiftRightLogical_AcceleratedTypes"/>
-        /// <seealso cref="IVectorTraits.ShiftRightLogical"/>
-        /// <seealso cref="IVectorTraits.ShiftRightLogical_Core"/>
+        /// <seealso cref="IVectorTraits.ShiftRightLogical(Vector{byte}, int)"/>
+        /// <seealso cref="IVectorTraits.ShiftRightLogical_Core(Vector{byte}, int, Vector{byte}, Vector{byte})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         public static (Vector<T> args0, Vector<T> args1) ShiftRightLogical_Args<T>(Vector<T> dummy, int shiftAmount) where T : struct {
             if (typeof(sbyte) == typeof(T)) {
@@ -611,12 +611,12 @@ namespace Zyl.VectorTraits {
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
         /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <param name="args0">Arguments 0 (参数0). Used for Shuffle_Core .</param>
         /// <param name="args1">Arguments 1 (参数1). Used for Shuffle_Core .</param>
-        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TIdx"/>) are not supported.</exception>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Args"/>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Args(Vector{byte}, out Vector{byte}, out Vector{byte})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         public static void Shuffle_Args<TIdx>(Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1)
                  where TIdx : struct {
@@ -662,10 +662,10 @@ namespace Zyl.VectorTraits {
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
         /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
-        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TIdx"/>) are not supported.</exception>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Vectors.Shuffle_Args{TIdx}(Vector{TIdx}, out Vector{TIdx}, out Vector{TIdx})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -679,10 +679,10 @@ namespace Zyl.VectorTraits {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<sbyte> args0, Vector<sbyte> args1) Shuffle_Args(Vector<sbyte> indices) {
@@ -694,10 +694,10 @@ namespace Zyl.VectorTraits {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Args(Vector{byte}, out Vector{byte}, out Vector{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<byte> args0, Vector<byte> args1) Shuffle_Args(Vector<byte> indices) {
             Shuffle_Args(indices, out var a, out var b);
@@ -708,10 +708,10 @@ namespace Zyl.VectorTraits {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{short}, out Vector{short}, out Vector{short})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Args(Vector{short}, out Vector{short}, out Vector{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<short> args0, Vector<short> args1) Shuffle_Args(Vector<short> indices) {
             Shuffle_Args(indices, out var a, out var b);
@@ -722,10 +722,10 @@ namespace Zyl.VectorTraits {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<ushort> args0, Vector<ushort> args1) Shuffle_Args(Vector<ushort> indices) {
@@ -737,10 +737,10 @@ namespace Zyl.VectorTraits {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{int}, out Vector{int}, out Vector{int})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Args(Vector{int}, out Vector{int}, out Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<int> args0, Vector<int> args1) Shuffle_Args(Vector<int> indices) {
             Shuffle_Args(indices, out var a, out var b);
@@ -751,10 +751,10 @@ namespace Zyl.VectorTraits {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Args(Vector{uint}, out Vector{uint}, out Vector{uint})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<uint> args0, Vector<uint> args1) Shuffle_Args(Vector<uint> indices) {
@@ -766,10 +766,10 @@ namespace Zyl.VectorTraits {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{long}, out Vector{long}, out Vector{long})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Args(Vector{long}, out Vector{long}, out Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<long> args0, Vector<long> args1) Shuffle_Args(Vector<long> indices) {
             Shuffle_Args(indices, out var a, out var b);
@@ -780,10 +780,10 @@ namespace Zyl.VectorTraits {
         /// Arguments calculation for shuffle and clear (换位并清零的参数计算). Provide arguments for Shuffle_Core (为 Shuffle_Core 提供参数). If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
         /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;Count)?( vector[indices[i]] ):0</c>.
         /// </summary>
-        /// <param name="indices">The per-element indices used to select a value from <paramref name="vector" /> (用于从 <paramref name="vector" /> 中选择值的每个元素索引).</param>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
         /// <returns>The arguments provided for Shuffle_Core (为 Shuffle_Core 提供参数).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<ulong> args0, Vector<ulong> args1) Shuffle_Args(Vector<ulong> indices) {
@@ -799,8 +799,8 @@ namespace Zyl.VectorTraits {
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
         /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{float}, Vector{int}, Vector{int})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Core(Vector{float}, Vector{int}, Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<float> Shuffle_Core(Vector<float> vector, (Vector<int> args0, Vector<int> args1) args) {
             return Shuffle_Core(vector, args.args0, args.args1);
@@ -813,8 +813,8 @@ namespace Zyl.VectorTraits {
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
         /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{double}, Vector{long}, Vector{long})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Core(Vector{double}, Vector{long}, Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> Shuffle_Core(Vector<double> vector, (Vector<long> args0, Vector<long> args1) args) {
             return Shuffle_Core(vector, args.args0, args.args1);
@@ -827,8 +827,8 @@ namespace Zyl.VectorTraits {
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
         /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<sbyte> Shuffle_Core(Vector<sbyte> vector, (Vector<sbyte> args0, Vector<sbyte> args1) args) {
@@ -842,8 +842,8 @@ namespace Zyl.VectorTraits {
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
         /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{byte}, Vector{byte}, Vector{byte})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Core(Vector{byte}, Vector{byte}, Vector{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<byte> Shuffle_Core(Vector<byte> vector, (Vector<byte> args0, Vector<byte> args1) args) {
             return Shuffle_Core(vector, args.args0, args.args1);
@@ -856,8 +856,8 @@ namespace Zyl.VectorTraits {
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
         /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{short}, Vector{short}, Vector{short})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Core(Vector{short}, Vector{short}, Vector{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<short> Shuffle_Core(Vector<short> vector, (Vector<short> args0, Vector<short> args1) args) {
             return Shuffle_Core(vector, args.args0, args.args1);
@@ -870,8 +870,8 @@ namespace Zyl.VectorTraits {
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
         /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{ushort}, VectorX2{ushort}, Vector{ushort})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Core(Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ushort> Shuffle_Core(Vector<ushort> vector, (Vector<ushort> args0, Vector<ushort> args1) args) {
@@ -885,8 +885,8 @@ namespace Zyl.VectorTraits {
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
         /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{int}, Vector{int}, Vector{int})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Core(Vector{int}, Vector{int}, Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> Shuffle_Core(Vector<int> vector, (Vector<int> args0, Vector<int> args1) args) {
             return Shuffle_Core(vector, args.args0, args.args1);
@@ -899,8 +899,8 @@ namespace Zyl.VectorTraits {
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
         /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{uint}, Vector{uint}, Vector{uint})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Core(Vector{uint}, Vector{uint}, Vector{uint})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<uint> Shuffle_Core(Vector<uint> vector, (Vector<uint> args0, Vector<uint> args1) args) {
@@ -914,8 +914,8 @@ namespace Zyl.VectorTraits {
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
         /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{long}, Vector{long}, Vector{long})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Core(Vector{long}, Vector{long}, Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<long> Shuffle_Core(Vector<long> vector, (Vector<long> args0, Vector<long> args1) args) {
             return Shuffle_Core(vector, args.args0, args.args1);
@@ -928,8 +928,8 @@ namespace Zyl.VectorTraits {
         /// <param name="vector">The input vector from which values are selected (从中选择值的输入向量).</param>
         /// <param name="args">The arguments(参数). Derived from Shuffle_Args .</param>
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
-        /// <seealso cref="IWVectorTraits.Shuffle_AcceleratedTypes"/>
-        /// <seealso cref="IWVectorTraits.Shuffle_Core(Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        /// <seealso cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.Shuffle_Core(Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ulong> Shuffle_Core(Vector<ulong> vector, (Vector<ulong> args0, Vector<ulong> args1) args) {

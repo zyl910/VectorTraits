@@ -38,9 +38,9 @@ namespace Zyl.VectorTraits {
         /// <summary>Represents positive infinity (表示正无穷). When the type is an integer, the value is 0 (当类型为整数时，该值为0).</summary>
         public static readonly Vector<T> PositiveInfinity;
         // -- Math --
-        /// <summary>Normalized number of value 1 (值1的归一化数). When the type is an integer, the value is'<see cref="ElementMaxValue"/>'; Otherwise it's 1 (当类型为整数时，它的值为 `<see cref="ElementMaxValue"/>`; 其他情况下为 1).</summary>
+        /// <summary>Normalized number of value 1 (值1的归一化数). When the type is an integer, the value is'<see cref="AbstractVectors{T}.ElementMaxValue"/>'; Otherwise it's 1 (当类型为整数时，它的值为 `<see cref="AbstractVectors{T}.ElementMaxValue"/>`; 其他情况下为 1).</summary>
         public static readonly Vector<T> NormOne;
-        /// <summary>The fixed point number of the value 1 (值1的定点数). When the type is an integer, the value is'Pow(2, <see cref="ElementFixedShift"/>)'; Otherwise it's 1 (当类型为整数时，它的值为 `Pow(2, <see cref="ElementFixedShift"/>)`; 其他情况下为 1).</summary>
+        /// <summary>The fixed point number of the value 1 (值1的定点数). When the type is an integer, the value is'Pow(2, <see cref="AbstractVectors{T}.ElementFixedShift"/>)'; Otherwise it's 1 (当类型为整数时，它的值为 `Pow(2, <see cref="AbstractVectors{T}.ElementFixedShift"/>)`; 其他情况下为 1).</summary>
         public static readonly Vector<T> FixedOne;
         /// <summary>Represents the natural logarithmic base, specified by the constant, e (表示自然对数的底，它由常数 e 指定).</summary>
         public static readonly Vector<T> E;
@@ -101,17 +101,17 @@ namespace Zyl.VectorTraits {
         /// <summary>Value -2147483648 (int.MinValue) .</summary>
         public static readonly Vector<T> VMinInt32;
         // -- Reciprocal number --
-        /// <summary>Reciprocal value: 1/127 (sbyte.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/127 (sbyte.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="AbstractVectors{T}.ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="AbstractVectors{T}.ElementFixedShift"/> 约定的定点数).</summary>
         public static readonly Vector<T> VReciprocalMaxSByte;
-        /// <summary>Reciprocal value: 1/255 (byte.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/255 (byte.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="AbstractVectors{T}.ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="AbstractVectors{T}.ElementFixedShift"/> 约定的定点数).</summary>
         public static readonly Vector<T> VReciprocalMaxByte;
-        /// <summary>Reciprocal value: 1/32767 (short.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/32767 (short.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="AbstractVectors{T}.ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="AbstractVectors{T}.ElementFixedShift"/> 约定的定点数).</summary>
         public static readonly Vector<T> VReciprocalMaxInt16;
-        /// <summary>Reciprocal value: 1/65535 (ushort.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/65535 (ushort.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="AbstractVectors{T}.ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="AbstractVectors{T}.ElementFixedShift"/> 约定的定点数).</summary>
         public static readonly Vector<T> VReciprocalMaxUInt16;
-        /// <summary>Reciprocal value: 1/2147483647 (int.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/2147483647 (int.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="AbstractVectors{T}.ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="AbstractVectors{T}.ElementFixedShift"/> 约定的定点数).</summary>
         public static readonly Vector<T> VReciprocalMaxInt32;
-        /// <summary>Reciprocal value: 1/4294967295 (uint.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="ElementFixedShift"/> 约定的定点数).</summary>
+        /// <summary>Reciprocal value: 1/4294967295 (uint.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="AbstractVectors{T}.ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="AbstractVectors{T}.ElementFixedShift"/> 约定的定点数).</summary>
         public static readonly Vector<T> VReciprocalMaxUInt32;
         // -- Specified value --
         /// <summary>The mask of the index (索引的掩码). All the elements have a value of <c>Count-1</c>.</summary>
@@ -176,13 +176,13 @@ namespace Zyl.VectorTraits {
         public static readonly Vector<T> XyzwAddress2NormOne;
         /// <summary>Xyzw - Address 3 is normalized number of value 1 (地址3为 值1的归一化数).</summary>
         public static readonly Vector<T> XyzwAddress3NormOne;
-        /// <summary>Xyzw - X mask. For a 4-element group, select the mask of the position 0th element (对于4个元素的组，选择位置为第0个元素的掩码). Alias has <see cref="RgbaRMask"/>.</summary>
+        /// <summary>Xyzw - X mask. For a 4-element group, select the mask of the position 0th element (对于4个元素的组，选择位置为第0个元素的掩码).</summary>
         public static readonly Vector<T> XyzwXMask;
-        /// <summary>Xyzw - Y mask. For a 4-element group, select the mask of the position 1th element (对于4个元素的组，选择位置为第1个元素的掩码). Alias has <see cref="RgbaGMask"/>.</summary>
+        /// <summary>Xyzw - Y mask. For a 4-element group, select the mask of the position 1th element (对于4个元素的组，选择位置为第1个元素的掩码).</summary>
         public static readonly Vector<T> XyzwYMask;
-        /// <summary>Xyzw - Z mask. For a 4-element group, select the mask of the position 2th element (对于4个元素的组，选择位置为第2个元素的掩码). Alias has <see cref="RgbaBMask"/>.</summary>
+        /// <summary>Xyzw - Z mask. For a 4-element group, select the mask of the position 2th element (对于4个元素的组，选择位置为第2个元素的掩码).</summary>
         public static readonly Vector<T> XyzwZMask;
-        /// <summary>Xyzw - W mask. For a 4-element group, select the mask of the position 3th element (对于4个元素的组，选择位置为第3个元素的掩码). Alias has <see cref="RgbaAMask"/>.</summary>
+        /// <summary>Xyzw - W mask. For a 4-element group, select the mask of the position 3th element (对于4个元素的组，选择位置为第3个元素的掩码).</summary>
         public static readonly Vector<T> XyzwWMask;
         /// <summary>Xyzw - X is normalized number of value 1 (X为 值1的归一化数).</summary>
         public static readonly Vector<T> XyzwXNormOne;
@@ -348,7 +348,7 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Get bit pos mask span (获取位偏移掩码的跨度). Tip: You can use <see cref="Unsafe.As"/> convert its item to <see cref="Vector{T}"/> type (提示: 可以用 <see cref="Unsafe.As"/> 将其中条目转为 <see cref="Vector{T}"/> 类型).
+        /// Get bit pos mask span (获取位偏移掩码的跨度). Tip: You can use <see cref="Unsafe.As{TFrom, TTo}(ref TFrom)"/> convert its item to <see cref="Vector{T}"/> type (提示: 可以用 <see cref="Unsafe.As{TFrom, TTo}(ref TFrom)"/> 将其中条目转为 <see cref="Vector{T}"/> 类型).
         /// </summary>
         /// <returns>Returns bit pos mask span (返回位偏移掩码的跨度).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -368,7 +368,7 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Get bits mask span (获取位集掩码的跨度). Tip: You can use <see cref="Unsafe.As"/> convert its item to <see cref="Vector{T}"/> type (提示: 可以用 <see cref="Unsafe.As"/> 将其中条目转为 <see cref="Vector{T}"/> 类型).
+        /// Get bits mask span (获取位集掩码的跨度). Tip: You can use <see cref="Unsafe.As{TFrom, TTo}(ref TFrom)"/> convert its item to <see cref="Vector{T}"/> type (提示: 可以用 <see cref="Unsafe.As{TFrom, TTo}(ref TFrom)"/> 将其中条目转为 <see cref="Vector{T}"/> 类型).
         /// </summary>
         /// <returns>Returns bits mask span (返回位集掩码的跨度).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
