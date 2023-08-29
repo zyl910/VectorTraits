@@ -27,6 +27,14 @@
       </PropertyGroup>
     </Otherwise>
   </Choose>
+
+  <Choose>
+    <When Condition=" '$(VersionPrefix)' == '' ">
+      <PropertyGroup>
+        <VersionPrefix>1.0.0</VersionPrefix>
+      </PropertyGroup>
+    </When>
+  </Choose>
     
   <PropertyGroup>
     <RootNamespace>Zyl.VectorTraits</RootNamespace>
@@ -42,6 +50,8 @@
     <Product>VectorTraits</Product>
     <Authors>zyl910</Authors>
     <Company>zyl910</Company>
+    <AssemblyVersion>$(VersionPrefix).0</AssemblyVersion>
+    <FileVersion>$(VersionPrefix).0</FileVersion>
     <CurrentYear>$([System.DateTime]::Now.ToString(yyyy))</CurrentYear>
     <Copyright>Copyright (c) 2022~$(CurrentYear) zyl910</Copyright>
     <Description>VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
