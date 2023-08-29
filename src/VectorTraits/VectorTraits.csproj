@@ -46,7 +46,7 @@
     <DefineConstants>$(DefineConstants);SOFTWARE_OPTIMIZATION;HARDWARE_OPTIMIZATION;BCL_OVERRIDE_BASE_FIXED;BCL_OVERRIDE_BASE_VAR;BCL_VER_OVERRIDE_STATIC;USE_VECTOR_CREATE_BY_ARRAY;REDUCE_MEMORY_USAGE</DefineConstants>
 
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Title>VectorTraits for .NET and .NET Standard</Title>
+    <Title>VectorTraits</Title>
     <Product>VectorTraits</Product>
     <Authors>zyl910</Authors>
     <Company>zyl910</Company>
@@ -100,42 +100,49 @@ Traits methods:
     <Otherwise>
     </Otherwise>
   </Choose>
-  
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
-    <Title>VectorTraits for .NET Framework 4.6.1</Title>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
-    <Title>VectorTraits for .NET Standard 1.1</Title>
-  </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <Title>VectorTraits for .NET Standard 2.0</Title>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
-    <Title>VectorTraits for .NET Standard 2.1</Title>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
-    <Title>VectorTraits for .NET Core 3.0</Title>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
-    <Title>VectorTraits for .NET 5.0</Title>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
-    <Title>VectorTraits for .NET 6.0</Title>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
-    <Title>VectorTraits for .NET 7.0</Title>
-  </PropertyGroup>
-    
-  <PropertyGroup>
-      <AssemblyTitle>VectorTraits</AssemblyTitle>
-  </PropertyGroup>
+  <Choose>
+    <When Condition=" '$(TargetFramework)'=='net461' ">
+      <PropertyGroup>
+        <AssemblyTitle>$(Product) for .NET Framework 4.6.1</AssemblyTitle>
+      </PropertyGroup>
+    </When>
+    <When Condition=" '$(TargetFramework)'=='netstandard1.1' ">
+      <PropertyGroup>
+        <AssemblyTitle>$(Product) for .NET Standard 1.1</AssemblyTitle>
+      </PropertyGroup>
+    </When>
+    <When Condition=" '$(TargetFramework)'=='netstandard2.0' ">
+      <PropertyGroup>
+        <AssemblyTitle>$(Product) for .NET Standard 2.0</AssemblyTitle>
+      </PropertyGroup>
+    </When>
+    <When Condition=" '$(TargetFramework)'=='netstandard2.0' ">
+      <PropertyGroup>
+        <AssemblyTitle>$(Product) for .NET Core 3.0</AssemblyTitle>
+      </PropertyGroup>
+    </When>
+    <When Condition=" '$(TargetFramework)'=='net5.0' ">
+      <PropertyGroup>
+        <AssemblyTitle>$(Product) for .NET 5.0</AssemblyTitle>
+      </PropertyGroup>
+    </When>
+    <When Condition=" '$(TargetFramework)'=='net6.0' ">
+      <PropertyGroup>
+        <AssemblyTitle>$(Product) for .NET 6.0</AssemblyTitle>
+      </PropertyGroup>
+    </When>
+    <When Condition=" '$(TargetFramework)'=='net7.0' ">
+      <PropertyGroup>
+        <AssemblyTitle>$(Product) for .NET 7.0</AssemblyTitle>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <AssemblyTitle>VectorTraits</AssemblyTitle>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
