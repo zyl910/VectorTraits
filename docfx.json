@@ -5,9 +5,9 @@
         {
           "files": [
             "docfx_project/bin/**/*.dll"
-            ,"src/VectorTraits/VectorTraits.csproj"
+            ,"off/src/VectorTraits/VectorTraits.csproj"
           ],
-          "src": "../"
+          "src": ""
         }
       ],
       "dest": "api",
