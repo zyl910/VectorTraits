@@ -47,7 +47,8 @@
       {
         "files": [
           "images/**"
-        ]
+        ],
+        "exclude": [ "**/doxyfiles/**"]
       }
     ],
     "output": "_site",

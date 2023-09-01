@@ -1,6 +1,7 @@
 # Benchmark - YNarrowSaturate
 ([← Back](README.md))
-See [Group](YNarrowSaturate.md)
+
+See [Group](YNarrowSaturate_Group.md)
 
 ## x86
 

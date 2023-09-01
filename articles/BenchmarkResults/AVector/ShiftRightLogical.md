@@ -1,5 +1,6 @@
 # Benchmark - ShiftRightLogical
 ([← Back](README.md))
+
 See [Group](ShiftRightLogical.md)
 
 ## x86

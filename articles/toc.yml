@@ -1,2 +1,19 @@
 - name: Introduction
   href: intro.md
+- name: README
+  href: ../README.md
+- name: README_Chinese
+  href: ../README_Chinese.md
+- name: Traits method list
+  href: ../TraitsMethodList.md
+- name: ChangeLog
+  href: ../ChangeLog.md
+
+- name: Benchmark results
+  items:
+  - name: Benchmark results
+    href: BenchmarkResults/README.md
+  - name: Results for BitUtil
+    href: BenchmarkResults/ABitUtil/README.md
+  - name: Results for Vector
+    href: BenchmarkResults/AVector/README.md
