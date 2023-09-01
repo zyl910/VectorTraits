@@ -722,7 +722,7 @@ YNarrowSaturate: 将两个 Vector 实例饱和缩窄为一个 Vector .
 因为从 `.NET 5.0`开始，提供了 Arm的内在函数. 故从 `.NET 5.0` 开始, SumNarrowVectorTraits的性能比SumNarrowVectorBase强很多.
 
 ### 更多结果
-详见: [BenchmarkResults](docs/BenchmarkResults/AVector/README.md)
+详见: [BenchmarkResults](articles/BenchmarkResults/AVector/README.md)
 
 ## 文档
 
