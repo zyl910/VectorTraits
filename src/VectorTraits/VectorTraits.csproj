@@ -47,6 +47,7 @@
 
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Title>VectorTraits</Title>
+    <AssemblyTitle>$(Title)</AssemblyTitle>
     <Product>VectorTraits</Product>
     <Authors>zyl910</Authors>
     <Company>zyl910</Company>
@@ -98,49 +99,6 @@ Traits methods:
       </PropertyGroup>
     </When>
     <Otherwise>
-    </Otherwise>
-  </Choose>
-
-  <Choose>
-    <When Condition=" '$(TargetFramework)'=='net461' ">
-      <PropertyGroup>
-        <AssemblyTitle>$(Product) for .NET Framework 4.6.1</AssemblyTitle>
-      </PropertyGroup>
-    </When>
-    <When Condition=" '$(TargetFramework)'=='netstandard1.1' ">
-      <PropertyGroup>
-        <AssemblyTitle>$(Product) for .NET Standard 1.1</AssemblyTitle>
-      </PropertyGroup>
-    </When>
-    <When Condition=" '$(TargetFramework)'=='netstandard2.0' ">
-      <PropertyGroup>
-        <AssemblyTitle>$(Product) for .NET Standard 2.0</AssemblyTitle>
-      </PropertyGroup>
-    </When>
-    <When Condition=" '$(TargetFramework)'=='netstandard2.0' ">
-      <PropertyGroup>
-        <AssemblyTitle>$(Product) for .NET Core 3.0</AssemblyTitle>
-      </PropertyGroup>
-    </When>
-    <When Condition=" '$(TargetFramework)'=='net5.0' ">
-      <PropertyGroup>
-        <AssemblyTitle>$(Product) for .NET 5.0</AssemblyTitle>
-      </PropertyGroup>
-    </When>
-    <When Condition=" '$(TargetFramework)'=='net6.0' ">
-      <PropertyGroup>
-        <AssemblyTitle>$(Product) for .NET 6.0</AssemblyTitle>
-      </PropertyGroup>
-    </When>
-    <When Condition=" '$(TargetFramework)'=='net7.0' ">
-      <PropertyGroup>
-        <AssemblyTitle>$(Product) for .NET 7.0</AssemblyTitle>
-      </PropertyGroup>
-    </When>
-    <Otherwise>
-      <PropertyGroup>
-        <AssemblyTitle>VectorTraits</AssemblyTitle>
-      </PropertyGroup>
     </Otherwise>
   </Choose>
 
