@@ -58,10 +58,10 @@ VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 - 为每一个特征方法, 增加了一些获取信息的的属性. e.g. `_AcceleratedTypes`, `_FullAcceleratedTypes` .
 
 提示: 在 Visual Studio 的 Disassembly窗口可以查看运行时的汇编代码. 例如在支持 Avx指令集的机器上运行时, `Vectors.ShiftLeft_Const` 会被内联编译优化为使用 `vpsllw` 指令. 且对于常量值(1), 会被编译为指令的立即数.
-![Vectors.ShiftLeft_use_inline.png](docs/Vectors.ShiftLeft_use_inline.png)
+![Vectors.ShiftLeft_use_inline.png](images/Vectors.ShiftLeft_use_inline.png)
 
 例2: 使用 `Vectors.ShiftLeft_Args` 与 `Vectors.ShiftLeft_Core`, 能将部分运算挪到循环外去提前处理. 例如在支持 Avx指令集的机器上运行时, 会在循环外设置好 `xmm1`, 随后在内循环的`vpsllw`指令里使用了它. 且这里展示了: 内联编译优化消除了冗余的 xmm/ymm 转换.
-![Vectors.ShiftLeft_Core_use_inline.png](docs/Vectors.ShiftLeft_Core_use_inline.png)
+![Vectors.ShiftLeft_Core_use_inline.png](images/Vectors.ShiftLeft_Core_use_inline.png)
 
 ## 入门指南
 范例代码在 `samples/VectorTraits.Sample` 文件夹.
@@ -324,9 +324,9 @@ BCL的方法(`Vector.ShiftLeft`) 在X86平台运行时, 仅 Int16/Int32/Int64 �
 因为从 `.NET Core 3.0`开始, 才提供了 X86的内在函数. 故对于 Int64类型, 在 `.NET Core 3.0` 之后才有硬件加速.
 
 对于ShiftLeft来说, 当参数`shiftAmount` 是常量时, 性能一般会比用变量时更高. 无论是 BCL还是本库的方法, 都是如此.
-使用本库的 `Core` 后缀的方法,  能将部分运算挪到循环外去提前处理, 从而优化了性能. 而当 CPU提供了常数参数的指令时（专业术语是“立即数参数的指令”）, 该指令的性能一般会更高. 于是本库还提供了 `ConstCore` 后缀的方法, 会选择该平台最快的指令.
+使用本库的 `Core` 后缀的方法,  能将部分运算挪到循环外去提前处理, 从而优化了性能. 而当 CPU提供了常数参数的指令时（专业术语是“立即数参数”）, 该指令的性能一般会更高. 于是本库还提供了 `ConstCore` 后缀的方法, 会选择该平台最快的指令.
 因“CPU睿频”、“其他进程抢占CPU资源”等因素, 有时性能波动比较大. 但请放心, 已经检查过了Release的程序运行时的汇编指令, 它已经是按最佳硬件指令运行的. 例如下图.
-![Vectors.ShiftLeft_Core_use_inline.png](docs/Vectors.ShiftLeft_Core_use_inline.png)
+![Vectors.ShiftLeft_Core_use_inline.png](images/Vectors.ShiftLeft_Core_use_inline.png)
 
 #### ShiftLeft - Arm - AWS Arm t4g.small
 | Type  | Method                 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
@@ -727,7 +727,7 @@ YNarrowSaturate: 将两个 Vector 实例饱和缩窄为一个 Vector .
 ## 文档
 
 - 特征方法列表: [TraitsMethodList](TraitsMethodList.md)
-- DocFX: 运行命令 `docfx docfx_project/docfx.json --serve -p 8080`. 随后浏览 `http://localhost:8080/`.
+- DocFX: 运行 `docfx_serve.bat`. 随后浏览 `http://localhost:8080/`.
 - Doxygen: 运行 Doxywizard, 点击菜单栏的 File->Open. 选择 `Doxyfile` 文件，并点击“OK”. 点击“Run”Tab, 点击“Run doxygen”按钮. 它会在“doc_gen”文件夹生成文档.
 
 ## 变更日志

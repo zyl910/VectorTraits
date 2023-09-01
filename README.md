@@ -58,17 +58,17 @@ Feature:
 - For each traits method, some properties are added to obtain information. e.g. `_AcceleratedTypes`, `_FullAcceleratedTypes` .
 
 Tip: The Disassembly window in Visual Studio allows you to view the assembly code at runtime.  For example, when running on a machine that supports the Avx instruction set, `Vectors.ShiftLeft_Const` will be compiled inline and optimized to use the `vpsllw` instruction. And for constant value(1), it will be compiled as the immediate number of the instruction.
-![Vectors.ShiftLeft_use_inline.png](docs/Vectors.ShiftLeft_use_inline.png)
+![Vectors.ShiftLeft_use_inline.png](images/Vectors.ShiftLeft_use_inline.png)
 
 Example 2: Using `Vectors.ShiftLeft_Args` and `Vectors.ShiftLeft_Core`, you can move some of the operations outside the loop to be processed earlier.   For example, when running on a machine that supports the Avx instruction set, `xmm1` is set outside the loop, and then used it in the `vpsllw` instruction of the inner loop.   And here it is shown: the inline compilation optimization eliminates redundant xmm/ymm conversions.
-![Vectors.ShiftLeft_Core_use_inline.png](docs/Vectors.ShiftLeft_Core_use_inline.png)
+![Vectors.ShiftLeft_Core_use_inline.png](images/Vectors.ShiftLeft_Core_use_inline.png)
 
 ## Getting started
 
 ## Documentation
 
 - Traits method list: [TraitsMethodList](TraitsMethodList.md)
-- DocFX: Run command `docfx docfx_project/docfx.json --serve -p 8080`. Then browse `http://localhost:8080/`.
+- DocFX: Run `docfx_serve.bat`. Then browse `http://localhost:8080/`.
 - Doxygen: Run the Doxywizard and click File ->Open on the menu bar. Select the `Doxyfile` file and click "OK". Click on the "Run" tab and click on the "Run doxygen" button. It will generate documents in the "doc_gen" folder.
 
 ## ChangeLog

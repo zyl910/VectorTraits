@@ -138,7 +138,7 @@ Traits methods:
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <None Include="..\..\VectorTraits_logo.png">
+    <None Include="..\..\images\VectorTraits_logo.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
