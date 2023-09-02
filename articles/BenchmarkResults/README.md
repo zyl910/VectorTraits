@@ -106,3 +106,23 @@ Run (运行):
 cd ~/Documents/VectorTraits/samples
 dotnet net7.0/VectorTraits.Sample.dll
 ```
+
+### docfx (docfx 文档)
+
+Install (安装).
+```
+dotnet tool update -g docfx
+```
+
+Start document service (启动文档服务):
+```
+dotnet tool update -g docfx
+~/.dotnet/tools/docfx docfx.json --serve -p 8080
+```
+Then browse `http://localhost:8080/`.
+
+docfx_serve_mac.sh
+```
+chmod u+x docfx_serve_mac.sh
+./docfx_serve_mac.sh
+```
