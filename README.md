@@ -68,7 +68,7 @@ Example 2: Using `Vectors.ShiftLeft_Args` and `Vectors.ShiftLeft_Core`, you can 
 ## Documentation
 
 - Traits method list: [TraitsMethodList](TraitsMethodList.md)
-- DocFX: Run `docfx_serve.bat`. Then browse `http://localhost:8080/`.
+- DocFX: Run `docfx_serve.bat`. Then browse http://localhost:8080/ .
 - Doxygen: Run the Doxywizard and click File ->Open on the menu bar. Select the `Doxyfile` file and click "OK". Click on the "Run" tab and click on the "Run doxygen" button. It will generate documents in the "doc_gen" folder.
 
 ## ChangeLog

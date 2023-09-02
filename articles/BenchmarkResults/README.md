@@ -116,10 +116,10 @@ dotnet tool update -g docfx
 
 Start document service (启动文档服务):
 ```
-dotnet tool update -g docfx
+docfx docfx.json --serve -p 8080
 ~/.dotnet/tools/docfx docfx.json --serve -p 8080
 ```
-Then browse `http://localhost:8080/`.
+Then browse http://localhost:8080/ .
 
 docfx_serve_mac.sh
 ```
