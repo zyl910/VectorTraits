@@ -4,6 +4,7 @@ using System.Numerics;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits;
 
 namespace Zyl.VectorTraits.Sample {
     class Program {
@@ -33,7 +34,7 @@ namespace Zyl.VectorTraits.Sample {
             writer.WriteLine();
 
             // Shuffle. It is a new vector method in `.NET 7.0` (换位. 它是 `.NET 7.0` 新增的向量方法)
-            Vector<short> desc = Vectors<short>.SerialDesc; // The generic structure 'Vectors<T>' provides fields for commonly used constants For example, 'SerialDesc' is a descending order value (泛型结构体 `Vectors<T>` 为常用常数提供了字段. 例如 `SerialDesc` 是降序的顺序值).
+            Vector<short> desc = Vectors<short>.SerialDesc; // The generic structure 'Vectors<T>' provides fields for commonly used constants. For example, 'SerialDesc' is a descending order value (泛型结构体 `Vectors<T>` 为常用常数提供了字段. 例如 `SerialDesc` 是降序的顺序值).
             VectorTextUtil.WriteLine(writer, "desc:\t{0}", desc);
             Vector<short> dst = Vectors.Shuffle(shifted, desc); // dst[i] = shifted[desc[i]].
             VectorTextUtil.WriteLine(writer, "Shuffle:\t{0}", dst);

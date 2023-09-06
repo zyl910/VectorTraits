@@ -2,6 +2,7 @@
 [English](README.md) | Chinese(中文)
 
 VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
+[![NuGet](https://buildstats.info/nuget/VectorTraits)](https://www.nuget.org/packages/VectorTraits)
 
 本库为向量类型提供了许多重要的算术方法(如 Shift, Shuffle, NarrowSaturate)及常数, 使您能更方便的编写跨平台的SIMD运算代码。它充分利用了 X86、Arm架构的内在函数实现硬件加速，且能够享受内联编译优化。
 
@@ -64,12 +65,18 @@ VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 ![Vectors.ShiftLeft_Core_use_inline.png](images/Vectors.ShiftLeft_Core_use_inline.png)
 
 ## 入门指南
-范例代码在 `samples/VectorTraits.Sample` 文件夹.
 
-`Vectors` 类提供了许多方法, 例如 CreateRotate, ShiftLeft, Shuffle. 特征方法的清单见: [TraitsMethodList](TraitsMethodList.md)
+### 1) 通过NuGet安装
+可在'包管理器控制台'里输入以下命令, 或是使用'包管理器'GUI来安装本库.
+
+NuGet: `PM> Install-Package VectorTraits` 
+
+### 2) 用法示例
+
+静态类 `Vectors` 提供了许多方法, 例如 CreateRotate, ShiftLeft, Shuffle.
 泛型结构体 `Vectors<T>` 为常用常数提供了字段.
 
-范例源代码如下。
+范例代码在 `samples/VectorTraits.Sample` 文件夹. 源代码如下.
 ```cs
 using System;
 using System.IO;
@@ -77,6 +84,7 @@ using System.Numerics;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits;
 
 namespace Zyl.VectorTraits.Sample {
     class Program {
@@ -106,7 +114,7 @@ namespace Zyl.VectorTraits.Sample {
             writer.WriteLine();
 
             // Shuffle. It is a new vector method in `.NET 7.0` (换位. 它是 `.NET 7.0` 新增的向量方法)
-            Vector<short> desc = Vectors<short>.SerialDesc; // The generic structure 'Vectors<T>' provides fields for commonly used constants For example, 'SerialDesc' is a descending order value (泛型结构体 `Vectors<T>` 为常用常数提供了字段. 例如 `SerialDesc` 是降序的顺序值).
+            Vector<short> desc = Vectors<short>.SerialDesc; // The generic structure 'Vectors<T>' provides fields for commonly used constants. For example, 'SerialDesc' is a descending order value (泛型结构体 `Vectors<T>` 为常用常数提供了字段. 例如 `SerialDesc` 是降序的顺序值).
             VectorTextUtil.WriteLine(writer, "desc:\t{0}", desc);
             Vector<short> dst = Vectors.Shuffle(shifted, desc); // dst[i] = shifted[desc[i]].
             VectorTextUtil.WriteLine(writer, "Shuffle:\t{0}", dst);
@@ -129,13 +137,13 @@ namespace Zyl.VectorTraits.Sample {
             // Show AcceleratedTypes.
             VectorTextUtil.WriteLine(writer, "ShiftLeft_AcceleratedTypes:\t{0}", Vectors.ShiftLeft_AcceleratedTypes);
             VectorTextUtil.WriteLine(writer, "Shuffle_AcceleratedTypes:\t{0}", Vectors.Shuffle_AcceleratedTypes);
-
         }
     }
 }
 ```
 
-### X86 `.NET7.0`中的运行结果
+### 3) 示例的运行结果
+#### `.NET7.0` on X86
 程序: `VectorTraits.Sample`
 
 ```
@@ -178,10 +186,10 @@ ShiftLeft_AcceleratedTypes:     SByte, Byte, Int16, UInt16, Int32, UInt32, Int64
 Shuffle_AcceleratedTypes:       SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double        # (00007FE0)
 ```
 
-注: `Vectors.Instance` 及之前的文本, 是`TraitsOutput.OutputEnvironment`输出的环境信息. 而从 `src` 开始的, 才是主要的测试代码.
-因CPU支持X86的Avx2指令集, 于是 `Vector<byte>.Count` 为 32(256bit), `Vectors.Instance` 为 `VectorTraits256Avx2`.
+注: `Vectors.Instance` 及之前的文本, 是`TraitsOutput.OutputEnvironment`输出的环境信息. 而从 `src` 开始的, 才是示例的主体代码.
+由于CPU支持X86的Avx2指令集, 于是 `Vector<byte>.Count` 为 32(256bit), `Vectors.Instance` 为 `VectorTraits256Avx2`.
 
-### Arm `.NET7.0`中的运行结果
+#### `.NET7.0` on Arm
 程序: `VectorTraits.Sample`
 
 ```
@@ -225,9 +233,9 @@ Shuffle_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt
 ```
 
 运算结果与X86的相同，只是环境信息不同。
-因CPU支持Arm的AdvSimd指令集, 于是 `Vector<byte>.Count` 为 16(128bit), `Vectors.Instance` 为 `VectorTraits128AdvSimdB64`.
+由于CPU支持Arm的AdvSimd指令集, 于是 `Vector<byte>.Count` 为 16(128bit), `Vectors.Instance` 为 `VectorTraits128AdvSimdB64`.
 
-### X86 `.NET Framework 4.5`中的运行结果
+#### `.NET Framework 4.5` on X86
 程序: `VectorTraits.Sample.NetFw`.
 
 ```
@@ -268,8 +276,8 @@ Shuffle_AcceleratedTypes:       None    # (00000000)
 ```
 
 Vectors 的 ShiftLeft/Shuffle 都能正常工作.
-因CPU支持X86的Avx2指令集, 于是 `Vector<byte>.Count` 为 32(256bit). `Vectors.Instance` 为 `VectorTraits256Base`, 是因为 `.NET Framework` 不支持内在函数（Intrinsics Functions. 直到 `.NET Core 3.0` 才支持）.
-且从 ShiftLeft_AcceleratedTypes 中的“Int16”可以看出, Int16类型的ShiftLeft方法是存在硬件加速的. 本库巧妙利用了其他向量方法, 实现了ShiftLeft的硬件加速.
+由于CPU支持X86的Avx2指令集, 于是 `Vector<byte>.Count` 为 32(256bit). `Vectors.Instance` 为 `VectorTraits256Base`. 它不是 `VectorTraits256Avx2`, 是因为直到 `.NET Core 3.0` 才支持内在函数.
+ShiftLeft_AcceleratedTypes的值含有“Int16”等类型，这表示ShiftLeft在使用这些类型时, 是存在硬件加速的. 本库巧妙的利用了向量算法, 即使在没有内在函数时，也尽量实现了硬件加速.
 
 ## 基准测试结果
 数据的单位: 百万次操作/秒. 数字越大, 性能越好.

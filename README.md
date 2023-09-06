@@ -2,6 +2,7 @@
 English | [Chinese(中文)](README_Chinese.md)
 
 VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
+[![NuGet](https://buildstats.info/nuget/VectorTraits)](https://www.nuget.org/packages/VectorTraits)
 
 This library provides many important arithmetic methods(e.g. Shift, Shuffle, NarrowSaturate) and constants for vector types, making it easier for you to write cross-platform SIMD code. It takes full advantage of the X86 and Arm architectures' intrinsic functions to achieve hardware acceleration and can enjoy inline compilation optimization.
 
@@ -64,6 +65,218 @@ Example 2: Using `Vectors.ShiftLeft_Args` and `Vectors.ShiftLeft_Core`, you can 
 ![Vectors.ShiftLeft_Core_use_inline.png](images/Vectors.ShiftLeft_Core_use_inline.png)
 
 ## Getting started
+
+### 1) Install via NuGet
+Either open the 'Package Management Console' and enter the following or use the built-in GUI
+
+NuGet: `PM> Install-Package VectorTraits` 
+
+### 2) Usage examples
+
+The static class  `Vectors` provides some methods. e.g. CreateRotate, ShiftLeft, Shuffle.
+The generic structure 'Vectors<T>' provides fields for commonly used constants.
+
+The example code is in the `samples/VectorTraits.Sample` folder. The source code is as follows.
+```cs
+using System;
+using System.IO;
+using System.Numerics;
+#if NETCOREAPP3_0_OR_GREATER
+using System.Runtime.Intrinsics;
+#endif
+using Zyl.VectorTraits;
+
+namespace Zyl.VectorTraits.Sample {
+    class Program {
+        private static readonly TextWriter writer = Console.Out;
+        static void Main(string[] args) {
+            writer.WriteLine("VectorTraits.Sample");
+            writer.WriteLine();
+            VectorTraitsGlobal.Init(); // Initialization .
+            TraitsOutput.OutputEnvironment(writer); // Output environment info .
+            writer.WriteLine();
+
+            // -- Start --
+            Vector<short> src = Vectors.CreateRotate<short>(0, 1, 2, 3, 4, 5, 6, 7); // The `Vectors` class provides some methods. For example, 'CreateRotate' is rotate fill .
+            VectorTextUtil.WriteLine(writer, "src:\t{0}", src); // It can not only format the string, but also display the hexadecimal of each element in the vector on the right Easy to view vector data .
+
+            // ShiftLeft. It is a new vector method in `.NET 7.0`
+            const int shiftAmount = 1;
+            Vector<short> shifted = Vectors.ShiftLeft(src, shiftAmount); // shifted[i] = src[i] << shiftAmount.
+            VectorTextUtil.WriteLine(writer, "ShiftLeft:\t{0}", shifted);
+#if NET7_0_OR_GREATER
+            // Compare BCL function .
+            Vector<short> shiftedBCL = Vector.ShiftLeft(src, shiftAmount);
+            VectorTextUtil.WriteLine(writer, "Equals to BCL ShiftLeft:\t{0}", shifted.Equals(shiftedBCL));
+#endif
+            // ShiftLeft_Const
+            VectorTextUtil.WriteLine(writer, "Equals to ShiftLeft_Const:\t{0}", shifted.Equals(Vectors.ShiftLeft_Const(src, shiftAmount))); // If the parameter shiftAmount is a constant, you can also use the Vectors' ShiftLeft_Const method. It is faster in many scenarios .
+            writer.WriteLine();
+
+            // Shuffle. It is a new vector method in `.NET 7.0`
+            Vector<short> desc = Vectors<short>.SerialDesc; // The generic structure 'Vectors<T>' provides fields for commonly used constants. For example, 'SerialDesc' is a descending order value .
+            VectorTextUtil.WriteLine(writer, "desc:\t{0}", desc);
+            Vector<short> dst = Vectors.Shuffle(shifted, desc); // dst[i] = shifted[desc[i]].
+            VectorTextUtil.WriteLine(writer, "Shuffle:\t{0}", dst);
+#if NET7_0_OR_GREATER
+            // Compare BCL function . 
+            Vector<short> dstBCL = default; // Since `.NET 7.0`, the Shuffle method has been provided in Vector128/Vector256, but the Shuffle method has not yet been provided in Vector .
+            if (Vector<short>.Count == Vector128<short>.Count) {
+                dstBCL = Vector128.Shuffle(shifted.AsVector128(), desc.AsVector128()).AsVector();
+            } else if (Vector<short>.Count == Vector256<short>.Count) {
+                dstBCL = Vector256.Shuffle(shifted.AsVector256(), desc.AsVector256()).AsVector();
+            }
+            VectorTextUtil.WriteLine(writer, "Equals to BCL Shuffle:\t{0}", dst.Equals(dstBCL));
+#endif
+            // Shuffle_Args and Shuffle_Core
+            Vectors.Shuffle_Args(desc, out var args0, out var args1); // The suffix is the `Args' method used for parameter calculation, which involves processing such as parameter transformation in advance It is suitable for external loop .
+            Vector<short> dst2 = Vectors.Shuffle_Core(shifted, args0, args1); // The suffix is the `Core` method used for core calculations, which calculates based on cached parameters It is suitable for internal loop to improve performance .
+            VectorTextUtil.WriteLine(writer, "Equals to Shuffle_Core:\t{0}", dst.Equals(dst2));
+            writer.WriteLine();
+
+            // Show AcceleratedTypes.
+            VectorTextUtil.WriteLine(writer, "ShiftLeft_AcceleratedTypes:\t{0}", Vectors.ShiftLeft_AcceleratedTypes);
+            VectorTextUtil.WriteLine(writer, "Shuffle_AcceleratedTypes:\t{0}", Vectors.Shuffle_AcceleratedTypes);
+        }
+    }
+}
+```
+
+### 3) Example results
+#### `.NET7.0` on X86
+Program: `VectorTraits.Sample`
+
+```
+VectorTraits.Sample
+
+IsRelease:      True
+EnvironmentVariable(PROCESSOR_IDENTIFIER):      Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
+Environment.ProcessorCount:     8
+Environment.Is64BitProcess:     True
+Environment.OSVersion:  Microsoft Windows NT 10.0.19045.0
+Environment.Version:    7.0.3
+Stopwatch.Frequency:    10000000
+RuntimeEnvironment.GetRuntimeDirectory: C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.3\
+RuntimeInformation.FrameworkDescription:        .NET 7.0.3
+RuntimeInformation.OSArchitecture:      X64
+RuntimeInformation.OSDescription:       Microsoft Windows 10.0.19045
+RuntimeInformation.RuntimeIdentifier:   win10-x64
+IntPtr.Size:    8
+BitConverter.IsLittleEndian:    True
+Vector.IsHardwareAccelerated:   True
+Vector<byte>.Count:     32      # 256bit
+Vector<float>.Count:    8       # 256bit
+VectorTraitsGlobal.InitCheckSum:        7960959 # 0x0079797F
+Vector<T>.Assembly.CodeBase:    file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.3/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):  .NET 7.0
+GetTargetFrameworkDisplayName(TraitsOutput):    .NET 7.0
+Vectors.Instance:       VectorTraits256Avx2
+
+src:    <0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7>        # (0000 0001 0002 0003 0004 0005 0006 0007 0000 0001 0002 0003 0004 0005 0006 0007)
+ShiftLeft:      <0, 2, 4, 6, 8, 10, 12, 14, 0, 2, 4, 6, 8, 10, 12, 14>  # (0000 0002 0004 0006 0008 000A 000C 000E 0000 0002 0004 0006 0008 000A 000C 000E)
+Equals to BCL ShiftLeft:        True
+Equals to ShiftLeft_Const:      True
+
+desc:   <15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0>  # (000F 000E 000D 000C 000B 000A 0009 0008 0007 0006 0005 0004 0003 0002 0001 0000)
+Shuffle:        <14, 12, 10, 8, 6, 4, 2, 0, 14, 12, 10, 8, 6, 4, 2, 0>  # (000E 000C 000A 0008 0006 0004 0002 0000 000E 000C 000A 0008 0006 0004 0002 0000)
+Equals to BCL Shuffle:  True
+Equals to Shuffle_Core: True
+
+ShiftLeft_AcceleratedTypes:     SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64        # (00001FE0)
+Shuffle_AcceleratedTypes:       SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double        # (00007FE0)
+```
+
+Note: The text before `Vectors.Instance` is the environment information output by `TraitsOutput.OutputEnvironment`. OutputEnvironment`. The text starting from `src` is the main code of the example.
+Since the CPU supports the X86 Avx2 instruction set, `Vector<byte>.Count` is 32(256bit), and `Vectors.Instance` is `VectorTraits256Avx2`.
+
+#### `.NET7.0` on Arm
+Program: `VectorTraits.Sample`
+
+```
+VectorTraits.Sample
+
+IsRelease:	True
+EnvironmentVariable(PROCESSOR_IDENTIFIER):	
+Environment.ProcessorCount:	2
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Unix 5.19.0.1025
+Environment.Version:	7.0.8
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/
+RuntimeInformation.FrameworkDescription:	.NET 7.0.8
+RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:03 UTC 2023
+RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
+Vectors.Instance:	VectorTraits128AdvSimdB64
+
+src:	<0, 1, 2, 3, 4, 5, 6, 7>	# (0000 0001 0002 0003 0004 0005 0006 0007)
+ShiftLeft:	<0, 2, 4, 6, 8, 10, 12, 14>	# (0000 0002 0004 0006 0008 000A 000C 000E)
+Equals to BCL ShiftLeft:	True
+Equals to ShiftLeft_Const:	True
+
+desc:	<7, 6, 5, 4, 3, 2, 1, 0>	# (0007 0006 0005 0004 0003 0002 0001 0000)
+Shuffle:	<14, 12, 10, 8, 6, 4, 2, 0>	# (000E 000C 000A 0008 0006 0004 0002 0000)
+Equals to BCL Shuffle:	True
+Equals to Shuffle_Core:	True
+
+ShiftLeft_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64	# (00001FE0)
+Shuffle_AcceleratedTypes:	SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double	# (00007FE0)
+```
+
+The result is the same as the X86 one, only the environment information is different.
+Since the CPU supports Arm's AdvSimd instruction set, `Vector<byte>.Count` is 16(128bit) and `Vectors.Instance` is `VectorTraits128AdvSimdB64`.
+
+#### `.NET Framework 4.5` on X86
+Program: `VectorTraits.Sample.NetFw`.
+
+```
+VectorTraits.Sample
+
+IsRelease:      True
+EnvironmentVariable(PROCESSOR_IDENTIFIER):      Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
+Environment.ProcessorCount:     8
+Environment.Is64BitProcess:     True
+Environment.OSVersion:  Microsoft Windows NT 6.2.9200.0
+Environment.Version:    4.0.30319.42000
+Stopwatch.Frequency:    10000000
+RuntimeEnvironment.GetRuntimeDirectory: C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
+RuntimeInformation.FrameworkDescription:        .NET Framework 4.8.9167.0
+RuntimeInformation.OSArchitecture:      X64
+RuntimeInformation.OSDescription:       Microsoft Windows 10.0.19045
+IntPtr.Size:    8
+BitConverter.IsLittleEndian:    True
+Vector.IsHardwareAccelerated:   True
+Vector<byte>.Count:     32      # 256bit
+Vector<float>.Count:    8       # 256bit
+VectorTraitsGlobal.InitCheckSum:        -25396097       # 0xFE7C7C7F
+Vector<T>.Assembly.CodeBase:    file:///E:/zylSelf/Code/cs/base/VectorTraits/samples/VectorTraits.Sample.NetFw/bin/Release/System.Numerics.Vectors.DLL
+GetTargetFrameworkDisplayName(VectorTextUtil):  .NET Standard 1.1
+GetTargetFrameworkDisplayName(TraitsOutput):    .NET Framework 4.5
+Vectors.Instance:       VectorTraits256Base
+
+src:    <0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7>        # (0000 0001 0002 0003 0004 0005 0006 0007 0000 0001 0002 0003 0004 0005 0006 0007)
+ShiftLeft:      <0, 2, 4, 6, 8, 10, 12, 14, 0, 2, 4, 6, 8, 10, 12, 14>  # (0000 0002 0004 0006 0008 000A 000C 000E 0000 0002 0004 0006 0008 000A 000C 000E)
+Equals to ShiftLeft_Const:      True
+
+desc:   <15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0>  # (000F 000E 000D 000C 000B 000A 0009 0008 0007 0006 0005 0004 0003 0002 0001 0000)
+Shuffle:        <14, 12, 10, 8, 6, 4, 2, 0, 14, 12, 10, 8, 6, 4, 2, 0>  # (000E 000C 000A 0008 0006 0004 0002 0000 000E 000C 000A 0008 0006 0004 0002 0000)
+Equals to Shuffle_Core: True
+
+ShiftLeft_AcceleratedTypes:     SByte, Byte, Int16, UInt16, Int32, UInt32       # (000007E0)
+Shuffle_AcceleratedTypes:       None    # (00000000)
+```
+ShiftLeft/Shuffle of Vectors works fine.
+Since the CPU supports the X86 Avx2 instruction set, `Vector<byte>.Count` is 32 (256bit). Vectors.Instance` is `VectorTraits256Base`. It's not `VectorTraits256Avx2` because the intrinsic function wasn't supported until `.NET Core 3.0`.
+The value of ShiftLeft_AcceleratedTypes contains types such as "Int16", which means that ShiftLeft is hardware-accelerated when using these types. The library makes clever use of vector algorithms to try to achieve hardware acceleration even without intrinsic functions.
 
 ## Documentation
 
