@@ -41,6 +41,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorTraits.Output", "samp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits.Sample.NetFw", "samples\VectorTraits.Sample.NetFw\VectorTraits.Sample.NetFw.csproj", "{F405B1A1-108E-48F0-B3B8-B0A6D4B34956}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits.Sample.NuGet", "samples\VectorTraits.Sample.NuGet\VectorTraits.Sample.NuGet.csproj", "{E2619A9B-7A38-4FF3-9AFF-5C7FCA18D445}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{F405B1A1-108E-48F0-B3B8-B0A6D4B34956}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F405B1A1-108E-48F0-B3B8-B0A6D4B34956}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F405B1A1-108E-48F0-B3B8-B0A6D4B34956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2619A9B-7A38-4FF3-9AFF-5C7FCA18D445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2619A9B-7A38-4FF3-9AFF-5C7FCA18D445}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2619A9B-7A38-4FF3-9AFF-5C7FCA18D445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2619A9B-7A38-4FF3-9AFF-5C7FCA18D445}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +102,7 @@ Global
 		{A732C040-1F30-4A0A-BE44-C93AE15CA954} = {C49387B4-769A-47F2-9D37-79A13956650D}
 		{DE1E8655-C240-4B92-9391-10D0B44D50A0} = {7FEBEE53-6B60-400E-85F3-236B83B6311D}
 		{F405B1A1-108E-48F0-B3B8-B0A6D4B34956} = {7FEBEE53-6B60-400E-85F3-236B83B6311D}
+		{E2619A9B-7A38-4FF3-9AFF-5C7FCA18D445} = {7FEBEE53-6B60-400E-85F3-236B83B6311D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {563C5B68-C47B-4FD9-9EB3-279A64EE805C}
@@ -112,6 +119,7 @@ Global
 		tests\VectorTraits.Benchmarks.Core.Inc\VectorTraits.Benchmarks.Core.Inc.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
 		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{de1e8655-c240-4b92-9391-10d0b44d50a0}*SharedItemsImports = 5
+		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{e2619a9b-7a38-4ff3-9aff-5c7fca18d445}*SharedItemsImports = 5
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
 		tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5
 		tests\VectorTraits.Benchmarks.Core.Inc\VectorTraits.Benchmarks.Core.Inc.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5

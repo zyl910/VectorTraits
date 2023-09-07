@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\VectorTraits.Sample\Program.cs" Link="Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="VectorTraits" Version="1.0.0" />
+  </ItemGroup>
+
+  <Import Project="..\..\src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems" Label="Shared" />
+
+</Project>
