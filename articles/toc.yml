@@ -17,3 +17,9 @@
     href: BenchmarkResults/ABitUtil/README.md
   - name: Results for Vector
     href: BenchmarkResults/AVector/README.md
+
+- name: Release note
+  items:
+  - name: v1.0 (Chinese)
+    href: ReleaseNote/v1.0_Chinese.md
+
