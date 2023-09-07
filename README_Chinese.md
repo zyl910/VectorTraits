@@ -2,6 +2,7 @@
 [English](README.md) | Chinese(中文)
 
 VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
+
 [![NuGet](https://buildstats.info/nuget/VectorTraits)](https://www.nuget.org/packages/VectorTraits)
 
 本库为向量类型提供了许多重要的算术方法(如 Shift, Shuffle, NarrowSaturate)及常数, 使您能更方便的编写跨平台的SIMD运算代码。它充分利用了 X86、Arm架构的内在函数实现硬件加速，且能够享受内联编译优化。
@@ -93,7 +94,7 @@ namespace Zyl.VectorTraits.Sample {
             writer.WriteLine("VectorTraits.Sample");
             writer.WriteLine();
             VectorTraitsGlobal.Init(); // Initialization (初始化).
-            TraitsOutput.OutputEnvironment(writer); // Output environment info (输出环境信息).
+            TraitsOutput.OutputEnvironment(writer); // Output environment info. It depends on `VectorTraits.InfoInc`. This row can be deleted when only VectorTraits are used (输出环境信息. 它依赖 `VectorTraits.InfoInc`. 当仅使用 VectorTraits 时, 可以删除本行).
             writer.WriteLine();
 
             // -- Start --

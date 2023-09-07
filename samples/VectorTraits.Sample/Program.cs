@@ -13,7 +13,7 @@ namespace Zyl.VectorTraits.Sample {
             writer.WriteLine("VectorTraits.Sample");
             writer.WriteLine();
             VectorTraitsGlobal.Init(); // Initialization (初始化).
-            TraitsOutput.OutputEnvironment(writer); // Output environment info (输出环境信息).
+            TraitsOutput.OutputEnvironment(writer); // Output environment info. It depends on `VectorTraits.InfoInc`. This row can be deleted when only VectorTraits are used (输出环境信息. 它依赖 `VectorTraits.InfoInc`. 当仅使用 VectorTraits 时, 可以删除本行).
             writer.WriteLine();
 
             // -- Start --
