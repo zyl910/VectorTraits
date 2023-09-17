@@ -19,13 +19,13 @@ namespace Zyl.VectorTraits.Impl.Util {
         /// <summary>
         /// Run and fetch text lines (运行与获取每行文本)
         /// </summary>
-        /// <param name="onFetch">The callback function of fetch line text (获取单行文本的回调函数). Prototype: `onFetch(bool isError, string line)`. <see cref="OperationCanceledException"/> is cancel, other is throw.</param>
+        /// <param name="onFetch">The callback function of fetch line text (获取单行文本的回调函数). Prototype: `bool isBreak = onFetch(bool isError, string line)`. <see cref="OperationCanceledException"/> is cancel, other is throw.</param>
         /// <param name="fileName">The application or document to start (启动的应用程序或文档).</param>
         /// <param name="arguments">Command-line arguments to use when starting the application(启动应用程序时要使用的一组命令行参数).</param>
         /// <param name="allowError">Whether to allow output error streams(是否允许输出错误流).</param>
-        /// <param name="onBefore">The callback function of before run (运行之前的回调函数). Prototype: `onBefore(object processObj)`. <see cref="OperationCanceledException"/> is cancel, other is throw.</param>
+        /// <param name="onBefore">The callback function of before run (运行之前的回调函数). Prototype: `bool isBreak = onBefore(object processObj)`. <see cref="OperationCanceledException"/> is cancel, other is throw.</param>
         /// <returns>Returns the ExitCode of the <see cref="Process"/> (返回进程的 ExitCode).</returns>
-        public static int RunAndFetchLines(Action<bool, string> onFetch, string fileName, string arguments = "", bool allowError = false, Action<object>? onBefore = null) {
+        public static int RunAndFetchLines(Func<bool, string, bool> onFetch, string fileName, string arguments = "", bool allowError = false, Func<object, bool>? onBefore = null) {
             int exitCode = -1;
 #if NETSTANDARD1_0_OR_GREATER && !NETSTANDARD2_0_OR_GREATER
             throw new NotSupportedException();
@@ -64,7 +64,8 @@ namespace Zyl.VectorTraits.Impl.Util {
                     StreamReader outStream = processObj.StandardOutput;
                     while (null != (line = outStream.ReadLine())) {
                         try {
-                            onFetch(isError, line);
+                            bool isBreak = onFetch(isError, line);
+                            if (isBreak) break;
                         } catch (Exception ex) {
                             if (ex is OperationCanceledException) {
                                 return exitCode;
@@ -80,7 +81,8 @@ namespace Zyl.VectorTraits.Impl.Util {
                     StreamReader errStream = processObj.StandardError;
                     while (null != (line = errStream.ReadLine())) {
                         try {
-                            onFetch(isError, line);
+                            bool isBreak = onFetch(isError, line);
+                            if (isBreak) break;
                         } catch (Exception ex) {
                             if (ex is OperationCanceledException) {
                                 return exitCode;

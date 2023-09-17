@@ -593,7 +593,8 @@ namespace Zyl.VectorTraits {
         /// </summary>
         /// <param name="textWriter">Output <see cref="TextWriter"/>.</param>
         /// <param name="lines">Text lines (多行内容).</param>
-        public static void WriteLines(TextWriter textWriter, IEnumerable lines) {
+        public static void WriteLines(TextWriter textWriter, IEnumerable? lines) {
+            if (null == lines) return;
             foreach(object line in lines) {
                 if (null== line) {
                     textWriter.WriteLine();

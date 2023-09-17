@@ -90,6 +90,7 @@ namespace Zyl.VectorTraits.Impl.Util {
             int countBlank = 0;
             _CpuDetectionResult.Clear();
             ProcessUtil.RunAndFetchLines(delegate (bool isError, string line) {
+                bool isBreak = false;
                 bool needAdd = true;
                 if (string.IsNullOrEmpty(line)) {
                     // Skip odd blank line.
@@ -104,22 +105,24 @@ namespace Zyl.VectorTraits.Impl.Util {
                     _CpuDetectionResult.Add(line);
                 }
                 // parse.
-                if (string.IsNullOrEmpty(line)) return;
-                if (isError) {
-                    // StandardError
-                } else {
-                    // StandardOutput
-                    int n = line.IndexOf('=');
-                    if (n>0) {
-                        string key = line.Substring(0, n).Trim();
-                        if ("Name".Equals(key, comparisonType)) {
-                            string val = line.Substring(n + 1).Trim();
-                            if (string.IsNullOrEmpty(_CpuModelName)) {
-                                _CpuModelName = val;
+                if (!string.IsNullOrEmpty(line)) {
+                    if (isError) {
+                        // StandardError
+                    } else {
+                        // StandardOutput
+                        int n = line.IndexOf('=');
+                        if (n > 0) {
+                            string key = line.Substring(0, n).Trim();
+                            if ("Name".Equals(key, comparisonType)) {
+                                string val = line.Substring(n + 1).Trim();
+                                if (string.IsNullOrEmpty(_CpuModelName)) {
+                                    _CpuModelName = val;
+                                }
                             }
                         }
                     }
                 }
+                return isBreak;
             }, fileName, arguments);
             _CpuDetectionCommand = fileName;
         }
