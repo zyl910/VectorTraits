@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits {
     /// <summary>
@@ -81,6 +82,41 @@ namespace Zyl.VectorTraits {
 #else
                 return _ProcessIsArmFamily;
 #endif
+            }
+        }
+
+        /// <inheritdoc cref="CpuDetectionHelper.CpuModelName"/>
+        public static string CpuModelName {
+            get {
+                return CpuDetectionHelper.Instance.CpuModelName;
+            }
+        }
+
+        /// <inheritdoc cref="CpuDetectionHelper.CpuFlags"/>
+        public static string CpuFlags {
+            get {
+                return CpuDetectionHelper.Instance.CpuFlags;
+            }
+        }
+
+        /// <inheritdoc cref="CpuDetectionHelper.CpuDetectionCommand"/>
+        public static string CpuDetectionCommand {
+            get {
+                return CpuDetectionHelper.Instance.CpuDetectionCommand;
+            }
+        }
+
+        /// <inheritdoc cref="CpuDetectionHelper.CpuDetectionException"/>
+        public static Exception? CpuDetectionException {
+            get {
+                return CpuDetectionHelper.Instance.CpuDetectionException;
+            }
+        }
+
+        /// <inheritdoc cref="CpuDetectionHelper.CpuDetectionResult"/>
+        public static IReadOnlyList<string>? CpuDetectionResult {
+            get {
+                return CpuDetectionHelper.Instance.CpuDetectionResult;
             }
         }
 

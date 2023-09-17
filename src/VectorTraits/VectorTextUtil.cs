@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -585,6 +586,21 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the length of the output string (返回输出字符串的长度).</returns>
         public static int WriteLine(TextWriter textWriter, string format, params object?[] args) {
             return WriteLine(null, textWriter, format, args);
+        }
+
+        /// <summary>
+        /// Writes lines (输出多行).
+        /// </summary>
+        /// <param name="textWriter">Output <see cref="TextWriter"/>.</param>
+        /// <param name="lines">Text lines (多行内容).</param>
+        public static void WriteLines(TextWriter textWriter, IEnumerable lines) {
+            foreach(object line in lines) {
+                if (null== line) {
+                    textWriter.WriteLine();
+                } else {
+                    textWriter.WriteLine(line);
+                }
+            }
         }
 
         /// <summary>
