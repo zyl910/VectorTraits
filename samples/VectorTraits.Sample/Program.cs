@@ -58,9 +58,14 @@ namespace Zyl.VectorTraits.Sample {
             VectorTextUtil.WriteLine(writer, "ShiftLeft_AcceleratedTypes:\t{0}", Vectors.ShiftLeft_AcceleratedTypes);
             VectorTextUtil.WriteLine(writer, "Shuffle_AcceleratedTypes:\t{0}", Vectors.Shuffle_AcceleratedTypes);
 
+#if NETSTANDARD1_3_OR_GREATER || NETCOREAPP2_0_OR_GREATER
+#else
+            Zyl.VectorTraits.Impl.Util.ProcessUtil.TypeOfProcess = typeof(System.Diagnostics.Process);
+#endif
             writer.WriteLine();
             writer.WriteLine("CpuModelName: {0}", VectorEnvironment.CpuModelName);
             writer.WriteLine("CpuFlags: {0}", VectorEnvironment.CpuFlags);
+            writer.WriteLine("CpuDetectionException: {0}", VectorEnvironment.CpuDetectionException);
             writer.WriteLine("CpuDetectionCommand: {0}", VectorEnvironment.CpuDetectionCommand);
             writer.Write("CpuDetectionResult:\t");
             VectorTextUtil.WriteLines(writer, VectorEnvironment.CpuDetectionResult);

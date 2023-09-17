@@ -17,6 +17,16 @@ namespace Zyl.VectorTraits.Impl.Util {
         private static bool _SupportedProcess = false;
 
         /// <summary>
+        /// The type of `System.Diagnostics.Process`. If you are using `.NET Standard 1.1` library, you need to set this property in advance; in other cases, you do not need to set it (`System.Diagnostics.Process`的类型. 若使用 ``.NET Standard 1.1`` 的库, 需提前设置本属性; 其他情况下无需设置).
+        /// </summary>
+        /// <remarks>
+        /// <code>
+        /// Zyl.VectorTraits.Impl.Util.ProcessUtil.TypeOfProcess = typeof(System.Diagnostics.Process);
+        /// </code>
+        /// </remarks>
+        public static Type? TypeOfProcess { get; set; }
+
+        /// <summary>
         /// Run and fetch text lines (运行与获取每行文本)
         /// </summary>
         /// <param name="onFetch">The callback function of fetch line text (获取单行文本的回调函数). Prototype: `bool isBreak = onFetch(bool isError, string line)`. <see cref="OperationCanceledException"/> is cancel, other is throw.</param>
@@ -27,10 +37,96 @@ namespace Zyl.VectorTraits.Impl.Util {
         /// <returns>Returns the ExitCode of the <see cref="Process"/> (返回进程的 ExitCode).</returns>
         public static int RunAndFetchLines(Func<bool, string, bool> onFetch, string fileName, string arguments = "", bool allowError = false, Func<object, bool>? onBefore = null) {
             int exitCode = -1;
-#if NETSTANDARD1_0_OR_GREATER && !NETSTANDARD2_0_OR_GREATER
-            throw new NotSupportedException();
-#else
             string? line;
+#if NETSTANDARD1_0_OR_GREATER && !NETSTANDARD2_0_OR_GREATER
+            string typeName = "System.Diagnostics.Process";
+            Type? tp = TypeOfProcess;
+            if (tp == null) {
+                tp = Type.GetType(typeName);
+            }
+            if (tp == null) {
+                throw new NotSupportedException("Can't found type '" + typeName + "'!");
+            }
+            dynamic processObj = Activator.CreateInstance(tp); //new Process();
+            if (!_SupportedProcess) {
+                _SupportedProcess = true;
+            }
+            try {
+                dynamic startInfo = processObj.StartInfo;
+                startInfo.FileName = fileName;
+                startInfo.Arguments = arguments;
+                startInfo.UseShellExecute = false;
+                //startInfo.RedirectStandardInput = true;
+                startInfo.RedirectStandardOutput = true;
+                if (allowError) {
+                    startInfo.RedirectStandardError = true;
+                }
+                startInfo.CreateNoWindow = true;
+                if (null!= onBefore) {
+                    try {
+                        onBefore(startInfo);
+                    } catch (Exception ex) {
+                        if (ex is OperationCanceledException) {
+                            return exitCode;
+                        } else {
+                            throw;
+                        }
+                    }
+                }
+                processObj.Start();
+                // StandardOutput.
+                bool isError = false;
+                if (true) {
+                    StreamReader outStream = processObj.StandardOutput;
+                    while (null != (line = outStream.ReadLine())) {
+                        try {
+                            bool isBreak = onFetch(isError, line);
+                            if (isBreak) break;
+                        } catch (Exception ex) {
+                            if (ex is OperationCanceledException) {
+                                return exitCode;
+                            } else {
+                                throw;
+                            }
+                        }
+                    }
+                }
+                // StandardError.
+                if (allowError) {
+                    isError = true;
+                    StreamReader errStream = processObj.StandardError;
+                    while (null != (line = errStream.ReadLine())) {
+                        try {
+                            bool isBreak = onFetch(isError, line);
+                            if (isBreak) break;
+                        } catch (Exception ex) {
+                            if (ex is OperationCanceledException) {
+                                return exitCode;
+                            } else {
+                                throw;
+                            }
+                        }
+                    }
+                }
+                // done.
+                exitCode = 0;
+                processObj.WaitForExit();
+                if (processObj.HasExited) {
+                    try {
+                        exitCode = processObj.ExitCode;
+                    } catch (Exception ex0) {
+                        Trace.WriteLine(ex0);
+                    }
+                }
+            } finally {
+                try {
+                    processObj.Dispose();
+                } catch (Exception ex0) {
+                    Trace.WriteLine(ex0);
+                }
+            }
+            return exitCode;
+#else
             Process processObj = new Process();
             if (!_SupportedProcess) {
                 _SupportedProcess = true;
