@@ -68,27 +68,62 @@ namespace Zyl.VectorTraits.Impl.Util {
             _CpuDetectionCommand = "";
             _CpuDetectionException = null;
             _CpuDetectionResult.Clear();
-            // wmic.
-            try {
-                RefreshSelf_Wmic();
-            } catch (Exception ex) {
-                if (null== _CpuDetectionException) {
-                    _CpuDetectionException = ex;
+            // By command.
+            if (IsWindowsPath()) {
+                // wmic.
+                try {
+                    RefreshSelf_Wmic(_CpuDetectionResult, ref _CpuDetectionCommand);
+                } catch (Exception ex) {
+                    if (null == _CpuDetectionException) {
+                        _CpuDetectionException = ex;
+                    }
+                    Trace.WriteLine("RefreshSelf_Wmic fail!");
+                    Trace.WriteLine(ex);
                 }
-                Trace.WriteLine("RefreshSelf_Wmic fail!");
-                Trace.WriteLine(ex);
-            }
+            } else {
+                // lscpu.
+                try {
+                    RefreshSelf_Lscpu(_CpuDetectionResult, ref _CpuDetectionCommand);
+                } catch (Exception ex) {
+                    if (null == _CpuDetectionException) {
+                        _CpuDetectionException = ex;
+                    }
+                    Trace.WriteLine("RefreshSelf_Lscpu fail!");
+                    Trace.WriteLine(ex);
+                }
+                // Others.
+                if (string.IsNullOrEmpty(_CpuModelName)) {
+                    string cmd = "";
+                    List<string> list = new List<string>();
+                    // sysctl.
+                    try {
+                        RefreshSelf_Sysctl(list, ref cmd);
+                        _CpuDetectionCommand = cmd;
+                        _CpuDetectionResult.Clear();
+                        _CpuDetectionResult.AddRange(list);
+                    } catch (Exception ex) {
+                        if (null == _CpuDetectionException) {
+                            _CpuDetectionException = ex;
+                        }
+                        Trace.WriteLine("RefreshSelf_Sysctl fail!");
+                        Trace.WriteLine(ex);
+                    }
+                }
+            } // if (IsWindowsPath())
         }
 
         /// <summary>
-        /// Refresh self - wmic.
+        /// Refresh self - wmic. It use for Windows system.
         /// </summary>
-        public void RefreshSelf_Wmic() {
+        /// <param name="list">Output list (输出列表).</param>
+        /// <param name="commandName">Returns command name (返回命令名).</param>
+        public void RefreshSelf_Wmic(IList<string> list, ref string commandName) {
             const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
             string fileName = "wmic";
             string arguments = "cpu get /format:list";
             int countBlank = 0;
-            _CpuDetectionResult.Clear();
+            commandName = fileName;
+            list.Clear();
             ProcessUtil.RunAndFetchLines(delegate (bool isError, string line) {
                 bool isBreak = false;
                 bool needAdd = true;
@@ -102,7 +137,7 @@ namespace Zyl.VectorTraits.Impl.Util {
                     countBlank = 0;
                 }
                 if (needAdd) {
-                    _CpuDetectionResult.Add(line);
+                    list.Add(line);
                 }
                 // parse.
                 if (!string.IsNullOrEmpty(line)) {
@@ -124,7 +159,84 @@ namespace Zyl.VectorTraits.Impl.Util {
                 }
                 return isBreak;
             }, fileName, arguments);
-            _CpuDetectionCommand = fileName;
+        }
+
+        /// <summary>
+        /// Refresh self - lscpu. It use for Linux system.
+        /// </summary>
+        public void RefreshSelf_Lscpu(IList<string> list, ref string commandName) {
+            const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
+            string fileName = "lscpu";
+            string arguments = "";
+            commandName = fileName;
+            list.Clear();
+            ProcessUtil.RunAndFetchLines(delegate (bool isError, string line) {
+                bool isBreak = false;
+                bool needAdd = true;
+                if (needAdd) {
+                    list.Add(line);
+                }
+                // parse.
+                if (!string.IsNullOrEmpty(line)) {
+                    if (isError) {
+                        // StandardError
+                    } else {
+                        // StandardOutput
+                        int n = line.IndexOf(':');
+                        if (n > 0) {
+                            string key = line.Substring(0, n).Trim();
+                            string val = line.Substring(n + 1).Trim();
+                            if ("Model name".Equals(key, comparisonType)) {
+                                if (string.IsNullOrEmpty(_CpuModelName)) {
+                                    _CpuModelName = val;
+                                }
+                            } else if ("Flags".Equals(key, comparisonType)) {
+                                if (string.IsNullOrEmpty(_CpuFlags)) {
+                                    _CpuFlags = val;
+                                }
+                            }
+                        }
+                    }
+                }
+                return isBreak;
+            }, fileName, arguments);
+        }
+
+        /// <summary>
+        /// Refresh self - sysctl. It use for Mac OS system.
+        /// </summary>
+        public void RefreshSelf_Sysctl(IList<string> list, ref string commandName) {
+            const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
+            string fileName = "sysctl";
+            string arguments = "-a";
+            commandName = fileName;
+            list.Clear();
+            ProcessUtil.RunAndFetchLines(delegate (bool isError, string line) {
+                bool isBreak = false;
+                bool needAdd = !string.IsNullOrEmpty(line) && line.Contains("cpu");
+                if (needAdd) {
+                    list.Add(line);
+                }
+                // parse.
+                if (!string.IsNullOrEmpty(line)) {
+                    if (isError) {
+                        // StandardError
+                    } else {
+                        // StandardOutput
+                        int n = line.IndexOf(':');
+                        if (n > 0) {
+                            string key = line.Substring(0, n).Trim();
+                            if ("machdep.cpu.brand_string".Equals(key, comparisonType)) {
+                                string val = line.Substring(n + 1).Trim();
+                                if (string.IsNullOrEmpty(_CpuModelName)) {
+                                    _CpuModelName = val;
+                                }
+                            }
+                        }
+                    }
+                }
+                return isBreak;
+            }, fileName, arguments);
         }
 
         /// <summary>The instance (实例). </summary>

@@ -45,7 +45,7 @@ namespace Zyl.VectorTraits.Impl.Util {
                 tp = Type.GetType(typeName);
             }
             if (tp == null) {
-                throw new NotSupportedException("Can't found type '" + typeName + "'!");
+                throw new NotSupportedException("Can't found type '" + typeName + "'! Please set the 'ProcessUtil.TypeOfProcess' property.");
             }
             dynamic processObj = Activator.CreateInstance(tp); //new Process();
             if (!_SupportedProcess) {
