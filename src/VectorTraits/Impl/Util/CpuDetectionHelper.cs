@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 namespace Zyl.VectorTraits.Impl.Util {
@@ -81,23 +82,44 @@ namespace Zyl.VectorTraits.Impl.Util {
                     Trace.WriteLine(ex);
                 }
             } else {
-                // lscpu.
-                try {
-                    RefreshSelf_Lscpu(_CpuDetectionResult, ref _CpuDetectionCommand);
-                } catch (Exception ex) {
-                    if (null == _CpuDetectionException) {
-                        _CpuDetectionException = ex;
+                bool useCommnand = true;
+                if (useCommnand) {
+                    // lscpu.
+                    try {
+                        RefreshSelf_Lscpu(_CpuDetectionResult, ref _CpuDetectionCommand);
+                    } catch (Exception ex) {
+                        if (null == _CpuDetectionException) {
+                            _CpuDetectionException = ex;
+                        }
+                        Trace.WriteLine("RefreshSelf_Lscpu fail!");
+                        Trace.WriteLine(ex);
                     }
-                    Trace.WriteLine("RefreshSelf_Lscpu fail!");
-                    Trace.WriteLine(ex);
-                }
-                // Others.
-                if (string.IsNullOrEmpty(_CpuModelName)) {
+                    // Others.
+                    if (string.IsNullOrEmpty(_CpuModelName)) {
+                        string cmd = "";
+                        List<string> list = new List<string>();
+                        // sysctl.
+                        try {
+                            RefreshSelf_Sysctl(list, ref cmd);
+                            _CpuDetectionCommand = cmd;
+                            _CpuDetectionResult.Clear();
+                            _CpuDetectionResult.AddRange(list);
+                        } catch (Exception ex) {
+                            if (null == _CpuDetectionException) {
+                                _CpuDetectionException = ex;
+                            }
+                            Trace.WriteLine("RefreshSelf_Sysctl fail!");
+                            Trace.WriteLine(ex);
+                        }
+                    }
+                } // if (useCommnand)
+                // /proc/cpuinfo
+                if (string.IsNullOrEmpty(_CpuModelName) || string.IsNullOrEmpty(_CpuFlags)) {
                     string cmd = "";
                     List<string> list = new List<string>();
                     // sysctl.
                     try {
-                        RefreshSelf_Sysctl(list, ref cmd);
+                        RefreshSelf_ProcCpuinfo(list, ref cmd);
                         _CpuDetectionCommand = cmd;
                         _CpuDetectionResult.Clear();
                         _CpuDetectionResult.AddRange(list);
@@ -105,7 +127,7 @@ namespace Zyl.VectorTraits.Impl.Util {
                         if (null == _CpuDetectionException) {
                             _CpuDetectionException = ex;
                         }
-                        Trace.WriteLine("RefreshSelf_Sysctl fail!");
+                        Trace.WriteLine("RefreshSelf_ProcCpuinfo fail!");
                         Trace.WriteLine(ex);
                     }
                 }
@@ -237,6 +259,39 @@ namespace Zyl.VectorTraits.Impl.Util {
                 }
                 return isBreak;
             }, fileName, arguments);
+        }
+
+        /// <summary>
+        /// Refresh self - `/proc/cpuinfo`. It use for Linux system.
+        /// </summary>
+        public void RefreshSelf_ProcCpuinfo(IList<string> list, ref string commandName) {
+            const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
+            string fileName = "/proc/cpuinfo";
+            commandName = fileName;
+            list.Clear();
+            foreach(string line in File.ReadLines(fileName)) {
+                bool needAdd = true;
+                if (needAdd) {
+                    list.Add(line);
+                }
+                // parse.
+                if (!string.IsNullOrEmpty(line)) {
+                    int n = line.IndexOf(':');
+                    if (n > 0) {
+                        string key = line.Substring(0, n).Trim();
+                        string val = line.Substring(n + 1).Trim();
+                        if ("model name".Equals(key, comparisonType)) {
+                            if (string.IsNullOrEmpty(_CpuModelName)) {
+                                _CpuModelName = val;
+                            }
+                        } else if ("Features".Equals(key, comparisonType)) {
+                            if (string.IsNullOrEmpty(_CpuFlags)) {
+                                _CpuFlags = val;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>The instance (实例). </summary>
