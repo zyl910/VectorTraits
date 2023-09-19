@@ -44,9 +44,17 @@ namespace Zyl.VectorTraits {
             //string indentNext = indent + "\t";
             // VectorTraitsGlobal
             VectorTraitsGlobal.Init();
+#if NETSTANDARD1_3_OR_GREATER || NETCOREAPP2_0_OR_GREATER || NET461_OR_GREATER
+            // No need to set up `ProcessUtil.TypeOfProcess` properties. 
+#else
+            Zyl.VectorTraits.Impl.Util.ProcessUtil.TypeOfProcess = typeof(System.Diagnostics.Process);
+#endif
 
             writer.WriteLine(indent + string.Format("IsRelease:\t{0}", IsRelease));
-            writer.WriteLine(indent + string.Format("EnvironmentVariable(PROCESSOR_IDENTIFIER):\t{0}", Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER")));
+            writer.WriteLine(indent + string.Format("VectorEnvironment.CpuModelName:\t{0}", VectorEnvironment.CpuModelName));
+            if (!string.IsNullOrEmpty(VectorEnvironment.CpuFlags)) {
+                writer.WriteLine(indent + string.Format("VectorEnvironment.CpuFlags:\t{0}", VectorEnvironment.CpuFlags));
+            }
             writer.WriteLine(indent + string.Format("Environment.ProcessorCount:\t{0}", Environment.ProcessorCount));
             //writer.WriteLine(indent + string.Format("Environment.Is64BitOperatingSystem:\t{0}", Environment.Is64BitOperatingSystem));
             writer.WriteLine(indent + string.Format("Environment.Is64BitProcess:\t{0}", Environment.Is64BitProcess));

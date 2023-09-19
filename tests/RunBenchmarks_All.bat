@@ -2,7 +2,7 @@
 cd /d "%~dp0"
 @ECHO OFF
 
-SET my_args=-accelerated0 -fixedVector0 -test0
+SET my_args=-accelerated0 -fixedVector0 -test0 -cpuDetection0
 
 :Check_netFw
 SET my_path=VectorTraits.Benchmarks.NetFw.exe

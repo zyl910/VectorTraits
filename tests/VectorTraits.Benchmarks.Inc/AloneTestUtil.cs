@@ -29,6 +29,8 @@ namespace Zyl.VectorTraits.Benchmarks {
         internal static bool ShowTest = false;
         /// <summary>Show fixed width Vector. Command is `-fixedVector`.</summary>
         internal static bool ShowFixedVector = true;
+        /// <summary>Show cpu detection result. Command is `-cpuDetection`.</summary>
+        internal static bool ShowCpuDetection = true;
 
         /// <summary>
         /// Alone test by commnad.
@@ -46,25 +48,32 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// </summary>
         /// <param name="args">Command line args.</param>
         public static void ParseCommand(string[] args) {
+            const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
             if (null == args) return;
-            foreach(string arg in args) {
-                if ("-accelerated".Equals(arg, StringComparison.OrdinalIgnoreCase)) {
+            foreach (string arg in args) {
+                if ("-accelerated".Equals(arg, comparisonType)) {
                     ShowAccelerated = true;
                 }
-                if ("-accelerated0".Equals(arg, StringComparison.OrdinalIgnoreCase)) {
+                if ("-accelerated0".Equals(arg, comparisonType)) {
                     ShowAccelerated = false;
                 }
-                if ("-test".Equals(arg, StringComparison.OrdinalIgnoreCase)) {
+                if ("-test".Equals(arg, comparisonType)) {
                     ShowTest = true;
                 }
-                if ("-test0".Equals(arg, StringComparison.OrdinalIgnoreCase)) {
+                if ("-test0".Equals(arg, comparisonType)) {
                     ShowTest = false;
                 }
-                if ("-fixedVector".Equals(arg, StringComparison.OrdinalIgnoreCase)) {
+                if ("-fixedVector".Equals(arg, comparisonType)) {
                     ShowFixedVector = true;
                 }
-                if ("-fixedVector0".Equals(arg, StringComparison.OrdinalIgnoreCase)) {
+                if ("-fixedVector0".Equals(arg, comparisonType)) {
                     ShowFixedVector = false;
+                }
+                if ("-cpuDetection".Equals(arg, comparisonType)) {
+                    ShowCpuDetection = true;
+                }
+                if ("-cpuDetection0".Equals(arg, comparisonType)) {
+                    ShowCpuDetection = false;
                 }
             }
         }
@@ -79,11 +88,25 @@ namespace Zyl.VectorTraits.Benchmarks {
                 AloneTestVector128(writer);
                 AloneTestVector256(writer);
             }
+            if (ShowCpuDetection) {
+                AloneTestCpuDetection(writer);
+            }
 
             // -- IntroDisassemblyDry --
             //var o = new IntroDisassemblyDry();
             //int n = o.RunVector128();
             //writer.WriteLine("RunVector128:\t{0}", n);
+        }
+
+        /// <summary>
+        /// Alone test CpuDetection.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static void AloneTestCpuDetection(TextWriter writer) {
+            writer.WriteLine("CpuDetectionException: {0}", VectorEnvironment.CpuDetectionException);
+            writer.WriteLine("CpuDetectionCommand: {0}", VectorEnvironment.CpuDetectionCommand);
+            VectorTextUtil.WriteLines(writer, VectorEnvironment.CpuDetectionResult);
+            writer.WriteLine();
         }
 
         /// <summary>

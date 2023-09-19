@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 namespace Zyl.VectorTraits.Impl.Util {
@@ -117,12 +116,13 @@ namespace Zyl.VectorTraits.Impl.Util {
                 if (string.IsNullOrEmpty(_CpuModelName) || string.IsNullOrEmpty(_CpuFlags)) {
                     string cmd = "";
                     List<string> list = new List<string>();
-                    // sysctl.
                     try {
                         RefreshSelf_ProcCpuinfo(list, ref cmd);
-                        _CpuDetectionCommand = cmd;
-                        _CpuDetectionResult.Clear();
-                        _CpuDetectionResult.AddRange(list);
+                        if (string.IsNullOrEmpty(_CpuModelName)) {
+                            _CpuDetectionCommand = cmd;
+                            _CpuDetectionResult.Clear();
+                            _CpuDetectionResult.AddRange(list);
+                        }
                     } catch (Exception ex) {
                         if (null == _CpuDetectionException) {
                             _CpuDetectionException = ex;
@@ -269,29 +269,46 @@ namespace Zyl.VectorTraits.Impl.Util {
             string fileName = "/proc/cpuinfo";
             commandName = fileName;
             list.Clear();
-            foreach(string line in File.ReadLines(fileName)) {
+            Func<bool, string, bool> onFetch = delegate (bool isError, string line) {
+                bool isBreak = false;
                 bool needAdd = true;
                 if (needAdd) {
                     list.Add(line);
                 }
                 // parse.
                 if (!string.IsNullOrEmpty(line)) {
-                    int n = line.IndexOf(':');
-                    if (n > 0) {
-                        string key = line.Substring(0, n).Trim();
-                        string val = line.Substring(n + 1).Trim();
-                        if ("model name".Equals(key, comparisonType)) {
-                            if (string.IsNullOrEmpty(_CpuModelName)) {
-                                _CpuModelName = val;
-                            }
-                        } else if ("Features".Equals(key, comparisonType)) {
-                            if (string.IsNullOrEmpty(_CpuFlags)) {
-                                _CpuFlags = val;
+                    if (isError) {
+                        // StandardError
+                    } else {
+                        // StandardOutput
+                        int n = line.IndexOf(':');
+                        if (n > 0) {
+                            string key = line.Substring(0, n).Trim();
+                            string val = line.Substring(n + 1).Trim();
+                            if ("model name".Equals(key, comparisonType)) {
+                                if (string.IsNullOrEmpty(_CpuModelName)) {
+                                    _CpuModelName = val;
+                                }
+                            } else if ("Features".Equals(key, comparisonType)) {
+                                if (string.IsNullOrEmpty(_CpuFlags)) {
+                                    _CpuFlags = val;
+                                }
                             }
                         }
                     }
                 }
+                return isBreak;
+            };
+#if NETSTANDARD1_0_OR_GREATER && !NETSTANDARD1_3_OR_GREATER
+            //throw new NotSupportedException("Not supported File!");
+            string arguments = fileName;
+            fileName = "cat";
+            ProcessUtil.RunAndFetchLines(onFetch, fileName, arguments);
+#else
+            foreach (string line in File.ReadLines(fileName)) {
+                onFetch(false, line);
             }
+#endif
         }
 
         /// <summary>The instance (实例). </summary>
