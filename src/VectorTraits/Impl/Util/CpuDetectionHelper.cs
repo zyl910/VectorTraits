@@ -103,6 +103,7 @@ namespace Zyl.VectorTraits.Impl.Util {
                             _CpuDetectionCommand = cmd;
                             _CpuDetectionResult.Clear();
                             _CpuDetectionResult.AddRange(list);
+                            _CpuDetectionException = null;
                         } catch (Exception ex) {
                             if (null == _CpuDetectionException) {
                                 _CpuDetectionException = ex;
@@ -116,15 +117,17 @@ namespace Zyl.VectorTraits.Impl.Util {
                 if (string.IsNullOrEmpty(_CpuModelName) || string.IsNullOrEmpty(_CpuFlags)) {
                     string cmd = "";
                     List<string> list = new List<string>();
+                    bool allowPut = string.IsNullOrEmpty(_CpuModelName);
                     try {
                         RefreshSelf_ProcCpuinfo(list, ref cmd);
-                        if (string.IsNullOrEmpty(_CpuModelName)) {
+                        if (allowPut) {
                             _CpuDetectionCommand = cmd;
                             _CpuDetectionResult.Clear();
                             _CpuDetectionResult.AddRange(list);
+                            _CpuDetectionException = null;
                         }
                     } catch (Exception ex) {
-                        if (null == _CpuDetectionException) {
+                        if (null == _CpuDetectionException && allowPut) {
                             _CpuDetectionException = ex;
                         }
                         Trace.WriteLine("RefreshSelf_ProcCpuinfo fail!");

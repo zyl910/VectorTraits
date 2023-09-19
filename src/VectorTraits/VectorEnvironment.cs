@@ -85,6 +85,63 @@ namespace Zyl.VectorTraits {
             }
         }
 
+        /// <summary>Supported instruction sets. The separator is a comma char ',' (支持的指令集. 分隔符是逗号 ',').</summary>
+        public static string SupportedInstructionSets => MakeSupportedInstructionSets();
+
+        /// <summary>
+        /// Make for supported instruction sets. The separator is a comma char ',' (构造支持的指令集信息. 分隔符是逗号 ',').
+        /// </summary>
+        /// <returns>Returns supported instruction sets string.</returns>
+        private static string MakeSupportedInstructionSets() {
+            string rt = "";
+#if NETCOREAPP3_0_OR_GREATER
+            string separator = ", ";
+            // -- Arm --
+#if NET5_0_OR_GREATER
+            if (System.Runtime.Intrinsics.Arm.AdvSimd.IsSupported) rt += separator + "AdvSimd";
+            if (System.Runtime.Intrinsics.Arm.Aes.IsSupported) rt += separator + "Aes";
+            if (System.Runtime.Intrinsics.Arm.ArmBase.IsSupported) rt += separator + "ArmBase";
+            if (System.Runtime.Intrinsics.Arm.Crc32.IsSupported) rt += separator + "Crc32";
+            if (System.Runtime.Intrinsics.Arm.Dp.IsSupported) rt += separator + "Dp";
+            if (System.Runtime.Intrinsics.Arm.Rdm.IsSupported) rt += separator + "Rdm";
+            if (System.Runtime.Intrinsics.Arm.Sha1.IsSupported) rt += separator + "Sha1";
+            if (System.Runtime.Intrinsics.Arm.Sha256.IsSupported) rt += separator + "Sha256";
+#endif // NET5_0_OR_GREATER
+            // -- X86 --
+            if (System.Runtime.Intrinsics.X86.Aes.IsSupported) rt += separator + "Aes";
+            if (System.Runtime.Intrinsics.X86.Avx.IsSupported) rt += separator + "Avx";
+            if (System.Runtime.Intrinsics.X86.Avx2.IsSupported) rt += separator + "Avx2";
+#if NET6_0_OR_GREATER
+            // // Error	CA2252	Using 'IsSupported' requires opting into preview features. See https://aka.ms/dotnet-warnings/preview-features for more information.
+            // if (System.Runtime.Intrinsics.X86.AvxVnni.IsSupported) rt += separator + "AvxVnni";
+#endif
+            if (System.Runtime.Intrinsics.X86.Bmi1.IsSupported) rt += separator + "Bmi1";
+            if (System.Runtime.Intrinsics.X86.Bmi2.IsSupported) rt += separator + "Bmi2";
+            if (System.Runtime.Intrinsics.X86.Fma.IsSupported) rt += separator + "Fma";
+            if (System.Runtime.Intrinsics.X86.Lzcnt.IsSupported) rt += separator + "Lzcnt";
+            if (System.Runtime.Intrinsics.X86.Pclmulqdq.IsSupported) rt += separator + "Pclmulqdq";
+            if (System.Runtime.Intrinsics.X86.Popcnt.IsSupported) rt += separator + "Popcnt";
+            if (System.Runtime.Intrinsics.X86.Sse.IsSupported) rt += separator + "Sse";
+            if (System.Runtime.Intrinsics.X86.Sse2.IsSupported) rt += separator + "Sse2";
+            if (System.Runtime.Intrinsics.X86.Sse3.IsSupported) rt += separator + "Sse3";
+            if (System.Runtime.Intrinsics.X86.Sse41.IsSupported) rt += separator + "Sse41";
+            if (System.Runtime.Intrinsics.X86.Sse42.IsSupported) rt += separator + "Sse42";
+            if (System.Runtime.Intrinsics.X86.Ssse3.IsSupported) rt += separator + "Ssse3";
+#if NET5_0_OR_GREATER
+            if (System.Runtime.Intrinsics.X86.X86Base.IsSupported) rt += separator + "X86Base";
+#endif // NET5_0_OR_GREATER
+#if NET7_0_OR_GREATER
+            if (System.Runtime.Intrinsics.X86.X86Serialize.IsSupported) rt += separator + "X86Serialize";
+#endif // NET7_0_OR_GREATER
+            // done.
+            if (!string.IsNullOrEmpty(rt)) {
+                rt = rt.Substring(separator.Length);
+            }
+#else
+#endif // NETCOREAPP3_0_OR_GREATER
+            return rt;
+        }
+
         /// <inheritdoc cref="CpuDetectionHelper.CpuModelName"/>
         public static string CpuModelName {
             get {
