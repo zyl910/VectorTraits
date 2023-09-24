@@ -38,6 +38,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             Statics.ThrowForUnsupported(noStrict);
         }
 
+        /// <inheritdoc cref="IBaseTraits.UsedInstructionSets"/>
+        public override string UsedInstructionSets {
+            get {
+                return Statics.UsedInstructionSets;
+            }
+        }
+
 #if NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>

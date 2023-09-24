@@ -85,6 +85,9 @@ namespace Zyl.VectorTraits {
             }
         }
 
+        /// <summary>The separator of the instruction set (指令集的分隔符).</summary>
+        public static string InstructionSetsSeparator { get; } = ", ";
+
         /// <summary>Supported instruction sets. The separator is a comma char ',' (支持的指令集. 分隔符是逗号 ',').</summary>
         public static string SupportedInstructionSets { get; } = MakeSupportedInstructionSets();
 
@@ -95,7 +98,7 @@ namespace Zyl.VectorTraits {
         private static string MakeSupportedInstructionSets() {
             string rt = "";
 #if NETCOREAPP3_0_OR_GREATER
-            string separator = ", ";
+            string separator = InstructionSetsSeparator;
             // -- Arm --
 #if NET5_0_OR_GREATER
             if (System.Runtime.Intrinsics.Arm.AdvSimd.IsSupported) rt += separator + "AdvSimd";
@@ -114,7 +117,7 @@ namespace Zyl.VectorTraits {
 #if NET6_0_OR_GREATER
             // // Error	CA2252	Using 'IsSupported' requires opting into preview features. See https://aka.ms/dotnet-warnings/preview-features for more information.
             // if (System.Runtime.Intrinsics.X86.AvxVnni.IsSupported) rt += separator + "AvxVnni";
-#endif
+#endif // NET6_0_OR_GREATER
             if (System.Runtime.Intrinsics.X86.Bmi1.IsSupported) rt += separator + "Bmi1";
             if (System.Runtime.Intrinsics.X86.Bmi2.IsSupported) rt += separator + "Bmi2";
             if (System.Runtime.Intrinsics.X86.Fma.IsSupported) rt += separator + "Fma";

@@ -91,6 +91,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 throw new NotSupportedException(GetUnsupportedMessage(noStrict));
             }
 
+            /// <inheritdoc cref="IBaseTraits.UsedInstructionSets"/>
+            public static string UsedInstructionSets { get; } = MakeUsedInstructionSets();
+
+            /// <inheritdoc cref="Zyl.VectorTraits.Impl.AVector.VectorTraitsBase.Statics.MakeUsedInstructionSets"/>
+            internal static string MakeUsedInstructionSets() {
+                string rt = "";
+#if NETCOREAPP3_0_OR_GREATER
+                string separator = VectorEnvironment.InstructionSetsSeparator;
+                if (System.Runtime.Intrinsics.X86.Avx.IsSupported) rt += separator + "Avx";
+                if (System.Runtime.Intrinsics.X86.Avx2.IsSupported) rt += separator + "Avx2";
+                if (System.Runtime.Intrinsics.X86.Sse.IsSupported) rt += separator + "Sse";
+                if (System.Runtime.Intrinsics.X86.Sse2.IsSupported) rt += separator + "Sse2";
+                // done.
+                if (!string.IsNullOrEmpty(rt)) {
+                    rt = rt.Substring(separator.Length);
+                }
+#endif // NETCOREAPP3_0_OR_GREATER
+                return rt;
+            }
+
 #if NETCOREAPP3_0_OR_GREATER
 
             /// <inheritdoc cref="IWVectorTraits256.Ceiling_AcceleratedTypes"/>

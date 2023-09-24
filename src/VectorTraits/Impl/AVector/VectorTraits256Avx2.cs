@@ -70,6 +70,13 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 throw new NotSupportedException(GetUnsupportedMessage(noStrict));
             }
 
+            /// <inheritdoc cref="IBaseTraits.UsedInstructionSets"/>
+            public static string UsedInstructionSets {
+                get {
+                    return WStatics.UsedInstructionSets;
+                }
+            }
+
 #if NETCOREAPP3_0_OR_GREATER
 
             /// <inheritdoc cref="IVectorTraits.Ceiling_AcceleratedTypes"/>

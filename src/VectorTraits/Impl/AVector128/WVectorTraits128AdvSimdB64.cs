@@ -87,6 +87,25 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 throw new NotSupportedException(GetUnsupportedMessage(noStrict));
             }
 
+            /// <inheritdoc cref="IBaseTraits.UsedInstructionSets"/>
+            public static string UsedInstructionSets { get; } = MakeUsedInstructionSets();
+
+            /// <inheritdoc cref="Zyl.VectorTraits.Impl.AVector.VectorTraitsBase.Statics.MakeUsedInstructionSets"/>
+            internal static string MakeUsedInstructionSets() {
+                string rt = "";
+#if NETCOREAPP3_0_OR_GREATER
+                string separator = VectorEnvironment.InstructionSetsSeparator;
+#if NET5_0_OR_GREATER
+                if (System.Runtime.Intrinsics.Arm.AdvSimd.Arm64.IsSupported) rt += separator + "AdvSimd";
+#endif // NET5_0_OR_GREATER
+                // done.
+                if (!string.IsNullOrEmpty(rt)) {
+                    rt = rt.Substring(separator.Length);
+                }
+#endif // NETCOREAPP3_0_OR_GREATER
+                return rt;
+            }
+
 #if NET5_0_OR_GREATER
 
             /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>

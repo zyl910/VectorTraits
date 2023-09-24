@@ -39,6 +39,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             Statics.ThrowForUnsupported(noStrict);
         }
 
+        /// <inheritdoc cref="IBaseTraits.UsedInstructionSets"/>
+        public override string UsedInstructionSets {
+            get {
+                return Statics.UsedInstructionSets;
+            }
+        }
+
 #if NETCOREAPP3_0_OR_GREATER
 
         /// <inheritdoc cref="IWVectorTraits256.Ceiling_AcceleratedTypes"/>
