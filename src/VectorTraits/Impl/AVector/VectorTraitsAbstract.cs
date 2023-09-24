@@ -79,6 +79,13 @@ namespace Zyl.VectorTraits.Impl.AVector {
             Statics.ThrowForUnsupported(noStrict);
         }
 
+        /// <inheritdoc cref="IBaseTraits.UsedInstructionSets"/>
+        public virtual string UsedInstructionSets {
+            get {
+                return Statics.UsedInstructionSets;
+            }
+        }
+
 
         /// <inheritdoc cref="IVectorTraits.Ceiling_AcceleratedTypes"/>
         public virtual TypeCodeFlags Ceiling_AcceleratedTypes {

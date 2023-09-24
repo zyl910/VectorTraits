@@ -61,6 +61,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             Statics.ThrowForUnsupported(noStrict);
         }
 
+        /// <inheritdoc cref="IBaseTraits.UsedInstructionSets"/>
+        public virtual string UsedInstructionSets {
+            get {
+                return Statics.UsedInstructionSets;
+            }
+        }
+
 #if NETCOREAPP3_0_OR_GREATER
 
         /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>

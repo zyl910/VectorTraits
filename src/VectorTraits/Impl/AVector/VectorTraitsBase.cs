@@ -61,6 +61,18 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 throw new NotSupportedException(GetUnsupportedMessage(noStrict));
             }
 
+            /// <inheritdoc cref="IBaseTraits.UsedInstructionSets"/>
+            public static string UsedInstructionSets { get; } = MakeUsedInstructionSets();
+
+            /// <summary>
+            /// Make for used instruction sets. The separator is a comma char ',' (构造使用的指令集信息. 分隔符是逗号 ',').
+            /// </summary>
+            /// <returns>Returns used instruction sets string.</returns>
+            internal static string MakeUsedInstructionSets() {
+                string rt = "";
+                return rt;
+            }
+
 
             /// <inheritdoc cref="IVectorTraits.Ceiling_AcceleratedTypes"/>
             public static TypeCodeFlags Ceiling_AcceleratedTypes {

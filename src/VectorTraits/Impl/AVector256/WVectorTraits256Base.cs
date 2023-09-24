@@ -73,6 +73,15 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 throw new NotSupportedException(GetUnsupportedMessage(noStrict));
             }
 
+            /// <inheritdoc cref="IBaseTraits.UsedInstructionSets"/>
+            public static string UsedInstructionSets { get; } = MakeUsedInstructionSets();
+
+            /// <inheritdoc cref="Zyl.VectorTraits.Impl.AVector.VectorTraitsBase.Statics.MakeUsedInstructionSets"/>
+            internal static string MakeUsedInstructionSets() {
+                string rt = "";
+                return rt;
+            }
+
 #if NETCOREAPP3_0_OR_GREATER
 
             /// <inheritdoc cref="IWVectorTraits256.Ceiling_AcceleratedTypes"/>

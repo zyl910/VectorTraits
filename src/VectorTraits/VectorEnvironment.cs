@@ -86,7 +86,7 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>Supported instruction sets. The separator is a comma char ',' (支持的指令集. 分隔符是逗号 ',').</summary>
-        public static string SupportedInstructionSets => MakeSupportedInstructionSets();
+        public static string SupportedInstructionSets { get; } = MakeSupportedInstructionSets();
 
         /// <summary>
         /// Make for supported instruction sets. The separator is a comma char ',' (构造支持的指令集信息. 分隔符是逗号 ',').

@@ -4,6 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Numerics;
 using System.Reflection;
+#if NETCOREAPP3_0_OR_GREATER
+using System.Runtime.Intrinsics;
+#endif
 using System.Text;
 
 namespace Zyl.VectorTraits {
@@ -102,6 +105,12 @@ namespace Zyl.VectorTraits {
                 writer.WriteLine(indent + string.Format("VectorEnvironment.CpuFlags:\t{0}", VectorEnvironment.CpuFlags));
             }
             writer.WriteLine(indent + string.Format("VectorEnvironment.SupportedInstructionSets:\t{0}", VectorEnvironment.SupportedInstructionSets));
+#if NETCOREAPP3_0_OR_GREATER
+            if (Vector128<byte>.Count < Vector<byte>.Count) {
+                writer.WriteLine(indent + string.Format("Vector128s.Instance.UsedInstructionSets:\t{0}", Vector128s.Instance.UsedInstructionSets));
+            }
+#endif // NETCOREAPP3_0_OR_GREATER
+            writer.WriteLine(indent + string.Format("Vectors.Instance.UsedInstructionSets:\t{0}", Vectors.Instance.UsedInstructionSets));
             writer.WriteLine(indent + string.Format("Vectors.Instance:\t{0}", Vectors.Instance.GetType().Name));
             //writer.WriteLine();
         }

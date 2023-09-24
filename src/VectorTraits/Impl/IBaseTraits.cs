@@ -38,5 +38,9 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="noStrict">No strict check(不严格检查). When it is true, it will allow for incomplete matches, but the ability to run (当它为true时, 会允许不完全匹配, 但能够运行的)</param>
         /// <exception cref="NotSupportedException">If <see cref="GetIsSupported"/> return false.</exception>
         void ThrowForUnsupported(bool noStrict = false);
+
+        /// <summary>Used instruction sets. The separator is a comma char ',' (使用的指令集. 分隔符是逗号 ',').</summary>
+        string UsedInstructionSets { get; }
+
     }
 }
