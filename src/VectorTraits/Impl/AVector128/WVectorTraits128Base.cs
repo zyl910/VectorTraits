@@ -11,6 +11,7 @@ using System.Numerics;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.Collections;
 using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits.Impl.AVector128 {
@@ -1922,6 +1923,31 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic_Fast_Basic(Vector128<sbyte> value, int shiftAmount) {
+                Vector128<sbyte> rt = value;
+                ref FixedArray16<sbyte> p = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref rt);
+                p.I0 >>= shiftAmount;
+                p.I1 >>= shiftAmount;
+                p.I2 >>= shiftAmount;
+                p.I3 >>= shiftAmount;
+                p.I4 >>= shiftAmount;
+                p.I5 >>= shiftAmount;
+                p.I6 >>= shiftAmount;
+                p.I7 >>= shiftAmount;
+                p.I8 >>= shiftAmount;
+                p.I9 >>= shiftAmount;
+                p.I10 >>= shiftAmount;
+                p.I11 >>= shiftAmount;
+                p.I12 >>= shiftAmount;
+                p.I13 >>= shiftAmount;
+                p.I14 >>= shiftAmount;
+                p.I15 >>= shiftAmount;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{sbyte}, int)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> ShiftRightArithmetic_Fast_Basic_Ref(Vector128<sbyte> value, int shiftAmount) {
                 Vector128<sbyte> rt = value;
                 ref sbyte p = ref Unsafe.As<Vector128<sbyte>, sbyte>(ref rt);
                 p >>= shiftAmount;
