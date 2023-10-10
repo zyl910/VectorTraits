@@ -49,19 +49,19 @@ namespace Zyl.VectorTraits.Collections {
         }
 
         /// <inheritdoc/>
-        public IEnumerator<T> GetEnumerator() {
+        public readonly IEnumerator<T> GetEnumerator() {
             for (int i = 0; i < Count; ++i) {
                 yield return this[i];
             }
         }
 
         /// <inheritdoc/>
-        IEnumerator IEnumerable.GetEnumerator() {
+        readonly IEnumerator IEnumerable.GetEnumerator() {
             return GetEnumerator();
         }
 
         /// <inheritdoc/>
-        public int Count {
+        public readonly int Count {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
                 return CapacityValue;
@@ -71,8 +71,8 @@ namespace Zyl.VectorTraits.Collections {
         /// <inheritdoc/>
         public T this[int index] {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get {
-                return Unsafe.Add(ref I0, index);
+            readonly get {
+                return Unsafe.Add(ref Unsafe.AsRef(in I0), index);
             }
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set {

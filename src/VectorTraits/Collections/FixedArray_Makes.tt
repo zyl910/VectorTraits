@@ -9,7 +9,7 @@
 	int[] countList = {
 		4,
 		8,
-		//16,
+		16,
 		32,
 		64
 	};
@@ -25,11 +25,114 @@ using System.Text;
 namespace Zyl.VectorTraits.Collections {
 <#
     foreach(int cnt in countList) {
+    	string itemsDisplay = "{I0}";
+    	int iMax = cnt;
+    	if (iMax>DisplayMaxItems) iMax=DisplayMaxItems;
+    	for(int i=1; i<iMax; ++i) {
+    		itemsDisplay += ", {I" + i.ToString() + "}";
+    	}
+    	if (cnt>DisplayMaxItems) {
+    		itemsDisplay += " ...";
+    	}
 #>
-    public partial struct FixedArray<#=cnt#> {
+    /// <summary>
+    /// An array of fixed capacity <#=cnt#> (容量固定为<#=cnt#>的数组).
+    /// </summary>
+    /// <typeparam name="T">The array element type (数组中的元素的类型).</typeparam>
+    [DebuggerDisplay("Count={Count}, Items=[<#=itemsDisplay#>]")]
+#if NET20_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+    [Serializable]
+#endif
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public partial struct FixedArray<#=cnt#><T> : IEquatable<FixedArray<#=cnt#><T>>, IFixedArray<T>, IReadOnlyList<T>
+            where T : struct {
+        /// <summary>Capacity value.</summary>
+        public const int CapacityValue = <#=cnt#>;
+
+        // -- Items --
+<#
+    	for(int i=0; i<cnt; ++i) {
+#>        /// <summary>Item <#=i#>.</summary>
+        public T I<#=i#>;
+<#
+    	} // End: for i
+#>
+
+        /// <inheritdoc/>
+        public override readonly bool Equals(object? obj) {
+            if (null == obj) return false;
+            if (!(obj is FixedArray<#=cnt#><T>)) return false;
+            return Equals((FixedArray<#=cnt#><T>)obj);
+        }
+
+        /// <inheritdoc/>
+        public readonly bool Equals(FixedArray<#=cnt#><T> other) {
+            if (!I0.Equals(other.I0)) return false;
+<#
+    	for(int i=1; i<cnt; ++i) {
+#>            if (!I<#=i#>.Equals(other.I<#=i#>)) return false;
+<#
+    	} // End: for i
+#>
+            return true;
+        }
+
+        /// <inheritdoc/>
+        public override readonly int GetHashCode() {
+            int rt = I0.GetHashCode();
+<#
+    	for(int i=1; i<cnt; ++i) {
+#>            rt ^= I<#=i#>.GetHashCode();
+<#
+    	} // End: for i
+#>
+            return rt;
+        }
+
+        /// <inheritdoc/>
+        public readonly IEnumerator<T> GetEnumerator() {
+            for (int i = 0; i < Count; ++i) {
+                yield return this[i];
+            }
+        }
+
+        /// <inheritdoc/>
+        readonly IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
+        }
+
+        /// <inheritdoc/>
+        public readonly int Count {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+                return CapacityValue;
+            }
+        }
+
+        /// <inheritdoc/>
+        public T this[int index] {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            readonly get {
+                return Unsafe.Add(ref Unsafe.AsRef(in I0), index);
+            }
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set {
+                Unsafe.Add(ref I0, index) = value;
+            }
+        }
+
+        /// <inheritdoc/>
+        public static bool operator ==(FixedArray<#=cnt#><T> left, FixedArray<#=cnt#><T> right) {
+            return left.Equals(right);
+        }
+
+        /// <inheritdoc/>
+        public static bool operator !=(FixedArray<#=cnt#><T> left, FixedArray<#=cnt#><T> right) {
+            return !(left == right);
+        }
 
     } // End: struct FixedArray<#=cnt#>
 <#
-    } // End: for
+    } // End: foreach cnt
 #>
 } // End: namespace
