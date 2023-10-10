@@ -1,0 +1,35 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+	const int DisplayMaxItems = 8;
+	int[] countList = {
+		4,
+		8,
+		//16,
+		32,
+		64
+	};
+#>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
+
+namespace Zyl.VectorTraits.Collections {
+<#
+    foreach(int cnt in countList) {
+#>
+    public partial struct FixedArray<#=cnt#> {
+
+    } // End: struct FixedArray<#=cnt#>
+<#
+    } // End: for
+#>
+} // End: namespace

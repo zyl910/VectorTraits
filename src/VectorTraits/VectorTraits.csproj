@@ -160,6 +160,10 @@ Traits methods:
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Collections\FixedArray_Makes.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FixedArray_Makes.cs</LastGenOutput>
+    </None>
     <None Update="Tuples\VectorXTuple_Extensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>VectorXTuple_Extensions.cs</LastGenOutput>
@@ -179,6 +183,11 @@ Traits methods:
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Collections\FixedArray_Makes.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FixedArray_Makes.tt</DependentUpon>
+    </Compile>
     <Compile Update="Tuples\VectorXTuple_Extensions.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

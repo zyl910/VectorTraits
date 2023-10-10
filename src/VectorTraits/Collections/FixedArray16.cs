@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define AllowMe
+#if AllowMe
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -133,3 +135,4 @@ namespace Zyl.VectorTraits.Collections {
 
     }
 }
+#endif // AllowMe
