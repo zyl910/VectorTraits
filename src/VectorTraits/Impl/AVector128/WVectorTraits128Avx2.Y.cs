@@ -109,8 +109,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YNarrowSaturate(Vector128<short> lower, Vector128<short> upper) {
-                Vector128<sbyte> raw = Avx2.PackSignedSaturate(lower, upper); // bit64(x, z, y, w)
-                Vector128<sbyte> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsSByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                Vector128<sbyte> rt = Avx2.PackSignedSaturate(lower, upper);
                 return rt;
             }
 
@@ -120,16 +119,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<byte> YNarrowSaturate(Vector128<ushort> lower, Vector128<ushort> upper) {
                 // Vector128<ushort> amax = Vector128s<ushort>.VMaxByte;
                 Vector128<ushort> amax = Vector128.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
-                Vector128<byte> raw = Avx2.PackUnsignedSaturate(Avx2.Min(lower, amax).AsInt16(), Avx2.Min(upper, amax).AsInt16()); // bit64(x, z, y, w)
-                Vector128<byte> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                Vector128<byte> rt = Avx2.PackUnsignedSaturate(Avx2.Min(lower, amax).AsInt16(), Avx2.Min(upper, amax).AsInt16());
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate(Vector128{int}, Vector128{int})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YNarrowSaturate(Vector128<int> lower, Vector128<int> upper) {
-                Vector128<short> raw = Avx2.PackSignedSaturate(lower, upper); // bit64(x, z, y, w)
-                Vector128<short> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsInt16(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                Vector128<short> rt = Avx2.PackSignedSaturate(lower, upper);
                 return rt;
             }
 
@@ -139,16 +136,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ushort> YNarrowSaturate(Vector128<uint> lower, Vector128<uint> upper) {
                 //Vector128<uint> amax = Vector128s<uint>.VMaxUInt16;
                 Vector128<uint> amax = Vector128.Create((uint)ushort.MaxValue); // .NET5+ has better performance .
-                Vector128<ushort> raw = Avx2.PackUnsignedSaturate(Avx2.Min(lower, amax).AsInt32(), Avx2.Min(upper, amax).AsInt32()); // bit64(x, z, y, w)
-                Vector128<ushort> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsUInt16(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                Vector128<ushort> rt = Avx2.PackUnsignedSaturate(Avx2.Min(lower, amax).AsInt32(), Avx2.Min(upper, amax).AsInt32());
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate(Vector128{long}, Vector128{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YNarrowSaturate(Vector128<long> lower, Vector128<long> upper) {
-                //Vector128<long> amin = Vector128s<long>.VMinInt32;
-                //Vector128<long> amax = Vector128s<long>.VMaxInt32;
                 Vector128<long> amin = Vector128Constants.Int64_VMinInt32;
                 Vector128<long> amax = Vector128Constants.Int64_VMaxInt32;
                 Vector128<long> l = YClamp(lower, amin, amax);
@@ -187,8 +181,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned(Vector128{short}, Vector128{short})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YNarrowSaturateUnsigned(Vector128<short> lower, Vector128<short> upper) {
-                Vector128<byte> raw = Avx2.PackUnsignedSaturate(lower, upper); // bit64(x, z, y, w)
-                Vector128<byte> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                Vector128<byte> rt = Avx2.PackUnsignedSaturate(lower, upper);
                 return rt;
             }
 
@@ -196,8 +189,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YNarrowSaturateUnsigned(Vector128<int> lower, Vector128<int> upper) {
-                Vector128<ushort> raw = Avx2.PackUnsignedSaturate(lower, upper); // bit64(x, z, y, w)
-                Vector128<ushort> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsUInt16(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                Vector128<ushort> rt = Avx2.PackUnsignedSaturate(lower, upper);
                 return rt;
             }
 
@@ -206,7 +198,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YNarrowSaturateUnsigned(Vector128<long> lower, Vector128<long> upper) {
                 Vector128<long> amin = Vector128<long>.Zero;
-                //Vector128<long> amax = Vector128s<long>.VMaxUInt32;
                 Vector128<long> amax = Vector128Constants.Int64_VMaxUInt32;
                 Vector128<ulong> l = YClamp(lower, amin, amax).AsUInt64();
                 Vector128<ulong> u = YClamp(upper, amin, amax).AsUInt64();

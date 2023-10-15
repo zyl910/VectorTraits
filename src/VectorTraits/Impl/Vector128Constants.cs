@@ -649,6 +649,17 @@ namespace Zyl.VectorTraits.Impl {
         #region TraitsMethod
         // == TraitsMethod ==
 
+        /// <summary>ExtractMostSignificantBits - Shuffle - Get high byte of 16bit.</summary>
+        public static Vector128<byte> ExtractMostSignificantBits_Shuffle_HiByteOf16 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80);
+#endif // USE_VECTOR_CREATE
+
         /// <summary>Shuffle - UInt16 - The multiplier.</summary>
         [CLSCompliant(false)]
         public static Vector128<ushort> Shuffle_UInt16_Multiplier {
