@@ -127,9 +127,9 @@ namespace Zyl.VectorTraits {
             if (System.Runtime.Intrinsics.X86.Sse.IsSupported) rt += separator + "Sse";
             if (System.Runtime.Intrinsics.X86.Sse2.IsSupported) rt += separator + "Sse2";
             if (System.Runtime.Intrinsics.X86.Sse3.IsSupported) rt += separator + "Sse3";
+            if (System.Runtime.Intrinsics.X86.Ssse3.IsSupported) rt += separator + "Ssse3";
             if (System.Runtime.Intrinsics.X86.Sse41.IsSupported) rt += separator + "Sse41";
             if (System.Runtime.Intrinsics.X86.Sse42.IsSupported) rt += separator + "Sse42";
-            if (System.Runtime.Intrinsics.X86.Ssse3.IsSupported) rt += separator + "Ssse3";
 #if NET5_0_OR_GREATER
             if (System.Runtime.Intrinsics.X86.X86Base.IsSupported) rt += separator + "X86Base";
 #endif // NET5_0_OR_GREATER

@@ -99,10 +99,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 string rt = "";
 #if NETCOREAPP3_0_OR_GREATER
                 string separator = VectorEnvironment.InstructionSetsSeparator;
-                if (System.Runtime.Intrinsics.X86.Avx.IsSupported) rt += separator + "Avx";
-                if (System.Runtime.Intrinsics.X86.Avx2.IsSupported) rt += separator + "Avx2";
                 if (System.Runtime.Intrinsics.X86.Sse.IsSupported) rt += separator + "Sse";
                 if (System.Runtime.Intrinsics.X86.Sse2.IsSupported) rt += separator + "Sse2";
+                if (System.Runtime.Intrinsics.X86.Sse3.IsSupported) rt += separator + "Sse3";
+                if (System.Runtime.Intrinsics.X86.Ssse3.IsSupported) rt += separator + "Ssse3";
+                if (System.Runtime.Intrinsics.X86.Sse41.IsSupported) rt += separator + "Sse41";
+                if (System.Runtime.Intrinsics.X86.Sse42.IsSupported) rt += separator + "Sse42";
+                if (System.Runtime.Intrinsics.X86.Avx.IsSupported) rt += separator + "Avx";
+                if (System.Runtime.Intrinsics.X86.Avx2.IsSupported) rt += separator + "Avx2";
                 // done.
                 if (!string.IsNullOrEmpty(rt)) {
                     rt = rt.Substring(separator.Length);
