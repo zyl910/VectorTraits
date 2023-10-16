@@ -16,7 +16,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
     using SuperStatics = WVectorTraits256Base.Statics;
 
     /// <summary>
-    /// <see cref="Vector256{T}"/> traits - Avx2 .
+    /// <see cref="Vector256{T}"/> traits - Avx2 family .
     /// </summary>
     public sealed partial class WVectorTraits256Avx2 : WVectorTraits256Avx2Abstract {
         private static readonly WVectorTraits256Avx2 _instance = new WVectorTraits256Avx2(); // Default instance.

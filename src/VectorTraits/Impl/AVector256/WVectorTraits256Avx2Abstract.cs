@@ -14,7 +14,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
     using Statics = WVectorTraits256Avx2.Statics;
 
     /// <summary>
-    /// <see cref="Vector256{T}"/> traits - Avx2 abstract.
+    /// <see cref="Vector256{T}"/> traits - Avx2 family abstract.
     /// </summary>
     public abstract partial class WVectorTraits256Avx2Abstract : WVectorTraits256Abstract {
         /// <inheritdoc cref="IBaseTraits.IsSupported"/>

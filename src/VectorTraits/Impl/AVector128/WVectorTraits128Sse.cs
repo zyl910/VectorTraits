@@ -16,13 +16,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
     using SuperStatics = WVectorTraits128Base.Statics;
 
     /// <summary>
-    /// <see cref="Vector128{T}"/> traits - Avx2 .
+    /// <see cref="Vector128{T}"/> traits - Sse family .
     /// </summary>
-    public sealed partial class WVectorTraits128Avx2 : WVectorTraits128Avx2Abstract {
-        private static readonly WVectorTraits128Avx2 _instance = new WVectorTraits128Avx2(); // Default instance.
+    public sealed partial class WVectorTraits128Sse : WVectorTraits128SseAbstract {
+        private static readonly WVectorTraits128Sse _instance = new WVectorTraits128Sse(); // Default instance.
 
         /// <summary>Default instance. </summary>
-        public static WVectorTraits128Avx2 Instance {
+        public static WVectorTraits128Sse Instance {
             get { return _instance; }
         }
 

@@ -11,12 +11,12 @@ using System.Runtime.Intrinsics;
 #endif
 
 namespace Zyl.VectorTraits.Impl.AVector128 {
-    using Statics = WVectorTraits128Avx2.Statics;
+    using Statics = WVectorTraits128Sse.Statics;
 
     /// <summary>
-    /// <see cref="Vector128{T}"/> traits - Avx2 abstract.
+    /// <see cref="Vector128{T}"/> traits - Sse family abstract.
     /// </summary>
-    public abstract partial class WVectorTraits128Avx2Abstract : WVectorTraits128Abstract {
+    public abstract partial class WVectorTraits128SseAbstract : WVectorTraits128Abstract {
         /// <inheritdoc cref="IBaseTraits.IsSupported"/>
         public override bool IsSupported {
             get {

@@ -11,9 +11,9 @@ using System.Runtime.Intrinsics;
 #endif
 
 namespace Zyl.VectorTraits.Impl.AVector128 {
-    using Statics = WVectorTraits128Avx2.Statics;
+    using Statics = WVectorTraits128Sse.Statics;
 
-    partial class WVectorTraits128Avx2Abstract {
+    partial class WVectorTraits128SseAbstract {
 #if NETCOREAPP3_0_OR_GREATER
 
         /// <inheritdoc cref="IWVectorTraits128.YClamp_AcceleratedTypes"/>
