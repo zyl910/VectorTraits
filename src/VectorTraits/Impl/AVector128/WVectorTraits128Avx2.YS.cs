@@ -13,7 +13,7 @@ using System.Runtime.Intrinsics.X86;
 #endif
 
 namespace Zyl.VectorTraits.Impl.AVector128 {
-    using SuperStatics = WVectorTraits128Base.Statics;
+    using SuperStatics = WVectorTraits128Sse.Statics;
 
     partial class WVectorTraits128Avx2 {
 

@@ -24,6 +24,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         /// <returns>Returns best instance.</returns>
         [CLSCompliant(false)]
         public static IWVectorTraits128 GetBestInstance() {
+            if (WVectorTraits128Avx2.Instance.IsSupported) return WVectorTraits128Avx2.Instance;
+            if (WVectorTraits128Sse.Instance.IsSupported) return WVectorTraits128Sse.Instance;
             if (WVectorTraits128AdvSimdB64.Instance.IsSupported) return WVectorTraits128AdvSimdB64.Instance;
             if (WVectorTraits128AdvSimd.Instance.IsSupported) return WVectorTraits128AdvSimd.Instance;
             return WVectorTraits128Base.Instance;

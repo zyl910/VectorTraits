@@ -22,12 +22,16 @@ namespace Zyl.VectorTraits {
 
         private static readonly string[] _traitsNames = {
             "WVectorTraits128Base",
+            "WVectorTraits128Sse",
+            "WVectorTraits128Avx2",
             "WVectorTraits128AdvSimd",
             "WVectorTraits128AdvSimdB64"
         };
 
         private static readonly IWVectorTraits128[] _traitsInstances = {
             WVectorTraits128Base.Instance,
+            WVectorTraits128Sse.Instance,
+            WVectorTraits128Avx2.Instance,
             WVectorTraits128AdvSimd.Instance,
             WVectorTraits128AdvSimdB64.Instance
         };
@@ -35,6 +39,8 @@ namespace Zyl.VectorTraits {
         // Statics types (静态类型集).
         private static readonly Type[] _staticsTypes = {
             typeof(WVectorTraits128Base.Statics),
+            typeof(WVectorTraits128Sse.Statics),
+            typeof(WVectorTraits128Avx2.Statics),
             typeof(WVectorTraits128AdvSimd.Statics),
             typeof(WVectorTraits128AdvSimdB64.Statics)
         };
