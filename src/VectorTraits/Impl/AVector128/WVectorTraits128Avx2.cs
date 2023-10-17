@@ -16,7 +16,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
     using SuperStatics = WVectorTraits128Sse.Statics;
 
     /// <summary>
-    /// <see cref="Vector128{T}"/> traits - Avx2 family .
+    /// <see cref="Vector128{T}"/> traits - Avx2 .
     /// </summary>
     public sealed partial class WVectorTraits128Avx2 : WVectorTraits128Avx2Abstract {
         private static readonly WVectorTraits128Avx2 _instance = new WVectorTraits128Avx2(); // Default instance.

@@ -14,7 +14,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
     using Statics = WVectorTraits128Avx2.Statics;
 
     /// <summary>
-    /// <see cref="Vector128{T}"/> traits - Avx2 family abstract.
+    /// <see cref="Vector128{T}"/> traits - Avx2 abstract.
     /// </summary>
     public abstract partial class WVectorTraits128Avx2Abstract : WVectorTraits128SseAbstract {
         /// <inheritdoc cref="IBaseTraits.IsSupported"/>
