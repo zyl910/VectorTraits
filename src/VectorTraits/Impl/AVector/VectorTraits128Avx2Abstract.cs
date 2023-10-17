@@ -14,7 +14,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
     /// <summary>
     /// <see cref="Vector{T}"/> traits 128 - Avx2 abstract.
     /// </summary>
-    public abstract partial class VectorTraits128Avx2Abstract : VectorTraits128Abstract {
+    public abstract partial class VectorTraits128Avx2Abstract : VectorTraits128SseAbstract {
         
         /// <inheritdoc cref="IBaseTraits.IsSupported"/>
         public override bool IsSupported {
