@@ -375,12 +375,6 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.YShuffleG4(source.AsVector128(), control).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.YShuffleG4(Vector{double}, ShuffleControlG4)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<double> YShuffleG4(Vector<double> source, ShuffleControlG4 control) {
-                return WStatics.YShuffleG4(source.AsVector128(), control).AsVector();
-            }
-
             /// <inheritdoc cref="IVectorTraits.YShuffleG4(Vector{sbyte}, ShuffleControlG4)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -420,28 +414,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.YShuffleG4(source.AsVector128(), control).AsVector();
             }
 
-            /// <inheritdoc cref="IVectorTraits.YShuffleG4(Vector{long}, ShuffleControlG4)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<long> YShuffleG4(Vector<long> source, ShuffleControlG4 control) {
-                return WStatics.YShuffleG4(source.AsVector128(), control).AsVector();
-            }
-
-            /// <inheritdoc cref="IVectorTraits.YShuffleG4(Vector{ulong}, ShuffleControlG4)"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ulong> YShuffleG4(Vector<ulong> source, ShuffleControlG4 control) {
-                return WStatics.YShuffleG4(source.AsVector128(), control).AsVector();
-            }
-
             /// <inheritdoc cref="IVectorTraits.YShuffleG4_Const(Vector{float}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<float> YShuffleG4_Const(Vector<float> source, [ConstantExpected] ShuffleControlG4 control) {
-                return WStatics.YShuffleG4_Const(source.AsVector128(), control).AsVector();
-            }
-
-            /// <inheritdoc cref="IVectorTraits.YShuffleG4_Const(Vector{double}, ShuffleControlG4)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<double> YShuffleG4_Const(Vector<double> source, [ConstantExpected] ShuffleControlG4 control) {
                 return WStatics.YShuffleG4_Const(source.AsVector128(), control).AsVector();
             }
 
@@ -481,19 +456,6 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> YShuffleG4_Const(Vector<uint> source, [ConstantExpected] ShuffleControlG4 control) {
-                return WStatics.YShuffleG4_Const(source.AsVector128(), control).AsVector();
-            }
-
-            /// <inheritdoc cref="IVectorTraits.YShuffleG4_Const(Vector{long}, ShuffleControlG4)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<long> YShuffleG4_Const(Vector<long> source, [ConstantExpected] ShuffleControlG4 control) {
-                return WStatics.YShuffleG4_Const(source.AsVector128(), control).AsVector();
-            }
-
-            /// <inheritdoc cref="IVectorTraits.YShuffleG4_Const(Vector{ulong}, ShuffleControlG4)"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector<ulong> YShuffleG4_Const(Vector<ulong> source, [ConstantExpected] ShuffleControlG4 control) {
                 return WStatics.YShuffleG4_Const(source.AsVector128(), control).AsVector();
             }
 
