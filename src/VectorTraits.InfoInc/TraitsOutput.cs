@@ -108,6 +108,7 @@ namespace Zyl.VectorTraits {
 #if NETCOREAPP3_0_OR_GREATER
             if (Vector128<byte>.Count < Vector<byte>.Count) {
                 writer.WriteLine(indent + string.Format("Vector128s.Instance.UsedInstructionSets:\t{0}", Vector128s.Instance.UsedInstructionSets));
+                writer.WriteLine(indent + string.Format("Vector256s.Instance.UsedInstructionSets:\t{0}", Vector256s.Instance.UsedInstructionSets));
             }
 #endif // NETCOREAPP3_0_OR_GREATER
             writer.WriteLine(indent + string.Format("Vectors.Instance.UsedInstructionSets:\t{0}", Vectors.Instance.UsedInstructionSets));
