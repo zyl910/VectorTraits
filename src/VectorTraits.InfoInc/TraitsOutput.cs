@@ -107,12 +107,11 @@ namespace Zyl.VectorTraits {
             writer.WriteLine(indent + string.Format("VectorEnvironment.SupportedInstructionSets:\t{0}", VectorEnvironment.SupportedInstructionSets));
 #if NETCOREAPP3_0_OR_GREATER
             if (Vector128<byte>.Count < Vector<byte>.Count) {
-                writer.WriteLine(indent + string.Format("Vector128s.Instance.UsedInstructionSets:\t{0}", Vector128s.Instance.UsedInstructionSets));
-                writer.WriteLine(indent + string.Format("Vector256s.Instance.UsedInstructionSets:\t{0}", Vector256s.Instance.UsedInstructionSets));
+                writer.WriteLine(indent + string.Format("Vector128s.Instance:\t{0}\t// {1}", Vector128s.Instance.GetType().Name, Vector128s.Instance.UsedInstructionSets));
+                writer.WriteLine(indent + string.Format("Vector256s.Instance:\t{0}\t// {1}", Vector256s.Instance.GetType().Name, Vector256s.Instance.UsedInstructionSets));
             }
 #endif // NETCOREAPP3_0_OR_GREATER
-            writer.WriteLine(indent + string.Format("Vectors.Instance.UsedInstructionSets:\t{0}", Vectors.Instance.UsedInstructionSets));
-            writer.WriteLine(indent + string.Format("Vectors.Instance:\t{0}", Vectors.Instance.GetType().Name));
+            writer.WriteLine(indent + string.Format("Vectors.Instance:\t{0}\t// {1}", Vectors.Instance.GetType().Name, Vectors.Instance.UsedInstructionSets));
             //writer.WriteLine();
         }
 
