@@ -2321,11 +2321,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static float Sum(Vector128<float> value) {
                 // 0 1 2 3
-                Vector128<float> m = Ssse3.HorizontalAdd(value, value);
+                Vector128<float> m = Sse3.HorizontalAdd(value, value);
                 // 01 23 01 23
-                m = Avx.HorizontalAdd(m, m);
+                m = Sse3.HorizontalAdd(m, m);
                 // 0123 0123 0123 0123
-                Vector128<float> n = Ssse3.HorizontalAdd(m, m);
+                Vector128<float> n = Sse3.HorizontalAdd(m, m);
                 return n.GetElement(0);
             }
 
@@ -2333,7 +2333,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static double Sum(Vector128<double> value) {
                 // 0 1
-                Vector128<double> m = Ssse3.HorizontalAdd(value, value);
+                Vector128<double> m = Sse3.HorizontalAdd(value, value);
                 // 01 01
                 return m.GetElement(0);
             }
@@ -2342,23 +2342,23 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static sbyte Sum(Vector128<sbyte> value) {
-                Widen(value, out Vector128<short> l, out Vector128<short> h);
-                Vector128<short> t = Avx2.Add(l, h);
-                return (sbyte)Sum(t);
+                return (sbyte)Sum(value.AsByte());
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static byte Sum(Vector128<byte> value) {
-                return (byte)Sum(value.AsSByte());
+                Widen_Unpack(value, out Vector128<ushort> l, out Vector128<ushort> h);
+                Vector128<ushort> t = Sse2.Add(l, h);
+                return (byte)Sum(t);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static short Sum(Vector128<short> value) {
-                Vector128<short> m = Avx2.HorizontalAdd(value, value);
-                m = Avx2.HorizontalAdd(m, m);
-                m = Avx2.HorizontalAdd(m, m);
+                Vector128<short> m = Ssse3.HorizontalAdd(value, value);
+                m = Ssse3.HorizontalAdd(m, m);
+                m = Ssse3.HorizontalAdd(m, m);
                 return (short)Sse2.ConvertToInt32(m.AsInt32());
             }
 
@@ -2377,8 +2377,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 // 01 23 01 23
                 m = Ssse3.HorizontalAdd(m, m);
                 // 0123 0123 0123 0123
-                Vector128<int> n = Ssse3.HorizontalAdd(m, m);
-                return Sse2.ConvertToInt32(n);
+                return Sse2.ConvertToInt32(m);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{uint})"/>
@@ -2393,7 +2392,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static long Sum(Vector128<long> value) {
                 // 0 1
                 Vector128<long> m = Sse2.UnpackHigh(value, value); // upper
-                Vector128<long> n = Avx2.Add(value, m);
+                Vector128<long> n = Sse2.Add(value, m);
                 // 01 01
                 return n.GetElement(0);
             }
@@ -2475,16 +2474,16 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_ConvertTo(Vector128<byte> source, out Vector128<ushort> lower, out Vector128<ushort> upper) {
-                lower = Avx2.ConvertToVector128Int16(source).AsUInt16();
-                Vector128<byte> sourceUpper = Sse2.UnpackHigh(source.AsUInt16(), source.AsUInt16()).AsByte();
-                upper = Avx2.ConvertToVector128Int16(sourceUpper).AsUInt16();
+                lower = Sse41.ConvertToVector128Int16(source).AsUInt16();
+                Vector128<byte> sourceUpper = Sse2.UnpackHigh(source.AsUInt64(), source.AsUInt64()).AsByte();
+                upper = Sse41.ConvertToVector128Int16(sourceUpper).AsUInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{short}, out Vector128{int}, out Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_ConvertTo(Vector128<short> source, out Vector128<int> lower, out Vector128<int> upper) {
                 lower = Avx2.ConvertToVector128Int32(source);
-                Vector128<short> sourceUpper = Sse2.UnpackHigh(source.AsInt32(), source.AsInt32()).AsInt16();
+                Vector128<short> sourceUpper = Sse2.UnpackHigh(source.AsUInt64(), source.AsUInt64()).AsInt16();
                 upper = Avx2.ConvertToVector128Int32(sourceUpper);
             }
 
@@ -2493,7 +2492,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_ConvertTo(Vector128<ushort> source, out Vector128<uint> lower, out Vector128<uint> upper) {
                 lower = Avx2.ConvertToVector128Int32(source).AsUInt32();
-                Vector128<ushort> sourceUpper = Sse2.UnpackHigh(source.AsUInt32(), source.AsUInt32()).AsUInt16();
+                Vector128<ushort> sourceUpper = Sse2.UnpackHigh(source.AsUInt64(), source.AsUInt64()).AsUInt16();
                 upper = Avx2.ConvertToVector128Int32(sourceUpper).AsUInt32();
             }
 
