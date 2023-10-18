@@ -2320,21 +2320,32 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static float Sum(Vector128<float> value) {
+                Vector128<float> m;
+                Vector128<float> n;
                 // 0 1 2 3
-                Vector128<float> m = Sse3.HorizontalAdd(value, value);
-                // 01 23 01 23
-                m = Sse3.HorizontalAdd(m, m);
-                // 0123 0123 0123 0123
-                Vector128<float> n = Sse3.HorizontalAdd(m, m);
+                if (Sse3.IsSupported) {
+                    m = Sse3.HorizontalAdd(value, value); // 01 23 01 23
+                    n = Sse3.HorizontalAdd(m, m); // 0123 0123 0123 0123
+                } else {
+                    m = Sse2.UnpackHigh(value.AsInt64(), value.AsInt64()).AsSingle(); // 2 3 2 3
+                    n = Sse.Add(m, value); // 02 13 22 33
+                    m = Sse2.Shuffle(n.AsInt32(), (byte)ShuffleControlG4.YXZW).AsSingle(); // 13 02 22 33
+                    n = Sse.Add(m, n); // 0123 0123 2222 3333
+                }
                 return n.GetElement(0);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static double Sum(Vector128<double> value) {
+                Vector128<double> m;
                 // 0 1
-                Vector128<double> m = Sse3.HorizontalAdd(value, value);
-                // 01 01
+                if (Sse3.IsSupported) {
+                    m = Sse3.HorizontalAdd(value, value); // 01 01
+                } else {
+                    m = Sse2.UnpackHigh(value, value); // 1 1
+                    m = Sse2.Add(m, value); // 01 01
+                }
                 return m.GetElement(0);
             }
 
@@ -2356,10 +2367,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static short Sum(Vector128<short> value) {
-                Vector128<short> m = Ssse3.HorizontalAdd(value, value);
-                m = Ssse3.HorizontalAdd(m, m);
-                m = Ssse3.HorizontalAdd(m, m);
-                return (short)Sse2.ConvertToInt32(m.AsInt32());
+                Vector128<short> m;
+                Vector128<short> n;
+                // 0 1 2 3 4 5 6 7
+                if (Ssse3.IsSupported) {
+                    m = Ssse3.HorizontalAdd(value, value); // 01 23 45 67 01 23 45 67
+                    m = Ssse3.HorizontalAdd(m, m); // 0123 4567 0123 4567
+                    n = Ssse3.HorizontalAdd(m, m); // 01234567 01234567 01234567 01234567
+                } else {
+                    m = Sse2.UnpackHigh(value.AsInt64(), value.AsInt64()).AsInt16(); // 4 5 6 7 4 5 6 7
+                    n = Sse2.Add(m, value); // 04 15 26 37 44 55 66 77
+                    m = Sse2.Shuffle(n.AsInt32(), (byte)ShuffleControlG4.YXZW).AsInt16(); // 26 37 04 15 26 44 55 66 77
+                    n = Sse2.Add(m, n); // 0246 1357 0246 1357 4444 5555 6666 7777
+                    m = Sse2.ShuffleLow(n, (byte)ShuffleControlG4.YXWZ).AsInt16(); // 1357 0246 1357 0246 4444 5555 6666 7777
+                    n = Sse2.Add(m, n); // 01234567 01234567 01234567 01234567 44444444 5555555 6666666 77777777
+                }
+                return (short)Sse2.ConvertToInt32(n.AsInt32());
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{ushort})"/>
@@ -2372,12 +2395,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static int Sum(Vector128<int> value) {
+                Vector128<int> m;
+                Vector128<int> n;
                 // 0 1 2 3
-                Vector128<int> m = Ssse3.HorizontalAdd(value, value);
-                // 01 23 01 23
-                m = Ssse3.HorizontalAdd(m, m);
-                // 0123 0123 0123 0123
-                return Sse2.ConvertToInt32(m);
+                if (Ssse3.IsSupported) {
+                    m = Ssse3.HorizontalAdd(value, value); // 01 23 01 23
+                    n = Ssse3.HorizontalAdd(m, m); // 0123 0123 0123 0123
+                } else {
+                    m = Sse2.UnpackHigh(value.AsInt64(), value.AsInt64()).AsInt32(); // 2 3 2 3
+                    n = Sse2.Add(m, value); // 02 13 22 33
+                    m = Sse2.Shuffle(n, (byte)ShuffleControlG4.YXZW); // 13 02 22 33
+                    n = Sse2.Add(m, n); // 0123 0123 2222 3333
+                }
+                return Sse2.ConvertToInt32(n);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{uint})"/>
