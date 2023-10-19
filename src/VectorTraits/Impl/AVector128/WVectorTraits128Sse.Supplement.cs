@@ -459,7 +459,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Max_AcceleratedTypes"/>
             public static TypeCodeFlags Max_AcceleratedTypes {
                 get {
-                    return TypeCodeFlagsUtil.AllTypes;
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    if (Sse42.IsSupported) {
+                        rt |= TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    }
+                    return rt;
                 }
             }
 
@@ -479,7 +483,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> Max(Vector128<sbyte> left, Vector128<sbyte> right) {
-                return Sse41.Max(left, right);
+                if (Sse41.IsSupported) {
+                    return Sse41.Max(left, right);
+                } else {
+                    Vector128<sbyte> mask = GreaterThan(left, right);
+                    return ConditionalSelect(mask, left, right);
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{byte}, Vector128{byte})"/>
@@ -498,41 +507,74 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> Max(Vector128<ushort> left, Vector128<ushort> right) {
-                return Sse41.Max(left, right);
+                if (Sse41.IsSupported) {
+                    return Sse41.Max(left, right);
+                } else {
+                    Vector128<ushort> mask = GreaterThan(left, right);
+                    return ConditionalSelect(mask, left, right);
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> Max(Vector128<int> left, Vector128<int> right) {
-                return Sse41.Max(left, right);
+                if (Sse41.IsSupported) {
+                    return Sse41.Max(left, right);
+                } else {
+                    Vector128<int> mask = GreaterThan(left, right);
+                    return ConditionalSelect(mask, left, right);
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> Max(Vector128<uint> left, Vector128<uint> right) {
-                return Sse41.Max(left, right);
+                if (Sse41.IsSupported) {
+                    return Sse41.Max(left, right);
+                } else {
+                    Vector128<uint> mask = GreaterThan(left, right);
+                    return ConditionalSelect(mask, left, right);
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Max(Vector128<long> left, Vector128<long> right) {
-                Vector128<long> mask = Sse42.CompareGreaterThan(left, right);
-                Vector128<long> rt = Sse41.BlendVariable(right, left, mask);
-                return rt;
+                if (Sse42.IsSupported) {
+                    Vector128<long> mask = Sse42.CompareGreaterThan(left, right);
+                    Vector128<long> rt;
+                    if (Sse41.IsSupported) {
+                        rt = Sse41.BlendVariable(right, left, mask);
+                    } else {
+                        rt = ConditionalSelect(mask, left, right);
+                    }
+                    return rt;
+                } else {
+                    return SuperStatics.Max(left, right);
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> Max(Vector128<ulong> left, Vector128<ulong> right) {
-                //Vector128<long> mid = Vector128s<long>.MinValue;
-                Vector128<long> mid = Vector128Constants.Int64_MinValue;
-                Vector128<long> left2 = Sse2.Xor(left.AsInt64(), mid);
-                Vector128<long> right2 = Sse2.Xor(right.AsInt64(), mid);
-                Vector128<long> mask = Sse42.CompareGreaterThan(left2, right2);
-                Vector128<ulong> rt = Sse41.BlendVariable(right, left, mask.AsUInt64());
-                return rt;
+                if (Sse42.IsSupported) {
+                    //Vector128<long> mid = Vector128s<long>.MinValue;
+                    Vector128<long> mid = Vector128Constants.Int64_MinValue;
+                    Vector128<long> left2 = Sse2.Xor(left.AsInt64(), mid);
+                    Vector128<long> right2 = Sse2.Xor(right.AsInt64(), mid);
+                    Vector128<long> mask = Sse42.CompareGreaterThan(left2, right2);
+                    Vector128<ulong> rt;
+                    if (Sse41.IsSupported) {
+                        rt = Sse41.BlendVariable(right, left, mask.AsUInt64());
+                    } else {
+                        rt = ConditionalSelect(mask.AsUInt64(), left, right);
+                    }
+                    return rt;
+                } else {
+                    return SuperStatics.Max(left, right);
+                }
             }
 
 
