@@ -372,35 +372,27 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.LessThan_AcceleratedTypes"/>
             public static TypeCodeFlags LessThan_AcceleratedTypes {
                 get {
-                    return TypeCodeFlagsUtil.AllTypes;
+                    return GreaterThan_AcceleratedTypes;
                 }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> LessThan(Vector128<float> left, Vector128<float> right) {
-#if NET5_0_OR_GREATER
-                return Avx.CompareLessThan(left, right);
-#else
-                return Avx.Compare(left, right, FloatComparisonMode.OrderedLessThanSignaling);
-#endif // NET5_0_OR_GREATER
+                return Sse2.CompareLessThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> LessThan(Vector128<double> left, Vector128<double> right) {
-#if NET5_0_OR_GREATER
-                return Avx.CompareLessThan(left, right);
-#else
-                return Avx.Compare(left, right, FloatComparisonMode.OrderedLessThanSignaling);
-#endif // NET5_0_OR_GREATER
+                return Sse2.CompareLessThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> LessThan(Vector128<sbyte> left, Vector128<sbyte> right) {
-                return Avx2.CompareGreaterThan(right, left);
+                return Sse2.CompareGreaterThan(right, left);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{byte}, Vector128{byte})"/>
@@ -408,16 +400,16 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<byte> LessThan(Vector128<byte> left, Vector128<byte> right) {
                 //Vector128<sbyte> mid = Vector128s<sbyte>.MinValue;
                 Vector128<sbyte> mid = Vector128.Create(sbyte.MinValue); // .NET5+ has better performance .
-                Vector128<sbyte> left2 = Avx2.Xor(left.AsSByte(), mid);
-                Vector128<sbyte> right2 = Avx2.Xor(right.AsSByte(), mid);
-                Vector128<sbyte> mask = Avx2.CompareGreaterThan(right2, left2);
+                Vector128<sbyte> left2 = Sse2.Xor(left.AsSByte(), mid);
+                Vector128<sbyte> right2 = Sse2.Xor(right.AsSByte(), mid);
+                Vector128<sbyte> mask = Sse2.CompareGreaterThan(right2, left2);
                 return mask.AsByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> LessThan(Vector128<short> left, Vector128<short> right) {
-                return Avx2.CompareGreaterThan(right, left);
+                return Sse2.CompareGreaterThan(right, left);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{ushort}, Vector128{ushort})"/>
@@ -426,16 +418,16 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ushort> LessThan(Vector128<ushort> left, Vector128<ushort> right) {
                 //Vector128<short> mid = Vector128s<short>.MinValue;
                 Vector128<short> mid = Vector128.Create(short.MinValue); // .NET5+ has better performance .
-                Vector128<short> left2 = Avx2.Xor(left.AsInt16(), mid);
-                Vector128<short> right2 = Avx2.Xor(right.AsInt16(), mid);
-                Vector128<short> mask = Avx2.CompareGreaterThan(right2, left2);
+                Vector128<short> left2 = Sse2.Xor(left.AsInt16(), mid);
+                Vector128<short> right2 = Sse2.Xor(right.AsInt16(), mid);
+                Vector128<short> mask = Sse2.CompareGreaterThan(right2, left2);
                 return mask.AsUInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> LessThan(Vector128<int> left, Vector128<int> right) {
-                return Avx2.CompareGreaterThan(right, left);
+                return Sse2.CompareGreaterThan(right, left);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{uint}, Vector128{uint})"/>
@@ -444,28 +436,23 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<uint> LessThan(Vector128<uint> left, Vector128<uint> right) {
                 //Vector128<int> mid = Vector128s<int>.MinValue;
                 Vector128<int> mid = Vector128.Create(int.MinValue); // .NET5+ has better performance .
-                Vector128<int> left2 = Avx2.Xor(left.AsInt32(), mid);
-                Vector128<int> right2 = Avx2.Xor(right.AsInt32(), mid);
-                Vector128<int> mask = Avx2.CompareGreaterThan(right2, left2);
+                Vector128<int> left2 = Sse2.Xor(left.AsInt32(), mid);
+                Vector128<int> right2 = Sse2.Xor(right.AsInt32(), mid);
+                Vector128<int> mask = Sse2.CompareGreaterThan(right2, left2);
                 return mask.AsUInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> LessThan(Vector128<long> left, Vector128<long> right) {
-                return Avx2.CompareGreaterThan(right, left);
+                return GreaterThan(right, left);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.LessThan(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> LessThan(Vector128<ulong> left, Vector128<ulong> right) {
-                //Vector128<long> mid = Vector128s<long>.MinValue;
-                Vector128<long> mid = Vector128Constants.Int64_MinValue;
-                Vector128<long> left2 = Avx2.Add(mid, left.AsInt64());
-                Vector128<long> right2 = Avx2.Add(mid, right.AsInt64());
-                Vector128<long> mask = Avx2.CompareGreaterThan(right2, left2);
-                return mask.AsUInt64();
+                return GreaterThan(right, left);
             }
 
 
