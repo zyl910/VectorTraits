@@ -714,7 +714,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Multiply_FullAcceleratedTypes"/>
             public static TypeCodeFlags Multiply_FullAcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16;
+                    if (Sse41.IsSupported) {
+                        rt |= TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    }
                     return rt;
                 }
             }
@@ -722,13 +725,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Multiply(Vector128<float> left, Vector128<float> right) {
-                return Avx.Multiply(left, right);
+                return Sse.Multiply(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Multiply(Vector128<double> left, Vector128<double> right) {
-                return Avx.Multiply(left, right);
+                return Sse2.Multiply(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{sbyte}, Vector128{sbyte})"/>
@@ -755,27 +758,42 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> Multiply(Vector128<short> left, Vector128<short> right) {
-                return Avx2.MultiplyLow(left, right);
+                return Sse2.MultiplyLow(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> Multiply(Vector128<ushort> left, Vector128<ushort> right) {
-                return Avx2.MultiplyLow(left, right);
+                return Sse2.MultiplyLow(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> Multiply(Vector128<int> left, Vector128<int> right) {
-                return Avx2.MultiplyLow(left, right);
+                if (Sse41.IsSupported) {
+                    return Sse41.MultiplyLow(left, right);
+                } else {
+                    return Multiply(left.AsUInt32(), right.AsUInt32()).AsInt32();
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> Multiply(Vector128<uint> left, Vector128<uint> right) {
-                return Avx2.MultiplyLow(left, right);
+                if (Sse41.IsSupported) {
+                    return Sse41.MultiplyLow(left, right);
+                } else {
+                    const byte control = (byte)ShuffleControlG4.YXWZ;
+                    Vector128<ulong> v = Sse2.Multiply(Sse2.Shuffle(left, control), Sse2.Shuffle(right, control)); // bit64(left[1] * right[1], left[3] * right[3])
+                    Vector128<ulong> u = Sse2.Multiply(left, right); // bit64(left[0] * right[0], left[2] * right[2])
+                    v = Sse2.ShiftLeftLogical(v, 32); // Clear low 32bit and shift to high.
+                    u = Sse2.ShiftLeftLogical(u, 32);
+                    u = Sse2.ShiftRightLogical(u, 32); // Clear high 32bit.
+                    Vector128<uint> rt = Sse2.Or(u, v).AsUInt32();
+                    return rt;
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{long}, Vector128{long})"/>
@@ -818,23 +836,23 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 // u=left; v=right;
                 //u0 = u & MASK_VALUE; u1 = u >> L;
                 //v0 = v & MASK_VALUE; v1 = v >> L;
-                u1 = Avx2.ShiftRightLogical(left, L);
-                v1 = Avx2.ShiftRightLogical(right, L);
+                u1 = Sse2.ShiftRightLogical(left, L);
+                v1 = Sse2.ShiftRightLogical(right, L);
                 // u*v = (u1*v1)<<(2*L) + (u0*v1)<<L + (u1*v0)<<L + u0*v0
                 // Part1 = u0*v0
                 //w0 = u0 * v0;
-                w0 = Avx2.Multiply(left.AsUInt32(), right.AsUInt32());
+                w0 = Sse2.Multiply(left.AsUInt32(), right.AsUInt32());
                 // Part2 = (u1*v0)<<L + Part1
                 //w1 = u1 * v0 + (w0 >> L);
-                w1 = Avx2.Add(Avx2.Multiply(u1.AsUInt32(), right.AsUInt32())
-                    , Avx2.ShiftRightLogical(w0, L));
+                w1 = Sse2.Add(Sse2.Multiply(u1.AsUInt32(), right.AsUInt32())
+                    , Sse2.ShiftRightLogical(w0, L));
                 // Part3 = (u0*v1)<<L + Part2
                 //w1 = u0 * v1 + w1;
                 //low = (w1 << L) + (w0 & MASK_VALUE);
-                w1 = Avx2.Add(w1
-                    , Avx2.Multiply(left.AsUInt32(), v1.AsUInt32()));
-                low = Avx2.Or(Avx2.ShiftLeftLogical(w1, L)
-                    , Avx2.And(w0, mask));
+                w1 = Sse2.Add(w1
+                    , Sse2.Multiply(left.AsUInt32(), v1.AsUInt32()));
+                low = Sse2.Or(Sse2.ShiftLeftLogical(w1, L)
+                    , Sse2.And(w0, mask));
                 return low;
             }
 
