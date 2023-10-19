@@ -466,59 +466,59 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Max(Vector128<float> left, Vector128<float> right) {
-                return Avx.Max(left, right);
+                return Sse.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Max(Vector128<double> left, Vector128<double> right) {
-                return Avx.Max(left, right);
+                return Sse2.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> Max(Vector128<sbyte> left, Vector128<sbyte> right) {
-                return Avx2.Max(left, right);
+                return Sse41.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> Max(Vector128<byte> left, Vector128<byte> right) {
-                return Avx2.Max(left, right);
+                return Sse2.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> Max(Vector128<short> left, Vector128<short> right) {
-                return Avx2.Max(left, right);
+                return Sse2.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> Max(Vector128<ushort> left, Vector128<ushort> right) {
-                return Avx2.Max(left, right);
+                return Sse41.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> Max(Vector128<int> left, Vector128<int> right) {
-                return Avx2.Max(left, right);
+                return Sse41.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> Max(Vector128<uint> left, Vector128<uint> right) {
-                return Avx2.Max(left, right);
+                return Sse41.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Max(Vector128<long> left, Vector128<long> right) {
-                Vector128<long> mask = Avx2.CompareGreaterThan(left, right);
-                Vector128<long> rt = Avx2.BlendVariable(right, left, mask);
+                Vector128<long> mask = Sse42.CompareGreaterThan(left, right);
+                Vector128<long> rt = Sse41.BlendVariable(right, left, mask);
                 return rt;
             }
 
@@ -528,10 +528,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> Max(Vector128<ulong> left, Vector128<ulong> right) {
                 //Vector128<long> mid = Vector128s<long>.MinValue;
                 Vector128<long> mid = Vector128Constants.Int64_MinValue;
-                Vector128<long> left2 = Avx2.Xor(left.AsInt64(), mid);
-                Vector128<long> right2 = Avx2.Xor(right.AsInt64(), mid);
-                Vector128<long> mask = Avx2.CompareGreaterThan(left2, right2);
-                Vector128<ulong> rt = Avx2.BlendVariable(right, left, mask.AsUInt64());
+                Vector128<long> left2 = Sse2.Xor(left.AsInt64(), mid);
+                Vector128<long> right2 = Sse2.Xor(right.AsInt64(), mid);
+                Vector128<long> mask = Sse42.CompareGreaterThan(left2, right2);
+                Vector128<ulong> rt = Sse41.BlendVariable(right, left, mask.AsUInt64());
                 return rt;
             }
 
