@@ -156,45 +156,20 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble_Bcl(Vector128<long> value) {
                 // From: src/libraries/System.Private.CoreLib/src/System/Runtime/Intrinsics/Vector128.cs
-                // Based on __m128d int64_to_double_fast_precise(const __m128i v)
+                // Based on __m256d int64_to_double_fast_precise(const __m256i v)
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
                 Vector128<int> lowerBits;
-                lowerBits = value.AsInt32();
-                lowerBits = Avx2.Blend(lowerBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow52).AsInt32(), 0b10101010); // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)
-                Vector128<long> upperBits = Avx2.ShiftRightLogical(value, 32);                                               // Extract the 32 most significant bits of vector
-                upperBits = Avx2.Xor(upperBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow84_2Pow63).AsInt64());        // Flip the msb of upperBits and blend with the bit representation of double(2^84 + 2^63)
-                Vector128<double> result = Avx.Subtract(upperBits.AsDouble(), Vector128.Create(ScalarConstants.DoubleVal_2Pow84_2Pow63_2Pow52)); // Compute in double precision: (upper - (2^84 + 2^63 + 2^52)) + lower
-                return Avx.Add(result, lowerBits.AsDouble());
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<double> ConvertToDouble_Bcl_Wim(Vector128<long> value) {
-                // Same ConvertToDouble_Bcl.
-                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
-                // answered Dec 19, 2016 at 12:51 wim
-                //__m128d int64_to_double_fast_precise(const __m128i v) {
-                //    __m128i magic_i_lo   = _mm128_set1_epi64x(0x4330000000000000);                /* 2^52               encoded as floating-point  */
-                //    __m128i magic_i_hi32 = _mm128_set1_epi64x(0x4530000080000000);                /* 2^84 + 2^63        encoded as floating-point  */
-                //    __m128i magic_i_all  = _mm128_set1_epi64x(0x4530000080100000);                /* 2^84 + 2^63 + 2^52 encoded as floating-point  */
-                //    __m128d magic_d_all  = _mm128_castsi128_pd(magic_i_all);
-                //    __m128i v_lo         = _mm128_blend_epi32(magic_i_lo, v, 0b01010101);         /* Blend the 32 lowest significant bits of v with magic_int_lo                                                   */
-                //    __m128i v_hi         = _mm128_srli_epi64(v, 32);                              /* Extract the 32 most significant bits of v                                                                     */
-                //            v_hi         = _mm128_xor_si128(v_hi, magic_i_hi32);                  /* Flip the msb of v_hi and blend with 0x45300000                                                                */
-                //    __m128d v_hi_dbl     = _mm128_sub_pd(_mm128_castsi128_pd(v_hi), magic_d_all); /* Compute in double precision:                                                                                  */
-                //    __m128d result       = _mm128_add_pd(v_hi_dbl, _mm128_castsi128_pd(v_lo));    /* (v_hi - magic_d_all) + v_lo  Do not assume associativity of floating point addition !!                        */
-                //            return result;                                                        /* With gcc use -O3, then -fno-associative-math is default. Do not use -Ofast, which enables -fassociative-math! */
-                //}
-                Vector128<long> magic_i_lo = Vector128.Create(0x43300000_00000000);   // 2^52               encoded as floating-point
-                Vector128<long> magic_i_hi32 = Vector128.Create(0x45300000_80000000); // 2^84 + 2^63        encoded as floating-point
-                Vector128<long> magic_i_all = Vector128.Create(0x45300000_80100000);  // 2^84 + 2^63 + 2^52 encoded as floating-point
-                Vector128<double> magic_d_all = magic_i_all.AsDouble();
-                Vector128<int> v_lo = Avx2.Blend(value.AsInt32(), magic_i_lo.AsInt32(), 0b10101010); // Blend the 32 lowest significant bits of v with magic_int_lo (double(2^52))
-                Vector128<long> v_hi = Avx2.ShiftRightLogical(value, 32);                            // Extract the 32 most significant bits of v
-                v_hi = Avx2.Xor(v_hi, magic_i_hi32);                                                 // Flip the msb of v_hi and blend with magic_i_hi32 (double(2^84 + 2^63))
-                Vector128<double> v_hi_dbl = Avx.Subtract(v_hi.AsDouble(), magic_d_all);             // Compute in double precision:
-                Vector128<double> result = Avx.Add(v_hi_dbl, v_lo.AsDouble());                       // (v_hi - (2^84 + 2^63 + 2^52)) + v_lo  Do not assume associativity of floating point addition !!
-                return result;
+                if (Avx2.IsSupported) {
+                    lowerBits = value.AsInt32();
+                    lowerBits = Avx2.Blend(lowerBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow52).AsInt32(), 0b1010); // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)
+                } else {
+                    lowerBits = Sse2.And(value, Vector128.Create(ScalarConstants.DoubleVal_MaskLow32).AsInt64()).AsInt32();
+                    lowerBits = Sse2.Or(lowerBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow52).AsInt32());
+                }
+                Vector128<long> upperBits = Sse2.ShiftRightLogical(value, 32);                                               // Extract the 32 most significant bits of vector
+                upperBits = Sse2.Xor(upperBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow84_2Pow63).AsInt64());        // Flip the msb of upperBits and blend with the bit representation of double(2^84 + 2^63)
+                Vector128<double> result = Sse2.Subtract(upperBits.AsDouble(), Vector128.Create(ScalarConstants.DoubleVal_2Pow84_2Pow63_2Pow52)); // Compute in double precision: (upper - (2^84 + 2^63 + 2^52)) + lower
+                return Sse2.Add(result, lowerBits.AsDouble());
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{long})"/>
@@ -239,8 +214,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 // }
                 // BitConverter.DoubleToInt64Bits((double)0x0018000000000000).ToString("X") = "4338000000000000"
                 Vector128<long> magicNumber = Vector128.Create(ScalarConstants.DoubleVal_2Pow52_2Pow51).AsInt64(); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
-                Vector128<long> x = Avx2.Add(value, magicNumber);
-                Vector128<double> result = Avx.Subtract(x.AsDouble(), magicNumber.AsDouble());
+                Vector128<long> x = Sse2.Add(value, magicNumber);
+                Vector128<double> result = Sse2.Subtract(x.AsDouble(), magicNumber.AsDouble());
                 return result;
             }
 
@@ -256,46 +231,20 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble_Bcl(Vector128<ulong> value) {
                 // From: src/libraries/System.Private.CoreLib/src/System/Runtime/Intrinsics/Vector128.cs
-                // Based on __m128d uint64_to_double_fast_precise(const __m128i v)
+                // Based on __m256d int64_to_double_fast_precise(const __m256i v)
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
-                Vector128<uint> lowerBits;
-                lowerBits = value.AsUInt32();
-                lowerBits = Avx2.Blend(lowerBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow52).AsUInt32(), 0b10101010); // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)                                                 */
-                Vector128<ulong> upperBits = Avx2.ShiftRightLogical(value, 32);                                               // Extract the 32 most significant bits of vector
-                upperBits = Avx2.Xor(upperBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow84).AsUInt64());               // Blend upperBits with the bit representation of double(2^84)
-                Vector128<double> result = Avx.Subtract(upperBits.AsDouble(), Vector128.Create(ScalarConstants.DoubleVal_2Pow84_2Pow52)); // Compute in double precision: (upper - (2^84 + 2^52)) + lower
-                return Avx.Add(result, lowerBits.AsDouble());
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{ulong})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<double> ConvertToDouble_Bcl_Wim(Vector128<ulong> value) {
-                // Same ConvertToDouble_Bcl.
-                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
-                // answered Dec 19, 2016 at 12:51 wim
-                //__m128d uint64_to_double_fast_precise(const __m128i v) {
-                //    __m128i magic_i_lo   = _mm128_set1_epi64x(0x4330000000000000);                /* 2^52        encoded as floating-point  */
-                //    __m128i magic_i_hi32 = _mm128_set1_epi64x(0x4530000000000000);                /* 2^84        encoded as floating-point  */
-                //    __m128i magic_i_all  = _mm128_set1_epi64x(0x4530000000100000);                /* 2^84 + 2^52 encoded as floating-point  */
-                //    __m128d magic_d_all  = _mm128_castsi128_pd(magic_i_all);
-                //    __m128i v_lo         = _mm128_blend_epi32(magic_i_lo, v, 0b01010101);         /* Blend the 32 lowest significant bits of v with magic_int_lo                                                   */
-                //    __m128i v_hi         = _mm128_srli_epi64(v, 32);                              /* Extract the 32 most significant bits of v                                                                     */
-                //            v_hi         = _mm128_xor_si128(v_hi, magic_i_hi32);                  /* Blend v_hi with 0x45300000                                                                                    */
-                //    __m128d v_hi_dbl     = _mm128_sub_pd(_mm128_castsi128_pd(v_hi), magic_d_all); /* Compute in double precision:                                                                                  */
-                //    __m128d result       = _mm128_add_pd(v_hi_dbl, _mm128_castsi128_pd(v_lo));    /* (v_hi - magic_d_all) + v_lo  Do not assume associativity of floating point addition !!                        */
-                //            return result;                                                        /* With gcc use -O3, then -fno-associative-math is default. Do not use -Ofast, which enables -fassociative-math! */
-                //}
-                Vector128<long> magic_i_lo = Vector128.Create(0x43300000_00000000);   // 2^52        encoded as floating-point
-                Vector128<long> magic_i_hi32 = Vector128.Create(0x45300000_00000000); // 2^84        encoded as floating-point
-                Vector128<long> magic_i_all = Vector128.Create(0x45300000_00100000);  // 2^84 + 2^52 encoded as floating-point
-                Vector128<double> magic_d_all = magic_i_all.AsDouble();
-                Vector128<int> v_lo = Avx2.Blend(value.AsInt32(), magic_i_lo.AsInt32(), 0b10101010); // Blend the 32 lowest significant bits of v with magic_int_lo (double(2^52))
-                Vector128<long> v_hi = Avx2.ShiftRightLogical(value, 32).AsInt64();                  // Extract the 32 most significant bits of v
-                v_hi = Avx2.Xor(v_hi, magic_i_hi32);                                                 // Blend v_hi with magic_i_hi32 (double(2^84))
-                Vector128<double> v_hi_dbl = Avx.Subtract(v_hi.AsDouble(), magic_d_all);             // Compute in double precision:
-                Vector128<double> result = Avx.Add(v_hi_dbl, v_lo.AsDouble());                       // (v_hi - magic_d_all) + v_lo  Do not assume associativity of floating point addition !!
-                return result;
+                Vector128<int> lowerBits;
+                if (Avx2.IsSupported) {
+                    lowerBits = value.AsInt32();
+                    lowerBits = Avx2.Blend(lowerBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow52).AsInt32(), 0b1010); // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)
+                } else {
+                    lowerBits = Sse2.And(value, Vector128.Create(ScalarConstants.DoubleVal_MaskLow32).AsUInt64()).AsInt32();
+                    lowerBits = Sse2.Or(lowerBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow52).AsInt32());
+                }
+                Vector128<ulong> upperBits = Sse2.ShiftRightLogical(value, 32);                                               // Extract the 32 most significant bits of vector
+                upperBits = Sse2.Xor(upperBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow84).AsUInt64());               // Blend upperBits with the bit representation of double(2^84)
+                Vector128<double> result = Sse2.Subtract(upperBits.AsDouble(), Vector128.Create(ScalarConstants.DoubleVal_2Pow84_2Pow52)); // Compute in double precision: (upper - (2^84 + 2^52)) + lower
+                return Sse2.Add(result, lowerBits.AsDouble());
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{ulong})"/>
@@ -311,8 +260,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 // }
                 // BitConverter.DoubleToInt64Bits((double)0x0010000000000000).ToString("X") = "4330000000000000"
                 Vector128<ulong> magicNumber = Vector128.Create(ScalarConstants.DoubleVal_2Pow52).AsUInt64(); // Double value: pow(2, 52)
-                Vector128<ulong> x = Avx2.Or(value, magicNumber);
-                Vector128<double> result = Avx.Subtract(x.AsDouble(), magicNumber.AsDouble());
+                Vector128<ulong> x = Sse2.Or(value, magicNumber);
+                Vector128<double> result = Sse2.Subtract(x.AsDouble(), magicNumber.AsDouble());
                 return result;
             }
 

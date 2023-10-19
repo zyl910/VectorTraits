@@ -212,6 +212,9 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>DoubleVal - Non-mantissa mask (非尾数掩码). Binary is `0xFFF0000000000000L`.</summary>
         public const double DoubleVal_NonMantissaMask = double.NegativeInfinity;
 
+        /// <summary>DoubleVal - Mask of low 32-bit (低32位的掩码). Binary is `0x00000000_FFFFFFFFL`.</summary>
+        public const double DoubleVal_MaskLow32 = 2.12199579047121E-314; // BitConverter.Int64BitsToDouble(0x00000000_FFFFFFFFL)
+
         /// <summary>DoubleVal - `(double)0x0008000000000000 = pow(2, 51) = 2251799813685248`. Binary is `0x43200000_00000000`.</summary>
         public const double DoubleVal_2Pow51 = 0x0008000000000000L;
         /// <summary>DoubleVal - `(double)0x0010000000000000 = pow(2, 52) = 4503599627370496`. Binary is `0x43300000_00000000`.</summary>
