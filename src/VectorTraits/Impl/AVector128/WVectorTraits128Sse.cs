@@ -128,13 +128,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Ceiling(Vector128<float> value) {
-                return Avx.Ceiling(value);
+                return Sse41.Ceiling(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Ceiling(Vector128<double> value) {
-                return Avx.Ceiling(value);
+                return Sse41.Ceiling(value);
             }
 
 
@@ -850,13 +850,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Floor(Vector128<float> value) {
-                return Avx.Floor(value);
+                return Sse41.Floor(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Floor(Vector128<double> value) {
-                return Avx.Floor(value);
+                return Sse41.Floor(value);
             }
 
 
