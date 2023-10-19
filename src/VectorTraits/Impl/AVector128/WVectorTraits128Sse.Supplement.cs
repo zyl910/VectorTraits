@@ -184,7 +184,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 // Compute the bitwise NOT of 128 bits (representing integer data) in a and then AND with b, and store the result in dst.
                 // Operation
                 // dst[255:0] := ((NOT a[255:0]) AND b[255:0])
-                return Avx2.AndNot(right.AsUInt64(), left.AsUInt64()).As<ulong, T>();
+                return Sse2.AndNot(right.AsUInt64(), left.AsUInt64()).As<ulong, T>();
             }
 
 
@@ -198,7 +198,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.BitwiseAnd{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> BitwiseAnd<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-                return Avx2.And(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
+                return Sse2.And(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
             }
 
 
@@ -212,7 +212,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.BitwiseOr{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> BitwiseOr<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-                return Avx2.Or(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
+                return Sse2.Or(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
             }
 
 
@@ -237,8 +237,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> ConditionalSelect_OrAnd<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
                 // result = (left & condition) | (right & ~condition);
-                return Avx2.Or(Avx2.And(condition.AsUInt64(), left.AsUInt64())
-                    , Avx2.AndNot(condition.AsUInt64(), right.AsUInt64())
+                return Sse2.Or(Sse2.And(condition.AsUInt64(), left.AsUInt64())
+                    , Sse2.AndNot(condition.AsUInt64(), right.AsUInt64())
                     ).As<ulong, T>();
             }
 
