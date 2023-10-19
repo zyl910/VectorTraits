@@ -788,7 +788,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     const byte control = (byte)ShuffleControlG4.YXWZ;
                     Vector128<ulong> v = Sse2.Multiply(Sse2.Shuffle(left, control), Sse2.Shuffle(right, control)); // bit64(left[1] * right[1], left[3] * right[3])
                     Vector128<ulong> u = Sse2.Multiply(left, right); // bit64(left[0] * right[0], left[2] * right[2])
-                    v = Sse2.ShiftLeftLogical(v, 32); // Clear low 32bit and shift to high.
+                    v = Sse2.ShiftLeftLogical(v, 32); // Clear high 32bit and shift to high.
                     u = Sse2.ShiftLeftLogical(u, 32);
                     u = Sse2.ShiftRightLogical(u, 32); // Clear high 32bit.
                     Vector128<uint> rt = Sse2.Or(u, v).AsUInt32();
@@ -886,38 +886,38 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Negate(Vector128<float> value) {
-                return Avx.Subtract(Vector128<float>.Zero, value);
+                return Sse.Subtract(Vector128<float>.Zero, value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Negate(Vector128<double> value) {
-                return Avx.Subtract(Vector128<double>.Zero, value);
+                return Sse2.Subtract(Vector128<double>.Zero, value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> Negate(Vector128<sbyte> value) {
-                return Avx2.Subtract(Vector128<sbyte>.Zero, value);
+                return Sse2.Subtract(Vector128<sbyte>.Zero, value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> Negate(Vector128<short> value) {
-                return Avx2.Subtract(Vector128<short>.Zero, value);
+                return Sse2.Subtract(Vector128<short>.Zero, value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> Negate(Vector128<int> value) {
-                return Avx2.Subtract(Vector128<int>.Zero, value);
+                return Sse2.Subtract(Vector128<int>.Zero, value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Negate(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Negate(Vector128<long> value) {
-                return Avx2.Subtract(Vector128<long>.Zero, value);
+                return Sse2.Subtract(Vector128<long>.Zero, value);
             }
 
 
@@ -931,7 +931,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.OnesComplement{T}(Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> OnesComplement<T>(Vector128<T> vector) where T : struct {
-                return Avx2.Xor(Vector128s<ulong>.AllBitsSet, vector.AsUInt64()).As<ulong, T>();
+                return Sse2.Xor(Vector128s<ulong>.AllBitsSet, vector.AsUInt64()).As<ulong, T>();
             }
 
 
