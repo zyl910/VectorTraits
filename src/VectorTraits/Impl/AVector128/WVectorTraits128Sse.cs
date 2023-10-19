@@ -2455,49 +2455,49 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector128<sbyte> source, out Vector128<short> lower, out Vector128<short> upper) {
-                Widen_ConvertTo(source, out lower, out upper);
+                Widen_Unpack(source, out lower, out upper);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{byte}, out Vector128{ushort}, out Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector128<byte> source, out Vector128<ushort> lower, out Vector128<ushort> upper) {
-                Widen_ConvertTo(source, out lower, out upper);
+                Widen_Unpack(source, out lower, out upper);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{short}, out Vector128{int}, out Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector128<short> source, out Vector128<int> lower, out Vector128<int> upper) {
-                Widen_ConvertTo(source, out lower, out upper);
+                Widen_Unpack(source, out lower, out upper);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{ushort}, out Vector128{uint}, out Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector128<ushort> source, out Vector128<uint> lower, out Vector128<uint> upper) {
-                Widen_ConvertTo(source, out lower, out upper);
+                Widen_Unpack(source, out lower, out upper);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{int}, out Vector128{long}, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector128<int> source, out Vector128<long> lower, out Vector128<long> upper) {
-                Widen_ConvertTo(source, out lower, out upper);
+                Widen_Unpack(source, out lower, out upper);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{uint}, out Vector128{ulong}, out Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector128<uint> source, out Vector128<ulong> lower, out Vector128<ulong> upper) {
-                Widen_ConvertTo(source, out lower, out upper);
+                Widen_Unpack(source, out lower, out upper);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{sbyte}, out Vector128{short}, out Vector128{short})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_ConvertTo(Vector128<sbyte> source, out Vector128<short> lower, out Vector128<short> upper) {
-                lower = Avx2.ConvertToVector128Int16(source);
-                Vector128<sbyte> sourceUpper = Sse2.UnpackHigh(source.AsInt16(), source.AsInt16()).AsSByte();
-                upper = Avx2.ConvertToVector128Int16(sourceUpper);
+                lower = Sse41.ConvertToVector128Int16(source);
+                Vector128<sbyte> sourceUpper = Sse2.UnpackHigh(source.AsInt64(), source.AsInt64()).AsSByte();
+                upper = Sse41.ConvertToVector128Int16(sourceUpper);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{byte}, out Vector128{ushort}, out Vector128{ushort})"/>
@@ -2512,35 +2512,35 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{short}, out Vector128{int}, out Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_ConvertTo(Vector128<short> source, out Vector128<int> lower, out Vector128<int> upper) {
-                lower = Avx2.ConvertToVector128Int32(source);
+                lower = Sse41.ConvertToVector128Int32(source);
                 Vector128<short> sourceUpper = Sse2.UnpackHigh(source.AsUInt64(), source.AsUInt64()).AsInt16();
-                upper = Avx2.ConvertToVector128Int32(sourceUpper);
+                upper = Sse41.ConvertToVector128Int32(sourceUpper);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{ushort}, out Vector128{uint}, out Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_ConvertTo(Vector128<ushort> source, out Vector128<uint> lower, out Vector128<uint> upper) {
-                lower = Avx2.ConvertToVector128Int32(source).AsUInt32();
+                lower = Sse41.ConvertToVector128Int32(source).AsUInt32();
                 Vector128<ushort> sourceUpper = Sse2.UnpackHigh(source.AsUInt64(), source.AsUInt64()).AsUInt16();
-                upper = Avx2.ConvertToVector128Int32(sourceUpper).AsUInt32();
+                upper = Sse41.ConvertToVector128Int32(sourceUpper).AsUInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{int}, out Vector128{long}, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_ConvertTo(Vector128<int> source, out Vector128<long> lower, out Vector128<long> upper) {
-                lower = Avx2.ConvertToVector128Int64(source);
+                lower = Sse41.ConvertToVector128Int64(source);
                 Vector128<int> sourceUpper = Sse2.UnpackHigh(source.AsInt64(), source.AsInt64()).AsInt32();
-                upper = Avx2.ConvertToVector128Int64(sourceUpper);
+                upper = Sse41.ConvertToVector128Int64(sourceUpper);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{uint}, out Vector128{ulong}, out Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_ConvertTo(Vector128<uint> source, out Vector128<ulong> lower, out Vector128<ulong> upper) {
-                lower = Avx2.ConvertToVector128Int64(source).AsUInt64();
+                lower = Sse41.ConvertToVector128Int64(source).AsUInt64();
                 Vector128<uint> sourceUpper = Sse2.UnpackHigh(source.AsUInt64(), source.AsUInt64()).AsUInt32();
-                upper = Avx2.ConvertToVector128Int64(sourceUpper).AsUInt64();
+                upper = Sse41.ConvertToVector128Int64(sourceUpper).AsUInt64();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{sbyte}, out Vector128{short}, out Vector128{short})"/>
@@ -2548,9 +2548,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Unpack(Vector128<sbyte> source, out Vector128<short> lower, out Vector128<short> upper) {
                 Vector128<sbyte> zero = Vector128<sbyte>.Zero;
-                Vector128<sbyte> mask = Avx2.CompareGreaterThan(zero, source);
-                lower = Avx2.UnpackLow(source, mask).AsInt16();
-                upper = Avx2.UnpackHigh(source, mask).AsInt16();
+                Vector128<sbyte> mask = Sse2.CompareGreaterThan(zero, source);
+                lower = Sse2.UnpackLow(source, mask).AsInt16();
+                upper = Sse2.UnpackHigh(source, mask).AsInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{byte}, out Vector128{ushort}, out Vector128{ushort})"/>
@@ -2558,17 +2558,17 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Unpack(Vector128<byte> source, out Vector128<ushort> lower, out Vector128<ushort> upper) {
                 Vector128<byte> zero = Vector128<byte>.Zero;
-                lower = Avx2.UnpackLow(source.AsByte(), zero).AsUInt16();
-                upper = Avx2.UnpackHigh(source.AsByte(), zero).AsUInt16();
+                lower = Sse2.UnpackLow(source.AsByte(), zero).AsUInt16();
+                upper = Sse2.UnpackHigh(source.AsByte(), zero).AsUInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{short}, out Vector128{int}, out Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Unpack(Vector128<short> source, out Vector128<int> lower, out Vector128<int> upper) {
                 Vector128<short> zero = Vector128<short>.Zero;
-                Vector128<short> mask = Avx2.CompareGreaterThan(zero, source);
-                lower = Avx2.UnpackLow(source, mask).AsInt32();
-                upper = Avx2.UnpackHigh(source, mask).AsInt32();
+                Vector128<short> mask = Sse2.CompareGreaterThan(zero, source);
+                lower = Sse2.UnpackLow(source, mask).AsInt32();
+                upper = Sse2.UnpackHigh(source, mask).AsInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{ushort}, out Vector128{uint}, out Vector128{uint})"/>
@@ -2576,17 +2576,17 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Unpack(Vector128<ushort> source, out Vector128<uint> lower, out Vector128<uint> upper) {
                 Vector128<ushort> zero = Vector128<ushort>.Zero;
-                lower = Avx2.UnpackLow(source.AsUInt16(), zero).AsUInt32();
-                upper = Avx2.UnpackHigh(source.AsUInt16(), zero).AsUInt32();
+                lower = Sse2.UnpackLow(source.AsUInt16(), zero).AsUInt32();
+                upper = Sse2.UnpackHigh(source.AsUInt16(), zero).AsUInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{int}, out Vector128{long}, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Unpack(Vector128<int> source, out Vector128<long> lower, out Vector128<long> upper) {
                 Vector128<int> zero = Vector128<int>.Zero;
-                Vector128<int> mask = Avx2.CompareGreaterThan(zero, source);
-                lower = Avx2.UnpackLow(source, mask).AsInt64();
-                upper = Avx2.UnpackHigh(source, mask).AsInt64();
+                Vector128<int> mask = Sse2.CompareGreaterThan(zero, source);
+                lower = Sse2.UnpackLow(source, mask).AsInt64();
+                upper = Sse2.UnpackHigh(source, mask).AsInt64();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{uint}, out Vector128{ulong}, out Vector128{ulong})"/>
@@ -2594,8 +2594,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Unpack(Vector128<uint> source, out Vector128<ulong> lower, out Vector128<ulong> upper) {
                 Vector128<uint> zero = Vector128<uint>.Zero;
-                lower = Avx2.UnpackLow(source.AsUInt32(), zero).AsUInt64();
-                upper = Avx2.UnpackHigh(source.AsUInt32(), zero).AsUInt64();
+                lower = Sse2.UnpackLow(source.AsUInt32(), zero).AsUInt64();
+                upper = Sse2.UnpackHigh(source.AsUInt32(), zero).AsUInt64();
             }
 
 
