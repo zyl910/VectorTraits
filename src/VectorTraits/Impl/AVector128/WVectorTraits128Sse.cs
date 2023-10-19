@@ -889,7 +889,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> Narrow(Vector128<ushort> lower, Vector128<ushort> upper) {
                 Vector128<ushort> mask = Vector128Constants.UInt16_VMaxByte;
-                Vector128<byte> rt = Avx2.PackUnsignedSaturate(Avx2.And(lower, mask).AsInt16(), Avx2.And(upper, mask).AsInt16());
+                Vector128<byte> rt = Sse2.PackUnsignedSaturate(Sse2.And(lower, mask).AsInt16(), Sse2.And(upper, mask).AsInt16());
                 return rt;
             }
 
@@ -903,9 +903,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> Narrow(Vector128<uint> lower, Vector128<uint> upper) {
-                Vector128<uint> mask = Vector128.Create((uint)0x0FFFFU); // .NET5+ has better performance .
-                Vector128<ushort> rt = Avx2.PackUnsignedSaturate(Avx2.And(lower, mask).AsInt32(), Avx2.And(upper, mask).AsInt32());
-                return rt;
+                if (Sse41.IsSupported) {
+                    // Need: Sse41
+                    Vector128<uint> mask = Vector128.Create((uint)0x0FFFFU); // .NET5+ has better performance .
+                    Vector128<ushort> rt = Sse41.PackUnsignedSaturate(Sse2.And(lower, mask).AsInt32(), Sse2.And(upper, mask).AsInt32());
+                    return rt;
+                } else {
+                    Vector128<ushort> l = Sse2.UnpackLow(lower.AsUInt16(), upper.AsUInt16()); // bit16(a0.L, b0.L, a0.H, b0.H, a1.L, b1.L, a1.H, b1.H)
+                    Vector128<ushort> h = Sse2.UnpackHigh(lower.AsUInt16(), upper.AsUInt16()); // bit16(a2.L, b2.L, a2.H, b2.H, a3.L, b3.L, a3.H, b3.H)
+                    Vector128<ushort> l2 = Sse2.UnpackLow(l, h); // bit16(a0.L, a2.L, b0.L, b2.L, a0.H, a2.H, b0.H, b2.H)
+                    Vector128<ushort> h2 = Sse2.UnpackHigh(l, h); // bit16(a1.L, a3.L, b1.L, b3.L, a1.H, a3.H, b1.H, b3.H)
+                    Vector128<ushort> rt = Sse2.UnpackLow(l2, h2); // bit16(a0.L, a1.L, a2.L, a3.L, b0.L, b1.L, b2.L, b3.L)
+                    return rt;
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{long}, Vector128{long})" />
@@ -918,9 +928,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> Narrow(Vector128<ulong> lower, Vector128<ulong> upper) {
-                Vector128<uint> l = Avx2.UnpackLow(lower.AsUInt32(), upper.AsUInt32()); // bit32(a0.L, b0.L, a0.H, b0.H)
-                Vector128<uint> h = Avx2.UnpackHigh(lower.AsUInt32(), upper.AsUInt32()); // bit32(a1.L, b1.L, a1.H, b1.H)
-                Vector128<uint> rt = Avx2.UnpackLow(l, h); // bit32(a0.L, a1.L, b0.L, b1.L).
+                Vector128<uint> l = Sse2.UnpackLow(lower.AsUInt32(), upper.AsUInt32()); // bit32(a0.L, b0.L, a0.H, b0.H)
+                Vector128<uint> h = Sse2.UnpackHigh(lower.AsUInt32(), upper.AsUInt32()); // bit32(a1.L, b1.L, a1.H, b1.H)
+                Vector128<uint> rt = Sse2.UnpackLow(l, h); // bit32(a0.L, a1.L, b0.L, b1.L).
                 return rt;
             }
 
