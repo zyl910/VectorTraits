@@ -253,13 +253,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Divide(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Divide(Vector128<float> left, Vector128<float> right) {
-                return Avx.Divide(left, right);
+                return Sse.Divide(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Divide(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Divide(Vector128<double> left, Vector128<double> right) {
-                return Avx.Divide(left, right);
+                return Sse2.Divide(left, right);
             }
 
 
