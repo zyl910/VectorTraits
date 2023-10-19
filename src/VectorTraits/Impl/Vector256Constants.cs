@@ -177,6 +177,20 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+        /// <inheritdoc cref="Vector256s{T}.VMaxUInt16"/>
+        /// <remarks>For UInt32.</remarks>
+        [CLSCompliant(false)]
+        public static Vector256<uint> UInt32_VMaxUInt16 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if USE_VECTOR_CREATE
+                return Vector256.Create((uint)0x0FFFFU);
+#else
+                return Vector256s<uint>.VMaxUInt16;
+#endif // USE_VECTOR_CREATE
+            }
+        }
+
         // -- Vectors_T: Vector256s<Int64> --
 
         /// <inheritdoc cref="Vector256s{T}.MinValue"/>

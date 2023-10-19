@@ -178,6 +178,20 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+        /// <inheritdoc cref="Vector128s{T}.VMaxUInt16"/>
+        /// <remarks>For UInt32.</remarks>
+        [CLSCompliant(false)]
+        public static Vector128<uint> UInt32_VMaxUInt16 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if USE_VECTOR_CREATE
+                return Vector128.Create((uint)0x0FFFFU);
+#else
+                return Vector128s<uint>.VMaxUInt16;
+#endif // USE_VECTOR_CREATE
+            }
+        }
+
         // -- Vectors_T: Vector128s<Int64> --
 
         /// <inheritdoc cref="Vector128s{T}.MinValue"/>

@@ -905,7 +905,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ushort> Narrow(Vector128<uint> lower, Vector128<uint> upper) {
                 if (Sse41.IsSupported) {
                     // Need: Sse41
-                    Vector128<uint> mask = Vector128.Create((uint)0x0FFFFU); // .NET5+ has better performance .
+                    Vector128<uint> mask = Vector128Constants.UInt32_VMaxUInt16;
                     Vector128<ushort> rt = Sse41.PackUnsignedSaturate(Sse2.And(lower, mask).AsInt32(), Sse2.And(upper, mask).AsInt32());
                     return rt;
                 } else {
