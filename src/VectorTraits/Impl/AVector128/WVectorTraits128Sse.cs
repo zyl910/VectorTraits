@@ -385,7 +385,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> ConvertToSingle(Vector128<int> value) {
-                return Avx.ConvertToVector128Single(value);
+                return Sse2.ConvertToVector128Single(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle(Vector128{uint})"/>
@@ -404,10 +404,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 //
                 // This means everything between 0 and 2^16 (ushort.MaxValue + 1) are exact and so
                 // converting each of the upper and lower halves will give an exact result
-                Vector128<int> lowerBits = Avx2.And(value, Vector128.Create(0x0000FFFFU)).AsInt32();
-                Vector128<int> upperBits = Avx2.ShiftRightLogical(value, 16).AsInt32();
-                Vector128<float> lower = Avx.ConvertToVector128Single(lowerBits);
-                Vector128<float> upper = Avx.ConvertToVector128Single(upperBits);
+                Vector128<int> lowerBits = Sse2.And(value, Vector128.Create(0x0000FFFFU)).AsInt32();
+                Vector128<int> upperBits = Sse2.ShiftRightLogical(value, 16).AsInt32();
+                Vector128<float> lower = Sse2.ConvertToVector128Single(lowerBits);
+                Vector128<float> upper = Sse2.ConvertToVector128Single(upperBits);
                 // This next bit of magic works because all multiples of 65536, at least up to 65535
                 // are likewise exactly representable
                 //
@@ -417,8 +417,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 if (Fma.IsSupported) {
                     return Fma.MultiplyAdd(upper, Vector128.Create(65536.0f), lower);
                 } else {
-                    Vector128<float> result = Avx.Multiply(upper, Vector128.Create(65536.0f));
-                    return Avx.Add(result, lower);
+                    Vector128<float> result = Sse2.Multiply(upper, Vector128.Create(65536.0f));
+                    return Sse2.Add(result, lower);
                 }
             }
 
