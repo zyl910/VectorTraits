@@ -1327,7 +1327,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic_Core(Vector128<sbyte> value, int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
                 _ = shiftAmount;
-                Vector128<sbyte> sign = Avx2.CompareGreaterThan(Vector128<sbyte>.Zero, value);
+                Vector128<sbyte> sign = Sse2.CompareGreaterThan(Vector128<sbyte>.Zero, value);
                 Vector128<sbyte> shifted = Avx2.ShiftRightLogicalVariable(value.AsUInt32(), args0.AsUInt32()).AsSByte();
                 Vector128<sbyte> rt = ConditionalSelect(args1, shifted, sign);
                 return rt;
@@ -1338,7 +1338,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<short> ShiftRightArithmetic_Core(Vector128<short> value, int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx2.ShiftRightArithmetic(value, args0);
+                return Sse2.ShiftRightArithmetic(value, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
@@ -1354,10 +1354,16 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<long> ShiftRightArithmetic_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                Vector128<long> sign = Avx2.CompareGreaterThan(Vector128<long>.Zero, value);
-                Vector128<long> rt = Avx2.Xor(value, sign);
+                Vector128<long> sign;
+                if (Sse42.IsSupported) {
+                    sign = Sse42.CompareGreaterThan(Vector128<long>.Zero, value);
+                } else {
+                    Vector128<int> valueHigh = Sse2.Shuffle(value.AsInt32(), (byte)ShuffleControlG4.YYWW);
+                    sign = Sse2.CompareGreaterThan(Vector128<int>.Zero, valueHigh).AsInt64();
+                }
+                Vector128<long> rt = Sse2.Xor(value, sign);
                 rt = Avx2.ShiftRightLogicalVariable(rt, args0.AsUInt64());
-                rt = Avx2.Xor(rt, sign);
+                rt = Sse2.Xor(rt, sign);
                 return rt;
             }
 
@@ -1371,13 +1377,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_Const(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
-                return Avx2.ShiftRightArithmetic(value, (byte)shiftAmount);
+                return Sse2.ShiftRightArithmetic(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_Const(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
-                return Avx2.ShiftRightArithmetic(value, (byte)shiftAmount);
+                return Sse2.ShiftRightArithmetic(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{long}, int)"/>
@@ -1396,25 +1402,25 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_ConstCore(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
-#if NET6_0_OR_GREATER
+//#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return Avx2.ShiftRightArithmetic(value, (byte)shiftAmount);
-#else
-                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
-#endif
+                return Sse2.ShiftRightArithmetic(value, (byte)shiftAmount);
+//#else
+//                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+//#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_ConstCore(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
-#if NET6_0_OR_GREATER
+//#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return Avx2.ShiftRightArithmetic(value, (byte)shiftAmount);
-#else
-                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
-#endif
+                return Sse2.ShiftRightArithmetic(value, (byte)shiftAmount);
+//#else
+//                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+//#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
@@ -1435,11 +1441,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic_Fast_Widen(Vector128<sbyte> value, int shiftAmount) {
-                Vector128<short> lowerToHigh = Avx2.ShiftLeftLogical(value.AsInt16(), 8);
-                Vector128<short> lowerShifted = Avx2.ShiftRightArithmetic(lowerToHigh, (byte)shiftAmount);
-                Vector128<sbyte> upper = Avx2.ShiftRightArithmetic(value.AsInt16(), (byte)shiftAmount).AsSByte();
-                Vector128<sbyte> lower = Avx2.ShiftRightLogical(lowerShifted, 8).AsSByte();
-                Vector128<sbyte> rt = Avx2.Or(Avx2.And(Vector128s<sbyte>.XyYMask, upper), lower);
+                Vector128<short> lowerToHigh = Sse2.ShiftLeftLogical(value.AsInt16(), 8);
+                Vector128<short> lowerShifted = Sse2.ShiftRightArithmetic(lowerToHigh, (byte)shiftAmount);
+                Vector128<sbyte> upper = Sse2.ShiftRightArithmetic(value.AsInt16(), (byte)shiftAmount).AsSByte();
+                Vector128<sbyte> lower = Sse2.ShiftRightLogical(lowerShifted, 8).AsSByte();
+                Vector128<sbyte> rt = Sse2.Or(Sse2.And(Vector128s<sbyte>.XyYMask, upper), lower);
                 return rt;
             }
 
@@ -1448,8 +1454,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic_Fast_Negative(Vector128<sbyte> value, int shiftAmount) {
                 Vector128<sbyte> mask = Vector128Constants.GetResidueMaskBits_SByte(shiftAmount);
-                Vector128<sbyte> shifted = Avx2.ShiftRightLogical(value.AsUInt16(), (byte)shiftAmount).AsSByte();
-                Vector128<sbyte> sign = Avx2.CompareGreaterThan(Vector128<sbyte>.Zero, value);
+                Vector128<sbyte> shifted = Sse2.ShiftRightLogical(value.AsUInt16(), (byte)shiftAmount).AsSByte();
+                Vector128<sbyte> sign = Sse2.CompareGreaterThan(Vector128<sbyte>.Zero, value);
                 Vector128<sbyte> rt = ConditionalSelect(mask, shifted, sign);
                 return rt;
             }
@@ -1457,13 +1463,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_Fast(Vector128<short> value, int shiftAmount) {
-                return Avx2.ShiftRightArithmetic(value, (byte)shiftAmount);
+                return Sse2.ShiftRightArithmetic(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_Fast(Vector128<int> value, int shiftAmount) {
-                return Avx2.ShiftRightArithmetic(value, (byte)shiftAmount);
+                return Sse2.ShiftRightArithmetic(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{long}, int)"/>
@@ -1472,69 +1478,18 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return ShiftRightArithmetic_Fast_Xor(value, shiftAmount);
             }
 
-#if !REDUCE_MEMORY_USAGE
-            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{long}, int)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<long> ShiftRightArithmetic_Fast_Narrow(Vector128<long> value, int shiftAmount) {
-                if (0 == shiftAmount) {
-                    return value;
-                }
-                Vector128<long> rt;
-                Vector128<int> lower, upper;
-                Vector128<int> XyXMask = Vector128s<int>.XyXMask;
-                const byte controlInputUpper = (byte)ShuffleControlG4.YYWW; // BitMath._MM_SHUFFLE(3, 3, 1, 1) = 0xF5 = 0b11_11_01_01;
-                Vector128<int> upperAtLower = Avx2.Shuffle(value.AsInt32(), controlInputUpper); // f({ v0.lower, v0.upper, v1.lower, v1.upper, ... }) = { v0.upper, v0.upper, v1.upper, v1.upper, ... }
-                upperAtLower = Avx2.And(XyXMask, upperAtLower); // = { v0.upper, 0, v1.upper, 0, ... }
-                Vector128<int> upperOld = Avx2.AndNot(XyXMask, value.AsInt32()); // = { 0, v0.upper, 0, v1.upper, ... }
-                if (32 <= shiftAmount) {
-                    // Scalar algorithm:
-                    //    uint lower = (uint)((int)value._upper >> (shiftAmount & 31));
-                    //    uint upper = (uint)((int)value._upper >> 31);
-                    lower = Avx2.ShiftRightArithmetic(upperAtLower, (byte)(shiftAmount & 31));
-                    upper = Avx2.ShiftRightArithmetic(upperOld, 31);
-                    rt = Avx2.Or(lower, upper).AsInt64();
-                } else {
-                    // Scalar algorithm:
-                    //    uint lower = (value._lower >> shiftAmount) | (value._upper << (32 - shiftAmount));
-                    //    uint upper = (uint)((int)value._upper >> shiftAmount);
-                    Vector128<int> lowerOld = Avx2.And(XyXMask, value.AsInt32());
-                    lower = Avx2.Or(Avx2.ShiftRightLogical(lowerOld, (byte)shiftAmount), Avx2.ShiftLeftLogical(upperAtLower, (byte)(32 - shiftAmount)));
-                    upper = Avx2.ShiftRightArithmetic(upperOld, (byte)shiftAmount);
-                    rt = Avx2.Or(lower, upper).AsInt64();
-                }
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{long}, int)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<long> ShiftRightArithmetic_Fast_NarrowIfLess(Vector128<long> value, int shiftAmount) {
-                if (0 == shiftAmount) {
-                    return value;
-                }
-                Vector128<int> XyXMask = Vector128s<int>.XyXMask;
-                const byte controlInputUpper = (byte)ShuffleControlG4.YYWW; // BitMath._MM_SHUFFLE(3, 3, 1, 1) = 0xF5 = 0b11_11_01_01;
-                Vector128<int> upperAtLower = Avx2.Shuffle(value.AsInt32(), controlInputUpper); // f({ v0.lower, v0.upper, v1.lower, v1.upper, ... }) = { v0.upper, v0.upper, v1.upper, v1.upper, ... }
-                byte shiftAmountUpper = (byte)BitMath.Min(31, shiftAmount);
-                byte shiftAmountLeft = (byte)BitMath.Max(0, 32 - shiftAmount);
-                Vector128<int> lowerUse1Mask = Vector128.Create(BitMath.ToInt32Mask(32 <= shiftAmount));
-                upperAtLower = Avx2.And(XyXMask, upperAtLower); // = { v0.upper, 0, v1.upper, 0, ... }
-                Vector128<int> lowerOld = Avx2.And(XyXMask, value.AsInt32());
-                Vector128<int> upperOld = Avx2.AndNot(XyXMask, value.AsInt32()); // = { 0, v0.upper, 0, v1.upper, ... }
-                Vector128<int> lower2 = Avx2.Or(Avx2.ShiftRightLogical(lowerOld, (byte)shiftAmount), Avx2.ShiftLeftLogical(upperAtLower, shiftAmountLeft));
-                Vector128<int> upper = Avx2.ShiftRightArithmetic(upperOld, shiftAmountUpper);
-                Vector128<int> lower1 = Avx2.ShiftRightArithmetic(upperAtLower, (byte)(shiftAmount & 31));
-                Vector128<int> lower = ConditionalSelect(lowerUse1Mask, lower1, lower2);
-                Vector128<long> rt = Avx2.Or(lower, upper).AsInt64();
-                return rt;
-            }
-#endif // !REDUCE_MEMORY_USAGE
-
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightArithmetic_Fast_Negative(Vector128<long> value, int shiftAmount) {
-                Vector128<long> sign = Avx2.CompareGreaterThan(Vector128<long>.Zero, value);
                 byte shiftAmountLeft = (byte)(64 - shiftAmount);
-                Vector128<long> rt = Avx2.Or(Avx2.ShiftRightLogical(value, (byte)shiftAmount), Avx2.ShiftLeftLogical(sign, shiftAmountLeft));
+                Vector128<long> sign;
+                if (Sse42.IsSupported) {
+                    sign = Sse42.CompareGreaterThan(Vector128<long>.Zero, value);
+                } else {
+                    Vector128<int> valueHigh = Sse2.Shuffle(value.AsInt32(), (byte)ShuffleControlG4.YYWW);
+                    sign = Sse2.CompareGreaterThan(Vector128<int>.Zero, valueHigh).AsInt64();
+                }
+                Vector128<long> rt = Sse2.Or(Sse2.ShiftRightLogical(value, (byte)shiftAmount), Sse2.ShiftLeftLogical(sign, shiftAmountLeft));
                 return rt;
             }
 
@@ -1542,10 +1497,16 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightArithmetic_Fast_Xor(Vector128<long> value, int shiftAmount) {
                 // t = -(x>>>31); return ((x^t)>>>n)^t; // From "Hacker's Delight", Page 18.
-                Vector128<long> sign = Avx2.CompareGreaterThan(Vector128<long>.Zero, value); // Mask `0>x` is `-(x>>>31)`.
-                Vector128<long> rt = Avx2.Xor(value, sign);
-                rt = Avx2.ShiftRightLogical(rt, (byte)shiftAmount);
-                rt = Avx2.Xor(rt, sign);
+                Vector128<long> sign;// Mask `0>x` is `-(x>>>31)`.
+                if (Sse42.IsSupported) {
+                    sign = Sse42.CompareGreaterThan(Vector128<long>.Zero, value);
+                } else {
+                    Vector128<int> valueHigh = Sse2.Shuffle(value.AsInt32(), (byte)ShuffleControlG4.YYWW);
+                    sign = Sse2.CompareGreaterThan(Vector128<int>.Zero, valueHigh).AsInt64();
+                }
+                Vector128<long> rt = Sse2.Xor(value, sign);
+                rt = Sse2.ShiftRightLogical(rt, (byte)shiftAmount);
+                rt = Sse2.Xor(rt, sign);
                 return rt;
             }
 
