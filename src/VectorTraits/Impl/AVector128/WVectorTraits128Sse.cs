@@ -672,14 +672,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint ExtractMostSignificantBits(Vector128<float> vector) {
-                return (uint)Avx.MoveMask(vector);
+                return (uint)Sse.MoveMask(vector);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{double})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint ExtractMostSignificantBits(Vector128<double> vector) {
-                return (uint)Avx.MoveMask(vector);
+                return (uint)Sse2.MoveMask(vector);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{sbyte})"/>
@@ -693,7 +693,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint ExtractMostSignificantBits(Vector128<byte> vector) {
-                return (uint)Avx2.MoveMask(vector);
+                return (uint)Sse2.MoveMask(vector);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{short})"/>
@@ -707,7 +707,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint ExtractMostSignificantBits(Vector128<ushort> vector) {
-                Vector128<byte> m = Ssse3.Shuffle(vector.AsByte(), Vector128Constants.ExtractMostSignificantBits_Shuffle_HiByteOf16); // Packed the high byte.
+                Vector128<byte> m;
+                if (Ssse3.IsSupported) {
+                    m = Ssse3.Shuffle(vector.AsByte(), Vector128Constants.ExtractMostSignificantBits_Shuffle_HiByteOf16); // Packed the high byte.
+                } else {
+                    Vector128<short> t = Sse2.ShiftRightLogical(vector, 8).AsInt16();
+                    m = Sse2.PackUnsignedSaturate(t, Vector128<short>.Zero);
+                }
                 return (uint)Sse2.MoveMask(m);
             }
 
