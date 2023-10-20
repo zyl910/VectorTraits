@@ -444,15 +444,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return ConvertToUInt32_ShiftVar(value);
             }
 
-            ///// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32(Vector128{float})"/>
-            ///// <remarks>Input range is `[-pow(2,31), pow(2,31))`. Out of range results in `2147483648`(pow(2,31)).</remarks>
-            //[Obsolete("It has a different valid range.")]
-            //[CLSCompliant(false)]
-            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-            //public static Vector128<uint> ConvertToUInt32_As(Vector128<float> value) {
-            //    return Avx.ConvertToVector128Int32WithTruncation(value).AsUInt32();
-            //}
-
             /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32(Vector128{float})"/>
             /// <remarks>Input range is `[0, pow(2,32))`. Out of range results in `0`.</remarks>
             [CLSCompliant(false)]
@@ -465,15 +456,15 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<int> zero = Vector128<int>.Zero;
                 //majik operations										  //Latency, Throughput(references IceLake)
                 Vector128<int> bin = value.AsInt32();
-                Vector128<int> mat = Avx2.And(bin, mat_mask);                                    //1,1/3
-                mat = Avx2.Or(mat, hidden_1);                                                    //1,1/3
-                Vector128<int> exp_enc = Avx2.ShiftRightLogical(bin, 23);                        //1,1/2
-                Vector128<int> exp_frac = Avx2.Subtract(exp_enc, exp_bias);                      //1,1/3
+                Vector128<int> mat = Sse2.And(bin, mat_mask);                                    //1,1/3
+                mat = Sse2.Or(mat, hidden_1);                                                    //1,1/3
+                Vector128<int> exp_enc = Sse2.ShiftRightLogical(bin, 23);                        //1,1/2
+                Vector128<int> exp_frac = Sse2.Subtract(exp_enc, exp_bias);                      //1,1/3
                 Vector128<int> msl = Avx2.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt32());    //1,1/2
-                Vector128<int> exp_frac_n = Avx2.Subtract(zero, exp_frac);                       //1,1/3
+                Vector128<int> exp_frac_n = Sse2.Subtract(zero, exp_frac);                       //1,1/3
                 Vector128<int> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt32()); //1,1/2
-                Vector128<int> exp_is_pos = Avx2.CompareGreaterThan(exp_frac, zero);             //3,1
-                Vector128<int> result_abs = Avx2.BlendVariable(msr, msl, exp_is_pos);            //2,1
+                Vector128<int> exp_is_pos = Sse2.CompareGreaterThan(exp_frac, zero);             //3,1
+                Vector128<int> result_abs = Sse41.BlendVariable(msr, msl, exp_is_pos);            //2,1
                 return result_abs.AsUInt32();	//total latency: 12, total throughput CPI: 4.8
             }
 
@@ -482,20 +473,24 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ConvertToUInt32_Mapping(Vector128<float> value) {
-#if NET5_0_OR_GREATER
+//#if NET5_0_OR_GREATER
                 // [pow(2,31), pow(2,32)-1] mapping to [-pow(2,31), -1]. Subtract `pow(2,32)`.
                 Vector128<float> highEnd = Vector128.Create(ScalarConstants.SingleBit_2Pow32).AsSingle();
                 Vector128<float> highBegin = Vector128.Create(ScalarConstants.SingleBit_2Pow31).AsSingle();
-                Vector128<float> highMapped = Avx.Subtract(value, highEnd);
-                Vector128<float> highMask = Avx.And(Avx.CompareLessThanOrEqual(highBegin, value), Avx.CompareLessThan(value, highEnd)); // highBegin <= value < highEnd .
-                //Vector128<float> value2 = ConditionalSelect(highMask, highMapped, value);
-                Vector128<float> value2 = Avx2.BlendVariable(value, highMapped, highMask);
-                Vector128<uint> rt = Avx.ConvertToVector128Int32WithTruncation(value2).AsUInt32();
+                Vector128<float> highMapped = Sse.Subtract(value, highEnd);
+                Vector128<float> highMask = Sse.And(Sse.CompareLessThanOrEqual(highBegin, value), Sse.CompareLessThan(value, highEnd)); // highBegin <= value < highEnd .
+                Vector128<float> value2;
+                if (Sse41.IsSupported) {
+                    value2 = Sse41.BlendVariable(value, highMapped, highMask);
+                } else {
+                    value2 = ConditionalSelect(highMask, highMapped, value);
+                }
+                Vector128<uint> rt = Sse2.ConvertToVector128Int32WithTruncation(value2).AsUInt32();
                 return rt;
-#else
-                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector128<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
-                return SuperStatics.ConvertToUInt32(value);
-#endif
+//#else
+//                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector128<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
+//                return SuperStatics.ConvertToUInt32(value);
+//#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32(Vector128{float})"/>
@@ -503,24 +498,28 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ConvertToUInt32_MappingFix(Vector128<float> value) {
-#if NET5_0_OR_GREATER
+//#if NET5_0_OR_GREATER
                 // [pow(2,31), pow(2,32)-1] mapping to [-pow(2,31), -1]. Subtract `pow(2,32)`.
                 Vector128<float> highEnd = Vector128.Create(ScalarConstants.SingleBit_2Pow32).AsSingle();
                 Vector128<float> lowBegin = Vector128.Create(ScalarConstants.SingleBit_Negative2Pow31).AsSingle();
                 Vector128<float> highBegin = Vector128.Create(ScalarConstants.SingleBit_2Pow31).AsSingle();
-                Vector128<float> lessHighEnd = Avx.CompareLessThan(value, highEnd); // value < highEnd .
-                Vector128<float> highMapped = Avx.Subtract(value, highEnd);
-                Vector128<float> lowMask = Avx.And(Avx.CompareLessThanOrEqual(lowBegin, value), lessHighEnd); // lowBegin <= value < highEnd .
-                Vector128<float> value0 = Avx.And(value, lowMask); // If out of range, set to 0.
-                Vector128<float> highMask = Avx.And(Avx.CompareLessThanOrEqual(highBegin, value), lessHighEnd); // highBegin <= value < highEnd .
-                //Vector128<float> value2 = ConditionalSelect(highMask, highMapped, value0);
-                Vector128<float> value2 = Avx2.BlendVariable(value0, highMapped, highMask);
-                Vector128<uint> rt = Avx.ConvertToVector128Int32WithTruncation(value2).AsUInt32();
+                Vector128<float> lessHighEnd = Sse.CompareLessThan(value, highEnd); // value < highEnd .
+                Vector128<float> highMapped = Sse.Subtract(value, highEnd);
+                Vector128<float> lowMask = Sse.And(Sse.CompareLessThanOrEqual(lowBegin, value), lessHighEnd); // lowBegin <= value < highEnd .
+                Vector128<float> value0 = Sse.And(value, lowMask); // If out of range, set to 0.
+                Vector128<float> highMask = Sse.And(Sse.CompareLessThanOrEqual(highBegin, value), lessHighEnd); // highBegin <= value < highEnd .
+                Vector128<float> value2;
+                if (Sse41.IsSupported) {
+                    value2 = Sse41.BlendVariable(value0, highMapped, highMask);
+                } else {
+                    value2 = ConditionalSelect(highMask, highMapped, value0);
+                }
+                Vector128<uint> rt = Sse2.ConvertToVector128Int32WithTruncation(value2).AsUInt32();
                 return rt;
-#else
-                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector128<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
-                return SuperStatics.ConvertToUInt32(value);
-#endif
+//#else
+//                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector128<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
+//                return SuperStatics.ConvertToUInt32(value);
+//#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32(Vector128{float})"/>
@@ -528,31 +527,37 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ConvertToUInt32_Mod(Vector128<float> value) {
-#if NET5_0_OR_GREATER
+//#if NET5_0_OR_GREATER
                 // remainder = mod(value, highEnd) = value - floor(value/highEnd)*highEnd
                 Vector128<float> highEndDiv = Vector128.Create(ScalarConstants.SingleBit_2PowNegative32).AsSingle();
                 Vector128<float> highEnd = Vector128.Create(ScalarConstants.SingleBit_2Pow32).AsSingle();
                 Vector128<float> lowBegin = Vector128.Create(ScalarConstants.SingleBit_Negative2Pow31).AsSingle();
                 Vector128<float> highBegin = Vector128.Create(ScalarConstants.SingleBit_2Pow31).AsSingle();
-                Vector128<float> quotientFloor = Avx.Multiply(value, highEndDiv); // Avx.Divide(value, highEnd);
-                quotientFloor = Avx.Floor(quotientFloor);
-                Vector128<float> intRangeMask = Avx.And(Avx.CompareLessThanOrEqual(lowBegin, value), Avx.CompareLessThan(value, highBegin)); // lowBegin <= value < highBegin .
-                Vector128<float> remainder = Avx.Subtract(value, Avx.Multiply(quotientFloor, highEnd));
+                Vector128<float> quotientFloor = Sse.Multiply(value, highEndDiv); // Sse.Divide(value, highEnd);
+                quotientFloor = Sse41.Floor(quotientFloor);
+                Vector128<float> intRangeMask = Sse.And(Sse.CompareLessThanOrEqual(lowBegin, value), Sse.CompareLessThan(value, highBegin)); // lowBegin <= value < highBegin .
+                Vector128<float> remainder = Sse.Subtract(value, Sse.Multiply(quotientFloor, highEnd));
                 // [pow(2,31), pow(2,32)-1] mapping to [-pow(2,31), -1]. Subtract `pow(2,32)`.
-                Vector128<float> uintRangeMask = Avx.And(Avx.CompareLessThanOrEqual(Vector128<float>.Zero, remainder), Avx.CompareLessThan(remainder, highEnd)); // lowBegin <= remainder < highEnd .
-                Vector128<float> highMask = Avx.CompareLessThanOrEqual(highBegin, remainder); // highBegin <= value .
-                Vector128<float> remainder0 = Avx.And(remainder, uintRangeMask); // If out of range, set to 0.
-                Vector128<float> highMapped = Avx.Subtract(remainder0, highEnd);
-                //Vector128<float> value2 = ConditionalSelect(highMask, highMapped, remainder0);
-                Vector128<float> value2 = Avx2.BlendVariable(remainder0, highMapped, highMask);
-                // If within the signed integer range, return value, otherwise return value2 .
-                Vector128<float> value3 = Avx2.BlendVariable(value2, value, intRangeMask);
-                Vector128<uint> rt = Avx.ConvertToVector128Int32WithTruncation(value3).AsUInt32();
+                Vector128<float> uintRangeMask = Sse.And(Sse.CompareLessThanOrEqual(Vector128<float>.Zero, remainder), Sse.CompareLessThan(remainder, highEnd)); // lowBegin <= remainder < highEnd .
+                Vector128<float> highMask = Sse.CompareLessThanOrEqual(highBegin, remainder); // highBegin <= value .
+                Vector128<float> remainder0 = Sse.And(remainder, uintRangeMask); // If out of range, set to 0.
+                Vector128<float> highMapped = Sse.Subtract(remainder0, highEnd);
+                Vector128<float> value3;
+                if (Sse41.IsSupported) {
+                    Vector128<float> value2 = Sse41.BlendVariable(remainder0, highMapped, highMask);
+                    // If within the signed integer range, return value, otherwise return value2 .
+                    value3 = Sse41.BlendVariable(value2, value, intRangeMask);
+                } else {
+                    Vector128<float> value2 = ConditionalSelect(highMask, highMapped, remainder0);
+                    // If within the signed integer range, return value, otherwise return value2 .
+                    value3 = ConditionalSelect(intRangeMask, value, value2);
+                }
+                Vector128<uint> rt = Sse2.ConvertToVector128Int32WithTruncation(value3).AsUInt32();
                 return rt;
-#else
-                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector128<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
-                return SuperStatics.ConvertToUInt32(value);
-#endif
+//#else
+//                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector128<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
+//                return SuperStatics.ConvertToUInt32(value);
+//#endif
             }
 
 
@@ -607,15 +612,15 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> zero = Vector128<long>.Zero;
                 //majik operations										  //Latency, Throughput(references IceLake)
                 Vector128<long> bin = value.AsInt64();
-                Vector128<long> mat = Avx2.And(bin, mat_mask);                                    //1,1/3
-                mat = Avx2.Or(mat, hidden_1);                                                     //1,1/3
-                Vector128<long> exp_enc = Avx2.ShiftRightLogical(bin, 52);                        //1,1/2
-                Vector128<long> exp_frac = Avx2.Subtract(exp_enc, exp_bias);                      //1,1/3
+                Vector128<long> mat = Sse2.And(bin, mat_mask);                                    //1,1/3
+                mat = Sse2.Or(mat, hidden_1);                                                     //1,1/3
+                Vector128<long> exp_enc = Sse2.ShiftRightLogical(bin, 52);                        //1,1/2
+                Vector128<long> exp_frac = Sse2.Subtract(exp_enc, exp_bias);                      //1,1/3
                 Vector128<long> msl = Avx2.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt64());    //1,1/2
-                Vector128<long> exp_frac_n = Avx2.Subtract(zero, exp_frac);                       //1,1/3
+                Vector128<long> exp_frac_n = Sse2.Subtract(zero, exp_frac);                       //1,1/3
                 Vector128<long> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64()); //1,1/2
-                Vector128<long> exp_is_pos = Avx2.CompareGreaterThan(exp_frac, zero);             //3,1
-                Vector128<long> result_abs = Avx2.BlendVariable(msr, msl, exp_is_pos);            //2,1
+                Vector128<long> exp_is_pos = Sse42.CompareGreaterThan(exp_frac, zero);             //3,1
+                Vector128<long> result_abs = Sse41.BlendVariable(msr, msl, exp_is_pos);            //2,1
                 return result_abs.AsUInt64();	//total latency: 12, total throughput CPI: 4.8
             }
 
@@ -630,7 +635,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ConvertToUInt64_Range52_Impl(Vector128<double> value) {
-                value = Avx.RoundToZero(value); // Truncate.
+                value = YRoundToZero(value); // Truncate.
                 return ConvertToUInt64_Range52RoundToEven(value);
             }
 
@@ -649,8 +654,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 //     );
                 // }
                 Vector128<double> magicNumber = Vector128.Create(ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
-                Vector128<double> x = Avx.Add(value, magicNumber);
-                Vector128<ulong> result = Avx2.Xor(x.AsUInt64(), magicNumber.AsUInt64());
+                Vector128<double> x = Sse2.Add(value, magicNumber);
+                Vector128<ulong> result = Sse2.Xor(x.AsUInt64(), magicNumber.AsUInt64());
                 return result;
             }
 

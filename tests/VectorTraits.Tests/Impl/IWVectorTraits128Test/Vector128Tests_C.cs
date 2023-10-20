@@ -520,6 +520,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 Vector128s<T>.DemoNaN,
             };
             bool allowLog = false;
+            bool showNotEquals = true;
             foreach (Vector128<T> value in samples) {
                 Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
                 Vector128<uint> expected = Vector128s.ConvertToUInt32((dynamic)value);
@@ -527,7 +528,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 foreach (IWVectorTraits128 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector128<uint> dst = instance.ConvertToUInt32((dynamic)value);
-                    if (allowLog) {
+                    if (allowLog || (showNotEquals && !expected.Equals(dst))) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
                         Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
@@ -556,6 +557,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 Vector128s<T>.DemoNaN,
             };
             bool allowLog = false;
+            bool showNotEquals = true;
             foreach (Vector128<T> value in samples) {
                 Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
                 Vector128<ulong> expected = Vector128s.ConvertToUInt64((dynamic)value);
@@ -563,7 +565,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 foreach (IWVectorTraits128 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector128<ulong> dst = instance.ConvertToUInt64((dynamic)value);
-                    if (allowLog) {
+                    if (allowLog || (showNotEquals && !expected.Equals(dst))) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
                         Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
