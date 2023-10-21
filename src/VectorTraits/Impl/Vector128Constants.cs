@@ -743,6 +743,18 @@ namespace Zyl.VectorTraits.Impl {
         } = Vector128s.CreateRotate<byte>(0, 1, 2, 3, 4, 5, 6, 7);
 #endif // USE_VECTOR_CREATE
 
+        /// <summary>Shuffle - UInt64 - The offset of each byte within an element.</summary>
+        [CLSCompliant(false)]
+        public static Vector128<uint> Shuffle_UInt64_UInt32Offset {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((uint)0, 1, 0, 1);
+        }
+#else
+            get;
+        } = Vector128s.CreateRotate<uint>(0, 1);
+#endif // USE_VECTOR_CREATE
+
 
         private static readonly Vector128<byte>[] m_YShuffleG2_Byte_Indices = {
             Vector128.Create((byte)0, 0, 2, 2, 4, 4, 6, 6, 8, 8, 10, 10, 12, 12, 14, 14), // XX
