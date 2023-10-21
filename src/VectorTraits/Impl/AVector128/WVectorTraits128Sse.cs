@@ -1964,13 +1964,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> Shuffle(Vector128<byte> vector, Vector128<byte> indices) {
-                var indicesAdded = Avx2.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue));
-                Vector128<byte> mask = Avx2.CompareGreaterThan(
-                    Vector128.Create((sbyte)(32 + sbyte.MinValue)),
+                var indicesAdded = Sse2.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue));
+                Vector128<byte> mask = Sse2.CompareGreaterThan(
+                    Vector128.Create((sbyte)(16 + sbyte.MinValue)),
                     indicesAdded
-                ).AsByte(); // Unsigned compare: (i < 32)
+                ).AsByte(); // Unsigned compare: (i < 16)
                 Vector128<byte> raw = YShuffleKernel(vector, indices);
-                Vector128<byte> rt = Avx2.And(raw, mask);
+                Vector128<byte> rt = Sse2.And(raw, mask);
                 return rt;
             }
 
@@ -1984,13 +1984,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> Shuffle(Vector128<ushort> vector, Vector128<ushort> indices) {
-                var indicesAdded = Avx2.Add(indices.AsInt16(), Vector128.Create(short.MinValue));
-                Vector128<ushort> mask = Avx2.CompareGreaterThan(
-                    Vector128.Create((short)(16 + short.MinValue)),
+                var indicesAdded = Sse2.Add(indices.AsInt16(), Vector128.Create(short.MinValue));
+                Vector128<ushort> mask = Sse2.CompareGreaterThan(
+                    Vector128.Create((short)(8 + short.MinValue)),
                     indicesAdded
-                ).AsUInt16(); // Unsigned compare: (i < 16)
+                ).AsUInt16(); // Unsigned compare: (i < 8)
                 Vector128<ushort> raw = YShuffleKernel(vector, indices);
-                Vector128<ushort> rt = Avx2.And(raw, mask);
+                Vector128<ushort> rt = Sse2.And(raw, mask);
                 return rt;
             }
 
@@ -2004,13 +2004,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> Shuffle(Vector128<uint> vector, Vector128<uint> indices) {
-                var indicesAdded = Avx2.Add(indices.AsInt32(), Vector128.Create(int.MinValue));
-                Vector128<uint> mask = Avx2.CompareGreaterThan(
-                    Vector128.Create((int)(8 + int.MinValue)),
+                var indicesAdded = Sse2.Add(indices.AsInt32(), Vector128.Create(int.MinValue));
+                Vector128<uint> mask = Sse2.CompareGreaterThan(
+                    Vector128.Create((int)(4 + int.MinValue)),
                     indicesAdded
-                ).AsUInt32(); // Unsigned compare: (i < 8)
+                ).AsUInt32(); // Unsigned compare: (i < 4)
                 Vector128<uint> raw = YShuffleKernel(vector, indices);
-                Vector128<uint> rt = Avx2.And(raw, mask);
+                Vector128<uint> rt = Sse2.And(raw, mask);
                 return rt;
             }
 
@@ -2024,13 +2024,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> Shuffle(Vector128<ulong> vector, Vector128<ulong> indices) {
-                var indicesAdded = Avx2.Add(indices.AsInt64(), Vector128Constants.Int64_MinValue);
-                Vector128<ulong> mask = Avx2.CompareGreaterThan(
-                    Vector128Constants.Int64_MinValue_4,
+                var indicesAdded = Sse2.Add(indices.AsInt64(), Vector128Constants.Int64_MinValue);
+                Vector128<ulong> mask = GreaterThan(
+                    Vector128Constants.Int64_MinValue_2,
                     indicesAdded
-                ).AsUInt64(); // Unsigned compare: (i < 4)
+                ).AsUInt64(); // Unsigned compare: (i < 2)
                 Vector128<ulong> raw = YShuffleKernel(vector, indices);
-                Vector128<ulong> rt = Avx2.And(raw, mask);
+                Vector128<ulong> rt = Sse2.And(raw, mask);
                 return rt;
             }
 
@@ -2048,14 +2048,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Shuffle_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1) {
                 YShuffleKernel_Args(indices, out args0, out args1);
-                var indicesAdded = Avx2.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue));
-                Vector128<byte> mask = Avx2.CompareGreaterThan(
-                    Vector128.Create((sbyte)(32 + sbyte.MinValue)),
+                var indicesAdded = Sse2.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue));
+                Vector128<byte> mask = Sse2.CompareGreaterThan(
+                    Vector128.Create((sbyte)(16 + sbyte.MinValue)),
                     indicesAdded
-                ).AsByte(); // Unsigned compare: (i < 32)
+                ).AsByte(); // Unsigned compare: (i < 16)
                 mask = OnesComplement(mask); // Used for _mm128_shuffle_epi8. Change mask to `0 is keep; AllBitsSet is set zero`.
-                args0 = Avx2.Or(args0, mask);
-                args1 = Avx2.Or(args1, mask);
+                args0 = Sse2.Or(args0, mask);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Shuffle_Args(Vector128{short}, out Vector128{short}, out Vector128{short})"/>
@@ -2071,14 +2070,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Shuffle_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1) {
                 YShuffleKernel_Args(indices, out args0, out args1);
-                var indicesAdded = Avx2.Add(indices.AsInt16(), Vector128.Create(short.MinValue));
-                Vector128<ushort> mask = Avx2.CompareGreaterThan(
-                    Vector128.Create((short)(16 + short.MinValue)),
+                var indicesAdded = Sse2.Add(indices.AsInt16(), Vector128.Create(short.MinValue));
+                Vector128<ushort> mask = Sse2.CompareGreaterThan(
+                    Vector128.Create((short)(8 + short.MinValue)),
                     indicesAdded
-                ).AsUInt16(); // Unsigned compare: (i < 16)
+                ).AsUInt16(); // Unsigned compare: (i < 8)
                 mask = OnesComplement(mask); // Used for _mm128_shuffle_epi8. Change mask to `0 is keep; AllBitsSet is set zero`.
-                args0 = Avx2.Or(args0, mask);
-                args1 = Avx2.Or(args1, mask);
+                args0 = Sse2.Or(args0, mask);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Shuffle_Args(Vector128{int}, out Vector128{int}, out Vector128{int})"/>
@@ -2093,12 +2091,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Shuffle_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1) {
-                args0 = indices;
-                var indicesAdded = Avx2.Add(indices.AsInt32(), Vector128.Create(int.MinValue));
-                args1 = Avx2.CompareGreaterThan(
-                    Vector128.Create((int)(8 + int.MinValue)),
+                YShuffleKernel_Args(indices, out args0, out args1);
+                Vector128<int> indicesAdded = Sse2.Add(indices.AsInt32(), Vector128.Create(int.MinValue));
+                Vector128<uint> mask = Sse2.CompareGreaterThan(
+                    Vector128.Create((int)(4 + int.MinValue)),
                     indicesAdded
-                ).AsUInt32(); // Unsigned compare: (i < 8)
+                ).AsUInt32(); // Unsigned compare: (i < 4)
+                mask = OnesComplement(mask); // Used for _mm128_shuffle_epi8. Change mask to `0 is keep; AllBitsSet is set zero`.
+                args0 = Sse2.Or(args0, mask);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Shuffle_Args(Vector128{long}, out Vector128{long}, out Vector128{long})"/>
@@ -2113,12 +2113,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Shuffle_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1) {
-                YShuffleKernel_Args(indices, out args0, out _);
-                var indicesAdded = Avx2.Add(indices.AsInt64(), Vector128Constants.Int64_MinValue);
-                args1 = Avx2.CompareGreaterThan(
-                    Vector128Constants.Int64_MinValue_4,
+                YShuffleKernel_Args(indices, out args0, out args1);
+                Vector128<long> indicesAdded = Sse2.Add(indices.AsInt64(), Vector128Constants.Int64_MinValue);
+                Vector128<ulong> mask = GreaterThan(
+                    Vector128Constants.Int64_MinValue_2,
                     indicesAdded
-                ).AsUInt64(); // Unsigned compare: (i < 4)
+                ).AsUInt64(); // Unsigned compare: (i < 2)
+                mask = OnesComplement(mask); // Used for _mm128_shuffle_epi8. Change mask to `0 is keep; AllBitsSet is set zero`.
+                args0 = Sse2.Or(args0, mask);
             }
 
 

@@ -213,6 +213,17 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+        /// <summary>Int64 - `long.MinValue + 2 = 0x8000000000000002 = -9223372036852775802`.</summary>
+        public static Vector128<long> Int64_MinValue_2 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE_INT64
+            get => Vector128.Create(long.MinValue + 2);
+        }
+#else
+            get;
+        } = Vector128.Create(long.MinValue + 2);
+#endif // USE_VECTOR_CREATE_INT64
+
         /// <summary>Int64 - `long.MinValue + 4 = 0x8000000000000004 = -9223372036854775804`.</summary>
         public static Vector128<long> Int64_MinValue_4 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
