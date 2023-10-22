@@ -370,7 +370,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<double> nonSignMask = Vector128Constants.Double_NonSignMask;
                 //Operations.
                 Vector128<double> valueExpData = Sse2.And(value, exponentMask); // Get exponent field.
-                Vector128<long> maskBegin = GreaterThan(one, valueExpData).AsInt64(); // `1 > valueExpData[i] = pow(2,0) > pow(2,e)`, it mean `e<0`.
+                Vector128<long> maskBegin = Sse2.CompareGreaterThan(one, valueExpData).AsInt64(); // `1 > valueExpData[i] = pow(2,0) > pow(2,e)`, it mean `e<0`.
                 valueExpData = Sse2.Min(valueExpData, rangeEnd); // Clamp to `e<=52`.
                 maskBegin = Sse2.And(maskBegin, nonSignMask.AsInt64()); // Keep sign flag.
                 Vector128<double> expMinuend = Vector128.Create(ScalarConstants.DoubleVal_Truncate_expMinuend); // Item is `(long)(1023*2 + 52)<<52`. Binary is `0x8320000000000000`.
