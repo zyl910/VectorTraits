@@ -21,11 +21,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Abs_AcceleratedTypes"/>
             public static TypeCodeFlags Abs_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
-                    if (Sse42.IsSupported) {
-                        rt |= TypeCodeFlags.Int64;
-
-                    }
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
                     return rt;
                 }
             }
@@ -84,14 +80,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Abs(Vector128<long> value) {
-                if (Sse42.IsSupported) {
-                    // If an integer value is positive or zero, no action is required. Otherwise complement and add 1.
-                    Vector128<long> mask = Sse42.CompareGreaterThan(Vector128<long>.Zero, value); // 0>value => value<0
-                    Vector128<long> rt = Sse2.Subtract(Sse2.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
-                    return rt;
-                } else {
-                    return SuperStatics.Abs(value);
-                }
+                // If an integer value is positive or zero, no action is required. Otherwise complement and add 1.
+                Vector128<long> mask = GreaterThan(Vector128<long>.Zero, value); // 0>value => value<0
+                Vector128<long> rt = Sse2.Subtract(Sse2.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
+                return rt;
             }
 
 
@@ -472,10 +464,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Max_AcceleratedTypes"/>
             public static TypeCodeFlags Max_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
-                    if (Sse42.IsSupported) {
-                        rt |= TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-                    }
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
                     return rt;
                 }
             }
@@ -554,50 +543,35 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Max(Vector128<long> left, Vector128<long> right) {
-                if (Sse42.IsSupported) {
-                    Vector128<long> mask = Sse42.CompareGreaterThan(left, right);
-                    Vector128<long> rt;
-                    if (Sse41.IsSupported) {
-                        rt = Sse41.BlendVariable(right, left, mask);
-                    } else {
-                        rt = ConditionalSelect(mask, left, right);
-                    }
-                    return rt;
+                Vector128<long> mask = GreaterThan(left, right);
+                Vector128<long> rt;
+                if (Sse41.IsSupported) {
+                    rt = Sse41.BlendVariable(right, left, mask);
                 } else {
-                    return SuperStatics.Max(left, right);
+                    rt = ConditionalSelect(mask, left, right);
                 }
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Max(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> Max(Vector128<ulong> left, Vector128<ulong> right) {
-                if (Sse42.IsSupported) {
-                    //Vector128<long> mid = Vector128s<long>.MinValue;
-                    Vector128<long> mid = Vector128Constants.Int64_MinValue;
-                    Vector128<long> left2 = Sse2.Xor(left.AsInt64(), mid);
-                    Vector128<long> right2 = Sse2.Xor(right.AsInt64(), mid);
-                    Vector128<long> mask = Sse42.CompareGreaterThan(left2, right2);
-                    Vector128<ulong> rt;
-                    if (Sse41.IsSupported) {
-                        rt = Sse41.BlendVariable(right, left, mask.AsUInt64());
-                    } else {
-                        rt = ConditionalSelect(mask.AsUInt64(), left, right);
-                    }
-                    return rt;
+                Vector128<ulong> mask = GreaterThan(left, right);
+                Vector128<ulong> rt;
+                if (Sse41.IsSupported) {
+                    rt = Sse41.BlendVariable(right, left, mask);
                 } else {
-                    return SuperStatics.Max(left, right);
+                    rt = ConditionalSelect(mask, left, right);
                 }
+                return rt;
             }
 
 
             /// <inheritdoc cref="IWVectorTraits128.Min_AcceleratedTypes"/>
             public static TypeCodeFlags Min_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
-                    if (Sse42.IsSupported) {
-                        rt |= TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-                    }
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
                     return rt;
                 }
             }
@@ -676,40 +650,28 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Min(Vector128<long> left, Vector128<long> right) {
-                if (Sse42.IsSupported) {
-                    Vector128<long> mask = Sse42.CompareGreaterThan(right, left);
-                    Vector128<long> rt;
-                    if (Sse41.IsSupported) {
-                        rt = Sse41.BlendVariable(right, left, mask);
-                    } else {
-                        rt = ConditionalSelect(mask, left, right);
-                    }
-                    return rt;
+                Vector128<long> mask = GreaterThan(right, left);
+                Vector128<long> rt;
+                if (Sse41.IsSupported) {
+                    rt = Sse41.BlendVariable(right, left, mask);
                 } else {
-                    return SuperStatics.Min(left, right);
+                    rt = ConditionalSelect(mask, left, right);
                 }
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Min(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> Min(Vector128<ulong> left, Vector128<ulong> right) {
-                if (Sse42.IsSupported) {
-                    //Vector128<long> mid = Vector128s<long>.MinValue;
-                    Vector128<long> mid = Vector128Constants.Int64_MinValue;
-                    Vector128<long> left2 = Sse2.Xor(left.AsInt64(), mid);
-                    Vector128<long> right2 = Sse2.Xor(right.AsInt64(), mid);
-                    Vector128<long> mask = Sse42.CompareGreaterThan(right2, left2);
-                    Vector128<ulong> rt;
-                    if (Sse41.IsSupported) {
-                        rt = Sse41.BlendVariable(right, left, mask.AsUInt64());
-                    } else {
-                        rt = ConditionalSelect(mask.AsUInt64(), left, right);
-                    }
-                    return rt;
+                Vector128<ulong> mask = GreaterThan(right, left);
+                Vector128<ulong> rt;
+                if (Sse41.IsSupported) {
+                    rt = Sse41.BlendVariable(right, left, mask.AsUInt64());
                 } else {
-                    return SuperStatics.Min(left, right);
+                    rt = ConditionalSelect(mask.AsUInt64(), left, right);
                 }
+                return rt;
             }
 
 
