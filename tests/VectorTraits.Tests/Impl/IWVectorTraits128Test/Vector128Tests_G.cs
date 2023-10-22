@@ -32,6 +32,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
+            Console.WriteLine();
             // run.
             Vector128<T>[] samples = {
                 Vector128s.Create(src),
@@ -42,6 +43,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 Vector128s<T>.XyYMask,
                 Vector128s<T>.XyzwXMask
             };
+            bool allowLog = false;
+            bool showNotEquals = true;
             foreach (Vector128<T> left in samples) {
                 foreach (Vector128<T> right in samples) {
 #if NET7_0_OR_GREATER
@@ -52,7 +55,11 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         Vector128<T> dst = instance.GreaterThan((dynamic)left, (dynamic)right);
-                        Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        if (allowLog || (showNotEquals && !expected.AsByte().Equals(dst.AsByte()))) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
+                        } else {
+                            Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        }
                     }
                 }
             }

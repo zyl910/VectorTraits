@@ -128,13 +128,45 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Ceiling(Vector128<float> value) {
-                return Sse41.Ceiling(value);
+                if (Sse41.IsSupported) {
+                    return Sse41.Ceiling(value);
+                } else {
+                    return Ceiling_ClearBit(value);
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Ceiling(Vector128<double> value) {
-                return Sse41.Ceiling(value);
+                if (Sse41.IsSupported) {
+                    return Sse41.Ceiling(value);
+                } else {
+                    return Ceiling_ClearBit(value);
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Ceiling_ClearBit(Vector128<float> value) {
+                Vector128<float> fixMask = Sse.CompareGreaterThan(value, Vector128<float>.Zero);
+                Vector128<float> valueTrun = YRoundToZero_ClearBit(value);
+                Vector128<float> equalsMask = Sse.CompareEqual(value, valueTrun);
+                fixMask = Sse.AndNot(equalsMask, fixMask); // It mean `Vector128.AndNot(fixMask, equalsMask)`
+                Vector128<float> valueTrunFix = Sse.Add(valueTrun, Vector128.Create(1.0f));
+                Vector128<float> rt = ConditionalSelect(fixMask, valueTrunFix, valueTrun);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Ceiling_ClearBit(Vector128<double> value) {
+                Vector128<double> fixMask = Sse2.CompareGreaterThan(value, Vector128<double>.Zero);
+                Vector128<double> valueTrun = YRoundToZero_ClearBit(value);
+                Vector128<double> equalsMask = Sse2.CompareEqual(value, valueTrun);
+                fixMask = Sse2.AndNot(equalsMask, fixMask); // It mean `Vector128.AndNot(fixMask, equalsMask)`
+                Vector128<double> valueTrunFix = Sse2.Add(valueTrun, Vector128.Create(1.0d));
+                Vector128<double> rt = ConditionalSelect(fixMask, valueTrunFix, valueTrun);
+                return rt;
             }
 
 
