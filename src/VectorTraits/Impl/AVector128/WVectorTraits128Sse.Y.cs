@@ -261,7 +261,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 // [Single type] If (0<=x && x<pow(2,23)), `round_to_even(x) = x + pow(2,23) - pow(2,23)`. Next generalize this approach to all number ranges.
                 Vector128<float> delta = Vector128.Create(ScalarConstants.SingleVal_2Pow23);
                 Vector128<float> signMask = Vector128Constants.Single_SignMask;
-                Vector128<float> valueAbs = Sse.AndNot(value, signMask);
+                Vector128<float> valueAbs = Sse.AndNot(signMask, value); // It mean `Vector128.AndNot(value, signMask)`
                 Vector128<float> signData = Sse.And(value, signMask);
                 //Vector128<float> allowMask = LessThan(valueAbs, delta); // Allow is `(value[i] < pow(2,23) )`.
                 Vector128<float> allowMask = Sse.CompareGreaterThan(delta, valueAbs); // Allow is `(value[i] < pow(2,23) )`.
@@ -278,7 +278,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 // [Double type] If (0<=x && x<pow(2,52)), `round_to_even(x) = x + pow(2,52) - pow(2,52)`. Next generalize this approach to all number ranges.
                 Vector128<double> delta = Vector128.Create(ScalarConstants.DoubleVal_2Pow52);
                 Vector128<double> signMask = Vector128Constants.Double_SignMask;
-                Vector128<double> valueAbs = Sse2.AndNot(value, signMask);
+                Vector128<double> valueAbs = Sse2.AndNot(signMask, value); // It mean `Vector128.AndNot(value, signMask)`
                 Vector128<double> signData = Sse2.And(value, signMask);
                 //Vector128<double> allowMask = LessThan(valueAbs, delta); // Allow is `(value[i] < pow(2,52) )`.
                 Vector128<double> allowMask = Sse2.CompareGreaterThan(delta, valueAbs); // Allow is `(value[i] < pow(2,52) )`.
@@ -301,15 +301,88 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YRoundToZero(Vector128<float> value) {
-                return Sse41.RoundToZero(value);
+                if (Sse41.IsSupported) {
+                    return Sse41.RoundToZero(value);
+                } else {
+                    return YRoundToZero_ClearBit(value);
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YRoundToZero(Vector128<double> value) {
-                return Sse41.RoundToZero(value);
+                if (Sse41.IsSupported) {
+                    return Sse41.RoundToZero(value);
+                } else {
+                    return YRoundToZero_ClearBit(value);
+                }
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YRoundToZero_ClearBit(Vector128<float> value) {
+                // Float encode is `sign*(1.m)*pow(2,e) = sign*(1.m)*pow(2,eBias - BIAS)`. Single's BIAS is `127`.
+                // If (e>=23): Has 0bit fractional part. The mask is `0`.
+                // If (e==22): Has 1bit fractional part. The mask is `0x1`.
+                // ...
+                // If (e==1): Has 22bit fractional part. The mask is `0x003FFFFF`.
+                // If (e==0): Has 23bit fractional part. The mask is `0x007FFFFF`.
+                // If (e< 0): Need set to zero (0.0 / -0.0). The mask is `0x7FFFFFFF`.
+                //
+                // If (0<=e && e<=23): The mask is `pow(2,23-e) - 1`. So `RoundToZero(x) = x & ~mask`.
+                //Constants.
+                Vector128<float> exponentMask = Vector128.Create(ScalarConstants.SingleVal_ExponentMask);
+                Vector128<float> one = Vector128.Create(1.0f);
+                Vector128<float> rangeEnd = Vector128.Create(ScalarConstants.SingleVal_2Pow23); // Single value: pow(2, 23)
+                Vector128<float> nonSignMask = Vector128Constants.Single_NonSignMask;
+                //Operations.
+                Vector128<float> valueExpData = Sse.And(value, exponentMask); // Get exponent field.
+                Vector128<int> maskBegin = Sse.CompareGreaterThan(one, valueExpData).AsInt32(); // `1 > valueExpData[i] = pow(2,0) > pow(2,e)`, it mean `e<0`.
+                valueExpData = Sse.Min(valueExpData, rangeEnd); // Clamp to `e<=23`.
+                maskBegin = Sse2.And(maskBegin, nonSignMask.AsInt32()); // Keep sign flag.
+                Vector128<int> expMinuend = Vector128.Create(ScalarConstants.SingleBit_Truncate_expMinuend); // Item is `(int)(127*2 + 23)<<23`. Binary is `0x8A800000`.
+                Vector128<float> maskRawPow = Sse2.Subtract(expMinuend.AsUInt32(), valueExpData.AsUInt32()).AsSingle(); // If valueExpData is `(127 + e)<<23`, `expMinuend-valueExpData` exponent field will be `(127*2 + 23) - (127 + e) = 127 + (23-e)`
+                maskRawPow = Sse.Subtract(maskRawPow, one); // The mask is `pow(2,23-e) - 1`.
+                Vector128<int> mask = Sse.Add(maskRawPow, rangeEnd).AsInt32(); // Step 1 of ConvertToUInt32_Range23RoundToEven .
+                mask = Sse2.Xor(mask, rangeEnd.AsInt32()); // mask = ConvertToUInt32_Range23RoundToEven(maskRawPow).AsInt32();
+                mask = Sse2.Or(mask, maskBegin); // Choose (e<0).
+                //writer.WriteLine(Vector128TextUtil.Format("The mask:\t{0}", mask));
+                Vector128<float> rt = Sse.AndNot(mask.AsSingle(), value); // It mean `Vector128.AndNot(value, mask.AsSingle())`
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YRoundToZero_ClearBit(Vector128<double> value) {
+                // Float encode is `sign*(1.m)*pow(2,e) = sign*(1.m)*pow(2,eBias - BIAS)`. Double's BIAS is `1023`.
+                // If (e>=52): Has 0bit fractional part. The mask is `0`.
+                // If (e==51): Has 1bit fractional part. The mask is `0x1`.
+                // ...
+                // If (e==1): Has 51bit fractional part. The mask is `0x0007FFFF_FFFFFFFF`.
+                // If (e==0): Has 52bit fractional part. The mask is `0x000FFFFF_FFFFFFFF`.
+                // If (e< 0): Need set to zero (0.0 / -0.0). The mask is `0x7FFFFFFF_FFFFFFFF`.
+                //
+                // If (0<=e && e<=52): The mask is `pow(2,52-e) - 1`. So `RoundToZero(x) = x & ~mask`.
+                //Constants.
+                Vector128<double> exponentMask = Vector128.Create(ScalarConstants.DoubleVal_ExponentMask);
+                Vector128<double> one = Vector128.Create(1.0);
+                Vector128<double> rangeEnd = Vector128.Create(ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
+                Vector128<double> nonSignMask = Vector128Constants.Double_NonSignMask;
+                //Operations.
+                Vector128<double> valueExpData = Sse2.And(value, exponentMask); // Get exponent field.
+                Vector128<long> maskBegin = GreaterThan(one, valueExpData).AsInt64(); // `1 > valueExpData[i] = pow(2,0) > pow(2,e)`, it mean `e<0`.
+                valueExpData = Sse2.Min(valueExpData, rangeEnd); // Clamp to `e<=52`.
+                maskBegin = Sse2.And(maskBegin, nonSignMask.AsInt64()); // Keep sign flag.
+                Vector128<double> expMinuend = Vector128.Create(ScalarConstants.DoubleVal_Truncate_expMinuend); // Item is `(long)(1023*2 + 52)<<52`. Binary is `0x8320000000000000`.
+                Vector128<double> maskRawPow = Sse2.Subtract(expMinuend.AsUInt64(), valueExpData.AsUInt64()).AsDouble(); // If valueExpData is `(1023 + e)<<52`, `expMinuend-valueExpData` exponent field will be `(1023*2 + 52) - (1023 + e) = 1023 + (52-e)`
+                maskRawPow = Sse2.Subtract(maskRawPow, one); // The mask is `pow(2,52-e) - 1`.
+                Vector128<long> mask = Sse2.Add(maskRawPow, rangeEnd).AsInt64(); // Step 1 of ConvertToUInt64_Range52RoundToEven .
+                mask = Sse2.Xor(mask, rangeEnd.AsInt64()); // mask = ConvertToUInt64_Range52RoundToEven(maskRawPow).AsInt64();
+                mask = Sse2.Or(mask, maskBegin); // Choose (e<0).
+                //writer.WriteLine(Vector128TextUtil.Format("The mask:\t{0}", mask));
+                Vector128<double> rt = Sse2.AndNot(mask.AsDouble(), value); // It mean `Vector128.AndNot(value, mask.AsDouble())`
+                return rt;
+            }
 
 #endif // NETCOREAPP3_0_OR_GREATER
         }
