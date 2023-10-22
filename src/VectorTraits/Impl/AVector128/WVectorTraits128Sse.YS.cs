@@ -122,7 +122,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
                     if (Ssse3.IsSupported) {
-                        rt |= TypeCodeFlagsUtil.AllTypes;
+                        rt |= TypeCodeFlagsUtil.Most32Types;
                     }
                     return rt;
                 }
@@ -302,7 +302,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4X2_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleG4X2_AcceleratedTypes {
                 get {
-                    return YShuffleG4_AcceleratedTypes;
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+                    if (Ssse3.IsSupported) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+                    return rt;
                 }
             }
 
@@ -334,10 +338,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4X2(Vector128{byte}, Vector128{byte}, ShuffleControlG4, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleG4X2(Vector128<byte> source0, Vector128<byte> source1, ShuffleControlG4 control, out Vector128<byte> result1) {
-                Vector128<byte> indices = Vector128Constants.GetYShuffleG4_Byte_Indices(control); // It also supports _mm128_shuffle_epi8 for 128-bit lanes .
-                var rt0 = Avx2.Shuffle(source0, indices);
-                result1 = Avx2.Shuffle(source1, indices);
-                return rt0;
+                if (Ssse3.IsSupported) {
+                    Vector128<byte> indices = Vector128Constants.GetYShuffleG4_Byte_Indices(control); // It also supports _mm128_shuffle_epi8 for 128-bit lanes .
+                    var rt0 = Ssse3.Shuffle(source0, indices);
+                    result1 = Ssse3.Shuffle(source1, indices);
+                    return rt0;
+                } else {
+                    return YShuffleG4X2(source0, source1, control, out result1);
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4X2(Vector128{short}, Vector128{short}, ShuffleControlG4, out Vector128{short})"/>
@@ -352,10 +360,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleG4X2(Vector128<ushort> source0, Vector128<ushort> source1, ShuffleControlG4 control, out Vector128<ushort> result1) {
-                Vector128<byte> indices = Vector128Constants.GetYShuffleG4_UInt16_ByteIndices(control).AsByte(); // It also supports _mm128_shuffle_epi8 for 128-bit lanes .
-                var rt0 = Avx2.Shuffle(source0.AsByte(), indices).AsUInt16();
-                result1 = Avx2.Shuffle(source1.AsByte(), indices).AsUInt16();
-                return rt0;
+                if (Ssse3.IsSupported) {
+                    Vector128<byte> indices = Vector128Constants.GetYShuffleG4_UInt16_ByteIndices(control).AsByte(); // It also supports _mm128_shuffle_epi8 for 128-bit lanes .
+                    var rt0 = Ssse3.Shuffle(source0.AsByte(), indices).AsUInt16();
+                    result1 = Ssse3.Shuffle(source1.AsByte(), indices).AsUInt16();
+                    return rt0;
+                } else {
+                    return YShuffleG4X2(source0, source1, control, out result1);
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4X2(Vector128{int}, Vector128{int}, ShuffleControlG4, out Vector128{int})"/>
@@ -370,10 +382,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleG4X2(Vector128<uint> source0, Vector128<uint> source1, ShuffleControlG4 control, out Vector128<uint> result1) {
-                Vector128<byte> indices = Vector128Constants.GetYShuffleG4_UInt32_ByteIndices(control).AsByte();
-                var rt0 = Avx2.Shuffle(source0.AsByte(), indices).AsUInt32();
-                result1 = Avx2.Shuffle(source1.AsByte(), indices).AsUInt32();
-                return rt0;
+                if (Ssse3.IsSupported) {
+                    Vector128<byte> indices = Vector128Constants.GetYShuffleG4_UInt32_ByteIndices(control).AsByte();
+                    var rt0 = Ssse3.Shuffle(source0.AsByte(), indices).AsUInt32();
+                    result1 = Ssse3.Shuffle(source1.AsByte(), indices).AsUInt32();
+                    return rt0;
+                } else {
+                    return YShuffleG4X2(source0, source1, control, out result1);
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4X2(Vector128{long}, Vector128{long}, ShuffleControlG4, out Vector128{long})"/>
