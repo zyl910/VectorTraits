@@ -120,7 +120,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleG4_AcceleratedTypes {
                 get {
-                    return TypeCodeFlagsUtil.AllTypes;
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+                    if (Ssse3.IsSupported) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+                    return rt;
                 }
             }
 
@@ -140,8 +144,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{byte}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleG4(Vector128<byte> source, ShuffleControlG4 control) {
-                Vector128<byte> indices = Vector128Constants.GetYShuffleG4_Byte_Indices(control); // It also supports _mm128_shuffle_epi8 for 128-bit lanes .
-                return Avx2.Shuffle(source, indices);
+                if (Ssse3.IsSupported) {
+                    Vector128<byte> indices = Vector128Constants.GetYShuffleG4_Byte_Indices(control); // It also supports _mm128_shuffle_epi8 for 128-bit lanes .
+                    return Ssse3.Shuffle(source, indices);
+                } else {
+                    return YShuffleG4(source, control);
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{short}, ShuffleControlG4)"/>
@@ -154,8 +162,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleG4(Vector128<ushort> source, ShuffleControlG4 control) {
-                Vector128<byte> indices = Vector128Constants.GetYShuffleG4_UInt16_ByteIndices(control).AsByte(); // It also supports _mm128_shuffle_epi8 for 128-bit lanes .
-                return Avx2.Shuffle(source.AsByte(), indices).AsUInt16();
+                if (Ssse3.IsSupported) {
+                    Vector128<byte> indices = Vector128Constants.GetYShuffleG4_UInt16_ByteIndices(control).AsByte(); // It also supports _mm128_shuffle_epi8 for 128-bit lanes .
+                    return Ssse3.Shuffle(source.AsByte(), indices).AsUInt16();
+                } else {
+                    return YShuffleG4(source, control);
+                }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{int}, ShuffleControlG4)"/>
@@ -175,19 +187,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleG4_Byte(Vector128<uint> source, ShuffleControlG4 control) {
-                Vector128<byte> indices = Vector128Constants.GetYShuffleG4_UInt32_ByteIndices(control).AsByte(); // It also supports _mm128_shuffle_epi8 for 128-bit lanes .
-                return Avx2.Shuffle(source.AsByte(), indices).AsUInt32(); // _mm128_shuffle_epi8
+                if (Ssse3.IsSupported) {
+                    Vector128<byte> indices = Vector128Constants.GetYShuffleG4_UInt32_ByteIndices(control).AsByte(); // It also supports _mm128_shuffle_epi8 for 128-bit lanes .
+                    return Ssse3.Shuffle(source.AsByte(), indices).AsUInt32(); // _mm128_shuffle_epi8
+                } else {
+                    return YShuffleG4(source, control);
+                }
             }
-
-#if !REDUCE_MEMORY_USAGE
-            /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{uint}, ShuffleControlG4)"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<uint> YShuffleG4_UInt32(Vector128<uint> source, ShuffleControlG4 control) {
-                Vector128<int> indices = Vector128Constants.GetYShuffleG4_UInt32_Indices(control).AsInt32(); // It also supports _mm128_permutevar_ps for 128-bit lanes .
-                return Avx.PermuteVar(source.AsSingle(), indices).AsUInt32(); // _mm128_permutevar_ps
-            }
-#endif // !REDUCE_MEMORY_USAGE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4_Const(Vector128{float}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -263,33 +269,33 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4_Const(Vector128{short}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YShuffleG4_Const_Imm(Vector128<short> source, [ConstantExpected] ShuffleControlG4 control) {
-                return Avx2.ShuffleHigh(Avx2.ShuffleLow(source, (byte)control), (byte)control);
+                return Sse2.ShuffleHigh(Sse2.ShuffleLow(source, (byte)control), (byte)control);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4_Const(Vector128{ushort}, ShuffleControlG4)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleG4_Const_Imm(Vector128<ushort> source, [ConstantExpected] ShuffleControlG4 control) {
-                return Avx2.ShuffleHigh(Avx2.ShuffleLow(source, (byte)control), (byte)control);
+                return Sse2.ShuffleHigh(Sse2.ShuffleLow(source, (byte)control), (byte)control);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4_Const(Vector128{int}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YShuffleG4_Const_Imm(Vector128<int> source, [ConstantExpected] ShuffleControlG4 control) {
-                return Avx2.Shuffle(source, (byte)control);
+                return Sse2.Shuffle(source, (byte)control);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4_Const(Vector128{int}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YShuffleG4_Const_ImmByte(Vector128<int> source, [ConstantExpected(Max = 255)] byte control) {
-                return Avx2.Shuffle(source, control);
+                return Sse2.Shuffle(source, control);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4_Const(Vector128{uint}, ShuffleControlG4)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleG4_Const_Imm(Vector128<uint> source, [ConstantExpected] ShuffleControlG4 control) {
-                return Avx2.Shuffle(source, (byte)control);
+                return Sse2.Shuffle(source, (byte)control);
             }
 
 
