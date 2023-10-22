@@ -183,7 +183,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned_FullAcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturateUnsigned_FullAcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+                    TypeCodeFlags rt = TypeCodeFlags.Int16;
+                    if (Sse41.IsSupported) {
+                        rt |= TypeCodeFlags.Int32;
+                    }
                     return rt;
                 }
             }
@@ -191,7 +194,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned(Vector128{short}, Vector128{short})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YNarrowSaturateUnsigned(Vector128<short> lower, Vector128<short> upper) {
-                Vector128<byte> rt = Avx2.PackUnsignedSaturate(lower, upper);
+                Vector128<byte> rt = Sse2.PackUnsignedSaturate(lower, upper);
                 return rt;
             }
 
@@ -199,7 +202,16 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YNarrowSaturateUnsigned(Vector128<int> lower, Vector128<int> upper) {
-                Vector128<ushort> rt = Avx2.PackUnsignedSaturate(lower, upper);
+                Vector128<ushort> rt;
+                if (false) {
+                    rt = Sse41.PackUnsignedSaturate(lower, upper);
+                } else {
+                    Vector128<int> amin = Vector128<int>.Zero;
+                    Vector128<int> amax = Vector128.Create((int)ushort.MaxValue);
+                    Vector128<uint> l = YClamp(lower, amin, amax).AsUInt32();
+                    Vector128<uint> u = YClamp(upper, amin, amax).AsUInt32();
+                    rt = Narrow(l, u);
+                }
                 return rt;
             }
 
