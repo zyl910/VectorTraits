@@ -203,7 +203,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YNarrowSaturateUnsigned(Vector128<int> lower, Vector128<int> upper) {
                 Vector128<ushort> rt;
-                if (false) {
+                if (Sse41.IsSupported) {
                     rt = Sse41.PackUnsignedSaturate(lower, upper);
                 } else {
                     Vector128<int> amin = Vector128<int>.Zero;
@@ -238,13 +238,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YRoundToEven(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YRoundToEven(Vector128<float> value) {
-                return Avx.RoundToNearestInteger(value);
+                return Sse41.RoundToNearestInteger(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YRoundToEven(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YRoundToEven(Vector128<double> value) {
-                return Avx.RoundToNearestInteger(value);
+                return Sse41.RoundToNearestInteger(value);
             }
 
 
@@ -259,13 +259,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YRoundToZero(Vector128<float> value) {
-                return Avx.RoundToZero(value);
+                return Sse41.RoundToZero(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YRoundToZero(Vector128<double> value) {
-                return Avx.RoundToZero(value);
+                return Sse41.RoundToZero(value);
             }
 
 
