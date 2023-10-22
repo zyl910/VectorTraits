@@ -32,7 +32,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #endif // NETCOREAPP3_0_OR_GREATER
 
         /// <summary>
-        /// <see cref="Vector128{T}"/> traits.Statics - Avx2.
+        /// <see cref="Vector128{T}"/> traits.Statics - Sse.
         /// </summary>
         public static partial class Statics {
 

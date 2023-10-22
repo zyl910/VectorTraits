@@ -52,7 +52,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     return Ssse3.Abs(value).AsSByte();
                 } else {
                     Vector128<sbyte> mask = Sse2.CompareGreaterThan(Vector128<sbyte>.Zero, value); // 0>value => value<0
-                    Vector128<sbyte> rt = Sse2.Subtract(Avx2.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
+                    Vector128<sbyte> rt = Sse2.Subtract(Sse2.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
                     return rt;
                 }
             }
@@ -64,7 +64,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     return Ssse3.Abs(value).AsInt16();
                 } else {
                     Vector128<short> mask = Sse2.CompareGreaterThan(Vector128<short>.Zero, value); // 0>value => value<0
-                    Vector128<short> rt = Sse2.Subtract(Avx2.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
+                    Vector128<short> rt = Sse2.Subtract(Sse2.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
                     return rt;
                 }
             }
@@ -76,7 +76,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     return Ssse3.Abs(value).AsInt32();
                 } else {
                     Vector128<int> mask = Sse2.CompareGreaterThan(Vector128<int>.Zero, value); // 0>value => value<0
-                    Vector128<int> rt = Sse2.Subtract(Avx2.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
+                    Vector128<int> rt = Sse2.Subtract(Sse2.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
                     return rt;
                 }
             }
@@ -87,7 +87,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 if (Sse42.IsSupported) {
                     // If an integer value is positive or zero, no action is required. Otherwise complement and add 1.
                     Vector128<long> mask = Sse42.CompareGreaterThan(Vector128<long>.Zero, value); // 0>value => value<0
-                    Vector128<long> rt = Sse2.Subtract(Avx2.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
+                    Vector128<long> rt = Sse2.Subtract(Sse2.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
                     return rt;
                 } else {
                     return SuperStatics.Abs(value);
@@ -177,14 +177,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.AndNot{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> AndNot<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-                // __m128i _mm128_andnot_si128 (__m128i a, __m128i b)
-                // #include <immintrin.h>
-                // Instruction: vpandn ymm, ymm, ymm
-                // CPUID Flags: AVX2
+                // __m128i _mm_andnot_si128 (__m128i a, __m128i b)
+                // #include <emmintrin.h>
+                // Instruction: pandn xmm, xmm
+                // CPUID Flags: SSE2
                 // Description
                 // Compute the bitwise NOT of 128 bits (representing integer data) in a and then AND with b, and store the result in dst.
                 // Operation
-                // dst[255:0] := ((NOT a[255:0]) AND b[255:0])
+                // dst[127:0] := ((NOT a[127:0]) AND b[127:0])
                 return Sse2.AndNot(right.AsUInt64(), left.AsUInt64()).As<ulong, T>();
             }
 

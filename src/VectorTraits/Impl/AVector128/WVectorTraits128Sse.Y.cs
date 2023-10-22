@@ -100,7 +100,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate_FullAcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_FullAcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.UInt16;
+                    if (Sse41.IsSupported) {
+                        rt |= TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    }
                     return rt;
                 }
             }
@@ -109,7 +112,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YNarrowSaturate(Vector128<short> lower, Vector128<short> upper) {
-                Vector128<sbyte> rt = Avx2.PackSignedSaturate(lower, upper);
+                Vector128<sbyte> rt = Sse2.PackSignedSaturate(lower, upper);
                 return rt;
             }
 
@@ -119,14 +122,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<byte> YNarrowSaturate(Vector128<ushort> lower, Vector128<ushort> upper) {
                 // Vector128<ushort> amax = Vector128s<ushort>.VMaxByte;
                 Vector128<ushort> amax = Vector128.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
-                Vector128<byte> rt = Avx2.PackUnsignedSaturate(Avx2.Min(lower, amax).AsInt16(), Avx2.Min(upper, amax).AsInt16());
+                Vector128<byte> rt = Sse2.PackUnsignedSaturate(Min(lower, amax).AsInt16(), Min(upper, amax).AsInt16());
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate(Vector128{int}, Vector128{int})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YNarrowSaturate(Vector128<int> lower, Vector128<int> upper) {
-                Vector128<short> rt = Avx2.PackSignedSaturate(lower, upper);
+                Vector128<short> rt = Sse2.PackSignedSaturate(lower, upper);
                 return rt;
             }
 
@@ -136,7 +139,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ushort> YNarrowSaturate(Vector128<uint> lower, Vector128<uint> upper) {
                 //Vector128<uint> amax = Vector128s<uint>.VMaxUInt16;
                 Vector128<uint> amax = Vector128.Create((uint)ushort.MaxValue); // .NET5+ has better performance .
-                Vector128<ushort> rt = Avx2.PackUnsignedSaturate(Avx2.Min(lower, amax).AsInt32(), Avx2.Min(upper, amax).AsInt32());
+                Vector128<uint> l = Min(lower, amax);
+                Vector128<uint> u = Min(upper, amax);
+                Vector128<ushort> rt;
+                if (Sse41.IsSupported) {
+                    rt = Sse41.PackUnsignedSaturate(l.AsInt32(), u.AsInt32());
+                } else {
+                    rt = Narrow(l, u);
+                }
                 return rt;
             }
 
