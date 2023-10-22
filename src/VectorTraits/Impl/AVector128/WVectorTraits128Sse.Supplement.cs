@@ -267,10 +267,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan_AcceleratedTypes"/>
             public static TypeCodeFlags GreaterThan_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
-                    if (Sse42.IsSupported) {
-                        rt |= TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-                    }
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
                     return rt;
                 }
             }
@@ -297,8 +294,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> GreaterThan(Vector128<byte> left, Vector128<byte> right) {
-                //Vector128<sbyte> mid = Vector128s<sbyte>.MinValue;
-                Vector128<sbyte> mid = Vector128.Create(sbyte.MinValue); // .NET5+ has better performance .
+                Vector128<sbyte> mid = Vector128.Create(sbyte.MinValue);
                 Vector128<sbyte> left2 = Sse2.Xor(left.AsSByte(), mid);
                 Vector128<sbyte> right2 = Sse2.Xor(right.AsSByte(), mid);
                 Vector128<sbyte> mask = Sse2.CompareGreaterThan(left2, right2);
@@ -315,8 +311,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> GreaterThan(Vector128<ushort> left, Vector128<ushort> right) {
-                //Vector128<short> mid = Vector128s<short>.MinValue;
-                Vector128<short> mid = Vector128.Create(short.MinValue); // .NET5+ has better performance .
+                Vector128<short> mid = Vector128.Create(short.MinValue);
                 Vector128<short> left2 = Sse2.Xor(left.AsInt16(), mid);
                 Vector128<short> right2 = Sse2.Xor(right.AsInt16(), mid);
                 Vector128<short> mask = Sse2.CompareGreaterThan(left2, right2);
@@ -333,8 +328,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> GreaterThan(Vector128<uint> left, Vector128<uint> right) {
-                //Vector128<int> mid = Vector128s<int>.MinValue;
-                Vector128<int> mid = Vector128.Create(int.MinValue); // .NET5+ has better performance .
+                Vector128<int> mid = Vector128.Create(int.MinValue);
                 Vector128<int> left2 = Sse2.Xor(left.AsInt32(), mid);
                 Vector128<int> right2 = Sse2.Xor(right.AsInt32(), mid);
                 Vector128<int> mask = Sse2.CompareGreaterThan(left2, right2);
@@ -348,7 +342,17 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     Vector128<long> mask = Sse42.CompareGreaterThan(left, right);
                     return mask;
                 } else {
-                    return SuperStatics.GreaterThan(left, right);
+                    // 'a > b' is '(a.H > b.H) || ((a.H == b.H) && (a.L u> b.L))'
+                    Vector128<int> mid = Vector128.Create(int.MinValue, 0, int.MinValue, 0);
+                    Vector128<int> maskEqual = Sse2.CompareEqual(left.AsInt32(), right.AsInt32());
+                    Vector128<int> left2 = Sse2.Xor(left.AsInt32(), mid);
+                    Vector128<int> right2 = Sse2.Xor(right.AsInt32(), mid);
+                    Vector128<int> maskGreater = Sse2.CompareGreaterThan(left2, right2).AsInt32(); // The high is signed greater then. The low is unsigned greater then.
+                    Vector128<int> mask2 = Sse2.And(maskEqual, Sse2.ShiftLeftLogical(maskGreater.AsInt64(), 32).AsInt32()); // High items is `((a.H == b.H) && (a.L u> b.L))`.
+                    Vector128<int> mask = Sse2.Or(maskGreater, mask2); // High items is `a > b`.
+                    mask = Sse2.Shuffle(mask, (byte)ShuffleControlG4.YYWW); // Copy high to low.
+                    return mask.AsInt64();
+                    //return SuperStatics.GreaterThan(left, right);
                 }
             }
 
@@ -357,14 +361,23 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> GreaterThan(Vector128<ulong> left, Vector128<ulong> right) {
                 if (Sse42.IsSupported) {
-                    //Vector128<long> mid = Vector128s<long>.MinValue;
                     Vector128<long> mid = Vector128Constants.Int64_MinValue;
-                    Vector128<long> left2 = Sse2.Add(left.AsInt64(), mid);
-                    Vector128<long> right2 = Sse2.Add(right.AsInt64(), mid);
+                    Vector128<long> left2 = Sse2.Xor(left.AsInt64(), mid);
+                    Vector128<long> right2 = Sse2.Xor(right.AsInt64(), mid);
                     Vector128<long> mask = Sse42.CompareGreaterThan(left2, right2);
                     return mask.AsUInt64();
                 } else {
-                    return SuperStatics.GreaterThan(left, right);
+                    // 'a u> b' is '(a.H u> b.H) || ((a.H == b.H) && (a.L u> b.L))'
+                    Vector128<int> mid = Vector128.Create(int.MinValue);
+                    Vector128<uint> maskEqual = Sse2.CompareEqual(left.AsUInt32(), right.AsUInt32());
+                    Vector128<int> left2 = Sse2.Xor(left.AsInt32(), mid);
+                    Vector128<int> right2 = Sse2.Xor(right.AsInt32(), mid);
+                    Vector128<uint> maskGreater = Sse2.CompareGreaterThan(left2, right2).AsUInt32(); // `u>` is Unsigned greater then.
+                    Vector128<uint> mask2 = Sse2.And(maskEqual, Sse2.ShiftLeftLogical(maskGreater.AsUInt64(), 32).AsUInt32()); // High items is `((a.H == b.H) && (a.L u> b.L))`.
+                    Vector128<uint> mask = Sse2.Or(maskGreater, mask2); // High items is `a u> b`.
+                    mask = Sse2.Shuffle(mask, (byte)ShuffleControlG4.YYWW); // Copy high to low.
+                    return mask.AsUInt64();
+                    //return SuperStatics.GreaterThan(left, right);
                 }
             }
 
