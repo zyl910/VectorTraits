@@ -79,6 +79,25 @@ namespace Zyl.VectorTraits.Impl.AVector {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToDouble_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> ConvertToDouble(Vector<long> value) {
+                return WStatics.ConvertToDouble(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> ConvertToDouble(Vector<ulong> value) {
+                return WStatics.ConvertToDouble(value.AsVector128()).AsVector();
+            }
 
 #endif // NETCOREAPP3_0_OR_GREATER
         }

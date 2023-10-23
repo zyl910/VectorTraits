@@ -118,6 +118,58 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if NETCOREAPP3_0_OR_GREATER
 
 
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble(Vector128<long> value) {
+                return ConvertToDouble_Bcl(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Bcl(Vector128<long> value) {
+                // From: src/libraries/System.Private.CoreLib/src/System/Runtime/Intrinsics/Vector128.cs
+                // Based on __m256d int64_to_double_fast_precise(const __m256i v)
+                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
+                Vector128<int> lowerBits;
+                lowerBits = value.AsInt32();
+                lowerBits = Avx2.Blend(lowerBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow52).AsInt32(), 0b1010); // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)
+                Vector128<long> upperBits = Sse2.ShiftRightLogical(value, 32);                                               // Extract the 32 most significant bits of vector
+                upperBits = Sse2.Xor(upperBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow84_2Pow63).AsInt64());        // Flip the msb of upperBits and blend with the bit representation of double(2^84 + 2^63)
+                Vector128<double> result = Sse2.Subtract(upperBits.AsDouble(), Vector128.Create(ScalarConstants.DoubleVal_2Pow84_2Pow63_2Pow52)); // Compute in double precision: (upper - (2^84 + 2^63 + 2^52)) + lower
+                return Sse2.Add(result, lowerBits.AsDouble());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble(Vector128<ulong> value) {
+                return ConvertToDouble_Bcl(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Bcl(Vector128<ulong> value) {
+                // From: src/libraries/System.Private.CoreLib/src/System/Runtime/Intrinsics/Vector128.cs
+                // Based on __m256d int64_to_double_fast_precise(const __m256i v)
+                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
+                Vector128<int> lowerBits;
+                lowerBits = value.AsInt32();
+                lowerBits = Avx2.Blend(lowerBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow52).AsInt32(), 0b1010); // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)
+                Vector128<ulong> upperBits = Sse2.ShiftRightLogical(value, 32);                                               // Extract the 32 most significant bits of vector
+                upperBits = Sse2.Xor(upperBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow84).AsUInt64());               // Blend upperBits with the bit representation of double(2^84)
+                Vector128<double> result = Sse2.Subtract(upperBits.AsDouble(), Vector128.Create(ScalarConstants.DoubleVal_2Pow84_2Pow52)); // Compute in double precision: (upper - (2^84 + 2^52)) + lower
+                return Sse2.Add(result, lowerBits.AsDouble());
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 
