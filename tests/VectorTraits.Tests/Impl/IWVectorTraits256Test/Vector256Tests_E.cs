@@ -110,7 +110,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         Vector256<T> dst = instance.Equals((dynamic)left, (dynamic)right);
-                        if (allowLog || (showNotEquals && !expected.AsByte().Equals(dst.AsByte()))) {
+                        bool showLog = showNotEquals && !expected.AsByte().Equals(dst.AsByte());
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (allowLog || showLog) {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
                         } else {
                             Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");

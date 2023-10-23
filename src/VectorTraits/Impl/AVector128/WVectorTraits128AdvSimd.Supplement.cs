@@ -227,6 +227,98 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Equals_AcceleratedTypes"/>
+            public static TypeCodeFlags Equals_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Equals(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Equals(Vector128<float> left, Vector128<float> right) {
+                return AdvSimd.CompareEqual(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Equals(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Equals(Vector128<double> left, Vector128<double> right) {
+                //Vector128<long> mask = AdvSimd.CompareEquals(left, right);
+                long m0 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 0) == AdvSimd.Extract(right, 0));
+                long m1 = BitMath.ToInt32Mask(AdvSimd.Extract(left, 1) == AdvSimd.Extract(right, 1));
+                Vector128<long> mask = Vector128.Create(m0, m1);
+                return mask.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Equals(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Equals(Vector128<sbyte> left, Vector128<sbyte> right) {
+                return AdvSimd.CompareEqual(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Equals(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> Equals(Vector128<byte> left, Vector128<byte> right) {
+                return AdvSimd.CompareEqual(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Equals(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Equals(Vector128<short> left, Vector128<short> right) {
+                return AdvSimd.CompareEqual(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Equals(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> Equals(Vector128<ushort> left, Vector128<ushort> right) {
+                return AdvSimd.CompareEqual(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Equals(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Equals(Vector128<int> left, Vector128<int> right) {
+                return AdvSimd.CompareEqual(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Equals(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> Equals(Vector128<uint> left, Vector128<uint> right) {
+                return AdvSimd.CompareEqual(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Equals(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Equals(Vector128<long> left, Vector128<long> right) {
+                return Equals(left.AsUInt64(), right.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Equals(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> Equals(Vector128<ulong> left, Vector128<ulong> right) {
+                return Equals_Half(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Equals(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> Equals_Half(Vector128<ulong> left, Vector128<ulong> right) {
+                const byte N = 32; // sizeof(uint);
+                // rt = (a == b)
+                //    = (a1<<N + a0) == (b1<<N + b1)
+                //    = (a1==b1) && (a0==b0)
+                Vector128<ulong> rawEqual = AdvSimd.CompareEqual(left.AsUInt32(), right.AsUInt32()).AsUInt64();
+                Vector128<ulong> swapEqual = AdvSimd.Or(
+                    AdvSimd.ShiftLeftLogical(rawEqual, N),
+                    AdvSimd.ShiftRightLogical(rawEqual, N));
+                Vector128<ulong> rt = AdvSimd.And(rawEqual, swapEqual);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan_AcceleratedTypes"/>
             public static TypeCodeFlags GreaterThan_AcceleratedTypes {
                 get {

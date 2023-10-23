@@ -72,6 +72,34 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Equals_AcceleratedTypes"/>
+            public static TypeCodeFlags Equals_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Double | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64
+                        | SuperStatics.Equals_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Equals(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Equals(Vector128<double> left, Vector128<double> right) {
+                return AdvSimd.Arm64.CompareEqual(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Equals(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Equals(Vector128<long> left, Vector128<long> right) {
+                return AdvSimd.Arm64.CompareEqual(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Equals(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> Equals(Vector128<ulong> left, Vector128<ulong> right) {
+                return AdvSimd.Arm64.CompareEqual(left, right);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan_AcceleratedTypes"/>
             public static TypeCodeFlags GreaterThan_AcceleratedTypes {
                 get {
