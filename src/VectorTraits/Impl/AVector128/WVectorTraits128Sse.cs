@@ -306,7 +306,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
                 get {
                     //TypeCodeFlags rt = SuperStatics.ConvertToInt64_AcceleratedTypes;
-                    TypeCodeFlags rt = TypeCodeFlags.Double;
+                    TypeCodeFlags rt = TypeCodeFlags.None;
                     return rt;
                 }
             }
@@ -315,15 +315,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64(Vector128<double> value) {
                 // return SuperStatics.ConvertToInt64(value);
-                // return ConvertToInt64_HwScalar(value);
-                return ConvertToInt64_ShiftVarFix(value);
+                return ConvertToInt64_HwScalar(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64_HwScalar(Vector128<double> value) {
                 if (Sse2.X64.IsSupported) {
-                    // Same 256bit: Vector256<double> valueOdd = Avx2.Permute4x64(value, (byte)ShuffleControlG4.YYWW);
                     Vector128<double> valueOdd = Sse2.Shuffle(value, value, (byte)ShuffleControlG2.YY);
                     long v_0 = Sse2.X64.ConvertToInt64WithTruncation(value);
                     long v_1 = Sse2.X64.ConvertToInt64WithTruncation(valueOdd);
@@ -332,36 +330,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 } else {
                     return SuperStatics.ConvertToInt64(value);
                 }
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64(Vector128{double})"/>
-            /// <remarks>Input range is all number. Out of range results is `-pow(2,63)`.</remarks>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<long> ConvertToInt64_ShiftVarFix(Vector128<double> value) {
-                Vector128<long> mat_mask = Vector128.Create(ScalarConstants.DoubleVal_MantissaMask).AsInt64(); // Element: 0x000FFFFF_FFFFFFFF
-                Vector128<long> hidden_1 = Vector128.Create(ScalarConstants.IntDbl_2Pow52).AsInt64(); // Element: 0x00100000_00000000
-                Vector128<long> exp_bias = Vector128.Create(ScalarConstants.IntDbl_DoubleBias52).AsInt64(); // Element: ScalarConstants.Double_ExponentBias + ScalarConstants.Double_MantissaBits =  = 1023 + 52 = 1075 = 0x433
-                Vector128<long> zero = Vector128<long>.Zero;
-                Vector128<long> exp_max = Vector128.Create(ScalarConstants.IntDbl_DoubleBias62).AsInt64(); // Element: ScalarConstants.Double_ExponentBias + 63-1 = 1023 + 62 = 1085 = 0x43D. Because `long.MaxValue` is `pow(2,63)-1`.
-                Vector128<long> defValue = Vector128Constants.Double_SignMask.AsInt64(); // Out of range results is `-pow(2,63)`
-                //majik operations										  //Latency, Throughput(references IceLake)
-                Vector128<long> bin = value.AsInt64();
-                Vector128<long> negative = Sse42.CompareGreaterThan(zero, bin);                     //3,1. negative[i] = (0 < bin[i])
-                Vector128<long> mat = Sse2.And(bin, mat_mask);                                     //1,1/3. Get mantissa field.
-                mat = Sse2.Or(mat, hidden_1);                                                      //1,1/3. Convert mantissa field to integer.
-                Vector128<long> exp_enc = Sse2.ShiftLeftLogical(bin, 1);                           //1,1/2. Remove sign bit.
-                exp_enc = Sse2.ShiftRightLogical(exp_enc, 1 + ScalarConstants.Double_MantissaBits);//1,1/2. (bin[i]<<1)>>(1+52) = abs_double(bin[i])>>52
-                Vector128<long> exp_frac = Sse2.Subtract(exp_enc, exp_bias);                       //1,1/3. Convert exponent field to shift amount .
-                Vector128<long> exp_frac_n = Sse2.Subtract(zero, exp_frac);                        //1,1/3. exp_frac_n[i] = -exp_frac[i]
-                Vector128<long> exp_is_end = Sse42.CompareGreaterThan(exp_enc, exp_max);            //3,1.  exp_is_end[i] = (exp_enc[i] > exp_max[i]) .
-                Vector128<long> msl = Avx2.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt64());     //1,1/2. msl[i] = mat << exp_frac[i]
-                Vector128<long> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64());  //1,1/2. msr[i] = mat >> exp_frac_n[i] = mat >> (-exp_frac[i])
-                Vector128<long> exp_is_pos = Sse42.CompareGreaterThan(exp_frac, zero);              //3,1. The mask of exp_frac is a positive
-                Vector128<long> result_abs = Sse41.BlendVariable(msr, msl, exp_is_pos);             //2,1. result_abs[i] = (exp_is_pos[i])?msl[i]:msl[i]
-                result_abs = Sse41.BlendVariable(result_abs, defValue, exp_is_end);                 //2,1.  result_abs[i] = (exp_is_end[i])?defValue[i]:result_abs[i]
-                Vector128<long> result = Sse2.Xor(result_abs, negative);                           //1,1/3. ~x = xor(x, -1)
-                result = Sse2.Subtract(result, negative);                                          //1,1/3 -(x) = (~x)+1 = (~x) - (-1)
-                return result;  //total latency: 23, total throughput CPI: 9
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>

@@ -99,6 +99,20 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.ConvertToDouble(value.AsVector128()).AsVector();
             }
 
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToInt64_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToInt64(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ConvertToInt64(Vector<double> value) {
+                return WStatics.ConvertToInt64(value.AsVector128()).AsVector();
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 
