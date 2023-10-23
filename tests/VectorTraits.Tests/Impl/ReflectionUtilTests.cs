@@ -24,6 +24,8 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 typeof(VectorTraits128Base.Statics), typeof(VectorTraits128Abstract),
                 typeof(VectorTraits128AdvSimd.Statics), typeof(VectorTraits128AdvSimdAbstract),
                 typeof(VectorTraits128AdvSimdB64.Statics), typeof(VectorTraits128AdvSimdB64Abstract),
+                typeof(VectorTraits128Avx2.Statics), typeof(VectorTraits128Avx2Abstract),
+                typeof(VectorTraits128Sse.Statics), typeof(VectorTraits128SseAbstract),
                 typeof(VectorTraits256Base.Statics), typeof(VectorTraits256Abstract),
                 typeof(VectorTraits256Avx2.Statics), typeof(VectorTraits256Avx2Abstract),
             };
@@ -58,6 +60,8 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 typeof(WVectorTraits128Base.Statics), typeof(WVectorTraits128Abstract),
                 typeof(WVectorTraits128AdvSimd.Statics), typeof(WVectorTraits128AdvSimdAbstract),
                 typeof(WVectorTraits128AdvSimdB64.Statics), typeof(WVectorTraits128AdvSimdB64Abstract),
+                typeof(WVectorTraits128Avx2.Statics), typeof(WVectorTraits128Avx2Abstract),
+                typeof(WVectorTraits128Sse.Statics), typeof(WVectorTraits128SseAbstract),
             };
             int totalMissed = 0;
             for (int i = 0; i < types.Length; i += 2) {
@@ -117,6 +121,8 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 // -- 128 --
                 typeof(WVectorTraits128AdvSimd.Statics), typeof(VectorTraits128AdvSimd.Statics),
                 typeof(WVectorTraits128AdvSimdB64.Statics), typeof(VectorTraits128AdvSimdB64.Statics),
+                typeof(WVectorTraits128Avx2.Statics), typeof(VectorTraits128Avx2.Statics),
+                typeof(WVectorTraits128Sse.Statics), typeof(VectorTraits128Sse.Statics),
                 // -- 256 --
                 typeof(WVectorTraits256Avx2.Statics), typeof(VectorTraits256Avx2.Statics),
             };
