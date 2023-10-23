@@ -812,6 +812,360 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.Equals_AcceleratedTypes"/>
+            public static TypeCodeFlags Equals_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> Equals(Vector256<float> left, Vector256<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Equals(left, right);
+#else
+                return Equals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> Equals(Vector256<double> left, Vector256<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Equals(left, right);
+#else
+                return Equals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> Equals(Vector256<sbyte> left, Vector256<sbyte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Equals(left, right);
+#else
+                return Equals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{byte}, Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> Equals(Vector256<byte> left, Vector256<byte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Equals(left, right);
+#else
+                return Equals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{short}, Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> Equals(Vector256<short> left, Vector256<short> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Equals(left, right);
+#else
+                return Equals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{ushort}, Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> Equals(Vector256<ushort> left, Vector256<ushort> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Equals(left, right);
+#else
+                return Equals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{int}, Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> Equals(Vector256<int> left, Vector256<int> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Equals(left, right);
+#else
+                return Equals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{uint}, Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> Equals(Vector256<uint> left, Vector256<uint> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Equals(left, right);
+#else
+                return Equals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{long}, Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> Equals(Vector256<long> left, Vector256<long> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Equals(left, right);
+#else
+                return Equals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{ulong}, Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> Equals(Vector256<ulong> left, Vector256<ulong> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Equals(left, right);
+#else
+                return Equals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> Equals_Basic(Vector256<float> left, Vector256<float> right) {
+                UnsafeUtil.SkipInit(out Vector256<float> rt);
+                ref int prt = ref Unsafe.As<Vector256<float>, int>(ref rt);
+                ref float pleft = ref Unsafe.As<Vector256<float>, float>(ref left);
+                ref float pright = ref Unsafe.As<Vector256<float>, float>(ref right);
+                prt = BitMath.ToInt32Mask(pleft == pright);
+                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) == Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) == Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) == Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) == Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) == Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) == Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) == Unsafe.Add(ref pright, 7));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> Equals_Basic(Vector256<double> left, Vector256<double> right) {
+                UnsafeUtil.SkipInit(out Vector256<double> rt);
+                ref long prt = ref Unsafe.As<Vector256<double>, long>(ref rt);
+                ref double pleft = ref Unsafe.As<Vector256<double>, double>(ref left);
+                ref double pright = ref Unsafe.As<Vector256<double>, double>(ref right);
+                prt = BitMath.ToInt32Mask(pleft == pright);
+                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) == Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) == Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) == Unsafe.Add(ref pright, 3));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> Equals_Basic(Vector256<sbyte> left, Vector256<sbyte> right) {
+                UnsafeUtil.SkipInit(out Vector256<sbyte> rt);
+                ref sbyte prt = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref rt);
+                ref sbyte pleft = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref left);
+                ref sbyte pright = ref Unsafe.As<Vector256<sbyte>, sbyte>(ref right);
+                prt = (sbyte)BitMath.ToInt32Mask(pleft == pright);
+                Unsafe.Add(ref prt, 1) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) == Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) == Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) == Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) == Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) == Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) == Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) == Unsafe.Add(ref pright, 7));
+                Unsafe.Add(ref prt, 8) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 8) == Unsafe.Add(ref pright, 8));
+                Unsafe.Add(ref prt, 9) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 9) == Unsafe.Add(ref pright, 9));
+                Unsafe.Add(ref prt, 10) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 10) == Unsafe.Add(ref pright, 10));
+                Unsafe.Add(ref prt, 11) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 11) == Unsafe.Add(ref pright, 11));
+                Unsafe.Add(ref prt, 12) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 12) == Unsafe.Add(ref pright, 12));
+                Unsafe.Add(ref prt, 13) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 13) == Unsafe.Add(ref pright, 13));
+                Unsafe.Add(ref prt, 14) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 14) == Unsafe.Add(ref pright, 14));
+                Unsafe.Add(ref prt, 15) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 15) == Unsafe.Add(ref pright, 15));
+                Unsafe.Add(ref prt, 16) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 16) == Unsafe.Add(ref pright, 16));
+                Unsafe.Add(ref prt, 17) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 17) == Unsafe.Add(ref pright, 17));
+                Unsafe.Add(ref prt, 18) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 18) == Unsafe.Add(ref pright, 18));
+                Unsafe.Add(ref prt, 19) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 19) == Unsafe.Add(ref pright, 19));
+                Unsafe.Add(ref prt, 20) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 20) == Unsafe.Add(ref pright, 20));
+                Unsafe.Add(ref prt, 21) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 21) == Unsafe.Add(ref pright, 21));
+                Unsafe.Add(ref prt, 22) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 22) == Unsafe.Add(ref pright, 22));
+                Unsafe.Add(ref prt, 23) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 23) == Unsafe.Add(ref pright, 23));
+                Unsafe.Add(ref prt, 24) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 24) == Unsafe.Add(ref pright, 24));
+                Unsafe.Add(ref prt, 25) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 25) == Unsafe.Add(ref pright, 25));
+                Unsafe.Add(ref prt, 26) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 26) == Unsafe.Add(ref pright, 26));
+                Unsafe.Add(ref prt, 27) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 27) == Unsafe.Add(ref pright, 27));
+                Unsafe.Add(ref prt, 28) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 28) == Unsafe.Add(ref pright, 28));
+                Unsafe.Add(ref prt, 29) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 29) == Unsafe.Add(ref pright, 29));
+                Unsafe.Add(ref prt, 30) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 30) == Unsafe.Add(ref pright, 30));
+                Unsafe.Add(ref prt, 31) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 31) == Unsafe.Add(ref pright, 31));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{byte}, Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> Equals_Basic(Vector256<byte> left, Vector256<byte> right) {
+                UnsafeUtil.SkipInit(out Vector256<byte> rt);
+                ref sbyte prt = ref Unsafe.As<Vector256<byte>, sbyte>(ref rt);
+                ref byte pleft = ref Unsafe.As<Vector256<byte>, byte>(ref left);
+                ref byte pright = ref Unsafe.As<Vector256<byte>, byte>(ref right);
+                prt = (sbyte)BitMath.ToInt32Mask(pleft == pright);
+                Unsafe.Add(ref prt, 1) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) == Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) == Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) == Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) == Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) == Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) == Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) == Unsafe.Add(ref pright, 7));
+                Unsafe.Add(ref prt, 8) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 8) == Unsafe.Add(ref pright, 8));
+                Unsafe.Add(ref prt, 9) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 9) == Unsafe.Add(ref pright, 9));
+                Unsafe.Add(ref prt, 10) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 10) == Unsafe.Add(ref pright, 10));
+                Unsafe.Add(ref prt, 11) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 11) == Unsafe.Add(ref pright, 11));
+                Unsafe.Add(ref prt, 12) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 12) == Unsafe.Add(ref pright, 12));
+                Unsafe.Add(ref prt, 13) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 13) == Unsafe.Add(ref pright, 13));
+                Unsafe.Add(ref prt, 14) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 14) == Unsafe.Add(ref pright, 14));
+                Unsafe.Add(ref prt, 15) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 15) == Unsafe.Add(ref pright, 15));
+                Unsafe.Add(ref prt, 16) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 16) == Unsafe.Add(ref pright, 16));
+                Unsafe.Add(ref prt, 17) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 17) == Unsafe.Add(ref pright, 17));
+                Unsafe.Add(ref prt, 18) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 18) == Unsafe.Add(ref pright, 18));
+                Unsafe.Add(ref prt, 19) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 19) == Unsafe.Add(ref pright, 19));
+                Unsafe.Add(ref prt, 20) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 20) == Unsafe.Add(ref pright, 20));
+                Unsafe.Add(ref prt, 21) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 21) == Unsafe.Add(ref pright, 21));
+                Unsafe.Add(ref prt, 22) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 22) == Unsafe.Add(ref pright, 22));
+                Unsafe.Add(ref prt, 23) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 23) == Unsafe.Add(ref pright, 23));
+                Unsafe.Add(ref prt, 24) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 24) == Unsafe.Add(ref pright, 24));
+                Unsafe.Add(ref prt, 25) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 25) == Unsafe.Add(ref pright, 25));
+                Unsafe.Add(ref prt, 26) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 26) == Unsafe.Add(ref pright, 26));
+                Unsafe.Add(ref prt, 27) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 27) == Unsafe.Add(ref pright, 27));
+                Unsafe.Add(ref prt, 28) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 28) == Unsafe.Add(ref pright, 28));
+                Unsafe.Add(ref prt, 29) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 29) == Unsafe.Add(ref pright, 29));
+                Unsafe.Add(ref prt, 30) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 30) == Unsafe.Add(ref pright, 30));
+                Unsafe.Add(ref prt, 31) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 31) == Unsafe.Add(ref pright, 31));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{short}, Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> Equals_Basic(Vector256<short> left, Vector256<short> right) {
+                UnsafeUtil.SkipInit(out Vector256<short> rt);
+                ref short prt = ref Unsafe.As<Vector256<short>, short>(ref rt);
+                ref short pleft = ref Unsafe.As<Vector256<short>, short>(ref left);
+                ref short pright = ref Unsafe.As<Vector256<short>, short>(ref right);
+                prt = (short)BitMath.ToInt32Mask(pleft == pright);
+                Unsafe.Add(ref prt, 1) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) == Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) == Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) == Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) == Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) == Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) == Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) == Unsafe.Add(ref pright, 7));
+                Unsafe.Add(ref prt, 8) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 8) == Unsafe.Add(ref pright, 8));
+                Unsafe.Add(ref prt, 9) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 9) == Unsafe.Add(ref pright, 9));
+                Unsafe.Add(ref prt, 10) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 10) == Unsafe.Add(ref pright, 10));
+                Unsafe.Add(ref prt, 11) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 11) == Unsafe.Add(ref pright, 11));
+                Unsafe.Add(ref prt, 12) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 12) == Unsafe.Add(ref pright, 12));
+                Unsafe.Add(ref prt, 13) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 13) == Unsafe.Add(ref pright, 13));
+                Unsafe.Add(ref prt, 14) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 14) == Unsafe.Add(ref pright, 14));
+                Unsafe.Add(ref prt, 15) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 15) == Unsafe.Add(ref pright, 15));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{ushort}, Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> Equals_Basic(Vector256<ushort> left, Vector256<ushort> right) {
+                UnsafeUtil.SkipInit(out Vector256<ushort> rt);
+                ref short prt = ref Unsafe.As<Vector256<ushort>, short>(ref rt);
+                ref ushort pleft = ref Unsafe.As<Vector256<ushort>, ushort>(ref left);
+                ref ushort pright = ref Unsafe.As<Vector256<ushort>, ushort>(ref right);
+                prt = (short)BitMath.ToInt32Mask(pleft == pright);
+                Unsafe.Add(ref prt, 1) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) == Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) == Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) == Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) == Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) == Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) == Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) == Unsafe.Add(ref pright, 7));
+                Unsafe.Add(ref prt, 8) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 8) == Unsafe.Add(ref pright, 8));
+                Unsafe.Add(ref prt, 9) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 9) == Unsafe.Add(ref pright, 9));
+                Unsafe.Add(ref prt, 10) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 10) == Unsafe.Add(ref pright, 10));
+                Unsafe.Add(ref prt, 11) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 11) == Unsafe.Add(ref pright, 11));
+                Unsafe.Add(ref prt, 12) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 12) == Unsafe.Add(ref pright, 12));
+                Unsafe.Add(ref prt, 13) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 13) == Unsafe.Add(ref pright, 13));
+                Unsafe.Add(ref prt, 14) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 14) == Unsafe.Add(ref pright, 14));
+                Unsafe.Add(ref prt, 15) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 15) == Unsafe.Add(ref pright, 15));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{int}, Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> Equals_Basic(Vector256<int> left, Vector256<int> right) {
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
+                ref int prt = ref Unsafe.As<Vector256<int>, int>(ref rt);
+                ref int pleft = ref Unsafe.As<Vector256<int>, int>(ref left);
+                ref int pright = ref Unsafe.As<Vector256<int>, int>(ref right);
+                prt = BitMath.ToInt32Mask(pleft == pright);
+                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) == Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) == Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) == Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) == Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) == Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) == Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) == Unsafe.Add(ref pright, 7));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{uint}, Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> Equals_Basic(Vector256<uint> left, Vector256<uint> right) {
+                UnsafeUtil.SkipInit(out Vector256<uint> rt);
+                ref int prt = ref Unsafe.As<Vector256<uint>, int>(ref rt);
+                ref uint pleft = ref Unsafe.As<Vector256<uint>, uint>(ref left);
+                ref uint pright = ref Unsafe.As<Vector256<uint>, uint>(ref right);
+                prt = BitMath.ToInt32Mask(pleft == pright);
+                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) == Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) == Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) == Unsafe.Add(ref pright, 3));
+                Unsafe.Add(ref prt, 4) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) == Unsafe.Add(ref pright, 4));
+                Unsafe.Add(ref prt, 5) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) == Unsafe.Add(ref pright, 5));
+                Unsafe.Add(ref prt, 6) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) == Unsafe.Add(ref pright, 6));
+                Unsafe.Add(ref prt, 7) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) == Unsafe.Add(ref pright, 7));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{long}, Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> Equals_Basic(Vector256<long> left, Vector256<long> right) {
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
+                ref long prt = ref Unsafe.As<Vector256<long>, long>(ref rt);
+                ref long pleft = ref Unsafe.As<Vector256<long>, long>(ref left);
+                ref long pright = ref Unsafe.As<Vector256<long>, long>(ref right);
+                prt = BitMath.ToInt32Mask(pleft == pright);
+                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) == Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) == Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) == Unsafe.Add(ref pright, 3));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals(Vector256{ulong}, Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> Equals_Basic(Vector256<ulong> left, Vector256<ulong> right) {
+                UnsafeUtil.SkipInit(out Vector256<ulong> rt);
+                ref long prt = ref Unsafe.As<Vector256<ulong>, long>(ref rt);
+                ref ulong pleft = ref Unsafe.As<Vector256<ulong>, ulong>(ref left);
+                ref ulong pright = ref Unsafe.As<Vector256<ulong>, ulong>(ref right);
+                prt = BitMath.ToInt32Mask(pleft == pright);
+                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) == Unsafe.Add(ref pright, 1));
+                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) == Unsafe.Add(ref pright, 2));
+                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) == Unsafe.Add(ref pright, 3));
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.GreaterThan_AcceleratedTypes"/>
             public static TypeCodeFlags GreaterThan_AcceleratedTypes {
                 get {

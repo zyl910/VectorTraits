@@ -322,6 +322,123 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Equals</c> (运行 <c>Equals</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Equals(Vector256{byte}, Vector256{byte})"/>
+        TypeCodeFlags Equals_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] == right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="Equals_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<float> Equals(Vector256<float> left, Vector256<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] == right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="Equals_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<double> Equals(Vector256<double> left, Vector256<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] == right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="Equals_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<sbyte> Equals(Vector256<sbyte> left, Vector256<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] == right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="Equals_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<byte> Equals(Vector256<byte> left, Vector256<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] == right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="Equals_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<short> Equals(Vector256<short> left, Vector256<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] == right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="Equals_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<ushort> Equals(Vector256<ushort> left, Vector256<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] == right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="Equals_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<int> Equals(Vector256<int> left, Vector256<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] == right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="Equals_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<uint> Equals(Vector256<uint> left, Vector256<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] == right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="Equals_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<long> Equals(Vector256<long> left, Vector256<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] == right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="Equals_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/> // Since: .NET 7
+        Vector256<ulong> Equals(Vector256<ulong> left, Vector256<ulong> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>GreaterThan</c> (运行 <c>GreaterThan</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="GreaterThan(Vector256{byte}, Vector256{byte})"/>
