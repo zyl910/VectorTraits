@@ -96,6 +96,21 @@ namespace Zyl.VectorTraits.Impl.AVector {
             return Statics.ConvertToUInt32(value);
         }
 
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
+            get {
+                return Statics.ConvertToUInt64_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt64(Vector{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> ConvertToUInt64(Vector<double> value) {
+            return Statics.ConvertToUInt64(value);
+        }
+
 #endif // NETCOREAPP3_0_OR_GREATER
     }
 }

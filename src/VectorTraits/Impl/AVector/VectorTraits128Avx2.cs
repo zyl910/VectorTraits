@@ -128,6 +128,21 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.ConvertToUInt32(value.AsVector128()).AsVector();
             }
 
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToUInt64_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt64(Vector{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> ConvertToUInt64(Vector<double> value) {
+                return WStatics.ConvertToUInt64(value.AsVector128()).AsVector();
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 

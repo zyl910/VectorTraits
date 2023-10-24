@@ -510,8 +510,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
                 get {
-                    //return SuperStatics.ConvertToUInt64_AcceleratedTypes;
-                    return TypeCodeFlags.Double;
+                    return SuperStatics.ConvertToUInt64_AcceleratedTypes;
                 }
             }
 
@@ -519,55 +518,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ConvertToUInt64(Vector128<double> value) {
-                //return SuperStatics.ConvertToUInt64(value);
-                return ConvertToUInt64_ShiftVar(value);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64(Vector128{double})"/>
-            /// <remarks>Input range is `[0, pow(2,64))`. Out of range results in `0`.</remarks>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ulong> ConvertToUInt64_ShiftVar(Vector128<double> value) {
-                // From Veloctor . MIT
-                // https://github.com/Veloctor/Int128/blob/main/include/AVX2Ext.h
-                // //  Only works for inputs in full uint64 range, otherwise result undefined
-                // inline __m128i double_to_uint64_fast(const __m128d v) //9 instructions
-                // {
-                // 	//constants
-                // 	__m128i mat_mask = _mm128_set1_epi64x(0x0FFFFFFFFFFFFF);	//0_00000000000_1111111111111111111111111111111111111111111111111111
-                // 	__m128i hidden_1 = _mm128_set1_epi64x(0x10000000000000);	//0_00000000001_0000000000000000000000000000000000000000000000000000
-                // 	__m128i exp_bias = _mm128_set1_epi64x(1023LL + 52);			//0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
-                // 	#define zero128 _mm128_setzero_si128()
-                // 	//majik operations
-                // 	__m128i bin = _mm128_castpd_si128(v);
-                // 	__m128i mat = _mm128_and_si128(bin, mat_mask);					//1,1/3
-                // 	mat = _mm128_or_si128(mat, hidden_1);							//1,1/3
-                // 	__m128i exp_enc = _mm128_srli_epi64(bin, 52);					//1,1/2
-                // 	__m128i exp_frac = _mm128_sub_epi64(exp_enc, exp_bias);			//1,1/3
-                // 	__m128i msl = _mm128_sllv_epi64(mat, exp_frac);					//1,1/2
-                // 	__m128i exp_frac_n = _mm128_sub_epi64(zero128, exp_frac);		//1,1/3
-                // 	__m128i msr = _mm128_srlv_epi64(mat, exp_frac_n);				//1,1/2
-                // 	__m128i exp_is_pos = _mm128_cmpgt_epi64(exp_frac, zero128);		//3,1
-                // 	__m128i result_abs = _mm128_blendv_epi8(msr, msl, exp_is_pos);	//2,1
-                // 	return result_abs;	//total latency: 12, total throughput CPI: 4.8
-                // }
-                //constants
-                Vector128<long> mat_mask = Vector128.Create(ScalarConstants.DoubleVal_MantissaMask).AsInt64();  //0_00000000000_1111111111111111111111111111111111111111111111111111
-                Vector128<long> hidden_1 = Vector128.Create(ScalarConstants.IntDbl_2Pow52).AsInt64();  //0_00000000001_0000000000000000000000000000000000000000000000000000 // Int64: 2^52
-                Vector128<long> exp_bias = Vector128.Create(ScalarConstants.IntDbl_DoubleBias52).AsInt64(); //0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
-                Vector128<long> zero = Vector128<long>.Zero;
-                //majik operations										  //Latency, Throughput(references IceLake)
-                Vector128<long> bin = value.AsInt64();
-                Vector128<long> mat = Sse2.And(bin, mat_mask);                                    //1,1/3
-                mat = Sse2.Or(mat, hidden_1);                                                     //1,1/3
-                Vector128<long> exp_enc = Sse2.ShiftRightLogical(bin, 52);                        //1,1/2
-                Vector128<long> exp_frac = Sse2.Subtract(exp_enc, exp_bias);                      //1,1/3
-                Vector128<long> msl = Avx2.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt64());    //1,1/2
-                Vector128<long> exp_frac_n = Sse2.Subtract(zero, exp_frac);                       //1,1/3
-                Vector128<long> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64()); //1,1/2
-                Vector128<long> exp_is_pos = Sse42.CompareGreaterThan(exp_frac, zero);             //3,1
-                Vector128<long> result_abs = Sse41.BlendVariable(msr, msl, exp_is_pos);            //2,1
-                return result_abs.AsUInt64();	//total latency: 12, total throughput CPI: 4.8
+                return SuperStatics.ConvertToUInt64(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52(Vector128{double})"/>

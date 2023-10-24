@@ -266,6 +266,54 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
+                get {
+                    //return SuperStatics.ConvertToUInt64_AcceleratedTypes;
+                    TypeCodeFlags rt = SuperStatics.ConvertToUInt64_AcceleratedTypes;
+                    if (Sse41.IsSupported && Sse42.IsSupported) {
+                        rt |= TypeCodeFlags.Double;
+                    }
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64(Vector128{double})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ConvertToUInt64(Vector128<double> value) {
+                if (Sse41.IsSupported && Sse42.IsSupported) {
+                    return ConvertToUInt64_ShiftVar(value);
+                } else {
+                    return SuperStatics.ConvertToUInt64(value);
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64(Vector128{double})"/>
+            /// <remarks>Input range is `[0, pow(2,64))`. Out of range results in `0`.</remarks>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ConvertToUInt64_ShiftVar(Vector128<double> value) {
+                // See Avx2 ConvertToUInt64_ShiftVar.
+                //constants
+                Vector128<long> mat_mask = Vector128.Create(ScalarConstants.DoubleVal_MantissaMask).AsInt64();  //0_00000000000_1111111111111111111111111111111111111111111111111111
+                Vector128<long> hidden_1 = Vector128.Create(ScalarConstants.IntDbl_2Pow52).AsInt64();  //0_00000000001_0000000000000000000000000000000000000000000000000000 // Int64: 2^52
+                Vector128<long> exp_bias = Vector128.Create(ScalarConstants.IntDbl_DoubleBias52).AsInt64(); //0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
+                Vector128<long> zero = Vector128<long>.Zero;
+                //majik operations										  //Latency, Throughput(references IceLake)
+                Vector128<long> bin = value.AsInt64();
+                Vector128<long> mat = Sse2.And(bin, mat_mask);                                    //1,1/3
+                mat = Sse2.Or(mat, hidden_1);                                                     //1,1/3
+                Vector128<long> exp_enc = Sse2.ShiftRightLogical(bin, 52);                        //1,1/2
+                Vector128<long> exp_frac = Sse2.Subtract(exp_enc, exp_bias);                      //1,1/3
+                Vector128<long> msl = Avx2.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt64());    //1,1/2
+                Vector128<long> exp_frac_n = Sse2.Subtract(zero, exp_frac);                       //1,1/3
+                Vector128<long> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64()); //1,1/2
+                Vector128<long> exp_is_pos = Sse42.CompareGreaterThan(exp_frac, zero);             //3,1
+                Vector128<long> result_abs = Sse41.BlendVariable(msr, msl, exp_is_pos);            //2,1
+                return result_abs.AsUInt64();	//total latency: 12, total throughput CPI: 4.8
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 
