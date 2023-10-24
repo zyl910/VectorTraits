@@ -113,6 +113,21 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.ConvertToInt64(value.AsVector128()).AsVector();
             }
 
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt32_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
+                get {
+                    return WStatics.ConvertToUInt32_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ConvertToUInt32(Vector{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> ConvertToUInt32(Vector<float> value) {
+                return WStatics.ConvertToUInt32(value.AsVector128()).AsVector();
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 

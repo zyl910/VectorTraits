@@ -222,6 +222,50 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return result;  //total latency: 23, total throughput CPI: 9
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32_AcceleratedTypes"/>
+            public static TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Single;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32(Vector128{float})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> ConvertToUInt32(Vector128<float> value) {
+                if (Sse41.IsSupported) {
+                    return ConvertToUInt32_ShiftVar(value);
+                } else {
+                    return SuperStatics.ConvertToUInt32(value);
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32(Vector128{float})"/>
+            /// <remarks>Input range is `[0, pow(2,32))`. Out of range results in `0`.</remarks>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> ConvertToUInt32_ShiftVar(Vector128<float> value) {
+                //constants
+                Vector128<int> mat_mask = Vector128.Create(ScalarConstants.SingleVal_MantissaMask).AsInt32(); // 0x007FFFFF
+                Vector128<int> hidden_1 = Vector128.Create(ScalarConstants.Int_2Pow23).AsInt32();             // 0x00800000 // Int32: 2^23
+                Vector128<int> exp_bias = Vector128.Create(ScalarConstants.Int_SingleBias23).AsInt32(); // Single_ExponentBias + Single_MantissaBits = 127 + 23 = 150 = 0x96
+                Vector128<int> zero = Vector128<int>.Zero;
+                //majik operations										  //Latency, Throughput(references IceLake)
+                Vector128<int> bin = value.AsInt32();
+                Vector128<int> mat = Sse2.And(bin, mat_mask);                                    //1,1/3
+                mat = Sse2.Or(mat, hidden_1);                                                    //1,1/3
+                Vector128<int> exp_enc = Sse2.ShiftRightLogical(bin, 23);                        //1,1/2
+                Vector128<int> exp_frac = Sse2.Subtract(exp_enc, exp_bias);                      //1,1/3
+                Vector128<int> msl = Avx2.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt32());    //1,1/2
+                Vector128<int> exp_frac_n = Sse2.Subtract(zero, exp_frac);                       //1,1/3
+                Vector128<int> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt32()); //1,1/2
+                Vector128<int> exp_is_pos = Sse2.CompareGreaterThan(exp_frac, zero);             //3,1
+                Vector128<int> result_abs = Sse41.BlendVariable(msr, msl, exp_is_pos);            //2,1
+                return result_abs.AsUInt32();	//total latency: 12, total throughput CPI: 4.8
+            }
+
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 

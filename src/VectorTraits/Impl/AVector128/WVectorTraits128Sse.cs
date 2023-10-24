@@ -416,11 +416,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
                 get {
-#if NET5_0_OR_GREATER
                     return TypeCodeFlags.Single;
-#else
-                    return SuperStatics.ConvertToUInt32_AcceleratedTypes;
-#endif
                 }
             }
 
@@ -430,32 +426,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<uint> ConvertToUInt32(Vector128<float> value) {
                 //return SuperStatics.ConvertToUInt32(value);
                 //return ConvertToUInt32_Mapping(value);
-                //return ConvertToUInt32_MappingFix(value);
-                return ConvertToUInt32_ShiftVar(value);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32(Vector128{float})"/>
-            /// <remarks>Input range is `[0, pow(2,32))`. Out of range results in `0`.</remarks>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<uint> ConvertToUInt32_ShiftVar(Vector128<float> value) {
-                //constants
-                Vector128<int> mat_mask = Vector128.Create(ScalarConstants.SingleVal_MantissaMask).AsInt32(); // 0x007FFFFF
-                Vector128<int> hidden_1 = Vector128.Create(ScalarConstants.Int_2Pow23).AsInt32();             // 0x00800000 // Int32: 2^23
-                Vector128<int> exp_bias = Vector128.Create(ScalarConstants.Int_SingleBias23).AsInt32(); // Single_ExponentBias + Single_MantissaBits = 127 + 23 = 150 = 0x96
-                Vector128<int> zero = Vector128<int>.Zero;
-                //majik operations										  //Latency, Throughput(references IceLake)
-                Vector128<int> bin = value.AsInt32();
-                Vector128<int> mat = Sse2.And(bin, mat_mask);                                    //1,1/3
-                mat = Sse2.Or(mat, hidden_1);                                                    //1,1/3
-                Vector128<int> exp_enc = Sse2.ShiftRightLogical(bin, 23);                        //1,1/2
-                Vector128<int> exp_frac = Sse2.Subtract(exp_enc, exp_bias);                      //1,1/3
-                Vector128<int> msl = Avx2.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt32());    //1,1/2
-                Vector128<int> exp_frac_n = Sse2.Subtract(zero, exp_frac);                       //1,1/3
-                Vector128<int> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt32()); //1,1/2
-                Vector128<int> exp_is_pos = Sse2.CompareGreaterThan(exp_frac, zero);             //3,1
-                Vector128<int> result_abs = Sse41.BlendVariable(msr, msl, exp_is_pos);            //2,1
-                return result_abs.AsUInt32();	//total latency: 12, total throughput CPI: 4.8
+                return ConvertToUInt32_MappingFix(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32(Vector128{float})"/>
@@ -463,7 +434,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ConvertToUInt32_Mapping(Vector128<float> value) {
-//#if NET5_0_OR_GREATER
                 // [pow(2,31), pow(2,32)-1] mapping to [-pow(2,31), -1]. Subtract `pow(2,32)`.
                 Vector128<float> highEnd = Vector128.Create(ScalarConstants.SingleBit_2Pow32).AsSingle();
                 Vector128<float> highBegin = Vector128.Create(ScalarConstants.SingleBit_2Pow31).AsSingle();
@@ -477,10 +447,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 }
                 Vector128<uint> rt = Sse2.ConvertToVector128Int32WithTruncation(value2).AsUInt32();
                 return rt;
-//#else
-//                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector128<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
-//                return SuperStatics.ConvertToUInt32(value);
-//#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32(Vector128{float})"/>
@@ -488,7 +454,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ConvertToUInt32_MappingFix(Vector128<float> value) {
-//#if NET5_0_OR_GREATER
                 // [pow(2,31), pow(2,32)-1] mapping to [-pow(2,31), -1]. Subtract `pow(2,32)`.
                 Vector128<float> highEnd = Vector128.Create(ScalarConstants.SingleBit_2Pow32).AsSingle();
                 Vector128<float> lowBegin = Vector128.Create(ScalarConstants.SingleBit_Negative2Pow31).AsSingle();
@@ -506,10 +471,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 }
                 Vector128<uint> rt = Sse2.ConvertToVector128Int32WithTruncation(value2).AsUInt32();
                 return rt;
-//#else
-//                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector128<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
-//                return SuperStatics.ConvertToUInt32(value);
-//#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32(Vector128{float})"/>
@@ -517,7 +478,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ConvertToUInt32_Mod(Vector128<float> value) {
-//#if NET5_0_OR_GREATER
                 // remainder = mod(value, highEnd) = value - floor(value/highEnd)*highEnd
                 Vector128<float> highEndDiv = Vector128.Create(ScalarConstants.SingleBit_2PowNegative32).AsSingle();
                 Vector128<float> highEnd = Vector128.Create(ScalarConstants.SingleBit_2Pow32).AsSingle();
@@ -544,10 +504,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 }
                 Vector128<uint> rt = Sse2.ConvertToVector128Int32WithTruncation(value3).AsUInt32();
                 return rt;
-//#else
-//                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector128<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
-//                return SuperStatics.ConvertToUInt32(value);
-//#endif
             }
 
 

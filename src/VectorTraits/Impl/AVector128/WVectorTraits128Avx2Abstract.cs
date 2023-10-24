@@ -83,6 +83,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
+            get {
+                return Statics.ConvertToUInt32_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt32(Vector128{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<uint> ConvertToUInt32(Vector128<float> value) {
+            return Statics.ConvertToUInt32(value);
+        }
+
+
 #endif
     }
 }
