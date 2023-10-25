@@ -852,7 +852,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<byte> ShiftLeft_Args(Vector128<byte> dummy, int shiftAmount, out Vector128<byte> args1) {
                 _ = dummy;
                 shiftAmount &= 7;
-                var args0 = Vector128.Create((uint)shiftAmount).AsByte();
+                var args0 = Vector128.CreateScalar((int)shiftAmount).AsByte();
                 args1 = Vector128Constants.GetResidueMaskBits_Byte(shiftAmount);
                 return args0;
             }
@@ -862,7 +862,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<short> ShiftLeft_Args(Vector128<short> dummy, int shiftAmount, out Vector128<short> args1) {
                 _ = dummy;
                 //Vector128<short> args0 = Sse2.ConvertScalarToVector128Int32(shiftAmount & 0x0F).AsInt16();
-                Vector128<short> args0 = Vector128.CreateScalarUnsafe((int)(shiftAmount & 0x0F)).AsInt16();
+                Vector128<short> args0 = Vector128.CreateScalar((int)(shiftAmount & 0x0F)).AsInt16();
                 args1 = default;
                 return args0;
             }
@@ -880,7 +880,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftLeft_Args(Vector128<int> dummy, int shiftAmount, out Vector128<int> args1) {
                 _ = dummy;
-                var args0 = Vector128.Create((int)(shiftAmount & 0x1F));
+                Vector128<int> args0 = Vector128.CreateScalar((int)(shiftAmount & 0x1F)).AsInt32();
                 args1 = default;
                 return args0;
             }
@@ -890,7 +890,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftLeft_Args(Vector128<uint> dummy, int shiftAmount, out Vector128<uint> args1) {
                 _ = dummy;
-                var args0 = Vector128.Create((uint)(shiftAmount & 0x1F));
+                var args0 = Vector128.CreateScalar((uint)(shiftAmount & 0x1F));
                 args1 = default;
                 return args0;
             }
@@ -899,7 +899,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftLeft_Args(Vector128<long> dummy, int shiftAmount, out Vector128<long> args1) {
                 _ = dummy;
-                var args0 = Vector128.Create((long)(shiftAmount & 0x3F));
+                Vector128<long> args0 = Vector128.CreateScalar((int)(shiftAmount & 0x3F)).AsInt64();
                 args1 = default;
                 return args0;
             }
@@ -925,8 +925,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftLeft_Core(Vector128<byte> value, int shiftAmount, Vector128<byte> args0, Vector128<byte> args1) {
                 _ = shiftAmount;
+                //Console.WriteLine("Sse: args0={0}, args1={1}", args0, args1);
                 var t = Sse2.And(value, args1).AsUInt32();
-                return Avx2.ShiftLeftLogicalVariable(t, args0.AsUInt32()).AsByte();
+                return Sse2.ShiftLeftLogical(t, args0.AsUInt32()).AsByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
@@ -951,7 +952,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<int> ShiftLeft_Core(Vector128<int> value, int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx2.ShiftLeftLogicalVariable(value, args0.AsUInt32());
+                return Sse2.ShiftLeftLogical(value, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{uint}, int, Vector128{uint}, Vector128{uint})"/>
@@ -960,7 +961,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<uint> ShiftLeft_Core(Vector128<uint> value, int shiftAmount, Vector128<uint> args0, Vector128<uint> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx2.ShiftLeftLogicalVariable(value, args0);
+                //Console.WriteLine("Sse: args0={0}, args1={1}", args0, args1);
+                return Sse2.ShiftLeftLogical(value, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
@@ -968,7 +970,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<long> ShiftLeft_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx2.ShiftLeftLogicalVariable(value, args0.AsUInt64());
+                return Sse2.ShiftLeftLogical(value, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{ulong}, int, Vector128{ulong}, Vector128{ulong})"/>
@@ -977,7 +979,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> ShiftLeft_Core(Vector128<ulong> value, int shiftAmount, Vector128<ulong> args0, Vector128<ulong> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx2.ShiftLeftLogicalVariable(value, args0);
+                return Sse2.ShiftLeftLogical(value, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{sbyte}, int)"/>
@@ -990,7 +992,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftLeft_Const(Vector128<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
-                Vector128<byte> t = Avx2.And(value, Vector128Constants.GetResidueMaskBits_Byte(shiftAmount));
+                Vector128<byte> t = Sse2.And(value, Vector128Constants.GetResidueMaskBits_Byte(shiftAmount));
                 return Sse2.ShiftLeftLogical(t.AsUInt32(), (byte)shiftAmount).AsByte();
             }
 
