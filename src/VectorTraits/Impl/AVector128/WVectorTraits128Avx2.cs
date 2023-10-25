@@ -438,6 +438,86 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{sbyte}, int, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> ShiftRightArithmetic_Args(Vector128<sbyte> dummy, int shiftAmount, out Vector128<sbyte> args1) {
+                _ = dummy;
+                shiftAmount &= 7;
+                var args0 = Vector128.Create((int)shiftAmount).AsSByte();
+                args1 = Vector128Constants.GetResidueMaskBits_SByte(shiftAmount);
+                return args0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{int}, int, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> ShiftRightArithmetic_Args(Vector128<int> dummy, int shiftAmount, out Vector128<int> args1) {
+                _ = dummy;
+                var args0 = Vector128.Create((int)(shiftAmount & 0x1F));
+                args1 = default;
+                return args0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{long}, int, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ShiftRightArithmetic_Args(Vector128<long> dummy, int shiftAmount, out Vector128<long> args1) {
+                _ = dummy;
+                shiftAmount &= 0x3F;
+                var args0 = Vector128.Create((long)shiftAmount);
+                args1 = default;
+                return args0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> ShiftRightArithmetic_Core(Vector128<sbyte> value, int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
+                _ = shiftAmount;
+                Vector128<sbyte> sign = Sse2.CompareGreaterThan(Vector128<sbyte>.Zero, value);
+                Vector128<sbyte> shifted = Avx2.ShiftRightLogicalVariable(value.AsUInt32(), args0.AsUInt32()).AsSByte();
+                Vector128<sbyte> rt = SuperStatics.ConditionalSelect(args1, shifted, sign);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> ShiftRightArithmetic_Core(Vector128<int> value, int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
+                _ = shiftAmount;
+                _ = args1;
+                return Avx2.ShiftRightArithmeticVariable(value, args0.AsUInt32());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ShiftRightArithmetic_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+                _ = shiftAmount;
+                _ = args1;
+                Vector128<long> sign;
+                if (Sse42.IsSupported) {
+                    sign = Sse42.CompareGreaterThan(Vector128<long>.Zero, value);
+                } else {
+                    Vector128<int> valueHigh = Sse2.Shuffle(value.AsInt32(), (byte)ShuffleControlG4.YYWW);
+                    sign = Sse2.CompareGreaterThan(Vector128<int>.Zero, valueHigh).AsInt64();
+                }
+                Vector128<long> rt = Sse2.Xor(value, sign);
+                rt = Avx2.ShiftRightLogicalVariable(rt, args0.AsUInt64());
+                rt = Sse2.Xor(rt, sign);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> ShiftRightArithmetic_ConstCore(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
+                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ShiftRightArithmetic_ConstCore(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 

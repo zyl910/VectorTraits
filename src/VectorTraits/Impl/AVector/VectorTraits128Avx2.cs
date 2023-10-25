@@ -247,6 +247,64 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.ShiftLeft_ConstCore(value.AsVector128(), shiftAmount, args0.AsVector128(), args1.AsVector128()).AsVector();
             }
 
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Args(Vector{sbyte}, int, out Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> ShiftRightArithmetic_Args(Vector<sbyte> dummy, int shiftAmount, out Vector<sbyte> args1) {
+                var args0 = WStatics.ShiftRightArithmetic_Args(dummy.AsVector128(), shiftAmount, out var a1).AsVector();
+                args1 = a1.AsVector();
+                return args0;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Args(Vector{int}, int, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> ShiftRightArithmetic_Args(Vector<int> dummy, int shiftAmount, out Vector<int> args1) {
+                var args0 = WStatics.ShiftRightArithmetic_Args(dummy.AsVector128(), shiftAmount, out var a1).AsVector();
+                args1 = a1.AsVector();
+                return args0;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Args(Vector{long}, int, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftRightArithmetic_Args(Vector<long> dummy, int shiftAmount, out Vector<long> args1) {
+                var args0 = WStatics.ShiftRightArithmetic_Args(dummy.AsVector128(), shiftAmount, out var a1).AsVector();
+                args1 = a1.AsVector();
+                return args0;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Core(Vector{sbyte}, int, Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> ShiftRightArithmetic_Core(Vector<sbyte> value, int shiftAmount, Vector<sbyte> args0, Vector<sbyte> args1) {
+                return WStatics.ShiftRightArithmetic_Core(value.AsVector128(), shiftAmount, args0.AsVector128(), args1.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Core(Vector{int}, int, Vector{int}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> ShiftRightArithmetic_Core(Vector<int> value, int shiftAmount, Vector<int> args0, Vector<int> args1) {
+                return WStatics.ShiftRightArithmetic_Core(value.AsVector128(), shiftAmount, args0.AsVector128(), args1.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_Core(Vector{long}, int, Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftRightArithmetic_Core(Vector<long> value, int shiftAmount, Vector<long> args0, Vector<long> args1) {
+                return WStatics.ShiftRightArithmetic_Core(value.AsVector128(), shiftAmount, args0.AsVector128(), args1.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_ConstCore(Vector{sbyte}, int, Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> ShiftRightArithmetic_ConstCore(Vector<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector<sbyte> args0, Vector<sbyte> args1) {
+                return WStatics.ShiftRightArithmetic_ConstCore(value.AsVector128(), shiftAmount, args0.AsVector128(), args1.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_ConstCore(Vector{long}, int, Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftRightArithmetic_ConstCore(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector<long> args0, Vector<long> args1) {
+                return WStatics.ShiftRightArithmetic_ConstCore(value.AsVector128(), shiftAmount, args0.AsVector128(), args1.AsVector128()).AsVector();
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 

@@ -64,6 +64,8 @@ List (列表):
   Mnemonic: `rt[i] := (left[i] & condition[i]) | (right[i] & ~condition[i])`.
 - `Divide`: Divides two vectors to compute their quotient (将两个向量相除来计算它们的商).
   Mnemonic: `rt[i] := left[i] / right[i]`.
+- `Equals`: Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+  Mnemonic: `rt[i] := to_mask(left[i] == right[i])`.
 - `GreaterThan`: Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
   Mnemonic: `rt[i] := to_mask(left[i] > right[i])`.
 - `LessThan`: Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).

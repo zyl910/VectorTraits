@@ -1220,7 +1220,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<sbyte> ShiftRightArithmetic_Args(Vector128<sbyte> dummy, int shiftAmount, out Vector128<sbyte> args1) {
                 _ = dummy;
                 shiftAmount &= 7;
-                var args0 = Vector128.Create((int)shiftAmount).AsSByte();
+                var args0 = Vector128.CreateScalar((int)shiftAmount).AsSByte();
                 args1 = Vector128Constants.GetResidueMaskBits_SByte(shiftAmount);
                 return args0;
             }
@@ -1229,7 +1229,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_Args(Vector128<short> dummy, int shiftAmount, out Vector128<short> args1) {
                 _ = dummy;
-                Vector128<short> args0 = Vector128.CreateScalarUnsafe((int)(shiftAmount & 0x0F)).AsInt16();
+                Vector128<short> args0 = Vector128.CreateScalar((int)(shiftAmount & 0x0F)).AsInt16();
                 args1 = default;
                 return args0;
             }
@@ -1238,7 +1238,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_Args(Vector128<int> dummy, int shiftAmount, out Vector128<int> args1) {
                 _ = dummy;
-                var args0 = Vector128.Create((int)(shiftAmount & 0x1F));
+                var args0 = Vector128.CreateScalar((int)(shiftAmount & 0x1F));
                 args1 = default;
                 return args0;
             }
@@ -1248,7 +1248,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<long> ShiftRightArithmetic_Args(Vector128<long> dummy, int shiftAmount, out Vector128<long> args1) {
                 _ = dummy;
                 shiftAmount &= 0x3F;
-                var args0 = Vector128.Create((long)shiftAmount);
+                var args0 = Vector128.CreateScalar((int)shiftAmount).AsInt64();
                 args1 = default;
                 return args0;
             }
@@ -1259,7 +1259,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<sbyte> ShiftRightArithmetic_Core(Vector128<sbyte> value, int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
                 _ = shiftAmount;
                 Vector128<sbyte> sign = Sse2.CompareGreaterThan(Vector128<sbyte>.Zero, value);
-                Vector128<sbyte> shifted = Avx2.ShiftRightLogicalVariable(value.AsUInt32(), args0.AsUInt32()).AsSByte();
+                Vector128<sbyte> shifted = Sse2.ShiftRightLogical(value.AsUInt32(), args0.AsUInt32()).AsSByte();
                 Vector128<sbyte> rt = ConditionalSelect(args1, shifted, sign);
                 return rt;
             }
@@ -1277,7 +1277,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<int> ShiftRightArithmetic_Core(Vector128<int> value, int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx2.ShiftRightArithmeticVariable(value, args0.AsUInt32());
+                return Sse2.ShiftRightArithmetic(value, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
@@ -1293,7 +1293,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     sign = Sse2.CompareGreaterThan(Vector128<int>.Zero, valueHigh).AsInt64();
                 }
                 Vector128<long> rt = Sse2.Xor(value, sign);
-                rt = Avx2.ShiftRightLogicalVariable(rt, args0.AsUInt64());
+                rt = Sse2.ShiftRightLogical(rt, args0);
                 rt = Sse2.Xor(rt, sign);
                 return rt;
             }
@@ -1333,25 +1333,25 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_ConstCore(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
-//#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
                 return Sse2.ShiftRightArithmetic(value, (byte)shiftAmount);
-//#else
-//                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
-//#endif
+#else
+                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_ConstCore(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
-//#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
                 return Sse2.ShiftRightArithmetic(value, (byte)shiftAmount);
-//#else
-//                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
-//#endif
+#else
+                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
@@ -1532,7 +1532,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightLogical_Args(Vector128<short> dummy, int shiftAmount, out Vector128<short> args1) {
                 _ = dummy;
-                Vector128<short> args0 = Vector128.CreateScalarUnsafe((int)(shiftAmount & 0x0F)).AsInt16();
+                Vector128<short> args0 = Vector128.CreateScalar((int)(shiftAmount & 0x0F)).AsInt16();
                 args1 = default;
                 return args0;
             }
