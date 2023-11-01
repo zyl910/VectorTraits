@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+    <RunConfiguration>
+        <EnvironmentVariables>
+            <!-- List of environment variables we want to set
+            -->
+            <COMPlus_EnableAVX2>1</COMPlus_EnableAVX2>
+        </EnvironmentVariables>
+    </RunConfiguration>
+</RunSettings>

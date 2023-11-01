@@ -106,8 +106,8 @@ namespace Zyl.VectorTraits {
             }
             writer.WriteLine(indent + string.Format("VectorEnvironment.SupportedInstructionSets:\t{0}", VectorEnvironment.SupportedInstructionSets));
 #if NETCOREAPP3_0_OR_GREATER
-            if (Vector128<byte>.Count < Vector<byte>.Count) {
-                writer.WriteLine(indent + string.Format("Vector128s.Instance:\t{0}\t// {1}", Vector128s.Instance.GetType().Name, Vector128s.Instance.UsedInstructionSets));
+            writer.WriteLine(indent + string.Format("Vector128s.Instance:\t{0}\t// {1}", Vector128s.Instance.GetType().Name, Vector128s.Instance.UsedInstructionSets));
+            if (Vector<byte>.Count >= Vector256<byte>.Count) {
                 writer.WriteLine(indent + string.Format("Vector256s.Instance:\t{0}\t// {1}", Vector256s.Instance.GetType().Name, Vector256s.Instance.UsedInstructionSets));
             }
 #endif // NETCOREAPP3_0_OR_GREATER

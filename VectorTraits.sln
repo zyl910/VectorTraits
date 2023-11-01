@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE = LICENSE
 		README.md = README.md
 		README_Chinese.md = README_Chinese.md
+		test.runsettings = test.runsettings
 	EndProjectSection
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "VectorTraits.InfoInc", "src\VectorTraits.InfoInc\VectorTraits.InfoInc.shproj", "{81CCAD3F-6606-410B-9D02-3F8FC65CACE5}"
