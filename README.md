@@ -29,6 +29,7 @@ Traits methods:
 
 Supported instruction set:
 - x86
+  - 128-bit vector: Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2 .
   - 256-bit vector: Avx, Avx2 .
 - Arm
   - 128-bit vector: AdvSimd .

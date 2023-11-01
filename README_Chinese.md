@@ -29,6 +29,7 @@ VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 
 支持的指令集:
 - x86
+  - 128位向量: Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2 .
   - 256位向量: Avx, Avx2 .
 - Arm
   - 128位向量: AdvSimd .
