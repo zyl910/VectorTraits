@@ -437,6 +437,56 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return ShiftLeft_Core(value, shiftAmount, args0, args1);
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> ShiftLeft_ConstCore(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
+#if NET6_0_OR_GREATER
+                _ = args0;
+                _ = args1;
+                return Sse2.ShiftLeftLogical(value, (byte)shiftAmount);
+#else
+                return ShiftLeft_Core(value, shiftAmount, args0, args1);
+#endif
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{uint}, int, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> ShiftLeft_ConstCore(Vector128<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<uint> args0, Vector128<uint> args1) {
+#if NET6_0_OR_GREATER
+                _ = args0;
+                _ = args1;
+                return Sse2.ShiftLeftLogical(value, (byte)shiftAmount);
+#else
+                return ShiftLeft_Core(value, shiftAmount, args0, args1);
+#endif
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> ShiftLeft_ConstCore(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+#if NET6_0_OR_GREATER
+                _ = args0;
+                _ = args1;
+                return Sse2.ShiftLeftLogical(value, (byte)shiftAmount);
+#else
+                return ShiftLeft_Core(value, shiftAmount, args0, args1);
+#endif
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{ulong}, int, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> ShiftLeft_ConstCore(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<ulong> args0, Vector128<ulong> args1) {
+#if NET6_0_OR_GREATER
+                _ = args0;
+                _ = args1;
+                return Sse2.ShiftLeftLogical(value, (byte)shiftAmount);
+#else
+                return ShiftLeft_Core(value, shiftAmount, args0, args1);
+#endif
+            }
+
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{sbyte}, int, out Vector128{sbyte})"/>
             [CLSCompliant(false)]
