@@ -275,6 +275,12 @@ namespace Zyl.VectorTraits.Impl.AVector {
             return Statics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
         }
 
+        /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_ConstCore(Vector{int}, int, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<int> ShiftRightArithmetic_ConstCore(Vector<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector<int> args0, Vector<int> args1) {
+            return Statics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
+        }
+
         /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_ConstCore(Vector{long}, int, Vector{long}, Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> ShiftRightArithmetic_ConstCore(Vector<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector<long> args0, Vector<long> args1) {
