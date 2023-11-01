@@ -52,7 +52,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static bool GetIsSupported(bool noStrict = false) {
                 bool rt = false;
 #if NETCOREAPP3_0_OR_GREATER
-                rt = Avx.IsSupported && Avx2.IsSupported && Sse.IsSupported && Sse2.IsSupported;
+                rt = Sse.IsSupported && Sse2.IsSupported;
 #else
 #endif // NETCOREAPP3_0_OR_GREATER
                 if (!noStrict) {
@@ -62,21 +62,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IBaseTraits.GetUnsupportedMessage"/>
             public static string GetUnsupportedMessage(bool noStrict = false) {
-                string rt = "Requires hardware support Avx, Avx2!";
+                string rt = "Requires hardware support Sse, Sse2!";
 #if NETCOREAPP3_0_OR_GREATER
-                if (Avx.IsSupported && Avx2.IsSupported) {
-                    if (Sse.IsSupported && Sse2.IsSupported) {
-                        // done.
-                    } else {
-                        // Details.
-                        rt = "";
-                        if (!Sse.IsSupported) rt += ", Sse";
-                        if (!Sse2.IsSupported) rt += ", Sse2";
-                        if (!String.IsNullOrEmpty(rt)) {
-                            rt = "Requires hardware support " + rt.Substring(2) + "!";
-                        }
-                    }
-                }
 #else
                 rt = "Vector128 type is not supported! " + rt;
 #endif // NETCOREAPP3_0_OR_GREATER
@@ -105,8 +92,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 if (System.Runtime.Intrinsics.X86.Ssse3.IsSupported) rt += separator + "Ssse3";
                 if (System.Runtime.Intrinsics.X86.Sse41.IsSupported) rt += separator + "Sse41";
                 if (System.Runtime.Intrinsics.X86.Sse42.IsSupported) rt += separator + "Sse42";
-                if (System.Runtime.Intrinsics.X86.Avx.IsSupported) rt += separator + "Avx";
-                if (System.Runtime.Intrinsics.X86.Avx2.IsSupported) rt += separator + "Avx2";
                 // done.
                 if (!string.IsNullOrEmpty(rt)) {
                     rt = rt.Substring(separator.Length);
