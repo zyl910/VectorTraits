@@ -385,7 +385,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftLeft_Core(Vector128<byte> value, int shiftAmount, Vector128<byte> args0, Vector128<byte> args1) {
                 _ = shiftAmount;
-                Console.WriteLine("Avx2: args0={0}, args1={1}", args0, args1);
+                //Console.WriteLine("Avx2: args0={0}, args1={1}", args0, args1);
                 var t = Sse2.And(value, args1).AsUInt32();
                 return Avx2.ShiftLeftLogicalVariable(t, args0.AsUInt32()).AsByte();
             }
