@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -7,6 +7,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+#if NETCOREAPP3_0_OR_GREATER
+using System.Runtime.Intrinsics;
+#endif
 using System.Text;
 using System.Threading;
 using Zyl.VectorTraits.Impl;
@@ -22,7 +25,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
     using TMy = UInt16;
 
     /// <summary>
-    /// Shift left benchmark - UInt16.
+    /// Shift right logical benchmark - UInt16.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
@@ -33,7 +36,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         private const int shiftAmount = 1;
 
         /// <summary>
-        /// Sum shift left logical - base.
+        /// Sum shift right logical - base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -58,7 +61,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #if NET7_0_OR_GREATER
         /// <summary>
-        /// Sum shift left logical - VectorT - .NET Bcl - variate .
+        /// Sum shift right logical - VectorT - .NET Bcl - variate .
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -102,7 +105,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult("SumSRLNetBcl");
         }
         /// <summary>
-        /// Sum shift left logical - VectorT - .NET Bcl - Const.
+        /// Sum shift right logical - VectorT - .NET Bcl - Const.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -152,7 +155,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum shift left logical - Base.
+        /// Sum shift right logical - Base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -193,7 +196,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift left logical - Base - Core.
+        /// Sum shift right logical - Base - Core.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -240,7 +243,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #if NET5_0_OR_GREATER
         /// <summary>
-        /// Sum shift left logical - Raw - AdvSimd.
+        /// Sum shift right logical - Raw - AdvSimd.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -287,7 +290,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #if NETCOREAPP3_0_OR_GREATER
         /// <summary>
-        /// Sum shift left logical - Raw - Avx.
+        /// Sum shift right logical - Raw - Avx.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -336,7 +339,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum shift left logical - Traits static.
+        /// Sum shift right logical - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -380,7 +383,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift left logical - Traits static - Core.
+        /// Sum shift right logical - Traits static - Core.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -425,7 +428,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift left logical const - Traits static.
+        /// Sum shift right logical const - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -468,7 +471,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum shift left logical - Traits static - ConstCore.
+        /// Sum shift right logical - Traits static - ConstCore.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -512,7 +515,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         ///// <summary>
-        ///// Sum shift left logical - Traits static - ConstCore - AdvSimd.
+        ///// Sum shift right logical - Traits static - ConstCore - AdvSimd.
         ///// </summary>
         ///// <param name="src">Source array.</param>
         ///// <param name="srcCount">Source count</param>
@@ -570,12 +573,196 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         //    CheckResult("SumSRLConstTraits_Core_AdvSimd");
         //}
 
+#if NETCOREAPP3_0_OR_GREATER
+
+        /// <summary>
+        /// Sum shift right logical - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumSRL128Traits(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = Vector128s.ShiftRightLogical(p0, shiftAmount);
+                vrt = Vector128s.Add(vrt, vtemp); // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)(Unsafe.Add(ref p, i) << shiftAmount);
+            }
+            // Reduce.
+            rt += Vector128s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRL128Traits() {
+            Vector128s.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumSRL128Traits(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRL128Traits");
+        }
+
+        /// <summary>
+        /// Sum shift right logical - Traits static - Core.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumSRL128Traits_Core(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            int i;
+            // Body.
+            var args0 = Vector128s.ShiftRightLogical_Args(vrt, shiftAmount, out var args1);
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = Vector128s.ShiftRightLogical_Core(p0, shiftAmount, args0, args1);
+                vrt = Vector128s.Add(vrt, vtemp); // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)(Unsafe.Add(ref p, i) << shiftAmount);
+            }
+            // Reduce.
+            rt += Vector128s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRL128Traits_Core() {
+            Vector128s.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumSRL128Traits_Core(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRL128Traits_Core");
+        }
+
+        /// <summary>
+        /// Sum shift right logical const - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumSRL128ConstTraits(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = Vector128s.ShiftRightLogical_Const(p0, shiftAmount);
+                vrt = Vector128s.Add(vrt, vtemp); // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)(Unsafe.Add(ref p, i) << shiftAmount);
+            }
+            // Reduce.
+            rt += Vector128s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRL128ConstTraits() {
+            Vector128s.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumSRL128ConstTraits(srcArray, srcArray.Length);
+            CheckResult("SumSRL128ConstTraits");
+        }
+
+        /// <summary>
+        /// Sum shift right logical - Traits static - ConstCore.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumSRL128ConstTraits_Core(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            int i;
+            // Body.
+            var args0 = Vector128s.ShiftRightLogical_Args(vrt, shiftAmount, out var args1);
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = Vector128s.ShiftRightLogical_ConstCore(p0, shiftAmount, args0, args1);
+                vrt = Vector128s.Add(vrt, vtemp); // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)(Unsafe.Add(ref p, i) << shiftAmount);
+            }
+            // Reduce.
+            rt += Vector128s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRL128ConstTraits_Core() {
+            Vector128s.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumSRL128ConstTraits_Core(srcArray, srcArray.Length);
+            CheckResult("SumSRL128ConstTraits_Core");
+        }
+
+#endif
+
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
 
 #if NET5_0_OR_GREATER
         /// <summary>
-        /// Sum shift left logical fast - Raw - AdvSimd.
+        /// Sum shift right logical fast - Raw - AdvSimd.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -619,7 +806,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #if NETCOREAPP3_0_OR_GREATER
         /// <summary>
-        /// Sum shift left logical fast - Raw - Avx.
+        /// Sum shift right logical fast - Raw - Avx.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -666,7 +853,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum shift left logical fast - Traits static.
+        /// Sum shift right logical fast - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
