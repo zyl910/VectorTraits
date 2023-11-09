@@ -768,6 +768,19 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YShuffleInsert_EqualAnd(Vector256<byte> back, Vector256<byte> vector, Vector256<byte> indices) {
+                Vector256<byte> maskOverflow = Vector256.Create((byte)0xE0); // ((byte)~(System.Runtime.Intrinsics.Vector256<byte>.Count - 1)).ToString("X2") = "E0"
+                Vector256<byte> mask = Avx2.CompareEqual(
+                    Vector256<byte>.Zero,
+                    Avx2.And(indices, maskOverflow)
+                ); // (0<=i && i<32)
+                Vector256<byte> raw = YShuffleKernel(vector, indices);
+                Vector256<byte> rt = Avx2.BlendVariable(back, raw, mask);
+                return rt;
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert(Vector256{short}, Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> YShuffleInsert(Vector256<short> back, Vector256<short> vector, Vector256<short> indices) {
