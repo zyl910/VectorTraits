@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -691,6 +691,54 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
+
+        /// <summary>
+        /// Sum YShuffleKernel - Vector128 - Sse - DuplicateEven.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumKernel128_Sse_DuplicateEven(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
+            Vector128<TMy> indicesUsed = indices.AsVector128();
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = WVectorTraits128Sse.Statics.YShuffleKernel_DuplicateEven(p0.AsUInt64(), indicesUsed.AsUInt64()).AsInt64();
+                vrt = WVectorTraits128Sse.Statics.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumKernel128_Sse_DuplicateEven() {
+            WVectorTraits128Sse.Statics.ThrowForUnsupported(true);
+            if (Vector<byte>.Count != Vector128<byte>.Count) {
+                throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector128<byte>.Count));
+            }
+            //Debugger.Break();
+            dstTMy = StaticSumKernel128_Sse_DuplicateEven(srcArray, srcArray.Length, indices);
+            CheckResult("SumKernel128_Sse_DuplicateEven");
+        }
 
 #if NET5_0_OR_GREATER
 
