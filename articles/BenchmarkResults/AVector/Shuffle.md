@@ -14,14 +14,13 @@ VectorTraits.Benchmarks.NetFw
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
 Environment.Version:	4.0.30319.42000
 Stopwatch.Frequency:	10000000
 RuntimeEnvironment.GetRuntimeDirectory:	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
-RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9167.0
+RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9181.0
 RuntimeInformation.OSArchitecture:	X64
 RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045 
 IntPtr.Size:	8
@@ -29,11 +28,13 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
 Vector<T>.Assembly.CodeBase:	file:///E:/zylSelf/Code/cs/base/VectorTraits/tests/VectorTraits.Benchmarks.NetFw/bin/Release/System.Numerics.Vectors.DLL
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 1.1
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Framework 4.5
-Vectors.Instance:	VectorTraits256Base
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -41,58 +42,60 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-24614
-SumScalar	259.772	1009.132
-SumBase	258.718	1013.240	1.004071
-SumTraits	258.876	1012.626	1.003462
-SumTraits_Args0	259.825	1008.925	0.999795
-SumTraits_Args	259.811	1008.981	0.999850
-SumKernelTraits	259.157	1011.528	1.002374
-SumKernelTraits_Args0	260.495	1006.331	0.997225
-SumKernelTraits_Args	257.695	1017.264	1.008059
+SumScalar	260.539	1006.161
+SumBase	260.861	1004.919	0.998766
+SumTraits	259.001	1012.135	1.005938
+SumTraits_Args0	258.821	1012.838	1.006636
+SumTraits_Args	256.689	1021.252	1.014999
+SumKernelTraits	259.066	1011.881	1.005685
+SumKernelTraits_Args0	259.565	1009.936	1.003753
+SumKernelTraits_Args	257.096	1019.635	1.013391
 
 [ShuffleBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-467755046
-SumScalar	362.569	723.019
-SumBase	364.665	718.863	0.994253
-SumTraits	365.863	716.509	0.990997
-SumTraits_Args0	365.857	716.520	0.991012
-SumTraits_Args	362.652	722.854	0.999772
-SumKernelTraits	362.859	722.441	0.999201
-SumKernelTraits_Args0	361.733	724.689	1.002310
-SumKernelTraits_Args	360.097	727.981	1.006863
+SumScalar	361.556	725.043
+SumBase	361.587	724.982	0.999916
+SumTraits	361.454	725.248	1.000282
+SumTraits_Args0	362.886	722.387	0.996337
+SumTraits_Args	360.164	727.846	1.003866
+SumKernelTraits	365.211	717.788	0.989994
+SumKernelTraits_Args0	365.158	717.892	0.990137
+SumKernelTraits_Args	363.553	721.062	0.994509
 
 [ShuffleBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	5910372263572008452
-SumScalar	570.025	459.881
-SumBase	569.874	460.004	1.000265
-SumTraits	570.744	459.302	0.998741
-SumTraits_Args0	563.673	465.064	1.011269
-SumTraits_Args	570.144	459.786	0.999792
-SumKernelTraits	569.807	460.058	1.000384
-SumKernelTraits_Args0	564.108	464.705	1.010489
-SumKernelTraits_Args	565.919	463.218	1.007255
+SumScalar	577.073	454.265
+SumBase	576.288	454.884	1.001363
+SumTraits	571.536	458.666	1.009688
+SumTraits_Args0	563.264	465.401	1.024516
+SumTraits_Args	565.853	463.273	1.019830
+SumKernelTraits	569.560	460.257	1.013192
+SumKernelTraits_Args0	565.967	463.179	1.019623
+SumKernelTraits_Args	569.706	460.139	1.012932
 
 [ShuffleBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	114
-SumScalar	207.522	1263.210
-SumBase	207.542	1263.090	0.999905
-SumTraits	207.328	1264.393	1.000936
-SumTraits_Args0	207.660	1262.368	0.999333
-SumTraits_Args	214.601	1221.542	0.967013
-SumKernelTraits	208.035	1260.097	0.997535
-SumKernelTraits_Args0	207.975	1260.461	0.997824
-SumKernelTraits_Args	208.006	1260.272	0.997674
+SumScalar	206.915	1266.919
+SumBase	207.798	1261.533	0.995749
+SumTraits	207.131	1265.597	0.998957
+SumTraits_Args0	207.711	1262.062	0.996166
+SumTraits_Args	208.917	1254.775	0.990414
+SumKernelTraits	214.672	1221.136	0.963863
+SumKernelTraits_Args0	207.973	1260.474	0.994913
+SumKernelTraits_Args	217.310	1206.316	0.952165
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
 VectorTraits128AdvSimd: Vector128 type is not supported! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
 VectorTraits128AdvSimdB64: Vector128 type is not supported! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
+VectorTraits128Avx2: Vector128 type is not supported! Requires hardware support Avx, Avx2! Vector byte size mismatch(32!=16) !
+VectorTraits128Sse: Vector128 type is not supported! Requires hardware support Sse, Sse2! Vector byte size mismatch(32!=16) !
 VectorTraits256Base: OK.
 VectorTraits256Avx2: Vector256 type is not supported! Requires hardware support Avx, Avx2!
 
@@ -104,7 +107,6 @@ VectorTraits.Benchmarks.NetCore
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
@@ -119,11 +121,13 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/2.1.30/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 2.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 2.1
-Vectors.Instance:	VectorTraits256Base
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -131,58 +135,60 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-24614
-SumScalar	260.129	1007.748
-SumBase	258.749	1013.121	1.005332
-SumTraits	259.831	1008.900	1.001144
-SumTraits_Args0	265.155	988.646	0.981045
-SumTraits_Args	264.314	991.790	0.984165
-SumKernelTraits	259.731	1009.289	1.001529
-SumKernelTraits_Args0	264.929	989.488	0.981881
-SumKernelTraits_Args	264.749	990.161	0.982548
+SumScalar	264.507	991.067
+SumBase	263.593	994.502	1.003466
+SumTraits	264.340	991.694	1.000632
+SumTraits_Args0	259.516	1010.126	1.019231
+SumTraits_Args	257.057	1019.791	1.028983
+SumKernelTraits	264.331	991.725	1.000664
+SumKernelTraits_Args0	259.295	1010.987	1.020099
+SumKernelTraits_Args	257.816	1016.789	1.025953
 
 [ShuffleBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-467755046
-SumScalar	361.571	725.013
-SumBase	361.863	724.428	0.999193
-SumTraits	361.893	724.369	0.999112
-SumTraits_Args0	372.557	703.636	0.970514
-SumTraits_Args	369.397	709.654	0.978816
-SumKernelTraits	361.469	725.218	1.000283
-SumKernelTraits_Args0	371.128	706.345	0.974251
-SumKernelTraits_Args	373.874	701.155	0.967093
+SumScalar	371.638	705.375
+SumBase	372.061	704.573	0.998864
+SumTraits	371.897	704.884	0.999304
+SumTraits_Args0	362.440	723.276	1.025378
+SumTraits_Args	384.323	682.093	0.966994
+SumKernelTraits	372.193	704.322	0.998508
+SumKernelTraits_Args0	361.645	724.866	1.027633
+SumKernelTraits_Args	385.113	680.694	0.965011
 
 [ShuffleBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	5910372263572008452
-SumScalar	572.427	457.952
-SumBase	571.744	458.499	1.001195
-SumTraits	570.032	459.876	1.004202
-SumTraits_Args0	593.656	441.576	0.964241
-SumTraits_Args	641.652	408.545	0.892114
-SumKernelTraits	571.296	458.858	1.001980
-SumKernelTraits_Args0	598.196	438.224	0.956923
-SumKernelTraits_Args	636.419	411.905	0.899450
+SumScalar	596.473	439.490
+SumBase	596.920	439.161	0.999250
+SumTraits	597.514	438.724	0.998257
+SumTraits_Args0	564.130	464.687	1.057332
+SumTraits_Args	565.209	463.800	1.055313
+SumKernelTraits	597.978	438.384	0.997482
+SumKernelTraits_Args0	565.587	463.490	1.054609
+SumKernelTraits_Args	569.431	460.361	1.047488
 
 [ShuffleBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	114
-SumScalar	207.601	1262.732
-SumBase	207.189	1265.241	1.001986
-SumTraits	207.283	1264.667	1.001532
-SumTraits_Args0	210.981	1242.503	0.983980
-SumTraits_Args	210.031	1248.121	0.988429
-SumKernelTraits	207.056	1266.056	1.002632
-SumKernelTraits_Args0	210.468	1245.530	0.986377
-SumKernelTraits_Args	209.830	1249.316	0.989375
+SumScalar	210.971	1242.561
+SumBase	210.745	1243.890	1.001070
+SumTraits	214.567	1221.738	0.983242
+SumTraits_Args0	206.917	1266.901	1.019589
+SumTraits_Args	207.642	1262.483	1.016034
+SumKernelTraits	211.312	1240.552	0.998383
+SumKernelTraits_Args0	207.609	1262.681	1.016193
+SumKernelTraits_Args	207.964	1260.528	1.014460
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
 VectorTraits128AdvSimd: Vector128 type is not supported! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
 VectorTraits128AdvSimdB64: Vector128 type is not supported! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
+VectorTraits128Avx2: Vector128 type is not supported! Requires hardware support Avx, Avx2! Vector byte size mismatch(32!=16) !
+VectorTraits128Sse: Vector128 type is not supported! Requires hardware support Sse, Sse2! Vector byte size mismatch(32!=16) !
 VectorTraits256Base: OK.
 VectorTraits256Avx2: Vector256 type is not supported! Requires hardware support Avx, Avx2!
 
@@ -194,7 +200,6 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
@@ -209,11 +214,15 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
-Vectors.Instance:	VectorTraits256Avx2
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -221,91 +230,95 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-24614
-SumScalar	264.178	992.299
-SumBase	259.888	1008.682	1.016510
-SumTraits	43.505	6025.629	6.072392
-SumTraits_Args0	17.658	14845.370	14.960580
-SumTraits_Args	17.901	14644.219	14.757868
+SumScalar	258.989	1012.184
+SumBase	263.873	993.447	0.981488
+SumTraits	44.358	5909.784	5.838647
+SumTraits_Args0	17.511	14970.657	14.790454
+SumTraits_Args	17.893	14650.891	14.474536
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	44.416	5901.995	5.947799
-SumKernelTraits	34.646	7566.266	7.624986
-SumKernelTraits_Args0	17.423	15045.753	15.162519
-SumKernelTraits_Args	17.593	14900.553	15.016192
+Sum256Traits	47.392	5531.443	5.464861
+SumKernelTraits	39.776	6590.516	6.511185
+SumKernelTraits_Args0	17.657	14846.064	14.667360
+SumKernelTraits_Args	17.582	14910.076	14.730602
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256_Avx2_Multiply	39.178	6691.139	6.743067
-SumKernel256_Avx2_ShiftLane	36.501	7181.794	7.237529
-SumKernel256Traits	36.770	7129.297	7.184625
-SumKernel256Traits_Args0	18.399	14247.517	14.358088
-SumKernel256Traits_Args	18.880	13885.080	13.992838
+SumKernel256_Avx2_Multiply	34.829	7526.536	7.435939
+SumKernel256_Avx2_ShiftLane	32.033	8183.523	8.085017
+SumKernel256Traits	36.684	7146.040	7.060022
+SumKernel256Traits_Args0	17.591	14902.325	14.722944
+SumKernel256Traits_Args	17.859	14678.213	14.501529
 
 [ShuffleBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-467755046
-SumScalar	371.936	704.809
-SumBase	362.819	722.521	1.025130
-SumTraits	50.250	5216.757	7.401659
-SumTraits_Args0	28.253	9278.507	13.164567
-SumTraits_Args	29.092	9010.834	12.784786
+SumScalar	361.761	724.634
+SumBase	372.369	703.991	0.971513
+SumTraits	51.554	5084.806	7.017071
+SumTraits_Args0	28.500	9198.009	12.693324
+SumTraits_Args	26.764	9794.512	13.516502
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	51.734	5067.112	7.189339
-SumKernelTraits	27.436	9554.766	13.556529
-SumKernelTraits_Args0	23.793	11017.874	15.632421
-SumKernelTraits_Args	23.765	11030.886	15.650883
+Sum256Traits	50.319	5209.671	7.189386
+SumKernelTraits	22.240	11787.085	16.266268
+SumKernelTraits_Args0	23.660	11079.628	15.289972
+SumKernelTraits_Args	21.914	11962.349	16.508134
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256Traits	23.459	11174.456	15.854583
-SumKernel256Traits_Args0	24.013	10916.589	15.488716
-SumKernel256Traits_Args	26.161	10020.229	14.216938
+SumKernel256Traits	23.796	11016.122	15.202334
+SumKernel256Traits_Args0	24.077	10887.847	15.025312
+SumKernel256Traits_Args	24.923	10518.065	14.515011
 
 [ShuffleBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	5910372263572008452
-SumScalar	1390.227	188.562
-SumBase	571.713	458.524	2.431687
-SumTraits	122.318	2143.129	11.365640
-SumTraits_Args0	58.141	4508.754	23.911246
-SumTraits_Args	58.697	4466.028	23.684659
+SumScalar	570.066	459.848
+SumBase	596.720	439.308	0.955333
+SumTraits	134.425	1950.108	4.240765
+SumTraits_Args0	59.045	4439.768	9.654856
+SumTraits_Args	59.183	4429.402	9.632313
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	131.518	1993.214	10.570601
-SumKernelTraits	97.015	2702.105	14.330058
-SumKernelTraits_Args0	54.378	4820.767	25.565944
-SumKernelTraits_Args	53.671	4884.277	25.902753
+Sum256Traits	133.850	1958.496	4.259006
+SumKernelTraits	94.568	2772.029	6.028139
+SumKernelTraits_Args0	50.681	5172.457	11.248184
+SumKernelTraits_Args	51.736	5066.915	11.018668
+SumKernel128_Sse_DuplicateEven	Run fail! Vector byte size mismatch(32!=16) !
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256_Avx2_AlignRight	81.248	3226.481	17.110974
-SumKernel256_Avx2_DuplicateEven	77.988	3361.318	17.826057
-SumKernel256_Avx2_Multiply	159.711	1641.368	8.704655
-SumKernel256_Avx2_ShiftLane	80.151	3270.627	17.345096
-SumKernel256Traits	78.423	3342.688	17.727254
-SumKernel256Traits_Args0	48.230	5435.300	28.824989
-SumKernel256Traits_Args	48.008	5460.464	28.958446
+SumKernel256_Avx2_AlignRight	75.713	3462.356	7.529345
+SumKernel256_Avx2_DuplicateEven	67.705	3871.875	8.419898
+SumKernel256_Avx2_Multiply	149.368	1755.018	3.816516
+SumKernel256_Avx2_ShiftLane	81.438	3218.933	6.999990
+SumKernel256Traits	66.857	3920.949	8.526616
+SumKernel256Traits_Args0	46.675	5616.366	12.213521
+SumKernel256Traits_Args	48.849	5366.364	11.669860
 
 [ShuffleBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	114
-SumScalar	310.322	844.749
-SumBase	207.741	1261.878	1.493790
-SumTraits	19.800	13239.408	15.672585
-SumTraits_Args0	8.245	31793.487	37.636586
-SumTraits_Args	8.424	31118.400	36.837430
+SumScalar	207.544	1263.079
+SumBase	210.661	1244.388	0.985202
+SumTraits	20.209	12971.856	10.270024
+SumTraits_Args0	8.176	32063.329	25.385045
+SumTraits_Args	8.136	32218.525	25.507916
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_Avx2_Add1	20.567	12745.930	15.088414
-Sum256_Avx2_Add2	20.590	12731.326	15.071126
-Sum256_Avx2_Cmp2	18.206	14398.765	17.045012
-Sum256Traits	18.839	13914.661	16.471937
-SumKernelTraits	13.109	19996.806	23.671877
-SumKernelTraits_Args0	8.433	31084.955	36.797838
-SumKernelTraits_Args	8.504	30827.152	36.492655
+Sum256_Avx2_Add1	20.982	12493.988	9.891688
+Sum256_Avx2_Add2	20.121	13028.494	10.314865
+Sum256_Avx2_Cmp2	17.534	14950.892	11.836858
+Sum256_Avx2_EqualAnd	17.446	15026.405	11.896643
+Sum256Traits	17.844	14690.538	11.630731
+SumKernelTraits	13.399	19564.164	15.489259
+SumKernelTraits_Args0	8.054	32547.991	25.768760
+SumKernelTraits_Args	8.091	32400.241	25.651784
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256Traits	13.511	19401.960	22.967708
-SumKernel256Traits_Args0	8.466	30964.751	36.655542
-SumKernel256Traits_Args	8.455	31005.994	36.704365
+SumKernel256Traits	13.962	18775.932	14.865203
+SumKernel256Traits_Args0	8.002	32759.494	25.936210
+SumKernel256Traits_Args	8.025	32665.368	25.861689
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
 VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
 VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
+VectorTraits128Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(32!=16) !
+VectorTraits128Sse: Requires hardware support Sse, Sse2! Vector byte size mismatch(32!=16) !
 VectorTraits256Base: OK.
 VectorTraits256Avx2: OK.
 
@@ -317,7 +330,6 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
@@ -333,11 +345,15 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
-Vectors.Instance:	VectorTraits256Avx2
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -345,100 +361,104 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-24614
-SumScalar	261.003	1004.370
-SumBase	253.541	1033.930	1.029432
-SumTraits	32.532	8058.075	8.023015
-SumTraits_Args0	17.967	14590.246	14.526766
-SumTraits_Args	18.045	14527.035	14.463830
+SumScalar	258.486	1014.152
+SumBase	253.957	1032.239	1.017835
+SumTraits	31.934	8208.898	8.094344
+SumTraits_Args0	17.705	14806.353	14.599732
+SumTraits_Args	18.774	13963.010	13.768157
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	31.291	8377.537	8.341088
-SumKernelTraits	27.943	9381.227	9.340410
-SumKernelTraits_Args0	17.985	14575.460	14.512044
-SumKernelTraits_Args	19.174	13672.167	13.612682
+Sum256Traits	30.436	8613.060	8.492866
+SumKernelTraits	27.077	9681.463	9.546360
+SumKernelTraits_Args0	18.548	14133.277	13.936049
+SumKernelTraits_Args	18.472	14191.424	13.993384
 SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256_Avx2_Multiply	25.844	10143.220	10.099088
-SumKernel256_Avx2_ShiftLane	26.223	9996.539	9.953045
-SumKernel256Traits	25.771	10172.071	10.127814
-SumKernel256Traits_Args0	17.680	14827.097	14.762587
-SumKernel256Traits_Args	18.250	14364.013	14.301517
+SumKernel256_Avx2_Multiply	23.903	10966.893	10.813851
+SumKernel256_Avx2_ShiftLane	25.457	10297.433	10.153733
+SumKernel256Traits	25.724	10190.495	10.048288
+SumKernel256Traits_Args0	18.673	14038.623	13.842715
+SumKernel256Traits_Args	18.777	13960.799	13.765978
 
 [ShuffleBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-467755046
-SumScalar	370.066	708.372
-SumBase	350.042	748.893	1.057204
-SumTraits	45.095	5813.206	8.206433
-SumTraits_Args0	28.428	9221.310	13.017614
-SumTraits_Args	28.603	9164.854	12.937915
+SumScalar	371.995	704.698
+SumBase	350.008	748.965	1.062817
+SumTraits	45.223	5796.653	8.225726
+SumTraits_Args0	27.715	9458.512	13.422077
+SumTraits_Args	29.632	8846.709	12.553900
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	34.032	7702.905	10.874099
-SumKernelTraits	37.106	7064.711	9.973168
-SumKernelTraits_Args0	23.633	11092.301	15.658869
-SumKernelTraits_Args	23.896	10970.116	15.486382
+Sum256Traits	35.473	7389.938	10.486672
+SumKernelTraits	37.223	7042.597	9.993779
+SumKernelTraits_Args0	25.225	10392.273	14.747127
+SumKernelTraits_Args	26.674	9827.635	13.945879
 SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256Traits	23.720	11051.656	15.601492
-SumKernel256Traits_Args0	26.350	9948.481	14.044152
-SumKernel256Traits_Args	25.833	10147.550	14.325176
+SumKernel256Traits	23.466	11171.389	15.852731
+SumKernel256Traits_Args0	26.554	9872.190	14.009105
+SumKernel256Traits_Args	25.661	10215.792	14.496693
 
 [ShuffleBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	5910372263572008452
-SumScalar	548.641	477.806
-SumBase	547.939	478.418	1.001281
-SumTraits	104.095	2518.325	5.270601
-SumTraits_Args0	58.921	4449.098	9.311515
-SumTraits_Args	62.196	4214.808	8.821169
+SumScalar	548.039	478.331
+SumBase	547.635	478.684	1.000738
+SumTraits	99.533	2633.737	5.506100
+SumTraits_Args0	57.667	4545.861	9.503590
+SumTraits_Args	60.492	4333.526	9.059683
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	101.448	2584.016	5.408086
-SumKernelTraits	82.027	3195.810	6.688511
-SumKernelTraits_Args0	55.706	4705.843	9.848856
-SumKernelTraits_Args	48.245	5433.558	11.371892
+Sum256Traits	100.097	2618.891	5.475063
+SumKernelTraits	79.633	3291.889	6.882033
+SumKernelTraits_Args0	51.306	5109.451	10.681835
+SumKernelTraits_Args	55.493	4723.944	9.875893
+SumKernel128_Sse_DuplicateEven	Run fail! Vector byte size mismatch(32!=16) !
 SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumKernel128_Arm_Multiply	Run fail! Requires hardware support AdvSimd!
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256_Avx2_AlignRight	89.620	2925.062	6.121861
-SumKernel256_Avx2_DuplicateEven	115.062	2278.289	4.768230
-SumKernel256_Avx2_Multiply	171.270	1530.592	3.203376
-SumKernel256_Avx2_ShiftLane	115.931	2261.214	4.732495
-SumKernel256Traits	120.271	2179.618	4.561722
-SumKernel256Traits_Args0	84.193	3113.626	6.516507
-SumKernel256Traits_Args	62.881	4168.885	8.725058
+SumKernel256_Avx2_AlignRight	78.824	3325.674	6.952664
+SumKernel256_Avx2_DuplicateEven	76.989	3404.973	7.118447
+SumKernel256_Avx2_Multiply	118.841	2205.840	4.611535
+SumKernel256_Avx2_ShiftLane	77.609	3377.771	7.061579
+SumKernel256Traits	77.342	3389.419	7.085930
+SumKernel256Traits_Args0	47.872	5475.897	11.447926
+SumKernel256Traits_Args	48.363	5420.309	11.331714
 
 [ShuffleBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	114
-SumScalar	258.544	1013.924
-SumBase	240.431	1090.308	1.075334
-SumTraits	14.755	17766.242	17.522254
-SumTraits_Args0	8.342	31423.344	30.991800
-SumTraits_Args	8.292	31615.120	31.180942
+SumScalar	258.653	1013.498
+SumBase	204.759	1280.258	1.263206
+SumTraits	12.564	20865.138	20.587246
+SumTraits_Args0	8.405	31187.251	30.771883
+SumTraits_Args	8.539	30699.425	30.290555
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_Avx2_Add1	13.992	18735.483	18.478184
-Sum256_Avx2_Add2	14.876	17621.875	17.379870
-Sum256_Avx2_Cmp2	13.413	19544.513	19.276103
-Sum256Traits	11.830	22158.597	21.854288
-SumKernelTraits	11.382	23032.250	22.715943
-SumKernelTraits_Args0	8.463	30974.022	30.548648
-SumKernelTraits_Args	8.529	30734.831	30.312742
+Sum256_Avx2_Add1	13.703	19130.998	18.876201
+Sum256_Avx2_Add2	13.807	18986.698	18.733824
+Sum256_Avx2_Cmp2	13.965	18771.154	18.521150
+Sum256_Avx2_EqualAnd	16.922	15491.101	15.284783
+Sum256Traits	12.340	21242.696	20.959776
+SumKernelTraits	10.719	24456.437	24.130714
+SumKernelTraits_Args0	8.129	32247.207	31.817722
+SumKernelTraits_Args	8.271	31696.002	31.273859
 SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256Traits	10.077	26014.344	25.657083
-SumKernel256Traits_Args0	8.458	30993.177	30.567540
-SumKernel256Traits_Args	8.388	31250.668	30.821495
+SumKernel256Traits	9.729	26944.824	26.585960
+SumKernel256Traits_Args0	8.178	32055.663	31.628730
+SumKernel256Traits_Args	8.236	31828.286	31.404381
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
 VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
 VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
+VectorTraits128Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(32!=16) !
+VectorTraits128Sse: Requires hardware support Sse, Sse2! Vector byte size mismatch(32!=16) !
 VectorTraits256Base: OK.
 VectorTraits256Avx2: OK.
 
@@ -450,7 +470,6 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
@@ -466,11 +485,15 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.14/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
-Vectors.Instance:	VectorTraits256Avx2
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -478,100 +501,104 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-24614
-SumScalar	253.301	1034.912
-SumBase	258.301	1014.877	0.980641
-SumTraits	32.697	8017.278	7.746821
-SumTraits_Args0	18.188	14413.193	13.926974
-SumTraits_Args	18.463	14198.718	13.719734
+SumScalar	260.196	1007.489
+SumBase	256.699	1021.210	1.013620
+SumTraits	31.734	8260.645	8.199245
+SumTraits_Args0	20.626	12709.454	12.614986
+SumTraits_Args	22.283	11764.498	11.677054
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	30.580	8572.468	8.283282
-SumKernelTraits	27.348	9585.573	9.262210
-SumKernelTraits_Args0	18.124	14464.147	13.976208
-SumKernelTraits_Args	18.009	14556.627	14.065569
+Sum256Traits	31.409	8346.029	8.283994
+SumKernelTraits	27.178	9645.427	9.573733
+SumKernelTraits_Args0	18.674	14037.800	13.933458
+SumKernelTraits_Args	18.785	13955.069	13.851342
 SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256_Avx2_Multiply	25.492	10283.465	9.936559
-SumKernel256_Avx2_ShiftLane	26.255	9984.497	9.647676
-SumKernel256Traits	25.549	10260.544	9.914412
-SumKernel256Traits_Args0	22.896	11449.426	11.063187
-SumKernel256Traits_Args	18.759	13974.440	13.503022
+SumKernel256_Avx2_Multiply	30.625	8559.762	8.496138
+SumKernel256_Avx2_ShiftLane	27.394	9569.339	9.498211
+SumKernel256Traits	26.181	10012.695	9.938272
+SumKernel256Traits_Args0	17.445	15027.159	14.915463
+SumKernel256Traits_Args	18.734	13992.654	13.888648
 
 [ShuffleBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-467755046
-SumScalar	356.475	735.378
-SumBase	366.603	715.063	0.972375
-SumTraits	36.718	7139.337	9.708394
-SumTraits_Args0	28.619	9159.683	12.455754
-SumTraits_Args	29.152	8992.356	12.228215
+SumScalar	365.728	716.773
+SumBase	357.238	733.809	1.023767
+SumTraits	39.558	6626.829	9.245363
+SumTraits_Args0	29.594	8858.010	12.358177
+SumTraits_Args	28.774	9110.320	12.710185
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	30.619	8561.380	11.642153
-SumKernelTraits	37.815	6932.192	9.426709
-SumKernelTraits_Args0	23.543	11134.924	15.141776
-SumKernelTraits_Args	24.942	10510.208	14.292258
+Sum256Traits	30.313	8647.773	12.064867
+SumKernelTraits	37.465	6996.997	9.761800
+SumKernelTraits_Args0	24.522	10690.334	14.914528
+SumKernelTraits_Args	23.379	11212.747	15.643368
 SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256Traits	26.609	9851.523	13.396549
-SumKernel256Traits_Args0	26.432	9917.648	13.486468
-SumKernel256Traits_Args	26.909	9741.727	13.247243
+SumKernel256Traits	25.153	10422.075	14.540269
+SumKernel256Traits_Args0	24.425	10732.581	14.973468
+SumKernel256Traits_Args	25.798	10161.214	14.176331
 
 [ShuffleBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	5910372263572008452
-SumScalar	570.819	459.242
-SumBase	570.426	459.559	1.000690
-SumTraits	107.725	2433.449	5.298844
-SumTraits_Args0	59.484	4406.994	9.596245
-SumTraits_Args	61.057	4293.438	9.348975
+SumScalar	581.114	451.106
+SumBase	575.608	455.421	1.009565
+SumTraits	109.135	2402.019	5.324734
+SumTraits_Args0	59.700	4391.024	9.733910
+SumTraits_Args	60.234	4352.073	9.647562
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	169.146	1549.809	3.374715
-SumKernelTraits	152.877	1714.735	3.733841
-SumKernelTraits_Args0	64.851	4042.262	8.802040
-SumKernelTraits_Args	63.312	4140.529	9.016016
+Sum256Traits	96.391	2719.593	6.028724
+SumKernelTraits	77.690	3374.221	7.479886
+SumKernelTraits_Args0	53.361	4912.615	10.890158
+SumKernelTraits_Args	54.003	4854.242	10.760759
+SumKernel128_Sse_DuplicateEven	Run fail! Vector byte size mismatch(32!=16) !
 SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumKernel128_Arm_Multiply	Run fail! Requires hardware support AdvSimd!
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256_Avx2_AlignRight	158.658	1652.260	3.597801
-SumKernel256_Avx2_DuplicateEven	141.988	1846.244	4.020202
-SumKernel256_Avx2_Multiply	185.095	1416.268	3.083929
-SumKernel256_Avx2_ShiftLane	111.417	2352.816	5.123264
-SumKernel256Traits	99.414	2636.886	5.741829
-SumKernel256Traits_Args0	58.062	4514.884	9.831175
-SumKernel256Traits_Args	57.779	4537.030	9.879398
+SumKernel256_Avx2_AlignRight	91.068	2878.562	6.381122
+SumKernel256_Avx2_DuplicateEven	79.054	3316.022	7.350871
+SumKernel256_Avx2_Multiply	113.604	2307.516	5.115241
+SumKernel256_Avx2_ShiftLane	78.118	3355.722	7.438879
+SumKernel256Traits	79.124	3313.071	7.344331
+SumKernel256Traits_Args0	53.813	4871.359	10.798703
+SumKernel256Traits_Args	51.336	5106.469	11.319888
 
 [ShuffleBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	114
-SumScalar	243.286	1077.513
-SumBase	244.728	1071.163	0.994107
-SumTraits	16.241	16140.964	14.979830
-SumTraits_Args0	8.371	31314.488	29.061816
-SumTraits_Args	8.197	31980.794	29.680190
+SumScalar	213.260	1229.225
+SumBase	216.280	1212.060	0.986036
+SumTraits	13.153	19929.717	16.213237
+SumTraits_Args0	8.076	32460.652	26.407412
+SumTraits_Args	8.040	32603.163	26.523348
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_Avx2_Add1	13.074	20051.159	18.608738
-Sum256_Avx2_Add2	13.316	19686.080	18.269922
-Sum256_Avx2_Cmp2	11.961	21917.193	20.340535
-Sum256Traits	12.168	21543.760	19.993966
-SumKernelTraits	10.990	23853.314	22.137377
-SumKernelTraits_Args0	8.214	31913.287	29.617539
-SumKernelTraits_Args	8.113	32311.418	29.987030
+Sum256_Avx2_Add1	13.692	19145.866	15.575559
+Sum256_Avx2_Add2	13.250	19784.878	16.095408
+Sum256_Avx2_Cmp2	10.730	24430.113	19.874402
+Sum256_Avx2_EqualAnd	12.573	20849.258	16.961303
+Sum256Traits	11.777	22258.705	18.107917
+SumKernelTraits	10.801	24270.131	19.744254
+SumKernelTraits_Args0	8.568	30594.901	24.889585
+SumKernelTraits_Args	8.068	32491.589	26.432580
 SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256Traits	9.707	27007.048	25.064240
-SumKernel256Traits_Args0	8.169	32091.019	29.782485
-SumKernel256Traits_Args	8.136	32222.099	29.904136
+SumKernel256Traits	9.781	26800.954	21.803131
+SumKernel256Traits_Args0	8.154	32151.067	26.155559
+SumKernel256Traits_Args	8.138	32212.198	26.205290
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
 VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
 VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
+VectorTraits128Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(32!=16) !
+VectorTraits128Sse: Requires hardware support Sse, Sse2! Vector byte size mismatch(32!=16) !
 VectorTraits256Base: OK.
 VectorTraits256Avx2: OK.
 
@@ -583,7 +610,6 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
@@ -599,11 +625,15 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.3/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
-Vectors.Instance:	VectorTraits256Avx2
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -611,112 +641,676 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-24614
-SumScalar	265.048	989.043
-SumBase	260.370	1006.813	1.017966
-SumTraits	28.934	9060.106	9.160475
-SumTraits_Args0	18.449	14209.436	14.366849
-SumTraits_Args	18.692	14024.591	14.179956
+SumScalar	261.340	1003.075
+SumBase	260.812	1005.107	1.002027
+SumTraits	26.738	9804.195	9.774143
+SumTraits_Args0	17.759	14761.122	14.715875
+SumTraits_Args	17.563	14925.738	14.879987
 Sum128_Bcl	Run fail! Vector byte size mismatch(32!=16) !
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_Bcl	337.883	775.841	0.784436
-Sum256Traits	22.005	11912.737	12.044707
-SumKernelTraits	25.376	10330.592	10.445035
-SumKernelTraits_Args0	18.098	14484.413	14.644872
-SumKernelTraits_Args	18.357	14280.139	14.438335
+Sum256_Bcl	336.209	779.704	0.777314
+Sum256Traits	22.302	11754.418	11.718388
+SumKernelTraits	24.275	10798.954	10.765853
+SumKernelTraits_Args0	18.877	13887.220	13.844653
+SumKernelTraits_Args	18.463	14198.492	14.154970
 SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256_Avx2_Multiply	19.401	13511.561	13.661243
-SumKernel256_Avx2_ShiftLane	24.505	10697.449	10.815956
-SumKernel256Traits	19.235	13628.575	13.779553
-SumKernel256Traits_Args0	18.347	14287.774	14.446055
-SumKernel256Traits_Args	18.432	14222.289	14.379845
+SumKernel256_Avx2_Multiply	18.177	14422.079	14.377872
+SumKernel256_Avx2_ShiftLane	23.866	10983.845	10.950177
+SumKernel256Traits	18.950	13833.350	13.790947
+SumKernel256Traits_Args0	18.344	14290.465	14.246661
+SumKernel256Traits_Args	18.267	14350.829	14.306840
 
 [ShuffleBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-467755046
-SumScalar	350.624	747.651
-SumBase	349.832	749.342	1.002261
-SumTraits	28.338	9250.625	12.372921
-SumTraits_Args0	26.946	9728.639	13.012276
-SumTraits_Args	26.671	9828.623	13.146007
+SumScalar	352.618	743.423
+SumBase	348.832	751.490	1.010851
+SumTraits	26.453	9909.691	13.329817
+SumTraits_Args0	27.561	9511.275	12.793896
+SumTraits_Args	28.090	9332.213	12.553035
 Sum128_Bcl	Run fail! Vector byte size mismatch(32!=16) !
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_Bcl	428.765	611.393	0.817752
-Sum256Traits	27.433	9555.813	12.781118
-SumKernelTraits	26.222	9996.960	13.371162
-SumKernelTraits_Args0	23.242	11279.116	15.086074
-SumKernelTraits_Args	23.148	11324.558	15.146854
+Sum256_Bcl	426.097	615.221	0.827552
+Sum256Traits	27.785	9434.578	12.690729
+SumKernelTraits	24.691	10616.814	14.280989
+SumKernelTraits_Args0	25.518	10272.796	13.818240
+SumKernelTraits_Args	25.982	10089.265	13.571367
 SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256Traits	25.026	10475.013	14.010568
-SumKernel256Traits_Args0	26.028	10071.736	13.471176
-SumKernel256Traits_Args	25.948	10102.702	13.512595
+SumKernel256Traits	23.661	11079.125	14.902857
+SumKernel256Traits_Args0	23.547	11132.643	14.974846
+SumKernel256Traits_Args	23.146	11325.758	15.234611
 
 [ShuffleBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	5910372263572008452
-SumScalar	567.386	462.021
-SumBase	589.084	445.003	0.963167
-SumTraits	74.382	3524.309	7.628036
-SumTraits_Args0	58.455	4484.512	9.706305
-SumTraits_Args	61.384	4270.565	9.243236
+SumScalar	586.956	446.616
+SumBase	566.302	462.905	1.036472
+SumTraits	81.767	3205.985	7.178387
+SumTraits_Args0	54.757	4787.368	10.719197
+SumTraits_Args	61.363	4272.037	9.565340
 Sum128_Bcl	Run fail! Vector byte size mismatch(32!=16) !
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_Bcl	508.166	515.863	1.116537
-Sum256Traits	65.541	3999.694	8.656962
-SumKernelTraits	64.789	4046.124	8.757456
-SumKernelTraits_Args0	53.692	4882.344	10.567375
-SumKernelTraits_Args	54.748	4788.233	10.363680
+Sum256_Bcl	515.404	508.619	1.138827
+Sum256Traits	73.474	3567.844	7.988611
+SumKernelTraits	65.671	3991.753	8.937769
+SumKernelTraits_Args0	53.639	4887.197	10.942719
+SumKernelTraits_Args	53.836	4869.304	10.902655
+SumKernel128_Sse_DuplicateEven	Run fail! Vector byte size mismatch(32!=16) !
 SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumKernel128_Arm_Multiply	Run fail! Requires hardware support AdvSimd!
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256_Avx2_AlignRight	67.158	3903.387	8.448514
-SumKernel256_Avx2_DuplicateEven	56.803	4614.976	9.988683
-SumKernel256_Avx2_Multiply	117.836	2224.655	4.815057
-SumKernel256_Avx2_ShiftLane	58.532	4478.636	9.693586
-SumKernel256Traits	60.134	4359.323	9.435344
-SumKernel256Traits_Args0	54.122	4843.565	10.483441
-SumKernel256Traits_Args	53.669	4884.430	10.571891
+SumKernel256_Avx2_AlignRight	69.535	3769.965	8.441171
+SumKernel256_Avx2_DuplicateEven	55.374	4734.096	10.599917
+SumKernel256_Avx2_Multiply	110.007	2382.979	5.335628
+SumKernel256_Avx2_ShiftLane	58.566	4476.046	10.022128
+SumKernel256Traits	57.035	4596.196	10.291152
+SumKernel256Traits_Args0	49.555	5289.930	11.844462
+SumKernel256Traits_Args	47.500	5518.767	12.356842
 
 [ShuffleBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	114
-SumScalar	207.732	1261.932
-SumBase	209.558	1250.940	0.991289
-SumTraits	10.683	24537.440	19.444339
-SumTraits_Args0	7.638	34322.789	27.198596
-SumTraits_Args	7.906	33156.240	26.274181
+SumScalar	216.864	1208.795
+SumBase	214.814	1220.330	1.009543
+SumTraits	10.081	26004.767	21.512975
+SumTraits_Args0	7.624	34384.734	28.445474
+SumTraits_Args	8.162	32117.686	26.570012
 Sum128_Bcl	Run fail! Vector byte size mismatch(32!=16) !
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_Bcl	281.776	930.329	0.737226
-Sum256_Avx2_Add1	10.286	25485.263	20.195427
-Sum256_Avx2_Add2	10.327	25385.425	20.116312
-Sum256_Avx2_Cmp2	10.271	25522.923	20.225270
-Sum256Traits	8.636	30353.955	24.053552
-SumKernelTraits	8.853	29612.169	23.465734
-SumKernelTraits_Args0	7.792	33643.052	26.659948
-SumKernelTraits_Args	7.949	32977.071	26.132202
+Sum256_Bcl	281.288	931.941	0.770967
+Sum256_Avx2_Add1	10.380	25254.533	20.892329
+Sum256_Avx2_Add2	11.453	22889.121	18.935493
+Sum256_Avx2_Cmp2	10.919	24008.159	19.861241
+Sum256_Avx2_EqualAnd	10.700	24500.101	20.268209
+Sum256Traits	8.553	30648.230	25.354374
+SumKernelTraits	8.091	32399.369	26.803040
+SumKernelTraits_Args0	7.627	34368.848	28.432332
+SumKernelTraits_Args	8.335	31451.719	26.019077
 SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 SumKernel128Traits	Run fail! Vector byte size mismatch(32!=16) !
-SumKernel256Traits	7.774	33722.566	26.722958
-SumKernel256Traits_Args0	7.901	33179.123	26.292315
-SumKernel256Traits_Args	8.147	32176.595	25.497876
+SumKernel256Traits	8.314	31531.864	26.085379
+SumKernel256Traits_Args0	8.323	31496.054	26.055754
+SumKernel256Traits_Args	8.329	31473.059	26.036731
 
 VectorTraitsBase: OK.
 VectorTraits128Base: Vector byte size mismatch(32!=16) !
 VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
 VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
+VectorTraits128Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(32!=16) !
+VectorTraits128Sse: Requires hardware support Sse, Sse2! Vector byte size mismatch(32!=16) !
 VectorTraits256Base: OK.
 VectorTraits256Avx2: OK.
 
 ``` 
+
+
+### lntel Core i5-8250U - 128 bit
+`lntel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
+SET COMPlus_EnableAVX2=0
+
+#### .NET Core 3.1 
+``` 
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
+Environment.Version:	3.1.32
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.32\
+RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vector128s.Instance:	WVectorTraits128Sse	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vectors.Instance:	VectorTraits128Sse	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[ShuffleBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-24614
+SumScalar	354.130	740.249
+SumBase	360.542	727.083	0.982215
+SumTraits	75.709	3462.537	4.677533
+SumTraits_Args0	21.301	12306.584	16.624935
+SumTraits_Args	21.345	12281.000	16.590374
+Sum128Traits	69.228	3786.654	5.115383
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	52.994	4946.668	6.682443
+SumKernelTraits_Args0	21.220	12353.493	16.688305
+SumKernelTraits_Args	21.360	12272.866	16.579387
+SumKernel128Traits	41.250	6355.005	8.584962
+SumKernel256_Avx2_Multiply	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_ShiftLane	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+[ShuffleBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-467755046
+SumScalar	596.163	439.719
+SumBase	548.806	477.662	1.086291
+SumTraits	134.431	1950.031	4.434725
+SumTraits_Args0	42.198	6212.169	14.127601
+SumTraits_Args	40.373	6493.041	14.766356
+Sum128Traits	123.777	2117.871	4.816423
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	91.296	2871.354	6.529981
+SumKernelTraits_Args0	42.706	6138.326	13.959669
+SumKernelTraits_Args	42.221	6208.813	14.119970
+SumKernel128Traits	84.045	3119.094	7.093385
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+[ShuffleBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5910372263572008452
+SumScalar	949.546	276.073
+SumBase	947.525	276.662	1.002133
+SumTraits	315.833	830.008	3.006478
+SumTraits_Args0	80.528	3255.313	11.791491
+SumTraits_Args	84.247	3111.626	11.271023
+Sum128Traits	248.691	1054.096	3.818176
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	180.891	1449.179	5.249257
+SumKernelTraits_Args0	95.993	2730.876	9.891858
+SumKernelTraits_Args	90.021	2912.020	10.548006
+SumKernel128_Sse_DuplicateEven	212.979	1230.846	4.458407
+SumKernel128Traits	206.803	1267.601	4.591541
+SumKernel256_Avx2_AlignRight	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_DuplicateEven	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_Multiply	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_ShiftLane	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+[ShuffleBenchmark_SByte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	114
+SumScalar	272.126	963.320
+SumBase	255.178	1027.300	1.066416
+SumTraits	24.689	10617.759	11.022046
+SumTraits_Args0	9.885	26518.244	27.527965
+SumTraits_Args	10.013	26180.253	27.177104
+Sum128Traits	24.749	10591.944	10.995248
+Sum256_Avx2_Add1	Run fail! Requires hardware support Avx, Avx2!
+Sum256_Avx2_Add2	Run fail! Requires hardware support Avx, Avx2!
+Sum256_Avx2_Cmp2	Run fail! Requires hardware support Avx, Avx2!
+Sum256_Avx2_EqualAnd	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	10.162	25796.330	26.778564
+SumKernelTraits_Args0	10.043	26101.227	27.095070
+SumKernelTraits_Args	10.542	24867.437	25.814301
+SumKernel128Traits	10.717	24461.205	25.392602
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+VectorTraitsBase: OK.
+VectorTraits128Base: OK.
+VectorTraits128AdvSimd: Requires hardware support AdvSimd!
+VectorTraits128AdvSimdB64: Requires hardware support AdvSimd!
+VectorTraits128Avx2: Requires hardware support Avx, Avx2!
+VectorTraits128Sse: OK.
+VectorTraits256Base: Vector byte size mismatch(16!=32) !
+VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+
+``` 
+
+#### .NET 5.0 
+``` 
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
+Environment.Version:	5.0.17
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\5.0.17\
+RuntimeInformation.FrameworkDescription:	.NET 5.0.17
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Sse	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vectors.Instance:	VectorTraits128Sse	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[ShuffleBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-24614
+SumScalar	341.105	768.515
+SumBase	342.790	764.736	0.995083
+SumTraits	41.903	6255.944	8.140303
+SumTraits_Args0	19.640	13347.670	17.368134
+SumTraits_Args	20.049	13074.901	17.013205
+Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	35.378	7409.713	9.641601
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	32.451	8078.267	10.511530
+SumKernelTraits_Args0	20.985	12492.054	16.254798
+SumKernelTraits_Args	20.047	13076.678	17.015517
+SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumKernel128Traits	25.501	10279.712	13.376075
+SumKernel256_Avx2_Multiply	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_ShiftLane	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+[ShuffleBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-467755046
+SumScalar	526.068	498.308
+SumBase	526.121	498.258	0.999900
+SumTraits	86.284	3038.154	6.096941
+SumTraits_Args0	38.756	6763.988	13.573912
+SumTraits_Args	42.042	6235.346	12.513039
+Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	74.780	3505.560	7.034927
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	66.389	3948.604	7.924025
+SumKernelTraits_Args0	48.280	5429.647	10.896168
+SumKernelTraits_Args	40.068	6542.452	13.129335
+SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumKernel128Traits	60.985	4298.532	8.626256
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+[ShuffleBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5910372263572008452
+SumScalar	899.126	291.554
+SumBase	898.188	291.859	1.001044
+SumTraits	188.791	1388.538	4.762537
+SumTraits_Args0	78.404	3343.512	11.467888
+SumTraits_Args	82.046	3195.081	10.958787
+Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	181.537	1444.028	4.952862
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	135.012	1941.636	6.659603
+SumKernelTraits_Args0	81.805	3204.512	10.991133
+SumKernelTraits_Args	78.550	3337.283	11.446524
+SumKernel128_Sse_DuplicateEven	152.328	1720.917	5.902562
+SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumKernel128_Arm_Multiply	Run fail! Requires hardware support AdvSimd!
+SumKernel128Traits	114.464	2290.195	7.855125
+SumKernel256_Avx2_AlignRight	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_DuplicateEven	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_Multiply	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_ShiftLane	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+[ShuffleBenchmark_SByte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	114
+SumScalar	247.819	1057.803
+SumBase	249.187	1051.996	0.994510
+SumTraits	16.302	16080.835	15.202106
+SumTraits_Args0	10.139	25854.669	24.441854
+SumTraits_Args	10.029	26139.450	24.711072
+Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	13.988	18740.745	17.716666
+Sum256_Avx2_Add1	Run fail! Requires hardware support Avx, Avx2!
+Sum256_Avx2_Add2	Run fail! Requires hardware support Avx, Avx2!
+Sum256_Avx2_Cmp2	Run fail! Requires hardware support Avx, Avx2!
+Sum256_Avx2_EqualAnd	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	12.103	21659.094	20.475544
+SumKernelTraits_Args0	9.597	27315.981	25.823313
+SumKernelTraits_Args	9.399	27889.534	26.365524
+SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumKernel128Traits	10.402	25201.216	23.824108
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+VectorTraitsBase: OK.
+VectorTraits128Base: OK.
+VectorTraits128AdvSimd: Requires hardware support AdvSimd!
+VectorTraits128AdvSimdB64: Requires hardware support AdvSimd!
+VectorTraits128Avx2: Requires hardware support Avx, Avx2!
+VectorTraits128Sse: OK.
+VectorTraits256Base: Vector byte size mismatch(16!=32) !
+VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+
+``` 
+
+#### .NET 6.0 
+``` 
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
+Environment.Version:	6.0.14
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.14\
+RuntimeInformation.FrameworkDescription:	.NET 6.0.14
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.14/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Sse	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vectors.Instance:	VectorTraits128Sse	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[ShuffleBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-24614
+SumScalar	339.232	772.758
+SumBase	339.199	772.833	1.000097
+SumTraits	37.061	7073.393	9.153439
+SumTraits_Args0	19.326	13564.558	17.553435
+SumTraits_Args	20.397	12852.249	16.631661
+Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	36.862	7111.410	9.202635
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	29.535	8875.736	11.485789
+SumKernelTraits_Args0	18.763	13971.670	18.080265
+SumKernelTraits_Args	18.678	14035.159	18.162424
+SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumKernel128Traits	27.586	9502.717	12.297145
+SumKernel256_Avx2_Multiply	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_ShiftLane	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+[ShuffleBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-467755046
+SumScalar	545.804	480.289
+SumBase	550.924	475.826	0.990707
+SumTraits	84.634	3097.391	6.449012
+SumTraits_Args0	39.607	6618.650	13.780550
+SumTraits_Args	38.682	6776.833	14.109900
+Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	79.035	3316.811	6.905862
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	60.746	4315.436	8.985078
+SumKernelTraits_Args0	37.430	7003.559	14.581961
+SumKernelTraits_Args	38.737	6767.243	14.089933
+SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumKernel128Traits	58.473	4483.136	9.334243
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+[ShuffleBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5910372263572008452
+SumScalar	936.094	280.040
+SumBase	935.590	280.191	1.000538
+SumTraits	200.503	1307.429	4.668715
+SumTraits_Args0	79.919	3280.135	11.713081
+SumTraits_Args	79.550	3295.345	11.767392
+Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	179.428	1461.001	5.217109
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	121.791	2152.402	7.686043
+SumKernelTraits_Args0	79.737	3287.616	11.739792
+SumKernelTraits_Args	81.785	3205.269	11.445740
+SumKernel128_Sse_DuplicateEven	152.666	1717.103	6.131627
+SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumKernel128_Arm_Multiply	Run fail! Requires hardware support AdvSimd!
+SumKernel128Traits	119.116	2200.748	7.858681
+SumKernel256_Avx2_AlignRight	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_DuplicateEven	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_Multiply	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_ShiftLane	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+[ShuffleBenchmark_SByte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	114
+SumScalar	254.800	1028.821
+SumBase	254.775	1028.922	1.000098
+SumTraits	13.244	19793.764	19.239261
+SumTraits_Args0	10.313	25418.389	24.706318
+SumTraits_Args	9.547	27457.767	26.688565
+Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	12.232	21431.121	20.830749
+Sum256_Avx2_Add1	Run fail! Requires hardware support Avx, Avx2!
+Sum256_Avx2_Add2	Run fail! Requires hardware support Avx, Avx2!
+Sum256_Avx2_Cmp2	Run fail! Requires hardware support Avx, Avx2!
+Sum256_Avx2_EqualAnd	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	11.987	21868.788	21.256155
+SumKernelTraits_Args0	9.833	26659.470	25.912631
+SumKernelTraits_Args	9.570	27392.049	26.624687
+SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumKernel128Traits	9.746	26896.689	26.143205
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+VectorTraitsBase: OK.
+VectorTraits128Base: OK.
+VectorTraits128AdvSimd: Requires hardware support AdvSimd!
+VectorTraits128AdvSimdB64: Requires hardware support AdvSimd!
+VectorTraits128Avx2: Requires hardware support Avx, Avx2!
+VectorTraits128Sse: OK.
+VectorTraits256Base: Vector byte size mismatch(16!=32) !
+VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+
+``` 
+
+#### .NET 7.0 
+``` 
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
+Environment.Version:	7.0.3
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.3\
+RuntimeInformation.FrameworkDescription:	.NET 7.0.3
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.3/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Sse	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vectors.Instance:	VectorTraits128Sse	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[ShuffleBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-24614
+SumScalar	345.338	759.095
+SumBase	347.968	753.356	0.992440
+SumTraits	32.362	8100.287	10.670979
+SumTraits_Args0	18.009	14556.397	19.175988
+SumTraits_Args	18.833	13919.373	18.336799
+Sum128_Bcl	421.209	622.361	0.819873
+Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	26.654	9835.238	12.956531
+Sum256_Bcl	Run fail! Vector byte size mismatch(16!=32) !
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	25.414	10315.084	13.588660
+SumKernelTraits_Args0	18.747	13982.928	18.420524
+SumKernelTraits_Args	18.963	13824.059	18.211236
+SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumKernel128Traits	20.046	13077.237	17.227404
+SumKernel256_Avx2_Multiply	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_ShiftLane	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+[ShuffleBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-467755046
+SumScalar	551.442	475.379
+SumBase	554.771	472.526	0.993999
+SumTraits	72.087	3636.507	7.649700
+SumTraits_Args0	37.420	7005.379	14.736404
+SumTraits_Args	37.551	6981.091	14.685313
+Sum128_Bcl	489.351	535.698	1.126885
+Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	53.002	4945.924	10.404169
+Sum256_Bcl	Run fail! Vector byte size mismatch(16!=32) !
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	52.057	5035.680	10.592977
+SumKernelTraits_Args0	38.451	6817.644	14.341489
+SumKernelTraits_Args	37.360	7016.655	14.760124
+SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumKernel128Traits	41.215	6360.422	13.379683
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+[ShuffleBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5910372263572008452
+SumScalar	945.030	277.392
+SumBase	944.207	277.634	1.000872
+SumTraits	143.821	1822.714	6.570889
+SumTraits_Args0	78.615	3334.538	12.021021
+SumTraits_Args	78.138	3354.894	12.094403
+Sum128_Bcl	869.310	301.554	1.087104
+Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	141.217	1856.322	6.692047
+Sum256_Bcl	Run fail! Vector byte size mismatch(16!=32) !
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	111.055	2360.493	8.509584
+SumKernelTraits_Args0	73.657	3558.987	12.830159
+SumKernelTraits_Args	73.557	3563.819	12.847578
+SumKernel128_Sse_DuplicateEven	121.139	2163.989	7.801187
+SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumKernel128_Arm_Multiply	Run fail! Requires hardware support AdvSimd!
+SumKernel128Traits	92.240	2841.992	10.245390
+SumKernel256_Avx2_AlignRight	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_DuplicateEven	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_Multiply	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256_Avx2_ShiftLane	Run fail! Requires hardware support Avx, Avx2!
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+[ShuffleBenchmark_SByte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	114
+SumScalar	254.523	1029.944
+SumBase	256.476	1022.099	0.992383
+SumTraits	13.408	19550.985	18.982572
+SumTraits_Args0	9.081	28865.877	28.026649
+SumTraits_Args	10.749	24388.763	23.679700
+Sum128_Bcl	326.565	802.731	0.779393
+Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	12.172	21536.321	20.910188
+Sum256_Bcl	Run fail! Vector byte size mismatch(16!=32) !
+Sum256_Avx2_Add1	Run fail! Requires hardware support Avx, Avx2!
+Sum256_Avx2_Add2	Run fail! Requires hardware support Avx, Avx2!
+Sum256_Avx2_Cmp2	Run fail! Requires hardware support Avx, Avx2!
+Sum256_Avx2_EqualAnd	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernelTraits	10.692	24517.746	23.804933
+SumKernelTraits_Args0	9.460	27710.286	26.904654
+SumKernelTraits_Args	9.389	27920.304	27.108566
+SumKernel128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumKernel128Traits	9.270	28278.463	27.456312
+SumKernel256Traits	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args0	Run fail! Vector byte size mismatch(16!=32) !
+SumKernel256Traits_Args	Run fail! Vector byte size mismatch(16!=32) !
+
+VectorTraitsBase: OK.
+VectorTraits128Base: OK.
+VectorTraits128AdvSimd: Requires hardware support AdvSimd!
+VectorTraits128AdvSimdB64: Requires hardware support AdvSimd!
+VectorTraits128Avx2: Requires hardware support Avx, Avx2!
+VectorTraits128Sse: OK.
+VectorTraits256Base: Vector byte size mismatch(16!=32) !
+VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+
+```
+
 
 ## Arm
 

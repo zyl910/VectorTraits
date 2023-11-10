@@ -1,7 +1,8 @@
 @REM Put me to `VectorTraits/tests/`
 cd /d "%~dp0"
-@ECHO OFF
+@REM SET COMPlus_EnableAVX2=0
 
+@ECHO OFF
 SET my_args=-accelerated0 -fixedVector0 -test0 -cpuDetection0
 
 :Check_netcore3_1
