@@ -1051,7 +1051,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleKernel_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1) {
                 if (Ssse3.IsSupported) {
                     args1 = default;
-                    args0 = Sse2.Add(Multiply(indices, Vector128Constants.Shuffle_UInt64_Multiplier).AsByte(), Vector128Constants.Shuffle_UInt64_ByteOffset).AsUInt64();
+                    //args0 = Sse2.Add(Multiply(indices, Vector128Constants.Shuffle_UInt64_Multiplier).AsByte(), Vector128Constants.Shuffle_UInt64_ByteOffset).AsUInt64();
+                    Vector128<uint> temp = Sse2.Multiply(indices.AsUInt32(), Vector128Constants.Shuffle_UInt64_Multiplier.AsUInt32()).AsUInt32(); // (temp0, 0, temp1, 0)
+                    temp = Sse2.Shuffle(temp, (byte)ShuffleControlG4.XXZZ);  // (temp0, temp0, temp1, temp1)
+                    args0 = Sse2.Add(temp.AsByte(), Vector128Constants.Shuffle_UInt64_ByteOffset).AsUInt64();
                 } else {
                     SuperStatics.YShuffleKernel_Args(indices, out args0, out args1);
                 }
