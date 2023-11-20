@@ -4,7 +4,7 @@
       "commandName": "Project",
       "commandLineArgs": "",
       "environmentVariables": {
-        "COMPlus_EnableAVX2": "0"
+        "COMPlus_EnableAVX2": "1"
       }
     }
   }

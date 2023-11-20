@@ -237,6 +237,97 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.Dot_AcceleratedTypes"/>
+            public static TypeCodeFlags Dot_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static float Dot(Vector256<float> left, Vector256<float> right) {
+                Vector256<float> temp = Avx.Multiply(left, right);
+                return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static double Dot(Vector256<double> left, Vector256<double> right) {
+                Vector256<double> temp = Avx.Multiply(left, right);
+                return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static sbyte Dot(Vector256<sbyte> left, Vector256<sbyte> right) {
+                return (sbyte)Dot(left.AsByte(), right.AsByte());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{byte}, Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static byte Dot(Vector256<byte> left, Vector256<byte> right) {
+                Widen(left, out Vector256<ushort> u0, out Vector256<ushort> u1);
+                Widen(right, out Vector256<ushort> v0, out Vector256<ushort> v1);
+                Vector256<ushort> w0 = Avx2.MultiplyLow(u0, v0);
+                Vector256<ushort> w1 = Avx2.MultiplyLow(u1, v1);
+                w0 = Avx2.Add(w0, w1);
+                return (byte)Sum(w0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{short}, Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static short Dot(Vector256<short> left, Vector256<short> right) {
+                Vector256<short> temp = Avx2.MultiplyLow(left, right);
+                return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{ushort}, Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ushort Dot(Vector256<ushort> left, Vector256<ushort> right) {
+                Vector256<ushort> temp = Avx2.MultiplyLow(left, right);
+                return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{int}, Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static int Dot(Vector256<int> left, Vector256<int> right) {
+                Vector256<int> temp = Avx2.MultiplyLow(left, right);
+                return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{uint}, Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint Dot(Vector256<uint> left, Vector256<uint> right) {
+                Vector256<uint> temp = Avx2.MultiplyLow(left, right);
+                return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{long}, Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static long Dot(Vector256<long> left, Vector256<long> right) {
+                Vector256<long> temp = Multiply(left, right);
+                return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{ulong}, Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong Dot(Vector256<ulong> left, Vector256<ulong> right) {
+                Vector256<ulong> temp = Multiply(left, right);
+                return Sum(temp);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.Equals_AcceleratedTypes"/>
             public static TypeCodeFlags Equals_AcceleratedTypes {
                 get {

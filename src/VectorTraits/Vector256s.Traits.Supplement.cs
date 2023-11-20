@@ -343,6 +343,122 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.Dot_AcceleratedTypes"/>
+        public static TypeCodeFlags Dot_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Dot_AcceleratedTypes;
+#else
+                return _instance.Dot_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Dot(Vector256<float> left, Vector256<float> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Dot(Vector256<double> left, Vector256<double> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static sbyte Dot(Vector256<sbyte> left, Vector256<sbyte> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte Dot(Vector256<byte> left, Vector256<byte> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static short Dot(Vector256<short> left, Vector256<short> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ushort Dot(Vector256<ushort> left, Vector256<ushort> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Dot(Vector256<int> left, Vector256<int> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint Dot(Vector256<uint> left, Vector256<uint> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long Dot(Vector256<long> left, Vector256<long> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Dot(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ulong Dot(Vector256<ulong> left, Vector256<ulong> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.Equals_AcceleratedTypes"/>
         public static TypeCodeFlags Equals_AcceleratedTypes {
             get {
