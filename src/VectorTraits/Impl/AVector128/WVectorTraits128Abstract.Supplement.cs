@@ -221,6 +221,78 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.Dot_AcceleratedTypes"/>
+        public virtual TypeCodeFlags Dot_AcceleratedTypes {
+            get {
+                return Statics.Dot_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual float Dot(Vector128<float> left, Vector128<float> right) {
+            return Statics.Dot(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual double Dot(Vector128<double> left, Vector128<double> right) {
+            return Statics.Dot(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{sbyte}, Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual sbyte Dot(Vector128<sbyte> left, Vector128<sbyte> right) {
+            return Statics.Dot(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{byte}, Vector128{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual byte Dot(Vector128<byte> left, Vector128<byte> right) {
+            return Statics.Dot(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{short}, Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual short Dot(Vector128<short> left, Vector128<short> right) {
+            return Statics.Dot(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{ushort}, Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual ushort Dot(Vector128<ushort> left, Vector128<ushort> right) {
+            return Statics.Dot(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{int}, Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual int Dot(Vector128<int> left, Vector128<int> right) {
+            return Statics.Dot(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{uint}, Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual uint Dot(Vector128<uint> left, Vector128<uint> right) {
+            return Statics.Dot(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual long Dot(Vector128<long> left, Vector128<long> right) {
+            return Statics.Dot(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual ulong Dot(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.Dot(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Equals_AcceleratedTypes"/>
         public virtual TypeCodeFlags Equals_AcceleratedTypes {
             get {

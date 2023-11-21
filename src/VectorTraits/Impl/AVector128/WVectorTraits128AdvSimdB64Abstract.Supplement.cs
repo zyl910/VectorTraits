@@ -68,6 +68,20 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.Divide(left, right);
         }
 
+        /// <inheritdoc cref="IWVectorTraits128.Dot_AcceleratedTypes"/>
+        public override TypeCodeFlags Dot_AcceleratedTypes {
+            get {
+                return Statics.Dot_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override double Dot(Vector128<double> left, Vector128<double> right) {
+            return Statics.Dot(left, right);
+        }
+
+
 
         /// <inheritdoc cref="IWVectorTraits128.Equals_AcceleratedTypes"/>
         public override TypeCodeFlags Equals_AcceleratedTypes {

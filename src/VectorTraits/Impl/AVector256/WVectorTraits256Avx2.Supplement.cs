@@ -240,12 +240,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Dot_AcceleratedTypes"/>
             public static TypeCodeFlags Dot_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.None;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                    if (Vector256.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlagsUtil.AllTypes;
-                    }
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    TypeCodeFlags rt = Multiply_AcceleratedTypes;
                     return rt;
                 }
             }

@@ -682,6 +682,274 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Dot_AcceleratedTypes"/>
+            public static TypeCodeFlags Dot_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static float Dot(Vector128<float> left, Vector128<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Dot(left, right);
+#else
+                return Dot_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static double Dot(Vector128<double> left, Vector128<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Dot(left, right);
+#else
+                return Dot_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static sbyte Dot(Vector128<sbyte> left, Vector128<sbyte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Dot(left, right);
+#else
+                return Dot_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static byte Dot(Vector128<byte> left, Vector128<byte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Dot(left, right);
+#else
+                return Dot_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static short Dot(Vector128<short> left, Vector128<short> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Dot(left, right);
+#else
+                return Dot_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ushort Dot(Vector128<ushort> left, Vector128<ushort> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Dot(left, right);
+#else
+                return Dot_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static int Dot(Vector128<int> left, Vector128<int> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Dot(left, right);
+#else
+                return Dot_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint Dot(Vector128<uint> left, Vector128<uint> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Dot(left, right);
+#else
+                return Dot_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static long Dot(Vector128<long> left, Vector128<long> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Dot(left, right);
+#else
+                return Dot_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong Dot(Vector128<ulong> left, Vector128<ulong> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Dot(left, right);
+#else
+                return Dot_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static float Dot_Basic(Vector128<float> left, Vector128<float> right) {
+                ref FixedArray4<float> pleft = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref left);
+                ref FixedArray4<float> pright = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref right);
+                float rt = pleft.I0 * pright.I0;
+                rt += pleft.I1 * pright.I1;
+                rt += pleft.I2 * pright.I2;
+                rt += pleft.I3 * pright.I3;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static double Dot_Basic(Vector128<double> left, Vector128<double> right) {
+                ref FixedArray2<double> pleft = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref left);
+                ref FixedArray2<double> pright = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref right);
+                double rt = pleft.I0 * pright.I0;
+                rt += pleft.I1 * pright.I1;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static sbyte Dot_Basic(Vector128<sbyte> left, Vector128<sbyte> right) {
+                ref FixedArray16<sbyte> pleft = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref left);
+                ref FixedArray16<sbyte> pright = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref right);
+                int rt = pleft.I0 * pright.I0;
+                rt += pleft.I1 * pright.I1;
+                rt += pleft.I2 * pright.I2;
+                rt += pleft.I3 * pright.I3;
+                rt += pleft.I4 * pright.I4;
+                rt += pleft.I5 * pright.I5;
+                rt += pleft.I6 * pright.I6;
+                rt += pleft.I7 * pright.I7;
+                rt += pleft.I8 * pright.I8;
+                rt += pleft.I9 * pright.I9;
+                rt += pleft.I10 * pright.I10;
+                rt += pleft.I11 * pright.I11;
+                rt += pleft.I12 * pright.I12;
+                rt += pleft.I13 * pright.I13;
+                rt += pleft.I14 * pright.I14;
+                rt += pleft.I15 * pright.I15;
+                return (sbyte)rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static byte Dot_Basic(Vector128<byte> left, Vector128<byte> right) {
+                ref FixedArray16<byte> pleft = ref Unsafe.As<Vector128<byte>, FixedArray16<byte>>(ref left);
+                ref FixedArray16<byte> pright = ref Unsafe.As<Vector128<byte>, FixedArray16<byte>>(ref right);
+                int rt = pleft.I0 * pright.I0;
+                rt += pleft.I1 * pright.I1;
+                rt += pleft.I2 * pright.I2;
+                rt += pleft.I3 * pright.I3;
+                rt += pleft.I4 * pright.I4;
+                rt += pleft.I5 * pright.I5;
+                rt += pleft.I6 * pright.I6;
+                rt += pleft.I7 * pright.I7;
+                rt += pleft.I8 * pright.I8;
+                rt += pleft.I9 * pright.I9;
+                rt += pleft.I10 * pright.I10;
+                rt += pleft.I11 * pright.I11;
+                rt += pleft.I12 * pright.I12;
+                rt += pleft.I13 * pright.I13;
+                rt += pleft.I14 * pright.I14;
+                rt += pleft.I15 * pright.I15;
+                return (byte)rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static short Dot_Basic(Vector128<short> left, Vector128<short> right) {
+                ref FixedArray8<short> pleft = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref left);
+                ref FixedArray8<short> pright = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref right);
+                int rt = pleft.I0 * pright.I0;
+                rt += pleft.I1 * pright.I1;
+                rt += pleft.I2 * pright.I2;
+                rt += pleft.I3 * pright.I3;
+                rt += pleft.I4 * pright.I4;
+                rt += pleft.I5 * pright.I5;
+                rt += pleft.I6 * pright.I6;
+                rt += pleft.I7 * pright.I7;
+                return (short)rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ushort Dot_Basic(Vector128<ushort> left, Vector128<ushort> right) {
+                ref FixedArray8<ushort> pleft = ref Unsafe.As<Vector128<ushort>, FixedArray8<ushort>>(ref left);
+                ref FixedArray8<ushort> pright = ref Unsafe.As<Vector128<ushort>, FixedArray8<ushort>>(ref right);
+                int rt = pleft.I0 * pright.I0;
+                rt += pleft.I1 * pright.I1;
+                rt += pleft.I2 * pright.I2;
+                rt += pleft.I3 * pright.I3;
+                rt += pleft.I4 * pright.I4;
+                rt += pleft.I5 * pright.I5;
+                rt += pleft.I6 * pright.I6;
+                rt += pleft.I7 * pright.I7;
+                return (ushort)rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static int Dot_Basic(Vector128<int> left, Vector128<int> right) {
+                ref FixedArray4<int> pleft = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref left);
+                ref FixedArray4<int> pright = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref right);
+                int rt = pleft.I0 * pright.I0;
+                rt += pleft.I1 * pright.I1;
+                rt += pleft.I2 * pright.I2;
+                rt += pleft.I3 * pright.I3;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint Dot_Basic(Vector128<uint> left, Vector128<uint> right) {
+                ref FixedArray4<uint> pleft = ref Unsafe.As<Vector128<uint>, FixedArray4<uint>>(ref left);
+                ref FixedArray4<uint> pright = ref Unsafe.As<Vector128<uint>, FixedArray4<uint>>(ref right);
+                uint rt = pleft.I0 * pright.I0;
+                rt += pleft.I1 * pright.I1;
+                rt += pleft.I2 * pright.I2;
+                rt += pleft.I3 * pright.I3;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static long Dot_Basic(Vector128<long> left, Vector128<long> right) {
+                ref FixedArray2<long> pleft = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref left);
+                ref FixedArray2<long> pright = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref right);
+                long rt = pleft.I0 * pright.I0;
+                rt += pleft.I1 * pright.I1;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong Dot_Basic(Vector128<ulong> left, Vector128<ulong> right) {
+                ref FixedArray2<ulong> pleft = ref Unsafe.As<Vector128<ulong>, FixedArray2<ulong>>(ref left);
+                ref FixedArray2<ulong> pright = ref Unsafe.As<Vector128<ulong>, FixedArray2<ulong>>(ref right);
+                ulong rt = pleft.I0 * pright.I0;
+                rt += pleft.I1 * pright.I1;
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Equals_AcceleratedTypes"/>
             public static TypeCodeFlags Equals_AcceleratedTypes {
                 get {

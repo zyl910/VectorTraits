@@ -227,6 +227,90 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Dot_AcceleratedTypes"/>
+            public static TypeCodeFlags Dot_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static float Dot(Vector128<float> left, Vector128<float> right) {
+                Vector128<float> temp = AdvSimd.Multiply(left, right);
+                return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static double Dot(Vector128<double> left, Vector128<double> right) {
+                return SuperStatics.Dot(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static sbyte Dot(Vector128<sbyte> left, Vector128<sbyte> right) {
+                Vector128<sbyte> temp = AdvSimd.Multiply(left, right);
+                return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static byte Dot(Vector128<byte> left, Vector128<byte> right) {
+                Vector128<byte> temp = AdvSimd.Multiply(left, right);
+                return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static short Dot(Vector128<short> left, Vector128<short> right) {
+                Vector128<short> temp = AdvSimd.Multiply(left, right);
+                return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ushort Dot(Vector128<ushort> left, Vector128<ushort> right) {
+                Vector128<ushort> temp = AdvSimd.Multiply(left, right);
+                return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static int Dot(Vector128<int> left, Vector128<int> right) {
+                Vector128<int> temp = AdvSimd.Multiply(left, right);
+                return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint Dot(Vector128<uint> left, Vector128<uint> right) {
+                Vector128<uint> temp = AdvSimd.Multiply(left, right);
+                return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static long Dot(Vector128<long> left, Vector128<long> right) {
+                return SuperStatics.Dot(left, right);
+                //Vector128<long> temp = Multiply(left, right);
+                //return Sum(temp);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static ulong Dot(Vector128<ulong> left, Vector128<ulong> right) {
+                return SuperStatics.Dot(left, right);
+                //Vector128<ulong> temp = Multiply(left, right);
+                //return Sum(temp);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Equals_AcceleratedTypes"/>
             public static TypeCodeFlags Equals_AcceleratedTypes {
                 get {
