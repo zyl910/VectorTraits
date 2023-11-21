@@ -18,6 +18,20 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #if NET5_0_OR_GREATER
         partial class Statics {
 
+            /// <inheritdoc cref="IVectorTraits.Dot_AcceleratedTypes"/>
+            public static TypeCodeFlags Dot_AcceleratedTypes {
+                get {
+                    return WStatics.Dot_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Dot(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static double Dot(Vector<double> left, Vector<double> right) {
+                return WStatics.Dot(left.AsVector128(), right.AsVector128());
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.Multiply_AcceleratedTypes"/>
             public static TypeCodeFlags Multiply_AcceleratedTypes {
                 get {

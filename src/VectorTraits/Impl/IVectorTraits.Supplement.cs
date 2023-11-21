@@ -7,6 +7,123 @@ namespace Zyl.VectorTraits.Impl {
     partial interface IVectorTraits {
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Dot</c> (运行 <c>Dot</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Dot(Vector{byte}, Vector{byte})"/>
+        TypeCodeFlags Dot_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the dot product of two vectors (计算两个向量的点积).
+        /// Mnemonic: <c>rt := left[0]*right[0] + left[1]*right[1] + left[2]*right[2] + ... + left[Count-1]*right[Count-1]</c>.
+        /// </summary>
+        /// <param name="left">The vector that will be dotted with <paramref name="right" /> (将会与<paramref name="right" />进行点积的向量).</param>
+        /// <param name="right">The vector that will be dotted with <paramref name="left" /> (将会与<paramref name="left" />进行点积的向量).</param>
+        /// <returns>The dot product of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的点积).</returns>
+        /// <seealso cref="Dot_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Dot{T}(Vector{T}, Vector{T})"/>
+        float Dot(Vector<float> left, Vector<float> right);
+
+        /// <summary>
+        /// Computes the dot product of two vectors (计算两个向量的点积).
+        /// Mnemonic: <c>rt := left[0]*right[0] + left[1]*right[1] + left[2]*right[2] + ... + left[Count-1]*right[Count-1]</c>.
+        /// </summary>
+        /// <param name="left">The vector that will be dotted with <paramref name="right" /> (将会与<paramref name="right" />进行点积的向量).</param>
+        /// <param name="right">The vector that will be dotted with <paramref name="left" /> (将会与<paramref name="left" />进行点积的向量).</param>
+        /// <returns>The dot product of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的点积).</returns>
+        /// <seealso cref="Dot_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Dot{T}(Vector{T}, Vector{T})"/>
+        double Dot(Vector<double> left, Vector<double> right);
+
+        /// <summary>
+        /// Computes the dot product of two vectors (计算两个向量的点积).
+        /// Mnemonic: <c>rt := left[0]*right[0] + left[1]*right[1] + left[2]*right[2] + ... + left[Count-1]*right[Count-1]</c>.
+        /// </summary>
+        /// <param name="left">The vector that will be dotted with <paramref name="right" /> (将会与<paramref name="right" />进行点积的向量).</param>
+        /// <param name="right">The vector that will be dotted with <paramref name="left" /> (将会与<paramref name="left" />进行点积的向量).</param>
+        /// <returns>The dot product of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的点积).</returns>
+        /// <seealso cref="Dot_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Dot{T}(Vector{T}, Vector{T})"/>
+        sbyte Dot(Vector<sbyte> left, Vector<sbyte> right);
+
+        /// <summary>
+        /// Computes the dot product of two vectors (计算两个向量的点积).
+        /// Mnemonic: <c>rt := left[0]*right[0] + left[1]*right[1] + left[2]*right[2] + ... + left[Count-1]*right[Count-1]</c>.
+        /// </summary>
+        /// <param name="left">The vector that will be dotted with <paramref name="right" /> (将会与<paramref name="right" />进行点积的向量).</param>
+        /// <param name="right">The vector that will be dotted with <paramref name="left" /> (将会与<paramref name="left" />进行点积的向量).</param>
+        /// <returns>The dot product of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的点积).</returns>
+        /// <seealso cref="Dot_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Dot{T}(Vector{T}, Vector{T})"/>
+        byte Dot(Vector<byte> left, Vector<byte> right);
+
+        /// <summary>
+        /// Computes the dot product of two vectors (计算两个向量的点积).
+        /// Mnemonic: <c>rt := left[0]*right[0] + left[1]*right[1] + left[2]*right[2] + ... + left[Count-1]*right[Count-1]</c>.
+        /// </summary>
+        /// <param name="left">The vector that will be dotted with <paramref name="right" /> (将会与<paramref name="right" />进行点积的向量).</param>
+        /// <param name="right">The vector that will be dotted with <paramref name="left" /> (将会与<paramref name="left" />进行点积的向量).</param>
+        /// <returns>The dot product of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的点积).</returns>
+        /// <seealso cref="Dot_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Dot{T}(Vector{T}, Vector{T})"/>
+        short Dot(Vector<short> left, Vector<short> right);
+
+        /// <summary>
+        /// Computes the dot product of two vectors (计算两个向量的点积).
+        /// Mnemonic: <c>rt := left[0]*right[0] + left[1]*right[1] + left[2]*right[2] + ... + left[Count-1]*right[Count-1]</c>.
+        /// </summary>
+        /// <param name="left">The vector that will be dotted with <paramref name="right" /> (将会与<paramref name="right" />进行点积的向量).</param>
+        /// <param name="right">The vector that will be dotted with <paramref name="left" /> (将会与<paramref name="left" />进行点积的向量).</param>
+        /// <returns>The dot product of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的点积).</returns>
+        /// <seealso cref="Dot_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Dot{T}(Vector{T}, Vector{T})"/>
+        ushort Dot(Vector<ushort> left, Vector<ushort> right);
+
+        /// <summary>
+        /// Computes the dot product of two vectors (计算两个向量的点积).
+        /// Mnemonic: <c>rt := left[0]*right[0] + left[1]*right[1] + left[2]*right[2] + ... + left[Count-1]*right[Count-1]</c>.
+        /// </summary>
+        /// <param name="left">The vector that will be dotted with <paramref name="right" /> (将会与<paramref name="right" />进行点积的向量).</param>
+        /// <param name="right">The vector that will be dotted with <paramref name="left" /> (将会与<paramref name="left" />进行点积的向量).</param>
+        /// <returns>The dot product of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的点积).</returns>
+        /// <seealso cref="Dot_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Dot{T}(Vector{T}, Vector{T})"/>
+        int Dot(Vector<int> left, Vector<int> right);
+
+        /// <summary>
+        /// Computes the dot product of two vectors (计算两个向量的点积).
+        /// Mnemonic: <c>rt := left[0]*right[0] + left[1]*right[1] + left[2]*right[2] + ... + left[Count-1]*right[Count-1]</c>.
+        /// </summary>
+        /// <param name="left">The vector that will be dotted with <paramref name="right" /> (将会与<paramref name="right" />进行点积的向量).</param>
+        /// <param name="right">The vector that will be dotted with <paramref name="left" /> (将会与<paramref name="left" />进行点积的向量).</param>
+        /// <returns>The dot product of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的点积).</returns>
+        /// <seealso cref="Dot_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Dot{T}(Vector{T}, Vector{T})"/>
+        uint Dot(Vector<uint> left, Vector<uint> right);
+
+        /// <summary>
+        /// Computes the dot product of two vectors (计算两个向量的点积).
+        /// Mnemonic: <c>rt := left[0]*right[0] + left[1]*right[1] + left[2]*right[2] + ... + left[Count-1]*right[Count-1]</c>.
+        /// </summary>
+        /// <param name="left">The vector that will be dotted with <paramref name="right" /> (将会与<paramref name="right" />进行点积的向量).</param>
+        /// <param name="right">The vector that will be dotted with <paramref name="left" /> (将会与<paramref name="left" />进行点积的向量).</param>
+        /// <returns>The dot product of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的点积).</returns>
+        /// <seealso cref="Dot_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Dot{T}(Vector{T}, Vector{T})"/>
+        long Dot(Vector<long> left, Vector<long> right);
+
+        /// <summary>
+        /// Computes the dot product of two vectors (计算两个向量的点积).
+        /// Mnemonic: <c>rt := left[0]*right[0] + left[1]*right[1] + left[2]*right[2] + ... + left[Count-1]*right[Count-1]</c>.
+        /// </summary>
+        /// <param name="left">The vector that will be dotted with <paramref name="right" /> (将会与<paramref name="right" />进行点积的向量).</param>
+        /// <param name="right">The vector that will be dotted with <paramref name="left" /> (将会与<paramref name="left" />进行点积的向量).</param>
+        /// <returns>The dot product of <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的点积).</returns>
+        /// <seealso cref="Dot_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Dot{T}(Vector{T}, Vector{T})"/>
+        ulong Dot(Vector<ulong> left, Vector<ulong> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Multiply</c> (运行 <c>Multiply</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Multiply(Vector{byte}, Vector{byte})"/>

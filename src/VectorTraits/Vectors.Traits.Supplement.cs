@@ -11,6 +11,122 @@ namespace Zyl.VectorTraits {
 
     partial class Vectors {
 
+        /// <inheritdoc cref="IVectorTraits.Dot_AcceleratedTypes"/>
+        public static TypeCodeFlags Dot_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Dot_AcceleratedTypes;
+#else
+                return _instance.Dot_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Dot(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Dot(Vector<float> left, Vector<float> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Dot(Vector{double}, Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double Dot(Vector<double> left, Vector<double> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Dot(Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static sbyte Dot(Vector<sbyte> left, Vector<sbyte> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Dot(Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte Dot(Vector<byte> left, Vector<byte> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Dot(Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static short Dot(Vector<short> left, Vector<short> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Dot(Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ushort Dot(Vector<ushort> left, Vector<ushort> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Dot(Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Dot(Vector<int> left, Vector<int> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Dot(Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint Dot(Vector<uint> left, Vector<uint> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Dot(Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long Dot(Vector<long> left, Vector<long> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Dot(Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ulong Dot(Vector<ulong> left, Vector<ulong> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Dot(left, right);
+#else
+            return _instance.Dot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.Multiply_AcceleratedTypes"/>
         public static TypeCodeFlags Multiply_AcceleratedTypes {
             get {

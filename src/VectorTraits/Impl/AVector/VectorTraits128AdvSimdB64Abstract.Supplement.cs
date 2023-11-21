@@ -14,6 +14,20 @@ namespace Zyl.VectorTraits.Impl.AVector {
     partial class VectorTraits128AdvSimdB64Abstract {
 #if NET5_0_OR_GREATER
 
+        /// <inheritdoc cref="IVectorTraits.Dot_AcceleratedTypes"/>
+        public override TypeCodeFlags Dot_AcceleratedTypes {
+            get {
+                return Statics.Dot_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Dot(Vector{double}, Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override double Dot(Vector<double> left, Vector<double> right) {
+            return Statics.Dot(left, right);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.Multiply_AcceleratedTypes"/>
         public override TypeCodeFlags Multiply_AcceleratedTypes {
             get {

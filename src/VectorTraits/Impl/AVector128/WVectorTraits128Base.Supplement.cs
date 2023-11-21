@@ -688,7 +688,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                     if (Vector128.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
                     }
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                     return rt;
@@ -751,7 +751,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static ushort Dot(Vector128<ushort> left, Vector128<ushort> right) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector128.Dot(left, right);
+                return (ushort)Vector128.Dot(left.AsInt16(), right.AsInt16());
 #else
                 return Dot_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
@@ -772,7 +772,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint Dot(Vector128<uint> left, Vector128<uint> right) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return Vector128.Dot(left, right);
+                return (uint)Vector128.Dot(left.AsInt32(), right.AsInt32());
 #else
                 return Dot_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
