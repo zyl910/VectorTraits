@@ -132,7 +132,7 @@ namespace Zyl.VectorTraits {
         public static readonly Vector<T> DemoNaN2;
         /// <summary>Serial bit pos mask (顺序位偏移的掩码). The element whose index exceeds the number of bits has a value of 0(索引超过位数的元素值为0). e.g. 1, 2, 4, 8, 0x10 ...</summary>
         public static readonly Vector<T> MaskBitPosSerial;
-        /// <summary>Serial bit pos rotate mask (顺序位偏移的旋转掩码). e.g. 1, 2, 4, 8, 0x10 ...</summary>
+        /// <summary>Serial bit pos rotate mask (顺序位偏移的旋转掩码). e.g. 1, 2, 4, 8, 0x10, ... 1, 2, 4, 8, 0x10, ...</summary>
         public static readonly Vector<T> MaskBitPosSerialRotate;
         /// <summary>Serial bits mask (顺序位集的掩码). The element whose index exceeds the number of bits has a value of all bit set 1(索引超过位数的元素值为所有位都是1的值). e.g. 1, 3, 7, 0xF, 0x1F ...</summary>
         public static readonly Vector<T> MaskBitsSerial;

@@ -301,6 +301,58 @@ namespace Zyl.VectorTraits.Impl {
 
         // -- Vectors_T: others --
 
+        /// <inheritdoc cref="Vector128s{T}.MaskBitPosSerialRotate"/>
+        /// <remarks>For 8-bit.</remarks>
+        /// <seealso cref="Vector128s{T}.MaskBitPosSerialRotate"/>
+        public static Vector128<byte> MaskBitPosSerialRotate8 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)1, 2, 4, 8, 0x10, 0x20, 0x40, 0x80, 1, 2, 4, 8, 0x10, 0x20, 0x40, 0x80);
+        }
+#else
+            get;
+        } = Vector128s<byte>.MaskBitPosSerialRotate;
+#endif // USE_VECTOR_CREATE
+
+        /// <inheritdoc cref="Vector128s{T}.MaskBitPosSerialRotate"/>
+        /// <remarks>For 16-bit.</remarks>
+        /// <seealso cref="Vector128s{T}.MaskBitPosSerialRotate"/>
+        public static Vector128<short> MaskBitPosSerialRotate16 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((short)1, 2, 4, 8, 0x10, 0x20, 0x40, 0x80);
+        }
+#else
+            get;
+        } = Vector128s<short>.MaskBitPosSerialRotate;
+#endif // USE_VECTOR_CREATE
+
+        /// <inheritdoc cref="Vector128s{T}.MaskBitPosSerialRotate"/>
+        /// <remarks>For 32-bit.</remarks>
+        /// <seealso cref="Vector128s{T}.MaskBitPosSerialRotate"/>
+        public static Vector128<int> MaskBitPosSerialRotate32 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((int)1, 2, 4, 8);
+        }
+#else
+            get;
+        } = Vector128s<int>.MaskBitPosSerialRotate;
+#endif // USE_VECTOR_CREATE
+
+        /// <inheritdoc cref="Vector128s{T}.MaskBitPosSerialRotate"/>
+        /// <remarks>For 64-bit.</remarks>
+        /// <seealso cref="Vector128s{T}.MaskBitPosSerialRotate"/>
+        public static Vector128<long> MaskBitPosSerialRotate64 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((long)1, 2);
+        }
+#else
+            get;
+        } = Vector128s<long>.MaskBitPosSerialRotate;
+#endif // USE_VECTOR_CREATE
+
         /// <summary>
         /// Get bits mask by index (根据索引获取位集掩码). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>).
         /// The equivalent of <c>Vector128s&lt;T&gt;.GetMaskBits(index)</c>.

@@ -239,13 +239,153 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint ExtractMostSignificantBits(Vector128<sbyte> vector) {
-                return ExtractMostSignificantBits(vector.AsByte());
+                return ExtractMostSignificantBits_ShiftAnd(vector);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{byte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint ExtractMostSignificantBits(Vector128<byte> vector) {
+                return ExtractMostSignificantBits_ShiftAnd(vector);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{short})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<short> vector) {
+                return ExtractMostSignificantBits_ShiftAnd(vector);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<ushort> vector) {
+                return ExtractMostSignificantBits_ShiftAnd(vector);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{int})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<int> vector) {
+                return ExtractMostSignificantBits_ShiftAnd(vector);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<uint> vector) {
+                return ExtractMostSignificantBits_ShiftAnd(vector);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{long})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<long> vector) {
+                return ExtractMostSignificantBits_ShiftAnd(vector);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits(Vector128<ulong> vector) {
+                return ExtractMostSignificantBits_ShiftAnd(vector);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_ShiftAnd(Vector128<sbyte> vector) {
+                return ExtractMostSignificantBits_ShiftAnd(vector.AsByte());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_ShiftAnd(Vector128<byte> vector) {
+                // https://github.com/WebAssembly/simd/pull/201#issue-380682845
+                // Lowering for ARM64
+                // While ARM doesn't directly support this instruction, it supports horizontal add (which is not exposed in WASM), which makes it possible to emulate these as follows:
+                // int bitmask_8(int8x16_t val) {
+                //     static const uint8x16_t mask = {1, 2, 4, 8, 16, 32, 64, 128, 1, 2, 4, 8, 16, 32, 64, 128};
+                //     uint8x16_t masked = vandq_u8(mask, (uint8x16_t)vshrq_n_s8(val, 7));
+                //     uint8x16_t maskedhi = vextq_u8(masked, masked, 8);
+                //     return vaddvq_u16((uint16x8_t)vzip1q_u8(masked, maskedhi));
+                // }
+                // int bitmask_16(int16x8_t val) {
+                //     static const uint16x8_t mask = { 1, 2, 4, 8, 16, 32, 64, 128 };
+                //     return vaddvq_u16(vandq_u16((uint16x8_t)vshrq_n_s16(val, 15), mask));
+                // }
+                // int bitmask_32(int32x4_t val) {
+                //     static const uint32x4_t mask = { 1, 2, 4, 8 };
+                //     return vaddvq_u32(vandq_u32((uint32x4_t)vshrq_n_s32(val, 31), mask));
+                // }
+                Vector128<byte> mask = Vector128Constants.MaskBitPosSerialRotate8;
+                Vector128<byte> masked = AdvSimd.And(mask, AdvSimd.ShiftRightArithmetic(vector.AsSByte(), 7).AsByte());
+                Vector128<byte> maskedhi = AdvSimd.ExtractVector128(masked, masked, 8);
+                Vector128<ushort> temp = AdvSimd.Arm64.ZipLow(masked, maskedhi).AsUInt16();
+                uint rt = Sum(temp);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{short})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_ShiftAnd(Vector128<short> vector) {
+                return ExtractMostSignificantBits_ShiftAnd(vector.AsUInt16());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_ShiftAnd(Vector128<ushort> vector) {
+                Vector128<short> mask = Vector128Constants.MaskBitPosSerialRotate16;
+                Vector128<ushort> temp = AdvSimd.And(mask, AdvSimd.ShiftRightArithmetic(vector.AsInt16(), 15)).AsUInt16();
+                uint rt = Sum(temp);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{int})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_ShiftAnd(Vector128<int> vector) {
+                return ExtractMostSignificantBits_ShiftAnd(vector.AsUInt32());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_ShiftAnd(Vector128<uint> vector) {
+                Vector128<int> mask = Vector128Constants.MaskBitPosSerialRotate32;
+                Vector128<uint> temp = AdvSimd.And(mask, AdvSimd.ShiftRightArithmetic(vector.AsInt32(), 31)).AsUInt32();
+                uint rt = Sum(temp);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{long})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_ShiftAnd(Vector128<long> vector) {
+                return SuperStatics.ExtractMostSignificantBits_ShiftAnd(vector);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_ShiftAnd(Vector128<ulong> vector) {
+                return SuperStatics.ExtractMostSignificantBits_ShiftAnd(vector);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_ShiftVar(Vector128<sbyte> vector) {
+                return ExtractMostSignificantBits_ShiftVar(vector.AsByte());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static uint ExtractMostSignificantBits_ShiftVar(Vector128<byte> vector) {
                 Vector128<byte> m = AdvSimd.ShiftRightLogical(vector, 7); // Get MostSignificantBit .
                 m = AdvSimd.ShiftLogical(m, Vector128Constants.SerialRotate8.AsSByte());
                 SuperStatics.Widen(m, out Vector128<ushort> l, out Vector128<ushort> h);
@@ -258,14 +398,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{short})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector128<short> vector) {
-                return ExtractMostSignificantBits(vector.AsUInt16());
+            public static uint ExtractMostSignificantBits_ShiftVar(Vector128<short> vector) {
+                return ExtractMostSignificantBits_ShiftVar(vector.AsUInt16());
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector128<ushort> vector) {
+            public static uint ExtractMostSignificantBits_ShiftVar(Vector128<ushort> vector) {
                 Vector128<ushort> m = AdvSimd.ShiftRightLogical(vector, 15); // Get MostSignificantBit .
                 m = AdvSimd.ShiftLogical(m, Vector128s<short>.Serial);
                 uint rt = Sum(m);
@@ -275,14 +415,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{int})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector128<int> vector) {
-                return ExtractMostSignificantBits(vector.AsUInt32());
+            public static uint ExtractMostSignificantBits_ShiftVar(Vector128<int> vector) {
+                return ExtractMostSignificantBits_ShiftVar(vector.AsUInt32());
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector128<uint> vector) {
+            public static uint ExtractMostSignificantBits_ShiftVar(Vector128<uint> vector) {
                 Vector128<uint> m = AdvSimd.ShiftRightLogical(vector, 31); // Get MostSignificantBit .
                 m = AdvSimd.ShiftLogical(m, Vector128s<int>.Serial);
                 uint rt = Sum(m);
@@ -292,14 +432,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{long})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector128<long> vector) {
-                return ExtractMostSignificantBits(vector.AsUInt64());
+            public static uint ExtractMostSignificantBits_ShiftVar(Vector128<long> vector) {
+                return ExtractMostSignificantBits_ShiftVar(vector.AsUInt64());
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits(Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector128<ulong> vector) {
+            public static uint ExtractMostSignificantBits_ShiftVar(Vector128<ulong> vector) {
                 Vector128<ulong> m = AdvSimd.ShiftRightLogical(vector, 63); // Get MostSignificantBit .
                 m = AdvSimd.ShiftLogical(m, Vector128s<long>.Serial);
                 uint rt = (uint)Sum(m);
