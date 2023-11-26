@@ -146,6 +146,42 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YIsAllTrue</c> (运行 <c>YIsAllTrue</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsAllTrue{T}(Vector128{T})"/>
+        TypeCodeFlags YIsAllTrue_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Checks if all elements of the vector is true (检查向量中所有元素是不是都为true).
+        /// Mnemonic: <c>rt := value[0] &amp;&amp; value[1] &amp;&amp; value[2] &amp;&amp; ... &amp;&amp; value[Count-1]</c>. The element of value must be 0 or <see cref="Scalars{T}.AllBitsSet">AllBitsSet</see> (Signed integer value -1).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="value">The vector whose elements will be checked. The return value of a comparison category function can be assigned to it (将检查其元素的向量. 可将比较类函数的返回值赋值给它). e.g. <see cref="Vector128.Equals{T}(Vector128{T}, Vector128{T})"/>.</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="value"/> is true. (<paramref name="value" /> 中所有元素为true时返回<c>true</c>).</returns>
+        /// <seealso cref="YIsAllTrue_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAll{T}(Vector128{T}, Vector128{T})" />
+        bool YIsAllTrue<T>(Vector128<T> value) where T : struct;
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsAnyTrue</c> (运行 <c>YIsAnyTrue</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsAnyTrue{T}(Vector128{T})"/>
+        TypeCodeFlags YIsAnyTrue_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Checks if any elements of the vector is true (检查向量中任一元素是不是为true).
+        /// Mnemonic: <c>rt := value[0] || value[1] || value[2] || ... || value[Count-1]</c>. The element of value must be 0 or <see cref="Scalars{T}.AllBitsSet">AllBitsSet</see> (Signed integer value -1).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="value">The vector whose elements will be checked. The return value of a comparison category function can be assigned to it (将检查其元素的向量. 可将比较类函数的返回值赋值给它). e.g. <see cref="Vector128.Equals{T}(Vector128{T}, Vector128{T})"/>.</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="value"/> is true. (<paramref name="value" /> 中任一元素为true时返回<c>true</c>).</returns>
+        /// <seealso cref="YIsAnyTrue_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAny{T}(Vector128{T}, Vector128{T})" />
+        bool YIsAnyTrue<T>(Vector128<T> value) where T : struct;
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YNarrowSaturate</c> (运行 <c>YNarrowSaturate</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YNarrowSaturate(Vector128{short}, Vector128{short})"/>
