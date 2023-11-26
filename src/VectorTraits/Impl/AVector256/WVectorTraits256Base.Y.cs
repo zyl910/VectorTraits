@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
-using Zyl.VectorTraits.Impl.Util;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.Collections;
+using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits.Impl.AVector256 {
     partial class WVectorTraits256Base {

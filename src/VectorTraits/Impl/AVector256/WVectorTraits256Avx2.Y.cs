@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 #endif
+using Zyl.VectorTraits.Collections;
+using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits.Impl.AVector256 {
     using SuperStatics = WVectorTraits256Base.Statics;

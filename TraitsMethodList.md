@@ -103,6 +103,10 @@ Summary (概要):
 List (列表):
 - `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
   Mnemonic: `rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])` .
+- `YIsAllTrue`: Checks if all elements of the vector is true (检查向量中所有元素是不是都为true).
+  Mnemonic: `rt := value[0] && value[1] && value[2] && ... && value[Count-1]` . The element of value must be 0 or AllBitsSet (Signed integer value -1).
+- `YIsAnyTrue`: Checks if any elements of the vector is true (检查向量中任一元素是不是为true).
+  Mnemonic: `rt := value[0] || value[1] || value[2] || ... || value[Count-1]` . The element of value must be 0 or AllBitsSet (Signed integer value -1).
 - `YRoundToEven`: Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: `MidpointRounding.ToEven`.
   Mnemonic: `rt[i] := round_to_even(value[i])` .
 - `YRoundToZero`: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: `MidpointRounding.ToZero`.

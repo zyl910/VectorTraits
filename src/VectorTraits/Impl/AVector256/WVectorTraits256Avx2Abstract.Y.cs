@@ -88,6 +88,34 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsAllTrue_AcceleratedTypes"/>
+        public override TypeCodeFlags YIsAllTrue_AcceleratedTypes {
+            get {
+                return Statics.YIsAllTrue_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsAllTrue{T}(Vector256{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool YIsAllTrue<T>(Vector256<T> value) where T : struct {
+            return Statics.YIsAllTrue(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsAnyTrue_AcceleratedTypes"/>
+        public override TypeCodeFlags YIsAnyTrue_AcceleratedTypes {
+            get {
+                return Statics.YIsAnyTrue_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsAnyTrue{T}(Vector256{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool YIsAnyTrue<T>(Vector256<T> value) where T : struct {
+            return Statics.YIsAnyTrue(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public override TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {
