@@ -110,6 +110,60 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.EqualsAll_AcceleratedTypes"/>
+        public override TypeCodeFlags EqualsAll_AcceleratedTypes {
+            get {
+                return Statics.EqualsAll_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.EqualsAll(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool EqualsAll(Vector128<double> left, Vector128<double> right) {
+            return Statics.EqualsAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.EqualsAll(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool EqualsAll(Vector128<long> left, Vector128<long> right) {
+            return Statics.EqualsAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.EqualsAll(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool EqualsAll(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.EqualsAll(left, right);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.EqualsAny_AcceleratedTypes"/>
+        public override TypeCodeFlags EqualsAny_AcceleratedTypes {
+            get {
+                return Statics.EqualsAny_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.EqualsAny(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool EqualsAny(Vector128<double> left, Vector128<double> right) {
+            return Statics.EqualsAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.EqualsAny(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool EqualsAny(Vector128<long> left, Vector128<long> right) {
+            return Statics.EqualsAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.EqualsAny(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool EqualsAny(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.EqualsAny(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.GreaterThan_AcceleratedTypes"/>
         public override TypeCodeFlags GreaterThan_AcceleratedTypes {
             get {

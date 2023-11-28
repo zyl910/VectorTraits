@@ -559,6 +559,240 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>EqualsAll</c> (运行 <c>EqualsAll</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="EqualsAll(Vector128{byte}, Vector128{byte})"/>
+        TypeCodeFlags EqualsAll_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are equal (比较两个向量以判定所有元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) &amp;&amp; (left[1] == right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAll{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAll(Vector128<float> left, Vector128<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are equal (比较两个向量以判定所有元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) &amp;&amp; (left[1] == right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAll{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAll(Vector128<double> left, Vector128<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are equal (比较两个向量以判定所有元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) &amp;&amp; (left[1] == right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAll{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAll(Vector128<sbyte> left, Vector128<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are equal (比较两个向量以判定所有元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) &amp;&amp; (left[1] == right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAll{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAll(Vector128<byte> left, Vector128<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are equal (比较两个向量以判定所有元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) &amp;&amp; (left[1] == right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAll{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAll(Vector128<short> left, Vector128<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are equal (比较两个向量以判定所有元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) &amp;&amp; (left[1] == right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAll{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAll(Vector128<ushort> left, Vector128<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are equal (比较两个向量以判定所有元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) &amp;&amp; (left[1] == right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAll{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAll(Vector128<int> left, Vector128<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are equal (比较两个向量以判定所有元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) &amp;&amp; (left[1] == right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAll{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAll(Vector128<uint> left, Vector128<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are equal (比较两个向量以判定所有元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) &amp;&amp; (left[1] == right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAll{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAll(Vector128<long> left, Vector128<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are equal (比较两个向量以判定所有元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) &amp;&amp; (left[1] == right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAll{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAll(Vector128<ulong> left, Vector128<ulong> right);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>EqualsAny</c> (运行 <c>EqualsAny</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="EqualsAny(Vector128{byte}, Vector128{byte})"/>
+        TypeCodeFlags EqualsAny_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are equal (比较两个向量以判定任一元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) || (left[1] == right[1]) || ... || (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAny{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAny(Vector128<float> left, Vector128<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are equal (比较两个向量以判定任一元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) || (left[1] == right[1]) || ... || (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAny{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAny(Vector128<double> left, Vector128<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are equal (比较两个向量以判定任一元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) || (left[1] == right[1]) || ... || (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAny{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAny(Vector128<sbyte> left, Vector128<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are equal (比较两个向量以判定任一元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) || (left[1] == right[1]) || ... || (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAny{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAny(Vector128<byte> left, Vector128<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are equal (比较两个向量以判定任一元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) || (left[1] == right[1]) || ... || (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAny{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAny(Vector128<short> left, Vector128<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are equal (比较两个向量以判定任一元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) || (left[1] == right[1]) || ... || (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAny{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAny(Vector128<ushort> left, Vector128<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are equal (比较两个向量以判定任一元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) || (left[1] == right[1]) || ... || (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAny{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAny(Vector128<int> left, Vector128<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are equal (比较两个向量以判定任一元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) || (left[1] == right[1]) || ... || (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAny{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAny(Vector128<uint> left, Vector128<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are equal (比较两个向量以判定任一元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) || (left[1] == right[1]) || ... || (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAny{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAny(Vector128<long> left, Vector128<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are equal (比较两个向量以判定任一元素是否相等).
+        /// Mnemonic: <c>rt := (left[0] == right[0]) || (left[1] == right[1]) || ... || (left[Count-1] == right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素相等时返回<c>true</c>).</returns>
+        /// <seealso cref="EqualsAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.EqualsAny{T}(Vector128{T}, Vector128{T})"/>
+        bool EqualsAny(Vector128<ulong> left, Vector128<ulong> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>GreaterThan</c> (运行 <c>GreaterThan</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="GreaterThan(Vector128{byte}, Vector128{byte})"/>

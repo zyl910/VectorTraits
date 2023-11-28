@@ -122,6 +122,114 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             }
         }
 
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void EqualsAllTest<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.EqualsAll_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            Console.WriteLine();
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s.Create(src),
+                Vector128s<T>.Demo,
+                Vector128s<T>.Serial,
+                Vector128s<T>.SerialNegative,
+                Vector128s<T>.XyXMask,
+                Vector128s<T>.XyYMask,
+                Vector128s<T>.XyzwXMask
+            };
+            bool allowLog = false;
+            bool showNotEqualsAll = true;
+            foreach (Vector128<T> left in samples) {
+                foreach (Vector128<T> right in samples) {
+#if NET7_0_OR_GREATER
+                    bool expected = Vector128.EqualsAll(left, right);
+#else
+                    bool expected = Vector128s.EqualsAll((dynamic)left, (dynamic)right);
+#endif // NET7_0_OR_GREATER
+                    foreach (IWVectorTraits128 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        bool dst = instance.EqualsAll((dynamic)left, (dynamic)right);
+                        bool showLog = showNotEqualsAll && !expected.Equals(dst);
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (allowLog || showLog) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
+                        } else {
+                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                        }
+                    }
+                }
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void EqualsAnyTest<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.EqualsAny_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            Console.WriteLine();
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s.Create(src),
+                Vector128s<T>.Demo,
+                Vector128s<T>.Serial,
+                Vector128s<T>.SerialNegative,
+                Vector128s<T>.XyXMask,
+                Vector128s<T>.XyYMask,
+                Vector128s<T>.XyzwXMask
+            };
+            bool allowLog = false;
+            bool showNotEqualsAny = true;
+            foreach (Vector128<T> left in samples) {
+                foreach (Vector128<T> right in samples) {
+#if NET7_0_OR_GREATER
+                    bool expected = Vector128.EqualsAny(left, right);
+#else
+                    bool expected = Vector128s.EqualsAny((dynamic)left, (dynamic)right);
+#endif // NET7_0_OR_GREATER
+                    foreach (IWVectorTraits128 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        bool dst = instance.EqualsAny((dynamic)left, (dynamic)right);
+                        bool showLog = showNotEqualsAny && !expected.Equals(dst);
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (allowLog || showLog) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
+                        } else {
+                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                        }
+                    }
+                }
+            }
+        }
+
 #endif
     }
 }
