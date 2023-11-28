@@ -131,6 +131,50 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.YIsAllTrue_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsAllTrue_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsAllTrue_AcceleratedTypes;
+#else
+                return _instance.YIsAllTrue_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsAllTrue{T}(Vector{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool YIsAllTrue<T>(Vector<T> value) where T : struct {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsAllTrue(value);
+#else
+            return _instance.YIsAllTrue(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YIsAnyTrue_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsAnyTrue_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsAnyTrue_AcceleratedTypes;
+#else
+                return _instance.YIsAnyTrue_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsAnyTrue{T}(Vector{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool YIsAnyTrue<T>(Vector<T> value) where T : struct {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsAnyTrue(value);
+#else
+            return _instance.YIsAnyTrue(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_AcceleratedTypes"/>
         public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {
