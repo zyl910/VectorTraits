@@ -69,11 +69,15 @@ List (列表):
 - `Equals`: Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
   Mnemonic: `rt[i] := to_mask(left[i] == right[i])`.
 - `EqualsAll`: Compares two vectors to determine if all elements are equal (比较两个向量以判定所有元素是否相等).
-  Mnemonic: <c>rt := (left[0] == right[0]) && (left[1] == right[1]) && ... && (left[Count-1] == right[Count-1])</c>.
+  Mnemonic: `rt := (left[0] == right[0]) && (left[1] == right[1]) && ... && (left[Count-1] == right[Count-1])`.
 - `EqualsAny`: Compares two vectors to determine if any elements are equal (比较两个向量以判定任一元素是否相等).
-  Mnemonic: <c>rt := (left[0] == right[0]) || (left[1] == right[1]) || ... || (left[Count-1] == right[Count-1])</c>.
+  Mnemonic: `rt := (left[0] == right[0]) || (left[1] == right[1]) || ... || (left[Count-1] == right[Count-1])`.
 - `GreaterThan`: Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
   Mnemonic: `rt[i] := to_mask(left[i] > right[i])`.
+- `GreaterThanAll`: Compares two vectors to determine if all elements are equal (比较两个向量以判定所有元素是否大于).
+  Mnemonic: `rt := (left[0] > right[0]) && (left[1] > right[1]) && ... && (left[Count-1] > right[Count-1])`.
+- `GreaterThanAny`: Compares two vectors to determine if any elements are equal (比较两个向量以判定任一元素是否大于).
+  Mnemonic: `rt := (left[0] > right[0]) || (left[1] > right[1]) || ... || (left[Count-1] > right[Count-1])`.
 - `LessThan`: Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
   Mnemonic: `rt[i] := to_mask(left[i] < right[i])`.
 - `Max`: Computes the maximum of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最大值).
