@@ -2143,6 +2143,360 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual_AcceleratedTypes"/>
+            public static TypeCodeFlags GreaterThanOrEqual_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> GreaterThanOrEqual(Vector256<float> left, Vector256<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThanOrEqual(left, right);
+#else
+                return GreaterThanOrEqual_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> GreaterThanOrEqual(Vector256<double> left, Vector256<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThanOrEqual(left, right);
+#else
+                return GreaterThanOrEqual_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> GreaterThanOrEqual(Vector256<sbyte> left, Vector256<sbyte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThanOrEqual(left, right);
+#else
+                return GreaterThanOrEqual_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{byte}, Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> GreaterThanOrEqual(Vector256<byte> left, Vector256<byte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThanOrEqual(left, right);
+#else
+                return GreaterThanOrEqual_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{short}, Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> GreaterThanOrEqual(Vector256<short> left, Vector256<short> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThanOrEqual(left, right);
+#else
+                return GreaterThanOrEqual_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{ushort}, Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> GreaterThanOrEqual(Vector256<ushort> left, Vector256<ushort> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThanOrEqual(left, right);
+#else
+                return GreaterThanOrEqual_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{int}, Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> GreaterThanOrEqual(Vector256<int> left, Vector256<int> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThanOrEqual(left, right);
+#else
+                return GreaterThanOrEqual_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{uint}, Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> GreaterThanOrEqual(Vector256<uint> left, Vector256<uint> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThanOrEqual(left, right);
+#else
+                return GreaterThanOrEqual_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{long}, Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> GreaterThanOrEqual(Vector256<long> left, Vector256<long> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThanOrEqual(left, right);
+#else
+                return GreaterThanOrEqual_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{ulong}, Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> GreaterThanOrEqual(Vector256<ulong> left, Vector256<ulong> right) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.GreaterThanOrEqual(left, right);
+#else
+                return GreaterThanOrEqual_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> GreaterThanOrEqual_Basic(Vector256<float> left, Vector256<float> right) {
+                UnsafeUtil.SkipInit(out Vector256<float> rt);
+                ref FixedArray8<int> p = ref Unsafe.As<Vector256<float>, FixedArray8<int>>(ref rt);
+                ref FixedArray8<float> pleft = ref Unsafe.As<Vector256<float>, FixedArray8<float>>(ref left);
+                ref FixedArray8<float> pright = ref Unsafe.As<Vector256<float>, FixedArray8<float>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 >= pright.I3);
+                p.I4 = BitMath.ToInt32Mask(pleft.I4 >= pright.I4);
+                p.I5 = BitMath.ToInt32Mask(pleft.I5 >= pright.I5);
+                p.I6 = BitMath.ToInt32Mask(pleft.I6 >= pright.I6);
+                p.I7 = BitMath.ToInt32Mask(pleft.I7 >= pright.I7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> GreaterThanOrEqual_Basic(Vector256<double> left, Vector256<double> right) {
+                UnsafeUtil.SkipInit(out Vector256<double> rt);
+                ref FixedArray4<long> p = ref Unsafe.As<Vector256<double>, FixedArray4<long>>(ref rt);
+                ref FixedArray4<double> pleft = ref Unsafe.As<Vector256<double>, FixedArray4<double>>(ref left);
+                ref FixedArray4<double> pright = ref Unsafe.As<Vector256<double>, FixedArray4<double>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 >= pright.I3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> GreaterThanOrEqual_Basic(Vector256<sbyte> left, Vector256<sbyte> right) {
+                UnsafeUtil.SkipInit(out Vector256<sbyte> rt);
+                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector256<sbyte>, FixedArray32<sbyte>>(ref rt);
+                ref FixedArray32<sbyte> pleft = ref Unsafe.As<Vector256<sbyte>, FixedArray32<sbyte>>(ref left);
+                ref FixedArray32<sbyte> pright = ref Unsafe.As<Vector256<sbyte>, FixedArray32<sbyte>>(ref right);
+                p.I0 = (sbyte)BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
+                p.I1 = (sbyte)BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
+                p.I2 = (sbyte)BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
+                p.I3 = (sbyte)BitMath.ToInt32Mask(pleft.I3 >= pright.I3);
+                p.I4 = (sbyte)BitMath.ToInt32Mask(pleft.I4 >= pright.I4);
+                p.I5 = (sbyte)BitMath.ToInt32Mask(pleft.I5 >= pright.I5);
+                p.I6 = (sbyte)BitMath.ToInt32Mask(pleft.I6 >= pright.I6);
+                p.I7 = (sbyte)BitMath.ToInt32Mask(pleft.I7 >= pright.I7);
+                p.I8 = (sbyte)BitMath.ToInt32Mask(pleft.I8 >= pright.I8);
+                p.I9 = (sbyte)BitMath.ToInt32Mask(pleft.I9 >= pright.I9);
+                p.I10 = (sbyte)BitMath.ToInt32Mask(pleft.I10 >= pright.I10);
+                p.I11 = (sbyte)BitMath.ToInt32Mask(pleft.I11 >= pright.I11);
+                p.I12 = (sbyte)BitMath.ToInt32Mask(pleft.I12 >= pright.I12);
+                p.I13 = (sbyte)BitMath.ToInt32Mask(pleft.I13 >= pright.I13);
+                p.I14 = (sbyte)BitMath.ToInt32Mask(pleft.I14 >= pright.I14);
+                p.I15 = (sbyte)BitMath.ToInt32Mask(pleft.I15 >= pright.I15);
+                p.I16 = (sbyte)BitMath.ToInt32Mask(pleft.I16 >= pright.I16);
+                p.I17 = (sbyte)BitMath.ToInt32Mask(pleft.I17 >= pright.I17);
+                p.I18 = (sbyte)BitMath.ToInt32Mask(pleft.I18 >= pright.I18);
+                p.I19 = (sbyte)BitMath.ToInt32Mask(pleft.I19 >= pright.I19);
+                p.I20 = (sbyte)BitMath.ToInt32Mask(pleft.I20 >= pright.I20);
+                p.I21 = (sbyte)BitMath.ToInt32Mask(pleft.I21 >= pright.I21);
+                p.I22 = (sbyte)BitMath.ToInt32Mask(pleft.I22 >= pright.I22);
+                p.I23 = (sbyte)BitMath.ToInt32Mask(pleft.I23 >= pright.I23);
+                p.I24 = (sbyte)BitMath.ToInt32Mask(pleft.I24 >= pright.I24);
+                p.I25 = (sbyte)BitMath.ToInt32Mask(pleft.I25 >= pright.I25);
+                p.I26 = (sbyte)BitMath.ToInt32Mask(pleft.I26 >= pright.I26);
+                p.I27 = (sbyte)BitMath.ToInt32Mask(pleft.I27 >= pright.I27);
+                p.I28 = (sbyte)BitMath.ToInt32Mask(pleft.I28 >= pright.I28);
+                p.I29 = (sbyte)BitMath.ToInt32Mask(pleft.I29 >= pright.I29);
+                p.I30 = (sbyte)BitMath.ToInt32Mask(pleft.I30 >= pright.I30);
+                p.I31 = (sbyte)BitMath.ToInt32Mask(pleft.I31 >= pright.I31);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{byte}, Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> GreaterThanOrEqual_Basic(Vector256<byte> left, Vector256<byte> right) {
+                UnsafeUtil.SkipInit(out Vector256<byte> rt);
+                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector256<byte>, FixedArray32<sbyte>>(ref rt);
+                ref FixedArray32<byte> pleft = ref Unsafe.As<Vector256<byte>, FixedArray32<byte>>(ref left);
+                ref FixedArray32<byte> pright = ref Unsafe.As<Vector256<byte>, FixedArray32<byte>>(ref right);
+                p.I0 = (sbyte)BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
+                p.I1 = (sbyte)BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
+                p.I2 = (sbyte)BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
+                p.I3 = (sbyte)BitMath.ToInt32Mask(pleft.I3 >= pright.I3);
+                p.I4 = (sbyte)BitMath.ToInt32Mask(pleft.I4 >= pright.I4);
+                p.I5 = (sbyte)BitMath.ToInt32Mask(pleft.I5 >= pright.I5);
+                p.I6 = (sbyte)BitMath.ToInt32Mask(pleft.I6 >= pright.I6);
+                p.I7 = (sbyte)BitMath.ToInt32Mask(pleft.I7 >= pright.I7);
+                p.I8 = (sbyte)BitMath.ToInt32Mask(pleft.I8 >= pright.I8);
+                p.I9 = (sbyte)BitMath.ToInt32Mask(pleft.I9 >= pright.I9);
+                p.I10 = (sbyte)BitMath.ToInt32Mask(pleft.I10 >= pright.I10);
+                p.I11 = (sbyte)BitMath.ToInt32Mask(pleft.I11 >= pright.I11);
+                p.I12 = (sbyte)BitMath.ToInt32Mask(pleft.I12 >= pright.I12);
+                p.I13 = (sbyte)BitMath.ToInt32Mask(pleft.I13 >= pright.I13);
+                p.I14 = (sbyte)BitMath.ToInt32Mask(pleft.I14 >= pright.I14);
+                p.I15 = (sbyte)BitMath.ToInt32Mask(pleft.I15 >= pright.I15);
+                p.I16 = (sbyte)BitMath.ToInt32Mask(pleft.I16 >= pright.I16);
+                p.I17 = (sbyte)BitMath.ToInt32Mask(pleft.I17 >= pright.I17);
+                p.I18 = (sbyte)BitMath.ToInt32Mask(pleft.I18 >= pright.I18);
+                p.I19 = (sbyte)BitMath.ToInt32Mask(pleft.I19 >= pright.I19);
+                p.I20 = (sbyte)BitMath.ToInt32Mask(pleft.I20 >= pright.I20);
+                p.I21 = (sbyte)BitMath.ToInt32Mask(pleft.I21 >= pright.I21);
+                p.I22 = (sbyte)BitMath.ToInt32Mask(pleft.I22 >= pright.I22);
+                p.I23 = (sbyte)BitMath.ToInt32Mask(pleft.I23 >= pright.I23);
+                p.I24 = (sbyte)BitMath.ToInt32Mask(pleft.I24 >= pright.I24);
+                p.I25 = (sbyte)BitMath.ToInt32Mask(pleft.I25 >= pright.I25);
+                p.I26 = (sbyte)BitMath.ToInt32Mask(pleft.I26 >= pright.I26);
+                p.I27 = (sbyte)BitMath.ToInt32Mask(pleft.I27 >= pright.I27);
+                p.I28 = (sbyte)BitMath.ToInt32Mask(pleft.I28 >= pright.I28);
+                p.I29 = (sbyte)BitMath.ToInt32Mask(pleft.I29 >= pright.I29);
+                p.I30 = (sbyte)BitMath.ToInt32Mask(pleft.I30 >= pright.I30);
+                p.I31 = (sbyte)BitMath.ToInt32Mask(pleft.I31 >= pright.I31);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{short}, Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> GreaterThanOrEqual_Basic(Vector256<short> left, Vector256<short> right) {
+                UnsafeUtil.SkipInit(out Vector256<short> rt);
+                ref FixedArray16<short> p = ref Unsafe.As<Vector256<short>, FixedArray16<short>>(ref rt);
+                ref FixedArray16<short> pleft = ref Unsafe.As<Vector256<short>, FixedArray16<short>>(ref left);
+                ref FixedArray16<short> pright = ref Unsafe.As<Vector256<short>, FixedArray16<short>>(ref right);
+                p.I0 = (short)BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
+                p.I1 = (short)BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
+                p.I2 = (short)BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
+                p.I3 = (short)BitMath.ToInt32Mask(pleft.I3 >= pright.I3);
+                p.I4 = (short)BitMath.ToInt32Mask(pleft.I4 >= pright.I4);
+                p.I5 = (short)BitMath.ToInt32Mask(pleft.I5 >= pright.I5);
+                p.I6 = (short)BitMath.ToInt32Mask(pleft.I6 >= pright.I6);
+                p.I7 = (short)BitMath.ToInt32Mask(pleft.I7 >= pright.I7);
+                p.I8 = (short)BitMath.ToInt32Mask(pleft.I8 >= pright.I8);
+                p.I9 = (short)BitMath.ToInt32Mask(pleft.I9 >= pright.I9);
+                p.I10 = (short)BitMath.ToInt32Mask(pleft.I10 >= pright.I10);
+                p.I11 = (short)BitMath.ToInt32Mask(pleft.I11 >= pright.I11);
+                p.I12 = (short)BitMath.ToInt32Mask(pleft.I12 >= pright.I12);
+                p.I13 = (short)BitMath.ToInt32Mask(pleft.I13 >= pright.I13);
+                p.I14 = (short)BitMath.ToInt32Mask(pleft.I14 >= pright.I14);
+                p.I15 = (short)BitMath.ToInt32Mask(pleft.I15 >= pright.I15);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{ushort}, Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> GreaterThanOrEqual_Basic(Vector256<ushort> left, Vector256<ushort> right) {
+                UnsafeUtil.SkipInit(out Vector256<ushort> rt);
+                ref FixedArray16<short> p = ref Unsafe.As<Vector256<ushort>, FixedArray16<short>>(ref rt);
+                ref FixedArray16<ushort> pleft = ref Unsafe.As<Vector256<ushort>, FixedArray16<ushort>>(ref left);
+                ref FixedArray16<ushort> pright = ref Unsafe.As<Vector256<ushort>, FixedArray16<ushort>>(ref right);
+                p.I0 = (short)BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
+                p.I1 = (short)BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
+                p.I2 = (short)BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
+                p.I3 = (short)BitMath.ToInt32Mask(pleft.I3 >= pright.I3);
+                p.I4 = (short)BitMath.ToInt32Mask(pleft.I4 >= pright.I4);
+                p.I5 = (short)BitMath.ToInt32Mask(pleft.I5 >= pright.I5);
+                p.I6 = (short)BitMath.ToInt32Mask(pleft.I6 >= pright.I6);
+                p.I7 = (short)BitMath.ToInt32Mask(pleft.I7 >= pright.I7);
+                p.I8 = (short)BitMath.ToInt32Mask(pleft.I8 >= pright.I8);
+                p.I9 = (short)BitMath.ToInt32Mask(pleft.I9 >= pright.I9);
+                p.I10 = (short)BitMath.ToInt32Mask(pleft.I10 >= pright.I10);
+                p.I11 = (short)BitMath.ToInt32Mask(pleft.I11 >= pright.I11);
+                p.I12 = (short)BitMath.ToInt32Mask(pleft.I12 >= pright.I12);
+                p.I13 = (short)BitMath.ToInt32Mask(pleft.I13 >= pright.I13);
+                p.I14 = (short)BitMath.ToInt32Mask(pleft.I14 >= pright.I14);
+                p.I15 = (short)BitMath.ToInt32Mask(pleft.I15 >= pright.I15);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{int}, Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> GreaterThanOrEqual_Basic(Vector256<int> left, Vector256<int> right) {
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
+                ref FixedArray8<int> p = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref rt);
+                ref FixedArray8<int> pleft = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref left);
+                ref FixedArray8<int> pright = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 >= pright.I3);
+                p.I4 = BitMath.ToInt32Mask(pleft.I4 >= pright.I4);
+                p.I5 = BitMath.ToInt32Mask(pleft.I5 >= pright.I5);
+                p.I6 = BitMath.ToInt32Mask(pleft.I6 >= pright.I6);
+                p.I7 = BitMath.ToInt32Mask(pleft.I7 >= pright.I7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{uint}, Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> GreaterThanOrEqual_Basic(Vector256<uint> left, Vector256<uint> right) {
+                UnsafeUtil.SkipInit(out Vector256<uint> rt);
+                ref FixedArray8<int> p = ref Unsafe.As<Vector256<uint>, FixedArray8<int>>(ref rt);
+                ref FixedArray8<uint> pleft = ref Unsafe.As<Vector256<uint>, FixedArray8<uint>>(ref left);
+                ref FixedArray8<uint> pright = ref Unsafe.As<Vector256<uint>, FixedArray8<uint>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 >= pright.I3);
+                p.I4 = BitMath.ToInt32Mask(pleft.I4 >= pright.I4);
+                p.I5 = BitMath.ToInt32Mask(pleft.I5 >= pright.I5);
+                p.I6 = BitMath.ToInt32Mask(pleft.I6 >= pright.I6);
+                p.I7 = BitMath.ToInt32Mask(pleft.I7 >= pright.I7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{long}, Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> GreaterThanOrEqual_Basic(Vector256<long> left, Vector256<long> right) {
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
+                ref FixedArray4<long> p = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref rt);
+                ref FixedArray4<long> pleft = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref left);
+                ref FixedArray4<long> pright = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 >= pright.I3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{ulong}, Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> GreaterThanOrEqual_Basic(Vector256<ulong> left, Vector256<ulong> right) {
+                UnsafeUtil.SkipInit(out Vector256<ulong> rt);
+                ref FixedArray4<long> p = ref Unsafe.As<Vector256<ulong>, FixedArray4<long>>(ref rt);
+                ref FixedArray4<ulong> pleft = ref Unsafe.As<Vector256<ulong>, FixedArray4<ulong>>(ref left);
+                ref FixedArray4<ulong> pright = ref Unsafe.As<Vector256<ulong>, FixedArray4<ulong>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 >= pright.I3);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.LessThan_AcceleratedTypes"/>
             public static TypeCodeFlags LessThan_AcceleratedTypes {
                 get {

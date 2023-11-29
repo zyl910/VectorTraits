@@ -725,6 +725,78 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual_AcceleratedTypes"/>
+        public override TypeCodeFlags GreaterThanOrEqual_AcceleratedTypes {
+            get {
+                return Statics.GreaterThanOrEqual_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<float> GreaterThanOrEqual(Vector256<float> left, Vector256<float> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<double> GreaterThanOrEqual(Vector256<double> left, Vector256<double> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> GreaterThanOrEqual(Vector256<sbyte> left, Vector256<sbyte> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<byte> GreaterThanOrEqual(Vector256<byte> left, Vector256<byte> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> GreaterThanOrEqual(Vector256<short> left, Vector256<short> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ushort> GreaterThanOrEqual(Vector256<ushort> left, Vector256<ushort> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> GreaterThanOrEqual(Vector256<int> left, Vector256<int> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<uint> GreaterThanOrEqual(Vector256<uint> left, Vector256<uint> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> GreaterThanOrEqual(Vector256<long> left, Vector256<long> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ulong> GreaterThanOrEqual(Vector256<ulong> left, Vector256<ulong> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.LessThan_AcceleratedTypes"/>
         public override TypeCodeFlags LessThan_AcceleratedTypes {
             get {

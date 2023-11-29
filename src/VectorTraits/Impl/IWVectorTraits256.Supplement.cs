@@ -796,7 +796,7 @@ namespace Zyl.VectorTraits.Impl {
         TypeCodeFlags GreaterThan_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -807,7 +807,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<float> GreaterThan(Vector256<float> left, Vector256<float> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -818,7 +818,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<double> GreaterThan(Vector256<double> left, Vector256<double> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -829,7 +829,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<sbyte> GreaterThan(Vector256<sbyte> left, Vector256<sbyte> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -840,7 +840,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<byte> GreaterThan(Vector256<byte> left, Vector256<byte> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -851,7 +851,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<short> GreaterThan(Vector256<short> left, Vector256<short> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -862,7 +862,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<ushort> GreaterThan(Vector256<ushort> left, Vector256<ushort> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -873,7 +873,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<int> GreaterThan(Vector256<int> left, Vector256<int> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -884,7 +884,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<uint> GreaterThan(Vector256<uint> left, Vector256<uint> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -895,7 +895,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<long> GreaterThan(Vector256<long> left, Vector256<long> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1141,13 +1141,130 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>GreaterThanOrEqual</c> (运行 <c>GreaterThanOrEqual</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="GreaterThanOrEqual(Vector256{byte}, Vector256{byte})"/>
+        TypeCodeFlags GreaterThanOrEqual_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大或等于).</returns>
+        /// <seealso cref="GreaterThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<float> GreaterThanOrEqual(Vector256<float> left, Vector256<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大或等于).</returns>
+        /// <seealso cref="GreaterThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<double> GreaterThanOrEqual(Vector256<double> left, Vector256<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大或等于).</returns>
+        /// <seealso cref="GreaterThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<sbyte> GreaterThanOrEqual(Vector256<sbyte> left, Vector256<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大或等于).</returns>
+        /// <seealso cref="GreaterThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<byte> GreaterThanOrEqual(Vector256<byte> left, Vector256<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大或等于).</returns>
+        /// <seealso cref="GreaterThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<short> GreaterThanOrEqual(Vector256<short> left, Vector256<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大或等于).</returns>
+        /// <seealso cref="GreaterThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<ushort> GreaterThanOrEqual(Vector256<ushort> left, Vector256<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大或等于).</returns>
+        /// <seealso cref="GreaterThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<int> GreaterThanOrEqual(Vector256<int> left, Vector256<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大或等于).</returns>
+        /// <seealso cref="GreaterThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<uint> GreaterThanOrEqual(Vector256<uint> left, Vector256<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大或等于).</returns>
+        /// <seealso cref="GreaterThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<long> GreaterThanOrEqual(Vector256<long> left, Vector256<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is greater or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大或等于).</returns>
+        /// <seealso cref="GreaterThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<ulong> GreaterThanOrEqual(Vector256<ulong> left, Vector256<ulong> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>LessThan</c> (运行 <c>LessThan</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="LessThan(Vector256{byte}, Vector256{byte})"/>
         TypeCodeFlags LessThan_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1158,7 +1275,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<float> LessThan(Vector256<float> left, Vector256<float> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1169,7 +1286,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<double> LessThan(Vector256<double> left, Vector256<double> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1180,7 +1297,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<sbyte> LessThan(Vector256<sbyte> left, Vector256<sbyte> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1191,7 +1308,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<byte> LessThan(Vector256<byte> left, Vector256<byte> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1202,7 +1319,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<short> LessThan(Vector256<short> left, Vector256<short> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1213,7 +1330,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<ushort> LessThan(Vector256<ushort> left, Vector256<ushort> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1224,7 +1341,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<int> LessThan(Vector256<int> left, Vector256<int> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1235,7 +1352,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<uint> LessThan(Vector256<uint> left, Vector256<uint> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1246,7 +1363,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<long> LessThan(Vector256<long> left, Vector256<long> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>

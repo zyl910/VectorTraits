@@ -799,7 +799,7 @@ namespace Zyl.VectorTraits.Impl {
         TypeCodeFlags GreaterThan_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -810,7 +810,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<float> GreaterThan(Vector128<float> left, Vector128<float> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -821,7 +821,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<double> GreaterThan(Vector128<double> left, Vector128<double> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -832,7 +832,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<sbyte> GreaterThan(Vector128<sbyte> left, Vector128<sbyte> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -843,7 +843,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<byte> GreaterThan(Vector128<byte> left, Vector128<byte> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -854,7 +854,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<short> GreaterThan(Vector128<short> left, Vector128<short> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -865,7 +865,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<ushort> GreaterThan(Vector128<ushort> left, Vector128<ushort> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -876,7 +876,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<int> GreaterThan(Vector128<int> left, Vector128<int> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -887,7 +887,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<uint> GreaterThan(Vector128<uint> left, Vector128<uint> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -898,7 +898,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<long> GreaterThan(Vector128<long> left, Vector128<long> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is greater on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更大).
+        /// Compares two vectors to determine which is greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更大).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &gt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1150,7 +1150,7 @@ namespace Zyl.VectorTraits.Impl {
         TypeCodeFlags LessThan_AcceleratedTypes { get; }
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1161,7 +1161,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<float> LessThan(Vector128<float> left, Vector128<float> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1172,7 +1172,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<double> LessThan(Vector128<double> left, Vector128<double> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1183,7 +1183,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<sbyte> LessThan(Vector128<sbyte> left, Vector128<sbyte> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1194,7 +1194,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<byte> LessThan(Vector128<byte> left, Vector128<byte> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1205,7 +1205,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<short> LessThan(Vector128<short> left, Vector128<short> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1216,7 +1216,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<ushort> LessThan(Vector128<ushort> left, Vector128<ushort> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1227,7 +1227,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<int> LessThan(Vector128<int> left, Vector128<int> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1238,7 +1238,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<uint> LessThan(Vector128<uint> left, Vector128<uint> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
@@ -1249,7 +1249,7 @@ namespace Zyl.VectorTraits.Impl {
         Vector128<long> LessThan(Vector128<long> left, Vector128<long> right);
 
         /// <summary>
-        /// Compares two vectors to determine which is less on a per-element basis. (比较两个向量，在每个元素的基础上确定哪个更小).
+        /// Compares two vectors to determine which is less on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt; right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
