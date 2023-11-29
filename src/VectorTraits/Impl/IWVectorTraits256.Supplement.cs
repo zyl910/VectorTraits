@@ -1258,6 +1258,240 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>GreaterThanOrEqualAll</c> (运行 <c>GreaterThanOrEqualAll</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="GreaterThanOrEqualAll(Vector256{byte}, Vector256{byte})"/>
+        TypeCodeFlags GreaterThanOrEqualAll_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are greater or equal (比较两个向量以判定所有元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) &amp;&amp; (left[1] &gt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAll(Vector256<float> left, Vector256<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are greater or equal (比较两个向量以判定所有元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) &amp;&amp; (left[1] &gt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAll(Vector256<double> left, Vector256<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are greater or equal (比较两个向量以判定所有元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) &amp;&amp; (left[1] &gt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAll(Vector256<sbyte> left, Vector256<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are greater or equal (比较两个向量以判定所有元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) &amp;&amp; (left[1] &gt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAll(Vector256<byte> left, Vector256<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are greater or equal (比较两个向量以判定所有元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) &amp;&amp; (left[1] &gt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAll(Vector256<short> left, Vector256<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are greater or equal (比较两个向量以判定所有元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) &amp;&amp; (left[1] &gt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAll(Vector256<ushort> left, Vector256<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are greater or equal (比较两个向量以判定所有元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) &amp;&amp; (left[1] &gt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAll(Vector256<int> left, Vector256<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are greater or equal (比较两个向量以判定所有元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) &amp;&amp; (left[1] &gt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAll(Vector256<uint> left, Vector256<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are greater or equal (比较两个向量以判定所有元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) &amp;&amp; (left[1] &gt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAll(Vector256<long> left, Vector256<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are greater or equal (比较两个向量以判定所有元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) &amp;&amp; (left[1] &gt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAll(Vector256<ulong> left, Vector256<ulong> right);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>GreaterThanOrEqualAny</c> (运行 <c>GreaterThanOrEqualAny</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="GreaterThanOrEqualAny(Vector256{byte}, Vector256{byte})"/>
+        TypeCodeFlags GreaterThanOrEqualAny_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are greater or equal (比较两个向量以判定任一元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) || (left[1] &gt;= right[1]) || ... || (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAny(Vector256<float> left, Vector256<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are greater or equal (比较两个向量以判定任一元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) || (left[1] &gt;= right[1]) || ... || (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAny(Vector256<double> left, Vector256<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are greater or equal (比较两个向量以判定任一元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) || (left[1] &gt;= right[1]) || ... || (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAny(Vector256<sbyte> left, Vector256<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are greater or equal (比较两个向量以判定任一元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) || (left[1] &gt;= right[1]) || ... || (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAny(Vector256<byte> left, Vector256<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are greater or equal (比较两个向量以判定任一元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) || (left[1] &gt;= right[1]) || ... || (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAny(Vector256<short> left, Vector256<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are greater or equal (比较两个向量以判定任一元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) || (left[1] &gt;= right[1]) || ... || (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAny(Vector256<ushort> left, Vector256<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are greater or equal (比较两个向量以判定任一元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) || (left[1] &gt;= right[1]) || ... || (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAny(Vector256<int> left, Vector256<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are greater or equal (比较两个向量以判定任一元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) || (left[1] &gt;= right[1]) || ... || (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAny(Vector256<uint> left, Vector256<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are greater or equal (比较两个向量以判定任一元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) || (left[1] &gt;= right[1]) || ... || (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAny(Vector256<long> left, Vector256<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are greater or equal (比较两个向量以判定任一元素是否大于或等于).
+        /// Mnemonic: <c>rt := (left[0] &gt;= right[0]) || (left[1] &gt;= right[1]) || ... || (left[Count-1] &gt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.GreaterThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool GreaterThanOrEqualAny(Vector256<ulong> left, Vector256<ulong> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>LessThan</c> (运行 <c>LessThan</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="LessThan(Vector256{byte}, Vector256{byte})"/>
