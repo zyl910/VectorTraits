@@ -153,7 +153,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 Vector128s<T>.XyzwXMask
             };
             bool allowLog = false;
-            bool showNotEqualsAll = true;
+            bool showNotEquals = true;
             foreach (Vector128<T> left in samples) {
                 foreach (Vector128<T> right in samples) {
 #if NET7_0_OR_GREATER
@@ -164,7 +164,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         bool dst = instance.EqualsAll((dynamic)left, (dynamic)right);
-                        bool showLog = showNotEqualsAll && !expected.Equals(dst);
+                        bool showLog = showNotEquals && !expected.Equals(dst);
                         if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
                         if (allowLog || showLog) {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
@@ -207,7 +207,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 Vector128s<T>.XyzwXMask
             };
             bool allowLog = false;
-            bool showNotEqualsAny = true;
+            bool showNotEquals = true;
             foreach (Vector128<T> left in samples) {
                 foreach (Vector128<T> right in samples) {
 #if NET7_0_OR_GREATER
@@ -218,7 +218,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         bool dst = instance.EqualsAny((dynamic)left, (dynamic)right);
-                        bool showLog = showNotEqualsAny && !expected.Equals(dst);
+                        bool showLog = showNotEquals && !expected.Equals(dst);
                         if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
                         if (allowLog || showLog) {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));

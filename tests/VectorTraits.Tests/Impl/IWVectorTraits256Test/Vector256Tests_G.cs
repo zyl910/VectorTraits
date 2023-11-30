@@ -89,7 +89,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.XyzwXMask
             };
             bool allowLog = false;
-            bool showNotGreaterThanAll = true;
+            bool showNotEquals = true;
             foreach (Vector256<T> left in samples) {
                 foreach (Vector256<T> right in samples) {
 #if NET7_0_OR_GREATER
@@ -100,7 +100,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         bool dst = instance.GreaterThanAll((dynamic)left, (dynamic)right);
-                        bool showLog = showNotGreaterThanAll && !expected.Equals(dst);
+                        bool showLog = showNotEquals && !expected.Equals(dst);
                         if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
                         if (allowLog || showLog) {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
@@ -143,7 +143,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.XyzwXMask
             };
             bool allowLog = false;
-            bool showNotGreaterThanAny = true;
+            bool showNotEquals = true;
             foreach (Vector256<T> left in samples) {
                 foreach (Vector256<T> right in samples) {
 #if NET7_0_OR_GREATER
@@ -154,7 +154,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         bool dst = instance.GreaterThanAny((dynamic)left, (dynamic)right);
-                        bool showLog = showNotGreaterThanAny && !expected.Equals(dst);
+                        bool showLog = showNotEquals && !expected.Equals(dst);
                         if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
                         if (allowLog || showLog) {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
@@ -243,7 +243,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.XyzwXMask
             };
             bool allowLog = false;
-            bool showNotGreaterThanOrEqualAll = true;
+            bool showNotEquals = true;
             foreach (Vector256<T> left in samples) {
                 foreach (Vector256<T> right in samples) {
 #if NET7_0_OR_GREATER
@@ -254,7 +254,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         bool dst = instance.GreaterThanOrEqualAll((dynamic)left, (dynamic)right);
-                        bool showLog = showNotGreaterThanOrEqualAll && !expected.Equals(dst);
+                        bool showLog = showNotEquals && !expected.Equals(dst);
                         if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
                         if (allowLog || showLog) {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
@@ -297,7 +297,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.XyzwXMask
             };
             bool allowLog = false;
-            bool showNotGreaterThanOrEqualAny = true;
+            bool showNotEquals = true;
             foreach (Vector256<T> left in samples) {
                 foreach (Vector256<T> right in samples) {
 #if NET7_0_OR_GREATER
@@ -308,7 +308,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         bool dst = instance.GreaterThanOrEqualAny((dynamic)left, (dynamic)right);
-                        bool showLog = showNotGreaterThanOrEqualAny && !expected.Equals(dst);
+                        bool showLog = showNotEquals && !expected.Equals(dst);
                         if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
                         if (allowLog || showLog) {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));

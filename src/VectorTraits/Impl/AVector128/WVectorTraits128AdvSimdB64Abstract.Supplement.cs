@@ -245,6 +245,87 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual_AcceleratedTypes"/>
+        public override TypeCodeFlags GreaterThanOrEqual_AcceleratedTypes {
+            get {
+                return Statics.GreaterThanOrEqual_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> GreaterThanOrEqual(Vector128<double> left, Vector128<double> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> GreaterThanOrEqual(Vector128<long> left, Vector128<long> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<ulong> GreaterThanOrEqual(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll_AcceleratedTypes"/>
+        public override TypeCodeFlags GreaterThanOrEqualAll_AcceleratedTypes {
+            get {
+                return Statics.GreaterThanOrEqualAll_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool GreaterThanOrEqualAll(Vector128<double> left, Vector128<double> right) {
+            return Statics.GreaterThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool GreaterThanOrEqualAll(Vector128<long> left, Vector128<long> right) {
+            return Statics.GreaterThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool GreaterThanOrEqualAll(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.GreaterThanOrEqualAll(left, right);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny_AcceleratedTypes"/>
+        public override TypeCodeFlags GreaterThanOrEqualAny_AcceleratedTypes {
+            get {
+                return Statics.GreaterThanOrEqualAny_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool GreaterThanOrEqualAny(Vector128<double> left, Vector128<double> right) {
+            return Statics.GreaterThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool GreaterThanOrEqualAny(Vector128<long> left, Vector128<long> right) {
+            return Statics.GreaterThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool GreaterThanOrEqualAny(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.GreaterThanOrEqualAny(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.LessThan_AcceleratedTypes"/>
         public override TypeCodeFlags LessThan_AcceleratedTypes {
             get {

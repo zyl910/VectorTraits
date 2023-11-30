@@ -725,6 +725,222 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual_AcceleratedTypes"/>
+        public virtual TypeCodeFlags GreaterThanOrEqual_AcceleratedTypes {
+            get {
+                return Statics.GreaterThanOrEqual_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual(Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<float> GreaterThanOrEqual(Vector128<float> left, Vector128<float> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<double> GreaterThanOrEqual(Vector128<double> left, Vector128<double> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual(Vector128{sbyte}, Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<sbyte> GreaterThanOrEqual(Vector128<sbyte> left, Vector128<sbyte> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual(Vector128{byte}, Vector128{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<byte> GreaterThanOrEqual(Vector128<byte> left, Vector128<byte> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual(Vector128{short}, Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<short> GreaterThanOrEqual(Vector128<short> left, Vector128<short> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual(Vector128{ushort}, Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<ushort> GreaterThanOrEqual(Vector128<ushort> left, Vector128<ushort> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual(Vector128{int}, Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<int> GreaterThanOrEqual(Vector128<int> left, Vector128<int> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual(Vector128{uint}, Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<uint> GreaterThanOrEqual(Vector128<uint> left, Vector128<uint> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<long> GreaterThanOrEqual(Vector128<long> left, Vector128<long> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqual(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<ulong> GreaterThanOrEqual(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.GreaterThanOrEqual(left, right);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll_AcceleratedTypes"/>
+        public virtual TypeCodeFlags GreaterThanOrEqualAll_AcceleratedTypes {
+            get {
+                return Statics.GreaterThanOrEqualAll_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll(Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAll(Vector128<float> left, Vector128<float> right) {
+            return Statics.GreaterThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAll(Vector128<double> left, Vector128<double> right) {
+            return Statics.GreaterThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll(Vector128{sbyte}, Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAll(Vector128<sbyte> left, Vector128<sbyte> right) {
+            return Statics.GreaterThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll(Vector128{byte}, Vector128{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAll(Vector128<byte> left, Vector128<byte> right) {
+            return Statics.GreaterThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll(Vector128{short}, Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAll(Vector128<short> left, Vector128<short> right) {
+            return Statics.GreaterThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll(Vector128{ushort}, Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAll(Vector128<ushort> left, Vector128<ushort> right) {
+            return Statics.GreaterThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll(Vector128{int}, Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAll(Vector128<int> left, Vector128<int> right) {
+            return Statics.GreaterThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll(Vector128{uint}, Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAll(Vector128<uint> left, Vector128<uint> right) {
+            return Statics.GreaterThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAll(Vector128<long> left, Vector128<long> right) {
+            return Statics.GreaterThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAll(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAll(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.GreaterThanOrEqualAll(left, right);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny_AcceleratedTypes"/>
+        public virtual TypeCodeFlags GreaterThanOrEqualAny_AcceleratedTypes {
+            get {
+                return Statics.GreaterThanOrEqualAny_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny(Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAny(Vector128<float> left, Vector128<float> right) {
+            return Statics.GreaterThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAny(Vector128<double> left, Vector128<double> right) {
+            return Statics.GreaterThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny(Vector128{sbyte}, Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAny(Vector128<sbyte> left, Vector128<sbyte> right) {
+            return Statics.GreaterThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny(Vector128{byte}, Vector128{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAny(Vector128<byte> left, Vector128<byte> right) {
+            return Statics.GreaterThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny(Vector128{short}, Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAny(Vector128<short> left, Vector128<short> right) {
+            return Statics.GreaterThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny(Vector128{ushort}, Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAny(Vector128<ushort> left, Vector128<ushort> right) {
+            return Statics.GreaterThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny(Vector128{int}, Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAny(Vector128<int> left, Vector128<int> right) {
+            return Statics.GreaterThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny(Vector128{uint}, Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAny(Vector128<uint> left, Vector128<uint> right) {
+            return Statics.GreaterThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAny(Vector128<long> left, Vector128<long> right) {
+            return Statics.GreaterThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.GreaterThanOrEqualAny(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool GreaterThanOrEqualAny(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.GreaterThanOrEqualAny(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.LessThan_AcceleratedTypes"/>
         public virtual TypeCodeFlags LessThan_AcceleratedTypes {
             get {
