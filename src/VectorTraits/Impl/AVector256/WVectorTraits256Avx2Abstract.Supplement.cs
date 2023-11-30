@@ -1157,6 +1157,222 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual_AcceleratedTypes"/>
+        public override TypeCodeFlags LessThanOrEqual_AcceleratedTypes {
+            get {
+                return Statics.LessThanOrEqual_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<float> LessThanOrEqual(Vector256<float> left, Vector256<float> right) {
+            return Statics.LessThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<double> LessThanOrEqual(Vector256<double> left, Vector256<double> right) {
+            return Statics.LessThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> LessThanOrEqual(Vector256<sbyte> left, Vector256<sbyte> right) {
+            return Statics.LessThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<byte> LessThanOrEqual(Vector256<byte> left, Vector256<byte> right) {
+            return Statics.LessThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> LessThanOrEqual(Vector256<short> left, Vector256<short> right) {
+            return Statics.LessThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ushort> LessThanOrEqual(Vector256<ushort> left, Vector256<ushort> right) {
+            return Statics.LessThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> LessThanOrEqual(Vector256<int> left, Vector256<int> right) {
+            return Statics.LessThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<uint> LessThanOrEqual(Vector256<uint> left, Vector256<uint> right) {
+            return Statics.LessThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> LessThanOrEqual(Vector256<long> left, Vector256<long> right) {
+            return Statics.LessThanOrEqual(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ulong> LessThanOrEqual(Vector256<ulong> left, Vector256<ulong> right) {
+            return Statics.LessThanOrEqual(left, right);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAll_AcceleratedTypes"/>
+        public override TypeCodeFlags LessThanOrEqualAll_AcceleratedTypes {
+            get {
+                return Statics.LessThanOrEqualAll_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAll(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAll(Vector256<float> left, Vector256<float> right) {
+            return Statics.LessThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAll(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAll(Vector256<double> left, Vector256<double> right) {
+            return Statics.LessThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAll(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAll(Vector256<sbyte> left, Vector256<sbyte> right) {
+            return Statics.LessThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAll(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAll(Vector256<byte> left, Vector256<byte> right) {
+            return Statics.LessThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAll(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAll(Vector256<short> left, Vector256<short> right) {
+            return Statics.LessThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAll(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAll(Vector256<ushort> left, Vector256<ushort> right) {
+            return Statics.LessThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAll(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAll(Vector256<int> left, Vector256<int> right) {
+            return Statics.LessThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAll(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAll(Vector256<uint> left, Vector256<uint> right) {
+            return Statics.LessThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAll(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAll(Vector256<long> left, Vector256<long> right) {
+            return Statics.LessThanOrEqualAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAll(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAll(Vector256<ulong> left, Vector256<ulong> right) {
+            return Statics.LessThanOrEqualAll(left, right);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAny_AcceleratedTypes"/>
+        public override TypeCodeFlags LessThanOrEqualAny_AcceleratedTypes {
+            get {
+                return Statics.LessThanOrEqualAny_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAny(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAny(Vector256<float> left, Vector256<float> right) {
+            return Statics.LessThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAny(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAny(Vector256<double> left, Vector256<double> right) {
+            return Statics.LessThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAny(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAny(Vector256<sbyte> left, Vector256<sbyte> right) {
+            return Statics.LessThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAny(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAny(Vector256<byte> left, Vector256<byte> right) {
+            return Statics.LessThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAny(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAny(Vector256<short> left, Vector256<short> right) {
+            return Statics.LessThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAny(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAny(Vector256<ushort> left, Vector256<ushort> right) {
+            return Statics.LessThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAny(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAny(Vector256<int> left, Vector256<int> right) {
+            return Statics.LessThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAny(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAny(Vector256<uint> left, Vector256<uint> right) {
+            return Statics.LessThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAny(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAny(Vector256<long> left, Vector256<long> right) {
+            return Statics.LessThanOrEqualAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqualAny(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanOrEqualAny(Vector256<ulong> left, Vector256<ulong> right) {
+            return Statics.LessThanOrEqualAny(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.Max_AcceleratedTypes"/>
         public override TypeCodeFlags Max_AcceleratedTypes {
             get {

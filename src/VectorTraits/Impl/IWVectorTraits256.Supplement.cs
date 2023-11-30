@@ -1843,6 +1843,357 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>LessThanOrEqual</c> (运行 <c>LessThanOrEqual</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="LessThanOrEqual(Vector256{byte}, Vector256{byte})"/>
+        TypeCodeFlags LessThanOrEqual_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine which is less or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小或等于).</returns>
+        /// <seealso cref="LessThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<float> LessThanOrEqual(Vector256<float> left, Vector256<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小或等于).</returns>
+        /// <seealso cref="LessThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<double> LessThanOrEqual(Vector256<double> left, Vector256<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小或等于).</returns>
+        /// <seealso cref="LessThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<sbyte> LessThanOrEqual(Vector256<sbyte> left, Vector256<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小或等于).</returns>
+        /// <seealso cref="LessThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<byte> LessThanOrEqual(Vector256<byte> left, Vector256<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小或等于).</returns>
+        /// <seealso cref="LessThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<short> LessThanOrEqual(Vector256<short> left, Vector256<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小或等于).</returns>
+        /// <seealso cref="LessThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<ushort> LessThanOrEqual(Vector256<ushort> left, Vector256<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小或等于).</returns>
+        /// <seealso cref="LessThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<int> LessThanOrEqual(Vector256<int> left, Vector256<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小或等于).</returns>
+        /// <seealso cref="LessThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<uint> LessThanOrEqual(Vector256<uint> left, Vector256<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小或等于).</returns>
+        /// <seealso cref="LessThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<long> LessThanOrEqual(Vector256<long> left, Vector256<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine which is less or equal on a per-element basis (比较两个向量，在每个元素的基础上确定哪个更小或等于).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] &lt;= right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less or equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更小或等于).</returns>
+        /// <seealso cref="LessThanOrEqual_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqual{T}(Vector256{T}, Vector256{T})"/>
+        Vector256<ulong> LessThanOrEqual(Vector256<ulong> left, Vector256<ulong> right);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>LessThanOrEqualAll</c> (运行 <c>LessThanOrEqualAll</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="LessThanOrEqualAll(Vector256{byte}, Vector256{byte})"/>
+        TypeCodeFlags LessThanOrEqualAll_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less or equal (比较两个向量以判定所有元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) &amp;&amp; (left[1] &lt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAll(Vector256<float> left, Vector256<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less or equal (比较两个向量以判定所有元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) &amp;&amp; (left[1] &lt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAll(Vector256<double> left, Vector256<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less or equal (比较两个向量以判定所有元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) &amp;&amp; (left[1] &lt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAll(Vector256<sbyte> left, Vector256<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less or equal (比较两个向量以判定所有元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) &amp;&amp; (left[1] &lt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAll(Vector256<byte> left, Vector256<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less or equal (比较两个向量以判定所有元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) &amp;&amp; (left[1] &lt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAll(Vector256<short> left, Vector256<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less or equal (比较两个向量以判定所有元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) &amp;&amp; (left[1] &lt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAll(Vector256<ushort> left, Vector256<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less or equal (比较两个向量以判定所有元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) &amp;&amp; (left[1] &lt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAll(Vector256<int> left, Vector256<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less or equal (比较两个向量以判定所有元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) &amp;&amp; (left[1] &lt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAll(Vector256<uint> left, Vector256<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less or equal (比较两个向量以判定所有元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) &amp;&amp; (left[1] &lt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAll(Vector256<long> left, Vector256<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less or equal (比较两个向量以判定所有元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) &amp;&amp; (left[1] &lt;= right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAll{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAll(Vector256<ulong> left, Vector256<ulong> right);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>LessThanOrEqualAny</c> (运行 <c>LessThanOrEqualAny</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="LessThanOrEqualAny(Vector256{byte}, Vector256{byte})"/>
+        TypeCodeFlags LessThanOrEqualAny_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less or equal (比较两个向量以判定任一元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) || (left[1] &lt;= right[1]) || ... || (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAny(Vector256<float> left, Vector256<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less or equal (比较两个向量以判定任一元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) || (left[1] &lt;= right[1]) || ... || (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAny(Vector256<double> left, Vector256<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less or equal (比较两个向量以判定任一元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) || (left[1] &lt;= right[1]) || ... || (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAny(Vector256<sbyte> left, Vector256<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less or equal (比较两个向量以判定任一元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) || (left[1] &lt;= right[1]) || ... || (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAny(Vector256<byte> left, Vector256<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less or equal (比较两个向量以判定任一元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) || (left[1] &lt;= right[1]) || ... || (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAny(Vector256<short> left, Vector256<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less or equal (比较两个向量以判定任一元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) || (left[1] &lt;= right[1]) || ... || (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAny(Vector256<ushort> left, Vector256<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less or equal (比较两个向量以判定任一元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) || (left[1] &lt;= right[1]) || ... || (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAny(Vector256<int> left, Vector256<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less or equal (比较两个向量以判定任一元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) || (left[1] &lt;= right[1]) || ... || (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAny(Vector256<uint> left, Vector256<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less or equal (比较两个向量以判定任一元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) || (left[1] &lt;= right[1]) || ... || (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAny(Vector256<long> left, Vector256<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less or equal (比较两个向量以判定任一元素是否小于或等于).
+        /// Mnemonic: <c>rt := (left[0] &lt;= right[0]) || (left[1] &lt;= right[1]) || ... || (left[Count-1] &lt;= right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于或等于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanOrEqualAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector256.LessThanOrEqualAny{T}(Vector256{T}, Vector256{T})"/>
+        bool LessThanOrEqualAny(Vector256<ulong> left, Vector256<ulong> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Max</c> (运行 <c>Max</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Max(Vector256{byte}, Vector256{byte})"/>
