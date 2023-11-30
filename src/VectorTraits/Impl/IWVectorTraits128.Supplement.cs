@@ -1612,6 +1612,239 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>LessThanAll</c> (运行 <c>LessThanAll</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="LessThanAll(Vector128{byte}, Vector128{byte})"/>
+        TypeCodeFlags LessThanAll_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less (比较两个向量以判定所有元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) &amp;&amp; (left[1] &lt; right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAll{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAll(Vector128<float> left, Vector128<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less (比较两个向量以判定所有元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) &amp;&amp; (left[1] &lt; right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAll{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAll(Vector128<double> left, Vector128<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less (比较两个向量以判定所有元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) &amp;&amp; (left[1] &lt; right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAll{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAll(Vector128<sbyte> left, Vector128<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less (比较两个向量以判定所有元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) &amp;&amp; (left[1] &lt; right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAll{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAll(Vector128<byte> left, Vector128<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less (比较两个向量以判定所有元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) &amp;&amp; (left[1] &lt; right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAll{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAll(Vector128<short> left, Vector128<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less (比较两个向量以判定所有元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) &amp;&amp; (left[1] &lt; right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAll{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAll(Vector128<ushort> left, Vector128<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less (比较两个向量以判定所有元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) &amp;&amp; (left[1] &lt; right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAll{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAll(Vector128<int> left, Vector128<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less (比较两个向量以判定所有元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) &amp;&amp; (left[1] &lt; right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAll{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAll(Vector128<uint> left, Vector128<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less (比较两个向量以判定所有元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) &amp;&amp; (left[1] &lt; right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAll{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAll(Vector128<long> left, Vector128<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if all elements are less (比较两个向量以判定所有元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) &amp;&amp; (left[1] &lt; right[1]) &amp;&amp; ... &amp;&amp; (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAll_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAll{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAll(Vector128<ulong> left, Vector128<ulong> right);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>LessThanAny</c> (运行 <c>LessThanAny</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="LessThanAny(Vector128{byte}, Vector128{byte})"/>
+        TypeCodeFlags LessThanAny_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less (比较两个向量以判定任一元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) || (left[1] &lt; right[1]) || ... || (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAny{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAny(Vector128<float> left, Vector128<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less (比较两个向量以判定任一元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) || (left[1] &lt; right[1]) || ... || (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAny{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAny(Vector128<double> left, Vector128<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less (比较两个向量以判定任一元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) || (left[1] &lt; right[1]) || ... || (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAny{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAny(Vector128<sbyte> left, Vector128<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less (比较两个向量以判定任一元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) || (left[1] &lt; right[1]) || ... || (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAny{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAny(Vector128<byte> left, Vector128<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less (比较两个向量以判定任一元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) || (left[1] &lt; right[1]) || ... || (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAny{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAny(Vector128<short> left, Vector128<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less (比较两个向量以判定任一元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) || (left[1] &lt; right[1]) || ... || (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAny{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAny(Vector128<ushort> left, Vector128<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less (比较两个向量以判定任一元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) || (left[1] &lt; right[1]) || ... || (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAny{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAny(Vector128<int> left, Vector128<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less (比较两个向量以判定任一元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) || (left[1] &lt; right[1]) || ... || (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAny{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAny(Vector128<uint> left, Vector128<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less (比较两个向量以判定任一元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) || (left[1] &lt; right[1]) || ... || (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAny{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAny(Vector128<long> left, Vector128<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if any elements are less (比较两个向量以判定任一元素是否小于).
+        /// Mnemonic: <c>rt := (left[0] &lt; right[0]) || (left[1] &lt; right[1]) || ... || (left[Count-1] &lt; right[Count-1])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were less to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素小于时返回<c>true</c>).</returns>
+        /// <seealso cref="LessThanAny_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.LessThanAny{T}(Vector128{T}, Vector128{T})"/>
+        bool LessThanAny(Vector128<ulong> left, Vector128<ulong> right);
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Max</c> (运行 <c>Max</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Max(Vector128{byte}, Vector128{byte})"/>

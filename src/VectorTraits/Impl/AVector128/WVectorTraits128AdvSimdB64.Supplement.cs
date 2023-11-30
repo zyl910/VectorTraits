@@ -383,6 +383,60 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.LessThanAll_AcceleratedTypes"/>
+            public static TypeCodeFlags LessThanAll_AcceleratedTypes {
+                get {
+                    return LessThan_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanAll(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static bool LessThanAll(Vector128<double> left, Vector128<double> right) {
+                return SuperStatics.YIsAllTrue(LessThan(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanAll(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static bool LessThanAll(Vector128<long> left, Vector128<long> right) {
+                return SuperStatics.YIsAllTrue(LessThan(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanAll(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static bool LessThanAll(Vector128<ulong> left, Vector128<ulong> right) {
+                return SuperStatics.YIsAllTrue(LessThan(left, right));
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanAny_AcceleratedTypes"/>
+            public static TypeCodeFlags LessThanAny_AcceleratedTypes {
+                get {
+                    return LessThan_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanAny(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static bool LessThanAny(Vector128<double> left, Vector128<double> right) {
+                return SuperStatics.YIsAnyTrue(LessThan(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanAny(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static bool LessThanAny(Vector128<long> left, Vector128<long> right) {
+                return SuperStatics.YIsAnyTrue(LessThan(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanAny(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static bool LessThanAny(Vector128<ulong> left, Vector128<ulong> right) {
+                return SuperStatics.YIsAnyTrue(LessThan(left, right));
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Max_AcceleratedTypes"/>
             public static TypeCodeFlags Max_AcceleratedTypes {
                 get {

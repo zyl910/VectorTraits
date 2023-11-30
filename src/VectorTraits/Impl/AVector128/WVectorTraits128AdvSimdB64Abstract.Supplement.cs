@@ -353,6 +353,59 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.LessThanAll_AcceleratedTypes"/>
+        public override TypeCodeFlags LessThanAll_AcceleratedTypes {
+            get {
+                return Statics.LessThanAll_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThanAll(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanAll(Vector128<double> left, Vector128<double> right) {
+            return Statics.LessThanAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThanAll(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanAll(Vector128<long> left, Vector128<long> right) {
+            return Statics.LessThanAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThanAll(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanAll(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.LessThanAll(left, right);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThanAny_AcceleratedTypes"/>
+        public override TypeCodeFlags LessThanAny_AcceleratedTypes {
+            get {
+                return Statics.LessThanAny_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThanAny(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanAny(Vector128<double> left, Vector128<double> right) {
+            return Statics.LessThanAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThanAny(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanAny(Vector128<long> left, Vector128<long> right) {
+            return Statics.LessThanAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.LessThanAny(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override bool LessThanAny(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.LessThanAny(left, right);
+        }
+
         /// <inheritdoc cref="IWVectorTraits128.Max_AcceleratedTypes"/>
         public override TypeCodeFlags Max_AcceleratedTypes {
             get {
