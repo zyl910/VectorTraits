@@ -437,6 +437,90 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.LessThanOrEqual_AcceleratedTypes"/>
+            public static TypeCodeFlags LessThanOrEqual_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Double | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64
+                        | SuperStatics.LessThanOrEqual_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanOrEqual(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> LessThanOrEqual(Vector128<double> left, Vector128<double> right) {
+                return AdvSimd.Arm64.CompareLessThanOrEqual(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanOrEqual(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> LessThanOrEqual(Vector128<long> left, Vector128<long> right) {
+                return AdvSimd.Arm64.CompareLessThanOrEqual(left, right);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanOrEqual(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> LessThanOrEqual(Vector128<ulong> left, Vector128<ulong> right) {
+                return AdvSimd.Arm64.CompareLessThanOrEqual(left, right);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanOrEqualAll_AcceleratedTypes"/>
+            public static TypeCodeFlags LessThanOrEqualAll_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Double | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64
+                        | SuperStatics.LessThanOrEqualAll_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanOrEqualAll(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static bool LessThanOrEqualAll(Vector128<double> left, Vector128<double> right) {
+                return SuperStatics.YIsAllTrue(LessThanOrEqual(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanOrEqualAll(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static bool LessThanOrEqualAll(Vector128<long> left, Vector128<long> right) {
+                return SuperStatics.YIsAllTrue(LessThanOrEqual(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanOrEqualAll(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static bool LessThanOrEqualAll(Vector128<ulong> left, Vector128<ulong> right) {
+                return SuperStatics.YIsAllTrue(LessThanOrEqual(left, right));
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanOrEqualAny_AcceleratedTypes"/>
+            public static TypeCodeFlags LessThanOrEqualAny_AcceleratedTypes {
+                get {
+                    return TypeCodeFlags.Double | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64
+                        | SuperStatics.LessThanOrEqualAny_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanOrEqualAny(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static bool LessThanOrEqualAny(Vector128<double> left, Vector128<double> right) {
+                return SuperStatics.YIsAnyTrue(LessThanOrEqual(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanOrEqualAny(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static bool LessThanOrEqualAny(Vector128<long> left, Vector128<long> right) {
+                return SuperStatics.YIsAnyTrue(LessThanOrEqual(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.LessThanOrEqualAny(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static bool LessThanOrEqualAny(Vector128<ulong> left, Vector128<ulong> right) {
+                return SuperStatics.YIsAnyTrue(LessThanOrEqual(left, right));
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Max_AcceleratedTypes"/>
             public static TypeCodeFlags Max_AcceleratedTypes {
                 get {
