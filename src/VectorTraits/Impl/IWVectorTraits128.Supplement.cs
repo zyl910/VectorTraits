@@ -1272,7 +1272,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAll{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAll(Vector128<float> left, Vector128<float> right);
@@ -1283,7 +1283,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAll{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAll(Vector128<double> left, Vector128<double> right);
@@ -1294,7 +1294,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAll{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAll(Vector128<sbyte> left, Vector128<sbyte> right);
@@ -1305,7 +1305,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAll{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAll(Vector128<byte> left, Vector128<byte> right);
@@ -1316,7 +1316,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAll{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAll(Vector128<short> left, Vector128<short> right);
@@ -1327,7 +1327,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAll{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAll(Vector128<ushort> left, Vector128<ushort> right);
@@ -1338,7 +1338,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAll{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAll(Vector128<int> left, Vector128<int> right);
@@ -1349,7 +1349,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAll{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAll(Vector128<uint> left, Vector128<uint> right);
@@ -1360,7 +1360,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAll{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAll(Vector128<long> left, Vector128<long> right);
@@ -1371,7 +1371,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if all elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的全部对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAll_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAll{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAll(Vector128<ulong> left, Vector128<ulong> right);
@@ -1389,7 +1389,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAny{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAny(Vector128<float> left, Vector128<float> right);
@@ -1400,7 +1400,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAny{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAny(Vector128<double> left, Vector128<double> right);
@@ -1411,7 +1411,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAny{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAny(Vector128<sbyte> left, Vector128<sbyte> right);
@@ -1422,7 +1422,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAny{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAny(Vector128<byte> left, Vector128<byte> right);
@@ -1433,7 +1433,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAny{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAny(Vector128<short> left, Vector128<short> right);
@@ -1444,7 +1444,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAny{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAny(Vector128<ushort> left, Vector128<ushort> right);
@@ -1455,7 +1455,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAny{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAny(Vector128<int> left, Vector128<int> right);
@@ -1466,7 +1466,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAny{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAny(Vector128<uint> left, Vector128<uint> right);
@@ -1477,7 +1477,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAny{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAny(Vector128<long> left, Vector128<long> right);
@@ -1488,7 +1488,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于时返回<c>true</c>).</returns>
+        /// <returns>Return <c>true</c> if any elements in <paramref name="left" /> were greater or equal to the corresponding element in <paramref name="right" /> (当<paramref name="left" />和<paramref name="right" />的任一对应元素大于或等于时返回<c>true</c>).</returns>
         /// <seealso cref="GreaterThanOrEqualAny_AcceleratedTypes"/>
         /// <seealso cref="Vector128.GreaterThanOrEqualAny{T}(Vector128{T}, Vector128{T})"/>
         bool GreaterThanOrEqualAny(Vector128<ulong> left, Vector128<ulong> right);

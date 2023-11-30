@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
+using System.IO;
+
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -178,12 +180,13 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((long)9)]
         [TestCase((ulong)10)]
         public void GreaterThanOrEqualTest<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
                 if (instance.GetIsSupported(true)) {
-                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.GreaterThanOrEqual_AcceleratedTypes}");
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.GreaterThanOrEqual_AcceleratedTypes}");
                 } else {
-                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
             // run.
@@ -196,6 +199,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.XyYMask,
                 Vector256s<T>.XyzwXMask
             };
+            bool allowLog = false;
+            bool showNotEquals = false;
             foreach (Vector256<T> left in samples) {
                 foreach (Vector256<T> right in samples) {
 #if NET7_0_OR_GREATER
@@ -203,10 +208,23 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
 #else
                     Vector256<T> expected = Vector256s.GreaterThanOrEqual((dynamic)left, (dynamic)right);
 #endif // NET7_0_OR_GREATER
+                    bool usedWrite = false;
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         Vector256<T> dst = instance.GreaterThanOrEqual((dynamic)left, (dynamic)right);
-                        Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        //Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        bool showLog = showNotEquals && !expected.AsByte().Equals(dst.AsByte());
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (allowLog || showLog) {
+                            if (!usedWrite) {
+                                usedWrite = true;
+                                writer.WriteLine();
+                                writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", "Expected", expected, left, right));
+                            }
+                            writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                        } else {
+                            Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        }
                     }
                 }
             }

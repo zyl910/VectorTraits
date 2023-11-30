@@ -58,6 +58,114 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
         }
 
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void LessThanAllTest<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.LessThanAll_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            Console.WriteLine();
+            // run.
+            Vector256<T>[] samples = {
+                Vector256s.Create(src),
+                Vector256s<T>.Demo,
+                Vector256s<T>.Serial,
+                Vector256s<T>.SerialNegative,
+                Vector256s<T>.XyXMask,
+                Vector256s<T>.XyYMask,
+                Vector256s<T>.XyzwXMask
+            };
+            bool allowLog = false;
+            bool showNotEquals = true;
+            foreach (Vector256<T> left in samples) {
+                foreach (Vector256<T> right in samples) {
+#if NET7_0_OR_GREATER
+                    bool expected = Vector256.LessThanAll(left, right);
+#else
+                    bool expected = Vector256s.LessThanAll((dynamic)left, (dynamic)right);
+#endif // NET7_0_OR_GREATER
+                    foreach (IWVectorTraits256 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        bool dst = instance.LessThanAll((dynamic)left, (dynamic)right);
+                        bool showLog = showNotEquals && !expected.Equals(dst);
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (allowLog || showLog) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
+                        } else {
+                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                        }
+                    }
+                }
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void LessThanAnyTest<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.LessThanAny_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            Console.WriteLine();
+            // run.
+            Vector256<T>[] samples = {
+                Vector256s.Create(src),
+                Vector256s<T>.Demo,
+                Vector256s<T>.Serial,
+                Vector256s<T>.SerialNegative,
+                Vector256s<T>.XyXMask,
+                Vector256s<T>.XyYMask,
+                Vector256s<T>.XyzwXMask
+            };
+            bool allowLog = false;
+            bool showNotEquals = true;
+            foreach (Vector256<T> left in samples) {
+                foreach (Vector256<T> right in samples) {
+#if NET7_0_OR_GREATER
+                    bool expected = Vector256.LessThanAny(left, right);
+#else
+                    bool expected = Vector256s.LessThanAny((dynamic)left, (dynamic)right);
+#endif // NET7_0_OR_GREATER
+                    foreach (IWVectorTraits256 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        bool dst = instance.LessThanAny((dynamic)left, (dynamic)right);
+                        bool showLog = showNotEquals && !expected.Equals(dst);
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (allowLog || showLog) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
+                        } else {
+                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                        }
+                    }
+                }
+            }
+        }
+
 
 #endif
     }

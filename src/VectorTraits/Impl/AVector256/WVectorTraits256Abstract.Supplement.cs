@@ -1013,6 +1013,150 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAll_AcceleratedTypes"/>
+        public virtual TypeCodeFlags LessThanAll_AcceleratedTypes {
+            get {
+                return Statics.LessThanAll_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAll(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAll(Vector256<float> left, Vector256<float> right) {
+            return Statics.LessThanAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAll(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAll(Vector256<double> left, Vector256<double> right) {
+            return Statics.LessThanAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAll(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAll(Vector256<sbyte> left, Vector256<sbyte> right) {
+            return Statics.LessThanAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAll(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAll(Vector256<byte> left, Vector256<byte> right) {
+            return Statics.LessThanAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAll(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAll(Vector256<short> left, Vector256<short> right) {
+            return Statics.LessThanAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAll(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAll(Vector256<ushort> left, Vector256<ushort> right) {
+            return Statics.LessThanAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAll(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAll(Vector256<int> left, Vector256<int> right) {
+            return Statics.LessThanAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAll(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAll(Vector256<uint> left, Vector256<uint> right) {
+            return Statics.LessThanAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAll(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAll(Vector256<long> left, Vector256<long> right) {
+            return Statics.LessThanAll(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAll(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAll(Vector256<ulong> left, Vector256<ulong> right) {
+            return Statics.LessThanAll(left, right);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAny_AcceleratedTypes"/>
+        public virtual TypeCodeFlags LessThanAny_AcceleratedTypes {
+            get {
+                return Statics.LessThanAny_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAny(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAny(Vector256<float> left, Vector256<float> right) {
+            return Statics.LessThanAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAny(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAny(Vector256<double> left, Vector256<double> right) {
+            return Statics.LessThanAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAny(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAny(Vector256<sbyte> left, Vector256<sbyte> right) {
+            return Statics.LessThanAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAny(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAny(Vector256<byte> left, Vector256<byte> right) {
+            return Statics.LessThanAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAny(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAny(Vector256<short> left, Vector256<short> right) {
+            return Statics.LessThanAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAny(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAny(Vector256<ushort> left, Vector256<ushort> right) {
+            return Statics.LessThanAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAny(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAny(Vector256<int> left, Vector256<int> right) {
+            return Statics.LessThanAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAny(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAny(Vector256<uint> left, Vector256<uint> right) {
+            return Statics.LessThanAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAny(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAny(Vector256<long> left, Vector256<long> right) {
+            return Statics.LessThanAny(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.LessThanAny(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual bool LessThanAny(Vector256<ulong> left, Vector256<ulong> right) {
+            return Statics.LessThanAny(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.Max_AcceleratedTypes"/>
         public virtual TypeCodeFlags Max_AcceleratedTypes {
             get {
