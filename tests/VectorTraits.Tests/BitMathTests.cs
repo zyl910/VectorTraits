@@ -1,9 +1,8 @@
 ﻿using NUnit.Framework;
-using Zyl.VectorTraits;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Security.Cryptography;
+using Zyl.VectorTraits;
 
 namespace Zyl.VectorTraits.Tests {
     [TestFixture()]
