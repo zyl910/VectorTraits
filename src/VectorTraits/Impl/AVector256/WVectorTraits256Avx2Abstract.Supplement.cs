@@ -1655,6 +1655,78 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.Sqrt_AcceleratedTypes"/>
+        public override TypeCodeFlags Sqrt_AcceleratedTypes {
+            get {
+                return Statics.Sqrt_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<float> Sqrt(Vector256<float> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<double> Sqrt(Vector256<double> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> Sqrt(Vector256<sbyte> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<byte> Sqrt(Vector256<byte> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> Sqrt(Vector256<short> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ushort> Sqrt(Vector256<ushort> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> Sqrt(Vector256<int> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<uint> Sqrt(Vector256<uint> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> Sqrt(Vector256<long> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ulong> Sqrt(Vector256<ulong> value) {
+            return Statics.Sqrt(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.Subtract_AcceleratedTypes"/>
         public override TypeCodeFlags Subtract_AcceleratedTypes {
             get {

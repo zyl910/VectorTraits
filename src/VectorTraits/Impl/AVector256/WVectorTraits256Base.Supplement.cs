@@ -4640,6 +4640,372 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt_AcceleratedTypes"/>
+            public static TypeCodeFlags Sqrt_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> Sqrt(Vector256<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Sqrt(value);
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> Sqrt(Vector256<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector256.Sqrt(value);
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> Sqrt(Vector256<sbyte> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    return Vector256.Sqrt(value);
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> Sqrt(Vector256<byte> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    return Vector256.Sqrt(value);
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> Sqrt(Vector256<short> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    return Vector256.Sqrt(value);
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> Sqrt(Vector256<ushort> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    return Vector256.Sqrt(value);
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> Sqrt(Vector256<int> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    return Vector256.Sqrt(value);
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> Sqrt(Vector256<uint> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    return Vector256.Sqrt(value);
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> Sqrt(Vector256<long> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    return Vector256.Sqrt(value);
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> Sqrt(Vector256<ulong> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    return Vector256.Sqrt(value);
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> Sqrt_Basic(Vector256<float> value) {
+                Vector256<float> rt = value;
+                ref FixedArray8<float> p = ref Unsafe.As<Vector256<float>, FixedArray8<float>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                p.I4 = BitMath.Sqrt(p.I4);
+                p.I5 = BitMath.Sqrt(p.I5);
+                p.I6 = BitMath.Sqrt(p.I6);
+                p.I7 = BitMath.Sqrt(p.I7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> Sqrt_Basic(Vector256<double> value) {
+                Vector256<double> rt = value;
+                ref FixedArray4<double> p = ref Unsafe.As<Vector256<double>, FixedArray4<double>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> Sqrt_Basic(Vector256<sbyte> value) {
+                Vector256<sbyte> rt = value;
+                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector256<sbyte>, FixedArray32<sbyte>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                p.I4 = BitMath.Sqrt(p.I4);
+                p.I5 = BitMath.Sqrt(p.I5);
+                p.I6 = BitMath.Sqrt(p.I6);
+                p.I7 = BitMath.Sqrt(p.I7);
+                p.I8 = BitMath.Sqrt(p.I8);
+                p.I9 = BitMath.Sqrt(p.I9);
+                p.I10 = BitMath.Sqrt(p.I10);
+                p.I11 = BitMath.Sqrt(p.I11);
+                p.I12 = BitMath.Sqrt(p.I12);
+                p.I13 = BitMath.Sqrt(p.I13);
+                p.I14 = BitMath.Sqrt(p.I14);
+                p.I15 = BitMath.Sqrt(p.I15);
+                p.I16 = BitMath.Sqrt(p.I16);
+                p.I17 = BitMath.Sqrt(p.I17);
+                p.I18 = BitMath.Sqrt(p.I18);
+                p.I19 = BitMath.Sqrt(p.I19);
+                p.I20 = BitMath.Sqrt(p.I20);
+                p.I21 = BitMath.Sqrt(p.I21);
+                p.I22 = BitMath.Sqrt(p.I22);
+                p.I23 = BitMath.Sqrt(p.I23);
+                p.I24 = BitMath.Sqrt(p.I24);
+                p.I25 = BitMath.Sqrt(p.I25);
+                p.I26 = BitMath.Sqrt(p.I26);
+                p.I27 = BitMath.Sqrt(p.I27);
+                p.I28 = BitMath.Sqrt(p.I28);
+                p.I29 = BitMath.Sqrt(p.I29);
+                p.I30 = BitMath.Sqrt(p.I30);
+                p.I31 = BitMath.Sqrt(p.I31);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> Sqrt_Basic(Vector256<byte> value) {
+                Vector256<byte> rt = value;
+                ref FixedArray32<byte> p = ref Unsafe.As<Vector256<byte>, FixedArray32<byte>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                p.I4 = BitMath.Sqrt(p.I4);
+                p.I5 = BitMath.Sqrt(p.I5);
+                p.I6 = BitMath.Sqrt(p.I6);
+                p.I7 = BitMath.Sqrt(p.I7);
+                p.I8 = BitMath.Sqrt(p.I8);
+                p.I9 = BitMath.Sqrt(p.I9);
+                p.I10 = BitMath.Sqrt(p.I10);
+                p.I11 = BitMath.Sqrt(p.I11);
+                p.I12 = BitMath.Sqrt(p.I12);
+                p.I13 = BitMath.Sqrt(p.I13);
+                p.I14 = BitMath.Sqrt(p.I14);
+                p.I15 = BitMath.Sqrt(p.I15);
+                p.I16 = BitMath.Sqrt(p.I16);
+                p.I17 = BitMath.Sqrt(p.I17);
+                p.I18 = BitMath.Sqrt(p.I18);
+                p.I19 = BitMath.Sqrt(p.I19);
+                p.I20 = BitMath.Sqrt(p.I20);
+                p.I21 = BitMath.Sqrt(p.I21);
+                p.I22 = BitMath.Sqrt(p.I22);
+                p.I23 = BitMath.Sqrt(p.I23);
+                p.I24 = BitMath.Sqrt(p.I24);
+                p.I25 = BitMath.Sqrt(p.I25);
+                p.I26 = BitMath.Sqrt(p.I26);
+                p.I27 = BitMath.Sqrt(p.I27);
+                p.I28 = BitMath.Sqrt(p.I28);
+                p.I29 = BitMath.Sqrt(p.I29);
+                p.I30 = BitMath.Sqrt(p.I30);
+                p.I31 = BitMath.Sqrt(p.I31);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> Sqrt_Basic(Vector256<short> value) {
+                Vector256<short> rt = value;
+                ref FixedArray16<short> p = ref Unsafe.As<Vector256<short>, FixedArray16<short>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                p.I4 = BitMath.Sqrt(p.I4);
+                p.I5 = BitMath.Sqrt(p.I5);
+                p.I6 = BitMath.Sqrt(p.I6);
+                p.I7 = BitMath.Sqrt(p.I7);
+                p.I8 = BitMath.Sqrt(p.I8);
+                p.I9 = BitMath.Sqrt(p.I9);
+                p.I10 = BitMath.Sqrt(p.I10);
+                p.I11 = BitMath.Sqrt(p.I11);
+                p.I12 = BitMath.Sqrt(p.I12);
+                p.I13 = BitMath.Sqrt(p.I13);
+                p.I14 = BitMath.Sqrt(p.I14);
+                p.I15 = BitMath.Sqrt(p.I15);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> Sqrt_Basic(Vector256<ushort> value) {
+                Vector256<ushort> rt = value;
+                ref FixedArray16<ushort> p = ref Unsafe.As<Vector256<ushort>, FixedArray16<ushort>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                p.I4 = BitMath.Sqrt(p.I4);
+                p.I5 = BitMath.Sqrt(p.I5);
+                p.I6 = BitMath.Sqrt(p.I6);
+                p.I7 = BitMath.Sqrt(p.I7);
+                p.I8 = BitMath.Sqrt(p.I8);
+                p.I9 = BitMath.Sqrt(p.I9);
+                p.I10 = BitMath.Sqrt(p.I10);
+                p.I11 = BitMath.Sqrt(p.I11);
+                p.I12 = BitMath.Sqrt(p.I12);
+                p.I13 = BitMath.Sqrt(p.I13);
+                p.I14 = BitMath.Sqrt(p.I14);
+                p.I15 = BitMath.Sqrt(p.I15);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> Sqrt_Basic(Vector256<int> value) {
+                Vector256<int> rt = value;
+                ref FixedArray8<int> p = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                p.I4 = BitMath.Sqrt(p.I4);
+                p.I5 = BitMath.Sqrt(p.I5);
+                p.I6 = BitMath.Sqrt(p.I6);
+                p.I7 = BitMath.Sqrt(p.I7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> Sqrt_Basic(Vector256<uint> value) {
+                Vector256<uint> rt = value;
+                ref FixedArray8<uint> p = ref Unsafe.As<Vector256<uint>, FixedArray8<uint>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                p.I4 = BitMath.Sqrt(p.I4);
+                p.I5 = BitMath.Sqrt(p.I5);
+                p.I6 = BitMath.Sqrt(p.I6);
+                p.I7 = BitMath.Sqrt(p.I7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> Sqrt_Basic(Vector256<long> value) {
+                Vector256<long> rt = value;
+                ref long p = ref Unsafe.As<Vector256<long>, long>(ref rt);
+                p = BitMath.Sqrt(p);
+                Unsafe.Add(ref p, 1) = BitMath.Sqrt(Unsafe.Add(ref p, 1));
+                Unsafe.Add(ref p, 2) = BitMath.Sqrt(Unsafe.Add(ref p, 2));
+                Unsafe.Add(ref p, 3) = BitMath.Sqrt(Unsafe.Add(ref p, 3));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> Sqrt_Basic(Vector256<ulong> value) {
+                Vector256<ulong> rt = value;
+                ref FixedArray4<ulong> p = ref Unsafe.As<Vector256<ulong>, FixedArray4<ulong>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.Subtract_AcceleratedTypes"/>
             public static TypeCodeFlags Subtract_AcceleratedTypes {
                 get {
