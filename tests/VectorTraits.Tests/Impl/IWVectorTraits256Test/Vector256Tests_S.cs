@@ -598,7 +598,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         }
                         writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, vector={vector}");
+                        Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, vector={vector}");
                     }
                 }
             }

@@ -2653,6 +2653,123 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.Sqrt_AcceleratedTypes"/>
+        public static TypeCodeFlags Sqrt_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Sqrt_AcceleratedTypes;
+#else
+                return _instance.Sqrt_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<float> Sqrt(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<double> Sqrt(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<sbyte> Sqrt(Vector128<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<byte> Sqrt(Vector128<byte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<short> Sqrt(Vector128<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<ushort> Sqrt(Vector128<ushort> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> Sqrt(Vector128<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<uint> Sqrt(Vector128<uint> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> Sqrt(Vector128<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<ulong> Sqrt(Vector128<ulong> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.Subtract_AcceleratedTypes"/>
         public static TypeCodeFlags Subtract_AcceleratedTypes {
             get {

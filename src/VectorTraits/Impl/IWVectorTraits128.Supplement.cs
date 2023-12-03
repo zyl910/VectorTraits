@@ -2644,6 +2644,114 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Sqrt</c> (运行 <c>Sqrt</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Sqrt(Vector128{double})"/>
+        /// <seealso cref="BitMath.Sqrt(double)"/>
+        TypeCodeFlags Sqrt_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sqrt{T}(Vector128{T})" />
+        Vector128<float> Sqrt(Vector128<float> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sqrt{T}(Vector128{T})" />
+        Vector128<double> Sqrt(Vector128<double> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sqrt{T}(Vector128{T})" />
+        Vector128<sbyte> Sqrt(Vector128<sbyte> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sqrt{T}(Vector128{T})" />
+        Vector128<byte> Sqrt(Vector128<byte> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sqrt{T}(Vector128{T})" />
+        Vector128<short> Sqrt(Vector128<short> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sqrt{T}(Vector128{T})" />
+        Vector128<ushort> Sqrt(Vector128<ushort> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sqrt{T}(Vector128{T})" />
+        Vector128<int> Sqrt(Vector128<int> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sqrt{T}(Vector128{T})" />
+        Vector128<uint> Sqrt(Vector128<uint> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sqrt{T}(Vector128{T})" />
+        Vector128<long> Sqrt(Vector128<long> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Sqrt{T}(Vector128{T})" />
+        Vector128<ulong> Sqrt(Vector128<ulong> vector);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Subtract</c> (运行 <c>Subtract</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Subtract(Vector128{byte}, Vector128{byte})"/>

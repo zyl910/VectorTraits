@@ -1794,6 +1794,153 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt_AcceleratedTypes"/>
+            public static TypeCodeFlags Sqrt_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Sqrt(Vector128<float> value) {
+                Vector128<float> a0 = AdvSimd.ShiftRightLogical(AdvSimd.ShiftLeftLogical(value.AsUInt64(), 32), 32).AsSingle(); // 0, 2
+                Vector128<float> a1 = AdvSimd.ShiftRightLogical(value.AsUInt64(), 32).AsSingle(); // 1, 3
+                Vector64<float> b0 = AdvSimd.SqrtScalar(a0.GetLower());
+                Vector64<float> b2 = AdvSimd.SqrtScalar(a0.GetUpper());
+                Vector64<float> b1 = AdvSimd.SqrtScalar(a1.GetLower());
+                Vector64<float> b3 = AdvSimd.SqrtScalar(a1.GetUpper());
+                Vector128<float> c0 = Vector128.Create(b0, b2);
+                Vector128<float> c1 = Vector128.Create(b1, b3);
+                c1 = AdvSimd.ShiftLeftLogical(c1.AsUInt64(), 32).AsSingle();
+                Vector128<float> rt = AdvSimd.Or(c0, c1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Sqrt(Vector128<double> value) {
+                Vector64<double> dst0 = AdvSimd.SqrtScalar(value.GetLower());
+                Vector64<double> dst1 = AdvSimd.SqrtScalar(value.GetUpper());
+                Vector128<double> rt = Vector128.Create(dst0, dst1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Sqrt(Vector128<sbyte> value) {
+                Vector128<sbyte> mask = GreaterThan(Vector128<sbyte>.Zero, value); // 0>x = x<0.
+                Vector128<sbyte> temp = Sqrt(value.AsByte()).AsSByte();
+                Vector128<sbyte> rt = AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> Sqrt(Vector128<byte> value) {
+                // To float
+                Widen(value, out Vector128<ushort> t0, out Vector128<ushort> t1);
+                Widen(t0, out Vector128<uint> w0, out Vector128<uint> w1);
+                Widen(t1, out Vector128<uint> w2, out Vector128<uint> w3);
+                Vector128<float> src0 = ConvertToSingle(w0.AsInt32()); // On x86 platforms, Int32 typically has special instructions to speed up, which is faster than UInt32.
+                Vector128<float> src1 = ConvertToSingle(w1.AsInt32());
+                Vector128<float> src2 = ConvertToSingle(w2.AsInt32());
+                Vector128<float> src3 = ConvertToSingle(w3.AsInt32());
+                // Body
+                Vector128<float> dst0 = Sqrt(src0);
+                Vector128<float> dst1 = Sqrt(src1);
+                Vector128<float> dst2 = Sqrt(src2);
+                Vector128<float> dst3 = Sqrt(src3);
+                // To int
+                w0 = ConvertToInt32(dst0).AsUInt32();
+                w1 = ConvertToInt32(dst1).AsUInt32();
+                w2 = ConvertToInt32(dst2).AsUInt32();
+                w3 = ConvertToInt32(dst3).AsUInt32();
+                t0 = Narrow(w0, w1);
+                t1 = Narrow(w2, w3);
+                Vector128<byte> rt = Narrow(t0, t1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Sqrt(Vector128<short> value) {
+                Vector128<short> mask = GreaterThan(Vector128<short>.Zero, value); // 0>x = x<0.
+                Vector128<short> temp = Sqrt(value.AsUInt16()).AsInt16();
+                Vector128<short> rt = AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> Sqrt(Vector128<ushort> value) {
+                // To float
+                Widen(value, out Vector128<uint> w0, out Vector128<uint> w1);
+                Vector128<float> src0 = ConvertToSingle(w0.AsInt32());
+                Vector128<float> src1 = ConvertToSingle(w1.AsInt32());
+                // Body
+                Vector128<float> dst0 = Sqrt(src0);
+                Vector128<float> dst1 = Sqrt(src1);
+                // To int
+                w0 = ConvertToInt32(dst0).AsUInt32();
+                w1 = ConvertToInt32(dst1).AsUInt32();
+                Vector128<ushort> rt = Narrow(w0, w1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Sqrt(Vector128<int> value) {
+                Vector128<int> mask = GreaterThan(Vector128<int>.Zero, value); // 0>x = x<0.
+                Vector128<int> temp = Sqrt(value.AsUInt32()).AsInt32();
+                Vector128<int> rt = AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> Sqrt(Vector128<uint> value) {
+                // To float
+                Widen(value, out Vector128<ulong> w0, out Vector128<ulong> w1);
+                Vector128<double> src0 = ConvertToDouble_Range52(w0);
+                Vector128<double> src1 = ConvertToDouble_Range52(w1);
+                // Body
+                Vector128<double> dst0 = Sqrt(src0);
+                Vector128<double> dst1 = Sqrt(src1);
+                // To int
+                w0 = ConvertToUInt64_Range52(dst0);
+                w1 = ConvertToUInt64_Range52(dst1);
+                Vector128<uint> rt = Narrow(w0, w1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Sqrt(Vector128<long> value) {
+                Vector128<long> mask = GreaterThan(Vector128<long>.Zero, value); // 0>x = x<0.
+                Vector128<long> temp = Sqrt(value.AsUInt64()).AsInt64();
+                Vector128<long> rt = AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> Sqrt(Vector128<ulong> value) {
+                // To float
+                Vector128<double> src0 = ConvertToDouble(value);
+                // Body
+                Vector128<double> dst0 = Sqrt(src0);
+                // To int
+                Vector128<ulong> rt = ConvertToUInt64_Range52(dst0);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Subtract_AcceleratedTypes"/>
             public static TypeCodeFlags Subtract_AcceleratedTypes {
                 get {

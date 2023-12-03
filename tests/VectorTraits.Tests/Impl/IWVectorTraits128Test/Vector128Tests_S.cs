@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
+using System.IO;
+
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -541,6 +543,62 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     }
                     if (allowLog) {
                         Console.WriteLine();
+                    }
+                }
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void SqrtTest<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.Sqrt_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s.Create(src),
+                Vector128s<T>.Demo,
+                Vector128s<T>.Serial,
+                Vector128s<T>.SerialNegative,
+                Vector128s<T>.InterlacedSign
+            };
+            bool allowLog = false;
+            bool showNotEquals = true;
+            foreach (Vector128<T> vector in samples) {
+                Vector128<T> expected = Vector128s.Sqrt((dynamic)vector);
+                bool usedWrite = false;
+                foreach (IWVectorTraits128 instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector128<T> dst = instance.Sqrt((dynamic)vector);
+                    bool showLog = allowLog;
+                    if (!showLog && !expected.AsByte().Equals(dst.AsByte())) {
+                        if (showNotEquals) {
+                            showLog = true;
+                        }
+                    }
+                    if (showLog) {
+                        if (!usedWrite) {
+                            usedWrite = true;
+                            writer.WriteLine();
+                            writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}", "Expected", expected, vector));
+                        }
+                        writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                    } else {
+                        Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, vector={vector}");
                     }
                 }
             }

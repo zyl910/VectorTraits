@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define Sqrt_Float_Used
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
@@ -4007,6 +4009,456 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Unsafe.Add(ref p, 1) = ~Unsafe.Add(ref p, 1);
                 return rt;
             }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt_AcceleratedTypes"/>
+            public static TypeCodeFlags Sqrt_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single;
+#if Sqrt_Float_Used
+                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16;
+#endif
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Sqrt(Vector128<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Sqrt(value);
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Sqrt(Vector128<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return Vector128.Sqrt(value);
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Sqrt(Vector128<sbyte> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector128.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
+                    return Vector128.Sqrt(value);
+#endif
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> Sqrt(Vector128<byte> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector128.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
+                    return Vector128.Sqrt(value);
+#endif
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Sqrt(Vector128<short> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector128.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
+                    return Vector128.Sqrt(value);
+#endif
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> Sqrt(Vector128<ushort> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector128.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
+                    return Vector128.Sqrt(value);
+#endif
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Sqrt(Vector128<int> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector128.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
+                    return Vector128.Sqrt(value);
+#endif
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> Sqrt(Vector128<uint> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector128.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
+                    return Vector128.Sqrt(value);
+#endif
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Sqrt(Vector128<long> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector128.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
+                    return Vector128.Sqrt(value);
+#endif
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> Sqrt(Vector128<ulong> value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                if (Vector128.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
+                    return Vector128.Sqrt(value);
+#endif
+                } else {
+                    return Sqrt_Basic(value);
+                }
+#else
+                return Sqrt_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> Sqrt_Basic(Vector128<float> value) {
+                Vector128<float> rt = value;
+                ref FixedArray4<float> p = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> Sqrt_Basic(Vector128<double> value) {
+                Vector128<double> rt = value;
+                ref FixedArray2<double> p = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Sqrt_Basic(Vector128<sbyte> value) {
+                Vector128<sbyte> rt = value;
+                ref FixedArray16<sbyte> p = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                p.I4 = BitMath.Sqrt(p.I4);
+                p.I5 = BitMath.Sqrt(p.I5);
+                p.I6 = BitMath.Sqrt(p.I6);
+                p.I7 = BitMath.Sqrt(p.I7);
+                p.I8 = BitMath.Sqrt(p.I8);
+                p.I9 = BitMath.Sqrt(p.I9);
+                p.I10 = BitMath.Sqrt(p.I10);
+                p.I11 = BitMath.Sqrt(p.I11);
+                p.I12 = BitMath.Sqrt(p.I12);
+                p.I13 = BitMath.Sqrt(p.I13);
+                p.I14 = BitMath.Sqrt(p.I14);
+                p.I15 = BitMath.Sqrt(p.I15);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> Sqrt_Basic(Vector128<byte> value) {
+                Vector128<byte> rt = value;
+                ref FixedArray16<byte> p = ref Unsafe.As<Vector128<byte>, FixedArray16<byte>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                p.I4 = BitMath.Sqrt(p.I4);
+                p.I5 = BitMath.Sqrt(p.I5);
+                p.I6 = BitMath.Sqrt(p.I6);
+                p.I7 = BitMath.Sqrt(p.I7);
+                p.I8 = BitMath.Sqrt(p.I8);
+                p.I9 = BitMath.Sqrt(p.I9);
+                p.I10 = BitMath.Sqrt(p.I10);
+                p.I11 = BitMath.Sqrt(p.I11);
+                p.I12 = BitMath.Sqrt(p.I12);
+                p.I13 = BitMath.Sqrt(p.I13);
+                p.I14 = BitMath.Sqrt(p.I14);
+                p.I15 = BitMath.Sqrt(p.I15);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Sqrt_Basic(Vector128<short> value) {
+                Vector128<short> rt = value;
+                ref FixedArray8<short> p = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                p.I4 = BitMath.Sqrt(p.I4);
+                p.I5 = BitMath.Sqrt(p.I5);
+                p.I6 = BitMath.Sqrt(p.I6);
+                p.I7 = BitMath.Sqrt(p.I7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> Sqrt_Basic(Vector128<ushort> value) {
+                Vector128<ushort> rt = value;
+                ref FixedArray8<ushort> p = ref Unsafe.As<Vector128<ushort>, FixedArray8<ushort>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                p.I4 = BitMath.Sqrt(p.I4);
+                p.I5 = BitMath.Sqrt(p.I5);
+                p.I6 = BitMath.Sqrt(p.I6);
+                p.I7 = BitMath.Sqrt(p.I7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Sqrt_Basic(Vector128<int> value) {
+                Vector128<int> rt = value;
+                ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> Sqrt_Basic(Vector128<uint> value) {
+                Vector128<uint> rt = value;
+                ref FixedArray4<uint> p = ref Unsafe.As<Vector128<uint>, FixedArray4<uint>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Sqrt_Basic(Vector128<long> value) {
+                Vector128<long> rt = value;
+                ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> Sqrt_Basic(Vector128<ulong> value) {
+                Vector128<ulong> rt = value;
+                ref FixedArray2<ulong> p = ref Unsafe.As<Vector128<ulong>, FixedArray2<ulong>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Sqrt_Float(Vector128<sbyte> value) {
+                Vector128<sbyte> mask = GreaterThan(Vector128<sbyte>.Zero, value); // 0>x = x<0.
+                Vector128<sbyte> temp = Sqrt_Float(value.AsByte()).AsSByte();
+                Vector128<sbyte> rt = AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> Sqrt_Float(Vector128<byte> value) {
+                // To float
+                Widen(value, out Vector128<ushort> t0, out Vector128<ushort> t1);
+                Widen(t0, out Vector128<uint> w0, out Vector128<uint> w1);
+                Widen(t1, out Vector128<uint> w2, out Vector128<uint> w3);
+                Vector128<float> src0 = ConvertToSingle(w0.AsInt32()); // On x86 platforms, Int32 typically has special instructions to speed up, which is faster than UInt32.
+                Vector128<float> src1 = ConvertToSingle(w1.AsInt32());
+                Vector128<float> src2 = ConvertToSingle(w2.AsInt32());
+                Vector128<float> src3 = ConvertToSingle(w3.AsInt32());
+                // Body
+                Vector128<float> dst0 = Vector128.Sqrt(src0);
+                Vector128<float> dst1 = Vector128.Sqrt(src1);
+                Vector128<float> dst2 = Vector128.Sqrt(src2);
+                Vector128<float> dst3 = Vector128.Sqrt(src3);
+                // To int
+                w0 = ConvertToInt32(dst0).AsUInt32();
+                w1 = ConvertToInt32(dst1).AsUInt32();
+                w2 = ConvertToInt32(dst2).AsUInt32();
+                w3 = ConvertToInt32(dst3).AsUInt32();
+                t0 = Narrow(w0, w1);
+                t1 = Narrow(w2, w3);
+                Vector128<byte> rt = Narrow(t0, t1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> Sqrt_Float(Vector128<short> value) {
+                Vector128<short> mask = GreaterThan(Vector128<short>.Zero, value); // 0>x = x<0.
+                Vector128<short> temp = Sqrt_Float(value.AsUInt16()).AsInt16();
+                Vector128<short> rt = AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> Sqrt_Float(Vector128<ushort> value) {
+                // To float
+                Widen(value, out Vector128<uint> w0, out Vector128<uint> w1);
+                Vector128<float> src0 = ConvertToSingle(w0.AsInt32());
+                Vector128<float> src1 = ConvertToSingle(w1.AsInt32());
+                // Body
+                Vector128<float> dst0 = Vector128.Sqrt(src0);
+                Vector128<float> dst1 = Vector128.Sqrt(src1);
+                // To int
+                w0 = ConvertToInt32(dst0).AsUInt32();
+                w1 = ConvertToInt32(dst1).AsUInt32();
+                Vector128<ushort> rt = Narrow(w0, w1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> Sqrt_Float(Vector128<int> value) {
+                Vector128<int> mask = GreaterThan(Vector128<int>.Zero, value); // 0>x = x<0.
+                Vector128<int> temp = Sqrt_Float(value.AsUInt32()).AsInt32();
+                Vector128<int> rt = AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> Sqrt_Float(Vector128<uint> value) {
+                // To float
+                Widen(value, out Vector128<ulong> w0, out Vector128<ulong> w1);
+                Vector128<double> src0 = ConvertToDouble_Range52(w0);
+                Vector128<double> src1 = ConvertToDouble_Range52(w1);
+                // Body
+                Vector128<double> dst0 = Vector128.Sqrt(src0);
+                Vector128<double> dst1 = Vector128.Sqrt(src1);
+                // To int
+                w0 = ConvertToUInt64_Range52(dst0);
+                w1 = ConvertToUInt64_Range52(dst1);
+                Vector128<uint> rt = Narrow(w0, w1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> Sqrt_Float(Vector128<long> value) {
+                Vector128<long> mask = GreaterThan(Vector128<long>.Zero, value); // 0>x = x<0.
+                Vector128<long> temp = Sqrt_Float(value.AsUInt64()).AsInt64();
+                Vector128<long> rt = AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> Sqrt_Float(Vector128<ulong> value) {
+                // To float
+                Vector128<double> src0 = ConvertToDouble(value);
+                // Body
+                Vector128<double> dst0 = Vector128.Sqrt(src0);
+                // To int
+                Vector128<ulong> rt = ConvertToUInt64_Range52(dst0); // `Math.Ceiling(Math.Log2(Math.Sqrt(ulong.MaxValue))) = 32`. It less 52bit.
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
 
 
             /// <inheritdoc cref="IWVectorTraits128.Subtract_AcceleratedTypes"/>
