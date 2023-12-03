@@ -1990,7 +1990,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // Body
                 Vector256<double> dst0 = Avx.Sqrt(src0);
                 // To int
-                Vector256<ulong> rt = ConvertToUInt64(dst0);
+                Vector256<ulong> rt = ConvertToUInt64_Range52(dst0);
                 return rt;
             }
 

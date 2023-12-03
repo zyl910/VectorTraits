@@ -4648,7 +4648,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                     if (Vector256.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                        rt |= TypeCodeFlags.Single;
+#if Sqrt_Float_Used
+                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16;
+#endif
                     }
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                     return rt;
@@ -5018,11 +5021,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> Sqrt_Basic(Vector256<long> value) {
                 Vector256<long> rt = value;
-                ref long p = ref Unsafe.As<Vector256<long>, long>(ref rt);
-                p = BitMath.Sqrt(p);
-                Unsafe.Add(ref p, 1) = BitMath.Sqrt(Unsafe.Add(ref p, 1));
-                Unsafe.Add(ref p, 2) = BitMath.Sqrt(Unsafe.Add(ref p, 2));
-                Unsafe.Add(ref p, 3) = BitMath.Sqrt(Unsafe.Add(ref p, 3));
+                ref FixedArray4<long> p = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
                 return rt;
             }
 
@@ -5149,7 +5152,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // Body
                 Vector256<double> dst0 = Vector256.Sqrt(src0);
                 // To int
-                Vector256<ulong> rt = ConvertToUInt64(dst0);
+                Vector256<ulong> rt = ConvertToUInt64_Range52(dst0); // `Math.Ceiling(Math.Log2(Math.Sqrt(ulong.MaxValue))) = 32`. It less 52bit.
                 return rt;
             }
 #endif // NET7_0_OR_GREATER
