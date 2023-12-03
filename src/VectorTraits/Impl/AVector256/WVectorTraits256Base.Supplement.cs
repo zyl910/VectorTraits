@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define Sqrt_Float_Used
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
@@ -4679,7 +4681,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<sbyte> Sqrt(Vector256<sbyte> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 if (Vector256.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
                     return Vector256.Sqrt(value);
+#endif
                 } else {
                     return Sqrt_Basic(value);
                 }
@@ -4693,7 +4699,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<byte> Sqrt(Vector256<byte> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 if (Vector256.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
                     return Vector256.Sqrt(value);
+#endif
                 } else {
                     return Sqrt_Basic(value);
                 }
@@ -4707,7 +4717,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<short> Sqrt(Vector256<short> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 if (Vector256.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
                     return Vector256.Sqrt(value);
+#endif
                 } else {
                     return Sqrt_Basic(value);
                 }
@@ -4722,7 +4736,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<ushort> Sqrt(Vector256<ushort> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 if (Vector256.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
                     return Vector256.Sqrt(value);
+#endif
                 } else {
                     return Sqrt_Basic(value);
                 }
@@ -4736,7 +4754,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<int> Sqrt(Vector256<int> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 if (Vector256.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
                     return Vector256.Sqrt(value);
+#endif
                 } else {
                     return Sqrt_Basic(value);
                 }
@@ -4751,7 +4773,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<uint> Sqrt(Vector256<uint> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 if (Vector256.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
                     return Vector256.Sqrt(value);
+#endif
                 } else {
                     return Sqrt_Basic(value);
                 }
@@ -4765,7 +4791,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<long> Sqrt(Vector256<long> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 if (Vector256.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
                     return Vector256.Sqrt(value);
+#endif
                 } else {
                     return Sqrt_Basic(value);
                 }
@@ -4780,14 +4810,18 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<ulong> Sqrt(Vector256<ulong> value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
                 if (Vector256.IsHardwareAccelerated) {
+#if Sqrt_Float_Used
+                    return Sqrt_Float(value);
+#else
                     return Vector256.Sqrt(value);
+#endif
                 } else {
                     return Sqrt_Basic(value);
                 }
 #else
                 return Sqrt_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-            }
+                }
 
             /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -5004,6 +5038,121 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 p.I3 = BitMath.Sqrt(p.I3);
                 return rt;
             }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> Sqrt_Float(Vector256<sbyte> value) {
+                Vector256<sbyte> mask = GreaterThan(Vector256<sbyte>.Zero, value); // 0>x = x<0.
+                Vector256<sbyte> temp = Sqrt_Float(value.AsByte()).AsSByte();
+                Vector256<sbyte> rt = AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> Sqrt_Float(Vector256<byte> value) {
+                // To float
+                Widen(value, out Vector256<ushort> t0, out Vector256<ushort> t1);
+                Widen(t0, out Vector256<uint> w0, out Vector256<uint> w1);
+                Widen(t1, out Vector256<uint> w2, out Vector256<uint> w3);
+                Vector256<float> src0 = ConvertToSingle(w0.AsInt32()); // On x86 platforms, Int32 typically has special instructions to speed up, which is faster than UInt32.
+                Vector256<float> src1 = ConvertToSingle(w1.AsInt32());
+                Vector256<float> src2 = ConvertToSingle(w2.AsInt32());
+                Vector256<float> src3 = ConvertToSingle(w3.AsInt32());
+                // Body
+                Vector256<float> dst0 = Vector256.Sqrt(src0);
+                Vector256<float> dst1 = Vector256.Sqrt(src1);
+                Vector256<float> dst2 = Vector256.Sqrt(src2);
+                Vector256<float> dst3 = Vector256.Sqrt(src3);
+                // To int
+                w0 = ConvertToInt32(dst0).AsUInt32();
+                w1 = ConvertToInt32(dst1).AsUInt32();
+                w2 = ConvertToInt32(dst2).AsUInt32();
+                w3 = ConvertToInt32(dst3).AsUInt32();
+                t0 = Narrow(w0, w1);
+                t1 = Narrow(w2, w3);
+                Vector256<byte> rt = Narrow(t0, t1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> Sqrt_Float(Vector256<short> value) {
+                Vector256<short> mask = GreaterThan(Vector256<short>.Zero, value); // 0>x = x<0.
+                Vector256<short> temp = Sqrt_Float(value.AsUInt16()).AsInt16();
+                Vector256<short> rt = AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> Sqrt_Float(Vector256<ushort> value) {
+                // To float
+                Widen(value, out Vector256<uint> w0, out Vector256<uint> w1);
+                Vector256<float> src0 = ConvertToSingle(w0.AsInt32());
+                Vector256<float> src1 = ConvertToSingle(w1.AsInt32());
+                // Body
+                Vector256<float> dst0 = Vector256.Sqrt(src0);
+                Vector256<float> dst1 = Vector256.Sqrt(src1);
+                // To int
+                w0 = ConvertToInt32(dst0).AsUInt32();
+                w1 = ConvertToInt32(dst1).AsUInt32();
+                Vector256<ushort> rt = Narrow(w0, w1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> Sqrt_Float(Vector256<int> value) {
+                Vector256<int> mask = GreaterThan(Vector256<int>.Zero, value); // 0>x = x<0.
+                Vector256<int> temp = Sqrt_Float(value.AsUInt32()).AsInt32();
+                Vector256<int> rt = AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> Sqrt_Float(Vector256<uint> value) {
+                // To float
+                Widen(value, out Vector256<ulong> w0, out Vector256<ulong> w1);
+                Vector256<double> src0 = ConvertToDouble_Range52(w0);
+                Vector256<double> src1 = ConvertToDouble_Range52(w1);
+                // Body
+                Vector256<double> dst0 = Vector256.Sqrt(src0);
+                Vector256<double> dst1 = Vector256.Sqrt(src1);
+                // To int
+                w0 = ConvertToUInt64_Range52(dst0);
+                w1 = ConvertToUInt64_Range52(dst1);
+                Vector256<uint> rt = Narrow(w0, w1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> Sqrt_Float(Vector256<long> value) {
+                Vector256<long> mask = GreaterThan(Vector256<long>.Zero, value); // 0>x = x<0.
+                Vector256<long> temp = Sqrt_Float(value.AsUInt64()).AsInt64();
+                Vector256<long> rt = AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Sqrt(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> Sqrt_Float(Vector256<ulong> value) {
+                // To float
+                Vector256<double> src0 = ConvertToDouble(value);
+                // Body
+                Vector256<double> dst0 = Vector256.Sqrt(src0);
+                // To int
+                Vector256<ulong> rt = ConvertToUInt64(dst0);
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
 
 
             /// <inheritdoc cref="IWVectorTraits256.Subtract_AcceleratedTypes"/>

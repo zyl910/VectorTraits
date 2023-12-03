@@ -584,8 +584,12 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 foreach (IWVectorTraits256 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector256<T> dst = instance.Sqrt((dynamic)vector);
-                    bool rangeValid = 0 == Scalars<T>.SignBits;
-                    bool showLog = allowLog || ((showNotEquals || !rangeValid) && !expected.AsByte().Equals(dst.AsByte()));
+                    bool showLog = allowLog;
+                    if (!showLog && !expected.AsByte().Equals(dst.AsByte())) {
+                        if (showNotEquals) {
+                            showLog = true;
+                        }
+                    }
                     if (showLog) {
                         if (!usedWrite) {
                             usedWrite = true;

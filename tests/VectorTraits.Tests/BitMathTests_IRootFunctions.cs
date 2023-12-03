@@ -30,7 +30,7 @@ namespace Zyl.VectorTraits.Tests {
                 samples[i] = Scalars.GetByDouble<T>(i);
             }
             bool allowLog = false;
-            bool showNotEquals = false;
+            bool showNotEquals = true;
             // run.
             for (int i = 0; i < samples.Length; ++i) {
                 T x = samples[i];
@@ -38,8 +38,12 @@ namespace Zyl.VectorTraits.Tests {
                 double expectedDouble = Math.Sqrt(xDouble);
                 T expected = Scalars.GetByDouble<T>(expectedDouble);
                 T dst = BitMath.Sqrt((dynamic)x);
-                bool rangeValid = (0 <= xDouble) && (xDouble <= double.MaxValue);
-                bool showLog = allowLog || !rangeValid || (showNotEquals && !expected.Equals(dst));
+                bool showLog = allowLog;
+                if (!showLog && !expected.Equals(dst)) {
+                    if (showNotEquals) {
+                        showLog = true;
+                    }
+                }
                 if (showLog) {
                     Console.WriteLine("Sqrt({0}):\t{1}\t// {2}", x, dst, expected);
                 } else {
