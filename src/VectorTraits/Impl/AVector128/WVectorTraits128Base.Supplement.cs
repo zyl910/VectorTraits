@@ -4454,8 +4454,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<double> src0 = ConvertToDouble(value);
                 // Body
                 Vector128<double> dst0 = Vector128.Sqrt(src0);
+                //Console.WriteLine(VectorTextUtil.Format("dst0:\t{0}", dst0));
                 // To int
                 Vector128<ulong> rt = ConvertToUInt64_Range52(dst0); // `Math.Ceiling(Math.Log2(Math.Sqrt(ulong.MaxValue))) = 32`. It less 52bit.
+                //Console.WriteLine(VectorTextUtil.Format("Sqrt_Float:\t{0}", rt));
                 return rt;
             }
 #endif // NET7_0_OR_GREATER

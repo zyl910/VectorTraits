@@ -525,6 +525,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #if NET7_0_OR_GREATER
                 // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52_Impl
                 value = YRoundToZero(value); // Truncate.
+                //Console.WriteLine(VectorTextUtil.Format("YRoundToZero:\t{0}", value));
                 return ConvertToUInt64_Range52RoundToEven(value);
 #else
                 return ConvertToUInt64_Basic(value);
@@ -537,8 +538,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> ConvertToUInt64_Range52RoundToEven(Vector128<double> value) {
 #if NET7_0_OR_GREATER
                 // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52RoundToEven
-                Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
+                Vector128<ulong> magicNumber = Vector128.Create(ScalarConstants.DoubleVal_2Pow52).AsUInt64(); // Double value: pow(2, 52)
                 Vector128<double> x = Vector128.Add(value, magicNumber.AsDouble());
+                //Console.WriteLine(VectorTextUtil.Format("x:\t{0}", x));
                 Vector128<ulong> result = Vector128.Xor(x.AsUInt64(), magicNumber);
                 return result;
 #else
