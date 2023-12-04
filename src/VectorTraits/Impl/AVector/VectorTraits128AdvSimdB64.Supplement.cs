@@ -52,6 +52,78 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.Multiply(left.AsVector128(), right.AsVector128()).AsVector();
             }
 
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt_AcceleratedTypes"/>
+            public static TypeCodeFlags Sqrt_AcceleratedTypes {
+                get {
+                    return WStatics.Sqrt_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Sqrt(Vector<float> value) {
+                return WStatics.Sqrt(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> Sqrt(Vector<double> value) {
+                return WStatics.Sqrt(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> Sqrt(Vector<sbyte> value) {
+                return WStatics.Sqrt(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> Sqrt(Vector<byte> value) {
+                return WStatics.Sqrt(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> Sqrt(Vector<short> value) {
+                return WStatics.Sqrt(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> Sqrt(Vector<ushort> value) {
+                return WStatics.Sqrt(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> Sqrt(Vector<int> value) {
+                return WStatics.Sqrt(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> Sqrt(Vector<uint> value) {
+                return WStatics.Sqrt(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> Sqrt(Vector<long> value) {
+                return WStatics.Sqrt(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> Sqrt(Vector<ulong> value) {
+                return WStatics.Sqrt(value.AsVector128()).AsVector();
+            }
+
         }
 #endif // NET5_0_OR_GREATER
     }

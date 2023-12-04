@@ -163,5 +163,78 @@ namespace Zyl.VectorTraits.Impl.AVector {
             return Statics.Multiply(left, right);
         }
 
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt_AcceleratedTypes"/>
+        public virtual TypeCodeFlags Sqrt_AcceleratedTypes {
+            get {
+                return Statics.Sqrt_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<float> Sqrt(Vector<float> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<double> Sqrt(Vector<double> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<sbyte> Sqrt(Vector<sbyte> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<byte> Sqrt(Vector<byte> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<short> Sqrt(Vector<short> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ushort> Sqrt(Vector<ushort> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<int> Sqrt(Vector<int> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<uint> Sqrt(Vector<uint> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<long> Sqrt(Vector<long> value) {
+            return Statics.Sqrt(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ulong> Sqrt(Vector<ulong> value) {
+            return Statics.Sqrt(value);
+        }
+
+
     }
 }

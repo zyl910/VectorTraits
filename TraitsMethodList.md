@@ -106,7 +106,7 @@ List (列表):
   Mnemonic: `rt[i] := -vector[i]`.
 - `OnesComplement`: Computes the ones-complement of a vector (计算向量的反码).
   Mnemonic: `rt[i] := ~vector[i]`.
-- `Sqrt`: Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+- `Sqrt`①: Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
   Mnemonic: `rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)`. When x is less than 0, floating-point types return NaN, integer types return 0.
 - `Subtract`: Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
   Mnemonic: `rt[i] := left[i] - right[i]`.

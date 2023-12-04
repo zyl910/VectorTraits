@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define Sqrt_Float_Used
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
@@ -184,6 +186,229 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt_AcceleratedTypes"/>
+            public static TypeCodeFlags Sqrt_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+                    if (Vector.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single;
+#if Sqrt_Float_Used
+                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16;
+#endif
+                    }
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Sqrt(Vector<float> value) {
+                return Vector.SquareRoot(value);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> Sqrt(Vector<double> value) {
+                return Vector.SquareRoot(value);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> Sqrt(Vector<sbyte> value) {
+#if Sqrt_Float_Used
+                return Sqrt_Float(value);
+#else
+                return Vector.SquareRoot(value);
+#endif
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> Sqrt(Vector<byte> value) {
+#if Sqrt_Float_Used
+                return Sqrt_Float(value);
+#else
+                return Vector.SquareRoot(value);
+#endif
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> Sqrt(Vector<short> value) {
+#if Sqrt_Float_Used
+                return Sqrt_Float(value);
+#else
+                return Vector.SquareRoot(value);
+#endif
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> Sqrt(Vector<ushort> value) {
+#if Sqrt_Float_Used
+                return Sqrt_Float(value);
+#else
+                return Vector.SquareRoot(value);
+#endif
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> Sqrt(Vector<int> value) {
+#if Sqrt_Float_Used
+                return Sqrt_Float(value);
+#else
+                return Vector.SquareRoot(value);
+#endif
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> Sqrt(Vector<uint> value) {
+#if Sqrt_Float_Used
+                return Sqrt_Float(value);
+#else
+                return Vector.SquareRoot(value);
+#endif
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> Sqrt(Vector<long> value) {
+#if Sqrt_Float_Used
+                return Sqrt_Float(value);
+#else
+                return Vector.SquareRoot(value);
+#endif
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> Sqrt(Vector<ulong> value) {
+#if Sqrt_Float_Used
+                return Sqrt_Float(value);
+#else
+                return Vector.SquareRoot(value);
+#endif
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> Sqrt_Float(Vector<sbyte> value) {
+                Vector<sbyte> mask = Vector.GreaterThan(Vector<sbyte>.Zero, value); // 0>x = x<0.
+                Vector<sbyte> temp = Sqrt_Float(value.AsByte()).AsSByte();
+                Vector<sbyte> rt = Vector.AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> Sqrt_Float(Vector<byte> value) {
+                // To float
+                Widen(value, out Vector<ushort> t0, out Vector<ushort> t1);
+                Widen(t0, out Vector<uint> w0, out Vector<uint> w1);
+                Widen(t1, out Vector<uint> w2, out Vector<uint> w3);
+                Vector<float> src0 = ConvertToSingle(w0.AsInt32()); // On x86 platforms, Int32 typically has special instructions to speed up, which is faster than UInt32.
+                Vector<float> src1 = ConvertToSingle(w1.AsInt32());
+                Vector<float> src2 = ConvertToSingle(w2.AsInt32());
+                Vector<float> src3 = ConvertToSingle(w3.AsInt32());
+                // Body
+                Vector<float> dst0 = Vector.SquareRoot(src0);
+                Vector<float> dst1 = Vector.SquareRoot(src1);
+                Vector<float> dst2 = Vector.SquareRoot(src2);
+                Vector<float> dst3 = Vector.SquareRoot(src3);
+                // To int
+                w0 = ConvertToInt32(dst0).AsUInt32();
+                w1 = ConvertToInt32(dst1).AsUInt32();
+                w2 = ConvertToInt32(dst2).AsUInt32();
+                w3 = ConvertToInt32(dst3).AsUInt32();
+                t0 = Narrow(w0, w1);
+                t1 = Narrow(w2, w3);
+                Vector<byte> rt = Narrow(t0, t1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> Sqrt_Float(Vector<short> value) {
+                Vector<short> mask = Vector.GreaterThan(Vector<short>.Zero, value); // 0>x = x<0.
+                Vector<short> temp = Sqrt_Float(value.AsUInt16()).AsInt16();
+                Vector<short> rt = Vector.AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> Sqrt_Float(Vector<ushort> value) {
+                // To float
+                Widen(value, out Vector<uint> w0, out Vector<uint> w1);
+                Vector<float> src0 = ConvertToSingle(w0.AsInt32());
+                Vector<float> src1 = ConvertToSingle(w1.AsInt32());
+                // Body
+                Vector<float> dst0 = Vector.SquareRoot(src0);
+                Vector<float> dst1 = Vector.SquareRoot(src1);
+                // To int
+                w0 = ConvertToInt32(dst0).AsUInt32();
+                w1 = ConvertToInt32(dst1).AsUInt32();
+                Vector<ushort> rt = Narrow(w0, w1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> Sqrt_Float(Vector<int> value) {
+                Vector<int> mask = Vector.GreaterThan(Vector<int>.Zero, value); // 0>x = x<0.
+                Vector<int> temp = Sqrt_Float(value.AsUInt32()).AsInt32();
+                Vector<int> rt = Vector.AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> Sqrt_Float(Vector<uint> value) {
+                // To float
+                Widen(value, out Vector<ulong> w0, out Vector<ulong> w1);
+                Vector<double> src0 = ConvertToDouble_Range52(w0);
+                Vector<double> src1 = ConvertToDouble_Range52(w1);
+                // Body
+                Vector<double> dst0 = Vector.SquareRoot(src0);
+                Vector<double> dst1 = Vector.SquareRoot(src1);
+                // To int
+                w0 = ConvertToUInt64_Range52(dst0);
+                w1 = ConvertToUInt64_Range52(dst1);
+                Vector<uint> rt = Narrow(w0, w1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> Sqrt_Float(Vector<long> value) {
+                Vector<long> mask = Vector.GreaterThan(Vector<long>.Zero, value); // 0>x = x<0.
+                Vector<long> temp = Sqrt_Float(value.AsUInt64()).AsInt64();
+                Vector<long> rt = Vector.AndNot(temp, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> Sqrt_Float(Vector<ulong> value) {
+                // To float
+                Vector<double> src0 = ConvertToDouble(value);
+                // Body
+                Vector<double> dst0 = Vector.SquareRoot(src0);
+                // To int
+                Vector<ulong> rt = ConvertToUInt64_Range52(dst0); // `Math.Ceiling(Math.Log2(Math.Sqrt(ulong.MaxValue))) = 32`. It less 52bit.
+                return rt;
+            }
 
         }
     }

@@ -250,5 +250,113 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector.Multiply{T}(Vector{T}, Vector{T})"/>
         Vector<ulong> Multiply(Vector<ulong> left, Vector<ulong> right);
 
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>Sqrt</c> (运行 <c>Sqrt</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Sqrt(Vector{double})"/>
+        /// <seealso cref="BitMath.Sqrt(double)"/>
+        TypeCodeFlags Sqrt_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector.SquareRoot{T}(Vector{T})" />
+        Vector<float> Sqrt(Vector<float> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector.SquareRoot{T}(Vector{T})" />
+        Vector<double> Sqrt(Vector<double> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector.SquareRoot{T}(Vector{T})" />
+        Vector<sbyte> Sqrt(Vector<sbyte> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector.SquareRoot{T}(Vector{T})" />
+        Vector<byte> Sqrt(Vector<byte> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector.SquareRoot{T}(Vector{T})" />
+        Vector<short> Sqrt(Vector<short> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector.SquareRoot{T}(Vector{T})" />
+        Vector<ushort> Sqrt(Vector<ushort> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector.SquareRoot{T}(Vector{T})" />
+        Vector<int> Sqrt(Vector<int> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector.SquareRoot{T}(Vector{T})" />
+        Vector<uint> Sqrt(Vector<uint> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector.SquareRoot{T}(Vector{T})" />
+        Vector<long> Sqrt(Vector<long> vector);
+
+        /// <summary>
+        /// Computes the square root of a vector on a per-element basis (计算向量中每个元素的平方根).
+        /// Mnemonic: <c>rt[i] := sqrt(vector[i]) = pow(vector[i], 1.0/2)</c>. When x is less than 0, floating-point types return NaN, integer types return 0.
+        /// </summary>
+        /// <param name="vector">The vector whose square root is to be computed (将被计算其平方根的向量).</param>
+        /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" /> (一个向量，其元素是 <paramref name="vector" /> 中对应元素的平方根).</returns>
+        /// <seealso cref="Sqrt_AcceleratedTypes"/>
+        /// <seealso cref="Vector.SquareRoot{T}(Vector{T})" />
+        Vector<ulong> Sqrt(Vector<ulong> vector);
+
     }
 }

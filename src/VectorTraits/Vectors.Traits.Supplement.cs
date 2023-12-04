@@ -254,5 +254,122 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.Sqrt_AcceleratedTypes"/>
+        public static TypeCodeFlags Sqrt_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Sqrt_AcceleratedTypes;
+#else
+                return _instance.Sqrt_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> Sqrt(Vector<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> Sqrt(Vector<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> Sqrt(Vector<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> Sqrt(Vector<byte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> Sqrt(Vector<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> Sqrt(Vector<ushort> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> Sqrt(Vector<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> Sqrt(Vector<uint> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> Sqrt(Vector<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sqrt(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> Sqrt(Vector<ulong> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Sqrt(value);
+#else
+            return _instance.Sqrt(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
     }
 }
