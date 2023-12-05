@@ -215,6 +215,23 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.YOrNot_AcceleratedTypes"/>
+            public static TypeCodeFlags YOrNot_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YOrNot{T}(Vector256{T}, Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> YOrNot<T>(Vector256<T> left, Vector256<T> right) where T : struct {
+                Vector256<T> right2 = OnesComplement(right);
+                Vector256<T> rt = BitwiseOr(left, right2);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.YRoundToEven_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
                 get {
@@ -254,23 +271,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YRoundToZero(Vector256<double> value) {
                 return Avx.RoundToZero(value);
-            }
-
-
-            /// <inheritdoc cref="IWVectorTraits256.YOrNot_AcceleratedTypes"/>
-            public static TypeCodeFlags YOrNot_AcceleratedTypes {
-                get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
-                    return rt;
-                }
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YOrNot{T}(Vector256{T}, Vector256{T})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<T> YOrNot<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-                Vector256<T> right2 = OnesComplement(right);
-                Vector256<T> rt = BitwiseOr(left, right2);
-                return rt;
             }
 
 

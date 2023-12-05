@@ -226,6 +226,54 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.YOrNot_AcceleratedTypes"/>
+            public static TypeCodeFlags YOrNot_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YOrNot{T}(Vector256{T}, Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> YOrNot<T>(Vector256<T> left, Vector256<T> right) where T : struct {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return YOrNot_Or(left, right);
+#else
+                return YOrNot_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YOrNot{T}(Vector256{T}, Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> YOrNot_Basic<T>(Vector256<T> left, Vector256<T> right) where T : struct {
+                UnsafeUtil.SkipInit(out Vector256<T> rt);
+                ref FixedArray4<ulong> p = ref Unsafe.As<Vector256<T>, FixedArray4<ulong>>(ref rt);
+                ref FixedArray4<ulong> pleft = ref Unsafe.As<Vector256<T>, FixedArray4<ulong>>(ref left);
+                ref FixedArray4<ulong> pright = ref Unsafe.As<Vector256<T>, FixedArray4<ulong>>(ref right);
+                p.I0 = pleft.I0 | ~pright.I0;
+                p.I1 = pleft.I1 | ~pright.I1;
+                p.I2 = pleft.I2 | ~pright.I2;
+                p.I3 = pleft.I3 | ~pright.I3;
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits256.YOrNot{T}(Vector256{T}, Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> YOrNot_Or<T>(Vector256<T> left, Vector256<T> right) where T : struct {
+                Vector256<T> right2 = Vector256.OnesComplement(right);
+                Vector256<T> rt = Vector256.BitwiseOr(left, right2);
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
+
+
             /// <inheritdoc cref="IWVectorTraits256.YRoundToEven_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
                 get {
@@ -399,54 +447,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<double> signData = Vector256.BitwiseAnd(value, signMask);
                 Vector256<double> rt = Vector256.Floor(valueAbs);
                 rt = Vector256.BitwiseOr(rt, signData);
-                return rt;
-            }
-#endif // NET7_0_OR_GREATER
-
-
-            /// <inheritdoc cref="IWVectorTraits256.YOrNot_AcceleratedTypes"/>
-            public static TypeCodeFlags YOrNot_AcceleratedTypes {
-                get {
-                    TypeCodeFlags rt = TypeCodeFlags.None;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                    if (Vector256.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlagsUtil.AllTypes;
-                    }
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                    return rt;
-                }
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YOrNot{T}(Vector256{T}, Vector256{T})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<T> YOrNot<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return YOrNot_Or(left, right);
-#else
-                return YOrNot_Basic(left, right);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YOrNot{T}(Vector256{T}, Vector256{T})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<T> YOrNot_Basic<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-                UnsafeUtil.SkipInit(out Vector256<T> rt);
-                ref FixedArray4<ulong> p = ref Unsafe.As<Vector256<T>, FixedArray4<ulong>>(ref rt);
-                ref FixedArray4<ulong> pleft = ref Unsafe.As<Vector256<T>, FixedArray4<ulong>>(ref left);
-                ref FixedArray4<ulong> pright = ref Unsafe.As<Vector256<T>, FixedArray4<ulong>>(ref right);
-                p.I0 = pleft.I0 | ~pright.I0;
-                p.I1 = pleft.I1 | ~pright.I1;
-                p.I2 = pleft.I2 | ~pright.I2;
-                p.I3 = pleft.I3 | ~pright.I3;
-                return rt;
-            }
-
-#if NET7_0_OR_GREATER
-            /// <inheritdoc cref="IWVectorTraits256.YOrNot{T}(Vector256{T}, Vector256{T})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<T> YOrNot_Or<T>(Vector256<T> left, Vector256<T> right) where T : struct {
-                Vector256<T> right2 = Vector256.OnesComplement(right);
-                Vector256<T> rt = Vector256.BitwiseOr(left, right2);
                 return rt;
             }
 #endif // NET7_0_OR_GREATER
