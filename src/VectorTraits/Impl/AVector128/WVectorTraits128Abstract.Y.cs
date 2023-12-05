@@ -206,6 +206,20 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.YOrNot_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YOrNot_AcceleratedTypes {
+            get {
+                return Statics.YOrNot_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YOrNot{T}(Vector128{T}, Vector128{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<T> YOrNot<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+            return Statics.YOrNot(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.YRoundToEven_AcceleratedTypes"/>
         public virtual TypeCodeFlags YRoundToEven_AcceleratedTypes {
             get {

@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.Collections;
 using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits.Impl.AVector128 {
@@ -224,6 +225,52 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<ulong> u = YClamp(upper, amin, amax).AsUInt64();
                 return Narrow(l, u);
             }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YOrNot_AcceleratedTypes"/>
+            public static TypeCodeFlags YOrNot_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YOrNot{T}(Vector128{T}, Vector128{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<T> YOrNot<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return YOrNot_Or(left, right);
+#else
+                return YOrNot_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YOrNot{T}(Vector128{T}, Vector128{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<T> YOrNot_Basic<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+                UnsafeUtil.SkipInit(out Vector128<T> rt);
+                ref FixedArray2<ulong> p = ref Unsafe.As<Vector128<T>, FixedArray2<ulong>>(ref rt);
+                ref FixedArray2<ulong> pleft = ref Unsafe.As<Vector128<T>, FixedArray2<ulong>>(ref left);
+                ref FixedArray2<ulong> pright = ref Unsafe.As<Vector128<T>, FixedArray2<ulong>>(ref right);
+                p.I0 = pleft.I0 | ~pright.I0;
+                p.I1 = pleft.I1 | ~pright.I1;
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits128.YOrNot{T}(Vector128{T}, Vector128{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<T> YOrNot_Or<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+                Vector128<T> right2 = Vector128.OnesComplement(right);
+                Vector128<T> rt = Vector128.BitwiseOr(left, right2);
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
 
 
             /// <inheritdoc cref="IWVectorTraits128.YRoundToEven_AcceleratedTypes"/>
