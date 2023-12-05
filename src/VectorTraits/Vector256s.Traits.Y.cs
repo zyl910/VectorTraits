@@ -1658,6 +1658,28 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YOrNot_AcceleratedTypes"/>
+        public static TypeCodeFlags YOrNot_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YOrNot_AcceleratedTypes;
+#else
+                return _instance.YOrNot_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YOrNot{T}(Vector256{T}, Vector256{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<T> YOrNot<T>(Vector256<T> left, Vector256<T> right) where T : struct {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YOrNot(left, right);
+#else
+            return _instance.YOrNot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
 #endif
     }
 }

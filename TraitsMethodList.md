@@ -121,7 +121,9 @@ Remarks:
 Types: Vector, Vector128, Vector256 .
 
 Summary (概要):
+- Provides the vector methods of bitwise operations (提供位运算的向量方法): YOrNot, YBitToElement .
 - Provides the vector methods of clamp (提供限制的向量方法): YClamp .
+- Provides the vector methods of compare (提供比较的向量方法): YIsAllTrue, YIsAnyTrue.
 - Provides the vector methods of narrow saturate (提供缩窄饱和的向量方法): YNarrowSaturate, YNarrowSaturateUnsigned .
 - Provides the vector methods of round (提供舍入的向量方法): YRoundToEven, YRoundToZero .
 - Provides the vector methods of shuffle (提供换位的向量方法): YShuffleInsert, YShuffleKernel, YShuffleG2, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG2/ShuffleControlG4 enum.
@@ -133,6 +135,8 @@ List (列表):
   Mnemonic: `rt := value[0] && value[1] && value[2] && ... && value[Count-1]` . The element of value must be 0 or AllBitsSet (Signed integer value -1).
 - `YIsAnyTrue`: Checks if any elements of the vector is true (检查向量中任一元素是不是为true).
   Mnemonic: `rt := value[0] || value[1] || value[2] || ... || value[Count-1]` . The element of value must be 0 or AllBitsSet (Signed integer value -1).
+- `YOrNot`: Computes the bitwise-or of a given vector and the ones complement of another vector (计算一个给定的向量和另一个向量反码的位或).
+  Mnemonic: `rt[i] := left[i] | ~right[i]`.
 - `YRoundToEven`: Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: `MidpointRounding.ToEven`.
   Mnemonic: `rt[i] := round_to_even(value[i])` .
 - `YRoundToZero`: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: `MidpointRounding.ToZero`.

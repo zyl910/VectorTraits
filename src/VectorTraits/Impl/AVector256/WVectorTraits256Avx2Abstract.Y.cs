@@ -1035,6 +1035,20 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             return Statics.YShuffleKernel_Core(vector, args0, args1);
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits256.YOrNot_AcceleratedTypes"/>
+        public override TypeCodeFlags YOrNot_AcceleratedTypes {
+            get {
+                return Statics.YOrNot_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YOrNot{T}(Vector256{T}, Vector256{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<T> YOrNot<T>(Vector256<T> left, Vector256<T> right) where T : struct {
+            return Statics.YOrNot(left, right);
+        }
+
 #endif
     }
 }
