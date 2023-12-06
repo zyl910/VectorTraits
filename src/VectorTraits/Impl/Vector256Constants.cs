@@ -282,6 +282,58 @@ namespace Zyl.VectorTraits.Impl {
 
         // -- Vectors_T: others --
 
+        /// <inheritdoc cref="Vector256s{T}.MaskBitPosSerialRotate"/>
+        /// <remarks>For 8-bit.</remarks>
+        /// <seealso cref="Vector256s{T}.MaskBitPosSerialRotate"/>
+        public static Vector256<byte> MaskBitPosSerialRotate8 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector256.Create((byte)1, 2, 4, 8, 0x10, 0x20, 0x40, 0x80, 1, 2, 4, 8, 0x10, 0x20, 0x40, 0x80, 1, 2, 4, 8, 0x10, 0x20, 0x40, 0x80, 1, 2, 4, 8, 0x10, 0x20, 0x40, 0x80);
+        }
+#else
+            get;
+        } = Vector256s<byte>.MaskBitPosSerialRotate;
+#endif // USE_VECTOR_CREATE
+
+        /// <inheritdoc cref="Vector256s{T}.MaskBitPosSerialRotate"/>
+        /// <remarks>For 16-bit.</remarks>
+        /// <seealso cref="Vector256s{T}.MaskBitPosSerialRotate"/>
+        public static Vector256<short> MaskBitPosSerialRotate16 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector256.Create((short)1, 2, 4, 8, 0x10, 0x20, 0x40, 0x80, 1, 2, 4, 8, 0x10, 0x20, 0x40, 0x80);
+        }
+#else
+            get;
+        } = Vector256s<short>.MaskBitPosSerialRotate;
+#endif // USE_VECTOR_CREATE
+
+        /// <inheritdoc cref="Vector256s{T}.MaskBitPosSerialRotate"/>
+        /// <remarks>For 32-bit.</remarks>
+        /// <seealso cref="Vector256s{T}.MaskBitPosSerialRotate"/>
+        public static Vector256<int> MaskBitPosSerialRotate32 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector256.Create((int)1, 2, 4, 8, 0x10, 0x20, 0x40, 0x80);
+        }
+#else
+            get;
+        } = Vector256s<int>.MaskBitPosSerialRotate;
+#endif // USE_VECTOR_CREATE
+
+        /// <inheritdoc cref="Vector256s{T}.MaskBitPosSerialRotate"/>
+        /// <remarks>For 64-bit.</remarks>
+        /// <seealso cref="Vector256s{T}.MaskBitPosSerialRotate"/>
+        public static Vector256<long> MaskBitPosSerialRotate64 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector256.Create((long)1, 2, 4, 8);
+        }
+#else
+            get;
+        } = Vector256s<long>.MaskBitPosSerialRotate;
+#endif // USE_VECTOR_CREATE
+
         /// <summary>
         /// Get bits mask by index (根据索引获取位集掩码). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>).
         /// The equivalent of <c>Vector256s&lt;T&gt;.GetMaskBits(index)</c>.
@@ -633,7 +685,7 @@ namespace Zyl.VectorTraits.Impl {
 #endif // USE_VECTOR_CREATE_BY_ARRAY
         }
 
-#endregion // Vectors_T
+        #endregion // Vectors_T
 
         #region Shared
         // == Shared ==
@@ -642,6 +694,17 @@ namespace Zyl.VectorTraits.Impl {
 
         #region TraitsMethod
         // == TraitsMethod ==
+
+        /// <summary>YBitToByte - Shuffle - Indices .</summary>
+        public static Vector256<byte> YBitToByte_Shuffle_Indices {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector256.Create((byte)0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3);
+        }
+#else
+            get;
+        } = Vector256.Create((byte)0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3);
+#endif // USE_VECTOR_CREATE
 
         /// <summary>ExtractMostSignificantBits - Shuffle - Get high byte of 16bit.</summary>
         public static Vector256<byte> ExtractMostSignificantBits_Shuffle_HiByteOf16 {

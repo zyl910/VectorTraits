@@ -129,6 +129,8 @@ Summary (概要):
 - Provides the vector methods of shuffle (提供换位的向量方法): YShuffleInsert, YShuffleKernel, YShuffleG2, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG2/ShuffleControlG4 enum.
 
 List (列表):
+- `YBitToByte`: Converts binary bits to each element of the Byte vector (将各个二进制位转换为 Byte 向量的每个元素). Bit 0 meaning is 0, bit 1 meaning is 1 for all bits (`byte.MaxValue`).
+  Mnemonic: `rt[i] := to_mask(0 != ((mask>>i)&1))` .
 - `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
   Mnemonic: `rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])` .
 - `YIsAllTrue`: Checks if all elements of the vector is true (检查向量中所有元素是不是都为true).
@@ -155,3 +157,4 @@ List (列表):
   Mnemonic: `rt[i] := (0<=indices[i] && indices[i]<Count)?( vector[indices[i]] ):back[i]`.
 - `YShuffleKernel[/_Args/_Core]`: Only shuffle (仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the IndexMask mask to constrain the parameters (可使用 IndexMask 掩码来约束参数).
   Mnemonic: `rt[i] := vector[indices[i]]`. Conditions: `0<=indices[i] && indices[i]<Count`.
+

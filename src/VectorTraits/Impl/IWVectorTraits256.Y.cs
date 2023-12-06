@@ -17,6 +17,31 @@ namespace Zyl.VectorTraits.Impl {
         // == mY style  ==
 
         /// <summary>
+        /// Is it has hardware accelerated when running <c>YBitToByte</c> (运行 <c>YBitToByte</c> 时是否具有硬件加速).
+        /// </summary>
+        /// <remarks>
+        /// <para>Inverse function (反函数): <see cref="ExtractMostSignificantBits(Vector256{byte})"/>.</para>
+        /// <para>Similar methods (相似的方法).</para>
+        /// <para>- <see cref="YBitToByte"/>: Converts binary bits to each element of the Byte vector (将各个二进制位转换为 Byte 向量的每个元素).</para>
+        /// <para>- <see cref="YBitToInt16"/>: Converts binary bits to each element of the Int16 vector (将各个二进制位转换为 Int16 向量的每个元素).</para>
+        /// <para>- <see cref="YBitToInt32"/>: Converts binary bits to each element of the Int32 vector (将各个二进制位转换为 Int16 向量的每个元素).</para>
+        /// <para>- <see cref="YBitToInt64"/>: Converts binary bits to each element of the Int64 vector (将各个二进制位转换为 Int16 向量的每个元素).</para>
+        /// </remarks>
+        /// <seealso cref="YBitToByte"/>
+        /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
+        bool YBitToByte_IsAccelerated { get; }
+
+        /// <summary>
+        /// Converts binary bits to each element of the Byte vector (将各个二进制位转换为 Byte 向量的每个元素). Bit 0 meaning is 0, bit 1 meaning is 1 for all bits (<see cref="byte.MaxValue"/>).
+        /// Mnemonic: <c>rt[i] := to_mask(0 != ((mask&gt;&gt;i)&amp;1))</c>.
+        /// </summary>
+        /// <param name="mask">The bit mask (位掩码).</param>
+        /// <returns>Returns the converted vector (返回转换后的向量).</returns>
+        /// <seealso cref="YBitToByte_IsAccelerated"/>
+        Vector256<byte> YBitToByte(uint mask);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YClamp</c> (运行 <c>YClamp</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YClamp(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>

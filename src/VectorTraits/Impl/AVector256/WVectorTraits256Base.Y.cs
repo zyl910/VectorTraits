@@ -15,6 +15,65 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.YBitToByte_IsAccelerated"/>
+            public static bool YBitToByte_IsAccelerated {
+                get {
+                    bool rt = false;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt = true;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YBitToByte"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YBitToByte(uint mask) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return YBitToByte_Widen(mask);
+#else
+                return YBitToByte_Basic(mask);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YBitToByte"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YBitToByte_Basic(uint mask) {
+                UnsafeUtil.SkipInit(out Vector256<byte> rt);
+                ref sbyte p = ref Unsafe.As<Vector256<byte>, sbyte>(ref rt);
+                for (int i = 0;i< Vector256<byte>.Count; ++i) {
+                    p = (sbyte)-((mask >> i) & 1); // 1 for all bits: (sbyte)-1
+                    p = ref Unsafe.Add(ref p, 1);
+                }
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits256.YBitToByte"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YBitToByte_Widen(uint mask) {
+                Vector256<byte> a = Vector256.Create(mask).AsByte();
+                Vector256<int> scale = Vector256.Create(0x01010101);
+                Vector256<byte> bitPosMask = Vector256Constants.MaskBitPosSerialRotate8;
+                // Widen 8bit to 64bit
+                (_, Vector256<ushort> b) = Vector256.Widen(a);
+                (_, Vector256<uint> c) = Vector256.Widen(b);
+                (_, Vector256<ulong> d) = Vector256.Widen(c);
+                // Duplicate 8bit value to 64bit
+                Vector256<ulong> e = Vector256.Multiply(d.AsInt32(), scale).AsUInt64(); // Duplicate 8bit value to 32bit
+                Vector256<ulong> f = Vector256.BitwiseOr(e, Vector256.ShiftLeft(e, 32)); // Duplicate 32bit value to 64bit
+                // Check bit.
+                Vector256<byte> hit = Vector256.BitwiseAnd(f.AsByte(), bitPosMask);
+                Vector256<byte> rt = Vector256.OnesComplement(Vector256.Equals(hit, Vector256<byte>.Zero));
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
+
             /// <inheritdoc cref="IWVectorTraits256.YClamp_AcceleratedTypes"/>
             public static TypeCodeFlags YClamp_AcceleratedTypes {
                 get {

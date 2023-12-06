@@ -18,6 +18,29 @@ namespace Zyl.VectorTraits {
     partial class Vector256s {
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits256.YBitToByte_IsAccelerated"/>
+        public static bool YBitToByte_IsAccelerated {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YBitToByte_IsAccelerated;
+#else
+                return _instance.YBitToByte_IsAccelerated;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YBitToByte"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YBitToByte(uint mask) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YBitToByte(mask);
+#else
+            return _instance.YBitToByte(mask);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YClamp_AcceleratedTypes"/>
         public static TypeCodeFlags YClamp_AcceleratedTypes {
             get {

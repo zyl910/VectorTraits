@@ -18,6 +18,30 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.YBitToByte_IsAccelerated"/>
+            public static bool YBitToByte_IsAccelerated {
+                get {
+                    bool rt = true;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YBitToByte"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YBitToByte(uint mask) {
+                Vector256<byte> a = Vector256.Create(mask).AsByte();
+                Vector256<byte> indices = Vector256Constants.YBitToByte_Shuffle_Indices;
+                Vector256<byte> bitPosMask = Vector256Constants.MaskBitPosSerialRotate8;
+                // Duplicate 8bit value to 64bit
+                Vector256<byte> f = Avx2.Shuffle(a, indices);
+                // Check bit.
+                Vector256<byte> hit = BitwiseAnd(f, bitPosMask);
+                Vector256<byte> rt = OnesComplement(Equals(hit, Vector256<byte>.Zero));
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.YClamp_AcceleratedTypes"/>
             public static TypeCodeFlags YClamp_AcceleratedTypes {
                 get {
