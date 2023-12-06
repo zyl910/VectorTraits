@@ -25,6 +25,8 @@ namespace Zyl.VectorTraits.Benchmarks {
         public static IBenchmarkWriter CurrentBenchmarkWriter { get; set; }
         /// <summary>Is last run (最后一次运行).</summary>
         public static bool IsLastRun { get => m_IsLastRun; }
+        /// <summary>Is use <see cref="FakeBenchmarkAttribute"/> (是否使用<see cref="FakeBenchmarkAttribute"/>).</summary>
+        public static bool AllowFakeBenchmark { get; set; } = false;
 
         static BenchmarkUtil() {
             CurrentBenchmarkWriter = new TabBenchmarkWriter();
@@ -38,6 +40,23 @@ namespace Zyl.VectorTraits.Benchmarks {
         public static void OutputEnvironment(TextWriter writer, string? indent = null) {
             TraitsOutput.OutputEnvironment(writer, indent);
             writer.WriteLine(indent + string.Format("Vectors.BaseInstance:\t{0}", Vectors.BaseInstance.GetType().Name));
+        }
+
+        /// <summary>
+        /// Parse command line args.
+        /// </summary>
+        /// <param name="args">Command line args.</param>
+        public static void ParseCommand(string[] args) {
+            const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
+            if (null == args) return;
+            foreach (string arg in args) {
+                if ("-allowFakeBenchmark".Equals(arg, comparisonType)) {
+                    AllowFakeBenchmark = true;
+                }
+                if ("-allowFakeBenchmark0".Equals(arg, comparisonType)) {
+                    AllowFakeBenchmark = false;
+                }
+            }
         }
 
         /// <summary>
@@ -151,9 +170,16 @@ namespace Zyl.VectorTraits.Benchmarks {
                 if (mi.IsAbstract) continue;
                 if (mi.GetParameters().Length != 0) continue;
                 BenchmarkAttribute? attr = mi.GetCustomAttribute<BenchmarkAttribute>();
-                if (null == attr) continue;
+                bool isAdd = false;
+                if (null != attr) isAdd = true;
+                if (!isAdd && AllowFakeBenchmark) {
+                    FakeBenchmarkAttribute? attr2 = mi.GetCustomAttribute<FakeBenchmarkAttribute>();
+                    if (null != attr2) isAdd = true;
+                }
                 // ok.
-                dst.Add(mi);
+                if (isAdd) {
+                    dst.Add(mi);
+                }
             }
         }
 

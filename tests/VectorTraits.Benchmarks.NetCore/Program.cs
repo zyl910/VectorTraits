@@ -28,6 +28,7 @@ namespace Zyl.VectorTraits.Benchmarks.NetCore {
                 BenchmarkUtil.OutputEnvironment(writer, indent);
                 TraitsOutput.ParseWaitDebugAndReadKey(args);
                 writer.WriteLine();
+                BenchmarkUtil.ParseCommand(args);
                 BenchmarkMain.RunBenchmark(writer, indent);
                 writer.WriteLine();
                 AloneTestUtil.AloneTestByCommand(writer, args);

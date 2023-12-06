@@ -3,7 +3,7 @@
 
 # == RunBenchmarks ==
 
-my_args="-accelerated0 -fixedVector0 -test0 -cpuDetection0"
+my_args="-accelerated0 -fixedVector0 -test0 -cpuDetection0 -allowFakeBenchmark0"
 
 exe_file="netcoreapp3.1/VectorTraits.Benchmarks.dll"
 log_file="netcore3.1.txt"

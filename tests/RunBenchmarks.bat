@@ -3,7 +3,7 @@ cd /d "%~dp0"
 @REM SET COMPlus_EnableAVX2=0
 
 @ECHO OFF
-SET my_args=-accelerated0 -fixedVector0 -test0 -cpuDetection0
+SET my_args=-accelerated0 -fixedVector0 -test0 -cpuDetection0 -allowFakeBenchmark0
 
 :Check_netcore3_1
 SET my_path=netcoreapp3.1/VectorTraits.Benchmarks.exe

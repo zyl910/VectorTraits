@@ -2,7 +2,7 @@
   "profiles": {
     "VectorTraits.Benchmarks": {
       "commandName": "Project",
-      "commandLineArgs": "",
+      "commandLineArgs": " -allowFakeBenchmark0",
       "environmentVariables": {
         "COMPlus_EnableAVX2": "1"
       }
