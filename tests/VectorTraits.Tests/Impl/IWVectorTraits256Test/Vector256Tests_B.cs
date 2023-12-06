@@ -27,7 +27,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
                 if (instance.GetIsSupported(true)) {
-                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ConditionalSelect_AcceleratedTypes}");
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.BitwiseAnd_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
@@ -68,7 +68,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
             foreach (IWVectorTraits256 instance in instances) {
                 if (instance.GetIsSupported(true)) {
-                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.ConditionalSelect_AcceleratedTypes}");
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.BitwiseOr_AcceleratedTypes}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }

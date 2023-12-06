@@ -215,6 +215,23 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.YOrNot_AcceleratedTypes"/>
+            public static TypeCodeFlags YOrNot_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YOrNot{T}(Vector{T}, Vector{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<T> YOrNot<T>(Vector<T> left, Vector<T> right) where T : struct {
+                Vector<T> right2 = Vector.OnesComplement(right);
+                Vector<T> rt = Vector.BitwiseOr(left, right2);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.YRoundToEven_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
                 get {

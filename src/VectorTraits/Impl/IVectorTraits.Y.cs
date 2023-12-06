@@ -333,6 +333,24 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YOrNot</c> (运行 <c>YOrNot</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YOrNot"/>
+        TypeCodeFlags YOrNot_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the bitwise-or of a given vector or the ones complement of another vector (计算一个给定的向量和另一个向量反码的位或).
+        /// Mnemonic: <c>rt[i] := left[i] | ~right[i]</c>.
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="left">The vector to bitwise-or with <paramref name="right" /> (将会与<paramref name="right" />进行位或运算的向量).</param>
+        /// <param name="right">The vector to that is ones-complemented before being bitwise-or with <paramref name="left" /> (将会与<paramref name="left" />进行位或运算, 并使用反码的向量).</param>
+        /// <returns>The bitwise-or of <paramref name="left" /> or the ones-complement of <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />反码 的位或运算结果).</returns>
+        /// <seealso cref="YOrNot_AcceleratedTypes"/>
+        Vector<T> YOrNot<T>(Vector<T> left, Vector<T> right) where T : struct;
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YRoundToEven</c> (运行 <c>YRoundToEven</c> 时具有硬件加速的类型).
         /// </summary>
         /// <remarks>

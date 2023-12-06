@@ -1,19 +1,15 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
-#if NETCOREAPP3_0_OR_GREATER
-using System.Runtime.Intrinsics;
-#endif
+using System.Xml.Linq;
+using System.Numerics;
+using Zyl.VectorTraits.Extensions.SameW;
 using Zyl.VectorTraits.Impl;
-using Zyl.VectorTraits.Impl.AVector256;
 
-namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
+namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
     [TestFixture()]
-    public class Vector256Tests_YO {
-#if NETCOREAPP3_0_OR_GREATER
-
+    public class VectorTests_YO {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
@@ -26,8 +22,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((long)9)]
         [TestCase((ulong)10)]
         public void YOrNotTest<T>(T src) where T : struct {
-            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
-            foreach (IWVectorTraits256 instance in instances) {
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
                 if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.YOrNot_AcceleratedTypes}");
                 } else {
@@ -35,28 +31,26 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 }
             }
             // run.
-            Vector256<T>[] samples = {
-                Vector256s.Create(src),
-                Vector256s<T>.Demo,
-                Vector256s<T>.Serial,
-                Vector256s<T>.SerialNegative,
-                Vector256s<T>.XyXMask,
-                Vector256s<T>.XyYMask,
-                Vector256s<T>.XyzwXMask
+            Vector<T>[] samples = {
+                Vectors.Create(src),
+                Vectors<T>.Demo,
+                Vectors<T>.Serial,
+                Vectors<T>.SerialNegative,
+                Vectors<T>.XyXMask,
+                Vectors<T>.XyYMask,
+                Vectors<T>.XyzwXMask
             };
-            foreach (Vector256<T> left in samples) {
-                foreach (Vector256<T> right in samples) {
-                    Vector256<T> expected = Vector256s.YOrNot(left, right);
-                    foreach (IWVectorTraits256 instance in instances) {
+            foreach (Vector<T> left in samples) {
+                foreach (Vector<T> right in samples) {
+                    Vector<T> expected = Vectors.YOrNot(left, right);
+                    foreach (IVectorTraits instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
-                        Vector256<T> dst = instance.YOrNot(left, right);
+                        Vector<T> dst = instance.YOrNot(left, right);
                         Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                     }
                 }
             }
         }
 
-
-#endif
     }
 }
