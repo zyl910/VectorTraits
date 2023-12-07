@@ -31,22 +31,22 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YBitToByte"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> YBitToByte(uint mask) {
+            public static Vector256<byte> YBitToByte(uint value) {
 #if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                return YBitToByte_Widen(mask);
+                return YBitToByte_Widen(value);
 #else
-                return YBitToByte_Basic(mask);
+                return YBitToByte_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YBitToByte"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> YBitToByte_Basic(uint mask) {
+            public static Vector256<byte> YBitToByte_Basic(uint value) {
                 UnsafeUtil.SkipInit(out Vector256<byte> rt);
                 ref sbyte p = ref Unsafe.As<Vector256<byte>, sbyte>(ref rt);
-                for (int i = 0;i< Vector256<byte>.Count; ++i) {
-                    p = (sbyte)-((mask >> i) & 1); // 1 for all bits: (sbyte)-1
+                for (int i = 0; i < Vector256<byte>.Count; ++i) {
+                    p = (sbyte)-((value >> i) & 1); // 1 for all bits: (sbyte)-1
                     p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
@@ -56,8 +56,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YBitToByte"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> YBitToByte_Widen(uint mask) {
-                Vector256<byte> a = Vector256.Create(mask).AsByte();
+            public static Vector256<byte> YBitToByte_Widen(uint value) {
+                Vector256<byte> a = Vector256.Create(value).AsByte();
                 Vector256<int> scale = Vector256.Create(0x01010101);
                 Vector256<byte> bitPosMask = Vector256Constants.MaskBitPosSerialRotate8;
                 // Widen 8bit to 64bit
@@ -73,6 +73,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 #endif // NET7_0_OR_GREATER
+
 
             /// <inheritdoc cref="IWVectorTraits256.YClamp_AcceleratedTypes"/>
             public static TypeCodeFlags YClamp_AcceleratedTypes {

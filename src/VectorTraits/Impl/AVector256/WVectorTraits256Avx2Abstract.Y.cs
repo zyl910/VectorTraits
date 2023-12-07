@@ -26,8 +26,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         /// <inheritdoc cref="IWVectorTraits256.YBitToByte"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override Vector256<byte> YBitToByte(uint mask) {
-            return Statics.YBitToByte(mask);
+        public override Vector256<byte> YBitToByte(uint value) {
+            return Statics.YBitToByte(value);
         }
 
 

@@ -32,11 +32,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits256.YBitToByte"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector256<byte> YBitToByte(uint mask) {
+        public static Vector256<byte> YBitToByte(uint value) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YBitToByte(mask);
+            return BaseStatics.YBitToByte(value);
 #else
-            return _instance.YBitToByte(mask);
+            return _instance.YBitToByte(value);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 

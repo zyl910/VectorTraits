@@ -29,8 +29,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YBitToByte"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> YBitToByte(uint mask) {
-                Vector256<byte> a = Vector256.Create(mask).AsByte();
+            public static Vector256<byte> YBitToByte(uint value) {
+                Vector256<byte> a = Vector256.Create(value).AsByte();
                 Vector256<byte> indices = Vector256Constants.YBitToByte_Shuffle_Indices;
                 Vector256<byte> bitPosMask = Vector256Constants.MaskBitPosSerialRotate8;
                 // Duplicate 8bit value to 64bit

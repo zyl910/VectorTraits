@@ -24,8 +24,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>Similar methods (相似的方法).</para>
         /// <para>- <see cref="YBitToByte"/>: Converts binary bits to each element of the Byte vector (将各个二进制位转换为 Byte 向量的每个元素).</para>
         /// <para>- <see cref="YBitToInt16"/>: Converts binary bits to each element of the Int16 vector (将各个二进制位转换为 Int16 向量的每个元素).</para>
-        /// <para>- <see cref="YBitToInt32"/>: Converts binary bits to each element of the Int32 vector (将各个二进制位转换为 Int16 向量的每个元素).</para>
-        /// <para>- <see cref="YBitToInt64"/>: Converts binary bits to each element of the Int64 vector (将各个二进制位转换为 Int16 向量的每个元素).</para>
+        /// <para>- <see cref="YBitToInt32"/>: Converts binary bits to each element of the Int32 vector (将各个二进制位转换为 Int32 向量的每个元素).</para>
+        /// <para>- <see cref="YBitToInt64"/>: Converts binary bits to each element of the Int64 vector (将各个二进制位转换为 Int64 向量的每个元素).</para>
         /// </remarks>
         /// <seealso cref="YBitToByte"/>
         /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
@@ -35,10 +35,10 @@ namespace Zyl.VectorTraits.Impl {
         /// Converts binary bits to each element of the Byte vector (将各个二进制位转换为 Byte 向量的每个元素). Bit 0 meaning is 0, bit 1 meaning is 1 for all bits (<see cref="byte.MaxValue"/>).
         /// Mnemonic: <c>rt[i] := to_mask(0 != ((mask&gt;&gt;i)&amp;1))</c>.
         /// </summary>
-        /// <param name="mask">The bit mask (位掩码).</param>
+        /// <param name="value">Source value (源值).</param>
         /// <returns>Returns the converted vector (返回转换后的向量).</returns>
         /// <seealso cref="YBitToByte_IsAccelerated"/>
-        Vector256<byte> YBitToByte(uint mask);
+        Vector256<byte> YBitToByte(uint value);
 
 
         /// <summary>

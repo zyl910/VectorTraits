@@ -27,16 +27,16 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
             // run.
             List<uint> samples = new List<uint>();
-            for (int i=0; i<32; ++i) {
-                uint mask = (uint)(i) << i;
-                samples.Add(mask);
+            for (int i = 0; i < 32; ++i) {
+                uint value = (uint)(i) << i;
+                samples.Add(value);
             }
-            foreach (uint mask in samples) {
-                Vector256<byte> expected = Vector256s.YBitToByte(mask);
+            foreach (uint value in samples) {
+                Vector256<byte> expected = Vector256s.YBitToByte(value);
                 foreach (IWVectorTraits256 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
-                    Vector256<byte> dst = instance.YBitToByte(mask);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, mask={mask}");
+                    Vector256<byte> dst = instance.YBitToByte(value);
+                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                 }
             }
         }
