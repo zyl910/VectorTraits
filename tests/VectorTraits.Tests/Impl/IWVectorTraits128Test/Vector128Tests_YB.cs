@@ -7,31 +7,31 @@ using System.Text;
 using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
-using Zyl.VectorTraits.Impl.AVector256;
+using Zyl.VectorTraits.Impl.AVector128;
 
-namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
+namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
     [TestFixture()]
-    public class Vector256Tests_YB {
+    public class Vector128Tests_YB {
 #if NETCOREAPP3_0_OR_GREATER
 
 
         [TestCase]
         public void YBitToByteTest() {
-            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
-            foreach (IWVectorTraits256 instance in instances) {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
                 if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.YBitToByte_IsAccelerated}");
                 } else {
                     Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector256s.GetSupportedMethodList<Func<uint, Vector256<byte>>>("YBitToByte_Basic", "YBitToByte_Shuffle", "YBitToByte_Widen");
+            var funcList = Vector128s.GetSupportedMethodList<Func<uint, Vector128<byte>>>("YBitToByte_Basic", "YBitToByte_Shuffle", "YBitToByte_Widen");
             foreach (var func in funcList) {
                 Console.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
             // samples.
             List<uint> samples = new List<uint>();
-            int bitCount = Vector256<byte>.Count;
+            int bitCount = Vector128<byte>.Count;
             int bitClamped = Math.Min(bitCount, 4);
             int iMax = (1 << bitClamped) - 1;
             for (int i = 0; i <= iMax; ++i) {
@@ -45,16 +45,16 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
             // run.
             foreach (uint value in samples) {
-                Vector256<byte> expected = Vector256s.YBitToByte(value);
+                Vector128<byte> expected = Vector128s.YBitToByte(value);
                 //Console.WriteLine(VectorTextUtil.Format("YBitToByte({0}):\t{1}", value, expected));
-                foreach (IWVectorTraits256 instance in instances) {
+                foreach (IWVectorTraits128 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
-                    Vector256<byte> dst = instance.YBitToByte(value);
+                    Vector128<byte> dst = instance.YBitToByte(value);
                     Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                 }
                 foreach (var func in funcList) {
                     string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
-                    Vector256<byte> dst = func(value);
+                    Vector128<byte> dst = func(value);
                     Assert.AreEqual(expected, dst, $"{funcName}, value={value}");
                     Assert.AreEqual(expected, dst, VectorTextUtil.Format("{0}, value={1}", funcName, value));
                     //Console.WriteLine(VectorTextUtil.Format("{2}({0}):\t{1}", value, expected, funcName));
@@ -64,8 +64,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
 
         [TestCase]
         public void YBitToInt16Test() {
-            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
-            foreach (IWVectorTraits256 instance in instances) {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
                 if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.YBitToInt16_IsAccelerated}");
                 } else {
@@ -74,7 +74,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
             // samples.
             List<uint> samples = new List<uint>();
-            int bitCount = Vector256<short>.Count;
+            int bitCount = Vector128<short>.Count;
             int bitClamped = Math.Min(bitCount, 4);
             int iMax = (1 << bitClamped) - 1;
             for (int i = 0; i <= iMax; ++i) {
@@ -88,11 +88,11 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
             // run.
             foreach (uint value in samples) {
-                Vector256<short> expected = Vector256s.YBitToInt16(value);
+                Vector128<short> expected = Vector128s.YBitToInt16(value);
                 //Console.WriteLine(VectorTextUtil.Format("YBitToInt16({0}):\t{1}", value, expected));
-                foreach (IWVectorTraits256 instance in instances) {
+                foreach (IWVectorTraits128 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
-                    Vector256<short> dst = instance.YBitToInt16(value);
+                    Vector128<short> dst = instance.YBitToInt16(value);
                     Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                 }
             }
@@ -100,8 +100,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
 
         [TestCase]
         public void YBitToInt32Test() {
-            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
-            foreach (IWVectorTraits256 instance in instances) {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
                 if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.YBitToInt32_IsAccelerated}");
                 } else {
@@ -110,7 +110,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
             // samples.
             List<uint> samples = new List<uint>();
-            int bitCount = Vector256<int>.Count;
+            int bitCount = Vector128<int>.Count;
             int bitClamped = Math.Min(bitCount, 4);
             int iMax = (1 << bitClamped) - 1;
             for (int i = 0; i <= iMax; ++i) {
@@ -124,11 +124,11 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
             // run.
             foreach (uint value in samples) {
-                Vector256<int> expected = Vector256s.YBitToInt32(value);
+                Vector128<int> expected = Vector128s.YBitToInt32(value);
                 //Console.WriteLine(VectorTextUtil.Format("YBitToInt32({0}):\t{1}", value, expected));
-                foreach (IWVectorTraits256 instance in instances) {
+                foreach (IWVectorTraits128 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
-                    Vector256<int> dst = instance.YBitToInt32(value);
+                    Vector128<int> dst = instance.YBitToInt32(value);
                     Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                 }
             }
@@ -136,8 +136,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
 
         [TestCase]
         public void YBitToInt64Test() {
-            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
-            foreach (IWVectorTraits256 instance in instances) {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
                 if (instance.GetIsSupported(true)) {
                     Console.WriteLine($"{instance.GetType().Name}: OK. {instance.YBitToInt64_IsAccelerated}");
                 } else {
@@ -146,7 +146,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
             // samples.
             List<uint> samples = new List<uint>();
-            int bitCount = Vector256<long>.Count;
+            int bitCount = Vector128<long>.Count;
             int bitClamped = Math.Min(bitCount, 4);
             int iMax = (1 << bitClamped) - 1;
             for (int i = 0; i <= iMax; ++i) {
@@ -160,11 +160,11 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
             // run.
             foreach (uint value in samples) {
-                Vector256<long> expected = Vector256s.YBitToInt64(value);
+                Vector128<long> expected = Vector128s.YBitToInt64(value);
                 //Console.WriteLine(VectorTextUtil.Format("YBitToInt64({0}):\t{1}", value, expected));
-                foreach (IWVectorTraits256 instance in instances) {
+                foreach (IWVectorTraits128 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
-                    Vector256<long> dst = instance.YBitToInt64(value);
+                    Vector128<long> dst = instance.YBitToInt64(value);
                     Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                 }
             }

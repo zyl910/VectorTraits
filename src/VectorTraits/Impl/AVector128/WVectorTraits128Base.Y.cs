@@ -16,6 +16,227 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits128.YBitToByte_IsAccelerated"/>
+            public static bool YBitToByte_IsAccelerated {
+                get {
+                    bool rt = false;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt = true;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToByte"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YBitToByte(uint value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return YBitToByte_Widen(value);
+#else
+                return YBitToByte_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToByte"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YBitToByte_Basic(uint value) {
+                UnsafeUtil.SkipInit(out Vector128<byte> rt);
+                ref sbyte p = ref Unsafe.As<Vector128<byte>, sbyte>(ref rt);
+                for (int i = 0; i < Vector128<byte>.Count; ++i) {
+                    p = (sbyte)-((value >> i) & 1); // 1 for all bits: (sbyte)-1
+                    p = ref Unsafe.Add(ref p, 1);
+                }
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits128.YBitToByte"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YBitToByte_Widen(uint value) {
+                Vector128<byte> a = Vector128.Create(value).AsByte();
+                Vector128<int> scale = Vector128.Create(0x01010101);
+                Vector128<byte> bitPosMask = Vector128Constants.MaskBitPosSerialRotate8;
+                // Widen 8bit to 64bit
+                (Vector128<ushort> b, _) = Vector128.Widen(a);
+                (Vector128<uint> c, _) = Vector128.Widen(b);
+                (Vector128<ulong> d, _) = Vector128.Widen(c);
+                //Console.WriteLine(VectorTextUtil.Format("d':\t{0}", d));
+                // Duplicate 8bit value to 64bit
+                Vector128<ulong> e = Vector128.Multiply(d.AsInt32(), scale).AsUInt64(); // Duplicate 8bit value to 32bit
+                Vector128<ulong> f = Vector128.BitwiseOr(e, Vector128.ShiftLeft(e, 32)); // Duplicate 32bit value to 64bit
+                //Console.WriteLine(VectorTextUtil.Format("f':\t{0}", f));
+                // Check bit.
+                Vector128<byte> hit = Vector128.BitwiseAnd(f.AsByte(), bitPosMask);
+                Vector128<byte> rt = Vector128.OnesComplement(Vector128.Equals(hit, Vector128<byte>.Zero));
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt16_IsAccelerated"/>
+            public static bool YBitToInt16_IsAccelerated {
+                get {
+                    bool rt = false;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt = true;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt16"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YBitToInt16(uint value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return YBitToInt16_And(value);
+#else
+                return YBitToInt16_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt16"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YBitToInt16_Basic(uint value) {
+                UnsafeUtil.SkipInit(out Vector128<short> rt);
+                ref short p = ref Unsafe.As<Vector128<short>, short>(ref rt);
+                for (int i = 0; i < Vector128<short>.Count; ++i) {
+                    p = (short)-((value >> i) & 1); // 1 for all bits: (short)-1
+                    p = ref Unsafe.Add(ref p, 1);
+                }
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt16"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YBitToInt16_And(uint value) {
+                Vector128<short> bitPosMask = Vector128Constants.MaskBitPosSerialRotate16;
+                // Duplicate 16bit value
+                Vector128<short> a = Vector128.Create((ushort)value).AsInt16();
+                // Check bit.
+                Vector128<short> hit = Vector128.BitwiseAnd(a, bitPosMask);
+                Vector128<short> rt = Vector128.OnesComplement(Vector128.Equals(hit, Vector128<short>.Zero));
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt32_IsAccelerated"/>
+            public static bool YBitToInt32_IsAccelerated {
+                get {
+                    bool rt = false;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt = true;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt32"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YBitToInt32(uint value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return YBitToInt32_And(value);
+#else
+                return YBitToInt32_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt32"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YBitToInt32_Basic(uint value) {
+                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                ref int p = ref Unsafe.As<Vector128<int>, int>(ref rt);
+                for (int i = 0; i < Vector128<int>.Count; ++i) {
+                    p = (int)-((value >> i) & 1); // 1 for all bits: (int)-1
+                    p = ref Unsafe.Add(ref p, 1);
+                }
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt32"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YBitToInt32_And(uint value) {
+                Vector128<int> bitPosMask = Vector128Constants.MaskBitPosSerialRotate32;
+                // Duplicate 32bit value
+                Vector128<int> a = Vector128.Create((uint)value).AsInt32();
+                // Check bit.
+                Vector128<int> hit = Vector128.BitwiseAnd(a, bitPosMask);
+                Vector128<int> rt = Vector128.OnesComplement(Vector128.Equals(hit, Vector128<int>.Zero));
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt64_IsAccelerated"/>
+            public static bool YBitToInt64_IsAccelerated {
+                get {
+                    bool rt = false;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt = true;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt64"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YBitToInt64(uint value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return YBitToInt64_And(value);
+#else
+                return YBitToInt64_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt64"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YBitToInt64_Basic(uint value) {
+                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                ref long p = ref Unsafe.As<Vector128<long>, long>(ref rt);
+                for (int i = 0; i < Vector128<long>.Count; ++i) {
+                    p = (long)-((value >> i) & 1); // 1 for all bits: (long)-1
+                    p = ref Unsafe.Add(ref p, 1);
+                }
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt64"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YBitToInt64_And(uint value) {
+                Vector128<long> bitPosMask = Vector128Constants.MaskBitPosSerialRotate64;
+                // Duplicate 64bit value
+                Vector128<long> a = Vector128.Create((ulong)value).AsInt64();
+                // Check bit.
+                Vector128<long> hit = Vector128.BitwiseAnd(a, bitPosMask);
+                Vector128<long> rt = Vector128.OnesComplement(Vector128.Equals(hit, Vector128<long>.Zero));
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
+
+
             /// <inheritdoc cref="IWVectorTraits128.YClamp_AcceleratedTypes"/>
             public static TypeCodeFlags YClamp_AcceleratedTypes {
                 get {

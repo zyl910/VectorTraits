@@ -18,6 +18,98 @@ namespace Zyl.VectorTraits {
     partial class Vector128s {
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IWVectorTraits128.YBitToByte_IsAccelerated"/>
+        public static bool YBitToByte_IsAccelerated {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YBitToByte_IsAccelerated;
+#else
+                return _instance.YBitToByte_IsAccelerated;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YBitToByte"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<byte> YBitToByte(uint value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YBitToByte(value);
+#else
+            return _instance.YBitToByte(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YBitToInt16_IsAccelerated"/>
+        public static bool YBitToInt16_IsAccelerated {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YBitToInt16_IsAccelerated;
+#else
+                return _instance.YBitToInt16_IsAccelerated;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YBitToInt16"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<short> YBitToInt16(uint value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YBitToInt16(value);
+#else
+            return _instance.YBitToInt16(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YBitToInt32_IsAccelerated"/>
+        public static bool YBitToInt32_IsAccelerated {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YBitToInt32_IsAccelerated;
+#else
+                return _instance.YBitToInt32_IsAccelerated;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YBitToInt32"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YBitToInt32(uint value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YBitToInt32(value);
+#else
+            return _instance.YBitToInt32(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YBitToInt64_IsAccelerated"/>
+        public static bool YBitToInt64_IsAccelerated {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YBitToInt64_IsAccelerated;
+#else
+                return _instance.YBitToInt64_IsAccelerated;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YBitToInt64"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YBitToInt64(uint value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YBitToInt64(value);
+#else
+            return _instance.YBitToInt64(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.YClamp_AcceleratedTypes"/>
         public static TypeCodeFlags YClamp_AcceleratedTypes {
             get {

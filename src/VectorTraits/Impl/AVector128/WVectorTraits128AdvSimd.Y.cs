@@ -19,6 +19,96 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
 #if NET5_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits128.YBitToByte_IsAccelerated"/>
+            public static bool YBitToByte_IsAccelerated {
+                get {
+                    bool rt = true;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToByte"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YBitToByte(uint value) {
+                Vector128<byte> a = Vector128.Create(value).AsByte();
+                Vector128<byte> indices = Vector128Constants.YBitToByte_Shuffle_Indices;
+                Vector128<byte> bitPosMask = Vector128Constants.MaskBitPosSerialRotate8;
+                // Duplicate 8bit value to 64bit
+                Vector128<byte> f = YShuffleKernel(a, indices);
+                // Check bit.
+                Vector128<byte> hit = BitwiseAnd(f, bitPosMask);
+                Vector128<byte> rt = OnesComplement(Equals(hit, Vector128<byte>.Zero));
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt16_IsAccelerated"/>
+            public static bool YBitToInt16_IsAccelerated {
+                get {
+                    bool rt = true;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt16"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YBitToInt16(uint value) {
+                Vector128<short> bitPosMask = Vector128Constants.MaskBitPosSerialRotate16;
+                // Duplicate 16bit value
+                Vector128<short> a = Vector128.Create((ushort)value).AsInt16();
+                // Check bit.
+                Vector128<short> hit = BitwiseAnd(a, bitPosMask);
+                Vector128<short> rt = OnesComplement(Equals(hit, Vector128<short>.Zero));
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt32_IsAccelerated"/>
+            public static bool YBitToInt32_IsAccelerated {
+                get {
+                    bool rt = true;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt32"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YBitToInt32(uint value) {
+                Vector128<int> bitPosMask = Vector128Constants.MaskBitPosSerialRotate32;
+                // Duplicate 32bit value
+                Vector128<int> a = Vector128.Create((uint)value).AsInt32();
+                // Check bit.
+                Vector128<int> hit = BitwiseAnd(a, bitPosMask);
+                Vector128<int> rt = OnesComplement(Equals(hit, Vector128<int>.Zero));
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt64_IsAccelerated"/>
+            public static bool YBitToInt64_IsAccelerated {
+                get {
+                    bool rt = true;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YBitToInt64"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YBitToInt64(uint value) {
+                Vector128<long> bitPosMask = Vector128Constants.MaskBitPosSerialRotate64;
+                // Duplicate 64bit value
+                Vector128<long> a = Vector128.Create((ulong)value).AsInt64();
+                // Check bit.
+                Vector128<long> hit = BitwiseAnd(a, bitPosMask);
+                Vector128<long> rt = OnesComplement(Equals(hit, Vector128<long>.Zero));
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.YClamp_AcceleratedTypes"/>
             public static TypeCodeFlags YClamp_AcceleratedTypes {
                 get {

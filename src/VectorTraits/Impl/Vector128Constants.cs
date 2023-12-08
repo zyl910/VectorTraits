@@ -726,6 +726,18 @@ namespace Zyl.VectorTraits.Impl {
         #region TraitsMethod
         // == TraitsMethod ==
 
+        /// <summary>YBitToByte - Shuffle - Indices .</summary>
+        public static Vector128<byte> YBitToByte_Shuffle_Indices {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1);
+#endif // USE_VECTOR_CREATE
+
+
         /// <summary>ExtractMostSignificantBits - Shuffle - Get high byte of 16bit.</summary>
         public static Vector128<byte> ExtractMostSignificantBits_Shuffle_HiByteOf16 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

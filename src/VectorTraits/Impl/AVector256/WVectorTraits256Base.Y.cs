@@ -61,9 +61,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<int> scale = Vector256.Create(0x01010101);
                 Vector256<byte> bitPosMask = Vector256Constants.MaskBitPosSerialRotate8;
                 // Widen 8bit to 64bit
-                (_, Vector256<ushort> b) = Vector256.Widen(a);
-                (_, Vector256<uint> c) = Vector256.Widen(b);
-                (_, Vector256<ulong> d) = Vector256.Widen(c);
+                (Vector256<ushort> b, _) = Vector256.Widen(a);
+                (Vector256<uint> c, _) = Vector256.Widen(b);
+                (Vector256<ulong> d, _) = Vector256.Widen(c);
                 // Duplicate 8bit value to 64bit
                 Vector256<ulong> e = Vector256.Multiply(d.AsInt32(), scale).AsUInt64(); // Duplicate 8bit value to 32bit
                 Vector256<ulong> f = Vector256.BitwiseOr(e, Vector256.ShiftLeft(e, 32)); // Duplicate 32bit value to 64bit
