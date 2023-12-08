@@ -31,6 +31,51 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YBitToInt16_IsAccelerated"/>
+        public virtual bool YBitToInt16_IsAccelerated {
+            get {
+                return Statics.YBitToInt16_IsAccelerated;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YBitToInt16"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<short> YBitToInt16(uint value) {
+            return Statics.YBitToInt16(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YBitToInt32_IsAccelerated"/>
+        public virtual bool YBitToInt32_IsAccelerated {
+            get {
+                return Statics.YBitToInt32_IsAccelerated;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YBitToInt32"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YBitToInt32(uint value) {
+            return Statics.YBitToInt32(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YBitToInt64_IsAccelerated"/>
+        public virtual bool YBitToInt64_IsAccelerated {
+            get {
+                return Statics.YBitToInt64_IsAccelerated;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YBitToInt64"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YBitToInt64(uint value) {
+            return Statics.YBitToInt64(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YClamp_AcceleratedTypes"/>
         public virtual TypeCodeFlags YClamp_AcceleratedTypes {
             get {

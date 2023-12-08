@@ -42,6 +42,81 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Is it has hardware accelerated when running <c>YBitToInt16</c> (运行 <c>YBitToInt16</c> 时是否具有硬件加速).
+        /// </summary>
+        /// <remarks>
+        /// <para>Inverse function (反函数): <see cref="ExtractMostSignificantBits(Vector256{short})"/>.</para>
+        /// <para>Similar methods (相似的方法).</para>
+        /// <para>- <see cref="YBitToByte"/>: Converts binary bits to each element of the Byte vector (将各个二进制位转换为 Byte 向量的每个元素).</para>
+        /// <para>- <see cref="YBitToInt16"/>: Converts binary bits to each element of the Int16 vector (将各个二进制位转换为 Int16 向量的每个元素).</para>
+        /// <para>- <see cref="YBitToInt32"/>: Converts binary bits to each element of the Int32 vector (将各个二进制位转换为 Int32 向量的每个元素).</para>
+        /// <para>- <see cref="YBitToInt64"/>: Converts binary bits to each element of the Int64 vector (将各个二进制位转换为 Int64 向量的每个元素).</para>
+        /// </remarks>
+        /// <seealso cref="YBitToInt16"/>
+        /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
+        bool YBitToInt16_IsAccelerated { get; }
+
+        /// <summary>
+        /// Converts binary bits to each element of the Int16 vector (将各个二进制位转换为 Int16 向量的每个元素). Bit 0 meaning is 0, bit 1 meaning is 1 for all bits (-1).
+        /// Mnemonic: <c>rt[i] := to_mask(0 != ((mask&gt;&gt;i)&amp;1))</c>.
+        /// </summary>
+        /// <param name="value">Source value (源值).</param>
+        /// <returns>Returns the converted vector (返回转换后的向量).</returns>
+        /// <seealso cref="YBitToInt16_IsAccelerated"/>
+        Vector256<short> YBitToInt16(uint value);
+
+
+        /// <summary>
+        /// Is it has hardware accelerated when running <c>YBitToInt32</c> (运行 <c>YBitToInt32</c> 时是否具有硬件加速).
+        /// </summary>
+        /// <remarks>
+        /// <para>Inverse function (反函数): <see cref="ExtractMostSignificantBits(Vector256{int})"/>.</para>
+        /// <para>Similar methods (相似的方法).</para>
+        /// <para>- <see cref="YBitToByte"/>: Converts binary bits to each element of the Byte vector (将各个二进制位转换为 Byte 向量的每个元素).</para>
+        /// <para>- <see cref="YBitToInt16"/>: Converts binary bits to each element of the Int16 vector (将各个二进制位转换为 Int16 向量的每个元素).</para>
+        /// <para>- <see cref="YBitToInt32"/>: Converts binary bits to each element of the Int32 vector (将各个二进制位转换为 Int32 向量的每个元素).</para>
+        /// <para>- <see cref="YBitToInt64"/>: Converts binary bits to each element of the Int64 vector (将各个二进制位转换为 Int64 向量的每个元素).</para>
+        /// </remarks>
+        /// <seealso cref="YBitToInt32"/>
+        /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
+        bool YBitToInt32_IsAccelerated { get; }
+
+        /// <summary>
+        /// Converts binary bits to each element of the Int32 vector (将各个二进制位转换为 Int32 向量的每个元素). Bit 0 meaning is 0, bit 1 meaning is 1 for all bits (-1).
+        /// Mnemonic: <c>rt[i] := to_mask(0 != ((mask&gt;&gt;i)&amp;1))</c>.
+        /// </summary>
+        /// <param name="value">Source value (源值).</param>
+        /// <returns>Returns the converted vector (返回转换后的向量).</returns>
+        /// <seealso cref="YBitToInt32_IsAccelerated"/>
+        Vector256<int> YBitToInt32(uint value);
+
+
+        /// <summary>
+        /// Is it has hardware accelerated when running <c>YBitToInt64</c> (运行 <c>YBitToInt64</c> 时是否具有硬件加速).
+        /// </summary>
+        /// <remarks>
+        /// <para>Inverse function (反函数): <see cref="ExtractMostSignificantBits(Vector256{long})"/>.</para>
+        /// <para>Similar methods (相似的方法).</para>
+        /// <para>- <see cref="YBitToByte"/>: Converts binary bits to each element of the Byte vector (将各个二进制位转换为 Byte 向量的每个元素).</para>
+        /// <para>- <see cref="YBitToInt16"/>: Converts binary bits to each element of the Int16 vector (将各个二进制位转换为 Int16 向量的每个元素).</para>
+        /// <para>- <see cref="YBitToInt32"/>: Converts binary bits to each element of the Int32 vector (将各个二进制位转换为 Int32 向量的每个元素).</para>
+        /// <para>- <see cref="YBitToInt64"/>: Converts binary bits to each element of the Int64 vector (将各个二进制位转换为 Int64 向量的每个元素).</para>
+        /// </remarks>
+        /// <seealso cref="YBitToInt64"/>
+        /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
+        bool YBitToInt64_IsAccelerated { get; }
+
+        /// <summary>
+        /// Converts binary bits to each element of the Int64 vector (将各个二进制位转换为 Int64 向量的每个元素). Bit 0 meaning is 0, bit 1 meaning is 1 for all bits (-1).
+        /// Mnemonic: <c>rt[i] := to_mask(0 != ((mask&gt;&gt;i)&amp;1))</c>.
+        /// </summary>
+        /// <param name="value">Source value (源值).</param>
+        /// <returns>Returns the converted vector (返回转换后的向量).</returns>
+        /// <seealso cref="YBitToInt64_IsAccelerated"/>
+        Vector256<long> YBitToInt64(uint value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YClamp</c> (运行 <c>YClamp</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YClamp(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>

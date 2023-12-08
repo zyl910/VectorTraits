@@ -41,6 +41,75 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YBitToInt16_IsAccelerated"/>
+        public static bool YBitToInt16_IsAccelerated {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YBitToInt16_IsAccelerated;
+#else
+                return _instance.YBitToInt16_IsAccelerated;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YBitToInt16"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YBitToInt16(uint value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YBitToInt16(value);
+#else
+            return _instance.YBitToInt16(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YBitToInt32_IsAccelerated"/>
+        public static bool YBitToInt32_IsAccelerated {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YBitToInt32_IsAccelerated;
+#else
+                return _instance.YBitToInt32_IsAccelerated;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YBitToInt32"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YBitToInt32(uint value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YBitToInt32(value);
+#else
+            return _instance.YBitToInt32(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YBitToInt64_IsAccelerated"/>
+        public static bool YBitToInt64_IsAccelerated {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YBitToInt64_IsAccelerated;
+#else
+                return _instance.YBitToInt64_IsAccelerated;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YBitToInt64"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YBitToInt64(uint value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YBitToInt64(value);
+#else
+            return _instance.YBitToInt64(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YClamp_AcceleratedTypes"/>
         public static TypeCodeFlags YClamp_AcceleratedTypes {
             get {

@@ -130,7 +130,13 @@ Summary (概要):
 
 List (列表):
 - `YBitToByte`: Converts binary bits to each element of the Byte vector (将各个二进制位转换为 Byte 向量的每个元素). Bit 0 meaning is 0, bit 1 meaning is 1 for all bits (`byte.MaxValue`).
-  Mnemonic: `rt[i] := to_mask(0 != ((mask>>i)&1))` .
+  Mnemonic: `rt[i] := to_mask(0 != ((value>>i)&1))` .
+- `YBitToInt16`: Converts binary bits to each element of the Int16 vector (将各个二进制位转换为 Int16 向量的每个元素). Bit 0 meaning is 0, bit 1 meaning is 1 for all bits (-1).
+  Mnemonic: `rt[i] := to_mask(0 != ((value>>i)&1))` .
+- `YBitToInt32`: Converts binary bits to each element of the Int32 vector (将各个二进制位转换为 Int32 向量的每个元素). Bit 0 meaning is 0, bit 1 meaning is 1 for all bits (-1).
+  Mnemonic: `rt[i] := to_mask(0 != ((value>>i)&1))` .
+- `YBitToInt64`: Converts binary bits to each element of the Int64 vector (将各个二进制位转换为 Int64 向量的每个元素). Bit 0 meaning is 0, bit 1 meaning is 1 for all bits (-1).
+  Mnemonic: `rt[i] := to_mask(0 != ((value>>i)&1))` .
 - `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
   Mnemonic: `rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])` .
 - `YIsAllTrue`: Checks if all elements of the vector is true (检查向量中所有元素是不是都为true).

@@ -42,6 +42,72 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.YBitToInt16_IsAccelerated"/>
+            public static bool YBitToInt16_IsAccelerated {
+                get {
+                    bool rt = true;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YBitToInt16"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YBitToInt16(uint value) {
+                Vector256<short> bitPosMask = Vector256Constants.MaskBitPosSerialRotate16;
+                // Duplicate 16bit value
+                Vector256<short> a = Vector256.Create((ushort)value).AsInt16();
+                // Check bit.
+                Vector256<short> hit = BitwiseAnd(a, bitPosMask);
+                Vector256<short> rt = OnesComplement(Equals(hit, Vector256<short>.Zero));
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.YBitToInt32_IsAccelerated"/>
+            public static bool YBitToInt32_IsAccelerated {
+                get {
+                    bool rt = true;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YBitToInt32"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YBitToInt32(uint value) {
+                Vector256<int> bitPosMask = Vector256Constants.MaskBitPosSerialRotate32;
+                // Duplicate 32bit value
+                Vector256<int> a = Vector256.Create((uint)value).AsInt32();
+                // Check bit.
+                Vector256<int> hit = BitwiseAnd(a, bitPosMask);
+                Vector256<int> rt = OnesComplement(Equals(hit, Vector256<int>.Zero));
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.YBitToInt64_IsAccelerated"/>
+            public static bool YBitToInt64_IsAccelerated {
+                get {
+                    bool rt = true;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YBitToInt64"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YBitToInt64(uint value) {
+                Vector256<long> bitPosMask = Vector256Constants.MaskBitPosSerialRotate64;
+                // Duplicate 64bit value
+                Vector256<long> a = Vector256.Create((ulong)value).AsInt64();
+                // Check bit.
+                Vector256<long> hit = BitwiseAnd(a, bitPosMask);
+                Vector256<long> rt = OnesComplement(Equals(hit, Vector256<long>.Zero));
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.YClamp_AcceleratedTypes"/>
             public static TypeCodeFlags YClamp_AcceleratedTypes {
                 get {
