@@ -22,6 +22,66 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #if NETCOREAPP3_0_OR_GREATER
         partial class Statics {
 
+            /// <inheritdoc cref="IVectorTraits.YBitToByte_IsAccelerated"/>
+            public static bool YBitToByte_IsAccelerated {
+                get {
+                    return WStatics.YBitToByte_IsAccelerated;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToByte"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YBitToByte(ulong value) {
+                return WStatics.YBitToByte((uint)value).AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt16_IsAccelerated"/>
+            public static bool YBitToInt16_IsAccelerated {
+                get {
+                    return WStatics.YBitToInt16_IsAccelerated;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt16"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YBitToInt16(ulong value) {
+                return WStatics.YBitToInt16((uint)value).AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt32_IsAccelerated"/>
+            public static bool YBitToInt32_IsAccelerated {
+                get {
+                    return WStatics.YBitToInt32_IsAccelerated;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt32"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YBitToInt32(ulong value) {
+                return WStatics.YBitToInt32((uint)value).AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt64_IsAccelerated"/>
+            public static bool YBitToInt64_IsAccelerated {
+                get {
+                    return WStatics.YBitToInt64_IsAccelerated;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt64"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YBitToInt64(ulong value) {
+                return WStatics.YBitToInt64((uint)value).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.YClamp_AcceleratedTypes"/>
             public static TypeCodeFlags YClamp_AcceleratedTypes {
                 get {

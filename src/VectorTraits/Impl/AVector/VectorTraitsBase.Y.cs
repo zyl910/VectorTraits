@@ -12,6 +12,227 @@ namespace Zyl.VectorTraits.Impl.AVector {
 
         partial class Statics {
 
+            /// <inheritdoc cref="IVectorTraits.YBitToByte_IsAccelerated"/>
+            public static bool YBitToByte_IsAccelerated {
+                get {
+                    bool rt = false;
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    if (Vector.IsHardwareAccelerated) {
+                        rt = true;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToByte"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YBitToByte(ulong value) {
+#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+                return YBitToByte_Widen(value);
+#else
+                return YBitToByte_WidenScalar(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToByte"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YBitToByte_Basic(ulong value) {
+                UnsafeUtil.SkipInit(out Vector<byte> rt);
+                ref sbyte p = ref Unsafe.As<Vector<byte>, sbyte>(ref rt);
+                for (int i = 0; i < Vector<byte>.Count; ++i) {
+                    p = (sbyte)-(long)((value >> i) & 1); // 1 for all bits: (sbyte)-1
+                    p = ref Unsafe.Add(ref p, 1);
+                }
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IVectorTraits.YBitToByte"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YBitToByte_Widen(ulong value) {
+                Vector<byte> a = new Vector<ulong>(value).AsByte();
+                Vector<int> scale = new Vector<int>(0x01010101);
+                Vector<byte> bitPosMask = Vectors<byte>.MaskBitPosSerialRotate;
+                // Widen 8bit to 64bit
+                Vector.Widen(a, out Vector<ushort> b, out _);
+                Vector.Widen(b, out Vector<uint> c, out _);
+                Vector.Widen(c, out Vector<ulong> d, out _);
+                // Duplicate 8bit value to 64bit
+                Vector<ulong> e = Vector.Multiply(d.AsInt32(), scale).AsUInt64(); // Duplicate 8bit value to 32bit
+                Vector<ulong> f = Vector.BitwiseOr(e, Vector.ShiftLeft(e, 32)); // Duplicate 32bit value to 64bit
+                // Check bit.
+                Vector<byte> hit = Vector.BitwiseAnd(f.AsByte(), bitPosMask);
+                Vector<byte> rt = Vector.OnesComplement(Vector.Equals(hit, Vector<byte>.Zero));
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
+
+            /// <inheritdoc cref="IVectorTraits.YBitToByte"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YBitToByte_WidenScalar(ulong value) {
+                Vector<byte> bitPosMask = Vectors<byte>.MaskBitPosSerialRotate;
+                // Widen 8bit to 64bit with duplicate
+                UnsafeUtil.SkipInit(out Vector<ulong> f);
+                ulong m = value;
+                ref ulong p = ref Unsafe.As<Vector<ulong>, ulong>(ref f);
+                for (int i = 0; i < Vector<ulong>.Count; ++i) {
+                    ulong temp = (m & 0xFFU) * 0x0101010101010101UL;
+                    p = temp;
+                    p = ref Unsafe.Add(ref p, 1);
+                    m >>= 8;
+                }
+                // Check bit.
+                Vector<byte> hit = Vector.BitwiseAnd(f.AsByte(), bitPosMask);
+                Vector<byte> rt = Vector.OnesComplement(Vector.Equals(hit, Vector<byte>.Zero));
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt16_IsAccelerated"/>
+            public static bool YBitToInt16_IsAccelerated {
+                get {
+                    bool rt = false;
+                    if (Vector.IsHardwareAccelerated) {
+                        rt = true;
+                    }
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt16"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YBitToInt16(ulong value) {
+                return YBitToInt16_And(value);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt16"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YBitToInt16_Basic(ulong value) {
+                UnsafeUtil.SkipInit(out Vector<short> rt);
+                ref short p = ref Unsafe.As<Vector<short>, short>(ref rt);
+                for (int i = 0; i < Vector<short>.Count; ++i) {
+                    p = (short)-(long)((value >> i) & 1); // 1 for all bits: (short)-1
+                    p = ref Unsafe.Add(ref p, 1);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt16"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YBitToInt16_And(ulong value) {
+#if NET8_0_OR_GREATER
+                if (Vector<byte>.Count >= BitOfByte.Bit512) {
+                    return YBitToInt16_Basic(value);
+                }
+#endif // NET8_0_OR_GREATER
+                Vector<short> bitPosMask = Vectors<short>.MaskBitPosSerialRotate;
+                // Duplicate 16bit value
+                Vector<short> a = new Vector<ushort>((ushort)value).AsInt16();
+                // Check bit.
+                Vector<short> hit = Vector.BitwiseAnd(a, bitPosMask);
+                Vector<short> rt = Vector.OnesComplement(Vector.Equals(hit, Vector<short>.Zero));
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt32_IsAccelerated"/>
+            public static bool YBitToInt32_IsAccelerated {
+                get {
+                    bool rt = false;
+                    if (Vector.IsHardwareAccelerated) {
+                        rt = true;
+                    }
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt32"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YBitToInt32(ulong value) {
+                return YBitToInt32_And(value);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt32"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YBitToInt32_Basic(ulong value) {
+                UnsafeUtil.SkipInit(out Vector<int> rt);
+                ref int p = ref Unsafe.As<Vector<int>, int>(ref rt);
+                for (int i = 0; i < Vector<int>.Count; ++i) {
+                    p = (int)-(long)((value >> i) & 1); // 1 for all bits: (int)-1
+                    p = ref Unsafe.Add(ref p, 1);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt32"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YBitToInt32_And(ulong value) {
+                Vector<int> bitPosMask = Vectors<int>.MaskBitPosSerialRotate;
+                // Duplicate 32bit value
+                Vector<int> a = new Vector<uint>((uint)value).AsInt32();
+                // Check bit.
+                Vector<int> hit = Vector.BitwiseAnd(a, bitPosMask);
+                Vector<int> rt = Vector.OnesComplement(Vector.Equals(hit, Vector<int>.Zero));
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt64_IsAccelerated"/>
+            public static bool YBitToInt64_IsAccelerated {
+                get {
+                    bool rt = false;
+                    if (Vector.IsHardwareAccelerated) {
+                        rt = true;
+                    }
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt64"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YBitToInt64(ulong value) {
+                return YBitToInt64_And(value);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt64"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YBitToInt64_Basic(ulong value) {
+                UnsafeUtil.SkipInit(out Vector<long> rt);
+                ref long p = ref Unsafe.As<Vector<long>, long>(ref rt);
+                for (int i = 0; i < Vector<long>.Count; ++i) {
+                    p = -(long)((value >> i) & 1); // 1 for all bits: (long)-1
+                    p = ref Unsafe.Add(ref p, 1);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YBitToInt64"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YBitToInt64_And(ulong value) {
+                Vector<long> bitPosMask = Vectors<long>.MaskBitPosSerialRotate;
+                // Duplicate 64bit value
+                Vector<long> a = new Vector<ulong>((ulong)value).AsInt64();
+                // Check bit.
+                Vector<long> hit = Vector.BitwiseAnd(a, bitPosMask);
+                Vector<long> rt = Vector.OnesComplement(Vector.Equals(hit, Vector<long>.Zero));
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.YClamp_AcceleratedTypes"/>
             public static TypeCodeFlags YClamp_AcceleratedTypes {
                 get {

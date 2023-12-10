@@ -13,6 +13,66 @@ namespace Zyl.VectorTraits.Impl.AVector {
 
     partial class VectorTraitsAbstract {
 
+        /// <inheritdoc cref="IVectorTraits.YBitToByte_IsAccelerated"/>
+        public virtual bool YBitToByte_IsAccelerated {
+            get {
+                return Statics.YBitToByte_IsAccelerated;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YBitToByte"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<byte> YBitToByte(ulong value) {
+            return Statics.YBitToByte(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YBitToInt16_IsAccelerated"/>
+        public virtual bool YBitToInt16_IsAccelerated {
+            get {
+                return Statics.YBitToInt16_IsAccelerated;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YBitToInt16"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<short> YBitToInt16(ulong value) {
+            return Statics.YBitToInt16(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YBitToInt32_IsAccelerated"/>
+        public virtual bool YBitToInt32_IsAccelerated {
+            get {
+                return Statics.YBitToInt32_IsAccelerated;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YBitToInt32"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<int> YBitToInt32(ulong value) {
+            return Statics.YBitToInt32(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YBitToInt64_IsAccelerated"/>
+        public virtual bool YBitToInt64_IsAccelerated {
+            get {
+                return Statics.YBitToInt64_IsAccelerated;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YBitToInt64"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<long> YBitToInt64(ulong value) {
+            return Statics.YBitToInt64(value);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.YClamp_AcceleratedTypes"/>
         public virtual TypeCodeFlags YClamp_AcceleratedTypes {
             get {
@@ -203,14 +263,14 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YOrNot_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YOrNot_AcceleratedTypes"/>
         public virtual TypeCodeFlags YOrNot_AcceleratedTypes {
             get {
                 return Statics.YOrNot_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YOrNot{T}(Vector{T}, Vector{T})"/>
+        /// <inheritdoc cref="IVectorTraits.YOrNot{T}(Vector{T}, Vector{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector<T> YOrNot<T>(Vector<T> left, Vector<T> right) where T : struct {
             return Statics.YOrNot(left, right);

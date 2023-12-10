@@ -14,6 +14,21 @@ namespace Zyl.VectorTraits.Impl.AVector {
     partial class VectorTraits128AdvSimdB64Abstract {
 #if NET5_0_OR_GREATER
 
+        /// <inheritdoc cref="IVectorTraits.YBitToByte_IsAccelerated"/>
+        public override bool YBitToByte_IsAccelerated {
+            get {
+                return Statics.YBitToByte_IsAccelerated;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YBitToByte"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<byte> YBitToByte(ulong value) {
+            return Statics.YBitToByte(value);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.YClamp_AcceleratedTypes"/>
         public override TypeCodeFlags YClamp_AcceleratedTypes {
             get {

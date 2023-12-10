@@ -262,6 +262,9 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>ExtractMostSignificantBits</c> (运行 <c>ExtractMostSignificantBits</c> 时具有硬件加速的类型).
         /// </summary>
+        /// <remarks>
+        /// <para>Inverse function (反函数): <see cref="YBitToByte"/>, <see cref="YBitToInt16"/>, <see cref="YBitToInt32"/>, <see cref="YBitToInt64"/>.</para>
+        /// </remarks>
         /// <seealso cref="ExtractMostSignificantBits(Vector{byte})"/>
         TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes { get; }
 

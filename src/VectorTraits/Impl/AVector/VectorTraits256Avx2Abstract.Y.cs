@@ -14,6 +14,66 @@ namespace Zyl.VectorTraits.Impl.AVector {
     partial class VectorTraits256Avx2Abstract {
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="IVectorTraits.YBitToByte_IsAccelerated"/>
+        public override bool YBitToByte_IsAccelerated {
+            get {
+                return Statics.YBitToByte_IsAccelerated;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YBitToByte"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<byte> YBitToByte(ulong value) {
+            return Statics.YBitToByte(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YBitToInt16_IsAccelerated"/>
+        public override bool YBitToInt16_IsAccelerated {
+            get {
+                return Statics.YBitToInt16_IsAccelerated;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YBitToInt16"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<short> YBitToInt16(ulong value) {
+            return Statics.YBitToInt16(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YBitToInt32_IsAccelerated"/>
+        public override bool YBitToInt32_IsAccelerated {
+            get {
+                return Statics.YBitToInt32_IsAccelerated;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YBitToInt32"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<int> YBitToInt32(ulong value) {
+            return Statics.YBitToInt32(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YBitToInt64_IsAccelerated"/>
+        public override bool YBitToInt64_IsAccelerated {
+            get {
+                return Statics.YBitToInt64_IsAccelerated;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YBitToInt64"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> YBitToInt64(ulong value) {
+            return Statics.YBitToInt64(value);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.YClamp_AcceleratedTypes"/>
         public override TypeCodeFlags YClamp_AcceleratedTypes {
             get {
