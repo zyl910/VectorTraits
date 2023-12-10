@@ -38,6 +38,10 @@
     <Folder Include="AVector\S\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" />
+  </ItemGroup>
+
   <Import Project="..\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems" Label="Shared" />
 
   <Import Project="..\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems" Label="Shared" />
