@@ -218,5 +218,77 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
 
+        /// <inheritdoc cref="IsInteger(double)"/>
+        /// <seealso cref="float.IsInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger(float value) {
+//#if NET7_0_OR_GREATER
+//            return IsInteger_Bcl(value);
+//#else
+//            return IsInteger_Basic(value);
+//#endif // NET7_0_OR_GREATER
+            return IsInteger_Bit(value);
+        }
+
+        /// <inheritdoc cref="IsInteger(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger_Basic(float value) {
+            float m = MathIFloatingPoint.Truncate(value);
+            return IsFinite(value) && (value == m);
+        }
+
+#if NET7_0_OR_GREATER
+        /// <inheritdoc cref="IsInteger(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger_Bcl(float value) {
+            return float.IsInteger(value);
+        }
+#endif // NET7_0_OR_GREATER
+
+        /// <inheritdoc cref="IsInteger(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger_Bit(float value) {
+            return IsInteger_Basic(value);
+        }
+
+        /// <summary>
+        /// Determines if a element represents an integral number (确定元素是否为整数).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value is integral number, otherwise is <c>false</c> (如果值是整数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsInteger(TSelf)"/>
+        /// <seealso cref="double.IsInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger(double value) {
+//#if NET7_0_OR_GREATER
+//            return IsInteger_Bcl(value);
+//#else
+//            return IsInteger_Basic(value);
+//#endif // NET7_0_OR_GREATER
+            return IsInteger_Bit(value);
+        }
+
+        /// <inheritdoc cref="IsInteger(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger_Basic(double value) {
+            double m = Math.Truncate(value);
+            return IsFinite(value) && (value == m);
+        }
+
+#if NET7_0_OR_GREATER
+        /// <inheritdoc cref="IsInteger(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger_Bcl(double value) {
+            return double.IsInteger(value);
+        }
+#endif // NET7_0_OR_GREATER
+
+        /// <inheritdoc cref="IsInteger(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger_Bit(double value) {
+            return IsInteger_Basic(value);
+        }
+
+
     }
 }
