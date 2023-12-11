@@ -152,5 +152,71 @@ namespace Zyl.VectorTraits.Numerics {
             return rt;
         }
 
+
+        /// <inheritdoc cref="IsInfinityOrNaN(double)"/>
+        /// <seealso cref="float.IsInfinityOrNaN"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinityOrNaN(float value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsInfinityOrNaN_Bcl(value);
+#else
+            return IsInfinityOrNaN_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        /// <inheritdoc cref="IsInfinityOrNaN(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinityOrNaN_Bcl(float value) {
+            return !float.IsFinite(value);
+        }
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+        /// <inheritdoc cref="IsInfinityOrNaN(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinityOrNaN_Bit(float value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const int exponentMask = ScalarConstants.Single_ExponentMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            int bits = MathBitConverter.SingleToInt32Bits(value);
+            bool rt = exponentMask == (bits & exponentMask);
+            return rt;
+        }
+
+        /// <summary>
+        /// Determines if a element is infinite or NaN (确定元素是否为无穷大或非数).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value is infinite or NaN, otherwise is <c>false</c> (如果值是无穷大或非数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsFinite(TSelf)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinityOrNaN(double value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsInfinityOrNaN_Bcl(value);
+#else
+            return IsInfinityOrNaN_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        /// <inheritdoc cref="IsInfinityOrNaN(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinityOrNaN_Bcl(double value) {
+            return !double.IsFinite(value);
+        }
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+        /// <inheritdoc cref="IsInfinityOrNaN(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinityOrNaN_Bit(double value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const long exponentMask = ScalarConstants.Double_ExponentMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            long bits = BitConverter.DoubleToInt64Bits(value);
+            bool rt = exponentMask == (bits & exponentMask);
+            return rt;
+        }
+
+
     }
 }

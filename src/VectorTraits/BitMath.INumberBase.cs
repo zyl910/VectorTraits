@@ -34,5 +34,18 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsInfinity(value);
         }
 
+
+        /// <inheritdoc cref="MathINumberBase.IsInfinityOrNaN(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinityOrNaN(float value) {
+            return MathINumberBase.IsInfinityOrNaN(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsInfinityOrNaN(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinityOrNaN(double value) {
+            return MathINumberBase.IsInfinityOrNaN(value);
+        }
+
     }
 }
