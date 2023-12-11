@@ -30,25 +30,6 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
 
-#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        /// <inheritdoc cref="IsFinite(float)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsFinite_Bcl(float value) {
-            return float.IsFinite(value);
-        }
-#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-
-        /// <inheritdoc cref="IsFinite(float)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsFinite_Bit(float value) {
-#pragma warning disable CS0618 // Type or member is obsolete
-            const int exponentMask = ScalarConstants.Single_ExponentMask;
-#pragma warning restore CS0618 // Type or member is obsolete
-            int bits = MathBitConverter.SingleToInt32Bits(value);
-            bool rt = exponentMask != (bits & exponentMask);
-            return rt;
-        }
-
         /// <summary>
         /// Determines if a element is finite. It contains zero, subnormal, and normal. It does not contain infinity, NaN (确定元素是否为有限值. 它包含 零、次正规数、正规数. 它不含无穷大、非数).
         /// </summary>
@@ -66,12 +47,29 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        /// <inheritdoc cref="IsFinite(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsFinite_Bcl(float value) {
+            return float.IsFinite(value);
+        }
+
         /// <inheritdoc cref="IsFinite(double)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsFinite_Bcl(double value) {
             return double.IsFinite(value);
         }
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+        /// <inheritdoc cref="IsFinite(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsFinite_Bit(float value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const int exponentMask = ScalarConstants.Single_ExponentMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            int bits = MathBitConverter.SingleToInt32Bits(value);
+            bool rt = exponentMask != (bits & exponentMask);
+            return rt;
+        }
 
         /// <inheritdoc cref="IsFinite(double)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -96,26 +94,6 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
 
-#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        /// <inheritdoc cref="IsInfinity(float)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInfinity_Bcl(float value) {
-            return float.IsInfinity(value);
-        }
-#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-
-        /// <inheritdoc cref="IsInfinity(float)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInfinity_Bit(float value) {
-#pragma warning disable CS0618 // Type or member is obsolete
-            const int exponentMask = ScalarConstants.Single_ExponentMask;
-            const int nonSignMask = ScalarConstants.Single_NonSignMask;
-#pragma warning restore CS0618 // Type or member is obsolete
-            int bits = MathBitConverter.SingleToInt32Bits(value);
-            bool rt = (bits & nonSignMask) == exponentMask;
-            return rt;
-        }
-
         /// <summary>
         /// Determines if a element is negative or positive infinite (确定元素是否为负数或正数的无穷大).
         /// </summary>
@@ -133,12 +111,30 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        /// <inheritdoc cref="IsInfinity(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinity_Bcl(float value) {
+            return float.IsInfinity(value);
+        }
+
         /// <inheritdoc cref="IsInfinity(double)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInfinity_Bcl(double value) {
             return double.IsInfinity(value);
         }
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+        /// <inheritdoc cref="IsInfinity(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinity_Bit(float value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const int exponentMask = ScalarConstants.Single_ExponentMask;
+            const int nonSignMask = ScalarConstants.Single_NonSignMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            int bits = MathBitConverter.SingleToInt32Bits(value);
+            bool rt = (bits & nonSignMask) == exponentMask;
+            return rt;
+        }
 
         /// <inheritdoc cref="IsInfinity(double)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -164,25 +160,6 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
 
-#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        /// <inheritdoc cref="IsInfinityOrNaN(float)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInfinityOrNaN_Bcl(float value) {
-            return !float.IsFinite(value);
-        }
-#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-
-        /// <inheritdoc cref="IsInfinityOrNaN(float)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInfinityOrNaN_Bit(float value) {
-#pragma warning disable CS0618 // Type or member is obsolete
-            const int exponentMask = ScalarConstants.Single_ExponentMask;
-#pragma warning restore CS0618 // Type or member is obsolete
-            int bits = MathBitConverter.SingleToInt32Bits(value);
-            bool rt = exponentMask == (bits & exponentMask);
-            return rt;
-        }
-
         /// <summary>
         /// Determines if a element is infinite or NaN (确定元素是否为无穷大或非数).
         /// </summary>
@@ -199,12 +176,29 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        /// <inheritdoc cref="IsInfinityOrNaN(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinityOrNaN_Bcl(float value) {
+            return !float.IsFinite(value);
+        }
+
         /// <inheritdoc cref="IsInfinityOrNaN(double)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInfinityOrNaN_Bcl(double value) {
             return !double.IsFinite(value);
         }
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+        /// <inheritdoc cref="IsInfinityOrNaN(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinityOrNaN_Bit(float value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const int exponentMask = ScalarConstants.Single_ExponentMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            int bits = MathBitConverter.SingleToInt32Bits(value);
+            bool rt = exponentMask == (bits & exponentMask);
+            return rt;
+        }
 
         /// <inheritdoc cref="IsInfinityOrNaN(double)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -230,27 +224,6 @@ namespace Zyl.VectorTraits.Numerics {
             return IsInteger_Bit(value);
         }
 
-        /// <inheritdoc cref="IsInteger(float)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInteger_Basic(float value) {
-            float m = MathIFloatingPoint.Truncate(value);
-            return IsFinite(value) && (value == m);
-        }
-
-#if NET7_0_OR_GREATER
-        /// <inheritdoc cref="IsInteger(float)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInteger_Bcl(float value) {
-            return float.IsInteger(value);
-        }
-#endif // NET7_0_OR_GREATER
-
-        /// <inheritdoc cref="IsInteger(float)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInteger_Bit(float value) {
-            return IsInteger_Basic(value);
-        }
-
         /// <summary>
         /// Determines if a element represents an integral number (确定元素是否为整数).
         /// </summary>
@@ -268,6 +241,13 @@ namespace Zyl.VectorTraits.Numerics {
             return IsInteger_Bit(value);
         }
 
+        /// <inheritdoc cref="IsInteger(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger_Basic(float value) {
+            float m = MathIFloatingPoint.Truncate(value);
+            return IsFinite(value) && (value == m);
+        }
+
         /// <inheritdoc cref="IsInteger(double)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInteger_Basic(double value) {
@@ -276,12 +256,24 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
 #if NET7_0_OR_GREATER
+        /// <inheritdoc cref="IsInteger(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger_Bcl(float value) {
+            return float.IsInteger(value);
+        }
+
         /// <inheritdoc cref="IsInteger(double)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInteger_Bcl(double value) {
             return double.IsInteger(value);
         }
 #endif // NET7_0_OR_GREATER
+
+        /// <inheritdoc cref="IsInteger(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger_Bit(float value) {
+            return IsInteger_Basic(value);
+        }
 
         /// <inheritdoc cref="IsInteger(double)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
