@@ -21,5 +21,18 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsFinite(value);
         }
 
+
+        /// <inheritdoc cref="MathINumberBase.IsInfinity(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinity(float value) {
+            return MathINumberBase.IsInfinity(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsInfinity(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinity(double value) {
+            return MathINumberBase.IsInfinity(value);
+        }
+
     }
 }

@@ -50,7 +50,7 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
         /// <summary>
-        /// YIsFinite: Determines if a element is finite. It contains zero, subnormal, and normal. It does not contain infinity, NaN (确定元素是否为有限值. 它包含 零、次正规数、正规数. 它不含无穷大、非数).
+        /// Determines if a element is finite. It contains zero, subnormal, and normal. It does not contain infinity, NaN (确定元素是否为有限值. 它包含 零、次正规数、正规数. 它不含无穷大、非数).
         /// </summary>
         /// <param name="value">The value to be checked (要检查的值).</param>
         /// <returns>Return <c>true</c> if value is finite, otherwise is <c>false</c> (如果值是有限的，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
@@ -81,6 +81,74 @@ namespace Zyl.VectorTraits.Numerics {
 #pragma warning restore CS0618 // Type or member is obsolete
             long bits = BitConverter.DoubleToInt64Bits(value);
             bool rt = exponentMask != (bits & exponentMask);
+            return rt;
+        }
+
+
+        /// <inheritdoc cref="IsInfinity(double)"/>
+        /// <seealso cref="float.IsInfinity"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinity(float value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsInfinity_Bcl(value);
+#else
+            return IsInfinity_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        /// <inheritdoc cref="IsInfinity(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinity_Bcl(float value) {
+            return float.IsInfinity(value);
+        }
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+        /// <inheritdoc cref="IsInfinity(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinity_Bit(float value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const int exponentMask = ScalarConstants.Single_ExponentMask;
+            const int nonSignMask = ScalarConstants.Single_NonSignMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            int bits = MathBitConverter.SingleToInt32Bits(value);
+            bool rt = (bits & nonSignMask) == exponentMask;
+            return rt;
+        }
+
+        /// <summary>
+        /// Determines if a element is negative or positive infinite (确定元素是否为负数或正数的无穷大).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value is infinite, otherwise is <c>false</c> (如果值是无穷大，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsInfinity(TSelf)"/>
+        /// <seealso cref="double.IsInfinity"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinity(double value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsInfinity_Bcl(value);
+#else
+            return IsInfinity_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        /// <inheritdoc cref="IsInfinity(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinity_Bcl(double value) {
+            return double.IsInfinity(value);
+        }
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+        /// <inheritdoc cref="IsInfinity(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinity_Bit(double value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const long exponentMask = ScalarConstants.Double_ExponentMask;
+            const long nonSignMask = ScalarConstants.Double_NonSignMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            long bits = BitConverter.DoubleToInt64Bits(value);
+            bool rt = (bits & nonSignMask) == exponentMask;
             return rt;
         }
 
