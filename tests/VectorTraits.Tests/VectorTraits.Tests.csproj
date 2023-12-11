@@ -45,6 +45,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
+      <PackageReference Include="Microsoft.NetCore.App" Version="2.1.29" />
       <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" />
   </ItemGroup>
 
