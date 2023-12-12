@@ -318,5 +318,170 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
 
+        /// <inheritdoc cref="IsNegative(double)"/>
+        /// <seealso cref="float.IsNegative"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative(float value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsNegative_Bcl(value);
+#else
+            return IsNegative_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+
+        /// <summary>
+        /// Determines if a element represents a negative number (确定元素是否为负数).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value represents negative zero or a negative real number, otherwise is <c>false</c> (如果值表示负零或负实数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsNegative(TSelf)"/>
+        /// <seealso cref="double.IsNegative"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative(double value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsNegative_Bcl(value);
+#else
+            return IsNegative_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsNegative(double)"/>
+        /// <seealso cref="sbyte.IsNegative"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative(sbyte value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsNegative_Bcl(value);
+#else
+            return IsNegative_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsNegative(double)"/>
+        /// <seealso cref="short.IsNegative"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative(short value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsNegative_Bcl(value);
+#else
+            return IsNegative_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsNegative(double)"/>
+        /// <seealso cref="int.IsNegative"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative(int value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsNegative_Bcl(value);
+#else
+            return IsNegative_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsNegative(double)"/>
+        /// <seealso cref="long.IsNegative"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative(long value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsNegative_Bcl(value);
+#else
+            return IsNegative_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        /// <inheritdoc cref="IsNegative(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bcl(float value) {
+            return float.IsNegative(value);
+        }
+
+        /// <inheritdoc cref="IsNegative(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bcl(double value) {
+            return double.IsNegative(value);
+        }
+
+        /// <inheritdoc cref="IsNegative(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bcl(sbyte value) {
+#if NET7_0_OR_GREATER
+            return sbyte.IsNegative(value);
+#else
+            return IsNegative_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsNegative(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bcl(short value) {
+#if NET7_0_OR_GREATER
+            return short.IsNegative(value);
+#else
+            return IsNegative_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsNegative(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bcl(int value) {
+#if NET7_0_OR_GREATER
+            return int.IsNegative(value);
+#else
+            return IsNegative_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsNegative(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bcl(long value) {
+#if NET7_0_OR_GREATER
+            return long.IsNegative(value);
+#else
+            return IsNegative_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+        /// <inheritdoc cref="IsNegative(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bit(float value) {
+            return MathBitConverter.SingleToInt32Bits(value) < 0;
+        }
+
+        /// <inheritdoc cref="IsNegative(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bit(double value) {
+            return BitConverter.DoubleToInt64Bits(value) < 0;
+        }
+
+        /// <inheritdoc cref="IsNegative(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bit(sbyte value) {
+            return value < 0;
+        }
+
+        /// <inheritdoc cref="IsNegative(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bit(short value) {
+            return value < 0;
+        }
+
+        /// <inheritdoc cref="IsNegative(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bit(int value) {
+            return value < 0;
+        }
+
+        /// <inheritdoc cref="IsNegative(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bit(long value) {
+            return value < 0;
+        }
+
+
     }
 }
