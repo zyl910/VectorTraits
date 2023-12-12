@@ -60,5 +60,18 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsInteger(value);
         }
 
+
+        /// <inheritdoc cref="MathINumberBase.IsNaN(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNaN(float value) {
+            return MathINumberBase.IsNaN(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsNaN(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNaN(double value) {
+            return MathINumberBase.IsNaN(value);
+        }
+
     }
 }

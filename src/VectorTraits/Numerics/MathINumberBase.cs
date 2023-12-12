@@ -268,5 +268,55 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
 
+        /// <inheritdoc cref="IsNaN(double)"/>
+        /// <seealso cref="float.IsNaN"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNaN(float value) {
+            return IsNaN_Bcl(value);
+        }
+
+        /// <summary>
+        /// Determines if a element is NaN (确定元素是否为非数).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value is NaN, otherwise is <c>false</c> (如果值是非数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsNaN(TSelf)"/>
+        /// <seealso cref="double.IsNaN"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNaN(double value) {
+            return IsNaN_Bcl(value);
+        }
+
+        /// <inheritdoc cref="IsNaN(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNaN_Bcl(float value) {
+            return float.IsNaN(value);
+        }
+
+        /// <inheritdoc cref="IsNaN(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNaN_Bcl(double value) {
+            return double.IsNaN(value);
+        }
+
+        /// <inheritdoc cref="IsNaN(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNaN_Bit(float value) {
+#pragma warning disable CS1718
+            return value != value;
+#pragma warning restore CS1718
+        }
+
+        /// <inheritdoc cref="IsNaN(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNaN_Bit(double value) {
+            // A NaN will never equal itself so this is an
+            // easy and efficient way to check for NaN.
+#pragma warning disable CS1718
+            return value != value;
+#pragma warning restore CS1718
+        }
+
+
     }
 }
