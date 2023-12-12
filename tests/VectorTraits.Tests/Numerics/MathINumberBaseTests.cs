@@ -126,10 +126,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                     Console.WriteLine("IsInteger({0}):\t{1}", x, expected);
                 }
                 // IsInteger_Bit.
-                bool dst = MathINumberBase.IsInteger_Basic((dynamic)x);
-                Assert.AreEqual(expected, dst, string.Format("IsInteger_Basic({0})", x));
-                // IsInteger_Bit.
-                dst = MathINumberBase.IsInteger_Bit((dynamic)x);
+                bool dst = MathINumberBase.IsInteger_Bit((dynamic)x);
                 Assert.AreEqual(expected, dst, string.Format("IsInteger_Bit({0})", x));
                 // IsInteger_Bcl.
 #if NET7_0_OR_GREATER

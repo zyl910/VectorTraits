@@ -216,12 +216,11 @@ namespace Zyl.VectorTraits.Numerics {
         /// <seealso cref="float.IsInteger"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInteger(float value) {
-//#if NET7_0_OR_GREATER
-//            return IsInteger_Bcl(value);
-//#else
-//            return IsInteger_Basic(value);
-//#endif // NET7_0_OR_GREATER
+#if NET7_0_OR_GREATER
+            return IsInteger_Bcl(value);
+#else
             return IsInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
         }
 
         /// <summary>
@@ -233,26 +232,11 @@ namespace Zyl.VectorTraits.Numerics {
         /// <seealso cref="double.IsInteger"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInteger(double value) {
-//#if NET7_0_OR_GREATER
-//            return IsInteger_Bcl(value);
-//#else
-//            return IsInteger_Basic(value);
-//#endif // NET7_0_OR_GREATER
+#if NET7_0_OR_GREATER
+            return IsInteger_Bcl(value);
+#else
             return IsInteger_Bit(value);
-        }
-
-        /// <inheritdoc cref="IsInteger(float)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInteger_Basic(float value) {
-            float m = MathIFloatingPoint.Truncate(value);
-            return IsFinite(value) && (value == m);
-        }
-
-        /// <inheritdoc cref="IsInteger(double)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInteger_Basic(double value) {
-            double m = Math.Truncate(value);
-            return IsFinite(value) && (value == m);
+#endif // NET7_0_OR_GREATER
         }
 
 #if NET7_0_OR_GREATER
@@ -272,13 +256,15 @@ namespace Zyl.VectorTraits.Numerics {
         /// <inheritdoc cref="IsInteger(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInteger_Bit(float value) {
-            return IsInteger_Basic(value);
+            float valueTrun = MathIFloatingPoint.Truncate(value);
+            return IsFinite(value) && (value == valueTrun);
         }
 
         /// <inheritdoc cref="IsInteger(double)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInteger_Bit(double value) {
-            return IsInteger_Basic(value);
+            double valueTrun = Math.Truncate(value);
+            return IsFinite(value) && (value == valueTrun);
         }
 
 
