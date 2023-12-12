@@ -229,5 +229,36 @@ namespace Zyl.VectorTraits.Tests.Numerics {
             }
         }
 
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        public void IsNormalTest<T>(T src) where T : struct {
+            T[] samples = new T[8];
+            samples[0] = default;
+            samples[1] = Scalars<T>.NegativeZero;
+            samples[2] = src;
+            samples[3] = Scalars<T>.MaxValue;
+            samples[4] = Scalars<T>.MinValue;
+            samples[5] = Scalars<T>.PositiveInfinity;
+            samples[6] = Scalars<T>.NegativeInfinity;
+            samples[7] = Scalars<T>.NaN;
+            // run.
+            bool allowLog = false;
+            for (int i = 0; i < samples.Length; ++i) {
+                T x = samples[i];
+                bool expected = BitMath.IsNormal((dynamic)x);
+                if (allowLog) {
+                    Console.WriteLine("IsNormal({0}):\t{1}", x, expected);
+                }
+                // IsNormal_Bit.
+                bool dst = MathINumberBase.IsNormal_Bit((dynamic)x);
+                Assert.AreEqual(expected, dst, string.Format("IsNormal_Bit({0})", x));
+                // IsNormal_Bcl.
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+                dst = MathINumberBase.IsNormal_Bcl((dynamic)x);
+                Assert.AreEqual(expected, dst, string.Format("IsNormal_Bcl({0})", x));
+#endif // NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            }
+        }
+
     }
 }

@@ -527,5 +527,71 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
 
+        /// <inheritdoc cref="IsNormal(double)"/>
+        /// <seealso cref="float.IsNormal"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNormal(float value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsNormal_Bcl(value);
+#else
+            return IsNormal_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+
+        /// <summary>
+        /// Determines if a element is normal (确定元素是否为正规数).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value is normal, otherwise is <c>false</c> (如果值是正规数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsNormal(TSelf)"/>
+        /// <seealso cref="double.IsNormal"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNormal(double value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsNormal_Bcl(value);
+#else
+            return IsNormal_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        /// <inheritdoc cref="IsNormal(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNormal_Bcl(float value) {
+            return float.IsNormal(value);
+        }
+
+        /// <inheritdoc cref="IsNormal(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNormal_Bcl(double value) {
+            return double.IsNormal(value);
+        }
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+        /// <inheritdoc cref="IsNormal(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNormal_Bit(float value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const int exponentMask = ScalarConstants.Single_ExponentMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            int bits = MathBitConverter.SingleToInt32Bits(value);
+            bits &= exponentMask;
+            bool rt = (bits > 0) && (exponentMask > bits);
+            return rt;
+        }
+
+        /// <inheritdoc cref="IsNormal(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNormal_Bit(double value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const long exponentMask = ScalarConstants.Double_ExponentMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            long bits = BitConverter.DoubleToInt64Bits(value);
+            bits &= exponentMask;
+            bool rt = (bits > 0) && (exponentMask > bits);
+            return rt;
+        }
+
+
     }
 }

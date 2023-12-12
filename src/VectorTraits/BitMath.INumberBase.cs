@@ -125,5 +125,17 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="MathINumberBase.IsNormal(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNormal(float value) {
+            return MathINumberBase.IsNormal(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsNormal(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNormal(double value) {
+            return MathINumberBase.IsNormal(value);
+        }
+
     }
 }
