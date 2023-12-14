@@ -267,5 +267,43 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsOddInteger(value);
         }
 
+
+        /// <inheritdoc cref="MathINumberBase.IsPositive(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive(float value) {
+            return MathINumberBase.IsPositive(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsPositive(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive(double value) {
+            return MathINumberBase.IsPositive(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsPositive(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive(sbyte value) {
+            return MathINumberBase.IsPositive(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsPositive(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive(short value) {
+            return MathINumberBase.IsPositive(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsPositive(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive(int value) {
+            return MathINumberBase.IsPositive(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsPositive(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive(long value) {
+            return MathINumberBase.IsPositive(value);
+        }
+
     }
 }

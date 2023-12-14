@@ -1108,5 +1108,154 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
 
+        /// <inheritdoc cref="IsPositive(double)"/>
+        /// <seealso cref="float.IsPositive"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive(float value) {
+#if NET7_0_OR_GREATER
+            return IsPositive_Bcl(value);
+#else
+            return IsPositive_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <summary>
+        /// Determines if a element represents zero or a positive number (确定元素是否为正零或正实数).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value represents positive zero or a positive real number, otherwise is <c>false</c> (如果值表示正零或正实数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsPositive(TSelf)"/>
+        /// <seealso cref="double.IsPositive"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive(double value) {
+#if NET7_0_OR_GREATER
+            return IsPositive_Bcl(value);
+#else
+            return IsPositive_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsPositive(double)"/>
+        /// <seealso cref="sbyte.IsPositive"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive(sbyte value) {
+#if NET7_0_OR_GREATER
+            return IsPositive_Bcl(value);
+#else
+            return IsPositive_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsPositive(double)"/>
+        /// <seealso cref="short.IsPositive"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive(short value) {
+#if NET7_0_OR_GREATER
+            return IsPositive_Bcl(value);
+#else
+            return IsPositive_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsPositive(double)"/>
+        /// <seealso cref="int.IsPositive"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive(int value) {
+#if NET7_0_OR_GREATER
+            return IsPositive_Bcl(value);
+#else
+            return IsPositive_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsPositive(double)"/>
+        /// <seealso cref="long.IsPositive"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive(long value) {
+#if NET7_0_OR_GREATER
+            return IsPositive_Bcl(value);
+#else
+            return IsPositive_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+#if NET7_0_OR_GREATER
+        /// <inheritdoc cref="IsPositive(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive_Bcl(float value) {
+            return float.IsPositive(value);
+        }
+
+        /// <inheritdoc cref="IsPositive(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive_Bcl(double value) {
+            return double.IsPositive(value);
+        }
+
+        /// <inheritdoc cref="IsPositive(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive_Bcl(sbyte value) {
+            return sbyte.IsPositive(value);
+        }
+
+        /// <inheritdoc cref="IsPositive(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive_Bcl(short value) {
+            return short.IsPositive(value);
+        }
+
+        /// <inheritdoc cref="IsPositive(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive_Bcl(int value) {
+            return int.IsPositive(value);
+        }
+
+        /// <inheritdoc cref="IsPositive(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive_Bcl(long value) {
+            return long.IsPositive(value);
+        }
+#endif // NET7_0_OR_GREATER
+
+        /// <inheritdoc cref="IsPositive(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive_Bit(float value) {
+            return MathBitConverter.SingleToInt32Bits(value) >= 0;
+        }
+
+        /// <inheritdoc cref="IsPositive(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive_Bit(double value) {
+            return BitConverter.DoubleToInt64Bits(value) >= 0;
+        }
+
+        /// <inheritdoc cref="IsPositive(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive_Bit(sbyte value) {
+            return value >= 0;
+        }
+
+        /// <inheritdoc cref="IsPositive(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive_Bit(short value) {
+            return value >= 0;
+        }
+
+        /// <inheritdoc cref="IsPositive(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive_Bit(int value) {
+            return value >= 0;
+        }
+
+        /// <inheritdoc cref="IsPositive(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive_Bit(long value) {
+            return value >= 0;
+        }
+
+
     }
 }
