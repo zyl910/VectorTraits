@@ -396,5 +396,18 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsZero(value);
         }
 
+
+        /// <inheritdoc cref="MathINumberBase.IsZeroOrSubnormal(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZeroOrSubnormal(float value) {
+            return MathINumberBase.IsZeroOrSubnormal(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsZeroOrSubnormal(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZeroOrSubnormal(double value) {
+            return MathINumberBase.IsZeroOrSubnormal(value);
+        }
+
     }
 }

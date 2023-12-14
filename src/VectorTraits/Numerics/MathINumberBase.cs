@@ -1628,5 +1628,80 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
 
+
+        /// <inheritdoc cref="IsZeroOrSubnormal(double)"/>
+        /// <seealso cref="float.IsZeroOrSubnormal"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZeroOrSubnormal(float value) {
+#if NETX_0_OR_GREATER
+            return IsZeroOrSubnormal_Bcl(value);
+#else
+            return IsZeroOrSubnormal_Bit(value);
+#endif // NETX_0_OR_GREATER
+        }
+
+        /// <summary>
+        /// Determines if a element is subnormal (确定元素是否为次正规数).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value is subnormal, otherwise is <c>false</c> (如果值是次正规数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsZeroOrSubnormal(TSelf)"/>
+        /// <seealso cref="double.IsZeroOrSubnormal"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZeroOrSubnormal(double value) {
+#if NETX_0_OR_GREATER
+            return IsZeroOrSubnormal_Bcl(value);
+#else
+            return IsZeroOrSubnormal_Bit(value);
+#endif // NETX_0_OR_GREATER
+        }
+
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        /// <inheritdoc cref="IsZeroOrSubnormal(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZeroOrSubnormal_Bcl(float value) {
+#if NETX_0_OR_GREATER
+            return float.IsZeroOrSubnormal(value);
+#else
+            return IsSubnormal_Bcl(value) || (0 == value);
+#endif // NETX_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsZeroOrSubnormal(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZeroOrSubnormal_Bcl(double value) {
+#if NETX_0_OR_GREATER
+            return double.IsZeroOrSubnormal(value);
+#else
+            return IsSubnormal_Bcl(value) || (0 == value);
+#endif // NETX_0_OR_GREATER
+        }
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+        /// <inheritdoc cref="IsZeroOrSubnormal(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZeroOrSubnormal_Bit(float value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const int exponentMask = ScalarConstants.Single_ExponentMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            int bits = MathBitConverter.SingleToInt32Bits(value);
+            int exponent = bits & exponentMask;
+            bool rt = (0 == exponent);
+            return rt;
+        }
+
+        /// <inheritdoc cref="IsZeroOrSubnormal(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZeroOrSubnormal_Bit(double value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const long exponentMask = ScalarConstants.Double_ExponentMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            long bits = BitConverter.DoubleToInt64Bits(value);
+            long exponent = bits & exponentMask;
+            bool rt = (0 == exponent);
+            return rt;
+        }
+
+
     }
 }
