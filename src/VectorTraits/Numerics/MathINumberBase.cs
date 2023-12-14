@@ -17,7 +17,263 @@ namespace Zyl.VectorTraits.Numerics {
     /// <seealso cref="BitMath"/>
     public static class MathINumberBase {
 
-        // IsEvenInteger: Determines if a element represents an even integral number (确定元素是否为偶数整数).
+        /// <inheritdoc cref="IsEvenInteger(double)"/>
+        /// <seealso cref="float.IsEvenInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(float value) {
+#if NET7_0_OR_GREATER
+            return IsEvenInteger_Bcl(value);
+#else
+            return IsEvenInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <summary>
+        /// Determines if a element represents an even integral number (确定元素是否为偶数整数).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value is even integral number, otherwise is <c>false</c> (如果值是偶数整数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsEvenInteger(TSelf)"/>
+        /// <seealso cref="double.IsEvenInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(double value) {
+#if NET7_0_OR_GREATER
+            return IsEvenInteger_Bcl(value);
+#else
+            return IsEvenInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(double)"/>
+        /// <seealso cref="sbyte.IsEvenInteger"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(sbyte value) {
+#if NET7_0_OR_GREATER
+            return IsEvenInteger_Bcl(value);
+#else
+            return IsEvenInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(double)"/>
+        /// <seealso cref="byte.IsEvenInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(byte value) {
+#if NET7_0_OR_GREATER
+            return IsEvenInteger_Bcl(value);
+#else
+            return IsEvenInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(double)"/>
+        /// <seealso cref="short.IsEvenInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(short value) {
+#if NET7_0_OR_GREATER
+            return IsEvenInteger_Bcl(value);
+#else
+            return IsEvenInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(double)"/>
+        /// <seealso cref="ushort.IsEvenInteger"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(ushort value) {
+#if NET7_0_OR_GREATER
+            return IsEvenInteger_Bcl(value);
+#else
+            return IsEvenInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(double)"/>
+        /// <seealso cref="int.IsEvenInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(int value) {
+#if NET7_0_OR_GREATER
+            return IsEvenInteger_Bcl(value);
+#else
+            return IsEvenInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(double)"/>
+        /// <seealso cref="uint.IsEvenInteger"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(uint value) {
+#if NET7_0_OR_GREATER
+            return IsEvenInteger_Bcl(value);
+#else
+            return IsEvenInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(double)"/>
+        /// <seealso cref="long.IsEvenInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(long value) {
+#if NET7_0_OR_GREATER
+            return IsEvenInteger_Bcl(value);
+#else
+            return IsEvenInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(double)"/>
+        /// <seealso cref="ulong.IsEvenInteger"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(ulong value) {
+#if NET7_0_OR_GREATER
+            return IsEvenInteger_Bcl(value);
+#else
+            return IsEvenInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+#if NET7_0_OR_GREATER
+        /// <inheritdoc cref="IsEvenInteger(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bcl(float value) {
+            return float.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bcl(double value) {
+            return double.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bcl(sbyte value) {
+            return sbyte.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bcl(byte value) {
+            return byte.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bcl(short value) {
+            return short.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(ushort)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bcl(ushort value) {
+            return ushort.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bcl(int value) {
+            return int.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(uint)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bcl(uint value) {
+            return uint.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bcl(long value) {
+            return long.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(ulong)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bcl(ulong value) {
+            return ulong.IsEvenInteger(value);
+        }
+#endif // NET7_0_OR_GREATER
+
+        /// <inheritdoc cref="IsEvenInteger(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bit(float value) {
+            float valueHalf = value * 0.5f;
+            float valueHalfTrun = MathIFloatingPoint.Truncate(valueHalf);
+            bool halfEqual = valueHalf == valueHalfTrun;
+            bool rt = IsInteger(valueHalf) && halfEqual;
+            return rt;
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bit(double value) {
+            double valueHalf = value * 0.5;
+            double valueHalfTrun = Math.Truncate(valueHalf);
+            bool halfEqual = valueHalf == valueHalfTrun;
+            bool rt = IsInteger(valueHalf) && halfEqual;
+            return rt;
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bit(sbyte value) {
+            return 0 == (value & 1);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bit(byte value) {
+            return 0 == (value & 1);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bit(short value) {
+            return 0 == (value & 1);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(ushort)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bit(ushort value) {
+            return 0 == (value & 1);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bit(int value) {
+            return 0 == (value & 1);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(uint)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bit(uint value) {
+            return 0 == (value & 1);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bit(long value) {
+            return 0L == (value & 1);
+        }
+
+        /// <inheritdoc cref="IsEvenInteger(ulong)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bit(ulong value) {
+            return 0LU == (value & 1);
+        }
+
 
         /// <inheritdoc cref="IsFinite(double)"/>
         /// <seealso cref="float.IsFinite"/>

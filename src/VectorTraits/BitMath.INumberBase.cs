@@ -9,6 +9,71 @@ namespace Zyl.VectorTraits {
     // Referenced from generic math (参考了泛型数学): https://learn.microsoft.com/en-us/dotnet/standard/generics/math
     partial class BitMath {
 
+        /// <inheritdoc cref="MathINumberBase.IsEvenInteger(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(float value) {
+            return MathINumberBase.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsEvenInteger(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(double value) {
+            return MathINumberBase.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsEvenInteger(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(sbyte value) {
+            return MathINumberBase.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsEvenInteger(byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(byte value) {
+            return MathINumberBase.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsEvenInteger(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(short value) {
+            return MathINumberBase.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsEvenInteger(ushort)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(ushort value) {
+            return MathINumberBase.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsEvenInteger(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(int value) {
+            return MathINumberBase.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsEvenInteger(uint)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(uint value) {
+            return MathINumberBase.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsEvenInteger(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(long value) {
+            return MathINumberBase.IsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsEvenInteger(ulong)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(ulong value) {
+            return MathINumberBase.IsEvenInteger(value);
+        }
+
+
         /// <inheritdoc cref="MathINumberBase.IsFinite(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsFinite(float value) {
