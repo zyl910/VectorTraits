@@ -1371,5 +1371,262 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
 
+        /// <inheritdoc cref="IsZero(double)"/>
+        /// <seealso cref="float.IsZero"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(float value) {
+#if NET7_0_OR_GREATER
+            return IsZero_Bcl(value);
+#else
+            return IsZero_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <summary>
+        /// Determines if a element represents an even integral number (确定元素是否为偶数整数).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value is even integral number, otherwise is <c>false</c> (如果值是偶数整数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsZero(TSelf)"/>
+        /// <seealso cref="double.IsZero"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(double value) {
+#if NET7_0_OR_GREATER
+            return IsZero_Bcl(value);
+#else
+            return IsZero_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsZero(double)"/>
+        /// <seealso cref="sbyte.IsZero"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(sbyte value) {
+#if NET7_0_OR_GREATER
+            return IsZero_Bcl(value);
+#else
+            return IsZero_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsZero(double)"/>
+        /// <seealso cref="byte.IsZero"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(byte value) {
+#if NET7_0_OR_GREATER
+            return IsZero_Bcl(value);
+#else
+            return IsZero_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsZero(double)"/>
+        /// <seealso cref="short.IsZero"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(short value) {
+#if NET7_0_OR_GREATER
+            return IsZero_Bcl(value);
+#else
+            return IsZero_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsZero(double)"/>
+        /// <seealso cref="ushort.IsZero"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(ushort value) {
+#if NET7_0_OR_GREATER
+            return IsZero_Bcl(value);
+#else
+            return IsZero_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsZero(double)"/>
+        /// <seealso cref="int.IsZero"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(int value) {
+#if NET7_0_OR_GREATER
+            return IsZero_Bcl(value);
+#else
+            return IsZero_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsZero(double)"/>
+        /// <seealso cref="uint.IsZero"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(uint value) {
+#if NET7_0_OR_GREATER
+            return IsZero_Bcl(value);
+#else
+            return IsZero_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsZero(double)"/>
+        /// <seealso cref="long.IsZero"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(long value) {
+#if NET7_0_OR_GREATER
+            return IsZero_Bcl(value);
+#else
+            return IsZero_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsZero(double)"/>
+        /// <seealso cref="ulong.IsZero"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(ulong value) {
+#if NET7_0_OR_GREATER
+            return IsZero_Bcl(value);
+#else
+            return IsZero_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+#if NET7_0_OR_GREATER
+        /// <inheritdoc cref="IsZero(double)"/>
+        /// <typeparam name="T">Target type (目标类型).</typeparam>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static bool IsZero_Generic<T>(T value) where T : INumberBase<T> {
+            return T.IsZero(value);
+        }
+
+        /// <inheritdoc cref="IsZero(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bcl(float value) {
+            return IsZero_Generic(value);
+        }
+
+        /// <inheritdoc cref="IsZero(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bcl(double value) {
+            return IsZero_Generic(value);
+        }
+
+        /// <inheritdoc cref="IsZero(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bcl(sbyte value) {
+            return IsZero_Generic(value);
+        }
+
+        /// <inheritdoc cref="IsZero(byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bcl(byte value) {
+            return IsZero_Generic(value);
+        }
+
+        /// <inheritdoc cref="IsZero(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bcl(short value) {
+            return IsZero_Generic(value);
+        }
+
+        /// <inheritdoc cref="IsZero(ushort)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bcl(ushort value) {
+            return IsZero_Generic(value);
+        }
+
+        /// <inheritdoc cref="IsZero(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bcl(int value) {
+            return IsZero_Generic(value);
+        }
+
+        /// <inheritdoc cref="IsZero(uint)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bcl(uint value) {
+            return IsZero_Generic(value);
+        }
+
+        /// <inheritdoc cref="IsZero(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bcl(long value) {
+            return IsZero_Generic(value);
+        }
+
+        /// <inheritdoc cref="IsZero(ulong)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bcl(ulong value) {
+            return IsZero_Generic(value);
+        }
+#endif // NET7_0_OR_GREATER
+
+        /// <inheritdoc cref="IsZero(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bit(float value) {
+            return 0 == value;
+        }
+
+        /// <inheritdoc cref="IsZero(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bit(double value) {
+            return 0 == value;
+        }
+
+        /// <inheritdoc cref="IsZero(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bit(sbyte value) {
+            return 0 == value;
+        }
+
+        /// <inheritdoc cref="IsZero(byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bit(byte value) {
+            return 0 == value;
+        }
+
+        /// <inheritdoc cref="IsZero(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bit(short value) {
+            return 0 == value;
+        }
+
+        /// <inheritdoc cref="IsZero(ushort)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bit(ushort value) {
+            return 0 == value;
+        }
+
+        /// <inheritdoc cref="IsZero(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bit(int value) {
+            return 0 == value;
+        }
+
+        /// <inheritdoc cref="IsZero(uint)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bit(uint value) {
+            return 0 == value;
+        }
+
+        /// <inheritdoc cref="IsZero(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bit(long value) {
+            return 0 == value;
+        }
+
+        /// <inheritdoc cref="IsZero(ulong)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bit(ulong value) {
+            return 0 == value;
+        }
+
+
     }
 }

@@ -441,5 +441,48 @@ namespace Zyl.VectorTraits.Tests.Numerics {
             }
         }
 
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void IsZeroTest<T>(T src) where T : struct {
+            T[] samples = new T[12];
+            samples[0] = default;
+            samples[1] = Scalars<T>.NegativeZero;
+            samples[2] = src;
+            samples[3] = Scalars<T>.MaxValue;
+            samples[4] = Scalars<T>.MinValue;
+            samples[5] = Scalars<T>.PositiveInfinity;
+            samples[6] = Scalars<T>.NegativeInfinity;
+            samples[7] = Scalars<T>.NaN;
+            samples[8] = Scalars<T>.V1;
+            samples[9] = Scalars<T>.V2;
+            samples[10] = Scalars<T>.V_1;
+            samples[11] = Scalars<T>.V_2;
+            // run.
+            bool allowLog = false;
+            for (int i = 0; i < samples.Length; ++i) {
+                T x = samples[i];
+                bool expected = BitMath.IsZero((dynamic)x);
+                if (allowLog) {
+                    Console.WriteLine("IsZero({0}):\t{1}", x, expected);
+                }
+                // IsZero_Bit.
+                bool dst = MathINumberBase.IsZero_Bit((dynamic)x);
+                Assert.AreEqual(expected, dst, string.Format("IsZero_Bit({0})", x));
+                // IsZero_Bcl.
+#if NET7_0_OR_GREATER
+                dst = MathINumberBase.IsZero_Bcl((dynamic)x);
+                Assert.AreEqual(expected, dst, string.Format("IsZero_Bcl({0})", x));
+#endif // NET7_0_OR_GREATER
+            }
+        }
+
     }
 }

@@ -29,6 +29,19 @@
   </Choose>
 
   <Choose>
+    <When Condition=" $(VisualStudioVersion) &gt;= 17.0 ">
+      <PropertyGroup>
+        <LangVersion>11.0</LangVersion>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <LangVersion>9.0</LangVersion>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+    
+  <Choose>
     <When Condition=" '$(VersionPrefix)' == '' ">
       <PropertyGroup>
         <VersionPrefix>1.0.0</VersionPrefix>
@@ -38,7 +51,6 @@
     
   <PropertyGroup>
     <RootNamespace>Zyl.VectorTraits</RootNamespace>
-    <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <DebugType>portable</DebugType>

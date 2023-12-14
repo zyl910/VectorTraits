@@ -331,5 +331,70 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsSubnormal(value);
         }
 
+
+        /// <inheritdoc cref="MathINumberBase.IsZero(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(float value) {
+            return MathINumberBase.IsZero(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsZero(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(double value) {
+            return MathINumberBase.IsZero(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsZero(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(sbyte value) {
+            return MathINumberBase.IsZero(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsZero(byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(byte value) {
+            return MathINumberBase.IsZero(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsZero(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(short value) {
+            return MathINumberBase.IsZero(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsZero(ushort)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(ushort value) {
+            return MathINumberBase.IsZero(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsZero(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(int value) {
+            return MathINumberBase.IsZero(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsZero(uint)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(uint value) {
+            return MathINumberBase.IsZero(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsZero(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(long value) {
+            return MathINumberBase.IsZero(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsZero(ulong)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(ulong value) {
+            return MathINumberBase.IsZero(value);
+        }
+
     }
 }
