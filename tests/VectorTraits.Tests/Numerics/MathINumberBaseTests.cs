@@ -381,5 +381,34 @@ namespace Zyl.VectorTraits.Tests.Numerics {
             }
         }
 
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        public void IsPositiveInfinityTest<T>(T src) where T : struct {
+            T[] samples = new T[8];
+            samples[0] = default;
+            samples[1] = Scalars<T>.NegativeZero;
+            samples[2] = src;
+            samples[3] = Scalars<T>.MaxValue;
+            samples[4] = Scalars<T>.MinValue;
+            samples[5] = Scalars<T>.PositiveInfinity;
+            samples[6] = Scalars<T>.NegativeInfinity;
+            samples[7] = Scalars<T>.NaN;
+            // run.
+            bool allowLog = false;
+            for (int i = 0; i < samples.Length; ++i) {
+                T x = samples[i];
+                bool expected = BitMath.IsPositiveInfinity((dynamic)x);
+                if (allowLog) {
+                    Console.WriteLine("IsPositiveInfinity({0}):\t{1}", x, expected);
+                }
+                // IsPositiveInfinity_Bit.
+                bool dst = MathINumberBase.IsPositiveInfinity_Bit((dynamic)x);
+                Assert.AreEqual(expected, dst, string.Format("IsPositiveInfinity_Bit({0})", x));
+                // IsPositiveInfinity_Bcl.
+                dst = MathINumberBase.IsPositiveInfinity_Bcl((dynamic)x);
+                Assert.AreEqual(expected, dst, string.Format("IsPositiveInfinity_Bcl({0})", x));
+            }
+        }
+
     }
 }

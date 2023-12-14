@@ -305,5 +305,18 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsPositive(value);
         }
 
+
+        /// <inheritdoc cref="MathINumberBase.IsPositiveInfinity(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositiveInfinity(float value) {
+            return MathINumberBase.IsPositiveInfinity(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsPositiveInfinity(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositiveInfinity(double value) {
+            return MathINumberBase.IsPositiveInfinity(value);
+        }
+
     }
 }

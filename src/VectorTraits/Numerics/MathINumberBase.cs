@@ -1257,5 +1257,49 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
 
+        /// <inheritdoc cref="IsPositiveInfinity(double)"/>
+        /// <seealso cref="float.IsPositiveInfinity"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositiveInfinity(float value) {
+            return IsPositiveInfinity_Bcl(value);
+        }
+
+        /// <summary>
+        /// Determines if a element is positive infinity (确定元素是否为正无穷大).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value is positive infinity, otherwise is <c>false</c> (如果值是正无穷大，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsPositiveInfinity(TSelf)"/>
+        /// <seealso cref="double.IsPositiveInfinity"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositiveInfinity(double value) {
+            return IsPositiveInfinity_Bcl(value);
+        }
+
+        /// <inheritdoc cref="IsPositiveInfinity(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositiveInfinity_Bcl(float value) {
+            return float.IsPositiveInfinity(value);
+        }
+
+        /// <inheritdoc cref="IsPositiveInfinity(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositiveInfinity_Bcl(double value) {
+            return double.IsPositiveInfinity(value);
+        }
+
+        /// <inheritdoc cref="IsPositiveInfinity(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositiveInfinity_Bit(float value) {
+            return value == float.PositiveInfinity;
+        }
+
+        /// <inheritdoc cref="IsPositiveInfinity(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositiveInfinity_Bit(double value) {
+            return value == double.PositiveInfinity;
+        }
+
+
     }
 }
