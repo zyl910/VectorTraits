@@ -10,6 +10,49 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void IsEvenIntegerTest<T>(T src) where T : struct {
+            T[] samples = new T[12];
+            samples[0] = default;
+            samples[1] = Scalars<T>.NegativeZero;
+            samples[2] = src;
+            samples[3] = Scalars<T>.MaxValue;
+            samples[4] = Scalars<T>.MinValue;
+            samples[5] = Scalars<T>.PositiveInfinity;
+            samples[6] = Scalars<T>.NegativeInfinity;
+            samples[7] = Scalars<T>.NaN;
+            samples[8] = Scalars<T>.V1;
+            samples[9] = Scalars<T>.V2;
+            samples[10] = Scalars<T>.V_1;
+            samples[11] = Scalars<T>.V_2;
+            // run.
+            bool allowLog = false;
+            for (int i = 0; i < samples.Length; ++i) {
+                T x = samples[i];
+                bool expected = BitMath.IsEvenInteger((dynamic)x);
+                if (allowLog) {
+                    Console.WriteLine("IsEvenInteger({0}):\t{1}", x, expected);
+                }
+                // IsEvenInteger_Bit.
+                bool dst = MathINumberBase.IsEvenInteger_Bit((dynamic)x);
+                Assert.AreEqual(expected, dst, string.Format("IsEvenInteger_Bit({0})", x));
+                // IsEvenInteger_Bcl.
+#if NET7_0_OR_GREATER
+                dst = MathINumberBase.IsEvenInteger_Bcl((dynamic)x);
+                Assert.AreEqual(expected, dst, string.Format("IsEvenInteger_Bcl({0})", x));
+#endif // NET7_0_OR_GREATER
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
         public void IsFiniteTest<T>(T src) where T : struct {
             T[] samples = new T[8];
             samples[0] = default;
@@ -270,7 +313,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
-        public void IsEvenIntegerTest<T>(T src) where T : struct {
+        public void IsOddIntegerTest<T>(T src) where T : struct {
             T[] samples = new T[12];
             samples[0] = default;
             samples[1] = Scalars<T>.NegativeZero;
@@ -288,17 +331,17 @@ namespace Zyl.VectorTraits.Tests.Numerics {
             bool allowLog = false;
             for (int i = 0; i < samples.Length; ++i) {
                 T x = samples[i];
-                bool expected = BitMath.IsEvenInteger((dynamic)x);
+                bool expected = BitMath.IsOddInteger((dynamic)x);
                 if (allowLog) {
-                    Console.WriteLine("IsEvenInteger({0}):\t{1}", x, expected);
+                    Console.WriteLine("IsOddInteger({0}):\t{1}", x, expected);
                 }
-                // IsEvenInteger_Bit.
-                bool dst = MathINumberBase.IsEvenInteger_Bit((dynamic)x);
-                Assert.AreEqual(expected, dst, string.Format("IsEvenInteger_Bit({0})", x));
-                // IsEvenInteger_Bcl.
+                // IsOddInteger_Bit.
+                bool dst = MathINumberBase.IsOddInteger_Bit((dynamic)x);
+                Assert.AreEqual(expected, dst, string.Format("IsOddInteger_Bit({0})", x));
+                // IsOddInteger_Bcl.
 #if NET7_0_OR_GREATER
-                dst = MathINumberBase.IsEvenInteger_Bcl((dynamic)x);
-                Assert.AreEqual(expected, dst, string.Format("IsEvenInteger_Bcl({0})", x));
+                dst = MathINumberBase.IsOddInteger_Bcl((dynamic)x);
+                Assert.AreEqual(expected, dst, string.Format("IsOddInteger_Bcl({0})", x));
 #endif // NET7_0_OR_GREATER
             }
         }

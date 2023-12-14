@@ -202,5 +202,70 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsNormal(value);
         }
 
+
+        /// <inheritdoc cref="MathINumberBase.IsOddInteger(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(float value) {
+            return MathINumberBase.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsOddInteger(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(double value) {
+            return MathINumberBase.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsOddInteger(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(sbyte value) {
+            return MathINumberBase.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsOddInteger(byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(byte value) {
+            return MathINumberBase.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsOddInteger(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(short value) {
+            return MathINumberBase.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsOddInteger(ushort)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(ushort value) {
+            return MathINumberBase.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsOddInteger(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(int value) {
+            return MathINumberBase.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsOddInteger(uint)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(uint value) {
+            return MathINumberBase.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsOddInteger(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(long value) {
+            return MathINumberBase.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsOddInteger(ulong)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(ulong value) {
+            return MathINumberBase.IsOddInteger(value);
+        }
+
     }
 }

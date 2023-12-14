@@ -208,7 +208,7 @@ namespace Zyl.VectorTraits.Numerics {
             float valueHalf = value * 0.5f;
             float valueHalfTrun = MathIFloatingPoint.Truncate(valueHalf);
             bool halfEqual = valueHalf == valueHalfTrun;
-            bool rt = IsInteger(valueHalf) && halfEqual;
+            bool rt = IsInteger(value) && halfEqual;
             return rt;
         }
 
@@ -218,7 +218,7 @@ namespace Zyl.VectorTraits.Numerics {
             double valueHalf = value * 0.5;
             double valueHalfTrun = Math.Truncate(valueHalf);
             bool halfEqual = valueHalf == valueHalfTrun;
-            bool rt = IsInteger(valueHalf) && halfEqual;
+            bool rt = IsInteger(value) && halfEqual;
             return rt;
         }
 
@@ -264,14 +264,14 @@ namespace Zyl.VectorTraits.Numerics {
         /// <inheritdoc cref="IsEvenInteger(long)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEvenInteger_Bit(long value) {
-            return 0L == (value & 1);
+            return 0 == (value & 1);
         }
 
         /// <inheritdoc cref="IsEvenInteger(ulong)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEvenInteger_Bit(ulong value) {
-            return 0LU == (value & 1);
+            return 0 == (value & 1);
         }
 
 
@@ -846,6 +846,265 @@ namespace Zyl.VectorTraits.Numerics {
             bits &= exponentMask;
             bool rt = (bits > 0) && (exponentMask > bits);
             return rt;
+        }
+
+
+        /// <inheritdoc cref="IsOddInteger(double)"/>
+        /// <seealso cref="float.IsOddInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(float value) {
+#if NET7_0_OR_GREATER
+            return IsOddInteger_Bcl(value);
+#else
+            return IsOddInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <summary>
+        /// Determines if a element represents an odd integral number (确定元素是否为奇数整数).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value is odd integral number, otherwise is <c>false</c> (如果值是奇数整数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsOddInteger(TSelf)"/>
+        /// <seealso cref="double.IsOddInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(double value) {
+#if NET7_0_OR_GREATER
+            return IsOddInteger_Bcl(value);
+#else
+            return IsOddInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsOddInteger(double)"/>
+        /// <seealso cref="sbyte.IsOddInteger"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(sbyte value) {
+#if NET7_0_OR_GREATER
+            return IsOddInteger_Bcl(value);
+#else
+            return IsOddInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsOddInteger(double)"/>
+        /// <seealso cref="byte.IsOddInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(byte value) {
+#if NET7_0_OR_GREATER
+            return IsOddInteger_Bcl(value);
+#else
+            return IsOddInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsOddInteger(double)"/>
+        /// <seealso cref="short.IsOddInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(short value) {
+#if NET7_0_OR_GREATER
+            return IsOddInteger_Bcl(value);
+#else
+            return IsOddInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsOddInteger(double)"/>
+        /// <seealso cref="ushort.IsOddInteger"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(ushort value) {
+#if NET7_0_OR_GREATER
+            return IsOddInteger_Bcl(value);
+#else
+            return IsOddInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsOddInteger(double)"/>
+        /// <seealso cref="int.IsOddInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(int value) {
+#if NET7_0_OR_GREATER
+            return IsOddInteger_Bcl(value);
+#else
+            return IsOddInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsOddInteger(double)"/>
+        /// <seealso cref="uint.IsOddInteger"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(uint value) {
+#if NET7_0_OR_GREATER
+            return IsOddInteger_Bcl(value);
+#else
+            return IsOddInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsOddInteger(double)"/>
+        /// <seealso cref="long.IsOddInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(long value) {
+#if NET7_0_OR_GREATER
+            return IsOddInteger_Bcl(value);
+#else
+            return IsOddInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="IsOddInteger(double)"/>
+        /// <seealso cref="ulong.IsOddInteger"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(ulong value) {
+#if NET7_0_OR_GREATER
+            return IsOddInteger_Bcl(value);
+#else
+            return IsOddInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
+#if NET7_0_OR_GREATER
+        /// <inheritdoc cref="IsOddInteger(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bcl(float value) {
+            return float.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bcl(double value) {
+            return double.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bcl(sbyte value) {
+            return sbyte.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bcl(byte value) {
+            return byte.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bcl(short value) {
+            return short.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(ushort)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bcl(ushort value) {
+            return ushort.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bcl(int value) {
+            return int.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(uint)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bcl(uint value) {
+            return uint.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bcl(long value) {
+            return long.IsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(ulong)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bcl(ulong value) {
+            return ulong.IsOddInteger(value);
+        }
+#endif // NET7_0_OR_GREATER
+
+        /// <inheritdoc cref="IsOddInteger(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bit(float value) {
+            float valueHalf = value * 0.5f;
+            float valueHalfTrun = MathIFloatingPoint.Truncate(valueHalf);
+            bool halfEqual = valueHalf == valueHalfTrun;
+            bool rt = IsInteger(value) && !halfEqual;
+            return rt;
+        }
+
+        /// <inheritdoc cref="IsOddInteger(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bit(double value) {
+            double valueHalf = value * 0.5;
+            double valueHalfTrun = Math.Truncate(valueHalf);
+            bool halfEqual = valueHalf == valueHalfTrun;
+            //Console.WriteLine(VectorTextUtil.Format("halfEqual({0}):\t{1}", value, halfEqual));
+            bool rt = IsInteger(value) && !halfEqual;
+            return rt;
+        }
+
+        /// <inheritdoc cref="IsOddInteger(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bit(sbyte value) {
+            return 0 != (value & 1);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bit(byte value) {
+            return 0 != (value & 1);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bit(short value) {
+            return 0 != (value & 1);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(ushort)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bit(ushort value) {
+            return 0 != (value & 1);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bit(int value) {
+            return 0 != (value & 1);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(uint)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bit(uint value) {
+            return 0 != (value & 1);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bit(long value) {
+            return 0 != (value & 1);
+        }
+
+        /// <inheritdoc cref="IsOddInteger(ulong)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bit(ulong value) {
+            return 0 != (value & 1);
         }
 
 
