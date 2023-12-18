@@ -9,6 +9,38 @@ namespace Zyl.VectorTraits {
     // Referenced from generic math (参考了泛型数学): https://learn.microsoft.com/en-us/dotnet/standard/generics/math
     partial class BitMath {
 
+        /// <inheritdoc cref="MathINumberBase.Abs(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static sbyte Abs(sbyte value) {
+            return MathINumberBase.Abs(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.Abs(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static short Abs(short value) {
+            return MathINumberBase.Abs(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.Abs(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Abs(int value) {
+            return MathINumberBase.Abs(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.Abs(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long Abs(long value) {
+            return MathINumberBase.Abs(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.Abs(nint)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static nint Abs(nint value) {
+            return MathINumberBase.Abs(value);
+        }
+
+
         /// <inheritdoc cref="MathINumberBase.IsEvenInteger(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEvenInteger(float value) {

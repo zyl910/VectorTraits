@@ -19,65 +19,6 @@ namespace Zyl.VectorTraits {
         // == My ==
 
         /// <summary>
-        /// Returns the absolute value of a 8-bit signed integer (返回 8 位有符号整数的绝对值). No exception, <c>Abs(MinValue) := MinValue</c> .
-        /// </summary>
-        /// <param name="value">A number (一个数值).</param>
-        /// <returns>Returns the absolute value (返回绝对值)</returns>
-        /// <seealso cref="Math.Abs(sbyte)"/>
-        [CLSCompliant(false)]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static sbyte Abs(sbyte value) {
-            return (sbyte)Abs((int)value);
-        }
-
-        /// <summary>
-        /// Returns the absolute value of a 16-bit signed integer (返回 16 位有符号整数的绝对值). No exception, <c>Abs(MinValue) := MinValue</c> .
-        /// </summary>
-        /// <param name="value">A number (一个数值).</param>
-        /// <returns>Returns the absolute value (返回绝对值)</returns>
-        /// <seealso cref="Math.Abs(short)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static short Abs(short value) {
-            return (short)Abs((int)value);
-        }
-
-        /// <summary>
-        /// Returns the absolute value of a 32-bit signed integer (返回 32 位有符号整数的绝对值). No exception, <c>Abs(MinValue) := MinValue</c> .
-        /// </summary>
-        /// <param name="value">A number (一个数值).</param>
-        /// <returns>Returns the absolute value (返回绝对值)</returns>
-        /// <seealso cref="Math.Abs(int)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int Abs(int value) {
-            int mask = value >> 31; //ToInt32Mask(0 > value);
-            return (value ^ mask) - mask; // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
-        }
-
-        /// <summary>
-        /// Returns the absolute value of a 64-bit signed integer (返回 64 位有符号整数的绝对值). No exception, <c>Abs(MinValue) := MinValue</c> .
-        /// </summary>
-        /// <param name="value">A number (一个数值).</param>
-        /// <returns>Returns the absolute value (返回绝对值)</returns>
-        /// <seealso cref="Math.Abs(long)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static long Abs(long value) {
-            long mask = value >> 63; //ToInt32Mask(0 > value);
-            return (value ^ mask) - mask; // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
-        }
-
-        /// <summary>
-        /// Returns the absolute value of a native signed integer (返回本机有符号整数的绝对值). No exception, <c>Abs(MinValue) := MinValue</c> .
-        /// </summary>
-        /// <param name="value">A number (一个数值).</param>
-        /// <returns>Returns the absolute value (返回绝对值)</returns>
-        /// <seealso cref="Math.Abs(nint)"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static nint Abs(nint value) {
-            nint mask = (nint)(((long)value) >> 63); //ToInt32Mask(0 > value);
-            return (value ^ mask) - mask; // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
-        }
-
-        /// <summary>
         /// Produces the full product of signed big numbers (产生有符号大数字的完整乘积) (`w = u * v`). Use little endian to store (使用小端存储).
         /// </summary>
         /// <param name="w">The full product of the specified numbers (指定数字的完整乘积).</param>
