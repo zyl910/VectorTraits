@@ -3,23 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Zyl.VectorTraits;
+using Zyl.VectorTraits.Numerics;
 
-namespace Zyl.VectorTraits.Tests {
-    [Obsolete("It has been instead by MathIRootFunctionsTests class.")]
+namespace Zyl.VectorTraits.Tests.Numerics {
     [TestFixture()]
-    internal class BitMathTests_IRootFunctions {
+    internal class MathIFloatingPointTests {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
-        [TestCase((sbyte)3)]
-        [TestCase((byte)4)]
-        [TestCase((short)5)]
-        [TestCase((ushort)6)]
-        [TestCase((int)7)]
-        [TestCase((uint)8)]
-        [TestCase((long)9)]
-        [TestCase((ulong)10)]
-        public void SqrtTest<T>(T src) where T : struct {
+        public void TruncateTest<T>(T src) where T : struct {
             T[] samples = new T[10];
             samples[0] = default;
             samples[1] = src;
@@ -36,9 +28,9 @@ namespace Zyl.VectorTraits.Tests {
             for (int i = 0; i < samples.Length; ++i) {
                 T x = samples[i];
                 double xDouble = Scalars.GetDoubleFrom(x);
-                double expectedDouble = Math.Sqrt(xDouble);
+                double expectedDouble = Math.Truncate(xDouble);
                 T expected = Scalars.GetByDouble<T>(expectedDouble);
-                T dst = BitMath.Sqrt((dynamic)x);
+                T dst = MathIFloatingPoint.Truncate((dynamic)x);
                 bool showLog = allowLog;
                 if (!showLog && !expected.Equals(dst)) {
                     if (showNotEquals) {
@@ -46,9 +38,9 @@ namespace Zyl.VectorTraits.Tests {
                     }
                 }
                 if (showLog) {
-                    Console.WriteLine("Sqrt({0}):\t{1}\t// {2}", x, dst, expected);
+                    Console.WriteLine("Truncate({0}):\t{1}\t// {2}", x, dst, expected);
                 } else {
-                    Assert.AreEqual(expected, dst, string.Format("Sqrt({0})", x));
+                    Assert.AreEqual(expected, dst, string.Format("Truncate({0})", x));
                 }
             }
         }

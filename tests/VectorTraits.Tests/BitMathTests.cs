@@ -5,6 +5,7 @@ using System.Text;
 using Zyl.VectorTraits;
 
 namespace Zyl.VectorTraits.Tests {
+    [Obsolete("It has been instead by Zyl.VectorTraits.Tests.Numerics namespace.")]
     [TestFixture()]
     public class BitMathTests {
         [Test()]

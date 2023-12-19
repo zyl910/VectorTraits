@@ -8,6 +8,38 @@ using Zyl.VectorTraits.Numerics;
 namespace Zyl.VectorTraits.Tests.Numerics {
     internal class MathINumberBaseTests {
 
+        [TestCase((sbyte)3)]
+        [TestCase((short)5)]
+        [TestCase((int)7)]
+        [TestCase((long)9)]
+        public void AbsTest<T>(T src) where T : struct {
+            T[] samples = new T[10];
+            samples[0] = default;
+            samples[1] = src;
+            samples[2] = Scalars<T>.MinValue;
+            samples[3] = Scalars<T>.MaxValue;
+            for (int i = 4; i < samples.Length; ++i) {
+                samples[i] = Scalars.GetByDouble<T>(-i);
+            }
+            // run.
+            for (int i = 0; i < samples.Length; ++i) {
+                T x = samples[i];
+                T dst = MathINumberBase.Abs((dynamic)x);
+                T expected = default;
+                bool expectedError = false;
+                try {
+                    expected = Math.Abs((dynamic)x);
+                } catch (Exception) {
+                    expectedError = true;
+                }
+                if (expectedError) {
+                    Console.WriteLine("Abs({0}):\t{1}", x, dst);
+                } else {
+                    Assert.AreEqual(expected, dst, string.Format("Abs({0})", x));
+                }
+            }
+        }
+
         [TestCase((float)1)]
         [TestCase((double)2)]
         [TestCase((sbyte)3)]
