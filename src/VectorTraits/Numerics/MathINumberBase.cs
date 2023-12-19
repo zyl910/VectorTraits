@@ -104,6 +104,19 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NET7_0_OR_GREATER
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsEvenInteger(double)"/>
+        /// <seealso cref="Half.IsEvenInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(Half value) {
+#if NET7_0_OR_GREATER
+            return IsEvenInteger_Bcl(value);
+#else
+            return IsEvenInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
+
         /// <inheritdoc cref="IsEvenInteger(double)"/>
         /// <seealso cref="sbyte.IsEvenInteger"/>
         [CLSCompliant(false)]
@@ -209,6 +222,12 @@ namespace Zyl.VectorTraits.Numerics {
             return double.IsEvenInteger(value);
         }
 
+        /// <inheritdoc cref="IsEvenInteger(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bcl(Half value) {
+            return Half.IsEvenInteger(value);
+        }
+
         /// <inheritdoc cref="IsEvenInteger(sbyte)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -281,6 +300,18 @@ namespace Zyl.VectorTraits.Numerics {
             bool rt = IsInteger(value) && halfEqual;
             return rt;
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsEvenInteger(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger_Bit(Half value) {
+            Half valueHalf = (Half)((float)value * 0.5f);
+            Half valueHalfTrun = MathIFloatingPoint.Truncate(valueHalf);
+            bool halfEqual = valueHalf == valueHalfTrun;
+            bool rt = IsInteger(value) && halfEqual;
+            return rt;
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IsEvenInteger(sbyte)"/>
         [CLSCompliant(false)]
@@ -362,6 +393,19 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsFinite(double)"/>
+        /// <seealso cref="Half.IsFinite"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsFinite(Half value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsFinite_Bcl(value);
+#else
+            return IsFinite_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
+
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         /// <inheritdoc cref="IsFinite(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -375,6 +419,14 @@ namespace Zyl.VectorTraits.Numerics {
             return double.IsFinite(value);
         }
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsFinite(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsFinite_Bcl(Half value) {
+            return Half.IsFinite(value);
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IsFinite(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -397,6 +449,19 @@ namespace Zyl.VectorTraits.Numerics {
             bool rt = exponentMask != (bits & exponentMask);
             return rt;
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsFinite(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsFinite_Bit(Half value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const short exponentMask = ScalarConstants.Half_ExponentMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            short bits = MathBitConverter.HalfToInt16Bits(value);
+            bool rt = exponentMask != (bits & exponentMask);
+            return rt;
+        }
+#endif // NET5_0_OR_GREATER
 
 
         /// <inheritdoc cref="IsInfinity(double)"/>
@@ -426,6 +491,19 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsInfinity(double)"/>
+        /// <seealso cref="Half.IsInfinity"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinity(Half value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsInfinity_Bcl(value);
+#else
+            return IsInfinity_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
+
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         /// <inheritdoc cref="IsInfinity(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -439,6 +517,14 @@ namespace Zyl.VectorTraits.Numerics {
             return double.IsInfinity(value);
         }
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsInfinity(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinity_Bcl(Half value) {
+            return Half.IsInfinity(value);
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IsInfinity(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -463,6 +549,20 @@ namespace Zyl.VectorTraits.Numerics {
             bool rt = (bits & nonSignMask) == exponentMask;
             return rt;
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsInfinity(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinity_Bit(Half value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const short exponentMask = ScalarConstants.Half_ExponentMask;
+            const short nonSignMask = ScalarConstants.Half_NonSignMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            short bits = MathBitConverter.HalfToInt16Bits(value);
+            bool rt = (bits & nonSignMask) == exponentMask;
+            return rt;
+        }
+#endif // NET5_0_OR_GREATER
 
 
         /// <inheritdoc cref="IsInfinityOrNaN(double)"/>
@@ -491,6 +591,19 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsInfinityOrNaN(double)"/>
+        /// <seealso cref="Half.IsInfinityOrNaN"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinityOrNaN(Half value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsInfinityOrNaN_Bcl(value);
+#else
+            return IsInfinityOrNaN_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
+
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         /// <inheritdoc cref="IsInfinityOrNaN(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -504,6 +617,14 @@ namespace Zyl.VectorTraits.Numerics {
             return !double.IsFinite(value);
         }
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsInfinityOrNaN(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinityOrNaN_Bcl(Half value) {
+            return !Half.IsFinite(value);
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IsInfinityOrNaN(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -526,6 +647,19 @@ namespace Zyl.VectorTraits.Numerics {
             bool rt = exponentMask == (bits & exponentMask);
             return rt;
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsInfinityOrNaN(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinityOrNaN_Bit(Half value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const short exponentMask = ScalarConstants.Half_ExponentMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            short bits = MathBitConverter.HalfToInt16Bits(value);
+            bool rt = exponentMask == (bits & exponentMask);
+            return rt;
+        }
+#endif // NET5_0_OR_GREATER
 
 
         /// <inheritdoc cref="IsInteger(double)"/>
@@ -555,6 +689,19 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NET7_0_OR_GREATER
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsInteger(double)"/>
+        /// <seealso cref="Half.IsInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger(Half value) {
+#if NET7_0_OR_GREATER
+            return IsInteger_Bcl(value);
+#else
+            return IsInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
+
 #if NET7_0_OR_GREATER
         /// <inheritdoc cref="IsInteger(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -566,6 +713,12 @@ namespace Zyl.VectorTraits.Numerics {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInteger_Bcl(double value) {
             return double.IsInteger(value);
+        }
+
+        /// <inheritdoc cref="IsInteger(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger_Bcl(Half value) {
+            return Half.IsInteger(value);
         }
 #endif // NET7_0_OR_GREATER
 
@@ -582,6 +735,15 @@ namespace Zyl.VectorTraits.Numerics {
             double valueTrun = Math.Truncate(value);
             return IsFinite(value) && (value == valueTrun);
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsInteger(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger_Bit(Half value) {
+            Half valueTrun = MathIFloatingPoint.Truncate(value);
+            return IsFinite(value) && (value == valueTrun);
+        }
+#endif // NET5_0_OR_GREATER
 
 
         /// <inheritdoc cref="IsNaN(double)"/>
@@ -603,6 +765,15 @@ namespace Zyl.VectorTraits.Numerics {
             return IsNaN_Bcl(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNaN(double)"/>
+        /// <seealso cref="Half.IsNaN"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNaN(Half value) {
+            return IsNaN_Bcl(value);
+        }
+#endif // NET5_0_OR_GREATER
+
         /// <inheritdoc cref="IsNaN(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNaN_Bcl(float value) {
@@ -615,12 +786,20 @@ namespace Zyl.VectorTraits.Numerics {
             return double.IsNaN(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNaN(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNaN_Bcl(Half value) {
+            return Half.IsNaN(value);
+        }
+#endif // NET5_0_OR_GREATER
+
         /// <inheritdoc cref="IsNaN(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNaN_Bit(float value) {
-#pragma warning disable CS1718
+#pragma warning disable CS1718 // Comparison made to same variable; did you mean to compare something else?
             return value != value;
-#pragma warning restore CS1718
+#pragma warning restore CS1718 // Comparison made to same variable; did you mean to compare something else?
         }
 
         /// <inheritdoc cref="IsNaN(double)"/>
@@ -628,10 +807,20 @@ namespace Zyl.VectorTraits.Numerics {
         public static bool IsNaN_Bit(double value) {
             // A NaN will never equal itself so this is an
             // easy and efficient way to check for NaN.
-#pragma warning disable CS1718
+#pragma warning disable CS1718 // Comparison made to same variable; did you mean to compare something else?
             return value != value;
-#pragma warning restore CS1718
+#pragma warning restore CS1718 // Comparison made to same variable; did you mean to compare something else?
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNaN(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNaN_Bit(Half value) {
+#pragma warning disable CS1718 // Comparison made to same variable; did you mean to compare something else?
+            return value != value;
+#pragma warning restore CS1718 // Comparison made to same variable; did you mean to compare something else?
+        }
+#endif // NET5_0_OR_GREATER
 
 
         /// <inheritdoc cref="IsNegative(double)"/>
@@ -660,6 +849,19 @@ namespace Zyl.VectorTraits.Numerics {
             return IsNegative_Bit(value);
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNegative(double)"/>
+        /// <seealso cref="Half.IsNegative"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative(Half value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsNegative_Bcl(value);
+#else
+            return IsNegative_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IsNegative(double)"/>
         /// <seealso cref="sbyte.IsNegative"/>
@@ -719,6 +921,14 @@ namespace Zyl.VectorTraits.Numerics {
             return double.IsNegative(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNegative(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bcl(Half value) {
+            return Half.IsNegative(value);
+        }
+#endif // NET5_0_OR_GREATER
+
         /// <inheritdoc cref="IsNegative(sbyte)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -773,6 +983,14 @@ namespace Zyl.VectorTraits.Numerics {
             return BitConverter.DoubleToInt64Bits(value) < 0;
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNegative(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bit(Half value) {
+            return MathBitConverter.HalfToInt16Bits(value) < 0;
+        }
+#endif // NET5_0_OR_GREATER
+
         /// <inheritdoc cref="IsNegative(sbyte)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -818,6 +1036,15 @@ namespace Zyl.VectorTraits.Numerics {
             return IsNegativeInfinity_Bcl(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNegativeInfinity(double)"/>
+        /// <seealso cref="Half.IsNegativeInfinity"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeInfinity(Half value) {
+            return IsNegativeInfinity_Bcl(value);
+        }
+#endif // NET5_0_OR_GREATER
+
         /// <inheritdoc cref="IsNegativeInfinity(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNegativeInfinity_Bcl(float value) {
@@ -830,6 +1057,14 @@ namespace Zyl.VectorTraits.Numerics {
             return double.IsNegativeInfinity(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNegativeInfinity(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeInfinity_Bcl(Half value) {
+            return Half.IsNegativeInfinity(value);
+        }
+#endif // NET5_0_OR_GREATER
+
         /// <inheritdoc cref="IsNegativeInfinity(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNegativeInfinity_Bit(float value) {
@@ -841,6 +1076,14 @@ namespace Zyl.VectorTraits.Numerics {
         public static bool IsNegativeInfinity_Bit(double value) {
             return value == double.NegativeInfinity;
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNegativeInfinity(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeInfinity_Bit(Half value) {
+            return value == Half.NegativeInfinity;
+        }
+#endif // NET5_0_OR_GREATER
 
 
         /// <inheritdoc cref="IsNormal(double)"/>
@@ -870,6 +1113,19 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNormal(double)"/>
+        /// <seealso cref="Half.IsNormal"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNormal(Half value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsNormal_Bcl(value);
+#else
+            return IsNormal_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
+
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         /// <inheritdoc cref="IsNormal(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -883,6 +1139,14 @@ namespace Zyl.VectorTraits.Numerics {
             return double.IsNormal(value);
         }
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNormal(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNormal_Bcl(Half value) {
+            return Half.IsNormal(value);
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IsNormal(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -907,6 +1171,20 @@ namespace Zyl.VectorTraits.Numerics {
             bool rt = (bits > 0) && (exponentMask > bits);
             return rt;
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNormal(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNormal_Bit(Half value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const short exponentMask = ScalarConstants.Half_ExponentMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            short bits = MathBitConverter.HalfToInt16Bits(value);
+            bits &= exponentMask;
+            bool rt = (bits > 0) && (exponentMask > bits);
+            return rt;
+        }
+#endif // NET5_0_OR_GREATER
 
 
         /// <inheritdoc cref="IsOddInteger(double)"/>
@@ -935,6 +1213,19 @@ namespace Zyl.VectorTraits.Numerics {
             return IsOddInteger_Bit(value);
 #endif // NET7_0_OR_GREATER
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsOddInteger(double)"/>
+        /// <seealso cref="Half.IsOddInteger"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(Half value) {
+#if NET7_0_OR_GREATER
+            return IsOddInteger_Bcl(value);
+#else
+            return IsOddInteger_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IsOddInteger(double)"/>
         /// <seealso cref="sbyte.IsOddInteger"/>
@@ -1041,6 +1332,14 @@ namespace Zyl.VectorTraits.Numerics {
             return double.IsOddInteger(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsOddInteger(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bcl(Half value) {
+            return Half.IsOddInteger(value);
+        }
+#endif // NET5_0_OR_GREATER
+
         /// <inheritdoc cref="IsOddInteger(sbyte)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1114,6 +1413,18 @@ namespace Zyl.VectorTraits.Numerics {
             bool rt = IsInteger(value) && !halfEqual;
             return rt;
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsOddInteger(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger_Bit(Half value) {
+            Half valueHalf = (Half)((float)value * 0.5f);
+            Half valueHalfTrun = MathIFloatingPoint.Truncate(valueHalf);
+            bool halfEqual = valueHalf == valueHalfTrun;
+            bool rt = IsInteger(value) && !halfEqual;
+            return rt;
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IsOddInteger(sbyte)"/>
         [CLSCompliant(false)]
@@ -1195,6 +1506,19 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NET7_0_OR_GREATER
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsPositive(double)"/>
+        /// <seealso cref="Half.IsPositive"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive(Half value) {
+#if NET7_0_OR_GREATER
+            return IsPositive_Bcl(value);
+#else
+            return IsPositive_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
+
         /// <inheritdoc cref="IsPositive(double)"/>
         /// <seealso cref="sbyte.IsPositive"/>
         [CLSCompliant(false)]
@@ -1253,6 +1577,12 @@ namespace Zyl.VectorTraits.Numerics {
             return double.IsPositive(value);
         }
 
+        /// <inheritdoc cref="IsPositive(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive_Bcl(Half value) {
+            return Half.IsPositive(value);
+        }
+
         /// <inheritdoc cref="IsPositive(sbyte)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1290,6 +1620,14 @@ namespace Zyl.VectorTraits.Numerics {
         public static bool IsPositive_Bit(double value) {
             return BitConverter.DoubleToInt64Bits(value) >= 0;
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsPositive(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive_Bit(Half value) {
+            return MathBitConverter.HalfToInt16Bits(value) >= 0;
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IsPositive(sbyte)"/>
         [CLSCompliant(false)]
@@ -1336,6 +1674,15 @@ namespace Zyl.VectorTraits.Numerics {
             return IsPositiveInfinity_Bcl(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsPositiveInfinity(double)"/>
+        /// <seealso cref="Half.IsPositiveInfinity"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositiveInfinity(Half value) {
+            return IsPositiveInfinity_Bcl(value);
+        }
+#endif // NET5_0_OR_GREATER
+
         /// <inheritdoc cref="IsPositiveInfinity(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsPositiveInfinity_Bcl(float value) {
@@ -1348,6 +1695,14 @@ namespace Zyl.VectorTraits.Numerics {
             return double.IsPositiveInfinity(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsPositiveInfinity(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositiveInfinity_Bcl(Half value) {
+            return Half.IsPositiveInfinity(value);
+        }
+#endif // NET5_0_OR_GREATER
+
         /// <inheritdoc cref="IsPositiveInfinity(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsPositiveInfinity_Bit(float value) {
@@ -1359,6 +1714,14 @@ namespace Zyl.VectorTraits.Numerics {
         public static bool IsPositiveInfinity_Bit(double value) {
             return value == double.PositiveInfinity;
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsPositiveInfinity(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositiveInfinity_Bit(Half value) {
+            return value == Half.PositiveInfinity;
+        }
+#endif // NET5_0_OR_GREATER
 
 
         /// <inheritdoc cref="IsSubnormal(double)"/>
@@ -1388,6 +1751,19 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsSubnormal(double)"/>
+        /// <seealso cref="Half.IsSubnormal"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsSubnormal(Half value) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return IsSubnormal_Bcl(value);
+#else
+            return IsSubnormal_Bit(value);
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
+
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         /// <inheritdoc cref="IsSubnormal(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1401,6 +1777,14 @@ namespace Zyl.VectorTraits.Numerics {
             return double.IsSubnormal(value);
         }
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsSubnormal(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsSubnormal_Bcl(Half value) {
+            return Half.IsSubnormal(value);
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IsSubnormal(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1430,6 +1814,22 @@ namespace Zyl.VectorTraits.Numerics {
             return rt;
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsSubnormal(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsSubnormal_Bit(Half value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const short exponentMask = ScalarConstants.Half_ExponentMask;
+            const short mantissaMask = ScalarConstants.Half_MantissaMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            short bits = MathBitConverter.HalfToInt16Bits(value);
+            short exponent = (short)(bits & exponentMask);
+            short mantissa = (short)(bits & mantissaMask);
+            bool rt = (0 == exponent) && (mantissa > 0);
+            return rt;
+        }
+#endif // NET5_0_OR_GREATER
+
 
         /// <inheritdoc cref="IsZero(double)"/>
         /// <seealso cref="float.IsZero"/>
@@ -1457,6 +1857,19 @@ namespace Zyl.VectorTraits.Numerics {
             return IsZero_Bit(value);
 #endif // NET7_0_OR_GREATER
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsZero(double)"/>
+        /// <seealso cref="Half.IsZero"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(Half value) {
+#if NET7_0_OR_GREATER
+            return IsZero_Bcl(value);
+#else
+            return IsZero_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IsZero(double)"/>
         /// <seealso cref="sbyte.IsZero"/>
@@ -1570,6 +1983,12 @@ namespace Zyl.VectorTraits.Numerics {
             return IsZero_Generic(value);
         }
 
+        /// <inheritdoc cref="IsZero(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bcl(Half value) {
+            return IsZero_Generic(value);
+        }
+
         /// <inheritdoc cref="IsZero(sbyte)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1635,6 +2054,14 @@ namespace Zyl.VectorTraits.Numerics {
             return 0 == value;
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsZero(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero_Bit(Half value) {
+            return (Half)0 == value;
+        }
+#endif // NET5_0_OR_GREATER
+
         /// <inheritdoc cref="IsZero(sbyte)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1688,9 +2115,8 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
 
-
         /// <inheritdoc cref="IsZeroOrSubnormal(double)"/>
-        /// <seealso cref="float.IsZeroOrSubnormal"/>
+        // /// <seealso cref="float.IsZeroOrSubnormal"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZeroOrSubnormal(float value) {
 #if NETX_0_OR_GREATER
@@ -1706,7 +2132,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <param name="value">The value to be checked (要检查的值).</param>
         /// <returns>Return <c>true</c> if value is subnormal, otherwise is <c>false</c> (如果值是次正规数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
         /// <seealso cref="INumberBase{TSelf}.IsZeroOrSubnormal(TSelf)"/>
-        /// <seealso cref="double.IsZeroOrSubnormal"/>
+        // /// <seealso cref="double.IsZeroOrSubnormal"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZeroOrSubnormal(double value) {
 #if NETX_0_OR_GREATER
@@ -1715,6 +2141,19 @@ namespace Zyl.VectorTraits.Numerics {
             return IsZeroOrSubnormal_Bit(value);
 #endif // NETX_0_OR_GREATER
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsZeroOrSubnormal(double)"/>
+        // /// <seealso cref="Half.IsZeroOrSubnormal"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZeroOrSubnormal(Half value) {
+#if NETX_0_OR_GREATER
+            return IsZeroOrSubnormal_Bcl(value);
+#else
+            return IsZeroOrSubnormal_Bit(value);
+#endif // NETX_0_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
 
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         /// <inheritdoc cref="IsZeroOrSubnormal(float)"/>
@@ -1737,6 +2176,18 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NETX_0_OR_GREATER
         }
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsZeroOrSubnormal(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZeroOrSubnormal_Bcl(Half value) {
+#if NETX_0_OR_GREATER
+            return Half.IsZeroOrSubnormal(value);
+#else
+            return IsSubnormal_Bcl(value) || ((Half)0 == value);
+#endif // NETX_0_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IsZeroOrSubnormal(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1761,6 +2212,20 @@ namespace Zyl.VectorTraits.Numerics {
             bool rt = (0 == exponent);
             return rt;
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsZeroOrSubnormal(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZeroOrSubnormal_Bit(Half value) {
+#pragma warning disable CS0618 // Type or member is obsolete
+            const short exponentMask = ScalarConstants.Half_ExponentMask;
+#pragma warning restore CS0618 // Type or member is obsolete
+            short bits = MathBitConverter.HalfToInt16Bits(value);
+            short exponent = (short)(bits & exponentMask);
+            bool rt = (0 == exponent);
+            return rt;
+        }
+#endif // NET5_0_OR_GREATER
 
 
     }

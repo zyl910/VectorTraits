@@ -19,6 +19,7 @@ namespace Zyl.VectorTraits.Numerics {
 
         /// <inheritdoc cref="Truncate(double)"/>
         /// <seealso cref="MathF.Truncate"/>
+        /// <seealso cref="float.Truncate(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Truncate(float x) {
 #if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
@@ -35,10 +36,25 @@ namespace Zyl.VectorTraits.Numerics {
         /// <returns>Returns the truncated value (返回截断后的值).</returns>
         /// <seealso cref="IFloatingPoint{TSelf}.Truncate(TSelf)"/>
         /// <seealso cref="Math.Truncate(double)"/>
+        /// <seealso cref="double.Truncate(double)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Truncate(double x) {
             return Math.Truncate(x);
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="Truncate(double)"/>
+        /// <seealso cref="MathF.Truncate"/>
+        /// <seealso cref="Half.Truncate(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half Truncate(Half x) {
+#if NET7_0_OR_GREATER
+            return Half.Truncate(x);
+#else
+            return (Half)MathF.Truncate((float)x);
+#endif // NET7_0_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
 
     }
 }

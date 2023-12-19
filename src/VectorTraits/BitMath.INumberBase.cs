@@ -53,6 +53,14 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsEvenInteger(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsEvenInteger(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEvenInteger(Half x) {
+            return MathINumberBase.IsEvenInteger(x);
+        }
+#endif // NET5_0_OR_GREATER
+
         /// <inheritdoc cref="MathINumberBase.IsEvenInteger(sbyte)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -118,6 +126,14 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsFinite(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsFinite(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsFinite(Half x) {
+            return MathINumberBase.IsFinite(x);
+        }
+#endif // NET5_0_OR_GREATER
+
 
         /// <inheritdoc cref="MathINumberBase.IsInfinity(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -130,6 +146,14 @@ namespace Zyl.VectorTraits {
         public static bool IsInfinity(double value) {
             return MathINumberBase.IsInfinity(value);
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsInfinity(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinity(Half x) {
+            return MathINumberBase.IsInfinity(x);
+        }
+#endif // NET5_0_OR_GREATER
 
 
         /// <inheritdoc cref="MathINumberBase.IsInfinityOrNaN(float)"/>
@@ -144,6 +168,14 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsInfinityOrNaN(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsInfinityOrNaN(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInfinityOrNaN(Half x) {
+            return MathINumberBase.IsInfinityOrNaN(x);
+        }
+#endif // NET5_0_OR_GREATER
+
 
         /// <inheritdoc cref="MathINumberBase.IsInteger(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -156,6 +188,14 @@ namespace Zyl.VectorTraits {
         public static bool IsInteger(double value) {
             return MathINumberBase.IsInteger(value);
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsInteger(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInteger(Half x) {
+            return MathINumberBase.IsInteger(x);
+        }
+#endif // NET5_0_OR_GREATER
 
 
         /// <inheritdoc cref="MathINumberBase.IsNaN(float)"/>
@@ -170,6 +210,14 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsNaN(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsNaN(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNaN(Half x) {
+            return MathINumberBase.IsNaN(x);
+        }
+#endif // NET5_0_OR_GREATER
+
 
         /// <inheritdoc cref="MathINumberBase.IsNegative(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -182,6 +230,14 @@ namespace Zyl.VectorTraits {
         public static bool IsNegative(double value) {
             return MathINumberBase.IsNegative(value);
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsNegative(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative(Half x) {
+            return MathINumberBase.IsNegative(x);
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="MathINumberBase.IsNegative(sbyte)"/>
         [CLSCompliant(false)]
@@ -221,6 +277,14 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsNegativeInfinity(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsNegativeInfinity(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeInfinity(Half x) {
+            return MathINumberBase.IsNegativeInfinity(x);
+        }
+#endif // NET5_0_OR_GREATER
+
 
         /// <inheritdoc cref="MathINumberBase.IsNormal(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -234,6 +298,14 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsNormal(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsNormal(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNormal(Half x) {
+            return MathINumberBase.IsNormal(x);
+        }
+#endif // NET5_0_OR_GREATER
+
 
         /// <inheritdoc cref="MathINumberBase.IsOddInteger(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -246,6 +318,14 @@ namespace Zyl.VectorTraits {
         public static bool IsOddInteger(double value) {
             return MathINumberBase.IsOddInteger(value);
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsOddInteger(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOddInteger(Half x) {
+            return MathINumberBase.IsOddInteger(x);
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="MathINumberBase.IsOddInteger(sbyte)"/>
         [CLSCompliant(false)]
@@ -312,6 +392,14 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsPositive(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsPositive(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositive(Half x) {
+            return MathINumberBase.IsPositive(x);
+        }
+#endif // NET5_0_OR_GREATER
+
         /// <inheritdoc cref="MathINumberBase.IsPositive(sbyte)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -350,6 +438,14 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsPositiveInfinity(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsPositiveInfinity(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPositiveInfinity(Half x) {
+            return MathINumberBase.IsPositiveInfinity(x);
+        }
+#endif // NET5_0_OR_GREATER
+
 
         /// <inheritdoc cref="MathINumberBase.IsSubnormal(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -363,6 +459,14 @@ namespace Zyl.VectorTraits {
             return MathINumberBase.IsSubnormal(value);
         }
 
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsSubnormal(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsSubnormal(Half x) {
+            return MathINumberBase.IsSubnormal(x);
+        }
+#endif // NET5_0_OR_GREATER
+
 
         /// <inheritdoc cref="MathINumberBase.IsZero(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -375,6 +479,14 @@ namespace Zyl.VectorTraits {
         public static bool IsZero(double value) {
             return MathINumberBase.IsZero(value);
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsZero(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZero(Half x) {
+            return MathINumberBase.IsZero(x);
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="MathINumberBase.IsZero(sbyte)"/>
         [CLSCompliant(false)]
@@ -440,6 +552,14 @@ namespace Zyl.VectorTraits {
         public static bool IsZeroOrSubnormal(double value) {
             return MathINumberBase.IsZeroOrSubnormal(value);
         }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsZeroOrSubnormal(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsZeroOrSubnormal(Half x) {
+            return MathINumberBase.IsZeroOrSubnormal(x);
+        }
+#endif // NET5_0_OR_GREATER
 
     }
 }
