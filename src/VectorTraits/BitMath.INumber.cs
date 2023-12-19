@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Zyl.VectorTraits.Numerics;
@@ -9,89 +10,89 @@ namespace Zyl.VectorTraits {
     // Referenced from generic math (参考了泛型数学): https://learn.microsoft.com/en-us/dotnet/standard/generics/math
     partial class BitMath {
 
-        /// <inheritdoc cref="MathINumber.Min(sbyte, sbyte)"/>
+        /// <inheritdoc cref="MathINumber.Clamp(sbyte, sbyte, sbyte)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static sbyte Min(sbyte val1, sbyte val2) {
-            return MathINumber.Min(val1, val2);
+        public static sbyte Clamp(sbyte value, sbyte amin, sbyte amax) {
+            return MathINumber.Clamp(value, amin, amax);
         }
 
-        /// <inheritdoc cref="MathINumber.Min(byte, byte)"/>
+        /// <inheritdoc cref="MathINumber.Clamp(byte, byte, byte)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static byte Min(byte val1, byte val2) {
-            return MathINumber.Min(val1, val2);
+        public static byte Clamp(byte value, byte amin, byte amax) {
+            return MathINumber.Clamp(value, amin, amax);
         }
 
-        /// <inheritdoc cref="MathINumber.Min(short, short)"/>
+        /// <inheritdoc cref="MathINumber.Clamp(short, short, short)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static short Min(short val1, short val2) {
-            return MathINumber.Min(val1, val2);
+        public static short Clamp(short value, short amin, short amax) {
+            return MathINumber.Clamp(value, amin, amax);
         }
 
-        /// <inheritdoc cref="MathINumber.Min(ushort, ushort)"/>
+        /// <inheritdoc cref="MathINumber.Clamp(ushort, ushort, ushort)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ushort Min(ushort val1, ushort val2) {
-            return MathINumber.Min(val1, val2);
+        public static ushort Clamp(ushort value, ushort amin, ushort amax) {
+            return MathINumber.Clamp(value, amin, amax);
         }
 
-        /// <inheritdoc cref="MathINumber.Min(int, int)"/>
+        /// <inheritdoc cref="MathINumber.Clamp(int, int, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int Min(int val1, int val2) {
-            return MathINumber.Min(val1, val2);
+        public static int Clamp(int value, int amin, int amax) {
+            return MathINumber.Clamp(value, amin, amax);
         }
 
-        /// <inheritdoc cref="MathINumber.Min(uint, uint)"/>
+        /// <inheritdoc cref="MathINumber.Clamp(uint, uint, uint)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint Min(uint val1, uint val2) {
-            return MathINumber.Min(val1, val2);
+        public static uint Clamp(uint value, uint amin, uint amax) {
+            return MathINumber.Clamp(value, amin, amax);
         }
 
-        /// <inheritdoc cref="MathINumber.Min(long, long)"/>
+        /// <inheritdoc cref="MathINumber.Clamp(long, long, long)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static long Min(long val1, long val2) {
-            return MathINumber.Min(val1, val2);
+        public static long Clamp(long value, long amin, long amax) {
+            return MathINumber.Clamp(value, amin, amax);
         }
 
-        /// <inheritdoc cref="MathINumber.Min(ulong, ulong)"/>
+        /// <inheritdoc cref="MathINumber.Clamp(ulong, ulong, ulong)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ulong Min(ulong val1, ulong val2) {
-            return MathINumber.Min(val1, val2);
+        public static ulong Clamp(ulong value, ulong amin, ulong amax) {
+            return MathINumber.Clamp(value, amin, amax);
         }
 
-        /// <inheritdoc cref="MathINumber.Min(nint, nint)"/>
+        /// <inheritdoc cref="MathINumber.Clamp(nint, nint, nint)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static nint Min(nint val1, nint val2) {
-            return MathINumber.Min(val1, val2);
+        public static nint Clamp(nint value, nint amin, nint amax) {
+            return MathINumber.Clamp(value, amin, amax);
         }
 
-        /// <inheritdoc cref="MathINumber.Min(nuint, nuint)"/>
+        /// <inheritdoc cref="MathINumber.Clamp(nuint, nuint, nuint)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static nuint Min(nuint val1, nuint val2) {
-            return MathINumber.Min(val1, val2);
+        public static nuint Clamp(nuint value, nuint amin, nuint amax) {
+            return MathINumber.Clamp(value, amin, amax);
         }
 
-        /// <inheritdoc cref="MathINumber.Min(float, float)"/>
+        /// <inheritdoc cref="MathINumber.Clamp(float, float, float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Min(float val1, float val2) {
-            return MathINumber.Min(val1, val2);
+        public static float Clamp(float value, float amin, float amax) {
+            return MathINumber.Clamp(value, amin, amax);
         }
 
-        /// <inheritdoc cref="MathINumber.Min(double, double)"/>
+        /// <inheritdoc cref="MathINumber.Clamp(double, double, double)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double Min(double val1, double val2) {
-            return MathINumber.Min(val1, val2);
+        public static double Clamp(double value, double amin, double amax) {
+            return MathINumber.Clamp(value, amin, amax);
         }
 
 #if NET5_0_OR_GREATER
 
-        /// <inheritdoc cref="MathINumber.Min(Half, Half)"/>
+        /// <inheritdoc cref="MathINumber.Clamp(Half, Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Half Min(Half val1, Half val2) {
-            return MathINumber.Min(val1, val2);
+        public static Half Clamp(Half value, Half amin, Half amax) {
+            return MathINumber.Clamp(value, amin, amax);
         }
 
 #endif // NET5_0_OR_GREATER
@@ -185,89 +186,110 @@ namespace Zyl.VectorTraits {
 #endif // NET5_0_OR_GREATER
 
 
-        /// <inheritdoc cref="MathINumber.Clamp(sbyte, sbyte, sbyte)"/>
+        /// <inheritdoc cref="MathINumber.MaxNumber(float, float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float MaxNumber(float x, float y) {
+            return MathINumber.MaxNumber(x, y);
+        }
+
+        /// <inheritdoc cref="MathINumber.MaxNumber(double, double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double MaxNumber(double x, double y) {
+            return MathINumber.MaxNumber(x, y);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumber.MaxNumber(Half, Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half MaxNumber(Half x, Half y) {
+            return MathINumber.MaxNumber(x, y);
+        }
+#endif // NET5_0_OR_GREATER
+
+
+        /// <inheritdoc cref="MathINumber.Min(sbyte, sbyte)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static sbyte Clamp(sbyte value, sbyte amin, sbyte amax) {
-            return MathINumber.Clamp(value, amin, amax);
+        public static sbyte Min(sbyte val1, sbyte val2) {
+            return MathINumber.Min(val1, val2);
         }
 
-        /// <inheritdoc cref="MathINumber.Clamp(byte, byte, byte)"/>
+        /// <inheritdoc cref="MathINumber.Min(byte, byte)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static byte Clamp(byte value, byte amin, byte amax) {
-            return MathINumber.Clamp(value, amin, amax);
+        public static byte Min(byte val1, byte val2) {
+            return MathINumber.Min(val1, val2);
         }
 
-        /// <inheritdoc cref="MathINumber.Clamp(short, short, short)"/>
+        /// <inheritdoc cref="MathINumber.Min(short, short)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static short Clamp(short value, short amin, short amax) {
-            return MathINumber.Clamp(value, amin, amax);
+        public static short Min(short val1, short val2) {
+            return MathINumber.Min(val1, val2);
         }
 
-        /// <inheritdoc cref="MathINumber.Clamp(ushort, ushort, ushort)"/>
+        /// <inheritdoc cref="MathINumber.Min(ushort, ushort)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ushort Clamp(ushort value, ushort amin, ushort amax) {
-            return MathINumber.Clamp(value, amin, amax);
+        public static ushort Min(ushort val1, ushort val2) {
+            return MathINumber.Min(val1, val2);
         }
 
-        /// <inheritdoc cref="MathINumber.Clamp(int, int, int)"/>
+        /// <inheritdoc cref="MathINumber.Min(int, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int Clamp(int value, int amin, int amax) {
-            return MathINumber.Clamp(value, amin, amax);
+        public static int Min(int val1, int val2) {
+            return MathINumber.Min(val1, val2);
         }
 
-        /// <inheritdoc cref="MathINumber.Clamp(uint, uint, uint)"/>
+        /// <inheritdoc cref="MathINumber.Min(uint, uint)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint Clamp(uint value, uint amin, uint amax) {
-            return MathINumber.Clamp(value, amin, amax);
+        public static uint Min(uint val1, uint val2) {
+            return MathINumber.Min(val1, val2);
         }
 
-        /// <inheritdoc cref="MathINumber.Clamp(long, long, long)"/>
+        /// <inheritdoc cref="MathINumber.Min(long, long)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static long Clamp(long value, long amin, long amax) {
-            return MathINumber.Clamp(value, amin, amax);
+        public static long Min(long val1, long val2) {
+            return MathINumber.Min(val1, val2);
         }
 
-        /// <inheritdoc cref="MathINumber.Clamp(ulong, ulong, ulong)"/>
+        /// <inheritdoc cref="MathINumber.Min(ulong, ulong)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ulong Clamp(ulong value, ulong amin, ulong amax) {
-            return MathINumber.Clamp(value, amin, amax);
+        public static ulong Min(ulong val1, ulong val2) {
+            return MathINumber.Min(val1, val2);
         }
 
-        /// <inheritdoc cref="MathINumber.Clamp(nint, nint, nint)"/>
+        /// <inheritdoc cref="MathINumber.Min(nint, nint)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static nint Clamp(nint value, nint amin, nint amax) {
-            return MathINumber.Clamp(value, amin, amax);
+        public static nint Min(nint val1, nint val2) {
+            return MathINumber.Min(val1, val2);
         }
 
-        /// <inheritdoc cref="MathINumber.Clamp(nuint, nuint, nuint)"/>
+        /// <inheritdoc cref="MathINumber.Min(nuint, nuint)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static nuint Clamp(nuint value, nuint amin, nuint amax) {
-            return MathINumber.Clamp(value, amin, amax);
+        public static nuint Min(nuint val1, nuint val2) {
+            return MathINumber.Min(val1, val2);
         }
 
-        /// <inheritdoc cref="MathINumber.Clamp(float, float, float)"/>
+        /// <inheritdoc cref="MathINumber.Min(float, float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Clamp(float value, float amin, float amax) {
-            return MathINumber.Clamp(value, amin, amax);
+        public static float Min(float val1, float val2) {
+            return MathINumber.Min(val1, val2);
         }
 
-        /// <inheritdoc cref="MathINumber.Clamp(double, double, double)"/>
+        /// <inheritdoc cref="MathINumber.Min(double, double)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double Clamp(double value, double amin, double amax) {
-            return MathINumber.Clamp(value, amin, amax);
+        public static double Min(double val1, double val2) {
+            return MathINumber.Min(val1, val2);
         }
 
 #if NET5_0_OR_GREATER
 
-        /// <inheritdoc cref="MathINumber.Clamp(Half, Half, Half)"/>
+        /// <inheritdoc cref="MathINumber.Min(Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Half Clamp(Half value, Half amin, Half amax) {
-            return MathINumber.Clamp(value, amin, amax);
+        public static Half Min(Half val1, Half val2) {
+            return MathINumber.Min(val1, val2);
         }
 
 #endif // NET5_0_OR_GREATER

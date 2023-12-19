@@ -7,6 +7,7 @@ using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Numerics {
     using static BitMathCore;
+    using static MathINumberBase;
 
     /// <summary>
     /// Math functions of <see cref="INumber{TSelf}"/> (INumber 的数学函数).
@@ -298,6 +299,94 @@ namespace Zyl.VectorTraits.Numerics {
 
 #endif // NET5_0_OR_GREATER
 
+        /// <inheritdoc cref="MaxNumber(double, double)"/>
+        /// <seealso cref="float.MaxNumber(float, float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float MaxNumber(float x, float y) {
+#if NET7_0_OR_GREATER
+            return MaxNumber_Bcl(x, y);
+#else
+            return MaxNumber_Bit(x, y);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <summary>Compares two values to compute which is lesser and returning the other value if an input is <c>NaN</c> (取得两个值中较大的数字. 若其中一个是<c>NaN</c>, 则会返回另一个值).</summary>
+        /// <param name="x">The value to compare with <paramref name="y"/> (要与 <paramref name="y"/> 进行比较的值).</param>
+        /// <param name="y">The value to compare with <paramref name="x"/> (要与 <paramref name="x"/> 进行比较的值).</param>
+        /// <returns>Return the larger number of two variables (返回两个值中较大的数字.).</returns>
+        /// <remarks>This method matches the IEEE 754:2019 minimumNumber function. This requires <c>NaN</c> inputs to not be propagated back to the caller and for <c>-0.0</c> to be treated as less than <c>+0.0</c> (此方法与 IEEE 754:2019 minimumNumber 函数匹配。 这要求 <c>NaN</c> 输入不传播回调用方，且 <c>-0.0</c> 被视为小于 <c>+0.0</c>).</remarks>
+        /// <seealso cref="INumber{TSelf}.MaxNumber(TSelf, TSelf)"/>
+        /// <seealso cref="double.MaxNumber(double, double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double MaxNumber(double x, double y) {
+#if NET7_0_OR_GREATER
+            return MaxNumber_Bcl(x, y);
+#else
+            return MaxNumber_Bit(x, y);
+#endif // NET7_0_OR_GREATER
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MaxNumber(double, double)"/>
+        /// <seealso cref="Half.MaxNumber(Half, Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half MaxNumber(Half x, Half y) {
+#if NET7_0_OR_GREATER
+            return MaxNumber_Bcl(x, y);
+#else
+            return MaxNumber_Bit(x, y);
+#endif // NET7_0_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
+
+#if NET7_0_OR_GREATER
+        /// <inheritdoc cref="MaxNumber(float, float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float MaxNumber_Bcl(float x, float y) {
+            return float.MaxNumber(x, y);
+        }
+
+        /// <inheritdoc cref="MaxNumber(double, double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double MaxNumber_Bcl(double x, double y) {
+            return double.MaxNumber(x, y);
+        }
+
+        /// <inheritdoc cref="MaxNumber(Half, Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half MaxNumber_Bcl(Half x, Half y) {
+            return Half.MaxNumber(x, y);
+        }
+#endif // NET7_0_OR_GREATER
+
+        /// <inheritdoc cref="MaxNumber(float, float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float MaxNumber_Bit(float x, float y) {
+            bool mask = x > y;
+            mask |= (x == y) && IsNegative(y);
+            mask |= IsNaN(y);
+            return ConditionalSelect(mask, x, y);
+        }
+
+        /// <inheritdoc cref="MaxNumber(double, double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double MaxNumber_Bit(double x, double y) {
+            bool mask = x > y;
+            mask |= (x == y) && IsNegative(y);
+            mask |= IsNaN(y);
+            return ConditionalSelect(mask, x, y);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MaxNumber(Half, Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half MaxNumber_Bit(Half x, Half y) {
+            bool mask = x > y;
+            mask |= (x == y) && IsNegative(y);
+            mask |= IsNaN(y);
+            return ConditionalSelect(mask, x, y);
+        }
+#endif // NET5_0_OR_GREATER
 
         /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
         /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
