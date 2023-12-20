@@ -147,5 +147,47 @@ namespace Zyl.VectorTraits.Tests.Numerics {
             }
         }
 
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        public void MinNumberTest<T>(T src) where T : struct {
+            System.IO.TextWriter writer = Console.Out;
+            T[] samples = new T[12];
+            samples[0] = default;
+            samples[1] = Scalars<T>.NegativeZero;
+            samples[2] = src;
+            samples[3] = Scalars<T>.MaxValue;
+            samples[4] = Scalars<T>.MinValue;
+            samples[5] = Scalars<T>.PositiveInfinity;
+            samples[6] = Scalars<T>.NegativeInfinity;
+            samples[7] = Scalars<T>.NaN;
+            samples[8] = Scalars<T>.V1;
+            samples[9] = Scalars<T>.V2;
+            samples[10] = Scalars<T>.V_1;
+            samples[11] = Scalars<T>.V_2;
+            // run.
+            bool allowLog = false;
+            for (int i = 1; i < samples.Length; ++i) {
+                T left = samples[i];
+                for (int j = 1; j < samples.Length; ++j) {
+                    T right = samples[j];
+                    T expected;
+                    T dst;
+                    expected = BitMath.MinNumber((dynamic)left, (dynamic)right);
+                    if (allowLog) {
+                        VectorTextUtil.WriteLine(writer, "MinNumber({0}, {1}):\t{2}", left, right, expected);
+                    }
+                    // MinNumber_Bit.
+                    dst = MathINumber.MinNumber_Bit((dynamic)left, (dynamic)right);
+                    Assert.AreEqual(expected, dst, string.Format("MinNumber_Bit({0}, {1})", left, right));
+                    // MinNumber_Bcl.
+#if NET7_0_OR_GREATER
+                    dst = MathINumber.MinNumber_Bcl((dynamic)left, (dynamic)right);
+                    Assert.AreEqual(expected, dst, string.Format("MinNumber_Bcl({0}, {1})", left, right));
+#endif // NET7_0_OR_GREATER
+                }
+            }
+        }
+
     }
 }

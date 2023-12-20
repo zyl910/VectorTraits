@@ -294,5 +294,26 @@ namespace Zyl.VectorTraits {
 
 #endif // NET5_0_OR_GREATER
 
+
+        /// <inheritdoc cref="MathINumber.MinNumber(float, float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float MinNumber(float x, float y) {
+            return MathINumber.MinNumber(x, y);
+        }
+
+        /// <inheritdoc cref="MathINumber.MinNumber(double, double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double MinNumber(double x, double y) {
+            return MathINumber.MinNumber(x, y);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumber.MinNumber(Half, Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half MinNumber(Half x, Half y) {
+            return MathINumber.MinNumber(x, y);
+        }
+#endif // NET5_0_OR_GREATER
+
     }
 }
