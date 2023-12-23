@@ -11,7 +11,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void TruncateTest<T>(T src) where T : struct {
             T[] samples = new T[10];
             samples[0] = default;

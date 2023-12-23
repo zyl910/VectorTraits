@@ -50,7 +50,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsEvenIntegerTest<T>(T src) where T : struct {
             T[] samples = new T[12];
             samples[0] = default;
@@ -86,7 +86,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsFiniteTest<T>(T src) where T : struct {
             T[] samples = new T[8];
             samples[0] = default;
@@ -118,7 +118,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsInfinityTest<T>(T src) where T : struct {
             T[] samples = new T[8];
             samples[0] = default;
@@ -150,7 +150,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsInfinityOrNaNTest<T>(T src) where T : struct {
             T[] samples = new T[8];
             samples[0] = default;
@@ -182,7 +182,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsIntegerTest<T>(T src) where T : struct {
             T[] samples = new T[12];
             samples[0] = default;
@@ -218,7 +218,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsNaNTest<T>(T src) where T : struct {
             T[] samples = new T[8];
             samples[0] = default;
@@ -252,7 +252,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
         [TestCase((short)5)]
         [TestCase((int)7)]
         [TestCase((long)9)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsNegativeTest<T>(T src) where T : struct {
             T[] samples = new T[8];
             samples[0] = default;
@@ -284,7 +284,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsNegativeInfinityTest<T>(T src) where T : struct {
             T[] samples = new T[8];
             samples[0] = default;
@@ -314,7 +314,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsNormalTest<T>(T src) where T : struct {
             T[] samples = new T[8];
             samples[0] = default;
@@ -354,7 +354,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsOddIntegerTest<T>(T src) where T : struct {
             T[] samples = new T[12];
             samples[0] = default;
@@ -394,7 +394,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
         [TestCase((short)5)]
         [TestCase((int)7)]
         [TestCase((long)9)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsPositiveTest<T>(T src) where T : struct {
             T[] samples = new T[8];
             samples[0] = default;
@@ -426,7 +426,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsPositiveInfinityTest<T>(T src) where T : struct {
             T[] samples = new T[8];
             samples[0] = default;
@@ -456,7 +456,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsSubnormalTest<T>(T src) where T : struct {
             T[] samples = new T[8];
             samples[0] = default;
@@ -496,7 +496,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsZeroTest<T>(T src) where T : struct {
             T[] samples = new T[12];
             samples[0] = default;
@@ -532,7 +532,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsZeroOrSubnormalTest<T>(T src) where T : struct {
             T[] samples = new T[8];
             samples[0] = default;

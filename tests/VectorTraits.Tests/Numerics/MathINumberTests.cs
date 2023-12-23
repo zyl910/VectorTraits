@@ -49,7 +49,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
         [TestCase((short)5)]
         [TestCase((int)7)]
         [TestCase((long)9)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void CopySignTest<T>(T src) where T : struct {
             System.IO.TextWriter writer = Console.Out;
             T[] samples = new T[12];
@@ -126,7 +126,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void MaxNumberTest<T>(T src) where T : struct {
             System.IO.TextWriter writer = Console.Out;
             T[] samples = new T[12];
@@ -199,7 +199,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 
         [TestCase((float)1)]
         [TestCase((double)2)]
-        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.GetCaseByFunc1))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void MinNumberTest<T>(T src) where T : struct {
             System.IO.TextWriter writer = Console.Out;
             T[] samples = new T[12];
