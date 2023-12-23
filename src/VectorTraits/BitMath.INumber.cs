@@ -98,6 +98,52 @@ namespace Zyl.VectorTraits {
 #endif // NET5_0_OR_GREATER
 
 
+        /// <inheritdoc cref="MathINumber.CopySign(float, float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float CopySign(float value, float sign) {
+            return MathINumber.CopySign(value, sign);
+        }
+
+        /// <inheritdoc cref="MathINumber.CopySign(double, double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double CopySign(double value, double sign) {
+            return MathINumber.CopySign(value, sign);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumber.CopySign(Half, Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half CopySign(Half value, Half sign) {
+            return MathINumber.CopySign(value, sign);
+        }
+#endif // NET5_0_OR_GREATER
+
+        /// <inheritdoc cref="MathINumber.CopySign(sbyte, sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static sbyte CopySign(sbyte value, sbyte sign) {
+            return MathINumber.CopySign(value, sign);
+        }
+
+        /// <inheritdoc cref="MathINumber.CopySign(short, short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static short CopySign(short value, short sign) {
+            return MathINumber.CopySign(value, sign);
+        }
+
+        /// <inheritdoc cref="MathINumber.CopySign(int, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int CopySign(int value, int sign) {
+            return MathINumber.CopySign(value, sign);
+        }
+
+        /// <inheritdoc cref="MathINumber.CopySign(long, long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long CopySign(long value, long sign) {
+            return MathINumber.CopySign(value, sign);
+        }
+
+
         /// <inheritdoc cref="MathINumber.Max(sbyte, sbyte)"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

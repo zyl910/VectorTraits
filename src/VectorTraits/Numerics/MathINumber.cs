@@ -173,6 +173,226 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NET5_0_OR_GREATER
 
 
+        /// <inheritdoc cref="CopySign(double, double)"/>
+        /// <seealso cref="MathF.CopySign(float, float)"/>
+        /// <seealso cref="float.CopySign(float, float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float CopySign(float value, float sign) {
+#if NETCOREAPP3_0_OR_GREATER
+            return CopySign_Bcl(value, sign);
+#else
+            return CopySign_Bit(value, sign);
+#endif // NETCOREAPP3_0_OR_GREATER
+        }
+
+        /// <summary>Copies the sign of a value to the sign of another value (将一个值的符号复制到另一个值).</summary>
+        /// <param name="value">The value whose magnitude is used in the result (结果中使用的幅度).</param>
+        /// <param name="sign">The value whose sign is used in the result (结果中使用符号的值).</param>
+        /// <returns>A value with the magnitude of value and the sign of sign (根据 value的幅度和sign的符号而生成的值).</returns>
+        /// <remarks>
+        /// <para>No exception is thrown. For the <c>MinValue</c> of integer types, the source value is returned.(不会抛出异常. 对于整数类型的 <c>MinValue</c>, 会返回源值).</para>
+        /// <para>But <see cref="CopySign_Bcl(int, int)">CopySign_Bcl</see> behaves differently. Throws an exception for the <c>MinValue</c> of integer value (而 <see cref="CopySign_Bcl(int, int)">CopySign_Bcl</see> 的行为有所不同. 对于整数类型的 <c>MinValue</c>, 会抛出异常): System.OverflowException : Negating the minimum value of a twos complement number is invalid.</para>
+        /// </remarks>
+        /// <seealso cref="INumber{TSelf}.CopySign(TSelf, TSelf)"/>
+        /// <seealso cref="Math.CopySign(double, double)"/>
+        /// <seealso cref="double.CopySign(double, double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double CopySign(double value, double sign) {
+#if NETCOREAPP3_0_OR_GREATER
+            return CopySign_Bcl(value, sign);
+#else
+            return CopySign_Bit(value, sign);
+#endif // NETCOREAPP3_0_OR_GREATER
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="CopySign(double, double)"/>
+        /// <seealso cref="Half.CopySign(Half, Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half CopySign(Half value, Half sign) {
+#if NET7_0_OR_GREATER
+            return CopySign_Bcl(value, sign);
+#else
+            return CopySign_Bit(value, sign);
+#endif // NET7_0_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
+
+        /// <inheritdoc cref="CopySign(double, double)"/>
+        /// <seealso cref="sbyte.CopySign(sbyte, sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static sbyte CopySign(sbyte value, sbyte sign) {
+            return CopySign_Bit(value, sign);
+            // System.OverflowException : Negating the minimum value of a twos complement number is invalid.
+            //return CopySign_Bcl(value, sign);
+        }
+
+        /// <inheritdoc cref="CopySign(double, double)"/>
+        /// <seealso cref="short.CopySign(short, short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static short CopySign(short value, short sign) {
+            return CopySign_Bit(value, sign);
+            // System.OverflowException : Negating the minimum value of a twos complement number is invalid.
+            //return CopySign_Bcl(value, sign);
+        }
+
+        /// <inheritdoc cref="CopySign(double, double)"/>
+        /// <seealso cref="int.CopySign(int, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int CopySign(int value, int sign) {
+            return CopySign_Bit(value, sign);
+            // System.OverflowException : Negating the minimum value of a twos complement number is invalid.
+            //return CopySign_Bcl(value, sign);
+        }
+
+        /// <inheritdoc cref="CopySign(double, double)"/>
+        /// <seealso cref="long.CopySign(long, long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long CopySign(long value, long sign) {
+            return CopySign_Bit(value, sign);
+            // System.OverflowException : Negating the minimum value of a twos complement number is invalid.
+            //return CopySign_Bcl(value, sign);
+        }
+
+#if NETCOREAPP3_0_OR_GREATER
+        /// <inheritdoc cref="CopySign(float, float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float CopySign_Bcl(float value, float sign) {
+            return MathF.CopySign(value, sign);
+        }
+
+        /// <inheritdoc cref="CopySign(double, double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double CopySign_Bcl(double value, double sign) {
+            return Math.CopySign(value, sign);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="CopySign(Half, Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half CopySign_Bcl(Half value, Half sign) {
+#if NET7_0_OR_GREATER
+            return Half.CopySign(value, sign);
+#else
+            return CopySign_Bit(value, sign);
+#endif // NET7_0_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
+
+        /// <inheritdoc cref="CopySign(sbyte, sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static sbyte CopySign_Bcl(sbyte value, sbyte sign) {
+#if NET7_0_OR_GREATER
+            return sbyte.CopySign(value, sign);
+#else
+            return CopySign_Bit(value, sign);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="CopySign(short, short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static short CopySign_Bcl(short value, short sign) {
+#if NET7_0_OR_GREATER
+            return short.CopySign(value, sign);
+#else
+            return CopySign_Bit(value, sign);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="CopySign(int, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int CopySign_Bcl(int value, int sign) {
+#if NET7_0_OR_GREATER
+            return int.CopySign(value, sign);
+#else
+            return CopySign_Bit(value, sign);
+#endif // NET7_0_OR_GREATER
+        }
+
+        /// <inheritdoc cref="CopySign(long, long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long CopySign_Bcl(long value, long sign) {
+#if NET7_0_OR_GREATER
+            return long.CopySign(value, sign);
+#else
+            return CopySign_Bit(value, sign);
+#endif // NET7_0_OR_GREATER
+        }
+#endif // NETCOREAPP3_0_OR_GREATER
+
+        /// <inheritdoc cref="CopySign(float, float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float CopySign_Bit(float value, float sign) {
+            const int signMask = ScalarConstants.Single_SignMask;
+            int xbits = MathBitConverter.SingleToInt32Bits(value);
+            int ybits = MathBitConverter.SingleToInt32Bits(sign);
+            xbits &= ~signMask;
+            ybits &= signMask;
+            return MathBitConverter.Int32BitsToSingle(xbits | ybits);
+        }
+
+        /// <inheritdoc cref="CopySign(double, double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double CopySign_Bit(double value, double sign) {
+            const long signMask = ScalarConstants.Double_SignMask;
+            long xbits = BitConverter.DoubleToInt64Bits(value);
+            long ybits = BitConverter.DoubleToInt64Bits(sign);
+            xbits &= ~signMask;
+            ybits &= signMask;
+            return BitConverter.Int64BitsToDouble(xbits | ybits);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="CopySign(Half, Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half CopySign_Bit(Half value, Half sign) {
+            const short signMask = ScalarConstants.Half_SignMask;
+            short xbits = MathBitConverter.HalfToInt16Bits(value);
+            short ybits = MathBitConverter.HalfToInt16Bits(sign);
+            xbits &= ~signMask;
+            ybits &= signMask;
+            return MathBitConverter.Int16BitsToHalf((short)(xbits | ybits));
+        }
+#endif // NET5_0_OR_GREATER
+
+        /// <inheritdoc cref="CopySign(sbyte, sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static sbyte CopySign_Bit(sbyte value, sbyte sign) {
+            return (sbyte)CopySign_Bit((int)value, (int)sign);
+        }
+
+        /// <inheritdoc cref="CopySign(short, short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static short CopySign_Bit(short value, short sign) {
+            return (short)CopySign_Bit((int)value, (int)sign);
+        }
+
+        /// <inheritdoc cref="CopySign(int, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int CopySign_Bit(int value, int sign) {
+            // t = ((x^y)>>31); ISIGN = (x^t)-t; // From "Hacker's Delight" 2.9, Page 19.
+            unchecked {
+                int t = (value ^ sign) >> 31;
+                //Console.WriteLine(string.Format("value={0}, sign={1}, t={2}", value, sign, t));
+                int rt = (value ^ t) - t;
+                return rt;
+            }
+        }
+
+        /// <inheritdoc cref="CopySign(long, long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static long CopySign_Bit(long value, long sign) {
+            unchecked {
+                long t = (value ^ sign) >> 63;
+                long rt = (value ^ t) - t;
+                return rt;
+            }
+        }
+
+
         /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
         /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
         /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
