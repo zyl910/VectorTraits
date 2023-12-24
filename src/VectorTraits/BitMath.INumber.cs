@@ -361,5 +361,51 @@ namespace Zyl.VectorTraits {
         }
 #endif // NET5_0_OR_GREATER
 
+
+        /// <inheritdoc cref="MathINumber.Sign(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(float value) {
+            return MathINumber.Sign(value);
+        }
+
+        /// <inheritdoc cref="MathINumber.Sign(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(double value) {
+            return MathINumber.Sign(value);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumber.Sign(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(Half value) {
+            return MathINumber.Sign(value);
+        }
+#endif // NET5_0_OR_GREATER
+
+        /// <inheritdoc cref="MathINumber.Sign(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(sbyte value) {
+            return MathINumber.Sign(value);
+        }
+
+        /// <inheritdoc cref="MathINumber.Sign(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(short value) {
+            return MathINumber.Sign(value);
+        }
+
+        /// <inheritdoc cref="MathINumber.Sign(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(int value) {
+            return MathINumber.Sign(value);
+        }
+
+        /// <inheritdoc cref="MathINumber.Sign(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(long value) {
+            return MathINumber.Sign(value);
+        }
+
     }
 }

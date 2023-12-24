@@ -191,7 +191,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <returns>A value with the magnitude of value and the sign of sign (根据 value的幅度和sign的符号而生成的值).</returns>
         /// <remarks>
         /// <para>No exception is thrown. For the <c>MinValue</c> of integer types, the source value is returned.(不会抛出异常. 对于整数类型的 <c>MinValue</c>, 会返回源值).</para>
-        /// <para>But <see cref="CopySign_Bcl(int, int)">CopySign_Bcl</see> behaves differently. Throws an exception for the <c>MinValue</c> of integer value (而 <see cref="CopySign_Bcl(int, int)">CopySign_Bcl</see> 的行为有所不同. 对于整数类型的 <c>MinValue</c>, 会抛出异常): System.OverflowException : Negating the minimum value of a twos complement number is invalid.</para>
+        /// <para>But <see cref="CopySign_Bcl(int, int)">CopySign_Bcl</see> behaves differently. Throws an exception for the <c>MinValue</c> of integer types (而 <see cref="CopySign_Bcl(int, int)">CopySign_Bcl</see> 的行为有所不同. 对于整数类型的 <c>MinValue</c>, 会抛出异常): System.OverflowException : Negating the minimum value of a twos complement number is invalid.</para>
         /// </remarks>
         /// <seealso cref="INumber{TSelf}.CopySign(TSelf, TSelf)"/>
         /// <seealso cref="Math.CopySign(double, double)"/>
@@ -373,7 +373,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <inheritdoc cref="CopySign(int, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CopySign_Bit(int value, int sign) {
-            // t = ((x^y)>>31); ISIGN = (x^t)-t; // From "Hacker's Delight" 2.9, Page 19.
+            // t = ((x^y)>>31); ISIGN = (x^t)-t; // From "Hacker's Delight" 2.9, Page 20.
             unchecked {
                 int t = (value ^ sign) >> 31;
                 //Console.WriteLine(string.Format("value={0}, sign={1}, t={2}", value, sign, t));
@@ -825,6 +825,185 @@ namespace Zyl.VectorTraits.Numerics {
             return ConditionalSelect(mask, x, y);
         }
 #endif // NET5_0_OR_GREATER
+
+
+        /// <inheritdoc cref="Sign(double)"/>
+        /// <seealso cref="Math.Sign(float)"/>
+        /// <seealso cref="float.Sign"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(float value) {
+            return Sign_Bit(value);
+            // System.ArithmeticException: Function does not accept floating point Not-a-Number values.
+            //return Sign_Bcl(value);
+        }
+
+        /// <summary>
+        /// Computes the sign of a value (计算值的符号).
+        /// </summary>
+        /// <param name="value">The value whose sign is to be computed (要计算其符号的值)</param>
+        /// <returns>Returns 1 if the value is positive, 0 if the value is zero, and -1 if the value is negative (值为正数时返回1，值为0时返回0，值为负数时返回-1).</returns>
+        /// <remarks>
+        /// <para>No exception is thrown. For the <c>NaN</c> of float types, returns 0.(不会抛出异常. 对于浮点类型的 <c>NaN</c>, 会返回0).</para>
+        /// <para>But <see cref="Sign_Bcl(float)">Sign_Bcl</see> behaves differently. Throws an exception for the <c>NaN</c> of float types (而 <see cref="Sign_Bcl(int, int)">Sign_Bcl</see> 的行为有所不同. 对于浮点类型的 <c>NaN</c>, 会抛出异常): System.ArithmeticException: Function does not accept floating point Not-a-Number values.</para>
+        /// </remarks>
+        /// <seealso cref="INumber{TSelf}.Sign(TSelf)"/>
+        /// <seealso cref="Math.Sign(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(double value) {
+            return Sign_Bit(value);
+            // System.ArithmeticException: Function does not accept floating point Not-a-Number values.
+            //return Sign_Bcl(value);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="Sign(double)"/>
+        /// <seealso cref="Half.Sign"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(Half value) {
+            return Sign_Bit(value);
+            // System.ArithmeticException: Function does not accept floating point Not-a-Number values.
+            //return Sign_Bcl(value);
+        }
+#endif // NET5_0_OR_GREATER
+
+        /// <inheritdoc cref="Sign(double)"/>
+        /// <seealso cref="Math.Sign(sbyte)"/>
+        /// <seealso cref="sbyte.Sign"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(sbyte value) {
+            return Sign_Bcl(value);
+        }
+
+        /// <inheritdoc cref="Sign(double)"/>
+        /// <seealso cref="Math.Sign(short)"/>
+        /// <seealso cref="short.Sign"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(short value) {
+            return Sign_Bcl(value);
+        }
+
+        /// <inheritdoc cref="Sign(double)"/>
+        /// <seealso cref="Math.Sign(int)"/>
+        /// <seealso cref="int.Sign"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(int value) {
+            return Sign_Bcl(value);
+        }
+
+        /// <inheritdoc cref="Sign(double)"/>
+        /// <seealso cref="Math.Sign(long)"/>
+        /// <seealso cref="long.Sign"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(long value) {
+            return Sign_Bcl(value);
+        }
+
+        /// <inheritdoc cref="Sign(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign_Bcl(float value) {
+            return Math.Sign(value);
+        }
+
+        /// <inheritdoc cref="Sign(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign_Bcl(double value) {
+            return Math.Sign(value);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="Sign(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign_Bcl(Half value) {
+#if NET7_0_OR_GREATER
+            return Half.Sign(value);
+#else
+            return Sign_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
+
+        /// <inheritdoc cref="Sign(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign_Bcl(sbyte value) {
+            return Math.Sign(value);
+        }
+
+        /// <inheritdoc cref="Sign(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign_Bcl(short value) {
+            return Math.Sign(value);
+        }
+
+        /// <inheritdoc cref="Sign(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign_Bcl(int value) {
+            return Math.Sign(value);
+        }
+
+        /// <inheritdoc cref="Sign(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign_Bcl(long value) {
+            return Math.Sign(value);
+        }
+
+        /// <inheritdoc cref="Sign(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign_Bit(float value) {
+            int m = ToInt32(value > 0);
+            int n = ToInt32(value < 0);
+            int rt = m - n;
+            return rt;
+        }
+
+        /// <inheritdoc cref="Sign(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign_Bit(double value) {
+            // (x > 0) - (x < 0); //From "Hacker's Delight" 2.7, Page 19.
+            int m = ToInt32(value > 0);
+            int n = ToInt32(value < 0);
+            int rt = m - n;
+            return rt;
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="Sign(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign_Bit(Half value) {
+            Half zero = (Half)0;
+            int m = ToInt32(value > zero);
+            int n = ToInt32(value < zero);
+            int rt = m - n;
+            return rt;
+        }
+#endif // NET5_0_OR_GREATER
+
+        /// <inheritdoc cref="Sign(sbyte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign_Bit(sbyte value) {
+            return Sign_Bit((int)value);
+        }
+
+        /// <inheritdoc cref="Sign(short)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign_Bit(short value) {
+            return Sign_Bit((int)value);
+        }
+
+        /// <inheritdoc cref="Sign(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign_Bit(int value) {
+            // (x >> 31) | (-x u>> 31); //From "Hacker's Delight" 2.7, Page 19.
+            return unchecked(value >> 31 | (int)((uint)-value >> 31));
+        }
+
+        /// <inheritdoc cref="Sign(long)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign_Bit(long value) {
+            return unchecked((int)(value >> 63 | (long)((ulong)-value >> 63)));
+        }
 
 
     }
