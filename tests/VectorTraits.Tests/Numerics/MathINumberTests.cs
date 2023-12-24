@@ -269,14 +269,47 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                 int dst = MathINumber.Sign_Bit((dynamic)x);
                 Assert.AreEqual(expected, dst, string.Format("Sign_Bit({0})", x));
                 // Sign_Bcl.
-#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                 try {
                     dst = MathINumber.Sign_Bcl((dynamic)x);
                     Assert.AreEqual(expected, dst, string.Format("Sign_Bcl({0})", x));
                 } catch (Exception ex) {
                     VectorTextUtil.WriteLine(writer, "Sign_Bcl({0}):\t{1}", x, ex.Message);
                 }
-#endif // NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
+        public void SignFloatTest<T>(T src) where T : struct {
+            System.IO.TextWriter writer = Console.Out;
+            T[] samples = new T[8];
+            samples[0] = default;
+            samples[1] = Scalars<T>.NegativeZero;
+            samples[2] = src;
+            samples[3] = Scalars<T>.MaxValue;
+            samples[4] = Scalars<T>.MinValue;
+            samples[5] = Scalars<T>.PositiveInfinity;
+            samples[6] = Scalars<T>.NegativeInfinity;
+            samples[7] = Scalars<T>.NaN;
+            // run.
+            bool allowLog = false;
+            for (int i = 0; i < samples.Length; ++i) {
+                T x = samples[i];
+                T expected = BitMath.SignFloat((dynamic)x);
+                if (allowLog) {
+                    VectorTextUtil.WriteLine(writer, "SignFloat({0}):\t{1}", x, expected);
+                }
+                // SignFloat_Bit.
+                T dst = MathINumber.SignFloat_Bit((dynamic)x);
+                Assert.AreEqual(expected, dst, string.Format("SignFloat_Bit({0})", x));
+                // SignFloat_Bcl.
+                try {
+                    dst = MathINumber.SignFloat_Bcl((dynamic)x);
+                    Assert.AreEqual(expected, dst, string.Format("SignFloat_Bcl({0})", x));
+                } catch (Exception ex) {
+                    VectorTextUtil.WriteLine(writer, "SignFloat_Bcl({0}):\t{1}", x, ex.Message);
+                }
             }
         }
 

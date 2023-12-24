@@ -841,7 +841,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// Computes the sign of a value (计算值的符号).
         /// </summary>
         /// <param name="value">The value whose sign is to be computed (要计算其符号的值)</param>
-        /// <returns>Returns 1 if the value is positive, 0 if the value is zero, and -1 if the value is negative (值为正数时返回1，值为0时返回0，值为负数时返回-1).</returns>
+        /// <returns>Returns 1 if the value is positive, 0 if the value is zero, and -1 if the value is negative (值为正数时返回1, 值为0时返回0, 值为负数时返回-1).</returns>
         /// <remarks>
         /// <para>No exception is thrown. For the <c>NaN</c> of float types, returns 0.(不会抛出异常. 对于浮点类型的 <c>NaN</c>, 会返回0).</para>
         /// <para>But <see cref="Sign_Bcl(float)">Sign_Bcl</see> behaves differently. Throws an exception for the <c>NaN</c> of float types (而 <see cref="Sign_Bcl(int, int)">Sign_Bcl</see> 的行为有所不同. 对于浮点类型的 <c>NaN</c>, 会抛出异常): System.ArithmeticException: Function does not accept floating point Not-a-Number values.</para>
@@ -1004,6 +1004,101 @@ namespace Zyl.VectorTraits.Numerics {
         public static int Sign_Bit(long value) {
             return unchecked((int)(value >> 63 | (long)((ulong)-value >> 63)));
         }
+
+
+        /// <inheritdoc cref="SignFloat(double)"/>
+        /// <seealso cref="Math.Sign(float)"/>
+        /// <seealso cref="float.Sign"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float SignFloat(float value) {
+            return SignFloat_Bit(value);
+            // Poor performance due to the presence of branching statements.
+            //return SignFloat_Bcl(value);
+        }
+
+        /// <summary>
+        /// Computes the sign of a value and returns a floating point number (计算值的符号并返回浮点数).
+        /// </summary>
+        /// <param name="value">The value whose sign is to be computed (要计算其符号的值)</param>
+        /// <returns>Returns 1 if the value is positive, 0 if the value is zero, -1 if the value is negative, and <c>NaN</c> if the value is <c>NaN</c> (值为正数时返回1, 值为0时返回0, 值为负数时返回-1, 值为<c>NaN</c>时返回<c>NaN</c>).</returns>
+        /// <remarks>
+        /// <para>No exception is thrown. For the <c>NaN</c> of float types, returns <c>NaN</c>.(不会抛出异常. 对于浮点类型的 <c>NaN</c>, 会返回 <c>NaN</c>).</para>
+        /// </remarks>
+        /// <seealso cref="INumber{TSelf}.Sign(TSelf)"/>
+        /// <seealso cref="Math.Sign(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double SignFloat(double value) {
+            return SignFloat_Bit(value);
+            // Poor performance due to the presence of branching statements.
+            //return SignFloat_Bcl(value);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="SignFloat(double)"/>
+        /// <seealso cref="Half.Sign"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half SignFloat(Half value) {
+            return SignFloat_Bit(value);
+            // Poor performance due to the presence of branching statements.
+            //return SignFloat_Bcl(value);
+        }
+#endif // NET5_0_OR_GREATER
+
+        /// <inheritdoc cref="SignFloat(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float SignFloat_Bcl(float value) {
+            if (IsNaN_Bcl(value)) return value;
+            return (float)Sign_Bit(value);
+        }
+
+        /// <inheritdoc cref="SignFloat(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double SignFloat_Bcl(double value) {
+            if (IsNaN_Bcl(value)) return value;
+            return (double)Sign_Bit(value);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="SignFloat(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half SignFloat_Bcl(Half value) {
+#if NET7_0_OR_GREATER
+            if (IsNaN_Bcl(value)) return value;
+            return (Half)Sign_Bit(value);
+#else
+            return SignFloat_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+#endif // NET5_0_OR_GREATER
+
+        /// <inheritdoc cref="SignFloat(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float SignFloat_Bit(float value) {
+            bool nanMask = IsNaN_Bit(value);
+            float rt = (float)Sign_Bit(value);
+            rt = ConditionalSelect(nanMask, value, rt);
+            return rt;
+        }
+
+        /// <inheritdoc cref="SignFloat(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double SignFloat_Bit(double value) {
+            bool nanMask = IsNaN_Bit(value);
+            double rt = (double)Sign_Bit(value);
+            rt = ConditionalSelect(nanMask, value, rt);
+            return rt;
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="SignFloat(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half SignFloat_Bit(Half value) {
+            bool nanMask = IsNaN_Bit(value);
+            Half rt = (Half)Sign_Bit(value);
+            rt = ConditionalSelect(nanMask, value, rt);
+            return rt;
+        }
+#endif // NET5_0_OR_GREATER
 
 
     }

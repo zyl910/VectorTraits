@@ -407,5 +407,26 @@ namespace Zyl.VectorTraits {
             return MathINumber.Sign(value);
         }
 
+
+        /// <inheritdoc cref="MathINumber.SignFloat(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float SignFloat(float value) {
+            return MathINumber.SignFloat(value);
+        }
+
+        /// <inheritdoc cref="MathINumber.SignFloat(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double SignFloat(double value) {
+            return MathINumber.SignFloat(value);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumber.SignFloat(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Half SignFloat(Half value) {
+            return MathINumber.SignFloat(value);
+        }
+#endif // NET5_0_OR_GREATER
+
     }
 }
