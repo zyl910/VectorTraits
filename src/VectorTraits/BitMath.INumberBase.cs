@@ -286,6 +286,27 @@ namespace Zyl.VectorTraits {
 #endif // NET5_0_OR_GREATER
 
 
+        /// <inheritdoc cref="MathINumberBase.IsNegativeZero(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeZero(float value) {
+            return MathINumberBase.IsNegativeZero(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsNegativeZero(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeZero(double value) {
+            return MathINumberBase.IsNegativeZero(value);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsNegativeZero(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeZero(Half x) {
+            return MathINumberBase.IsNegativeZero(x);
+        }
+#endif // NET5_0_OR_GREATER
+
+
         /// <inheritdoc cref="MathINumberBase.IsNormal(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNormal(float value) {

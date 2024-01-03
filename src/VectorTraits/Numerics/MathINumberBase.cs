@@ -1086,6 +1086,80 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NET5_0_OR_GREATER
 
 
+        /// <inheritdoc cref="IsNegativeZero(double)"/>
+        /// <seealso cref="float.IsZero"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeZero(float value) {
+            return IsNegativeZero_Bit(value);
+        }
+
+        /// <summary>
+        /// Determines if a element represents a negative zero (确定元素是否为负零).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value is negative zero, otherwise is <c>false</c> (如果值是负零，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsZero(TSelf)"/>
+        /// <seealso cref="double.IsZero"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeZero(double value) {
+            return IsNegativeZero_Bit(value);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNegativeZero(double)"/>
+        /// <seealso cref="Half.IsZero"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeZero(Half value) {
+            return IsNegativeZero_Bit(value);
+        }
+#endif // NET5_0_OR_GREATER
+
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+        /// <inheritdoc cref="IsNegativeZero(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeZero_Bcl(float value) {
+            return IsNegative_Bcl(value) && 0f == value;
+        }
+
+        /// <inheritdoc cref="IsNegativeZero(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeZero_Bcl(double value) {
+            return IsNegative_Bcl(value) && 0 == value;
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNegativeZero(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeZero_Bcl(Half value) {
+            return IsNegative_Bcl(value) && (Half)0 == value;
+        }
+#endif // NET5_0_OR_GREATER
+#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+
+        /// <inheritdoc cref="IsNegativeZero(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeZero_Bit(float value) {
+            int bits = MathBitConverter.SingleToInt32Bits(value);
+            return int.MinValue == bits;
+        }
+
+        /// <inheritdoc cref="IsNegativeZero(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeZero_Bit(double value) {
+            long bits = BitConverter.DoubleToInt64Bits(value);
+            return long.MinValue == bits;
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNegativeZero(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegativeZero_Bit(Half value) {
+            short bits = MathBitConverter.HalfToInt16Bits(value);
+            return short.MinValue == bits;
+        }
+#endif // NET5_0_OR_GREATER
+
+
         /// <inheritdoc cref="IsNormal(double)"/>
         /// <seealso cref="float.IsNormal"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
