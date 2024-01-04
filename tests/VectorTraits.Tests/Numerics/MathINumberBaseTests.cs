@@ -347,6 +347,36 @@ namespace Zyl.VectorTraits.Tests.Numerics {
         [TestCase((float)1)]
         [TestCase((double)2)]
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
+        public void IsNotNaNTest<T>(T src) where T : struct {
+            T[] samples = new T[8];
+            samples[0] = default;
+            samples[1] = Scalars<T>.NegativeZero;
+            samples[2] = src;
+            samples[3] = Scalars<T>.MaxValue;
+            samples[4] = Scalars<T>.MinValue;
+            samples[5] = Scalars<T>.PositiveInfinity;
+            samples[6] = Scalars<T>.NegativeInfinity;
+            samples[7] = Scalars<T>.NaN;
+            // run.
+            bool allowLog = false;
+            for (int i = 0; i < samples.Length; ++i) {
+                T x = samples[i];
+                bool expected = BitMath.IsNotNaN((dynamic)x);
+                if (allowLog) {
+                    Console.WriteLine("IsNotNaN({0}):\t{1}", x, expected);
+                }
+                // IsNotNaN_Bit.
+                bool dst = MathINumberBase.IsNotNaN_Bit((dynamic)x);
+                Assert.AreEqual(expected, dst, string.Format("IsNotNaN_Bit({0})", x));
+                // IsNotNaN_Bcl.
+                dst = MathINumberBase.IsNotNaN_Bcl((dynamic)x);
+                Assert.AreEqual(expected, dst, string.Format("IsNotNaN_Bcl({0})", x));
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
         public void IsNormalTest<T>(T src) where T : struct {
             T[] samples = new T[8];
             samples[0] = default;

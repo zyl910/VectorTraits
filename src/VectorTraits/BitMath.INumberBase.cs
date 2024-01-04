@@ -328,6 +328,27 @@ namespace Zyl.VectorTraits {
 #endif // NET5_0_OR_GREATER
 
 
+        /// <inheritdoc cref="MathINumberBase.IsNotNaN(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotNaN(float value) {
+            return MathINumberBase.IsNotNaN(value);
+        }
+
+        /// <inheritdoc cref="MathINumberBase.IsNotNaN(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotNaN(double value) {
+            return MathINumberBase.IsNotNaN(value);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="MathINumberBase.IsNotNaN(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotNaN(Half x) {
+            return MathINumberBase.IsNotNaN(x);
+        }
+#endif // NET5_0_OR_GREATER
+
+
         /// <inheritdoc cref="MathINumberBase.IsOddInteger(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsOddInteger(float value) {

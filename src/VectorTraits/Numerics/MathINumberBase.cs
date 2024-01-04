@@ -1261,6 +1261,83 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NET5_0_OR_GREATER
 
 
+        /// <inheritdoc cref="IsNotNaN(double)"/>
+        /// <seealso cref="float.IsNaN"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotNaN(float value) {
+            return IsNotNaN_Bcl(value);
+        }
+
+        /// <summary>
+        /// Determines if a element is not NaN (确定元素是否不为非数).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value is NaN, otherwise is <c>false</c> (如果值不为非数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsNaN(TSelf)"/>
+        /// <seealso cref="double.IsNaN"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotNaN(double value) {
+            return IsNotNaN_Bcl(value);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNotNaN(double)"/>
+        /// <seealso cref="Half.IsNaN"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotNaN(Half value) {
+            return IsNotNaN_Bcl(value);
+        }
+#endif // NET5_0_OR_GREATER
+
+        /// <inheritdoc cref="IsNotNaN(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotNaN_Bcl(float value) {
+            return !float.IsNaN(value);
+        }
+
+        /// <inheritdoc cref="IsNotNaN(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotNaN_Bcl(double value) {
+            return !double.IsNaN(value);
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNotNaN(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotNaN_Bcl(Half value) {
+            return !Half.IsNaN(value);
+        }
+#endif // NET5_0_OR_GREATER
+
+        /// <inheritdoc cref="IsNotNaN(float)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotNaN_Bit(float value) {
+#pragma warning disable CS1718 // Comparison made to same variable; did you mean to compare something else?
+            return value == value;
+#pragma warning restore CS1718 // Comparison made to same variable; did you mean to compare something else?
+        }
+
+        /// <inheritdoc cref="IsNotNaN(double)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotNaN_Bit(double value) {
+            // A NaN will never equal itself so this is an
+            // easy and efficient way to check for NaN.
+#pragma warning disable CS1718 // Comparison made to same variable; did you mean to compare something else?
+            return value == value;
+#pragma warning restore CS1718 // Comparison made to same variable; did you mean to compare something else?
+        }
+
+#if NET5_0_OR_GREATER
+        /// <inheritdoc cref="IsNotNaN(Half)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotNaN_Bit(Half value) {
+#pragma warning disable CS1718 // Comparison made to same variable; did you mean to compare something else?
+            return value == value;
+#pragma warning restore CS1718 // Comparison made to same variable; did you mean to compare something else?
+        }
+#endif // NET5_0_OR_GREATER
+
+
         /// <inheritdoc cref="IsOddInteger(double)"/>
         /// <seealso cref="float.IsOddInteger"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
