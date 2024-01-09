@@ -120,6 +120,20 @@ Remarks:
 ## Vector traits method appended by this library (由本库追加的向量特性方法)
 Types: Vector, Vector128, Vector256 .
 
+### Methods of INumber (数字性接口的函数)
+Summary (概要):
+
+List (列表):
+
+### Methods of INumberBase (数字基本性接口的函数)
+Summary (概要):
+- Provides the vector methods of check floating number (提供浮点数判断的向量方法): YIsEvenInteger, YIsFinite, YIsInfinity, YIsInfinityOrNaN, YIsInteger, YIsNaN, YIsNegative, YIsNegativeZero, YIsNegativeInfinity, YIsNormal, YIsNotNaN, YIsOddInteger, YIsPositive, YIsPositiveInfinity, YIsSubnormal, YIsZero, YIsZeroOrSubnormal.
+
+List (列表):
+- `YIsFinite`: Determines if a element is finite. It contains zero, subnormal, and normal. It does not contain infinity, NaN (确定元素是否为有限值. 它包含 零、次正规数、正规数. 它不含无穷大、非数).
+  Mnemonic: `rt[i] := to_mask(isFinite(value[i]))` .
+
+### Others (其他)
 Summary (概要):
 - Provides the vector methods of bitwise operations (提供位运算的向量方法): YOrNot, YBitToByte, YBitToInt16, YBitToInt32, YBitToInt64 .
 - Provides the vector methods of clamp (提供限制的向量方法): YClamp .

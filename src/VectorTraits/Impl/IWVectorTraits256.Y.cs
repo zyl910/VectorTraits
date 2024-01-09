@@ -9,6 +9,7 @@ using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 #endif
 using System.Text;
+using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Impl {
     partial interface IWVectorTraits256 {
@@ -277,6 +278,27 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="YIsAnyTrue_AcceleratedTypes"/>
         /// <seealso cref="Vector256.EqualsAny{T}(Vector256{T}, Vector256{T})" />
         bool YIsAnyTrue<T>(Vector256<T> value) where T : struct;
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsFinite</c> (运行 <c>YIsFinite</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsFinite(Vector256{float})"/>
+        TypeCodeFlags YIsFinite_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is finite. It contains zero, subnormal, and normal. It does not contain infinity, NaN (确定元素是否为有限值. 它包含 零、次正规数、正规数. 它不含无穷大、非数).
+        /// Mnemonic: <c>rt[i] := to_mask(isFinite(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is finite (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为有限的).</returns>
+        /// <seealso cref="YIsFinite_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsFinite(float)"/>
+        Vector256<int> YIsFinite(Vector256<float> value);
+
+        /// <inheritdoc cref="YIsFinite(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsFinite(double)"/>
+        Vector256<long> YIsFinite(Vector256<double> value);
 
 
         /// <summary>

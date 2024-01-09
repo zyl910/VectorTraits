@@ -7,6 +7,7 @@ using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Collections;
 using Zyl.VectorTraits.Impl.Util;
+using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Impl.AVector256 {
     partial class WVectorTraits256Base {
@@ -81,6 +82,88 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static bool YIsAnyTrue_Bcl<T>(Vector256<T> value) where T : struct {
                 Vector256<byte> allBitsSet = Vector256<byte>.AllBitsSet; // Must use byte.
                 return Vector256.EqualsAny(value.AsByte(), allBitsSet);
+            }
+#endif // NET7_0_OR_GREATER
+
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsFinite_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsFinite_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if NET7_0_OR_GREATER
+                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+#endif // NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsFinite(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsFinite(Vector256<float> value) {
+#if NET7_0_OR_GREATER
+                return YIsFinite_Bit(value);
+#else
+                return YIsFinite_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsFinite(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsFinite(Vector256<double> value) {
+#if NET7_0_OR_GREATER
+                return YIsFinite_Bit(value);
+#else
+                return YIsFinite_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsFinite(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsFinite_Basic(Vector256<float> value) {
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
+                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector256<float>, FixedArray8<float>>(ref value);
+                ref FixedArray8<int> p = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsFinite(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsFinite(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsFinite(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsFinite(pvalue.I3));
+                p.I4 = BitMathCore.ToInt32Mask(MathINumberBase.IsFinite(pvalue.I4));
+                p.I5 = BitMathCore.ToInt32Mask(MathINumberBase.IsFinite(pvalue.I5));
+                p.I6 = BitMathCore.ToInt32Mask(MathINumberBase.IsFinite(pvalue.I6));
+                p.I7 = BitMathCore.ToInt32Mask(MathINumberBase.IsFinite(pvalue.I7));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsFinite(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsFinite_Basic(Vector256<double> value) {
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
+                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector256<double>, FixedArray4<double>>(ref value);
+                ref FixedArray4<long> p = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsFinite(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsFinite(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsFinite(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsFinite(pvalue.I3));
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits256.YIsFinite(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsFinite_Bit(Vector256<float> value) {
+                Vector256<int> exponentMask = Vector256Constants.Single_ExponentMask.AsInt32();
+                Vector256<int> exponent = Vector256.BitwiseAnd(value.AsInt32(), exponentMask);
+                Vector256<int> rt = Vector256.OnesComplement(Vector256.Equals(exponent, exponentMask));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsFinite(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsFinite_Bit(Vector256<double> value) {
+                Vector256<long> exponentMask = Vector256Constants.Double_ExponentMask.AsInt64();
+                Vector256<long> exponent = Vector256.BitwiseAnd(value.AsInt64(), exponentMask);
+                Vector256<long> rt = Vector256.OnesComplement(Vector256.Equals(exponent, exponentMask));
+                return rt;
             }
 #endif // NET7_0_OR_GREATER
 

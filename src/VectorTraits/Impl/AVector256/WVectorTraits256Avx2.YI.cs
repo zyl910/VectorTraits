@@ -46,6 +46,33 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return !Avx.TestZ(value.AsInt32(), value.AsInt32());
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsFinite_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsFinite_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsFinite(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsFinite(Vector256<float> value) {
+                Vector256<int> exponentMask = Vector256Constants.Single_ExponentMask.AsInt32();
+                Vector256<int> exponent = Avx2.And(value.AsInt32(), exponentMask);
+                Vector256<int> rt = OnesComplement(Equals(exponent, exponentMask));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsFinite(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsFinite(Vector256<double> value) {
+                Vector256<long> exponentMask = Vector256Constants.Double_ExponentMask.AsInt64();
+                Vector256<long> exponent = Avx2.And(value.AsInt64(), exponentMask);
+                Vector256<long> rt = OnesComplement(Equals(exponent, exponentMask));
+                return rt;
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }

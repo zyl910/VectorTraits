@@ -176,6 +176,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsFinite_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YIsFinite_AcceleratedTypes {
+            get {
+                return Statics.YIsFinite_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsFinite(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YIsFinite(Vector256<float> value) {
+            return Statics.YIsFinite(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsFinite(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YIsFinite(Vector256<double> value) {
+            return Statics.YIsFinite(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public virtual TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {
