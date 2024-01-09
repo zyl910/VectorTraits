@@ -196,6 +196,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsInfinity_AcceleratedTypes"/>
+        public override TypeCodeFlags YIsInfinity_AcceleratedTypes {
+            get {
+                return Statics.YIsInfinity_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsInfinity(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> YIsInfinity(Vector256<float> value) {
+            return Statics.YIsInfinity(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsInfinity(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> YIsInfinity(Vector256<double> value) {
+            return Statics.YIsInfinity(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public override TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

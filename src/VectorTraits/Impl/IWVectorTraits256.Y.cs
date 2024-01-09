@@ -302,6 +302,27 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YIsInfinity</c> (运行 <c>YIsInfinity</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsInfinity(Vector256{float})"/>
+        TypeCodeFlags YIsInfinity_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is infinite (确定元素是否为无穷大).
+        /// Mnemonic: <c>rt[i] := to_mask(isInfinity(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is infinite (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为无穷大).</returns>
+        /// <seealso cref="YIsInfinity_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsInfinity(float)"/>
+        Vector256<int> YIsInfinity(Vector256<float> value);
+
+        /// <inheritdoc cref="YIsInfinity(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsInfinity(double)"/>
+        Vector256<long> YIsInfinity(Vector256<double> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YNarrowSaturate</c> (运行 <c>YNarrowSaturate</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YNarrowSaturate(Vector256{short}, Vector256{short})"/>

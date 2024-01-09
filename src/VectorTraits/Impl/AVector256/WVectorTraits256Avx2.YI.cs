@@ -73,6 +73,35 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsInfinity_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsInfinity_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsInfinity(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsInfinity(Vector256<float> value) {
+                Vector256<int> nonSignMask = Vector256Constants.Single_NonSignMask.AsInt32();
+                Vector256<int> exponentMask = Vector256Constants.Single_ExponentMask.AsInt32();
+                Vector256<int> nonSign = Avx2.And(value.AsInt32(), nonSignMask);
+                Vector256<int> rt = Equals(nonSign, exponentMask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsInfinity(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsInfinity(Vector256<double> value) {
+                Vector256<long> nonSignMask = Vector256Constants.Double_NonSignMask.AsInt64();
+                Vector256<long> exponentMask = Vector256Constants.Double_ExponentMask.AsInt64();
+                Vector256<long> nonSign = Avx2.And(value.AsInt64(), nonSignMask);
+                Vector256<long> rt = Equals(nonSign, exponentMask);
+                return rt;
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }
