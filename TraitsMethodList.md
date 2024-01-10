@@ -132,6 +132,10 @@ Summary (概要):
 List (列表):
 - `YIsFinite`: Determines if a element is finite. It contains zero, subnormal, and normal. It does not contain infinity, NaN (确定元素是否为有限值. 它包含 零、次正规数、正规数. 它不含无穷大、非数).
   Mnemonic: `rt[i] := to_mask(isFinite(value[i]))` .
+- `YIsInfinity`: Determines if a element is infinite (确定元素是否为无穷大).
+  Mnemonic: `rt[i] := to_mask(isInfinity(value[i]))` .
+- `YIsInfinityOrNaN`: Determines if a element is infinite or NaN (确定元素是否为无穷大或非数).
+  Mnemonic: `rt[i] := to_mask(isInfinityOrNaN(value[i]))` .
 
 ### Others (其他)
 Summary (概要):
