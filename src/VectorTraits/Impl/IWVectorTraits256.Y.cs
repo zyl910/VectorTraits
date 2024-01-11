@@ -423,6 +423,27 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YIsNegativeInfinity</c> (运行 <c>YIsNegativeInfinity</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsNegativeInfinity(Vector256{float})"/>
+        TypeCodeFlags YIsNegativeInfinity_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is negative infinity (确定元素是否为负无穷大).
+        /// Mnemonic: <c>rt[i] := to_mask(isNegativeInfinity(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is negative infinity (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为负无穷大).</returns>
+        /// <seealso cref="YIsNegativeInfinity_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsNegativeInfinity(float)"/>
+        Vector256<int> YIsNegativeInfinity(Vector256<float> value);
+
+        /// <inheritdoc cref="YIsNegativeInfinity(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsNegativeInfinity(double)"/>
+        Vector256<long> YIsNegativeInfinity(Vector256<double> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YIsNegativeZero</c> (运行 <c>YIsNegativeZero</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YIsNegativeZero(Vector256{float})"/>

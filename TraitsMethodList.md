@@ -142,6 +142,8 @@ List (列表):
   Mnemonic: `rt[i] := to_mask(isNaN(value[i]))` .
 - `YIsNegative`: Determines if a element represents a negative number or negative zero (确定元素是否为负数或负零).
   Mnemonic: `rt[i] := to_mask(isNegative(value[i])) = to_mask((value[i]<0) || isNegativeZero(value[i]))` .
+- `YIsNegativeInfinity`: Determines if a element is negative infinity (确定元素是否为负无穷大).
+  Mnemonic: `rt[i] := to_mask(isNegativeInfinity(value[i]))` .
 - `YIsNegativeZero`: Determines if a element represents a negative zero (确定元素是否为负零).
   Mnemonic: `rt[i] := to_mask(isNegativeZero(value[i]))` .
 

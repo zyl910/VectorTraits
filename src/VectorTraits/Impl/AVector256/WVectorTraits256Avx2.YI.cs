@@ -232,6 +232,31 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.YIsNegativeInfinity_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsNegativeInfinity_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNegativeInfinity(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsNegativeInfinity(Vector256<float> value) {
+                Vector256<float> sample = Vector256.Create(float.NegativeInfinity);
+                Vector256<int> rt = Equals(value, sample).AsInt32();
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNegativeInfinity(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsNegativeInfinity(Vector256<double> value) {
+                Vector256<double> sample = Vector256.Create(double.NegativeInfinity);
+                Vector256<long> rt = Equals(value, sample).AsInt64();
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.YIsNegativeZero_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNegativeZero_AcceleratedTypes {
                 get {
