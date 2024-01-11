@@ -386,6 +386,43 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YIsNegative</c> (运行 <c>YIsNegative</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsNegative(Vector256{float})"/>
+        TypeCodeFlags YIsNegative_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element represents a negative number or negative zero (确定元素是否为负数或负零).
+        /// Mnemonic: <c>rt[i] := to_mask(isFinite(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is negative number or negative zero (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为负数或负零).</returns>
+        /// <seealso cref="YIsNegative_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsNegative(float)"/>
+        Vector256<int> YIsNegative(Vector256<float> value);
+
+        /// <inheritdoc cref="YIsNegative(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsNegative(double)"/>
+        Vector256<long> YIsNegative(Vector256<double> value);
+
+        /// <inheritdoc cref="YIsNegative(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsNegative(sbyte)"/>
+        Vector256<sbyte> YIsNegative(Vector256<sbyte> value);
+
+        /// <inheritdoc cref="YIsNegative(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsNegative(short)"/>
+        Vector256<short> YIsNegative(Vector256<short> value);
+
+        /// <inheritdoc cref="YIsNegative(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsNegative(int)"/>
+        Vector256<int> YIsNegative(Vector256<int> value);
+
+        /// <inheritdoc cref="YIsNegative(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsNegative(long)"/>
+        Vector256<long> YIsNegative(Vector256<long> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YNarrowSaturate</c> (运行 <c>YNarrowSaturate</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YNarrowSaturate(Vector256{short}, Vector256{short})"/>

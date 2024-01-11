@@ -276,6 +276,52 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative_AcceleratedTypes"/>
+        public override TypeCodeFlags YIsNegative_AcceleratedTypes {
+            get {
+                return Statics.YIsNegative_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> YIsNegative(Vector256<float> value) {
+            return Statics.YIsNegative(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> YIsNegative(Vector256<double> value) {
+            return Statics.YIsNegative(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> YIsNegative(Vector256<sbyte> value) {
+            return Statics.YIsNegative(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> YIsNegative(Vector256<short> value) {
+            return Statics.YIsNegative(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> YIsNegative(Vector256<int> value) {
+            return Statics.YIsNegative(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> YIsNegative(Vector256<long> value) {
+            return Statics.YIsNegative(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public override TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

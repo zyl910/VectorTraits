@@ -256,6 +256,70 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsNaN_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YIsNaN_AcceleratedTypes {
+            get {
+                return Statics.YIsNaN_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YIsNaN(Vector256<float> value) {
+            return Statics.YIsNaN(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YIsNaN(Vector256<double> value) {
+            return Statics.YIsNaN(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YIsNegative_AcceleratedTypes {
+            get {
+                return Statics.YIsNegative_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YIsNegative(Vector256<float> value) {
+            return Statics.YIsNegative(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YIsNegative(Vector256<double> value) {
+            return Statics.YIsNegative(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<sbyte> YIsNegative(Vector256<sbyte> value) {
+            return Statics.YIsNegative(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<short> YIsNegative(Vector256<short> value) {
+            return Statics.YIsNegative(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YIsNegative(Vector256<int> value) {
+            return Statics.YIsNegative(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YIsNegative(Vector256<long> value) {
+            return Statics.YIsNegative(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public virtual TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {
@@ -1187,26 +1251,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector256<ulong> YShuffleKernel_Core(Vector256<ulong> vector, Vector256<ulong> args0, Vector256<ulong> args1) {
             return Statics.YShuffleKernel_Core(vector, args0, args1);
-        }
-
-
-        /// <inheritdoc cref="IWVectorTraits256.YIsNaN_AcceleratedTypes"/>
-        public virtual TypeCodeFlags YIsNaN_AcceleratedTypes {
-            get {
-                return Statics.YIsNaN_AcceleratedTypes;
-            }
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{float})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector256<int> YIsNaN(Vector256<float> value) {
-            return Statics.YIsNaN(value);
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{double})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector256<long> YIsNaN(Vector256<double> value) {
-            return Statics.YIsNaN(value);
         }
 
 #endif

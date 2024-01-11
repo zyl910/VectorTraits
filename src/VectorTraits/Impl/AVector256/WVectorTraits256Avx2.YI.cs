@@ -181,6 +181,56 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNegative_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsNegative_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsNegative(Vector256<float> value) {
+                return YIsNegative(value.AsInt32());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsNegative(Vector256<double> value) {
+                return YIsNegative(value.AsInt64());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YIsNegative(Vector256<sbyte> value) {
+                Vector256<sbyte> rt = LessThan(value, Vector256<sbyte>.Zero);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YIsNegative(Vector256<short> value) {
+                Vector256<short> rt = LessThan(value, Vector256<short>.Zero);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsNegative(Vector256<int> value) {
+                Vector256<int> rt = LessThan(value, Vector256<int>.Zero);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsNegative(Vector256<long> value) {
+                Vector256<long> rt = LessThan(value, Vector256<long>.Zero);
+                return rt;
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }

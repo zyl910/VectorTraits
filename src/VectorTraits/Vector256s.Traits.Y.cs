@@ -430,6 +430,79 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNegative_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNegative_AcceleratedTypes;
+#else
+                return _instance.YIsNegative_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YIsNegative(Vector256<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YIsNegative(Vector256<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YIsNegative(Vector256<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YIsNegative(Vector256<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YIsNegative(Vector256<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YIsNegative(Vector256<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

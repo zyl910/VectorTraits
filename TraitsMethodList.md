@@ -140,6 +140,8 @@ List (列表):
   Mnemonic: `rt[i] := to_mask(isInteger(value[i]))` .
 - `YIsNaN`: Determines if a element is NaN (确定元素是否为非数).
   Mnemonic: `rt[i] := to_mask(isNaN(value[i]))` .
+- `YIsNegative`: Determines if a element represents a negative number or negative zero (确定元素是否为负数或负零).
+  Mnemonic: `rt[i] := to_mask(isNegative(value[i])) = to_mask((value[i]<0) || isNegativeZero(value[i]))` .
 
 ### Others (其他)
 Summary (概要):
