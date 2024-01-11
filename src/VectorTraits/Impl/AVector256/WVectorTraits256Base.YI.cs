@@ -417,6 +417,88 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 #endif // NET7_0_OR_GREATER
 
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNaN_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsNaN_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if NET7_0_OR_GREATER
+                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+#endif // NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsNaN(Vector256<float> value) {
+#if NET7_0_OR_GREATER
+                return YIsNaN_Bit(value);
+#else
+                return YIsNaN_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsNaN(Vector256<double> value) {
+#if NET7_0_OR_GREATER
+                return YIsNaN_Bit(value);
+#else
+                return YIsNaN_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsNaN_Basic(Vector256<float> value) {
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
+                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector256<float>, FixedArray8<float>>(ref value);
+                ref FixedArray8<int> p = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNaN(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsNaN(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsNaN(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsNaN(pvalue.I3));
+                p.I4 = BitMathCore.ToInt32Mask(MathINumberBase.IsNaN(pvalue.I4));
+                p.I5 = BitMathCore.ToInt32Mask(MathINumberBase.IsNaN(pvalue.I5));
+                p.I6 = BitMathCore.ToInt32Mask(MathINumberBase.IsNaN(pvalue.I6));
+                p.I7 = BitMathCore.ToInt32Mask(MathINumberBase.IsNaN(pvalue.I7));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsNaN_Basic(Vector256<double> value) {
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
+                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector256<double>, FixedArray4<double>>(ref value);
+                ref FixedArray4<long> p = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNaN(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsNaN(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsNaN(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsNaN(pvalue.I3));
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsNaN_Bit(Vector256<float> value) {
+#pragma warning disable CS1718 // Comparison made to same variable; did you mean to compare something else?
+                Vector256<int> rt = Vector256.OnesComplement(Vector256.Equals(value, value).AsInt32());
+#pragma warning restore CS1718 // Comparison made to same variable; did you mean to compare something else?
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsNaN_Bit(Vector256<double> value) {
+#pragma warning disable CS1718 // Comparison made to same variable; did you mean to compare something else?
+                Vector256<long> rt = Vector256.OnesComplement(Vector256.Equals(value, value).AsInt64());
+#pragma warning restore CS1718 // Comparison made to same variable; did you mean to compare something else?
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }

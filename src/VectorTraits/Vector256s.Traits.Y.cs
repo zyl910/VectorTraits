@@ -398,6 +398,38 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsNaN_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNaN_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNaN_AcceleratedTypes;
+#else
+                return _instance.YIsNaN_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YIsNaN(Vector256<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNaN(value);
+#else
+            return _instance.YIsNaN(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YIsNaN(Vector256<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNaN(value);
+#else
+            return _instance.YIsNaN(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

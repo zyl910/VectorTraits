@@ -1189,6 +1189,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             return Statics.YShuffleKernel_Core(vector, args0, args1);
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNaN_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YIsNaN_AcceleratedTypes {
+            get {
+                return Statics.YIsNaN_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YIsNaN(Vector256<float> value) {
+            return Statics.YIsNaN(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YIsNaN(Vector256<double> value) {
+            return Statics.YIsNaN(value);
+        }
+
 #endif
     }
 }

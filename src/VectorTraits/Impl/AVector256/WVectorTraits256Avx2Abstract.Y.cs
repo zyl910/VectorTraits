@@ -256,6 +256,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsNaN_AcceleratedTypes"/>
+        public override TypeCodeFlags YIsNaN_AcceleratedTypes {
+            get {
+                return Statics.YIsNaN_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> YIsNaN(Vector256<float> value) {
+            return Statics.YIsNaN(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> YIsNaN(Vector256<double> value) {
+            return Statics.YIsNaN(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public override TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

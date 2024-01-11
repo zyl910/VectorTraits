@@ -136,8 +136,10 @@ List (列表):
   Mnemonic: `rt[i] := to_mask(isInfinity(value[i]))` .
 - `YIsInfinityOrNaN`: Determines if a element is infinite or NaN (确定元素是否为无穷大或非数).
   Mnemonic: `rt[i] := to_mask(isInfinityOrNaN(value[i]))` .
-- `YIsInfinityOrNaN`: Determines if a element represents an integral number (确定元素是否为整数).
+- `YIsInteger`: Determines if a element represents an integral number (确定元素是否为整数).
   Mnemonic: `rt[i] := to_mask(isInteger(value[i]))` .
+- `YIsNaN`: Determines if a element is NaN (确定元素是否为非数).
+  Mnemonic: `rt[i] := to_mask(isNaN(value[i]))` .
 
 ### Others (其他)
 Summary (概要):
