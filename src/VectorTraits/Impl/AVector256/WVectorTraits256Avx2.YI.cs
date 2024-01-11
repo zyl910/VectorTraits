@@ -129,6 +129,35 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsInteger_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsInteger_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsInteger(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsInteger(Vector256<float> value) {
+                Vector256<float> valueTrun = Avx.Floor(value);
+                Vector256<int> maskFinite = YIsFinite(value);
+                Vector256<int> maskEquals = Equals(value, valueTrun).AsInt32();
+                Vector256<int> rt = Avx2.And(maskFinite, maskEquals);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsInteger(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsInteger(Vector256<double> value) {
+                Vector256<double> valueTrun = Avx.Floor(value);
+                Vector256<long> maskFinite = YIsFinite(value);
+                Vector256<long> maskEquals = Equals(value, valueTrun).AsInt64();
+                Vector256<long> rt = Avx2.And(maskFinite, maskEquals);
+                return rt;
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }

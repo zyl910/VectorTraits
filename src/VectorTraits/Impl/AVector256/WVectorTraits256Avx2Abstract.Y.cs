@@ -236,6 +236,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsInteger_AcceleratedTypes"/>
+        public override TypeCodeFlags YIsInteger_AcceleratedTypes {
+            get {
+                return Statics.YIsInteger_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsInteger(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> YIsInteger(Vector256<float> value) {
+            return Statics.YIsInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsInteger(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> YIsInteger(Vector256<double> value) {
+            return Statics.YIsInteger(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public override TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

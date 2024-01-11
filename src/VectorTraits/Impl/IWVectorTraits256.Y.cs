@@ -344,6 +344,27 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YIsInteger</c> (运行 <c>YIsInteger</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsInteger(Vector256{float})"/>
+        TypeCodeFlags YIsInteger_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element represents an integral number (确定元素是否为整数).
+        /// Mnemonic: <c>rt[i] := to_mask(isInteger(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is integral number (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为整数).</returns>
+        /// <seealso cref="YIsInteger_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsInteger(float)"/>
+        Vector256<int> YIsInteger(Vector256<float> value);
+
+        /// <inheritdoc cref="YIsInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsInteger(double)"/>
+        Vector256<long> YIsInteger(Vector256<double> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YNarrowSaturate</c> (运行 <c>YNarrowSaturate</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YNarrowSaturate(Vector256{short}, Vector256{short})"/>

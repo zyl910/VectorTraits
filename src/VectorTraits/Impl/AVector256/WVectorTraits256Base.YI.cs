@@ -333,6 +333,90 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 #endif // NET7_0_OR_GREATER
 
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsInteger_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsInteger_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if NET7_0_OR_GREATER
+                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+#endif // NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsInteger(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsInteger(Vector256<float> value) {
+#if NET7_0_OR_GREATER
+                return YIsInteger_Bit(value);
+#else
+                return YIsInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsInteger(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsInteger(Vector256<double> value) {
+#if NET7_0_OR_GREATER
+                return YIsInteger_Bit(value);
+#else
+                return YIsInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsInteger(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsInteger_Basic(Vector256<float> value) {
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
+                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector256<float>, FixedArray8<float>>(ref value);
+                ref FixedArray8<int> p = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsInteger(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsInteger(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsInteger(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsInteger(pvalue.I3));
+                p.I4 = BitMathCore.ToInt32Mask(MathINumberBase.IsInteger(pvalue.I4));
+                p.I5 = BitMathCore.ToInt32Mask(MathINumberBase.IsInteger(pvalue.I5));
+                p.I6 = BitMathCore.ToInt32Mask(MathINumberBase.IsInteger(pvalue.I6));
+                p.I7 = BitMathCore.ToInt32Mask(MathINumberBase.IsInteger(pvalue.I7));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsInteger(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsInteger_Basic(Vector256<double> value) {
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
+                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector256<double>, FixedArray4<double>>(ref value);
+                ref FixedArray4<long> p = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsInteger(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsInteger(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsInteger(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsInteger(pvalue.I3));
+                return rt;
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits256.YIsInteger(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsInteger_Bit(Vector256<float> value) {
+                Vector256<float> valueTrun = Vector256.Floor(value);
+                Vector256<int> maskFinite = YIsFinite(value);
+                Vector256<int> maskEquals = Equals(value, valueTrun).AsInt32();
+                Vector256<int> rt = Vector256.BitwiseAnd(maskFinite, maskEquals);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsInteger(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsInteger_Bit(Vector256<double> value) {
+                Vector256<double> valueTrun = Vector256.Floor(value);
+                Vector256<long> maskFinite = YIsFinite(value);
+                Vector256<long> maskEquals = Equals(value, valueTrun).AsInt64();
+                Vector256<long> rt = Vector256.BitwiseAnd(maskFinite, maskEquals);
+                return rt;
+            }
+#endif // NET7_0_OR_GREATER
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }
