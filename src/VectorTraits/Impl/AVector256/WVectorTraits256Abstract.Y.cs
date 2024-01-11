@@ -320,6 +320,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegativeZero_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YIsNegativeZero_AcceleratedTypes {
+            get {
+                return Statics.YIsNegativeZero_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegativeZero(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YIsNegativeZero(Vector256<float> value) {
+            return Statics.YIsNegativeZero(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNegativeZero(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YIsNegativeZero(Vector256<double> value) {
+            return Statics.YIsNegativeZero(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public virtual TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

@@ -393,7 +393,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>
         /// Determines if a element represents a negative number or negative zero (确定元素是否为负数或负零).
-        /// Mnemonic: <c>rt[i] := to_mask(isFinite(value[i]))</c>.
+        /// Mnemonic: <c>rt[i] := to_mask(isNegative(value[i])) = to_mask((value[i]&lt;0) || isNegativeZero(value[i]))</c>.
         /// </summary>
         /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
         /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is negative number or negative zero (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为负数或负零).</returns>
@@ -420,6 +420,27 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="YIsNegative(Vector256{float})"/>
         /// <seealso cref="MathINumberBase.IsNegative(long)"/>
         Vector256<long> YIsNegative(Vector256<long> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsNegativeZero</c> (运行 <c>YIsNegativeZero</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsNegativeZero(Vector256{float})"/>
+        TypeCodeFlags YIsNegativeZero_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element represents a negative zero (确定元素是否为负零).
+        /// Mnemonic: <c>rt[i] := to_mask(isNegativeZero(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is finite (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为有限的).</returns>
+        /// <seealso cref="YIsNegativeZero_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsNegativeZero(float)"/>
+        Vector256<int> YIsNegativeZero(Vector256<float> value);
+
+        /// <inheritdoc cref="YIsNegativeZero(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsNegativeZero(double)"/>
+        Vector256<long> YIsNegativeZero(Vector256<double> value);
 
 
         /// <summary>

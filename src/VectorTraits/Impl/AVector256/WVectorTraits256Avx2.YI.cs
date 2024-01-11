@@ -231,6 +231,31 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNegativeZero_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsNegativeZero_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNegativeZero(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsNegativeZero(Vector256<float> value) {
+                Vector256<int> signMask = Vector256Constants.Single_SignMask.AsInt32();
+                Vector256<int> rt = Equals(value.AsInt32(), signMask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNegativeZero(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsNegativeZero(Vector256<double> value) {
+                Vector256<long> signMask = Vector256Constants.Double_SignMask.AsInt64();
+                Vector256<long> rt = Equals(value.AsInt64(), signMask);
+                return rt;
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }
