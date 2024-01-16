@@ -146,6 +146,8 @@ List (列表):
   Mnemonic: `rt[i] := to_mask(isNegativeInfinity(value[i]))` .
 - `YIsNegativeZero`: Determines if a element represents a negative zero (确定元素是否为负零).
   Mnemonic: `rt[i] := to_mask(isNegativeZero(value[i]))` .
+- `YIsNormal`: Determines if a element is normal (确定元素是否为正规数).
+  Mnemonic: `rt[i] := to_mask(isNormal(value[i]))` .
 
 ### Others (其他)
 Summary (概要):

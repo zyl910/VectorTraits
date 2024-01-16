@@ -465,6 +465,27 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YIsNormal</c> (运行 <c>YIsNormal</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsNormal(Vector256{float})"/>
+        TypeCodeFlags YIsNormal_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is normal (确定元素是否为正规数).
+        /// Mnemonic: <c>rt[i] := to_mask(isFinite(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is normal (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为正规数).</returns>
+        /// <seealso cref="YIsNormal_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsNormal(float)"/>
+        Vector256<int> YIsNormal(Vector256<float> value);
+
+        /// <inheritdoc cref="YIsNormal(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsNormal(double)"/>
+        Vector256<long> YIsNormal(Vector256<double> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YNarrowSaturate</c> (运行 <c>YNarrowSaturate</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YNarrowSaturate(Vector256{short}, Vector256{short})"/>

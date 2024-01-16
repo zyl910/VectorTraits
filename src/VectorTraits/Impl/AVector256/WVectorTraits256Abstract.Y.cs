@@ -360,6 +360,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsNormal_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YIsNormal_AcceleratedTypes {
+            get {
+                return Statics.YIsNormal_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNormal(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YIsNormal(Vector256<float> value) {
+            return Statics.YIsNormal(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNormal(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YIsNormal(Vector256<double> value) {
+            return Statics.YIsNormal(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public virtual TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

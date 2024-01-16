@@ -281,6 +281,36 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNormal_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsNormal_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if NET7_0_OR_GREATER
+                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+#endif // NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNormal(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsNormal(Vector256<float> value) {
+                Vector256<int> exponentMask = Vector256Constants.Single_ExponentMask.AsInt32();
+                Vector256<int> exponent = Avx2.And(value.AsInt32(), exponentMask);
+                Vector256<int> rt = Avx2.And(GreaterThan(exponent, Vector256<int>.Zero), GreaterThan(exponentMask, exponent));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNormal(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsNormal(Vector256<double> value) {
+                Vector256<long> exponentMask = Vector256Constants.Double_ExponentMask.AsInt64();
+                Vector256<long> exponent = Avx2.And(value.AsInt64(), exponentMask);
+                Vector256<long> rt = Avx2.And(GreaterThan(exponent, Vector256<long>.Zero), GreaterThan(exponentMask, exponent));
+                return rt;
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }
