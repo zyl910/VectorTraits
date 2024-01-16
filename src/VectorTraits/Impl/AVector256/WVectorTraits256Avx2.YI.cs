@@ -311,6 +311,29 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNotNaN_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsNotNaN_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNotNaN(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsNotNaN(Vector256<float> value) {
+                Vector256<int> rt = Equals(value, value).AsInt32();
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsNotNaN(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsNotNaN(Vector256<double> value) {
+                Vector256<long> rt = Equals(value, value).AsInt64();
+                return rt;
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }

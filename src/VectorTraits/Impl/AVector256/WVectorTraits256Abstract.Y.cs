@@ -275,6 +275,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             return Statics.YIsNaN(value);
         }
 
+
         /// <inheritdoc cref="IWVectorTraits256.YIsNegative_AcceleratedTypes"/>
         public virtual TypeCodeFlags YIsNegative_AcceleratedTypes {
             get {
@@ -377,6 +378,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector256<long> YIsNormal(Vector256<double> value) {
             return Statics.YIsNormal(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNotNaN_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YIsNotNaN_AcceleratedTypes {
+            get {
+                return Statics.YIsNotNaN_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNotNaN(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YIsNotNaN(Vector256<float> value) {
+            return Statics.YIsNotNaN(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsNotNaN(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YIsNotNaN(Vector256<double> value) {
+            return Statics.YIsNotNaN(value);
         }
 
 

@@ -486,6 +486,27 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YIsNotNaN</c> (运行 <c>YIsNotNaN</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsNotNaN(Vector256{float})"/>
+        TypeCodeFlags YIsNotNaN_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is not NaN (确定元素是否不为非数).
+        /// Mnemonic: <c>rt[i] := to_mask(isNotNaN(value[i])) = to_mask(!isNaN(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is not NaN (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否不为非数).</returns>
+        /// <seealso cref="YIsNotNaN_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsNotNaN(float)"/>
+        Vector256<int> YIsNotNaN(Vector256<float> value);
+
+        /// <inheritdoc cref="YIsNotNaN(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsNotNaN(double)"/>
+        Vector256<long> YIsNotNaN(Vector256<double> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YNarrowSaturate</c> (运行 <c>YNarrowSaturate</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YNarrowSaturate(Vector256{short}, Vector256{short})"/>

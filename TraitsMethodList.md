@@ -148,6 +148,8 @@ List (列表):
   Mnemonic: `rt[i] := to_mask(isNegativeZero(value[i]))` .
 - `YIsNormal`: Determines if a element is normal (确定元素是否为正规数).
   Mnemonic: `rt[i] := to_mask(isNormal(value[i]))` .
+- `YIsNotNaN`: Determines if a element is not NaN (确定元素是否不为非数).
+  Mnemonic: `rt[i] := to_mask(isNotNaN(value[i])) = to_mask(!isNaN(value[i]))` .
 
 ### Others (其他)
 Summary (概要):
