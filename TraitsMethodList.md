@@ -130,6 +130,8 @@ Summary (概要):
 - Provides the vector methods of check floating number (提供浮点数判断的向量方法): YIsEvenInteger, YIsFinite, YIsInfinity, YIsInfinityOrNaN, YIsInteger, YIsNaN, YIsNegative, YIsNegativeZero, YIsNegativeInfinity, YIsNormal, YIsNotNaN, YIsOddInteger, YIsPositive, YIsPositiveInfinity, YIsSubnormal, YIsZero, YIsZeroOrSubnormal.
 
 List (列表):
+- `YIsEvenInteger`: Determines if a element represents an even integral number (确定元素是否为偶数整数).
+  Mnemonic: `rt[i] := to_mask(isEvenInteger(value[i]))` .
 - `YIsFinite`: Determines if a element is finite. It contains zero, subnormal, and normal. It does not contain infinity, NaN (确定元素是否为有限值. 它包含 零、次正规数、正规数. 它不含无穷大、非数).
   Mnemonic: `rt[i] := to_mask(isFinite(value[i]))` .
 - `YIsInfinity`: Determines if a element is infinite (确定元素是否为无穷大).

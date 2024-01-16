@@ -281,6 +281,59 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YIsEvenInteger</c> (运行 <c>YIsEvenInteger</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsEvenInteger(Vector256{float})"/>
+        TypeCodeFlags YIsEvenInteger_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element represents an even integral number (确定元素是否为偶数整数).
+        /// Mnemonic: <c>rt[i] := to_mask(isEvenInteger(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is even integral number (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为偶数整数).</returns>
+        /// <seealso cref="YIsEvenInteger_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(float)"/>
+        Vector256<int> YIsEvenInteger(Vector256<float> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(double)"/>
+        Vector256<long> YIsEvenInteger(Vector256<double> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(sbyte)"/>
+        Vector256<sbyte> YIsEvenInteger(Vector256<sbyte> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(byte)"/>
+        Vector256<byte> YIsEvenInteger(Vector256<byte> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(short)"/>
+        Vector256<short> YIsEvenInteger(Vector256<short> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(ushort)"/>
+        Vector256<ushort> YIsEvenInteger(Vector256<ushort> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(int)"/>
+        Vector256<int> YIsEvenInteger(Vector256<int> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(uint)"/>
+        Vector256<uint> YIsEvenInteger(Vector256<uint> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(long)"/>
+        Vector256<long> YIsEvenInteger(Vector256<long> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(ulong)"/>
+        Vector256<ulong> YIsEvenInteger(Vector256<ulong> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YIsFinite</c> (运行 <c>YIsFinite</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YIsFinite(Vector256{float})"/>

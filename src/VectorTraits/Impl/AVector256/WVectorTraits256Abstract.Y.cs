@@ -176,6 +176,78 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YIsEvenInteger_AcceleratedTypes {
+            get {
+                return Statics.YIsEvenInteger_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YIsEvenInteger(Vector256<float> value) {
+            return Statics.YIsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YIsEvenInteger(Vector256<double> value) {
+            return Statics.YIsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<sbyte> YIsEvenInteger(Vector256<sbyte> value) {
+            return Statics.YIsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<byte> YIsEvenInteger(Vector256<byte> value) {
+            return Statics.YIsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<short> YIsEvenInteger(Vector256<short> value) {
+            return Statics.YIsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ushort> YIsEvenInteger(Vector256<ushort> value) {
+            return Statics.YIsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YIsEvenInteger(Vector256<int> value) {
+            return Statics.YIsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<uint> YIsEvenInteger(Vector256<uint> value) {
+            return Statics.YIsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YIsEvenInteger(Vector256<long> value) {
+            return Statics.YIsEvenInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ulong> YIsEvenInteger(Vector256<ulong> value) {
+            return Statics.YIsEvenInteger(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YIsFinite_AcceleratedTypes"/>
         public virtual TypeCodeFlags YIsFinite_AcceleratedTypes {
             get {

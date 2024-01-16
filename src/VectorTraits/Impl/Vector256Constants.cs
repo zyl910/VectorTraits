@@ -161,6 +161,52 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+        // -- Vectors_T: Vector256s<Byte> --
+
+        /// <inheritdoc cref="Vector256s{T}.V1"/>
+        /// <remarks>For Byte.</remarks>
+        public static Vector256<byte> Byte_One {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET8_0_OR_GREATER
+                return Vector256<byte>.One;
+#elif USE_VECTOR_CREATE_INT64
+                return Vector256.Create((byte)1);
+#elif USE_VECTOR_CREATE
+                if (VectorEnvironment.Is64BitProcess) {
+                    return Vector256.Create((byte)1);
+                } else {
+                    return Vector256s<byte>.V1;
+                }
+#else
+                return Vector256s<byte>.V1;
+#endif // NET8_0_OR_GREATER
+            }
+        }
+
+        // -- Vectors_T: Vector256s<Int16> --
+
+        /// <inheritdoc cref="Vector256s{T}.V1"/>
+        /// <remarks>For Int16.</remarks>
+        public static Vector256<short> Int16_One {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET8_0_OR_GREATER
+                return Vector256<short>.One;
+#elif USE_VECTOR_CREATE_INT64
+                return Vector256.Create((short)1);
+#elif USE_VECTOR_CREATE
+                if (VectorEnvironment.Is64BitProcess) {
+                    return Vector256.Create((short)1);
+                } else {
+                    return Vector256s<short>.V1;
+                }
+#else
+                return Vector256s<short>.V1;
+#endif // NET8_0_OR_GREATER
+            }
+        }
+
         // -- Vectors_T: Vector256s<UInt16> --
 
         /// <inheritdoc cref="Vector256s{T}.VMaxByte"/>
@@ -191,7 +237,51 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+        // -- Vectors_T: Vector256s<Int32> --
+
+        /// <inheritdoc cref="Vector256s{T}.V1"/>
+        /// <remarks>For Int32.</remarks>
+        public static Vector256<int> Int32_One {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET8_0_OR_GREATER
+                return Vector256<int>.One;
+#elif USE_VECTOR_CREATE_INT64
+                return Vector256.Create((int)1);
+#elif USE_VECTOR_CREATE
+                if (VectorEnvironment.Is64BitProcess) {
+                    return Vector256.Create((int)1);
+                } else {
+                    return Vector256s<int>.V1;
+                }
+#else
+                return Vector256s<int>.V1;
+#endif // NET8_0_OR_GREATER
+            }
+        }
+
         // -- Vectors_T: Vector256s<Int64> --
+
+        /// <inheritdoc cref="Vector256s{T}.V1"/>
+        /// <remarks>For Int64.</remarks>
+        public static Vector256<long> Int64_One {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET8_0_OR_GREATER
+                return Vector256<long>.One;
+#elif USE_VECTOR_CREATE_INT64
+                return Vector256.Create((long)1);
+#elif USE_VECTOR_CREATE
+                if (VectorEnvironment.Is64BitProcess) {
+                    return Vector256.Create((long)1);
+                } else {
+                    return Vector256s<long>.V1;
+                }
+#else
+                return Vector256s<long>.V1;
+#endif // NET8_0_OR_GREATER
+            }
+        }
 
         /// <inheritdoc cref="Vector256s{T}.MinValue"/>
         /// <remarks>For Int64.</remarks>

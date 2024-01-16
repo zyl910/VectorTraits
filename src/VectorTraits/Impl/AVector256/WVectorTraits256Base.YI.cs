@@ -86,6 +86,361 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #endif // NET7_0_OR_GREATER
 
 
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsEvenInteger_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if NET7_0_OR_GREATER
+                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+#endif // NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsEvenInteger(Vector256<float> value) {
+#if NET7_0_OR_GREATER
+                return YIsEvenInteger_Bit(value);
+#else
+                return YIsEvenInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsEvenInteger(Vector256<double> value) {
+#if NET7_0_OR_GREATER
+                return YIsEvenInteger_Bit(value);
+#else
+                return YIsEvenInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YIsEvenInteger(Vector256<sbyte> value) {
+#if NET7_0_OR_GREATER
+                return YIsEvenInteger_Bit(value);
+#else
+                return YIsEvenInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YIsEvenInteger(Vector256<byte> value) {
+#if NET7_0_OR_GREATER
+                return YIsEvenInteger_Bit(value);
+#else
+                return YIsEvenInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YIsEvenInteger(Vector256<short> value) {
+#if NET7_0_OR_GREATER
+                return YIsEvenInteger_Bit(value);
+#else
+                return YIsEvenInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YIsEvenInteger(Vector256<ushort> value) {
+#if NET7_0_OR_GREATER
+                return YIsEvenInteger_Bit(value);
+#else
+                return YIsEvenInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsEvenInteger(Vector256<int> value) {
+#if NET7_0_OR_GREATER
+                return YIsEvenInteger_Bit(value);
+#else
+                return YIsEvenInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YIsEvenInteger(Vector256<uint> value) {
+#if NET7_0_OR_GREATER
+                return YIsEvenInteger_Bit(value);
+#else
+                return YIsEvenInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsEvenInteger(Vector256<long> value) {
+#if NET7_0_OR_GREATER
+                return YIsEvenInteger_Bit(value);
+#else
+                return YIsEvenInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YIsEvenInteger(Vector256<ulong> value) {
+#if NET7_0_OR_GREATER
+                return YIsEvenInteger_Bit(value);
+#else
+                return YIsEvenInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsEvenInteger_Basic(Vector256<float> value) {
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
+                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector256<float>, FixedArray8<float>>(ref value);
+                ref FixedArray8<int> p = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I3));
+                p.I4 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I4));
+                p.I5 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I5));
+                p.I6 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I6));
+                p.I7 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I7));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsEvenInteger_Basic(Vector256<double> value) {
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
+                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector256<double>, FixedArray4<double>>(ref value);
+                ref FixedArray4<long> p = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I3));
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YIsEvenInteger_Basic(Vector256<sbyte> value) {
+                UnsafeUtil.SkipInit(out Vector256<sbyte> rt);
+                ref FixedArray32<sbyte> pvalue = ref Unsafe.As<Vector256<sbyte>, FixedArray32<sbyte>>(ref value);
+                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector256<sbyte>, FixedArray32<sbyte>>(ref rt);
+                p.I0 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
+                p.I1 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I1));
+                p.I2 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I2));
+                p.I3 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I3));
+                p.I4 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I4));
+                p.I5 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I5));
+                p.I6 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I6));
+                p.I7 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I7));
+                p.I8 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I8));
+                p.I9 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I9));
+                p.I10 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I10));
+                p.I11 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I11));
+                p.I12 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I12));
+                p.I13 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I13));
+                p.I14 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I14));
+                p.I15 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I15));
+                p.I16 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I16));
+                p.I17 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I17));
+                p.I18 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I18));
+                p.I19 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I19));
+                p.I20 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I20));
+                p.I21 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I21));
+                p.I22 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I22));
+                p.I23 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I23));
+                p.I24 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I24));
+                p.I25 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I25));
+                p.I26 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I26));
+                p.I27 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I27));
+                p.I28 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I28));
+                p.I29 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I29));
+                p.I30 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I30));
+                p.I31 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I31));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YIsEvenInteger_Basic(Vector256<byte> value) {
+                return YIsEvenInteger_Basic(value.AsSByte()).AsByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YIsEvenInteger_Basic(Vector256<short> value) {
+                UnsafeUtil.SkipInit(out Vector256<short> rt);
+                ref FixedArray16<short> pvalue = ref Unsafe.As<Vector256<short>, FixedArray16<short>>(ref value);
+                ref FixedArray16<short> p = ref Unsafe.As<Vector256<short>, FixedArray16<short>>(ref rt);
+                p.I0 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
+                p.I1 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I1));
+                p.I2 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I2));
+                p.I3 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I3));
+                p.I4 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I4));
+                p.I5 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I5));
+                p.I6 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I6));
+                p.I7 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I7));
+                p.I8 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I8));
+                p.I9 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I9));
+                p.I10 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I10));
+                p.I11 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I11));
+                p.I12 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I12));
+                p.I13 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I13));
+                p.I14 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I14));
+                p.I15 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I15));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YIsEvenInteger_Basic(Vector256<ushort> value) {
+                return YIsEvenInteger_Basic(value.AsInt16()).AsUInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsEvenInteger_Basic(Vector256<int> value) {
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
+                ref FixedArray8<int> pvalue = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref value);
+                ref FixedArray8<int> p = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I3));
+                p.I4 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I4));
+                p.I5 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I5));
+                p.I6 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I6));
+                p.I7 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I7));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YIsEvenInteger_Basic(Vector256<uint> value) {
+                return YIsEvenInteger_Basic(value.AsInt32()).AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsEvenInteger_Basic(Vector256<long> value) {
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
+                ref FixedArray4<long> pvalue = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref value);
+                ref FixedArray4<long> p = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I3));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YIsEvenInteger_Basic(Vector256<ulong> value) {
+                return YIsEvenInteger_Basic(value.AsInt64()).AsUInt64();
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsEvenInteger_Bit(Vector256<float> value) {
+                Vector256<float> valueHalf = Vector256.Multiply(value, 0.5f);
+                Vector256<float> valueHalfTrun = Vector256.Floor(valueHalf);
+                Vector256<int> intMask = YIsInteger(value);
+                Vector256<int> halfEqual = Vector256.Equals(valueHalf, valueHalfTrun).AsInt32();
+                Vector256<int> rt = Vector256.BitwiseAnd(intMask, halfEqual);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsEvenInteger_Bit(Vector256<double> value) {
+                Vector256<double> valueHalf = Vector256.Multiply(value, 0.5);
+                Vector256<double> valueHalfTrun = Vector256.Floor(valueHalf);
+                Vector256<long> intMask = YIsInteger(value);
+                Vector256<long> halfEqual = Vector256.Equals(valueHalf, valueHalfTrun).AsInt64();
+                Vector256<long> rt = Vector256.BitwiseAnd(intMask, halfEqual);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YIsEvenInteger_Bit(Vector256<sbyte> value) {
+                Vector256<sbyte> temp = Vector256.BitwiseAnd(value, Vector256Constants.Byte_One.AsSByte());
+                Vector256<sbyte> rt = Vector256.Equals(Vector256<sbyte>.Zero, temp);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YIsEvenInteger_Bit(Vector256<byte> value) {
+                return YIsEvenInteger_Bit(value.AsSByte()).AsByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YIsEvenInteger_Bit(Vector256<short> value) {
+                Vector256<short> temp = Vector256.BitwiseAnd(value, Vector256Constants.Int16_One);
+                Vector256<short> rt = Vector256.Equals(Vector256<short>.Zero, temp);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YIsEvenInteger_Bit(Vector256<ushort> value) {
+                return YIsEvenInteger_Bit(value.AsInt16()).AsUInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsEvenInteger_Bit(Vector256<int> value) {
+                Vector256<int> temp = Vector256.BitwiseAnd(value, Vector256Constants.Int32_One);
+                Vector256<int> rt = Vector256.Equals(Vector256<int>.Zero, temp);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YIsEvenInteger_Bit(Vector256<uint> value) {
+                return YIsEvenInteger_Bit(value.AsInt32()).AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsEvenInteger_Bit(Vector256<long> value) {
+                Vector256<long> temp = Vector256.BitwiseAnd(value, Vector256Constants.Int64_One);
+                Vector256<long> rt = Vector256.Equals(Vector256<long>.Zero, temp);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YIsEvenInteger_Bit(Vector256<ulong> value) {
+                return YIsEvenInteger_Bit(value.AsInt64()).AsUInt64();
+            }
+#endif // NET7_0_OR_GREATER
+
+
             /// <inheritdoc cref="IWVectorTraits256.YIsFinite_AcceleratedTypes"/>
             public static TypeCodeFlags YIsFinite_AcceleratedTypes {
                 get {
@@ -505,7 +860,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if NET7_0_OR_GREATER
-                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
 #endif // NET7_0_OR_GREATER
                     return rt;
                 }
@@ -699,6 +1054,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsNegative(pvalue.I3));
                 return rt;
             }
+
 #if NET7_0_OR_GREATER
             /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
