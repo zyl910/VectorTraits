@@ -747,6 +747,134 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsOddInteger_AcceleratedTypes
+        {
+            get
+            {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsOddInteger_AcceleratedTypes;
+#else
+                return _instance.YIsOddInteger_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YIsOddInteger(Vector256<float> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YIsOddInteger(Vector256<double> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YIsOddInteger(Vector256<sbyte> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YIsOddInteger(Vector256<byte> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YIsOddInteger(Vector256<short> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> YIsOddInteger(Vector256<ushort> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YIsOddInteger(Vector256<int> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> YIsOddInteger(Vector256<uint> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YIsOddInteger(Vector256<long> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> YIsOddInteger(Vector256<ulong> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

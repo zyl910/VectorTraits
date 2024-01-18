@@ -560,6 +560,59 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YIsOddInteger</c> (运行 <c>YIsOddInteger</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsOddInteger(Vector256{float})"/>
+        TypeCodeFlags YIsOddInteger_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element represents an odd integral number (确定元素是否为奇数整数).
+        /// Mnemonic: <c>rt[i] := to_mask(isOddInteger(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is odd integral number (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为奇数整数).</returns>
+        /// <seealso cref="YIsOddInteger_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(float)"/>
+        Vector256<int> YIsOddInteger(Vector256<float> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(double)"/>
+        Vector256<long> YIsOddInteger(Vector256<double> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(sbyte)"/>
+        Vector256<sbyte> YIsOddInteger(Vector256<sbyte> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(byte)"/>
+        Vector256<byte> YIsOddInteger(Vector256<byte> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(short)"/>
+        Vector256<short> YIsOddInteger(Vector256<short> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(ushort)"/>
+        Vector256<ushort> YIsOddInteger(Vector256<ushort> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(int)"/>
+        Vector256<int> YIsOddInteger(Vector256<int> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(uint)"/>
+        Vector256<uint> YIsOddInteger(Vector256<uint> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(long)"/>
+        Vector256<long> YIsOddInteger(Vector256<long> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(ulong)"/>
+        Vector256<ulong> YIsOddInteger(Vector256<ulong> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YNarrowSaturate</c> (运行 <c>YNarrowSaturate</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YNarrowSaturate(Vector256{short}, Vector256{short})"/>

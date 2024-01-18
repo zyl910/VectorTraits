@@ -473,6 +473,90 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger_AcceleratedTypes"/>
+        public override TypeCodeFlags YIsOddInteger_AcceleratedTypes
+        {
+            get
+            {
+                return Statics.YIsOddInteger_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> YIsOddInteger(Vector256<float> value)
+        {
+            return Statics.YIsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> YIsOddInteger(Vector256<double> value)
+        {
+            return Statics.YIsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> YIsOddInteger(Vector256<sbyte> value)
+        {
+            return Statics.YIsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<byte> YIsOddInteger(Vector256<byte> value)
+        {
+            return Statics.YIsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> YIsOddInteger(Vector256<short> value)
+        {
+            return Statics.YIsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ushort> YIsOddInteger(Vector256<ushort> value)
+        {
+            return Statics.YIsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> YIsOddInteger(Vector256<int> value)
+        {
+            return Statics.YIsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<uint> YIsOddInteger(Vector256<uint> value)
+        {
+            return Statics.YIsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> YIsOddInteger(Vector256<long> value)
+        {
+            return Statics.YIsOddInteger(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ulong> YIsOddInteger(Vector256<ulong> value)
+        {
+            return Statics.YIsOddInteger(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public override TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

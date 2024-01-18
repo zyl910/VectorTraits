@@ -1422,6 +1422,394 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 #endif // NET7_0_OR_GREATER
 
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsOddInteger_AcceleratedTypes
+            {
+                get
+                {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if NET7_0_OR_GREATER
+                    rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & YIsInteger_AcceleratedTypes & Floor_AcceleratedTypes;
+#endif // NET7_0_OR_GREATER
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsOddInteger(Vector256<float> value)
+            {
+#if NET7_0_OR_GREATER
+                return YIsOddInteger_Bit(value);
+#else
+                return YIsOddInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsOddInteger(Vector256<double> value)
+            {
+#if NET7_0_OR_GREATER
+                return YIsOddInteger_Bit(value);
+#else
+                return YIsOddInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YIsOddInteger(Vector256<sbyte> value)
+            {
+#if NET7_0_OR_GREATER
+                return YIsOddInteger_Bit(value);
+#else
+                return YIsOddInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YIsOddInteger(Vector256<byte> value)
+            {
+#if NET7_0_OR_GREATER
+                return YIsOddInteger_Bit(value);
+#else
+                return YIsOddInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YIsOddInteger(Vector256<short> value)
+            {
+#if NET7_0_OR_GREATER
+                return YIsOddInteger_Bit(value);
+#else
+                return YIsOddInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YIsOddInteger(Vector256<ushort> value)
+            {
+#if NET7_0_OR_GREATER
+                return YIsOddInteger_Bit(value);
+#else
+                return YIsOddInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsOddInteger(Vector256<int> value)
+            {
+#if NET7_0_OR_GREATER
+                return YIsOddInteger_Bit(value);
+#else
+                return YIsOddInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YIsOddInteger(Vector256<uint> value)
+            {
+#if NET7_0_OR_GREATER
+                return YIsOddInteger_Bit(value);
+#else
+                return YIsOddInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsOddInteger(Vector256<long> value)
+            {
+#if NET7_0_OR_GREATER
+                return YIsOddInteger_Bit(value);
+#else
+                return YIsOddInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YIsOddInteger(Vector256<ulong> value)
+            {
+#if NET7_0_OR_GREATER
+                return YIsOddInteger_Bit(value);
+#else
+                return YIsOddInteger_Basic(value);
+#endif // NET7_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsOddInteger_Basic(Vector256<float> value)
+            {
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
+                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector256<float>, FixedArray8<float>>(ref value);
+                ref FixedArray8<int> p = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I3));
+                p.I4 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I4));
+                p.I5 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I5));
+                p.I6 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I6));
+                p.I7 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I7));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsOddInteger_Basic(Vector256<double> value)
+            {
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
+                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector256<double>, FixedArray4<double>>(ref value);
+                ref FixedArray4<long> p = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I3));
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YIsOddInteger_Basic(Vector256<sbyte> value)
+            {
+                UnsafeUtil.SkipInit(out Vector256<sbyte> rt);
+                ref FixedArray32<sbyte> pvalue = ref Unsafe.As<Vector256<sbyte>, FixedArray32<sbyte>>(ref value);
+                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector256<sbyte>, FixedArray32<sbyte>>(ref rt);
+                p.I0 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
+                p.I1 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I1));
+                p.I2 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I2));
+                p.I3 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I3));
+                p.I4 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I4));
+                p.I5 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I5));
+                p.I6 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I6));
+                p.I7 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I7));
+                p.I8 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I8));
+                p.I9 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I9));
+                p.I10 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I10));
+                p.I11 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I11));
+                p.I12 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I12));
+                p.I13 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I13));
+                p.I14 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I14));
+                p.I15 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I15));
+                p.I16 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I16));
+                p.I17 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I17));
+                p.I18 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I18));
+                p.I19 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I19));
+                p.I20 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I20));
+                p.I21 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I21));
+                p.I22 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I22));
+                p.I23 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I23));
+                p.I24 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I24));
+                p.I25 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I25));
+                p.I26 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I26));
+                p.I27 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I27));
+                p.I28 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I28));
+                p.I29 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I29));
+                p.I30 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I30));
+                p.I31 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I31));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YIsOddInteger_Basic(Vector256<byte> value)
+            {
+                return YIsOddInteger_Basic(value.AsSByte()).AsByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YIsOddInteger_Basic(Vector256<short> value)
+            {
+                UnsafeUtil.SkipInit(out Vector256<short> rt);
+                ref FixedArray16<short> pvalue = ref Unsafe.As<Vector256<short>, FixedArray16<short>>(ref value);
+                ref FixedArray16<short> p = ref Unsafe.As<Vector256<short>, FixedArray16<short>>(ref rt);
+                p.I0 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
+                p.I1 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I1));
+                p.I2 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I2));
+                p.I3 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I3));
+                p.I4 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I4));
+                p.I5 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I5));
+                p.I6 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I6));
+                p.I7 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I7));
+                p.I8 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I8));
+                p.I9 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I9));
+                p.I10 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I10));
+                p.I11 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I11));
+                p.I12 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I12));
+                p.I13 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I13));
+                p.I14 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I14));
+                p.I15 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I15));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YIsOddInteger_Basic(Vector256<ushort> value)
+            {
+                return YIsOddInteger_Basic(value.AsInt16()).AsUInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsOddInteger_Basic(Vector256<int> value)
+            {
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
+                ref FixedArray8<int> pvalue = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref value);
+                ref FixedArray8<int> p = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I3));
+                p.I4 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I4));
+                p.I5 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I5));
+                p.I6 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I6));
+                p.I7 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I7));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YIsOddInteger_Basic(Vector256<uint> value)
+            {
+                return YIsOddInteger_Basic(value.AsInt32()).AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsOddInteger_Basic(Vector256<long> value)
+            {
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
+                ref FixedArray4<long> pvalue = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref value);
+                ref FixedArray4<long> p = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I3));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YIsOddInteger_Basic(Vector256<ulong> value)
+            {
+                return YIsOddInteger_Basic(value.AsInt64()).AsUInt64();
+            }
+
+#if NET7_0_OR_GREATER
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsOddInteger_Bit(Vector256<float> value)
+            {
+                Vector256<float> valueHalf = Vector256.Multiply(value, 0.5f);
+                Vector256<float> valueHalfTrun = Vector256.Floor(valueHalf);
+                Vector256<int> intMask = YIsInteger(value);
+                Vector256<int> halfEqual = Vector256.Equals(valueHalf, valueHalfTrun).AsInt32();
+                Vector256<int> rt = Vector256.AndNot(intMask, halfEqual);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsOddInteger_Bit(Vector256<double> value)
+            {
+                Vector256<double> valueHalf = Vector256.Multiply(value, 0.5);
+                Vector256<double> valueHalfTrun = Vector256.Floor(valueHalf);
+                Vector256<long> intMask = YIsInteger(value);
+                Vector256<long> halfEqual = Vector256.Equals(valueHalf, valueHalfTrun).AsInt64();
+                Vector256<long> rt = Vector256.AndNot(intMask, halfEqual);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YIsOddInteger_Bit(Vector256<sbyte> value)
+            {
+                Vector256<sbyte> temp = Vector256.BitwiseAnd(value, Vector256Constants.Byte_One.AsSByte());
+                Vector256<sbyte> rt = Vector256.GreaterThan(temp, Vector256<sbyte>.Zero);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YIsOddInteger_Bit(Vector256<byte> value)
+            {
+                return YIsOddInteger_Bit(value.AsSByte()).AsByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YIsOddInteger_Bit(Vector256<short> value)
+            {
+                Vector256<short> temp = Vector256.BitwiseAnd(value, Vector256Constants.Int16_One);
+                Vector256<short> rt = Vector256.GreaterThan(temp, Vector256<short>.Zero);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YIsOddInteger_Bit(Vector256<ushort> value)
+            {
+                return YIsOddInteger_Bit(value.AsInt16()).AsUInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsOddInteger_Bit(Vector256<int> value)
+            {
+                Vector256<int> temp = Vector256.BitwiseAnd(value, Vector256Constants.Int32_One);
+                Vector256<int> rt = Vector256.GreaterThan(temp, Vector256<int>.Zero);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YIsOddInteger_Bit(Vector256<uint> value)
+            {
+                return YIsOddInteger_Bit(value.AsInt32()).AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsOddInteger_Bit(Vector256<long> value)
+            {
+                Vector256<long> temp = Vector256.BitwiseAnd(value, Vector256Constants.Int64_One);
+                Vector256<long> rt = Vector256.GreaterThan(temp, Vector256<long>.Zero);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YIsOddInteger_Bit(Vector256<ulong> value)
+            {
+                return YIsOddInteger_Bit(value.AsInt64()).AsUInt64();
+            }
+#endif // NET7_0_OR_GREATER
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }

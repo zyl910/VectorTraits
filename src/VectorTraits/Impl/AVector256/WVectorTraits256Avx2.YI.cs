@@ -51,9 +51,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static TypeCodeFlags YIsEvenInteger_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if NET7_0_OR_GREATER
                     rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-#endif // NET7_0_OR_GREATER
                     return rt;
                 }
             }
@@ -426,6 +424,110 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<long> YIsNotNaN(Vector256<double> value) {
                 Vector256<long> rt = Equals(value, value).AsInt64();
                 return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsOddInteger_AcceleratedTypes
+            {
+                get
+                {
+                    TypeCodeFlags rt = TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & YIsInteger_AcceleratedTypes & Floor_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsOddInteger(Vector256<float> value)
+            {
+                Vector256<float> valueHalf = Avx.Multiply(value, Vector256.Create(0.5f));
+                Vector256<float> valueHalfTrun = Avx.Floor(valueHalf);
+                Vector256<int> intMask = YIsInteger(value);
+                Vector256<int> halfEqual = Equals(valueHalf, valueHalfTrun).AsInt32();
+                Vector256<int> rt = AndNot(intMask, halfEqual);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsOddInteger(Vector256<double> value)
+            {
+                Vector256<double> valueHalf = Avx.Multiply(value, Vector256.Create(0.5));
+                Vector256<double> valueHalfTrun = Avx.Floor(valueHalf);
+                Vector256<long> intMask = YIsInteger(value);
+                Vector256<long> halfEqual = Equals(valueHalf, valueHalfTrun).AsInt64();
+                Vector256<long> rt = AndNot(intMask, halfEqual);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YIsOddInteger(Vector256<sbyte> value)
+            {
+                Vector256<sbyte> temp = Avx2.And(value, Vector256Constants.Byte_One.AsSByte());
+                Vector256<sbyte> rt = GreaterThan(temp, Vector256<sbyte>.Zero);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YIsOddInteger(Vector256<byte> value)
+            {
+                return YIsOddInteger(value.AsSByte()).AsByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YIsOddInteger(Vector256<short> value)
+            {
+                Vector256<short> temp = Avx2.And(value, Vector256Constants.Int16_One);
+                Vector256<short> rt = GreaterThan(temp, Vector256<short>.Zero);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YIsOddInteger(Vector256<ushort> value)
+            {
+                return YIsOddInteger(value.AsInt16()).AsUInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsOddInteger(Vector256<int> value)
+            {
+                Vector256<int> temp = Avx2.And(value, Vector256Constants.Int32_One);
+                Vector256<int> rt = GreaterThan(temp, Vector256<int>.Zero);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YIsOddInteger(Vector256<uint> value)
+            {
+                return YIsOddInteger(value.AsInt32()).AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsOddInteger(Vector256<long> value)
+            {
+                Vector256<long> temp = Avx2.And(value, Vector256Constants.Int64_One);
+                Vector256<long> rt = GreaterThan(temp, Vector256<long>.Zero);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YIsOddInteger(Vector256<ulong> value)
+            {
+                return YIsOddInteger(value.AsInt64()).AsUInt64();
             }
 
 #endif // NETCOREAPP3_0_OR_GREATER

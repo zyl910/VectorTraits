@@ -152,6 +152,8 @@ List (列表):
   Mnemonic: `rt[i] := to_mask(isNormal(value[i]))` .
 - `YIsNotNaN`: Determines if a element is not NaN (确定元素是否不为非数).
   Mnemonic: `rt[i] := to_mask(isNotNaN(value[i])) = to_mask(!isNaN(value[i]))` .
+- `YIsOddInteger`: Determines if a element represents an odd integral number (确定元素是否为奇数整数).
+  Mnemonic: `rt[i] := to_mask(isOddInteger(value[i]))` .
 
 ### Others (其他)
 Summary (概要):
