@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
+using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits {
 
@@ -199,6 +201,32 @@ namespace Zyl.VectorTraits {
                 // next.
                 mask <<= 1;
             }
+        }
+
+        /// <summary>
+        /// Mapping old flags to new flags (将旧标志映射为新标志).
+        /// </summary>
+        /// <param name="src">Source value (源值).</param>
+        /// <param name="matchFlag">Flags to be matched (欲匹配的标志)</param>
+        /// <param name="newFlag">New flag (新的标志).</param>
+        /// <returns>Returns the mapped value(返回映射后的值).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TypeCodeFlags MapFlags(TypeCodeFlags src, TypeCodeFlags matchFlag, TypeCodeFlags newFlag) {
+            return (TypeCodeFlags)BitMathCore.MapFlags((int)src, (int)matchFlag, (int)newFlag);
+        }
+
+        /// <summary>
+        /// Mapping 2 groups of old flags to new flags (将2组旧标志映射为新标志).
+        /// </summary>
+        /// <param name="src">Source value (源值).</param>
+        /// <param name="matchFlag0">Flags to be matched 0 (欲匹配的标志0)</param>
+        /// <param name="newFlag0">New flag 0 (新的标志0).</param>
+        /// <param name="matchFlag1">Flags to be matched 1 (欲匹配的标志1)</param>
+        /// <param name="newFlag1">New flag 1 (新的标志1).</param>
+        /// <returns>Returns the mapped value(返回映射后的值).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TypeCodeFlags MapFlags(TypeCodeFlags src, TypeCodeFlags matchFlag0, TypeCodeFlags newFlag0, TypeCodeFlags matchFlag1, TypeCodeFlags newFlag1) {
+            return (TypeCodeFlags)BitMathCore.MapFlags((int)src, (int)matchFlag0, (int)newFlag0, (int)matchFlag1, (int)newFlag1);
         }
 
         /// <summary>

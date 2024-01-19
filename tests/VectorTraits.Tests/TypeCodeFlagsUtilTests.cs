@@ -37,6 +37,22 @@ namespace Zyl.VectorTraits.Tests {
         }
 
         [Test()]
+        public void MapFlagsTest() {
+            const TypeCodeFlags expected = TypeCodeFlags.Double;
+            TypeCodeFlags src = TypeCodeFlags.Int64;
+            TypeCodeFlags dst = TypeCodeFlagsUtil.MapFlags(src, TypeCodeFlags.Int64, expected);
+            Assert.AreEqual(expected, dst);
+        }
+
+        [Test()]
+        public void MapFlagsTest_2() {
+            const TypeCodeFlags expected = TypeCodeFlags.Single | TypeCodeFlags.Double;
+            TypeCodeFlags src = TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
+            TypeCodeFlags dst = TypeCodeFlagsUtil.MapFlags(src, TypeCodeFlags.Int32, TypeCodeFlags.Single, TypeCodeFlags.Int64, TypeCodeFlags.Double);
+            Assert.AreEqual(expected, dst);
+        }
+
+        [Test()]
         public void ToEnumerableTest() {
             foreach (var code in TypeCodeFlagsUtil.ToEnumerable(TypeCodeFlagsUtil.IntTypes)) {
                 Assert.AreNotEqual(0, (int)code);

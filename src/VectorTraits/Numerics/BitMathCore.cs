@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -508,6 +509,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint GetMostSignificantBit(float src) {
             return GetMostSignificantBit(BitMath.SingleToUInt32Bits(src));
         }
@@ -519,6 +521,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint GetMostSignificantBit(double src) {
             return GetMostSignificantBit(BitMath.DoubleToUInt64Bits(src));
         }
@@ -530,6 +533,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint GetMostSignificantBit(sbyte src) {
             return GetMostSignificantBit((byte)src);
         }
@@ -541,6 +545,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint GetMostSignificantBit(byte src) {
             return (uint)(src >> 7);
         }
@@ -552,6 +557,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint GetMostSignificantBit(short src) {
             return GetMostSignificantBit((ushort)src);
         }
@@ -563,6 +569,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint GetMostSignificantBit(ushort src) {
             return (uint)(src >> 15);
         }
@@ -574,6 +581,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint GetMostSignificantBit(int src) {
             return GetMostSignificantBit((uint)src);
         }
@@ -585,6 +593,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint GetMostSignificantBit(uint src) {
             return src >> 31;
         }
@@ -596,6 +605,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint GetMostSignificantBit(long src) {
             return GetMostSignificantBit((ulong)src);
         }
@@ -607,8 +617,39 @@ namespace Zyl.VectorTraits.Numerics {
         /// <param name="src">Source value (源值).</param>
         /// <returns>The most significant bit (最高有效位).</returns>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint GetMostSignificantBit(ulong src) {
             return (uint)(src >> 63);
+        }
+
+        /// <summary>
+        /// Mapping old flags to new flags (将旧标志映射为新标志).
+        /// </summary>
+        /// <param name="src">Source value (源值).</param>
+        /// <param name="matchFlag">Flags to be matched (欲匹配的标志)</param>
+        /// <param name="newFlag">New flag (新的标志).</param>
+        /// <returns>Returns the mapped value(返回映射后的值).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int MapFlags(int src, int matchFlag, int newFlag) {
+            //int rt = (0 != (src & matchFlag)) ? newFlag : 0;
+            int rt = ToInt32Mask(0 != (src & matchFlag)) & newFlag;
+            return rt;
+        }
+
+        /// <summary>
+        /// Mapping 2 groups of old flags to new flags (将2组旧标志映射为新标志).
+        /// </summary>
+        /// <param name="src">Source value (源值).</param>
+        /// <param name="matchFlag0">Flags to be matched 0 (欲匹配的标志0)</param>
+        /// <param name="newFlag0">New flag 0 (新的标志0).</param>
+        /// <param name="matchFlag1">Flags to be matched 1 (欲匹配的标志1)</param>
+        /// <param name="newFlag1">New flag 1 (新的标志1).</param>
+        /// <returns>Returns the mapped value(返回映射后的值).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int MapFlags(int src, int matchFlag0, int newFlag0, int matchFlag1, int newFlag1) {
+            int rt = MapFlags(src, matchFlag0, newFlag0);
+            rt |= MapFlags(src, matchFlag1, newFlag1);
+            return rt;
         }
 
         /// <summary>
