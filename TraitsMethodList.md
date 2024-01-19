@@ -154,6 +154,10 @@ List (列表):
   Mnemonic: `rt[i] := to_mask(isNotNaN(value[i])) = to_mask(!isNaN(value[i]))` .
 - `YIsOddInteger`: Determines if a element represents an odd integral number (确定元素是否为奇数整数).
   Mnemonic: `rt[i] := to_mask(isOddInteger(value[i]))` .
+- `YIsPositive`: Determines if a element represents zero or a positive number (确定元素是否为零或正数).
+  Mnemonic: `rt[i] := to_mask(isPositive(value[i]))` .
+- `YIsPositiveInfinity`: Determines if a element is positive infinity (确定元素是否为正无穷大).
+  Mnemonic: `rt[i] := to_mask(isPositiveInfinity(value[i]))` .
 
 ### Others (其他)
 Summary (概要):

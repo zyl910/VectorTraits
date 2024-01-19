@@ -1642,7 +1642,7 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
         /// <summary>
-        /// Determines if a element represents zero or a positive number (确定元素是否为正零或正实数).
+        /// Determines if a element represents zero or a positive number (确定元素是否为正零或正数).
         /// </summary>
         /// <param name="value">The value to be checked (要检查的值).</param>
         /// <returns>Return <c>true</c> if value represents positive zero or a positive real number, otherwise is <c>false</c> (如果值表示正零或正实数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>

@@ -613,6 +613,64 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YIsPositive</c> (运行 <c>YIsPositive</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsPositive(Vector256{float})"/>
+        TypeCodeFlags YIsPositive_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element represents zero or a positive number (确定元素是否为零或正数).
+        /// Mnemonic: <c>rt[i] := to_mask(isNegative(value[i])) = to_mask((value[i]&lt;0) || isNegativeZero(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is zero or a positive number (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为零或正数).</returns>
+        /// <seealso cref="YIsPositive_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsPositive(float)"/>
+        Vector256<int> YIsPositive(Vector256<float> value);
+
+        /// <inheritdoc cref="YIsPositive(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsPositive(double)"/>
+        Vector256<long> YIsPositive(Vector256<double> value);
+
+        /// <inheritdoc cref="YIsPositive(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsPositive(sbyte)"/>
+        Vector256<sbyte> YIsPositive(Vector256<sbyte> value);
+
+        /// <inheritdoc cref="YIsPositive(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsPositive(short)"/>
+        Vector256<short> YIsPositive(Vector256<short> value);
+
+        /// <inheritdoc cref="YIsPositive(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsPositive(int)"/>
+        Vector256<int> YIsPositive(Vector256<int> value);
+
+        /// <inheritdoc cref="YIsPositive(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsPositive(long)"/>
+        Vector256<long> YIsPositive(Vector256<long> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsPositiveInfinity</c> (运行 <c>YIsPositiveInfinity</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsPositiveInfinity(Vector256{float})"/>
+        TypeCodeFlags YIsPositiveInfinity_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is positive infinity (确定元素是否为正无穷大).
+        /// Mnemonic: <c>rt[i] := to_mask(isNegativeInfinity(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is positive infinity (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为正无穷大).</returns>
+        /// <seealso cref="YIsPositiveInfinity_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsPositiveInfinity(float)"/>
+        Vector256<int> YIsPositiveInfinity(Vector256<float> value);
+
+        /// <inheritdoc cref="YIsPositiveInfinity(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsPositiveInfinity(double)"/>
+        Vector256<long> YIsPositiveInfinity(Vector256<double> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YNarrowSaturate</c> (运行 <c>YNarrowSaturate</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YNarrowSaturate(Vector256{short}, Vector256{short})"/>

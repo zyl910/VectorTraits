@@ -310,14 +310,16 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> YIsNegative(Vector256<short> value) {
-                Vector256<short> rt = LessThan(value, Vector256<short>.Zero);
+                //Vector256<short> rt = LessThan(value, Vector256<short>.Zero);
+                Vector256<short> rt = Avx2.ShiftRightArithmetic(value, 15);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> YIsNegative(Vector256<int> value) {
-                Vector256<int> rt = LessThan(value, Vector256<int>.Zero);
+                //Vector256<int> rt = LessThan(value, Vector256<int>.Zero);
+                Vector256<int> rt = Avx2.ShiftRightArithmetic(value, 31);
                 return rt;
             }
 
@@ -534,6 +536,80 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<ulong> YIsOddInteger(Vector256<ulong> value)
             {
                 return YIsOddInteger(value.AsInt64()).AsUInt64();
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsPositive_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsPositive_AcceleratedTypes {
+                get {
+                    return YIsNegative_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsPositive(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsPositive(Vector256<float> value) {
+                return YIsPositive(value.AsInt32());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsPositive(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsPositive(Vector256<double> value) {
+                return YIsPositive(value.AsInt64());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsPositive(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YIsPositive(Vector256<sbyte> value) {
+                Vector256<sbyte> rt = OnesComplement(YIsNegative(value));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsPositive(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YIsPositive(Vector256<short> value) {
+                Vector256<short> rt = OnesComplement(YIsNegative(value));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsPositive(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsPositive(Vector256<int> value) {
+                Vector256<int> rt = OnesComplement(YIsNegative(value));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsPositive(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsPositive(Vector256<long> value) {
+                Vector256<long> rt = OnesComplement(YIsNegative(value));
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsPositiveInfinity_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsPositiveInfinity_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = (TypeCodeFlags.Single | TypeCodeFlags.Double) & Equals_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsPositiveInfinity(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsPositiveInfinity(Vector256<float> value) {
+                Vector256<float> sample = Vector256.Create(float.PositiveInfinity);
+                Vector256<int> rt = Equals(value, sample).AsInt32();
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsPositiveInfinity(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsPositiveInfinity(Vector256<double> value) {
+                Vector256<double> sample = Vector256.Create(double.PositiveInfinity);
+                Vector256<long> rt = Equals(value, sample).AsInt64();
+                return rt;
             }
 
 #endif // NETCOREAPP3_0_OR_GREATER

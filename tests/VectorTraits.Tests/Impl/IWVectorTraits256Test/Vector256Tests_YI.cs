@@ -657,6 +657,96 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
         }
 
+        [TestCase((float)1, (int)1)]
+        [TestCase((double)2, (long)1)]
+        [TestCase((sbyte)3, (sbyte)1)]
+        [TestCase((short)5, (short)1)]
+        [TestCase((int)7, (int)1)]
+        [TestCase((long)9, (long)1)]
+        public void YIsPositiveTest<T, TOut>(T src, TOut srcOut) where T : struct where TOut : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YIsPositive_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<TOut>>>("YIsPositive_Basic", "YIsPositive_Bit");
+            foreach (var func in funcList) {
+                writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            writer.WriteLine();
+            // run.
+            Vector256<T>[] samples = {
+                Vector256s<T>.Serial,
+                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), -1.0),
+                Vector256s<T>.Demo,
+                Vector256s<T>.DemoNaN,
+            };
+            bool allowLog = false;
+            bool showNotEquals = true;
+            foreach (Vector256<T> value in samples) {
+                writer.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
+                Vector256<TOut> expected = Vector256s.YIsPositive((dynamic)value);
+                writer.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                foreach (IWVectorTraits256 instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector256<TOut> dst = instance.YIsPositive((dynamic)value);
+                    if (allowLog || (showNotEquals && !expected.Equals(dst))) {
+                        writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    }
+                }
+                writer.WriteLine();
+            }
+        }
+
+        [TestCase((float)1, (int)1)]
+        [TestCase((double)2, (long)1)]
+        public void YIsPositiveInfinityTest<T, TOut>(T src, TOut srcOut) where T : struct where TOut : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YIsPositiveInfinity_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vector256s.GetSupportedMethodList<Func<Vector256<T>, Vector256<TOut>>>("YIsPositiveInfinity_Basic", "YIsPositiveInfinity_Bit");
+            foreach (var func in funcList) {
+                writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            writer.WriteLine();
+            // run.
+            Vector256<T>[] samples = {
+                Vector256s<T>.Serial,
+                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), -1.0),
+                Vector256s<T>.Demo,
+                Vector256s<T>.DemoNaN,
+            };
+            bool allowLog = false;
+            bool showNotEquals = true;
+            foreach (Vector256<T> value in samples) {
+                writer.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
+                Vector256<TOut> expected = Vector256s.YIsPositiveInfinity((dynamic)value);
+                writer.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                foreach (IWVectorTraits256 instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector256<TOut> dst = instance.YIsPositiveInfinity((dynamic)value);
+                    if (allowLog || (showNotEquals && !expected.Equals(dst))) {
+                        writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    }
+                }
+                writer.WriteLine();
+            }
+        }
+
 #endif
     }
 }
