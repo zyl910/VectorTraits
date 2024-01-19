@@ -91,7 +91,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if NET7_0_OR_GREATER
-                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    rt |= TypeCodeFlagsUtil.IntTypes & Equals_AcceleratedTypes;
+                    rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & YIsInteger_AcceleratedTypes & Floor_AcceleratedTypes;
 #endif // NET7_0_OR_GREATER
                     return rt;
                 }
@@ -446,7 +447,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if NET7_0_OR_GREATER
-                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    rt |= TypeCodeFlags.Single;
+                    rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
 #endif // NET7_0_OR_GREATER
                     return rt;
                 }
@@ -528,7 +530,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if NET7_0_OR_GREATER
-                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    rt |= TypeCodeFlags.Single;
+                    rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
 #endif // NET7_0_OR_GREATER
                     return rt;
                 }
@@ -612,7 +615,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if NET7_0_OR_GREATER
-                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    rt |= TypeCodeFlags.Single;
+                    rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
 #endif // NET7_0_OR_GREATER
                     return rt;
                 }
@@ -694,7 +698,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if NET7_0_OR_GREATER
-                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    rt |= TypeCodeFlags.Single;
+                    rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double) & Floor_AcceleratedTypes;
 #endif // NET7_0_OR_GREATER
                     return rt;
                 }
@@ -778,7 +783,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if NET7_0_OR_GREATER
-                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & Equals_AcceleratedTypes;
 #endif // NET7_0_OR_GREATER
                     return rt;
                 }
@@ -860,7 +865,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if NET7_0_OR_GREATER
-                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
+                    rt |= (TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64) & LessThan_AcceleratedTypes;
+                    rt |= TypeCodeFlagsUtil.MapFlags(LessThan_AcceleratedTypes, TypeCodeFlags.Int32, TypeCodeFlags.Single, TypeCodeFlags.Int64, TypeCodeFlags.Double);
 #endif // NET7_0_OR_GREATER
                     return rt;
                 }
@@ -1104,7 +1110,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if NET7_0_OR_GREATER
-                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & Equals_AcceleratedTypes;
 #endif // NET7_0_OR_GREATER
                     return rt;
                 }
@@ -1184,7 +1190,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if NET7_0_OR_GREATER
-                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    rt |= TypeCodeFlags.Single;
+                    rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
 #endif // NET7_0_OR_GREATER
                     return rt;
                 }
@@ -1264,7 +1271,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if NET7_0_OR_GREATER
-                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    rt |= TypeCodeFlagsUtil.MapFlags(GreaterThan_AcceleratedTypes, TypeCodeFlags.Int32, TypeCodeFlags.Single, TypeCodeFlags.Int64, TypeCodeFlags.Double);
 #endif // NET7_0_OR_GREATER
                     return rt;
                 }
@@ -1346,7 +1353,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if NET7_0_OR_GREATER
-                    rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & Equals_AcceleratedTypes;
 #endif // NET7_0_OR_GREATER
                     return rt;
                 }
@@ -1430,7 +1437,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if NET7_0_OR_GREATER
-                    rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    rt |= TypeCodeFlagsUtil.IntTypes & Equals_AcceleratedTypes;
                     rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & YIsInteger_AcceleratedTypes & Floor_AcceleratedTypes;
 #endif // NET7_0_OR_GREATER
                     return rt;
