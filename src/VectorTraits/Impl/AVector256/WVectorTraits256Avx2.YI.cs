@@ -719,6 +719,34 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return Equals(Vector256<ulong>.Zero, value);
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsZeroOrSubnormal_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsZeroOrSubnormal_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single;
+                    rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsZeroOrSubnormal(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsZeroOrSubnormal(Vector256<float> value) {
+                Vector256<int> exponentMask = Vector256Constants.Single_ExponentMask.AsInt32();
+                Vector256<int> exponent = Avx2.And(value.AsInt32(), exponentMask);
+                Vector256<int> rt = Equals(exponent, Vector256<int>.Zero);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsZeroOrSubnormal(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsZeroOrSubnormal(Vector256<double> value) {
+                Vector256<long> exponentMask = Vector256Constants.Double_ExponentMask.AsInt64();
+                Vector256<long> exponent = Avx2.And(value.AsInt64(), exponentMask);
+                Vector256<long> rt = Equals(exponent, Vector256<long>.Zero);
+                return rt;
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }

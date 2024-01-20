@@ -649,6 +649,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsZeroOrSubnormal_AcceleratedTypes"/>
+        public override TypeCodeFlags YIsZeroOrSubnormal_AcceleratedTypes {
+            get {
+                return Statics.YIsZeroOrSubnormal_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZeroOrSubnormal(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> YIsZeroOrSubnormal(Vector256<float> value) {
+            return Statics.YIsZeroOrSubnormal(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZeroOrSubnormal(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> YIsZeroOrSubnormal(Vector256<double> value) {
+            return Statics.YIsZeroOrSubnormal(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public override TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

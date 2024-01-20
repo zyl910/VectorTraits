@@ -162,7 +162,8 @@ List (列表):
   Mnemonic: `rt[i] := to_mask(isSubnormal(value[i]))` .
 - `YIsZero`: Determines if a element is zero (确定元素是否为零).
   Mnemonic: `rt[i] := to_mask(0==value[i])` .
-
+- `YIsZeroOrSubnormal`: Determines if a element is zero or subnormal (确定元素是否为零或次正规数).
+  Mnemonic: `rt[i] := to_mask(isZeroOrSubnormal(value[i]))` .
 
 ### Others (其他)
 Summary (概要):
