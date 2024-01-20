@@ -612,6 +612,40 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsSubnormal_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsSubnormal_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single;
+                    rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes & GreaterThan_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsSubnormal(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsSubnormal(Vector256<float> value) {
+                Vector256<int> exponentMask = Vector256Constants.Single_ExponentMask.AsInt32();
+                Vector256<int> mantissaMask = Vector256Constants.Single_MantissaMask.AsInt32();
+                Vector256<int> zero = Vector256<int>.Zero;
+                Vector256<int> exponent = Avx2.And(value.AsInt32(), exponentMask);
+                Vector256<int> mantissa = Avx2.And(value.AsInt32(), mantissaMask);
+                Vector256<int> rt = Avx2.And(Equals(exponent, zero), GreaterThan(mantissa, zero));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsSubnormal(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsSubnormal(Vector256<double> value) {
+                Vector256<long> exponentMask = Vector256Constants.Double_ExponentMask.AsInt64();
+                Vector256<long> mantissaMask = Vector256Constants.Double_MantissaMask.AsInt64();
+                Vector256<long> zero = Vector256<long>.Zero;
+                Vector256<long> exponent = Avx2.And(value.AsInt64(), exponentMask);
+                Vector256<long> mantissa = Avx2.And(value.AsInt64(), mantissaMask);
+                Vector256<long> rt = Avx2.And(Equals(exponent, zero), GreaterThan(mantissa, zero));
+                return rt;
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }

@@ -671,6 +671,27 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YIsSubnormal</c> (运行 <c>YIsSubnormal</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsSubnormal(Vector256{float})"/>
+        TypeCodeFlags YIsSubnormal_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is subnormal (确定元素是否为次正规数).
+        /// Mnemonic: <c>rt[i] := to_mask(IsSubnormal(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is subnormal (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为次正规数).</returns>
+        /// <seealso cref="YIsSubnormal_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsSubnormal(float)"/>
+        Vector256<int> YIsSubnormal(Vector256<float> value);
+
+        /// <inheritdoc cref="YIsSubnormal(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsSubnormal(double)"/>
+        Vector256<long> YIsSubnormal(Vector256<double> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YNarrowSaturate</c> (运行 <c>YNarrowSaturate</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YNarrowSaturate(Vector256{short}, Vector256{short})"/>

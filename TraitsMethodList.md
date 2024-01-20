@@ -158,6 +158,9 @@ List (列表):
   Mnemonic: `rt[i] := to_mask(isPositive(value[i]))` .
 - `YIsPositiveInfinity`: Determines if a element is positive infinity (确定元素是否为正无穷大).
   Mnemonic: `rt[i] := to_mask(isPositiveInfinity(value[i]))` .
+- `YIsSubnormal`: Determines if a element is subnormal (确定元素是否为次正规数).
+  Mnemonic: `rt[i] := to_mask(isSubnormal(value[i]))` .
+
 
 ### Others (其他)
 Summary (概要):
