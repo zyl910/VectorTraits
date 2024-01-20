@@ -642,6 +642,78 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YIsZero_AcceleratedTypes {
+            get {
+                return Statics.YIsZero_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YIsZero(Vector256<float> value) {
+            return Statics.YIsZero(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YIsZero(Vector256<double> value) {
+            return Statics.YIsZero(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<sbyte> YIsZero(Vector256<sbyte> value) {
+            return Statics.YIsZero(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<byte> YIsZero(Vector256<byte> value) {
+            return Statics.YIsZero(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<short> YIsZero(Vector256<short> value) {
+            return Statics.YIsZero(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ushort> YIsZero(Vector256<ushort> value) {
+            return Statics.YIsZero(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YIsZero(Vector256<int> value) {
+            return Statics.YIsZero(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<uint> YIsZero(Vector256<uint> value) {
+            return Statics.YIsZero(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YIsZero(Vector256<long> value) {
+            return Statics.YIsZero(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ulong> YIsZero(Vector256<ulong> value) {
+            return Statics.YIsZero(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public virtual TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

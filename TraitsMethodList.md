@@ -160,6 +160,8 @@ List (列表):
   Mnemonic: `rt[i] := to_mask(isPositiveInfinity(value[i]))` .
 - `YIsSubnormal`: Determines if a element is subnormal (确定元素是否为次正规数).
   Mnemonic: `rt[i] := to_mask(isSubnormal(value[i]))` .
+- `YIsZero`: Determines if a element is zero (确定元素是否为零).
+  Mnemonic: `rt[i] := to_mask(0==value[i])` .
 
 
 ### Others (其他)

@@ -646,6 +646,79 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsZero_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsZero_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = Equals_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsZero(Vector256<float> value) {
+                return Equals(Vector256<float>.Zero, value).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsZero(Vector256<double> value) {
+                return Equals(Vector256<double>.Zero, value).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YIsZero(Vector256<sbyte> value) {
+                return Equals(Vector256<sbyte>.Zero, value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YIsZero(Vector256<byte> value) {
+                return Equals(Vector256<byte>.Zero, value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YIsZero(Vector256<short> value) {
+                return Equals(Vector256<short>.Zero, value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YIsZero(Vector256<ushort> value) {
+                return Equals(Vector256<ushort>.Zero, value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YIsZero(Vector256<int> value) {
+                return Equals(Vector256<int>.Zero, value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YIsZero(Vector256<uint> value) {
+                return Equals(Vector256<uint>.Zero, value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YIsZero(Vector256<long> value) {
+                return Equals(Vector256<long>.Zero, value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YIsZero(Vector256<ulong> value) {
+                return Equals(Vector256<ulong>.Zero, value);
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }

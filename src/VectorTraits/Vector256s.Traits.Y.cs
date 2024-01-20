@@ -1012,6 +1012,122 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsZero_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsZero_AcceleratedTypes;
+#else
+                return _instance.YIsZero_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YIsZero(Vector256<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YIsZero(Vector256<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YIsZero(Vector256<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YIsZero(Vector256<byte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YIsZero(Vector256<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> YIsZero(Vector256<ushort> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YIsZero(Vector256<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> YIsZero(Vector256<uint> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YIsZero(Vector256<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> YIsZero(Vector256<ulong> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

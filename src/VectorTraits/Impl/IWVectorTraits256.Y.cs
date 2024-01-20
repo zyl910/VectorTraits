@@ -692,6 +692,59 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YIsZero</c> (运行 <c>YIsZero</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsZero(Vector256{float})"/>
+        TypeCodeFlags YIsZero_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is zero (确定元素是否为零).
+        /// Mnemonic: <c>rt[i] := to_mask(0==value[i])</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is zero (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为零).</returns>
+        /// <seealso cref="YIsZero_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsZero(float)"/>
+        Vector256<int> YIsZero(Vector256<float> value);
+
+        /// <inheritdoc cref="YIsZero(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(double)"/>
+        Vector256<long> YIsZero(Vector256<double> value);
+
+        /// <inheritdoc cref="YIsZero(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(sbyte)"/>
+        Vector256<sbyte> YIsZero(Vector256<sbyte> value);
+
+        /// <inheritdoc cref="YIsZero(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(byte)"/>
+        Vector256<byte> YIsZero(Vector256<byte> value);
+
+        /// <inheritdoc cref="YIsZero(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(short)"/>
+        Vector256<short> YIsZero(Vector256<short> value);
+
+        /// <inheritdoc cref="YIsZero(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(ushort)"/>
+        Vector256<ushort> YIsZero(Vector256<ushort> value);
+
+        /// <inheritdoc cref="YIsZero(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(int)"/>
+        Vector256<int> YIsZero(Vector256<int> value);
+
+        /// <inheritdoc cref="YIsZero(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(uint)"/>
+        Vector256<uint> YIsZero(Vector256<uint> value);
+
+        /// <inheritdoc cref="YIsZero(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(long)"/>
+        Vector256<long> YIsZero(Vector256<long> value);
+
+        /// <inheritdoc cref="YIsZero(Vector256{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(ulong)"/>
+        Vector256<ulong> YIsZero(Vector256<ulong> value);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YNarrowSaturate</c> (运行 <c>YNarrowSaturate</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YNarrowSaturate(Vector256{short}, Vector256{short})"/>
