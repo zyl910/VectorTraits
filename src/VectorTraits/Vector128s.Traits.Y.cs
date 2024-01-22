@@ -270,6 +270,884 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsEvenInteger_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsEvenInteger_AcceleratedTypes;
+#else
+                return _instance.YIsEvenInteger_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsEvenInteger(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsEvenInteger(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<sbyte> YIsEvenInteger(Vector128<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<byte> YIsEvenInteger(Vector128<byte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<short> YIsEvenInteger(Vector128<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<ushort> YIsEvenInteger(Vector128<ushort> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsEvenInteger(Vector128<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<uint> YIsEvenInteger(Vector128<uint> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsEvenInteger(Vector128<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<ulong> YIsEvenInteger(Vector128<ulong> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsFinite_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsFinite_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsFinite_AcceleratedTypes;
+#else
+                return _instance.YIsFinite_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsFinite(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsFinite(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsFinite(value);
+#else
+            return _instance.YIsFinite(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsFinite(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsFinite(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsFinite(value);
+#else
+            return _instance.YIsFinite(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsInfinity_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsInfinity_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsInfinity_AcceleratedTypes;
+#else
+                return _instance.YIsInfinity_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsInfinity(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsInfinity(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsInfinity(value);
+#else
+            return _instance.YIsInfinity(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsInfinity(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsInfinity(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsInfinity(value);
+#else
+            return _instance.YIsInfinity(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsInfinityOrNaN_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsInfinityOrNaN_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsInfinityOrNaN_AcceleratedTypes;
+#else
+                return _instance.YIsInfinityOrNaN_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsInfinityOrNaN(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsInfinityOrNaN(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsInfinityOrNaN(value);
+#else
+            return _instance.YIsInfinityOrNaN(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsInfinityOrNaN(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsInfinityOrNaN(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsInfinityOrNaN(value);
+#else
+            return _instance.YIsInfinityOrNaN(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsInteger_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsInteger_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsInteger_AcceleratedTypes;
+#else
+                return _instance.YIsInteger_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsInteger(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsInteger(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsInteger(value);
+#else
+            return _instance.YIsInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsInteger(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsInteger(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsInteger(value);
+#else
+            return _instance.YIsInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNaN_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNaN_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNaN_AcceleratedTypes;
+#else
+                return _instance.YIsNaN_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNaN(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsNaN(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNaN(value);
+#else
+            return _instance.YIsNaN(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNaN(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsNaN(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNaN(value);
+#else
+            return _instance.YIsNaN(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNegative_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNegative_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNegative_AcceleratedTypes;
+#else
+                return _instance.YIsNegative_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsNegative(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsNegative(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<sbyte> YIsNegative(Vector128<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<short> YIsNegative(Vector128<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsNegative(Vector128<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsNegative(Vector128<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNegativeInfinity_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNegativeInfinity_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNegativeInfinity_AcceleratedTypes;
+#else
+                return _instance.YIsNegativeInfinity_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNegativeInfinity(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsNegativeInfinity(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegativeInfinity(value);
+#else
+            return _instance.YIsNegativeInfinity(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNegativeInfinity(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsNegativeInfinity(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegativeInfinity(value);
+#else
+            return _instance.YIsNegativeInfinity(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNegativeZero_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNegativeZero_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNegativeZero_AcceleratedTypes;
+#else
+                return _instance.YIsNegativeZero_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNegativeZero(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsNegativeZero(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegativeZero(value);
+#else
+            return _instance.YIsNegativeZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNegativeZero(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsNegativeZero(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegativeZero(value);
+#else
+            return _instance.YIsNegativeZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNormal_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNormal_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNormal_AcceleratedTypes;
+#else
+                return _instance.YIsNormal_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNormal(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsNormal(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNormal(value);
+#else
+            return _instance.YIsNormal(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNormal(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsNormal(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNormal(value);
+#else
+            return _instance.YIsNormal(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNotNaN_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNotNaN_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNotNaN_AcceleratedTypes;
+#else
+                return _instance.YIsNotNaN_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNotNaN(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsNotNaN(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNotNaN(value);
+#else
+            return _instance.YIsNotNaN(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNotNaN(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsNotNaN(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNotNaN(value);
+#else
+            return _instance.YIsNotNaN(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsOddInteger_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsOddInteger_AcceleratedTypes;
+#else
+                return _instance.YIsOddInteger_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsOddInteger(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsOddInteger(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<sbyte> YIsOddInteger(Vector128<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<byte> YIsOddInteger(Vector128<byte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<short> YIsOddInteger(Vector128<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<ushort> YIsOddInteger(Vector128<ushort> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsOddInteger(Vector128<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<uint> YIsOddInteger(Vector128<uint> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsOddInteger(Vector128<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<ulong> YIsOddInteger(Vector128<ulong> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositive_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsPositive_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsPositive_AcceleratedTypes;
+#else
+                return _instance.YIsPositive_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsPositive(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositive(value);
+#else
+            return _instance.YIsPositive(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsPositive(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositive(value);
+#else
+            return _instance.YIsPositive(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<sbyte> YIsPositive(Vector128<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositive(value);
+#else
+            return _instance.YIsPositive(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<short> YIsPositive(Vector128<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositive(value);
+#else
+            return _instance.YIsPositive(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsPositive(Vector128<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositive(value);
+#else
+            return _instance.YIsPositive(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsPositive(Vector128<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositive(value);
+#else
+            return _instance.YIsPositive(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositiveInfinity_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsPositiveInfinity_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsPositiveInfinity_AcceleratedTypes;
+#else
+                return _instance.YIsPositiveInfinity_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositiveInfinity(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsPositiveInfinity(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositiveInfinity(value);
+#else
+            return _instance.YIsPositiveInfinity(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositiveInfinity(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsPositiveInfinity(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositiveInfinity(value);
+#else
+            return _instance.YIsPositiveInfinity(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsSubnormal_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsSubnormal_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsSubnormal_AcceleratedTypes;
+#else
+                return _instance.YIsSubnormal_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsSubnormal(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsSubnormal(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsSubnormal(value);
+#else
+            return _instance.YIsSubnormal(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsSubnormal(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsSubnormal(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsSubnormal(value);
+#else
+            return _instance.YIsSubnormal(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsZero_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsZero_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsZero_AcceleratedTypes;
+#else
+                return _instance.YIsZero_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsZero(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsZero(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<sbyte> YIsZero(Vector128<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<byte> YIsZero(Vector128<byte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<short> YIsZero(Vector128<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<ushort> YIsZero(Vector128<ushort> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsZero(Vector128<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<uint> YIsZero(Vector128<uint> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsZero(Vector128<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<ulong> YIsZero(Vector128<ulong> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsZeroOrSubnormal_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsZeroOrSubnormal_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsZeroOrSubnormal_AcceleratedTypes;
+#else
+                return _instance.YIsZeroOrSubnormal_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsZeroOrSubnormal(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<int> YIsZeroOrSubnormal(Vector128<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZeroOrSubnormal(value);
+#else
+            return _instance.YIsZeroOrSubnormal(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsZeroOrSubnormal(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<long> YIsZeroOrSubnormal(Vector128<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZeroOrSubnormal(value);
+#else
+            return _instance.YIsZeroOrSubnormal(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate_AcceleratedTypes"/>
         public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

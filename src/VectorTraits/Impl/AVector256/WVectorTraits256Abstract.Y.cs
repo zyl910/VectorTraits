@@ -733,6 +733,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             return Statics.YIsZeroOrSubnormal(value);
         }
 
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public virtual TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {
