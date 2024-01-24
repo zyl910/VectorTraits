@@ -1,4 +1,8 @@
-﻿using System;
+﻿#if NET7_0_OR_GREATER
+#define VECTOR_HAS_METHOD
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
@@ -20,11 +24,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static bool YBitToByte_IsAccelerated {
                 get {
                     bool rt = false;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     if (Vector128.IsHardwareAccelerated) {
                         rt = true;
                     }
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -33,11 +37,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YBitToByte(uint value) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YBitToByte_Widen(value);
 #else
                 return YBitToByte_Basic(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YBitToByte"/>
@@ -53,7 +57,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if NET7_0_OR_GREATER
+#if VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YBitToByte"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -75,18 +79,18 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<byte> rt = Vector128.OnesComplement(Vector128.Equals(hit, Vector128<byte>.Zero));
                 return rt;
             }
-#endif // NET7_0_OR_GREATER
+#endif // VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YBitToInt16_IsAccelerated"/>
             public static bool YBitToInt16_IsAccelerated {
                 get {
                     bool rt = false;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     if (Vector128.IsHardwareAccelerated) {
                         rt = true;
                     }
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -95,11 +99,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YBitToInt16(uint value) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YBitToInt16_And(value);
 #else
                 return YBitToInt16_Basic(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YBitToInt16"/>
@@ -115,7 +119,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if NET7_0_OR_GREATER
+#if VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YBitToInt16"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -128,18 +132,18 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<short> rt = Vector128.OnesComplement(Vector128.Equals(hit, Vector128<short>.Zero));
                 return rt;
             }
-#endif // NET7_0_OR_GREATER
+#endif // VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YBitToInt32_IsAccelerated"/>
             public static bool YBitToInt32_IsAccelerated {
                 get {
                     bool rt = false;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     if (Vector128.IsHardwareAccelerated) {
                         rt = true;
                     }
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -148,11 +152,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YBitToInt32(uint value) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YBitToInt32_And(value);
 #else
                 return YBitToInt32_Basic(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YBitToInt32"/>
@@ -168,7 +172,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if NET7_0_OR_GREATER
+#if VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YBitToInt32"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -181,18 +185,18 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<int> rt = Vector128.OnesComplement(Vector128.Equals(hit, Vector128<int>.Zero));
                 return rt;
             }
-#endif // NET7_0_OR_GREATER
+#endif // VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YBitToInt64_IsAccelerated"/>
             public static bool YBitToInt64_IsAccelerated {
                 get {
                     bool rt = false;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     if (Vector128.IsHardwareAccelerated) {
                         rt = true;
                     }
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -201,11 +205,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YBitToInt64(uint value) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YBitToInt64_And(value);
 #else
                 return YBitToInt64_Basic(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YBitToInt64"/>
@@ -221,7 +225,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if NET7_0_OR_GREATER
+#if VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YBitToInt64"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -234,7 +238,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> rt = Vector128.OnesComplement(Vector128.Equals(hit, Vector128<long>.Zero));
                 return rt;
             }
-#endif // NET7_0_OR_GREATER
+#endif // VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YClamp_AcceleratedTypes"/>
@@ -452,11 +456,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static TypeCodeFlags YOrNot_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     if (Vector128.IsHardwareAccelerated) {
                         rt |= TypeCodeFlagsUtil.AllTypes;
                     }
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -464,11 +468,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YOrNot{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> YOrNot<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YOrNot_Or(left, right);
 #else
                 return YOrNot_Basic(left, right);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YOrNot{T}(Vector128{T}, Vector128{T})"/>
@@ -483,7 +487,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if NET7_0_OR_GREATER
+#if VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YOrNot{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> YOrNot_Or<T>(Vector128<T> left, Vector128<T> right) where T : struct {
@@ -491,16 +495,16 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<T> rt = Vector128.BitwiseOr(left, right2);
                 return rt;
             }
-#endif // NET7_0_OR_GREATER
+#endif // VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YRoundToEven_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if NET7_0_OR_GREATER
+#if VECTOR_HAS_METHOD
                     rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
-#endif // NET7_0_OR_GREATER
+#endif // VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -508,21 +512,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YRoundToEven(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YRoundToEven(Vector128<float> value) {
-#if NET7_0_OR_GREATER
+#if VECTOR_HAS_METHOD
                 return YRoundToEven_Add(value);
 #else
                 return YRoundToEven_Basic(value);
-#endif // NET7_0_OR_GREATER
+#endif // VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YRoundToEven(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YRoundToEven(Vector128<double> value) {
-#if NET7_0_OR_GREATER
+#if VECTOR_HAS_METHOD
                 return YRoundToEven_Add(value);
 #else
                 return YRoundToEven_Basic(value);
-#endif // NET7_0_OR_GREATER
+#endif // VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YRoundToEven(Vector128{float})"/>
@@ -547,7 +551,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if NET7_0_OR_GREATER
+#if VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YRoundToEven(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YRoundToEven_Add(Vector128<float> value) {
@@ -579,16 +583,16 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 rt = Vector128.Subtract(rt, delta);
                 return rt;
             }
-#endif // NET7_0_OR_GREATER
+#endif // VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if NET7_0_OR_GREATER
+#if VECTOR_HAS_METHOD
                     rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
-#endif // NET7_0_OR_GREATER
+#endif // VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -596,21 +600,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YRoundToZero(Vector128<float> value) {
-#if NET7_0_OR_GREATER
+#if VECTOR_HAS_METHOD
                 return YRoundToZero_Floor(value);
 #else
                 return YRoundToZero_Basic(value);
-#endif // NET7_0_OR_GREATER
+#endif // VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YRoundToZero(Vector128<double> value) {
-#if NET7_0_OR_GREATER
+#if VECTOR_HAS_METHOD
                 return YRoundToZero_Floor(value);
 #else
                 return YRoundToZero_Basic(value);
-#endif // NET7_0_OR_GREATER
+#endif // VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
@@ -635,7 +639,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if NET7_0_OR_GREATER
+#if VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YRoundToZero_Floor(Vector128<float> value) {
@@ -657,7 +661,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 rt = Vector128.BitwiseOr(rt, signData);
                 return rt;
             }
-#endif // NET7_0_OR_GREATER
+#endif // VECTOR_HAS_METHOD
 
 
 #endif // NETCOREAPP3_0_OR_GREATER

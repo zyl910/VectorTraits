@@ -1,4 +1,8 @@
-﻿using System;
+﻿#if NET7_0_OR_GREATER
+#define VECTOR_HAS_METHOD
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 #if !NET7_0_OR_GREATER
@@ -48,11 +52,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{byte}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleG2(Vector128<byte> source, ShuffleControlG2 control) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector128.Shuffle(source, Vector128Constants.GetYShuffleG2_Byte_Indices(control));
 #else
                 return YShuffleG2_Basic(source, control);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{short}, ShuffleControlG2)"/>
@@ -65,11 +69,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleG2(Vector128<ushort> source, ShuffleControlG2 control) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector128.Shuffle(source.AsByte(), Vector128Constants.GetYShuffleG2_UInt16_ByteIndices(control)).AsUInt16();
 #else
                 return YShuffleG2_Basic(source, control);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{int}, ShuffleControlG2)"/>
@@ -82,11 +86,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleG2(Vector128<uint> source, ShuffleControlG2 control) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector128.Shuffle(source.AsByte(), Vector128Constants.GetYShuffleG2_UInt32_ByteIndices(control)).AsUInt32();
 #else
                 return YShuffleG2_Basic(source, control);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{long}, ShuffleControlG2)"/>
@@ -99,11 +103,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleG2(Vector128<ulong> source, ShuffleControlG2 control) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector128.Shuffle(source.AsByte(), Vector128Constants.GetYShuffleG2_UInt64_ByteIndices(control)).AsUInt64();
 #else
                 return YShuffleG2_Basic(source, control);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{float}, ShuffleControlG2)"/>
@@ -292,11 +296,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{byte}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleG4(Vector128<byte> source, ShuffleControlG4 control) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector128.Shuffle(source, Vector128Constants.GetYShuffleG4_Byte_Indices(control));
 #else
                 return YShuffleG4_Basic(source, control);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{short}, ShuffleControlG4)"/>
@@ -309,11 +313,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleG4(Vector128<ushort> source, ShuffleControlG4 control) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector128.Shuffle(source.AsByte(), Vector128Constants.GetYShuffleG4_UInt16_ByteIndices(control)).AsUInt16();
 #else
                 return YShuffleG4_Basic(source, control);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{int}, ShuffleControlG4)"/>
@@ -326,11 +330,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleG4(Vector128<uint> source, ShuffleControlG4 control) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector128.Shuffle(source.AsByte(), Vector128Constants.GetYShuffleG4_UInt32_ByteIndices(control)).AsUInt32();
 #else
                 return YShuffleG4_Basic(source, control);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{float}, ShuffleControlG4)"/>
@@ -666,14 +670,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleInsert(Vector128<byte> back, Vector128<byte> vector, Vector128<byte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 Vector128<byte> mask = Vector128.GreaterThan(Vector128.Create((byte)Vector128<byte>.Count), indices);
                 Vector128<byte> raw = Vector128.Shuffle(vector, indices);
                 Vector128<byte> rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
 #else
                 return YShuffleInsert_Basic(back, vector, indices);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{short}, Vector128{short}, Vector128{short})"/>
@@ -686,14 +690,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleInsert(Vector128<ushort> back, Vector128<ushort> vector, Vector128<ushort> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 Vector128<ushort> mask = Vector128.GreaterThan(Vector128.Create((ushort)Vector128<ushort>.Count), indices);
                 Vector128<ushort> raw = Vector128.Shuffle(vector, indices);
                 Vector128<ushort> rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
 #else
                 return YShuffleInsert_Basic(back, vector, indices);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{int}, Vector128{int}, Vector128{int})"/>
@@ -706,14 +710,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleInsert(Vector128<uint> back, Vector128<uint> vector, Vector128<uint> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 Vector128<uint> mask = Vector128.GreaterThan(Vector128.Create((uint)Vector128<uint>.Count), indices);
                 Vector128<uint> raw = Vector128.Shuffle(vector, indices);
                 Vector128<uint> rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
 #else
                 return YShuffleInsert_Basic(back, vector, indices);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{long}, Vector128{long}, Vector128{long})"/>
@@ -726,14 +730,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleInsert(Vector128<ulong> back, Vector128<ulong> vector, Vector128<ulong> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 Vector128<ulong> mask = Vector128.GreaterThan(Vector128.Create((ulong)Vector128<ulong>.Count), indices);
                 Vector128<ulong> raw = Vector128.Shuffle(vector, indices);
                 Vector128<ulong> rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
 #else
                 return YShuffleInsert_Basic(back, vector, indices);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
@@ -826,11 +830,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleInsert_Args(Vector128<sbyte> indices, out Vector128<sbyte> args0, out Vector128<sbyte> args1, out Vector128<sbyte> args2) {
                 args0 = indices;
                 args1 = default;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 args2 = Vector128.GreaterThan(Vector128.Create((byte)Vector128<byte>.Count), indices.AsByte()).AsSByte();
 #else
                 args2 = default;
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert_Args(Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
@@ -838,11 +842,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleInsert_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1, out Vector128<byte> args2) {
                 args0 = indices;
                 args1 = default;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 args2 = Vector128.GreaterThan(Vector128.Create((byte)Vector128<byte>.Count), indices);
 #else
                 args2 = default;
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert_Args(Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
@@ -850,11 +854,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleInsert_Args(Vector128<short> indices, out Vector128<short> args0, out Vector128<short> args1, out Vector128<short> args2) {
                 args0 = indices;
                 args1 = default;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 args2 = Vector128.GreaterThan(Vector128.Create((ushort)Vector128<ushort>.Count), indices.AsUInt16()).AsInt16();
 #else
                 args2 = default;
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert_Args(Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
@@ -863,11 +867,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleInsert_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1, out Vector128<ushort> args2) {
                 args0 = indices;
                 args1 = default;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 args2 = Vector128.GreaterThan(Vector128.Create((ushort)Vector128<ushort>.Count), indices);
 #else
                 args2 = default;
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert_Args(Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
@@ -875,11 +879,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleInsert_Args(Vector128<int> indices, out Vector128<int> args0, out Vector128<int> args1, out Vector128<int> args2) {
                 args0 = indices;
                 args1 = default;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 args2 = Vector128.GreaterThan(Vector128.Create((uint)Vector128<uint>.Count), indices.AsUInt32()).AsInt32();
 #else
                 args2 = default;
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert_Args(Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
@@ -888,11 +892,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleInsert_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1, out Vector128<uint> args2) {
                 args0 = indices;
                 args1 = default;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 args2 = Vector128.GreaterThan(Vector128.Create((uint)Vector128<uint>.Count), indices);
 #else
                 args2 = default;
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert_Args(Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
@@ -900,11 +904,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleInsert_Args(Vector128<long> indices, out Vector128<long> args0, out Vector128<long> args1, out Vector128<long> args2) {
                 args0 = indices;
                 args1 = default;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 args2 = Vector128.GreaterThan(Vector128.Create((ulong)Vector128<ulong>.Count), indices.AsUInt64()).AsInt64();
 #else
                 args2 = default;
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert_Args(Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
@@ -913,11 +917,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleInsert_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1, out Vector128<ulong> args2) {
                 args0 = indices;
                 args1 = default;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 args2 = Vector128.GreaterThan(Vector128.Create((ulong)Vector128<ulong>.Count), indices);
 #else
                 args2 = default;
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
 
@@ -944,14 +948,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleInsert_Core(Vector128<byte> back, Vector128<byte> vector, Vector128<byte> args0, Vector128<byte> args1, Vector128<byte> args2) {
                 _ = args1;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 var raw = Vector128.Shuffle(vector, args0);
                 var rt = Vector128.ConditionalSelect(args2, raw, back);
                 return rt;
 #else
                 _ = args2;
                 return YShuffleInsert_Basic(back, vector, args0);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert_Core(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
@@ -965,14 +969,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleInsert_Core(Vector128<ushort> back, Vector128<ushort> vector, Vector128<ushort> args0, Vector128<ushort> args1, Vector128<ushort> args2) {
                 _ = args1;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 var raw = Vector128.Shuffle(vector, args0);
                 var rt = Vector128.ConditionalSelect(args2, raw, back);
                 return rt;
 #else
                 _ = args2;
                 return YShuffleInsert_Basic(back, vector, args0);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert_Core(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
@@ -986,14 +990,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleInsert_Core(Vector128<uint> back, Vector128<uint> vector, Vector128<uint> args0, Vector128<uint> args1, Vector128<uint> args2) {
                 _ = args1;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 var raw = Vector128.Shuffle(vector, args0);
                 var rt = Vector128.ConditionalSelect(args2, raw, back);
                 return rt;
 #else
                 _ = args2;
                 return YShuffleInsert_Basic(back, vector, args0);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert_Core(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
@@ -1007,14 +1011,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleInsert_Core(Vector128<ulong> back, Vector128<ulong> vector, Vector128<ulong> args0, Vector128<ulong> args1, Vector128<ulong> args2) {
                 _ = args1;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 var raw = Vector128.Shuffle(vector, args0);
                 var rt = Vector128.ConditionalSelect(args2, raw, back);
                 return rt;
 #else
                 _ = args2;
                 return YShuffleInsert_Basic(back, vector, args0);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
 

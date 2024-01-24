@@ -1,7 +1,7 @@
 # VectorTraits_design
 
 ## Conditional compilation symbols(条件编译符号)
-
+### Global (全局)
 - UNSAFE: 是否使用 unsafe 关键字。
 - UNSAFE_USE_TRAITS: 是否使用 unsafe 版的 VectorTraits 。
 - SOFTWARE_OPTIMIZATION: Software algorithm optimization（软件算法优化）, 会利用其它向量函数组合实现. 如 ShiftLeft_Multiply、ShiftRightArithmetic_Var64 .
@@ -27,6 +27,11 @@
 - BENCHMARKS_TARGET_FAST: [废弃] 评测目标方法的快速版.
 
 注: 若配置的条件编译符号带了“0”后缀的, 表示关闭. 例如“BCL_BASE_OVERRIDE_STATIC0”, 表示关闭“BCL_BASE_OVERRIDE_STATIC”.
+
+### File (文件)
+- USE_VECTOR_CREATE: （小于64位时）是否直接使用向量的构造方法. 该办法在高版本.NET下性能很好. Vector need ?; Vector128/256 need .NET5.
+- USE_VECTOR_CREATE_INT64: 对于64位整数, 是否直接使用向量的构造方法. 该办法在高版本.NET下性能很好. Vector need ?; Vector128/256 need .NET7.
+- VECTOR_HAS_METHOD: 向量类型是否已提供了算术计算的方法. 没有此标志时, 会回退为标量算法. Vector alway true; Vector128/256 need .NET7.
 
 ## Traits method naming convention (特征方法命名约定)
 

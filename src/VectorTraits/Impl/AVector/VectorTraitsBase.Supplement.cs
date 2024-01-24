@@ -1,4 +1,5 @@
 ﻿#define Sqrt_Float_Used
+#define VECTOR_HAS_METHOD
 
 using System;
 using System.Collections.Generic;
@@ -84,6 +85,32 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static ulong Dot(Vector<ulong> left, Vector<ulong> right) {
                 return Vector.Dot(left, right);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.Equals_AcceleratedTypes"/>
+            private static TypeCodeFlags Equals_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    return rt;
+                }
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.GreaterThan_AcceleratedTypes"/>
+            private static TypeCodeFlags GreaterThan_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    return rt;
+                }
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.Less_AcceleratedTypes"/>
+            private static TypeCodeFlags Less_AcceleratedTypes {
+                get {
+                    return GreaterThan_AcceleratedTypes;
+                }
             }
 
 

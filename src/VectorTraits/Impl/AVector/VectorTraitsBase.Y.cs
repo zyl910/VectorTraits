@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define VECTOR_HAS_METHOD
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
@@ -49,7 +51,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-#if NET7_0_OR_GREATER
+#if NET7_0_OR_GREATER // ShiftLeft need .NET7
             /// <inheritdoc cref="IVectorTraits.YBitToByte"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

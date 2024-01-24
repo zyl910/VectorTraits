@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define VECTOR_HAS_METHOD
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 #if !NET7_0_OR_GREATER
