@@ -23,18 +23,24 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsAllTrue_AcceleratedTypes"/>
             public static TypeCodeFlags YIsAllTrue_AcceleratedTypes {
                 get {
-                    return TypeCodeFlagsUtil.AllTypes;
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    return rt;
                 }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsAllTrue{T}(Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool YIsAllTrue<T>(Vector128<T> value) where T : struct {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsAllTrue_Bcl(value);
 #else
                 return YIsAllTrue_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsAllTrue{T}(Vector128{T})"/>
@@ -45,31 +51,37 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return -1 == total;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsAllTrue{T}(Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool YIsAllTrue_Bcl<T>(Vector128<T> value) where T : struct {
                 Vector128<int> allBitsSet = Vector128<int>.AllBitsSet;
                 return Vector128.EqualsAll(value.AsInt32(), allBitsSet);
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsAnyTrue_AcceleratedTypes"/>
             public static TypeCodeFlags YIsAnyTrue_AcceleratedTypes {
                 get {
-                    return TypeCodeFlagsUtil.AllTypes;
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.AllTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    return rt;
                 }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsAnyTrue{T}(Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool YIsAnyTrue<T>(Vector128<T> value) where T : struct {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsAnyTrue_Bcl(value);
 #else
                 return YIsAnyTrue_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsAnyTrue{T}(Vector128{T})"/>
@@ -80,24 +92,26 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return 0 != total;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsAnyTrue{T}(Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool YIsAnyTrue_Bcl<T>(Vector128<T> value) where T : struct {
                 Vector128<byte> allBitsSet = Vector128<byte>.AllBitsSet; // Must use byte.
                 return Vector128.EqualsAny(value.AsByte(), allBitsSet);
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger_AcceleratedTypes"/>
             public static TypeCodeFlags YIsEvenInteger_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
-                    rt |= TypeCodeFlagsUtil.IntTypes & Equals_AcceleratedTypes;
-                    rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & YIsInteger_AcceleratedTypes & Floor_AcceleratedTypes;
-#endif // VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.IntTypes & Equals_AcceleratedTypes;
+                        rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & YIsInteger_AcceleratedTypes & Floor_AcceleratedTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -105,105 +119,105 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsEvenInteger(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsEvenInteger_Bit(value);
 #else
                 return YIsEvenInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsEvenInteger(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsEvenInteger_Bit(value);
 #else
                 return YIsEvenInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YIsEvenInteger(Vector128<sbyte> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsEvenInteger_Bit(value);
 #else
                 return YIsEvenInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YIsEvenInteger(Vector128<byte> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsEvenInteger_Bit(value);
 #else
                 return YIsEvenInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YIsEvenInteger(Vector128<short> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsEvenInteger_Bit(value);
 #else
                 return YIsEvenInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YIsEvenInteger(Vector128<ushort> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsEvenInteger_Bit(value);
 #else
                 return YIsEvenInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsEvenInteger(Vector128<int> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsEvenInteger_Bit(value);
 #else
                 return YIsEvenInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YIsEvenInteger(Vector128<uint> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsEvenInteger_Bit(value);
 #else
                 return YIsEvenInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsEvenInteger(Vector128<long> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsEvenInteger_Bit(value);
 #else
                 return YIsEvenInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YIsEvenInteger(Vector128<ulong> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsEvenInteger_Bit(value);
 #else
                 return YIsEvenInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{float})"/>
@@ -325,7 +339,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return YIsEvenInteger_Basic(value.AsInt64()).AsUInt64();
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsEvenInteger_Bit(Vector128<float> value) {
@@ -407,17 +421,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> YIsEvenInteger_Bit(Vector128<ulong> value) {
                 return YIsEvenInteger_Bit(value.AsInt64()).AsUInt64();
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsFinite_AcceleratedTypes"/>
             public static TypeCodeFlags YIsFinite_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
-                    rt |= TypeCodeFlags.Single;
-                    rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
-#endif // VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single;
+                        rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -425,21 +441,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsFinite(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsFinite(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsFinite_Bit(value);
 #else
                 return YIsFinite_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsFinite(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsFinite(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsFinite_Bit(value);
 #else
                 return YIsFinite_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsFinite(Vector128{float})"/>
@@ -466,7 +482,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsFinite(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsFinite_Bit(Vector128<float> value) {
@@ -484,17 +500,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> rt = Vector128.OnesComplement(Vector128.Equals(exponent, exponentMask));
                 return rt;
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsInfinity_AcceleratedTypes"/>
             public static TypeCodeFlags YIsInfinity_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
-                    rt |= TypeCodeFlags.Single;
-                    rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
-#endif // VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single;
+                        rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -502,21 +520,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsInfinity(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsInfinity(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsInfinity_Bit(value);
 #else
                 return YIsInfinity_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsInfinity(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsInfinity(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsInfinity_Bit(value);
 #else
                 return YIsInfinity_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsInfinity(Vector128{float})"/>
@@ -543,7 +561,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsInfinity(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsInfinity_Bit(Vector128<float> value) {
@@ -563,17 +581,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> rt = Vector128.Equals(nonSign, exponentMask);
                 return rt;
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsInfinityOrNaN_AcceleratedTypes"/>
             public static TypeCodeFlags YIsInfinityOrNaN_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
-                    rt |= TypeCodeFlags.Single;
-                    rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
-#endif // VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single;
+                        rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -581,21 +601,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsInfinityOrNaN(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsInfinityOrNaN(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsInfinityOrNaN_Bit(value);
 #else
                 return YIsInfinityOrNaN_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsInfinityOrNaN(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsInfinityOrNaN(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsInfinityOrNaN_Bit(value);
 #else
                 return YIsInfinityOrNaN_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsInfinityOrNaN(Vector128{float})"/>
@@ -622,7 +642,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsInfinityOrNaN(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsInfinityOrNaN_Bit(Vector128<float> value) {
@@ -640,17 +660,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> rt = Vector128.Equals(exponent, exponentMask);
                 return rt;
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsInteger_AcceleratedTypes"/>
             public static TypeCodeFlags YIsInteger_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
-                    rt |= TypeCodeFlags.Single;
-                    rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double) & Floor_AcceleratedTypes;
-#endif // VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single;
+                        rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double) & Floor_AcceleratedTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -658,21 +680,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsInteger(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsInteger(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsInteger_Bit(value);
 #else
                 return YIsInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsInteger(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsInteger(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsInteger_Bit(value);
 #else
                 return YIsInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsInteger(Vector128{float})"/>
@@ -699,7 +721,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsInteger(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsInteger_Bit(Vector128<float> value) {
@@ -719,16 +741,18 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> rt = Vector128.BitwiseAnd(maskFinite, maskEquals);
                 return rt;
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNaN_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNaN_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
-                    rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & Equals_AcceleratedTypes;
-#endif // VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & Equals_AcceleratedTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -736,21 +760,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNaN(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNaN(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNaN_Bit(value);
 #else
                 return YIsNaN_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNaN(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNaN(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNaN_Bit(value);
 #else
                 return YIsNaN_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNaN(Vector128{float})"/>
@@ -777,7 +801,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsNaN(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNaN_Bit(Vector128<float> value) {
@@ -795,17 +819,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #pragma warning restore CS1718 // Comparison made to same variable; did you mean to compare something else?
                 return rt;
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNegative_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
-                    rt |= (TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64) & LessThan_AcceleratedTypes;
-                    rt |= TypeCodeFlagsUtil.MapFlags(LessThan_AcceleratedTypes, TypeCodeFlags.Int32, TypeCodeFlags.Single, TypeCodeFlags.Int64, TypeCodeFlags.Double);
-#endif // VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= (TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64) & LessThan_AcceleratedTypes;
+                        rt |= TypeCodeFlagsUtil.MapFlags(LessThan_AcceleratedTypes, TypeCodeFlags.Int32, TypeCodeFlags.Single, TypeCodeFlags.Int64, TypeCodeFlags.Double);
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -813,62 +839,62 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNegative(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNegative_Bit(value);
 #else
                 return YIsNegative_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNegative(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNegative_Bit(value);
 #else
                 return YIsNegative_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YIsNegative(Vector128<sbyte> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNegative_Bit(value);
 #else
                 return YIsNegative_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YIsNegative(Vector128<short> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNegative_Bit(value);
 #else
                 return YIsNegative_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNegative(Vector128<int> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNegative_Bit(value);
 #else
                 return YIsNegative_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNegative(Vector128<long> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNegative_Bit(value);
 #else
                 return YIsNegative_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{float})"/>
@@ -963,7 +989,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNegative_Bit(Vector128<float> value) {
@@ -1006,16 +1032,18 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> rt = Vector128.LessThan(value, Vector128<long>.Zero);
                 return rt;
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNegativeInfinity_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNegativeInfinity_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
-                    rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & Equals_AcceleratedTypes;
-#endif // VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & Equals_AcceleratedTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -1023,21 +1051,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegativeInfinity(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNegativeInfinity(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNegativeInfinity_Bit(value);
 #else
                 return YIsNegativeInfinity_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNegativeInfinity(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNegativeInfinity(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNegativeInfinity_Bit(value);
 #else
                 return YIsNegativeInfinity_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNegativeInfinity(Vector128{float})"/>
@@ -1064,7 +1092,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsNegativeInfinity(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNegativeInfinity_Bit(Vector128<float> value) {
@@ -1080,17 +1108,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> rt = Vector128.Equals(value, sample).AsInt64();
                 return rt;
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNegativeZero_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNegativeZero_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
-                    rt |= TypeCodeFlags.Single;
-                    rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
-#endif // VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single;
+                        rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -1098,21 +1128,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegativeZero(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNegativeZero(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNegativeZero_Bit(value);
 #else
                 return YIsNegativeZero_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNegativeZero(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNegativeZero(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNegativeZero_Bit(value);
 #else
                 return YIsNegativeZero_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNegativeZero(Vector128{float})"/>
@@ -1139,7 +1169,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsNegativeZero(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNegativeZero_Bit(Vector128<float> value) {
@@ -1155,16 +1185,18 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> rt = Vector128.Equals(value.AsInt64(), signMask);
                 return rt;
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNormal_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNormal_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
-                    rt |= TypeCodeFlagsUtil.MapFlags(GreaterThan_AcceleratedTypes, TypeCodeFlags.Int32, TypeCodeFlags.Single, TypeCodeFlags.Int64, TypeCodeFlags.Double);
-#endif // VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.MapFlags(GreaterThan_AcceleratedTypes, TypeCodeFlags.Int32, TypeCodeFlags.Single, TypeCodeFlags.Int64, TypeCodeFlags.Double);
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -1172,21 +1204,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNormal(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNormal(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNormal_Bit(value);
 #else
                 return YIsNormal_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNormal(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNormal(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNormal_Bit(value);
 #else
                 return YIsNormal_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNormal(Vector128{float})"/>
@@ -1213,7 +1245,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsNormal(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNormal_Bit(Vector128<float> value) {
@@ -1231,16 +1263,18 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> rt = Vector128.BitwiseAnd(Vector128.GreaterThan(exponent, Vector128<long>.Zero), Vector128.GreaterThan(exponentMask, exponent));
                 return rt;
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNotNaN_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNotNaN_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
-                    rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & Equals_AcceleratedTypes;
-#endif // VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & Equals_AcceleratedTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -1248,21 +1282,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNotNaN(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNotNaN(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNotNaN_Bit(value);
 #else
                 return YIsNotNaN_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNotNaN(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNotNaN(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsNotNaN_Bit(value);
 #else
                 return YIsNotNaN_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNotNaN(Vector128{float})"/>
@@ -1289,7 +1323,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsNotNaN(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNotNaN_Bit(Vector128<float> value) {
@@ -1307,17 +1341,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #pragma warning restore CS1718 // Comparison made to same variable; did you mean to compare something else?
                 return rt;
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger_AcceleratedTypes"/>
             public static TypeCodeFlags YIsOddInteger_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
-                    rt |= TypeCodeFlagsUtil.IntTypes & Equals_AcceleratedTypes;
-                    rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & YIsInteger_AcceleratedTypes & Floor_AcceleratedTypes;
-#endif // VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.IntTypes & Equals_AcceleratedTypes;
+                        rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & YIsInteger_AcceleratedTypes & Floor_AcceleratedTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -1325,105 +1361,105 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsOddInteger(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsOddInteger_Bit(value);
 #else
                 return YIsOddInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsOddInteger(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsOddInteger_Bit(value);
 #else
                 return YIsOddInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YIsOddInteger(Vector128<sbyte> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsOddInteger_Bit(value);
 #else
                 return YIsOddInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YIsOddInteger(Vector128<byte> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsOddInteger_Bit(value);
 #else
                 return YIsOddInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YIsOddInteger(Vector128<short> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsOddInteger_Bit(value);
 #else
                 return YIsOddInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YIsOddInteger(Vector128<ushort> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsOddInteger_Bit(value);
 #else
                 return YIsOddInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsOddInteger(Vector128<int> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsOddInteger_Bit(value);
 #else
                 return YIsOddInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YIsOddInteger(Vector128<uint> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsOddInteger_Bit(value);
 #else
                 return YIsOddInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsOddInteger(Vector128<long> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsOddInteger_Bit(value);
 #else
                 return YIsOddInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YIsOddInteger(Vector128<ulong> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsOddInteger_Bit(value);
 #else
                 return YIsOddInteger_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{float})"/>
@@ -1545,7 +1581,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return YIsOddInteger_Basic(value.AsInt64()).AsUInt64();
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsOddInteger_Bit(Vector128<float> value) {
@@ -1627,7 +1663,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> YIsOddInteger_Bit(Vector128<ulong> value) {
                 return YIsOddInteger_Bit(value.AsInt64()).AsUInt64();
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive_AcceleratedTypes"/>
@@ -1640,62 +1676,62 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsPositive(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsPositive_Bit(value);
 #else
                 return YIsPositive_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsPositive(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsPositive_Bit(value);
 #else
                 return YIsPositive_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YIsPositive(Vector128<sbyte> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsPositive_Bit(value);
 #else
                 return YIsPositive_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YIsPositive(Vector128<short> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsPositive_Bit(value);
 #else
                 return YIsPositive_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsPositive(Vector128<int> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsPositive_Bit(value);
 #else
                 return YIsPositive_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsPositive(Vector128<long> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsPositive_Bit(value);
 #else
                 return YIsPositive_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{float})"/>
@@ -1790,7 +1826,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsPositive_Bit(Vector128<float> value) {
@@ -1831,16 +1867,18 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> rt = Vector128.OnesComplement(YIsNegative(value));
                 return rt;
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsPositiveInfinity_AcceleratedTypes"/>
             public static TypeCodeFlags YIsPositiveInfinity_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
-                    rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & Equals_AcceleratedTypes;
-#endif // VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= (TypeCodeFlags.Single | TypeCodeFlags.Double) & Equals_AcceleratedTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -1848,21 +1886,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsPositiveInfinity(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsPositiveInfinity(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsPositiveInfinity_Bit(value);
 #else
                 return YIsPositiveInfinity_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsPositiveInfinity(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsPositiveInfinity(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsPositiveInfinity_Bit(value);
 #else
                 return YIsPositiveInfinity_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsPositiveInfinity(Vector128{float})"/>
@@ -1889,7 +1927,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsPositiveInfinity(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsPositiveInfinity_Bit(Vector128<float> value) {
@@ -1905,17 +1943,17 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> rt = Vector128.Equals(value, sample).AsInt64();
                 return rt;
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsSubnormal_AcceleratedTypes"/>
             public static TypeCodeFlags YIsSubnormal_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     rt |= TypeCodeFlags.Single;
                     rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes & GreaterThan_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -1923,21 +1961,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsSubnormal(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsSubnormal(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsSubnormal_Bit(value);
 #else
                 return YIsSubnormal_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsSubnormal(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsSubnormal(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsSubnormal_Bit(value);
 #else
                 return YIsSubnormal_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsSubnormal(Vector128{float})"/>
@@ -1964,7 +2002,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsSubnormal(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsSubnormal_Bit(Vector128<float> value) {
@@ -1988,7 +2026,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> rt = Vector128.BitwiseAnd(Vector128.Equals(exponent, zero), Vector128.GreaterThan(mantissa, zero));
                 return rt;
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZero_AcceleratedTypes"/>
@@ -2002,105 +2040,105 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsZero(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsZero_Bit(value);
 #else
                 return YIsZero_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsZero(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsZero_Bit(value);
 #else
                 return YIsZero_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YIsZero(Vector128<sbyte> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsZero_Bit(value);
 #else
                 return YIsZero_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YIsZero(Vector128<byte> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsZero_Bit(value);
 #else
                 return YIsZero_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YIsZero(Vector128<short> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsZero_Bit(value);
 #else
                 return YIsZero_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YIsZero(Vector128<ushort> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsZero_Bit(value);
 #else
                 return YIsZero_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsZero(Vector128<int> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsZero_Bit(value);
 #else
                 return YIsZero_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YIsZero(Vector128<uint> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsZero_Bit(value);
 #else
                 return YIsZero_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsZero(Vector128<long> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsZero_Bit(value);
 #else
                 return YIsZero_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YIsZero(Vector128<ulong> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsZero_Bit(value);
 #else
                 return YIsZero_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{float})"/>
@@ -2222,7 +2260,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return YIsZero_Basic(value.AsInt64()).AsUInt64();
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsZero_Bit(Vector128<float> value) {
@@ -2286,17 +2324,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> YIsZero_Bit(Vector128<ulong> value) {
                 return Vector128.Equals(Vector128<ulong>.Zero, value);
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZeroOrSubnormal_AcceleratedTypes"/>
             public static TypeCodeFlags YIsZeroOrSubnormal_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if VECTOR_HAS_METHOD
-                    rt |= TypeCodeFlags.Single;
-                    rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
-#endif // VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single;
+                        rt |= TypeCodeFlagsUtil.MapFlags(Equals_AcceleratedTypes, TypeCodeFlags.Int64, TypeCodeFlags.Double);
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -2304,21 +2344,21 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsZeroOrSubnormal(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsZeroOrSubnormal(Vector128<float> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsZeroOrSubnormal_Bit(value);
 #else
                 return YIsZeroOrSubnormal_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZeroOrSubnormal(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsZeroOrSubnormal(Vector128<double> value) {
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YIsZeroOrSubnormal_Bit(value);
 #else
                 return YIsZeroOrSubnormal_Basic(value);
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZeroOrSubnormal(Vector128{float})"/>
@@ -2345,7 +2385,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#if VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IWVectorTraits128.YIsZeroOrSubnormal(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsZeroOrSubnormal_Bit(Vector128<float> value) {
@@ -2363,7 +2403,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> rt = Vector128.Equals(exponent, Vector128<long>.Zero);
                 return rt;
             }
-#endif // VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 #endif // NETCOREAPP3_0_OR_GREATER
         }
