@@ -544,6 +544,71 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositive_AcceleratedTypes"/>
+        public override TypeCodeFlags YIsPositive_AcceleratedTypes {
+            get {
+                return Statics.YIsPositive_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<int> YIsPositive(Vector128<float> value) {
+            return Statics.YIsPositive(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> YIsPositive(Vector128<double> value) {
+            return Statics.YIsPositive(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<sbyte> YIsPositive(Vector128<sbyte> value) {
+            return Statics.YIsPositive(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<short> YIsPositive(Vector128<short> value) {
+            return Statics.YIsPositive(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<int> YIsPositive(Vector128<int> value) {
+            return Statics.YIsPositive(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> YIsPositive(Vector128<long> value) {
+            return Statics.YIsPositive(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositiveInfinity_AcceleratedTypes"/>
+        public override TypeCodeFlags YIsPositiveInfinity_AcceleratedTypes {
+            get {
+                return Statics.YIsPositiveInfinity_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositiveInfinity(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<int> YIsPositiveInfinity(Vector128<float> value) {
+            return Statics.YIsPositiveInfinity(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsPositiveInfinity(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> YIsPositiveInfinity(Vector128<double> value) {
+            return Statics.YIsPositiveInfinity(value);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.YIsSubnormal_AcceleratedTypes"/>
         public override TypeCodeFlags YIsSubnormal_AcceleratedTypes {
             get {
