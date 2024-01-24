@@ -13,6 +13,7 @@ using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics.Arm;
 #endif
 using System.Text;
+using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Impl {
     partial interface IVectorTraits {
@@ -281,6 +282,490 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector.EqualsAny{T}(Vector{T}, Vector{T})" />
         bool YIsAnyTrue<T>(Vector<T> value) where T : struct;
 
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsEvenInteger</c> (运行 <c>YIsEvenInteger</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsEvenInteger(Vector{float})"/>
+        TypeCodeFlags YIsEvenInteger_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element represents an even integral number (确定元素是否为偶数整数).
+        /// Mnemonic: <c>rt[i] := to_mask(isEvenInteger(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is even integral number (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为偶数整数).</returns>
+        /// <seealso cref="YIsEvenInteger_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(float)"/>
+        Vector<int> YIsEvenInteger(Vector<float> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(double)"/>
+        Vector<long> YIsEvenInteger(Vector<double> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(sbyte)"/>
+        Vector<sbyte> YIsEvenInteger(Vector<sbyte> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(byte)"/>
+        Vector<byte> YIsEvenInteger(Vector<byte> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(short)"/>
+        Vector<short> YIsEvenInteger(Vector<short> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(ushort)"/>
+        Vector<ushort> YIsEvenInteger(Vector<ushort> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(int)"/>
+        Vector<int> YIsEvenInteger(Vector<int> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(uint)"/>
+        Vector<uint> YIsEvenInteger(Vector<uint> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(long)"/>
+        Vector<long> YIsEvenInteger(Vector<long> value);
+
+        /// <inheritdoc cref="YIsEvenInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsEvenInteger(ulong)"/>
+        Vector<ulong> YIsEvenInteger(Vector<ulong> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsFinite</c> (运行 <c>YIsFinite</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsFinite(Vector{float})"/>
+        TypeCodeFlags YIsFinite_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is finite. It contains zero, subnormal, and normal. It does not contain infinity, NaN (确定元素是否为有限值. 它包含 零、次正规数、正规数. 它不含无穷大、非数).
+        /// Mnemonic: <c>rt[i] := to_mask(isFinite(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is finite (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为有限的).</returns>
+        /// <seealso cref="YIsFinite_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsFinite(float)"/>
+        Vector<int> YIsFinite(Vector<float> value);
+
+        /// <inheritdoc cref="YIsFinite(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsFinite(double)"/>
+        Vector<long> YIsFinite(Vector<double> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsInfinity</c> (运行 <c>YIsInfinity</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsInfinity(Vector{float})"/>
+        TypeCodeFlags YIsInfinity_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is infinite (确定元素是否为无穷大).
+        /// Mnemonic: <c>rt[i] := to_mask(isInfinity(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is infinite (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为无穷大).</returns>
+        /// <seealso cref="YIsInfinity_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsInfinity(float)"/>
+        Vector<int> YIsInfinity(Vector<float> value);
+
+        /// <inheritdoc cref="YIsInfinity(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsInfinity(double)"/>
+        Vector<long> YIsInfinity(Vector<double> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsInfinityOrNaN</c> (运行 <c>YIsInfinityOrNaN</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsInfinityOrNaN(Vector{float})"/>
+        TypeCodeFlags YIsInfinityOrNaN_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is infinite or NaN (确定元素是否为无穷大或非数).
+        /// Mnemonic: <c>rt[i] := to_mask(isInfinityOrNaN(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is infinite or NaN (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为无穷大或非数).</returns>
+        /// <seealso cref="YIsInfinityOrNaN_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsInfinityOrNaN(float)"/>
+        Vector<int> YIsInfinityOrNaN(Vector<float> value);
+
+        /// <inheritdoc cref="YIsInfinityOrNaN(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsInfinityOrNaN(double)"/>
+        Vector<long> YIsInfinityOrNaN(Vector<double> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsInteger</c> (运行 <c>YIsInteger</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsInteger(Vector{float})"/>
+        TypeCodeFlags YIsInteger_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element represents an integral number (确定元素是否为整数).
+        /// Mnemonic: <c>rt[i] := to_mask(isInteger(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is integral number (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为整数).</returns>
+        /// <seealso cref="YIsInteger_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsInteger(float)"/>
+        Vector<int> YIsInteger(Vector<float> value);
+
+        /// <inheritdoc cref="YIsInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsInteger(double)"/>
+        Vector<long> YIsInteger(Vector<double> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsNaN</c> (运行 <c>YIsNaN</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsNaN(Vector{float})"/>
+        TypeCodeFlags YIsNaN_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is NaN (确定元素是否为非数).
+        /// Mnemonic: <c>rt[i] := to_mask(isNaN(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is NaN (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为非数).</returns>
+        /// <seealso cref="YIsNaN_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsNaN(float)"/>
+        Vector<int> YIsNaN(Vector<float> value);
+
+        /// <inheritdoc cref="YIsNaN(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsNaN(double)"/>
+        Vector<long> YIsNaN(Vector<double> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsNegative</c> (运行 <c>YIsNegative</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsNegative(Vector{float})"/>
+        TypeCodeFlags YIsNegative_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element represents a negative number or negative zero (确定元素是否为负数或负零).
+        /// Mnemonic: <c>rt[i] := to_mask(isNegative(value[i])) = to_mask((value[i]&lt;0) || isNegativeZero(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is negative number or negative zero (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为负数或负零).</returns>
+        /// <seealso cref="YIsNegative_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsNegative(float)"/>
+        Vector<int> YIsNegative(Vector<float> value);
+
+        /// <inheritdoc cref="YIsNegative(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsNegative(double)"/>
+        Vector<long> YIsNegative(Vector<double> value);
+
+        /// <inheritdoc cref="YIsNegative(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsNegative(sbyte)"/>
+        Vector<sbyte> YIsNegative(Vector<sbyte> value);
+
+        /// <inheritdoc cref="YIsNegative(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsNegative(short)"/>
+        Vector<short> YIsNegative(Vector<short> value);
+
+        /// <inheritdoc cref="YIsNegative(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsNegative(int)"/>
+        Vector<int> YIsNegative(Vector<int> value);
+
+        /// <inheritdoc cref="YIsNegative(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsNegative(long)"/>
+        Vector<long> YIsNegative(Vector<long> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsNegativeInfinity</c> (运行 <c>YIsNegativeInfinity</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsNegativeInfinity(Vector{float})"/>
+        TypeCodeFlags YIsNegativeInfinity_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is negative infinity (确定元素是否为负无穷大).
+        /// Mnemonic: <c>rt[i] := to_mask(isNegativeInfinity(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is negative infinity (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为负无穷大).</returns>
+        /// <seealso cref="YIsNegativeInfinity_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsNegativeInfinity(float)"/>
+        Vector<int> YIsNegativeInfinity(Vector<float> value);
+
+        /// <inheritdoc cref="YIsNegativeInfinity(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsNegativeInfinity(double)"/>
+        Vector<long> YIsNegativeInfinity(Vector<double> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsNegativeZero</c> (运行 <c>YIsNegativeZero</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsNegativeZero(Vector{float})"/>
+        TypeCodeFlags YIsNegativeZero_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element represents a negative zero (确定元素是否为负零).
+        /// Mnemonic: <c>rt[i] := to_mask(isNegativeZero(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is finite (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为有限的).</returns>
+        /// <seealso cref="YIsNegativeZero_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsNegativeZero(float)"/>
+        Vector<int> YIsNegativeZero(Vector<float> value);
+
+        /// <inheritdoc cref="YIsNegativeZero(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsNegativeZero(double)"/>
+        Vector<long> YIsNegativeZero(Vector<double> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsNormal</c> (运行 <c>YIsNormal</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsNormal(Vector{float})"/>
+        TypeCodeFlags YIsNormal_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is normal (确定元素是否为正规数).
+        /// Mnemonic: <c>rt[i] := to_mask(isFinite(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is normal (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为正规数).</returns>
+        /// <seealso cref="YIsNormal_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsNormal(float)"/>
+        Vector<int> YIsNormal(Vector<float> value);
+
+        /// <inheritdoc cref="YIsNormal(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsNormal(double)"/>
+        Vector<long> YIsNormal(Vector<double> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsNotNaN</c> (运行 <c>YIsNotNaN</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsNotNaN(Vector{float})"/>
+        TypeCodeFlags YIsNotNaN_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is not NaN (确定元素是否不为非数).
+        /// Mnemonic: <c>rt[i] := to_mask(isNotNaN(value[i])) = to_mask(!isNaN(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is not NaN (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否不为非数).</returns>
+        /// <seealso cref="YIsNotNaN_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsNotNaN(float)"/>
+        Vector<int> YIsNotNaN(Vector<float> value);
+
+        /// <inheritdoc cref="YIsNotNaN(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsNotNaN(double)"/>
+        Vector<long> YIsNotNaN(Vector<double> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsOddInteger</c> (运行 <c>YIsOddInteger</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsOddInteger(Vector{float})"/>
+        TypeCodeFlags YIsOddInteger_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element represents an odd integral number (确定元素是否为奇数整数).
+        /// Mnemonic: <c>rt[i] := to_mask(isOddInteger(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is odd integral number (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为奇数整数).</returns>
+        /// <seealso cref="YIsOddInteger_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(float)"/>
+        Vector<int> YIsOddInteger(Vector<float> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(double)"/>
+        Vector<long> YIsOddInteger(Vector<double> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(sbyte)"/>
+        Vector<sbyte> YIsOddInteger(Vector<sbyte> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(byte)"/>
+        Vector<byte> YIsOddInteger(Vector<byte> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(short)"/>
+        Vector<short> YIsOddInteger(Vector<short> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(ushort)"/>
+        Vector<ushort> YIsOddInteger(Vector<ushort> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(int)"/>
+        Vector<int> YIsOddInteger(Vector<int> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(uint)"/>
+        Vector<uint> YIsOddInteger(Vector<uint> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(long)"/>
+        Vector<long> YIsOddInteger(Vector<long> value);
+
+        /// <inheritdoc cref="YIsOddInteger(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsOddInteger(ulong)"/>
+        Vector<ulong> YIsOddInteger(Vector<ulong> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsPositive</c> (运行 <c>YIsPositive</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsPositive(Vector{float})"/>
+        TypeCodeFlags YIsPositive_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element represents zero or a positive number (确定元素是否为零或正数).
+        /// Mnemonic: <c>rt[i] := to_mask(isNegative(value[i])) = to_mask((value[i]&lt;0) || isNegativeZero(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is zero or a positive number (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为零或正数).</returns>
+        /// <seealso cref="YIsPositive_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsPositive(float)"/>
+        Vector<int> YIsPositive(Vector<float> value);
+
+        /// <inheritdoc cref="YIsPositive(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsPositive(double)"/>
+        Vector<long> YIsPositive(Vector<double> value);
+
+        /// <inheritdoc cref="YIsPositive(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsPositive(sbyte)"/>
+        Vector<sbyte> YIsPositive(Vector<sbyte> value);
+
+        /// <inheritdoc cref="YIsPositive(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsPositive(short)"/>
+        Vector<short> YIsPositive(Vector<short> value);
+
+        /// <inheritdoc cref="YIsPositive(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsPositive(int)"/>
+        Vector<int> YIsPositive(Vector<int> value);
+
+        /// <inheritdoc cref="YIsPositive(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsPositive(long)"/>
+        Vector<long> YIsPositive(Vector<long> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsPositiveInfinity</c> (运行 <c>YIsPositiveInfinity</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsPositiveInfinity(Vector{float})"/>
+        TypeCodeFlags YIsPositiveInfinity_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is positive infinity (确定元素是否为正无穷大).
+        /// Mnemonic: <c>rt[i] := to_mask(isNegativeInfinity(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is positive infinity (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为正无穷大).</returns>
+        /// <seealso cref="YIsPositiveInfinity_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsPositiveInfinity(float)"/>
+        Vector<int> YIsPositiveInfinity(Vector<float> value);
+
+        /// <inheritdoc cref="YIsPositiveInfinity(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsPositiveInfinity(double)"/>
+        Vector<long> YIsPositiveInfinity(Vector<double> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsSubnormal</c> (运行 <c>YIsSubnormal</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsSubnormal(Vector{float})"/>
+        TypeCodeFlags YIsSubnormal_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is subnormal (确定元素是否为次正规数).
+        /// Mnemonic: <c>rt[i] := to_mask(IsSubnormal(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is subnormal (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为次正规数).</returns>
+        /// <seealso cref="YIsSubnormal_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsSubnormal(float)"/>
+        Vector<int> YIsSubnormal(Vector<float> value);
+
+        /// <inheritdoc cref="YIsSubnormal(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsSubnormal(double)"/>
+        Vector<long> YIsSubnormal(Vector<double> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsZero</c> (运行 <c>YIsZero</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsZero(Vector{float})"/>
+        TypeCodeFlags YIsZero_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is zero (确定元素是否为零).
+        /// Mnemonic: <c>rt[i] := to_mask(0==value[i])</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is zero (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为零).</returns>
+        /// <seealso cref="YIsZero_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsZero(float)"/>
+        Vector<int> YIsZero(Vector<float> value);
+
+        /// <inheritdoc cref="YIsZero(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(double)"/>
+        Vector<long> YIsZero(Vector<double> value);
+
+        /// <inheritdoc cref="YIsZero(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(sbyte)"/>
+        Vector<sbyte> YIsZero(Vector<sbyte> value);
+
+        /// <inheritdoc cref="YIsZero(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(byte)"/>
+        Vector<byte> YIsZero(Vector<byte> value);
+
+        /// <inheritdoc cref="YIsZero(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(short)"/>
+        Vector<short> YIsZero(Vector<short> value);
+
+        /// <inheritdoc cref="YIsZero(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(ushort)"/>
+        Vector<ushort> YIsZero(Vector<ushort> value);
+
+        /// <inheritdoc cref="YIsZero(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(int)"/>
+        Vector<int> YIsZero(Vector<int> value);
+
+        /// <inheritdoc cref="YIsZero(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(uint)"/>
+        Vector<uint> YIsZero(Vector<uint> value);
+
+        /// <inheritdoc cref="YIsZero(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(long)"/>
+        Vector<long> YIsZero(Vector<long> value);
+
+        /// <inheritdoc cref="YIsZero(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsZero(ulong)"/>
+        Vector<ulong> YIsZero(Vector<ulong> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YIsZeroOrSubnormal</c> (运行 <c>YIsZeroOrSubnormal</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsZeroOrSubnormal(Vector{float})"/>
+        TypeCodeFlags YIsZeroOrSubnormal_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determines if a element is zero or subnormal (确定元素是否为零或次正规数).
+        /// Mnemonic: <c>rt[i] := to_mask(isZeroOrSubnormal(value[i]))</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="value" /> were is zero or subnormal (一个向量，其元素是全位为1或0，取决于<paramref name="value" />的对应元素中是否为零或次正规数).</returns>
+        /// <seealso cref="YIsZeroOrSubnormal_AcceleratedTypes"/>
+        /// <seealso cref="MathINumberBase.IsZeroOrSubnormal(float)"/>
+        Vector<int> YIsZeroOrSubnormal(Vector<float> value);
+
+        /// <inheritdoc cref="YIsZeroOrSubnormal(Vector{float})"/>
+        /// <seealso cref="MathINumberBase.IsZeroOrSubnormal(double)"/>
+        Vector<long> YIsZeroOrSubnormal(Vector<double> value);
 
         /// <summary>
         /// Types with hardware acceleration when running <c>YNarrowSaturate</c> (运行 <c>YNarrowSaturate</c> 时具有硬件加速的类型).
