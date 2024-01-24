@@ -106,8 +106,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
-            /// <inheritdoc cref="IWVectorTraits256.Less_AcceleratedTypes"/>
-            private static TypeCodeFlags Less_AcceleratedTypes {
+            /// <inheritdoc cref="IWVectorTraits256.LessThan_AcceleratedTypes"/>
+            private static TypeCodeFlags LessThan_AcceleratedTypes {
                 get {
                     return GreaterThan_AcceleratedTypes;
                 }

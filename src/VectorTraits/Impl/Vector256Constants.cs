@@ -170,14 +170,8 @@ namespace Zyl.VectorTraits.Impl {
             get {
 #if NET8_0_OR_GREATER
                 return Vector256<byte>.One;
-#elif USE_VECTOR_CREATE_INT64
-                return Vector256.Create((byte)1);
 #elif USE_VECTOR_CREATE
-                if (VectorEnvironment.Is64BitProcess) {
-                    return Vector256.Create((byte)1);
-                } else {
-                    return Vector256s<byte>.V1;
-                }
+                return Vector256.Create((byte)1);
 #else
                 return Vector256s<byte>.V1;
 #endif // NET8_0_OR_GREATER
@@ -193,14 +187,8 @@ namespace Zyl.VectorTraits.Impl {
             get {
 #if NET8_0_OR_GREATER
                 return Vector256<short>.One;
-#elif USE_VECTOR_CREATE_INT64
-                return Vector256.Create((short)1);
 #elif USE_VECTOR_CREATE
-                if (VectorEnvironment.Is64BitProcess) {
-                    return Vector256.Create((short)1);
-                } else {
-                    return Vector256s<short>.V1;
-                }
+                return Vector256.Create((short)1);
 #else
                 return Vector256s<short>.V1;
 #endif // NET8_0_OR_GREATER
@@ -246,14 +234,8 @@ namespace Zyl.VectorTraits.Impl {
             get {
 #if NET8_0_OR_GREATER
                 return Vector256<int>.One;
-#elif USE_VECTOR_CREATE_INT64
-                return Vector256.Create((int)1);
 #elif USE_VECTOR_CREATE
-                if (VectorEnvironment.Is64BitProcess) {
-                    return Vector256.Create((int)1);
-                } else {
-                    return Vector256s<int>.V1;
-                }
+                return Vector256.Create((int)1);
 #else
                 return Vector256s<int>.V1;
 #endif // NET8_0_OR_GREATER

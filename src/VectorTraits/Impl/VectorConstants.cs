@@ -146,6 +146,40 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+        // -- Vectors_T: Vectors<Byte> --
+
+        /// <inheritdoc cref="Vectors{T}.V1"/>
+        /// <remarks>For Byte.</remarks>
+        public static Vector<byte> Byte_One {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET8_0_OR_GREATER
+                return Vector<byte>.One;
+#elif USE_VECTOR_CREATE
+                return new Vector<byte>((byte)1);
+#else
+                return Vectors<byte>.V1;
+#endif // NET8_0_OR_GREATER
+            }
+        }
+
+        // -- Vectors_T: Vectors<Int16> --
+
+        /// <inheritdoc cref="Vectors{T}.V1"/>
+        /// <remarks>For Int16.</remarks>
+        public static Vector<short> Int16_One {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET8_0_OR_GREATER
+                return Vector<short>.One;
+#elif USE_VECTOR_CREATE
+                return new Vector<short>((short)1);
+#else
+                return Vectors<short>.V1;
+#endif // NET8_0_OR_GREATER
+            }
+        }
+
         // -- Vectors_T: Vectors<UInt16> --
 
         /// <inheritdoc cref="Vectors{T}.VMaxByte"/>
@@ -162,7 +196,39 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+        // -- Vectors_T: Vectors<Int32> --
+
+        /// <inheritdoc cref="Vectors{T}.V1"/>
+        /// <remarks>For Int32.</remarks>
+        public static Vector<int> Int32_One {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET8_0_OR_GREATER
+                return Vector<int>.One;
+#elif USE_VECTOR_CREATE
+                return new Vector<int>(1);
+#else
+                return Vectors<int>.V1;
+#endif // NET8_0_OR_GREATER
+            }
+        }
+
         // -- Vectors_T: Vectors<Int64> --
+
+        /// <inheritdoc cref="Vectors{T}.V1"/>
+        /// <remarks>For Int64.</remarks>
+        public static Vector<long> Int64_One {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET8_0_OR_GREATER
+                return Vector<long>.One;
+#elif USE_VECTOR_CREATE_INT64
+                return new Vector<long>(1L);
+#else
+                return Vectors<long>.V1;
+#endif // NET8_0_OR_GREATER
+            }
+        }
 
         /// <inheritdoc cref="Vectors{T}.MinValue"/>
         /// <remarks>For Int64.</remarks>

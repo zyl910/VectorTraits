@@ -250,7 +250,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 
-
             /// <inheritdoc cref="IWVectorTraits256.YIsEvenInteger(Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -993,7 +992,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 
-
             /// <inheritdoc cref="IWVectorTraits256.YIsNegative(Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1618,7 +1616,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt;
             }
 
-
             /// <inheritdoc cref="IWVectorTraits256.YIsOddInteger(Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1925,7 +1922,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsPositive(pvalue.I3));
                 return rt;
             }
-
 
             /// <inheritdoc cref="IWVectorTraits256.YIsPositive(Vector256{sbyte})"/>
             [CLSCompliant(false)]
@@ -2380,7 +2376,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsZero(pvalue.I3));
                 return rt;
             }
-
 
             /// <inheritdoc cref="IWVectorTraits256.YIsZero(Vector256{sbyte})"/>
             [CLSCompliant(false)]

@@ -244,7 +244,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -921,7 +920,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1486,7 +1484,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1757,7 +1754,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsPositive(pvalue.I1));
                 return rt;
             }
-
 
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{sbyte})"/>
             [CLSCompliant(false)]
@@ -2164,7 +2160,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsZero(pvalue.I1));
                 return rt;
             }
-
 
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{sbyte})"/>
             [CLSCompliant(false)]
