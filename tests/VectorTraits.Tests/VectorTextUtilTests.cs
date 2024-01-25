@@ -31,5 +31,25 @@ namespace Zyl.VectorTraits.Tests {
                 }
             }
         }
+
+        [TestCase]
+        public void SplitKeyValueToIntTest() {
+            const int defaultValue = 123;
+            string key;
+            int dst;
+            // No value.
+            dst = VectorTextUtil.SplitKeyValueToInt("-accelerated", out key, defaultValue);
+            Assert.AreEqual(defaultValue, dst);
+            Assert.AreEqual("-accelerated", key);
+            // Use defaultValue.
+            dst = VectorTextUtil.SplitKeyValueToInt("-accelerated=1", out key, defaultValue);
+            Assert.AreEqual(1, dst);
+            Assert.AreEqual("-accelerated", key);
+            // Value has space.
+            dst = VectorTextUtil.SplitKeyValueToInt("-accelerated= 1", out key, defaultValue);
+            Assert.AreEqual(1, dst);
+            Assert.AreEqual("-accelerated", key);
+        }
+
     }
 }
