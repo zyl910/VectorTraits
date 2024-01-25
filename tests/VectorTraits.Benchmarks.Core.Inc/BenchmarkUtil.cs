@@ -50,10 +50,12 @@ namespace Zyl.VectorTraits.Benchmarks {
             const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
             if (null == args) return;
             foreach (string arg in args) {
-                if ("-allowFakeBenchmark".Equals(arg, comparisonType)) {
-                    AllowFakeBenchmark = true;
+                int dst = VectorTextUtil.SplitKeyValueToInt(arg, out string key, 1);
+                bool dstBool = 0 != dst;
+                if ("-allowFakeBenchmark".Equals(key, comparisonType)) {
+                    AllowFakeBenchmark = dstBool;
                 }
-                if ("-allowFakeBenchmark0".Equals(arg, comparisonType)) {
+                if ("-allowFakeBenchmark0".Equals(key, comparisonType)) {
                     AllowFakeBenchmark = false;
                 }
             }

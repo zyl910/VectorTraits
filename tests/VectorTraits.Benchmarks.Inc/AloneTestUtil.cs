@@ -51,28 +51,30 @@ namespace Zyl.VectorTraits.Benchmarks {
             const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
             if (null == args) return;
             foreach (string arg in args) {
-                if ("-accelerated".Equals(arg, comparisonType)) {
-                    ShowAccelerated = true;
+                int dst = VectorTextUtil.SplitKeyValueToInt(arg, out string key, 1);
+                bool dstBool = 0 != dst;
+                if ("-accelerated".Equals(key, comparisonType)) {
+                    ShowAccelerated = dstBool;
                 }
-                if ("-accelerated0".Equals(arg, comparisonType)) {
+                if ("-accelerated0".Equals(key, comparisonType)) {
                     ShowAccelerated = false;
                 }
-                if ("-test".Equals(arg, comparisonType)) {
-                    ShowTest = true;
+                if ("-test".Equals(key, comparisonType)) {
+                    ShowTest = dstBool;
                 }
-                if ("-test0".Equals(arg, comparisonType)) {
+                if ("-test0".Equals(key, comparisonType)) {
                     ShowTest = false;
                 }
-                if ("-fixedVector".Equals(arg, comparisonType)) {
-                    ShowFixedVector = true;
+                if ("-fixedVector".Equals(key, comparisonType)) {
+                    ShowFixedVector = dstBool;
                 }
-                if ("-fixedVector0".Equals(arg, comparisonType)) {
+                if ("-fixedVector0".Equals(key, comparisonType)) {
                     ShowFixedVector = false;
                 }
-                if ("-cpuDetection".Equals(arg, comparisonType)) {
-                    ShowCpuDetection = true;
+                if ("-cpuDetection".Equals(key, comparisonType)) {
+                    ShowCpuDetection = dstBool;
                 }
-                if ("-cpuDetection0".Equals(arg, comparisonType)) {
+                if ("-cpuDetection0".Equals(key, comparisonType)) {
                     ShowCpuDetection = false;
                 }
             }
