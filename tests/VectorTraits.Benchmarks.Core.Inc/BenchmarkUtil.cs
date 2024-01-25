@@ -308,6 +308,18 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
+        /// Comparison on <see cref="Type"/>.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>Return compare result.</returns>
+        private static int ComparisonOnType(Type x, Type y) {
+            int rt = string.CompareOrdinal(x?.Name, y?.Name);
+            if (0 == rt) rt = string.CompareOrdinal(x?.FullName, y?.FullName);
+            return rt;
+        }
+
+        /// <summary>
         /// Run benchmark.
         /// </summary>
         /// <param name="writer">Output <see cref="IBenchmarkWriter"/>.</param>
@@ -315,10 +327,16 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="assembly">The assembly.</param>
         public static void RunBenchmark(IBenchmarkWriter writer, Assembly assembly) {
             Type baseType = typeof(AbstractBenchmark);
+            List<Type> lst = new List<Type>();
             foreach (Type typ in assembly.GetTypes()) {
                 if (typ.ContainsGenericParameters) continue;
                 if (typ.IsAbstract) continue;
                 if (!typ.IsSubclassOf(baseType)) continue;
+                lst.Add(typ);
+            }
+            // Sort and run.
+            lst.Sort(ComparisonOnType);
+            foreach (Type typ in lst) {
                 try {
                     AbstractBenchmark? obj = Activator.CreateInstance(typ) as AbstractBenchmark;
                     RunBenchmarkObject(writer, typ, obj);
