@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "UpdateBenchmarkResults": {
+      "commandName": "Project",
+      "commandLineArgs": "\"E:\\zylSelf\\Code\\cs\\base\\_Vector\\_WillTest\\Apple M2.txt\""
+    }
+  }
+}
