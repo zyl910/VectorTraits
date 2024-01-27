@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using UpdateBenchmarkResults.Common;
@@ -89,16 +90,16 @@ namespace UpdateBenchmarkResults.Service {
         }
 
         internal enum LoadPhase {
-            /// <summary>Init. 即“####”之前.</summary>
+            /// <summary>Init. 即“####”之前的非代码区域.</summary>
             Init,
-            /// <summary>Framework. 已经遇到了“####”，获得了框架名. 尚未遇到“```”.</summary>
+            /// <summary>Other code. 即“####”之前的代码区域.</summary>
+            OtherCode,
+            /// <summary>Framework. 已经遇到了“####”，非代码区域.</summary>
             Framework,
-            /// <summary>Case begin. 已经遇到了“```”.</summary>
-            CaseBegin,
-            /// <summary>Case title ok. 已经获得了标题.</summary>
-            CaseTitleOk,
-            /// <summary>Case end. 已经再次遇到了“```”, 这表示数据已结束, 将遇到空白数据.</summary>
-            CaseEnd
+            /// <summary>Framework code. 已经遇到了“####”，尚未遇到case.</summary>
+            FrameworkCode,
+            /// <summary>Framework Case. 已经遇到了 case, 这表示 header区域结束 .</summary>
+            FrameworkCase
         }
 
         /// <summary>
@@ -106,7 +107,7 @@ namespace UpdateBenchmarkResults.Service {
         /// </summary>
         private void Load() {
             string FrameworkPrefix = "####";
-            string CaseDelimiter = "```";
+            string CodeDelimiter = "```";
             InputFramework? inputFramework = null;
             InputCase? inputCase = null;
             LoadPhase phase = LoadPhase.Init;
@@ -117,57 +118,76 @@ namespace UpdateBenchmarkResults.Service {
                     //Writer.WriteLine("{0}\t{1}", lineNo, line);
                 }
                 if (null != line) {
+                    bool needNewFramework = false;
                     bool needAppend = false;
-                    if (line.StartsWith(FrameworkPrefix)) {
-                        if (phase != LoadPhase.CaseBegin) {
-                            // Submit old.
-                            if (null != inputFramework) {
-                                List.Add(inputFramework);
-                                inputFramework = null;
+                    switch(phase) {
+                        case LoadPhase.Init:
+                            if (line.StartsWith(FrameworkPrefix)) {
+                                phase = LoadPhase.Framework;
+                                needNewFramework = true;
+                            } else if (line.StartsWith(CodeDelimiter)) {
+                                phase = LoadPhase.OtherCode;
+                            } else {
+                                // Ignore.
                             }
-                            // Make new Framework
-                            title = line.Substring(FrameworkPrefix.Length + 1).Trim();
-                            inputFramework = new InputFramework();
-                            inputFramework.Title = title;
-                            phase = LoadPhase.Framework;
-                        } else {
-                            needAppend = true;
-                        }
-                    } else if (line.StartsWith(CaseDelimiter)) {
-                        if (phase == LoadPhase.Framework || phase == LoadPhase.CaseEnd) {
-                            phase = LoadPhase.CaseBegin;
-                            inputCase = new InputCase();
-                        } else if (phase == LoadPhase.CaseBegin || phase == LoadPhase.CaseTitleOk) {
-                            phase = LoadPhase.CaseEnd;
-                            if (null != inputFramework && null != inputCase && !string.IsNullOrEmpty(inputCase.Title)) {
-                                inputFramework.Cases.Add(inputCase.Title, inputCase);
-                                inputCase = null;
+                            break;
+                        case LoadPhase.OtherCode:
+                            if (line.StartsWith(CodeDelimiter)) {
+                                phase = LoadPhase.Init;
+                            } else {
+                                // Ignore.
                             }
-                        } else {
-                            // Ignore.
-                            Debug.WriteLine(string.Format("Invalid text encountered! [{0}] {1}", lineNo, line));
-                        }
-                    } else {
-                        if (phase == LoadPhase.Framework) {
-                            if (null != inputFramework) {
-                                inputFramework.Header.Add(line);
+                            break;
+                        case LoadPhase.Framework:
+                            if (line.StartsWith(FrameworkPrefix)) {
+                                phase = LoadPhase.Framework;
+                                needNewFramework = true;
+                            } else if (line.StartsWith(CodeDelimiter)) {
+                                phase = LoadPhase.FrameworkCode;
+                            } else {
+                                // Ignore.
                             }
-                        } else if (phase == LoadPhase.CaseBegin) {
-                            if (!string.IsNullOrEmpty(line) && null != inputCase) {
-                                if (line.StartsWith('[')) {
-                                    int n = line.IndexOf(']');
-                                    if (n > 0) {
-                                        inputCase.Title = line.Substring(1, n - 2);
-                                        phase = LoadPhase.CaseTitleOk;
+                            break;
+                        default: // FrameworkCode or others.
+                            if (line.StartsWith(CodeDelimiter)) {
+                                phase = LoadPhase.Framework;
+                            } else {
+                                if (line.Length > 0) {
+                                    if (line.StartsWith('[')) {
+                                        int n = line.IndexOf(']');
+                                        if (n > 0) {
+                                            title = line.Substring(1, n - 1);
+                                            phase = LoadPhase.FrameworkCase;
+                                            SubmitCase();
+                                            inputCase = new InputCase();
+                                            inputCase.Title = title;
+                                        }
+                                    }
+                                    if (phase != LoadPhase.FrameworkCode) {
                                         needAppend = true;
                                     }
+                                } else {
+                                    if (null!= inputCase) {
+                                        SubmitCase();
+                                    }
+                                }
+                                if (phase == LoadPhase.FrameworkCode) {
+                                    inputFramework?.Header.Add(line);
                                 }
                             }
-                        } else if (phase == LoadPhase.CaseTitleOk) {
-                            needAppend = true;
-                        } else {
-                            // Ignore.
+                            break;
+                    }
+                    if (needNewFramework) {
+                        // Submit old.
+                        if (null != inputFramework) {
+                            SubmitCase();
+                            List.Add(inputFramework);
+                            inputFramework = null;
                         }
+                        // Make new Framework
+                        title = line.Substring(FrameworkPrefix.Length + 1).Trim();
+                        inputFramework = new InputFramework();
+                        inputFramework.Title = title;
                     }
                     // needAppend.
                     if (needAppend && null != inputCase) {
@@ -180,6 +200,13 @@ namespace UpdateBenchmarkResults.Service {
             if (null != inputFramework) {
                 List.Add(inputFramework);
                 //inputFramework = null;
+            }
+
+            void SubmitCase() {
+                if (null == inputCase) return;
+                if (null == inputFramework) return;
+                inputFramework.Cases.Add(inputCase.Title, inputCase);
+                inputCase = null;
             }
         }
 
