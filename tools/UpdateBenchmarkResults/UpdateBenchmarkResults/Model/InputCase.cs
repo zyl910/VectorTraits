@@ -21,6 +21,11 @@ namespace UpdateBenchmarkResults.Model {
         public string BaseTitle { get; set; } = string.Empty;
 
         /// <summary>
+        /// The primary title (主标题).
+        /// </summary>
+        public string PrimaryTitle { get; set; } = string.Empty;
+
+        /// <summary>
         /// The text lines (文本行).
         /// </summary>
         public List<string> Lines { get; set; } = new List<string>();

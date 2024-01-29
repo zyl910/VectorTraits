@@ -175,17 +175,19 @@ namespace UpdateBenchmarkResults.Service {
                                         inputCase.Title = title;
                                         string baseTitle = BenchmarkStringUtil.GetCaseBaseTitle(title);
                                         inputCase.BaseTitle = baseTitle;
+                                        string primaryTitle = BenchmarkStringUtil.GetCasePrimaryTitle(title);
+                                        inputCase.PrimaryTitle = primaryTitle;
                                         if (null!= inputFramework) {
                                             int num;
-                                            if (!inputFramework.GroupCounter.TryGetValue(baseTitle, out num)) {
+                                            if (!inputFramework.GroupCounter.TryGetValue(primaryTitle, out num)) {
                                                 num = 0;
                                             }
-                                            inputFramework.GroupCounter[baseTitle] = num + 1;
+                                            inputFramework.GroupCounter[primaryTitle] = num + 1;
                                             // Group.
-                                            if (!GroupCounter.TryGetValue(baseTitle, out num)) {
+                                            if (!GroupCounter.TryGetValue(primaryTitle, out num)) {
                                                 num = 0;
                                             }
-                                            GroupCounter[baseTitle] = num + 1;
+                                            GroupCounter[primaryTitle] = num + 1;
                                         }
                                     }
                                     if (phase != LoadPhase.FrameworkCode) {
@@ -246,8 +248,20 @@ namespace UpdateBenchmarkResults.Service {
         private void LoadDone() {
             // Show load info.
             foreach (InputFramework item in List) {
-                Writer?.WriteLine("- {0}: {1} items, {2} groups ({3})", item.Title, item.Cases.Count, item.GroupCounter.Count, item.GetGroupNames());
+                Writer?.WriteLine("- {0}: {1} items, {2} groups", item.Title, item.Cases.Count, item.GroupCounter.Count);
             }
+            Writer?.WriteLine("Total {0} groups ({1})", GroupCounter.Count, GetGroupNames());
+            Writer?.WriteLine();
+        }
+
+        /// <summary>
+        /// Get group names.
+        /// </summary>
+        /// <returns>Returns group names.</returns>
+        public string GetGroupNames() {
+            string[] list = GroupCounter.Keys.ToArray();
+            string rt = string.Join(", ", list);
+            return rt;
         }
 
     }

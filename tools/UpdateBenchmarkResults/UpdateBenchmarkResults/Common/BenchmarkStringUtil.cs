@@ -31,7 +31,7 @@ namespace UpdateBenchmarkResults.Common {
         }
 
         /// <summary>
-        /// Extract case base title (返回事例基本标题). 即圆括号左侧的内容.
+        /// Get case base title (返回事例基本标题). 即圆括号左侧的内容.
         /// </summary>
         /// <param name="src">Source text (源文本).</param>
         /// <returns>Returns case base name (返回事例基本标题). 找不到时返回空串.</returns>
@@ -39,6 +39,21 @@ namespace UpdateBenchmarkResults.Common {
             string rt = string.Empty;
             if (string.IsNullOrEmpty(src)) return rt;
             int n = src.IndexOf('(');
+            if (n > 0) {
+                rt = src.Substring(0, n).Trim();
+            }
+            return rt;
+        }
+
+        /// <summary>
+        /// Get case primary title (返回事例主标题). 即最后一个下换线左侧的内容.
+        /// </summary>
+        /// <param name="src">Source text (源文本).</param>
+        /// <returns>Returns case primary name (返回事例主标题). 找不到时返回空串.</returns>
+        public static string GetCasePrimaryTitle(string src) {
+            string rt = string.Empty;
+            if (string.IsNullOrEmpty(src)) return rt;
+            int n = src.LastIndexOf('_');
             if (n > 0) {
                 rt = src.Substring(0, n).Trim();
             }
