@@ -106,6 +106,14 @@ namespace UpdateBenchmarkResults.Service {
         /// Load.
         /// </summary>
         private void Load() {
+            LoadParse();
+            LoadDone();
+        }
+
+        /// <summary>
+        /// Load parse. parse file.
+        /// </summary>
+        private void LoadParse() {
             string FrameworkPrefix = "####";
             string CodeDelimiter = "```";
             InputFramework? inputFramework = null;
@@ -207,6 +215,16 @@ namespace UpdateBenchmarkResults.Service {
                 if (null == inputFramework) return;
                 inputFramework.Cases.Add(inputCase.Title, inputCase);
                 inputCase = null;
+            }
+        }
+
+        /// <summary>
+        /// Load done - show info.
+        /// </summary>
+        private void LoadDone() {
+            // Show load info.
+            foreach (InputFramework item in List) {
+                Writer?.WriteLine("- {0}: {1} items.", item.Title, item.Cases.Count);
             }
         }
 
