@@ -11,19 +11,33 @@ namespace UpdateBenchmarkResults.Model {
     internal class InputFramework {
 
         /// <summary>
-        /// The title.
+        /// The title (标题).
         /// </summary>
         public string Title { get; set; } = string.Empty;
 
         /// <summary>
         /// The Header lines.
         /// </summary>
-        public List<string> Header { get; } = new List<string>();
+        public List<string> Header { get; set; } = new List<string>();
 
         /// <summary>
         /// The Cases.
         /// </summary>
-        public IDictionary<string, InputCase> Cases { get; } = new SortedDictionary<string, InputCase>();
+        public IDictionary<string, InputCase> Cases { get; set; } = new SortedDictionary<string, InputCase>();
 
+        /// <summary>
+        /// Group counter (组的计数器).
+        /// </summary>
+        public IDictionary<string, int> GroupCounter { get; set; } = new SortedDictionary<string, int>();
+
+        /// <summary>
+        /// Get group names.
+        /// </summary>
+        /// <returns>Returns group names.</returns>
+        public string GetGroupNames() {
+            string[] list = GroupCounter.Keys.ToArray();
+            string rt = string.Join(", ", list);
+            return rt;
+        }
     }
 }

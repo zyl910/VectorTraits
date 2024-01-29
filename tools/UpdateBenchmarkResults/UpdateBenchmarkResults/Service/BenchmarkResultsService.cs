@@ -31,6 +31,11 @@ namespace UpdateBenchmarkResults.Service {
         public List<InputFramework> List { get; } = new List<InputFramework>();
 
         /// <summary>
+        /// Group counter (组的计数器).
+        /// </summary>
+        public IDictionary<string, int> GroupCounter { get; set; } = new SortedDictionary<string, int>();
+
+        /// <summary>
         /// Parse command line args.
         /// </summary>
         /// <param name="args">Command line args.</param>
@@ -71,7 +76,8 @@ namespace UpdateBenchmarkResults.Service {
         /// Clear.
         /// </summary>
         private void Clear() {
-            List.Clear(); ;
+            List.Clear();
+            GroupCounter.Clear();
         }
 
         /// <summary>
@@ -161,12 +167,26 @@ namespace UpdateBenchmarkResults.Service {
                                 phase = LoadPhase.Framework;
                             } else {
                                 if (line.Length > 0) {
-                                    title = BenchmarkStringUtil.ExtractCaseName(line);
+                                    title = BenchmarkStringUtil.ExtractCaseTitle(line);
                                     if (!string.IsNullOrEmpty(title)) {
                                         phase = LoadPhase.FrameworkCase;
                                         SubmitCase();
                                         inputCase = new InputCase();
                                         inputCase.Title = title;
+                                        string baseTitle = BenchmarkStringUtil.GetCaseBaseTitle(title);
+                                        inputCase.BaseTitle = baseTitle;
+                                        if (null!= inputFramework) {
+                                            int num;
+                                            if (!inputFramework.GroupCounter.TryGetValue(baseTitle, out num)) {
+                                                num = 0;
+                                            }
+                                            inputFramework.GroupCounter[baseTitle] = num + 1;
+                                            // Group.
+                                            if (!GroupCounter.TryGetValue(baseTitle, out num)) {
+                                                num = 0;
+                                            }
+                                            GroupCounter[baseTitle] = num + 1;
+                                        }
                                     }
                                     if (phase != LoadPhase.FrameworkCode) {
                                         needAppend = true;
@@ -226,7 +246,7 @@ namespace UpdateBenchmarkResults.Service {
         private void LoadDone() {
             // Show load info.
             foreach (InputFramework item in List) {
-                Writer?.WriteLine("- {0}: {1} items.", item.Title, item.Cases.Count);
+                Writer?.WriteLine("- {0}: {1} items, {2} groups ({3})", item.Title, item.Cases.Count, item.GroupCounter.Count, item.GetGroupNames());
             }
         }
 

@@ -11,14 +11,19 @@ namespace UpdateBenchmarkResults.Model {
     internal class InputCase {
 
         /// <summary>
-        /// The title.
+        /// The title (标题).
         /// </summary>
         public string Title { get; set; } = string.Empty;
 
         /// <summary>
-        /// The Lines.
+        /// The base title (基本标题).
         /// </summary>
-        public List<string> Lines { get; } = new List<string>();
+        public string BaseTitle { get; set; } = string.Empty;
+
+        /// <summary>
+        /// The text lines (文本行).
+        /// </summary>
+        public List<string> Lines { get; set; } = new List<string>();
 
     }
 }
