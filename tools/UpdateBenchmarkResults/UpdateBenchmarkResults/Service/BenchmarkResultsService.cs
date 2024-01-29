@@ -161,15 +161,12 @@ namespace UpdateBenchmarkResults.Service {
                                 phase = LoadPhase.Framework;
                             } else {
                                 if (line.Length > 0) {
-                                    if (line.StartsWith('[')) {
-                                        int n = line.IndexOf(']');
-                                        if (n > 0) {
-                                            title = line.Substring(1, n - 1);
-                                            phase = LoadPhase.FrameworkCase;
-                                            SubmitCase();
-                                            inputCase = new InputCase();
-                                            inputCase.Title = title;
-                                        }
+                                    title = BenchmarkStringUtil.ExtractCaseName(line);
+                                    if (!string.IsNullOrEmpty(title)) {
+                                        phase = LoadPhase.FrameworkCase;
+                                        SubmitCase();
+                                        inputCase = new InputCase();
+                                        inputCase.Title = title;
                                     }
                                     if (phase != LoadPhase.FrameworkCode) {
                                         needAppend = true;
@@ -188,9 +185,7 @@ namespace UpdateBenchmarkResults.Service {
                     if (needNewFramework) {
                         // Submit old.
                         if (null != inputFramework) {
-                            SubmitCase();
-                            List.Add(inputFramework);
-                            inputFramework = null;
+                            SubmitFramework();
                         }
                         // Make new Framework
                         title = line.Substring(FrameworkPrefix.Length + 1).Trim();
@@ -215,6 +210,13 @@ namespace UpdateBenchmarkResults.Service {
                 if (null == inputFramework) return;
                 inputFramework.Cases.Add(inputCase.Title, inputCase);
                 inputCase = null;
+            }
+
+            void SubmitFramework() {
+                if (null == inputFramework) return;
+                SubmitCase();
+                List.Add(inputFramework);
+                inputFramework = null;
             }
         }
 

@@ -8,7 +8,7 @@ namespace UpdateBenchmarkResults.Common {
     /// <summary>
     /// Vector text util
     /// </summary>
-    internal class VectorTextUtil {
+    internal static class VectorTextUtil {
 
         /// <summary>Separator for key-value pairs (键值对的分隔符).</summary>
         public static readonly string KeyValueSeparator = "=";
