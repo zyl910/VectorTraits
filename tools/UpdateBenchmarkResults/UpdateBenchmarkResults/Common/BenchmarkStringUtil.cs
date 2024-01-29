@@ -14,6 +14,25 @@ namespace UpdateBenchmarkResults.Common {
     internal static class BenchmarkStringUtil {
 
         /// <summary>
+        /// Get sub path (取得子路径).
+        /// </summary>
+        /// <param name="rootPath">Root path (根路径).</param>
+        /// <param name="fullPath">Full path (完全路径).</param>
+        /// <returns>Returns sub path (返回子路径).</returns>
+        public static string GetSubPath(string? rootPath, string fullPath) {
+            string rt = fullPath;
+            if (null == rootPath || rootPath.Length <= 1) return rt;
+            if (fullPath.Length <= rootPath.Length) return rt;
+            int m = rootPath.Length;
+            char ch = fullPath[m];
+            if (ch == '/' || ch == '\\') {
+                ++m;
+            }
+            rt = fullPath.Substring(m);
+            return rt;
+        }
+
+        /// <summary>
         /// Extract case title (提取事例标题). 会去除方括号.
         /// </summary>
         /// <param name="line">Text line (文本行).</param>

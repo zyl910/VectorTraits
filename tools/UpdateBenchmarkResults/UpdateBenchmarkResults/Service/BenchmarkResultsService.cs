@@ -21,9 +21,14 @@ namespace UpdateBenchmarkResults.Service {
         public TextWriter? Writer { get; set; }
 
         /// <summary>
-        /// Source file.
+        /// Source file (源文件).
         /// </summary>
         public string SourceFile { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Destination folder (目标文件夹).
+        /// </summary>
+        public string Folder { get; set; } = string.Empty;
 
         /// <summary>
         /// The List.
@@ -40,17 +45,16 @@ namespace UpdateBenchmarkResults.Service {
         /// </summary>
         /// <param name="args">Command line args.</param>
         public void ParseCommand(string[] args) {
-            //const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
+            const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
             if (null == args) return;
             //int idx = 0;
             foreach (string arg in args) {
                 if (string.IsNullOrEmpty(arg)) continue;
                 if (arg.StartsWith('-')) {
-                    int dst = VectorTextUtil.SplitKeyValueToInt(arg, out string key, 1);
-                    bool dstBool = 0 != dst;
-                    //if ("-allowFakeBenchmark".Equals(key, comparisonType)) {
-                    //    AllowFakeBenchmark = dstBool;
-                    //}
+                    ReadOnlySpan<char> dst = VectorTextUtil.SplitKeyValue(arg, out string key);
+                    if ("-folder".Equals(key, comparisonType)) {
+                        Folder = dst.ToString();
+                    }
                     //if ("-allowFakeBenchmark0".Equals(key, comparisonType)) {
                     //    AllowFakeBenchmark = false;
                     //}
@@ -91,6 +95,8 @@ namespace UpdateBenchmarkResults.Service {
                 return;
             }
             Load();
+            // Process.
+            Process();
             // Finish.
             Writer.WriteLine("Finish.");
         }
@@ -262,6 +268,83 @@ namespace UpdateBenchmarkResults.Service {
             string[] list = GroupCounter.Keys.ToArray();
             string rt = string.Join(", ", list);
             return rt;
+        }
+
+        /// <summary>
+        /// Process.
+        /// </summary>
+        private void Process() {
+            Writer?.WriteLine("Folder:\t{0}", Folder);
+            // folderFullPath
+            string rootPath = Folder;
+            if (string.IsNullOrEmpty(rootPath)) {
+                rootPath = Environment.CurrentDirectory;
+            }
+            rootPath = Path.GetFullPath(rootPath);
+            Writer?.WriteLine("Root path:\t{0}", rootPath);
+            // enum.
+            DirectoryInfo directoryInfo = new DirectoryInfo(rootPath);
+            ProcessFolder(rootPath, directoryInfo);
+            Writer?.WriteLine();
+        }
+
+        /// <summary>
+        /// Process folder.
+        /// </summary>
+        /// <param name="rootPath">Root path.</param>
+        /// <param name="directoryInfo">Current directory info.</param>
+        private void ProcessFolder(string rootPath, DirectoryInfo directoryInfo) {
+            string fullpath = "";
+            try {
+                fullpath = directoryInfo.FullName;
+                //Writer?.WriteLine("{0}", directoryInfo.FullName);
+                // sub folder.
+                foreach (DirectoryInfo di in directoryInfo.GetDirectories()) {
+
+                    ProcessFolder(rootPath, di);
+                }
+                // sub file.
+                foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.md")) {
+                    ProcessFile(rootPath, fileInfo);
+                }
+            } catch (Exception ex) {
+                Writer?.WriteLine("- {0}: {1}", fullpath, ex);
+            }
+        }
+
+        /// <summary>
+        /// Process file.
+        /// </summary>
+        /// <param name="rootPath">Root path.</param>
+        /// <param name="fileInfo">Current file info.</param>
+        private void ProcessFile(string rootPath, FileInfo fileInfo) {
+            const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
+            string fileName = fileInfo.Name;
+            string fileShortPath = BenchmarkStringUtil.GetSubPath(rootPath, fileInfo.FullName);
+            string message = "";
+            bool isEnd = false;
+            try {
+                if (fileName.IndexOf("_Group", comparisonType) >= 0) return;
+                if (fileName.IndexOf("README.md", comparisonType) >= 0) return;
+                if (fileName.IndexOf("sample.md", comparisonType) >= 0) return;
+                message = ProcessFileBody(rootPath, fileInfo, fileShortPath);
+            } catch (Exception ex) {
+                if (!isEnd) {
+                    message = ex.ToString();
+                }
+            }
+            Writer?.WriteLine("- {0}: {1}", fileShortPath, message);
+        }
+
+        /// <summary>
+        /// Process file body.
+        /// </summary>
+        /// <param name="rootPath">Root path.</param>
+        /// <param name="fileInfo">Current file info.</param>
+        /// <param name="fileShortPath">File short path.</param>
+        private string ProcessFileBody(string rootPath, FileInfo fileInfo, string fileShortPath) {
+            string message = "";
+            return message;
         }
 
     }

@@ -2,7 +2,7 @@
   "profiles": {
     "UpdateBenchmarkResults": {
       "commandName": "Project",
-      "commandLineArgs": "\"E:\\zylSelf\\Code\\cs\\base\\_Vector\\_WillTest\\lntel Core i5-8250U.txt\"\r\n"
+      "commandLineArgs": "\"E:\\zylSelf\\Code\\cs\\base\\_Vector\\_WillTest\\lntel Core i5-8250U.txt\" \"-folder=E:\\zylSelf\\Code\\cs\\base\\VectorTraits\\articles\\BenchmarkResults\""
     }
   }
 }
