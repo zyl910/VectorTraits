@@ -12,6 +12,67 @@ namespace UpdateBenchmarkResults.Common {
     /// Benchmark string util.
     /// </summary>
     internal static class BenchmarkStringUtil {
+        /// <summary>
+        /// Common comparison type.
+        /// </summary>
+        public const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
+
+        /// <summary>
+        /// Prefix - CpuModelName.
+        /// </summary>
+        public static readonly string CpuModelNamePrefix = "VectorEnvironment.CpuModelName:";
+
+        /// <summary>
+        /// Prefix - OSArchitecture.
+        /// </summary>
+        public static readonly string OSArchitecturePrefix = "RuntimeInformation.OSArchitecture:";
+
+        /// <summary>
+        /// Architecture string to architecture family dictionary (架构系列转架构系列的词典).
+        /// </summary>
+        public static readonly IDictionary<string, string> ToArchitectureFamilyDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
+            { "Arm", "Arm" },
+            { "Arm64", "Arm" },
+            { "Armv6", "Arm" },
+            { "LoongArch64", "LoongArch" },
+            { "Ppc64le", "PowerPC" },
+            { "S390x", "S390x" },
+            { "Wasm", "Wasm" },
+            { "X64", "X86" },
+            { "X86", "X86" },
+        };
+
+        /// <summary>
+        /// Architecture family to architecture sort code dictionary (架构系列转架构系列的词典).
+        /// </summary>
+        public static readonly IDictionary<string, string> ToArchitectureSortCodeDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
+            { "Arm", "20" },
+            { "Arm64", "21" },
+            { "Armv6", "22" },
+            { "LoongArch", "30" },
+            { "LoongArch64", "31" },
+            { "PowerPC", "40" },
+            { "Ppc64le", "41" },
+            { "S390x", "60" },
+            { "Wasm", "50" },
+            { "X64", "11" },
+            { "X86", "10" },
+        };
+
+        /// <summary>
+        /// Get value by prefix (根据前缀获得值).
+        /// </summary>
+        /// <param name="prefix">The prefix (前缀).</param>
+        /// <param name="src">Source text (源文本).</param>
+        /// <returns>Returns value (返回值). 找不到时返回空串.</returns>
+        public static string GetValueByPrefix(string prefix, string src) {
+            string rt = string.Empty;
+            int m = src.IndexOf(prefix, comparisonType);
+            if (m >= 0) {
+                rt = src.Substring(m + prefix.Length).Trim();
+            }
+            return rt;
+        }
 
         /// <summary>
         /// Get sub path (取得子路径).
@@ -76,6 +137,34 @@ namespace UpdateBenchmarkResults.Common {
             if (n > 0) {
                 rt = src.Substring(0, n).Trim();
             }
+            return rt;
+        }
+
+        /// <summary>
+        /// Get architecture family (取得架构系列).
+        /// </summary>
+        /// <param name="architectureString">Architecture string (架构字符串).</param>
+        /// <returns>Returns architecture family (返回架构系列). 找不到时返回源值.</returns>
+        public static string GetArchitectureFamily(string architectureString) {
+            string? rt;
+            if (!ToArchitectureFamilyDictionary.TryGetValue(architectureString, out rt)) {
+                rt = null;
+            }
+            if (null == rt) rt = architectureString;
+            return rt;
+        }
+
+        /// <summary>
+        /// Get architecture sort code (取得架构排序代码).
+        /// </summary>
+        /// <param name="architectureFamily">Architecture family (架构系列).</param>
+        /// <returns>Returns architecture sort code (返回架构排序代码). 找不到时返回源值.</returns>
+        public static string GetArchitectureSortCode(string architectureFamily) {
+            string? rt;
+            if (!ToArchitectureSortCodeDictionary.TryGetValue(architectureFamily, out rt)) {
+                rt = null;
+            }
+            if (null == rt) rt = architectureFamily;
             return rt;
         }
 

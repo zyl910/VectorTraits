@@ -15,6 +15,9 @@ namespace UpdateBenchmarkResults.Service {
     /// </summary>
     internal class BenchmarkResultsService {
 
+        /// <inheritdoc cref="BenchmarkStringUtil.comparisonType"/>
+        const StringComparison comparisonType = BenchmarkStringUtil.comparisonType;
+
         /// <summary>
         /// Text writer.
         /// </summary>
@@ -39,6 +42,31 @@ namespace UpdateBenchmarkResults.Service {
         /// Group counter (组的计数器).
         /// </summary>
         public IDictionary<string, int> GroupCounter { get; set; } = new SortedDictionary<string, int>();
+
+        /// <summary>
+        /// Source base name (源基本名).
+        /// </summary>
+        public string SourceBaseName { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Cpu model name (CPU型号名).
+        /// </summary>
+        public string CpuModelName { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Architecture string (架构字符串).
+        /// </summary>
+        public string ArchitectureString { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Architecture family (架构系列). 如 X86/Arm.
+        /// </summary>
+        public string ArchitectureFamily { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Architecture sort code (架构排序代码).
+        /// </summary>
+        public string ArchitectureSortCode { get; set; } = string.Empty;
 
         /// <summary>
         /// Parse command line args.
@@ -82,6 +110,11 @@ namespace UpdateBenchmarkResults.Service {
         private void Clear() {
             List.Clear();
             GroupCounter.Clear();
+            SourceBaseName = string.Empty;
+            CpuModelName = string.Empty;
+            ArchitectureString = string.Empty;
+            ArchitectureFamily = string.Empty;
+            ArchitectureSortCode = string.Empty;
         }
 
         /// <summary>
@@ -133,7 +166,8 @@ namespace UpdateBenchmarkResults.Service {
             LoadPhase phase = LoadPhase.Init;
             string title;
             int lineNo = 1;
-            foreach(string line in File.ReadLines(SourceFile)) {
+            SourceBaseName = Path.GetFileNameWithoutExtension(SourceFile);
+            foreach (string line in File.ReadLines(SourceFile)) {
                 if (lineNo <= 30) {
                     //Writer.WriteLine("{0}\t{1}", lineNo, line);
                 }
@@ -205,6 +239,16 @@ namespace UpdateBenchmarkResults.Service {
                                     }
                                 }
                                 if (phase == LoadPhase.FrameworkCode) {
+                                    if (string.IsNullOrEmpty(ArchitectureString)) {
+                                        ArchitectureString = BenchmarkStringUtil.GetValueByPrefix(BenchmarkStringUtil.OSArchitecturePrefix, line);
+                                        if (!string.IsNullOrEmpty(ArchitectureString)) {
+                                            ArchitectureFamily = BenchmarkStringUtil.GetArchitectureFamily(ArchitectureString);
+                                            ArchitectureSortCode = BenchmarkStringUtil.GetArchitectureSortCode(ArchitectureFamily);
+                                        }
+                                    }
+                                    if (string.IsNullOrEmpty(CpuModelName)) {
+                                        CpuModelName = BenchmarkStringUtil.GetValueByPrefix(BenchmarkStringUtil.CpuModelNamePrefix, line);
+                                    }
                                     inputFramework?.Header.Add(line);
                                 }
                             }
@@ -257,6 +301,11 @@ namespace UpdateBenchmarkResults.Service {
                 Writer?.WriteLine("- {0}: {1} items, {2} groups", item.Title, item.Cases.Count, item.GroupCounter.Count);
             }
             Writer?.WriteLine("Total {0} groups ({1})", GroupCounter.Count, GetGroupNames());
+            Writer?.WriteLine("ArchitectureString:\t{0}", ArchitectureString);
+            Writer?.WriteLine("ArchitectureFamily:\t{0}", ArchitectureFamily);
+            //Writer?.WriteLine("ArchitectureSortCode:\t{0}", ArchitectureSortCode);
+            Writer?.WriteLine("CpuModelName:\t{0}", CpuModelName);
+            //Writer?.WriteLine("SourceBaseName:\t{0}", SourceBaseName);
             Writer?.WriteLine();
         }
 
@@ -318,7 +367,6 @@ namespace UpdateBenchmarkResults.Service {
         /// <param name="rootPath">Root path.</param>
         /// <param name="fileInfo">Current file info.</param>
         private void ProcessFile(string rootPath, FileInfo fileInfo) {
-            const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
             string fileName = fileInfo.Name;
             string fileShortPath = BenchmarkStringUtil.GetSubPath(rootPath, fileInfo.FullName);
             string message = "";
