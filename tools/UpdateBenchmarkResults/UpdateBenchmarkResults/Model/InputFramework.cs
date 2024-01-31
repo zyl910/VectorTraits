@@ -8,7 +8,7 @@ namespace UpdateBenchmarkResults.Model {
     /// <summary>
     /// The framework of input.
     /// </summary>
-    internal class InputFramework {
+    internal class InputFramework : ITitleGetter {
 
         /// <summary>
         /// The title (标题).

@@ -398,16 +398,17 @@ namespace UpdateBenchmarkResults.Service {
         /// <param name="fileInfo">Current file info.</param>
         /// <param name="fileShortPath">File short path.</param>
         private string ProcessFileBody(string rootPath, FileInfo fileInfo, string fileShortPath) {
-            string message = "";
+            string message = string.Empty;
+            string filePath = fileInfo.FullName;
             // Load.
             string[]? lines = null;
             try {
-                lines = File.ReadAllLines(fileInfo.FullName, encoding);
+                lines = File.ReadAllLines(filePath, encoding);
             } catch (Exception ex) {
                 Writer?.WriteLine(ex);
             }
             if (null == lines) {
-                lines = File.ReadAllLines(fileInfo.FullName);
+                lines = File.ReadAllLines(filePath);
             }
             if (null == lines) {
                 return "Can't read file!";
@@ -420,7 +421,23 @@ namespace UpdateBenchmarkResults.Service {
                 }
                 return message;
             }
-            // Fill.
+            // Combine.
+            const bool UseOutputOther = true; // [Debug] Output to other file.
+            string OutputOtherSuffix = "_out.txt";
+            if (UseOutputOther) {
+                filePath += OutputOtherSuffix;
+            }
+            message = string.Empty;
+            using (StreamWriter writer = new StreamWriter(filePath, false, encoding)) {
+                CombineBenchmarkFile(writer, lines, benchmarkFile, ref message);
+            }
+            if (string.IsNullOrEmpty(message)) {
+                //message = "Fail on CombineBenchmarkFile!";
+                message = "OK.";
+                if (UseOutputOther) {
+                    message += string.Format(" Output to '{0}{1}'", fileShortPath, OutputOtherSuffix);
+                }
+            }
             return message;
         }
 
@@ -445,7 +462,7 @@ namespace UpdateBenchmarkResults.Service {
             int m;
             for (int i = 0; i < lines.Length; ++i) {
                 string line = lines[i];
-                if (string.IsNullOrEmpty(line)) continue;
+                if (null == line) continue;
                 if (line.StartsWith(CodeDelimiter)) {
                     inCode = !inCode;
                     if (!inCode) {
@@ -552,6 +569,36 @@ namespace UpdateBenchmarkResults.Service {
             }
             // done.
             return benchmarkFile;
+        }
+
+        /// <summary>
+        /// Combine benchmark file and output.
+        /// </summary>
+        /// <param name="writer">Output writer.</param>
+        /// <param name="lines">Source text lines (源文本行).</param>
+        /// <param name="benchmarkFile">Source  <see cref="BenchmarkFile"/>.</param>
+        /// <param name="message"></param>
+        private void CombineBenchmarkFile(StreamWriter writer, string[] lines, BenchmarkFile benchmarkFile, ref string message) {
+            const char TitleChar = '#';
+            string CodeDelimiter = "```";
+            BenchmarkArchitecture? benchmarkArchitecture = null;
+            BenchmarkCpu? benchmarkCpu = null;
+            BenchmarkFramework? benchmarkFramework = null;
+            BenchmarkCase? benchmarkCase = null;
+            bool inCode = false;
+            bool inCodeHeader = false;
+            //bool inCase = false;
+            string title, key;
+            int m;
+            for (int i = 0; i < lines.Length; ++i) {
+                string line = lines[i];
+                if (null == line) continue;
+                bool needAppend = true;
+                // needAppend.
+                if (needAppend) {
+                    writer.WriteLine(line);
+                }
+            }
         }
 
     }

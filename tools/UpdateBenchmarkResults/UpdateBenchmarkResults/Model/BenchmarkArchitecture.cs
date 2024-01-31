@@ -8,7 +8,7 @@ namespace UpdateBenchmarkResults.Model {
     /// <summary>
     /// The architecture of BenchmarkResults.
     /// </summary>
-    internal class BenchmarkArchitecture {
+    internal class BenchmarkArchitecture : ITitleGetter, IBenchmarkNode<BenchmarkCpu> {
 
         /// <summary>
         /// The title (标题).

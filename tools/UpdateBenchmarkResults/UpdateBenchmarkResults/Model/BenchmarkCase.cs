@@ -8,7 +8,7 @@ namespace UpdateBenchmarkResults.Model {
     /// <summary>
     /// The case of BenchmarkResults.
     /// </summary>
-    internal class BenchmarkCase {
+    internal class BenchmarkCase : ITitleGetter {
 
         /// <summary>
         /// The title (标题).

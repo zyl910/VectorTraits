@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace UpdateBenchmarkResults.Model {
     /// <summary>
     /// The framework of BenchmarkResults.
     /// </summary>
-    internal class BenchmarkFramework {
+    internal class BenchmarkFramework : ITitleGetter {
 
         /// <summary>
         /// The title (标题).
@@ -39,5 +40,19 @@ namespace UpdateBenchmarkResults.Model {
             string rt = string.Join(", ", list);
             return rt;
         }
+
+        /// <summary>
+        /// Find case by title.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <returns>Return found item.</returns>
+        public BenchmarkCase? FindByTitle(string title) {
+            BenchmarkCase? rt;
+            if (!Cases.TryGetValue(title, out rt)) {
+                rt = null;
+            }
+            return rt;
+        }
+
     }
 }
