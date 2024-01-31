@@ -168,5 +168,28 @@ namespace UpdateBenchmarkResults.Common {
             return rt;
         }
 
+        /// <summary>
+        /// Get the count of consecutive same characters (取得连续的相同字符的个数).
+        /// </summary>
+        /// <param name="check">Will check char (将检查的字符).</param>
+        /// <param name="src">Source text (源文本).</param>
+        /// <param name="start">Start index (开始索引).</param>
+        /// <returns>Returns count(返回个数).</returns>
+        public static int GetSameCharCount(char check, string src, int start = 0) {
+            int rt = 0;
+            if (string.IsNullOrEmpty(src)) return rt;
+            if (start >= src.Length) return rt;
+            if (start < 0) throw new ArgumentOutOfRangeException(nameof(start), "The start parameter must be greater than or equal to 0!");
+            for (int i = start; i < src.Length; ++i) {
+                char ch = src[i];
+                if (ch == check) {
+                    ++rt;
+                } else {
+                    break;
+                }
+            }
+            return rt;
+        }
+
     }
 }

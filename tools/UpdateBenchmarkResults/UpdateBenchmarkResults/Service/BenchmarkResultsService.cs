@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,9 @@ namespace UpdateBenchmarkResults.Service {
 
         /// <inheritdoc cref="BenchmarkStringUtil.comparisonType"/>
         const StringComparison comparisonType = BenchmarkStringUtil.comparisonType;
+
+        /// <summary>Default Encoding.</summary>
+        static readonly Encoding encoding = Encoding.UTF8;
 
         /// <summary>
         /// Text writer.
@@ -355,7 +359,10 @@ namespace UpdateBenchmarkResults.Service {
                 // sub file.
                 foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.md")) {
                     ProcessFile(rootPath, fileInfo);
+                    throw new OperationCanceledException("[Debug] Only test one file. Will stop.");
                 }
+            } catch (OperationCanceledException) {
+                throw;
             } catch (Exception ex) {
                 Writer?.WriteLine("- {0}: {1}", fullpath, ex);
             }
@@ -392,7 +399,159 @@ namespace UpdateBenchmarkResults.Service {
         /// <param name="fileShortPath">File short path.</param>
         private string ProcessFileBody(string rootPath, FileInfo fileInfo, string fileShortPath) {
             string message = "";
+            // Load.
+            string[]? lines = null;
+            try {
+                lines = File.ReadAllLines(fileInfo.FullName, encoding);
+            } catch (Exception ex) {
+                Writer?.WriteLine(ex);
+            }
+            if (null == lines) {
+                lines = File.ReadAllLines(fileInfo.FullName);
+            }
+            if (null == lines) {
+                return "Can't read file!";
+            }
+            // Parse.
+            BenchmarkFile? benchmarkFile = ParseBenchmarkFile(lines, ref message);
+            if (null == benchmarkFile) {
+                if (string.IsNullOrEmpty(message)) {
+                    message = "Not a benchmark results file!";
+                }
+                return message;
+            }
+            // Fill.
             return message;
+        }
+
+        /// <summary>
+        /// Parse <see cref="BenchmarkFile"/>.
+        /// </summary>
+        /// <param name="lines">Text lines (文本行).</param>
+        /// <param name="message">The message (消息).</param>
+        /// <returns>Returns <see cref="BenchmarkFile"/>.</returns>
+        private BenchmarkFile? ParseBenchmarkFile(string[] lines, ref string message) {
+            const char TitleChar = '#';
+            string CodeDelimiter = "```";
+            BenchmarkFile? benchmarkFile = null;
+            BenchmarkArchitecture? benchmarkArchitecture = null;
+            BenchmarkCpu? benchmarkCpu = null;
+            BenchmarkFramework? benchmarkFramework = null;
+            BenchmarkCase? benchmarkCase = null;
+            bool inCode = false;
+            bool inCodeHeader = false;
+            //bool inCase = false;
+            string title, key;
+            int m;
+            for (int i = 0; i < lines.Length; ++i) {
+                string line = lines[i];
+                if (string.IsNullOrEmpty(line)) continue;
+                if (line.StartsWith(CodeDelimiter)) {
+                    inCode = !inCode;
+                    if (!inCode) {
+                        // Submit.
+                        if (null != benchmarkCase) {
+                            benchmarkCase = null;
+                        }
+                    } else {
+                        // init var.
+                        inCodeHeader = true;
+                    }
+                    //inCase = false;
+                } else if (!inCode) {
+                    // Out code.
+                    if (line.StartsWith(TitleChar)) {
+                        // Is title.
+                        int cnt = BenchmarkStringUtil.GetSameCharCount(TitleChar, line);
+                        title = line.Substring(cnt).Trim();
+                        // Submit old.
+                        if (cnt <= 3 && null != benchmarkFramework) {
+                            benchmarkFramework = null;
+                        }
+                        if (cnt <= 2 && null != benchmarkCpu) {
+                            benchmarkCpu = null;
+                        }
+                        if (cnt <= 1 && null!= benchmarkArchitecture) {
+                            benchmarkArchitecture = null;
+                        }
+                        // Make new.
+                        if (cnt == 1) {
+                            key = title;
+                            //val = string.Empty;
+                            m = title.IndexOf('-');
+                            if (m >= 0) {
+                                key = title.Substring(0, m).Trim();
+                            }
+                            if (string.Equals("Benchmark", key, comparisonType)) {
+                                // ok.
+                                message = string.Empty;
+                                if (null == benchmarkFile) {
+                                    benchmarkFile = new BenchmarkFile();
+                                    benchmarkFile.Title = title;
+                                }
+                            } else {
+                                // not.
+                                message = string.Format("Not a benchmark results file! Title is {0}", key);
+                                return benchmarkFile;
+                            }
+                        }
+                        if (cnt >= 2) {
+                            if (cnt == 2 || null == benchmarkArchitecture) {
+                                benchmarkArchitecture = new BenchmarkArchitecture();
+                                benchmarkArchitecture.Title = title;
+                                benchmarkFile?.List.Add(benchmarkArchitecture);
+                            }
+                        }
+                        if (cnt >= 3) {
+                            if (cnt == 3 || null == benchmarkCpu) {
+                                benchmarkCpu = new BenchmarkCpu();
+                                benchmarkCpu.Title = title;
+                                benchmarkArchitecture?.List.Add(benchmarkCpu);
+                            }
+                        }
+                        if (cnt >= 4) {
+                            if (cnt == 4 || null == benchmarkFramework) {
+                                benchmarkFramework = new BenchmarkFramework();
+                                benchmarkFramework.Title = title;
+                                benchmarkCpu?.List.Add(benchmarkFramework);
+                            }
+                        }
+                    } else {
+                        // Not title.
+                    }
+                } else {
+                    // In code.
+                    title = BenchmarkStringUtil.ExtractCaseTitle(line);
+                    if (!string.IsNullOrEmpty(title)) {
+                        inCodeHeader = false;
+                        //inCase = true;
+                        //SubmitCase();
+                        benchmarkCase = new BenchmarkCase();
+                        benchmarkCase.Title = title;
+                        string baseTitle = BenchmarkStringUtil.GetCaseBaseTitle(title);
+                        benchmarkCase.BaseTitle = baseTitle;
+                        string primaryTitle = BenchmarkStringUtil.GetCasePrimaryTitle(title);
+                        benchmarkCase.PrimaryTitle = primaryTitle;
+                        if (null != benchmarkFramework) {
+                            benchmarkFramework.Cases.Add(benchmarkCase.Title, benchmarkCase);
+                            int num;
+                            if (!benchmarkFramework.GroupCounter.TryGetValue(primaryTitle, out num)) {
+                                num = 0;
+                            }
+                            benchmarkFramework.GroupCounter[primaryTitle] = num + 1;
+                            // benchmarkCpu.
+                            //if (!benchmarkCpu.GroupCounter.TryGetValue(primaryTitle, out num)) {
+                            //    num = 0;
+                            //}
+                            //benchmarkCpu.GroupCounter[primaryTitle] = num + 1;
+                        }
+                    }
+                    if (inCodeHeader) {
+                    }
+                }
+            }
+            // done.
+            return benchmarkFile;
         }
 
     }
