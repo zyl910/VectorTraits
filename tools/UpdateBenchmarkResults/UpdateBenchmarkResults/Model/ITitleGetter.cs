@@ -8,7 +8,7 @@ namespace UpdateBenchmarkResults.Model {
     /// <summary>
     /// Title getter interface.
     /// </summary>
-    internal interface ITitleGetter {
+    public interface ITitleGetter {
 
         /// <summary>
         /// The title (标题).

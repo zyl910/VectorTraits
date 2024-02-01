@@ -577,7 +577,7 @@ namespace UpdateBenchmarkResults.Service {
         /// <param name="writer">Output writer.</param>
         /// <param name="lines">Source text lines (源文本行).</param>
         /// <param name="benchmarkFile">Source  <see cref="BenchmarkFile"/>.</param>
-        /// <param name="message"></param>
+        /// <param name="message">The message (消息).</param>
         private void CombineBenchmarkFile(StreamWriter writer, string[] lines, BenchmarkFile benchmarkFile, ref string message) {
             const char TitleChar = '#';
             string CodeDelimiter = "```";
@@ -585,20 +585,149 @@ namespace UpdateBenchmarkResults.Service {
             BenchmarkCpu? benchmarkCpu = null;
             BenchmarkFramework? benchmarkFramework = null;
             BenchmarkCase? benchmarkCase = null;
+            InputFramework? inputFramework = null;
+            InputCase? inputCase = null;
+            bool isAllow = false;
             bool inCode = false;
             bool inCodeHeader = false;
             //bool inCase = false;
+            bool needCopy = true;
             string title, key;
             int m;
             for (int i = 0; i < lines.Length; ++i) {
                 string line = lines[i];
                 if (null == line) continue;
-                bool needAppend = true;
-                // needAppend.
-                if (needAppend) {
+                if (line.StartsWith(CodeDelimiter)) {
+                    needCopy = true;
+                    inCode = !inCode;
+                    if (!inCode) {
+                        // Submit.
+                        if (null != benchmarkCase) {
+                            benchmarkCase = null;
+                        }
+                    } else {
+                        // init var.
+                        inCodeHeader = true;
+                    }
+                    //inCase = false;
+                } else if (!inCode) {
+                    needCopy = true;
+                    // Out code.
+                    if (line.StartsWith(TitleChar)) {
+                        // Is title.
+                        int cnt = BenchmarkStringUtil.GetSameCharCount(TitleChar, line);
+                        title = line.Substring(cnt).Trim();
+                        // Submit old.
+                        if (cnt <= 3) {
+                            benchmarkCase = null;
+                            benchmarkFramework = null;
+                            inputCase = null;
+                            inputFramework = null;
+                        }
+                        if (cnt <= 2) {
+                            benchmarkCpu = null;
+                        }
+                        if (cnt <= 1) {
+                            benchmarkArchitecture = null;
+                        }
+                        // Make new.
+                        if (cnt == 1) {
+                            key = title;
+                            //val = string.Empty;
+                            m = title.IndexOf('-');
+                            if (m >= 0) {
+                                key = title.Substring(0, m).Trim();
+                            }
+                            if (string.Equals("Benchmark", key, comparisonType)) {
+                                // ok.
+                                message = string.Empty;
+                                //if (null == benchmarkFile) {
+                                //    benchmarkFile = new BenchmarkFile();
+                                //    benchmarkFile.Title = title;
+                                //}
+                                isAllow = true;
+                            } else {
+                                // not.
+                                message = string.Format("Not a benchmark results file! Title is {0}", key);
+                                return;
+                            }
+                        }
+                        if (isAllow) {
+                            if (cnt >= 2) {
+                                if (cnt == 2 || null == benchmarkArchitecture) {
+                                    benchmarkArchitecture = benchmarkFile.FindByTitle(title, comparisonType);
+                                    if (null == benchmarkArchitecture) {
+                                        message = string.Format("[WARN] Line {0}: Can't found architecture({1})!", 1 + i, title);
+                                        return;
+                                    }
+                                }
+                            }
+                            if (cnt >= 3) {
+                                if (cnt == 3 || null == benchmarkCpu) {
+                                    benchmarkCpu = benchmarkArchitecture?.FindByTitle(title, comparisonType);
+                                    if (null == benchmarkCpu) {
+                                        message = string.Format("[WARN] Line {0}: Can't found cpu({1})!", 1 + i, title);
+                                        return;
+                                    }
+                                }
+                            }
+                            if (cnt >= 4) {
+                                if (cnt == 4 || null == benchmarkFramework) {
+                                    benchmarkFramework = benchmarkCpu?.FindByTitle(title, comparisonType);
+                                    if (null == benchmarkFramework) {
+                                        message = string.Format("[WARN] Line {0}: Can't found framework({1})!", 1 + i, title);
+                                        return;
+                                    }
+                                    inputCase = null;
+                                    inputFramework = List.FirstOrDefault(x => title.Equals(x.Title, comparisonType));
+                                }
+                            }
+                        }
+                    } else {
+                        // Not title.
+                    }
+                } else {
+                    // In code.
+                    title = BenchmarkStringUtil.ExtractCaseTitle(line);
+                    if (!string.IsNullOrEmpty(title)) {
+                        inCodeHeader = false;
+                        needCopy = true;
+                        //inCase = true;
+                        //SubmitCase();
+                        benchmarkCase = benchmarkFramework?.FindByTitle(title);
+                        if (null == benchmarkCase) {
+                            message = string.Format("[WARN] Line {0}: Can't found case({1})!", 1 + i, title);
+                            return;
+                        }
+                        if (null != inputFramework) {
+                            inputCase = inputFramework.FindByTitle(title);
+                            if (null != inputCase) {
+                                // Replace case.
+                                needCopy = false;
+                                foreach(string str in  inputCase.Lines) {
+                                    WriteFromInput(str);
+                                }
+                                WriteFromInput();
+                            }
+                        }
+                    } else {
+                        if (!needCopy && string.IsNullOrEmpty(line)) {
+                            needCopy = true; // If empty line, will set needCopy.
+                        }
+                    }
+                    if (inCodeHeader) {
+                    }
+                }
+                // needCopy.
+                if (needCopy) {
                     writer.WriteLine(line);
                 }
+            } // end for.
+
+            void WriteFromInput(string line = "") {
+                writer.WriteLine(line);
             }
+
         }
 
     }

@@ -8,17 +8,17 @@ namespace UpdateBenchmarkResults.Model {
     /// <summary>
     /// The CPU of BenchmarkResults.
     /// </summary>
-    internal class BenchmarkCpu : ITitleGetter, IBenchmarkNode<BenchmarkFramework> {
+    internal class BenchmarkCpu : AbstractBenchmarkNode<BenchmarkFramework>, ITitleGetter {
 
         /// <summary>
         /// The title (标题).
         /// </summary>
-        public string Title { get; set; } = string.Empty;
+        public override string Title { get; set; } = string.Empty;
 
         /// <summary>
         /// The List.
         /// </summary>
-        public IList<BenchmarkFramework> List { get; set; } = new List<BenchmarkFramework>();
+        public override IList<BenchmarkFramework> List { get; set; } = new List<BenchmarkFramework>();
 
     }
 }

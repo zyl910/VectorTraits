@@ -39,5 +39,19 @@ namespace UpdateBenchmarkResults.Model {
             string rt = string.Join(", ", list);
             return rt;
         }
+
+        /// <summary>
+        /// Find case by title.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <returns>Return found item.</returns>
+        public InputCase? FindByTitle(string title) {
+            InputCase? rt;
+            if (!Cases.TryGetValue(title, out rt)) {
+                rt = null;
+            }
+            return rt;
+        }
+
     }
 }

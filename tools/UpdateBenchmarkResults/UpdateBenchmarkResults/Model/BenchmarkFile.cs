@@ -8,16 +8,16 @@ namespace UpdateBenchmarkResults.Model {
     /// <summary>
     /// The file of BenchmarkResults.
     /// </summary>
-    internal class BenchmarkFile : ITitleGetter, IBenchmarkNode<BenchmarkArchitecture> {
+    internal class BenchmarkFile : AbstractBenchmarkNode<BenchmarkArchitecture>, ITitleGetter {
 
         /// <summary>
         /// The title (标题).
         /// </summary>
-        public string Title { get; set; } = string.Empty;
+        public override string Title { get; set; } = string.Empty;
 
         /// <summary>
         /// The List.
         /// </summary>
-        public IList<BenchmarkArchitecture> List { get; set; } = new List<BenchmarkArchitecture>();
+        public override IList<BenchmarkArchitecture> List { get; set; } = new List<BenchmarkArchitecture>();
     }
 }
