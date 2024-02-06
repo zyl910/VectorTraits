@@ -364,7 +364,7 @@ namespace UpdateBenchmarkResults.Service {
             } catch (OperationCanceledException) {
                 throw;
             } catch (Exception ex) {
-                Writer?.WriteLine("- {0}: {1}", fullpath, ex);
+                Writer?.WriteLine("- {0}: {1}", fullpath, ex.Message);
             }
         }
 
@@ -385,7 +385,7 @@ namespace UpdateBenchmarkResults.Service {
                 message = ProcessFileBody(rootPath, fileInfo, fileShortPath);
             } catch (Exception ex) {
                 if (!isEnd) {
-                    message = ex.ToString();
+                    message = ex.Message;
                 }
             }
             Writer?.WriteLine("- {0}: {1}", fileShortPath, message);
@@ -581,6 +581,25 @@ namespace UpdateBenchmarkResults.Service {
         private void CombineBenchmarkFile(StreamWriter writer, string[] lines, BenchmarkFile benchmarkFile, ref string message) {
             const char TitleChar = '#';
             string CodeDelimiter = "```";
+            // insertArchitecture
+            BenchmarkArchitecture? benchmarkArchitectureFound = benchmarkFile.List.FirstOrDefault(x=> string.Equals(x.Title, ArchitectureFamily, comparisonType));
+            BenchmarkCpu? benchmarkCpuFound = null;
+            bool insertArchitecture = false;
+            bool insertCpu = false;
+            if (null != benchmarkArchitectureFound) {
+                benchmarkCpuFound = benchmarkArchitectureFound.List.FirstOrDefault(x => string.Equals(x.Title, SourceBaseName, comparisonType));
+                if (null != benchmarkCpuFound) {
+                    // OK.
+                } else {
+                    insertCpu = true;
+                }
+            } else {
+                insertArchitecture = true;
+            }
+            // Group by CasePrimaryTitle.
+            IDictionary<string, int> GroupCasePrimaryTitle = new SortedDictionary<string, int>();
+            BenchmarkStringUtil.GroupByCasePrimaryTitle(GroupCasePrimaryTitle, benchmarkFile.List);
+            // Body.
             BenchmarkArchitecture? benchmarkArchitecture = null;
             BenchmarkCpu? benchmarkCpu = null;
             BenchmarkFramework? benchmarkFramework = null;
@@ -592,6 +611,8 @@ namespace UpdateBenchmarkResults.Service {
             bool inCodeHeader = false;
             //bool inCase = false;
             bool needCopy = true;
+            int countAdd = 0;
+            int countRemove = 0;
             string title, key;
             int m;
             for (int i = 0; i < lines.Length; ++i) {
@@ -625,6 +646,15 @@ namespace UpdateBenchmarkResults.Service {
                             inputFramework = null;
                         }
                         if (cnt <= 2) {
+                            if (null!= benchmarkArchitecture && string.Equals(benchmarkArchitecture.Title, ArchitectureFamily, comparisonType)) {
+                                if (insertCpu) {
+                                    m = string.Compare(title, SourceBaseName, comparisonType);
+                                    if (m > 0) {
+                                        insertCpu = false;
+                                        WriteFromInputCpu();
+                                    }
+                                }
+                            }
                             benchmarkCpu = null;
                         }
                         if (cnt <= 1) {
@@ -655,6 +685,14 @@ namespace UpdateBenchmarkResults.Service {
                         if (isAllow) {
                             if (cnt >= 2) {
                                 if (cnt == 2 || null == benchmarkArchitecture) {
+                                    if (insertArchitecture) {
+                                        string sortCode = BenchmarkStringUtil.GetArchitectureSortCode(title);
+                                        m = string.Compare(sortCode, ArchitectureFamily, comparisonType);
+                                        if (m > 0) {
+                                            insertArchitecture = false;
+                                            WriteFromInputArchitecture();
+                                        }
+                                    }
                                     benchmarkArchitecture = benchmarkFile.FindByTitle(title, comparisonType);
                                     if (null == benchmarkArchitecture) {
                                         message = string.Format("[WARN] Line {0}: Can't found architecture({1})!", 1 + i, title);
@@ -664,6 +702,13 @@ namespace UpdateBenchmarkResults.Service {
                             }
                             if (cnt >= 3) {
                                 if (cnt == 3 || null == benchmarkCpu) {
+                                    if (insertCpu) {
+                                        m = string.Compare(title, SourceBaseName, comparisonType);
+                                        if (m > 0) {
+                                            insertCpu = false;
+                                            WriteFromInputCpu();
+                                        }
+                                    }
                                     benchmarkCpu = benchmarkArchitecture?.FindByTitle(title, comparisonType);
                                     if (null == benchmarkCpu) {
                                         message = string.Format("[WARN] Line {0}: Can't found cpu({1})!", 1 + i, title);
@@ -679,7 +724,9 @@ namespace UpdateBenchmarkResults.Service {
                                         return;
                                     }
                                     inputCase = null;
-                                    inputFramework = List.FirstOrDefault(x => title.Equals(x.Title, comparisonType));
+                                    if (benchmarkCpu == benchmarkCpuFound) {
+                                        inputFramework = List.FirstOrDefault(x => title.Equals(x.Title, comparisonType));
+                                    }
                                 }
                             }
                         }
@@ -704,16 +751,13 @@ namespace UpdateBenchmarkResults.Service {
                             if (null != inputCase) {
                                 // Replace case.
                                 needCopy = false;
-                                foreach(string str in  inputCase.Lines) {
-                                    WriteFromInput(str);
-                                }
-                                WriteFromInput();
+                                WriteFromInputCase(inputCase);
                             }
                         }
                     } else {
-                        if (!needCopy && string.IsNullOrEmpty(line)) {
-                            needCopy = true; // If empty line, will set needCopy.
-                        }
+                        //if (!needCopy && string.IsNullOrEmpty(line)) {
+                        //    needCopy = true; // If empty line, will set needCopy.
+                        //}
                     }
                     if (inCodeHeader) {
                     }
@@ -721,11 +765,78 @@ namespace UpdateBenchmarkResults.Service {
                 // needCopy.
                 if (needCopy) {
                     writer.WriteLine(line);
+                } else {
+                    ++countRemove;
                 }
             } // end for.
+            // fix
+            bool lastIsEmpty = true;
+            if (lines.Length > 0) {
+                lastIsEmpty = string.IsNullOrEmpty(lines[lines.Length - 1]);
+            }
+            if (insertCpu) {
+                insertCpu = false;
+                if (!lastIsEmpty) {
+                    lastIsEmpty = true;
+                    WriteFromInput();
+                }
+                WriteFromInputCpu();
+            }
+            if (insertArchitecture) {
+                insertArchitecture = false;
+                if (!lastIsEmpty) {
+                    lastIsEmpty = true;
+                    WriteFromInput();
+                }
+                WriteFromInputArchitecture();
+            }
+            // done.
+            message = string.Format("The source is {0} lines. {1} lines added, {2} lines removed.", lines.Length, countAdd, countRemove);
 
             void WriteFromInput(string line = "") {
                 writer.WriteLine(line);
+                ++countAdd;
+            }
+
+            void WriteFromInputCase(InputCase? inputCase) {
+                if (null == inputCase) return;
+                foreach (string str in inputCase.Lines) {
+                    WriteFromInput(str);
+                }
+                WriteFromInput();
+            }
+
+            void WriteFromInputFramework(InputFramework? inputFramework) {
+                if (null == inputFramework) return;
+                WriteFromInput(string.Format("#### {0}", inputFramework.Title));
+                WriteFromInput();
+                WriteFromInput("```");
+                foreach(string s in inputFramework.Header) {
+                    WriteFromInput(s);
+                }
+                foreach (KeyValuePair<string, InputCase> p in inputFramework.Cases) {
+                    bool flag = GroupCasePrimaryTitle.ContainsKey(p.Value.PrimaryTitle);
+                    if (flag) {
+                        WriteFromInputCase(p.Value);
+                    }
+                }
+                WriteFromInput("```");
+                WriteFromInput();
+            }
+
+            void WriteFromInputCpu() {
+                WriteFromInput(string.Format("### {0}", SourceBaseName));
+                WriteFromInput(string.Format("`{0}`", CpuModelName));
+                WriteFromInput();
+                foreach (InputFramework aFramework in List) {
+                    WriteFromInputFramework(aFramework);
+                }
+            }
+
+            void WriteFromInputArchitecture() {
+                WriteFromInput(string.Format("## {0}", ArchitectureFamily));
+                WriteFromInput();
+                WriteFromInputCpu();
             }
 
         }

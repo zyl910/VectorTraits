@@ -14,7 +14,7 @@ namespace UpdateBenchmarkResults {
                 service.Writer = writer;
                 service.RunWithCommand(args);
             } catch (Exception ex) {
-                writer.WriteLine(ex.ToString());
+                writer.WriteLine(ex.Message);
             }
         }
     }

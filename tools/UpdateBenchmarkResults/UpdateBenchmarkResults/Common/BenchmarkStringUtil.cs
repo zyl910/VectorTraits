@@ -191,5 +191,63 @@ namespace UpdateBenchmarkResults.Common {
             return rt;
         }
 
+        /// <summary>
+        /// Group by CasePrimaryTitle from <see cref="BenchmarkCase"/>.
+        /// </summary>
+        /// <param name="destination">The destination (目的地).</param>
+        /// <param name="list">Source list (源列表).</param>
+        public static void GroupByCasePrimaryTitle(IDictionary<string, int> destination, BenchmarkCase item) {
+            string str = item.PrimaryTitle;
+            int num;
+            if (!destination.TryGetValue(str, out num)) {
+                num = 0;
+            }
+            destination[str] = num + 1;
+        }
+
+        /// <summary>
+        /// Group by CasePrimaryTitle from <see cref="BenchmarkFramework"/>.
+        /// </summary>
+        /// <param name="destination">The destination (目的地).</param>
+        /// <param name="list">Source list (源列表).</param>
+        public static void GroupByCasePrimaryTitle(IDictionary<string, int> destination, BenchmarkFramework item) {
+            foreach (KeyValuePair<string, BenchmarkCase> p in item.Cases) {
+                GroupByCasePrimaryTitle(destination, p.Value);
+            }
+        }
+
+        /// <summary>
+        /// Group by CasePrimaryTitle from <see cref="BenchmarkCpu"/>.
+        /// </summary>
+        /// <param name="destination">The destination (目的地).</param>
+        /// <param name="list">Source list (源列表).</param>
+        public static void GroupByCasePrimaryTitle(IDictionary<string, int> destination, BenchmarkCpu item) {
+            foreach (BenchmarkFramework p in item.List) {
+                GroupByCasePrimaryTitle(destination, p);
+            }
+        }
+
+        /// <summary>
+        /// Group by CasePrimaryTitle from <see cref="BenchmarkArchitecture"/>.
+        /// </summary>
+        /// <param name="destination">The destination (目的地).</param>
+        /// <param name="list">Source item (源条目).</param>
+        public static void GroupByCasePrimaryTitle(IDictionary<string, int> destination, BenchmarkArchitecture item) {
+            foreach (BenchmarkCpu p in item.List) {
+                GroupByCasePrimaryTitle(destination, p);
+            }
+        }
+
+        /// <summary>
+        /// Group by CasePrimaryTitle from <see cref="BenchmarkArchitecture"/> list.
+        /// </summary>
+        /// <param name="destination">The destination (目的地).</param>
+        /// <param name="list">Source list (源列表).</param>
+        public static void GroupByCasePrimaryTitle(IDictionary<string, int> destination, IList<BenchmarkArchitecture> list) {
+            foreach(BenchmarkArchitecture p in list) {
+                GroupByCasePrimaryTitle(destination, p);
+            }
+        }
+
     }
 }
