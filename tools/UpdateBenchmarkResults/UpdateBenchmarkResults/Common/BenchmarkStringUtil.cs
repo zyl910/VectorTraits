@@ -169,6 +169,29 @@ namespace UpdateBenchmarkResults.Common {
         }
 
         /// <summary>
+        /// Get sort code of framework (取得框架的排序代码).
+        /// </summary>
+        /// <param name="framework">framework name (框架名).</param>
+        /// <returns>Returns architecture sort code (返回框架的排序代码). 找不到时返回源值, 为null时返回空串.</returns>
+        public static string GetSortCodeOfFramework(string? framework) {
+            string SampleNetFramework = ".NET Framework";
+            string SampleNetCore = ".NET Core";
+            string SampleNet = ".NET";
+            string rt = string.Empty;
+            if (null == framework) return rt;
+            if (framework.StartsWith(SampleNetFramework, comparisonType)) {
+                rt = ".NET AFramework" + framework.Substring(SampleNetFramework.Length);
+            } else if (framework.StartsWith(SampleNetCore, comparisonType)) {
+                rt = framework; // Keep .NET Core.
+            } else if (framework.StartsWith(SampleNet, comparisonType)) {
+                rt = ".NET Core" + framework.Substring(SampleNet.Length);
+            } else {
+                rt = framework;
+            }
+            return rt;
+        }
+
+        /// <summary>
         /// Get the count of consecutive same characters (取得连续的相同字符的个数).
         /// </summary>
         /// <param name="check">Will check char (将检查的字符).</param>
