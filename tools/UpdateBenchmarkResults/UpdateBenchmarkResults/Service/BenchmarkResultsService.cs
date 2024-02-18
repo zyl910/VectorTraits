@@ -597,9 +597,10 @@ namespace UpdateBenchmarkResults.Service {
                 insertArchitecture = true;
             }
             List<InputFramework> inputFrameworkList = new List<InputFramework>();
+            List<InputCase> inputCaseList = new List<InputCase>();
             // Group by CasePrimaryTitle.
-            IDictionary<string, int> GroupCasePrimaryTitle = new SortedDictionary<string, int>();
-            BenchmarkStringUtil.GroupByCasePrimaryTitle(GroupCasePrimaryTitle, benchmarkFile.List);
+            IDictionary<string, int> groupCasePrimaryTitle = new SortedDictionary<string, int>();
+            BenchmarkStringUtil.GroupByCasePrimaryTitle(groupCasePrimaryTitle, benchmarkFile.List);
             // Body.
             BenchmarkArchitecture? benchmarkArchitecture = null;
             BenchmarkCpu? benchmarkCpu = null;
@@ -628,6 +629,7 @@ namespace UpdateBenchmarkResults.Service {
                         if (null != benchmarkCase) {
                             benchmarkCase = null;
                         }
+                        SubmitOtherCase();
                     } else {
                         // init var.
                         inCodeHeader = true;
@@ -747,14 +749,14 @@ namespace UpdateBenchmarkResults.Service {
                                     if (benchmarkCpu == benchmarkCpuFound) {
                                         inputFrameworkList.Clear();
                                         foreach(InputFramework p in List) {
-                                            var temp = benchmarkCpu.FindByTitle(p.Title, comparisonType);
+                                            BenchmarkFramework? temp = benchmarkCpu.FindByTitle(p.Title, comparisonType);
                                             if (null == temp) {
                                                 // Not found, need insert.
                                                 inputFrameworkList.Add(p);
                                             }
                                         }
                                         inputFrameworkList.Sort((a, b) => string.Compare(BenchmarkStringUtil.GetSortCodeOfFramework(a.Title), BenchmarkStringUtil.GetSortCodeOfFramework(b.Title), comparisonType));
-                                        Debug.WriteLine(inputFrameworkList);
+                                        //Debug.WriteLine(inputFrameworkList);
                                     }
                                 }
                             }
@@ -789,8 +791,25 @@ namespace UpdateBenchmarkResults.Service {
                                         return;
                                     }
                                     inputCase = null;
+                                    inputFramework = null;
                                     if (benchmarkCpu == benchmarkCpuFound) {
                                         inputFramework = List.FirstOrDefault(x => title.Equals(x.Title, comparisonType));
+                                    }
+                                    // Fill inputCaseList.
+                                    if (null != inputFramework) {
+                                        inputCaseList.Clear();
+                                        foreach (KeyValuePair<string, InputCase> p in inputFramework.Cases) {
+                                            // Check in groupCasePrimaryTitle.
+                                            if (!groupCasePrimaryTitle.ContainsKey(p.Value.PrimaryTitle)) continue;
+                                            // Check in benchmarkFramework.
+                                            BenchmarkCase? temp = benchmarkFramework.FindByTitle(p.Value.Title);
+                                            if (null == temp) {
+                                                // Not found, need insert.
+                                                inputCaseList.Add(p.Value);
+                                            }
+                                        }
+                                        inputCaseList.Sort((a, b) => string.Compare(a.Title, b.Title, comparisonType));
+                                        Debug.WriteLine(inputCaseList);
                                     }
                                 }
                             }
@@ -805,7 +824,29 @@ namespace UpdateBenchmarkResults.Service {
                         inCodeHeader = false;
                         needCopy = true;
                         //inCase = true;
-                        //SubmitCase();
+                        // Insert case.
+                        if (inputCaseList.Count > 0) {
+                            int idx = 0;
+                            string sortCode = title;
+                            while (inputCaseList.Count > 0) {
+                                InputCase p = inputCaseList[idx];
+                                string sortCodeInput = p.Title;
+                                m = string.Compare(sortCode, sortCodeInput, comparisonType);
+                                if (m > 0) {
+                                    // Need insert.
+                                    if (!lastIsEmpty) {
+                                        lastIsEmpty = true;
+                                        WriteFromInput();
+                                    }
+                                    WriteFromInputCase(p);
+                                    // Remove.
+                                    inputCaseList.RemoveAt(idx);
+                                } else {
+                                    break;
+                                }
+                            }
+                        }
+                        // Copy case.
                         benchmarkCase = benchmarkFramework?.FindByTitle(title);
                         if (null == benchmarkCase) {
                             message = string.Format("[WARN] Line {0}: Can't found case({1})!", 1 + i, title);
@@ -836,6 +877,10 @@ namespace UpdateBenchmarkResults.Service {
                 lastIsEmpty = string.IsNullOrEmpty(line);
             } // end for.
             // fix
+            if (inputCaseList.Count > 0) {
+                SubmitOtherCase();
+                WriteFromInput(CodeDelimiter);
+            }
             if (inputFrameworkList.Count > 0) {
                 foreach (InputFramework p in inputFrameworkList) {
                     if (!lastIsEmpty) {
@@ -863,7 +908,8 @@ namespace UpdateBenchmarkResults.Service {
                 WriteFromInputArchitecture();
             }
             // done.
-            message = string.Format("The source is {0} lines. {1} lines added, {2} lines removed.", lines.Length, countAdd, countRemove);
+            int dstCount = lines.Length + countAdd - countRemove;
+            message = string.Format("The source is {0} lines, the destination is {1} lines. {2} lines added, {3} lines removed.", lines.Length, dstCount, countAdd, countRemove);
 
             void WriteFromInput(string line = "") {
                 writer.WriteLine(line);
@@ -887,7 +933,7 @@ namespace UpdateBenchmarkResults.Service {
                     WriteFromInput(s);
                 }
                 foreach (KeyValuePair<string, InputCase> p in inputFramework.Cases) {
-                    bool flag = GroupCasePrimaryTitle.ContainsKey(p.Value.PrimaryTitle);
+                    bool flag = groupCasePrimaryTitle.ContainsKey(p.Value.PrimaryTitle);
                     if (flag) {
                         WriteFromInputCase(p.Value);
                     }
@@ -909,6 +955,19 @@ namespace UpdateBenchmarkResults.Service {
                 WriteFromInput(string.Format("## {0}", ArchitectureFamily));
                 WriteFromInput();
                 WriteFromInputCpu();
+            }
+
+            void SubmitOtherCase() {
+                if (inputCaseList.Count > 0) {
+                    foreach (InputCase p in inputCaseList) {
+                        if (!lastIsEmpty) {
+                            lastIsEmpty = true;
+                            WriteFromInput();
+                        }
+                        WriteFromInputCase(p);
+                    }
+                    inputCaseList.Clear();
+                }
             }
 
         }
