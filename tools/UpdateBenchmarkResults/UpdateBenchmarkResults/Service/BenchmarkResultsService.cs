@@ -748,7 +748,7 @@ namespace UpdateBenchmarkResults.Service {
                             if (cnt >= 3) {
                                 if (cnt == 3 || null == benchmarkCpu) {
                                     // Insert cpu.
-                                    if (insertCpu) {
+                                    if (insertCpu && benchmarkArchitectureFound == benchmarkArchitecture) {
                                         m = string.Compare(title, SourceBaseName, comparisonType);
                                         if (m > 0) {
                                             insertCpu = false;
@@ -939,7 +939,7 @@ namespace UpdateBenchmarkResults.Service {
             }
             // done.
             int dstCount = lines.Length + countAdd - countRemove;
-            message = string.Format("The source is {0} lines, the destination is {1} lines. {2} lines added, {3} lines removed.", lines.Length, dstCount, countAdd, countRemove);
+            message = string.Format("{0} lines => {1} lines. {2} lines added, {3} lines removed.", lines.Length, dstCount, countAdd, countRemove);
 
             void WriteFromInput(string line = "") {
                 writer.WriteLine(line);
