@@ -3,10 +3,10 @@
 
 ## x86
 
-### lntel Core i5-8250U
-`lntel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
+### Intel Core i5-8250U
+`Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
 
-#### .NET Framework 4.5
+#### .NET Framework
 
 ```
 VectorTraits.Benchmarks.NetFw
@@ -120,7 +120,7 @@ SumBigMul_Two	453.825	577.632	3.591329
 SumBigMul_HighLow	430.754	608.570	3.783681
 ```
 
-#### .NET 5
+#### .NET 5.0
 
 ```
 VectorTraits.Benchmarks
@@ -159,7 +159,7 @@ SumBigMul_Two	429.997	609.641	3.784153
 SumBigMul_HighLow	441.294	594.035	3.687281
 ```
 
-#### .NET 6
+#### .NET 6.0
 
 ```
 VectorTraits.Benchmarks
@@ -198,7 +198,7 @@ SumBigMul_Two	433.074	605.310	4.325388
 SumBigMul_HighLow	433.558	604.634	4.320559
 ```
 
-#### .NET 7
+#### .NET 7.0
 
 ```
 VectorTraits.Benchmarks
@@ -247,17 +247,17 @@ SumBigMul_HighLow	407.476	643.337	4.698602
 ```
 ```
 
-#### .NET 5
+#### .NET 5.0
 
 ```
 ```
 
-#### .NET 6
+#### .NET 6.0
 
 ```
 ```
 
-#### .NET 7
+#### .NET 7.0
 
 ```
 ```

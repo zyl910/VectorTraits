@@ -5,8 +5,8 @@ See [Group](Shuffle_Group.md)
 
 ## x86
 
-### lntel Core i5-8250U
-`lntel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
+### Intel Core i5-8250U
+`Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
 
 #### .NET Framework 
 ``` 
@@ -753,8 +753,8 @@ VectorTraits256Avx2: OK.
 ``` 
 
 
-### lntel Core i5-8250U - 128 bit
-`lntel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
+### Intel Core i5-8250U - 128 bit
+`Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
 SET COMPlus_EnableAVX2=0
 
 #### .NET Core 3.1 

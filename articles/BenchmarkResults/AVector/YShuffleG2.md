@@ -5,8 +5,8 @@ See [Group](YShuffleG2_Group.md)
 
 ## x86
 
-### lntel Core i5-8250U
-`lntel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
+### Intel Core i5-8250U
+`Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
 
 #### .NET Framework 
 ``` 

@@ -3,10 +3,10 @@
 
 ## x86
 
-### lntel Core i5-8250U
-`lntel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
+### Intel Core i5-8250U
+`Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
 
-#### .NET Framework 4.5
+#### .NET Framework
 
 ```
 VectorTraits.Benchmarks.NetFw
@@ -131,17 +131,17 @@ VectorTraits256Avx2: Vector256 type is not supported! Requires hardware support 
 ```
 ```
 
-#### .NET 5
+#### .NET 5.0
 
 ```
 ```
 
-#### .NET 6
+#### .NET 6.0
 
 ```
 ```
 
-#### .NET 7
+#### .NET 7.0
 
 ```
 VectorTraits.Benchmarks
@@ -213,17 +213,17 @@ VectorTraits256Avx2: OK.
 ```
 ```
 
-#### .NET 5
+#### .NET 5.0
 
 ```
 ```
 
-#### .NET 6
+#### .NET 6.0
 
 ```
 ```
 
-#### .NET 7
+#### .NET 7.0
 
 ```
 ```

@@ -3,10 +3,10 @@
 
 ## x86
 
-### lntel Core i5-8250U
-`lntel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
+### Intel Core i5-8250U
+`Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
 
-#### .NET Framework 4.5
+#### .NET Framework
 
 ```
 VectorTraits.Benchmarks.NetFw
@@ -352,7 +352,7 @@ VectorTraits256Base: OK.
 VectorTraits256Avx2: OK.
 ```
 
-#### .NET 5
+#### .NET 5.0
 
 ```
 VectorTraits.Benchmarks
@@ -487,7 +487,7 @@ VectorTraits256Base: OK.
 VectorTraits256Avx2: OK.
 ```
 
-#### .NET 6
+#### .NET 6.0
 
 ```
 VectorTraits.Benchmarks
@@ -622,7 +622,7 @@ VectorTraits256Base: OK.
 VectorTraits256Avx2: OK.
 ```
 
-#### .NET 7
+#### .NET 7.0
 
 ```
 VectorTraits.Benchmarks
@@ -890,7 +890,7 @@ VectorTraits256Base: Vector byte size mismatch(16!=32) !
 VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 ```
 
-#### .NET 5
+#### .NET 5.0
 
 ```
 VectorTraits.Benchmarks
@@ -1027,7 +1027,7 @@ VectorTraits256Base: Vector byte size mismatch(16!=32) !
 VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 ```
 
-#### .NET 6
+#### .NET 6.0
 
 ```
 VectorTraits.Benchmarks
@@ -1164,7 +1164,7 @@ VectorTraits256Base: Vector byte size mismatch(16!=32) !
 VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 ```
 
-#### .NET 7
+#### .NET 7.0
 
 ```
 VectorTraits.Benchmarks
