@@ -33,14 +33,24 @@ namespace UpdateBenchmarkResults.Service {
         public string SourceFile { get; set; } = string.Empty;
 
         /// <summary>
+        /// Apply header (应用标题. 即是否更新标题区的内容).
+        /// </summary>
+        public bool ApplyHeader { get; set; } = true;
+
+        /// <summary>
+        /// Debug - Debugging only one file (调试 - 仅调试一个文件).
+        /// </summary>
+        public bool DebugOnly { get; set; } = false;
+
+        /// <summary>
         /// Destination folder (目标文件夹).
         /// </summary>
         public string Folder { get; set; } = string.Empty;
 
         /// <summary>
-        /// Apply header (应用标题. 即是否更新标题区的内容).
+        /// Whether to export to another file, rather than overwriting the original file (是否输出到另一文件, 而不是覆盖原文件).
         /// </summary>
-        public bool ApplyHeader { get; set; } = true;
+        public bool OutputOther { get; set; } = false;
 
         /// <summary>
         /// The List.
@@ -85,7 +95,6 @@ namespace UpdateBenchmarkResults.Service {
             const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
             if (null == args) return;
             //int idx = 0;
-            bool flag;
             foreach (string arg in args) {
                 if (string.IsNullOrEmpty(arg)) continue;
                 if (arg.StartsWith('-')) {
@@ -97,8 +106,19 @@ namespace UpdateBenchmarkResults.Service {
                         ApplyHeader = false;
                     }
                     if ("-applyHeader".Equals(key, comparisonType)) {
-                        flag = VectorTextUtil.ParseInt32(dst, 1) != 0;
-                        ApplyHeader = flag;
+                        ApplyHeader = VectorTextUtil.ParseInt32(dst, 1) != 0;
+                    }
+                    if ("-debugOnly0".Equals(key, comparisonType)) {
+                        DebugOnly = false;
+                    }
+                    if ("-debugOnly".Equals(key, comparisonType)) {
+                        DebugOnly = VectorTextUtil.ParseInt32(dst, 0) != 0;
+                    }
+                    if ("-outputOther0".Equals(key, comparisonType)) {
+                        OutputOther = false;
+                    }
+                    if ("-outputOther".Equals(key, comparisonType)) {
+                        OutputOther = VectorTextUtil.ParseInt32(dst, 0) != 0;
                     }
                 } else {
                     if (string.IsNullOrEmpty(SourceFile)) {
@@ -338,6 +358,7 @@ namespace UpdateBenchmarkResults.Service {
         /// </summary>
         private void Process() {
             Writer?.WriteLine("ApplyHeader:\t{0}", ApplyHeader);
+            Writer?.WriteLine("OutputOther:\t{0}", OutputOther);
             Writer?.WriteLine("Folder:\t{0}", Folder);
             // folderFullPath
             string rootPath = Folder;
@@ -370,7 +391,9 @@ namespace UpdateBenchmarkResults.Service {
                 // sub file.
                 foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.md")) {
                     ProcessFile(rootPath, fileInfo);
-                    throw new OperationCanceledException("[Debug] Only test one file. Will stop.");
+                    if (DebugOnly) {
+                        throw new OperationCanceledException("[Debug] Only test one file. Will stop.");
+                    }
                 }
             } catch (OperationCanceledException) {
                 throw;
@@ -433,7 +456,7 @@ namespace UpdateBenchmarkResults.Service {
                 return message;
             }
             // Combine.
-            const bool UseOutputOther = true; // [Debug] Output to other file.
+            bool UseOutputOther = OutputOther; // [Debug] Output to other file.
             string OutputOtherSuffix = "_out.txt";
             if (UseOutputOther) {
                 filePath += OutputOtherSuffix;

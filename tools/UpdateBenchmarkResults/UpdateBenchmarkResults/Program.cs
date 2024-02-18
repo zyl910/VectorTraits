@@ -7,7 +7,7 @@ namespace UpdateBenchmarkResults {
         static void Main(string[] args) {
             TextWriter writer = Console.Out;
             writer.WriteLine("UpdateBenchmarkResults");
-            writer.WriteLine("Syntax: UpdateBenchmarkResults (SourceFile) [-folder=(folder)] [-applyHeader=(0/1)]");
+            writer.WriteLine("Syntax: UpdateBenchmarkResults [-applyHeader=(0/1)] [-outputOther] [-folder=(folder)] (sourceFile)");
             writer.WriteLine();
             try {
                 BenchmarkResultsService service = new BenchmarkResultsService();
