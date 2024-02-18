@@ -38,6 +38,11 @@ namespace UpdateBenchmarkResults.Service {
         public string Folder { get; set; } = string.Empty;
 
         /// <summary>
+        /// Apply header (应用标题. 即是否更新标题区的内容).
+        /// </summary>
+        public bool ApplyHeader { get; set; } = true;
+
+        /// <summary>
         /// The List.
         /// </summary>
         public List<InputFramework> List { get; } = new List<InputFramework>();
@@ -80,6 +85,7 @@ namespace UpdateBenchmarkResults.Service {
             const StringComparison comparisonType = StringComparison.OrdinalIgnoreCase;
             if (null == args) return;
             //int idx = 0;
+            bool flag;
             foreach (string arg in args) {
                 if (string.IsNullOrEmpty(arg)) continue;
                 if (arg.StartsWith('-')) {
@@ -87,9 +93,13 @@ namespace UpdateBenchmarkResults.Service {
                     if ("-folder".Equals(key, comparisonType)) {
                         Folder = dst.ToString();
                     }
-                    //if ("-allowFakeBenchmark0".Equals(key, comparisonType)) {
-                    //    AllowFakeBenchmark = false;
-                    //}
+                    if ("-applyHeader0".Equals(key, comparisonType)) {
+                        ApplyHeader = false;
+                    }
+                    if ("-applyHeader".Equals(key, comparisonType)) {
+                        flag = VectorTextUtil.ParseInt32(dst, 1) != 0;
+                        ApplyHeader = flag;
+                    }
                 } else {
                     if (string.IsNullOrEmpty(SourceFile)) {
                         SourceFile = arg;
@@ -327,6 +337,7 @@ namespace UpdateBenchmarkResults.Service {
         /// Process.
         /// </summary>
         private void Process() {
+            Writer?.WriteLine("ApplyHeader:\t{0}", ApplyHeader);
             Writer?.WriteLine("Folder:\t{0}", Folder);
             // folderFullPath
             string rootPath = Folder;
@@ -613,12 +624,14 @@ namespace UpdateBenchmarkResults.Service {
             bool inCodeHeader = false;
             //bool inCase = false;
             bool needCopy = true;
+            bool inApplyHeader = false;
             int countAdd = 0;
             int countRemove = 0;
             string title, key;
             int m;
             bool lastIsEmpty = true;
             for (int i = 0; i < lines.Length; ++i) {
+                bool doApplyHeader = false;
                 string line = lines[i];
                 if (null == line) continue;
                 if (line.StartsWith(CodeDelimiter)) {
@@ -630,15 +643,21 @@ namespace UpdateBenchmarkResults.Service {
                             benchmarkCase = null;
                         }
                         SubmitOtherCase();
+                        if (inApplyHeader) inApplyHeader = false;
                     } else {
                         // init var.
                         inCodeHeader = true;
+                        if (ApplyHeader && null != inputFramework) {
+                            inApplyHeader = true;
+                            doApplyHeader = true;
+                        }
                     }
                     //inCase = false;
                 } else if (!inCode) {
                     needCopy = true;
                     // Out code.
                     if (line.StartsWith(TitleChar)) {
+                        if (inApplyHeader) inApplyHeader = false;
                         // Is title.
                         int cnt = BenchmarkStringUtil.GetSameCharCount(TitleChar, line);
                         title = line.Substring(cnt).Trim();
@@ -809,7 +828,7 @@ namespace UpdateBenchmarkResults.Service {
                                             }
                                         }
                                         inputCaseList.Sort((a, b) => string.Compare(a.Title, b.Title, comparisonType));
-                                        Debug.WriteLine(inputCaseList);
+                                        //Debug.WriteLine(inputCaseList);
                                     }
                                 }
                             }
@@ -822,6 +841,9 @@ namespace UpdateBenchmarkResults.Service {
                     title = BenchmarkStringUtil.ExtractCaseTitle(line);
                     if (!string.IsNullOrEmpty(title)) {
                         inCodeHeader = false;
+                        if (inApplyHeader) {
+                            inApplyHeader = false;
+                        }
                         needCopy = true;
                         //inCase = true;
                         // Insert case.
@@ -871,6 +893,14 @@ namespace UpdateBenchmarkResults.Service {
                 // needCopy.
                 if (needCopy) {
                     writer.WriteLine(line);
+                    if (doApplyHeader && null != inputFramework) {
+                        // Output from input.
+                        foreach (string s in inputFramework.Header) {
+                            WriteFromInput(s);
+                        }
+                        // Next line is header, so no output.
+                        needCopy = false;
+                    }
                 } else {
                     ++countRemove;
                 }

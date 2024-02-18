@@ -48,15 +48,33 @@ namespace UpdateBenchmarkResults.Common {
             int rt = defaultValue;
             ReadOnlySpan<char> v = SplitKeyValue(src, out key, separator);
             if (!v.IsEmpty) {
-#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-                if (!int.TryParse(v, out rt)) {
-#else
-                if (!int.TryParse(v.ToString(), out rt)) {
-#endif
+                if (!TryParseInt32(v, out rt)) {
                     rt = defaultValue;
                 }
             }
             return rt;
+        }
+
+        /// <inheritdoc cref="int.TryParse(ReadOnlySpan{char}, out int)"/>
+        public static bool TryParseInt32(ReadOnlySpan<char> s, out int result) {
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            return int.TryParse(s, out result);
+#else
+            return int.TryParse(s.ToString(), out result);
+#endif
+        }
+
+        /// <summary>
+        /// Parse string to <see cref="Int32"/> (解析字符串并转为Int32).
+        /// </summary>
+        /// <param name="s">Source string (源字符串).</param>
+        /// <param name="defaultValue">Default value(默认值).</param>
+        /// <returns>Returns the parsed value. If parsing fails, return <paramref name="defaultValue"/> (返回解析后的值. 解析失败时返回 defaultValue).</returns>
+        public static int ParseInt32(ReadOnlySpan<char> s, int defaultValue = 0) {
+            if (TryParseInt32(s, out int rt)) {
+                return rt;
+            }
+            return defaultValue;
         }
 
     }
