@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Reflection;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace UpdateBenchmarkResults.Service {
     /// <summary>
     /// Benchmark results service
     /// </summary>
-    internal class BenchmarkResultsService {
+    internal partial class BenchmarkResultsService {
 
         /// <inheritdoc cref="BenchmarkStringUtil.comparisonType"/>
         const StringComparison comparisonType = BenchmarkStringUtil.comparisonType;
@@ -36,6 +37,11 @@ namespace UpdateBenchmarkResults.Service {
         /// Apply header (应用标题. 即是否更新标题区的内容).
         /// </summary>
         public bool ApplyHeader { get; set; } = true;
+
+        /// <summary>
+        /// Apply Group (应用分组. 即是否更新group文件的内容).
+        /// </summary>
+        public bool ApplyGroup { get; set; } = true;
 
         /// <summary>
         /// Debug - Debugging only one file (调试 - 仅调试一个文件).
@@ -108,6 +114,12 @@ namespace UpdateBenchmarkResults.Service {
                     if ("-applyHeader".Equals(key, comparisonType)) {
                         ApplyHeader = VectorTextUtil.ParseInt32(dst, 1) != 0;
                     }
+                    if ("-applyGroup0".Equals(key, comparisonType)) {
+                        ApplyGroup = false;
+                    }
+                    if ("-applyGroup".Equals(key, comparisonType)) {
+                        ApplyGroup = VectorTextUtil.ParseInt32(dst, 1) != 0;
+                    }
                     if ("-debugOnly0".Equals(key, comparisonType)) {
                         DebugOnly = false;
                     }
@@ -142,6 +154,13 @@ namespace UpdateBenchmarkResults.Service {
         /// Clear.
         /// </summary>
         private void Clear() {
+            ClearLoad();
+        }
+
+        /// <summary>
+        /// Clear load.
+        /// </summary>
+        private void ClearLoad() {
             List.Clear();
             GroupCounter.Clear();
             SourceBaseName = string.Empty;
@@ -156,14 +175,39 @@ namespace UpdateBenchmarkResults.Service {
         /// </summary>
         public void Run() {
             if (null == Writer) return;
-            Writer.WriteLine("SourceFile:\t{0}", SourceFile);
+            // Show param.
+            //Writer.WriteLine("SourceFile:\t{0}", SourceFile);
             if (string.IsNullOrEmpty(SourceFile)) {
                 Writer.WriteLine("[Error] SourceFile is empty!");
                 return;
             }
-            Load();
+            Writer.WriteLine("ApplyHeader:\t{0}", ApplyHeader);
+            Writer.WriteLine("ApplyGroup:\t{0}", ApplyGroup);
+            Writer.WriteLine("OutputOther:\t{0}", OutputOther);
+            Writer.WriteLine("Folder:\t{0}", Folder);
+            // folderFullPath
+            string rootPath = Folder;
+            if (string.IsNullOrEmpty(rootPath)) {
+                rootPath = Environment.CurrentDirectory;
+            }
+            rootPath = Path.GetFullPath(rootPath);
+            DirectoryInfo directoryInfo = new DirectoryInfo(rootPath);
+            Writer.WriteLine("Root path:\t{0}", rootPath);
+            Writer.WriteLine();
             // Process.
-            Process();
+            try {
+                Load();
+                Process(rootPath, directoryInfo);
+            } catch (Exception ex) {
+                Writer.WriteLine(ex.Message);
+            }
+            Writer.WriteLine();
+            // GroupProcessFolder.
+            if (ApplyGroup) {
+                Writer.WriteLine("[Group]");
+                GroupProcessFolder(rootPath, directoryInfo);
+                Writer.WriteLine();
+            }
             // Finish.
             Writer.WriteLine("Finish.");
         }
@@ -185,6 +229,8 @@ namespace UpdateBenchmarkResults.Service {
         /// Load.
         /// </summary>
         private void Load() {
+            Writer?.WriteLine("[{0}]", SourceFile);
+            ClearLoad();
             LoadParse();
             LoadDone();
         }
@@ -340,7 +386,7 @@ namespace UpdateBenchmarkResults.Service {
             //Writer?.WriteLine("ArchitectureSortCode:\t{0}", ArchitectureSortCode);
             Writer?.WriteLine("CpuModelName:\t{0}", CpuModelName);
             //Writer?.WriteLine("SourceBaseName:\t{0}", SourceBaseName);
-            Writer?.WriteLine();
+            Writer?.WriteLine("Update to:");
         }
 
         /// <summary>
@@ -356,21 +402,11 @@ namespace UpdateBenchmarkResults.Service {
         /// <summary>
         /// Process.
         /// </summary>
-        private void Process() {
-            Writer?.WriteLine("ApplyHeader:\t{0}", ApplyHeader);
-            Writer?.WriteLine("OutputOther:\t{0}", OutputOther);
-            Writer?.WriteLine("Folder:\t{0}", Folder);
-            // folderFullPath
-            string rootPath = Folder;
-            if (string.IsNullOrEmpty(rootPath)) {
-                rootPath = Environment.CurrentDirectory;
-            }
-            rootPath = Path.GetFullPath(rootPath);
-            Writer?.WriteLine("Root path:\t{0}", rootPath);
-            // enum.
-            DirectoryInfo directoryInfo = new DirectoryInfo(rootPath);
+        /// <param name="rootPath">Root path.</param>
+        /// <param name="directoryInfo">Current directory info.</param>
+        private void Process(string rootPath, DirectoryInfo directoryInfo) {
             ProcessFolder(rootPath, directoryInfo);
-            Writer?.WriteLine();
+            //Writer?.WriteLine();
         }
 
         /// <summary>
