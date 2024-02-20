@@ -8,12 +8,12 @@ namespace UpdateBenchmarkResults.Model {
     /// <summary>
     /// The case of BenchmarkResults.
     /// </summary>
-    internal class BenchmarkCase : ITitleGetter {
+    internal class BenchmarkCase : AbstractBenchmarkNode<BenchmarkCaseRecord>, ITitleGetter {
 
         /// <summary>
         /// The title (标题).
         /// </summary>
-        public string Title { get; set; } = string.Empty;
+        public override string Title { get; set; } = string.Empty;
 
         /// <summary>
         /// The base title (基本标题).
@@ -29,6 +29,11 @@ namespace UpdateBenchmarkResults.Model {
         /// The text lines (文本行).
         /// </summary>
         public List<string> Lines { get; set; } = new List<string>();
+
+        /// <summary>
+        /// The List.
+        /// </summary>
+        public override IList<BenchmarkCaseRecord> List { get; set; } = new List<BenchmarkCaseRecord>();
 
     }
 }

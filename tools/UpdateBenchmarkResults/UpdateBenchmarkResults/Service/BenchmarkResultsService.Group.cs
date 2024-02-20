@@ -69,21 +69,38 @@ namespace UpdateBenchmarkResults.Service {
         private string GroupProcessFileBody(string rootPath, FileInfo fileInfo, string fileShortPath) {
             string message = string.Empty;
             string filePath = fileInfo.FullName;
+            // Check source.
+            string filePathSource = filePath.Replace("_Group.md", ".md", comparisonType);
+            if (!File.Exists(filePathSource)) {
+                return "Source file not found! " + filePathSource;
+            }
             // Load.
-            string[]? lines = null;
-            try {
-                lines = File.ReadAllLines(filePath, encoding);
-            } catch (Exception ex) {
-                Writer?.WriteLine(ex);
-            }
-            if (null == lines) {
-                lines = File.ReadAllLines(filePath);
-            }
-            if (null == lines) {
-                return "Can't read file!";
-            }
+            string[] lines = ReadAllLines(filePath);
+            int srcCount = lines.Length;
             // Parse group.
+            string patternTitle = "###";
+            ArraySegment<string>? groupHeader = null;
+            int i;
+            for (i = 0; i < lines.Length; ++i) {
+                string line = lines[i];
+                if (null == line) continue;
+                if (line.StartsWith(patternTitle, comparisonType)) {
+                    groupHeader = new ArraySegment<string>(lines, 0, i);
+                    break;
+                }
+            }
+            if (null == groupHeader) {
+                return "It's not a group file!";
+            }
             // Parse source.
+            lines = ReadAllLines(filePathSource);
+            BenchmarkFile? benchmarkFile = ParseBenchmarkFile(lines, ref message, true);
+            if (null == benchmarkFile) {
+                if (string.IsNullOrEmpty(message)) {
+                    message = "Not a benchmark results file! " + filePathSource;
+                }
+                return message;
+            }
             return message;
         }
 

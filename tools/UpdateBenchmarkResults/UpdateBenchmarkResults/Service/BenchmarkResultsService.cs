@@ -150,6 +150,17 @@ namespace UpdateBenchmarkResults.Service {
             Run();
         }
 
+        /// <inheritdoc cref="File.ReadAllLines(string)"/>
+        private string[] ReadAllLines(string path) {
+            try {
+                return File.ReadAllLines(path, encoding);
+            } catch (Exception ex) {
+                //Writer?.WriteLine(ex);
+                Debug.WriteLine(ex);
+            }
+            return File.ReadAllLines(path);
+        }
+
         /// <summary>
         /// Clear.
         /// </summary>
@@ -471,18 +482,7 @@ namespace UpdateBenchmarkResults.Service {
             string message = string.Empty;
             string filePath = fileInfo.FullName;
             // Load.
-            string[]? lines = null;
-            try {
-                lines = File.ReadAllLines(filePath, encoding);
-            } catch (Exception ex) {
-                Writer?.WriteLine(ex);
-            }
-            if (null == lines) {
-                lines = File.ReadAllLines(filePath);
-            }
-            if (null == lines) {
-                return "Can't read file!";
-            }
+            string[] lines = ReadAllLines(filePath);
             // Parse.
             BenchmarkFile? benchmarkFile = ParseBenchmarkFile(lines, ref message);
             if (null == benchmarkFile) {
@@ -516,8 +516,9 @@ namespace UpdateBenchmarkResults.Service {
         /// </summary>
         /// <param name="lines">Text lines (文本行).</param>
         /// <param name="message">The message (消息).</param>
+        /// <param name="fillRecord">Is fill record (是否填充记录信息).</param>
         /// <returns>Returns <see cref="BenchmarkFile"/>.</returns>
-        private BenchmarkFile? ParseBenchmarkFile(string[] lines, ref string message) {
+        private BenchmarkFile? ParseBenchmarkFile(string[] lines, ref string message, bool fillRecord = false) {
             const char TitleChar = '#';
             string CodeDelimiter = "```";
             BenchmarkFile? benchmarkFile = null;
@@ -631,6 +632,32 @@ namespace UpdateBenchmarkResults.Service {
                             //    num = 0;
                             //}
                             //benchmarkCpu.GroupCounter[primaryTitle] = num + 1;
+                        }
+                    } else {
+                        if (null != benchmarkCase && fillRecord && line.Length > 0) {
+                            char ch = line[0];
+                            bool isRecord = true;
+                            if (isRecord && '#' == ch) isRecord = false;
+                            if (isRecord && '-' == ch) isRecord = false;
+                            if (isRecord && 0 == line.IndexOf("NAME")) isRecord = false;
+                            if (isRecord && 0 == line.IndexOf("Check-")) isRecord = false;
+                            if (isRecord) {
+                                string[] parts = line.Split("\t");
+                                if (null!= parts && parts.Length>=2) {
+                                    if (parts.Length < 4) {
+                                        string[] bak = parts;
+                                        parts = new string[4];
+                                        Array.Copy(bak, parts, bak.Length);
+                                    }
+                                    // Add record.
+                                    BenchmarkCaseRecord p = new BenchmarkCaseRecord();
+                                    p.Title = parts[0];
+                                    p.us = parts[1];
+                                    p.mops = parts[2];
+                                    p.scale = parts[3];
+                                    benchmarkCase.List.Add(p);
+                                }
+                            }
                         }
                     }
                     if (inCodeHeader) {
