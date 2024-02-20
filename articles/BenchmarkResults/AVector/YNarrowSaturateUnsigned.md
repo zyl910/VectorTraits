@@ -1,4 +1,4 @@
-# Benchmark - YNarrowSaturateUnsigned
+﻿# Benchmark - YNarrowSaturateUnsigned
 ([← Back](README.md))
 
 ## X86
@@ -13,24 +13,27 @@ VectorTraits.Benchmarks.NetFw
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
 Environment.Version:	4.0.30319.42000
 Stopwatch.Frequency:	10000000
 RuntimeEnvironment.GetRuntimeDirectory:	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
-RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.4614.0
+RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9195.0
 RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045 
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-Vector<T>.Assembly.CodeBase:	file:///E:/zylSelf/Code/cs/base/VectorTraits/tests/VectorTraits.Benchmarks.NetFw/bin/Release/System.Numerics.Vectors.DLL
-GetTargetFrameworkDisplayName(TraitsUtil):	.NET Standard 1.1
+Vector<T>.Assembly.CodeBase:	file:///E:/910Soft/MyCode/VectorTraits_test/RunBenchmarks_All/VectorTraits.Benchmarks.NetFw/bin/Release/System.Numerics.Vectors.DLL
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 1.1
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Framework 4.5
-Vectors.Instance:	VectorTraits256Base
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -38,41 +41,35 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	24
-SumNarrow_If	1268.461	206.663
-SumNarrow_IfUnrolling4	1244.356	210.666	1.019371
-SumNarrow_MinMax	1281.443	204.569	0.989869
-SumNarrow_MinMaxUnrolling4	1650.215	158.854	0.768664
-SumNarrow_BitUtil	1092.136	240.029	1.161449
-SumNarrow_BitUtilUnrolling4	699.120	374.963	1.814368
-SumNarrowVectorBase	42.617	6151.122	29.764019
-SumNarrowVectorTraits	16.930	15484.165	74.924701
+SumNarrow_If	1246.583	210.290
+SumNarrow_IfUnrolling4	1219.788	214.910	1.021967
+SumNarrow_MinMax	1261.245	207.845	0.988375
+SumNarrow_MinMaxUnrolling4	1620.898	161.728	0.769069
+SumNarrow_BitMath	1084.412	241.738	1.149547
+SumNarrow_BitMathUnrolling4	681.228	384.811	1.829907
+SumNarrowVectorBase	16.920	15493.391	73.676288
+SumNarrowVectorTraits	16.900	15511.929	73.764444
 
 [YNarrowSaturateUnsignedBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	52652
-SumNarrow_If	1224.320	214.114
-SumNarrow_MinMax	1234.415	212.363	0.991822
-SumNarrow_BitUtil	522.036	502.156	2.345277
-SumNarrowVectorBase	111.953	2341.561	10.936051
-SumNarrowVectorTraits	39.968	6558.827	30.632416
+SumNarrow_If	1220.923	214.710
+SumNarrow_MinMax	1226.086	213.806	0.995790
+SumNarrow_BitMath	511.680	512.320	2.386108
+SumNarrowVectorBase	34.743	7545.259	35.141689
+SumNarrowVectorTraits	34.719	7550.500	35.166095
 
 [YNarrowSaturateUnsignedBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	4294901885
-SumNarrow_If	937.612	279.587
-SumNarrow_MinMax	953.190	275.018	0.983657
-SumNarrow_BitUtil	509.799	514.210	1.839180
-SumNarrowVectorBase	259.556	1009.970	3.612367
-SumNarrowVectorTraits	131.661	1991.053	7.121414
+SumNarrow_If	914.514	286.648
+SumNarrow_MinMax	931.788	281.334	0.981461
+SumNarrow_BitMath	498.701	525.654	1.833793
+SumNarrowVectorBase	115.331	2272.961	7.929440
+SumNarrowVectorTraits	116.106	2257.793	7.876524
 
-VectorTraitsBase: OK.
-VectorTraits128Base: Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimd: Vector128 type is not supported! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimdB64: Vector128 type is not supported! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits256Base: OK.
-VectorTraits256Avx2: Vector256 type is not supported! Requires hardware support Avx, Avx2!
 ```
 
 #### .NET Core 2.1
@@ -82,7 +79,6 @@ VectorTraits.Benchmarks.NetCore
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
@@ -91,15 +87,19 @@ Stopwatch.Frequency:	10000000
 RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.1.30\
 RuntimeInformation.FrameworkDescription:	.NET Core 4.6.30411.01
 RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045 
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/2.1.30/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(TraitsUtil):	.NET Standard 2.0
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 2.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 2.1
-Vectors.Instance:	VectorTraits256Base
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -107,41 +107,35 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	24
-SumNarrow_If	1268.102	206.722
-SumNarrow_IfUnrolling4	1233.758	212.476	1.027837
-SumNarrow_MinMax	1209.793	216.685	1.048198
-SumNarrow_MinMaxUnrolling4	1209.205	216.790	1.048707
-SumNarrow_BitUtil	1090.980	240.283	1.162352
-SumNarrow_BitUtilUnrolling4	687.042	381.554	1.845741
-SumNarrowVectorBase	40.177	6524.759	31.563038
-SumNarrowVectorTraits	19.602	13373.345	64.692565
+SumNarrow_If	1287.951	203.536
+SumNarrow_IfUnrolling4	1225.024	213.991	1.051368
+SumNarrow_MinMax	1218.342	215.164	1.057134
+SumNarrow_MinMaxUnrolling4	1192.816	219.769	1.079757
+SumNarrow_BitMath	1088.213	240.894	1.183547
+SumNarrow_BitMathUnrolling4	682.762	383.947	1.886385
+SumNarrowVectorBase	17.652	14850.977	72.964999
+SumNarrowVectorTraits	17.586	14906.325	73.236932
 
 [YNarrowSaturateUnsignedBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	52652
-SumNarrow_If	1223.210	214.308
-SumNarrow_MinMax	1242.312	211.013	0.984624
-SumNarrow_BitUtil	517.725	506.338	2.362662
-SumNarrowVectorBase	76.001	3449.232	16.094722
-SumNarrowVectorTraits	35.591	7365.355	34.368038
+SumNarrow_If	1214.604	215.827
+SumNarrow_MinMax	1217.566	215.302	0.997567
+SumNarrow_BitMath	508.584	515.439	2.388208
+SumNarrowVectorBase	38.576	6795.446	31.485650
+SumNarrowVectorTraits	38.734	6767.870	31.357880
 
 [YNarrowSaturateUnsignedBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	4294901885
-SumNarrow_If	891.563	294.027
-SumNarrow_MinMax	909.732	288.155	0.980029
-SumNarrow_BitUtil	503.224	520.929	1.771702
-SumNarrowVectorBase	209.150	1253.377	4.262789
-SumNarrowVectorTraits	124.477	2105.960	7.162461
+SumNarrow_If	916.593	285.998
+SumNarrow_MinMax	928.013	282.479	0.987694
+SumNarrow_BitMath	497.797	526.609	1.841299
+SumNarrowVectorBase	137.086	1912.266	6.686283
+SumNarrowVectorTraits	137.041	1912.881	6.688434
 
-VectorTraitsBase: OK.
-VectorTraits128Base: Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimd: Vector128 type is not supported! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimdB64: Vector128 type is not supported! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits256Base: OK.
-VectorTraits256Avx2: Vector256 type is not supported! Requires hardware support Avx, Avx2!
 ```
 
 #### .NET Core 3.1
@@ -151,7 +145,6 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
@@ -160,15 +153,21 @@ Stopwatch.Frequency:	10000000
 RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.32\
 RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
 RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(TraitsUtil):	.NET Core 3.0
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
-Vectors.Instance:	VectorTraits256Avx2
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -176,47 +175,41 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	24
-SumNarrow_If	1301.806	201.369
-SumNarrow_IfUnrolling4	1354.365	193.555	0.961193
-SumNarrow_MinMax	1262.093	207.706	1.031466
-SumNarrow_MinMaxUnrolling4	1234.367	212.371	1.054635
-SumNarrow_BitUtil	765.433	342.478	1.700745
-SumNarrow_BitUtilUnrolling4	632.138	414.694	2.059372
-SumNarrowVectorBase	29.152	8992.295	44.655711
-SumNarrowVectorTraits	9.295	28204.171	140.061833
-SumNarrowVector128Traits	1690.191	155.097	0.770212
-SumNarrowVector256Traits	55.330	4737.812	23.527960
+SumNarrow_If	1304.080	201.018
+SumNarrow_IfUnrolling4	1328.272	197.357	0.981787
+SumNarrow_MinMax	1222.789	214.382	1.066480
+SumNarrow_MinMaxUnrolling4	1235.679	212.146	1.055356
+SumNarrow_BitMath	730.613	358.800	1.784912
+SumNarrow_BitMathUnrolling4	623.148	420.677	2.092730
+SumNarrowVectorBase	19.209	13646.959	67.889141
+SumNarrowVectorTraits	9.194	28513.211	141.843863
+SumNarrowVector128Traits	12.412	21120.153	105.065830
+SumNarrowVector256Traits	9.216	28443.815	141.498644
 
 [YNarrowSaturateUnsignedBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	52652
-SumNarrow_If	1239.847	211.433
-SumNarrow_MinMax	1254.887	208.898	0.988015
-SumNarrow_BitUtil	537.229	487.955	2.307854
-SumNarrowVectorBase	60.651	4322.188	20.442398
-SumNarrowVectorTraits	21.260	12330.212	58.317484
-SumNarrowVector128Traits	2719.755	96.385	0.455867
-SumNarrowVector256Traits	18.574	14113.811	66.753267
+SumNarrow_If	1220.896	214.714
+SumNarrow_MinMax	1231.824	212.810	0.991128
+SumNarrow_BitMath	527.627	496.836	2.313939
+SumNarrowVectorBase	38.819	6752.904	31.450622
+SumNarrowVectorTraits	18.309	14317.622	66.682141
+SumNarrowVector128Traits	24.527	10688.056	49.777992
+SumNarrowVector256Traits	19.185	13664.211	63.638981
 
 [YNarrowSaturateUnsignedBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	4294901885
-SumNarrow_If	859.074	305.147
-SumNarrow_MinMax	932.978	280.976	0.920787
-SumNarrow_BitUtil	522.760	501.462	1.643343
-SumNarrowVectorBase	221.499	1183.497	3.878446
-SumNarrowVectorTraits	168.458	1556.141	5.099638
-SumNarrowVector128Traits	3140.210	83.480	0.273572
-SumNarrowVector256Traits	94.520	2773.424	9.088806
+SumNarrow_If	810.885	323.281
+SumNarrow_MinMax	880.350	297.773	0.921094
+SumNarrow_BitMath	516.515	507.524	1.569915
+SumNarrowVectorBase	122.617	2137.906	6.613144
+SumNarrowVectorTraits	92.800	2824.818	8.737957
+SumNarrowVector128Traits	213.330	1228.817	3.801077
+SumNarrowVector256Traits	92.888	2822.149	8.729700
 
-VectorTraitsBase: OK.
-VectorTraits128Base: Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits256Base: OK.
-VectorTraits256Avx2: OK.
 ```
 
 #### .NET 5.0
@@ -226,7 +219,6 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
@@ -235,15 +227,22 @@ Stopwatch.Frequency:	10000000
 RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\5.0.17\
 RuntimeInformation.FrameworkDescription:	.NET 5.0.17
 RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
+RuntimeInformation.RuntimeIdentifier:	win10-x64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(TraitsUtil):	.NET 5.0
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
-Vectors.Instance:	VectorTraits256Avx2
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -251,47 +250,41 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	24
-SumNarrow_If	1363.933	192.197
-SumNarrow_IfUnrolling4	1463.125	179.167	0.932205
-SumNarrow_MinMax	1282.787	204.355	1.063257
-SumNarrow_MinMaxUnrolling4	1280.852	204.664	1.064863
-SumNarrow_BitUtil	1068.816	245.266	1.276116
-SumNarrow_BitUtilUnrolling4	1025.248	255.688	1.330344
-SumNarrowVectorBase	30.845	8498.872	44.219544
-SumNarrowVectorTraits	10.643	24629.763	128.148407
-SumNarrowVector128Traits	1775.550	147.641	0.768175
-SumNarrowVector256Traits	56.872	4609.348	23.982390
+SumNarrow_If	1256.799	208.581
+SumNarrow_IfUnrolling4	1329.672	197.149	0.945195
+SumNarrow_MinMax	1215.412	215.683	1.034052
+SumNarrow_MinMaxUnrolling4	1210.498	216.559	1.038250
+SumNarrow_BitMath	1049.040	249.889	1.198047
+SumNarrow_BitMathUnrolling4	968.818	270.581	1.297250
+SumNarrowVectorBase	19.408	13506.832	64.755907
+SumNarrowVectorTraits	10.380	25254.194	121.076373
+SumNarrowVector128Traits	13.491	19431.592	93.161027
+SumNarrowVector256Traits	9.279	28252.470	135.451029
 
 [YNarrowSaturateUnsignedBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	52652
-SumNarrow_If	1266.735	206.945
-SumNarrow_MinMax	1264.018	207.389	1.002150
-SumNarrow_BitUtil	910.626	287.872	1.391060
-SumNarrowVectorBase	67.595	3878.161	18.740095
-SumNarrowVectorTraits	20.240	12951.816	62.585923
-SumNarrowVector128Traits	2830.829	92.603	0.447479
-SumNarrowVector256Traits	20.435	12828.134	61.988263
+SumNarrow_If	1220.955	214.704
+SumNarrow_MinMax	1235.110	212.243	0.988539
+SumNarrow_BitMath	895.245	292.818	1.363821
+SumNarrowVectorBase	35.955	7290.861	33.957709
+SumNarrowVectorTraits	18.296	14327.770	66.732620
+SumNarrowVector128Traits	26.623	9846.518	45.860865
+SumNarrowVector256Traits	20.599	12726.347	59.273877
 
 [YNarrowSaturateUnsignedBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	4294901885
-SumNarrow_If	865.902	302.741
-SumNarrow_MinMax	932.490	281.122	0.928591
-SumNarrow_BitUtil	721.820	363.171	1.199609
-SumNarrowVectorBase	204.274	1283.297	4.238928
-SumNarrowVectorTraits	169.452	1547.012	5.110020
-SumNarrowVector128Traits	3261.578	80.373	0.265486
-SumNarrowVector256Traits	106.973	2450.573	8.094622
+SumNarrow_If	848.198	309.060
+SumNarrow_MinMax	924.323	283.607	0.917643
+SumNarrow_BitMath	705.034	371.817	1.203060
+SumNarrowVectorBase	122.189	2145.397	6.941690
+SumNarrowVectorTraits	92.578	2831.598	9.161976
+SumNarrowVector128Traits	140.284	1868.665	6.046290
+SumNarrowVector256Traits	91.749	2857.186	9.244768
 
-VectorTraitsBase: OK.
-VectorTraits128Base: Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits256Base: OK.
-VectorTraits256Avx2: OK.
 [Vectors.Instance: VectorTraits256Avx2]
 ```
 
@@ -302,24 +295,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
-Environment.Version:	6.0.14
+Environment.Version:	6.0.24
 Stopwatch.Frequency:	10000000
-RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.14\
-RuntimeInformation.FrameworkDescription:	.NET 6.0.14
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.24\
+RuntimeInformation.FrameworkDescription:	.NET 6.0.24
 RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
+RuntimeInformation.RuntimeIdentifier:	win10-x64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.14/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(TraitsUtil):	.NET 6.0
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.24/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
-Vectors.Instance:	VectorTraits256Avx2
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -327,47 +326,41 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	24
-SumNarrow_If	1353.521	193.676
-SumNarrow_IfUnrolling4	1421.268	184.444	0.952333
-SumNarrow_MinMax	1388.724	188.766	0.974650
-SumNarrow_MinMaxUnrolling4	1413.400	185.471	0.957635
-SumNarrow_BitUtil	879.101	298.196	1.539664
-SumNarrow_BitUtilUnrolling4	826.377	317.221	1.637896
-SumNarrowVectorBase	30.071	8717.563	45.011143
-SumNarrowVectorTraits	11.541	22714.395	117.280583
-SumNarrowVector128Traits	1844.997	142.084	0.733617
-SumNarrowVector256Traits	55.545	4719.495	24.368035
+SumNarrow_If	1299.261	201.764
+SumNarrow_IfUnrolling4	1281.280	204.595	1.014033
+SumNarrow_MinMax	1281.483	204.563	1.013873
+SumNarrow_MinMaxUnrolling4	1363.390	192.274	0.952963
+SumNarrow_BitMath	855.263	306.507	1.519137
+SumNarrow_BitMathUnrolling4	808.367	324.288	1.607266
+SumNarrowVectorBase	19.225	13635.746	67.582680
+SumNarrowVectorTraits	9.220	28430.918	140.911806
+SumNarrowVector128Traits	12.434	21083.352	104.495157
+SumNarrowVector256Traits	9.218	28438.840	140.951072
 
 [YNarrowSaturateUnsignedBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	52652
-SumNarrow_If	1260.156	208.025
-SumNarrow_MinMax	1256.160	208.687	1.003181
-SumNarrow_BitUtil	907.943	288.723	1.387924
-SumNarrowVectorBase	70.302	3728.818	17.924853
-SumNarrowVectorTraits	19.152	13687.686	65.798262
-SumNarrowVector128Traits	2847.965	92.046	0.442476
-SumNarrowVector256Traits	19.101	13724.394	65.974722
+SumNarrow_If	1233.054	212.597
+SumNarrow_MinMax	1215.441	215.678	1.014491
+SumNarrow_BitMath	894.924	292.923	1.377831
+SumNarrowVectorBase	34.675	7559.980	35.560081
+SumNarrowVectorTraits	18.302	14323.482	67.373748
+SumNarrowVector128Traits	24.731	10599.796	49.858544
+SumNarrowVector256Traits	18.309	14318.085	67.348361
 
 [YNarrowSaturateUnsignedBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	4294901885
-SumNarrow_If	860.582	304.612
-SumNarrow_MinMax	816.767	320.953	1.053645
-SumNarrow_BitUtil	736.038	356.156	1.169210
-SumNarrowVectorBase	200.977	1304.347	4.281990
-SumNarrowVectorTraits	167.760	1562.610	5.129832
-SumNarrowVector128Traits	3753.932	69.832	0.229248
-SumNarrowVector256Traits	109.827	2386.882	7.835803
+SumNarrow_If	818.600	320.234
+SumNarrow_MinMax	804.467	325.860	1.017568
+SumNarrow_BitMath	705.676	371.479	1.160023
+SumNarrowVectorBase	121.246	2162.083	6.751563
+SumNarrowVectorTraits	92.144	2844.929	8.883894
+SumNarrowVector128Traits	140.676	1863.457	5.819040
+SumNarrowVector256Traits	92.371	2837.939	8.862068
 
-VectorTraitsBase: OK.
-VectorTraits128Base: Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits256Base: OK.
-VectorTraits256Avx2: OK.
 ```
 
 #### .NET 7.0
@@ -377,24 +370,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
-Environment.Version:	7.0.3
+Environment.Version:	7.0.13
 Stopwatch.Frequency:	10000000
-RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.3\
-RuntimeInformation.FrameworkDescription:	.NET 7.0.3
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.13\
+RuntimeInformation.FrameworkDescription:	.NET 7.0.13
 RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
+RuntimeInformation.RuntimeIdentifier:	win10-x64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.3/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(TraitsUtil):	.NET 7.0
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.13/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
-Vectors.Instance:	VectorTraits256Avx2
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -402,47 +401,41 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	24
-SumNarrow_If	1209.999	216.648
-SumNarrow_IfUnrolling4	1275.870	205.463	0.948371
-SumNarrow_MinMax	1188.064	220.648	1.018463
-SumNarrow_MinMaxUnrolling4	1259.259	208.173	0.960882
-SumNarrow_BitUtil	657.060	398.965	1.841536
-SumNarrow_BitUtilUnrolling4	675.469	388.092	1.791345
-SumNarrowVectorBase	14.702	17830.561	82.301933
-SumNarrowVectorTraits	9.251	28337.439	130.799364
-SumNarrowVector128Traits	21.811	12018.629	55.475339
-SumNarrowVector256Traits	9.240	28372.051	130.959126
+SumNarrow_If	1189.598	220.364
+SumNarrow_IfUnrolling4	1263.791	207.427	0.941293
+SumNarrow_MinMax	1188.973	220.479	1.000526
+SumNarrow_MinMaxUnrolling4	1253.008	209.212	0.949394
+SumNarrow_BitMath	653.151	401.353	1.821320
+SumNarrow_BitMathUnrolling4	673.158	389.424	1.767191
+SumNarrowVectorBase	15.622	16780.535	76.149336
+SumNarrowVectorTraits	9.173	28577.130	129.681768
+SumNarrowVector128Traits	12.293	21324.347	96.768957
+SumNarrowVector256Traits	9.260	28307.930	128.460150
 
 [YNarrowSaturateUnsignedBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	52652
-SumNarrow_If	1187.968	220.666
-SumNarrow_MinMax	1249.180	209.853	0.950999
-SumNarrow_BitUtil	519.004	505.090	2.288937
-SumNarrowVectorBase	28.778	9109.115	41.280127
-SumNarrowVectorTraits	18.743	13986.604	63.383636
-SumNarrowVector128Traits	78.582	3335.948	15.117645
-SumNarrowVector256Traits	20.398	12851.662	58.240375
+SumNarrow_If	1175.542	222.998
+SumNarrow_MinMax	1260.100	208.034	0.932896
+SumNarrow_BitMath	518.986	505.108	2.265076
+SumNarrowVectorBase	27.119	9666.440	43.347569
+SumNarrowVectorTraits	18.151	14442.278	64.764034
+SumNarrowVector128Traits	24.383	10750.941	48.210839
+SumNarrowVector256Traits	18.332	14299.886	64.125500
 
 [YNarrowSaturateUnsignedBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	4294901885
-SumNarrow_If	969.963	270.262
-SumNarrow_MinMax	853.139	307.270	1.136935
-SumNarrow_BitUtil	574.291	456.465	1.688974
-SumNarrowVectorBase	107.384	2441.193	9.032697
-SumNarrowVectorTraits	107.197	2445.448	9.048440
-SumNarrowVector128Traits	158.729	1651.516	6.110801
-SumNarrowVector256Traits	106.706	2456.697	9.090063
+SumNarrow_If	796.042	329.309
+SumNarrow_MinMax	797.389	328.753	0.998310
+SumNarrow_BitMath	572.111	458.205	1.391411
+SumNarrowVectorBase	95.012	2759.052	8.378301
+SumNarrowVectorTraits	102.058	2568.578	7.799897
+SumNarrowVector128Traits	194.470	1347.991	4.093389
+SumNarrowVector256Traits	100.936	2597.132	7.886604
 
-VectorTraitsBase: OK.
-VectorTraits128Base: Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits256Base: OK.
-VectorTraits256Avx2: OK.
 ```
 
 ## Arm

@@ -1,4 +1,4 @@
-# Benchmark - YShuffleG2
+﻿# Benchmark - YShuffleG2
 ([← Back](README.md))
 
 See [Group](YShuffleG2_Group.md)
@@ -14,14 +14,13 @@ VectorTraits.Benchmarks.NetFw
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
 Environment.Version:	4.0.30319.42000
 Stopwatch.Frequency:	10000000
 RuntimeEnvironment.GetRuntimeDirectory:	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
-RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9167.0
+RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9195.0
 RuntimeInformation.OSArchitecture:	X64
 RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045 
 IntPtr.Size:	8
@@ -29,11 +28,13 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
-Vector<T>.Assembly.CodeBase:	file:///E:/zylSelf/Code/cs/base/VectorTraits/tests/VectorTraits.Benchmarks.NetFw/bin/Release/System.Numerics.Vectors.DLL
+Vector<T>.Assembly.CodeBase:	file:///E:/910Soft/MyCode/VectorTraits_test/RunBenchmarks_All/VectorTraits.Benchmarks.NetFw/bin/Release/System.Numerics.Vectors.DLL
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 1.1
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Framework 4.5
-Vectors.Instance:	VectorTraits256Base
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -41,44 +42,33 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	28917
-SumScalar	434.328	603.563
-SumBase	432.100	606.674	1.005155
-SumTraits	438.687	597.564	0.990062
-Sum_ConstTraits	431.139	608.027	1.007397
+SumScalar	427.146	613.710
+SumBase	431.536	607.467	0.989827
+SumTraits	431.881	606.983	0.989038
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-1234767990
-SumScalar	527.060	497.370
-SumBase	528.789	495.744	0.996730
-SumTraits	528.244	496.255	0.997758
-Sum_ConstTraits	526.551	497.851	1.000967
+SumScalar	524.372	499.920
+SumBase	536.235	488.861	0.977878
+SumTraits	535.457	489.571	0.979298
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-5475020453166212109
-SumScalar	531.217	493.478
-SumBase	529.326	495.242	1.003574
-SumTraits	528.985	495.560	1.004219
-Sum_ConstTraits	499.466	524.849	1.063571
+SumScalar	522.420	501.788
+SumBase	547.174	479.088	0.954761
+SumTraits	549.163	477.352	0.951302
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-47
-SumScalar	381.422	687.281
-SumBase	382.460	685.415	0.997285
-SumTraits	398.284	658.184	0.957662
-Sum_ConstTraits	380.630	688.711	1.002080
-
-VectorTraitsBase: OK.
-VectorTraits128Base: Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimd: Vector128 type is not supported! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimdB64: Vector128 type is not supported! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits256Base: OK.
-VectorTraits256Avx2: Vector256 type is not supported! Requires hardware support Avx, Avx2!
+SumScalar	377.958	693.580
+SumBase	382.300	685.702	0.988641
+SumTraits	380.680	688.620	0.992848
 
 ``` 
 
@@ -88,7 +78,6 @@ VectorTraits.Benchmarks.NetCore
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
@@ -103,11 +92,13 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/2.1.30/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 2.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 2.1
-Vectors.Instance:	VectorTraits256Base
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -115,44 +106,33 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	28917
-SumScalar	428.650	611.557
-SumBase	430.392	609.081	0.995951
-SumTraits	430.114	609.475	0.996595
-Sum_ConstTraits	429.310	610.617	0.998462
+SumScalar	426.192	615.084
+SumBase	426.291	614.942	0.999769
+SumTraits	426.876	614.098	0.998397
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-1234767990
-SumScalar	527.337	497.109
-SumBase	534.264	490.663	0.987034
-SumTraits	533.460	491.403	0.988523
-Sum_ConstTraits	536.596	488.532	0.982747
+SumScalar	524.053	500.224
+SumBase	525.141	499.188	0.997928
+SumTraits	524.561	499.740	0.999031
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-5475020453166212109
-SumScalar	536.988	488.174
-SumBase	538.795	486.538	0.996647
-SumTraits	541.013	484.543	0.992562
-Sum_ConstTraits	503.076	521.083	1.067411
+SumScalar	525.398	498.944
+SumBase	526.146	498.234	0.998578
+SumTraits	525.781	498.580	0.999272
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-47
-SumScalar	382.755	684.887
-SumBase	383.261	683.982	0.998679
-SumTraits	382.588	685.187	1.000438
-Sum_ConstTraits	392.108	668.551	0.976148
-
-VectorTraitsBase: OK.
-VectorTraits128Base: Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimd: Vector128 type is not supported! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimdB64: Vector128 type is not supported! Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits256Base: OK.
-VectorTraits256Avx2: Vector256 type is not supported! Requires hardware support Avx, Avx2!
+SumScalar	378.323	692.910
+SumBase	378.828	691.988	0.998669
+SumTraits	378.044	693.421	1.000738
 
 ``` 
 
@@ -162,7 +142,6 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
@@ -177,11 +156,15 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
-Vectors.Instance:	VectorTraits256Avx2
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -189,64 +172,42 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	28917
-SumScalar	435.265	602.263
-SumBase	431.301	607.799	1.009191
-SumTraits	21.473	12207.818	20.269897
+SumScalar	426.442	614.723
+SumBase	426.058	615.277	1.000901
+SumTraits	21.733	12062.124	19.622042
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	21.440	12227.133	20.301967
-Sum_ConstTraits	21.454	12219.112	20.288648
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	22.046	11890.565	19.743129
+Sum256Traits	22.040	11894.025	19.348587
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-1234767990
-SumScalar	540.468	485.032
-SumBase	528.176	496.319	1.023272
-SumTraits	44.157	5936.641	12.239700
+SumScalar	523.982	500.292
+SumBase	524.343	499.948	0.999312
+SumTraits	42.383	6185.124	12.363038
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_AvxByte	44.137	5939.308	12.245198
-Sum256Traits	44.209	5929.641	12.225268
-Sum_ConstTraits	44.595	5878.300	12.119417
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256_AvxImm	92.564	2832.045	5.838888
-Sum_Const256_AvxImmByte	118.556	2211.134	4.558743
-Sum_Const256_AvxImmByteG4	21.964	11934.933	24.606506
-Sum_Const256Traits	46.674	5616.497	11.579653
+Sum256_AvxByte	42.484	6170.363	12.333534
+Sum256Traits	42.421	6179.582	12.351961
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-5475020453166212109
-SumScalar	554.621	472.655
-SumBase	529.481	495.096	1.047479
-SumTraits	88.679	2956.109	6.254271
+SumScalar	524.686	499.621
+SumBase	523.011	501.221	1.003202
+SumTraits	85.518	3065.379	6.135411
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	89.880	2916.597	6.170674
-Sum_ConstTraits	93.149	2814.256	5.954150
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	91.498	2865.033	6.061580
+Sum256Traits	85.690	3059.214	6.123071
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-47
-SumScalar	383.389	683.754
-SumBase	381.181	687.714	1.005792
-SumTraits	10.463	25055.009	36.643310
+SumScalar	378.475	692.633
+SumBase	377.942	693.610	1.001410
+SumTraits	9.946	26356.467	38.052569
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	10.372	25274.170	36.963835
-Sum_ConstTraits	10.557	24830.939	36.315603
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	10.274	25514.129	37.314780
-
-VectorTraitsBase: OK.
-VectorTraits128Base: Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits256Base: OK.
-VectorTraits256Avx2: OK.
+Sum256Traits	9.942	26368.652	38.070161
 
 ``` 
 
@@ -256,7 +217,6 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
@@ -272,11 +232,15 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
 Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
-Vectors.Instance:	VectorTraits256Avx2
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -284,68 +248,46 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	28917
-SumScalar	429.224	610.740
-SumBase	429.910	609.765	0.998403
-SumTraits	21.570	12153.266	19.899246
+SumScalar	427.652	612.985
+SumBase	433.750	604.367	0.985941
+SumTraits	21.227	12349.700	20.146826
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	21.559	12159.311	19.909144
-Sum_ConstTraits	21.714	12072.395	19.766832
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	21.696	12082.761	19.783805
+Sum256Traits	21.264	12327.884	20.111235
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-1234767990
-SumScalar	527.777	496.694
-SumBase	524.376	499.916	1.006487
-SumTraits	43.735	5993.975	12.067736
+SumScalar	524.185	500.098
+SumBase	533.292	491.558	0.982923
+SumTraits	43.571	6016.417	12.030477
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_AvxByte	43.662	6003.943	12.087805
-Sum256Traits	44.164	5935.686	11.950383
-Sum_ConstTraits	44.166	5935.378	11.949762
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256_AvxImm	116.664	2247.003	4.523916
-Sum_Const256_AvxImmByte	105.998	2473.094	4.979108
-Sum_Const256_AvxImmByteG4	22.428	11688.258	23.532099
-Sum_Const256Traits	46.458	5642.545	11.360198
+Sum256_AvxByte	43.533	6021.792	12.041225
+Sum256Traits	43.581	6015.130	12.027902
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-5475020453166212109
-SumScalar	513.438	510.566
-SumBase	512.916	511.085	1.001016
-SumTraits	92.896	2821.899	5.526997
+SumScalar	502.400	521.783
+SumBase	521.354	502.814	0.963645
+SumTraits	85.368	3070.744	5.885094
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	97.224	2696.281	5.280959
-Sum_ConstTraits	94.799	2765.271	5.416084
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	95.518	2744.432	5.375270
+Sum256Traits	85.367	3070.792	5.885185
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-47
-SumScalar	385.939	679.237
-SumBase	388.105	675.446	0.994418
-SumTraits	10.881	24092.316	35.469682
+SumScalar	378.792	692.053
+SumBase	381.841	686.527	0.992014
+SumTraits	9.979	26269.727	37.959116
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	10.772	24336.080	35.828561
-Sum_ConstTraits	10.869	24118.642	35.508439
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	11.143	23525.222	34.634784
-
-VectorTraitsBase: OK.
-VectorTraits128Base: Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits256Base: OK.
-VectorTraits256Avx2: OK.
+Sum256Traits	9.964	26309.214	38.016173
 
 ``` 
 
@@ -355,14 +297,13 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
-Environment.Version:	6.0.14
+Environment.Version:	6.0.24
 Stopwatch.Frequency:	10000000
-RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.14\
-RuntimeInformation.FrameworkDescription:	.NET 6.0.14
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.24\
+RuntimeInformation.FrameworkDescription:	.NET 6.0.24
 RuntimeInformation.OSArchitecture:	X64
 RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
 RuntimeInformation.RuntimeIdentifier:	win10-x64
@@ -371,11 +312,15 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
-Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.14/System.Private.CoreLib.dll
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.24/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
-Vectors.Instance:	VectorTraits256Avx2
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -383,68 +328,46 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	28917
-SumScalar	437.003	599.868
-SumBase	438.883	597.298	0.995717
-SumTraits	14.146	18531.389	30.892456
+SumScalar	427.064	613.828
+SumBase	566.309	462.899	0.754118
+SumTraits	12.595	20813.621	33.907880
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	15.656	16744.514	27.913674
-Sum_ConstTraits	15.702	16694.599	27.830465
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	15.738	16656.231	27.766503
+Sum256Traits	13.572	19315.244	31.466845
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-1234767990
-SumScalar	528.517	495.999
-SumBase	538.090	487.175	0.982210
-SumTraits	30.134	8699.256	17.538864
+SumScalar	524.020	500.256
+SumBase	813.286	322.327	0.644324
+SumTraits	27.452	9549.107	19.088450
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_AvxByte	30.550	8580.903	17.300250
-Sum256Traits	32.014	8188.328	16.508765
-Sum_ConstTraits	31.661	8279.822	16.693229
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256_AvxImm	98.180	2670.028	5.383134
-Sum_Const256_AvxImmByte	109.491	2394.198	4.827024
-Sum_Const256_AvxImmByteG4	24.254	10808.298	21.790975
-Sum_Const256Traits	31.504	8320.925	16.776098
+Sum256_AvxByte	29.452	8900.803	17.792505
+Sum256Traits	30.499	8595.103	17.181417
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-5475020453166212109
-SumScalar	506.624	517.433
-SumBase	526.641	497.766	0.961991
-SumTraits	58.657	4469.086	8.637031
+SumScalar	503.059	521.100
+SumBase	1101.816	237.920	0.456572
+SumTraits	50.403	5200.986	9.980786
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	56.460	4642.996	8.973133
-Sum_ConstTraits	63.079	4155.818	8.031603
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	65.207	4020.205	7.769515
+Sum256Traits	49.613	5283.821	10.139748
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-47
-SumScalar	381.342	687.424
-SumBase	380.738	688.516	1.001588
-SumTraits	6.530	40141.594	58.394223
+SumScalar	379.123	691.449
+SumBase	448.228	584.845	0.845825
+SumTraits	5.846	44842.162	64.852440
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	6.784	38642.844	56.213982
-Sum_ConstTraits	7.189	36462.187	53.041766
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	7.032	37278.811	54.229714
-
-VectorTraitsBase: OK.
-VectorTraits128Base: Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits256Base: OK.
-VectorTraits256Avx2: OK.
+Sum256Traits	6.480	40455.310	58.508008
 
 ``` 
 
@@ -454,14 +377,13 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
 Environment.ProcessorCount:	8
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
-Environment.Version:	7.0.3
+Environment.Version:	7.0.13
 Stopwatch.Frequency:	10000000
-RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.3\
-RuntimeInformation.FrameworkDescription:	.NET 7.0.3
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.13\
+RuntimeInformation.FrameworkDescription:	.NET 7.0.13
 RuntimeInformation.OSArchitecture:	X64
 RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
 RuntimeInformation.RuntimeIdentifier:	win10-x64
@@ -470,11 +392,15 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
-Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.3/System.Private.CoreLib.dll
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.13/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
-Vectors.Instance:	VectorTraits256Avx2
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
 Vectors.BaseInstance:	VectorTraits256Base
 
 
@@ -482,68 +408,46 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	28917
-SumScalar	351.301	746.208
-SumBase	348.994	751.141	1.006610
-SumTraits	12.842	20412.731	27.355282
+SumScalar	346.753	755.996
+SumBase	347.276	754.857	0.998494
+SumTraits	13.672	19174.068	25.362670
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	15.057	17409.773	23.330992
-Sum_ConstTraits	15.109	17350.418	23.251449
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	15.130	17326.438	23.219313
+Sum256Traits	16.196	16185.459	21.409461
 
 [YShuffleG2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-1234767990
-SumScalar	450.567	581.809
-SumBase	458.882	571.266	0.981880
-SumTraits	28.984	9044.568	15.545606
+SumScalar	446.989	586.467
+SumBase	447.020	586.425	0.999929
+SumTraits	26.951	9726.706	16.585266
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256_AvxByte	33.069	7927.193	13.625086
-Sum256Traits	31.477	8327.988	14.313964
-Sum_ConstTraits	32.094	8168.093	14.039140
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256_AvxImm	105.167	2492.633	4.284284
-Sum_Const256_AvxImmByte	97.735	2682.200	4.610107
-Sum_Const256_AvxImmByteG4	23.273	11263.914	19.360170
-Sum_Const256Traits	31.393	8350.406	14.352495
+Sum256_AvxByte	26.304	9965.984	16.993265
+Sum256Traits	28.098	9329.745	15.908398
 
 [YShuffleG2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-5475020453166212109
-SumScalar	499.618	524.689
-SumBase	500.759	523.493	0.997721
-SumTraits	59.303	4420.383	8.424771
+SumScalar	499.000	525.338
+SumBase	498.637	525.721	1.000729
+SumTraits	51.738	5066.715	9.644668
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	61.562	4258.220	8.115705
-Sum_ConstTraits	63.392	4135.294	7.881421
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	64.421	4069.263	7.755573
+Sum256Traits	53.072	4939.400	9.402320
 
 [YShuffleG2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumScalar	-47
-SumScalar	306.846	854.318
-SumBase	304.089	862.064	1.009067
-SumTraits	5.912	44339.044	51.899908
+SumScalar	299.881	874.159
+SumBase	312.870	837.868	0.958484
+SumTraits	5.753	45567.330	52.127023
 Sum128_AdvSimd	Run fail! Requires hardware support AdvSimd!
 Sum128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum256Traits	7.173	36544.143	42.775790
-Sum_ConstTraits	7.052	37174.087	43.513155
-Sum_Const128Traits	Run fail! Vector byte size mismatch(32!=16) !
-Sum_Const256Traits	7.143	36700.467	42.958772
-
-VectorTraitsBase: OK.
-VectorTraits128Base: Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimd: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits128AdvSimdB64: Requires hardware support AdvSimd! Vector byte size mismatch(32!=16) !
-VectorTraits256Base: OK.
-VectorTraits256Avx2: OK.
+Sum256Traits	6.513	40250.872	46.045229
 
 ``` 
 

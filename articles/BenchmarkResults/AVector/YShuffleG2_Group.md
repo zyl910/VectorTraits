@@ -1,51 +1,36 @@
-# Benchmark group - YShuffleG2
+﻿# Benchmark group - YShuffleG2
 ([← Back](YShuffleG2.md))
 
 Unit of data: Million operations per second. The larger the number, the better the performance.
 
-### x86 - lntel Core i5-8250U
-| Type                      | Method                    | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
-| :------------------------ | :------------------------ | -------------: | ------------: | ------------: | --------: | --------: | --------: |
-| YShuffleG2Benchmark_Int16 | SumScalar                 |        603.563 |       611.557 |       602.263 |   610.740 |   599.868 |   746.208 |
-| YShuffleG2Benchmark_Int16 | SumBase                   |        606.674 |       609.081 |       607.799 |   609.765 |   597.298 |   751.141 |
-| YShuffleG2Benchmark_Int16 | SumTraits                 |        597.564 |       609.475 |     12207.818 | 12153.266 | 18531.389 | 20412.731 |
-| YShuffleG2Benchmark_Int16 | Sum128_AdvSimd            |                |               |               |           |           |           |
-| YShuffleG2Benchmark_Int16 | Sum128Traits              |                |               |               |           |           |           |
-| YShuffleG2Benchmark_Int16 | Sum256Traits              |                |               |     12227.133 | 12159.311 | 16744.514 | 17409.773 |
-| YShuffleG2Benchmark_Int16 | Sum_ConstTraits           |        608.027 |       610.617 |     12219.112 | 12072.395 | 16694.599 | 17350.418 |
-| YShuffleG2Benchmark_Int16 | Sum_Const128Traits        |                |               |               |           |           |           |
-| YShuffleG2Benchmark_Int16 | Sum_Const256Traits        |                |               |     11890.565 | 12082.761 | 16656.231 | 17326.438 |
-| YShuffleG2Benchmark_Int32 | SumScalar                 |        497.370 |       497.109 |       485.032 |   496.694 |   495.999 |   581.809 |
-| YShuffleG2Benchmark_Int32 | SumBase                   |        495.744 |       490.663 |       496.319 |   499.916 |   487.175 |   571.266 |
-| YShuffleG2Benchmark_Int32 | SumTraits                 |        496.255 |       491.403 |      5936.641 |  5993.975 |  8699.256 |  9044.568 |
-| YShuffleG2Benchmark_Int32 | Sum128_AdvSimd            |                |               |               |           |           |           |
-| YShuffleG2Benchmark_Int32 | Sum128Traits              |                |               |               |           |           |           |
-| YShuffleG2Benchmark_Int32 | Sum256_AvxByte            |                |               |      5939.308 |  6003.943 |  8580.903 |  7927.193 |
-| YShuffleG2Benchmark_Int32 | Sum256Traits              |                |               |      5929.641 |  5935.686 |  8188.328 |  8327.988 |
-| YShuffleG2Benchmark_Int32 | Sum_ConstTraits           |        497.851 |       488.532 |      5878.300 |  5935.378 |  8279.822 |  8168.093 |
-| YShuffleG2Benchmark_Int32 | Sum_Const128Traits        |                |               |               |           |           |           |
-| YShuffleG2Benchmark_Int32 | Sum_Const256_AvxImm       |                |               |      2832.045 |  2247.003 |  2670.028 |  2492.633 |
-| YShuffleG2Benchmark_Int32 | Sum_Const256_AvxImmByte   |                |               |      2211.134 |  2473.094 |  2394.198 |  2682.200 |
-| YShuffleG2Benchmark_Int32 | Sum_Const256_AvxImmByteG4 |                |               |     11934.933 | 11688.258 | 10808.298 | 11263.914 |
-| YShuffleG2Benchmark_Int32 | Sum_Const256Traits        |                |               |      5616.497 |  5642.545 |  8320.925 |  8350.406 |
-| YShuffleG2Benchmark_Int64 | SumScalar                 |        493.478 |       488.174 |       472.655 |   510.566 |   517.433 |   524.689 |
-| YShuffleG2Benchmark_Int64 | SumBase                   |        495.242 |       486.538 |       495.096 |   511.085 |   497.766 |   523.493 |
-| YShuffleG2Benchmark_Int64 | SumTraits                 |        495.560 |       484.543 |      2956.109 |  2821.899 |  4469.086 |  4420.383 |
-| YShuffleG2Benchmark_Int64 | Sum128_AdvSimd            |                |               |               |           |           |           |
-| YShuffleG2Benchmark_Int64 | Sum128Traits              |                |               |               |           |           |           |
-| YShuffleG2Benchmark_Int64 | Sum256Traits              |                |               |      2916.597 |  2696.281 |  4642.996 |  4258.220 |
-| YShuffleG2Benchmark_Int64 | Sum_ConstTraits           |        524.849 |       521.083 |      2814.256 |  2765.271 |  4155.818 |  4135.294 |
-| YShuffleG2Benchmark_Int64 | Sum_Const128Traits        |                |               |               |           |           |           |
-| YShuffleG2Benchmark_Int64 | Sum_Const256Traits        |                |               |      2865.033 |  2744.432 |  4020.205 |  4069.263 |
-| YShuffleG2Benchmark_SByte | SumScalar                 |        687.281 |       684.887 |       683.754 |   679.237 |   687.424 |   854.318 |
-| YShuffleG2Benchmark_SByte | SumBase                   |        685.415 |       683.982 |       687.714 |   675.446 |   688.516 |   862.064 |
-| YShuffleG2Benchmark_SByte | SumTraits                 |        658.184 |       685.187 |     25055.009 | 24092.316 | 40141.594 | 44339.044 |
-| YShuffleG2Benchmark_SByte | Sum128_AdvSimd            |                |               |               |           |           |           |
-| YShuffleG2Benchmark_SByte | Sum128Traits              |                |               |               |           |           |           |
-| YShuffleG2Benchmark_SByte | Sum256Traits              |                |               |     25274.170 | 24336.080 | 38642.844 | 36544.143 |
-| YShuffleG2Benchmark_SByte | Sum_ConstTraits           |        688.711 |       668.551 |     24830.939 | 24118.642 | 36462.187 | 37174.087 |
-| YShuffleG2Benchmark_SByte | Sum_Const128Traits        |                |               |               |           |           |           |
-| YShuffleG2Benchmark_SByte | Sum_Const256Traits        |                |               |     25514.129 | 23525.222 | 37278.811 | 36700.467 |
+### X86 - Intel Core i5-8250U
+| Type                      | Method         | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| :------------------------ | :------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: |
+| YShuffleG2Benchmark_Int16 | SumScalar      |        613.710 |       615.084 |       614.723 |   612.985 |   613.828 |   755.996 |
+| YShuffleG2Benchmark_Int16 | SumBase        |        607.467 |       614.942 |       615.277 |   604.367 |   462.899 |   754.857 |
+| YShuffleG2Benchmark_Int16 | SumTraits      |        606.983 |       614.098 |     12062.124 | 12349.700 | 20813.621 | 19174.068 |
+| YShuffleG2Benchmark_Int16 | Sum128_AdvSimd |                |               |               |           |           |           |
+| YShuffleG2Benchmark_Int16 | Sum128Traits   |                |               |               |           |           |           |
+| YShuffleG2Benchmark_Int16 | Sum256Traits   |                |               |     11894.025 | 12327.884 | 19315.244 | 16185.459 |
+| YShuffleG2Benchmark_Int32 | SumScalar      |        499.920 |       500.224 |       500.292 |   500.098 |   500.256 |   586.467 |
+| YShuffleG2Benchmark_Int32 | SumBase        |        488.861 |       499.188 |       499.948 |   491.558 |   322.327 |   586.425 |
+| YShuffleG2Benchmark_Int32 | SumTraits      |        489.571 |       499.740 |      6185.124 |  6016.417 |  9549.107 |  9726.706 |
+| YShuffleG2Benchmark_Int32 | Sum128_AdvSimd |                |               |               |           |           |           |
+| YShuffleG2Benchmark_Int32 | Sum128Traits   |                |               |               |           |           |           |
+| YShuffleG2Benchmark_Int32 | Sum256_AvxByte |                |               |      6170.363 |  6021.792 |  8900.803 |  9965.984 |
+| YShuffleG2Benchmark_Int32 | Sum256Traits   |                |               |      6179.582 |  6015.130 |  8595.103 |  9329.745 |
+| YShuffleG2Benchmark_Int64 | SumScalar      |        501.788 |       498.944 |       499.621 |   521.783 |   521.100 |   525.338 |
+| YShuffleG2Benchmark_Int64 | SumBase        |        479.088 |       498.234 |       501.221 |   502.814 |   237.920 |   525.721 |
+| YShuffleG2Benchmark_Int64 | SumTraits      |        477.352 |       498.580 |      3065.379 |  3070.744 |  5200.986 |  5066.715 |
+| YShuffleG2Benchmark_Int64 | Sum128_AdvSimd |                |               |               |           |           |           |
+| YShuffleG2Benchmark_Int64 | Sum128Traits   |                |               |               |           |           |           |
+| YShuffleG2Benchmark_Int64 | Sum256Traits   |                |               |      3059.214 |  3070.792 |  5283.821 |  4939.400 |
+| YShuffleG2Benchmark_SByte | SumScalar      |        693.580 |       692.910 |       692.633 |   692.053 |   691.449 |   874.159 |
+| YShuffleG2Benchmark_SByte | SumBase        |        685.702 |       691.988 |       693.610 |   686.527 |   584.845 |   837.868 |
+| YShuffleG2Benchmark_SByte | SumTraits      |        688.620 |       693.421 |     26356.467 | 26269.727 | 44842.162 | 45567.330 |
+| YShuffleG2Benchmark_SByte | Sum128_AdvSimd |                |               |               |           |           |           |
+| YShuffleG2Benchmark_SByte | Sum128Traits   |                |               |               |           |           |           |
+| YShuffleG2Benchmark_SByte | Sum256Traits   |                |               |     26368.652 | 26309.214 | 40455.310 | 40250.872 |
 
 ### Arm - AWS Arm t4g.small
 | Type                      | Method                    | .NET Core 3.1 | .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
@@ -90,3 +75,4 @@ Unit of data: Million operations per second. The larger the number, the better t
 | YShuffleG2Benchmark_SByte | Sum_ConstTraits           |       478.371 | 8693.426 |  9945.001 | 13213.780 |
 | YShuffleG2Benchmark_SByte | Sum_Const128Traits        |       323.798 | 8529.797 | 11275.200 | 13219.879 |
 | YShuffleG2Benchmark_SByte | Sum_Const256Traits        |               |          |           |           |
+

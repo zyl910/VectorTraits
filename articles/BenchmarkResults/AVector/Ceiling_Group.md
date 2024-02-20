@@ -1,108 +1,108 @@
-# Benchmark group - Ceiling
+﻿# Benchmark group - Ceiling
 ([← Back](Ceiling.md))
 
 Unit of data: Million operations per second. The larger the number, the better the performance.
 
-### x86 - lntel Core i5-8250U
+### X86 - Intel Core i5-8250U
 | Type                         | Method               | .NET Framework | .NET Core 2.1 | .NET Core 3.1 | .NET 5.0 | .NET 6.0 | .NET 7.0 |
 | :--------------------------- | :------------------- | -------------: | ------------: | ------------: | -------: | -------: | -------: |
-| CeilingBenchmark_Double      | SumScalar            |        412.980 |       280.858 |       280.137 |  279.561 |  279.128 |  279.967 |
-| CeilingBenchmark_Double      | SumBcl               |                |               |               | 3010.554 | 3242.627 | 3247.624 |
-| CeilingBenchmark_Double      | SumBase              |       1062.381 |      1061.929 |      1280.356 | 2968.252 | 3194.279 | 3269.246 |
-| CeilingBenchmark_Double      | SumBase_Basic        |        287.440 |       490.767 |       467.050 |  496.050 |  467.434 |  493.473 |
-| CeilingBenchmark_Double      | SumBase_ClearBit     |       1072.637 |       993.333 |      1197.805 | 1174.705 | 1239.603 | 1234.445 |
-| CeilingBenchmark_Double      | SumTraits            |       1000.619 |       991.899 |      3172.027 | 3104.910 | 3251.552 | 3206.632 |
-| CeilingBenchmark_Double      | Sum128Bcl            |                |               |               |          |          | 1655.395 |
-| CeilingBenchmark_Double      | Sum128Base_Basic     |                |               |       158.773 |  157.945 |  159.768 |  302.729 |
-| CeilingBenchmark_Double      | Sum128Base           |                |               |       159.136 |  159.282 |  159.653 | 1659.188 |
-| CeilingBenchmark_Double      | Sum128Traits         |                |               |       158.938 |  158.323 |  159.506 | 1653.792 |
-| CeilingBenchmark_Double      | Sum256Bcl            |                |               |               |          |          | 3048.889 |
-| CeilingBenchmark_Double      | Sum256Base_Basic     |                |               |       471.118 |  532.589 |  469.511 |  535.830 |
-| CeilingBenchmark_Double      | Sum256Base           |                |               |       469.610 |  533.437 |  468.297 | 3089.020 |
-| CeilingBenchmark_Double      | Sum256Traits         |                |               |      3271.728 | 3081.069 | 3211.921 | 3095.625 |
-| CeilingBenchmark_Single      | SumScalar            |        185.993 |       280.947 |       281.245 |  280.813 |  280.453 |  281.408 |
-| CeilingBenchmark_Single      | SumBcl               |                |               |               | 6663.045 | 6666.958 | 6635.887 |
-| CeilingBenchmark_Single      | SumBase              |       1042.031 |      1947.968 |      2385.106 | 6647.332 | 6665.210 | 6553.857 |
-| CeilingBenchmark_Single      | SumBase_Basic        |        181.479 |       459.524 |       766.965 |  785.447 |  755.807 |  788.257 |
-| CeilingBenchmark_Single      | SumBase_ClearBit     |       1975.370 |      1932.821 |      2495.557 | 2528.092 | 2340.143 | 2526.898 |
-| CeilingBenchmark_Single      | SumTraits            |       1878.139 |      2075.313 |      6129.016 | 6571.875 | 6446.697 | 6624.018 |
-| CeilingBenchmark_Single      | Sum128Bcl            |                |               |               |          |          | 3336.253 |
-| CeilingBenchmark_Single      | Sum128Base_Basic     |                |               |       289.793 |  289.216 |  290.158 |  559.436 |
-| CeilingBenchmark_Single      | Sum128Base           |                |               |       289.592 |  290.591 |  286.749 | 3334.433 |
-| CeilingBenchmark_Single      | Sum128Traits         |                |               |       289.494 |  291.004 |  258.190 | 3348.518 |
-| CeilingBenchmark_Single      | Sum256Bcl            |                |               |               |          |          | 6542.927 |
-| CeilingBenchmark_Single      | Sum256Base_Basic     |                |               |       822.290 |  885.084 |  816.630 |  923.770 |
-| CeilingBenchmark_Single      | Sum256Base           |                |               |       825.477 |  886.191 |  827.980 | 6276.027 |
-| CeilingBenchmark_Single      | Sum256Traits         |                |               |      6624.296 | 6329.864 | 6527.725 | 6542.642 |
-| FloorBenchmark_Double        | SumScalar            |        434.349 |       280.889 |       279.580 |  280.165 |  280.482 |  279.027 |
-| FloorBenchmark_Double        | SumBcl               |                |               |               | 3091.000 | 3189.489 | 3181.729 |
-| FloorBenchmark_Double        | SumBase              |        933.307 |      1007.928 |      1278.945 | 3205.871 | 3145.399 | 3087.774 |
-| FloorBenchmark_Double        | SumBase_Basic        |        274.699 |       495.287 |       463.589 |  495.710 |  470.792 |  492.169 |
-| FloorBenchmark_Double        | SumBase_ClearBit     |        999.334 |      1009.316 |      1147.151 | 1174.578 | 1244.012 | 1313.490 |
-| FloorBenchmark_Double        | SumTraits            |        996.211 |      1004.039 |      2994.228 | 3120.590 | 3251.925 | 3253.668 |
-| FloorBenchmark_Double        | Sum128Bcl            |                |               |               |          |          | 1646.149 |
-| FloorBenchmark_Double        | Sum128Base_Basic     |                |               |       158.989 |  159.972 |  159.543 |  304.595 |
-| FloorBenchmark_Double        | Sum128Base           |                |               |       158.536 |  159.026 |  159.916 | 1656.506 |
-| FloorBenchmark_Double        | Sum128Traits         |                |               |       158.387 |  158.908 |  159.565 | 1652.297 |
-| FloorBenchmark_Double        | Sum256Bcl            |                |               |               |          |          | 3212.858 |
-| FloorBenchmark_Double        | Sum256Base_Basic     |                |               |       465.611 |  467.375 |  533.869 |  534.838 |
-| FloorBenchmark_Double        | Sum256Base           |                |               |       462.915 |  466.562 |  535.311 | 3247.740 |
-| FloorBenchmark_Double        | Sum256Traits         |                |               |      2970.900 | 2953.529 | 3067.252 | 3248.753 |
-| FloorBenchmark_Single        | SumScalar            |        197.076 |       281.338 |       281.050 |  279.850 |  280.635 |  281.419 |
-| FloorBenchmark_Single        | SumBcl               |                |               |               | 6673.020 | 6335.088 | 6160.084 |
-| FloorBenchmark_Single        | SumBase              |       2028.046 |      2016.554 |      2521.991 | 6694.421 | 6457.957 | 6178.017 |
-| FloorBenchmark_Single        | SumBase_Basic        |        234.796 |       459.259 |       759.712 |  762.355 |  770.766 |  765.623 |
-| FloorBenchmark_Single        | SumBase_ClearBit     |       2149.107 |      1926.093 |      1781.410 | 2328.569 | 2434.517 | 2416.349 |
-| FloorBenchmark_Single        | SumTraits            |       2138.401 |      1911.738 |      3279.931 | 6606.767 | 6647.730 | 6208.141 |
-| FloorBenchmark_Single        | Sum128Bcl            |                |               |               |          |          | 3338.840 |
-| FloorBenchmark_Single        | Sum128Base_Basic     |                |               |       190.366 |  289.794 |  291.102 |  560.421 |
-| FloorBenchmark_Single        | Sum128Base           |                |               |       218.153 |  289.064 |  290.244 | 3338.906 |
-| FloorBenchmark_Single        | Sum128Traits         |                |               |       231.947 |  288.476 |  291.338 | 3347.296 |
-| FloorBenchmark_Single        | Sum256Bcl            |                |               |               |          |          | 6591.146 |
-| FloorBenchmark_Single        | Sum256Base_Basic     |                |               |       580.264 |  819.903 |  885.886 |  925.118 |
-| FloorBenchmark_Single        | Sum256Base           |                |               |       619.942 |  827.258 |  885.597 | 6658.583 |
-| FloorBenchmark_Single        | Sum256Traits         |                |               |      5299.073 | 6686.638 | 6660.299 | 6189.342 |
-| YRoundToEvenBenchmark_Double | SumScalar            |        127.742 |       279.942 |       238.148 |  280.935 |  280.907 |  281.073 |
-| YRoundToEvenBenchmark_Double | SumBase              |       2228.336 |      2047.918 |      1921.266 | 2330.883 | 2597.889 | 2467.688 |
-| YRoundToEvenBenchmark_Double | SumBase_Add          |       2206.904 |      1986.976 |      2200.473 | 2275.420 | 2564.584 | 2584.549 |
-| YRoundToEvenBenchmark_Double | SumTraits            |       1936.561 |      1952.964 |      3014.638 | 3178.493 | 3265.075 | 3247.742 |
-| YRoundToEvenBenchmark_Double | Sum128Base_Basic     |                |               |       159.218 |  159.143 |  159.894 |  304.689 |
-| YRoundToEvenBenchmark_Double | Sum128Base           |                |               |       159.237 |  158.729 |  160.018 | 1505.217 |
-| YRoundToEvenBenchmark_Double | Sum128Traits         |                |               |       159.296 |  159.827 |  160.091 | 1506.678 |
-| YRoundToEvenBenchmark_Double | Sum256Base_Basic     |                |               |       468.000 |  470.075 |  531.652 |  536.278 |
-| YRoundToEvenBenchmark_Double | Sum256Base           |                |               |       467.375 |  469.478 |  535.763 | 2453.877 |
-| YRoundToEvenBenchmark_Double | Sum256Traits         |                |               |      3152.866 | 3153.965 | 3067.464 | 3208.535 |
-| YRoundToEvenBenchmark_Single | SumScalar            |        106.129 |       281.202 |       280.483 |  281.308 |  280.888 |  281.124 |
-| YRoundToEvenBenchmark_Single | SumBase              |       3846.063 |      4354.952 |      4669.012 | 5246.601 | 5814.252 | 4628.288 |
-| YRoundToEvenBenchmark_Single | SumBase_Add          |       4049.007 |      4139.158 |      4801.331 | 5098.525 | 5099.222 | 4857.226 |
-| YRoundToEvenBenchmark_Single | SumTraits            |       3737.951 |      4553.530 |      6509.488 | 6609.823 | 6485.141 | 6459.225 |
-| YRoundToEvenBenchmark_Single | Sum128Base_Basic     |                |               |       291.138 |  289.171 |  290.504 |  555.559 |
-| YRoundToEvenBenchmark_Single | Sum128Base           |                |               |       291.557 |  290.458 |  290.617 | 2885.109 |
-| YRoundToEvenBenchmark_Single | Sum128Traits         |                |               |       291.480 |  289.428 |  290.611 | 2909.698 |
-| YRoundToEvenBenchmark_Single | Sum256Base_Basic     |                |               |       821.989 |  824.871 |  884.982 |  927.905 |
-| YRoundToEvenBenchmark_Single | Sum256Base           |                |               |       816.917 |  818.202 |  882.247 | 4705.889 |
-| YRoundToEvenBenchmark_Single | Sum256Traits         |                |               |      6514.154 | 6234.231 | 6170.518 | 6201.831 |
-| YRoundToZeroBenchmark_Double | SumScalar            |        183.251 |       199.108 |       216.126 |  201.761 |  204.123 |  280.635 |
-| YRoundToZeroBenchmark_Double | SumBase              |       1539.579 |      1593.620 |      1815.298 | 2502.016 | 2904.255 | 2621.701 |
-| YRoundToZeroBenchmark_Double | SumBase_ClearBit     |       1391.329 |      1493.136 |      1813.153 | 1787.973 | 1704.912 | 1708.608 |
-| YRoundToZeroBenchmark_Double | SumBase_ClearBit_Not |       1627.086 |      1512.067 |      1610.078 | 1705.871 | 1517.497 | 1656.192 |
-| YRoundToZeroBenchmark_Double | SumTraits            |       1582.205 |      1489.558 |      3194.236 | 3235.294 | 3188.426 | 3147.820 |
-| YRoundToZeroBenchmark_Double | Sum128Base_Basic     |                |               |       109.916 |  108.744 |  108.847 |  301.915 |
-| YRoundToZeroBenchmark_Double | Sum128Base           |                |               |       109.424 |  109.798 |  108.687 | 1522.046 |
-| YRoundToZeroBenchmark_Double | Sum128Traits         |                |               |       109.797 |  109.957 |  109.476 | 1469.299 |
-| YRoundToZeroBenchmark_Double | Sum256Base_Basic     |                |               |       173.227 |  191.831 |  192.517 |  528.007 |
-| YRoundToZeroBenchmark_Double | Sum256Base           |                |               |       172.379 |  170.511 |  192.199 | 2660.909 |
-| YRoundToZeroBenchmark_Double | Sum256Traits         |                |               |      3164.017 | 3045.328 | 3261.483 | 3020.262 |
-| YRoundToZeroBenchmark_Single | SumScalar            |        118.145 |       209.425 |       190.957 |  200.718 |  210.920 |  281.118 |
-| YRoundToZeroBenchmark_Single | SumBase              |       2840.766 |      3180.573 |      3441.352 | 5891.495 | 5601.870 | 5293.321 |
-| YRoundToZeroBenchmark_Single | SumBase_ClearBit     |       2937.327 |      2986.076 |      3451.416 | 3437.217 | 3309.733 | 3491.647 |
-| YRoundToZeroBenchmark_Single | SumTraits            |       2797.146 |      3105.694 |      6555.822 | 6077.277 | 6145.363 | 6165.792 |
-| YRoundToZeroBenchmark_Single | Sum128Base_Basic     |                |               |       147.439 |  159.333 |  147.947 |  555.750 |
-| YRoundToZeroBenchmark_Single | Sum128Base           |                |               |       121.617 |  144.945 |  151.696 | 2992.939 |
-| YRoundToZeroBenchmark_Single | Sum128Traits         |                |               |       107.147 |  145.996 |  159.800 | 3074.751 |
-| YRoundToZeroBenchmark_Single | Sum256Base_Basic     |                |               |       133.805 |  176.634 |  198.481 |  927.573 |
-| YRoundToZeroBenchmark_Single | Sum256Base           |                |               |       180.315 |  177.831 |  187.927 | 5293.440 |
-| YRoundToZeroBenchmark_Single | Sum256Traits         |                |               |      6556.909 | 6328.726 | 6265.317 | 6242.231 |
+| CeilingBenchmark_Double      | SumScalar            |        371.737 |       281.620 |       282.137 |  282.055 |  282.140 |  282.076 |
+| CeilingBenchmark_Double      | SumBcl               |                |               |               | 3367.948 | 3372.665 | 3363.958 |
+| CeilingBenchmark_Double      | SumBase              |        939.994 |      1104.902 |      1340.663 | 3369.820 | 3370.514 | 3374.934 |
+| CeilingBenchmark_Double      | SumBase_Basic        |        211.838 |       497.085 |       497.582 |  473.897 |  136.758 |  500.544 |
+| CeilingBenchmark_Double      | SumBase_ClearBit     |        831.958 |      1098.234 |      1335.947 | 1342.891 | 1278.012 | 1342.663 |
+| CeilingBenchmark_Double      | SumTraits            |        906.118 |      1102.451 |      3373.932 | 3373.611 | 3366.471 | 3371.318 |
+| CeilingBenchmark_Double      | Sum128Bcl            |                |               |               |          |          | 1689.760 |
+| CeilingBenchmark_Double      | Sum128Base_Basic     |                |               |       307.472 |  307.138 |  307.222 |  306.223 |
+| CeilingBenchmark_Double      | Sum128Base           |                |               |       307.176 |  307.181 |  307.278 | 1688.910 |
+| CeilingBenchmark_Double      | Sum128Traits         |                |               |      1688.123 | 1686.162 | 1687.723 | 1687.029 |
+| CeilingBenchmark_Double      | Sum256Bcl            |                |               |               |          |          | 3374.338 |
+| CeilingBenchmark_Double      | Sum256Base_Basic     |                |               |       539.057 |  474.368 |  139.482 |  538.351 |
+| CeilingBenchmark_Double      | Sum256Base           |                |               |       539.773 |  474.299 |  139.441 | 3368.927 |
+| CeilingBenchmark_Double      | Sum256Traits         |                |               |      3358.594 | 3354.522 | 3363.948 | 3367.215 |
+| CeilingBenchmark_Single      | SumScalar            |        148.166 |       281.825 |       281.978 |  282.127 |  282.007 |  281.945 |
+| CeilingBenchmark_Single      | SumBcl               |                |               |               | 6741.925 | 6734.217 | 6738.768 |
+| CeilingBenchmark_Single      | SumBase              |       1095.133 |      2221.882 |      2569.409 | 6743.225 | 6746.937 | 6737.024 |
+| CeilingBenchmark_Single      | SumBase_Basic        |        152.208 |       463.480 |       794.760 |  772.194 |  255.380 |  794.168 |
+| CeilingBenchmark_Single      | SumBase_ClearBit     |       1583.780 |      2272.377 |      2568.486 | 2698.716 | 2622.592 | 2684.462 |
+| CeilingBenchmark_Single      | SumTraits            |       1065.950 |      2249.785 |      6734.605 | 6736.146 | 6738.297 | 6744.141 |
+| CeilingBenchmark_Single      | Sum128Bcl            |                |               |               |          |          | 3377.173 |
+| CeilingBenchmark_Single      | Sum128Base_Basic     |                |               |       562.028 |  562.942 |  562.724 |  562.265 |
+| CeilingBenchmark_Single      | Sum128Base           |                |               |       561.877 |  562.717 |  562.767 | 3380.882 |
+| CeilingBenchmark_Single      | Sum128Traits         |                |               |      3379.182 | 3372.141 | 3377.911 | 3375.749 |
+| CeilingBenchmark_Single      | Sum256Bcl            |                |               |               |          |          | 6732.600 |
+| CeilingBenchmark_Single      | Sum256Base_Basic     |                |               |       890.273 |  831.179 |  257.395 |  930.868 |
+| CeilingBenchmark_Single      | Sum256Base           |                |               |       890.210 |  831.125 |  257.296 | 6736.442 |
+| CeilingBenchmark_Single      | Sum256Traits         |                |               |      6731.602 | 6730.672 | 6726.019 | 6735.871 |
+| FloorBenchmark_Double        | SumScalar            |        358.416 |       281.657 |       282.045 |  282.121 |  281.901 |  281.698 |
+| FloorBenchmark_Double        | SumBcl               |                |               |               | 3359.510 | 3372.893 | 3364.317 |
+| FloorBenchmark_Double        | SumBase              |        698.766 |      1104.280 |      1340.645 | 3365.947 | 3368.951 | 3363.893 |
+| FloorBenchmark_Double        | SumBase_Basic        |        244.586 |       497.655 |       498.112 |  473.383 |  136.581 |  499.284 |
+| FloorBenchmark_Double        | SumBase_ClearBit     |        734.571 |      1098.501 |      1334.278 | 1338.663 | 1279.650 | 1349.079 |
+| FloorBenchmark_Double        | SumTraits            |        605.527 |      1107.906 |      3368.315 | 3367.014 | 3370.659 | 3373.400 |
+| FloorBenchmark_Double        | Sum128Bcl            |                |               |               |          |          | 1686.986 |
+| FloorBenchmark_Double        | Sum128Base_Basic     |                |               |       307.052 |  306.504 |  306.897 |  306.155 |
+| FloorBenchmark_Double        | Sum128Base           |                |               |       307.486 |  306.827 |  307.361 | 1688.467 |
+| FloorBenchmark_Double        | Sum128Traits         |                |               |      1685.019 | 1684.974 | 1685.069 | 1686.328 |
+| FloorBenchmark_Double        | Sum256Bcl            |                |               |               |          |          | 3369.147 |
+| FloorBenchmark_Double        | Sum256Base_Basic     |                |               |       539.660 |  474.138 |  139.480 |  538.922 |
+| FloorBenchmark_Double        | Sum256Base           |                |               |       539.698 |  474.016 |  139.401 | 3374.108 |
+| FloorBenchmark_Double        | Sum256Traits         |                |               |      3367.969 | 3369.784 | 3369.956 | 3364.726 |
+| FloorBenchmark_Single        | SumScalar            |        144.228 |       281.941 |       281.840 |  282.089 |  281.935 |  282.086 |
+| FloorBenchmark_Single        | SumBcl               |                |               |               | 6739.706 | 6750.329 | 6723.379 |
+| FloorBenchmark_Single        | SumBase              |       1548.149 |      2246.156 |      2553.935 | 6734.717 | 6747.700 | 6738.892 |
+| FloorBenchmark_Single        | SumBase_Basic        |        163.447 |       461.349 |       794.168 |  771.097 |  255.065 |  795.187 |
+| FloorBenchmark_Single        | SumBase_ClearBit     |       1215.447 |      2247.887 |      2555.778 | 2661.656 | 2627.355 | 2673.449 |
+| FloorBenchmark_Single        | SumTraits            |       1130.207 |      2252.835 |      6737.850 | 6743.087 | 6716.382 | 6729.163 |
+| FloorBenchmark_Single        | Sum128Bcl            |                |               |               |          |          | 3373.271 |
+| FloorBenchmark_Single        | Sum128Base_Basic     |                |               |       562.206 |  563.101 |  561.866 |  563.047 |
+| FloorBenchmark_Single        | Sum128Base           |                |               |       562.688 |  563.125 |  562.024 | 3374.392 |
+| FloorBenchmark_Single        | Sum128Traits         |                |               |      3378.019 | 3372.074 | 3376.758 | 3375.965 |
+| FloorBenchmark_Single        | Sum256Bcl            |                |               |               |          |          | 6737.070 |
+| FloorBenchmark_Single        | Sum256Base_Basic     |                |               |       891.329 |  831.414 |  257.656 |  927.565 |
+| FloorBenchmark_Single        | Sum256Base           |                |               |       891.208 |  830.791 |  257.368 | 6742.392 |
+| FloorBenchmark_Single        | Sum256Traits         |                |               |      6736.925 | 6734.557 | 6737.162 | 6736.511 |
+| YRoundToEvenBenchmark_Double | SumScalar            |         78.912 |       282.088 |       281.996 |  282.124 |  281.795 |  282.103 |
+| YRoundToEvenBenchmark_Double | SumBase              |       1702.530 |      2242.179 |      2612.343 | 2705.523 | 2575.820 | 2622.030 |
+| YRoundToEvenBenchmark_Double | SumBase_Add          |       1684.609 |      2190.424 |      2551.329 | 2665.736 | 2569.017 | 2651.675 |
+| YRoundToEvenBenchmark_Double | SumTraits            |       1570.471 |      2165.047 |      3367.939 | 3367.058 | 3366.326 | 3369.313 |
+| YRoundToEvenBenchmark_Double | Sum128Base_Basic     |                |               |       307.119 |  307.292 |  307.204 |  306.138 |
+| YRoundToEvenBenchmark_Double | Sum128Base           |                |               |       307.118 |  307.071 |  307.289 | 1681.823 |
+| YRoundToEvenBenchmark_Double | Sum128Traits         |                |               |      1687.654 | 1690.072 | 1688.480 | 1683.988 |
+| YRoundToEvenBenchmark_Double | Sum256Base_Basic     |                |               |       539.245 |  474.191 |  139.475 |  539.189 |
+| YRoundToEvenBenchmark_Double | Sum256Base           |                |               |       539.219 |  473.538 |  139.514 | 2809.219 |
+| YRoundToEvenBenchmark_Double | Sum256Traits         |                |               |      3369.697 | 3371.297 | 3367.504 | 3371.984 |
+| YRoundToEvenBenchmark_Single | SumScalar            |         64.624 |       282.074 |       282.127 |  281.853 |  282.052 |  282.096 |
+| YRoundToEvenBenchmark_Single | SumBase              |       2117.009 |      4710.667 |      5140.096 | 6103.596 | 5951.808 | 5489.668 |
+| YRoundToEvenBenchmark_Single | SumBase_Add          |       2106.134 |      4791.699 |      5190.154 | 6115.292 | 6028.539 | 5559.593 |
+| YRoundToEvenBenchmark_Single | SumTraits            |       3167.618 |      4791.293 |      6735.294 | 6735.617 | 6740.122 | 6734.230 |
+| YRoundToEvenBenchmark_Single | Sum128Base_Basic     |                |               |       561.859 |  563.162 |  562.585 |  563.143 |
+| YRoundToEvenBenchmark_Single | Sum128Base           |                |               |       561.712 |  561.653 |  562.209 | 3324.719 |
+| YRoundToEvenBenchmark_Single | Sum128Traits         |                |               |      3376.776 | 3375.345 | 3375.675 | 3370.487 |
+| YRoundToEvenBenchmark_Single | Sum256Base_Basic     |                |               |       889.967 |  832.189 |  257.741 |  931.385 |
+| YRoundToEvenBenchmark_Single | Sum256Base           |                |               |       890.645 |  832.451 |  257.745 | 5665.301 |
+| YRoundToEvenBenchmark_Single | Sum256Traits         |                |               |      6733.353 | 6738.818 | 6736.515 | 6731.561 |
+| YRoundToZeroBenchmark_Double | SumScalar            |        155.627 |       228.444 |       227.316 |  214.232 |  215.237 |  281.893 |
+| YRoundToZeroBenchmark_Double | SumBase              |        781.218 |      1667.316 |      1975.546 | 3023.088 | 3001.609 | 3010.300 |
+| YRoundToZeroBenchmark_Double | SumBase_ClearBit     |        737.299 |      1765.902 |      1978.367 | 1993.278 | 1909.557 | 1993.469 |
+| YRoundToZeroBenchmark_Double | SumBase_ClearBit_Not |        823.704 |      1808.218 |      1817.060 | 1806.966 | 1747.250 | 1811.987 |
+| YRoundToZeroBenchmark_Double | SumTraits            |        845.271 |      1603.939 |      3369.194 | 3375.452 | 3367.570 | 3366.053 |
+| YRoundToZeroBenchmark_Double | Sum128Base_Basic     |                |               |       163.411 |  163.001 |  163.597 |  306.145 |
+| YRoundToZeroBenchmark_Double | Sum128Base           |                |               |       163.180 |  163.499 |  163.019 | 1663.025 |
+| YRoundToZeroBenchmark_Double | Sum128Traits         |                |               |      1688.797 | 1687.691 | 1688.928 | 1687.246 |
+| YRoundToZeroBenchmark_Double | Sum256Base_Basic     |                |               |       199.374 |  198.568 |  198.759 |  539.233 |
+| YRoundToZeroBenchmark_Double | Sum256Base           |                |               |       198.734 |  198.849 |  198.333 | 3077.768 |
+| YRoundToZeroBenchmark_Double | Sum256Traits         |                |               |      3371.283 | 3351.001 | 3375.001 | 3369.877 |
+| YRoundToZeroBenchmark_Single | SumScalar            |         82.638 |       196.408 |       210.676 |  191.708 |  190.555 |  282.098 |
+| YRoundToZeroBenchmark_Single | SumBase              |       1303.039 |      3367.688 |      3848.289 | 6177.637 | 6163.136 | 6052.151 |
+| YRoundToZeroBenchmark_Single | SumBase_ClearBit     |       1416.122 |      3373.335 |      3847.083 | 4212.048 | 4169.460 | 3965.241 |
+| YRoundToZeroBenchmark_Single | SumTraits            |       1468.666 |      3371.784 |      6727.151 | 6730.234 | 6738.520 | 6737.743 |
+| YRoundToZeroBenchmark_Single | Sum128Base_Basic     |                |               |       208.708 |  204.055 |  212.058 |  562.782 |
+| YRoundToZeroBenchmark_Single | Sum128Base           |                |               |       209.200 |  206.037 |  212.982 | 3145.404 |
+| YRoundToZeroBenchmark_Single | Sum128Traits         |                |               |      3377.788 | 3371.067 | 3372.191 | 3379.266 |
+| YRoundToZeroBenchmark_Single | Sum256Base_Basic     |                |               |       204.272 |  202.664 |  202.695 |  932.117 |
+| YRoundToZeroBenchmark_Single | Sum256Base           |                |               |       202.705 |  202.128 |  202.779 | 6168.437 |
+| YRoundToZeroBenchmark_Single | Sum256Traits         |                |               |      6742.872 | 6726.350 | 6721.680 | 6728.401 |
 
 ### Arm - AWS Arm t4g.small
 | Type                         | Method               | .NET Core 3.1 | .NET 5.0 | .NET 6.0 | .NET 7.0 |
@@ -204,3 +204,4 @@ Unit of data: Million operations per second. The larger the number, the better t
 | YRoundToZeroBenchmark_Single | Sum256Base_Basic     |        68.793 |  101.088 |  115.132 |  259.781 |
 | YRoundToZeroBenchmark_Single | Sum256Base           |        68.960 |  104.218 |  118.361 |  116.531 |
 | YRoundToZeroBenchmark_Single | Sum256Traits         |        69.300 |  105.192 |  117.227 |  117.104 |
+
