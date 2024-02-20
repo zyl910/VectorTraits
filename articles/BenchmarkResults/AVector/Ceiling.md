@@ -12,7 +12,7 @@ See [Group](Ceiling_Group.md)
 - `YRoundToZero`: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: `MidpointRounding.ToZero`.
   Mnemonic: `rt[i] := round_to_zero(value[i])` .
 
-## x86
+## X86
 
 ### Intel Core i5-8250U
 `Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`

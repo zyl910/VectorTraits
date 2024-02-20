@@ -1,7 +1,7 @@
 # Benchmark - YNarrowSaturateUnsigned
 ([← Back](README.md))
 
-## x86
+## X86
 
 ### Intel Core i5-8250U
 `Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`

@@ -8,7 +8,7 @@
 - `ConvertToUInt64[/_Range52/Range52RoundToEven]`: Convert to a vector whose elements are of type UInt64 (转换为元素类型是UInt64的向量).
   Mnemonic: `rt[i] := (UInt64)(value[i])` .
 
-## x86
+## X86
 
 ### Intel Core i5-8250U
 `Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`

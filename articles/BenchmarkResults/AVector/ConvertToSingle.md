@@ -8,7 +8,7 @@
 - `ConvertToUInt32`: Convert to a vector whose elements are of type UInt32 (转换为元素类型是UInt32的向量).
   Mnemonic: `rt[i] := (UInt32)(value[i])` .
 
-## x86
+## X86
 
 ### Intel Core i5-8250U
 `Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
