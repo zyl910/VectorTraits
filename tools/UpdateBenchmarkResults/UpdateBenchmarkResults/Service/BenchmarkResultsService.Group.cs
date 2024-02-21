@@ -80,16 +80,24 @@ namespace UpdateBenchmarkResults.Service {
             string[] lines = ReadAllLines(filePath);
             int srcCount = lines.Length;
             // Parse group.
-            string patternTitle = "###";
+            string fileTitlePrefix = "# ";
+            string patternTitlePrefix = "###";
+            string title = "";
             ArraySegment<string>? groupHeader = null;
             int i;
             for (i = 0; i < lines.Length; ++i) {
                 string line = lines[i];
                 if (null == line) continue;
-                if (line.StartsWith(patternTitle, comparisonType)) {
+                if (line.StartsWith(fileTitlePrefix, comparisonType) && string.IsNullOrEmpty(title)) {
+                    title = line.Substring(fileTitlePrefix.Length).Trim();
+                }
+                if (line.StartsWith(patternTitlePrefix, comparisonType)) {
                     groupHeader = new ArraySegment<string>(lines, 0, i);
                     break;
                 }
+            }
+            if (null == title || title.IndexOf("Benchmark group", comparisonType) < 0) {
+                return string.Format("It's not a group file! ({0})", title);
             }
             if (null == groupHeader) {
                 //return "It's not a group file!";
@@ -256,9 +264,7 @@ namespace UpdateBenchmarkResults.Service {
             int i, j, k, m;
             int n;
             string v;
-            for(i=0; i< itemCountCommons; ++i) {
-                itemRow.Add("");
-            }
+            itemRow.AddRange(Enumerable.Repeat("", itemCountCommons));
             for (i = 0; i < benchmarkGroupFile.List.Count; ++i) {
                 dataPlatform = benchmarkGroupFile.List[i];
                 fieldNames = dataPlatform.FieldNames;
@@ -266,9 +272,7 @@ namespace UpdateBenchmarkResults.Service {
                 // Fill itemWidths.
                 itemCount = itemCountCommons + fieldNames.Count;
                 itemWidths = new List<int>(itemCount); //new Array(itemCount);
-                for (j = 0; j < itemCount; ++j) {
-                    itemWidths.Add(0);
-                }
+                itemWidths.AddRange(Enumerable.Repeat(0, itemCount));
                 for (j = 0; j < itemCommons.Length; ++j) {
                     fieldName = itemCommons[j];
                     itemWidths[j] = fieldName.Length;
@@ -287,7 +291,7 @@ namespace UpdateBenchmarkResults.Service {
                         if (itemWidths[1] < n) itemWidths[1] = n;
                         for (m = 0; m < fieldNames.Count; ++m) {
                             v = dataRow.Values[m];
-                            if (null == v) continue;
+                            if (null == v) v = "";
                             n = v.Length;
                             if (itemWidths[itemCountCommons + m] < n) itemWidths[itemCountCommons + m] = n;
                         }
@@ -322,6 +326,7 @@ namespace UpdateBenchmarkResults.Service {
                         line = "|";
                         for (m = 0; m < itemRow.Count; ++m) {
                             v = itemRow[m];
+                            if (null == v) v = "";
                             itemWidth = itemWidths[m];
                             line += " " + v + repeatString(" ", itemWidth - v.Length) + " |";
                         }

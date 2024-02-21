@@ -34,6 +34,11 @@ namespace UpdateBenchmarkResults.Service {
         public string SourceFile { get; set; } = string.Empty;
 
         /// <summary>
+        /// Current source file (当前源文件).
+        /// </summary>
+        private string SourceFileCurrent { get; set; } = string.Empty;
+
+        /// <summary>
         /// Apply header (应用标题. 即是否更新标题区的内容).
         /// </summary>
         public bool ApplyHeader { get; set; } = true;
@@ -66,32 +71,32 @@ namespace UpdateBenchmarkResults.Service {
         /// <summary>
         /// Group counter (组的计数器).
         /// </summary>
-        public IDictionary<string, int> GroupCounter { get; set; } = new SortedDictionary<string, int>();
+        public IDictionary<string, int> GroupCounter { get; private set; } = new SortedDictionary<string, int>();
 
         /// <summary>
         /// Source base name (源基本名).
         /// </summary>
-        public string SourceBaseName { get; set; } = string.Empty;
+        public string SourceBaseName { get; private set; } = string.Empty;
 
         /// <summary>
         /// Cpu model name (CPU型号名).
         /// </summary>
-        public string CpuModelName { get; set; } = string.Empty;
+        public string CpuModelName { get; private set; } = string.Empty;
 
         /// <summary>
         /// Architecture string (架构字符串).
         /// </summary>
-        public string ArchitectureString { get; set; } = string.Empty;
+        public string ArchitectureString { get; private set; } = string.Empty;
 
         /// <summary>
         /// Architecture family (架构系列). 如 X86/Arm.
         /// </summary>
-        public string ArchitectureFamily { get; set; } = string.Empty;
+        public string ArchitectureFamily { get; private set; } = string.Empty;
 
         /// <summary>
         /// Architecture sort code (架构排序代码).
         /// </summary>
-        public string ArchitectureSortCode { get; set; } = string.Empty;
+        public string ArchitectureSortCode { get; private set; } = string.Empty;
 
         /// <summary>
         /// Parse command line args.
@@ -206,13 +211,12 @@ namespace UpdateBenchmarkResults.Service {
             Writer.WriteLine("Root path:\t{0}", rootPath);
             Writer.WriteLine();
             // Process.
-            try {
-                Load();
-                Process(rootPath, directoryInfo);
-            } catch (Exception ex) {
-                Writer.WriteLine(ex.Message);
+            if (Directory.Exists(SourceFile)) {
+                RunSourceFolder(rootPath, directoryInfo, new DirectoryInfo(SourceFile));
+            } else {
+                SourceFileCurrent = SourceFile;
+                RunSourceFile(rootPath, directoryInfo);
             }
-            Writer.WriteLine();
             // GroupProcessFolder.
             if (ApplyGroup) {
                 Writer.WriteLine("[Group]");
@@ -221,6 +225,42 @@ namespace UpdateBenchmarkResults.Service {
             }
             // Finish.
             Writer.WriteLine("Finish.");
+        }
+
+        /// <summary>
+        /// Run on source folder.
+        /// </summary>
+        /// <param name="rootPath">Root path.</param>
+        /// <param name="directoryInfo">Current directory info of benchmark.</param>
+        /// <param name="directoryInfo">Current directory info of source.</param>
+        private void RunSourceFolder(string rootPath, DirectoryInfo directoryInfo, DirectoryInfo directoryInfoSource) {
+            // sub folder.
+            foreach (DirectoryInfo di in directoryInfoSource.GetDirectories()) {
+                RunSourceFolder(rootPath, directoryInfo, di);
+            }
+            // sub file.
+            foreach (FileInfo fileInfo in directoryInfoSource.GetFiles("*.txt")) {
+                SourceFileCurrent = fileInfo.FullName;
+                RunSourceFile(rootPath, directoryInfo);
+                if (DebugOnly) {
+                    throw new OperationCanceledException("[Debug] Only test one file. Will stop.");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Run on source file. Use SourceFileCurrent.
+        /// </summary>
+        /// <param name="rootPath">Root path.</param>
+        /// <param name="directoryInfo">Current directory info.</param>
+        private void RunSourceFile(string rootPath, DirectoryInfo directoryInfo) {
+            try {
+                Load();
+                Process(rootPath, directoryInfo);
+                Writer?.WriteLine();
+            } catch (Exception ex) {
+                Writer?.WriteLine(ex.Message);
+            }
         }
 
         internal enum LoadPhase {
@@ -240,7 +280,7 @@ namespace UpdateBenchmarkResults.Service {
         /// Load.
         /// </summary>
         private void Load() {
-            Writer?.WriteLine("[{0}]", SourceFile);
+            Writer?.WriteLine("[{0}]", SourceFileCurrent);
             ClearLoad();
             LoadParse();
             LoadDone();
@@ -257,8 +297,8 @@ namespace UpdateBenchmarkResults.Service {
             LoadPhase phase = LoadPhase.Init;
             string title;
             int lineNo = 1;
-            SourceBaseName = Path.GetFileNameWithoutExtension(SourceFile);
-            foreach (string line in File.ReadLines(SourceFile)) {
+            SourceBaseName = Path.GetFileNameWithoutExtension(SourceFileCurrent);
+            foreach (string line in File.ReadLines(SourceFileCurrent)) {
                 if (lineNo <= 30) {
                     //Writer.WriteLine("{0}\t{1}", lineNo, line);
                 }
