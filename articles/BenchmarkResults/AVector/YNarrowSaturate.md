@@ -667,26 +667,29 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.19.0.1029
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	3.1.32
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/
 RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.19.0-1029-aws #30~22.04.1-Ubuntu SMP Thu Jul 13 17:21:19 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
-Vectors.Instance:	VectorTraits128Base
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	
+Vector128s.Instance:	WVectorTraits128Base	// 
+Vectors.Instance:	VectorTraits128Base	// 
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -694,86 +697,79 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	123
-SumNarrow_If	1694.345	154.717
-SumNarrow_IfUnrolling4	1639.083	159.933	1.033715
-SumNarrow_MinMax	1631.732	160.654	1.038372
-SumNarrow_MinMaxUnrolling4	1605.929	163.235	1.055056
-SumNarrow_BitMath	1241.988	211.068	1.364220
-SumNarrow_BitMathUnrolling4	1257.642	208.441	1.347239
-SumNarrowVectorBase	42.802	6124.516	39.585271
-SumNarrowVectorTraits	42.798	6125.113	39.589126
-SumNarrowVector128Traits	2131.819	122.967	0.794788
-SumNarrowVector256Traits	3146.617	83.310	0.538466
+SumNarrow_If	1665.282	157.417
+SumNarrow_IfUnrolling4	1639.341	159.908	1.015824
+SumNarrow_MinMax	1628.664	160.956	1.022483
+SumNarrow_MinMaxUnrolling4	1618.041	162.013	1.029196
+SumNarrow_BitMath	1241.922	211.079	1.340891
+SumNarrow_BitMathUnrolling4	1257.566	208.453	1.324210
+SumNarrowVectorBase	43.369	6044.523	38.398109
+SumNarrowVectorTraits	43.407	6039.229	38.364477
+SumNarrowVector128Traits	2133.136	122.891	0.780673
+SumNarrowVector256Traits	3180.455	82.423	0.523599
 
 [YNarrowSaturateBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	25440
-SumNarrow_If	1599.363	163.905
-SumNarrow_MinMax	1686.906	155.399	0.948104
-SumNarrow_BitMath	1046.052	250.603	1.528952
-SumNarrowVectorBase	97.025	2701.810	16.483973
-SumNarrowVectorTraits	96.957	2703.709	16.495556
-SumNarrowVector128Traits	4045.927	64.792	0.395302
-SumNarrowVector256Traits	5970.135	43.909	0.267894
+SumNarrow_If	1585.783	165.309
+SumNarrow_MinMax	1618.084	162.009	0.980037
+SumNarrow_BitMath	1045.480	250.740	1.516798
+SumNarrowVectorBase	85.351	3071.364	18.579542
+SumNarrowVectorTraits	86.920	3015.939	18.244258
+SumNarrowVector128Traits	4038.667	64.909	0.392650
+SumNarrowVector256Traits	5819.471	45.046	0.272496
 
 [YNarrowSaturateBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	1070749362
-SumNarrow_If	1618.323	161.985
-SumNarrow_MinMax	1699.537	154.244	0.952214
-SumNarrow_BitMath	1054.207	248.665	1.535110
-SumNarrowVectorBase	365.673	716.880	4.425599
-SumNarrowVectorTraits	365.785	716.661	4.424244
-SumNarrowVector128Traits	5798.661	45.208	0.279086
-SumNarrowVector256Traits	6741.292	38.886	0.240061
+SumNarrow_If	1613.490	162.470
+SumNarrow_MinMax	1699.953	154.207	0.949138
+SumNarrow_BitMath	1054.083	248.694	1.530704
+SumNarrowVectorBase	366.306	715.642	4.404761
+SumNarrowVectorTraits	366.621	715.027	4.400972
+SumNarrowVector128Traits	5763.494	45.484	0.279950
+SumNarrowVector256Traits	6780.334	38.662	0.237966
 
 [YNarrowSaturateBenchmark_UInt16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	123
-SumNarrow_If	499.227	525.100
-SumNarrow_IfUnrolling4	515.757	508.270	0.967950
-SumNarrow_MinMax	496.080	528.430	1.006342
-SumNarrow_MinMaxUnrolling4	477.411	549.095	1.045696
-SumNarrow_BitMath	797.785	328.590	0.625766
-SumNarrow_BitMathUnrolling4	813.462	322.257	0.613706
-SumNarrowVectorBase	32.992	7945.777	15.131931
-SumNarrowVectorTraits	33.003	7943.115	15.126861
-SumNarrowVector128Traits	1352.735	193.788	0.369050
-SumNarrowVector256Traits	1857.518	141.126	0.268760
+SumNarrow_If	496.304	528.192
+SumNarrow_IfUnrolling4	515.684	508.343	0.962420
+SumNarrow_MinMax	455.122	575.986	1.090487
+SumNarrow_MinMaxUnrolling4	477.216	549.319	1.039998
+SumNarrow_BitMath	797.804	328.582	0.622088
+SumNarrow_BitMathUnrolling4	813.325	322.312	0.610217
+SumNarrowVectorBase	29.943	8754.855	16.575137
+SumNarrowVectorTraits	30.420	8617.492	16.315074
+SumNarrowVector128Traits	1353.267	193.712	0.366745
+SumNarrowVector256Traits	1832.053	143.088	0.270901
 
 [YNarrowSaturateBenchmark_UInt32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	52166
-SumNarrow_If	481.112	544.871
-SumNarrow_MinMax	483.911	541.719	0.994215
-SumNarrow_BitMath	709.435	369.511	0.678161
-SumNarrowVectorBase	65.510	4001.590	7.344101
-SumNarrowVectorTraits	65.229	4018.815	7.375715
-SumNarrowVector128Traits	2480.055	105.701	0.193992
-SumNarrowVector256Traits	3497.182	74.959	0.137571
+SumNarrow_If	484.553	541.002
+SumNarrow_MinMax	481.064	544.926	1.007252
+SumNarrow_BitMath	708.870	369.806	0.683557
+SumNarrowVectorBase	66.209	3959.347	7.318542
+SumNarrowVectorTraits	66.269	3955.773	7.311934
+SumNarrowVector128Traits	2471.507	106.066	0.196056
+SumNarrowVector256Traits	3414.190	76.781	0.141923
 
 [YNarrowSaturateBenchmark_UInt64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	4294705152
-SumNarrow_If	422.535	620.408
-SumNarrow_MinMax	422.805	620.012	0.999362
-SumNarrow_BitMath	672.267	389.940	0.628522
-SumNarrowVectorBase	203.047	1291.051	2.080970
-SumNarrowVectorTraits	202.585	1293.997	2.085719
-SumNarrowVector128Traits	3287.391	79.742	0.128532
-SumNarrowVector256Traits	4175.524	62.781	0.101193
-
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: Requires hardware support AdvSimd!
-VectorTraits128AdvSimdB64: Requires hardware support AdvSimd!
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+SumNarrow_If	422.550	620.385
+SumNarrow_MinMax	422.780	620.048	0.999456
+SumNarrow_BitMath	672.212	389.972	0.628597
+SumNarrowVectorBase	203.578	1287.681	2.075614
+SumNarrowVectorTraits	203.747	1286.616	2.073898
+SumNarrowVector128Traits	3242.981	80.834	0.130297
+SumNarrowVector256Traits	4175.752	62.778	0.101191
 
 ```
 
@@ -783,27 +779,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.19.0.1029
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	5.0.17
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/
 RuntimeInformation.FrameworkDescription:	.NET 5.0.17
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.19.0-1029-aws #30~22.04.1-Ubuntu SMP Thu Jul 13 17:21:19 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -811,86 +810,79 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	123
-SumNarrow_If	1604.804	163.350
-SumNarrow_IfUnrolling4	1615.382	162.280	0.993452
-SumNarrow_MinMax	1626.909	161.130	0.986413
-SumNarrow_MinMaxUnrolling4	1622.368	161.581	0.989174
-SumNarrow_BitMath	1583.638	165.533	1.013366
-SumNarrow_BitMathUnrolling4	1611.776	162.643	0.995674
-SumNarrowVectorBase	50.307	5210.880	31.900185
-SumNarrowVectorTraits	19.312	13574.329	83.099898
-SumNarrowVector128Traits	19.916	13162.718	80.580081
-SumNarrowVector256Traits	3268.582	80.201	0.490979
+SumNarrow_If	1694.624	154.692
+SumNarrow_IfUnrolling4	1653.823	158.508	1.024671
+SumNarrow_MinMax	1581.722	165.733	1.071379
+SumNarrow_MinMaxUnrolling4	1604.437	163.387	1.056211
+SumNarrow_BitMath	1583.953	165.500	1.069870
+SumNarrow_BitMathUnrolling4	1611.837	162.637	1.051362
+SumNarrowVectorBase	42.323	6193.938	40.040580
+SumNarrowVectorTraits	19.475	13460.358	87.014196
+SumNarrowVector128Traits	19.520	13429.272	86.813246
+SumNarrowVector256Traits	3225.966	81.261	0.525307
 
 [YNarrowSaturateBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	25440
-SumNarrow_If	1586.347	165.250
-SumNarrow_MinMax	1690.608	155.059	0.938329
-SumNarrow_BitMath	1348.434	194.406	1.176436
-SumNarrowVectorBase	81.429	3219.290	19.481319
-SumNarrowVectorTraits	41.570	6306.022	38.160469
-SumNarrowVector128Traits	42.539	6162.376	37.291201
-SumNarrowVector256Traits	5077.907	51.624	0.312402
+SumNarrow_If	1585.374	165.352
+SumNarrow_MinMax	1617.984	162.019	0.979845
+SumNarrow_BitMath	1345.535	194.825	1.178248
+SumNarrowVectorBase	80.193	3268.933	19.769595
+SumNarrowVectorTraits	42.823	6121.553	37.021451
+SumNarrowVector128Traits	42.813	6122.989	37.030135
+SumNarrowVector256Traits	4891.129	53.596	0.324133
 
 [YNarrowSaturateBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	1070749362
-SumNarrow_If	1617.283	162.089
-SumNarrow_MinMax	1702.456	153.980	0.949971
-SumNarrow_BitMath	1362.689	192.373	1.186832
-SumNarrowVectorBase	220.439	1189.192	7.336657
-SumNarrowVectorTraits	79.862	3282.455	20.250924
-SumNarrowVector128Traits	83.587	3136.169	19.348423
-SumNarrowVector256Traits	7704.702	34.024	0.209909
+SumNarrow_If	1631.368	160.690
+SumNarrow_MinMax	1662.772	157.655	0.981114
+SumNarrow_BitMath	1367.111	191.750	1.193296
+SumNarrowVectorBase	226.552	1157.104	7.200864
+SumNarrowVectorTraits	84.163	3114.720	19.383452
+SumNarrowVector128Traits	84.996	3084.209	19.193577
+SumNarrowVector256Traits	7963.162	32.920	0.204864
 
 [YNarrowSaturateBenchmark_UInt16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	123
-SumNarrow_If	494.098	530.550
-SumNarrow_IfUnrolling4	515.932	508.098	0.957682
-SumNarrow_MinMax	496.950	527.506	0.994261
-SumNarrow_MinMaxUnrolling4	485.801	539.612	1.017080
-SumNarrow_BitMath	1010.686	259.372	0.488874
-SumNarrow_BitMathUnrolling4	1058.267	247.711	0.466894
-SumNarrowVectorBase	29.995	8739.615	16.472737
-SumNarrowVectorTraits	18.515	14158.586	26.686607
-SumNarrowVector128Traits	18.518	14156.330	26.682354
-SumNarrowVector256Traits	1730.068	151.522	0.285595
+SumNarrow_If	508.943	515.076
+SumNarrow_IfUnrolling4	515.835	508.194	0.986639
+SumNarrow_MinMax	498.933	525.410	1.020063
+SumNarrow_MinMaxUnrolling4	481.064	544.925	1.057951
+SumNarrow_BitMath	1010.621	259.389	0.503594
+SumNarrow_BitMathUnrolling4	1058.937	247.554	0.480617
+SumNarrowVectorBase	31.061	8439.577	16.385123
+SumNarrowVectorTraits	20.001	13106.613	25.445998
+SumNarrowVector128Traits	20.010	13100.479	25.434088
+SumNarrowVector256Traits	1760.020	148.944	0.289169
 
 [YNarrowSaturateBenchmark_UInt32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	52166
-SumNarrow_If	485.213	540.266
-SumNarrow_MinMax	488.420	536.718	0.993434
-SumNarrow_BitMath	918.405	285.434	0.528322
-SumNarrowVectorBase	65.169	4022.504	7.445420
-SumNarrowVectorTraits	38.411	6824.637	12.632005
-SumNarrowVector128Traits	38.463	6815.464	12.615026
-SumNarrowVector256Traits	2375.271	110.364	0.204277
+SumNarrow_If	490.247	534.718
+SumNarrow_MinMax	488.138	537.029	1.004321
+SumNarrow_BitMath	917.617	285.679	0.534261
+SumNarrowVectorBase	65.191	4021.154	7.520135
+SumNarrowVectorTraits	41.341	6340.994	11.858569
+SumNarrowVector128Traits	38.236	6855.859	12.821441
+SumNarrowVector256Traits	2475.436	105.898	0.198045
 
 [YNarrowSaturateBenchmark_UInt64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	4294705152
-SumNarrow_If	422.200	620.900
-SumNarrow_MinMax	422.945	619.806	0.998238
-SumNarrow_BitMath	889.527	294.700	0.474634
-SumNarrowVectorBase	140.670	1863.543	3.001357
-SumNarrowVectorTraits	81.066	3233.726	5.208124
-SumNarrowVector128Traits	81.270	3225.596	5.195030
-SumNarrowVector256Traits	3720.313	70.463	0.113485
-
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+SumNarrow_If	422.051	621.120
+SumNarrow_MinMax	422.710	620.151	0.998440
+SumNarrow_BitMath	882.894	296.914	0.478031
+SumNarrowVectorBase	143.938	1821.232	2.932175
+SumNarrowVectorTraits	75.128	3489.303	5.617762
+SumNarrowVector128Traits	81.051	3234.292	5.207196
+SumNarrowVector256Traits	3737.696	70.135	0.112917
 
 ```
 
@@ -900,27 +892,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.19.0.1029
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	6.0.19
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/
 RuntimeInformation.FrameworkDescription:	.NET 6.0.19
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.19.0-1029-aws #30~22.04.1-Ubuntu SMP Thu Jul 13 17:21:19 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -928,86 +923,79 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	123
-SumNarrow_If	1664.232	157.517
-SumNarrow_IfUnrolling4	1628.646	160.958	1.021850
-SumNarrow_MinMax	2412.608	108.656	0.689806
-SumNarrow_MinMaxUnrolling4	1775.218	147.669	0.937480
-SumNarrow_BitMath	1578.987	166.020	1.053987
-SumNarrow_BitMathUnrolling4	1594.236	164.432	1.043905
-SumNarrowVectorBase	43.289	6055.721	38.444994
-SumNarrowVectorTraits	19.514	13433.471	85.282940
-SumNarrowVector128Traits	20.613	12717.414	80.737027
-SumNarrowVector256Traits	4430.470	59.168	0.375633
+SumNarrow_If	1666.966	157.258
+SumNarrow_IfUnrolling4	1617.078	162.110	1.030851
+SumNarrow_MinMax	2415.064	108.545	0.690237
+SumNarrow_MinMaxUnrolling4	1784.294	146.918	0.934244
+SumNarrow_BitMath	1582.041	165.700	1.053681
+SumNarrow_BitMathUnrolling4	1596.018	164.249	1.044453
+SumNarrowVectorBase	43.837	5979.916	38.026121
+SumNarrowVectorTraits	21.748	12053.732	76.649348
+SumNarrowVector128Traits	20.709	12658.154	80.492853
+SumNarrowVector256Traits	5405.592	48.495	0.308378
 
 [YNarrowSaturateBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	25440
-SumNarrow_If	1634.150	160.416
-SumNarrow_MinMax	1647.749	159.092	0.991747
-SumNarrow_BitMath	1346.768	194.647	1.213387
-SumNarrowVectorBase	94.765	2766.267	17.244319
-SumNarrowVectorTraits	42.208	6210.719	38.716303
-SumNarrowVector128Traits	42.185	6214.182	38.737889
-SumNarrowVector256Traits	5100.212	51.399	0.320408
+SumNarrow_If	1543.604	169.826
+SumNarrow_MinMax	1708.746	153.413	0.903355
+SumNarrow_BitMath	1347.186	194.586	1.145799
+SumNarrowVectorBase	83.093	3154.830	18.576845
+SumNarrowVectorTraits	42.526	6164.284	36.297663
+SumNarrowVector128Traits	42.659	6145.077	36.184563
+SumNarrowVector256Traits	5167.005	50.734	0.298743
 
 [YNarrowSaturateBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	1070749362
-SumNarrow_If	1630.200	160.805
-SumNarrow_MinMax	1585.400	165.349	1.028258
-SumNarrow_BitMath	1360.385	192.698	1.198337
-SumNarrowVectorBase	226.645	1156.627	7.192741
-SumNarrowVectorTraits	79.825	3283.969	20.422081
-SumNarrowVector128Traits	79.727	3288.015	20.447246
-SumNarrowVector256Traits	7755.180	33.802	0.210208
+SumNarrow_If	1633.810	160.450
+SumNarrow_MinMax	1580.886	165.821	1.033477
+SumNarrow_BitMath	1363.272	192.290	1.198448
+SumNarrowVectorBase	230.436	1137.600	7.090080
+SumNarrowVectorTraits	84.159	3114.881	19.413462
+SumNarrowVector128Traits	84.983	3084.659	19.225108
+SumNarrowVector256Traits	7857.028	33.364	0.207942
 
 [YNarrowSaturateBenchmark_UInt16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	123
-SumNarrow_If	498.418	525.952
-SumNarrow_IfUnrolling4	516.501	507.538	0.964990
-SumNarrow_MinMax	486.273	539.088	1.024977
-SumNarrow_MinMaxUnrolling4	483.279	542.428	1.031326
-SumNarrow_BitMath	1010.398	259.446	0.493289
-SumNarrow_BitMathUnrolling4	1049.666	249.740	0.474835
-SumNarrowVectorBase	32.991	7945.913	15.107684
-SumNarrowVectorTraits	18.505	14166.207	26.934423
-SumNarrowVector128Traits	18.525	14150.934	26.905384
-SumNarrowVector256Traits	1829.907	143.255	0.272374
+SumNarrow_If	506.249	517.816
+SumNarrow_IfUnrolling4	517.110	506.940	0.978997
+SumNarrow_MinMax	456.759	573.922	1.108351
+SumNarrow_MinMaxUnrolling4	483.596	542.072	1.046842
+SumNarrow_BitMath	1012.556	258.893	0.499971
+SumNarrow_BitMathUnrolling4	1052.384	249.095	0.481050
+SumNarrowVectorBase	33.393	7850.298	15.160391
+SumNarrowVectorTraits	19.449	13478.400	26.029307
+SumNarrowVector128Traits	19.448	13479.084	26.030629
+SumNarrowVector256Traits	1774.820	147.702	0.285240
 
 [YNarrowSaturateBenchmark_UInt32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	52166
-SumNarrow_If	486.669	538.649
-SumNarrow_MinMax	489.286	535.769	0.994652
-SumNarrow_BitMath	917.816	285.617	0.530247
-SumNarrowVectorBase	66.286	3954.723	7.341923
-SumNarrowVectorTraits	40.954	6400.947	11.883324
-SumNarrowVector128Traits	38.037	6891.766	12.794529
-SumNarrowVector256Traits	2614.252	100.275	0.186160
+SumNarrow_If	490.806	534.109
+SumNarrow_MinMax	494.815	529.782	0.991898
+SumNarrow_BitMath	917.871	285.600	0.534722
+SumNarrowVectorBase	62.402	4200.870	7.865193
+SumNarrowVectorTraits	41.726	6282.575	11.762722
+SumNarrowVector128Traits	39.009	6720.106	12.581902
+SumNarrowVector256Traits	2495.518	105.046	0.196675
 
 [YNarrowSaturateBenchmark_UInt64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	4294705152
-SumNarrow_If	421.402	622.076
-SumNarrow_MinMax	421.317	622.201	1.000201
-SumNarrow_BitMath	882.303	297.113	0.477616
-SumNarrowVectorBase	140.191	1869.904	3.005908
-SumNarrowVectorTraits	75.083	3491.369	5.612448
-SumNarrowVector128Traits	81.107	3232.074	5.195625
-SumNarrowVector256Traits	3629.701	72.222	0.116098
-
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+SumNarrow_If	423.938	618.355
+SumNarrow_MinMax	424.308	617.816	0.999128
+SumNarrow_BitMath	884.775	296.283	0.479147
+SumNarrowVectorBase	141.352	1854.543	2.999156
+SumNarrowVectorTraits	76.146	3442.668	5.567461
+SumNarrowVector128Traits	81.842	3203.035	5.179929
+SumNarrowVector256Traits	3600.020	72.817	0.117760
 
 ```
 
@@ -1017,27 +1005,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.19.0.1029
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	7.0.8
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/
 RuntimeInformation.FrameworkDescription:	.NET 7.0.8
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.19.0-1029-aws #30~22.04.1-Ubuntu SMP Thu Jul 13 17:21:19 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -1045,86 +1036,79 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	123
-SumNarrow_If	1441.188	181.894
-SumNarrow_IfUnrolling4	1406.561	186.372	1.024618
-SumNarrow_MinMax	1419.201	184.712	1.015492
-SumNarrow_MinMaxUnrolling4	1406.301	186.407	1.024807
-SumNarrow_BitMath	1282.035	204.475	1.124141
-SumNarrow_BitMathUnrolling4	1274.991	205.605	1.130351
-SumNarrowVectorBase	36.584	7165.511	39.393791
-SumNarrowVectorTraits	16.904	15507.867	85.257509
-SumNarrowVector128Traits	16.919	15494.383	85.183380
-SumNarrowVector256Traits	4242.157	61.795	0.339730
+SumNarrow_If	1440.815	181.941
+SumNarrow_IfUnrolling4	1405.700	186.487	1.024981
+SumNarrow_MinMax	1419.995	184.609	1.014662
+SumNarrow_MinMaxUnrolling4	1406.922	186.324	1.024090
+SumNarrow_BitMath	1275.647	205.499	1.129478
+SumNarrow_BitMathUnrolling4	1276.037	205.436	1.129133
+SumNarrowVectorBase	38.670	6778.968	37.259061
+SumNarrowVectorTraits	16.943	15472.104	85.038917
+SumNarrowVector128Traits	17.256	15191.105	83.494471
+SumNarrowVector256Traits	4282.214	61.217	0.336465
 
 [YNarrowSaturateBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	25440
-SumNarrow_If	1373.222	190.897
-SumNarrow_MinMax	1337.567	195.986	1.026657
-SumNarrow_BitMath	1014.959	258.280	1.352983
-SumNarrowVectorBase	86.647	3025.432	15.848498
-SumNarrowVectorTraits	32.755	8003.142	41.923858
-SumNarrowVector128Traits	32.876	7973.790	41.770099
-SumNarrowVector256Traits	4538.541	57.760	0.302569
+SumNarrow_If	1371.861	191.086
+SumNarrow_MinMax	1337.883	195.939	1.025397
+SumNarrow_BitMath	1010.096	259.524	1.358149
+SumNarrowVectorBase	74.714	3508.643	18.361550
+SumNarrowVectorTraits	33.795	7756.942	40.593890
+SumNarrowVector128Traits	34.194	7666.446	40.120301
+SumNarrowVector256Traits	4540.156	57.739	0.302162
 
 [YNarrowSaturateBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	1070749362
-SumNarrow_If	1276.440	205.371
-SumNarrow_MinMax	1330.643	197.005	0.959266
-SumNarrow_BitMath	1064.614	246.234	1.198970
-SumNarrowVectorBase	213.246	1229.301	5.985756
-SumNarrowVectorTraits	66.847	3921.550	19.094944
-SumNarrowVector128Traits	65.231	4018.683	19.567910
-SumNarrowVector256Traits	4069.181	64.422	0.313685
+SumNarrow_If	1276.641	205.339
+SumNarrow_MinMax	1327.646	197.450	0.961582
+SumNarrow_BitMath	1065.359	246.062	1.198320
+SumNarrowVectorBase	210.741	1243.915	6.057865
+SumNarrowVectorTraits	66.228	3958.193	19.276393
+SumNarrowVector128Traits	64.843	4042.758	19.688222
+SumNarrowVector256Traits	4076.431	64.307	0.313176
 
 [YNarrowSaturateBenchmark_UInt16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	123
-SumNarrow_If	430.487	608.947
-SumNarrow_IfUnrolling4	372.718	703.331	1.154996
-SumNarrow_MinMax	430.267	609.259	1.000513
-SumNarrow_MinMaxUnrolling4	378.186	693.162	1.138296
-SumNarrow_BitMath	785.126	333.888	0.548303
-SumNarrow_BitMathUnrolling4	786.939	333.118	0.547040
-SumNarrowVectorBase	29.400	8916.311	14.642179
-SumNarrowVectorTraits	18.977	13814.007	22.685071
-SumNarrowVector128Traits	17.998	14565.067	23.918446
-SumNarrowVector256Traits	1392.367	188.272	0.309177
+SumNarrow_If	430.557	608.849
+SumNarrow_IfUnrolling4	373.288	702.256	1.153416
+SumNarrow_MinMax	430.777	608.538	0.999490
+SumNarrow_MinMaxUnrolling4	378.714	692.196	1.136893
+SumNarrow_BitMath	785.872	333.571	0.547871
+SumNarrow_BitMathUnrolling4	787.055	333.070	0.547048
+SumNarrowVectorBase	29.579	8862.558	14.556252
+SumNarrowVectorTraits	18.640	14063.862	23.099100
+SumNarrowVector128Traits	18.428	14225.569	23.364694
+SumNarrowVector256Traits	1387.054	188.993	0.310411
 
 [YNarrowSaturateBenchmark_UInt32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	52166
-SumNarrow_If	422.059	621.107
-SumNarrow_MinMax	421.851	621.414	1.000494
-SumNarrow_BitMath	645.748	405.954	0.653598
-SumNarrowVectorBase	59.857	4379.473	7.051077
-SumNarrowVectorTraits	38.996	6722.416	10.823284
-SumNarrowVector128Traits	39.370	6658.424	10.720255
-SumNarrowVector256Traits	1621.123	161.705	0.260350
+SumNarrow_If	422.334	620.704
+SumNarrow_MinMax	422.233	620.851	1.000238
+SumNarrow_BitMath	645.835	405.899	0.653934
+SumNarrowVectorBase	60.954	4300.706	6.928759
+SumNarrowVectorTraits	40.177	6524.682	10.511750
+SumNarrowVector128Traits	40.294	6505.829	10.481375
+SumNarrowVector256Traits	1638.500	159.990	0.257756
 
 [YNarrowSaturateBenchmark_UInt64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrow_If	4294705152
-SumNarrow_If	316.249	828.917
-SumNarrow_MinMax	316.383	828.565	0.999576
-SumNarrow_BitMath	626.708	418.287	0.504619
-SumNarrowVectorBase	144.294	1816.732	2.191694
-SumNarrowVectorTraits	74.871	3501.256	4.223894
-SumNarrowVector128Traits	75.207	3485.648	4.205065
-SumNarrowVector256Traits	1746.632	150.085	0.181062
-
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+SumNarrow_If	316.566	828.085
+SumNarrow_MinMax	316.668	827.820	0.999679
+SumNarrow_BitMath	626.514	418.417	0.505282
+SumNarrowVectorBase	144.701	1811.620	2.187721
+SumNarrowVectorTraits	75.086	3491.233	4.216030
+SumNarrowVector128Traits	75.261	3483.151	4.206271
+SumNarrowVector256Traits	1757.176	149.185	0.180156
 
 ```
 

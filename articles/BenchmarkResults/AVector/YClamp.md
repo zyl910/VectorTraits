@@ -762,24 +762,29 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.15.0.1026
-Environment.Version:	3.1.31
+Environment.OSVersion:	Unix 6.2.0.1013
+Environment.Version:	3.1.32
 Stopwatch.Frequency:	1000000000
-RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.31/
-RuntimeInformation.FrameworkDescription:	.NET Core 3.1.31
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/
+RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
 RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.31/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(TraitsUtil):	.NET Core 3.0
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
-Vectors.Instance:	VectorTraits128Base
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	
+Vector128s.Instance:	WVectorTraits128Base	// 
+Vectors.Instance:	VectorTraits128Base	// 
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -791,71 +796,71 @@ Check-SumClampVectorBase	Check `SumClampVectorBase` mismatch. 130882.25684480942
 Check-SumClampVectorTraits	Check `SumClampVectorTraits` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVector128Traits	Check `SumClampVector128Traits` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVector256Traits	Check `SumClampVector256Traits` mismatch. 130882.25684481168!=130882.25684481156
-SumClamp_If	1587.760	165.103
-SumClamp_MinMax	2178.762	120.318	0.728744
-SumClamp_Math	1474.440	177.792	1.076856
-SumClamp_BitUtil	1596.014	164.249	0.994828
-SumClampVectorScalar	385.613	679.811	4.117494
-SumClampVectorBase	134.909	1943.113	11.769091
-SumClampVectorTraits	134.523	1948.691	11.802874
-SumClampVector128Traits	2949.064	88.891	0.538394
-SumClampVector256Traits	7154.960	36.638	0.221910
+SumClamp_If	1588.049	165.073
+SumClamp_MinMax	2158.829	121.429	0.735607
+SumClamp_Math	1472.245	178.057	1.078658
+SumClamp_BitMath	1624.806	161.339	0.977377
+SumClampVectorScalar	386.308	678.588	4.110834
+SumClampVectorBase	132.601	1976.940	11.976155
+SumClampVectorTraits	158.338	1655.595	10.029471
+SumClampVector128Traits	4521.650	57.975	0.351210
+SumClampVector256Traits	9388.687	27.921	0.169145
 
 [YClampBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	25723
-SumClamp_If	1529.624	171.378
-SumClamp_MinMax	1621.412	161.676	0.943390
-SumClamp_Math	1621.400	161.678	0.943397
-SumClamp_BitUtil	1189.230	220.432	1.286231
-SumClampVectorScalar	613.607	427.218	2.492838
-SumClampVectorBase	39.638	6613.497	38.590105
-SumClampVectorTraits	33.320	7867.359	45.906454
-SumClampVector128Traits	1751.056	149.706	0.873544
-SumClampVector256Traits	2684.773	97.641	0.569741
+SumClamp_If	1618.982	161.919
+SumClamp_MinMax	1536.722	170.586	1.053530
+SumClamp_Math	1513.758	173.174	1.069512
+SumClamp_BitMath	1188.237	220.616	1.362508
+SumClampVectorScalar	606.618	432.140	2.668868
+SumClampVectorBase	33.494	7826.693	48.337089
+SumClampVectorTraits	33.500	7825.292	48.328434
+SumClampVector128Traits	1802.716	145.416	0.898079
+SumClampVector256Traits	2783.975	94.162	0.581536
 
 [YClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-31956128
-SumClamp_If	1563.886	167.624
-SumClamp_MinMax	1529.022	171.446	1.022802
-SumClamp_Math	1506.342	174.027	1.038201
-SumClamp_BitUtil	947.644	276.627	1.650288
-SumClampVectorScalar	421.654	621.704	3.708930
-SumClampVectorBase	79.618	3292.520	19.642350
-SumClampVectorTraits	79.724	3288.143	19.616237
-SumClampVector128Traits	3316.644	79.039	0.471527
-SumClampVector256Traits	5210.626	50.310	0.300134
+SumClamp_If	1563.830	167.629
+SumClamp_MinMax	1571.772	166.782	0.994947
+SumClamp_Math	1553.471	168.747	1.006668
+SumClamp_BitMath	947.749	276.596	1.650046
+SumClampVectorScalar	421.355	622.145	3.711428
+SumClampVectorBase	79.894	3281.144	19.573790
+SumClampVectorTraits	79.500	3297.408	19.670815
+SumClampVector128Traits	3307.649	79.254	0.472792
+SumClampVector256Traits	5126.769	51.132	0.305032
 
 [YClampBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141951893350734
-SumClamp_If	1591.384	164.727
-SumClamp_MinMax	1733.247	151.244	0.918152
-SumClamp_Math	1553.532	168.741	1.024365
-SumClamp_BitUtil	1056.874	248.037	1.505747
-SumClampVectorScalar	716.438	365.899	2.221244
-SumClampVectorBase	284.392	921.771	5.595750
-SumClampVectorTraits	284.577	921.170	5.592097
-SumClampVector128Traits	2319.325	113.026	0.686141
-SumClampVector256Traits	4416.653	59.354	0.360314
+SumClamp_If	1677.197	156.299
+SumClamp_MinMax	1707.800	153.498	0.982081
+SumClamp_Math	1590.627	164.805	1.054425
+SumClamp_BitMath	1062.793	246.656	1.578103
+SumClampVectorScalar	716.728	365.751	2.340075
+SumClampVectorBase	309.219	847.762	5.423980
+SumClampVectorTraits	309.472	847.069	5.419547
+SumClampVector128Traits	4041.513	64.863	0.414992
+SumClampVector256Traits	9512.647	27.557	0.176312
 
 [YClampBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	6
-SumClamp_If	1645.522	159.307
-SumClamp_MinMax	1596.838	164.164	1.030488
-SumClamp_Math	1640.774	159.768	1.002894
-SumClamp_BitUtil	1158.909	226.199	1.419889
-SumClampVectorScalar	594.904	440.649	2.766031
-SumClampVectorBase	19.825	13223.016	83.003112
-SumClampVectorTraits	19.838	13214.068	82.946948
-SumClampVector128Traits	1061.056	247.060	1.550834
-SumClampVector256Traits	1576.512	166.281	1.043774
+SumClamp_If	1694.529	154.700
+SumClamp_MinMax	1679.898	156.048	1.008710
+SumClamp_Math	1623.828	161.436	1.043540
+SumClamp_BitMath	1159.307	226.121	1.461674
+SumClampVectorScalar	591.701	443.035	2.863827
+SumClampVectorBase	16.823	15582.326	100.725964
+SumClampVectorTraits	16.835	15571.467	100.655772
+SumClampVector128Traits	1155.280	226.910	1.466770
+SumClampVector256Traits	1367.281	191.727	1.239343
 
 [YClampBenchmark_Single(262144)]
 ---
@@ -865,22 +870,16 @@ Check-SumClampVectorBase	Check `SumClampVectorBase` mismatch. 130881.91!=130883.
 Check-SumClampVectorTraits	Check `SumClampVectorTraits` mismatch. 130881.91!=130883.55
 Check-SumClampVector128Traits	Check `SumClampVector128Traits` mismatch. 130881.91!=130883.55
 Check-SumClampVector256Traits	Check `SumClampVector256Traits` mismatch. 130882.305!=130883.55
-SumClamp_If	1570.506	166.917
-SumClamp_MinMax	2168.072	120.911	0.724379
-SumClamp_Math	1471.624	178.132	1.067193
-SumClamp_BitUtil	1521.857	172.253	1.031967
-SumClampVectorScalar	383.035	684.387	4.100168
-SumClampVectorBase	67.553	3880.545	23.248371
-SumClampVectorTraits	67.589	3878.492	23.236073
-SumClampVector128Traits	3266.738	80.246	0.480757
-SumClampVector256Traits	5130.562	51.095	0.306108
+SumClamp_If	1507.688	173.871
+SumClamp_MinMax	2423.954	108.147	0.621995
+SumClamp_Math	1472.268	178.055	1.024059
+SumClamp_BitMath	1522.782	172.148	0.990088
+SumClampVectorScalar	381.840	686.528	3.948481
+SumClampVectorBase	67.773	3867.973	22.246165
+SumClampVectorTraits	67.649	3875.048	22.286856
+SumClampVector128Traits	3290.297	79.672	0.458223
+SumClampVector256Traits	4908.271	53.409	0.307173
 
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: Requires hardware support AdvSimd!
-VectorTraits128AdvSimdB64: Requires hardware support AdvSimd!
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 ```
 
 #### .NET 5.0
@@ -890,24 +889,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.15.0.1026
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	5.0.17
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/
 RuntimeInformation.FrameworkDescription:	.NET 5.0.17
 RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
+RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(TraitsUtil):	.NET 5.0
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -920,77 +925,77 @@ Check-SumClampVectorTraits	Check `SumClampVectorTraits` mismatch. 130882.2568448
 Check-SumClampVector128_AdvSimd	Check `SumClampVector128_AdvSimd` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVector128Traits	Check `SumClampVector128Traits` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVector256Traits	Check `SumClampVector256Traits` mismatch. 130882.25684481168!=130882.25684481156
-SumClamp_If	1545.658	169.600
-SumClamp_MinMax	2004.861	130.754	0.770955
-SumClamp_Math	1465.969	178.820	1.054359
-SumClamp_BitUtil	2320.424	112.972	0.666110
-SumClampVectorScalar	389.378	673.237	3.969551
-SumClampVectorBase	133.863	1958.302	11.546574
-SumClampVectorTraits	133.869	1958.206	11.546006
-SumClampVector128_AdvSimd	1485.092	176.517	1.040783
-SumClampVector128Traits	133.392	1965.215	11.587332
-SumClampVector256Traits	3008.985	87.120	0.513681
+SumClamp_If	1497.256	175.083
+SumClamp_MinMax	1995.446	131.371	0.750336
+SumClamp_Math	1495.693	175.266	1.001045
+SumClamp_BitMath	2290.986	114.424	0.653542
+SumClampVectorScalar	386.111	678.935	3.877790
+SumClampVectorBase	132.432	1979.468	11.305885
+SumClampVectorTraits	132.499	1978.454	11.300092
+SumClampVector128_AdvSimd	1821.997	143.877	0.821766
+SumClampVector128Traits	132.459	1979.062	11.303565
+SumClampVector256Traits	4581.469	57.218	0.326807
 
 [YClampBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	25723
-SumClamp_If	1551.573	168.954
-SumClamp_MinMax	1531.442	171.175	1.013145
-SumClamp_Math	1557.712	168.288	0.996059
-SumClamp_BitUtil	1553.268	168.769	0.998909
-SumClampVectorScalar	614.415	426.656	2.525286
-SumClampVectorBase	40.043	6546.640	38.748137
-SumClampVectorTraits	34.095	7688.617	45.507251
-SumClampVector128_AdvSimd	33.918	7728.677	45.744359
-SumClampVector128Traits	40.314	6502.519	38.486995
-SumClampVector256Traits	2387.483	109.799	0.649878
+SumClamp_If	1515.387	172.988
+SumClamp_MinMax	1620.949	161.723	0.934877
+SumClamp_Math	1574.604	166.482	0.962392
+SumClamp_BitMath	1535.846	170.684	0.986679
+SumClampVectorScalar	610.731	429.230	2.481267
+SumClampVectorBase	33.537	7816.561	45.185528
+SumClampVectorTraits	39.716	6600.392	38.155166
+SumClampVector128_AdvSimd	39.563	6626.016	38.303293
+SumClampVector128Traits	33.571	7808.673	45.139929
+SumClampVector256Traits	2851.723	91.925	0.531394
 
 [YClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-31956128
-SumClamp_If	1480.971	177.008
-SumClamp_MinMax	1581.713	165.734	0.936309
-SumClamp_Math	1528.743	171.477	0.968751
-SumClamp_BitUtil	1242.354	211.006	1.192069
-SumClampVectorScalar	399.912	655.504	3.703241
-SumClampVectorBase	68.779	3811.396	21.532319
-SumClampVectorTraits	68.541	3824.629	21.607079
-SumClampVector128_AdvSimd	80.577	3253.323	18.379512
-SumClampVector128Traits	80.209	3268.265	18.463925
-SumClampVector256Traits	3175.573	82.550	0.466364
+SumClamp_If	1521.338	172.312
+SumClamp_MinMax	1566.104	167.386	0.971415
+SumClamp_Math	1599.858	163.854	0.950920
+SumClamp_BitMath	1234.324	212.379	1.232527
+SumClampVectorScalar	397.869	658.870	3.823716
+SumClampVectorBase	80.025	3275.757	19.010668
+SumClampVectorTraits	79.641	3291.572	19.102445
+SumClampVector128_AdvSimd	67.912	3860.075	22.401725
+SumClampVector128Traits	68.157	3846.174	22.321047
+SumClampVector256Traits	3949.279	66.378	0.385219
 
 [YClampBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141951893350734
-SumClamp_If	1633.783	160.452
-SumClamp_MinMax	1707.506	153.525	0.956824
-SumClamp_Math	1599.495	163.892	1.021437
-SumClamp_BitUtil	1377.648	190.284	1.185922
-SumClampVectorScalar	467.718	560.475	3.493096
-SumClampVectorBase	184.843	1418.196	8.838744
-SumClampVectorTraits	186.486	1405.707	8.760906
-SumClampVector128_AdvSimd	1433.062	182.926	1.140064
-SumClampVector128_AdvSimd64	184.592	1420.127	8.850777
-SumClampVector128Traits	184.916	1417.636	8.835252
-SumClampVector256Traits	2571.964	101.924	0.635228
+SumClamp_If	1576.254	166.308
+SumClamp_MinMax	1699.611	154.238	0.927420
+SumClamp_Math	1628.939	160.929	0.967657
+SumClamp_BitMath	1359.801	192.781	1.159180
+SumClampVectorScalar	472.423	554.892	3.336530
+SumClampVectorBase	182.696	1434.866	8.627752
+SumClampVectorTraits	182.793	1434.107	8.623187
+SumClampVector128_AdvSimd	1796.486	145.920	0.877410
+SumClampVector128_Arm64	182.132	1439.311	8.654481
+SumClampVector128Traits	182.188	1438.866	8.651806
+SumClampVector256Traits	4497.154	58.291	0.350500
 
 [YClampBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	6
-SumClamp_If	1576.240	166.310
-SumClamp_MinMax	1706.391	153.625	0.923728
-SumClamp_Math	1641.762	159.672	0.960091
-SumClamp_BitUtil	1502.352	174.489	1.049182
-SumClampVectorScalar	598.317	438.135	2.634455
-SumClampVectorBase	16.892	15518.749	93.312369
-SumClampVectorTraits	16.965	15452.052	92.911328
-SumClampVector128_AdvSimd	20.029	13088.214	78.697854
-SumClampVector128Traits	20.017	13096.164	78.745654
-SumClampVector256Traits	1828.070	143.399	0.862243
+SumClamp_If	1624.306	161.388
+SumClamp_MinMax	1700.806	154.129	0.955021
+SumClamp_Math	1677.856	156.237	0.968084
+SumClamp_BitMath	1496.355	175.188	1.085509
+SumClampVectorScalar	595.851	439.949	2.726026
+SumClampVectorBase	19.947	13141.723	81.429217
+SumClampVectorTraits	19.942	13145.372	81.451827
+SumClampVector128_AdvSimd	16.836	15570.587	96.479029
+SumClampVector128Traits	16.854	15553.970	96.376066
+SumClampVector256Traits	1479.542	177.179	1.097844
 
 [YClampBenchmark_Single(262144)]
 ---
@@ -1001,23 +1006,17 @@ Check-SumClampVectorTraits	Check `SumClampVectorTraits` mismatch. 130881.91!=130
 Check-SumClampVector128_AdvSimd	Check `SumClampVector128_AdvSimd` mismatch. 130881.91!=130883.55
 Check-SumClampVector128Traits	Check `SumClampVector128Traits` mismatch. 130881.91!=130883.55
 Check-SumClampVector256Traits	Check `SumClampVector256Traits` mismatch. 130882.305!=130883.55
-SumClamp_If	1462.712	179.218
-SumClamp_MinMax	2017.755	129.919	0.724920
-SumClamp_Math	1511.019	173.488	0.968030
-SumClamp_BitUtil	2055.388	127.540	0.711648
-SumClampVectorScalar	383.274	683.960	3.816363
-SumClampVectorBase	80.646	3250.539	18.137367
-SumClampVectorTraits	68.422	3831.290	21.377847
-SumClampVector128_AdvSimd	68.899	3804.758	21.229801
-SumClampVector128Traits	68.923	3803.452	21.222516
-SumClampVector256Traits	3089.452	84.851	0.473454
+SumClamp_If	1528.479	171.506
+SumClamp_MinMax	1994.344	131.444	0.766407
+SumClamp_Math	1453.763	180.321	1.051395
+SumClamp_BitMath	2030.580	129.098	0.752731
+SumClampVectorScalar	382.448	685.437	3.996569
+SumClampVectorBase	68.131	3847.645	22.434406
+SumClampVectorTraits	80.145	3270.883	19.071492
+SumClampVector128_AdvSimd	79.995	3276.997	19.107138
+SumClampVector128Traits	80.029	3275.621	19.099114
+SumClampVector256Traits	3895.904	67.287	0.392330
 
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 ```
 
 #### .NET 6.0
@@ -1027,24 +1026,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.15.0.1026
-Environment.Version:	6.0.11
+Environment.OSVersion:	Unix 6.2.0.1013
+Environment.Version:	6.0.19
 Stopwatch.Frequency:	1000000000
-RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.11/
-RuntimeInformation.FrameworkDescription:	.NET 6.0.11
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/
+RuntimeInformation.FrameworkDescription:	.NET 6.0.19
 RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
+RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.11/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(TraitsUtil):	.NET 6.0
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -1057,77 +1062,77 @@ Check-SumClampVectorTraits	Check `SumClampVectorTraits` mismatch. 130882.2568448
 Check-SumClampVector128_AdvSimd	Check `SumClampVector128_AdvSimd` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVector128Traits	Check `SumClampVector128Traits` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVector256Traits	Check `SumClampVector256Traits` mismatch. 130882.25684481168!=130882.25684481156
-SumClamp_If	1490.817	175.839
-SumClamp_MinMax	1931.634	135.711	0.771791
-SumClamp_Math	1425.787	183.859	1.045610
-SumClamp_BitUtil	2337.483	112.148	0.637788
-SumClampVectorScalar	426.213	615.053	3.497819
-SumClampVectorBase	134.121	1954.541	11.115508
-SumClampVectorTraits	133.522	1963.298	11.165311
-SumClampVector128_AdvSimd	1481.306	176.968	1.006421
-SumClampVector128Traits	134.207	1953.280	11.108339
-SumClampVector256Traits	3199.120	81.943	0.466009
+SumClamp_If	1480.153	177.106
+SumClamp_MinMax	1939.639	135.151	0.763108
+SumClamp_Math	1545.128	169.658	0.957948
+SumClamp_BitMath	2320.392	112.974	0.637889
+SumClampVectorScalar	401.202	653.397	3.689296
+SumClampVectorBase	133.360	1965.685	11.098918
+SumClampVectorTraits	158.973	1648.988	9.310743
+SumClampVector128_AdvSimd	1853.457	141.435	0.798590
+SumClampVector128Traits	158.999	1648.710	9.309170
+SumClampVector256Traits	4572.715	57.328	0.323692
 
 [YClampBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	25723
-SumClamp_If	1558.021	168.255
-SumClamp_MinMax	1687.553	155.340	0.923243
-SumClamp_Math	1591.123	164.754	0.979196
-SumClamp_BitUtil	1551.969	168.911	1.003900
-SumClampVectorScalar	616.165	425.445	2.528577
-SumClampVectorBase	33.748	7767.658	46.166123
-SumClampVectorTraits	34.062	7696.191	45.741370
-SumClampVector128_AdvSimd	34.062	7696.195	45.741390
-SumClampVector128Traits	34.016	7706.450	45.802340
-SumClampVector256Traits	2529.319	103.642	0.615984
+SumClamp_If	1518.971	172.580
+SumClamp_MinMax	1758.447	149.077	0.863814
+SumClamp_Math	1576.136	166.321	0.963731
+SumClamp_BitMath	1535.231	170.752	0.989409
+SumClampVectorScalar	614.734	426.435	2.470941
+SumClampVectorBase	34.180	7669.598	44.440832
+SumClampVectorTraits	34.212	7662.379	44.399005
+SumClampVector128_AdvSimd	34.243	7655.475	44.358998
+SumClampVector128Traits	34.156	7674.842	44.471220
+SumClampVector256Traits	2766.798	94.746	0.549000
 
 [YClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-31956128
-SumClamp_If	1476.857	177.501
-SumClamp_MinMax	1572.279	166.729	0.939310
-SumClamp_Math	1531.052	171.218	0.964603
-SumClamp_BitUtil	1246.213	210.353	1.185077
-SumClampVectorScalar	408.270	642.084	3.617352
-SumClampVectorBase	68.809	3809.717	21.463049
-SumClampVectorTraits	68.795	3810.521	21.467577
-SumClampVector128_AdvSimd	68.485	3827.758	21.564685
-SumClampVector128Traits	68.780	3811.325	21.472103
-SumClampVector256Traits	3205.332	81.784	0.460750
+SumClamp_If	1519.893	172.475
+SumClamp_MinMax	1643.194	159.533	0.924962
+SumClamp_Math	1602.646	163.570	0.948365
+SumClamp_BitMath	1237.813	211.780	1.227885
+SumClampVectorScalar	407.832	642.775	3.726763
+SumClampVectorBase	68.272	3839.679	22.262190
+SumClampVectorTraits	68.278	3839.369	22.260394
+SumClampVector128_AdvSimd	68.395	3832.793	22.222263
+SumClampVector128Traits	68.467	3828.781	22.199003
+SumClampVector256Traits	3673.165	71.367	0.413783
 
 [YClampBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141951893350734
-SumClamp_If	1586.389	165.246
-SumClamp_MinMax	1646.458	159.217	0.963516
-SumClamp_Math	1568.312	167.150	1.011526
-SumClamp_BitUtil	1374.063	190.780	1.154524
-SumClampVectorScalar	507.200	516.846	3.127739
-SumClampVectorBase	184.843	1418.199	8.582366
-SumClampVectorTraits	184.533	1420.583	8.596791
-SumClampVector128_AdvSimd	1428.160	183.554	1.110792
-SumClampVector128_AdvSimd64	184.449	1421.224	8.600668
-SumClampVector128Traits	186.012	1409.283	8.528407
-SumClampVector256Traits	2702.764	96.991	0.586951
+SumClamp_If	1565.666	167.433
+SumClamp_MinMax	1584.451	165.448	0.988144
+SumClamp_Math	1561.132	167.919	1.002904
+SumClamp_BitMath	1359.643	192.804	1.151527
+SumClampVectorScalar	511.553	512.447	3.060612
+SumClampVectorBase	183.528	1428.361	8.530942
+SumClampVectorTraits	183.715	1426.904	8.522244
+SumClampVector128_AdvSimd	1793.450	146.167	0.872991
+SumClampVector128_Arm64	184.787	1418.628	8.472816
+SumClampVector128Traits	183.971	1424.916	8.510371
+SumClampVector256Traits	4588.614	57.129	0.341207
 
 [YClampBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	6
-SumClamp_If	1583.729	165.523
-SumClamp_MinMax	1630.137	160.811	0.971531
-SumClamp_Math	1558.250	168.230	1.016351
-SumClamp_BitUtil	1469.260	178.419	1.077909
-SumClampVectorScalar	566.095	463.074	2.797636
-SumClampVectorBase	17.036	15387.905	92.965177
-SumClampVectorTraits	17.035	15388.486	92.968686
-SumClampVector128_AdvSimd	16.940	15474.626	93.489100
-SumClampVector128Traits	17.058	15367.514	92.841987
-SumClampVector256Traits	1908.234	137.375	0.829944
+SumClamp_If	1564.782	167.527
+SumClamp_MinMax	1675.927	156.417	0.933682
+SumClamp_Math	1549.903	169.136	1.009600
+SumClamp_BitMath	1460.180	179.529	1.071636
+SumClampVectorScalar	567.185	462.184	2.758856
+SumClampVectorBase	16.864	15544.478	92.787645
+SumClampVectorTraits	16.879	15531.098	92.707778
+SumClampVector128_AdvSimd	16.878	15531.832	92.712159
+SumClampVector128Traits	16.872	15537.514	92.746073
+SumClampVector256Traits	1502.235	174.503	1.041636
 
 [YClampBenchmark_Single(262144)]
 ---
@@ -1138,23 +1143,17 @@ Check-SumClampVectorTraits	Check `SumClampVectorTraits` mismatch. 130881.91!=130
 Check-SumClampVector128_AdvSimd	Check `SumClampVector128_AdvSimd` mismatch. 130881.91!=130883.55
 Check-SumClampVector128Traits	Check `SumClampVector128Traits` mismatch. 130881.91!=130883.55
 Check-SumClampVector256Traits	Check `SumClampVector256Traits` mismatch. 130882.305!=130883.55
-SumClamp_If	1475.081	177.715
-SumClamp_MinMax	2032.980	128.946	0.725576
-SumClamp_Math	1458.920	179.684	1.011078
-SumClamp_BitUtil	2047.835	128.010	0.720312
-SumClampVectorScalar	425.848	615.581	3.463865
-SumClampVectorBase	69.252	3785.379	21.300284
-SumClampVectorTraits	69.797	3755.782	21.133740
-SumClampVector128_AdvSimd	69.067	3795.518	21.357336
-SumClampVector128Traits	69.155	3790.700	21.330227
-SumClampVector256Traits	3164.462	82.840	0.466140
+SumClamp_If	1471.450	178.153
+SumClamp_MinMax	2137.969	122.614	0.688247
+SumClamp_Math	1450.927	180.673	1.014145
+SumClamp_BitMath	2041.818	128.388	0.720657
+SumClampVectorScalar	422.820	619.989	3.480085
+SumClampVectorBase	68.712	3815.119	21.414789
+SumClampVectorTraits	68.740	3813.554	21.406003
+SumClampVector128_AdvSimd	68.675	3817.158	21.426235
+SumClampVector128Traits	68.754	3812.774	21.401623
+SumClampVector256Traits	3616.583	72.484	0.406862
 
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 ```
 
 #### .NET 7.0
@@ -1164,24 +1163,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.15.0.1026
-Environment.Version:	7.0.1
+Environment.OSVersion:	Unix 6.2.0.1013
+Environment.Version:	7.0.8
 Stopwatch.Frequency:	1000000000
-RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.1/
-RuntimeInformation.FrameworkDescription:	.NET 7.0.1
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/
+RuntimeInformation.FrameworkDescription:	.NET 7.0.8
 RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
+RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.1/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(TraitsUtil):	.NET 7.0
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -1194,77 +1199,77 @@ Check-SumClampVectorTraits	Check `SumClampVectorTraits` mismatch. 130882.2568448
 Check-SumClampVector128_AdvSimd	Check `SumClampVector128_AdvSimd` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVector128Traits	Check `SumClampVector128Traits` mismatch. 130882.25684480942!=130882.25684481156
 Check-SumClampVector256Traits	Check `SumClampVector256Traits` mismatch. 130882.25684481168!=130882.25684481156
-SumClamp_If	1242.012	211.064
-SumClamp_MinMax	211.667	1238.472	5.867754
-SumClamp_Math	1218.118	215.204	1.019615
-SumClamp_BitUtil	1018.869	257.289	1.219010
-SumClampVectorScalar	308.497	849.746	4.026009
-SumClampVectorBase	112.888	2322.158	11.002150
-SumClampVectorTraits	112.892	2322.076	11.001762
-SumClampVector128_AdvSimd	1465.925	178.825	0.847255
-SumClampVector128Traits	136.025	1927.171	9.130739
-SumClampVector256Traits	3018.289	86.852	0.411495
+SumClamp_If	1240.182	211.375
+SumClamp_MinMax	211.952	1236.810	5.851248
+SumClamp_Math	1218.701	215.101	1.017626
+SumClamp_BitMath	1008.949	259.819	1.229182
+SumClampVectorScalar	308.887	848.672	4.015000
+SumClampVectorBase	112.978	2320.303	10.977165
+SumClampVectorTraits	112.977	2320.341	10.977344
+SumClampVector128_AdvSimd	750.996	349.062	1.651383
+SumClampVector128Traits	135.653	1932.453	9.142279
+SumClampVector256Traits	3024.040	86.687	0.410108
 
 [YClampBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	25723
-SumClamp_If	1323.253	198.106
-SumClamp_MinMax	1383.570	189.469	0.956405
-SumClamp_Math	1341.639	195.391	0.986295
-SumClamp_BitUtil	1231.898	212.797	1.074158
-SumClampVectorScalar	469.642	558.178	2.817575
-SumClampVectorBase	26.780	9788.683	49.411401
-SumClampVectorTraits	26.843	9765.709	49.295434
-SumClampVector128_AdvSimd	33.195	7897.137	39.863238
-SumClampVector128Traits	33.165	7904.151	39.898645
-SumClampVector256Traits	4170.027	62.864	0.317325
+SumClamp_If	1320.443	198.527
+SumClamp_MinMax	1384.209	189.382	0.953933
+SumClamp_Math	1338.732	195.815	0.986338
+SumClamp_BitMath	1229.297	213.247	1.074145
+SumClampVectorScalar	476.332	550.339	2.772109
+SumClampVectorBase	26.711	9814.223	49.435116
+SumClampVectorTraits	26.720	9810.699	49.417370
+SumClampVector128_AdvSimd	33.126	7913.656	39.861795
+SumClampVector128Traits	33.112	7916.946	39.878366
+SumClampVector256Traits	4157.065	63.060	0.317638
 
 [YClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-31956128
-SumClamp_If	1304.687	200.925
-SumClamp_MinMax	1353.238	193.716	0.964123
-SumClamp_Math	1253.535	209.124	1.040806
-SumClamp_BitUtil	936.393	279.951	1.393312
-SumClampVectorScalar	265.359	987.884	4.916686
-SumClampVectorBase	55.208	4748.260	23.632030
-SumClampVectorTraits	55.197	4749.250	23.636953
-SumClampVector128_AdvSimd	67.499	3883.688	19.329065
-SumClampVector128Traits	67.505	3883.312	19.327194
-SumClampVector256Traits	3604.374	72.729	0.361973
+SumClamp_If	1298.534	201.877
+SumClamp_MinMax	1349.077	194.314	0.962536
+SumClamp_Math	1248.954	209.891	1.039697
+SumClamp_BitMath	935.188	280.312	1.388527
+SumClampVectorScalar	265.279	988.181	4.894972
+SumClampVectorBase	55.065	4760.626	23.581835
+SumClampVectorTraits	55.061	4760.959	23.583486
+SumClampVector128_AdvSimd	67.445	3886.755	19.253103
+SumClampVector128Traits	67.383	3890.375	19.271034
+SumClampVector256Traits	3659.145	71.641	0.354874
 
 [YClampBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141951893350734
-SumClamp_If	1315.407	199.287
-SumClamp_MinMax	1284.572	204.071	1.024005
-SumClamp_Math	1361.282	192.571	0.966301
-SumClamp_BitUtil	1065.777	245.965	1.234224
-SumClampVectorScalar	508.650	515.372	2.586075
-SumClampVectorBase	153.943	1702.859	8.544743
-SumClampVectorTraits	153.899	1703.353	8.547222
-SumClampVector128_AdvSimd	1423.875	184.106	0.923822
-SumClampVector128_AdvSimd64	187.516	1397.983	7.014911
-SumClampVector128Traits	187.715	1396.501	7.007476
-SumClampVector256Traits	3090.383	84.826	0.425645
+SumClamp_If	1314.582	199.412
+SumClamp_MinMax	1280.980	204.643	1.026231
+SumClamp_Math	1353.910	193.620	0.970952
+SumClamp_BitMath	1066.152	245.879	1.233015
+SumClampVectorScalar	508.969	515.049	2.582833
+SumClampVectorBase	154.150	1700.577	8.527937
+SumClampVectorTraits	154.162	1700.449	8.527293
+SumClampVector128_AdvSimd	1768.547	148.226	0.743312
+SumClampVector128_Arm64	187.456	1398.432	7.012762
+SumClampVector128Traits	187.115	1400.979	7.025534
+SumClampVector256Traits	3084.887	84.977	0.426136
 
 [YClampBenchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	6
-SumClamp_If	1318.346	198.843
-SumClamp_MinMax	1285.266	203.961	1.025737
-SumClamp_Math	1287.821	203.556	1.023702
-SumClamp_BitUtil	1136.966	230.565	1.159530
-SumClampVectorScalar	429.084	610.939	3.072465
-SumClampVectorBase	13.477	19450.689	97.819251
-SumClampVectorTraits	13.466	19467.714	97.904871
-SumClampVector128_AdvSimd	16.624	15768.957	79.303491
-SumClampVector128Traits	16.640	15753.675	79.226640
-SumClampVector256Traits	3059.376	85.685	0.430920
+SumClamp_If	1316.078	199.186
+SumClamp_MinMax	1292.445	202.828	1.018286
+SumClamp_Math	1290.745	203.095	1.019627
+SumClamp_BitMath	1132.571	231.459	1.162027
+SumClampVectorScalar	428.192	612.211	3.073571
+SumClampVectorBase	13.452	19486.919	97.832897
+SumClampVectorTraits	13.449	19491.937	97.858090
+SumClampVector128_AdvSimd	16.622	15770.986	79.177280
+SumClampVector128Traits	16.624	15769.093	79.167778
+SumClampVector256Traits	3055.926	85.782	0.430664
 
 [YClampBenchmark_Single(262144)]
 ---
@@ -1275,22 +1280,16 @@ Check-SumClampVectorTraits	Check `SumClampVectorTraits` mismatch. 130881.91!=130
 Check-SumClampVector128_AdvSimd	Check `SumClampVector128_AdvSimd` mismatch. 130881.91!=130883.55
 Check-SumClampVector128Traits	Check `SumClampVector128Traits` mismatch. 130881.91!=130883.55
 Check-SumClampVector256Traits	Check `SumClampVector256Traits` mismatch. 130882.305!=130883.55
-SumClamp_If	1239.933	211.418
-SumClamp_MinMax	212.646	1232.772	5.830974
-SumClamp_Math	1220.643	214.759	1.015803
-SumClamp_BitUtil	937.140	279.728	1.323103
-SumClampVectorScalar	307.763	851.772	4.028856
-SumClampVectorBase	55.491	4724.083	22.344763
-SumClampVectorTraits	55.541	4719.848	22.324734
-SumClampVector128_AdvSimd	68.011	3854.423	18.231298
-SumClampVector128Traits	67.863	3862.869	18.271251
-SumClampVector256Traits	2887.323	90.791	0.429440
+SumClamp_If	1237.488	211.836
+SumClamp_MinMax	211.828	1237.532	5.841948
+SumClamp_Math	1217.233	215.361	1.016641
+SumClamp_BitMath	935.907	280.096	1.322234
+SumClampVectorScalar	307.324	852.990	4.026663
+SumClampVectorBase	55.382	4733.386	22.344631
+SumClampVectorTraits	55.354	4735.763	22.355849
+SumClampVector128_AdvSimd	67.489	3884.225	18.336043
+SumClampVector128Traits	67.645	3875.290	18.293865
+SumClampVector256Traits	2895.015	90.550	0.427455
 
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 ```
 

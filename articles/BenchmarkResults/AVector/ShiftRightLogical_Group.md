@@ -80,62 +80,78 @@ Unit of data: Million operations per second. The larger the number, the better t
 | ShiftRightLogicalConstBenchmark_UInt64 | SumSRLFastTraits          |        486.667 |       504.534 |      4852.310 |  4993.147 |  5190.052 |  5004.310 |
 
 ### Arm - AWS Arm t4g.small
-| Type                                   | Method                 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
-| :------------------------------------- | :--------------------- | ------------: | --------: | --------: | --------: |
-| ShiftRightLogicalConstBenchmark_Byte   | SumSRLScalar           |       609.971 |   610.843 |   654.575 |   890.839 |
-| ShiftRightLogicalConstBenchmark_Byte   | SumSRLNetBcl           |               |           |           | 19586.726 |
-| ShiftRightLogicalConstBenchmark_Byte   | SumSRLNetBcl_Const     |               |           |           | 19590.775 |
-| ShiftRightLogicalConstBenchmark_Byte   | SumSRL_Basic           |      3535.363 |  3580.168 |  3569.164 |  7933.745 |
-| ShiftRightLogicalConstBenchmark_Byte   | SumSRL_Base_Core       |      3537.350 |  3664.403 |  3616.444 |  7930.950 |
-| ShiftRightLogicalConstBenchmark_Byte   | SumSRL_AdvSimd         |               | 11345.178 | 11338.244 | 13165.746 |
-| ShiftRightLogicalConstBenchmark_Byte   | SumSRL_Avx2            |               |           |           |           |
-| ShiftRightLogicalConstBenchmark_Byte   | SumSRLTraits           |      3741.637 | 11913.021 | 11355.501 | 13175.619 |
-| ShiftRightLogicalConstBenchmark_Byte   | SumSRLTraits_Core      |      3738.350 | 16982.614 | 15872.815 | 19580.851 |
-| ShiftRightLogicalConstBenchmark_Byte   | SumSRLConstTraits      |      3823.629 | 15882.629 | 15867.157 | 19447.280 |
-| ShiftRightLogicalConstBenchmark_Byte   | SumSRLConstTraits_Core |      3824.594 | 16997.625 | 16974.903 | 19432.662 |
-| ShiftRightLogicalConstBenchmark_Byte   | SumSRLFast_AdvSimd     |               | 15868.754 | 17003.082 | 19603.444 |
-| ShiftRightLogicalConstBenchmark_Byte   | SumSRLFast_Avx2        |               |           |           |           |
-| ShiftRightLogicalConstBenchmark_Byte   | SumSRLFastTraits       |      3803.316 | 15886.504 | 16996.865 | 19568.992 |
-| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLScalar           |       606.641 |   607.225 |   606.715 |   820.618 |
-| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLNetBcl           |               |           |           |  9505.360 |
-| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLNetBcl_Const     |               |           |           |  9508.811 |
-| ShiftRightLogicalConstBenchmark_UInt16 | SumSRL_Basic           |      1767.420 |  1798.180 |  1778.601 |  9521.524 |
-| ShiftRightLogicalConstBenchmark_UInt16 | SumSRL_Base_Core       |      1765.596 |  1787.371 |  1793.904 |  9503.337 |
-| ShiftRightLogicalConstBenchmark_UInt16 | SumSRL_AdvSimd         |               |  5673.453 |  5929.012 |  6511.443 |
-| ShiftRightLogicalConstBenchmark_UInt16 | SumSRL_Avx2            |               |           |           |           |
-| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLTraits           |      1891.842 |  5681.334 |  5940.648 |  9505.102 |
-| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLTraits_Core      |      1893.230 |  8484.151 |  7879.072 |  9509.063 |
-| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLConstTraits      |      1919.649 |  1250.372 |  7884.014 |  9442.549 |
-| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLConstTraits_Core |      1921.276 |  8473.922 |  7875.343 |  9439.698 |
-| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLFast_AdvSimd     |               |  7921.829 |  7862.685 |  9522.792 |
-| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLFast_Avx2        |               |           |           |           |
-| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLFastTraits       |      1915.946 |  6611.060 |  8390.470 |  9510.709 |
-| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLScalar           |       747.766 |   746.570 |   748.934 |  1169.981 |
-| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLNetBcl           |               |           |           |  4758.308 |
-| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLNetBcl_Const     |               |           |           |  4747.163 |
-| ShiftRightLogicalConstBenchmark_UInt32 | SumSRL_Basic           |       949.905 |   976.257 |   975.748 |  4746.886 |
-| ShiftRightLogicalConstBenchmark_UInt32 | SumSRL_Base_Core       |       385.962 |   978.606 |   975.768 |  4751.345 |
-| ShiftRightLogicalConstBenchmark_UInt32 | SumSRL_AdvSimd         |               |  3274.991 |  3279.505 |  3280.461 |
-| ShiftRightLogicalConstBenchmark_UInt32 | SumSRL_Avx2            |               |           |           |           |
-| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLTraits           |       938.073 |  3276.459 |  3280.786 |  4737.385 |
-| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLTraits_Core      |       938.379 |  3901.594 |  4180.485 |  4753.624 |
-| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLConstTraits      |       947.631 |  3896.249 |  3916.718 |  4717.740 |
-| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLConstTraits_Core |       959.031 |  3902.825 |  3923.265 |  4709.911 |
-| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLFast_AdvSimd     |               |  3880.117 |  4172.700 |  4736.323 |
-| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLFast_Avx2        |               |           |           |           |
-| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLFastTraits       |       962.467 |  3888.059 |  3919.469 |  4749.435 |
-| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLScalar           |       740.429 |   741.494 |   742.373 |  1189.752 |
-| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLNetBcl           |               |           |           |  2434.417 |
-| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLNetBcl_Const     |               |           |           |  2434.110 |
-| ShiftRightLogicalConstBenchmark_UInt64 | SumSRL_Basic           |       485.800 |   484.430 |   487.105 |  2423.514 |
-| ShiftRightLogicalConstBenchmark_UInt64 | SumSRL_Base_Core       |       490.624 |   484.508 |   476.591 |  2352.692 |
-| ShiftRightLogicalConstBenchmark_UInt64 | SumSRL_AdvSimd         |               |  1419.077 |  1419.860 |  1633.169 |
-| ShiftRightLogicalConstBenchmark_UInt64 | SumSRL_Avx2            |               |           |           |           |
-| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLTraits           |       471.315 |  1420.603 |  1420.872 |  1648.802 |
-| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLTraits_Core      |       471.172 |  2120.369 |  2122.190 |  2390.895 |
-| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLConstTraits      |       470.183 |  1974.648 |  2120.920 |  2410.270 |
-| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLConstTraits_Core |       470.207 |  1981.918 |  1982.508 |  2399.429 |
-| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLFast_AdvSimd     |               |  1977.193 |  1654.524 |  2379.890 |
-| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLFast_Avx2        |               |           |           |           |
-| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLFastTraits       |       470.075 |  1980.220 |  1654.040 |  2380.027 |
+| Type                                   | Method                    | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| :------------------------------------- | :------------------------ | ------------: | --------: | --------: | --------: |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRLScalar              |       610.440 |   611.068 |   653.301 |   925.069 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRLNetBcl              |               |           |           | 19526.683 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRLNetBcl_Const        |               |           |           | 19527.125 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRL_Basic              |      3522.345 |  3576.642 |  1517.947 |  7944.581 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRL_Base_Core          |      3524.622 |  3576.022 |  1489.862 |  7925.434 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRL_AdvSimd            |               | 11892.353 | 11291.053 | 13135.329 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRL_Avx2               |               |           |           |           |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRLTraits              |      3794.990 | 11367.866 | 11854.758 | 13150.471 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRLTraits_Core         |      3786.531 | 15887.374 | 16931.012 | 19512.920 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRLConstTraits         |      3895.547 | 13254.468 | 16929.335 | 19416.639 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRLConstTraits_Core    |      3875.003 | 15889.018 | 15854.083 | 19416.358 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRL128Traits           |       462.520 | 11908.536 | 11902.879 | 13154.059 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRL128Traits_Core      |       466.298 | 15835.768 | 15793.090 | 19515.757 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRL128ConstTraits      |       464.774 | 15844.426 | 16914.199 | 19404.393 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRL128ConstTraits_Core |       464.907 | 15859.491 | 16898.840 | 19395.451 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRLFast_AdvSimd        |               | 13207.837 | 16956.112 | 19579.055 |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRLFast_Avx2           |               |           |           |           |
+| ShiftRightLogicalConstBenchmark_Byte   | SumSRLFastTraits          |      3874.840 | 13212.078 | 16956.265 | 19516.840 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLScalar              |       606.922 |   606.062 |   604.075 |   822.934 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLNetBcl              |               |           |           |  9805.972 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLNetBcl_Const        |               |           |           |  9806.457 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRL_Basic              |      1767.201 |  1787.808 |  1771.186 |  9817.130 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRL_Base_Core          |      1769.150 |  1782.443 |   823.786 |  9792.583 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRL_AdvSimd            |               |  5941.433 |  5892.797 |  6584.266 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRL_Avx2               |               |           |           |           |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLTraits              |      1883.644 |  5971.707 |  5901.827 |  9806.873 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLTraits_Core         |      1888.758 |  7952.247 |  7835.431 |  9809.512 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLConstTraits         |      1927.803 |  1249.623 |  7845.444 |  9747.796 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLConstTraits_Core    |      1927.897 |  7957.828 |  7834.350 |  9742.182 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRL128Traits           |       295.401 |  5679.936 |  5902.850 |  9792.525 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRL128Traits_Core      |       298.497 |  7938.871 |  8320.033 |  9791.252 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRL128ConstTraits      |       293.517 |  1248.756 |  7792.567 |  9729.161 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRL128ConstTraits_Core |       293.774 |  7940.466 |  8306.434 |  9728.222 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLFast_AdvSimd        |               |  6609.521 |  8340.868 |  9797.920 |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLFast_Avx2           |               |           |           |           |
+| ShiftRightLogicalConstBenchmark_UInt16 | SumSRLFastTraits          |      1911.139 |  7953.825 |  7814.332 |  9820.527 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLScalar              |       749.805 |   747.568 |   741.975 |  1170.115 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLNetBcl              |               |           |           |  4771.051 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLNetBcl_Const        |               |           |           |  4776.363 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRL_Basic              |       952.751 |   976.939 |   967.911 |  4777.290 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRL_Base_Core          |       952.229 |   975.116 |   967.333 |  4759.469 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRL_AdvSimd            |               |  3283.631 |  3262.002 |  3285.996 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRL_Avx2               |               |           |           |           |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLTraits              |       944.328 |  3292.010 |  3272.067 |  4774.267 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLTraits_Core         |       945.949 |  3934.975 |  4175.823 |  4770.997 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLConstTraits         |       952.870 |  3933.740 |  3917.508 |  4733.043 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLConstTraits_Core    |       954.282 |  3935.683 |  3923.493 |  4743.864 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRL128Traits           |       183.110 |  3282.675 |  3273.167 |  4776.961 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRL128Traits_Core      |       183.053 |  4190.520 |  4167.244 |  4776.351 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRL128ConstTraits      |       183.033 |  3925.599 |  4169.417 |  4734.876 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRL128ConstTraits_Core |       183.041 |  4198.127 |  3913.322 |  4743.023 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLFast_AdvSimd        |               |  3932.311 |  4161.691 |  4781.043 |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLFast_Avx2           |               |           |           |           |
+| ShiftRightLogicalConstBenchmark_UInt32 | SumSRLFastTraits          |       967.210 |  3923.614 |  3917.982 |  4773.527 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLScalar              |       742.433 |   739.881 |   739.075 |  1192.022 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLNetBcl              |               |           |           |  2437.007 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLNetBcl_Const        |               |           |           |  2438.554 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRL_Basic              |       478.629 |   486.457 |   481.770 |  2436.375 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRL_Base_Core          |       485.350 |   483.676 |   481.629 |  2432.922 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRL_AdvSimd            |               |  1414.415 |  1479.955 |  1646.618 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRL_Avx2               |               |           |           |           |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLTraits              |       468.098 |  1420.642 |  1486.629 |  1649.062 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLTraits_Core         |       470.677 |  2123.873 |  1968.333 |  2435.511 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLConstTraits         |       467.839 |  1983.810 |  1964.318 |  2429.675 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLConstTraits_Core    |       468.965 |  1981.799 |  2110.022 |  2435.217 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRL128Traits           |       270.583 |  1416.889 |  1478.744 |  1649.302 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRL128Traits_Core      |       275.935 |  1982.015 |  2093.517 |  2412.091 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRL128ConstTraits      |       273.560 |  1972.904 |  1972.086 |  2430.599 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRL128ConstTraits_Core |       276.181 |  2112.151 |  1968.082 |  2435.059 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLFast_AdvSimd        |               |  1978.634 |  1647.634 |  2410.698 |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLFast_Avx2           |               |           |           |           |
+| ShiftRightLogicalConstBenchmark_UInt64 | SumSRLFastTraits          |       469.657 |  1984.034 |  1648.839 |  2412.110 |
 

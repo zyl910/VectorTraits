@@ -89,69 +89,87 @@ Unit of data: Million operations per second. The larger the number, the better t
 | ShiftRightArithmeticConstBenchmark_SByte | SumSRAFastTraits          |       3307.606 |      3465.987 |     24286.313 | 26500.990 | 29505.447 | 31784.911 |
 
 ### Arm - AWS Arm t4g.small
-| Type                                     | Method                   | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
-| :--------------------------------------- | :----------------------- | ------------: | --------: | --------: | --------: |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRAScalar             |       587.279 |   541.166 |   607.230 |   822.580 |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRANetBcl             |               |           |           |  9941.333 |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRANetBcl_Const       |               |           |           |  9938.477 |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRA_Base_Basic        |       499.978 |   468.984 |   524.454 |   548.575 |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRA_Base              |      1550.998 |  1505.018 |   700.127 |  9944.813 |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRA_Base_Core         |      1761.556 |  1708.796 |  1940.752 |  9937.640 |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRA_AdvSimd           |               |  4935.548 |  5644.488 |  5687.558 |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRA_Avx2              |               |           |           |           |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRATraits             |      1559.138 |  4950.480 |  5645.497 |  9938.217 |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRATraits_Core        |      1823.509 |  8388.956 |  7904.366 |  9938.584 |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRAConstTraits        |      1808.965 |  6589.881 |  7892.407 |  9871.343 |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRAConstTraits_Core   |      1810.527 |  8392.943 |  7896.220 |  9925.543 |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRAFast_AdvSimd       |               |  7839.053 |  7898.538 |  9944.129 |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRAFast_Avx2          |               |           |           |           |
-| ShiftRightArithmeticConstBenchmark_Int16 | SumSRAFastTraits         |      1754.440 |  6587.622 |  8412.310 |  9937.396 |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRAScalar             |       712.668 |   746.666 |   747.055 |  1188.551 |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRANetBcl             |               |           |           |  4861.897 |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRANetBcl_Const       |               |           |           |  4859.816 |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRA_Base_Basic        |       317.991 |   330.418 |   331.432 |   339.296 |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRA_Base              |       829.461 |   393.008 |   393.199 |  4846.014 |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRA_Base_Core         |       871.763 |   960.185 |   969.376 |  4848.500 |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRA_AdvSimd           |               |  2808.552 |  2467.260 |  3285.681 |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRA_Avx2              |               |           |           |           |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRATraits             |       779.787 |  2944.169 |  2945.026 |  4868.865 |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRATraits_Core        |       914.346 |  4125.748 |  4135.353 |  4862.075 |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRAConstTraits        |       884.914 |  3266.272 |  3892.016 |  4841.364 |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRAConstTraits_Core   |       920.389 |  4134.164 |  3893.088 |  4844.364 |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRAFast_AdvSimd       |               |  3831.355 |  4126.674 |  4871.387 |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRAFast_Avx2          |               |           |           |           |
-| ShiftRightArithmeticConstBenchmark_Int32 | SumSRAFastTraits         |       875.693 |  3845.319 |  3901.047 |  4871.318 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRAScalar             |       717.640 |   742.361 |   742.337 |  1189.925 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRANetBcl             |               |           |           |  2468.196 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRANetBcl_Const       |               |           |           |  2471.434 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA_Base_Basic        |       197.017 |   484.230 |   483.481 |   474.944 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA_Base              |       458.672 |   484.408 |   483.189 |  2466.542 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA_Base_Create       |       442.804 |   480.529 |   484.006 |  1782.609 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA_Base_LoadArray    |       361.038 |   403.137 |   435.685 |  1325.673 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA_Base_Core         |       199.524 |   477.348 |   476.856 |  2468.146 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA_AdvSimd           |               |  1408.181 |  1408.528 |  1420.547 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA_Avx2              |               |           |           |           |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRATraits             |       451.956 |  1235.429 |  1233.818 |  1420.116 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRATraits_Core        |       435.180 |  1972.734 |  1966.992 |  2465.932 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRAConstTraits        |       437.799 |  1962.084 |  1966.946 |  2470.825 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRAConstTraits_Core   |       436.419 |  2099.303 |  2097.296 |  2469.149 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRAFast_AdvSimd       |               |  1959.429 |  2098.306 |  2467.935 |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRAFast_Avx2          |               |           |           |           |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRAFast_Avx2_Negative |               |           |           |           |
-| ShiftRightArithmeticConstBenchmark_Int64 | SumSRAFastTraits         |       434.293 |  1959.553 |  1970.332 |  2462.309 |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRAScalar             |       577.766 |   610.669 |   672.786 |   925.515 |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRANetBcl             |               |           |           | 19792.701 |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRANetBcl_Const       |               |           |           | 19792.641 |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRA_Base_Basic        |       666.552 |   712.706 |   711.647 |   761.916 |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRA_Base              |      3026.992 |  3399.260 |  3443.934 |  7966.148 |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRA_Base_Core         |      3432.558 |  3913.964 |  1700.917 | 11344.947 |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRA_AdvSimd           |               | 11259.027 | 11205.761 | 11349.802 |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRA_Avx2              |               |           |           |           |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRATraits             |      2991.228 | 11281.229 | 11275.758 | 11356.994 |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRATraits_Core        |      3529.326 | 16818.297 | 16827.844 | 19798.924 |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRAConstTraits        |      3476.138 | 15680.873 | 16829.920 | 19774.470 |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRAConstTraits_Core   |      3577.927 | 16813.202 | 15762.243 | 19759.552 |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRAFast_AdvSimd       |               | 15651.930 | 15800.184 | 19841.339 |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRAFast_Avx2          |               |           |           |           |
-| ShiftRightArithmeticConstBenchmark_SByte | SumSRAFastTraits         |      3456.946 | 15691.023 | 15780.403 | 19789.471 |
+| Type                                     | Method                    | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
+| :--------------------------------------- | :------------------------ | ------------: | --------: | --------: | --------: |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRAScalar              |       607.828 |   607.345 |   598.402 |   823.024 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRANetBcl              |               |           |           |  9954.129 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRANetBcl_Const        |               |           |           |  9951.495 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRA_Base_Basic         |       523.001 |   523.252 |   516.371 |   549.437 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRA_Base               |      1606.660 |  1696.802 |   746.642 |  9960.099 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRA_Base_Core          |      1854.449 |  1956.042 |  1909.820 |  9939.727 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRA_AdvSimd            |               |  5629.659 |  5528.339 |  5687.521 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRA_Avx2               |               |           |           |           |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRATraits              |      1621.081 |  4958.905 |  4890.378 |  9948.477 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRATraits_Core         |      1909.445 |  8432.141 |  8265.428 |  9952.180 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRAConstTraits         |      1891.182 |  6630.722 |  8197.125 |  9934.293 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRAConstTraits_Core    |      1906.767 |  8427.578 |  8288.203 |  9937.380 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRA128Traits           |       292.698 |  5643.810 |  5566.951 |  9943.661 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRA128Traits_Core      |       295.222 |  8424.151 |  8180.479 |  9941.077 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRA128ConstTraits      |       291.052 |  7855.149 |  7722.716 |  9927.420 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRA128ConstTraits_Core |       292.359 |  8421.416 |  8180.930 |  9929.214 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRAFast_AdvSimd        |               |  7848.911 |  8194.233 |  9959.014 |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRAFast_Avx2           |               |           |           |           |
+| ShiftRightArithmeticConstBenchmark_Int16 | SumSRAFastTraits          |      1838.148 |  6605.093 |  7720.844 |  9950.795 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRAScalar              |       750.637 |   748.119 |   740.289 |  1176.531 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRANetBcl              |               |           |           |  4866.387 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRANetBcl_Const        |               |           |           |  4870.302 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRA_Base_Basic         |       328.017 |   330.819 |   327.806 |   338.639 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRA_Base               |       865.885 |   906.274 |   895.934 |  4869.642 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRA_Base_Core          |       923.515 |   964.718 |   960.968 |  4856.067 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRA_AdvSimd            |               |  2939.852 |  2903.020 |  3286.766 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRA_Avx2               |               |           |           |           |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRATraits              |       813.933 |  2470.893 |  2444.451 |  4870.535 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRATraits_Core         |       963.525 |  3914.050 |  3858.082 |  4869.283 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRAConstTraits         |       940.151 |  3885.333 |  4084.852 |  4843.771 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRAConstTraits_Core    |       949.954 |  3916.259 |  4087.165 |  4852.290 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRA128Traits           |       181.273 |  2942.021 |  2448.542 |  4866.181 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRA128Traits_Core      |       181.112 |  3904.869 |  4093.903 |  4846.512 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRA128ConstTraits      |       181.118 |  3272.652 |  4119.499 |  4838.237 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRA128ConstTraits_Core |       181.302 |  3917.178 |  3865.873 |  4840.303 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRAFast_AdvSimd        |               |  3862.874 |  4098.781 |  4864.979 |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRAFast_Avx2           |               |           |           |           |
+| ShiftRightArithmeticConstBenchmark_Int32 | SumSRAFastTraits          |       919.492 |  3864.866 |  3885.305 |  4867.942 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRAScalar              |       743.062 |   741.969 |   740.910 |  1182.604 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRANetBcl              |               |           |           |  2461.702 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRANetBcl_Const        |               |           |           |  2462.585 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA_Base_Basic         |       478.699 |   474.881 |   473.504 |   485.090 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA_Base               |       209.684 |   475.496 |   481.564 |  2455.917 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA_Base_Create        |       206.328 |   479.217 |   472.752 |  1777.550 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA_Base_LoadArray     |       388.839 |   410.226 |   429.817 |  1321.231 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA_Base_Core          |       480.603 |   481.203 |   478.819 |  2462.884 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA_AdvSimd            |               |  1230.920 |  1397.176 |  1416.348 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA_Avx2               |               |           |           |           |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRATraits              |       471.088 |  1409.135 |  1224.179 |  1415.718 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRATraits_Core         |       471.510 |  2100.695 |  1951.205 |  2459.283 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRAConstTraits         |       471.437 |  1961.367 |  1948.020 |  2459.839 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRAConstTraits_Core    |       470.318 |  1968.264 |  2072.287 |  2458.221 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA128Traits           |       256.281 |  1229.928 |  1392.079 |  1416.358 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA128Traits_Core      |       258.127 |  2091.913 |  1951.087 |  2457.825 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA128ConstTraits      |       257.629 |  1954.913 |  2071.421 |  2459.579 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRA128ConstTraits_Core |       254.479 |  1965.847 |  2053.870 |  2456.472 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRAFast_AdvSimd        |               |  1957.254 |  2073.874 |  2466.410 |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRAFast_Avx2           |               |           |           |           |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRAFast_Avx2_Negative  |               |           |           |           |
+| ShiftRightArithmeticConstBenchmark_Int64 | SumSRAFastTraits          |       471.194 |  1956.370 |  1933.926 |  2458.773 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRAScalar              |       610.356 |   610.073 |   656.649 |   925.837 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRANetBcl              |               |           |           | 19802.147 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRANetBcl_Const        |               |           |           | 19805.305 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRA_Base128_Basic      |       460.408 |   475.368 |   477.269 |   976.242 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRA_Base128_Basic_Ref  |       464.422 |   479.087 |   470.968 |   976.148 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRA_Base_Basic         |       717.935 |   711.793 |   706.193 |   761.188 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRA_Base               |      3227.227 |  3434.471 |  3370.373 |  7961.707 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRA_Base_Core          |      3730.648 |  3867.873 |  3869.859 | 11326.963 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRA_AdvSimd            |               | 11256.112 |  9783.594 | 11336.728 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRA_Avx2               |               |           |           |           |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRATraits              |      3243.691 | 11280.956 |  9822.260 | 11360.525 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRATraits_Core         |      3863.241 | 16817.227 | 15701.835 | 19808.274 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRAConstTraits         |      3790.213 | 15628.914 | 15781.410 | 19773.174 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRAConstTraits_Core    |      3810.742 | 16816.889 | 16703.652 | 19785.247 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRA128Traits           |       465.010 | 11269.353 | 11287.905 | 11349.048 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRA128Traits_Core      |       462.964 | 15745.013 | 15723.169 | 19810.270 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRA128ConstTraits      |       463.467 | 15681.627 | 16637.017 | 19775.467 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRA128ConstTraits_Core |       464.558 | 15769.839 | 16671.725 | 19781.344 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRAFast_AdvSimd        |               | 13172.874 | 16758.243 | 19838.051 |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRAFast_Avx2           |               |           |           |           |
+| ShiftRightArithmeticConstBenchmark_SByte | SumSRAFastTraits          |      3712.494 | 13167.475 | 16732.268 | 19810.999 |
 

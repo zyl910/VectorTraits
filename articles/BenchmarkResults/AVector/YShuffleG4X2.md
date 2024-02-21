@@ -567,26 +567,29 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.19.0.1025
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	3.1.32
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/
 RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:03 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
-Vectors.Instance:	VectorTraits128Base
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	
+Vector128s.Instance:	WVectorTraits128Base	// 
+Vectors.Instance:	VectorTraits128Base	// 
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -594,69 +597,62 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumBase	-21037
-SumBase	681.636	384.581
-SumX1Traits	685.327	382.509	0.994614
-SumTraits	679.396	385.849	1.003296
-SumTraits_Tuple	742.581	353.018	0.917928
-Sum128Traits	1081.728	242.338	0.630136
+SumBase	679.380	385.858
+SumX1Traits	684.400	383.028	0.992665
+SumTraits	679.509	385.785	0.999811
+SumTraits_Tuple	742.136	353.229	0.915438
+Sum128Traits	1080.870	242.531	0.628549
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	701.803	373.529	0.971264
-Sum_ConstTraits_Tuple	764.091	343.080	0.892087
-Sum_Const128Traits	1101.146	238.065	0.619024
+Sum_ConstTraits	700.961	373.978	0.969212
+Sum_ConstTraits_Tuple	763.762	343.227	0.889518
+Sum_Const128Traits	1099.015	238.526	0.618172
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumBase	2018061718
-SumBase	704.121	372.300
-SumX1Traits	700.937	373.991	1.004542
-SumTraits	706.476	371.059	0.996666
-SumTraits_Tuple	925.998	283.093	0.760391
-Sum128Traits	1467.969	178.576	0.479656
+SumBase	701.501	373.690
+SumX1Traits	696.890	376.163	1.006617
+SumTraits	698.076	375.524	1.004907
+SumTraits_Tuple	931.457	281.434	0.753123
+Sum128Traits	1466.671	178.734	0.478295
 Sum256_AvxByte	Run fail! Requires hardware support Avx, Avx2!
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	681.324	384.756	1.033459
-Sum_ConstTraits_Tuple	908.635	288.503	0.774922
-Sum_Const128Traits	1466.974	178.697	0.479982
+Sum_ConstTraits	680.964	384.960	1.030160
+Sum_ConstTraits_Tuple	912.213	287.371	0.769010
+Sum_Const128Traits	1463.754	179.090	0.479248
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumBase	5878554485936559874
-SumBase	833.284	314.591
+SumBase	833.100	314.661
 SumX1Traits	Run fail! The count(2) of elements in a vector cannot be less than 4! Please use YShuffleG4X2 instead.
-SumTraits	835.052	313.926	0.997883
-SumTraits_Tuple	1028.268	254.937	0.810376
-Sum128Traits	1279.207	204.927	0.651407
+SumTraits	833.272	314.596	0.999794
+SumTraits_Tuple	1027.183	255.207	0.811053
+Sum128Traits	1275.058	205.594	0.653382
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	851.145	307.990	0.979015
-Sum_ConstTraits_Tuple	1050.006	249.660	0.793599
-Sum_Const128Traits	1279.458	204.887	0.651279
+Sum_ConstTraits	842.713	311.072	0.988594
+Sum_ConstTraits_Tuple	1033.855	253.560	0.805820
+Sum_Const128Traits	1290.687	203.104	0.645471
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumBase	91
-SumBase	569.898	459.984
-SumX1Traits	567.554	461.883	1.004130
-SumTraits	570.469	459.523	0.998999
-SumTraits_Tuple	605.697	432.798	0.940897
-Sum128Traits	848.596	308.915	0.671578
+SumBase	570.402	459.578
+SumX1Traits	566.780	462.515	1.006391
+SumTraits	569.556	460.261	1.001485
+SumTraits_Tuple	605.121	433.209	0.942625
+Sum128Traits	845.395	310.085	0.674716
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	592.055	442.770	0.962577
-Sum_ConstTraits_Tuple	626.541	418.399	0.909594
-Sum_Const128Traits	865.534	302.870	0.658436
+Sum_ConstTraits	592.110	442.729	0.963337
+Sum_ConstTraits_Tuple	627.383	417.837	0.909175
+Sum_Const128Traits	864.243	303.322	0.660002
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
-
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: Requires hardware support AdvSimd!
-VectorTraits128AdvSimdB64: Requires hardware support AdvSimd!
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 
 ```
 
@@ -666,27 +662,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.19.0.1025
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	5.0.17
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/
 RuntimeInformation.FrameworkDescription:	.NET 5.0.17
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:03 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -694,73 +693,66 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumBase	-21037
-SumBase	676.166	387.692
-SumX1Traits	39.934	6564.384	16.931967
-SumTraits	33.744	7768.697	20.038335
-SumTraits_Tuple	112.841	2323.129	5.992206
-Sum128_AdvSimd	59.358	4416.346	11.391386
-Sum128Traits	33.832	7748.439	19.986082
+SumBase	676.040	387.764
+SumX1Traits	44.164	5935.688	15.307476
+SumTraits	36.690	7144.903	18.425908
+SumTraits_Tuple	121.685	2154.287	5.555666
+Sum128_AdvSimd	71.204	3681.616	9.494477
+Sum128Traits	36.725	7137.978	18.408047
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	33.759	7765.248	20.029438
-Sum_ConstTraits_Tuple	106.182	2468.814	6.367982
-Sum_Const128Traits	33.837	7747.366	19.983312
+Sum_ConstTraits	36.598	7162.871	18.472246
+Sum_ConstTraits_Tuple	121.800	2152.246	5.550401
+Sum_Const128Traits	36.568	7168.684	18.487236
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumBase	2018061718
-SumBase	689.231	380.343
-SumX1Traits	80.537	3254.959	8.557964
-SumTraits	68.648	3818.691	10.040131
-SumTraits_Tuple	230.276	1138.388	2.993059
-Sum128_AdvSimd	118.133	2219.063	5.834377
-Sum128Traits	68.206	3843.423	10.105156
+SumBase	687.770	381.151
+SumX1Traits	74.135	3536.042	9.277276
+SumTraits	67.567	3879.751	10.179041
+SumTraits_Tuple	189.965	1379.956	3.620497
+Sum128_AdvSimd	117.831	2224.736	5.836891
+Sum128Traits	67.643	3875.407	10.167644
 Sum256_AvxByte	Run fail! Requires hardware support Avx, Avx2!
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	68.399	3832.587	10.076668
-Sum_ConstTraits_Tuple	230.759	1136.007	2.986799
-Sum_Const128Traits	68.261	3840.331	10.097029
+Sum_ConstTraits	67.577	3879.192	10.177576
+Sum_ConstTraits_Tuple	224.027	1170.146	3.070034
+Sum_Const128Traits	67.593	3878.295	10.175222
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumBase	5878554485936559874
-SumBase	770.887	340.055
+SumBase	773.857	338.750
 SumX1Traits	Run fail! The count(2) of elements in a vector cannot be less than 4! Please use YShuffleG4X2 instead.
-SumTraits	211.271	1240.795	3.648805
-SumTraits_Tuple	625.982	418.773	1.231485
-Sum128_AdvSimd	472.663	554.611	1.630946
-Sum128Traits	211.741	1238.041	3.640708
+SumTraits	216.744	1209.464	3.570375
+SumTraits_Tuple	610.319	429.520	1.267955
+Sum128_AdvSimd	488.214	536.945	1.585079
+Sum128Traits	216.673	1209.861	3.571546
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	213.964	1225.177	3.602880
-Sum_ConstTraits_Tuple	612.650	427.885	1.258283
-Sum_Const128Traits	213.807	1226.078	3.605529
+Sum_ConstTraits	217.202	1206.914	3.562848
+Sum_ConstTraits_Tuple	609.254	430.271	1.270172
+Sum_Const128Traits	217.511	1205.197	3.557779
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumBase	91
-SumBase	565.734	463.370
-SumX1Traits	18.558	14125.982	30.485328
-SumTraits	16.800	15604.242	33.675565
-SumTraits_Tuple	54.485	4811.334	10.383356
-Sum128_AdvSimd	28.886	9075.087	19.584974
-Sum128Traits	16.825	15580.659	33.624671
+SumBase	565.391	463.651
+SumX1Traits	18.679	14034.527	30.269597
+SumTraits	16.896	15515.454	33.463654
+SumTraits_Tuple	54.397	4819.098	10.393808
+Sum128_AdvSimd	29.567	8866.246	19.122675
+Sum128Traits	16.931	15483.485	33.394703
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	16.791	15612.462	33.693305
-Sum_ConstTraits_Tuple	52.846	4960.488	10.705245
-Sum_Const128Traits	16.808	15596.408	33.658658
+Sum_ConstTraits	16.856	15552.141	33.542779
+Sum_ConstTraits_Tuple	55.651	4710.493	10.159568
+Sum_Const128Traits	16.902	15509.914	33.451706
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
-
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 
 ```
 
@@ -770,27 +762,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.19.0.1025
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	6.0.19
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/
 RuntimeInformation.FrameworkDescription:	.NET 6.0.19
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:03 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -798,73 +793,66 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumBase	-21037
-SumBase	674.925	388.405
-SumX1Traits	32.375	8097.043	20.846932
-SumTraits	30.277	8658.265	22.291874
-SumTraits_Tuple	91.071	2878.457	7.410976
-Sum128_AdvSimd	49.024	5347.275	13.767283
-Sum128Traits	29.987	8741.823	22.507006
+SumBase	677.351	387.014
+SumX1Traits	33.212	7893.089	20.394865
+SumTraits	30.976	8462.884	21.867150
+SumTraits_Tuple	90.564	2894.568	7.479243
+Sum128_AdvSimd	49.410	5305.467	13.708737
+Sum128Traits	30.673	8546.491	22.083181
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	31.027	8448.968	21.753011
-Sum_ConstTraits_Tuple	91.074	2878.354	7.410712
-Sum_Const128Traits	30.828	8503.488	21.893378
+Sum_ConstTraits	31.198	8402.658	21.711534
+Sum_ConstTraits_Tuple	88.967	2946.516	7.613468
+Sum_Const128Traits	30.744	8526.711	22.032072
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumBase	2018061718
-SumBase	693.196	378.167
-SumX1Traits	68.099	3849.454	10.179241
-SumTraits	65.705	3989.740	10.550206
-SumTraits_Tuple	182.345	1437.628	3.801569
-Sum128_AdvSimd	97.913	2677.315	7.079714
-Sum128Traits	63.811	4108.155	10.863334
+SumBase	687.111	381.516
+SumX1Traits	67.710	3871.594	10.147917
+SumTraits	61.620	4254.200	11.150772
+SumTraits_Tuple	183.461	1428.878	3.745262
+Sum128_AdvSimd	98.211	2669.193	6.996277
+Sum128Traits	62.515	4193.269	10.991065
 Sum256_AvxByte	Run fail! Requires hardware support Avx, Avx2!
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	65.013	4032.178	10.662425
-Sum_ConstTraits_Tuple	182.037	1440.057	3.807992
-Sum_Const128Traits	63.741	4112.626	10.875155
+Sum_ConstTraits	62.304	4207.505	11.028380
+Sum_ConstTraits_Tuple	183.481	1428.726	3.744863
+Sum_Const128Traits	62.488	4195.113	10.995900
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumBase	5878554485936559874
-SumBase	774.945	338.274
+SumBase	770.718	340.130
 SumX1Traits	Run fail! The count(2) of elements in a vector cannot be less than 4! Please use YShuffleG4X2 instead.
-SumTraits	170.796	1534.835	4.537250
-SumTraits_Tuple	406.671	644.609	1.905582
-Sum128_AdvSimd	411.915	636.404	1.881325
-Sum128Traits	174.605	1501.356	4.438282
+SumTraits	170.605	1536.557	4.517562
+SumTraits_Tuple	387.356	676.752	1.989687
+Sum128_AdvSimd	388.536	674.696	1.983643
+Sum128Traits	174.862	1499.145	4.407570
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	175.188	1496.361	4.423513
-Sum_ConstTraits_Tuple	411.066	637.717	1.885208
-Sum_Const128Traits	175.053	1497.514	4.426924
+Sum_ConstTraits	174.647	1500.990	4.412994
+Sum_ConstTraits_Tuple	387.488	676.521	1.989010
+Sum_Const128Traits	174.940	1498.478	4.405607
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumBase	91
-SumBase	564.929	464.030
-SumX1Traits	16.714	15684.232	33.800050
-SumTraits	14.911	17580.562	37.886706
-SumTraits_Tuple	46.611	5624.091	12.120105
-Sum128_AdvSimd	24.131	10863.503	23.411217
-Sum128Traits	15.165	17285.738	37.251350
+SumBase	565.124	463.870
+SumX1Traits	18.670	14040.669	30.268571
+SumTraits	15.308	17124.365	36.916338
+SumTraits_Tuple	46.114	5684.755	12.255072
+Sum128_AdvSimd	28.972	9048.188	19.505888
+Sum128Traits	15.238	17202.753	37.085325
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	14.725	17802.435	38.364849
-Sum_ConstTraits_Tuple	45.595	5749.413	12.390180
-Sum_Const128Traits	15.103	17356.546	37.403945
+Sum_ConstTraits	15.468	16947.788	36.535676
+Sum_ConstTraits_Tuple	45.335	5782.395	12.465562
+Sum_Const128Traits	15.695	16702.273	36.006400
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
-
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 
 ```
 
@@ -874,27 +862,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.19.0.1025
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	7.0.8
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/
 RuntimeInformation.FrameworkDescription:	.NET 7.0.8
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:03 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -902,73 +893,66 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumBase	-21037
-SumBase	509.115	514.902
-SumX1Traits	29.988	8741.548	16.977123
-SumTraits	25.125	10433.609	20.263307
-SumTraits_Tuple	87.387	2999.818	5.826002
-Sum128_AdvSimd	45.617	5746.664	11.160703
-Sum128Traits	25.124	10434.019	20.264103
+SumBase	507.020	517.029
+SumX1Traits	29.587	8859.966	17.136315
+SumTraits	24.837	10554.444	20.413654
+SumTraits_Tuple	90.110	2909.155	5.626681
+Sum128_AdvSimd	45.254	5792.771	11.203965
+Sum128Traits	24.821	10561.232	20.426781
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	26.586	9860.214	19.149706
-Sum_ConstTraits_Tuple	87.365	3000.560	5.827444
-Sum_Const128Traits	26.593	9857.672	19.144769
+Sum_ConstTraits	26.351	9948.207	19.241112
+Sum_ConstTraits_Tuple	87.361	3000.704	5.803748
+Sum_Const128Traits	26.334	9954.407	19.253104
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumBase	2018061718
-SumBase	662.816	395.500
-SumX1Traits	61.282	4277.648	10.815785
-SumTraits	51.190	5120.962	12.948057
-SumTraits_Tuple	182.590	1435.697	3.630078
-Sum128_AdvSimd	92.160	2844.455	7.192040
-Sum128Traits	51.311	5108.926	12.917623
+SumBase	663.884	394.864
+SumX1Traits	62.261	4210.424	10.662971
+SumTraits	51.306	5109.443	12.939752
+SumTraits_Tuple	178.470	1468.844	3.719872
+Sum128_AdvSimd	91.262	2872.439	7.274501
+Sum128Traits	51.389	5101.200	12.918875
 Sum256_AvxByte	Run fail! Requires hardware support Avx, Avx2!
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	53.910	4862.617	12.294845
-Sum_ConstTraits_Tuple	178.938	1464.997	3.704160
-Sum_Const128Traits	53.979	4856.366	12.279040
+Sum_ConstTraits	54.326	4825.364	12.220318
+Sum_ConstTraits_Tuple	179.685	1458.906	3.694703
+Sum_Const128Traits	54.180	4838.384	12.253290
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumBase	5878554485936559874
-SumBase	563.076	465.557
+SumBase	564.240	464.597
 SumX1Traits	Run fail! The count(2) of elements in a vector cannot be less than 4! Please use YShuffleG4X2 instead.
-SumTraits	160.113	1637.245	3.516743
-SumTraits_Tuple	372.433	703.869	1.511886
-Sum128_AdvSimd	361.501	725.155	1.557607
-Sum128Traits	160.204	1636.318	3.514753
+SumTraits	160.381	1634.510	3.518124
+SumTraits_Tuple	369.103	710.218	1.528676
+Sum128_AdvSimd	361.009	726.143	1.562952
+Sum128Traits	160.759	1630.660	3.509838
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	160.277	1635.564	3.513134
-Sum_ConstTraits_Tuple	366.665	714.942	1.535671
-Sum_Const128Traits	160.169	1636.674	3.515516
+Sum_ConstTraits	160.504	1633.253	3.515420
+Sum_ConstTraits_Tuple	369.366	709.713	1.527588
+Sum_Const128Traits	160.587	1632.409	3.513602
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
 
 [YShuffleG4X2Benchmark_SByte(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumBase	91
-SumBase	409.970	639.422
-SumX1Traits	14.861	17640.121	27.587600
-SumTraits	12.464	21032.648	32.893214
-SumTraits_Tuple	43.891	5972.646	9.340694
-Sum128_AdvSimd	22.920	11437.349	17.887009
-Sum128Traits	12.463	21033.148	32.893996
+SumBase	410.688	638.305
+SumX1Traits	14.721	17806.962	27.897266
+SumTraits	12.443	21066.988	33.004585
+SumTraits_Tuple	43.891	5972.603	9.356975
+Sum128_AdvSimd	22.729	11533.557	18.069040
+Sum128Traits	12.447	21060.724	32.994771
 Sum256Traits	Run fail! Vector byte size mismatch(16!=32) !
-Sum_ConstTraits	13.233	19809.813	30.980808
-Sum_ConstTraits_Tuple	42.895	6111.353	9.557619
-Sum_Const128Traits	13.236	19806.095	30.974992
+Sum_ConstTraits	13.232	19811.234	31.037258
+Sum_ConstTraits_Tuple	43.864	5976.286	9.362745
+Sum_Const128Traits	13.234	19807.954	31.032120
 Sum_Const256Traits	Run fail! Vector byte size mismatch(16!=32) !
-
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 
 ```
 

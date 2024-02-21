@@ -685,24 +685,29 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.15.0.1026
-Environment.Version:	3.1.31
+Environment.OSVersion:	Unix 6.2.0.1013
+Environment.Version:	3.1.32
 Stopwatch.Frequency:	1000000000
-RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.31/
-RuntimeInformation.FrameworkDescription:	.NET Core 3.1.31
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/
+RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
 RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.31/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(TraitsUtil):	.NET Core 3.0
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
-Vectors.Instance:	VectorTraits128Base
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	
+Vector128s.Instance:	WVectorTraits128Base	// 
+Vectors.Instance:	VectorTraits128Base	// 
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -715,41 +720,35 @@ Check-SumNarrowVectorBase	Check `SumNarrowVectorBase` mismatch. 130888.75!=13088
 Check-SumNarrowVectorTraits	Check `SumNarrowVectorTraits` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector128Traits	Check `SumNarrowVector128Traits` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector256Traits	Check `SumNarrowVector256Traits` mismatch. 130888.7!=130889.58
-SumNarrowScalar	292.234	897.034
-SumNarrowBcl	85.001	3084.003	3.438002
-SumNarrowVectorBase	84.631	3097.487	3.453034
-SumNarrowVectorTraits	84.811	3090.914	3.445707
-SumNarrowVector128Traits	1906.359	137.510	0.153295
-SumNarrowVector256Traits	2022.475	129.615	0.144493
+SumNarrowScalar	315.964	829.665
+SumNarrowBcl	75.127	3489.327	4.205707
+SumNarrowVectorBase	74.988	3495.824	4.213539
+SumNarrowVectorTraits	75.389	3477.226	4.191122
+SumNarrowVector128Traits	1381.436	189.762	0.228721
+SumNarrowVector256Traits	1460.513	179.488	0.216338
 
 [NarrowBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrowScalar	-38
-SumNarrowScalar	351.271	746.273
-SumNarrowBcl	19.054	13758.104	18.435758
-SumNarrowVectorBase	18.948	13834.817	18.538552
-SumNarrowVectorTraits	18.951	13832.597	18.535577
-SumNarrowVector128Traits	484.517	541.042	0.724992
-SumNarrowVector256Traits	520.906	503.247	0.674347
+SumNarrowScalar	346.770	755.958
+SumNarrowBcl	19.959	13134.205	17.374245
+SumNarrowVectorBase	19.898	13174.125	17.427052
+SumNarrowVectorTraits	19.933	13151.386	17.396973
+SumNarrowVector128Traits	514.318	509.693	0.674234
+SumNarrowVector256Traits	541.958	483.698	0.639848
 
 [NarrowBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrowScalar	1552412164
-SumNarrowScalar	314.501	833.523
-SumNarrowBcl	75.371	3478.045	4.172703
-SumNarrowVectorBase	80.422	3259.603	3.910632
-SumNarrowVectorTraits	75.245	3483.857	4.179675
-SumNarrowVector128Traits	1384.846	189.295	0.227102
-SumNarrowVector256Traits	1387.759	188.897	0.226625
+SumNarrowScalar	312.488	838.892
+SumNarrowBcl	79.922	3279.978	3.909893
+SumNarrowVectorBase	82.537	3176.087	3.786050
+SumNarrowVectorTraits	80.048	3274.845	3.903774
+SumNarrowVector128Traits	1388.994	188.729	0.224975
+SumNarrowVector256Traits	1496.679	175.150	0.208788
 
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: Requires hardware support AdvSimd!
-VectorTraits128AdvSimdB64: Requires hardware support AdvSimd!
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 ```
 
 #### .NET 5.0
@@ -759,24 +758,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.15.0.1026
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	5.0.17
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/
 RuntimeInformation.FrameworkDescription:	.NET 5.0.17
 RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
+RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(TraitsUtil):	.NET 5.0
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -788,48 +793,42 @@ Check-SumNarrowBcl	Check `SumNarrowBcl` mismatch. 130888.75!=130889.58
 Check-SumNarrowVectorBase	Check `SumNarrowVectorBase` mismatch. 130888.75!=130889.58
 Check-SumNarrowVectorTraits	Check `SumNarrowVectorTraits` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector128_AdvSimd	Check `SumNarrowVector128_AdvSimd` mismatch. 130888.75!=130889.58
-Check-SumNarrowVector128_AdvSimdB64	Check `SumNarrowVector128_AdvSimdB64` mismatch. 130888.75!=130889.58
+Check-SumNarrowVector128_ArmB64	Check `SumNarrowVector128_ArmB64` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector128Traits	Check `SumNarrowVector128Traits` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector256Traits	Check `SumNarrowVector256Traits` mismatch. 130888.7!=130889.58
-SumNarrowScalar	290.354	902.841
-SumNarrowBcl	81.007	3236.050	3.584296
-SumNarrowVectorBase	75.113	3489.994	3.865568
-SumNarrowVectorTraits	81.215	3227.759	3.575112
-SumNarrowVector128_AdvSimd	562.115	466.353	0.516539
-SumNarrowVector128_AdvSimdB64	82.825	3165.039	3.505643
-SumNarrowVector128Traits	579.494	452.367	0.501048
-SumNarrowVector256Traits	1304.321	200.981	0.222610
+SumNarrowScalar	291.365	899.709
+SumNarrowBcl	75.549	3469.866	3.856656
+SumNarrowVectorBase	81.425	3219.434	3.578308
+SumNarrowVectorTraits	76.134	3443.193	3.827010
+SumNarrowVector128_AdvSimd	558.248	469.584	0.521929
+SumNarrowVector128_ArmB64	75.614	3466.870	3.853326
+SumNarrowVector128Traits	81.592	3212.854	3.570994
+SumNarrowVector256Traits	917.012	285.867	0.317733
 
 [NarrowBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrowScalar	-38
-SumNarrowScalar	348.389	752.447
-SumNarrowBcl	20.872	12559.431	16.691461
-SumNarrowVectorBase	20.901	12542.386	16.668808
-SumNarrowVectorTraits	20.892	12547.789	16.675989
-SumNarrowVector128_AdvSimd	20.073	13059.461	17.355999
-SumNarrowVector128Traits	19.838	13214.069	17.561473
-SumNarrowVector256Traits	391.835	669.017	0.889122
+SumNarrowScalar	349.267	750.554
+SumNarrowBcl	20.492	12792.581	17.044183
+SumNarrowVectorBase	20.543	12760.590	17.001559
+SumNarrowVectorTraits	20.599	12725.949	16.955406
+SumNarrowVector128_AdvSimd	20.594	12729.282	16.959846
+SumNarrowVector128Traits	20.459	12813.310	17.071801
+SumNarrowVector256Traits	405.946	645.761	0.860379
 
 [NarrowBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrowScalar	1552412164
-SumNarrowScalar	312.581	838.644
-SumNarrowBcl	79.242	3308.158	3.944651
-SumNarrowVectorBase	83.340	3145.471	3.750663
-SumNarrowVectorTraits	79.116	3313.423	3.950929
-SumNarrowVector128_AdvSimd	79.170	3311.155	3.948224
-SumNarrowVector128Traits	83.061	3156.056	3.763284
-SumNarrowVector256Traits	880.877	297.594	0.354852
+SumNarrowScalar	312.055	840.058
+SumNarrowBcl	79.270	3306.988	3.936617
+SumNarrowVectorBase	83.423	3142.330	3.740609
+SumNarrowVectorTraits	79.241	3308.205	3.938065
+SumNarrowVector128_AdvSimd	79.480	3298.259	3.926226
+SumNarrowVector128Traits	83.190	3151.167	3.751128
+SumNarrowVector256Traits	913.719	286.898	0.341521
 
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 ```
 
 #### .NET 6.0
@@ -839,24 +838,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.15.0.1026
-Environment.Version:	6.0.11
+Environment.OSVersion:	Unix 6.2.0.1013
+Environment.Version:	6.0.19
 Stopwatch.Frequency:	1000000000
-RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.11/
-RuntimeInformation.FrameworkDescription:	.NET 6.0.11
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/
+RuntimeInformation.FrameworkDescription:	.NET 6.0.19
 RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
+RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.11/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(TraitsUtil):	.NET 6.0
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -868,48 +873,42 @@ Check-SumNarrowBcl	Check `SumNarrowBcl` mismatch. 130888.75!=130889.58
 Check-SumNarrowVectorBase	Check `SumNarrowVectorBase` mismatch. 130888.75!=130889.58
 Check-SumNarrowVectorTraits	Check `SumNarrowVectorTraits` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector128_AdvSimd	Check `SumNarrowVector128_AdvSimd` mismatch. 130888.75!=130889.58
-Check-SumNarrowVector128_AdvSimdB64	Check `SumNarrowVector128_AdvSimdB64` mismatch. 130888.75!=130889.58
+Check-SumNarrowVector128_ArmB64	Check `SumNarrowVector128_ArmB64` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector128Traits	Check `SumNarrowVector128Traits` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector256Traits	Check `SumNarrowVector256Traits` mismatch. 130888.7!=130889.58
-SumNarrowScalar	290.303	903.002
-SumNarrowBcl	75.130	3489.223	3.864026
-SumNarrowVectorBase	81.086	3232.929	3.580201
-SumNarrowVectorTraits	75.071	3491.952	3.867048
-SumNarrowVector128_AdvSimd	561.076	467.217	0.517404
-SumNarrowVector128_AdvSimdB64	75.248	3483.750	3.857965
-SumNarrowVector128Traits	792.276	330.874	0.366416
-SumNarrowVector256Traits	1291.282	203.011	0.224818
+SumNarrowScalar	290.400	902.699
+SumNarrowBcl	76.385	3431.879	3.801797
+SumNarrowVectorBase	81.642	3210.881	3.556978
+SumNarrowVectorTraits	76.126	3443.560	3.814737
+SumNarrowVector128_AdvSimd	558.164	469.654	0.520277
+SumNarrowVector128_ArmB64	82.486	3178.029	3.520585
+SumNarrowVector128Traits	75.962	3450.974	3.822950
+SumNarrowVector256Traits	915.898	286.215	0.317066
 
 [NarrowBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrowScalar	-38
-SumNarrowScalar	347.281	754.846
-SumNarrowBcl	19.662	13332.469	17.662492
-SumNarrowVectorBase	19.665	13330.678	17.660121
-SumNarrowVectorTraits	19.784	13250.364	17.553722
-SumNarrowVector128_AdvSimd	19.803	13237.430	17.536588
-SumNarrowVector128Traits	19.587	13383.242	17.729756
-SumNarrowVector256Traits	392.386	668.077	0.885050
+SumNarrowScalar	349.506	750.041
+SumNarrowBcl	21.537	12171.826	16.228219
+SumNarrowVectorBase	21.453	12219.703	16.292052
+SumNarrowVectorTraits	21.514	12185.043	16.245841
+SumNarrowVector128_AdvSimd	21.628	12120.847	16.160251
+SumNarrowVector128Traits	21.600	12136.505	16.181127
+SumNarrowVector256Traits	409.680	639.875	0.853120
 
 [NarrowBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrowScalar	1552412164
-SumNarrowScalar	312.726	838.254
-SumNarrowBcl	79.271	3306.919	3.945006
-SumNarrowVectorBase	82.884	3162.797	3.773076
-SumNarrowVectorTraits	82.803	3165.871	3.776743
-SumNarrowVector128_AdvSimd	79.086	3314.682	3.954267
-SumNarrowVector128Traits	82.753	3167.792	3.779034
-SumNarrowVector256Traits	872.872	300.324	0.358273
+SumNarrowScalar	314.242	834.212
+SumNarrowBcl	84.146	3115.340	3.734473
+SumNarrowVectorBase	80.467	3257.777	3.905217
+SumNarrowVectorTraits	84.524	3101.402	3.717764
+SumNarrowVector128_AdvSimd	84.241	3111.840	3.730277
+SumNarrowVector128Traits	79.907	3280.604	3.932581
+SumNarrowVector256Traits	919.918	284.964	0.341597
 
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 ```
 
 #### .NET 7.0
@@ -919,24 +918,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.15.0.1026
-Environment.Version:	7.0.1
+Environment.OSVersion:	Unix 6.2.0.1013
+Environment.Version:	7.0.8
 Stopwatch.Frequency:	1000000000
-RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.1/
-RuntimeInformation.FrameworkDescription:	.NET 7.0.1
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/
+RuntimeInformation.FrameworkDescription:	.NET 7.0.8
 RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
+RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.1/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(TraitsUtil):	.NET 7.0
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -948,47 +953,41 @@ Check-SumNarrowBcl	Check `SumNarrowBcl` mismatch. 130888.75!=130889.58
 Check-SumNarrowVectorBase	Check `SumNarrowVectorBase` mismatch. 130888.75!=130889.58
 Check-SumNarrowVectorTraits	Check `SumNarrowVectorTraits` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector128_AdvSimd	Check `SumNarrowVector128_AdvSimd` mismatch. 130888.75!=130889.58
-Check-SumNarrowVector128_AdvSimdB64	Check `SumNarrowVector128_AdvSimdB64` mismatch. 130888.75!=130889.58
+Check-SumNarrowVector128_ArmB64	Check `SumNarrowVector128_ArmB64` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector128Traits	Check `SumNarrowVector128Traits` mismatch. 130888.75!=130889.58
 Check-SumNarrowVector256Traits	Check `SumNarrowVector256Traits` mismatch. 130888.7!=130889.58
-SumNarrowScalar	210.605	1244.722
-SumNarrowBcl	75.298	3481.401	2.796932
-SumNarrowVectorBase	75.476	3473.223	2.790362
-SumNarrowVectorTraits	74.895	3500.169	2.812009
-SumNarrowVector128_AdvSimd	75.439	3474.922	2.791726
-SumNarrowVector128_AdvSimdB64	75.376	3477.835	2.794066
-SumNarrowVector128Traits	75.593	3467.840	2.786036
-SumNarrowVector256Traits	958.777	273.415	0.219660
+SumNarrowScalar	210.669	1244.343
+SumNarrowBcl	78.633	3333.759	2.679132
+SumNarrowVectorBase	79.078	3314.994	2.664053
+SumNarrowVectorTraits	78.736	3329.394	2.675624
+SumNarrowVector128_AdvSimd	78.736	3329.413	2.675640
+SumNarrowVector128_ArmB64	78.691	3331.304	2.677159
+SumNarrowVector128Traits	78.640	3333.457	2.678890
+SumNarrowVector256Traits	936.765	279.840	0.224889
 
 [NarrowBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrowScalar	-38
-SumNarrowScalar	253.988	1032.113
-SumNarrowBcl	16.991	15428.521	14.948478
-SumNarrowVectorBase	16.972	15445.908	14.965325
-SumNarrowVectorTraits	16.981	15437.910	14.957575
-SumNarrowVector128_AdvSimd	16.988	15430.867	14.950752
-SumNarrowVector128Traits	16.962	15454.345	14.973499
-SumNarrowVector256Traits	687.066	381.541	0.369670
+SumNarrowScalar	253.811	1032.831
+SumNarrowBcl	16.814	15590.571	15.094993
+SumNarrowVectorBase	16.825	15580.813	15.085546
+SumNarrowVectorTraits	16.864	15544.734	15.050613
+SumNarrowVector128_AdvSimd	16.826	15579.282	15.084063
+SumNarrowVector128Traits	16.818	15587.264	15.091791
+SumNarrowVector256Traits	690.839	379.457	0.367396
 
 [NarrowBenchmark_Int64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumNarrowScalar	1552412164
-SumNarrowScalar	226.683	1156.432
-SumNarrowBcl	64.490	4064.873	3.515011
-SumNarrowVectorBase	64.229	4081.370	3.529276
-SumNarrowVectorTraits	64.266	4079.025	3.527248
-SumNarrowVector128_AdvSimd	64.668	4053.662	3.505317
-SumNarrowVector128Traits	64.421	4069.220	3.518770
-SumNarrowVector256Traits	933.311	280.875	0.242881
+SumNarrowScalar	224.523	1167.560
+SumNarrowBcl	64.938	4036.806	3.457471
+SumNarrowVectorBase	64.510	4063.599	3.480419
+SumNarrowVectorTraits	65.333	4012.446	3.436607
+SumNarrowVector128_AdvSimd	65.471	4003.961	3.429340
+SumNarrowVector128Traits	64.797	4045.604	3.465006
+SumNarrowVector256Traits	931.005	281.571	0.241162
 
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
 ```
 

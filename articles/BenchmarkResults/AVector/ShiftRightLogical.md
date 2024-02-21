@@ -663,26 +663,29 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.19.0.1025
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	3.1.32
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/
 RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:03 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
-Vectors.Instance:	VectorTraits128Base
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	
+Vector128s.Instance:	WVectorTraits128Base	// 
+Vectors.Instance:	VectorTraits128Base	// 
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -690,68 +693,77 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	97
-SumSRLScalar	429.765	609.971
-SumSRL_Basic	74.149	3535.363	5.795951
-SumSRL_Base_Core	74.107	3537.350	5.799208
+SumSRLScalar	429.435	610.440
+SumSRL_Basic	74.423	3522.345	5.770175
+SumSRL_Base_Core	74.375	3524.622	5.773905
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	70.061	3741.637	6.134122
-SumSRLTraits_Core	70.123	3738.350	6.128733
-SumSRLConstTraits	68.559	3823.629	6.268540
-SumSRLConstTraits_Core	68.542	3824.594	6.270122
+SumSRLTraits	69.076	3794.990	6.216811
+SumSRLTraits_Core	69.231	3786.531	6.202954
+SumSRLConstTraits	67.293	3895.547	6.381541
+SumSRLConstTraits_Core	67.650	3875.003	6.347886
+SumSRL128Traits	566.774	462.520	0.757683
+SumSRL128Traits_Core	562.181	466.298	0.763872
+SumSRL128ConstTraits	564.025	464.774	0.761375
+SumSRL128ConstTraits_Core	563.863	464.907	0.761594
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	68.925	3803.316	6.235240
+SumSRLFastTraits	67.653	3874.840	6.347618
 
 [ShiftRightLogicalConstBenchmark_UInt16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	20269
-SumSRLScalar	432.124	606.641
-SumSRL_Basic	148.320	1767.420	2.913453
-SumSRL_Base_Core	148.473	1765.596	2.910447
+SumSRLScalar	431.924	606.922
+SumSRL_Basic	148.338	1767.201	2.911745
+SumSRL_Base_Core	148.175	1769.150	2.914957
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	138.565	1891.842	3.118553
-SumSRLTraits_Core	138.464	1893.230	3.120842
-SumSRLConstTraits	136.558	1919.649	3.164391
-SumSRLConstTraits_Core	136.443	1921.276	3.167072
+SumSRLTraits	139.169	1883.644	3.103603
+SumSRLTraits_Core	138.792	1888.758	3.112030
+SumSRLConstTraits	135.981	1927.803	3.176362
+SumSRLConstTraits_Core	135.974	1927.897	3.176517
+SumSRL128Traits	887.416	295.401	0.486721
+SumSRL128Traits_Core	878.213	298.497	0.491821
+SumSRL128ConstTraits	893.112	293.517	0.483617
+SumSRL128ConstTraits_Core	892.333	293.774	0.484039
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	136.822	1915.946	3.158287
+SumSRLFastTraits	137.166	1911.139	3.148906
 
 [ShiftRightLogicalConstBenchmark_UInt32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	1913540397
-SumSRLScalar	350.570	747.766
-SumSRL_Basic	275.969	949.905	1.270323
-SumSRL_Base_Core	679.196	385.962	0.516154
+SumSRLScalar	349.616	749.805
+SumSRL_Basic	275.144	952.751	1.270666
+SumSRL_Base_Core	275.295	952.229	1.269969
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	279.450	938.073	1.254500
-SumSRLTraits_Core	279.358	938.379	1.254909
-SumSRLConstTraits	276.631	947.631	1.267283
-SumSRLConstTraits_Core	273.343	959.031	1.282528
+SumSRLTraits	277.599	944.328	1.259432
+SumSRLTraits_Core	277.123	945.949	1.261594
+SumSRLConstTraits	275.110	952.870	1.270825
+SumSRLConstTraits_Core	274.703	954.282	1.272707
+SumSRL128Traits	1431.621	183.110	0.244210
+SumSRL128Traits_Core	1432.064	183.053	0.244135
+SumSRL128ConstTraits	1432.219	183.033	0.244108
+SumSRL128ConstTraits_Core	1432.159	183.041	0.244118
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	272.367	962.467	1.287123
+SumSRLFastTraits	271.031	967.210	1.289950
 
 [ShiftRightLogicalConstBenchmark_UInt64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	2955186131785938676
-SumSRLScalar	354.044	740.429
-SumSRL_Basic	539.613	485.800	0.656106
-SumSRL_Base_Core	534.307	490.624	0.662622
+SumSRLScalar	353.088	742.433
+SumSRL_Basic	547.698	478.629	0.644676
+SumSRL_Base_Core	540.114	485.350	0.653728
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	556.197	471.315	0.636543
-SumSRLTraits_Core	556.365	471.172	0.636351
-SumSRLConstTraits	557.536	470.183	0.635014
-SumSRLConstTraits_Core	557.508	470.207	0.635047
+SumSRLTraits	560.019	468.098	0.630492
+SumSRLTraits_Core	556.951	470.677	0.633966
+SumSRLConstTraits	560.329	467.839	0.630143
+SumSRLConstTraits_Core	558.984	468.965	0.631659
+SumSRL128Traits	968.813	270.583	0.364454
+SumSRL128Traits_Core	950.022	275.935	0.371663
+SumSRL128ConstTraits	958.267	273.560	0.368465
+SumSRL128ConstTraits_Core	949.173	276.181	0.371995
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	557.664	470.075	0.634869
-
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: Requires hardware support AdvSimd!
-VectorTraits128AdvSimdB64: Requires hardware support AdvSimd!
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+SumSRLFastTraits	558.161	469.657	0.632591
 
 ```
 
@@ -761,27 +773,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.19.0.1025
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	5.0.17
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/
 RuntimeInformation.FrameworkDescription:	.NET 5.0.17
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:03 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -789,76 +804,85 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	97
-SumSRLScalar	429.151	610.843
-SumSRL_Basic	73.221	3580.168	5.861027
-SumSRL_Base_Core	71.538	3664.403	5.998926
-SumSRL_AdvSimd	23.106	11345.178	18.572980
+SumSRLScalar	428.993	611.068
+SumSRL_Basic	73.293	3576.642	5.853095
+SumSRL_Base_Core	73.306	3576.022	5.852081
+SumSRL_AdvSimd	22.043	11892.353	19.461572
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	22.005	11913.021	19.502587
-SumSRLTraits_Core	15.436	16982.614	27.801924
-SumSRLConstTraits	16.505	15882.629	26.001158
-SumSRLConstTraits_Core	15.422	16997.625	27.826497
-SumSRLFast_AdvSimd	16.520	15868.754	25.978445
+SumSRLTraits	23.060	11367.866	18.603260
+SumSRLTraits_Core	16.500	15887.374	25.999335
+SumSRLConstTraits	19.778	13254.468	21.690643
+SumSRLConstTraits_Core	16.498	15889.018	26.002026
+SumSRL128Traits	22.013	11908.536	19.488056
+SumSRL128Traits_Core	16.554	15835.768	25.914883
+SumSRL128ConstTraits	16.545	15844.426	25.929052
+SumSRL128ConstTraits_Core	16.529	15859.491	25.953706
+SumSRLFast_AdvSimd	19.848	13207.837	21.614332
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	16.501	15886.504	26.007502
+SumSRLFastTraits	19.841	13212.078	21.621274
 
 [ShiftRightLogicalConstBenchmark_UInt16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	20269
-SumSRLScalar	431.708	607.225
-SumSRL_Basic	145.783	1798.180	2.961308
-SumSRL_Base_Core	146.665	1787.371	2.943506
-SumSRL_AdvSimd	46.205	5673.453	9.343245
+SumSRLScalar	432.537	606.062
+SumSRL_Basic	146.629	1787.808	2.949877
+SumSRL_Base_Core	147.070	1782.443	2.941024
+SumSRL_AdvSimd	44.121	5941.433	9.803341
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	46.141	5681.334	9.356224
-SumSRLTraits_Core	30.898	8484.151	13.972002
-SumSRLConstTraits	209.653	1250.372	2.059157
-SumSRLConstTraits_Core	30.935	8473.922	13.955157
-SumSRLFast_AdvSimd	33.091	7921.829	13.045951
+SumSRLTraits	43.898	5971.707	9.853294
+SumSRLTraits_Core	32.965	7952.247	13.121177
+SumSRLConstTraits	209.778	1249.623	2.061874
+SumSRLConstTraits_Core	32.942	7957.828	13.130386
+SumSRL128Traits	46.153	5679.936	9.371872
+SumSRL128Traits_Core	33.020	7938.871	13.099106
+SumSRL128ConstTraits	209.924	1248.756	2.060443
+SumSRL128ConstTraits_Core	33.014	7940.466	13.101737
+SumSRLFast_AdvSimd	39.662	6609.521	10.905684
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	39.652	6611.060	10.887330
+SumSRLFastTraits	32.958	7953.825	13.123780
 
 [ShiftRightLogicalConstBenchmark_UInt32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	1913540397
-SumSRLScalar	351.131	746.570
-SumSRL_Basic	268.519	976.257	1.307656
-SumSRL_Base_Core	267.875	978.606	1.310802
-SumSRL_AdvSimd	80.044	3274.991	4.386716
+SumSRLScalar	350.662	747.568
+SumSRL_Basic	268.332	976.939	1.306823
+SumSRL_Base_Core	268.834	975.116	1.304385
+SumSRL_AdvSimd	79.834	3283.631	4.392417
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	80.008	3276.459	4.388681
-SumSRLTraits_Core	67.189	3901.594	5.226024
-SumSRLConstTraits	67.281	3896.249	5.218865
-SumSRLConstTraits_Core	67.168	3902.825	5.227673
-SumSRLFast_AdvSimd	67.561	3880.117	5.197257
+SumSRLTraits	79.630	3292.010	4.403625
+SumSRLTraits_Core	66.619	3934.975	5.263702
+SumSRLConstTraits	66.640	3933.740	5.262049
+SumSRLConstTraits_Core	66.607	3935.683	5.264648
+SumSRL128Traits	79.857	3282.675	4.391139
+SumSRL128Traits_Core	62.556	4190.520	5.605536
+SumSRL128ConstTraits	66.778	3925.599	5.251160
+SumSRL128ConstTraits_Core	62.443	4198.127	5.615713
+SumSRLFast_AdvSimd	66.664	3932.311	5.260138
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	67.423	3888.059	5.207894
+SumSRLFastTraits	66.812	3923.614	5.248504
 
 [ShiftRightLogicalConstBenchmark_UInt64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	2955186131785938676
-SumSRLScalar	353.535	741.494
-SumSRL_Basic	541.139	484.430	0.653317
-SumSRL_Base_Core	541.052	484.508	0.653421
-SumSRL_AdvSimd	184.729	1419.077	1.913807
+SumSRLScalar	354.306	739.881
+SumSRL_Basic	538.884	486.457	0.657481
+SumSRL_Base_Core	541.983	483.676	0.653721
+SumSRL_AdvSimd	185.337	1414.415	1.911678
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	184.530	1420.603	1.915865
-SumSRLTraits_Core	123.631	2120.369	2.859590
-SumSRLConstTraits	132.755	1974.648	2.663066
-SumSRLConstTraits_Core	132.268	1981.918	2.672871
-SumSRLFast_AdvSimd	132.584	1977.193	2.666499
+SumSRLTraits	184.525	1420.642	1.920095
+SumSRLTraits_Core	123.427	2123.873	2.870560
+SumSRLConstTraits	132.142	1983.810	2.681256
+SumSRLConstTraits_Core	132.276	1981.799	2.678537
+SumSRL128Traits	185.014	1416.889	1.915023
+SumSRL128Traits_Core	132.261	1982.015	2.678829
+SumSRL128ConstTraits	132.872	1972.904	2.666516
+SumSRL128ConstTraits_Core	124.112	2112.151	2.854718
+SumSRLFast_AdvSimd	132.487	1978.634	2.674260
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	132.381	1980.220	2.670582
-
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+SumSRLFastTraits	132.127	1984.034	2.681558
 
 ```
 
@@ -868,27 +892,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.19.0.1025
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	6.0.19
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/
 RuntimeInformation.FrameworkDescription:	.NET 6.0.19
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:03 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -896,76 +923,85 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	97
-SumSRLScalar	400.480	654.575
-SumSRL_Basic	73.447	3569.164	5.452642
-SumSRL_Base_Core	72.487	3616.444	5.524872
-SumSRL_AdvSimd	23.120	11338.244	17.321532
+SumSRLScalar	401.261	653.301
+SumSRL_Basic	172.696	1517.947	2.323503
+SumSRL_Base_Core	175.952	1489.862	2.280513
+SumSRL_AdvSimd	23.217	11291.053	17.283073
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	23.085	11355.501	17.347896
-SumSRLTraits_Core	16.515	15872.815	24.249036
-SumSRLConstTraits	16.521	15867.157	24.240391
-SumSRLConstTraits_Core	15.443	16974.903	25.932705
-SumSRLFast_AdvSimd	15.417	17003.082	25.975754
+SumSRLTraits	22.113	11854.758	18.145930
+SumSRLTraits_Core	15.483	16931.012	25.916088
+SumSRLConstTraits	15.485	16929.335	25.913521
+SumSRLConstTraits_Core	16.535	15854.083	24.267646
+SumSRL128Traits	22.024	11902.879	18.219589
+SumSRL128Traits_Core	16.599	15793.090	24.174285
+SumSRL128ConstTraits	15.498	16914.199	25.890352
+SumSRL128ConstTraits_Core	15.513	16898.840	25.866843
+SumSRLFast_AdvSimd	15.460	16956.112	25.954509
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	15.423	16996.865	25.966256
+SumSRLFastTraits	15.460	16956.265	25.954743
 
 [ShiftRightLogicalConstBenchmark_UInt16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	20269
-SumSRLScalar	432.071	606.715
-SumSRL_Basic	147.388	1778.601	2.931528
-SumSRL_Base_Core	146.130	1793.904	2.956751
-SumSRL_AdvSimd	44.214	5929.012	9.772323
+SumSRLScalar	433.959	604.075
+SumSRL_Basic	148.005	1771.186	2.932061
+SumSRL_Base_Core	318.218	823.786	1.363715
+SumSRL_AdvSimd	44.485	5892.797	9.755068
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	44.127	5940.648	9.791501
-SumSRLTraits_Core	33.271	7879.072	12.986453
-SumSRLConstTraits	33.250	7884.014	12.994599
-SumSRLConstTraits_Core	33.287	7875.343	12.980307
-SumSRLFast_AdvSimd	33.340	7862.685	12.959444
+SumSRLTraits	44.417	5901.827	9.770016
+SumSRLTraits_Core	33.456	7835.431	12.970949
+SumSRLConstTraits	33.414	7845.444	12.987524
+SumSRLConstTraits_Core	33.461	7834.350	12.969158
+SumSRL128Traits	44.410	5902.850	9.771710
+SumSRL128Traits_Core	31.508	8320.033	13.773169
+SumSRL128ConstTraits	33.640	7792.567	12.899990
+SumSRL128ConstTraits_Core	31.559	8306.434	13.750657
+SumSRLFast_AdvSimd	31.429	8340.868	13.807660
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	31.243	8390.470	13.829349
+SumSRLFastTraits	33.547	7814.332	12.936021
 
 [ShiftRightLogicalConstBenchmark_UInt32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	1913540397
-SumSRLScalar	350.023	748.934
-SumSRL_Basic	268.659	975.748	1.302849
-SumSRL_Base_Core	268.654	975.768	1.302875
-SumSRL_AdvSimd	79.934	3279.505	4.378895
+SumSRLScalar	353.306	741.975
+SumSRL_Basic	270.835	967.911	1.304506
+SumSRL_Base_Core	270.997	967.333	1.303727
+SumSRL_AdvSimd	80.363	3262.002	4.396376
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	79.903	3280.786	4.380606
-SumSRLTraits_Core	62.707	4180.485	5.581911
-SumSRLConstTraits	66.929	3916.718	5.229722
-SumSRLConstTraits_Core	66.818	3923.265	5.238463
-SumSRLFast_AdvSimd	62.824	4172.700	5.571516
+SumSRLTraits	80.116	3272.067	4.409942
+SumSRLTraits_Core	62.777	4175.823	5.627983
+SumSRLConstTraits	66.916	3917.508	5.279837
+SumSRLConstTraits_Core	66.814	3923.493	5.287904
+SumSRL128Traits	80.089	3273.167	4.411423
+SumSRL128Traits_Core	62.906	4167.244	5.616419
+SumSRL128ConstTraits	62.873	4169.417	5.619348
+SumSRL128ConstTraits_Core	66.988	3913.322	5.274196
+SumSRLFast_AdvSimd	62.990	4161.691	5.608935
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	66.883	3919.469	5.233395
+SumSRLFastTraits	66.908	3917.982	5.280477
 
 [ShiftRightLogicalConstBenchmark_UInt64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	2955186131785938676
-SumSRLScalar	353.116	742.373
-SumSRL_Basic	538.167	487.105	0.656146
-SumSRL_Base_Core	550.040	476.591	0.641983
-SumSRL_AdvSimd	184.627	1419.860	1.912597
+SumSRLScalar	354.692	739.075
+SumSRL_Basic	544.126	481.770	0.651856
+SumSRL_Base_Core	544.286	481.629	0.651665
+SumSRL_AdvSimd	177.130	1479.955	2.002443
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	184.495	1420.872	1.913960
-SumSRLTraits_Core	123.525	2122.190	2.858657
-SumSRLConstTraits	123.599	2120.920	2.856947
-SumSRLConstTraits_Core	132.228	1982.508	2.670501
-SumSRLFast_AdvSimd	158.441	1654.524	2.228697
+SumSRLTraits	176.334	1486.629	2.011473
+SumSRLTraits_Core	133.181	1968.333	2.663239
+SumSRLConstTraits	133.453	1964.318	2.657807
+SumSRLConstTraits_Core	124.238	2110.022	2.854950
+SumSRL128Traits	177.275	1478.744	2.000805
+SumSRL128Traits_Core	125.217	2093.517	2.832618
+SumSRL128ConstTraits	132.927	1972.086	2.668318
+SumSRL128ConstTraits_Core	133.198	1968.082	2.662900
+SumSRLFast_AdvSimd	159.103	1647.634	2.229320
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	158.487	1654.040	2.228044
-
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+SumSRLFastTraits	158.987	1648.839	2.230950
 
 ```
 
@@ -975,27 +1011,30 @@ VectorTraits.Benchmarks
 benchmarkMode:	0
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.19.0.1025
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	7.0.8
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/
 RuntimeInformation.FrameworkDescription:	.NET 7.0.8
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:03 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
@@ -1003,84 +1042,93 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	97
-SumSRLScalar	294.266	890.839
-SumSRLNetBcl	13.384	19586.726	21.986831
-SumSRLNetBcl_Const	13.381	19590.775	21.991376
-SumSRL_Basic	33.042	7933.745	8.905925
-SumSRL_Base_Core	33.053	7930.950	8.902788
-SumSRL_AdvSimd	19.911	13165.746	14.779041
+SumSRLScalar	283.378	925.069
+SumSRLNetBcl	13.425	19526.683	21.108344
+SumSRLNetBcl_Const	13.425	19527.125	21.108822
+SumSRL_Basic	32.997	7944.581	8.588092
+SumSRL_Base_Core	33.076	7925.434	8.567394
+SumSRL_AdvSimd	19.957	13135.329	14.199291
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	19.896	13175.619	14.790124
-SumSRLTraits_Core	13.388	19580.851	21.980236
-SumSRLConstTraits	13.480	19447.280	21.830298
-SumSRLConstTraits_Core	13.490	19432.662	21.813888
-SumSRLFast_AdvSimd	13.372	19603.444	22.005598
+SumSRLTraits	19.934	13150.471	14.215659
+SumSRLTraits_Core	13.434	19512.920	21.093466
+SumSRLConstTraits	13.501	19416.639	20.989386
+SumSRLConstTraits_Core	13.501	19416.358	20.989083
+SumSRL128Traits	19.929	13154.059	14.219538
+SumSRL128Traits_Core	13.432	19515.757	21.096533
+SumSRL128ConstTraits	13.510	19404.393	20.976148
+SumSRL128ConstTraits_Core	13.516	19395.451	20.966483
+SumSRLFast_AdvSimd	13.389	19579.055	21.164958
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	13.396	19568.992	21.966924
+SumSRLFastTraits	13.432	19516.840	21.097704
 
 [ShiftRightLogicalConstBenchmark_UInt16(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	20269
-SumSRLScalar	319.447	820.618
-SumSRLNetBcl	27.579	9505.360	11.583171
-SumSRLNetBcl_Const	27.569	9508.811	11.587376
-SumSRL_Basic	27.532	9521.524	11.602867
-SumSRL_Base_Core	27.584	9503.337	11.580705
-SumSRL_AdvSimd	40.259	6511.443	7.934803
+SumSRLScalar	318.548	822.934
+SumSRLNetBcl	26.733	9805.972	11.915872
+SumSRLNetBcl_Const	26.732	9806.457	11.916461
+SumSRL_Basic	26.703	9817.130	11.929431
+SumSRL_Base_Core	26.770	9792.583	11.899603
+SumSRL_AdvSimd	39.814	6584.266	8.000969
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	27.579	9505.102	11.582856
-SumSRLTraits_Core	27.568	9509.063	11.587683
-SumSRLConstTraits	27.762	9442.549	11.506630
-SumSRLConstTraits_Core	27.770	9439.698	11.503155
-SumSRLFast_AdvSimd	27.528	9522.792	11.604413
+SumSRLTraits	26.731	9806.873	11.916967
+SumSRLTraits_Core	26.723	9809.512	11.920174
+SumSRLConstTraits	26.893	9747.796	11.845180
+SumSRLConstTraits_Core	26.908	9742.182	11.838358
+SumSRL128Traits	26.770	9792.525	11.899532
+SumSRL128Traits_Core	26.773	9791.252	11.897986
+SumSRL128ConstTraits	26.944	9729.161	11.822535
+SumSRL128ConstTraits_Core	26.947	9728.222	11.821393
+SumSRLFast_AdvSimd	26.755	9797.920	11.906088
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	27.563	9510.709	11.589689
+SumSRLFastTraits	26.693	9820.527	11.933559
 
 [ShiftRightLogicalConstBenchmark_UInt32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	1913540397
-SumSRLScalar	224.058	1169.981
-SumSRLNetBcl	55.092	4758.308	4.066995
-SumSRLNetBcl_Const	55.221	4747.163	4.057469
-SumSRL_Basic	55.224	4746.886	4.057233
-SumSRL_Base_Core	55.173	4751.345	4.061044
-SumSRL_AdvSimd	79.911	3280.461	2.803858
+SumSRLScalar	224.033	1170.115
+SumSRLNetBcl	54.945	4771.051	4.077420
+SumSRLNetBcl_Const	54.884	4776.363	4.081960
+SumSRL_Basic	54.873	4777.290	4.082753
+SumSRL_Base_Core	55.078	4759.469	4.067522
+SumSRL_AdvSimd	79.776	3285.996	2.808268
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	55.335	4737.385	4.049113
-SumSRLTraits_Core	55.146	4753.624	4.062992
-SumSRLConstTraits	55.566	4717.740	4.032321
-SumSRLConstTraits_Core	55.658	4709.911	4.025630
-SumSRLFast_AdvSimd	55.348	4736.323	4.048205
+SumSRLTraits	54.908	4774.267	4.080169
+SumSRLTraits_Core	54.945	4770.997	4.077374
+SumSRLConstTraits	55.386	4733.043	4.044938
+SumSRLConstTraits_Core	55.260	4743.864	4.054186
+SumSRL128Traits	54.877	4776.961	4.082471
+SumSRL128Traits_Core	54.884	4776.351	4.081950
+SumSRL128ConstTraits	55.364	4734.876	4.046505
+SumSRL128ConstTraits_Core	55.269	4743.023	4.053467
+SumSRLFast_AdvSimd	54.830	4781.043	4.085959
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	55.195	4749.435	4.059412
+SumSRLFastTraits	54.916	4773.527	4.079537
 
 [ShiftRightLogicalConstBenchmark_UInt64(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumSRLScalar	2955186131785938676
-SumSRLScalar	220.335	1189.752
-SumSRLNetBcl	107.682	2434.417	2.046156
-SumSRLNetBcl_Const	107.696	2434.110	2.045898
-SumSRL_Basic	108.167	2423.514	2.036992
-SumSRL_Base_Core	111.423	2352.692	1.977465
-SumSRL_AdvSimd	160.513	1633.169	1.372697
+SumSRLScalar	219.915	1192.022
+SumSRLNetBcl	107.568	2437.007	2.044430
+SumSRLNetBcl_Const	107.500	2438.554	2.045729
+SumSRL_Basic	107.596	2436.375	2.043901
+SumSRL_Base_Core	107.749	2432.922	2.041003
+SumSRL_AdvSimd	159.201	1646.618	1.381366
 SumSRL_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLTraits	158.991	1648.802	1.385838
-SumSRLTraits_Core	109.643	2390.895	2.009575
-SumSRLConstTraits	108.761	2410.270	2.025860
-SumSRLConstTraits_Core	109.253	2399.429	2.016748
-SumSRLFast_AdvSimd	110.150	2379.890	2.000325
+SumSRLTraits	158.965	1649.062	1.383416
+SumSRLTraits_Core	107.634	2435.511	2.043176
+SumSRLConstTraits	107.893	2429.675	2.038280
+SumSRLConstTraits_Core	107.647	2435.217	2.042929
+SumSRL128Traits	158.942	1649.302	1.383617
+SumSRL128Traits_Core	108.679	2412.091	2.023528
+SumSRL128ConstTraits	107.852	2430.599	2.039055
+SumSRL128ConstTraits_Core	107.654	2435.059	2.042796
+SumSRLFast_AdvSimd	108.742	2410.698	2.022360
 SumSRLFast_Avx2	Run fail! Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
-SumSRLFastTraits	110.143	2380.027	2.000441
-
-VectorTraitsBase: OK.
-VectorTraits128Base: OK.
-VectorTraits128AdvSimd: OK.
-VectorTraits128AdvSimdB64: OK.
-VectorTraits256Base: Vector byte size mismatch(16!=32) !
-VectorTraits256Avx2: Requires hardware support Avx, Avx2! Vector byte size mismatch(16!=32) !
+SumSRLFastTraits	108.678	2412.110	2.023545
 
 ```
 
