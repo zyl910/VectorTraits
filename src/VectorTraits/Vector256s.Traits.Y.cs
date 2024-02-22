@@ -226,6 +226,79 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YCopySign_AcceleratedTypes"/>
+        public static TypeCodeFlags YCopySign_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YCopySign_AcceleratedTypes;
+#else
+                return _instance.YCopySign_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YCopySign(Vector256<float> value, Vector256<float> sign) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YCopySign(value, sign);
+#else
+            return _instance.YCopySign(value, sign);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YCopySign(Vector256<double> value, Vector256<double> sign) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YCopySign(value, sign);
+#else
+            return _instance.YCopySign(value, sign);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YCopySign(Vector256<sbyte> value, Vector256<sbyte> sign) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YCopySign(value, sign);
+#else
+            return _instance.YCopySign(value, sign);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YCopySign(Vector256<short> value, Vector256<short> sign) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YCopySign(value, sign);
+#else
+            return _instance.YCopySign(value, sign);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YCopySign(Vector256<int> value, Vector256<int> sign) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YCopySign(value, sign);
+#else
+            return _instance.YCopySign(value, sign);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YCopySign(Vector256<long> value, Vector256<long> sign) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YCopySign(value, sign);
+#else
+            return _instance.YCopySign(value, sign);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YIsAllTrue_AcceleratedTypes"/>
         public static TypeCodeFlags YIsAllTrue_AcceleratedTypes {
             get {

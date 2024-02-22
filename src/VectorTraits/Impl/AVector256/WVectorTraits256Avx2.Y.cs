@@ -180,6 +180,65 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.YCopySign_AcceleratedTypes"/>
+            public static TypeCodeFlags YCopySign_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    rt |= (TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64) & ShiftRightArithmetic_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YCopySign(Vector256<float> value, Vector256<float> sign) {
+                Vector256<float> signMask = Vector256Constants.Single_SignMask;
+                Vector256<float> rt = ConditionalSelect(signMask, sign, value);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YCopySign(Vector256<double> value, Vector256<double> sign) {
+                Vector256<double> signMask = Vector256Constants.Double_SignMask;
+                Vector256<double> rt = ConditionalSelect(signMask, sign, value);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YCopySign(Vector256<sbyte> value, Vector256<sbyte> sign) {
+                Vector256<sbyte> t = ShiftRightArithmetic_Const(Avx2.Xor(value, sign), 63);
+                Vector256<sbyte> rt = Avx2.Subtract(Avx2.Xor(value, t), t);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{short}, Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YCopySign(Vector256<short> value, Vector256<short> sign) {
+                Vector256<short> t = Avx2.ShiftRightArithmetic(Avx2.Xor(value, sign), 15);
+                Vector256<short> rt = Avx2.Subtract(Avx2.Xor(value, t), t);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{int}, Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YCopySign(Vector256<int> value, Vector256<int> sign) {
+                Vector256<int> t = Avx2.ShiftRightArithmetic(Avx2.Xor(value, sign), 31);
+                Vector256<int> rt = Avx2.Subtract(Avx2.Xor(value, t), t);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{long}, Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YCopySign(Vector256<long> value, Vector256<long> sign) {
+                Vector256<long> t = ShiftRightArithmetic_Const(Avx2.Xor(value, sign), 63);
+                Vector256<long> rt = Avx2.Subtract(Avx2.Xor(value, t), t);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
                 get {

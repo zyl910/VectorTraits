@@ -122,8 +122,11 @@ Types: Vector, Vector128, Vector256 .
 
 ### Methods of INumber (数字性接口的函数)
 Summary (概要):
+- Provides the vector methods of check sign (提供符号判断的向量方法): YCopySign .
 
 List (列表):
+- `YCopySign`: Copies the sign of a value to the sign of another value (将一个值的符号复制到另一个值).
+  Mnemonic: `rt[i] := copySign(value[i], sign[i])`.
 
 ### Methods of INumberBase (数字基本性接口的函数)
 Summary (概要):

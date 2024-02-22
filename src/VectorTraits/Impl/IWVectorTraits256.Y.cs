@@ -245,6 +245,44 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YCopySign</c> (运行 <c>YCopySign</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YCopySign(Vector256{float}, Vector256{float})"/>
+        TypeCodeFlags YCopySign_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Copies the sign of a value to the sign of another value (将一个值的符号复制到另一个值).
+        /// Mnemonic: <c>rt[i] := copySign(value[i], sign[i])</c>.
+        /// </summary>
+        /// <param name="value">The value whose magnitude is used in the result (结果中使用的幅度).</param>
+        /// <param name="sign">The value whose sign is used in the result (结果中使用符号的值).</param>
+        /// <returns>Returns a vector where each element is a value based on the magnitude of <paramref name="value"/> and the sign of <paramref name="sign"/> (返回一个向量，其中每个元素是根据 value的幅度和sign的符号而生成的值).</returns>
+        /// <seealso cref="YCopySign_AcceleratedTypes"/>
+        /// <seealso cref="MathINumber.CopySign(float, float)"/>
+        Vector256<float> YCopySign(Vector256<float> value, Vector256<float> sign);
+
+        /// <inheritdoc cref="YCopySign(Vector256{float}, Vector256{float})"/>
+        /// <seealso cref="MathINumber.CopySign(double, double)"/>
+        Vector256<double> YCopySign(Vector256<double> value, Vector256<double> sign);
+
+        /// <inheritdoc cref="YCopySign(Vector256{float}, Vector256{float})"/>
+        /// <seealso cref="MathINumber.CopySign(sbyte, sbyte)"/>
+        Vector256<sbyte> YCopySign(Vector256<sbyte> value, Vector256<sbyte> sign);
+
+        /// <inheritdoc cref="YCopySign(Vector256{float}, Vector256{float})"/>
+        /// <seealso cref="MathINumber.CopySign(short, short)"/>
+        Vector256<short> YCopySign(Vector256<short> value, Vector256<short> sign);
+
+        /// <inheritdoc cref="YCopySign(Vector256{float}, Vector256{float})"/>
+        /// <seealso cref="MathINumber.CopySign(int, int)"/>
+        Vector256<int> YCopySign(Vector256<int> value, Vector256<int> sign);
+
+        /// <inheritdoc cref="YCopySign(Vector256{float}, Vector256{float})"/>
+        /// <seealso cref="MathINumber.CopySign(long, long)"/>
+        Vector256<long> YCopySign(Vector256<long> value, Vector256<long> sign);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YIsAllTrue</c> (运行 <c>YIsAllTrue</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YIsAllTrue{T}(Vector256{T})"/>
