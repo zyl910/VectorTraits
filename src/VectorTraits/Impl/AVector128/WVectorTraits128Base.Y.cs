@@ -11,6 +11,7 @@ using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Collections;
 using Zyl.VectorTraits.Impl.Util;
+using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Impl.AVector128 {
 
@@ -311,6 +312,230 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> YClamp(Vector128<ulong> value, Vector128<ulong> amin, Vector128<ulong> amax) {
                 return Min(Max(amin, value), amax);
             }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign_AcceleratedTypes"/>
+            public static TypeCodeFlags YCopySign_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
+                        rt |= (TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64) & ShiftRightArithmetic_AcceleratedTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YCopySign(Vector128<float> value, Vector128<float> sign) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YCopySign_Bit(value, sign);
+#else
+                return YCopySign_Basic(value, sign);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YCopySign(Vector128<double> value, Vector128<double> sign) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YCopySign_Bit(value, sign);
+#else
+                return YCopySign_Basic(value, sign);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YCopySign(Vector128<sbyte> value, Vector128<sbyte> sign) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YCopySign_Bit(value, sign);
+#else
+                return YCopySign_Basic(value, sign);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YCopySign(Vector128<short> value, Vector128<short> sign) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YCopySign_Bit(value, sign);
+#else
+                return YCopySign_Basic(value, sign);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YCopySign(Vector128<int> value, Vector128<int> sign) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YCopySign_Bit(value, sign);
+#else
+                return YCopySign_Basic(value, sign);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YCopySign(Vector128<long> value, Vector128<long> sign) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YCopySign_Bit(value, sign);
+#else
+                return YCopySign_Basic(value, sign);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YCopySign_Basic(Vector128<float> value, Vector128<float> sign) {
+                UnsafeUtil.SkipInit(out Vector128<float> rt);
+                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray8<float>>(ref value);
+                ref FixedArray8<float> psign = ref Unsafe.As<Vector128<float>, FixedArray8<float>>(ref sign);
+                ref FixedArray8<float> p = ref Unsafe.As<Vector128<float>, FixedArray8<float>>(ref rt);
+                p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
+                p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
+                p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
+                p.I3 = MathINumber.CopySign(pvalue.I3, psign.I3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YCopySign_Basic(Vector128<double> value, Vector128<double> sign) {
+                UnsafeUtil.SkipInit(out Vector128<double> rt);
+                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray4<double>>(ref value);
+                ref FixedArray4<double> psign = ref Unsafe.As<Vector128<double>, FixedArray4<double>>(ref sign);
+                ref FixedArray4<double> p = ref Unsafe.As<Vector128<double>, FixedArray4<double>>(ref rt);
+                p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
+                p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YCopySign_Basic(Vector128<sbyte> value, Vector128<sbyte> sign) {
+                UnsafeUtil.SkipInit(out Vector128<sbyte> rt);
+                ref FixedArray32<sbyte> pvalue = ref Unsafe.As<Vector128<sbyte>, FixedArray32<sbyte>>(ref value);
+                ref FixedArray32<sbyte> psign = ref Unsafe.As<Vector128<sbyte>, FixedArray32<sbyte>>(ref sign);
+                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector128<sbyte>, FixedArray32<sbyte>>(ref rt);
+                p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
+                p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
+                p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
+                p.I3 = MathINumber.CopySign(pvalue.I3, psign.I3);
+                p.I4 = MathINumber.CopySign(pvalue.I4, psign.I4);
+                p.I5 = MathINumber.CopySign(pvalue.I5, psign.I5);
+                p.I6 = MathINumber.CopySign(pvalue.I6, psign.I6);
+                p.I7 = MathINumber.CopySign(pvalue.I7, psign.I7);
+                p.I8 = MathINumber.CopySign(pvalue.I8, psign.I8);
+                p.I9 = MathINumber.CopySign(pvalue.I9, psign.I9);
+                p.I10 = MathINumber.CopySign(pvalue.I10, psign.I10);
+                p.I11 = MathINumber.CopySign(pvalue.I11, psign.I11);
+                p.I12 = MathINumber.CopySign(pvalue.I12, psign.I12);
+                p.I13 = MathINumber.CopySign(pvalue.I13, psign.I13);
+                p.I14 = MathINumber.CopySign(pvalue.I14, psign.I14);
+                p.I15 = MathINumber.CopySign(pvalue.I15, psign.I15);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YCopySign_Basic(Vector128<short> value, Vector128<short> sign) {
+                UnsafeUtil.SkipInit(out Vector128<short> rt);
+                ref FixedArray16<short> pvalue = ref Unsafe.As<Vector128<short>, FixedArray16<short>>(ref value);
+                ref FixedArray16<short> psign = ref Unsafe.As<Vector128<short>, FixedArray16<short>>(ref sign);
+                ref FixedArray16<short> p = ref Unsafe.As<Vector128<short>, FixedArray16<short>>(ref rt);
+                p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
+                p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
+                p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
+                p.I3 = MathINumber.CopySign(pvalue.I3, psign.I3);
+                p.I4 = MathINumber.CopySign(pvalue.I4, psign.I4);
+                p.I5 = MathINumber.CopySign(pvalue.I5, psign.I5);
+                p.I6 = MathINumber.CopySign(pvalue.I6, psign.I6);
+                p.I7 = MathINumber.CopySign(pvalue.I7, psign.I7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YCopySign_Basic(Vector128<int> value, Vector128<int> sign) {
+                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                ref FixedArray8<int> pvalue = ref Unsafe.As<Vector128<int>, FixedArray8<int>>(ref value);
+                ref FixedArray8<int> psign = ref Unsafe.As<Vector128<int>, FixedArray8<int>>(ref sign);
+                ref FixedArray8<int> p = ref Unsafe.As<Vector128<int>, FixedArray8<int>>(ref rt);
+                p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
+                p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
+                p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
+                p.I3 = MathINumber.CopySign(pvalue.I3, psign.I3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YCopySign_Basic(Vector128<long> value, Vector128<long> sign) {
+                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                ref FixedArray4<long> pvalue = ref Unsafe.As<Vector128<long>, FixedArray4<long>>(ref value);
+                ref FixedArray4<long> psign = ref Unsafe.As<Vector128<long>, FixedArray4<long>>(ref sign);
+                ref FixedArray4<long> p = ref Unsafe.As<Vector128<long>, FixedArray4<long>>(ref rt);
+                p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
+                p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
+                return rt;
+            }
+
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YCopySign_Bit(Vector128<float> value, Vector128<float> sign) {
+                Vector128<float> signMask = Vector128Constants.Single_SignMask;
+                Vector128<float> rt = Vector128.ConditionalSelect(signMask, sign, value);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YCopySign_Bit(Vector128<double> value, Vector128<double> sign) {
+                Vector128<double> signMask = Vector128Constants.Double_SignMask;
+                Vector128<double> rt = Vector128.ConditionalSelect(signMask, sign, value);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YCopySign_Bit(Vector128<sbyte> value, Vector128<sbyte> sign) {
+                Vector128<sbyte> t = ShiftRightArithmetic(Vector128.Xor(value, sign), 7);
+                Vector128<sbyte> rt = Vector128.Subtract(Vector128.Xor(value, t), t);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YCopySign_Bit(Vector128<short> value, Vector128<short> sign) {
+                Vector128<short> t = Vector128.ShiftRightArithmetic(Vector128.Xor(value, sign), 15);
+                Vector128<short> rt = Vector128.Subtract(Vector128.Xor(value, t), t);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YCopySign_Bit(Vector128<int> value, Vector128<int> sign) {
+                Vector128<int> t = Vector128.ShiftRightArithmetic(Vector128.Xor(value, sign), 31);
+                Vector128<int> rt = Vector128.Subtract(Vector128.Xor(value, t), t);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YCopySign(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YCopySign_Bit(Vector128<long> value, Vector128<long> sign) {
+                Vector128<long> t = ShiftRightArithmetic(Vector128.Xor(value, sign), 63);
+                Vector128<long> rt = Vector128.Subtract(Vector128.Xor(value, t), t);
+                return rt;
+            }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate_AcceleratedTypes"/>

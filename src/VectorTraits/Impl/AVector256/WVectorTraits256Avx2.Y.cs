@@ -209,7 +209,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YCopySign(Vector256<sbyte> value, Vector256<sbyte> sign) {
-                Vector256<sbyte> t = ShiftRightArithmetic_Const(Avx2.Xor(value, sign), 63);
+                Vector256<sbyte> t = ShiftRightArithmetic_Const(Avx2.Xor(value, sign), 7);
                 Vector256<sbyte> rt = Avx2.Subtract(Avx2.Xor(value, t), t);
                 return rt;
             }

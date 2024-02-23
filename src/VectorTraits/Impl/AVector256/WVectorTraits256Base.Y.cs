@@ -540,7 +540,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YCopySign_Bit(Vector256<sbyte> value, Vector256<sbyte> sign) {
-                Vector256<sbyte> t = ShiftRightArithmetic(Vector256.Xor(value, sign), 63);
+                Vector256<sbyte> t = ShiftRightArithmetic(Vector256.Xor(value, sign), 7);
                 Vector256<sbyte> rt = Vector256.Subtract(Vector256.Xor(value, t), t);
                 return rt;
             }

@@ -246,6 +246,44 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YCopySign</c> (运行 <c>YCopySign</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YCopySign(Vector128{float}, Vector128{float})"/>
+        TypeCodeFlags YCopySign_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Copies the sign of a value to the sign of another value (将一个值的符号复制到另一个值).
+        /// Mnemonic: <c>rt[i] := copySign(value[i], sign[i])</c>.
+        /// </summary>
+        /// <param name="value">The value whose magnitude is used in the result (结果中使用的幅度).</param>
+        /// <param name="sign">The value whose sign is used in the result (结果中使用符号的值).</param>
+        /// <returns>Returns a vector where each element is a value based on the magnitude of <paramref name="value"/> and the sign of <paramref name="sign"/> (返回一个向量，其中每个元素是根据 value的幅度和sign的符号而生成的值).</returns>
+        /// <seealso cref="YCopySign_AcceleratedTypes"/>
+        /// <seealso cref="MathINumber.CopySign(float, float)"/>
+        Vector128<float> YCopySign(Vector128<float> value, Vector128<float> sign);
+
+        /// <inheritdoc cref="YCopySign(Vector128{float}, Vector128{float})"/>
+        /// <seealso cref="MathINumber.CopySign(double, double)"/>
+        Vector128<double> YCopySign(Vector128<double> value, Vector128<double> sign);
+
+        /// <inheritdoc cref="YCopySign(Vector128{float}, Vector128{float})"/>
+        /// <seealso cref="MathINumber.CopySign(sbyte, sbyte)"/>
+        Vector128<sbyte> YCopySign(Vector128<sbyte> value, Vector128<sbyte> sign);
+
+        /// <inheritdoc cref="YCopySign(Vector128{float}, Vector128{float})"/>
+        /// <seealso cref="MathINumber.CopySign(short, short)"/>
+        Vector128<short> YCopySign(Vector128<short> value, Vector128<short> sign);
+
+        /// <inheritdoc cref="YCopySign(Vector128{float}, Vector128{float})"/>
+        /// <seealso cref="MathINumber.CopySign(int, int)"/>
+        Vector128<int> YCopySign(Vector128<int> value, Vector128<int> sign);
+
+        /// <inheritdoc cref="YCopySign(Vector128{float}, Vector128{float})"/>
+        /// <seealso cref="MathINumber.CopySign(long, long)"/>
+        Vector128<long> YCopySign(Vector128<long> value, Vector128<long> sign);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YIsAllTrue</c> (运行 <c>YIsAllTrue</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YIsAllTrue{T}(Vector128{T})"/>
