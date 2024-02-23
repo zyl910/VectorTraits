@@ -154,6 +154,51 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.YCopySign_AcceleratedTypes"/>
+            public static TypeCodeFlags YCopySign_AcceleratedTypes {
+                get {
+                    return WStatics.YCopySign_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YCopySign(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YCopySign(Vector<float> value, Vector<float> sign) {
+                return WStatics.YCopySign(value.AsVector256(), sign.AsVector256()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YCopySign(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YCopySign(Vector<double> value, Vector<double> sign) {
+                return WStatics.YCopySign(value.AsVector256(), sign.AsVector256()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YCopySign(Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YCopySign(Vector<sbyte> value, Vector<sbyte> sign) {
+                return WStatics.YCopySign(value.AsVector256(), sign.AsVector256()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YCopySign(Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YCopySign(Vector<short> value, Vector<short> sign) {
+                return WStatics.YCopySign(value.AsVector256(), sign.AsVector256()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YCopySign(Vector{int}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YCopySign(Vector<int> value, Vector<int> sign) {
+                return WStatics.YCopySign(value.AsVector256(), sign.AsVector256()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YCopySign(Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YCopySign(Vector<long> value, Vector<long> sign) {
+                return WStatics.YCopySign(value.AsVector256(), sign.AsVector256()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
                 get {

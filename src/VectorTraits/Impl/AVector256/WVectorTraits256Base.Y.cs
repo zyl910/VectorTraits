@@ -318,7 +318,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     if (Vector256.IsHardwareAccelerated) {
                         rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
-                        rt |= (TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64) & ShiftRightArithmetic_AcceleratedTypes;
+                        rt |= (TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64); // & ShiftRightArithmetic_AcceleratedTypes
                     }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
@@ -540,7 +540,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YCopySign_Bit(Vector256<sbyte> value, Vector256<sbyte> sign) {
-                Vector256<sbyte> t = ShiftRightArithmetic(Vector256.Xor(value, sign), 7);
+                Vector256<sbyte> t = Vector256.GreaterThan(Vector256<sbyte>.Zero, Vector256.Xor(value, sign));
                 Vector256<sbyte> rt = Vector256.Subtract(Vector256.Xor(value, t), t);
                 return rt;
             }
@@ -548,7 +548,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> YCopySign_Bit(Vector256<short> value, Vector256<short> sign) {
-                Vector256<short> t = Vector256.ShiftRightArithmetic(Vector256.Xor(value, sign), 15);
+                Vector256<short> t = Vector256.GreaterThan(Vector256<short>.Zero, Vector256.Xor(value, sign));
                 Vector256<short> rt = Vector256.Subtract(Vector256.Xor(value, t), t);
                 return rt;
             }
@@ -556,7 +556,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> YCopySign_Bit(Vector256<int> value, Vector256<int> sign) {
-                Vector256<int> t = Vector256.ShiftRightArithmetic(Vector256.Xor(value, sign), 31);
+                // Vector256<int> t = Vector256.ShiftRightArithmetic(Vector256.Xor(value, sign), 31); // Need .NET 7.
+                Vector256<int> t = Vector256.GreaterThan(Vector256<int>.Zero, Vector256.Xor(value, sign));
                 Vector256<int> rt = Vector256.Subtract(Vector256.Xor(value, t), t);
                 return rt;
             }
@@ -564,7 +565,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YCopySign_Bit(Vector256<long> value, Vector256<long> sign) {
-                Vector256<long> t = ShiftRightArithmetic(Vector256.Xor(value, sign), 63);
+                Vector256<long> t = Vector256.GreaterThan(Vector256<long>.Zero, Vector256.Xor(value, sign));
                 Vector256<long> rt = Vector256.Subtract(Vector256.Xor(value, t), t);
                 return rt;
             }

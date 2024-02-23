@@ -113,7 +113,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static TypeCodeFlags YCopySign_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
-                    rt |= (TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64) & ShiftRightArithmetic_AcceleratedTypes;
+                    rt |= (TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64); // & ShiftRightArithmetic_AcceleratedTypes
                     return rt;
                 }
             }

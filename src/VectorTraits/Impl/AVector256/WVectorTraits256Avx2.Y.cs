@@ -184,7 +184,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static TypeCodeFlags YCopySign_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
-                    rt |= (TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64) & ShiftRightArithmetic_AcceleratedTypes;
+                    rt |= (TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64); // & ShiftRightArithmetic_AcceleratedTypes
                     return rt;
                 }
             }
@@ -209,7 +209,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YCopySign(Vector256<sbyte> value, Vector256<sbyte> sign) {
-                Vector256<sbyte> t = ShiftRightArithmetic_Const(Avx2.Xor(value, sign), 7);
+                //Vector256<sbyte> t = ShiftRightArithmetic_Const(Avx2.Xor(value, sign), 7);
+                Vector256<sbyte> t = Avx2.CompareGreaterThan(Vector256<sbyte>.Zero, Avx2.Xor(value, sign));
                 Vector256<sbyte> rt = Avx2.Subtract(Avx2.Xor(value, t), t);
                 return rt;
             }
@@ -233,7 +234,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YCopySign(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YCopySign(Vector256<long> value, Vector256<long> sign) {
-                Vector256<long> t = ShiftRightArithmetic_Const(Avx2.Xor(value, sign), 63);
+                //Vector256<long> t = ShiftRightArithmetic_Const(Avx2.Xor(value, sign), 63);
+                Vector256<long> t = Avx2.CompareGreaterThan(Vector256<long>.Zero, Avx2.Xor(value, sign));
                 Vector256<long> rt = Avx2.Subtract(Avx2.Xor(value, t), t);
                 return rt;
             }
