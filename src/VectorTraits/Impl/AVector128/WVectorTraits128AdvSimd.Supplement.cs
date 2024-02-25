@@ -1334,14 +1334,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.LessThanOrEqual(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> LessThanOrEqual(Vector128<long> left, Vector128<long> right) {
-                return OnesComplement(LessThan(left, right));
+                return OnesComplement(GreaterThan(left, right));
             }
 
             /// <inheritdoc cref="IWVectorTraits128.LessThanOrEqual(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> LessThanOrEqual(Vector128<ulong> left, Vector128<ulong> right) {
-                return OnesComplement(LessThan(left, right));
+                return OnesComplement(GreaterThan(left, right));
             }
 
 

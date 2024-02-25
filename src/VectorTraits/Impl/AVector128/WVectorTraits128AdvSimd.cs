@@ -528,7 +528,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint ExtractMostSignificantBits_ShiftAnd(Vector128<ulong> vector) {
                 Vector128<ulong> m = AdvSimd.ShiftRightLogical(vector, 63); // Get MostSignificantBit .
-                Vector64<uint> h = AdvSimd.ShiftLeftLogical(vector.GetUpper().AsUInt32(), 1);
+                Vector64<uint> h = AdvSimd.ShiftLeftLogical(m.GetUpper().AsUInt32(), 1);
                 Vector64<uint> l = m.GetLower().AsUInt32();
                 l = AdvSimd.Or(l, h);
                 return AdvSimd.Extract(l, 0);
