@@ -265,7 +265,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YCopySign(Vector128<long> value, Vector128<long> sign) {
                 //Vector128<long> t = ShiftRightArithmetic_Const(Sse2.Xor(value, sign), 63);
-                Vector128<long> t = GreaterThan(Vector128<long>.Zero, Sse2.Xor(value, sign));
+                //Vector128<long> t = GreaterThan(Vector128<long>.Zero, Sse2.Xor(value, sign));
+                Vector128<long> t = YIsNegative(Sse2.Xor(value, sign));
                 Vector128<long> rt = Sse2.Subtract(Sse2.Xor(value, t), t);
                 return rt;
             }

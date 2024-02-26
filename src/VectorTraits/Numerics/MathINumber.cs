@@ -843,7 +843,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <returns>Returns 1 if the value is positive, 0 if the value is zero, and -1 if the value is negative (值为正数时返回1, 值为0时返回0, 值为负数时返回-1).</returns>
         /// <remarks>
         /// <para>No exception is thrown. For the <c>NaN</c> of float types, returns 0.(不会抛出异常. 对于浮点类型的 <c>NaN</c>, 会返回0).</para>
-        /// <para>But <see cref="Sign_Bcl(float)">Sign_Bcl</see> behaves differently. Throws an exception for the <c>NaN</c> of float types (而 <see cref="Sign_Bcl(int, int)">Sign_Bcl</see> 的行为有所不同. 对于浮点类型的 <c>NaN</c>, 会抛出异常): System.ArithmeticException: Function does not accept floating point Not-a-Number values.</para>
+        /// <para>But <see cref="Sign_Bcl(float)">Sign_Bcl</see> behaves differently. Throws an exception for the <c>NaN</c> of float types (而 <see cref="Sign_Bcl(float)">Sign_Bcl</see> 的行为有所不同. 对于浮点类型的 <c>NaN</c>, 会抛出异常): System.ArithmeticException: Function does not accept floating point Not-a-Number values.</para>
         /// </remarks>
         /// <seealso cref="INumber{TSelf}.Sign(TSelf)"/>
         /// <seealso cref="Math.Sign(double)"/>

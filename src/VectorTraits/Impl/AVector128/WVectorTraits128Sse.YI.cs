@@ -336,8 +336,15 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNegative(Vector128<long> value) {
-                Vector128<long> rt = LessThan(value, Vector128<long>.Zero);
-                return rt;
+                //Vector128<long> rt = LessThan(value, Vector128<long>.Zero);
+                Vector128<long> sign;
+                if (Sse42.IsSupported) {
+                    sign = Sse42.CompareGreaterThan(Vector128<long>.Zero, value);
+                } else {
+                    Vector128<int> valueHigh = Sse2.Shuffle(value.AsInt32(), (byte)ShuffleControlG4.YYWW);
+                    sign = Sse2.CompareGreaterThan(Vector128<int>.Zero, valueHigh).AsInt64();
+                }
+                return sign;
             }
 
 
