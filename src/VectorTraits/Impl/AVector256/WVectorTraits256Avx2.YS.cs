@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 #endif
+using Zyl.VectorTraits.Collections;
+using Zyl.VectorTraits.Impl.Util;
+using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Impl.AVector256 {
     using SuperStatics = WVectorTraits256Base.Statics;
@@ -20,6 +23,125 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         partial class Statics {
 
 #if NETCOREAPP3_0_OR_GREATER
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign_AcceleratedTypes"/>
+            public static TypeCodeFlags YSign_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YSign(Vector256<float> value) {
+                Vector256<float> zero = Vector256<float>.Zero;
+                Vector256<int> m = LessThan(value, zero).AsInt32();
+                Vector256<int> n = GreaterThan(value, zero).AsInt32();
+                Vector256<int> rt = Avx2.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YSign(Vector256<double> value) {
+                Vector256<double> zero = Vector256<double>.Zero;
+                Vector256<long> m = LessThan(value, zero).AsInt64();
+                Vector256<long> n = GreaterThan(value, zero).AsInt64();
+                Vector256<long> rt = Avx2.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YSign(Vector256<sbyte> value) {
+                Vector256<sbyte> zero = Vector256<sbyte>.Zero;
+                Vector256<sbyte> m = LessThan(value, zero);
+                Vector256<sbyte> n = GreaterThan(value, zero);
+                Vector256<sbyte> rt = Avx2.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YSign(Vector256<short> value) {
+                Vector256<short> zero = Vector256<short>.Zero;
+                Vector256<short> m = LessThan(value, zero);
+                Vector256<short> n = GreaterThan(value, zero);
+                Vector256<short> rt = Avx2.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YSign(Vector256<int> value) {
+                Vector256<int> zero = Vector256<int>.Zero;
+                Vector256<int> m = LessThan(value, zero);
+                Vector256<int> n = GreaterThan(value, zero);
+                Vector256<int> rt = Avx2.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YSign(Vector256<long> value) {
+                Vector256<long> zero = Vector256<long>.Zero;
+                Vector256<long> m = LessThan(value, zero);
+                Vector256<long> n = GreaterThan(value, zero);
+                Vector256<long> rt = Avx2.Subtract(m, n);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.YSignFloat_AcceleratedTypes"/>
+            public static TypeCodeFlags YSignFloat_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+                    rt |= (TypeCodeFlags.Single) & YIsNaN_AcceleratedTypes & ConvertToSingle_AcceleratedTypes;
+                    rt |= (TypeCodeFlags.Double) & YIsNaN_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YSignFloat(Vector256<float> value) {
+                Vector256<int> signVal = YSign(value);
+                Vector256<float> nanMask = YIsNaN(value).AsSingle();
+                Vector256<float> rt = ConvertToSingle(signVal);
+                rt = ConditionalSelect(nanMask, value, rt);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YSignFloat(Vector256<double> value) {
+                return YSignFloat_Compare(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YSignFloat_Compare(Vector256<double> value) {
+                Vector256<double> negativeOne = Vector256.Create(-1.0);
+                Vector256<double> zero = Vector256<double>.Zero;
+                Vector256<double> one = Vector256.Create(1.0);
+                Vector256<double> rt = BitwiseAnd(LessThan(value, zero), negativeOne);
+                Vector256<double> nanMask = YIsNaN(value).AsDouble();
+                rt = BitwiseOr(rt, BitwiseAnd(GreaterThan(value, zero), one)); // rt = ConvertToDouble(YSign(value));
+                rt = Avx.BlendVariable(rt, value, nanMask); // ConditionalSelect(nanMask, value, rt);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YSignFloat_Convert(Vector256<double> value) {
+                Vector256<long> signVal = YSign(value);
+                Vector256<double> nanMask = YIsNaN(value).AsDouble();
+                Vector256<double> rt = ConvertToDouble(signVal);
+                rt = ConditionalSelect(nanMask, value, rt);
+                return rt;
+            }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleG2_AcceleratedTypes {
