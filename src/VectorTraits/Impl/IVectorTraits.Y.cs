@@ -2478,5 +2478,63 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="YShuffleKernel_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
         Vector<ulong> YShuffleKernel_Core(Vector<ulong> vector, Vector<ulong> args0, Vector<ulong> args1);
 
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YSign</c> (运行 <c>YSign</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YSign(Vector{float})"/>
+        TypeCodeFlags YSign_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determine the sign of each element (判断各个元素的符号).
+        /// Mnemonic: <c>rt[i] := sign(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements depend on the sign of the corresponding element of <paramref name="value" />:  Returns 1 if the value is positive, 0 if the value is zero, and -1 if the value is negative (一个向量，其元素取决于value的对应元素的符号情况: 值为正数时返回1, 值为0时返回0, 值为负数时返回-1).</returns>
+        /// <seealso cref="YSign_AcceleratedTypes"/>
+        /// <seealso cref="MathINumber.Sign(float)"/>
+        Vector<int> YSign(Vector<float> value);
+
+        /// <inheritdoc cref="YSign(Vector{float})"/>
+        /// <seealso cref="MathINumber.Sign(double)"/>
+        Vector<long> YSign(Vector<double> value);
+
+        /// <inheritdoc cref="YSign(Vector{float})"/>
+        /// <seealso cref="MathINumber.Sign(sbyte)"/>
+        Vector<sbyte> YSign(Vector<sbyte> value);
+
+        /// <inheritdoc cref="YSign(Vector{float})"/>
+        /// <seealso cref="MathINumber.Sign(short)"/>
+        Vector<short> YSign(Vector<short> value);
+
+        /// <inheritdoc cref="YSign(Vector{float})"/>
+        /// <seealso cref="MathINumber.Sign(int)"/>
+        Vector<int> YSign(Vector<int> value);
+
+        /// <inheritdoc cref="YSign(Vector{float})"/>
+        /// <seealso cref="MathINumber.Sign(long)"/>
+        Vector<long> YSign(Vector<long> value);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YSignFloat</c> (运行 <c>YSignFloat</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YSignFloat(Vector{float})"/>
+        TypeCodeFlags YSignFloat_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Determine the sign of each element and returns a floating point number (判断各个元素的符号并返回浮点数).
+        /// Mnemonic: <c>rt[i] := signFloat(value[i])</c>.
+        /// </summary>
+        /// <param name="value">The vectors that will be checked (将进行检查的向量).</param>
+        /// <returns>A vector whose elements depend on the sign of the corresponding element of <paramref name="value" />: Returns 1 if the value is positive, 0 if the value is zero, -1 if the value is negative, and <c>NaN</c> if the value is <c>NaN</c> (一个向量，其元素取决于value的对应元素的符号情况: 值为正数时返回1, 值为0时返回0, 值为负数时返回-1, 值为<c>NaN</c>时返回<c>NaN</c>).</returns>
+        /// <seealso cref="YSignFloat_AcceleratedTypes"/>
+        /// <seealso cref="MathINumber.Sign(float)"/>
+        Vector<float> YSignFloat(Vector<float> value);
+
+        /// <inheritdoc cref="YSignFloat(Vector{float})"/>
+        /// <seealso cref="MathINumber.Sign(double)"/>
+        Vector<double> YSignFloat(Vector<double> value);
+
     }
 }

@@ -1698,6 +1698,71 @@ namespace Zyl.VectorTraits.Impl.AVector {
             return Statics.YShuffleKernel_Core(vector, args0, args1);
         }
 
+
+        /// <inheritdoc cref="IVectorTraits.YSign_AcceleratedTypes"/>
+        public override TypeCodeFlags YSign_AcceleratedTypes {
+            get {
+                return Statics.YSign_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YSign(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<int> YSign(Vector<float> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YSign(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> YSign(Vector<double> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YSign(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<sbyte> YSign(Vector<sbyte> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YSign(Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<short> YSign(Vector<short> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YSign(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<int> YSign(Vector<int> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YSign(Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> YSign(Vector<long> value) {
+            return Statics.YSign(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YSignFloat_AcceleratedTypes"/>
+        public override TypeCodeFlags YSignFloat_AcceleratedTypes {
+            get {
+                return Statics.YSignFloat_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YSignFloat(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<float> YSignFloat(Vector<float> value) {
+            return Statics.YSignFloat(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YSignFloat(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> YSignFloat(Vector<double> value) {
+            return Statics.YSignFloat(value);
+        }
+
 #endif // NETCOREAPP3_0_OR_GREATER
     }
 }

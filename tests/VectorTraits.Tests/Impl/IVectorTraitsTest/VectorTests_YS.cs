@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using System.Numerics;
 using Zyl.VectorTraits.Impl;
+using System.IO;
 
 namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
     [TestFixture()]
@@ -512,6 +513,96 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                         Console.WriteLine();
                     }
                 }
+            }
+        }
+
+        [TestCase((float)1, (int)1)]
+        [TestCase((double)2, (long)1)]
+        [TestCase((sbyte)3, (sbyte)1)]
+        [TestCase((short)5, (short)1)]
+        [TestCase((int)7, (int)1)]
+        [TestCase((long)9, (long)1)]
+        public void YSignTest<T, TOut>(T src, TOut srcOut) where T : struct where TOut : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YSign_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, Vector<TOut>>>("YSign_Basic", "YSign_Bit");
+            foreach (var func in funcList) {
+                writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            writer.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors<T>.Serial,
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), -1.0),
+                Vectors<T>.Demo,
+                Vectors<T>.DemoNaN,
+            };
+            bool allowLog = false;
+            bool showNotEquals = true;
+            foreach (Vector<T> value in samples) {
+                writer.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
+                Vector<TOut> expected = Vectors.YSign((dynamic)value);
+                writer.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                foreach (IVectorTraits instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector<TOut> dst = instance.YSign((dynamic)value);
+                    if (allowLog || (showNotEquals && !expected.Equals(dst))) {
+                        writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    }
+                }
+                writer.WriteLine();
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        public void YSignFloatTest<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YSignFloat_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, Vector<T>>>("YSignFloat_Basic", "YSignFloat_Bit", "YSignFloat_Compare", "YSignFloat_Convert");
+            foreach (var func in funcList) {
+                writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            writer.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors<T>.Serial,
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), -1.0),
+                Vectors<T>.Demo,
+                Vectors<T>.DemoNaN,
+            };
+            bool allowLog = false;
+            bool showNotEquals = true;
+            foreach (Vector<T> value in samples) {
+                writer.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
+                Vector<T> expected = Vectors.YSignFloat((dynamic)value);
+                writer.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                foreach (IVectorTraits instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector<T> dst = instance.YSignFloat((dynamic)value);
+                    if (allowLog || (showNotEquals && !expected.Equals(dst))) {
+                        writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    }
+                }
+                writer.WriteLine();
             }
         }
 

@@ -1245,7 +1245,41 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return WStatics.YShuffleKernel_Core(vector.AsVector128(), args0.AsVector128(), args1.AsVector128()).AsVector();
             }
 
+
+            /// <inheritdoc cref="IVectorTraits.YSign_AcceleratedTypes"/>
+            public static TypeCodeFlags YSign_AcceleratedTypes {
+                get {
+                    return WStatics.YSign_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YSign(Vector<double> value) {
+                return WStatics.YSign(value.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YSign(Vector<long> value) {
+                return WStatics.YSign(value.AsVector128()).AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.YSignFloat_AcceleratedTypes"/>
+            public static TypeCodeFlags YSignFloat_AcceleratedTypes {
+                get {
+                    return WStatics.YSignFloat_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YSignFloat(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YSignFloat(Vector<double> value) {
+                return WStatics.YSignFloat(value.AsVector128()).AsVector();
+            }
+
         }
 #endif // NET5_0_OR_GREATER
-        }
+    }
     }
