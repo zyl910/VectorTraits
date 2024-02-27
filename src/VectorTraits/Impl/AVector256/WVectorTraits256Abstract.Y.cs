@@ -923,71 +923,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits256.YSign_AcceleratedTypes"/>
-        public virtual TypeCodeFlags YSign_AcceleratedTypes {
-            get {
-                return Statics.YSign_AcceleratedTypes;
-            }
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{float})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector256<int> YSign(Vector256<float> value) {
-            return Statics.YSign(value);
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{double})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector256<long> YSign(Vector256<double> value) {
-            return Statics.YSign(value);
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{sbyte})"/>
-        [CLSCompliant(false)]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector256<sbyte> YSign(Vector256<sbyte> value) {
-            return Statics.YSign(value);
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{short})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector256<short> YSign(Vector256<short> value) {
-            return Statics.YSign(value);
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{int})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector256<int> YSign(Vector256<int> value) {
-            return Statics.YSign(value);
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{long})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector256<long> YSign(Vector256<long> value) {
-            return Statics.YSign(value);
-        }
-
-
-        /// <inheritdoc cref="IWVectorTraits256.YSignFloat_AcceleratedTypes"/>
-        public virtual TypeCodeFlags YSignFloat_AcceleratedTypes {
-            get {
-                return Statics.YSignFloat_AcceleratedTypes;
-            }
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{float})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector256<float> YSignFloat(Vector256<float> value) {
-            return Statics.YSignFloat(value);
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector256<double> YSignFloat(Vector256<double> value) {
-            return Statics.YSignFloat(value);
-        }
-
-
         /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_AcceleratedTypes"/>
         public virtual TypeCodeFlags YShuffleG2_AcceleratedTypes {
             get {
@@ -1775,6 +1710,71 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual Vector256<ulong> YShuffleKernel_Core(Vector256<ulong> vector, Vector256<ulong> args0, Vector256<ulong> args1) {
             return Statics.YShuffleKernel_Core(vector, args0, args1);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YSign_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YSign_AcceleratedTypes {
+            get {
+                return Statics.YSign_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YSign(Vector256<float> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YSign(Vector256<double> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<sbyte> YSign(Vector256<sbyte> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<short> YSign(Vector256<short> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YSign(Vector256<int> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YSign(Vector256<long> value) {
+            return Statics.YSign(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YSignFloat_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YSignFloat_AcceleratedTypes {
+            get {
+                return Statics.YSignFloat_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> YSignFloat(Vector256<float> value) {
+            return Statics.YSignFloat(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> YSignFloat(Vector256<double> value) {
+            return Statics.YSignFloat(value);
         }
 
 #endif

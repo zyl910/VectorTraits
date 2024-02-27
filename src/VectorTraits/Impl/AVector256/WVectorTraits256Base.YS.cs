@@ -24,379 +24,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
 #if NETCOREAPP3_0_OR_GREATER
 
-            /// <inheritdoc cref="IWVectorTraits256.YSign_AcceleratedTypes"/>
-            public static TypeCodeFlags YSign_AcceleratedTypes {
-                get {
-                    TypeCodeFlags rt = TypeCodeFlags.None;
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                    if (Vector256.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
-                    }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                    return rt;
-                }
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{float})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> YSign(Vector256<float> value) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YSign_Bit(value);
-#else
-                return YSign_Basic(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> YSign(Vector256<double> value) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YSign_Bit(value);
-#else
-                return YSign_Basic(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{sbyte})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> YSign(Vector256<sbyte> value) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YSign_Bit(value);
-#else
-                return YSign_Basic(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{short})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> YSign(Vector256<short> value) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YSign_Bit(value);
-#else
-                return YSign_Basic(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{int})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> YSign(Vector256<int> value) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YSign_Bit(value);
-#else
-                return YSign_Basic(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> YSign(Vector256<long> value) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YSign_Bit(value);
-#else
-                return YSign_Basic(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{float})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> YSign_Basic(Vector256<float> value) {
-                UnsafeUtil.SkipInit(out Vector256<int> rt);
-                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector256<float>, FixedArray8<float>>(ref value);
-                ref FixedArray8<int> p = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref rt);
-                p.I0 = MathINumber.Sign(pvalue.I0);
-                p.I1 = MathINumber.Sign(pvalue.I1);
-                p.I2 = MathINumber.Sign(pvalue.I2);
-                p.I3 = MathINumber.Sign(pvalue.I3);
-                p.I4 = MathINumber.Sign(pvalue.I4);
-                p.I5 = MathINumber.Sign(pvalue.I5);
-                p.I6 = MathINumber.Sign(pvalue.I6);
-                p.I7 = MathINumber.Sign(pvalue.I7);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> YSign_Basic(Vector256<double> value) {
-                UnsafeUtil.SkipInit(out Vector256<long> rt);
-                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector256<double>, FixedArray4<double>>(ref value);
-                ref FixedArray4<long> p = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref rt);
-                p.I0 = MathINumber.Sign(pvalue.I0);
-                p.I1 = MathINumber.Sign(pvalue.I1);
-                p.I2 = MathINumber.Sign(pvalue.I2);
-                p.I3 = MathINumber.Sign(pvalue.I3);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{sbyte})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> YSign_Basic(Vector256<sbyte> value) {
-                UnsafeUtil.SkipInit(out Vector256<sbyte> rt);
-                ref FixedArray32<sbyte> pvalue = ref Unsafe.As<Vector256<sbyte>, FixedArray32<sbyte>>(ref value);
-                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector256<sbyte>, FixedArray32<sbyte>>(ref rt);
-                p.I0 = (sbyte)MathINumber.Sign(pvalue.I0);
-                p.I1 = (sbyte)MathINumber.Sign(pvalue.I1);
-                p.I2 = (sbyte)MathINumber.Sign(pvalue.I2);
-                p.I3 = (sbyte)MathINumber.Sign(pvalue.I3);
-                p.I4 = (sbyte)MathINumber.Sign(pvalue.I4);
-                p.I5 = (sbyte)MathINumber.Sign(pvalue.I5);
-                p.I6 = (sbyte)MathINumber.Sign(pvalue.I6);
-                p.I7 = (sbyte)MathINumber.Sign(pvalue.I7);
-                p.I8 = (sbyte)MathINumber.Sign(pvalue.I8);
-                p.I9 = (sbyte)MathINumber.Sign(pvalue.I9);
-                p.I10 = (sbyte)MathINumber.Sign(pvalue.I10);
-                p.I11 = (sbyte)MathINumber.Sign(pvalue.I11);
-                p.I12 = (sbyte)MathINumber.Sign(pvalue.I12);
-                p.I13 = (sbyte)MathINumber.Sign(pvalue.I13);
-                p.I14 = (sbyte)MathINumber.Sign(pvalue.I14);
-                p.I15 = (sbyte)MathINumber.Sign(pvalue.I15);
-                p.I16 = (sbyte)MathINumber.Sign(pvalue.I16);
-                p.I17 = (sbyte)MathINumber.Sign(pvalue.I17);
-                p.I18 = (sbyte)MathINumber.Sign(pvalue.I18);
-                p.I19 = (sbyte)MathINumber.Sign(pvalue.I19);
-                p.I20 = (sbyte)MathINumber.Sign(pvalue.I20);
-                p.I21 = (sbyte)MathINumber.Sign(pvalue.I21);
-                p.I22 = (sbyte)MathINumber.Sign(pvalue.I22);
-                p.I23 = (sbyte)MathINumber.Sign(pvalue.I23);
-                p.I24 = (sbyte)MathINumber.Sign(pvalue.I24);
-                p.I25 = (sbyte)MathINumber.Sign(pvalue.I25);
-                p.I26 = (sbyte)MathINumber.Sign(pvalue.I26);
-                p.I27 = (sbyte)MathINumber.Sign(pvalue.I27);
-                p.I28 = (sbyte)MathINumber.Sign(pvalue.I28);
-                p.I29 = (sbyte)MathINumber.Sign(pvalue.I29);
-                p.I30 = (sbyte)MathINumber.Sign(pvalue.I30);
-                p.I31 = (sbyte)MathINumber.Sign(pvalue.I31);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{short})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> YSign_Basic(Vector256<short> value) {
-                UnsafeUtil.SkipInit(out Vector256<short> rt);
-                ref FixedArray16<short> pvalue = ref Unsafe.As<Vector256<short>, FixedArray16<short>>(ref value);
-                ref FixedArray16<short> p = ref Unsafe.As<Vector256<short>, FixedArray16<short>>(ref rt);
-                p.I0 = (short)MathINumber.Sign(pvalue.I0);
-                p.I1 = (short)MathINumber.Sign(pvalue.I1);
-                p.I2 = (short)MathINumber.Sign(pvalue.I2);
-                p.I3 = (short)MathINumber.Sign(pvalue.I3);
-                p.I4 = (short)MathINumber.Sign(pvalue.I4);
-                p.I5 = (short)MathINumber.Sign(pvalue.I5);
-                p.I6 = (short)MathINumber.Sign(pvalue.I6);
-                p.I7 = (short)MathINumber.Sign(pvalue.I7);
-                p.I8 = (short)MathINumber.Sign(pvalue.I8);
-                p.I9 = (short)MathINumber.Sign(pvalue.I9);
-                p.I10 = (short)MathINumber.Sign(pvalue.I10);
-                p.I11 = (short)MathINumber.Sign(pvalue.I11);
-                p.I12 = (short)MathINumber.Sign(pvalue.I12);
-                p.I13 = (short)MathINumber.Sign(pvalue.I13);
-                p.I14 = (short)MathINumber.Sign(pvalue.I14);
-                p.I15 = (short)MathINumber.Sign(pvalue.I15);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{int})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> YSign_Basic(Vector256<int> value) {
-                UnsafeUtil.SkipInit(out Vector256<int> rt);
-                ref FixedArray8<int> pvalue = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref value);
-                ref FixedArray8<int> p = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref rt);
-                p.I0 = MathINumber.Sign(pvalue.I0);
-                p.I1 = MathINumber.Sign(pvalue.I1);
-                p.I2 = MathINumber.Sign(pvalue.I2);
-                p.I3 = MathINumber.Sign(pvalue.I3);
-                p.I4 = MathINumber.Sign(pvalue.I4);
-                p.I5 = MathINumber.Sign(pvalue.I5);
-                p.I6 = MathINumber.Sign(pvalue.I6);
-                p.I7 = MathINumber.Sign(pvalue.I7);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> YSign_Basic(Vector256<long> value) {
-                UnsafeUtil.SkipInit(out Vector256<long> rt);
-                ref FixedArray4<long> pvalue = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref value);
-                ref FixedArray4<long> p = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref rt);
-                p.I0 = MathINumber.Sign(pvalue.I0);
-                p.I1 = MathINumber.Sign(pvalue.I1);
-                p.I2 = MathINumber.Sign(pvalue.I2);
-                p.I3 = MathINumber.Sign(pvalue.I3);
-                return rt;
-            }
-
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{float})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> YSign_Bit(Vector256<float> value) {
-                // (x > 0) - (x < 0); //From "Hacker's Delight" 2.7, Page 19.
-                // = (-to_mask(x > 0)) - (-to_mask(x < 0))
-                // = to_mask(x < 0) - to_mask(x > 0).
-                Vector256<float> zero = Vector256<float>.Zero;
-                Vector256<int> m = Vector256.LessThan(value, zero).AsInt32();
-                Vector256<int> n = Vector256.GreaterThan(value, zero).AsInt32();
-                Vector256<int> rt = Vector256.Subtract(m, n);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> YSign_Bit(Vector256<double> value) {
-                Vector256<double> zero = Vector256<double>.Zero;
-                Vector256<long> m = Vector256.LessThan(value, zero).AsInt64();
-                Vector256<long> n = Vector256.GreaterThan(value, zero).AsInt64();
-                Vector256<long> rt = Vector256.Subtract(m, n);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{sbyte})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> YSign_Bit(Vector256<sbyte> value) {
-                Vector256<sbyte> zero = Vector256<sbyte>.Zero;
-                Vector256<sbyte> m = Vector256.LessThan(value, zero);
-                Vector256<sbyte> n = Vector256.GreaterThan(value, zero);
-                Vector256<sbyte> rt = Vector256.Subtract(m, n);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{short})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> YSign_Bit(Vector256<short> value) {
-                Vector256<short> zero = Vector256<short>.Zero;
-                Vector256<short> m = Vector256.LessThan(value, zero);
-                Vector256<short> n = Vector256.GreaterThan(value, zero);
-                Vector256<short> rt = Vector256.Subtract(m, n);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{int})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> YSign_Bit(Vector256<int> value) {
-                Vector256<int> zero = Vector256<int>.Zero;
-                Vector256<int> m = Vector256.LessThan(value, zero);
-                Vector256<int> n = Vector256.GreaterThan(value, zero);
-                Vector256<int> rt = Vector256.Subtract(m, n);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> YSign_Bit(Vector256<long> value) {
-                Vector256<long> zero = Vector256<long>.Zero;
-                Vector256<long> m = Vector256.LessThan(value, zero);
-                Vector256<long> n = Vector256.GreaterThan(value, zero);
-                Vector256<long> rt = Vector256.Subtract(m, n);
-                return rt;
-            }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-
-
-            /// <inheritdoc cref="IWVectorTraits256.YSignFloat_AcceleratedTypes"/>
-            public static TypeCodeFlags YSignFloat_AcceleratedTypes {
-                get {
-                    TypeCodeFlags rt = TypeCodeFlags.None;
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                    if (Vector256.IsHardwareAccelerated) {
-                        rt |= (TypeCodeFlags.Single) & YIsNaN_AcceleratedTypes & YSign_AcceleratedTypes & ConvertToSingle_AcceleratedTypes;
-                    }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                    return rt;
-                }
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{float})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<float> YSignFloat(Vector256<float> value) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YSignFloat_Bit(value);
-#else
-                return YSignFloat_Basic(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> YSignFloat(Vector256<double> value) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YSignFloat_Bit(value);
-#else
-                return YSignFloat_Basic(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{float})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<float> YSignFloat_Basic(Vector256<float> value) {
-                UnsafeUtil.SkipInit(out Vector256<float> rt);
-                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector256<float>, FixedArray8<float>>(ref value);
-                ref FixedArray8<float> p = ref Unsafe.As<Vector256<float>, FixedArray8<float>>(ref rt);
-                p.I0 = MathINumber.SignFloat(pvalue.I0);
-                p.I1 = MathINumber.SignFloat(pvalue.I1);
-                p.I2 = MathINumber.SignFloat(pvalue.I2);
-                p.I3 = MathINumber.SignFloat(pvalue.I3);
-                p.I4 = MathINumber.SignFloat(pvalue.I4);
-                p.I5 = MathINumber.SignFloat(pvalue.I5);
-                p.I6 = MathINumber.SignFloat(pvalue.I6);
-                p.I7 = MathINumber.SignFloat(pvalue.I7);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> YSignFloat_Basic(Vector256<double> value) {
-                UnsafeUtil.SkipInit(out Vector256<double> rt);
-                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector256<double>, FixedArray4<double>>(ref value);
-                ref FixedArray4<double> p = ref Unsafe.As<Vector256<double>, FixedArray4<double>>(ref rt);
-                p.I0 = MathINumber.SignFloat(pvalue.I0);
-                p.I1 = MathINumber.SignFloat(pvalue.I1);
-                p.I2 = MathINumber.SignFloat(pvalue.I2);
-                p.I3 = MathINumber.SignFloat(pvalue.I3);
-                return rt;
-            }
-
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{float})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<float> YSignFloat_Bit(Vector256<float> value) {
-                Vector256<int> signVal = YSign(value);
-                Vector256<float> nanMask = YIsNaN(value).AsSingle();
-                Vector256<float> rt = ConvertToSingle(signVal);
-                rt = ConditionalSelect(nanMask, value, rt);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> YSignFloat_Bit(Vector256<double> value) {
-                return YSignFloat_Compare(value);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> YSignFloat_Compare(Vector256<double> value) {
-                Vector256<double> negativeOne = Vector256.Create(-1.0);
-                Vector256<double> zero = Vector256<double>.Zero;
-                Vector256<double> one = Vector256.Create(1.0);
-                Vector256<double> rt = Vector256.BitwiseAnd(Vector256.LessThan(value, zero), negativeOne);
-                Vector256<double> nanMask = YIsNaN(value).AsDouble();
-                rt = Vector256.BitwiseOr(rt, Vector256.BitwiseAnd(Vector256.GreaterThan(value, zero), one)); // rt = ConvertToDouble(YSign(value));
-                rt = ConditionalSelect(nanMask, value, rt);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> YSignFloat_Convert(Vector256<double> value) {
-                Vector256<long> signVal = YSign(value);
-                Vector256<double> nanMask = YIsNaN(value).AsDouble();
-                Vector256<double> rt = ConvertToDouble(signVal);
-                rt = ConditionalSelect(nanMask, value, rt);
-                return rt;
-            }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-
-
             /// <inheritdoc cref="IWVectorTraits256.YShuffleG2_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleG2_AcceleratedTypes {
                 get {
@@ -1651,6 +1278,379 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 _ = args1;
                 return YShuffleKernel(vector, args0);
             }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign_AcceleratedTypes"/>
+            public static TypeCodeFlags YSign_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YSign(Vector256<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YSign_Bit(value);
+#else
+                return YSign_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YSign(Vector256<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YSign_Bit(value);
+#else
+                return YSign_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YSign(Vector256<sbyte> value) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YSign_Bit(value);
+#else
+                return YSign_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YSign(Vector256<short> value) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YSign_Bit(value);
+#else
+                return YSign_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YSign(Vector256<int> value) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YSign_Bit(value);
+#else
+                return YSign_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YSign(Vector256<long> value) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YSign_Bit(value);
+#else
+                return YSign_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YSign_Basic(Vector256<float> value) {
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
+                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector256<float>, FixedArray8<float>>(ref value);
+                ref FixedArray8<int> p = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref rt);
+                p.I0 = MathINumber.Sign(pvalue.I0);
+                p.I1 = MathINumber.Sign(pvalue.I1);
+                p.I2 = MathINumber.Sign(pvalue.I2);
+                p.I3 = MathINumber.Sign(pvalue.I3);
+                p.I4 = MathINumber.Sign(pvalue.I4);
+                p.I5 = MathINumber.Sign(pvalue.I5);
+                p.I6 = MathINumber.Sign(pvalue.I6);
+                p.I7 = MathINumber.Sign(pvalue.I7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YSign_Basic(Vector256<double> value) {
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
+                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector256<double>, FixedArray4<double>>(ref value);
+                ref FixedArray4<long> p = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref rt);
+                p.I0 = MathINumber.Sign(pvalue.I0);
+                p.I1 = MathINumber.Sign(pvalue.I1);
+                p.I2 = MathINumber.Sign(pvalue.I2);
+                p.I3 = MathINumber.Sign(pvalue.I3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YSign_Basic(Vector256<sbyte> value) {
+                UnsafeUtil.SkipInit(out Vector256<sbyte> rt);
+                ref FixedArray32<sbyte> pvalue = ref Unsafe.As<Vector256<sbyte>, FixedArray32<sbyte>>(ref value);
+                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector256<sbyte>, FixedArray32<sbyte>>(ref rt);
+                p.I0 = (sbyte)MathINumber.Sign(pvalue.I0);
+                p.I1 = (sbyte)MathINumber.Sign(pvalue.I1);
+                p.I2 = (sbyte)MathINumber.Sign(pvalue.I2);
+                p.I3 = (sbyte)MathINumber.Sign(pvalue.I3);
+                p.I4 = (sbyte)MathINumber.Sign(pvalue.I4);
+                p.I5 = (sbyte)MathINumber.Sign(pvalue.I5);
+                p.I6 = (sbyte)MathINumber.Sign(pvalue.I6);
+                p.I7 = (sbyte)MathINumber.Sign(pvalue.I7);
+                p.I8 = (sbyte)MathINumber.Sign(pvalue.I8);
+                p.I9 = (sbyte)MathINumber.Sign(pvalue.I9);
+                p.I10 = (sbyte)MathINumber.Sign(pvalue.I10);
+                p.I11 = (sbyte)MathINumber.Sign(pvalue.I11);
+                p.I12 = (sbyte)MathINumber.Sign(pvalue.I12);
+                p.I13 = (sbyte)MathINumber.Sign(pvalue.I13);
+                p.I14 = (sbyte)MathINumber.Sign(pvalue.I14);
+                p.I15 = (sbyte)MathINumber.Sign(pvalue.I15);
+                p.I16 = (sbyte)MathINumber.Sign(pvalue.I16);
+                p.I17 = (sbyte)MathINumber.Sign(pvalue.I17);
+                p.I18 = (sbyte)MathINumber.Sign(pvalue.I18);
+                p.I19 = (sbyte)MathINumber.Sign(pvalue.I19);
+                p.I20 = (sbyte)MathINumber.Sign(pvalue.I20);
+                p.I21 = (sbyte)MathINumber.Sign(pvalue.I21);
+                p.I22 = (sbyte)MathINumber.Sign(pvalue.I22);
+                p.I23 = (sbyte)MathINumber.Sign(pvalue.I23);
+                p.I24 = (sbyte)MathINumber.Sign(pvalue.I24);
+                p.I25 = (sbyte)MathINumber.Sign(pvalue.I25);
+                p.I26 = (sbyte)MathINumber.Sign(pvalue.I26);
+                p.I27 = (sbyte)MathINumber.Sign(pvalue.I27);
+                p.I28 = (sbyte)MathINumber.Sign(pvalue.I28);
+                p.I29 = (sbyte)MathINumber.Sign(pvalue.I29);
+                p.I30 = (sbyte)MathINumber.Sign(pvalue.I30);
+                p.I31 = (sbyte)MathINumber.Sign(pvalue.I31);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YSign_Basic(Vector256<short> value) {
+                UnsafeUtil.SkipInit(out Vector256<short> rt);
+                ref FixedArray16<short> pvalue = ref Unsafe.As<Vector256<short>, FixedArray16<short>>(ref value);
+                ref FixedArray16<short> p = ref Unsafe.As<Vector256<short>, FixedArray16<short>>(ref rt);
+                p.I0 = (short)MathINumber.Sign(pvalue.I0);
+                p.I1 = (short)MathINumber.Sign(pvalue.I1);
+                p.I2 = (short)MathINumber.Sign(pvalue.I2);
+                p.I3 = (short)MathINumber.Sign(pvalue.I3);
+                p.I4 = (short)MathINumber.Sign(pvalue.I4);
+                p.I5 = (short)MathINumber.Sign(pvalue.I5);
+                p.I6 = (short)MathINumber.Sign(pvalue.I6);
+                p.I7 = (short)MathINumber.Sign(pvalue.I7);
+                p.I8 = (short)MathINumber.Sign(pvalue.I8);
+                p.I9 = (short)MathINumber.Sign(pvalue.I9);
+                p.I10 = (short)MathINumber.Sign(pvalue.I10);
+                p.I11 = (short)MathINumber.Sign(pvalue.I11);
+                p.I12 = (short)MathINumber.Sign(pvalue.I12);
+                p.I13 = (short)MathINumber.Sign(pvalue.I13);
+                p.I14 = (short)MathINumber.Sign(pvalue.I14);
+                p.I15 = (short)MathINumber.Sign(pvalue.I15);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YSign_Basic(Vector256<int> value) {
+                UnsafeUtil.SkipInit(out Vector256<int> rt);
+                ref FixedArray8<int> pvalue = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref value);
+                ref FixedArray8<int> p = ref Unsafe.As<Vector256<int>, FixedArray8<int>>(ref rt);
+                p.I0 = MathINumber.Sign(pvalue.I0);
+                p.I1 = MathINumber.Sign(pvalue.I1);
+                p.I2 = MathINumber.Sign(pvalue.I2);
+                p.I3 = MathINumber.Sign(pvalue.I3);
+                p.I4 = MathINumber.Sign(pvalue.I4);
+                p.I5 = MathINumber.Sign(pvalue.I5);
+                p.I6 = MathINumber.Sign(pvalue.I6);
+                p.I7 = MathINumber.Sign(pvalue.I7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YSign_Basic(Vector256<long> value) {
+                UnsafeUtil.SkipInit(out Vector256<long> rt);
+                ref FixedArray4<long> pvalue = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref value);
+                ref FixedArray4<long> p = ref Unsafe.As<Vector256<long>, FixedArray4<long>>(ref rt);
+                p.I0 = MathINumber.Sign(pvalue.I0);
+                p.I1 = MathINumber.Sign(pvalue.I1);
+                p.I2 = MathINumber.Sign(pvalue.I2);
+                p.I3 = MathINumber.Sign(pvalue.I3);
+                return rt;
+            }
+
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YSign_Bit(Vector256<float> value) {
+                // (x > 0) - (x < 0); //From "Hacker's Delight" 2.7, Page 19.
+                // = (-to_mask(x > 0)) - (-to_mask(x < 0))
+                // = to_mask(x < 0) - to_mask(x > 0).
+                Vector256<float> zero = Vector256<float>.Zero;
+                Vector256<int> m = Vector256.LessThan(value, zero).AsInt32();
+                Vector256<int> n = Vector256.GreaterThan(value, zero).AsInt32();
+                Vector256<int> rt = Vector256.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YSign_Bit(Vector256<double> value) {
+                Vector256<double> zero = Vector256<double>.Zero;
+                Vector256<long> m = Vector256.LessThan(value, zero).AsInt64();
+                Vector256<long> n = Vector256.GreaterThan(value, zero).AsInt64();
+                Vector256<long> rt = Vector256.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YSign_Bit(Vector256<sbyte> value) {
+                Vector256<sbyte> zero = Vector256<sbyte>.Zero;
+                Vector256<sbyte> m = Vector256.LessThan(value, zero);
+                Vector256<sbyte> n = Vector256.GreaterThan(value, zero);
+                Vector256<sbyte> rt = Vector256.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YSign_Bit(Vector256<short> value) {
+                Vector256<short> zero = Vector256<short>.Zero;
+                Vector256<short> m = Vector256.LessThan(value, zero);
+                Vector256<short> n = Vector256.GreaterThan(value, zero);
+                Vector256<short> rt = Vector256.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YSign_Bit(Vector256<int> value) {
+                Vector256<int> zero = Vector256<int>.Zero;
+                Vector256<int> m = Vector256.LessThan(value, zero);
+                Vector256<int> n = Vector256.GreaterThan(value, zero);
+                Vector256<int> rt = Vector256.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSign(Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YSign_Bit(Vector256<long> value) {
+                Vector256<long> zero = Vector256<long>.Zero;
+                Vector256<long> m = Vector256.LessThan(value, zero);
+                Vector256<long> n = Vector256.GreaterThan(value, zero);
+                Vector256<long> rt = Vector256.Subtract(m, n);
+                return rt;
+            }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+
+
+            /// <inheritdoc cref="IWVectorTraits256.YSignFloat_AcceleratedTypes"/>
+            public static TypeCodeFlags YSignFloat_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt |= (TypeCodeFlags.Single) & YIsNaN_AcceleratedTypes & YSign_AcceleratedTypes & ConvertToSingle_AcceleratedTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YSignFloat(Vector256<float> value) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YSignFloat_Bit(value);
+#else
+                return YSignFloat_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YSignFloat(Vector256<double> value) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YSignFloat_Bit(value);
+#else
+                return YSignFloat_Basic(value);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YSignFloat_Basic(Vector256<float> value) {
+                UnsafeUtil.SkipInit(out Vector256<float> rt);
+                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector256<float>, FixedArray8<float>>(ref value);
+                ref FixedArray8<float> p = ref Unsafe.As<Vector256<float>, FixedArray8<float>>(ref rt);
+                p.I0 = MathINumber.SignFloat(pvalue.I0);
+                p.I1 = MathINumber.SignFloat(pvalue.I1);
+                p.I2 = MathINumber.SignFloat(pvalue.I2);
+                p.I3 = MathINumber.SignFloat(pvalue.I3);
+                p.I4 = MathINumber.SignFloat(pvalue.I4);
+                p.I5 = MathINumber.SignFloat(pvalue.I5);
+                p.I6 = MathINumber.SignFloat(pvalue.I6);
+                p.I7 = MathINumber.SignFloat(pvalue.I7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YSignFloat_Basic(Vector256<double> value) {
+                UnsafeUtil.SkipInit(out Vector256<double> rt);
+                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector256<double>, FixedArray4<double>>(ref value);
+                ref FixedArray4<double> p = ref Unsafe.As<Vector256<double>, FixedArray4<double>>(ref rt);
+                p.I0 = MathINumber.SignFloat(pvalue.I0);
+                p.I1 = MathINumber.SignFloat(pvalue.I1);
+                p.I2 = MathINumber.SignFloat(pvalue.I2);
+                p.I3 = MathINumber.SignFloat(pvalue.I3);
+                return rt;
+            }
+
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YSignFloat_Bit(Vector256<float> value) {
+                Vector256<int> signVal = YSign(value);
+                Vector256<float> nanMask = YIsNaN(value).AsSingle();
+                Vector256<float> rt = ConvertToSingle(signVal);
+                rt = ConditionalSelect(nanMask, value, rt);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YSignFloat_Bit(Vector256<double> value) {
+                return YSignFloat_Compare(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YSignFloat_Compare(Vector256<double> value) {
+                Vector256<double> negativeOne = Vector256.Create(-1.0);
+                Vector256<double> zero = Vector256<double>.Zero;
+                Vector256<double> one = Vector256.Create(1.0);
+                Vector256<double> rt = Vector256.BitwiseAnd(Vector256.LessThan(value, zero), negativeOne);
+                Vector256<double> nanMask = YIsNaN(value).AsDouble();
+                rt = Vector256.BitwiseOr(rt, Vector256.BitwiseAnd(Vector256.GreaterThan(value, zero), one)); // rt = ConvertToDouble(YSign(value));
+                rt = Vector256.BitwiseOr(rt, Vector256.BitwiseAnd(nanMask, value)); // ConditionalSelect(nanMask, value, rt);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YSignFloat(Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YSignFloat_Convert(Vector256<double> value) {
+                Vector256<long> signVal = YSign(value);
+                Vector256<double> nanMask = YIsNaN(value).AsDouble();
+                Vector256<double> rt = ConvertToDouble(signVal);
+                rt = Vector256.BitwiseOr(rt, Vector256.BitwiseAnd(nanMask, value)); // ConditionalSelect(nanMask, value, rt);
+                return rt;
+            }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 #endif // NETCOREAPP3_0_OR_GREATER
         }
