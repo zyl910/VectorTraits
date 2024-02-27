@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 using System.Diagnostics;
+using System.IO;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -516,6 +517,96 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                         Console.WriteLine();
                     }
                 }
+            }
+        }
+
+        [TestCase((float)1, (int)1)]
+        [TestCase((double)2, (long)1)]
+        [TestCase((sbyte)3, (sbyte)1)]
+        [TestCase((short)5, (short)1)]
+        [TestCase((int)7, (int)1)]
+        [TestCase((long)9, (long)1)]
+        public void YSignTest<T, TOut>(T src, TOut srcOut) where T : struct where TOut : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YSign_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vector128s.GetSupportedMethodList<Func<Vector128<T>, Vector128<TOut>>>("YSign_Basic", "YSign_Bit");
+            foreach (var func in funcList) {
+                writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            writer.WriteLine();
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s<T>.Serial,
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), -1.0),
+                Vector128s<T>.Demo,
+                Vector128s<T>.DemoNaN,
+            };
+            bool allowLog = false;
+            bool showNotEquals = true;
+            foreach (Vector128<T> value in samples) {
+                writer.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
+                Vector128<TOut> expected = Vector128s.YSign((dynamic)value);
+                writer.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                foreach (IWVectorTraits128 instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector128<TOut> dst = instance.YSign((dynamic)value);
+                    if (allowLog || (showNotEquals && !expected.Equals(dst))) {
+                        writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    }
+                }
+                writer.WriteLine();
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        public void YSignFloatTest<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YSignFloat_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vector128s.GetSupportedMethodList<Func<Vector128<T>, Vector128<T>>>("YSignFloat_Basic", "YSignFloat_Bit", "YSignFloat_Compare", "YSignFloat_Convert");
+            foreach (var func in funcList) {
+                writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            writer.WriteLine();
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s<T>.Serial,
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), -1.0),
+                Vector128s<T>.Demo,
+                Vector128s<T>.DemoNaN,
+            };
+            bool allowLog = false;
+            bool showNotEquals = true;
+            foreach (Vector128<T> value in samples) {
+                writer.WriteLine(VectorTextUtil.Format("Sample:\t{0}", value));
+                Vector128<T> expected = Vector128s.YSignFloat((dynamic)value);
+                writer.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                foreach (IWVectorTraits128 instance in instances) {
+                    if (!instance.GetIsSupported(true)) continue;
+                    Vector128<T> dst = instance.YSignFloat((dynamic)value);
+                    if (allowLog || (showNotEquals && !expected.Equals(dst))) {
+                        writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
+                    } else {
+                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    }
+                }
+                writer.WriteLine();
             }
         }
 

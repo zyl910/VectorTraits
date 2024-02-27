@@ -1662,6 +1662,71 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.YShuffleKernel_Core(vector, args0, args1);
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits128.YSign_AcceleratedTypes"/>
+        public override TypeCodeFlags YSign_AcceleratedTypes {
+            get {
+                return Statics.YSign_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<int> YSign(Vector128<float> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> YSign(Vector128<double> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<sbyte> YSign(Vector128<sbyte> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<short> YSign(Vector128<short> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<int> YSign(Vector128<int> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> YSign(Vector128<long> value) {
+            return Statics.YSign(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YSignFloat_AcceleratedTypes"/>
+        public override TypeCodeFlags YSignFloat_AcceleratedTypes {
+            get {
+                return Statics.YSignFloat_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YSignFloat(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<float> YSignFloat(Vector128<float> value) {
+            return Statics.YSignFloat(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YSignFloat(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> YSignFloat(Vector128<double> value) {
+            return Statics.YSignFloat(value);
+        }
+
 #endif
     }
 }

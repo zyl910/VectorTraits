@@ -1125,6 +1125,40 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.YShuffleKernel_Core(vector, args0, args1);
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits128.YSign_AcceleratedTypes"/>
+        public override TypeCodeFlags YSign_AcceleratedTypes {
+            get {
+                return Statics.YSign_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> YSign(Vector128<double> value) {
+            return Statics.YSign(value);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> YSign(Vector128<long> value) {
+            return Statics.YSign(value);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YSignFloat_AcceleratedTypes"/>
+        public override TypeCodeFlags YSignFloat_AcceleratedTypes {
+            get {
+                return Statics.YSignFloat_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YSignFloat(Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> YSignFloat(Vector128<double> value) {
+            return Statics.YSignFloat(value);
+        }
+
 #endif
     }
 }

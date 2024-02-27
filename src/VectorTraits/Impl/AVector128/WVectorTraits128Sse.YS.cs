@@ -1130,6 +1130,126 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return YShuffleKernel_Core(vector.AsByte(), args0.AsByte(), args1.AsByte()).AsUInt64();
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits128.YSign_AcceleratedTypes"/>
+            public static TypeCodeFlags YSign_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YSign(Vector128<float> value) {
+                Vector128<float> zero = Vector128<float>.Zero;
+                Vector128<int> m = LessThan(value, zero).AsInt32();
+                Vector128<int> n = GreaterThan(value, zero).AsInt32();
+                Vector128<int> rt = Sse2.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YSign(Vector128<double> value) {
+                Vector128<double> zero = Vector128<double>.Zero;
+                Vector128<long> m = LessThan(value, zero).AsInt64();
+                Vector128<long> n = GreaterThan(value, zero).AsInt64();
+                Vector128<long> rt = Sse2.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YSign(Vector128<sbyte> value) {
+                Vector128<sbyte> zero = Vector128<sbyte>.Zero;
+                Vector128<sbyte> m = LessThan(value, zero);
+                Vector128<sbyte> n = GreaterThan(value, zero);
+                Vector128<sbyte> rt = Sse2.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YSign(Vector128<short> value) {
+                Vector128<short> zero = Vector128<short>.Zero;
+                Vector128<short> m = LessThan(value, zero);
+                Vector128<short> n = GreaterThan(value, zero);
+                Vector128<short> rt = Sse2.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YSign(Vector128<int> value) {
+                Vector128<int> zero = Vector128<int>.Zero;
+                Vector128<int> m = LessThan(value, zero);
+                Vector128<int> n = GreaterThan(value, zero);
+                Vector128<int> rt = Sse2.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YSign(Vector128<long> value) {
+                Vector128<long> zero = Vector128<long>.Zero;
+                Vector128<long> m = LessThan(value, zero);
+                Vector128<long> n = GreaterThan(value, zero);
+                Vector128<long> rt = Sse2.Subtract(m, n);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YSignFloat_AcceleratedTypes"/>
+            public static TypeCodeFlags YSignFloat_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+                    rt |= (TypeCodeFlags.Single) & YIsNaN_AcceleratedTypes & ConvertToSingle_AcceleratedTypes;
+                    rt |= (TypeCodeFlags.Double) & YIsNaN_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSignFloat(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YSignFloat(Vector128<float> value) {
+                Vector128<int> signVal = YSign(value);
+                Vector128<float> nanMask = YIsNaN(value).AsSingle();
+                Vector128<float> rt = ConvertToSingle(signVal);
+                rt = BitwiseOr(rt, BitwiseAnd(nanMask, value)); // ConditionalSelect(nanMask, value, rt);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSignFloat(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YSignFloat(Vector128<double> value) {
+                return YSignFloat_Compare(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSignFloat(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YSignFloat_Compare(Vector128<double> value) {
+                Vector128<double> negativeOne = Vector128.Create(-1.0);
+                Vector128<double> zero = Vector128<double>.Zero;
+                Vector128<double> one = Vector128.Create(1.0);
+                Vector128<double> rt = BitwiseAnd(LessThan(value, zero), negativeOne);
+                Vector128<double> nanMask = YIsNaN(value).AsDouble();
+                rt = BitwiseOr(rt, BitwiseAnd(GreaterThan(value, zero), one)); // rt = ConvertToDouble(YSign(value));
+                rt = BitwiseOr(rt, BitwiseAnd(nanMask, value)); // ConditionalSelect(nanMask, value, rt);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSignFloat(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YSignFloat_Convert(Vector128<double> value) {
+                Vector128<long> signVal = YSign(value);
+                Vector128<double> nanMask = YIsNaN(value).AsDouble();
+                Vector128<double> rt = ConvertToDouble(signVal);
+                rt = BitwiseOr(rt, BitwiseAnd(nanMask, value)); // ConditionalSelect(nanMask, value, rt);
+                return rt;
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }

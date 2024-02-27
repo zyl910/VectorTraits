@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
+using System.IO;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
-using System.IO;
 using Zyl.VectorTraits.Impl;
 #if ALLOW_VECTOR_TUPLES
 using Zyl.VectorTraits.Tuples;

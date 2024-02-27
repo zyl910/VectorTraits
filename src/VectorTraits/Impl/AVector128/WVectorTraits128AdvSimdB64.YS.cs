@@ -11,6 +11,7 @@ using System.Runtime.Intrinsics;
 #if NET5_0_OR_GREATER
 using System.Runtime.Intrinsics.Arm;
 #endif // NET5_0_OR_GREATER
+using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Impl.AVector128 {
     using SuperStatics = WVectorTraits128AdvSimd.Statics;
@@ -891,6 +892,75 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleKernel_Core(Vector128<ulong> vector, Vector128<ulong> args0, Vector128<ulong> args1) {
                 return YShuffleKernel_Core(vector.AsByte(), args0.AsByte(), args1.AsByte()).AsUInt64();
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YSign_AcceleratedTypes"/>
+            public static TypeCodeFlags YSign_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = SuperStatics.YSign_AcceleratedTypes;
+                    rt |= TypeCodeFlags.Double | TypeCodeFlags.Int64;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YSign(Vector128<double> value) {
+                Vector128<double> zero = Vector128<double>.Zero;
+                Vector128<long> m = LessThan(value, zero).AsInt64();
+                Vector128<long> n = GreaterThan(value, zero).AsInt64();
+                Vector128<long> rt = AdvSimd.Subtract(m, n);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YSign(Vector128<long> value) {
+                Vector128<long> zero = Vector128<long>.Zero;
+                Vector128<long> m = LessThan(value, zero);
+                Vector128<long> n = GreaterThan(value, zero);
+                Vector128<long> rt = AdvSimd.Subtract(m, n);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YSignFloat_AcceleratedTypes"/>
+            public static TypeCodeFlags YSignFloat_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = SuperStatics.YSignFloat_AcceleratedTypes;
+                    rt |= (TypeCodeFlags.Double) & YIsNaN_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSignFloat(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YSignFloat(Vector128<double> value) {
+                return YSignFloat_Compare(value);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSignFloat(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YSignFloat_Compare(Vector128<double> value) {
+                Vector128<double> negativeOne = Vector128.Create(-1.0);
+                Vector128<double> zero = Vector128<double>.Zero;
+                Vector128<double> one = Vector128.Create(1.0);
+                Vector128<double> rt = SuperStatics.BitwiseAnd(LessThan(value, zero), negativeOne);
+                Vector128<double> nanMask = YIsNaN(value).AsDouble();
+                rt = SuperStatics.BitwiseOr(rt, SuperStatics.BitwiseAnd(GreaterThan(value, zero), one)); // rt = ConvertToDouble(YSign(value));
+                rt = SuperStatics.BitwiseOr(rt, SuperStatics.BitwiseAnd(nanMask, value)); // ConditionalSelect(nanMask, value, rt);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YSignFloat(Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YSignFloat_Convert(Vector128<double> value) {
+                Vector128<long> signVal = YSign(value);
+                Vector128<double> nanMask = YIsNaN(value).AsDouble();
+                Vector128<double> rt = ConvertToDouble(signVal);
+                rt = SuperStatics.BitwiseOr(rt, SuperStatics.BitwiseAnd(nanMask, value)); // ConditionalSelect(nanMask, value, rt);
+                return rt;
             }
 
 

@@ -393,9 +393,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YCopySign_Basic(Vector128<float> value, Vector128<float> sign) {
                 UnsafeUtil.SkipInit(out Vector128<float> rt);
-                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray8<float>>(ref value);
-                ref FixedArray8<float> psign = ref Unsafe.As<Vector128<float>, FixedArray8<float>>(ref sign);
-                ref FixedArray8<float> p = ref Unsafe.As<Vector128<float>, FixedArray8<float>>(ref rt);
+                ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
+                ref FixedArray4<float> psign = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref sign);
+                ref FixedArray4<float> p = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref rt);
                 p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
                 p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
                 p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
@@ -407,9 +407,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YCopySign_Basic(Vector128<double> value, Vector128<double> sign) {
                 UnsafeUtil.SkipInit(out Vector128<double> rt);
-                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray4<double>>(ref value);
-                ref FixedArray4<double> psign = ref Unsafe.As<Vector128<double>, FixedArray4<double>>(ref sign);
-                ref FixedArray4<double> p = ref Unsafe.As<Vector128<double>, FixedArray4<double>>(ref rt);
+                ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
+                ref FixedArray2<double> psign = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref sign);
+                ref FixedArray2<double> p = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref rt);
                 p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
                 p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
                 return rt;
@@ -420,9 +420,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YCopySign_Basic(Vector128<sbyte> value, Vector128<sbyte> sign) {
                 UnsafeUtil.SkipInit(out Vector128<sbyte> rt);
-                ref FixedArray32<sbyte> pvalue = ref Unsafe.As<Vector128<sbyte>, FixedArray32<sbyte>>(ref value);
-                ref FixedArray32<sbyte> psign = ref Unsafe.As<Vector128<sbyte>, FixedArray32<sbyte>>(ref sign);
-                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector128<sbyte>, FixedArray32<sbyte>>(ref rt);
+                ref FixedArray16<sbyte> pvalue = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref value);
+                ref FixedArray16<sbyte> psign = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref sign);
+                ref FixedArray16<sbyte> p = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref rt);
                 p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
                 p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
                 p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
@@ -446,9 +446,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YCopySign_Basic(Vector128<short> value, Vector128<short> sign) {
                 UnsafeUtil.SkipInit(out Vector128<short> rt);
-                ref FixedArray16<short> pvalue = ref Unsafe.As<Vector128<short>, FixedArray16<short>>(ref value);
-                ref FixedArray16<short> psign = ref Unsafe.As<Vector128<short>, FixedArray16<short>>(ref sign);
-                ref FixedArray16<short> p = ref Unsafe.As<Vector128<short>, FixedArray16<short>>(ref rt);
+                ref FixedArray8<short> pvalue = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref value);
+                ref FixedArray8<short> psign = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref sign);
+                ref FixedArray8<short> p = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref rt);
                 p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
                 p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
                 p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
@@ -464,9 +464,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YCopySign_Basic(Vector128<int> value, Vector128<int> sign) {
                 UnsafeUtil.SkipInit(out Vector128<int> rt);
-                ref FixedArray8<int> pvalue = ref Unsafe.As<Vector128<int>, FixedArray8<int>>(ref value);
-                ref FixedArray8<int> psign = ref Unsafe.As<Vector128<int>, FixedArray8<int>>(ref sign);
-                ref FixedArray8<int> p = ref Unsafe.As<Vector128<int>, FixedArray8<int>>(ref rt);
+                ref FixedArray4<int> pvalue = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref value);
+                ref FixedArray4<int> psign = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref sign);
+                ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
                 p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
                 p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
@@ -478,9 +478,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YCopySign_Basic(Vector128<long> value, Vector128<long> sign) {
                 UnsafeUtil.SkipInit(out Vector128<long> rt);
-                ref FixedArray4<long> pvalue = ref Unsafe.As<Vector128<long>, FixedArray4<long>>(ref value);
-                ref FixedArray4<long> psign = ref Unsafe.As<Vector128<long>, FixedArray4<long>>(ref sign);
-                ref FixedArray4<long> p = ref Unsafe.As<Vector128<long>, FixedArray4<long>>(ref rt);
+                ref FixedArray2<long> pvalue = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref value);
+                ref FixedArray2<long> psign = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref sign);
+                ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
                 p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
                 return rt;
