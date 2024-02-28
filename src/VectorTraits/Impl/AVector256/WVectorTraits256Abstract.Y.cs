@@ -779,6 +779,46 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YMaxNumber_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YMaxNumber_AcceleratedTypes {
+            get {
+                return Statics.YMaxNumber_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YMaxNumber(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> YMaxNumber(Vector256<float> left, Vector256<float> right) {
+            return Statics.YMaxNumber(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YMaxNumber(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> YMaxNumber(Vector256<double> left, Vector256<double> right) {
+            return Statics.YMaxNumber(left, right);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YMinNumber_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YMinNumber_AcceleratedTypes {
+            get {
+                return Statics.YMinNumber_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YMinNumber(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> YMinNumber(Vector256<float> left, Vector256<float> right) {
+            return Statics.YMinNumber(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YMinNumber(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> YMinNumber(Vector256<double> left, Vector256<double> right) {
+            return Statics.YMinNumber(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
         public virtual TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

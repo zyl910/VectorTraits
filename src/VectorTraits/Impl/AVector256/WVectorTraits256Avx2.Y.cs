@@ -241,6 +241,60 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.YMaxNumber_AcceleratedTypes"/>
+            public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = YIsNaN_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YMaxNumber(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YMaxNumber(Vector256<float> left, Vector256<float> right) {
+                Vector256<float> mask = BitwiseOr(GreaterThan(left, right), YIsNaN(right).AsSingle());
+                mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(right).AsSingle()));
+                Vector256<float> rt = Avx.BlendVariable(right, left, mask); // ConditionalSelect(mask, left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YMaxNumber(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YMaxNumber(Vector256<double> left, Vector256<double> right) {
+                Vector256<double> mask = BitwiseOr(GreaterThan(left, right), YIsNaN(right).AsDouble());
+                mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(right).AsDouble()));
+                Vector256<double> rt = Avx.BlendVariable(right, left, mask); // ConditionalSelect(mask, left, right);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.YMinNumber_AcceleratedTypes"/>
+            public static TypeCodeFlags YMinNumber_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = YIsNaN_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YMinNumber(Vector256{float}, Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YMinNumber(Vector256<float> left, Vector256<float> right) {
+                Vector256<float> mask = BitwiseOr(LessThan(left, right), YIsNaN(right).AsSingle());
+                mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(left).AsSingle()));
+                Vector256<float> rt = Avx.BlendVariable(right, left, mask); // ConditionalSelect(mask, left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YMinNumber(Vector256{double}, Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YMinNumber(Vector256<double> left, Vector256<double> right) {
+                Vector256<double> mask = BitwiseOr(LessThan(left, right), YIsNaN(right).AsDouble());
+                mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(left).AsDouble()));
+                Vector256<double> rt = Avx.BlendVariable(right, left, mask); // ConditionalSelect(mask, left, right);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
                 get {

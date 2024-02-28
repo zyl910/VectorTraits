@@ -120,19 +120,27 @@ Remarks:
 ## Vector traits method appended by this library (由本库追加的向量特性方法)
 Types: Vector, Vector128, Vector256 .
 
-### Methods of INumber (数字性接口的函数)
+### Methods of INumber (数字性接口的方法)
 Summary (概要):
+- Provides the vector methods of clamp (提供限制的向量方法): YClamp .
 - Provides the vector methods of check sign (提供符号判断的向量方法): YCopySign, YSign, YSignFloat .
+- Provides the vector methods of clamp (提供限制的向量方法): YMaxNumber, YMinNumber .
 
 List (列表):
+- `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
+  Mnemonic: `rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])` .
 - `YCopySign`: Copies the sign of a value to the sign of another value (将一个值的符号复制到另一个值).
   Mnemonic: `rt[i] := copySign(value[i], sign[i])`.
+- `YMaxNumber`: Computes the maximum number of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最大数值). The maxNumber method matches the IEEE 754:2019 maximumNumber function. This requires `NaN` inputs to not be propagated back to the caller and for `-0.0` to be treated as less than `+0.0` (maxNumber方法与 IEEE 754:2019 maximumNumber 函数匹配。 这要求 `NaN` 输入不传播回调用方，且 `-0.0` 被视为小于 `+0.0`).
+  Mnemonic: `rt[i] := maxNumber(left[i], right[i]).
+- `YMinNumber`: Computes the minimum number of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小数值). The minNumber method matches the IEEE 754:2019 minimumNumber function. This requires `NaN` inputs to not be propagated back to the caller and for `-0.0` to be treated as less than `+0.0` (minNumber方法与 IEEE 754:2019 minimumNumber 函数匹配。 这要求 `NaN` 输入不传播回调用方，且 `-0.0` 被视为小于 `+0.0`).
+  Mnemonic: `rt[i] := minNumber(left[i], right[i]).
 - `YSign`: Determine the sign of each element (判断各个元素的符号).
   Mnemonic: `rt[i] := sign(value[i])`.
 - `YSignFloat`: Determine the sign of each element and returns a floating point number (判断各个元素的符号并返回浮点数).
   Mnemonic: `rt[i] := signFloat(value[i])`.
 
-### Methods of INumberBase (数字基本性接口的函数)
+### Methods of INumberBase (数字基本性接口的方法)
 Summary (概要):
 - Provides the vector methods of check floating number (提供浮点数判断的向量方法): YIsEvenInteger, YIsFinite, YIsInfinity, YIsInfinityOrNaN, YIsInteger, YIsNaN, YIsNegative, YIsNegativeZero, YIsNegativeInfinity, YIsNormal, YIsNotNaN, YIsOddInteger, YIsPositive, YIsPositiveInfinity, YIsSubnormal, YIsZero, YIsZeroOrSubnormal.
 
@@ -175,7 +183,6 @@ List (列表):
 ### Others (其他)
 Summary (概要):
 - Provides the vector methods of bitwise operations (提供位运算的向量方法): YOrNot, YBitToByte, YBitToInt16, YBitToInt32, YBitToInt64 .
-- Provides the vector methods of clamp (提供限制的向量方法): YClamp .
 - Provides the vector methods of compare (提供比较的向量方法): YIsAllTrue, YIsAnyTrue.
 - Provides the vector methods of narrow saturate (提供缩窄饱和的向量方法): YNarrowSaturate, YNarrowSaturateUnsigned .
 - Provides the vector methods of round (提供舍入的向量方法): YRoundToEven, YRoundToZero .
@@ -190,8 +197,6 @@ List (列表):
   Mnemonic: `rt[i] := to_mask(0 != ((value>>i)&1))` .
 - `YBitToInt64`: Converts binary bits to each element of the Int64 vector (将各个二进制位转换为 Int64 向量的每个元素). Bit 0 meaning is 0, bit 1 meaning is 1 for all bits (-1).
   Mnemonic: `rt[i] := to_mask(0 != ((value>>i)&1))` .
-- `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
-  Mnemonic: `rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])` .
 - `YIsAllTrue`: Checks if all elements of the vector is true (检查向量中所有元素是不是都为true).
   Mnemonic: `rt := value[0] && value[1] && value[2] && ... && value[Count-1]` . The element of value must be 0 or AllBitsSet (Signed integer value -1).
 - `YIsAnyTrue`: Checks if any elements of the vector is true (检查向量中任一元素是不是为true).
