@@ -587,13 +587,15 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> GreaterThan(Vector128<float> left, Vector128<float> right) {
-                return Sse.CompareGreaterThan(left, right);
+                //return Sse.CompareGreaterThan(left, right); // Bug!
+                return Sse.CompareLessThan(right, left);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> GreaterThan(Vector128<double> left, Vector128<double> right) {
-                return Sse2.CompareGreaterThan(left, right);
+                //return Sse2.CompareGreaterThan(left, right); // Bug! Sse.CompareGreaterThan is `__m128d _mm_cmpgt_pd (__m128d a, __m128d b)` // CMPPD xmm, xmm/m128, imm8(6) // UnorderedNotLessThanOrEqualSignaling	6	_CMP_NLE_US.
+                return Sse2.CompareLessThan(right, left);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.GreaterThan(Vector128{sbyte}, Vector128{sbyte})"/>

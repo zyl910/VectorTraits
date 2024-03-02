@@ -283,13 +283,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YMaxNumber(Vector128<float> left, Vector128<float> right) {
-                Vector128<float> maskGreater;
-                if (Avx.IsSupported) {
-                    maskGreater = Avx.Compare(left, right, FloatComparisonMode.OrderedGreaterThanNonSignaling).AsSingle(); // GreaterThan(left, right)
-                } else {
-                    //maskGreater = Sse.CompareGreaterThan(left, right); // Bug!
-                    maskGreater = Sse.AndNot(Sse.CompareGreaterThan(left, right), YIsNaN(left).AsSingle());
-                }
+                Vector128<float> maskGreater = GreaterThan(left, right);
                 Vector128<float> mask = BitwiseOr(maskGreater, YIsNaN(right).AsSingle());
                 mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(right).AsSingle()));
                 Vector128<float> rt = ConditionalSelect(mask, left, right);
@@ -299,13 +293,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YMaxNumber(Vector128<double> left, Vector128<double> right) {
-                Vector128<double> maskGreater;
-                if (Avx.IsSupported) {
-                    maskGreater = Avx.Compare(left, right, FloatComparisonMode.OrderedGreaterThanNonSignaling).AsDouble(); // GreaterThan(left, right)
-                } else {
-                    //maskGreater = Sse.CompareGreaterThan(left, right); // Bug! Sse.CompareGreaterThan is `__m128d _mm_cmpgt_pd (__m128d a, __m128d b)` // CMPPD xmm, xmm/m128, imm8(6) // UnorderedNotLessThanOrEqualSignaling	6	_CMP_NLE_US.
-                    maskGreater = Sse2.AndNot(Sse2.CompareGreaterThan(left, right), YIsNaN(left).AsDouble());
-                }
+                Vector128<double> maskGreater = GreaterThan(left, right);
                 Vector128<double> mask = BitwiseOr(maskGreater, YIsNaN(right).AsDouble());
                 // Console.WriteLine("GreaterThan:\t{0}", GreaterThan(left, right));
                 // Console.WriteLine("YIsNaN:\t{0}", YIsNaN(right));
