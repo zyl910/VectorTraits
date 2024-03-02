@@ -294,8 +294,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNegative_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = (TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64) & LessThan_AcceleratedTypes;
-                    rt |= TypeCodeFlagsUtil.MapFlags(LessThan_AcceleratedTypes, TypeCodeFlags.Int32, TypeCodeFlags.Single, TypeCodeFlags.Int64, TypeCodeFlags.Double);
+                    // TypeCodeFlags rt = (TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64) & LessThan_AcceleratedTypes;
+                    // rt |= TypeCodeFlagsUtil.MapFlags(LessThan_AcceleratedTypes, TypeCodeFlags.Int32, TypeCodeFlags.Single, TypeCodeFlags.Int64, TypeCodeFlags.Double);
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
                     return rt;
                 }
             }
@@ -316,7 +317,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YIsNegative(Vector128<sbyte> value) {
-                Vector128<sbyte> rt = LessThan(value, Vector128<sbyte>.Zero);
+                //Vector128<sbyte> rt = LessThan(value, Vector128<sbyte>.Zero);
+                Vector128<sbyte> rt = AdvSimd.ShiftRightArithmetic(value, 7);
                 return rt;
             }
 
@@ -339,7 +341,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNegative(Vector128<long> value) {
-                Vector128<long> rt = LessThan(value, Vector128<long>.Zero);
+                //Vector128<long> rt = LessThan(value, Vector128<long>.Zero);
+                Vector128<long> rt = AdvSimd.ShiftRightArithmetic(value, 63);
                 return rt;
             }
 

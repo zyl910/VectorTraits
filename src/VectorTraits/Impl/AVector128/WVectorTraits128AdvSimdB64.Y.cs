@@ -69,6 +69,42 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.YMaxNumber_AcceleratedTypes"/>
+            public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = YIsNaN_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YMaxNumber(Vector128<double> left, Vector128<double> right) {
+                Vector128<double> mask = SuperStatics.BitwiseOr(GreaterThan(left, right), YIsNaN(right).AsDouble());
+                mask = SuperStatics.BitwiseOr(mask, SuperStatics.BitwiseAnd(Equals(left, right), YIsNegative(right).AsDouble()));
+                Vector128<double> rt = SuperStatics.ConditionalSelect(mask, left, right);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YMinNumber_AcceleratedTypes"/>
+            public static TypeCodeFlags YMinNumber_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = YIsNaN_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMinNumber(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YMinNumber(Vector128<double> left, Vector128<double> right) {
+                Vector128<double> mask = SuperStatics.BitwiseOr(LessThan(left, right), YIsNaN(right).AsDouble());
+                mask = SuperStatics.BitwiseOr(mask, SuperStatics.BitwiseAnd(Equals(left, right), YIsNegative(left).AsDouble()));
+                Vector128<double> rt = SuperStatics.ConditionalSelect(mask, left, right);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.YRoundToEven_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
                 get {

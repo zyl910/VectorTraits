@@ -240,6 +240,60 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.YMaxNumber_AcceleratedTypes"/>
+            public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = YIsNaN_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YMaxNumber(Vector128<float> left, Vector128<float> right) {
+                Vector128<float> mask = BitwiseOr(GreaterThan(left, right), YIsNaN(right).AsSingle());
+                mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(right).AsSingle()));
+                Vector128<float> rt = ConditionalSelect(mask, left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YMaxNumber(Vector128<double> left, Vector128<double> right) {
+                Vector128<double> mask = BitwiseOr(GreaterThan(left, right), YIsNaN(right).AsDouble());
+                mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(right).AsDouble()));
+                Vector128<double> rt = ConditionalSelect(mask, left, right);
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YMinNumber_AcceleratedTypes"/>
+            public static TypeCodeFlags YMinNumber_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = YIsNaN_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMinNumber(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YMinNumber(Vector128<float> left, Vector128<float> right) {
+                Vector128<float> mask = BitwiseOr(LessThan(left, right), YIsNaN(right).AsSingle());
+                mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(left).AsSingle()));
+                Vector128<float> rt = ConditionalSelect(mask, left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMinNumber(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YMinNumber(Vector128<double> left, Vector128<double> right) {
+                Vector128<double> mask = BitwiseOr(LessThan(left, right), YIsNaN(right).AsDouble());
+                mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(left).AsDouble()));
+                Vector128<double> rt = ConditionalSelect(mask, left, right);
+                return rt;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
                 get {

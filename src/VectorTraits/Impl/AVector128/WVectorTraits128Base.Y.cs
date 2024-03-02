@@ -539,6 +539,165 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
+            /// <inheritdoc cref="IWVectorTraits128.YMaxNumber_AcceleratedTypes"/>
+            public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt = YIsNaN_AcceleratedTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YMaxNumber(Vector128<float> left, Vector128<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YMaxNumber_Bit(left, right);
+#else
+                return YMaxNumber_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YMaxNumber(Vector128<double> left, Vector128<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YMaxNumber_Bit(left, right);
+#else
+                return YMaxNumber_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YMaxNumber_Basic(Vector128<float> left, Vector128<float> right) {
+                UnsafeUtil.SkipInit(out Vector128<float> rt);
+                ref FixedArray4<float> pleft = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref left);
+                ref FixedArray4<float> pright = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref right);
+                ref FixedArray4<float> p = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref rt);
+                p.I0 = MathINumber.MaxNumber(pleft.I0, pright.I0);
+                p.I1 = MathINumber.MaxNumber(pleft.I1, pright.I1);
+                p.I2 = MathINumber.MaxNumber(pleft.I2, pright.I2);
+                p.I3 = MathINumber.MaxNumber(pleft.I3, pright.I3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YMaxNumber_Basic(Vector128<double> left, Vector128<double> right) {
+                UnsafeUtil.SkipInit(out Vector128<double> rt);
+                ref FixedArray2<double> pleft = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref left);
+                ref FixedArray2<double> pright = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref right);
+                ref FixedArray2<double> p = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref rt);
+                p.I0 = MathINumber.MaxNumber(pleft.I0, pright.I0);
+                p.I1 = MathINumber.MaxNumber(pleft.I1, pright.I1);
+                return rt;
+            }
+
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YMaxNumber_Bit(Vector128<float> left, Vector128<float> right) {
+                Vector128<float> mask = Vector128.BitwiseOr(Vector128.GreaterThan(left, right), YIsNaN(right).AsSingle());
+                mask = Vector128.BitwiseOr(mask, Vector128.BitwiseAnd(Vector128.Equals(left, right), YIsNegative(right).AsSingle()));
+                Vector128<float> rt = ConditionalSelect(mask, left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YMaxNumber_Bit(Vector128<double> left, Vector128<double> right) {
+                Vector128<double> mask = Vector128.BitwiseOr(Vector128.GreaterThan(left, right), YIsNaN(right).AsDouble());
+                mask = Vector128.BitwiseOr(mask, Vector128.BitwiseAnd(Vector128.Equals(left, right), YIsNegative(right).AsDouble()));
+                Vector128<double> rt = ConditionalSelect(mask, left, right);
+                return rt;
+            }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YMinNumber_AcceleratedTypes"/>
+            public static TypeCodeFlags YMinNumber_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt = YIsNaN_AcceleratedTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMinNumber(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YMinNumber(Vector128<float> left, Vector128<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YMinNumber_Bit(left, right);
+#else
+                return YMinNumber_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMinNumber(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YMinNumber(Vector128<double> left, Vector128<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YMinNumber_Bit(left, right);
+#else
+                return YMinNumber_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMinNumber(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YMinNumber_Basic(Vector128<float> left, Vector128<float> right) {
+                UnsafeUtil.SkipInit(out Vector128<float> rt);
+                ref FixedArray4<float> pleft = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref left);
+                ref FixedArray4<float> pright = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref right);
+                ref FixedArray4<float> p = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref rt);
+                p.I0 = MathINumber.MinNumber(pleft.I0, pright.I0);
+                p.I1 = MathINumber.MinNumber(pleft.I1, pright.I1);
+                p.I2 = MathINumber.MinNumber(pleft.I2, pright.I2);
+                p.I3 = MathINumber.MinNumber(pleft.I3, pright.I3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMinNumber(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YMinNumber_Basic(Vector128<double> left, Vector128<double> right) {
+                UnsafeUtil.SkipInit(out Vector128<double> rt);
+                ref FixedArray2<double> pleft = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref left);
+                ref FixedArray2<double> pright = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref right);
+                ref FixedArray2<double> p = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref rt);
+                p.I0 = MathINumber.MinNumber(pleft.I0, pright.I0);
+                p.I1 = MathINumber.MinNumber(pleft.I1, pright.I1);
+                return rt;
+            }
+
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            /// <inheritdoc cref="IWVectorTraits128.YMinNumber(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YMinNumber_Bit(Vector128<float> left, Vector128<float> right) {
+                Vector128<float> mask = Vector128.BitwiseOr(Vector128.LessThan(left, right), YIsNaN(right).AsSingle());
+                mask = Vector128.BitwiseOr(mask, Vector128.BitwiseAnd(Vector128.Equals(left, right), YIsNegative(left).AsSingle()));
+                Vector128<float> rt = ConditionalSelect(mask, left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YMinNumber(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YMinNumber_Bit(Vector128<double> left, Vector128<double> right) {
+                Vector128<double> mask = Vector128.BitwiseOr(Vector128.LessThan(left, right), YIsNaN(right).AsDouble());
+                mask = Vector128.BitwiseOr(mask, Vector128.BitwiseAnd(Vector128.Equals(left, right), YIsNegative(left).AsDouble()));
+                Vector128<double> rt = ConditionalSelect(mask, left, right);
+                return rt;
+            }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
                 get {

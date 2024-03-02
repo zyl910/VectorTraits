@@ -767,6 +767,46 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.YMaxNumber_AcceleratedTypes"/>
+        public override TypeCodeFlags YMaxNumber_AcceleratedTypes {
+            get {
+                return Statics.YMaxNumber_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<float> YMaxNumber(Vector128<float> left, Vector128<float> right) {
+            return Statics.YMaxNumber(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> YMaxNumber(Vector128<double> left, Vector128<double> right) {
+            return Statics.YMaxNumber(left, right);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YMinNumber_AcceleratedTypes"/>
+        public override TypeCodeFlags YMinNumber_AcceleratedTypes {
+            get {
+                return Statics.YMinNumber_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YMinNumber(Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<float> YMinNumber(Vector128<float> left, Vector128<float> right) {
+            return Statics.YMinNumber(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YMinNumber(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> YMinNumber(Vector128<double> left, Vector128<double> right) {
+            return Statics.YMinNumber(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate_AcceleratedTypes"/>
         public override TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

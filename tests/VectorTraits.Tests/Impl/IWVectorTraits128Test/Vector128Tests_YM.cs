@@ -8,18 +8,18 @@ using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
 
-namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
+namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
     [TestFixture()]
-    public class Vector256Tests_YM {
+    public class Vector128Tests_YM {
 #if NETCOREAPP3_0_OR_GREATER
 
         [TestCase((float)1)]
         [TestCase((double)2)]
         public void YMaxNumberTest<T>(T src) where T : struct {
             var writer = Console.Out;
-            writer.WriteLine("[Vector256-YMaxNumberTest<{0}>({1})]", typeof(T).Name, src);
-            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
-            foreach (IWVectorTraits256 instance in instances) {
+            writer.WriteLine("[Vector128-YMaxNumberTest<{0}>({1})]", typeof(T).Name, src);
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
                 if (instance.GetIsSupported(true)) {
                     writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YMaxNumber_AcceleratedTypes}");
                 } else {
@@ -27,26 +27,26 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 }
             }
             // run.
-            Vector256<T>[] samples = {
-                Vector256s.Create(src),
-                Vector256s<T>.Demo,
-                Vector256s<T>.Serial,
-                Vector256s<T>.SerialNegative,
-                Vector256s<T>.XyXMask,
-                Vector256s<T>.XyYMask,
-                Vector256s<T>.XyzwXMask
+            Vector128<T>[] samples = {
+                Vector128s.Create(src),
+                Vector128s<T>.Demo,
+                Vector128s<T>.Serial,
+                Vector128s<T>.SerialNegative,
+                Vector128s<T>.XyXMask,
+                Vector128s<T>.XyYMask,
+                Vector128s<T>.XyzwXMask
             };
             bool allowLog = false;
             bool showNotEquals = false;
             //bool showNotEquals = Scalars<T>.ExponentBits > 0;
-            foreach (Vector256<T> left in samples) {
-                foreach (Vector256<T> right in samples) {
-                    Vector256<T> expected = Vector256s.YMaxNumber((dynamic)left, (dynamic)right);
+            foreach (Vector128<T> left in samples) {
+                foreach (Vector128<T> right in samples) {
+                    Vector128<T> expected = Vector128s.YMaxNumber((dynamic)left, (dynamic)right);
                     bool usedWrite = false;
-                    foreach (IWVectorTraits256 instance in instances) {
+                    foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
-                        Vector256<T> dst = instance.YMaxNumber((dynamic)left, (dynamic)right);
+                        Vector128<T> dst = instance.YMaxNumber((dynamic)left, (dynamic)right);
                         bool showLog = allowLog;
                         if (!expected.Equals(dst)) {
                             if (showNotEquals) {
@@ -74,9 +74,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((double)2)]
         public void YMinNumberTest<T>(T src) where T : struct {
             var writer = Console.Out;
-            writer.WriteLine("[Vector256-YMinNumberTest<{0}>({1})]", typeof(T).Name, src);
-            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
-            foreach (IWVectorTraits256 instance in instances) {
+            writer.WriteLine("[Vector128-YMinNumberTest<{0}>({1})]", typeof(T).Name, src);
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
                 if (instance.GetIsSupported(true)) {
                     writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YMinNumber_AcceleratedTypes}");
                 } else {
@@ -84,26 +84,26 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 }
             }
             // run.
-            Vector256<T>[] samples = {
-                Vector256s.Create(src),
-                Vector256s<T>.Demo,
-                Vector256s<T>.Serial,
-                Vector256s<T>.SerialNegative,
-                Vector256s<T>.XyXMask,
-                Vector256s<T>.XyYMask,
-                Vector256s<T>.XyzwXMask
+            Vector128<T>[] samples = {
+                Vector128s.Create(src),
+                Vector128s<T>.Demo,
+                Vector128s<T>.Serial,
+                Vector128s<T>.SerialNegative,
+                Vector128s<T>.XyXMask,
+                Vector128s<T>.XyYMask,
+                Vector128s<T>.XyzwXMask
             };
             bool allowLog = false;
             bool showNotEquals = false;
             //bool showNotEquals = Scalars<T>.ExponentBits > 0;
-            foreach (Vector256<T> left in samples) {
-                foreach (Vector256<T> right in samples) {
-                    Vector256<T> expected = Vector256s.YMinNumber((dynamic)left, (dynamic)right);
+            foreach (Vector128<T> left in samples) {
+                foreach (Vector128<T> right in samples) {
+                    Vector128<T> expected = Vector128s.YMinNumber((dynamic)left, (dynamic)right);
                     bool usedWrite = false;
-                    foreach (IWVectorTraits256 instance in instances) {
+                    foreach (IWVectorTraits128 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
-                        Vector256<T> dst = instance.YMinNumber((dynamic)left, (dynamic)right);
+                        Vector128<T> dst = instance.YMinNumber((dynamic)left, (dynamic)right);
                         bool showLog = allowLog;
                         if (!expected.Equals(dst)) {
                             if (showNotEquals) {

@@ -805,6 +805,50 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YMaxNumber</c> (运行 <c>YMaxNumber</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YMaxNumber(Vector128{byte}, Vector128{byte})"/>
+        TypeCodeFlags YMaxNumber_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the maximum number of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最大数值). The maxNumber method matches the IEEE 754:2019 maximumNumber function. This requires <c>NaN</c> inputs to not be propagated back to the caller and for <c>-0.0</c> to be treated as less than <c>+0.0</c> (maxNumber方法与 IEEE 754:2019 maximumNumber 函数匹配。 这要求 <c>NaN</c> 输入不传播回调用方，且 <c>-0.0</c> 被视为小于 <c>+0.0</c>).
+        /// Mnemonic: <c>rt[i] := maxNumber(left[i], right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are the maximum number of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> (一个向量，其元素是<paramref name="left" />和<paramref name="right" />的相应元素的最大数值).</returns>
+        /// <seealso cref="YMaxNumber_AcceleratedTypes"/>
+        /// <seealso cref="MathINumber.MaxNumber(float, float)"/>
+        Vector128<float> YMaxNumber(Vector128<float> left, Vector128<float> right);
+
+        /// <inheritdoc cref="YMaxNumber(Vector128{float}, Vector128{float})"/>
+        /// <seealso cref="MathINumber.MaxNumber(double, double)"/>
+        Vector128<double> YMaxNumber(Vector128<double> left, Vector128<double> right);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YMinNumber</c> (运行 <c>YMinNumber</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YMinNumber(Vector128{byte}, Vector128{byte})"/>
+        TypeCodeFlags YMinNumber_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Computes the minimum number of two vectors on a per-element basis (在每个元素的基础上计算两个向量的最小数值). The minNumber method matches the IEEE 754:2019 minimumNumber function. This requires <c>NaN</c> inputs to not be propagated back to the caller and for <c>-0.0</c> to be treated as less than <c>+0.0</c> (minNumber方法与 IEEE 754:2019 minimumNumber 函数匹配。 这要求 <c>NaN</c> 输入不传播回调用方，且 <c>-0.0</c> 被视为小于 <c>+0.0</c>).
+        /// Mnemonic: <c>rt[i] := minNumber(left[i], right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are the minimum number of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> (一个向量，其元素是<paramref name="left" />和<paramref name="right" />的相应元素的最小数值).</returns>
+        /// <seealso cref="YMinNumber_AcceleratedTypes"/>
+        /// <seealso cref="MathINumber.MinNumber(float, float)"/>
+        Vector128<float> YMinNumber(Vector128<float> left, Vector128<float> right);
+
+        /// <inheritdoc cref="YMinNumber(Vector128{float}, Vector128{float})"/>
+        /// <seealso cref="MathINumber.MinNumber(double, double)"/>
+        Vector128<double> YMinNumber(Vector128<double> left, Vector128<double> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YNarrowSaturate</c> (运行 <c>YNarrowSaturate</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YNarrowSaturate(Vector128{short}, Vector128{short})"/>
