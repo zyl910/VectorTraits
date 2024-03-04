@@ -806,7 +806,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>YMaxNumber</c> (运行 <c>YMaxNumber</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="YMaxNumber(Vector256{byte}, Vector256{byte})"/>
+        /// <seealso cref="YMaxNumber(Vector256{float}, Vector256{float})"/>
         TypeCodeFlags YMaxNumber_AcceleratedTypes { get; }
 
         /// <summary>
@@ -828,7 +828,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>YMinNumber</c> (运行 <c>YMinNumber</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="YMinNumber(Vector256{byte}, Vector256{byte})"/>
+        /// <seealso cref="YMinNumber(Vector256{float}, Vector256{float})"/>
         TypeCodeFlags YMinNumber_AcceleratedTypes { get; }
 
         /// <summary>

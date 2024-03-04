@@ -349,6 +349,34 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.YMaxNumber_AcceleratedTypes"/>
+            public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
+                get {
+                    return WStatics.YMaxNumber_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YMaxNumber(Vector<double> left, Vector<double> right) {
+                return WStatics.YMaxNumber(left.AsVector128(), right.AsVector128()).AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.YMinNumber_AcceleratedTypes"/>
+            public static TypeCodeFlags YMinNumber_AcceleratedTypes {
+                get {
+                    return WStatics.YMinNumber_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YMinNumber(Vector<double> left, Vector<double> right) {
+                return WStatics.YMinNumber(left.AsVector128(), right.AsVector128()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.YRoundToEven_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
                 get {

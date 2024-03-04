@@ -11,6 +11,7 @@ using System.Runtime.Intrinsics;
 #if NET5_0_OR_GREATER
 using System.Runtime.Intrinsics.Arm;
 #endif
+using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Impl {
     partial interface IWVectorTraits128 {
@@ -807,7 +808,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>YMaxNumber</c> (运行 <c>YMaxNumber</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="YMaxNumber(Vector128{byte}, Vector128{byte})"/>
+        /// <seealso cref="YMaxNumber(Vector128{float}, Vector128{float})"/>
         TypeCodeFlags YMaxNumber_AcceleratedTypes { get; }
 
         /// <summary>
@@ -829,7 +830,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>YMinNumber</c> (运行 <c>YMinNumber</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="YMinNumber(Vector128{byte}, Vector128{byte})"/>
+        /// <seealso cref="YMinNumber(Vector128{float}, Vector128{float})"/>
         TypeCodeFlags YMinNumber_AcceleratedTypes { get; }
 
         /// <summary>

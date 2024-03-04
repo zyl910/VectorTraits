@@ -763,6 +763,47 @@ namespace Zyl.VectorTraits.Impl.AVector {
             return Statics.YIsZeroOrSubnormal(value);
         }
 
+
+        /// <inheritdoc cref="IVectorTraits.YMaxNumber_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YMaxNumber_AcceleratedTypes {
+            get {
+                return Statics.YMaxNumber_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<float> YMaxNumber(Vector<float> left, Vector<float> right) {
+            return Statics.YMaxNumber(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{double}, Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<double> YMaxNumber(Vector<double> left, Vector<double> right) {
+            return Statics.YMaxNumber(left, right);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YMinNumber_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YMinNumber_AcceleratedTypes {
+            get {
+                return Statics.YMinNumber_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<float> YMinNumber(Vector<float> left, Vector<float> right) {
+            return Statics.YMinNumber(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{double}, Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<double> YMinNumber(Vector<double> left, Vector<double> right) {
+            return Statics.YMinNumber(left, right);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_AcceleratedTypes"/>
         public virtual TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

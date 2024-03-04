@@ -525,6 +525,169 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
+            /// <inheritdoc cref="IVectorTraits.YMaxNumber_AcceleratedTypes"/>
+            public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector.IsHardwareAccelerated) {
+                        rt = YIsNaN_AcceleratedTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YMaxNumber(Vector<float> left, Vector<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YMaxNumber_Bit(left, right);
+#else
+                return YMaxNumber_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YMaxNumber(Vector<double> left, Vector<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YMaxNumber_Bit(left, right);
+#else
+                return YMaxNumber_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YMaxNumber_Basic(Vector<float> left, Vector<float> right) {
+                Vector<float> rt = left;
+                ref float p = ref Unsafe.As<Vector<float>, float>(ref rt);
+                ref float pright = ref Unsafe.As<Vector<float>, float>(ref right);
+                for (nint i = 0; i < Vector<float>.Count; ++i) {
+                    p = MathINumber.MaxNumber(p, pright);
+                    p = ref Unsafe.Add(ref p, 1);
+                    pright = ref Unsafe.Add(ref pright, 1);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YMaxNumber_Basic(Vector<double> left, Vector<double> right) {
+                Vector<double> rt = left;
+                ref double p = ref Unsafe.As<Vector<double>, double>(ref rt);
+                ref double pright = ref Unsafe.As<Vector<double>, double>(ref right);
+                for (nint i = 0; i < Vector<double>.Count; ++i) {
+                    p = MathINumber.MaxNumber(p, pright);
+                    p = ref Unsafe.Add(ref p, 1);
+                    pright = ref Unsafe.Add(ref pright, 1);
+                }
+                return rt;
+            }
+
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YMaxNumber_Bit(Vector<float> left, Vector<float> right) {
+                Vector<int> mask = Vector.BitwiseOr(Vector.GreaterThan(left, right), YIsNaN(right));
+                mask = Vector.BitwiseOr(mask, Vector.BitwiseAnd(Vector.Equals(left, right), YIsNegative(right)));
+                Vector<float> rt = Vector.ConditionalSelect(mask, left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YMaxNumber_Bit(Vector<double> left, Vector<double> right) {
+                Vector<long> mask = Vector.BitwiseOr(Vector.GreaterThan(left, right), YIsNaN(right));
+                mask = Vector.BitwiseOr(mask, Vector.BitwiseAnd(Vector.Equals(left, right), YIsNegative(right)));
+                Vector<double> rt = Vector.ConditionalSelect(mask, left, right);
+                return rt;
+            }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+
+
+            /// <inheritdoc cref="IVectorTraits.YMinNumber_AcceleratedTypes"/>
+            public static TypeCodeFlags YMinNumber_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector.IsHardwareAccelerated) {
+                        rt = YIsNaN_AcceleratedTypes;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YMinNumber(Vector<float> left, Vector<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YMinNumber_Bit(left, right);
+#else
+                return YMinNumber_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YMinNumber(Vector<double> left, Vector<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YMinNumber_Bit(left, right);
+#else
+                return YMinNumber_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YMinNumber_Basic(Vector<float> left, Vector<float> right) {
+                Vector<float> rt = left;
+                ref float p = ref Unsafe.As<Vector<float>, float>(ref rt);
+                ref float pright = ref Unsafe.As<Vector<float>, float>(ref right);
+                for (nint i = 0; i < Vector<float>.Count; ++i) {
+                    p = MathINumber.MinNumber(p, pright);
+                    p = ref Unsafe.Add(ref p, 1);
+                    pright = ref Unsafe.Add(ref pright, 1);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YMinNumber_Basic(Vector<double> left, Vector<double> right) {
+                Vector<double> rt = left;
+                ref double p = ref Unsafe.As<Vector<double>, double>(ref rt);
+                ref double pright = ref Unsafe.As<Vector<double>, double>(ref right);
+                for (nint i = 0; i < Vector<double>.Count; ++i) {
+                    p = MathINumber.MinNumber(p, pright);
+                    p = ref Unsafe.Add(ref p, 1);
+                    pright = ref Unsafe.Add(ref pright, 1);
+                }
+                return rt;
+            }
+
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YMinNumber_Bit(Vector<float> left, Vector<float> right) {
+                Vector<int> mask = Vector.BitwiseOr(Vector.LessThan(left, right), YIsNaN(right));
+                mask = Vector.BitwiseOr(mask, Vector.BitwiseAnd(Vector.Equals(left, right), YIsNegative(left)));
+                Vector<float> rt = Vector.ConditionalSelect(mask, left, right);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YMinNumber_Bit(Vector<double> left, Vector<double> right) {
+                Vector<long> mask = Vector.BitwiseOr(Vector.LessThan(left, right), YIsNaN(right));
+                mask = Vector.BitwiseOr(mask, Vector.BitwiseAnd(Vector.Equals(left, right), YIsNegative(left)));
+                Vector<double> rt = Vector.ConditionalSelect(mask, left, right);
+                return rt;
+            }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+
             /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
                 get {

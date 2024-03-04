@@ -1230,6 +1230,70 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits.YMaxNumber_AcceleratedTypes"/>
+        public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YMaxNumber_AcceleratedTypes;
+#else
+                return _instance.YMaxNumber_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits.YMaxNumber(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YMaxNumber(Vector<float> left, Vector<float> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YMaxNumber(left, right);
+#else
+            return _instance.YMaxNumber(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits.YMaxNumber(Vector{double}, Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YMaxNumber(Vector<double> left, Vector<double> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YMaxNumber(left, right);
+#else
+            return _instance.YMaxNumber(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits.YMinNumber_AcceleratedTypes"/>
+        public static TypeCodeFlags YMinNumber_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YMinNumber_AcceleratedTypes;
+#else
+                return _instance.YMinNumber_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits.YMinNumber(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YMinNumber(Vector<float> left, Vector<float> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YMinNumber(left, right);
+#else
+            return _instance.YMinNumber(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits.YMinNumber(Vector{double}, Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YMinNumber(Vector<double> left, Vector<double> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YMinNumber(left, right);
+#else
+            return _instance.YMinNumber(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_AcceleratedTypes"/>
         public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
             get {

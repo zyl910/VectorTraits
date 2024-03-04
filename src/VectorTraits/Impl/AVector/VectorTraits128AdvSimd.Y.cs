@@ -197,6 +197,46 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.YMaxNumber_AcceleratedTypes"/>
+            public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
+                get {
+                    return WStatics.YMaxNumber_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YMaxNumber(Vector<float> left, Vector<float> right) {
+                return WStatics.YMaxNumber(left.AsVector128(), right.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YMaxNumber(Vector<double> left, Vector<double> right) {
+                return WStatics.YMaxNumber(left.AsVector128(), right.AsVector128()).AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.YMinNumber_AcceleratedTypes"/>
+            public static TypeCodeFlags YMinNumber_AcceleratedTypes {
+                get {
+                    return WStatics.YMinNumber_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YMinNumber(Vector<float> left, Vector<float> right) {
+                return WStatics.YMinNumber(left.AsVector128(), right.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YMinNumber(Vector<double> left, Vector<double> right) {
+                return WStatics.YMinNumber(left.AsVector128(), right.AsVector128()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
                 get {
