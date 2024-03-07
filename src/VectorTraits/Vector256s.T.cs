@@ -378,10 +378,13 @@ namespace Zyl.VectorTraits {
 
 
         /// <summary>Zero (0).</summary>
+        /// <seealso cref="Vector256{T}.Zero"/>
         public static Vector256<T> Zero { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return Vector256<T>.Zero; } }
         /// <summary>Value 0 (0的值).</summary>
+        /// <seealso cref="Vector256{T}.Zero"/>
         public static Vector256<T> V0 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return Vector256<T>.Zero; } }
         /// <summary>All bit is 1 (所有位都是1的值).</summary>
+        /// <seealso cref="Vector256{T}.AllBitsSet"/>
         public static Vector256<T> AllBitsSet {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
