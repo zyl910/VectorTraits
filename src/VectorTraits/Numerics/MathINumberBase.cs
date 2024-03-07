@@ -566,7 +566,7 @@ namespace Zyl.VectorTraits.Numerics {
 
 
         /// <inheritdoc cref="IsInfinityOrNaN(double)"/>
-        /// <seealso cref="float.IsInfinityOrNaN"/>
+        // / <seealso cref="float.IsInfinityOrNaN"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInfinityOrNaN(float value) {
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
@@ -593,7 +593,7 @@ namespace Zyl.VectorTraits.Numerics {
 
 #if NET5_0_OR_GREATER
         /// <inheritdoc cref="IsInfinityOrNaN(double)"/>
-        /// <seealso cref="Half.IsInfinityOrNaN"/>
+        // / <seealso cref="Half.IsInfinityOrNaN"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInfinityOrNaN(Half value) {
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
@@ -1087,7 +1087,7 @@ namespace Zyl.VectorTraits.Numerics {
 
 
         /// <inheritdoc cref="IsNegativeZero(double)"/>
-        /// <seealso cref="float.IsZero"/>
+        // / <seealso cref="float.IsZero"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNegativeZero(float value) {
             return IsNegativeZero_Bit(value);
@@ -1099,7 +1099,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <param name="value">The value to be checked (要检查的值).</param>
         /// <returns>Return <c>true</c> if value is negative zero, otherwise is <c>false</c> (如果值是负零，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
         /// <seealso cref="INumberBase{TSelf}.IsZero(TSelf)"/>
-        /// <seealso cref="double.IsZero"/>
+        // / <seealso cref="double.IsZero"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNegativeZero(double value) {
             return IsNegativeZero_Bit(value);
@@ -1107,7 +1107,7 @@ namespace Zyl.VectorTraits.Numerics {
 
 #if NET5_0_OR_GREATER
         /// <inheritdoc cref="IsNegativeZero(double)"/>
-        /// <seealso cref="Half.IsZero"/>
+        // / <seealso cref="Half.IsZero"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNegativeZero(Half value) {
             return IsNegativeZero_Bit(value);
@@ -1983,7 +1983,7 @@ namespace Zyl.VectorTraits.Numerics {
 
 
         /// <inheritdoc cref="IsZero(double)"/>
-        /// <seealso cref="float.IsZero"/>
+        // / <seealso cref="float.IsZero"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(float value) {
 #if NET7_0_OR_GREATER
@@ -1999,7 +1999,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// <param name="value">The value to be checked (要检查的值).</param>
         /// <returns>Return <c>true</c> if value is even integral number, otherwise is <c>false</c> (如果值是偶数整数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
         /// <seealso cref="INumberBase{TSelf}.IsZero(TSelf)"/>
-        /// <seealso cref="double.IsZero"/>
+        // / <seealso cref="double.IsZero"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(double value) {
 #if NET7_0_OR_GREATER
@@ -2011,7 +2011,7 @@ namespace Zyl.VectorTraits.Numerics {
 
 #if NET5_0_OR_GREATER
         /// <inheritdoc cref="IsZero(double)"/>
-        /// <seealso cref="Half.IsZero"/>
+        // / <seealso cref="Half.IsZero"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(Half value) {
 #if NET7_0_OR_GREATER
@@ -2023,7 +2023,7 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NET5_0_OR_GREATER
 
         /// <inheritdoc cref="IsZero(double)"/>
-        /// <seealso cref="sbyte.IsZero"/>
+        // / <seealso cref="sbyte.IsZero"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(sbyte value) {
@@ -2035,7 +2035,7 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
         /// <inheritdoc cref="IsZero(double)"/>
-        /// <seealso cref="byte.IsZero"/>
+        // / <seealso cref="byte.IsZero"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(byte value) {
 #if NET7_0_OR_GREATER
@@ -2046,7 +2046,7 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
         /// <inheritdoc cref="IsZero(double)"/>
-        /// <seealso cref="short.IsZero"/>
+        // / <seealso cref="short.IsZero"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(short value) {
 #if NET7_0_OR_GREATER
@@ -2057,7 +2057,7 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
         /// <inheritdoc cref="IsZero(double)"/>
-        /// <seealso cref="ushort.IsZero"/>
+        // / <seealso cref="ushort.IsZero"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(ushort value) {
@@ -2069,7 +2069,7 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
         /// <inheritdoc cref="IsZero(double)"/>
-        /// <seealso cref="int.IsZero"/>
+        // / <seealso cref="int.IsZero"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(int value) {
 #if NET7_0_OR_GREATER
@@ -2080,7 +2080,7 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
         /// <inheritdoc cref="IsZero(double)"/>
-        /// <seealso cref="uint.IsZero"/>
+        // / <seealso cref="uint.IsZero"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(uint value) {
@@ -2092,7 +2092,7 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
         /// <inheritdoc cref="IsZero(double)"/>
-        /// <seealso cref="long.IsZero"/>
+        // / <seealso cref="long.IsZero"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(long value) {
 #if NET7_0_OR_GREATER
@@ -2103,7 +2103,7 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
         /// <inheritdoc cref="IsZero(double)"/>
-        /// <seealso cref="ulong.IsZero"/>
+        // / <seealso cref="ulong.IsZero"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(ulong value) {
@@ -2282,7 +2282,7 @@ namespace Zyl.VectorTraits.Numerics {
         /// </summary>
         /// <param name="value">The value to be checked (要检查的值).</param>
         /// <returns>Return <c>true</c> if value is subnormal, otherwise is <c>false</c> (如果值是次正规数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
-        /// <seealso cref="INumberBase{TSelf}.IsZeroOrSubnormal(TSelf)"/>
+        // / <seealso cref="INumberBase{TSelf}.IsZeroOrSubnormal(TSelf)"/>
         // /// <seealso cref="double.IsZeroOrSubnormal"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZeroOrSubnormal(double value) {

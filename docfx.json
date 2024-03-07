@@ -12,8 +12,8 @@
       ],
       "dest": "api",
       "properties": {
-        "TargetFramework": "net7.0",
-        "DefineConstants": "REDUCE_MEMORY_USAGE;NETCOREAPP3_0_OR_GREATER;NET5_0_OR_GREATE;NET6_0_OR_GREATE;NET7_0_OR_GREATE"
+        "TargetFramework": "net8.0",
+        "DefineConstants": "REDUCE_MEMORY_USAGE;NETCOREAPP3_0_OR_GREATER;NET5_0_OR_GREATE;NET6_0_OR_GREATE;NET7_0_OR_GREATE;NET8_0_OR_GREATER"
       },
       "includePrivateMembers": false,
       "disableGitFeatures": false,

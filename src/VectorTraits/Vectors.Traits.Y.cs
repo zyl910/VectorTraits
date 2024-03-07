@@ -785,7 +785,7 @@ namespace Zyl.VectorTraits {
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals_AcceleratedTypes"/>
         public static TypeCodeFlags YIsNotEquals_AcceleratedTypes {
             get {
 #if BCL_BASE_OVERRIDE_STATIC
@@ -796,7 +796,7 @@ namespace Zyl.VectorTraits {
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{float}, Vector{float})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{float}, Vector{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<float> YIsNotEquals(Vector<float> left, Vector<float> right) {
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
@@ -806,7 +806,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{double}, Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{double}, Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> YIsNotEquals(Vector<double> left, Vector<double> right) {
 #if BCL_BASE_OVERRIDE_STATIC
@@ -816,7 +816,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{sbyte}, Vector{sbyte})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{sbyte}, Vector{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<sbyte> YIsNotEquals(Vector<sbyte> left, Vector<sbyte> right) {
@@ -827,7 +827,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{byte}, Vector{byte})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{byte}, Vector{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<byte> YIsNotEquals(Vector<byte> left, Vector<byte> right) {
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
@@ -837,7 +837,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{short}, Vector{short})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{short}, Vector{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<short> YIsNotEquals(Vector<short> left, Vector<short> right) {
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
@@ -847,7 +847,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{ushort}, Vector{ushort})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{ushort}, Vector{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ushort> YIsNotEquals(Vector<ushort> left, Vector<ushort> right) {
@@ -858,7 +858,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{int}, Vector{int})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{int}, Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> YIsNotEquals(Vector<int> left, Vector<int> right) {
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
@@ -868,7 +868,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{uint}, Vector{uint})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{uint}, Vector{uint})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<uint> YIsNotEquals(Vector<uint> left, Vector<uint> right) {
@@ -879,7 +879,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{long}, Vector{long})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{long}, Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<long> YIsNotEquals(Vector<long> left, Vector<long> right) {
 #if BCL_BASE_OVERRIDE_STATIC
@@ -889,7 +889,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{ulong}, Vector{ulong})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{ulong}, Vector{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ulong> YIsNotEquals(Vector<ulong> left, Vector<ulong> right) {
@@ -1346,7 +1346,7 @@ namespace Zyl.VectorTraits {
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YMaxNumber_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YMaxNumber_AcceleratedTypes"/>
         public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
             get {
 #if BCL_BASE_OVERRIDE_STATIC
@@ -1357,7 +1357,7 @@ namespace Zyl.VectorTraits {
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YMaxNumber(Vector{float}, Vector{float})"/>
+        /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{float}, Vector{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<float> YMaxNumber(Vector<float> left, Vector<float> right) {
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
@@ -1367,7 +1367,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YMaxNumber(Vector{double}, Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{double}, Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> YMaxNumber(Vector<double> left, Vector<double> right) {
 #if BCL_BASE_OVERRIDE_STATIC
@@ -1378,7 +1378,7 @@ namespace Zyl.VectorTraits {
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YMinNumber_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YMinNumber_AcceleratedTypes"/>
         public static TypeCodeFlags YMinNumber_AcceleratedTypes {
             get {
 #if BCL_BASE_OVERRIDE_STATIC
@@ -1389,7 +1389,7 @@ namespace Zyl.VectorTraits {
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YMinNumber(Vector{float}, Vector{float})"/>
+        /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{float}, Vector{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<float> YMinNumber(Vector<float> left, Vector<float> right) {
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
@@ -1399,7 +1399,7 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YMinNumber(Vector{double}, Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{double}, Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> YMinNumber(Vector<double> left, Vector<double> right) {
 #if BCL_BASE_OVERRIDE_STATIC

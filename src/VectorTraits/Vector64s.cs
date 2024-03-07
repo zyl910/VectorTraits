@@ -465,10 +465,6 @@ namespace Zyl.VectorTraits {
     /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
     public abstract class Vector64s<T> : AbstractVectors<T> where T : struct {
 #if NETCOREAPP3_0_OR_GREATER
-        /// <summary>Value 0 (0的值).</summary>
-        public static readonly Vector64<T> V0;
-        /// <summary>All bit is 1 (所有位都是1的值).</summary>
-        public static readonly Vector64<T> AllBitsSet;
         // -- Number struct --
         /// <summary>Sign mask (符号掩码).</summary>
         public static readonly Vector64<T> SignMask;
@@ -655,8 +651,6 @@ namespace Zyl.VectorTraits {
         /// Static constructor.
         /// </summary>
         static Vector64s() {
-            V0 = Vector64s.Create<T>(ElementV0);
-            AllBitsSet = Vector64s.Create<T>(ElementAllBitsSet);
             // -- Number struct --
             SignMask = Vector64s.Create<T>(ElementSignMask);
             ExponentMask = Vector64s.Create<T>(ElementExponentMask);
@@ -830,7 +824,24 @@ namespace Zyl.VectorTraits {
 
 
         /// <summary>Zero (0).</summary>
-        public static Vector64<T> Zero { get { return V0; } }
+        /// <seealso cref="Vector64{T}.Zero"/>
+        public static Vector64<T> Zero { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return Vector64<T>.Zero; } }
+        /// <summary>Value 0 (0的值).</summary>
+        /// <seealso cref="Vector64{T}.Zero"/>
+        public static Vector64<T> V0 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return Vector64<T>.Zero; } }
+        /// <summary>All bit is 1 (所有位都是1的值).</summary>
+        /// <seealso cref="Vector64{T}.AllBitsSet"/>
+        public static Vector64<T> AllBitsSet {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if NET5_0_OR_GREATER
+                return Vector64<T>.AllBitsSet;
+#else
+                return Vector64.Create((int)-1).As<int, T>();
+#endif // NET5_0_OR_GREATER
+            }
+        }
+
 
         /// <summary>1 bits mask (1位掩码).</summary>
         public static ref readonly Vector64<T> MaskBits1 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return ref GetMaskBits(1); } }

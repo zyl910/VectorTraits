@@ -1287,7 +1287,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
-            /// <inheritdoc cref="IWVectorTraits.YSign_AcceleratedTypes"/>
+            /// <inheritdoc cref="IVectorTraits.YSign_AcceleratedTypes"/>
             public static TypeCodeFlags YSign_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
@@ -1300,7 +1300,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 }
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{float})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> YSign(Vector<float> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -1310,7 +1310,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{double})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> YSign(Vector<double> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -1320,7 +1320,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{sbyte})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> YSign(Vector<sbyte> value) {
@@ -1331,7 +1331,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{short})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> YSign(Vector<short> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -1341,7 +1341,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{int})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> YSign(Vector<int> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -1351,7 +1351,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{long})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> YSign(Vector<long> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -1361,7 +1361,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{float})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> YSign_Basic(Vector<float> value) {
                 Vector<float> rt = value;
@@ -1373,7 +1373,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt.AsInt32();
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{double})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> YSign_Basic(Vector<double> value) {
                 Vector<double> rt = value;
@@ -1385,7 +1385,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt.AsInt64();
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{sbyte})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> YSign_Basic(Vector<sbyte> value) {
@@ -1398,7 +1398,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{short})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> YSign_Basic(Vector<short> value) {
                 Vector<short> rt = value;
@@ -1410,7 +1410,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{int})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> YSign_Basic(Vector<int> value) {
                 Vector<int> rt = value;
@@ -1422,7 +1422,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{long})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> YSign_Basic(Vector<long> value) {
                 Vector<long> rt = value;
@@ -1435,7 +1435,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{float})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> YSign_Bit(Vector<float> value) {
                 // (x > 0) - (x < 0); //From "Hacker's Delight" 2.7, Page 19.
@@ -1448,7 +1448,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{double})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> YSign_Bit(Vector<double> value) {
                 Vector<double> zero = Vector<double>.Zero;
@@ -1458,7 +1458,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{sbyte})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> YSign_Bit(Vector<sbyte> value) {
@@ -1469,7 +1469,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{short})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> YSign_Bit(Vector<short> value) {
                 Vector<short> zero = Vector<short>.Zero;
@@ -1479,7 +1479,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{int})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> YSign_Bit(Vector<int> value) {
                 Vector<int> zero = Vector<int>.Zero;
@@ -1489,7 +1489,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSign(Vector{long})"/>
+            /// <inheritdoc cref="IVectorTraits.YSign(Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> YSign_Bit(Vector<long> value) {
                 Vector<long> zero = Vector<long>.Zero;
@@ -1501,7 +1501,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
-            /// <inheritdoc cref="IWVectorTraits.YSignFloat_AcceleratedTypes"/>
+            /// <inheritdoc cref="IVectorTraits.YSignFloat_AcceleratedTypes"/>
             public static TypeCodeFlags YSignFloat_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
@@ -1514,7 +1514,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 }
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSignFloat(Vector{float})"/>
+            /// <inheritdoc cref="IVectorTraits.YSignFloat(Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<float> YSignFloat(Vector<float> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -1524,7 +1524,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSignFloat(Vector{double})"/>
+            /// <inheritdoc cref="IVectorTraits.YSignFloat(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YSignFloat(Vector<double> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -1534,7 +1534,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSignFloat(Vector{float})"/>
+            /// <inheritdoc cref="IVectorTraits.YSignFloat(Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<float> YSignFloat_Basic(Vector<float> value) {
                 Vector<float> rt = value;
@@ -1546,7 +1546,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSignFloat(Vector{double})"/>
+            /// <inheritdoc cref="IVectorTraits.YSignFloat(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YSignFloat_Basic(Vector<double> value) {
                 Vector<double> rt = value;
@@ -1559,7 +1559,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-            /// <inheritdoc cref="IWVectorTraits.YSignFloat(Vector{float})"/>
+            /// <inheritdoc cref="IVectorTraits.YSignFloat(Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<float> YSignFloat_Bit(Vector<float> value) {
                 Vector<int> signVal = YSign(value);
@@ -1569,13 +1569,13 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSignFloat(Vector{double})"/>
+            /// <inheritdoc cref="IVectorTraits.YSignFloat(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YSignFloat_Bit(Vector<double> value) {
                 return YSignFloat_Compare(value);
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSignFloat(Vector{double})"/>
+            /// <inheritdoc cref="IVectorTraits.YSignFloat(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YSignFloat_Compare(Vector<double> value) {
                 Vector<double> negativeOne = new Vector<double>(-1.0);
@@ -1588,7 +1588,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits.YSignFloat(Vector{double})"/>
+            /// <inheritdoc cref="IVectorTraits.YSignFloat(Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YSignFloat_Convert(Vector<double> value) {
                 Vector<long> signVal = YSign(value);

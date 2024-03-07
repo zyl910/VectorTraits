@@ -2405,7 +2405,8 @@ INCLUDE_FILE_PATTERNS  =
 PREDEFINED             = NETCOREAPP3_0_OR_GREATER \
                          NET5_0_OR_GREATER \
                          NET6_0_OR_GREATER \
-                         NET7_0_OR_GREATER
+                         NET7_0_OR_GREATER \
+                         NET8_0_OR_GREATER
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The

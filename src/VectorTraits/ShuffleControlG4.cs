@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits {
 
@@ -11,8 +12,8 @@ namespace Zyl.VectorTraits {
     /// <remarks>
     /// <para>Constant names are referenced to HLSL(High-level shader language)/GLSL(OpenGL Shading Language), using the Little-Endian mode. It is like GetByteByBit2R, and the similarly inverse-ordered _MM_SHUFFLE (常量名参考了 HLSL(高级着色语言)/GLSL(OpenGL着色语言), 使用的是小端模式. 它像 GetByteByBit2R, 以及类似逆序的 _MM_SHUFFLE). </para>
     /// </remarks>
-    /// <seealso cref="BitMath.GetByteByBit2R(byte, byte, byte, byte)"/>
-    /// <seealso cref="BitMath._MM_SHUFFLE(byte, byte, byte, byte)"/>
+    /// <seealso cref="BitMathCore.GetByteByBit2R(byte, byte, byte, byte)"/>
+    /// <seealso cref="BitMathCore._MM_SHUFFLE(byte, byte, byte, byte)"/>
     public enum ShuffleControlG4 : byte {
         /// <summary>XXXX := GetByteByBit2R(0, 0, 0, 0) = _MM_SHUFFLE(0, 0, 0, 0) = (0 &lt;&lt; 6) | (0 &lt;&lt; 4) | (0 &lt;&lt; 2) | 0 = 0x00 = 0 .</summary>
         XXXX = 0x00,
