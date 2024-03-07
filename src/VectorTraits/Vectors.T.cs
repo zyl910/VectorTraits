@@ -386,7 +386,7 @@ namespace Zyl.VectorTraits {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
 #if NET8_0_OR_GREATER
-                return Vector.AllBitsSet;
+                return Vector<T>.AllBitsSet;
 #else
                 var zero = Vector<int>.Zero;
                 var rt = Vector.Equals(zero, zero);
