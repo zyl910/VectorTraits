@@ -1387,12 +1387,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YIsNotEquals_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNotEquals_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.None;
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                    if (Vector256.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlagsUtil.AllTypes;
-                    }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    TypeCodeFlags rt = Equals_AcceleratedTypes;
                     return rt;
                 }
             }

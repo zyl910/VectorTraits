@@ -579,6 +579,123 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YIsNotEquals</c> (运行 <c>YIsNotEquals</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YIsNotEquals(Vector128{byte}, Vector128{byte})"/>
+        TypeCodeFlags YIsNotEquals_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Compares two vectors to determine if they are not equal on a per-element basis (比较两个向量，确定它们每个元素是否不相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were not equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否不相等).</returns>
+        /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Equals{T}(Vector128{T}, Vector128{T})"/>
+        Vector128<float> YIsNotEquals(Vector128<float> left, Vector128<float> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Equals{T}(Vector128{T}, Vector128{T})"/>
+        Vector128<double> YIsNotEquals(Vector128<double> left, Vector128<double> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Equals{T}(Vector128{T}, Vector128{T})"/>
+        Vector128<sbyte> YIsNotEquals(Vector128<sbyte> left, Vector128<sbyte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Equals{T}(Vector128{T}, Vector128{T})"/>
+        Vector128<byte> YIsNotEquals(Vector128<byte> left, Vector128<byte> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Equals{T}(Vector128{T}, Vector128{T})"/>
+        Vector128<short> YIsNotEquals(Vector128<short> left, Vector128<short> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Equals{T}(Vector128{T}, Vector128{T})"/>
+        Vector128<ushort> YIsNotEquals(Vector128<ushort> left, Vector128<ushort> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Equals{T}(Vector128{T}, Vector128{T})"/>
+        Vector128<int> YIsNotEquals(Vector128<int> left, Vector128<int> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Equals{T}(Vector128{T}, Vector128{T})"/>
+        Vector128<uint> YIsNotEquals(Vector128<uint> left, Vector128<uint> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Equals{T}(Vector128{T}, Vector128{T})"/>
+        Vector128<long> YIsNotEquals(Vector128<long> left, Vector128<long> right);
+
+        /// <summary>
+        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
+        /// <seealso cref="Vector128.Equals{T}(Vector128{T}, Vector128{T})"/>
+        Vector128<ulong> YIsNotEquals(Vector128<ulong> left, Vector128<ulong> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YIsNotNaN</c> (运行 <c>YIsNotNaN</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YIsNotNaN(Vector128{float})"/>

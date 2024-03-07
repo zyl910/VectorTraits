@@ -1264,6 +1264,355 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsNotEquals_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = Equals_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YIsNotEquals(Vector128<float> left, Vector128<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YIsNotEquals(Vector128<double> left, Vector128<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YIsNotEquals(Vector128<sbyte> left, Vector128<sbyte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YIsNotEquals(Vector128<byte> left, Vector128<byte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YIsNotEquals(Vector128<short> left, Vector128<short> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YIsNotEquals(Vector128<ushort> left, Vector128<ushort> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YIsNotEquals(Vector128<int> left, Vector128<int> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YIsNotEquals(Vector128<uint> left, Vector128<uint> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YIsNotEquals(Vector128<long> left, Vector128<long> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YIsNotEquals(Vector128<ulong> left, Vector128<ulong> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YIsNotEquals_Basic(Vector128<float> left, Vector128<float> right) {
+                UnsafeUtil.SkipInit(out Vector128<float> rt);
+                ref FixedArray4<int> p = ref Unsafe.As<Vector128<float>, FixedArray4<int>>(ref rt);
+                ref FixedArray4<float> pleft = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref left);
+                ref FixedArray4<float> pright = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 != pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 != pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 != pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 != pright.I3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YIsNotEquals_Basic(Vector128<double> left, Vector128<double> right) {
+                UnsafeUtil.SkipInit(out Vector128<double> rt);
+                ref FixedArray2<long> p = ref Unsafe.As<Vector128<double>, FixedArray2<long>>(ref rt);
+                ref FixedArray2<double> pleft = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref left);
+                ref FixedArray2<double> pright = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 != pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 != pright.I1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YIsNotEquals_Basic(Vector128<sbyte> left, Vector128<sbyte> right) {
+                UnsafeUtil.SkipInit(out Vector128<sbyte> rt);
+                ref FixedArray16<sbyte> p = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref rt);
+                ref FixedArray16<sbyte> pleft = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref left);
+                ref FixedArray16<sbyte> pright = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref right);
+                p.I0 = (sbyte)BitMath.ToInt32Mask(pleft.I0 != pright.I0);
+                p.I1 = (sbyte)BitMath.ToInt32Mask(pleft.I1 != pright.I1);
+                p.I2 = (sbyte)BitMath.ToInt32Mask(pleft.I2 != pright.I2);
+                p.I3 = (sbyte)BitMath.ToInt32Mask(pleft.I3 != pright.I3);
+                p.I4 = (sbyte)BitMath.ToInt32Mask(pleft.I4 != pright.I4);
+                p.I5 = (sbyte)BitMath.ToInt32Mask(pleft.I5 != pright.I5);
+                p.I6 = (sbyte)BitMath.ToInt32Mask(pleft.I6 != pright.I6);
+                p.I7 = (sbyte)BitMath.ToInt32Mask(pleft.I7 != pright.I7);
+                p.I8 = (sbyte)BitMath.ToInt32Mask(pleft.I8 != pright.I8);
+                p.I9 = (sbyte)BitMath.ToInt32Mask(pleft.I9 != pright.I9);
+                p.I10 = (sbyte)BitMath.ToInt32Mask(pleft.I10 != pright.I10);
+                p.I11 = (sbyte)BitMath.ToInt32Mask(pleft.I11 != pright.I11);
+                p.I12 = (sbyte)BitMath.ToInt32Mask(pleft.I12 != pright.I12);
+                p.I13 = (sbyte)BitMath.ToInt32Mask(pleft.I13 != pright.I13);
+                p.I14 = (sbyte)BitMath.ToInt32Mask(pleft.I14 != pright.I14);
+                p.I15 = (sbyte)BitMath.ToInt32Mask(pleft.I15 != pright.I15);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YIsNotEquals_Basic(Vector128<byte> left, Vector128<byte> right) {
+                UnsafeUtil.SkipInit(out Vector128<byte> rt);
+                ref FixedArray16<sbyte> p = ref Unsafe.As<Vector128<byte>, FixedArray16<sbyte>>(ref rt);
+                ref FixedArray16<byte> pleft = ref Unsafe.As<Vector128<byte>, FixedArray16<byte>>(ref left);
+                ref FixedArray16<byte> pright = ref Unsafe.As<Vector128<byte>, FixedArray16<byte>>(ref right);
+                p.I0 = (sbyte)BitMath.ToInt32Mask(pleft.I0 != pright.I0);
+                p.I1 = (sbyte)BitMath.ToInt32Mask(pleft.I1 != pright.I1);
+                p.I2 = (sbyte)BitMath.ToInt32Mask(pleft.I2 != pright.I2);
+                p.I3 = (sbyte)BitMath.ToInt32Mask(pleft.I3 != pright.I3);
+                p.I4 = (sbyte)BitMath.ToInt32Mask(pleft.I4 != pright.I4);
+                p.I5 = (sbyte)BitMath.ToInt32Mask(pleft.I5 != pright.I5);
+                p.I6 = (sbyte)BitMath.ToInt32Mask(pleft.I6 != pright.I6);
+                p.I7 = (sbyte)BitMath.ToInt32Mask(pleft.I7 != pright.I7);
+                p.I8 = (sbyte)BitMath.ToInt32Mask(pleft.I8 != pright.I8);
+                p.I9 = (sbyte)BitMath.ToInt32Mask(pleft.I9 != pright.I9);
+                p.I10 = (sbyte)BitMath.ToInt32Mask(pleft.I10 != pright.I10);
+                p.I11 = (sbyte)BitMath.ToInt32Mask(pleft.I11 != pright.I11);
+                p.I12 = (sbyte)BitMath.ToInt32Mask(pleft.I12 != pright.I12);
+                p.I13 = (sbyte)BitMath.ToInt32Mask(pleft.I13 != pright.I13);
+                p.I14 = (sbyte)BitMath.ToInt32Mask(pleft.I14 != pright.I14);
+                p.I15 = (sbyte)BitMath.ToInt32Mask(pleft.I15 != pright.I15);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YIsNotEquals_Basic(Vector128<short> left, Vector128<short> right) {
+                UnsafeUtil.SkipInit(out Vector128<short> rt);
+                ref FixedArray8<short> p = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref rt);
+                ref FixedArray8<short> pleft = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref left);
+                ref FixedArray8<short> pright = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref right);
+                p.I0 = (short)BitMath.ToInt32Mask(pleft.I0 != pright.I0);
+                p.I1 = (short)BitMath.ToInt32Mask(pleft.I1 != pright.I1);
+                p.I2 = (short)BitMath.ToInt32Mask(pleft.I2 != pright.I2);
+                p.I3 = (short)BitMath.ToInt32Mask(pleft.I3 != pright.I3);
+                p.I4 = (short)BitMath.ToInt32Mask(pleft.I4 != pright.I4);
+                p.I5 = (short)BitMath.ToInt32Mask(pleft.I5 != pright.I5);
+                p.I6 = (short)BitMath.ToInt32Mask(pleft.I6 != pright.I6);
+                p.I7 = (short)BitMath.ToInt32Mask(pleft.I7 != pright.I7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YIsNotEquals_Basic(Vector128<ushort> left, Vector128<ushort> right) {
+                UnsafeUtil.SkipInit(out Vector128<ushort> rt);
+                ref FixedArray8<short> p = ref Unsafe.As<Vector128<ushort>, FixedArray8<short>>(ref rt);
+                ref FixedArray8<ushort> pleft = ref Unsafe.As<Vector128<ushort>, FixedArray8<ushort>>(ref left);
+                ref FixedArray8<ushort> pright = ref Unsafe.As<Vector128<ushort>, FixedArray8<ushort>>(ref right);
+                p.I0 = (short)BitMath.ToInt32Mask(pleft.I0 != pright.I0);
+                p.I1 = (short)BitMath.ToInt32Mask(pleft.I1 != pright.I1);
+                p.I2 = (short)BitMath.ToInt32Mask(pleft.I2 != pright.I2);
+                p.I3 = (short)BitMath.ToInt32Mask(pleft.I3 != pright.I3);
+                p.I4 = (short)BitMath.ToInt32Mask(pleft.I4 != pright.I4);
+                p.I5 = (short)BitMath.ToInt32Mask(pleft.I5 != pright.I5);
+                p.I6 = (short)BitMath.ToInt32Mask(pleft.I6 != pright.I6);
+                p.I7 = (short)BitMath.ToInt32Mask(pleft.I7 != pright.I7);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YIsNotEquals_Basic(Vector128<int> left, Vector128<int> right) {
+                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
+                ref FixedArray4<int> pleft = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref left);
+                ref FixedArray4<int> pright = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 != pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 != pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 != pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 != pright.I3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YIsNotEquals_Basic(Vector128<uint> left, Vector128<uint> right) {
+                UnsafeUtil.SkipInit(out Vector128<uint> rt);
+                ref FixedArray4<int> p = ref Unsafe.As<Vector128<uint>, FixedArray4<int>>(ref rt);
+                ref FixedArray4<uint> pleft = ref Unsafe.As<Vector128<uint>, FixedArray4<uint>>(ref left);
+                ref FixedArray4<uint> pright = ref Unsafe.As<Vector128<uint>, FixedArray4<uint>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 != pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 != pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 != pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 != pright.I3);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YIsNotEquals_Basic(Vector128<long> left, Vector128<long> right) {
+                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
+                ref FixedArray2<long> pleft = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref left);
+                ref FixedArray2<long> pright = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 != pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 != pright.I1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YIsNotEquals_Basic(Vector128<ulong> left, Vector128<ulong> right) {
+                UnsafeUtil.SkipInit(out Vector128<ulong> rt);
+                ref FixedArray2<long> p = ref Unsafe.As<Vector128<ulong>, FixedArray2<long>>(ref rt);
+                ref FixedArray2<ulong> pleft = ref Unsafe.As<Vector128<ulong>, FixedArray2<ulong>>(ref left);
+                ref FixedArray2<ulong> pright = ref Unsafe.As<Vector128<ulong>, FixedArray2<ulong>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 != pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 != pright.I1);
+                return rt;
+            }
+
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YIsNotEquals_Bit(Vector128<float> left, Vector128<float> right) {
+                return OnesComplement(Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{double}, Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YIsNotEquals_Bit(Vector128<double> left, Vector128<double> right) {
+                return OnesComplement(Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YIsNotEquals_Bit(Vector128<sbyte> left, Vector128<sbyte> right) {
+                return OnesComplement(Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YIsNotEquals_Bit(Vector128<byte> left, Vector128<byte> right) {
+                return OnesComplement(Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YIsNotEquals_Bit(Vector128<short> left, Vector128<short> right) {
+                return OnesComplement(Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YIsNotEquals_Bit(Vector128<ushort> left, Vector128<ushort> right) {
+                return OnesComplement(Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YIsNotEquals_Bit(Vector128<int> left, Vector128<int> right) {
+                return OnesComplement(Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YIsNotEquals_Bit(Vector128<uint> left, Vector128<uint> right) {
+                return OnesComplement(Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YIsNotEquals_Bit(Vector128<long> left, Vector128<long> right) {
+                return OnesComplement(Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YIsNotEquals_Bit(Vector128<ulong> left, Vector128<ulong> right) {
+                return OnesComplement(Equals(left, right));
+            }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+
+
             /// <inheritdoc cref="IWVectorTraits128.YIsNotNaN_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNotNaN_AcceleratedTypes {
                 get {

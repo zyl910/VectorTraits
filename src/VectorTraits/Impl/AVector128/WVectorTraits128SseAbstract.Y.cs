@@ -498,6 +498,78 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals_AcceleratedTypes"/>
+        public override TypeCodeFlags YIsNotEquals_AcceleratedTypes {
+            get {
+                return Statics.YIsNotEquals_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<float> YIsNotEquals(Vector128<float> left, Vector128<float> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> YIsNotEquals(Vector128<double> left, Vector128<double> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{sbyte}, Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<sbyte> YIsNotEquals(Vector128<sbyte> left, Vector128<sbyte> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{byte}, Vector128{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<byte> YIsNotEquals(Vector128<byte> left, Vector128<byte> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{short}, Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<short> YIsNotEquals(Vector128<short> left, Vector128<short> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{ushort}, Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<ushort> YIsNotEquals(Vector128<ushort> left, Vector128<ushort> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{int}, Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<int> YIsNotEquals(Vector128<int> left, Vector128<int> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{uint}, Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<uint> YIsNotEquals(Vector128<uint> left, Vector128<uint> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{long}, Vector128{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> YIsNotEquals(Vector128<long> left, Vector128<long> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{ulong}, Vector128{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<ulong> YIsNotEquals(Vector128<ulong> left, Vector128<ulong> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.YIsNotNaN_AcceleratedTypes"/>
         public override TypeCodeFlags YIsNotNaN_AcceleratedTypes {
             get {

@@ -551,6 +551,56 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
             }
         }
 
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void YIsNotEqualsTest<T>(T src) where T : struct {
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.YIsNotEquals_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            Console.WriteLine();
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s.Create(src),
+                Vector128s<T>.Demo,
+                Vector128s<T>.Serial,
+                Vector128s<T>.SerialNegative,
+                Vector128s<T>.XyXMask,
+                Vector128s<T>.XyYMask,
+                Vector128s<T>.XyzwXMask
+            };
+            bool allowLog = false;
+            bool showNotYIsNotEquals = false;
+            foreach (Vector128<T> left in samples) {
+                foreach (Vector128<T> right in samples) {
+                    Vector128<T> expected = Vector128s.YIsNotEquals((dynamic)left, (dynamic)right);
+                    foreach (IWVectorTraits128 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        Vector128<T> dst = instance.YIsNotEquals((dynamic)left, (dynamic)right);
+                        bool showLog = showNotYIsNotEquals && !expected.AsByte().Equals(dst.AsByte());
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (allowLog || showLog) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
+                        } else {
+                            Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        }
+                    }
+                }
+            }
+        }
+
         [TestCase((float)1, (int)1)]
         [TestCase((double)2, (long)1)]
         public void YIsNotNaNTest<T, TOut>(T src, TOut srcOut) where T : struct where TOut : struct {
