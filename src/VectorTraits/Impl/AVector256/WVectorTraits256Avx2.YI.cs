@@ -266,14 +266,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> YIsNaN(Vector256<float> value) {
-                Vector256<int> rt = OnesComplement(Equals(value, value).AsInt32());
+                Vector256<int> rt = YIsNotEquals(value, value).AsInt32();
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YIsNaN(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YIsNaN(Vector256<double> value) {
-                Vector256<long> rt = OnesComplement(Equals(value, value).AsInt64());
+                Vector256<long> rt = YIsNotEquals(value, value).AsInt64();
                 return rt;
             }
 
