@@ -785,6 +785,122 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNotEquals_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNotEquals_AcceleratedTypes;
+#else
+                return _instance.YIsNotEquals_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YIsNotEquals(Vector<float> left, Vector<float> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{double}, Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YIsNotEquals(Vector<double> left, Vector<double> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> YIsNotEquals(Vector<sbyte> left, Vector<sbyte> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> YIsNotEquals(Vector<byte> left, Vector<byte> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> YIsNotEquals(Vector<short> left, Vector<short> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> YIsNotEquals(Vector<ushort> left, Vector<ushort> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> YIsNotEquals(Vector<int> left, Vector<int> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> YIsNotEquals(Vector<uint> left, Vector<uint> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> YIsNotEquals(Vector<long> left, Vector<long> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits.YIsNotEquals(Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> YIsNotEquals(Vector<ulong> left, Vector<ulong> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.YIsNotNaN_AcceleratedTypes"/>
         public static TypeCodeFlags YIsNotNaN_AcceleratedTypes {
             get {

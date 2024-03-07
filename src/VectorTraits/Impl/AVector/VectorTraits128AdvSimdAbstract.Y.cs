@@ -496,6 +496,78 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals_AcceleratedTypes"/>
+        public override TypeCodeFlags YIsNotEquals_AcceleratedTypes {
+            get {
+                return Statics.YIsNotEquals_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<float> YIsNotEquals(Vector<float> left, Vector<float> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{double}, Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> YIsNotEquals(Vector<double> left, Vector<double> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<sbyte> YIsNotEquals(Vector<sbyte> left, Vector<sbyte> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<byte> YIsNotEquals(Vector<byte> left, Vector<byte> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<short> YIsNotEquals(Vector<short> left, Vector<short> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ushort> YIsNotEquals(Vector<ushort> left, Vector<ushort> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<int> YIsNotEquals(Vector<int> left, Vector<int> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<uint> YIsNotEquals(Vector<uint> left, Vector<uint> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> YIsNotEquals(Vector<long> left, Vector<long> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> YIsNotEquals(Vector<ulong> left, Vector<ulong> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.YIsNotNaN_AcceleratedTypes"/>
         public override TypeCodeFlags YIsNotNaN_AcceleratedTypes {
             get {

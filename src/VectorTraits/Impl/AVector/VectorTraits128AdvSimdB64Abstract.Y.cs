@@ -56,26 +56,26 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsEvenInteger_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsEvenInteger_AcceleratedTypes"/>
         public override TypeCodeFlags YIsEvenInteger_AcceleratedTypes {
             get {
                 return Statics.YIsEvenInteger_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsEvenInteger(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsEvenInteger(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsEvenInteger(Vector<double> value) {
             return Statics.YIsEvenInteger(value);
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsEvenInteger(Vector{long})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsEvenInteger(Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsEvenInteger(Vector<long> value) {
             return Statics.YIsEvenInteger(value);
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsEvenInteger(Vector{ulong})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsEvenInteger(Vector{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<ulong> YIsEvenInteger(Vector<ulong> value) {
@@ -83,172 +83,199 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsFinite_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsFinite_AcceleratedTypes"/>
         public override TypeCodeFlags YIsFinite_AcceleratedTypes {
             get {
                 return Statics.YIsFinite_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsFinite(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsFinite(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsFinite(Vector<double> value) {
             return Statics.YIsFinite(value);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsInfinity_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsInfinity_AcceleratedTypes"/>
         public override TypeCodeFlags YIsInfinity_AcceleratedTypes {
             get {
                 return Statics.YIsInfinity_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsInfinity(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsInfinity(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsInfinity(Vector<double> value) {
             return Statics.YIsInfinity(value);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsInfinityOrNaN_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsInfinityOrNaN_AcceleratedTypes"/>
         public override TypeCodeFlags YIsInfinityOrNaN_AcceleratedTypes {
             get {
                 return Statics.YIsInfinityOrNaN_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsInfinityOrNaN(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsInfinityOrNaN(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsInfinityOrNaN(Vector<double> value) {
             return Statics.YIsInfinityOrNaN(value);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsInteger_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsInteger_AcceleratedTypes"/>
         public override TypeCodeFlags YIsInteger_AcceleratedTypes {
             get {
                 return Statics.YIsInteger_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsInteger(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsInteger(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsInteger(Vector<double> value) {
             return Statics.YIsInteger(value);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNaN_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNaN_AcceleratedTypes"/>
         public override TypeCodeFlags YIsNaN_AcceleratedTypes {
             get {
                 return Statics.YIsNaN_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNaN(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNaN(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsNaN(Vector<double> value) {
             return Statics.YIsNaN(value);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNegative_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNegative_AcceleratedTypes"/>
         public override TypeCodeFlags YIsNegative_AcceleratedTypes {
             get {
                 return Statics.YIsNegative_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNegative(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNegative(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsNegative(Vector<double> value) {
             return Statics.YIsNegative(value);
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNegative(Vector{long})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNegative(Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsNegative(Vector<long> value) {
             return Statics.YIsNegative(value);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNegativeInfinity_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNegativeInfinity_AcceleratedTypes"/>
         public override TypeCodeFlags YIsNegativeInfinity_AcceleratedTypes {
             get {
                 return Statics.YIsNegativeInfinity_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNegativeInfinity(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNegativeInfinity(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsNegativeInfinity(Vector<double> value) {
             return Statics.YIsNegativeInfinity(value);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNegativeZero_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNegativeZero_AcceleratedTypes"/>
         public override TypeCodeFlags YIsNegativeZero_AcceleratedTypes {
             get {
                 return Statics.YIsNegativeZero_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNegativeZero(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNegativeZero(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsNegativeZero(Vector<double> value) {
             return Statics.YIsNegativeZero(value);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNormal_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNormal_AcceleratedTypes"/>
         public override TypeCodeFlags YIsNormal_AcceleratedTypes {
             get {
                 return Statics.YIsNormal_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNormal(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNormal(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsNormal(Vector<double> value) {
             return Statics.YIsNormal(value);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNotNaN_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals_AcceleratedTypes"/>
+        public override TypeCodeFlags YIsNotEquals_AcceleratedTypes {
+            get {
+                return Statics.YIsNotEquals_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{double}, Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> YIsNotEquals(Vector<double> left, Vector<double> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> YIsNotEquals(Vector<long> left, Vector<long> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> YIsNotEquals(Vector<ulong> left, Vector<ulong> right) {
+            return Statics.YIsNotEquals(left, right);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.YIsNotNaN_AcceleratedTypes"/>
         public override TypeCodeFlags YIsNotNaN_AcceleratedTypes {
             get {
                 return Statics.YIsNotNaN_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsNotNaN(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsNotNaN(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsNotNaN(Vector<double> value) {
             return Statics.YIsNotNaN(value);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsOddInteger_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsOddInteger_AcceleratedTypes"/>
         public override TypeCodeFlags YIsOddInteger_AcceleratedTypes {
             get {
                 return Statics.YIsOddInteger_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsOddInteger(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsOddInteger(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsOddInteger(Vector<double> value) {
             return Statics.YIsOddInteger(value);
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsOddInteger(Vector{long})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsOddInteger(Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsOddInteger(Vector<long> value) {
             return Statics.YIsOddInteger(value);
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsOddInteger(Vector{ulong})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsOddInteger(Vector{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<ulong> YIsOddInteger(Vector<ulong> value) {
@@ -256,74 +283,74 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsPositive_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsPositive_AcceleratedTypes"/>
         public override TypeCodeFlags YIsPositive_AcceleratedTypes {
             get {
                 return Statics.YIsPositive_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsPositive(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsPositive(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsPositive(Vector<double> value) {
             return Statics.YIsPositive(value);
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsPositive(Vector{long})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsPositive(Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsPositive(Vector<long> value) {
             return Statics.YIsPositive(value);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsPositiveInfinity_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsPositiveInfinity_AcceleratedTypes"/>
         public override TypeCodeFlags YIsPositiveInfinity_AcceleratedTypes {
             get {
                 return Statics.YIsPositiveInfinity_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsPositiveInfinity(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsPositiveInfinity(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsPositiveInfinity(Vector<double> value) {
             return Statics.YIsPositiveInfinity(value);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsSubnormal_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsSubnormal_AcceleratedTypes"/>
         public override TypeCodeFlags YIsSubnormal_AcceleratedTypes {
             get {
                 return Statics.YIsSubnormal_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsSubnormal(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsSubnormal(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsSubnormal(Vector<double> value) {
             return Statics.YIsSubnormal(value);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsZero_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsZero_AcceleratedTypes"/>
         public override TypeCodeFlags YIsZero_AcceleratedTypes {
             get {
                 return Statics.YIsZero_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsZero(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsZero(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsZero(Vector<double> value) {
             return Statics.YIsZero(value);
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsZero(Vector{long})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsZero(Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsZero(Vector<long> value) {
             return Statics.YIsZero(value);
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsZero(Vector{ulong})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsZero(Vector{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<ulong> YIsZero(Vector<ulong> value) {
@@ -331,14 +358,14 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits.YIsZeroOrSubnormal_AcceleratedTypes"/>
+        /// <inheritdoc cref="IVectorTraits.YIsZeroOrSubnormal_AcceleratedTypes"/>
         public override TypeCodeFlags YIsZeroOrSubnormal_AcceleratedTypes {
             get {
                 return Statics.YIsZeroOrSubnormal_AcceleratedTypes;
             }
         }
 
-        /// <inheritdoc cref="IWVectorTraits.YIsZeroOrSubnormal(Vector{double})"/>
+        /// <inheritdoc cref="IVectorTraits.YIsZeroOrSubnormal(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<long> YIsZeroOrSubnormal(Vector<double> value) {
             return Statics.YIsZeroOrSubnormal(value);

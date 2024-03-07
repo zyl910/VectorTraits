@@ -594,100 +594,100 @@ namespace Zyl.VectorTraits.Impl {
         Vector256<float> YIsNotEquals(Vector256<float> left, Vector256<float> right);
 
         /// <summary>
-        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Compares two vectors to determine if they are not equal on a per-element basis (比较两个向量，确定它们每个元素是否不相等).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" />were not equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否不相等).</returns>
         /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/>
         Vector256<double> YIsNotEquals(Vector256<double> left, Vector256<double> right);
 
         /// <summary>
-        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Compares two vectors to determine if they are not equal on a per-element basis (比较两个向量，确定它们每个元素是否不相等).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" />were not equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否不相等).</returns>
         /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/>
         Vector256<sbyte> YIsNotEquals(Vector256<sbyte> left, Vector256<sbyte> right);
 
         /// <summary>
-        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Compares two vectors to determine if they are not equal on a per-element basis (比较两个向量，确定它们每个元素是否不相等).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" />were not equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否不相等).</returns>
         /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/>
         Vector256<byte> YIsNotEquals(Vector256<byte> left, Vector256<byte> right);
 
         /// <summary>
-        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Compares two vectors to determine if they are not equal on a per-element basis (比较两个向量，确定它们每个元素是否不相等).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" />were not equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否不相等).</returns>
         /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/>
         Vector256<short> YIsNotEquals(Vector256<short> left, Vector256<short> right);
 
         /// <summary>
-        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Compares two vectors to determine if they are not equal on a per-element basis (比较两个向量，确定它们每个元素是否不相等).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" />were not equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否不相等).</returns>
         /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/>
         Vector256<ushort> YIsNotEquals(Vector256<ushort> left, Vector256<ushort> right);
 
         /// <summary>
-        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Compares two vectors to determine if they are not equal on a per-element basis (比较两个向量，确定它们每个元素是否不相等).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" />were not equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否不相等).</returns>
         /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/>
         Vector256<int> YIsNotEquals(Vector256<int> left, Vector256<int> right);
 
         /// <summary>
-        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Compares two vectors to determine if they are not equal on a per-element basis (比较两个向量，确定它们每个元素是否不相等).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" />were not equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否不相等).</returns>
         /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/>
         Vector256<uint> YIsNotEquals(Vector256<uint> left, Vector256<uint> right);
 
         /// <summary>
-        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Compares two vectors to determine if they are not equal on a per-element basis (比较两个向量，确定它们每个元素是否不相等).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" />were not equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否不相等).</returns>
         /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/>
         Vector256<long> YIsNotEquals(Vector256<long> left, Vector256<long> right);
 
         /// <summary>
-        /// Compares two vectors to determine if they are equal on a per-element basis (比较两个向量，确定它们每个元素是否相等).
+        /// Compares two vectors to determine if they are not equal on a per-element basis (比较两个向量，确定它们每个元素是否不相等).
         /// Mnemonic: <c>rt[i] := to_mask(left[i] != right[i])</c>.
         /// </summary>
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
-        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否相等).</returns>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" />were not equal (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中是否不相等).</returns>
         /// <seealso cref="YIsNotEquals_AcceleratedTypes"/>
         /// <seealso cref="Vector256.Equals{T}(Vector256{T}, Vector256{T})"/>
         Vector256<ulong> YIsNotEquals(Vector256<ulong> left, Vector256<ulong> right);

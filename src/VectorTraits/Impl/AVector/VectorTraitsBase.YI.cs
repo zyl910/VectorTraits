@@ -1185,6 +1185,297 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
 
 
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsNotEquals_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = Equals_AcceleratedTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YIsNotEquals(Vector<float> left, Vector<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YIsNotEquals(Vector<double> left, Vector<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YIsNotEquals(Vector<sbyte> left, Vector<sbyte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{byte}, Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YIsNotEquals(Vector<byte> left, Vector<byte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YIsNotEquals(Vector<short> left, Vector<short> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{ushort}, Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YIsNotEquals(Vector<ushort> left, Vector<ushort> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{int}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YIsNotEquals(Vector<int> left, Vector<int> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{uint}, Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YIsNotEquals(Vector<uint> left, Vector<uint> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YIsNotEquals(Vector<long> left, Vector<long> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{ulong}, Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YIsNotEquals(Vector<ulong> left, Vector<ulong> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YIsNotEquals_Bit(left, right);
+#else
+                return YIsNotEquals_Basic(left, right);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YIsNotEquals_Basic(Vector<float> left, Vector<float> right) {
+                Vector<float> rt = left;
+                ref float p = ref Unsafe.As<Vector<float>, float>(ref rt);
+                ref float pright = ref Unsafe.As<Vector<float>, float>(ref right);
+                for (nint i = 0; i < Vector<float>.Count; ++i) {
+                    p = MathBitConverter.Int32BitsToSingle(BitMathCore.ToInt32Mask(p != pright));
+                    p = ref Unsafe.Add(ref p, 1);
+                    pright = ref Unsafe.Add(ref pright, 1);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YIsNotEquals_Basic(Vector<double> left, Vector<double> right) {
+                Vector<double> rt = left;
+                ref double p = ref Unsafe.As<Vector<double>, double>(ref rt);
+                ref double pright = ref Unsafe.As<Vector<double>, double>(ref right);
+                for (nint i = 0; i < Vector<double>.Count; ++i) {
+                    p = MathBitConverter.Int64BitsToDouble(BitMathCore.ToInt32Mask(p != pright));
+                    p = ref Unsafe.Add(ref p, 1);
+                    pright = ref Unsafe.Add(ref pright, 1);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YIsNotEquals_Basic(Vector<sbyte> left, Vector<sbyte> right) {
+                Vector<sbyte> rt = left;
+                ref sbyte p = ref Unsafe.As<Vector<sbyte>, sbyte>(ref rt);
+                ref sbyte pright = ref Unsafe.As<Vector<sbyte>, sbyte>(ref right);
+                for (nint i = 0; i < Vector<sbyte>.Count; ++i) {
+                    p = (sbyte)BitMathCore.ToInt32Mask(p != pright);
+                    p = ref Unsafe.Add(ref p, 1);
+                    pright = ref Unsafe.Add(ref pright, 1);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{byte}, Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YIsNotEquals_Basic(Vector<byte> left, Vector<byte> right) {
+                return YIsNotEquals_Basic(left.AsSByte(), right.AsSByte()).AsByte();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YIsNotEquals_Basic(Vector<short> left, Vector<short> right) {
+                Vector<short> rt = left;
+                ref short p = ref Unsafe.As<Vector<short>, short>(ref rt);
+                ref short pright = ref Unsafe.As<Vector<short>, short>(ref right);
+                for (nint i = 0; i < Vector<short>.Count; ++i) {
+                    p = (short)BitMathCore.ToInt32Mask(p != pright);
+                    p = ref Unsafe.Add(ref p, 1);
+                    pright = ref Unsafe.Add(ref pright, 1);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{ushort}, Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YIsNotEquals_Basic(Vector<ushort> left, Vector<ushort> right) {
+                return YIsNotEquals_Basic(left.AsInt16(), right.AsInt16()).AsUInt16();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{int}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YIsNotEquals_Basic(Vector<int> left, Vector<int> right) {
+                Vector<int> rt = left;
+                ref int p = ref Unsafe.As<Vector<int>, int>(ref rt);
+                ref int pright = ref Unsafe.As<Vector<int>, int>(ref right);
+                for (nint i = 0; i < Vector<int>.Count; ++i) {
+                    p = BitMathCore.ToInt32Mask(p != pright);
+                    p = ref Unsafe.Add(ref p, 1);
+                    pright = ref Unsafe.Add(ref pright, 1);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{uint}, Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YIsNotEquals_Basic(Vector<uint> left, Vector<uint> right) {
+                return YIsNotEquals_Basic(left.AsInt32(), right.AsInt32()).AsUInt32();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YIsNotEquals_Basic(Vector<long> left, Vector<long> right) {
+                Vector<long> rt = left;
+                ref long p = ref Unsafe.As<Vector<long>, long>(ref rt);
+                ref long pright = ref Unsafe.As<Vector<long>, long>(ref right);
+                for (nint i = 0; i < Vector<long>.Count; ++i) {
+                    p = (long)BitMathCore.ToInt32Mask(p != pright);
+                    p = ref Unsafe.Add(ref p, 1);
+                    pright = ref Unsafe.Add(ref pright, 1);
+                }
+                return rt;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{ulong}, Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YIsNotEquals_Basic(Vector<ulong> left, Vector<ulong> right) {
+                return YIsNotEquals_Basic(left.AsInt64(), right.AsInt64()).AsUInt64();
+            }
+
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YIsNotEquals_Bit(Vector<float> left, Vector<float> right) {
+                return Vector.OnesComplement(Vector.Equals(left, right).AsSingle());
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YIsNotEquals_Bit(Vector<double> left, Vector<double> right) {
+                return Vector.OnesComplement(Vector.Equals(left, right).AsDouble());
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YIsNotEquals_Bit(Vector<sbyte> left, Vector<sbyte> right) {
+                return Vector.OnesComplement(Vector.Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{byte}, Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YIsNotEquals_Bit(Vector<byte> left, Vector<byte> right) {
+                return Vector.OnesComplement(Vector.Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YIsNotEquals_Bit(Vector<short> left, Vector<short> right) {
+                return Vector.OnesComplement(Vector.Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{ushort}, Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YIsNotEquals_Bit(Vector<ushort> left, Vector<ushort> right) {
+                return Vector.OnesComplement(Vector.Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{int}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YIsNotEquals_Bit(Vector<int> left, Vector<int> right) {
+                return Vector.OnesComplement(Vector.Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{uint}, Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YIsNotEquals_Bit(Vector<uint> left, Vector<uint> right) {
+                return Vector.OnesComplement(Vector.Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YIsNotEquals_Bit(Vector<long> left, Vector<long> right) {
+                return Vector.OnesComplement(Vector.Equals(left, right));
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{ulong}, Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YIsNotEquals_Bit(Vector<ulong> left, Vector<ulong> right) {
+                return Vector.OnesComplement(Vector.Equals(left, right));
+            }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+
+
             /// <inheritdoc cref="IVectorTraits.YIsNotNaN_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNotNaN_AcceleratedTypes {
                 get {

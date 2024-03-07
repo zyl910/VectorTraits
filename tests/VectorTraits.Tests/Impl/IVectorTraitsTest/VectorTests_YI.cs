@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
 using System.Text;
+using Zyl.VectorTraits.Extensions.SameW;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
 
@@ -537,6 +538,56 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     }
                 }
                 writer.WriteLine();
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void YIsNotEqualsTest<T>(T src) where T : struct {
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine($"{instance.GetType().Name}: OK. {instance.YIsNotEquals_AcceleratedTypes}");
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            Console.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors.Create(src),
+                Vectors<T>.Demo,
+                Vectors<T>.Serial,
+                Vectors<T>.SerialNegative,
+                Vectors<T>.XyXMask,
+                Vectors<T>.XyYMask,
+                Vectors<T>.XyzwXMask
+            };
+            bool allowLog = false;
+            bool showNotYIsNotEquals = false;
+            foreach (Vector<T> left in samples) {
+                foreach (Vector<T> right in samples) {
+                    Vector<T> expected = Vectors.YIsNotEquals((dynamic)left, (dynamic)right);
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        Vector<T> dst = instance.YIsNotEquals((dynamic)left, (dynamic)right);
+                        bool showLog = showNotYIsNotEquals && !expected.AsByte().Equals(dst.AsByte());
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (allowLog || showLog) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
+                        } else {
+                            Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        }
+                    }
+                }
             }
         }
 

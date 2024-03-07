@@ -219,6 +219,33 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals_AcceleratedTypes"/>
+            public static TypeCodeFlags YIsNotEquals_AcceleratedTypes {
+                get {
+                    return WStatics.YIsNotEquals_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YIsNotEquals(Vector<double> left, Vector<double> right) {
+                return WStatics.YIsNotEquals(left.AsVector128(), right.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YIsNotEquals(Vector<long> left, Vector<long> right) {
+                return WStatics.YIsNotEquals(left.AsVector128(), right.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YIsNotEquals(Vector{ulong}, Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YIsNotEquals(Vector<ulong> left, Vector<ulong> right) {
+                return WStatics.YIsNotEquals(left.AsVector128(), right.AsVector128()).AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.YIsNotNaN_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNotNaN_AcceleratedTypes {
                 get {
