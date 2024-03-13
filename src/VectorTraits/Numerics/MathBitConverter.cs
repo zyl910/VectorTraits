@@ -5,10 +5,9 @@ using System.Text;
 
 namespace Zyl.VectorTraits.Numerics {
     /// <summary>
-    /// Math functions of <see cref="MathBitConverter"/> (MathBitConverter 的数学函数).
+    /// Math functions of <see cref="BitConverter"/> (BitConverter 的数学函数).
     /// </summary>
     /// <seealso cref="BitConverter"/>
-    /// <seealso cref="BitMath"/>
     public static class MathBitConverter {
 
         /// <summary>
