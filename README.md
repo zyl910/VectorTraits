@@ -95,7 +95,7 @@ namespace Zyl.VectorTraits.Sample {
             writer.WriteLine("VectorTraits.Sample");
             writer.WriteLine();
             VectorTraitsGlobal.Init(); // Initialization .
-            TraitsOutput.OutputEnvironment(writer); // // Output environment info. It depends on `VectorTraits.InfoInc`. This row can be deleted when only VectorTraits are used.
+            TraitsOutput.OutputEnvironment(writer); // Output environment info. It depends on `VectorTraits.InfoInc`. This row can be deleted when only VectorTraits are used.
             writer.WriteLine();
 
             // -- Start --
@@ -151,28 +151,32 @@ Program: `VectorTraits.Sample`
 ```
 VectorTraits.Sample
 
-IsRelease:      True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):      Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
-Environment.ProcessorCount:     8
-Environment.Is64BitProcess:     True
-Environment.OSVersion:  Microsoft Windows NT 10.0.19045.0
-Environment.Version:    7.0.3
-Stopwatch.Frequency:    10000000
-RuntimeEnvironment.GetRuntimeDirectory: C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.3\
-RuntimeInformation.FrameworkDescription:        .NET 7.0.3
-RuntimeInformation.OSArchitecture:      X64
-RuntimeInformation.OSDescription:       Microsoft Windows 10.0.19045
-RuntimeInformation.RuntimeIdentifier:   win10-x64
-IntPtr.Size:    8
-BitConverter.IsLittleEndian:    True
-Vector.IsHardwareAccelerated:   True
-Vector<byte>.Count:     32      # 256bit
-Vector<float>.Count:    8       # 256bit
-VectorTraitsGlobal.InitCheckSum:        7960959 # 0x0079797F
-Vector<T>.Assembly.CodeBase:    file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.3/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(VectorTextUtil):  .NET 7.0
-GetTargetFrameworkDisplayName(TraitsOutput):    .NET 7.0
-Vectors.Instance:       VectorTraits256Avx2
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
+Environment.Version:	7.0.13
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.13\
+RuntimeInformation.FrameworkDescription:	.NET 7.0.13
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.13/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
 
 src:    <0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7>        # (0000 0001 0002 0003 0004 0005 0006 0007 0000 0001 0002 0003 0004 0005 0006 0007)
 ShiftLeft:      <0, 2, 4, 6, 8, 10, 12, 14, 0, 2, 4, 6, 8, 10, 12, 14>  # (0000 0002 0004 0006 0008 000A 000C 000E 0000 0002 0004 0006 0008 000A 000C 000E)
@@ -198,27 +202,31 @@ Program: `VectorTraits.Sample`
 VectorTraits.Sample
 
 IsRelease:	True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):	
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 5.19.0.1025
+Environment.OSVersion:	Unix 6.2.0.1013
 Environment.Version:	7.0.8
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/
 RuntimeInformation.FrameworkDescription:	.NET 7.0.8
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:03 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
-Vectors.Instance:	VectorTraits128AdvSimdB64
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
+Vectors.BaseInstance:	VectorTraits128Base
 
 src:	<0, 1, 2, 3, 4, 5, 6, 7>	# (0000 0001 0002 0003 0004 0005 0006 0007)
 ShiftLeft:	<0, 2, 4, 6, 8, 10, 12, 14>	# (0000 0002 0004 0006 0008 000A 000C 000E)
@@ -243,27 +251,29 @@ Program: `VectorTraits.Sample.NetFw`.
 ```
 VectorTraits.Sample
 
-IsRelease:      True
-EnvironmentVariable(PROCESSOR_IDENTIFIER):      Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
-Environment.ProcessorCount:     8
-Environment.Is64BitProcess:     True
-Environment.OSVersion:  Microsoft Windows NT 6.2.9200.0
-Environment.Version:    4.0.30319.42000
-Stopwatch.Frequency:    10000000
-RuntimeEnvironment.GetRuntimeDirectory: C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
-RuntimeInformation.FrameworkDescription:        .NET Framework 4.8.9167.0
-RuntimeInformation.OSArchitecture:      X64
-RuntimeInformation.OSDescription:       Microsoft Windows 10.0.19045
-IntPtr.Size:    8
-BitConverter.IsLittleEndian:    True
-Vector.IsHardwareAccelerated:   True
-Vector<byte>.Count:     32      # 256bit
-Vector<float>.Count:    8       # 256bit
-VectorTraitsGlobal.InitCheckSum:        -25396097       # 0xFE7C7C7F
-Vector<T>.Assembly.CodeBase:    file:///E:/zylSelf/Code/cs/base/VectorTraits/samples/VectorTraits.Sample.NetFw/bin/Release/System.Numerics.Vectors.DLL
-GetTargetFrameworkDisplayName(VectorTextUtil):  .NET Standard 1.1
-GetTargetFrameworkDisplayName(TraitsOutput):    .NET Framework 4.5
-Vectors.Instance:       VectorTraits256Base
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
+Environment.Version:	4.0.30319.42000
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
+RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9195.0
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045 
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///E:/910Soft/MyCode/VectorTraits_test/RunBenchmarks_All/VectorTraits.Benchmarks.NetFw/bin/Release/System.Numerics.Vectors.DLL
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 1.1
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Framework 4.5
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
+Vectors.BaseInstance:	VectorTraits256Base
 
 src:    <0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7>        # (0000 0001 0002 0003 0004 0005 0006 0007 0000 0001 0002 0003 0004 0005 0006 0007)
 ShiftLeft:      <0, 2, 4, 6, 8, 10, 12, 14, 0, 2, 4, 6, 8, 10, 12, 14>  # (0000 0002 0004 0006 0008 000A 000C 000E 0000 0002 0004 0006 0008 000A 000C 000E)
