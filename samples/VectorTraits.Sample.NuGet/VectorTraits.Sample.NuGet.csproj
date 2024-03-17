@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="VectorTraits" Version="1.0.0" />
+    <PackageReference Include="VectorTraits" Version="2.0.0" />
   </ItemGroup>
 
   <Import Project="..\..\src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems" Label="Shared" />
