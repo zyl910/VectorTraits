@@ -1,6 +1,6 @@
 # ChangeLog (变更日志)
 
-## [2023-?-?] v2.0
+## [2024-03-17] v2.0
 
 - Major: Support for the X86 Sse family instruction set; supplement all vector methods for Vector128/Vector256; also provides innovative vector methods such as check floating number (YIsNaN, YIsInfinity), sign (YCopySign, YSign) (支持 x86的Sse系列指令集; 为 Vector128/Vector256 补充全部的向量方法; 还提供了 浮点数判断(YIsNaN, YIsinfinity)、符号判断(YCopySign, YSign) 等原创的向量方法).
 - Provides the CPU model info (提供CPU型号信息). VectorEnvironment adds members: CpuModelName, CpuFlags, CpuDetectionCommand, CpuDetectionException, CpuDetectionResult .
