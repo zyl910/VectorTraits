@@ -1646,7 +1646,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<double> YSignFloat_Convert(Vector256<double> value) {
                 Vector256<long> signVal = YSign(value);
                 Vector256<double> nanMask = YIsNaN(value).AsDouble();
-                Vector256<double> rt = ConvertToDouble(signVal);
+                Vector256<double> rt = ConvertToDouble_Range52(signVal);
                 rt = Vector256.BitwiseOr(rt, Vector256.BitwiseAnd(nanMask, value)); // ConditionalSelect(nanMask, value, rt);
                 return rt;
             }

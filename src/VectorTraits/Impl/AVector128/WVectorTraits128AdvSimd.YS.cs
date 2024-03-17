@@ -1028,7 +1028,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<double> YSignFloat_Convert(Vector128<double> value) {
                 Vector128<long> signVal = YSign(value);
                 Vector128<double> nanMask = YIsNaN(value).AsDouble();
-                Vector128<double> rt = ConvertToDouble(signVal);
+                Vector128<double> rt = ConvertToDouble_Range52(signVal);
                 rt = BitwiseOr(rt, BitwiseAnd(nanMask, value)); // ConditionalSelect(nanMask, value, rt);
                 return rt;
             }
