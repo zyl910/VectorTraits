@@ -20,6 +20,8 @@
 
 - name: Release note
   items:
+  - name: v2.0 (Chinese)
+    href: ReleaseNote/v2.0_Chinese.md
   - name: v1.0 (Chinese)
     href: ReleaseNote/v1.0_Chinese.md
 
