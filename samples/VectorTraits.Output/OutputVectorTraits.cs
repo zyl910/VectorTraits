@@ -104,6 +104,23 @@ namespace Zyl.VectorTraits.Output {
             WriteLine(tw, indent, "Avx.X64.IsSupported:\t{0}", Avx.X64.IsSupported);
             WriteLine(tw, indent, "Avx2.IsSupported:\t{0}", Avx2.IsSupported);
             WriteLine(tw, indent, "Avx2.X64.IsSupported:\t{0}", Avx2.X64.IsSupported);
+#if NET8_0_OR_GREATER
+            WriteLine(tw, indent, "Avx512BW.IsSupported:\t{0}", Avx512BW.IsSupported);
+            WriteLine(tw, indent, "Avx512BW.VL.IsSupported:\t{0}", Avx512BW.VL.IsSupported);
+            WriteLine(tw, indent, "Avx512BW.X64.IsSupported:\t{0}", Avx512BW.X64.IsSupported);
+            WriteLine(tw, indent, "Avx512CD.IsSupported:\t{0}", Avx512CD.IsSupported);
+            WriteLine(tw, indent, "Avx512CD.VL.IsSupported:\t{0}", Avx512CD.VL.IsSupported);
+            WriteLine(tw, indent, "Avx512CD.X64.IsSupported:\t{0}", Avx512DQ.IsSupported);
+            WriteLine(tw, indent, "Avx512DQ.IsSupported:\t{0}", Avx512DQ.IsSupported);
+            WriteLine(tw, indent, "Avx512DQ.VL.IsSupported:\t{0}", Avx512DQ.VL.IsSupported);
+            WriteLine(tw, indent, "Avx512DQ.X64.IsSupported:\t{0}", Avx512DQ.X64.IsSupported);
+            WriteLine(tw, indent, "Avx512F.IsSupported:\t{0}", Avx512F.IsSupported);
+            WriteLine(tw, indent, "Avx512F.VL.IsSupported:\t{0}", Avx512F.VL.IsSupported);
+            WriteLine(tw, indent, "Avx512F.X64\t.IsSupported:\t{0}", Avx512F.X64.IsSupported);
+            WriteLine(tw, indent, "Avx512Vbmi.IsSupported:\t{0}", Avx512Vbmi.IsSupported);
+            WriteLine(tw, indent, "Avx512Vbmi.VL.IsSupported:\t{0}", Avx512Vbmi.VL.IsSupported);
+            WriteLine(tw, indent, "Avx512Vbmi.X64\t.IsSupported:\t{0}", Avx512Vbmi.X64.IsSupported);
+#endif
 #if NET6_0_OR_GREATER
             WriteLine(tw, indent, "AvxVnni.IsSupported:\t{0}", AvxVnni.IsSupported);
             WriteLine(tw, indent, "AvxVnni.X64.IsSupported:\t{0}", AvxVnni.X64.IsSupported);
@@ -269,6 +286,25 @@ namespace Zyl.VectorTraits.Output {
                 writer.WriteLine("RunInfoVector256s fail! " + ex.ToString());
             }
             writer.WriteLine();
+
+#if NET8_0_OR_GREATER
+            // Vector512s<T> .
+            try {
+                RunInfoVector512s<float>(writer, indent);
+                RunInfoVector512s<double>(writer, indent);
+                RunInfoVector512s<sbyte>(writer, indent);
+                RunInfoVector512s<byte>(writer, indent);
+                RunInfoVector512s<short>(writer, indent);
+                RunInfoVector512s<ushort>(writer, indent);
+                RunInfoVector512s<int>(writer, indent);
+                RunInfoVector512s<uint>(writer, indent);
+                RunInfoVector512s<long>(writer, indent);
+                RunInfoVector512s<ulong>(writer, indent);
+            } catch (Exception ex) {
+                writer.WriteLine("RunInfoVector512s fail! " + ex.ToString());
+            }
+            writer.WriteLine();
+#endif // NET8_0_OR_GREATER
         }
 
         /// <summary>
@@ -698,6 +734,99 @@ namespace Zyl.VectorTraits.Output {
                 WriteLine(writer, indent, "XyzwWNormOne:\t{0}", Vector256s<T>.XyzwWNormOne);
             }
         }
+
+#if NET8_0_OR_GREATER
+        /// <summary>
+        /// Run base - <see cref="Vector512s{T}"/>
+        /// </summary>
+        /// <param name="writer">Output <see cref="TextWriter"/>.</param>
+        /// <param name="indent">The indent.</param>
+        /// <typeparam name="T">The vector element type. T can be any primitive numeric type.</typeparam>
+        public static void RunInfoVector512s<T>(TextWriter writer, string indent) where T : struct {
+            writer.WriteLine(indent + string.Format("-- Vector512s<{0}> (Count={1}) --", typeof(T).Name, Vector512<T>.Count));
+            if (ShowFull) {
+                WriteLine(writer, indent, "ElementByteSize:\t{0}", Vector512s<T>.ElementByteSize);
+            }
+            writer.WriteLine(indent + string.Format("SignBits-ExponentBits-MantissaBits:\t{0}-{1}-{2}", Vector512s<T>.ElementSignBits, Vector512s<T>.ElementExponentBits, Vector512s<T>.ElementMantissaBits));
+            if (ShowFull) {
+                writer.WriteLine(indent + string.Format("SignShift-ExponentShift-MantissaShift:\t{0}-{1}-{2}", Vector512s<T>.ElementSignShift, Vector512s<T>.ElementExponentShift, Vector512s<T>.ElementMantissaShift));
+                WriteLine(writer, indent, "ElementV0:\t{0}", Vector512s<T>.ElementV0);
+                WriteLine(writer, indent, "ElementAllBitsSet:\t{0}", Vector512s<T>.ElementAllBitsSet);
+                WriteLine(writer, indent, "ElementSignMask:\t{0}", Vector512s<T>.ElementSignMask);
+                WriteLine(writer, indent, "ElementExponentMask:\t{0}", Vector512s<T>.ElementExponentMask);
+                WriteLine(writer, indent, "ElementMantissaMask:\t{0}", Vector512s<T>.ElementMantissaMask);
+                WriteLine(writer, indent, "ElementNonSignMask:\t{0}", Vector512s<T>.ElementNonSignMask);
+                WriteLine(writer, indent, "ElementNonExponentMask:\t{0}", Vector512s<T>.ElementNonExponentMask);
+                WriteLine(writer, indent, "ElementNonMantissaMask:\t{0}", Vector512s<T>.ElementNonMantissaMask);
+                WriteLine(writer, indent, "ElementEpsilon:\t{0}", Vector512s<T>.ElementEpsilon);
+                WriteLine(writer, indent, "ElementMaxValue:\t{0}", Vector512s<T>.ElementMaxValue);
+                WriteLine(writer, indent, "ElementMinValue:\t{0}", Vector512s<T>.ElementMinValue);
+                WriteLine(writer, indent, "ElementNaN:\t{0}", Vector512s<T>.ElementNaN);
+                WriteLine(writer, indent, "ElementNegativeInfinity:\t{0}", Vector512s<T>.ElementNegativeInfinity);
+                WriteLine(writer, indent, "ElementPositiveInfinity:\t{0}", Vector512s<T>.ElementPositiveInfinity);
+                WriteLine(writer, indent, "AllBitsSet:\t{0}", Vector512s<T>.AllBitsSet);
+                WriteLine(writer, indent, "SignMask:\t{0}", Vector512s<T>.SignMask);
+                WriteLine(writer, indent, "ExponentMask:\t{0}", Vector512s<T>.ExponentMask);
+                WriteLine(writer, indent, "MantissaMask:\t{0}", Vector512s<T>.MantissaMask);
+                WriteLine(writer, indent, "NonSignMask:\t{0}", Vector512s<T>.NonSignMask);
+                WriteLine(writer, indent, "NonExponentMask:\t{0}", Vector512s<T>.NonExponentMask);
+                WriteLine(writer, indent, "NonMantissaMask:\t{0}", Vector512s<T>.NonMantissaMask);
+                WriteLine(writer, indent, "Epsilon:\t{0}", Vector512s<T>.Epsilon);
+                WriteLine(writer, indent, "MaxValue:\t{0}", Vector512s<T>.MaxValue);
+                WriteLine(writer, indent, "MinValue:\t{0}", Vector512s<T>.MinValue);
+                WriteLine(writer, indent, "NaN:\t{0}", Vector512s<T>.NaN);
+                WriteLine(writer, indent, "NegativeInfinity:\t{0}", Vector512s<T>.NegativeInfinity);
+                WriteLine(writer, indent, "PositiveInfinity:\t{0}", Vector512s<T>.PositiveInfinity);
+                WriteLine(writer, indent, "FixedOne:\t{0}", Vector512s<T>.FixedOne);
+                WriteLine(writer, indent, "E:\t{0}", Vector512s<T>.E);
+                WriteLine(writer, indent, "Pi:\t{0}", Vector512s<T>.Pi);
+                WriteLine(writer, indent, "Tau:\t{0}", Vector512s<T>.Tau);
+                WriteLine(writer, indent, "V0:\t{0}", Vector512s<T>.V0);
+                WriteLine(writer, indent, "V1:\t{0}", Vector512s<T>.V1);
+                WriteLine(writer, indent, "VMaxSByte:\t{0}", Vector512s<T>.VMaxSByte);
+                WriteLine(writer, indent, "VMaxByte:\t{0}", Vector512s<T>.VMaxByte);
+                WriteLine(writer, indent, "VMaxInt16:\t{0}", Vector512s<T>.VMaxInt16);
+                WriteLine(writer, indent, "VMaxUInt16:\t{0}", Vector512s<T>.VMaxUInt16);
+                WriteLine(writer, indent, "VMaxInt32:\t{0}", Vector512s<T>.VMaxInt32);
+                WriteLine(writer, indent, "VMaxUInt32:\t{0}", Vector512s<T>.VMaxUInt32);
+                WriteLine(writer, indent, "V_1:\t{0}", Vector512s<T>.V_1);
+                WriteLine(writer, indent, "VMinSByte:\t{0}", Vector512s<T>.VMinSByte);
+                WriteLine(writer, indent, "VMinInt16:\t{0}", Vector512s<T>.VMinInt16);
+                WriteLine(writer, indent, "VMinInt32:\t{0}", Vector512s<T>.VMinInt32);
+                WriteLine(writer, indent, "VReciprocalMaxSByte:\t{0}", Vector512s<T>.VReciprocalMaxSByte);
+                WriteLine(writer, indent, "VReciprocalMaxByte:\t{0}", Vector512s<T>.VReciprocalMaxByte);
+                WriteLine(writer, indent, "VReciprocalMaxInt16:\t{0}", Vector512s<T>.VReciprocalMaxInt16);
+                WriteLine(writer, indent, "VReciprocalMaxUInt16:\t{0}", Vector512s<T>.VReciprocalMaxUInt16);
+                WriteLine(writer, indent, "VReciprocalMaxInt32:\t{0}", Vector512s<T>.VReciprocalMaxInt32);
+                WriteLine(writer, indent, "VReciprocalMaxUInt32:\t{0}", Vector512s<T>.VReciprocalMaxUInt32);
+            }
+            WriteLine(writer, indent, "Serial:\t{0}", Vector512s<T>.Serial);
+            WriteLine(writer, indent, "SerialDesc:\t{0}", Vector512s<T>.SerialDesc);
+            WriteLine(writer, indent, "SerialNegative:\t{0}", Vector512s<T>.SerialNegative);
+            WriteLine(writer, indent, "Demo:\t{0}", Vector512s<T>.Demo);
+            WriteLine(writer, indent, "MaskBitPosSerial:\t{0}", Vector512s<T>.MaskBitPosSerial);
+            WriteLine(writer, indent, "MaskBitPosSerialRotate:\t{0}", Vector512s<T>.MaskBitPosSerialRotate);
+            WriteLine(writer, indent, "MaskBitsSerial:\t{0}", Vector512s<T>.MaskBitsSerial);
+            WriteLine(writer, indent, "MaskBitsSerialRotate:\t{0}", Vector512s<T>.MaskBitsSerialRotate);
+            if (ShowFull) {
+                WriteLine(writer, indent, "InterlacedSign:\t{0}", Vector512s<T>.InterlacedSign);
+                WriteLine(writer, indent, "InterlacedSignNegative:\t{0}", Vector512s<T>.InterlacedSignNegative);
+                WriteLine(writer, indent, "MaskBits8:\t{0}", Vector512s<T>.MaskBits8);
+                WriteLine(writer, indent, "MaskBits16:\t{0}", Vector512s<T>.MaskBits16);
+                WriteLine(writer, indent, "MaskBits32:\t{0}", Vector512s<T>.MaskBits32);
+                WriteLine(writer, indent, "XyXMask:\t{0}", Vector512s<T>.XyXMask);
+                WriteLine(writer, indent, "XyYMask:\t{0}", Vector512s<T>.XyYMask);
+                WriteLine(writer, indent, "XyzwXMask:\t{0}", Vector512s<T>.XyzwXMask);
+                WriteLine(writer, indent, "XyzwYMask:\t{0}", Vector512s<T>.XyzwYMask);
+                WriteLine(writer, indent, "XyzwZMask:\t{0}", Vector512s<T>.XyzwZMask);
+                WriteLine(writer, indent, "XyzwWMask:\t{0}", Vector512s<T>.XyzwWMask);
+                WriteLine(writer, indent, "XyzwXNormOne:\t{0}", Vector512s<T>.XyzwXNormOne);
+                WriteLine(writer, indent, "XyzwYNormOne:\t{0}", Vector512s<T>.XyzwYNormOne);
+                WriteLine(writer, indent, "XyzwZNormOne:\t{0}", Vector512s<T>.XyzwZNormOne);
+                WriteLine(writer, indent, "XyzwWNormOne:\t{0}", Vector512s<T>.XyzwWNormOne);
+            }
+        }
+#endif // NET8_0_OR_GREATER
 
     }
 }
