@@ -16,7 +16,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         partial class Statics {
 
 #if NET8_0_OR_GREATER
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.Abs_AcceleratedTypes"/>
             public static TypeCodeFlags Abs_AcceleratedTypes {
                 get {
@@ -28,46 +28,43 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Abs(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Abs(Vector512<float> value) {
-                var mask = Vector512Constants.Single_NonSignMask;
-                return Avx.And(mask, value);
+                Vector512<float> mask = Vector512Constants.Single_NonSignMask;
+                return Avx512DQ.And(mask, value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Abs(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> Abs(Vector512<double> value) {
-                var mask = Vector512Constants.Double_NonSignMask;
-                return Avx.And(mask, value);
+                Vector512<double> mask = Vector512Constants.Double_NonSignMask;
+                return Avx512DQ.And(mask, value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Abs(Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> Abs(Vector512<sbyte> value) {
-                return Avx512.Abs(value).AsSByte();
+                return Avx512BW.Abs(value).AsSByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Abs(Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> Abs(Vector512<short> value) {
-                return Avx512.Abs(value).AsInt16();
+                return Avx512BW.Abs(value).AsInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Abs(Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> Abs(Vector512<int> value) {
-                return Avx512.Abs(value).AsInt32();
+                return Avx512F.Abs(value).AsInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Abs(Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> Abs(Vector512<long> value) {
-                // If an integer value is positive or zero, no action is required. Otherwise complement and add 1.
-                Vector512<long> mask = Avx512.CompareGreaterThan(Vector512<long>.Zero, value); // 0>value => value<0
-                Vector512<long> rt = Avx512.Subtract(Avx512.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
-                return rt;
+                return Avx512F.Abs(value).AsInt64();
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.Add_AcceleratedTypes"/>
             public static TypeCodeFlags Add_AcceleratedTypes {
                 get {

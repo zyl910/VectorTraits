@@ -123,6 +123,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 5) = Math.Abs(Unsafe.Add(ref p, 5));
                 Unsafe.Add(ref p, 6) = Math.Abs(Unsafe.Add(ref p, 6));
                 Unsafe.Add(ref p, 7) = Math.Abs(Unsafe.Add(ref p, 7));
+                Unsafe.Add(ref p, 8) = Math.Abs(Unsafe.Add(ref p, 8));
+                Unsafe.Add(ref p, 9) = Math.Abs(Unsafe.Add(ref p, 9));
+                Unsafe.Add(ref p, 10) = Math.Abs(Unsafe.Add(ref p, 10));
+                Unsafe.Add(ref p, 11) = Math.Abs(Unsafe.Add(ref p, 11));
+                Unsafe.Add(ref p, 12) = Math.Abs(Unsafe.Add(ref p, 12));
+                Unsafe.Add(ref p, 13) = Math.Abs(Unsafe.Add(ref p, 13));
+                Unsafe.Add(ref p, 14) = Math.Abs(Unsafe.Add(ref p, 14));
+                Unsafe.Add(ref p, 15) = Math.Abs(Unsafe.Add(ref p, 15));
                 return rt;
             }
 
@@ -135,6 +143,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 1) = Math.Abs(Unsafe.Add(ref p, 1));
                 Unsafe.Add(ref p, 2) = Math.Abs(Unsafe.Add(ref p, 2));
                 Unsafe.Add(ref p, 3) = Math.Abs(Unsafe.Add(ref p, 3));
+                Unsafe.Add(ref p, 4) = Math.Abs(Unsafe.Add(ref p, 4));
+                Unsafe.Add(ref p, 5) = Math.Abs(Unsafe.Add(ref p, 5));
+                Unsafe.Add(ref p, 6) = Math.Abs(Unsafe.Add(ref p, 6));
+                Unsafe.Add(ref p, 7) = Math.Abs(Unsafe.Add(ref p, 7));
                 return rt;
             }
 
@@ -176,6 +188,38 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 29) = BitMath.Abs(Unsafe.Add(ref p, 29));
                 Unsafe.Add(ref p, 30) = BitMath.Abs(Unsafe.Add(ref p, 30));
                 Unsafe.Add(ref p, 31) = BitMath.Abs(Unsafe.Add(ref p, 31));
+                Unsafe.Add(ref p, 32) = BitMath.Abs(Unsafe.Add(ref p, 32));
+                Unsafe.Add(ref p, 33) = BitMath.Abs(Unsafe.Add(ref p, 33));
+                Unsafe.Add(ref p, 34) = BitMath.Abs(Unsafe.Add(ref p, 34));
+                Unsafe.Add(ref p, 35) = BitMath.Abs(Unsafe.Add(ref p, 35));
+                Unsafe.Add(ref p, 36) = BitMath.Abs(Unsafe.Add(ref p, 36));
+                Unsafe.Add(ref p, 37) = BitMath.Abs(Unsafe.Add(ref p, 37));
+                Unsafe.Add(ref p, 38) = BitMath.Abs(Unsafe.Add(ref p, 38));
+                Unsafe.Add(ref p, 39) = BitMath.Abs(Unsafe.Add(ref p, 39));
+                Unsafe.Add(ref p, 40) = BitMath.Abs(Unsafe.Add(ref p, 40));
+                Unsafe.Add(ref p, 41) = BitMath.Abs(Unsafe.Add(ref p, 41));
+                Unsafe.Add(ref p, 42) = BitMath.Abs(Unsafe.Add(ref p, 42));
+                Unsafe.Add(ref p, 43) = BitMath.Abs(Unsafe.Add(ref p, 43));
+                Unsafe.Add(ref p, 44) = BitMath.Abs(Unsafe.Add(ref p, 44));
+                Unsafe.Add(ref p, 45) = BitMath.Abs(Unsafe.Add(ref p, 45));
+                Unsafe.Add(ref p, 46) = BitMath.Abs(Unsafe.Add(ref p, 46));
+                Unsafe.Add(ref p, 47) = BitMath.Abs(Unsafe.Add(ref p, 47));
+                Unsafe.Add(ref p, 48) = BitMath.Abs(Unsafe.Add(ref p, 48));
+                Unsafe.Add(ref p, 49) = BitMath.Abs(Unsafe.Add(ref p, 49));
+                Unsafe.Add(ref p, 50) = BitMath.Abs(Unsafe.Add(ref p, 50));
+                Unsafe.Add(ref p, 51) = BitMath.Abs(Unsafe.Add(ref p, 51));
+                Unsafe.Add(ref p, 52) = BitMath.Abs(Unsafe.Add(ref p, 52));
+                Unsafe.Add(ref p, 53) = BitMath.Abs(Unsafe.Add(ref p, 53));
+                Unsafe.Add(ref p, 54) = BitMath.Abs(Unsafe.Add(ref p, 54));
+                Unsafe.Add(ref p, 55) = BitMath.Abs(Unsafe.Add(ref p, 55));
+                Unsafe.Add(ref p, 56) = BitMath.Abs(Unsafe.Add(ref p, 56));
+                Unsafe.Add(ref p, 57) = BitMath.Abs(Unsafe.Add(ref p, 57));
+                Unsafe.Add(ref p, 58) = BitMath.Abs(Unsafe.Add(ref p, 58));
+                Unsafe.Add(ref p, 59) = BitMath.Abs(Unsafe.Add(ref p, 59));
+                Unsafe.Add(ref p, 60) = BitMath.Abs(Unsafe.Add(ref p, 60));
+                Unsafe.Add(ref p, 61) = BitMath.Abs(Unsafe.Add(ref p, 61));
+                Unsafe.Add(ref p, 62) = BitMath.Abs(Unsafe.Add(ref p, 62));
+                Unsafe.Add(ref p, 63) = BitMath.Abs(Unsafe.Add(ref p, 63));
                 return rt;
             }
 
@@ -200,6 +244,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 13) = BitMath.Abs(Unsafe.Add(ref p, 13));
                 Unsafe.Add(ref p, 14) = BitMath.Abs(Unsafe.Add(ref p, 14));
                 Unsafe.Add(ref p, 15) = BitMath.Abs(Unsafe.Add(ref p, 15));
+                Unsafe.Add(ref p, 16) = BitMath.Abs(Unsafe.Add(ref p, 16));
+                Unsafe.Add(ref p, 17) = BitMath.Abs(Unsafe.Add(ref p, 17));
+                Unsafe.Add(ref p, 18) = BitMath.Abs(Unsafe.Add(ref p, 18));
+                Unsafe.Add(ref p, 19) = BitMath.Abs(Unsafe.Add(ref p, 19));
+                Unsafe.Add(ref p, 20) = BitMath.Abs(Unsafe.Add(ref p, 20));
+                Unsafe.Add(ref p, 21) = BitMath.Abs(Unsafe.Add(ref p, 21));
+                Unsafe.Add(ref p, 22) = BitMath.Abs(Unsafe.Add(ref p, 22));
+                Unsafe.Add(ref p, 23) = BitMath.Abs(Unsafe.Add(ref p, 23));
+                Unsafe.Add(ref p, 24) = BitMath.Abs(Unsafe.Add(ref p, 24));
+                Unsafe.Add(ref p, 25) = BitMath.Abs(Unsafe.Add(ref p, 25));
+                Unsafe.Add(ref p, 26) = BitMath.Abs(Unsafe.Add(ref p, 26));
+                Unsafe.Add(ref p, 27) = BitMath.Abs(Unsafe.Add(ref p, 27));
+                Unsafe.Add(ref p, 28) = BitMath.Abs(Unsafe.Add(ref p, 28));
+                Unsafe.Add(ref p, 29) = BitMath.Abs(Unsafe.Add(ref p, 29));
+                Unsafe.Add(ref p, 30) = BitMath.Abs(Unsafe.Add(ref p, 30));
+                Unsafe.Add(ref p, 31) = BitMath.Abs(Unsafe.Add(ref p, 31));
                 return rt;
             }
 
@@ -216,6 +276,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 5) = BitMath.Abs(Unsafe.Add(ref p, 5));
                 Unsafe.Add(ref p, 6) = BitMath.Abs(Unsafe.Add(ref p, 6));
                 Unsafe.Add(ref p, 7) = BitMath.Abs(Unsafe.Add(ref p, 7));
+                Unsafe.Add(ref p, 8) = BitMath.Abs(Unsafe.Add(ref p, 8));
+                Unsafe.Add(ref p, 9) = BitMath.Abs(Unsafe.Add(ref p, 9));
+                Unsafe.Add(ref p, 10) = BitMath.Abs(Unsafe.Add(ref p, 10));
+                Unsafe.Add(ref p, 11) = BitMath.Abs(Unsafe.Add(ref p, 11));
+                Unsafe.Add(ref p, 12) = BitMath.Abs(Unsafe.Add(ref p, 12));
+                Unsafe.Add(ref p, 13) = BitMath.Abs(Unsafe.Add(ref p, 13));
+                Unsafe.Add(ref p, 14) = BitMath.Abs(Unsafe.Add(ref p, 14));
+                Unsafe.Add(ref p, 15) = BitMath.Abs(Unsafe.Add(ref p, 15));
                 return rt;
             }
 
@@ -228,6 +296,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 1) = BitMath.Abs(Unsafe.Add(ref p, 1));
                 Unsafe.Add(ref p, 2) = BitMath.Abs(Unsafe.Add(ref p, 2));
                 Unsafe.Add(ref p, 3) = BitMath.Abs(Unsafe.Add(ref p, 3));
+                Unsafe.Add(ref p, 4) = BitMath.Abs(Unsafe.Add(ref p, 4));
+                Unsafe.Add(ref p, 5) = BitMath.Abs(Unsafe.Add(ref p, 5));
+                Unsafe.Add(ref p, 6) = BitMath.Abs(Unsafe.Add(ref p, 6));
+                Unsafe.Add(ref p, 7) = BitMath.Abs(Unsafe.Add(ref p, 7));
                 return rt;
             }
 

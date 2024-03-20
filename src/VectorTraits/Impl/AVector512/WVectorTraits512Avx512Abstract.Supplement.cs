@@ -15,7 +15,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
 
     partial class WVectorTraits512Avx512Abstract {
 #if NET8_0_OR_GREATER
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.Abs_AcceleratedTypes"/>
         public override TypeCodeFlags Abs_AcceleratedTypes {
             get {
@@ -60,7 +60,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Abs(value);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.Add_AcceleratedTypes"/>
         public override TypeCodeFlags Add_AcceleratedTypes {
             get {
