@@ -273,7 +273,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
         /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
         /// <seealso cref="Vector512.ExtractMostSignificantBits{T}(Vector512{T})" />
-        uint ExtractMostSignificantBits(Vector512<float> vector);
+        ulong ExtractMostSignificantBits(Vector512<float> vector);
 
         /// <summary>
         /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
@@ -283,7 +283,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
         /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
         /// <seealso cref="Vector512.ExtractMostSignificantBits{T}(Vector512{T})" />
-        uint ExtractMostSignificantBits(Vector512<double> vector);
+        ulong ExtractMostSignificantBits(Vector512<double> vector);
 
         /// <summary>
         /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
@@ -293,7 +293,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
         /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
         /// <seealso cref="Vector512.ExtractMostSignificantBits{T}(Vector512{T})" />
-        uint ExtractMostSignificantBits(Vector512<sbyte> vector);
+        ulong ExtractMostSignificantBits(Vector512<sbyte> vector);
 
         /// <summary>
         /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
@@ -303,7 +303,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
         /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
         /// <seealso cref="Vector512.ExtractMostSignificantBits{T}(Vector512{T})" />
-        uint ExtractMostSignificantBits(Vector512<byte> vector);
+        ulong ExtractMostSignificantBits(Vector512<byte> vector);
 
         /// <summary>
         /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
@@ -313,7 +313,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
         /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
         /// <seealso cref="Vector512.ExtractMostSignificantBits{T}(Vector512{T})" />
-        uint ExtractMostSignificantBits(Vector512<short> vector);
+        ulong ExtractMostSignificantBits(Vector512<short> vector);
 
         /// <summary>
         /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
@@ -323,7 +323,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
         /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
         /// <seealso cref="Vector512.ExtractMostSignificantBits{T}(Vector512{T})" />
-        uint ExtractMostSignificantBits(Vector512<ushort> vector);
+        ulong ExtractMostSignificantBits(Vector512<ushort> vector);
 
         /// <summary>
         /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
@@ -333,7 +333,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
         /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
         /// <seealso cref="Vector512.ExtractMostSignificantBits{T}(Vector512{T})" />
-        uint ExtractMostSignificantBits(Vector512<int> vector);
+        ulong ExtractMostSignificantBits(Vector512<int> vector);
 
         /// <summary>
         /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
@@ -343,7 +343,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
         /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
         /// <seealso cref="Vector512.ExtractMostSignificantBits{T}(Vector512{T})" />
-        uint ExtractMostSignificantBits(Vector512<uint> vector);
+        ulong ExtractMostSignificantBits(Vector512<uint> vector);
 
         /// <summary>
         /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
@@ -353,7 +353,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
         /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
         /// <seealso cref="Vector512.ExtractMostSignificantBits{T}(Vector512{T})" />
-        uint ExtractMostSignificantBits(Vector512<long> vector);
+        ulong ExtractMostSignificantBits(Vector512<long> vector);
 
         /// <summary>
         /// Extracts the most significant bit from each element in a vector (从向量的每个元素中提取最高有效位).
@@ -363,7 +363,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>The packed most significant bits extracted from the elements in <paramref name="vector" /> (从 <paramref name="vector" /> 中各元素中提取的最高有效位的紧缩值).</returns>
         /// <seealso cref="ExtractMostSignificantBits_AcceleratedTypes"/>
         /// <seealso cref="Vector512.ExtractMostSignificantBits{T}(Vector512{T})" />
-        uint ExtractMostSignificantBits(Vector512<ulong> vector);
+        ulong ExtractMostSignificantBits(Vector512<ulong> vector);
 
 
         /// <summary>
