@@ -18,7 +18,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="Vector256s.YShuffleG4X2{T}(Vector256{T}, Vector256{T}, ShuffleControlG4)"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         [CLSCompliant(false)]
-        public static (Vector256<T> Result0, Vector256<T> Result1) YShuffleG4X2<T>(this IWVectorTraits256 athis, Vector256<T> source0, Vector256<T> source1, ShuffleControlG4 control) where T : struct {
+        public static (Vector256<T> Result0, Vector256<T> Result1) YShuffleG4X2<T>(this IWVectorTraits256 athis, Vector256<T> source0, Vector256<T> source1, [ConstantExpected] ShuffleControlG4 control) where T : struct {
             if (typeof(float) == typeof(T)) {
                 (var result0, var result1) = athis.YShuffleG4X2((Vector256<float>)(object)source0, (Vector256<float>)(object)source1, control);
                 return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
@@ -127,7 +127,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="Vector256s.YShuffleG4X2_Const{T}(Vector256{T}, Vector256{T}, ShuffleControlG4)"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         [CLSCompliant(false)]
-        public static (Vector256<T> Result0, Vector256<T> Result1) YShuffleG4X2_Const<T>(this IWVectorTraits256 athis, Vector256<T> source0, Vector256<T> source1, ShuffleControlG4 control) where T : struct {
+        public static (Vector256<T> Result0, Vector256<T> Result1) YShuffleG4X2_Const<T>(this IWVectorTraits256 athis, Vector256<T> source0, Vector256<T> source1, [ConstantExpected] ShuffleControlG4 control) where T : struct {
             if (typeof(float) == typeof(T)) {
                 (var result0, var result1) = athis.YShuffleG4X2_Const((Vector256<float>)(object)source0, (Vector256<float>)(object)source1, control);
                 return ((Vector256<T>)(object)result0, (Vector256<T>)(object)result1);
