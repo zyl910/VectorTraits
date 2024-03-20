@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.Intrinsics;
 #endif
 using System.Text;
+using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits {
     /// <summary>
@@ -107,10 +108,21 @@ namespace Zyl.VectorTraits {
             writer.WriteLine(indent + string.Format("VectorEnvironment.SupportedInstructionSets:\t{0}", VectorEnvironment.SupportedInstructionSets));
 #if NETCOREAPP3_0_OR_GREATER
             writer.WriteLine(indent + string.Format("Vector128s.Instance:\t{0}\t// {1}", Vector128s.Instance.GetType().Name, Vector128s.Instance.UsedInstructionSets));
+            bool flag;
+#if NET7_0_OR_GREATER
+            flag = Vector256.IsHardwareAccelerated;
+#else
+            flag = Vector<byte>.Count >= Vector256<byte>.Count;
+#endif // NET7_0_OR_GREATER
             if (Vector<byte>.Count >= Vector256<byte>.Count) {
                 writer.WriteLine(indent + string.Format("Vector256s.Instance:\t{0}\t// {1}", Vector256s.Instance.GetType().Name, Vector256s.Instance.UsedInstructionSets));
             }
 #endif // NETCOREAPP3_0_OR_GREATER
+#if NET8_0_OR_GREATER
+            if (Vector512.IsHardwareAccelerated) {
+                writer.WriteLine(indent + string.Format("Vector512s.Instance:\t{0}\t// {1}", Vector512s.Instance.GetType().Name, Vector512s.Instance.UsedInstructionSets));
+            }
+#endif // NET8_0_OR_GREATER
             writer.WriteLine(indent + string.Format("Vectors.Instance:\t{0}\t// {1}", Vectors.Instance.GetType().Name, Vectors.Instance.UsedInstructionSets));
             //writer.WriteLine();
         }
