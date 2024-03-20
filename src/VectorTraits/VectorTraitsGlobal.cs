@@ -87,6 +87,21 @@ namespace Zyl.VectorTraits {
 
 #endif // NETCOREAPP3_0_OR_GREATER
 
+#if NET8_0_OR_GREATER
+            // Vector512
+            m_InitCheckSum += Vector512s<sbyte>.Demo.AsInt32().GetElement(0);
+            m_InitCheckSum += Vector512s<byte>.Demo.AsInt32().GetElement(0);
+            m_InitCheckSum += Vector512s<short>.Demo.AsInt32().GetElement(0);
+            m_InitCheckSum += Vector512s<ushort>.Demo.AsInt32().GetElement(0);
+            m_InitCheckSum += Vector512s<int>.Demo.AsInt32().GetElement(0);
+            m_InitCheckSum += Vector512s<uint>.Demo.AsInt32().GetElement(0);
+            m_InitCheckSum += Vector512s<long>.Demo.AsInt32().GetElement(0);
+            m_InitCheckSum += Vector512s<ulong>.Demo.AsInt32().GetElement(0);
+            m_InitCheckSum += Vector512s<float>.Demo.AsInt32().GetElement(0);
+            m_InitCheckSum += Vector512s<double>.Demo.AsInt32().GetElement(0);
+            m_InitCheckSum += Vector512Constants.Shuffle_UInt16_Multiplier.AsInt32().GetElement(0);
+#endif // NET8_0_OR_GREATER
+
         }
     }
 
