@@ -1,0 +1,3025 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+#if !NET7_0_OR_GREATER
+using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
+#endif // !NET7_0_OR_GREATER
+using System.Runtime.CompilerServices;
+using System.Text;
+#if NETCOREAPP3_0_OR_GREATER
+using System.Runtime.Intrinsics;
+#endif
+using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Impl.AVector512;
+
+namespace Zyl.VectorTraits {
+    using BaseStatics = WVectorTraits512Base.Statics;
+
+    partial class Vector512s {
+#if NET8_0_OR_GREATER
+
+        /// <inheritdoc cref="IWVectorTraits512.YBitToByte_IsAccelerated"/>
+        public static bool YBitToByte_IsAccelerated {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YBitToByte_IsAccelerated;
+#else
+                return _instance.YBitToByte_IsAccelerated;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YBitToByte"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YBitToByte(uint value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YBitToByte(value);
+#else
+            return _instance.YBitToByte(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YBitToInt16_IsAccelerated"/>
+        public static bool YBitToInt16_IsAccelerated {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YBitToInt16_IsAccelerated;
+#else
+                return _instance.YBitToInt16_IsAccelerated;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YBitToInt16"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YBitToInt16(uint value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YBitToInt16(value);
+#else
+            return _instance.YBitToInt16(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YBitToInt32_IsAccelerated"/>
+        public static bool YBitToInt32_IsAccelerated {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YBitToInt32_IsAccelerated;
+#else
+                return _instance.YBitToInt32_IsAccelerated;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YBitToInt32"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YBitToInt32(uint value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YBitToInt32(value);
+#else
+            return _instance.YBitToInt32(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YBitToInt64_IsAccelerated"/>
+        public static bool YBitToInt64_IsAccelerated {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YBitToInt64_IsAccelerated;
+#else
+                return _instance.YBitToInt64_IsAccelerated;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YBitToInt64"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YBitToInt64(uint value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YBitToInt64(value);
+#else
+            return _instance.YBitToInt64(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YClamp_AcceleratedTypes"/>
+        public static TypeCodeFlags YClamp_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YClamp_AcceleratedTypes;
+#else
+                return _instance.YClamp_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YClamp(Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YClamp(Vector512<float> value, Vector512<float> amin, Vector512<float> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
+            return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YClamp(Vector512{double}, Vector512{double}, Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YClamp(Vector512<double> value, Vector512<double> amin, Vector512<double> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
+            return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YClamp(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YClamp(Vector512<sbyte> value, Vector512<sbyte> amin, Vector512<sbyte> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
+            return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YClamp(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YClamp(Vector512<byte> value, Vector512<byte> amin, Vector512<byte> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
+            return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YClamp(Vector512{short}, Vector512{short}, Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YClamp(Vector512<short> value, Vector512<short> amin, Vector512<short> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
+            return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YClamp(Vector512{ushort}, Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YClamp(Vector512<ushort> value, Vector512<ushort> amin, Vector512<ushort> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
+            return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YClamp(Vector512{int}, Vector512{int}, Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YClamp(Vector512<int> value, Vector512<int> amin, Vector512<int> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
+            return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YClamp(Vector512{uint}, Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YClamp(Vector512<uint> value, Vector512<uint> amin, Vector512<uint> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
+            return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YClamp(Vector512{long}, Vector512{long}, Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YClamp(Vector512<long> value, Vector512<long> amin, Vector512<long> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
+            return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YClamp(Vector512{ulong}, Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YClamp(Vector512<ulong> value, Vector512<ulong> amin, Vector512<ulong> amax) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YClamp(value, amin, amax);
+#else
+            return _instance.YClamp(value, amin, amax);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YCopySign_AcceleratedTypes"/>
+        public static TypeCodeFlags YCopySign_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YCopySign_AcceleratedTypes;
+#else
+                return _instance.YCopySign_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{float}, Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YCopySign(Vector512<float> value, Vector512<float> sign) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YCopySign(value, sign);
+#else
+            return _instance.YCopySign(value, sign);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{double}, Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YCopySign(Vector512<double> value, Vector512<double> sign) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YCopySign(value, sign);
+#else
+            return _instance.YCopySign(value, sign);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YCopySign(Vector512<sbyte> value, Vector512<sbyte> sign) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YCopySign(value, sign);
+#else
+            return _instance.YCopySign(value, sign);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{short}, Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YCopySign(Vector512<short> value, Vector512<short> sign) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YCopySign(value, sign);
+#else
+            return _instance.YCopySign(value, sign);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{int}, Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YCopySign(Vector512<int> value, Vector512<int> sign) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YCopySign(value, sign);
+#else
+            return _instance.YCopySign(value, sign);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{long}, Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YCopySign(Vector512<long> value, Vector512<long> sign) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YCopySign(value, sign);
+#else
+            return _instance.YCopySign(value, sign);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsAllTrue_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsAllTrue_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsAllTrue_AcceleratedTypes;
+#else
+                return _instance.YIsAllTrue_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsAllTrue{T}(Vector512{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool YIsAllTrue<T>(Vector512<T> value) where T : struct {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsAllTrue(value);
+#else
+            return _instance.YIsAllTrue(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsAnyTrue_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsAnyTrue_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsAnyTrue_AcceleratedTypes;
+#else
+                return _instance.YIsAnyTrue_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsAnyTrue{T}(Vector512{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool YIsAnyTrue<T>(Vector512<T> value) where T : struct {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsAnyTrue(value);
+#else
+            return _instance.YIsAnyTrue(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsEvenInteger_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsEvenInteger_AcceleratedTypes;
+#else
+                return _instance.YIsEvenInteger_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsEvenInteger(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsEvenInteger(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YIsEvenInteger(Vector512<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YIsEvenInteger(Vector512<byte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YIsEvenInteger(Vector512<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YIsEvenInteger(Vector512<ushort> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsEvenInteger(Vector512<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YIsEvenInteger(Vector512<uint> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsEvenInteger(Vector512<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YIsEvenInteger(Vector512<ulong> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsEvenInteger(value);
+#else
+            return _instance.YIsEvenInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsFinite_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsFinite_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsFinite_AcceleratedTypes;
+#else
+                return _instance.YIsFinite_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsFinite(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsFinite(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsFinite(value);
+#else
+            return _instance.YIsFinite(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsFinite(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsFinite(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsFinite(value);
+#else
+            return _instance.YIsFinite(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsInfinity_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsInfinity_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsInfinity_AcceleratedTypes;
+#else
+                return _instance.YIsInfinity_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsInfinity(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsInfinity(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsInfinity(value);
+#else
+            return _instance.YIsInfinity(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsInfinity(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsInfinity(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsInfinity(value);
+#else
+            return _instance.YIsInfinity(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsInfinityOrNaN_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsInfinityOrNaN_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsInfinityOrNaN_AcceleratedTypes;
+#else
+                return _instance.YIsInfinityOrNaN_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsInfinityOrNaN(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsInfinityOrNaN(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsInfinityOrNaN(value);
+#else
+            return _instance.YIsInfinityOrNaN(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsInfinityOrNaN(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsInfinityOrNaN(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsInfinityOrNaN(value);
+#else
+            return _instance.YIsInfinityOrNaN(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsInteger_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsInteger_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsInteger_AcceleratedTypes;
+#else
+                return _instance.YIsInteger_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsInteger(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsInteger(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsInteger(value);
+#else
+            return _instance.YIsInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsInteger(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsInteger(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsInteger(value);
+#else
+            return _instance.YIsInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNaN_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNaN_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNaN_AcceleratedTypes;
+#else
+                return _instance.YIsNaN_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNaN(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsNaN(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNaN(value);
+#else
+            return _instance.YIsNaN(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNaN(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsNaN(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNaN(value);
+#else
+            return _instance.YIsNaN(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNegative_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNegative_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNegative_AcceleratedTypes;
+#else
+                return _instance.YIsNegative_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNegative(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsNegative(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNegative(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsNegative(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNegative(Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YIsNegative(Vector512<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNegative(Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YIsNegative(Vector512<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNegative(Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsNegative(Vector512<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNegative(Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsNegative(Vector512<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegative(value);
+#else
+            return _instance.YIsNegative(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNegativeInfinity_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNegativeInfinity_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNegativeInfinity_AcceleratedTypes;
+#else
+                return _instance.YIsNegativeInfinity_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNegativeInfinity(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsNegativeInfinity(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegativeInfinity(value);
+#else
+            return _instance.YIsNegativeInfinity(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNegativeInfinity(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsNegativeInfinity(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegativeInfinity(value);
+#else
+            return _instance.YIsNegativeInfinity(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNegativeZero_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNegativeZero_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNegativeZero_AcceleratedTypes;
+#else
+                return _instance.YIsNegativeZero_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNegativeZero(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsNegativeZero(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegativeZero(value);
+#else
+            return _instance.YIsNegativeZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNegativeZero(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsNegativeZero(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNegativeZero(value);
+#else
+            return _instance.YIsNegativeZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNormal_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNormal_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNormal_AcceleratedTypes;
+#else
+                return _instance.YIsNormal_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNormal(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsNormal(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNormal(value);
+#else
+            return _instance.YIsNormal(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNormal(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsNormal(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNormal(value);
+#else
+            return _instance.YIsNormal(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNotEquals_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNotEquals_AcceleratedTypes;
+#else
+                return _instance.YIsNotEquals_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{float}, Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YIsNotEquals(Vector512<float> left, Vector512<float> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{double}, Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YIsNotEquals(Vector512<double> left, Vector512<double> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YIsNotEquals(Vector512<sbyte> left, Vector512<sbyte> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{byte}, Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YIsNotEquals(Vector512<byte> left, Vector512<byte> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{short}, Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YIsNotEquals(Vector512<short> left, Vector512<short> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YIsNotEquals(Vector512<ushort> left, Vector512<ushort> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{int}, Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsNotEquals(Vector512<int> left, Vector512<int> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YIsNotEquals(Vector512<uint> left, Vector512<uint> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{long}, Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsNotEquals(Vector512<long> left, Vector512<long> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YIsNotEquals(Vector512<ulong> left, Vector512<ulong> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNotEquals(left, right);
+#else
+            return _instance.YIsNotEquals(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNotNaN_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsNotNaN_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsNotNaN_AcceleratedTypes;
+#else
+                return _instance.YIsNotNaN_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNotNaN(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsNotNaN(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNotNaN(value);
+#else
+            return _instance.YIsNotNaN(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsNotNaN(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsNotNaN(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsNotNaN(value);
+#else
+            return _instance.YIsNotNaN(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsOddInteger_AcceleratedTypes
+        {
+            get
+            {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsOddInteger_AcceleratedTypes;
+#else
+                return _instance.YIsOddInteger_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsOddInteger(Vector512<float> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsOddInteger(Vector512<double> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger(Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YIsOddInteger(Vector512<sbyte> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger(Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YIsOddInteger(Vector512<byte> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger(Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YIsOddInteger(Vector512<short> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger(Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YIsOddInteger(Vector512<ushort> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger(Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsOddInteger(Vector512<int> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger(Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YIsOddInteger(Vector512<uint> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger(Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsOddInteger(Vector512<long> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger(Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YIsOddInteger(Vector512<ulong> value)
+        {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsOddInteger(value);
+#else
+            return _instance.YIsOddInteger(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsPositive_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsPositive_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsPositive_AcceleratedTypes;
+#else
+                return _instance.YIsPositive_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsPositive(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsPositive(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositive(value);
+#else
+            return _instance.YIsPositive(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsPositive(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsPositive(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositive(value);
+#else
+            return _instance.YIsPositive(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsPositive(Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YIsPositive(Vector512<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositive(value);
+#else
+            return _instance.YIsPositive(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsPositive(Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YIsPositive(Vector512<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositive(value);
+#else
+            return _instance.YIsPositive(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsPositive(Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsPositive(Vector512<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositive(value);
+#else
+            return _instance.YIsPositive(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsPositive(Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsPositive(Vector512<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositive(value);
+#else
+            return _instance.YIsPositive(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsPositiveInfinity_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsPositiveInfinity_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsPositiveInfinity_AcceleratedTypes;
+#else
+                return _instance.YIsPositiveInfinity_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsPositiveInfinity(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsPositiveInfinity(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositiveInfinity(value);
+#else
+            return _instance.YIsPositiveInfinity(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsPositiveInfinity(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsPositiveInfinity(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsPositiveInfinity(value);
+#else
+            return _instance.YIsPositiveInfinity(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsSubnormal_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsSubnormal_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsSubnormal_AcceleratedTypes;
+#else
+                return _instance.YIsSubnormal_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsSubnormal(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsSubnormal(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsSubnormal(value);
+#else
+            return _instance.YIsSubnormal(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsSubnormal(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsSubnormal(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsSubnormal(value);
+#else
+            return _instance.YIsSubnormal(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsZero_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsZero_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsZero_AcceleratedTypes;
+#else
+                return _instance.YIsZero_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsZero(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsZero(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsZero(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsZero(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsZero(Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YIsZero(Vector512<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsZero(Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YIsZero(Vector512<byte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsZero(Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YIsZero(Vector512<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsZero(Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YIsZero(Vector512<ushort> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsZero(Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsZero(Vector512<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsZero(Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YIsZero(Vector512<uint> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsZero(Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsZero(Vector512<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsZero(Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YIsZero(Vector512<ulong> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZero(value);
+#else
+            return _instance.YIsZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsZeroOrSubnormal_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsZeroOrSubnormal_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsZeroOrSubnormal_AcceleratedTypes;
+#else
+                return _instance.YIsZeroOrSubnormal_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsZeroOrSubnormal(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YIsZeroOrSubnormal(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZeroOrSubnormal(value);
+#else
+            return _instance.YIsZeroOrSubnormal(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YIsZeroOrSubnormal(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YIsZeroOrSubnormal(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsZeroOrSubnormal(value);
+#else
+            return _instance.YIsZeroOrSubnormal(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YMaxNumber_AcceleratedTypes"/>
+        public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YMaxNumber_AcceleratedTypes;
+#else
+                return _instance.YMaxNumber_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YMaxNumber(Vector512{float}, Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YMaxNumber(Vector512<float> left, Vector512<float> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YMaxNumber(left, right);
+#else
+            return _instance.YMaxNumber(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YMaxNumber(Vector512{double}, Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YMaxNumber(Vector512<double> left, Vector512<double> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YMaxNumber(left, right);
+#else
+            return _instance.YMaxNumber(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YMinNumber_AcceleratedTypes"/>
+        public static TypeCodeFlags YMinNumber_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YMinNumber_AcceleratedTypes;
+#else
+                return _instance.YMinNumber_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YMinNumber(Vector512{float}, Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YMinNumber(Vector512<float> left, Vector512<float> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YMinNumber(left, right);
+#else
+            return _instance.YMinNumber(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YMinNumber(Vector512{double}, Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YMinNumber(Vector512<double> left, Vector512<double> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YMinNumber(left, right);
+#else
+            return _instance.YMinNumber(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate_AcceleratedTypes"/>
+        public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YNarrowSaturate_AcceleratedTypes;
+#else
+                return _instance.YNarrowSaturate_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate_FullAcceleratedTypes"/>
+        public static TypeCodeFlags YNarrowSaturate_FullAcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YNarrowSaturate_FullAcceleratedTypes;
+#else
+                return _instance.YNarrowSaturate_FullAcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{short}, Vector512{short})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YNarrowSaturate(Vector512<short> lower, Vector512<short> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturate(lower, upper);
+#else
+            return _instance.YNarrowSaturate(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{ushort}, Vector512{ushort})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YNarrowSaturate(Vector512<ushort> lower, Vector512<ushort> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturate(lower, upper);
+#else
+            return _instance.YNarrowSaturate(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{int}, Vector512{int})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YNarrowSaturate(Vector512<int> lower, Vector512<int> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturate(lower, upper);
+#else
+            return _instance.YNarrowSaturate(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{uint}, Vector512{uint})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YNarrowSaturate(Vector512<uint> lower, Vector512<uint> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturate(lower, upper);
+#else
+            return _instance.YNarrowSaturate(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{long}, Vector512{long})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YNarrowSaturate(Vector512<long> lower, Vector512<long> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturate(lower, upper);
+#else
+            return _instance.YNarrowSaturate(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{ulong}, Vector512{ulong})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YNarrowSaturate(Vector512<ulong> lower, Vector512<ulong> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturate(lower, upper);
+#else
+            return _instance.YNarrowSaturate(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturateUnsigned_AcceleratedTypes"/>
+        public static TypeCodeFlags YNarrowSaturateUnsigned_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YNarrowSaturateUnsigned_AcceleratedTypes;
+#else
+                return _instance.YNarrowSaturateUnsigned_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturateUnsigned_FullAcceleratedTypes"/>
+        public static TypeCodeFlags YNarrowSaturateUnsigned_FullAcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YNarrowSaturateUnsigned_FullAcceleratedTypes;
+#else
+                return _instance.YNarrowSaturateUnsigned_FullAcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturateUnsigned(Vector512{short}, Vector512{short})" />
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YNarrowSaturateUnsigned(Vector512<short> lower, Vector512<short> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturateUnsigned(lower, upper);
+#else
+            return _instance.YNarrowSaturateUnsigned(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturateUnsigned(Vector512{int}, Vector512{int})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YNarrowSaturateUnsigned(Vector512<int> lower, Vector512<int> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturateUnsigned(lower, upper);
+#else
+            return _instance.YNarrowSaturateUnsigned(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturateUnsigned(Vector512{long}, Vector512{long})" />
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YNarrowSaturateUnsigned(Vector512<long> lower, Vector512<long> upper) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YNarrowSaturateUnsigned(lower, upper);
+#else
+            return _instance.YNarrowSaturateUnsigned(lower, upper);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YOrNot_AcceleratedTypes"/>
+        public static TypeCodeFlags YOrNot_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YOrNot_AcceleratedTypes;
+#else
+                return _instance.YOrNot_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YOrNot{T}(Vector512{T}, Vector512{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<T> YOrNot<T>(Vector512<T> left, Vector512<T> right) where T : struct {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
+            return BaseStatics.YOrNot(left, right);
+#else
+            return _instance.YOrNot(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YRoundToZero_AcceleratedTypes"/>
+        public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YRoundToZero_AcceleratedTypes;
+#else
+                return _instance.YRoundToZero_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YRoundToZero(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YRoundToZero(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToZero(value);
+#else
+            return _instance.YRoundToZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YRoundToZero(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YRoundToZero(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToZero(value);
+#else
+            return _instance.YRoundToZero(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2_AcceleratedTypes"/>
+        public static TypeCodeFlags YShuffleG2_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YShuffleG2_AcceleratedTypes;
+#else
+                return _instance.YShuffleG2_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2(Vector512{float}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YShuffleG2(Vector512<float> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2(source, control);
+#else
+            return _instance.YShuffleG2(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2(Vector512{double}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YShuffleG2(Vector512<double> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2(source, control);
+#else
+            return _instance.YShuffleG2(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2(Vector512{sbyte}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YShuffleG2(Vector512<sbyte> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2(source, control);
+#else
+            return _instance.YShuffleG2(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2(Vector512{byte}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YShuffleG2(Vector512<byte> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2(source, control);
+#else
+            return _instance.YShuffleG2(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2(Vector512{short}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YShuffleG2(Vector512<short> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2(source, control);
+#else
+            return _instance.YShuffleG2(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2(Vector512{ushort}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YShuffleG2(Vector512<ushort> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2(source, control);
+#else
+            return _instance.YShuffleG2(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2(Vector512{int}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YShuffleG2(Vector512<int> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2(source, control);
+#else
+            return _instance.YShuffleG2(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2(Vector512{uint}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YShuffleG2(Vector512<uint> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2(source, control);
+#else
+            return _instance.YShuffleG2(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2(Vector512{long}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YShuffleG2(Vector512<long> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2(source, control);
+#else
+            return _instance.YShuffleG2(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2(Vector512{ulong}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YShuffleG2(Vector512<ulong> source, ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2(source, control);
+#else
+            return _instance.YShuffleG2(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+#if !REDUCE_MEMORY_USAGE
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2_Const(Vector512{float}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YShuffleG2_Const(Vector512<float> source, [ConstantExpected] ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2_Const(Vector512{double}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YShuffleG2_Const(Vector512<double> source, [ConstantExpected] ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2_Const(Vector512{sbyte}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YShuffleG2_Const(Vector512<sbyte> source, [ConstantExpected] ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2_Const(Vector512{byte}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YShuffleG2_Const(Vector512<byte> source, [ConstantExpected] ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2_Const(Vector512{short}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YShuffleG2_Const(Vector512<short> source, [ConstantExpected] ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2_Const(Vector512{ushort}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YShuffleG2_Const(Vector512<ushort> source, [ConstantExpected] ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2_Const(Vector512{int}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YShuffleG2_Const(Vector512<int> source, [ConstantExpected] ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2_Const(Vector512{uint}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YShuffleG2_Const(Vector512<uint> source, [ConstantExpected] ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2_Const(Vector512{long}, ShuffleControlG2)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YShuffleG2_Const(Vector512<long> source, [ConstantExpected] ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG2_Const(Vector512{ulong}, ShuffleControlG2)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YShuffleG2_Const(Vector512<ulong> source, [ConstantExpected] ShuffleControlG2 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG2_Const(source, control);
+#else
+            return _instance.YShuffleG2_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+#endif // !REDUCE_MEMORY_USAGE
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4_AcceleratedTypes"/>
+        public static TypeCodeFlags YShuffleG4_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YShuffleG4_AcceleratedTypes;
+#else
+                return _instance.YShuffleG4_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4(Vector512{float}, ShuffleControlG4)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YShuffleG4(Vector512<float> source, ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4(source, control);
+#else
+            return _instance.YShuffleG4(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4(Vector512{double}, ShuffleControlG4)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YShuffleG4(Vector512<double> source, ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4(source, control);
+#else
+            return _instance.YShuffleG4(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4(Vector512{sbyte}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YShuffleG4(Vector512<sbyte> source, ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4(source, control);
+#else
+            return _instance.YShuffleG4(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4(Vector512{byte}, ShuffleControlG4)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YShuffleG4(Vector512<byte> source, ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4(source, control);
+#else
+            return _instance.YShuffleG4(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4(Vector512{short}, ShuffleControlG4)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YShuffleG4(Vector512<short> source, ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4(source, control);
+#else
+            return _instance.YShuffleG4(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4(Vector512{ushort}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YShuffleG4(Vector512<ushort> source, ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4(source, control);
+#else
+            return _instance.YShuffleG4(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4(Vector512{int}, ShuffleControlG4)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YShuffleG4(Vector512<int> source, ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4(source, control);
+#else
+            return _instance.YShuffleG4(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4(Vector512{uint}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YShuffleG4(Vector512<uint> source, ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4(source, control);
+#else
+            return _instance.YShuffleG4(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4(Vector512{long}, ShuffleControlG4)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YShuffleG4(Vector512<long> source, ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4(source, control);
+#else
+            return _instance.YShuffleG4(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4(Vector512{ulong}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YShuffleG4(Vector512<ulong> source, ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4(source, control);
+#else
+            return _instance.YShuffleG4(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4_Const(Vector512{float}, ShuffleControlG4)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YShuffleG4_Const(Vector512<float> source, [ConstantExpected] ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4_Const(source, control);
+#else
+            return _instance.YShuffleG4_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4_Const(Vector512{double}, ShuffleControlG4)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YShuffleG4_Const(Vector512<double> source, [ConstantExpected] ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4_Const(source, control);
+#else
+            return _instance.YShuffleG4_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4_Const(Vector512{sbyte}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YShuffleG4_Const(Vector512<sbyte> source, [ConstantExpected] ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4_Const(source, control);
+#else
+            return _instance.YShuffleG4_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4_Const(Vector512{byte}, ShuffleControlG4)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YShuffleG4_Const(Vector512<byte> source, [ConstantExpected] ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4_Const(source, control);
+#else
+            return _instance.YShuffleG4_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4_Const(Vector512{short}, ShuffleControlG4)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YShuffleG4_Const(Vector512<short> source, [ConstantExpected] ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4_Const(source, control);
+#else
+            return _instance.YShuffleG4_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4_Const(Vector512{ushort}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YShuffleG4_Const(Vector512<ushort> source, [ConstantExpected] ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4_Const(source, control);
+#else
+            return _instance.YShuffleG4_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4_Const(Vector512{int}, ShuffleControlG4)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YShuffleG4_Const(Vector512<int> source, [ConstantExpected] ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4_Const(source, control);
+#else
+            return _instance.YShuffleG4_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4_Const(Vector512{uint}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YShuffleG4_Const(Vector512<uint> source, [ConstantExpected] ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4_Const(source, control);
+#else
+            return _instance.YShuffleG4_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4_Const(Vector512{long}, ShuffleControlG4)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YShuffleG4_Const(Vector512<long> source, [ConstantExpected] ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4_Const(source, control);
+#else
+            return _instance.YShuffleG4_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4_Const(Vector512{ulong}, ShuffleControlG4)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YShuffleG4_Const(Vector512<ulong> source, [ConstantExpected] ShuffleControlG4 control) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4_Const(source, control);
+#else
+            return _instance.YShuffleG4_Const(source, control);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2_AcceleratedTypes"/>
+        public static TypeCodeFlags YShuffleG4X2_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YShuffleG4X2_AcceleratedTypes;
+#else
+                return _instance.YShuffleG4X2_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{float}, Vector512{float}, ShuffleControlG4, out Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YShuffleG4X2(Vector512<float> source0, Vector512<float> source1, ShuffleControlG4 control, out Vector512<float> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{double}, Vector512{double}, ShuffleControlG4, out Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YShuffleG4X2(Vector512<double> source0, Vector512<double> source1, ShuffleControlG4 control, out Vector512<double> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{sbyte}, Vector512{sbyte}, ShuffleControlG4, out Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YShuffleG4X2(Vector512<sbyte> source0, Vector512<sbyte> source1, ShuffleControlG4 control, out Vector512<sbyte> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{byte}, Vector512{byte}, ShuffleControlG4, out Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YShuffleG4X2(Vector512<byte> source0, Vector512<byte> source1, ShuffleControlG4 control, out Vector512<byte> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{short}, Vector512{short}, ShuffleControlG4, out Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YShuffleG4X2(Vector512<short> source0, Vector512<short> source1, ShuffleControlG4 control, out Vector512<short> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{ushort}, Vector512{ushort}, ShuffleControlG4, out Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YShuffleG4X2(Vector512<ushort> source0, Vector512<ushort> source1, ShuffleControlG4 control, out Vector512<ushort> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{int}, Vector512{int}, ShuffleControlG4, out Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YShuffleG4X2(Vector512<int> source0, Vector512<int> source1, ShuffleControlG4 control, out Vector512<int> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{uint}, Vector512{uint}, ShuffleControlG4, out Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YShuffleG4X2(Vector512<uint> source0, Vector512<uint> source1, ShuffleControlG4 control, out Vector512<uint> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{long}, Vector512{long}, ShuffleControlG4, out Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YShuffleG4X2(Vector512<long> source0, Vector512<long> source1, ShuffleControlG4 control, out Vector512<long> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{ulong}, Vector512{ulong}, ShuffleControlG4, out Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YShuffleG4X2(Vector512<ulong> source0, Vector512<ulong> source1, ShuffleControlG4 control, out Vector512<ulong> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2_Const(Vector512{float}, Vector512{float}, ShuffleControlG4, out Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YShuffleG4X2_Const(Vector512<float> source0, Vector512<float> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<float> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2_Const(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2_Const(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2_Const(Vector512{double}, Vector512{double}, ShuffleControlG4, out Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YShuffleG4X2_Const(Vector512<double> source0, Vector512<double> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<double> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2_Const(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2_Const(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2_Const(Vector512{sbyte}, Vector512{sbyte}, ShuffleControlG4, out Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YShuffleG4X2_Const(Vector512<sbyte> source0, Vector512<sbyte> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<sbyte> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2_Const(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2_Const(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2_Const(Vector512{byte}, Vector512{byte}, ShuffleControlG4, out Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YShuffleG4X2_Const(Vector512<byte> source0, Vector512<byte> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<byte> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2_Const(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2_Const(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2_Const(Vector512{short}, Vector512{short}, ShuffleControlG4, out Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YShuffleG4X2_Const(Vector512<short> source0, Vector512<short> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<short> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2_Const(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2_Const(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2_Const(Vector512{ushort}, Vector512{ushort}, ShuffleControlG4, out Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YShuffleG4X2_Const(Vector512<ushort> source0, Vector512<ushort> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<ushort> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2_Const(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2_Const(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2_Const(Vector512{int}, Vector512{int}, ShuffleControlG4, out Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YShuffleG4X2_Const(Vector512<int> source0, Vector512<int> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<int> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2_Const(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2_Const(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2_Const(Vector512{uint}, Vector512{uint}, ShuffleControlG4, out Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YShuffleG4X2_Const(Vector512<uint> source0, Vector512<uint> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<uint> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2_Const(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2_Const(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2_Const(Vector512{long}, Vector512{long}, ShuffleControlG4, out Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YShuffleG4X2_Const(Vector512<long> source0, Vector512<long> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<long> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2_Const(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2_Const(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2_Const(Vector512{ulong}, Vector512{ulong}, ShuffleControlG4, out Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YShuffleG4X2_Const(Vector512<ulong> source0, Vector512<ulong> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<ulong> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleG4X2_Const(source0, source1, control, out result1);
+#else
+            return _instance.YShuffleG4X2_Const(source0, source1, control, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_AcceleratedTypes"/>
+        public static TypeCodeFlags YShuffleInsert_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YShuffleInsert_AcceleratedTypes;
+#else
+                return _instance.YShuffleInsert_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{float}, Vector512{float}, Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YShuffleInsert(Vector512<float> back, Vector512<float> vector, Vector512<int> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert(back, vector, indices);
+#else
+            return _instance.YShuffleInsert(back, vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{double}, Vector512{double}, Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YShuffleInsert(Vector512<double> back, Vector512<double> vector, Vector512<long> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert(back, vector, indices);
+#else
+            return _instance.YShuffleInsert(back, vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YShuffleInsert(Vector512<sbyte> back, Vector512<sbyte> vector, Vector512<sbyte> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert(back, vector, indices);
+#else
+            return _instance.YShuffleInsert(back, vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YShuffleInsert(Vector512<byte> back, Vector512<byte> vector, Vector512<byte> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert(back, vector, indices);
+#else
+            return _instance.YShuffleInsert(back, vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{short}, Vector512{short}, Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YShuffleInsert(Vector512<short> back, Vector512<short> vector, Vector512<short> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert(back, vector, indices);
+#else
+            return _instance.YShuffleInsert(back, vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{ushort}, Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YShuffleInsert(Vector512<ushort> back, Vector512<ushort> vector, Vector512<ushort> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert(back, vector, indices);
+#else
+            return _instance.YShuffleInsert(back, vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{int}, Vector512{int}, Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YShuffleInsert(Vector512<int> back, Vector512<int> vector, Vector512<int> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert(back, vector, indices);
+#else
+            return _instance.YShuffleInsert(back, vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{uint}, Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YShuffleInsert(Vector512<uint> back, Vector512<uint> vector, Vector512<uint> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert(back, vector, indices);
+#else
+            return _instance.YShuffleInsert(back, vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{long}, Vector512{long}, Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YShuffleInsert(Vector512<long> back, Vector512<long> vector, Vector512<long> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert(back, vector, indices);
+#else
+            return _instance.YShuffleInsert(back, vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{ulong}, Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YShuffleInsert(Vector512<ulong> back, Vector512<ulong> vector, Vector512<ulong> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert(back, vector, indices);
+#else
+            return _instance.YShuffleInsert(back, vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Args(Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector512<sbyte> indices, out Vector512<sbyte> args0, out Vector512<sbyte> args1, out Vector512<sbyte> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Args(Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector512<byte> indices, out Vector512<byte> args0, out Vector512<byte> args1, out Vector512<byte> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Args(Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector512<short> indices, out Vector512<short> args0, out Vector512<short> args1, out Vector512<short> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Args(Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector512<ushort> indices, out Vector512<ushort> args0, out Vector512<ushort> args1, out Vector512<ushort> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Args(Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector512<int> indices, out Vector512<int> args0, out Vector512<int> args1, out Vector512<int> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Args(Vector512{uint}, out Vector512{uint}, out Vector512{uint}, out Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector512<uint> indices, out Vector512<uint> args0, out Vector512<uint> args1, out Vector512<uint> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Args(Vector512{long}, out Vector512{long}, out Vector512{long}, out Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector512<long> indices, out Vector512<long> args0, out Vector512<long> args1, out Vector512<long> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Args(Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleInsert_Args(Vector512<ulong> indices, out Vector512<ulong> args0, out Vector512<ulong> args1, out Vector512<ulong> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#else
+            _instance.YShuffleInsert_Args(indices, out args0, out args1, out args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Core(Vector512{float}, Vector512{float}, Vector512{int}, Vector512{int}, Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YShuffleInsert_Core(Vector512<float> back, Vector512<float> vector, Vector512<int> args0, Vector512<int> args1, Vector512<int> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Core(Vector512{double}, Vector512{double}, Vector512{long}, Vector512{long}, Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YShuffleInsert_Core(Vector512<double> back, Vector512<double> vector, Vector512<long> args0, Vector512<long> args1, Vector512<long> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Core(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YShuffleInsert_Core(Vector512<sbyte> back, Vector512<sbyte> vector, Vector512<sbyte> args0, Vector512<sbyte> args1, Vector512<sbyte> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Core(Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YShuffleInsert_Core(Vector512<byte> back, Vector512<byte> vector, Vector512<byte> args0, Vector512<byte> args1, Vector512<byte> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Core(Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YShuffleInsert_Core(Vector512<short> back, Vector512<short> vector, Vector512<short> args0, Vector512<short> args1, Vector512<short> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Core(Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YShuffleInsert_Core(Vector512<ushort> back, Vector512<ushort> vector, Vector512<ushort> args0, Vector512<ushort> args1, Vector512<ushort> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Core(Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YShuffleInsert_Core(Vector512<int> back, Vector512<int> vector, Vector512<int> args0, Vector512<int> args1, Vector512<int> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Core(Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YShuffleInsert_Core(Vector512<uint> back, Vector512<uint> vector, Vector512<uint> args0, Vector512<uint> args1, Vector512<uint> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Core(Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YShuffleInsert_Core(Vector512<long> back, Vector512<long> vector, Vector512<long> args0, Vector512<long> args1, Vector512<long> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Core(Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YShuffleInsert_Core(Vector512<ulong> back, Vector512<ulong> vector, Vector512<ulong> args0, Vector512<ulong> args1, Vector512<ulong> args2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#else
+            return _instance.YShuffleInsert_Core(back, vector, args0, args1, args2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_AcceleratedTypes"/>
+        public static TypeCodeFlags YShuffleKernel_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YShuffleKernel_AcceleratedTypes;
+#else
+                return _instance.YShuffleKernel_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{float}, Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YShuffleKernel(Vector512<float> vector, Vector512<int> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel(vector, indices);
+#else
+            return _instance.YShuffleKernel(vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{double}, Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YShuffleKernel(Vector512<double> vector, Vector512<long> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel(vector, indices);
+#else
+            return _instance.YShuffleKernel(vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YShuffleKernel(Vector512<sbyte> vector, Vector512<sbyte> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel(vector, indices);
+#else
+            return _instance.YShuffleKernel(vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{byte}, Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YShuffleKernel(Vector512<byte> vector, Vector512<byte> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel(vector, indices);
+#else
+            return _instance.YShuffleKernel(vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{short}, Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YShuffleKernel(Vector512<short> vector, Vector512<short> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel(vector, indices);
+#else
+            return _instance.YShuffleKernel(vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YShuffleKernel(Vector512<ushort> vector, Vector512<ushort> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel(vector, indices);
+#else
+            return _instance.YShuffleKernel(vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{int}, Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YShuffleKernel(Vector512<int> vector, Vector512<int> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel(vector, indices);
+#else
+            return _instance.YShuffleKernel(vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YShuffleKernel(Vector512<uint> vector, Vector512<uint> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel(vector, indices);
+#else
+            return _instance.YShuffleKernel(vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{long}, Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YShuffleKernel(Vector512<long> vector, Vector512<long> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel(vector, indices);
+#else
+            return _instance.YShuffleKernel(vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YShuffleKernel(Vector512<ulong> vector, Vector512<ulong> indices) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel(vector, indices);
+#else
+            return _instance.YShuffleKernel(vector, indices);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Args(Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleKernel_Args(Vector512<sbyte> indices, out Vector512<sbyte> args0, out Vector512<sbyte> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleKernel_Args(indices, out args0, out args1);
+#else
+            _instance.YShuffleKernel_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Args(Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleKernel_Args(Vector512<byte> indices, out Vector512<byte> args0, out Vector512<byte> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleKernel_Args(indices, out args0, out args1);
+#else
+            _instance.YShuffleKernel_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Args(Vector512{short}, out Vector512{short}, out Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleKernel_Args(Vector512<short> indices, out Vector512<short> args0, out Vector512<short> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleKernel_Args(indices, out args0, out args1);
+#else
+            _instance.YShuffleKernel_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Args(Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleKernel_Args(Vector512<ushort> indices, out Vector512<ushort> args0, out Vector512<ushort> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleKernel_Args(indices, out args0, out args1);
+#else
+            _instance.YShuffleKernel_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Args(Vector512{int}, out Vector512{int}, out Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleKernel_Args(Vector512<int> indices, out Vector512<int> args0, out Vector512<int> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleKernel_Args(indices, out args0, out args1);
+#else
+            _instance.YShuffleKernel_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Args(Vector512{uint}, out Vector512{uint}, out Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleKernel_Args(Vector512<uint> indices, out Vector512<uint> args0, out Vector512<uint> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleKernel_Args(indices, out args0, out args1);
+#else
+            _instance.YShuffleKernel_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Args(Vector512{long}, out Vector512{long}, out Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleKernel_Args(Vector512<long> indices, out Vector512<long> args0, out Vector512<long> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleKernel_Args(indices, out args0, out args1);
+#else
+            _instance.YShuffleKernel_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Args(Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void YShuffleKernel_Args(Vector512<ulong> indices, out Vector512<ulong> args0, out Vector512<ulong> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            BaseStatics.YShuffleKernel_Args(indices, out args0, out args1);
+#else
+            _instance.YShuffleKernel_Args(indices, out args0, out args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{float}, Vector512{int}, Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YShuffleKernel_Core(Vector512<float> vector, Vector512<int> args0, Vector512<int> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel_Core(vector, args0, args1);
+#else
+            return _instance.YShuffleKernel_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{double}, Vector512{long}, Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YShuffleKernel_Core(Vector512<double> vector, Vector512<long> args0, Vector512<long> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel_Core(vector, args0, args1);
+#else
+            return _instance.YShuffleKernel_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YShuffleKernel_Core(Vector512<sbyte> vector, Vector512<sbyte> args0, Vector512<sbyte> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel_Core(vector, args0, args1);
+#else
+            return _instance.YShuffleKernel_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YShuffleKernel_Core(Vector512<byte> vector, Vector512<byte> args0, Vector512<byte> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel_Core(vector, args0, args1);
+#else
+            return _instance.YShuffleKernel_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{short}, Vector512{short}, Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YShuffleKernel_Core(Vector512<short> vector, Vector512<short> args0, Vector512<short> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel_Core(vector, args0, args1);
+#else
+            return _instance.YShuffleKernel_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{ushort}, Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YShuffleKernel_Core(Vector512<ushort> vector, Vector512<ushort> args0, Vector512<ushort> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel_Core(vector, args0, args1);
+#else
+            return _instance.YShuffleKernel_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{int}, Vector512{int}, Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YShuffleKernel_Core(Vector512<int> vector, Vector512<int> args0, Vector512<int> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel_Core(vector, args0, args1);
+#else
+            return _instance.YShuffleKernel_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{uint}, Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YShuffleKernel_Core(Vector512<uint> vector, Vector512<uint> args0, Vector512<uint> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel_Core(vector, args0, args1);
+#else
+            return _instance.YShuffleKernel_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{long}, Vector512{long}, Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YShuffleKernel_Core(Vector512<long> vector, Vector512<long> args0, Vector512<long> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel_Core(vector, args0, args1);
+#else
+            return _instance.YShuffleKernel_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{ulong}, Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YShuffleKernel_Core(Vector512<ulong> vector, Vector512<ulong> args0, Vector512<ulong> args1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YShuffleKernel_Core(vector, args0, args1);
+#else
+            return _instance.YShuffleKernel_Core(vector, args0, args1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YRoundToEven_AcceleratedTypes"/>
+        public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YRoundToEven_AcceleratedTypes;
+#else
+                return _instance.YRoundToEven_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YRoundToEven(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YRoundToEven(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToEven(value);
+#else
+            return _instance.YRoundToEven(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YRoundToEven(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YRoundToEven(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToEven(value);
+#else
+            return _instance.YRoundToEven(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YSign_AcceleratedTypes"/>
+        public static TypeCodeFlags YSign_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YSign_AcceleratedTypes;
+#else
+                return _instance.YSign_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YSign(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YSign(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YSign(value);
+#else
+            return _instance.YSign(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YSign(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YSign(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YSign(value);
+#else
+            return _instance.YSign(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YSign(Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YSign(Vector512<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YSign(value);
+#else
+            return _instance.YSign(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YSign(Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YSign(Vector512<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YSign(value);
+#else
+            return _instance.YSign(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YSign(Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YSign(Vector512<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YSign(value);
+#else
+            return _instance.YSign(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YSign(Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YSign(Vector512<long> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YSign(value);
+#else
+            return _instance.YSign(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YSignFloat_AcceleratedTypes"/>
+        public static TypeCodeFlags YSignFloat_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YSignFloat_AcceleratedTypes;
+#else
+                return _instance.YSignFloat_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YSignFloat(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YSignFloat(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YSignFloat(value);
+#else
+            return _instance.YSignFloat(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YSignFloat(Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YSignFloat(Vector512<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YSignFloat(value);
+#else
+            return _instance.YSignFloat(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+#endif
+    }
+}
