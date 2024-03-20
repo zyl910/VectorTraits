@@ -61,6 +61,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Abs(Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> Abs(Vector256<long> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.Abs(value).AsInt64();
+                }
+#endif // NET8_0_OR_GREATER
                 // If an integer value is positive or zero, no action is required. Otherwise complement and add 1.
                 Vector256<long> mask = Avx2.CompareGreaterThan(Vector256<long>.Zero, value); // 0>value => value<0
                 Vector256<long> rt = Avx2.Subtract(Avx2.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
