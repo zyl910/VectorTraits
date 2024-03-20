@@ -114,6 +114,14 @@ namespace Zyl.VectorTraits {
             if (System.Runtime.Intrinsics.X86.Aes.IsSupported) rt += separator + "Aes";
             if (System.Runtime.Intrinsics.X86.Avx.IsSupported) rt += separator + "Avx";
             if (System.Runtime.Intrinsics.X86.Avx2.IsSupported) rt += separator + "Avx2";
+#if NET8_0_OR_GREATER
+            if (System.Runtime.Intrinsics.X86.Avx512BW.IsSupported) rt += separator + "Avx512BW";
+            if (System.Runtime.Intrinsics.X86.Avx512CD.IsSupported) rt += separator + "Avx512CD";
+            if (System.Runtime.Intrinsics.X86.Avx512DQ.IsSupported) rt += separator + "Avx512DQ";
+            if (System.Runtime.Intrinsics.X86.Avx512F.IsSupported) rt += separator + "Avx512F";
+            if (System.Runtime.Intrinsics.X86.Avx512Vbmi.IsSupported) rt += separator + "Avx512Vbmi";
+            if (System.Runtime.Intrinsics.X86.Avx512F.VL.IsSupported) rt += separator + "Avx512VL";
+#endif // NET8_0_OR_GREATER
 #if NET6_0_OR_GREATER
             // // Error	CA2252	Using 'IsSupported' requires opting into preview features. See https://aka.ms/dotnet-warnings/preview-features for more information.
             // if (System.Runtime.Intrinsics.X86.AvxVnni.IsSupported) rt += separator + "AvxVnni";

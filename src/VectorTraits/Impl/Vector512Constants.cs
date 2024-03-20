@@ -20,7 +20,7 @@ namespace Zyl.VectorTraits.Impl {
     /// The constants used in <see cref="Vector512{T}"/> methods (<see cref="Vector512{T}"/> 方法所用的常数).
     /// </summary>
     public static class Vector512Constants {
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
 
         #region Vectors_T
         // == Vectors_T: originate from Vector512s<T> ==
