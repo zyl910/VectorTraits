@@ -200,7 +200,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return ConditionalSelect<double>(condition.AsDouble(), left, right);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.Divide_AcceleratedTypes"/>
         public override TypeCodeFlags Divide_AcceleratedTypes {
             get {
@@ -220,7 +220,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Divide(left, right);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.Dot_AcceleratedTypes"/>
         public override TypeCodeFlags Dot_AcceleratedTypes {
             get {

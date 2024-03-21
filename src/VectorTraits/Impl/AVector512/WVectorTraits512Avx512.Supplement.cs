@@ -213,7 +213,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                     ).As<ulong, T>();
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.Divide_AcceleratedTypes"/>
             public static TypeCodeFlags Divide_AcceleratedTypes {
                 get {
@@ -224,16 +224,16 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Divide(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Divide(Vector512<float> left, Vector512<float> right) {
-                return Avx.Divide(left, right);
+                return Avx512F.Divide(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Divide(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> Divide(Vector512<double> left, Vector512<double> right) {
-                return Avx.Divide(left, right);
+                return Avx512F.Divide(left, right);
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.Dot_AcceleratedTypes"/>
             public static TypeCodeFlags Dot_AcceleratedTypes {
                 get {
