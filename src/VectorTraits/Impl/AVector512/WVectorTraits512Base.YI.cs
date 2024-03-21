@@ -46,8 +46,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YIsAllTrue{T}(Vector512{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool YIsAllTrue_Basic<T>(Vector512<T> value) where T : struct {
-                ref FixedArray4<long> p = ref Unsafe.As<Vector512<T>, FixedArray4<long>>(ref value);
-                long total = p.I0 & p.I1 & p.I2 & p.I3;
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<T>, FixedArray8<long>>(ref value);
+                long total = p.I0 & p.I1 & p.I2 & p.I3 & p.I4 & p.I5 & p.I6 & p.I7;
                 return -1 == total;
             }
 
@@ -87,8 +87,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YIsAnyTrue{T}(Vector512{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool YIsAnyTrue_Basic<T>(Vector512<T> value) where T : struct {
-                ref FixedArray4<long> p = ref Unsafe.As<Vector512<T>, FixedArray4<long>>(ref value);
-                long total = p.I0 | p.I1 | p.I2 | p.I3;
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<T>, FixedArray8<long>>(ref value);
+                long total = p.I0 | p.I1 | p.I2 | p.I3 | p.I4 | p.I5 | p.I6 | p.I7;
                 return 0 != total;
             }
 

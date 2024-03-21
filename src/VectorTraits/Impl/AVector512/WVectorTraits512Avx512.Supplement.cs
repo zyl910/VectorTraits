@@ -1834,7 +1834,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<long> Negate(Vector512<long> value) {
                 return Avx512.Subtract(Vector512<long>.Zero, value);
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits512.OnesComplement_AcceleratedTypes"/>
             public static TypeCodeFlags OnesComplement_AcceleratedTypes {
@@ -1846,10 +1846,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.OnesComplement{T}(Vector512{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> OnesComplement<T>(Vector512<T> vector) where T : struct {
-                return Avx512.Xor(Vector512s<ulong>.AllBitsSet, vector.AsUInt64()).As<ulong, T>();
+                return Avx512F.Xor(Vector512s<ulong>.AllBitsSet, vector.AsUInt64()).As<ulong, T>();
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.Sqrt_AcceleratedTypes"/>
             public static TypeCodeFlags Sqrt_AcceleratedTypes {
                 get {

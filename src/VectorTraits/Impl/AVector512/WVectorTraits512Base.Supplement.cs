@@ -5129,6 +5129,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 1) = ~Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref p, 2) = ~Unsafe.Add(ref p, 2);
                 Unsafe.Add(ref p, 3) = ~Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref p, 4) = ~Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref p, 5) = ~Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref p, 6) = ~Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref p, 7) = ~Unsafe.Add(ref p, 7);
                 return rt;
             }
 
