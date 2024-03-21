@@ -318,7 +318,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<ulong> temp = Multiply(left, right);
                 return Sum(temp);
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits512.Equals_AcceleratedTypes"/>
             public static TypeCodeFlags Equals_AcceleratedTypes {
@@ -330,76 +330,68 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Equals(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Equals(Vector512<float> left, Vector512<float> right) {
-#if NET5_0_OR_GREATER
-                return Avx.CompareEqual(left, right);
-#else
-                return Avx.Compare(left, right, FloatComparisonMode.OrderedEqualNonSignaling);
-#endif // NET5_0_OR_GREATER
+                return Avx512F.CompareEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Equals(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> Equals(Vector512<double> left, Vector512<double> right) {
-#if NET5_0_OR_GREATER
-                return Avx.CompareEqual(left, right);
-#else
-                return Avx.Compare(left, right, FloatComparisonMode.OrderedEqualNonSignaling);
-#endif // NET5_0_OR_GREATER
+                return Avx512F.CompareEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Equals(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> Equals(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return Avx512.CompareEqual(left, right);
+                return Avx512BW.CompareEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Equals(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> Equals(Vector512<byte> left, Vector512<byte> right) {
-                return Avx512.CompareEqual(left, right);
+                return Avx512BW.CompareEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Equals(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> Equals(Vector512<short> left, Vector512<short> right) {
-                return Avx512.CompareEqual(left, right);
+                return Avx512BW.CompareEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Equals(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> Equals(Vector512<ushort> left, Vector512<ushort> right) {
-                return Avx512.CompareEqual(left, right);
+                return Avx512BW.CompareEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Equals(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> Equals(Vector512<int> left, Vector512<int> right) {
-                return Avx512.CompareEqual(left, right);
+                return Avx512F.CompareEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Equals(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> Equals(Vector512<uint> left, Vector512<uint> right) {
-                return Avx512.CompareEqual(left, right);
+                return Avx512F.CompareEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Equals(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> Equals(Vector512<long> left, Vector512<long> right) {
-                return Avx512.CompareEqual(left, right);
+                return Avx512F.CompareEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Equals(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> Equals(Vector512<ulong> left, Vector512<ulong> right) {
-                return Avx512.CompareEqual(left, right);
+                return Avx512F.CompareEqual(left, right);
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll_AcceleratedTypes"/>
             public static TypeCodeFlags EqualsAll_AcceleratedTypes {
                 get {
