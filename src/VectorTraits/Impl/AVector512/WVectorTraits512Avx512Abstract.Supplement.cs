@@ -132,7 +132,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Add(left, right);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.AndNot_AcceleratedTypes"/>
         public override TypeCodeFlags AndNot_AcceleratedTypes {
             get {
@@ -146,7 +146,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.AndNot(left, right);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.BitwiseAnd_AcceleratedTypes"/>
         public override TypeCodeFlags BitwiseAnd_AcceleratedTypes {
             get {

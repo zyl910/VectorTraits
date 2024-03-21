@@ -136,7 +136,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return Avx512F.Add(left, right);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.AndNot_AcceleratedTypes"/>
             public static TypeCodeFlags AndNot_AcceleratedTypes {
                 get {
@@ -149,16 +149,16 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<T> AndNot<T>(Vector512<T> left, Vector512<T> right) where T : struct {
                 // __m512i _mm512_andnot_si512 (__m512i a, __m512i b)
                 // #include <immintrin.h>
-                // Instruction: vpandn ymm, ymm, ymm
-                // CPUID Flags: AVX2
+                // Instruction: vpandnd zmm, zmm, zmm
+                // CPUID Flags: AVX512F
                 // Description
                 // Compute the bitwise NOT of 512 bits (representing integer data) in a and then AND with b, and store the result in dst.
                 // Operation
-                // dst[255:0] := ((NOT a[255:0]) AND b[255:0])
-                return Avx512.AndNot(right.AsUInt64(), left.AsUInt64()).As<ulong, T>();
+                // dst[511:0] := ((NOT a[511:0]) AND b[511:0])
+                return Avx512F.AndNot(right.AsUInt64(), left.AsUInt64()).As<ulong, T>();
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.BitwiseAnd_AcceleratedTypes"/>
             public static TypeCodeFlags BitwiseAnd_AcceleratedTypes {
                 get {
