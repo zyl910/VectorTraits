@@ -146,7 +146,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.AndNot(left, right);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.BitwiseAnd_AcceleratedTypes"/>
         public override TypeCodeFlags BitwiseAnd_AcceleratedTypes {
             get {
@@ -200,7 +200,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return ConditionalSelect<double>(condition.AsDouble(), left, right);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.Divide_AcceleratedTypes"/>
         public override TypeCodeFlags Divide_AcceleratedTypes {
             get {

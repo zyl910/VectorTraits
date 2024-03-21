@@ -158,7 +158,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return Avx512F.AndNot(right.AsUInt64(), left.AsUInt64()).As<ulong, T>();
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.BitwiseAnd_AcceleratedTypes"/>
             public static TypeCodeFlags BitwiseAnd_AcceleratedTypes {
                 get {
@@ -169,7 +169,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.BitwiseAnd{T}(Vector512{T}, Vector512{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> BitwiseAnd<T>(Vector512<T> left, Vector512<T> right) where T : struct {
-                return Avx512.And(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
+                return Avx512F.And(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
             }
 
 
@@ -183,7 +183,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.BitwiseOr{T}(Vector512{T}, Vector512{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> BitwiseOr<T>(Vector512<T> left, Vector512<T> right) where T : struct {
-                return Avx512.Or(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
+                return Avx512F.Or(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
             }
 
 
@@ -208,12 +208,12 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> ConditionalSelect_OrAnd<T>(Vector512<T> condition, Vector512<T> left, Vector512<T> right) where T : struct {
                 // result = (left & condition) | (right & ~condition);
-                return Avx512.Or(Avx512.And(condition.AsUInt64(), left.AsUInt64())
-                    , Avx512.AndNot(condition.AsUInt64(), right.AsUInt64())
+                return Avx512F.Or(Avx512F.And(condition.AsUInt64(), left.AsUInt64())
+                    , Avx512F.AndNot(condition.AsUInt64(), right.AsUInt64())
                     ).As<ulong, T>();
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.Divide_AcceleratedTypes"/>
             public static TypeCodeFlags Divide_AcceleratedTypes {
                 get {

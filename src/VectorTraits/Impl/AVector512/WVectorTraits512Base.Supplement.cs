@@ -866,6 +866,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref prt, 1) = Unsafe.Add(ref pleft, 1) & Unsafe.Add(ref pright, 1);
                 Unsafe.Add(ref prt, 2) = Unsafe.Add(ref pleft, 2) & Unsafe.Add(ref pright, 2);
                 Unsafe.Add(ref prt, 3) = Unsafe.Add(ref pleft, 3) & Unsafe.Add(ref pright, 3);
+                Unsafe.Add(ref prt, 4) = Unsafe.Add(ref pleft, 4) & Unsafe.Add(ref pright, 4);
+                Unsafe.Add(ref prt, 5) = Unsafe.Add(ref pleft, 5) & Unsafe.Add(ref pright, 5);
+                Unsafe.Add(ref prt, 6) = Unsafe.Add(ref pleft, 6) & Unsafe.Add(ref pright, 6);
+                Unsafe.Add(ref prt, 7) = Unsafe.Add(ref pleft, 7) & Unsafe.Add(ref pright, 7);
                 return rt;
             }
 
@@ -904,6 +908,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref prt, 1) = Unsafe.Add(ref pleft, 1) | Unsafe.Add(ref pright, 1);
                 Unsafe.Add(ref prt, 2) = Unsafe.Add(ref pleft, 2) | Unsafe.Add(ref pright, 2);
                 Unsafe.Add(ref prt, 3) = Unsafe.Add(ref pleft, 3) | Unsafe.Add(ref pright, 3);
+                Unsafe.Add(ref prt, 4) = Unsafe.Add(ref pleft, 4) | Unsafe.Add(ref pright, 4);
+                Unsafe.Add(ref prt, 5) = Unsafe.Add(ref pleft, 5) | Unsafe.Add(ref pright, 5);
+                Unsafe.Add(ref prt, 6) = Unsafe.Add(ref pleft, 6) | Unsafe.Add(ref pright, 6);
+                Unsafe.Add(ref prt, 7) = Unsafe.Add(ref pleft, 7) | Unsafe.Add(ref pright, 7);
                 return rt;
             }
 
@@ -956,6 +964,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref prt, 1) = (Unsafe.Add(ref pleft, 1) & Unsafe.Add(ref pcondition, 1)) | (Unsafe.Add(ref pright, 1) & ~Unsafe.Add(ref pcondition, 1));
                 Unsafe.Add(ref prt, 2) = (Unsafe.Add(ref pleft, 2) & Unsafe.Add(ref pcondition, 2)) | (Unsafe.Add(ref pright, 2) & ~Unsafe.Add(ref pcondition, 2));
                 Unsafe.Add(ref prt, 3) = (Unsafe.Add(ref pleft, 3) & Unsafe.Add(ref pcondition, 3)) | (Unsafe.Add(ref pright, 3) & ~Unsafe.Add(ref pcondition, 3));
+                Unsafe.Add(ref prt, 4) = (Unsafe.Add(ref pleft, 4) & Unsafe.Add(ref pcondition, 4)) | (Unsafe.Add(ref pright, 4) & ~Unsafe.Add(ref pcondition, 4));
+                Unsafe.Add(ref prt, 5) = (Unsafe.Add(ref pleft, 5) & Unsafe.Add(ref pcondition, 5)) | (Unsafe.Add(ref pright, 5) & ~Unsafe.Add(ref pcondition, 5));
+                Unsafe.Add(ref prt, 6) = (Unsafe.Add(ref pleft, 6) & Unsafe.Add(ref pcondition, 6)) | (Unsafe.Add(ref pright, 6) & ~Unsafe.Add(ref pcondition, 6));
+                Unsafe.Add(ref prt, 7) = (Unsafe.Add(ref pleft, 7) & Unsafe.Add(ref pcondition, 7)) | (Unsafe.Add(ref pright, 7) & ~Unsafe.Add(ref pcondition, 7));
                 return rt;
             }
 
