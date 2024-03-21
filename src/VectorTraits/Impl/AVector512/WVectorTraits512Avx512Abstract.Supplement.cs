@@ -60,7 +60,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Abs(value);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.Add_AcceleratedTypes"/>
         public override TypeCodeFlags Add_AcceleratedTypes {
             get {
@@ -132,7 +132,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Add(left, right);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.AndNot_AcceleratedTypes"/>
         public override TypeCodeFlags AndNot_AcceleratedTypes {
             get {

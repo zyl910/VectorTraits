@@ -64,7 +64,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return Avx512F.Abs(value).AsInt64();
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.Add_AcceleratedTypes"/>
             public static TypeCodeFlags Add_AcceleratedTypes {
                 get {
@@ -75,68 +75,68 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Add(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Add(Vector512<float> left, Vector512<float> right) {
-                return Avx.Add(left, right);
+                return Avx512F.Add(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Add(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> Add(Vector512<double> left, Vector512<double> right) {
-                return Avx.Add(left, right);
+                return Avx512F.Add(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Add(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> Add(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return Avx512.Add(left, right);
+                return Avx512BW.Add(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Add(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> Add(Vector512<byte> left, Vector512<byte> right) {
-                return Avx512.Add(left, right);
+                return Avx512BW.Add(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Add(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> Add(Vector512<short> left, Vector512<short> right) {
-                return Avx512.Add(left, right);
+                return Avx512BW.Add(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Add(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> Add(Vector512<ushort> left, Vector512<ushort> right) {
-                return Avx512.Add(left, right);
+                return Avx512BW.Add(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Add(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> Add(Vector512<int> left, Vector512<int> right) {
-                return Avx512.Add(left, right);
+                return Avx512F.Add(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Add(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> Add(Vector512<uint> left, Vector512<uint> right) {
-                return Avx512.Add(left, right);
+                return Avx512F.Add(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Add(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> Add(Vector512<long> left, Vector512<long> right) {
-                return Avx512.Add(left, right);
+                return Avx512F.Add(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Add(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> Add(Vector512<ulong> left, Vector512<ulong> right) {
-                return Avx512.Add(left, right);
+                return Avx512F.Add(left, right);
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.AndNot_AcceleratedTypes"/>
             public static TypeCodeFlags AndNot_AcceleratedTypes {
                 get {
