@@ -595,6 +595,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static ulong ExtractMostSignificantBits(Vector512<float> vector) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.ExtractMostSignificantBits(vector);
+                //00007FFDAB5903AC  vmovups     zmm0,zmmword ptr [rcx]  
+                //00007FFDAB5903B2  vpmovd2m    k1,zmm0  
+                //00007FFDAB5903B8  kmovw       ecx,k1  
+                //00007FFDAB5903BC  mov         qword ptr [rbp-4520h],rcx  
 #else
                 return ExtractMostSignificantBits_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -606,6 +610,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static ulong ExtractMostSignificantBits(Vector512<double> vector) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.ExtractMostSignificantBits(vector);
+                //00007FFDAB590491  vmovups     zmm0,zmmword ptr [rcx]  
+                //00007FFDAB590497  vpmovq2m    k1,zmm0  
+                //00007FFDAB59049D  kmovb       ecx,k1  
+                //00007FFDAB5904A1  mov         qword ptr [rbp-4558h],rcx  
 #else
                 return ExtractMostSignificantBits_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -617,6 +625,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static ulong ExtractMostSignificantBits(Vector512<sbyte> vector) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.ExtractMostSignificantBits(vector);
+                //00007FFDAB590576  vmovups     zmm0,zmmword ptr [rcx]  
+                //00007FFDAB59057C  vpmovb2m    k1,zmm0  
+                //00007FFDAB590582  kmovq       rcx,k1  
+                //00007FFDAB590587  mov         qword ptr [rbp-4590h],rcx  
 #else
                 return ExtractMostSignificantBits_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -639,6 +651,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static ulong ExtractMostSignificantBits(Vector512<short> vector) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.ExtractMostSignificantBits(vector);
+                //00007FFDAB590742  vmovups     zmm0,zmmword ptr [rcx]  
+                //00007FFDAB590748  vpmovw2m    k1,zmm0  
+                //00007FFDAB59074E  kmovd       ecx,k1  
+                //00007FFDAB590752  mov         qword ptr [rbp-4600h],rcx  
 #else
                 return ExtractMostSignificantBits_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -2843,6 +2859,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<byte> Shuffle(Vector512<byte> vector, Vector512<byte> indices) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.Shuffle(vector, indices);
+                // .NET8: No hardware accelerated.
 #else
                 return Shuffle_Basic(vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -3182,6 +3199,40 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static float Sum(Vector512<float> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.Sum(value);
+                //  1545: 		T left = Vector256.Sum(vector._lower);
+                //00007FFDAB70F264  vmovups     ymm0,ymmword ptr [rbp-30h]  
+                //00007FFDAB70F269  vhaddps     ymm0,ymm0,ymmword ptr [rbp-30h]  
+                //00007FFDAB70F26E  vmovups     ymmword ptr [rbp-50h],ymm0  
+                //00007FFDAB70F273  vmovups     ymm0,ymmword ptr [rbp-50h]  
+                //00007FFDAB70F278  vhaddps     ymm0,ymm0,ymmword ptr [rbp-50h]  
+                //00007FFDAB70F27D  vmovups     ymmword ptr [rbp-70h],ymm0  
+                //00007FFDAB70F282  vmovups     ymm0,ymmword ptr [rbp-70h]  
+                //00007FFDAB70F287  vextractf128 xmm0,ymm0,1  
+                //00007FFDAB70F28D  vmovups     xmm1,xmmword ptr [rbp-70h]  
+                //00007FFDAB70F292  vaddps      xmm0,xmm0,xmm1  
+                //00007FFDAB70F296  vmovss      dword ptr [rbp-4],xmm0  
+                //  1546: 		return Scalar<T>.Add(left, Vector256.Sum(vector._upper));
+                //00007FFDAB70F29B  vmovss      xmm0,dword ptr [rbp-4]  
+                //00007FFDAB70F2A0  vmovss      dword ptr [rbp-0D4h],xmm0  
+                //00007FFDAB70F2A8  mov         rax,qword ptr [rbp+10h]  
+                //00007FFDAB70F2AC  vmovups     ymm0,ymmword ptr [rax+20h]  
+                //00007FFDAB70F2B1  vmovups     ymmword ptr [rbp-90h],ymm0  
+                //00007FFDAB70F2B9  vmovups     ymm0,ymmword ptr [rbp-90h]  
+                //00007FFDAB70F2C1  vhaddps     ymm0,ymm0,ymmword ptr [rbp-90h]  
+                //00007FFDAB70F2C9  vmovups     ymmword ptr [rbp-0B0h],ymm0  
+                //00007FFDAB70F2D1  vmovups     ymm0,ymmword ptr [rbp-0B0h]  
+                //00007FFDAB70F2D9  vhaddps     ymm0,ymm0,ymmword ptr [rbp-0B0h]  
+                //00007FFDAB70F2E1  vmovups     ymmword ptr [rbp-0D0h],ymm0  
+                //00007FFDAB70F2E9  vmovups     ymm0,ymmword ptr [rbp-0D0h]  
+                //00007FFDAB70F2F1  vextractf128 xmm0,ymm0,1  
+                //00007FFDAB70F2F7  vmovups     xmm1,xmmword ptr [rbp-0D0h]  
+                //00007FFDAB70F2FF  vaddps      xmm0,xmm0,xmm1  
+                //00007FFDAB70F303  vmovss      dword ptr [rbp-0D8h],xmm0  
+                //00007FFDAB70F30B  vmovss      xmm0,dword ptr [rbp-0D4h]  
+                //00007FFDAB70F313  vmovss      xmm1,dword ptr [rbp-0D8h]  
+                //00007FFDAB70F31B  call        qword ptr [CLRStub[MethodDescPrestub]@00007FFDAB7FCBE8 (07FFDAB7FCBE8h)]  
+                //00007FFDAB70F321  vmovss      dword ptr [rbp-4],xmm0  
+                //00007FFDAB70F326  vmovss      xmm0,dword ptr [rbp-4]  
 #else
                 return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -3192,6 +3243,33 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static double Sum(Vector512<double> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.Sum(value);
+                //  1545: 		T left = Vector256.Sum(vector._lower);
+                //00007FFDAB711F34  vmovups     ymm0,ymmword ptr [rbp-30h]  
+                //00007FFDAB711F39  vhaddpd     ymm0,ymm0,ymmword ptr [rbp-30h]  
+                //00007FFDAB711F3E  vmovups     ymmword ptr [rbp-50h],ymm0  
+                //00007FFDAB711F43  vmovups     ymm0,ymmword ptr [rbp-50h]  
+                //00007FFDAB711F48  vextractf128 xmm0,ymm0,1  
+                //00007FFDAB711F4E  vmovupd     xmm1,xmmword ptr [rbp-50h]  
+                //00007FFDAB711F53  vaddpd      xmm0,xmm0,xmm1  
+                //00007FFDAB711F57  vmovsd      qword ptr [rbp-8],xmm0  
+                //  1546: 		return Scalar<T>.Add(left, Vector256.Sum(vector._upper));
+                //00007FFDAB711F5C  vmovsd      xmm0,qword ptr [rbp-8]  
+                //00007FFDAB711F61  vmovsd      qword ptr [rbp-98h],xmm0  
+                //00007FFDAB711F69  mov         rax,qword ptr [rbp+10h]  
+                //00007FFDAB711F6D  vmovups     ymm0,ymmword ptr [rax+20h]  
+                //00007FFDAB711F72  vmovups     ymmword ptr [rbp-70h],ymm0  
+                //00007FFDAB711F77  vmovups     ymm0,ymmword ptr [rbp-70h]  
+                //00007FFDAB711F7C  vhaddpd     ymm0,ymm0,ymmword ptr [rbp-70h]  
+                //00007FFDAB711F81  vmovups     ymmword ptr [rbp-90h],ymm0  
+                //00007FFDAB711F89  vmovups     ymm0,ymmword ptr [rbp-90h]  
+                //00007FFDAB711F91  vextractf128 xmm0,ymm0,1  
+                //00007FFDAB711F97  vmovupd     xmm1,xmmword ptr [rbp-90h]  
+                //00007FFDAB711F9F  vaddpd      xmm0,xmm0,xmm1  
+                //00007FFDAB711FA3  vmovsd      qword ptr [rbp-0A0h],xmm0  
+                //00007FFDAB711FAB  vmovsd      xmm0,qword ptr [rbp-98h]  
+                //00007FFDAB711FB3  vmovsd      xmm1,qword ptr [rbp-0A0h]  
+                //00007FFDAB711FBB  call        qword ptr [CLRStub[MethodDescPrestub]@00007FFDAB7FCDC8 (07FFDAB7FCDC8h)]  
+                //00007FFDAB711FC1  vmovsd      qword ptr [rbp-8],xmm0  
 #else
                 return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -3203,6 +3281,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static sbyte Sum(Vector512<sbyte> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.Sum(value);
+                //1545: 		T left = Vector256.Sum(vector._lower);
+                //1546: 		return Scalar<T>.Add(left, Vector256.Sum(vector._upper));
 #else
                 return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -3516,6 +3596,70 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static void Widen(Vector512<float> source, out Vector512<double> lower, out Vector512<double> upper) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 (lower, upper) = Vector512.Widen(source);
+                // -- .NET8 Widen<float>
+                //  1596: 		return (WidenLower(source), WidenUpper(source));
+                //00007FFE09D30DD0  sub         rsp,28h  
+                //00007FFE09D30DD4  movaps      xmmword ptr [rsp+10h],xmm6  
+                //00007FFE09D30DD9  movaps      xmmword ptr [rsp],xmm7  
+                //00007FFE09D30DDD  movups      xmm0,xmmword ptr [rdx]  
+                //00007FFE09D30DE0  movups      xmm1,xmmword ptr [rdx+10h]  
+                //00007FFE09D30DE4  cvtps2pd    xmm2,xmm0  
+                //00007FFE09D30DE7  movhlps     xmm0,xmm0  
+                //00007FFE09D30DEA  cvtps2pd    xmm0,xmm0  
+                //00007FFE09D30DED  cvtps2pd    xmm3,xmm1  
+                //00007FFE09D30DF0  movhlps     xmm1,xmm1  
+                //00007FFE09D30DF3  cvtps2pd    xmm1,xmm1  
+                //00007FFE09D30DF6  movups      xmm4,xmmword ptr [rdx+20h]  
+                //00007FFE09D30DFA  movups      xmm5,xmmword ptr [rdx+30h]  
+                //00007FFE09D30DFE  cvtps2pd    xmm6,xmm4  
+                //00007FFE09D30E01  movhlps     xmm4,xmm4  
+                //00007FFE09D30E04  cvtps2pd    xmm4,xmm4  
+                //00007FFE09D30E07  cvtps2pd    xmm7,xmm5  
+                //00007FFE09D30E0A  movhlps     xmm5,xmm5  
+                //00007FFE09D30E0D  cvtps2pd    xmm5,xmm5  
+                //00007FFE09D30E10  movups      xmmword ptr [rcx],xmm2  
+                //00007FFE09D30E13  movups      xmmword ptr [rcx+10h],xmm0  
+                //00007FFE09D30E17  movups      xmmword ptr [rcx+20h],xmm3  
+                //00007FFE09D30E1B  movups      xmmword ptr [rcx+30h],xmm1  
+                //00007FFE09D30E1F  movups      xmmword ptr [rcx+40h],xmm6  
+                //00007FFE09D30E23  movups      xmmword ptr [rcx+50h],xmm4  
+                //00007FFE09D30E27  movups      xmmword ptr [rcx+60h],xmm7  
+                //00007FFE09D30E2B  movups      xmmword ptr [rcx+70h],xmm5  
+                //00007FFE09D30E2F  mov         rax,rcx  
+                //00007FFE09D30E32  movaps      xmm6,xmmword ptr [rsp+10h]  
+                //00007FFE09D30E37  movaps      xmm7,xmmword ptr [rsp]  
+                //00007FFE09D30E3B  add         rsp,28h  
+                //00007FFE09D30E3F  ret  
+                //00007FFE09D30E40  sub         rsp,28h  
+                //00007FFE09D30E44  movaps      xmmword ptr [rsp+10h],xmm6  
+                //00007FFE09D30E49  movaps      xmmword ptr [rsp],xmm7  
+                //00007FFE09D30E4D  movups      xmm0,xmmword ptr [rdx]  
+                //00007FFE09D30E50  movups      xmm1,xmmword ptr [rdx+10h]  
+                //00007FFE09D30E54  pmovzxwd    xmm2,xmm0  
+                //00007FFE09D30E59  psrldq      xmm0,8  
+                //00007FFE09D30E5E  pmovzxwd    xmm0,xmm0  
+                //00007FFE09D30E63  pmovzxwd    xmm3,xmm1  
+                //00007FFE09D30E68  psrldq      xmm1,8  
+                //00007FFE09D30E6D  pmovzxwd    xmm1,xmm1  
+                //00007FFE09D30E72  movups      xmm4,xmmword ptr [rdx+20h]  
+                //00007FFE09D30E76  movups      xmm5,xmmword ptr [rdx+30h]  
+                //00007FFE09D30E7A  pmovzxwd    xmm6,xmm4  
+                //00007FFE09D30E7F  psrldq      xmm4,8  
+                //00007FFE09D30E84  pmovzxwd    xmm4,xmm4  
+                //00007FFE09D30E89  pmovzxwd    xmm7,xmm5  
+                //00007FFE09D30E8E  psrldq      xmm5,8  
+                //00007FFE09D30E93  pmovzxwd    xmm5,xmm5  
+                //00007FFE09D30E98  movups      xmmword ptr [rcx],xmm2  
+                //00007FFE09D30E9B  movups      xmmword ptr [rcx+10h],xmm0  
+                //00007FFE09D30E9F  movups      xmmword ptr [rcx+20h],xmm3  
+                //00007FFE09D30EA3  movups      xmmword ptr [rcx+30h],xmm1  
+                //00007FFE09D30EA7  movups      xmmword ptr [rcx+40h],xmm6  
+                //00007FFE09D30EAB  movups      xmmword ptr [rcx+50h],xmm4  
+                //00007FFE09D30EAF  movups      xmmword ptr [rcx+60h],xmm7  
+                //00007FFE09D30EB3  movups      xmmword ptr [rcx+70h],xmm5  
+                //00007FFE09D30EB7  mov         rax,rcx  
+                //00007FFE09D30EBA  movaps      xmm6,xmmword ptr [rsp+10h]  
+                //00007FFE09D30EBF  movaps      xmm7,xmmword ptr [rsp]  
 #else
                 Widen_Basic(source, out lower, out upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD

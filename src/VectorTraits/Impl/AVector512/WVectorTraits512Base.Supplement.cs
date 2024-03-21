@@ -934,6 +934,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<T> ConditionalSelect<T>(Vector512<T> condition, Vector512<T> left, Vector512<T> right) where T : struct {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.ConditionalSelect(condition, left, right);
+                //00007FFDAA4CAADB  mov         rdx,16C8005FC78h  
+                //00007FFDAA4CAAE5  vmovups     zmm6,zmmword ptr [rbp-0ED68h]  
+                //00007FFDAA4CAAEF  vmovups     zmm7,zmmword ptr [rbp-0EDA8h]  
+                //00007FFDAA4CAAF9  vpternlogd  zmm6,zmm7,zmmword ptr [rdx],0CAh  ; 0xCA: (a&b)|(~a&c)
+                //00007FFDAA4CAB00  vmovups     zmmword ptr [rbp-2630h],zmm6  
 #else
                 return ConditionalSelect_Basic(condition, left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -2004,65 +2009,83 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<float> left, Vector512<float> right) {
-                return YIsAllTrue(Equals(left, right));
+                return Vector512.EqualsAll(left, right);
+                //00007FFDAB58EDB2  vmovups     zmm6,zmmword ptr [rbp-0ED68h]  
+                //00007FFDAB58EDBC  vcmpps      k1,zmm6,zmmword ptr [rcx],0  
+                //00007FFDAB58EDC3  kortestw    k1,k1  
+                //00007FFDAB58EDC7  setb        cl  
+                //00007FFDAB58EDCA  movzx       ecx,cl  
+                //00007FFDAB58EDCD  mov         dword ptr [rbp-4158h],ecx  
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<double> left, Vector512<double> right) {
-                return YIsAllTrue(Equals(left, right));
+                return Vector512.EqualsAll(left, right);
+                //00007FFDAB58EECE  vmovups     zmm6,zmmword ptr [rbp-0ED68h]  
+                //00007FFDAB58EED8  vcmppd      k1,zmm6,zmmword ptr [rcx],0  
+                //00007FFDAB58EEDF  kortestb    k1,k1  
+                //00007FFDAB58EEE3  setb        cl  
+                //00007FFDAB58EEE6  movzx       ecx,cl  
+                //00007FFDAB58EEE9  mov         dword ptr [rbp-4188h],ecx  
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAllTrue(Equals(left, right));
+                return Vector512.EqualsAll(left, right);
+                //00007FFDAB58EFEA  vmovups     zmm6,zmmword ptr [rbp-0ED68h]  
+                //00007FFDAB58EFF4  vpcmpeqb    k1,zmm6,zmmword ptr [rcx]  
+                //00007FFDAB58EFFA  kortestq    k1,k1  
+                //00007FFDAB58EFFF  setb        cl  
+                //00007FFDAB58F002  movzx       ecx,cl  
+                //00007FFDAB58F005  mov         dword ptr [rbp-41B8h],ecx  
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAllTrue(Equals(left, right));
+                return Vector512.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<short> left, Vector512<short> right) {
-                return YIsAllTrue(Equals(left, right));
+                return Vector512.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAllTrue(Equals(left, right));
+                return Vector512.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<int> left, Vector512<int> right) {
-                return YIsAllTrue(Equals(left, right));
+                return Vector512.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAllTrue(Equals(left, right));
+                return Vector512.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<long> left, Vector512<long> right) {
-                return YIsAllTrue(Equals(left, right));
+                return Vector512.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAllTrue(Equals(left, right));
+                return Vector512.EqualsAll(left, right);
             }
 
 
@@ -2076,65 +2099,83 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<float> left, Vector512<float> right) {
-                return YIsAnyTrue(Equals(left, right));
+                return Vector512.EqualsAny(left, right);
+                //00007FFDAB58F8C6  vmovups     zmm6,zmmword ptr [rbp-0ED68h]  
+                //00007FFDAB58F8D0  vcmpps      k1,zmm6,zmmword ptr [rcx],0  
+                //00007FFDAB58F8D7  kortestw    k1,k1  
+                //00007FFDAB58F8DB  setne       cl  
+                //00007FFDAB58F8DE  movzx       ecx,cl  
+                //00007FFDAB58F8E1  mov         dword ptr [rbp-4338h],ecx  
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<double> left, Vector512<double> right) {
-                return YIsAnyTrue(Equals(left, right));
+                return Vector512.EqualsAny(left, right);
+                //00007FFDAB58F9E2  vmovups     zmm6,zmmword ptr [rbp-0ED68h]  
+                //00007FFDAB58F9EC  vcmppd      k1,zmm6,zmmword ptr [rcx],0  
+                //00007FFDAB58F9F3  kortestb    k1,k1  
+                //00007FFDAB58F9F7  setne       cl  
+                //00007FFDAB58F9FA  movzx       ecx,cl  
+                //00007FFDAB58F9FD  mov         dword ptr [rbp-4368h],ecx  
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAnyTrue(Equals(left, right));
+                return Vector512.EqualsAny(left, right);
+                //00007FFDAB58FAFE  vmovups     zmm6,zmmword ptr [rbp-0ED68h]  
+                //00007FFDAB58FB08  vpcmpeqb    k1,zmm6,zmmword ptr [rcx]  
+                //00007FFDAB58FB0E  kortestq    k1,k1  
+                //00007FFDAB58FB13  setne       cl  
+                //00007FFDAB58FB16  movzx       ecx,cl  
+                //00007FFDAB58FB19  mov         dword ptr [rbp-4398h],ecx  
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAnyTrue(Equals(left, right));
+                return Vector512.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<short> left, Vector512<short> right) {
-                return YIsAnyTrue(Equals(left, right));
+                return Vector512.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAnyTrue(Equals(left, right));
+                return Vector512.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<int> left, Vector512<int> right) {
-                return YIsAnyTrue(Equals(left, right));
+                return Vector512.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAnyTrue(Equals(left, right));
+                return Vector512.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<long> left, Vector512<long> right) {
-                return YIsAnyTrue(Equals(left, right));
+                return Vector512.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAnyTrue(Equals(left, right));
+                return Vector512.EqualsAny(left, right);
             }
 
 
@@ -5115,6 +5156,18 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<T> OnesComplement<T>(Vector512<T> vector) where T : struct {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.OnesComplement(vector);
+                // 55h: ~c
+                // FFh: All 1
+                // -- Single
+                //00007FFDAB598611  vpternlogd  zmm0,zmm0,zmmword ptr [rdx],55h  
+                //00007FFDAB598618  vmovups     zmmword ptr [rbp-7EB0h],zmm0  
+                // -- Double
+                //00007FFDAB5986E5  vpternlogq  zmm0,zmm0,zmmword ptr [rdx],55h  
+                //00007FFDAB5986EC  vmovups     zmmword ptr [rbp-7F30h],zmm0  
+                // -- Byte
+                //00007FFDAB5987B9  vpternlogd  zmm0,zmm0,zmm0,0FFh  
+                //00007FFDAB5987C0  vpxord      zmm0,zmm0,zmmword ptr [rdx]  
+                //00007FFDAB5987C6  vmovups     zmmword ptr [rbp-7FB0h],zmm0  
 #else
                 return OnesComplement_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
