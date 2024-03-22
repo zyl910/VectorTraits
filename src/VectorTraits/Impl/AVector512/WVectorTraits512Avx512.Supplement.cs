@@ -1846,7 +1846,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.OnesComplement{T}(Vector512{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> OnesComplement<T>(Vector512<T> vector) where T : struct {
-                return Avx512F.Xor(Vector512s<ulong>.AllBitsSet, vector.AsUInt64()).As<ulong, T>();
+                // Poor performance //return Avx512F.Xor(Vector512s<ulong>.AllBitsSet, vector.AsUInt64()).As<ulong, T>();
+                // The Vector512.OnesComplement methods are hardware-accelerated.
+                return SuperStatics.OnesComplement(vector);
             }
 
 /*
