@@ -1346,7 +1346,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<ulong> Shuffle_Core(Vector512<ulong> vector, Vector512<ulong> args0, Vector512<ulong> args1) {
             return Statics.Shuffle_Core(vector, args0, args1);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits512.Sum_AcceleratedTypes"/>
         public override TypeCodeFlags Sum_AcceleratedTypes {
@@ -1419,7 +1419,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Sum(value);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.Widen_AcceleratedTypes"/>
         public override TypeCodeFlags Widen_AcceleratedTypes {
             get {

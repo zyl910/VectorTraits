@@ -11,6 +11,7 @@ using System.Numerics;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 #endif
+using Zyl.VectorTraits.Impl.AVector256;
 
 namespace Zyl.VectorTraits.Impl.AVector512 {
     using SuperStatics = WVectorTraits512Base.Statics;
@@ -54,7 +55,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
 #if NET8_0_OR_GREATER
                 // 2019, Intel Ice Lake (10th Core) - avx512_bitalg, avx512_vbmi2, avx512_vnni, avx512_vpopcntdq, avx512bw, avx512cd, avx512dq, avx512f, avx512ifma, avx512vbmi, avx512vl.
                 // 2022, AMD Zen 4 (Ryzen 7000 series) - avx512_bf16, avx512_bitalg, avx512_vbmi2, avx512_vnni, avx512_vpopcntdq, avx512bw, avx512cd, avx512dq, avx512f, avx512ifma, avx512vbmi, avx512vl.
-                rt = Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported && Avx512F.VL.IsSupported;
+                rt = Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported && Avx512F.VL.IsSupported
+                    & Avx.IsSupported && Avx2.IsSupported && Sse.IsSupported && Sse2.IsSupported;
 #else
 #endif // NET8_0_OR_GREATER
                 if (!noStrict) {
@@ -67,11 +69,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 string rt = "Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi, Avx512VL!";
 #if NET8_0_OR_GREATER
                 if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported && Avx512F.VL.IsSupported) {
-                    if (Sse.IsSupported && Sse2.IsSupported) {
+                    if (Avx.IsSupported && Avx2.IsSupported && Sse.IsSupported && Sse2.IsSupported) {
                         // done.
                     } else {
                         // Details.
                         rt = "";
+                        if (!Avx.IsSupported) rt += ", Avx";
+                        if (!Avx2.IsSupported) rt += ", Avx2";
                         if (!Sse.IsSupported) rt += ", Sse";
                         if (!Sse2.IsSupported) rt += ", Sse2";
                         if (!String.IsNullOrEmpty(rt)) {
@@ -107,6 +111,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 if (System.Runtime.Intrinsics.X86.Avx512F.IsSupported) rt += separator + "Avx512F";
                 if (System.Runtime.Intrinsics.X86.Avx512Vbmi.IsSupported) rt += separator + "Avx512Vbmi";
                 if (System.Runtime.Intrinsics.X86.Avx512F.VL.IsSupported) rt += separator + "Avx512VL";
+                if (System.Runtime.Intrinsics.X86.Avx.IsSupported) rt += separator + "Avx";
+                if (System.Runtime.Intrinsics.X86.Avx2.IsSupported) rt += separator + "Avx2";
+                if (System.Runtime.Intrinsics.X86.Sse.IsSupported) rt += separator + "Sse";
+                if (System.Runtime.Intrinsics.X86.Sse2.IsSupported) rt += separator + "Sse2";
                 // done.
                 if (!string.IsNullOrEmpty(rt)) {
                     rt = rt.Substring(separator.Length);
@@ -2333,7 +2341,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<ulong> Shuffle_Core(Vector512<ulong> vector, Vector512<ulong> args0, Vector512<ulong> args1) {
                 return Shuffle_Core(vector.AsUInt32(), args0.AsUInt32(), args1.AsUInt32()).AsUInt64();
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits512.Sum_AcceleratedTypes"/>
             public static TypeCodeFlags Sum_AcceleratedTypes {
@@ -2346,32 +2354,23 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Sum(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static float Sum(Vector512<float> value) {
-                // 0 1 2 3 4 5 6 7
-                Vector512<float> m = Avx.HorizontalAdd(value, value); // Each 128-bit lane.
-                // 01 23 01 23 45 67 45 67
-                m = Avx.HorizontalAdd(m, m);
-                // 0123 0123 0123 0123 4567 4567 4567 4567
-                Vector128<float> n = Sse.Add(m.GetLower(), m.GetUpper());
-                return n.GetElement(0);
+                Vector256<float> temp = Avx.Add(value.GetLower(), value.GetUpper());
+                return WVectorTraits256Avx2.Statics.Sum(temp);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Sum(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static double Sum(Vector512<double> value) {
-                // 0 1 2 3
-                Vector512<double> m = Avx.HorizontalAdd(value, value); // Each 128-bit lane.
-                // 01 01 23 23
-                Vector128<double> n = Sse2.Add(m.GetLower(), m.GetUpper());
-                return n.GetElement(0);
+                Vector256<double> temp = Avx.Add(value.GetLower(), value.GetUpper());
+                return WVectorTraits256Avx2.Statics.Sum(temp);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Sum(Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static sbyte Sum(Vector512<sbyte> value) {
-                Widen(value, out Vector512<short> l, out Vector512<short> h);
-                Vector512<short> t = Avx512.Add(l, h);
-                return (sbyte)Sum(t);
+                Vector256<sbyte> temp = Avx2.Add(value.GetLower(), value.GetUpper());
+                return WVectorTraits256Avx2.Statics.Sum(temp);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Sum(Vector512{byte})"/>
@@ -2383,11 +2382,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Sum(Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static short Sum(Vector512<short> value) {
-                Vector512<short> m = Avx512.HorizontalAdd(value, value); // Each 128-bit lane.
-                m = Avx512.HorizontalAdd(m, m);
-                m = Avx512.HorizontalAdd(m, m);
-                Vector128<short> n = Sse2.Add(m.GetLower(), m.GetUpper());
-                return (short)Sse2.ConvertToInt32(n.AsInt32());
+                Vector256<short> temp = Avx2.Add(value.GetLower(), value.GetUpper());
+                return WVectorTraits256Avx2.Statics.Sum(temp);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Sum(Vector512{ushort})"/>
@@ -2400,13 +2396,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Sum(Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static int Sum(Vector512<int> value) {
-                // 0 1 2 3 4 5 6 7
-                Vector512<int> m = Avx512.HorizontalAdd(value, value); // Each 128-bit lane.
-                // 01 23 01 23 45 67 45 67
-                m = Avx512.HorizontalAdd(m, m);
-                // 0123 0123 0123 0123 4567 4567 4567 4567
-                Vector128<int> n = Sse2.Add(m.GetLower(), m.GetUpper());
-                return Sse2.ConvertToInt32(n);
+                Vector256<int> temp = Avx2.Add(value.GetLower(), value.GetUpper());
+                return WVectorTraits256Avx2.Statics.Sum(temp);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Sum(Vector512{uint})"/>
@@ -2419,14 +2410,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Sum(Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static long Sum(Vector512<long> value) {
-                // 0 1 2 3
-                Vector512<long> m = Avx512.Permute4x64(value, (byte)ShuffleControlG4.WZYX);
-                Vector512<long> n = Avx512.Add(value, m);
-                // 03 12 12 03
-                m = Avx512.Permute4x64(n, (byte)ShuffleControlG4.YXWZ);
-                n = Avx512.Add(n, m);
-                // 0123 0123 0123 0123
-                return n.GetElement(0);
+                Vector256<long> temp = Avx2.Add(value.GetLower(), value.GetUpper());
+                return WVectorTraits256Avx2.Statics.Sum(temp);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Sum(Vector512{ulong})"/>
@@ -2436,7 +2421,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return (ulong)Sum(value.AsInt64());
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.Widen_AcceleratedTypes"/>
             public static TypeCodeFlags Widen_AcceleratedTypes {
                 get {
