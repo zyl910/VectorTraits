@@ -191,7 +191,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<long> YCopySign(Vector512<long> value, Vector512<long> sign) {
             return Statics.YCopySign(value, sign);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits512.YIsAllTrue_AcceleratedTypes"/>
         public override TypeCodeFlags YIsAllTrue_AcceleratedTypes {
@@ -220,7 +220,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YIsAnyTrue(value);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger_AcceleratedTypes"/>
         public override TypeCodeFlags YIsEvenInteger_AcceleratedTypes {
             get {

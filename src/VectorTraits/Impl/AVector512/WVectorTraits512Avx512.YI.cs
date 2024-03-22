@@ -17,7 +17,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         partial class Statics {
 
 #if NET8_0_OR_GREATER
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.YIsAllTrue_AcceleratedTypes"/>
             public static TypeCodeFlags YIsAllTrue_AcceleratedTypes {
                 get {
@@ -28,8 +28,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YIsAllTrue{T}(Vector512{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool YIsAllTrue<T>(Vector512<T> value) where T : struct {
-                Vector512<int> mask = OnesComplement(value).AsInt32();
-                return Avx.TestZ(mask, mask);
+                //Vector512<int> mask = OnesComplement(value).AsInt32();
+                //return Avx.TestZ(mask, mask);
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.YIsAllTrue(value);
             }
 
 
@@ -43,10 +45,12 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YIsAnyTrue{T}(Vector512{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool YIsAnyTrue<T>(Vector512<T> value) where T : struct {
-                return !Avx.TestZ(value.AsInt32(), value.AsInt32());
+                //return !Avx.TestZ(value.AsInt32(), value.AsInt32());
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.YIsAllTrue(value);
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger_AcceleratedTypes"/>
             public static TypeCodeFlags YIsEvenInteger_AcceleratedTypes {
                 get {
