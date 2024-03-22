@@ -208,9 +208,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> ConditionalSelect_OrAnd<T>(Vector512<T> condition, Vector512<T> left, Vector512<T> right) where T : struct {
                 // result = (left & condition) | (right & ~condition);
-                return Avx512F.Or(Avx512F.And(condition.AsUInt64(), left.AsUInt64())
-                    , Avx512F.AndNot(condition.AsUInt64(), right.AsUInt64())
-                    ).As<ulong, T>();
+                return Avx512F.TernaryLogic(condition.AsInt64(), left.AsInt64(), right.AsInt64(), TernaryLogicControl.Or_And_A_B_And_NotA_C).As<long, T>();
             }
 
 
