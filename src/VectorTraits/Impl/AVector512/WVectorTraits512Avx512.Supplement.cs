@@ -389,7 +389,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return Avx512F.CompareEqual(left, right);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll_AcceleratedTypes"/>
             public static TypeCodeFlags EqualsAll_AcceleratedTypes {
                 get {
@@ -400,65 +400,85 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<float> left, Vector512<float> right) {
-                return YIsAllTrue(Equals(left, right));
+                // return YIsAllTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<double> left, Vector512<double> right) {
-                return YIsAllTrue(Equals(left, right));
+                // return YIsAllTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAllTrue(Equals(left, right));
+                // return YIsAllTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAllTrue(Equals(left, right));
+                // return YIsAllTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<short> left, Vector512<short> right) {
-                return YIsAllTrue(Equals(left, right));
+                // return YIsAllTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAllTrue(Equals(left, right));
+                // return YIsAllTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<int> left, Vector512<int> right) {
-                return YIsAllTrue(Equals(left, right));
+                // return YIsAllTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAllTrue(Equals(left, right));
+                // return YIsAllTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<long> left, Vector512<long> right) {
-                return YIsAllTrue(Equals(left, right));
+                // return YIsAllTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAll(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAllTrue(Equals(left, right));
+                // return YIsAllTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAll(left, right);
             }
 
 
@@ -472,68 +492,88 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<float> left, Vector512<float> right) {
-                return YIsAnyTrue(Equals(left, right));
+                // return YIsAnyTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<double> left, Vector512<double> right) {
-                return YIsAnyTrue(Equals(left, right));
+                // return YIsAnyTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAnyTrue(Equals(left, right));
+                // return YIsAnyTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAnyTrue(Equals(left, right));
+                // return YIsAnyTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<short> left, Vector512<short> right) {
-                return YIsAnyTrue(Equals(left, right));
+                // return YIsAnyTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAnyTrue(Equals(left, right));
+                // return YIsAnyTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<int> left, Vector512<int> right) {
-                return YIsAnyTrue(Equals(left, right));
+                // return YIsAnyTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAnyTrue(Equals(left, right));
+                // return YIsAnyTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<long> left, Vector512<long> right) {
-                return YIsAnyTrue(Equals(left, right));
+                // return YIsAnyTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.EqualsAny(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAnyTrue(Equals(left, right));
+                // return YIsAnyTrue(Equals(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.EqualsAny(left, right);
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.GreaterThan_AcceleratedTypes"/>
             public static TypeCodeFlags GreaterThan_AcceleratedTypes {
                 get {
