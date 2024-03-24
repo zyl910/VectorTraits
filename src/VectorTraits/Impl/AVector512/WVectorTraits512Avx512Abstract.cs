@@ -284,7 +284,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.ExtractMostSignificantBits(vector);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.Floor_AcceleratedTypes"/>
         public override TypeCodeFlags Floor_AcceleratedTypes {
             get {
@@ -303,7 +303,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<double> Floor(Vector512<double> value) {
             return Statics.Floor(value);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits512.Narrow_AcceleratedTypes"/>
         public override TypeCodeFlags Narrow_AcceleratedTypes {

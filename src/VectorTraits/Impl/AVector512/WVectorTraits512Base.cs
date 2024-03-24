@@ -976,6 +976,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 5) = MathF.Floor(Unsafe.Add(ref p, 5));
                 Unsafe.Add(ref p, 6) = MathF.Floor(Unsafe.Add(ref p, 6));
                 Unsafe.Add(ref p, 7) = MathF.Floor(Unsafe.Add(ref p, 7));
+                Unsafe.Add(ref p, 8) = MathF.Floor(Unsafe.Add(ref p, 8));
+                Unsafe.Add(ref p, 9) = MathF.Floor(Unsafe.Add(ref p, 9));
+                Unsafe.Add(ref p, 10) = MathF.Floor(Unsafe.Add(ref p, 10));
+                Unsafe.Add(ref p, 11) = MathF.Floor(Unsafe.Add(ref p, 11));
+                Unsafe.Add(ref p, 12) = MathF.Floor(Unsafe.Add(ref p, 12));
+                Unsafe.Add(ref p, 13) = MathF.Floor(Unsafe.Add(ref p, 13));
+                Unsafe.Add(ref p, 14) = MathF.Floor(Unsafe.Add(ref p, 14));
+                Unsafe.Add(ref p, 15) = MathF.Floor(Unsafe.Add(ref p, 15));
                 return rt;
             }
 
@@ -988,6 +996,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 1) = Math.Floor(Unsafe.Add(ref p, 1));
                 Unsafe.Add(ref p, 2) = Math.Floor(Unsafe.Add(ref p, 2));
                 Unsafe.Add(ref p, 3) = Math.Floor(Unsafe.Add(ref p, 3));
+                Unsafe.Add(ref p, 4) = Math.Floor(Unsafe.Add(ref p, 4));
+                Unsafe.Add(ref p, 5) = Math.Floor(Unsafe.Add(ref p, 5));
+                Unsafe.Add(ref p, 6) = Math.Floor(Unsafe.Add(ref p, 6));
+                Unsafe.Add(ref p, 7) = Math.Floor(Unsafe.Add(ref p, 7));
                 return rt;
             }
 

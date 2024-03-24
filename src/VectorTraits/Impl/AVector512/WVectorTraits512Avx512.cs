@@ -867,7 +867,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return SuperStatics.ExtractMostSignificantBits(vector);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {
@@ -879,15 +879,15 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Floor(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Floor(Vector512<float> value) {
-                return Avx.Floor(value);
+                return Avx512F.RoundScale(value, (byte)FloatRoundMode.ToNegativeInfinity);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Floor(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> Floor(Vector512<double> value) {
-                return Avx.Floor(value);
+                return Avx512F.RoundScale(value, (byte)FloatRoundMode.ToNegativeInfinity);
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow_AcceleratedTypes"/>
             public static TypeCodeFlags Narrow_AcceleratedTypes {
