@@ -1597,7 +1597,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return SuperStatics.LessThanOrEqualAny(left, right);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.Max_AcceleratedTypes"/>
             public static TypeCodeFlags Max_AcceleratedTypes {
                 get {
@@ -1608,73 +1608,65 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Max(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Max(Vector512<float> left, Vector512<float> right) {
-                return Avx.Max(left, right);
+                return Avx512F.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Max(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> Max(Vector512<double> left, Vector512<double> right) {
-                return Avx.Max(left, right);
+                return Avx512F.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Max(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> Max(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return Avx512.Max(left, right);
+                return Avx512BW.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Max(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> Max(Vector512<byte> left, Vector512<byte> right) {
-                return Avx512.Max(left, right);
+                return Avx512BW.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Max(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> Max(Vector512<short> left, Vector512<short> right) {
-                return Avx512.Max(left, right);
+                return Avx512BW.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Max(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> Max(Vector512<ushort> left, Vector512<ushort> right) {
-                return Avx512.Max(left, right);
+                return Avx512BW.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Max(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> Max(Vector512<int> left, Vector512<int> right) {
-                return Avx512.Max(left, right);
+                return Avx512F.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Max(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> Max(Vector512<uint> left, Vector512<uint> right) {
-                return Avx512.Max(left, right);
+                return Avx512F.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Max(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> Max(Vector512<long> left, Vector512<long> right) {
-                Vector512<long> mask = Avx512.CompareGreaterThan(left, right);
-                Vector512<long> rt = Avx512.BlendVariable(right, left, mask);
-                return rt;
+                return Avx512F.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Max(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> Max(Vector512<ulong> left, Vector512<ulong> right) {
-                //Vector512<long> mid = Vector512s<long>.MinValue;
-                Vector512<long> mid = Vector512Constants.Int64_MinValue;
-                Vector512<long> left2 = Avx512.Xor(left.AsInt64(), mid);
-                Vector512<long> right2 = Avx512.Xor(right.AsInt64(), mid);
-                Vector512<long> mask = Avx512.CompareGreaterThan(left2, right2);
-                Vector512<ulong> rt = Avx512.BlendVariable(right, left, mask.AsUInt64());
-                return rt;
+                return Avx512F.Max(left, right);
             }
 
 
@@ -1688,76 +1680,68 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Min(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Min(Vector512<float> left, Vector512<float> right) {
-                return Avx.Min(left, right);
+                return Avx512F.Min(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Min(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> Min(Vector512<double> left, Vector512<double> right) {
-                return Avx.Min(left, right);
+                return Avx512F.Min(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Min(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> Min(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return Avx512.Min(left, right);
+                return Avx512BW.Min(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Min(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> Min(Vector512<byte> left, Vector512<byte> right) {
-                return Avx512.Min(left, right);
+                return Avx512BW.Min(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Min(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> Min(Vector512<short> left, Vector512<short> right) {
-                return Avx512.Min(left, right);
+                return Avx512BW.Min(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Min(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> Min(Vector512<ushort> left, Vector512<ushort> right) {
-                return Avx512.Min(left, right);
+                return Avx512BW.Min(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Min(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> Min(Vector512<int> left, Vector512<int> right) {
-                return Avx512.Min(left, right);
+                return Avx512F.Min(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Min(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> Min(Vector512<uint> left, Vector512<uint> right) {
-                return Avx512.Min(left, right);
+                return Avx512F.Min(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Min(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> Min(Vector512<long> left, Vector512<long> right) {
-                Vector512<long> mask = Avx512.CompareGreaterThan(right, left);
-                Vector512<long> rt = Avx512.BlendVariable(right, left, mask);
-                return rt;
+                return Avx512F.Min(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Min(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> Min(Vector512<ulong> left, Vector512<ulong> right) {
-                //Vector512<long> mid = Vector512s<long>.MinValue;
-                Vector512<long> mid = Vector512Constants.Int64_MinValue;
-                Vector512<long> left2 = Avx512.Xor(left.AsInt64(), mid);
-                Vector512<long> right2 = Avx512.Xor(right.AsInt64(), mid);
-                Vector512<long> mask = Avx512.CompareGreaterThan(right2, left2);
-                Vector512<ulong> rt = Avx512.BlendVariable(right, left, mask.AsUInt64());
-                return rt;
+                return Avx512F.Min(left, right);
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.Multiply_AcceleratedTypes"/>
             public static TypeCodeFlags Multiply_AcceleratedTypes {
                 get {

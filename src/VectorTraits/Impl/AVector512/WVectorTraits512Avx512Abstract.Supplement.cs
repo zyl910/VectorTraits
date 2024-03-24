@@ -1372,7 +1372,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.LessThanOrEqualAny(left, right);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.Max_AcceleratedTypes"/>
         public override TypeCodeFlags Max_AcceleratedTypes {
             get {
@@ -1516,7 +1516,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Min(left, right);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.Multiply_AcceleratedTypes"/>
         public override TypeCodeFlags Multiply_AcceleratedTypes {
             get {
