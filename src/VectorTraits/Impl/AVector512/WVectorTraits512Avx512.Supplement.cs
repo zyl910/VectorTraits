@@ -1085,7 +1085,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return SuperStatics.GreaterThanOrEqualAny(left, right);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.LessThan_AcceleratedTypes"/>
             public static TypeCodeFlags LessThan_AcceleratedTypes {
                 get {
@@ -1096,93 +1096,65 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.LessThan(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> LessThan(Vector512<float> left, Vector512<float> right) {
-#if NET5_0_OR_GREATER
-                return Avx.CompareLessThan(left, right);
-#else
-                return Avx.Compare(left, right, FloatComparisonMode.OrderedLessThanSignaling);
-#endif // NET5_0_OR_GREATER
+                return Avx512F.CompareLessThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThan(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> LessThan(Vector512<double> left, Vector512<double> right) {
-#if NET5_0_OR_GREATER
-                return Avx.CompareLessThan(left, right);
-#else
-                return Avx.Compare(left, right, FloatComparisonMode.OrderedLessThanSignaling);
-#endif // NET5_0_OR_GREATER
+                return Avx512F.CompareLessThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThan(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> LessThan(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return Avx512.CompareGreaterThan(right, left);
+                return Avx512BW.CompareLessThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThan(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> LessThan(Vector512<byte> left, Vector512<byte> right) {
-                //Vector512<sbyte> mid = Vector512s<sbyte>.MinValue;
-                Vector512<sbyte> mid = Vector512.Create(sbyte.MinValue); // .NET5+ has better performance .
-                Vector512<sbyte> left2 = Avx512.Xor(left.AsSByte(), mid);
-                Vector512<sbyte> right2 = Avx512.Xor(right.AsSByte(), mid);
-                Vector512<sbyte> mask = Avx512.CompareGreaterThan(right2, left2);
-                return mask.AsByte();
+                return Avx512BW.CompareLessThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThan(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> LessThan(Vector512<short> left, Vector512<short> right) {
-                return Avx512.CompareGreaterThan(right, left);
+                return Avx512BW.CompareLessThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThan(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> LessThan(Vector512<ushort> left, Vector512<ushort> right) {
-                //Vector512<short> mid = Vector512s<short>.MinValue;
-                Vector512<short> mid = Vector512.Create(short.MinValue); // .NET5+ has better performance .
-                Vector512<short> left2 = Avx512.Xor(left.AsInt16(), mid);
-                Vector512<short> right2 = Avx512.Xor(right.AsInt16(), mid);
-                Vector512<short> mask = Avx512.CompareGreaterThan(right2, left2);
-                return mask.AsUInt16();
+                return Avx512BW.CompareLessThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThan(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> LessThan(Vector512<int> left, Vector512<int> right) {
-                return Avx512.CompareGreaterThan(right, left);
+                return Avx512F.CompareLessThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThan(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> LessThan(Vector512<uint> left, Vector512<uint> right) {
-                //Vector512<int> mid = Vector512s<int>.MinValue;
-                Vector512<int> mid = Vector512.Create(int.MinValue); // .NET5+ has better performance .
-                Vector512<int> left2 = Avx512.Xor(left.AsInt32(), mid);
-                Vector512<int> right2 = Avx512.Xor(right.AsInt32(), mid);
-                Vector512<int> mask = Avx512.CompareGreaterThan(right2, left2);
-                return mask.AsUInt32();
+                return Avx512F.CompareLessThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThan(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> LessThan(Vector512<long> left, Vector512<long> right) {
-                return Avx512.CompareGreaterThan(right, left);
+                return Avx512F.CompareLessThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThan(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> LessThan(Vector512<ulong> left, Vector512<ulong> right) {
-                //Vector512<long> mid = Vector512s<long>.MinValue;
-                Vector512<long> mid = Vector512Constants.Int64_MinValue;
-                Vector512<long> left2 = Avx512.Add(mid, left.AsInt64());
-                Vector512<long> right2 = Avx512.Add(mid, right.AsInt64());
-                Vector512<long> mask = Avx512.CompareGreaterThan(right2, left2);
-                return mask.AsUInt64();
+                return Avx512F.CompareLessThan(left, right);
             }
 
 
@@ -1196,65 +1168,85 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.LessThanAll(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAll(Vector512<float> left, Vector512<float> right) {
-                return YIsAllTrue(LessThan(left, right));
+                //return YIsAllTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAll(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAll(Vector512<double> left, Vector512<double> right) {
-                return YIsAllTrue(LessThan(left, right));
+                //return YIsAllTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAll(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAll(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAllTrue(LessThan(left, right));
+                //return YIsAllTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAll(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAll(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAllTrue(LessThan(left, right));
+                //return YIsAllTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAll(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAll(Vector512<short> left, Vector512<short> right) {
-                return YIsAllTrue(LessThan(left, right));
+                //return YIsAllTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAll(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAll(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAllTrue(LessThan(left, right));
+                //return YIsAllTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAll(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAll(Vector512<int> left, Vector512<int> right) {
-                return YIsAllTrue(LessThan(left, right));
+                //return YIsAllTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAll(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAll(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAllTrue(LessThan(left, right));
+                //return YIsAllTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAll(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAll(Vector512<long> left, Vector512<long> right) {
-                return YIsAllTrue(LessThan(left, right));
+                //return YIsAllTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAll(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAll(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAllTrue(LessThan(left, right));
+                //return YIsAllTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAll(left, right);
             }
 
 
@@ -1268,65 +1260,85 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.LessThanAny(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAny(Vector512<float> left, Vector512<float> right) {
-                return YIsAnyTrue(LessThan(left, right));
+                //return YIsAnyTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAny(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAny(Vector512<double> left, Vector512<double> right) {
-                return YIsAnyTrue(LessThan(left, right));
+                //return YIsAnyTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAny(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAny(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAnyTrue(LessThan(left, right));
+                //return YIsAnyTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAny(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAny(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAnyTrue(LessThan(left, right));
+                //return YIsAnyTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAny(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAny(Vector512<short> left, Vector512<short> right) {
-                return YIsAnyTrue(LessThan(left, right));
+                //return YIsAnyTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAny(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAny(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAnyTrue(LessThan(left, right));
+                //return YIsAnyTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAny(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAny(Vector512<int> left, Vector512<int> right) {
-                return YIsAnyTrue(LessThan(left, right));
+                //return YIsAnyTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAny(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAny(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAnyTrue(LessThan(left, right));
+                //return YIsAnyTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAny(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAny(Vector512<long> left, Vector512<long> right) {
-                return YIsAnyTrue(LessThan(left, right));
+                //return YIsAnyTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanAny(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanAny(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAnyTrue(LessThan(left, right));
+                //return YIsAnyTrue(LessThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanAny(left, right);
             }
 
 
@@ -1340,21 +1352,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqual(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> LessThanOrEqual(Vector512<float> left, Vector512<float> right) {
-#if NET5_0_OR_GREATER
-                return Avx.CompareLessThanOrEqual(left, right);
-#else
-                return Avx.Compare(left, right, FloatComparisonMode.OrderedLessThanOrEqualSignaling);
-#endif // NET5_0_OR_GREATER
+                return Avx512F.CompareLessThanOrEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqual(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> LessThanOrEqual(Vector512<double> left, Vector512<double> right) {
-#if NET5_0_OR_GREATER
-                return Avx.CompareLessThanOrEqual(left, right);
-#else
-                return Avx.Compare(left, right, FloatComparisonMode.OrderedLessThanOrEqualSignaling);
-#endif // NET5_0_OR_GREATER
+                return Avx512F.CompareLessThanOrEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqual(Vector512{sbyte}, Vector512{sbyte})"/>
@@ -1386,27 +1390,27 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqual(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> LessThanOrEqual(Vector512<int> left, Vector512<int> right) {
-                return OnesComplement(GreaterThan(left, right));
+                return Avx512F.CompareLessThanOrEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqual(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> LessThanOrEqual(Vector512<uint> left, Vector512<uint> right) {
-                return OnesComplement(GreaterThan(left, right));
+                return Avx512F.CompareLessThanOrEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqual(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> LessThanOrEqual(Vector512<long> left, Vector512<long> right) {
-                return OnesComplement(GreaterThan(left, right));
+                return Avx512F.CompareLessThanOrEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqual(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> LessThanOrEqual(Vector512<ulong> left, Vector512<ulong> right) {
-                return OnesComplement(GreaterThan(left, right));
+                return Avx512F.CompareLessThanOrEqual(left, right);
             }
 
 
@@ -1420,65 +1424,85 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAll(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAll(Vector512<float> left, Vector512<float> right) {
-                return YIsAllTrue(LessThanOrEqual(left, right));
+                //return YIsAllTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAll(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAll(Vector512<double> left, Vector512<double> right) {
-                return YIsAllTrue(LessThanOrEqual(left, right));
+                //return YIsAllTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAll(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAll(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAllTrue(LessThanOrEqual(left, right));
+                //return YIsAllTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAll(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAll(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAllTrue(LessThanOrEqual(left, right));
+                //return YIsAllTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAll(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAll(Vector512<short> left, Vector512<short> right) {
-                return YIsAllTrue(LessThanOrEqual(left, right));
+                //return YIsAllTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAll(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAll(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAllTrue(LessThanOrEqual(left, right));
+                //return YIsAllTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAll(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAll(Vector512<int> left, Vector512<int> right) {
-                return YIsAllTrue(LessThanOrEqual(left, right));
+                //return YIsAllTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAll(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAll(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAllTrue(LessThanOrEqual(left, right));
+                //return YIsAllTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAll(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAll(Vector512<long> left, Vector512<long> right) {
-                return YIsAllTrue(LessThanOrEqual(left, right));
+                //return YIsAllTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAll(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAll(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAllTrue(LessThanOrEqual(left, right));
+                //return YIsAllTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAll(left, right);
             }
 
 
@@ -1492,68 +1516,88 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAny(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAny(Vector512<float> left, Vector512<float> right) {
-                return YIsAnyTrue(LessThanOrEqual(left, right));
+                //return YIsAnyTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAny(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAny(Vector512<double> left, Vector512<double> right) {
-                return YIsAnyTrue(LessThanOrEqual(left, right));
+                //return YIsAnyTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAny(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAny(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAnyTrue(LessThanOrEqual(left, right));
+                //return YIsAnyTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAny(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAny(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAnyTrue(LessThanOrEqual(left, right));
+                //return YIsAnyTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAny(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAny(Vector512<short> left, Vector512<short> right) {
-                return YIsAnyTrue(LessThanOrEqual(left, right));
+                //return YIsAnyTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAny(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAny(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAnyTrue(LessThanOrEqual(left, right));
+                //return YIsAnyTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAny(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAny(Vector512<int> left, Vector512<int> right) {
-                return YIsAnyTrue(LessThanOrEqual(left, right));
+                //return YIsAnyTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAny(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAny(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAnyTrue(LessThanOrEqual(left, right));
+                //return YIsAnyTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAny(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAny(Vector512<long> left, Vector512<long> right) {
-                return YIsAnyTrue(LessThanOrEqual(left, right));
+                //return YIsAnyTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.LessThanOrEqualAny(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool LessThanOrEqualAny(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAnyTrue(LessThanOrEqual(left, right));
+                //return YIsAnyTrue(LessThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.LessThanOrEqualAny(left, right);
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.Max_AcceleratedTypes"/>
             public static TypeCodeFlags Max_AcceleratedTypes {
                 get {
