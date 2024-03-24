@@ -1741,13 +1741,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return Avx512F.Min(left, right);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.Multiply_AcceleratedTypes"/>
             public static TypeCodeFlags Multiply_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
 #if HARDWARE_OPTIMIZATION
-                    rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte;
 #endif // HARDWARE_OPTIMIZATION
                     return rt;
                 }
@@ -1756,7 +1756,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Multiply_FullAcceleratedTypes"/>
             public static TypeCodeFlags Multiply_FullAcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
                     return rt;
                 }
             }
@@ -1764,13 +1764,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Multiply(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Multiply(Vector512<float> left, Vector512<float> right) {
-                return Avx.Multiply(left, right);
+                return Avx512F.Multiply(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Multiply(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> Multiply(Vector512<double> left, Vector512<double> right) {
-                return Avx.Multiply(left, right);
+                return Avx512F.Multiply(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Multiply(Vector512{sbyte}, Vector512{sbyte})"/>
@@ -1797,87 +1797,40 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Multiply(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> Multiply(Vector512<short> left, Vector512<short> right) {
-                return Avx512.MultiplyLow(left, right);
+                return Avx512BW.MultiplyLow(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Multiply(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> Multiply(Vector512<ushort> left, Vector512<ushort> right) {
-                return Avx512.MultiplyLow(left, right);
+                return Avx512BW.MultiplyLow(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Multiply(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> Multiply(Vector512<int> left, Vector512<int> right) {
-                return Avx512.MultiplyLow(left, right);
+                return Avx512F.MultiplyLow(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Multiply(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> Multiply(Vector512<uint> left, Vector512<uint> right) {
-                return Avx512.MultiplyLow(left, right);
+                return Avx512F.MultiplyLow(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Multiply(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> Multiply(Vector512<long> left, Vector512<long> right) {
-#if HARDWARE_OPTIMIZATION
-                return Multiply_TwoWord(left, right);
-#else
-                return SuperStatics.Multiply(left, right);
-#endif // HARDWARE_OPTIMIZATION
+                return Avx512DQ.MultiplyLow(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Multiply(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> Multiply(Vector512<ulong> left, Vector512<ulong> right) {
-#if HARDWARE_OPTIMIZATION
-                return Multiply_TwoWord(left, right);
-#else
-                return SuperStatics.Multiply(left, right);
-#endif // HARDWARE_OPTIMIZATION
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.Multiply(Vector512{long}, Vector512{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> Multiply_TwoWord(Vector512<long> left, Vector512<long> right) {
-                return Multiply_TwoWord(left.AsUInt64(), right.AsUInt64()).AsInt64();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.Multiply(Vector512{ulong}, Vector512{ulong})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<ulong> Multiply_TwoWord(Vector512<ulong> left, Vector512<ulong> right) {
-                const int L = 32; // sizeof(uint) * 8;
-                //const ulong MASK_VALUE = (1L << L) - 1;
-                //Vector512<ulong> mask = Vector512.Create(MASK_VALUE);
-                Vector512<ulong> mask = Vector512Constants.Int64_VMaxUInt32.AsUInt64();
-                Vector512<ulong> w0;
-                Vector512<ulong> u1, v1, w1, low;
-                // u=left; v=right;
-                //u0 = u & MASK_VALUE; u1 = u >> L;
-                //v0 = v & MASK_VALUE; v1 = v >> L;
-                u1 = Avx512.ShiftRightLogical(left, L);
-                v1 = Avx512.ShiftRightLogical(right, L);
-                // u*v = (u1*v1)<<(2*L) + (u0*v1)<<L + (u1*v0)<<L + u0*v0
-                // Part1 = u0*v0
-                //w0 = u0 * v0;
-                w0 = Avx512.Multiply(left.AsUInt32(), right.AsUInt32());
-                // Part2 = (u1*v0)<<L + Part1
-                //w1 = u1 * v0 + (w0 >> L);
-                w1 = Avx512.Add(Avx512.Multiply(u1.AsUInt32(), right.AsUInt32())
-                    , Avx512.ShiftRightLogical(w0, L));
-                // Part3 = (u0*v1)<<L + Part2
-                //w1 = u0 * v1 + w1;
-                //low = (w1 << L) + (w0 & MASK_VALUE);
-                w1 = Avx512.Add(w1
-                    , Avx512.Multiply(left.AsUInt32(), v1.AsUInt32()));
-                low = Avx512.Or(Avx512.ShiftLeftLogical(w1, L)
-                    , Avx512.And(w0, mask));
-                return low;
+                return Avx512DQ.MultiplyLow(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Multiply(Vector512{sbyte}, Vector512{sbyte})"/>
@@ -1898,7 +1851,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.Negate_AcceleratedTypes"/>
             public static TypeCodeFlags Negate_AcceleratedTypes {
                 get {

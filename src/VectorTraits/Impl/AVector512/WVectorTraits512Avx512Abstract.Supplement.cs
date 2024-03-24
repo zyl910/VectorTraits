@@ -1516,7 +1516,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Min(left, right);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.Multiply_AcceleratedTypes"/>
         public override TypeCodeFlags Multiply_AcceleratedTypes {
             get {
@@ -1595,7 +1595,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Multiply(left, right);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.Negate_AcceleratedTypes"/>
         public override TypeCodeFlags Negate_AcceleratedTypes {
             get {
