@@ -231,7 +231,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return Avx512F.Divide(left, right);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.Dot_AcceleratedTypes"/>
             public static TypeCodeFlags Dot_AcceleratedTypes {
                 get {
@@ -243,14 +243,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Dot(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static float Dot(Vector512<float> left, Vector512<float> right) {
-                Vector512<float> temp = Avx.Multiply(left, right);
+                Vector512<float> temp = Avx512F.Multiply(left, right);
                 return Sum(temp);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Dot(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static double Dot(Vector512<double> left, Vector512<double> right) {
-                Vector512<double> temp = Avx.Multiply(left, right);
+                Vector512<double> temp = Avx512F.Multiply(left, right);
                 return Sum(temp);
             }
 
@@ -266,16 +266,16 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static byte Dot(Vector512<byte> left, Vector512<byte> right) {
                 Widen(left, out Vector512<ushort> u0, out Vector512<ushort> u1);
                 Widen(right, out Vector512<ushort> v0, out Vector512<ushort> v1);
-                Vector512<ushort> w0 = Avx512.MultiplyLow(u0, v0);
-                Vector512<ushort> w1 = Avx512.MultiplyLow(u1, v1);
-                w0 = Avx512.Add(w0, w1);
+                Vector512<ushort> w0 = Avx512BW.MultiplyLow(u0, v0);
+                Vector512<ushort> w1 = Avx512BW.MultiplyLow(u1, v1);
+                w0 = Avx512BW.Add(w0, w1);
                 return (byte)Sum(w0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Dot(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static short Dot(Vector512<short> left, Vector512<short> right) {
-                Vector512<short> temp = Avx512.MultiplyLow(left, right);
+                Vector512<short> temp = Avx512BW.MultiplyLow(left, right);
                 return Sum(temp);
             }
 
@@ -283,14 +283,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static ushort Dot(Vector512<ushort> left, Vector512<ushort> right) {
-                Vector512<ushort> temp = Avx512.MultiplyLow(left, right);
+                Vector512<ushort> temp = Avx512BW.MultiplyLow(left, right);
                 return Sum(temp);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Dot(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static int Dot(Vector512<int> left, Vector512<int> right) {
-                Vector512<int> temp = Avx512.MultiplyLow(left, right);
+                Vector512<int> temp = Avx512F.MultiplyLow(left, right);
                 return Sum(temp);
             }
 
@@ -298,7 +298,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint Dot(Vector512<uint> left, Vector512<uint> right) {
-                Vector512<uint> temp = Avx512.MultiplyLow(left, right);
+                Vector512<uint> temp = Avx512F.MultiplyLow(left, right);
                 return Sum(temp);
             }
 
@@ -316,7 +316,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<ulong> temp = Multiply(left, right);
                 return Sum(temp);
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits512.Equals_AcceleratedTypes"/>
             public static TypeCodeFlags Equals_AcceleratedTypes {

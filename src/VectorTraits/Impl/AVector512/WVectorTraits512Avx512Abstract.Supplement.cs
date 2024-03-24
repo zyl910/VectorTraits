@@ -220,7 +220,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Divide(left, right);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.Dot_AcceleratedTypes"/>
         public override TypeCodeFlags Dot_AcceleratedTypes {
             get {
@@ -291,7 +291,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override ulong Dot(Vector512<ulong> left, Vector512<ulong> right) {
             return Statics.Dot(left, right);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits512.Equals_AcceleratedTypes"/>
         public override TypeCodeFlags Equals_AcceleratedTypes {
