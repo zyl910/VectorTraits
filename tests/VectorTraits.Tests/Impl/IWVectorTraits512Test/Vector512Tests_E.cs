@@ -46,9 +46,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
             };
             foreach (Vector512<T> vector in samples) {
 #if NET7_0_OR_GREATER
-                uint expected = Vector512.ExtractMostSignificantBits((dynamic)vector);
+                ulong expected = Vector512.ExtractMostSignificantBits((dynamic)vector);
 #else
-                uint expected = Vector512s.ExtractMostSignificantBits((dynamic)vector);
+                ulong expected = Vector512s.ExtractMostSignificantBits((dynamic)vector);
 #endif // NET7_0_OR_GREATER
                 if (allowLog) {
                     Console.WriteLine();
@@ -57,7 +57,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                 }
                 foreach (IWVectorTraits512 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
-                    uint dst = instance.ExtractMostSignificantBits((dynamic)vector);
+                    ulong dst = instance.ExtractMostSignificantBits((dynamic)vector);
                     if (allowLogItem) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {

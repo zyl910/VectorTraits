@@ -205,7 +205,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<ulong> ConvertToUInt64_Range52RoundToEven(Vector512<double> value) {
             return Statics.ConvertToUInt64_Range52RoundToEven(value);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits_AcceleratedTypes"/>
         public override TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
@@ -217,74 +217,74 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{float})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override uint ExtractMostSignificantBits(Vector512<float> vector) {
+        public override ulong ExtractMostSignificantBits(Vector512<float> vector) {
             return Statics.ExtractMostSignificantBits(vector);
         }
 
         /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{double})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override uint ExtractMostSignificantBits(Vector512<double> vector) {
+        public override ulong ExtractMostSignificantBits(Vector512<double> vector) {
             return Statics.ExtractMostSignificantBits(vector);
         }
 
         /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override uint ExtractMostSignificantBits(Vector512<sbyte> vector) {
+        public override ulong ExtractMostSignificantBits(Vector512<sbyte> vector) {
             return Statics.ExtractMostSignificantBits(vector);
         }
 
         /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{byte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override uint ExtractMostSignificantBits(Vector512<byte> vector) {
+        public override ulong ExtractMostSignificantBits(Vector512<byte> vector) {
             return Statics.ExtractMostSignificantBits(vector);
         }
 
         /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{short})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override uint ExtractMostSignificantBits(Vector512<short> vector) {
+        public override ulong ExtractMostSignificantBits(Vector512<short> vector) {
             return Statics.ExtractMostSignificantBits(vector);
         }
 
         /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{ushort})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override uint ExtractMostSignificantBits(Vector512<ushort> vector) {
+        public override ulong ExtractMostSignificantBits(Vector512<ushort> vector) {
             return Statics.ExtractMostSignificantBits(vector);
         }
 
         /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{int})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override uint ExtractMostSignificantBits(Vector512<int> vector) {
+        public override ulong ExtractMostSignificantBits(Vector512<int> vector) {
             return Statics.ExtractMostSignificantBits(vector);
         }
 
         /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{uint})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override uint ExtractMostSignificantBits(Vector512<uint> vector) {
+        public override ulong ExtractMostSignificantBits(Vector512<uint> vector) {
             return Statics.ExtractMostSignificantBits(vector);
         }
 
         /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{long})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override uint ExtractMostSignificantBits(Vector512<long> vector) {
+        public override ulong ExtractMostSignificantBits(Vector512<long> vector) {
             return Statics.ExtractMostSignificantBits(vector);
         }
 
         /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override uint ExtractMostSignificantBits(Vector512<ulong> vector) {
+        public override ulong ExtractMostSignificantBits(Vector512<ulong> vector) {
             return Statics.ExtractMostSignificantBits(vector);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.Floor_AcceleratedTypes"/>
         public override TypeCodeFlags Floor_AcceleratedTypes {
             get {

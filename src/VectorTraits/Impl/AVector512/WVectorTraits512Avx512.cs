@@ -777,7 +777,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<ulong> result = Avx512.Xor(x.AsUInt64(), magicNumber.AsUInt64());
                 return result;
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits_AcceleratedTypes"/>
             public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
@@ -790,76 +790,84 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{float})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector512<float> vector) {
-                return (uint)Avx.MoveMask(vector);
+            public static ulong ExtractMostSignificantBits(Vector512<float> vector) {
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide vpmovd2m instructions.
+                return SuperStatics.ExtractMostSignificantBits(vector);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{double})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector512<double> vector) {
-                return (uint)Avx.MoveMask(vector);
+            public static ulong ExtractMostSignificantBits(Vector512<double> vector) {
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide vpmovq2m instructions.
+                return SuperStatics.ExtractMostSignificantBits(vector);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector512<sbyte> vector) {
-                return ExtractMostSignificantBits(vector.AsByte());
+            public static ulong ExtractMostSignificantBits(Vector512<sbyte> vector) {
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide vpmovb2m instructions.
+                return SuperStatics.ExtractMostSignificantBits(vector);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{byte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector512<byte> vector) {
-                return (uint)Avx512.MoveMask(vector);
+            public static ulong ExtractMostSignificantBits(Vector512<byte> vector) {
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide vpmovb2m instructions.
+                return SuperStatics.ExtractMostSignificantBits(vector);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{short})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector512<short> vector) {
-                return ExtractMostSignificantBits(vector.AsUInt16());
+            public static ulong ExtractMostSignificantBits(Vector512<short> vector) {
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide vpmovw2m instructions.
+                return SuperStatics.ExtractMostSignificantBits(vector);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector512<ushort> vector) {
-                Vector512<byte> m = Avx512.Shuffle(vector.AsByte(), Vector512Constants.ExtractMostSignificantBits_Shuffle_HiByteOf16); // Packed the high byte. 0~7 is the source 0~7, 16~23 is the source 8~15, and the rest is cleared.
-                m = Avx512.Permute4x64(m.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsByte(); // Swap 16~23 bytes, to 8~15 .
-                return (uint)Avx512.MoveMask(m);
+            public static ulong ExtractMostSignificantBits(Vector512<ushort> vector) {
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide vpmovw2m instructions.
+                return SuperStatics.ExtractMostSignificantBits(vector);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{int})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector512<int> vector) {
-                return ExtractMostSignificantBits(vector.AsSingle());
+            public static ulong ExtractMostSignificantBits(Vector512<int> vector) {
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide vpmovd2m instructions.
+                return SuperStatics.ExtractMostSignificantBits(vector);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector512<uint> vector) {
-                return ExtractMostSignificantBits(vector.AsSingle());
+            public static ulong ExtractMostSignificantBits(Vector512<uint> vector) {
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide vpmovd2m instructions.
+                return SuperStatics.ExtractMostSignificantBits(vector);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{long})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector512<long> vector) {
-                return ExtractMostSignificantBits(vector.AsDouble());
+            public static ulong ExtractMostSignificantBits(Vector512<long> vector) {
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide vpmovq2m instructions.
+                return SuperStatics.ExtractMostSignificantBits(vector);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits(Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static uint ExtractMostSignificantBits(Vector512<ulong> vector) {
-                return ExtractMostSignificantBits(vector.AsDouble());
+            public static ulong ExtractMostSignificantBits(Vector512<ulong> vector) {
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide vpmovq2m instructions.
+                return SuperStatics.ExtractMostSignificantBits(vector);
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.Floor_AcceleratedTypes"/>
             public static TypeCodeFlags Floor_AcceleratedTypes {
                 get {

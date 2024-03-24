@@ -582,7 +582,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     if (Vector512.IsHardwareAccelerated) {
-                        rt |= TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                        rt |= TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
                     }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
@@ -777,6 +777,38 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 29)) << 29)
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 30)) << 30)
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 31)) << 31)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 32)) << 32)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 33)) << 33)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 34)) << 34)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 35)) << 35)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 36)) << 36)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 37)) << 37)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 38)) << 38)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 39)) << 39)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 40)) << 40)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 41)) << 41)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 42)) << 42)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 43)) << 43)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 44)) << 44)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 45)) << 45)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 46)) << 46)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 47)) << 47)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 48)) << 48)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 49)) << 49)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 50)) << 50)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 51)) << 51)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 52)) << 52)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 53)) << 53)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 54)) << 54)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 55)) << 55)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 56)) << 56)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 57)) << 57)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 58)) << 58)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 59)) << 59)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 60)) << 60)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 61)) << 61)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 62)) << 62)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 63)) << 63)
                 ;
                 return rt;
             }
@@ -809,6 +841,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 13)) << 13)
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 14)) << 14)
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 15)) << 15)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 16)) << 16)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 17)) << 17)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 18)) << 18)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 19)) << 19)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 20)) << 20)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 21)) << 21)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 22)) << 22)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 23)) << 23)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 24)) << 24)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 25)) << 25)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 26)) << 26)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 27)) << 27)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 28)) << 28)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 29)) << 29)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 30)) << 30)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 31)) << 31)
                 ;
                 return rt;
             }
@@ -833,6 +881,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 5)) << 5)
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 6)) << 6)
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 7)) << 7)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 8)) << 8)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 9)) << 9)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 10)) << 10)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 11)) << 11)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 12)) << 12)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 13)) << 13)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 14)) << 14)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 15)) << 15)
                 ;
                 return rt;
             }
@@ -853,6 +909,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 1)) << 1)
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 2)) << 2)
                     | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 3)) << 3)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 4)) << 4)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 5)) << 5)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 6)) << 6)
+                    | (BitMath.GetMostSignificantBit(Unsafe.Add(ref p, 7)) << 7)
                 ;
                 return rt;
             }
