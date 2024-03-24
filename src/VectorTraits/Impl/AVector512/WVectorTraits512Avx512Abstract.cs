@@ -303,7 +303,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<double> Floor(Vector512<double> value) {
             return Statics.Floor(value);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits512.Narrow_AcceleratedTypes"/>
         public override TypeCodeFlags Narrow_AcceleratedTypes {
@@ -358,7 +358,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Narrow(lower, upper);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_AcceleratedTypes"/>
         public override TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {

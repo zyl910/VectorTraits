@@ -879,7 +879,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<double> Floor(Vector512<double> value) {
                 return Avx.Floor(value);
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow_AcceleratedTypes"/>
             public static TypeCodeFlags Narrow_AcceleratedTypes {
@@ -892,69 +892,50 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{double}, Vector512{double})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Narrow(Vector512<double> lower, Vector512<double> upper) {
-                return Vector512.Create(Avx.ConvertToVector128Single(lower), Avx.ConvertToVector128Single(upper));
+                return Vector512.Create(Avx512F.ConvertToVector256Single(lower), Avx512F.ConvertToVector256Single(upper));
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{short}, Vector512{short})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> Narrow(Vector512<short> lower, Vector512<short> upper) {
-                return Narrow(lower.AsUInt16(), upper.AsUInt16()).AsSByte();
+                return Vector512.Create(Avx512BW.ConvertToVector256SByte(lower), Avx512BW.ConvertToVector256SByte(upper));
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{ushort}, Vector512{ushort})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> Narrow(Vector512<ushort> lower, Vector512<ushort> upper) {
-                //Vector512<ushort> mask = Vector512s<ushort>.VMaxByte;
-                //Vector512<ushort> mask = Vector512.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
-                Vector512<ushort> mask = Vector512Constants.UInt16_VMaxByte;
-                Vector512<byte> raw = Avx512.PackUnsignedSaturate(Avx512.And(lower, mask).AsInt16(), Avx512.And(upper, mask).AsInt16()); // bit64(x, z, y, w)
-                Vector512<byte> rt = Avx512.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
-                return rt;
+                return Vector512.Create(Avx512BW.ConvertToVector256Byte(lower), Avx512BW.ConvertToVector256Byte(upper));
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{int}, Vector512{int})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> Narrow(Vector512<int> lower, Vector512<int> upper) {
-                return Narrow(lower.AsUInt32(), upper.AsUInt32()).AsInt16();
+                return Vector512.Create(Avx512F.ConvertToVector256Int16(lower), Avx512F.ConvertToVector256Int16(upper));
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{uint}, Vector512{uint})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> Narrow(Vector512<uint> lower, Vector512<uint> upper) {
-                Vector512<uint> mask = Vector512Constants.UInt32_VMaxUInt16;
-                Vector512<ushort> raw = Avx512.PackUnsignedSaturate(Avx512.And(lower, mask).AsInt32(), Avx512.And(upper, mask).AsInt32()); // bit64(x, z, y, w)
-                Vector512<ushort> rt = Avx512.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsUInt16(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
-                return rt;
+                return Vector512.Create(Avx512F.ConvertToVector256UInt16(lower), Avx512F.ConvertToVector256UInt16(upper));
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{long}, Vector512{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> Narrow(Vector512<long> lower, Vector512<long> upper) {
-                return Narrow(lower.AsUInt64(), upper.AsUInt64()).AsInt32();
+                return Vector512.Create(Avx512F.ConvertToVector256Int32(lower), Avx512F.ConvertToVector256Int32(upper));
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{ulong}, Vector512{ulong})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> Narrow(Vector512<ulong> lower, Vector512<ulong> upper) {
-                //  vmovupd     ymm0,ymmword ptr [rbp-2B70h]  
-                //  vpunpckldq  ymm0,ymm0,ymmword ptr [rbp-2B90h]  
-                //  vmovupd     ymm1,ymmword ptr [rbp-2B70h]  
-                //  vpunpckhdq  ymm1,ymm1,ymmword ptr [rbp-2B90h]  
-                //  vpunpckldq  ymm0,ymm0,ymm1  
-                //  vpermq      ymm0,ymm0,0D8h  
-                //  vmovupd     ymmword ptr [rbp-2BB0h],ymm0
-                Vector512<uint> l = Avx512.UnpackLow(lower.AsUInt32(), upper.AsUInt32()); // bit32(a0.L, b0.L, a0.H, b0.H, a2.L, b2.L, a2.H, b2.H)
-                Vector512<uint> h = Avx512.UnpackHigh(lower.AsUInt32(), upper.AsUInt32()); // bit32(a1.L, b1.L, a1.H, b1.H, a3.L, b3.L, a3.H, b3.H)
-                Vector512<uint> raw = Avx512.UnpackLow(l, h); // bit32(a0.L, a1.L, b0.L, b1.L, a2.L, a3.L, b2.L, b3.L). Need Permute4x64 to swap `b0.L, b1.L` and `a2.L, a3.L`.
-                Vector512<uint> rt = Avx512.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsUInt32(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
-                return rt;
+                return Vector512.Create(Avx512F.ConvertToVector256UInt32(lower), Avx512F.ConvertToVector256UInt32(upper));
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {
