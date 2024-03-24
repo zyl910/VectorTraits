@@ -2402,7 +2402,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return (ulong)Sum(value.AsInt64());
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.Widen_AcceleratedTypes"/>
             public static TypeCodeFlags Widen_AcceleratedTypes {
                 get {
@@ -2414,189 +2414,56 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{float}, out Vector512{double}, out Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector512<float> source, out Vector512<double> lower, out Vector512<double> upper) {
-                lower = Avx.ConvertToVector512Double(source.GetLower());
-                upper = Avx.ConvertToVector512Double(source.GetUpper());
+                lower = Avx512F.ConvertToVector512Double(source.GetLower());
+                upper = Avx512F.ConvertToVector512Double(source.GetUpper());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{sbyte}, out Vector512{short}, out Vector512{short})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector512<sbyte> source, out Vector512<short> lower, out Vector512<short> upper) {
-                Widen_ConvertTo(source, out lower, out upper);
+                lower = Avx512BW.ConvertToVector512Int16(source.GetLower());
+                upper = Avx512BW.ConvertToVector512Int16(source.GetUpper());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{byte}, out Vector512{ushort}, out Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector512<byte> source, out Vector512<ushort> lower, out Vector512<ushort> upper) {
-                Widen_ConvertTo(source, out lower, out upper);
+                lower = Avx512BW.ConvertToVector512UInt16(source.GetLower());
+                upper = Avx512BW.ConvertToVector512UInt16(source.GetUpper());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{short}, out Vector512{int}, out Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector512<short> source, out Vector512<int> lower, out Vector512<int> upper) {
-                Widen_ConvertTo(source, out lower, out upper);
+                lower = Avx512F.ConvertToVector512Int32(source.GetLower());
+                upper = Avx512F.ConvertToVector512Int32(source.GetUpper());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{ushort}, out Vector512{uint}, out Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector512<ushort> source, out Vector512<uint> lower, out Vector512<uint> upper) {
-                Widen_ConvertTo(source, out lower, out upper);
+                lower = Avx512F.ConvertToVector512UInt32(source.GetLower());
+                upper = Avx512F.ConvertToVector512UInt32(source.GetUpper());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{int}, out Vector512{long}, out Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector512<int> source, out Vector512<long> lower, out Vector512<long> upper) {
-                Widen_ConvertTo(source, out lower, out upper);
+                lower = Avx512F.ConvertToVector512Int64(source.GetLower());
+                upper = Avx512F.ConvertToVector512Int64(source.GetUpper());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{uint}, out Vector512{ulong}, out Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector512<uint> source, out Vector512<ulong> lower, out Vector512<ulong> upper) {
-                Widen_ConvertTo(source, out lower, out upper);
+                lower = Avx512F.ConvertToVector512UInt64(source.GetLower());
+                upper = Avx512F.ConvertToVector512UInt64(source.GetUpper());
             }
 
-            /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{sbyte}, out Vector512{short}, out Vector512{short})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_ConvertTo(Vector512<sbyte> source, out Vector512<short> lower, out Vector512<short> upper) {
-                lower = Avx512.ConvertToVector512Int16(source.GetLower());
-                upper = Avx512.ConvertToVector512Int16(source.GetUpper());
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{byte}, out Vector512{ushort}, out Vector512{ushort})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_ConvertTo(Vector512<byte> source, out Vector512<ushort> lower, out Vector512<ushort> upper) {
-                lower = Avx512.ConvertToVector512Int16(source.GetLower()).AsUInt16();
-                upper = Avx512.ConvertToVector512Int16(source.GetUpper()).AsUInt16();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{short}, out Vector512{int}, out Vector512{int})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_ConvertTo(Vector512<short> source, out Vector512<int> lower, out Vector512<int> upper) {
-                lower = Avx512.ConvertToVector512Int32(source.GetLower());
-                upper = Avx512.ConvertToVector512Int32(source.GetUpper());
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{ushort}, out Vector512{uint}, out Vector512{uint})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_ConvertTo(Vector512<ushort> source, out Vector512<uint> lower, out Vector512<uint> upper) {
-                lower = Avx512.ConvertToVector512Int32(source.GetLower()).AsUInt32();
-                upper = Avx512.ConvertToVector512Int32(source.GetUpper()).AsUInt32();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{int}, out Vector512{long}, out Vector512{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_ConvertTo(Vector512<int> source, out Vector512<long> lower, out Vector512<long> upper) {
-                lower = Avx512.ConvertToVector512Int64(source.GetLower());
-                upper = Avx512.ConvertToVector512Int64(source.GetUpper());
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{uint}, out Vector512{ulong}, out Vector512{ulong})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_ConvertTo(Vector512<uint> source, out Vector512<ulong> lower, out Vector512<ulong> upper) {
-                lower = Avx512.ConvertToVector512Int64(source.GetLower()).AsUInt64();
-                upper = Avx512.ConvertToVector512Int64(source.GetUpper()).AsUInt64();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{sbyte}, out Vector512{short}, out Vector512{short})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_Unpack(Vector512<sbyte> source, out Vector512<short> lower, out Vector512<short> upper) {
-                // vmovupd     ymm0,ymmword ptr [rbp-790h]  
-                // vpermq      ymm0,ymm0,0D4h  
-                // vxorps      ymm1,ymm1,ymm1  
-                // vpcmpgtb    ymm1,ymm1,ymm0  
-                // vpunpcklbw  ymm0,ymm0,ymm1  
-                // vmovupd     ymmword ptr [rbp-70h],ymm0  
-                // vmovupd     ymm0,ymmword ptr [rbp-790h]  
-                // vpermq      ymm0,ymm0,0E8h  
-                // vxorps      ymm1,ymm1,ymm1  
-                // vpcmpgtb    ymm1,ymm1,ymm0  
-                // vpunpckhbw  ymm0,ymm0,ymm1  
-                // vmovupd     ymmword ptr [rbp-90h],ymm0  
-                Vector512<sbyte> zero = Vector512<sbyte>.Zero;
-                Vector512<sbyte> lower0 = Avx512.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XYYW).AsSByte(); // UnpackLow uses only `X_Y_`.
-                Vector512<sbyte> upper0 = Avx512.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XZZW).AsSByte(); // UnpackHigh uses only `_Z_W`.
-                Vector512<sbyte> lowerMask = Avx512.CompareGreaterThan(zero, lower0); // sign[i] = (lower0[i]<0)?-1:0
-                Vector512<sbyte> upperMask = Avx512.CompareGreaterThan(zero, upper0); // sign[i] = (source1[i]<0)?-1:0
-                lower = Avx512.UnpackLow(lower0, lowerMask).AsInt16();
-                upper = Avx512.UnpackLow(upper0, upperMask).AsInt16();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{byte}, out Vector512{ushort}, out Vector512{ushort})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_Unpack(Vector512<byte> source, out Vector512<ushort> lower, out Vector512<ushort> upper) {
-                // vmovupd     ymm0,ymmword ptr [rbp-7D0h]  
-                // vpermq      ymm0,ymm0,0D4h  
-                // vxorps      ymm1,ymm1,ymm1  
-                // vpunpcklbw  ymm0,ymm0,ymm1  
-                // vmovupd     ymmword ptr [rbp-0B0h],ymm0  
-                // vmovupd     ymm0,ymmword ptr [rbp-7D0h]  
-                // vpermq      ymm0,ymm0,0E8h  
-                // vxorps      ymm1,ymm1,ymm1  
-                // vpunpckhbw  ymm0,ymm0,ymm1  
-                // vmovupd     ymmword ptr [rbp-0D0h],ymm0  
-                Vector512<byte> zero = Vector512<byte>.Zero;
-                Vector512<byte> lower0 = Avx512.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XYYW).AsByte(); // UnpackLow uses only `X_Y_`.
-                Vector512<byte> upper0 = Avx512.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XZZW).AsByte(); // UnpackHigh uses only `_Z_W`.
-                lower = Avx512.UnpackLow(lower0, zero).AsUInt16();
-                upper = Avx512.UnpackHigh(upper0, zero).AsUInt16();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{short}, out Vector512{int}, out Vector512{int})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_Unpack(Vector512<short> source, out Vector512<int> lower, out Vector512<int> upper) {
-                Vector512<short> zero = Vector512<short>.Zero;
-                Vector512<short> lower0 = Avx512.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XYYW).AsInt16();
-                Vector512<short> upper0 = Avx512.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XZZW).AsInt16();
-                Vector512<short> lowerMask = Avx512.CompareGreaterThan(zero, lower0);
-                Vector512<short> upperMask = Avx512.CompareGreaterThan(zero, upper0);
-                lower = Avx512.UnpackLow(lower0, lowerMask).AsInt32();
-                upper = Avx512.UnpackHigh(upper0, upperMask).AsInt32();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{ushort}, out Vector512{uint}, out Vector512{uint})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_Unpack(Vector512<ushort> source, out Vector512<uint> lower, out Vector512<uint> upper) {
-                Vector512<ushort> zero = Vector512<ushort>.Zero;
-                Vector512<ushort> lower0 = Avx512.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XYYW).AsUInt16();
-                Vector512<ushort> upper0 = Avx512.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XZZW).AsUInt16();
-                lower = Avx512.UnpackLow(lower0, zero).AsUInt32();
-                upper = Avx512.UnpackHigh(upper0, zero).AsUInt32();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{int}, out Vector512{long}, out Vector512{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_Unpack(Vector512<int> source, out Vector512<long> lower, out Vector512<long> upper) {
-                Vector512<int> zero = Vector512<int>.Zero;
-                Vector512<int> lower0 = Avx512.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XYYW).AsInt32();
-                Vector512<int> upper0 = Avx512.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XZZW).AsInt32();
-                Vector512<int> lowerMask = Avx512.CompareGreaterThan(zero, lower0);
-                Vector512<int> upperMask = Avx512.CompareGreaterThan(zero, upper0);
-                lower = Avx512.UnpackLow(lower0, lowerMask).AsInt64();
-                upper = Avx512.UnpackHigh(upper0, upperMask).AsInt64();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{uint}, out Vector512{ulong}, out Vector512{ulong})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_Unpack(Vector512<uint> source, out Vector512<ulong> lower, out Vector512<ulong> upper) {
-                Vector512<uint> zero = Vector512<uint>.Zero;
-                Vector512<uint> lower0 = Avx512.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XYYW).AsUInt32();
-                Vector512<uint> upper0 = Avx512.Permute4x64(source.AsUInt64(), (byte)ShuffleControlG4.XZZW).AsUInt32();
-                lower = Avx512.UnpackLow(lower0, zero).AsUInt64();
-                upper = Avx512.UnpackHigh(upper0, zero).AsUInt64();
-            }
-
-*/
 #endif // NET8_0_OR_GREATER
         }
 

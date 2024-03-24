@@ -4001,11 +4001,19 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref plower, 2) = Unsafe.Add(ref p, 2);
                 Unsafe.Add(ref plower, 3) = Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref plower, 4) = Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref plower, 5) = Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref plower, 6) = Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref plower, 7) = Unsafe.Add(ref p, 7);
                 p = ref Unsafe.Add(ref p, cnt);
                 pupper = p;
                 Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref pupper, 2) = Unsafe.Add(ref p, 2);
                 Unsafe.Add(ref pupper, 3) = Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref pupper, 4) = Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref pupper, 5) = Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref pupper, 6) = Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref pupper, 7) = Unsafe.Add(ref p, 7);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{sbyte}, out Vector512{short}, out Vector512{short})"/>
@@ -4034,6 +4042,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref plower, 13) = Unsafe.Add(ref p, 13);
                 Unsafe.Add(ref plower, 14) = Unsafe.Add(ref p, 14);
                 Unsafe.Add(ref plower, 15) = Unsafe.Add(ref p, 15);
+                Unsafe.Add(ref plower, 16) = Unsafe.Add(ref p, 16);
+                Unsafe.Add(ref plower, 17) = Unsafe.Add(ref p, 17);
+                Unsafe.Add(ref plower, 18) = Unsafe.Add(ref p, 18);
+                Unsafe.Add(ref plower, 19) = Unsafe.Add(ref p, 19);
+                Unsafe.Add(ref plower, 20) = Unsafe.Add(ref p, 20);
+                Unsafe.Add(ref plower, 21) = Unsafe.Add(ref p, 21);
+                Unsafe.Add(ref plower, 22) = Unsafe.Add(ref p, 22);
+                Unsafe.Add(ref plower, 23) = Unsafe.Add(ref p, 23);
+                Unsafe.Add(ref plower, 24) = Unsafe.Add(ref p, 24);
+                Unsafe.Add(ref plower, 25) = Unsafe.Add(ref p, 25);
+                Unsafe.Add(ref plower, 26) = Unsafe.Add(ref p, 26);
+                Unsafe.Add(ref plower, 27) = Unsafe.Add(ref p, 27);
+                Unsafe.Add(ref plower, 28) = Unsafe.Add(ref p, 28);
+                Unsafe.Add(ref plower, 29) = Unsafe.Add(ref p, 29);
+                Unsafe.Add(ref plower, 30) = Unsafe.Add(ref p, 30);
+                Unsafe.Add(ref plower, 31) = Unsafe.Add(ref p, 31);
                 p = ref Unsafe.Add(ref p, cnt);
                 pupper = p;
                 Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
@@ -4051,6 +4075,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref pupper, 13) = Unsafe.Add(ref p, 13);
                 Unsafe.Add(ref pupper, 14) = Unsafe.Add(ref p, 14);
                 Unsafe.Add(ref pupper, 15) = Unsafe.Add(ref p, 15);
+                Unsafe.Add(ref pupper, 16) = Unsafe.Add(ref p, 16);
+                Unsafe.Add(ref pupper, 17) = Unsafe.Add(ref p, 17);
+                Unsafe.Add(ref pupper, 18) = Unsafe.Add(ref p, 18);
+                Unsafe.Add(ref pupper, 19) = Unsafe.Add(ref p, 19);
+                Unsafe.Add(ref pupper, 20) = Unsafe.Add(ref p, 20);
+                Unsafe.Add(ref pupper, 21) = Unsafe.Add(ref p, 21);
+                Unsafe.Add(ref pupper, 22) = Unsafe.Add(ref p, 22);
+                Unsafe.Add(ref pupper, 23) = Unsafe.Add(ref p, 23);
+                Unsafe.Add(ref pupper, 24) = Unsafe.Add(ref p, 24);
+                Unsafe.Add(ref pupper, 25) = Unsafe.Add(ref p, 25);
+                Unsafe.Add(ref pupper, 26) = Unsafe.Add(ref p, 26);
+                Unsafe.Add(ref pupper, 27) = Unsafe.Add(ref p, 27);
+                Unsafe.Add(ref pupper, 28) = Unsafe.Add(ref p, 28);
+                Unsafe.Add(ref pupper, 29) = Unsafe.Add(ref p, 29);
+                Unsafe.Add(ref pupper, 30) = Unsafe.Add(ref p, 30);
+                Unsafe.Add(ref pupper, 31) = Unsafe.Add(ref p, 31);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{byte}, out Vector512{ushort}, out Vector512{ushort})"/>
@@ -4063,6 +4103,82 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 ref byte p = ref Unsafe.As<Vector512<byte>, byte>(ref source);
                 ref ushort plower = ref Unsafe.As<Vector512<ushort>, ushort>(ref lower);
                 ref ushort pupper = ref Unsafe.As<Vector512<ushort>, ushort>(ref upper);
+                plower = p;
+                Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref plower, 2) = Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref plower, 3) = Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref plower, 4) = Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref plower, 5) = Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref plower, 6) = Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref plower, 7) = Unsafe.Add(ref p, 7);
+                Unsafe.Add(ref plower, 8) = Unsafe.Add(ref p, 8);
+                Unsafe.Add(ref plower, 9) = Unsafe.Add(ref p, 9);
+                Unsafe.Add(ref plower, 10) = Unsafe.Add(ref p, 10);
+                Unsafe.Add(ref plower, 11) = Unsafe.Add(ref p, 11);
+                Unsafe.Add(ref plower, 12) = Unsafe.Add(ref p, 12);
+                Unsafe.Add(ref plower, 13) = Unsafe.Add(ref p, 13);
+                Unsafe.Add(ref plower, 14) = Unsafe.Add(ref p, 14);
+                Unsafe.Add(ref plower, 15) = Unsafe.Add(ref p, 15);
+                Unsafe.Add(ref plower, 16) = Unsafe.Add(ref p, 16);
+                Unsafe.Add(ref plower, 17) = Unsafe.Add(ref p, 17);
+                Unsafe.Add(ref plower, 18) = Unsafe.Add(ref p, 18);
+                Unsafe.Add(ref plower, 19) = Unsafe.Add(ref p, 19);
+                Unsafe.Add(ref plower, 20) = Unsafe.Add(ref p, 20);
+                Unsafe.Add(ref plower, 21) = Unsafe.Add(ref p, 21);
+                Unsafe.Add(ref plower, 22) = Unsafe.Add(ref p, 22);
+                Unsafe.Add(ref plower, 23) = Unsafe.Add(ref p, 23);
+                Unsafe.Add(ref plower, 24) = Unsafe.Add(ref p, 24);
+                Unsafe.Add(ref plower, 25) = Unsafe.Add(ref p, 25);
+                Unsafe.Add(ref plower, 26) = Unsafe.Add(ref p, 26);
+                Unsafe.Add(ref plower, 27) = Unsafe.Add(ref p, 27);
+                Unsafe.Add(ref plower, 28) = Unsafe.Add(ref p, 28);
+                Unsafe.Add(ref plower, 29) = Unsafe.Add(ref p, 29);
+                Unsafe.Add(ref plower, 30) = Unsafe.Add(ref p, 30);
+                Unsafe.Add(ref plower, 31) = Unsafe.Add(ref p, 31);
+                p = ref Unsafe.Add(ref p, cnt);
+                pupper = p;
+                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
+                Unsafe.Add(ref pupper, 2) = Unsafe.Add(ref p, 2);
+                Unsafe.Add(ref pupper, 3) = Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref pupper, 4) = Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref pupper, 5) = Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref pupper, 6) = Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref pupper, 7) = Unsafe.Add(ref p, 7);
+                Unsafe.Add(ref pupper, 8) = Unsafe.Add(ref p, 8);
+                Unsafe.Add(ref pupper, 9) = Unsafe.Add(ref p, 9);
+                Unsafe.Add(ref pupper, 10) = Unsafe.Add(ref p, 10);
+                Unsafe.Add(ref pupper, 11) = Unsafe.Add(ref p, 11);
+                Unsafe.Add(ref pupper, 12) = Unsafe.Add(ref p, 12);
+                Unsafe.Add(ref pupper, 13) = Unsafe.Add(ref p, 13);
+                Unsafe.Add(ref pupper, 14) = Unsafe.Add(ref p, 14);
+                Unsafe.Add(ref pupper, 15) = Unsafe.Add(ref p, 15);
+                Unsafe.Add(ref pupper, 16) = Unsafe.Add(ref p, 16);
+                Unsafe.Add(ref pupper, 17) = Unsafe.Add(ref p, 17);
+                Unsafe.Add(ref pupper, 18) = Unsafe.Add(ref p, 18);
+                Unsafe.Add(ref pupper, 19) = Unsafe.Add(ref p, 19);
+                Unsafe.Add(ref pupper, 20) = Unsafe.Add(ref p, 20);
+                Unsafe.Add(ref pupper, 21) = Unsafe.Add(ref p, 21);
+                Unsafe.Add(ref pupper, 22) = Unsafe.Add(ref p, 22);
+                Unsafe.Add(ref pupper, 23) = Unsafe.Add(ref p, 23);
+                Unsafe.Add(ref pupper, 24) = Unsafe.Add(ref p, 24);
+                Unsafe.Add(ref pupper, 25) = Unsafe.Add(ref p, 25);
+                Unsafe.Add(ref pupper, 26) = Unsafe.Add(ref p, 26);
+                Unsafe.Add(ref pupper, 27) = Unsafe.Add(ref p, 27);
+                Unsafe.Add(ref pupper, 28) = Unsafe.Add(ref p, 28);
+                Unsafe.Add(ref pupper, 29) = Unsafe.Add(ref p, 29);
+                Unsafe.Add(ref pupper, 30) = Unsafe.Add(ref p, 30);
+                Unsafe.Add(ref pupper, 31) = Unsafe.Add(ref p, 31);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{short}, out Vector512{int}, out Vector512{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void Widen_Basic(Vector512<short> source, out Vector512<int> lower, out Vector512<int> upper) {
+                nint cnt = Vector512<int>.Count;
+                UnsafeUtil.SkipInit(out lower);
+                UnsafeUtil.SkipInit(out upper);
+                ref short p = ref Unsafe.As<Vector512<short>, short>(ref source);
+                ref int plower = ref Unsafe.As<Vector512<int>, int>(ref lower);
+                ref int pupper = ref Unsafe.As<Vector512<int>, int>(ref upper);
                 plower = p;
                 Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref plower, 2) = Unsafe.Add(ref p, 2);
@@ -4098,34 +4214,6 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref pupper, 15) = Unsafe.Add(ref p, 15);
             }
 
-            /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{short}, out Vector512{int}, out Vector512{int})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static void Widen_Basic(Vector512<short> source, out Vector512<int> lower, out Vector512<int> upper) {
-                nint cnt = Vector512<int>.Count;
-                UnsafeUtil.SkipInit(out lower);
-                UnsafeUtil.SkipInit(out upper);
-                ref short p = ref Unsafe.As<Vector512<short>, short>(ref source);
-                ref int plower = ref Unsafe.As<Vector512<int>, int>(ref lower);
-                ref int pupper = ref Unsafe.As<Vector512<int>, int>(ref upper);
-                plower = p;
-                Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
-                Unsafe.Add(ref plower, 2) = Unsafe.Add(ref p, 2);
-                Unsafe.Add(ref plower, 3) = Unsafe.Add(ref p, 3);
-                Unsafe.Add(ref plower, 4) = Unsafe.Add(ref p, 4);
-                Unsafe.Add(ref plower, 5) = Unsafe.Add(ref p, 5);
-                Unsafe.Add(ref plower, 6) = Unsafe.Add(ref p, 6);
-                Unsafe.Add(ref plower, 7) = Unsafe.Add(ref p, 7);
-                p = ref Unsafe.Add(ref p, cnt);
-                pupper = p;
-                Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
-                Unsafe.Add(ref pupper, 2) = Unsafe.Add(ref p, 2);
-                Unsafe.Add(ref pupper, 3) = Unsafe.Add(ref p, 3);
-                Unsafe.Add(ref pupper, 4) = Unsafe.Add(ref p, 4);
-                Unsafe.Add(ref pupper, 5) = Unsafe.Add(ref p, 5);
-                Unsafe.Add(ref pupper, 6) = Unsafe.Add(ref p, 6);
-                Unsafe.Add(ref pupper, 7) = Unsafe.Add(ref p, 7);
-            }
-
             /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{ushort}, out Vector512{uint}, out Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -4144,6 +4232,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref plower, 5) = Unsafe.Add(ref p, 5);
                 Unsafe.Add(ref plower, 6) = Unsafe.Add(ref p, 6);
                 Unsafe.Add(ref plower, 7) = Unsafe.Add(ref p, 7);
+                Unsafe.Add(ref plower, 8) = Unsafe.Add(ref p, 8);
+                Unsafe.Add(ref plower, 9) = Unsafe.Add(ref p, 9);
+                Unsafe.Add(ref plower, 10) = Unsafe.Add(ref p, 10);
+                Unsafe.Add(ref plower, 11) = Unsafe.Add(ref p, 11);
+                Unsafe.Add(ref plower, 12) = Unsafe.Add(ref p, 12);
+                Unsafe.Add(ref plower, 13) = Unsafe.Add(ref p, 13);
+                Unsafe.Add(ref plower, 14) = Unsafe.Add(ref p, 14);
+                Unsafe.Add(ref plower, 15) = Unsafe.Add(ref p, 15);
                 p = ref Unsafe.Add(ref p, cnt);
                 pupper = p;
                 Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
@@ -4153,6 +4249,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref pupper, 5) = Unsafe.Add(ref p, 5);
                 Unsafe.Add(ref pupper, 6) = Unsafe.Add(ref p, 6);
                 Unsafe.Add(ref pupper, 7) = Unsafe.Add(ref p, 7);
+                Unsafe.Add(ref pupper, 8) = Unsafe.Add(ref p, 8);
+                Unsafe.Add(ref pupper, 9) = Unsafe.Add(ref p, 9);
+                Unsafe.Add(ref pupper, 10) = Unsafe.Add(ref p, 10);
+                Unsafe.Add(ref pupper, 11) = Unsafe.Add(ref p, 11);
+                Unsafe.Add(ref pupper, 12) = Unsafe.Add(ref p, 12);
+                Unsafe.Add(ref pupper, 13) = Unsafe.Add(ref p, 13);
+                Unsafe.Add(ref pupper, 14) = Unsafe.Add(ref p, 14);
+                Unsafe.Add(ref pupper, 15) = Unsafe.Add(ref p, 15);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{int}, out Vector512{long}, out Vector512{long})"/>
@@ -4168,11 +4272,19 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref plower, 2) = Unsafe.Add(ref p, 2);
                 Unsafe.Add(ref plower, 3) = Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref plower, 4) = Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref plower, 5) = Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref plower, 6) = Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref plower, 7) = Unsafe.Add(ref p, 7);
                 p = ref Unsafe.Add(ref p, cnt);
                 pupper = p;
                 Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref pupper, 2) = Unsafe.Add(ref p, 2);
                 Unsafe.Add(ref pupper, 3) = Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref pupper, 4) = Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref pupper, 5) = Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref pupper, 6) = Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref pupper, 7) = Unsafe.Add(ref p, 7);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Widen(Vector512{uint}, out Vector512{ulong}, out Vector512{ulong})"/>
@@ -4189,11 +4301,19 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref plower, 1) = Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref plower, 2) = Unsafe.Add(ref p, 2);
                 Unsafe.Add(ref plower, 3) = Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref plower, 4) = Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref plower, 5) = Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref plower, 6) = Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref plower, 7) = Unsafe.Add(ref p, 7);
                 p = ref Unsafe.Add(ref p, cnt);
                 pupper = p;
                 Unsafe.Add(ref pupper, 1) = Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref pupper, 2) = Unsafe.Add(ref p, 2);
                 Unsafe.Add(ref pupper, 3) = Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref pupper, 4) = Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref pupper, 5) = Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref pupper, 6) = Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref pupper, 7) = Unsafe.Add(ref p, 7);
             }
 
 

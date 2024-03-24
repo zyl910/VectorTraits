@@ -1419,7 +1419,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Sum(value);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.Widen_AcceleratedTypes"/>
         public override TypeCodeFlags Widen_AcceleratedTypes {
             get {
@@ -1472,7 +1472,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override void Widen(Vector512<uint> source, out Vector512<ulong> lower, out Vector512<ulong> upper) {
             Statics.Widen(source, out lower, out upper);
         }
-*/
+
 #endif
     }
 }
