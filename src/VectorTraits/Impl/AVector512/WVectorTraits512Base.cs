@@ -134,6 +134,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 5) = MathF.Ceiling(Unsafe.Add(ref p, 5));
                 Unsafe.Add(ref p, 6) = MathF.Ceiling(Unsafe.Add(ref p, 6));
                 Unsafe.Add(ref p, 7) = MathF.Ceiling(Unsafe.Add(ref p, 7));
+                Unsafe.Add(ref p, 8) = MathF.Ceiling(Unsafe.Add(ref p, 8));
+                Unsafe.Add(ref p, 9) = MathF.Ceiling(Unsafe.Add(ref p, 9));
+                Unsafe.Add(ref p, 10) = MathF.Ceiling(Unsafe.Add(ref p, 10));
+                Unsafe.Add(ref p, 11) = MathF.Ceiling(Unsafe.Add(ref p, 11));
+                Unsafe.Add(ref p, 12) = MathF.Ceiling(Unsafe.Add(ref p, 12));
+                Unsafe.Add(ref p, 13) = MathF.Ceiling(Unsafe.Add(ref p, 13));
+                Unsafe.Add(ref p, 14) = MathF.Ceiling(Unsafe.Add(ref p, 14));
+                Unsafe.Add(ref p, 15) = MathF.Ceiling(Unsafe.Add(ref p, 15));
                 return rt;
             }
 
@@ -146,6 +154,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 1) = Math.Ceiling(Unsafe.Add(ref p, 1));
                 Unsafe.Add(ref p, 2) = Math.Ceiling(Unsafe.Add(ref p, 2));
                 Unsafe.Add(ref p, 3) = Math.Ceiling(Unsafe.Add(ref p, 3));
+                Unsafe.Add(ref p, 4) = Math.Ceiling(Unsafe.Add(ref p, 4));
+                Unsafe.Add(ref p, 5) = Math.Ceiling(Unsafe.Add(ref p, 5));
+                Unsafe.Add(ref p, 6) = Math.Ceiling(Unsafe.Add(ref p, 6));
+                Unsafe.Add(ref p, 7) = Math.Ceiling(Unsafe.Add(ref p, 7));
                 return rt;
             }
 

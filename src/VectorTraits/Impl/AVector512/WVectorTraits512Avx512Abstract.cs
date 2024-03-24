@@ -47,7 +47,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         }
 
 #if NET8_0_OR_GREATER
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.Ceiling_AcceleratedTypes"/>
         public override TypeCodeFlags Ceiling_AcceleratedTypes {
             get {
@@ -67,7 +67,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Ceiling(value);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble_AcceleratedTypes"/>
         public override TypeCodeFlags ConvertToDouble_AcceleratedTypes {
             get {

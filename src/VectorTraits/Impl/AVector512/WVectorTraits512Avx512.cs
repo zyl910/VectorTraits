@@ -124,7 +124,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             }
 
 #if NET8_0_OR_GREATER
-/*
+
 
             /// <inheritdoc cref="IWVectorTraits512.Ceiling_AcceleratedTypes"/>
             public static TypeCodeFlags Ceiling_AcceleratedTypes {
@@ -137,16 +137,16 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Ceiling(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Ceiling(Vector512<float> value) {
-                return Avx.Ceiling(value);
+                return Avx512F.RoundScale(value, (byte)FloatRoundMode.ToPositiveInfinity);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Ceiling(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> Ceiling(Vector512<double> value) {
-                return Avx.Ceiling(value);
+                return Avx512F.RoundScale(value, (byte)FloatRoundMode.ToPositiveInfinity);
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToDouble_AcceleratedTypes {
                 get {
