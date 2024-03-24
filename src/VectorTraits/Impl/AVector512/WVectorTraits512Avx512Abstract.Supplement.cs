@@ -1595,7 +1595,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Multiply(left, right);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.Negate_AcceleratedTypes"/>
         public override TypeCodeFlags Negate_AcceleratedTypes {
             get {
@@ -1639,7 +1639,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<long> Negate(Vector512<long> value) {
             return Statics.Negate(value);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits512.OnesComplement_AcceleratedTypes"/>
         public override TypeCodeFlags OnesComplement_AcceleratedTypes {

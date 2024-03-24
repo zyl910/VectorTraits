@@ -5704,6 +5704,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 5) = -Unsafe.Add(ref p, 5);
                 Unsafe.Add(ref p, 6) = -Unsafe.Add(ref p, 6);
                 Unsafe.Add(ref p, 7) = -Unsafe.Add(ref p, 7);
+                Unsafe.Add(ref p, 8) = -Unsafe.Add(ref p, 8);
+                Unsafe.Add(ref p, 9) = -Unsafe.Add(ref p, 9);
+                Unsafe.Add(ref p, 10) = -Unsafe.Add(ref p, 10);
+                Unsafe.Add(ref p, 11) = -Unsafe.Add(ref p, 11);
+                Unsafe.Add(ref p, 12) = -Unsafe.Add(ref p, 12);
+                Unsafe.Add(ref p, 13) = -Unsafe.Add(ref p, 13);
+                Unsafe.Add(ref p, 14) = -Unsafe.Add(ref p, 14);
+                Unsafe.Add(ref p, 15) = -Unsafe.Add(ref p, 15);
                 return rt;
             }
 
@@ -5716,6 +5724,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 1) = -Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref p, 2) = -Unsafe.Add(ref p, 2);
                 Unsafe.Add(ref p, 3) = -Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref p, 4) = -Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref p, 5) = -Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref p, 6) = -Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref p, 7) = -Unsafe.Add(ref p, 7);
                 return rt;
             }
 
@@ -5757,6 +5769,38 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 29) = (sbyte)-Unsafe.Add(ref p, 29);
                 Unsafe.Add(ref p, 30) = (sbyte)-Unsafe.Add(ref p, 30);
                 Unsafe.Add(ref p, 31) = (sbyte)-Unsafe.Add(ref p, 31);
+                Unsafe.Add(ref p, 32) = (sbyte)-Unsafe.Add(ref p, 32);
+                Unsafe.Add(ref p, 33) = (sbyte)-Unsafe.Add(ref p, 33);
+                Unsafe.Add(ref p, 34) = (sbyte)-Unsafe.Add(ref p, 34);
+                Unsafe.Add(ref p, 35) = (sbyte)-Unsafe.Add(ref p, 35);
+                Unsafe.Add(ref p, 36) = (sbyte)-Unsafe.Add(ref p, 36);
+                Unsafe.Add(ref p, 37) = (sbyte)-Unsafe.Add(ref p, 37);
+                Unsafe.Add(ref p, 38) = (sbyte)-Unsafe.Add(ref p, 38);
+                Unsafe.Add(ref p, 39) = (sbyte)-Unsafe.Add(ref p, 39);
+                Unsafe.Add(ref p, 40) = (sbyte)-Unsafe.Add(ref p, 40);
+                Unsafe.Add(ref p, 41) = (sbyte)-Unsafe.Add(ref p, 41);
+                Unsafe.Add(ref p, 42) = (sbyte)-Unsafe.Add(ref p, 42);
+                Unsafe.Add(ref p, 43) = (sbyte)-Unsafe.Add(ref p, 43);
+                Unsafe.Add(ref p, 44) = (sbyte)-Unsafe.Add(ref p, 44);
+                Unsafe.Add(ref p, 45) = (sbyte)-Unsafe.Add(ref p, 45);
+                Unsafe.Add(ref p, 46) = (sbyte)-Unsafe.Add(ref p, 46);
+                Unsafe.Add(ref p, 47) = (sbyte)-Unsafe.Add(ref p, 47);
+                Unsafe.Add(ref p, 48) = (sbyte)-Unsafe.Add(ref p, 48);
+                Unsafe.Add(ref p, 49) = (sbyte)-Unsafe.Add(ref p, 49);
+                Unsafe.Add(ref p, 50) = (sbyte)-Unsafe.Add(ref p, 50);
+                Unsafe.Add(ref p, 51) = (sbyte)-Unsafe.Add(ref p, 51);
+                Unsafe.Add(ref p, 52) = (sbyte)-Unsafe.Add(ref p, 52);
+                Unsafe.Add(ref p, 53) = (sbyte)-Unsafe.Add(ref p, 53);
+                Unsafe.Add(ref p, 54) = (sbyte)-Unsafe.Add(ref p, 54);
+                Unsafe.Add(ref p, 55) = (sbyte)-Unsafe.Add(ref p, 55);
+                Unsafe.Add(ref p, 56) = (sbyte)-Unsafe.Add(ref p, 56);
+                Unsafe.Add(ref p, 57) = (sbyte)-Unsafe.Add(ref p, 57);
+                Unsafe.Add(ref p, 58) = (sbyte)-Unsafe.Add(ref p, 58);
+                Unsafe.Add(ref p, 59) = (sbyte)-Unsafe.Add(ref p, 59);
+                Unsafe.Add(ref p, 60) = (sbyte)-Unsafe.Add(ref p, 60);
+                Unsafe.Add(ref p, 61) = (sbyte)-Unsafe.Add(ref p, 61);
+                Unsafe.Add(ref p, 62) = (sbyte)-Unsafe.Add(ref p, 62);
+                Unsafe.Add(ref p, 63) = (sbyte)-Unsafe.Add(ref p, 63);
                 return rt;
             }
 
@@ -5781,6 +5825,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 13) = (short)-Unsafe.Add(ref p, 13);
                 Unsafe.Add(ref p, 14) = (short)-Unsafe.Add(ref p, 14);
                 Unsafe.Add(ref p, 15) = (short)-Unsafe.Add(ref p, 15);
+                Unsafe.Add(ref p, 16) = (short)-Unsafe.Add(ref p, 16);
+                Unsafe.Add(ref p, 17) = (short)-Unsafe.Add(ref p, 17);
+                Unsafe.Add(ref p, 18) = (short)-Unsafe.Add(ref p, 18);
+                Unsafe.Add(ref p, 19) = (short)-Unsafe.Add(ref p, 19);
+                Unsafe.Add(ref p, 20) = (short)-Unsafe.Add(ref p, 20);
+                Unsafe.Add(ref p, 21) = (short)-Unsafe.Add(ref p, 21);
+                Unsafe.Add(ref p, 22) = (short)-Unsafe.Add(ref p, 22);
+                Unsafe.Add(ref p, 23) = (short)-Unsafe.Add(ref p, 23);
+                Unsafe.Add(ref p, 24) = (short)-Unsafe.Add(ref p, 24);
+                Unsafe.Add(ref p, 25) = (short)-Unsafe.Add(ref p, 25);
+                Unsafe.Add(ref p, 26) = (short)-Unsafe.Add(ref p, 26);
+                Unsafe.Add(ref p, 27) = (short)-Unsafe.Add(ref p, 27);
+                Unsafe.Add(ref p, 28) = (short)-Unsafe.Add(ref p, 28);
+                Unsafe.Add(ref p, 29) = (short)-Unsafe.Add(ref p, 29);
+                Unsafe.Add(ref p, 30) = (short)-Unsafe.Add(ref p, 30);
+                Unsafe.Add(ref p, 31) = (short)-Unsafe.Add(ref p, 31);
                 return rt;
             }
 
@@ -5797,6 +5857,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 5) = -Unsafe.Add(ref p, 5);
                 Unsafe.Add(ref p, 6) = -Unsafe.Add(ref p, 6);
                 Unsafe.Add(ref p, 7) = -Unsafe.Add(ref p, 7);
+                Unsafe.Add(ref p, 8) = -Unsafe.Add(ref p, 8);
+                Unsafe.Add(ref p, 9) = -Unsafe.Add(ref p, 9);
+                Unsafe.Add(ref p, 10) = -Unsafe.Add(ref p, 10);
+                Unsafe.Add(ref p, 11) = -Unsafe.Add(ref p, 11);
+                Unsafe.Add(ref p, 12) = -Unsafe.Add(ref p, 12);
+                Unsafe.Add(ref p, 13) = -Unsafe.Add(ref p, 13);
+                Unsafe.Add(ref p, 14) = -Unsafe.Add(ref p, 14);
+                Unsafe.Add(ref p, 15) = -Unsafe.Add(ref p, 15);
                 return rt;
             }
 
@@ -5809,6 +5877,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 1) = -Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref p, 2) = -Unsafe.Add(ref p, 2);
                 Unsafe.Add(ref p, 3) = -Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref p, 4) = -Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref p, 5) = -Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref p, 6) = -Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref p, 7) = -Unsafe.Add(ref p, 7);
                 return rt;
             }
 

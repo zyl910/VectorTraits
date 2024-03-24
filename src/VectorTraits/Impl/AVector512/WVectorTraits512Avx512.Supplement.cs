@@ -1851,7 +1851,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.Negate_AcceleratedTypes"/>
             public static TypeCodeFlags Negate_AcceleratedTypes {
                 get {
@@ -1863,40 +1863,40 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Negate(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Negate(Vector512<float> value) {
-                return Avx.Subtract(Vector512<float>.Zero, value);
+                return Avx512F.Subtract(Vector512<float>.Zero, value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Negate(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> Negate(Vector512<double> value) {
-                return Avx.Subtract(Vector512<double>.Zero, value);
+                return Avx512F.Subtract(Vector512<double>.Zero, value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Negate(Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> Negate(Vector512<sbyte> value) {
-                return Avx512.Subtract(Vector512<sbyte>.Zero, value);
+                return Avx512BW.Subtract(Vector512<sbyte>.Zero, value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Negate(Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> Negate(Vector512<short> value) {
-                return Avx512.Subtract(Vector512<short>.Zero, value);
+                return Avx512BW.Subtract(Vector512<short>.Zero, value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Negate(Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> Negate(Vector512<int> value) {
-                return Avx512.Subtract(Vector512<int>.Zero, value);
+                return Avx512F.Subtract(Vector512<int>.Zero, value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Negate(Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> Negate(Vector512<long> value) {
-                return Avx512.Subtract(Vector512<long>.Zero, value);
+                return Avx512F.Subtract(Vector512<long>.Zero, value);
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits512.OnesComplement_AcceleratedTypes"/>
             public static TypeCodeFlags OnesComplement_AcceleratedTypes {
