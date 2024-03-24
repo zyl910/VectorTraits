@@ -934,6 +934,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<T> ConditionalSelect<T>(Vector512<T> condition, Vector512<T> left, Vector512<T> right) where T : struct {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.ConditionalSelect(condition, left, right);
+                // .NET8 on Avx512: It has hardware-accelerated.
                 //00007FFDAA4CAADB  mov         rdx,16C8005FC78h  
                 //00007FFDAA4CAAE5  vmovups     zmm6,zmmword ptr [rbp-0ED68h]  
                 //00007FFDAA4CAAEF  vmovups     zmm7,zmmword ptr [rbp-0EDA8h]  
@@ -1653,6 +1654,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I5 = BitMath.ToInt32Mask(pleft.I5 == pright.I5);
                 p.I6 = BitMath.ToInt32Mask(pleft.I6 == pright.I6);
                 p.I7 = BitMath.ToInt32Mask(pleft.I7 == pright.I7);
+                p.I8 = BitMath.ToInt32Mask(pleft.I8 == pright.I8);
+                p.I9 = BitMath.ToInt32Mask(pleft.I9 == pright.I9);
+                p.I10 = BitMath.ToInt32Mask(pleft.I10 == pright.I10);
+                p.I11 = BitMath.ToInt32Mask(pleft.I11 == pright.I11);
+                p.I12 = BitMath.ToInt32Mask(pleft.I12 == pright.I12);
+                p.I13 = BitMath.ToInt32Mask(pleft.I13 == pright.I13);
+                p.I14 = BitMath.ToInt32Mask(pleft.I14 == pright.I14);
+                p.I15 = BitMath.ToInt32Mask(pleft.I15 == pright.I15);
                 return rt;
             }
 
@@ -2010,6 +2019,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<float> left, Vector512<float> right) {
                 return Vector512.EqualsAll(left, right);
+                // .NET8 on Avx512: It has hardware-accelerated.
                 //00007FFDAB58EDB2  vmovups     zmm6,zmmword ptr [rbp-0ED68h]  
                 //00007FFDAB58EDBC  vcmpps      k1,zmm6,zmmword ptr [rcx],0  
                 //00007FFDAB58EDC3  kortestw    k1,k1  
@@ -2022,6 +2032,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<double> left, Vector512<double> right) {
                 return Vector512.EqualsAll(left, right);
+                // .NET8 on Avx512: It has hardware-accelerated.
                 //00007FFDAB58EECE  vmovups     zmm6,zmmword ptr [rbp-0ED68h]  
                 //00007FFDAB58EED8  vcmppd      k1,zmm6,zmmword ptr [rcx],0  
                 //00007FFDAB58EEDF  kortestb    k1,k1  
@@ -2035,6 +2046,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector512<sbyte> left, Vector512<sbyte> right) {
                 return Vector512.EqualsAll(left, right);
+                // .NET8 on Avx512: It has hardware-accelerated.
                 //00007FFDAB58EFEA  vmovups     zmm6,zmmword ptr [rbp-0ED68h]  
                 //00007FFDAB58EFF4  vpcmpeqb    k1,zmm6,zmmword ptr [rcx]  
                 //00007FFDAB58EFFA  kortestq    k1,k1  
@@ -2100,6 +2112,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<float> left, Vector512<float> right) {
                 return Vector512.EqualsAny(left, right);
+                // .NET8 on Avx512: It has hardware-accelerated.
                 //00007FFDAB58F8C6  vmovups     zmm6,zmmword ptr [rbp-0ED68h]  
                 //00007FFDAB58F8D0  vcmpps      k1,zmm6,zmmword ptr [rcx],0  
                 //00007FFDAB58F8D7  kortestw    k1,k1  
@@ -2112,6 +2125,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<double> left, Vector512<double> right) {
                 return Vector512.EqualsAny(left, right);
+                // .NET8 on Avx512: It has hardware-accelerated.
                 //00007FFDAB58F9E2  vmovups     zmm6,zmmword ptr [rbp-0ED68h]  
                 //00007FFDAB58F9EC  vcmppd      k1,zmm6,zmmword ptr [rcx],0  
                 //00007FFDAB58F9F3  kortestb    k1,k1  
@@ -2125,6 +2139,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector512<sbyte> left, Vector512<sbyte> right) {
                 return Vector512.EqualsAny(left, right);
+                // .NET8 on Avx512: It has hardware-accelerated.
                 //00007FFDAB58FAFE  vmovups     zmm6,zmmword ptr [rbp-0ED68h]  
                 //00007FFDAB58FB08  vpcmpeqb    k1,zmm6,zmmword ptr [rcx]  
                 //00007FFDAB58FB0E  kortestq    k1,k1  
@@ -2300,17 +2315,25 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> GreaterThan_Basic(Vector512<float> left, Vector512<float> right) {
                 UnsafeUtil.SkipInit(out Vector512<float> rt);
-                ref int prt = ref Unsafe.As<Vector512<float>, int>(ref rt);
-                ref float pleft = ref Unsafe.As<Vector512<float>, float>(ref left);
-                ref float pright = ref Unsafe.As<Vector512<float>, float>(ref right);
-                prt = BitMath.ToInt32Mask(pleft > pright);
-                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) > Unsafe.Add(ref pright, 1));
-                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) > Unsafe.Add(ref pright, 2));
-                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) > Unsafe.Add(ref pright, 3));
-                Unsafe.Add(ref prt, 4) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) > Unsafe.Add(ref pright, 4));
-                Unsafe.Add(ref prt, 5) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) > Unsafe.Add(ref pright, 5));
-                Unsafe.Add(ref prt, 6) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) > Unsafe.Add(ref pright, 6));
-                Unsafe.Add(ref prt, 7) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) > Unsafe.Add(ref pright, 7));
+                ref FixedArray16<int> p = ref Unsafe.As<Vector512<float>, FixedArray16<int>>(ref rt);
+                ref FixedArray16<float> pleft = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref left);
+                ref FixedArray16<float> pright = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 > pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 > pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 > pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 > pright.I3);
+                p.I4 = BitMath.ToInt32Mask(pleft.I4 > pright.I4);
+                p.I5 = BitMath.ToInt32Mask(pleft.I5 > pright.I5);
+                p.I6 = BitMath.ToInt32Mask(pleft.I6 > pright.I6);
+                p.I7 = BitMath.ToInt32Mask(pleft.I7 > pright.I7);
+                p.I8 = BitMath.ToInt32Mask(pleft.I8 > pright.I8);
+                p.I9 = BitMath.ToInt32Mask(pleft.I9 > pright.I9);
+                p.I10 = BitMath.ToInt32Mask(pleft.I10 > pright.I10);
+                p.I11 = BitMath.ToInt32Mask(pleft.I11 > pright.I11);
+                p.I12 = BitMath.ToInt32Mask(pleft.I12 > pright.I12);
+                p.I13 = BitMath.ToInt32Mask(pleft.I13 > pright.I13);
+                p.I14 = BitMath.ToInt32Mask(pleft.I14 > pright.I14);
+                p.I15 = BitMath.ToInt32Mask(pleft.I15 > pright.I15);
                 return rt;
             }
 
@@ -2318,13 +2341,17 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> GreaterThan_Basic(Vector512<double> left, Vector512<double> right) {
                 UnsafeUtil.SkipInit(out Vector512<double> rt);
-                ref long prt = ref Unsafe.As<Vector512<double>, long>(ref rt);
-                ref double pleft = ref Unsafe.As<Vector512<double>, double>(ref left);
-                ref double pright = ref Unsafe.As<Vector512<double>, double>(ref right);
-                prt = BitMath.ToInt32Mask(pleft > pright);
-                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) > Unsafe.Add(ref pright, 1));
-                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) > Unsafe.Add(ref pright, 2));
-                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) > Unsafe.Add(ref pright, 3));
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<double>, FixedArray8<long>>(ref rt);
+                ref FixedArray8<double> pleft = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref left);
+                ref FixedArray8<double> pright = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 > pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 > pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 > pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 > pright.I3);
+                p.I4 = BitMath.ToInt32Mask(pleft.I4 > pright.I4);
+                p.I5 = BitMath.ToInt32Mask(pleft.I5 > pright.I5);
+                p.I6 = BitMath.ToInt32Mask(pleft.I6 > pright.I6);
+                p.I7 = BitMath.ToInt32Mask(pleft.I7 > pright.I7);
                 return rt;
             }
 
@@ -2333,41 +2360,73 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> GreaterThan_Basic(Vector512<sbyte> left, Vector512<sbyte> right) {
                 UnsafeUtil.SkipInit(out Vector512<sbyte> rt);
-                ref sbyte prt = ref Unsafe.As<Vector512<sbyte>, sbyte>(ref rt);
-                ref sbyte pleft = ref Unsafe.As<Vector512<sbyte>, sbyte>(ref left);
-                ref sbyte pright = ref Unsafe.As<Vector512<sbyte>, sbyte>(ref right);
-                prt = (sbyte)BitMath.ToInt32Mask(pleft > pright);
-                Unsafe.Add(ref prt, 1) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) > Unsafe.Add(ref pright, 1));
-                Unsafe.Add(ref prt, 2) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) > Unsafe.Add(ref pright, 2));
-                Unsafe.Add(ref prt, 3) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) > Unsafe.Add(ref pright, 3));
-                Unsafe.Add(ref prt, 4) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) > Unsafe.Add(ref pright, 4));
-                Unsafe.Add(ref prt, 5) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) > Unsafe.Add(ref pright, 5));
-                Unsafe.Add(ref prt, 6) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) > Unsafe.Add(ref pright, 6));
-                Unsafe.Add(ref prt, 7) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) > Unsafe.Add(ref pright, 7));
-                Unsafe.Add(ref prt, 8) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 8) > Unsafe.Add(ref pright, 8));
-                Unsafe.Add(ref prt, 9) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 9) > Unsafe.Add(ref pright, 9));
-                Unsafe.Add(ref prt, 10) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 10) > Unsafe.Add(ref pright, 10));
-                Unsafe.Add(ref prt, 11) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 11) > Unsafe.Add(ref pright, 11));
-                Unsafe.Add(ref prt, 12) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 12) > Unsafe.Add(ref pright, 12));
-                Unsafe.Add(ref prt, 13) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 13) > Unsafe.Add(ref pright, 13));
-                Unsafe.Add(ref prt, 14) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 14) > Unsafe.Add(ref pright, 14));
-                Unsafe.Add(ref prt, 15) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 15) > Unsafe.Add(ref pright, 15));
-                Unsafe.Add(ref prt, 16) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 16) > Unsafe.Add(ref pright, 16));
-                Unsafe.Add(ref prt, 17) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 17) > Unsafe.Add(ref pright, 17));
-                Unsafe.Add(ref prt, 18) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 18) > Unsafe.Add(ref pright, 18));
-                Unsafe.Add(ref prt, 19) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 19) > Unsafe.Add(ref pright, 19));
-                Unsafe.Add(ref prt, 20) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 20) > Unsafe.Add(ref pright, 20));
-                Unsafe.Add(ref prt, 21) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 21) > Unsafe.Add(ref pright, 21));
-                Unsafe.Add(ref prt, 22) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 22) > Unsafe.Add(ref pright, 22));
-                Unsafe.Add(ref prt, 23) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 23) > Unsafe.Add(ref pright, 23));
-                Unsafe.Add(ref prt, 24) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 24) > Unsafe.Add(ref pright, 24));
-                Unsafe.Add(ref prt, 25) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 25) > Unsafe.Add(ref pright, 25));
-                Unsafe.Add(ref prt, 26) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 26) > Unsafe.Add(ref pright, 26));
-                Unsafe.Add(ref prt, 27) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 27) > Unsafe.Add(ref pright, 27));
-                Unsafe.Add(ref prt, 28) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 28) > Unsafe.Add(ref pright, 28));
-                Unsafe.Add(ref prt, 29) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 29) > Unsafe.Add(ref pright, 29));
-                Unsafe.Add(ref prt, 30) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 30) > Unsafe.Add(ref pright, 30));
-                Unsafe.Add(ref prt, 31) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 31) > Unsafe.Add(ref pright, 31));
+                ref FixedArray64<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref rt);
+                ref FixedArray64<sbyte> pleft = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref left);
+                ref FixedArray64<sbyte> pright = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref right);
+                p.I0 = (sbyte)BitMath.ToInt32Mask(pleft.I0 > pright.I0);
+                p.I1 = (sbyte)BitMath.ToInt32Mask(pleft.I1 > pright.I1);
+                p.I2 = (sbyte)BitMath.ToInt32Mask(pleft.I2 > pright.I2);
+                p.I3 = (sbyte)BitMath.ToInt32Mask(pleft.I3 > pright.I3);
+                p.I4 = (sbyte)BitMath.ToInt32Mask(pleft.I4 > pright.I4);
+                p.I5 = (sbyte)BitMath.ToInt32Mask(pleft.I5 > pright.I5);
+                p.I6 = (sbyte)BitMath.ToInt32Mask(pleft.I6 > pright.I6);
+                p.I7 = (sbyte)BitMath.ToInt32Mask(pleft.I7 > pright.I7);
+                p.I8 = (sbyte)BitMath.ToInt32Mask(pleft.I8 > pright.I8);
+                p.I9 = (sbyte)BitMath.ToInt32Mask(pleft.I9 > pright.I9);
+                p.I10 = (sbyte)BitMath.ToInt32Mask(pleft.I10 > pright.I10);
+                p.I11 = (sbyte)BitMath.ToInt32Mask(pleft.I11 > pright.I11);
+                p.I12 = (sbyte)BitMath.ToInt32Mask(pleft.I12 > pright.I12);
+                p.I13 = (sbyte)BitMath.ToInt32Mask(pleft.I13 > pright.I13);
+                p.I14 = (sbyte)BitMath.ToInt32Mask(pleft.I14 > pright.I14);
+                p.I15 = (sbyte)BitMath.ToInt32Mask(pleft.I15 > pright.I15);
+                p.I16 = (sbyte)BitMath.ToInt32Mask(pleft.I16 > pright.I16);
+                p.I17 = (sbyte)BitMath.ToInt32Mask(pleft.I17 > pright.I17);
+                p.I18 = (sbyte)BitMath.ToInt32Mask(pleft.I18 > pright.I18);
+                p.I19 = (sbyte)BitMath.ToInt32Mask(pleft.I19 > pright.I19);
+                p.I20 = (sbyte)BitMath.ToInt32Mask(pleft.I20 > pright.I20);
+                p.I21 = (sbyte)BitMath.ToInt32Mask(pleft.I21 > pright.I21);
+                p.I22 = (sbyte)BitMath.ToInt32Mask(pleft.I22 > pright.I22);
+                p.I23 = (sbyte)BitMath.ToInt32Mask(pleft.I23 > pright.I23);
+                p.I24 = (sbyte)BitMath.ToInt32Mask(pleft.I24 > pright.I24);
+                p.I25 = (sbyte)BitMath.ToInt32Mask(pleft.I25 > pright.I25);
+                p.I26 = (sbyte)BitMath.ToInt32Mask(pleft.I26 > pright.I26);
+                p.I27 = (sbyte)BitMath.ToInt32Mask(pleft.I27 > pright.I27);
+                p.I28 = (sbyte)BitMath.ToInt32Mask(pleft.I28 > pright.I28);
+                p.I29 = (sbyte)BitMath.ToInt32Mask(pleft.I29 > pright.I29);
+                p.I30 = (sbyte)BitMath.ToInt32Mask(pleft.I30 > pright.I30);
+                p.I31 = (sbyte)BitMath.ToInt32Mask(pleft.I31 > pright.I31);
+                p.I32 = (sbyte)BitMath.ToInt32Mask(pleft.I32 > pright.I32);
+                p.I33 = (sbyte)BitMath.ToInt32Mask(pleft.I33 > pright.I33);
+                p.I34 = (sbyte)BitMath.ToInt32Mask(pleft.I34 > pright.I34);
+                p.I35 = (sbyte)BitMath.ToInt32Mask(pleft.I35 > pright.I35);
+                p.I36 = (sbyte)BitMath.ToInt32Mask(pleft.I36 > pright.I36);
+                p.I37 = (sbyte)BitMath.ToInt32Mask(pleft.I37 > pright.I37);
+                p.I38 = (sbyte)BitMath.ToInt32Mask(pleft.I38 > pright.I38);
+                p.I39 = (sbyte)BitMath.ToInt32Mask(pleft.I39 > pright.I39);
+                p.I40 = (sbyte)BitMath.ToInt32Mask(pleft.I40 > pright.I40);
+                p.I41 = (sbyte)BitMath.ToInt32Mask(pleft.I41 > pright.I41);
+                p.I42 = (sbyte)BitMath.ToInt32Mask(pleft.I42 > pright.I42);
+                p.I43 = (sbyte)BitMath.ToInt32Mask(pleft.I43 > pright.I43);
+                p.I44 = (sbyte)BitMath.ToInt32Mask(pleft.I44 > pright.I44);
+                p.I45 = (sbyte)BitMath.ToInt32Mask(pleft.I45 > pright.I45);
+                p.I46 = (sbyte)BitMath.ToInt32Mask(pleft.I46 > pright.I46);
+                p.I47 = (sbyte)BitMath.ToInt32Mask(pleft.I47 > pright.I47);
+                p.I48 = (sbyte)BitMath.ToInt32Mask(pleft.I48 > pright.I48);
+                p.I49 = (sbyte)BitMath.ToInt32Mask(pleft.I49 > pright.I49);
+                p.I50 = (sbyte)BitMath.ToInt32Mask(pleft.I50 > pright.I50);
+                p.I51 = (sbyte)BitMath.ToInt32Mask(pleft.I51 > pright.I51);
+                p.I52 = (sbyte)BitMath.ToInt32Mask(pleft.I52 > pright.I52);
+                p.I53 = (sbyte)BitMath.ToInt32Mask(pleft.I53 > pright.I53);
+                p.I54 = (sbyte)BitMath.ToInt32Mask(pleft.I54 > pright.I54);
+                p.I55 = (sbyte)BitMath.ToInt32Mask(pleft.I55 > pright.I55);
+                p.I56 = (sbyte)BitMath.ToInt32Mask(pleft.I56 > pright.I56);
+                p.I57 = (sbyte)BitMath.ToInt32Mask(pleft.I57 > pright.I57);
+                p.I58 = (sbyte)BitMath.ToInt32Mask(pleft.I58 > pright.I58);
+                p.I59 = (sbyte)BitMath.ToInt32Mask(pleft.I59 > pright.I59);
+                p.I60 = (sbyte)BitMath.ToInt32Mask(pleft.I60 > pright.I60);
+                p.I61 = (sbyte)BitMath.ToInt32Mask(pleft.I61 > pright.I61);
+                p.I62 = (sbyte)BitMath.ToInt32Mask(pleft.I62 > pright.I62);
+                p.I63 = (sbyte)BitMath.ToInt32Mask(pleft.I63 > pright.I63);
                 return rt;
             }
 
@@ -2375,41 +2434,73 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> GreaterThan_Basic(Vector512<byte> left, Vector512<byte> right) {
                 UnsafeUtil.SkipInit(out Vector512<byte> rt);
-                ref sbyte prt = ref Unsafe.As<Vector512<byte>, sbyte>(ref rt);
-                ref byte pleft = ref Unsafe.As<Vector512<byte>, byte>(ref left);
-                ref byte pright = ref Unsafe.As<Vector512<byte>, byte>(ref right);
-                prt = (sbyte)BitMath.ToInt32Mask(pleft > pright);
-                Unsafe.Add(ref prt, 1) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) > Unsafe.Add(ref pright, 1));
-                Unsafe.Add(ref prt, 2) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) > Unsafe.Add(ref pright, 2));
-                Unsafe.Add(ref prt, 3) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) > Unsafe.Add(ref pright, 3));
-                Unsafe.Add(ref prt, 4) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) > Unsafe.Add(ref pright, 4));
-                Unsafe.Add(ref prt, 5) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) > Unsafe.Add(ref pright, 5));
-                Unsafe.Add(ref prt, 6) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) > Unsafe.Add(ref pright, 6));
-                Unsafe.Add(ref prt, 7) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) > Unsafe.Add(ref pright, 7));
-                Unsafe.Add(ref prt, 8) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 8) > Unsafe.Add(ref pright, 8));
-                Unsafe.Add(ref prt, 9) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 9) > Unsafe.Add(ref pright, 9));
-                Unsafe.Add(ref prt, 10) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 10) > Unsafe.Add(ref pright, 10));
-                Unsafe.Add(ref prt, 11) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 11) > Unsafe.Add(ref pright, 11));
-                Unsafe.Add(ref prt, 12) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 12) > Unsafe.Add(ref pright, 12));
-                Unsafe.Add(ref prt, 13) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 13) > Unsafe.Add(ref pright, 13));
-                Unsafe.Add(ref prt, 14) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 14) > Unsafe.Add(ref pright, 14));
-                Unsafe.Add(ref prt, 15) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 15) > Unsafe.Add(ref pright, 15));
-                Unsafe.Add(ref prt, 16) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 16) > Unsafe.Add(ref pright, 16));
-                Unsafe.Add(ref prt, 17) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 17) > Unsafe.Add(ref pright, 17));
-                Unsafe.Add(ref prt, 18) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 18) > Unsafe.Add(ref pright, 18));
-                Unsafe.Add(ref prt, 19) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 19) > Unsafe.Add(ref pright, 19));
-                Unsafe.Add(ref prt, 20) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 20) > Unsafe.Add(ref pright, 20));
-                Unsafe.Add(ref prt, 21) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 21) > Unsafe.Add(ref pright, 21));
-                Unsafe.Add(ref prt, 22) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 22) > Unsafe.Add(ref pright, 22));
-                Unsafe.Add(ref prt, 23) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 23) > Unsafe.Add(ref pright, 23));
-                Unsafe.Add(ref prt, 24) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 24) > Unsafe.Add(ref pright, 24));
-                Unsafe.Add(ref prt, 25) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 25) > Unsafe.Add(ref pright, 25));
-                Unsafe.Add(ref prt, 26) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 26) > Unsafe.Add(ref pright, 26));
-                Unsafe.Add(ref prt, 27) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 27) > Unsafe.Add(ref pright, 27));
-                Unsafe.Add(ref prt, 28) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 28) > Unsafe.Add(ref pright, 28));
-                Unsafe.Add(ref prt, 29) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 29) > Unsafe.Add(ref pright, 29));
-                Unsafe.Add(ref prt, 30) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 30) > Unsafe.Add(ref pright, 30));
-                Unsafe.Add(ref prt, 31) = (sbyte)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 31) > Unsafe.Add(ref pright, 31));
+                ref FixedArray64<sbyte> p = ref Unsafe.As<Vector512<byte>, FixedArray64<sbyte>>(ref rt);
+                ref FixedArray64<byte> pleft = ref Unsafe.As<Vector512<byte>, FixedArray64<byte>>(ref left);
+                ref FixedArray64<byte> pright = ref Unsafe.As<Vector512<byte>, FixedArray64<byte>>(ref right);
+                p.I0 = (sbyte)BitMath.ToInt32Mask(pleft.I0 > pright.I0);
+                p.I1 = (sbyte)BitMath.ToInt32Mask(pleft.I1 > pright.I1);
+                p.I2 = (sbyte)BitMath.ToInt32Mask(pleft.I2 > pright.I2);
+                p.I3 = (sbyte)BitMath.ToInt32Mask(pleft.I3 > pright.I3);
+                p.I4 = (sbyte)BitMath.ToInt32Mask(pleft.I4 > pright.I4);
+                p.I5 = (sbyte)BitMath.ToInt32Mask(pleft.I5 > pright.I5);
+                p.I6 = (sbyte)BitMath.ToInt32Mask(pleft.I6 > pright.I6);
+                p.I7 = (sbyte)BitMath.ToInt32Mask(pleft.I7 > pright.I7);
+                p.I8 = (sbyte)BitMath.ToInt32Mask(pleft.I8 > pright.I8);
+                p.I9 = (sbyte)BitMath.ToInt32Mask(pleft.I9 > pright.I9);
+                p.I10 = (sbyte)BitMath.ToInt32Mask(pleft.I10 > pright.I10);
+                p.I11 = (sbyte)BitMath.ToInt32Mask(pleft.I11 > pright.I11);
+                p.I12 = (sbyte)BitMath.ToInt32Mask(pleft.I12 > pright.I12);
+                p.I13 = (sbyte)BitMath.ToInt32Mask(pleft.I13 > pright.I13);
+                p.I14 = (sbyte)BitMath.ToInt32Mask(pleft.I14 > pright.I14);
+                p.I15 = (sbyte)BitMath.ToInt32Mask(pleft.I15 > pright.I15);
+                p.I16 = (sbyte)BitMath.ToInt32Mask(pleft.I16 > pright.I16);
+                p.I17 = (sbyte)BitMath.ToInt32Mask(pleft.I17 > pright.I17);
+                p.I18 = (sbyte)BitMath.ToInt32Mask(pleft.I18 > pright.I18);
+                p.I19 = (sbyte)BitMath.ToInt32Mask(pleft.I19 > pright.I19);
+                p.I20 = (sbyte)BitMath.ToInt32Mask(pleft.I20 > pright.I20);
+                p.I21 = (sbyte)BitMath.ToInt32Mask(pleft.I21 > pright.I21);
+                p.I22 = (sbyte)BitMath.ToInt32Mask(pleft.I22 > pright.I22);
+                p.I23 = (sbyte)BitMath.ToInt32Mask(pleft.I23 > pright.I23);
+                p.I24 = (sbyte)BitMath.ToInt32Mask(pleft.I24 > pright.I24);
+                p.I25 = (sbyte)BitMath.ToInt32Mask(pleft.I25 > pright.I25);
+                p.I26 = (sbyte)BitMath.ToInt32Mask(pleft.I26 > pright.I26);
+                p.I27 = (sbyte)BitMath.ToInt32Mask(pleft.I27 > pright.I27);
+                p.I28 = (sbyte)BitMath.ToInt32Mask(pleft.I28 > pright.I28);
+                p.I29 = (sbyte)BitMath.ToInt32Mask(pleft.I29 > pright.I29);
+                p.I30 = (sbyte)BitMath.ToInt32Mask(pleft.I30 > pright.I30);
+                p.I31 = (sbyte)BitMath.ToInt32Mask(pleft.I31 > pright.I31);
+                p.I32 = (sbyte)BitMath.ToInt32Mask(pleft.I32 > pright.I32);
+                p.I33 = (sbyte)BitMath.ToInt32Mask(pleft.I33 > pright.I33);
+                p.I34 = (sbyte)BitMath.ToInt32Mask(pleft.I34 > pright.I34);
+                p.I35 = (sbyte)BitMath.ToInt32Mask(pleft.I35 > pright.I35);
+                p.I36 = (sbyte)BitMath.ToInt32Mask(pleft.I36 > pright.I36);
+                p.I37 = (sbyte)BitMath.ToInt32Mask(pleft.I37 > pright.I37);
+                p.I38 = (sbyte)BitMath.ToInt32Mask(pleft.I38 > pright.I38);
+                p.I39 = (sbyte)BitMath.ToInt32Mask(pleft.I39 > pright.I39);
+                p.I40 = (sbyte)BitMath.ToInt32Mask(pleft.I40 > pright.I40);
+                p.I41 = (sbyte)BitMath.ToInt32Mask(pleft.I41 > pright.I41);
+                p.I42 = (sbyte)BitMath.ToInt32Mask(pleft.I42 > pright.I42);
+                p.I43 = (sbyte)BitMath.ToInt32Mask(pleft.I43 > pright.I43);
+                p.I44 = (sbyte)BitMath.ToInt32Mask(pleft.I44 > pright.I44);
+                p.I45 = (sbyte)BitMath.ToInt32Mask(pleft.I45 > pright.I45);
+                p.I46 = (sbyte)BitMath.ToInt32Mask(pleft.I46 > pright.I46);
+                p.I47 = (sbyte)BitMath.ToInt32Mask(pleft.I47 > pright.I47);
+                p.I48 = (sbyte)BitMath.ToInt32Mask(pleft.I48 > pright.I48);
+                p.I49 = (sbyte)BitMath.ToInt32Mask(pleft.I49 > pright.I49);
+                p.I50 = (sbyte)BitMath.ToInt32Mask(pleft.I50 > pright.I50);
+                p.I51 = (sbyte)BitMath.ToInt32Mask(pleft.I51 > pright.I51);
+                p.I52 = (sbyte)BitMath.ToInt32Mask(pleft.I52 > pright.I52);
+                p.I53 = (sbyte)BitMath.ToInt32Mask(pleft.I53 > pright.I53);
+                p.I54 = (sbyte)BitMath.ToInt32Mask(pleft.I54 > pright.I54);
+                p.I55 = (sbyte)BitMath.ToInt32Mask(pleft.I55 > pright.I55);
+                p.I56 = (sbyte)BitMath.ToInt32Mask(pleft.I56 > pright.I56);
+                p.I57 = (sbyte)BitMath.ToInt32Mask(pleft.I57 > pright.I57);
+                p.I58 = (sbyte)BitMath.ToInt32Mask(pleft.I58 > pright.I58);
+                p.I59 = (sbyte)BitMath.ToInt32Mask(pleft.I59 > pright.I59);
+                p.I60 = (sbyte)BitMath.ToInt32Mask(pleft.I60 > pright.I60);
+                p.I61 = (sbyte)BitMath.ToInt32Mask(pleft.I61 > pright.I61);
+                p.I62 = (sbyte)BitMath.ToInt32Mask(pleft.I62 > pright.I62);
+                p.I63 = (sbyte)BitMath.ToInt32Mask(pleft.I63 > pright.I63);
                 return rt;
             }
 
@@ -2417,25 +2508,41 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> GreaterThan_Basic(Vector512<short> left, Vector512<short> right) {
                 UnsafeUtil.SkipInit(out Vector512<short> rt);
-                ref short prt = ref Unsafe.As<Vector512<short>, short>(ref rt);
-                ref short pleft = ref Unsafe.As<Vector512<short>, short>(ref left);
-                ref short pright = ref Unsafe.As<Vector512<short>, short>(ref right);
-                prt = (short)BitMath.ToInt32Mask(pleft > pright);
-                Unsafe.Add(ref prt, 1) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) > Unsafe.Add(ref pright, 1));
-                Unsafe.Add(ref prt, 2) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) > Unsafe.Add(ref pright, 2));
-                Unsafe.Add(ref prt, 3) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) > Unsafe.Add(ref pright, 3));
-                Unsafe.Add(ref prt, 4) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) > Unsafe.Add(ref pright, 4));
-                Unsafe.Add(ref prt, 5) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) > Unsafe.Add(ref pright, 5));
-                Unsafe.Add(ref prt, 6) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) > Unsafe.Add(ref pright, 6));
-                Unsafe.Add(ref prt, 7) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) > Unsafe.Add(ref pright, 7));
-                Unsafe.Add(ref prt, 8) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 8) > Unsafe.Add(ref pright, 8));
-                Unsafe.Add(ref prt, 9) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 9) > Unsafe.Add(ref pright, 9));
-                Unsafe.Add(ref prt, 10) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 10) > Unsafe.Add(ref pright, 10));
-                Unsafe.Add(ref prt, 11) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 11) > Unsafe.Add(ref pright, 11));
-                Unsafe.Add(ref prt, 12) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 12) > Unsafe.Add(ref pright, 12));
-                Unsafe.Add(ref prt, 13) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 13) > Unsafe.Add(ref pright, 13));
-                Unsafe.Add(ref prt, 14) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 14) > Unsafe.Add(ref pright, 14));
-                Unsafe.Add(ref prt, 15) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 15) > Unsafe.Add(ref pright, 15));
+                ref FixedArray32<short> p = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref rt);
+                ref FixedArray32<short> pleft = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref left);
+                ref FixedArray32<short> pright = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref right);
+                p.I0 = (short)BitMath.ToInt32Mask(pleft.I0 > pright.I0);
+                p.I1 = (short)BitMath.ToInt32Mask(pleft.I1 > pright.I1);
+                p.I2 = (short)BitMath.ToInt32Mask(pleft.I2 > pright.I2);
+                p.I3 = (short)BitMath.ToInt32Mask(pleft.I3 > pright.I3);
+                p.I4 = (short)BitMath.ToInt32Mask(pleft.I4 > pright.I4);
+                p.I5 = (short)BitMath.ToInt32Mask(pleft.I5 > pright.I5);
+                p.I6 = (short)BitMath.ToInt32Mask(pleft.I6 > pright.I6);
+                p.I7 = (short)BitMath.ToInt32Mask(pleft.I7 > pright.I7);
+                p.I8 = (short)BitMath.ToInt32Mask(pleft.I8 > pright.I8);
+                p.I9 = (short)BitMath.ToInt32Mask(pleft.I9 > pright.I9);
+                p.I10 = (short)BitMath.ToInt32Mask(pleft.I10 > pright.I10);
+                p.I11 = (short)BitMath.ToInt32Mask(pleft.I11 > pright.I11);
+                p.I12 = (short)BitMath.ToInt32Mask(pleft.I12 > pright.I12);
+                p.I13 = (short)BitMath.ToInt32Mask(pleft.I13 > pright.I13);
+                p.I14 = (short)BitMath.ToInt32Mask(pleft.I14 > pright.I14);
+                p.I15 = (short)BitMath.ToInt32Mask(pleft.I15 > pright.I15);
+                p.I16 = (short)BitMath.ToInt32Mask(pleft.I16 > pright.I16);
+                p.I17 = (short)BitMath.ToInt32Mask(pleft.I17 > pright.I17);
+                p.I18 = (short)BitMath.ToInt32Mask(pleft.I18 > pright.I18);
+                p.I19 = (short)BitMath.ToInt32Mask(pleft.I19 > pright.I19);
+                p.I20 = (short)BitMath.ToInt32Mask(pleft.I20 > pright.I20);
+                p.I21 = (short)BitMath.ToInt32Mask(pleft.I21 > pright.I21);
+                p.I22 = (short)BitMath.ToInt32Mask(pleft.I22 > pright.I22);
+                p.I23 = (short)BitMath.ToInt32Mask(pleft.I23 > pright.I23);
+                p.I24 = (short)BitMath.ToInt32Mask(pleft.I24 > pright.I24);
+                p.I25 = (short)BitMath.ToInt32Mask(pleft.I25 > pright.I25);
+                p.I26 = (short)BitMath.ToInt32Mask(pleft.I26 > pright.I26);
+                p.I27 = (short)BitMath.ToInt32Mask(pleft.I27 > pright.I27);
+                p.I28 = (short)BitMath.ToInt32Mask(pleft.I28 > pright.I28);
+                p.I29 = (short)BitMath.ToInt32Mask(pleft.I29 > pright.I29);
+                p.I30 = (short)BitMath.ToInt32Mask(pleft.I30 > pright.I30);
+                p.I31 = (short)BitMath.ToInt32Mask(pleft.I31 > pright.I31);
                 return rt;
             }
 
@@ -2444,25 +2551,41 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> GreaterThan_Basic(Vector512<ushort> left, Vector512<ushort> right) {
                 UnsafeUtil.SkipInit(out Vector512<ushort> rt);
-                ref short prt = ref Unsafe.As<Vector512<ushort>, short>(ref rt);
-                ref ushort pleft = ref Unsafe.As<Vector512<ushort>, ushort>(ref left);
-                ref ushort pright = ref Unsafe.As<Vector512<ushort>, ushort>(ref right);
-                prt = (short)BitMath.ToInt32Mask(pleft > pright);
-                Unsafe.Add(ref prt, 1) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) > Unsafe.Add(ref pright, 1));
-                Unsafe.Add(ref prt, 2) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) > Unsafe.Add(ref pright, 2));
-                Unsafe.Add(ref prt, 3) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) > Unsafe.Add(ref pright, 3));
-                Unsafe.Add(ref prt, 4) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) > Unsafe.Add(ref pright, 4));
-                Unsafe.Add(ref prt, 5) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) > Unsafe.Add(ref pright, 5));
-                Unsafe.Add(ref prt, 6) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) > Unsafe.Add(ref pright, 6));
-                Unsafe.Add(ref prt, 7) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) > Unsafe.Add(ref pright, 7));
-                Unsafe.Add(ref prt, 8) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 8) > Unsafe.Add(ref pright, 8));
-                Unsafe.Add(ref prt, 9) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 9) > Unsafe.Add(ref pright, 9));
-                Unsafe.Add(ref prt, 10) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 10) > Unsafe.Add(ref pright, 10));
-                Unsafe.Add(ref prt, 11) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 11) > Unsafe.Add(ref pright, 11));
-                Unsafe.Add(ref prt, 12) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 12) > Unsafe.Add(ref pright, 12));
-                Unsafe.Add(ref prt, 13) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 13) > Unsafe.Add(ref pright, 13));
-                Unsafe.Add(ref prt, 14) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 14) > Unsafe.Add(ref pright, 14));
-                Unsafe.Add(ref prt, 15) = (short)BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 15) > Unsafe.Add(ref pright, 15));
+                ref FixedArray32<short> p = ref Unsafe.As<Vector512<ushort>, FixedArray32<short>>(ref rt);
+                ref FixedArray32<ushort> pleft = ref Unsafe.As<Vector512<ushort>, FixedArray32<ushort>>(ref left);
+                ref FixedArray32<ushort> pright = ref Unsafe.As<Vector512<ushort>, FixedArray32<ushort>>(ref right);
+                p.I0 = (short)BitMath.ToInt32Mask(pleft.I0 > pright.I0);
+                p.I1 = (short)BitMath.ToInt32Mask(pleft.I1 > pright.I1);
+                p.I2 = (short)BitMath.ToInt32Mask(pleft.I2 > pright.I2);
+                p.I3 = (short)BitMath.ToInt32Mask(pleft.I3 > pright.I3);
+                p.I4 = (short)BitMath.ToInt32Mask(pleft.I4 > pright.I4);
+                p.I5 = (short)BitMath.ToInt32Mask(pleft.I5 > pright.I5);
+                p.I6 = (short)BitMath.ToInt32Mask(pleft.I6 > pright.I6);
+                p.I7 = (short)BitMath.ToInt32Mask(pleft.I7 > pright.I7);
+                p.I8 = (short)BitMath.ToInt32Mask(pleft.I8 > pright.I8);
+                p.I9 = (short)BitMath.ToInt32Mask(pleft.I9 > pright.I9);
+                p.I10 = (short)BitMath.ToInt32Mask(pleft.I10 > pright.I10);
+                p.I11 = (short)BitMath.ToInt32Mask(pleft.I11 > pright.I11);
+                p.I12 = (short)BitMath.ToInt32Mask(pleft.I12 > pright.I12);
+                p.I13 = (short)BitMath.ToInt32Mask(pleft.I13 > pright.I13);
+                p.I14 = (short)BitMath.ToInt32Mask(pleft.I14 > pright.I14);
+                p.I15 = (short)BitMath.ToInt32Mask(pleft.I15 > pright.I15);
+                p.I16 = (short)BitMath.ToInt32Mask(pleft.I16 > pright.I16);
+                p.I17 = (short)BitMath.ToInt32Mask(pleft.I17 > pright.I17);
+                p.I18 = (short)BitMath.ToInt32Mask(pleft.I18 > pright.I18);
+                p.I19 = (short)BitMath.ToInt32Mask(pleft.I19 > pright.I19);
+                p.I20 = (short)BitMath.ToInt32Mask(pleft.I20 > pright.I20);
+                p.I21 = (short)BitMath.ToInt32Mask(pleft.I21 > pright.I21);
+                p.I22 = (short)BitMath.ToInt32Mask(pleft.I22 > pright.I22);
+                p.I23 = (short)BitMath.ToInt32Mask(pleft.I23 > pright.I23);
+                p.I24 = (short)BitMath.ToInt32Mask(pleft.I24 > pright.I24);
+                p.I25 = (short)BitMath.ToInt32Mask(pleft.I25 > pright.I25);
+                p.I26 = (short)BitMath.ToInt32Mask(pleft.I26 > pright.I26);
+                p.I27 = (short)BitMath.ToInt32Mask(pleft.I27 > pright.I27);
+                p.I28 = (short)BitMath.ToInt32Mask(pleft.I28 > pright.I28);
+                p.I29 = (short)BitMath.ToInt32Mask(pleft.I29 > pright.I29);
+                p.I30 = (short)BitMath.ToInt32Mask(pleft.I30 > pright.I30);
+                p.I31 = (short)BitMath.ToInt32Mask(pleft.I31 > pright.I31);
                 return rt;
             }
 
@@ -2470,17 +2593,25 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> GreaterThan_Basic(Vector512<int> left, Vector512<int> right) {
                 UnsafeUtil.SkipInit(out Vector512<int> rt);
-                ref int prt = ref Unsafe.As<Vector512<int>, int>(ref rt);
-                ref int pleft = ref Unsafe.As<Vector512<int>, int>(ref left);
-                ref int pright = ref Unsafe.As<Vector512<int>, int>(ref right);
-                prt = BitMath.ToInt32Mask(pleft > pright);
-                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) > Unsafe.Add(ref pright, 1));
-                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) > Unsafe.Add(ref pright, 2));
-                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) > Unsafe.Add(ref pright, 3));
-                Unsafe.Add(ref prt, 4) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) > Unsafe.Add(ref pright, 4));
-                Unsafe.Add(ref prt, 5) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) > Unsafe.Add(ref pright, 5));
-                Unsafe.Add(ref prt, 6) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) > Unsafe.Add(ref pright, 6));
-                Unsafe.Add(ref prt, 7) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) > Unsafe.Add(ref pright, 7));
+                ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
+                ref FixedArray16<int> pleft = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref left);
+                ref FixedArray16<int> pright = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 > pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 > pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 > pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 > pright.I3);
+                p.I4 = BitMath.ToInt32Mask(pleft.I4 > pright.I4);
+                p.I5 = BitMath.ToInt32Mask(pleft.I5 > pright.I5);
+                p.I6 = BitMath.ToInt32Mask(pleft.I6 > pright.I6);
+                p.I7 = BitMath.ToInt32Mask(pleft.I7 > pright.I7);
+                p.I8 = BitMath.ToInt32Mask(pleft.I8 > pright.I8);
+                p.I9 = BitMath.ToInt32Mask(pleft.I9 > pright.I9);
+                p.I10 = BitMath.ToInt32Mask(pleft.I10 > pright.I10);
+                p.I11 = BitMath.ToInt32Mask(pleft.I11 > pright.I11);
+                p.I12 = BitMath.ToInt32Mask(pleft.I12 > pright.I12);
+                p.I13 = BitMath.ToInt32Mask(pleft.I13 > pright.I13);
+                p.I14 = BitMath.ToInt32Mask(pleft.I14 > pright.I14);
+                p.I15 = BitMath.ToInt32Mask(pleft.I15 > pright.I15);
                 return rt;
             }
 
@@ -2489,17 +2620,25 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> GreaterThan_Basic(Vector512<uint> left, Vector512<uint> right) {
                 UnsafeUtil.SkipInit(out Vector512<uint> rt);
-                ref int prt = ref Unsafe.As<Vector512<uint>, int>(ref rt);
-                ref uint pleft = ref Unsafe.As<Vector512<uint>, uint>(ref left);
-                ref uint pright = ref Unsafe.As<Vector512<uint>, uint>(ref right);
-                prt = BitMath.ToInt32Mask(pleft > pright);
-                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) > Unsafe.Add(ref pright, 1));
-                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) > Unsafe.Add(ref pright, 2));
-                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) > Unsafe.Add(ref pright, 3));
-                Unsafe.Add(ref prt, 4) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 4) > Unsafe.Add(ref pright, 4));
-                Unsafe.Add(ref prt, 5) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 5) > Unsafe.Add(ref pright, 5));
-                Unsafe.Add(ref prt, 6) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 6) > Unsafe.Add(ref pright, 6));
-                Unsafe.Add(ref prt, 7) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 7) > Unsafe.Add(ref pright, 7));
+                ref FixedArray16<int> p = ref Unsafe.As<Vector512<uint>, FixedArray16<int>>(ref rt);
+                ref FixedArray16<uint> pleft = ref Unsafe.As<Vector512<uint>, FixedArray16<uint>>(ref left);
+                ref FixedArray16<uint> pright = ref Unsafe.As<Vector512<uint>, FixedArray16<uint>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 > pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 > pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 > pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 > pright.I3);
+                p.I4 = BitMath.ToInt32Mask(pleft.I4 > pright.I4);
+                p.I5 = BitMath.ToInt32Mask(pleft.I5 > pright.I5);
+                p.I6 = BitMath.ToInt32Mask(pleft.I6 > pright.I6);
+                p.I7 = BitMath.ToInt32Mask(pleft.I7 > pright.I7);
+                p.I8 = BitMath.ToInt32Mask(pleft.I8 > pright.I8);
+                p.I9 = BitMath.ToInt32Mask(pleft.I9 > pright.I9);
+                p.I10 = BitMath.ToInt32Mask(pleft.I10 > pright.I10);
+                p.I11 = BitMath.ToInt32Mask(pleft.I11 > pright.I11);
+                p.I12 = BitMath.ToInt32Mask(pleft.I12 > pright.I12);
+                p.I13 = BitMath.ToInt32Mask(pleft.I13 > pright.I13);
+                p.I14 = BitMath.ToInt32Mask(pleft.I14 > pright.I14);
+                p.I15 = BitMath.ToInt32Mask(pleft.I15 > pright.I15);
                 return rt;
             }
 
@@ -2507,13 +2646,17 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> GreaterThan_Basic(Vector512<long> left, Vector512<long> right) {
                 UnsafeUtil.SkipInit(out Vector512<long> rt);
-                ref long prt = ref Unsafe.As<Vector512<long>, long>(ref rt);
-                ref long pleft = ref Unsafe.As<Vector512<long>, long>(ref left);
-                ref long pright = ref Unsafe.As<Vector512<long>, long>(ref right);
-                prt = BitMath.ToInt32Mask(pleft > pright);
-                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) > Unsafe.Add(ref pright, 1));
-                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) > Unsafe.Add(ref pright, 2));
-                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) > Unsafe.Add(ref pright, 3));
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
+                ref FixedArray8<long> pleft = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref left);
+                ref FixedArray8<long> pright = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 > pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 > pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 > pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 > pright.I3);
+                p.I4 = BitMath.ToInt32Mask(pleft.I4 > pright.I4);
+                p.I5 = BitMath.ToInt32Mask(pleft.I5 > pright.I5);
+                p.I6 = BitMath.ToInt32Mask(pleft.I6 > pright.I6);
+                p.I7 = BitMath.ToInt32Mask(pleft.I7 > pright.I7);
                 return rt;
             }
 
@@ -2522,13 +2665,17 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> GreaterThan_Basic(Vector512<ulong> left, Vector512<ulong> right) {
                 UnsafeUtil.SkipInit(out Vector512<ulong> rt);
-                ref long prt = ref Unsafe.As<Vector512<ulong>, long>(ref rt);
-                ref ulong pleft = ref Unsafe.As<Vector512<ulong>, ulong>(ref left);
-                ref ulong pright = ref Unsafe.As<Vector512<ulong>, ulong>(ref right);
-                prt = BitMath.ToInt32Mask(pleft > pright);
-                Unsafe.Add(ref prt, 1) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 1) > Unsafe.Add(ref pright, 1));
-                Unsafe.Add(ref prt, 2) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 2) > Unsafe.Add(ref pright, 2));
-                Unsafe.Add(ref prt, 3) = BitMath.ToInt32Mask(Unsafe.Add(ref pleft, 3) > Unsafe.Add(ref pright, 3));
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<ulong>, FixedArray8<long>>(ref rt);
+                ref FixedArray8<ulong> pleft = ref Unsafe.As<Vector512<ulong>, FixedArray8<ulong>>(ref left);
+                ref FixedArray8<ulong> pright = ref Unsafe.As<Vector512<ulong>, FixedArray8<ulong>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 > pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 > pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 > pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 > pright.I3);
+                p.I4 = BitMath.ToInt32Mask(pleft.I4 > pright.I4);
+                p.I5 = BitMath.ToInt32Mask(pleft.I5 > pright.I5);
+                p.I6 = BitMath.ToInt32Mask(pleft.I6 > pright.I6);
+                p.I7 = BitMath.ToInt32Mask(pleft.I7 > pright.I7);
                 return rt;
             }
 
@@ -2543,65 +2690,65 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<float> left, Vector512<float> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<double> left, Vector512<double> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<short> left, Vector512<short> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<int> left, Vector512<int> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<long> left, Vector512<long> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAll(left, right);
             }
 
 
@@ -2615,65 +2762,65 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<float> left, Vector512<float> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<double> left, Vector512<double> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<short> left, Vector512<short> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<int> left, Vector512<int> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<long> left, Vector512<long> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                return Vector512.GreaterThanAny(left, right);
             }
 
 
@@ -2798,9 +2945,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> GreaterThanOrEqual_Basic(Vector512<float> left, Vector512<float> right) {
                 UnsafeUtil.SkipInit(out Vector512<float> rt);
-                ref FixedArray8<int> p = ref Unsafe.As<Vector512<float>, FixedArray8<int>>(ref rt);
-                ref FixedArray8<float> pleft = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref left);
-                ref FixedArray8<float> pright = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref right);
+                ref FixedArray16<int> p = ref Unsafe.As<Vector512<float>, FixedArray16<int>>(ref rt);
+                ref FixedArray16<float> pleft = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref left);
+                ref FixedArray16<float> pright = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref right);
                 p.I0 = BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
                 p.I1 = BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
                 p.I2 = BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
@@ -2809,6 +2956,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I5 = BitMath.ToInt32Mask(pleft.I5 >= pright.I5);
                 p.I6 = BitMath.ToInt32Mask(pleft.I6 >= pright.I6);
                 p.I7 = BitMath.ToInt32Mask(pleft.I7 >= pright.I7);
+                p.I8 = BitMath.ToInt32Mask(pleft.I8 >= pright.I8);
+                p.I9 = BitMath.ToInt32Mask(pleft.I9 >= pright.I9);
+                p.I10 = BitMath.ToInt32Mask(pleft.I10 >= pright.I10);
+                p.I11 = BitMath.ToInt32Mask(pleft.I11 >= pright.I11);
+                p.I12 = BitMath.ToInt32Mask(pleft.I12 >= pright.I12);
+                p.I13 = BitMath.ToInt32Mask(pleft.I13 >= pright.I13);
+                p.I14 = BitMath.ToInt32Mask(pleft.I14 >= pright.I14);
+                p.I15 = BitMath.ToInt32Mask(pleft.I15 >= pright.I15);
                 return rt;
             }
 
@@ -2816,13 +2971,17 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> GreaterThanOrEqual_Basic(Vector512<double> left, Vector512<double> right) {
                 UnsafeUtil.SkipInit(out Vector512<double> rt);
-                ref FixedArray4<long> p = ref Unsafe.As<Vector512<double>, FixedArray4<long>>(ref rt);
-                ref FixedArray4<double> pleft = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref left);
-                ref FixedArray4<double> pright = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref right);
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<double>, FixedArray8<long>>(ref rt);
+                ref FixedArray8<double> pleft = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref left);
+                ref FixedArray8<double> pright = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref right);
                 p.I0 = BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
                 p.I1 = BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
                 p.I2 = BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
                 p.I3 = BitMath.ToInt32Mask(pleft.I3 >= pright.I3);
+                p.I4 = BitMath.ToInt32Mask(pleft.I4 >= pright.I4);
+                p.I5 = BitMath.ToInt32Mask(pleft.I5 >= pright.I5);
+                p.I6 = BitMath.ToInt32Mask(pleft.I6 >= pright.I6);
+                p.I7 = BitMath.ToInt32Mask(pleft.I7 >= pright.I7);
                 return rt;
             }
 
@@ -2831,9 +2990,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> GreaterThanOrEqual_Basic(Vector512<sbyte> left, Vector512<sbyte> right) {
                 UnsafeUtil.SkipInit(out Vector512<sbyte> rt);
-                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray32<sbyte>>(ref rt);
-                ref FixedArray32<sbyte> pleft = ref Unsafe.As<Vector512<sbyte>, FixedArray32<sbyte>>(ref left);
-                ref FixedArray32<sbyte> pright = ref Unsafe.As<Vector512<sbyte>, FixedArray32<sbyte>>(ref right);
+                ref FixedArray64<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref rt);
+                ref FixedArray64<sbyte> pleft = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref left);
+                ref FixedArray64<sbyte> pright = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref right);
                 p.I0 = (sbyte)BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
                 p.I1 = (sbyte)BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
                 p.I2 = (sbyte)BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
@@ -2866,6 +3025,38 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I29 = (sbyte)BitMath.ToInt32Mask(pleft.I29 >= pright.I29);
                 p.I30 = (sbyte)BitMath.ToInt32Mask(pleft.I30 >= pright.I30);
                 p.I31 = (sbyte)BitMath.ToInt32Mask(pleft.I31 >= pright.I31);
+                p.I32 = (sbyte)BitMath.ToInt32Mask(pleft.I32 >= pright.I32);
+                p.I33 = (sbyte)BitMath.ToInt32Mask(pleft.I33 >= pright.I33);
+                p.I34 = (sbyte)BitMath.ToInt32Mask(pleft.I34 >= pright.I34);
+                p.I35 = (sbyte)BitMath.ToInt32Mask(pleft.I35 >= pright.I35);
+                p.I36 = (sbyte)BitMath.ToInt32Mask(pleft.I36 >= pright.I36);
+                p.I37 = (sbyte)BitMath.ToInt32Mask(pleft.I37 >= pright.I37);
+                p.I38 = (sbyte)BitMath.ToInt32Mask(pleft.I38 >= pright.I38);
+                p.I39 = (sbyte)BitMath.ToInt32Mask(pleft.I39 >= pright.I39);
+                p.I40 = (sbyte)BitMath.ToInt32Mask(pleft.I40 >= pright.I40);
+                p.I41 = (sbyte)BitMath.ToInt32Mask(pleft.I41 >= pright.I41);
+                p.I42 = (sbyte)BitMath.ToInt32Mask(pleft.I42 >= pright.I42);
+                p.I43 = (sbyte)BitMath.ToInt32Mask(pleft.I43 >= pright.I43);
+                p.I44 = (sbyte)BitMath.ToInt32Mask(pleft.I44 >= pright.I44);
+                p.I45 = (sbyte)BitMath.ToInt32Mask(pleft.I45 >= pright.I45);
+                p.I46 = (sbyte)BitMath.ToInt32Mask(pleft.I46 >= pright.I46);
+                p.I47 = (sbyte)BitMath.ToInt32Mask(pleft.I47 >= pright.I47);
+                p.I48 = (sbyte)BitMath.ToInt32Mask(pleft.I48 >= pright.I48);
+                p.I49 = (sbyte)BitMath.ToInt32Mask(pleft.I49 >= pright.I49);
+                p.I50 = (sbyte)BitMath.ToInt32Mask(pleft.I50 >= pright.I50);
+                p.I51 = (sbyte)BitMath.ToInt32Mask(pleft.I51 >= pright.I51);
+                p.I52 = (sbyte)BitMath.ToInt32Mask(pleft.I52 >= pright.I52);
+                p.I53 = (sbyte)BitMath.ToInt32Mask(pleft.I53 >= pright.I53);
+                p.I54 = (sbyte)BitMath.ToInt32Mask(pleft.I54 >= pright.I54);
+                p.I55 = (sbyte)BitMath.ToInt32Mask(pleft.I55 >= pright.I55);
+                p.I56 = (sbyte)BitMath.ToInt32Mask(pleft.I56 >= pright.I56);
+                p.I57 = (sbyte)BitMath.ToInt32Mask(pleft.I57 >= pright.I57);
+                p.I58 = (sbyte)BitMath.ToInt32Mask(pleft.I58 >= pright.I58);
+                p.I59 = (sbyte)BitMath.ToInt32Mask(pleft.I59 >= pright.I59);
+                p.I60 = (sbyte)BitMath.ToInt32Mask(pleft.I60 >= pright.I60);
+                p.I61 = (sbyte)BitMath.ToInt32Mask(pleft.I61 >= pright.I61);
+                p.I62 = (sbyte)BitMath.ToInt32Mask(pleft.I62 >= pright.I62);
+                p.I63 = (sbyte)BitMath.ToInt32Mask(pleft.I63 >= pright.I63);
                 return rt;
             }
 
@@ -2873,9 +3064,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> GreaterThanOrEqual_Basic(Vector512<byte> left, Vector512<byte> right) {
                 UnsafeUtil.SkipInit(out Vector512<byte> rt);
-                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector512<byte>, FixedArray32<sbyte>>(ref rt);
-                ref FixedArray32<byte> pleft = ref Unsafe.As<Vector512<byte>, FixedArray32<byte>>(ref left);
-                ref FixedArray32<byte> pright = ref Unsafe.As<Vector512<byte>, FixedArray32<byte>>(ref right);
+                ref FixedArray64<sbyte> p = ref Unsafe.As<Vector512<byte>, FixedArray64<sbyte>>(ref rt);
+                ref FixedArray64<byte> pleft = ref Unsafe.As<Vector512<byte>, FixedArray64<byte>>(ref left);
+                ref FixedArray64<byte> pright = ref Unsafe.As<Vector512<byte>, FixedArray64<byte>>(ref right);
                 p.I0 = (sbyte)BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
                 p.I1 = (sbyte)BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
                 p.I2 = (sbyte)BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
@@ -2908,6 +3099,38 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I29 = (sbyte)BitMath.ToInt32Mask(pleft.I29 >= pright.I29);
                 p.I30 = (sbyte)BitMath.ToInt32Mask(pleft.I30 >= pright.I30);
                 p.I31 = (sbyte)BitMath.ToInt32Mask(pleft.I31 >= pright.I31);
+                p.I32 = (sbyte)BitMath.ToInt32Mask(pleft.I32 >= pright.I32);
+                p.I33 = (sbyte)BitMath.ToInt32Mask(pleft.I33 >= pright.I33);
+                p.I34 = (sbyte)BitMath.ToInt32Mask(pleft.I34 >= pright.I34);
+                p.I35 = (sbyte)BitMath.ToInt32Mask(pleft.I35 >= pright.I35);
+                p.I36 = (sbyte)BitMath.ToInt32Mask(pleft.I36 >= pright.I36);
+                p.I37 = (sbyte)BitMath.ToInt32Mask(pleft.I37 >= pright.I37);
+                p.I38 = (sbyte)BitMath.ToInt32Mask(pleft.I38 >= pright.I38);
+                p.I39 = (sbyte)BitMath.ToInt32Mask(pleft.I39 >= pright.I39);
+                p.I40 = (sbyte)BitMath.ToInt32Mask(pleft.I40 >= pright.I40);
+                p.I41 = (sbyte)BitMath.ToInt32Mask(pleft.I41 >= pright.I41);
+                p.I42 = (sbyte)BitMath.ToInt32Mask(pleft.I42 >= pright.I42);
+                p.I43 = (sbyte)BitMath.ToInt32Mask(pleft.I43 >= pright.I43);
+                p.I44 = (sbyte)BitMath.ToInt32Mask(pleft.I44 >= pright.I44);
+                p.I45 = (sbyte)BitMath.ToInt32Mask(pleft.I45 >= pright.I45);
+                p.I46 = (sbyte)BitMath.ToInt32Mask(pleft.I46 >= pright.I46);
+                p.I47 = (sbyte)BitMath.ToInt32Mask(pleft.I47 >= pright.I47);
+                p.I48 = (sbyte)BitMath.ToInt32Mask(pleft.I48 >= pright.I48);
+                p.I49 = (sbyte)BitMath.ToInt32Mask(pleft.I49 >= pright.I49);
+                p.I50 = (sbyte)BitMath.ToInt32Mask(pleft.I50 >= pright.I50);
+                p.I51 = (sbyte)BitMath.ToInt32Mask(pleft.I51 >= pright.I51);
+                p.I52 = (sbyte)BitMath.ToInt32Mask(pleft.I52 >= pright.I52);
+                p.I53 = (sbyte)BitMath.ToInt32Mask(pleft.I53 >= pright.I53);
+                p.I54 = (sbyte)BitMath.ToInt32Mask(pleft.I54 >= pright.I54);
+                p.I55 = (sbyte)BitMath.ToInt32Mask(pleft.I55 >= pright.I55);
+                p.I56 = (sbyte)BitMath.ToInt32Mask(pleft.I56 >= pright.I56);
+                p.I57 = (sbyte)BitMath.ToInt32Mask(pleft.I57 >= pright.I57);
+                p.I58 = (sbyte)BitMath.ToInt32Mask(pleft.I58 >= pright.I58);
+                p.I59 = (sbyte)BitMath.ToInt32Mask(pleft.I59 >= pright.I59);
+                p.I60 = (sbyte)BitMath.ToInt32Mask(pleft.I60 >= pright.I60);
+                p.I61 = (sbyte)BitMath.ToInt32Mask(pleft.I61 >= pright.I61);
+                p.I62 = (sbyte)BitMath.ToInt32Mask(pleft.I62 >= pright.I62);
+                p.I63 = (sbyte)BitMath.ToInt32Mask(pleft.I63 >= pright.I63);
                 return rt;
             }
 
@@ -2915,9 +3138,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> GreaterThanOrEqual_Basic(Vector512<short> left, Vector512<short> right) {
                 UnsafeUtil.SkipInit(out Vector512<short> rt);
-                ref FixedArray16<short> p = ref Unsafe.As<Vector512<short>, FixedArray16<short>>(ref rt);
-                ref FixedArray16<short> pleft = ref Unsafe.As<Vector512<short>, FixedArray16<short>>(ref left);
-                ref FixedArray16<short> pright = ref Unsafe.As<Vector512<short>, FixedArray16<short>>(ref right);
+                ref FixedArray32<short> p = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref rt);
+                ref FixedArray32<short> pleft = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref left);
+                ref FixedArray32<short> pright = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref right);
                 p.I0 = (short)BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
                 p.I1 = (short)BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
                 p.I2 = (short)BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
@@ -2934,6 +3157,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I13 = (short)BitMath.ToInt32Mask(pleft.I13 >= pright.I13);
                 p.I14 = (short)BitMath.ToInt32Mask(pleft.I14 >= pright.I14);
                 p.I15 = (short)BitMath.ToInt32Mask(pleft.I15 >= pright.I15);
+                p.I16 = (short)BitMath.ToInt32Mask(pleft.I16 >= pright.I16);
+                p.I17 = (short)BitMath.ToInt32Mask(pleft.I17 >= pright.I17);
+                p.I18 = (short)BitMath.ToInt32Mask(pleft.I18 >= pright.I18);
+                p.I19 = (short)BitMath.ToInt32Mask(pleft.I19 >= pright.I19);
+                p.I20 = (short)BitMath.ToInt32Mask(pleft.I20 >= pright.I20);
+                p.I21 = (short)BitMath.ToInt32Mask(pleft.I21 >= pright.I21);
+                p.I22 = (short)BitMath.ToInt32Mask(pleft.I22 >= pright.I22);
+                p.I23 = (short)BitMath.ToInt32Mask(pleft.I23 >= pright.I23);
+                p.I24 = (short)BitMath.ToInt32Mask(pleft.I24 >= pright.I24);
+                p.I25 = (short)BitMath.ToInt32Mask(pleft.I25 >= pright.I25);
+                p.I26 = (short)BitMath.ToInt32Mask(pleft.I26 >= pright.I26);
+                p.I27 = (short)BitMath.ToInt32Mask(pleft.I27 >= pright.I27);
+                p.I28 = (short)BitMath.ToInt32Mask(pleft.I28 >= pright.I28);
+                p.I29 = (short)BitMath.ToInt32Mask(pleft.I29 >= pright.I29);
+                p.I30 = (short)BitMath.ToInt32Mask(pleft.I30 >= pright.I30);
+                p.I31 = (short)BitMath.ToInt32Mask(pleft.I31 >= pright.I31);
                 return rt;
             }
 
@@ -2942,9 +3181,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> GreaterThanOrEqual_Basic(Vector512<ushort> left, Vector512<ushort> right) {
                 UnsafeUtil.SkipInit(out Vector512<ushort> rt);
-                ref FixedArray16<short> p = ref Unsafe.As<Vector512<ushort>, FixedArray16<short>>(ref rt);
-                ref FixedArray16<ushort> pleft = ref Unsafe.As<Vector512<ushort>, FixedArray16<ushort>>(ref left);
-                ref FixedArray16<ushort> pright = ref Unsafe.As<Vector512<ushort>, FixedArray16<ushort>>(ref right);
+                ref FixedArray32<short> p = ref Unsafe.As<Vector512<ushort>, FixedArray32<short>>(ref rt);
+                ref FixedArray32<ushort> pleft = ref Unsafe.As<Vector512<ushort>, FixedArray32<ushort>>(ref left);
+                ref FixedArray32<ushort> pright = ref Unsafe.As<Vector512<ushort>, FixedArray32<ushort>>(ref right);
                 p.I0 = (short)BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
                 p.I1 = (short)BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
                 p.I2 = (short)BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
@@ -2961,6 +3200,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I13 = (short)BitMath.ToInt32Mask(pleft.I13 >= pright.I13);
                 p.I14 = (short)BitMath.ToInt32Mask(pleft.I14 >= pright.I14);
                 p.I15 = (short)BitMath.ToInt32Mask(pleft.I15 >= pright.I15);
+                p.I16 = (short)BitMath.ToInt32Mask(pleft.I16 >= pright.I16);
+                p.I17 = (short)BitMath.ToInt32Mask(pleft.I17 >= pright.I17);
+                p.I18 = (short)BitMath.ToInt32Mask(pleft.I18 >= pright.I18);
+                p.I19 = (short)BitMath.ToInt32Mask(pleft.I19 >= pright.I19);
+                p.I20 = (short)BitMath.ToInt32Mask(pleft.I20 >= pright.I20);
+                p.I21 = (short)BitMath.ToInt32Mask(pleft.I21 >= pright.I21);
+                p.I22 = (short)BitMath.ToInt32Mask(pleft.I22 >= pright.I22);
+                p.I23 = (short)BitMath.ToInt32Mask(pleft.I23 >= pright.I23);
+                p.I24 = (short)BitMath.ToInt32Mask(pleft.I24 >= pright.I24);
+                p.I25 = (short)BitMath.ToInt32Mask(pleft.I25 >= pright.I25);
+                p.I26 = (short)BitMath.ToInt32Mask(pleft.I26 >= pright.I26);
+                p.I27 = (short)BitMath.ToInt32Mask(pleft.I27 >= pright.I27);
+                p.I28 = (short)BitMath.ToInt32Mask(pleft.I28 >= pright.I28);
+                p.I29 = (short)BitMath.ToInt32Mask(pleft.I29 >= pright.I29);
+                p.I30 = (short)BitMath.ToInt32Mask(pleft.I30 >= pright.I30);
+                p.I31 = (short)BitMath.ToInt32Mask(pleft.I31 >= pright.I31);
                 return rt;
             }
 
@@ -2968,9 +3223,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> GreaterThanOrEqual_Basic(Vector512<int> left, Vector512<int> right) {
                 UnsafeUtil.SkipInit(out Vector512<int> rt);
-                ref FixedArray8<int> p = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref rt);
-                ref FixedArray8<int> pleft = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref left);
-                ref FixedArray8<int> pright = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref right);
+                ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
+                ref FixedArray16<int> pleft = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref left);
+                ref FixedArray16<int> pright = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref right);
                 p.I0 = BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
                 p.I1 = BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
                 p.I2 = BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
@@ -2979,6 +3234,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I5 = BitMath.ToInt32Mask(pleft.I5 >= pright.I5);
                 p.I6 = BitMath.ToInt32Mask(pleft.I6 >= pright.I6);
                 p.I7 = BitMath.ToInt32Mask(pleft.I7 >= pright.I7);
+                p.I8 = BitMath.ToInt32Mask(pleft.I8 >= pright.I8);
+                p.I9 = BitMath.ToInt32Mask(pleft.I9 >= pright.I9);
+                p.I10 = BitMath.ToInt32Mask(pleft.I10 >= pright.I10);
+                p.I11 = BitMath.ToInt32Mask(pleft.I11 >= pright.I11);
+                p.I12 = BitMath.ToInt32Mask(pleft.I12 >= pright.I12);
+                p.I13 = BitMath.ToInt32Mask(pleft.I13 >= pright.I13);
+                p.I14 = BitMath.ToInt32Mask(pleft.I14 >= pright.I14);
+                p.I15 = BitMath.ToInt32Mask(pleft.I15 >= pright.I15);
                 return rt;
             }
 
@@ -2987,9 +3250,35 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> GreaterThanOrEqual_Basic(Vector512<uint> left, Vector512<uint> right) {
                 UnsafeUtil.SkipInit(out Vector512<uint> rt);
-                ref FixedArray8<int> p = ref Unsafe.As<Vector512<uint>, FixedArray8<int>>(ref rt);
-                ref FixedArray8<uint> pleft = ref Unsafe.As<Vector512<uint>, FixedArray8<uint>>(ref left);
-                ref FixedArray8<uint> pright = ref Unsafe.As<Vector512<uint>, FixedArray8<uint>>(ref right);
+                ref FixedArray16<int> p = ref Unsafe.As<Vector512<uint>, FixedArray16<int>>(ref rt);
+                ref FixedArray16<uint> pleft = ref Unsafe.As<Vector512<uint>, FixedArray16<uint>>(ref left);
+                ref FixedArray16<uint> pright = ref Unsafe.As<Vector512<uint>, FixedArray16<uint>>(ref right);
+                p.I0 = BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
+                p.I1 = BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
+                p.I2 = BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
+                p.I3 = BitMath.ToInt32Mask(pleft.I3 >= pright.I3);
+                p.I4 = BitMath.ToInt32Mask(pleft.I4 >= pright.I4);
+                p.I5 = BitMath.ToInt32Mask(pleft.I5 >= pright.I5);
+                p.I6 = BitMath.ToInt32Mask(pleft.I6 >= pright.I6);
+                p.I7 = BitMath.ToInt32Mask(pleft.I7 >= pright.I7);
+                p.I8 = BitMath.ToInt32Mask(pleft.I8 >= pright.I8);
+                p.I9 = BitMath.ToInt32Mask(pleft.I9 >= pright.I9);
+                p.I10 = BitMath.ToInt32Mask(pleft.I10 >= pright.I10);
+                p.I11 = BitMath.ToInt32Mask(pleft.I11 >= pright.I11);
+                p.I12 = BitMath.ToInt32Mask(pleft.I12 >= pright.I12);
+                p.I13 = BitMath.ToInt32Mask(pleft.I13 >= pright.I13);
+                p.I14 = BitMath.ToInt32Mask(pleft.I14 >= pright.I14);
+                p.I15 = BitMath.ToInt32Mask(pleft.I15 >= pright.I15);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqual(Vector512{long}, Vector512{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<long> GreaterThanOrEqual_Basic(Vector512<long> left, Vector512<long> right) {
+                UnsafeUtil.SkipInit(out Vector512<long> rt);
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
+                ref FixedArray8<long> pleft = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref left);
+                ref FixedArray8<long> pright = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref right);
                 p.I0 = BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
                 p.I1 = BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
                 p.I2 = BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
@@ -3001,32 +3290,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqual(Vector512{long}, Vector512{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> GreaterThanOrEqual_Basic(Vector512<long> left, Vector512<long> right) {
-                UnsafeUtil.SkipInit(out Vector512<long> rt);
-                ref FixedArray4<long> p = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref rt);
-                ref FixedArray4<long> pleft = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref left);
-                ref FixedArray4<long> pright = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref right);
-                p.I0 = BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
-                p.I1 = BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
-                p.I2 = BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
-                p.I3 = BitMath.ToInt32Mask(pleft.I3 >= pright.I3);
-                return rt;
-            }
-
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqual(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> GreaterThanOrEqual_Basic(Vector512<ulong> left, Vector512<ulong> right) {
                 UnsafeUtil.SkipInit(out Vector512<ulong> rt);
-                ref FixedArray4<long> p = ref Unsafe.As<Vector512<ulong>, FixedArray4<long>>(ref rt);
-                ref FixedArray4<ulong> pleft = ref Unsafe.As<Vector512<ulong>, FixedArray4<ulong>>(ref left);
-                ref FixedArray4<ulong> pright = ref Unsafe.As<Vector512<ulong>, FixedArray4<ulong>>(ref right);
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<ulong>, FixedArray8<long>>(ref rt);
+                ref FixedArray8<ulong> pleft = ref Unsafe.As<Vector512<ulong>, FixedArray8<ulong>>(ref left);
+                ref FixedArray8<ulong> pright = ref Unsafe.As<Vector512<ulong>, FixedArray8<ulong>>(ref right);
                 p.I0 = BitMath.ToInt32Mask(pleft.I0 >= pright.I0);
                 p.I1 = BitMath.ToInt32Mask(pleft.I1 >= pright.I1);
                 p.I2 = BitMath.ToInt32Mask(pleft.I2 >= pright.I2);
                 p.I3 = BitMath.ToInt32Mask(pleft.I3 >= pright.I3);
+                p.I4 = BitMath.ToInt32Mask(pleft.I4 >= pright.I4);
+                p.I5 = BitMath.ToInt32Mask(pleft.I5 >= pright.I5);
+                p.I6 = BitMath.ToInt32Mask(pleft.I6 >= pright.I6);
+                p.I7 = BitMath.ToInt32Mask(pleft.I7 >= pright.I7);
                 return rt;
             }
 
@@ -3041,65 +3320,65 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<float> left, Vector512<float> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<double> left, Vector512<double> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<short> left, Vector512<short> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<int> left, Vector512<int> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<long> left, Vector512<long> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAll(left, right);
             }
 
 
@@ -3113,65 +3392,65 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<float> left, Vector512<float> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<double> left, Vector512<double> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<short> left, Vector512<short> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<int> left, Vector512<int> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<long> left, Vector512<long> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                return Vector512.GreaterThanOrEqualAny(left, right);
             }
 
 
@@ -5156,16 +5435,15 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<T> OnesComplement<T>(Vector512<T> vector) where T : struct {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.OnesComplement(vector);
-                // 55h: ~c
-                // FFh: All 1
+                // .NET8 on Avx512: It has hardware-accelerated.
                 // -- Single
-                //00007FFDAB598611  vpternlogd  zmm0,zmm0,zmmword ptr [rdx],55h  
+                //00007FFDAB598611  vpternlogd  zmm0,zmm0,zmmword ptr [rdx],55h  ; 55h: ~c
                 //00007FFDAB598618  vmovups     zmmword ptr [rbp-7EB0h],zmm0  
                 // -- Double
                 //00007FFDAB5986E5  vpternlogq  zmm0,zmm0,zmmword ptr [rdx],55h  
                 //00007FFDAB5986EC  vmovups     zmmword ptr [rbp-7F30h],zmm0  
                 // -- Byte
-                //00007FFDAB5987B9  vpternlogd  zmm0,zmm0,zmm0,0FFh  
+                //00007FFDAB5987B9  vpternlogd  zmm0,zmm0,zmm0,0FFh  ; FFh: All 1
                 //00007FFDAB5987C0  vpxord      zmm0,zmm0,zmmword ptr [rdx]  
                 //00007FFDAB5987C6  vmovups     zmmword ptr [rbp-7FB0h],zmm0  
 #else

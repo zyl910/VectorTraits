@@ -595,6 +595,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static ulong ExtractMostSignificantBits(Vector512<float> vector) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.ExtractMostSignificantBits(vector);
+                // .NET8 on Avx512: It has hardware-accelerated.
                 //00007FFDAB5903AC  vmovups     zmm0,zmmword ptr [rcx]  
                 //00007FFDAB5903B2  vpmovd2m    k1,zmm0  
                 //00007FFDAB5903B8  kmovw       ecx,k1  
@@ -610,6 +611,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static ulong ExtractMostSignificantBits(Vector512<double> vector) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.ExtractMostSignificantBits(vector);
+                // .NET8 on Avx512: It has hardware-accelerated.
                 //00007FFDAB590491  vmovups     zmm0,zmmword ptr [rcx]  
                 //00007FFDAB590497  vpmovq2m    k1,zmm0  
                 //00007FFDAB59049D  kmovb       ecx,k1  
@@ -625,6 +627,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static ulong ExtractMostSignificantBits(Vector512<sbyte> vector) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.ExtractMostSignificantBits(vector);
+                // .NET8 on Avx512: It has hardware-accelerated.
                 //00007FFDAB590576  vmovups     zmm0,zmmword ptr [rcx]  
                 //00007FFDAB59057C  vpmovb2m    k1,zmm0  
                 //00007FFDAB590582  kmovq       rcx,k1  
@@ -651,6 +654,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static ulong ExtractMostSignificantBits(Vector512<short> vector) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.ExtractMostSignificantBits(vector);
+                // .NET8 on Avx512: It has hardware-accelerated.
                 //00007FFDAB590742  vmovups     zmm0,zmmword ptr [rcx]  
                 //00007FFDAB590748  vpmovw2m    k1,zmm0  
                 //00007FFDAB59074E  kmovd       ecx,k1  
@@ -3199,7 +3203,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static float Sum(Vector512<float> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.Sum(value);
-                // .NET8: Poor performance!
+                // .NET8 on Avx512: Poor performance!
                 //  1545: 		T left = Vector256.Sum(vector._lower);
                 //00007FFDAB70F264  vmovups     ymm0,ymmword ptr [rbp-30h]  
                 //00007FFDAB70F269  vhaddps     ymm0,ymm0,ymmword ptr [rbp-30h]  
@@ -3244,7 +3248,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static double Sum(Vector512<double> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.Sum(value);
-                // .NET8: Poor performance!
+                // .NET8 on Avx512: Poor performance!
                 //  1545: 		T left = Vector256.Sum(vector._lower);
                 //00007FFDAB711F34  vmovups     ymm0,ymmword ptr [rbp-30h]  
                 //00007FFDAB711F39  vhaddpd     ymm0,ymm0,ymmword ptr [rbp-30h]  
@@ -3283,7 +3287,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static sbyte Sum(Vector512<sbyte> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector512.Sum(value);
-                // .NET8: Poor performance!
+                // .NET8 on Avx512: Poor performance!
                 //1545: 		T left = Vector256.Sum(vector._lower);
                 //1546: 		return Scalar<T>.Add(left, Vector256.Sum(vector._upper));
 #else
@@ -3731,7 +3735,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static void Widen(Vector512<float> source, out Vector512<double> lower, out Vector512<double> upper) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 (lower, upper) = Vector512.Widen(source);
-                // -- .NET8 Widen<float>
+                // .NET8 on Avx512: Poor performance!
                 //  1596: 		return (WidenLower(source), WidenUpper(source));
                 //00007FFE09D30DD0  sub         rsp,28h  
                 //00007FFE09D30DD4  movaps      xmmword ptr [rsp+10h],xmm6  

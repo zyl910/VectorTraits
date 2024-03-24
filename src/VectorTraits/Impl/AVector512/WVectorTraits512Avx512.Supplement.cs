@@ -573,7 +573,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return SuperStatics.EqualsAny(left, right);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.GreaterThan_AcceleratedTypes"/>
             public static TypeCodeFlags GreaterThan_AcceleratedTypes {
                 get {
@@ -584,94 +584,65 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.GreaterThan(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> GreaterThan(Vector512<float> left, Vector512<float> right) {
-#if NET5_0_OR_GREATER
-                return Avx.CompareGreaterThan(left, right);
-#else
-                return Avx.Compare(left, right, FloatComparisonMode.OrderedGreaterThanSignaling);
-#endif // NET5_0_OR_GREATER
+                return Avx512F.CompareGreaterThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThan(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> GreaterThan(Vector512<double> left, Vector512<double> right) {
-#if NET5_0_OR_GREATER
-                return Avx.CompareGreaterThan(left, right);
-#else
-                return Avx.Compare(left, right, FloatComparisonMode.OrderedGreaterThanSignaling);
-#endif // NET5_0_OR_GREATER
+                return Avx512F.CompareGreaterThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThan(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> GreaterThan(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return Avx512.CompareGreaterThan(left, right);
+                return Avx512BW.CompareGreaterThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThan(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> GreaterThan(Vector512<byte> left, Vector512<byte> right) {
-                //Vector512<sbyte> mid = Vector512s<sbyte>.MinValue;
-                Vector512<sbyte> mid = Vector512.Create(sbyte.MinValue); // .NET5+ has better performance .
-                Vector512<sbyte> left2 = Avx512.Xor(left.AsSByte(), mid);
-                Vector512<sbyte> right2 = Avx512.Xor(right.AsSByte(), mid);
-                Vector512<sbyte> mask = Avx512.CompareGreaterThan(left2, right2);
-                return mask.AsByte();
+                return Avx512BW.CompareGreaterThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThan(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> GreaterThan(Vector512<short> left, Vector512<short> right) {
-                return Avx512.CompareGreaterThan(left, right);
+                return Avx512BW.CompareGreaterThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThan(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> GreaterThan(Vector512<ushort> left, Vector512<ushort> right) {
-                //Vector512<short> mid = Vector512s<short>.MinValue;
-                Vector512<short> mid = Vector512.Create(short.MinValue); // .NET5+ has better performance .
-                Vector512<short> left2 = Avx512.Xor(left.AsInt16(), mid);
-                Vector512<short> right2 = Avx512.Xor(right.AsInt16(), mid);
-                Vector512<short> mask = Avx512.CompareGreaterThan(left2, right2);
-                return mask.AsUInt16();
+                return Avx512BW.CompareGreaterThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThan(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> GreaterThan(Vector512<int> left, Vector512<int> right) {
-                return Avx512.CompareGreaterThan(left, right);
+                return Avx512F.CompareGreaterThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThan(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> GreaterThan(Vector512<uint> left, Vector512<uint> right) {
-                //Vector512<int> mid = Vector512s<int>.MinValue;
-                Vector512<int> mid = Vector512.Create(int.MinValue); // .NET5+ has better performance .
-                Vector512<int> left2 = Avx512.Xor(left.AsInt32(), mid);
-                Vector512<int> right2 = Avx512.Xor(right.AsInt32(), mid);
-                Vector512<int> mask = Avx512.CompareGreaterThan(left2, right2);
-                return mask.AsUInt32();
+                return Avx512F.CompareGreaterThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThan(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> GreaterThan(Vector512<long> left, Vector512<long> right) {
-                Vector512<long> mask = Avx512.CompareGreaterThan(left, right);
-                return mask;
+                return Avx512F.CompareGreaterThan(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThan(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> GreaterThan(Vector512<ulong> left, Vector512<ulong> right) {
-                //Vector512<long> mid = Vector512s<long>.MinValue;
-                Vector512<long> mid = Vector512Constants.Int64_MinValue;
-                Vector512<long> left2 = Avx512.Add(left.AsInt64(), mid);
-                Vector512<long> right2 = Avx512.Add(right.AsInt64(), mid);
-                Vector512<long> mask = Avx512.CompareGreaterThan(left2, right2);
-                return mask.AsUInt64();
+                return Avx512F.CompareGreaterThan(left, right);
             }
 
 
@@ -685,65 +656,85 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<float> left, Vector512<float> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                // return YIsAllTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<double> left, Vector512<double> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                // return YIsAllTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                // return YIsAllTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                // return YIsAllTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<short> left, Vector512<short> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                // return YIsAllTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                // return YIsAllTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<int> left, Vector512<int> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                // return YIsAllTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                // return YIsAllTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<long> left, Vector512<long> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                // return YIsAllTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAll(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAll(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAllTrue(GreaterThan(left, right));
+                // return YIsAllTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAll(left, right);
             }
 
 
@@ -757,65 +748,85 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<float> left, Vector512<float> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                // return YIsAnyTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<double> left, Vector512<double> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                // return YIsAnyTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                // return YIsAnyTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                // return YIsAnyTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<short> left, Vector512<short> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                // return YIsAnyTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                // return YIsAnyTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<int> left, Vector512<int> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                // return YIsAnyTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                // return YIsAnyTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<long> left, Vector512<long> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                // return YIsAnyTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanAny(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanAny(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAnyTrue(GreaterThan(left, right));
+                // return YIsAnyTrue(GreaterThan(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanAny(left, right);
             }
 
 
@@ -829,73 +840,65 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqual(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> GreaterThanOrEqual(Vector512<float> left, Vector512<float> right) {
-#if NET5_0_OR_GREATER
-                return Avx.CompareGreaterThanOrEqual(left, right);
-#else
-                return Avx.Compare(left, right, FloatComparisonMode.OrderedGreaterThanOrEqualSignaling);
-#endif // NET5_0_OR_GREATER
+                return Avx512F.CompareGreaterThanOrEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqual(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> GreaterThanOrEqual(Vector512<double> left, Vector512<double> right) {
-#if NET5_0_OR_GREATER
-                return Avx.CompareGreaterThanOrEqual(left, right);
-#else
-                return Avx.Compare(left, right, FloatComparisonMode.OrderedGreaterThanOrEqualSignaling);
-#endif // NET5_0_OR_GREATER
+                return Avx512F.CompareGreaterThanOrEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqual(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> GreaterThanOrEqual(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return OnesComplement(LessThan(left, right));
+                return Avx512BW.CompareGreaterThanOrEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqual(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> GreaterThanOrEqual(Vector512<byte> left, Vector512<byte> right) {
-                return OnesComplement(LessThan(left, right));
+                return Avx512BW.CompareGreaterThanOrEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqual(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> GreaterThanOrEqual(Vector512<short> left, Vector512<short> right) {
-                return OnesComplement(LessThan(left, right));
+                return Avx512BW.CompareGreaterThanOrEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqual(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> GreaterThanOrEqual(Vector512<ushort> left, Vector512<ushort> right) {
-                return OnesComplement(LessThan(left, right));
+                return Avx512BW.CompareGreaterThanOrEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqual(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> GreaterThanOrEqual(Vector512<int> left, Vector512<int> right) {
-                return OnesComplement(LessThan(left, right));
+                return Avx512F.CompareGreaterThanOrEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqual(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> GreaterThanOrEqual(Vector512<uint> left, Vector512<uint> right) {
-                return OnesComplement(LessThan(left, right));
+                return Avx512F.CompareGreaterThanOrEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqual(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> GreaterThanOrEqual(Vector512<long> left, Vector512<long> right) {
-                return OnesComplement(LessThan(left, right));
+                return Avx512F.CompareGreaterThanOrEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqual(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> GreaterThanOrEqual(Vector512<ulong> left, Vector512<ulong> right) {
-                return OnesComplement(LessThan(left, right));
+                return Avx512F.CompareGreaterThanOrEqual(left, right);
             }
 
 
@@ -909,65 +912,85 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<float> left, Vector512<float> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<double> left, Vector512<double> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<short> left, Vector512<short> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<int> left, Vector512<int> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<long> left, Vector512<long> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAll(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAll(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAll(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // return YIsAllTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAll(left, right);
             }
 
 
@@ -981,68 +1004,88 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<float> left, Vector512<float> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<double> left, Vector512<double> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<byte> left, Vector512<byte> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<short> left, Vector512<short> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<ushort> left, Vector512<ushort> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<int> left, Vector512<int> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<uint> left, Vector512<uint> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<long> left, Vector512<long> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAny(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.GreaterThanOrEqualAny(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool GreaterThanOrEqualAny(Vector512<ulong> left, Vector512<ulong> right) {
-                return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // return YIsAnyTrue(GreaterThanOrEqual(left, right));
+                // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
+                return SuperStatics.GreaterThanOrEqualAny(left, right);
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.LessThan_AcceleratedTypes"/>
             public static TypeCodeFlags LessThan_AcceleratedTypes {
                 get {
