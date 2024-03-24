@@ -47,7 +47,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static bool YIsAnyTrue<T>(Vector512<T> value) where T : struct {
                 //return !Avx.TestZ(value.AsInt32(), value.AsInt32());
                 // .NET8 methods have hardware-accelerated. .NET8 does not provide kortestw instructions.
-                return SuperStatics.YIsAllTrue(value);
+                return SuperStatics.YIsAnyTrue(value);
             }
 
 /*
