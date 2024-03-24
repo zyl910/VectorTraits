@@ -2119,7 +2119,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return Avx512F.Subtract(left, right);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.Xor_AcceleratedTypes"/>
             public static TypeCodeFlags Xor_AcceleratedTypes {
                 get {
@@ -2130,10 +2130,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Xor{T}(Vector512{T}, Vector512{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> Xor<T>(Vector512<T> left, Vector512<T> right) where T : struct {
-                return Avx512.Xor(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
+                return Avx512F.Xor(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
             }
 
-*/
+
 #endif // NET8_0_OR_GREATER
         }
     }

@@ -1798,7 +1798,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Subtract(left, right);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.Xor_AcceleratedTypes"/>
         public override TypeCodeFlags Xor_AcceleratedTypes {
             get {
@@ -1811,7 +1811,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<T> Xor<T>(Vector512<T> left, Vector512<T> right) where T : struct {
             return Statics.Xor(left, right);
         }
-*/
+
 #endif
     }
 }
