@@ -6124,7 +6124,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Sqrt_Basic(Vector512<float> value) {
                 Vector512<float> rt = value;
-                ref FixedArray8<float> p = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref rt);
+                ref FixedArray16<float> p = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref rt);
                 p.I0 = BitMath.Sqrt(p.I0);
                 p.I1 = BitMath.Sqrt(p.I1);
                 p.I2 = BitMath.Sqrt(p.I2);
@@ -6133,6 +6133,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I5 = BitMath.Sqrt(p.I5);
                 p.I6 = BitMath.Sqrt(p.I6);
                 p.I7 = BitMath.Sqrt(p.I7);
+                p.I8 = BitMath.Sqrt(p.I8);
+                p.I9 = BitMath.Sqrt(p.I9);
+                p.I10 = BitMath.Sqrt(p.I10);
+                p.I11 = BitMath.Sqrt(p.I11);
+                p.I12 = BitMath.Sqrt(p.I12);
+                p.I13 = BitMath.Sqrt(p.I13);
+                p.I14 = BitMath.Sqrt(p.I14);
+                p.I15 = BitMath.Sqrt(p.I15);
                 return rt;
             }
 
@@ -6140,11 +6148,15 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> Sqrt_Basic(Vector512<double> value) {
                 Vector512<double> rt = value;
-                ref FixedArray4<double> p = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref rt);
+                ref FixedArray8<double> p = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref rt);
                 p.I0 = BitMath.Sqrt(p.I0);
                 p.I1 = BitMath.Sqrt(p.I1);
                 p.I2 = BitMath.Sqrt(p.I2);
                 p.I3 = BitMath.Sqrt(p.I3);
+                p.I4 = BitMath.Sqrt(p.I4);
+                p.I5 = BitMath.Sqrt(p.I5);
+                p.I6 = BitMath.Sqrt(p.I6);
+                p.I7 = BitMath.Sqrt(p.I7);
                 return rt;
             }
 
@@ -6153,7 +6165,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> Sqrt_Basic(Vector512<sbyte> value) {
                 Vector512<sbyte> rt = value;
-                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray32<sbyte>>(ref rt);
+                ref FixedArray64<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref rt);
                 p.I0 = BitMath.Sqrt(p.I0);
                 p.I1 = BitMath.Sqrt(p.I1);
                 p.I2 = BitMath.Sqrt(p.I2);
@@ -6186,6 +6198,38 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I29 = BitMath.Sqrt(p.I29);
                 p.I30 = BitMath.Sqrt(p.I30);
                 p.I31 = BitMath.Sqrt(p.I31);
+                p.I32 = BitMath.Sqrt(p.I32);
+                p.I33 = BitMath.Sqrt(p.I33);
+                p.I34 = BitMath.Sqrt(p.I34);
+                p.I35 = BitMath.Sqrt(p.I35);
+                p.I36 = BitMath.Sqrt(p.I36);
+                p.I37 = BitMath.Sqrt(p.I37);
+                p.I38 = BitMath.Sqrt(p.I38);
+                p.I39 = BitMath.Sqrt(p.I39);
+                p.I40 = BitMath.Sqrt(p.I40);
+                p.I41 = BitMath.Sqrt(p.I41);
+                p.I42 = BitMath.Sqrt(p.I42);
+                p.I43 = BitMath.Sqrt(p.I43);
+                p.I44 = BitMath.Sqrt(p.I44);
+                p.I45 = BitMath.Sqrt(p.I45);
+                p.I46 = BitMath.Sqrt(p.I46);
+                p.I47 = BitMath.Sqrt(p.I47);
+                p.I48 = BitMath.Sqrt(p.I48);
+                p.I49 = BitMath.Sqrt(p.I49);
+                p.I50 = BitMath.Sqrt(p.I50);
+                p.I51 = BitMath.Sqrt(p.I51);
+                p.I52 = BitMath.Sqrt(p.I52);
+                p.I53 = BitMath.Sqrt(p.I53);
+                p.I54 = BitMath.Sqrt(p.I54);
+                p.I55 = BitMath.Sqrt(p.I55);
+                p.I56 = BitMath.Sqrt(p.I56);
+                p.I57 = BitMath.Sqrt(p.I57);
+                p.I58 = BitMath.Sqrt(p.I58);
+                p.I59 = BitMath.Sqrt(p.I59);
+                p.I60 = BitMath.Sqrt(p.I60);
+                p.I61 = BitMath.Sqrt(p.I61);
+                p.I62 = BitMath.Sqrt(p.I62);
+                p.I63 = BitMath.Sqrt(p.I63);
                 return rt;
             }
 
@@ -6193,7 +6237,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> Sqrt_Basic(Vector512<byte> value) {
                 Vector512<byte> rt = value;
-                ref FixedArray32<byte> p = ref Unsafe.As<Vector512<byte>, FixedArray32<byte>>(ref rt);
+                ref FixedArray64<byte> p = ref Unsafe.As<Vector512<byte>, FixedArray64<byte>>(ref rt);
                 p.I0 = BitMath.Sqrt(p.I0);
                 p.I1 = BitMath.Sqrt(p.I1);
                 p.I2 = BitMath.Sqrt(p.I2);
@@ -6226,6 +6270,38 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I29 = BitMath.Sqrt(p.I29);
                 p.I30 = BitMath.Sqrt(p.I30);
                 p.I31 = BitMath.Sqrt(p.I31);
+                p.I32 = BitMath.Sqrt(p.I32);
+                p.I33 = BitMath.Sqrt(p.I33);
+                p.I34 = BitMath.Sqrt(p.I34);
+                p.I35 = BitMath.Sqrt(p.I35);
+                p.I36 = BitMath.Sqrt(p.I36);
+                p.I37 = BitMath.Sqrt(p.I37);
+                p.I38 = BitMath.Sqrt(p.I38);
+                p.I39 = BitMath.Sqrt(p.I39);
+                p.I40 = BitMath.Sqrt(p.I40);
+                p.I41 = BitMath.Sqrt(p.I41);
+                p.I42 = BitMath.Sqrt(p.I42);
+                p.I43 = BitMath.Sqrt(p.I43);
+                p.I44 = BitMath.Sqrt(p.I44);
+                p.I45 = BitMath.Sqrt(p.I45);
+                p.I46 = BitMath.Sqrt(p.I46);
+                p.I47 = BitMath.Sqrt(p.I47);
+                p.I48 = BitMath.Sqrt(p.I48);
+                p.I49 = BitMath.Sqrt(p.I49);
+                p.I50 = BitMath.Sqrt(p.I50);
+                p.I51 = BitMath.Sqrt(p.I51);
+                p.I52 = BitMath.Sqrt(p.I52);
+                p.I53 = BitMath.Sqrt(p.I53);
+                p.I54 = BitMath.Sqrt(p.I54);
+                p.I55 = BitMath.Sqrt(p.I55);
+                p.I56 = BitMath.Sqrt(p.I56);
+                p.I57 = BitMath.Sqrt(p.I57);
+                p.I58 = BitMath.Sqrt(p.I58);
+                p.I59 = BitMath.Sqrt(p.I59);
+                p.I60 = BitMath.Sqrt(p.I60);
+                p.I61 = BitMath.Sqrt(p.I61);
+                p.I62 = BitMath.Sqrt(p.I62);
+                p.I63 = BitMath.Sqrt(p.I63);
                 return rt;
             }
 
@@ -6233,7 +6309,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> Sqrt_Basic(Vector512<short> value) {
                 Vector512<short> rt = value;
-                ref FixedArray16<short> p = ref Unsafe.As<Vector512<short>, FixedArray16<short>>(ref rt);
+                ref FixedArray32<short> p = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref rt);
                 p.I0 = BitMath.Sqrt(p.I0);
                 p.I1 = BitMath.Sqrt(p.I1);
                 p.I2 = BitMath.Sqrt(p.I2);
@@ -6258,7 +6334,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> Sqrt_Basic(Vector512<ushort> value) {
                 Vector512<ushort> rt = value;
-                ref FixedArray16<ushort> p = ref Unsafe.As<Vector512<ushort>, FixedArray16<ushort>>(ref rt);
+                ref FixedArray32<ushort> p = ref Unsafe.As<Vector512<ushort>, FixedArray32<ushort>>(ref rt);
                 p.I0 = BitMath.Sqrt(p.I0);
                 p.I1 = BitMath.Sqrt(p.I1);
                 p.I2 = BitMath.Sqrt(p.I2);
@@ -6282,7 +6358,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> Sqrt_Basic(Vector512<int> value) {
                 Vector512<int> rt = value;
-                ref FixedArray8<int> p = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref rt);
+                ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
                 p.I0 = BitMath.Sqrt(p.I0);
                 p.I1 = BitMath.Sqrt(p.I1);
                 p.I2 = BitMath.Sqrt(p.I2);
@@ -6291,6 +6367,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I5 = BitMath.Sqrt(p.I5);
                 p.I6 = BitMath.Sqrt(p.I6);
                 p.I7 = BitMath.Sqrt(p.I7);
+                p.I8 = BitMath.Sqrt(p.I8);
+                p.I9 = BitMath.Sqrt(p.I9);
+                p.I10 = BitMath.Sqrt(p.I10);
+                p.I11 = BitMath.Sqrt(p.I11);
+                p.I12 = BitMath.Sqrt(p.I12);
+                p.I13 = BitMath.Sqrt(p.I13);
+                p.I14 = BitMath.Sqrt(p.I14);
+                p.I15 = BitMath.Sqrt(p.I15);
                 return rt;
             }
 
@@ -6299,7 +6383,31 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> Sqrt_Basic(Vector512<uint> value) {
                 Vector512<uint> rt = value;
-                ref FixedArray8<uint> p = ref Unsafe.As<Vector512<uint>, FixedArray8<uint>>(ref rt);
+                ref FixedArray16<uint> p = ref Unsafe.As<Vector512<uint>, FixedArray16<uint>>(ref rt);
+                p.I0 = BitMath.Sqrt(p.I0);
+                p.I1 = BitMath.Sqrt(p.I1);
+                p.I2 = BitMath.Sqrt(p.I2);
+                p.I3 = BitMath.Sqrt(p.I3);
+                p.I4 = BitMath.Sqrt(p.I4);
+                p.I5 = BitMath.Sqrt(p.I5);
+                p.I6 = BitMath.Sqrt(p.I6);
+                p.I7 = BitMath.Sqrt(p.I7);
+                p.I8 = BitMath.Sqrt(p.I8);
+                p.I9 = BitMath.Sqrt(p.I9);
+                p.I10 = BitMath.Sqrt(p.I10);
+                p.I11 = BitMath.Sqrt(p.I11);
+                p.I12 = BitMath.Sqrt(p.I12);
+                p.I13 = BitMath.Sqrt(p.I13);
+                p.I14 = BitMath.Sqrt(p.I14);
+                p.I15 = BitMath.Sqrt(p.I15);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.Sqrt(Vector512{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<long> Sqrt_Basic(Vector512<long> value) {
+                Vector512<long> rt = value;
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
                 p.I0 = BitMath.Sqrt(p.I0);
                 p.I1 = BitMath.Sqrt(p.I1);
                 p.I2 = BitMath.Sqrt(p.I2);
@@ -6311,28 +6419,20 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits512.Sqrt(Vector512{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> Sqrt_Basic(Vector512<long> value) {
-                Vector512<long> rt = value;
-                ref FixedArray4<long> p = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref rt);
-                p.I0 = BitMath.Sqrt(p.I0);
-                p.I1 = BitMath.Sqrt(p.I1);
-                p.I2 = BitMath.Sqrt(p.I2);
-                p.I3 = BitMath.Sqrt(p.I3);
-                return rt;
-            }
-
             /// <inheritdoc cref="IWVectorTraits512.Sqrt(Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> Sqrt_Basic(Vector512<ulong> value) {
                 Vector512<ulong> rt = value;
-                ref FixedArray4<ulong> p = ref Unsafe.As<Vector512<ulong>, FixedArray4<ulong>>(ref rt);
+                ref FixedArray8<ulong> p = ref Unsafe.As<Vector512<ulong>, FixedArray8<ulong>>(ref rt);
                 p.I0 = BitMath.Sqrt(p.I0);
                 p.I1 = BitMath.Sqrt(p.I1);
                 p.I2 = BitMath.Sqrt(p.I2);
                 p.I3 = BitMath.Sqrt(p.I3);
+                p.I4 = BitMath.Sqrt(p.I4);
+                p.I5 = BitMath.Sqrt(p.I5);
+                p.I6 = BitMath.Sqrt(p.I6);
+                p.I7 = BitMath.Sqrt(p.I7);
                 return rt;
             }
 

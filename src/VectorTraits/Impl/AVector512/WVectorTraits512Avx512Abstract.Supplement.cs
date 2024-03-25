@@ -1654,7 +1654,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.OnesComplement(vector);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.Sqrt_AcceleratedTypes"/>
         public override TypeCodeFlags Sqrt_AcceleratedTypes {
             get {
@@ -1725,7 +1725,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<ulong> Sqrt(Vector512<ulong> value) {
             return Statics.Sqrt(value);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits512.Subtract_AcceleratedTypes"/>
         public override TypeCodeFlags Subtract_AcceleratedTypes {

@@ -1913,7 +1913,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return SuperStatics.OnesComplement(vector);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.Sqrt_AcceleratedTypes"/>
             public static TypeCodeFlags Sqrt_AcceleratedTypes {
                 get {
@@ -1925,13 +1925,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Sqrt(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Sqrt(Vector512<float> value) {
-                return Avx.Sqrt(value);
+                return Avx512F.Sqrt(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Sqrt(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> Sqrt(Vector512<double> value) {
-                return Avx.Sqrt(value);
+                return Avx512F.Sqrt(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Sqrt(Vector512{sbyte})"/>
@@ -1956,10 +1956,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<float> src2 = ConvertToSingle(w2.AsInt32());
                 Vector512<float> src3 = ConvertToSingle(w3.AsInt32());
                 // Body
-                Vector512<float> dst0 = Avx.Sqrt(src0);
-                Vector512<float> dst1 = Avx.Sqrt(src1);
-                Vector512<float> dst2 = Avx.Sqrt(src2);
-                Vector512<float> dst3 = Avx.Sqrt(src3);
+                Vector512<float> dst0 = Avx512F.Sqrt(src0);
+                Vector512<float> dst1 = Avx512F.Sqrt(src1);
+                Vector512<float> dst2 = Avx512F.Sqrt(src2);
+                Vector512<float> dst3 = Avx512F.Sqrt(src3);
                 // To int
                 w0 = ConvertToInt32(dst0).AsUInt32();
                 w1 = ConvertToInt32(dst1).AsUInt32();
@@ -1989,8 +1989,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<float> src0 = ConvertToSingle(w0.AsInt32());
                 Vector512<float> src1 = ConvertToSingle(w1.AsInt32());
                 // Body
-                Vector512<float> dst0 = Avx.Sqrt(src0);
-                Vector512<float> dst1 = Avx.Sqrt(src1);
+                Vector512<float> dst0 = Avx512F.Sqrt(src0);
+                Vector512<float> dst1 = Avx512F.Sqrt(src1);
                 // To int
                 w0 = ConvertToInt32(dst0).AsUInt32();
                 w1 = ConvertToInt32(dst1).AsUInt32();
@@ -2016,8 +2016,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<double> src0 = ConvertToDouble_Range52(w0);
                 Vector512<double> src1 = ConvertToDouble_Range52(w1);
                 // Body
-                Vector512<double> dst0 = Avx.Sqrt(src0);
-                Vector512<double> dst1 = Avx.Sqrt(src1);
+                Vector512<double> dst0 = Avx512F.Sqrt(src0);
+                Vector512<double> dst1 = Avx512F.Sqrt(src1);
                 // To int
                 w0 = ConvertToUInt64_Range52(dst0);
                 w1 = ConvertToUInt64_Range52(dst1);
@@ -2041,12 +2041,12 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 // To float
                 Vector512<double> src0 = ConvertToDouble(value);
                 // Body
-                Vector512<double> dst0 = Avx.Sqrt(src0);
+                Vector512<double> dst0 = Avx512F.Sqrt(src0);
                 // To int
                 Vector512<ulong> rt = ConvertToUInt64_Range52(dst0);
                 return rt;
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits512.Subtract_AcceleratedTypes"/>
             public static TypeCodeFlags Subtract_AcceleratedTypes {
