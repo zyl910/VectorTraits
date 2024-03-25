@@ -203,6 +203,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref prt, 1) = (Double)Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref prt, 2) = (Double)Unsafe.Add(ref p, 2);
                 Unsafe.Add(ref prt, 3) = (Double)Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref prt, 4) = (Double)Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref prt, 5) = (Double)Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref prt, 6) = (Double)Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref prt, 7) = (Double)Unsafe.Add(ref p, 7);
                 return rt;
             }
 
@@ -217,6 +221,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref prt, 1) = (Double)Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref prt, 2) = (Double)Unsafe.Add(ref p, 2);
                 Unsafe.Add(ref prt, 3) = (Double)Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref prt, 4) = (Double)Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref prt, 5) = (Double)Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref prt, 6) = (Double)Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref prt, 7) = (Double)Unsafe.Add(ref p, 7);
                 return rt;
             }
 
@@ -320,6 +328,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref prt, 5) = (Int32)Unsafe.Add(ref p, 5);
                 Unsafe.Add(ref prt, 6) = (Int32)Unsafe.Add(ref p, 6);
                 Unsafe.Add(ref prt, 7) = (Int32)Unsafe.Add(ref p, 7);
+                Unsafe.Add(ref prt, 8) = (Int32)Unsafe.Add(ref p, 8);
+                Unsafe.Add(ref prt, 9) = (Int32)Unsafe.Add(ref p, 9);
+                Unsafe.Add(ref prt, 10) = (Int32)Unsafe.Add(ref p, 10);
+                Unsafe.Add(ref prt, 11) = (Int32)Unsafe.Add(ref p, 11);
+                Unsafe.Add(ref prt, 12) = (Int32)Unsafe.Add(ref p, 12);
+                Unsafe.Add(ref prt, 13) = (Int32)Unsafe.Add(ref p, 13);
+                Unsafe.Add(ref prt, 14) = (Int32)Unsafe.Add(ref p, 14);
+                Unsafe.Add(ref prt, 15) = (Int32)Unsafe.Add(ref p, 15);
                 return rt;
             }
 
@@ -357,6 +373,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref prt, 1) = (Int64)Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref prt, 2) = (Int64)Unsafe.Add(ref p, 2);
                 Unsafe.Add(ref prt, 3) = (Int64)Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref prt, 4) = (Int64)Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref prt, 5) = (Int64)Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref prt, 6) = (Int64)Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref prt, 7) = (Int64)Unsafe.Add(ref p, 7);
                 return rt;
             }
 
@@ -392,7 +412,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ConvertToInt64_Range52RoundToEven(Vector512<double> value) {
 #if VECTOR_HAS_METHOD
-                // See more: WVector512Traits512Avx2.ConvertToInt64_Range52RoundToEven
+                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52RoundToEven
                 Vector512<long> magicNumber = Vector512.Create(ScalarConstants.DoubleVal_2Pow52_2Pow51).AsInt64(); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
                 Vector512<double> x = Vector512.Add(value, magicNumber.AsDouble());
                 Vector512<long> result = Vector512.Subtract(x.AsInt64(), magicNumber);
@@ -451,6 +471,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref prt, 5) = (Single)Unsafe.Add(ref p, 5);
                 Unsafe.Add(ref prt, 6) = (Single)Unsafe.Add(ref p, 6);
                 Unsafe.Add(ref prt, 7) = (Single)Unsafe.Add(ref p, 7);
+                Unsafe.Add(ref prt, 8) = (Single)Unsafe.Add(ref p, 8);
+                Unsafe.Add(ref prt, 9) = (Single)Unsafe.Add(ref p, 9);
+                Unsafe.Add(ref prt, 10) = (Single)Unsafe.Add(ref p, 10);
+                Unsafe.Add(ref prt, 11) = (Single)Unsafe.Add(ref p, 11);
+                Unsafe.Add(ref prt, 12) = (Single)Unsafe.Add(ref p, 12);
+                Unsafe.Add(ref prt, 13) = (Single)Unsafe.Add(ref p, 13);
+                Unsafe.Add(ref prt, 14) = (Single)Unsafe.Add(ref p, 14);
+                Unsafe.Add(ref prt, 15) = (Single)Unsafe.Add(ref p, 15);
                 return rt;
             }
 
@@ -469,6 +497,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref prt, 5) = (Single)Unsafe.Add(ref p, 5);
                 Unsafe.Add(ref prt, 6) = (Single)Unsafe.Add(ref p, 6);
                 Unsafe.Add(ref prt, 7) = (Single)Unsafe.Add(ref p, 7);
+                Unsafe.Add(ref prt, 8) = (Single)Unsafe.Add(ref p, 8);
+                Unsafe.Add(ref prt, 9) = (Single)Unsafe.Add(ref p, 9);
+                Unsafe.Add(ref prt, 10) = (Single)Unsafe.Add(ref p, 10);
+                Unsafe.Add(ref prt, 11) = (Single)Unsafe.Add(ref p, 11);
+                Unsafe.Add(ref prt, 12) = (Single)Unsafe.Add(ref p, 12);
+                Unsafe.Add(ref prt, 13) = (Single)Unsafe.Add(ref p, 13);
+                Unsafe.Add(ref prt, 14) = (Single)Unsafe.Add(ref p, 14);
+                Unsafe.Add(ref prt, 15) = (Single)Unsafe.Add(ref p, 15);
                 return rt;
             }
 
@@ -506,6 +542,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref prt, 5) = (UInt32)Unsafe.Add(ref p, 5);
                 Unsafe.Add(ref prt, 6) = (UInt32)Unsafe.Add(ref p, 6);
                 Unsafe.Add(ref prt, 7) = (UInt32)Unsafe.Add(ref p, 7);
+                Unsafe.Add(ref prt, 8) = (UInt32)Unsafe.Add(ref p, 8);
+                Unsafe.Add(ref prt, 9) = (UInt32)Unsafe.Add(ref p, 9);
+                Unsafe.Add(ref prt, 10) = (UInt32)Unsafe.Add(ref p, 10);
+                Unsafe.Add(ref prt, 11) = (UInt32)Unsafe.Add(ref p, 11);
+                Unsafe.Add(ref prt, 12) = (UInt32)Unsafe.Add(ref p, 12);
+                Unsafe.Add(ref prt, 13) = (UInt32)Unsafe.Add(ref p, 13);
+                Unsafe.Add(ref prt, 14) = (UInt32)Unsafe.Add(ref p, 14);
+                Unsafe.Add(ref prt, 15) = (UInt32)Unsafe.Add(ref p, 15);
                 return rt;
             }
 
@@ -539,6 +583,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref prt, 1) = (UInt64)Unsafe.Add(ref p, 1);
                 Unsafe.Add(ref prt, 2) = (UInt64)Unsafe.Add(ref p, 2);
                 Unsafe.Add(ref prt, 3) = (UInt64)Unsafe.Add(ref p, 3);
+                Unsafe.Add(ref prt, 4) = (UInt64)Unsafe.Add(ref p, 4);
+                Unsafe.Add(ref prt, 5) = (UInt64)Unsafe.Add(ref p, 5);
+                Unsafe.Add(ref prt, 6) = (UInt64)Unsafe.Add(ref p, 6);
+                Unsafe.Add(ref prt, 7) = (UInt64)Unsafe.Add(ref p, 7);
                 return rt;
             }
 
@@ -577,7 +625,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> ConvertToUInt64_Range52RoundToEven(Vector512<double> value) {
 #if VECTOR_HAS_METHOD
-                // See more: WVector512Traits512Avx2.ConvertToUInt64_Range52RoundToEven
+                // See more: WVectorTraits256Avx2.ConvertToUInt64_Range52RoundToEven
                 Vector512<ulong> magicNumber = Vector512.Create(ScalarConstants.DoubleVal_2Pow52).AsUInt64(); // Double value: pow(2, 52)
                 Vector512<double> x = Vector512.Add(value, magicNumber.AsDouble());
                 Vector512<ulong> result = Vector512.Xor(x.AsUInt64(), magicNumber);

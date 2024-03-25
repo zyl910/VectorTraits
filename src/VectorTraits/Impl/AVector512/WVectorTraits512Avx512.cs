@@ -78,7 +78,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                         if (!Avx2.IsSupported) rt += ", Avx2";
                         if (!Sse.IsSupported) rt += ", Sse";
                         if (!Sse2.IsSupported) rt += ", Sse2";
-                        if (!String.IsNullOrEmpty(rt)) {
+                        if (!string.IsNullOrEmpty(rt)) {
                             rt = "Requires hardware support " + rt.Substring(2) + "!";
                         }
                     }
@@ -146,7 +146,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return Avx512F.RoundScale(value, (byte)FloatRoundMode.ToPositiveInfinity);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToDouble_AcceleratedTypes {
                 get {
@@ -158,181 +158,37 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble(Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> ConvertToDouble(Vector512<long> value) {
-                return ConvertToDouble_Bcl(value);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble(Vector512{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<double> ConvertToDouble_Bcl(Vector512<long> value) {
-                // From: src/libraries/System.Private.CoreLib/src/System/Runtime/Intrinsics/Vector512.cs
-                // Based on __m512d int64_to_double_fast_precise(const __m512i v)
-                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
-                Vector512<int> lowerBits;
-                lowerBits = value.AsInt32();
-                lowerBits = Avx512.Blend(lowerBits, Vector512.Create(ScalarConstants.DoubleVal_2Pow52).AsInt32(), 0b10101010); // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)
-                Vector512<long> upperBits = Avx512.ShiftRightLogical(value, 32);                                               // Extract the 32 most significant bits of vector
-                upperBits = Avx512.Xor(upperBits, Vector512.Create(ScalarConstants.DoubleVal_2Pow84_2Pow63).AsInt64());        // Flip the msb of upperBits and blend with the bit representation of double(2^84 + 2^63)
-                Vector512<double> result = Avx.Subtract(upperBits.AsDouble(), Vector512.Create(ScalarConstants.DoubleVal_2Pow84_2Pow63_2Pow52)); // Compute in double precision: (upper - (2^84 + 2^63 + 2^52)) + lower
-                return Avx.Add(result, lowerBits.AsDouble());
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble(Vector512{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<double> ConvertToDouble_Bcl_Wim(Vector512<long> value) {
-                // Same ConvertToDouble_Bcl.
-                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
-                // answered Dec 19, 2016 at 12:51 wim
-                //__m512d int64_to_double_fast_precise(const __m512i v) {
-                //    __m512i magic_i_lo   = _mm512_set1_epi64x(0x4330000000000000);                /* 2^52               encoded as floating-point  */
-                //    __m512i magic_i_hi32 = _mm512_set1_epi64x(0x4530000080000000);                /* 2^84 + 2^63        encoded as floating-point  */
-                //    __m512i magic_i_all  = _mm512_set1_epi64x(0x4530000080100000);                /* 2^84 + 2^63 + 2^52 encoded as floating-point  */
-                //    __m512d magic_d_all  = _mm512_castsi512_pd(magic_i_all);
-                //    __m512i v_lo         = _mm512_blend_epi32(magic_i_lo, v, 0b01010101);         /* Blend the 32 lowest significant bits of v with magic_int_lo                                                   */
-                //    __m512i v_hi         = _mm512_srli_epi64(v, 32);                              /* Extract the 32 most significant bits of v                                                                     */
-                //            v_hi         = _mm512_xor_si512(v_hi, magic_i_hi32);                  /* Flip the msb of v_hi and blend with 0x45300000                                                                */
-                //    __m512d v_hi_dbl     = _mm512_sub_pd(_mm512_castsi512_pd(v_hi), magic_d_all); /* Compute in double precision:                                                                                  */
-                //    __m512d result       = _mm512_add_pd(v_hi_dbl, _mm512_castsi512_pd(v_lo));    /* (v_hi - magic_d_all) + v_lo  Do not assume associativity of floating point addition !!                        */
-                //            return result;                                                        /* With gcc use -O3, then -fno-associative-math is default. Do not use -Ofast, which enables -fassociative-math! */
-                //}
-/*
-                Vector512<long> magic_i_lo = Vector512.Create(0x43300000_00000000);   // 2^52               encoded as floating-point
-                Vector512<long> magic_i_hi32 = Vector512.Create(0x45300000_80000000); // 2^84 + 2^63        encoded as floating-point
-                Vector512<long> magic_i_all = Vector512.Create(0x45300000_80100000);  // 2^84 + 2^63 + 2^52 encoded as floating-point
-                Vector512<double> magic_d_all = magic_i_all.AsDouble();
-                Vector512<int> v_lo = Avx512.Blend(value.AsInt32(), magic_i_lo.AsInt32(), 0b10101010); // Blend the 32 lowest significant bits of v with magic_int_lo (double(2^52))
-                Vector512<long> v_hi = Avx512.ShiftRightLogical(value, 32);                            // Extract the 32 most significant bits of v
-                v_hi = Avx512.Xor(v_hi, magic_i_hi32);                                                 // Flip the msb of v_hi and blend with magic_i_hi32 (double(2^84 + 2^63))
-                Vector512<double> v_hi_dbl = Avx.Subtract(v_hi.AsDouble(), magic_d_all);             // Compute in double precision:
-                Vector512<double> result = Avx.Add(v_hi_dbl, v_lo.AsDouble());                       // (v_hi - (2^84 + 2^63 + 2^52)) + v_lo  Do not assume associativity of floating point addition !!
-                return result;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble(Vector512{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<double> ConvertToDouble_HwScalar(Vector512<long> value) {
-                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
-                // answered Dec 19, 2016 at 12:51 wim
-                // __m512d int64_to_double_based_on_cvtsi2sd(const __m512i v){
-                //     __m128d zero         = _mm_setzero_pd();                            /* to avoid uninitialized variables in_mm_cvtsi64_sd                       */
-                //     __m128i v_lo         = _mm512_castsi512_si128(v);
-                //     __m128i v_hi         = _mm512_extracti128_si512(v,1);
-                //     __m128d v_0          = _mm_cvtsi64_sd(zero,_mm_cvtsi128_si64(v_lo));
-                //     __m128d v_2          = _mm_cvtsi64_sd(zero,_mm_cvtsi128_si64(v_hi));
-                //     __m128d v_1          = _mm_cvtsi64_sd(zero,_mm_extract_epi64(v_lo,1));
-                //     __m128d v_3          = _mm_cvtsi64_sd(zero,_mm_extract_epi64(v_hi,1));
-                //     __m128d v_01         = _mm_unpacklo_pd(v_0,v_1);
-                //     __m128d v_23         = _mm_unpacklo_pd(v_2,v_3);
-                //     __m512d v_dbl        = _mm512_castpd128_pd512(v_01);
-                //             v_dbl        = _mm512_insertf128_pd(v_dbl,v_23,1);
-                //     return v_dbl;
-                // }
-/*
-                if (Sse2.X64.IsSupported && Sse41.X64.IsSupported) {
-                    Vector128<double> zero = Vector128<double>.Zero;
-                    Vector128<long> v_lo = value.GetLower();
-                    Vector128<long> v_hi = value.GetUpper();
-                    Vector128<double> v_0 = Sse2.X64.ConvertScalarToVector128Double(zero, Sse2.X64.ConvertToInt64(v_lo));
-                    Vector128<double> v_2 = Sse2.X64.ConvertScalarToVector128Double(zero, Sse2.X64.ConvertToInt64(v_hi));
-                    Vector128<double> v_1 = Sse2.X64.ConvertScalarToVector128Double(zero, Sse41.X64.Extract(v_lo, 1));
-                    Vector128<double> v_3 = Sse2.X64.ConvertScalarToVector128Double(zero, Sse41.X64.Extract(v_hi, 1));
-                    Vector128<double> v_01 = Sse2.UnpackLow(v_0, v_1);
-                    Vector128<double> v_23 = Sse2.UnpackLow(v_2, v_3);
-                    Vector512<double> result = Vector512.Create(v_01, v_23);
-                    return result;
-                } else {
-                    return SuperStatics.ConvertToDouble(value);
-                }
+                return Avx512DQ.ConvertToVector512Double(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble_Range52(Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> ConvertToDouble_Range52(Vector512<long> value) {
-                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
-                // answered Dec 14, 2016 at 17:23 Mysticial
-                // inline __m512d int64_to_double512(__m512i x){
-                //     /*  Mysticial's fast int64_to_double. Works for inputs in the range: (-2^51, 2^51)  */
-                //     x = _mm512_add_epi64(x, _mm512_castpd_si512(_mm512_set1_pd(0x0018000000000000)));
-                //     return _mm512_sub_pd(_mm512_castsi512_pd(x), _mm512_set1_pd(0x0018000000000000));
-                // }
+                return Avx512DQ.ConvertToVector512Double(value);
                 // BitConverter.DoubleToInt64Bits((double)0x0018000000000000).ToString("X") = "4338000000000000"
-/*
-                Vector512<long> magicNumber = Vector512.Create(ScalarConstants.DoubleVal_2Pow52_2Pow51).AsInt64(); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
-                Vector512<long> x = Avx512.Add(value, magicNumber);
-                Vector512<double> result = Avx.Subtract(x.AsDouble(), magicNumber.AsDouble());
-                return result;
+                //Vector512<long> magicNumber = Vector512.Create(ScalarConstants.DoubleVal_2Pow52_2Pow51).AsInt64(); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                //Vector512<long> x = Avx512F.Add(value, magicNumber);
+                //Vector512<double> result = Avx512F.Subtract(x.AsDouble(), magicNumber.AsDouble());
+                //return result;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble(Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> ConvertToDouble(Vector512<ulong> value) {
-                return ConvertToDouble_Bcl(value);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble(Vector512{ulong})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<double> ConvertToDouble_Bcl(Vector512<ulong> value) {
-                // From: src/libraries/System.Private.CoreLib/src/System/Runtime/Intrinsics/Vector512.cs
-                // Based on __m512d uint64_to_double_fast_precise(const __m512i v)
-                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
-                Vector512<uint> lowerBits;
-                lowerBits = value.AsUInt32();
-                lowerBits = Avx512.Blend(lowerBits, Vector512.Create(ScalarConstants.DoubleVal_2Pow52).AsUInt32(), 0b10101010); // Blend the 32 lowest significant bits of vector with the bit representation of double(2^52)                                                 */
-/*
-                Vector512<ulong> upperBits = Avx512.ShiftRightLogical(value, 32);                                               // Extract the 32 most significant bits of vector
-                upperBits = Avx512.Xor(upperBits, Vector512.Create(ScalarConstants.DoubleVal_2Pow84).AsUInt64());               // Blend upperBits with the bit representation of double(2^84)
-                Vector512<double> result = Avx.Subtract(upperBits.AsDouble(), Vector512.Create(ScalarConstants.DoubleVal_2Pow84_2Pow52)); // Compute in double precision: (upper - (2^84 + 2^52)) + lower
-                return Avx.Add(result, lowerBits.AsDouble());
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble(Vector512{ulong})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<double> ConvertToDouble_Bcl_Wim(Vector512<ulong> value) {
-                // Same ConvertToDouble_Bcl.
-                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
-                // answered Dec 19, 2016 at 12:51 wim
-                //__m512d uint64_to_double_fast_precise(const __m512i v) {
-                //    __m512i magic_i_lo   = _mm512_set1_epi64x(0x4330000000000000);                /* 2^52        encoded as floating-point  */
-                //    __m512i magic_i_hi32 = _mm512_set1_epi64x(0x4530000000000000);                /* 2^84        encoded as floating-point  */
-                //    __m512i magic_i_all  = _mm512_set1_epi64x(0x4530000000100000);                /* 2^84 + 2^52 encoded as floating-point  */
-                //    __m512d magic_d_all  = _mm512_castsi512_pd(magic_i_all);
-                //    __m512i v_lo         = _mm512_blend_epi32(magic_i_lo, v, 0b01010101);         /* Blend the 32 lowest significant bits of v with magic_int_lo                                                   */
-                //    __m512i v_hi         = _mm512_srli_epi64(v, 32);                              /* Extract the 32 most significant bits of v                                                                     */
-                //            v_hi         = _mm512_xor_si512(v_hi, magic_i_hi32);                  /* Blend v_hi with 0x45300000                                                                                    */
-                //    __m512d v_hi_dbl     = _mm512_sub_pd(_mm512_castsi512_pd(v_hi), magic_d_all); /* Compute in double precision:                                                                                  */
-                //    __m512d result       = _mm512_add_pd(v_hi_dbl, _mm512_castsi512_pd(v_lo));    /* (v_hi - magic_d_all) + v_lo  Do not assume associativity of floating point addition !!                        */
-                //            return result;                                                        /* With gcc use -O3, then -fno-associative-math is default. Do not use -Ofast, which enables -fassociative-math! */
-                //}
-/*                Vector512<long> magic_i_lo = Vector512.Create(0x43300000_00000000);   // 2^52        encoded as floating-point
-                Vector512<long> magic_i_hi32 = Vector512.Create(0x45300000_00000000); // 2^84        encoded as floating-point
-                Vector512<long> magic_i_all = Vector512.Create(0x45300000_00100000);  // 2^84 + 2^52 encoded as floating-point
-                Vector512<double> magic_d_all = magic_i_all.AsDouble();
-                Vector512<int> v_lo = Avx512.Blend(value.AsInt32(), magic_i_lo.AsInt32(), 0b10101010); // Blend the 32 lowest significant bits of v with magic_int_lo (double(2^52))
-                Vector512<long> v_hi = Avx512.ShiftRightLogical(value, 32).AsInt64();                  // Extract the 32 most significant bits of v
-                v_hi = Avx512.Xor(v_hi, magic_i_hi32);                                                 // Blend v_hi with magic_i_hi32 (double(2^84))
-                Vector512<double> v_hi_dbl = Avx.Subtract(v_hi.AsDouble(), magic_d_all);             // Compute in double precision:
-                Vector512<double> result = Avx.Add(v_hi_dbl, v_lo.AsDouble());                       // (v_hi - magic_d_all) + v_lo  Do not assume associativity of floating point addition !!
-                return result;
+                return Avx512DQ.ConvertToVector512Double(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble_Range52(Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> ConvertToDouble_Range52(Vector512<ulong> value) {
-                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
-                // answered Dec 14, 2016 at 17:23 Mysticial
-                // inline __m512d uint64_to_double512(__m512i x){
-                //     /*  Mysticial's fast uint64_to_double. Works for inputs in the range: [0, 2^52)     */
-                //     x = _mm512_or_si512(x, _mm512_castpd_si512(_mm512_set1_pd(0x0010000000000000)));
-                //     return _mm512_sub_pd(_mm512_castsi512_pd(x), _mm512_set1_pd(0x0010000000000000));
-                // }
+                return Avx512DQ.ConvertToVector512Double(value);
                 // BitConverter.DoubleToInt64Bits((double)0x0010000000000000).ToString("X") = "4330000000000000"
-/*                Vector512<ulong> magicNumber = Vector512.Create(ScalarConstants.DoubleVal_2Pow52).AsUInt64(); // Double value: pow(2, 52)
-                Vector512<ulong> x = Avx512.Or(value, magicNumber);
-                Vector512<double> result = Avx.Subtract(x.AsDouble(), magicNumber.AsDouble());
-                return result;
+                //Vector512<ulong> magicNumber = Vector512.Create(ScalarConstants.DoubleVal_2Pow52).AsUInt64(); // Double value: pow(2, 52)
+                //Vector512<ulong> x = Avx512F.Or(value, magicNumber);
+                //Vector512<double> result = Avx512F.Subtract(x.AsDouble(), magicNumber.AsDouble());
+                //return result;
             }
 
 
@@ -346,14 +202,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ConvertToInt32(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> ConvertToInt32(Vector512<float> value) {
-                return Avx.ConvertToVector512Int32WithTruncation(value);
+                return Avx512F.ConvertToVector512Int32WithTruncation(value);
             }
 
 
             /// <inheritdoc cref="IWVectorTraits512.ConvertToInt64_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
                 get {
-                    //TypeCodeFlags rt = SuperStatics.ConvertToInt64_AcceleratedTypes;
                     TypeCodeFlags rt = TypeCodeFlags.Double;
                     return rt;
                 }
@@ -362,108 +217,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ConvertToInt64(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ConvertToInt64(Vector512<double> value) {
-                // return SuperStatics.ConvertToInt64(value);
-                // return ConvertToInt64_HwScalar(value);
-                return ConvertToInt64_ShiftVarFix(value);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ConvertToInt64(Vector512{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> ConvertToInt64_HwScalar(Vector512<double> value) {
-                if (Sse2.X64.IsSupported) {
-                    Vector512<double> valueOdd = Avx512.Permute4x64(value, (byte)ShuffleControlG4.YYWW);
-                    long v_0 = Sse2.X64.ConvertToInt64WithTruncation(value.GetLower());
-                    long v_2 = Sse2.X64.ConvertToInt64WithTruncation(value.GetUpper());
-                    long v_1 = Sse2.X64.ConvertToInt64WithTruncation(valueOdd.GetLower());
-                    long v_3 = Sse2.X64.ConvertToInt64WithTruncation(valueOdd.GetUpper());
-                    Vector512<long> result = Vector512.Create(v_0, v_1, v_2, v_3);
-                    return result;
-                } else {
-                    return SuperStatics.ConvertToInt64(value);
-                }
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ConvertToInt64(Vector512{double})"/>
-            /// <remarks>Input range is `[-pow(2,63), pow(2,63))`. Out of range results in `0`.</remarks>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> ConvertToInt64_ShiftVar(Vector512<double> value) {
-                // From Veloctor . MIT
-                // https://github.com/Veloctor/Int128/blob/main/include/AVX2Ext.h
-                // inline __m512i double_to_int64_fast(const __m512d v) //13 instructions
-                // {
-                // 	//constants
-                // 	__m512i mat_mask = _mm512_set1_epi64x(0x0FFFFFFFFFFFFF);	//0_00000000000_1111111111111111111111111111111111111111111111111111
-                // 	__m512i hidden_1 = _mm512_set1_epi64x(0x10000000000000);	//0_00000000001_0000000000000000000000000000000000000000000000000000
-                // 	__m512i exp_bias = _mm512_set1_epi64x(1023LL + 52);			//0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
-                // 	#define zero512 _mm512_setzero_si512()
-                // 	//majik operations										  //Latency, Throughput(references IceLake)
-                // 	__m512i bin = _mm512_castpd_si512(v);
-                // 	__m512i negative = _mm512_cmpgt_epi64(zero512, bin);			//3,1
-                // 	__m512i mat = _mm512_and_si512(bin, mat_mask);					//1,1/3
-                // 	mat = _mm512_or_si512(mat, hidden_1);							//1,1/3
-                // 	__m512i exp_enc = _mm512_slli_epi64(bin, 1);					//1,1/2
-                // 	exp_enc = _mm512_srli_epi64(exp_enc, 53);						//1,1/2
-                // 	__m512i exp_frac = _mm512_sub_epi64(exp_enc, exp_bias);			//1,1/3
-                // 	__m512i msl = _mm512_sllv_epi64(mat, exp_frac);					//1,1/2
-                // 	__m512i exp_frac_n = _mm512_sub_epi64(zero512, exp_frac);		//1,1/3
-                // 	__m512i msr = _mm512_srlv_epi64(mat, exp_frac_n);				//1,1/2
-                // 	__m512i exp_is_pos = _mm512_cmpgt_epi64(exp_frac, zero512);		//3,1
-                // 	__m512i result_abs = _mm512_blendv_epi8(msr, msl, exp_is_pos);	//2,1
-                // 	__m512i result = _mm512_xor_si512(result_abs, negative);		//1,1/3
-                // 	result = _mm512_sub_epi64(result, negative);					//1,1/3
-                // 	return result;	//total latency: 18, total throughput CPI: 7
-                // }
-                //constants
-                Vector512<long> mat_mask = Vector512.Create(ScalarConstants.DoubleVal_MantissaMask).AsInt64();  //0_00000000000_1111111111111111111111111111111111111111111111111111
-                Vector512<long> hidden_1 = Vector512.Create(ScalarConstants.IntDbl_2Pow52).AsInt64();  //0_00000000001_0000000000000000000000000000000000000000000000000000 // Int64: 2^52
-                Vector512<long> exp_bias = Vector512.Create(ScalarConstants.IntDbl_DoubleBias52).AsInt64(); //0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
-                Vector512<long> zero = Vector512<long>.Zero;
-                //majik operations										  //Latency, Throughput(references IceLake)
-                Vector512<long> bin = value.AsInt64();
-                Vector512<long> negative = Avx512.CompareGreaterThan(zero, bin);                    //3,1
-                Vector512<long> mat = Avx512.And(bin, mat_mask);                                    //1,1/3
-                mat = Avx512.Or(mat, hidden_1);                                                     //1,1/3
-                Vector512<long> exp_enc = Avx512.ShiftLeftLogical(bin, 1);                          //1,1/2
-                exp_enc = Avx512.ShiftRightLogical(exp_enc, 53);                                    //1,1/2
-                Vector512<long> exp_frac = Avx512.Subtract(exp_enc, exp_bias);                      //1,1/3
-                Vector512<long> msl = Avx512.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt64());    //1,1/2
-                Vector512<long> exp_frac_n = Avx512.Subtract(zero, exp_frac);                       //1,1/3
-                Vector512<long> msr = Avx512.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64()); //1,1/2
-                Vector512<long> exp_is_pos = Avx512.CompareGreaterThan(exp_frac, zero);             //3,1
-                Vector512<long> result_abs = Avx512.BlendVariable(msr, msl, exp_is_pos);            //2,1
-                Vector512<long> result = Avx512.Xor(result_abs, negative);                          //1,1/3
-                result = Avx512.Subtract(result, negative);                                         //1,1/3
-                return result;  //total latency: 18, total throughput CPI: 7
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ConvertToInt64(Vector512{double})"/>
-            /// <remarks>Input range is all number. Out of range results is `-pow(2,63)`.</remarks>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> ConvertToInt64_ShiftVarFix(Vector512<double> value) {
-                Vector512<long> mat_mask = Vector512.Create(ScalarConstants.DoubleVal_MantissaMask).AsInt64(); // Element: 0x000FFFFF_FFFFFFFF
-                Vector512<long> hidden_1 = Vector512.Create(ScalarConstants.IntDbl_2Pow52).AsInt64(); // Element: 0x00100000_00000000
-                Vector512<long> exp_bias = Vector512.Create(ScalarConstants.IntDbl_DoubleBias52).AsInt64(); // Element: ScalarConstants.Double_ExponentBias + ScalarConstants.Double_MantissaBits =  = 1023 + 52 = 1075 = 0x433
-                Vector512<long> zero = Vector512<long>.Zero;
-                Vector512<long> exp_max = Vector512.Create(ScalarConstants.IntDbl_DoubleBias62).AsInt64(); // Element: ScalarConstants.Double_ExponentBias + 63-1 = 1023 + 62 = 1085 = 0x43D. Because `long.MaxValue` is `pow(2,63)-1`.
-                Vector512<long> defValue = Vector512Constants.Double_SignMask.AsInt64(); // Out of range results is `-pow(2,63)`
-                //majik operations										  //Latency, Throughput(references IceLake)
-                Vector512<long> bin = value.AsInt64();
-                Vector512<long> negative = Avx512.CompareGreaterThan(zero, bin);                     //3,1. negative[i] = (0 < bin[i])
-                Vector512<long> mat = Avx512.And(bin, mat_mask);                                     //1,1/3. Get mantissa field.
-                mat = Avx512.Or(mat, hidden_1);                                                      //1,1/3. Convert mantissa field to integer.
-                Vector512<long> exp_enc = Avx512.ShiftLeftLogical(bin, 1);                           //1,1/2. Remove sign bit.
-                exp_enc = Avx512.ShiftRightLogical(exp_enc, 1 + ScalarConstants.Double_MantissaBits);//1,1/2. (bin[i]<<1)>>(1+52) = abs_double(bin[i])>>52
-                Vector512<long> exp_frac = Avx512.Subtract(exp_enc, exp_bias);                       //1,1/3. Convert exponent field to shift amount .
-                Vector512<long> exp_frac_n = Avx512.Subtract(zero, exp_frac);                        //1,1/3. exp_frac_n[i] = -exp_frac[i]
-                Vector512<long> exp_is_end = Avx512.CompareGreaterThan(exp_enc, exp_max);            //3,1.  exp_is_end[i] = (exp_enc[i] > exp_max[i]) .
-                Vector512<long> msl = Avx512.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt64());     //1,1/2. msl[i] = mat << exp_frac[i]
-                Vector512<long> msr = Avx512.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64());  //1,1/2. msr[i] = mat >> exp_frac_n[i] = mat >> (-exp_frac[i])
-                Vector512<long> exp_is_pos = Avx512.CompareGreaterThan(exp_frac, zero);              //3,1. The mask of exp_frac is a positive
-                Vector512<long> result_abs = Avx512.BlendVariable(msr, msl, exp_is_pos);             //2,1. result_abs[i] = (exp_is_pos[i])?msl[i]:msl[i]
-                result_abs = Avx512.BlendVariable(result_abs, defValue, exp_is_end);                 //2,1.  result_abs[i] = (exp_is_end[i])?defValue[i]:result_abs[i]
-                Vector512<long> result = Avx512.Xor(result_abs, negative);                           //1,1/3. ~x = xor(x, -1)
-                result = Avx512.Subtract(result, negative);                                          //1,1/3 -(x) = (~x)+1 = (~x) - (-1)
-                return result;  //total latency: 23, total throughput CPI: 9
+                return Avx512DQ.ConvertToVector512Int64WithTruncation(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ConvertToInt64_Range52(Vector512{double})"/>
@@ -475,27 +229,17 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ConvertToInt64_Range52(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ConvertToInt64_Range52_Impl(Vector512<double> value) {
-                value = Avx.RoundToZero(value); // Truncate.
-                return ConvertToInt64_Range52RoundToEven(value);
+                return Avx512DQ.ConvertToVector512Int64WithTruncation(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ConvertToInt64_Range52RoundToEven(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ConvertToInt64_Range52RoundToEven(Vector512<double> value) {
-                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
-                // answered Dec 14, 2016 at 17:23 Mysticial
-                // //  Only works for inputs in the range: [-2^51, 2^51]
-                // __m128i double_to_int64(__m128d x){
-                //     x = _mm_add_pd(x, _mm_set1_pd(0x0018000000000000));
-                //     return _mm_sub_epi64(
-                //         _mm_castpd_si128(x),
-                //         _mm_castpd_si128(_mm_set1_pd(0x0018000000000000))
-                //     );
-                // }
-                Vector512<double> magicNumber = Vector512.Create(ScalarConstants.DoubleVal_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
-                Vector512<double> x = Avx.Add(value, magicNumber);
-                Vector512<long> result = Avx512.Subtract(x.AsInt64(), magicNumber.AsInt64());
-                return result;
+                return Avx512DQ.ConvertToVector512Int64(value);
+                //Vector512<double> magicNumber = Vector512.Create(ScalarConstants.DoubleVal_2Pow52_2Pow51); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
+                //Vector512<double> x = Avx512F.Add(value, magicNumber);
+                //Vector512<long> result = Avx512F.Subtract(x.AsInt64(), magicNumber.AsInt64());
+                //return result;
             }
 
 
@@ -509,52 +253,21 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ConvertToSingle(Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> ConvertToSingle(Vector512<int> value) {
-                return Avx.ConvertToVector512Single(value);
+                return Avx512F.ConvertToVector512Single(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ConvertToSingle(Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> ConvertToSingle(Vector512<uint> value) {
-                return ConvertToSingle_Multiply(value);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ConvertToSingle(Vector512{uint})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<float> ConvertToSingle_Multiply(Vector512<uint> value) {
-                // Reference: System.Private.CoreLib/src/System/Runtime/Intrinsics/Vector512.cs
-                // This first bit of magic works because float can exactly represent integers up to 2^24
-                //
-                // This means everything between 0 and 2^16 (ushort.MaxValue + 1) are exact and so
-                // converting each of the upper and lower halves will give an exact result
-                Vector512<int> lowerBits = Avx512.And(value, Vector512.Create(0x0000FFFFU)).AsInt32();
-                Vector512<int> upperBits = Avx512.ShiftRightLogical(value, 16).AsInt32();
-                Vector512<float> lower = Avx.ConvertToVector512Single(lowerBits);
-                Vector512<float> upper = Avx.ConvertToVector512Single(upperBits);
-                // This next bit of magic works because all multiples of 65536, at least up to 65535
-                // are likewise exactly representable
-                //
-                // This means that scaling upper by 65536 gives us the exactly representable base value
-                // and then the remaining lower value, which is likewise up to 65535 can be added on
-                // giving us a result that will correctly round to the nearest representable value
-                if (Fma.IsSupported) {
-                    return Fma.MultiplyAdd(upper, Vector512.Create(65536.0f), lower);
-                } else {
-                    Vector512<float> result = Avx.Multiply(upper, Vector512.Create(65536.0f));
-                    return Avx.Add(result, lower);
-                }
+                return Avx512F.ConvertToVector512Single(value);
             }
 
 
             /// <inheritdoc cref="IWVectorTraits512.ConvertToUInt32_AcceleratedTypes"/>
             public static TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
                 get {
-#if NET5_0_OR_GREATER
                     return TypeCodeFlags.Single;
-#else
-                    return SuperStatics.ConvertToUInt32_AcceleratedTypes;
-#endif
                 }
             }
 
@@ -562,121 +275,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> ConvertToUInt32(Vector512<float> value) {
-                //return SuperStatics.ConvertToUInt32(value);
-                //return ConvertToUInt32_Mapping(value);
-                //return ConvertToUInt32_MappingFix(value);
-                return ConvertToUInt32_ShiftVar(value);
-            }
-
-            ///// <inheritdoc cref="IWVectorTraits512.ConvertToUInt32(Vector512{float})"/>
-            ///// <remarks>Input range is `[-pow(2,31), pow(2,31))`. Out of range results in `2147483648`(pow(2,31)).</remarks>
-            //[Obsolete("It has a different valid range.")]
-            //[CLSCompliant(false)]
-            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-            //public static Vector512<uint> ConvertToUInt32_As(Vector512<float> value) {
-            //    return Avx.ConvertToVector512Int32WithTruncation(value).AsUInt32();
-            //}
-
-            /// <inheritdoc cref="IWVectorTraits512.ConvertToUInt32(Vector512{float})"/>
-            /// <remarks>Input range is `[0, pow(2,32))`. Out of range results in `0`.</remarks>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<uint> ConvertToUInt32_ShiftVar(Vector512<float> value) {
-                //constants
-                Vector512<int> mat_mask = Vector512.Create(ScalarConstants.SingleVal_MantissaMask).AsInt32(); // 0x007FFFFF
-                Vector512<int> hidden_1 = Vector512.Create(ScalarConstants.Int_2Pow23).AsInt32();             // 0x00800000 // Int32: 2^23
-                Vector512<int> exp_bias = Vector512.Create(ScalarConstants.Int_SingleBias23).AsInt32(); // Single_ExponentBias + Single_MantissaBits = 127 + 23 = 150 = 0x96
-                Vector512<int> zero = Vector512<int>.Zero;
-                //majik operations										  //Latency, Throughput(references IceLake)
-                Vector512<int> bin = value.AsInt32();
-                Vector512<int> mat = Avx512.And(bin, mat_mask);                                    //1,1/3
-                mat = Avx512.Or(mat, hidden_1);                                                    //1,1/3
-                Vector512<int> exp_enc = Avx512.ShiftRightLogical(bin, 23);                        //1,1/2
-                Vector512<int> exp_frac = Avx512.Subtract(exp_enc, exp_bias);                      //1,1/3
-                Vector512<int> msl = Avx512.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt32());    //1,1/2
-                Vector512<int> exp_frac_n = Avx512.Subtract(zero, exp_frac);                       //1,1/3
-                Vector512<int> msr = Avx512.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt32()); //1,1/2
-                Vector512<int> exp_is_pos = Avx512.CompareGreaterThan(exp_frac, zero);             //3,1
-                Vector512<int> result_abs = Avx512.BlendVariable(msr, msl, exp_is_pos);            //2,1
-                return result_abs.AsUInt32();	//total latency: 12, total throughput CPI: 4.8
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ConvertToUInt32(Vector512{float})"/>
-            /// <remarks>Input range is `[-pow(2,31), pow(2,32))`. Out of range results in `2147483648`(pow(2,31)).</remarks>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<uint> ConvertToUInt32_Mapping(Vector512<float> value) {
-#if NET5_0_OR_GREATER
-                // [pow(2,31), pow(2,32)-1] mapping to [-pow(2,31), -1]. Subtract `pow(2,32)`.
-                Vector512<float> highEnd = Vector512.Create(ScalarConstants.SingleBit_2Pow32).AsSingle();
-                Vector512<float> highBegin = Vector512.Create(ScalarConstants.SingleBit_2Pow31).AsSingle();
-                Vector512<float> highMapped = Avx.Subtract(value, highEnd);
-                Vector512<float> highMask = Avx.And(Avx.CompareLessThanOrEqual(highBegin, value), Avx.CompareLessThan(value, highEnd)); // highBegin <= value < highEnd .
-                //Vector512<float> value2 = ConditionalSelect(highMask, highMapped, value);
-                Vector512<float> value2 = Avx512.BlendVariable(value, highMapped, highMask);
-                Vector512<uint> rt = Avx.ConvertToVector512Int32WithTruncation(value2).AsUInt32();
-                return rt;
-#else
-                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector512<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
-                return SuperStatics.ConvertToUInt32(value);
-#endif
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ConvertToUInt32(Vector512{float})"/>
-            /// <remarks>Input range is `[-pow(2,31), pow(2,32))`. Out of range results in `0`.</remarks>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<uint> ConvertToUInt32_MappingFix(Vector512<float> value) {
-#if NET5_0_OR_GREATER
-                // [pow(2,31), pow(2,32)-1] mapping to [-pow(2,31), -1]. Subtract `pow(2,32)`.
-                Vector512<float> highEnd = Vector512.Create(ScalarConstants.SingleBit_2Pow32).AsSingle();
-                Vector512<float> lowBegin = Vector512.Create(ScalarConstants.SingleBit_Negative2Pow31).AsSingle();
-                Vector512<float> highBegin = Vector512.Create(ScalarConstants.SingleBit_2Pow31).AsSingle();
-                Vector512<float> lessHighEnd = Avx.CompareLessThan(value, highEnd); // value < highEnd .
-                Vector512<float> highMapped = Avx.Subtract(value, highEnd);
-                Vector512<float> lowMask = Avx.And(Avx.CompareLessThanOrEqual(lowBegin, value), lessHighEnd); // lowBegin <= value < highEnd .
-                Vector512<float> value0 = Avx.And(value, lowMask); // If out of range, set to 0.
-                Vector512<float> highMask = Avx.And(Avx.CompareLessThanOrEqual(highBegin, value), lessHighEnd); // highBegin <= value < highEnd .
-                //Vector512<float> value2 = ConditionalSelect(highMask, highMapped, value0);
-                Vector512<float> value2 = Avx512.BlendVariable(value0, highMapped, highMask);
-                Vector512<uint> rt = Avx.ConvertToVector512Int32WithTruncation(value2).AsUInt32();
-                return rt;
-#else
-                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector512<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
-                return SuperStatics.ConvertToUInt32(value);
-#endif
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ConvertToUInt32(Vector512{float})"/>
-            /// <remarks>Input range is all number (Use mod function). Out of range results in `0`.</remarks>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<uint> ConvertToUInt32_Mod(Vector512<float> value) {
-#if NET5_0_OR_GREATER
-                // remainder = mod(value, highEnd) = value - floor(value/highEnd)*highEnd
-                Vector512<float> highEndDiv = Vector512.Create(ScalarConstants.SingleBit_2PowNegative32).AsSingle();
-                Vector512<float> highEnd = Vector512.Create(ScalarConstants.SingleBit_2Pow32).AsSingle();
-                Vector512<float> lowBegin = Vector512.Create(ScalarConstants.SingleBit_Negative2Pow31).AsSingle();
-                Vector512<float> highBegin = Vector512.Create(ScalarConstants.SingleBit_2Pow31).AsSingle();
-                Vector512<float> quotientFloor = Avx.Multiply(value, highEndDiv); // Avx.Divide(value, highEnd);
-                quotientFloor = Avx.Floor(quotientFloor);
-                Vector512<float> intRangeMask = Avx.And(Avx.CompareLessThanOrEqual(lowBegin, value), Avx.CompareLessThan(value, highBegin)); // lowBegin <= value < highBegin .
-                Vector512<float> remainder = Avx.Subtract(value, Avx.Multiply(quotientFloor, highEnd));
-                // [pow(2,31), pow(2,32)-1] mapping to [-pow(2,31), -1]. Subtract `pow(2,32)`.
-                Vector512<float> uintRangeMask = Avx.And(Avx.CompareLessThanOrEqual(Vector512<float>.Zero, remainder), Avx.CompareLessThan(remainder, highEnd)); // lowBegin <= remainder < highEnd .
-                Vector512<float> highMask = Avx.CompareLessThanOrEqual(highBegin, remainder); // highBegin <= value .
-                Vector512<float> remainder0 = Avx.And(remainder, uintRangeMask); // If out of range, set to 0.
-                Vector512<float> highMapped = Avx.Subtract(remainder0, highEnd);
-                //Vector512<float> value2 = ConditionalSelect(highMask, highMapped, remainder0);
-                Vector512<float> value2 = Avx512.BlendVariable(remainder0, highMapped, highMask);
-                // If within the signed integer range, return value, otherwise return value2 .
-                Vector512<float> value3 = Avx512.BlendVariable(value2, value, intRangeMask);
-                Vector512<uint> rt = Avx.ConvertToVector512Int32WithTruncation(value3).AsUInt32();
-                return rt;
-#else
-                // Because CompareLessThanOrEqual has Exception: Error	CS1503	Argument 1: cannot convert from 'System.Runtime.Intrinsics.Vector512<float>' to 'System.Runtime.Intrinsics.Vector128<double>'	VectorTraits (netcoreapp3.0)
-                return SuperStatics.ConvertToUInt32(value);
-#endif
+                return Avx512F.ConvertToVector512UInt32WithTruncation(value);
             }
 
 
@@ -692,55 +291,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> ConvertToUInt64(Vector512<double> value) {
-                //return SuperStatics.ConvertToUInt64(value);
-                return ConvertToUInt64_ShiftVar(value);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ConvertToUInt64(Vector512{double})"/>
-            /// <remarks>Input range is `[0, pow(2,64))`. Out of range results in `0`.</remarks>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<ulong> ConvertToUInt64_ShiftVar(Vector512<double> value) {
-                // From Veloctor . MIT
-                // https://github.com/Veloctor/Int128/blob/main/include/AVX2Ext.h
-                // //  Only works for inputs in full uint64 range, otherwise result undefined
-                // inline __m512i double_to_uint64_fast(const __m512d v) //9 instructions
-                // {
-                // 	//constants
-                // 	__m512i mat_mask = _mm512_set1_epi64x(0x0FFFFFFFFFFFFF);	//0_00000000000_1111111111111111111111111111111111111111111111111111
-                // 	__m512i hidden_1 = _mm512_set1_epi64x(0x10000000000000);	//0_00000000001_0000000000000000000000000000000000000000000000000000
-                // 	__m512i exp_bias = _mm512_set1_epi64x(1023LL + 52);			//0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
-                // 	#define zero512 _mm512_setzero_si512()
-                // 	//majik operations
-                // 	__m512i bin = _mm512_castpd_si512(v);
-                // 	__m512i mat = _mm512_and_si512(bin, mat_mask);					//1,1/3
-                // 	mat = _mm512_or_si512(mat, hidden_1);							//1,1/3
-                // 	__m512i exp_enc = _mm512_srli_epi64(bin, 52);					//1,1/2
-                // 	__m512i exp_frac = _mm512_sub_epi64(exp_enc, exp_bias);			//1,1/3
-                // 	__m512i msl = _mm512_sllv_epi64(mat, exp_frac);					//1,1/2
-                // 	__m512i exp_frac_n = _mm512_sub_epi64(zero512, exp_frac);		//1,1/3
-                // 	__m512i msr = _mm512_srlv_epi64(mat, exp_frac_n);				//1,1/2
-                // 	__m512i exp_is_pos = _mm512_cmpgt_epi64(exp_frac, zero512);		//3,1
-                // 	__m512i result_abs = _mm512_blendv_epi8(msr, msl, exp_is_pos);	//2,1
-                // 	return result_abs;	//total latency: 12, total throughput CPI: 4.8
-                // }
-                //constants
-                Vector512<long> mat_mask = Vector512.Create(ScalarConstants.DoubleVal_MantissaMask).AsInt64();  //0_00000000000_1111111111111111111111111111111111111111111111111111
-                Vector512<long> hidden_1 = Vector512.Create(ScalarConstants.IntDbl_2Pow52).AsInt64();  //0_00000000001_0000000000000000000000000000000000000000000000000000 // Int64: 2^52
-                Vector512<long> exp_bias = Vector512.Create(ScalarConstants.IntDbl_DoubleBias52).AsInt64(); //0_10001010011_0000000000000000000000000000000100000000000000000000    //2^84 + 2^52
-                Vector512<long> zero = Vector512<long>.Zero;
-                //majik operations										  //Latency, Throughput(references IceLake)
-                Vector512<long> bin = value.AsInt64();
-                Vector512<long> mat = Avx512.And(bin, mat_mask);                                    //1,1/3
-                mat = Avx512.Or(mat, hidden_1);                                                     //1,1/3
-                Vector512<long> exp_enc = Avx512.ShiftRightLogical(bin, 52);                        //1,1/2
-                Vector512<long> exp_frac = Avx512.Subtract(exp_enc, exp_bias);                      //1,1/3
-                Vector512<long> msl = Avx512.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt64());    //1,1/2
-                Vector512<long> exp_frac_n = Avx512.Subtract(zero, exp_frac);                       //1,1/3
-                Vector512<long> msr = Avx512.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64()); //1,1/2
-                Vector512<long> exp_is_pos = Avx512.CompareGreaterThan(exp_frac, zero);             //3,1
-                Vector512<long> result_abs = Avx512.BlendVariable(msr, msl, exp_is_pos);            //2,1
-                return result_abs.AsUInt64();	//total latency: 12, total throughput CPI: 4.8
+                return Avx512DQ.ConvertToVector512UInt64WithTruncation(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ConvertToUInt64_Range52(Vector512{double})"/>
@@ -754,30 +305,20 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> ConvertToUInt64_Range52_Impl(Vector512<double> value) {
-                value = Avx.RoundToZero(value); // Truncate.
-                return ConvertToUInt64_Range52RoundToEven(value);
+                return Avx512DQ.ConvertToVector512UInt64WithTruncation(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ConvertToUInt64_Range52RoundToEven(Vector512{double})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> ConvertToUInt64_Range52RoundToEven(Vector512<double> value) {
-                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
-                // answered Dec 14, 2016 at 17:23 Mysticial
-                // //  Only works for inputs in the range: [0, 2^52)
-                // __m128i double_to_uint64(__m128d x){
-                //     x = _mm_add_pd(x, _mm_set1_pd(0x0010000000000000));
-                //     return _mm_xor_si128(
-                //         _mm_castpd_si128(x),
-                //         _mm_castpd_si128(_mm_set1_pd(0x0010000000000000))
-                //     );
-                // }
-                Vector512<double> magicNumber = Vector512.Create(ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
-                Vector512<double> x = Avx.Add(value, magicNumber);
-                Vector512<ulong> result = Avx512.Xor(x.AsUInt64(), magicNumber.AsUInt64());
-                return result;
+                return Avx512DQ.ConvertToVector512UInt64(value);
+                //Vector512<double> magicNumber = Vector512.Create(ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
+                //Vector512<double> x = Avx512F.Add(value, magicNumber);
+                //Vector512<ulong> result = Avx512F.Xor(x.AsUInt64(), magicNumber.AsUInt64());
+                //return result;
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits_AcceleratedTypes"/>
             public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {

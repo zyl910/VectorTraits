@@ -67,7 +67,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.Ceiling(value);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble_AcceleratedTypes"/>
         public override TypeCodeFlags ConvertToDouble_AcceleratedTypes {
             get {
@@ -205,7 +205,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<ulong> ConvertToUInt64_Range52RoundToEven(Vector512<double> value) {
             return Statics.ConvertToUInt64_Range52RoundToEven(value);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits512.ExtractMostSignificantBits_AcceleratedTypes"/>
         public override TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
