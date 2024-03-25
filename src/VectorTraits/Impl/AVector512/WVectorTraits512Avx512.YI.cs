@@ -414,7 +414,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<long> rt = Avx512.And(GreaterThan(exponent, Vector512<long>.Zero), GreaterThan(exponentMask, exponent));
                 return rt;
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNotEquals_AcceleratedTypes {
@@ -426,76 +426,68 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YIsNotEquals(Vector512<float> left, Vector512<float> right) {
-#if NET5_0_OR_GREATER
-                return Avx.CompareNotEqual(left, right);
-#else
-                return Avx.Compare(left, right, FloatComparisonMode.UnorderedNotEqualNonSignaling);
-#endif // NET5_0_OR_GREATER
+                return Avx512F.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YIsNotEquals(Vector512<double> left, Vector512<double> right) {
-#if NET5_0_OR_GREATER
-                return Avx.CompareNotEqual(left, right);
-#else
-                return Avx.Compare(left, right, FloatComparisonMode.UnorderedNotEqualNonSignaling);
-#endif // NET5_0_OR_GREATER
+                return Avx512F.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YIsNotEquals(Vector512<sbyte> left, Vector512<sbyte> right) {
-                return OnesComplement(Avx512.CompareEqual(left, right));
+                return Avx512BW.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YIsNotEquals(Vector512<byte> left, Vector512<byte> right) {
-                return OnesComplement(Avx512.CompareEqual(left, right));
+                return Avx512BW.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YIsNotEquals(Vector512<short> left, Vector512<short> right) {
-                return OnesComplement(Avx512.CompareEqual(left, right));
+                return Avx512BW.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YIsNotEquals(Vector512<ushort> left, Vector512<ushort> right) {
-                return OnesComplement(Avx512.CompareEqual(left, right));
+                return Avx512BW.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsNotEquals(Vector512<int> left, Vector512<int> right) {
-                return OnesComplement(Avx512.CompareEqual(left, right));
+                return Avx512F.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YIsNotEquals(Vector512<uint> left, Vector512<uint> right) {
-                return OnesComplement(Avx512.CompareEqual(left, right));
+                return Avx512F.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YIsNotEquals(Vector512<long> left, Vector512<long> right) {
-                return OnesComplement(Avx512.CompareEqual(left, right));
+                return Avx512F.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> YIsNotEquals(Vector512<ulong> left, Vector512<ulong> right) {
-                return OnesComplement(Avx512.CompareEqual(left, right));
+                return Avx512F.CompareNotEqual(left, right);
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.YIsNotNaN_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNotNaN_AcceleratedTypes {
                 get {
