@@ -484,7 +484,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return Vector512.Create(Avx512F.ConvertToVector256UInt32(lower), Avx512F.ConvertToVector256UInt32(upper));
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {
@@ -575,9 +575,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> ShiftLeft_Args(Vector512<short> dummy, int shiftAmount, out Vector512<short> args1) {
                 _ = dummy;
-                //Vector128<short> xmm = Sse2.ConvertScalarToVector128Int32(shiftAmount & 0x0F).AsInt16();
-                //Vector512<short> args0 = Vector512.Create(xmm, xmm);
-                Vector512<short> args0 = Vector512.CreateScalarUnsafe((int)(shiftAmount & 0x0F)).AsInt16();
+                var args0 = Vector512.Create((short)(shiftAmount & 0x0F));
                 args1 = default;
                 return args0;
             }
@@ -586,8 +584,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> ShiftLeft_Args(Vector512<ushort> dummy, int shiftAmount, out Vector512<ushort> args1) {
-                var args0 = ShiftLeft_Args(dummy.AsInt16(), shiftAmount, out var a1).AsUInt16();
-                args1 = a1.AsUInt16();
+                _ = dummy;
+                var args0 = Vector512.Create((ushort)(shiftAmount & 0x0F));
+                args1 = default;
                 return args0;
             }
 
@@ -640,8 +639,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> ShiftLeft_Core(Vector512<byte> value, int shiftAmount, Vector512<byte> args0, Vector512<byte> args1) {
                 _ = shiftAmount;
-                var t = Avx512.And(value, args1).AsUInt32();
-                return Avx512.ShiftLeftLogicalVariable(t, args0.AsUInt32()).AsByte();
+                var t = Avx512F.And(value, args1).AsUInt32();
+                return Avx512F.ShiftLeftLogicalVariable(t, args0.AsUInt32()).AsByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Core(Vector512{short}, int, Vector512{short}, Vector512{short})"/>
@@ -649,7 +648,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<short> ShiftLeft_Core(Vector512<short> value, int shiftAmount, Vector512<short> args0, Vector512<short> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx512.ShiftLeftLogical(value, args0.GetLower());
+                return Avx512BW.ShiftLeftLogicalVariable(value, args0.AsUInt16());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Core(Vector512{ushort}, int, Vector512{ushort}, Vector512{ushort})"/>
@@ -658,7 +657,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<ushort> ShiftLeft_Core(Vector512<ushort> value, int shiftAmount, Vector512<ushort> args0, Vector512<ushort> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx512.ShiftLeftLogical(value, args0.GetLower());
+                return Avx512BW.ShiftLeftLogicalVariable(value, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Core(Vector512{int}, int, Vector512{int}, Vector512{int})"/>
@@ -666,7 +665,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<int> ShiftLeft_Core(Vector512<int> value, int shiftAmount, Vector512<int> args0, Vector512<int> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx512.ShiftLeftLogicalVariable(value, args0.AsUInt32());
+                return Avx512F.ShiftLeftLogicalVariable(value, args0.AsUInt32());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Core(Vector512{uint}, int, Vector512{uint}, Vector512{uint})"/>
@@ -675,7 +674,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<uint> ShiftLeft_Core(Vector512<uint> value, int shiftAmount, Vector512<uint> args0, Vector512<uint> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx512.ShiftLeftLogicalVariable(value, args0);
+                return Avx512F.ShiftLeftLogicalVariable(value, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Core(Vector512{long}, int, Vector512{long}, Vector512{long})"/>
@@ -683,7 +682,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<long> ShiftLeft_Core(Vector512<long> value, int shiftAmount, Vector512<long> args0, Vector512<long> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx512.ShiftLeftLogicalVariable(value, args0.AsUInt64());
+                return Avx512F.ShiftLeftLogicalVariable(value, args0.AsUInt64());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Core(Vector512{ulong}, int, Vector512{ulong}, Vector512{ulong})"/>
@@ -692,7 +691,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<ulong> ShiftLeft_Core(Vector512<ulong> value, int shiftAmount, Vector512<ulong> args0, Vector512<ulong> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx512.ShiftLeftLogicalVariable(value, args0);
+                return Avx512F.ShiftLeftLogicalVariable(value, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Const(Vector512{sbyte}, int)"/>
@@ -705,47 +704,47 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Const(Vector512{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> ShiftLeft_Const(Vector512<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
-                Vector512<byte> t = Avx512.And(value, Vector512Constants.GetResidueMaskBits_Byte(shiftAmount));
-                return Avx512.ShiftLeftLogical(t.AsUInt32(), (byte)shiftAmount).AsByte();
+                Vector512<byte> t = Avx512F.And(value, Vector512Constants.GetResidueMaskBits_Byte(shiftAmount));
+                return Avx512F.ShiftLeftLogical(t.AsUInt32(), (byte)shiftAmount).AsByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Const(Vector512{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> ShiftLeft_Const(Vector512<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
+                return Avx512BW.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Const(Vector512{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> ShiftLeft_Const(Vector512<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
+                return Avx512BW.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Const(Vector512{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> ShiftLeft_Const(Vector512<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Const(Vector512{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> ShiftLeft_Const(Vector512<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Const(Vector512{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ShiftLeft_Const(Vector512<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Const(Vector512{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> ShiftLeft_Const(Vector512<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_ConstCore(Vector512{sbyte}, int, Vector512{sbyte}, Vector512{sbyte})"/>
@@ -764,77 +763,52 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_ConstCore(Vector512{short}, int, Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> ShiftLeft_ConstCore(Vector512<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector512<short> args0, Vector512<short> args1) {
-#if NET6_0_OR_GREATER
-                // The net6 JIT can compile constants to immediate numbers
                 _ = args0;
                 _ = args1;
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
-#else
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#endif
+                return Avx512BW.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_ConstCore(Vector512{ushort}, int, Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> ShiftLeft_ConstCore(Vector512<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector512<ushort> args0, Vector512<ushort> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
-#else
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#endif
+                return Avx512BW.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_ConstCore(Vector512{int}, int, Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> ShiftLeft_ConstCore(Vector512<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector512<int> args0, Vector512<int> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
-#else
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#endif
+                return Avx512F.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_ConstCore(Vector512{uint}, int, Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> ShiftLeft_ConstCore(Vector512<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector512<uint> args0, Vector512<uint> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
-#else
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#endif
+                return Avx512F.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_ConstCore(Vector512{long}, int, Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ShiftLeft_ConstCore(Vector512<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector512<long> args0, Vector512<long> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
-#else
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#endif
+                return Avx512F.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_ConstCore(Vector512{ulong}, int, Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> ShiftLeft_ConstCore(Vector512<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector512<ulong> args0, Vector512<ulong> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
-#else
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#endif
+                return Avx512F.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Fast(Vector512{sbyte}, int)"/>
@@ -847,47 +821,47 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Fast(Vector512{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> ShiftLeft_Fast(Vector512<byte> value, int shiftAmount) {
-                Vector512<byte> t = Avx512.And(value, Vector512Constants.GetResidueMaskBits_Byte(shiftAmount));
-                return Avx512.ShiftLeftLogical(t.AsUInt32(), (byte)shiftAmount).AsByte();
+                Vector512<byte> t = Avx512F.And(value, Vector512Constants.GetResidueMaskBits_Byte(shiftAmount));
+                return Avx512F.ShiftLeftLogical(t.AsUInt32(), (byte)shiftAmount).AsByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Fast(Vector512{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> ShiftLeft_Fast(Vector512<short> value, int shiftAmount) {
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount); // For non-constant parameters, JIT will automatically use the Vector128 version (对于非常量参数, JIT会自动使用Vector128的版本). e.g. Avx512.ShiftLeftLogical(Vector512{ushort}, Vector128{ushort})
+                return Avx512BW.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Fast(Vector512{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> ShiftLeft_Fast(Vector512<ushort> value, int shiftAmount) {
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
+                return Avx512BW.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Fast(Vector512{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> ShiftLeft_Fast(Vector512<int> value, int shiftAmount) {
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Fast(Vector512{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> ShiftLeft_Fast(Vector512<uint> value, int shiftAmount) {
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Fast(Vector512{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ShiftLeft_Fast(Vector512<long> value, int shiftAmount) {
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Fast(Vector512{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> ShiftLeft_Fast(Vector512<ulong> value, int shiftAmount) {
-                return Avx512.ShiftLeftLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftLeftLogical(value, (byte)shiftAmount);
             }
 
 
@@ -942,7 +916,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> ShiftRightArithmetic_Args(Vector512<short> dummy, int shiftAmount, out Vector512<short> args1) {
                 _ = dummy;
-                Vector512<short> args0 = Vector512.CreateScalarUnsafe((int)(shiftAmount & 0x0F)).AsInt16();
+                var args0 = Vector512.Create((short)(shiftAmount & 0x0F));
                 args1 = default;
                 return args0;
             }
@@ -960,8 +934,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ShiftRightArithmetic_Args(Vector512<long> dummy, int shiftAmount, out Vector512<long> args1) {
                 _ = dummy;
-                shiftAmount &= 0x3F;
-                var args0 = Vector512.Create((long)shiftAmount);
+                var args0 = Vector512.Create((long)(shiftAmount & 0x3F));
                 args1 = default;
                 return args0;
             }
@@ -971,8 +944,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> ShiftRightArithmetic_Core(Vector512<sbyte> value, int shiftAmount, Vector512<sbyte> args0, Vector512<sbyte> args1) {
                 _ = shiftAmount;
-                Vector512<sbyte> sign = Avx512.CompareGreaterThan(Vector512<sbyte>.Zero, value);
-                Vector512<sbyte> shifted = Avx512.ShiftRightLogicalVariable(value.AsUInt32(), args0.AsUInt32()).AsSByte();
+                Vector512<sbyte> sign = Avx512BW.CompareGreaterThan(Vector512<sbyte>.Zero, value);
+                Vector512<sbyte> shifted = Avx512F.ShiftRightLogicalVariable(value.AsUInt32(), args0.AsUInt32()).AsSByte();
                 Vector512<sbyte> rt = ConditionalSelect(args1, shifted, sign);
                 return rt;
             }
@@ -982,7 +955,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<short> ShiftRightArithmetic_Core(Vector512<short> value, int shiftAmount, Vector512<short> args0, Vector512<short> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx512.ShiftRightArithmetic(value, args0.GetLower());
+                return Avx512BW.ShiftRightArithmeticVariable(value, args0.AsUInt16());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Core(Vector512{int}, int, Vector512{int}, Vector512{int})"/>
@@ -990,7 +963,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<int> ShiftRightArithmetic_Core(Vector512<int> value, int shiftAmount, Vector512<int> args0, Vector512<int> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx512.ShiftRightArithmeticVariable(value, args0.AsUInt32());
+                return Avx512F.ShiftRightArithmeticVariable(value, args0.AsUInt32());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Core(Vector512{long}, int, Vector512{long}, Vector512{long})"/>
@@ -998,11 +971,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<long> ShiftRightArithmetic_Core(Vector512<long> value, int shiftAmount, Vector512<long> args0, Vector512<long> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                Vector512<long> sign = Avx512.CompareGreaterThan(Vector512<long>.Zero, value);
-                Vector512<long> rt = Avx512.Xor(value, sign);
-                rt = Avx512.ShiftRightLogicalVariable(rt, args0.AsUInt64());
-                rt = Avx512.Xor(rt, sign);
-                return rt;
+                return Avx512F.ShiftRightArithmeticVariable(value, args0.AsUInt64());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Const(Vector512{sbyte}, int)"/>
@@ -1015,19 +984,19 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Const(Vector512{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> ShiftRightArithmetic_Const(Vector512<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
-                return Avx512.ShiftRightArithmetic(value, (byte)shiftAmount);
+                return Avx512BW.ShiftRightArithmetic(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Const(Vector512{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> ShiftRightArithmetic_Const(Vector512<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
-                return Avx512.ShiftRightArithmetic(value, (byte)shiftAmount);
+                return Avx512F.ShiftRightArithmetic(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Const(Vector512{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ShiftRightArithmetic_Const(Vector512<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
-                return ShiftRightArithmetic_Fast(value, shiftAmount);
+                return Avx512F.ShiftRightArithmetic(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_ConstCore(Vector512{sbyte}, int, Vector512{sbyte}, Vector512{sbyte})"/>
@@ -1040,31 +1009,25 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_ConstCore(Vector512{short}, int, Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> ShiftRightArithmetic_ConstCore(Vector512<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector512<short> args0, Vector512<short> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return Avx512.ShiftRightArithmetic(value, (byte)shiftAmount);
-#else
-                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
-#endif
+                return Avx512BW.ShiftRightArithmetic(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_ConstCore(Vector512{int}, int, Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> ShiftRightArithmetic_ConstCore(Vector512<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector512<int> args0, Vector512<int> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return Avx512.ShiftRightArithmetic(value, (byte)shiftAmount);
-#else
-                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
-#endif
+                return Avx512F.ShiftRightArithmetic(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_ConstCore(Vector512{long}, int, Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ShiftRightArithmetic_ConstCore(Vector512<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector512<long> args0, Vector512<long> args1) {
-                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+                _ = args0;
+                _ = args1;
+                return Avx512F.ShiftRightArithmetic(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Fast(Vector512{sbyte}, int)"/>
@@ -1079,11 +1042,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> ShiftRightArithmetic_Fast_Widen(Vector512<sbyte> value, int shiftAmount) {
-                Vector512<short> lowerToHigh = Avx512.ShiftLeftLogical(value.AsInt16(), 8);
-                Vector512<short> lowerShifted = Avx512.ShiftRightArithmetic(lowerToHigh, (byte)shiftAmount);
-                Vector512<sbyte> upper = Avx512.ShiftRightArithmetic(value.AsInt16(), (byte)shiftAmount).AsSByte();
-                Vector512<sbyte> lower = Avx512.ShiftRightLogical(lowerShifted, 8).AsSByte();
-                Vector512<sbyte> rt = Avx512.Or(Avx512.And(Vector512s<sbyte>.XyYMask, upper), lower);
+                Vector512<short> lowerToHigh = Avx512BW.ShiftLeftLogical(value.AsInt16(), 8);
+                Vector512<short> lowerShifted = Avx512BW.ShiftRightArithmetic(lowerToHigh, (byte)shiftAmount);
+                Vector512<sbyte> upper = Avx512BW.ShiftRightArithmetic(value.AsInt16(), (byte)shiftAmount).AsSByte();
+                Vector512<sbyte> lower = Avx512BW.ShiftRightLogical(lowerShifted, 8).AsSByte();
+                Vector512<sbyte> rt = Avx512F.Or(Avx512F.And(Vector512s<sbyte>.XyYMask, upper), lower);
                 return rt;
             }
 
@@ -1092,8 +1055,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> ShiftRightArithmetic_Fast_Negative(Vector512<sbyte> value, int shiftAmount) {
                 Vector512<sbyte> mask = Vector512Constants.GetResidueMaskBits_SByte(shiftAmount);
-                Vector512<sbyte> shifted = Avx512.ShiftRightLogical(value.AsUInt16(), (byte)shiftAmount).AsSByte();
-                Vector512<sbyte> sign = Avx512.CompareGreaterThan(Vector512<sbyte>.Zero, value);
+                Vector512<sbyte> shifted = Avx512BW.ShiftRightLogical(value.AsUInt16(), (byte)shiftAmount).AsSByte();
+                Vector512<sbyte> sign = Avx512BW.CompareGreaterThan(Vector512<sbyte>.Zero, value);
                 Vector512<sbyte> rt = ConditionalSelect(mask, shifted, sign);
                 return rt;
             }
@@ -1101,96 +1064,19 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Fast(Vector512{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> ShiftRightArithmetic_Fast(Vector512<short> value, int shiftAmount) {
-                return Avx512.ShiftRightArithmetic(value, (byte)shiftAmount);
+                return Avx512BW.ShiftRightArithmetic(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Fast(Vector512{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> ShiftRightArithmetic_Fast(Vector512<int> value, int shiftAmount) {
-                return Avx512.ShiftRightArithmetic(value, (byte)shiftAmount);
+                return Avx512F.ShiftRightArithmetic(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Fast(Vector512{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ShiftRightArithmetic_Fast(Vector512<long> value, int shiftAmount) {
-                return ShiftRightArithmetic_Fast_Xor(value, shiftAmount);
-            }
-
-#if !REDUCE_MEMORY_USAGE
-            /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Fast(Vector512{long}, int)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> ShiftRightArithmetic_Fast_Narrow(Vector512<long> value, int shiftAmount) {
-                if (0 == shiftAmount) {
-                    return value;
-                }
-                Vector512<long> rt;
-                Vector512<int> lower, upper;
-                Vector512<int> XyXMask = Vector512s<int>.XyXMask;
-                const byte controlInputUpper = (byte)ShuffleControlG4.YYWW; // BitMath._MM_SHUFFLE(3, 3, 1, 1) = 0xF5 = 0b11_11_01_01;
-                Vector512<int> upperAtLower = Avx512.Shuffle(value.AsInt32(), controlInputUpper); // f({ v0.lower, v0.upper, v1.lower, v1.upper, ... }) = { v0.upper, v0.upper, v1.upper, v1.upper, ... }
-                upperAtLower = Avx512.And(XyXMask, upperAtLower); // = { v0.upper, 0, v1.upper, 0, ... }
-                Vector512<int> upperOld = Avx512.AndNot(XyXMask, value.AsInt32()); // = { 0, v0.upper, 0, v1.upper, ... }
-                if (32 <= shiftAmount) {
-                    // Scalar algorithm:
-                    //    uint lower = (uint)((int)value._upper >> (shiftAmount & 31));
-                    //    uint upper = (uint)((int)value._upper >> 31);
-                    lower = Avx512.ShiftRightArithmetic(upperAtLower, (byte)(shiftAmount & 31));
-                    upper = Avx512.ShiftRightArithmetic(upperOld, 31);
-                    rt = Avx512.Or(lower, upper).AsInt64();
-                } else {
-                    // Scalar algorithm:
-                    //    uint lower = (value._lower >> shiftAmount) | (value._upper << (32 - shiftAmount));
-                    //    uint upper = (uint)((int)value._upper >> shiftAmount);
-                    Vector512<int> lowerOld = Avx512.And(XyXMask, value.AsInt32());
-                    lower = Avx512.Or(Avx512.ShiftRightLogical(lowerOld, (byte)shiftAmount), Avx512.ShiftLeftLogical(upperAtLower, (byte)(32 - shiftAmount)));
-                    upper = Avx512.ShiftRightArithmetic(upperOld, (byte)shiftAmount);
-                    rt = Avx512.Or(lower, upper).AsInt64();
-                }
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Fast(Vector512{long}, int)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> ShiftRightArithmetic_Fast_NarrowIfLess(Vector512<long> value, int shiftAmount) {
-                if (0 == shiftAmount) {
-                    return value;
-                }
-                Vector512<int> XyXMask = Vector512s<int>.XyXMask;
-                const byte controlInputUpper = (byte)ShuffleControlG4.YYWW; // BitMath._MM_SHUFFLE(3, 3, 1, 1) = 0xF5 = 0b11_11_01_01;
-                Vector512<int> upperAtLower = Avx512.Shuffle(value.AsInt32(), controlInputUpper); // f({ v0.lower, v0.upper, v1.lower, v1.upper, ... }) = { v0.upper, v0.upper, v1.upper, v1.upper, ... }
-                byte shiftAmountUpper = (byte)BitMath.Min(31, shiftAmount);
-                byte shiftAmountLeft = (byte)BitMath.Max(0, 32 - shiftAmount);
-                Vector512<int> lowerUse1Mask = Vector512.Create(BitMath.ToInt32Mask(32 <= shiftAmount));
-                upperAtLower = Avx512.And(XyXMask, upperAtLower); // = { v0.upper, 0, v1.upper, 0, ... }
-                Vector512<int> lowerOld = Avx512.And(XyXMask, value.AsInt32());
-                Vector512<int> upperOld = Avx512.AndNot(XyXMask, value.AsInt32()); // = { 0, v0.upper, 0, v1.upper, ... }
-                Vector512<int> lower2 = Avx512.Or(Avx512.ShiftRightLogical(lowerOld, (byte)shiftAmount), Avx512.ShiftLeftLogical(upperAtLower, shiftAmountLeft));
-                Vector512<int> upper = Avx512.ShiftRightArithmetic(upperOld, shiftAmountUpper);
-                Vector512<int> lower1 = Avx512.ShiftRightArithmetic(upperAtLower, (byte)(shiftAmount & 31));
-                Vector512<int> lower = ConditionalSelect(lowerUse1Mask, lower1, lower2);
-                Vector512<long> rt = Avx512.Or(lower, upper).AsInt64();
-                return rt;
-            }
-#endif // !REDUCE_MEMORY_USAGE
-
-            /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Fast(Vector512{long}, int)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> ShiftRightArithmetic_Fast_Negative(Vector512<long> value, int shiftAmount) {
-                Vector512<long> sign = Avx512.CompareGreaterThan(Vector512<long>.Zero, value);
-                byte shiftAmountLeft = (byte)(64 - shiftAmount);
-                Vector512<long> rt = Avx512.Or(Avx512.ShiftRightLogical(value, (byte)shiftAmount), Avx512.ShiftLeftLogical(sign, shiftAmountLeft));
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Fast(Vector512{long}, int)"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> ShiftRightArithmetic_Fast_Xor(Vector512<long> value, int shiftAmount) {
-                // t = -(x>>>31); return ((x^t)>>>n)^t; // From "Hacker's Delight", Page 18.
-                Vector512<long> sign = Avx512.CompareGreaterThan(Vector512<long>.Zero, value); // Mask `0>x` is `-(x>>>31)`.
-                Vector512<long> rt = Avx512.Xor(value, sign);
-                rt = Avx512.ShiftRightLogical(rt, (byte)shiftAmount);
-                rt = Avx512.Xor(rt, sign);
-                return rt;
+                return Avx512F.ShiftRightArithmetic(value, (byte)shiftAmount);
             }
 
 
@@ -1284,7 +1170,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> ShiftRightLogical_Args(Vector512<short> dummy, int shiftAmount, out Vector512<short> args1) {
                 _ = dummy;
-                Vector512<short> args0 = Vector512.CreateScalarUnsafe((int)(shiftAmount & 0x0F)).AsInt16();
+                var args0 = Vector512.Create((short)(shiftAmount & 0x0F));
                 args1 = default;
                 return args0;
             }
@@ -1293,8 +1179,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> ShiftRightLogical_Args(Vector512<ushort> dummy, int shiftAmount, out Vector512<ushort> args1) {
-                var args0 = ShiftRightLogical_Args(dummy.AsInt16(), shiftAmount, out var a1).AsUInt16();
-                args1 = a1.AsUInt16();
+                _ = dummy;
+                var args0 = Vector512.Create((ushort)(shiftAmount & 0x0F));
+                args1 = default;
                 return args0;
             }
 
@@ -1347,8 +1234,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> ShiftRightLogical_Core(Vector512<byte> value, int shiftAmount, Vector512<byte> args0, Vector512<byte> args1) {
                 _ = shiftAmount;
-                var rt = Avx512.ShiftRightLogicalVariable(value.AsUInt32(), args0.AsUInt32()).AsByte();
-                rt = Avx512.And(rt, args1);
+                var rt = Avx512BW.ShiftRightLogicalVariable(value.AsUInt32(), args0.AsUInt32()).AsByte();
+                rt = Avx512F.And(rt, args1);
                 return rt;
             }
 
@@ -1357,7 +1244,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<short> ShiftRightLogical_Core(Vector512<short> value, int shiftAmount, Vector512<short> args0, Vector512<short> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx512.ShiftRightLogical(value, args0.GetLower());
+                return Avx512BW.ShiftRightLogicalVariable(value, args0.AsUInt16());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Core(Vector512{ushort}, int, Vector512{ushort}, Vector512{ushort})"/>
@@ -1366,7 +1253,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<ushort> ShiftRightLogical_Core(Vector512<ushort> value, int shiftAmount, Vector512<ushort> args0, Vector512<ushort> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx512.ShiftRightLogical(value, args0.GetLower());
+                return Avx512BW.ShiftRightLogicalVariable(value, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Core(Vector512{int}, int, Vector512{int}, Vector512{int})"/>
@@ -1374,7 +1261,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<int> ShiftRightLogical_Core(Vector512<int> value, int shiftAmount, Vector512<int> args0, Vector512<int> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx512.ShiftRightLogicalVariable(value, args0.AsUInt32());
+                return Avx512F.ShiftRightLogicalVariable(value, args0.AsUInt32());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Core(Vector512{uint}, int, Vector512{uint}, Vector512{uint})"/>
@@ -1383,7 +1270,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<uint> ShiftRightLogical_Core(Vector512<uint> value, int shiftAmount, Vector512<uint> args0, Vector512<uint> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx512.ShiftRightLogicalVariable(value, args0);
+                return Avx512F.ShiftRightLogicalVariable(value, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Core(Vector512{long}, int, Vector512{long}, Vector512{long})"/>
@@ -1391,7 +1278,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<long> ShiftRightLogical_Core(Vector512<long> value, int shiftAmount, Vector512<long> args0, Vector512<long> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx512.ShiftRightLogicalVariable(value, args0.AsUInt64());
+                return Avx512F.ShiftRightLogicalVariable(value, args0.AsUInt64());
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Core(Vector512{ulong}, int, Vector512{ulong}, Vector512{ulong})"/>
@@ -1400,7 +1287,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<ulong> ShiftRightLogical_Core(Vector512<ulong> value, int shiftAmount, Vector512<ulong> args0, Vector512<ulong> args1) {
                 _ = shiftAmount;
                 _ = args1;
-                return Avx512.ShiftRightLogicalVariable(value, args0);
+                return Avx512F.ShiftRightLogicalVariable(value, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Const(Vector512{sbyte}, int)"/>
@@ -1414,48 +1301,48 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> ShiftRightLogical_Const(Vector512<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
                 Vector512<byte> mask = Vector512Constants.GetResidueMaskBits_Byte(shiftAmount);
-                Vector512<byte> t = Avx512.ShiftRightLogical(value.AsUInt16(), (byte)shiftAmount).AsByte();
-                Vector512<byte> rt = Avx512.And(t, mask);
+                Vector512<byte> t = Avx512BW.ShiftRightLogical(value.AsUInt16(), (byte)shiftAmount).AsByte();
+                Vector512<byte> rt = Avx512F.And(t, mask);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Const(Vector512{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> ShiftRightLogical_Const(Vector512<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
+                return Avx512BW.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Const(Vector512{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> ShiftRightLogical_Const(Vector512<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
+                return Avx512BW.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Const(Vector512{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> ShiftRightLogical_Const(Vector512<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Const(Vector512{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> ShiftRightLogical_Const(Vector512<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Const(Vector512{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ShiftRightLogical_Const(Vector512<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Const(Vector512{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> ShiftRightLogical_Const(Vector512<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_ConstCore(Vector512{sbyte}, int, Vector512{sbyte}, Vector512{sbyte})"/>
@@ -1474,77 +1361,52 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_ConstCore(Vector512{short}, int, Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> ShiftRightLogical_ConstCore(Vector512<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector512<short> args0, Vector512<short> args1) {
-#if NET6_0_OR_GREATER
-                // The net6 JIT can compile constants to immediate numbers
                 _ = args0;
                 _ = args1;
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Core(value, shiftAmount, args0, args1);
-#endif
+                return Avx512BW.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_ConstCore(Vector512{ushort}, int, Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> ShiftRightLogical_ConstCore(Vector512<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector512<ushort> args0, Vector512<ushort> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Core(value, shiftAmount, args0, args1);
-#endif
+                return Avx512BW.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_ConstCore(Vector512{int}, int, Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> ShiftRightLogical_ConstCore(Vector512<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector512<int> args0, Vector512<int> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Core(value, shiftAmount, args0, args1);
-#endif
+                return Avx512F.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_ConstCore(Vector512{uint}, int, Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> ShiftRightLogical_ConstCore(Vector512<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector512<uint> args0, Vector512<uint> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Core(value, shiftAmount, args0, args1);
-#endif
+                return Avx512F.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_ConstCore(Vector512{long}, int, Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ShiftRightLogical_ConstCore(Vector512<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector512<long> args0, Vector512<long> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Core(value, shiftAmount, args0, args1);
-#endif
+                return Avx512F.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_ConstCore(Vector512{ulong}, int, Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> ShiftRightLogical_ConstCore(Vector512<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector512<ulong> args0, Vector512<ulong> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Core(value, shiftAmount, args0, args1);
-#endif
+                return Avx512F.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Fast(Vector512{sbyte}, int)"/>
@@ -1564,8 +1426,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> ShiftRightLogical_Fast_FirstAnd(Vector512<byte> value, int shiftAmount) {
                 Vector512<byte> mask = Vector512Constants.GetMaskBits_Byte(shiftAmount);
-                Vector512<byte> t = Avx512.AndNot(mask, value);
-                Vector512<byte> rt = Avx512.ShiftRightLogical(t.AsUInt16(), (byte)shiftAmount).AsByte();
+                Vector512<byte> t = Avx512F.AndNot(mask, value);
+                Vector512<byte> rt = Avx512BW.ShiftRightLogical(t.AsUInt16(), (byte)shiftAmount).AsByte();
                 return rt;
             }
 
@@ -1573,51 +1435,51 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> ShiftRightLogical_Fast_FirstShift(Vector512<byte> value, int shiftAmount) {
                 Vector512<byte> mask = Vector512Constants.GetResidueMaskBits_Byte(shiftAmount);
-                Vector512<byte> t = Avx512.ShiftRightLogical(value.AsUInt16(), (byte)shiftAmount).AsByte();
-                Vector512<byte> rt = Avx512.And(t, mask);
+                Vector512<byte> t = Avx512BW.ShiftRightLogical(value.AsUInt16(), (byte)shiftAmount).AsByte();
+                Vector512<byte> rt = Avx512BW.And(t, mask);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Fast(Vector512{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> ShiftRightLogical_Fast(Vector512<short> value, int shiftAmount) {
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
+                return Avx512BW.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Fast(Vector512{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> ShiftRightLogical_Fast(Vector512<ushort> value, int shiftAmount) {
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
+                return Avx512BW.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Fast(Vector512{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> ShiftRightLogical_Fast(Vector512<int> value, int shiftAmount) {
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Fast(Vector512{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> ShiftRightLogical_Fast(Vector512<uint> value, int shiftAmount) {
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Fast(Vector512{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ShiftRightLogical_Fast(Vector512<long> value, int shiftAmount) {
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_Fast(Vector512{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> ShiftRightLogical_Fast(Vector512<ulong> value, int shiftAmount) {
-                return Avx512.ShiftRightLogical(value, (byte)shiftAmount);
+                return Avx512F.ShiftRightLogical(value, (byte)shiftAmount);
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.Shuffle_AcceleratedTypes"/>
             public static TypeCodeFlags Shuffle_AcceleratedTypes {
                 get {

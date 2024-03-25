@@ -1893,8 +1893,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> ShiftLeft_Fast(Vector512<sbyte> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
-                return Vector512.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector512.ShiftLeft(value, shiftAmount);
 #else
                 return ShiftLeft_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
@@ -1903,8 +1903,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ShiftLeft_Fast(Vector512{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> ShiftLeft_Fast(Vector512<byte> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
-                return Vector512.ShiftLeft(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector512.ShiftLeft(value, shiftAmount);
 #else
                 return ShiftLeft_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
@@ -2017,6 +2017,38 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 29) <<= shiftAmount;
                 Unsafe.Add(ref p, 30) <<= shiftAmount;
                 Unsafe.Add(ref p, 31) <<= shiftAmount;
+                Unsafe.Add(ref p, 32) <<= shiftAmount;
+                Unsafe.Add(ref p, 33) <<= shiftAmount;
+                Unsafe.Add(ref p, 34) <<= shiftAmount;
+                Unsafe.Add(ref p, 35) <<= shiftAmount;
+                Unsafe.Add(ref p, 36) <<= shiftAmount;
+                Unsafe.Add(ref p, 37) <<= shiftAmount;
+                Unsafe.Add(ref p, 38) <<= shiftAmount;
+                Unsafe.Add(ref p, 39) <<= shiftAmount;
+                Unsafe.Add(ref p, 40) <<= shiftAmount;
+                Unsafe.Add(ref p, 41) <<= shiftAmount;
+                Unsafe.Add(ref p, 42) <<= shiftAmount;
+                Unsafe.Add(ref p, 43) <<= shiftAmount;
+                Unsafe.Add(ref p, 44) <<= shiftAmount;
+                Unsafe.Add(ref p, 45) <<= shiftAmount;
+                Unsafe.Add(ref p, 46) <<= shiftAmount;
+                Unsafe.Add(ref p, 47) <<= shiftAmount;
+                Unsafe.Add(ref p, 48) <<= shiftAmount;
+                Unsafe.Add(ref p, 49) <<= shiftAmount;
+                Unsafe.Add(ref p, 50) <<= shiftAmount;
+                Unsafe.Add(ref p, 51) <<= shiftAmount;
+                Unsafe.Add(ref p, 52) <<= shiftAmount;
+                Unsafe.Add(ref p, 53) <<= shiftAmount;
+                Unsafe.Add(ref p, 54) <<= shiftAmount;
+                Unsafe.Add(ref p, 55) <<= shiftAmount;
+                Unsafe.Add(ref p, 56) <<= shiftAmount;
+                Unsafe.Add(ref p, 57) <<= shiftAmount;
+                Unsafe.Add(ref p, 58) <<= shiftAmount;
+                Unsafe.Add(ref p, 59) <<= shiftAmount;
+                Unsafe.Add(ref p, 60) <<= shiftAmount;
+                Unsafe.Add(ref p, 61) <<= shiftAmount;
+                Unsafe.Add(ref p, 62) <<= shiftAmount;
+                Unsafe.Add(ref p, 63) <<= shiftAmount;
                 return rt;
             }
 
@@ -2041,6 +2073,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 13) <<= shiftAmount;
                 Unsafe.Add(ref p, 14) <<= shiftAmount;
                 Unsafe.Add(ref p, 15) <<= shiftAmount;
+                Unsafe.Add(ref p, 16) <<= shiftAmount;
+                Unsafe.Add(ref p, 17) <<= shiftAmount;
+                Unsafe.Add(ref p, 18) <<= shiftAmount;
+                Unsafe.Add(ref p, 19) <<= shiftAmount;
+                Unsafe.Add(ref p, 20) <<= shiftAmount;
+                Unsafe.Add(ref p, 21) <<= shiftAmount;
+                Unsafe.Add(ref p, 22) <<= shiftAmount;
+                Unsafe.Add(ref p, 23) <<= shiftAmount;
+                Unsafe.Add(ref p, 24) <<= shiftAmount;
+                Unsafe.Add(ref p, 25) <<= shiftAmount;
+                Unsafe.Add(ref p, 26) <<= shiftAmount;
+                Unsafe.Add(ref p, 27) <<= shiftAmount;
+                Unsafe.Add(ref p, 28) <<= shiftAmount;
+                Unsafe.Add(ref p, 29) <<= shiftAmount;
+                Unsafe.Add(ref p, 30) <<= shiftAmount;
+                Unsafe.Add(ref p, 31) <<= shiftAmount;
                 return rt;
             }
 
@@ -2064,6 +2112,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 5) <<= shiftAmount;
                 Unsafe.Add(ref p, 6) <<= shiftAmount;
                 Unsafe.Add(ref p, 7) <<= shiftAmount;
+                Unsafe.Add(ref p, 8) <<= shiftAmount;
+                Unsafe.Add(ref p, 9) <<= shiftAmount;
+                Unsafe.Add(ref p, 10) <<= shiftAmount;
+                Unsafe.Add(ref p, 11) <<= shiftAmount;
+                Unsafe.Add(ref p, 12) <<= shiftAmount;
+                Unsafe.Add(ref p, 13) <<= shiftAmount;
+                Unsafe.Add(ref p, 14) <<= shiftAmount;
+                Unsafe.Add(ref p, 15) <<= shiftAmount;
                 return rt;
             }
 
@@ -2083,6 +2139,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 1) <<= shiftAmount;
                 Unsafe.Add(ref p, 2) <<= shiftAmount;
                 Unsafe.Add(ref p, 3) <<= shiftAmount;
+                Unsafe.Add(ref p, 4) <<= shiftAmount;
+                Unsafe.Add(ref p, 5) <<= shiftAmount;
+                Unsafe.Add(ref p, 6) <<= shiftAmount;
+                Unsafe.Add(ref p, 7) <<= shiftAmount;
                 return rt;
             }
 
@@ -2111,8 +2171,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> ShiftRightArithmetic(Vector512<sbyte> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
-                return Vector512.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector512.ShiftRightArithmetic(value, shiftAmount);
 #else
                 return ShiftRightArithmetic_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
@@ -2141,8 +2201,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic(Vector512{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ShiftRightArithmetic(Vector512<long> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
-                return Vector512.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector512.ShiftRightArithmetic(value, shiftAmount);
 #else
                 return ShiftRightArithmetic_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
@@ -2309,8 +2369,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> ShiftRightArithmetic_Fast(Vector512<sbyte> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
-                return Vector512.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector512.ShiftRightArithmetic(value, shiftAmount);
 #else
                 return ShiftRightArithmetic_Fast_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
@@ -2384,6 +2444,38 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 29) >>= shiftAmount;
                 Unsafe.Add(ref p, 30) >>= shiftAmount;
                 Unsafe.Add(ref p, 31) >>= shiftAmount;
+                Unsafe.Add(ref p, 32) >>= shiftAmount;
+                Unsafe.Add(ref p, 33) >>= shiftAmount;
+                Unsafe.Add(ref p, 34) >>= shiftAmount;
+                Unsafe.Add(ref p, 35) >>= shiftAmount;
+                Unsafe.Add(ref p, 36) >>= shiftAmount;
+                Unsafe.Add(ref p, 37) >>= shiftAmount;
+                Unsafe.Add(ref p, 38) >>= shiftAmount;
+                Unsafe.Add(ref p, 39) >>= shiftAmount;
+                Unsafe.Add(ref p, 40) >>= shiftAmount;
+                Unsafe.Add(ref p, 41) >>= shiftAmount;
+                Unsafe.Add(ref p, 42) >>= shiftAmount;
+                Unsafe.Add(ref p, 43) >>= shiftAmount;
+                Unsafe.Add(ref p, 44) >>= shiftAmount;
+                Unsafe.Add(ref p, 45) >>= shiftAmount;
+                Unsafe.Add(ref p, 46) >>= shiftAmount;
+                Unsafe.Add(ref p, 47) >>= shiftAmount;
+                Unsafe.Add(ref p, 48) >>= shiftAmount;
+                Unsafe.Add(ref p, 49) >>= shiftAmount;
+                Unsafe.Add(ref p, 50) >>= shiftAmount;
+                Unsafe.Add(ref p, 51) >>= shiftAmount;
+                Unsafe.Add(ref p, 52) >>= shiftAmount;
+                Unsafe.Add(ref p, 53) >>= shiftAmount;
+                Unsafe.Add(ref p, 54) >>= shiftAmount;
+                Unsafe.Add(ref p, 55) >>= shiftAmount;
+                Unsafe.Add(ref p, 56) >>= shiftAmount;
+                Unsafe.Add(ref p, 57) >>= shiftAmount;
+                Unsafe.Add(ref p, 58) >>= shiftAmount;
+                Unsafe.Add(ref p, 59) >>= shiftAmount;
+                Unsafe.Add(ref p, 60) >>= shiftAmount;
+                Unsafe.Add(ref p, 61) >>= shiftAmount;
+                Unsafe.Add(ref p, 62) >>= shiftAmount;
+                Unsafe.Add(ref p, 63) >>= shiftAmount;
                 return rt;
             }
 
@@ -2408,6 +2500,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 13) >>= shiftAmount;
                 Unsafe.Add(ref p, 14) >>= shiftAmount;
                 Unsafe.Add(ref p, 15) >>= shiftAmount;
+                Unsafe.Add(ref p, 16) >>= shiftAmount;
+                Unsafe.Add(ref p, 17) >>= shiftAmount;
+                Unsafe.Add(ref p, 18) >>= shiftAmount;
+                Unsafe.Add(ref p, 19) >>= shiftAmount;
+                Unsafe.Add(ref p, 20) >>= shiftAmount;
+                Unsafe.Add(ref p, 21) >>= shiftAmount;
+                Unsafe.Add(ref p, 22) >>= shiftAmount;
+                Unsafe.Add(ref p, 23) >>= shiftAmount;
+                Unsafe.Add(ref p, 24) >>= shiftAmount;
+                Unsafe.Add(ref p, 25) >>= shiftAmount;
+                Unsafe.Add(ref p, 26) >>= shiftAmount;
+                Unsafe.Add(ref p, 27) >>= shiftAmount;
+                Unsafe.Add(ref p, 28) >>= shiftAmount;
+                Unsafe.Add(ref p, 29) >>= shiftAmount;
+                Unsafe.Add(ref p, 30) >>= shiftAmount;
+                Unsafe.Add(ref p, 31) >>= shiftAmount;
                 return rt;
             }
 
@@ -2424,6 +2532,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 5) >>= shiftAmount;
                 Unsafe.Add(ref p, 6) >>= shiftAmount;
                 Unsafe.Add(ref p, 7) >>= shiftAmount;
+                Unsafe.Add(ref p, 8) >>= shiftAmount;
+                Unsafe.Add(ref p, 9) >>= shiftAmount;
+                Unsafe.Add(ref p, 10) >>= shiftAmount;
+                Unsafe.Add(ref p, 11) >>= shiftAmount;
+                Unsafe.Add(ref p, 12) >>= shiftAmount;
+                Unsafe.Add(ref p, 13) >>= shiftAmount;
+                Unsafe.Add(ref p, 14) >>= shiftAmount;
+                Unsafe.Add(ref p, 15) >>= shiftAmount;
                 return rt;
             }
 
@@ -2436,6 +2552,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 1) >>= shiftAmount;
                 Unsafe.Add(ref p, 2) >>= shiftAmount;
                 Unsafe.Add(ref p, 3) >>= shiftAmount;
+                Unsafe.Add(ref p, 4) >>= shiftAmount;
+                Unsafe.Add(ref p, 5) >>= shiftAmount;
+                Unsafe.Add(ref p, 6) >>= shiftAmount;
+                Unsafe.Add(ref p, 7) >>= shiftAmount;
                 return rt;
             }
 
@@ -2457,8 +2577,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> ShiftRightLogical(Vector512<sbyte> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
-                return Vector512.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector512.ShiftRightLogical(value, shiftAmount);
 #else
                 return ShiftRightLogical_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
@@ -2467,8 +2587,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical(Vector512{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> ShiftRightLogical(Vector512<byte> value, int shiftAmount) {
-#if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
-                return Vector512.ShiftRightLogical(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector512.ShiftRightLogical(value, shiftAmount);
 #else
                 return ShiftRightLogical_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
@@ -2989,6 +3109,38 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 29) >>= shiftAmount;
                 Unsafe.Add(ref p, 30) >>= shiftAmount;
                 Unsafe.Add(ref p, 31) >>= shiftAmount;
+                Unsafe.Add(ref p, 32) >>= shiftAmount;
+                Unsafe.Add(ref p, 33) >>= shiftAmount;
+                Unsafe.Add(ref p, 34) >>= shiftAmount;
+                Unsafe.Add(ref p, 35) >>= shiftAmount;
+                Unsafe.Add(ref p, 36) >>= shiftAmount;
+                Unsafe.Add(ref p, 37) >>= shiftAmount;
+                Unsafe.Add(ref p, 38) >>= shiftAmount;
+                Unsafe.Add(ref p, 39) >>= shiftAmount;
+                Unsafe.Add(ref p, 40) >>= shiftAmount;
+                Unsafe.Add(ref p, 41) >>= shiftAmount;
+                Unsafe.Add(ref p, 42) >>= shiftAmount;
+                Unsafe.Add(ref p, 43) >>= shiftAmount;
+                Unsafe.Add(ref p, 44) >>= shiftAmount;
+                Unsafe.Add(ref p, 45) >>= shiftAmount;
+                Unsafe.Add(ref p, 46) >>= shiftAmount;
+                Unsafe.Add(ref p, 47) >>= shiftAmount;
+                Unsafe.Add(ref p, 48) >>= shiftAmount;
+                Unsafe.Add(ref p, 49) >>= shiftAmount;
+                Unsafe.Add(ref p, 50) >>= shiftAmount;
+                Unsafe.Add(ref p, 51) >>= shiftAmount;
+                Unsafe.Add(ref p, 52) >>= shiftAmount;
+                Unsafe.Add(ref p, 53) >>= shiftAmount;
+                Unsafe.Add(ref p, 54) >>= shiftAmount;
+                Unsafe.Add(ref p, 55) >>= shiftAmount;
+                Unsafe.Add(ref p, 56) >>= shiftAmount;
+                Unsafe.Add(ref p, 57) >>= shiftAmount;
+                Unsafe.Add(ref p, 58) >>= shiftAmount;
+                Unsafe.Add(ref p, 59) >>= shiftAmount;
+                Unsafe.Add(ref p, 60) >>= shiftAmount;
+                Unsafe.Add(ref p, 61) >>= shiftAmount;
+                Unsafe.Add(ref p, 62) >>= shiftAmount;
+                Unsafe.Add(ref p, 63) >>= shiftAmount;
                 return rt;
             }
 
@@ -3020,6 +3172,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 13) >>= shiftAmount;
                 Unsafe.Add(ref p, 14) >>= shiftAmount;
                 Unsafe.Add(ref p, 15) >>= shiftAmount;
+                Unsafe.Add(ref p, 16) >>= shiftAmount;
+                Unsafe.Add(ref p, 17) >>= shiftAmount;
+                Unsafe.Add(ref p, 18) >>= shiftAmount;
+                Unsafe.Add(ref p, 19) >>= shiftAmount;
+                Unsafe.Add(ref p, 20) >>= shiftAmount;
+                Unsafe.Add(ref p, 21) >>= shiftAmount;
+                Unsafe.Add(ref p, 22) >>= shiftAmount;
+                Unsafe.Add(ref p, 23) >>= shiftAmount;
+                Unsafe.Add(ref p, 24) >>= shiftAmount;
+                Unsafe.Add(ref p, 25) >>= shiftAmount;
+                Unsafe.Add(ref p, 26) >>= shiftAmount;
+                Unsafe.Add(ref p, 27) >>= shiftAmount;
+                Unsafe.Add(ref p, 28) >>= shiftAmount;
+                Unsafe.Add(ref p, 29) >>= shiftAmount;
+                Unsafe.Add(ref p, 30) >>= shiftAmount;
+                Unsafe.Add(ref p, 31) >>= shiftAmount;
                 return rt;
             }
 
@@ -3043,6 +3211,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 5) >>= shiftAmount;
                 Unsafe.Add(ref p, 6) >>= shiftAmount;
                 Unsafe.Add(ref p, 7) >>= shiftAmount;
+                Unsafe.Add(ref p, 8) >>= shiftAmount;
+                Unsafe.Add(ref p, 9) >>= shiftAmount;
+                Unsafe.Add(ref p, 10) >>= shiftAmount;
+                Unsafe.Add(ref p, 11) >>= shiftAmount;
+                Unsafe.Add(ref p, 12) >>= shiftAmount;
+                Unsafe.Add(ref p, 13) >>= shiftAmount;
+                Unsafe.Add(ref p, 14) >>= shiftAmount;
+                Unsafe.Add(ref p, 15) >>= shiftAmount;
                 return rt;
             }
 
@@ -3062,6 +3238,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Unsafe.Add(ref p, 1) >>= shiftAmount;
                 Unsafe.Add(ref p, 2) >>= shiftAmount;
                 Unsafe.Add(ref p, 3) >>= shiftAmount;
+                Unsafe.Add(ref p, 4) >>= shiftAmount;
+                Unsafe.Add(ref p, 5) >>= shiftAmount;
+                Unsafe.Add(ref p, 6) >>= shiftAmount;
+                Unsafe.Add(ref p, 7) >>= shiftAmount;
                 return rt;
             }
 
