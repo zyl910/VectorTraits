@@ -910,13 +910,17 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> YOrNot_Basic<T>(Vector512<T> left, Vector512<T> right) where T : struct {
                 UnsafeUtil.SkipInit(out Vector512<T> rt);
-                ref FixedArray4<ulong> p = ref Unsafe.As<Vector512<T>, FixedArray4<ulong>>(ref rt);
-                ref FixedArray4<ulong> pleft = ref Unsafe.As<Vector512<T>, FixedArray4<ulong>>(ref left);
-                ref FixedArray4<ulong> pright = ref Unsafe.As<Vector512<T>, FixedArray4<ulong>>(ref right);
+                ref FixedArray8<ulong> p = ref Unsafe.As<Vector512<T>, FixedArray8<ulong>>(ref rt);
+                ref FixedArray8<ulong> pleft = ref Unsafe.As<Vector512<T>, FixedArray8<ulong>>(ref left);
+                ref FixedArray8<ulong> pright = ref Unsafe.As<Vector512<T>, FixedArray8<ulong>>(ref right);
                 p.I0 = pleft.I0 | ~pright.I0;
                 p.I1 = pleft.I1 | ~pright.I1;
                 p.I2 = pleft.I2 | ~pright.I2;
                 p.I3 = pleft.I3 | ~pright.I3;
+                p.I4 = pleft.I4 | ~pright.I4;
+                p.I5 = pleft.I5 | ~pright.I5;
+                p.I6 = pleft.I6 | ~pright.I6;
+                p.I7 = pleft.I7 | ~pright.I7;
                 return rt;
             }
 

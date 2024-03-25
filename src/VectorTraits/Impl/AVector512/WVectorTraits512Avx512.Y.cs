@@ -418,7 +418,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<ulong> u = YClamp(upper, amin, amax).AsUInt64();
                 return Narrow(l, u);
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits512.YOrNot_AcceleratedTypes"/>
             public static TypeCodeFlags YOrNot_AcceleratedTypes {
@@ -431,11 +431,12 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YOrNot{T}(Vector512{T}, Vector512{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> YOrNot<T>(Vector512<T> left, Vector512<T> right) where T : struct {
-                Vector512<T> right2 = OnesComplement(right);
-                Vector512<T> rt = BitwiseOr(left, right2);
-                return rt;
+                return Avx512F.TernaryLogic(left.AsInt64(), right.AsInt64(), right.AsInt64(), TernaryLogicControl.Or_A_NotB).As<long, T>();
+                //Vector512<T> right2 = OnesComplement(right);
+                //Vector512<T> rt = BitwiseOr(left, right2);
+                //return rt;
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits512.YRoundToEven_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToEven_AcceleratedTypes {

@@ -41,6 +41,8 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>0xCA: <c>(A&amp;B)|(~A&amp;C)</c></summary>
         public const byte Or_And_A_B_And_NotA_C = unchecked((A & B) | (~A & C));
+        /// <summary>0xF3: <c>A | ~B</c></summary>
+        public const byte Or_A_NotB = unchecked(A | (byte)~B);
 
     }
 

@@ -979,7 +979,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<uint> YNarrowSaturateUnsigned(Vector512<long> lower, Vector512<long> upper) {
             return Statics.YNarrowSaturateUnsigned(lower, upper);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits512.YOrNot_AcceleratedTypes"/>
         public override TypeCodeFlags YOrNot_AcceleratedTypes {
@@ -993,7 +993,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<T> YOrNot<T>(Vector512<T> left, Vector512<T> right) where T : struct {
             return Statics.YOrNot(left, right);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits512.YRoundToEven_AcceleratedTypes"/>
         public override TypeCodeFlags YRoundToEven_AcceleratedTypes {
