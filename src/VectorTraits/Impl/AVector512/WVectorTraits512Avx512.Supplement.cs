@@ -197,11 +197,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ConditionalSelect{T}(Vector512{T}, Vector512{T}, Vector512{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> ConditionalSelect<T>(Vector512<T> condition, Vector512<T> left, Vector512<T> right) where T : struct {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && NET8_0_OR_GREATER
                 return Vector512.ConditionalSelect(condition, left, right);
 #else
                 return ConditionalSelect_OrAnd(condition, left, right);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && NET8_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ConditionalSelect{T}(Vector512{T}, Vector512{T}, Vector512{T})"/>

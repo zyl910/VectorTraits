@@ -703,7 +703,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 result1 = YShuffleG4_Const(source1, control);
                 return rt0;
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleInsert_AcceleratedTypes {
@@ -734,53 +734,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YShuffleInsert(Vector512<byte> back, Vector512<byte> vector, Vector512<byte> indices) {
-                return YShuffleInsert_Add1(back, vector, indices);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<byte> YShuffleInsert_Add1(Vector512<byte> back, Vector512<byte> vector, Vector512<byte> indices) {
-                var indicesAdded = Avx512.Add(indices.AsSByte(), Vector512.Create(sbyte.MinValue));
-                Vector512<byte> mask = Avx512.CompareGreaterThan(
-                    Vector512.Create((sbyte)(32 + sbyte.MinValue)),
-                    indicesAdded
-                ).AsByte(); // Unsigned compare: (i < 32)
+                Vector512<byte> mask = Avx512BW.CompareGreaterThan(Vector512.Create((byte)64), indices); // Unsigned compare: (i < 64)
                 Vector512<byte> raw = YShuffleKernel(vector, indices);
-                Vector512<byte> rt = Avx512.BlendVariable(back, raw, mask);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<byte> YShuffleInsert_Add2(Vector512<byte> back, Vector512<byte> vector, Vector512<byte> indices) {
-                Vector512<byte> mask = GreaterThan(Vector512.Create((byte)32), indices);
-                Vector512<byte> raw = YShuffleKernel(vector, indices);
-                Vector512<byte> rt = Avx512.BlendVariable(back, raw, mask);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<byte> YShuffleInsert_Cmp2(Vector512<byte> back, Vector512<byte> vector, Vector512<byte> indices) {
-                Vector512<byte> mask = Avx512.AndNot(
-                    Avx512.CompareGreaterThan(Vector512<sbyte>.Zero, indices.AsSByte()),
-                    Avx512.CompareGreaterThan(Vector512.Create((sbyte)32), indices.AsSByte())
-                ).AsByte(); // (0<=i && i<32)
-                Vector512<byte> raw = YShuffleKernel(vector, indices);
-                Vector512<byte> rt = Avx512.BlendVariable(back, raw, mask);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<byte> YShuffleInsert_EqualAnd(Vector512<byte> back, Vector512<byte> vector, Vector512<byte> indices) {
-                Vector512<byte> maskOverflow = Vector512.Create((byte)0xE0); // ((byte)~(System.Runtime.Intrinsics.Vector512<byte>.Count - 1)).ToString("X2") = "E0"
-                Vector512<byte> mask = Avx512.CompareEqual(
-                    Vector512<byte>.Zero,
-                    Avx512.And(indices, maskOverflow)
-                ); // (0<=i && i<32)
-                Vector512<byte> raw = YShuffleKernel(vector, indices);
-                Vector512<byte> rt = Avx512.BlendVariable(back, raw, mask);
+                Vector512<byte> rt = ConditionalSelect(mask, raw, back);
                 return rt;
             }
 
@@ -794,13 +750,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YShuffleInsert(Vector512<ushort> back, Vector512<ushort> vector, Vector512<ushort> indices) {
-                var indicesAdded = Avx512.Add(indices.AsInt16(), Vector512.Create(short.MinValue));
-                Vector512<ushort> mask = Avx512.CompareGreaterThan(
-                    Vector512.Create((short)(16 + short.MinValue)),
-                    indicesAdded
-                ).AsUInt16(); // Unsigned compare: (i < 16)
+                Vector512<ushort> mask = Avx512BW.CompareGreaterThan(Vector512.Create((ushort)32), indices); // Unsigned compare: (i < 32)
                 Vector512<ushort> raw = YShuffleKernel(vector, indices);
-                Vector512<ushort> rt = Avx512.BlendVariable(back, raw, mask);
+                Vector512<ushort> rt = ConditionalSelect(mask, raw, back);
                 return rt;
             }
 
@@ -814,13 +766,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YShuffleInsert(Vector512<uint> back, Vector512<uint> vector, Vector512<uint> indices) {
-                var indicesAdded = Avx512.Add(indices.AsInt32(), Vector512.Create(int.MinValue));
-                Vector512<uint> mask = Avx512.CompareGreaterThan(
-                    Vector512.Create((int)(8 + int.MinValue)),
-                    indicesAdded
-                ).AsUInt32(); // Unsigned compare: (i < 8)
+                Vector512<uint> mask = Avx512F.CompareGreaterThan(Vector512.Create((uint)16), indices); // Unsigned compare: (i < 16)
                 Vector512<uint> raw = YShuffleKernel(vector, indices);
-                Vector512<uint> rt = Avx512.BlendVariable(back, raw, mask);
+                Vector512<uint> rt = ConditionalSelect(mask, raw, back);
                 return rt;
             }
 
@@ -834,13 +782,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> YShuffleInsert(Vector512<ulong> back, Vector512<ulong> vector, Vector512<ulong> indices) {
-                var indicesAdded = Avx512.Add(indices.AsInt64(), Vector512Constants.Int64_MinValue);
-                Vector512<ulong> mask = Avx512.CompareGreaterThan(
-                    Vector512Constants.Int64_MinValue_4,
-                    indicesAdded
-                ).AsUInt64(); // Unsigned compare: (i < 4)
+                Vector512<ulong> mask = Avx512F.CompareGreaterThan(Vector512.Create((ulong)8), indices); // Unsigned compare: (i < 8)
                 Vector512<ulong> raw = YShuffleKernel(vector, indices);
-                Vector512<ulong> rt = Avx512.BlendVariable(back, raw, mask);
+                Vector512<ulong> rt = ConditionalSelect(mask, raw, back);
                 return rt;
             }
 
@@ -859,11 +803,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleInsert_Args(Vector512<byte> indices, out Vector512<byte> args0, out Vector512<byte> args1, out Vector512<byte> args2) {
                 YShuffleKernel_Args(indices, out args0, out args1);
-                var indicesAdded = Avx512.Add(indices.AsSByte(), Vector512.Create(sbyte.MinValue));
-                args2 = Avx512.CompareGreaterThan(
-                    Vector512.Create((sbyte)(32 + sbyte.MinValue)),
-                    indicesAdded
-                ).AsByte(); // Unsigned compare: (i < 32)
+                args2 = Avx512BW.CompareGreaterThan(Vector512.Create((byte)64), indices); // Unsigned compare: (i < 64)
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Args(Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short})"/>
@@ -880,11 +820,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleInsert_Args(Vector512<ushort> indices, out Vector512<ushort> args0, out Vector512<ushort> args1, out Vector512<ushort> args2) {
                 YShuffleKernel_Args(indices, out args0, out args1);
-                var indicesAdded = Avx512.Add(indices.AsInt16(), Vector512.Create(short.MinValue));
-                args2 = Avx512.CompareGreaterThan(
-                    Vector512.Create((short)(16 + short.MinValue)),
-                    indicesAdded
-                ).AsUInt16(); // Unsigned compare: (i < 16)
+                args2 = Avx512BW.CompareGreaterThan(Vector512.Create((ushort)32), indices); // Unsigned compare: (i < 32)
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Args(Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int})"/>
@@ -901,11 +837,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleInsert_Args(Vector512<uint> indices, out Vector512<uint> args0, out Vector512<uint> args1, out Vector512<uint> args2) {
                 YShuffleKernel_Args(indices, out args0, out args1);
-                var indicesAdded = Avx512.Add(indices.AsInt32(), Vector512.Create(int.MinValue));
-                args2 = Avx512.CompareGreaterThan(
-                    Vector512.Create((int)(8 + int.MinValue)),
-                    indicesAdded
-                ).AsUInt32(); // Unsigned compare: (i < 8)
+                args2 = Avx512F.CompareGreaterThan(Vector512.Create((uint)16), indices); // Unsigned compare: (i < 16)
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Args(Vector512{long}, out Vector512{long}, out Vector512{long}, out Vector512{long})"/>
@@ -922,11 +854,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleInsert_Args(Vector512<ulong> indices, out Vector512<ulong> args0, out Vector512<ulong> args1, out Vector512<ulong> args2) {
                 YShuffleKernel_Args(indices, out args0, out args1);
-                var indicesAdded = Avx512.Add(indices.AsInt64(), Vector512Constants.Int64_MinValue);
-                args2 = Avx512.CompareGreaterThan(
-                    Vector512Constants.Int64_MinValue_4,
-                    indicesAdded
-                ).AsUInt64(); // Unsigned compare: (i < 4)
+                args2 = Avx512F.CompareGreaterThan(Vector512.Create((ulong)8), indices); // Unsigned compare: (i < 8)
             }
 
 
@@ -953,7 +881,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YShuffleInsert_Core(Vector512<byte> back, Vector512<byte> vector, Vector512<byte> args0, Vector512<byte> args1, Vector512<byte> args2) {
                 var raw = YShuffleKernel_Core(vector, args0, args1);
-                var rt = Avx512.BlendVariable(back, raw, args2);
+                var rt = ConditionalSelect(args2, raw, back);
                 return rt;
             }
 
@@ -968,7 +896,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YShuffleInsert_Core(Vector512<ushort> back, Vector512<ushort> vector, Vector512<ushort> args0, Vector512<ushort> args1, Vector512<ushort> args2) {
                 var raw = YShuffleKernel_Core(vector, args0, args1);
-                var rt = Avx512.BlendVariable(back, raw, args2);
+                var rt = ConditionalSelect(args2, raw, back);
                 return rt;
             }
 
@@ -983,7 +911,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YShuffleInsert_Core(Vector512<uint> back, Vector512<uint> vector, Vector512<uint> args0, Vector512<uint> args1, Vector512<uint> args2) {
                 var raw = YShuffleKernel_Core(vector, args0, args1);
-                var rt = Avx512.BlendVariable(back, raw, args2);
+                var rt = ConditionalSelect(args2, raw, back);
                 return rt;
             }
 
@@ -998,7 +926,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> YShuffleInsert_Core(Vector512<ulong> back, Vector512<ulong> vector, Vector512<ulong> args0, Vector512<ulong> args1, Vector512<ulong> args2) {
                 var raw = YShuffleKernel_Core(vector, args0, args1);
-                var rt = Avx512.BlendVariable(back, raw, args2);
+                var rt = ConditionalSelect(args2, raw, back);
                 return rt;
             }
 
@@ -1014,134 +942,65 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{float}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YShuffleKernel(Vector512<float> vector, Vector512<int> indices) {
-                return Avx512.PermuteVar8x32(vector, indices);
+                return Avx512F.PermuteVar16x32(vector, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{double}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YShuffleKernel(Vector512<double> vector, Vector512<long> indices) {
-                return YShuffleKernel(vector.AsUInt64(), indices.AsUInt64()).AsDouble();
+                return Avx512F.PermuteVar8x64(vector, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YShuffleKernel(Vector512<sbyte> vector, Vector512<sbyte> indices) {
-                return YShuffleKernel(vector.AsByte(), indices.AsByte()).AsSByte();
+                return Avx512Vbmi.PermuteVar64x8(vector, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YShuffleKernel(Vector512<byte> vector, Vector512<byte> indices) {
-                return YShuffleKernel_ByteAdd(vector, indices);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{byte}, Vector512{byte})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<byte> YShuffleKernel_ByteAdd(Vector512<byte> vector, Vector512<byte> indices) {
-                // Shuffle elements of __m512i vector
-                // https://stackoverflow.com/questions/30669556/shuffle-elements-of-m512i-vector
-                // ErmIg answered Jun 5, 2015 at 14:54
-                return Avx512.Or(
-                    Avx512.Shuffle(Avx512.Permute4x64(vector.AsInt64(), (byte)ShuffleControlG4.ZWXY).AsByte(), Avx512.Add(indices, Vector512Constants.Shuffle_Byte_LaneAdd_K1))
-                    , Avx512.Shuffle(vector, Avx512.Add(indices, Vector512Constants.Shuffle_Byte_LaneAdd_K0))
-                );
-                // Remark: The value of each element must be less than count
+                return Avx512Vbmi.PermuteVar64x8(vector, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YShuffleKernel(Vector512<short> vector, Vector512<short> indices) {
-                return YShuffleKernel(vector.AsUInt16(), indices.AsUInt16()).AsInt16();
+                return Avx512BW.PermuteVar32x16(vector, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YShuffleKernel(Vector512<ushort> vector, Vector512<ushort> indices) {
-                return YShuffleKernel_Multiply(vector, indices);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{ushort}, Vector512{ushort})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<ushort> YShuffleKernel_Multiply(Vector512<ushort> vector, Vector512<ushort> indices) {
-                Vector512<byte> indices2 = Avx512.Add(Multiply(indices, Vector512Constants.Shuffle_UInt16_Multiplier).AsByte(), Vector512Constants.Shuffle_UInt16_ByteOffset);
-                return YShuffleKernel(vector.AsByte(), indices2).AsUInt16();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{ushort}, Vector512{ushort})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<ushort> YShuffleKernel_ShiftLane(Vector512<ushort> vector, Vector512<ushort> indices) {
-                Vector512<ushort> m = Avx512.ShiftLeftLogical(indices, 1); // n*2 = n << 1;
-                Vector512<byte> temp = Avx512.Or(m, Avx512.ShiftLeftLogical128BitLane(m, 1)).AsByte();
-                Vector512<byte> indices2 = Avx512.Add(temp, Vector512Constants.Shuffle_UInt16_ByteOffset);
-                return YShuffleKernel(vector.AsByte(), indices2).AsUInt16();
+                return Avx512BW.PermuteVar32x16(vector, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YShuffleKernel(Vector512<int> vector, Vector512<int> indices) {
-                return Avx512.PermuteVar8x32(vector, indices);
+                return Avx512F.PermuteVar16x32(vector, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{uint}, Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YShuffleKernel(Vector512<uint> vector, Vector512<uint> indices) {
-                return Avx512.PermuteVar8x32(vector, indices);
+                return Avx512F.PermuteVar16x32(vector, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YShuffleKernel(Vector512<long> vector, Vector512<long> indices) {
-                return YShuffleKernel(vector.AsUInt64(), indices.AsUInt64()).AsInt64();
+                return Avx512F.PermuteVar8x64(vector, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> YShuffleKernel(Vector512<ulong> vector, Vector512<ulong> indices) {
-                return YShuffleKernel_DuplicateEven(vector, indices);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{ulong}, Vector512{ulong})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<ulong> YShuffleKernel_AlignRight(Vector512<ulong> vector, Vector512<ulong> indices) {
-                Vector512<uint> temp = Avx512.Or(indices, Avx512.AlignRight(indices, indices, 4)).AsUInt32();
-                temp = Avx512.ShiftLeftLogical(temp, 1); // n*2 = n << 1;
-                Vector512<uint> indices2 = Avx512.Add(temp, Vector512Constants.Shuffle_UInt64_UInt32Offset);
-                return Avx512.PermuteVar8x32(vector.AsUInt32(), indices2).AsUInt64();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{ulong}, Vector512{ulong})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<ulong> YShuffleKernel_DuplicateEven(Vector512<ulong> vector, Vector512<ulong> indices) {
-                Vector512<uint> temp = Avx.DuplicateEvenIndexed(indices.AsSingle()).AsUInt32();
-                temp = Avx512.ShiftLeftLogical(temp, 1); // n*2 = n << 1;
-                Vector512<uint> indices2 = Avx512.Add(temp, Vector512Constants.Shuffle_UInt64_UInt32Offset);
-                return Avx512.PermuteVar8x32(vector.AsUInt32(), indices2).AsUInt64();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{ulong}, Vector512{ulong})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<ulong> YShuffleKernel_Multiply(Vector512<ulong> vector, Vector512<ulong> indices) {
-                Vector512<uint> indices2 = Avx512.Add(Multiply(indices, Vector512Constants.Shuffle_UInt64_Multiplier).AsUInt32(), Vector512Constants.Shuffle_UInt64_UInt32Offset);
-                return Avx512.PermuteVar8x32(vector.AsUInt32(), indices2).AsUInt64();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel(Vector512{ulong}, Vector512{ulong})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<ulong> YShuffleKernel_ShiftLane(Vector512<ulong> vector, Vector512<ulong> indices) {
-                Vector512<uint> temp = Avx512.Or(indices, Avx512.ShiftLeftLogical128BitLane(indices, 4)).AsUInt32();
-                temp = Avx512.ShiftLeftLogical(temp, 1); // n*2 = n << 1;
-                Vector512<uint> indices2 = Avx512.Add(temp, Vector512Constants.Shuffle_UInt64_UInt32Offset);
-                return Avx512.PermuteVar8x32(vector.AsUInt32(), indices2).AsUInt64();
+                return Avx512F.PermuteVar8x64(vector, indices);
             }
 
 
@@ -1149,34 +1008,30 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleKernel_Args(Vector512<sbyte> indices, out Vector512<sbyte> args0, out Vector512<sbyte> args1) {
-                YShuffleKernel_Args(indices.AsByte(), out var a0, out var a1);
-                args0 = a0.AsSByte();
-                args1 = a1.AsSByte();
+                args0 = indices;
+                args1 = default;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Args(Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleKernel_Args(Vector512<byte> indices, out Vector512<byte> args0, out Vector512<byte> args1) {
-                args0 = Avx512.Add(indices, Vector512Constants.Shuffle_Byte_LaneAdd_K0);
-                args1 = Avx512.Add(indices, Vector512Constants.Shuffle_Byte_LaneAdd_K1);
+                args0 = indices;
+                args1 = default;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Args(Vector512{short}, out Vector512{short}, out Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleKernel_Args(Vector512<short> indices, out Vector512<short> args0, out Vector512<short> args1) {
-                YShuffleKernel_Args(indices.AsUInt16(), out var a0, out var a1);
-                args0 = a0.AsInt16();
-                args1 = a1.AsInt16();
+                args0 = indices;
+                args1 = default;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Args(Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleKernel_Args(Vector512<ushort> indices, out Vector512<ushort> args0, out Vector512<ushort> args1) {
-                Vector512<byte> indices2 = Avx512.Add(Multiply(indices, Vector512Constants.Shuffle_UInt16_Multiplier).AsByte(), Vector512Constants.Shuffle_UInt16_ByteOffset);
-                YShuffleKernel_Args(indices2, out var a0, out var a1);
-                args0 = a0.AsUInt16();
-                args1 = a1.AsUInt16();
+                args0 = indices;
+                args1 = default;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Args(Vector512{int}, out Vector512{int}, out Vector512{int})"/>
@@ -1197,19 +1052,16 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Args(Vector512{long}, out Vector512{long}, out Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleKernel_Args(Vector512<long> indices, out Vector512<long> args0, out Vector512<long> args1) {
-                YShuffleKernel_Args(indices.AsUInt64(), out var a0, out var a1);
-                args0 = a0.AsInt64();
-                args1 = a1.AsInt64();
+                args0 = indices;
+                args1 = default;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Args(Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleKernel_Args(Vector512<ulong> indices, out Vector512<ulong> args0, out Vector512<ulong> args1) {
+                args0 = indices;
                 args1 = default;
-                Vector512<uint> temp = Avx.DuplicateEvenIndexed(indices.AsSingle()).AsUInt32();
-                temp = Avx512.ShiftLeftLogical(temp, 1); // n*2 = n << 1;
-                args0 = Avx512.Add(temp, Vector512Constants.Shuffle_UInt64_UInt32Offset).AsUInt64();
             }
 
 
@@ -1217,49 +1069,51 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YShuffleKernel_Core(Vector512<float> vector, Vector512<int> args0, Vector512<int> args1) {
                 _ = args1;
-                return Avx512.PermuteVar8x32(vector, args0);
+                return Avx512F.PermuteVar16x32(vector, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{double}, Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YShuffleKernel_Core(Vector512<double> vector, Vector512<long> args0, Vector512<long> args1) {
-                return YShuffleKernel_Core(vector.AsUInt64(), args0.AsUInt64(), args1.AsUInt64()).AsDouble();
+                _ = args1;
+                return Avx512F.PermuteVar8x64(vector, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YShuffleKernel_Core(Vector512<sbyte> vector, Vector512<sbyte> args0, Vector512<sbyte> args1) {
-                return YShuffleKernel_Core(vector.AsByte(), args0.AsByte(), args1.AsByte()).AsSByte();
+                _ = args1;
+                return Avx512Vbmi.PermuteVar64x8(vector, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YShuffleKernel_Core(Vector512<byte> vector, Vector512<byte> args0, Vector512<byte> args1) {
-                return Avx512.Or(
-                    Avx512.Shuffle(Avx512.Permute4x64(vector.AsInt64(), (byte)ShuffleControlG4.ZWXY).AsByte(), args1)
-                    , Avx512.Shuffle(vector, args0)
-                );
+                _ = args1;
+                return Avx512Vbmi.PermuteVar64x8(vector, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{short}, Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YShuffleKernel_Core(Vector512<short> vector, Vector512<short> args0, Vector512<short> args1) {
-                return YShuffleKernel_Core(vector.AsUInt16(), args0.AsUInt16(), args1.AsUInt16()).AsInt16();
+                _ = args1;
+                return Avx512BW.PermuteVar32x16(vector, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{ushort}, Vector512{ushort}, Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YShuffleKernel_Core(Vector512<ushort> vector, Vector512<ushort> args0, Vector512<ushort> args1) {
-                return YShuffleKernel_Core(vector.AsByte(), args0.AsByte(), args1.AsByte()).AsUInt16();
+                _ = args1;
+                return Avx512BW.PermuteVar32x16(vector, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{int}, Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YShuffleKernel_Core(Vector512<int> vector, Vector512<int> args0, Vector512<int> args1) {
                 _ = args1;
-                return Avx512.PermuteVar8x32(vector, args0);
+                return Avx512F.PermuteVar16x32(vector, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{uint}, Vector512{uint}, Vector512{uint})"/>
@@ -1267,13 +1121,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YShuffleKernel_Core(Vector512<uint> vector, Vector512<uint> args0, Vector512<uint> args1) {
                 _ = args1;
-                return Avx512.PermuteVar8x32(vector, args0);
+                return Avx512F.PermuteVar16x32(vector, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{long}, Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YShuffleKernel_Core(Vector512<long> vector, Vector512<long> args0, Vector512<long> args1) {
-                return YShuffleKernel_Core(vector.AsUInt64(), args0.AsUInt64(), args1.AsUInt64()).AsInt64();
+                _ = args1;
+                return Avx512F.PermuteVar8x64(vector, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleKernel_Core(Vector512{ulong}, Vector512{ulong}, Vector512{ulong})"/>
@@ -1281,10 +1136,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> YShuffleKernel_Core(Vector512<ulong> vector, Vector512<ulong> args0, Vector512<ulong> args1) {
                 _ = args1;
-                return Avx512.PermuteVar8x32(vector.AsUInt32(), args0.AsUInt32()).AsUInt64();
+                return Avx512F.PermuteVar8x64(vector, args0);
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.YSign_AcceleratedTypes"/>
             public static TypeCodeFlags YSign_AcceleratedTypes {
                 get {
