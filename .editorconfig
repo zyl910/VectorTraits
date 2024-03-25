@@ -1,5 +1,8 @@
 ﻿[*.cs]
 
+# CA1857: A constant is expected for the parameter
+dotnet_diagnostic.CA1857.severity = suggestion
+
 # CS1574: XML comment has cref attribute that could not be resolved
 dotnet_diagnostic.CS1574.severity = suggestion
 
