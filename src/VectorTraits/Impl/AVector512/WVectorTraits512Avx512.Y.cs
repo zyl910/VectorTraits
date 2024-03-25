@@ -435,7 +435,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<T> rt = BitwiseOr(left, right2);
                 return rt;
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits512.YRoundToEven_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
@@ -448,13 +448,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YRoundToEven(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YRoundToEven(Vector512<float> value) {
-                return Avx.RoundToNearestInteger(value);
+                return Avx512F.RoundScale(value, (byte)FloatRoundMode.ToEven);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YRoundToEven(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YRoundToEven(Vector512<double> value) {
-                return Avx.RoundToNearestInteger(value);
+                return Avx512F.RoundScale(value, (byte)FloatRoundMode.ToEven);
             }
 
 
@@ -469,16 +469,16 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YRoundToZero(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YRoundToZero(Vector512<float> value) {
-                return Avx.RoundToZero(value);
+                return Avx512F.RoundScale(value, (byte)FloatRoundMode.ToZero);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YRoundToZero(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YRoundToZero(Vector512<double> value) {
-                return Avx.RoundToZero(value);
+                return Avx512F.RoundScale(value, (byte)FloatRoundMode.ToZero);
             }
 
-*/
+
 #endif // NET8_0_OR_GREATER
         }
     }

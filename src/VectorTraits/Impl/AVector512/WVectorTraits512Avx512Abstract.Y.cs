@@ -993,7 +993,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<T> YOrNot<T>(Vector512<T> left, Vector512<T> right) where T : struct {
             return Statics.YOrNot(left, right);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits512.YRoundToEven_AcceleratedTypes"/>
         public override TypeCodeFlags YRoundToEven_AcceleratedTypes {
@@ -1034,7 +1034,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YRoundToZero(value);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.YShuffleG2_AcceleratedTypes"/>
         public override TypeCodeFlags YShuffleG2_AcceleratedTypes {
             get {
