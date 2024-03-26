@@ -106,6 +106,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<float> Ceiling(Vector256<float> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Ceiling(value);
+                // .NET7~8 on Avx2~Avx512: It has hardware-accelerated.
+                //00007FFD4FE2477E  mov         rdx,1EE0012DCC0h  
+                //00007FFD4FE24788  vroundps    ymm0,ymmword ptr [rdx],2  
+                //00007FFD4FE2478E  vmovups     ymmword ptr [rbp-1910h],ymm0  
 #else
                 return Ceiling_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -116,6 +120,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<double> Ceiling(Vector256<double> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Ceiling(value);
+                // .NET7~8 on Avx2~Avx512: It has hardware-accelerated.
+                //00007FFD4FE2483B  mov         rdx,1EE0012EB20h  
+                //00007FFD4FE24845  vroundpd    ymm0,ymmword ptr [rdx],2  
+                //00007FFD4FE2484B  vmovups     ymmword ptr [rbp-1970h],ymm0  
 #else
                 return Ceiling_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -165,6 +173,30 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<double> ConvertToDouble(Vector256<long> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.ConvertToDouble(value);
+                // .NET8 on Avx512: No hardware accelerated.
+                //   208: 		return Create(Vector128.ConvertToDouble(vector._lower), Vector128.ConvertToDouble(vector._upper));
+                //00007FFDE22AAC98  movups      xmm0,xmmword ptr [rdx]  
+                //00007FFDE22AAC9B  movaps      xmm1,xmm0  
+                //00007FFDE22AAC9E  psrlq       xmm1,20h  
+                //00007FFDE22AACA3  movups      xmm2,xmmword ptr [System.Diagnostics.Tracing.Statics.GetCustomAttribute[[System.__Canon, System.Private.CoreLib]](System.Type)+044E500h (07FFDE29D1BD0h)]  
+                //00007FFDE22AACAA  pxor        xmm1,xmm2  
+                //00007FFDE22AACAE  movups      xmm3,xmmword ptr [System.Diagnostics.Tracing.Statics.GetCustomAttribute[[System.__Canon, System.Private.CoreLib]](System.Type)+044E510h (07FFDE29D1BE0h)]  
+                //00007FFDE22AACB5  subpd       xmm1,xmm3  
+                //00007FFDE22AACB9  movups      xmm4,xmmword ptr [System.Diagnostics.Tracing.Statics.GetCustomAttribute[[System.__Canon, System.Private.CoreLib]](System.Type)+044E520h (07FFDE29D1BF0h)]  
+                //00007FFDE22AACC0  pand        xmm0,xmm4  
+                //00007FFDE22AACC4  movups      xmm5,xmmword ptr [System.Diagnostics.Tracing.Statics.GetCustomAttribute[[System.__Canon, System.Private.CoreLib]](System.Type)+044E530h (07FFDE29D1C00h)]  
+                //00007FFDE22AACCB  por         xmm0,xmm5  
+                //00007FFDE22AACCF  addpd       xmm0,xmm1  
+                //00007FFDE22AACD3  movups      xmm1,xmmword ptr [rdx+10h]  
+                //00007FFDE22AACD7  movaps      xmm6,xmm1  
+                //00007FFDE22AACDA  psrlq       xmm6,20h  
+                //00007FFDE22AACDF  pxor        xmm2,xmm6  
+                //00007FFDE22AACE3  subpd       xmm2,xmm3  
+                //00007FFDE22AACE7  pand        xmm1,xmm4  
+                //00007FFDE22AACEB  por         xmm1,xmm5  
+                //00007FFDE22AACEF  addpd       xmm1,xmm2  
+                //00007FFDE22AACF3  movups      xmmword ptr [rcx],xmm0  
+                //00007FFDE22AACF6  movups      xmmword ptr [rcx+10h],xmm1  
 #else
                 return ConvertToDouble_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -176,6 +208,30 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<double> ConvertToDouble(Vector256<ulong> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.ConvertToDouble(value);
+                // .NET8 on Avx512: No hardware accelerated.
+                //   225: 		return Create(Vector128.ConvertToDouble(vector._lower), Vector128.ConvertToDouble(vector._upper));
+                //00007FFDAE85AD18  movups      xmm0,xmmword ptr [rdx]  
+                //00007FFDAE85AD1B  movaps      xmm1,xmm0  
+                //00007FFDAE85AD1E  psrlq       xmm1,20h  
+                //00007FFDAE85AD23  movups      xmm2,xmmword ptr [System.Diagnostics.Tracing.Statics.GetCustomAttribute[[System.__Canon, System.Private.CoreLib]](System.Type)+044E540h (07FFDAEF81C10h)]  
+                //00007FFDAE85AD2A  pxor        xmm1,xmm2  
+                //00007FFDAE85AD2E  movups      xmm3,xmmword ptr [System.Diagnostics.Tracing.Statics.GetCustomAttribute[[System.__Canon, System.Private.CoreLib]](System.Type)+044E550h (07FFDAEF81C20h)]  
+                //00007FFDAE85AD35  subpd       xmm1,xmm3  
+                //00007FFDAE85AD39  movups      xmm4,xmmword ptr [System.Diagnostics.Tracing.Statics.GetCustomAttribute[[System.__Canon, System.Private.CoreLib]](System.Type)+044E560h (07FFDAEF81C30h)]  
+                //00007FFDAE85AD40  pand        xmm0,xmm4  
+                //00007FFDAE85AD44  movups      xmm5,xmmword ptr [System.Diagnostics.Tracing.Statics.GetCustomAttribute[[System.__Canon, System.Private.CoreLib]](System.Type)+044E570h (07FFDAEF81C40h)]  
+                //00007FFDAE85AD4B  por         xmm0,xmm5  
+                //00007FFDAE85AD4F  addpd       xmm0,xmm1  
+                //00007FFDAE85AD53  movups      xmm1,xmmword ptr [rdx+10h]  
+                //00007FFDAE85AD57  movaps      xmm6,xmm1  
+                //00007FFDAE85AD5A  psrlq       xmm6,20h  
+                //00007FFDAE85AD5F  pxor        xmm2,xmm6  
+                //00007FFDAE85AD63  subpd       xmm2,xmm3  
+                //00007FFDAE85AD67  pand        xmm1,xmm4  
+                //00007FFDAE85AD6B  por         xmm1,xmm5  
+                //00007FFDAE85AD6F  addpd       xmm1,xmm2  
+                //00007FFDAE85AD73  movups      xmmword ptr [rcx],xmm0  
+                //00007FFDAE85AD76  movups      xmmword ptr [rcx+10h],xmm1  
 #else
                 return ConvertToDouble_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -289,6 +345,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<int> ConvertToInt32(Vector256<float> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.ConvertToInt32(value);
+                // .NET7~8 on Avx2~Avx512: It has hardware-accelerated.
+                //00007FFD4FE2531A  mov         rdx,1EE0012DCC0h  
+                //00007FFD4FE25324  vcvttps2dq  ymm0,ymmword ptr [rdx]  
+                //00007FFD4FE25328  vmovups     ymmword ptr [rbp-1E50h],ymm0  
 #else
                 return ConvertToInt32_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -330,6 +390,41 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<long> ConvertToInt64(Vector256<double> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.ConvertToInt64(value);
+                // .NET8 on Avx512: No hardware accelerated.
+                //   239: 		return Create(Vector128.ConvertToInt64(vector._lower), Vector128.ConvertToInt64(vector._upper));
+                //00007FFDAE85ADB0  sub         rsp,88h  
+                //00007FFDAE85ADB7  movups      xmm0,xmmword ptr [rdx]  
+                //00007FFDAE85ADBA  movaps      xmmword ptr [rsp+70h],xmm0  
+                //00007FFDAE85ADBF  mov         rax,qword ptr [rsp+70h]  
+                //00007FFDAE85ADC4  mov         qword ptr [rsp+60h],rax  
+                //00007FFDAE85ADC9  cvttsd2si   rax,mmword ptr [rsp+60h]  
+                //00007FFDAE85ADD0  mov         qword ptr [rsp+68h],rax  
+                //00007FFDAE85ADD5  mov         rax,qword ptr [rsp+68h]  
+                //00007FFDAE85ADDA  mov         r8,qword ptr [rsp+78h]  
+                //00007FFDAE85ADDF  mov         qword ptr [rsp+50h],r8  
+                //00007FFDAE85ADE4  cvttsd2si   r8,mmword ptr [rsp+50h]  
+                //00007FFDAE85ADEB  mov         qword ptr [rsp+58h],r8  
+                //00007FFDAE85ADF0  mov         r8,qword ptr [rsp+58h]  
+                //00007FFDAE85ADF5  mov         qword ptr [rsp+40h],rax  
+                //00007FFDAE85ADFA  mov         qword ptr [rsp+48h],r8  
+                //00007FFDAE85ADFF  movaps      xmm0,xmmword ptr [rsp+40h]  
+                //00007FFDAE85AE04  movups      xmm1,xmmword ptr [rdx+10h]  
+                //00007FFDAE85AE08  movaps      xmmword ptr [rsp+30h],xmm1  
+                //00007FFDAE85AE0D  mov         rax,qword ptr [rsp+30h]  
+                //00007FFDAE85AE12  mov         qword ptr [rsp+20h],rax  
+                //00007FFDAE85AE17  cvttsd2si   rax,mmword ptr [rsp+20h]  
+                //00007FFDAE85AE1E  mov         qword ptr [rsp+28h],rax  
+                //00007FFDAE85AE23  mov         rax,qword ptr [rsp+28h]  
+                //00007FFDAE85AE28  mov         rdx,qword ptr [rsp+38h]  
+                //00007FFDAE85AE2D  mov         qword ptr [rsp+10h],rdx  
+                //00007FFDAE85AE32  cvttsd2si   rdx,mmword ptr [rsp+10h]  
+                //00007FFDAE85AE39  mov         qword ptr [rsp+18h],rdx  
+                //00007FFDAE85AE3E  mov         rdx,qword ptr [rsp+18h]  
+                //00007FFDAE85AE43  mov         qword ptr [rsp],rax  
+                //00007FFDAE85AE47  mov         qword ptr [rsp+8],rdx  
+                //00007FFDAE85AE4C  movaps      xmm1,xmmword ptr [rsp]  
+                //00007FFDAE85AE50  movups      xmmword ptr [rcx],xmm0  
+                //00007FFDAE85AE53  movups      xmmword ptr [rcx+10h],xmm1  
 #else
                 return ConvertToInt64_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -409,6 +504,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<float> ConvertToSingle(Vector256<int> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.ConvertToSingle(value);
+                // .NET7~8 on Avx2~Avx512: It has hardware-accelerated.
+                //00007FFD87345494  mov         rdx,20180133148h  
+                //00007FFD8734549E  vcvtdq2ps   ymm0,ymmword ptr [rdx]  
+                //00007FFD873454A2  vmovups     ymmword ptr [rbp-1F10h],ymm0  
 #else
                 return ConvertToSingle_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -420,6 +519,23 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<float> ConvertToSingle(Vector256<uint> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.ConvertToSingle(value);
+                // .NET8 on Avx512: No hardware accelerated.
+                //00007FFDE22AAE90  movups      xmm0,xmmword ptr [rdx]  
+                //00007FFDE22AAE93  movaps      xmm1,xmm0  
+                //00007FFDE22AAE96  psrld       xmm1,10h  
+                //00007FFDE22AAE9B  cvtdq2ps    xmm1,xmm1  
+                //00007FFDE22AAE9E  movups      xmm2,xmmword ptr [System.Diagnostics.Tracing.Statics.GetCustomAttribute[[System.__Canon, System.Private.CoreLib]](System.Type)+044E580h (07FFDE29D1C50h)]  
+                //00007FFDE22AAEA5  mulps       xmm1,xmm2  
+                //00007FFDE22AAEA8  movups      xmm3,xmmword ptr [System.Diagnostics.Tracing.Statics.GetCustomAttribute[[System.__Canon, System.Private.CoreLib]](System.Type)+044E590h (07FFDE29D1C60h)]  
+                //00007FFDE22AAEAF  pand        xmm0,xmm3  
+                //00007FFDE22AAEB3  cvtdq2ps    xmm0,xmm0  
+                //00007FFDE22AAEB6  addps       xmm0,xmm1  
+                //00007FFDE22AAEB9  movups      xmm1,xmmword ptr [rdx+10h]  
+                //00007FFDE22AAEBD  movaps      xmm4,xmm1  
+                //00007FFDE22AAEC0  psrld       xmm4,10h  
+                //00007FFDE22AAEC5  cvtdq2ps    xmm4,xmm4  
+                //00007FFDE22AAEC8  mulps       xmm2,xmm4  
+                //00007FFDE22AAECB  pand        xmm1,xmm3  
 #else
                 return ConvertToSingle_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -474,6 +590,24 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<uint> ConvertToUInt32(Vector256<float> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.ConvertToUInt32(value);
+                // .NET8 on Avx512: No hardware accelerated.
+                //   275: 		return Create(Vector128.ConvertToUInt32(vector._lower), Vector128.ConvertToUInt32(vector._upper));
+                //00007FFDE22AAEE0  sub         rsp,88h  
+                //00007FFDE22AAEE7  movups      xmm0,xmmword ptr [rdx]  
+                //00007FFDE22AAEEA  movaps      xmmword ptr [rsp+70h],xmm0  
+                //00007FFDE22AAEEF  mov         rax,qword ptr [rsp+70h]  
+                //00007FFDE22AAEF4  mov         qword ptr [rsp+60h],rax  
+                //00007FFDE22AAEF9  cvttss2si   rax,dword ptr [rsp+60h]  
+                //00007FFDE22AAF00  mov         dword ptr [rsp+68h],eax  
+                //00007FFDE22AAF04  cvttss2si   rax,dword ptr [rsp+64h]  
+                //00007FFDE22AAF0B  mov         dword ptr [rsp+6Ch],eax  
+                //00007FFDE22AAF0F  mov         rax,qword ptr [rsp+68h]  
+                //00007FFDE22AAF14  mov         r8,qword ptr [rsp+78h]  
+                //00007FFDE22AAF19  mov         qword ptr [rsp+50h],r8  
+                //00007FFDE22AAF1E  cvttss2si   r8,dword ptr [rsp+50h]  
+                //00007FFDE22AAF25  mov         dword ptr [rsp+58h],r8d  
+                //00007FFDE22AAF2A  cvttss2si   r8,dword ptr [rsp+54h]  
+                //00007FFDE22AAF31  mov         dword ptr [rsp+5Ch],r8d  
 #else
                 return ConvertToUInt32_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -511,6 +645,24 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<ulong> ConvertToUInt64(Vector256<double> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.ConvertToUInt64(value);
+                // .NET8 on Avx512: No hardware accelerated.
+                //   283: 		return Create(Vector128.ConvertToUInt64(vector._lower), Vector128.ConvertToUInt64(vector._upper));
+                //00007FFDE22AAFC0  push        rdi  
+                //00007FFDE22AAFC1  push        rsi  
+                //00007FFDE22AAFC2  push        rbx  
+                //00007FFDE22AAFC3  sub         rsp,0B0h  
+                //00007FFDE22AAFCA  movaps      xmmword ptr [rsp+0A0h],xmm6  
+                //00007FFDE22AAFD2  mov         rsi,rcx  
+                //00007FFDE22AAFD5  mov         rbx,rdx  
+                //00007FFDE22AAFD8  movups      xmm0,xmmword ptr [rbx]  
+                //00007FFDE22AAFDB  movaps      xmmword ptr [rsp+90h],xmm0  
+                //00007FFDE22AAFE3  mov         rax,qword ptr [rsp+90h]  
+                //00007FFDE22AAFEB  mov         qword ptr [rsp+80h],rax  
+                //00007FFDE22AAFF3  movsd       xmm0,mmword ptr [rsp+80h]  
+                //00007FFDE22AAFFC  call        qword ptr [System.Diagnostics.Tracing.Statics.GetCustomAttribute[[System.__Canon, System.Private.CoreLib]](System.Type)+05AE748h (07FFDE2B31E18h)]  
+                //00007FFDE22AB002  mov         qword ptr [rsp+88h],rax  
+                //00007FFDE22AB00A  mov         rdi,qword ptr [rsp+88h]  
+                //00007FFDE22AB012  mov         rax,qword ptr [rsp+98h]  
 #else
                 return ConvertToUInt64_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -918,6 +1070,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<float> Narrow(Vector256<double> lower, Vector256<double> upper) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Narrow(lower, upper);
+                // .NET7~8 on Avx2~Avx512: It has hardware-accelerated.
+                //00007FFD8734ECBC  mov         rdx,2018012EB20h  
+                //00007FFD8734ECC6  vcvtpd2ps   xmm0,ymmword ptr [rdx]  
+                //00007FFD8734ECCA  mov         rdx,2018012EAF0h  
+                //00007FFD8734ECD4  vcvtpd2ps   xmm1,ymmword ptr [rdx]  
+                //00007FFD8734ECD8  vinsertf128 ymm0,ymm0,xmm1,1  
+                //00007FFD8734ECDE  vmovups     ymmword ptr [rbp-5710h],ymm0  
 #else
                 return Narrow_Basic(lower, upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -929,6 +1088,15 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<sbyte> Narrow(Vector256<short> lower, Vector256<short> upper) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Narrow(lower, upper);
+                // .NET7~8 on Avx2~Avx512: It has hardware-accelerated.
+                //00007FFD8734ED8B  mov         rdx,20180131538h  
+                //00007FFD8734ED95  vmovups     ymm0,ymmword ptr [rdx]  
+                //00007FFD8734ED99  vpmovwb     xmm0,ymm0  
+                //00007FFD8734ED9F  mov         rdx,20180131508h  
+                //00007FFD8734EDA9  vmovups     ymm1,ymmword ptr [rdx]  
+                //00007FFD8734EDAD  vpmovwb     xmm1,ymm1  
+                //00007FFD8734EDB3  vinserti128 ymm0,ymm0,xmm1,1  
+                //00007FFD8734EDB9  vmovups     ymmword ptr [rbp-5770h],ymm0  
 #else
                 return Narrow_Basic(lower, upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -971,6 +1139,16 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<int> Narrow(Vector256<long> lower, Vector256<long> upper) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Narrow(lower, upper);
+                // .NET8 on Avx512: Poor performance!
+                // .NET7~8 on Avx2(Not use Avx512): It has hardware-accelerated.
+                //00007FFD8734EF41  mov         rdx,20180134D58h  
+                //00007FFD8734EF4B  vmovups     ymm0,ymmword ptr [rdx]  
+                //00007FFD8734EF4F  vpmovqd     xmm0,ymm0  
+                //00007FFD8734EF55  mov         rdx,20180134D28h  
+                //00007FFD8734EF5F  vmovups     ymm1,ymmword ptr [rdx]  
+                //00007FFD8734EF63  vpmovqd     xmm1,ymm1  
+                //00007FFD8734EF69  vinserti128 ymm0,ymm0,xmm1,1  
+                //00007FFD8734EF6F  vmovups     ymmword ptr [rbp-5830h],ymm0  
 #else
                 return Narrow_Basic(lower, upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -982,6 +1160,16 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<uint> Narrow(Vector256<ulong> lower, Vector256<ulong> upper) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Narrow(lower, upper);
+                // .NET7~8 on Avx2(Not use Avx512): It has hardware-accelerated.
+                //00007FFD8734F1D2  mov         rdx,20180135B60h  
+                //00007FFD8734F1DC  vmovups     ymm0,ymmword ptr [rdx]  
+                //00007FFD8734F1E0  vpmovqd     xmm0,ymm0  
+                //00007FFD8734F1E6  mov         rdx,20180135B30h  
+                //00007FFD8734F1F0  vmovups     ymm1,ymmword ptr [rdx]  
+                //00007FFD8734F1F4  vpmovqd     xmm1,ymm1  
+                //00007FFD8734F1FA  vinserti128 ymm0,ymm0,xmm1,1  
+                //00007FFD8734F200  vmovups     ymmword ptr [rbp-5950h],ymm0  
+
 #else
                 return Narrow_Basic(lower, upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -1871,6 +2059,12 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<long> ShiftRightArithmetic(Vector256<long> value, int shiftAmount) {
 #if BCL_OVERRIDE_BASE_FIXED && NET_X_0_OR_GREATER
                 return Vector256.ShiftRightArithmetic(value, shiftAmount); // .NET7 no hardware acceleration! X86(sse, avx)
+                // .NET8 on Avx512: It has hardware-accelerated.
+                //00007FFD87350CCC  mov         edx,dword ptr [rbp-4]  
+                //00007FFD87350CCF  and         edx,3Fh  
+                //00007FFD87350CD2  vmovd       xmm1,edx  
+                //00007FFD87350CD6  vpsraq      ymm0,ymm0,xmm1  
+                //00007FFD87350CDC  vmovups     ymmword ptr [rbp-6630h],ymm0  
 #else
                 return ShiftRightArithmetic_Basic(value, shiftAmount);
 #endif // BCL_OVERRIDE_BASE_FIXED
@@ -2812,6 +3006,35 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<float> Shuffle(Vector256<float> vector, Vector256<int> indices) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Shuffle(vector, indices);
+                // .NET8 on Avx512: No hardware accelerated.
+                //  1475: 		Unsafe.SkipInit<Vector256<float>>(out var value);
+                //00007FFDE22ACBE0  sub         rsp,28h  
+                //  1476: 		for (int i = 0; i < Vector256<float>.Count; i++)
+                //00007FFDE22ACBE4  xor         eax,eax  
+                //  1477: 		{
+                //  1478: 			uint elementUnsafe = (uint)GetElementUnsafe(in indices, i);
+                //00007FFDE22ACBE6  movsxd      r10,eax  
+                //00007FFDE22ACBE9  mov         r9d,dword ptr [r8+r10*4]  
+                //  1479: 			float value2 = 0f;
+                //00007FFDE22ACBED  xorps       xmm0,xmm0  
+                //  1480: 			if (elementUnsafe < Vector256<float>.Count)
+                //00007FFDE22ACBF0  cmp         r9d,8  
+                //00007FFDE22ACBF4  jae         System.Runtime.Intrinsics.Vector256.Shuffle(System.Runtime.Intrinsics.Vector256`1<Single>, System.Runtime.Intrinsics.Vector256`1<Int32>)+01Fh (07FFDE22ACBFFh)  
+                //  1481: 			{
+                //  1482: 				value2 = GetElementUnsafe(in vector, (int)elementUnsafe);
+                //00007FFDE22ACBF6  movsxd      r9,r9d  
+                //00007FFDE22ACBF9  movss       xmm0,dword ptr [rdx+r9*4]  
+                //  1483: 			}
+                //  1484: 			value.SetElementUnsafe(i, value2);
+                //00007FFDE22ACBFF  lea         r9,[rsp+8]  
+                //00007FFDE22ACC04  movss       dword ptr [r9+r10*4],xmm0  
+                //  1476: 		for (int i = 0; i < Vector256<float>.Count; i++)
+                //00007FFDE22ACC0A  inc         eax  
+                //00007FFDE22ACC0C  cmp         eax,8  
+                //00007FFDE22ACC0F  jl          System.Runtime.Intrinsics.Vector256.Shuffle(System.Runtime.Intrinsics.Vector256`1<Single>, System.Runtime.Intrinsics.Vector256`1<Int32>)+06h (07FFDE22ACBE6h)  
+                //  1485: 		}
+                //  1486: 		return value;
+                //00007FFDE22ACC11  movups      xmm0,xmmword ptr [rsp+8]  
 #else
                 return Shuffle_Basic(vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -2833,6 +3056,35 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<sbyte> Shuffle(Vector256<sbyte> vector, Vector256<sbyte> indices) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Shuffle(vector, indices);
+                // .NET8 on Avx512: No hardware accelerated.
+                //  1388: 		Unsafe.SkipInit<Vector256<sbyte>>(out var value);
+                //00007FFDE22ACA50  sub         rsp,28h  
+                //  1389: 		for (int i = 0; i < Vector256<sbyte>.Count; i++)
+                //00007FFDE22ACA54  xor         eax,eax  
+                //  1390: 		{
+                //  1391: 			byte b = (byte)GetElementUnsafe(in indices, i);
+                //00007FFDE22ACA56  movsxd      r10,eax  
+                //00007FFDE22ACA59  movzx       r9d,byte ptr [r8+r10]  
+                //  1392: 			sbyte value2 = 0;
+                //00007FFDE22ACA5E  xor         r11d,r11d  
+                //  1393: 			if (b < Vector256<sbyte>.Count)
+                //00007FFDE22ACA61  cmp         r9d,20h  
+                //00007FFDE22ACA65  jge         System.Runtime.Intrinsics.Vector256.Shuffle(System.Runtime.Intrinsics.Vector256`1<SByte>, System.Runtime.Intrinsics.Vector256`1<SByte>)+01Fh (07FFDE22ACA6Fh)  
+                //  1394: 			{
+                //  1395: 				value2 = GetElementUnsafe(in vector, b);
+                //00007FFDE22ACA67  mov         r11d,r9d  
+                //00007FFDE22ACA6A  movsx       r11,byte ptr [rdx+r11]  
+                //  1396: 			}
+                //  1397: 			value.SetElementUnsafe(i, value2);
+                //00007FFDE22ACA6F  lea         r9,[rsp+8]  
+                //00007FFDE22ACA74  mov         byte ptr [r9+r10],r11b  
+                //  1389: 		for (int i = 0; i < Vector256<sbyte>.Count; i++)
+                //00007FFDE22ACA78  inc         eax  
+                //00007FFDE22ACA7A  cmp         eax,20h  
+                //00007FFDE22ACA7D  jl          System.Runtime.Intrinsics.Vector256.Shuffle(System.Runtime.Intrinsics.Vector256`1<SByte>, System.Runtime.Intrinsics.Vector256`1<SByte>)+06h (07FFDE22ACA56h)  
+                //  1398: 		}
+                //  1399: 		return value;
+                //00007FFDE22ACA7F  movups      xmm0,xmmword ptr [rsp+8]  
 #else
                 return Shuffle_Basic(vector, indices);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -3182,6 +3434,21 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static float Sum(Vector256<float> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Sum(value);
+                // .NET7~8 on Avx2(Not use Avx512): It has hardware-accelerated.
+                //00007FFD87352FB2  mov         rcx,2018012DCC0h  
+                //00007FFD87352FBC  vmovups     ymm0,ymmword ptr [rcx]  
+                //00007FFD87352FC0  vmovups     ymmword ptr [rbp-75D0h],ymm0  
+                //00007FFD87352FC8  vmovups     ymm0,ymmword ptr [rbp-75D0h]  
+                //00007FFD87352FD0  vhaddps     ymm0,ymm0,ymmword ptr [rbp-75D0h]  
+                //00007FFD87352FD8  vmovups     ymmword ptr [rbp-75F0h],ymm0  
+                //00007FFD87352FE0  vmovups     ymm0,ymmword ptr [rbp-75F0h]  
+                //00007FFD87352FE8  vhaddps     ymm0,ymm0,ymmword ptr [rbp-75F0h]  
+                //00007FFD87352FF0  vmovups     ymmword ptr [rbp-7610h],ymm0  
+                //00007FFD87352FF8  vmovups     ymm0,ymmword ptr [rbp-7610h]  
+                //00007FFD87353000  vextractf128 xmm0,ymm0,1  
+                //00007FFD87353006  vmovups     xmm1,xmmword ptr [rbp-7610h]  
+                //00007FFD8735300E  vaddps      xmm0,xmm0,xmm1  
+                //00007FFD87353012  vmovss      dword ptr [rbp-7618h],xmm0  
 #else
                 return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -3203,6 +3470,20 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static sbyte Sum(Vector256<sbyte> value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Sum(value);
+                // .NET8 on Avx512: Poor performance!
+                //  1606: 		T left = Vector128.Sum(vector._lower);
+                //00007FFD875A8780  push        rbp  
+                //00007FFD875A8781  sub         rsp,60h  
+                //00007FFD875A8785  vzeroupper  
+                //00007FFD875A8788  lea         rbp,[rsp+60h]  
+                //00007FFD875A878D  mov         qword ptr [rbp+10h],rcx  
+                //00007FFD875A8791  mov         rcx,qword ptr [rbp+10h]  
+                //00007FFD875A8795  vmovups     xmm0,xmmword ptr [rcx]  
+                //00007FFD875A8799  vmovaps     xmmword ptr [rbp-20h],xmm0  
+                //00007FFD875A879E  lea         rcx,[rbp-20h]  
+                //00007FFD875A87A2  call        qword ptr [CLRStub[MethodDescPrestub]@00007FFD873F7F00 (07FFD873F7F00h)]  
+                //00007FFD875A87A8  mov         dword ptr [rbp-4],eax  
+                //  1607: 		return Scalar<T>.Add(left, Vector128.Sum(vector._upper));
 #else
                 return Sum_Basic(value);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -3516,6 +3797,19 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static void Widen(Vector256<float> source, out Vector256<double> lower, out Vector256<double> upper) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 (lower, upper) = Vector256.Widen(source);
+                // .NET8 on Avx512: Poor performance!
+                //  2374:                     (var low, var high) = Vector256.Widen(Vector256s<Single>.Demo);
+                //00007FFD87354139  mov         rdx,2018012DCC0h  
+                //00007FFD87354143  vmovups     ymm0,ymmword ptr [rdx]  
+                //00007FFD87354147  vmovups     ymmword ptr [rbzzzzzzzp-0A2F0h],ymm0  
+                //00007FFD8735414F  lea         rdx,[rbp-0A2F0h]  
+                //00007FFD87354156  lea         rcx,[rbp-7BE0h]  
+                //00007FFD8735415D  call        qword ptr [CLRStub[MethodDescPrestub]@00007FFD86F055F0 (07FFD86F055F0h)]  
+                //00007FFD87354163  vmovups     ymm0,ymmword ptr [rbp-7BE0h]  
+                //00007FFD8735416B  vmovups     ymmword ptr [rbp-30h],ymm0  
+                //00007FFD87354170  vmovups     ymm0,ymmword ptr [rbp-7BC0h]  
+                //00007FFD87354178  vmovups     ymmword ptr [rbp-50h],ymm0  
+                //  2375:                     WriteLine(writer, indent, "Widen(Vector256s<Single>.Demo):\t{0}, {1}", low, high);
 #else
                 Widen_Basic(source, out lower, out upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -3527,6 +3821,21 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static void Widen(Vector256<sbyte> source, out Vector256<short> lower, out Vector256<short> upper) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 (lower, upper) = Vector256.Widen(source);
+                // .NET8 on Avx512: Poor performance!
+                //#if  1670: 		return (WidenLower(source), WidenUpper(source));
+                //00007FFDE22ACE80  movups      xmm0,xmmword ptr [rdx]  
+                //00007FFDE22ACE83  pmovsxbw    xmm1,xmm0  
+                //00007FFDE22ACE88  psrldq      xmm0,8  
+                //00007FFDE22ACE8D  pmovsxbw    xmm0,xmm0  
+                //00007FFDE22ACE92  movups      xmm2,xmmword ptr [rdx+10h]  
+                //00007FFDE22ACE96  pmovsxbw    xmm3,xmm2  
+                //00007FFDE22ACE9B  psrldq      xmm2,8  
+                //00007FFDE22ACEA0  pmovsxbw    xmm2,xmm2  
+                //00007FFDE22ACEA5  movups      xmmword ptr [rcx],xmm1  
+                //00007FFDE22ACEA8  movups      xmmword ptr [rcx+10h],xmm0  
+                //00007FFDE22ACEAC  movups      xmmword ptr [rcx+20h],xmm3  
+                //00007FFDE22ACEB0  movups      xmmword ptr [rcx+30h],xmm2  
+                //00007FFDE22ACEB4  mov         rax,rcx  
 #else
                 Widen_Basic(source, out lower, out upper);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD

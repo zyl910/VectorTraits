@@ -102,6 +102,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 if (Vector256.IsHardwareAccelerated) {
                     return Vector256.Abs(value);
+                    // .NET8 on Avx512: It has hardware-accelerated.
+                    //00007FFD84153E6E  mov         rdx,2E400135C18h  
+                    //00007FFD84153E78  vpabsq      ymm0,ymmword ptr [rdx]  
+                    //00007FFD84153E7E  vmovups     ymmword ptr [rbp-810h],ymm0  
                 } else {
                     return Abs_Basic(value);
                 }
@@ -718,6 +722,35 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<T> ConditionalSelect<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.ConditionalSelect(condition, left, right);
+                // -- Single --
+                // .NET8 on Avx512: It has hardware-accelerated.
+                //00007FFD4FE248F8  mov         rdx,1EE0012DF00h  
+                //00007FFD4FE24902  vmovups     ymm0,ymmword ptr [rdx]  
+                //00007FFD4FE24906  mov         rdx,1EE0012DCC0h  
+                //00007FFD4FE24910  vmovups     ymm1,ymmword ptr [rdx]  
+                //00007FFD4FE24914  mov         rdx,1EE0012E8B8h  
+                //00007FFD4FE2491E  vpternlogd  ymm0,ymm1,ymmword ptr [rdx],0CAh  
+                //00007FFD4FE24925  vmovups     ymmword ptr [rbp-19D0h],ymm0  
+
+                // -- Double --
+                // .NET8 on Avx512: It has hardware-accelerated.
+                //00007FFD4FE249D2  mov         rdx,1EE0012ED60h  
+                //00007FFD4FE249DC  vmovups     ymm0,ymmword ptr [rdx]  
+                //00007FFD4FE249E0  mov         rdx,1EE0012EB20h  
+                //00007FFD4FE249EA  vmovups     ymm1,ymmword ptr [rdx]  
+                //00007FFD4FE249EE  mov         rdx,1EE0012F6C0h  
+                //00007FFD4FE249F8  vpternlogq  ymm0,ymm1,ymmword ptr [rdx],0CAh  
+                //00007FFD4FE249FF  vmovups     ymmword ptr [rbp-1A30h],ymm0  
+
+                // -- Byte --
+                // .NET8 on Avx512: It has hardware-accelerated.
+                //00007FFD4FE24AAC  mov         rdx,1EE0012FB68h  
+                //00007FFD4FE24AB6  vmovups     ymm0,ymmword ptr [rdx]  
+                //00007FFD4FE24ABA  mov         rdx,1EE0012F928h  
+                //00007FFD4FE24AC4  vmovups     ymm1,ymmword ptr [rdx]  
+                //00007FFD4FE24AC8  mov         rdx,1EE001304C8h  
+                //00007FFD4FE24AD2  vpternlogd  ymm0,ymm1,ymmword ptr [rdx],0CAh  
+                //00007FFD4FE24AD9  vmovups     ymmword ptr [rbp-1A90h],ymm0  
 #else
                 return ConditionalSelect_Basic(condition, left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -1516,65 +1549,111 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.EqualsAll(Vector256{float}, Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector256<float> left, Vector256<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAll(left, right);
+                // .NET8 on Avx512: It has hardware-accelerated.
+                //00007FFD87347EBD  mov         rcx,2018012E260h  
+                //00007FFD87347EC7  vcmpps      k1,ymm0,ymmword ptr [rcx],0  
+                //00007FFD87347ECE  kortestb    k1,k1  
+                //00007FFD87347ED2  setb        cl  
+                //00007FFD87347ED5  movzx       ecx,cl  
+#else
                 return YIsAllTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAll(Vector256{double}, Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector256<double> left, Vector256<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAll(left, right);
+#else
                 return YIsAllTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAll(Vector256{sbyte}, Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector256<sbyte> left, Vector256<sbyte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAll(left, right);
+#else
                 return YIsAllTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAll(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector256<byte> left, Vector256<byte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAll(left, right);
+#else
                 return YIsAllTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAll(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector256<short> left, Vector256<short> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAll(left, right);
+#else
                 return YIsAllTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAll(Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector256<ushort> left, Vector256<ushort> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAll(left, right);
+#else
                 return YIsAllTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAll(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector256<int> left, Vector256<int> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAll(left, right);
+#else
                 return YIsAllTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAll(Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector256<uint> left, Vector256<uint> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAll(left, right);
+#else
                 return YIsAllTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAll(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector256<long> left, Vector256<long> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAll(left, right);
+#else
                 return YIsAllTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAll(Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAll(Vector256<ulong> left, Vector256<ulong> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAll(left, right);
+#else
                 return YIsAllTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
 
@@ -1588,65 +1667,113 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.EqualsAny(Vector256{float}, Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector256<float> left, Vector256<float> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAny(left, right);
+                // .NET7~8 on Avx2(Not use Avx512): It has hardware-accelerated.
+                //00007FFD87348765  mov         rcx,2018012E3E0h  
+                //00007FFD8734876F  vcmpeqps    ymm0,ymm0,ymmword ptr [rcx]  
+                //00007FFD87348774  vmovups     ymmword ptr [rbp-0AB10h],ymm0  
+                //00007FFD8734877C  vmovups     ymm0,ymmword ptr [rbp-0AB10h]  
+                //00007FFD87348784  vptest      ymm0,ymmword ptr [rbp-0AB10h]  
+                //00007FFD8734878D  setne       cl  
+                //00007FFD87348790  movzx       ecx,cl  
+#else
                 return YIsAnyTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAny(Vector256{double}, Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector256<double> left, Vector256<double> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAny(left, right);
+#else
                 return YIsAnyTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAny(Vector256{sbyte}, Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector256<sbyte> left, Vector256<sbyte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAny(left, right);
+#else
                 return YIsAnyTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAny(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector256<byte> left, Vector256<byte> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAny(left, right);
+#else
                 return YIsAnyTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAny(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector256<short> left, Vector256<short> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAny(left, right);
+#else
                 return YIsAnyTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAny(Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector256<ushort> left, Vector256<ushort> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAny(left, right);
+#else
                 return YIsAnyTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAny(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector256<int> left, Vector256<int> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAny(left, right);
+#else
                 return YIsAnyTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAny(Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector256<uint> left, Vector256<uint> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAny(left, right);
+#else
                 return YIsAnyTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAny(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector256<long> left, Vector256<long> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAny(left, right);
+#else
                 return YIsAnyTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.EqualsAny(Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool EqualsAny(Vector256<ulong> left, Vector256<ulong> right) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return Vector256.EqualsAny(left, right);
+#else
                 return YIsAnyTrue(Equals(left, right));
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
 
@@ -3743,6 +3870,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<long> Max(Vector256<long> left, Vector256<long> right) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Max(left, right);
+                // .NET8 on Avx512: It has hardware-accelerated.
+                //00007FFD8734DA45  mov         rdx,20180135478h  
+                //00007FFD8734DA4F  vpmaxsq     ymm0,ymm0,ymmword ptr [rdx]  
+                //00007FFD8734DA55  vmovups     ymmword ptr [rbp-4E50h],ymm0  
 #else
                 return Max_Conditional(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -3754,6 +3885,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<ulong> Max(Vector256<ulong> left, Vector256<ulong> right) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Max(left, right);
+                // .NET8 on Avx512: It has hardware-accelerated.
+                //00007FFD8734DB10  mov         rdx,20180136280h  
+                //00007FFD8734DB1A  vpmaxuq     ymm0,ymm0,ymmword ptr [rdx]  
+                //00007FFD8734DB20  vmovups     ymmword ptr [rbp-4EB0h],ymm0  
 #else
                 return Max_Conditional(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -3945,6 +4080,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<long> Min(Vector256<long> left, Vector256<long> right) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Min(left, right);
+                // .NET8 on Avx512: It has hardware-accelerated.
+                //00007FFD8734E227  mov         rdx,20180135478h  
+                //00007FFD8734E231  vpminsq     ymm0,ymm0,ymmword ptr [rdx]  
+                //00007FFD8734E237  vmovups     ymmword ptr [rbp-5210h],ymm0  
 #else
                 return Min_Conditional(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -3956,6 +4095,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<ulong> Min(Vector256<ulong> left, Vector256<ulong> right) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Min(left, right);
+                // .NET8 on Avx512: It has hardware-accelerated.
+                //00007FFD8734E2F2  mov         rdx,20180136280h  
+                //00007FFD8734E2FC  vpminuq     ymm0,ymm0,ymmword ptr [rdx]  
+                //00007FFD8734E302  vmovups     ymmword ptr [rbp-5270h],ymm0  
 #else
                 return Min_Conditional(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -4160,6 +4303,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<long> Multiply(Vector256<long> left, Vector256<long> right) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Multiply(left, right);
+                // .NET8 on Avx512: It has hardware-accelerated.
+                //00007FFD8734EB34  mov         rdx,20180135808h  
+                //00007FFD8734EB3E  vpmullq     ymm0,ymm0,ymmword ptr [rdx]  
+                //00007FFD8734EB44  vmovups     ymmword ptr [rbp-5650h],ymm0  
 #else
                 return Multiply_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -4171,6 +4318,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<ulong> Multiply(Vector256<ulong> left, Vector256<ulong> right) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.Multiply(left, right);
+                // .NET8 on Avx512: It has hardware-accelerated.
+                //00007FFD8734EBFF  mov         rdx,20180136610h  
+                //00007FFD8734EC09  vpmullq     ymm0,ymm0,ymmword ptr [rdx]  
+                //00007FFD8734EC0F  vmovups     ymmword ptr [rbp-56B0h],ymm0  
 #else
                 return Multiply_Basic(left, right);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -4627,6 +4778,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<T> OnesComplement<T>(Vector256<T> vector) where T : struct {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return Vector256.OnesComplement(vector);
+                // .NET8 on Avx512: It has hardware-accelerated.
+                //00007FFD8734FA2F  mov         rdx,2018012DCC0h  
+                //00007FFD8734FA39  vpternlogd  ymm0,ymm0,ymmword ptr [rdx],55h  
+                //00007FFD8734FA40  vmovups     ymmword ptr [rbp-5D70h],ymm0  
 #else
                 return OnesComplement_Basic(vector);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
