@@ -17,7 +17,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         partial class Statics {
 
 #if NET8_0_OR_GREATER
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.YBitToByte_IsAccelerated"/>
             public static bool YBitToByte_IsAccelerated {
                 get {
@@ -29,12 +29,12 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToByte"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<byte> YBitToByte(uint value) {
+            public static Vector512<byte> YBitToByte(ulong value) {
                 Vector512<byte> a = Vector512.Create(value).AsByte();
                 Vector512<byte> indices = Vector512Constants.YBitToByte_Shuffle_Indices;
                 Vector512<byte> bitPosMask = Vector512Constants.MaskBitPosSerialRotate8;
                 // Duplicate 8bit value to 64bit
-                Vector512<byte> f = Avx512.Shuffle(a, indices);
+                Vector512<byte> f = Avx512BW.Shuffle(a, indices);
                 // Check bit.
                 Vector512<byte> hit = BitwiseAnd(f, bitPosMask);
                 Vector512<byte> rt = OnesComplement(Equals(hit, Vector512<byte>.Zero));
@@ -53,7 +53,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToInt16"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<short> YBitToInt16(uint value) {
+            public static Vector512<short> YBitToInt16(ulong value) {
                 Vector512<short> bitPosMask = Vector512Constants.MaskBitPosSerialRotate16;
                 // Duplicate 16bit value
                 Vector512<short> a = Vector512.Create((ushort)value).AsInt16();
@@ -75,7 +75,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToInt32"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<int> YBitToInt32(uint value) {
+            public static Vector512<int> YBitToInt32(ulong value) {
                 Vector512<int> bitPosMask = Vector512Constants.MaskBitPosSerialRotate32;
                 // Duplicate 32bit value
                 Vector512<int> a = Vector512.Create((uint)value).AsInt32();
@@ -97,7 +97,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToInt64"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> YBitToInt64(uint value) {
+            public static Vector512<long> YBitToInt64(ulong value) {
                 Vector512<long> bitPosMask = Vector512Constants.MaskBitPosSerialRotate64;
                 // Duplicate 64bit value
                 Vector512<long> a = Vector512.Create((ulong)value).AsInt64();
@@ -107,7 +107,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.YClamp_AcceleratedTypes"/>
             public static TypeCodeFlags YClamp_AcceleratedTypes {
                 get {

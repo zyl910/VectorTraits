@@ -26,7 +26,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         /// <inheritdoc cref="IWVectorTraits512.YBitToByte"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector512<byte> YBitToByte(uint value) {
+        public virtual Vector512<byte> YBitToByte(ulong value) {
             return Statics.YBitToByte(value);
         }
 
@@ -41,7 +41,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         /// <inheritdoc cref="IWVectorTraits512.YBitToInt16"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector512<short> YBitToInt16(uint value) {
+        public virtual Vector512<short> YBitToInt16(ulong value) {
             return Statics.YBitToInt16(value);
         }
 
@@ -56,7 +56,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         /// <inheritdoc cref="IWVectorTraits512.YBitToInt32"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector512<int> YBitToInt32(uint value) {
+        public virtual Vector512<int> YBitToInt32(ulong value) {
             return Statics.YBitToInt32(value);
         }
 
@@ -71,7 +71,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         /// <inheritdoc cref="IWVectorTraits512.YBitToInt64"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector512<long> YBitToInt64(uint value) {
+        public virtual Vector512<long> YBitToInt64(ulong value) {
             return Statics.YBitToInt64(value);
         }
 

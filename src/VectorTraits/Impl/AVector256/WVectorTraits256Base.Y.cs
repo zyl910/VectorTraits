@@ -62,6 +62,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YBitToByte_Widen(uint value) {
+                if (!BitConverter.IsLittleEndian) {
+                    value = MathBinaryPrimitives.ReverseEndianness(value);
+                }
                 Vector256<byte> a = Vector256.Create(value).AsByte();
                 Vector256<int> scale = Vector256.Create(0x01010101);
                 Vector256<byte> bitPosMask = Vector256Constants.MaskBitPosSerialRotate8;

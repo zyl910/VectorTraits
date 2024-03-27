@@ -32,7 +32,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits512.YBitToByte"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector512<byte> YBitToByte(uint value) {
+        public static Vector512<byte> YBitToByte(ulong value) {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YBitToByte(value);
 #else
@@ -55,7 +55,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits512.YBitToInt16"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector512<short> YBitToInt16(uint value) {
+        public static Vector512<short> YBitToInt16(ulong value) {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YBitToInt16(value);
 #else
@@ -78,7 +78,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits512.YBitToInt32"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector512<int> YBitToInt32(uint value) {
+        public static Vector512<int> YBitToInt32(ulong value) {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YBitToInt32(value);
 #else
@@ -101,7 +101,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits512.YBitToInt64"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector512<long> YBitToInt64(uint value) {
+        public static Vector512<long> YBitToInt64(ulong value) {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YBitToInt64(value);
 #else

@@ -57,6 +57,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YBitToByte_Widen(ulong value) {
+                if (!BitConverter.IsLittleEndian) {
+                    value = MathBinaryPrimitives.ReverseEndianness(value);
+                }
                 Vector<byte> a = new Vector<ulong>(value).AsByte();
                 Vector<int> scale = new Vector<int>(0x01010101);
                 Vector<byte> bitPosMask = Vectors<byte>.MaskBitPosSerialRotate;

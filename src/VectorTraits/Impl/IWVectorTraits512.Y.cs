@@ -39,7 +39,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">Source value (源值).</param>
         /// <returns>Returns the converted vector (返回转换后的向量).</returns>
         /// <seealso cref="YBitToByte_IsAccelerated"/>
-        Vector512<byte> YBitToByte(uint value);
+        Vector512<byte> YBitToByte(ulong value);
 
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">Source value (源值).</param>
         /// <returns>Returns the converted vector (返回转换后的向量).</returns>
         /// <seealso cref="YBitToInt16_IsAccelerated"/>
-        Vector512<short> YBitToInt16(uint value);
+        Vector512<short> YBitToInt16(ulong value);
 
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">Source value (源值).</param>
         /// <returns>Returns the converted vector (返回转换后的向量).</returns>
         /// <seealso cref="YBitToInt32_IsAccelerated"/>
-        Vector512<int> YBitToInt32(uint value);
+        Vector512<int> YBitToInt32(ulong value);
 
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="value">Source value (源值).</param>
         /// <returns>Returns the converted vector (返回转换后的向量).</returns>
         /// <seealso cref="YBitToInt64_IsAccelerated"/>
-        Vector512<long> YBitToInt64(uint value);
+        Vector512<long> YBitToInt64(ulong value);
 
 
         /// <summary>

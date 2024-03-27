@@ -15,7 +15,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
 
     partial class WVectorTraits512Avx512Abstract {
 #if NET8_0_OR_GREATER
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.YBitToByte_IsAccelerated"/>
         public override bool YBitToByte_IsAccelerated {
             get {
@@ -26,7 +26,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         /// <inheritdoc cref="IWVectorTraits512.YBitToByte"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override Vector512<byte> YBitToByte(uint value) {
+        public override Vector512<byte> YBitToByte(ulong value) {
             return Statics.YBitToByte(value);
         }
 
@@ -41,7 +41,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         /// <inheritdoc cref="IWVectorTraits512.YBitToInt16"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override Vector512<short> YBitToInt16(uint value) {
+        public override Vector512<short> YBitToInt16(ulong value) {
             return Statics.YBitToInt16(value);
         }
 
@@ -56,7 +56,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         /// <inheritdoc cref="IWVectorTraits512.YBitToInt32"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override Vector512<int> YBitToInt32(uint value) {
+        public override Vector512<int> YBitToInt32(ulong value) {
             return Statics.YBitToInt32(value);
         }
 
@@ -71,11 +71,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         /// <inheritdoc cref="IWVectorTraits512.YBitToInt64"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override Vector512<long> YBitToInt64(uint value) {
+        public override Vector512<long> YBitToInt64(ulong value) {
             return Statics.YBitToInt64(value);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.YClamp_AcceleratedTypes"/>
         public override TypeCodeFlags YClamp_AcceleratedTypes {
             get {

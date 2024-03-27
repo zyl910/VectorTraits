@@ -36,7 +36,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToByte"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<byte> YBitToByte(uint value) {
+            public static Vector512<byte> YBitToByte(ulong value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YBitToByte_Widen(value);
 #else
@@ -47,11 +47,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToByte"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<byte> YBitToByte_Basic(uint value) {
+            public static Vector512<byte> YBitToByte_Basic(ulong value) {
                 UnsafeUtil.SkipInit(out Vector512<byte> rt);
                 ref sbyte p = ref Unsafe.As<Vector512<byte>, sbyte>(ref rt);
                 for (int i = 0; i < Vector512<byte>.Count; ++i) {
-                    p = (sbyte)-((value >> i) & 1); // 1 for all bits: (sbyte)-1
+                    p = (sbyte)-(uint)((value >> i) & 1); // 1 for all bits: (sbyte)-1
                     p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
@@ -61,7 +61,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToByte"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<byte> YBitToByte_Widen(uint value) {
+            public static Vector512<byte> YBitToByte_Widen(ulong value) {
+                if (!BitConverter.IsLittleEndian) {
+                    value = MathBinaryPrimitives.ReverseEndianness(value);
+                }
                 Vector512<byte> a = Vector512.Create(value).AsByte();
                 Vector512<int> scale = Vector512.Create(0x01010101);
                 Vector512<byte> bitPosMask = Vector512Constants.MaskBitPosSerialRotate8;
@@ -96,7 +99,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToInt16"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<short> YBitToInt16(uint value) {
+            public static Vector512<short> YBitToInt16(ulong value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YBitToInt16_And(value);
 #else
@@ -107,11 +110,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToInt16"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<short> YBitToInt16_Basic(uint value) {
+            public static Vector512<short> YBitToInt16_Basic(ulong value) {
                 UnsafeUtil.SkipInit(out Vector512<short> rt);
                 ref short p = ref Unsafe.As<Vector512<short>, short>(ref rt);
                 for (int i = 0; i < Vector512<short>.Count; ++i) {
-                    p = (short)-((value >> i) & 1); // 1 for all bits: (short)-1
+                    p = (short)-(((uint)value >> i) & 1); // 1 for all bits: (short)-1
                     p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
@@ -121,7 +124,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToInt16"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<short> YBitToInt16_And(uint value) {
+            public static Vector512<short> YBitToInt16_And(ulong value) {
                 Vector512<short> bitPosMask = Vector512Constants.MaskBitPosSerialRotate16;
                 // Duplicate 16bit value
                 Vector512<short> a = Vector512.Create((ushort)value).AsInt16();
@@ -149,7 +152,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToInt32"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<int> YBitToInt32(uint value) {
+            public static Vector512<int> YBitToInt32(ulong value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YBitToInt32_And(value);
 #else
@@ -160,11 +163,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToInt32"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<int> YBitToInt32_Basic(uint value) {
+            public static Vector512<int> YBitToInt32_Basic(ulong value) {
                 UnsafeUtil.SkipInit(out Vector512<int> rt);
                 ref int p = ref Unsafe.As<Vector512<int>, int>(ref rt);
                 for (int i = 0; i < Vector512<int>.Count; ++i) {
-                    p = (int)-((value >> i) & 1); // 1 for all bits: (int)-1
+                    p = (int)-(((uint)value >> i) & 1); // 1 for all bits: (int)-1
                     p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
@@ -174,7 +177,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToInt32"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<int> YBitToInt32_And(uint value) {
+            public static Vector512<int> YBitToInt32_And(ulong value) {
                 Vector512<int> bitPosMask = Vector512Constants.MaskBitPosSerialRotate32;
                 // Duplicate 32bit value
                 Vector512<int> a = Vector512.Create((uint)value).AsInt32();
@@ -202,7 +205,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToInt64"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> YBitToInt64(uint value) {
+            public static Vector512<long> YBitToInt64(ulong value) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                 return YBitToInt64_And(value);
 #else
@@ -213,11 +216,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToInt64"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> YBitToInt64_Basic(uint value) {
+            public static Vector512<long> YBitToInt64_Basic(ulong value) {
                 UnsafeUtil.SkipInit(out Vector512<long> rt);
                 ref long p = ref Unsafe.As<Vector512<long>, long>(ref rt);
                 for (int i = 0; i < Vector512<long>.Count; ++i) {
-                    p = (long)-((value >> i) & 1); // 1 for all bits: (long)-1
+                    p = (long)-(((uint)value >> i) & 1); // 1 for all bits: (long)-1
                     p = ref Unsafe.Add(ref p, 1);
                 }
                 return rt;
@@ -227,7 +230,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YBitToInt64"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> YBitToInt64_And(uint value) {
+            public static Vector512<long> YBitToInt64_And(ulong value) {
                 Vector512<long> bitPosMask = Vector512Constants.MaskBitPosSerialRotate64;
                 // Duplicate 64bit value
                 Vector512<long> a = Vector512.Create((ulong)value).AsInt64();

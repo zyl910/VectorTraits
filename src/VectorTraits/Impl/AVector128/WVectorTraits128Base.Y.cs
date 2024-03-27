@@ -63,6 +63,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YBitToByte_Widen(uint value) {
+                if (!BitConverter.IsLittleEndian) {
+                    value = MathBinaryPrimitives.ReverseEndianness(value);
+                }
                 Vector128<byte> a = Vector128.Create(value).AsByte();
                 Vector128<int> scale = Vector128.Create(0x01010101);
                 Vector128<byte> bitPosMask = Vector128Constants.MaskBitPosSerialRotate8;
