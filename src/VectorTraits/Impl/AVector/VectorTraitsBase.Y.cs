@@ -72,7 +72,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 Vector<ulong> f = Vector.BitwiseOr(e, Vector.ShiftLeft(e, 32)); // Duplicate 32bit value to 64bit
                 // Check bit.
                 Vector<byte> hit = Vector.BitwiseAnd(f.AsByte(), bitPosMask);
-                Vector<byte> rt = Vector.OnesComplement(Vector.Equals(hit, Vector<byte>.Zero));
+                Vector<byte> rt = Vector.Equals(hit, bitPosMask);
                 return rt;
             }
 #endif // NET7_0_OR_GREATER
@@ -94,7 +94,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 }
                 // Check bit.
                 Vector<byte> hit = Vector.BitwiseAnd(f.AsByte(), bitPosMask);
-                Vector<byte> rt = Vector.OnesComplement(Vector.Equals(hit, Vector<byte>.Zero));
+                Vector<byte> rt = Vector.Equals(hit, bitPosMask);
                 return rt;
             }
 
@@ -189,7 +189,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 Vector<int> a = new Vector<uint>((uint)value).AsInt32();
                 // Check bit.
                 Vector<int> hit = Vector.BitwiseAnd(a, bitPosMask);
-                Vector<int> rt = Vector.OnesComplement(Vector.Equals(hit, Vector<int>.Zero));
+                Vector<int> rt = Vector.Equals(hit, bitPosMask);
                 return rt;
             }
 
@@ -234,7 +234,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 Vector<long> a = new Vector<ulong>((ulong)value).AsInt64();
                 // Check bit.
                 Vector<long> hit = Vector.BitwiseAnd(a, bitPosMask);
-                Vector<long> rt = Vector.OnesComplement(Vector.Equals(hit, Vector<long>.Zero));
+                Vector<long> rt = Vector.Equals(hit, bitPosMask);
                 return rt;
             }
 

@@ -38,7 +38,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<byte> f = YShuffleKernel(a, indices);
                 // Check bit.
                 Vector128<byte> hit = BitwiseAnd(f, bitPosMask);
-                Vector128<byte> rt = OnesComplement(Equals(hit, Vector128<byte>.Zero));
+                Vector128<byte> rt = Equals(hit, bitPosMask);
                 return rt;
             }
 
@@ -60,7 +60,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<short> a = Vector128.Create((ushort)value).AsInt16();
                 // Check bit.
                 Vector128<short> hit = BitwiseAnd(a, bitPosMask);
-                Vector128<short> rt = OnesComplement(Equals(hit, Vector128<short>.Zero));
+                Vector128<short> rt = Equals(hit, bitPosMask);
                 return rt;
             }
 
@@ -82,7 +82,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<int> a = Vector128.Create((uint)value).AsInt32();
                 // Check bit.
                 Vector128<int> hit = BitwiseAnd(a, bitPosMask);
-                Vector128<int> rt = OnesComplement(Equals(hit, Vector128<int>.Zero));
+                Vector128<int> rt = Equals(hit, bitPosMask);
                 return rt;
             }
 
@@ -104,7 +104,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> a = Vector128.Create((ulong)value).AsInt64();
                 // Check bit.
                 Vector128<long> hit = BitwiseAnd(a, bitPosMask);
-                Vector128<long> rt = OnesComplement(Equals(hit, Vector128<long>.Zero));
+                Vector128<long> rt = Equals(hit, bitPosMask);
                 return rt;
             }
 

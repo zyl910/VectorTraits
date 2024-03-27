@@ -80,7 +80,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 //Console.WriteLine(VectorTextUtil.Format("f':\t{0}", f));
                 // Check bit.
                 Vector128<byte> hit = Vector128.BitwiseAnd(f.AsByte(), bitPosMask);
-                Vector128<byte> rt = Vector128.OnesComplement(Vector128.Equals(hit, Vector128<byte>.Zero));
+                Vector128<byte> rt = Vector128.Equals(hit, bitPosMask);
                 return rt;
             }
 #endif // VECTOR_HAS_METHOD
@@ -133,7 +133,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<short> a = Vector128.Create((ushort)value).AsInt16();
                 // Check bit.
                 Vector128<short> hit = Vector128.BitwiseAnd(a, bitPosMask);
-                Vector128<short> rt = Vector128.OnesComplement(Vector128.Equals(hit, Vector128<short>.Zero));
+                Vector128<short> rt = Vector128.Equals(hit, bitPosMask);
                 return rt;
             }
 #endif // VECTOR_HAS_METHOD
@@ -186,7 +186,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<int> a = Vector128.Create((uint)value).AsInt32();
                 // Check bit.
                 Vector128<int> hit = Vector128.BitwiseAnd(a, bitPosMask);
-                Vector128<int> rt = Vector128.OnesComplement(Vector128.Equals(hit, Vector128<int>.Zero));
+                Vector128<int> rt = Vector128.Equals(hit, bitPosMask);
                 return rt;
             }
 #endif // VECTOR_HAS_METHOD
@@ -239,7 +239,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> a = Vector128.Create((ulong)value).AsInt64();
                 // Check bit.
                 Vector128<long> hit = Vector128.BitwiseAnd(a, bitPosMask);
-                Vector128<long> rt = Vector128.OnesComplement(Vector128.Equals(hit, Vector128<long>.Zero));
+                Vector128<long> rt = Vector128.Equals(hit, bitPosMask);
                 return rt;
             }
 #endif // VECTOR_HAS_METHOD

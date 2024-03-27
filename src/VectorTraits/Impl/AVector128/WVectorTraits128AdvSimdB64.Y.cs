@@ -37,7 +37,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<byte> f = YShuffleKernel(a, indices);
                 // Check bit.
                 Vector128<byte> hit = SuperStatics.BitwiseAnd(f, bitPosMask);
-                Vector128<byte> rt = SuperStatics.OnesComplement(SuperStatics.Equals(hit, Vector128<byte>.Zero));
+                Vector128<byte> rt = SuperStatics.Equals(hit, bitPosMask);
                 return rt;
             }
 

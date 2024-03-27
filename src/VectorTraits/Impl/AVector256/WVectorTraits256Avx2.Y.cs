@@ -37,7 +37,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<byte> f = Avx2.Shuffle(a, indices);
                 // Check bit.
                 Vector256<byte> hit = BitwiseAnd(f, bitPosMask);
-                Vector256<byte> rt = OnesComplement(Equals(hit, Vector256<byte>.Zero));
+                Vector256<byte> rt = Equals(hit, bitPosMask);
                 return rt;
             }
 
@@ -59,7 +59,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<short> a = Vector256.Create((ushort)value).AsInt16();
                 // Check bit.
                 Vector256<short> hit = BitwiseAnd(a, bitPosMask);
-                Vector256<short> rt = OnesComplement(Equals(hit, Vector256<short>.Zero));
+                Vector256<short> rt = Equals(hit, bitPosMask);
                 return rt;
             }
 
@@ -81,7 +81,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<int> a = Vector256.Create((uint)value).AsInt32();
                 // Check bit.
                 Vector256<int> hit = BitwiseAnd(a, bitPosMask);
-                Vector256<int> rt = OnesComplement(Equals(hit, Vector256<int>.Zero));
+                Vector256<int> rt = Equals(hit, bitPosMask);
                 return rt;
             }
 
@@ -103,7 +103,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> a = Vector256.Create((ulong)value).AsInt64();
                 // Check bit.
                 Vector256<long> hit = BitwiseAnd(a, bitPosMask);
-                Vector256<long> rt = OnesComplement(Equals(hit, Vector256<long>.Zero));
+                Vector256<long> rt = Equals(hit, bitPosMask);
                 return rt;
             }
 

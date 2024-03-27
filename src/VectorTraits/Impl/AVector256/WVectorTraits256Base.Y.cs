@@ -77,7 +77,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<ulong> f = Vector256.BitwiseOr(e, Vector256.ShiftLeft(e, 32)); // Duplicate 32bit value to 64bit
                 // Check bit.
                 Vector256<byte> hit = Vector256.BitwiseAnd(f.AsByte(), bitPosMask);
-                Vector256<byte> rt = Vector256.OnesComplement(Vector256.Equals(hit, Vector256<byte>.Zero));
+                Vector256<byte> rt = Vector256.Equals(hit, bitPosMask);
                 return rt;
             }
 #endif // VECTOR_HAS_METHOD
@@ -130,7 +130,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<short> a = Vector256.Create((ushort)value).AsInt16();
                 // Check bit.
                 Vector256<short> hit = Vector256.BitwiseAnd(a, bitPosMask);
-                Vector256<short> rt = Vector256.OnesComplement(Vector256.Equals(hit, Vector256<short>.Zero));
+                Vector256<short> rt = Vector256.Equals(hit, bitPosMask);
                 return rt;
             }
 #endif // VECTOR_HAS_METHOD
@@ -183,7 +183,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<int> a = Vector256.Create((uint)value).AsInt32();
                 // Check bit.
                 Vector256<int> hit = Vector256.BitwiseAnd(a, bitPosMask);
-                Vector256<int> rt = Vector256.OnesComplement(Vector256.Equals(hit, Vector256<int>.Zero));
+                Vector256<int> rt = Vector256.Equals(hit, bitPosMask);
                 return rt;
             }
 #endif // VECTOR_HAS_METHOD
@@ -236,7 +236,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> a = Vector256.Create((ulong)value).AsInt64();
                 // Check bit.
                 Vector256<long> hit = Vector256.BitwiseAnd(a, bitPosMask);
-                Vector256<long> rt = Vector256.OnesComplement(Vector256.Equals(hit, Vector256<long>.Zero));
+                Vector256<long> rt = Vector256.Equals(hit, bitPosMask);
                 return rt;
             }
 #endif // VECTOR_HAS_METHOD

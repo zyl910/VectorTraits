@@ -130,7 +130,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<short> a = Vector512.Create((ushort)value).AsInt16();
                 // Check bit.
                 Vector512<short> hit = Vector512.BitwiseAnd(a, bitPosMask);
-                Vector512<short> rt = Vector512.OnesComplement(Vector512.Equals(hit, Vector512<short>.Zero));
+                Vector512<short> rt = Vector512.Equals(hit, bitPosMask);
                 return rt;
             }
 #endif // VECTOR_HAS_METHOD
@@ -183,7 +183,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<int> a = Vector512.Create((uint)value).AsInt32();
                 // Check bit.
                 Vector512<int> hit = Vector512.BitwiseAnd(a, bitPosMask);
-                Vector512<int> rt = Vector512.OnesComplement(Vector512.Equals(hit, Vector512<int>.Zero));
+                Vector512<int> rt = Vector512.Equals(hit, bitPosMask);
                 return rt;
             }
 #endif // VECTOR_HAS_METHOD
@@ -236,7 +236,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<long> a = Vector512.Create((ulong)value).AsInt64();
                 // Check bit.
                 Vector512<long> hit = Vector512.BitwiseAnd(a, bitPosMask);
-                Vector512<long> rt = Vector512.OnesComplement(Vector512.Equals(hit, Vector512<long>.Zero));
+                Vector512<long> rt = Vector512.Equals(hit, bitPosMask);
                 return rt;
             }
 #endif // VECTOR_HAS_METHOD
