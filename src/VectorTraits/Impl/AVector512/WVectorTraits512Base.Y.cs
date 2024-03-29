@@ -393,9 +393,35 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YCopySign_Basic(Vector512<float> value, Vector512<float> sign) {
                 UnsafeUtil.SkipInit(out Vector512<float> rt);
-                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref value);
-                ref FixedArray8<float> psign = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref sign);
-                ref FixedArray8<float> p = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref rt);
+                ref FixedArray16<float> pvalue = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref value);
+                ref FixedArray16<float> psign = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref sign);
+                ref FixedArray16<float> p = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref rt);
+                p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
+                p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
+                p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
+                p.I3 = MathINumber.CopySign(pvalue.I3, psign.I3);
+                p.I4 = MathINumber.CopySign(pvalue.I4, psign.I4);
+                p.I5 = MathINumber.CopySign(pvalue.I5, psign.I5);
+                p.I6 = MathINumber.CopySign(pvalue.I6, psign.I6);
+                p.I7 = MathINumber.CopySign(pvalue.I7, psign.I7);
+                p.I8 = MathINumber.CopySign(pvalue.I8, psign.I8);
+                p.I9 = MathINumber.CopySign(pvalue.I9, psign.I9);
+                p.I10 = MathINumber.CopySign(pvalue.I10, psign.I10);
+                p.I11 = MathINumber.CopySign(pvalue.I11, psign.I11);
+                p.I12 = MathINumber.CopySign(pvalue.I12, psign.I12);
+                p.I13 = MathINumber.CopySign(pvalue.I13, psign.I13);
+                p.I14 = MathINumber.CopySign(pvalue.I14, psign.I14);
+                p.I15 = MathINumber.CopySign(pvalue.I15, psign.I15);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{double}, Vector512{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<double> YCopySign_Basic(Vector512<double> value, Vector512<double> sign) {
+                UnsafeUtil.SkipInit(out Vector512<double> rt);
+                ref FixedArray8<double> pvalue = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref value);
+                ref FixedArray8<double> psign = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref sign);
+                ref FixedArray8<double> p = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref rt);
                 p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
                 p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
                 p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
@@ -407,28 +433,88 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{double}, Vector512{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<double> YCopySign_Basic(Vector512<double> value, Vector512<double> sign) {
-                UnsafeUtil.SkipInit(out Vector512<double> rt);
-                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref value);
-                ref FixedArray4<double> psign = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref sign);
-                ref FixedArray4<double> p = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref rt);
-                p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
-                p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
-                p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
-                p.I3 = MathINumber.CopySign(pvalue.I3, psign.I3);
-                return rt;
-            }
-
             /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{sbyte}, Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YCopySign_Basic(Vector512<sbyte> value, Vector512<sbyte> sign) {
                 UnsafeUtil.SkipInit(out Vector512<sbyte> rt);
-                ref FixedArray32<sbyte> pvalue = ref Unsafe.As<Vector512<sbyte>, FixedArray32<sbyte>>(ref value);
-                ref FixedArray32<sbyte> psign = ref Unsafe.As<Vector512<sbyte>, FixedArray32<sbyte>>(ref sign);
-                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray32<sbyte>>(ref rt);
+                ref FixedArray64<sbyte> pvalue = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref value);
+                ref FixedArray64<sbyte> psign = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref sign);
+                ref FixedArray64<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref rt);
+                p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
+                p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
+                p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
+                p.I3 = MathINumber.CopySign(pvalue.I3, psign.I3);
+                p.I4 = MathINumber.CopySign(pvalue.I4, psign.I4);
+                p.I5 = MathINumber.CopySign(pvalue.I5, psign.I5);
+                p.I6 = MathINumber.CopySign(pvalue.I6, psign.I6);
+                p.I7 = MathINumber.CopySign(pvalue.I7, psign.I7);
+                p.I8 = MathINumber.CopySign(pvalue.I8, psign.I8);
+                p.I9 = MathINumber.CopySign(pvalue.I9, psign.I9);
+                p.I10 = MathINumber.CopySign(pvalue.I10, psign.I10);
+                p.I11 = MathINumber.CopySign(pvalue.I11, psign.I11);
+                p.I12 = MathINumber.CopySign(pvalue.I12, psign.I12);
+                p.I13 = MathINumber.CopySign(pvalue.I13, psign.I13);
+                p.I14 = MathINumber.CopySign(pvalue.I14, psign.I14);
+                p.I15 = MathINumber.CopySign(pvalue.I15, psign.I15);
+                p.I16 = MathINumber.CopySign(pvalue.I16, psign.I16);
+                p.I17 = MathINumber.CopySign(pvalue.I17, psign.I17);
+                p.I18 = MathINumber.CopySign(pvalue.I18, psign.I18);
+                p.I19 = MathINumber.CopySign(pvalue.I19, psign.I19);
+                p.I20 = MathINumber.CopySign(pvalue.I20, psign.I20);
+                p.I21 = MathINumber.CopySign(pvalue.I21, psign.I21);
+                p.I22 = MathINumber.CopySign(pvalue.I22, psign.I22);
+                p.I23 = MathINumber.CopySign(pvalue.I23, psign.I23);
+                p.I24 = MathINumber.CopySign(pvalue.I24, psign.I24);
+                p.I25 = MathINumber.CopySign(pvalue.I25, psign.I25);
+                p.I26 = MathINumber.CopySign(pvalue.I26, psign.I26);
+                p.I27 = MathINumber.CopySign(pvalue.I27, psign.I27);
+                p.I28 = MathINumber.CopySign(pvalue.I28, psign.I28);
+                p.I29 = MathINumber.CopySign(pvalue.I29, psign.I29);
+                p.I30 = MathINumber.CopySign(pvalue.I30, psign.I30);
+                p.I31 = MathINumber.CopySign(pvalue.I31, psign.I31);
+                p.I32 = MathINumber.CopySign(pvalue.I32, psign.I32);
+                p.I33 = MathINumber.CopySign(pvalue.I33, psign.I33);
+                p.I34 = MathINumber.CopySign(pvalue.I34, psign.I34);
+                p.I35 = MathINumber.CopySign(pvalue.I35, psign.I35);
+                p.I36 = MathINumber.CopySign(pvalue.I36, psign.I36);
+                p.I37 = MathINumber.CopySign(pvalue.I37, psign.I37);
+                p.I38 = MathINumber.CopySign(pvalue.I38, psign.I38);
+                p.I39 = MathINumber.CopySign(pvalue.I39, psign.I39);
+                p.I40 = MathINumber.CopySign(pvalue.I40, psign.I40);
+                p.I41 = MathINumber.CopySign(pvalue.I41, psign.I41);
+                p.I42 = MathINumber.CopySign(pvalue.I42, psign.I42);
+                p.I43 = MathINumber.CopySign(pvalue.I43, psign.I43);
+                p.I44 = MathINumber.CopySign(pvalue.I44, psign.I44);
+                p.I45 = MathINumber.CopySign(pvalue.I45, psign.I45);
+                p.I46 = MathINumber.CopySign(pvalue.I46, psign.I46);
+                p.I47 = MathINumber.CopySign(pvalue.I47, psign.I47);
+                p.I48 = MathINumber.CopySign(pvalue.I48, psign.I48);
+                p.I49 = MathINumber.CopySign(pvalue.I49, psign.I49);
+                p.I50 = MathINumber.CopySign(pvalue.I50, psign.I50);
+                p.I51 = MathINumber.CopySign(pvalue.I51, psign.I51);
+                p.I52 = MathINumber.CopySign(pvalue.I52, psign.I52);
+                p.I53 = MathINumber.CopySign(pvalue.I53, psign.I53);
+                p.I54 = MathINumber.CopySign(pvalue.I54, psign.I54);
+                p.I55 = MathINumber.CopySign(pvalue.I55, psign.I55);
+                p.I56 = MathINumber.CopySign(pvalue.I56, psign.I56);
+                p.I57 = MathINumber.CopySign(pvalue.I57, psign.I57);
+                p.I58 = MathINumber.CopySign(pvalue.I58, psign.I58);
+                p.I59 = MathINumber.CopySign(pvalue.I59, psign.I59);
+                p.I60 = MathINumber.CopySign(pvalue.I60, psign.I60);
+                p.I61 = MathINumber.CopySign(pvalue.I61, psign.I61);
+                p.I62 = MathINumber.CopySign(pvalue.I62, psign.I62);
+                p.I63 = MathINumber.CopySign(pvalue.I63, psign.I63);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{short}, Vector512{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<short> YCopySign_Basic(Vector512<short> value, Vector512<short> sign) {
+                UnsafeUtil.SkipInit(out Vector512<short> rt);
+                ref FixedArray32<short> pvalue = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref value);
+                ref FixedArray32<short> psign = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref sign);
+                ref FixedArray32<short> p = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref rt);
                 p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
                 p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
                 p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
@@ -464,13 +550,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{short}, Vector512{short})"/>
+            /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<short> YCopySign_Basic(Vector512<short> value, Vector512<short> sign) {
-                UnsafeUtil.SkipInit(out Vector512<short> rt);
-                ref FixedArray16<short> pvalue = ref Unsafe.As<Vector512<short>, FixedArray16<short>>(ref value);
-                ref FixedArray16<short> psign = ref Unsafe.As<Vector512<short>, FixedArray16<short>>(ref sign);
-                ref FixedArray16<short> p = ref Unsafe.As<Vector512<short>, FixedArray16<short>>(ref rt);
+            public static Vector512<int> YCopySign_Basic(Vector512<int> value, Vector512<int> sign) {
+                UnsafeUtil.SkipInit(out Vector512<int> rt);
+                ref FixedArray16<int> pvalue = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref value);
+                ref FixedArray16<int> psign = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref sign);
+                ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
                 p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
                 p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
                 p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
@@ -490,13 +576,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{int}, Vector512{int})"/>
+            /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<int> YCopySign_Basic(Vector512<int> value, Vector512<int> sign) {
-                UnsafeUtil.SkipInit(out Vector512<int> rt);
-                ref FixedArray8<int> pvalue = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref value);
-                ref FixedArray8<int> psign = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref sign);
-                ref FixedArray8<int> p = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref rt);
+            public static Vector512<long> YCopySign_Basic(Vector512<long> value, Vector512<long> sign) {
+                UnsafeUtil.SkipInit(out Vector512<long> rt);
+                ref FixedArray8<long> pvalue = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref value);
+                ref FixedArray8<long> psign = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref sign);
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
                 p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
                 p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
                 p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
@@ -505,20 +591,6 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I5 = MathINumber.CopySign(pvalue.I5, psign.I5);
                 p.I6 = MathINumber.CopySign(pvalue.I6, psign.I6);
                 p.I7 = MathINumber.CopySign(pvalue.I7, psign.I7);
-                return rt;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{long}, Vector512{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> YCopySign_Basic(Vector512<long> value, Vector512<long> sign) {
-                UnsafeUtil.SkipInit(out Vector512<long> rt);
-                ref FixedArray4<long> pvalue = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref value);
-                ref FixedArray4<long> psign = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref sign);
-                ref FixedArray4<long> p = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref rt);
-                p.I0 = MathINumber.CopySign(pvalue.I0, psign.I0);
-                p.I1 = MathINumber.CopySign(pvalue.I1, psign.I1);
-                p.I2 = MathINumber.CopySign(pvalue.I2, psign.I2);
-                p.I3 = MathINumber.CopySign(pvalue.I3, psign.I3);
                 return rt;
             }
 

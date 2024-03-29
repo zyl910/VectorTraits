@@ -75,7 +75,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YBitToInt64(value);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.YClamp_AcceleratedTypes"/>
         public override TypeCodeFlags YClamp_AcceleratedTypes {
             get {
@@ -191,7 +191,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<long> YCopySign(Vector512<long> value, Vector512<long> sign) {
             return Statics.YCopySign(value, sign);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits512.YIsAllTrue_AcceleratedTypes"/>
         public override TypeCodeFlags YIsAllTrue_AcceleratedTypes {

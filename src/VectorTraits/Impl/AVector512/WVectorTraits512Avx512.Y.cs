@@ -107,7 +107,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.YClamp_AcceleratedTypes"/>
             public static TypeCodeFlags YClamp_AcceleratedTypes {
                 get {
@@ -210,24 +210,24 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YCopySign(Vector512<sbyte> value, Vector512<sbyte> sign) {
                 //Vector512<sbyte> t = ShiftRightArithmetic_Const(Avx512.Xor(value, sign), 7);
-                Vector512<sbyte> t = Avx512.CompareGreaterThan(Vector512<sbyte>.Zero, Avx512.Xor(value, sign));
-                Vector512<sbyte> rt = Avx512.Subtract(Avx512.Xor(value, t), t);
+                Vector512<sbyte> t = Avx512BW.CompareGreaterThan(Vector512<sbyte>.Zero, Avx512F.Xor(value, sign));
+                Vector512<sbyte> rt = Avx512BW.Subtract(Avx512F.Xor(value, t), t);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YCopySign(Vector512<short> value, Vector512<short> sign) {
-                Vector512<short> t = Avx512.ShiftRightArithmetic(Avx512.Xor(value, sign), 15);
-                Vector512<short> rt = Avx512.Subtract(Avx512.Xor(value, t), t);
+                Vector512<short> t = Avx512BW.ShiftRightArithmetic(Avx512F.Xor(value, sign), 15);
+                Vector512<short> rt = Avx512BW.Subtract(Avx512F.Xor(value, t), t);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YCopySign(Vector512<int> value, Vector512<int> sign) {
-                Vector512<int> t = Avx512.ShiftRightArithmetic(Avx512.Xor(value, sign), 31);
-                Vector512<int> rt = Avx512.Subtract(Avx512.Xor(value, t), t);
+                Vector512<int> t = Avx512F.ShiftRightArithmetic(Avx512F.Xor(value, sign), 31);
+                Vector512<int> rt = Avx512F.Subtract(Avx512F.Xor(value, t), t);
                 return rt;
             }
 
@@ -235,12 +235,12 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YCopySign(Vector512<long> value, Vector512<long> sign) {
                 //Vector512<long> t = ShiftRightArithmetic_Const(Avx512.Xor(value, sign), 63);
-                Vector512<long> t = Avx512.CompareGreaterThan(Vector512<long>.Zero, Avx512.Xor(value, sign));
-                Vector512<long> rt = Avx512.Subtract(Avx512.Xor(value, t), t);
+                Vector512<long> t = Avx512F.CompareGreaterThan(Vector512<long>.Zero, Avx512F.Xor(value, sign));
+                Vector512<long> rt = Avx512F.Subtract(Avx512F.Xor(value, t), t);
                 return rt;
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.YMaxNumber_AcceleratedTypes"/>
             public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
                 get {
