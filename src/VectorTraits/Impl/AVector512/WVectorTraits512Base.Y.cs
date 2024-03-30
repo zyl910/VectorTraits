@@ -684,9 +684,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YMaxNumber_Basic(Vector512<float> left, Vector512<float> right) {
                 UnsafeUtil.SkipInit(out Vector512<float> rt);
-                ref FixedArray8<float> pleft = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref left);
-                ref FixedArray8<float> pright = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref right);
-                ref FixedArray8<float> p = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref rt);
+                ref FixedArray16<float> pleft = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref left);
+                ref FixedArray16<float> pright = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref right);
+                ref FixedArray16<float> p = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref rt);
                 p.I0 = MathINumber.MaxNumber(pleft.I0, pright.I0);
                 p.I1 = MathINumber.MaxNumber(pleft.I1, pright.I1);
                 p.I2 = MathINumber.MaxNumber(pleft.I2, pright.I2);
@@ -695,6 +695,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I5 = MathINumber.MaxNumber(pleft.I5, pright.I5);
                 p.I6 = MathINumber.MaxNumber(pleft.I6, pright.I6);
                 p.I7 = MathINumber.MaxNumber(pleft.I7, pright.I7);
+                p.I0 = MathINumber.MaxNumber(pleft.I8, pright.I8);
+                p.I1 = MathINumber.MaxNumber(pleft.I9, pright.I9);
+                p.I2 = MathINumber.MaxNumber(pleft.I10, pright.I10);
+                p.I3 = MathINumber.MaxNumber(pleft.I11, pright.I11);
+                p.I4 = MathINumber.MaxNumber(pleft.I12, pright.I12);
+                p.I5 = MathINumber.MaxNumber(pleft.I13, pright.I13);
+                p.I6 = MathINumber.MaxNumber(pleft.I14, pright.I14);
+                p.I7 = MathINumber.MaxNumber(pleft.I15, pright.I15);
                 return rt;
             }
 
@@ -702,13 +710,17 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YMaxNumber_Basic(Vector512<double> left, Vector512<double> right) {
                 UnsafeUtil.SkipInit(out Vector512<double> rt);
-                ref FixedArray4<double> pleft = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref left);
-                ref FixedArray4<double> pright = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref right);
-                ref FixedArray4<double> p = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref rt);
+                ref FixedArray8<double> pleft = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref left);
+                ref FixedArray8<double> pright = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref right);
+                ref FixedArray8<double> p = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref rt);
                 p.I0 = MathINumber.MaxNumber(pleft.I0, pright.I0);
                 p.I1 = MathINumber.MaxNumber(pleft.I1, pright.I1);
                 p.I2 = MathINumber.MaxNumber(pleft.I2, pright.I2);
                 p.I3 = MathINumber.MaxNumber(pleft.I3, pright.I3);
+                p.I4 = MathINumber.MaxNumber(pleft.I4, pright.I4);
+                p.I5 = MathINumber.MaxNumber(pleft.I5, pright.I5);
+                p.I6 = MathINumber.MaxNumber(pleft.I6, pright.I6);
+                p.I7 = MathINumber.MaxNumber(pleft.I7, pright.I7);
                 return rt;
             }
 
@@ -770,9 +782,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YMinNumber_Basic(Vector512<float> left, Vector512<float> right) {
                 UnsafeUtil.SkipInit(out Vector512<float> rt);
-                ref FixedArray8<float> pleft = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref left);
-                ref FixedArray8<float> pright = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref right);
-                ref FixedArray8<float> p = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref rt);
+                ref FixedArray16<float> pleft = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref left);
+                ref FixedArray16<float> pright = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref right);
+                ref FixedArray16<float> p = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref rt);
                 p.I0 = MathINumber.MinNumber(pleft.I0, pright.I0);
                 p.I1 = MathINumber.MinNumber(pleft.I1, pright.I1);
                 p.I2 = MathINumber.MinNumber(pleft.I2, pright.I2);
@@ -781,6 +793,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I5 = MathINumber.MinNumber(pleft.I5, pright.I5);
                 p.I6 = MathINumber.MinNumber(pleft.I6, pright.I6);
                 p.I7 = MathINumber.MinNumber(pleft.I7, pright.I7);
+                p.I0 = MathINumber.MinNumber(pleft.I8, pright.I8);
+                p.I1 = MathINumber.MinNumber(pleft.I9, pright.I9);
+                p.I2 = MathINumber.MinNumber(pleft.I10, pright.I10);
+                p.I3 = MathINumber.MinNumber(pleft.I11, pright.I11);
+                p.I4 = MathINumber.MinNumber(pleft.I12, pright.I12);
+                p.I5 = MathINumber.MinNumber(pleft.I13, pright.I13);
+                p.I6 = MathINumber.MinNumber(pleft.I14, pright.I14);
+                p.I7 = MathINumber.MinNumber(pleft.I15, pright.I15);
                 return rt;
             }
 
@@ -788,13 +808,17 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YMinNumber_Basic(Vector512<double> left, Vector512<double> right) {
                 UnsafeUtil.SkipInit(out Vector512<double> rt);
-                ref FixedArray4<double> pleft = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref left);
-                ref FixedArray4<double> pright = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref right);
-                ref FixedArray4<double> p = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref rt);
+                ref FixedArray8<double> pleft = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref left);
+                ref FixedArray8<double> pright = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref right);
+                ref FixedArray8<double> p = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref rt);
                 p.I0 = MathINumber.MinNumber(pleft.I0, pright.I0);
                 p.I1 = MathINumber.MinNumber(pleft.I1, pright.I1);
                 p.I2 = MathINumber.MinNumber(pleft.I2, pright.I2);
                 p.I3 = MathINumber.MinNumber(pleft.I3, pright.I3);
+                p.I4 = MathINumber.MinNumber(pleft.I4, pright.I4);
+                p.I5 = MathINumber.MinNumber(pleft.I5, pright.I5);
+                p.I6 = MathINumber.MinNumber(pleft.I6, pright.I6);
+                p.I7 = MathINumber.MinNumber(pleft.I7, pright.I7);
                 return rt;
             }
 

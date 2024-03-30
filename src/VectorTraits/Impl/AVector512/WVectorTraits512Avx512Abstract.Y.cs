@@ -889,7 +889,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<double> YMinNumber(Vector512<double> left, Vector512<double> right) {
             return Statics.YMinNumber(left, right);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate_AcceleratedTypes"/>
         public override TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
@@ -979,7 +979,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<uint> YNarrowSaturateUnsigned(Vector512<long> lower, Vector512<long> upper) {
             return Statics.YNarrowSaturateUnsigned(lower, upper);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits512.YOrNot_AcceleratedTypes"/>
         public override TypeCodeFlags YOrNot_AcceleratedTypes {

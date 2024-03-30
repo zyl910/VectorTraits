@@ -789,6 +789,18 @@ namespace Zyl.VectorTraits.Impl {
         } = Vector512.Create((byte)1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80);
 #endif // USE_VECTOR_CREATE
 
+        /// <summary>NarrowSaturate - Permute index - Int64.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<long> NarrowSaturate_Permute_Index64 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((long)0L, 2, 4, 8, 1, 3, 5, 7);
+        }
+#else
+            get;
+        } = Vector512.Create((long)0L, 2, 4, 8, 1, 3, 5, 7);
+#endif // USE_VECTOR_CREATE
+
 
         /// <summary>Shuffle - UInt16 - The multiplier.</summary>
         [CLSCompliant(false)]

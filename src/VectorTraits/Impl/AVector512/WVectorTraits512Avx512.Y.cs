@@ -8,6 +8,7 @@ using System.Runtime.Intrinsics.X86;
 #endif
 using Zyl.VectorTraits.Collections;
 using Zyl.VectorTraits.Impl.Util;
+using System.Reflection;
 
 namespace Zyl.VectorTraits.Impl.AVector512 {
     using SuperStatics = WVectorTraits512Base.Statics;
@@ -293,7 +294,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<double> rt = Avx.BlendVariable(right, left, mask); // ConditionalSelect(mask, left, right);
                 return rt;
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {
@@ -306,7 +307,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate_FullAcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_FullAcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
                     return rt;
                 }
             }
@@ -315,27 +316,128 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YNarrowSaturate(Vector512<short> lower, Vector512<short> upper) {
-                Vector512<sbyte> raw = Avx512.PackSignedSaturate(lower, upper); // bit64(x, z, y, w)
-                Vector512<sbyte> rt = Avx512.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsSByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                return YNarrowSaturate_Pack(lower, upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{short}, Vector512{short})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<sbyte> YNarrowSaturate_Convert(Vector512<short> lower, Vector512<short> upper) {
+                return Vector512.Create(Avx512BW.ConvertToVector256SByteWithSaturation(lower), Avx512BW.ConvertToVector256SByteWithSaturation(upper));
+                // total latency: 11(4*2+3), total throughput CPI: 5(2*2+1)
+                //
+                //__m256i _mm512_cvtsepi16_epi8 (__m512i a)
+                //#include <immintrin.h>
+                //Instruction: vpmovswb ymm, zmm
+                //CPUID Flags: AVX512BW
+                //Latency and Throughput
+                //Architecture	Latency	Throughput (CPI)
+                //Icelake Intel Core	-	2
+                //Icelake Xeon	4	2
+                //Sapphire Rapids	4	2
+                //Skylake	4	2
+                //
+                //__m512i _mm512_inserti64x4 (__m512i a, __m256i b, int imm8)
+                //#include <immintrin.h>
+                //Instruction: vinserti64x4 zmm, zmm, ymm, imm8
+                //CPUID Flags: AVX512F
+                //Latency and Throughput
+                //Architecture	Latency	Throughput (CPI)
+                //Icelake Intel Core	3	1
+                //Icelake Xeon	3	1
+                //Sapphire Rapids	3	1
+                //Skylake	3	1
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{short}, Vector512{short})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<sbyte> YNarrowSaturate_Pack(Vector512<short> lower, Vector512<short> upper) {
+                Vector512<long> index = Vector512Constants.NarrowSaturate_Permute_Index64; // _mm512_load_si512
+                Vector512<sbyte> raw = Avx512BW.PackSignedSaturate(lower, upper); // _mm512_packs_epi16
+                Vector512<sbyte> rt = Avx512F.PermuteVar8x64(raw.AsInt64(), index.AsInt64()).AsSByte(); // _mm512_permutexvar_epi64
                 return rt;
+                // total latency without load: 4~8, total throughput CPI: 2
+                // total latency with load: 11~16, total throughput CPI: 2.5
+                //
+                //__m512i _mm512_packs_epi16 (__m512i a, __m512i b)
+                //#include <immintrin.h>
+                //Instruction: vpacksswb zmm, zmm, zmm
+                //CPUID Flags: AVX512BW
+                //Latency and Throughput
+                //Architecture	Latency	Throughput (CPI)
+                //Icelake Intel Core	-	1
+                //Icelake Xeon	3	1
+                //Sapphire Rapids	5	1
+                //Skylake	1	1
+                //
+                //__m512i _mm512_permutexvar_epi64 (__m512i idx, __m512i a)
+                //#include <immintrin.h>
+                //Instruction: vpermq zmm, zmm, zmm
+                //CPUID Flags: AVX512F
+                //Latency and Throughput
+                //Architecture	Latency	Throughput (CPI)
+                //Icelake Intel Core	3	1
+                //Icelake Xeon	3	1
+                //Sapphire Rapids	3	1
+                //Skylake	3	1
+                // ===
+                //__m512i _mm512_load_si512 (void const* mem_addr)
+                //#include <immintrin.h>
+                //Instruction: vmovdqa32 zmm, m512
+                //CPUID Flags: AVX512F
+                //Latency and Throughput
+                //Architecture	Latency	Throughput (CPI)
+                //Icelake Intel Core	8	0.5
+                //Icelake Xeon	7	0.58
+                //Sapphire Rapids	8	0.5
+                //Skylake	8	0.5
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{ushort}, Vector512{ushort})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YNarrowSaturate(Vector512<ushort> lower, Vector512<ushort> upper) {
+                return YNarrowSaturate_Convert(lower, upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{ushort}, Vector512{ushort})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<byte> YNarrowSaturate_Convert(Vector512<ushort> lower, Vector512<ushort> upper) {
+                return Vector512.Create(Avx512BW.ConvertToVector256ByteWithSaturation(lower), Avx512BW.ConvertToVector256ByteWithSaturation(upper));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{ushort}, Vector512{ushort})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<byte> YNarrowSaturate_Pack(Vector512<ushort> lower, Vector512<ushort> upper) {
                 // Vector512<ushort> amax = Vector512s<ushort>.VMaxByte;
-                Vector512<ushort> amax = Vector512.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
-                Vector512<byte> raw = Avx512.PackUnsignedSaturate(Avx512.Min(lower, amax).AsInt16(), Avx512.Min(upper, amax).AsInt16()); // bit64(x, z, y, w)
-                Vector512<byte> rt = Avx512.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                Vector512<ushort> amax = Vector512.Create((ushort)byte.MaxValue);
+                Vector512<long> index = Vector512Constants.NarrowSaturate_Permute_Index64;
+                Vector512<byte> raw = Avx512BW.PackUnsignedSaturate(Avx512BW.Min(lower, amax).AsInt16(), Avx512BW.Min(upper, amax).AsInt16());
+                Vector512<byte> rt = Avx512F.PermuteVar8x64(raw.AsInt64(), index.AsInt64()).AsByte();
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{int}, Vector512{int})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YNarrowSaturate(Vector512<int> lower, Vector512<int> upper) {
-                Vector512<short> raw = Avx512.PackSignedSaturate(lower, upper); // bit64(x, z, y, w)
-                Vector512<short> rt = Avx512.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsInt16(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                return YNarrowSaturate_Pack(lower, upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{int}, Vector512{int})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<short> YNarrowSaturate_Convert(Vector512<int> lower, Vector512<int> upper) {
+                return Vector512.Create(Avx512F.ConvertToVector256Int16WithSaturation(lower), Avx512F.ConvertToVector256Int16WithSaturation(upper));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{int}, Vector512{int})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<short> YNarrowSaturate_Pack(Vector512<int> lower, Vector512<int> upper) {
+                Vector512<long> index = Vector512Constants.NarrowSaturate_Permute_Index64; // _mm512_load_si512
+                Vector512<short> raw = Avx512BW.PackSignedSaturate(lower, upper);
+                Vector512<short> rt = Avx512F.PermuteVar8x64(raw.AsInt64(), index.AsInt64()).AsInt16();
                 return rt;
             }
 
@@ -343,16 +445,37 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YNarrowSaturate(Vector512<uint> lower, Vector512<uint> upper) {
+                return YNarrowSaturate_Convert(lower, upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{uint}, Vector512{uint})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ushort> YNarrowSaturate_Convert(Vector512<uint> lower, Vector512<uint> upper) {
+                return Vector512.Create(Avx512F.ConvertToVector256UInt16WithSaturation(lower), Avx512F.ConvertToVector256UInt16WithSaturation(upper));
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{uint}, Vector512{uint})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ushort> YNarrowSaturate_Pack(Vector512<uint> lower, Vector512<uint> upper) {
                 //Vector512<uint> amax = Vector512s<uint>.VMaxUInt16;
-                Vector512<uint> amax = Vector512.Create((uint)ushort.MaxValue); // .NET5+ has better performance .
-                Vector512<ushort> raw = Avx512.PackUnsignedSaturate(Avx512.Min(lower, amax).AsInt32(), Avx512.Min(upper, amax).AsInt32()); // bit64(x, z, y, w)
-                Vector512<ushort> rt = Avx512.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsUInt16(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                Vector512<uint> amax = Vector512.Create((uint)ushort.MaxValue);
+                Vector512<long> index = Vector512Constants.NarrowSaturate_Permute_Index64;
+                Vector512<ushort> raw = Avx512BW.PackUnsignedSaturate(Avx512F.Min(lower, amax).AsInt32(), Avx512F.Min(upper, amax).AsInt32());
+                Vector512<ushort> rt = Avx512F.PermuteVar8x64(raw.AsInt64(), index.AsInt64()).AsUInt16();
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{long}, Vector512{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YNarrowSaturate(Vector512<long> lower, Vector512<long> upper) {
+                return YNarrowSaturate_Convert(lower, upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{long}, Vector512{long})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<int> YNarrowSaturate_Clamp(Vector512<long> lower, Vector512<long> upper) {
                 //Vector512<long> amin = Vector512s<long>.VMinInt32;
                 //Vector512<long> amax = Vector512s<long>.VMaxInt32;
                 Vector512<long> amin = Vector512Constants.Int64_VMinInt32;
@@ -362,15 +485,35 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return Narrow(l, u);
             }
 
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{long}, Vector512{long})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<int> YNarrowSaturate_Convert(Vector512<long> lower, Vector512<long> upper) {
+                return Vector512.Create(Avx512F.ConvertToVector256Int32WithSaturation(lower), Avx512F.ConvertToVector256Int32WithSaturation(upper));
+            }
+
             /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{ulong}, Vector512{ulong})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YNarrowSaturate(Vector512<ulong> lower, Vector512<ulong> upper) {
+                return YNarrowSaturate_Convert(lower, upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{ulong}, Vector512{ulong})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<uint> YNarrowSaturate_Clamp(Vector512<ulong> lower, Vector512<ulong> upper) {
                 //Vector512<ulong> amax = Vector512s<ulong>.VMaxUInt32;
                 Vector512<ulong> amax = Vector512Constants.Int64_VMaxUInt32.AsUInt64();
                 Vector512<ulong> l = Min(lower, amax);
                 Vector512<ulong> u = Min(upper, amax);
                 return Narrow(l, u);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate(Vector512{ulong}, Vector512{ulong})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<uint> YNarrowSaturate_Convert(Vector512<ulong> lower, Vector512<ulong> upper) {
+                return Vector512.Create(Avx512F.ConvertToVector256UInt32WithSaturation(lower), Avx512F.ConvertToVector256UInt32WithSaturation(upper));
             }
 
 
@@ -393,8 +536,24 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturateUnsigned(Vector512{short}, Vector512{short})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YNarrowSaturateUnsigned(Vector512<short> lower, Vector512<short> upper) {
-                Vector512<byte> raw = Avx512.PackUnsignedSaturate(lower, upper); // bit64(x, z, y, w)
-                Vector512<byte> rt = Avx512.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                return YNarrowSaturateUnsigned_Pack(lower, upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturateUnsigned(Vector512{short}, Vector512{short})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<byte> YNarrowSaturateUnsigned_Convert(Vector512<short> lower, Vector512<short> upper) {
+                Vector512<short> zero = Vector512<short>.Zero;
+                Vector512<ushort> l = Avx512BW.Max(lower, zero).AsUInt16();
+                Vector512<ushort> u = Avx512BW.Max(upper, zero).AsUInt16();
+                return YNarrowSaturate_Convert(l, u);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturateUnsigned(Vector512{short}, Vector512{short})" />
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<byte> YNarrowSaturateUnsigned_Pack(Vector512<short> lower, Vector512<short> upper) {
+                Vector512<long> index = Vector512Constants.NarrowSaturate_Permute_Index64;
+                Vector512<byte> raw = Avx512BW.PackUnsignedSaturate(lower, upper);
+                Vector512<byte> rt = Avx512F.PermuteVar8x64(raw.AsInt64(), index.AsInt64()).AsByte();
                 return rt;
             }
 
@@ -402,8 +561,26 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YNarrowSaturateUnsigned(Vector512<int> lower, Vector512<int> upper) {
-                Vector512<ushort> raw = Avx512.PackUnsignedSaturate(lower, upper); // bit64(x, z, y, w)
-                Vector512<ushort> rt = Avx512.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsUInt16(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                return YNarrowSaturateUnsigned_Pack(lower, upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturateUnsigned(Vector512{int}, Vector512{int})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ushort> YNarrowSaturateUnsigned_Convert(Vector512<int> lower, Vector512<int> upper) {
+                Vector512<int> zero = Vector512<int>.Zero;
+                Vector512<uint> l = Avx512F.Max(lower, zero).AsUInt32();
+                Vector512<uint> u = Avx512F.Max(upper, zero).AsUInt32();
+                return YNarrowSaturate_Convert(l, u);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturateUnsigned(Vector512{int}, Vector512{int})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ushort> YNarrowSaturateUnsigned_Pack(Vector512<int> lower, Vector512<int> upper) {
+                Vector512<long> index = Vector512Constants.NarrowSaturate_Permute_Index64;
+                Vector512<ushort> raw = Avx512BW.PackUnsignedSaturate(lower, upper);
+                Vector512<ushort> rt = Avx512F.PermuteVar8x64(raw.AsInt64(), index.AsInt64()).AsUInt16();
                 return rt;
             }
 
@@ -411,6 +588,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YNarrowSaturateUnsigned(Vector512<long> lower, Vector512<long> upper) {
+                return YNarrowSaturateUnsigned_Convert(lower, upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturateUnsigned(Vector512{long}, Vector512{long})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<uint> YNarrowSaturateUnsigned_Clamp(Vector512<long> lower, Vector512<long> upper) {
                 Vector512<long> amin = Vector512<long>.Zero;
                 //Vector512<long> amax = Vector512s<long>.VMaxUInt32;
                 Vector512<long> amax = Vector512Constants.Int64_VMaxUInt32;
@@ -418,7 +602,17 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<ulong> u = YClamp(upper, amin, amax).AsUInt64();
                 return Narrow(l, u);
             }
-*/
+
+            /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturateUnsigned(Vector512{long}, Vector512{long})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<uint> YNarrowSaturateUnsigned_Convert(Vector512<long> lower, Vector512<long> upper) {
+                Vector512<long> zero = Vector512<long>.Zero;
+                Vector512<ulong> l = Avx512F.Max(lower, zero).AsUInt64();
+                Vector512<ulong> u = Avx512F.Max(upper, zero).AsUInt64();
+                return YNarrowSaturate_Convert(l, u);
+            }
+
 
             /// <inheritdoc cref="IWVectorTraits512.YOrNot_AcceleratedTypes"/>
             public static TypeCodeFlags YOrNot_AcceleratedTypes {
