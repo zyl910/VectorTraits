@@ -355,7 +355,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<sbyte> YNarrowSaturate_Pack(Vector512<short> lower, Vector512<short> upper) {
                 Vector512<long> index = Vector512Constants.NarrowSaturate_Permute_Index64; // _mm512_load_si512
                 Vector512<sbyte> raw = Avx512BW.PackSignedSaturate(lower, upper); // _mm512_packs_epi16
+                //Console.WriteLine(VectorTextUtil.Format("raw:\t{0}", raw));
                 Vector512<sbyte> rt = Avx512F.PermuteVar8x64(raw.AsInt64(), index.AsInt64()).AsSByte(); // _mm512_permutexvar_epi64
+                //Console.WriteLine(VectorTextUtil.Format("rt:\t{0}", rt));
                 return rt;
                 // total latency without load: 4~8, total throughput CPI: 2
                 // total latency with load: 11~16, total throughput CPI: 2.5
