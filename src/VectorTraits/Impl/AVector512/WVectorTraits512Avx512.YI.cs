@@ -50,7 +50,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return SuperStatics.YIsAnyTrue(value);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger_AcceleratedTypes"/>
             public static TypeCodeFlags YIsEvenInteger_AcceleratedTypes {
                 get {
@@ -63,22 +63,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsEvenInteger(Vector512<float> value) {
-                Vector512<float> valueHalf = Avx.Multiply(value, Vector512.Create(0.5f));
-                Vector512<float> valueHalfTrun = Avx.Floor(valueHalf);
+                Vector512<float> valueHalf = Avx512F.Multiply(value, Vector512.Create(0.5f));
+                Vector512<float> valueHalfTrun = Floor(valueHalf);
                 Vector512<int> intMask = YIsInteger(value);
                 Vector512<int> halfEqual = Equals(valueHalf, valueHalfTrun).AsInt32();
-                Vector512<int> rt = Avx512.And(intMask, halfEqual);
+                Vector512<int> rt = Avx512F.And(intMask, halfEqual);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YIsEvenInteger(Vector512<double> value) {
-                Vector512<double> valueHalf = Avx.Multiply(value, Vector512.Create(0.5));
-                Vector512<double> valueHalfTrun = Avx.Floor(valueHalf);
+                Vector512<double> valueHalf = Avx512F.Multiply(value, Vector512.Create(0.5));
+                Vector512<double> valueHalfTrun = Floor(valueHalf);
                 Vector512<long> intMask = YIsInteger(value);
                 Vector512<long> halfEqual = Equals(valueHalf, valueHalfTrun).AsInt64();
-                Vector512<long> rt = Avx512.And(intMask, halfEqual);
+                Vector512<long> rt = Avx512F.And(intMask, halfEqual);
                 return rt;
             }
 
@@ -86,7 +86,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YIsEvenInteger(Vector512<sbyte> value) {
-                Vector512<sbyte> temp = Avx512.And(value, Vector512Constants.Byte_One.AsSByte());
+                Vector512<sbyte> temp = Avx512F.And(value, Vector512Constants.Byte_One.AsSByte());
                 Vector512<sbyte> rt = Equals(Vector512<sbyte>.Zero, temp);
                 return rt;
             }
@@ -100,7 +100,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YIsEvenInteger(Vector512<short> value) {
-                Vector512<short> temp = Avx512.And(value, Vector512Constants.Int16_One);
+                Vector512<short> temp = Avx512F.And(value, Vector512Constants.Int16_One);
                 Vector512<short> rt = Equals(Vector512<short>.Zero, temp);
                 return rt;
             }
@@ -115,7 +115,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsEvenInteger(Vector512<int> value) {
-                Vector512<int> temp = Avx512.And(value, Vector512Constants.Int32_One);
+                Vector512<int> temp = Avx512F.And(value, Vector512Constants.Int32_One);
                 Vector512<int> rt = Equals(Vector512<int>.Zero, temp);
                 return rt;
             }
@@ -130,7 +130,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YIsEvenInteger(Vector512<long> value) {
-                Vector512<long> temp = Avx512.And(value, Vector512Constants.Int64_One);
+                Vector512<long> temp = Avx512F.And(value, Vector512Constants.Int64_One);
                 Vector512<long> rt = Equals(Vector512<long>.Zero, temp);
                 return rt;
             }
@@ -141,7 +141,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<ulong> YIsEvenInteger(Vector512<ulong> value) {
                 return YIsEvenInteger(value.AsInt64()).AsUInt64();
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits512.YIsFinite_AcceleratedTypes"/>
             public static TypeCodeFlags YIsFinite_AcceleratedTypes {
@@ -510,7 +510,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger_AcceleratedTypes"/>
             public static TypeCodeFlags YIsOddInteger_AcceleratedTypes
             {
@@ -526,8 +526,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsOddInteger(Vector512<float> value)
             {
-                Vector512<float> valueHalf = Avx.Multiply(value, Vector512.Create(0.5f));
-                Vector512<float> valueHalfTrun = Avx.Floor(valueHalf);
+                Vector512<float> valueHalf = Avx512F.Multiply(value, Vector512.Create(0.5f));
+                Vector512<float> valueHalfTrun = Floor(valueHalf);
                 Vector512<int> intMask = YIsInteger(value);
                 Vector512<int> halfEqual = Equals(valueHalf, valueHalfTrun).AsInt32();
                 Vector512<int> rt = AndNot(intMask, halfEqual);
@@ -538,8 +538,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YIsOddInteger(Vector512<double> value)
             {
-                Vector512<double> valueHalf = Avx.Multiply(value, Vector512.Create(0.5));
-                Vector512<double> valueHalfTrun = Avx.Floor(valueHalf);
+                Vector512<double> valueHalf = Avx512F.Multiply(value, Vector512.Create(0.5));
+                Vector512<double> valueHalfTrun = Floor(valueHalf);
                 Vector512<long> intMask = YIsInteger(value);
                 Vector512<long> halfEqual = Equals(valueHalf, valueHalfTrun).AsInt64();
                 Vector512<long> rt = AndNot(intMask, halfEqual);
@@ -551,7 +551,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YIsOddInteger(Vector512<sbyte> value)
             {
-                Vector512<sbyte> temp = Avx512.And(value, Vector512Constants.Byte_One.AsSByte());
+                Vector512<sbyte> temp = Avx512F.And(value, Vector512Constants.Byte_One.AsSByte());
                 Vector512<sbyte> rt = GreaterThan(temp, Vector512<sbyte>.Zero);
                 return rt;
             }
@@ -567,7 +567,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YIsOddInteger(Vector512<short> value)
             {
-                Vector512<short> temp = Avx512.And(value, Vector512Constants.Int16_One);
+                Vector512<short> temp = Avx512F.And(value, Vector512Constants.Int16_One);
                 Vector512<short> rt = GreaterThan(temp, Vector512<short>.Zero);
                 return rt;
             }
@@ -584,7 +584,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsOddInteger(Vector512<int> value)
             {
-                Vector512<int> temp = Avx512.And(value, Vector512Constants.Int32_One);
+                Vector512<int> temp = Avx512F.And(value, Vector512Constants.Int32_One);
                 Vector512<int> rt = GreaterThan(temp, Vector512<int>.Zero);
                 return rt;
             }
@@ -601,7 +601,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YIsOddInteger(Vector512<long> value)
             {
-                Vector512<long> temp = Avx512.And(value, Vector512Constants.Int64_One);
+                Vector512<long> temp = Avx512F.And(value, Vector512Constants.Int64_One);
                 Vector512<long> rt = GreaterThan(temp, Vector512<long>.Zero);
                 return rt;
             }
@@ -614,7 +614,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return YIsOddInteger(value.AsInt64()).AsUInt64();
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.YIsPositive_AcceleratedTypes"/>
             public static TypeCodeFlags YIsPositive_AcceleratedTypes {
                 get {

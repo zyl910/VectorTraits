@@ -224,8 +224,33 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsEvenInteger_Basic(Vector512<float> value) {
                 UnsafeUtil.SkipInit(out Vector512<int> rt);
-                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref value);
-                ref FixedArray8<int> p = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref rt);
+                ref FixedArray16<float> pvalue = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref value);
+                ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I3));
+                p.I4 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I4));
+                p.I5 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I5));
+                p.I6 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I6));
+                p.I7 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I7));
+                p.I8 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I8));
+                p.I9 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I9));
+                p.I10 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I10));
+                p.I11 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I11));
+                p.I12 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I12));
+                p.I13 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I13));
+                p.I14 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I14));
+                p.I15 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I15));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<long> YIsEvenInteger_Basic(Vector512<double> value) {
+                UnsafeUtil.SkipInit(out Vector512<long> rt);
+                ref FixedArray8<double> pvalue = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref value);
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
                 p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I1));
                 p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I2));
@@ -237,26 +262,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> YIsEvenInteger_Basic(Vector512<double> value) {
-                UnsafeUtil.SkipInit(out Vector512<long> rt);
-                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref value);
-                ref FixedArray4<long> p = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref rt);
-                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
-                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I1));
-                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I2));
-                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I3));
-                return rt;
-            }
-
             /// <inheritdoc cref="IWVectorTraits512.YIsEvenInteger(Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YIsEvenInteger_Basic(Vector512<sbyte> value) {
                 UnsafeUtil.SkipInit(out Vector512<sbyte> rt);
-                ref FixedArray32<sbyte> pvalue = ref Unsafe.As<Vector512<sbyte>, FixedArray32<sbyte>>(ref value);
-                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray32<sbyte>>(ref rt);
+                ref FixedArray64<sbyte> pvalue = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref value);
+                ref FixedArray64<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref rt);
                 p.I0 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
                 p.I1 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I1));
                 p.I2 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I2));
@@ -289,6 +301,38 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I29 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I29));
                 p.I30 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I30));
                 p.I31 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I31));
+                p.I32 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I32));
+                p.I33 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I33));
+                p.I34 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I34));
+                p.I35 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I35));
+                p.I36 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I36));
+                p.I37 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I37));
+                p.I38 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I38));
+                p.I39 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I39));
+                p.I40 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I40));
+                p.I41 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I41));
+                p.I42 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I42));
+                p.I43 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I43));
+                p.I44 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I44));
+                p.I45 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I45));
+                p.I46 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I46));
+                p.I47 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I47));
+                p.I48 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I48));
+                p.I49 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I49));
+                p.I50 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I50));
+                p.I51 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I51));
+                p.I52 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I52));
+                p.I53 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I53));
+                p.I54 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I54));
+                p.I55 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I55));
+                p.I56 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I56));
+                p.I57 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I57));
+                p.I58 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I58));
+                p.I59 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I59));
+                p.I60 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I60));
+                p.I61 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I61));
+                p.I62 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I62));
+                p.I63 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I63));
                 return rt;
             }
 
@@ -302,8 +346,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YIsEvenInteger_Basic(Vector512<short> value) {
                 UnsafeUtil.SkipInit(out Vector512<short> rt);
-                ref FixedArray16<short> pvalue = ref Unsafe.As<Vector512<short>, FixedArray16<short>>(ref value);
-                ref FixedArray16<short> p = ref Unsafe.As<Vector512<short>, FixedArray16<short>>(ref rt);
+                ref FixedArray32<short> pvalue = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref value);
+                ref FixedArray32<short> p = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref rt);
                 p.I0 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
                 p.I1 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I1));
                 p.I2 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I2));
@@ -320,6 +364,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I13 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I13));
                 p.I14 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I14));
                 p.I15 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I15));
+                p.I16 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I16));
+                p.I17 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I17));
+                p.I18 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I18));
+                p.I19 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I19));
+                p.I20 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I20));
+                p.I21 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I21));
+                p.I22 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I22));
+                p.I23 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I23));
+                p.I24 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I24));
+                p.I25 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I25));
+                p.I26 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I26));
+                p.I27 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I27));
+                p.I28 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I28));
+                p.I29 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I29));
+                p.I30 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I30));
+                p.I31 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I31));
                 return rt;
             }
 
@@ -334,8 +394,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsEvenInteger_Basic(Vector512<int> value) {
                 UnsafeUtil.SkipInit(out Vector512<int> rt);
-                ref FixedArray8<int> pvalue = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref value);
-                ref FixedArray8<int> p = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref rt);
+                ref FixedArray16<int> pvalue = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref value);
+                ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
                 p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I1));
                 p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I2));
@@ -344,6 +404,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I5 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I5));
                 p.I6 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I6));
                 p.I7 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I7));
+                p.I8 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I8));
+                p.I9 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I9));
+                p.I10 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I10));
+                p.I11 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I11));
+                p.I12 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I12));
+                p.I13 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I13));
+                p.I14 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I14));
+                p.I15 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I15));
                 return rt;
             }
 
@@ -358,12 +426,16 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YIsEvenInteger_Basic(Vector512<long> value) {
                 UnsafeUtil.SkipInit(out Vector512<long> rt);
-                ref FixedArray4<long> pvalue = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref value);
-                ref FixedArray4<long> p = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref rt);
+                ref FixedArray8<long> pvalue = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref value);
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
                 p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I1));
                 p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I2));
                 p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I3));
+                p.I4 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I4));
+                p.I5 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I5));
+                p.I6 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I6));
+                p.I7 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I7));
                 return rt;
             }
 
@@ -2317,8 +2389,33 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsOddInteger_Basic(Vector512<float> value) {
                 UnsafeUtil.SkipInit(out Vector512<int> rt);
-                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref value);
-                ref FixedArray8<int> p = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref rt);
+                ref FixedArray16<float> pvalue = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref value);
+                ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
+                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
+                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I1));
+                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I2));
+                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I3));
+                p.I4 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I4));
+                p.I5 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I5));
+                p.I6 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I6));
+                p.I7 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I7));
+                p.I8 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I8));
+                p.I9 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I9));
+                p.I10 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I10));
+                p.I11 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I11));
+                p.I12 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I12));
+                p.I13 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I13));
+                p.I14 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I14));
+                p.I15 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I15));
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger(Vector512{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<long> YIsOddInteger_Basic(Vector512<double> value) {
+                UnsafeUtil.SkipInit(out Vector512<long> rt);
+                ref FixedArray8<double> pvalue = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref value);
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
                 p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I1));
                 p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I2));
@@ -2330,26 +2427,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger(Vector512{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> YIsOddInteger_Basic(Vector512<double> value) {
-                UnsafeUtil.SkipInit(out Vector512<long> rt);
-                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref value);
-                ref FixedArray4<long> p = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref rt);
-                p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
-                p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I1));
-                p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I2));
-                p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I3));
-                return rt;
-            }
-
             /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger(Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YIsOddInteger_Basic(Vector512<sbyte> value) {
                 UnsafeUtil.SkipInit(out Vector512<sbyte> rt);
-                ref FixedArray32<sbyte> pvalue = ref Unsafe.As<Vector512<sbyte>, FixedArray32<sbyte>>(ref value);
-                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray32<sbyte>>(ref rt);
+                ref FixedArray64<sbyte> pvalue = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref value);
+                ref FixedArray64<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref rt);
                 p.I0 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
                 p.I1 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I1));
                 p.I2 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I2));
@@ -2382,6 +2466,38 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I29 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I29));
                 p.I30 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I30));
                 p.I31 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I31));
+                p.I32 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I32));
+                p.I33 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I33));
+                p.I34 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I34));
+                p.I35 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I35));
+                p.I36 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I36));
+                p.I37 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I37));
+                p.I38 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I38));
+                p.I39 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I39));
+                p.I40 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I40));
+                p.I41 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I41));
+                p.I42 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I42));
+                p.I43 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I43));
+                p.I44 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I44));
+                p.I45 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I45));
+                p.I46 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I46));
+                p.I47 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I47));
+                p.I48 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I48));
+                p.I49 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I49));
+                p.I50 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I50));
+                p.I51 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I51));
+                p.I52 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I52));
+                p.I53 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I53));
+                p.I54 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I54));
+                p.I55 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I55));
+                p.I56 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I56));
+                p.I57 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I57));
+                p.I58 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I58));
+                p.I59 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I59));
+                p.I60 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I60));
+                p.I61 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I61));
+                p.I62 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I62));
+                p.I63 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I63));
                 return rt;
             }
 
@@ -2395,8 +2511,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YIsOddInteger_Basic(Vector512<short> value) {
                 UnsafeUtil.SkipInit(out Vector512<short> rt);
-                ref FixedArray16<short> pvalue = ref Unsafe.As<Vector512<short>, FixedArray16<short>>(ref value);
-                ref FixedArray16<short> p = ref Unsafe.As<Vector512<short>, FixedArray16<short>>(ref rt);
+                ref FixedArray32<short> pvalue = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref value);
+                ref FixedArray32<short> p = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref rt);
                 p.I0 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
                 p.I1 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I1));
                 p.I2 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I2));
@@ -2413,6 +2529,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I13 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I13));
                 p.I14 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I14));
                 p.I15 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I15));
+                p.I16 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I16));
+                p.I17 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I17));
+                p.I18 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I18));
+                p.I19 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I19));
+                p.I20 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I20));
+                p.I21 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I21));
+                p.I22 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I22));
+                p.I23 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I23));
+                p.I24 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I24));
+                p.I25 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I25));
+                p.I26 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I26));
+                p.I27 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I27));
+                p.I28 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I28));
+                p.I29 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I29));
+                p.I30 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I30));
+                p.I31 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I31));
                 return rt;
             }
 
@@ -2427,8 +2559,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsOddInteger_Basic(Vector512<int> value) {
                 UnsafeUtil.SkipInit(out Vector512<int> rt);
-                ref FixedArray8<int> pvalue = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref value);
-                ref FixedArray8<int> p = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref rt);
+                ref FixedArray16<int> pvalue = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref value);
+                ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
                 p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I1));
                 p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I2));
@@ -2437,6 +2569,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I5 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I5));
                 p.I6 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I6));
                 p.I7 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I7));
+                p.I8 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I8));
+                p.I9 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I9));
+                p.I10 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I10));
+                p.I11 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I11));
+                p.I12 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I12));
+                p.I13 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I13));
+                p.I14 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I14));
+                p.I15 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I15));
                 return rt;
             }
 
@@ -2451,12 +2591,16 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YIsOddInteger_Basic(Vector512<long> value) {
                 UnsafeUtil.SkipInit(out Vector512<long> rt);
-                ref FixedArray4<long> pvalue = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref value);
-                ref FixedArray4<long> p = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref rt);
+                ref FixedArray8<long> pvalue = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref value);
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
                 p.I1 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I1));
                 p.I2 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I2));
                 p.I3 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I3));
+                p.I4 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I4));
+                p.I5 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I5));
+                p.I6 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I6));
+                p.I7 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I7));
                 return rt;
             }
 
