@@ -141,7 +141,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<ulong> YIsEvenInteger(Vector512<ulong> value) {
                 return YIsEvenInteger(value.AsInt64()).AsUInt64();
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits512.YIsFinite_AcceleratedTypes"/>
             public static TypeCodeFlags YIsFinite_AcceleratedTypes {
@@ -156,7 +156,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsFinite(Vector512<float> value) {
                 Vector512<int> exponentMask = Vector512Constants.Single_ExponentMask.AsInt32();
-                Vector512<int> exponent = Avx512.And(value.AsInt32(), exponentMask);
+                Vector512<int> exponent = Avx512F.And(value.AsInt32(), exponentMask);
                 Vector512<int> rt = OnesComplement(Equals(exponent, exponentMask));
                 return rt;
             }
@@ -165,7 +165,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YIsFinite(Vector512<double> value) {
                 Vector512<long> exponentMask = Vector512Constants.Double_ExponentMask.AsInt64();
-                Vector512<long> exponent = Avx512.And(value.AsInt64(), exponentMask);
+                Vector512<long> exponent = Avx512F.And(value.AsInt64(), exponentMask);
                 Vector512<long> rt = OnesComplement(Equals(exponent, exponentMask));
                 return rt;
             }
@@ -185,7 +185,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<int> YIsInfinity(Vector512<float> value) {
                 Vector512<int> nonSignMask = Vector512Constants.Single_NonSignMask.AsInt32();
                 Vector512<int> exponentMask = Vector512Constants.Single_ExponentMask.AsInt32();
-                Vector512<int> nonSign = Avx512.And(value.AsInt32(), nonSignMask);
+                Vector512<int> nonSign = Avx512F.And(value.AsInt32(), nonSignMask);
                 Vector512<int> rt = Equals(nonSign, exponentMask);
                 return rt;
             }
@@ -195,7 +195,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<long> YIsInfinity(Vector512<double> value) {
                 Vector512<long> nonSignMask = Vector512Constants.Double_NonSignMask.AsInt64();
                 Vector512<long> exponentMask = Vector512Constants.Double_ExponentMask.AsInt64();
-                Vector512<long> nonSign = Avx512.And(value.AsInt64(), nonSignMask);
+                Vector512<long> nonSign = Avx512F.And(value.AsInt64(), nonSignMask);
                 Vector512<long> rt = Equals(nonSign, exponentMask);
                 return rt;
             }
@@ -214,7 +214,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsInfinityOrNaN(Vector512<float> value) {
                 Vector512<int> exponentMask = Vector512Constants.Single_ExponentMask.AsInt32();
-                Vector512<int> exponent = Avx512.And(value.AsInt32(), exponentMask);
+                Vector512<int> exponent = Avx512F.And(value.AsInt32(), exponentMask);
                 Vector512<int> rt = Equals(exponent, exponentMask);
                 return rt;
             }
@@ -223,7 +223,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YIsInfinityOrNaN(Vector512<double> value) {
                 Vector512<long> exponentMask = Vector512Constants.Double_ExponentMask.AsInt64();
-                Vector512<long> exponent = Avx512.And(value.AsInt64(), exponentMask);
+                Vector512<long> exponent = Avx512F.And(value.AsInt64(), exponentMask);
                 Vector512<long> rt = Equals(exponent, exponentMask);
                 return rt;
             }
@@ -241,20 +241,20 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YIsInteger(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsInteger(Vector512<float> value) {
-                Vector512<float> valueTrun = Avx.Floor(value);
+                Vector512<float> valueTrun = Floor(value);
                 Vector512<int> maskFinite = YIsFinite(value);
                 Vector512<int> maskEquals = Equals(value, valueTrun).AsInt32();
-                Vector512<int> rt = Avx512.And(maskFinite, maskEquals);
+                Vector512<int> rt = Avx512F.And(maskFinite, maskEquals);
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YIsInteger(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YIsInteger(Vector512<double> value) {
-                Vector512<double> valueTrun = Avx.Floor(value);
+                Vector512<double> valueTrun = Floor(value);
                 Vector512<long> maskFinite = YIsFinite(value);
                 Vector512<long> maskEquals = Equals(value, valueTrun).AsInt64();
-                Vector512<long> rt = Avx512.And(maskFinite, maskEquals);
+                Vector512<long> rt = Avx512F.And(maskFinite, maskEquals);
                 return rt;
             }
 
@@ -315,7 +315,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YIsNegative(Vector512<short> value) {
                 //Vector512<short> rt = LessThan(value, Vector512<short>.Zero);
-                Vector512<short> rt = Avx512.ShiftRightArithmetic(value, 15);
+                Vector512<short> rt = Avx512BW.ShiftRightArithmetic(value, 15);
                 return rt;
             }
 
@@ -323,7 +323,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsNegative(Vector512<int> value) {
                 //Vector512<int> rt = LessThan(value, Vector512<int>.Zero);
-                Vector512<int> rt = Avx512.ShiftRightArithmetic(value, 31);
+                Vector512<int> rt = Avx512F.ShiftRightArithmetic(value, 31);
                 return rt;
             }
 
@@ -401,8 +401,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsNormal(Vector512<float> value) {
                 Vector512<int> exponentMask = Vector512Constants.Single_ExponentMask.AsInt32();
-                Vector512<int> exponent = Avx512.And(value.AsInt32(), exponentMask);
-                Vector512<int> rt = Avx512.And(GreaterThan(exponent, Vector512<int>.Zero), GreaterThan(exponentMask, exponent));
+                Vector512<int> exponent = Avx512F.And(value.AsInt32(), exponentMask);
+                Vector512<int> rt = Avx512F.And(GreaterThan(exponent, Vector512<int>.Zero), GreaterThan(exponentMask, exponent));
                 return rt;
             }
 
@@ -410,11 +410,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YIsNormal(Vector512<double> value) {
                 Vector512<long> exponentMask = Vector512Constants.Double_ExponentMask.AsInt64();
-                Vector512<long> exponent = Avx512.And(value.AsInt64(), exponentMask);
-                Vector512<long> rt = Avx512.And(GreaterThan(exponent, Vector512<long>.Zero), GreaterThan(exponentMask, exponent));
+                Vector512<long> exponent = Avx512F.And(value.AsInt64(), exponentMask);
+                Vector512<long> rt = Avx512F.And(GreaterThan(exponent, Vector512<long>.Zero), GreaterThan(exponentMask, exponent));
                 return rt;
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNotEquals_AcceleratedTypes {
@@ -487,7 +487,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return Avx512F.CompareNotEqual(left, right);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.YIsNotNaN_AcceleratedTypes"/>
             public static TypeCodeFlags YIsNotNaN_AcceleratedTypes {
                 get {
@@ -510,7 +510,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger_AcceleratedTypes"/>
             public static TypeCodeFlags YIsOddInteger_AcceleratedTypes
             {

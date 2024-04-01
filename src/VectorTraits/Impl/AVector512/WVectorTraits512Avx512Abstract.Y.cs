@@ -291,7 +291,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<ulong> YIsEvenInteger(Vector512<ulong> value) {
             return Statics.YIsEvenInteger(value);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits512.YIsFinite_AcceleratedTypes"/>
         public override TypeCodeFlags YIsFinite_AcceleratedTypes {
@@ -496,7 +496,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<long> YIsNormal(Vector512<double> value) {
             return Statics.YIsNormal(value);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits512.YIsNotEquals_AcceleratedTypes"/>
         public override TypeCodeFlags YIsNotEquals_AcceleratedTypes {
@@ -569,7 +569,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YIsNotEquals(left, right);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.YIsNotNaN_AcceleratedTypes"/>
         public override TypeCodeFlags YIsNotNaN_AcceleratedTypes {
             get {
@@ -589,7 +589,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YIsNotNaN(value);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.YIsOddInteger_AcceleratedTypes"/>
         public override TypeCodeFlags YIsOddInteger_AcceleratedTypes
         {

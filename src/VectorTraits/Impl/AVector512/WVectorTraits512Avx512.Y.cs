@@ -8,7 +8,6 @@ using System.Runtime.Intrinsics.X86;
 #endif
 using Zyl.VectorTraits.Collections;
 using Zyl.VectorTraits.Impl.Util;
-using System.Reflection;
 
 namespace Zyl.VectorTraits.Impl.AVector512 {
     using SuperStatics = WVectorTraits512Base.Statics;
