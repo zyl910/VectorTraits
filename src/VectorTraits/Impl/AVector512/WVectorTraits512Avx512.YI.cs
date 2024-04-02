@@ -614,7 +614,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return YIsOddInteger(value.AsInt64()).AsUInt64();
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.YIsPositive_AcceleratedTypes"/>
             public static TypeCodeFlags YIsPositive_AcceleratedTypes {
                 get {
@@ -704,9 +704,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<int> exponentMask = Vector512Constants.Single_ExponentMask.AsInt32();
                 Vector512<int> mantissaMask = Vector512Constants.Single_MantissaMask.AsInt32();
                 Vector512<int> zero = Vector512<int>.Zero;
-                Vector512<int> exponent = Avx512.And(value.AsInt32(), exponentMask);
-                Vector512<int> mantissa = Avx512.And(value.AsInt32(), mantissaMask);
-                Vector512<int> rt = Avx512.And(Equals(exponent, zero), GreaterThan(mantissa, zero));
+                Vector512<int> exponent = Avx512F.And(value.AsInt32(), exponentMask);
+                Vector512<int> mantissa = Avx512F.And(value.AsInt32(), mantissaMask);
+                Vector512<int> rt = Avx512F.And(Equals(exponent, zero), GreaterThan(mantissa, zero));
                 return rt;
             }
 
@@ -716,9 +716,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<long> exponentMask = Vector512Constants.Double_ExponentMask.AsInt64();
                 Vector512<long> mantissaMask = Vector512Constants.Double_MantissaMask.AsInt64();
                 Vector512<long> zero = Vector512<long>.Zero;
-                Vector512<long> exponent = Avx512.And(value.AsInt64(), exponentMask);
-                Vector512<long> mantissa = Avx512.And(value.AsInt64(), mantissaMask);
-                Vector512<long> rt = Avx512.And(Equals(exponent, zero), GreaterThan(mantissa, zero));
+                Vector512<long> exponent = Avx512F.And(value.AsInt64(), exponentMask);
+                Vector512<long> mantissa = Avx512F.And(value.AsInt64(), mantissaMask);
+                Vector512<long> rt = Avx512F.And(Equals(exponent, zero), GreaterThan(mantissa, zero));
                 return rt;
             }
 
@@ -809,7 +809,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YIsZeroOrSubnormal(Vector512<float> value) {
                 Vector512<int> exponentMask = Vector512Constants.Single_ExponentMask.AsInt32();
-                Vector512<int> exponent = Avx512.And(value.AsInt32(), exponentMask);
+                Vector512<int> exponent = Avx512F.And(value.AsInt32(), exponentMask);
                 Vector512<int> rt = Equals(exponent, Vector512<int>.Zero);
                 return rt;
             }
@@ -818,11 +818,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YIsZeroOrSubnormal(Vector512<double> value) {
                 Vector512<long> exponentMask = Vector512Constants.Double_ExponentMask.AsInt64();
-                Vector512<long> exponent = Avx512.And(value.AsInt64(), exponentMask);
+                Vector512<long> exponent = Avx512F.And(value.AsInt64(), exponentMask);
                 Vector512<long> rt = Equals(exponent, Vector512<long>.Zero);
                 return rt;
             }
-*/
+
 #endif // NET8_0_OR_GREATER
         }
     }

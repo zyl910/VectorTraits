@@ -673,7 +673,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YIsOddInteger(value);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.YIsPositive_AcceleratedTypes"/>
         public override TypeCodeFlags YIsPositive_AcceleratedTypes {
             get {
@@ -850,7 +850,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YIsZeroOrSubnormal(value);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits512.YMaxNumber_AcceleratedTypes"/>
         public override TypeCodeFlags YMaxNumber_AcceleratedTypes {
             get {
