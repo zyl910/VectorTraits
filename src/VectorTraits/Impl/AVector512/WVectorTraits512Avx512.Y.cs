@@ -240,7 +240,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.YMaxNumber_AcceleratedTypes"/>
             public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
                 get {
@@ -254,7 +254,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<float> YMaxNumber(Vector512<float> left, Vector512<float> right) {
                 Vector512<float> mask = BitwiseOr(GreaterThan(left, right), YIsNaN(right).AsSingle());
                 mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(right).AsSingle()));
-                Vector512<float> rt = Avx.BlendVariable(right, left, mask); // ConditionalSelect(mask, left, right);
+                Vector512<float> rt = ConditionalSelect(mask, left, right);
                 return rt;
             }
 
@@ -263,7 +263,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<double> YMaxNumber(Vector512<double> left, Vector512<double> right) {
                 Vector512<double> mask = BitwiseOr(GreaterThan(left, right), YIsNaN(right).AsDouble());
                 mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(right).AsDouble()));
-                Vector512<double> rt = Avx.BlendVariable(right, left, mask); // ConditionalSelect(mask, left, right);
+                Vector512<double> rt = ConditionalSelect(mask, left, right);
                 return rt;
             }
 
@@ -281,7 +281,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<float> YMinNumber(Vector512<float> left, Vector512<float> right) {
                 Vector512<float> mask = BitwiseOr(LessThan(left, right), YIsNaN(right).AsSingle());
                 mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(left).AsSingle()));
-                Vector512<float> rt = Avx.BlendVariable(right, left, mask); // ConditionalSelect(mask, left, right);
+                Vector512<float> rt = ConditionalSelect(mask, left, right);
                 return rt;
             }
 
@@ -290,10 +290,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<double> YMinNumber(Vector512<double> left, Vector512<double> right) {
                 Vector512<double> mask = BitwiseOr(LessThan(left, right), YIsNaN(right).AsDouble());
                 mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(left).AsDouble()));
-                Vector512<double> rt = Avx.BlendVariable(right, left, mask); // ConditionalSelect(mask, left, right);
+                Vector512<double> rt =  ConditionalSelect(mask, left, right);
                 return rt;
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {

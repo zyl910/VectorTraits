@@ -850,7 +850,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YIsZeroOrSubnormal(value);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.YMaxNumber_AcceleratedTypes"/>
         public override TypeCodeFlags YMaxNumber_AcceleratedTypes {
             get {
@@ -889,7 +889,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<double> YMinNumber(Vector512<double> left, Vector512<double> right) {
             return Statics.YMinNumber(left, right);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits512.YNarrowSaturate_AcceleratedTypes"/>
         public override TypeCodeFlags YNarrowSaturate_AcceleratedTypes {

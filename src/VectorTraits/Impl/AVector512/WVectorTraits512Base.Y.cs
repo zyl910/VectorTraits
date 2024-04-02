@@ -695,14 +695,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I5 = MathINumber.MaxNumber(pleft.I5, pright.I5);
                 p.I6 = MathINumber.MaxNumber(pleft.I6, pright.I6);
                 p.I7 = MathINumber.MaxNumber(pleft.I7, pright.I7);
-                p.I0 = MathINumber.MaxNumber(pleft.I8, pright.I8);
-                p.I1 = MathINumber.MaxNumber(pleft.I9, pright.I9);
-                p.I2 = MathINumber.MaxNumber(pleft.I10, pright.I10);
-                p.I3 = MathINumber.MaxNumber(pleft.I11, pright.I11);
-                p.I4 = MathINumber.MaxNumber(pleft.I12, pright.I12);
-                p.I5 = MathINumber.MaxNumber(pleft.I13, pright.I13);
-                p.I6 = MathINumber.MaxNumber(pleft.I14, pright.I14);
-                p.I7 = MathINumber.MaxNumber(pleft.I15, pright.I15);
+                p.I8 = MathINumber.MaxNumber(pleft.I8, pright.I8);
+                p.I9 = MathINumber.MaxNumber(pleft.I9, pright.I9);
+                p.I10 = MathINumber.MaxNumber(pleft.I10, pright.I10);
+                p.I11 = MathINumber.MaxNumber(pleft.I11, pright.I11);
+                p.I12 = MathINumber.MaxNumber(pleft.I12, pright.I12);
+                p.I13 = MathINumber.MaxNumber(pleft.I13, pright.I13);
+                p.I14 = MathINumber.MaxNumber(pleft.I14, pright.I14);
+                p.I15 = MathINumber.MaxNumber(pleft.I15, pright.I15);
                 return rt;
             }
 
@@ -793,14 +793,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I5 = MathINumber.MinNumber(pleft.I5, pright.I5);
                 p.I6 = MathINumber.MinNumber(pleft.I6, pright.I6);
                 p.I7 = MathINumber.MinNumber(pleft.I7, pright.I7);
-                p.I0 = MathINumber.MinNumber(pleft.I8, pright.I8);
-                p.I1 = MathINumber.MinNumber(pleft.I9, pright.I9);
-                p.I2 = MathINumber.MinNumber(pleft.I10, pright.I10);
-                p.I3 = MathINumber.MinNumber(pleft.I11, pright.I11);
-                p.I4 = MathINumber.MinNumber(pleft.I12, pright.I12);
-                p.I5 = MathINumber.MinNumber(pleft.I13, pright.I13);
-                p.I6 = MathINumber.MinNumber(pleft.I14, pright.I14);
-                p.I7 = MathINumber.MinNumber(pleft.I15, pright.I15);
+                p.I8 = MathINumber.MinNumber(pleft.I8, pright.I8);
+                p.I9 = MathINumber.MinNumber(pleft.I9, pright.I9);
+                p.I10 = MathINumber.MinNumber(pleft.I10, pright.I10);
+                p.I11 = MathINumber.MinNumber(pleft.I11, pright.I11);
+                p.I12 = MathINumber.MinNumber(pleft.I12, pright.I12);
+                p.I13 = MathINumber.MinNumber(pleft.I13, pright.I13);
+                p.I14 = MathINumber.MinNumber(pleft.I14, pright.I14);
+                p.I15 = MathINumber.MinNumber(pleft.I15, pright.I15);
                 return rt;
             }
 
