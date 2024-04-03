@@ -474,14 +474,16 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{long}, Vector512{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> Narrow(Vector512<long> lower, Vector512<long> upper) {
-                return Vector512.Create(Avx512F.ConvertToVector256Int32(lower), Avx512F.ConvertToVector256Int32(upper));
+                // return Vector512.Create(Avx512F.ConvertToVector256Int32(lower), Avx512F.ConvertToVector256Int32(upper)); // 2*vpmovqd, 2*vinsertf64x4
+                return Vector512.Narrow(lower, upper); // 2*vpmovqd, 1*vinsertf64x4
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{ulong}, Vector512{ulong})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> Narrow(Vector512<ulong> lower, Vector512<ulong> upper) {
-                return Vector512.Create(Avx512F.ConvertToVector256UInt32(lower), Avx512F.ConvertToVector256UInt32(upper));
+                // return Vector512.Create(Avx512F.ConvertToVector256UInt32(lower), Avx512F.ConvertToVector256UInt32(upper)); // 2*vpmovqd, 2*vinsertf64x4
+                return Vector512.Narrow(lower, upper); // 2*vpmovqd, 1*vinsertf64x4
             }
 
 

@@ -10,8 +10,10 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 #endif
 using System.Text;
+using System.Threading;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
+using Zyl.VectorTraits.Impl.AVector512;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
 #if BENCHMARKS_OFF
@@ -325,5 +327,197 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YN {
         #endregion // BENCHMARKS_256ALGORITHM
 
 #endif // NETCOREAPP3_0_OR_GREATER
+
+#if NET8_0_OR_GREATER
+
+        #region BENCHMARKS_512ALGORITHM
+#if BENCHMARKS_512ALGORITHM
+
+        /// <summary>
+        /// Sum Narrow - Vector512 - Base static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSumNarrowVector512Base(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMyOut> vrt = Vector512<TMyOut>.Zero; // Vector512 result.
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                var t = WVectorTraits512Base.Statics.YNarrowSaturate(p0, Unsafe.Add(ref p0, 1));
+                vrt = Vector512.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += Narrow_BitMath(Unsafe.Add(ref p, i));
+            }
+            // Reduce.
+            for (i = 0; i < Vector512<TMyOut>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumNarrowVector512Base() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumNarrowVector512Base(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVector512Base");
+        }
+
+        /// <summary>
+        /// Sum Narrow - Vector512 - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSumNarrowVector512Traits(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMyOut> vrt = Vector512<TMyOut>.Zero; // Vector512 result.
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                var t = Vector512s.YNarrowSaturate(p0, Unsafe.Add(ref p0, 1));
+                vrt = Vector512s.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += Narrow_BitMath(Unsafe.Add(ref p, i));
+            }
+            // Reduce.
+            for (i = 0; i < Vector512<TMyOut>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumNarrowVector512Traits() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumNarrowVector512Traits(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVector512Traits");
+        }
+
+        /// <summary>
+        /// Sum Narrow - Vector512 - Clamp static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSumNarrowVector512_Clamp(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMyOut> vrt = Vector512<TMyOut>.Zero; // Vector512 result.
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                var t = WVectorTraits512Avx512.Statics.YNarrowSaturate_Clamp(p0, Unsafe.Add(ref p0, 1));
+                vrt = Vector512.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += Narrow_BitMath(Unsafe.Add(ref p, i));
+            }
+            // Reduce.
+            for (i = 0; i < Vector512<TMyOut>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumNarrowVector512_Clamp() {
+            WVectorTraits512Avx512.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumNarrowVector512_Clamp(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVector512_Clamp");
+        }
+
+        /// <summary>
+        /// Sum Narrow - Vector512 - Convert static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSumNarrowVector512_Convert(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMyOut> vrt = Vector512<TMyOut>.Zero; // Vector512 result.
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                var t = WVectorTraits512Avx512.Statics.YNarrowSaturate_Convert(p0, Unsafe.Add(ref p0, 1));
+                vrt = Vector512.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += Narrow_BitMath(Unsafe.Add(ref p, i));
+            }
+            // Reduce.
+            for (i = 0; i < Vector512<TMyOut>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumNarrowVector512_Convert() {
+            WVectorTraits512Avx512.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumNarrowVector512_Convert(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVector512_Convert");
+        }
+
+#endif // BENCHMARKS_512ALGORITHM
+        #endregion // BENCHMARKS_512ALGORITHM
+
+#endif // NET8_0_OR_GREATER
     }
 }

@@ -89,6 +89,7 @@ namespace Zyl.VectorTraits.Benchmarks {
             if (ShowFixedVector) {
                 AloneTestVector128(writer);
                 AloneTestVector256(writer);
+                AloneTestVector512(writer);
             }
             if (ShowCpuDetection) {
                 AloneTestCpuDetection(writer);
@@ -348,6 +349,42 @@ namespace Zyl.VectorTraits.Benchmarks {
             } // ShowTest
 
 #endif // NETCOREAPP3_0_OR_GREATER
+        }
+
+        /// <summary>
+        /// Alone test Vector512.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public static void AloneTestVector512(TextWriter writer) {
+#if NET8_0_OR_GREATER
+            string indentNext = IndentNextSeparator;
+
+            // -- TraitsInstances --
+            IReadOnlyList<IWVectorTraits512> instances = Vector512s.TraitsInstances;
+            foreach (IWVectorTraits512 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK.");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage(true)}");
+                }
+            }
+            if (ShowAccelerated) {
+                IWVectorTraits512 instance = Vector512s.Instance;
+                writer.WriteLine(string.Format("[Vector512s.Instance: {0}]", instance.GetType().Name));
+                VectorTextUtil.OutputProperties(writer, instance);
+            }
+            writer.WriteLine();
+
+            if (ShowTest) {
+                VectorTextUtil.WriteLine(writer, "Vector512s<float>.Demo:\t{0}", Vector512s<float>.Demo);
+                VectorTextUtil.WriteLine(writer, "Vector512s<double>.Demo:\t{0}", Vector512s<double>.Demo);
+                VectorTextUtil.WriteLine(writer, "Vector512s<double>.DemoNaN:\t{0}", Vector512s<double>.DemoNaN);
+                VectorTextUtil.WriteLine(writer, "Vector512s<double>.DemoNaN2:\t{0}", Vector512s<double>.DemoNaN2);
+                writer.WriteLine();
+
+            } // ShowTest
+
+#endif // NET8_0_OR_GREATER
         }
 
     }
