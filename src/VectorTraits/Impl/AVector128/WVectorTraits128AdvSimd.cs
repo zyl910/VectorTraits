@@ -160,7 +160,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<double> Ceiling(Vector128<double> value) {
                 Vector64<double> lower = AdvSimd.CeilingScalar(Vector128.GetLower(value));
                 Vector64<double> upper = AdvSimd.CeilingScalar(Vector128.GetUpper(value));
-                Vector128<double> rt = Vector128.Create(lower, upper);
+                Vector128<double> rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
                 return rt;
             }
 
@@ -290,7 +290,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector64<double> right = magicNumber.AsDouble().GetLower();
                 Vector64<double> lower = AdvSimd.AddScalar(AdvSimd.RoundToZeroScalar(value.GetLower()), right);
                 Vector64<double> upper = AdvSimd.AddScalar(AdvSimd.RoundToZeroScalar(value.GetUpper()), right);
-                Vector128<double> x = Vector128.Create(lower, upper);
+                Vector128<double> x = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
                 Vector128<long> result = AdvSimd.Subtract(x.AsInt64(), magicNumber);
                 return result;
             }
@@ -382,7 +382,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector64<double> right = magicNumber.AsDouble().GetLower();
                 Vector64<double> lower = AdvSimd.AddScalar(AdvSimd.RoundToZeroScalar(value.GetLower()), right);
                 Vector64<double> upper = AdvSimd.AddScalar(AdvSimd.RoundToZeroScalar(value.GetUpper()), right);
-                Vector128<double> x = Vector128.Create(lower, upper);
+                Vector128<double> x = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
                 Vector128<ulong> result = AdvSimd.Xor(x.AsUInt64(), magicNumber);
                 return result;
             }
@@ -625,7 +625,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<double> Floor(Vector128<double> value) {
                 Vector64<double> lower = AdvSimd.FloorScalar(Vector128.GetLower(value));
                 Vector64<double> upper = AdvSimd.FloorScalar(Vector128.GetUpper(value));
-                Vector128<double> rt = Vector128.Create(lower, upper);
+                Vector128<double> rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
                 return rt;
             }
 

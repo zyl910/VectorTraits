@@ -89,7 +89,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<double> Add(Vector128<double> left, Vector128<double> right) {
                 Vector64<double> lower = AdvSimd.AddScalar(Vector128.GetLower(left), Vector128.GetLower(right));
                 Vector64<double> upper = AdvSimd.AddScalar(Vector128.GetUpper(left), Vector128.GetUpper(right));
-                Vector128<double> rt = Vector128.Create(lower, upper);
+                Vector128<double> rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
                 return rt;
             }
 
@@ -1750,7 +1750,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<double> Negate(Vector128<double> value) {
                 Vector64<double> lower = AdvSimd.NegateScalar(Vector128.GetLower(value));
                 Vector64<double> upper = AdvSimd.NegateScalar(Vector128.GetUpper(value));
-                Vector128<double> rt = Vector128.Create(lower, upper);
+                Vector128<double> rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
                 return rt;
             }
 
@@ -1811,8 +1811,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector64<float> b2 = AdvSimd.SqrtScalar(a0.GetUpper());
                 Vector64<float> b1 = AdvSimd.SqrtScalar(a1.GetLower());
                 Vector64<float> b3 = AdvSimd.SqrtScalar(a1.GetUpper());
-                Vector128<float> c0 = Vector128.Create(b0, b2);
-                Vector128<float> c1 = Vector128.Create(b1, b3);
+                Vector128<float> c0 = b0.ToVector128Unsafe().WithUpper(b2); //Vector128.Create(b0, b2);
+                Vector128<float> c1 = b1.ToVector128Unsafe().WithUpper(b3); //Vector128.Create(b1, b3);
                 c1 = AdvSimd.ShiftLeftLogical(c1.AsUInt64(), 32).AsSingle();
                 Vector128<float> rt = AdvSimd.Or(c0, c1);
                 return rt;
@@ -1823,7 +1823,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<double> Sqrt(Vector128<double> value) {
                 Vector64<double> dst0 = AdvSimd.SqrtScalar(value.GetLower());
                 Vector64<double> dst1 = AdvSimd.SqrtScalar(value.GetUpper());
-                Vector128<double> rt = Vector128.Create(dst0, dst1);
+                Vector128<double> rt = dst0.ToVector128Unsafe().WithUpper(dst1); //Vector128.Create(dst0, dst1);
                 return rt;
             }
 
@@ -1959,7 +1959,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<double> Subtract(Vector128<double> left, Vector128<double> right) {
                 Vector64<double> lower = AdvSimd.SubtractScalar(Vector128.GetLower(left), Vector128.GetLower(right));
                 Vector64<double> upper = AdvSimd.SubtractScalar(Vector128.GetUpper(left), Vector128.GetUpper(right));
-                Vector128<double> rt = Vector128.Create(lower, upper);
+                Vector128<double> rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
                 return rt;
             }
 

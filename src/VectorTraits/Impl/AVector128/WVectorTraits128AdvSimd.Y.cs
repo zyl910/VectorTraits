@@ -424,7 +424,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<double> YRoundToEven(Vector128<double> value) {
                 Vector64<double> lower = AdvSimd.RoundToNearestScalar(Vector128.GetLower(value));
                 Vector64<double> upper = AdvSimd.RoundToNearestScalar(Vector128.GetUpper(value));
-                Vector128<double> rt = Vector128.Create(lower, upper);
+                Vector128<double> rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
                 return rt;
             }
 
@@ -448,7 +448,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<double> YRoundToZero(Vector128<double> value) {
                 Vector64<double> lower = AdvSimd.RoundToZeroScalar(Vector128.GetLower(value));
                 Vector64<double> upper = AdvSimd.RoundToZeroScalar(Vector128.GetUpper(value));
-                Vector128<double> rt = Vector128.Create(lower, upper);
+                Vector128<double> rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
                 return rt;
             }
 

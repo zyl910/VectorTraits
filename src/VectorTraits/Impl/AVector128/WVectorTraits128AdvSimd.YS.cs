@@ -476,10 +476,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleInsert(Vector128<byte> back, Vector128<byte> vector, Vector128<byte> indices) {
-                var rt = Vector128.Create(
-                    AdvSimd.VectorTableLookupExtension(back.GetLower(), vector, indices.GetLower()),
-                    AdvSimd.VectorTableLookupExtension(back.GetUpper(), vector, indices.GetUpper())
-                );
+                var lower = AdvSimd.VectorTableLookupExtension(back.GetLower(), vector, indices.GetLower());
+                var upper = AdvSimd.VectorTableLookupExtension(back.GetUpper(), vector, indices.GetUpper());
+                var rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
                 return rt;
             }
 
@@ -633,10 +632,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<byte> YShuffleInsert_Core(Vector128<byte> back, Vector128<byte> vector, Vector128<byte> args0, Vector128<byte> args1, Vector128<byte> args2) {
                 _ = args1;
                 _ = args2;
-                var rt = Vector128.Create(
-                    AdvSimd.VectorTableLookupExtension(back.GetLower(), vector, args0.GetLower()),
-                    AdvSimd.VectorTableLookupExtension(back.GetUpper(), vector, args0.GetUpper())
-                );
+                var lower = AdvSimd.VectorTableLookupExtension(back.GetLower(), vector, args0.GetLower());
+                var upper = AdvSimd.VectorTableLookupExtension(back.GetUpper(), vector, args0.GetUpper());
+                var rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
                 return rt;
             }
 
@@ -710,10 +708,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleKernel(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleKernel(Vector128<byte> vector, Vector128<byte> indices) {
-                var rt = Vector128.Create(
-                    AdvSimd.VectorTableLookup(vector, indices.GetLower()),
-                    AdvSimd.VectorTableLookup(vector, indices.GetUpper())
-                );
+                var lower = AdvSimd.VectorTableLookup(vector, indices.GetLower());
+                var upper = AdvSimd.VectorTableLookup(vector, indices.GetUpper());
+                var rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
                 return rt;
             }
 
@@ -868,10 +865,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleKernel_Core(Vector128<byte> vector, Vector128<byte> args0, Vector128<byte> args1) {
                 _ = args1;
-                var rt = Vector128.Create(
-                    AdvSimd.VectorTableLookup(vector, args0.GetLower()),
-                    AdvSimd.VectorTableLookup(vector, args0.GetUpper())
-                );
+                var lower = AdvSimd.VectorTableLookup(vector, args0.GetLower());
+                var upper = AdvSimd.VectorTableLookup(vector, args0.GetUpper());
+                var rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
                 return rt;
             }
 
