@@ -27,7 +27,9 @@ namespace Zyl.VectorTraits {
             "VectorTraits128Avx2",
             "VectorTraits128Sse",
             "VectorTraits256Base",
-            "VectorTraits256Avx2"
+            "VectorTraits256Avx2",
+            "VectorTraits512Base",
+            "VectorTraits512Avx512"
         };
 
         private static readonly IVectorTraits[] _traitsInstances = {
@@ -38,7 +40,9 @@ namespace Zyl.VectorTraits {
             VectorTraits128Avx2.Instance,
             VectorTraits128Sse.Instance,
             VectorTraits256Base.Instance,
-            VectorTraits256Avx2.Instance
+            VectorTraits256Avx2.Instance,
+            VectorTraits512Base.Instance,
+            VectorTraits512Avx512.Instance
         };
 
         // Statics types (静态类型集).
@@ -50,7 +54,9 @@ namespace Zyl.VectorTraits {
             typeof(VectorTraits128Avx2.Statics),
             typeof(VectorTraits128Sse.Statics),
             typeof(VectorTraits256Base.Statics),
-            typeof(VectorTraits256Avx2.Statics)
+            typeof(VectorTraits256Avx2.Statics),
+            typeof(VectorTraits512Base.Statics),
+            typeof(VectorTraits512Avx512.Statics)
         };
 
         /// <summary>Best traits instance (最佳特征实例). </summary>

@@ -1079,6 +1079,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return Avx512F.ShiftRightArithmetic(value, (byte)shiftAmount);
             }
 
+            /// <inheritdoc cref="IWVectorTraits512.ShiftRightArithmetic_Fast(Vector512{long}, int)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<long> ShiftRightArithmetic_Fast_Negative(Vector512<long> value, int shiftAmount) {
+                Vector512<long> sign = Avx512F.CompareGreaterThan(Vector512<long>.Zero, value);
+                byte shiftAmountLeft = (byte)(64 - shiftAmount);
+                Vector512<long> rt = Avx512F.Or(Avx512F.ShiftRightLogical(value, (byte)shiftAmount), Avx512F.ShiftLeftLogical(sign, shiftAmountLeft));
+                return rt;
+            }
 
             /// <inheritdoc cref="IWVectorTraits512.ShiftRightLogical_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftRightLogical_AcceleratedTypes {
