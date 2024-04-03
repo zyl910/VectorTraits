@@ -441,41 +441,42 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{double}, Vector512{double})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Narrow(Vector512<double> lower, Vector512<double> upper) {
-                return Vector512.Create(Avx512F.ConvertToVector256Single(lower), Avx512F.ConvertToVector256Single(upper));
+                return Avx512F.ConvertToVector256Single(lower).ToVector512Unsafe().WithUpper(Avx512F.ConvertToVector256Single(upper));
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{short}, Vector512{short})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> Narrow(Vector512<short> lower, Vector512<short> upper) {
-                return Vector512.Create(Avx512BW.ConvertToVector256SByte(lower), Avx512BW.ConvertToVector256SByte(upper));
+                return Avx512BW.ConvertToVector256SByte(lower).ToVector512Unsafe().WithUpper(Avx512BW.ConvertToVector256SByte(upper));
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{ushort}, Vector512{ushort})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> Narrow(Vector512<ushort> lower, Vector512<ushort> upper) {
-                return Vector512.Create(Avx512BW.ConvertToVector256Byte(lower), Avx512BW.ConvertToVector256Byte(upper));
+                return Avx512BW.ConvertToVector256Byte(lower).ToVector512Unsafe().WithUpper(Avx512BW.ConvertToVector256Byte(upper));
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{int}, Vector512{int})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> Narrow(Vector512<int> lower, Vector512<int> upper) {
-                return Vector512.Create(Avx512F.ConvertToVector256Int16(lower), Avx512F.ConvertToVector256Int16(upper));
+                return Avx512F.ConvertToVector256Int16(lower).ToVector512Unsafe().WithUpper(Avx512F.ConvertToVector256Int16(upper));
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{uint}, Vector512{uint})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> Narrow(Vector512<uint> lower, Vector512<uint> upper) {
-                return Vector512.Create(Avx512F.ConvertToVector256UInt16(lower), Avx512F.ConvertToVector256UInt16(upper));
+                return Avx512F.ConvertToVector256UInt16(lower).ToVector512Unsafe().WithUpper(Avx512F.ConvertToVector256UInt16(upper));
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{long}, Vector512{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> Narrow(Vector512<long> lower, Vector512<long> upper) {
                 // return Vector512.Create(Avx512F.ConvertToVector256Int32(lower), Avx512F.ConvertToVector256Int32(upper)); // 2*vpmovqd, 2*vinsertf64x4
-                return Vector512.Narrow(lower, upper); // 2*vpmovqd, 1*vinsertf64x4
+                // return Vector512.Narrow(lower, upper); // 2*vpmovqd, 1*vinsertf64x4
+                return Avx512F.ConvertToVector256Int32(lower).ToVector512Unsafe().WithUpper(Avx512F.ConvertToVector256Int32(upper));
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Narrow(Vector512{ulong}, Vector512{ulong})" />
@@ -483,7 +484,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> Narrow(Vector512<ulong> lower, Vector512<ulong> upper) {
                 // return Vector512.Create(Avx512F.ConvertToVector256UInt32(lower), Avx512F.ConvertToVector256UInt32(upper)); // 2*vpmovqd, 2*vinsertf64x4
-                return Vector512.Narrow(lower, upper); // 2*vpmovqd, 1*vinsertf64x4
+                // return Vector512.Narrow(lower, upper); // 2*vpmovqd, 1*vinsertf64x4
+                return Avx512F.ConvertToVector256UInt32(lower).ToVector512Unsafe().WithUpper(Avx512F.ConvertToVector256UInt32(upper));
             }
 
 
