@@ -880,10 +880,10 @@ namespace Zyl.VectorTraits.Impl {
 
 #if !REDUCE_MEMORY_USAGE
         private static readonly Vector512<uint>[] m_YShuffleG2_UInt32_Indices = {
-            Vector512.Create((uint)0, 0, 2, 2, 4, 4, 6, 6), // XX
-            Vector512.Create((uint)1, 0, 3, 2, 5, 4, 7, 6), // YX
-            Vector512.Create((uint)0, 1, 2, 3, 4, 5, 6, 7), // XY
-            Vector512.Create((uint)1, 1, 3, 3, 5, 5, 7, 7), // YY
+            Vector512.Create((uint)0, 0, 2, 2, 4, 4, 6, 6, 0, 0, 2, 2, 4, 4, 6, 6), // XX
+            Vector512.Create((uint)1, 0, 3, 2, 5, 4, 7, 6, 1, 0, 3, 2, 5, 4, 7, 6), // YX
+            Vector512.Create((uint)0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7), // XY
+            Vector512.Create((uint)1, 1, 3, 3, 5, 5, 7, 7, 1, 1, 3, 3, 5, 5, 7, 7), // YY
         };
         /// <summary>YShuffleG2 - UInt32 - The uint32 indices.</summary>
         /// <param name="index">The index (索引).</param>

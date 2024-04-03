@@ -61,7 +61,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{byte}, Vector256{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<byte> Shuffle_Base_Basic(Vector256<byte> vector, Vector256<byte> indices) {
-            UnsafeEx.SkipInit(out Vector256<byte> rt);
+            UnsafeUtil.SkipInit(out Vector256<byte> rt);
             byte cnt = (byte)Vector256<byte>.Count;
             ref byte q = ref Unsafe.As<Vector256<byte>, byte>(ref rt);
             ref byte p = ref Unsafe.As<Vector256<byte>, byte>(ref vector);
@@ -81,7 +81,7 @@ namespace Zyl.VectorTraits.Impl {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ushort> Shuffle_Base_Basic(Vector256<ushort> vector, Vector256<ushort> indices) {
-            UnsafeEx.SkipInit(out Vector256<ushort> rt);
+            UnsafeUtil.SkipInit(out Vector256<ushort> rt);
             ushort cnt = (ushort)Vector256<ushort>.Count;
             ref ushort q = ref Unsafe.As<Vector256<ushort>, ushort>(ref rt);
             ref ushort p = ref Unsafe.As<Vector256<ushort>, ushort>(ref vector);
@@ -174,7 +174,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="IWVectorTraits256.YShuffleInsert(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<byte> YShuffleInsert_Base_Basic(Vector256<byte> back, Vector256<byte> vector, Vector256<byte> indices) {
-            UnsafeEx.SkipInit(out Vector256<byte> rt);
+            UnsafeUtil.SkipInit(out Vector256<byte> rt);
             byte cnt = (byte)Vector256<byte>.Count;
             ref byte q = ref Unsafe.As<Vector256<byte>, byte>(ref rt);
             ref byte p = ref Unsafe.As<Vector256<byte>, byte>(ref vector);
@@ -195,7 +195,7 @@ namespace Zyl.VectorTraits.Impl {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ushort> YShuffleInsert_Base_Basic(Vector256<ushort> back, Vector256<ushort> vector, Vector256<ushort> indices) {
-            UnsafeEx.SkipInit(out Vector256<ushort> rt);
+            UnsafeUtil.SkipInit(out Vector256<ushort> rt);
             ushort cnt = (ushort)Vector256<ushort>.Count;
             ref ushort q = ref Unsafe.As<Vector256<ushort>, ushort>(ref rt);
             ref ushort p = ref Unsafe.As<Vector256<ushort>, ushort>(ref vector);

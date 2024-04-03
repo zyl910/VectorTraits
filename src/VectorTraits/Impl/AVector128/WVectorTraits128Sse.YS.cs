@@ -116,6 +116,171 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 }
             }
 
+#if !REDUCE_MEMORY_USAGE
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{float}, ShuffleControlG2)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleG2_Const(Vector128<float> source, [ConstantExpected] ShuffleControlG2 control) {
+#if NETX_0_OR_GREATER // Requires support for compiling constants to immediate numbers
+                return YShuffleG2_Const_Imm(source, control);
+#else
+                return YShuffleG2(source, control);
+#endif // NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{double}, ShuffleControlG2)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleG2_Const(Vector128<double> source, [ConstantExpected] ShuffleControlG2 control) {
+#if NETX_0_OR_GREATER // Requires support for compiling constants to immediate numbers
+                return YShuffleG2_Const_Imm(source, control);
+#else
+                return YShuffleG2(source, control);
+#endif // NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{sbyte}, ShuffleControlG2)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleG2_Const(Vector128<sbyte> source, [ConstantExpected] ShuffleControlG2 control) {
+                return YShuffleG2(source, control);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{byte}, ShuffleControlG2)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleG2_Const(Vector128<byte> source, [ConstantExpected] ShuffleControlG2 control) {
+                return YShuffleG2(source, control);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{short}, ShuffleControlG2)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleG2_Const(Vector128<short> source, [ConstantExpected] ShuffleControlG2 control) {
+#if NETX_0_OR_GREATER // Requires support for compiling constants to immediate numbers
+                return YShuffleG2_Const_Imm(source, control);
+#else
+                return YShuffleG2(source, control);
+#endif // NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{ushort}, ShuffleControlG2)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleG2_Const(Vector128<ushort> source, [ConstantExpected] ShuffleControlG2 control) {
+#if NETX_0_OR_GREATER // Requires support for compiling constants to immediate numbers
+                return YShuffleG2_Const_Imm(source, control);
+#else
+                return YShuffleG2(source, control);
+#endif // NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{int}, ShuffleControlG2)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleG2_Const(Vector128<int> source, [ConstantExpected] ShuffleControlG2 control) {
+#if NETX_0_OR_GREATER // Requires support for compiling constants to immediate numbers
+                return YShuffleG2_Const_Imm(source, control);
+#else
+                return YShuffleG2(source, control);
+#endif // NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{uint}, ShuffleControlG2)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleG2_Const(Vector128<uint> source, [ConstantExpected] ShuffleControlG2 control) {
+#if NETX_0_OR_GREATER // Requires support for compiling constants to immediate numbers
+                return YShuffleG2_Const_Imm(source, control);
+#else
+                return YShuffleG2(source, control);
+#endif // NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{long}, ShuffleControlG2)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleG2_Const(Vector128<long> source, [ConstantExpected] ShuffleControlG2 control) {
+#if NETX_0_OR_GREATER // Requires support for compiling constants to immediate numbers
+                return YShuffleG2_Const_Imm(source, control);
+#else
+                return YShuffleG2(source, control);
+#endif // NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{ulong}, ShuffleControlG2)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleG2_Const(Vector128<ulong> source, [ConstantExpected] ShuffleControlG2 control) {
+#if NETX_0_OR_GREATER // Requires support for compiling constants to immediate numbers
+                return YShuffleG2_Const_Imm(source, control);
+#else
+                return YShuffleG2(source, control);
+#endif // NETX_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{float}, ShuffleControlG2)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleG2_Const_Imm(Vector128<float> source, [ConstantExpected] ShuffleControlG2 control) {
+                return YShuffleG2_Const_Imm(source.AsUInt32(), control).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{double}, ShuffleControlG2)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleG2_Const_Imm(Vector128<double> source, [ConstantExpected] ShuffleControlG2 control) {
+                byte ctl = (byte)((byte)control * 5);
+                return Ssse3.Shuffle(source, source, ctl);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{short}, ShuffleControlG2)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleG2_Const_Imm(Vector128<short> source, [ConstantExpected] ShuffleControlG2 control) {
+                return YShuffleG2_Const_Imm(source.AsUInt16(), control).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{ushort}, ShuffleControlG2)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleG2_Const_Imm(Vector128<ushort> source, [ConstantExpected] ShuffleControlG2 control) {
+                byte n = (byte)control;
+                byte ctl = (byte)(0xA0 + (n & 2) * 0x22 + (n & 1) * 0x11); // ShuffleControlG2 to ShuffleControlG4
+                return Sse2.ShuffleHigh(Sse2.ShuffleLow(source, ctl), ctl);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{int}, ShuffleControlG2)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleG2_Const_Imm(Vector128<int> source, [ConstantExpected] ShuffleControlG2 control) {
+                return YShuffleG2_Const_Imm(source.AsUInt32(), control).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{int}, ShuffleControlG2)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleG2_Const_ImmByte(Vector128<int> source, [ConstantExpected(Max = 3)] byte control) {
+                byte ctl = (byte)(0xA0 + (control & 2) * 0x22 + (control & 1) * 0x11); // ShuffleControlG2 to ShuffleControlG4
+                return Sse2.Shuffle(source, ctl);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{uint}, ShuffleControlG2)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleG2_Const_Imm(Vector128<uint> source, [ConstantExpected] ShuffleControlG2 control) {
+                byte n = (byte)control;
+                byte ctl = (byte)(0xA0 + (n & 2) * 0x22 + (n & 1) * 0x11); // ShuffleControlG2 to ShuffleControlG4
+                return Sse2.Shuffle(source, ctl);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{long}, ShuffleControlG2)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleG2_Const_Imm(Vector128<long> source, [ConstantExpected] ShuffleControlG2 control) {
+                return YShuffleG2_Const_Imm(source.AsUInt64(), control).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_Const(Vector128{ulong}, ShuffleControlG2)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleG2_Const_Imm(Vector128<ulong> source, [ConstantExpected] ShuffleControlG2 control) {
+                return YShuffleG2_Const_Imm(source.AsDouble(), control).AsUInt64();
+                //// _mm128_permute4x64_epi64
+                // byte n = (byte)control;
+                //byte ctl = (byte)(0xA0 + (n & 2) * 0x22 + (n & 1) * 0x11); // ShuffleControlG2 to ShuffleControlG4
+                //return Sse2.Permute4x64(source, ctl);
+            }
+#endif // !REDUCE_MEMORY_USAGE
+
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleG4_AcceleratedTypes {

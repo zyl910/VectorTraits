@@ -82,7 +82,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{byte}, Vector{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<byte> Shuffle_Base_Basic(Vector<byte> vector, Vector<byte> indices) {
-            UnsafeEx.SkipInit(out Vector<byte> rt);
+            UnsafeUtil.SkipInit(out Vector<byte> rt);
             byte cnt = (byte)Vector<byte>.Count;
             ref byte q = ref Unsafe.As<Vector<byte>, byte>(ref rt);
             ref byte p = ref Unsafe.As<Vector<byte>, byte>(ref vector);
@@ -102,7 +102,7 @@ namespace Zyl.VectorTraits.Impl {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ushort> Shuffle_Base_Basic(Vector<ushort> vector, Vector<ushort> indices) {
-            UnsafeEx.SkipInit(out Vector<ushort> rt);
+            UnsafeUtil.SkipInit(out Vector<ushort> rt);
             ushort cnt = (ushort)Vector<ushort>.Count;
             ref ushort q = ref Unsafe.As<Vector<ushort>, ushort>(ref rt);
             ref ushort p = ref Unsafe.As<Vector<ushort>, ushort>(ref vector);

@@ -1034,7 +1034,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YRoundToZero(value);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.YShuffleG2_AcceleratedTypes"/>
         public override TypeCodeFlags YShuffleG2_AcceleratedTypes {
             get {
@@ -1443,7 +1443,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<ulong> YShuffleG4X2_Const(Vector512<ulong> source0, Vector512<ulong> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<ulong> result1) {
             return Statics.YShuffleG4X2_Const(source0, source1, control, out result1);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_AcceleratedTypes"/>
         public override TypeCodeFlags YShuffleInsert_AcceleratedTypes {
