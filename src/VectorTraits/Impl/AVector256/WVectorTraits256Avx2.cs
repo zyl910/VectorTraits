@@ -222,7 +222,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     Vector128<double> v_3 = Sse2.X64.ConvertScalarToVector128Double(zero, Sse41.X64.Extract(v_hi, 1));
                     Vector128<double> v_01 = Sse2.UnpackLow(v_0, v_1);
                     Vector128<double> v_23 = Sse2.UnpackLow(v_2, v_3);
-                    Vector256<double> result = Vector256.Create(v_01, v_23);
+                    Vector256<double> result = v_01.ToVector256Unsafe().WithUpper(v_23); //Vector256.Create(v_01, v_23);
                     return result;
                 } else {
                     return SuperStatics.ConvertToDouble(value);
@@ -875,7 +875,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{double}, Vector256{double})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Narrow(Vector256<double> lower, Vector256<double> upper) {
-                return Vector256.Create(Avx.ConvertToVector128Single(lower), Avx.ConvertToVector128Single(upper));
+                return Avx.ConvertToVector128Single(lower).ToVector256Unsafe().WithUpper(Avx.ConvertToVector128Single(upper));
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{short}, Vector256{short})" />
