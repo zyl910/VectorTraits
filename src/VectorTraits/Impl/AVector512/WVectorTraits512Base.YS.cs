@@ -1358,8 +1358,33 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YSign_Basic(Vector512<float> value) {
                 UnsafeUtil.SkipInit(out Vector512<int> rt);
-                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref value);
-                ref FixedArray8<int> p = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref rt);
+                ref FixedArray16<float> pvalue = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref value);
+                ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
+                p.I0 = MathINumber.Sign(pvalue.I0);
+                p.I1 = MathINumber.Sign(pvalue.I1);
+                p.I2 = MathINumber.Sign(pvalue.I2);
+                p.I3 = MathINumber.Sign(pvalue.I3);
+                p.I4 = MathINumber.Sign(pvalue.I4);
+                p.I5 = MathINumber.Sign(pvalue.I5);
+                p.I6 = MathINumber.Sign(pvalue.I6);
+                p.I7 = MathINumber.Sign(pvalue.I7);
+                p.I8 = MathINumber.Sign(pvalue.I8);
+                p.I9 = MathINumber.Sign(pvalue.I9);
+                p.I10 = MathINumber.Sign(pvalue.I10);
+                p.I11 = MathINumber.Sign(pvalue.I11);
+                p.I12 = MathINumber.Sign(pvalue.I12);
+                p.I13 = MathINumber.Sign(pvalue.I13);
+                p.I14 = MathINumber.Sign(pvalue.I14);
+                p.I15 = MathINumber.Sign(pvalue.I15);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YSign(Vector512{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<long> YSign_Basic(Vector512<double> value) {
+                UnsafeUtil.SkipInit(out Vector512<long> rt);
+                ref FixedArray8<double> pvalue = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref value);
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
                 p.I0 = MathINumber.Sign(pvalue.I0);
                 p.I1 = MathINumber.Sign(pvalue.I1);
                 p.I2 = MathINumber.Sign(pvalue.I2);
@@ -1371,26 +1396,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits512.YSign(Vector512{double})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> YSign_Basic(Vector512<double> value) {
-                UnsafeUtil.SkipInit(out Vector512<long> rt);
-                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref value);
-                ref FixedArray4<long> p = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref rt);
-                p.I0 = MathINumber.Sign(pvalue.I0);
-                p.I1 = MathINumber.Sign(pvalue.I1);
-                p.I2 = MathINumber.Sign(pvalue.I2);
-                p.I3 = MathINumber.Sign(pvalue.I3);
-                return rt;
-            }
-
             /// <inheritdoc cref="IWVectorTraits512.YSign(Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YSign_Basic(Vector512<sbyte> value) {
                 UnsafeUtil.SkipInit(out Vector512<sbyte> rt);
-                ref FixedArray32<sbyte> pvalue = ref Unsafe.As<Vector512<sbyte>, FixedArray32<sbyte>>(ref value);
-                ref FixedArray32<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray32<sbyte>>(ref rt);
+                ref FixedArray64<sbyte> pvalue = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref value);
+                ref FixedArray64<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref rt);
                 p.I0 = (sbyte)MathINumber.Sign(pvalue.I0);
                 p.I1 = (sbyte)MathINumber.Sign(pvalue.I1);
                 p.I2 = (sbyte)MathINumber.Sign(pvalue.I2);
@@ -1423,6 +1435,38 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I29 = (sbyte)MathINumber.Sign(pvalue.I29);
                 p.I30 = (sbyte)MathINumber.Sign(pvalue.I30);
                 p.I31 = (sbyte)MathINumber.Sign(pvalue.I31);
+                p.I32 = (sbyte)MathINumber.Sign(pvalue.I32);
+                p.I33 = (sbyte)MathINumber.Sign(pvalue.I33);
+                p.I34 = (sbyte)MathINumber.Sign(pvalue.I34);
+                p.I35 = (sbyte)MathINumber.Sign(pvalue.I35);
+                p.I36 = (sbyte)MathINumber.Sign(pvalue.I36);
+                p.I37 = (sbyte)MathINumber.Sign(pvalue.I37);
+                p.I38 = (sbyte)MathINumber.Sign(pvalue.I38);
+                p.I39 = (sbyte)MathINumber.Sign(pvalue.I39);
+                p.I40 = (sbyte)MathINumber.Sign(pvalue.I40);
+                p.I41 = (sbyte)MathINumber.Sign(pvalue.I41);
+                p.I42 = (sbyte)MathINumber.Sign(pvalue.I42);
+                p.I43 = (sbyte)MathINumber.Sign(pvalue.I43);
+                p.I44 = (sbyte)MathINumber.Sign(pvalue.I44);
+                p.I45 = (sbyte)MathINumber.Sign(pvalue.I45);
+                p.I46 = (sbyte)MathINumber.Sign(pvalue.I46);
+                p.I47 = (sbyte)MathINumber.Sign(pvalue.I47);
+                p.I48 = (sbyte)MathINumber.Sign(pvalue.I48);
+                p.I49 = (sbyte)MathINumber.Sign(pvalue.I49);
+                p.I50 = (sbyte)MathINumber.Sign(pvalue.I50);
+                p.I51 = (sbyte)MathINumber.Sign(pvalue.I51);
+                p.I52 = (sbyte)MathINumber.Sign(pvalue.I52);
+                p.I53 = (sbyte)MathINumber.Sign(pvalue.I53);
+                p.I54 = (sbyte)MathINumber.Sign(pvalue.I54);
+                p.I55 = (sbyte)MathINumber.Sign(pvalue.I55);
+                p.I56 = (sbyte)MathINumber.Sign(pvalue.I56);
+                p.I57 = (sbyte)MathINumber.Sign(pvalue.I57);
+                p.I58 = (sbyte)MathINumber.Sign(pvalue.I58);
+                p.I59 = (sbyte)MathINumber.Sign(pvalue.I59);
+                p.I60 = (sbyte)MathINumber.Sign(pvalue.I60);
+                p.I61 = (sbyte)MathINumber.Sign(pvalue.I61);
+                p.I62 = (sbyte)MathINumber.Sign(pvalue.I62);
+                p.I63 = (sbyte)MathINumber.Sign(pvalue.I63);
                 return rt;
             }
 
@@ -1430,8 +1474,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YSign_Basic(Vector512<short> value) {
                 UnsafeUtil.SkipInit(out Vector512<short> rt);
-                ref FixedArray16<short> pvalue = ref Unsafe.As<Vector512<short>, FixedArray16<short>>(ref value);
-                ref FixedArray16<short> p = ref Unsafe.As<Vector512<short>, FixedArray16<short>>(ref rt);
+                ref FixedArray32<short> pvalue = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref value);
+                ref FixedArray32<short> p = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref rt);
                 p.I0 = (short)MathINumber.Sign(pvalue.I0);
                 p.I1 = (short)MathINumber.Sign(pvalue.I1);
                 p.I2 = (short)MathINumber.Sign(pvalue.I2);
@@ -1448,6 +1492,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I13 = (short)MathINumber.Sign(pvalue.I13);
                 p.I14 = (short)MathINumber.Sign(pvalue.I14);
                 p.I15 = (short)MathINumber.Sign(pvalue.I15);
+                p.I16 = (short)MathINumber.Sign(pvalue.I16);
+                p.I17 = (short)MathINumber.Sign(pvalue.I17);
+                p.I18 = (short)MathINumber.Sign(pvalue.I18);
+                p.I19 = (short)MathINumber.Sign(pvalue.I19);
+                p.I20 = (short)MathINumber.Sign(pvalue.I20);
+                p.I21 = (short)MathINumber.Sign(pvalue.I21);
+                p.I22 = (short)MathINumber.Sign(pvalue.I22);
+                p.I23 = (short)MathINumber.Sign(pvalue.I23);
+                p.I24 = (short)MathINumber.Sign(pvalue.I24);
+                p.I25 = (short)MathINumber.Sign(pvalue.I25);
+                p.I26 = (short)MathINumber.Sign(pvalue.I26);
+                p.I27 = (short)MathINumber.Sign(pvalue.I27);
+                p.I28 = (short)MathINumber.Sign(pvalue.I28);
+                p.I29 = (short)MathINumber.Sign(pvalue.I29);
+                p.I30 = (short)MathINumber.Sign(pvalue.I30);
+                p.I31 = (short)MathINumber.Sign(pvalue.I31);
                 return rt;
             }
 
@@ -1455,8 +1515,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YSign_Basic(Vector512<int> value) {
                 UnsafeUtil.SkipInit(out Vector512<int> rt);
-                ref FixedArray8<int> pvalue = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref value);
-                ref FixedArray8<int> p = ref Unsafe.As<Vector512<int>, FixedArray8<int>>(ref rt);
+                ref FixedArray16<int> pvalue = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref value);
+                ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
                 p.I0 = MathINumber.Sign(pvalue.I0);
                 p.I1 = MathINumber.Sign(pvalue.I1);
                 p.I2 = MathINumber.Sign(pvalue.I2);
@@ -1465,6 +1525,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I5 = MathINumber.Sign(pvalue.I5);
                 p.I6 = MathINumber.Sign(pvalue.I6);
                 p.I7 = MathINumber.Sign(pvalue.I7);
+                p.I8 = MathINumber.Sign(pvalue.I8);
+                p.I9 = MathINumber.Sign(pvalue.I9);
+                p.I10 = MathINumber.Sign(pvalue.I10);
+                p.I11 = MathINumber.Sign(pvalue.I11);
+                p.I12 = MathINumber.Sign(pvalue.I12);
+                p.I13 = MathINumber.Sign(pvalue.I13);
+                p.I14 = MathINumber.Sign(pvalue.I14);
+                p.I15 = MathINumber.Sign(pvalue.I15);
                 return rt;
             }
 
@@ -1472,12 +1540,16 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YSign_Basic(Vector512<long> value) {
                 UnsafeUtil.SkipInit(out Vector512<long> rt);
-                ref FixedArray4<long> pvalue = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref value);
-                ref FixedArray4<long> p = ref Unsafe.As<Vector512<long>, FixedArray4<long>>(ref rt);
+                ref FixedArray8<long> pvalue = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref value);
+                ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
                 p.I0 = MathINumber.Sign(pvalue.I0);
                 p.I1 = MathINumber.Sign(pvalue.I1);
                 p.I2 = MathINumber.Sign(pvalue.I2);
                 p.I3 = MathINumber.Sign(pvalue.I3);
+                p.I4 = MathINumber.Sign(pvalue.I4);
+                p.I5 = MathINumber.Sign(pvalue.I5);
+                p.I6 = MathINumber.Sign(pvalue.I6);
+                p.I7 = MathINumber.Sign(pvalue.I7);
                 return rt;
             }
 
@@ -1585,8 +1657,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YSignFloat_Basic(Vector512<float> value) {
                 UnsafeUtil.SkipInit(out Vector512<float> rt);
-                ref FixedArray8<float> pvalue = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref value);
-                ref FixedArray8<float> p = ref Unsafe.As<Vector512<float>, FixedArray8<float>>(ref rt);
+                ref FixedArray16<float> pvalue = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref value);
+                ref FixedArray16<float> p = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref rt);
                 p.I0 = MathINumber.SignFloat(pvalue.I0);
                 p.I1 = MathINumber.SignFloat(pvalue.I1);
                 p.I2 = MathINumber.SignFloat(pvalue.I2);
@@ -1595,6 +1667,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 p.I5 = MathINumber.SignFloat(pvalue.I5);
                 p.I6 = MathINumber.SignFloat(pvalue.I6);
                 p.I7 = MathINumber.SignFloat(pvalue.I7);
+                p.I8 = MathINumber.SignFloat(pvalue.I8);
+                p.I9 = MathINumber.SignFloat(pvalue.I9);
+                p.I10 = MathINumber.SignFloat(pvalue.I10);
+                p.I11 = MathINumber.SignFloat(pvalue.I11);
+                p.I12 = MathINumber.SignFloat(pvalue.I12);
+                p.I13 = MathINumber.SignFloat(pvalue.I13);
+                p.I14 = MathINumber.SignFloat(pvalue.I14);
+                p.I15 = MathINumber.SignFloat(pvalue.I15);
                 return rt;
             }
 
@@ -1602,12 +1682,16 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YSignFloat_Basic(Vector512<double> value) {
                 UnsafeUtil.SkipInit(out Vector512<double> rt);
-                ref FixedArray4<double> pvalue = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref value);
-                ref FixedArray4<double> p = ref Unsafe.As<Vector512<double>, FixedArray4<double>>(ref rt);
+                ref FixedArray8<double> pvalue = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref value);
+                ref FixedArray8<double> p = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref rt);
                 p.I0 = MathINumber.SignFloat(pvalue.I0);
                 p.I1 = MathINumber.SignFloat(pvalue.I1);
                 p.I2 = MathINumber.SignFloat(pvalue.I2);
                 p.I3 = MathINumber.SignFloat(pvalue.I3);
+                p.I4 = MathINumber.SignFloat(pvalue.I4);
+                p.I5 = MathINumber.SignFloat(pvalue.I5);
+                p.I6 = MathINumber.SignFloat(pvalue.I6);
+                p.I7 = MathINumber.SignFloat(pvalue.I7);
                 return rt;
             }
 

@@ -1824,7 +1824,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YShuffleKernel_Core(vector, args0, args1);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits512.YSign_AcceleratedTypes"/>
         public override TypeCodeFlags YSign_AcceleratedTypes {
             get {
@@ -1888,7 +1888,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         public override Vector512<double> YSignFloat(Vector512<double> value) {
             return Statics.YSignFloat(value);
         }
-*/
+
 #endif
     }
 }

@@ -1139,7 +1139,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return Avx512F.PermuteVar8x64(vector, args0);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits512.YSign_AcceleratedTypes"/>
             public static TypeCodeFlags YSign_AcceleratedTypes {
                 get {
@@ -1154,7 +1154,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<float> zero = Vector512<float>.Zero;
                 Vector512<int> m = LessThan(value, zero).AsInt32();
                 Vector512<int> n = GreaterThan(value, zero).AsInt32();
-                Vector512<int> rt = Avx512.Subtract(m, n);
+                Vector512<int> rt = Avx512F.Subtract(m, n);
                 return rt;
             }
 
@@ -1164,7 +1164,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<double> zero = Vector512<double>.Zero;
                 Vector512<long> m = LessThan(value, zero).AsInt64();
                 Vector512<long> n = GreaterThan(value, zero).AsInt64();
-                Vector512<long> rt = Avx512.Subtract(m, n);
+                Vector512<long> rt = Avx512F.Subtract(m, n);
                 return rt;
             }
 
@@ -1175,7 +1175,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<sbyte> zero = Vector512<sbyte>.Zero;
                 Vector512<sbyte> m = LessThan(value, zero);
                 Vector512<sbyte> n = GreaterThan(value, zero);
-                Vector512<sbyte> rt = Avx512.Subtract(m, n);
+                Vector512<sbyte> rt = Avx512BW.Subtract(m, n);
                 return rt;
             }
 
@@ -1185,7 +1185,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<short> zero = Vector512<short>.Zero;
                 Vector512<short> m = LessThan(value, zero);
                 Vector512<short> n = GreaterThan(value, zero);
-                Vector512<short> rt = Avx512.Subtract(m, n);
+                Vector512<short> rt = Avx512BW.Subtract(m, n);
                 return rt;
             }
 
@@ -1195,7 +1195,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<int> zero = Vector512<int>.Zero;
                 Vector512<int> m = LessThan(value, zero);
                 Vector512<int> n = GreaterThan(value, zero);
-                Vector512<int> rt = Avx512.Subtract(m, n);
+                Vector512<int> rt = Avx512F.Subtract(m, n);
                 return rt;
             }
 
@@ -1205,7 +1205,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 Vector512<long> zero = Vector512<long>.Zero;
                 Vector512<long> m = LessThan(value, zero);
                 Vector512<long> n = GreaterThan(value, zero);
-                Vector512<long> rt = Avx512.Subtract(m, n);
+                Vector512<long> rt = Avx512F.Subtract(m, n);
                 return rt;
             }
 
@@ -1258,7 +1258,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 rt = BitwiseOr(rt, BitwiseAnd(nanMask, value)); // ConditionalSelect(nanMask, value, rt);
                 return rt;
             }
-*/
+
 #endif // NET8_0_OR_GREATER
         }
     }
