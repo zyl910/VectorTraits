@@ -9,6 +9,7 @@ using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
 using Zyl.VectorTraits.Impl.AVector128;
 using Zyl.VectorTraits.Impl.AVector256;
+using Zyl.VectorTraits.Impl.AVector512;
 
 namespace Zyl.VectorTraits.Tests.Impl {
     [TestFixture()]
@@ -28,6 +29,8 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 typeof(VectorTraits128Sse.Statics), typeof(VectorTraits128SseAbstract),
                 typeof(VectorTraits256Base.Statics), typeof(VectorTraits256Abstract),
                 typeof(VectorTraits256Avx2.Statics), typeof(VectorTraits256Avx2Abstract),
+                typeof(VectorTraits512Base.Statics), typeof(VectorTraits512Abstract),
+                typeof(VectorTraits512Avx512.Statics), typeof(VectorTraits512Avx512Abstract),
             };
             int totalMissed = 0;
             for (int i = 0; i < types.Length; i += 2) {
@@ -112,6 +115,37 @@ namespace Zyl.VectorTraits.Tests.Impl {
             Assert.Zero(totalMissed);
         }
 
+#if NET8_0_OR_GREATER
+        [Test()]
+        public void CheckBindMethodsTest_512() {
+            TextWriter writer = Console.Out;
+            Type? interfaceType = null;
+            interfaceType = typeof(IWVectorTraits512);
+            Type[] types = new Type[] {
+                typeof(WVectorTraits512Base.Statics), typeof(WVectorTraits512Abstract),
+                typeof(WVectorTraits512Avx512.Statics), typeof(WVectorTraits512Avx512Abstract),
+            };
+            int totalMissed = 0;
+            for (int i = 0; i < types.Length; i += 2) {
+                Type staticType = types[i];
+                Type objectType = types[i + 1];
+                writer.WriteLine("{0}:", staticType.FullName);
+                int n = ReflectionUtil.CheckBindMethods(staticType, objectType, interfaceType, delegate (MethodInfo methodStatic, MethodInfo? methodInterface, object? userdata) {
+                    bool isIgnore = (null == methodInterface); // If it is not in the method list of the interface, it is ignored.
+                    _ = userdata;
+                    if (!isIgnore) {
+                        writer.WriteLine("  {0}", methodStatic.ToString());
+                    }
+                    return isIgnore;
+                });
+                writer.WriteLine("{0} missed count: {1}", staticType.FullName, n);
+                totalMissed += n;
+            }
+            writer.WriteLine("Total missed: {0}", totalMissed);
+            Assert.Zero(totalMissed);
+        }
+#endif // NET8_0_OR_GREATER
+
         [Test()]
         public void CheckBindMethodsAnyVectorTest() {
             TextWriter writer = Console.Out;
@@ -125,6 +159,8 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 typeof(WVectorTraits128Sse.Statics), typeof(VectorTraits128Sse.Statics),
                 // -- 256 --
                 typeof(WVectorTraits256Avx2.Statics), typeof(VectorTraits256Avx2.Statics),
+                // -- 512 --
+                typeof(WVectorTraits512Avx512.Statics), typeof(VectorTraits512Avx512.Statics),
             };
             int totalMissed = 0;
             for (int i = 0; i < types.Length; i += 2) {
