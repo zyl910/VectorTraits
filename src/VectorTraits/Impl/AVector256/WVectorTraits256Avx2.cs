@@ -145,6 +145,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble(Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> ConvertToDouble(Vector256<long> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector256Double(value);
+                }
+#endif // NET8_0_OR_GREATER
                 return ConvertToDouble_Bcl(value);
             }
 
@@ -232,6 +237,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToDouble_Range52(Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> ConvertToDouble_Range52(Vector256<long> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector256Double(value);
+                }
+#endif // NET8_0_OR_GREATER
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
                 // answered Dec 14, 2016 at 17:23 Mysticial
                 // inline __m256d int64_to_double256(__m256i x){
@@ -250,6 +260,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> ConvertToDouble(Vector256<ulong> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector256Double(value);
+                }
+#endif // NET8_0_OR_GREATER
                 return ConvertToDouble_Bcl(value);
             }
 
@@ -304,6 +319,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> ConvertToDouble_Range52(Vector256<ulong> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector256Double(value);
+                }
+#endif // NET8_0_OR_GREATER
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
                 // answered Dec 14, 2016 at 17:23 Mysticial
                 // inline __m256d uint64_to_double256(__m256i x){
@@ -345,6 +365,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64(Vector256<double> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector256Int64WithTruncation(value);
+                }
+#endif // NET8_0_OR_GREATER
                 // return SuperStatics.ConvertToInt64(value);
                 // return ConvertToInt64_HwScalar(value);
                 return ConvertToInt64_ShiftVarFix(value);
@@ -458,6 +483,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_Range52(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64_Range52_Impl(Vector256<double> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector256Int64WithTruncation(value);
+                }
+#endif // NET8_0_OR_GREATER
                 value = Avx.RoundToZero(value); // Truncate.
                 return ConvertToInt64_Range52RoundToEven(value);
             }
@@ -465,6 +495,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ConvertToInt64_Range52RoundToEven(Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ConvertToInt64_Range52RoundToEven(Vector256<double> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector256Int64(value);
+                }
+#endif // NET8_0_OR_GREATER
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
                 // answered Dec 14, 2016 at 17:23 Mysticial
                 // //  Only works for inputs in the range: [-2^51, 2^51]
@@ -499,6 +534,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> ConvertToSingle(Vector256<uint> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ConvertToVector256Single(value);
+                }
+#endif // NET8_0_OR_GREATER
                 return ConvertToSingle_Multiply(value);
             }
 
@@ -545,6 +585,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> ConvertToUInt32(Vector256<float> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ConvertToVector256UInt32WithTruncation(value);
+                }
+#endif // NET8_0_OR_GREATER
                 //return SuperStatics.ConvertToUInt32(value);
                 //return ConvertToUInt32_Mapping(value);
                 //return ConvertToUInt32_MappingFix(value);
@@ -675,6 +720,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> ConvertToUInt64(Vector256<double> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector256UInt64WithTruncation(value);
+                }
+#endif // NET8_0_OR_GREATER
                 //return SuperStatics.ConvertToUInt64(value);
                 return ConvertToUInt64_ShiftVar(value);
             }
@@ -737,6 +787,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> ConvertToUInt64_Range52_Impl(Vector256<double> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector256UInt64WithTruncation(value);
+                }
+#endif // NET8_0_OR_GREATER
                 value = Avx.RoundToZero(value); // Truncate.
                 return ConvertToUInt64_Range52RoundToEven(value);
             }
@@ -745,6 +800,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> ConvertToUInt64_Range52RoundToEven(Vector256<double> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector256UInt64(value);
+                }
+#endif // NET8_0_OR_GREATER
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
                 // answered Dec 14, 2016 at 17:23 Mysticial
                 // //  Only works for inputs in the range: [0, 2^52)
@@ -875,6 +935,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{double}, Vector256{double})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Narrow(Vector256<double> lower, Vector256<double> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.IsSupported) {
+                    return Avx512F.ConvertToVector256Single(lower.ToVector512Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 return Avx.ConvertToVector128Single(lower).ToVector256Unsafe().WithUpper(Avx.ConvertToVector128Single(upper));
             }
 
@@ -882,6 +947,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> Narrow(Vector256<short> lower, Vector256<short> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.IsSupported) {
+                    return Avx512BW.ConvertToVector256SByte(lower.ToVector512Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 return Narrow(lower.AsUInt16(), upper.AsUInt16()).AsSByte();
             }
 
@@ -889,6 +959,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> Narrow(Vector256<ushort> lower, Vector256<ushort> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.IsSupported) {
+                    return Avx512BW.ConvertToVector256Byte(lower.ToVector512Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector256<ushort> mask = Vector256s<ushort>.VMaxByte;
                 //Vector256<ushort> mask = Vector256.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
                 Vector256<ushort> mask = Vector256Constants.UInt16_VMaxByte;
@@ -900,6 +975,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{int}, Vector256{int})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> Narrow(Vector256<int> lower, Vector256<int> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.IsSupported) {
+                    return Avx512F.ConvertToVector256Int16(lower.ToVector512Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 return Narrow(lower.AsUInt32(), upper.AsUInt32()).AsInt16();
             }
 
@@ -907,6 +987,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> Narrow(Vector256<uint> lower, Vector256<uint> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.IsSupported) {
+                    return Avx512F.ConvertToVector256UInt16(lower.ToVector512Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 Vector256<uint> mask = Vector256Constants.UInt32_VMaxUInt16;
                 Vector256<ushort> raw = Avx2.PackUnsignedSaturate(Avx2.And(lower, mask).AsInt32(), Avx2.And(upper, mask).AsInt32()); // bit64(x, z, y, w)
                 Vector256<ushort> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsUInt16(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
@@ -916,6 +1001,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{long}, Vector256{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> Narrow(Vector256<long> lower, Vector256<long> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.IsSupported) {
+                    return Avx512F.ConvertToVector256Int32(lower.ToVector512Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 return Narrow(lower.AsUInt64(), upper.AsUInt64()).AsInt32();
             }
 
@@ -923,6 +1013,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> Narrow(Vector256<ulong> lower, Vector256<ulong> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.IsSupported) {
+                    return Avx512F.ConvertToVector256UInt32(lower.ToVector512Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 //  vmovupd     ymm0,ymmword ptr [rbp-2B70h]  
                 //  vpunpckldq  ymm0,ymm0,ymmword ptr [rbp-2B90h]  
                 //  vmovupd     ymm1,ymmword ptr [rbp-2B70h]  

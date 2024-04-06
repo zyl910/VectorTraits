@@ -217,6 +217,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble_Range52(Vector128<long> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector128Double(value);
+                }
+#endif // NET8_0_OR_GREATER
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
                 // answered Dec 14, 2016 at 17:23 Mysticial
                 // inline __m128d int64_to_double128(__m128i x){
@@ -258,6 +263,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble_Range52(Vector128<ulong> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector128Double(value);
+                }
+#endif // NET8_0_OR_GREATER
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
                 // answered Dec 14, 2016 at 17:23 Mysticial
                 // inline __m128d uint64_to_double128(__m128i x){
@@ -326,6 +336,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64_Range52_Impl(Vector128<double> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector128Int64WithTruncation(value);
+                }
+#endif // NET8_0_OR_GREATER
                 value = YRoundToZero(value); // Truncate.
                 return ConvertToInt64_Range52RoundToEven(value);
             }
@@ -333,6 +348,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52RoundToEven(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64_Range52RoundToEven(Vector128<double> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector128Int64(value);
+                }
+#endif // NET8_0_OR_GREATER
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
                 // answered Dec 14, 2016 at 17:23 Mysticial
                 // //  Only works for inputs in the range: [-2^51, 2^51]
@@ -367,6 +387,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> ConvertToSingle(Vector128<uint> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ConvertToVector128Single(value);
+                }
+#endif // NET8_0_OR_GREATER
                 return ConvertToSingle_Multiply(value);
             }
 
@@ -517,6 +542,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ConvertToUInt64_Range52_Impl(Vector128<double> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector128UInt64WithTruncation(value);
+                }
+#endif // NET8_0_OR_GREATER
                 value = YRoundToZero(value); // Truncate.
                 return ConvertToUInt64_Range52RoundToEven(value);
             }
@@ -525,6 +555,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ConvertToUInt64_Range52RoundToEven(Vector128<double> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector128UInt64(value);
+                }
+#endif // NET8_0_OR_GREATER
                 // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
                 // answered Dec 14, 2016 at 17:23 Mysticial
                 // //  Only works for inputs in the range: [0, 2^52)
@@ -692,6 +727,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{double}, Vector128{double})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Narrow(Vector128<double> lower, Vector128<double> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx.IsSupported) {
+                    return Avx.ConvertToVector128Single(lower.ToVector256Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 Vector128<float> rt0 = Sse2.ConvertToVector128Single(lower); // double(a, b) -> float(a, b, 0, 0)
                 Vector128<float> rt1 = Sse2.ConvertToVector128Single(upper); // double(c, d) -> float(c, d, 0, 0)
                 Vector128<float> rt = Sse.Shuffle(rt0, rt1, (byte)ShuffleControlG4.XYXY); // control = 0 + (1 << 2) + (0 << 4) + (1 << 6)
@@ -702,6 +742,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> Narrow(Vector128<short> lower, Vector128<short> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.ConvertToVector128SByte(lower.ToVector256Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 return Narrow(lower.AsUInt16(), upper.AsUInt16()).AsSByte();
             }
 
@@ -709,6 +754,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> Narrow(Vector128<ushort> lower, Vector128<ushort> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.ConvertToVector128Byte(lower.ToVector256Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 Vector128<ushort> mask = Vector128Constants.UInt16_VMaxByte;
                 Vector128<byte> rt = Sse2.PackUnsignedSaturate(Sse2.And(lower, mask).AsInt16(), Sse2.And(upper, mask).AsInt16());
                 return rt;
@@ -717,6 +767,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{int}, Vector128{int})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> Narrow(Vector128<int> lower, Vector128<int> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ConvertToVector128Int16(lower.ToVector256Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 return Narrow(lower.AsUInt32(), upper.AsUInt32()).AsInt16();
             }
 
@@ -724,6 +779,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> Narrow(Vector128<uint> lower, Vector128<uint> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ConvertToVector128UInt16(lower.ToVector256Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 if (Sse41.IsSupported) {
                     // Need: Sse41
                     Vector128<uint> mask = Vector128Constants.UInt32_VMaxUInt16;
@@ -742,6 +802,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{long}, Vector128{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> Narrow(Vector128<long> lower, Vector128<long> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ConvertToVector128Int32(lower.ToVector256Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 return Narrow(lower.AsUInt64(), upper.AsUInt64()).AsInt32();
             }
 
@@ -749,6 +814,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> Narrow(Vector128<ulong> lower, Vector128<ulong> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ConvertToVector128UInt32(lower.ToVector256Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 Vector128<uint> l = Sse2.UnpackLow(lower.AsUInt32(), upper.AsUInt32()); // bit32(a0.L, b0.L, a0.H, b0.H)
                 Vector128<uint> h = Sse2.UnpackHigh(lower.AsUInt32(), upper.AsUInt32()); // bit32(a1.L, b1.L, a1.H, b1.H)
                 Vector128<uint> rt = Sse2.UnpackLow(l, h); // bit32(a0.L, a1.L, b0.L, b1.L).

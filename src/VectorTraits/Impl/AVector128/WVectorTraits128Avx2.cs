@@ -129,6 +129,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble(Vector128<long> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector128Double(value);
+                }
+#endif // NET8_0_OR_GREATER
                 return ConvertToDouble_Bcl(value);
             }
 
@@ -151,6 +156,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble(Vector128<ulong> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector128Double(value);
+                }
+#endif // NET8_0_OR_GREATER
                 return ConvertToDouble_Bcl(value);
             }
 
@@ -175,6 +185,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static TypeCodeFlags ConvertToInt64_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = SuperStatics.ConvertToInt64_AcceleratedTypes;
+#if NET8_0_OR_GREATER
+                    if (Avx512DQ.VL.IsSupported) {
+                        rt |= TypeCodeFlags.Double;
+                    }
+#endif // NET8_0_OR_GREATER
                     if (Sse41.IsSupported && Sse42.IsSupported) {
                         rt |= TypeCodeFlags.Double;
                     }
@@ -185,6 +200,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64(Vector128<double> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector128Int64WithTruncation(value);
+                }
+#endif // NET8_0_OR_GREATER
                 if (Sse41.IsSupported && Sse42.IsSupported) {
                     return ConvertToInt64_ShiftVarFix(value);
                 } else {
@@ -234,6 +254,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ConvertToUInt32(Vector128<float> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ConvertToVector128UInt32WithTruncation(value);
+                }
+#endif // NET8_0_OR_GREATER
                 if (Sse41.IsSupported) {
                     return ConvertToUInt32_ShiftVar(value);
                 } else {
@@ -282,6 +307,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ConvertToUInt64(Vector128<double> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.ConvertToVector128UInt64WithTruncation(value);
+                }
+#endif // NET8_0_OR_GREATER
                 if (Sse41.IsSupported && Sse42.IsSupported) {
                     return ConvertToUInt64_ShiftVar(value);
                 } else {
