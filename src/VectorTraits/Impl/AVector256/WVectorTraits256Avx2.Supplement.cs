@@ -216,6 +216,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> ConditionalSelect_OrAnd<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
                 // result = (left & condition) | (right & ~condition);
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.TernaryLogic(condition.AsInt64(), left.AsInt64(), right.AsInt64(), TernaryLogicControl.Or_And_A_B_And_NotA_C).As<long, T>();
+                }
+#endif // NET8_0_OR_GREATER
                 return Avx2.Or(Avx2.And(condition.AsUInt64(), left.AsUInt64())
                     , Avx2.AndNot(condition.AsUInt64(), right.AsUInt64())
                     ).As<ulong, T>();
@@ -589,6 +594,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.GreaterThan(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> GreaterThan(Vector256<byte> left, Vector256<byte> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareGreaterThan(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector256<sbyte> mid = Vector256s<sbyte>.MinValue;
                 Vector256<sbyte> mid = Vector256.Create(sbyte.MinValue); // .NET5+ has better performance .
                 Vector256<sbyte> left2 = Avx2.Xor(left.AsSByte(), mid);
@@ -607,6 +617,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> GreaterThan(Vector256<ushort> left, Vector256<ushort> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareGreaterThan(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector256<short> mid = Vector256s<short>.MinValue;
                 Vector256<short> mid = Vector256.Create(short.MinValue); // .NET5+ has better performance .
                 Vector256<short> left2 = Avx2.Xor(left.AsInt16(), mid);
@@ -625,6 +640,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> GreaterThan(Vector256<uint> left, Vector256<uint> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareGreaterThan(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector256<int> mid = Vector256s<int>.MinValue;
                 Vector256<int> mid = Vector256.Create(int.MinValue); // .NET5+ has better performance .
                 Vector256<int> left2 = Avx2.Xor(left.AsInt32(), mid);
@@ -644,6 +664,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> GreaterThan(Vector256<ulong> left, Vector256<ulong> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareGreaterThan(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector256<long> mid = Vector256s<long>.MinValue;
                 Vector256<long> mid = Vector256Constants.Int64_MinValue;
                 Vector256<long> left2 = Avx2.Add(left.AsInt64(), mid);
@@ -828,18 +853,33 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> GreaterThanOrEqual(Vector256<sbyte> left, Vector256<sbyte> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareGreaterThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(LessThan(left, right));
             }
 
             /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> GreaterThanOrEqual(Vector256<byte> left, Vector256<byte> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareGreaterThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(LessThan(left, right));
             }
 
             /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> GreaterThanOrEqual(Vector256<short> left, Vector256<short> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareGreaterThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(LessThan(left, right));
             }
 
@@ -847,12 +887,22 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> GreaterThanOrEqual(Vector256<ushort> left, Vector256<ushort> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareGreaterThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(LessThan(left, right));
             }
 
             /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> GreaterThanOrEqual(Vector256<int> left, Vector256<int> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareGreaterThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(LessThan(left, right));
             }
 
@@ -860,12 +910,22 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> GreaterThanOrEqual(Vector256<uint> left, Vector256<uint> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareGreaterThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(LessThan(left, right));
             }
 
             /// <inheritdoc cref="IWVectorTraits256.GreaterThanOrEqual(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> GreaterThanOrEqual(Vector256<long> left, Vector256<long> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareGreaterThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(LessThan(left, right));
             }
 
@@ -873,6 +933,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> GreaterThanOrEqual(Vector256<ulong> left, Vector256<ulong> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareGreaterThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(LessThan(left, right));
             }
 
@@ -1058,6 +1123,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.LessThan(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> LessThan(Vector256<byte> left, Vector256<byte> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareLessThan(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector256<sbyte> mid = Vector256s<sbyte>.MinValue;
                 Vector256<sbyte> mid = Vector256.Create(sbyte.MinValue); // .NET5+ has better performance .
                 Vector256<sbyte> left2 = Avx2.Xor(left.AsSByte(), mid);
@@ -1076,6 +1146,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> LessThan(Vector256<ushort> left, Vector256<ushort> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareLessThan(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector256<short> mid = Vector256s<short>.MinValue;
                 Vector256<short> mid = Vector256.Create(short.MinValue); // .NET5+ has better performance .
                 Vector256<short> left2 = Avx2.Xor(left.AsInt16(), mid);
@@ -1094,6 +1169,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> LessThan(Vector256<uint> left, Vector256<uint> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareLessThan(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector256<int> mid = Vector256s<int>.MinValue;
                 Vector256<int> mid = Vector256.Create(int.MinValue); // .NET5+ has better performance .
                 Vector256<int> left2 = Avx2.Xor(left.AsInt32(), mid);
@@ -1112,6 +1192,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> LessThan(Vector256<ulong> left, Vector256<ulong> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareLessThan(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector256<long> mid = Vector256s<long>.MinValue;
                 Vector256<long> mid = Vector256Constants.Int64_MinValue;
                 Vector256<long> left2 = Avx2.Add(mid, left.AsInt64());
@@ -1296,18 +1381,33 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> LessThanOrEqual(Vector256<sbyte> left, Vector256<sbyte> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareLessThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(GreaterThan(left, right));
             }
 
             /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> LessThanOrEqual(Vector256<byte> left, Vector256<byte> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareLessThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(GreaterThan(left, right));
             }
 
             /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> LessThanOrEqual(Vector256<short> left, Vector256<short> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareLessThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(GreaterThan(left, right));
             }
 
@@ -1315,12 +1415,22 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> LessThanOrEqual(Vector256<ushort> left, Vector256<ushort> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareLessThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(GreaterThan(left, right));
             }
 
             /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> LessThanOrEqual(Vector256<int> left, Vector256<int> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareLessThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(GreaterThan(left, right));
             }
 
@@ -1328,12 +1438,22 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> LessThanOrEqual(Vector256<uint> left, Vector256<uint> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareLessThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(GreaterThan(left, right));
             }
 
             /// <inheritdoc cref="IWVectorTraits256.LessThanOrEqual(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> LessThanOrEqual(Vector256<long> left, Vector256<long> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareLessThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(GreaterThan(left, right));
             }
 
@@ -1341,6 +1461,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> LessThanOrEqual(Vector256<ulong> left, Vector256<ulong> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareLessThanOrEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(GreaterThan(left, right));
             }
 
@@ -1550,6 +1675,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Max(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> Max(Vector256<long> left, Vector256<long> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.Max(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 Vector256<long> mask = Avx2.CompareGreaterThan(left, right);
                 Vector256<long> rt = Avx2.BlendVariable(right, left, mask);
                 return rt;
@@ -1559,6 +1689,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Max(Vector256<ulong> left, Vector256<ulong> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.Max(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector256<long> mid = Vector256s<long>.MinValue;
                 Vector256<long> mid = Vector256Constants.Int64_MinValue;
                 Vector256<long> left2 = Avx2.Xor(left.AsInt64(), mid);
@@ -1630,6 +1765,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Min(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> Min(Vector256<long> left, Vector256<long> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.Min(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 Vector256<long> mask = Avx2.CompareGreaterThan(right, left);
                 Vector256<long> rt = Avx2.BlendVariable(right, left, mask);
                 return rt;
@@ -1639,6 +1779,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Min(Vector256<ulong> left, Vector256<ulong> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.Min(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector256<long> mid = Vector256s<long>.MinValue;
                 Vector256<long> mid = Vector256Constants.Int64_MinValue;
                 Vector256<long> left2 = Avx2.Xor(left.AsInt64(), mid);
@@ -1664,6 +1809,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static TypeCodeFlags Multiply_FullAcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+#if NET8_0_OR_GREATER
+                    if (Avx512DQ.VL.IsSupported) {
+                        rt |= TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    }
+#endif // NET8_0_OR_GREATER
                     return rt;
                 }
             }
@@ -1730,6 +1880,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Multiply(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> Multiply(Vector256<long> left, Vector256<long> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.MultiplyLow(left, right);
+                }
+#endif // NET8_0_OR_GREATER
 #if HARDWARE_OPTIMIZATION
                 return Multiply_TwoWord(left, right);
 #else
@@ -1741,6 +1896,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Multiply(Vector256<ulong> left, Vector256<ulong> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512DQ.VL.IsSupported) {
+                    return Avx512DQ.VL.MultiplyLow(left, right);
+                }
+#endif // NET8_0_OR_GREATER
 #if HARDWARE_OPTIMIZATION
                 return Multiply_TwoWord(left, right);
 #else
@@ -1862,6 +2022,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.OnesComplement{T}(Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> OnesComplement<T>(Vector256<T> vector) where T : struct {
+#if NET7_0_OR_GREATER
+                if (Vector256.IsHardwareAccelerated) {
+                    return Vector256.OnesComplement(vector);
+                    // Avx2: pxor
+                    // Avx512: vpternlogq  ymm0,ymm0,ymmword ptr [rdx],55h  ; 55h: ~c
+                }
+#endif // NET7_0_OR_GREATER
                 return Avx2.Xor(Vector256s<ulong>.AllBitsSet, vector.AsUInt64()).As<ulong, T>();
             }
 
