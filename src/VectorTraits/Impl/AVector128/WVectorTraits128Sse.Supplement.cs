@@ -80,6 +80,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Abs(Vector128<long> value) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.Abs(value).AsInt64();
+                }
+#endif // NET8_0_OR_GREATER
                 // If an integer value is positive or zero, no action is required. Otherwise complement and add 1.
                 Vector128<long> mask = GreaterThan(Vector128<long>.Zero, value); // 0>value => value<0
                 Vector128<long> rt = Sse2.Subtract(Sse2.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
