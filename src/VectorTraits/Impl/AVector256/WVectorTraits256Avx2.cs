@@ -1546,6 +1546,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<long> ShiftRightArithmetic_Core(Vector256<long> value, int shiftAmount, Vector256<long> args0, Vector256<long> args1) {
                 _ = shiftAmount;
                 _ = args1;
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ShiftRightArithmeticVariable(value, args0.AsUInt64());
+                }
+#endif // NET8_0_OR_GREATER
                 Vector256<long> sign = Avx2.CompareGreaterThan(Vector256<long>.Zero, value);
                 Vector256<long> rt = Avx2.Xor(value, sign);
                 rt = Avx2.ShiftRightLogicalVariable(rt, args0.AsUInt64());
@@ -1575,6 +1580,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Const(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftRightArithmetic_Const(Vector256<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ShiftRightArithmetic(value, (byte)shiftAmount);
+                }
+#endif // NET8_0_OR_GREATER
                 return ShiftRightArithmetic_Fast(value, shiftAmount);
             }
 
@@ -1612,6 +1622,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_ConstCore(Vector256{long}, int, Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftRightArithmetic_ConstCore(Vector256<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector256<long> args0, Vector256<long> args1) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ShiftRightArithmetic(value, (byte)shiftAmount);
+                }
+#endif // NET8_0_OR_GREATER
                 return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
             }
 
@@ -1661,6 +1676,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.ShiftRightArithmetic_Fast(Vector256{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> ShiftRightArithmetic_Fast(Vector256<long> value, int shiftAmount) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ShiftRightArithmetic(value, (byte)shiftAmount);
+                }
+#endif // NET8_0_OR_GREATER
                 return ShiftRightArithmetic_Fast_Xor(value, shiftAmount);
             }
 

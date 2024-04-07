@@ -572,6 +572,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<long> ShiftRightArithmetic_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
                 _ = shiftAmount;
                 _ = args1;
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ShiftRightArithmeticVariable(value, args0.AsUInt64());
+                }
+#endif // NET8_0_OR_GREATER
                 Vector128<long> sign;
                 if (Sse42.IsSupported) {
                     sign = Sse42.CompareGreaterThan(Vector128<long>.Zero, value);
@@ -607,6 +612,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightArithmetic_ConstCore(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ShiftRightArithmetic(value, (byte)shiftAmount);
+                }
+#endif // NET8_0_OR_GREATER
                 return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
             }
 
