@@ -307,6 +307,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static TypeCodeFlags YNarrowSaturate_FullAcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+#if NET8_0_OR_GREATER
+                    if (Avx512F.IsSupported) {
+                        rt |= TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    }
+#endif // NET8_0_OR_GREATER
                     return rt;
                 }
             }
@@ -315,8 +320,59 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YNarrowSaturate(Vector256<short> lower, Vector256<short> upper) {
+#if NET8_0_OR_GREATER
+                //if (Avx512BW.IsSupported) {
+                //    return Avx512BW.ConvertToVector256SByteWithSaturation(lower.ToVector512Unsafe().WithUpper(upper));
+                //    // total latency: 7, total throughput CPI: 3
+                //    //
+                //    //__m256i _mm512_cvtsepi16_epi8 (__m512i a)
+                //    //#include <immintrin.h>
+                //    //Instruction: vpmovswb ymm, zmm
+                //    //CPUID Flags: AVX512BW
+                //    //Latency and Throughput
+                //    //Architecture	Latency	Throughput (CPI)
+                //    //Icelake Intel Core	-	2
+                //    //Icelake Xeon	4	2
+                //    //
+                //    //__m512i _mm512_inserti64x4 (__m512i a, __m256i b, int imm8)
+                //    //#include <immintrin.h>
+                //    //Instruction: vinserti64x4 zmm, zmm, ymm, imm8
+                //    //CPUID Flags: AVX512F
+                //    //Latency and Throughput
+                //    //Architecture	Latency	Throughput (CPI)
+                //    //Icelake Intel Core	3	1
+                //    //Icelake Xeon	3	1
+                //    //Sapphire Rapids	3	1
+                //    //Skylake	3	1
+                //}
+#endif // NET8_0_OR_GREATER
                 Vector256<sbyte> raw = Avx2.PackSignedSaturate(lower, upper); // bit64(x, z, y, w)
                 Vector256<sbyte> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsSByte(); // Shuffle(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                // total latency: 4~6, total throughput CPI: 2
+                //
+                //__m256i _mm256_packs_epi16 (__m256i a, __m256i b)
+                //#include <immintrin.h>
+                //Instruction: vpacksswb ymm, ymm, ymm
+                //CPUID Flags: AVX2
+                //Latency and Throughput
+                //Architecture	Latency	Throughput (CPI)
+                //Alderlake	3	1
+                //Icelake Intel Core	3	1
+                //Icelake Xeon	3	1
+                //Sapphire Rapids	3	1
+                //Skylake	1	1
+                //
+                //__m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8)
+                //#include <immintrin.h>
+                //Instruction: vpermq ymm, ymm, imm8
+                //CPUID Flags: AVX2
+                //Latency and Throughput
+                //Architecture	Latency	Throughput (CPI)
+                //Alderlake	3	1
+                //Icelake Intel Core	3	1
+                //Icelake Xeon	3	1
+                //Sapphire Rapids	3	1
+                //Skylake	3	1
                 return rt;
             }
 
@@ -324,6 +380,32 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YNarrowSaturate(Vector256<ushort> lower, Vector256<ushort> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.IsSupported) {
+                    return Avx512BW.ConvertToVector256ByteWithSaturation(lower.ToVector512Unsafe().WithUpper(upper));
+                    // total latency: 7, total throughput CPI: 3
+                    //
+                    //__m256i _mm512_cvtusepi16_epi8 (__m512i a)
+                    //#include <immintrin.h>
+                    //Instruction: vpmovuswb ymm, zmm
+                    //CPUID Flags: AVX512BW
+                    //Latency and Throughput
+                    //Architecture	Latency	Throughput (CPI)
+                    //Icelake Intel Core	-	2
+                    //Icelake Xeon	4	2
+                    //
+                    //__m512i _mm512_inserti64x4 (__m512i a, __m256i b, int imm8)
+                    //#include <immintrin.h>
+                    //Instruction: vinserti64x4 zmm, zmm, ymm, imm8
+                    //CPUID Flags: AVX512F
+                    //Latency and Throughput
+                    //Architecture	Latency	Throughput (CPI)
+                    //Icelake Intel Core	3	1
+                    //Icelake Xeon	3	1
+                    //Sapphire Rapids	3	1
+                    //Skylake	3	1
+                }
+#endif // NET8_0_OR_GREATER
                 // Vector256<ushort> amax = Vector256s<ushort>.VMaxByte;
                 Vector256<ushort> amax = Vector256.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
                 Vector256<byte> raw = Avx2.PackUnsignedSaturate(Avx2.Min(lower, amax).AsInt16(), Avx2.Min(upper, amax).AsInt16()); // bit64(x, z, y, w)
@@ -343,6 +425,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YNarrowSaturate(Vector256<uint> lower, Vector256<uint> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.IsSupported) {
+                    return Avx512F.ConvertToVector256UInt16WithSaturation(lower.ToVector512Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector256<uint> amax = Vector256s<uint>.VMaxUInt16;
                 Vector256<uint> amax = Vector256.Create((uint)ushort.MaxValue); // .NET5+ has better performance .
                 Vector256<ushort> raw = Avx2.PackUnsignedSaturate(Avx2.Min(lower, amax).AsInt32(), Avx2.Min(upper, amax).AsInt32()); // bit64(x, z, y, w)
@@ -353,6 +440,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YNarrowSaturate(Vector256{long}, Vector256{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> YNarrowSaturate(Vector256<long> lower, Vector256<long> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.IsSupported) {
+                    return Avx512F.ConvertToVector256Int32WithSaturation(lower.ToVector512Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector256<long> amin = Vector256s<long>.VMinInt32;
                 //Vector256<long> amax = Vector256s<long>.VMaxInt32;
                 Vector256<long> amin = Vector256Constants.Int64_VMinInt32;
@@ -366,6 +458,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YNarrowSaturate(Vector256<ulong> lower, Vector256<ulong> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.IsSupported) {
+                    return Avx512F.ConvertToVector256UInt32WithSaturation(lower.ToVector512Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector256<ulong> amax = Vector256s<ulong>.VMaxUInt32;
                 Vector256<ulong> amax = Vector256Constants.Int64_VMaxUInt32.AsUInt64();
                 Vector256<ulong> l = Min(lower, amax);
@@ -386,6 +483,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static TypeCodeFlags YNarrowSaturateUnsigned_FullAcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+#if NET8_0_OR_GREATER
+                    if (Avx512F.IsSupported) {
+                        rt = TypeCodeFlags.Int64;
+                    }
+#endif // NET8_0_OR_GREATER
                     return rt;
                 }
             }
@@ -411,6 +513,12 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YNarrowSaturateUnsigned(Vector256<long> lower, Vector256<long> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.IsSupported) {
+                    Vector512<ulong> temp = Avx512F.Max(lower.ToVector512Unsafe().WithUpper(upper), Vector512<long>.Zero).AsUInt64();
+                    return Avx512F.ConvertToVector256UInt32WithSaturation(temp);
+                }
+#endif // NET8_0_OR_GREATER
                 Vector256<long> amin = Vector256<long>.Zero;
                 //Vector256<long> amax = Vector256s<long>.VMaxUInt32;
                 Vector256<long> amax = Vector256Constants.Int64_VMaxUInt32;
@@ -431,6 +539,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YOrNot{T}(Vector256{T}, Vector256{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> YOrNot<T>(Vector256<T> left, Vector256<T> right) where T : struct {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.TernaryLogic(left.AsInt64(), right.AsInt64(), right.AsInt64(), TernaryLogicControl.Or_A_NotB).As<long, T>();
+                }
+#endif // NET8_0_OR_GREATER
                 Vector256<T> right2 = OnesComplement(right);
                 Vector256<T> rt = BitwiseOr(left, right2);
                 return rt;

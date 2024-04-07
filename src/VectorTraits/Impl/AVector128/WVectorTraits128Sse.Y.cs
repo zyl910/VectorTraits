@@ -347,6 +347,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     if (Sse41.IsSupported) {
                         rt |= TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
                     }
+#if NET8_0_OR_GREATER
+                    if (Avx512F.VL.IsSupported) {
+                        rt |= TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    }
+#endif // NET8_0_OR_GREATER
                     return rt;
                 }
             }
@@ -363,6 +368,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YNarrowSaturate(Vector128<ushort> lower, Vector128<ushort> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.ConvertToVector128ByteWithSaturation(lower.ToVector256Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 // Vector128<ushort> amax = Vector128s<ushort>.VMaxByte;
                 Vector128<ushort> amax = Vector128.Create((ushort)byte.MaxValue); // .NET5+ has better performance .
                 Vector128<byte> rt = Sse2.PackUnsignedSaturate(Min(lower, amax).AsInt16(), Min(upper, amax).AsInt16());
@@ -380,6 +390,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YNarrowSaturate(Vector128<uint> lower, Vector128<uint> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ConvertToVector128UInt16WithSaturation(lower.ToVector256Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector128<uint> amax = Vector128s<uint>.VMaxUInt16;
                 Vector128<uint> amax = Vector128.Create((uint)ushort.MaxValue); // .NET5+ has better performance .
                 Vector128<uint> l = Min(lower, amax);
@@ -396,6 +411,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate(Vector128{long}, Vector128{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YNarrowSaturate(Vector128<long> lower, Vector128<long> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ConvertToVector128Int32WithSaturation(lower.ToVector256Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 Vector128<long> amin = Vector128Constants.Int64_VMinInt32;
                 Vector128<long> amax = Vector128Constants.Int64_VMaxInt32;
                 Vector128<long> l = YClamp(lower, amin, amax);
@@ -407,6 +427,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YNarrowSaturate(Vector128<ulong> lower, Vector128<ulong> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ConvertToVector128UInt32WithSaturation(lower.ToVector256Unsafe().WithUpper(upper));
+                }
+#endif // NET8_0_OR_GREATER
                 //Vector128<ulong> amax = Vector128s<ulong>.VMaxUInt32;
                 Vector128<ulong> amax = Vector128Constants.Int64_VMaxUInt32.AsUInt64();
                 Vector128<ulong> l = Min(lower, amax);
@@ -430,6 +455,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     if (Sse41.IsSupported) {
                         rt |= TypeCodeFlags.Int32;
                     }
+#if NET8_0_OR_GREATER
+                    if (Avx512F.VL.IsSupported) {
+                        rt |= TypeCodeFlags.Int64;
+                    }
+#endif // NET8_0_OR_GREATER
                     return rt;
                 }
             }
@@ -462,6 +492,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YNarrowSaturateUnsigned(Vector128<long> lower, Vector128<long> upper) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    Vector256<ulong> temp = Avx512F.VL.Max(lower.ToVector256Unsafe().WithUpper(upper), Vector256<long>.Zero).AsUInt64();
+                    return Avx512F.VL.ConvertToVector128UInt32WithSaturation(temp);
+                }
+#endif // NET8_0_OR_GREATER
                 Vector128<long> amin = Vector128<long>.Zero;
                 Vector128<long> amax = Vector128Constants.Int64_VMaxUInt32;
                 Vector128<ulong> l = YClamp(lower, amin, amax).AsUInt64();
@@ -481,6 +517,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YOrNot{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> YOrNot<T>(Vector128<T> left, Vector128<T> right) where T : struct {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.TernaryLogic(left.AsInt64(), right.AsInt64(), right.AsInt64(), TernaryLogicControl.Or_A_NotB).As<long, T>();
+                }
+#endif // NET8_0_OR_GREATER
                 Vector128<T> right2 = OnesComplement(right);
                 Vector128<T> rt = BitwiseOr(left, right2);
                 return rt;
