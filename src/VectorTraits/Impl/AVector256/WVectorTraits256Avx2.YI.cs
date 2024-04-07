@@ -443,18 +443,33 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YIsNotEquals(Vector256<sbyte> left, Vector256<sbyte> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareNotEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(Avx2.CompareEqual(left, right));
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YIsNotEquals(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YIsNotEquals(Vector256<byte> left, Vector256<byte> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareNotEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(Avx2.CompareEqual(left, right));
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YIsNotEquals(Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> YIsNotEquals(Vector256<short> left, Vector256<short> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareNotEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(Avx2.CompareEqual(left, right));
             }
 
@@ -462,12 +477,22 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YIsNotEquals(Vector256<ushort> left, Vector256<ushort> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.CompareNotEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(Avx2.CompareEqual(left, right));
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YIsNotEquals(Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> YIsNotEquals(Vector256<int> left, Vector256<int> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareNotEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(Avx2.CompareEqual(left, right));
             }
 
@@ -475,12 +500,22 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YIsNotEquals(Vector256<uint> left, Vector256<uint> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareNotEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(Avx2.CompareEqual(left, right));
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YIsNotEquals(Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YIsNotEquals(Vector256<long> left, Vector256<long> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareNotEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(Avx2.CompareEqual(left, right));
             }
 
@@ -488,6 +523,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YIsNotEquals(Vector256<ulong> left, Vector256<ulong> right) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.CompareNotEqual(left, right);
+                }
+#endif // NET8_0_OR_GREATER
                 return OnesComplement(Avx2.CompareEqual(left, right));
             }
 
