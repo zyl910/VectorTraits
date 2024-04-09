@@ -1270,6 +1270,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     return;
                 }
 #endif // NET8_0_OR_GREATER
+                YShuffleKernel_Args_Multiply(indices, out args0, out args1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleKernel_Args(Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleKernel_Args_Multiply(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1) {
                 if (Ssse3.IsSupported) {
                     Vector128<byte> indices2 = Sse2.Add(Multiply(indices, Vector128Constants.Shuffle_UInt16_Multiplier).AsByte(), Vector128Constants.Shuffle_UInt16_ByteOffset);
                     YShuffleKernel_Args(indices2, out var a0, out var a1);
@@ -1366,6 +1373,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleKernel_Core(Vector128<ushort> vector, Vector128<ushort> args0, Vector128<ushort> args1) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    _ = args1;
+                    return Avx512BW.VL.PermuteVar8x16(vector, args0);
+                }
+#endif // NET8_0_OR_GREATER
                 return YShuffleKernel_Core(vector.AsByte(), args0.AsByte(), args1.AsByte()).AsUInt16();
             }
 

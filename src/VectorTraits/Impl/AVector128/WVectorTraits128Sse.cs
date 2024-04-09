@@ -2140,13 +2140,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Shuffle_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1) {
                 if (Ssse3.IsSupported) {
-                    YShuffleKernel_Args(indices, out args0, out args1);
 #if NET8_0_OR_GREATER
                     if (Avx512BW.VL.IsSupported) {
+                        YShuffleKernel_Args_Multiply(indices, out args0, out args1);
                         args0 = Sse2.Or(args0, Avx512BW.VL.CompareGreaterThanOrEqual(indices, Vector128.Create((ushort)8))); // (i >= 8)
                         return;
                     }
 #endif // NET8_0_OR_GREATER
+                    YShuffleKernel_Args(indices, out args0, out args1);
                     var indicesAdded = Sse2.Add(indices.AsInt16(), Vector128.Create(short.MinValue));
                     Vector128<ushort> mask = Sse2.CompareGreaterThan(
                         Vector128.Create((short)(8 + short.MinValue)),

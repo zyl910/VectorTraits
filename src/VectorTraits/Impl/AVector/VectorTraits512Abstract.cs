@@ -28,7 +28,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
         /// <summary>ByteCount value</summary>
-        public const int ByteCountValue = 32;
+        public const int ByteCountValue = 64;
 
         /// <summary>
         /// <see cref="GetUnsupportedMessage"/> - Fill by <see cref="Vector{T}.Count"/> .
