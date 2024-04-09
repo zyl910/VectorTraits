@@ -107,6 +107,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 if (System.Runtime.Intrinsics.X86.Sse42.IsSupported) rt += separator + "Sse42";
                 if (System.Runtime.Intrinsics.X86.Avx.IsSupported) rt += separator + "Avx";
                 if (System.Runtime.Intrinsics.X86.Avx2.IsSupported) rt += separator + "Avx2";
+#if NET8_0_OR_GREATER
+                if (System.Runtime.Intrinsics.X86.Avx512F.VL.IsSupported) rt += separator + "Avx512VL";
+#endif // NET8_0_OR_GREATER
                 // done.
                 if (!string.IsNullOrEmpty(rt)) {
                     rt = rt.Substring(separator.Length);
