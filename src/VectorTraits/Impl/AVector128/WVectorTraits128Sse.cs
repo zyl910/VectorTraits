@@ -1969,13 +1969,23 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> Shuffle(Vector128<byte> vector, Vector128<byte> indices) {
                 if (Ssse3.IsSupported) {
-                    Vector128<sbyte> indicesAdded = Sse2.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue));
-                    Vector128<byte> mask = Sse2.CompareGreaterThan(
+                    Vector128<sbyte> indicesAdded;
+                    Vector128<byte> mask, raw, rt;
+#if NET8_0_OR_GREATER
+                    if (Avx512BW.VL.IsSupported) {
+                        mask = Avx512BW.VL.CompareGreaterThan(Vector128.Create((byte)16), indices);
+                        raw = YShuffleKernel(vector, indices);
+                        rt = Sse2.And(raw, mask);
+                        return rt;
+                    }
+#endif // NET8_0_OR_GREATER
+                    indicesAdded = Sse2.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue));
+                    mask = Sse2.CompareGreaterThan(
                         Vector128.Create((sbyte)(16 + sbyte.MinValue)),
                         indicesAdded
                     ).AsByte(); // Unsigned compare: (i < 16)
-                    Vector128<byte> raw = YShuffleKernel(vector, indices);
-                    Vector128<byte> rt = Sse2.And(raw, mask);
+                    raw = YShuffleKernel(vector, indices);
+                    rt = Sse2.And(raw, mask);
                     return rt;
                 } else {
                     return SuperStatics.Shuffle(vector, indices);
@@ -1993,13 +2003,23 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> Shuffle(Vector128<ushort> vector, Vector128<ushort> indices) {
                 if (Ssse3.IsSupported) {
-                    Vector128<short> indicesAdded = Sse2.Add(indices.AsInt16(), Vector128.Create(short.MinValue));
-                    Vector128<ushort> mask = Sse2.CompareGreaterThan(
+                    Vector128<short> indicesAdded;
+                    Vector128<ushort> mask, raw, rt;
+#if NET8_0_OR_GREATER
+                    if (Avx512BW.VL.IsSupported) {
+                        mask = Avx512BW.VL.CompareGreaterThan(Vector128.Create((ushort)8), indices);
+                        raw = YShuffleKernel(vector, indices);
+                        rt = Sse2.And(raw, mask);
+                        return rt;
+                    }
+#endif // NET8_0_OR_GREATER
+                    indicesAdded = Sse2.Add(indices.AsInt16(), Vector128.Create(short.MinValue));
+                    mask = Sse2.CompareGreaterThan(
                         Vector128.Create((short)(8 + short.MinValue)),
                         indicesAdded
                     ).AsUInt16(); // Unsigned compare: (i < 8)
-                    Vector128<ushort> raw = YShuffleKernel(vector, indices);
-                    Vector128<ushort> rt = Sse2.And(raw, mask);
+                    raw = YShuffleKernel(vector, indices);
+                    rt = Sse2.And(raw, mask);
                     return rt;
                 } else {
                     return SuperStatics.Shuffle(vector, indices);
@@ -2017,13 +2037,23 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> Shuffle(Vector128<uint> vector, Vector128<uint> indices) {
                 if (Ssse3.IsSupported) {
-                    Vector128<int> indicesAdded = Sse2.Add(indices.AsInt32(), Vector128.Create(int.MinValue));
-                    Vector128<uint> mask = Sse2.CompareGreaterThan(
+                    Vector128<int> indicesAdded;
+                    Vector128<uint> mask, raw, rt;
+#if NET8_0_OR_GREATER
+                    if (Avx512F.VL.IsSupported) {
+                        mask = Avx512F.VL.CompareGreaterThan(Vector128.Create((uint)4), indices);
+                        raw = YShuffleKernel(vector, indices);
+                        rt = Sse2.And(raw, mask);
+                        return rt;
+                    }
+#endif // NET8_0_OR_GREATER
+                    indicesAdded = Sse2.Add(indices.AsInt32(), Vector128.Create(int.MinValue));
+                    mask = Sse2.CompareGreaterThan(
                         Vector128.Create((int)(4 + int.MinValue)),
                         indicesAdded
                     ).AsUInt32(); // Unsigned compare: (i < 4)
-                    Vector128<uint> raw = YShuffleKernel(vector, indices);
-                    Vector128<uint> rt = Sse2.And(raw, mask);
+                    raw = YShuffleKernel(vector, indices);
+                    rt = Sse2.And(raw, mask);
                     return rt;
                 } else {
                     return SuperStatics.Shuffle(vector, indices);
@@ -2041,13 +2071,23 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> Shuffle(Vector128<ulong> vector, Vector128<ulong> indices) {
                 if (Ssse3.IsSupported) {
-                    Vector128<long> indicesAdded = Sse2.Add(indices.AsInt64(), Vector128Constants.Int64_MinValue);
-                    Vector128<ulong> mask = GreaterThan(
+                    Vector128<long> indicesAdded;
+                    Vector128<ulong> mask, raw, rt;
+#if NET8_0_OR_GREATER
+                    if (Avx512F.VL.IsSupported) {
+                        mask = Avx512F.VL.CompareGreaterThan(Vector128.Create((ulong)2), indices);
+                        raw = YShuffleKernel(vector, indices);
+                        rt = Sse2.And(raw, mask);
+                        return rt;
+                    }
+#endif // NET8_0_OR_GREATER
+                    indicesAdded = Sse2.Add(indices.AsInt64(), Vector128Constants.Int64_MinValue);
+                    mask = GreaterThan(
                         Vector128Constants.Int64_MinValue_2,
                         indicesAdded
                     ).AsUInt64(); // Unsigned compare: (i < 2)
-                    Vector128<ulong> raw = YShuffleKernel(vector, indices);
-                    Vector128<ulong> rt = Sse2.And(raw, mask);
+                    raw = YShuffleKernel(vector, indices);
+                    rt = Sse2.And(raw, mask);
                     return rt;
                 } else {
                     return SuperStatics.Shuffle(vector, indices);
@@ -2069,6 +2109,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void Shuffle_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1) {
                 if (Ssse3.IsSupported) {
                     YShuffleKernel_Args(indices, out args0, out args1);
+#if NET8_0_OR_GREATER
+                    if (Avx512BW.VL.IsSupported) {
+                        args0 = Sse2.Or(args0, Avx512BW.VL.CompareGreaterThanOrEqual(indices, Vector128.Create((byte)16))); // (i >= 16)
+                        return;
+                    }
+#endif // NET8_0_OR_GREATER
                     Vector128<sbyte> indicesAdded = Sse2.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue));
                     Vector128<byte> mask = Sse2.CompareGreaterThan(
                         Vector128.Create((sbyte)(16 + sbyte.MinValue)),
@@ -2095,6 +2141,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void Shuffle_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1) {
                 if (Ssse3.IsSupported) {
                     YShuffleKernel_Args(indices, out args0, out args1);
+#if NET8_0_OR_GREATER
+                    if (Avx512BW.VL.IsSupported) {
+                        args0 = Sse2.Or(args0, Avx512BW.VL.CompareGreaterThanOrEqual(indices, Vector128.Create((ushort)8))); // (i >= 8)
+                        return;
+                    }
+#endif // NET8_0_OR_GREATER
                     var indicesAdded = Sse2.Add(indices.AsInt16(), Vector128.Create(short.MinValue));
                     Vector128<ushort> mask = Sse2.CompareGreaterThan(
                         Vector128.Create((short)(8 + short.MinValue)),
@@ -2121,6 +2173,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void Shuffle_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1) {
                 if (Ssse3.IsSupported) {
                     YShuffleKernel_Args(indices, out args0, out args1);
+#if NET8_0_OR_GREATER
+                    if (Avx512F.VL.IsSupported) {
+                        args0 = Sse2.Or(args0, Avx512F.VL.CompareGreaterThanOrEqual(indices, Vector128.Create((uint)4))); // (i >= 4)
+                        return;
+                    }
+#endif // NET8_0_OR_GREATER
                     Vector128<int> indicesAdded = Sse2.Add(indices.AsInt32(), Vector128.Create(int.MinValue));
                     Vector128<uint> mask = Sse2.CompareGreaterThan(
                         Vector128.Create((int)(4 + int.MinValue)),
@@ -2147,6 +2205,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void Shuffle_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1) {
                 if (Ssse3.IsSupported) {
                     YShuffleKernel_Args(indices, out args0, out args1);
+#if NET8_0_OR_GREATER
+                    if (Avx512F.VL.IsSupported) {
+                        args0 = Sse2.Or(args0, Avx512F.VL.CompareGreaterThanOrEqual(indices, Vector128.Create((ulong)2))); // (i >= 2)
+                        return;
+                    }
+#endif // NET8_0_OR_GREATER
                     Vector128<long> indicesAdded = Sse2.Add(indices.AsInt64(), Vector128Constants.Int64_MinValue);
                     Vector128<ulong> mask = GreaterThan(
                         Vector128Constants.Int64_MinValue_2,

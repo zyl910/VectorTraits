@@ -10,6 +10,7 @@ using System.Numerics;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
+using System.Threading.Tasks;
 #endif
 
 namespace Zyl.VectorTraits.Impl.AVector256 {
@@ -2215,13 +2216,31 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> Shuffle(Vector256<byte> vector, Vector256<byte> indices) {
-                var indicesAdded = Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue));
-                Vector256<byte> mask = Avx2.CompareGreaterThan(
+                Vector256<sbyte> indicesAdded;
+                Vector256<byte> mask, raw, rt;
+#if NET8_0_OR_GREATER
+                if (Avx512Vbmi.VL.IsSupported) {
+                    if (Avx512BW.VL.IsSupported) {
+                        mask = Avx512BW.VL.CompareGreaterThan(Vector256.Create((byte)32), indices);
+                    } else {
+                        indicesAdded = Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue));
+                        mask = Avx2.CompareGreaterThan(
+                            Vector256.Create((sbyte)(32 + sbyte.MinValue)),
+                            indicesAdded
+                        ).AsByte(); // Unsigned compare: (i < 32)
+                    }
+                    raw = YShuffleKernel(vector, indices);
+                    rt = Avx2.And(raw, mask);
+                    return rt;
+                }
+#endif // NET8_0_OR_GREATER
+                indicesAdded = Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue));
+                mask = Avx2.CompareGreaterThan(
                     Vector256.Create((sbyte)(32 + sbyte.MinValue)),
                     indicesAdded
                 ).AsByte(); // Unsigned compare: (i < 32)
-                Vector256<byte> raw = YShuffleKernel(vector, indices);
-                Vector256<byte> rt = Avx2.And(raw, mask);
+                raw = YShuffleKernel(vector, indices);
+                rt = Avx2.And(raw, mask);
                 return rt;
             }
 
@@ -2235,13 +2254,31 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> Shuffle(Vector256<ushort> vector, Vector256<ushort> indices) {
-                var indicesAdded = Avx2.Add(indices.AsInt16(), Vector256.Create(short.MinValue));
-                Vector256<ushort> mask = Avx2.CompareGreaterThan(
+                Vector256<short> indicesAdded;
+                Vector256<ushort> mask, raw, rt;
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    if (Avx512BW.VL.IsSupported) {
+                        mask = Avx512BW.VL.CompareGreaterThan(Vector256.Create((ushort)16), indices);
+                    } else {
+                        indicesAdded = Avx2.Add(indices.AsInt16(), Vector256.Create(short.MinValue));
+                        mask = Avx2.CompareGreaterThan(
+                            Vector256.Create((short)(16 + short.MinValue)),
+                            indicesAdded
+                        ).AsUInt16(); // Unsigned compare: (i < 16)
+                    }
+                    raw = YShuffleKernel(vector, indices);
+                    rt = Avx2.And(raw, mask);
+                    return rt;
+                }
+#endif // NET8_0_OR_GREATER
+                indicesAdded = Avx2.Add(indices.AsInt16(), Vector256.Create(short.MinValue));
+                mask = Avx2.CompareGreaterThan(
                     Vector256.Create((short)(16 + short.MinValue)),
                     indicesAdded
                 ).AsUInt16(); // Unsigned compare: (i < 16)
-                Vector256<ushort> raw = YShuffleKernel(vector, indices);
-                Vector256<ushort> rt = Avx2.And(raw, mask);
+                raw = YShuffleKernel(vector, indices);
+                rt = Avx2.And(raw, mask);
                 return rt;
             }
 
@@ -2255,13 +2292,23 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> Shuffle(Vector256<uint> vector, Vector256<uint> indices) {
-                var indicesAdded = Avx2.Add(indices.AsInt32(), Vector256.Create(int.MinValue));
-                Vector256<uint> mask = Avx2.CompareGreaterThan(
+                Vector256<int> indicesAdded;
+                Vector256<uint> mask, raw, rt;
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    mask = Avx512F.VL.CompareGreaterThan(Vector256.Create((uint)8), indices);
+                    raw = YShuffleKernel(vector, indices);
+                    rt = Avx2.And(raw, mask);
+                    return rt;
+                }
+#endif // NET8_0_OR_GREATER
+                indicesAdded = Avx2.Add(indices.AsInt32(), Vector256.Create(int.MinValue));
+                mask = Avx2.CompareGreaterThan(
                     Vector256.Create((int)(8 + int.MinValue)),
                     indicesAdded
                 ).AsUInt32(); // Unsigned compare: (i < 8)
-                Vector256<uint> raw = YShuffleKernel(vector, indices);
-                Vector256<uint> rt = Avx2.And(raw, mask);
+                raw = YShuffleKernel(vector, indices);
+                rt = Avx2.And(raw, mask);
                 return rt;
             }
 
@@ -2275,13 +2322,23 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Shuffle(Vector256<ulong> vector, Vector256<ulong> indices) {
-                var indicesAdded = Avx2.Add(indices.AsInt64(), Vector256Constants.Int64_MinValue);
-                Vector256<ulong> mask = Avx2.CompareGreaterThan(
+                Vector256<long> indicesAdded;
+                Vector256<ulong> mask, raw, rt;
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    mask = Avx512F.VL.CompareGreaterThan(Vector256.Create((ulong)4), indices);
+                    raw = YShuffleKernel(vector, indices);
+                    rt = Avx2.And(raw, mask);
+                    return rt;
+                }
+#endif // NET8_0_OR_GREATER
+                indicesAdded = Avx2.Add(indices.AsInt64(), Vector256Constants.Int64_MinValue);
+                mask = Avx2.CompareGreaterThan(
                     Vector256Constants.Int64_MinValue_4,
                     indicesAdded
                 ).AsUInt64(); // Unsigned compare: (i < 4)
-                Vector256<ulong> raw = YShuffleKernel(vector, indices);
-                Vector256<ulong> rt = Avx2.And(raw, mask);
+                raw = YShuffleKernel(vector, indices);
+                rt = Avx2.And(raw, mask);
                 return rt;
             }
 
@@ -2299,6 +2356,12 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Shuffle_Args(Vector256<byte> indices, out Vector256<byte> args0, out Vector256<byte> args1) {
                 YShuffleKernel_Args(indices, out args0, out args1);
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    args1 = Avx512BW.VL.CompareGreaterThan(Vector256.Create((byte)32), indices);
+                    return;
+                }
+#endif // NET8_0_OR_GREATER
                 var indicesAdded = Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue));
                 Vector256<byte> mask = Avx2.CompareGreaterThan(
                     Vector256.Create((sbyte)(32 + sbyte.MinValue)),
@@ -2322,6 +2385,12 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Shuffle_Args(Vector256<ushort> indices, out Vector256<ushort> args0, out Vector256<ushort> args1) {
                 YShuffleKernel_Args(indices, out args0, out args1);
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    args1 = Avx512BW.VL.CompareGreaterThan(Vector256.Create((ushort)16), indices);
+                    return;
+                }
+#endif // NET8_0_OR_GREATER
                 var indicesAdded = Avx2.Add(indices.AsInt16(), Vector256.Create(short.MinValue));
                 Vector256<ushort> mask = Avx2.CompareGreaterThan(
                     Vector256.Create((short)(16 + short.MinValue)),
@@ -2345,6 +2414,12 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Shuffle_Args(Vector256<uint> indices, out Vector256<uint> args0, out Vector256<uint> args1) {
                 args0 = indices;
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    args1 = Avx512F.VL.CompareGreaterThan(Vector256.Create((uint)8), indices);
+                    return;
+                }
+#endif // NET8_0_OR_GREATER
                 var indicesAdded = Avx2.Add(indices.AsInt32(), Vector256.Create(int.MinValue));
                 args1 = Avx2.CompareGreaterThan(
                     Vector256.Create((int)(8 + int.MinValue)),
@@ -2365,6 +2440,12 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Shuffle_Args(Vector256<ulong> indices, out Vector256<ulong> args0, out Vector256<ulong> args1) {
                 YShuffleKernel_Args(indices, out args0, out _);
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    args1 = Avx512F.VL.CompareGreaterThan(Vector256.Create((ulong)4), indices);
+                    return;
+                }
+#endif // NET8_0_OR_GREATER
                 var indicesAdded = Avx2.Add(indices.AsInt64(), Vector256Constants.Int64_MinValue);
                 args1 = Avx2.CompareGreaterThan(
                     Vector256Constants.Int64_MinValue_4,
@@ -2395,10 +2476,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Shuffle_Core(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> Shuffle_Core(Vector256<byte> vector, Vector256<byte> args0, Vector256<byte> args1) {
-                return Avx2.Or(
-                    Avx2.Shuffle(vector, args0),
-                    Avx2.Shuffle(Avx2.Permute4x64(vector.AsInt64(), (byte)ShuffleControlG4.ZWXY).AsByte(), args1)
-                );
+                var rt = YShuffleKernel_Core(vector, args0, args1);
+#if NET8_0_OR_GREATER
+                if (Avx512Vbmi.VL.IsSupported) {
+                    rt = Avx2.And(rt, args1);
+                }
+#endif // NET8_0_OR_GREATER
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle_Core(Vector256{short}, Vector256{short}, Vector256{short})"/>
@@ -2411,7 +2495,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> Shuffle_Core(Vector256<ushort> vector, Vector256<ushort> args0, Vector256<ushort> args1) {
-                return Shuffle_Core(vector.AsByte(), args0.AsByte(), args1.AsByte()).AsUInt16();
+                var rt = YShuffleKernel_Core(vector, args0, args1);
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    rt = Avx2.And(rt, args1);
+                }
+#endif // NET8_0_OR_GREATER
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.Shuffle_Core(Vector256{int}, Vector256{int}, Vector256{int})"/>
@@ -2437,7 +2527,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> Shuffle_Core(Vector256<ulong> vector, Vector256<ulong> args0, Vector256<ulong> args1) {
-                return Shuffle_Core(vector.AsUInt32(), args0.AsUInt32(), args1.AsUInt32()).AsUInt64();
+                var rt = YShuffleKernel_Core(vector, args0, args1);
+                rt = Avx2.And(rt, args1);
+                return rt;
             }
 
 
