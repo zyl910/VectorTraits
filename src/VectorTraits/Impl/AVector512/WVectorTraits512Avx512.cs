@@ -7,6 +7,8 @@ using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Runtime.CompilerServices;
 using System.Numerics;
+using System.Threading.Tasks;
+
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
@@ -1539,7 +1541,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Shuffle(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> Shuffle(Vector512<byte> vector, Vector512<byte> indices) {
-                return YShuffleInsert(Vector512<byte>.Zero, vector, indices);
+                Vector512<byte> mask = Avx512BW.CompareGreaterThan(Vector512.Create((byte)64), indices); // Unsigned compare: (i < 64)
+                Vector512<byte> raw = YShuffleKernel(vector, indices);
+                Vector512<byte> rt = Avx512F.And(raw, mask);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Shuffle(Vector512{short}, Vector512{short})"/>
@@ -1552,7 +1557,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> Shuffle(Vector512<ushort> vector, Vector512<ushort> indices) {
-                return YShuffleInsert(Vector512<ushort>.Zero, vector, indices);
+                Vector512<ushort> mask = Avx512BW.CompareGreaterThan(Vector512.Create((ushort)32), indices); // Unsigned compare: (i < 32)
+                Vector512<ushort> raw = YShuffleKernel(vector, indices);
+                Vector512<ushort> rt = Avx512F.And(raw, mask);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Shuffle(Vector512{int}, Vector512{int})"/>
@@ -1565,7 +1573,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> Shuffle(Vector512<uint> vector, Vector512<uint> indices) {
-                return YShuffleInsert(Vector512<uint>.Zero, vector, indices);
+                Vector512<uint> mask = Avx512F.CompareGreaterThan(Vector512.Create((uint)16), indices); // Unsigned compare: (i < 16)
+                Vector512<uint> raw = YShuffleKernel(vector, indices);
+                Vector512<uint> rt = Avx512F.And(raw, mask);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Shuffle(Vector512{long}, Vector512{long})"/>
@@ -1578,7 +1589,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> Shuffle(Vector512<ulong> vector, Vector512<ulong> indices) {
-                return YShuffleInsert(Vector512<ulong>.Zero, vector, indices);
+                Vector512<ulong> mask = Avx512F.CompareGreaterThan(Vector512.Create((ulong)8), indices); // Unsigned compare: (i < 8)
+                Vector512<ulong> raw = YShuffleKernel(vector, indices);
+                Vector512<ulong> rt = Avx512F.And(raw, mask);
+                return rt;
             }
 
 
@@ -1657,7 +1671,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Shuffle_Core(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> Shuffle_Core(Vector512<byte> vector, Vector512<byte> args0, Vector512<byte> args1) {
-                return YShuffleInsert_Core(Vector512<byte>.Zero, vector, args0, args0, args1);
+                var raw = YShuffleKernel_Core(vector, args0, args1);
+                var rt = Avx512F.And(raw, args1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Shuffle_Core(Vector512{short}, Vector512{short}, Vector512{short})"/>
@@ -1670,7 +1686,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> Shuffle_Core(Vector512<ushort> vector, Vector512<ushort> args0, Vector512<ushort> args1) {
-                return YShuffleInsert_Core(Vector512<ushort>.Zero, vector, args0, args0, args1);
+                var raw = YShuffleKernel_Core(vector, args0, args1);
+                var rt = Avx512F.And(raw, args1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Shuffle_Core(Vector512{int}, Vector512{int}, Vector512{int})"/>
@@ -1683,7 +1701,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> Shuffle_Core(Vector512<uint> vector, Vector512<uint> args0, Vector512<uint> args1) {
-                return YShuffleInsert_Core(Vector512<uint>.Zero, vector, args0, args0, args1);
+                var raw = YShuffleKernel_Core(vector, args0, args1);
+                var rt = Avx512F.And(raw, args1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Shuffle_Core(Vector512{long}, Vector512{long}, Vector512{long})"/>
@@ -1696,7 +1716,9 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> Shuffle_Core(Vector512<ulong> vector, Vector512<ulong> args0, Vector512<ulong> args1) {
-                return YShuffleInsert_Core(Vector512<ulong>.Zero, vector, args0, args0, args1);
+                var raw = YShuffleKernel_Core(vector, args0, args1);
+                var rt = Avx512F.And(raw, args1);
+                return rt;
             }
 
 
