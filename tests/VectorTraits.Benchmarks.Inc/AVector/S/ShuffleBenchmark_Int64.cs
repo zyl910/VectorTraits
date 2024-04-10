@@ -171,7 +171,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         [Benchmark]
         public void SumTraits() {
-            //Debugger.Break();
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
             dstTMy = StaticSumTraits(srcArray, srcArray.Length, indices);
             CheckResult("SumTraits");
         }

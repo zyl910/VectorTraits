@@ -619,7 +619,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> GreaterThan(Vector128<byte> left, Vector128<byte> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     return Avx512BW.VL.CompareGreaterThan(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -641,7 +641,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> GreaterThan(Vector128<ushort> left, Vector128<ushort> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     return Avx512BW.VL.CompareGreaterThan(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -663,7 +663,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> GreaterThan(Vector128<uint> left, Vector128<uint> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     return Avx512F.VL.CompareGreaterThan(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -700,7 +700,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> GreaterThan(Vector128<ulong> left, Vector128<ulong> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     return Avx512F.VL.CompareGreaterThan(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -930,7 +930,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> GreaterThanOrEqual(Vector128<sbyte> left, Vector128<sbyte> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     return Avx512BW.VL.CompareGreaterThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -941,7 +941,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> GreaterThanOrEqual(Vector128<byte> left, Vector128<byte> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     return Avx512BW.VL.CompareGreaterThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -952,7 +952,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> GreaterThanOrEqual(Vector128<short> left, Vector128<short> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     return Avx512BW.VL.CompareGreaterThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -964,7 +964,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> GreaterThanOrEqual(Vector128<ushort> left, Vector128<ushort> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     return Avx512BW.VL.CompareGreaterThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -975,7 +975,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> GreaterThanOrEqual(Vector128<int> left, Vector128<int> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     return Avx512F.VL.CompareGreaterThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -987,7 +987,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> GreaterThanOrEqual(Vector128<uint> left, Vector128<uint> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     return Avx512F.VL.CompareGreaterThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -998,7 +998,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> GreaterThanOrEqual(Vector128<long> left, Vector128<long> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     return Avx512F.VL.CompareGreaterThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -1010,7 +1010,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> GreaterThanOrEqual(Vector128<ulong> left, Vector128<ulong> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     return Avx512F.VL.CompareGreaterThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -1192,7 +1192,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> LessThan(Vector128<byte> left, Vector128<byte> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     return Avx512BW.VL.CompareLessThan(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -1215,7 +1215,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> LessThan(Vector128<ushort> left, Vector128<ushort> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     return Avx512BW.VL.CompareLessThan(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -1238,7 +1238,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> LessThan(Vector128<uint> left, Vector128<uint> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     return Avx512F.VL.CompareLessThan(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -1261,7 +1261,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> LessThan(Vector128<ulong> left, Vector128<ulong> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     return Avx512F.VL.CompareLessThan(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -1466,7 +1466,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> LessThanOrEqual(Vector128<sbyte> left, Vector128<sbyte> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     return Avx512BW.VL.CompareLessThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -1477,7 +1477,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> LessThanOrEqual(Vector128<byte> left, Vector128<byte> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     return Avx512BW.VL.CompareLessThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -1488,7 +1488,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> LessThanOrEqual(Vector128<short> left, Vector128<short> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     return Avx512BW.VL.CompareLessThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -1500,7 +1500,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> LessThanOrEqual(Vector128<ushort> left, Vector128<ushort> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     return Avx512BW.VL.CompareLessThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -1511,7 +1511,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> LessThanOrEqual(Vector128<int> left, Vector128<int> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     return Avx512F.VL.CompareLessThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -1523,7 +1523,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> LessThanOrEqual(Vector128<uint> left, Vector128<uint> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     return Avx512F.VL.CompareLessThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -1534,7 +1534,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> LessThanOrEqual(Vector128<long> left, Vector128<long> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     return Avx512F.VL.CompareLessThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER
@@ -1546,7 +1546,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> LessThanOrEqual(Vector128<ulong> left, Vector128<ulong> right) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     return Avx512F.VL.CompareLessThanOrEqual(left, right);
                 }
 #endif // NET8_0_OR_GREATER

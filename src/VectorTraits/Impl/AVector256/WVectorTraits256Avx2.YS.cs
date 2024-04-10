@@ -14,7 +14,6 @@ using System.Runtime.Intrinsics.X86;
 using Zyl.VectorTraits.Collections;
 using Zyl.VectorTraits.Impl.Util;
 using Zyl.VectorTraits.Numerics;
-using System.Numerics;
 
 namespace Zyl.VectorTraits.Impl.AVector256 {
     using SuperStatics = WVectorTraits256Base.Statics;
@@ -738,7 +737,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 #if NET8_0_OR_GREATER
                 if (Avx512Vbmi.VL.IsSupported) {
                     Vector256<byte> mask;
-                    if (Avx512BW.VL.IsSupported) {
+                    if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                         mask = Avx512BW.VL.CompareGreaterThan(Vector256.Create((byte)32), indices);
                     } else {
                         var indicesAdded = Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue));
@@ -815,7 +814,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<short> indicesAdded;
                 Vector256<ushort> mask, raw, rt;
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     mask = Avx512BW.VL.CompareGreaterThan(Vector256.Create((ushort)16), indices);
                     raw = YShuffleKernel(vector, indices);
                     rt = ConditionalSelect(mask, raw, back);
@@ -845,7 +844,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<int> indicesAdded;
                 Vector256<uint> mask, raw, rt;
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     mask = Avx512F.VL.CompareGreaterThan(Vector256.Create((uint)8), indices);
                     raw = YShuffleKernel(vector, indices);
                     rt = ConditionalSelect(mask, raw, back);
@@ -875,7 +874,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> indicesAdded;
                 Vector256<ulong> mask, raw, rt;
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     mask = Avx512F.VL.CompareGreaterThan(Vector256.Create((ulong)4), indices);
                     raw = YShuffleKernel(vector, indices);
                     rt = ConditionalSelect(mask, raw, back);

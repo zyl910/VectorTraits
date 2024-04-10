@@ -10,7 +10,6 @@ using System.Numerics;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
-using System.Threading.Tasks;
 #endif
 
 namespace Zyl.VectorTraits.Impl.AVector256 {
@@ -36,6 +35,25 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         /// <see cref="Vector256{T}"/> traits.Statics - Avx2.
         /// </summary>
         public static partial class Statics {
+
+#if NET8_0_OR_GREATER
+#if NETX_0_OR_GREATER
+            private const bool Avx512_Compare_Used = true;
+#else
+            private const bool Avx512_Compare_Used = false;
+            // Bug of Shuffle<byte> on .NET8.0:
+            //00007FFE68EA2B10  vmovups     ymm1,ymmword ptr [r8]  
+            //00007FFE68EA2B15  vmovups     ymm2,ymmword ptr [Zyl.VectorTraits.Benchmarks.AVector.S.ShuffleBenchmark_SByte.StaticSumTraits(SByte[], Int32, System.Numerics.Vector`1<SByte>)+0E0h (07FFE68EA2BA0h)]  
+            //00007FFE68EA2B1D  vpcmpub     k1,ymm2,ymm1,6  ; Avx512BW.VL.CompareGreaterThan
+            //00007FFE68EA2B24  kmovq       qword ptr [rsp+50h],k1    ; Redundant!
+            //   157:                 vrt += vtemp; // Add.
+            //00007FFE68EA2B2B  vpermb      ymm2,ymm1,ymmword ptr [rcx]  
+            //00007FFE68EA2B31  kmovq       k1,qword ptr [rsp+50h]    ; Redundant!
+            //00007FFE68EA2B38  vpmovm2b    ymm3,k1  
+            //00007FFE68EA2B3E  vpand       ymm2,ymm2,ymm3  
+            //00007FFE68EA2B42  vpaddb      ymm0,ymm0,ymm2  
+#endif // NETX_0_OR_GREATER
+#endif // NET8_0_OR_GREATER
 
             /// <inheritdoc cref="IBaseTraits.ByteCount"/>
             public static int ByteCount {
@@ -2223,7 +2241,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<byte> mask, raw, rt;
 #if NET8_0_OR_GREATER
                 if (Avx512Vbmi.VL.IsSupported) {
-                    if (Avx512BW.VL.IsSupported) {
+                    if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                         mask = Avx512BW.VL.CompareGreaterThan(Vector256.Create((byte)32), indices);
                     } else {
                         indicesAdded = Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue));
@@ -2261,7 +2279,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<ushort> mask, raw, rt;
 #if NET8_0_OR_GREATER
                 if (Avx512BW.VL.IsSupported) {
-                    if (Avx512BW.VL.IsSupported) {
+                    if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                         mask = Avx512BW.VL.CompareGreaterThan(Vector256.Create((ushort)16), indices);
                     } else {
                         indicesAdded = Avx2.Add(indices.AsInt16(), Vector256.Create(short.MinValue));
@@ -2298,8 +2316,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<int> indicesAdded;
                 Vector256<uint> mask, raw, rt;
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     mask = Avx512F.VL.CompareGreaterThan(Vector256.Create((uint)8), indices);
+                    //mask = Vector256.GreaterThan(Vector256.Create((uint)8), indices); // On .NET8, same to Avx512F.VL.CompareGreaterThan. It contains redundant vpmovm2d.
                     raw = YShuffleKernel(vector, indices);
                     rt = Avx2.And(raw, mask);
                     return rt;
@@ -2328,7 +2347,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> indicesAdded;
                 Vector256<ulong> mask, raw, rt;
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     mask = Avx512F.VL.CompareGreaterThan(Vector256.Create((ulong)4), indices);
                     raw = YShuffleKernel(vector, indices);
                     rt = Avx2.And(raw, mask);
@@ -2360,7 +2379,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static void Shuffle_Args(Vector256<byte> indices, out Vector256<byte> args0, out Vector256<byte> args1) {
                 YShuffleKernel_Args(indices, out args0, out args1);
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     args1 = Avx512BW.VL.CompareGreaterThan(Vector256.Create((byte)32), indices);
                     return;
                 }
@@ -2389,7 +2408,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static void Shuffle_Args(Vector256<ushort> indices, out Vector256<ushort> args0, out Vector256<ushort> args1) {
                 YShuffleKernel_Args(indices, out args0, out args1);
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                     args1 = Avx512BW.VL.CompareGreaterThan(Vector256.Create((ushort)16), indices);
                     return;
                 }
@@ -2418,7 +2437,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static void Shuffle_Args(Vector256<uint> indices, out Vector256<uint> args0, out Vector256<uint> args1) {
                 args0 = indices;
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     args1 = Avx512F.VL.CompareGreaterThan(Vector256.Create((uint)8), indices);
                     return;
                 }
@@ -2444,7 +2463,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static void Shuffle_Args(Vector256<ulong> indices, out Vector256<ulong> args0, out Vector256<ulong> args1) {
                 YShuffleKernel_Args(indices, out args0, out _);
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                     args1 = Avx512F.VL.CompareGreaterThan(Vector256.Create((ulong)4), indices);
                     return;
                 }

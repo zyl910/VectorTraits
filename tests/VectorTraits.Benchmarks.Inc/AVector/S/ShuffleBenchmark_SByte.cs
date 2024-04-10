@@ -586,7 +586,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
             }
-            //Debugger.Break();
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
             dstTMy = StaticSum256_Avx2_Add1(srcArray, srcArray.Length, indices);
             CheckResult("Sum256_Avx2_Add1");
         }
@@ -781,7 +784,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
             }
-            //Debugger.Break();
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
             dstTMy = StaticSum256Traits(srcArray, srcArray.Length, indices);
             CheckResult("Sum256Traits");
         }

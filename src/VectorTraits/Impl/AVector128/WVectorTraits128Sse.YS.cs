@@ -690,7 +690,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     Vector128<byte> mask, raw, rt;
 #if NET8_0_OR_GREATER
                     if (Avx512Vbmi.VL.IsSupported) {
-                        if (Avx512BW.VL.IsSupported) {
+                        if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                             mask = Avx512BW.VL.CompareGreaterThan(Vector128.Create((byte)16), indices);
                         } else {
                             indicesAdded = Sse2.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue));
@@ -735,7 +735,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     Vector128<short> indicesAdded;
                     Vector128<ushort> mask, raw, rt;
 #if NET8_0_OR_GREATER
-                    if (Avx512BW.VL.IsSupported) {
+                    if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                         mask = Avx512BW.VL.CompareGreaterThan(Vector128.Create((ushort)8), indices);
                         raw = YShuffleKernel(vector, indices);
                         rt = ConditionalSelect(mask, raw, back);
@@ -773,7 +773,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     Vector128<int> indicesAdded;
                     Vector128<uint> mask, raw, rt;
 #if NET8_0_OR_GREATER
-                    if (Avx512F.VL.IsSupported) {
+                    if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
                         mask = Avx512F.VL.CompareGreaterThan(Vector128.Create((uint)4), indices);
                         raw = YShuffleKernel(vector, indices);
                         rt = ConditionalSelect(mask, raw, back);
