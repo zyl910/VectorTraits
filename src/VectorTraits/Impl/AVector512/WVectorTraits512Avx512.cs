@@ -159,6 +159,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> ConvertToDouble(Vector512<long> value) {
                 return Avx512DQ.ConvertToVector512Double(value);
+                //__m512d _mm512_cvtepi64_pd (__m512i a)
+                //#include <immintrin.h>
+                //Instruction: vcvtqq2pd zmm, zmm
+                //CPUID Flags: AVX512DQ
+                //Latency and Throughput
+                //Architecture	Latency	Throughput (CPI)
+                //Icelake Intel Core	4	1
+                //Icelake Xeon	4	0.5
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble_Range52(Vector512{long})"/>
@@ -167,9 +175,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return Avx512DQ.ConvertToVector512Double(value);
                 // BitConverter.DoubleToInt64Bits((double)0x0018000000000000).ToString("X") = "4338000000000000"
                 //Vector512<long> magicNumber = Vector512.Create(ScalarConstants.DoubleVal_2Pow52_2Pow51).AsInt64(); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
-                //Vector512<long> x = Avx512F.Add(value, magicNumber);
-                //Vector512<double> result = Avx512F.Subtract(x.AsDouble(), magicNumber.AsDouble());
-                //return result;
+                //// Format: Code; //Latency, Throughput(references IceLake)
+                //Vector512<long> x = Avx512F.Add(value, magicNumber); // 1,0.5
+                //Vector512<double> result = Avx512F.Subtract(x.AsDouble(), magicNumber.AsDouble()); // 4,0.5
+                //return result; //total latency: 5, total throughput CPI: 1
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble(Vector512{ulong})"/>
@@ -306,6 +315,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> ConvertToUInt64_Range52_Impl(Vector512<double> value) {
                 return Avx512DQ.ConvertToVector512UInt64WithTruncation(value);
+                //__m512i _mm512_cvttpd_epi64 (__m512d a)
+                //#include <immintrin.h>
+                //Instruction: vcvttpd2qq zmm, zmm
+                //CPUID Flags: AVX512DQ
+                //Latency and Throughput
+                //Architecture	Latency	Throughput (CPI)
+                //Icelake Intel Core	4	1
+                //Icelake Xeon	4	0.5
             }
 
             /// <inheritdoc cref="IWVectorTraits512.ConvertToUInt64_Range52RoundToEven(Vector512{double})"/>
@@ -314,9 +331,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<ulong> ConvertToUInt64_Range52RoundToEven(Vector512<double> value) {
                 return Avx512DQ.ConvertToVector512UInt64(value);
                 //Vector512<double> magicNumber = Vector512.Create(ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
-                //Vector512<double> x = Avx512F.Add(value, magicNumber);
-                //Vector512<ulong> result = Avx512F.Xor(x.AsUInt64(), magicNumber.AsUInt64());
-                //return result;
+                //// Format: Code; //Latency, Throughput(references IceLake)
+                //Vector512<double> x = Avx512F.Add(value, magicNumber); // 4,0.5
+                //Vector512<ulong> result = Avx512F.Xor(x.AsUInt64(), magicNumber.AsUInt64()); // 1,0.5
+                //return result; //total latency: 5, total throughput CPI: 1
             }
 
 
