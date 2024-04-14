@@ -750,7 +750,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YShuffleInsert(Vector512<ushort> back, Vector512<ushort> vector, Vector512<ushort> indices) {
-                Vector512<ushort> mask = Avx512BW.CompareGreaterThan(Vector512.Create((ushort)32), indices); // Unsigned compare: (i < 32)
+                Vector512<ushort> mask = Avx512BW.CompareEqual(Avx512BW.ShiftRightLogical(indices, 5), Vector512<ushort>.Zero); // Unsigned compare: (i < 32)
                 Vector512<ushort> raw = YShuffleKernel(vector, indices);
                 Vector512<ushort> rt = ConditionalSelect(mask, raw, back);
                 return rt;
@@ -766,7 +766,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YShuffleInsert(Vector512<uint> back, Vector512<uint> vector, Vector512<uint> indices) {
-                Vector512<uint> mask = Avx512F.CompareGreaterThan(Vector512.Create((uint)16), indices); // Unsigned compare: (i < 16)
+                Vector512<uint> mask = Avx512F.CompareEqual(Avx512F.ShiftRightLogical(indices, 4), Vector512<uint>.Zero); // Unsigned compare: (i < 16)
                 Vector512<uint> raw = YShuffleKernel(vector, indices);
                 Vector512<uint> rt = ConditionalSelect(mask, raw, back);
                 return rt;
@@ -782,7 +782,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> YShuffleInsert(Vector512<ulong> back, Vector512<ulong> vector, Vector512<ulong> indices) {
-                Vector512<ulong> mask = Avx512F.CompareGreaterThan(Vector512.Create((ulong)8), indices); // Unsigned compare: (i < 8)
+                Vector512<ulong> mask = Avx512F.CompareEqual(Avx512F.ShiftRightLogical(indices, 3), Vector512<ulong>.Zero); // Unsigned compare: (i < 8)
                 Vector512<ulong> raw = YShuffleKernel(vector, indices);
                 Vector512<ulong> rt = ConditionalSelect(mask, raw, back);
                 return rt;
@@ -820,7 +820,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleInsert_Args(Vector512<ushort> indices, out Vector512<ushort> args0, out Vector512<ushort> args1, out Vector512<ushort> args2) {
                 YShuffleKernel_Args(indices, out args0, out args1);
-                args2 = Avx512BW.CompareGreaterThan(Vector512.Create((ushort)32), indices); // Unsigned compare: (i < 32)
+                args2 = Avx512BW.CompareEqual(Avx512BW.ShiftRightLogical(indices, 5), Vector512<ushort>.Zero); // Unsigned compare: (i < 32)
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Args(Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int})"/>
@@ -837,7 +837,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleInsert_Args(Vector512<uint> indices, out Vector512<uint> args0, out Vector512<uint> args1, out Vector512<uint> args2) {
                 YShuffleKernel_Args(indices, out args0, out args1);
-                args2 = Avx512F.CompareGreaterThan(Vector512.Create((uint)16), indices); // Unsigned compare: (i < 16)
+                args2 = Avx512F.CompareEqual(Avx512F.ShiftRightLogical(indices, 4), Vector512<uint>.Zero); // Unsigned compare: (i < 16)
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert_Args(Vector512{long}, out Vector512{long}, out Vector512{long}, out Vector512{long})"/>
@@ -854,7 +854,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleInsert_Args(Vector512<ulong> indices, out Vector512<ulong> args0, out Vector512<ulong> args1, out Vector512<ulong> args2) {
                 YShuffleKernel_Args(indices, out args0, out args1);
-                args2 = Avx512F.CompareGreaterThan(Vector512.Create((ulong)8), indices); // Unsigned compare: (i < 8)
+                args2 = Avx512F.CompareEqual(Avx512F.ShiftRightLogical(indices, 3), Vector512<ulong>.Zero); // Unsigned compare: (i < 8)
             }
 
 

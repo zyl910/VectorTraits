@@ -1557,7 +1557,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> Shuffle(Vector512<ushort> vector, Vector512<ushort> indices) {
-                Vector512<ushort> mask = Avx512BW.CompareGreaterThan(Vector512.Create((ushort)32), indices); // Unsigned compare: (i < 32)
+                Vector512<ushort> mask = Avx512BW.CompareEqual(Avx512BW.ShiftRightLogical(indices, 5), Vector512<ushort>.Zero); // Unsigned compare: (i < 32)
                 Vector512<ushort> raw = YShuffleKernel(vector, indices);
                 Vector512<ushort> rt = Avx512F.And(raw, mask);
                 return rt;
@@ -1573,7 +1573,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> Shuffle(Vector512<uint> vector, Vector512<uint> indices) {
-                Vector512<uint> mask = Avx512F.CompareGreaterThan(Vector512.Create((uint)16), indices); // Unsigned compare: (i < 16)
+                Vector512<uint> mask = Avx512F.CompareEqual(Avx512F.ShiftRightLogical(indices, 4), Vector512<uint>.Zero); // Unsigned compare: (i < 16)
                 Vector512<uint> raw = YShuffleKernel(vector, indices);
                 Vector512<uint> rt = Avx512F.And(raw, mask);
                 return rt;
@@ -1589,7 +1589,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> Shuffle(Vector512<ulong> vector, Vector512<ulong> indices) {
-                Vector512<ulong> mask = Avx512F.CompareGreaterThan(Vector512.Create((ulong)8), indices); // Unsigned compare: (i < 8)
+                Vector512<ulong> mask = Avx512F.CompareEqual(Avx512F.ShiftRightLogical(indices, 3), Vector512<ulong>.Zero); // Unsigned compare: (i < 8)
                 Vector512<ulong> raw = YShuffleKernel(vector, indices);
                 Vector512<ulong> rt = Avx512F.And(raw, mask);
                 return rt;
