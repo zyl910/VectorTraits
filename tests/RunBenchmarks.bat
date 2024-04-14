@@ -81,5 +81,24 @@ start /realtime /wait /b %my_path% %my_args% >net7.0.txt
 @ECHO OFF
 :Done_net7_0
 
+:Check_net8_0
+SET my_path=net8.0/VectorTraits.Benchmarks.exe
+IF EXIST "%my_path%" GOTO Run_net8_0
+SET my_path=Release/net8.0/VectorTraits.Benchmarks.exe
+IF EXIST "%my_path%" GOTO Run_net8_0
+SET my_path=bin/Release/net8.0/VectorTraits.Benchmarks.exe
+IF EXIST "%my_path%" GOTO Run_net8_0
+SET my_path=VectorTraits.Benchmarks/bin/Release/net8.0/VectorTraits.Benchmarks.exe
+IF EXIST "%my_path%" GOTO Run_net8_0
+@ECHO ON
+del net8.0.txt
+@ECHO OFF
+GOTO Done_net8_0
+:Run_net8_0
+@ECHO ON
+start /realtime /wait /b %my_path% %my_args% >net8.0.txt
+@ECHO OFF
+:Done_net8_0
+
 @ECHO ON
 timeout /T 60

@@ -65,5 +65,15 @@ ECHO ``` >>%my_file%
 ECHO+>>%my_file%
 :CombineDone_net7_0
 
+IF NOT EXIST "net8.0.txt" GOTO CombineDone_net8_0
+ECHO #### .NET 8.0 >>%my_file%
+ECHO ``` >>%my_file%
+@ECHO ON
+copy "%my_file%"/a+"net8.0.txt"/a %my_file%
+@ECHO OFF
+ECHO ``` >>%my_file%
+ECHO+>>%my_file%
+:CombineDone_net8_0
+
 @ECHO ON
 timeout /T 60

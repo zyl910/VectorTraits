@@ -101,6 +101,30 @@ else
   set +x
 fi
 
+exe_file="net8.0/VectorTraits.Benchmarks.dll"
+log_file="net8.0.txt"
+if [ ! -f "$exe_file" ];then
+  exe_file="Release/net8.0/VectorTraits.Benchmarks.dll"
+  if [ ! -f "$exe_file" ];then
+    exe_file="bin/Release/net8.0/VectorTraits.Benchmarks.dll"
+    if [ ! -f "$exe_file" ];then
+      exe_file="VectorTraits.Benchmarks/bin/Release/net8.0/VectorTraits.Benchmarks.dll"
+      if [ ! -f "$exe_file" ];then
+        exe_file=
+      fi
+    fi
+  fi
+fi
+if [ -n "$exe_file" ]; then 
+  set -x
+  dotnet $exe_file $my_args >$log_file
+  set +x
+else 
+  set -x
+  rm $log_file
+  set +x
+fi
+
 # == CombineBenchmarks ==
 
 out_file=CombineBenchmarks_out.txt
@@ -144,6 +168,17 @@ fi
 log_file="net7.0.txt"
 if [ -f "$log_file" ];then
   echo "#### .NET 7.0" >>$out_file
+  echo '```' >>$out_file
+  set -x
+  cat $log_file >>$out_file
+  set +x
+  echo '```' >>$out_file
+  echo >>$out_file
+fi
+
+log_file="net8.0.txt"
+if [ -f "$log_file" ];then
+  echo "#### .NET 8.0" >>$out_file
   echo '```' >>$out_file
   set -x
   cat $log_file >>$out_file
