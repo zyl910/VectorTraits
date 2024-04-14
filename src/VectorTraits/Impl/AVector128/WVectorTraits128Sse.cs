@@ -37,12 +37,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public static partial class Statics {
 
 #if NET8_0_OR_GREATER
-#if NETX_0_OR_GREATER
+#if NET9_0_OR_GREATER
             private const bool Avx512_Compare_Used = true;
 #else
             private const bool Avx512_Compare_Used = false;
             // Bug on .NET8.0:
-#endif // NETX_0_OR_GREATER
+#endif // NET9_0_OR_GREATER
 #endif // NET8_0_OR_GREATER
 
             /// <inheritdoc cref="IBaseTraits.ByteCount"/>

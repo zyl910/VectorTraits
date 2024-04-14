@@ -37,7 +37,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         public static partial class Statics {
 
 #if NET8_0_OR_GREATER
-#if NETX_0_OR_GREATER
+#if NET9_0_OR_GREATER
             private const bool Avx512_Compare_Used = true;
 #else
             private const bool Avx512_Compare_Used = false;
@@ -52,7 +52,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             //00007FFE68EA2B38  vpmovm2b    ymm3,k1  
             //00007FFE68EA2B3E  vpand       ymm2,ymm2,ymm3  
             //00007FFE68EA2B42  vpaddb      ymm0,ymm0,ymm2  
-#endif // NETX_0_OR_GREATER
+#endif // NET9_0_OR_GREATER
 #endif // NET8_0_OR_GREATER
 
             /// <inheritdoc cref="IBaseTraits.ByteCount"/>
@@ -2309,26 +2309,51 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return Shuffle(vector.AsUInt32(), indices.AsUInt32()).AsInt32();
             }
 
+            /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{int}, Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> Shuffle_Add1(Vector256<int> vector, Vector256<int> indices) {
+                return Shuffle_Add1(vector.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> Shuffle(Vector256<uint> vector, Vector256<uint> indices) {
-                Vector256<int> indicesAdded;
-                Vector256<uint> mask, raw, rt;
 #if NET8_0_OR_GREATER
                 if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
+                    Vector256<uint> mask, raw, rt;
                     mask = Avx512F.VL.CompareGreaterThan(Vector256.Create((uint)8), indices);
-                    //mask = Vector256.GreaterThan(Vector256.Create((uint)8), indices); // On .NET8, same to Avx512F.VL.CompareGreaterThan. It contains redundant vpmovm2d.
+                    //mask = Vector256.GreaterThan(Vector256.Create((uint)8), indices); // On .NET8, same to Avx512F.VL.CompareGreaterThan. It contains redundant kmovq.
                     raw = YShuffleKernel(vector, indices);
                     rt = Avx2.And(raw, mask);
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
+                return Shuffle_EqualsShift(vector, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{uint}, Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> Shuffle_Add1(Vector256<uint> vector, Vector256<uint> indices) {
+                Vector256<int> indicesAdded;
+                Vector256<uint> mask, raw, rt;
                 indicesAdded = Avx2.Add(indices.AsInt32(), Vector256.Create(int.MinValue));
                 mask = Avx2.CompareGreaterThan(
                     Vector256.Create((int)(8 + int.MinValue)),
                     indicesAdded
                 ).AsUInt32(); // Unsigned compare: (i < 8)
+                raw = YShuffleKernel(vector, indices);
+                rt = Avx2.And(raw, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.Shuffle(Vector256{uint}, Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> Shuffle_EqualsShift(Vector256<uint> vector, Vector256<uint> indices) {
+                Vector256<uint> mask, raw, rt;
+                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 3), Vector256<uint>.Zero); // Unsigned compare: (i < 8)
                 raw = YShuffleKernel(vector, indices);
                 rt = Avx2.And(raw, mask);
                 return rt;

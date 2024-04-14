@@ -496,6 +496,57 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #endif // NET7_0_OR_GREATER
 
         /// <summary>
+        /// Sum Shuffle - Vector256 - Avx2 - Add1.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum256_Avx2_Add1(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
+            Vector256<TMy> indicesUsed = indices.AsVector256();
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.Shuffle_Add1(p0, indicesUsed);
+                vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            for (i = 0; i < VectorWidth; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum256_Avx2_Add1() {
+            WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
+            if (Vector<byte>.Count != Vector256<byte>.Count) {
+                throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
+            }
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSum256_Avx2_Add1(srcArray, srcArray.Length, indices);
+            CheckResult("Sum256_Avx2_Add1");
+        }
+
+        /// <summary>
         /// Sum Shuffle - Vector256 - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
@@ -538,7 +589,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             if (Vector<byte>.Count != Vector256<byte>.Count) {
                 throw new NotSupportedException(string.Format("Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, Vector256<byte>.Count));
             }
-            //Debugger.Break();
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
             dstTMy = StaticSum256Traits(srcArray, srcArray.Length, indices);
             CheckResult("Sum256Traits");
         }
