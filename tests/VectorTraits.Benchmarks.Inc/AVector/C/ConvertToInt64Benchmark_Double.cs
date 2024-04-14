@@ -16,6 +16,7 @@ using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
 using Zyl.VectorTraits.Impl.AVector128;
 using Zyl.VectorTraits.Impl.AVector256;
+using Zyl.VectorTraits.Impl.AVector512;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.C {
 #if BENCHMARKS_OFF
@@ -1285,6 +1286,148 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
 
 #endif // BENCHMARKS_256 && NETCOREAPP3_0_OR_GREATER
         #endregion // BENCHMARKS_256
+
+
+        #region BENCHMARKS_512
+#if BENCHMARKS_512 && NET8_0_OR_GREATER
+
+        /// <summary>
+        /// Sum ConvertToInt64 - 512 - BCL.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSum512Bcl(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int Vector512Width = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = Vector512Width; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMyOut> vrt = Vector512<TMyOut>.Zero; // Vector result.
+            Vector512<TMyOut> vtemp;
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                vtemp = Vector512.ConvertToInt64(p0);
+                vrt = Vector512s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            rt += Vector512s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum512Bcl() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSum512Bcl(srcArray, srcArray.Length);
+            CheckResult("Sum512Bcl");
+        }
+
+        #region BENCHMARKS_ALGORITHM
+#if BENCHMARKS_ALGORITHM
+
+        /// <summary>
+        /// Sum ConvertToInt64 - 512 - Base.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSum512Base(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int Vector512Width = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = Vector512Width; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMyOut> vrt = Vector512<TMyOut>.Zero; // Vector result.
+            Vector512<TMyOut> vtemp;
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                vtemp = WVectorTraits512Base.Statics.ConvertToInt64(p0);
+                vrt = Vector512s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            rt += Vector512s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum512Base() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSum512Base(srcArray, srcArray.Length);
+            CheckResult("Sum512Base");
+        }
+
+#endif // BENCHMARKS_ALGORITHM
+        #endregion // BENCHMARKS_ALGORITHM
+
+        /// <summary>
+        /// Sum ConvertToInt64 - 512 - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSum512Traits(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int Vector512Width = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = Vector512Width; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMyOut> vrt = Vector512<TMyOut>.Zero; // Vector result.
+            Vector512<TMyOut> vtemp;
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                vtemp = Vector512s.ConvertToInt64(p0);
+                vrt = Vector512s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            rt += Vector512s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum512Traits() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSum512Traits(srcArray, srcArray.Length);
+            CheckResult("Sum512Traits");
+        }
+
+#endif // BENCHMARKS_512 && NET8_0_OR_GREATER
+        #endregion // BENCHMARKS_512
 
     }
 
