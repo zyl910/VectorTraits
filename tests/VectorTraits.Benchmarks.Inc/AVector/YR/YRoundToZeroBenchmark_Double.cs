@@ -13,6 +13,7 @@ using System.Threading;
 using Zyl.VectorTraits.Impl.AVector;
 using Zyl.VectorTraits.Impl.AVector128;
 using Zyl.VectorTraits.Impl.AVector256;
+using Zyl.VectorTraits.Impl.AVector512;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
 #if BENCHMARKS_OFF
@@ -668,6 +669,105 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
 
 #endif // BENCHMARKS_256 && NETCOREAPP3_0_OR_GREATER
         #endregion // BENCHMARKS_256
+
+
+        #region BENCHMARKS_512
+#if BENCHMARKS_512 && NET8_0_OR_GREATER
+
+        #region BENCHMARKS_ALGORITHM
+#if BENCHMARKS_ALGORITHM
+
+        /// <summary>
+        /// Sum YRoundToZero - 512 - Base.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMy StaticSum512Base(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            int Vector512Width = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = Vector512Width; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
+            Vector512<TMy> vtemp;
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                vtemp = WVectorTraits512Base.Statics.YRoundToZero(p0);
+                vrt = Vector512s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            rt += Vector512s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum512Base() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSum512Base(srcArray, srcArray.Length);
+            CheckResult("Sum512Base");
+        }
+
+#endif // BENCHMARKS_ALGORITHM
+        #endregion // BENCHMARKS_ALGORITHM
+
+        /// <summary>
+        /// Sum YRoundToZero - 512 - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMy StaticSum512Traits(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            int Vector512Width = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = Vector512Width; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
+            Vector512<TMy> vtemp;
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                vtemp = Vector512s.YRoundToZero(p0);
+                vrt = Vector512s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            rt += Vector512s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum512Traits() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSum512Traits(srcArray, srcArray.Length);
+            CheckResult("Sum512Traits");
+        }
+
+#endif // BENCHMARKS_512 && NET8_0_OR_GREATER
+        #endregion // BENCHMARKS_512
 
 
     }
