@@ -61,6 +61,13 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
         }
 
+        /// <inheritdoc cref="IBaseTraits.IsHardwareAccelerated"/>
+        public virtual bool IsHardwareAccelerated {
+            get {
+                return Statics.IsHardwareAccelerated;
+            }
+        }
+
         /// <inheritdoc cref="IBaseTraits.IsSupported"/>
         public virtual bool IsSupported {
             get {

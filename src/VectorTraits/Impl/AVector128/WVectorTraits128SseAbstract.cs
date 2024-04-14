@@ -17,6 +17,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
     /// <see cref="Vector128{T}"/> traits - Sse abstract.
     /// </summary>
     public abstract partial class WVectorTraits128SseAbstract : WVectorTraits128Abstract {
+
+        /// <inheritdoc cref="IBaseTraits.IsHardwareAccelerated"/>
+        public override bool IsHardwareAccelerated {
+            get {
+                return Statics.IsHardwareAccelerated;
+            }
+        }
+
         /// <inheritdoc cref="IBaseTraits.IsSupported"/>
         public override bool IsSupported {
             get {

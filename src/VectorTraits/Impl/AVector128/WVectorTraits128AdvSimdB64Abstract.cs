@@ -16,6 +16,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
     /// <see cref="Vector128{T}"/> traits - AdvSimd 64bit abstract.
     /// </summary>
     public abstract partial class WVectorTraits128AdvSimdB64Abstract : WVectorTraits128AdvSimdAbstract {
+
+        /// <inheritdoc cref="IBaseTraits.IsHardwareAccelerated"/>
+        public override bool IsHardwareAccelerated {
+            get {
+                return Statics.IsHardwareAccelerated;
+            }
+        }
+
         /// <inheritdoc cref="IBaseTraits.IsSupported"/>
         public override bool IsSupported {
             get {

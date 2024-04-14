@@ -23,6 +23,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
         }
 
+        /// <inheritdoc cref="IBaseTraits.IsHardwareAccelerated"/>
+        public override bool IsHardwareAccelerated {
+            get {
+                return Statics.IsHardwareAccelerated;
+            }
+        }
+
         /// <inheritdoc cref="IBaseTraits.GetIsSupported"/>
         public override bool GetIsSupported(bool noStrict = false) {
             return Statics.GetIsSupported(noStrict);

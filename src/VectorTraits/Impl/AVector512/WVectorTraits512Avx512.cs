@@ -43,6 +43,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 get { return ByteCountValue; }
             }
 
+            /// <inheritdoc cref="IBaseTraits.IsHardwareAccelerated"/>
+            public static bool IsHardwareAccelerated {
+                get {
+                    return IsSupported;
+                }
+            }
+
             /// <inheritdoc cref="IBaseTraits.IsSupported"/>
             public static bool IsSupported {
                 get {

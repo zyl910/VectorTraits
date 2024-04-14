@@ -14,6 +14,11 @@ namespace Zyl.VectorTraits.Impl {
         int ByteCount { get; }
 
         /// <summary>
+        /// Whether to exist hardware accelerated (是否存在硬件加速).
+        /// </summary>
+        bool IsHardwareAccelerated { get; }
+
+        /// <summary>
         /// Whether to support the run (是否支持运行).
         /// </summary>
         bool IsSupported { get; }

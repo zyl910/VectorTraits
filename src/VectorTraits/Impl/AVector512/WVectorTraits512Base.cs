@@ -51,6 +51,17 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 }
             }
 
+            /// <inheritdoc cref="IBaseTraits.IsHardwareAccelerated"/>
+            public static bool IsHardwareAccelerated {
+                get {
+#if NET8_0_OR_GREATER
+                    return Vector512.IsHardwareAccelerated;
+#else
+                    return false;
+#endif // NET8_0_OR_GREATER
+                }
+            }
+
             /// <inheritdoc cref="IBaseTraits.GetIsSupported"/>
             public static bool GetIsSupported(bool noStrict = false) {
                 bool rt = false;

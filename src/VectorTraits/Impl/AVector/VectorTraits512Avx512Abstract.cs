@@ -15,7 +15,14 @@ namespace Zyl.VectorTraits.Impl.AVector {
     /// <see cref="Vector{T}"/> traits 512 - Avx512 abstract.
     /// </summary>
     public abstract partial class VectorTraits512Avx512Abstract : VectorTraits512Abstract {
-        
+
+        /// <inheritdoc cref="IBaseTraits.IsHardwareAccelerated"/>
+        public override bool IsHardwareAccelerated {
+            get {
+                return Statics.IsHardwareAccelerated;
+            }
+        }
+
         /// <inheritdoc cref="IBaseTraits.IsSupported"/>
         public override bool IsSupported {
             get {
