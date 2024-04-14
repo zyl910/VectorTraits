@@ -270,8 +270,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
         /// <returns>Returns the sum.</returns>
         public static TMy StaticSum128Bcl(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
-            int Vector128Width = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = Vector128Width; // Block width.
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
@@ -317,8 +317,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
         /// <returns>Returns the sum.</returns>
         public static TMy StaticSum128Base_Basic(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
-            int Vector128Width = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = Vector128Width; // Block width.
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
@@ -360,8 +360,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
         /// <returns>Returns the sum.</returns>
         public static TMy StaticSum128Base(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
-            int Vector128Width = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = Vector128Width; // Block width.
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
@@ -406,8 +406,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
         /// <returns>Returns the sum.</returns>
         public static TMy StaticSum128Traits(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
-            int Vector128Width = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = Vector128Width; // Block width.
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
@@ -457,8 +457,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
         /// <returns>Returns the sum.</returns>
         public static TMy StaticSum256Bcl(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
-            int Vector256Width = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = Vector256Width; // Block width.
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
@@ -504,8 +504,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
         /// <returns>Returns the sum.</returns>
         public static TMy StaticSum256Base_Basic(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
-            int Vector256Width = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = Vector256Width; // Block width.
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
@@ -547,8 +547,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
         /// <returns>Returns the sum.</returns>
         public static TMy StaticSum256Base(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
-            int Vector256Width = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = Vector256Width; // Block width.
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
@@ -593,8 +593,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
         /// <returns>Returns the sum.</returns>
         public static TMy StaticSum256Traits(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
-            int Vector256Width = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = Vector256Width; // Block width.
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
@@ -646,8 +646,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
         /// <returns>Returns the sum.</returns>
         public static TMy StaticSum512Base(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
-            int Vector512Width = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = Vector512Width; // Block width.
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
@@ -692,8 +692,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YR {
         /// <returns>Returns the sum.</returns>
         public static TMy StaticSum512Traits(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
-            int Vector512Width = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = Vector512Width; // Block width.
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
