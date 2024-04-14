@@ -2071,14 +2071,25 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Shuffle_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1) {
                 if (Ssse3.IsSupported) {
+                    Vector128<sbyte> indicesAdded;
                     YShuffleKernel_Args(indices, out args0, out args1);
 #if NET8_0_OR_GREATER
-                    if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
-                        args0 = Sse2.Or(args0, Avx512BW.VL.CompareGreaterThanOrEqual(indices, Vector128.Create((byte)16))); // (i >= 16)
+                    if (Avx512Vbmi.VL.IsSupported) {
+                        if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
+                            args1 = Avx512BW.VL.CompareGreaterThanOrEqual(indices, Vector128.Create((byte)16)); // Unsigned compare: (i >= 16)
+                            args0 = Sse2.Or(args0, args1);
+                        } else {
+                            indicesAdded = Sse2.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue));
+                            args1 = Sse2.CompareGreaterThan(
+                                Vector128.Create((sbyte)(16 + sbyte.MinValue)),
+                                indicesAdded
+                            ).AsByte(); // Unsigned compare: (i < 16)
+                            args0 = YOrNot(args0, args1);
+                        }
                         return;
                     }
 #endif // NET8_0_OR_GREATER
-                    Vector128<sbyte> indicesAdded = Sse2.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue));
+                    indicesAdded = Sse2.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue));
                     Vector128<byte> mask = Sse2.CompareGreaterThan(
                         Vector128.Create((sbyte)(16 + sbyte.MinValue)),
                         indicesAdded
@@ -2104,9 +2115,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void Shuffle_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1) {
                 if (Ssse3.IsSupported) {
 #if NET8_0_OR_GREATER
-                    if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
+                    if (Avx512BW.VL.IsSupported) {
                         YShuffleKernel_Args_Multiply(indices, out args0, out args1);
-                        args0 = Sse2.Or(args0, Avx512BW.VL.CompareGreaterThanOrEqual(indices, Vector128.Create((ushort)8))); // (i >= 8)
+                        args1 = Sse2.CompareEqual(Sse2.ShiftRightLogical(indices, 3), Vector128<ushort>.Zero); // Unsigned compare: (i < 8)
+                        args0 = YOrNot(args0, args1);
                         return;
                     }
 #endif // NET8_0_OR_GREATER
@@ -2134,8 +2146,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 if (Ssse3.IsSupported) {
                     YShuffleKernel_Args(indices, out args0, out args1);
 #if NET8_0_OR_GREATER
-                    if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
-                        args0 = Sse2.Or(args0, Avx512F.VL.CompareGreaterThanOrEqual(indices, Vector128.Create((uint)4))); // (i >= 4)
+                    if (Avx512F.VL.IsSupported) {
+                        args1 = Sse2.CompareEqual(Sse2.ShiftRightLogical(indices, 2), Vector128<uint>.Zero); // Unsigned compare: (i < 4)
+                        args0 = YOrNot(args0, args1);
                         return;
                     }
 #endif // NET8_0_OR_GREATER
@@ -2163,8 +2176,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 if (Ssse3.IsSupported) {
                     YShuffleKernel_Args(indices, out args0, out args1);
 #if NET8_0_OR_GREATER
-                    if (Avx512_Compare_Used && Avx512F.VL.IsSupported) {
-                        args0 = Sse2.Or(args0, Avx512F.VL.CompareGreaterThanOrEqual(indices, Vector128.Create((ulong)2))); // (i >= 2)
+                    if (Avx512F.VL.IsSupported) {
+                        args1 = Equals(Sse2.ShiftRightLogical(indices, 1), Vector128<ulong>.Zero); // Unsigned compare: (i < 2)
+                        args0 = YOrNot(args0, args1);
                         return;
                     }
 #endif // NET8_0_OR_GREATER
