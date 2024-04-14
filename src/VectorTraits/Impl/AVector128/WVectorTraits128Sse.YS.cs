@@ -700,7 +700,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                             ).AsByte(); // Unsigned compare: (i < 16)
                         }
                         raw = YShuffleKernel(vector, indices);
-                        rt = ConditionalSelect(mask, raw, back);
+                        rt = ConditionalSelect_Relaxed(mask, raw, back);
                         return rt;
                     }
 #endif // NET8_0_OR_GREATER
@@ -710,11 +710,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                         indicesAdded
                     ).AsByte(); // Unsigned compare: (i < 16)
                     raw = YShuffleKernel(vector, indices);
-                    if (Sse41.IsSupported) {
-                        rt = Sse41.BlendVariable(back, raw, mask);
-                    } else {
-                        rt = ConditionalSelect(mask, raw, back);
-                    }
+                    rt = ConditionalSelect_Relaxed(mask, raw, back);
                     return rt;
                 } else {
                     return SuperStatics.YShuffleInsert(back, vector, indices);
@@ -735,11 +731,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     Vector128<ushort> mask, raw, rt;
                     mask = Sse2.CompareEqual(Sse2.ShiftRightLogical(indices, 3), Vector128<ushort>.Zero); // Unsigned compare: (i < 8)
                     raw = YShuffleKernel(vector, indices);
-                    if (Sse41.IsSupported) {
-                        rt = Sse41.BlendVariable(back, raw, mask);
-                    } else {
-                        rt = ConditionalSelect(mask, raw, back);
-                    }
+                    rt = ConditionalSelect_Relaxed(mask, raw, back);
                     return rt;
                 } else {
                     return SuperStatics.YShuffleInsert(back, vector, indices);
@@ -760,11 +752,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     Vector128<uint> mask, raw, rt;
                     mask = Sse2.CompareEqual(Sse2.ShiftRightLogical(indices, 2), Vector128<uint>.Zero); // Unsigned compare: (i < 4)
                     raw = YShuffleKernel(vector, indices);
-                    if (Sse41.IsSupported) {
-                        rt = Sse41.BlendVariable(back, raw, mask);
-                    } else {
-                        rt = ConditionalSelect(mask, raw, back);
-                    }
+                    rt = ConditionalSelect_Relaxed(mask, raw, back);
                     return rt;
                 } else {
                     return SuperStatics.YShuffleInsert(back, vector, indices);
@@ -785,11 +773,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     Vector128<ulong> mask, raw, rt;
                     mask = Equals(Sse2.ShiftRightLogical(indices, 1), Vector128<ulong>.Zero); // Unsigned compare: (i < 2)
                     raw = YShuffleKernel(vector, indices);
-                    if (Sse41.IsSupported) {
-                        rt = Sse41.BlendVariable(back, raw, mask);
-                    } else {
-                        rt = ConditionalSelect(mask, raw, back);
-                    }
+                    rt = ConditionalSelect_Relaxed(mask, raw, back);
                     return rt;
                 } else {
                     return SuperStatics.YShuffleInsert(back, vector, indices);
@@ -921,12 +905,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                         return ConditionalSelect(args2, raw, back);
                     }
 #endif // NET8_0_OR_GREATER
-                    Vector128<byte> rt;
-                    if (Sse41.IsSupported) {
-                        rt = Sse41.BlendVariable(back, raw, args2);
-                    } else {
-                        rt = ConditionalSelect(args2, raw, back);
-                    }
+                    Vector128<byte> rt = ConditionalSelect_Relaxed(args2, raw, back);
                     return rt;
                 } else {
                     return SuperStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
@@ -950,12 +929,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                         return ConditionalSelect(args2, raw, back);
                     }
 #endif // NET8_0_OR_GREATER
-                    Vector128<ushort> rt;
-                    if (Sse41.IsSupported) {
-                        rt = Sse41.BlendVariable(back, raw, args2);
-                    } else {
-                        rt = ConditionalSelect(args2, raw, back);
-                    }
+                    Vector128<ushort> rt = ConditionalSelect_Relaxed(args2, raw, back);
                     return rt;
                 } else {
                     return SuperStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
@@ -979,12 +953,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                         return ConditionalSelect(args2, raw, back);
                     }
 #endif // NET8_0_OR_GREATER
-                    Vector128<uint> rt;
-                    if (Sse41.IsSupported) {
-                        rt = Sse41.BlendVariable(back, raw, args2);
-                    } else {
-                        rt = ConditionalSelect(args2, raw, back);
-                    }
+                    Vector128<uint> rt = ConditionalSelect_Relaxed(args2, raw, back);
                     return rt;
                 } else {
                     return SuperStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);
@@ -1008,12 +977,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                         return ConditionalSelect(args2, raw, back);
                     }
 #endif // NET8_0_OR_GREATER
-                    Vector128<ulong> rt;
-                    if (Sse41.IsSupported) {
-                        rt = Sse41.BlendVariable(back, raw, args2);
-                    } else {
-                        rt = ConditionalSelect(args2, raw, back);
-                    }
+                    Vector128<ulong> rt = ConditionalSelect_Relaxed(args2, raw, back);
                     return rt;
                 } else {
                     return SuperStatics.YShuffleInsert_Core(back, vector, args0, args1, args2);

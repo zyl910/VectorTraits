@@ -461,12 +461,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<float> highBegin = Vector128.Create(ScalarConstants.SingleBit_2Pow31).AsSingle();
                 Vector128<float> highMapped = Sse.Subtract(value, highEnd);
                 Vector128<float> highMask = Sse.And(Sse.CompareLessThanOrEqual(highBegin, value), Sse.CompareLessThan(value, highEnd)); // highBegin <= value < highEnd .
-                Vector128<float> value2;
-                if (Sse41.IsSupported) {
-                    value2 = Sse41.BlendVariable(value, highMapped, highMask);
-                } else {
-                    value2 = ConditionalSelect(highMask, highMapped, value);
-                }
+                Vector128<float> value2 = ConditionalSelect_Relaxed(highMask, highMapped, value);
                 Vector128<uint> rt = Sse2.ConvertToVector128Int32WithTruncation(value2).AsUInt32();
                 return rt;
             }
@@ -485,12 +480,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<float> lowMask = Sse.And(Sse.CompareLessThanOrEqual(lowBegin, value), lessHighEnd); // lowBegin <= value < highEnd .
                 Vector128<float> value0 = Sse.And(value, lowMask); // If out of range, set to 0.
                 Vector128<float> highMask = Sse.And(Sse.CompareLessThanOrEqual(highBegin, value), lessHighEnd); // highBegin <= value < highEnd .
-                Vector128<float> value2;
-                if (Sse41.IsSupported) {
-                    value2 = Sse41.BlendVariable(value0, highMapped, highMask);
-                } else {
-                    value2 = ConditionalSelect(highMask, highMapped, value0);
-                }
+                Vector128<float> value2 = ConditionalSelect_Relaxed(highMask, highMapped, value0);
                 Vector128<uint> rt = Sse2.ConvertToVector128Int32WithTruncation(value2).AsUInt32();
                 return rt;
             }
@@ -514,16 +504,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<float> highMask = Sse.CompareLessThanOrEqual(highBegin, remainder); // highBegin <= value .
                 Vector128<float> remainder0 = Sse.And(remainder, uintRangeMask); // If out of range, set to 0.
                 Vector128<float> highMapped = Sse.Subtract(remainder0, highEnd);
-                Vector128<float> value3;
-                if (Sse41.IsSupported) {
-                    Vector128<float> value2 = Sse41.BlendVariable(remainder0, highMapped, highMask);
-                    // If within the signed integer range, return value, otherwise return value2 .
-                    value3 = Sse41.BlendVariable(value2, value, intRangeMask);
-                } else {
-                    Vector128<float> value2 = ConditionalSelect(highMask, highMapped, remainder0);
-                    // If within the signed integer range, return value, otherwise return value2 .
-                    value3 = ConditionalSelect(intRangeMask, value, value2);
-                }
+                Vector128<float> value2 = ConditionalSelect_Relaxed(highMask, highMapped, remainder0);
+                // If within the signed integer range, return value, otherwise return value2 .
+                Vector128<float> value3 = ConditionalSelect_Relaxed(intRangeMask, value, value2);
                 Vector128<uint> rt = Sse2.ConvertToVector128Int32WithTruncation(value3).AsUInt32();
                 return rt;
             }

@@ -245,6 +245,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     ).As<ulong, T>();
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<T> ConditionalSelect_Relaxed<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.TernaryLogic(condition.AsInt64(), left.AsInt64(), right.AsInt64(), TernaryLogicControl.Or_And_A_B_And_NotA_C).As<long, T>();
+                }
+#endif // NET8_0_OR_GREATER
+                if (Sse41.IsSupported) {
+                    return Sse41.BlendVariable(right.AsInt64(), left.AsInt64(), condition.AsInt64()).As<long, T>();
+                }
+                return Sse2.Or(Sse2.And(condition.AsUInt64(), left.AsUInt64())
+                    , Sse2.AndNot(condition.AsUInt64(), right.AsUInt64())
+                    ).As<ulong, T>();
+            }
+
 
             /// <inheritdoc cref="IWVectorTraits128.Divide_AcceleratedTypes"/>
             public static TypeCodeFlags Divide_AcceleratedTypes {
@@ -1786,12 +1802,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 }
 #endif // NET8_0_OR_GREATER
                 Vector128<long> mask = GreaterThan(left, right);
-                Vector128<long> rt;
-                if (Sse41.IsSupported) {
-                    rt = Sse41.BlendVariable(right, left, mask);
-                } else {
-                    rt = ConditionalSelect(mask, left, right);
-                }
+                Vector128<long> rt = ConditionalSelect_Relaxed(mask, left, right);
                 return rt;
             }
 
@@ -1805,12 +1816,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 }
 #endif // NET8_0_OR_GREATER
                 Vector128<ulong> mask = GreaterThan(left, right);
-                Vector128<ulong> rt;
-                if (Sse41.IsSupported) {
-                    rt = Sse41.BlendVariable(right, left, mask);
-                } else {
-                    rt = ConditionalSelect(mask, left, right);
-                }
+                Vector128<ulong> rt = ConditionalSelect_Relaxed(mask, left, right);
                 return rt;
             }
 
@@ -1903,12 +1909,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 }
 #endif // NET8_0_OR_GREATER
                 Vector128<long> mask = GreaterThan(right, left);
-                Vector128<long> rt;
-                if (Sse41.IsSupported) {
-                    rt = Sse41.BlendVariable(right, left, mask);
-                } else {
-                    rt = ConditionalSelect(mask, left, right);
-                }
+                Vector128<long> rt = ConditionalSelect_Relaxed(mask, left, right);
                 return rt;
             }
 
@@ -1922,12 +1923,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 }
 #endif // NET8_0_OR_GREATER
                 Vector128<ulong> mask = GreaterThan(right, left);
-                Vector128<ulong> rt;
-                if (Sse41.IsSupported) {
-                    rt = Sse41.BlendVariable(right, left, mask.AsUInt64());
-                } else {
-                    rt = ConditionalSelect(mask.AsUInt64(), left, right);
-                }
+                Vector128<ulong> rt = ConditionalSelect_Relaxed(mask, left, right);
                 return rt;
             }
 

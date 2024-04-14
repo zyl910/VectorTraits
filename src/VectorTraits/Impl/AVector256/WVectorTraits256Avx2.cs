@@ -460,7 +460,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> exp_frac_n = Avx2.Subtract(zero, exp_frac);                       //1,1/3
                 Vector256<long> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64()); //1,1/2
                 Vector256<long> exp_is_pos = Avx2.CompareGreaterThan(exp_frac, zero);             //3,1
-                Vector256<long> result_abs = Avx2.BlendVariable(msr, msl, exp_is_pos);            //2,1
+                Vector256<long> result_abs = ConditionalSelect_Relaxed(exp_is_pos, msl, msr); // ConditionalSelect_Relaxed(exp_is_pos, msl, msr); // Avx2.BlendVariable(msr, msl, exp_is_pos);            //2,1
                 Vector256<long> result = Avx2.Xor(result_abs, negative);                          //1,1/3
                 result = Avx2.Subtract(result, negative);                                         //1,1/3
                 return result;  //total latency: 18, total throughput CPI: 7
@@ -489,8 +489,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> msl = Avx2.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt64());     //1,1/2. msl[i] = mat << exp_frac[i]
                 Vector256<long> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64());  //1,1/2. msr[i] = mat >> exp_frac_n[i] = mat >> (-exp_frac[i])
                 Vector256<long> exp_is_pos = Avx2.CompareGreaterThan(exp_frac, zero);              //3,1. The mask of exp_frac is a positive
-                Vector256<long> result_abs = Avx2.BlendVariable(msr, msl, exp_is_pos);             //2,1. result_abs[i] = (exp_is_pos[i])?msl[i]:msl[i]
-                result_abs = Avx2.BlendVariable(result_abs, defValue, exp_is_end);                 //2,1.  result_abs[i] = (exp_is_end[i])?defValue[i]:result_abs[i]
+                Vector256<long> result_abs = ConditionalSelect_Relaxed(exp_is_pos, msl, msr); // Avx2.BlendVariable(msr, msl, exp_is_pos);             //2,1. result_abs[i] = (exp_is_pos[i])?msl[i]:msl[i]
+                result_abs = ConditionalSelect_Relaxed(exp_is_end, defValue, result_abs); // Avx2.BlendVariable();                 //2,1.  result_abs[i] = (exp_is_end[i])?defValue[i]:result_abs[i]
                 Vector256<long> result = Avx2.Xor(result_abs, negative);                           //1,1/3. ~x = xor(x, -1)
                 result = Avx2.Subtract(result, negative);                                          //1,1/3 -(x) = (~x)+1 = (~x) - (-1)
                 return result;  //total latency: 23, total throughput CPI: 9
@@ -647,7 +647,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<int> exp_frac_n = Avx2.Subtract(zero, exp_frac);                       //1,1/3
                 Vector256<int> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt32()); //1,1/2
                 Vector256<int> exp_is_pos = Avx2.CompareGreaterThan(exp_frac, zero);             //3,1
-                Vector256<int> result_abs = Avx2.BlendVariable(msr, msl, exp_is_pos);            //2,1
+                Vector256<int> result_abs = ConditionalSelect_Relaxed(exp_is_pos, msl, msr); // Avx2.BlendVariable(msr, msl, exp_is_pos);            //2,1
                 return result_abs.AsUInt32();	//total latency: 12, total throughput CPI: 4.8
             }
 
@@ -663,7 +663,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<float> highMapped = Avx.Subtract(value, highEnd);
                 Vector256<float> highMask = Avx.And(Avx.CompareLessThanOrEqual(highBegin, value), Avx.CompareLessThan(value, highEnd)); // highBegin <= value < highEnd .
                 //Vector256<float> value2 = ConditionalSelect(highMask, highMapped, value);
-                Vector256<float> value2 = Avx2.BlendVariable(value, highMapped, highMask);
+                Vector256<float> value2 = ConditionalSelect_Relaxed(highMask, highMapped, value); // Avx.BlendVariable(value, highMapped, highMask);
                 Vector256<uint> rt = Avx.ConvertToVector256Int32WithTruncation(value2).AsUInt32();
                 return rt;
 #else
@@ -688,7 +688,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<float> value0 = Avx.And(value, lowMask); // If out of range, set to 0.
                 Vector256<float> highMask = Avx.And(Avx.CompareLessThanOrEqual(highBegin, value), lessHighEnd); // highBegin <= value < highEnd .
                 //Vector256<float> value2 = ConditionalSelect(highMask, highMapped, value0);
-                Vector256<float> value2 = Avx2.BlendVariable(value0, highMapped, highMask);
+                Vector256<float> value2 = ConditionalSelect_Relaxed(highMask, highMapped, value); // Avx.BlendVariable(value0, highMapped, highMask);
                 Vector256<uint> rt = Avx.ConvertToVector256Int32WithTruncation(value2).AsUInt32();
                 return rt;
 #else
@@ -718,9 +718,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<float> remainder0 = Avx.And(remainder, uintRangeMask); // If out of range, set to 0.
                 Vector256<float> highMapped = Avx.Subtract(remainder0, highEnd);
                 //Vector256<float> value2 = ConditionalSelect(highMask, highMapped, remainder0);
-                Vector256<float> value2 = Avx2.BlendVariable(remainder0, highMapped, highMask);
+                Vector256<float> value2 = ConditionalSelect_Relaxed(highMask, highMapped, remainder0); // Avx.BlendVariable(remainder0, highMapped, highMask);
                 // If within the signed integer range, return value, otherwise return value2 .
-                Vector256<float> value3 = Avx2.BlendVariable(value2, value, intRangeMask);
+                Vector256<float> value3 = ConditionalSelect_Relaxed(intRangeMask, value, value2); // Avx.BlendVariable(value2, value, intRangeMask);
                 Vector256<uint> rt = Avx.ConvertToVector256Int32WithTruncation(value3).AsUInt32();
                 return rt;
 #else
@@ -794,7 +794,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> exp_frac_n = Avx2.Subtract(zero, exp_frac);                       //1,1/3
                 Vector256<long> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64()); //1,1/2
                 Vector256<long> exp_is_pos = Avx2.CompareGreaterThan(exp_frac, zero);             //3,1
-                Vector256<long> result_abs = Avx2.BlendVariable(msr, msl, exp_is_pos);            //2,1
+                Vector256<long> result_abs = ConditionalSelect_Relaxed(exp_is_pos, msl, msr); // Avx2.BlendVariable(msr, msl, exp_is_pos);            //2,1
                 return result_abs.AsUInt64();	//total latency: 12, total throughput CPI: 4.8
             }
 

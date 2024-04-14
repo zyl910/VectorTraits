@@ -238,8 +238,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> msl = Avx2.ShiftLeftLogicalVariable(mat, exp_frac.AsUInt64());     //1,1/2. msl[i] = mat << exp_frac[i]
                 Vector128<long> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64());  //1,1/2. msr[i] = mat >> exp_frac_n[i] = mat >> (-exp_frac[i])
                 Vector128<long> exp_is_pos = Sse42.CompareGreaterThan(exp_frac, zero);              //3,1. The mask of exp_frac is a positive
-                Vector128<long> result_abs = Sse41.BlendVariable(msr, msl, exp_is_pos);             //2,1. result_abs[i] = (exp_is_pos[i])?msl[i]:msl[i]
-                result_abs = Sse41.BlendVariable(result_abs, defValue, exp_is_end);                 //2,1.  result_abs[i] = (exp_is_end[i])?defValue[i]:result_abs[i]
+                Vector128<long> result_abs = ConditionalSelect_Relaxed(exp_is_pos, msl, msr); // ConditionalSelect_Relaxed(exp_is_pos, msl, msr); // Sse41.BlendVariable(msr, msl, exp_is_pos);             //2,1. result_abs[i] = (exp_is_pos[i])?msl[i]:msl[i]
+                result_abs = ConditionalSelect_Relaxed(exp_is_end, defValue, result_abs); // Sse41.BlendVariable(result_abs, defValue, exp_is_end);                 //2,1.  result_abs[i] = (exp_is_end[i])?defValue[i]:result_abs[i]
                 Vector128<long> result = Sse2.Xor(result_abs, negative);                           //1,1/3. ~x = xor(x, -1)
                 result = Sse2.Subtract(result, negative);                                          //1,1/3 -(x) = (~x)+1 = (~x) - (-1)
                 return result;  //total latency: 23, total throughput CPI: 9
@@ -289,7 +289,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<int> exp_frac_n = Sse2.Subtract(zero, exp_frac);                       //1,1/3
                 Vector128<int> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt32()); //1,1/2
                 Vector128<int> exp_is_pos = Sse2.CompareGreaterThan(exp_frac, zero);             //3,1
-                Vector128<int> result_abs = Sse41.BlendVariable(msr, msl, exp_is_pos);            //2,1
+                Vector128<int> result_abs = ConditionalSelect_Relaxed(exp_is_pos, msl, msr); // Sse41.BlendVariable(msr, msl, exp_is_pos);            //2,1
                 return result_abs.AsUInt32();	//total latency: 12, total throughput CPI: 4.8
             }
 
@@ -343,7 +343,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> exp_frac_n = Sse2.Subtract(zero, exp_frac);                       //1,1/3
                 Vector128<long> msr = Avx2.ShiftRightLogicalVariable(mat, exp_frac_n.AsUInt64()); //1,1/2
                 Vector128<long> exp_is_pos = Sse42.CompareGreaterThan(exp_frac, zero);             //3,1
-                Vector128<long> result_abs = Sse41.BlendVariable(msr, msl, exp_is_pos);            //2,1
+                Vector128<long> result_abs = ConditionalSelect_Relaxed(exp_is_pos, msl, msr); // Sse41.BlendVariable(msr, msl, exp_is_pos);            //2,1
                 return result_abs.AsUInt64();	//total latency: 12, total throughput CPI: 4.8
             }
 

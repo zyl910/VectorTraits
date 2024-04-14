@@ -17,6 +17,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<T> ConditionalSelect_Relaxed<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
+                return SuperStatics.ConditionalSelect_Relaxed(condition, left, right);
+            }
 
 #endif // NETCOREAPP3_0_OR_GREATER
         }

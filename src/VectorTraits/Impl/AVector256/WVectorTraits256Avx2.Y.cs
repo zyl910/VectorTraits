@@ -254,7 +254,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<float> YMaxNumber(Vector256<float> left, Vector256<float> right) {
                 Vector256<float> mask = BitwiseOr(GreaterThan(left, right), YIsNaN(right).AsSingle());
                 mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(right).AsSingle()));
-                Vector256<float> rt = Avx.BlendVariable(right, left, mask); // ConditionalSelect(mask, left, right);
+                Vector256<float> rt = ConditionalSelect_Relaxed(mask, left, right); // Avx.BlendVariable(right, left, mask);
                 return rt;
             }
 
@@ -263,7 +263,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<double> YMaxNumber(Vector256<double> left, Vector256<double> right) {
                 Vector256<double> mask = BitwiseOr(GreaterThan(left, right), YIsNaN(right).AsDouble());
                 mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(right).AsDouble()));
-                Vector256<double> rt = Avx.BlendVariable(right, left, mask); // ConditionalSelect(mask, left, right);
+                Vector256<double> rt = ConditionalSelect_Relaxed(mask, left, right); // Avx.BlendVariable(right, left, mask);
                 return rt;
             }
 
@@ -281,7 +281,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<float> YMinNumber(Vector256<float> left, Vector256<float> right) {
                 Vector256<float> mask = BitwiseOr(LessThan(left, right), YIsNaN(right).AsSingle());
                 mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(left).AsSingle()));
-                Vector256<float> rt = Avx.BlendVariable(right, left, mask); // ConditionalSelect(mask, left, right);
+                Vector256<float> rt = ConditionalSelect_Relaxed(mask, left, right); // Avx.BlendVariable(right, left, mask);
                 return rt;
             }
 
@@ -290,7 +290,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<double> YMinNumber(Vector256<double> left, Vector256<double> right) {
                 Vector256<double> mask = BitwiseOr(LessThan(left, right), YIsNaN(right).AsDouble());
                 mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(left).AsDouble()));
-                Vector256<double> rt = Avx.BlendVariable(right, left, mask); // ConditionalSelect(mask, left, right);
+                Vector256<double> rt = ConditionalSelect_Relaxed(mask, left, right); // Avx.BlendVariable(right, left, mask);
                 return rt;
             }
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
@@ -224,6 +226,17 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return Avx2.Or(Avx2.And(condition.AsUInt64(), left.AsUInt64())
                     , Avx2.AndNot(condition.AsUInt64(), right.AsUInt64())
                     ).As<ulong, T>();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.ConditionalSelect{T}(Vector256{T}, Vector256{T}, Vector256{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> ConditionalSelect_Relaxed<T>(Vector256<T> condition, Vector256<T> left, Vector256<T> right) where T : struct {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.TernaryLogic(condition.AsInt64(), left.AsInt64(), right.AsInt64(), TernaryLogicControl.Or_And_A_B_And_NotA_C).As<long, T>();
+                }
+#endif // NET8_0_OR_GREATER
+                return Avx2.BlendVariable(right.AsInt64(), left.AsInt64(), condition.AsInt64()).As<long, T>();
             }
 
 
@@ -1681,7 +1694,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 }
 #endif // NET8_0_OR_GREATER
                 Vector256<long> mask = Avx2.CompareGreaterThan(left, right);
-                Vector256<long> rt = Avx2.BlendVariable(right, left, mask);
+                Vector256<long> rt = ConditionalSelect_Relaxed(mask, left, right); // Avx2.BlendVariable(right, left, mask);
                 return rt;
             }
 
@@ -1699,7 +1712,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> left2 = Avx2.Xor(left.AsInt64(), mid);
                 Vector256<long> right2 = Avx2.Xor(right.AsInt64(), mid);
                 Vector256<long> mask = Avx2.CompareGreaterThan(left2, right2);
-                Vector256<ulong> rt = Avx2.BlendVariable(right, left, mask.AsUInt64());
+                Vector256<ulong> rt = ConditionalSelect_Relaxed(mask.AsUInt64(), left, right); // Avx2.BlendVariable(right, left, mask.AsUInt64());
                 return rt;
             }
 
@@ -1771,7 +1784,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 }
 #endif // NET8_0_OR_GREATER
                 Vector256<long> mask = Avx2.CompareGreaterThan(right, left);
-                Vector256<long> rt = Avx2.BlendVariable(right, left, mask);
+                Vector256<long> rt = ConditionalSelect_Relaxed(mask, left, right); // Avx2.BlendVariable(right, left, mask);
                 return rt;
             }
 
@@ -1789,7 +1802,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<long> left2 = Avx2.Xor(left.AsInt64(), mid);
                 Vector256<long> right2 = Avx2.Xor(right.AsInt64(), mid);
                 Vector256<long> mask = Avx2.CompareGreaterThan(right2, left2);
-                Vector256<ulong> rt = Avx2.BlendVariable(right, left, mask.AsUInt64());
+                Vector256<ulong> rt = ConditionalSelect_Relaxed(mask.AsUInt64(), left, right); // Avx2.BlendVariable(right, left, mask.AsUInt64());
                 return rt;
             }
 

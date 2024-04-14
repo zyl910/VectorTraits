@@ -13,7 +13,6 @@ using System.Runtime.Intrinsics.X86;
 #endif
 using Zyl.VectorTraits.Collections;
 using Zyl.VectorTraits.Impl.Util;
-using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Impl.AVector256 {
     using SuperStatics = WVectorTraits256Base.Statics;
@@ -763,7 +762,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     indicesAdded
                 ).AsByte(); // Unsigned compare: (i < 32)
                 Vector256<byte> raw = YShuffleKernel(vector, indices);
-                Vector256<byte> rt = Avx2.BlendVariable(back, raw, mask);
+                Vector256<byte> rt = ConditionalSelect_Relaxed(mask, raw, back); // Avx2.BlendVariable(back, raw, mask);
                 return rt;
             }
 
@@ -772,7 +771,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<byte> YShuffleInsert_Add2(Vector256<byte> back, Vector256<byte> vector, Vector256<byte> indices) {
                 Vector256<byte> mask = GreaterThan(Vector256.Create((byte)32), indices);
                 Vector256<byte> raw = YShuffleKernel(vector, indices);
-                Vector256<byte> rt = Avx2.BlendVariable(back, raw, mask);
+                Vector256<byte> rt = ConditionalSelect_Relaxed(mask, raw, back); // Avx2.BlendVariable(back, raw, mask);
                 return rt;
             }
 
@@ -784,7 +783,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     Avx2.CompareGreaterThan(Vector256.Create((sbyte)32), indices.AsSByte())
                 ).AsByte(); // (0<=i && i<32)
                 Vector256<byte> raw = YShuffleKernel(vector, indices);
-                Vector256<byte> rt = Avx2.BlendVariable(back, raw, mask);
+                Vector256<byte> rt = ConditionalSelect_Relaxed(mask, raw, back); // Avx2.BlendVariable(back, raw, mask);
                 return rt;
             }
 
@@ -797,7 +796,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     Avx2.And(indices, maskOverflow)
                 ); // (0<=i && i<32)
                 Vector256<byte> raw = YShuffleKernel(vector, indices);
-                Vector256<byte> rt = Avx2.BlendVariable(back, raw, mask);
+                Vector256<byte> rt = ConditionalSelect_Relaxed(mask, raw, back); // Avx2.BlendVariable(back, raw, mask);
                 return rt;
             }
 
@@ -814,7 +813,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<ushort> mask, raw, rt;
                 mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 4), Vector256<ushort>.Zero); // Unsigned compare: (i < 16)
                 raw = YShuffleKernel(vector, indices);
-                rt = Avx2.BlendVariable(back, raw, mask);
+                rt = ConditionalSelect_Relaxed(mask, raw, back); // Avx2.BlendVariable(back, raw, mask);
                 return rt;
             }
 
@@ -831,7 +830,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<uint> mask, raw, rt;
                 mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 3), Vector256<uint>.Zero); // Unsigned compare: (i < 8)
                 raw = YShuffleKernel(vector, indices);
-                rt = Avx2.BlendVariable(back, raw, mask);
+                rt = ConditionalSelect_Relaxed(mask, raw, back); // Avx2.BlendVariable(back, raw, mask);
                 return rt;
             }
 
@@ -848,7 +847,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<ulong> mask, raw, rt;
                 mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 2), Vector256<ulong>.Zero); // Unsigned compare: (i < 4)
                 raw = YShuffleKernel(vector, indices);
-                rt = Avx2.BlendVariable(back, raw, mask);
+                rt = ConditionalSelect_Relaxed(mask, raw, back); // Avx2.BlendVariable(back, raw, mask);
                 return rt;
             }
 
@@ -960,7 +959,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return ConditionalSelect(args2, raw, back);
                 }
 #endif // NET8_0_OR_GREATER
-                var rt = Avx2.BlendVariable(back, raw, args2);
+                var rt = ConditionalSelect_Relaxed(args2, raw, back); // Avx2.BlendVariable(back, raw, args2);
                 return rt;
             }
 
@@ -980,7 +979,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return ConditionalSelect(args2, raw, back);
                 }
 #endif // NET8_0_OR_GREATER
-                var rt = Avx2.BlendVariable(back, raw, args2);
+                var rt = ConditionalSelect_Relaxed(args2, raw, back); // Avx2.BlendVariable(back, raw, args2);
                 return rt;
             }
 
@@ -1000,7 +999,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return ConditionalSelect(args2, raw, back);
                 }
 #endif // NET8_0_OR_GREATER
-                var rt = Avx2.BlendVariable(back, raw, args2);
+                var rt = ConditionalSelect_Relaxed(args2, raw, back); // Avx2.BlendVariable(back, raw, args2);
                 return rt;
             }
 
@@ -1020,7 +1019,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return ConditionalSelect(args2, raw, back);
                 }
 #endif // NET8_0_OR_GREATER
-                var rt = Avx2.BlendVariable(back, raw, args2);
+                var rt = ConditionalSelect_Relaxed(args2, raw, back); // Avx2.BlendVariable(back, raw, args2);
                 return rt;
             }
 
