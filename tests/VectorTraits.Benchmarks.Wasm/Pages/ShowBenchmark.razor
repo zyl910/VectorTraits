@@ -10,23 +10,28 @@
 <button class="btn btn-primary" @onclick="OnTest" disabled=@IsTaskRunning>Test</button>
 &nbsp;<span>@statePercentage</span>
 <br />
+<InputCheckbox @bind-Value="AllowFakeBenchmark" />AllowFakeBenchmark
 <br />
 <InputTextArea @bind-Value="resultText" readonly rows="30" style="width: 95%" />
 
 @code {
-    bool IsTaskRunning = false;
+    private bool IsTaskRunning = false;
+    private bool AllowFakeBenchmark = false;
     private string resultText = "";
     private string statePercentage = "";
 
     private async Task OnTest() {
-        await OnTest_Coroutine();
-    }
-
-    [Obsolete("WebAssembly for .NET 8 still doesn't support multithread.")]
-    private async Task OnTest_Multithread() {
         StringWriter writer = new StringWriter();
         writer.WriteLine("VectorTraits.Benchmarks.Wasm");
         writer.WriteLine();
+        BenchmarkUtil.AllowFakeBenchmark = AllowFakeBenchmark;
+        // run.
+        //await OnTest_Multithread(writer);
+        await OnTest_Coroutine(writer);
+    }
+
+    [Obsolete("WebAssembly for .NET 8 still doesn't support multithread.")]
+    private async Task OnTest_Multithread(TextWriter writer) {
         IsTaskRunning = true;
         Timer timer = new Timer(TimeCallBack, null, 1000, 1000);
         try {
@@ -79,12 +84,10 @@
         }
     }
 
-    private async Task OnTest_Coroutine() {
-        StringWriter writer = new StringWriter();
-        writer.WriteLine("VectorTraits.Benchmarks.Wasm");
-        writer.WriteLine();
+    private async Task OnTest_Coroutine(TextWriter writer) {
         IsTaskRunning = true;
         try {
+            resultText = "";
             statePercentage = "";
             await OnTestCoreAync(writer);
         } catch (Exception ex) {
