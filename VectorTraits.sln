@@ -44,6 +44,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits.Sample.NetFw",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits.Sample.NuGet", "samples\VectorTraits.Sample.NuGet\VectorTraits.Sample.NuGet.csproj", "{E2619A9B-7A38-4FF3-9AFF-5C7FCA18D445}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTraits.Benchmarks.Wasm", "tests\VectorTraits.Benchmarks.Wasm\VectorTraits.Benchmarks.Wasm.csproj", "{D7E8296A-2252-4427-A63D-7CDDCA86B184}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +88,10 @@ Global
 		{E2619A9B-7A38-4FF3-9AFF-5C7FCA18D445}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2619A9B-7A38-4FF3-9AFF-5C7FCA18D445}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2619A9B-7A38-4FF3-9AFF-5C7FCA18D445}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7E8296A-2252-4427-A63D-7CDDCA86B184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7E8296A-2252-4427-A63D-7CDDCA86B184}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7E8296A-2252-4427-A63D-7CDDCA86B184}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7E8296A-2252-4427-A63D-7CDDCA86B184}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +110,7 @@ Global
 		{DE1E8655-C240-4B92-9391-10D0B44D50A0} = {7FEBEE53-6B60-400E-85F3-236B83B6311D}
 		{F405B1A1-108E-48F0-B3B8-B0A6D4B34956} = {7FEBEE53-6B60-400E-85F3-236B83B6311D}
 		{E2619A9B-7A38-4FF3-9AFF-5C7FCA18D445} = {7FEBEE53-6B60-400E-85F3-236B83B6311D}
+		{D7E8296A-2252-4427-A63D-7CDDCA86B184} = {C49387B4-769A-47F2-9D37-79A13956650D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {563C5B68-C47B-4FD9-9EB3-279A64EE805C}
