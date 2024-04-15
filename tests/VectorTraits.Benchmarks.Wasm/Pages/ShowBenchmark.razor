@@ -1,4 +1,5 @@
 ﻿@page "/showBenchmark"
+@inject IJSRuntime JS
 @using System.Text
 @using System.Diagnostics
 @using Zyl.VectorTraits.Benchmarks
@@ -8,14 +9,24 @@
 <h1>Show benchmark</h1>
 
 <button class="btn btn-primary" @onclick="OnTest" disabled=@IsTaskRunning>Test</button>
-&nbsp;<span>@statePercentage</span>
+&nbsp; <span>@statePercentage</span>
 <br />
-<InputCheckbox @bind-Value="AllowFakeBenchmark" />AllowFakeBenchmark
+<InputCheckbox @bind-Value="IsScrollMyTexArea" />Scroll to bottom
+&nbsp; <InputCheckbox @bind-Value="AllowFakeBenchmark" />AllowFakeBenchmark
 <br />
-<InputTextArea @bind-Value="resultText" readonly rows="30" style="width: 95%" />
+<br />
+<InputTextArea id="txtOut" @bind-Value="resultText" readonly rows="30" style="width: 95%" />
+
+<script>
+    window.scrollMyTexArea = () => {
+              var obj = document.getElementById('txtOut');
+              obj.scrollTop = obj.scrollHeight;
+    };
+</script>
 
 @code {
     private bool IsTaskRunning = false;
+    private bool IsScrollMyTexArea = true;
     private bool AllowFakeBenchmark = false;
     private string resultText = "";
     private string statePercentage = "";
@@ -78,6 +89,9 @@
                 statePercentage = string.Format("{0:0.00}%: {1}", percentage, title);
                 resultText = "" + writer?.ToString();
                 InvokeAsync(StateHasChanged);
+                if (IsScrollMyTexArea) {
+                    JS.InvokeVoidAsync("scrollMyTexArea");
+                }
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
@@ -120,6 +134,9 @@
                 statePercentage = string.Format("{0:0.00}%: {1}", percentage, title);
                 resultText = "" + writer?.ToString();
                 await InvokeAsync(StateHasChanged);
+                if (IsScrollMyTexArea) {
+                    await JS.InvokeVoidAsync("scrollMyTexArea");
+                }
                 await Task.Delay(1);
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
