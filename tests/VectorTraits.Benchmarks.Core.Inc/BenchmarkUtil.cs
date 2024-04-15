@@ -7,6 +7,7 @@ using System.Numerics;
 using System.Reflection;
 using System.Runtime.Versioning;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Zyl.VectorTraits.Benchmarks {
     /// <summary>
@@ -300,7 +301,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                         if (mopsFlag) {
                             mopsBaseline = mops;
                         }
-                        //break; // [Debug] Only test one.
+                        break; // [Debug] Only test one.
                     } catch (Exception ex) {
                         writer.WriteItem(name, string.Format("Run fail! {0}", ex.Message));
                     }
@@ -349,5 +350,42 @@ namespace Zyl.VectorTraits.Benchmarks {
                 ++i;
             }
         }
+
+        /// <summary>
+        /// Run benchmark.
+        /// </summary>
+        /// <param name="writer">Output <see cref="IBenchmarkWriter"/>.</param>
+        /// <param name="assembly">The assembly.</param>
+        /// <param name="onBefore">The action on before call item. Prototype: <c>Task onBefore(double percentage, string title)</c>.</param>
+        public static async Task RunBenchmarkAsync(IBenchmarkWriter writer, Assembly assembly, Func<double, string, Task>? onBefore = null) {
+            Type baseType = typeof(AbstractBenchmark);
+            List<Type> lst = new List<Type>();
+            foreach (Type typ in assembly.GetTypes()) {
+                if (typ.ContainsGenericParameters) continue;
+                if (typ.IsAbstract) continue;
+                if (!typ.IsSubclassOf(baseType)) continue;
+                lst.Add(typ);
+            }
+            if (lst.Count <= 0) return;
+            double total = lst.Count;
+            // Sort and run.
+            lst.Sort(ComparisonOnType);
+            int i = 0;
+            foreach (Type typ in lst) {
+                try {
+                    double percentage = i / total;
+                    string title = typ.Name;
+                    if (null != onBefore) {
+                        await onBefore(percentage, title);
+                    }
+                    AbstractBenchmark? obj = Activator.CreateInstance(typ) as AbstractBenchmark;
+                    RunBenchmarkObject(writer, typ, obj);
+                } catch (Exception ex) {
+                    writer.WriteLine(string.Format("Run `{0} fail! {1}`", typ.FullName, ex.Message));
+                }
+                ++i;
+            }
+        }
+
     }
 }

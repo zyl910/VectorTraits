@@ -8,10 +8,10 @@
 <h1>Show benchmark</h1>
 
 <button class="btn btn-primary" @onclick="OnTest" disabled=@IsTaskRunning>Test</button>
-<p role="status">@statePercentage</p>
+&nbsp;<span>@statePercentage</span>
 <br />
 <br />
-<InputTextArea @bind-Value="resultText" rows="30" style="width: 95%" />
+<InputTextArea @bind-Value="resultText" readonly rows="30" style="width: 95%" />
 
 @code {
     bool IsTaskRunning = false;
@@ -19,16 +19,18 @@
     private string statePercentage = "";
 
     private async Task OnTest() {
-        await OnTestMain();
+        await OnTest_Coroutine();
     }
 
-    private async Task OnTestMain() {
+    [Obsolete("WebAssembly for .NET 8 still doesn't support multithread.")]
+    private async Task OnTest_Multithread() {
         StringWriter writer = new StringWriter();
         writer.WriteLine("VectorTraits.Benchmarks.Wasm");
         writer.WriteLine();
         IsTaskRunning = true;
         Timer timer = new Timer(TimeCallBack, null, 1000, 1000);
         try {
+            resultText = "";
             statePercentage = "";
             await Task.Factory.StartNew(() => OnTestCore(writer), TaskCreationOptions.LongRunning);
         } catch (Exception ex) {
@@ -74,6 +76,51 @@
         });
         writer.WriteLine();
         AloneTestUtil.AloneTestByCommand(writer, args);
+    }
+
+    private async Task OnTest_Coroutine() {
+        StringWriter writer = new StringWriter();
+        writer.WriteLine("VectorTraits.Benchmarks.Wasm");
+        writer.WriteLine();
+        IsTaskRunning = true;
+        try {
+            statePercentage = "";
+            await OnTestCoreAync(writer);
+        } catch (Exception ex) {
+            System.Diagnostics.Debug.WriteLine(ex);
+            writer.WriteLine(ex);
+        } finally {
+            IsTaskRunning = false;
+        }
+        statePercentage = "";
+        // Show.
+        resultText = writer.ToString();
+        StateHasChanged();
+    }
+
+    private async Task OnTestCoreAync(TextWriter writer) {
+        string[] args = { };
+        string indent = "";
+        writer.WriteLine();
+        BenchmarkUtil.OutputEnvironment(writer, indent);
+        //TraitsOutput.ParseWaitDebugAndReadKey(args);
+        writer.WriteLine();
+        //BenchmarkUtil.ParseCommand(args);
+        await BenchmarkMain.RunBenchmarkAsync(writer, indent, onBefore);
+        writer.WriteLine();
+        AloneTestUtil.AloneTestByCommand(writer, args);
+
+        async Task onBefore(double percentage, string title) {
+            Debug.WriteLine(percentage);
+            try {
+                statePercentage = string.Format("{0:0.00}%: {1}", percentage, title);
+                resultText = "" + writer?.ToString();
+                await InvokeAsync(StateHasChanged);
+                await Task.Delay(1);
+            } catch (Exception ex) {
+                Debug.WriteLine(ex);
+            }
+        }
     }
 
     private void AppendLine(string str) {
