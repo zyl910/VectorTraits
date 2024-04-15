@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Zyl.VectorTraits.Impl.Util {
@@ -81,6 +82,15 @@ namespace Zyl.VectorTraits.Impl.Util {
                     Trace.WriteLine(ex);
                 }
             } else {
+#if NET5_0_OR_GREATER
+                Architecture architectureWasm = Architecture.Wasm;
+#else
+                Architecture architectureWasm = (Architecture)4; // Wasm
+#endif // NET5_0_OR_GREATER
+                if (System.Runtime.InteropServices.RuntimeInformation.OSArchitecture == architectureWasm) {
+                    _CpuDetectionException = new PlatformNotSupportedException(string.Format("Not supported on this platform({0}).", System.Runtime.InteropServices.RuntimeInformation.OSArchitecture));
+                    return;
+                }
                 bool useCommnand = true;
                 if (useCommnand) {
                     // lscpu.
