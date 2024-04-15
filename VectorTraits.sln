@@ -126,6 +126,10 @@ Global
 		tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
 		tests\VectorTraits.Benchmarks.Core.Inc\VectorTraits.Benchmarks.Core.Inc.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
 		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{a732c040-1f30-4a0a-be44-c93ae15ca954}*SharedItemsImports = 4
+		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{d7e8296a-2252-4427-a63d-7cddca86b184}*SharedItemsImports = 5
+		tests\BenchmarkDotNet.Mock\BenchmarkDotNet.Mock.projitems*{d7e8296a-2252-4427-a63d-7cddca86b184}*SharedItemsImports = 5
+		tests\VectorTraits.Benchmarks.Core.Inc\VectorTraits.Benchmarks.Core.Inc.projitems*{d7e8296a-2252-4427-a63d-7cddca86b184}*SharedItemsImports = 5
+		tests\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems*{d7e8296a-2252-4427-a63d-7cddca86b184}*SharedItemsImports = 5
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{de1e8655-c240-4b92-9391-10d0b44d50a0}*SharedItemsImports = 5
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{e2619a9b-7a38-4ff3-9aff-5c7fca18d445}*SharedItemsImports = 5
 		src\VectorTraits.InfoInc\VectorTraits.InfoInc.projitems*{efa732ba-f81c-482d-9bde-80753cb0c9a8}*SharedItemsImports = 5

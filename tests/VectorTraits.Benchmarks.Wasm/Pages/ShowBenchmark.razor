@@ -1,0 +1,57 @@
+﻿@page "/showBenchmark"
+@using System.Text
+@using Zyl.VectorTraits.Benchmarks
+
+<PageTitle>Show benchmark</PageTitle>
+
+<h1>Show benchmark</h1>
+
+<button class="btn btn-primary" @onclick="OnTest" disabled=@IsTaskRunning>Test</button>
+
+<br />
+<br />
+<InputTextArea @bind-Value="resultText" rows="30" style="width: 95%" />
+
+@code {
+    bool IsTaskRunning = false;
+    private string resultText = "";
+
+    private async void OnTest() {
+        var writer = new StringWriter();
+        writer.WriteLine("VectorTraits.Benchmarks.Wasm");
+        writer.WriteLine();
+        IsTaskRunning = true;
+        try {
+            await Task.Run(() => OnTestCore(writer));
+        } catch (Exception ex) {
+            System.Diagnostics.Debug.WriteLine(ex);
+            writer.WriteLine(ex);
+        } finally {
+            IsTaskRunning = false;
+        }
+        // Show.
+        resultText = writer.ToString();
+        StateHasChanged();
+    }
+
+    private void OnTestCore(TextWriter writer) {
+        string[] args = { };
+        string indent = "";
+        writer.WriteLine();
+        BenchmarkUtil.OutputEnvironment(writer, indent);
+        //TraitsOutput.ParseWaitDebugAndReadKey(args);
+        writer.WriteLine();
+        //BenchmarkUtil.ParseCommand(args);
+        //BenchmarkMain.RunBenchmark(writer, indent);
+        writer.WriteLine();
+        AloneTestUtil.AloneTestByCommand(writer, args);
+    }
+
+    private void AppendLine(string str) {
+        if (resultText.Length > 0x10000) {
+            resultText = "";
+        }
+        resultText += str + Environment.NewLine;
+    }
+
+}
