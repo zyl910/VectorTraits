@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Numerics;
 using System.Reflection;
 using System.Runtime.Versioning;
@@ -354,8 +355,11 @@ namespace Zyl.VectorTraits.Benchmarks {
             if (lst.Count <= 0) return;
             string typeName = typ.Name;
             double total = lst.Count;
+            int[] valueList = AbstractBenchmark.ValuesForN.ToArray();
+            double percentageWeight2 = percentageWeight * 1.0 / valueList.Length;
             int j = 0;
-            foreach (int n in AbstractBenchmark.ValuesForN) {
+            foreach (int n in valueList) {
+                double percentageCurrent2 = percentageCurrent + percentageWeight * j / valueList.Length;
                 double mopsBaseline = 0.0;
                 writer.WriteLine();
                 writer.WriteTitle(string.Format("{0}({1})", typeName, n));
@@ -368,7 +372,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                     string name = mi.Name;
                     try {
                         if (null != onBefore) {
-                            double percentage = percentageCurrent + percentageWeight * i / total;
+                            double percentage = percentageCurrent2 + percentageWeight2 * i / total;
                             string title;
                             if (j <= 0) {
                                 title = string.Format("{0}.{1}", typeName, name);
