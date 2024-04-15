@@ -1,5 +1,6 @@
 ﻿@page "/showBenchmark"
 @using System.Text
+@using System.Diagnostics
 @using Zyl.VectorTraits.Benchmarks
 
 <PageTitle>Show benchmark</PageTitle>
@@ -7,7 +8,7 @@
 <h1>Show benchmark</h1>
 
 <button class="btn btn-primary" @onclick="OnTest" disabled=@IsTaskRunning>Test</button>
-
+<p role="status">@statePercentage</p>
 <br />
 <br />
 <InputTextArea @bind-Value="resultText" rows="30" style="width: 95%" />
@@ -15,23 +16,41 @@
 @code {
     bool IsTaskRunning = false;
     private string resultText = "";
+    private string statePercentage = "";
 
-    private async void OnTest() {
-        var writer = new StringWriter();
+    private async Task OnTest() {
+        await OnTestMain();
+    }
+
+    private async Task OnTestMain() {
+        StringWriter writer = new StringWriter();
         writer.WriteLine("VectorTraits.Benchmarks.Wasm");
         writer.WriteLine();
         IsTaskRunning = true;
+        Timer timer = new Timer(TimeCallBack, null, 1000, 1000);
         try {
-            await Task.Run(() => OnTestCore(writer));
+            statePercentage = "";
+            await Task.Factory.StartNew(() => OnTestCore(writer), TaskCreationOptions.LongRunning);
         } catch (Exception ex) {
             System.Diagnostics.Debug.WriteLine(ex);
             writer.WriteLine(ex);
         } finally {
             IsTaskRunning = false;
         }
+        timer.Dispose();
+        statePercentage = "";
         // Show.
         resultText = writer.ToString();
         StateHasChanged();
+        //
+        void TimeCallBack(object? state) {
+            try {
+                resultText = "" + writer?.ToString();
+                InvokeAsync(StateHasChanged);
+            } catch (Exception ex) {
+                Debug.WriteLine(ex);
+            }
+        }
     }
 
     private void OnTestCore(TextWriter writer) {
@@ -42,7 +61,17 @@
         //TraitsOutput.ParseWaitDebugAndReadKey(args);
         writer.WriteLine();
         //BenchmarkUtil.ParseCommand(args);
-        //BenchmarkMain.RunBenchmark(writer, indent);
+        BenchmarkMain.RunBenchmark(writer, indent, (list, index)=> {
+            Debug.WriteLine(index);
+            try {
+                double percentage = 0;
+                statePercentage = string.Format("{0:0.00}%", percentage);
+                resultText = "" + writer?.ToString();
+                InvokeAsync(StateHasChanged).Wait();
+            } catch (Exception ex) {
+                Debug.WriteLine(ex);
+            }
+        });
         writer.WriteLine();
         AloneTestUtil.AloneTestByCommand(writer, args);
     }

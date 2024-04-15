@@ -13,7 +13,8 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// </summary>
         /// <param name="writer">Output <see cref="TextWriter"/>.</param>
         /// <param name="indent">The indent.</param>
-        public static void RunBenchmark(TextWriter writer, string indent) {
+        /// <param name="onBefore">The action on before call item. Prototype: <c>(IReadOnlyList&lt;Type&gt; list, int index)</c>.</param>
+        public static void RunBenchmark(TextWriter writer, string indent, Action<IReadOnlyList<Type>, int>? onBefore = null) {
             // info.
             //writer.WriteLine(indent + string.Format("VectorTTraits.BaseIInstance.Name:\t{0}", VectorTTraits.BaseIInstance.Name));
             //writer.WriteLine(indent + string.Format("VectorTTraits:\t{0}", VectorTTraits.IInstance));
@@ -24,7 +25,7 @@ namespace Zyl.VectorTraits.Benchmarks {
             //writer.WriteLine(indent + string.Format("AccelerateState-VectorTTraits256Avx2.ShiftRightArithmetic:\t{0}", AccelerateStateAttribute.GetAttributeValue(typeof(VectorTTraits256Avx2).GetMethod("ShiftRightArithmetic"))));
             // RunBenchmark.
             BenchmarkUtil.CurrentBenchmarkWriter.CurrentTextWriter = writer;
-            BenchmarkUtil.RunBenchmark(BenchmarkUtil.CurrentBenchmarkWriter, typeof(BenchmarkMain).Assembly);
+            BenchmarkUtil.RunBenchmark(BenchmarkUtil.CurrentBenchmarkWriter, typeof(BenchmarkMain).Assembly, onBefore);
         }
     }
 }

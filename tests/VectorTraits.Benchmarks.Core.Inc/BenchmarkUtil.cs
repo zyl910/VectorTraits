@@ -300,6 +300,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                         if (mopsFlag) {
                             mopsBaseline = mops;
                         }
+                        //break; // [Debug] Only test one.
                     } catch (Exception ex) {
                         writer.WriteItem(name, string.Format("Run fail! {0}", ex.Message));
                     }
@@ -323,9 +324,9 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// Run benchmark.
         /// </summary>
         /// <param name="writer">Output <see cref="IBenchmarkWriter"/>.</param>
-        /// <param name="indent">The indent.</param>
         /// <param name="assembly">The assembly.</param>
-        public static void RunBenchmark(IBenchmarkWriter writer, Assembly assembly) {
+        /// <param name="onBefore">The action on before call item. Prototype: <c>(IReadOnlyList&lt;Type&gt; list, int index)</c>.</param>
+        public static void RunBenchmark(IBenchmarkWriter writer, Assembly assembly, Action<IReadOnlyList<Type>, int>? onBefore = null) {
             Type baseType = typeof(AbstractBenchmark);
             List<Type> lst = new List<Type>();
             foreach (Type typ in assembly.GetTypes()) {
@@ -336,13 +337,16 @@ namespace Zyl.VectorTraits.Benchmarks {
             }
             // Sort and run.
             lst.Sort(ComparisonOnType);
+            int i = 0;
             foreach (Type typ in lst) {
                 try {
+                    onBefore?.Invoke(lst, i);
                     AbstractBenchmark? obj = Activator.CreateInstance(typ) as AbstractBenchmark;
                     RunBenchmarkObject(writer, typ, obj);
                 } catch (Exception ex) {
                     writer.WriteLine(string.Format("Run `{0} fail! {1}`", typ.FullName, ex.Message));
                 }
+                ++i;
             }
         }
     }
