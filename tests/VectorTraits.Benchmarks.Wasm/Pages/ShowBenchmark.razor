@@ -63,19 +63,20 @@
         //TraitsOutput.ParseWaitDebugAndReadKey(args);
         writer.WriteLine();
         //BenchmarkUtil.ParseCommand(args);
-        BenchmarkMain.RunBenchmark(writer, indent, (list, index)=> {
-            Debug.WriteLine(index);
+        BenchmarkMain.RunBenchmark(writer, indent, onBefore);
+        writer.WriteLine();
+        AloneTestUtil.AloneTestByCommand(writer, args);
+
+        void onBefore(double percentage, string title) {
+            Debug.WriteLine(percentage);
             try {
-                double percentage = 0;
-                statePercentage = string.Format("{0:0.00}%", percentage);
+                statePercentage = string.Format("{0:0.00}%: {1}", percentage, title);
                 resultText = "" + writer?.ToString();
-                InvokeAsync(StateHasChanged).Wait();
+                InvokeAsync(StateHasChanged);
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
-        });
-        writer.WriteLine();
-        AloneTestUtil.AloneTestByCommand(writer, args);
+        }
     }
 
     private async Task OnTest_Coroutine() {

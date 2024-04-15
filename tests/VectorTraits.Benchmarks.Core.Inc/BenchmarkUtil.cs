@@ -6,6 +6,7 @@ using System.IO;
 using System.Numerics;
 using System.Reflection;
 using System.Runtime.Versioning;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -161,6 +162,26 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
+        /// Check method is use on benchmark.
+        /// </summary>
+        /// <param name="mi">The method info.</param>
+        /// <returns>Return true if use on benchmark.</returns>
+        public static bool CheckMethodInfoOnBenchmark(MethodInfo mi) {
+            if (mi.ContainsGenericParameters) return false;
+            if (mi.IsStatic) return false;
+            if (mi.IsAbstract) return false;
+            if (mi.GetParameters().Length != 0) return false;
+            BenchmarkAttribute? attr = mi.GetCustomAttribute<BenchmarkAttribute>();
+            bool isAdd = false;
+            if (null != attr) isAdd = true;
+            if (!isAdd && AllowFakeBenchmark) {
+                FakeBenchmarkAttribute? attr2 = mi.GetCustomAttribute<FakeBenchmarkAttribute>();
+                if (null != attr2) isAdd = true;
+            }
+            return isAdd;
+        }
+
+        /// <summary>
         /// Fill <see cref="MethodInfo"/> of benchmark .
         /// </summary>
         /// <typeparam name="T">The benchmark class.</typeparam>
@@ -168,22 +189,27 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="src">Source object.</param>
         public static void FillMethodInfoOfBenchmark<T>(ICollection<MethodInfo> dst, T src) where T : class {
             foreach (MethodInfo mi in src.GetType().GetMethods()) {
-                if (mi.ContainsGenericParameters) continue;
-                if (mi.IsStatic) continue;
-                if (mi.IsAbstract) continue;
-                if (mi.GetParameters().Length != 0) continue;
-                BenchmarkAttribute? attr = mi.GetCustomAttribute<BenchmarkAttribute>();
-                bool isAdd = false;
-                if (null != attr) isAdd = true;
-                if (!isAdd && AllowFakeBenchmark) {
-                    FakeBenchmarkAttribute? attr2 = mi.GetCustomAttribute<FakeBenchmarkAttribute>();
-                    if (null != attr2) isAdd = true;
-                }
+                bool isAdd = CheckMethodInfoOnBenchmark(mi);
                 // ok.
                 if (isAdd) {
                     dst.Add(mi);
                 }
             }
+        }
+
+        /// <summary>
+        /// Is exist benchmark method.
+        /// </summary>
+        /// <param name="typ">The type.</param>
+        /// <returns>Return true if exist benchmark method.</returns>
+        public static bool ExistBenchmarkMethod(Type typ) {
+            foreach (MethodInfo mi in typ.GetMethods()) {
+                bool isAdd = CheckMethodInfoOnBenchmark(mi);
+                if (isAdd) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>
@@ -310,6 +336,70 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
+        /// Run benchmark object - Async
+        /// </summary>
+        /// <param name="writer">Output <see cref="IBenchmarkWriter"/>.</param>
+        /// <param name="indent">The indent.</param>
+        /// <param name="typ">The type.</param>
+        /// <param name="obj">The object.</param>
+        /// <param name="onBefore">The action on before call item. Prototype: <c>Task onBefore(double percentage, string title)</c>.</param>
+        /// <param name="percentageCurrent">Percentage of current.</param>
+        /// <param name="percentageWeight">Percentage weight.</param>
+        /// <returns>Returns async task.</returns>
+        public static async Task RunBenchmarkObjectAsync(IBenchmarkWriter writer, Type typ, AbstractBenchmark? obj, Func<double, string, Task>? onBefore = null, double percentageCurrent=0.0, double percentageWeight=1.0) {
+            if (null == obj) return;
+            ILoopCountGetter? loopCountGetter = obj as ILoopCountGetter;
+            List<MethodInfo> lst = new List<MethodInfo>();
+            FillMethodInfoOfBenchmark(lst, obj);
+            if (lst.Count <= 0) return;
+            string typeName = typ.Name;
+            double total = lst.Count;
+            int j = 0;
+            foreach (int n in AbstractBenchmark.ValuesForN) {
+                double mopsBaseline = 0.0;
+                writer.WriteLine();
+                writer.WriteTitle(string.Format("{0}({1})", typeName, n));
+                // GlobalSetup.
+                obj.N = n;
+                obj.GlobalSetup();
+                // Tests.
+                int i = 0;
+                foreach (MethodInfo mi in lst) {
+                    string name = mi.Name;
+                    try {
+                        if (null != onBefore) {
+                            double percentage = percentageCurrent + percentageWeight * i / total;
+                            string title;
+                            if (j <= 0) {
+                                title = string.Format("{0}.{1}", typeName, name);
+                            } else {
+                                title = string.Format("{0}.{1}[{2}]", typeName, name, j);
+                            }
+                            await onBefore(percentage, title);
+                        }
+                        Action action = (Action)mi.CreateDelegate(typeof(Action), obj);
+                        //Action action = (Action)Delegate.CreateDelegate(typeof(Action), obj, mi);
+                        double mops = BenchmarkUtil.RunTest(writer, name, action, n, mopsBaseline, loopCountGetter);
+                        bool isBaseline = false;
+                        BenchmarkAttribute? attr = mi.GetCustomAttribute<BenchmarkAttribute>();
+                        if (null != attr) {
+                            isBaseline = attr.Baseline;
+                        }
+                        bool mopsFlag = (0 == mopsBaseline || isBaseline) && mops > 0;
+                        if (mopsFlag) {
+                            mopsBaseline = mops;
+                        }
+                        //break; // [Debug] Only test one.
+                    } catch (Exception ex) {
+                        writer.WriteItem(name, string.Format("Run fail! {0}", ex.Message));
+                    }
+                    ++i;
+                }
+                ++j;
+            }
+        }
+
+        /// <summary>
         /// Comparison on <see cref="Type"/>.
         /// </summary>
         /// <param name="x">The x.</param>
@@ -326,22 +416,27 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// </summary>
         /// <param name="writer">Output <see cref="IBenchmarkWriter"/>.</param>
         /// <param name="assembly">The assembly.</param>
-        /// <param name="onBefore">The action on before call item. Prototype: <c>(IReadOnlyList&lt;Type&gt; list, int index)</c>.</param>
-        public static void RunBenchmark(IBenchmarkWriter writer, Assembly assembly, Action<IReadOnlyList<Type>, int>? onBefore = null) {
+        /// <param name="onBefore">The action on before call item. Prototype: <c>void onBefore(double percentage, string title)</c>.</param>
+        public static void RunBenchmark(IBenchmarkWriter writer, Assembly assembly, Action<double, string>? onBefore = null) {
             Type baseType = typeof(AbstractBenchmark);
             List<Type> lst = new List<Type>();
             foreach (Type typ in assembly.GetTypes()) {
                 if (typ.ContainsGenericParameters) continue;
                 if (typ.IsAbstract) continue;
                 if (!typ.IsSubclassOf(baseType)) continue;
+                if (!ExistBenchmarkMethod(typ)) continue;
                 lst.Add(typ);
             }
+            if (lst.Count <= 0) return;
+            double total = lst.Count;
             // Sort and run.
             lst.Sort(ComparisonOnType);
             int i = 0;
             foreach (Type typ in lst) {
                 try {
-                    onBefore?.Invoke(lst, i);
+                    double percentage = 100.0 * i / total;
+                    string title = typ.Name;
+                    onBefore?.Invoke(percentage, title);
                     AbstractBenchmark? obj = Activator.CreateInstance(typ) as AbstractBenchmark;
                     RunBenchmarkObject(writer, typ, obj);
                 } catch (Exception ex) {
@@ -352,7 +447,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
-        /// Run benchmark.
+        /// Run benchmark - Async.
         /// </summary>
         /// <param name="writer">Output <see cref="IBenchmarkWriter"/>.</param>
         /// <param name="assembly">The assembly.</param>
@@ -364,22 +459,24 @@ namespace Zyl.VectorTraits.Benchmarks {
                 if (typ.ContainsGenericParameters) continue;
                 if (typ.IsAbstract) continue;
                 if (!typ.IsSubclassOf(baseType)) continue;
+                if (!ExistBenchmarkMethod(typ)) continue;
                 lst.Add(typ);
             }
             if (lst.Count <= 0) return;
             double total = lst.Count;
+            double percentageWeight = 100.0 * 1 / total;
             // Sort and run.
             lst.Sort(ComparisonOnType);
             int i = 0;
             foreach (Type typ in lst) {
                 try {
-                    double percentage = i / total;
+                    double percentage = 100.0 * i / total;
                     string title = typ.Name;
                     if (null != onBefore) {
                         await onBefore(percentage, title);
                     }
                     AbstractBenchmark? obj = Activator.CreateInstance(typ) as AbstractBenchmark;
-                    RunBenchmarkObject(writer, typ, obj);
+                    await RunBenchmarkObjectAsync(writer, typ, obj, onBefore, percentage, percentageWeight);
                 } catch (Exception ex) {
                     writer.WriteLine(string.Format("Run `{0} fail! {1}`", typ.FullName, ex.Message));
                 }

@@ -14,8 +14,8 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// </summary>
         /// <param name="writer">Output <see cref="TextWriter"/>.</param>
         /// <param name="indent">The indent.</param>
-        /// <param name="onBefore">The action on before call item. Prototype: <c>(IReadOnlyList&lt;Type&gt; list, int index)</c>.</param>
-        public static void RunBenchmark(TextWriter writer, string indent, Action<IReadOnlyList<Type>, int>? onBefore = null) {
+        /// <param name="onBefore">The action on before call item. Prototype: <c>void onBefore(double percentage, string title)</c>.</param>
+        public static void RunBenchmark(TextWriter writer, string indent, Action<double, string>? onBefore = null) {
             // info.
             //writer.WriteLine(indent + string.Format("VectorTTraits.BaseIInstance.Name:\t{0}", VectorTTraits.BaseIInstance.Name));
             //writer.WriteLine(indent + string.Format("VectorTTraits:\t{0}", VectorTTraits.IInstance));
@@ -30,7 +30,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
-        /// Run benchmark.
+        /// Run benchmark - Async.
         /// </summary>
         /// <param name="writer">Output <see cref="TextWriter"/>.</param>
         /// <param name="indent">The indent.</param>
