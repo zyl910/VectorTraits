@@ -6,8 +6,6 @@ using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 #endif // !NET7_0_OR_GREATER
 using System.Text;
 using System.Runtime.CompilerServices;
-using System.Numerics;
-
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
@@ -63,7 +61,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
 #if NET8_0_OR_GREATER
                 // 2019, Intel Ice Lake (10th Core) - avx512_bitalg, avx512_vbmi2, avx512_vnni, avx512_vpopcntdq, avx512bw, avx512cd, avx512dq, avx512f, avx512ifma, avx512vbmi, avx512vl.
                 // 2022, AMD Zen 4 (Ryzen 7000 series) - avx512_bf16, avx512_bitalg, avx512_vbmi2, avx512_vnni, avx512_vpopcntdq, avx512bw, avx512cd, avx512dq, avx512f, avx512ifma, avx512vbmi, avx512vl.
-                rt = Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported && Avx512F.VL.IsSupported
+                rt = Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported
                     & Avx.IsSupported && Avx2.IsSupported && Sse.IsSupported && Sse2.IsSupported;
 #else
 #endif // NET8_0_OR_GREATER
@@ -76,7 +74,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static string GetUnsupportedMessage(bool noStrict = false) {
                 string rt = "Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi, Avx512VL!";
 #if NET8_0_OR_GREATER
-                if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported && Avx512F.VL.IsSupported) {
+                if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported) {
                     if (Avx.IsSupported && Avx2.IsSupported && Sse.IsSupported && Sse2.IsSupported) {
                         // done.
                     } else {
@@ -112,13 +110,13 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             internal static string MakeUsedInstructionSets() {
                 string rt = "";
 #if NET8_0_OR_GREATER
-                // Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported && Avx512F.VL.IsSupported
+                // Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported //&& Avx512F.VL.IsSupported
                 string separator = VectorEnvironment.InstructionSetsSeparator;
                 if (System.Runtime.Intrinsics.X86.Avx512BW.IsSupported) rt += separator + "Avx512BW";
                 if (System.Runtime.Intrinsics.X86.Avx512DQ.IsSupported) rt += separator + "Avx512DQ";
                 if (System.Runtime.Intrinsics.X86.Avx512F.IsSupported) rt += separator + "Avx512F";
                 if (System.Runtime.Intrinsics.X86.Avx512Vbmi.IsSupported) rt += separator + "Avx512Vbmi";
-                if (System.Runtime.Intrinsics.X86.Avx512F.VL.IsSupported) rt += separator + "Avx512VL";
+                //if (System.Runtime.Intrinsics.X86.Avx512F.VL.IsSupported) rt += separator + "Avx512VL";
                 if (System.Runtime.Intrinsics.X86.Avx.IsSupported) rt += separator + "Avx";
                 if (System.Runtime.Intrinsics.X86.Avx2.IsSupported) rt += separator + "Avx2";
                 if (System.Runtime.Intrinsics.X86.Sse.IsSupported) rt += separator + "Sse";
