@@ -729,11 +729,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{double}, Vector128{double})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Narrow(Vector128<double> lower, Vector128<double> upper) {
-#if NET8_0_OR_GREATER
                 if (Avx.IsSupported) {
                     return Avx.ConvertToVector128Single(lower.ToVector256Unsafe().WithUpper(upper));
                 }
-#endif // NET8_0_OR_GREATER
                 Vector128<float> rt0 = Sse2.ConvertToVector128Single(lower); // double(a, b) -> float(a, b, 0, 0)
                 Vector128<float> rt1 = Sse2.ConvertToVector128Single(upper); // double(c, d) -> float(c, d, 0, 0)
                 Vector128<float> rt = Sse.Shuffle(rt0, rt1, (byte)ShuffleControlG4.XYXY); // control = 0 + (1 << 2) + (0 << 4) + (1 << 6)
@@ -745,7 +743,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> Narrow(Vector128<short> lower, Vector128<short> upper) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512BW.VL.IsSupported && Avx.IsSupported) {
                     return Avx512BW.VL.ConvertToVector128SByte(lower.ToVector256Unsafe().WithUpper(upper));
                 }
 #endif // NET8_0_OR_GREATER
@@ -757,7 +755,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> Narrow(Vector128<ushort> lower, Vector128<ushort> upper) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if (Avx512BW.VL.IsSupported && Avx.IsSupported) {
                     return Avx512BW.VL.ConvertToVector128Byte(lower.ToVector256Unsafe().WithUpper(upper));
                 }
 #endif // NET8_0_OR_GREATER
@@ -770,7 +768,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> Narrow(Vector128<int> lower, Vector128<int> upper) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512F.VL.IsSupported && Avx.IsSupported) {
                     return Avx512F.VL.ConvertToVector128Int16(lower.ToVector256Unsafe().WithUpper(upper));
                 }
 #endif // NET8_0_OR_GREATER
@@ -782,7 +780,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> Narrow(Vector128<uint> lower, Vector128<uint> upper) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
+                if (Avx512F.VL.IsSupported && Avx.IsSupported) {
                     return Avx512F.VL.ConvertToVector128UInt16(lower.ToVector256Unsafe().WithUpper(upper));
                 }
 #endif // NET8_0_OR_GREATER

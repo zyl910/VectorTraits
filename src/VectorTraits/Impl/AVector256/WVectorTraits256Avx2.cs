@@ -964,11 +964,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{double}, Vector256{double})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> Narrow(Vector256<double> lower, Vector256<double> upper) {
-#if NET8_0_OR_GREATER
-                if (Avx512F.IsSupported) {
-                    return Avx512F.ConvertToVector256Single(lower.ToVector512Unsafe().WithUpper(upper));
-                }
-#endif // NET8_0_OR_GREATER
+//#if NET8_0_OR_GREATER
+//                if (Avx512F.IsSupported) {
+//                    return Avx512F.ConvertToVector256Single(lower.ToVector512Unsafe().WithUpper(upper)); // ToVector512Unsafe is slow.
+//                }
+//#endif // NET8_0_OR_GREATER
                 return Avx.ConvertToVector128Single(lower).ToVector256Unsafe().WithUpper(Avx.ConvertToVector128Single(upper));
             }
 
@@ -976,11 +976,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> Narrow(Vector256<short> lower, Vector256<short> upper) {
-#if NET8_0_OR_GREATER
-                if (Avx512BW.IsSupported) {
-                    return Avx512BW.ConvertToVector256SByte(lower.ToVector512Unsafe().WithUpper(upper));
-                }
-#endif // NET8_0_OR_GREATER
                 return Narrow(lower.AsUInt16(), upper.AsUInt16()).AsSByte();
             }
 
@@ -989,8 +984,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> Narrow(Vector256<ushort> lower, Vector256<ushort> upper) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.IsSupported) {
-                    return Avx512BW.ConvertToVector256Byte(lower.ToVector512Unsafe().WithUpper(upper));
+                //if (Avx512BW.IsSupported) {
+                //    return Avx512BW.ConvertToVector256Byte(lower.ToVector512Unsafe().WithUpper(upper)); // ToVector512Unsafe is slow.
+                //}
+                if (Avx512BW.VL.IsSupported) {
+                    return Avx512BW.VL.ConvertToVector128Byte(lower).ToVector256Unsafe().WithUpper(Avx512BW.VL.ConvertToVector128Byte(upper));
                 }
 #endif // NET8_0_OR_GREATER
                 //Vector256<ushort> mask = Vector256s<ushort>.VMaxByte;
@@ -1004,11 +1002,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{int}, Vector256{int})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> Narrow(Vector256<int> lower, Vector256<int> upper) {
-#if NET8_0_OR_GREATER
-                if (Avx512F.IsSupported) {
-                    return Avx512F.ConvertToVector256Int16(lower.ToVector512Unsafe().WithUpper(upper));
-                }
-#endif // NET8_0_OR_GREATER
                 return Narrow(lower.AsUInt32(), upper.AsUInt32()).AsInt16();
             }
 
@@ -1017,8 +1010,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> Narrow(Vector256<uint> lower, Vector256<uint> upper) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.IsSupported) {
-                    return Avx512F.ConvertToVector256UInt16(lower.ToVector512Unsafe().WithUpper(upper));
+                //if (Avx512F.IsSupported) {
+                //    return Avx512F.ConvertToVector256UInt16(lower.ToVector512Unsafe().WithUpper(upper));
+                //}
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ConvertToVector128UInt16(lower).ToVector256Unsafe().WithUpper(Avx512F.VL.ConvertToVector128UInt16(upper));
                 }
 #endif // NET8_0_OR_GREATER
                 Vector256<uint> mask = Vector256Constants.UInt32_VMaxUInt16;
@@ -1030,11 +1026,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.Narrow(Vector256{long}, Vector256{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> Narrow(Vector256<long> lower, Vector256<long> upper) {
-#if NET8_0_OR_GREATER
-                if (Avx512F.IsSupported) {
-                    return Avx512F.ConvertToVector256Int32(lower.ToVector512Unsafe().WithUpper(upper));
-                }
-#endif // NET8_0_OR_GREATER
                 return Narrow(lower.AsUInt64(), upper.AsUInt64()).AsInt32();
             }
 
@@ -1043,8 +1034,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> Narrow(Vector256<ulong> lower, Vector256<ulong> upper) {
 #if NET8_0_OR_GREATER
-                if (Avx512F.IsSupported) {
-                    return Avx512F.ConvertToVector256UInt32(lower.ToVector512Unsafe().WithUpper(upper));
+                //if (Avx512F.IsSupported) {
+                //    return Avx512F.ConvertToVector256UInt32(lower.ToVector512Unsafe().WithUpper(upper));
+                //}
+                if (Avx512F.VL.IsSupported) {
+                    return Avx512F.VL.ConvertToVector128UInt32(lower).ToVector256Unsafe().WithUpper(Avx512F.VL.ConvertToVector128UInt32(upper));
                 }
 #endif // NET8_0_OR_GREATER
                 //  vmovupd     ymm0,ymmword ptr [rbp-2B70h]  

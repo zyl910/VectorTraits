@@ -10,9 +10,11 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 #endif
 using System.Text;
+using System.Threading;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
 using Zyl.VectorTraits.Impl.AVector128;
+using Zyl.VectorTraits.Impl.AVector512;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.N {
 #if BENCHMARKS_OFF
@@ -190,6 +192,55 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
         #region BENCHMARKS_128ALGORITHM
 #if BENCHMARKS_128ALGORITHM
 
+#if NET7_0_OR_GREATER
+
+        /// <summary>
+        /// Sum Narrow - Vector128 - Bcl static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSumNarrowVector128Bcl(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector128 result.
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                var t = Vector128.Narrow(p0, Unsafe.Add(ref p0, 1));
+                vrt = Vector128.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            for (i = 0; i < Vector128<TMyOut>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumNarrowVector128Bcl() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumNarrowVector128Bcl(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVector128Bcl");
+        }
+
+#endif // NET7_0_OR_GREATER
+
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
 #if NET5_0_OR_GREATER
@@ -320,6 +371,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
 
         [Benchmark]
         public void SumNarrowVector128Traits() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
             dstTMy = StaticSumNarrowVector128Traits(srcArray, srcArray.Length);
             CheckResult("SumNarrowVector128Traits");
         }
@@ -329,6 +384,55 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
 
         #region BENCHMARKS_256ALGORITHM
 #if BENCHMARKS_256ALGORITHM
+
+#if NET7_0_OR_GREATER
+
+        /// <summary>
+        /// Sum Narrow - Vector256 - Bcl static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSumNarrowVector256Bcl(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMyOut> vrt = Vector256<TMyOut>.Zero; // Vector256 result.
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                var t = Vector256.Narrow(p0, Unsafe.Add(ref p0, 1));
+                vrt = Vector256.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            for (i = 0; i < Vector256<TMyOut>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumNarrowVector256Bcl() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumNarrowVector256Bcl(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVector256Bcl");
+        }
+
+#endif // NET7_0_OR_GREATER
 
         /// <summary>
         /// Sum Narrow - Vector256 - Traits static.
@@ -367,6 +471,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
 
         [Benchmark]
         public void SumNarrowVector256Traits() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
             dstTMy = StaticSumNarrowVector256Traits(srcArray, srcArray.Length);
             CheckResult("SumNarrowVector256Traits");
         }
@@ -375,5 +483,102 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.N {
         #endregion // BENCHMARKS_256ALGORITHM
 
 #endif // NETCOREAPP3_0_OR_GREATER
+
+        #region BENCHMARKS_512
+#if BENCHMARKS_512 && NET8_0_OR_GREATER
+
+        /// <summary>
+        /// Sum Narrow - Vector512 - Bcl static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSumNarrowVector512Bcl(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMyOut> vrt = Vector512<TMyOut>.Zero; // Vector512 result.
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                var t = Vector512.Narrow(p0, Unsafe.Add(ref p0, 1));
+                vrt = Vector512.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            for (i = 0; i < Vector512<TMyOut>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumNarrowVector512Bcl() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumNarrowVector512Bcl(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVector512Bcl");
+        }
+
+        /// <summary>
+        /// Sum Narrow - Vector512 - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMyOut StaticSumNarrowVector512Traits(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMyOut> vrt = Vector512<TMyOut>.Zero; // Vector512 result.
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                var t = Vector512s.Narrow(p0, Unsafe.Add(ref p0, 1));
+                vrt = Vector512s.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            for (i = 0; i < Vector512<TMyOut>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumNarrowVector512Traits() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumNarrowVector512Traits(srcArray, srcArray.Length);
+            CheckResult("SumNarrowVector512Traits");
+        }
+
+#endif // BENCHMARKS_512 && NET8_0_OR_GREATER
+        #endregion // BENCHMARKS_512
+
     }
 }

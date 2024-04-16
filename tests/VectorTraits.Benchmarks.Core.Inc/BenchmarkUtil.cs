@@ -328,7 +328,7 @@ namespace Zyl.VectorTraits.Benchmarks {
                         if (mopsFlag) {
                             mopsBaseline = mops;
                         }
-                        break; // [Debug] Only test one.
+                        // break; // [Debug] Only test one.
                     } catch (Exception ex) {
                         writer.WriteItem(name, string.Format("Run fail! {0}", ex.Message));
                     }
