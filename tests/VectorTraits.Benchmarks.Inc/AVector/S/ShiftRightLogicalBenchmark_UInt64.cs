@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#define BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
 using System.Text;
+using System.Threading;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
 
@@ -422,6 +424,111 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             }
             CheckResult("SumSRLTraits");
         }
+
+
+        #region BENCHMARKS_512
+#if BENCHMARKS_512 && NET8_0_OR_GREATER
+
+        /// <summary>
+        /// Sum shift right logical - 512 Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSRL512Traits(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector512 result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<TMy>(shiftAmount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector512 processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector512<TMy> vtemp = Vector512s.ShiftRightLogical(*(Vector512<TMy>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftAmount);
+                }
+            }
+            // Reduce.
+            rt += Vector512s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRL512Traits() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = 0;
+            for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
+                dstTMy += StaticSumSRL512Traits(srcArray, srcArray.Length, shiftAmount);
+            }
+            CheckResult("SumSRL512Traits");
+        }
+
+        /// <summary>
+        /// Sum shift right logical - 512 Bcl static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe TMy StaticSumSRL512Bcl(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector512 result.
+            int i;
+            // Body.
+            shiftAmount = Scalars.LimitShiftAmount<TMy>(shiftAmount);
+            fixed (TMy* p0 = &src[0]) {
+                TMy* p = p0;
+                // Vector512 processs.
+                for (i = 0; i < cntBlock; ++i) {
+                    Vector512<TMy> vtemp = Vector512.ShiftRightLogical(*(Vector512<TMy>*)p, shiftAmount);
+                    vrt += vtemp; // Add.
+                    p += nBlockWidth;
+                }
+                // Remainder processs.
+                for (i = 0; i < cntRem; ++i) {
+                    rt += (TMy)(p[i] << shiftAmount);
+                }
+            }
+            // Reduce.
+            rt += Vector512.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRL512Bcl() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = 0;
+            for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
+                dstTMy += StaticSumSRL512Bcl(srcArray, srcArray.Length, shiftAmount);
+            }
+            CheckResult("SumSRL512Bcl");
+        }
+
+#endif // BENCHMARKS_512 && NET8_0_OR_GREATER
+        #endregion // BENCHMARKS_512
 
         #region BENCHMARKS_TRAITS_USAGES
 #if BENCHMARKS_TRAITS_USAGES
