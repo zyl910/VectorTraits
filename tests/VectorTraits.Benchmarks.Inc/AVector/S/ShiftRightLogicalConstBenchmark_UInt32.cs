@@ -697,6 +697,101 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #endif
 
+        #region BENCHMARKS_512
+#if BENCHMARKS_512 && NET8_0_OR_GREATER
+
+        /// <summary>
+        /// Sum shift right logical - Bcl static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumSRL512Bcl(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector512 result.
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector512<TMy> vtemp = Vector512.ShiftRightLogical(p0, shiftAmount);
+                vrt = Vector512.Add(vrt, vtemp); // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)(Unsafe.Add(ref p, i) << shiftAmount);
+            }
+            // Reduce.
+            rt += Vector512.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRL512Bcl() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumSRL512Bcl(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRL512Bcl");
+        }
+
+        /// <summary>
+        /// Sum shift right logical - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumSRL512Traits(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector512 result.
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector512<TMy> vtemp = Vector512s.ShiftRightLogical(p0, shiftAmount);
+                vrt = Vector512s.Add(vrt, vtemp); // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)(Unsafe.Add(ref p, i) << shiftAmount);
+            }
+            // Reduce.
+            rt += Vector512s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRL512Traits() {
+            Vector512s.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumSRL512Traits(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRL512Traits");
+        }
+
+#endif // BENCHMARKS_512 && NET8_0_OR_GREATER
+        #endregion // BENCHMARKS_512
+
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
 
