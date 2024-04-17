@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;net7.0</TargetFrameworks>
@@ -7,6 +7,11 @@
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);REDUCE_MEMORY_USAGE;DRY_JOB0;BENCHMARKS_OFF;BENCHMARKS_128;BENCHMARKS_256;BENCHMARKS_512;BENCHMARKS_ALGORITHM;BENCHMARKS_128ALGORITHM;BENCHMARKS_256ALGORITHM;BENCHMARKS_512ALGORITHM;BENCHMARKS_RAW;BENCHMARKS_TARGET_FAST;BENCHMARKS_TRAITS_USAGES</DefineConstants>
   </PropertyGroup>
+
+  <ItemGroup>
+      <PackageReference Include="NUnit" Version="3.12.0" />
+      <PackageReference Include="NUnitLite" Version="3.12.0" />
+  </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.18" />
@@ -29,5 +34,7 @@
   <Import Project="..\VectorTraits.Benchmarks.Core.Inc\VectorTraits.Benchmarks.Core.Inc.projitems" Label="Shared" />
 
   <Import Project="..\VectorTraits.Benchmarks.Inc\VectorTraits.Benchmarks.Inc.projitems" Label="Shared" />
+
+  <Import Project="..\VectorTraits.Tests.Inc\VectorTraits.Tests.Inc.projitems" Label="Shared" />
 
 </Project>

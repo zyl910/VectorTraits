@@ -1,8 +1,11 @@
 ﻿@page "/showUnitTest"
 @inject IJSRuntime JS
+@using NUnit.Common
+@using NUnitLite
 @using System.Text
 @using System.Diagnostics
 @using Zyl.VectorTraits.Benchmarks
+@using Zyl.VectorTraits.Tests;
 
 <PageTitle>Show unit test</PageTitle>
 
@@ -42,7 +45,18 @@
         try {
             resultText = "";
             statePercentage = "";
-            await OnTestCoreAync(writer);
+            string indent = "";
+            writer.WriteLine();
+            BenchmarkUtil.OutputEnvironment(writer, indent);
+            writer.WriteLine();
+            resultText = "" + writer?.ToString();
+            await InvokeAsync(StateHasChanged);
+            await CallScrollMyTexArea();
+            await Task.Delay(1);
+            // Run.
+            //await OnTestCoreAync(writer);
+            OnTestCore(writer);
+            //await Task.Factory.StartNew(() => OnTestCore(writer), TaskCreationOptions.LongRunning); // No wait finish.
         } catch (Exception ex) {
             System.Diagnostics.Debug.WriteLine(ex);
             writer.WriteLine(ex);
@@ -51,34 +65,49 @@
         }
         statePercentage = "";
         // Show.
-        resultText = writer.ToString();
+        resultText = writer?.ToString();
         StateHasChanged();
-        if (IsScrollMyTexArea) {
-            await JS.InvokeVoidAsync("scrollMyTexArea");
+        await CallScrollMyTexArea();
+    }
+
+    private void OnTestCore(TextWriter writer) {
+        // AutoRun autoRun = new AutoRun();
+        // autoRun.Execute(args);
+        string[] args = { };
+        ExtendedTextWriter outWriter = new ExtendedTextWrapper(writer);
+        using (StringReader reader = new StringReader("")) {
+            var _testAssembly = typeof(VectorTextUtilTests).Assembly;
+            TextRunner textRunner = new TextRunner(_testAssembly);
+            textRunner.Execute(outWriter, reader, args);
         }
     }
 
-    private async Task OnTestCoreAync(TextWriter writer) {
-        string[] args = { };
-        string indent = "";
-        writer.WriteLine();
-        BenchmarkUtil.OutputEnvironment(writer, indent);
-        writer.WriteLine();
-        //TODO: Unit test
+    // private async Task OnTestCoreAync(TextWriter writer) {
+    //     string[] args = { };
+    //     ExtendedTextWriter outWriter = new ExtendedTextWrapper(writer);
+    //     using(StringReader reader = new StringReader("")) {
+    //         var _testAssembly = typeof(VectorTextUtilTests).Assembly;
+    //         TextRunner textRunner = new TextRunner(_testAssembly);
+    //         textRunner.Execute(outWriter, reader, args);
+    //     }
 
-        async Task onBefore(double percentage, string title) {
-            Debug.WriteLine(percentage);
-            try {
-                statePercentage = string.Format("{0:0.00}%: {1}", percentage, title);
-                resultText = "" + writer?.ToString();
-                await InvokeAsync(StateHasChanged);
-                if (IsScrollMyTexArea) {
-                    await JS.InvokeVoidAsync("scrollMyTexArea");
-                }
-                await Task.Delay(1);
-            } catch (Exception ex) {
-                Debug.WriteLine(ex);
-            }
+    //     async Task onBefore(double percentage, string title) {
+    //         Debug.WriteLine(percentage);
+    //         try {
+    //             statePercentage = string.Format("{0:0.00}%: {1}", percentage, title);
+    //             resultText = "" + writer?.ToString();
+    //             await InvokeAsync(StateHasChanged);
+    //             await CallScrollMyTexArea();
+    //             await Task.Delay(1);
+    //         } catch (Exception ex) {
+    //             Debug.WriteLine(ex);
+    //         }
+    //     }
+    // }
+
+    private async Task CallScrollMyTexArea() {
+        if (IsScrollMyTexArea) {
+            await JS.InvokeVoidAsync("scrollMyTexArea");
         }
     }
 
