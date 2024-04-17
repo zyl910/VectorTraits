@@ -1,15 +1,23 @@
-﻿using System;
+﻿#if NET8_0_OR_GREATER
+#define CHECK_WASM
+#endif // NET8_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+#if NET8_0_OR_GREATER
+using System.Runtime.Intrinsics.Wasm;
+#endif // NET8_0_OR_GREATER
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector128;
 
 namespace Zyl.VectorTraits {
     using BaseStatics = WVectorTraits128Base.Statics;
+    using BaseStaticsWasm = WVectorTraits128Base.Statics;
 
     partial class Vector128s {
 #if NETCOREAPP3_0_OR_GREATER
@@ -142,6 +150,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> Add(Vector128<short> left, Vector128<short> right) {
+#if CHECK_WASM
+            if (PackedSimd.IsSupported) {
+                return BaseStaticsWasm.Add(left, right);
+            }
+#endif // CHECK_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Add(left, right);
 #else
