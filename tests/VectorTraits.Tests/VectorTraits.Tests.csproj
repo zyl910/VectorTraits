@@ -53,4 +53,6 @@
     <ProjectReference Include="..\..\src\VectorTraits\VectorTraits.csproj" />
   </ItemGroup>
 
+  <Import Project="..\VectorTraits.Tests.Inc\VectorTraits.Tests.Inc.projitems" Label="Shared" />
+
 </Project>

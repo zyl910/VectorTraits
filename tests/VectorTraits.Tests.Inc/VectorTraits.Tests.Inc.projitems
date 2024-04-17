@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>be768355-83f8-4ab1-af0e-b19025bcf6c7</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>VectorTraits.Tests</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)BitMathTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BitMathTests_IRootFunctions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_C.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_D.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_E.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_F.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_M.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_N.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_S.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_W.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_YB.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_YC.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_YI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_YM.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_YN.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_YO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_YR.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_YS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_A.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_B.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_C.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_D.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_E.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_F.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_G.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_L.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_M.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_N.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_O.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_S.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_W.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_X.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_YB.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_YC.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_YI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_YM.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_YN.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_YO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_YR.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_YS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_A.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_B.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_C.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_D.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_E.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_F.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_G.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_L.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_M.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_N.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_O.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_S.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_W.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_X.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_YB.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_YC.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_YI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_YM.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_YN.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_YO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_YR.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_YS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_A.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_B.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_C.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_D.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_E.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_F.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_G.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_L.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_M.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_N.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_O.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_S.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_W.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_X.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_YB.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_YC.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_YI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_YM.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_YN.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_YO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_YR.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_YS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\ReflectionUtilTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\Vector128ConstantsTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\Vector256ConstantsTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\VectorConstantsTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\VectorGenericTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MathTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Numerics\BitMathCoreTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Numerics\MathBinaryPrimitivesTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Numerics\MathBitConverterTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Numerics\MathIFloatingPointTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Numerics\MathINumberBaseTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Numerics\MathINumberTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Numerics\MathIRootFunctionsTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Numerics\MathOperatorsTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ScalarsTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TestDataSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tuples\Vector128XTupleTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tuples\Vector256XTupleTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tuples\VectorXTupleTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypeCodeFlagsUtilTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Vector128sTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Vector256sTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Vector64sTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)VectorsTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)VectorTextUtilTests.cs" />
+  </ItemGroup>
+</Project>
