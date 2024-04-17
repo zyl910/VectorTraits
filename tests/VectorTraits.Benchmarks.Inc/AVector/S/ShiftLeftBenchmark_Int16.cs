@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+#if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
+#endif
 using System.Text;
 using System.Threading;
 using Zyl.VectorTraits.Impl;

@@ -357,7 +357,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector128<TMy> vtemp = Vector128.Shuffle(p0, indicesUsed);
-                vrt += vtemp; // Add.
+                // vrt += vtemp; // Add.
+                vrt = Vector128.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
