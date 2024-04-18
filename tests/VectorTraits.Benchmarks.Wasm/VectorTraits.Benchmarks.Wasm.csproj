@@ -1,17 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net7.0</TargetFrameworks>
+    <IsTestProject>false</IsTestProject>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);REDUCE_MEMORY_USAGE;DRY_JOB0;BENCHMARKS_OFF;BENCHMARKS_128;BENCHMARKS_256;BENCHMARKS_512;BENCHMARKS_ALGORITHM;BENCHMARKS_128ALGORITHM;BENCHMARKS_256ALGORITHM;BENCHMARKS_512ALGORITHM;BENCHMARKS_RAW;BENCHMARKS_TARGET_FAST;BENCHMARKS_TRAITS_USAGES</DefineConstants>
   </PropertyGroup>
-
-  <ItemGroup>
-      <PackageReference Include="NUnit" Version="3.12.0" />
-      <PackageReference Include="NUnitLite" Version="3.12.0" />
-  </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.18" />
@@ -22,6 +18,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.4" PrivateAssets="all" />
   </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="NUnit" Version="4.1.0" />
+        <PackageReference Include="NUnitLite" Version="4.1.0" />
+    </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\VectorTraits\VectorTraits.csproj" />
