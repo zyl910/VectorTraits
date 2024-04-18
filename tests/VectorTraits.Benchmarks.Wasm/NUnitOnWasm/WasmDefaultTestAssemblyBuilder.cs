@@ -146,7 +146,7 @@ namespace NUnit.Framework.Api {
 
         #region Helper Methods
 
-        private IList<Test> GetFixtures(Assembly assembly, object filter) { //  PreFilter filter
+        private IList<Test> GetFixtures(Assembly assembly, object? filter) { //  PreFilter filter
             var fixtures = new List<Test>();
             Log.Debug("Examining assembly for test fixtures");
 
@@ -204,12 +204,12 @@ namespace NUnit.Framework.Api {
 
             testAssembly.ApplyAttributesToTest(assembly);
 
-            try {
-                using var process = System.Diagnostics.Process.GetCurrentProcess();
-                testAssembly.Properties.Set(PropertyNames.ProcessId, process.Id);
-            } catch (PlatformNotSupportedException) {
-            }
-            testAssembly.Properties.Set(PropertyNames.AppDomain, AppDomain.CurrentDomain.FriendlyName);
+            //try {
+            //    using var process = System.Diagnostics.Process.GetCurrentProcess();
+            //    testAssembly.Properties.Set(PropertyNames.ProcessId, process.Id);
+            //} catch (PlatformNotSupportedException) {
+            //}
+            //testAssembly.Properties.Set(PropertyNames.AppDomain, AppDomain.CurrentDomain.FriendlyName);
 
             // TODO: Make this an option? Add Option to sort assemblies as well?
             testAssembly.Sort();

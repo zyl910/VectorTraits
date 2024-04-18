@@ -68,7 +68,7 @@
         }
         statePercentage = "";
         // Show.
-        resultText = writer?.ToString();
+        resultText = writer.ToString() ?? "";
         StateHasChanged();
         await CallScrollMyTexArea();
     }

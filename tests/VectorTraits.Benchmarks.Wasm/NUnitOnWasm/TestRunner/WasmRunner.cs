@@ -70,7 +70,7 @@ namespace NUnitOnWasm.TestRunner {
         public int Execute(string[] args) {
             _options = new NUnitLiteOptions(_testAssembly == null, args);
 
-            ExtendedTextWriter outWriter = null;
+            ExtendedTextWriter? outWriter = null;
             if (_options.OutFile != null) {
                 var outFile = Path.Combine(_options.WorkDirectory, _options.OutFile);
                 var textWriter = TextWriter.Synchronized(new StreamWriter(outFile));
@@ -81,7 +81,7 @@ namespace NUnitOnWasm.TestRunner {
             }
 
             using (outWriter) {
-                TextWriter errWriter = null;
+                TextWriter? errWriter = null;
                 if (_options.ErrFile != null) {
                     var errFile = Path.Combine(_options.WorkDirectory, _options.ErrFile);
                     errWriter = TextWriter.Synchronized(new StreamWriter(errFile));
@@ -110,7 +110,8 @@ namespace NUnitOnWasm.TestRunner {
             _runner = new NUnitTestAssemblyRunner(new WasmDefaultTestAssemblyBuilder());
 
             InitializeInternalTrace();
-
+            if (null == _options) return -1;
+            if (null == _textUI) return -1;
             try {
                 if (!Directory.Exists(_options.WorkDirectory))
                     Directory.CreateDirectory(_options.WorkDirectory);
@@ -179,14 +180,16 @@ namespace NUnitOnWasm.TestRunner {
 
         private void LoadTests(IDictionary<string, object> runSettings) {
             TimeStamp startTime = new TimeStamp();
-            _runner.Load(_testAssembly, runSettings);
+            _runner?.Load(_testAssembly, runSettings);
             TimeStamp endTime = new TimeStamp();
 
-            _textUI.DisplayDiscoveryReport(startTime, endTime);
+            _textUI?.DisplayDiscoveryReport(startTime, endTime);
         }
 
         public int RunTests(TestFilter filter, IDictionary<string, object> runSettings) {
             var startTime = DateTime.UtcNow;
+            if (null == _runner) return -1;
+            if (null == _options) return -1;
 
             ITestResult result = _runner.Run(this, filter);
 
@@ -198,6 +201,7 @@ namespace NUnitOnWasm.TestRunner {
                 foreach (var spec in _options.ResultOutputSpecifications)
                     outputManager.WriteResultFile(result, spec, runSettings, filter);
             }
+            if (null == Summary) return -1;
             if (Summary.InvalidTestFixtures > 0)
                 return INVALID_TEST_FIXTURE;
 
@@ -206,6 +210,7 @@ namespace NUnitOnWasm.TestRunner {
 
         public void ReportResults(ITestResult result) {
             Summary = new ResultSummary(result);
+            if (null == _textUI) return;
 
             if (Summary.ExplicitCount + Summary.SkipCount + Summary.IgnoreCount > 0)
                 _textUI.DisplayNotRunReport(result);
@@ -219,6 +224,8 @@ namespace NUnitOnWasm.TestRunner {
         }
 
         private int ExploreTests(ITestFilter filter) {
+            if (null == _runner) return -1;
+            if (null == _options) return -1;
             ITest testNode = _runner.ExploreTests(filter);
 
             var specs = _options.ExploreOutputSpecifications;
@@ -303,18 +310,18 @@ namespace NUnitOnWasm.TestRunner {
         }
 
         private void InitializeInternalTrace() {
-            var traceLevel = (InternalTraceLevel)Enum.Parse(typeof(InternalTraceLevel), _options.InternalTraceLevel ?? "Off", true);
+            var traceLevel = (InternalTraceLevel)Enum.Parse(typeof(InternalTraceLevel), _options?.InternalTraceLevel ?? "Off", true);
 
             if (traceLevel != InternalTraceLevel.Off) {
                 var logName = GetLogFileName();
 
-                StreamWriter streamWriter = null;
+                StreamWriter? streamWriter = null;
                 if (traceLevel > InternalTraceLevel.Off) {
                     string logPath = Path.Combine(Directory.GetCurrentDirectory(), logName);
                     streamWriter = new StreamWriter(new FileStream(logPath, FileMode.Append, FileAccess.Write, FileShare.Write));
                     streamWriter.AutoFlush = true;
                 }
-                InternalTrace.Initialize(streamWriter, traceLevel);
+                InternalTrace.Initialize(streamWriter!, traceLevel);
             }
         }
 
@@ -326,7 +333,7 @@ namespace NUnitOnWasm.TestRunner {
             const string ext = "log";
             var baseName = _testAssembly != null
                 ? _testAssembly.GetName().Name
-                : _options.InputFile != null
+                : _options?.InputFile != null
                     ? Path.GetFileNameWithoutExtension(_options.InputFile)
                     : "NUnitLite";
 
@@ -347,7 +354,7 @@ namespace NUnitOnWasm.TestRunner {
             if (_teamCity != null)
                 _teamCity.TestStarted(test);
 
-            _textUI.TestStarted(test);
+            _textUI?.TestStarted(test);
         }
 
         /// <summary>	
@@ -358,7 +365,7 @@ namespace NUnitOnWasm.TestRunner {
             if (_teamCity != null)
                 _teamCity.TestFinished(result);
 
-            _textUI.TestFinished(result);
+            _textUI?.TestFinished(result);
         }
 
         /// <summary>	
@@ -366,7 +373,7 @@ namespace NUnitOnWasm.TestRunner {
         /// </summary>	
         /// <param name="output">A TestOutput object containing the text to display</param>	
         public void TestOutput(TestOutput output) {
-            _textUI.TestOutput(output);
+            _textUI?.TestOutput(output);
         }
 
         /// <summary>	
