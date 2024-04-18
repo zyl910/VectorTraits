@@ -1,14 +1,21 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using System.IO;
+using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector256Tests_N {
 #if NETCOREAPP3_0_OR_GREATER
@@ -64,7 +71,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         // Compatible floating-point NaN.
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
                     }
                 }
                 foreach (var func in funcList) {
@@ -74,7 +81,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     // Compatible floating-point NaN.
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
+                        ClassicAssert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
                     }
                 }
             }
@@ -119,7 +126,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         // Compatible floating-point NaN.
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, vector={vector}");
+                        ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, vector={vector}");
                     }
                 }
             }

@@ -1,12 +1,17 @@
 ﻿using NUnit.Framework;
-using Zyl.VectorTraits;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class VectorTextUtilTests {
         private static readonly int[] LenArray = { 0, 0x10 };
@@ -27,7 +32,7 @@ namespace Zyl.VectorTraits.Tests {
                 VectorTextUtil.Fill(arr, src);
                 // check.
                 foreach (T p in arr) {
-                    Assert.AreEqual(src, p);
+                    ClassicAssert.AreEqual(src, p);
                 }
             }
         }
@@ -39,16 +44,16 @@ namespace Zyl.VectorTraits.Tests {
             int dst;
             // No value.
             dst = VectorTextUtil.SplitKeyValueToInt("-accelerated", out key, defaultValue);
-            Assert.AreEqual(defaultValue, dst);
-            Assert.AreEqual("-accelerated", key);
+            ClassicAssert.AreEqual(defaultValue, dst);
+            ClassicAssert.AreEqual("-accelerated", key);
             // Use defaultValue.
             dst = VectorTextUtil.SplitKeyValueToInt("-accelerated=1", out key, defaultValue);
-            Assert.AreEqual(1, dst);
-            Assert.AreEqual("-accelerated", key);
+            ClassicAssert.AreEqual(1, dst);
+            ClassicAssert.AreEqual("-accelerated", key);
             // Value has space.
             dst = VectorTextUtil.SplitKeyValueToInt("-accelerated= 1", out key, defaultValue);
-            Assert.AreEqual(1, dst);
-            Assert.AreEqual("-accelerated", key);
+            ClassicAssert.AreEqual(1, dst);
+            ClassicAssert.AreEqual("-accelerated", key);
         }
 
     }

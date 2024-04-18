@@ -1,15 +1,19 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
+using System.IO;
 using System.Numerics;
-#if NETCOREAPP3_0_OR_GREATER
-using System.Runtime.Intrinsics;
-#endif
+using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class VectorTests_E {
 #if NETCOREAPP3_0_OR_GREATER
@@ -62,7 +66,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     if (allowLogItem) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, vector={vector}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, vector={vector}");
                     }
                 }
             }

@@ -1,11 +1,16 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Zyl.VectorTraits.Tests {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     /// <summary>
     /// Test data source.
     /// </summary>

@@ -1,16 +1,21 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
-using System.IO;
-
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using System.IO;
+using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector256Tests_L {
 #if NETCOREAPP3_0_OR_GREATER
@@ -54,7 +59,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         Vector256<T> dst = instance.LessThan((dynamic)left, (dynamic)right);
-                        Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                     }
                 }
             }
@@ -103,11 +108,11 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         if (!instance.GetIsSupported(true)) continue;
                         bool dst = instance.LessThanAll((dynamic)left, (dynamic)right);
                         bool showLog = showNotEquals && !expected.Equals(dst);
-                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use ClassicAssert.
                         if (allowLog || showLog) {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
                         } else {
-                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
                         }
                     }
                 }
@@ -157,11 +162,11 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         if (!instance.GetIsSupported(true)) continue;
                         bool dst = instance.LessThanAny((dynamic)left, (dynamic)right);
                         bool showLog = showNotEquals && !expected.Equals(dst);
-                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use ClassicAssert.
                         if (allowLog || showLog) {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
                         } else {
-                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
                         }
                     }
                 }
@@ -212,9 +217,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         Vector256<T> dst = instance.LessThanOrEqual((dynamic)left, (dynamic)right);
-                        //Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        //ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                         bool showLog = showNotEquals && !expected.AsByte().Equals(dst.AsByte());
-                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use ClassicAssert.
                         if (allowLog || showLog) {
                             if (!usedWrite) {
                                 usedWrite = true;
@@ -223,7 +228,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                             }
                             writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                         } else {
-                            Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                         }
                     }
                 }
@@ -273,11 +278,11 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         if (!instance.GetIsSupported(true)) continue;
                         bool dst = instance.LessThanOrEqualAll((dynamic)left, (dynamic)right);
                         bool showLog = showNotEquals && !expected.Equals(dst);
-                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use ClassicAssert.
                         if (allowLog || showLog) {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
                         } else {
-                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
                         }
                     }
                 }
@@ -327,11 +332,11 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         if (!instance.GetIsSupported(true)) continue;
                         bool dst = instance.LessThanOrEqualAny((dynamic)left, (dynamic)right);
                         bool showLog = showNotEquals && !expected.Equals(dst);
-                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use ClassicAssert.
                         if (allowLog || showLog) {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
                         } else {
-                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
                         }
                     }
                 }

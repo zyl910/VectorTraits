@@ -1,14 +1,21 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using System.IO;
+using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector256Tests_X {
 #if NETCOREAPP3_0_OR_GREATER
@@ -48,7 +55,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         Vector256<T> dst = instance.Xor(left, right);
-                        Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                     }
                 }
             }

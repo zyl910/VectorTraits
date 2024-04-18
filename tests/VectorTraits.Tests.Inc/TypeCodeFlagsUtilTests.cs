@@ -1,10 +1,16 @@
 ﻿using NUnit.Framework;
-using Zyl.VectorTraits;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Zyl.VectorTraits.Tests {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class TypeCodeFlagsUtilTests {
 
@@ -13,26 +19,26 @@ namespace Zyl.VectorTraits.Tests {
         [Test()]
         public void FromTypeCodeTest() {
             ElementTypeCode dst = TypeCodeFlagsUtil.FromTypeCode(TypeCode.Byte);
-            Assert.AreEqual(ElementTypeCode.Byte, dst);
+            ClassicAssert.AreEqual(ElementTypeCode.Byte, dst);
         }
 
         [Test()]
         public void ToTypeCodeTest() {
             TypeCode dst = TypeCodeFlagsUtil.ToTypeCode(ElementTypeCode.Byte);
-            Assert.AreEqual(TypeCode.Byte, dst);
+            ClassicAssert.AreEqual(TypeCode.Byte, dst);
         }
 #endif
 
         [Test()]
         public void FlagsFromTypeCodeTest() {
             TypeCodeFlags flags = TypeCodeFlagsUtil.FlagsFromTypeCode(ElementTypeCode.Byte);
-            Assert.AreEqual(TypeCodeFlags.Byte, flags);
+            ClassicAssert.AreEqual(TypeCodeFlags.Byte, flags);
         }
 
         [Test()]
         public void ForEachTest() {
             TypeCodeFlagsUtil.ForEach(TypeCodeFlagsUtil.FloatTypes, delegate (ElementTypeCode code) {
-                Assert.AreNotEqual(0, (int)code);
+                ClassicAssert.AreNotEqual(0, (int)code);
             });
         }
 
@@ -41,7 +47,7 @@ namespace Zyl.VectorTraits.Tests {
             const TypeCodeFlags expected = TypeCodeFlags.Double;
             TypeCodeFlags src = TypeCodeFlags.Int64;
             TypeCodeFlags dst = TypeCodeFlagsUtil.MapFlags(src, TypeCodeFlags.Int64, expected);
-            Assert.AreEqual(expected, dst);
+            ClassicAssert.AreEqual(expected, dst);
         }
 
         [Test()]
@@ -49,13 +55,13 @@ namespace Zyl.VectorTraits.Tests {
             const TypeCodeFlags expected = TypeCodeFlags.Single | TypeCodeFlags.Double;
             TypeCodeFlags src = TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
             TypeCodeFlags dst = TypeCodeFlagsUtil.MapFlags(src, TypeCodeFlags.Int32, TypeCodeFlags.Single, TypeCodeFlags.Int64, TypeCodeFlags.Double);
-            Assert.AreEqual(expected, dst);
+            ClassicAssert.AreEqual(expected, dst);
         }
 
         [Test()]
         public void ToEnumerableTest() {
             foreach (var code in TypeCodeFlagsUtil.ToEnumerable(TypeCodeFlagsUtil.IntTypes)) {
-                Assert.AreNotEqual(0, (int)code);
+                ClassicAssert.AreNotEqual(0, (int)code);
             }
         }
     }

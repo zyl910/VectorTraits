@@ -1,14 +1,21 @@
 ﻿using NUnit.Framework;
-using Zyl.VectorTraits;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Numerics;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using System.IO;
+using System.Text;
+using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector64sTests {
 #if NETCOREAPP3_0_OR_GREATER
@@ -29,24 +36,24 @@ namespace Zyl.VectorTraits.Tests {
             // params
             Vector64<T> v1 = Vector64s.CreatePadding(src);
             Vector64<T> v2 = Vector64s.CreatePadding(src, src);
-            Assert.AreNotEqual(vzero, v1);
-            Assert.AreNotEqual(vzero, v2);
+            ClassicAssert.AreNotEqual(vzero, v1);
+            ClassicAssert.AreNotEqual(vzero, v2);
             // []
             int vcount = Vector64<T>.Count;
             T[] arr = new T[vcount + 1];
             VectorTextUtil.Fill(arr, src);
             v1 = Vector64s.CreatePadding(arr);
-            Assert.AreNotEqual(vzero, v1);
+            ClassicAssert.AreNotEqual(vzero, v1);
             // Use int index, int length
             for (int i = 0; i <= arr.Length; ++i) {
                 int srcCount = i;
                 if (srcCount > vcount) srcCount = vcount;
                 Vector64<T> v = Vector64s.CreatePadding(arr, 0, i);
                 for (int j = 0; j < srcCount; ++j) {
-                    Assert.AreEqual(src, v.GetElement(j));
+                    ClassicAssert.AreEqual(src, v.GetElement(j));
                 }
                 for (int j = srcCount; j < vcount; ++j) {
-                    Assert.AreEqual(zero, v.GetElement(j));
+                    ClassicAssert.AreEqual(zero, v.GetElement(j));
                 }
             }
         }
@@ -66,14 +73,14 @@ namespace Zyl.VectorTraits.Tests {
             // params
             Vector64<T> v1 = Vector64s.CreateRotate(src);
             Vector64<T> v2 = Vector64s.CreateRotate(src, src);
-            Assert.AreNotEqual(vzero, v1);
-            Assert.AreNotEqual(vzero, v2);
+            ClassicAssert.AreNotEqual(vzero, v1);
+            ClassicAssert.AreNotEqual(vzero, v2);
             // []
             int vcount = Vector64<T>.Count;
             T[] arr = new T[vcount + 1];
             arr[0] = src;
             v1 = Vector64s.CreateRotate(arr);
-            Assert.AreNotEqual(vzero, v1);
+            ClassicAssert.AreNotEqual(vzero, v1);
             // Use int index, int length
             for (int i = 0; i <= arr.Length; ++i) {
                 int srcCount = i;
@@ -83,10 +90,10 @@ namespace Zyl.VectorTraits.Tests {
                     for (int j = 0; j < srcCount; ++j) {
                         int pos = j % srcCount;
                         T cur = arr[pos];
-                        Assert.AreEqual(cur, v.GetElement(j));
+                        ClassicAssert.AreEqual(cur, v.GetElement(j));
                     }
                 } else {
-                    Assert.AreNotEqual(vzero, v);
+                    ClassicAssert.AreNotEqual(vzero, v);
                 }
             }
         }

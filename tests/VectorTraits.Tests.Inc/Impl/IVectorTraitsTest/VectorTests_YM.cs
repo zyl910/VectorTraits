@@ -1,13 +1,20 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Numerics;
 using System.Text;
-using System.Xml.Linq;
 using Zyl.VectorTraits.Extensions.SameW;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class VectorTests_YM {
 
@@ -61,7 +68,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                             dst = instance.YMaxNumber((dynamic)left, (dynamic)right); // [Debug] It is easy to debug the function again.
                             writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
                         } else {
-                            Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{funcName}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), $"{funcName}, left={left}, right={right}");
                         }
                     }
                 }
@@ -118,7 +125,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                             dst = instance.YMinNumber((dynamic)left, (dynamic)right); // [Debug] It is easy to debug the function again.
                             writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
                         } else {
-                            Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{funcName}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), $"{funcName}, left={left}, right={right}");
                         }
                     }
                 }

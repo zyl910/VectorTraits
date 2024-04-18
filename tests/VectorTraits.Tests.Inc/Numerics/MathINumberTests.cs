@@ -1,4 +1,7 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,6 +9,10 @@ using Zyl.VectorTraits;
 using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Tests.Numerics {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     internal class MathINumberTests {
 
@@ -39,7 +46,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                 expected = Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
 #endif
                 T dst = MathINumber.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
-                Assert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
+                ClassicAssert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
             }
         }
 
@@ -79,12 +86,12 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                     }
                     // CopySign_Bit.
                     dst = MathINumber.CopySign_Bit((dynamic)left, (dynamic)right);
-                    Assert.AreEqual(expected, dst, string.Format("CopySign_Bit({0}, {1})", left, right));
+                    ClassicAssert.AreEqual(expected, dst, string.Format("CopySign_Bit({0}, {1})", left, right));
                     // CopySign_Bcl.
 #if NET7_0_OR_GREATER
                     try {
                         dst = MathINumber.CopySign_Bcl((dynamic)left, (dynamic)right);
-                        Assert.AreEqual(expected, dst, string.Format("CopySign_Bcl({0}, {1})", left, right));
+                        ClassicAssert.AreEqual(expected, dst, string.Format("CopySign_Bcl({0}, {1})", left, right));
                     } catch (Exception ex) {
                         VectorTextUtil.WriteLine(writer, "CopySign_Bcl({0}, {1}):\t{2}", left, right, ex.Message);
                     }
@@ -118,7 +125,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                     T dst;
                     expected = Math.Max((dynamic)left, (dynamic)right);
                     dst = MathINumber.Max((dynamic)left, (dynamic)right);
-                    Assert.AreEqual(expected, dst, $"{left} < {right}");
+                    ClassicAssert.AreEqual(expected, dst, $"{left} < {right}");
                     //Console.WriteLine($"{left} < {right}: {expected}");
                 }
             }
@@ -156,11 +163,11 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                     }
                     // MaxNumber_Bit.
                     dst = MathINumber.MaxNumber_Bit((dynamic)left, (dynamic)right);
-                    Assert.AreEqual(expected, dst, string.Format("MaxNumber_Bit({0}, {1})", left, right));
+                    ClassicAssert.AreEqual(expected, dst, string.Format("MaxNumber_Bit({0}, {1})", left, right));
                     // MaxNumber_Bcl.
 #if NET7_0_OR_GREATER
                     dst = MathINumber.MaxNumber_Bcl((dynamic)left, (dynamic)right);
-                    Assert.AreEqual(expected, dst, string.Format("MaxNumber_Bcl({0}, {1})", left, right));
+                    ClassicAssert.AreEqual(expected, dst, string.Format("MaxNumber_Bcl({0}, {1})", left, right));
 #endif // NET7_0_OR_GREATER
                 }
             }
@@ -191,7 +198,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                     T dst;
                     expected = Math.Min((dynamic)left, (dynamic)right);
                     dst = MathINumber.Min((dynamic)left, (dynamic)right);
-                    Assert.AreEqual(expected, dst, $"{left} < {right}");
+                    ClassicAssert.AreEqual(expected, dst, $"{left} < {right}");
                     //Console.WriteLine($"{left} < {right}: {expected}");
                 }
             }
@@ -229,11 +236,11 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                     }
                     // MinNumber_Bit.
                     dst = MathINumber.MinNumber_Bit((dynamic)left, (dynamic)right);
-                    Assert.AreEqual(expected, dst, string.Format("MinNumber_Bit({0}, {1})", left, right));
+                    ClassicAssert.AreEqual(expected, dst, string.Format("MinNumber_Bit({0}, {1})", left, right));
                     // MinNumber_Bcl.
 #if NET7_0_OR_GREATER
                     dst = MathINumber.MinNumber_Bcl((dynamic)left, (dynamic)right);
-                    Assert.AreEqual(expected, dst, string.Format("MinNumber_Bcl({0}, {1})", left, right));
+                    ClassicAssert.AreEqual(expected, dst, string.Format("MinNumber_Bcl({0}, {1})", left, right));
 #endif // NET7_0_OR_GREATER
                 }
             }
@@ -267,11 +274,11 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                 }
                 // Sign_Bit.
                 int dst = MathINumber.Sign_Bit((dynamic)x);
-                Assert.AreEqual(expected, dst, string.Format("Sign_Bit({0})", x));
+                ClassicAssert.AreEqual(expected, dst, string.Format("Sign_Bit({0})", x));
                 // Sign_Bcl.
                 try {
                     dst = MathINumber.Sign_Bcl((dynamic)x);
-                    Assert.AreEqual(expected, dst, string.Format("Sign_Bcl({0})", x));
+                    ClassicAssert.AreEqual(expected, dst, string.Format("Sign_Bcl({0})", x));
                 } catch (Exception ex) {
                     VectorTextUtil.WriteLine(writer, "Sign_Bcl({0}):\t{1}", x, ex.Message);
                 }
@@ -302,11 +309,11 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                 }
                 // SignFloat_Bit.
                 T dst = MathINumber.SignFloat_Bit((dynamic)x);
-                Assert.AreEqual(expected, dst, string.Format("SignFloat_Bit({0})", x));
+                ClassicAssert.AreEqual(expected, dst, string.Format("SignFloat_Bit({0})", x));
                 // SignFloat_Bcl.
                 try {
                     dst = MathINumber.SignFloat_Bcl((dynamic)x);
-                    Assert.AreEqual(expected, dst, string.Format("SignFloat_Bcl({0})", x));
+                    ClassicAssert.AreEqual(expected, dst, string.Format("SignFloat_Bcl({0})", x));
                 } catch (Exception ex) {
                     VectorTextUtil.WriteLine(writer, "SignFloat_Bcl({0}):\t{1}", x, ex.Message);
                 }

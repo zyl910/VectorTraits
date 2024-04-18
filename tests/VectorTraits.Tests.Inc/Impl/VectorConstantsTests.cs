@@ -1,11 +1,19 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Numerics;
 using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class VectorConstantsTests {
 
@@ -26,7 +34,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
 #pragma warning disable CS0618 // Type or member is obsolete
                 Vector<T> dst = VectorConstants.GetMaskBits<T>(i);
 #pragma warning restore CS0618 // Type or member is obsolete
-                Assert.AreEqual(expected, dst, $"index={i}");
+                ClassicAssert.AreEqual(expected, dst, $"index={i}");
             }
         }
 
@@ -47,7 +55,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
 #pragma warning disable CS0618 // Type or member is obsolete
                 Vector<T> dst = VectorConstants.GetResidueMaskBits<T>(i);
 #pragma warning restore CS0618 // Type or member is obsolete
-                Assert.AreEqual(expected, dst, $"index={i}");
+                ClassicAssert.AreEqual(expected, dst, $"index={i}");
             }
         }
 

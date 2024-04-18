@@ -1,5 +1,8 @@
 ﻿#if ALLOW_VECTOR_TUPLES
 using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +13,10 @@ using System.Runtime.Intrinsics;
 using Zyl.VectorTraits.Tuples;
 
 namespace Zyl.VectorTraits.Tests.Tuples {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector256XTupleTests {
 #if NETCOREAPP3_0_OR_GREATER

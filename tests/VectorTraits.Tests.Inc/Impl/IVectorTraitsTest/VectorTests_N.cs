@@ -1,13 +1,19 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Numerics;
-using System.Security.Cryptography;
 using System.Text;
-using System.Xml.Linq;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class VectorTests_N {
 
@@ -62,7 +68,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                         // Compatible floating-point NaN.
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
                     }
                 }
                 foreach (var func in funcList) {
@@ -72,7 +78,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     // Compatible floating-point NaN.
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
+                        ClassicAssert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
                     }
                 }
             }

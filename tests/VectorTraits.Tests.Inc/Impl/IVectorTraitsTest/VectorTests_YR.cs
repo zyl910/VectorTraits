@@ -1,4 +1,7 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +11,10 @@ using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
 
 namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class VectorTests_YR {
 
@@ -50,7 +57,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     if (allowLog || (showNotEquals && !expected.Equals(dst))) {
                         writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 writer.WriteLine();
@@ -170,7 +177,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     if (allowLog || (showNotEquals && !expected.Equals(dst))) {
                         writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 writer.WriteLine();

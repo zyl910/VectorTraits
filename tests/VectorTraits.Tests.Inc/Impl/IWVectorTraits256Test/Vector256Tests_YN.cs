@@ -1,16 +1,21 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
-using System.IO;
-
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using System.IO;
+using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector256Tests_YN {
 #if NETCOREAPP3_0_OR_GREATER
@@ -61,7 +66,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 foreach (IWVectorTraits256 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector256<TOut> dst = instance.YNarrowSaturate((dynamic)lower, (dynamic)upper);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
+                    ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
                 }
                 foreach (var func in funcList) {
                     string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
@@ -69,7 +74,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     if (allowLogItem) {
                         writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}, lower={2}, upper={3}", funcName, dst, lower, upper));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
+                        ClassicAssert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
                     }
                 } // funcList
                 if (allowLog) {
@@ -121,7 +126,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 foreach (IWVectorTraits256 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector256<TOut> dst = instance.YNarrowSaturateUnsigned((dynamic)lower, (dynamic)upper);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
+                    ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
                 }
                 foreach (var func in funcList) {
                     string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
@@ -129,7 +134,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     if (allowLogItem) {
                         writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}, lower={2}, upper={3}", funcName, dst, lower, upper));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
+                        ClassicAssert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
                     }
                 } // funcList
                 if (allowLog) {

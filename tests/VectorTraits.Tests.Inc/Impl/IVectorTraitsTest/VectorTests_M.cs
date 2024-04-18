@@ -1,13 +1,19 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Numerics;
-using System.Security.Cryptography;
 using System.Text;
-using System.Xml.Linq;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class VectorTests_M {
 
@@ -46,7 +52,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                         // Compatible floating-point NaN.
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", "Vectors", dst, left, right));
                     } else {
-                        Assert.AreEqual(expected, dst, $"Vectors, left={left}, right={right}");
+                        ClassicAssert.AreEqual(expected, dst, $"Vectors, left={left}, right={right}");
                     }
                     // instances
                     foreach (IVectorTraits instance in instances) {
@@ -56,7 +62,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                             // Compatible floating-point NaN.
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
                         } else {
-                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
                         }
                     }
                 }

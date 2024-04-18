@@ -1,18 +1,21 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
-using System.IO;
-using System.Security.Cryptography;
-
-
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using System.IO;
+using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector512Tests_YN {
 #if NET8_0_OR_GREATER
@@ -63,7 +66,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                 foreach (IWVectorTraits512 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector512<TOut> dst = instance.YNarrowSaturate((dynamic)lower, (dynamic)upper);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
+                    ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
                 }
                 foreach (var func in funcList) {
                     string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
@@ -71,7 +74,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     if (allowLogItem) {
                         writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}, lower={2}, upper={3}", funcName, dst, lower, upper));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
+                        ClassicAssert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
                     }
                 } // funcList
                 if (allowLog) {
@@ -123,7 +126,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                 foreach (IWVectorTraits512 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector512<TOut> dst = instance.YNarrowSaturateUnsigned((dynamic)lower, (dynamic)upper);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
+                    ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
                 }
                 foreach (var func in funcList) {
                     string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
@@ -131,7 +134,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     if (allowLogItem) {
                         writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}, lower={2}, upper={3}", funcName, dst, lower, upper));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
+                        ClassicAssert.AreEqual(expected, dst, $"{funcName}, lower={lower}, upper={upper}");
                     }
                 } // funcList
                 if (allowLog) {

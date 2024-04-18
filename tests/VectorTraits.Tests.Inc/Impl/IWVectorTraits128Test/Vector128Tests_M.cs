@@ -1,14 +1,21 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using System.IO;
+using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector128Tests_M {
 #if NETCOREAPP3_0_OR_GREATER
@@ -75,7 +82,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                             dst = instance.Max((dynamic)left, (dynamic)right); // [Debug] It is easy to debug the function again.
                             writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
                         } else {
-                            Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{funcName}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), $"{funcName}, left={left}, right={right}");
                         }
                     }
                 }
@@ -144,7 +151,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                             dst = instance.Min((dynamic)left, (dynamic)right); // [Debug] It is easy to debug the function again.
                             writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst));
                         } else {
-                            Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{funcName}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), $"{funcName}, left={left}, right={right}");
                         }
                     }
                 }
@@ -191,7 +198,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                             // Compatible floating-point NaN.
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
                         } else {
-                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
                         }
                     }
                 }

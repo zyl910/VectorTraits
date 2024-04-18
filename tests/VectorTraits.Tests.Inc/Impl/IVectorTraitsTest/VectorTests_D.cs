@@ -1,13 +1,19 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
 using System.Text;
-using System.Xml.Linq;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class VectorTests_D {
 
@@ -53,7 +59,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                             if (showNotEquals || isCompatible) {
                                 usedWrite = true;
                             } else {
-                                Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                                ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
                             }
                         }
                         if (usedWrite) {

@@ -1,4 +1,7 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,6 +9,10 @@ using Zyl.VectorTraits;
 using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Tests.Numerics {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     internal class BitMathCoreTests {
 
@@ -57,7 +64,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                 expected = Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
 #endif
                 T dst = BitMathCore.ClampToBitMax((dynamic)value, (dynamic)amax);
-                Assert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
+                ClassicAssert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
             }
         }
 
@@ -85,7 +92,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                 expected = (byte)Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
 #endif
                 byte dst = BitMathCore.ClampToByte((dynamic)value);
-                Assert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
+                ClassicAssert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
             }
         }
 
@@ -114,7 +121,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                     T dst;
                     expected = Math.Min((dynamic)left, (dynamic)right);
                     dst = BitMathCore.ConditionalSelect((dynamic)left < (dynamic)right, (dynamic)left, (dynamic)right);
-                    Assert.AreEqual(expected, dst, $"{left} < {right}");
+                    ClassicAssert.AreEqual(expected, dst, $"{left} < {right}");
                     //Console.WriteLine($"{left} < {right}: {expected}");
                 }
             }
@@ -142,7 +149,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                         for (byte n0 = 0; n0 <= 3; ++n0) {
                             byte expected = BitMathCore.GetByteByBit2(n3, n2, n1, n0);
                             byte dst = BitMathCore.GetByteByBit2R(n0, n1, n2, n3);
-                            Assert.AreEqual(expected, dst, $"({n0}, {n1}, {n2}, {n3})");
+                            ClassicAssert.AreEqual(expected, dst, $"({n0}, {n1}, {n2}, {n3})");
                             //Console.WriteLine($"GetByteByBit2R({n0}, {n1}, {n2}, {n3}) = 0x{dst:X2}\t// {dst}");
                         }
                     }

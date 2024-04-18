@@ -1,14 +1,21 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using System.IO;
+using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector128Tests_W {
 #if NETCOREAPP3_0_OR_GREATER
@@ -62,8 +69,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                         // Compatible floating-point NaN.
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, {2}", instance.GetType().Name, dst0, dst1));
                     } else {
-                        Assert.AreEqual(expected0, dst0, $"{instance.GetType().Name}, soure={soure}");
-                        Assert.AreEqual(expected1, dst1, $"{instance.GetType().Name}, soure={soure}");
+                        ClassicAssert.AreEqual(expected0, dst0, $"{instance.GetType().Name}, soure={soure}");
+                        ClassicAssert.AreEqual(expected1, dst1, $"{instance.GetType().Name}, soure={soure}");
                     }
                 }
             }

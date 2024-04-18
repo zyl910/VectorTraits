@@ -1,12 +1,18 @@
 ﻿using NUnit.Framework;
-using Zyl.VectorTraits;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography;
 using System.IO;
+using System.Text;
+using Zyl.VectorTraits;
 
 namespace Zyl.VectorTraits.Tests {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class MathTests {
 
@@ -57,7 +63,7 @@ namespace Zyl.VectorTraits.Tests {
                 }
             }
             writer.WriteLine("countError: {0}", countError);
-            //Assert.Zero(countError);
+            //ClassicAssert.Zero(countError);
         }
 
     }

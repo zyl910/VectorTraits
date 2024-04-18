@@ -1,13 +1,20 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
+using System.IO;
 using System.Numerics;
+using System.Text;
 using Zyl.VectorTraits.Extensions.SameW;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class VectorTests_YO {
 
@@ -46,7 +53,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     foreach (IVectorTraits instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         Vector<T> dst = instance.YOrNot(left, right);
-                        Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                     }
                 }
             }

@@ -1,13 +1,20 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
+using System.IO;
 using System.Numerics;
+using System.Text;
 using Zyl.VectorTraits.Extensions.SameW;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class VectorTests_YB {
 
@@ -46,13 +53,13 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                 foreach (IVectorTraits instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector<byte> dst = instance.YBitToByte(value);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                 }
                 foreach (var func in funcList) {
                     string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
                     Vector<byte> dst = func(value);
-                    Assert.AreEqual(expected, dst, $"{funcName}, value={value}");
-                    Assert.AreEqual(expected, dst, VectorTextUtil.Format("{0}, value={1}", funcName, value));
+                    ClassicAssert.AreEqual(expected, dst, $"{funcName}, value={value}");
+                    ClassicAssert.AreEqual(expected, dst, VectorTextUtil.Format("{0}, value={1}", funcName, value));
                     //Console.WriteLine(VectorTextUtil.Format("{2}({0}):\t{1}", value, expected, funcName));
                 }
             }
@@ -89,7 +96,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                 foreach (IVectorTraits instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector<short> dst = instance.YBitToInt16(value);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                 }
             }
         }
@@ -125,7 +132,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                 foreach (IVectorTraits instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector<int> dst = instance.YBitToInt32(value);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                 }
             }
         }
@@ -161,7 +168,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                 foreach (IVectorTraits instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector<long> dst = instance.YBitToInt64(value);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                 }
             }
         }

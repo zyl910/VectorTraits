@@ -1,4 +1,7 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +15,10 @@ using Zyl.VectorTraits.Impl.AVector256;
 using Zyl.VectorTraits.Impl.AVector512;
 
 namespace Zyl.VectorTraits.Tests.Impl {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class ReflectionUtilTests {
 
@@ -49,7 +56,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 totalMissed += n;
             }
             writer.WriteLine("Total missed: {0}", totalMissed);
-            Assert.Zero(totalMissed);
+            ClassicAssert.Zero(totalMissed);
         }
 
 #if NETCOREAPP3_0_OR_GREATER
@@ -83,7 +90,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 totalMissed += n;
             }
             writer.WriteLine("Total missed: {0}", totalMissed);
-            Assert.Zero(totalMissed);
+            ClassicAssert.Zero(totalMissed);
         }
 
         [Test()]
@@ -112,7 +119,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 totalMissed += n;
             }
             writer.WriteLine("Total missed: {0}", totalMissed);
-            Assert.Zero(totalMissed);
+            ClassicAssert.Zero(totalMissed);
         }
 
 #if NET8_0_OR_GREATER
@@ -142,7 +149,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 totalMissed += n;
             }
             writer.WriteLine("Total missed: {0}", totalMissed);
-            Assert.Zero(totalMissed);
+            ClassicAssert.Zero(totalMissed);
         }
 #endif // NET8_0_OR_GREATER
 
@@ -179,7 +186,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
                 totalMissed += n;
             }
             writer.WriteLine("Total missed: {0}", totalMissed);
-            Assert.Zero(totalMissed);
+            ClassicAssert.Zero(totalMissed);
         }
 
 #endif // NETCOREAPP3_0_OR_GREATER

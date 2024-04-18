@@ -1,4 +1,7 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,6 +9,10 @@ using Zyl.VectorTraits;
 using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Tests.Numerics {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     internal class MathOperatorsTests {
 
@@ -45,23 +52,23 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                     // bcl.
 #if NET5_0_OR_GREATER
                     high = Math.BigMul(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
 #endif // NET5_0_OR_GREATER
                     // MathOperators.BigMul .
                     high = MathOperators.BigMul(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("MathOperators.BigMul({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("MathOperators.BigMul({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("MathOperators.BigMul({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("MathOperators.BigMul({0}, {1}).high", a, b));
                     // BigMul_Two.
                     high = MathOperators.BigMul_Two(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("BigMul_Two({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("BigMul_Two({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("BigMul_Two({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("BigMul_Two({0}, {1}).high", a, b));
                     // BigMulHigh.
                     high = MathOperators.BigMulHigh(a, b);
-                    Assert.AreEqual(expectedHigh, high, string.Format("BigMulHigh({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("BigMulHigh({0}, {1}).high", a, b));
                     // BigMulLow.
                     low = MathOperators.BigMulLow(a, b);
-                    Assert.AreEqual(expectedLow, low, string.Format("BigMulLow({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("BigMulLow({0}, {1}).low", a, b));
                 }
             }
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -99,23 +106,23 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                     // bcl.
 #if NET5_0_OR_GREATER
                     high = Math.BigMul(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
 #endif // NET5_0_OR_GREATER
                     // MathOperators.BigMul .
                     high = MathOperators.BigMul(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("MathOperators.BigMul({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("MathOperators.BigMul({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("MathOperators.BigMul({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("MathOperators.BigMul({0}, {1}).high", a, b));
                     // BigMul_Two.
                     high = MathOperators.BigMul_Two(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("BigMul_Two({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("BigMul_Two({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("BigMul_Two({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("BigMul_Two({0}, {1}).high", a, b));
                     // BigMulHigh.
                     high = MathOperators.BigMulHigh(a, b);
-                    Assert.AreEqual(expectedHigh, high, string.Format("BigMulHigh({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("BigMulHigh({0}, {1}).high", a, b));
                     // BigMulLow.
                     low = MathOperators.BigMulLow(a, b);
-                    Assert.AreEqual(expectedLow, low, string.Format("BigMulLow({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("BigMulLow({0}, {1}).low", a, b));
                 }
             }
 #pragma warning restore CS0618 // Type or member is obsolete

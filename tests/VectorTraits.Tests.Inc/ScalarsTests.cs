@@ -1,10 +1,17 @@
 ﻿using NUnit.Framework;
-using Zyl.VectorTraits;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Zyl.VectorTraits;
 
 namespace Zyl.VectorTraits.Tests {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class ScalarsTests {
 
@@ -21,7 +28,7 @@ namespace Zyl.VectorTraits.Tests {
         public void GetByDoubleTest<T>(T src) {
             double srcDouble = double.Parse("" + src);
             T dst = Scalars.GetByDouble<T>(srcDouble);
-            Assert.AreEqual(src, dst);
+            ClassicAssert.AreEqual(src, dst);
         }
 
         [TestCase((sbyte)3)]
@@ -39,8 +46,8 @@ namespace Zyl.VectorTraits.Tests {
             int iMaxLoop = iMax + (int)Scalars.GetInt64BitsFrom<T>(src);
             for (int i= iMinLoop; i<= iMaxLoop; ++i) {
                 int dst = Scalars.LimitShiftAmount<T>(i);
-                Assert.GreaterOrEqual(dst, iMin);
-                Assert.LessOrEqual(dst, iMax);
+                ClassicAssert.GreaterOrEqual(dst, iMin);
+                ClassicAssert.LessOrEqual(dst, iMax);
             }
         }
     }

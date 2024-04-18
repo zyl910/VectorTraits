@@ -1,11 +1,18 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Numerics;
+using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class VectorsTests {
 
@@ -25,24 +32,24 @@ namespace Zyl.VectorTraits.Tests {
             // params
             Vector<T> v1 = Vectors.CreatePadding(src);
             Vector<T> v2 = Vectors.CreatePadding(src, src);
-            Assert.AreNotEqual(vzero, v1);
-            Assert.AreNotEqual(vzero, v2);
+            ClassicAssert.AreNotEqual(vzero, v1);
+            ClassicAssert.AreNotEqual(vzero, v2);
             // []
             int vcount = Vector<T>.Count;
             T[] arr = new T[vcount + 1];
             VectorTextUtil.Fill(arr, src);
             v1 = Vectors.CreatePadding(arr);
-            Assert.AreNotEqual(vzero, v1);
+            ClassicAssert.AreNotEqual(vzero, v1);
             // Use int index, int length
             for (int i = 0; i <= arr.Length; ++i) {
                 int srcCount = i;
                 if (srcCount > vcount) srcCount = vcount;
                 Vector<T> v = Vectors.CreatePadding(arr, 0, i);
                 for (int j = 0; j < srcCount; ++j) {
-                    Assert.AreEqual(src, v[j]);
+                    ClassicAssert.AreEqual(src, v[j]);
                 }
                 for (int j = srcCount; j < vcount; ++j) {
-                    Assert.AreEqual(zero, v[j]);
+                    ClassicAssert.AreEqual(zero, v[j]);
                 }
             }
         }
@@ -62,14 +69,14 @@ namespace Zyl.VectorTraits.Tests {
             // params
             Vector<T> v1 = Vectors.CreateRotate(src);
             Vector<T> v2 = Vectors.CreateRotate(src, src);
-            Assert.AreNotEqual(vzero, v1);
-            Assert.AreNotEqual(vzero, v2);
+            ClassicAssert.AreNotEqual(vzero, v1);
+            ClassicAssert.AreNotEqual(vzero, v2);
             // []
             int vcount = Vector<T>.Count;
             T[] arr = new T[vcount + 1];
             arr[0] = src;
             v1 = Vectors.CreateRotate(arr);
-            Assert.AreNotEqual(vzero, v1);
+            ClassicAssert.AreNotEqual(vzero, v1);
             // Use int index, int length
             for (int i = 0; i <= arr.Length; ++i) {
                 int srcCount = i;
@@ -79,10 +86,10 @@ namespace Zyl.VectorTraits.Tests {
                     for (int j = 0; j < srcCount; ++j) {
                         int pos = j % srcCount;
                         T cur = arr[pos];
-                        Assert.AreEqual(cur, v[j]);
+                        ClassicAssert.AreEqual(cur, v[j]);
                     }
                 } else {
-                    Assert.AreNotEqual(vzero, v);
+                    ClassicAssert.AreNotEqual(vzero, v);
                 }
             }
         }

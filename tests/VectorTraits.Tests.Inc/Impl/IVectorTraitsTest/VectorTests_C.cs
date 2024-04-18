@@ -1,13 +1,19 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Numerics;
-using System.Security.Cryptography;
 using System.Text;
-using System.Xml.Linq;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class VectorTests_C {
 
@@ -229,7 +235,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     if (allowLog) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 Console.WriteLine();
@@ -265,7 +271,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     if (allowLog) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 Console.WriteLine();
@@ -306,7 +312,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     if (allowLog) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 foreach (var func in funcList) {
@@ -458,7 +464,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     if (allowLog || (showNotEquals && !expected.Equals(dst))) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 Console.WriteLine();
@@ -494,7 +500,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     if (allowLog) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 Console.WriteLine();
@@ -536,7 +542,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     if (allowLog) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 foreach (var func in funcList) {

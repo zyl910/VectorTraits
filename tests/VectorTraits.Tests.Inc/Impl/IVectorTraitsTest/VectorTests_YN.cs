@@ -1,12 +1,19 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Numerics;
 using System.Text;
-using System.Xml.Linq;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class VectorTests_YN {
 
@@ -49,7 +56,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                 foreach (IVectorTraits instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector<TOut> dst = instance.YNarrowSaturate((dynamic)lower, (dynamic)upper);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
+                    ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
                 }
             }
         }
@@ -90,7 +97,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                 foreach (IVectorTraits instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector<TOut> dst = instance.YNarrowSaturateUnsigned((dynamic)lower, (dynamic)upper);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
+                    ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
                 }
             }
         }

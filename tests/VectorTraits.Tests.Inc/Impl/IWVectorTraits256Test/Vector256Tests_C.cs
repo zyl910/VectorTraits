@@ -1,17 +1,23 @@
 ﻿using NUnit.Framework;
+using NUnit.Framework.Internal;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
-using System.Reflection;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
-using NUnit.Framework.Internal;
+using System.IO;
+using System.Text;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector256;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector256Tests_C {
 #if NETCOREAPP3_0_OR_GREATER
@@ -90,9 +96,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                             // NaN equality problem --
                             // Expected: <-1.7976931348623157E+308, NaN>
                             // But was:  <-1.7976931348623157E+308, NaN>
-                            //Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, condition={condition}, left={left}, right={right}");
+                            //ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, condition={condition}, left={left}, right={right}");
                             // Fixed NaN equality problem.
-                            Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, condition={condition}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, condition={condition}, left={left}, right={right}");
                         }
                     }
                 }
@@ -291,7 +297,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     if (allowLog) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 Console.WriteLine();
@@ -342,7 +348,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     if (allowLog) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 foreach (var func in funcList) {
@@ -380,7 +386,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
                         Vector256<long> dst = instance.ConvertToInt64((dynamic)value);
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                     bool usedWrite = false;
                     // funcList.
@@ -464,7 +470,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     if (allowLog) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 foreach (var func in funcList) {
@@ -632,7 +638,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                         }
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 foreach (var func in funcList) {
@@ -670,7 +676,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
                         Vector256<uint> dst = instance.ConvertToUInt32((dynamic)value);
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                     bool usedWrite = false;
                     // funcList.
@@ -768,7 +774,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                         }
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 foreach (var func in funcList) {
@@ -821,7 +827,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     if (allowLog) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 foreach (var func in funcList) {

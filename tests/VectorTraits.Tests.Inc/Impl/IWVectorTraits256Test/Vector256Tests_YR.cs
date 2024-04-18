@@ -1,15 +1,22 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using System.IO;
+using System.Text;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector256;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector256Tests_YR {
 #if NETCOREAPP3_0_OR_GREATER
@@ -53,7 +60,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     if (allowLog || (showNotEquals && !expected.Equals(dst))) {
                         writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 writer.WriteLine();
@@ -173,7 +180,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     if (allowLog || (showNotEquals && !expected.Equals(dst))) {
                         writer.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                     }
                 }
                 writer.WriteLine();

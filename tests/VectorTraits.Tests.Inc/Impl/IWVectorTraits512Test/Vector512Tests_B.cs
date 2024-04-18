@@ -1,14 +1,21 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using System.IO;
+using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector512Tests_B {
 #if NET8_0_OR_GREATER
@@ -48,7 +55,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     foreach (IWVectorTraits512 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         Vector512<T> dst = instance.BitwiseAnd(left, right);
-                        Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                     }
                 }
             }
@@ -89,7 +96,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     foreach (IWVectorTraits512 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         Vector512<T> dst = instance.BitwiseOr(left, right);
-                        Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                        ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                     }
                 }
             }

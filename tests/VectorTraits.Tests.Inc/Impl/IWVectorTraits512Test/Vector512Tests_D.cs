@@ -1,17 +1,21 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
-using System.Numerics;
-using System.IO;
-
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using System.IO;
+using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector512Tests_D {
 #if NET8_0_OR_GREATER
@@ -49,7 +53,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                             // Compatible floating-point NaN.
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
                         } else {
-                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
                         }
                     }
                 }
@@ -102,7 +106,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                             if (showNotEquals || isCompatible) {
                                 usedWrite = true;
                             } else {
-                                Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                                ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
                             }
                         }
                         if (usedWrite) {

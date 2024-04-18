@@ -1,17 +1,24 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Zyl.VectorTraits;
 
 namespace Zyl.VectorTraits.Tests {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [Obsolete("It has been instead by Zyl.VectorTraits.Tests.Numerics namespace.")]
     [TestFixture()]
     public class BitMathTests {
         [Test()]
         public void SingleToInt32BitsTest() {
             int n = BitMath.SingleToInt32Bits((float)1);
-            Assert.AreNotEqual(0, n);
+            ClassicAssert.AreNotEqual(0, n);
         }
 
         [Test()]
@@ -36,7 +43,7 @@ namespace Zyl.VectorTraits.Tests {
                         for (byte n0 = 0; n0 <= 3; ++n0) {
                             byte expected = BitMath.GetByteByBit2(n3, n2, n1, n0);
                             byte dst = BitMath.GetByteByBit2R(n0, n1, n2, n3);
-                            Assert.AreEqual(expected, dst, $"({n0}, {n1}, {n2}, {n3})");
+                            ClassicAssert.AreEqual(expected, dst, $"({n0}, {n1}, {n2}, {n3})");
                             //Console.WriteLine($"GetByteByBit2R({n0}, {n1}, {n2}, {n3}) = 0x{dst:X2}\t// {dst}");
                         }
                     }
@@ -114,7 +121,7 @@ namespace Zyl.VectorTraits.Tests {
                     T dst;
                     expected = Math.Min((dynamic)left, (dynamic)right);
                     dst = BitMath.ConditionalSelect((dynamic)left < (dynamic)right, (dynamic)left, (dynamic)right);
-                    Assert.AreEqual(expected, dst, $"{left} < {right}");
+                    ClassicAssert.AreEqual(expected, dst, $"{left} < {right}");
                     //Console.WriteLine($"{left} < {right}: {expected}");
                 }
             }
@@ -145,7 +152,7 @@ namespace Zyl.VectorTraits.Tests {
                     T dst;
                     expected = Math.Min((dynamic)left, (dynamic)right);
                     dst = BitMath.Min((dynamic)left, (dynamic)right);
-                    Assert.AreEqual(expected, dst, $"{left} < {right}");
+                    ClassicAssert.AreEqual(expected, dst, $"{left} < {right}");
                     //Console.WriteLine($"{left} < {right}: {expected}");
                 }
             }
@@ -176,7 +183,7 @@ namespace Zyl.VectorTraits.Tests {
                     T dst;
                     expected = Math.Max((dynamic)left, (dynamic)right);
                     dst = BitMath.Max((dynamic)left, (dynamic)right);
-                    Assert.AreEqual(expected, dst, $"{left} < {right}");
+                    ClassicAssert.AreEqual(expected, dst, $"{left} < {right}");
                     //Console.WriteLine($"{left} < {right}: {expected}");
                 }
             }
@@ -212,7 +219,7 @@ namespace Zyl.VectorTraits.Tests {
                 expected = Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
 #endif
                 T dst = BitMath.Clamp((dynamic)value, (dynamic)amin, (dynamic)amax);
-                Assert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
+                ClassicAssert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
             }
         }
 
@@ -240,7 +247,7 @@ namespace Zyl.VectorTraits.Tests {
                 expected = Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
 #endif
                 T dst = BitMath.ClampToBitMax((dynamic)value, (dynamic)amax);
-                Assert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
+                ClassicAssert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
             }
         }
 
@@ -268,7 +275,7 @@ namespace Zyl.VectorTraits.Tests {
                 expected = (byte)Math.Min(Math.Max((dynamic)value, (dynamic)amin), (dynamic)amax);
 #endif
                 byte dst = BitMath.ClampToByte((dynamic)value);
-                Assert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
+                ClassicAssert.AreEqual(expected, dst, $"{value}, [{amin}, {nmax}]");
             }
         }
 
@@ -299,7 +306,7 @@ namespace Zyl.VectorTraits.Tests {
                 if (expectedError) {
                     Console.WriteLine("Abs({0}):\t{1}", x, dst);
                 } else {
-                    Assert.AreEqual(expected, dst, string.Format("Abs({0})", x));
+                    ClassicAssert.AreEqual(expected, dst, string.Format("Abs({0})", x));
                 }
             }
         }
@@ -340,23 +347,23 @@ namespace Zyl.VectorTraits.Tests {
                     // bcl.
 #if NET5_0_OR_GREATER
                     high = Math.BigMul(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
 #endif // NET5_0_OR_GREATER
                     // BitMath.BigMul .
                     high = BitMath.BigMul(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("BitMath.BigMul({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("BitMath.BigMul({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("BitMath.BigMul({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("BitMath.BigMul({0}, {1}).high", a, b));
                     // BigMul_Two.
                     high = BitMath.BigMul_Two(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("BigMul_Two({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("BigMul_Two({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("BigMul_Two({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("BigMul_Two({0}, {1}).high", a, b));
                     // BigMulHigh.
                     high = BitMath.BigMulHigh(a, b);
-                    Assert.AreEqual(expectedHigh, high, string.Format("BigMulHigh({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("BigMulHigh({0}, {1}).high", a, b));
                     // BigMulLow.
                     low = BitMath.BigMulLow(a, b);
-                    Assert.AreEqual(expectedLow, low, string.Format("BigMulLow({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("BigMulLow({0}, {1}).low", a, b));
                 }
             }
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -394,23 +401,23 @@ namespace Zyl.VectorTraits.Tests {
                     // bcl.
 #if NET5_0_OR_GREATER
                     high = Math.BigMul(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("BigMul_BigNum({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("BigMul_BigNum({0}, {1}).high", a, b));
 #endif // NET5_0_OR_GREATER
                     // BitMath.BigMul .
                     high = BitMath.BigMul(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("BitMath.BigMul({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("BitMath.BigMul({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("BitMath.BigMul({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("BitMath.BigMul({0}, {1}).high", a, b));
                     // BigMul_Two.
                     high = BitMath.BigMul_Two(a, b, out low);
-                    Assert.AreEqual(expectedLow, low, string.Format("BigMul_Two({0}, {1}).low", a, b));
-                    Assert.AreEqual(expectedHigh, high, string.Format("BigMul_Two({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("BigMul_Two({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("BigMul_Two({0}, {1}).high", a, b));
                     // BigMulHigh.
                     high = BitMath.BigMulHigh(a, b);
-                    Assert.AreEqual(expectedHigh, high, string.Format("BigMulHigh({0}, {1}).high", a, b));
+                    ClassicAssert.AreEqual(expectedHigh, high, string.Format("BigMulHigh({0}, {1}).high", a, b));
                     // BigMulLow.
                     low = BitMath.BigMulLow(a, b);
-                    Assert.AreEqual(expectedLow, low, string.Format("BigMulLow({0}, {1}).low", a, b));
+                    ClassicAssert.AreEqual(expectedLow, low, string.Format("BigMulLow({0}, {1}).low", a, b));
                 }
             }
 #pragma warning restore CS0618 // Type or member is obsolete

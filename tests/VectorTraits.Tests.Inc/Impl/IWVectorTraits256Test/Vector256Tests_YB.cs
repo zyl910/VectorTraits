@@ -1,15 +1,22 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using System.IO;
+using System.Text;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector256;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector256Tests_YB {
 #if NETCOREAPP3_0_OR_GREATER
@@ -50,13 +57,13 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 foreach (IWVectorTraits256 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector256<byte> dst = instance.YBitToByte(value);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                 }
                 foreach (var func in funcList) {
                     string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
                     Vector256<byte> dst = func(value);
-                    Assert.AreEqual(expected, dst, $"{funcName}, value={value}");
-                    Assert.AreEqual(expected, dst, VectorTextUtil.Format("{0}, value={1}", funcName, value));
+                    ClassicAssert.AreEqual(expected, dst, $"{funcName}, value={value}");
+                    ClassicAssert.AreEqual(expected, dst, VectorTextUtil.Format("{0}, value={1}", funcName, value));
                     //Console.WriteLine(VectorTextUtil.Format("{2}({0}):\t{1}", value, expected, funcName));
                 }
             }
@@ -93,7 +100,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 foreach (IWVectorTraits256 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector256<short> dst = instance.YBitToInt16(value);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                 }
             }
         }
@@ -129,7 +136,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 foreach (IWVectorTraits256 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector256<int> dst = instance.YBitToInt32(value);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                 }
             }
         }
@@ -165,7 +172,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 foreach (IWVectorTraits256 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector256<long> dst = instance.YBitToInt64(value);
-                    Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
+                    ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, value={value}");
                 }
             }
         }

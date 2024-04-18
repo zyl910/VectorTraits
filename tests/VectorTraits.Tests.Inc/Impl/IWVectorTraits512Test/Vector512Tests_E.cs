@@ -1,14 +1,21 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using System.IO;
+using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     public class Vector512Tests_E {
 #if NET8_0_OR_GREATER
@@ -61,7 +68,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     if (allowLogItem) {
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));
                     } else {
-                        Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, vector={vector}");
+                        ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, vector={vector}");
                     }
                 }
             }
@@ -111,11 +118,11 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                         if (!instance.GetIsSupported(true)) continue;
                         Vector512<T> dst = instance.Equals((dynamic)left, (dynamic)right);
                         bool showLog = showNotEquals && !expected.AsByte().Equals(dst.AsByte());
-                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use ClassicAssert.
                         if (allowLog || showLog) {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
                         } else {
-                            Assert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), $"{instance.GetType().Name}, left={left}, right={right}");
                         }
                     }
                 }
@@ -165,11 +172,11 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                         if (!instance.GetIsSupported(true)) continue;
                         bool dst = instance.EqualsAll((dynamic)left, (dynamic)right);
                         bool showLog = showNotEquals && !expected.Equals(dst);
-                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use ClassicAssert.
                         if (allowLog || showLog) {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
                         } else {
-                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
                         }
                     }
                 }
@@ -219,11 +226,11 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                         if (!instance.GetIsSupported(true)) continue;
                         bool dst = instance.EqualsAny((dynamic)left, (dynamic)right);
                         bool showLog = showNotEquals && !expected.Equals(dst);
-                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use Assert.
+                        if (0 == Scalars<T>.ExponentBits) showLog = false; // Integers alway use ClassicAssert.
                         if (allowLog || showLog) {
                             Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, left={2}, right={3}", instance.GetType().Name, dst, left, right));
                         } else {
-                            Assert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
+                            ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, left={left}, right={right}");
                         }
                     }
                 }

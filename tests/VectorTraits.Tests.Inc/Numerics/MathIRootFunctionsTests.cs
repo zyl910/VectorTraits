@@ -1,4 +1,7 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,6 +9,10 @@ using Zyl.VectorTraits;
 using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Tests.Numerics {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     internal class MathIRootFunctionsTests {
 
@@ -48,7 +55,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
                 if (showLog) {
                     Console.WriteLine("Sqrt({0}):\t{1}\t// {2}", x, dst, expected);
                 } else {
-                    Assert.AreEqual(expected, dst, string.Format("Sqrt({0})", x));
+                    ClassicAssert.AreEqual(expected, dst, string.Format("Sqrt({0})", x));
                 }
             }
         }

@@ -1,4 +1,7 @@
 ﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
 using System;
 using System.Buffers.Binary;
 using System.Collections.Generic;
@@ -7,6 +10,10 @@ using Zyl.VectorTraits;
 using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Tests.Numerics {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
+
     [TestFixture()]
     internal class MathBinaryPrimitivesTests {
 
@@ -29,7 +36,7 @@ namespace Zyl.VectorTraits.Tests.Numerics {
 #else
                 expected = dst;
 #endif
-                Assert.AreEqual(expected, dst, $"{value}");
+                ClassicAssert.AreEqual(expected, dst, $"{value}");
             }
         }
 
