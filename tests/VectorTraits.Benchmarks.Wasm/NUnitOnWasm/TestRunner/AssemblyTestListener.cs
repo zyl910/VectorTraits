@@ -11,7 +11,7 @@ public class AssemblyTestListener : TestFilter, ITestListener
 {
     private readonly Assembly _asm;
 
-    public ITestResult Result { get; set; }
+    public ITestResult? Result { get; set; }
 
     public AssemblyTestListener(Assembly asm)
     {

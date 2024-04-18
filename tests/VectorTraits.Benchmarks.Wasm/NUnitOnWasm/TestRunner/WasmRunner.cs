@@ -44,12 +44,12 @@ namespace NUnitOnWasm.TestRunner {
         #endregion
 
         private Assembly _testAssembly;
-        private ITestAssemblyRunner _runner;
+        private ITestAssemblyRunner? _runner;
 
-        private NUnitLiteOptions _options;
-        private ITestListener _teamCity = null;
+        private NUnitLiteOptions? _options;
+        private ITestListener? _teamCity = null;
 
-        private TextUI _textUI;
+        private TextUI? _textUI;
 
         #region Constructors	
 
@@ -61,7 +61,7 @@ namespace NUnitOnWasm.TestRunner {
 
         #region Properties	
 
-        public ResultSummary Summary { get; private set; }
+        public ResultSummary? Summary { get; private set; }
 
         #endregion
 

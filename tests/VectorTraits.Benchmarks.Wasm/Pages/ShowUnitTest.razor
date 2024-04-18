@@ -55,8 +55,10 @@
             await CallScrollMyTexArea();
             await Task.Delay(1);
             // Run.
-            //await OnTestCoreAync(writer);
-            OnTestCore(writer);
+            if (null!= writer) {
+                //await OnTestCoreAync(writer);
+                OnTestCore(writer);
+            }
             //await Task.Factory.StartNew(() => OnTestCore(writer), TaskCreationOptions.LongRunning); // No wait finish.
         } catch (Exception ex) {
             System.Diagnostics.Debug.WriteLine(ex);
@@ -71,20 +73,14 @@
         await CallScrollMyTexArea();
     }
 
-    private async Task OnTestCore(TextWriter writer) {
-        // AutoRun autoRun = new AutoRun();
-        // autoRun.Execute(args);
+    private void OnTestCore(TextWriter writer) {
         string[] args = new[] { "--noresult", "--labels=ON" };
         var assembly = typeof(VectorTextUtilTests).Assembly;
-        // ExtendedTextWriter outWriter = new ExtendedTextWrapper(writer);
-        // using (StringReader reader = new StringReader("")) {
-        //     // TextRunner textRunner = new TextRunner(assembly);
-        //     // textRunner.Execute(outWriter, reader, args);
-        // }
 
         var sw = new Stopwatch();
         sw.Start();
-        var outWriter = new ExtendedTextWrapper(Console.Out);
+        //var outWriter = new ExtendedTextWrapper(Console.Out);
+        var outWriter = new ExtendedTextWrapper(writer);
         var runner = new WasmRunner(assembly);
         runner.Execute(outWriter, TextReader.Null, args);
         sw.Stop();
@@ -97,29 +93,6 @@
         var TestCount = runner.Summary.TestCount;
         Console.WriteLine($"FailedCount is {FailedCount}, TestCount is {TestCount}");
     }
-
-    // private async Task OnTestCoreAync(TextWriter writer) {
-    //     string[] args = { };
-    //     ExtendedTextWriter outWriter = new ExtendedTextWrapper(writer);
-    //     using(StringReader reader = new StringReader("")) {
-    //         var _testAssembly = typeof(VectorTextUtilTests).Assembly;
-    //         TextRunner textRunner = new TextRunner(_testAssembly);
-    //         textRunner.Execute(outWriter, reader, args);
-    //     }
-
-    //     async Task onBefore(double percentage, string title) {
-    //         Debug.WriteLine(percentage);
-    //         try {
-    //             statePercentage = string.Format("{0:0.00}%: {1}", percentage, title);
-    //             resultText = "" + writer?.ToString();
-    //             await InvokeAsync(StateHasChanged);
-    //             await CallScrollMyTexArea();
-    //             await Task.Delay(1);
-    //         } catch (Exception ex) {
-    //             Debug.WriteLine(ex);
-    //         }
-    //     }
-    // }
 
     private async Task CallScrollMyTexArea() {
         if (IsScrollMyTexArea) {
