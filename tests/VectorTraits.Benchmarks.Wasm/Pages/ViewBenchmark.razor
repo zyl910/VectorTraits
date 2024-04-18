@@ -1,12 +1,12 @@
-﻿@page "/showBenchmark"
+﻿@page "/viewBenchmark"
 @inject IJSRuntime JS
 @using System.Text
 @using System.Diagnostics
 @using Zyl.VectorTraits.Benchmarks
 
-<PageTitle>Show benchmark</PageTitle>
+<PageTitle>View benchmark</PageTitle>
 
-<h1>Show benchmark</h1>
+<h1>View benchmark</h1>
 
 <button class="btn btn-primary" @onclick="OnTest" disabled=@IsTaskRunning>Test</button>
 &nbsp; <span>@statePercentage</span>

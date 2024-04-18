@@ -1,4 +1,4 @@
-﻿@page "/showUnitTest"
+﻿@page "/viewUnitTest"
 @inject IJSRuntime JS
 @using NUnit.Common
 @using NUnitLite
@@ -8,9 +8,9 @@
 @using Zyl.VectorTraits.Benchmarks
 @using Zyl.VectorTraits.Tests;
 
-<PageTitle>Show unit test</PageTitle>
+<PageTitle>View unit test</PageTitle>
 
-<h1>Show unit test</h1>
+<h1>View unit test</h1>
 
 <button class="btn btn-primary" @onclick="OnTest" disabled=@IsTaskRunning>Test</button>
 &nbsp; <span>@statePercentage</span>
