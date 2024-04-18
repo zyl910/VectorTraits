@@ -4,6 +4,7 @@
 @using NUnitLite
 @using System.Text
 @using System.Diagnostics
+@using NUnitOnWasm.TestRunner
 @using Zyl.VectorTraits.Benchmarks
 @using Zyl.VectorTraits.Tests;
 
@@ -70,16 +71,31 @@
         await CallScrollMyTexArea();
     }
 
-    private void OnTestCore(TextWriter writer) {
+    private async Task OnTestCore(TextWriter writer) {
         // AutoRun autoRun = new AutoRun();
         // autoRun.Execute(args);
-        string[] args = { };
-        ExtendedTextWriter outWriter = new ExtendedTextWrapper(writer);
-        using (StringReader reader = new StringReader("")) {
-            var _testAssembly = typeof(VectorTextUtilTests).Assembly;
-            TextRunner textRunner = new TextRunner(_testAssembly);
-            textRunner.Execute(outWriter, reader, args);
+        string[] args = new[] { "--noresult", "--labels=ON" };
+        var assembly = typeof(VectorTextUtilTests).Assembly;
+        // ExtendedTextWriter outWriter = new ExtendedTextWrapper(writer);
+        // using (StringReader reader = new StringReader("")) {
+        //     // TextRunner textRunner = new TextRunner(assembly);
+        //     // textRunner.Execute(outWriter, reader, args);
+        // }
+
+        var sw = new Stopwatch();
+        sw.Start();
+        var outWriter = new ExtendedTextWrapper(Console.Out);
+        var runner = new WasmRunner(assembly);
+        runner.Execute(outWriter, TextReader.Null, args);
+        sw.Stop();
+        Console.WriteLine($"roundtrip took {sw.ElapsedMilliseconds} ms");
+        Console.WriteLine($"Summary is {runner.Summary}");
+        if (null == runner.Summary) {
+            return;
         }
+        var FailedCount = runner.Summary.FailedCount;
+        var TestCount = runner.Summary.TestCount;
+        Console.WriteLine($"FailedCount is {FailedCount}, TestCount is {TestCount}");
     }
 
     // private async Task OnTestCoreAync(TextWriter writer) {
