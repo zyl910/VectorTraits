@@ -122,8 +122,10 @@ namespace Zyl.VectorTraits.Output {
             WriteLine(tw, indent, "Avx512Vbmi.X64\t.IsSupported:\t{0}", Avx512Vbmi.X64.IsSupported);
 #endif
 #if NET6_0_OR_GREATER
+#pragma warning disable CA2252 // This API requires opting into preview features
             WriteLine(tw, indent, "AvxVnni.IsSupported:\t{0}", AvxVnni.IsSupported);
             WriteLine(tw, indent, "AvxVnni.X64.IsSupported:\t{0}", AvxVnni.X64.IsSupported);
+#pragma warning restore CA2252 // This API requires opting into preview features
 #endif
             WriteLine(tw, indent, "Bmi1.IsSupported:\t{0}", Bmi1.IsSupported);
             WriteLine(tw, indent, "Bmi1.X64.IsSupported:\t{0}", Bmi1.X64.IsSupported);
