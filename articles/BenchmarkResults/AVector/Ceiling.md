@@ -14,6 +14,1311 @@ See [Group](Ceiling_Group.md)
 
 ## X86
 
+### AMD Ryzen 7 7840H
+`AMD Ryzen 7 7840H w/ Radeon 780M Graphics`
+
+#### .NET Framework
+
+```
+VectorTraits.Benchmarks.NetFw
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
+Environment.Version:	4.0.30319.42000
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
+RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9232.0
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631 
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///E:/zylSelf/Code/cs/base/VectorTraits/tests/VectorTraits.Benchmarks/bin/Release/Release/System.Numerics.Vectors.DLL
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 1.1
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Framework 4.5
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[CeilingBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.56292563727288E+21
+# SumBase	-1.56292563727289E+21
+SumScalar	477.076	549.481
+SumBase	170.500	1537.499	2.798093
+SumBase_Basic	847.691	309.245	0.562794
+SumBase_ClearBit	170.952	1533.438	2.790701
+SumTraits	165.020	1588.560	2.891019
+
+[CeilingBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.639449E+11
+# SumBase	-3.639451E+11
+SumScalar	461.439	568.101
+SumBase	86.817	3019.487	5.315049
+SumBase_Basic	739.694	354.395	0.623824
+SumBase_ClearBit	110.969	2362.310	4.158255
+SumTraits	101.235	2589.451	4.558080
+
+[FloorBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.56292563727288E+21
+# SumBase	-1.56292563727289E+21
+SumScalar	543.840	482.024
+SumBase	161.681	1621.366	3.363661
+SumBase_Basic	804.689	325.770	0.675838
+SumBase_ClearBit	161.597	1622.208	3.365408
+SumTraits	160.154	1636.828	3.395737
+
+[FloorBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.639451E+11
+# SumBase	-3.639452E+11
+SumScalar	523.732	500.530
+SumBase	84.981	3084.739	6.162940
+SumBase_Basic	607.677	431.387	0.861859
+SumBase_ClearBit	85.801	3055.240	6.104004
+SumTraits	86.144	3043.084	6.079717
+
+[YRoundToEvenBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.56292563727288E+21
+# SumBase	-1.56292563727289E+21
+SumScalar	1911.567	137.136
+SumBase	72.471	3617.250	26.377173
+SumBase_Add	72.968	3592.600	26.197419
+SumTraits	73.526	3565.323	25.998516
+
+[YRoundToEvenBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.639451E+11
+# SumBase	-3.639451E+11
+SumScalar	1909.597	137.277
+SumBase	37.956	6906.579	50.311205
+SumBase_Add	37.703	6952.866	50.648379
+SumTraits	37.766	6941.215	50.563507
+
+[YRoundToZeroBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.56292563727288E+21
+# SumBase	-1.56292563727289E+21
+SumScalar	1198.256	218.771
+SumBase	105.515	2484.427	11.356278
+SumBase_ClearBit	104.421	2510.442	11.475194
+SumBase_ClearBit_Not	104.621	2505.658	11.453327
+SumTraits	105.041	2495.632	11.407496
+
+[YRoundToZeroBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.63945E+11
+# SumBase	-3.639451E+11
+SumScalar	2009.983	130.421
+SumBase	55.457	4726.957	36.243838
+SumBase_ClearBit	55.527	4721.061	36.198631
+SumTraits	55.300	4740.410	36.346989
+
+```
+
+#### .NET Core 2.1
+
+```
+VectorTraits.Benchmarks.NetCore
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	4.0.30319.42000
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.1.30\
+RuntimeInformation.FrameworkDescription:	.NET Core 4.6.30411.01
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631 
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/2.1.30/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 2.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 2.1
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[CeilingBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.56292563727288E+21
+# SumBase	-1.56292563727289E+21
+SumScalar	232.506	1127.470
+SumBase	162.212	1616.057	1.433347
+SumBase_Basic	500.274	524.000	0.464757
+SumBase_ClearBit	164.088	1597.584	1.416963
+SumTraits	162.376	1614.423	1.431898
+
+[CeilingBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.639449E+11
+# SumBase	-3.639451E+11
+SumScalar	232.680	1126.627
+SumBase	84.578	3099.450	2.751088
+SumBase_Basic	281.440	931.439	0.826751
+SumBase_ClearBit	84.977	3084.885	2.738160
+SumTraits	84.750	3093.159	2.745505
+
+[FloorBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.56292563727288E+21
+# SumBase	-1.56292563727289E+21
+SumScalar	244.391	1072.642
+SumBase	163.439	1603.926	1.495304
+SumBase_Basic	497.599	526.818	0.491140
+SumBase_ClearBit	162.182	1616.361	1.506897
+SumTraits	167.493	1565.100	1.459107
+
+[FloorBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.639451E+11
+# SumBase	-3.639452E+11
+SumScalar	233.466	1122.837
+SumBase	83.868	3125.691	2.783743
+SumBase_Basic	281.863	930.041	0.828295
+SumBase_ClearBit	84.839	3089.907	2.751874
+SumTraits	85.301	3073.165	2.736964
+
+[YRoundToEvenBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.56292563727288E+21
+# SumBase	-1.56292563727289E+21
+SumScalar	241.224	1086.725
+SumBase	71.683	3657.002	3.365158
+SumBase_Add	70.841	3700.431	3.405122
+SumTraits	71.644	3658.977	3.366975
+
+[YRoundToEvenBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.639451E+11
+# SumBase	-3.639451E+11
+SumScalar	233.425	1123.031
+SumBase	35.297	7426.872	6.613240
+SumBase_Add	35.722	7338.376	6.534438
+SumTraits	35.367	7412.166	6.600144
+
+[YRoundToZeroBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.56292563727288E+21
+# SumBase	-1.56292563727289E+21
+SumScalar	1162.868	225.429
+SumBase	106.871	2452.903	10.881053
+SumBase_ClearBit	107.225	2444.809	10.845151
+SumBase_ClearBit_Not	106.820	2454.072	10.886241
+SumTraits	107.707	2433.854	10.796553
+
+[YRoundToZeroBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.63945E+11
+# SumBase	-3.639451E+11
+SumScalar	981.678	267.037
+SumBase	55.425	4729.666	17.711667
+SumBase_ClearBit	55.046	4762.280	17.833800
+SumTraits	55.447	4727.789	17.704638
+
+```
+
+#### .NET Core 3.1
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
+Environment.Version:	3.1.32
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.32\
+RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[CeilingBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+SumScalar	239.971	1092.399
+SumBase	138.403	1894.059	1.733853
+SumBase_Basic	500.171	524.109	0.479778
+SumBase_ClearBit	136.520	1920.193	1.757776
+SumTraits	57.804	4535.059	4.151467
+Sum128Base_Basic	928.184	282.427	0.258538
+Sum128Base	920.628	284.745	0.260660
+Sum128Traits	115.238	2274.812	2.082400
+Sum256Base_Basic	504.193	519.928	0.475951
+Sum256Base	501.272	522.958	0.478724
+Sum256Traits	57.660	4546.414	4.161861
+
+[CeilingBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394494E+11
+# SumBase	-3.6394507E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639422E+11!=-3.6394507E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639422E+11!=-3.6394507E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639422E+11!=-3.6394507E+11
+SumScalar	233.923	1120.641
+SumBase	73.805	3551.870	3.169498
+SumBase_Basic	277.975	943.050	0.841527
+SumBase_ClearBit	73.528	3565.213	3.181404
+SumTraits	28.932	9060.761	8.085337
+Sum128Base_Basic	479.209	547.035	0.488145
+Sum128Base	478.607	547.723	0.488759
+Sum128Traits	57.279	4576.617	4.083928
+Sum256Base_Basic	280.572	934.319	0.833736
+Sum256Base	278.338	941.819	0.840428
+Sum256Traits	28.778	9109.209	8.128570
+
+[FloorBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+SumScalar	233.696	1121.733
+SumBase	140.005	1872.387	1.669192
+SumBase_Basic	497.794	526.612	0.469463
+SumBase_ClearBit	138.731	1889.580	1.684519
+SumTraits	57.784	4536.658	4.044331
+Sum128Base_Basic	934.312	280.574	0.250126
+Sum128Base	929.700	281.966	0.251367
+Sum128Traits	115.129	2276.960	2.029860
+Sum256Base_Basic	502.148	522.046	0.465392
+Sum256Base	503.446	520.700	0.464192
+Sum256Traits	57.985	4520.881	4.030267
+
+[FloorBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394507E+11
+# SumBase	-3.639452E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.6394235E+11!=-3.639452E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.6394235E+11!=-3.639452E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.6394235E+11!=-3.639452E+11
+SumScalar	234.915	1115.910
+SumBase	73.623	3560.632	3.190788
+SumBase_Basic	279.985	936.280	0.839028
+SumBase_ClearBit	74.204	3532.735	3.165788
+SumTraits	29.131	8998.757	8.064052
+Sum128Base_Basic	479.002	547.271	0.490426
+Sum128Base	481.714	544.190	0.487665
+Sum128Traits	57.860	4530.685	4.060081
+Sum256Base_Basic	279.993	936.254	0.839005
+Sum256Base	279.648	937.408	0.840039
+Sum256Traits	29.022	9032.480	8.094273
+
+[YRoundToEvenBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+SumScalar	233.153	1124.342
+SumBase	61.049	4294.002	3.819125
+SumBase_Add	61.929	4233.006	3.764875
+SumTraits	57.561	4554.227	4.050572
+Sum128Base_Basic	932.391	281.152	0.250060
+Sum128Base	929.813	281.932	0.250753
+Sum128Traits	114.572	2288.033	2.034998
+Sum256Base_Basic	496.813	527.652	0.469298
+Sum256Base	501.240	522.991	0.465153
+Sum256Traits	57.715	4542.008	4.039705
+
+[YRoundToEvenBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394507E+11
+# SumBase	-3.6394513E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639423E+11!=-3.6394513E+11
+SumScalar	233.652	1121.941
+SumBase	30.502	8594.248	7.660161
+SumBase_Add	30.146	8695.917	7.750780
+SumTraits	28.806	9100.447	8.111342
+Sum128Base_Basic	479.180	547.068	0.487608
+Sum128Base	477.556	548.928	0.489266
+Sum128Traits	57.637	4548.166	4.053838
+Sum256Base_Basic	278.161	942.418	0.839989
+Sum256Base	279.426	938.150	0.836185
+Sum256Traits	28.832	9092.239	8.104026
+
+[YRoundToZeroBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+SumScalar	1312.210	199.773
+SumBase	84.633	3097.405	15.504624
+SumBase_ClearBit	84.330	3108.555	15.560438
+SumBase_ClearBit_Not	96.315	2721.747	13.624198
+SumTraits	57.521	4557.374	22.812765
+Sum128Base_Basic	1392.229	188.291	0.942524
+Sum128Base	1396.310	187.741	0.939770
+Sum128Traits	115.117	2277.204	11.398961
+Sum256Base_Basic	1105.955	237.030	1.186495
+Sum256Base	1127.212	232.560	1.164120
+Sum256Traits	57.578	4552.880	22.790271
+
+[YRoundToZeroBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.63945E+11
+# SumBase	-3.6394513E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639423E+11!=-3.6394513E+11
+SumScalar	1032.639	253.858
+SumBase	47.323	5539.411	21.820887
+SumBase_ClearBit	47.862	5477.033	21.575168
+SumTraits	28.760	9115.006	35.905896
+Sum128Base_Basic	969.086	270.506	1.065580
+Sum128Base	983.232	266.615	1.050250
+Sum128Traits	57.511	4558.137	17.955446
+Sum256Base_Basic	1052.249	249.127	0.981365
+Sum256Base	1051.722	249.252	0.981856
+Sum256Traits	28.869	9080.462	35.769818
+
+```
+
+#### .NET 5.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	5.0.17
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\5.0.17\
+RuntimeInformation.FrameworkDescription:	.NET 5.0.17
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[CeilingBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBcl	-1.562925637272894E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+SumScalar	233.135	1124.432
+SumBcl	57.631	4548.655	4.045291
+SumBase	57.750	4539.289	4.036962
+SumBase_Basic	496.769	527.698	0.469302
+SumBase_ClearBit	137.315	1909.074	1.697812
+SumTraits	57.522	4557.286	4.052967
+Sum128Base_Basic	918.007	285.558	0.253957
+Sum128Base	924.574	283.529	0.252154
+Sum128Traits	114.731	2284.851	2.032005
+Sum256Base_Basic	498.212	526.170	0.467943
+Sum256Base	498.931	525.411	0.467268
+Sum256Traits	57.524	4557.132	4.052831
+
+[CeilingBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394494E+11
+# SumBcl	-3.6394507E+11
+# SumBase	-3.6394507E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639422E+11!=-3.6394507E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639422E+11!=-3.6394507E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639422E+11!=-3.6394507E+11
+SumScalar	234.565	1117.575
+SumBcl	28.803	9101.356	8.143844
+SumBase	28.838	9090.081	8.133756
+SumBase_Basic	267.663	979.380	0.876344
+SumBase_ClearBit	72.408	3620.351	3.239471
+SumTraits	28.932	9060.652	8.107424
+Sum128Base_Basic	480.892	545.120	0.487771
+Sum128Base	480.843	545.175	0.487820
+Sum128Traits	57.439	4563.884	4.083739
+Sum256Base_Basic	269.298	973.434	0.871024
+Sum256Base	269.901	971.258	0.869077
+Sum256Traits	29.082	9013.888	8.065579
+
+[FloorBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBcl	-1.562925637272894E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+SumScalar	234.786	1116.525
+SumBcl	57.881	4529.003	4.056339
+SumBase	57.970	4522.051	4.050113
+SumBase_Basic	524.607	499.696	0.447546
+SumBase_ClearBit	136.354	1922.532	1.721889
+SumTraits	57.847	4531.654	4.058714
+Sum128Base_Basic	929.646	281.983	0.252554
+Sum128Base	929.404	282.056	0.252620
+Sum128Traits	115.632	2267.054	2.030456
+Sum256Base_Basic	521.577	502.599	0.450146
+Sum256Base	527.033	497.396	0.445486
+Sum256Traits	57.839	4532.267	4.059263
+
+[FloorBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394507E+11
+# SumBcl	-3.639452E+11
+# SumBase	-3.639452E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.6394235E+11!=-3.639452E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.6394235E+11!=-3.639452E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.6394235E+11!=-3.639452E+11
+SumScalar	248.889	1053.258
+SumBcl	28.933	9060.489	8.602343
+SumBase	28.916	9065.826	8.607411
+SumBase_Basic	288.284	909.327	0.863347
+SumBase_ClearBit	71.782	3651.926	3.467265
+SumTraits	28.963	9050.841	8.593183
+Sum128Base_Basic	480.517	545.545	0.517960
+Sum128Base	480.409	545.669	0.518077
+Sum128Traits	57.737	4540.344	4.310760
+Sum256Base_Basic	290.949	900.997	0.855438
+Sum256Base	288.528	908.556	0.862614
+Sum256Traits	28.962	9051.236	8.593558
+
+[YRoundToEvenBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+SumScalar	235.403	1113.595
+SumBase	66.890	3919.030	3.519260
+SumBase_Add	60.862	4307.183	3.867818
+SumTraits	58.192	4504.822	4.045296
+Sum128Base_Basic	934.475	280.525	0.251910
+Sum128Base	942.395	278.168	0.249793
+Sum128Traits	115.839	2263.003	2.032160
+Sum256Base_Basic	537.911	487.337	0.437625
+Sum256Base	526.832	497.586	0.446828
+Sum256Traits	57.976	4521.624	4.060385
+
+[YRoundToEvenBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394507E+11
+# SumBase	-3.6394513E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639423E+11!=-3.6394513E+11
+SumScalar	244.548	1071.953
+SumBase	30.365	8633.230	8.053738
+SumBase_Add	30.756	8523.335	7.951220
+SumTraits	29.023	9032.208	8.425935
+Sum128Base_Basic	480.630	545.418	0.508807
+Sum128Base	480.702	545.336	0.508731
+Sum128Traits	57.780	4536.940	4.232406
+Sum256Base_Basic	289.111	906.724	0.845861
+Sum256Base	287.205	912.741	0.851475
+Sum256Traits	28.919	9064.727	8.456272
+
+[YRoundToZeroBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+SumScalar	1232.380	212.714
+SumBase	58.648	4469.761	21.013040
+SumBase_ClearBit	85.951	3049.924	14.338167
+SumBase_ClearBit_Not	97.795	2680.540	12.601632
+SumTraits	57.615	4549.931	21.389930
+Sum128Base_Basic	1403.463	186.784	0.878099
+Sum128Base	1377.697	190.277	0.894522
+Sum128Traits	114.970	2280.101	10.719106
+Sum256Base_Basic	1095.028	239.395	1.125432
+Sum256Base	1081.755	242.332	1.139241
+Sum256Traits	57.890	4528.293	21.288209
+
+[YRoundToZeroBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.63945E+11
+# SumBase	-3.6394513E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639423E+11!=-3.6394513E+11
+SumScalar	1027.771	255.061
+SumBase	29.430	8907.324	34.922353
+SumBase_ClearBit	45.830	5719.901	22.425634
+SumTraits	28.976	9046.807	35.469215
+Sum128Base_Basic	958.673	273.445	1.072077
+Sum128Base	973.226	269.356	1.056045
+Sum128Traits	57.807	4534.828	17.779400
+Sum256Base_Basic	1048.649	249.983	0.980090
+Sum256Base	1041.882	251.606	0.986456
+Sum256Traits	28.937	9059.106	35.517437
+
+```
+
+#### .NET 6.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	6.0.29
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.29\
+RuntimeInformation.FrameworkDescription:	.NET 6.0.29
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.29/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[CeilingBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBcl	-1.562925637272894E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+SumScalar	237.748	1102.614
+SumBcl	57.892	4528.132	4.106723
+SumBase	57.906	4527.078	4.105767
+SumBase_Basic	501.851	522.354	0.473741
+SumBase_ClearBit	140.166	1870.234	1.696181
+SumTraits	57.833	4532.775	4.110934
+Sum128Base_Basic	926.071	283.071	0.256727
+Sum128Base	930.250	281.799	0.255574
+Sum128Traits	115.518	2269.301	2.058109
+Sum256Base_Basic	496.902	527.557	0.478460
+Sum256Base	500.161	524.119	0.475342
+Sum256Traits	57.824	4533.510	4.111600
+
+[CeilingBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394494E+11
+# SumBcl	-3.6394507E+11
+# SumBase	-3.6394507E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639422E+11!=-3.6394507E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639422E+11!=-3.6394507E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639422E+11!=-3.6394507E+11
+SumScalar	234.331	1118.693
+SumBcl	29.007	9037.121	8.078285
+SumBase	29.040	9026.872	8.069123
+SumBase_Basic	269.748	971.809	0.868701
+SumBase_ClearBit	81.666	3209.938	2.869364
+SumTraits	28.954	9053.813	8.093205
+Sum128Base_Basic	488.475	536.657	0.479718
+Sum128Base	497.637	526.777	0.470886
+Sum128Traits	57.739	4540.152	4.058443
+Sum256Base_Basic	288.809	907.673	0.811369
+Sum256Base	285.461	918.318	0.820885
+Sum256Traits	29.108	9006.011	8.050475
+
+[FloorBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBcl	-1.562925637272894E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+SumScalar	237.514	1103.699
+SumBcl	57.918	4526.099	4.100847
+SumBase	58.161	4507.183	4.083708
+SumBase_Basic	526.445	497.952	0.451166
+SumBase_ClearBit	140.695	1863.205	1.688146
+SumTraits	57.662	4546.235	4.119091
+Sum128Base_Basic	932.688	281.063	0.254656
+Sum128Base	931.113	281.538	0.255086
+Sum128Traits	115.262	2274.334	2.060647
+Sum256Base_Basic	524.875	499.441	0.452516
+Sum256Base	527.548	496.910	0.450223
+Sum256Traits	58.051	4515.775	4.091493
+
+[FloorBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394507E+11
+# SumBcl	-3.639452E+11
+# SumBase	-3.639452E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.6394235E+11!=-3.639452E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.6394235E+11!=-3.639452E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.6394235E+11!=-3.639452E+11
+SumScalar	233.482	1122.757
+SumBcl	28.885	9075.379	8.083118
+SumBase	29.095	9010.049	8.024930
+SumBase_Basic	288.836	907.588	0.808356
+SumBase_ClearBit	73.200	3581.185	3.189635
+SumTraits	29.007	9037.348	8.049245
+Sum128Base_Basic	481.015	544.981	0.485395
+Sum128Base	482.410	543.405	0.483991
+Sum128Traits	57.721	4541.554	4.045001
+Sum256Base_Basic	289.023	907.001	0.807834
+Sum256Base	288.435	908.848	0.809479
+Sum256Traits	28.886	9075.226	8.082982
+
+[YRoundToEvenBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+SumScalar	235.407	1113.578
+SumBase	59.390	4413.941	3.963745
+SumBase_Add	59.789	4384.467	3.937277
+SumTraits	57.535	4556.273	4.091560
+Sum128Base_Basic	927.967	282.493	0.253680
+Sum128Base	930.420	281.748	0.253011
+Sum128Traits	114.949	2280.533	2.047932
+Sum256Base_Basic	522.548	501.665	0.450498
+Sum256Base	523.484	500.768	0.449693
+Sum256Traits	57.533	4556.398	4.091672
+
+[YRoundToEvenBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394507E+11
+# SumBase	-3.6394513E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639423E+11!=-3.6394513E+11
+SumScalar	238.338	1099.883
+SumBase	29.793	8798.793	7.999754
+SumBase_Add	29.911	8764.051	7.968167
+SumTraits	28.875	9078.546	8.254102
+Sum128Base_Basic	480.342	545.745	0.496185
+Sum128Base	478.674	547.646	0.497913
+Sum128Traits	57.456	4562.526	4.148193
+Sum256Base_Basic	287.772	910.943	0.828218
+Sum256Base	287.989	910.256	0.827594
+Sum256Traits	28.861	9082.861	8.258025
+
+[YRoundToZeroBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+SumScalar	1247.562	210.125
+SumBase	58.391	4489.447	21.365597
+SumBase_ClearBit	88.757	2953.497	14.055903
+SumBase_ClearBit_Not	96.210	2724.701	12.967046
+SumTraits	57.758	4538.633	21.599679
+Sum128Base_Basic	1376.787	190.403	0.906140
+Sum128Base	1369.967	191.351	0.910651
+Sum128Traits	115.340	2272.794	10.816389
+Sum256Base_Basic	1100.913	238.115	1.133207
+Sum256Base	1072.634	244.393	1.163082
+Sum256Traits	57.581	4552.627	21.666279
+
+[YRoundToZeroBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.63945E+11
+# SumBase	-3.6394513E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639423E+11!=-3.6394513E+11
+SumScalar	1069.524	245.103
+SumBase	29.407	8914.283	36.369465
+SumBase_ClearBit	46.066	5690.653	23.217345
+SumTraits	28.803	9101.294	37.132454
+Sum128Base_Basic	966.247	271.301	1.106885
+Sum128Base	958.667	273.446	1.115636
+Sum128Traits	57.454	4562.710	18.615440
+Sum256Base_Basic	1038.680	252.382	1.029695
+Sum256Base	1040.018	252.057	1.028371
+Sum256Traits	28.745	9119.587	37.207088
+
+```
+
+#### .NET 7.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	7.0.18
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.18\
+RuntimeInformation.FrameworkDescription:	.NET 7.0.18
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	True
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.18/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[CeilingBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBcl	-1.562925637272894E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Bcl	Check `Sum128Bcl` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+SumScalar	233.591	1122.235
+SumBcl	57.468	4561.589	4.064735
+SumBase	57.628	4548.923	4.053448
+SumBase_Basic	496.299	528.197	0.470665
+SumBase_ClearBit	119.929	2185.821	1.947739
+SumTraits	57.682	4544.622	4.049615
+Sum128Bcl	115.282	2273.938	2.026258
+Sum128Base_Basic	925.496	283.247	0.252395
+Sum128Base	115.275	2274.075	2.026380
+Sum128Traits	114.994	2279.640	2.031338
+Sum256Bcl	57.830	4532.985	4.039246
+Sum256Base_Basic	497.505	526.918	0.469525
+Sum256Base	57.585	4552.297	4.056454
+Sum256Traits	57.831	4532.947	4.039213
+
+[CeilingBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394494E+11
+# SumBcl	-3.6394507E+11
+# SumBase	-3.6394507E+11
+Check-Sum128Bcl	Check `Sum128Bcl` mismatch. -3.639422E+11!=-3.6394507E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639422E+11!=-3.6394507E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639422E+11!=-3.6394507E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639422E+11!=-3.6394507E+11
+SumScalar	233.768	1121.387
+SumBcl	29.198	8978.265	8.006396
+SumBase	29.146	8994.253	8.020653
+SumBase_Basic	278.814	940.211	0.838436
+SumBase_ClearBit	60.464	4335.544	3.866235
+SumTraits	29.061	9020.588	8.044138
+Sum128Bcl	57.922	4525.813	4.035908
+Sum128Base_Basic	479.557	546.638	0.487466
+Sum128Base	57.846	4531.776	4.041226
+Sum128Traits	57.834	4532.696	4.042046
+Sum256Bcl	29.138	8996.508	8.022664
+Sum256Base_Basic	278.291	941.978	0.840012
+Sum256Base	29.146	8994.049	8.020471
+Sum256Traits	29.099	9008.715	8.033549
+
+[FloorBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBcl	-1.562925637272894E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Bcl	Check `Sum128Bcl` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+SumScalar	236.694	1107.525
+SumBcl	57.874	4529.562	4.089806
+SumBase	57.630	4548.732	4.107115
+SumBase_Basic	500.447	523.820	0.472964
+SumBase_ClearBit	119.214	2198.939	1.985453
+SumTraits	57.718	4541.788	4.100845
+Sum128Bcl	114.867	2282.151	2.060587
+Sum128Base_Basic	922.120	284.284	0.256684
+Sum128Base	115.824	2263.301	2.043567
+Sum128Traits	115.292	2273.737	2.052990
+Sum256Bcl	57.895	4527.914	4.088318
+Sum256Base_Basic	498.829	525.519	0.474498
+Sum256Base	57.729	4540.965	4.100103
+Sum256Traits	57.523	4557.232	4.114790
+
+[FloorBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394507E+11
+# SumBcl	-3.639452E+11
+# SumBase	-3.639452E+11
+Check-Sum128Bcl	Check `Sum128Bcl` mismatch. -3.6394235E+11!=-3.639452E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.6394235E+11!=-3.639452E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.6394235E+11!=-3.639452E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.6394235E+11!=-3.639452E+11
+SumScalar	236.296	1109.390
+SumBcl	28.843	9088.603	8.192431
+SumBase	28.943	9057.185	8.164111
+SumBase_Basic	279.118	939.186	0.846578
+SumBase_ClearBit	59.952	4372.585	3.941431
+SumTraits	28.990	9042.411	8.150793
+Sum128Bcl	57.581	4552.634	4.103726
+Sum128Base_Basic	480.538	545.522	0.491732
+Sum128Base	57.582	4552.501	4.103606
+Sum128Traits	57.594	4551.585	4.102781
+Sum256Bcl	28.911	9067.260	8.173192
+Sum256Base_Basic	278.494	941.292	0.848477
+Sum256Base	29.058	9021.332	8.131793
+Sum256Traits	29.071	9017.492	8.128332
+
+[YRoundToEvenBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+SumScalar	233.425	1123.031
+SumBase	59.915	4375.248	3.895927
+SumBase_Add	59.735	4388.451	3.907683
+SumTraits	57.522	4557.252	4.057991
+Sum128Base_Basic	922.431	284.188	0.253054
+Sum128Base	117.272	2235.358	1.990468
+Sum128Traits	114.774	2284.006	2.033786
+Sum256Base_Basic	517.010	507.039	0.451491
+Sum256Base	60.686	4319.713	3.846476
+Sum256Traits	57.630	4548.715	4.050390
+
+[YRoundToEvenBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394507E+11
+# SumBase	-3.6394513E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639423E+11!=-3.6394513E+11
+SumScalar	234.753	1116.682
+SumBase	30.044	8725.480	7.813759
+SumBase_Add	30.415	8618.836	7.718258
+SumTraits	28.749	9118.384	8.165608
+Sum128Base_Basic	479.555	546.640	0.489522
+Sum128Base	58.866	4453.220	3.987905
+Sum128Traits	57.356	4570.443	4.092879
+Sum256Base_Basic	289.616	905.143	0.810565
+Sum256Base	30.072	8717.290	7.806424
+Sum256Traits	28.824	9094.801	8.144489
+
+[YRoundToZeroBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+SumScalar	242.654	1080.320
+SumBase	58.614	4472.370	4.139857
+SumBase_ClearBit	72.550	3613.276	3.344635
+SumBase_ClearBit_Not	86.990	3013.479	2.789432
+SumTraits	58.014	4518.665	4.182710
+Sum128Base_Basic	921.270	284.546	0.263391
+Sum128Base	115.784	2264.081	2.095751
+Sum128Traits	115.100	2277.533	2.108203
+Sum256Base_Basic	518.166	505.908	0.468294
+Sum256Base	58.147	4508.334	4.173147
+Sum256Traits	57.578	4552.889	4.214389
+
+[YRoundToZeroBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.63945E+11
+# SumBase	-3.6394513E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639423E+11!=-3.6394513E+11
+SumScalar	236.660	1107.682
+SumBase	29.321	8940.517	8.071376
+SumBase_ClearBit	36.651	7152.393	6.457083
+SumTraits	28.884	9075.862	8.193564
+Sum128Base_Basic	480.432	545.643	0.492599
+Sum128Base	57.772	4537.569	4.096455
+Sum128Traits	57.496	4559.340	4.116109
+Sum256Base_Basic	288.681	908.074	0.819797
+Sum256Base	29.046	9025.011	8.147656
+Sum256Traits	28.934	9060.196	8.179421
+
+```
+
+#### .NET 8.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	8.0.4
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.4\
+RuntimeInformation.FrameworkDescription:	.NET 8.0.4
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	True
+Vector512.IsHardwareAccelerated:	True
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.4/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 8.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 8.0
+VectorTraitsGlobal.InitCheckSum:	-2122844161	# 0x8177F7FF
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Avx512BW, Avx512CD, Avx512DQ, Avx512F, Avx512Vbmi, Avx512VL, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2, Avx512VL
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2, Avx512VL
+Vector512s.Instance:	WVectorTraits512Avx512	// Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi, Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2, Avx512VL
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[CeilingBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBcl	-1.562925637272894E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Bcl	Check `Sum128Bcl` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum512Bcl	Check `Sum512Bcl` mismatch. -1.5629256372728648E+21!=-1.562925637272894E+21
+Check-Sum512Base	Check `Sum512Base` mismatch. -1.5629256372728648E+21!=-1.562925637272894E+21
+Check-Sum512Traits	Check `Sum512Traits` mismatch. -1.5629256372728648E+21!=-1.562925637272894E+21
+SumScalar	236.316	1109.296
+SumBcl	57.792	4536.003	4.089081
+SumBase	57.672	4545.412	4.097563
+SumBase_Basic	513.635	510.370	0.460084
+SumBase_ClearBit	118.122	2219.273	2.000613
+SumTraits	57.740	4540.038	4.092719
+Sum128Bcl	115.011	2279.292	2.054718
+Sum128Base_Basic	940.315	278.783	0.251315
+Sum128Base	114.854	2282.416	2.057535
+Sum128Traits	114.873	2282.041	2.057197
+Sum256Bcl	57.648	4547.338	4.099299
+Sum256Base_Basic	500.320	523.953	0.472329
+Sum256Base	57.753	4539.017	4.091799
+Sum256Traits	57.679	4544.841	4.097049
+Sum512Bcl	31.567	8304.459	7.486241
+Sum512Base	31.639	8285.512	7.469160
+Sum512Traits	31.443	8337.220	7.515774
+
+[CeilingBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394494E+11
+# SumBcl	-3.6394507E+11
+# SumBase	-3.6394507E+11
+Check-Sum128Bcl	Check `Sum128Bcl` mismatch. -3.639422E+11!=-3.6394507E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639422E+11!=-3.6394507E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639422E+11!=-3.6394507E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639422E+11!=-3.6394507E+11
+Check-Sum512Bcl	Check `Sum512Bcl` mismatch. -3.6394212E+11!=-3.6394507E+11
+Check-Sum512Base	Check `Sum512Base` mismatch. -3.6394212E+11!=-3.6394507E+11
+Check-Sum512Traits	Check `Sum512Traits` mismatch. -3.6394212E+11!=-3.6394507E+11
+SumScalar	231.657	1131.605
+SumBcl	28.851	9086.154	8.029440
+SumBase	28.885	9075.376	8.019915
+SumBase_Basic	287.818	910.799	0.804874
+SumBase_ClearBit	53.044	4942.036	4.367280
+SumTraits	28.767	9112.771	8.052961
+Sum128Bcl	57.402	4566.841	4.035720
+Sum128Base_Basic	478.417	547.940	0.484215
+Sum128Base	57.594	4551.618	4.022268
+Sum128Traits	57.365	4569.723	4.038267
+Sum256Bcl	28.770	9111.745	8.052055
+Sum256Base_Basic	288.491	908.673	0.802995
+Sum256Base	28.889	9074.186	8.018863
+Sum256Traits	29.105	9006.947	7.959444
+Sum512Bcl	16.067	16315.358	14.417891
+Sum512Base	16.236	16145.415	14.267713
+Sum512Traits	16.512	15876.425	14.030006
+
+[FloorBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBcl	-1.562925637272894E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Bcl	Check `Sum128Bcl` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728656E+21!=-1.562925637272894E+21
+Check-Sum512Bcl	Check `Sum512Bcl` mismatch. -1.5629256372728648E+21!=-1.562925637272894E+21
+Check-Sum512Base	Check `Sum512Base` mismatch. -1.5629256372728648E+21!=-1.562925637272894E+21
+Check-Sum512Traits	Check `Sum512Traits` mismatch. -1.5629256372728648E+21!=-1.562925637272894E+21
+SumScalar	231.659	1131.593
+SumBcl	57.633	4548.496	4.019553
+SumBase	57.797	4535.620	4.008175
+SumBase_Basic	498.295	526.082	0.464904
+SumBase_ClearBit	110.654	2369.041	2.093546
+SumTraits	58.184	4505.397	3.981466
+Sum128Bcl	115.867	2262.448	1.999349
+Sum128Base_Basic	924.379	283.589	0.250611
+Sum128Base	115.330	2272.989	2.008664
+Sum128Traits	115.536	2268.936	2.005082
+Sum256Bcl	57.655	4546.789	4.018044
+Sum256Base_Basic	500.872	523.376	0.462512
+Sum256Base	57.644	4547.635	4.018792
+Sum256Traits	57.569	4553.534	4.024005
+Sum512Bcl	32.851	7979.895	7.051916
+Sum512Base	32.694	8018.227	7.085790
+Sum512Traits	32.833	7984.092	7.055625
+
+[FloorBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394507E+11
+# SumBcl	-3.639452E+11
+# SumBase	-3.639452E+11
+Check-Sum128Bcl	Check `Sum128Bcl` mismatch. -3.6394235E+11!=-3.639452E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.6394235E+11!=-3.639452E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.6394235E+11!=-3.639452E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.6394235E+11!=-3.639452E+11
+Check-Sum512Bcl	Check `Sum512Bcl` mismatch. -3.6394212E+11!=-3.639452E+11
+Check-Sum512Base	Check `Sum512Base` mismatch. -3.6394212E+11!=-3.639452E+11
+Check-Sum512Traits	Check `Sum512Traits` mismatch. -3.6394212E+11!=-3.639452E+11
+SumScalar	231.995	1129.957
+SumBcl	28.833	9091.753	8.046103
+SumBase	28.972	9048.264	8.007616
+SumBase_Basic	278.322	941.872	0.833547
+SumBase_ClearBit	54.360	4822.350	4.267728
+SumTraits	28.916	9065.725	8.023068
+Sum128Bcl	57.664	4546.059	4.023212
+Sum128Base_Basic	481.131	544.850	0.482186
+Sum128Base	57.587	4552.168	4.028619
+Sum128Traits	57.938	4524.560	4.004187
+Sum256Bcl	28.911	9067.143	8.024323
+Sum256Base_Basic	279.135	939.129	0.831119
+Sum256Base	28.896	9071.939	8.028567
+Sum256Traits	29.090	9011.531	7.975107
+Sum512Bcl	16.521	15867.152	14.042258
+Sum512Base	16.521	15867.598	14.042652
+Sum512Traits	16.382	16001.706	14.161336
+
+[YRoundToEvenBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum512Base	Check `Sum512Base` mismatch. -1.5629256372728648E+21!=-1.562925637272894E+21
+Check-Sum512Traits	Check `Sum512Traits` mismatch. -1.5629256372728648E+21!=-1.562925637272894E+21
+SumScalar	232.245	1128.740
+SumBase	60.828	4309.611	3.818074
+SumBase_Add	61.155	4286.585	3.797674
+SumTraits	58.101	4511.837	3.997235
+Sum128Base_Basic	923.988	283.709	0.251350
+Sum128Base	118.534	2211.548	1.959307
+Sum128Traits	115.053	2278.463	2.018591
+Sum256Base_Basic	500.303	523.970	0.464208
+Sum256Base	60.339	4344.511	3.848993
+Sum256Traits	57.816	4534.078	4.016939
+Sum512Base	57.752	4539.149	4.021432
+Sum512Traits	31.618	8290.922	7.345292
+
+[YRoundToEvenBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.6394507E+11
+# SumBase	-3.6394513E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum512Base	Check `Sum512Base` mismatch. -3.6394218E+11!=-3.6394513E+11
+Check-Sum512Traits	Check `Sum512Traits` mismatch. -3.6394218E+11!=-3.6394513E+11
+SumScalar	231.451	1132.610
+SumBase	30.535	8584.997	7.579837
+SumBase_Add	30.205	8678.937	7.662779
+SumTraits	28.808	9099.815	8.034379
+Sum128Base_Basic	479.610	546.577	0.482582
+Sum128Base	58.759	4461.377	3.939024
+Sum128Traits	57.618	4549.707	4.017012
+Sum256Base_Basic	269.898	971.270	0.857550
+Sum256Base	30.345	8638.818	7.627356
+Sum256Traits	28.835	9091.199	8.026772
+Sum512Base	29.055	9022.483	7.966101
+Sum512Traits	16.024	16359.655	14.444213
+
+[YRoundToZeroBenchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-1.5629256372728819E+21
+# SumBase	-1.562925637272894E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -1.5629256372728653E+21!=-1.562925637272894E+21
+Check-Sum512Base	Check `Sum512Base` mismatch. -1.5629256372728648E+21!=-1.562925637272894E+21
+Check-Sum512Traits	Check `Sum512Traits` mismatch. -1.5629256372728648E+21!=-1.562925637272894E+21
+SumScalar	231.468	1132.529
+SumBase	58.029	4517.454	3.988820
+SumBase_ClearBit	87.637	2991.254	2.641217
+SumBase_ClearBit_Not	91.035	2879.590	2.542620
+SumTraits	57.776	4537.231	4.006283
+Sum128Base_Basic	923.884	283.741	0.250538
+Sum128Base	115.463	2270.376	2.004696
+Sum128Traits	114.825	2282.991	2.015835
+Sum256Base_Basic	497.079	527.369	0.465656
+Sum256Base	58.295	4496.814	3.970596
+Sum256Traits	57.746	4539.575	4.008353
+Sum512Base	38.804	6755.622	5.965078
+Sum512Traits	31.479	8327.462	7.352981
+
+[YRoundToZeroBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.63945E+11
+# SumBase	-3.6394513E+11
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.639423E+11!=-3.6394513E+11
+Check-Sum512Base	Check `Sum512Base` mismatch. -3.6394218E+11!=-3.6394513E+11
+Check-Sum512Traits	Check `Sum512Traits` mismatch. -3.6394218E+11!=-3.6394513E+11
+SumScalar	230.005	1139.733
+SumBase	29.187	8981.666	7.880502
+SumBase_ClearBit	44.379	5906.898	5.182704
+SumTraits	28.905	9069.115	7.957229
+Sum128Base_Basic	479.905	546.241	0.479271
+Sum128Base	58.029	4517.488	3.963638
+Sum128Traits	57.434	4564.285	4.004698
+Sum256Base_Basic	267.461	980.121	0.859957
+Sum256Base	28.821	9095.594	7.980463
+Sum256Traits	28.804	9100.825	7.985052
+Sum512Base	19.958	13134.648	11.524323
+Sum512Traits	15.945	16440.354	14.424745
+
+```
+
 ### Intel Core i5-8250U
 `Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
 

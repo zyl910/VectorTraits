@@ -3,6 +3,680 @@
 
 ## X86
 
+### AMD Ryzen 7 7840H
+`AMD Ryzen 7 7840H w/ Radeon 780M Graphics`
+
+#### .NET Framework
+
+```
+VectorTraits.Benchmarks.NetFw
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
+Environment.Version:	4.0.30319.42000
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
+RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9232.0
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631 
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///E:/zylSelf/Code/cs/base/VectorTraits/tests/VectorTraits.Benchmarks/bin/Release/Release/System.Numerics.Vectors.DLL
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 1.1
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Framework 4.5
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[WidenBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	-829396443174
+SumWidenScalar	93.252	2811.137
+SumWidenBcl	30.244	8667.719	3.083350
+SumWidenVectorBase	30.205	8678.694	3.087254
+SumWidenVectorBase_NRef	360.108	727.960	0.258956
+SumWidenVectorBase_NRef2	371.341	705.938	0.251122
+SumWidenVectorBase_NRefInc	364.517	719.154	0.255823
+SumWidenVectorBase_NRefInc2	357.199	733.887	0.261064
+SumWidenVectorBase_Ref	370.837	706.898	0.251464
+SumWidenVectorBase_Ref2	391.246	670.024	0.238346
+SumWidenVectorBase_RefInc	360.319	727.533	0.258804
+SumWidenVectorBase128_Ref	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_Ref2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase256_Ref	294.522	890.065	0.316621
+SumWidenVectorBase256_Ref2	295.087	888.362	0.316015
+SumWidenVectorBase256_RefI	370.778	707.010	0.251503
+SumWidenVectorBase256_RefI2	371.285	706.046	0.251160
+SumWidenVectorBase256_RefInc	369.349	709.745	0.252476
+SumWidenVectorBase256_RefInc2	368.547	711.290	0.253026
+SumWidenVectorTraits	25.103	10442.853	3.714815
+SumWidenVectorTraits_Ptr	25.155	10421.103	3.707078
+
+[WidenBenchmark_SByte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	6514
+SumWidenScalar	162.186	1616.316
+SumWidenBcl	6.191	42340.276	26.195537
+SumWidenVectorBase	7.468	35101.891	21.717215
+SumWidenVectorTraits	7.395	35448.572	21.931704
+SumWidenVectorTraits_Ptr	6.245	41973.700	25.968740
+
+[WidenBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	130888.73095194
+SumWidenScalar	230.239	1138.573
+SumWidenBcl	29.206	8975.802	7.883375
+SumWidenVectorBase	29.256	8960.258	7.869723
+SumWidenVectorTraits	29.276	8954.213	7.864414
+SumWidenVectorTraits_Ptr	29.283	8952.165	7.862615
+
+```
+
+#### .NET Core 2.1
+
+```
+VectorTraits.Benchmarks.NetCore
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	4.0.30319.42000
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.1.30\
+RuntimeInformation.FrameworkDescription:	.NET Core 4.6.30411.01
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631 
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/2.1.30/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 2.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 2.1
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[WidenBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	-829396443174
+SumWidenScalar	82.903	3162.071
+SumWidenBcl	25.435	10306.513	3.259419
+SumWidenVectorBase	25.305	10359.422	3.276151
+SumWidenVectorBase_NRef	343.685	762.745	0.241217
+SumWidenVectorBase_NRef2	347.149	755.133	0.238810
+SumWidenVectorBase_NRefInc	338.755	773.846	0.244728
+SumWidenVectorBase_NRefInc2	342.229	765.990	0.242243
+SumWidenVectorBase_Ref	293.939	891.832	0.282041
+SumWidenVectorBase_Ref2	341.940	766.637	0.242448
+SumWidenVectorBase_RefInc	337.733	776.188	0.245468
+SumWidenVectorBase128_Ref	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_Ref2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase256_Ref	277.920	943.235	0.298297
+SumWidenVectorBase256_Ref2	275.868	950.250	0.300515
+SumWidenVectorBase256_RefI	338.859	773.608	0.244652
+SumWidenVectorBase256_RefI2	340.308	770.313	0.243610
+SumWidenVectorBase256_RefInc	344.872	760.120	0.240387
+SumWidenVectorBase256_RefInc2	338.400	774.657	0.244984
+SumWidenVectorTraits	30.196	8681.449	2.745495
+SumWidenVectorTraits_Ptr	25.369	10333.406	3.267924
+
+[WidenBenchmark_SByte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	6514
+SumWidenScalar	160.790	1630.352
+SumWidenBcl	6.209	42221.963	25.897459
+SumWidenVectorBase	6.190	42347.742	25.974608
+SumWidenVectorTraits	6.251	41937.286	25.722848
+SumWidenVectorTraits_Ptr	6.324	41452.949	25.425773
+
+[WidenBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	130888.73095194
+SumWidenScalar	231.043	1134.610
+SumWidenBcl	29.251	8961.800	7.898576
+SumWidenVectorBase	29.550	8871.159	7.818688
+SumWidenVectorTraits	29.444	8903.246	7.846968
+SumWidenVectorTraits_Ptr	29.418	8911.029	7.853828
+
+```
+
+#### .NET Core 3.1
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
+Environment.Version:	3.1.32
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.32\
+RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[WidenBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	-829396443174
+SumWidenScalar	98.010	2674.675
+SumWidenBcl	25.431	10308.000	3.853927
+SumWidenVectorBase	25.280	10369.776	3.877023
+SumWidenVectorBase_NRef	341.961	766.590	0.286611
+SumWidenVectorBase_NRef2	343.203	763.815	0.285573
+SumWidenVectorBase_NRefInc	339.030	773.218	0.289089
+SumWidenVectorBase_NRefInc2	340.263	770.415	0.288041
+SumWidenVectorBase_Ref	314.516	833.483	0.311620
+SumWidenVectorBase_Ref2	341.023	768.698	0.287399
+SumWidenVectorBase_RefInc	337.205	777.402	0.290653
+SumWidenVectorBase128_Ref	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_Ref2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase256_Ref	276.889	946.746	0.353967
+SumWidenVectorBase256_Ref2	274.701	954.289	0.356787
+SumWidenVectorBase256_RefI	339.528	772.084	0.288665
+SumWidenVectorBase256_RefI2	340.105	770.774	0.288175
+SumWidenVectorBase256_RefInc	345.221	759.351	0.283904
+SumWidenVectorBase256_RefInc2	340.618	769.614	0.287741
+SumWidenVectorTraits	17.778	14745.017	5.512826
+SumWidenVectorTraits_Ptr	17.659	14844.648	5.550076
+SumWidenVector128Traits	34.550	7587.392	2.836753
+SumWidenVector256Traits	17.935	14616.422	5.464747
+SumWidenVector256Avx_ConvertTo	17.680	14827.007	5.543481
+SumWidenVector256Avx_Unpack	24.746	10593.407	3.960634
+
+[WidenBenchmark_SByte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	6514
+Check-SumWidenVector256Avx_Unpack	Check `SumWidenVector256Avx_Unpack` mismatch. 14873!=6514
+SumWidenScalar	161.888	1619.290
+SumWidenBcl	6.189	42354.483	26.156200
+SumWidenVectorBase	6.177	42441.825	26.210139
+SumWidenVectorTraits	6.203	42261.452	26.098749
+SumWidenVectorTraits_Ptr	6.219	42151.696	26.030968
+SumWidenVector128Traits	8.477	30922.567	19.096370
+SumWidenVector256Traits	4.246	61737.560	38.126306
+SumWidenVector256Avx_ConvertTo	4.260	61541.726	38.005368
+SumWidenVector256Avx_Unpack	6.097	42998.842	26.554127
+
+[WidenBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	130888.73095194018
+SumWidenScalar	231.142	1134.125
+SumWidenBcl	29.585	8860.711	7.812816
+SumWidenVectorBase	29.353	8930.858	7.874667
+SumWidenVectorTraits	29.395	8918.060	7.863382
+SumWidenVectorTraits_Ptr	29.399	8916.814	7.862284
+SumWidenVector128Traits	57.638	4548.111	4.010237
+SumWidenVector256Traits	29.634	8845.920	7.799774
+
+```
+
+#### .NET 5.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	5.0.17
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\5.0.17\
+RuntimeInformation.FrameworkDescription:	.NET 5.0.17
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[WidenBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	-829396443174
+SumWidenScalar	101.722	2577.063
+SumWidenBcl	25.009	10481.901	4.067383
+SumWidenVectorBase	25.130	10431.469	4.047814
+SumWidenVectorBase_NRef	271.553	965.350	0.374593
+SumWidenVectorBase_NRef2	272.760	961.078	0.372936
+SumWidenVectorBase_NRefInc	307.768	851.760	0.330516
+SumWidenVectorBase_NRefInc2	275.239	952.422	0.369577
+SumWidenVectorBase_Ref	282.825	926.878	0.359664
+SumWidenVectorBase_Ref2	282.345	928.451	0.360275
+SumWidenVectorBase_RefInc	310.802	843.444	0.327289
+SumWidenVectorBase128_Ref	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_Ref2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase256_Ref	251.343	1042.975	0.404715
+SumWidenVectorBase256_Ref2	252.084	1039.908	0.403524
+SumWidenVectorBase256_RefI	324.220	808.538	0.313744
+SumWidenVectorBase256_RefI2	322.303	813.347	0.315610
+SumWidenVectorBase256_RefInc	327.950	799.342	0.310176
+SumWidenVectorBase256_RefInc2	312.464	838.957	0.325548
+SumWidenVectorTraits	17.759	14761.357	5.727977
+SumWidenVectorTraits_Ptr	17.655	14848.314	5.761720
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128Traits	34.102	7687.085	2.982887
+SumWidenVector256Traits	17.799	14728.120	5.715080
+SumWidenVector256Avx_ConvertTo	17.625	14873.468	5.771481
+SumWidenVector256Avx_Unpack	24.568	10669.980	4.140365
+
+[WidenBenchmark_SByte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	6514
+Check-SumWidenVector256Avx_Unpack	Check `SumWidenVector256Avx_Unpack` mismatch. 14873!=6514
+SumWidenScalar	161.329	1624.899
+SumWidenBcl	6.249	41952.695	25.818645
+SumWidenVectorBase	6.186	42374.186	26.078040
+SumWidenVectorTraits	6.233	42056.944	25.882802
+SumWidenVectorTraits_Ptr	6.137	42715.967	26.288380
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128Traits	8.474	30934.769	19.037962
+SumWidenVector256Traits	4.208	62302.261	38.342232
+SumWidenVector256Avx_ConvertTo	4.237	61872.077	38.077487
+SumWidenVector256Avx_Unpack	6.096	42999.954	26.463152
+
+[WidenBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	130888.73095194018
+SumWidenScalar	231.197	1133.856
+SumWidenBcl	29.201	8977.077	7.917299
+SumWidenVectorBase	29.415	8911.978	7.859885
+SumWidenVectorTraits	29.502	8885.720	7.836727
+SumWidenVectorTraits_Ptr	29.626	8848.573	7.803965
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_ArmB64	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128Traits	57.733	4540.640	4.004600
+SumWidenVector256Traits	29.552	8870.572	7.823367
+
+```
+
+#### .NET 6.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	6.0.29
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.29\
+RuntimeInformation.FrameworkDescription:	.NET 6.0.29
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.29/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[WidenBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	-829396443174
+SumWidenScalar	92.512	2833.623
+SumWidenBcl	24.902	10527.026	3.715041
+SumWidenVectorBase	24.886	10533.976	3.717493
+SumWidenVectorBase_NRef	273.426	958.739	0.338344
+SumWidenVectorBase_NRef2	273.288	959.223	0.338515
+SumWidenVectorBase_NRefInc	306.586	855.042	0.301749
+SumWidenVectorBase_NRefInc2	272.368	962.464	0.339658
+SumWidenVectorBase_Ref	283.219	925.587	0.326644
+SumWidenVectorBase_Ref2	282.687	927.329	0.327259
+SumWidenVectorBase_RefInc	308.315	850.247	0.300057
+SumWidenVectorBase128_Ref	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_Ref2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase256_Ref	251.452	1042.521	0.367911
+SumWidenVectorBase256_Ref2	252.209	1039.393	0.366807
+SumWidenVectorBase256_RefI	323.236	810.999	0.286206
+SumWidenVectorBase256_RefI2	322.835	812.007	0.286561
+SumWidenVectorBase256_RefInc	328.078	799.030	0.281982
+SumWidenVectorBase256_RefInc2	314.847	832.607	0.293831
+SumWidenVectorTraits	17.496	14982.852	5.287524
+SumWidenVectorTraits_Ptr	17.491	14987.428	5.289139
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128Traits	34.179	7669.695	2.706674
+SumWidenVector256Traits	17.566	14923.775	5.266675
+SumWidenVector256Avx_ConvertTo	17.595	14899.142	5.257982
+SumWidenVector256Avx_Unpack	24.207	10829.151	3.821662
+
+[WidenBenchmark_SByte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	6514
+Check-SumWidenVector256Avx_Unpack	Check `SumWidenVector256Avx_Unpack` mismatch. 14873!=6514
+SumWidenScalar	179.910	1457.082
+SumWidenBcl	6.148	42641.993	29.265326
+SumWidenVectorBase	6.144	42668.194	29.283308
+SumWidenVectorTraits	6.144	42667.371	29.282744
+SumWidenVectorTraits_Ptr	6.139	42702.362	29.306758
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128Traits	8.400	31206.130	21.416860
+SumWidenVector256Traits	4.220	62118.732	42.632270
+SumWidenVector256Avx_ConvertTo	4.234	61917.597	42.494231
+SumWidenVector256Avx_Unpack	5.985	43803.070	30.062177
+
+[WidenBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	130888.73095194018
+SumWidenScalar	230.043	1139.544
+SumWidenBcl	29.224	8970.061	7.871623
+SumWidenVectorBase	29.073	9016.800	7.912639
+SumWidenVectorTraits	29.050	9023.996	7.918953
+SumWidenVectorTraits_Ptr	29.518	8880.725	7.793227
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_ArmB64	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128Traits	57.493	4559.570	4.001224
+SumWidenVector256Traits	29.262	8958.543	7.861516
+
+```
+
+#### .NET 7.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	7.0.18
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.18\
+RuntimeInformation.FrameworkDescription:	.NET 7.0.18
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	True
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.18/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[WidenBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	-829396443174
+SumWidenScalar	82.549	3175.634
+SumWidenBcl	17.515	14966.898	4.713042
+SumWidenVectorBase	17.585	14907.018	4.694186
+SumWidenVectorBase_NRef	326.337	803.293	0.252955
+SumWidenVectorBase_NRef2	331.725	790.245	0.248846
+SumWidenVectorBase_NRefInc	309.604	846.708	0.266627
+SumWidenVectorBase_NRefInc2	271.842	964.326	0.303664
+SumWidenVectorBase_Ref	290.907	901.125	0.283762
+SumWidenVectorBase_Ref2	325.476	805.418	0.253624
+SumWidenVectorBase_RefInc	307.105	853.596	0.268796
+SumWidenVectorBase128_Ref	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_Ref2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase256_Ref	249.983	1048.648	0.330217
+SumWidenVectorBase256_Ref2	252.211	1039.383	0.327299
+SumWidenVectorBase256_RefI	328.392	798.265	0.251372
+SumWidenVectorBase256_RefI2	329.575	795.401	0.250470
+SumWidenVectorBase256_RefInc	327.197	801.180	0.252290
+SumWidenVectorBase256_RefInc2	317.530	825.572	0.259971
+SumWidenVectorTraits	17.829	14703.416	4.630072
+SumWidenVectorTraits_Ptr	18.023	14544.951	4.580172
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128Traits	33.751	7767.049	2.445826
+SumWidenVector256Traits	18.057	14517.797	4.571621
+SumWidenVector256Avx_ConvertTo	17.375	15087.456	4.751006
+SumWidenVector256Avx_Unpack	24.588	10661.372	3.357242
+
+[WidenBenchmark_SByte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	6514
+Check-SumWidenVector256Avx_Unpack	Check `SumWidenVector256Avx_Unpack` mismatch. 14873!=6514
+SumWidenScalar	152.904	1714.438
+SumWidenBcl	4.224	62053.754	36.194802
+SumWidenVectorBase	4.199	62432.136	36.415506
+SumWidenVectorTraits	4.195	62489.014	36.448681
+SumWidenVectorTraits_Ptr	4.263	61498.642	35.871016
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128Traits	7.944	33000.424	19.248535
+SumWidenVector256Traits	4.212	62235.974	36.301088
+SumWidenVector256Avx_ConvertTo	4.173	62824.434	36.644326
+SumWidenVector256Avx_Unpack	6.041	43396.878	25.312593
+
+[WidenBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	130888.73095194018
+SumWidenScalar	229.637	1141.560
+SumWidenBcl	29.292	8949.376	7.839602
+SumWidenVectorBase	29.359	8929.041	7.821789
+SumWidenVectorTraits	29.192	8980.015	7.866442
+SumWidenVectorTraits_Ptr	29.104	9007.059	7.890132
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_ArmB64	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128Traits	57.552	4554.921	3.990085
+SumWidenVector256Traits	29.292	8949.369	7.839597
+
+```
+
+#### .NET 8.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	8.0.4
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.4\
+RuntimeInformation.FrameworkDescription:	.NET 8.0.4
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	True
+Vector512.IsHardwareAccelerated:	True
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.4/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 8.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 8.0
+VectorTraitsGlobal.InitCheckSum:	-2122844161	# 0x8177F7FF
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Avx512BW, Avx512CD, Avx512DQ, Avx512F, Avx512Vbmi, Avx512VL, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2, Avx512VL
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2, Avx512VL
+Vector512s.Instance:	WVectorTraits512Avx512	// Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi, Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2, Avx512VL
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[WidenBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	-829396443174
+SumWidenScalar	83.137	3153.161
+SumWidenBcl	18.116	14469.941	4.589026
+SumWidenVectorBase	18.368	14271.703	4.526157
+SumWidenVectorBase_NRef	345.711	758.276	0.240481
+SumWidenVectorBase_NRef2	345.434	758.882	0.240673
+SumWidenVectorBase_NRefInc	344.417	761.125	0.241385
+SumWidenVectorBase_NRefInc2	331.732	790.228	0.250615
+SumWidenVectorBase_Ref	337.231	777.343	0.246528
+SumWidenVectorBase_Ref2	345.937	757.779	0.240323
+SumWidenVectorBase_RefInc	343.358	763.472	0.242129
+SumWidenVectorBase128_Ref	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_Ref2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefI2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase128_RefInc2	Run fail! Vector byte size mismatch(32!=16) !
+SumWidenVectorBase256_Ref	260.742	1005.376	0.318847
+SumWidenVectorBase256_Ref2	261.282	1003.301	0.318189
+SumWidenVectorBase256_RefI	329.513	795.551	0.252303
+SumWidenVectorBase256_RefI2	327.360	800.783	0.253962
+SumWidenVectorBase256_RefInc	345.284	759.213	0.240778
+SumWidenVectorBase256_RefInc2	345.613	758.491	0.240549
+SumWidenVectorTraits	18.152	14441.459	4.579994
+SumWidenVectorTraits_Ptr	18.286	14336.149	4.546595
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128Traits	33.609	7799.761	2.473632
+SumWidenVector256Traits	18.575	14112.817	4.475768
+SumWidenVector256Avx_ConvertTo	18.491	14177.154	4.496171
+SumWidenVector256Avx_Unpack	25.313	10356.091	3.284352
+SumWidenVector512Bcl	15.653	16747.420	5.311311
+SumWidenVector512Traits	15.570	16836.136	5.339446
+
+[WidenBenchmark_SByte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	6514
+Check-SumWidenVector256Avx_Unpack	Check `SumWidenVector256Avx_Unpack` mismatch. 14873!=6514
+SumWidenScalar	152.656	1717.219
+SumWidenBcl	4.283	61202.322	35.640362
+SumWidenVectorBase	4.234	61915.299	36.055555
+SumWidenVectorTraits	4.179	62724.259	36.526641
+SumWidenVectorTraits_Ptr	4.253	61636.940	35.893456
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128Traits	7.990	32808.183	19.105411
+SumWidenVector256Traits	4.181	62695.836	36.510090
+SumWidenVector256Avx_ConvertTo	4.277	61288.922	35.690792
+SumWidenVector256Avx_Unpack	6.133	42741.890	24.890174
+SumWidenVector512Bcl	3.745	70004.821	40.766381
+SumWidenVector512Traits	3.761	69699.484	40.588572
+
+[WidenBenchmark_Single(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumWidenScalar	130888.73095194018
+SumWidenScalar	230.262	1138.458
+SumWidenBcl	29.300	8946.802	7.858700
+SumWidenVectorBase	29.191	8980.254	7.888083
+SumWidenVectorTraits	28.955	9053.650	7.952554
+SumWidenVectorTraits_Ptr	29.401	8916.157	7.831782
+SumWidenVector128_AdvSimd	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128_ArmB64	Run fail! Requires hardware support AdvSimd!
+SumWidenVector128Traits	57.654	4546.809	3.993831
+SumWidenVector256Traits	29.199	8977.957	7.886066
+SumWidenVector512Bcl	23.663	11078.144	9.730830
+SumWidenVector512Traits	23.641	11088.613	9.740026
+
+```
+
 ### Intel Core i5-8250U
 `Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
 

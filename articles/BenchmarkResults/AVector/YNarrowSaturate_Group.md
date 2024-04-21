@@ -3,6 +3,80 @@
 
 Unit of data: Million operations per second. The larger the number, the better the performance.
 
+### X86 - AMD Ryzen 7 7840H
+| Type                            | Method                      | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
+| :------------------------------ | :-------------------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: | --------: |
+| YNarrowSaturateBenchmark_Int16  | SumNarrow_If                |        208.893 |       208.738 |       210.552 |   208.863 |   213.409 |   222.719 |   238.273 |
+| YNarrowSaturateBenchmark_Int16  | SumNarrow_IfUnrolling4      |        217.158 |       216.630 |       218.629 |   221.503 |   223.555 |   228.361 |   235.556 |
+| YNarrowSaturateBenchmark_Int16  | SumNarrow_MinMax            |        213.784 |       221.481 |       222.725 |   213.446 |   210.084 |   237.383 |   222.997 |
+| YNarrowSaturateBenchmark_Int16  | SumNarrow_MinMaxUnrolling4  |        211.181 |       228.599 |       229.550 |   226.194 |   208.886 |   238.919 |   236.850 |
+| YNarrowSaturateBenchmark_Int16  | SumNarrow_BitMath           |        229.875 |       229.498 |       228.851 |   169.940 |   205.351 |   305.005 |   526.992 |
+| YNarrowSaturateBenchmark_Int16  | SumNarrow_BitMathUnrolling4 |        316.482 |       318.147 |       347.112 |   183.350 |   221.339 |   299.835 |   540.668 |
+| YNarrowSaturateBenchmark_Int16  | SumNarrowVectorBase         |      25148.748 |     24393.350 |     23728.273 | 24093.755 | 24287.096 | 22984.550 | 28211.297 |
+| YNarrowSaturateBenchmark_Int16  | SumNarrowVectorTraits       |      25758.138 |     24197.346 |     51719.249 | 51042.196 | 52181.566 | 51971.868 | 51767.160 |
+| YNarrowSaturateBenchmark_Int16  | SumNarrowVector128Traits    |                |               |     38722.607 | 38370.034 | 39811.769 | 43939.067 | 35718.360 |
+| YNarrowSaturateBenchmark_Int16  | SumNarrowVector256Traits    |                |               |     51188.180 | 51498.152 | 51863.824 | 52017.120 | 52301.998 |
+| YNarrowSaturateBenchmark_Int16  | SumNarrowVector512Base      |                |               |               |           |           |           | 27065.764 |
+| YNarrowSaturateBenchmark_Int16  | SumNarrowVector512Traits    |                |               |               |           |           |           | 49044.283 |
+| YNarrowSaturateBenchmark_Int16  | SumNarrowVector512_Convert  |                |               |               |           |           |           | 47750.744 |
+| YNarrowSaturateBenchmark_Int32  | SumNarrow_If                |        223.199 |       230.356 |       223.827 |   218.194 |   225.068 |   241.795 |   253.186 |
+| YNarrowSaturateBenchmark_Int32  | SumNarrow_MinMax            |        227.390 |       225.655 |       229.949 |   225.008 |   232.123 |   235.125 |   241.790 |
+| YNarrowSaturateBenchmark_Int32  | SumNarrow_BitMath           |        501.900 |       508.553 |       364.831 |   199.982 |   200.311 |   415.404 |   692.718 |
+| YNarrowSaturateBenchmark_Int32  | SumNarrowVectorBase         |      11091.485 |     11686.841 |     12169.744 | 11930.394 | 11974.088 | 11432.451 | 13924.358 |
+| YNarrowSaturateBenchmark_Int32  | SumNarrowVectorTraits       |      11088.565 |     11563.786 |     23670.278 | 24502.961 | 24837.367 | 23689.904 | 21677.977 |
+| YNarrowSaturateBenchmark_Int32  | SumNarrowVector128Traits    |                |               |     18123.739 | 18671.542 | 19224.280 | 20016.846 | 17077.070 |
+| YNarrowSaturateBenchmark_Int32  | SumNarrowVector256Traits    |                |               |     23472.809 | 24605.776 | 25084.681 | 23843.890 | 21690.533 |
+| YNarrowSaturateBenchmark_Int32  | SumNarrowVector512Base      |                |               |               |           |           |           | 15195.383 |
+| YNarrowSaturateBenchmark_Int32  | SumNarrowVector512Traits    |                |               |               |           |           |           | 21155.123 |
+| YNarrowSaturateBenchmark_Int32  | SumNarrowVector512_Convert  |                |               |               |           |           |           | 20674.293 |
+| YNarrowSaturateBenchmark_Int64  | SumNarrow_If                |        227.036 |       214.520 |       220.570 |   222.299 |   223.679 |   230.874 |   238.637 |
+| YNarrowSaturateBenchmark_Int64  | SumNarrow_MinMax            |        223.303 |       210.577 |       222.049 |   219.301 |   223.062 |   238.317 |   238.675 |
+| YNarrowSaturateBenchmark_Int64  | SumNarrow_BitMath           |        358.706 |       359.058 |       358.400 |   216.791 |   217.130 |   377.258 |   604.860 |
+| YNarrowSaturateBenchmark_Int64  | SumNarrowVectorBase         |       3293.013 |      3312.063 |      3339.831 |  3326.127 |  3430.894 |  5667.124 |  7113.656 |
+| YNarrowSaturateBenchmark_Int64  | SumNarrowVectorTraits       |       3353.125 |      3297.276 |      5615.250 |  5794.109 |  5863.833 |  4481.222 | 10055.485 |
+| YNarrowSaturateBenchmark_Int64  | SumNarrowVector128Traits    |                |               |      2378.404 |  3455.114 |  3451.902 |  3312.175 |  9339.261 |
+| YNarrowSaturateBenchmark_Int64  | SumNarrowVector256Traits    |                |               |      5427.186 |  5814.520 |  5907.132 |  4431.031 | 10269.472 |
+| YNarrowSaturateBenchmark_Int64  | SumNarrowVector512Base      |                |               |               |           |           |           |  7824.437 |
+| YNarrowSaturateBenchmark_Int64  | SumNarrowVector512Traits    |                |               |               |           |           |           | 10195.687 |
+| YNarrowSaturateBenchmark_Int64  | SumNarrowVector512_Clamp    |                |               |               |           |           |           |  7733.377 |
+| YNarrowSaturateBenchmark_Int64  | SumNarrowVector512_Convert  |                |               |               |           |           |           | 10169.827 |
+| YNarrowSaturateBenchmark_UInt16 | SumNarrow_If                |       1520.727 |      1353.149 |      1417.767 |  1382.095 |  1347.531 |  1411.599 |  1685.738 |
+| YNarrowSaturateBenchmark_UInt16 | SumNarrow_IfUnrolling4      |       1399.387 |      1368.684 |      1356.830 |  1339.406 |  1421.410 |  1484.609 |  1812.324 |
+| YNarrowSaturateBenchmark_UInt16 | SumNarrow_MinMax            |       1431.974 |      1435.180 |      1414.646 |  1374.594 |  1452.314 |  1095.078 |  1441.681 |
+| YNarrowSaturateBenchmark_UInt16 | SumNarrow_MinMaxUnrolling4  |       1522.170 |      1598.674 |      1513.781 |  1481.718 |  1300.826 |  1287.374 |  1785.229 |
+| YNarrowSaturateBenchmark_UInt16 | SumNarrow_BitMath           |        669.162 |       667.766 |       664.758 |   184.324 |   194.878 |   553.552 |   891.000 |
+| YNarrowSaturateBenchmark_UInt16 | SumNarrow_BitMathUnrolling4 |        488.838 |       488.770 |       490.891 |   214.921 |   216.904 |   582.831 |   879.378 |
+| YNarrowSaturateBenchmark_UInt16 | SumNarrowVectorBase         |      29778.616 |     30727.711 |     30155.728 | 31110.346 | 23465.819 | 27716.652 | 37510.004 |
+| YNarrowSaturateBenchmark_UInt16 | SumNarrowVectorTraits       |      30199.224 |     30039.151 |     40324.075 | 51284.626 | 39436.541 | 38153.013 | 52303.410 |
+| YNarrowSaturateBenchmark_UInt16 | SumNarrowVector128Traits    |                |               |     24148.204 | 30630.747 | 24290.683 | 22613.799 | 43753.780 |
+| YNarrowSaturateBenchmark_UInt16 | SumNarrowVector256Traits    |                |               |     39812.323 | 50842.782 | 40001.161 | 38420.223 | 51197.369 |
+| YNarrowSaturateBenchmark_UInt16 | SumNarrowVector512Base      |                |               |               |           |           |           | 36692.778 |
+| YNarrowSaturateBenchmark_UInt16 | SumNarrowVector512Traits    |                |               |               |           |           |           | 48338.964 |
+| YNarrowSaturateBenchmark_UInt16 | SumNarrowVector512_Convert  |                |               |               |           |           |           | 48223.648 |
+| YNarrowSaturateBenchmark_UInt16 | SumNarrowVector512_Pack     |                |               |               |           |           |           | 36487.277 |
+| YNarrowSaturateBenchmark_UInt32 | SumNarrow_If                |       1651.350 |      1656.474 |      1657.393 |  1665.748 |  1298.902 |  1673.605 |  1684.855 |
+| YNarrowSaturateBenchmark_UInt32 | SumNarrow_MinMax            |       1651.554 |      1639.616 |      1661.525 |  1634.196 |  1648.652 |  1104.436 |  1684.422 |
+| YNarrowSaturateBenchmark_UInt32 | SumNarrow_BitMath           |        569.038 |       569.198 |       487.142 |   229.081 |   230.203 |   653.212 |  1111.454 |
+| YNarrowSaturateBenchmark_UInt32 | SumNarrowVectorBase         |      14254.628 |     13925.895 |     14791.805 | 14431.598 | 14687.760 | 15004.943 | 19154.035 |
+| YNarrowSaturateBenchmark_UInt32 | SumNarrowVectorTraits       |      14370.000 |     13868.776 |     19823.383 | 20468.961 | 21760.055 | 18303.374 | 21518.294 |
+| YNarrowSaturateBenchmark_UInt32 | SumNarrowVector128Traits    |                |               |     11809.487 | 14870.154 | 15349.610 | 10991.567 | 18385.223 |
+| YNarrowSaturateBenchmark_UInt32 | SumNarrowVector256Traits    |                |               |     20061.105 | 20051.064 | 22027.699 | 18025.863 | 22011.407 |
+| YNarrowSaturateBenchmark_UInt32 | SumNarrowVector512Base      |                |               |               |           |           |           | 22173.591 |
+| YNarrowSaturateBenchmark_UInt32 | SumNarrowVector512Traits    |                |               |               |           |           |           | 22636.186 |
+| YNarrowSaturateBenchmark_UInt32 | SumNarrowVector512_Convert  |                |               |               |           |           |           | 22677.879 |
+| YNarrowSaturateBenchmark_UInt32 | SumNarrowVector512_Pack     |                |               |               |           |           |           | 21995.081 |
+| YNarrowSaturateBenchmark_UInt64 | SumNarrow_If                |       1658.814 |      1648.733 |      1664.711 |  1639.963 |  1668.689 |  1649.613 |  2342.503 |
+| YNarrowSaturateBenchmark_UInt64 | SumNarrow_MinMax            |       1107.141 |      1661.253 |      1113.017 |  1628.014 |  1653.652 |  1114.979 |  2349.051 |
+| YNarrowSaturateBenchmark_UInt64 | SumNarrow_BitMath           |        799.115 |       804.042 |       793.151 |   509.697 |   512.657 |   625.198 |  1013.328 |
+| YNarrowSaturateBenchmark_UInt64 | SumNarrowVectorBase         |       3660.947 |      3696.134 |      3749.138 |  4037.009 |  4461.080 |  5748.578 |  9324.829 |
+| YNarrowSaturateBenchmark_UInt64 | SumNarrowVectorTraits       |       3665.085 |      3665.804 |      5566.215 |  6321.435 |  7404.890 |  5385.713 |  9964.018 |
+| YNarrowSaturateBenchmark_UInt64 | SumNarrowVector128Traits    |                |               |      2652.182 |  3649.313 |  3948.044 |  3408.569 | 10441.784 |
+| YNarrowSaturateBenchmark_UInt64 | SumNarrowVector256Traits    |                |               |      5576.564 |  6404.596 |  7607.278 |  5435.066 |  9980.185 |
+| YNarrowSaturateBenchmark_UInt64 | SumNarrowVector512Base      |                |               |               |           |           |           | 10553.714 |
+| YNarrowSaturateBenchmark_UInt64 | SumNarrowVector512Traits    |                |               |               |           |           |           | 10494.880 |
+| YNarrowSaturateBenchmark_UInt64 | SumNarrowVector512_Clamp    |                |               |               |           |           |           | 10610.265 |
+| YNarrowSaturateBenchmark_UInt64 | SumNarrowVector512_Convert  |                |               |               |           |           |           | 10455.842 |
+
 ### X86 - Intel Core i5-8250U
 | Type                            | Method                      | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
 | :------------------------------ | :-------------------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: |

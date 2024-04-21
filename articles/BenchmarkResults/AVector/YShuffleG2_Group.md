@@ -3,6 +3,43 @@
 
 Unit of data: Million operations per second. The larger the number, the better the performance.
 
+### X86 - AMD Ryzen 7 7840H
+| Type                      | Method         | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
+| :------------------------ | :------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: | --------: |
+| YShuffleG2Benchmark_Int16 | SumScalar      |       1087.661 |      1101.637 |      1104.544 |  1119.938 |  1128.276 |  1157.015 |  1141.805 |
+| YShuffleG2Benchmark_Int16 | SumBase        |       1099.972 |      1094.372 |      1084.752 |  1105.697 |  1114.873 |  1140.386 |  1127.591 |
+| YShuffleG2Benchmark_Int16 | SumTraits      |       1093.016 |      1106.062 |     25990.945 | 25886.263 | 27485.516 | 27117.640 | 38304.855 |
+| YShuffleG2Benchmark_Int16 | Sum128_AdvSimd |                |               |               |           |           |           |           |
+| YShuffleG2Benchmark_Int16 | Sum128Traits   |                |               |               |           |           |           |           |
+| YShuffleG2Benchmark_Int16 | Sum256Traits   |                |               |     25946.541 | 25864.203 | 25501.364 | 25342.257 | 38544.468 |
+| YShuffleG2Benchmark_Int16 | Sum512Base     |                |               |               |           |           |           |  1225.925 |
+| YShuffleG2Benchmark_Int16 | Sum512Traits   |                |               |               |           |           |           | 30051.706 |
+| YShuffleG2Benchmark_Int32 | SumScalar      |        723.362 |       749.801 |       719.524 |   772.732 |   776.903 |   797.260 |  1011.540 |
+| YShuffleG2Benchmark_Int32 | SumBase        |        767.755 |       749.328 |       771.060 |   753.903 |   757.296 |   770.010 |  1010.376 |
+| YShuffleG2Benchmark_Int32 | SumTraits      |        750.364 |       774.314 |     11201.451 | 11067.433 | 15214.935 | 15384.067 | 17640.637 |
+| YShuffleG2Benchmark_Int32 | Sum128_AdvSimd |                |               |               |           |           |           |           |
+| YShuffleG2Benchmark_Int32 | Sum128Traits   |                |               |               |           |           |           |           |
+| YShuffleG2Benchmark_Int32 | Sum256_AvxByte |                |               |     11052.503 | 11258.907 | 15149.355 | 15464.470 | 17606.166 |
+| YShuffleG2Benchmark_Int32 | Sum256Traits   |                |               |     11150.785 | 10920.510 | 14928.860 | 15396.595 | 17803.067 |
+| YShuffleG2Benchmark_Int32 | Sum512Base     |                |               |               |           |           |           |  1103.425 |
+| YShuffleG2Benchmark_Int32 | Sum512Traits   |                |               |               |           |           |           | 17771.026 |
+| YShuffleG2Benchmark_Int64 | SumScalar      |        505.318 |       525.282 |       503.321 |   521.927 |   524.301 |   543.642 |   539.330 |
+| YShuffleG2Benchmark_Int64 | SumBase        |        522.936 |       521.568 |       519.213 |   508.575 |   515.136 |   517.126 |   538.289 |
+| YShuffleG2Benchmark_Int64 | SumTraits      |        518.161 |       520.967 |      6257.356 |  6283.843 |  7606.608 |  6728.730 |  7124.596 |
+| YShuffleG2Benchmark_Int64 | Sum128_AdvSimd |                |               |               |           |           |           |           |
+| YShuffleG2Benchmark_Int64 | Sum128Traits   |                |               |               |           |           |           |           |
+| YShuffleG2Benchmark_Int64 | Sum256Traits   |                |               |      6326.099 |  6410.146 |  7675.571 |  6615.310 |  7132.190 |
+| YShuffleG2Benchmark_Int64 | Sum512Base     |                |               |               |           |           |           |   848.791 |
+| YShuffleG2Benchmark_Int64 | Sum512Traits   |                |               |               |           |           |           |  7769.455 |
+| YShuffleG2Benchmark_SByte | SumScalar      |       1116.768 |      1142.570 |      1126.924 |  1112.525 |  1147.130 |  1296.387 |  1233.262 |
+| YShuffleG2Benchmark_SByte | SumBase        |       1123.616 |      1141.862 |      1124.734 |  1127.150 |  1132.048 |  1286.785 |  1212.199 |
+| YShuffleG2Benchmark_SByte | SumTraits      |       1124.834 |      1129.501 |     51164.475 | 51085.822 | 61471.950 | 61697.931 | 57249.902 |
+| YShuffleG2Benchmark_SByte | Sum128_AdvSimd |                |               |               |           |           |           |           |
+| YShuffleG2Benchmark_SByte | Sum128Traits   |                |               |               |           |           |           |           |
+| YShuffleG2Benchmark_SByte | Sum256Traits   |                |               |     51387.516 | 52103.208 | 61552.383 | 61469.846 | 57331.397 |
+| YShuffleG2Benchmark_SByte | Sum512Base     |                |               |               |           |           |           |  1226.713 |
+| YShuffleG2Benchmark_SByte | Sum512Traits   |                |               |               |           |           |           | 61341.683 |
+
 ### X86 - Intel Core i5-8250U
 | Type                      | Method         | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
 | :------------------------ | :------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: |

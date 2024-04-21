@@ -3,6 +3,98 @@
 
 Unit of data: Million operations per second. The larger the number, the better the performance.
 
+### X86 - AMD Ryzen 7 7840H
+| Type                          | Method                    | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |   .NET 8.0 |
+| :---------------------------- | :------------------------ | -------------: | ------------: | ------------: | --------: | --------: | --------: | ---------: |
+| ShiftLeftConstBenchmark_Byte  | SumSLLScalar              |       1158.930 |      1162.537 |      1507.403 |  1529.852 |  1508.479 |  1677.757 |   1714.959 |
+| ShiftLeftConstBenchmark_Byte  | SumSLLNetBcl              |                |               |               |           |           |  1587.722 |   1602.705 |
+| ShiftLeftConstBenchmark_Byte  | SumSLLNetBcl_Const        |                |               |               |           |           |  1595.398 |   1640.845 |
+| ShiftLeftConstBenchmark_Byte  | SumSLL_Basic              |      13241.743 |     13207.349 |     25024.842 | 23412.700 | 24663.094 | 29834.283 |  32019.641 |
+| ShiftLeftConstBenchmark_Byte  | SumSLL_Base_Core          |      67289.841 |     67800.170 |     76530.251 | 76359.137 | 67728.945 | 78097.864 |  80445.723 |
+| ShiftLeftConstBenchmark_Byte  | SumSLL_Multiply           |      13219.514 |     15056.255 |     25299.812 | 23581.765 | 24854.766 | 30070.786 |  32834.447 |
+| ShiftLeftConstBenchmark_Byte  | SumSLL_AdvSimd            |                |               |               |           |           |           |            |
+| ShiftLeftConstBenchmark_Byte  | SumSLL_Avx2               |                |               |     35084.309 | 35073.321 | 30331.440 | 41355.116 |  82787.183 |
+| ShiftLeftConstBenchmark_Byte  | SumSLLTraits              |      13201.590 |     15054.128 |     34345.556 | 35173.054 | 30753.325 | 41998.816 |  82366.957 |
+| ShiftLeftConstBenchmark_Byte  | SumSLLTraits_Core         |      68122.389 |     67170.341 |     85378.339 | 85108.728 | 71706.672 | 85921.206 | 103940.833 |
+| ShiftLeftConstBenchmark_Byte  | SumSLLConstTraits         |      14873.913 |     13244.690 |     47270.691 | 69067.059 | 72211.591 | 82376.139 | 103768.539 |
+| ShiftLeftConstBenchmark_Byte  | SumSLLConstTraits_Core    |      67352.024 |     67462.939 |     84471.420 | 83904.666 | 77351.525 | 56313.666 | 104218.248 |
+| ShiftLeftConstBenchmark_Byte  | SumSLL128Traits           |                |               |     17464.506 | 17610.251 | 15388.614 | 19251.533 |  40937.707 |
+| ShiftLeftConstBenchmark_Byte  | SumSLL128Traits_Core      |                |               |     43145.557 | 43454.469 | 41881.908 | 43860.353 |  53136.481 |
+| ShiftLeftConstBenchmark_Byte  | SumSLL128ConstTraits      |                |               |     19159.479 | 26535.458 | 35040.946 | 43301.003 |  52498.193 |
+| ShiftLeftConstBenchmark_Byte  | SumSLL128ConstTraits_Core |                |               |     43709.593 | 43924.635 | 41056.827 | 31411.520 |  53406.905 |
+| ShiftLeftConstBenchmark_Byte  | SumSLL512Bcl              |                |               |               |           |           |           |    501.971 |
+| ShiftLeftConstBenchmark_Byte  | SumSLL512Traits           |                |               |               |           |           |           | 102336.376 |
+| ShiftLeftConstBenchmark_Byte  | SumSLLFast_Multiply       |      15152.225 |     15019.257 |     43452.725 | 43807.761 | 36610.511 | 57561.534 |  61251.942 |
+| ShiftLeftConstBenchmark_Byte  | SumSLLFast_AdvSimd        |                |               |               |           |           |           |            |
+| ShiftLeftConstBenchmark_Byte  | SumSLLFast_Avx2           |                |               |     38696.307 | 60984.258 | 69790.746 | 82595.651 |  81590.400 |
+| ShiftLeftConstBenchmark_Byte  | SumSLLFastTraits          |      15045.551 |     15085.911 |     38727.754 | 60138.120 | 70641.558 | 82310.926 |  99379.677 |
+| ShiftLeftConstBenchmark_Int16 | SumSLLScalar              |       1179.113 |      1178.102 |      1418.032 |  1411.558 |  1295.705 |  1570.545 |   1705.016 |
+| ShiftLeftConstBenchmark_Int16 | SumSLLNetBcl              |                |               |               |           |           | 39374.300 |  44739.814 |
+| ShiftLeftConstBenchmark_Int16 | SumSLLNetBcl_Const        |                |               |               |           |           | 50920.501 |  49458.678 |
+| ShiftLeftConstBenchmark_Int16 | SumSLL_Basic              |       7545.839 |      8714.679 |     17980.227 | 17869.757 | 23775.220 | 39442.007 |  45198.149 |
+| ShiftLeftConstBenchmark_Int16 | SumSLL_Base_Core          |      43319.874 |     42691.061 |     43384.468 | 41490.237 | 38316.864 | 38850.396 |  49734.859 |
+| ShiftLeftConstBenchmark_Int16 | SumSLL_Base_Core_Element  |       7451.170 |      8675.936 |     16143.067 | 16632.670 | 19425.648 | 24236.068 |  45180.696 |
+| ShiftLeftConstBenchmark_Int16 | SumSLL_Base_Core_Mov      |       6527.918 |      6615.670 |     17534.584 | 17675.758 | 21714.821 | 33565.398 |  33678.195 |
+| ShiftLeftConstBenchmark_Int16 | SumSLL_Multiply           |       7465.650 |      8692.835 |     17787.188 | 17924.490 | 24820.583 | 26437.499 |  32879.805 |
+| ShiftLeftConstBenchmark_Int16 | SumSLL_AdvSimd            |                |               |               |           |           |           |            |
+| ShiftLeftConstBenchmark_Int16 | SumSLL_Avx2               |                |               |     32585.584 | 33044.268 | 30160.500 | 33030.816 |  35712.430 |
+| ShiftLeftConstBenchmark_Int16 | SumSLLTraits              |       7646.653 |      7576.387 |     32493.293 | 32008.890 | 30823.012 | 39634.050 |  49491.506 |
+| ShiftLeftConstBenchmark_Int16 | SumSLLTraits_Core         |      42588.160 |     42562.830 |     43199.688 | 41750.420 | 42450.753 | 44715.654 |  42340.461 |
+| ShiftLeftConstBenchmark_Int16 | SumSLLConstTraits         |       6654.055 |      7616.741 |     33729.258 | 44707.598 | 46630.658 | 42713.244 |  49829.677 |
+| ShiftLeftConstBenchmark_Int16 | SumSLLConstTraits_Core    |      43220.783 |     40623.888 |     41013.383 | 44691.037 | 48501.402 | 42128.494 |  49805.196 |
+| ShiftLeftConstBenchmark_Int16 | SumSLL128Traits           |                |               |     17524.340 | 17563.021 | 17223.530 | 17409.903 |  26727.920 |
+| ShiftLeftConstBenchmark_Int16 | SumSLL128Traits_Core      |                |               |     22581.624 | 23592.948 | 23732.976 | 23154.652 |  22720.455 |
+| ShiftLeftConstBenchmark_Int16 | SumSLL128ConstTraits      |                |               |     17563.474 | 22250.319 | 26568.219 | 26721.196 |  26630.890 |
+| ShiftLeftConstBenchmark_Int16 | SumSLL128ConstTraits_Core |                |               |     22001.606 | 22400.069 | 26569.739 | 26555.490 |  26624.517 |
+| ShiftLeftConstBenchmark_Int16 | SumSLL512Bcl              |                |               |               |           |           |           |  48909.671 |
+| ShiftLeftConstBenchmark_Int16 | SumSLL512Traits           |                |               |               |           |           |           |  49414.521 |
+| ShiftLeftConstBenchmark_Int16 | SumSLLFast_Multiply       |       7544.444 |      7613.470 |     28799.847 | 28527.118 | 32328.200 | 32229.219 |  33024.721 |
+| ShiftLeftConstBenchmark_Int16 | SumSLLFast_AdvSimd        |                |               |               |           |           |           |            |
+| ShiftLeftConstBenchmark_Int16 | SumSLLFast_Avx2           |                |               |     33939.352 | 44640.885 | 39963.668 | 39108.753 |  44968.382 |
+| ShiftLeftConstBenchmark_Int16 | SumSLLFastTraits          |       8691.236 |      7624.219 |     34687.190 | 44978.236 | 39504.105 | 39096.035 |  49453.894 |
+| ShiftLeftConstBenchmark_Int32 | SumSLLScalar              |       1463.480 |      1454.936 |      1559.976 |  1684.073 |  2465.377 |  2996.555 |   2993.977 |
+| ShiftLeftConstBenchmark_Int32 | SumSLLNetBcl              |                |               |               |           |           | 21548.327 |  19677.030 |
+| ShiftLeftConstBenchmark_Int32 | SumSLLNetBcl_Const        |                |               |               |           |           | 22878.867 |  20453.920 |
+| ShiftLeftConstBenchmark_Int32 | SumSLL_Basic              |       4298.977 |      4331.705 |     13135.292 | 13225.361 | 14005.275 | 21494.027 |  19617.527 |
+| ShiftLeftConstBenchmark_Int32 | SumSLL_Base_Core          |      18612.821 |     19987.950 |     20604.687 | 19045.372 | 20339.215 | 21361.797 |  20607.885 |
+| ShiftLeftConstBenchmark_Int32 | SumSLL_Multiply           |       4339.441 |      3800.297 |     13069.043 | 13069.714 | 13865.790 | 14259.261 |  19346.380 |
+| ShiftLeftConstBenchmark_Int32 | SumSLL_AdvSimd            |                |               |               |           |           |           |            |
+| ShiftLeftConstBenchmark_Int32 | SumSLL_Avx2               |                |               |     15910.132 | 15899.566 | 16300.781 | 16671.905 |  16632.341 |
+| ShiftLeftConstBenchmark_Int32 | SumSLLTraits              |       4375.528 |      3804.305 |     16038.922 | 15987.260 | 16014.192 | 21556.913 |  20703.390 |
+| ShiftLeftConstBenchmark_Int32 | SumSLLTraits_Core         |      19792.313 |     19994.030 |     22761.253 | 23291.887 | 23985.510 | 22986.994 |  18749.999 |
+| ShiftLeftConstBenchmark_Int32 | SumSLLConstTraits         |       4380.457 |      3326.629 |     16002.972 | 19244.608 | 23951.437 | 22869.058 |  20726.908 |
+| ShiftLeftConstBenchmark_Int32 | SumSLLConstTraits_Core    |      18293.329 |     19943.893 |     19084.173 | 13214.099 | 23575.133 | 21086.849 |  20585.988 |
+| ShiftLeftConstBenchmark_Int32 | SumSLL128Traits           |                |               |      8748.598 |  8683.954 |  8663.424 | 11060.301 |  13096.959 |
+| ShiftLeftConstBenchmark_Int32 | SumSLL128Traits_Core      |                |               |     12939.748 | 12980.278 | 13198.866 | 13124.813 |  12526.460 |
+| ShiftLeftConstBenchmark_Int32 | SumSLL128ConstTraits      |                |               |      8518.578 | 10898.434 | 12928.864 | 12618.501 |  12825.056 |
+| ShiftLeftConstBenchmark_Int32 | SumSLL128ConstTraits_Core |                |               |     12911.830 | 13055.798 | 12930.918 | 12484.024 |  12935.403 |
+| ShiftLeftConstBenchmark_Int32 | SumSLL512Bcl              |                |               |               |           |           |           |  20914.791 |
+| ShiftLeftConstBenchmark_Int32 | SumSLL512Traits           |                |               |               |           |           |           |  21257.442 |
+| ShiftLeftConstBenchmark_Int32 | SumSLLFast_Multiply       |       4361.613 |      3794.213 |     15430.839 | 15626.693 | 15982.041 | 16130.549 |  19616.557 |
+| ShiftLeftConstBenchmark_Int32 | SumSLLFast_AdvSimd        |                |               |               |           |           |           |            |
+| ShiftLeftConstBenchmark_Int32 | SumSLLFast_Avx2           |                |               |     16235.154 | 21078.101 | 18307.665 | 16862.446 |  19879.184 |
+| ShiftLeftConstBenchmark_Int32 | SumSLLFastTraits          |       4405.177 |      3804.142 |     16373.592 | 19237.741 | 18227.790 | 21447.109 |  20810.343 |
+| ShiftLeftConstBenchmark_Int64 | SumSLLScalar              |       1464.290 |      1464.569 |      1687.438 |  1684.814 |  2488.596 |  2717.422 |   2986.043 |
+| ShiftLeftConstBenchmark_Int64 | SumSLLNetBcl              |                |               |               |           |           |  9349.849 |  10715.263 |
+| ShiftLeftConstBenchmark_Int64 | SumSLLNetBcl_Const        |                |               |               |           |           | 10017.360 |  10393.349 |
+| ShiftLeftConstBenchmark_Int64 | SumSLL_Basic              |        519.842 |       527.050 |       519.148 |   547.352 |   546.957 |  9266.590 |  10606.342 |
+| ShiftLeftConstBenchmark_Int64 | SumSLL_Base_Core          |        519.968 |       524.593 |       523.656 |   539.719 |   545.187 |  9210.611 |  10600.385 |
+| ShiftLeftConstBenchmark_Int64 | SumSLL_AdvSimd            |                |               |               |           |           |           |            |
+| ShiftLeftConstBenchmark_Int64 | SumSLL_Avx2               |                |               |      8214.588 |  8093.035 |  8190.858 |  8249.532 |   8838.482 |
+| ShiftLeftConstBenchmark_Int64 | SumSLLTraits              |        521.808 |       524.175 |      8016.616 |  8235.642 |  8085.607 |  8306.128 |   8741.160 |
+| ShiftLeftConstBenchmark_Int64 | SumSLLTraits_Core         |        519.484 |       524.490 |     10072.464 | 10127.320 | 10131.979 | 10213.689 |  10071.812 |
+| ShiftLeftConstBenchmark_Int64 | SumSLLConstTraits         |        544.565 |       546.734 |      8390.482 |  8262.187 | 10278.989 | 10188.180 |  10840.139 |
+| ShiftLeftConstBenchmark_Int64 | SumSLLConstTraits_Core    |        543.190 |       545.943 |     10250.939 | 10249.968 | 10306.207 | 10244.260 |  10732.499 |
+| ShiftLeftConstBenchmark_Int64 | SumSLL128Traits           |                |               |      4306.777 |  4341.621 |  4299.816 |  4287.973 |   5322.785 |
+| ShiftLeftConstBenchmark_Int64 | SumSLL128Traits_Core      |                |               |      6303.876 |  6485.925 |  6539.145 |  6596.300 |   6689.827 |
+| ShiftLeftConstBenchmark_Int64 | SumSLL128ConstTraits      |                |               |      4674.853 |  4572.462 |  6528.608 |  6610.880 |   6664.193 |
+| ShiftLeftConstBenchmark_Int64 | SumSLL128ConstTraits_Core |                |               |      6513.238 |  6511.238 |  6546.894 |  6598.881 |   6681.550 |
+| ShiftLeftConstBenchmark_Int64 | SumSLL512Bcl              |                |               |               |           |           |           |  10758.816 |
+| ShiftLeftConstBenchmark_Int64 | SumSLL512Traits           |                |               |               |           |           |           |   8877.605 |
+| ShiftLeftConstBenchmark_Int64 | SumSLLFast_AdvSimd        |                |               |               |           |           |           |            |
+| ShiftLeftConstBenchmark_Int64 | SumSLLFast_Avx2           |                |               |      8233.632 |  9210.144 |  9278.765 |  8991.723 |  10723.790 |
+| ShiftLeftConstBenchmark_Int64 | SumSLLFastTraits          |        541.011 |       548.171 |      8173.518 |  9312.483 |  9307.613 |  8959.314 |  10517.267 |
+
 ### X86 - Intel Core i5-8250U
 | Type                          | Method                    | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
 | :---------------------------- | :------------------------ | -------------: | ------------: | ------------: | --------: | --------: | --------: |

@@ -3,6 +3,61 @@
 
 Unit of data: Million operations per second. The larger the number, the better the performance.
 
+### X86 - AMD Ryzen 7 7840H
+| Type                     | Method       | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
+| :----------------------- | :----------- | -------------: | ------------: | ------------: | --------: | --------: | --------: | --------: |
+| MultiplyBenchmark_Double | SumScalar    |       2233.076 |      2247.540 |      2226.722 |  2239.652 |  2241.643 |  2223.557 |  2271.729 |
+| MultiplyBenchmark_Double | SumBcl       |       8989.461 |      9033.863 |      8996.712 |  8865.586 |  8989.267 |  9018.803 |  8985.127 |
+| MultiplyBenchmark_Double | SumTraits    |       8918.183 |      9001.905 |      9019.621 |  8986.022 |  8944.904 |  9019.581 |  9036.813 |
+| MultiplyBenchmark_Double | Sum128Traits |                |               |      4548.862 |  4544.570 |  4540.605 |  4508.141 |  4507.645 |
+| MultiplyBenchmark_Double | Sum256Traits |                |               |      8965.430 |  9012.898 |  8987.287 |  8865.010 |  9023.983 |
+| MultiplyBenchmark_Double | Sum512Bcl    |                |               |               |           |           |           | 11272.314 |
+| MultiplyBenchmark_Double | Sum512Traits |                |               |               |           |           |           | 11231.736 |
+| MultiplyBenchmark_Int16  | SumScalar    |       1554.731 |      1554.325 |      1540.805 |  1552.052 |  1558.295 |  1689.037 |  1914.695 |
+| MultiplyBenchmark_Int16  | SumBcl       |      53747.563 |     52460.825 |     51800.667 | 52848.046 | 53107.987 | 53746.061 | 53419.775 |
+| MultiplyBenchmark_Int16  | SumTraits    |      53507.146 |     52782.833 |     52839.420 | 53154.555 | 53436.923 | 52823.748 | 53203.159 |
+| MultiplyBenchmark_Int16  | Sum128Traits |                |               |     38654.889 | 38669.144 | 38843.149 | 51683.950 | 35830.693 |
+| MultiplyBenchmark_Int16  | Sum256Traits |                |               |     52587.267 | 51858.131 | 53021.860 | 52929.592 | 53731.756 |
+| MultiplyBenchmark_Int16  | Sum512Bcl    |                |               |               |           |           |           | 51241.525 |
+| MultiplyBenchmark_Int16  | Sum512Traits |                |               |               |           |           |           | 50753.082 |
+| MultiplyBenchmark_Int32  | SumScalar    |       2196.615 |      2140.207 |      2147.482 |  2145.339 |  2202.996 |  2836.422 |  2819.954 |
+| MultiplyBenchmark_Int32  | SumBcl       |      24465.857 |     24347.588 |     24178.823 | 24771.714 | 25451.560 | 24120.639 | 21702.571 |
+| MultiplyBenchmark_Int32  | SumTraits    |      24112.508 |     24699.595 |     24492.633 | 24829.388 | 25225.108 | 24296.791 | 21503.244 |
+| MultiplyBenchmark_Int32  | Sum128Traits |                |               |     18372.816 | 18315.938 | 18840.216 | 21123.228 | 17021.546 |
+| MultiplyBenchmark_Int32  | Sum256Traits |                |               |     24742.543 | 25019.720 | 25182.968 | 23961.430 | 21524.819 |
+| MultiplyBenchmark_Int32  | Sum512Bcl    |                |               |               |           |           |           | 21682.867 |
+| MultiplyBenchmark_Int32  | Sum512Traits |                |               |               |           |           |           | 21664.802 |
+| MultiplyBenchmark_SByte  | SumScalar    |       1554.483 |      1549.052 |      1544.172 |  1548.930 |  1545.671 |  1705.568 |  1906.858 |
+| MultiplyBenchmark_SByte  | SumBcl       |       1196.166 |      1258.913 |      1236.742 |  1944.703 |  1938.756 |  1744.998 |  1740.959 |
+| MultiplyBenchmark_SByte  | SumBcl_Widen |       1140.019 |      1277.760 |       992.148 |  1885.215 | 31885.599 | 46014.532 | 41592.869 |
+| MultiplyBenchmark_SByte  | SumTraits    |       1158.363 |      1273.225 |     44607.361 | 44911.337 | 45568.063 | 45754.853 | 41832.983 |
+| MultiplyBenchmark_SByte  | Sum128Traits |                |               |     31002.674 | 34619.095 | 34939.790 | 35180.985 | 34887.998 |
+| MultiplyBenchmark_SByte  | Sum256Traits |                |               |     45126.346 | 44960.972 | 45555.283 | 45932.683 | 41790.600 |
+| MultiplyBenchmark_SByte  | Sum512Bcl    |                |               |               |           |           |           |   464.311 |
+| MultiplyBenchmark_SByte  | Sum512Traits |                |               |               |           |           |           | 45887.293 |
+| MultiplyBenchmark_Single | SumScalar    |       2227.228 |      2212.464 |      2227.515 |  2227.973 |  2255.623 |  2259.844 |  2256.169 |
+| MultiplyBenchmark_Single | SumBcl       |      17961.651 |     17845.275 |     17479.312 | 17654.777 | 17705.423 | 18002.791 | 17684.550 |
+| MultiplyBenchmark_Single | SumTraits    |      17984.895 |     17807.568 |     17471.616 | 17608.997 | 17919.713 | 17951.014 | 17968.329 |
+| MultiplyBenchmark_Single | Sum128Traits |                |               |      9011.527 |  9063.130 |  9027.599 |  9050.032 |  9069.108 |
+| MultiplyBenchmark_Single | Sum256Traits |                |               |     17829.561 | 17762.227 | 17861.625 | 17936.843 | 17926.064 |
+| MultiplyBenchmark_Single | Sum512Bcl    |                |               |               |           |           |           | 21461.316 |
+| MultiplyBenchmark_Single | Sum512Traits |                |               |               |           |           |           | 21587.995 |
+| MultiplyBenchmark_UInt32 | SumScalar    |       2185.662 |      2174.935 |      2132.956 |  2171.037 |  2173.847 |  2814.793 |  2811.711 |
+| MultiplyBenchmark_UInt32 | SumBcl       |        792.138 |      1038.326 |       983.011 |  1253.582 | 25300.425 | 22301.059 | 22130.136 |
+| MultiplyBenchmark_UInt32 | SumTraits    |      24620.518 |     24836.345 |     24349.831 | 25294.316 | 25028.945 | 22820.971 | 22200.939 |
+| MultiplyBenchmark_UInt32 | Sum128Traits |                |               |     17615.886 | 20113.299 | 20147.359 | 17187.669 | 19845.149 |
+| MultiplyBenchmark_UInt32 | Sum256Traits |                |               |     24402.008 | 24765.613 | 25553.265 | 22582.894 | 22398.107 |
+| MultiplyBenchmark_UInt32 | Sum512Bcl    |                |               |               |           |           |           | 22988.093 |
+| MultiplyBenchmark_UInt32 | Sum512Traits |                |               |               |           |           |           | 22917.330 |
+| MultiplyBenchmark_UInt64 | SumScalar    |       2155.890 |      2173.871 |      2174.754 |  2120.901 |  2180.960 |  2836.802 |  2655.543 |
+| MultiplyBenchmark_UInt64 | SumBcl       |        393.494 |       585.301 |       550.356 |   654.253 |   988.303 |  1070.431 | 10284.914 |
+| MultiplyBenchmark_UInt64 | SumTraits    |        396.628 |       582.478 |      7086.154 |  7902.661 |  8142.377 |  7372.091 | 10274.940 |
+| MultiplyBenchmark_UInt64 | Sum128Traits |                |               |      3757.039 |  4106.071 |  4234.932 |  4063.604 | 11092.556 |
+| MultiplyBenchmark_UInt64 | Sum256Traits |                |               |      7061.012 |  7703.374 |  8127.779 |  7462.605 | 10355.200 |
+| MultiplyBenchmark_UInt64 | Sum256Avx    |                |               |      7055.996 |  7947.985 |  7917.805 |  7421.171 | 10468.888 |
+| MultiplyBenchmark_UInt64 | Sum512Bcl    |                |               |               |           |           |           | 10765.148 |
+| MultiplyBenchmark_UInt64 | Sum512Traits |                |               |               |           |           |           | 10662.058 |
+
 ### X86 - Intel Core i5-8250U
 | Type                     | Method       | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
 | :----------------------- | :----------- | -------------: | ------------: | ------------: | --------: | --------: | --------: |

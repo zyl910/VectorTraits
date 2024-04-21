@@ -10,6 +10,1137 @@
 
 ## X86
 
+### AMD Ryzen 7 7840H
+`AMD Ryzen 7 7840H w/ Radeon 780M Graphics`
+
+#### .NET Framework
+
+```
+VectorTraits.Benchmarks.NetFw
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
+Environment.Version:	4.0.30319.42000
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
+RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9232.0
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631 
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///E:/zylSelf/Code/cs/base/VectorTraits/tests/VectorTraits.Benchmarks/bin/Release/Release/System.Numerics.Vectors.DLL
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 1.1
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Framework 4.5
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[ConvertToDoubleBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.259163328783E+21
+# SumBcl	-3.25916332878302E+21
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. NaN!=-3.25916332878302E+21
+SumScalar	230.265	1138.444
+SumBcl	135.521	1934.338	1.699108
+SumBase_Range52_Impl	57.830	4533.026	3.981775
+SumTraits	136.040	1926.957	1.692624
+SumTraits_Range52	136.393	1921.972	1.688245
+
+[ConvertToDoubleBenchmark_UInt64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	3.62582413852437E+24
+# SumBcl	3.62582413852431E+24
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. NaN!=3.62582413852431E+24
+SumScalar	764.357	342.960
+SumBcl	107.417	2440.437	7.115800
+SumBase_Range52_Impl	57.721	4541.583	13.242297
+SumTraits	107.617	2435.887	7.102532
+SumTraits_Range52	107.269	2443.793	7.125583
+
+[ConvertToInt64Benchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5047608992447746009
+# SumBcl	5047608992447746009
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. -3689937982793898067!=5047608992447746009
+Check-SumBase_Range52RoundToEven	Check `SumBase_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-SumTraits_Range52RoundToEven	Check `SumTraits_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+SumScalar	155.429	1686.589
+SumBcl	136.148	1925.438	1.141617
+SumBase_Range52_Impl	117.435	2232.246	1.323527
+SumBase_Range52RoundToEven	27.765	9441.514	5.597994
+SumTraits	136.892	1914.970	1.135410
+SumTraits_Range52	137.532	1906.062	1.130129
+SumTraits_Range52RoundToEven	28.155	9310.763	5.520470
+
+[ConvertToUInt64Benchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5047608992447735894
+# SumBcl	5047608992447735894
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. 6696906415454780480!=5047608992447735894
+Check-SumBase_Range52RoundToEven	Check `SumBase_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-SumTraits_Range52RoundToEven	Check `SumTraits_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+SumScalar	929.911	281.902
+SumBcl	1453.953	180.297	0.639575
+SumBase_Range52_Impl	123.199	2127.815	7.548060
+SumBase_Range52RoundToEven	30.554	8579.765	30.435252
+SumTraits	1434.140	182.788	0.648410
+SumTraits_Range52	121.163	2163.568	7.674888
+SumTraits_Range52RoundToEven	31.275	8381.893	29.733335
+
+```
+
+#### .NET Core 2.1
+
+```
+VectorTraits.Benchmarks.NetCore
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	4.0.30319.42000
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.1.30\
+RuntimeInformation.FrameworkDescription:	.NET Core 4.6.30411.01
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631 
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/2.1.30/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 2.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 2.1
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[ConvertToDoubleBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.259163328783E+21
+# SumBcl	-3.25916332878302E+21
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. NaN!=-3.25916332878302E+21
+SumScalar	229.793	1140.781
+SumBcl	135.551	1933.921	1.695260
+SumBase_Range52_Impl	58.395	4489.142	3.935147
+SumTraits	135.519	1934.373	1.695657
+SumTraits_Range52	136.031	1927.089	1.689271
+
+[ConvertToDoubleBenchmark_UInt64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	3.62582413852437E+24
+# SumBcl	3.62582413852431E+24
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. NaN!=3.62582413852431E+24
+SumScalar	736.743	355.815
+SumBcl	107.383	2441.213	6.860912
+SumBase_Range52_Impl	58.207	4503.627	12.657227
+SumTraits	107.134	2446.883	6.876846
+SumTraits_Range52	107.333	2442.342	6.864084
+
+[ConvertToInt64Benchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5047608992447746009
+# SumBcl	5047608992447746009
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. -3689937982793898067!=5047608992447746009
+Check-SumBase_Range52RoundToEven	Check `SumBase_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-SumTraits_Range52RoundToEven	Check `SumTraits_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+SumScalar	155.533	1685.452
+SumBcl	136.755	1916.891	1.137315
+SumBase_Range52_Impl	123.564	2121.532	1.258732
+SumBase_Range52RoundToEven	30.342	8639.733	5.126062
+SumTraits	137.236	1910.166	1.133325
+SumTraits_Range52	136.553	1919.728	1.138998
+SumTraits_Range52RoundToEven	30.439	8612.012	5.109615
+
+[ConvertToUInt64Benchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5047608992447735894
+# SumBcl	5047608992447735894
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. 6696906415454780480!=5047608992447735894
+Check-SumBase_Range52RoundToEven	Check `SumBase_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-SumTraits_Range52RoundToEven	Check `SumTraits_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+SumScalar	926.684	282.884
+SumBcl	1442.305	181.754	0.642502
+SumBase_Range52_Impl	120.509	2175.306	7.689750
+SumBase_Range52RoundToEven	30.213	8676.588	30.671903
+SumTraits	1431.845	183.081	0.647196
+SumTraits_Range52	121.011	2166.284	7.657855
+SumTraits_Range52RoundToEven	31.454	8334.109	29.461233
+
+```
+
+#### .NET Core 3.1
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
+Environment.Version:	3.1.32
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.32\
+RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[ConvertToDoubleBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.2591633287830034E+21
+# SumBcl	-3.259163328783021E+21
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. NaN!=-3.259163328783021E+21
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Base_Range52_Impl	Check `Sum128Base_Range52_Impl` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. NaN!=-3.259163328783021E+21
+SumScalar	229.157	1143.950
+SumBcl	135.909	1928.814	1.686100
+SumBase_Range52_Impl	57.771	4537.669	3.966668
+SumTraits	65.162	4022.955	3.516724
+SumTraits_Range52	57.618	4549.683	3.977170
+Sum128Base_Basic	945.932	277.128	0.242255
+Sum128Base	944.103	277.665	0.242724
+Sum128Base_Range52_Impl	942.391	278.169	0.243165
+Sum128Traits	129.810	2019.439	1.765321
+Sum128Traits_Range52	115.237	2274.828	1.988573
+Sum256Base_Basic	523.580	500.676	0.437673
+Sum256Base	524.876	499.439	0.436592
+Sum256Base_Range52_Impl	524.986	499.335	0.436501
+Sum256Avx2_Bcl	65.313	4013.659	3.508597
+Sum256Avx2_HwScalar	139.724	1876.157	1.640070
+Sum256Avx2_Range52	57.636	4548.249	3.975917
+Sum256Traits	65.706	3989.629	3.487591
+Sum256Traits_Range52	57.884	4528.751	3.958872
+
+[ConvertToDoubleBenchmark_UInt64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	3.6258241385243714E+24
+# SumBcl	3.625824138524307E+24
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. NaN!=3.625824138524307E+24
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. NaN!=3.625824138524307E+24
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Base	Check `Sum128Base` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Base_Range52_Impl	Check `Sum128Base_Range52_Impl` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Traits	Check `Sum128Traits` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. NaN!=3.625824138524307E+24
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. NaN!=3.625824138524307E+24
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. NaN!=3.625824138524307E+24
+SumScalar	696.388	376.434
+SumBcl	106.914	2451.923	6.513555
+SumBase_Range52_Impl	57.577	4552.910	12.094845
+SumTraits	64.804	4045.208	10.746130
+SumTraits_Range52	57.572	4553.320	12.095936
+Sum128Base_Basic	1071.854	244.571	0.649704
+Sum128Base	1076.185	243.586	0.647090
+Sum128Base_Range52_Impl	1076.073	243.612	0.647157
+Sum128Traits	128.802	2035.247	5.406651
+Sum128Traits_Range52	115.123	2277.079	6.049082
+Sum256Base_Basic	913.298	287.030	0.762498
+Sum256Base	933.314	280.874	0.746145
+Sum256Base_Range52_Impl	943.930	277.716	0.737754
+Sum256Avx2_Bcl	64.731	4049.748	10.758192
+Sum256Avx2_Range52	57.888	4528.439	12.029840
+Sum256Traits	65.170	4022.442	10.685653
+Sum256Traits_Range52	57.719	4541.720	12.065120
+
+[ConvertToInt64Benchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5047608992447746009
+# SumBcl	5047608992447746009
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. -3689937982793898067!=5047608992447746009
+Check-SumBase_Range52RoundToEven	Check `SumBase_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-SumTraits_Range52RoundToEven	Check `SumTraits_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum128Traits_Range52RoundToEven	Check `Sum128Traits_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum256Traits_Range52RoundToEven	Check `Sum256Traits_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+SumScalar	154.106	1701.064
+SumBcl	135.665	1932.284	1.135926
+SumBase_Range52_Impl	113.078	2318.249	1.362823
+SumBase_Range52RoundToEven	30.102	8708.561	5.119478
+SumTraits	115.226	2275.043	1.337423
+SumTraits_Range52	36.198	7241.949	4.257304
+SumTraits_Range52RoundToEven	32.328	8108.759	4.766873
+Sum128Base_Basic	917.816	285.617	0.167905
+Sum128Base	920.654	284.737	0.167387
+Sum128Base_Range52_Impl	925.275	283.315	0.166551
+Sum128Traits	230.743	1136.089	0.667869
+Sum128Traits_Range52	68.334	3836.194	2.255173
+Sum128Traits_Range52RoundToEven	61.605	4255.224	2.501506
+Sum256Base_Basic	510.751	513.252	0.301724
+Sum256Base	508.243	515.785	0.303213
+Sum256Base_Range52_Impl	514.625	509.388	0.299453
+Sum256Avx2_HwScalar	139.699	1876.493	1.103128
+Sum256Avx2_ShiftVar	97.800	2680.412	1.575726
+Sum256Avx2_ShiftVarFix	121.243	2162.145	1.271054
+Sum256Avx2_Range52	36.719	7139.139	4.196866
+Sum256Traits	116.855	2243.320	1.318774
+Sum256Traits_Range52	36.276	7226.366	4.248144
+Sum256Traits_Range52RoundToEven	31.693	8271.301	4.862427
+
+[ConvertToUInt64Benchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5047608992447735894
+# SumBcl	5047608992447735894
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. 6696906415454780480!=5047608992447735894
+Check-SumBase_Range52RoundToEven	Check `SumBase_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-SumTraits_Range52RoundToEven	Check `SumTraits_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum128Traits_Range52RoundToEven	Check `Sum128Traits_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum256Traits_Range52RoundToEven	Check `Sum256Traits_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+SumScalar	945.958	277.120
+SumBcl	1464.228	179.032	0.646045
+SumBase_Range52_Impl	104.948	2497.841	9.013564
+SumBase_Range52RoundToEven	31.080	8434.515	30.436300
+SumTraits	75.826	3457.159	12.475302
+SumTraits_Range52	36.658	7151.099	25.805041
+SumTraits_Range52RoundToEven	32.064	8175.679	29.502282
+Sum128Base_Basic	1097.148	238.932	0.862197
+Sum128Base	1117.391	234.604	0.846577
+Sum128Base_Range52_Impl	1109.317	236.311	0.852739
+Sum128Traits	145.044	1807.336	6.521849
+Sum128Traits_Range52	69.407	3776.921	13.629179
+Sum128Traits_Range52RoundToEven	61.889	4235.694	15.284680
+Sum256Base_Basic	1074.860	243.887	0.880075
+Sum256Base	1084.270	241.770	0.872437
+Sum256Base_Range52_Impl	1082.750	242.110	0.873662
+Sum256Avx2_ShiftVar	77.734	3372.327	12.169185
+Sum256Avx2_Range52	36.833	7117.178	25.682635
+Sum256Traits	75.837	3456.659	12.473500
+Sum256Traits_Range52	36.243	7233.026	26.100677
+Sum256Traits_Range52RoundToEven	31.989	8194.918	29.571704
+
+```
+
+#### .NET 5.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	5.0.17
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\5.0.17\
+RuntimeInformation.FrameworkDescription:	.NET 5.0.17
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[ConvertToDoubleBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.2591633287830034E+21
+# SumBcl	-3.259163328783021E+21
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. NaN!=-3.259163328783021E+21
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Base_Range52_Impl	Check `Sum128Base_Range52_Impl` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. NaN!=-3.259163328783021E+21
+SumScalar	230.200	1138.764
+SumBcl	155.553	1685.240	1.479885
+SumBase_Range52_Impl	58.887	4451.636	3.909182
+SumTraits	63.066	4156.669	3.650158
+SumTraits_Range52	58.978	4444.779	3.903160
+Sum128Base_Basic	938.599	279.293	0.245260
+Sum128Base	939.182	279.119	0.245107
+Sum128Base_Range52_Impl	941.364	278.472	0.244539
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	123.860	2116.450	1.858550
+Sum128Traits_Range52	116.083	2258.244	1.983066
+Sum256Base_Basic	531.806	492.932	0.432865
+Sum256Base	533.255	491.592	0.431689
+Sum256Base_Range52_Impl	530.163	494.460	0.434207
+Sum256Avx2_Bcl	63.089	4155.141	3.648816
+Sum256Avx2_HwScalar	161.439	1623.796	1.425928
+Sum256Avx2_Range52	59.059	4438.676	3.897800
+Sum256Traits	62.778	4175.759	3.666921
+Sum256Traits_Range52	58.832	4455.823	3.912859
+
+[ConvertToDoubleBenchmark_UInt64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	3.6258241385243714E+24
+# SumBcl	3.625824138524307E+24
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. NaN!=3.625824138524307E+24
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. NaN!=3.625824138524307E+24
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Base	Check `Sum128Base` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Base_Range52_Impl	Check `Sum128Base_Range52_Impl` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Traits	Check `Sum128Traits` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. NaN!=3.625824138524307E+24
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. NaN!=3.625824138524307E+24
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. NaN!=3.625824138524307E+24
+SumScalar	711.831	368.267
+SumBcl	117.399	2232.930	6.063342
+SumBase_Range52_Impl	58.895	4451.013	12.086370
+SumTraits	59.694	4391.472	11.924691
+SumTraits_Range52	57.593	4551.672	12.359702
+Sum128Base_Basic	1061.840	246.877	0.670375
+Sum128Base	1057.743	247.833	0.672972
+Sum128Base_Range52_Impl	1066.611	245.773	0.667376
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	116.203	2255.907	6.125734
+Sum128Traits_Range52	115.150	2276.539	6.181760
+Sum256Base_Basic	958.487	273.498	0.742661
+Sum256Base	960.304	272.980	0.741256
+Sum256Base_Range52_Impl	961.777	272.562	0.740121
+Sum256Avx2_Bcl	58.754	4461.747	12.115516
+Sum256Avx2_Range52	57.598	4551.289	12.358662
+Sum256Traits	58.601	4473.361	12.147054
+Sum256Traits_Range52	57.656	4546.655	12.346079
+
+[ConvertToInt64Benchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5047608992447746009
+# SumBcl	5047608992447746009
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. -3689937982793898067!=5047608992447746009
+Check-SumBase_Range52RoundToEven	Check `SumBase_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-SumTraits_Range52RoundToEven	Check `SumTraits_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum128Traits_Range52RoundToEven	Check `Sum128Traits_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum256Traits_Range52RoundToEven	Check `Sum256Traits_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+SumScalar	155.525	1685.543
+SumBcl	137.683	1903.965	1.129586
+SumBase_Range52_Impl	52.231	5018.954	2.977649
+SumBase_Range52RoundToEven	30.236	8669.821	5.143638
+SumTraits	95.298	2750.794	1.631993
+SumTraits_Range52	33.183	7900.015	4.686927
+SumTraits_Range52RoundToEven	30.776	8517.762	5.053425
+Sum128Base_Basic	892.149	293.834	0.174326
+Sum128Base	891.605	294.014	0.174433
+Sum128Base_Range52_Impl	887.824	295.266	0.175175
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	187.972	1394.592	0.827384
+Sum128Traits_Range52	62.583	4188.773	2.485119
+Sum128Traits_Range52RoundToEven	52.694	4974.833	2.951473
+Sum256Base_Basic	496.229	528.273	0.313414
+Sum256Base	494.310	530.323	0.314631
+Sum256Base_Range52_Impl	490.974	533.926	0.316768
+Sum256Avx2_HwScalar	142.109	1844.663	1.094403
+Sum256Avx2_ShiftVar	84.524	3101.406	1.840005
+Sum256Avx2_ShiftVarFix	95.249	2752.211	1.632834
+Sum256Avx2_Range52	33.302	7871.662	4.670106
+Sum256Traits	95.566	2743.078	1.627416
+Sum256Traits_Range52	34.182	7669.011	4.549877
+Sum256Traits_Range52RoundToEven	30.850	8497.507	5.041408
+
+[ConvertToUInt64Benchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5047608992447735894
+# SumBcl	5047608992447735894
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. 6696906415454780480!=5047608992447735894
+Check-SumBase_Range52RoundToEven	Check `SumBase_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-SumTraits_Range52RoundToEven	Check `SumTraits_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum128Traits_Range52RoundToEven	Check `Sum128Traits_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum256Traits_Range52RoundToEven	Check `Sum256Traits_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+SumScalar	940.048	278.862
+SumBcl	1281.041	204.634	0.733816
+SumBase_Range52_Impl	51.689	5071.594	18.186727
+SumBase_Range52RoundToEven	27.776	9437.802	33.843944
+SumTraits	62.989	4161.721	14.923924
+SumTraits_Range52	31.452	8334.830	29.888687
+SumTraits_Range52RoundToEven	27.779	9436.677	33.839909
+Sum128Base_Basic	1088.978	240.725	0.863239
+Sum128Base	1089.892	240.523	0.862514
+Sum128Base_Range52_Impl	1091.843	240.093	0.860973
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	123.974	2114.501	7.582598
+Sum128Traits_Range52	61.434	4267.074	15.301722
+Sum128Traits_Range52RoundToEven	53.449	4904.586	17.587838
+Sum256Base_Basic	1034.010	253.522	0.909128
+Sum256Base	1039.378	252.212	0.904433
+Sum256Base_Range52_Impl	1038.667	252.385	0.905052
+Sum256Avx2_ShiftVar	63.708	4114.780	14.755595
+Sum256Avx2_Range52	31.081	8434.193	30.245004
+Sum256Traits	63.799	4108.900	14.734509
+Sum256Traits_Range52	31.658	8280.396	29.693486
+Sum256Traits_Range52RoundToEven	27.210	9634.085	34.547814
+
+```
+
+#### .NET 6.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	6.0.29
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.29\
+RuntimeInformation.FrameworkDescription:	.NET 6.0.29
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.29/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[ConvertToDoubleBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.2591633287830034E+21
+# SumBcl	-3.259163328783021E+21
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. NaN!=-3.259163328783021E+21
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Base_Range52_Impl	Check `Sum128Base_Range52_Impl` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. NaN!=-3.259163328783021E+21
+SumScalar	230.052	1139.498
+SumBcl	154.317	1698.735	1.490774
+SumBase_Range52_Impl	57.924	4525.662	3.971627
+SumTraits	58.240	4501.129	3.950097
+SumTraits_Range52	57.695	4543.591	3.987361
+Sum128Base_Basic	928.481	282.337	0.247773
+Sum128Base	925.496	283.247	0.248572
+Sum128Base_Range52_Impl	924.409	283.580	0.248864
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	115.112	2277.298	1.998509
+Sum128Traits_Range52	115.400	2271.610	1.993518
+Sum256Base_Basic	527.603	496.859	0.436033
+Sum256Base	513.994	510.014	0.447578
+Sum256Base_Range52_Impl	526.552	497.850	0.436903
+Sum256Avx2_Bcl	57.879	4529.182	3.974716
+Sum256Avx2_HwScalar	140.064	1871.604	1.642481
+Sum256Avx2_Range52	57.758	4538.685	3.983055
+Sum256Traits	57.945	4524.022	3.970187
+Sum256Traits_Range52	57.878	4529.272	3.974794
+
+[ConvertToDoubleBenchmark_UInt64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	3.6258241385243714E+24
+# SumBcl	3.625824138524307E+24
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. NaN!=3.625824138524307E+24
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. NaN!=3.625824138524307E+24
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Base	Check `Sum128Base` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Base_Range52_Impl	Check `Sum128Base_Range52_Impl` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Traits	Check `Sum128Traits` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. NaN!=3.625824138524307E+24
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. NaN!=3.625824138524307E+24
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. NaN!=3.625824138524307E+24
+SumScalar	696.932	376.140
+SumBcl	105.609	2482.220	6.599193
+SumBase_Range52_Impl	57.697	4543.482	12.079235
+SumTraits	58.040	4516.611	12.007795
+SumTraits_Range52	57.727	4541.076	12.072838
+Sum128Base_Basic	1026.118	255.472	0.679193
+Sum128Base	1050.545	249.531	0.663401
+Sum128Base_Range52_Impl	1029.328	254.675	0.677075
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	115.641	2266.887	6.026712
+Sum128Traits_Range52	115.131	2276.919	6.053383
+Sum256Base_Basic	958.199	273.580	0.727336
+Sum256Base	963.090	272.191	0.723642
+Sum256Base_Range52_Impl	958.079	273.614	0.727426
+Sum256Avx2_Bcl	57.901	4527.462	12.036645
+Sum256Avx2_Range52	57.590	4551.863	12.101516
+Sum256Traits	57.908	4526.926	12.035221
+Sum256Traits_Range52	57.605	4550.725	12.098492
+
+[ConvertToInt64Benchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5047608992447746009
+# SumBcl	5047608992447746009
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. -3689937982793898067!=5047608992447746009
+Check-SumBase_Range52RoundToEven	Check `SumBase_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-SumTraits_Range52RoundToEven	Check `SumTraits_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum128Traits_Range52RoundToEven	Check `Sum128Traits_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum256Traits_Range52RoundToEven	Check `Sum256Traits_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+SumScalar	154.427	1697.523
+SumBcl	136.400	1921.880	1.132167
+SumBase_Range52_Impl	51.057	5134.342	3.024608
+SumBase_Range52RoundToEven	39.458	6643.614	3.913711
+SumTraits	87.855	2983.825	1.757752
+SumTraits_Range52	30.359	8634.906	5.086769
+SumTraits_Range52RoundToEven	28.156	9310.375	5.484683
+Sum128Base_Basic	889.316	294.770	0.173647
+Sum128Base	889.520	294.703	0.173608
+Sum128Base_Range52_Impl	886.679	295.647	0.174164
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	177.426	1477.486	0.870378
+Sum128Traits_Range52	60.028	4367.050	2.572602
+Sum128Traits_Range52RoundToEven	55.507	4722.728	2.782129
+Sum256Base_Basic	492.561	532.206	0.313519
+Sum256Base	491.830	532.997	0.313985
+Sum256Base_Range52_Impl	492.827	531.918	0.313350
+Sum256Avx2_HwScalar	142.044	1845.513	1.087180
+Sum256Avx2_ShiftVar	76.939	3407.149	2.007130
+Sum256Avx2_ShiftVarFix	92.229	2842.314	1.674389
+Sum256Avx2_Range52	33.685	7782.212	4.584452
+Sum256Traits	91.913	2852.083	1.680144
+Sum256Traits_Range52	34.769	7539.603	4.441533
+Sum256Traits_Range52RoundToEven	29.103	9007.409	5.306208
+
+[ConvertToUInt64Benchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5047608992447735894
+# SumBcl	5047608992447735894
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. 6696906415454780480!=5047608992447735894
+Check-SumBase_Range52RoundToEven	Check `SumBase_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-SumTraits_Range52RoundToEven	Check `SumTraits_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum128Traits_Range52RoundToEven	Check `Sum128Traits_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum256Traits_Range52RoundToEven	Check `Sum256Traits_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+SumScalar	1006.620	260.420
+SumBcl	1279.872	204.821	0.786500
+SumBase_Range52_Impl	51.001	5140.013	19.737388
+SumBase_Range52RoundToEven	28.186	9300.624	35.713926
+SumTraits	59.596	4398.711	16.890827
+SumTraits_Range52	30.621	8560.839	32.873188
+SumTraits_Range52RoundToEven	27.029	9698.790	37.242862
+Sum128Base_Basic	1073.320	244.237	0.937856
+Sum128Base	1086.344	241.309	0.926612
+Sum128Base_Range52_Impl	1082.129	242.248	0.930222
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	118.199	2217.814	8.516294
+Sum128Traits_Range52	60.753	4314.879	16.568918
+Sum128Traits_Range52RoundToEven	52.256	5016.537	19.263247
+Sum256Base_Basic	1040.915	251.840	0.967053
+Sum256Base	1036.759	252.850	0.970929
+Sum256Base_Range52_Impl	1034.875	253.310	0.972697
+Sum256Avx2_ShiftVar	59.732	4388.663	16.852243
+Sum256Avx2_Range52	30.329	8643.214	33.189502
+Sum256Traits	60.089	4362.568	16.752042
+Sum256Traits_Range52	31.168	8410.638	32.296422
+Sum256Traits_Range52RoundToEven	26.591	9858.356	37.855587
+
+```
+
+#### .NET 7.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	7.0.18
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.18\
+RuntimeInformation.FrameworkDescription:	.NET 7.0.18
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	True
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.18/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[ConvertToDoubleBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.2591633287830034E+21
+# SumBcl	-3.259163328783021E+21
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. NaN!=-3.259163328783021E+21
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum128Bcl	Check `Sum128Bcl` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Base_Range52_Impl	Check `Sum128Base_Range52_Impl` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum256Base_Range52_Impl	Check `Sum256Base_Range52_Impl` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. NaN!=-3.259163328783021E+21
+SumScalar	229.759	1140.953
+SumBcl	57.978	4521.407	3.962834
+SumBase_Range52_Impl	57.739	4540.127	3.979242
+SumTraits	58.087	4512.957	3.955428
+SumTraits_Range52	58.259	4499.654	3.943769
+Sum128Bcl	116.184	2256.280	1.977540
+Sum128Base_Basic	921.224	284.561	0.249406
+Sum128Base	115.927	2261.278	1.981921
+Sum128Base_Range52_Impl	115.292	2273.731	1.992835
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	115.469	2270.245	1.989779
+Sum128Traits_Range52	115.240	2274.766	1.993742
+Sum256Bcl	58.148	4508.197	3.951256
+Sum256Base_Basic	503.077	521.081	0.456707
+Sum256Base	58.029	4517.434	3.959352
+Sum256Base_Range52_Impl	57.922	4525.810	3.966694
+Sum256Avx2_Bcl	57.939	4524.484	3.965531
+Sum256Avx2_HwScalar	138.442	1893.533	1.659606
+Sum256Avx2_Range52	57.792	4535.967	3.975596
+Sum256Traits	57.972	4521.902	3.963268
+Sum256Traits_Range52	58.060	4515.019	3.957236
+
+[ConvertToDoubleBenchmark_UInt64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	3.6258241385243714E+24
+# SumBcl	3.625824138524307E+24
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. NaN!=3.625824138524307E+24
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. NaN!=3.625824138524307E+24
+Check-Sum128Bcl	Check `Sum128Bcl` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Base	Check `Sum128Base` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Base_Range52_Impl	Check `Sum128Base_Range52_Impl` mismatch. NaN!=3.625824138524307E+24
+Check-Sum128Traits	Check `Sum128Traits` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. NaN!=3.625824138524307E+24
+Check-Sum256Base_Range52_Impl	Check `Sum256Base_Range52_Impl` mismatch. NaN!=3.625824138524307E+24
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. NaN!=3.625824138524307E+24
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. NaN!=3.625824138524307E+24
+SumScalar	652.915	401.498
+SumBcl	58.163	4507.073	11.225643
+SumBase_Range52_Impl	57.833	4532.752	11.289599
+SumTraits	58.023	4517.897	11.252602
+SumTraits_Range52	57.930	4525.217	11.270833
+Sum128Bcl	115.571	2268.241	5.649445
+Sum128Base_Basic	1020.609	256.851	0.639731
+Sum128Base	115.490	2269.838	5.653422
+Sum128Base_Range52_Impl	115.259	2274.388	5.664757
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	116.005	2259.766	5.628338
+Sum128Traits_Range52	114.918	2281.149	5.681596
+Sum256Bcl	58.209	4503.481	11.216697
+Sum256Base_Basic	943.320	277.895	0.692145
+Sum256Base	58.036	4516.933	11.250201
+Sum256Base_Range52_Impl	58.098	4512.092	11.238143
+Sum256Avx2_Bcl	58.124	4510.109	11.233205
+Sum256Avx2_Range52	57.790	4536.115	11.297978
+Sum256Traits	58.049	4515.935	11.247716
+Sum256Traits_Range52	57.969	4522.134	11.263154
+
+[ConvertToInt64Benchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5047608992447746009
+# SumBcl	5047608992447746009
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. -3689937982793898067!=5047608992447746009
+Check-SumBase_Range52RoundToEven	Check `SumBase_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-SumTraits_Range52RoundToEven	Check `SumTraits_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-Sum128Base_Range52_Impl	Check `Sum128Base_Range52_Impl` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum128Traits_Range52RoundToEven	Check `Sum128Traits_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-Sum256Base_Range52_Impl	Check `Sum256Base_Range52_Impl` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum256Traits_Range52RoundToEven	Check `Sum256Traits_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+SumScalar	154.420	1697.609
+SumBcl	494.432	530.193	0.312317
+SumBase_Range52_Impl	50.853	5154.901	3.036566
+SumBase_Range52RoundToEven	28.152	9311.873	5.485288
+SumTraits	86.908	3016.332	1.776812
+SumTraits_Range52	38.084	6883.374	4.054747
+SumTraits_Range52RoundToEven	37.738	6946.488	4.091925
+Sum128Bcl	881.242	297.471	0.175230
+Sum128Base_Basic	881.716	297.311	0.175135
+Sum128Base	885.987	295.878	0.174291
+Sum128Base_Range52_Impl	99.284	2640.338	1.555328
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	168.890	1552.154	0.914318
+Sum128Traits_Range52	60.631	4323.631	2.546895
+Sum128Traits_Range52RoundToEven	60.634	4323.357	2.546734
+Sum256Bcl	469.931	557.835	0.328600
+Sum256Base_Basic	479.505	546.697	0.322039
+Sum256Base	470.800	556.805	0.327994
+Sum256Base_Range52_Impl	58.211	4503.338	2.652754
+Sum256Avx2_HwScalar	140.367	1867.557	1.100111
+Sum256Avx2_ShiftVar	74.812	3504.040	2.064103
+Sum256Avx2_ShiftVarFix	86.005	3048.020	1.795478
+Sum256Avx2_Range52	37.444	7000.910	4.123983
+Sum256Traits	86.152	3042.818	1.792414
+Sum256Traits_Range52	37.208	7045.454	4.150222
+Sum256Traits_Range52RoundToEven	37.303	7027.437	4.139610
+
+[ConvertToUInt64Benchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5047608992447735894
+# SumBcl	5047608992447735894
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. 6696906415454780480!=5047608992447735894
+Check-SumBase_Range52RoundToEven	Check `SumBase_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-SumTraits_Range52	Check `SumTraits_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-SumTraits_Range52RoundToEven	Check `SumTraits_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-Sum128Base_Range52_Impl	Check `Sum128Base_Range52_Impl` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum128Traits_Range52RoundToEven	Check `Sum128Traits_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-Sum256Base_Range52_Impl	Check `Sum256Base_Range52_Impl` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum256Avx2_Range52	Check `Sum256Avx2_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum256Traits_Range52	Check `Sum256Traits_Range52` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum256Traits_Range52RoundToEven	Check `Sum256Traits_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+SumScalar	922.005	284.320
+SumBcl	1045.205	250.806	0.882128
+SumBase_Range52_Impl	51.870	5053.825	17.775157
+SumBase_Range52RoundToEven	27.326	9593.175	33.740819
+SumTraits	59.971	4371.170	15.374143
+SumTraits_Range52	37.907	6915.502	24.322993
+SumTraits_Range52RoundToEven	38.309	6842.850	24.067462
+Sum128Bcl	1089.071	240.704	0.846597
+Sum128Base_Basic	1085.032	241.600	0.849749
+Sum128Base	1085.153	241.573	0.849655
+Sum128Base_Range52_Impl	108.124	2424.486	8.527326
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	119.246	2198.340	7.731936
+Sum128Traits_Range52	67.823	3865.102	13.594220
+Sum128Traits_Range52RoundToEven	68.325	3836.730	13.494428
+Sum256Bcl	1033.341	253.686	0.892256
+Sum256Base_Basic	1023.931	256.017	0.900456
+Sum256Base	1035.972	253.041	0.889990
+Sum256Base_Range52_Impl	58.689	4466.694	15.710120
+Sum256Avx2_ShiftVar	60.186	4355.559	15.319239
+Sum256Avx2_Range52	37.951	6907.521	24.294921
+Sum256Traits	60.298	4347.480	15.290822
+Sum256Traits_Range52	38.058	6888.081	24.226546
+Sum256Traits_Range52RoundToEven	38.012	6896.434	24.255924
+
+```
+
+#### .NET 8.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	8.0.4
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.4\
+RuntimeInformation.FrameworkDescription:	.NET 8.0.4
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	True
+Vector512.IsHardwareAccelerated:	True
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.4/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 8.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 8.0
+VectorTraitsGlobal.InitCheckSum:	-2122844161	# 0x8177F7FF
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Avx512BW, Avx512CD, Avx512DQ, Avx512F, Avx512Vbmi, Avx512VL, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2, Avx512VL
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2, Avx512VL
+Vector512s.Instance:	WVectorTraits512Avx512	// Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi, Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2, Avx512VL
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[ConvertToDoubleBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	-3.2591633287830034E+21
+# SumBcl	-3.259163328783021E+21
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum128Bcl	Check `Sum128Bcl` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Base	Check `Sum128Base` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Base_Range52_Impl	Check `Sum128Base_Range52_Impl` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum128Traits	Check `Sum128Traits` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. -3.259163328783052E+21!=-3.259163328783021E+21
+Check-Sum256Base_Range52_Impl	Check `Sum256Base_Range52_Impl` mismatch. NaN!=-3.259163328783021E+21
+Check-Sum512Bcl	Check `Sum512Bcl` mismatch. -3.2591633287830233E+21!=-3.259163328783021E+21
+Check-Sum512Base	Check `Sum512Base` mismatch. -3.2591633287830233E+21!=-3.259163328783021E+21
+Check-Sum512Traits	Check `Sum512Traits` mismatch. -3.2591633287830233E+21!=-3.259163328783021E+21
+SumScalar	231.891	1130.463
+SumBcl	59.946	4373.005	3.868330
+SumBase_Range52_Impl	59.661	4393.920	3.886831
+SumTraits	59.284	4421.854	3.911542
+SumTraits_Range52	59.102	4435.418	3.923540
+Sum128Bcl	120.439	2176.571	1.925379
+Sum128Base_Basic	948.741	276.307	0.244419
+Sum128Base	119.492	2193.823	1.940641
+Sum128Base_Range52_Impl	118.355	2214.893	1.959279
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	117.598	2229.157	1.971897
+Sum128Traits_Range52	116.674	2246.803	1.987506
+Sum256Bcl	60.984	4298.594	3.802506
+Sum256Base_Basic	522.723	501.497	0.443620
+Sum256Base	61.371	4271.482	3.778523
+Sum256Base_Range52_Impl	60.011	4368.276	3.864147
+Sum256Avx2_Bcl	60.890	4305.189	3.808340
+Sum256Avx2_HwScalar	155.081	1690.363	1.495284
+Sum256Avx2_Range52	58.969	4445.433	3.932400
+Sum256Traits	58.897	4450.920	3.937253
+Sum256Traits_Range52	58.788	4459.112	3.944499
+Sum512Bcl	298.608	877.886	0.776572
+Sum512Base	296.713	883.493	0.781532
+Sum512Traits	34.090	7689.859	6.802396
+
+[ConvertToDoubleBenchmark_UInt64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	3.6258241385243714E+24
+# SumBcl	3.625824138524307E+24
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. NaN!=3.625824138524307E+24
+Check-Sum128Bcl	Check `Sum128Bcl` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Base_Basic	Check `Sum128Base_Basic` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Base	Check `Sum128Base` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Base_Range52_Impl	Check `Sum128Base_Range52_Impl` mismatch. NaN!=3.625824138524307E+24
+Check-Sum128Traits	Check `Sum128Traits` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum128Traits_Range52	Check `Sum128Traits_Range52` mismatch. 3.625824138524267E+24!=3.625824138524307E+24
+Check-Sum256Base_Range52_Impl	Check `Sum256Base_Range52_Impl` mismatch. NaN!=3.625824138524307E+24
+Check-Sum512Bcl	Check `Sum512Bcl` mismatch. 3.6258241385243226E+24!=3.625824138524307E+24
+Check-Sum512Base	Check `Sum512Base` mismatch. 3.6258241385243226E+24!=3.625824138524307E+24
+Check-Sum512Traits	Check `Sum512Traits` mismatch. 3.6258241385243226E+24!=3.625824138524307E+24
+SumScalar	246.161	1064.929
+SumBcl	60.607	4325.317	4.061602
+SumBase_Range52_Impl	59.255	4423.973	4.154243
+SumTraits	59.173	4430.156	4.160049
+SumTraits_Range52	59.170	4430.344	4.160225
+Sum128Bcl	119.568	2192.423	2.058751
+Sum128Base_Basic	986.192	265.814	0.249608
+Sum128Base	119.246	2198.349	2.064316
+Sum128Base_Range52_Impl	116.762	2245.113	2.108228
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	116.298	2254.070	2.116639
+Sum128Traits_Range52	116.779	2244.781	2.107917
+Sum256Bcl	60.685	4319.733	4.056359
+Sum256Base_Basic	519.919	504.202	0.473460
+Sum256Base	60.620	4324.356	4.060699
+Sum256Base_Range52_Impl	59.310	4419.893	4.150412
+Sum256Avx2_Bcl	58.502	4480.942	4.207739
+Sum256Avx2_Range52	58.091	4512.654	4.237518
+Sum256Traits	58.090	4512.733	4.237592
+Sum256Traits_Range52	57.677	4545.035	4.267924
+Sum512Bcl	305.896	856.972	0.804723
+Sum512Base	304.363	861.286	0.808774
+Sum512Traits	33.311	7869.563	7.389756
+
+[ConvertToInt64Benchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5047608992447746009
+# SumBcl	5047608992447746009
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. -3689937982793898067!=5047608992447746009
+Check-SumBase_Range52RoundToEven	Check `SumBase_Range52RoundToEven` mismatch. -3689937982793898793!=5047608992447746009
+Check-SumTraits_Range52RoundToEven	Check `SumTraits_Range52RoundToEven` mismatch. 5047608992447745283!=5047608992447746009
+Check-Sum128Base_Range52_Impl	Check `Sum128Base_Range52_Impl` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum128Traits_Range52RoundToEven	Check `Sum128Traits_Range52RoundToEven` mismatch. 5047608992447745283!=5047608992447746009
+Check-Sum256Base_Range52_Impl	Check `Sum256Base_Range52_Impl` mismatch. -3689937982793898067!=5047608992447746009
+Check-Sum256Traits_Range52RoundToEven	Check `Sum256Traits_Range52RoundToEven` mismatch. 5047608992447745283!=5047608992447746009
+SumScalar	155.175	1689.345
+SumBcl	471.049	556.512	0.329424
+SumBase_Range52_Impl	57.738	4540.258	2.687584
+SumBase_Range52RoundToEven	37.296	7028.739	4.160629
+SumTraits	24.594	10659.038	6.309567
+SumTraits_Range52	24.615	10649.565	6.303959
+SumTraits_Range52RoundToEven	24.216	10825.391	6.408039
+Sum128Bcl	972.887	269.450	0.159499
+Sum128Base_Basic	896.903	292.277	0.173012
+Sum128Base	966.640	271.191	0.160530
+Sum128Base_Range52_Impl	104.992	2496.809	1.477974
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	47.644	5502.115	3.256951
+Sum128Traits_Range52	48.374	5419.148	3.207839
+Sum128Traits_Range52RoundToEven	47.797	5484.520	3.246536
+Sum256Bcl	931.387	281.455	0.166606
+Sum256Base_Basic	486.386	538.963	0.319036
+Sum256Base	934.798	280.428	0.165998
+Sum256Base_Range52_Impl	57.458	4562.319	2.700643
+Sum256Avx2_HwScalar	137.383	1908.132	1.129510
+Sum256Avx2_ShiftVar	78.850	3324.585	1.967972
+Sum256Avx2_ShiftVarFix	90.735	2889.109	1.710194
+Sum256Avx2_Range52	24.401	10743.179	6.359374
+Sum256Traits	24.411	10738.964	6.356879
+Sum256Traits_Range52	24.430	10730.291	6.351745
+Sum256Traits_Range52RoundToEven	24.479	10708.991	6.339137
+Sum512Bcl	1397.309	187.606	0.111053
+Sum512Base	1410.190	185.893	0.110038
+Sum512Traits	24.556	10675.313	6.319201
+
+[ConvertToUInt64Benchmark_Double(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumScalar	5047608992447735894
+# SumBcl	5047608992447735894
+Check-SumBase_Range52_Impl	Check `SumBase_Range52_Impl` mismatch. 6696906415454780480!=5047608992447735894
+Check-SumBase_Range52RoundToEven	Check `SumBase_Range52RoundToEven` mismatch. 6696906415454844503!=5047608992447735894
+Check-SumTraits_Range52RoundToEven	Check `SumTraits_Range52RoundToEven` mismatch. 5047608992447799917!=5047608992447735894
+Check-Sum128Base_Range52_Impl	Check `Sum128Base_Range52_Impl` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum128Traits_Range52RoundToEven	Check `Sum128Traits_Range52RoundToEven` mismatch. 5047608992447799917!=5047608992447735894
+Check-Sum256Base_Range52_Impl	Check `Sum256Base_Range52_Impl` mismatch. 6696906415454780480!=5047608992447735894
+Check-Sum256Traits_Range52RoundToEven	Check `Sum256Traits_Range52RoundToEven` mismatch. 5047608992447799917!=5047608992447735894
+SumScalar	1058.654	247.620
+SumBcl	1094.849	239.434	0.966940
+SumBase_Range52_Impl	66.314	3953.101	15.964374
+SumBase_Range52RoundToEven	41.791	6272.667	25.331805
+SumTraits	31.071	8437.045	34.072523
+SumTraits_Range52	31.150	8415.470	33.985391
+SumTraits_Range52RoundToEven	30.922	8477.641	34.236467
+Sum128Bcl	1382.625	189.599	0.765684
+Sum128Base_Basic	1112.710	235.590	0.951419
+Sum128Base	1390.086	188.581	0.761574
+Sum128Base_Range52_Impl	99.697	2629.407	10.618708
+Sum128AdvSimd_Range52	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Range52_Impl	Run fail! Requires hardware support AdvSimd!
+Sum128Traits	47.412	5529.105	22.328973
+Sum128Traits_Range52	47.315	5540.372	22.374477
+Sum128Traits_Range52RoundToEven	47.524	5516.031	22.276174
+Sum256Bcl	1440.915	181.929	0.734709
+Sum256Base_Basic	1100.064	238.299	0.962356
+Sum256Base	1447.245	181.133	0.731496
+Sum256Base_Range52_Impl	57.435	4564.197	18.432247
+Sum256Avx2_ShiftVar	60.195	4354.901	17.587020
+Sum256Avx2_Range52	24.343	10768.982	43.489917
+Sum256Traits	24.378	10753.217	43.426248
+Sum256Traits_Range52	24.553	10676.618	43.116912
+Sum256Traits_Range52RoundToEven	24.303	10786.304	43.559872
+Sum512Bcl	2015.887	130.039	0.525155
+Sum512Base	2013.953	130.164	0.525659
+Sum512Traits	24.456	10719.165	43.288734
+
+```
+
 ### Intel Core i5-8250U
 `Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
 

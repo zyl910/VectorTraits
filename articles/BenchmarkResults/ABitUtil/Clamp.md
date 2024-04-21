@@ -3,6 +3,438 @@
 
 ## X86
 
+### AMD Ryzen 7 7840H
+`AMD Ryzen 7 7840H w/ Radeon 780M Graphics`
+
+#### .NET Framework
+
+```
+VectorTraits.Benchmarks.NetFw
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
+Environment.Version:	4.0.30319.42000
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
+RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9232.0
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631 
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///E:/zylSelf/Code/cs/base/VectorTraits/tests/VectorTraits.Benchmarks/bin/Release/Release/System.Numerics.Vectors.DLL
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 1.1
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Framework 4.5
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[ClampBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-13446
+SumClamp_If	6636.150	197.512
+SumClamp_IfUnrolling4	6037.909	217.082	1.099081
+SumClamp_MinMax	7138.703	183.608	0.929602
+SumClamp_MinMaxUnrolling4	6919.643	189.420	0.959031
+SumClamp_BitMath	3346.086	391.717	1.983257
+SumClamp_BitMathUnrolling4	3502.430	374.232	1.894727
+
+[ClampBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-141291292
+SumClamp_If	5966.297	219.687
+SumClamp_IfUnrolling4	5845.057	224.244	1.020742
+SumClamp_MinMax	6613.447	198.190	0.902146
+SumClamp_MinMaxUnrolling4	6391.809	205.062	0.933429
+SumClamp_BitMath	2515.922	520.970	2.371416
+SumClamp_BitMathUnrolling4	2532.692	517.520	2.355713
+
+```
+
+#### .NET Core 2.1
+
+```
+VectorTraits.Benchmarks.NetCore
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	4.0.30319.42000
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.1.30\
+RuntimeInformation.FrameworkDescription:	.NET Core 4.6.30411.01
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631 
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/2.1.30/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 2.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 2.1
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[ClampBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-13446
+SumClamp_If	6160.754	212.753
+SumClamp_IfUnrolling4	5861.818	223.603	1.050997
+SumClamp_MinMax	6467.861	202.651	0.952518
+SumClamp_MinMaxUnrolling4	6350.276	206.404	0.970155
+SumClamp_Math	7666.108	170.976	0.803635
+SumClamp_MathUnrolling4	7197.620	182.105	0.855943
+SumClamp_BitMath	2791.498	469.540	2.206971
+SumClamp_BitMathUnrolling4	3349.437	391.325	1.839340
+
+[ClampBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-141291292
+SumClamp_If	5696.271	230.101
+SumClamp_IfUnrolling4	5459.618	240.075	1.043346
+SumClamp_MinMax	6200.901	211.376	0.918620
+SumClamp_MinMaxUnrolling4	6142.313	213.392	0.927382
+SumClamp_Math	6796.941	192.840	0.838064
+SumClamp_MathUnrolling4	6946.560	188.686	0.820013
+SumClamp_BitMath	2029.270	645.907	2.807055
+SumClamp_BitMathUnrolling4	1980.364	661.858	2.876376
+
+```
+
+#### .NET Core 3.1
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
+Environment.Version:	3.1.32
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.32\
+RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[ClampBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-13446
+SumClamp_If	6051.456	216.596
+SumClamp_IfUnrolling4	5854.498	223.883	1.033642
+SumClamp_MinMax	6491.442	201.915	0.932221
+SumClamp_MinMaxUnrolling4	6394.931	204.962	0.946289
+SumClamp_Math	6623.409	197.892	0.913647
+SumClamp_MathUnrolling4	6318.673	207.436	0.957710
+SumClamp_BitMath	3327.622	393.891	1.818553
+SumClamp_BitMathUnrolling4	2765.165	474.011	2.188461
+
+[ClampBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-141291292
+SumClamp_If	6012.268	218.008
+SumClamp_IfUnrolling4	5584.480	234.708	1.076603
+SumClamp_MinMax	6163.689	212.652	0.975433
+SumClamp_MinMaxUnrolling4	6058.613	216.340	0.992351
+SumClamp_Math	6305.263	207.877	0.953532
+SumClamp_MathUnrolling4	6112.293	214.440	0.983635
+SumClamp_BitMath	1992.352	657.876	3.017674
+SumClamp_BitMathUnrolling4	1911.162	685.824	3.145871
+
+```
+
+#### .NET 5.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	5.0.17
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\5.0.17\
+RuntimeInformation.FrameworkDescription:	.NET 5.0.17
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[ClampBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-13446
+SumClamp_If	6580.930	199.169
+SumClamp_IfUnrolling4	6410.269	204.472	1.026623
+SumClamp_MinMax	7208.198	181.837	0.912979
+SumClamp_MinMaxUnrolling4	7182.915	182.477	0.916192
+SumClamp_Math	7087.901	184.924	0.928474
+SumClamp_MathUnrolling4	6746.019	194.295	0.975528
+SumClamp_BitMath	6804.232	192.633	0.967182
+SumClamp_BitMathUnrolling4	5596.932	234.185	1.175810
+
+[ClampBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-141291292
+SumClamp_If	6024.221	217.575
+SumClamp_IfUnrolling4	5898.482	222.213	1.021317
+SumClamp_MinMax	6554.455	199.974	0.919103
+SumClamp_MinMaxUnrolling4	6696.734	195.725	0.899576
+SumClamp_Math	6595.429	198.732	0.913393
+SumClamp_MathUnrolling4	6349.335	206.434	0.948796
+SumClamp_BitMath	5454.964	240.280	1.104356
+SumClamp_BitMathUnrolling4	4853.721	270.044	1.241155
+
+```
+
+#### .NET 6.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	6.0.29
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.29\
+RuntimeInformation.FrameworkDescription:	.NET 6.0.29
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.29/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[ClampBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-13446
+SumClamp_If	6806.397	192.572
+SumClamp_IfUnrolling4	6424.867	204.007	1.059383
+SumClamp_MinMax	7113.624	184.255	0.956811
+SumClamp_MinMaxUnrolling4	7065.020	185.522	0.963394
+SumClamp_Math	7165.360	182.925	0.949903
+SumClamp_MathUnrolling4	6814.141	192.353	0.998864
+SumClamp_BitMath	6397.697	204.874	1.063882
+SumClamp_BitMathUnrolling4	5387.744	243.278	1.263311
+
+[ClampBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-141291292
+SumClamp_If	6917.582	189.477
+SumClamp_IfUnrolling4	6139.759	213.481	1.126686
+SumClamp_MinMax	7103.246	184.524	0.973862
+SumClamp_MinMaxUnrolling4	7027.583	186.511	0.984347
+SumClamp_Math	6629.297	197.716	1.043487
+SumClamp_MathUnrolling4	6732.225	194.693	1.027533
+SumClamp_BitMath	5418.312	241.906	1.276704
+SumClamp_BitMathUnrolling4	4768.602	274.865	1.450652
+
+```
+
+#### .NET 7.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	7.0.18
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.18\
+RuntimeInformation.FrameworkDescription:	.NET 7.0.18
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	True
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.18/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[ClampBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-13446
+SumClamp_If	5771.577	227.099
+SumClamp_IfUnrolling4	5556.635	235.884	1.038682
+SumClamp_MinMax	6445.581	203.352	0.895432
+SumClamp_MinMaxUnrolling4	6603.622	198.485	0.874002
+SumClamp_Math	6478.686	202.313	0.890856
+SumClamp_MathUnrolling4	5938.468	220.717	0.971897
+SumClamp_BitMath	3525.115	371.823	1.637273
+SumClamp_BitMathUnrolling4	3484.233	376.186	1.656484
+
+[ClampBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-141291292
+SumClamp_If	5607.683	233.736
+SumClamp_IfUnrolling4	5264.353	248.980	1.065218
+SumClamp_MinMax	6044.594	216.842	0.927719
+SumClamp_MinMaxUnrolling4	5909.813	221.787	0.948877
+SumClamp_Math	5933.810	220.890	0.945039
+SumClamp_MathUnrolling4	5611.541	233.576	0.999313
+SumClamp_BitMath	2351.279	557.450	2.384950
+SumClamp_BitMathUnrolling4	2328.591	562.881	2.408187
+
+```
+
+#### .NET 8.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	8.0.4
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.4\
+RuntimeInformation.FrameworkDescription:	.NET 8.0.4
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	True
+Vector512.IsHardwareAccelerated:	True
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.4/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 8.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 8.0
+VectorTraitsGlobal.InitCheckSum:	-2122844161	# 0x8177F7FF
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Avx512BW, Avx512CD, Avx512DQ, Avx512F, Avx512Vbmi, Avx512VL, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2, Avx512VL
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2, Avx512VL
+Vector512s.Instance:	WVectorTraits512Avx512	// Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi, Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2, Avx512VL
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[ClampBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-13446
+SumClamp_If	5821.118	225.166
+SumClamp_IfUnrolling4	5585.104	234.681	1.042258
+SumClamp_MinMax	6198.299	211.464	0.939148
+SumClamp_MinMaxUnrolling4	6187.332	211.839	0.940812
+SumClamp_Math	5837.308	224.542	0.997226
+SumClamp_MathUnrolling4	5872.685	223.189	0.991219
+SumClamp_BitMath	2033.664	644.511	2.862379
+SumClamp_BitMathUnrolling4	2014.526	650.635	2.889572
+
+[ClampBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-141291292
+SumClamp_If	5400.621	242.698
+SumClamp_IfUnrolling4	5455.419	240.260	0.989955
+SumClamp_MinMax	6107.529	214.607	0.884256
+SumClamp_MinMaxUnrolling4	6013.231	217.973	0.898123
+SumClamp_Math	6165.024	212.606	0.876010
+SumClamp_MathUnrolling4	5712.176	229.461	0.945458
+SumClamp_BitMath	1475.568	888.281	3.660028
+SumClamp_BitMathUnrolling4	1425.584	919.427	3.788358
+
+```
+
 ### Intel Core i5-8250U
 `Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
 
@@ -405,7 +837,6 @@ Vectors.Instance:	VectorTraits128Base	//
 Vectors.BaseInstance:	VectorTraits128Base
 
 
-
 [ClampBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
@@ -466,7 +897,6 @@ VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, 
 Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
 Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
-
 
 
 [ClampBenchmark_Int16(262144)]
@@ -531,7 +961,6 @@ Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
 
 
-
 [ClampBenchmark_Int16(262144)]
 ---
 NAME	US	MOPS	SCALE
@@ -592,7 +1021,6 @@ VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, 
 Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
 Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
-
 
 
 [ClampBenchmark_Int16(262144)]
