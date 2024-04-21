@@ -1480,6 +1480,114 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             Statics.Widen(source, out lower, out upper);
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenLower_AcceleratedTypes"/>
+        public override TypeCodeFlags WidenLower_AcceleratedTypes {
+            get {
+                return Statics.WidenLower_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> WidenLower(Vector128<float> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<short> WidenLower(Vector128<sbyte> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<ushort> WidenLower(Vector128<byte> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<int> WidenLower(Vector128<short> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<uint> WidenLower(Vector128<ushort> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> WidenLower(Vector128<int> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<ulong> WidenLower(Vector128<uint> source) {
+            return Statics.WidenLower(source);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenUpper_AcceleratedTypes"/>
+        public override TypeCodeFlags WidenUpper_AcceleratedTypes {
+            get {
+                return Statics.WidenUpper_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> WidenUpper(Vector128<float> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<short> WidenUpper(Vector128<sbyte> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<ushort> WidenUpper(Vector128<byte> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<int> WidenUpper(Vector128<short> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<uint> WidenUpper(Vector128<ushort> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<long> WidenUpper(Vector128<int> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<ulong> WidenUpper(Vector128<uint> source) {
+            return Statics.WidenUpper(source);
+        }
+
 #endif
     }
 }

@@ -47,30 +47,30 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s<T>.XyXMask,
                 Vector256s<T>.XyzwXMask
             };
-            foreach (Vector256<T> soure in samples) {
+            foreach (Vector256<T> source in samples) {
                 Vector256<TOut> expected0, expected1;
 #if NET7_0_OR_GREATER
                 // CS8133	Cannot deconstruct dynamic objects. (expected0, expected1) = Vector256.Widen((dynamic)vector);
-                Vector256Generic.Widen(soure, out expected0, out expected1);
+                Vector256Generic.Widen(source, out expected0, out expected1);
 #else
                 // CS1510	A ref or out value must be an assignable variable . Vector256s.Widen((dynamic)vector, out (dynamic)expected0, out (dynamic)expected1);
-                Vector256s.Widen(soure, out expected0, out expected1);
+                Vector256s.Widen(source, out expected0, out expected1);
 #endif // NET7_0_OR_GREATER
                 if (Scalars<T>.ExponentBits > 0) {
                     Console.WriteLine();
-                    Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", soure));
+                    Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", source));
                     Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}, {1}", expected0, expected1));
                 }
                 foreach (IWVectorTraits256 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
                     Vector256<TOut> dst0, dst1;
-                    instance.Widen(soure, out dst0, out dst1);
+                    instance.Widen(source, out dst0, out dst1);
                     if (Scalars<T>.ExponentBits > 0) {
                         // Compatible floating-point NaN.
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, {2}", instance.GetType().Name, dst0, dst1));
                     } else {
-                        ClassicAssert.AreEqual(expected0, dst0, $"{instance.GetType().Name}, soure={soure}");
-                        ClassicAssert.AreEqual(expected1, dst1, $"{instance.GetType().Name}, soure={soure}");
+                        ClassicAssert.AreEqual(expected0, dst0, $"{instance.GetType().Name}, source={source}");
+                        ClassicAssert.AreEqual(expected1, dst1, $"{instance.GetType().Name}, source={source}");
                     }
                 }
             }

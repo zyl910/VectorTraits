@@ -3537,6 +3537,417 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenLower_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> WidenLower(Vector128<float> source) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD && NET8_0_OR_GREATER
+                return Vector128.WidenLower(source);
+#elif BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                (var rt, _) = Vector128.Widen(source);
+                return rt;
+#else
+                return WidenLower_Basic(source);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> WidenLower(Vector128<sbyte> source) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD && NET8_0_OR_GREATER
+                return Vector128.WidenLower(source);
+#elif BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                (var rt, _) = Vector128.Widen(source);
+                return rt;
+#else
+                return WidenLower_Basic(source);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> WidenLower(Vector128<byte> source) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD && NET8_0_OR_GREATER
+                return Vector128.WidenLower(source);
+#elif BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                (var rt, _) = Vector128.Widen(source);
+                return rt;
+#else
+                return WidenLower_Basic(source);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> WidenLower(Vector128<short> source) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD && NET8_0_OR_GREATER
+                return Vector128.WidenLower(source);
+#elif BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                (var rt, _) = Vector128.Widen(source);
+                return rt;
+#else
+                return WidenLower_Basic(source);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> WidenLower(Vector128<ushort> source) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD && NET8_0_OR_GREATER
+                return Vector128.WidenLower(source);
+#elif BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                (var rt, _) = Vector128.Widen(source);
+                return rt;
+#else
+                return WidenLower_Basic(source);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> WidenLower(Vector128<int> source) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD && NET8_0_OR_GREATER
+                return Vector128.WidenLower(source);
+#elif BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                (var rt, _) = Vector128.Widen(source);
+                return rt;
+#else
+                return WidenLower_Basic(source);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> WidenLower(Vector128<uint> source) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD && NET8_0_OR_GREATER
+                return Vector128.WidenLower(source);
+#elif BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                (var rt, _) = Vector128.Widen(source);
+                return rt;
+#else
+                return WidenLower_Basic(source);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> WidenLower_Basic(Vector128<float> source) {
+                UnsafeUtil.SkipInit(out Vector128<double> rt);
+                ref FixedArray2<double> p = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref rt);
+                ref FixedArray4<float> psource = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref source);
+                p.I0 = psource.I0;
+                p.I1 = psource.I1;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> WidenLower_Basic(Vector128<sbyte> source) {
+                UnsafeUtil.SkipInit(out Vector128<short> rt);
+                ref FixedArray8<short> p = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref rt);
+                ref FixedArray16<sbyte> psource = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref source);
+                p.I0 = psource.I0;
+                p.I1 = psource.I1;
+                p.I2 = psource.I2;
+                p.I3 = psource.I3;
+                p.I4 = psource.I4;
+                p.I5 = psource.I5;
+                p.I6 = psource.I6;
+                p.I7 = psource.I7;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> WidenLower_Basic(Vector128<byte> source) {
+                UnsafeUtil.SkipInit(out Vector128<ushort> rt);
+                ref FixedArray8<ushort> p = ref Unsafe.As<Vector128<ushort>, FixedArray8<ushort>>(ref rt);
+                ref FixedArray16<byte> psource = ref Unsafe.As<Vector128<byte>, FixedArray16<byte>>(ref source);
+                p.I0 = psource.I0;
+                p.I1 = psource.I1;
+                p.I2 = psource.I2;
+                p.I3 = psource.I3;
+                p.I4 = psource.I4;
+                p.I5 = psource.I5;
+                p.I6 = psource.I6;
+                p.I7 = psource.I7;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> WidenLower_Basic(Vector128<short> source) {
+                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
+                ref FixedArray8<short> psource = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref source);
+                p.I0 = psource.I0;
+                p.I1 = psource.I1;
+                p.I2 = psource.I2;
+                p.I3 = psource.I3;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> WidenLower_Basic(Vector128<ushort> source) {
+                UnsafeUtil.SkipInit(out Vector128<uint> rt);
+                ref FixedArray4<uint> p = ref Unsafe.As<Vector128<uint>, FixedArray4<uint>>(ref rt);
+                ref FixedArray8<ushort> psource = ref Unsafe.As<Vector128<ushort>, FixedArray8<ushort>>(ref source);
+                p.I0 = psource.I0;
+                p.I1 = psource.I1;
+                p.I2 = psource.I2;
+                p.I3 = psource.I3;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> WidenLower_Basic(Vector128<int> source) {
+                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
+                ref FixedArray4<int> psource = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref source);
+                p.I0 = psource.I0;
+                p.I1 = psource.I1;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> WidenLower_Basic(Vector128<uint> source) {
+                UnsafeUtil.SkipInit(out Vector128<ulong> rt);
+                ref FixedArray2<ulong> p = ref Unsafe.As<Vector128<ulong>, FixedArray2<ulong>>(ref rt);
+                ref FixedArray4<uint> psource = ref Unsafe.As<Vector128<uint>, FixedArray4<uint>>(ref source);
+                p.I0 = psource.I0;
+                p.I1 = psource.I1;
+                return rt;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenUpper_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector128.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> WidenUpper(Vector128<float> source) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD && NET8_0_OR_GREATER
+                return Vector128.WidenUpper(source);
+#elif BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                (_, var rt) = Vector128.Widen(source);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> WidenUpper(Vector128<sbyte> source) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD && NET8_0_OR_GREATER
+                return Vector128.WidenUpper(source);
+#elif BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                (_, var rt) = Vector128.Widen(source);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> WidenUpper(Vector128<byte> source) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD && NET8_0_OR_GREATER
+                return Vector128.WidenUpper(source);
+#elif BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                (_, var rt) = Vector128.Widen(source);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> WidenUpper(Vector128<short> source) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD && NET8_0_OR_GREATER
+                return Vector128.WidenUpper(source);
+#elif BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                (_, var rt) = Vector128.Widen(source);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> WidenUpper(Vector128<ushort> source) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD && NET8_0_OR_GREATER
+                return Vector128.WidenUpper(source);
+#elif BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                (_, var rt) = Vector128.Widen(source);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> WidenUpper(Vector128<int> source) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD && NET8_0_OR_GREATER
+                return Vector128.WidenUpper(source);
+#elif BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                (_, var rt) = Vector128.Widen(source);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> WidenUpper(Vector128<uint> source) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD && NET8_0_OR_GREATER
+                return Vector128.WidenUpper(source);
+#elif BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                (_, var rt) = Vector128.Widen(source);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> WidenUpper_Basic(Vector128<float> source) {
+                UnsafeUtil.SkipInit(out Vector128<double> rt);
+                ref FixedArray2<double> p = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref rt);
+                ref FixedArray4<float> psource = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref Unsafe.AddByteOffset(ref source, new IntPtr(Vector128<byte>.Count / 2)));
+                p.I0 = psource.I0;
+                p.I1 = psource.I1;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> WidenUpper_Basic(Vector128<sbyte> source) {
+                UnsafeUtil.SkipInit(out Vector128<short> rt);
+                ref FixedArray8<short> p = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref rt);
+                ref FixedArray16<sbyte> psource = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref Unsafe.AddByteOffset(ref source, new IntPtr(Vector128<byte>.Count / 2)));
+                p.I0 = psource.I0;
+                p.I1 = psource.I1;
+                p.I2 = psource.I2;
+                p.I3 = psource.I3;
+                p.I4 = psource.I4;
+                p.I5 = psource.I5;
+                p.I6 = psource.I6;
+                p.I7 = psource.I7;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> WidenUpper_Basic(Vector128<byte> source) {
+                UnsafeUtil.SkipInit(out Vector128<ushort> rt);
+                ref FixedArray8<ushort> p = ref Unsafe.As<Vector128<ushort>, FixedArray8<ushort>>(ref rt);
+                ref FixedArray16<byte> psource = ref Unsafe.As<Vector128<byte>, FixedArray16<byte>>(ref Unsafe.AddByteOffset(ref source, new IntPtr(Vector128<byte>.Count / 2)));
+                p.I0 = psource.I0;
+                p.I1 = psource.I1;
+                p.I2 = psource.I2;
+                p.I3 = psource.I3;
+                p.I4 = psource.I4;
+                p.I5 = psource.I5;
+                p.I6 = psource.I6;
+                p.I7 = psource.I7;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> WidenUpper_Basic(Vector128<short> source) {
+                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
+                ref FixedArray8<short> psource = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref Unsafe.AddByteOffset(ref source, new IntPtr(Vector128<byte>.Count / 2)));
+                p.I0 = psource.I0;
+                p.I1 = psource.I1;
+                p.I2 = psource.I2;
+                p.I3 = psource.I3;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> WidenUpper_Basic(Vector128<ushort> source) {
+                UnsafeUtil.SkipInit(out Vector128<uint> rt);
+                ref FixedArray4<uint> p = ref Unsafe.As<Vector128<uint>, FixedArray4<uint>>(ref rt);
+                ref FixedArray8<ushort> psource = ref Unsafe.As<Vector128<ushort>, FixedArray8<ushort>>(ref Unsafe.AddByteOffset(ref source, new IntPtr(Vector128<byte>.Count / 2)));
+                p.I0 = psource.I0;
+                p.I1 = psource.I1;
+                p.I2 = psource.I2;
+                p.I3 = psource.I3;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> WidenUpper_Basic(Vector128<int> source) {
+                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
+                ref FixedArray4<int> psource = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref Unsafe.AddByteOffset(ref source, new IntPtr(Vector128<byte>.Count / 2)));
+                p.I0 = psource.I0;
+                p.I1 = psource.I1;
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> WidenUpper_Basic(Vector128<uint> source) {
+                UnsafeUtil.SkipInit(out Vector128<ulong> rt);
+                ref FixedArray2<ulong> p = ref Unsafe.As<Vector128<ulong>, FixedArray2<ulong>>(ref rt);
+                ref FixedArray4<uint> psource = ref Unsafe.As<Vector128<uint>, FixedArray4<uint>>(ref Unsafe.AddByteOffset(ref source, new IntPtr(Vector128<byte>.Count / 2)));
+                p.I0 = psource.I0;
+                p.I1 = psource.I1;
+                return rt;
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }

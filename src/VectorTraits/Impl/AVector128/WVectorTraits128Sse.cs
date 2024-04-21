@@ -2550,6 +2550,135 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenLower_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> WidenLower(Vector128<float> source) {
+                return Sse2.ConvertToVector128Double(source);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> WidenLower(Vector128<sbyte> source) {
+                Vector128<sbyte> zero = Vector128<sbyte>.Zero;
+                Vector128<sbyte> mask = Sse2.CompareGreaterThan(zero, source);
+                return Sse2.UnpackLow(source, mask).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> WidenLower(Vector128<byte> source) {
+                Vector128<byte> zero = Vector128<byte>.Zero;
+                return Sse2.UnpackLow(source.AsByte(), zero).AsUInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> WidenLower(Vector128<short> source) {
+                Vector128<short> zero = Vector128<short>.Zero;
+                Vector128<short> mask = Sse2.CompareGreaterThan(zero, source);
+                return Sse2.UnpackLow(source, mask).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> WidenLower(Vector128<ushort> source) {
+                Vector128<ushort> zero = Vector128<ushort>.Zero;
+                return Sse2.UnpackLow(source.AsUInt16(), zero).AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> WidenLower(Vector128<int> source) {
+                Vector128<int> zero = Vector128<int>.Zero;
+                Vector128<int> mask = Sse2.CompareGreaterThan(zero, source);
+                return Sse2.UnpackLow(source, mask).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> WidenLower(Vector128<uint> source) {
+                Vector128<uint> zero = Vector128<uint>.Zero;
+                return Sse2.UnpackLow(source.AsUInt32(), zero).AsUInt64();
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenUpper_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> WidenUpper(Vector128<float> source) {
+                Vector128<float> sourceUpper = Sse2.UnpackHigh(source.AsDouble(), source.AsDouble()).AsSingle();
+                return Sse2.ConvertToVector128Double(sourceUpper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> WidenUpper(Vector128<sbyte> source) {
+                Vector128<sbyte> zero = Vector128<sbyte>.Zero;
+                Vector128<sbyte> mask = Sse2.CompareGreaterThan(zero, source);
+                return Sse2.UnpackHigh(source, mask).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> WidenUpper(Vector128<byte> source) {
+                Vector128<byte> zero = Vector128<byte>.Zero;
+                return Sse2.UnpackHigh(source.AsByte(), zero).AsUInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> WidenUpper(Vector128<short> source) {
+                Vector128<short> zero = Vector128<short>.Zero;
+                Vector128<short> mask = Sse2.CompareGreaterThan(zero, source);
+                return Sse2.UnpackHigh(source, mask).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> WidenUpper(Vector128<ushort> source) {
+                Vector128<ushort> zero = Vector128<ushort>.Zero;
+                return Sse2.UnpackHigh(source.AsUInt16(), zero).AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> WidenUpper(Vector128<int> source) {
+                Vector128<int> zero = Vector128<int>.Zero;
+                Vector128<int> mask = Sse2.CompareGreaterThan(zero, source);
+                return Sse2.UnpackHigh(source, mask).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> WidenUpper(Vector128<uint> source) {
+                Vector128<uint> zero = Vector128<uint>.Zero;
+                return Sse2.UnpackHigh(source.AsUInt32(), zero).AsUInt64();
+            }
+
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 

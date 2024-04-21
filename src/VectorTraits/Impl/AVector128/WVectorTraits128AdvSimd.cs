@@ -2194,6 +2194,116 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenLower_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> WidenLower(Vector128<float> source) {
+                return SuperStatics.WidenLower(source);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> WidenLower(Vector128<sbyte> source) {
+                return AdvSimd.SignExtendWideningLower(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> WidenLower(Vector128<byte> source) {
+                return AdvSimd.ZeroExtendWideningLower(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> WidenLower(Vector128<short> source) {
+                return AdvSimd.SignExtendWideningLower(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> WidenLower(Vector128<ushort> source) {
+                return AdvSimd.ZeroExtendWideningLower(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> WidenLower(Vector128<int> source) {
+                return AdvSimd.SignExtendWideningLower(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> WidenLower(Vector128<uint> source) {
+                return AdvSimd.ZeroExtendWideningLower(source.GetLower());
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenUpper_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> WidenUpper(Vector128<float> source) {
+                return SuperStatics.WidenUpper(source);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> WidenUpper(Vector128<sbyte> source) {
+                return AdvSimd.SignExtendWideningUpper(source);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> WidenUpper(Vector128<byte> source) {
+                return AdvSimd.ZeroExtendWideningUpper(source);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> WidenUpper(Vector128<short> source) {
+                return AdvSimd.SignExtendWideningUpper(source);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> WidenUpper(Vector128<ushort> source) {
+                return AdvSimd.ZeroExtendWideningUpper(source);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> WidenUpper(Vector128<int> source) {
+                return AdvSimd.SignExtendWideningUpper(source);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> WidenUpper(Vector128<uint> source) {
+                return AdvSimd.ZeroExtendWideningUpper(source);
+            }
+
+
 #endif // NET5_0_OR_GREATER
         }
 
