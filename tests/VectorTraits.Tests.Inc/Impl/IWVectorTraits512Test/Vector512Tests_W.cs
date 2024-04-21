@@ -112,13 +112,13 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
             };
             foreach (Vector512<T> source in samples) {
                 Vector512<TOut> expected = Vector512s.WidenLower((dynamic)source);
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
                 try {
                     expected = Vector512.WidenLower((dynamic)source);
                 } catch (Exception ex) {
                     Console.WriteLine(VectorTextUtil.Format("Fail by {0}! {1}", source, ex));
                 }
-#endif // NET7_0_OR_GREATER
+#endif // NET8_0_OR_GREATER
                 if (Scalars<T>.ExponentBits > 0) {
                     Console.WriteLine();
                     Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", source));
@@ -181,13 +181,13 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
             };
             foreach (Vector512<T> source in samples) {
                 Vector512<TOut> expected = Vector512s.WidenUpper((dynamic)source);
-#if NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
                 try {
                     expected = Vector512.WidenUpper((dynamic)source);
                 } catch (Exception ex) {
                     Console.WriteLine(VectorTextUtil.Format("Fail by {0}! {1}", source, ex));
                 }
-#endif // NET7_0_OR_GREATER
+#endif // NET8_0_OR_GREATER
                 if (Scalars<T>.ExponentBits > 0) {
                     Console.WriteLine();
                     Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", source));

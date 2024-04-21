@@ -1501,6 +1501,114 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             Statics.Widen(source, out lower, out upper);
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenLower_AcceleratedTypes"/>
+        public virtual TypeCodeFlags WidenLower_AcceleratedTypes {
+            get {
+                return Statics.WidenLower_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenLower(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> WidenLower(Vector256<float> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenLower(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<short> WidenLower(Vector256<sbyte> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenLower(Vector256{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ushort> WidenLower(Vector256<byte> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenLower(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> WidenLower(Vector256<short> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenLower(Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<uint> WidenLower(Vector256<ushort> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenLower(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> WidenLower(Vector256<int> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenLower(Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ulong> WidenLower(Vector256<uint> source) {
+            return Statics.WidenLower(source);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenUpper_AcceleratedTypes"/>
+        public virtual TypeCodeFlags WidenUpper_AcceleratedTypes {
+            get {
+                return Statics.WidenUpper_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenUpper(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> WidenUpper(Vector256<float> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenUpper(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<short> WidenUpper(Vector256<sbyte> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenUpper(Vector256{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ushort> WidenUpper(Vector256<byte> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenUpper(Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> WidenUpper(Vector256<short> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenUpper(Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<uint> WidenUpper(Vector256<ushort> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenUpper(Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> WidenUpper(Vector256<int> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.WidenUpper(Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ulong> WidenUpper(Vector256<uint> source) {
+            return Statics.WidenUpper(source);
+        }
+
 #endif // NETCOREAPP3_0_OR_GREATER
     }
 }

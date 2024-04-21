@@ -2818,6 +2818,115 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.WidenLower_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenLower_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenLower(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> WidenLower(Vector256<float> source) {
+                return Avx.ConvertToVector256Double(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenLower(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> WidenLower(Vector256<sbyte> source) {
+                return Avx2.ConvertToVector256Int16(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenLower(Vector256{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> WidenLower(Vector256<byte> source) {
+                return Avx2.ConvertToVector256Int16(source.GetLower()).AsUInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenLower(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> WidenLower(Vector256<short> source) {
+                return Avx2.ConvertToVector256Int32(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenLower(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> WidenLower(Vector256<ushort> source) {
+                return Avx2.ConvertToVector256Int32(source.GetLower()).AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenLower(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> WidenLower(Vector256<int> source) {
+                return Avx2.ConvertToVector256Int64(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenLower(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> WidenLower(Vector256<uint> source) {
+                return Avx2.ConvertToVector256Int64(source.GetLower()).AsUInt64();
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenUpper_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenUpper_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenUpper(Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> WidenUpper(Vector256<float> source) {
+                return Avx.ConvertToVector256Double(source.GetUpper());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenUpper(Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> WidenUpper(Vector256<sbyte> source) {
+                return Avx2.ConvertToVector256Int16(source.GetUpper());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenUpper(Vector256{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> WidenUpper(Vector256<byte> source) {
+                return Avx2.ConvertToVector256Int16(source.GetUpper()).AsUInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenUpper(Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> WidenUpper(Vector256<short> source) {
+                return Avx2.ConvertToVector256Int32(source.GetUpper());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenUpper(Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> WidenUpper(Vector256<ushort> source) {
+                return Avx2.ConvertToVector256Int32(source.GetUpper()).AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenUpper(Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> WidenUpper(Vector256<int> source) {
+                return Avx2.ConvertToVector256Int64(source.GetUpper());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.WidenUpper(Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> WidenUpper(Vector256<uint> source) {
+                return Avx2.ConvertToVector256Int64(source.GetUpper()).AsUInt64();
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 
