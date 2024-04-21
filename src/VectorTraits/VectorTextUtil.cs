@@ -297,6 +297,62 @@ namespace Zyl.VectorTraits {
         }
 #endif
 
+#if NET8_0_OR_GREATER
+
+        /// <summary>
+        /// Gets a hexadecimal string of the <see cref="Vector512"/> and outputs it to <see cref="Action"/> (取得 <see cref="Vector512"/> 的十六进制字符串, 并输出到 <see cref="Action"/> ).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="action">Output action (输出动作).</param>
+        /// <param name="src">Source value (源值).</param>
+        /// <param name="separator">(Optional) The separator (分隔符).</param>
+        /// <param name="noFixEndian">(Optional) No fix endian (不修正端序).</param>
+        /// <returns>Returns the length of the output string (返回输出字符串的长度).</returns>
+        public static int GetHexTo<T>(Action<string> action, Vector512<T> src, string? separator = null, bool noFixEndian = false) where T : struct {
+            int rt = 0;
+            string hex;
+            Vector512<byte> list = Vector512.AsByte(src);
+            int unitCount = Vector512<T>.Count;
+            int unitSize = Vector512<byte>.Count / unitCount;
+            bool fixEndian = false;
+            if (!noFixEndian && BitConverter.IsLittleEndian) fixEndian = true;
+            if (fixEndian) {
+                // IsLittleEndian.
+                for (int i = 0; i < unitCount; ++i) {
+                    if ((i > 0)) {
+                        if (!string.IsNullOrEmpty(separator)) {
+                            action(separator);
+                            rt += separator.Length;
+                        }
+                    }
+                    int idx = unitSize * (i + 1) - 1;
+                    for (int j = 0; j < unitSize; ++j) {
+                        byte by = list.GetElement(idx);
+                        --idx;
+                        hex = by.ToString("X2");
+                        action(hex);
+                        rt += hex.Length;
+                    }
+                }
+            } else {
+                for (int i = 0; i < Vector512<byte>.Count; ++i) {
+                    byte by = list.GetElement(i);
+                    if ((i > 0) && (0 == i % unitSize)) {
+                        if (!string.IsNullOrEmpty(separator)) {
+                            action(separator);
+                            rt += separator.Length;
+                        }
+                    }
+                    hex = by.ToString("X2");
+                    action(hex);
+                    rt += hex.Length;
+                }
+            }
+            return rt;
+        }
+
+#endif // NET8_0_OR_GREATER
+
         /// <summary>
         /// Get hexadecimal string (取得十六进制字符串).
         /// </summary>
@@ -390,6 +446,26 @@ namespace Zyl.VectorTraits {
             return sb.ToString();
         }
 #endif
+
+#if NET8_0_OR_GREATER
+
+        /// <summary>
+        /// Gets a hexadecimal string of the <see cref="Vector512"/> (取得 <see cref="Vector512"/> 的十六进制字符串).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="src">Source value (源值).</param>
+        /// <param name="separator">(Optional) The separator (分隔符).</param>
+        /// <param name="noFixEndian">(Optional) No fix endian (不修正端序).</param>
+        /// <returns>Returns hexadecimal string (返回十六进制字符串).</returns>
+        public static string GetHex<T>(Vector512<T> src, string? separator = null, bool noFixEndian = false) where T : struct {
+            StringBuilder sb = new StringBuilder();
+            GetHexTo(delegate (string str) {
+                sb.Append(str);
+            }, src, separator, noFixEndian);
+            return sb.ToString();
+        }
+
+#endif // NET8_0_OR_GREATER
 
         /// <summary>
         /// Format a string, append a hexadecimal string intelligently to the end of the line, and output it to the <see cref="Action"/> (格式化字符串，智能在行尾追加十六进制字符串, 并会输出到 <see cref="Action"/> ). With these parameters: <paramref name="noHex"/>, <paramref name="lineCommentSeparator"/>, <paramref name="lineCommentItemSeparator"/> .
