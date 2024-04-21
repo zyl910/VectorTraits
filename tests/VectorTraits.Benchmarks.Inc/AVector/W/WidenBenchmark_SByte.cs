@@ -500,5 +500,98 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         #endregion // BENCHMARKS_256ALGORITHM
 
 #endif // NETCOREAPP3_0_OR_GREATER
+
+        #region BENCHMARKS_512
+#if BENCHMARKS_512 && NET8_0_OR_GREATER
+
+        /// <summary>
+        /// Sum Widen - Vector512 - BCL static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TMyOut StaticSumWidenVector512Bcl(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMyOut> vrt = Vector512<TMyOut>.Zero; // Vector result.
+            Vector512<TMyOut> vrt1 = Vector512<TMyOut>.Zero;
+            Vector512<TMyOut> lower, upper;
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                (lower, upper) = Vector512.Widen(p0);
+                vrt = Vector512.Add(vrt, lower);
+                vrt1 = Vector512.Add(vrt1, upper);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            vrt = Vector512.Add(vrt, vrt1);
+            rt = Vector512.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVector512Bcl() {
+            dstTMy = StaticSumWidenVector512Bcl(srcArray, srcArray.Length);
+            CheckResult("SumWidenVector512Bcl");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector512 - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TMyOut StaticSumWidenVector512Traits(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMyOut> vrt = Vector512<TMyOut>.Zero; // Vector result.
+            Vector512<TMyOut> vrt1 = Vector512<TMyOut>.Zero;
+            Vector512<TMyOut> lower, upper;
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector512s.Widen(p0, out lower, out upper);
+                vrt = Vector512s.Add(vrt, lower);
+                vrt1 = Vector512s.Add(vrt1, upper);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            vrt = Vector512s.Add(vrt, vrt1);
+            rt = Vector512s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVector512Traits() {
+            dstTMy = StaticSumWidenVector512Traits(srcArray, srcArray.Length);
+            CheckResult("SumWidenVector512Traits");
+        }
+
+#endif // BENCHMARKS_512 && NET8_0_OR_GREATER
+        #endregion // BENCHMARKS_512
+
     }
 }
