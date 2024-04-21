@@ -19,6 +19,7 @@ using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
 using Zyl.VectorTraits.Impl.AVector128;
 using Zyl.VectorTraits.Impl.AVector256;
+using Zyl.VectorTraits.Impl.AVector512;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_OFF
@@ -374,6 +375,116 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
 #endif // BENCHMARKS_256 && NETCOREAPP3_0_OR_GREATER
         #endregion // BENCHMARKS_256
+
+        #region BENCHMARKS_512
+#if BENCHMARKS_512 && NET8_0_OR_GREATER
+
+        protected TMy dstOn512 = default, baselineOn512 = default;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected virtual void CheckResult512(string name) {
+            CheckResult_Report(name, dstOn512 != baselineOn512, dstOn512, baselineOn512);
+        }
+
+        /// <summary>
+        /// Sum YShuffleG2 - Vector512 - Base static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="control">The control.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum512Base(TMy[] src, int srcCount, ShuffleControlG2 control) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector512<TMy> vtemp = WVectorTraits512Base.Statics.YShuffleG2(p0, control);
+                vrt = WVectorTraits512Base.Statics.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            if (UseReduce) {
+                rt = Vector512.Sum(vrt);
+            } else {
+                rt = vrt.GetElement(0);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum512Base() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn512 = StaticSum512Base(srcArray, srcArray.Length, control);
+            if (CheckMode) {
+                baselineOn512 = dstOn512;
+                BenchmarkUtil.WriteItem("# Sum512Base", string.Format("{0}", baselineOn512));
+            }
+        }
+
+        /// <summary>
+        /// Sum YShuffleG2 - Vector512 - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="control">The control.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum512Traits(TMy[] src, int srcCount, ShuffleControlG2 control) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector512<TMy> vtemp = Vector512s.YShuffleG2(p0, control);
+                vrt = Vector512s.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            if (UseReduce) {
+                rt = Vector512s.Sum(vrt);
+            } else {
+                rt = vrt.GetElement(0);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum512Traits() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstTMy = StaticSum512Traits(srcArray, srcArray.Length, control);
+            CheckResult512("Sum512Traits");
+        }
+
+#endif // BENCHMARKS_512 && NET8_0_OR_GREATER
+        #endregion // BENCHMARKS_512
 
 
         #region BENCHMARKS_CONST
