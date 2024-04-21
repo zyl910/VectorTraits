@@ -1866,6 +1866,61 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 upper = Avx512F.ConvertToVector512UInt64(source.GetUpper());
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits512.WidenLower_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenLower_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<double> WidenLower(Vector512<float> source) {
+                return Avx512F.ConvertToVector512Double(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<short> WidenLower(Vector512<sbyte> source) {
+                return Avx512BW.ConvertToVector512Int16(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ushort> WidenLower(Vector512<byte> source) {
+                return Avx512BW.ConvertToVector512UInt16(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<int> WidenLower(Vector512<short> source) {
+                return Avx512F.ConvertToVector512Int32(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<uint> WidenLower(Vector512<ushort> source) {
+                return Avx512F.ConvertToVector512UInt32(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<long> WidenLower(Vector512<int> source) {
+                return Avx512F.ConvertToVector512Int64(source.GetLower());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ulong> WidenLower(Vector512<uint> source) {
+                return Avx512F.ConvertToVector512UInt64(source.GetLower());
+            }
+
 #endif // NET8_0_OR_GREATER
         }
 

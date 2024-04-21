@@ -2429,6 +2429,92 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower_AcceleratedTypes"/>
+        public static TypeCodeFlags WidenLower_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.WidenLower_AcceleratedTypes;
+#else
+                return _instance.WidenLower_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> WidenLower(Vector512<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenLower(value);
+#else
+            return _instance.WidenLower(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> WidenLower(Vector512<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenLower(value);
+#else
+            return _instance.WidenLower(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> WidenLower(Vector512<byte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenLower(value);
+#else
+            return _instance.WidenLower(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> WidenLower(Vector512<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenLower(value);
+#else
+            return _instance.WidenLower(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> WidenLower(Vector512<ushort> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenLower(value);
+#else
+            return _instance.WidenLower(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> WidenLower(Vector512<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenLower(value);
+#else
+            return _instance.WidenLower(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> WidenLower(Vector512<uint> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenLower(value);
+#else
+            return _instance.WidenLower(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
 #endif // NET8_0_OR_GREATER
     }
 }

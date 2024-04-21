@@ -1481,6 +1481,60 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             Statics.Widen(source, out lower, out upper);
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower_AcceleratedTypes"/>
+        public override TypeCodeFlags WidenLower_AcceleratedTypes {
+            get {
+                return Statics.WidenLower_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<double> WidenLower(Vector512<float> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<short> WidenLower(Vector512<sbyte> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<ushort> WidenLower(Vector512<byte> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<int> WidenLower(Vector512<short> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<uint> WidenLower(Vector512<ushort> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<long> WidenLower(Vector512<int> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<ulong> WidenLower(Vector512<uint> source) {
+            return Statics.WidenLower(source);
+        }
+
 #endif
     }
 }

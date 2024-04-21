@@ -8,6 +8,7 @@ Summary (概要):
 - Support for `.NET 5.0` new vector methods (支持 `.NET 5.0` 新增的向量方法): Ceiling, Floor .
 - Support for `.NET 6.0` new vector methods (支持 `.NET 6.0` 新增的向量方法): Sum .
 - Support for `.NET 7.0` new vector methods (支持 `.NET 7.0` 新增的向量方法): ExtractMostSignificantBits, ShiftLeft, ShiftRightArithmetic, ShiftRightLogical, Shuffle .
+- Support for `.NET 8.0` new vector methods (支持 `.NET 8.0` 新增的向量方法): WidenLower, WidenUpper.
 
 List (列表):
 - `Ceiling`: Computes the ceiling of each element in a vector (计算向量中每个元素的向上取整). It is also known as round to positive infinity (它也被称作向正无穷舍入). See more: `MidpointRounding.ToPositiveInfinity`.
@@ -42,6 +43,10 @@ List (列表):
   Mnemonic: `rt := value[0] + value[1] + value[2] + ... + value[Count-1]` .
 - `Widen`: Widens a Vector into two Vector instances (将一个 Vector 扩宽为两个 Vector 实例).
   Mnemonic: `element_ref(i, lower, upper) := widen(source[i])`.
+- `WidenLower`: Widens the lower half of a Vector into a Vector (将向量的低半部分扩宽为一个向量).
+  Mnemonic: `rt[i] := widen(source[i])`.
+- `WidenUpper`: Widens the upper half of a Vector into a Vector (将向量的高半部分扩宽为一个向量).
+  Mnemonic: `rt[i] := widen(source[i - Count/2])`.
 
 Remarks:
 - ①: It also works for Vector (它也适用于Vector).
