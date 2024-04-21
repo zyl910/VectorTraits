@@ -474,5 +474,100 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YC {
         #endregion // BENCHMARKS_256ALGORITHM
 
 #endif
+
+        #region BENCHMARKS_512
+#if BENCHMARKS_512 && NET8_0_OR_GREATER
+
+        /// <summary>
+        /// Sum Clamp - Vector512 - BCL static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static TMy StaticSumClampVector512Bcl(TMy[] src, int srcCount, TMy amin, TMy amax) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
+            Vector512<TMy> vectorMin = Vector512.Create(valueMin);
+            Vector512<TMy> vectorMax = Vector512.Create(valueMax);
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector512<TMy> vtemp = Vector512s.YClamp(p0, vectorMin, vectorMax);
+                vrt = Vector512s.Add(vrt, vtemp); // Add.
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += BitMath.Clamp(Unsafe.Add(ref p, i), amin, amax);
+            }
+            // Reduce.
+            rt = Vector512s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumClampVector512Bcl() {
+            Vector512s.ThrowForUnsupported(true);
+            //Debugger.Break();
+            dstTMy = StaticSumClampVector512Bcl(srcArray, srcArray.Length, valueMin, valueMax);
+            CheckResult("SumClampVector512Bcl");
+        }
+
+        /// <summary>
+        /// Sum Clamp - Vector512 - Traits static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static TMy StaticSumClampVector512Traits(TMy[] src, int srcCount, TMy amin, TMy amax) {
+            TMy rt = 0; // Result.
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
+            Vector512<TMy> vectorMin = Vector512.Create(valueMin);
+            Vector512<TMy> vectorMax = Vector512.Create(valueMax);
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector512<TMy> vtemp = Vector512s.YClamp(p0, vectorMin, vectorMax);
+                vrt = Vector512s.Add(vrt, vtemp); // Add.
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += BitMath.Clamp(Unsafe.Add(ref p, i), amin, amax);
+            }
+            // Reduce.
+            rt = Vector512s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumClampVector512Traits() {
+            Vector512s.ThrowForUnsupported(true);
+            //Debugger.Break();
+            dstTMy = StaticSumClampVector512Traits(srcArray, srcArray.Length, valueMin, valueMax);
+            CheckResult("SumClampVector512Traits");
+        }
+
+#endif // BENCHMARKS_512 && NET8_0_OR_GREATER
+        #endregion // BENCHMARKS_512
+
     }
 }
