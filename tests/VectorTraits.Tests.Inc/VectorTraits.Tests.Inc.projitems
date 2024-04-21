@@ -100,6 +100,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Impl\ReflectionUtilTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\Vector128ConstantsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\Vector256ConstantsTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)impl\Vector512ConstantsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\VectorConstantsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\VectorGenericTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MathTests.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)TypeCodeFlagsUtilTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vector128sTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vector256sTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Vector512sTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vector64sTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VectorsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VectorTextUtilTests.cs" />
