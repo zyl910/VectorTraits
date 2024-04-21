@@ -1555,6 +1555,60 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.WidenLower(source);
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenUpper_AcceleratedTypes"/>
+        public virtual TypeCodeFlags WidenUpper_AcceleratedTypes {
+            get {
+                return Statics.WidenUpper_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenUpper(Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<double> WidenUpper(Vector512<float> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenUpper(Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<short> WidenUpper(Vector512<sbyte> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenUpper(Vector512{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<ushort> WidenUpper(Vector512<byte> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenUpper(Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<int> WidenUpper(Vector512<short> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenUpper(Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<uint> WidenUpper(Vector512<ushort> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenUpper(Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<long> WidenUpper(Vector512<int> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.WidenUpper(Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<ulong> WidenUpper(Vector512<uint> source) {
+            return Statics.WidenUpper(source);
+        }
+
 #endif // NET8_0_OR_GREATER
     }
 }

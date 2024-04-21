@@ -2686,6 +2686,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <seealso cref="Vector512.Widen(Vector512{uint})" />
         void Widen(Vector512<uint> source, out Vector512<ulong> lower, out Vector512<ulong> upper);
 
+
         /// <summary>
         /// Types with hardware acceleration when running <c>WidenLower</c> (运行 <c>WidenLower</c> 时具有硬件加速的类型).
         /// </summary>
@@ -2725,6 +2726,47 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="WidenLower(Vector512{float})"/>
         /// <seealso cref="Vector512.WidenLower(Vector512{uint})" />
         Vector512<ulong> WidenLower(Vector512<uint> source);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>WidenUpper</c> (运行 <c>WidenUpper</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="WidenUpper(Vector512{float})" />
+        TypeCodeFlags WidenUpper_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Widens the upper half of a Vector into a Vector (将向量的高半部分扩宽为一个向量).
+        /// Mnemonic: <c>rt[i] := widen(source[i])</c>.
+        /// </summary>
+        /// <param name="source">The vector whose elements are to be widened (欲扩宽其元素的向量).</param>
+        /// <returns>A vector that contain the widened upper half of <paramref name="source" /> (包含 <paramref name="source" />的扩宽高半部分 的向量).</returns>
+        /// <seealso cref="WidenUpper_AcceleratedTypes"/>
+        /// <seealso cref="Vector512.WidenUpper(Vector512{float})" />
+        Vector512<double> WidenUpper(Vector512<float> source);
+
+        /// <inheritdoc cref="WidenUpper(Vector512{float})"/>
+        /// <seealso cref="Vector512.WidenUpper(Vector512{sbyte})" />
+        Vector512<short> WidenUpper(Vector512<sbyte> source);
+
+        /// <inheritdoc cref="WidenUpper(Vector512{float})"/>
+        /// <seealso cref="Vector512.WidenUpper(Vector512{byte})" />
+        Vector512<ushort> WidenUpper(Vector512<byte> source);
+
+        /// <inheritdoc cref="WidenUpper(Vector512{float})"/>
+        /// <seealso cref="Vector512.WidenUpper(Vector512{short})" />
+        Vector512<int> WidenUpper(Vector512<short> source);
+
+        /// <inheritdoc cref="WidenUpper(Vector512{float})"/>
+        /// <seealso cref="Vector512.WidenUpper(Vector512{ushort})" />
+        Vector512<uint> WidenUpper(Vector512<ushort> source);
+
+        /// <inheritdoc cref="WidenUpper(Vector512{float})"/>
+        /// <seealso cref="Vector512.WidenUpper(Vector512{int})" />
+        Vector512<long> WidenUpper(Vector512<int> source);
+
+        /// <inheritdoc cref="WidenUpper(Vector512{float})"/>
+        /// <seealso cref="Vector512.WidenUpper(Vector512{uint})" />
+        Vector512<ulong> WidenUpper(Vector512<uint> source);
 
 #endif
     }
