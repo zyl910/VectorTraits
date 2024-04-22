@@ -15,7 +15,9 @@
 <button class="btn btn-primary" @onclick="OnTest" disabled=@IsTaskRunning>Test</button>
 &nbsp; <span>@statePercentage</span>
 <br />
-<InputCheckbox @bind-Value="IsScrollMyTexArea" />Scroll to bottom
+<InputCheckbox @bind-Value="IsScrollMyTexArea" />Scroll to bottom &nbsp;
+<InputCheckbox @bind-Value="IsWhere" />Where:&nbsp;
+<InputText @bind-Value="whereText" size="30" />
 <br />
 <br />
 <InputTextArea id="txtOut" @bind-Value="resultText" readonly rows="30" style="width: 95%" />
@@ -30,6 +32,8 @@
 @code {
     private bool IsTaskRunning = false;
     private bool IsScrollMyTexArea = true;
+    private bool IsWhere = false;
+    private string whereText = "method==ShiftLeft_FastTest";
     private string resultText = "";
     private string statePercentage = "";
 
@@ -74,7 +78,12 @@
     }
 
     private void OnTestCore(TextWriter writer) {
-        string[] args = new[] { "--noresult", "--labels=ON" };
+        string[] args;
+        if (IsWhere) {
+            args = new[] { "--noresult", "--labels=ON", "--where=" + whereText };
+        } else {
+            args = new[] { "--noresult", "--labels=ON" };
+        }
         var assembly = typeof(VectorTextUtilTests).Assembly;
 
         var sw = new Stopwatch();
