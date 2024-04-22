@@ -4,6 +4,7 @@ using NUnit.Framework.Legacy;
 #endif
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -133,15 +134,23 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                         ClassicAssert.AreEqual(expected, dst0, $"{instance.GetType().Name}, source={source}");
                     }
                 }
-                foreach (var func in funcList) {
-                    string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
-                    Vector128<TOut> dst0 = func((dynamic)source);
-                    if (allowLogItem) {
-                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst0));
-                    } else {
-                        ClassicAssert.AreEqual(expected, dst0, $"{funcName}, source={source}");
-                    }
-                } // funcList
+                bool runLogItem = true;
+#if NET8_0_OR_GREATER
+                if (RuntimeInformation.OSArchitecture == Architecture.Wasm) {
+                    runLogItem = false; // Bug at .NET8.0 Wasm.
+                }
+#endif // NET8_0_OR_GREATER
+                if (runLogItem) {
+                    foreach (var func in funcList) {
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        Vector128<TOut> dst0 = func((dynamic)source);
+                        if (allowLogItem) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst0));
+                        } else {
+                            ClassicAssert.AreEqual(expected, dst0, $"{funcName}, source={source}");
+                        }
+                    } // funcList
+                }
             }
 #pragma warning restore CS0618 // Type or member is obsolete
         }
@@ -202,15 +211,23 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                         ClassicAssert.AreEqual(expected, dst0, $"{instance.GetType().Name}, source={source}");
                     }
                 }
-                foreach (var func in funcList) {
-                    string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
-                    Vector128<TOut> dst0 = func((dynamic)source);
-                    if (allowLogItem) {
-                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst0));
-                    } else {
-                        ClassicAssert.AreEqual(expected, dst0, $"{funcName}, source={source}");
-                    }
-                } // funcList
+                bool runLogItem = true;
+#if NET8_0_OR_GREATER
+                if (RuntimeInformation.OSArchitecture == Architecture.Wasm) {
+                    runLogItem = false; // Bug at .NET8.0 Wasm.
+                }
+#endif // NET8_0_OR_GREATER
+                if (runLogItem) {
+                    foreach (var func in funcList) {
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        Vector128<TOut> dst0 = func((dynamic)source);
+                        if (allowLogItem) {
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", funcName, dst0));
+                        } else {
+                            ClassicAssert.AreEqual(expected, dst0, $"{funcName}, source={source}");
+                        }
+                    } // funcList
+                }
             }
 #pragma warning restore CS0618 // Type or member is obsolete
         }
