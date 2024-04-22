@@ -1719,9 +1719,18 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> ShiftLeft_Fast_Multiply(Vector<byte> value, int shiftAmount) {
                 //Vector<byte> t = Vector.BitwiseAnd(value, Vectors<byte>.GetMaskBits(8 - shiftAmount));
-                Vector<byte> t = Vector.BitwiseAnd(value, VectorConstants.GetResidueMaskBits_Byte(shiftAmount));
+                var mask = VectorConstants.GetResidueMaskBits_Byte(shiftAmount);
+                Vector<byte> t = Vector.BitwiseAnd(value, mask);
                 short m = (short)(1 << shiftAmount);
-                return Vector.AsVectorByte(Vector.Multiply(Vector.AsVectorInt16(t), m));
+                var rt = Vector.AsVectorByte(Vector.Multiply(Vector.AsVectorInt16(t), m));
+//#if NETCOREAPP3_0_OR_GREATER
+//                Console.WriteLine(VectorTextUtil.Format("value:\t{0}", value));
+//                Console.WriteLine(VectorTextUtil.Format("mask:\t{0}", mask));
+//                Console.WriteLine(VectorTextUtil.Format("t:\t{0}", t));
+//                Console.WriteLine(VectorTextUtil.Format("m:\t{0}", m));
+//                Console.WriteLine(VectorTextUtil.Format("rt:\t{0}", rt));
+//#endif // NETCOREAPP3_0_OR_GREATER
+                return rt;
             }
 
             /// <inheritdoc cref="IVectorTraits.ShiftLeft_Fast(Vector{short}, int)"/>
