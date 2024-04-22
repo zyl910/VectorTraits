@@ -3934,6 +3934,420 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.WidenLower_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenLower_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_VAR
+                    if (Vector.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    }
+#endif // BCL_OVERRIDE_BASE_VAR
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> WidenLower(Vector<float> source) {
+#if BCL_OVERRIDE_BASE_VAR && NET8_0_OR_GREATER
+                return Vector.WidenLower(source);
+#elif BCL_OVERRIDE_BASE_VAR
+                Vector.Widen(source, out var rt, out _);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> WidenLower(Vector<sbyte> source) {
+#if BCL_OVERRIDE_BASE_VAR && NET8_0_OR_GREATER
+                return Vector.WidenLower(source);
+#elif BCL_OVERRIDE_BASE_VAR
+                Vector.Widen(source, out var rt, out _);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> WidenLower(Vector<byte> source) {
+#if BCL_OVERRIDE_BASE_VAR && NET8_0_OR_GREATER
+                return Vector.WidenLower(source);
+#elif BCL_OVERRIDE_BASE_VAR
+                Vector.Widen(source, out var rt, out _);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> WidenLower(Vector<short> source) {
+#if BCL_OVERRIDE_BASE_VAR && NET8_0_OR_GREATER
+                return Vector.WidenLower(source);
+#elif BCL_OVERRIDE_BASE_VAR
+                Vector.Widen(source, out var rt, out _);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> WidenLower(Vector<ushort> source) {
+#if BCL_OVERRIDE_BASE_VAR && NET8_0_OR_GREATER
+                return Vector.WidenLower(source);
+#elif BCL_OVERRIDE_BASE_VAR
+                Vector.Widen(source, out var rt, out _);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> WidenLower(Vector<int> source) {
+#if BCL_OVERRIDE_BASE_VAR && NET8_0_OR_GREATER
+                return Vector.WidenLower(source);
+#elif BCL_OVERRIDE_BASE_VAR
+                Vector.Widen(source, out var rt, out _);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> WidenLower(Vector<uint> source) {
+#if BCL_OVERRIDE_BASE_VAR && NET8_0_OR_GREATER
+                return Vector.WidenLower(source);
+#elif BCL_OVERRIDE_BASE_VAR
+                Vector.Widen(source, out var rt, out _);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> WidenLower_Basic(Vector<float> source) {
+                nint cnt = Vector<double>.Count;
+                UnsafeUtil.SkipInit(out Vector<double> lower);
+                ref float p = ref Unsafe.As<Vector<float>, float>(ref source);
+                ref double plower = ref Unsafe.As<Vector<double>, double>(ref lower);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref plower, i) = Unsafe.Add(ref p, i);
+                }
+                return lower;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> WidenLower_Basic(Vector<sbyte> source) {
+                nint cnt = Vector<short>.Count;
+                UnsafeUtil.SkipInit(out Vector<short> lower);
+                ref sbyte p = ref Unsafe.As<Vector<sbyte>, sbyte>(ref source);
+                ref short plower = ref Unsafe.As<Vector<short>, short>(ref lower);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref plower, i) = Unsafe.Add(ref p, i);
+                }
+                return lower;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> WidenLower_Basic(Vector<byte> source) {
+                nint cnt = Vector<ushort>.Count;
+                UnsafeUtil.SkipInit(out Vector<ushort> lower);
+                ref byte p = ref Unsafe.As<Vector<byte>, byte>(ref source);
+                ref ushort plower = ref Unsafe.As<Vector<ushort>, ushort>(ref lower);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref plower, i) = Unsafe.Add(ref p, i);
+                }
+                return lower;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> WidenLower_Basic(Vector<short> source) {
+                nint cnt = Vector<int>.Count;
+                UnsafeUtil.SkipInit(out Vector<int> lower);
+                ref short p = ref Unsafe.As<Vector<short>, short>(ref source);
+                ref int plower = ref Unsafe.As<Vector<int>, int>(ref lower);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref plower, i) = Unsafe.Add(ref p, i);
+                }
+                return lower;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> WidenLower_Basic(Vector<ushort> source) {
+                nint cnt = Vector<uint>.Count;
+                UnsafeUtil.SkipInit(out Vector<uint> lower);
+                ref ushort p = ref Unsafe.As<Vector<ushort>, ushort>(ref source);
+                ref uint plower = ref Unsafe.As<Vector<uint>, uint>(ref lower);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref plower, i) = Unsafe.Add(ref p, i);
+                }
+                return lower;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> WidenLower_Basic(Vector<int> source) {
+                nint cnt = Vector<long>.Count;
+                UnsafeUtil.SkipInit(out Vector<long> lower);
+                ref int p = ref Unsafe.As<Vector<int>, int>(ref source);
+                ref long plower = ref Unsafe.As<Vector<long>, long>(ref lower);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref plower, i) = Unsafe.Add(ref p, i);
+                }
+                return lower;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> WidenLower_Basic(Vector<uint> source) {
+                nint cnt = Vector<ulong>.Count;
+                UnsafeUtil.SkipInit(out Vector<ulong> lower);
+                ref uint p = ref Unsafe.As<Vector<uint>, uint>(ref source);
+                ref ulong plower = ref Unsafe.As<Vector<ulong>, ulong>(ref lower);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref plower, i) = Unsafe.Add(ref p, i);
+                }
+                return lower;
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenUpper_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_VAR
+                    if (Vector.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    }
+#endif // BCL_OVERRIDE_BASE_VAR
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> WidenUpper(Vector<float> source) {
+#if BCL_OVERRIDE_BASE_VAR && NET8_0_OR_GREATER
+                return Vector.WidenUpper(source);
+#elif BCL_OVERRIDE_BASE_VAR
+                Vector.Widen(source, out _, out var rt);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> WidenUpper(Vector<sbyte> source) {
+#if BCL_OVERRIDE_BASE_VAR && NET8_0_OR_GREATER
+                return Vector.WidenUpper(source);
+#elif BCL_OVERRIDE_BASE_VAR
+                Vector.Widen(source, out _, out var rt);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> WidenUpper(Vector<byte> source) {
+#if BCL_OVERRIDE_BASE_VAR && NET8_0_OR_GREATER
+                return Vector.WidenUpper(source);
+#elif BCL_OVERRIDE_BASE_VAR
+                Vector.Widen(source, out _, out var rt);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> WidenUpper(Vector<short> source) {
+#if BCL_OVERRIDE_BASE_VAR && NET8_0_OR_GREATER
+                return Vector.WidenUpper(source);
+#elif BCL_OVERRIDE_BASE_VAR
+                Vector.Widen(source, out _, out var rt);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> WidenUpper(Vector<ushort> source) {
+#if BCL_OVERRIDE_BASE_VAR && NET8_0_OR_GREATER
+                return Vector.WidenUpper(source);
+#elif BCL_OVERRIDE_BASE_VAR
+                Vector.Widen(source, out _, out var rt);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> WidenUpper(Vector<int> source) {
+#if BCL_OVERRIDE_BASE_VAR && NET8_0_OR_GREATER
+                return Vector.WidenUpper(source);
+#elif BCL_OVERRIDE_BASE_VAR
+                Vector.Widen(source, out _, out var rt);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> WidenUpper(Vector<uint> source) {
+#if BCL_OVERRIDE_BASE_VAR && NET8_0_OR_GREATER
+                return Vector.WidenUpper(source);
+#elif BCL_OVERRIDE_BASE_VAR
+                Vector.Widen(source, out _, out var rt);
+                return rt;
+#else
+                return WidenUpper_Basic(source);
+#endif // BCL_OVERRIDE_BASE_VAR
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> WidenUpper_Basic(Vector<float> source) {
+                nint cnt = Vector<double>.Count;
+                UnsafeUtil.SkipInit(out Vector<double> upper);
+                ref float p = ref Unsafe.As<Vector<float>, float>(ref source);
+                p = ref Unsafe.Add(ref p, cnt);
+                ref double pupper = ref Unsafe.As<Vector<double>, double>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref pupper, i) = Unsafe.Add(ref p, i);
+                }
+                return upper;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> WidenUpper_Basic(Vector<sbyte> source) {
+                nint cnt = Vector<short>.Count;
+                UnsafeUtil.SkipInit(out Vector<short> upper);
+                ref sbyte p = ref Unsafe.As<Vector<sbyte>, sbyte>(ref source);
+                p = ref Unsafe.Add(ref p, cnt);
+                ref short pupper = ref Unsafe.As<Vector<short>, short>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref pupper, i) = Unsafe.Add(ref p, i);
+                }
+                return upper;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> WidenUpper_Basic(Vector<byte> source) {
+                nint cnt = Vector<ushort>.Count;
+                UnsafeUtil.SkipInit(out Vector<ushort> upper);
+                ref byte p = ref Unsafe.As<Vector<byte>, byte>(ref source);
+                p = ref Unsafe.Add(ref p, cnt);
+                ref ushort pupper = ref Unsafe.As<Vector<ushort>, ushort>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref pupper, i) = Unsafe.Add(ref p, i);
+                }
+                return upper;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> WidenUpper_Basic(Vector<short> source) {
+                nint cnt = Vector<int>.Count;
+                UnsafeUtil.SkipInit(out Vector<int> upper);
+                ref short p = ref Unsafe.As<Vector<short>, short>(ref source);
+                p = ref Unsafe.Add(ref p, cnt);
+                ref int pupper = ref Unsafe.As<Vector<int>, int>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref pupper, i) = Unsafe.Add(ref p, i);
+                }
+                return upper;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> WidenUpper_Basic(Vector<ushort> source) {
+                nint cnt = Vector<uint>.Count;
+                UnsafeUtil.SkipInit(out Vector<uint> upper);
+                ref ushort p = ref Unsafe.As<Vector<ushort>, ushort>(ref source);
+                p = ref Unsafe.Add(ref p, cnt);
+                ref uint pupper = ref Unsafe.As<Vector<uint>, uint>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref pupper, i) = Unsafe.Add(ref p, i);
+                }
+                return upper;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> WidenUpper_Basic(Vector<int> source) {
+                nint cnt = Vector<long>.Count;
+                UnsafeUtil.SkipInit(out Vector<long> upper);
+                ref int p = ref Unsafe.As<Vector<int>, int>(ref source);
+                p = ref Unsafe.Add(ref p, cnt);
+                ref long pupper = ref Unsafe.As<Vector<long>, long>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref pupper, i) = Unsafe.Add(ref p, i);
+                }
+                return upper;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> WidenUpper_Basic(Vector<uint> source) {
+                nint cnt = Vector<ulong>.Count;
+                UnsafeUtil.SkipInit(out Vector<ulong> upper);
+                ref uint p = ref Unsafe.As<Vector<uint>, uint>(ref source);
+                p = ref Unsafe.Add(ref p, cnt);
+                ref ulong pupper = ref Unsafe.As<Vector<ulong>, ulong>(ref upper);
+                for (nint i = 0; i < cnt; ++i) {
+                    Unsafe.Add(ref pupper, i) = Unsafe.Add(ref p, i);
+                }
+                return upper;
+            }
+
         } // Statics
 
     }

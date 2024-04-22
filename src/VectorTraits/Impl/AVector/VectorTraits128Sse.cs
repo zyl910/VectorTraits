@@ -1630,6 +1630,114 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 upper = b.AsVector();
             }
 
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenLower_AcceleratedTypes {
+                get {
+                    return WStatics.WidenLower_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> WidenLower(Vector<float> source) {
+                return WStatics.WidenLower(source.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> WidenLower(Vector<sbyte> source) {
+                return WStatics.WidenLower(source.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> WidenLower(Vector<byte> source) {
+                return WStatics.WidenLower(source.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> WidenLower(Vector<short> source) {
+                return WStatics.WidenLower(source.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> WidenLower(Vector<ushort> source) {
+                return WStatics.WidenLower(source.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> WidenLower(Vector<int> source) {
+                return WStatics.WidenLower(source.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> WidenLower(Vector<uint> source) {
+                return WStatics.WidenLower(source.AsVector128()).AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenUpper_AcceleratedTypes {
+                get {
+                    return WStatics.WidenUpper_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> WidenUpper(Vector<float> source) {
+                return WStatics.WidenUpper(source.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> WidenUpper(Vector<sbyte> source) {
+                return WStatics.WidenUpper(source.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{byte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> WidenUpper(Vector<byte> source) {
+                return WStatics.WidenUpper(source.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> WidenUpper(Vector<short> source) {
+                return WStatics.WidenUpper(source.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> WidenUpper(Vector<ushort> source) {
+                return WStatics.WidenUpper(source.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> WidenUpper(Vector<int> source) {
+                return WStatics.WidenUpper(source.AsVector128()).AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> WidenUpper(Vector<uint> source) {
+                return WStatics.WidenUpper(source.AsVector128()).AsVector();
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 

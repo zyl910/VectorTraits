@@ -592,6 +592,34 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #endif // BCL_OVERRIDE_BASE_FIXED && !NET7_0_OR_GREATER
             }
 
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenLower_AcceleratedTypes {
+                get {
+                    return WStatics.WidenLower_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> WidenLower(Vector<float> source) {
+                return WStatics.WidenLower(source.AsVector128()).AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper_AcceleratedTypes"/>
+            public static TypeCodeFlags WidenUpper_AcceleratedTypes {
+                get {
+                    return WStatics.WidenUpper_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> WidenUpper(Vector<float> source) {
+                return WStatics.WidenUpper(source.AsVector128()).AsVector();
+            }
+
 #endif // NET5_0_OR_GREATER
         }
 

@@ -1529,5 +1529,113 @@ namespace Zyl.VectorTraits.Impl.AVector {
             Statics.Widen(source, out lower, out upper);
         }
 
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower_AcceleratedTypes"/>
+        public virtual TypeCodeFlags WidenLower_AcceleratedTypes {
+            get {
+                return Statics.WidenLower_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<double> WidenLower(Vector<float> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<short> WidenLower(Vector<sbyte> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ushort> WidenLower(Vector<byte> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<int> WidenLower(Vector<short> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<uint> WidenLower(Vector<ushort> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<long> WidenLower(Vector<int> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ulong> WidenLower(Vector<uint> source) {
+            return Statics.WidenLower(source);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper_AcceleratedTypes"/>
+        public virtual TypeCodeFlags WidenUpper_AcceleratedTypes {
+            get {
+                return Statics.WidenUpper_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<double> WidenUpper(Vector<float> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<short> WidenUpper(Vector<sbyte> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ushort> WidenUpper(Vector<byte> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<int> WidenUpper(Vector<short> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<uint> WidenUpper(Vector<ushort> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<long> WidenUpper(Vector<int> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ulong> WidenUpper(Vector<uint> source) {
+            return Statics.WidenUpper(source);
+        }
+
     }
 }

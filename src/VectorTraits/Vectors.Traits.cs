@@ -2470,5 +2470,177 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.WidenLower_AcceleratedTypes"/>
+        public static TypeCodeFlags WidenLower_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.WidenLower_AcceleratedTypes;
+#else
+                return _instance.WidenLower_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> WidenLower(Vector<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenLower(value);
+#else
+            return _instance.WidenLower(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> WidenLower(Vector<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenLower(value);
+#else
+            return _instance.WidenLower(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> WidenLower(Vector<byte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenLower(value);
+#else
+            return _instance.WidenLower(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> WidenLower(Vector<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenLower(value);
+#else
+            return _instance.WidenLower(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> WidenLower(Vector<ushort> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenLower(value);
+#else
+            return _instance.WidenLower(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> WidenLower(Vector<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenLower(value);
+#else
+            return _instance.WidenLower(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> WidenLower(Vector<uint> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenLower(value);
+#else
+            return _instance.WidenLower(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper_AcceleratedTypes"/>
+        public static TypeCodeFlags WidenUpper_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.WidenUpper_AcceleratedTypes;
+#else
+                return _instance.WidenUpper_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> WidenUpper(Vector<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenUpper(value);
+#else
+            return _instance.WidenUpper(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> WidenUpper(Vector<sbyte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenUpper(value);
+#else
+            return _instance.WidenUpper(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> WidenUpper(Vector<byte> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenUpper(value);
+#else
+            return _instance.WidenUpper(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> WidenUpper(Vector<short> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenUpper(value);
+#else
+            return _instance.WidenUpper(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> WidenUpper(Vector<ushort> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenUpper(value);
+#else
+            return _instance.WidenUpper(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> WidenUpper(Vector<int> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenUpper(value);
+#else
+            return _instance.WidenUpper(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> WidenUpper(Vector<uint> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.WidenUpper(value);
+#else
+            return _instance.WidenUpper(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
     }
 }

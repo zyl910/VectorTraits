@@ -72,7 +72,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
 
             /// <inheritdoc cref="IBaseTraits.GetUnsupportedMessage"/>
             public static string GetUnsupportedMessage(bool noStrict = false) {
-                string rt = "Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi, Avx512VL!";
+                string rt = "Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!";
 #if NET8_0_OR_GREATER
                 if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported) {
                     if (Avx.IsSupported && Avx2.IsSupported && Sse.IsSupported && Sse2.IsSupported) {
