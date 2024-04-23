@@ -33,7 +33,8 @@ namespace Zyl.VectorTraits {
             "WVectorTraits128Sse",
             "WVectorTraits128Avx2",
             "WVectorTraits128AdvSimd",
-            "WVectorTraits128AdvSimdB64"
+            "WVectorTraits128AdvSimdB64",
+            "WVectorTraits128PackedSimd"
         };
 
         private static readonly IWVectorTraits128[] _traitsInstances = {
@@ -41,7 +42,8 @@ namespace Zyl.VectorTraits {
             WVectorTraits128Sse.Instance,
             WVectorTraits128Avx2.Instance,
             WVectorTraits128AdvSimd.Instance,
-            WVectorTraits128AdvSimdB64.Instance
+            WVectorTraits128AdvSimdB64.Instance,
+            WVectorTraits128PackedSimd.Instance
         };
 
         // Statics types (静态类型集).
@@ -50,7 +52,8 @@ namespace Zyl.VectorTraits {
             typeof(WVectorTraits128Sse.Statics),
             typeof(WVectorTraits128Avx2.Statics),
             typeof(WVectorTraits128AdvSimd.Statics),
-            typeof(WVectorTraits128AdvSimdB64.Statics)
+            typeof(WVectorTraits128AdvSimdB64.Statics),
+            typeof(WVectorTraits128PackedSimd.Statics)
         };
 
         /// <summary>Best traits instance (最佳特征实例). </summary>
