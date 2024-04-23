@@ -59,7 +59,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.Abs(value);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits128.Add_AcceleratedTypes"/>
         public override TypeCodeFlags Add_AcceleratedTypes {
             get {
@@ -187,7 +187,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.ConditionalSelect(condition, left, right);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits128.Dot_AcceleratedTypes"/>
         public override TypeCodeFlags Dot_AcceleratedTypes {
             get {

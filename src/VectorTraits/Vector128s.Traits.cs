@@ -21,7 +21,7 @@ using Zyl.VectorTraits.Impl.AVector128;
 
 namespace Zyl.VectorTraits {
     using BaseStatics = WVectorTraits128Base.Statics;
-    using BaseStaticsWasm = WVectorTraits128PackedSimd.Statics;
+    using WasmStatics = WVectorTraits128PackedSimd.Statics;
 
     static partial class Vector128s {
         private static readonly IWVectorTraits128 _instance = WVectorTraits128Abstract.GetBestInstance(); // Best traits instance.
@@ -1994,8 +1994,8 @@ namespace Zyl.VectorTraits {
         public static Vector128<short> Shuffle(Vector128<short> vector, Vector128<short> indices) {
 #if SHORT_CIRCUIT_WASM
             if (PackedSimd.IsSupported) {
-                return BaseStatics.Add(vector, indices);
-                //return BaseStaticsWasm.Add(vector, indices);
+                return BaseStatics.Shuffle(vector, indices);
+                //return WasmStatics.Shuffle(vector, indices);
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC

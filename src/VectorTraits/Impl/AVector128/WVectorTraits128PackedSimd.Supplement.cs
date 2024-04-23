@@ -80,7 +80,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits128.Add_AcceleratedTypes"/>
             public static TypeCodeFlags Add_AcceleratedTypes {
                 get {
@@ -97,10 +97,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Add(Vector128<double> left, Vector128<double> right) {
-                Vector64<double> lower = PackedSimd.AddScalar(Vector128.GetLower(left), Vector128.GetLower(right));
-                Vector64<double> upper = PackedSimd.AddScalar(Vector128.GetUpper(left), Vector128.GetUpper(right));
-                Vector128<double> rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
-                return rt;
+                return PackedSimd.Add(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Add(Vector128{sbyte}, Vector128{sbyte})"/>
@@ -166,13 +163,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.AndNot{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> AndNot<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-                // Bitwise bit Clear (vector, register). This instruction performs a bitwise AND between the first source SIMD&FP register and the complement of the second source SIMD&FP register, and writes the result to the destination SIMD&FP register.
-                // Operation
-                // if invert then operand2 = NOT(operand2);
-                // case op of
-                //     when LogicalOp_AND
-                //         result = operand1 AND operand2;
-                return PackedSimd.BitwiseClear(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
+                return Vector128.AndNot(left, right);
+                //return PackedSimd.AndNot(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
             }
 
 
@@ -186,7 +178,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.BitwiseAnd{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> BitwiseAnd<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-                return PackedSimd.And(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
+                return Vector128.BitwiseAnd(left, right);
+                //return PackedSimd.And(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
             }
 
 
@@ -200,7 +193,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.BitwiseOr{T}(Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> BitwiseOr<T>(Vector128<T> left, Vector128<T> right) where T : struct {
-                return PackedSimd.Or(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
+                return Vector128.BitwiseOr(left, right);
+                //return PackedSimd.Or(left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
             }
 
 
@@ -214,11 +208,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<T> ConditionalSelect<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_FIXED && NET8_0_OR_GREATER
                 return Vector128.ConditionalSelect(condition, left, right);
 #else
                 return ConditionalSelect_Hw(condition, left, right);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_FIXED && NET8_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
@@ -236,7 +230,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return PackedSimd.BitwiseSelect(condition.AsUInt64(), left.AsUInt64(), right.AsUInt64()).As<ulong, T>();
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits128.Dot_AcceleratedTypes"/>
             public static TypeCodeFlags Dot_AcceleratedTypes {
                 get {
