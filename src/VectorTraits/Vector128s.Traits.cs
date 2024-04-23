@@ -1,5 +1,5 @@
 ﻿#if NET8_0_OR_GREATER
-#define CHECK_WASM
+#define SHORT_CIRCUIT_WASM
 #endif // NET8_0_OR_GREATER
 
 using System;
@@ -21,7 +21,7 @@ using Zyl.VectorTraits.Impl.AVector128;
 
 namespace Zyl.VectorTraits {
     using BaseStatics = WVectorTraits128Base.Statics;
-    using BaseStaticsWasm = WVectorTraits128Base.Statics;
+    using BaseStaticsWasm = WVectorTraits128PackedSimd.Statics;
 
     static partial class Vector128s {
         private static readonly IWVectorTraits128 _instance = WVectorTraits128Abstract.GetBestInstance(); // Best traits instance.
@@ -1992,11 +1992,12 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> Shuffle(Vector128<short> vector, Vector128<short> indices) {
-#if CHECK_WASM
+#if SHORT_CIRCUIT_WASM
             if (PackedSimd.IsSupported) {
-                return BaseStaticsWasm.Add(vector, indices);
+                return BaseStatics.Add(vector, indices);
+                //return BaseStaticsWasm.Add(vector, indices);
             }
-#endif // CHECK_WASM
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else

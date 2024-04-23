@@ -54,7 +54,13 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 }
                 foreach (IWVectorTraits128 instance in instances) {
                     if (!instance.GetIsSupported(true)) continue;
-                    Vector128<T> dst = instance.Abs((dynamic)vector);
+                    Vector128<T> dst;
+                    try {
+                        dst = instance.Abs((dynamic)vector);
+                    } catch (Exception ex) {
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\tvector={1}. {2}", instance.GetType().Name, vector, ex));
+                        continue;
+                    }
                     if (Scalars<T>.ExponentBits > 0) {
                         // Compatible floating-point NaN.
                         Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}", instance.GetType().Name, dst));

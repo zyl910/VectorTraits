@@ -18,11 +18,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         partial class Statics {
 
 #if NET8_0_OR_GREATER
-/*
+
             /// <inheritdoc cref="IWVectorTraits128.Abs_AcceleratedTypes"/>
             public static TypeCodeFlags Abs_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
                     return rt;
                 }
             }
@@ -36,41 +36,51 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Abs(Vector128<double> value) {
-                //var mask = Vector128s<double>.SignMask;
-                var mask = Vector128Constants.Double_SignMask;
-                return PackedSimd.BitwiseClear(value, mask);
+                return PackedSimd.Abs(value);
+                //var mask = Vector128Constants.Double_SignMask;
+                //return PackedSimd.AndNot(value, mask);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> Abs(Vector128<sbyte> value) {
-                return PackedSimd.Abs(value).AsSByte();
+                // return PackedSimd.Abs(value); // System.OverflowException : Negating the minimum value of a twos complement number is invalid.
+                Vector128<sbyte> mask = PackedSimd.CompareGreaterThan(Vector128<sbyte>.Zero, value); // 0>value => value<0
+                Vector128<sbyte> rt = PackedSimd.Subtract(PackedSimd.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> Abs(Vector128<short> value) {
-                return PackedSimd.Abs(value).AsInt16();
+                // return PackedSimd.Abs(value); // System.OverflowException : Negating the minimum value of a twos complement number is invalid.
+                Vector128<short> mask = PackedSimd.ShiftRightArithmetic(value, 15); // value[i] < 0
+                Vector128<short> rt = PackedSimd.Subtract(PackedSimd.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> Abs(Vector128<int> value) {
-                return PackedSimd.Abs(value).AsInt32();
+                // return PackedSimd.Abs(value); // System.OverflowException : Negating the minimum value of a twos complement number is invalid.
+                Vector128<int> mask = PackedSimd.ShiftRightArithmetic(value, 31); // value[i] < 0
+                Vector128<int> rt = PackedSimd.Subtract(PackedSimd.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Abs(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> Abs(Vector128<long> value) {
+                // return PackedSimd.Abs(value); // System.OverflowException : Negating the minimum value of a twos complement number is invalid.
                 // If an integer value is positive or zero, no action is required. Otherwise complement and add 1.
                 //Vector128<long> mask = PackedSimd.CompareGreaterThan(Vector128<long>.Zero, value); // 0>value => value<0
-                Vector128<long> mask = PackedSimd.ShiftRightArithmetic(value, 63);
+                Vector128<long> mask = PackedSimd.ShiftRightArithmetic(value, 63); // value[i] < 0
                 Vector128<long> rt = PackedSimd.Subtract(PackedSimd.Xor(value, mask), mask); // -x => (~x)+1 => (~x)-(-1) = (x^mask)-mask .
                 return rt;
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits128.Add_AcceleratedTypes"/>
             public static TypeCodeFlags Add_AcceleratedTypes {
                 get {

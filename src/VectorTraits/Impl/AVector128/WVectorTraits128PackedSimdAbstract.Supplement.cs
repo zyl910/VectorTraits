@@ -14,7 +14,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
     partial class WVectorTraits128PackedSimdAbstract {
 #if NET8_0_OR_GREATER
-/*
+
         /// <inheritdoc cref="IWVectorTraits128.Abs_AcceleratedTypes"/>
         public override TypeCodeFlags Abs_AcceleratedTypes {
             get {
@@ -59,7 +59,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.Abs(value);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits128.Add_AcceleratedTypes"/>
         public override TypeCodeFlags Add_AcceleratedTypes {
             get {
