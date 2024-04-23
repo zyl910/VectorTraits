@@ -187,6 +187,27 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.ConditionalSelect(condition, left, right);
         }
 
+
+        /// <inheritdoc cref="IWVectorTraits128.Divide_AcceleratedTypes"/>
+        public override TypeCodeFlags Divide_AcceleratedTypes {
+            get {
+                return Statics.Divide_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Divide(Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<float> Divide(Vector128<float> left, Vector128<float> right) {
+            return Statics.Divide(left, right);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.Divide(Vector128{double}, Vector128{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector128<double> Divide(Vector128<double> left, Vector128<double> right) {
+            return Statics.Divide(left, right);
+        }
+
+
 /*
         /// <inheritdoc cref="IWVectorTraits128.Dot_AcceleratedTypes"/>
         public override TypeCodeFlags Dot_AcceleratedTypes {
@@ -258,7 +279,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override ulong Dot(Vector128<ulong> left, Vector128<ulong> right) {
             return Statics.Dot(left, right);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits128.Equals_AcceleratedTypes"/>
         public override TypeCodeFlags Equals_AcceleratedTypes {
@@ -1621,7 +1642,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.OnesComplement(vector);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits128.Sqrt_AcceleratedTypes"/>
         public override TypeCodeFlags Sqrt_AcceleratedTypes {
             get {
@@ -1692,7 +1713,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override Vector128<ulong> Sqrt(Vector128<ulong> value) {
             return Statics.Sqrt(value);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits128.Subtract_AcceleratedTypes"/>
         public override TypeCodeFlags Subtract_AcceleratedTypes {
@@ -1778,7 +1799,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override Vector128<T> Xor<T>(Vector128<T> left, Vector128<T> right) where T : struct {
             return Statics.Xor(left, right);
         }
-*/
+
 #endif
     }
 }
