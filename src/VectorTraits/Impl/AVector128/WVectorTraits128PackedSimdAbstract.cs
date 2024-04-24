@@ -309,7 +309,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override Vector128<double> Floor(Vector128<double> value) {
             return Statics.Floor(value);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits128.Narrow_AcceleratedTypes"/>
         public override TypeCodeFlags Narrow_AcceleratedTypes {
@@ -364,7 +364,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.Narrow(lower, upper);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         public override TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {
@@ -1424,7 +1424,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override ulong Sum(Vector128<ulong> value) {
             return Statics.Sum(value);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits128.Widen_AcceleratedTypes"/>
         public override TypeCodeFlags Widen_AcceleratedTypes {
@@ -1586,7 +1586,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override Vector128<ulong> WidenUpper(Vector128<uint> source) {
             return Statics.WidenUpper(source);
         }
-*/
+
 #endif // NET8_0_OR_GREATER
     }
 }

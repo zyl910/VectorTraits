@@ -627,12 +627,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<double> rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
                 return rt;
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits128.Narrow_AcceleratedTypes"/>
             public static TypeCodeFlags Narrow_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    TypeCodeFlags rt = TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
                     return rt;
                 }
             }
@@ -640,51 +640,61 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{double}, Vector128{double})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Narrow(Vector128<double> lower, Vector128<double> upper) {
-                // TypeCodeFlags.Double: Need 64bit .
-                return SuperStatics.Narrow(lower, upper);
+                Vector128<float> l = PackedSimd.ConvertToSingle(lower);
+                Vector128<float> u = PackedSimd.ConvertToSingle(upper);
+                Vector128<float> rt = l.WithUpper(u.GetLower());
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{short}, Vector128{short})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> Narrow(Vector128<short> lower, Vector128<short> upper) {
-                return PackedSimd.ExtractNarrowingUpper(PackedSimd.ExtractNarrowingLower(lower), upper);
+                return Narrow(lower.AsUInt16(), upper.AsUInt16()).AsSByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{ushort}, Vector128{ushort})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> Narrow(Vector128<ushort> lower, Vector128<ushort> upper) {
-                return PackedSimd.ExtractNarrowingUpper(PackedSimd.ExtractNarrowingLower(lower), upper);
+                Vector128<ushort> mask = Vector128Constants.UInt16_VMaxByte;
+                Vector128<ushort> l = PackedSimd.And(lower, mask);
+                Vector128<ushort> u = PackedSimd.And(upper, mask);
+                Vector128<byte> rt = PackedSimd.ConvertNarrowingSaturateUnsigned(l.AsInt16(), u.AsInt16());
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{int}, Vector128{int})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> Narrow(Vector128<int> lower, Vector128<int> upper) {
-                return PackedSimd.ExtractNarrowingUpper(PackedSimd.ExtractNarrowingLower(lower), upper);
+                return Narrow(lower.AsUInt32(), upper.AsUInt32()).AsInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{uint}, Vector128{uint})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> Narrow(Vector128<uint> lower, Vector128<uint> upper) {
-                return PackedSimd.ExtractNarrowingUpper(PackedSimd.ExtractNarrowingLower(lower), upper);
+                Vector128<uint> mask = Vector128Constants.UInt32_VMaxUInt16;
+                Vector128<uint> l = PackedSimd.And(lower, mask);
+                Vector128<uint> u = PackedSimd.And(upper, mask);
+                Vector128<ushort> rt = PackedSimd.ConvertNarrowingSaturateUnsigned(l.AsInt32(), u.AsInt32());
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{long}, Vector128{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> Narrow(Vector128<long> lower, Vector128<long> upper) {
-                return PackedSimd.ExtractNarrowingUpper(PackedSimd.ExtractNarrowingLower(lower), upper);
+                return SuperStatics.Narrow(lower, upper);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{ulong}, Vector128{ulong})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> Narrow(Vector128<ulong> lower, Vector128<ulong> upper) {
-                return PackedSimd.ExtractNarrowingUpper(PackedSimd.ExtractNarrowingLower(lower), upper);
+                return SuperStatics.Narrow(lower, upper);
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {
@@ -2122,7 +2132,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 ulong rt = PackedSimd.Extract(value, 0) + PackedSimd.Extract(value, 1);
                 return rt;
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits128.Widen_AcceleratedTypes"/>
             public static TypeCodeFlags Widen_AcceleratedTypes {
@@ -2135,15 +2145,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{float}, out Vector128{double}, out Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector128<float> source, out Vector128<double> lower, out Vector128<double> upper) {
-                // TypeCodeFlags.Single: Need 64bit .
                 SuperStatics.Widen(source, out lower, out upper);
+                // Bug on .NET 8.0
+                //MONO interpreter: NIY encountered in method Widen
+                //logging.ts:119 Error: [MONO] * Assertion: should not be reached at /__w/1/s/src/mono/mono/mini/interp/interp.c
+                //lower = PackedSimd.ConvertToDoubleLower(source);
+                //upper = PackedSimd.ConvertToDoubleLower(source.GetUpper().ToVector128Unsafe());
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{sbyte}, out Vector128{short}, out Vector128{short})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector128<sbyte> source, out Vector128<short> lower, out Vector128<short> upper) {
-                lower = PackedSimd.SignExtendWideningLower(source.GetLower());
+                lower = PackedSimd.SignExtendWideningLower(source);
                 upper = PackedSimd.SignExtendWideningUpper(source);
             }
 
@@ -2151,14 +2165,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector128<byte> source, out Vector128<ushort> lower, out Vector128<ushort> upper) {
-                lower = PackedSimd.ZeroExtendWideningLower(source.GetLower());
+                lower = PackedSimd.ZeroExtendWideningLower(source);
                 upper = PackedSimd.ZeroExtendWideningUpper(source);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{short}, out Vector128{int}, out Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector128<short> source, out Vector128<int> lower, out Vector128<int> upper) {
-                lower = PackedSimd.SignExtendWideningLower(source.GetLower());
+                lower = PackedSimd.SignExtendWideningLower(source);
                 upper = PackedSimd.SignExtendWideningUpper(source);
             }
 
@@ -2166,14 +2180,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector128<ushort> source, out Vector128<uint> lower, out Vector128<uint> upper) {
-                lower = PackedSimd.ZeroExtendWideningLower(source.GetLower());
+                lower = PackedSimd.ZeroExtendWideningLower(source);
                 upper = PackedSimd.ZeroExtendWideningUpper(source);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{int}, out Vector128{long}, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector128<int> source, out Vector128<long> lower, out Vector128<long> upper) {
-                lower = PackedSimd.SignExtendWideningLower(source.GetLower());
+                lower = PackedSimd.SignExtendWideningLower(source);
                 upper = PackedSimd.SignExtendWideningUpper(source);
             }
 
@@ -2181,7 +2195,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen(Vector128<uint> source, out Vector128<ulong> lower, out Vector128<ulong> upper) {
-                lower = PackedSimd.ZeroExtendWideningLower(source.GetLower());
+                lower = PackedSimd.ZeroExtendWideningLower(source);
                 upper = PackedSimd.ZeroExtendWideningUpper(source);
             }
 
@@ -2198,46 +2212,47 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> WidenLower(Vector128<float> source) {
                 return SuperStatics.WidenLower(source);
+                //return PackedSimd.ConvertToDoubleLower(source);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> WidenLower(Vector128<sbyte> source) {
-                return PackedSimd.SignExtendWideningLower(source.GetLower());
+                return PackedSimd.SignExtendWideningLower(source);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{byte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> WidenLower(Vector128<byte> source) {
-                return PackedSimd.ZeroExtendWideningLower(source.GetLower());
+                return PackedSimd.ZeroExtendWideningLower(source);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> WidenLower(Vector128<short> source) {
-                return PackedSimd.SignExtendWideningLower(source.GetLower());
+                return PackedSimd.SignExtendWideningLower(source);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> WidenLower(Vector128<ushort> source) {
-                return PackedSimd.ZeroExtendWideningLower(source.GetLower());
+                return PackedSimd.ZeroExtendWideningLower(source);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> WidenLower(Vector128<int> source) {
-                return PackedSimd.SignExtendWideningLower(source.GetLower());
+                return PackedSimd.SignExtendWideningLower(source);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> WidenLower(Vector128<uint> source) {
-                return PackedSimd.ZeroExtendWideningLower(source.GetLower());
+                return PackedSimd.ZeroExtendWideningLower(source);
             }
 
 
@@ -2253,6 +2268,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> WidenUpper(Vector128<float> source) {
                 return SuperStatics.WidenUpper(source);
+                //return PackedSimd.ConvertToDoubleLower(source.GetUpper().ToVector128Unsafe());
             }
 
             /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{sbyte})"/>
@@ -2294,7 +2310,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> WidenUpper(Vector128<uint> source) {
                 return PackedSimd.ZeroExtendWideningUpper(source);
             }
-*/
+
 
 #endif // NET8_0_OR_GREATER
         }
